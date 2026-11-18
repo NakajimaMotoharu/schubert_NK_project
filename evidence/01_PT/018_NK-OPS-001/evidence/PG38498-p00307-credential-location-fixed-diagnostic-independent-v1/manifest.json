@@ -1,0 +1,87 @@
+{
+  "actualExit": 0,
+  "run": "PG38498-p00307-credential-location-fixed-diagnostic-independent-v1",
+  "terminalAtUTC": "2026-11-18T03:34:38.431831+00:00",
+  "productionCore": "280d6181d166eefc48adcfecda24df36bd4f3c95",
+  "source": "33d49561f48344c45f56ae19fb560b36409fe79a",
+  "tests": 6,
+  "newDefinitions": 1,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "unit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38490-ssc457-location-unit-v1/manifest.json",
+    "sha256": "8924fcc97ee7b3142242aa06b870d9a1ce81f76d1ff191038f6d770d68cbab6b"
+  },
+  "post": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38492-ssc457-location-post-v1/manifest.json",
+    "sha256": "829c8b6e213697560c3841064ec86b9437cceaeeac84cc100ecff161527c8e6b"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38486-ssc457-location-static-v1/manifest.json",
+    "sha256": "e9236252257facae6529cfd90aa53fb4ce8f9e3afe4c5ac6b2251a41ad46fba2"
+  },
+  "raw": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38498-p00307-credential-location-fixed-diagnostic-independent-v1/unfiltered.tsv",
+    "sha256": "e6c80fe2bb7c78f8a93feea7bd7eca1d510bf38502774c142d8673730ddbbefd"
+  },
+  "rawCommand": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+    "-cp",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31432-generated-code-supplemental-tool-v1/toolclasses:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+    "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG38492-ssc457-location-post-v1/jacoco.exec",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38484-ssc457-location-prepare-v1/component/dev/codex/schubert/nk/storage/ServiceCredentialLocation.class"
+  ],
+  "unfiltered": {
+    "INSTRUCTION": {
+      "covered": 99,
+      "missed": 0
+    },
+    "BRANCH": {
+      "covered": 26,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 24,
+      "missed": 0
+    },
+    "COMPLEXITY": {
+      "covered": 18,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 5,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 1,
+      "missed": 0
+    }
+  },
+  "targetClass": "dev/codex/schubert/nk/storage/ServiceCredentialLocation",
+  "classIds": {
+    "dev/codex/schubert/nk/storage/package-info": "422653fb36e474e9",
+    "dev/codex/schubert/nk/storage/ServiceCredentialLocation": "aa0778368d3166a1"
+  },
+  "originalClassInitSha256": "2e870d8101a34535261d5fbb26628df5a257cb0dca19434da1e9cff23f323635",
+  "classInit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38498-p00307-credential-location-fixed-diagnostic-independent-v1/class-init.stdout.gz",
+    "sha256": "f78232d90684b7851e1b8bfbd18cd221170314f11f6eaca100462ef3c8c06103"
+  },
+  "xml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38492-ssc457-location-post-v1/original-TEST-junit-jupiter.xml",
+    "sha256": "b8c8ddd8dc89c71e03513ecb2c7d39173782f0b1338a3c60b58d5f09401c2609"
+  },
+  "publicAbiUnchanged": true,
+  "coverageUnion": false,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "newAcceptance": 0,
+  "effortRate": null,
+  "resultVerification": {
+    "firstReadExit": 1,
+    "cause": "The wrapper interchanged the published missed/covered column semantics, so the exact original raw output was parsed without rerunning measurement or PT."
+  }
+}
