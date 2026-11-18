@@ -1,0 +1,25 @@
+  public int exitCode();
+    Code:
+         0: aload_0
+         1: getfield      #53                 // Field status:Ldev/codex/schubert/nk/api/maintenance/InspectionExecution$Status;
+         4: invokevirtual #60                 // Method dev/codex/schubert/nk/api/maintenance/InspectionExecution$Status.ordinal:()I
+         7: tableswitch   { // 0 to 4
+                       0: 50
+                       1: 54
+                       2: 59
+                       3: 59
+                       4: 59
+                 default: 40
+            }
+        40: new           #64                 // class java/lang/MatchException
+        43: dup
+        44: aconst_null
+        45: aconst_null
+        46: invokespecial #66                 // Method java/lang/MatchException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+        49: athrow
+        50: iconst_0
+        51: goto          61
+        54: bipush        10
+        56: goto          61
+        59: bipush        50
+        61: ireturn
