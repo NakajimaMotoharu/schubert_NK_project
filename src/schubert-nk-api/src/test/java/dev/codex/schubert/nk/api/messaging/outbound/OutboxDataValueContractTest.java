@@ -55,7 +55,7 @@ final class OutboxDataValueContractTest {
     assertEquals(NEXT, request.nextAttemptAt());
     assertEquals(CREATED, request.createdAt());
     assertEquals(Optional.empty(), request.dlqMetadata());
-    assertEquals("OutboxRequest[destination=ASYNC_WORK, body=<redacted>]", request.toString());
+    assertEquals("OutboxRequest[<redacted>]", request.toString());
     for (long id : new long[] {1, 999_999_999_999L}) {
       for (int attempts : new int[] {0, 100}) {
         for (String owner : List.of(LEASE_OWNER, "x".repeat(64))) {
@@ -77,9 +77,7 @@ final class OutboxDataValueContractTest {
           assertEquals(owner, entry.leaseOwner());
           assertEquals(UNTIL, entry.leaseUntil());
           assertEquals(Optional.empty(), entry.dlqMetadata());
-          assertEquals(
-              "OutboxEntry[id=" + id + ", destination=ASYNC_WORK, body=<redacted>]",
-              entry.toString());
+          assertEquals("OutboxEntry[<redacted>]", entry.toString());
         }
       }
     }

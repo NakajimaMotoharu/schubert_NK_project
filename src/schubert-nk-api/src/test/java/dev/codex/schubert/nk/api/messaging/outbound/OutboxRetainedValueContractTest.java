@@ -68,7 +68,7 @@ final class OutboxRetainedValueContractTest {
     assertArrayEquals(EXPECTED_BODY, entry.body());
     assertTrue(request.dlqMetadata().isEmpty());
     assertTrue(entry.dlqMetadata().isEmpty());
-    assertEquals("OutboxRequest[destination=ASYNC_WORK, body=<redacted>]", request.toString());
-    assertEquals("OutboxEntry[id=1, destination=ASYNC_WORK, body=<redacted>]", entry.toString());
+    assertEquals("OutboxRequest[<redacted>]", request.toString());
+    assertEquals("OutboxEntry[<redacted>]", entry.toString());
   }
 }
