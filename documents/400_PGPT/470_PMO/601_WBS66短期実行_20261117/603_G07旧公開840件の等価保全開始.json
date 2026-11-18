@@ -1,0 +1,61 @@
+{
+  "eventId": "PGPT-20261008-6123",
+  "groupId": "PGPT-WBS66-G07-HISTORICAL-840-EXACT-PUBLIC-TEXT-RETENTION-20261119",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-18T19:46:27.516000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 47,
+      "remainingPercent": 53,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-G07-HISTORICAL-840-EXACT-PUBLIC-TEXT-RETENTION-20261119",
+    "workCategory": "ADMIN",
+    "workDetailCategory": "PGPT-WBS66-G07-HISTORICAL-840-EXACT-PUBLIC-TEXT-RETENTION-20261119",
+    "workAttributionKind": "RECOVERY",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "G07"
+    ],
+    "source": "e0acb1a1f88ad261b6313af16f8ca27f43ede0b4",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "run": "PG40102-g07-legacy-840-public-text-retention-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.2,
+      "base": 0.5,
+      "high": 1.35
+    },
+    "groupCapPp": 3,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38796-g07-current-public-delta-survey-v1/manifest.json",
+        "sha256": "94c5828dc6288bcc82bef90b6dacfd343eace70de4fb9a89bf23e7ef92b22fd8"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40044-g07-preserve-older-public-projection-v1/manifest.json",
+        "sha256": "bdbdd0250a4ed158b69dec6ba1aa884e3594bb7d437cdbdb33227cc1cd132430"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40070-g07-packed-duplicate-capacity-v1/independent.json",
+        "sha256": "3fe0ecc10cccfbdd102f104af8007c58a1bbabf1fd9e934fb3a847acfd63efe1"
+      }
+    ],
+    "workScope": "At near G07 durable minimum, archive only exact 840 duplicate public text projections of fixed PG38796. Verify each byte in archive, same original Git blobs and five binaries preserved. No repo delete, worktree change, private runtime reads or evidence replay."
+  }
+}
