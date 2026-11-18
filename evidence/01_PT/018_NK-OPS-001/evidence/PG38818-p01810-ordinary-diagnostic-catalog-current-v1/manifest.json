@@ -1,0 +1,79 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-18T06:46:50.151293+00:00",
+  "source": "3c29148a57770f7b8fbfdfb35d9d99fade46b7c9",
+  "catalogTotal": 93,
+  "selected": 35,
+  "outsideGroup": 58,
+  "parseOnly": true,
+  "firstCompileFailure": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38818-p01810-ordinary-diagnostic-catalog-current-v1/terminal.json",
+    "sha256": "cf8957be80635090bbbb3079c1a04a196a762f8a88dfa6d4326d62fb487a0247"
+  },
+  "retainedFirstToolSource": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38818-p01810-ordinary-diagnostic-catalog-current-v1/first-tool-source.java.txt",
+    "sha256": "eaa0194e4e904fe8a0824a7819541d77ea4159f7a78e62513db025f50854ca02"
+  },
+  "initialToolBug": "BUG-3242",
+  "validation": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38818-p01810-ordinary-diagnostic-catalog-current-v1/attempt-02/terminal.json",
+    "sha256": "ac9df0cba06cd325751370077b13844c7b9137c585f9354b3eef47b9daca1260"
+  },
+  "catalog": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38818-p01810-ordinary-diagnostic-catalog-current-v1/attempt-02/catalog-evidence.json",
+    "sha256": "12bbd6119a32f4bfeedf30505bf7e74f3e19c474ad662c86b2e5bb0f3cbd40e5"
+  },
+  "rawCounts": {
+    "FIXED_REDACTED_LITERAL": 31,
+    "EXPRESSION_OR_MULTIPLE_RETURNS": 3,
+    "FIXED_OTHER_LITERAL": 1
+  },
+  "fixedRedactedVerified": 32,
+  "dynamicCandidates": 3,
+  "reviewedDecisions": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectionStep.java",
+      "catalog": "PT-P01810-CATALOG-017",
+      "sha256": "a1f815151a650c7fd50422585f5cf08d187c1ce7f6c114324e023d0a70155abb",
+      "sameAsCatalogBlob": true,
+      "kind": "RECORD",
+      "shape": "EXPRESSION_OR_MULTIPLE_RETURNS",
+      "line": 25,
+      "decision": "DYNAMIC_GENERIC_DIAGNOSTIC_REQUIRES_NARROW_DESIGN_PT_TRIAGE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry.java",
+      "catalog": "PT-P01810-CATALOG-022",
+      "sha256": "09bb3b7767c6c09c5c8685088a7ef0494898aedc478307cbd44a14cfa7dd0ef4",
+      "sameAsCatalogBlob": true,
+      "kind": "CLASS",
+      "shape": "EXPRESSION_OR_MULTIPLE_RETURNS",
+      "line": 152,
+      "decision": "DYNAMIC_GENERIC_DIAGNOSTIC_REQUIRES_NARROW_DESIGN_PT_TRIAGE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest.java",
+      "catalog": "PT-P01810-CATALOG-023",
+      "sha256": "564190205500c14866882d60d36d654276562f38593229ef85c14da0ef7ab463",
+      "sameAsCatalogBlob": true,
+      "kind": "CLASS",
+      "shape": "EXPRESSION_OR_MULTIPLE_RETURNS",
+      "line": 108,
+      "decision": "DYNAMIC_GENERIC_DIAGNOSTIC_REQUIRES_NARROW_DESIGN_PT_TRIAGE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/receipt/ReceiptReference.java",
+      "catalog": "PT-P01810-CATALOG-040",
+      "sha256": "b8dff7e53fd4b8646817eb6673a57479d3746a37d01585c3e35c2eee749ff829",
+      "sameAsCatalogBlob": true,
+      "kind": "RECORD",
+      "shape": "FIXED_OTHER_LITERAL",
+      "line": 27,
+      "decision": "FIXED_REDACTION_EXISTING_SPELLING"
+    }
+  ],
+  "wholeP01810Accepted": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "productTestsExecuted": 0
+}
