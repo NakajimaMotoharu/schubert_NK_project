@@ -1,0 +1,662 @@
+{
+  "actualExit": 0,
+  "run": "PG38582-f02-jdbc-exception-ownership-review-v1",
+  "source": "31748ed33367119278407a3bce0fe2c82641dc1b",
+  "terminalAtUTC": "2026-11-18T04:37:59.431873+00:00",
+  "firstFailure": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38580-f02-three-physical-library-boundaries-v1/manifest.json",
+    "sha256": "da44983bc855891dcb04a7ee6425627b9fc311c00b793dee1b7909ede05dd61a"
+  },
+  "moduleCallerFiles": {
+    "schubert-nk-api": 2,
+    "schubert-nk-batch": 40,
+    "schubert-nk-bootstrap": 9,
+    "schubert-nk-storage": 1
+  },
+  "moduleCallerSites": {
+    "schubert-nk-api": 3,
+    "schubert-nk-batch": 82,
+    "schubert-nk-bootstrap": 19,
+    "schubert-nk-storage": 3
+  },
+  "sourceClassificationOnlyNotRuntime": {
+    "UPPER_BOUNDARY_DEPENDENCY_REQUIRED_REVIEW": 51,
+    "JDBC_CAPABLE_UPPER_BOUNDARY": 53,
+    "STORAGE_FILE_CALLBACK_CONVERSION": 3
+  },
+  "sourceFiles": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiProcessMain.java",
+      "sha256": "5b079eff7dcf99c8e6d0c0c291000e0a4ac680b5571d77c3732e01b4546e2777",
+      "owner": "schubert-nk-api",
+      "label": "UPPER_BOUNDARY_DEPENDENCY_REQUIRED_REVIEW",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        86,
+        147
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/ApiApplicationPreparation.java",
+      "sha256": "0574334962482029ca32faa87d6eff10df522bb8d5412c4ad216524372fad134",
+      "owner": "schubert-nk-api",
+      "label": "UPPER_BOUNDARY_DEPENDENCY_REQUIRED_REVIEW",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        348
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+      "sha256": "94d2805655d767b74a141ef54571ed726ad9f0d2b3abe1141b986a0421a06a7c",
+      "owner": "schubert-nk-batch",
+      "label": "JDBC_CAPABLE_UPPER_BOUNDARY",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        49,
+        50,
+        59
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+      "sha256": "2bfb3c6d85c880d4e4c321b1f760986f1f2fe9e0d28e87e2b145fddbbb0b6a88",
+      "owner": "schubert-nk-batch",
+      "label": "JDBC_CAPABLE_UPPER_BOUNDARY",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        75,
+        79,
+        131,
+        132,
+        189,
+        190,
+        279
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+      "sha256": "d5391bd954f092f9c5792c7c28c694cb15812215ed5b547663bba40c32d16550",
+      "owner": "schubert-nk-batch",
+      "label": "JDBC_CAPABLE_UPPER_BOUNDARY",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        74,
+        77,
+        121,
+        122
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupArtifactVerifier.java",
+      "sha256": "0e946af478bd664a8433a6096503169a73d4563f83d297e1ecbdd5bd51160e8e",
+      "owner": "schubert-nk-batch",
+      "label": "UPPER_BOUNDARY_DEPENDENCY_REQUIRED_REVIEW",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        246,
+        336,
+        571
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupManifestReader.java",
+      "sha256": "f27b4c2e07af42bdcb153b1d6cffed031bad97b87580cd5edeb16e34350a138b",
+      "owner": "schubert-nk-batch",
+      "label": "UPPER_BOUNDARY_DEPENDENCY_REQUIRED_REVIEW",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        167,
+        341
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CaddyPublicConfiguration.java",
+      "sha256": "0c838614e4f41bd12640a8fd7c73f606696b0906fe237fafb7950306e8f74aae",
+      "owner": "schubert-nk-batch",
+      "label": "UPPER_BOUNDARY_DEPENDENCY_REQUIRED_REVIEW",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        121
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupBackupAdmission.java",
+      "sha256": "0555b9361b179ae5d8400857b2e18edab0c131f9a07e55b668f7a72723ca509c",
+      "owner": "schubert-nk-batch",
+      "label": "JDBC_CAPABLE_UPPER_BOUNDARY",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        76,
+        92,
+        93,
+        101,
+        102
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupExpiryExecution.java",
+      "sha256": "afabfa84361284127fd15a65ea4f50838b4e7c49d55061be147a60369d945853",
+      "owner": "schubert-nk-batch",
+      "label": "JDBC_CAPABLE_UPPER_BOUNDARY",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        178,
+        263,
+        270
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupMaintenanceWork.java",
+      "sha256": "a451738bbe7590a7f0a736e3feb53ab14632002144edbffcba9c68ddba40cc39",
+      "owner": "schubert-nk-batch",
+      "label": "JDBC_CAPABLE_UPPER_BOUNDARY",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        168,
+        262,
+        290
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupNativeExecution.java",
+      "sha256": "6ee015e4ad65dfbe2fd4f5cc7627c6941c3b107f58592933acc9c8e0328727ba",
+      "owner": "schubert-nk-batch",
+      "label": "JDBC_CAPABLE_UPPER_BOUNDARY",
+      "laterAdmission": "ROOT_OR_AUTHORITY_HOLD_REVIEW",
+      "lines": [
+        184
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupNativePreflight.java",
+      "sha256": "f58490e311cbc9556dbe7c5f0c6396b172bc85214d79ee834215d809212a164d",
+      "owner": "schubert-nk-batch",
+      "label": "UPPER_BOUNDARY_DEPENDENCY_REQUIRED_REVIEW",
+      "laterAdmission": "ROOT_OR_AUTHORITY_HOLD_REVIEW",
+      "lines": [
+        125
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupProcessMain.java",
+      "sha256": "d7282a5101871995e6cf8e33b9f8a50409739db4098b164abb74a24ce7551fd7",
+      "owner": "schubert-nk-batch",
+      "label": "JDBC_CAPABLE_UPPER_BOUNDARY",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        65,
+        81
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFiles.java",
+      "sha256": "a2551cf269b67fd205515e17d2b41380b0dfcde4072e424635340ba9a1fe26e2",
+      "owner": "schubert-nk-batch",
+      "label": "UPPER_BOUNDARY_DEPENDENCY_REQUIRED_REVIEW",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        269,
+        304
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningBrokerExecution.java",
+      "sha256": "d8148f4faf7a5c752e643277d90f058761ffcca7ada8cbc6e0bd4c9156aa5a18",
+      "owner": "schubert-nk-batch",
+      "label": "UPPER_BOUNDARY_DEPENDENCY_REQUIRED_REVIEW",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        294
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningPrestartEvidence.java",
+      "sha256": "49c10b9ec43d14d412fe5492a9e2513ffd93e1b078cee17c4e994ec69faaafe9",
+      "owner": "schubert-nk-batch",
+      "label": "UPPER_BOUNDARY_DEPENDENCY_REQUIRED_REVIEW",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        291
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningProcessMain.java",
+      "sha256": "6c6afac131d994f8f37d7dfd88e4d93421c0b5ef9a07b7686bc2b1ff5f28cc0b",
+      "owner": "schubert-nk-batch",
+      "label": "UPPER_BOUNDARY_DEPENDENCY_REQUIRED_REVIEW",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        423,
+        567
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.java",
+      "sha256": "e6e1b637427e2120e97d8c882cfd3b0bcbd10d020dd43960494c122d4edfebcd",
+      "owner": "schubert-nk-batch",
+      "label": "UPPER_BOUNDARY_DEPENDENCY_REQUIRED_REVIEW",
+      "laterAdmission": "ROOT_OR_AUTHORITY_HOLD_REVIEW",
+      "lines": [
+        750
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupRoots.java",
+      "sha256": "5ddf37a1f4ab3d4b764f8ad73d077d415be51aca0eac7ed3876f17dc2acd7ca2",
+      "owner": "schubert-nk-batch",
+      "label": "UPPER_BOUNDARY_DEPENDENCY_REQUIRED_REVIEW",
+      "laterAdmission": "ROOT_OR_AUTHORITY_HOLD_REVIEW",
+      "lines": [
+        148
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/RootStartupPending.java",
+      "sha256": "89bbde8e7045f9531dfd077d1d9d3848b266b2a740ada985069b0b68d67441de",
+      "owner": "schubert-nk-batch",
+      "label": "UPPER_BOUNDARY_DEPENDENCY_REQUIRED_REVIEW",
+      "laterAdmission": "ROOT_OR_AUTHORITY_HOLD_REVIEW",
+      "lines": [
+        121,
+        133
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/TransferCleanup.java",
+      "sha256": "9bcafdc62563fe490e2e76db981737d49f9523713e6fedfb14656d823c823a8e",
+      "owner": "schubert-nk-batch",
+      "label": "UPPER_BOUNDARY_DEPENDENCY_REQUIRED_REVIEW",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        285
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAcceptorReadinessClient.java",
+      "sha256": "d2a1c2d5528b4278a4fcea5d7504961fc1fb84d909d242ae48818f768aba200b",
+      "owner": "schubert-nk-batch",
+      "label": "UPPER_BOUNDARY_DEPENDENCY_REQUIRED_REVIEW",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        127
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient.java",
+      "sha256": "8733ed7e17c9b6b1a6dddb29cec099615196d80440355f84c53172f7b5d2b539",
+      "owner": "schubert-nk-batch",
+      "label": "UPPER_BOUNDARY_DEPENDENCY_REQUIRED_REVIEW",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        103
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisExpiryPurgeClient.java",
+      "sha256": "f0d7365d6f9cbfbee4946e6f74e02acaaccfb8675fb0767e58e5bb4148f3309a",
+      "owner": "schubert-nk-batch",
+      "label": "UPPER_BOUNDARY_DEPENDENCY_REQUIRED_REVIEW",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        70,
+        119
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.java",
+      "sha256": "7bdbce47508198ee6c55beff67728d07c837b7c629fc3748c91ea3a41060d118",
+      "owner": "schubert-nk-batch",
+      "label": "UPPER_BOUNDARY_DEPENDENCY_REQUIRED_REVIEW",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        110,
+        289
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisReadinessClient.java",
+      "sha256": "cea38af6f564bbd77a56ec813e6aea92c6744a7f0f8c3e3ed10dd92deb83d5d8",
+      "owner": "schubert-nk-batch",
+      "label": "UPPER_BOUNDARY_DEPENDENCY_REQUIRED_REVIEW",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        83
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient.java",
+      "sha256": "97451e64315eb5c783e85f580f0cb03b27f02feb43e7b4a9c7ee811b161a281b",
+      "owner": "schubert-nk-batch",
+      "label": "UPPER_BOUNDARY_DEPENDENCY_REQUIRED_REVIEW",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        208
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisStartupObservation.java",
+      "sha256": "3422dd26caa2efa2a7fd44682ef3d87f877254f0144f3cc0dd28332949085aac",
+      "owner": "schubert-nk-batch",
+      "label": "UPPER_BOUNDARY_DEPENDENCY_REQUIRED_REVIEW",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        137,
+        162
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+      "sha256": "da4f331f230ab0bbb66f0f63451b9e7d164be6a73bc9bb6bcdb5a13597b903cb",
+      "owner": "schubert-nk-batch",
+      "label": "UPPER_BOUNDARY_DEPENDENCY_REQUIRED_REVIEW",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        94,
+        140
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorUnitProbe.java",
+      "sha256": "f9609e88a54aaeb5151e50d6b245be7d69bfbaebda72cb92a51e812498dd0db5",
+      "owner": "schubert-nk-batch",
+      "label": "UPPER_BOUNDARY_DEPENDENCY_REQUIRED_REVIEW",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        249,
+        319,
+        324
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/SystemctlStateSource.java",
+      "sha256": "09481db85c7f81e3202ad90191977fbe0ea9f2e17c6e925df7c76447243d4c1e",
+      "owner": "schubert-nk-batch",
+      "label": "UPPER_BOUNDARY_DEPENDENCY_REQUIRED_REVIEW",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        88,
+        93
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupFailureSnapshot.java",
+      "sha256": "8842f538bbefba88a56e28b475c4fb0a162e4f3953b7865b4cae1e33c52086f3",
+      "owner": "schubert-nk-batch",
+      "label": "JDBC_CAPABLE_UPPER_BOUNDARY",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        91
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
+      "sha256": "a46d8a7712245f915dfa55dbaded65911d1984dedf575250bcfac891d050393b",
+      "owner": "schubert-nk-batch",
+      "label": "JDBC_CAPABLE_UPPER_BOUNDARY",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        179
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupDatabaseSession.java",
+      "sha256": "bff361d269816f14ce62da0a945c668b0bb14f7cc7c28018613b56369aface97",
+      "owner": "schubert-nk-batch",
+      "label": "JDBC_CAPABLE_UPPER_BOUNDARY",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        210,
+        331,
+        332
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "sha256": "9b9429b8074268d59883664688366075271fd62f685dc9b8e3d42900b982be0b",
+      "owner": "schubert-nk-batch",
+      "label": "JDBC_CAPABLE_UPPER_BOUNDARY",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        78,
+        125
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java",
+      "sha256": "a0a48838a0fc7792962fc246c47e4228572d51622b60dedd7e2b8ffc0a98b852",
+      "owner": "schubert-nk-batch",
+      "label": "JDBC_CAPABLE_UPPER_BOUNDARY",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        100
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+      "sha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3",
+      "owner": "schubert-nk-batch",
+      "label": "JDBC_CAPABLE_UPPER_BOUNDARY",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        237,
+        357,
+        551
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+      "sha256": "25c64d75bc37274c1cc27cbca5ddf64af35983a43605c323456f007bfdfdacda",
+      "owner": "schubert-nk-batch",
+      "label": "JDBC_CAPABLE_UPPER_BOUNDARY",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        157,
+        187,
+        247,
+        319
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java",
+      "sha256": "5784f01574923a7c1939cb63ee2fe4907f3536b377ccee9fc77ae675a9b47e7b",
+      "owner": "schubert-nk-batch",
+      "label": "JDBC_CAPABLE_UPPER_BOUNDARY",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        19,
+        20
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningSqlFailures.java",
+      "sha256": "5732b3c02487f292bdd1863950096e62098cc687b76cbdfd073bbe24dcf02f76",
+      "owner": "schubert-nk-batch",
+      "label": "JDBC_CAPABLE_UPPER_BOUNDARY",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        20
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "sha256": "4a0039f14411589b60e6e2ba2309ee090614c49bfbdd2d9606c424eac5352507",
+      "owner": "schubert-nk-batch",
+      "label": "JDBC_CAPABLE_UPPER_BOUNDARY",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        76
+      ]
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig.java",
+      "sha256": "a5646e0931961db5aa6aba20d303d33e85c2693ab1e252160752249fb0b8ad9a",
+      "owner": "schubert-nk-bootstrap",
+      "label": "UPPER_BOUNDARY_DEPENDENCY_REQUIRED_REVIEW",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        126,
+        173
+      ]
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.java",
+      "sha256": "9782d9ad81e0346d1b0a1168f9e16555909b7a2b5e0c3f828b6538c66af43a64",
+      "owner": "schubert-nk-bootstrap",
+      "label": "JDBC_CAPABLE_UPPER_BOUNDARY",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        33,
+        35
+      ]
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "sha256": "38f8ba4b123bab4c8f781f8e6e18ba29cc7daa34aa87ae33575a25ca46b3fb3e",
+      "owner": "schubert-nk-bootstrap",
+      "label": "JDBC_CAPABLE_UPPER_BOUNDARY",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        137
+      ]
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+      "sha256": "c935662109d84a65412221609b0229ead513a5f4b910e92f2780106b985f5fa7",
+      "owner": "schubert-nk-bootstrap",
+      "label": "JDBC_CAPABLE_UPPER_BOUNDARY",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        85
+      ]
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java",
+      "sha256": "12f6ff6bf49cbed3d8e4f43b831e33c64faaea111056f6e51ed47cfaca797788",
+      "owner": "schubert-nk-bootstrap",
+      "label": "JDBC_CAPABLE_UPPER_BOUNDARY",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        88,
+        95
+      ]
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/InspectorCredentialLoader.java",
+      "sha256": "8ed9f8bb81adb2e7bfb48e94f4e981ca0fd0da526fea0b4f92e72f6490025219",
+      "owner": "schubert-nk-bootstrap",
+      "label": "UPPER_BOUNDARY_DEPENDENCY_REQUIRED_REVIEW",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        70,
+        86,
+        144,
+        164,
+        193
+      ]
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint.java",
+      "sha256": "2bcf68e2b9b0a54e91c6c53635471c1febcec591116c42eee50d6ab7fed7c112",
+      "owner": "schubert-nk-bootstrap",
+      "label": "UPPER_BOUNDARY_DEPENDENCY_REQUIRED_REVIEW",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        206,
+        240,
+        252
+      ]
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier.java",
+      "sha256": "9b0d4b1fe6fbacf20c0cee5e0eea725514a54205200c7ad53c2a4991200f8a65",
+      "owner": "schubert-nk-bootstrap",
+      "label": "UPPER_BOUNDARY_DEPENDENCY_REQUIRED_REVIEW",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        56
+      ]
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfig.java",
+      "sha256": "3bb45310175acaf596d4f9047e3cfd350f690693b5dfd71a3c9b76aa7460b0cd",
+      "owner": "schubert-nk-bootstrap",
+      "label": "UPPER_BOUNDARY_DEPENDENCY_REQUIRED_REVIEW",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        119,
+        168
+      ]
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/OwnedTransferDirectory.java",
+      "sha256": "73583455f354f5ae42f573b8d13c9b98b708b59b133b9aa8c1cf2514a885344e",
+      "owner": "schubert-nk-storage",
+      "label": "STORAGE_FILE_CALLBACK_CONVERSION",
+      "laterAdmission": "ORDINARY_SCOPE_REVIEW",
+      "lines": [
+        343,
+        346,
+        349
+      ]
+    }
+  ],
+  "staticImportAndMethodReferenceAdditional": 0,
+  "storageAnchors": [
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java",
+      "sha256": "65a266f1a575db5f7116394a2dda0bca9a076a0340ada0a4b77cf68d70f32ed0",
+      "anchors": [
+        32,
+        38,
+        39,
+        42,
+        43
+      ]
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/OwnedTransferDirectory.java",
+      "sha256": "73583455f354f5ae42f573b8d13c9b98b708b59b133b9aa8c1cf2514a885344e",
+      "anchors": [
+        32,
+        33,
+        112,
+        210,
+        221,
+        230,
+        239,
+        249,
+        259,
+        268,
+        277,
+        293,
+        311,
+        330,
+        338,
+        341
+      ]
+    }
+  ],
+  "originalTestInputs": [
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageFailureGraphTest.java",
+      "sha256": "f030a16dc31c593b8d0f4a2f9a809ef52059069f0053292ef4a85e297f4a0b14",
+      "sqlTypeMention": true
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StoragePublicContractTest.java",
+      "sha256": "8ae87d3f27faf8d993de92552c2efb547c7915ac7a5ba26d025a477c6daf710d",
+      "sqlTypeMention": true
+    }
+  ],
+  "designDirection": [
+    "Storage owns identity-visited breadth-first cause/suppressed and the order of an explicitly supplied extra edge, with no JDBC type",
+    "Bootstrap owns the existing JDK JDBC adapter and reuses SQL next as the final edge; SQL-capable upper owners call it through existing dependencies",
+    "Establish all mixed FileOperation callback owners before switching the Storage default, including nested SQL in an IOException; keep closures explicit and protect unchanged direct Error identity/order",
+    "Accredited ordinary graph and original SQL/native/Root coverage remain split; no design/quality waiver"
+  ],
+  "protectedDynamicActions": 0,
+  "shortTermFormalUpdated": false,
+  "newAcceptance": 0,
+  "open": true
+}

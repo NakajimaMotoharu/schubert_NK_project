@@ -1,0 +1,114 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-5850",
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F02-JDBC-EXCEPTION-OWNERSHIP-20261118",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F02-JDBC-EXCEPTION-OWNERSHIP-20261118",
+    "workAttributionKind": "ADDITIONAL_FINDING",
+    "workScope": "BUG3233/YKT2680/SSC461; F02-a SYS005. Bind exact named caller locations, origin module, Java SQL graph capabilities, Storage file-callback constraints, relevant tests and pre-existing HOLD from published source only. End the read-only work with a bounded staged design to remove JDBC dependency while preserving graph order, concrete prerequisites and evidence, or an explicit unresolved ownership edge. No dynamic exception replay or runtime actions.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38580-f02-three-physical-library-boundaries-v1/manifest.json",
+        "sha256": "da44983bc855891dcb04a7ee6425627b9fc311c00b793dee1b7909ede05dd61a"
+      },
+      {
+        "path": "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md",
+        "sha256": "d42091c0f419fab98233766eb8f7ce13b25c0500c252f582d2c64f009775b583"
+      },
+      {
+        "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+        "sha256": "143daada6ad0a5921240a5a467373c7443c09a2f246c24bea3101e58a002d20c"
+      },
+      {
+        "path": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+        "sha256": "f0f91f5d06d77d881381c7ac0576a0726faf6bedf21d3d31165370612ba6c77d"
+      }
+    ],
+    "productionCoreMain": "31748ed33367119278407a3bce0fe2c82641dc1b",
+    "source": "66d18b09b7e9b080c90079f5f925ed12cd0982b0",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a",
+      "SSC-461"
+    ],
+    "run": "PG38582-f02-jdbc-exception-ownership-review-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.2,
+      "base": 0.75,
+      "high": 1.6
+    },
+    "groupCapPp": 2.0,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "startEvent": "PGPT-20261008-5849",
+    "terminalAtUTC": "2026-11-18T04:37:59.431873+00:00",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38582-f02-jdbc-exception-ownership-review-v1/manifest.json",
+      "sha256": "4c29301e66cd473c219320a3dfa8cf5d846b787eb477caa0bd38599f678a4e92"
+    },
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortCompletionRate": null,
+    "productTestsExecuted": 0,
+    "finiteGraphSites": 107,
+    "finiteGraphOwnerJavaFiles": 52,
+    "completedAdditionalPriceForGroupPp": 0,
+    "additionalCompletedPriceTotalPp": 42.9,
+    "remainingCriteria": [
+      "Storage owns identity-visited breadth-first cause/suppressed and the order of an explicitly supplied extra edge, with no JDBC type",
+      "Bootstrap owns the existing JDK JDBC adapter and reuses SQL next as the final edge; SQL-capable upper owners call it through existing dependencies",
+      "Establish all mixed FileOperation callback owners before switching the Storage default, including nested SQL in an IOException; keep closures explicit and protect unchanged direct Error identity/order",
+      "Accredited ordinary graph and original SQL/native/Root coverage remain split; no design/quality waiver"
+    ],
+    "quotaAfter": {
+      "usedPercent": 28,
+      "remainingPercent": 72,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "471c5a6fd4cebd0f01ca77ceb043288e2260a61ecc6cdd8f05f1efd6a034d04e",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T04:38:19.167000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 28,
+          "remainingPercent": 72,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 28,
+      "remainingPercent": 72,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true
+  }
+}
