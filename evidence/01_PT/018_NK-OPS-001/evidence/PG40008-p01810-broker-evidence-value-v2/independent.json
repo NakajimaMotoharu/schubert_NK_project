@@ -1,0 +1,83 @@
+{
+  "actualExit": 0,
+  "sourceCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "testSource": "4162eb60f357593fb4eb5f8bfa66eda3f2332010",
+  "manifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40008-p01810-broker-evidence-value-v2/manifest.json",
+    "sha256": "39127844d3df8f2539f3f531d3c8fef3184bc84b5806a7f95bfe22b683af3215"
+  },
+  "recordCrc64": "ff60118e5a89d372",
+  "firstPreparationExit": 1,
+  "firstDynamicSuccess": 3,
+  "firstDynamicTotal": 3,
+  "newTestDefinitions": 3,
+  "counters": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 116
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 0
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 21
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 14
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 14
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "firstFixtureCompile": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40006-p01810-broker-evidence-value-v1/manifest.json",
+    "sha256": "70db5c25aa03456fb85c661beb87a55c091d9c551785967de10e243c21f29031"
+  },
+  "testIds": {
+    "PT-P01810-CATALOG-062A": "ownsAllNestedValueInputsBeforeAndAfterCallerMutatesThem()",
+    "PT-P01810-CATALOG-062B": "comparesOwnedValueDataWhileItsGeneralDiagnosticsStayFixed()",
+    "PT-P01810-CATALOG-062C": "rejectsMissingNestedInputsWhileTakingOwnership()"
+  },
+  "pmdRaw": 3,
+  "pmdApplicable": 0,
+  "pmdUnclassified": 0,
+  "pmdPerSite": [
+    {
+      "rule": "UseConcurrentHashMap",
+      "line": 80,
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+      "scope": "missingField",
+      "applicable": false,
+      "reason": "A single method owns the map and captures it only for synchronous assertThrows and constructor; no concurrent access. HashMap admits the deliberate null test input."
+    },
+    {
+      "rule": "UseConcurrentHashMap",
+      "line": 82,
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+      "scope": "missingPermission",
+      "applicable": false,
+      "reason": "A single method owns the map and captures it only for synchronous assertThrows and constructor; no concurrent access. HashMap admits the deliberate null test input."
+    },
+    {
+      "rule": "UseConcurrentHashMap",
+      "line": 84,
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+      "scope": "missingPressure",
+      "applicable": false,
+      "reason": "A single method owns the map and captures it only for synchronous assertThrows and constructor; no concurrent access. HashMap admits the deliberate null test input."
+    }
+  ],
+  "realBroker": 0,
+  "actualNative": 0,
+  "whole451Accepted": false,
+  "newAcceptance": 0,
+  "terminalAtUTC": "2026-11-18T17:57:28.774973+00:00"
+}
