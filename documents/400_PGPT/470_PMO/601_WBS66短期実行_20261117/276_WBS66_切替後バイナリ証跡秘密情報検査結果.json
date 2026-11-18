@@ -1,0 +1,107 @@
+{
+  "eventId": "PGPT-20261008-5810",
+  "actualExit": 0,
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-G07-TRACKED-BINARY-EVIDENCE-20261118",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-G07-TRACKED-BINARY-EVIDENCE-20261118",
+    "workAttributionKind": "SOURCE_REQUALIFICATION",
+    "workScope": "WBS-G07: same baseline and fixed HEAD as PG38434. Inspect net binary delta and all historical binary versions added in that range. Read only tracked public .gz and .exec evidence. Redacted scan of decoded text; independently parse JaCoCo-only format/namespace and scan human-readable metadata strings. No unrelated files or external targets. Do not accept full repo secret gate.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38434-f03-g07-tracked-resume-delta-scan-v1/manifest.json",
+        "sha256": "67857c9c9df19b5eb6e4b24247a49e20ba31ac22374c4ce000a534fcc1cad710"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38434-f03-g07-tracked-resume-delta-scan-v1/triage-final.json",
+        "sha256": "c304b4ccbbdd720fdb403ecc4f8ad591aae645bc8bda72e6f7c2047c006d67b7"
+      }
+    ],
+    "source": "a579607426aaa00c33d500eac370febdb914e1fe",
+    "productionCoreMain": "713885ee295be89b2c2362594c67879827cfba50",
+    "gitBaseline": "cc64fbee4d21bb0b805fb364d8537de3169909e9",
+    "run": "PG38438-g07-incremental-binary-evidence-review-v1",
+    "wbsLeafIds": [
+      "WBS-G07"
+    ],
+    "managementWorkIds": [
+      "WBS-G07/criterion/quality"
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.1,
+      "base": 0.5,
+      "high": 1.1
+    },
+    "groupCapPp": 1.6,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "quotaAfter": {
+      "usedPercent": 27,
+      "remainingPercent": 73,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "cb1e5b7927b47a99c3d866d10042899093f5697f8f04f5c887dc9334c0f1da9c",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T02:47:48.783000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 27,
+          "remainingPercent": 73,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T02:46:19.920626+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 27,
+      "remainingPercent": 73,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-5809",
+    "productRuns": 0,
+    "productTestsExecuted": 0,
+    "inspectedTrackedBinaryPaths": 66,
+    "inspectedTrackedBinaryVersions": 66,
+    "scannerActualExit": 0,
+    "findings": 0,
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38438-g07-incremental-binary-evidence-review-v1/manifest.json",
+      "sha256": "a5ca6d1ff371ea9246fe67eda5257128ef027c3fdcca4478bb4dfe5aeaf73753"
+    },
+    "additionalCompletedPriceTotalPp": 35.45,
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortCompletionRate": null,
+    "actualDedicatedPp": null,
+    "remainingCriteria": [
+      "Complete G07 repository and baseline history acceptance separate; only 70-commit tracked delta bound",
+      "G07 / 451 final criteria and owner verification"
+    ]
+  }
+}
