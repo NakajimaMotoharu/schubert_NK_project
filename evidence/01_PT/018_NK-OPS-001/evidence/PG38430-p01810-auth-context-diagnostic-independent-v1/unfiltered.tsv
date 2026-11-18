@@ -1,0 +1,48 @@
+CLASS	dev/codex/schubert/nk/api/security/AuthContextCodec$EnvelopeFactory	08c8230a2b581f16	false	0	1536	INSTRUCTION:0:0	BRANCH:0:0	LINE:0:0	COMPLEXITY:0:0	METHOD:0:0	CLASS:0:0
+CLASS	dev/codex/schubert/nk/api/security/AuthContextCodec	c4080f5be58702fd	true	118	49	INSTRUCTION:6:529	BRANCH:0:36	LINE:0:124	COMPLEXITY:0:30	METHOD:0:12	CLASS:0:1
+METHOD	dev/codex/schubert/nk/api/security/AuthContextCodec	<init>	(Ljava/lang/String;[BLjava/lang/String;[B)V	1	INSTRUCTION:0:10	BRANCH:0:0	LINE:0:2	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/AuthContextCodec	<init>	(Ljava/lang/String;[BLjava/lang/String;[BLjava/security/SecureRandom;)V	0	INSTRUCTION:0:9	BRANCH:0:0	LINE:0:2	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/AuthContextCodec	<init>	(Ljava/lang/String;[BLjava/lang/String;[BLjava/security/SecureRandom;Ldev/codex/schubert/nk/api/security/AuthContextCodec$EnvelopeFactory;)V	0	INSTRUCTION:0:89	BRANCH:0:12	LINE:0:22	COMPLEXITY:0:7	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/AuthContextCodec	encrypt	(Ldev/codex/schubert/nk/api/security/AuthContextIdentity;Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;)Ldev/codex/schubert/nk/api/security/EncryptedAuthContext;	1	INSTRUCTION:0:139	BRANCH:0:2	LINE:0:38	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/AuthContextCodec	decrypt	(Ldev/codex/schubert/nk/api/security/AuthContextIdentity;Ldev/codex/schubert/nk/api/security/EncryptedAuthContext;)Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;	1	INSTRUCTION:0:173	BRANCH:0:12	LINE:0:34	COMPLEXITY:0:7	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/AuthContextCodec	key	(Ljava/lang/String;)[B	2	INSTRUCTION:0:15	BRANCH:0:2	LINE:0:4	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/AuthContextCodec	crypt	(I[B[B[B[B)[B	10	INSTRUCTION:0:23	BRANCH:0:0	LINE:0:4	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/AuthContextCodec	validateVersion	(Ljava/lang/String;)V	10	INSTRUCTION:0:14	BRANCH:0:2	LINE:0:4	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/AuthContextCodec	validateKey	([B)V	10	INSTRUCTION:0:14	BRANCH:0:2	LINE:0:4	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/AuthContextCodec	ensureOpen	()V	2	INSTRUCTION:0:9	BRANCH:0:2	LINE:0:2	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/AuthContextCodec	close	()V	1	INSTRUCTION:6:27	BRANCH:0:2	LINE:0:6	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/AuthContextCodec	<clinit>	()V	8	INSTRUCTION:0:7	BRANCH:0:0	LINE:0:2	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/api/security/AuthContextCryptoException$Reason	3cb648a9b574b3af	true	8	16433	INSTRUCTION:0:50	BRANCH:0:0	LINE:0:4	COMPLEXITY:0:5	METHOD:0:5	CLASS:0:1
+METHOD	dev/codex/schubert/nk/api/security/AuthContextCryptoException$Reason	values	()[Ldev/codex/schubert/nk/api/security/AuthContextCryptoException$Reason;	9	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/AuthContextCryptoException$Reason	valueOf	(Ljava/lang/String;)Ldev/codex/schubert/nk/api/security/AuthContextCryptoException$Reason;	9	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/AuthContextCryptoException$Reason	<init>	(Ljava/lang/String;I)V	2	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/AuthContextCryptoException$Reason	$values	()[Ldev/codex/schubert/nk/api/security/AuthContextCryptoException$Reason;	4106	INSTRUCTION:0:15	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/AuthContextCryptoException$Reason	<clinit>	()V	8	INSTRUCTION:0:21	BRANCH:0:0	LINE:0:4	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/api/security/AuthContextCryptoException	e6a9db4e7cdac3ca	true	3	49	INSTRUCTION:0:13	BRANCH:0:0	LINE:0:4	COMPLEXITY:0:2	METHOD:0:2	CLASS:0:1
+METHOD	dev/codex/schubert/nk/api/security/AuthContextCryptoException	<init>	(Ldev/codex/schubert/nk/api/security/AuthContextCryptoException$Reason;)V	0	INSTRUCTION:0:10	BRANCH:0:0	LINE:0:3	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/AuthContextCryptoException	reason	()Ldev/codex/schubert/nk/api/security/AuthContextCryptoException$Reason;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/api/security/AuthContextIdentity	d36755946b3c79f8	true	21	65585	INSTRUCTION:0:122	BRANCH:0:8	LINE:0:17	COMPLEXITY:0:11	METHOD:0:7	CLASS:0:1
+METHOD	dev/codex/schubert/nk/api/security/AuthContextIdentity	<init>	(Ljava/util/UUID;J)V	1	INSTRUCTION:0:26	BRANCH:0:4	LINE:0:5	COMPLEXITY:0:3	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/AuthContextIdentity	aad	(Ljava/lang/String;)[B	0	INSTRUCTION:0:80	BRANCH:0:4	LINE:0:11	COMPLEXITY:0:3	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/AuthContextIdentity	toString	()Ljava/lang/String;	17	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/AuthContextIdentity	hashCode	()I	17	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/AuthContextIdentity	equals	(Ljava/lang/Object;)Z	17	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/AuthContextIdentity	sessionId	()Ljava/util/UUID;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/AuthContextIdentity	userId	()J	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/api/security/EncryptedAuthContext	0dada592ee82b96d	true	14	65585	INSTRUCTION:0:60	BRANCH:0:6	LINE:0:12	COMPLEXITY:0:9	METHOD:0:6	CLASS:0:1
+METHOD	dev/codex/schubert/nk/api/security/EncryptedAuthContext	<init>	(Ljava/lang/String;[B)V	1	INSTRUCTION:0:43	BRANCH:0:6	LINE:0:9	COMPLEXITY:0:4	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/EncryptedAuthContext	ciphertext	()[B	1	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/EncryptedAuthContext	toString	()Ljava/lang/String;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/EncryptedAuthContext	hashCode	()I	17	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/EncryptedAuthContext	equals	(Ljava/lang/Object;)Z	17	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/EncryptedAuthContext	keyVersion	()Ljava/lang/String;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/api/security/package-info	e5e40b479082dd50	false	0	5632	INSTRUCTION:0:0	BRANCH:0:0	LINE:0:0	COMPLEXITY:0:0	METHOD:0:0	CLASS:0:0
+CLASS	dev/codex/schubert/nk/protocol/header/AuthenticationContext	a931162e0a83d341	true	15	49	INSTRUCTION:7:47	BRANCH:2:4	LINE:2:11	COMPLEXITY:4:6	METHOD:2:5	CLASS:0:1
+METHOD	dev/codex/schubert/nk/protocol/header/AuthenticationContext	<init>	(Ljava/lang/String;)V	2	INSTRUCTION:0:6	BRANCH:0:0	LINE:0:3	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/protocol/header/AuthenticationContext	of	(Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;	9	INSTRUCTION:0:19	BRANCH:0:2	LINE:0:4	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/protocol/header/AuthenticationContext	wireValue	()Ljava/lang/String;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/protocol/header/AuthenticationContext	equals	(Ljava/lang/Object;)Z	1	INSTRUCTION:1:15	BRANCH:2:2	LINE:0:2	COMPLEXITY:2:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/protocol/header/AuthenticationContext	hashCode	()I	1	INSTRUCTION:4:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/protocol/header/AuthenticationContext	toString	()Ljava/lang/String;	1	INSTRUCTION:2:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/protocol/header/AuthenticationContext	<clinit>	()V	8	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/protocol/header/package-info	61ea674b4f3bb183	false	0	5632	INSTRUCTION:0:0	BRANCH:0:0	LINE:0:0	COMPLEXITY:0:0	METHOD:0:0	CLASS:0:0

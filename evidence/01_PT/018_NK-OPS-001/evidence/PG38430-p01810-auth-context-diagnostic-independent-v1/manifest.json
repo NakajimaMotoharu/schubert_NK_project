@@ -1,0 +1,1406 @@
+{
+  "run": "PG38430-p01810-auth-context-diagnostic-independent-v1",
+  "source": "d5c74153bfee38801395beeeb8daa63907a138ed",
+  "productionCore": "713885ee295be89b2c2362594c67879827cfba50",
+  "actualExit": 0,
+  "tests": 13,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "physicalClasses": 9,
+  "classes": {
+    "dev/codex/schubert/nk/api/security/AuthContextCodec$EnvelopeFactory": {
+      "crc": "08c8230a2b581f16",
+      "positive": false,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    "dev/codex/schubert/nk/api/security/AuthContextCodec": {
+      "crc": "c4080f5be58702fd",
+      "positive": true,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 6,
+          "covered": 529
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 36
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 124
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 30
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 12
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "methods": {
+        "<init>(Ljava/lang/String;[BLjava/lang/String;[B)V": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 10
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 2
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "<init>(Ljava/lang/String;[BLjava/lang/String;[BLjava/security/SecureRandom;)V": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 9
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 2
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "<init>(Ljava/lang/String;[BLjava/lang/String;[BLjava/security/SecureRandom;Ldev/codex/schubert/nk/api/security/AuthContextCodec$EnvelopeFactory;)V": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 89
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 12
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 22
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 7
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "encrypt(Ldev/codex/schubert/nk/api/security/AuthContextIdentity;Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;)Ldev/codex/schubert/nk/api/security/EncryptedAuthContext;": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 139
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 2
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 38
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 2
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "decrypt(Ldev/codex/schubert/nk/api/security/AuthContextIdentity;Ldev/codex/schubert/nk/api/security/EncryptedAuthContext;)Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 173
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 12
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 34
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 7
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "key(Ljava/lang/String;)[B": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 15
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 2
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 4
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 2
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "crypt(I[B[B[B[B)[B": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 23
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 4
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "validateVersion(Ljava/lang/String;)V": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 14
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 2
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 4
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 2
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "validateKey([B)V": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 14
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 2
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 4
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 2
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "ensureOpen()V": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 9
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 2
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 2
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 2
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "close()V": {
+          "INSTRUCTION": {
+            "missed": 6,
+            "covered": 27
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 2
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 6
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 2
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "<clinit>()V": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 7
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 2
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        }
+      }
+    },
+    "dev/codex/schubert/nk/api/security/AuthContextCryptoException$Reason": {
+      "crc": "3cb648a9b574b3af",
+      "positive": true,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 50
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 4
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 5
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 5
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "methods": {
+        "values()[Ldev/codex/schubert/nk/api/security/AuthContextCryptoException$Reason;": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 4
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "valueOf(Ljava/lang/String;)Ldev/codex/schubert/nk/api/security/AuthContextCryptoException$Reason;": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 5
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "<init>(Ljava/lang/String;I)V": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 5
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "$values()[Ldev/codex/schubert/nk/api/security/AuthContextCryptoException$Reason;": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 15
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "<clinit>()V": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 21
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 4
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        }
+      }
+    },
+    "dev/codex/schubert/nk/api/security/AuthContextCryptoException": {
+      "crc": "e6a9db4e7cdac3ca",
+      "positive": true,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 13
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 4
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 2
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 2
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "methods": {
+        "<init>(Ldev/codex/schubert/nk/api/security/AuthContextCryptoException$Reason;)V": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 10
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 3
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "reason()Ldev/codex/schubert/nk/api/security/AuthContextCryptoException$Reason;": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 3
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        }
+      }
+    },
+    "dev/codex/schubert/nk/api/security/AuthContextIdentity": {
+      "crc": "d36755946b3c79f8",
+      "positive": true,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 122
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 8
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 17
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 11
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 7
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "methods": {
+        "<init>(Ljava/util/UUID;J)V": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 26
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 4
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 5
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 3
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "aad(Ljava/lang/String;)[B": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 80
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 4
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 11
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 3
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "toString()Ljava/lang/String;": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 3
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "hashCode()I": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 3
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "equals(Ljava/lang/Object;)Z": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 4
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "sessionId()Ljava/util/UUID;": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 3
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "userId()J": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 3
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        }
+      }
+    },
+    "dev/codex/schubert/nk/api/security/EncryptedAuthContext": {
+      "crc": "0dada592ee82b96d",
+      "positive": true,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 60
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 6
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 12
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 9
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 6
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "methods": {
+        "<init>(Ljava/lang/String;[B)V": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 43
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 6
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 9
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 4
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "ciphertext()[B": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 5
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "toString()Ljava/lang/String;": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 2
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "hashCode()I": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 3
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "equals(Ljava/lang/Object;)Z": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 4
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "keyVersion()Ljava/lang/String;": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 3
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        }
+      }
+    },
+    "dev/codex/schubert/nk/api/security/package-info": {
+      "crc": "e5e40b479082dd50",
+      "positive": false,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    "dev/codex/schubert/nk/protocol/header/AuthenticationContext": {
+      "crc": "a931162e0a83d341",
+      "positive": true,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 7,
+          "covered": 47
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 4
+        },
+        "LINE": {
+          "missed": 2,
+          "covered": 11
+        },
+        "COMPLEXITY": {
+          "missed": 4,
+          "covered": 6
+        },
+        "METHOD": {
+          "missed": 2,
+          "covered": 5
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "methods": {
+        "<init>(Ljava/lang/String;)V": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 6
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 3
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "of(Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 19
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 2
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 4
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 2
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "wireValue()Ljava/lang/String;": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 3
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "equals(Ljava/lang/Object;)Z": {
+          "INSTRUCTION": {
+            "missed": 1,
+            "covered": 15
+          },
+          "BRANCH": {
+            "missed": 2,
+            "covered": 2
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 2
+          },
+          "COMPLEXITY": {
+            "missed": 2,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "hashCode()I": {
+          "INSTRUCTION": {
+            "missed": 4,
+            "covered": 0
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 1,
+            "covered": 0
+          },
+          "COMPLEXITY": {
+            "missed": 1,
+            "covered": 0
+          },
+          "METHOD": {
+            "missed": 1,
+            "covered": 0
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "toString()Ljava/lang/String;": {
+          "INSTRUCTION": {
+            "missed": 2,
+            "covered": 0
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 1,
+            "covered": 0
+          },
+          "COMPLEXITY": {
+            "missed": 1,
+            "covered": 0
+          },
+          "METHOD": {
+            "missed": 1,
+            "covered": 0
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "<clinit>()V": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 4
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        }
+      }
+    },
+    "dev/codex/schubert/nk/protocol/header/package-info": {
+      "crc": "61ea674b4f3bb183",
+      "positive": false,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    }
+  },
+  "rawCommand": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+    "-cp",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31432-generated-code-supplemental-tool-v1/toolclasses:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+    "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG38426-ssc455-auth-context-post-v1/jacoco.exec",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38418-ssc455-auth-context-prepare-v1/component/dev/codex/schubert/nk/api/security/AuthContextCodec$EnvelopeFactory.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38418-ssc455-auth-context-prepare-v1/component/dev/codex/schubert/nk/api/security/AuthContextCodec.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38418-ssc455-auth-context-prepare-v1/component/dev/codex/schubert/nk/api/security/AuthContextCryptoException$Reason.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38418-ssc455-auth-context-prepare-v1/component/dev/codex/schubert/nk/api/security/AuthContextCryptoException.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38418-ssc455-auth-context-prepare-v1/component/dev/codex/schubert/nk/api/security/AuthContextIdentity.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38418-ssc455-auth-context-prepare-v1/component/dev/codex/schubert/nk/api/security/EncryptedAuthContext.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38418-ssc455-auth-context-prepare-v1/component/dev/codex/schubert/nk/api/security/package-info.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38418-ssc455-auth-context-prepare-v1/component/dev/codex/schubert/nk/protocol/header/AuthenticationContext.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38418-ssc455-auth-context-prepare-v1/component/dev/codex/schubert/nk/protocol/header/package-info.class"
+  ],
+  "raw": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38430-p01810-auth-context-diagnostic-independent-v1/unfiltered.tsv",
+    "sha256": "91ec17b147872b838ceff5388465d4266744fbcb1c7d046f7b4078c548b43689"
+  },
+  "unit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38424-ssc455-auth-context-unit-v1/manifest.json",
+    "sha256": "b3fa0d84e80ec22284402fe38eb35036033c7e3ea3a6ee7a4b1e042b5083b2c0"
+  },
+  "independentPost": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38426-ssc455-auth-context-post-v1/manifest.json",
+    "sha256": "c8d0ab5be1f0442f51c7fbb59edcb81aa38d52e34abad8f0fede714f21e12197"
+  },
+  "exec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38426-ssc455-auth-context-post-v1/jacoco.exec",
+    "sha256": "6255f5edca832ad2636faef6189e3fef57a9652d7ef1ba35165baacfb0006f64"
+  },
+  "classInitCompressed": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38426-ssc455-auth-context-post-v1/original-class-init.stdout.gz",
+    "sha256": "5113b2d4a6310e92e51de7d0b18594182a5f9456f7387cc72013f1049ed9c54e"
+  },
+  "classInitRawSha256": "df6649684736a6b01fe55efb81945ed3e6adb31e9db3a314eb96560fc93a25d1",
+  "targetRawCounters": {
+    "LINE": {
+      "missed": 0,
+      "covered": 161
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 32
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 5
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 50
+    },
+    "INSTRUCTION": {
+      "missed": 6,
+      "covered": 774
+    }
+  },
+  "encryptedAuthRawCounters": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 60
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 6
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 12
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 9
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 6
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "actualHeldOperations": 0,
+  "targetFourAll100": true,
+  "allRawTarget": false,
+  "publicAbi": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38430-p01810-auth-context-diagnostic-independent-v1/public-abi.json",
+    "sha256": "f2e1d8674f875c4747913b8a196b638ffc21b6d0c79c6559c3312b452eb3f095"
+  },
+  "terminalAtUTC": "2026-11-18T02:33:43.318097+00:00",
+  "otherOwnerResponseSnapshotHold": true,
+  "formalUpdated": false,
+  "newAcceptance": 0
+}
