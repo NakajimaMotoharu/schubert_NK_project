@@ -1,8 +1,9 @@
 package dev.codex.schubert.nk.batch.repository;
 
+import dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph;
 import dev.codex.schubert.nk.batch.backup.BackupManifest;
-import dev.codex.schubert.nk.storage.StorageIoException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLDataException;
 import java.sql.SQLException;
@@ -16,6 +17,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
+import javax.annotation.WillClose;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -152,31 +154,19 @@ public final class BackupStepRepository {
           rowFailure = failure;
           throw failure;
         } finally {
-          if (rows != null) {
-            try {
-              rows.close();
-            } catch (SQLException | RuntimeException | Error failure) {
-              if (JdbcResourceFailures.replace(rowFailure, failure)) throw failure;
-            }
-          }
+          closeRows(rows, rowFailure);
         }
       } catch (SQLException | RuntimeException | Error failure) {
         statementFailure = failure;
         throw failure;
       } finally {
-        if (statement != null) {
-          try {
-            statement.close();
-          } catch (SQLException | RuntimeException | Error failure) {
-            if (JdbcResourceFailures.replace(statementFailure, failure)) throw failure;
-          }
-        }
+        closeStatement(statement, statementFailure);
       }
       require(states.size() == 2 && states.get(0).equals(states.get(1)));
       guarded(manifest);
       return states.getFirst();
     } catch (SQLException failure) {
-      StorageIoException.preserveFatal(failure);
+      JdbcFailureGraph.preserveFatal(failure);
       throw new BatchRepositoryException();
     }
   }
@@ -189,6 +179,27 @@ public final class BackupStepRepository {
     var actual = inspect(manifest, endedAt);
     if (!actual.equals(Optional.of(endedAt))) throw new BatchRepositoryException();
     return actual.orElseThrow();
+  }
+
+  private static void closeRows(@WillClose @Nullable ResultSet rows, @Nullable Throwable primary)
+      throws SQLException {
+    if (rows == null) return;
+    try {
+      rows.close();
+    } catch (SQLException | RuntimeException | Error secondary) {
+      if (JdbcResourceFailures.replace(primary, secondary)) throw secondary;
+    }
+  }
+
+  private static void closeStatement(
+      @WillClose @Nullable PreparedStatement statement, @Nullable Throwable primary)
+      throws SQLException {
+    if (statement == null) return;
+    try {
+      statement.close();
+    } catch (SQLException | RuntimeException | Error secondary) {
+      if (JdbcResourceFailures.replace(primary, secondary)) throw secondary;
+    }
   }
 
   private static Optional<Instant> readRow(
