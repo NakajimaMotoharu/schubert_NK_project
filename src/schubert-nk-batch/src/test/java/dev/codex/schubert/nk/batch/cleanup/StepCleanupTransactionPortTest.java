@@ -7,11 +7,13 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.batch.repository.BatchRepositoryException;
 import dev.codex.schubert.nk.batch.repository.BatchRun;
 import dev.codex.schubert.nk.batch.repository.BatchStep;
 import dev.codex.schubert.nk.batch.repository.BatchStepAttempt;
 import dev.codex.schubert.nk.batch.repository.CleanupCounts;
 import dev.codex.schubert.nk.batch.repository.CleanupKind;
+import java.io.IOException;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
 import java.sql.Connection;
@@ -230,6 +232,102 @@ final class StepCleanupTransactionPortTest {
     assertEquals(1, drift.timeoutRows);
     assertEquals(List.of(BEGIN, ROLLBACK, RESTORE), drift.events);
     drift.closedExactly(1);
+  }
+
+  @Test
+  void steptx461008DefaultClockUsesTheSameBorrowedTransactionContract() {
+    var fixture = new Fixture();
+    fixture.chunks.add(new Projection(0, 5L, true, "OK"));
+    var result = new StepCleanupService().execute(fixture.borrowed, ATTEMPT, CleanupKind.QUESTIONS);
+    assertTrue(result.complete());
+    assertEquals(new CleanupCounts(0, 0, 0), result.callCounts());
+    assertEquals(List.of(BEGIN, COMMIT, RESTORE), fixture.events);
+    fixture.closedExactly(3);
+  }
+
+  @Test
+  void steptx461009CommitRemainsDurableWhenOwnerDisappearsBeforeRestore() {
+    var fixture = new Fixture();
+    fixture.chunks.add(new Projection(0, 5L, true, "OK"));
+    var service =
+        StepCleanupService.withOwner(
+            () -> {
+              if (fixture.events.contains(COMMIT)) throw new IOException(FIXTURE);
+              return 2_900_000_000L;
+            });
+    var failure =
+        assertThrows(
+            CleanupStoppedException.class,
+            () -> service.execute(fixture.borrowed, ATTEMPT, CleanupKind.QUESTIONS));
+    assertEquals("TIME_LIMIT", failure.reason().name());
+    assertNull(failure.getCause());
+    assertEquals(List.of(BEGIN, COMMIT), fixture.events);
+    assertFalse(fixture.autoCommit);
+    fixture.closedExactly(4);
+  }
+
+  @Test
+  void steptx461010CompoundKnownFaultsUseFixedDiagnosticAndFatalPrimaryUsesIdentity() {
+    for (Throwable primary :
+        List.of(
+            new SQLException(FIXTURE),
+            new BatchRepositoryException(),
+            new CleanupStoppedException(CleanupStopReason.TIME_LIMIT))) {
+      for (Throwable secondary :
+          List.of(
+              new SQLException(FIXTURE),
+              new BatchRepositoryException(),
+              new CleanupStoppedException(CleanupStopReason.LOCK_BUSY))) {
+        var f = new Fixture();
+        f.beginFailure = primary;
+        f.rollbackFailure = secondary;
+        assertStop(DB, f);
+        assertEquals(List.of(BEGIN, ROLLBACK), f.events);
+        assertEquals(0, primary.getSuppressed().length);
+        f.closedExactly(0);
+      }
+    }
+
+    var f = new Fixture();
+    var fatal = new AssertionError(FIXTURE);
+    f.beginFailure = fatal;
+    f.rollbackFailure = new SQLException(FIXTURE);
+    assertSame(fatal, assertThrows(AssertionError.class, () -> run(f)));
+    assertEquals(1, fatal.getSuppressed().length);
+    assertEquals(STOPS, fatal.getSuppressed()[0].getMessage());
+    assertNull(fatal.getSuppressed()[0].getCause());
+    assertEquals(List.of(BEGIN, ROLLBACK), f.events);
+    f.closedExactly(0);
+  }
+
+  @Test
+  void steptx461011InterruptDuringClockReadDoesNotBeginTransaction() {
+    var f = new Fixture();
+    LongSupplier clock =
+        new LongSupplier() {
+          private boolean startRead;
+
+          @Override
+          public long getAsLong() {
+            if (startRead) Thread.currentThread().interrupt();
+            startRead = true;
+            return 0;
+          }
+        };
+    try {
+      var stop =
+          assertThrows(
+              CleanupStoppedException.class,
+              () ->
+                  new StepCleanupService(clock)
+                      .execute(f.borrowed, ATTEMPT, CleanupKind.QUESTIONS));
+      assertEquals("INTERRUPTED", stop.reason().name());
+      assertTrue(Thread.currentThread().isInterrupted());
+      assertTrue(f.events.isEmpty());
+      f.closedExactly(0);
+    } finally {
+      Thread.interrupted();
+    }
   }
 
   private static StepCleanupSummary run(Fixture f) {
