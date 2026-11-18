@@ -1,0 +1,232 @@
+{
+  "actualExit": 0,
+  "source": "e81d98a11946b6c0e1c20c38d30b38056d14aa46",
+  "unit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40128-p020-path-contract-green206-v2/manifest.json",
+    "sha256": "4a13e6b099d8aa0d4798e2a7147c0fc38f3fa57634b528e4533a3ec1bd483cbb"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40130-p020-path-contract-static-v2/manifest.json",
+    "sha256": "709b6788b1be85d1b14603f18f369cec02f99b5ed52753318cdc24d307688650"
+  },
+  "firstUnit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40124-p020-path-contract-green206-v1/manifest.json",
+    "sha256": "a6700b7784ab38ad5ecd51018ba77ff67ca4d2b416db6135db5326428e4b2fe5"
+  },
+  "firstStaticFailure": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40126-p020-path-contract-static-v1/manifest.json",
+    "sha256": "a826900da45b830539d63b8f769510fe45039e616475f974fa123648e29bdc3f"
+  },
+  "firstRejectedUnit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40122-p020-path-contract-red206-v1/manifest.json",
+    "sha256": "74b61fc527b6a3dd0284655300d06022f94fe57f99571eb5f1b6e59bdf84b62c"
+  },
+  "firstRejectedXml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40122-p020-path-contract-red206-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "3ee6d319ac6caef2c8159409538c637cc7683c5a3b1ca5f702b91fff0f97593d"
+  },
+  "firstRejectedExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40122-p020-path-contract-red206-v1/jacoco.exec",
+    "sha256": "7464b7af5ec6781b9cbfeacab3588e336aced87d1c2e65441f5f368cd4986a07"
+  },
+  "failedReadOnly": {
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-jar",
+      "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+      "execinfo",
+      "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40122-p020-path-contract-red206-v1/jacoco.exec"
+    ],
+    "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+    "startUTC": "2026-11-18T20:20:07.065651+00:00",
+    "actualExit": 0,
+    "terminalAtUTC": "2026-11-18T20:20:07.182204+00:00",
+    "log": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40132-p020-path-contract-independent-v1/rejected-execinfo.log",
+      "sha256": "d33ab94770a493a2899a3691631b8133684053c937aea887602710b70611d685"
+    }
+  },
+  "initialFES": {
+    "passed": 204,
+    "failures": 2,
+    "errors": 0,
+    "skipped": 0,
+    "notRun": 0
+  },
+  "tests": 206,
+  "suites": 20,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "newDefinitions": 2,
+  "testIds": {
+    "PT-CHR-DEF077": [
+      "GateContractValidatorNegativeTest",
+      "rejectsOtherValidMetadataValuesForTheLegacyPathContract"
+    ],
+    "PT-CHR-DEF078": [
+      "ArtifactComparatorTest",
+      "rejectsALegacyPathDifferenceWhenTheLoadedRuleClaimsItIsPermitted"
+    ]
+  },
+  "independentExpected": {
+    "designRow": "METHOD\tdev/codex/schubert/characterization/TargetAdapter\tlambda$create$0\t(Ljava/lang/String;)Z\t4106\tINSTRUCTION:0:9\tBRANCH:0:4\tLINE:0:1\tCOMPLEXITY:0:3\tMETHOD:0:1\tCLASS:0:0",
+    "mode": "contract",
+    "field": "http.path",
+    "selector": "http.path",
+    "cases": 24
+  },
+  "approvedRevision": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+  "raw": {
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38642-schema-raw-line-tool-v1/toolclasses:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+      "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+      "--line-deficits",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG40128-p020-path-contract-green206-v2/jacoco.exec",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40128-p020-path-contract-green206-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/ArtifactComparator$ComparisonResult.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40128-p020-path-contract-green206-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/ArtifactComparator.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40128-p020-path-contract-green206-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope$Open.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40128-p020-path-contract-green206-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope$Release.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40128-p020-path-contract-green206-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope$Work.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40128-p020-path-contract-green206-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40128-p020-path-contract-green206-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40128-p020-path-contract-green206-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$BaselineNumbers.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40128-p020-path-contract-green206-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$FileJsonOutput.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40128-p020-path-contract-green206-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$JsonOutput.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40128-p020-path-contract-green206-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$TreeStats.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40128-p020-path-contract-green206-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$UsableSpace.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40128-p020-path-contract-green206-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40128-p020-path-contract-green206-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateContractValidator$ValidationResult.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40128-p020-path-contract-green206-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateContractValidator.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40128-p020-path-contract-green206-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/TargetAdapter$Target.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40128-p020-path-contract-green206-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/TargetAdapter.class"
+    ],
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40132-p020-path-contract-independent-v1/raw.tsv",
+      "sha256": "52a7aebf800542019054c48f95ce1ba30e46947fd319cdb2174d9971cc81356b"
+    },
+    "actualExit": 0,
+    "noCode": [
+      "dev/codex/schubert/characterization/CharacterizationIoScope$Open",
+      "dev/codex/schubert/characterization/CharacterizationIoScope$Release",
+      "dev/codex/schubert/characterization/CharacterizationIoScope$Work",
+      "dev/codex/schubert/characterization/GateCli$JsonOutput",
+      "dev/codex/schubert/characterization/GateCli$UsableSpace"
+    ],
+    "tool": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38642-f03-schema-raw-line-deficits-v1/begin.json",
+      "sha256": "7f91863199af3f9ce301b3b3eeefc24ff34fb8825524669fe8469bee1ccf8786"
+    },
+    "lineDeficits": [
+      [
+        "dev/codex/schubert/characterization/GateCli",
+        "main",
+        "([Ljava/lang/String;)V",
+        "92",
+        "INSTRUCTION:0:52",
+        "BRANCH:1:25"
+      ],
+      [
+        "dev/codex/schubert/characterization/GateCli",
+        "main",
+        "([Ljava/lang/String;)V",
+        "98",
+        "INSTRUCTION:7:0",
+        "BRANCH:0:0"
+      ],
+      [
+        "dev/codex/schubert/characterization/GateCli",
+        "preflight",
+        "(Ljava/nio/file/Path;Ljava/nio/file/Path;)V",
+        "202",
+        "INSTRUCTION:4:0",
+        "BRANCH:0:0"
+      ],
+      [
+        "dev/codex/schubert/characterization/GateCli",
+        "preflight",
+        "(Ljava/nio/file/Path;Ljava/nio/file/Path;)V",
+        "203",
+        "INSTRUCTION:1:0",
+        "BRANCH:0:0"
+      ]
+    ],
+    "rawTotals": {
+      "LINE": {
+        "missed": 2,
+        "covered": 1613
+      },
+      "METHOD": {
+        "missed": 1,
+        "covered": 247
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 12
+      },
+      "BRANCH": {
+        "missed": 1,
+        "covered": 996
+      },
+      "INSTRUCTION": {
+        "missed": 12,
+        "covered": 8578
+      }
+    },
+    "missedMethods": [
+      {
+        "className": "dev/codex/schubert/characterization/GateCli",
+        "method": "main",
+        "descriptor": "([Ljava/lang/String;)V",
+        "misses": [
+          "INSTRUCTION:7:141",
+          "BRANCH:1:27",
+          "LINE:1:27",
+          "COMPLEXITY:1:19"
+        ]
+      },
+      {
+        "className": "dev/codex/schubert/characterization/GateCli",
+        "method": "preflight",
+        "descriptor": "(Ljava/nio/file/Path;Ljava/nio/file/Path;)V",
+        "misses": [
+          "INSTRUCTION:5:0",
+          "LINE:2:0",
+          "COMPLEXITY:1:0",
+          "METHOD:1:0"
+        ]
+      }
+    ]
+  },
+  "changedToolCounters": {
+    "INSTRUCTION": 4460,
+    "BRANCH": 437,
+    "LINE": 836,
+    "COMPLEXITY": 334,
+    "METHOD": 112,
+    "CLASS": 4
+  },
+  "pmdReviews": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40132-p020-path-contract-independent-v1/pmd-per-site.json",
+    "sha256": "da4656984312a7443a7015156da6c4e84581db6aff7a0c5d093986e3f91ada4a"
+  },
+  "pmdRaw": 7,
+  "pmdApplicable": 0,
+  "baselineUnchanged": true,
+  "classInit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40132-p020-path-contract-independent-v1/class-init.log.gz",
+    "sha256": "853a75a374203c5abb78c57d94368907b6f3a06222c20a54de647650b9bb5622"
+  },
+  "actualNkChr": false,
+  "productTests": 0,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "terminalAtUTC": "2026-11-18T20:20:07.210952+00:00",
+  "verifier": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/5286_p020_path_contract_post.py",
+    "sha256": "1a9e640132fd3f9c8c63d99efd9c016fe3c9a979747bb71887f2ca1444de1ce5"
+  }
+}

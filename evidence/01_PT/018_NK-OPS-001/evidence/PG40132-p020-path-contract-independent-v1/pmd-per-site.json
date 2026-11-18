@@ -1,0 +1,93 @@
+[
+  {
+    "owner": "ArtifactComparator.java",
+    "rule": "UseConcurrentHashMap",
+    "anchor": "Map<String, JsonNode> currentByCase = new TreeMap<>();",
+    "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+    "line": 164,
+    "disposition": "NOT_APPLICABLE",
+    "reason": "Current artifacts are accumulated in a TreeMap local to one compare call; key order is stable.",
+    "file": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40128-p020-path-contract-green206-v2/snapshot/program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+      "sha256": "e48e9550714e3b16d7ff39cdcac48c0b3ef985727ee914f28e16728a3ba6b395"
+    }
+  },
+  {
+    "owner": "ArtifactComparator.java",
+    "rule": "UseConcurrentHashMap",
+    "anchor": "Map<String, JsonNode> nkByCase = new TreeMap<>();",
+    "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+    "line": 165,
+    "disposition": "NOT_APPLICABLE",
+    "reason": "NK artifacts are accumulated in a TreeMap local to one compare call; key order is stable.",
+    "file": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40128-p020-path-contract-green206-v2/snapshot/program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+      "sha256": "e48e9550714e3b16d7ff39cdcac48c0b3ef985727ee914f28e16728a3ba6b395"
+    }
+  },
+  {
+    "owner": "ArtifactComparator.java",
+    "rule": "UseConcurrentHashMap",
+    "anchor": "Map<String, JsonNode> rules = new LinkedHashMap<>();",
+    "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+    "line": 221,
+    "disposition": "NOT_APPLICABLE",
+    "reason": "DIF rules are first-seen and ordered in the calling thread; insertion order controls unused DIF diagnostics.",
+    "file": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40128-p020-path-contract-green206-v2/snapshot/program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+      "sha256": "e48e9550714e3b16d7ff39cdcac48c0b3ef985727ee914f28e16728a3ba6b395"
+    }
+  },
+  {
+    "owner": "ArtifactComparator.java",
+    "rule": "UseConcurrentHashMap",
+    "anchor": "Map<String, Path> files = new TreeMap<>();",
+    "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+    "line": 473,
+    "disposition": "NOT_APPLICABLE",
+    "reason": "The artifact index is built privately in each call and used after that call returns to its caller.",
+    "file": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40128-p020-path-contract-green206-v2/snapshot/program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+      "sha256": "e48e9550714e3b16d7ff39cdcac48c0b3ef985727ee914f28e16728a3ba6b395"
+    }
+  },
+  {
+    "owner": "GateContractValidator.java",
+    "rule": "UseConcurrentHashMap",
+    "anchor": "Map<String, Object> metrics = new LinkedHashMap<>();",
+    "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+    "line": 128,
+    "disposition": "NOT_APPLICABLE",
+    "reason": "Each invocation creates its own local map and returns an immutable copy.",
+    "file": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40128-p020-path-contract-green206-v2/snapshot/program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+      "sha256": "16e5e4abb5d2433224d3642dc18bbb5970c210a4e388a3d05a4fe0b9405d6c71"
+    }
+  },
+  {
+    "owner": "ArtifactComparatorTest.java",
+    "rule": "UseConcurrentHashMap",
+    "anchor": "java.util.Map<String, ObjectNode> currentArtifacts = new java.util.LinkedHashMap<>();",
+    "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+    "line": 1804,
+    "disposition": "NOT_APPLICABLE",
+    "reason": "A local Current observation map belongs solely to this test invocation and its own temporary directory.",
+    "file": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40128-p020-path-contract-green206-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorTest.java",
+      "sha256": "6b144e8320a8e767a8e4639c1f4b8c5c8fe3ec74636332999e1708686f4d7fc0"
+    }
+  },
+  {
+    "owner": "ArtifactComparatorTest.java",
+    "rule": "UseConcurrentHashMap",
+    "anchor": "java.util.Map<String, ObjectNode> nkArtifacts = new java.util.LinkedHashMap<>();",
+    "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+    "line": 1805,
+    "disposition": "NOT_APPLICABLE",
+    "reason": "A local NK observation map belongs solely to this test invocation and its own temporary directory.",
+    "file": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40128-p020-path-contract-green206-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorTest.java",
+      "sha256": "6b144e8320a8e767a8e4639c1f4b8c5c8fe3ec74636332999e1708686f4d7fc0"
+    }
+  }
+]

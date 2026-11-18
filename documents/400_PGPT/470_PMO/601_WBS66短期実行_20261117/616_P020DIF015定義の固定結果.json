@@ -1,0 +1,151 @@
+{
+  "eventId": "PGPT-20261008-6137",
+  "actualExit": 0,
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P020-DIF015-CONTRACT-DEFINITION-20261119",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-P020-DIF015-CONTRACT-DEFINITION-20261119",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P020-01.02"
+    ],
+    "managementWorkIds": [
+      "WBS-P020-01.02/2"
+    ],
+    "source": "5c062fcbd295377d216c0210aa0d1e9dfa454755",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "characterizationBase": "4d239658f12ead59fe8bfa6b8da4ae6aebecbcf5",
+    "run": "PG40122-p020-path-contract-red206-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.4,
+      "base": 1.3,
+      "high": 3.3
+    },
+    "groupCapPp": 5,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40107-p020-u01-menu204-v3/begin.json",
+        "sha256": "dc8d65d070c2eb4b60326b73fe5eaa59efceda0c1fe50cd8ec89bddc1f1b1f79"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40108-p020-u01-menu-independent-v1/manifest.json",
+        "sha256": "5975c52044ca3c0712ca87618ead68072b7bcd3efa4fffcccbe0102754100c94"
+      },
+      {
+        "path": "program/characterization/tests/resources/cases/dif-allowlist.json",
+        "sha256": "43239fe3d3f42c488dcbeb58017fde78830ba3771930a9c97cd65c3c7a7c5cb6"
+      },
+      {
+        "path": "documents/200_UI/260_引継ぎ・監査/264_現行互換性Characterization Test仕様.md",
+        "sha256": "0b0973e6e1e94858e840bc1b85df1daff35e3a0fe9f28ea12331823c2cbcf781"
+      }
+    ],
+    "workScope": "PT-CHR-DEF077/078. Preserve UI264 DIF-015 same legacy URL initial release, reject definition scope/mode changes in pure definition and untrusted offline comparator. Prove independent synthetic negatives and scoped 206 regression. No new runtime path observation, browser, deployment or Current artifact changes.",
+    "canonicalDesignSource": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "quotaAfter": {
+      "usedPercent": 48,
+      "remainingPercent": 52,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "8d5a6c258d6c753583c0bcc98374529c807d76ec8e8362b130e23c1151cdd0e4",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T20:20:44.021000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 48,
+          "remainingPercent": 52,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T20:20:07.210952+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 48,
+      "remainingPercent": 52,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "publicEvidence": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40132-p020-path-contract-independent-v1/manifest.json",
+        "sha256": "af18f4c6b12643581fa71f0faa1cd25dcc6cb30b862df6575584145afc862cf5"
+      }
+    ],
+    "toolSource": "e81d98a11946b6c0e1c20c38d30b38056d14aa46",
+    "firstSuccess": 204,
+    "firstDenominator": 206,
+    "tests": 206,
+    "suites": 20,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "notRun": 0,
+    "newDefinitions": 2,
+    "productTests": 0,
+    "finalPmdRaw": 7,
+    "finalPmdApplicable": 0,
+    "changedToolCounters": {
+      "INSTRUCTION": 4460,
+      "BRANCH": 437,
+      "LINE": 836,
+      "COMPLEXITY": 334,
+      "METHOD": 112,
+      "CLASS": 4
+    },
+    "rawOnly": [
+      {
+        "className": "dev/codex/schubert/characterization/GateCli",
+        "method": "main",
+        "descriptor": "([Ljava/lang/String;)V",
+        "misses": [
+          "INSTRUCTION:7:141",
+          "BRANCH:1:27",
+          "LINE:1:27",
+          "COMPLEXITY:1:19"
+        ]
+      },
+      {
+        "className": "dev/codex/schubert/characterization/GateCli",
+        "method": "preflight",
+        "descriptor": "(Ljava/nio/file/Path;Ljava/nio/file/Path;)V",
+        "misses": [
+          "INSTRUCTION:5:0",
+          "LINE:2:0",
+          "COMPLEXITY:1:0",
+          "METHOD:1:0"
+        ]
+      }
+    ],
+    "currentAccepted": 17,
+    "addedFormal": 0,
+    "actualNkChr": false,
+    "result": "Both definition and comparison reject an altered DIF-015 contract. Static first 4 applicable sites fixed; final only local map findings in 4 changed files. Actual HTTP path, real CHR, GateCli required capacity, 451 and formal intake remain open."
+  }
+}
