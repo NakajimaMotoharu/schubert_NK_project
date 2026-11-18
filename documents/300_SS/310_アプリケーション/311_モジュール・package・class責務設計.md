@@ -549,3 +549,8 @@ private stateless関数型の実装をclass初期化時に固定Listへ登録し
 旧承認SQL全byteと順序を一対一で照合するSource equivalenceは補助証拠とする。PT期待はproductionを呼んで生成せず、既独立Testのliteral SQL/metadata/rows/固定hash/JDBC後条件と承認SS/DDLから保持する。元Asset32・Column26・Constraint22・Content29・Finalizer30・Reference21のwhole160 Test本文/独立期待値を不変とし、必要なwhole helperをscope確定してから新sourceで一exec、Root NullAway/Werror/全静的/物理CRC-init/XML/当六sourceの未filter四counter/公開API及び不変byteを確認する。private関数型の真のNoCodeを隠さず、共通DTO等の残coverageも全componentに残す。実DB/master/原本/鍵/Backup/Root/VM/native/QA056四型/QA051 finalの保留は解除しない。
 
 既instanceのtoString/redactionと例外診断を維持する。literal化は所有開始後のString組立を除去するが、性能やheap OOME挙動の実測合格を主張しない。追加A .4/1.2/3.6pp cap4を一回だけ計上、元F03 C2.4/SV/原見積りを保持する。元P01903/全F03/正式/ITSTの受入は別。状態:設計確定・main反映前・製造/PT未実施。
+
+
+## SSC-461 JDBC例外とStorage一般graphの段階移管
+
+StorageのJDBC依存禁止と既物理判定を維持する。共通Bootstrapには既SSC084が認めるJDK JDBC内でJdbcFailureGraphを置く。Storageの共通探索はJDKのThrowableと関数の型だけで追加辺を受け、JDBC用adapterの所有はBootstrapとする。最初の採用先はJdbcAdmissionFailures。旧入口とSQL次辺は、既利用側とFileOperation全件の変更・再試験が終わるまで互換維持する。旧物理違反は継続記録し、当段階だけでF02完了としない。
