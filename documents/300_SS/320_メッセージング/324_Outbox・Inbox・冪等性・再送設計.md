@@ -331,6 +331,8 @@ InspectionRunExecutorは既存InboxCleanupを所有processの鍵寿命内で使�
 
 InspectionExecutionのstatusはSUCCESS/WARNING/TIME_LIMIT/INTERRUPTED/STORAGE_FAILURE。SUCCESSはENDかつ保護0、WARNINGはENDかつ保護ありだけ（exit相当0/10）。他はexit相当50であり、不明commitや時間内に終わらなかった検査を成功にしない。Optional lastConfirmedに最後にcommit/closeまで成功したprogressだけを保持する。失敗時の値は最後の確認点であり最新DB件数/未削除証明ではない。未取得を0件へ変換しない。失敗が起きたchunkの途中commit件数は次の同run再読で確認する。
 
+SSC-453：終了コード相当値は各Status列挙子が生成時に保持する必須intとする。SUCCESS=0、WARNING=10、TIME_LIMIT/INTERRUPTED/STORAGE_FAILURE=50。InspectionExecution.exitCodeは保持値を返す。名称、宣言順、public署名、正常／警告とprogressの整合性検査、後段ゲートを維持する。列挙子を追加する際は終了コードと独立期待値を同時に定義する。
+
 InboxMaintenanceExceptionはSTORAGE_FAILUREへ射影し、自動SQL retryしない。予期しないprogramming例外・NPEは正常扱いせず起動境界まで伝播する。interrupt flagは消去しない。SUCCESS/WARNINGが得られてもその後のcredential/DB/provider resource close・親の全gateが成功するまで実process exit0/10へ確定しない。OS lock/backup実体/通常API停止/鍵file/本番main・systemd unitは別の未完了gateであり、run executor単体で省略できない。
 
 PT097～104は実DB/既存独立wire fixtureと注入単調clock・thread interruptで、空/既完了・保護あり・1,000件越え・時間前/一致/超過/自然wrap・DB故障/最後の確認点・同run再開・例外/redaction/record null契約・全Java4種100%を確認する。時間待ちsleep、reflection、productionからexpected生成は禁止。
