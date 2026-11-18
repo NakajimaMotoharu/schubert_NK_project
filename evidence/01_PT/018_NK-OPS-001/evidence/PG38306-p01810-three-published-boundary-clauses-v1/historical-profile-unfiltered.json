@@ -1,0 +1,110 @@
+{
+  "command": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+    "-cp",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31432-generated-code-supplemental-tool-v1/toolclasses:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+    "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG28304-backup-profile4-post-v1/jacoco.exec",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38256-wbs66-four-current-compile-v1/src/schubert-nk-batch/target/classes/dev/codex/schubert/nk/batch/backup/BackupVersions.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38256-wbs66-four-current-compile-v1/src/schubert-nk-batch/target/classes/dev/codex/schubert/nk/batch/backup/BackupProfile.class"
+  ],
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-18T00:29:30.643303+00:00",
+  "scope": "old PG28302 exec measured against identical two physical class hashes. No product PT, code definition or profile changed. No new current full-run coverage.",
+  "oldManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28304-backup-profile4-post-v1/manifest.json",
+    "sha256": "5bb638ae1fe30306e9b5fa907e86762bf314520919140e71dd7bf0288d0f045d"
+  },
+  "tool": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31432-generated-code-supplemental-tool-v1/compile.json",
+    "sha256": "c8e7033722c9d00ff3d618bab1c6ab1bde8ac793b4f9e4d2a478db95a0d17401"
+  },
+  "execSha256": "7b70bd67ba989d6441cc6ac213e7f930f02c73da8ac789b4c40f590e652b6292",
+  "currentCandidate": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+  "classHashes": {
+    "dev/codex/schubert/nk/batch/backup/BackupVersions.class": "fb610109423526e8bff897cf647626204fb0a6219db5efe0d08fa0c79228bb01",
+    "dev/codex/schubert/nk/batch/backup/BackupProfile.class": "96b8c9305804f434844f7147b2f598671b44062536e69f86dec52a3b04489a33"
+  },
+  "output": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38306-p01810-three-published-boundary-clauses-v1/historical-profile-unfiltered.tsv",
+    "sha256": "531df0edffe7a09553128b50d68c9a4bfc40e3aaea3c0ed26241c31525dbb95f"
+  },
+  "actualCountersByDeclaredClass": {
+    "dev/codex/schubert/nk/batch/backup/BackupVersions": {
+      "methods": 12,
+      "uncoveredMethods": [
+        {
+          "name": "<init>",
+          "descriptor": "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V",
+          "missed": {
+            "INSTRUCTION": 5,
+            "BRANCH": 2,
+            "LINE": 1,
+            "COMPLEXITY": 2
+          }
+        },
+        {
+          "name": "toString",
+          "descriptor": "()Ljava/lang/String;",
+          "missed": {
+            "INSTRUCTION": 2,
+            "LINE": 1,
+            "COMPLEXITY": 1,
+            "METHOD": 1
+          }
+        },
+        {
+          "name": "hashCode",
+          "descriptor": "()I",
+          "missed": {
+            "INSTRUCTION": 3,
+            "LINE": 1,
+            "COMPLEXITY": 1,
+            "METHOD": 1
+          }
+        }
+      ],
+      "classCounters": {
+        "INSTRUCTION": 10,
+        "BRANCH": 2,
+        "LINE": 2,
+        "COMPLEXITY": 4,
+        "METHOD": 2,
+        "CLASS": 0
+      }
+    },
+    "dev/codex/schubert/nk/batch/backup/BackupProfile": {
+      "methods": 13,
+      "uncoveredMethods": [
+        {
+          "name": "hashCode",
+          "descriptor": "()I",
+          "missed": {
+            "INSTRUCTION": 3,
+            "LINE": 1,
+            "COMPLEXITY": 1,
+            "METHOD": 1
+          }
+        },
+        {
+          "name": "equals",
+          "descriptor": "(Ljava/lang/Object;)Z",
+          "missed": {
+            "INSTRUCTION": 4,
+            "LINE": 1,
+            "COMPLEXITY": 1,
+            "METHOD": 1
+          }
+        }
+      ],
+      "classCounters": {
+        "INSTRUCTION": 7,
+        "BRANCH": 0,
+        "LINE": 0,
+        "COMPLEXITY": 2,
+        "METHOD": 2,
+        "CLASS": 0
+      }
+    }
+  }
+}
