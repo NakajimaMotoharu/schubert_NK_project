@@ -1,0 +1,72 @@
+{
+  "actualExit": 0,
+  "source": "4f1b2afe49f3663cc15f642dc5eb135223415f1b",
+  "productionCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "candidates": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40178-c02-source-killmode-red-v1/manifest.json",
+      "sha256": "a3fb2cb8321015783eea8d7444bda347c7b98e1bfee6f3e31dce32a786fb9cc3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40180-c02-source-killmode-green-v1/manifest.json",
+      "sha256": "bbec4984d048959d6f6a5436db2a11c5c28751816cbbc85e2eb6e20d4ed01641"
+    }
+  ],
+  "outcomes": [
+    {
+      "testId": "PT-C02-TEXT-010",
+      "expected": null,
+      "actual": null,
+      "qualified": true,
+      "ordinaryServiceModes": {
+        "schubert-nk-api.service": "INHERITED_EFFECTIVE_UNOBSERVED",
+        "schubert-nk-web.service": "INHERITED_EFFECTIVE_UNOBSERVED"
+      }
+    },
+    {
+      "testId": "PT-C02-TEXT-011",
+      "expected": "KILLMODE_EXPLICIT_REQUIRED",
+      "actual": "KILLMODE_EXPLICIT_REQUIRED",
+      "qualified": true,
+      "ordinaryServiceModes": {}
+    },
+    {
+      "testId": "PT-C02-TEXT-012",
+      "expected": "KILLMODE_EXPLICIT_REQUIRED",
+      "actual": "KILLMODE_EXPLICIT_REQUIRED",
+      "qualified": true,
+      "ordinaryServiceModes": {}
+    },
+    {
+      "testId": "PT-C02-TEXT-013",
+      "expected": "KILLMODE_INVALID_OVERRIDE",
+      "actual": "KILLMODE_INVALID_OVERRIDE",
+      "qualified": true,
+      "ordinaryServiceModes": {}
+    },
+    {
+      "testId": "PT-C02-TEXT-014",
+      "expected": "REPEATED_DIRECTIVE",
+      "actual": "REPEATED_DIRECTIVE",
+      "qualified": true,
+      "ordinaryServiceModes": {}
+    },
+    {
+      "testId": "PT-C02-TEXT-015",
+      "expected": null,
+      "actual": null,
+      "qualified": true,
+      "ordinaryServiceModes": {
+        "schubert-nk-api.service": "INHERITED_EFFECTIVE_UNOBSERVED",
+        "schubert-nk-web.service": "control-group"
+      }
+    }
+  ],
+  "beforeMatched": 2,
+  "afterMatched": 6,
+  "actualEffectiveUnits": 0,
+  "productTests": 0,
+  "wholeC02Accepted": false,
+  "newFormalAcceptance": 0,
+  "terminalAtUTC": "2026-11-18T23:32:01.306332+00:00"
+}

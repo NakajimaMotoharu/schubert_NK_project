@@ -1,0 +1,147 @@
+{
+  "actualExit": 0,
+  "core": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "source": "4f1b2afe49f3663cc15f642dc5eb135223415f1b",
+  "mode": "green",
+  "sourceDefinitions": [
+    {
+      "path": "src/deployment/systemd/artemis.service",
+      "source": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+      "sha256": "1b8fe8eaab683ac658bfe8c23816e709725431a0a2b80816bba5449d129c5266"
+    },
+    {
+      "path": "src/deployment/systemd/caddy.service.d/schubert-nk-startup-policy.conf",
+      "source": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+      "sha256": "6711ce8ddf9fcf54f733acfb30c10e4970a051d55dba340bc55f70970060440e"
+    },
+    {
+      "path": "src/deployment/systemd/caddy.service.d/schubert-nk-stop-policy.conf",
+      "source": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+      "sha256": "3710be0c023a4bbbf3a8f095cd2d91c5b97b40ed76056ddd4ff433d4f4e066bc"
+    },
+    {
+      "path": "src/deployment/systemd/optional/inbox-inspector-context-previous.conf",
+      "source": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+      "sha256": "4e1de7eb4bee81acb1afb9fa34d41f01b26829030c225e74d92f1bce122dfd13"
+    },
+    {
+      "path": "src/deployment/systemd/optional/inbox-inspector-response-previous.conf",
+      "source": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+      "sha256": "8629e3e009a38a164b9954326f25cbfcc6faa590fc838fd52307da6c9120e9b4"
+    },
+    {
+      "path": "src/deployment/systemd/schubert-nk-api.service.template",
+      "source": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+      "sha256": "c81f848198dff4e24f7d607aef3caf3b3fa5d401278eeb0b1707662bdbc2d630"
+    },
+    {
+      "path": "src/deployment/systemd/schubert-nk-backup.service.template",
+      "source": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+      "sha256": "2328437591829502f9318c39358b3c5f9ed06afb4d4116febcb3d1860d3b2b8a"
+    },
+    {
+      "path": "src/deployment/systemd/schubert-nk-bootstrap-admin.service.template",
+      "source": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+      "sha256": "e38a6021b2881ec832a8ca7fa8961f8754619b110415ef35a6aa0992e556d392"
+    },
+    {
+      "path": "src/deployment/systemd/schubert-nk-cleanup.service.template",
+      "source": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+      "sha256": "a7446238928b4446a65fdd6088a7a5ad374b5a4507ade1adf9084190091c34a2"
+    },
+    {
+      "path": "src/deployment/systemd/schubert-nk-expiry-cleanup.service.template",
+      "source": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+      "sha256": "0e6c3453373e4eb9c20ff175408ff66db731acda376c0b343e89f3541cf30709"
+    },
+    {
+      "path": "src/deployment/systemd/schubert-nk-inbox-inspector.service",
+      "source": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+      "sha256": "225adff0cee398c1ad7d25bd587e666018b9698a3d0256788c38cf029d8262d8"
+    },
+    {
+      "path": "src/deployment/systemd/schubert-nk-morning-controller.service.template",
+      "source": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+      "sha256": "e9ce87045404893edede09b86dfb55523698ed26eeef3c4cb2b386f16518613b"
+    },
+    {
+      "path": "src/deployment/systemd/schubert-nk-morning.target.template",
+      "source": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+      "sha256": "befb463e738a7cec5379b98cbb9ca68026fe49bb5ab7c593038bae9df8ebfacb"
+    },
+    {
+      "path": "src/deployment/systemd/schubert-nk-web.service.template",
+      "source": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+      "sha256": "eb3980ad64852645ffe2a07ac2ac4f453aeb8ce9cedd1d9147e1a1d3d863acbc"
+    }
+  ],
+  "prior": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40094-c02-current-unit-text-order-v1/manifest.json",
+    "sha256": "5bb81a5b4c3cea4d870eef5071041b03e8be00d44ef1a6f78f3fd1ffc78a49ef"
+  },
+  "design": {
+    "path": "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md",
+    "sha256": "857b4062d624ab8b99a2bfc72524f380c655c930db9388755968981e7c76d6c5"
+  },
+  "gate": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5306_c02_killmode_contract.py",
+    "sha256": "7bb28063c697a35deedb3965f84b1970bd5a5fffaf13941e2e6cce8f641a0c12"
+  },
+  "results": [
+    {
+      "testId": "PT-C02-TEXT-010",
+      "expected": null,
+      "actual": null,
+      "qualified": true,
+      "ordinaryServiceModes": {
+        "schubert-nk-api.service": "INHERITED_EFFECTIVE_UNOBSERVED",
+        "schubert-nk-web.service": "INHERITED_EFFECTIVE_UNOBSERVED"
+      }
+    },
+    {
+      "testId": "PT-C02-TEXT-011",
+      "expected": "KILLMODE_EXPLICIT_REQUIRED",
+      "actual": "KILLMODE_EXPLICIT_REQUIRED",
+      "qualified": true,
+      "ordinaryServiceModes": {}
+    },
+    {
+      "testId": "PT-C02-TEXT-012",
+      "expected": "KILLMODE_EXPLICIT_REQUIRED",
+      "actual": "KILLMODE_EXPLICIT_REQUIRED",
+      "qualified": true,
+      "ordinaryServiceModes": {}
+    },
+    {
+      "testId": "PT-C02-TEXT-013",
+      "expected": "KILLMODE_INVALID_OVERRIDE",
+      "actual": "KILLMODE_INVALID_OVERRIDE",
+      "qualified": true,
+      "ordinaryServiceModes": {}
+    },
+    {
+      "testId": "PT-C02-TEXT-014",
+      "expected": "REPEATED_DIRECTIVE",
+      "actual": "REPEATED_DIRECTIVE",
+      "qualified": true,
+      "ordinaryServiceModes": {}
+    },
+    {
+      "testId": "PT-C02-TEXT-015",
+      "expected": null,
+      "actual": null,
+      "qualified": true,
+      "ordinaryServiceModes": {
+        "schubert-nk-api.service": "INHERITED_EFFECTIVE_UNOBSERVED",
+        "schubert-nk-web.service": "control-group"
+      }
+    }
+  ],
+  "qualified": 6,
+  "effectiveSystemdPolicyObserved": false,
+  "backendActions": 0,
+  "productTests": 0,
+  "wholeC02Accepted": false,
+  "newFormalAcceptance": 0,
+  "terminalAtUTC": "2026-11-18T23:31:38.178923+00:00"
+}

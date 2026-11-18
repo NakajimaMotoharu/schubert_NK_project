@@ -145,3 +145,7 @@ SS355、WBS-P020-01.01/2-b、BUG3311。GateCli.mainのpreflight分岐と二引�
 ## PT-F02-ARCH-027〜030 APIのrepository方向
 
 SS311 §3、WBS-F02-a。JDK25／ArchUnit1.4.2の合成6 JAR。027は通常persistence、028は監視persistenceのrepositoryからapplicationへの直接呼出しを禁止。029は順方向、030はJDKの局所補助呼出しを許可。input/5302_f02_monitoring_repository_canaries.pyのbefore/afterを、input/5303_f02_monitoring_repository_post.pyで独立照合。製品JAR・実DBは対象外。
+
+## PT-C02-TEXT-010〜015 終了対象範囲の文面
+
+SS341 SSC101、SS342、WBS-C02。現14の凍結設定を用いて固定対象8のKillMode明示または継承を判定。010は現文、011はArtemis誤指定、012はCaddy明示値欠落、013はAPI誤上書き、014はWeb重複、015はWebの正規明示値。API/Web未記載は実効未観測。実行は input/5305_c02_killmode_canaries.py before/after、独立照合は input/5307_c02_killmode_post.py。systemd・サービス・実停止なし。
