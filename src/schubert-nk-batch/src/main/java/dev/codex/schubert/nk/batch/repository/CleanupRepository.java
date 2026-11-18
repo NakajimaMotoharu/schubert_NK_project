@@ -113,10 +113,35 @@ public final class CleanupRepository {
   }
 
   private PreparedStatement prepare(CleanupKind kind) throws SQLException {
-    return connection.prepareStatement(
-        "select target_count,deleted_count,skipped_count,reason_code from "
-            + kind.function()
-            + "(?,?,?)");
+    return switch (kind) {
+      case NOTIFICATIONS ->
+          connection.prepareStatement(
+              "select target_count,deleted_count,skipped_count,reason_code from schubert.maintenance_cleanup_notifications(?,?,?)");
+      case QUESTIONS ->
+          connection.prepareStatement(
+              "select target_count,deleted_count,skipped_count,reason_code from schubert.maintenance_cleanup_questions(?,?,?)");
+      case SESSIONS ->
+          connection.prepareStatement(
+              "select target_count,deleted_count,skipped_count,reason_code from schubert.maintenance_cleanup_sessions(?,?,?)");
+      case OUTBOX ->
+          connection.prepareStatement(
+              "select target_count,deleted_count,skipped_count,reason_code from schubert.maintenance_cleanup_message_stores(?,?,?)");
+      case LOGS ->
+          connection.prepareStatement(
+              "select target_count,deleted_count,skipped_count,reason_code from schubert.maintenance_cleanup_logs(?,?,?)");
+      case WEB_RECEIPTS ->
+          connection.prepareStatement(
+              "select target_count,deleted_count,skipped_count,reason_code from schubert.maintenance_cleanup_web_receipt_references(?,?,?)");
+      case BATCH_RUNS ->
+          connection.prepareStatement(
+              "select target_count,deleted_count,skipped_count,reason_code from schubert.maintenance_cleanup_batch_runs(?,?,?)");
+      case INBOX_PROGRESS ->
+          connection.prepareStatement(
+              "select target_count,deleted_count,skipped_count,reason_code from schubert.maintenance_cleanup_inbox_progress(?,?,?)");
+      case LOG_PROGRESS ->
+          connection.prepareStatement(
+              "select target_count,deleted_count,skipped_count,reason_code from schubert.maintenance_cleanup_log_progress(?,?,?)");
+    };
   }
 
   private static void closeRow(@WillClose ResultSet row, @Nullable Throwable primary)
