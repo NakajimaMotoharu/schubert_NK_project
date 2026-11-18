@@ -1,0 +1,79 @@
+{
+  "initialState": "PRE_FIX",
+  "productionCore": "278839e0272a15a40a6a42b898eb2f6429597a5f",
+  "priorSource": "28465379638bfee7fe6d13c7974f57ba087255ac",
+  "actualTests": 0,
+  "oldRunReplayed": 0,
+  "originalProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39476-p00405-admission-single-cleanup-independent-v1/manifest.json",
+    "sha256": "0c2fac616d225b0e12b3ecc551fc4833186b8e38a96741ba2c7162a1c607db82"
+  },
+  "sourceInput": {
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java",
+    "sha256": "61727a7d93d080662c8aa14bdbb621bbe7e74916794fb288b70457686fc494c2"
+  },
+  "deficits": [
+    {
+      "type": "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource",
+      "method": "close",
+      "line": 168,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource",
+      "method": "close",
+      "line": 169,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 1
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    }
+  ],
+  "originalRawClass": {
+    "crc": "1135e8454a46d6c8",
+    "positive": true,
+    "counters": {
+      "INSTRUCTION": {
+        "missed": 6,
+        "covered": 273
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 22
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 74
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 27
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 16
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "unchangedExistingSource": true,
+  "noRealDatabaseOrNativeActions": true
+}

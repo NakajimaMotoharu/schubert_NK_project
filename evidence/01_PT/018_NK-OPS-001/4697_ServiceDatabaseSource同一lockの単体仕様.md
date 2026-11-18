@@ -1,0 +1,7 @@
+# ServiceDatabaseSource 同一lockの単体仕様
+
+NK-OPS-001。SS342/343、SYS-002/004、DAT-001、UI212/243/253、WBS-P004-05/2、BUG-3312、YKT-2698、PG-D-1189。ServiceDatabaseSource#getConnection/#closeの既ReentrantLockの所有と解放を対象とする。
+
+元ServiceDatabaseAdmissionPortTest 16＋ServiceDatabaseSourcePortTest 15は元Oracleを保持。追加PT-OPS-DBSRCPORT-016は独立に作ったIllegalStateExceptionを第一connector呼出で投げ、元Throwable本人が返り、同じPropertiesが空になったことを確認する。別の一自己所有threadが次の合成Connectionを取得し、同一connection、二呼出、sourceでは未close、呼出側で一度closeを確認する。各futureとworker終了は5秒。旧同一threadの試験が検出できない未解放を考慮した観点。
+
+使用するのは合成JDK ProxyのConnection・Statement・ResultSet。DriverManager、実JDBC、DB、実credentialは使用しない。旧PG39476の生命令6不足は旧証拠として保持し、現全32を単一run、全物理・公開ABI・同source静的、未除外の生counterで測定する。

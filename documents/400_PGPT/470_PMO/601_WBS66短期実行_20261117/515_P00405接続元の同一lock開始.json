@@ -1,0 +1,64 @@
+{
+  "eventId": "PGPT-20261008-6039",
+  "groupId": "PGPT-WBS66-P00405-SERVICE-DB-STATE-LOCK-20261119",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-18T16:08:43.709000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 43,
+      "remainingPercent": 57,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P00405-SERVICE-DB-STATE-LOCK-20261119",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-P00405-SERVICE-DB-STATE-LOCK-20261119",
+    "workAttributionKind": "REWORK",
+    "wbsLeafIds": [
+      "WBS-P004-05"
+    ],
+    "managementWorkIds": [
+      "WBS-P004-05/2",
+      "WBS-F03/2-2",
+      "BUG-3282",
+      "DBSOURCE-PORT016"
+    ],
+    "source": "61152cbd8fb2ef04636d3a715d3b9828c88aa3ae",
+    "productionCoreMain": "278839e0272a15a40a6a42b898eb2f6429597a5f",
+    "run": "PG39860-p00405-service-database-state-lock-v1",
+    "workScope": "WBS-P004-05/2 and F03. Reuse one ServiceDatabaseSource state-lock owner across close and getConnection without changing lock instance, selected role, SQL, connection admission, typed failure precedence, password handling or public API. Verify existing independent 31 whole port tests plus one cross-thread normal retry after connector failure. No DriverManager connector, DB, configuration, properties outside synthetic fixtures, Root, or protected classes are produced or initialized within tests. Include exact current four module build and independent raw counters.",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.65,
+      "base": 2.15,
+      "high": 5.0
+    },
+    "groupCapPp": 7,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39476-p00405-admission-single-cleanup-independent-v1/manifest.json",
+        "sha256": "0c2fac616d225b0e12b3ecc551fc4833186b8e38a96741ba2c7162a1c607db82"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39804-cleanup-fixed-statement-four-main-v1/compile/manifest.json",
+        "sha256": "f9ff6fdbb0300c821fbecfb348fe58c00855ee7ed96fb48a45d06132f5090d29"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39814-f03-storage-bootstrap-static-independent-v1/manifest.json",
+        "sha256": "e3139ccf79da928f0f9ca472549a79f7935753eacfedd5aef1e60f7587cf9539"
+      }
+    ]
+  }
+}
