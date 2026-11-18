@@ -792,6 +792,37 @@ class ArtifactComparatorTest {
         () -> ArtifactComparator.requiredArtifactFileName(Path.of("/")));
   }
 
+  /** PT-CHR-DEF078: valid-looking offline metadata cannot authorize any changed legacy URL. */
+  @Test
+  void rejectsALegacyPathDifferenceWhenTheLoadedRuleClaimsItIsPermitted() throws Exception {
+    Fixture sample = fixture("legacy-path-definition");
+    mutate(
+        sample.nk().resolve(FIXTURE_CHR_A01_JSON),
+        root -> ((ObjectNode) root.path("dif")).put(FIXTURE_DIF015, "/changed-path"));
+    mutate(
+        sample.project().resolve(FIXTURE_DIFF_ALLOWLIST_PATH),
+        root ->
+            ((ObjectNode) root.path(FIXTURE_DIFFERENCES_ARRAY).get(14))
+                .put("mode", FIXTURE_DIFFERENCE));
+    mutate(
+        sample.observations(),
+        root -> {
+          for (JsonNode item : root.path(FIXTURE_OBSERVATIONS)) {
+            if (FIXTURE_DIF015.equals(item.path("id").asText())) {
+              ((ObjectNode) item)
+                  .put("mode", FIXTURE_DIFFERENCE)
+                  .put(FIXTURE_EXPECTED_NK, "/changed-path");
+            }
+          }
+        });
+    var result =
+        ArtifactComparator.compare(
+            sample.project(), sample.current(), sample.nk(), sample.observations());
+    assertFalse(result.passed());
+    assertTrue(result.failures().contains("DIF-015_CONTRACT_SHAPE"));
+    assertTrue(result.unregisteredDifferences().contains("CHR-A01:/dif/DIF-015"));
+  }
+
   /** PT-CHR-DIF015-001 / BUG2812: one drift, no overlapping claim or unrelated failure. */
   @Test
   void contractChangeAndInvalidClaimCannotHideUnregisteredDrift() throws Exception {

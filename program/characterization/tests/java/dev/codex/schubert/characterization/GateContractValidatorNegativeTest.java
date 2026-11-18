@@ -188,6 +188,34 @@ class GateContractValidatorNegativeTest {
         "DIF-015_CASE_COVERAGE");
   }
 
+  /** PT-CHR-DEF077: the approved legacy HTTP path is a single semantic contract. */
+  @Test
+  void rejectsOtherValidMetadataValuesForTheLegacyPathContract() throws Exception {
+    List<List<String>> changes =
+        List.of(
+            List.of("mode", "difference"),
+            List.of("field", "unrelated.field"),
+            List.of("selectorType", "header"),
+            List.of(SELECTORS, "other.path"));
+    int index = 0;
+    for (List<String> change : changes) {
+      Fixture sample = fixture("path-contract-" + ++index);
+      sample.mutate(
+          "program/characterization/tests/resources/cases/dif-allowlist.json",
+          root -> {
+            ObjectNode pathContract = (ObjectNode) array(root, "differences").get(14);
+            String property = change.getFirst();
+            String changed = change.getLast();
+            if (SELECTORS.equals(property)) {
+              pathContract.putArray(SELECTORS).add(changed);
+            } else {
+              pathContract.put(property, changed);
+            }
+          });
+      assertFailures(sample.validate(), "DIF-015_CONTRACT_SHAPE");
+    }
+  }
+
   @Test
   void rejectsIncompleteRequirementMatrix() throws Exception {
     Fixture fixture = fixture("requirements");

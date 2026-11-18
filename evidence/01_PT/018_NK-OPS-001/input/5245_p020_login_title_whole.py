@@ -50,6 +50,10 @@ PHASES = {
         '605_P020*', E/'PG40089-p020-s08-voice198-v2', 198, 204),
     'PG40107-p020-u01-menu204-v3': (
         '605_P020*', E/'PG40089-p020-s08-voice198-v2', 198, 204),
+    'PG40122-p020-path-contract-red206-v1': (
+        '615_P020*', E/'PG40107-p020-u01-menu204-v3', 204, 206),
+    'PG40124-p020-path-contract-green206-v1': (
+        '615_P020*', E/'PG40107-p020-u01-menu204-v3', 204, 206),
 }
 TEST_PACKAGE='dev.codex.schubert.characterization.'
 JAVA_DIR=Path(TEST_PACKAGE.rstrip('.').replace('.','/'))
@@ -100,7 +104,14 @@ def main(name):
     out.mkdir()
     owned.mkdir(mode=0o700)
     snapshot=owned/'snapshot'
-    changed_paths=L01_CHANGES if 'l01-required-actions' in name else CHANGES
+    if 'path-contract-' in name:
+        changed_paths = {str(B / 'tests/java' / JAVA_DIR / file)
+                         for file in ('ArtifactComparatorTest.java', 'GateContractValidatorNegativeTest.java')}
+        if '-green' in name:
+            changed_paths |= {str(B / 'src/main/java' / JAVA_DIR / file)
+                              for file in ('ArtifactComparator.java', 'GateContractValidator.java')}
+    else:
+        changed_paths = L01_CHANGES if 'l01-required-actions' in name else CHANGES
     inputs=frozen_source(snapshot,source,previous,plan,changed_paths)
     tests=owned/'testclasses'
     temp=owned/'tmp'
