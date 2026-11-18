@@ -42,15 +42,17 @@ final class InboxOutcomeValueContractTest {
     assertEquals("retained", retained.get(value));
     assertEquals(hashBefore, value.hashCode());
     assertEquals(KEY_VERSION, value.keyVersion());
-    assertEquals(
-        "EncryptedResponseSnapshot[keyVersion=v1, ciphertext=<redacted>]", value.toString());
+    String diagnostic = "EncryptedResponseSnapshot[keyVersion/ciphertext=<redacted>]";
+    assertEquals(diagnostic, value.toString());
     assertEquals(value, value);
     assertNotEquals(value, null);
     assertNotEquals(value, VERSION);
     assertNotEquals(value, new EncryptedResponseSnapshot("v2", expected));
     assertNotEquals(value, new EncryptedResponseSnapshot(KEY_VERSION, new byte[30]));
     for (String version : List.of("a", "1", "V1", "a".repeat(16))) {
-      assertEquals(version, new EncryptedResponseSnapshot(version, expected).keyVersion());
+      var snapshot = new EncryptedResponseSnapshot(version, expected);
+      assertEquals(version, snapshot.keyVersion());
+      assertEquals(diagnostic, snapshot.toString());
     }
     assertEquals(
         1_050_000,

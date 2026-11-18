@@ -97,7 +97,7 @@ final class ResponseSnapshotCodecTest {
       assertArrayEquals(plaintext, callerPlaintext);
       assertArrayEquals(CURRENT_KEY, callerKey);
       assertEquals(
-          "EncryptedResponseSnapshot[keyVersion=k2, ciphertext=<redacted>]", actual.toString());
+          "EncryptedResponseSnapshot[keyVersion/ciphertext=<redacted>]", actual.toString());
       assertEquals(
           "ResponseSnapshotIdentity[request/layout/version/owner=<redacted>]", IDENTITY.toString());
 
