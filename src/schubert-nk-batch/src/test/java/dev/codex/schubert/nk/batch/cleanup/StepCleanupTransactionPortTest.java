@@ -175,8 +175,8 @@ final class StepCleanupTransactionPortTest {
   void steptx461006DeadlinesAndConfirmedCommitAreKeptSeparate() {
     for (long invalid : new long[] {-1, LIMIT}) {
       var f = new Fixture();
-      int[] calls = {0};
-      LongSupplier clock = () -> calls[0]++ == 0 ? 0 : invalid;
+      Deque<Long> ticks = new ArrayDeque<>(List.of(0L, invalid));
+      LongSupplier clock = ticks::removeFirst;
       CleanupStoppedException stop =
           assertThrows(
               CleanupStoppedException.class,
@@ -332,7 +332,8 @@ final class StepCleanupTransactionPortTest {
           (ignored, call, args) -> {
             switch (call.getName()) {
               case "next":
-                return next[0]++ == 0;
+                next[0]++;
+                return next[0] == 1;
               case "getObject", "getString":
                 assertEquals(1, next[0]);
                 String column = (String) args[0];
