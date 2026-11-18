@@ -1,0 +1,101 @@
+{
+  "eventId": "PGPT-20261008-6150",
+  "actualExit": 0,
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P01808-EXEC-CANONICAL-ENCODING-20261119",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-P01808-EXEC-CANONICAL-ENCODING-20261119",
+    "workAttributionKind": "TOOL_FIX",
+    "wbsLeafIds": [
+      "WBS-P018-08.03"
+    ],
+    "managementWorkIds": [
+      "WBS-P018-08.03/2"
+    ],
+    "source": "aff5a1e8d10f5262c9fd623ad7912e0682ca27ba",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "run": "PG40148-p01808-exec-canonical-red-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.2,
+      "base": 0.6,
+      "high": 1.6
+    },
+    "groupCapPp": 3,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "tools/quality/jacoco_readonly_exec_subset.py",
+        "sha256": "7f79a4ce86216acfc6cec698b7a5a48c450747a6c543ae1f0353fa581c594056"
+      },
+      {
+        "path": "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "sha256": "d2b74b20b415163c1f53261e7c5ef4445b788327094208ff821e0c2baf9bc8f1"
+      }
+    ],
+    "workScope": "WBS-P018-08.03/2: check only canonical count and packed padding in the exact pinned writer format. Six new synthetic decoder tests plus read-only javap. No native acquisition, prior tests, product process, or bulk outputs.",
+    "quotaAfter": {
+      "usedPercent": 48,
+      "remainingPercent": 52,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "772ab6b32519c842ca6be046823a57702932b537ecb7ac5328cffdcac4202894",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T22:28:08.420000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 48,
+          "remainingPercent": 52,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T22:27:15.546639+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 48,
+      "remainingPercent": 52,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "publicEvidence": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40152-p01808-exec-canonical-independent-v1/manifest.json",
+        "sha256": "590abba3c27c02115265323ce1806f439e8f700c4ba7ab8d7a9f01c154e3d9bb"
+      }
+    ],
+    "toolSource": "c800a4c8f30c4ee206029e13b044be507088db98",
+    "firstSucceeded": 2,
+    "firstFailures": 4,
+    "succeededAfter": 6,
+    "denom": 6,
+    "formalIntake": 0,
+    "currentAccepted": 17,
+    "productTests": 0,
+    "result": "Canonical count and probe padding fixed from pinned writer bytecode. Six new synthetic tests only; archived offline tool probe decoded read-only and 407 exact hits matched."
+  }
+}

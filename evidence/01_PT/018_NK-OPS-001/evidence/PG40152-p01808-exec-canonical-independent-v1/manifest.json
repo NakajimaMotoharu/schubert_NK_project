@@ -1,0 +1,55 @@
+{
+  "actualExit": 0,
+  "source": "c800a4c8f30c4ee206029e13b044be507088db98",
+  "productionCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "evidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40148-p01808-exec-canonical-red-v1/manifest.json",
+      "sha256": "1b1c5a9ce7c94e7479181adb50c20bb20018b34b609acd876ea99e5f17e74e88"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40150-p01808-exec-canonical-green-v1/manifest.json",
+      "sha256": "31e2b68e60b5232364ac3dc563b1c4d80b1db320cfa1048aa6403b1fbc44190b"
+    }
+  ],
+  "failedBefore": 4,
+  "firstSucceeded": 2,
+  "succeededAfter": 6,
+  "writerProof": {
+    "jar": {
+      "path": "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+      "sha256": "d2b74b20b415163c1f53261e7c5ef4445b788327094208ff821e0c2baf9bc8f1"
+    },
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+      "-classpath",
+      "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+      "-c",
+      "org.jacoco.cli.internal.core.internal.data.CompactDataOutput"
+    ],
+    "output": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40148-p01808-exec-canonical-red-v1/pinned-compact-writer-javap.txt",
+      "sha256": "ece3afdf1298e65b85566687125121b835463408696fac3f5ab3e23564d3cd7f"
+    }
+  },
+  "archivedOfflineTool": {
+    "receipt": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40128-p020-path-contract-green206-v2/execinfo.log",
+      "sha256": "59cb9c62b491823aba08d75b28ca1f6ef6e19489682bf6e5f3c239592b58f409"
+    },
+    "binary": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40128-p020-path-contract-green206-v2/jacoco.exec",
+      "sha256": "b02a997cfe0de0cac01361fc8080a57ef728486c017bd951bab16d845acf3fa6"
+    },
+    "source": "e81d98a11946b6c0e1c20c38d30b38056d14aa46",
+    "records": 912,
+    "probeCount": 407,
+    "covered": 407
+  },
+  "historicalScopeRerun": 0,
+  "realNativeActions": 0,
+  "productTests": 0,
+  "newFormalAcceptance": 0,
+  "whole451Accepted": false,
+  "terminalAtUTC": "2026-11-18T22:27:15.546639+00:00"
+}

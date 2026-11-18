@@ -1,0 +1,70 @@
+{
+  "actualExit": 0,
+  "source": "c800a4c8f30c4ee206029e13b044be507088db98",
+  "currentCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "run": "PG40150-p01808-exec-canonical-green-v1",
+  "phase": "green",
+  "command": [
+    "/usr/bin/python3",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tools/quality",
+    "-p",
+    "jacoco_readonly_exec_subset_encoding_test.py",
+    "-v"
+  ],
+  "writerProof": {
+    "jar": {
+      "path": "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+      "sha256": "d2b74b20b415163c1f53261e7c5ef4445b788327094208ff821e0c2baf9bc8f1"
+    },
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+      "-classpath",
+      "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+      "-c",
+      "org.jacoco.cli.internal.core.internal.data.CompactDataOutput"
+    ],
+    "output": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40148-p01808-exec-canonical-red-v1/pinned-compact-writer-javap.txt",
+      "sha256": "ece3afdf1298e65b85566687125121b835463408696fac3f5ab3e23564d3cd7f"
+    }
+  },
+  "tools": [
+    {
+      "path": "tools/quality/jacoco_readonly_exec_subset.py",
+      "sha256": "01005a6ba13002ba9e8ae7202b09ddf2cb7d72b375cf5a7604786e4b3e27c87a"
+    },
+    {
+      "path": "tools/quality/jacoco_readonly_exec_subset_encoding_test.py",
+      "sha256": "69e387c19ec42d5a61a028042069cd79aeb5687352ca7e4ce6675e3e67ad5a0b"
+    }
+  ],
+  "unitLog": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40150-p01808-exec-canonical-green-v1/unit-output.txt",
+    "sha256": "af4e51887628ecda701a6ae13597b6c9b7d408482cf7d0d09b3290663df197b4"
+  },
+  "tests": {
+    "PT-P01808-BIN-018": "test_rejects_nonminimal_zero",
+    "PT-P01808-BIN-019": "test_rejects_nonminimal_three",
+    "PT-P01808-BIN-020": "test_rejects_target_padding_above_last_probe",
+    "PT-P01808-BIN-021": "test_rejects_bad_padding_in_a_nonselected_record",
+    "PT-P01808-BIN-022": "test_pinned_counts_at_zero_and_near_single_byte_limit",
+    "PT-P01808-BIN-023": "test_full_probe_byte_and_partial_probe_byte"
+  },
+  "outcomes": {
+    "test_full_probe_byte_and_partial_probe_byte": "ok",
+    "test_pinned_counts_at_zero_and_near_single_byte_limit": "ok",
+    "test_rejects_bad_padding_in_a_nonselected_record": "ok",
+    "test_rejects_nonminimal_three": "ok",
+    "test_rejects_nonminimal_zero": "ok",
+    "test_rejects_target_padding_above_last_probe": "ok"
+  },
+  "productTests": 0,
+  "realNativeActions": 0,
+  "formalIntake": 0,
+  "terminalAtUTC": "2026-11-18T22:26:43.158009+00:00"
+}

@@ -133,3 +133,7 @@ WBS-P018-04.01,WBS-P018-04.02,WBS-P018-04.03公開source契約/独立期待値/T
 ## PT-F02-ARCH-023〜026 ControllerのSpring JDBC直接依存
 
 SS311 §5.2、WBS-F02-a、ModuleDependencyAudit.jdbc。JDK25.0.4／ArchUnit1.4.2。合成JAR6・10物理、外部fixture型はcompile専用。023はJdbcTemplateの生成と直接呼出し、024は名前がControllerでないRestController注釈付クラスからのJdbcOperations呼出しを禁止。025はControllerでない技術取得、026はControllerからのfacade呼出しを許可。手書きの型対と生監査stdoutをPG40146で独立照合。実行は input/5290_f02_controller_spring_jdbc.py の before/after、検証は input/5291_f02_controller_spring_jdbc_post.py。
+
+## PT-P01808-BIN-018〜023 固定JaCoCo writerの長さ・padding
+
+SS354、WBS-P018-08.03/2、jacoco_readonly_exec_subset.decode。固定0.8.15 writerをjavapで読取照合。独立hexで冗長な0／3の符号、対象／対象外のunused bit非0を拒否。空、127／129、全8bitと端数9bitで正規符号の件数を保持する。実行は input/5292_p01808_exec_canonical_run.py red/green、照合は input/5293_p01808_exec_canonical_post.py。製品nativeを採取しない。
