@@ -1,0 +1,62 @@
+{
+  "actualExit": 0,
+  "source": "29f3b433952ad19d4ad34c4e1a31ed310bebde6a",
+  "referencePriorSource": "13f2fd9bc1345a4dceb360849add2c329bc9b90f",
+  "compile": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39122-four-backup-candidate-build-v1/compile/manifest.json",
+    "sha256": "00234fd51933c1e9fb4589147992c723083a71ea89b6b64a387bc479c327befb"
+  },
+  "priorCompile": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38952-four-jdbc-candidate-build-v1/compile/manifest.json",
+    "sha256": "d4af59c413123396589cb99aae493754bc5f563acad1283fb4e68f414d263d85"
+  },
+  "architecture": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39124-f02-current-four-backup-archunit-v1/manifest.json",
+    "sha256": "79cc996befe4f6a9c8a257a5895034da1906153fc0b9772dafd9ccdae3899770"
+  },
+  "priorArchitecture": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38956-f02-current-four-jdbc-physical-architecture-v1/manifest.json",
+    "sha256": "47d484cf1668ba042e2aec24540933b81d602d49d00d902bc926030dc38bcdc0"
+  },
+  "currentChangedClassEvidence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38977-f02-backup-commit-owner-independent-v1/manifest.json",
+    "sha256": "042fb16b654ce1dee15f38c2df4f467bc07b8e0498dad101b44d89d8b287f51c"
+  },
+  "oldStatic": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38959-f02-current-four-physical-independent-v1/manifest.json",
+    "sha256": "6aae48af70d2fb968e922e9b73881dc1d69ba6419ccf7189fdf65a467776a9d3"
+  },
+  "sourceInputs": 490,
+  "main": 482,
+  "physical": 1102,
+  "otherClassesByteExact": 1101,
+  "newIntegratedClassExactUnitBytes": {
+    "dev/codex/schubert/nk/batch/backup/BackupCommitService.class": "0617df8ae283495ba2942b4df133048639e435f0a4b1b5ba1f91c0fc23cd557e"
+  },
+  "changedSource": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+  "currentRuntimeEdges": {
+    "batch->bootstrap": 729,
+    "batch->storage": 1650,
+    "bootstrap->storage": 320
+  },
+  "knownFrameworkFence": [
+    [
+      "FRAMEWORK_FENCE",
+      "dev.codex.schubert.nk.storage.StorageIoException",
+      "java.sql.SQLException"
+    ]
+  ],
+  "spotbugsScopePriorByteExact": 1101,
+  "spotbugsRemainingClassLocalExact": 1,
+  "scopedStaticApplicable": 0,
+  "oldOutcomesAggregatedIntoCurrentFull451": false,
+  "wholeSixModulesCompiled": false,
+  "ordinaryTestsRerun": 0,
+  "productInitialization": 0,
+  "migratedUpperSites": 29,
+  "remainingUpperSites": 75,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortCompletionRate": null,
+  "terminalAtUTC": "2026-11-18T09:33:55.710022+00:00"
+}
