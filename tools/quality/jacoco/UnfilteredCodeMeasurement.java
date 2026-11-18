@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 import org.jacoco.core.analysis.ICounter;
 import org.jacoco.core.analysis.ICoverageNode;
+import org.jacoco.core.analysis.IMethodCoverage;
 import org.jacoco.core.data.ExecutionData;
 import org.jacoco.core.data.ExecutionDataStore;
 import org.jacoco.core.internal.data.CRC64;
@@ -30,12 +31,14 @@ public final class UnfilteredCodeMeasurement {
   private UnfilteredCodeMeasurement() {}
 
   public static void main(String[] args) throws Exception {
-    if (args.length < 2)
+    boolean lineDeficits = args.length > 0 && args[0].equals("--line-deficits");
+    int execIndex = lineDeficits ? 1 : 0;
+    if (args.length < execIndex + 2)
       throw new IllegalArgumentException("exec and explicit class files required");
     var loader = new ExecFileLoader();
-    loader.load(Path.of(args[0]).toFile());
+    loader.load(Path.of(args[execIndex]).toFile());
     ExecutionDataStore data = loader.getExecutionDataStore();
-    for (int index = 1; index < args.length; index++) {
+    for (int index = execIndex + 1; index < args.length; index++) {
       byte[] bytes = Files.readAllBytes(Path.of(args[index]));
       var reader = new ClassReader(bytes);
       long id = CRC64.classId(bytes);
@@ -59,7 +62,7 @@ public final class UnfilteredCodeMeasurement {
               + "\t"
               + analysis.classAccess
               + counters(coverage));
-      for (var method : coverage.getMethods())
+      for (var method : coverage.getMethods()) {
         System.out.println(
             "METHOD\t"
                 + coverage.getName()
@@ -70,6 +73,28 @@ public final class UnfilteredCodeMeasurement {
                 + "\t"
                 + analysis.access.get(method.getName() + method.getDesc())
                 + counters(method));
+        if (lineDeficits) printLineDeficits(coverage.getName(), method);
+      }
+    }
+  }
+
+  private static void printLineDeficits(String owner, IMethodCoverage method) {
+    if (method.getFirstLine() < 0) return;
+    for (int number = method.getFirstLine(); number <= method.getLastLine(); number++) {
+      var line = method.getLine(number);
+      var instructions = line.getInstructionCounter();
+      var branches = line.getBranchCounter();
+      if (instructions.getMissedCount() == 0 && branches.getMissedCount() == 0) continue;
+      System.out.printf(
+          "DEFICIT\t%s\t%s\t%s\t%d\tINSTRUCTION:%d:%d\tBRANCH:%d:%d%n",
+          owner,
+          method.getName(),
+          method.getDesc(),
+          number,
+          instructions.getMissedCount(),
+          instructions.getCoveredCount(),
+          branches.getMissedCount(),
+          branches.getCoveredCount());
     }
   }
 

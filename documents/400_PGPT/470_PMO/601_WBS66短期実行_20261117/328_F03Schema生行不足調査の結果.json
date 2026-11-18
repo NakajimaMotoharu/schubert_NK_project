@@ -1,0 +1,109 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-5860",
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-SCHEMA-RAW-LINE-DEFICITS-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-F03-SCHEMA-RAW-LINE-DEFICITS-20261118",
+    "workAttributionKind": "TOOL_FIX",
+    "workScope": "F03 / 451 / BUG3234. Add a deterministic optional raw per-line deficit view to the existing JaCoCo class/exec reader. Retain original exact output mode, verify against finished run PG38634 and exact physical bytes without JVM product execution. Map inspect branches to source/bytecode and Row generated methods; genuine proof before any remedial PT.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38640-f02-schema-history-jdbc-owner-independent-v1/manifest.json",
+        "sha256": "ec173e2018f0dadf7883fa6ea988a34b6206935a0d4cd4e75dac9394fb70b3a7"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38636-ssc461-schema-history-post-v1/manifest.json",
+        "sha256": "3f6a5445d9b730ac4f182f9319756326b63ccab4351cd1f8996895fb2c964efa"
+      },
+      {
+        "path": "documents/400_PGPT/450_品質/451_Build・静的解析・coverage方針.md",
+        "sha256": "7980a204c02574b235d588e3a05ae8fb7b26ecb18313f4f000918c9135da6f4c"
+      }
+    ],
+    "productionCoreMain": "d15952579fea3067180a9fc65523045002e50482",
+    "source": "3bebae2c1c90a6e762db383892361c37b55be931",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2",
+      "BUG-3234"
+    ],
+    "run": "PG38642-f03-schema-raw-line-deficits-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.2,
+      "base": 0.75,
+      "high": 1.7
+    },
+    "groupCapPp": 2.2,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "relatedBug": "BUG-3234",
+    "startEvent": "PGPT-20261008-5859",
+    "terminalAtUTC": "2026-11-18T04:59:23.492606+00:00",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38642-f03-schema-raw-line-deficits-v1/manifest.json",
+      "sha256": "908e76dfc9015947bfbc1b000fb44cf720c29c4136d53ee8b69ed15771c75e28"
+    },
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortCompletionRate": null,
+    "productTestsExecuted": 0,
+    "commonDefaultOutputByteExact": true,
+    "additionalTargetLines": 9,
+    "completedAdditionalPriceForGroupPp": 0,
+    "additionalCompletedPriceTotalPp": 42.9,
+    "remainingCriteria": [
+      "Keep source exit order while defining single owned close per already non-null resource and moving duplicated conditional out of normal/exceptional raw branches",
+      "Add independent Row public value API test and rerun existing whole10 after actual production changes"
+    ],
+    "quotaAfter": {
+      "usedPercent": 29,
+      "remainingPercent": 71,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "2f4344c911c7c464c298382dbbfdf0f4b198c15baaf280873941f85e851c316c",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T05:00:01.601000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 29,
+          "remainingPercent": 71,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 29,
+      "remainingPercent": 71,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true
+  }
+}
