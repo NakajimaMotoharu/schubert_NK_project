@@ -1,0 +1,172 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-18T06:41:27.242751+00:00",
+  "run": "PG38812-SSC463-INBOX-REFERENCE",
+  "source": "c216e919b5a6ecf5bdb131006cf9058051445047",
+  "productionCoreMain": "3c29148a57770f7b8fbfdfb35d9d99fade46b7c9",
+  "tests": 3,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "firstProductRunSuccess": true,
+  "targetCounters": {
+    "dev/codex/schubert/nk/api/idempotency/InboxResultReference": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 129
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 24
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 24
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 22
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 10
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/idempotency/InboxResultReferenceType": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 80
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 0
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 7
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 5
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 5
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "totalCovered": {
+    "INSTRUCTION": 209,
+    "BRANCH": 24,
+    "LINE": 31,
+    "COMPLEXITY": 27,
+    "METHOD": 15,
+    "CLASS": 2
+  },
+  "publicABI": {
+    "dev/codex/schubert/nk/api/idempotency/InboxResultReference": "aa21636e200d373c3fc6038e69f73fb5ff998140e32054a9277dc6b66e414271",
+    "dev/codex/schubert/nk/api/idempotency/InboxResultReferenceType": "b7367f54632c339f737b7cda631180d1ef204d8cac86ff56680ae21e98bfab6e"
+  },
+  "physical": 2,
+  "positiveMainCrc": 2,
+  "relatedValuesExactSource": [
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxCompletion.java",
+        "sha256": "91237c32fb903bd8accd96886bdd8772a3432c177bafe1b76f1ac855023b5e37"
+      },
+      "previousEvidence": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38562-p01810-api-value-diagnostics-independent-v1/manifest.json",
+        "sha256": "bc5fbf6cc9e3fa306f8e5df0511a6ddbe23396005620c31d2027bd8442999674"
+      },
+      "newRun": false
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxExecution.java",
+        "sha256": "af0812e731e445582f88bd311204b4edfe834f9c97fb6acf4367517cddeaf85f"
+      },
+      "previousEvidence": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38562-p01810-api-value-diagnostics-independent-v1/manifest.json",
+        "sha256": "bc5fbf6cc9e3fa306f8e5df0511a6ddbe23396005620c31d2027bd8442999674"
+      },
+      "newRun": false
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/EncryptedResponseSnapshot.java",
+        "sha256": "2843826b1e47fce4ce2c15307a4b8f64bb3652c2579b065d40ce369dbdd1ac6e"
+      },
+      "previousEvidence": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38790-p01810-encrypted-response-diagnostic-independent-v1/manifest.json",
+        "sha256": "e14bd67800a4ceafd35e3979f48706c9fbc91595b9f709fe958af823a17286a0"
+      },
+      "newRun": false
+    }
+  ],
+  "heldSourceExpectationsAdjusted": 2,
+  "heldCallerCompileOrRun": 0,
+  "independentOrdinaryEvidence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38814-ssc463-inbox-reference-post-v1/manifest.json",
+    "sha256": "0424ea4618b9b6eaeab569602f0772aec076a87c6b3e3f5b7be64beb04ea5944"
+  },
+  "raw": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38816-p01810-inbox-reference-diagnostic-independent-v1/unfiltered.tsv",
+    "sha256": "e3736c4d8c0d8a59a2119d5bef1931bffff68c91311d8c9d4365da767d21ec97"
+  },
+  "rawCommand": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+    "-cp",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38642-schema-raw-line-tool-v1/toolclasses:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+    "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+    "--line-deficits",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG38814-ssc463-inbox-reference-post-v1/jacoco.exec",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38804-ssc463-inbox-reference-prepare-v1/component/dev/codex/schubert/nk/api/idempotency/InboxResultReference.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38804-ssc463-inbox-reference-prepare-v1/component/dev/codex/schubert/nk/api/idempotency/InboxResultReferenceType.class"
+  ],
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38806-ssc463-inbox-reference-static-v1/manifest.json",
+    "sha256": "dd44bcd238e61e061cacbd5b9143af6a09909c54f666ff1eb84b1736053de738"
+  },
+  "unit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38812-ssc463-inbox-reference-unit-v1/manifest.json",
+    "sha256": "d769a0abf84b3374f7d14d93086eb276f4d3efe56022a7591684ba56d199612c"
+  },
+  "exec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38814-ssc463-inbox-reference-post-v1/jacoco.exec",
+    "sha256": "439f6a5f30779d8fb8a22c2166b639bcc25d2a733f6f867b64149c9d1c25080a"
+  },
+  "xml": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38814-ssc463-inbox-reference-post-v1/original-TEST-junit-jupiter.xml",
+      "sha256": "0976c35ffd97f174308a87decb378ec6f7748f4dda358cb859ebb2881506f1e5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38814-ssc463-inbox-reference-post-v1/original-TEST-junit-platform-suite.xml",
+      "sha256": "fb9838f25a7155e5418a17923485f1a3c5282180c44f24a3eb3af5a9d75b351c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38814-ssc463-inbox-reference-post-v1/original-TEST-junit-vintage.xml",
+      "sha256": "900ffab95aa4391c15fc2b10bbe71774a1705a117c8983e564a7ab2ed6e8a45f"
+    }
+  ],
+  "classInit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38816-p01810-inbox-reference-diagnostic-independent-v1/class-init.stdout.gz",
+    "sha256": "ba39189061be8be5ae47313d59b9be14c0821cf32c9c099c3284b84ae7fd61a4"
+  },
+  "originalClassInitSha256": "09bdbeb2e6d98ff868cab0630553199d80075bce423c2c27aba3694a71665851",
+  "manualExclusions": [],
+  "oldExecCombined": false,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "newAcceptance": 0
+}

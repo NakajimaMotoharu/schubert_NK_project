@@ -1,0 +1,7 @@
+# SSC463 Inbox参照固定診断の実行結果
+
+Core 3c29148a57770f7b8fbfdfb35d9d99fade46b7c9、固定試験source c216e919b5a6ecf5bdb131006cf9058051445047、PG38812。元REFERENCE001～003の全3初回成功。F/E/skip/選定内未実行0。既84セルの許容と固定診断、明示type／reference、record値動作を独立に確認。対象2型は未フィルタ31L／15M／2C／24B／209I全到達。物理2／2CRC・公開ABI差0・NullAway/SpotBugs/Checkstyle0。PMD検出1は既fixtureの配列防御反例で適用0。
+
+SS324/351はPR430、origin/main cb5c5e93b1。InboxModelTest／NonAuthenticationInboxInspectorTestの期待と整形を同期し、当runでは未実行。既関連値3のsource bytesは保存証拠と一致。実DB・認証・実ログを発行せず、元WBS/451全体の合格には加算しない。
+
+証跡 evidence/01_PT/018_NK-OPS-001/evidence/PG38816-p01810-inbox-reference-diagnostic-independent-v1/manifest.json SHA256 760e10a11d6cff28a2573ae4ef99f34238407a337e46415b1d7ab5e83c8558ce。BUG3241は当値型で完了、YKT2686はcallerを残す。
