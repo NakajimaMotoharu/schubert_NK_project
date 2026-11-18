@@ -1,0 +1,119 @@
+{
+  "eventId": "PGPT-20261008-5974",
+  "actualExit": 0,
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-G07-COMMITTED-QUALITY-DELTA-20261118",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-G07-COMMITTED-QUALITY-DELTA-20261118",
+    "workAttributionKind": "SOURCE_REQUALIFICATION",
+    "workScope": "G07 redacted scan of immutable published Git versions: previously adjudicated cursor through pushed Storage receipt. Require positive origin and exact line for all scanner findings, separate binary data qualification, no raw private or held class body.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39284-g07-published-recorder-delta-v1/terminal-manifest.json",
+        "sha256": "66c13704faeef975d69360455c6e3a6a3d040b6db87384c17aefbd3eb61c4a8d"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5109_g07_committed_delta_scan.py",
+        "sha256": "b1b375bd6ff26ad1ebf6b873e06222ab4d71b70eb9176267d72fc51b1bc6afbc"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5110_g07_committed_delta_ground.py",
+        "sha256": "7d5e7640f4c47bd4d1b877c178f473e20614519a1cc37f4041fbd2b025c3c58a"
+      }
+    ],
+    "productionCoreMain": "bcc9e0673287c51950ecab9b36350abfcd4b2c69",
+    "source": "8d17e4399f5ab1345d3c121f33744e7db155d9cc",
+    "fromCommit": "1d1514bcfecb6d48fe3f087e5d1117c56cb5bc3a",
+    "wbsLeafIds": [
+      "WBS-G07"
+    ],
+    "managementWorkIds": [
+      "WBS-G07"
+    ],
+    "run": "PG39430-g07-quality-published-delta-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.45,
+      "base": 1.1,
+      "high": 3.1
+    },
+    "groupCapPp": 6.0,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "quotaAfter": {
+      "usedPercent": 35,
+      "remainingPercent": 65,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "026a638b9b055fe36fa5ef27f27f54cc69dd8e28e7eaed5e12ccbe7994f07066",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T11:55:10.263000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 35,
+          "remainingPercent": 65,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T11:55:03.001852+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 35,
+      "remainingPercent": 65,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "result": "G07_40_PUBLIC_COMMITS_ALL_COORDINATES_ADJUDICATED_ZERO_SECRETS_SCOPE_ONLY",
+    "actualPaths": [
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG39430-g07-quality-published-delta-v1/origins-pass2.json",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG39432-g07-quality-projection-retention-v1/manifest.json"
+    ],
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "applicationTrials": 0,
+    "newTestDefinitions": 0,
+    "effortCompletionRate": null,
+    "remainingOriginalDetailBasePp": 1089.848,
+    "publicEvidence": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39430-g07-quality-published-delta-v1/origins-pass2.json",
+        "sha256": "b7a0246f1620057c1c72bbf38245f2ee30466c4aacb7ee84a60bd023e36acc8c"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39432-g07-quality-projection-retention-v1/manifest.json",
+        "sha256": "b1bd117377c107edec21fcb5b691f5c023df77768d5db8e14ae877a198f2febd"
+      }
+    ],
+    "attempt": 1,
+    "attemptResult": "PASS_PUBLIC_DELTA",
+    "unaccepted": [
+      "Only fixed published range certified. Final exact source, deploy/run and G07 exit dependence remain."
+    ],
+    "toolPreparationFailures": [
+      "First group-start event was rejected because QUALITY is not a valid 487 category. No event was appended and no scan had run.",
+      "Early class-origin proof used superseded PG39386 profile; excluded this proof and checked PG39387 qualified actual class bytes against witnesses without repeating scanner or PT."
+    ]
+  }
+}
