@@ -1,0 +1,284 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG39653-BUG3296-BUSINESS-OUTBOX-REQUIRED-RESOURCE-V3",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39647-bug3296-business-outbox-prepare-v3/manifest.json",
+    "sha256": "85c3520d2cc5f35a66ff56d69ea77361d3f3c4a3bc4bddaa12f42fdc3ae6d925"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39648-bug3296-business-outbox-static-v3/manifest.json",
+    "sha256": "a0c190eeb76250a77f9dbfb112b3d182ac7474329ef6d5774e4ef0c44a91e40f"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository.java",
+      "sourceLine": 64,
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this PreparedStatement object are closed after use",
+      "sourceAnchor": "PreparedStatement statement = requireValue(acquiredStatement);",
+      "occurrences": 1,
+      "reason": "The direct acquisition is protected by its own finally including the required-value check. Exact @WillClose typed close runs once or skips an unacquired handle. The analyzer cannot infer this transfer. Routes are checked by JDBC fixture outcomes.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository.java",
+      "sourceLine": 90,
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ResultSet object are closed after use",
+      "sourceAnchor": "ResultSet result = requireValue(acquiredRows);",
+      "occurrences": 1,
+      "reason": "The direct acquisition is protected by its own finally including the required-value check. Exact @WillClose typed close runs once or skips an unacquired handle. The analyzer cannot infer this transfer. Routes are checked by JDBC fixture outcomes.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository.java",
+      "sourceLine": 96,
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Throwable in try-catch block",
+      "sourceAnchor": "} catch (Throwable failure) {",
+      "occurrences": 1,
+      "reason": "The owned JDBC scope and typed close rethrow the precise Throwable and retain suppression ordering of the previous language-level TWR contract. No failure is recovered or treated as success.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository.java",
+      "sourceLine": 102,
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Throwable in try-catch block",
+      "sourceAnchor": "} catch (Throwable failure) {",
+      "occurrences": 1,
+      "reason": "The owned JDBC scope and typed close rethrow the precise Throwable and retain suppression ordering of the previous language-level TWR contract. No failure is recovered or treated as success.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository.java",
+      "sourceLine": 122,
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this PreparedStatement object are closed after use",
+      "sourceAnchor": "PreparedStatement statement = requireValue(acquiredStatement);",
+      "occurrences": 1,
+      "reason": "The direct acquisition is protected by its own finally including the required-value check. Exact @WillClose typed close runs once or skips an unacquired handle. The analyzer cannot infer this transfer. Routes are checked by JDBC fixture outcomes.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository.java",
+      "sourceLine": 131,
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ResultSet object are closed after use",
+      "sourceAnchor": "ResultSet result = requireValue(acquiredRows);",
+      "occurrences": 1,
+      "reason": "The direct acquisition is protected by its own finally including the required-value check. Exact @WillClose typed close runs once or skips an unacquired handle. The analyzer cannot infer this transfer. Routes are checked by JDBC fixture outcomes.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository.java",
+      "sourceLine": 139,
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Throwable in try-catch block",
+      "sourceAnchor": "} catch (Throwable failure) {",
+      "occurrences": 1,
+      "reason": "The owned JDBC scope and typed close rethrow the precise Throwable and retain suppression ordering of the previous language-level TWR contract. No failure is recovered or treated as success.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository.java",
+      "sourceLine": 145,
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Throwable in try-catch block",
+      "sourceAnchor": "} catch (Throwable failure) {",
+      "occurrences": 1,
+      "reason": "The owned JDBC scope and typed close rethrow the precise Throwable and retain suppression ordering of the previous language-level TWR contract. No failure is recovered or treated as success.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository.java",
+      "sourceLine": 165,
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this PreparedStatement object are closed after use",
+      "sourceAnchor": "PreparedStatement statement = requireValue(acquiredStatement);",
+      "occurrences": 1,
+      "reason": "The direct acquisition is protected by its own finally including the required-value check. Exact @WillClose typed close runs once or skips an unacquired handle. The analyzer cannot infer this transfer. Routes are checked by JDBC fixture outcomes.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository.java",
+      "sourceLine": 170,
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Throwable in try-catch block",
+      "sourceAnchor": "} catch (Throwable failure) {",
+      "occurrences": 1,
+      "reason": "The owned JDBC scope and typed close rethrow the precise Throwable and retain suppression ordering of the previous language-level TWR contract. No failure is recovered or treated as success.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository.java",
+      "sourceLine": 202,
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this PreparedStatement object are closed after use",
+      "sourceAnchor": "PreparedStatement statement = requireValue(acquiredStatement);",
+      "occurrences": 1,
+      "reason": "The direct acquisition is protected by its own finally including the required-value check. Exact @WillClose typed close runs once or skips an unacquired handle. The analyzer cannot infer this transfer. Routes are checked by JDBC fixture outcomes.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository.java",
+      "sourceLine": 211,
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Throwable in try-catch block",
+      "sourceAnchor": "} catch (Throwable failure) {",
+      "occurrences": 1,
+      "reason": "The owned JDBC scope and typed close rethrow the precise Throwable and retain suppression ordering of the previous language-level TWR contract. No failure is recovered or treated as success.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository.java",
+      "sourceLine": 225,
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Throwable in try-catch block",
+      "sourceAnchor": "} catch (Throwable secondary) {",
+      "occurrences": 1,
+      "reason": "The owned JDBC scope and typed close rethrow the precise Throwable and retain suppression ordering of the previous language-level TWR contract. No failure is recovered or treated as success.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository.java",
+      "sourceLine": 237,
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Throwable in try-catch block",
+      "sourceAnchor": "} catch (Throwable secondary) {",
+      "occurrences": 1,
+      "reason": "The owned JDBC scope and typed close rethrow the precise Throwable and retain suppression ordering of the previous language-level TWR contract. No failure is recovered or treated as success.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxPortTest.java",
+      "sourceLine": 107,
+      "rule": "UseConcurrentHashMap",
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+      "sourceAnchor": "Map<Object, Object> values = new HashMap<>();",
+      "occurrences": 1,
+      "reason": "This map is a model or data member owned by one in-memory JDK proxy fixture instance. Separate fixtures are confined to each test task and no map is shared across the 16 workers.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxPortTest.java",
+      "sourceLine": 124,
+      "rule": "UseProperClassLoader",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+      "sourceAnchor": "return type.cast(Proxy.newProxyInstance(type.getClassLoader(), new Class<?>[] {type}, handler));",
+      "occurrences": 1,
+      "reason": "The in-memory Proxy takes the defining JDK JDBC interface loader. There is no application container, remote class loading or actual provider dependency in this fixture.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxPortTest.java",
+      "sourceLine": 128,
+      "rule": "UseConcurrentHashMap",
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+      "sourceAnchor": "private final Map<Integer, Object> parameters = new HashMap<>();",
+      "occurrences": 1,
+      "reason": "This map is a model or data member owned by one in-memory JDK proxy fixture instance. Separate fixtures are confined to each test task and no map is shared across the 16 workers.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxPortTest.java",
+      "sourceLine": 129,
+      "rule": "UseConcurrentHashMap",
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+      "sourceAnchor": "private final Map<Integer, Integer> nullTypes = new HashMap<>();",
+      "occurrences": 1,
+      "reason": "This map is a model or data member owned by one in-memory JDK proxy fixture instance. Separate fixtures are confined to each test task and no map is shared across the 16 workers.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxPortTest.java",
+      "sourceLine": 132,
+      "rule": "UseConcurrentHashMap",
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+      "sourceAnchor": "private final Map<String, SQLException> additionalFaults = new HashMap<>();",
+      "occurrences": 1,
+      "reason": "This map is a model or data member owned by one in-memory JDK proxy fixture instance. Separate fixtures are confined to each test task and no map is shared across the 16 workers.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxPortTest.java",
+      "sourceLine": 623,
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceAnchor": "var pool = Executors.newFixedThreadPool(2);",
+      "occurrences": 1,
+      "reason": "The fixture owns the executor in its explicit try/finally. shutdownNow and the 10-second termination assertion discharge the fixture ownership and fail on a nonterminal worker.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxPortTest.java",
+      "sourceLine": 623,
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "var pool = Executors.newFixedThreadPool(2);",
+      "occurrences": 1,
+      "reason": "All operations belong to the explicitly bounded 16-task in-memory fixture, with individual Future.get limits and owner finally shutdown and await for 10 seconds.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxPortTest.java",
+      "sourceLine": 629,
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "pool.submit(",
+      "occurrences": 1,
+      "reason": "All operations belong to the explicitly bounded 16-task in-memory fixture, with individual Future.get limits and owner finally shutdown and await for 10 seconds.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxPortTest.java",
+      "sourceLine": 648,
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "pool.shutdownNow();",
+      "occurrences": 1,
+      "reason": "All operations belong to the explicitly bounded 16-task in-memory fixture, with individual Future.get limits and owner finally shutdown and await for 10 seconds.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxPortTest.java",
+      "sourceLine": 649,
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "reason": "All operations belong to the explicitly bounded 16-task in-memory fixture, with individual Future.get limits and owner finally shutdown and await for 10 seconds.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxReturningIdContractTest.java",
+      "sourceLine": 19,
+      "rule": "UseProperClassLoader",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+      "sourceAnchor": "return type.cast(Proxy.newProxyInstance(type.getClassLoader(), new Class<?>[] {type}, handler));",
+      "occurrences": 1,
+      "reason": "The in-memory Proxy takes the defining JDK JDBC interface loader. There is no application container, remote class loading or actual provider dependency in this fixture.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxReturningIdContractTest.java",
+      "sourceLine": 36,
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this PreparedStatement object are closed after use",
+      "sourceAnchor": "PreparedStatement statement =",
+      "occurrences": 1,
+      "reason": "The exact synthetic proxy does not acquire a database resource. The repository owns closure of the returned fake statement; the fake Connection is caller-borrowed and rejects unauthorized ownership changes.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxReturningIdContractTest.java",
+      "sourceLine": 48,
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this Connection object are closed after use",
+      "sourceAnchor": "Connection connection =",
+      "occurrences": 1,
+      "reason": "The exact synthetic proxy does not acquire a database resource. The repository owns closure of the returned fake statement; the fake Connection is caller-borrowed and rejects unauthorized ownership changes.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ]
+}
