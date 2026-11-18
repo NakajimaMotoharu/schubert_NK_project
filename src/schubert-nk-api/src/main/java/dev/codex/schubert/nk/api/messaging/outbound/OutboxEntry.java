@@ -151,11 +151,7 @@ public final class OutboxEntry {
 
   @Override
   public String toString() {
-    return "OutboxEntry[id="
-        + retainedId
-        + ", destination="
-        + retainedDestination
-        + ", body=<redacted>]";
+    return "OutboxEntry[<redacted>]";
   }
 
   static String requireLayoutId(String value) {

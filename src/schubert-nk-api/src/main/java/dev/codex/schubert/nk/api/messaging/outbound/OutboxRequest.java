@@ -107,6 +107,6 @@ public final class OutboxRequest {
 
   @Override
   public String toString() {
-    return "OutboxRequest[destination=" + retainedDestination + ", body=<redacted>]";
+    return "OutboxRequest[<redacted>]";
   }
 }
