@@ -1,0 +1,270 @@
+Compiled from "InspectionSummaryRepository.java"
+public final class dev.codex.schubert.nk.batch.repository.InspectionSummaryRepository {
+  private final java.sql.Connection connection;
+
+  public dev.codex.schubert.nk.batch.repository.InspectionSummaryRepository(java.sql.Connection);
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: aload_1
+         6: ldc           #7                  // String parent connection
+         8: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        11: checkcast     #15                 // class java/sql/Connection
+        14: putfield      #17                 // Field connection:Ljava/sql/Connection;
+        17: return
+
+  public java.util.Optional<dev.codex.schubert.nk.batch.repository.InspectionSummary> read(dev.codex.schubert.nk.batch.repository.BatchRun);
+    Code:
+         0: aload_1
+         1: ldc           #23                 // String fixed run
+         3: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: invokestatic  #25                 // Method java/lang/Thread.currentThread:()Ljava/lang/Thread;
+        10: invokevirtual #31                 // Method java/lang/Thread.isInterrupted:()Z
+        13: ifne          20
+        16: iconst_1
+        17: goto          21
+        20: iconst_0
+        21: invokestatic  #35                 // Method require:(Z)V
+        24: aload_0
+        25: getfield      #17                 // Field connection:Ljava/sql/Connection;
+        28: invokeinterface #39,  1           // InterfaceMethod java/sql/Connection.getAutoCommit:()Z
+        33: invokestatic  #35                 // Method require:(Z)V
+        36: aload_0
+        37: getfield      #17                 // Field connection:Ljava/sql/Connection;
+        40: invokeinterface #42,  1           // InterfaceMethod java/sql/Connection.isReadOnly:()Z
+        45: ifne          52
+        48: iconst_1
+        49: goto          53
+        52: iconst_0
+        53: invokestatic  #35                 // Method require:(Z)V
+        56: aload_0
+        57: getfield      #17                 // Field connection:Ljava/sql/Connection;
+        60: invokeinterface #45,  1           // InterfaceMethod java/sql/Connection.getTransactionIsolation:()I
+        65: iconst_2
+        66: if_icmpne     73
+        69: iconst_1
+        70: goto          74
+        73: iconst_0
+        74: invokestatic  #35                 // Method require:(Z)V
+        77: aload_0
+        78: getfield      #17                 // Field connection:Ljava/sql/Connection;
+        81: ldc           #49                 // String select inspected_count,deleted_count,protected_count,complete from schubert.maintenance_read_inbox_summary(?,?)
+        83: invokeinterface #51,  2           // InterfaceMethod java/sql/Connection.prepareStatement:(Ljava/lang/String;)Ljava/sql/PreparedStatement;
+        88: invokestatic  #55                 // Method present:(Ljava/lang/Object;)Ljava/lang/Object;
+        91: checkcast     #59                 // class java/sql/PreparedStatement
+        94: astore_3
+        95: aconst_null
+        96: astore        4
+        98: aload_3
+        99: iconst_5
+       100: invokeinterface #61,  2           // InterfaceMethod java/sql/PreparedStatement.setQueryTimeout:(I)V
+       105: aload_3
+       106: iconst_1
+       107: aload_1
+       108: invokevirtual #65                 // Method dev/codex/schubert/nk/batch/repository/BatchRun.id:()Ljava/util/UUID;
+       111: invokeinterface #71,  3           // InterfaceMethod java/sql/PreparedStatement.setObject:(ILjava/lang/Object;)V
+       116: aload_3
+       117: iconst_2
+       118: aload_1
+       119: invokevirtual #75                 // Method dev/codex/schubert/nk/batch/repository/BatchRun.cutoff:()Ljava/time/Instant;
+       122: getstatic     #79                 // Field java/time/ZoneOffset.UTC:Ljava/time/ZoneOffset;
+       125: invokevirtual #85                 // Method java/time/Instant.atOffset:(Ljava/time/ZoneOffset;)Ljava/time/OffsetDateTime;
+       128: invokeinterface #71,  3           // InterfaceMethod java/sql/PreparedStatement.setObject:(ILjava/lang/Object;)V
+       133: aload_3
+       134: invokeinterface #91,  1           // InterfaceMethod java/sql/PreparedStatement.executeQuery:()Ljava/sql/ResultSet;
+       139: invokestatic  #55                 // Method present:(Ljava/lang/Object;)Ljava/lang/Object;
+       142: checkcast     #95                 // class java/sql/ResultSet
+       145: astore        5
+       147: aconst_null
+       148: astore        6
+       150: aload         5
+       152: invokeinterface #97,  1           // InterfaceMethod java/sql/ResultSet.next:()Z
+       157: ifeq          323
+       160: aload         5
+       162: ldc           #100                // String inspected_count
+       164: ldc           #102                // class java/lang/Long
+       166: invokeinterface #104,  3          // InterfaceMethod java/sql/ResultSet.getObject:(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;
+       171: checkcast     #102                // class java/lang/Long
+       174: invokestatic  #55                 // Method present:(Ljava/lang/Object;)Ljava/lang/Object;
+       177: checkcast     #102                // class java/lang/Long
+       180: invokevirtual #108                // Method java/lang/Long.longValue:()J
+       183: lstore        7
+       185: aload         5
+       187: ldc           #112                // String deleted_count
+       189: ldc           #102                // class java/lang/Long
+       191: invokeinterface #104,  3          // InterfaceMethod java/sql/ResultSet.getObject:(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;
+       196: checkcast     #102                // class java/lang/Long
+       199: invokestatic  #55                 // Method present:(Ljava/lang/Object;)Ljava/lang/Object;
+       202: checkcast     #102                // class java/lang/Long
+       205: invokevirtual #108                // Method java/lang/Long.longValue:()J
+       208: lstore        9
+       210: aload         5
+       212: ldc           #114                // String protected_count
+       214: ldc           #102                // class java/lang/Long
+       216: invokeinterface #104,  3          // InterfaceMethod java/sql/ResultSet.getObject:(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;
+       221: checkcast     #102                // class java/lang/Long
+       224: invokestatic  #55                 // Method present:(Ljava/lang/Object;)Ljava/lang/Object;
+       227: checkcast     #102                // class java/lang/Long
+       230: invokevirtual #108                // Method java/lang/Long.longValue:()J
+       233: lstore        11
+       235: aload         5
+       237: ldc           #116                // String complete
+       239: ldc           #118                // class java/lang/Boolean
+       241: invokeinterface #104,  3          // InterfaceMethod java/sql/ResultSet.getObject:(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;
+       246: checkcast     #118                // class java/lang/Boolean
+       249: invokestatic  #55                 // Method present:(Ljava/lang/Object;)Ljava/lang/Object;
+       252: checkcast     #118                // class java/lang/Boolean
+       255: invokevirtual #120                // Method java/lang/Boolean.booleanValue:()Z
+       258: istore        13
+       260: new           #123                // class dev/codex/schubert/nk/batch/repository/InspectionSummary
+       263: dup
+       264: aload_1
+       265: new           #125                // class dev/codex/schubert/nk/batch/repository/CleanupCounts
+       268: dup
+       269: lload         7
+       271: lload         9
+       273: lload         11
+       275: invokespecial #127                // Method dev/codex/schubert/nk/batch/repository/CleanupCounts."<init>":(JJJ)V
+       278: iload         13
+       280: invokespecial #130                // Method dev/codex/schubert/nk/batch/repository/InspectionSummary."<init>":(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ldev/codex/schubert/nk/batch/repository/CleanupCounts;Z)V
+       283: invokestatic  #133                // Method java/util/Optional.of:(Ljava/lang/Object;)Ljava/util/Optional;
+       286: astore_2
+       287: goto          302
+       290: astore        14
+       292: new           #141                // class java/sql/SQLDataException
+       295: dup
+       296: ldc           #143                // String inspection summary projection invalid
+       298: invokespecial #145                // Method java/sql/SQLDataException."<init>":(Ljava/lang/String;)V
+       301: athrow
+       302: aload         5
+       304: invokeinterface #97,  1           // InterfaceMethod java/sql/ResultSet.next:()Z
+       309: ifne          316
+       312: iconst_1
+       313: goto          317
+       316: iconst_0
+       317: invokestatic  #35                 // Method require:(Z)V
+       320: goto          327
+       323: invokestatic  #148                // Method java/util/Optional.empty:()Ljava/util/Optional;
+       326: astore_2
+       327: aload         5
+       329: aload         6
+       331: invokestatic  #152                // Method closeRow:(Ljava/sql/ResultSet;Ljava/lang/Throwable;)V
+       334: goto          358
+       337: astore        7
+       339: aload         7
+       341: astore        6
+       343: aload         7
+       345: athrow
+       346: astore        15
+       348: aload         5
+       350: aload         6
+       352: invokestatic  #152                // Method closeRow:(Ljava/sql/ResultSet;Ljava/lang/Throwable;)V
+       355: aload         15
+       357: athrow
+       358: aload_3
+       359: aload         4
+       361: invokestatic  #162                // Method closeStatement:(Ljava/sql/PreparedStatement;Ljava/lang/Throwable;)V
+       364: goto          387
+       367: astore        5
+       369: aload         5
+       371: astore        4
+       373: aload         5
+       375: athrow
+       376: astore        16
+       378: aload_3
+       379: aload         4
+       381: invokestatic  #162                // Method closeStatement:(Ljava/sql/PreparedStatement;Ljava/lang/Throwable;)V
+       384: aload         16
+       386: athrow
+       387: invokestatic  #25                 // Method java/lang/Thread.currentThread:()Ljava/lang/Thread;
+       390: invokevirtual #31                 // Method java/lang/Thread.isInterrupted:()Z
+       393: ifne          400
+       396: iconst_1
+       397: goto          401
+       400: iconst_0
+       401: invokestatic  #35                 // Method require:(Z)V
+       404: aload_2
+       405: areturn
+       406: astore_2
+       407: new           #166                // class dev/codex/schubert/nk/batch/repository/BatchRepositoryException
+       410: dup
+       411: invokespecial #168                // Method dev/codex/schubert/nk/batch/repository/BatchRepositoryException."<init>":()V
+       414: athrow
+      Exception table:
+         from    to  target type
+           260   287   290   Class java/lang/IllegalArgumentException
+           150   327   337   Class java/sql/SQLException
+           150   327   337   Class java/lang/RuntimeException
+           150   327   337   Class java/lang/Error
+           150   327   346   any
+           337   348   346   any
+            98   358   367   Class java/sql/SQLException
+            98   358   367   Class java/lang/RuntimeException
+            98   358   367   Class java/lang/Error
+            98   358   376   any
+           367   378   376   any
+             7   405   406   Class java/sql/SQLException
+
+  private static void closeRow(java.sql.ResultSet, java.lang.Throwable) throws java.sql.SQLException;
+    Code:
+         0: aload_0
+         1: invokeinterface #169,  1          // InterfaceMethod java/sql/ResultSet.close:()V
+         6: goto          20
+         9: astore_2
+        10: aload_1
+        11: aload_2
+        12: invokestatic  #172                // InterfaceMethod dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.replace:(Ljava/lang/Throwable;Ljava/lang/Throwable;)Z
+        15: ifeq          20
+        18: aload_2
+        19: athrow
+        20: return
+      Exception table:
+         from    to  target type
+             0     6     9   Class java/sql/SQLException
+             0     6     9   Class java/lang/RuntimeException
+             0     6     9   Class java/lang/Error
+
+  private static void closeStatement(java.sql.PreparedStatement, java.lang.Throwable) throws java.sql.SQLException;
+    Code:
+         0: aload_0
+         1: invokeinterface #178,  1          // InterfaceMethod java/sql/PreparedStatement.close:()V
+         6: goto          20
+         9: astore_2
+        10: aload_1
+        11: aload_2
+        12: invokestatic  #172                // InterfaceMethod dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.replace:(Ljava/lang/Throwable;Ljava/lang/Throwable;)Z
+        15: ifeq          20
+        18: aload_2
+        19: athrow
+        20: return
+      Exception table:
+         from    to  target type
+             0     6     9   Class java/sql/SQLException
+             0     6     9   Class java/lang/RuntimeException
+             0     6     9   Class java/lang/Error
+
+  private static void require(boolean) throws java.sql.SQLDataException;
+    Code:
+         0: iload_0
+         1: ifne          14
+         4: new           #141                // class java/sql/SQLDataException
+         7: dup
+         8: ldc           #179                // String inspection summary contract failed
+        10: invokespecial #145                // Method java/sql/SQLDataException."<init>":(Ljava/lang/String;)V
+        13: athrow
+        14: return
+
+  private static <T> T present(T) throws java.sql.SQLDataException;
+    Code:
+         0: aload_0
+         1: ifnonnull     14
+         4: new           #141                // class java/sql/SQLDataException
+         7: dup
+         8: ldc           #181                // String inspection summary projection missing
+        10: invokespecial #145                // Method java/sql/SQLDataException."<init>":(Ljava/lang/String;)V
+        13: athrow
+        14: aload_0
+        15: areturn
+}

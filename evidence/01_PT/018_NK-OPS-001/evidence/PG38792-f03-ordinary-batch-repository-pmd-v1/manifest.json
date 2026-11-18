@@ -1,0 +1,1014 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-18T06:16:30.323990+00:00",
+  "source": "c58e98bd297adcff2351447e52b2449e1b558255",
+  "pmdActualExit": 4,
+  "selectedMain": 16,
+  "rawFindings": 58,
+  "applied": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "priorExactCount": 48,
+  "adjudicated": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "CloseResource",
+      "line": 142,
+      "message": "Ensure that resources like this PreparedStatement object are closed after use",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "var query = present(statement);",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java finish update, line 142: nullable provider result is explicitly acquired before the applicable try and required inside it; the corresponding finally releases the nonnull row or statement even on projection failure. A null result has no JDBC owner. Borrowed connection is caller-owned. Original SS332 owned close contracts and exact tests cover the applicable SQL/unknown diagnostics.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 147,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java finish update, line 147: this catch captures the exact primary for the owned finally, then rethrows that same instance. It does not convert unexpected Runtime or Error into an allowed result. The approved close-priority rule requires retaining this primary category and observing the appropriate JDBC closes.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 147,
+      "message": "Avoid catching Error in try-catch block",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java finish update, line 147: this catch captures the exact primary for the owned finally, then rethrows that same instance. It does not convert unexpected Runtime or Error into an allowed result. The approved close-priority rule requires retaining this primary category and observing the appropriate JDBC closes.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "line": 150,
+      "message": "A throw statement in a finally block makes the control flow hard to understand.",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "} finally {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java finish update, line 150: closing owned JDBC may invalidate an otherwise confirmed return. The existing finally implements SS332 failure precedence and must propagate the selected close failure. It performs no connection ownership or transaction action. Raw branch deficits in this supporting scope remain separate.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 154,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java finish update, line 154: this handler encloses an owned JDBC close and exists to preserve SS332 precedence and redaction for known SQL and unknown provider failure. The scope rethrows the selected failure or keeps the original primary with only the fixed secondary, and closes the outer resource in order.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 154,
+      "message": "Avoid catching Error in try-catch block",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java finish update, line 154: this handler encloses an owned JDBC close and exists to preserve SS332 precedence and redaction for known SQL and unknown provider failure. The scope rethrows the selected failure or keeps the original primary with only the fixed secondary, and closes the outer resource in order.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "CloseResource",
+      "line": 238,
+      "message": "Ensure that resources like this PreparedStatement object are closed after use",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "var query = present(statement);",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java history read, line 238: nullable provider result is explicitly acquired before the applicable try and required inside it; the corresponding finally releases the nonnull row or statement even on projection failure. A null result has no JDBC owner. Borrowed connection is caller-owned. Original SS332 owned close contracts and exact tests cover the applicable SQL/unknown diagnostics.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "CloseResource",
+      "line": 245,
+      "message": "Ensure that resources like this ResultSet object are closed after use",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "var row = present(rows);",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java history read, line 245: nullable provider result is explicitly acquired before the applicable try and required inside it; the corresponding finally releases the nonnull row or statement even on projection failure. A null result has no JDBC owner. Borrowed connection is caller-owned. Original SS332 owned close contracts and exact tests cover the applicable SQL/unknown diagnostics.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 280,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java history read, line 280: this catch captures the exact primary for the owned finally, then rethrows that same instance. It does not convert unexpected Runtime or Error into an allowed result. The approved close-priority rule requires retaining this primary category and observing the appropriate JDBC closes.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 280,
+      "message": "Avoid catching Error in try-catch block",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java history read, line 280: this catch captures the exact primary for the owned finally, then rethrows that same instance. It does not convert unexpected Runtime or Error into an allowed result. The approved close-priority rule requires retaining this primary category and observing the appropriate JDBC closes.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "line": 283,
+      "message": "A throw statement in a finally block makes the control flow hard to understand.",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "} finally {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java history read, line 283: closing owned JDBC may invalidate an otherwise confirmed return. The existing finally implements SS332 failure precedence and must propagate the selected close failure. It performs no connection ownership or transaction action. Raw branch deficits in this supporting scope remain separate.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 287,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java history read, line 287: this handler encloses an owned JDBC close and exists to preserve SS332 precedence and redaction for known SQL and unknown provider failure. The scope rethrows the selected failure or keeps the original primary with only the fixed secondary, and closes the outer resource in order.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 287,
+      "message": "Avoid catching Error in try-catch block",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java history read, line 287: this handler encloses an owned JDBC close and exists to preserve SS332 precedence and redaction for known SQL and unknown provider failure. The scope rethrows the selected failure or keeps the original primary with only the fixed secondary, and closes the outer resource in order.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 292,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java history read, line 292: this catch captures the exact primary for the owned finally, then rethrows that same instance. It does not convert unexpected Runtime or Error into an allowed result. The approved close-priority rule requires retaining this primary category and observing the appropriate JDBC closes.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 292,
+      "message": "Avoid catching Error in try-catch block",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java history read, line 292: this catch captures the exact primary for the owned finally, then rethrows that same instance. It does not convert unexpected Runtime or Error into an allowed result. The approved close-priority rule requires retaining this primary category and observing the appropriate JDBC closes.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "line": 295,
+      "message": "A throw statement in a finally block makes the control flow hard to understand.",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "} finally {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java history read, line 295: closing owned JDBC may invalidate an otherwise confirmed return. The existing finally implements SS332 failure precedence and must propagate the selected close failure. It performs no connection ownership or transaction action. Raw branch deficits in this supporting scope remain separate.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 299,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java history read, line 299: this handler encloses an owned JDBC close and exists to preserve SS332 precedence and redaction for known SQL and unknown provider failure. The scope rethrows the selected failure or keeps the original primary with only the fixed secondary, and closes the outer resource in order.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 299,
+      "message": "Avoid catching Error in try-catch block",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java history read, line 299: this handler encloses an owned JDBC close and exists to preserve SS332 precedence and redaction for known SQL and unknown provider failure. The scope rethrows the selected failure or keeps the original primary with only the fixed secondary, and closes the outer resource in order.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "CloseResource",
+      "line": 314,
+      "message": "Ensure that resources like this PreparedStatement object are closed after use",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "var query = present(statement);",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java abandon update, line 314: nullable provider result is explicitly acquired before the applicable try and required inside it; the corresponding finally releases the nonnull row or statement even on projection failure. A null result has no JDBC owner. Borrowed connection is caller-owned. Original SS332 owned close contracts and exact tests cover the applicable SQL/unknown diagnostics.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 323,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java abandon update, line 323: this catch captures the exact primary for the owned finally, then rethrows that same instance. It does not convert unexpected Runtime or Error into an allowed result. The approved close-priority rule requires retaining this primary category and observing the appropriate JDBC closes.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 323,
+      "message": "Avoid catching Error in try-catch block",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java abandon update, line 323: this catch captures the exact primary for the owned finally, then rethrows that same instance. It does not convert unexpected Runtime or Error into an allowed result. The approved close-priority rule requires retaining this primary category and observing the appropriate JDBC closes.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "line": 326,
+      "message": "A throw statement in a finally block makes the control flow hard to understand.",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "} finally {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java abandon update, line 326: closing owned JDBC may invalidate an otherwise confirmed return. The existing finally implements SS332 failure precedence and must propagate the selected close failure. It performs no connection ownership or transaction action. Raw branch deficits in this supporting scope remain separate.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 330,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java abandon update, line 330: this handler encloses an owned JDBC close and exists to preserve SS332 precedence and redaction for known SQL and unknown provider failure. The scope rethrows the selected failure or keeps the original primary with only the fixed secondary, and closes the outer resource in order.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 330,
+      "message": "Avoid catching Error in try-catch block",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java abandon update, line 330: this handler encloses an owned JDBC close and exists to preserve SS332 precedence and redaction for known SQL and unknown provider failure. The scope rethrows the selected failure or keeps the original primary with only the fixed secondary, and closes the outer resource in order.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "CloseResource",
+      "line": 354,
+      "message": "Ensure that resources like this PreparedStatement object are closed after use",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "var query = present(statement);",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java insert returning read, line 354: nullable provider result is explicitly acquired before the applicable try and required inside it; the corresponding finally releases the nonnull row or statement even on projection failure. A null result has no JDBC owner. Borrowed connection is caller-owned. Original SS332 owned close contracts and exact tests cover the applicable SQL/unknown diagnostics.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "CloseResource",
+      "line": 368,
+      "message": "Ensure that resources like this ResultSet object are closed after use",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "var row = present(rows);",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java insert returning read, line 368: nullable provider result is explicitly acquired before the applicable try and required inside it; the corresponding finally releases the nonnull row or statement even on projection failure. A null result has no JDBC owner. Borrowed connection is caller-owned. Original SS332 owned close contracts and exact tests cover the applicable SQL/unknown diagnostics.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 377,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java insert returning read, line 377: this catch captures the exact primary for the owned finally, then rethrows that same instance. It does not convert unexpected Runtime or Error into an allowed result. The approved close-priority rule requires retaining this primary category and observing the appropriate JDBC closes.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 377,
+      "message": "Avoid catching Error in try-catch block",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java insert returning read, line 377: this catch captures the exact primary for the owned finally, then rethrows that same instance. It does not convert unexpected Runtime or Error into an allowed result. The approved close-priority rule requires retaining this primary category and observing the appropriate JDBC closes.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "line": 380,
+      "message": "A throw statement in a finally block makes the control flow hard to understand.",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "} finally {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java insert returning read, line 380: closing owned JDBC may invalidate an otherwise confirmed return. The existing finally implements SS332 failure precedence and must propagate the selected close failure. It performs no connection ownership or transaction action. Raw branch deficits in this supporting scope remain separate.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 384,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java insert returning read, line 384: this handler encloses an owned JDBC close and exists to preserve SS332 precedence and redaction for known SQL and unknown provider failure. The scope rethrows the selected failure or keeps the original primary with only the fixed secondary, and closes the outer resource in order.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 384,
+      "message": "Avoid catching Error in try-catch block",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java insert returning read, line 384: this handler encloses an owned JDBC close and exists to preserve SS332 precedence and redaction for known SQL and unknown provider failure. The scope rethrows the selected failure or keeps the original primary with only the fixed secondary, and closes the outer resource in order.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 389,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java insert returning read, line 389: this catch captures the exact primary for the owned finally, then rethrows that same instance. It does not convert unexpected Runtime or Error into an allowed result. The approved close-priority rule requires retaining this primary category and observing the appropriate JDBC closes.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 389,
+      "message": "Avoid catching Error in try-catch block",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java insert returning read, line 389: this catch captures the exact primary for the owned finally, then rethrows that same instance. It does not convert unexpected Runtime or Error into an allowed result. The approved close-priority rule requires retaining this primary category and observing the appropriate JDBC closes.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "line": 392,
+      "message": "A throw statement in a finally block makes the control flow hard to understand.",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "} finally {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java insert returning read, line 392: closing owned JDBC may invalidate an otherwise confirmed return. The existing finally implements SS332 failure precedence and must propagate the selected close failure. It performs no connection ownership or transaction action. Raw branch deficits in this supporting scope remain separate.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 396,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java insert returning read, line 396: this handler encloses an owned JDBC close and exists to preserve SS332 precedence and redaction for known SQL and unknown provider failure. The scope rethrows the selected failure or keeps the original primary with only the fixed secondary, and closes the outer resource in order.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 396,
+      "message": "Avoid catching Error in try-catch block",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java insert returning read, line 396: this handler encloses an owned JDBC close and exists to preserve SS332 precedence and redaction for known SQL and unknown provider failure. The scope rethrows the selected failure or keeps the original primary with only the fixed secondary, and closes the outer resource in order.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "CloseResource",
+      "line": 417,
+      "message": "Ensure that resources like this PreparedStatement object are closed after use",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "var query = present(statement);",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java replayed read, line 417: nullable provider result is explicitly acquired before the applicable try and required inside it; the corresponding finally releases the nonnull row or statement even on projection failure. A null result has no JDBC owner. Borrowed connection is caller-owned. Original SS332 owned close contracts and exact tests cover the applicable SQL/unknown diagnostics.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "CloseResource",
+      "line": 424,
+      "message": "Ensure that resources like this ResultSet object are closed after use",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "var row = present(rows);",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java replayed read, line 424: nullable provider result is explicitly acquired before the applicable try and required inside it; the corresponding finally releases the nonnull row or statement even on projection failure. A null result has no JDBC owner. Borrowed connection is caller-owned. Original SS332 owned close contracts and exact tests cover the applicable SQL/unknown diagnostics.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 428,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java replayed read, line 428: this catch captures the exact primary for the owned finally, then rethrows that same instance. It does not convert unexpected Runtime or Error into an allowed result. The approved close-priority rule requires retaining this primary category and observing the appropriate JDBC closes.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 428,
+      "message": "Avoid catching Error in try-catch block",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java replayed read, line 428: this catch captures the exact primary for the owned finally, then rethrows that same instance. It does not convert unexpected Runtime or Error into an allowed result. The approved close-priority rule requires retaining this primary category and observing the appropriate JDBC closes.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "line": 431,
+      "message": "A throw statement in a finally block makes the control flow hard to understand.",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "} finally {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java replayed read, line 431: closing owned JDBC may invalidate an otherwise confirmed return. The existing finally implements SS332 failure precedence and must propagate the selected close failure. It performs no connection ownership or transaction action. Raw branch deficits in this supporting scope remain separate.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 435,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java replayed read, line 435: this handler encloses an owned JDBC close and exists to preserve SS332 precedence and redaction for known SQL and unknown provider failure. The scope rethrows the selected failure or keeps the original primary with only the fixed secondary, and closes the outer resource in order.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 435,
+      "message": "Avoid catching Error in try-catch block",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java replayed read, line 435: this handler encloses an owned JDBC close and exists to preserve SS332 precedence and redaction for known SQL and unknown provider failure. The scope rethrows the selected failure or keeps the original primary with only the fixed secondary, and closes the outer resource in order.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 440,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java replayed read, line 440: this catch captures the exact primary for the owned finally, then rethrows that same instance. It does not convert unexpected Runtime or Error into an allowed result. The approved close-priority rule requires retaining this primary category and observing the appropriate JDBC closes.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 440,
+      "message": "Avoid catching Error in try-catch block",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java replayed read, line 440: this catch captures the exact primary for the owned finally, then rethrows that same instance. It does not convert unexpected Runtime or Error into an allowed result. The approved close-priority rule requires retaining this primary category and observing the appropriate JDBC closes.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "line": 443,
+      "message": "A throw statement in a finally block makes the control flow hard to understand.",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "} finally {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java replayed read, line 443: closing owned JDBC may invalidate an otherwise confirmed return. The existing finally implements SS332 failure precedence and must propagate the selected close failure. It performs no connection ownership or transaction action. Raw branch deficits in this supporting scope remain separate.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 447,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java replayed read, line 447: this handler encloses an owned JDBC close and exists to preserve SS332 precedence and redaction for known SQL and unknown provider failure. The scope rethrows the selected failure or keeps the original primary with only the fixed secondary, and closes the outer resource in order.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 447,
+      "message": "Avoid catching Error in try-catch block",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "BatchRunRepository.java replayed read, line 447: this handler encloses an owned JDBC close and exists to preserve SS332 precedence and redaction for known SQL and unknown provider failure. The scope rethrows the selected failure or keeps the original primary with only the fixed secondary, and closes the outer resource in order.",
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "rule": "DoNotUseThreads",
+      "line": 30,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceSha256": "fe6aacb6e84e4edcaee4bd8033b36e235f0575180f35e9060908a4c0eda34822",
+      "sourceAnchor": "require(!Thread.currentThread().isInterrupted());",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The ordinary borrowed repository observes the current thread interruption at entry. No thread is created, started or managed here, and this is not J2EE thread lifecycle. The interruption remains visible to the caller.",
+      "previous": null
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 65,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceSha256": "fe6aacb6e84e4edcaee4bd8033b36e235f0575180f35e9060908a4c0eda34822",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The rows scope captures the primary only to preserve it during the following direct close, then rethrows the identical instance. SS332 SSC063 prioritizes provider failure and close identity and never treats such failure as successful.",
+      "previous": null
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 65,
+      "message": "Avoid catching Error in try-catch block",
+      "sourceSha256": "fe6aacb6e84e4edcaee4bd8033b36e235f0575180f35e9060908a4c0eda34822",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The rows scope captures the primary only to preserve it during the following direct close, then rethrows the identical instance. SS332 SSC063 prioritizes provider failure and close identity and never treats such failure as successful.",
+      "previous": null
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 71,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceSha256": "fe6aacb6e84e4edcaee4bd8033b36e235f0575180f35e9060908a4c0eda34822",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The statement scope captures the primary only to preserve it during the following direct close, then rethrows the identical instance. SS332 SSC063 prioritizes provider failure and close identity and never treats such failure as successful.",
+      "previous": null
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 71,
+      "message": "Avoid catching Error in try-catch block",
+      "sourceSha256": "fe6aacb6e84e4edcaee4bd8033b36e235f0575180f35e9060908a4c0eda34822",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The statement scope captures the primary only to preserve it during the following direct close, then rethrows the identical instance. SS332 SSC063 prioritizes provider failure and close identity and never treats such failure as successful.",
+      "previous": null
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "rule": "DoNotUseThreads",
+      "line": 77,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceSha256": "fe6aacb6e84e4edcaee4bd8033b36e235f0575180f35e9060908a4c0eda34822",
+      "sourceAnchor": "require(!Thread.currentThread().isInterrupted());",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The ordinary borrowed repository observes the current thread interruption after ordered closure and before the result. No thread is created, started or managed here, and this is not J2EE thread lifecycle. The interruption remains visible to the caller.",
+      "previous": null
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 89,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceSha256": "fe6aacb6e84e4edcaee4bd8033b36e235f0575180f35e9060908a4c0eda34822",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "closeRow catches SQL or unknown only from the owned close method, applies JdbcResourceFailures documented order and propagates a selected close failure. The parent connection is borrowed. This is not a general Runtime/Error recovery catch.",
+      "previous": null
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 89,
+      "message": "Avoid catching Error in try-catch block",
+      "sourceSha256": "fe6aacb6e84e4edcaee4bd8033b36e235f0575180f35e9060908a4c0eda34822",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "closeRow catches SQL or unknown only from the owned close method, applies JdbcResourceFailures documented order and propagates a selected close failure. The parent connection is borrowed. This is not a general Runtime/Error recovery catch.",
+      "previous": null
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 98,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceSha256": "fe6aacb6e84e4edcaee4bd8033b36e235f0575180f35e9060908a4c0eda34822",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "closeStatement catches SQL or unknown only from the owned close method, applies JdbcResourceFailures documented order and propagates a selected close failure. The parent connection is borrowed. This is not a general Runtime/Error recovery catch.",
+      "previous": null
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 98,
+      "message": "Avoid catching Error in try-catch block",
+      "sourceSha256": "fe6aacb6e84e4edcaee4bd8033b36e235f0575180f35e9060908a4c0eda34822",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "closeStatement catches SQL or unknown only from the owned close method, applies JdbcResourceFailures documented order and propagates a selected close failure. The parent connection is borrowed. This is not a general Runtime/Error recovery catch.",
+      "previous": null
+    }
+  ],
+  "pending": [],
+  "raw": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38792-f03-ordinary-batch-repository-pmd-v1/raw.json",
+    "sha256": "1cc8472e7f1b72269cb4a028e26194b90afa2ab240985eaf29a0b6b0a03ab111"
+  },
+  "xml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38792-f03-ordinary-batch-repository-pmd-v1/pmd.xml",
+    "sha256": "ff5f1b7e6d49329bef3cb6f38b6330d0ea633ddad77a549b4c02bf6f8e676e31"
+  },
+  "terminal": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38792-f03-ordinary-batch-repository-pmd-v1/terminal.json",
+    "sha256": "27bdae852bb8da1446416f7e9bfd827c27549b0ccfcccfe0e3506865823bbd43"
+  },
+  "horizontal": {
+    "target": "dev.codex.schubert.nk.batch.repository.InspectionSummaryRepository",
+    "status": "NO_DUPLICATED_CLOSE_BRANCH_IN_CURRENT_CODE",
+    "physicalSha256": "f56ddc1dd6e10313e386967c83755fc73626f3fb9417cd55ba5c9ba665453fc9",
+    "receipt": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38792-f03-ordinary-batch-repository-pmd-v1/inspection-summary.javap.txt",
+      "sha256": "da9893ee43f70e84a9a216de9985c3aa518c11d4fa6d94d1ce91792030eb1bef"
+    },
+    "wholeRunNewlyExecuted": false
+  },
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "newAcceptance": 0
+}
