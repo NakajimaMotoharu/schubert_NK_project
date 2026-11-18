@@ -1,0 +1,70 @@
+{
+  "eventId": "PGPT-20261008-6053",
+  "groupId": "PGPT-WBS66-P020-CHR-A01-FIXED-LOGIN-TITLE-20261119",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-18T16:50:09.884000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 44,
+      "remainingPercent": 56,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P020-CHR-A01-FIXED-LOGIN-TITLE-20261119",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-P020-CHR-A01-FIXED-LOGIN-TITLE-20261119",
+    "workAttributionKind": "NEW_FINDING",
+    "wbsLeafIds": [
+      "WBS-P020-01.02"
+    ],
+    "managementWorkIds": [
+      "WBS-P020-01.02/2"
+    ],
+    "source": "c8f430b93b75f85fe6031568790250f8a23c40ae",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "run": "PG39910-p020-login-title-independent-v1",
+    "workScope": "Implement and independently verify the approved CHR-A01 login title on the existing Current artifact /title. Freeze exact current/NK pre/post strings and require a valid DIF-001 A01 observation even if the same DIF covers other cases. Preserve Current baseline, effective other DIF tests, tool/runtime boundaries and no real environments. Ordinary JUnit synthetic fixture within own TempDir only.",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.45,
+      "base": 1.65,
+      "high": 4.25
+    },
+    "groupCapPp": 6,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39834-p020-definition-independent-v1/manifest.json",
+        "sha256": "c638b0e950c64fb9132b46cafaf2920e4e3e58fa245424e60a641de1b1e6b88b"
+      },
+      {
+        "path": "documents/300_SS/350_運用・品質/355_Characterization Test実行準備・PG開始gate.md",
+        "sha256": "aff2aafe8f952de073e6dd2e7f5840152539f348f9816c6fa31e84ced93bef45"
+      },
+      {
+        "path": "documents/200_UI/260_引継ぎ・監査/264_現行互換性Characterization Test仕様.md",
+        "sha256": "0b0973e6e1e94858e840bc1b85df1daff35e3a0fe9f28ea12331823c2cbcf781"
+      },
+      {
+        "path": "program/characterization/baseline/current/artifacts/CHR-A01.json",
+        "sha256": "df68edfbd59d60fc0d87fcce818401788740153c8b630f790d785f6414001993"
+      },
+      {
+        "path": "program/characterization/tests/resources/cases/case-requirements.json",
+        "sha256": "f31eaff19732157415dccc960d85bf6a68e0eb188bf98b79d54a7c0887dea569"
+      }
+    ],
+    "characterizationBase": "c02f33718c628f1e935ea98df93230334eb3c832"
+  }
+}
