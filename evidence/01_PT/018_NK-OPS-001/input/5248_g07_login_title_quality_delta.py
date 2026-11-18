@@ -73,6 +73,15 @@ CONFIG = {
         'post': 'PG40060-p020-error-disclosure-independent-v1',
         'firstPmdCount': 7,
     },
+    '588': {
+        'history': ('PG40072-g07-e01-f02-trace-public-delta-v1',
+                    'PG40046-g07-l01-handoff-public-delta-v1',
+                    'PG40028-g07-value-onchange-signed-delta-v1',
+                    'PG39730-g07-weblog-session-and-comparator-public-delta-v1'),
+        'units': {'PG40075-p020-o01-restart192-v2': ('unit', 192)},
+        'post': 'PG40078-p020-o01-restart-independent-v1',
+        'journalValue': 'PG40080-p01810-detached-journal-values-v1',
+    },
 }
 
 
@@ -147,6 +156,39 @@ def detached_value_probe(B, row, meta, unit_folder):
                 toolExecutionRepeated=False,priorStaticFailureRemains=False)
 
 
+def journal_value_probe(B, row, meta, unit_folder):
+    post=unit_folder/'independent.json'
+    witness=B.load(post)
+    report=B.load(unit_folder/'manifest.json')
+    assert Path(witness['manifest']['path']).resolve() == (unit_folder/'manifest.json').resolve()
+    assert witness['manifest']['sha256'] == B.ref(unit_folder/'manifest.json')['sha256']
+    assert witness['actualExit']==report['actualExit']==0 and witness['tests']==report['tests']==2
+    assert witness['absentOuterParserInitialization'] and witness['runtimeOperationCount']==0
+    path=Path(row['path'])
+    assert B.ref(WORK/meta['relativeProjection'])['sha256']==B.ref(path)['sha256']==meta['blobSha256']
+    assert Path(report['exec']['path']).resolve() == path.resolve()
+    assert B.ref(path)['sha256'] == report['exec']['sha256']
+    terminal=report['stageResults']['execinfo']
+    assert terminal==B.load(unit_folder/'execinfo-exit.json') and terminal['actualExit']==0
+    decoded=Path(terminal['log']['path'])
+    assert decoded.resolve() == (unit_folder/'execinfo.log').resolve()
+    assert B.ref(decoded)['sha256'] == terminal['log']['sha256']
+    assert terminal['command'][-2:]==['execinfo',str(path.resolve())]
+    output=decoded.read_text()
+    assert re.findall(r'^Session "([^"]+)":',output,re.M)==[report['session']]
+    decoded_rows=re.findall(r'^([0-9a-f]{16})\s+(\d+) of\s+(\d+)\s+(\S+)$',output,re.M)
+    subjects={name:crc for crc,hit,_,name in decoded_rows if int(hit)>0 and name in witness['crc64']}
+    assert subjects==witness['crc64'] and len(subjects)==2
+    assert not any(n.startswith(('org/apache/activemq/','org/postgresql/','com/microsoft/playwright/'))
+                   for _,_,_,n in decoded_rows)
+    xml=ET.parse(unit_folder/'xml/TEST-junit-jupiter.xml').getroot()
+    assert {r.get('name') for r in xml.iter('testcase')}=={name+'()' for name in witness['testIds'].values()}
+    assert not any(n.tag in ('failure','error','skipped') for n in xml.iter())
+    return dict(row,actualExit=0,originalUnitExit=0,ordinaryProbeDataOnly=True,decodedOrigin=terminal['log'],
+                qualifiedOriginal=B.ref(post),session=report['session'],decodedRows=len(decoded_rows),
+                toolExecutionRepeated=False,priorStaticFailureRemains=False)
+
+
 def classify():
     p=P['load']('g07_login_qualification','5182_g07_jdbc_metrics_cached_classification.py')
     B=p.B
@@ -182,6 +224,11 @@ def classify():
                 unit_folder=E/name
                 assert path.resolve()==unit_folder/'jacoco.exec'
                 verified.append(detached_value_probe(B,row,by_key[row['path'],row['blob']],unit_folder))
+                continue
+            if row.get('actualExit')!=0 and name==settings.get('journalValue') and path.name=='jacoco.exec':
+                unit_folder=E/name
+                assert path.resolve()==unit_folder/'jacoco.exec'
+                verified.append(journal_value_probe(B,row,by_key[row['path'],row['blob']],unit_folder))
                 continue
             if row.get('actualExit')==0 or name not in settings['units'] or path.name!='jacoco.exec':
                 continue
@@ -266,8 +313,8 @@ def retain():
     if original:
         assert original['unresolvedCandidates']==(8 if GROUP=='580' else 1) and original['unqualifiedBinary']==0
     p.p.write(OUT/'qualified-final-private-detail.json',dict(
-        value,verifier=p.p.ref(HERE),scannerExecutionCount=1,initialClassificationExit=int(GROUP in ('532','559')),
-        initialIssue='Exact archived path was relative instead of absolute' if GROUP in ('532','559') else None,
+        value,verifier=p.p.ref(HERE),scannerExecutionCount=1,initialClassificationExit=int(GROUP in ('532','559','588')),
+        initialIssue='Exact archived path was relative instead of absolute' if GROUP in ('532','559','588') else None,
         initialSetupExit=int(GROUP=='551'),
         initialSetupIssue='Public run directory parent was absent before scanner start' if GROUP=='551' else None,
         firstUnclassified=original['unresolvedCandidates'] if original else None,

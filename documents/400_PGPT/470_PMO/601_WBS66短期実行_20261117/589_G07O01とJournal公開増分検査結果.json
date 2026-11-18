@@ -1,0 +1,117 @@
+{
+  "eventId": "PGPT-20261008-6110",
+  "actualExit": 0,
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-G07-O01-JOURNAL-LOCAL-DELTA-20261119",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-G07-O01-JOURNAL-LOCAL-DELTA-20261119",
+    "workAttributionKind": "REQUALIFICATION",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "G07",
+      "WBS-F03/2-3"
+    ],
+    "source": "106aec8a6e10b55f4cabadd5c8f361d576b9ded3",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "fromCommit": "36a0ebd7dc0f266cce16dbde4981b967484f48a4",
+    "run": "PG40084-g07-o01-journal-public-delta-v1",
+    "volatileStaging": "/dev/shm/schubert-nk-pg40084-1000",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.3,
+      "base": 0.8,
+      "high": 2.2
+    },
+    "groupCapPp": 5,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40072-g07-e01-f02-trace-public-delta-v1/scan/manifest.json",
+        "sha256": "291d62e136c3cdd6687e1cf2009c976874641042f0ba00ec579e0e44b5385b19"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40078-p020-o01-restart-independent-v1/manifest.json",
+        "sha256": "3c7e86e84c49d42e66c5909c274930ad704c5b5476b342091ef0ed859882f697"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40080-p01810-detached-journal-values-v1/independent.json",
+        "sha256": "e4c631b6e6b7b9334b570523614e78a0a7b5a3bdec4010b140488cd1e503974c"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40082-f03-cleanup-request-monitor-source-v1/manifest.json",
+        "sha256": "4fce316b3d3c6aaf1ed1610e33fb0534fc4877d84ede23d36b38451c1ca0ed7e"
+      }
+    ],
+    "workScope": "One fixed public interval covering O01 restart tool, detached Journal value PT and published F03 adjudication. Verify both measured binary runs using their own public XML/sha/session, no repeat or formal promotion.",
+    "durableAvailableBytesAtStart": 861569024,
+    "tmpfsAvailableBytesAtStart": 7948283904,
+    "quotaAfter": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-18T19:22:54.697000+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 47,
+        "remainingPercent": 53,
+        "resetsAt": 1795445752,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "quotaReceipt": {
+      "sha256": "b4dd3a2daf70e0fcb681207a426619838ba53744b5d87b2af3d8da3dbadb5e11",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T19:22:54.697000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 47,
+          "remainingPercent": 53,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T19:21:55.713646+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "publicEvidence": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40084-g07-o01-journal-public-delta-v1/scan/manifest.json",
+        "sha256": "33d6a00d34af956e7f43eb9360df83d78dfb88806f1d878916b1f6e19e8ab0c0"
+      }
+    ],
+    "sourceThrough": "106aec8a6e10b55f4cabadd5c8f361d576b9ded3",
+    "versions": 113,
+    "scannerExecutions": 1,
+    "rawScannerExit": 1,
+    "candidates": 29,
+    "confirmedSecrets": 0,
+    "unresolved": 0,
+    "binaryRuns": 2,
+    "firstClassificationGuardExit": 1,
+    "firstIssue": "Relative independent witness location, resolved path and SHA compared before regrouping",
+    "formalIntake": 0,
+    "currentAccepted": 17,
+    "productTests": 0,
+    "result": "Fixed 113 public versions, all 29 scanner coordinates grounded, with disjoint current O01 and Journal binaries. No product test or scanner repeat."
+  }
+}
