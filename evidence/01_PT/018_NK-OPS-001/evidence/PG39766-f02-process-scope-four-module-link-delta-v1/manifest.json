@@ -1,0 +1,148 @@
+{
+  "actualExit": 0,
+  "groupStart": "PGPT-20261008-6019",
+  "source": "df00fdfc2c59ddad1daa16e0f7477856b692d89d",
+  "unchangedPhysical": 1100,
+  "checkedPhysicalDelta": 1,
+  "baseline": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39616-wbs66-four-module-edge-and-handoff-v1/manifest.json",
+    "sha256": "16f1a493a1f284c0476454b645ce96be9d845df19cabc1c96d914863fbd2afe3"
+  },
+  "thirdPartyProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39622-f02-four-module-external-origins-delta-v1/manifest.json",
+    "sha256": "3154c4a69db949a14f725ea516fb22c08c41df33e173928b94567637ea293593"
+  },
+  "normalCurrentFourModuleCompile": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39764-process-resource-scope-four-main-v1/compile/manifest.json",
+    "sha256": "00e96d2b06b9858ae4931f700e5db0b3cf7d793085999d20b3aeb40dc63611c9"
+  },
+  "tool": {
+    "path": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/jdeps",
+    "sha256": "5bd301aba2a9e3f5f964eb5a9fc84750f88e8bf740f47fd550ce246fc9c844e6"
+  },
+  "deltaBefore": {
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/jdeps",
+      "-verbose:class",
+      "-filter:none",
+      "--ignore-missing-deps",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39462-admission-single-cleanup-four-build-v2/src/schubert-nk-batch/target/classes/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.class"
+    ],
+    "actualExit": 0,
+    "stdout": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39766-f02-process-scope-four-module-link-delta-v1/before-jdeps.stdout",
+      "sha256": "86c0cbece31762f04a294dd562e17b7892955e05e4b3000ae3d02af3c57bcb95"
+    },
+    "changedClass": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39462-admission-single-cleanup-four-build-v2/src/schubert-nk-batch/target/classes/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.class",
+      "sha256": "ee3c3802e99f440325b373bc138d31a0623007c433213354c2eb89217e61c9a2"
+    },
+    "edges": {
+      "dev.codex.schubert.nk.batch.platform.ProcessResourceScope$OwnedQuery": "not found",
+      "dev.codex.schubert.nk.batch.platform.ProcessResourceScope$QueryWork": "not found",
+      "dev.codex.schubert.nk.batch.platform.StopGateException": "not found",
+      "dev.codex.schubert.nk.batch.platform.StopGateFailure": "not found",
+      "dev.codex.schubert.nk.storage.ResourceScope": "not found",
+      "dev.codex.schubert.nk.storage.ResourceScope$Acquire": "not found",
+      "java.io.IOException": "java.base",
+      "java.lang.Error": "java.base",
+      "java.lang.InterruptedException": "java.base",
+      "java.lang.Object": "java.base",
+      "java.lang.Runnable": "java.base",
+      "java.lang.RuntimeException": "java.base",
+      "java.lang.String": "java.base",
+      "java.lang.Thread": "java.base",
+      "java.lang.Throwable": "java.base",
+      "java.util.Objects": "java.base",
+      "java.util.function.Consumer": "java.base",
+      "org.jspecify.annotations.NullMarked": "not found"
+    }
+  },
+  "deltaAfter": {
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/jdeps",
+      "-verbose:class",
+      "-filter:none",
+      "--ignore-missing-deps",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39764-process-resource-scope-four-main-v1/src/schubert-nk-batch/target/classes/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.class"
+    ],
+    "actualExit": 0,
+    "stdout": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39766-f02-process-scope-four-module-link-delta-v1/after-jdeps.stdout",
+      "sha256": "3db249e74cd39dd79016ff7345687bfd130832631002bf030667628cd3e47a18"
+    },
+    "changedClass": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39764-process-resource-scope-four-main-v1/src/schubert-nk-batch/target/classes/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.class",
+      "sha256": "71b77902d02e6e16594508d4913bbd2bb2ac2dc4873a3a2fd77a360ec2897611"
+    },
+    "edges": {
+      "dev.codex.schubert.nk.batch.platform.ProcessResourceScope$OwnedQuery": "not found",
+      "dev.codex.schubert.nk.batch.platform.ProcessResourceScope$QueryWork": "not found",
+      "dev.codex.schubert.nk.batch.platform.StopGateException": "not found",
+      "dev.codex.schubert.nk.batch.platform.StopGateFailure": "not found",
+      "dev.codex.schubert.nk.storage.ResourceScope": "not found",
+      "dev.codex.schubert.nk.storage.ResourceScope$Acquire": "not found",
+      "java.io.IOException": "java.base",
+      "java.lang.AssertionError": "java.base",
+      "java.lang.Error": "java.base",
+      "java.lang.InterruptedException": "java.base",
+      "java.lang.Object": "java.base",
+      "java.lang.Runnable": "java.base",
+      "java.lang.RuntimeException": "java.base",
+      "java.lang.String": "java.base",
+      "java.lang.Thread": "java.base",
+      "java.lang.Throwable": "java.base",
+      "java.util.Objects": "java.base",
+      "java.util.function.Consumer": "java.base",
+      "org.jspecify.annotations.NullMarked": "not found"
+    }
+  },
+  "removed": [],
+  "addedJdkTypes": [
+    "java.lang.AssertionError"
+  ],
+  "newInternalEdges": 0,
+  "newThirdPartyEdges": 0,
+  "priorExternalStaticExactPairs": 385,
+  "currentTypedEdgeSummary": {
+    "total": 17853,
+    "internal": 6008,
+    "edges": {
+      "batch->bootstrap": 213,
+      "batch->storage": 678,
+      "bootstrap->storage": 133
+    },
+    "internalUnresolved": [],
+    "externalUnresolved": 0
+  },
+  "buildStdoutStderrArchives": [
+    {
+      "originalPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG39764-process-resource-scope-four-main-v1/compile/maven.stdout.log",
+      "originalSha256": "c60f07f4c560832138ef50b1d422b976e872c41ef939428d42a87887984de848",
+      "archive": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39766-f02-process-scope-four-module-link-delta-v1/maven.stdout.log.gz",
+        "sha256": "3d99814b148554ec23ec6a59d1aeb585776deba702b788e9bfc8d56e8c3e26e2"
+      }
+    },
+    {
+      "originalPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG39764-process-resource-scope-four-main-v1/compile/maven.stderr.log",
+      "originalSha256": "05ed4976f99856c1417eead6c52058f5565d748a00ae7939fa02188545fafda4",
+      "archive": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39766-f02-process-scope-four-module-link-delta-v1/maven.stderr.log.gz",
+        "sha256": "7097fbfb15f55c833e6de8e49ccc4ae96e0a90c2af25ebe49e5a16ff0b5e14ae"
+      }
+    }
+  ],
+  "productTests": 0,
+  "newBuilds": 0,
+  "actualServiceOrHostVerification": false,
+  "apiAndWebTyped": false,
+  "wholeF02Accepted": false,
+  "whole451Accepted": false,
+  "newAcceptance": 0,
+  "verifier": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/5214_f02_one_changed_class_delta.py",
+    "sha256": "6596dfd9edad17f534f9f1fe446a02304c46ad1e0626a302f1964f07b407c75e"
+  },
+  "terminalAtUTC": "2026-11-18T15:00:42.494513+00:00"
+}
