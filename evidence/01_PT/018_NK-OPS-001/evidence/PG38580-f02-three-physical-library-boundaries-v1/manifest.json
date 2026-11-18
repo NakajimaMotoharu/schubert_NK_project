@@ -1,0 +1,45 @@
+{
+  "actualExit": 1,
+  "terminalAtUTC": "2026-11-18T04:34:53.948302+00:00",
+  "originalToolExit": 1,
+  "run": "PG38580-f02-three-physical-library-boundaries-v1",
+  "source": "31748ed33367119278407a3bce0fe2c82641dc1b",
+  "ordinaryCodeClassInit": 0,
+  "moduleCount": 3,
+  "physicalClasses": 455,
+  "dependencies": 18337,
+  "codeUnitAccesses": 13246,
+  "crossModuleEdges": {
+    "bootstrap->storage": 326
+  },
+  "forbiddenIntermoduleEdges": 0,
+  "failedFrameworkFence": 1,
+  "findings": [
+    "FINDING\tFRAMEWORK_FENCE\tdev.codex.schubert.nk.storage.StorageIoException\tjava.sql.SQLException"
+  ],
+  "toolRun": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38580-f02-three-physical-library-boundaries-v1/terminal.json",
+    "sha256": "77f56d00df4f9d8f26890fad56ce3ed8cea904ea3debda0cf86cb629aca44272"
+  },
+  "tool": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5032_PhysicalLibraryBoundaryAudit.java",
+    "sha256": "d064628bcd9f96a0e0dd68ea35d6b9b5b005eb436d31b6733c61a29945d12c5a"
+  },
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38580-f02-three-physical-library-boundaries-v1/archunit.tsv",
+    "sha256": "f9a9dd59206afbd2e794042ef0996d28808f19ee3acff8faf70ac21a4c48d268"
+  },
+  "designConflict": [
+    "SS311 SSC084/088 Storage native-only/no-JDBC and physical rule",
+    "SS332 storage.StorageIoException pure graph and SQLException.next requirement; SSC328 puts next last"
+  ],
+  "related": [
+    "BUG-3233",
+    "YKT-2680",
+    "SSC-461"
+  ],
+  "wholeF02Accepted": false,
+  "formalUpdated": false,
+  "newAcceptance": 0,
+  "retainedOriginalRule": true
+}
