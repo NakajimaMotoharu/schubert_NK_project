@@ -1,0 +1,724 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-18T07:57:34.591268+00:00",
+  "source": "4ea7c333ab0ad88ba1870e4d128153d9b33662c6",
+  "productionCoreMain": "13f2fd9bc1345a4dceb360849add2c329bc9b90f",
+  "priorCore": "421b1f35ee0733c4b357e4a862e1e2dc55e9b780",
+  "run": "PG38926-SSC461-STEP-CLEANUP-V3",
+  "tests": 7,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "newTestDefinitions": 7,
+  "firstProductRunSuccess": true,
+  "firstIndependentPostSuccess": false,
+  "priorUnit6FirstPostRejected": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38915-ssc461-step-cleanup-first-post-gap-v1/manifest.json",
+    "sha256": "3443d978da6c5cefc0aa8c9b933298af0f0418314accf2687ecc1f5b20d8b6ea"
+  },
+  "static": {
+    "ref": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38922-ssc461-step-cleanup-static-v3/manifest.json",
+      "sha256": "bc9b825825bef65d4597d3f4867bea4421d897d1fc104f73fd828662de694e96"
+    },
+    "classifiedInapplicable": 50,
+    "applied": 0,
+    "rootCompilerExact": true,
+    "checkstyle": 0,
+    "spotbugs": 0
+  },
+  "raw": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38930-f02-step-cleanup-independent-v1/unfiltered.tsv",
+    "sha256": "50603a90b50ed058d2ba7722f6876099b54783f46a37a131a5e6d4b61c8fba65"
+  },
+  "rawCommand": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+    "-cp",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38642-schema-raw-line-tool-v1/toolclasses:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+    "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+    "--line-deficits",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG38928-ssc461-step-cleanup-post-v3/jacoco.exec",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38920-ssc461-step-cleanup-prepare-v3/component/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38920-ssc461-step-cleanup-prepare-v3/component/dev/codex/schubert/nk/batch/cleanup/CleanupStopReason.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38920-ssc461-step-cleanup-prepare-v3/component/dev/codex/schubert/nk/batch/cleanup/CleanupStoppedException.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38920-ssc461-step-cleanup-prepare-v3/component/dev/codex/schubert/nk/batch/cleanup/MaintenanceMutationGuard.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38920-ssc461-step-cleanup-prepare-v3/component/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38920-ssc461-step-cleanup-prepare-v3/component/dev/codex/schubert/nk/batch/cleanup/StepCleanupSummary.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38920-ssc461-step-cleanup-prepare-v3/component/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38920-ssc461-step-cleanup-prepare-v3/component/dev/codex/schubert/nk/batch/repository/BatchRun.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38920-ssc461-step-cleanup-prepare-v3/component/dev/codex/schubert/nk/batch/repository/BatchStep.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38920-ssc461-step-cleanup-prepare-v3/component/dev/codex/schubert/nk/batch/repository/BatchStepAttempt.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38920-ssc461-step-cleanup-prepare-v3/component/dev/codex/schubert/nk/batch/repository/CleanupCounts.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38920-ssc461-step-cleanup-prepare-v3/component/dev/codex/schubert/nk/batch/repository/CleanupKind.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38920-ssc461-step-cleanup-prepare-v3/component/dev/codex/schubert/nk/batch/repository/CleanupStepChunk$Reason.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38920-ssc461-step-cleanup-prepare-v3/component/dev/codex/schubert/nk/batch/repository/CleanupStepChunk.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38920-ssc461-step-cleanup-prepare-v3/component/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38920-ssc461-step-cleanup-prepare-v3/component/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38920-ssc461-step-cleanup-prepare-v3/component/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38920-ssc461-step-cleanup-prepare-v3/component/dev/codex/schubert/nk/batch/repository/RunReferences.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38920-ssc461-step-cleanup-prepare-v3/component/dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Guard.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38920-ssc461-step-cleanup-prepare-v3/component/dev/codex/schubert/nk/storage/StorageIoException$Reason.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38920-ssc461-step-cleanup-prepare-v3/component/dev/codex/schubert/nk/storage/StorageIoException.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38920-ssc461-step-cleanup-prepare-v3/component/dev/codex/schubert/nk/storage/package-info.class"
+  ],
+  "targetCounters": {
+    "INSTRUCTION": [
+      18,
+      296
+    ],
+    "BRANCH": [
+      7,
+      41
+    ],
+    "LINE": [
+      5,
+      77
+    ],
+    "COMPLEXITY": [
+      8,
+      23
+    ],
+    "METHOD": [
+      1,
+      6
+    ],
+    "CLASS": [
+      0,
+      1
+    ]
+  },
+  "targetDeficitLines": [
+    "DEFICIT\tdev/codex/schubert/nk/batch/cleanup/StepCleanupService\t<init>\t()V\t30\tINSTRUCTION:3:0\tBRANCH:0:0",
+    "DEFICIT\tdev/codex/schubert/nk/batch/cleanup/StepCleanupService\t<init>\t()V\t31\tINSTRUCTION:1:0\tBRANCH:0:0",
+    "DEFICIT\tdev/codex/schubert/nk/batch/cleanup/StepCleanupService\ttransaction\t(Ljava/sql/Connection;Ldev/codex/schubert/nk/batch/repository/BatchStepAttempt;Ldev/codex/schubert/nk/batch/repository/CleanupKind;Ljava/util/Optional;)Ldev/codex/schubert/nk/batch/repository/CleanupStepChunk;\t104\tINSTRUCTION:2:2\tBRANCH:1:1",
+    "DEFICIT\tdev/codex/schubert/nk/batch/cleanup/StepCleanupService\ttransaction\t(Ljava/sql/Connection;Ldev/codex/schubert/nk/batch/repository/BatchStepAttempt;Ldev/codex/schubert/nk/batch/repository/CleanupKind;Ljava/util/Optional;)Ldev/codex/schubert/nk/batch/repository/CleanupStepChunk;\t110\tINSTRUCTION:0:12\tBRANCH:3:5",
+    "DEFICIT\tdev/codex/schubert/nk/batch/cleanup/StepCleanupService\ttransaction\t(Ljava/sql/Connection;Ldev/codex/schubert/nk/batch/repository/BatchStepAttempt;Ldev/codex/schubert/nk/batch/repository/CleanupKind;Ljava/util/Optional;)Ldev/codex/schubert/nk/batch/repository/CleanupStepChunk;\t118\tINSTRUCTION:0:9\tBRANCH:2:4",
+    "DEFICIT\tdev/codex/schubert/nk/batch/cleanup/StepCleanupService\ttransaction\t(Ljava/sql/Connection;Ldev/codex/schubert/nk/batch/repository/BatchStepAttempt;Ldev/codex/schubert/nk/batch/repository/CleanupKind;Ljava/util/Optional;)Ldev/codex/schubert/nk/batch/repository/CleanupStepChunk;\t122\tINSTRUCTION:2:0\tBRANCH:0:0",
+    "DEFICIT\tdev/codex/schubert/nk/batch/cleanup/StepCleanupService\ttransaction\t(Ljava/sql/Connection;Ldev/codex/schubert/nk/batch/repository/BatchStepAttempt;Ldev/codex/schubert/nk/batch/repository/CleanupKind;Ljava/util/Optional;)Ldev/codex/schubert/nk/batch/repository/CleanupStepChunk;\t123\tINSTRUCTION:5:0\tBRANCH:0:0",
+    "DEFICIT\tdev/codex/schubert/nk/batch/cleanup/StepCleanupService\tcheck\t(J)V\t137\tINSTRUCTION:0:3\tBRANCH:1:1",
+    "DEFICIT\tdev/codex/schubert/nk/batch/cleanup/StepCleanupService\tcheck\t(J)V\t138\tINSTRUCTION:5:0\tBRANCH:0:0"
+  ],
+  "allPhysicalRawCounters": {
+    "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph": {
+      "INSTRUCTION": [
+        0,
+        15
+      ],
+      "BRANCH": [
+        0,
+        2
+      ],
+      "LINE": [
+        0,
+        3
+      ],
+      "COMPLEXITY": [
+        0,
+        3
+      ],
+      "METHOD": [
+        0,
+        2
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/cleanup/CleanupStopReason": {
+      "INSTRUCTION": [
+        9,
+        61
+      ],
+      "BRANCH": [
+        0,
+        0
+      ],
+      "LINE": [
+        0,
+        6
+      ],
+      "COMPLEXITY": [
+        2,
+        3
+      ],
+      "METHOD": [
+        2,
+        3
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/cleanup/CleanupStoppedException": {
+      "INSTRUCTION": [
+        0,
+        13
+      ],
+      "BRANCH": [
+        0,
+        0
+      ],
+      "LINE": [
+        0,
+        4
+      ],
+      "COMPLEXITY": [
+        0,
+        2
+      ],
+      "METHOD": [
+        0,
+        2
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/cleanup/MaintenanceMutationGuard": {
+      "INSTRUCTION": [
+        25,
+        123
+      ],
+      "BRANCH": [
+        7,
+        13
+      ],
+      "LINE": [
+        4,
+        29
+      ],
+      "COMPLEXITY": [
+        7,
+        7
+      ],
+      "METHOD": [
+        0,
+        4
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/cleanup/StepCleanupService": {
+      "INSTRUCTION": [
+        18,
+        296
+      ],
+      "BRANCH": [
+        7,
+        41
+      ],
+      "LINE": [
+        5,
+        77
+      ],
+      "COMPLEXITY": [
+        8,
+        23
+      ],
+      "METHOD": [
+        1,
+        6
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/cleanup/StepCleanupSummary": {
+      "INSTRUCTION": [
+        23,
+        82
+      ],
+      "BRANCH": [
+        4,
+        8
+      ],
+      "LINE": [
+        2,
+        12
+      ],
+      "COMPLEXITY": [
+        10,
+        7
+      ],
+      "METHOD": [
+        6,
+        5
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/repository/BatchRepositoryException": {
+      "INSTRUCTION": [
+        4,
+        0
+      ],
+      "BRANCH": [
+        0,
+        0
+      ],
+      "LINE": [
+        2,
+        0
+      ],
+      "COMPLEXITY": [
+        1,
+        0
+      ],
+      "METHOD": [
+        1,
+        0
+      ],
+      "CLASS": [
+        1,
+        0
+      ]
+    },
+    "dev/codex/schubert/nk/batch/repository/BatchRun": {
+      "INSTRUCTION": [
+        14,
+        38
+      ],
+      "BRANCH": [
+        3,
+        3
+      ],
+      "LINE": [
+        2,
+        8
+      ],
+      "COMPLEXITY": [
+        6,
+        3
+      ],
+      "METHOD": [
+        3,
+        3
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/repository/BatchStep": {
+      "INSTRUCTION": [
+        12,
+        124
+      ],
+      "BRANCH": [
+        0,
+        0
+      ],
+      "LINE": [
+        1,
+        14
+      ],
+      "COMPLEXITY": [
+        3,
+        3
+      ],
+      "METHOD": [
+        3,
+        3
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/repository/BatchStepAttempt": {
+      "INSTRUCTION": [
+        27,
+        84
+      ],
+      "BRANCH": [
+        7,
+        7
+      ],
+      "LINE": [
+        4,
+        12
+      ],
+      "COMPLEXITY": [
+        11,
+        8
+      ],
+      "METHOD": [
+        4,
+        8
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/repository/CleanupCounts": {
+      "INSTRUCTION": [
+        11,
+        47
+      ],
+      "BRANCH": [
+        5,
+        5
+      ],
+      "LINE": [
+        1,
+        4
+      ],
+      "COMPLEXITY": [
+        7,
+        5
+      ],
+      "METHOD": [
+        2,
+        5
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/repository/CleanupKind": {
+      "INSTRUCTION": [
+        15,
+        144
+      ],
+      "BRANCH": [
+        0,
+        0
+      ],
+      "LINE": [
+        2,
+        16
+      ],
+      "COMPLEXITY": [
+        4,
+        4
+      ],
+      "METHOD": [
+        4,
+        4
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/repository/CleanupStepChunk$Reason": {
+      "INSTRUCTION": [
+        0,
+        60
+      ],
+      "BRANCH": [
+        0,
+        0
+      ],
+      "LINE": [
+        0,
+        5
+      ],
+      "COMPLEXITY": [
+        0,
+        5
+      ],
+      "METHOD": [
+        0,
+        5
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/repository/CleanupStepChunk": {
+      "INSTRUCTION": [
+        28,
+        157
+      ],
+      "BRANCH": [
+        9,
+        25
+      ],
+      "LINE": [
+        3,
+        23
+      ],
+      "COMPLEXITY": [
+        15,
+        15
+      ],
+      "METHOD": [
+        6,
+        7
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/repository/CleanupStepRepository": {
+      "INSTRUCTION": [
+        75,
+        250
+      ],
+      "BRANCH": [
+        13,
+        15
+      ],
+      "LINE": [
+        17,
+        58
+      ],
+      "COMPLEXITY": [
+        11,
+        10
+      ],
+      "METHOD": [
+        0,
+        7
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures": {
+      "INSTRUCTION": [
+        25,
+        0
+      ],
+      "BRANCH": [
+        8,
+        0
+      ],
+      "LINE": [
+        6,
+        0
+      ],
+      "COMPLEXITY": [
+        5,
+        0
+      ],
+      "METHOD": [
+        1,
+        0
+      ],
+      "CLASS": [
+        1,
+        0
+      ]
+    },
+    "dev/codex/schubert/nk/batch/repository/RunReferenceRepository": {
+      "INSTRUCTION": [
+        65,
+        165
+      ],
+      "BRANCH": [
+        14,
+        10
+      ],
+      "LINE": [
+        15,
+        44
+      ],
+      "COMPLEXITY": [
+        12,
+        6
+      ],
+      "METHOD": [
+        0,
+        6
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/repository/RunReferences": {
+      "INSTRUCTION": [
+        42,
+        20
+      ],
+      "BRANCH": [
+        13,
+        1
+      ],
+      "LINE": [
+        3,
+        4
+      ],
+      "COMPLEXITY": [
+        14,
+        2
+      ],
+      "METHOD": [
+        7,
+        2
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Guard": {
+      "INSTRUCTION": [
+        4,
+        20
+      ],
+      "BRANCH": [
+        2,
+        2
+      ],
+      "LINE": [
+        0,
+        5
+      ],
+      "COMPLEXITY": [
+        2,
+        2
+      ],
+      "METHOD": [
+        0,
+        2
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason": {
+      "INSTRUCTION": [
+        50,
+        0
+      ],
+      "BRANCH": [
+        0,
+        0
+      ],
+      "LINE": [
+        4,
+        0
+      ],
+      "COMPLEXITY": [
+        5,
+        0
+      ],
+      "METHOD": [
+        5,
+        0
+      ],
+      "CLASS": [
+        1,
+        0
+      ]
+    },
+    "dev/codex/schubert/nk/storage/StorageIoException": {
+      "INSTRUCTION": [
+        29,
+        64
+      ],
+      "BRANCH": [
+        3,
+        9
+      ],
+      "LINE": [
+        7,
+        16
+      ],
+      "COMPLEXITY": [
+        6,
+        5
+      ],
+      "METHOD": [
+        4,
+        1
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/storage/package-info": {
+      "INSTRUCTION": [
+        0,
+        0
+      ],
+      "BRANCH": [
+        0,
+        0
+      ],
+      "LINE": [
+        0,
+        0
+      ],
+      "COMPLEXITY": [
+        0,
+        0
+      ],
+      "METHOD": [
+        0,
+        0
+      ],
+      "CLASS": [
+        0,
+        0
+      ]
+    }
+  },
+  "SQLAndOtherMainCodeByInverseExact": true,
+  "ABI": {
+    "className": "dev.codex.schubert.nk.batch.cleanup.StepCleanupService",
+    "oldClass": "7eccde012567aacdee2ca57afe0c17c22887735b018d75633044f6b449dbdee5",
+    "newClass": "1e6850ba8cfcc433dd396602e10c804cee800e0a6d75ebbb360e0d11a4f3050a",
+    "publicEqual": true,
+    "javapPublicSha256": "beb0748ebf7809dbf86b5fbe01348fae05d3d94f06b175fb2d9edb38715a25d2",
+    "baselineCompile": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38760-wbs66-four-own-main-current-v1/compile/manifest.json",
+      "sha256": "9150e6f095658478a0b371b38a680871bba0831b50bd4e12ed8d13e5ace154f5"
+    },
+    "baselineQualification": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38764-wbs66-four-current-independent-v1/manifest.json",
+      "sha256": "16291db6b23b38b02224e53e2a6d632b6676378b735009c0955605144540dd4a"
+    }
+  },
+  "exactPhysical": 22,
+  "positiveCrc": 18,
+  "guardActualTwoPositiveDefaultMethods": true,
+  "unit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38926-ssc461-step-cleanup-unit-v3/manifest.json",
+    "sha256": "6ed64417a14b2ce88a231cfc28635cf044525fc7532dfbde6e11df1c333539d6"
+  },
+  "post": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38928-ssc461-step-cleanup-post-v3/manifest.json",
+    "sha256": "5f2cf3df61fffe1f9ed61f6b5c32686b2b7c161c3fe1a19778cc3d606608f286"
+  },
+  "exec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38928-ssc461-step-cleanup-post-v3/jacoco.exec",
+    "sha256": "42ab2f54ed46cd2025b03565215bb3235fa91adfb7e9a1af7200a27d2b264425"
+  },
+  "classInitArchive": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38930-f02-step-cleanup-independent-v1/class-init.stdout.gz",
+    "sha256": "f2f9afd2d32268e1370ea4278ddce689fa09fb0ac8999498baead5587b9d9a8a"
+  },
+  "originalClassInit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38928-ssc461-step-cleanup-post-v3/original-class-init.stdout",
+    "sha256": "23a9896aa79e80b6d1ddb5a86573296b149d8f54462787ba6558323c88c7d8d6"
+  },
+  "oldExecUnion": false,
+  "coverageExclusions": [],
+  "wholeScopeFour100": false,
+  "whole451Accepted": false,
+  "actualHeldActions": 0,
+  "actualDbOperations": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortCompletionRate": null
+}
