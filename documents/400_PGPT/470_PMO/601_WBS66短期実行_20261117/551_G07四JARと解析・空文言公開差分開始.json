@@ -1,0 +1,68 @@
+{
+  "eventId": "PGPT-20261008-6073",
+  "groupId": "PGPT-WBS66-G07-FOUR-JARS-BATCH-EMPTY-20261119",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-18T17:47:48.464000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 45,
+      "remainingPercent": 55,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-G07-FOUR-JARS-BATCH-EMPTY-20261119",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-G07-FOUR-JARS-BATCH-EMPTY-20261119",
+    "workAttributionKind": "REQUALIFICATION",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "G07",
+      "WBS-F03/2-3"
+    ],
+    "source": "689bbff6b4d7a3fd3365aa95126610c48ee71f75",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "fromCommit": "ecc875c54e6262e2af8ebb3af643798300112bc7",
+    "run": "PG39998-g07-jars-batch-empty-public-delta-v1",
+    "volatileStaging": "/dev/shm/schubert-nk-pg39998-1000",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.35,
+      "base": 1.1,
+      "high": 3.15
+    },
+    "groupCapPp": 5,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39974-g07-cache-session-range-public-delta-v1/scan/manifest.json",
+        "sha256": "41dbf58f85766d4f8ee76fbcc68b979b0c07e10f760196672fab4b72ebc88093"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39980-f02-current-four-production-jars-v1/independent.json",
+        "sha256": "333ff2a743b971018c471f3041b0ed1bddf3fd325f283db3f816956b3d7bfe5b"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39984-f03-batch-three-current-pmd-v1/independent.json",
+        "sha256": "8d8b25afb0634e92cc50d0669c7e8ea5cfeca68f74a8e70d5a753fd06be5cf93"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39994-p020-search-empty-independent-v1/manifest.json",
+        "sha256": "3f252e8bac345079192d4523d08ae78dd1fc57038297bd5662acc28859947192"
+      }
+    ],
+    "workScope": "One incremental redacted scan of tracked public blob versions; qualify exact package, source review and tool coverage origin. Exclude protected files and preserved untracked paths, no product jobs."
+  }
+}

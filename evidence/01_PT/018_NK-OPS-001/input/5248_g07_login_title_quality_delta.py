@@ -35,6 +35,15 @@ CONFIG = {
                   'PG39964-p020-invalid-range165-v1': 'PG39970-p020-invalid-range-independent-v1',
                   'PG39965-p020-invalid-range165-v2': 'PG39970-p020-invalid-range-independent-v1'},
     },
+    '551': {
+        'history': ('PG39974-g07-cache-session-range-public-delta-v1',
+                    'PG39932-g07-four-brand-public-delta-v1',
+                    'PG39914-g07-approved-login-title-and-quality-delta-v1',
+                    'PG39880-g07-service-state-lock-public-delta-v1',
+                    'PG39730-g07-weblog-session-and-comparator-public-delta-v1'),
+        'units': {'PG39990-p020-search-empty170-v1': ('unit', 170)},
+        'post': 'PG39994-p020-search-empty-independent-v1',
+    },
 }
 GROUP=sys.argv[2] if len(sys.argv)==3 else '532'
 settings=CONFIG[GROUP]
@@ -141,8 +150,16 @@ def retain():
     set_worker(p.w)
     value=p.p.load(OUT/'qualified-cached-initial.json')
     assert value['unresolvedCandidates']==value['unqualifiedBinary']==0
-    p.p.write(OUT/'qualified-final-private-detail.json',dict(value,verifier=p.p.ref(HERE),scannerExecutionCount=1,initialClassificationExit=int(GROUP=='532'),
-                   initialIssue='Exact archived path was relative instead of absolute' if GROUP=='532' else None))
+    original=p.p.load(RETAIN/'initial-classification'/'qualified-cached-initial.json') if GROUP=='551' else None
+    if original:
+        assert original['unresolvedCandidates']==1 and original['unqualifiedBinary']==0
+    p.p.write(OUT/'qualified-final-private-detail.json',dict(
+        value,verifier=p.p.ref(HERE),scannerExecutionCount=1,initialClassificationExit=int(GROUP=='532'),
+        initialIssue='Exact archived path was relative instead of absolute' if GROUP=='532' else None,
+        initialSetupExit=int(GROUP=='551'),
+        initialSetupIssue='Public run directory parent was absent before scanner start' if GROUP=='551' else None,
+        firstUnclassified=original['unresolvedCandidates'] if original else None,
+        firstClassification=tuple(p.p.ref(f) for f in sorted((RETAIN/'initial-classification').iterdir())) if original else ()))
     p.DETAILS=('scan-terminal.json','qualified-cached-initial.json','qualified-final-private-detail.json',
                'classified-findings.json','remaining-origins.json','binary-qualification.json')
     p.main()
