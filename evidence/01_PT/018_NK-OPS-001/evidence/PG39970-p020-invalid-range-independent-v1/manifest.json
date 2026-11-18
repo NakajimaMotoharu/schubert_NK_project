@@ -1,0 +1,245 @@
+{
+  "actualExit": 0,
+  "source": "fb7318d2933be50e899db7fd30a23614e3aeddd0",
+  "run": "PG39965-p020-invalid-range165-v2",
+  "unit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39965-p020-invalid-range165-v2/manifest.json",
+    "sha256": "dc56fdcd8308ad3cb5aab06eba5a24d8b2b59d84c4269681d536f3e5f434de8e"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39969-p020-invalid-range-static-v2/manifest.json",
+    "sha256": "8aa66e2ae65943d74b7732c6f7ffc95ba51d523077970797317aebc86fe433da"
+  },
+  "firstStaticFailure": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39968-p020-invalid-range-static-v1/manifest.json",
+    "sha256": "a8abedcb9dbf5dc14a7f0ff8ac0c392be700018844a406f8d9259bad072d2f66"
+  },
+  "firstUnit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39964-p020-invalid-range165-v1/manifest.json",
+    "sha256": "6c4a5116cb34460e378d93574b3041d44a398020bcceea64c13c5a835078a725"
+  },
+  "originalTests": 161,
+  "newDefinitions": 4,
+  "tests": 165,
+  "suites": 20,
+  "firstSuccess": 165,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "independentOracle": {
+    "design": {
+      "UI237": {
+        "path": "documents/200_UI/230_インターフェース/237_大容量結果・メディア配信設計.md",
+        "sha256": "e94d2f76c5238e6c70f962c8e019f80b511a95220d8958744d9b0325b7aa96b0"
+      },
+      "UI264": {
+        "path": "documents/200_UI/260_引継ぎ・監査/264_現行互換性Characterization Test仕様.md",
+        "sha256": "0b0973e6e1e94858e840bc1b85df1daff35e3a0fe9f28ea12331823c2cbcf781"
+      },
+      "SS333": {
+        "path": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+        "sha256": "20a5caaddf102186787680b06199821bebcf5522f65feebd41635d90ae228f12"
+      }
+    },
+    "artifacts": [
+      {
+        "path": "program/characterization/baseline/current/artifacts/CHR-M04.json",
+        "sha256": "289b0b1b8bc0282464eac51bbf5a51ae5bd05486efdfd42509570dc5ba691b8f"
+      },
+      {
+        "path": "program/characterization/baseline/current/artifacts/CHR-M07.json",
+        "sha256": "3114210545501ed9311fd342b59472e7fb450f591597d1b4a811648ae0af2a3b"
+      }
+    ],
+    "currentAndNk": {
+      "CHR-M04:/invalidRange/status": [
+        500,
+        416
+      ],
+      "CHR-M04:/invalidRange/contentRange": [
+        "bytes 999999999999-84084291/84084292",
+        "bytes */84084292"
+      ],
+      "CHR-M07:/invalidRange/status": [
+        500,
+        416
+      ],
+      "CHR-M07:/invalidRange/contentRange": [
+        "bytes 999999999999-3388626/3388627",
+        "bytes */3388627"
+      ]
+    },
+    "selectors": {
+      "/invalidRange/status": "status",
+      "/invalidRange/contentRange": "content-range"
+    }
+  },
+  "testIds": {
+    "PT-CHR-DEF034": "requiresTheSecondMediaCaseToReportItsOwnRangeStatus",
+    "PT-CHR-DEF035": "rejectsAContentRangeWithTheWrongVideoSize",
+    "PT-CHR-DEF036": "rejectsTheOtherApprovedHeaderSelectorAtTheStatusPointer",
+    "PT-CHR-DEF037": "rejectsAnInvalidRangeStatusOfAnotherHttpError"
+  },
+  "raw": {
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38642-schema-raw-line-tool-v1/toolclasses:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+      "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+      "--line-deficits",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG39965-p020-invalid-range165-v2/jacoco.exec",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39965-p020-invalid-range165-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/ArtifactComparator$ComparisonResult.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39965-p020-invalid-range165-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/ArtifactComparator.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39965-p020-invalid-range165-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope$Open.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39965-p020-invalid-range165-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope$Release.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39965-p020-invalid-range165-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope$Work.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39965-p020-invalid-range165-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39965-p020-invalid-range165-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39965-p020-invalid-range165-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$BaselineNumbers.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39965-p020-invalid-range165-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$FileJsonOutput.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39965-p020-invalid-range165-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$JsonOutput.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39965-p020-invalid-range165-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$TreeStats.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39965-p020-invalid-range165-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$UsableSpace.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39965-p020-invalid-range165-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39965-p020-invalid-range165-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateContractValidator$ValidationResult.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39965-p020-invalid-range165-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateContractValidator.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39965-p020-invalid-range165-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/TargetAdapter$Target.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39965-p020-invalid-range165-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/TargetAdapter.class"
+    ],
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39970-p020-invalid-range-independent-v1/raw.tsv",
+      "sha256": "42a21cd25c4620888a3c66e5e4f4dc8a9358851e7a5a3590d598160fa10794e9"
+    },
+    "actualExit": 0,
+    "noCode": [
+      "dev/codex/schubert/characterization/CharacterizationIoScope$Open",
+      "dev/codex/schubert/characterization/CharacterizationIoScope$Release",
+      "dev/codex/schubert/characterization/CharacterizationIoScope$Work",
+      "dev/codex/schubert/characterization/GateCli$JsonOutput",
+      "dev/codex/schubert/characterization/GateCli$UsableSpace"
+    ],
+    "tool": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38642-f03-schema-raw-line-deficits-v1/begin.json",
+      "sha256": "7f91863199af3f9ce301b3b3eeefc24ff34fb8825524669fe8469bee1ccf8786"
+    },
+    "lineDeficits": [
+      [
+        "dev/codex/schubert/characterization/GateCli",
+        "main",
+        "([Ljava/lang/String;)V",
+        "92",
+        "INSTRUCTION:0:52",
+        "BRANCH:1:25"
+      ],
+      [
+        "dev/codex/schubert/characterization/GateCli",
+        "main",
+        "([Ljava/lang/String;)V",
+        "98",
+        "INSTRUCTION:7:0",
+        "BRANCH:0:0"
+      ],
+      [
+        "dev/codex/schubert/characterization/GateCli",
+        "preflight",
+        "(Ljava/nio/file/Path;Ljava/nio/file/Path;)V",
+        "202",
+        "INSTRUCTION:4:0",
+        "BRANCH:0:0"
+      ],
+      [
+        "dev/codex/schubert/characterization/GateCli",
+        "preflight",
+        "(Ljava/nio/file/Path;Ljava/nio/file/Path;)V",
+        "203",
+        "INSTRUCTION:1:0",
+        "BRANCH:0:0"
+      ]
+    ],
+    "rawTotals": {
+      "LINE": {
+        "missed": 2,
+        "covered": 1514
+      },
+      "METHOD": {
+        "missed": 1,
+        "covered": 234
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 12
+      },
+      "BRANCH": {
+        "missed": 1,
+        "covered": 928
+      },
+      "INSTRUCTION": {
+        "missed": 12,
+        "covered": 8045
+      }
+    },
+    "missedMethods": [
+      {
+        "className": "dev/codex/schubert/characterization/GateCli",
+        "method": "main",
+        "descriptor": "([Ljava/lang/String;)V",
+        "misses": [
+          "INSTRUCTION:7:141",
+          "BRANCH:1:27",
+          "LINE:1:27",
+          "COMPLEXITY:1:19"
+        ]
+      },
+      {
+        "className": "dev/codex/schubert/characterization/GateCli",
+        "method": "preflight",
+        "descriptor": "(Ljava/nio/file/Path;Ljava/nio/file/Path;)V",
+        "misses": [
+          "INSTRUCTION:5:0",
+          "LINE:2:0",
+          "COMPLEXITY:1:0",
+          "METHOD:1:0"
+        ]
+      }
+    ]
+  },
+  "comparatorCounters": {
+    "INSTRUCTION": 1440,
+    "BRANCH": 136,
+    "LINE": 272,
+    "COMPLEXITY": 112,
+    "METHOD": 44,
+    "CLASS": 2
+  },
+  "originalBaselineUnchanged": true,
+  "oldCoverageTransferred": false,
+  "pmdRaw": 6,
+  "pmdApplicable": 0,
+  "pmdUnclassified": 0,
+  "pmdReviews": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39970-p020-invalid-range-independent-v1/pmd-per-site.json",
+    "sha256": "cb0dccfb3f234a4ecd857781487231082c108a7d0913756e3af4c5023425f251"
+  },
+  "remainingRuntimePreflight": "BUG-3311",
+  "closedLocal": [
+    "BUG-3318",
+    "BUG-3319"
+  ],
+  "horizontalOpen": "YKT-2699",
+  "actualNkChr": false,
+  "actualAuthenticationOrBackendActions": 0,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "productTests": 0,
+  "formalUpdated": false,
+  "classInit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39970-p020-invalid-range-independent-v1/class-init.log.gz",
+    "sha256": "6011a020166320155fb8f47ec6ca8b9f3626d47815bf11b85f5d8de0a120263f"
+  },
+  "terminalAtUTC": "2026-11-18T17:22:07.058809+00:00",
+  "verifier": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/5250_p020_cache_and_session_independent.py",
+    "sha256": "8066e3b7b1bef9532215fded1dd907040b1df15d767e6d487f48eeadb1ef0cc0"
+  }
+}

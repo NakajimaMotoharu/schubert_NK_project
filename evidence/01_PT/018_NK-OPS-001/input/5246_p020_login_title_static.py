@@ -13,7 +13,7 @@ BASE=E/'PG39832-p020-definition-static-v1'
 PREVIOUS=E/'PG39830-p020-definition-green144-v3'
 
 
-def main(unit_name, out_name):
+def main(unit_name, out_name, prior_same_main=None):
     unit_dir=E/unit_name
     out=(E/out_name).resolve()
     unit_path=unit_dir/'manifest.json'
@@ -24,7 +24,8 @@ def main(unit_name, out_name):
     assert actual['source']==begin['source']==R['git']('rev-parse','HEAD').decode().strip()
     assert (actual['expected'],unit_name) in {(148,'PG39904-p020-approved-login-title148-v1'),
         (153,'PG39922-p020-approved-all-brand153-v1'),(153,'PG39923-p020-approved-all-brand153-v2'),
-        (161,'PG39944-p020-cache-and-session161-v1'),(161,'PG39946-p020-cache-and-session161-v2')}
+        (161,'PG39944-p020-cache-and-session161-v1'),(161,'PG39946-p020-cache-and-session161-v2'),
+        (165,'PG39964-p020-invalid-range165-v1'),(165,'PG39965-p020-invalid-range165-v2')}
     assert actual['stages']['unit']['actualExit']==0
     snapshot=Path(begin['snapshot'])
     classes=Path(actual['classesDir'])
@@ -47,15 +48,37 @@ def main(unit_name, out_name):
         commands[name]=command
     save(out/'begin.json',dict(source=actual['source'],unit=ref(unit_path),commands=commands,
           priorToolRecipe=ref(BASE/'begin.json'),toolAndRulePins=previous['toolAndRulePins'],sourceInputs=src,productActions=0))
+    old_typed=None
+    if prior_same_main:
+        assert unit_name=='PG39965-p020-invalid-range165-v2' and prior_same_main=='PG39968-p020-invalid-range-static-v1'
+        receipt=E/prior_same_main/'manifest.json'
+        before=read(receipt)
+        prior_manifest=Path(before['unit']['path'])
+        assert ref(prior_manifest)==before['unit']
+        prior=read(prior_manifest)
+        assert before['allPhysicalUnchanged'] and before['stageExits']['spotbugs']==0
+        assert prior['mainPhysical']==actual['mainPhysical']==R['physical'](classes)
+        source_inputs={p:h for p,h in begin['inputHashes'].items() if '/src/main/' in p or p.endswith('pom.xml')}
+        assert all(prior['inputHashes'][p]==h for p,h in source_inputs.items())
+        pin=before['reports']['spotbugs']['raw']
+        old_xml=Path(pin['path'])
+        assert ref(old_xml)==pin and before['reports']['spotbugs']['exactPhysical']
+        old_typed=dict(receipt=ref(receipt),report=pin,actualArchivedExit=0,executedInCurrentScope=False)
+        commands.pop('spotbugs')
     with ThreadPoolExecutor(max_workers=3) as pool:
         futures=[pool.submit(Q['run'],name,cmd,out,snapshot) for name,cmd in commands.items()]
         stages=dict(fut.result() for fut in futures)
-    (out/'spotbugs.xml').write_bytes((classes.parent/'spotbugsXml.xml').read_bytes())
+    if old_typed:
+        stages['spotbugs']={'actualExit':0,'priorExactMain':old_typed}
+        (out/'spotbugs.xml').write_bytes(Path(old_typed['report']['path']).read_bytes())
+    else:
+        (out/'spotbugs.xml').write_bytes((classes.parent/'spotbugsXml.xml').read_bytes())
     result={name:Q['parse_report'](name,out/(name+'.xml'),snapshot,src,set(actual['mainPhysical']))
             for name in ('checkstyle','pmd','spotbugs')}
     manifests=dict(source=actual['source'],stageExits={k:v['actualExit'] for k,v in stages.items()},reports=result,
         unit=ref(unit_path),allPhysicalUnchanged=R['physical'](classes)==actual['mainPhysical'],
-        coverageWaiver=0,productActions=0,whole451Accepted=False,terminalAtUTC=R['utc'](),verifier=ref(HERE))
+        coverageWaiver=0,productActions=0,priorExactMainTyped=old_typed,whole451Accepted=False,
+        terminalAtUTC=R['utc'](),verifier=ref(HERE))
     save(out/'manifest.json',manifests)
     print(manifests['stageExits'],result)
 

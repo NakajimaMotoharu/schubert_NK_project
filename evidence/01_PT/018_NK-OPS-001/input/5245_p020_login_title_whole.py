@@ -20,6 +20,10 @@ PHASES = {
         '538_P020*', E/'PG39923-p020-approved-all-brand153-v2', 153, 161),
     'PG39946-p020-cache-and-session161-v2': (
         '538_P020*', E/'PG39923-p020-approved-all-brand153-v2', 153, 161),
+    'PG39964-p020-invalid-range165-v1': (
+        '540_P020*', E/'PG39944-p020-cache-and-session161-v1', 161, 165),
+    'PG39965-p020-invalid-range165-v2': (
+        '540_P020*', E/'PG39944-p020-cache-and-session161-v1', 161, 165),
 }
 TEST_PACKAGE='dev.codex.schubert.characterization.'
 JAVA_DIR=Path(TEST_PACKAGE.rstrip('.').replace('.','/'))
