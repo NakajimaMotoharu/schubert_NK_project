@@ -1,0 +1,67 @@
+{
+  "eventId": "PGPT-20261008-5927",
+  "groupId": "PGPT-WBS66-P01810-WIPING-STREAM-GENERAL-DIAGNOSTIC-20261118",
+  "baseCore": "29f3b433952ad19d4ad34c4e1a31ed310bebde6a",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-18T09:37:12.071000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 33,
+      "remainingPercent": 67,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P01810-WIPING-STREAM-GENERAL-DIAGNOSTIC-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-P01810-WIPING-STREAM-GENERAL-DIAGNOSTIC-20261118",
+    "workAttributionKind": "ADDITIONAL_FINDING",
+    "workScope": "WBS-P018-10.03 CATALOG-015 with P006-01 owner. Correct generic WipingByteArrayOutputStream no-arg toString length disclosure under fixed diagnostic contract. Keep size(), wipe/lifetime, byte boundaries, canonical serialization/HMAC and all caller contracts. Publish only canonical SS and SSC register first. Existing two buffer tests and HMAC smoke plus one fixed independent empty/different lengths/cleared diagnostic case. No actual keys, provider files, protected SnapshotCodec/FingerprintKeyRing or runtime caller actions.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37452-p01810-independent-case-catalog-v1/planned93-independent-cases.json",
+        "sha256": "b830c7bbbbb1375f5d11e1a67c22608e0ccf8f829febfa1b24fe12194471d54c"
+      },
+      {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.java",
+        "sha256": "1f751a0267c7d9f894806d67e5b9b3c05955038353d6f6bd6a44cfe3bd1217de"
+      },
+      {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/SecretBufferTest.java",
+        "sha256": "32743b02e36a6d15cc90d4510de108ccdc86f1ddb3e27920b2299b85566fbd32"
+      }
+    ],
+    "productionCoreMain": "29f3b433952ad19d4ad34c4e1a31ed310bebde6a",
+    "source": "b417a85f764be01e6310c5e29f24245aa1de27e5",
+    "wbsLeafIds": [
+      "WBS-F03",
+      "WBS-P018-10.03",
+      "WBS-P006-01"
+    ],
+    "managementWorkIds": [
+      "PT-P01810-CATALOG-015",
+      "BUG-3258",
+      "YKT-2689",
+      "SSC-466"
+    ],
+    "run": "PG39148-p01810-buffer-diagnostic-independent-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.5,
+      "base": 1.6,
+      "high": 3.5
+    },
+    "groupCapPp": 5.0,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848
+  }
+}
