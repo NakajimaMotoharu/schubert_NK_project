@@ -1,0 +1,901 @@
+{
+  "actualExit": 0,
+  "source": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "head": "46087b222e6e30fabea884f7045fa20be8a4840a",
+  "priorIndex": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38578-wbs66-short-term-receipt-intake-v1/manifest.json",
+    "sha256": "e5e77529d5484541cf03d99cb6707b4feb5fc5ea9f6deb50435cf9f4a574df25"
+  },
+  "items": [
+    {
+      "item": "WBS-F02",
+      "topFive": true,
+      "criterionCount": 4,
+      "directCriterionIds": [
+        "WBS-F02/reuse",
+        "WBS-F02/criterion/contract",
+        "WBS-F02/criterion/scope",
+        "WBS-F02/criterion/quality"
+      ],
+      "terminalDecisionIds": "閉/WBS-F02",
+      "sharedCriteria": "",
+      "missingEvidence": "正規6モジュール依存を実測。現候補のAPI/Web全型、実クラスArchUnit、同一Protocol JAR、実Artemisと全13要求の受入証拠が必要",
+      "receiptOwner": "QA-056／QA-058と実行担当",
+      "evidence": [
+        {
+          "record": {
+            "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/282_WBS66_F02現行境界と四物理適用結果.json",
+            "sha256": "42dfc5f8585c60070f3733f7f45ffe284c7c7d1b2913acde7df405133ea295ef"
+          },
+          "proof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38450-f02-latest-six-source-four-physical-evidence-v1/manifest.json",
+            "sha256": "c30acffec68386e48ec2f7a169feea6a03759a07dafdb98497077d9cf2dc9ac6"
+          },
+          "sourceAtRecord": "713885ee295be89b2c2362594c67879827cfba50",
+          "productionCoreAtRecord": "713885ee295be89b2c2362594c67879827cfba50",
+          "role": "LIMITED_OR_HISTORICAL_INTAKE",
+          "appliedAsCurrentFormalQualification": false
+        },
+        {
+          "record": {
+            "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/294_F02Controller基盤依存の結果.json",
+            "sha256": "82572495cfcb8e9cc5f2897a0e465fced490ff3cf0a9f959729d136c77b062ff"
+          },
+          "proof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38500-f02-controller-direct-adapters-source-v1/manifest.json",
+            "sha256": "b2195ada37a6553e28911bf191931cc885af1608b3e0127405c70195ce337422"
+          },
+          "sourceAtRecord": "280d6181d166eefc48adcfecda24df36bd4f3c95",
+          "productionCoreAtRecord": "280d6181d166eefc48adcfecda24df36bd4f3c95",
+          "role": "LIMITED_OR_HISTORICAL_INTAKE",
+          "appliedAsCurrentFormalQualification": false
+        },
+        {
+          "record": {
+            "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/296_F03現行Storage静的の結果.json",
+            "sha256": "47689bcb894a9f566f383df9ea676539cda9d9e96c8d0cccf2dc7725812febd2"
+          },
+          "proof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38502-f03-storage-current-full-static-v1/manifest.json",
+            "sha256": "ee58367bb956d7472120cf9de8b17efc4b84b4c29b94e9b813dd36689bdc323a"
+          },
+          "sourceAtRecord": "280d6181d166eefc48adcfecda24df36bd4f3c95",
+          "productionCoreAtRecord": "280d6181d166eefc48adcfecda24df36bd4f3c95",
+          "role": "LIMITED_OR_HISTORICAL_INTAKE",
+          "appliedAsCurrentFormalQualification": false
+        },
+        {
+          "record": {
+            "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/302_F02六module解決依存の結果.json",
+            "sha256": "9d8f2df1acdf5732439dca570ca548d02858c873a58bce215efa4bcaa3789acc"
+          },
+          "proof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38522-f02-six-resolved-maven-dependency-model-v1/manifest.json",
+            "sha256": "dd478111437fdd65aeefe3dae47bebe556ff4a9eee54d851dd34018ba1db1a5a"
+          },
+          "sourceAtRecord": "56afd159dc6919c1c2647730d9f17401defaf2d1",
+          "productionCoreAtRecord": "56afd159dc6919c1c2647730d9f17401defaf2d1",
+          "role": "LIMITED_OR_HISTORICAL_INTAKE",
+          "appliedAsCurrentFormalQualification": false
+        }
+      ],
+      "newAcceptance": false,
+      "state": "RECEIPT_INCOMPLETE",
+      "allowedFormalClosing": false,
+      "replacesPriorEvidence": false,
+      "currentLocalSupplements": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39862-service-db-state-lock-four-main-v1/manifest.json",
+          "sha256": "9433dae6e53e1d97a1b942175e930c315c118da9dea870cdffb0b26072e6a035"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39870-f02-service-state-lock-edges-and-trace-v1/manifest.json",
+          "sha256": "e95cdfc8954261ea392f89bd53bee2ed01d188a5b2e74e3cbf415444cf123d62"
+        }
+      ],
+      "outstandingSpecificEvidence": "現API/Web全型、StorageのSQLException依存3、未移管上位72・旧入口、同source全六と13要求・451"
+    },
+    {
+      "item": "WBS-F03",
+      "topFive": true,
+      "criterionCount": 4,
+      "directCriterionIds": [
+        "WBS-F03/reuse",
+        "WBS-F03/criterion/contract",
+        "WBS-F03/criterion/scope",
+        "WBS-F03/criterion/quality"
+      ],
+      "terminalDecisionIds": "閉/WBS-F03",
+      "sharedCriteria": "",
+      "missingEvidence": "Storage全物理／六Mainのlint、合成API14物理。API/Web全型、残PMD適用性／Root、残32試験sourceと現変更分、全451の終端が必要",
+      "receiptOwner": "QA-056／QA-057と静的品質担当",
+      "evidence": [
+        {
+          "record": {
+            "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/296_F03現行Storage静的の結果.json",
+            "sha256": "47689bcb894a9f566f383df9ea676539cda9d9e96c8d0cccf2dc7725812febd2"
+          },
+          "proof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38502-f03-storage-current-full-static-v1/manifest.json",
+            "sha256": "ee58367bb956d7472120cf9de8b17efc4b84b4c29b94e9b813dd36689bdc323a"
+          },
+          "sourceAtRecord": "280d6181d166eefc48adcfecda24df36bd4f3c95",
+          "productionCoreAtRecord": "280d6181d166eefc48adcfecda24df36bd4f3c95",
+          "role": "LIMITED_OR_HISTORICAL_INTAKE",
+          "appliedAsCurrentFormalQualification": false
+        },
+        {
+          "record": {
+            "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/298_F03現行TestJava差分の結果.json",
+            "sha256": "0b3bb325677a2fe8e2dc186d47853039d1728d61584be5ed00deeb422c7124d9"
+          },
+          "proof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38504-f03-current-test-source-delta-v1/manifest.json",
+            "sha256": "0a33f850576813ff014ada3969c20506fe8ec964ab49d4ab81a321bc33792b0c"
+          },
+          "sourceAtRecord": "a5aeb92bb81fd969207fc695493cd238a6563491",
+          "productionCoreAtRecord": "280d6181d166eefc48adcfecda24df36bd4f3c95",
+          "role": "LIMITED_OR_HISTORICAL_INTAKE",
+          "appliedAsCurrentFormalQualification": false
+        },
+        {
+          "record": {
+            "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/308_P01810API値四診断の結果.json",
+            "sha256": "4a0de475d1ad38e56c96eaea8323334912ea32590952031774715f7ea028aa14"
+          },
+          "proof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38562-p01810-api-value-diagnostics-independent-v1/manifest.json",
+            "sha256": "bc5fbf6cc9e3fa306f8e5df0511a6ddbe23396005620c31d2027bd8442999674"
+          },
+          "sourceAtRecord": "40b0f24b7c28eb3d266f7d11771481dc9f2c1b6a",
+          "productionCoreAtRecord": "31748ed33367119278407a3bce0fe2c82641dc1b",
+          "role": "LIMITED_OR_HISTORICAL_INTAKE",
+          "appliedAsCurrentFormalQualification": false
+        }
+      ],
+      "newAcceptance": false,
+      "state": "RECEIPT_INCOMPLETE",
+      "allowedFormalClosing": false,
+      "replacesPriorEvidence": false,
+      "currentLocalSupplements": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36628-ssc447-current152-quality-return-v1/manifest.json",
+          "sha256": "eccacdc78f0ea40993950ee5a0b6b25a4981c9e54fa3a01db59bf316a9128597"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39814-f03-storage-bootstrap-static-independent-v1/manifest.json",
+          "sha256": "e3139ccf79da928f0f9ca472549a79f7935753eacfedd5aef1e60f7587cf9539"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39864-service-db-state-lock-static-v1/manifest.json",
+          "sha256": "262eb265401d0c5134c29949a5317911bfb58d14558fb9b474aaf0c4e83aa01e"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39865-service-db-state-lock-test-static-v2/manifest.json",
+          "sha256": "fd600cef0c4db5d76104fc3eb58b886145a58c985876e191c92afccaca313750"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39888-f03-batch-eight-current-typed-delta-v1/manifest.json",
+          "sha256": "085ffe7b8ea250c434d4560d46e2d15f2bd817db91c445f6dc4efec1fcdf0e85"
+        }
+      ],
+      "outstandingSpecificEvidence": "保護Main4/Test32、Root11、六モジュールの型付き全域、Native監視のPMD適用未解決、全451"
+    },
+    {
+      "item": "WBS-P004-03",
+      "topFive": true,
+      "criterionCount": 4,
+      "directCriterionIds": [
+        "WBS-P004-03/reuse",
+        "WBS-P004-03/criterion/contract",
+        "WBS-P004-03/criterion/scope",
+        "WBS-P004-03/criterion/quality"
+      ],
+      "terminalDecisionIds": "閉/WBS-P004-03",
+      "sharedCriteria": "",
+      "missingEvidence": "原本DAO／純codecの証跡あり。現sourceの保持ファイル各byte、所有、処理終了後状態、退役・拒否時の戻り値が必要",
+      "receiptOwner": "原本保持担当とQA-058",
+      "evidence": [
+        {
+          "record": {
+            "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/079_P00403五所有照合・原16raw不足発見.json",
+            "sha256": "8f0818c114b73496d1962b9d9c3b605ea1a6c31d51d1a34dabafffa3c20c67bd"
+          },
+          "proof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37264-p00403-owner5-contract-return-v1/manifest.json",
+            "sha256": "f2ab09cfa4153ae6f60b65386f8c0a424e8085afa7f31e08a759f72f1efa1969"
+          },
+          "sourceAtRecord": "7e6cb3cc9711c12b4a68f2f05711a06f582bfe9b",
+          "productionCoreAtRecord": null,
+          "role": "LIMITED_OR_HISTORICAL_INTAKE",
+          "appliedAsCurrentFormalQualification": false
+        },
+        {
+          "record": {
+            "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/083_P00403追加四・whole20六class53Code100完了.json",
+            "sha256": "648f8f062df871c03d589d3b4a5e5c94633166123d2d91ba2c1f67eeafccc694"
+          },
+          "proof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37288-record-codec20-criteria-return-v1/manifest.json",
+            "sha256": "b9b97505ab87fdac1d4f230769095b21822a6ddfe7ddfe94d32dde23c8f59e44"
+          },
+          "sourceAtRecord": "91c55386a79a59b9766fb1cc9447d7451c71c083",
+          "productionCoreAtRecord": null,
+          "role": "LIMITED_OR_HISTORICAL_INTAKE",
+          "appliedAsCurrentFormalQualification": false
+        },
+        {
+          "record": {
+            "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/233_WBS66_P00403保持原本二作業証拠結果.json",
+            "sha256": "9df50046722158f2b8421d47d08899a0be3c882f91a04df067aadcbd66c00300"
+          },
+          "proof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38304-p00403-a115-retained-file-evidence-v1/manifest.json",
+            "sha256": "fd26de3ac5b5b77a8500893cab82b7f7300a5f09398eca058b6f972f13390637"
+          },
+          "sourceAtRecord": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+          "productionCoreAtRecord": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+          "role": "LIMITED_OR_HISTORICAL_INTAKE",
+          "appliedAsCurrentFormalQualification": false
+        }
+      ],
+      "newAcceptance": false,
+      "state": "RECEIPT_INCOMPLETE",
+      "allowedFormalClosing": false,
+      "replacesPriorEvidence": false,
+      "currentLocalSupplements": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39700-p00403-five-artifacts-current-lineage-v1/manifest.json",
+          "sha256": "3330f615bf9ba231d66eb5a2e89689a990aec2f6753ca7a4f99d1d252a21c7ab"
+        }
+      ],
+      "outstandingSpecificEvidence": "現保持原本とowner、正規退役、実DB認可済SQLとcommit後条件、全451"
+    },
+    {
+      "item": "WBS-P004-05",
+      "topFive": true,
+      "criterionCount": 4,
+      "directCriterionIds": [
+        "WBS-P004-05/reuse",
+        "WBS-P004-05/criterion/contract",
+        "WBS-P004-05/criterion/scope",
+        "WBS-P004-05/criterion/quality"
+      ],
+      "terminalDecisionIds": "閉/WBS-P004-05",
+      "sharedCriteria": "",
+      "missingEvidence": "JDBC所有closeの限定証跡あり。現DBとUTC、実transactionと例外型、rollback・close後条件の同sourceが必要",
+      "receiptOwner": "DB担当とQA-056／058",
+      "evidence": [
+        {
+          "record": {
+            "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/064_P00405通常1成功・原4条件不足返却.json",
+            "sha256": "4ac1e3052204b2eef1e1a86f016527557e3e4309c886a497835ec96677e41d5f"
+          },
+          "proof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37116-p00405-current-criteria-return-v1/manifest.json",
+            "sha256": "a6de3d893717b247062bbfb805649231d0a6bc1a469cbb94cc1fba172ed677b6"
+          },
+          "sourceAtRecord": "01c3b1a34ee01f4a43fcfd1eaa4cc945010675c9",
+          "productionCoreAtRecord": null,
+          "role": "LIMITED_OR_HISTORICAL_INTAKE",
+          "appliedAsCurrentFormalQualification": false
+        },
+        {
+          "record": {
+            "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/226_WBS66_P00405JDBC資源終了既証拠照合結果.json",
+            "sha256": "5f7ff420080a59e5de20219b122505bfce492bbb820f82bfb4d79ee89c467ac7"
+          },
+          "proof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38298-p00405-jdbc-ownership-current-receipt-v1/manifest.json",
+            "sha256": "de69c92577c16d1277c46f7323e92b170949729fbf8796ab27e0f86373bb5fc2"
+          },
+          "sourceAtRecord": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+          "productionCoreAtRecord": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+          "role": "LIMITED_OR_HISTORICAL_INTAKE",
+          "appliedAsCurrentFormalQualification": false
+        }
+      ],
+      "newAcceptance": false,
+      "state": "RECEIPT_INCOMPLETE",
+      "allowedFormalClosing": false,
+      "replacesPriorEvidence": false,
+      "currentLocalSupplements": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39868-p00405-service-db-state-lock-independent-v1/manifest.json",
+          "sha256": "5aa80f04cdef294762b856adb9acd95b1079f7105d90f0042ec6ee499b476c5d"
+        }
+      ],
+      "outstandingSpecificEvidence": "実DBとUTC・rollback/close後条件、JDBCトランザクションの保護型、全451"
+    },
+    {
+      "item": "WBS-P018-08",
+      "topFive": true,
+      "criterionCount": 9,
+      "directCriterionIds": [
+        "WBS-P018-08.01/reuse",
+        "WBS-P018-08.01/criterion/deliverable",
+        "WBS-P018-08.01/criterion/quality",
+        "WBS-P018-08.02/reuse",
+        "WBS-P018-08.02/criterion/deliverable",
+        "WBS-P018-08.02/criterion/quality",
+        "WBS-P018-08.03/reuse",
+        "WBS-P018-08.03/criterion/deliverable",
+        "WBS-P018-08.03/criterion/quality"
+      ],
+      "terminalDecisionIds": "閉/WBS-P018-08.01、閉/WBS-P018-08.02、閉/WBS-P018-08.03",
+      "sharedCriteria": "",
+      "missingEvidence": "通常terminal/Profileとオフライン測定は保存済み。現BOM、実ownerと同一原session／CRC、全stream・停止後条件の真正採取が必要",
+      "receiptOwner": "native担当とQA-057／058",
+      "evidence": [
+        {
+          "record": {
+            "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/205_WBS66_P01808計測工具既証跡照合結果.json",
+            "sha256": "c05d10fc36a6ac2172fd5c10b184a677547916ff68f70633caf65a3856580e27"
+          },
+          "proof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38254-p01808-offline-measurement-evidence-v1/manifest.json",
+            "sha256": "273c49de6b2d0bb94c3cb7553691804ad8349b27cffa992b181b5bbf8e1df963"
+          },
+          "sourceAtRecord": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+          "productionCoreAtRecord": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+          "role": "LIMITED_OR_HISTORICAL_INTAKE",
+          "appliedAsCurrentFormalQualification": false
+        },
+        {
+          "record": {
+            "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/254_WBS66_P01808ProfileTerminal既証拠結果.json",
+            "sha256": "f0a66a3ee4a9ee196f625b8ce0bbe4b7c4901316fd045c57aa735481e95706b4"
+          },
+          "proof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38334-p01808-profile-terminal-ordinary-proof-v1/manifest.json",
+            "sha256": "c6f2a72749d53259f75b6a35687155e9f67fb8326456f5235c155de6ce1b9d90"
+          },
+          "sourceAtRecord": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+          "productionCoreAtRecord": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+          "role": "LIMITED_OR_HISTORICAL_INTAKE",
+          "appliedAsCurrentFormalQualification": false
+        },
+        {
+          "record": {
+            "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/256_WBS66_P01808Terminal現依存通常五件結果.json",
+            "sha256": "52b6abf90122cd36ba339696f792c9c18713b2dfc9fba92fdee1334e54f64182"
+          },
+          "proof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38340-p01808-terminal-current-checkpoint-independent-v1/manifest.json",
+            "sha256": "5fa505f4d88d98f9c4a612bd6947dfdfb1d882bcb6e53b22ba0613003394f916"
+          },
+          "sourceAtRecord": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+          "productionCoreAtRecord": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+          "role": "LIMITED_OR_HISTORICAL_INTAKE",
+          "appliedAsCurrentFormalQualification": false
+        },
+        {
+          "record": {
+            "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/264_WBS66_P01808TerminalProfile現依存四件結果.json",
+            "sha256": "f515b3125bc9e0d626d21c693c3ced1bd00d46a733638d6bdfe8c82fd7c8b3b9"
+          },
+          "proof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38390-p01808-terminal-profile-four-v1/manifest.json",
+            "sha256": "c788e17dece60a22628289d6e598e8576a9c8b4bc1617c1b3d851af1736a350a"
+          },
+          "sourceAtRecord": "27e4b6706e3f0bbc15b9112ae89ddc9994945f05",
+          "productionCoreAtRecord": "35167d1390bdcedd31e5c35d8ee526089347fec6",
+          "role": "LIMITED_OR_HISTORICAL_INTAKE",
+          "appliedAsCurrentFormalQualification": false
+        }
+      ],
+      "newAcceptance": false,
+      "state": "RECEIPT_INCOMPLETE",
+      "allowedFormalClosing": false,
+      "replacesPriorEvidence": false,
+      "currentLocalSupplements": [],
+      "outstandingSpecificEvidence": "現BOM/current runtime ownerを持つ全stream、session/CRC、正規停止後条件、終了依存"
+    },
+    {
+      "item": "WBS-C02",
+      "topFive": false,
+      "criterionCount": 4,
+      "directCriterionIds": [
+        "WBS-C02/reuse",
+        "WBS-C02/criterion/contract",
+        "WBS-C02/criterion/scope",
+        "WBS-C02/criterion/quality"
+      ],
+      "terminalDecisionIds": "閉/WBS-C02",
+      "sharedCriteria": "",
+      "missingEvidence": "14設定の原資料。現candidateの有効Unit、所有、Inspector正規終端とnative postが必要",
+      "receiptOwner": "実行環境担当とQA-058",
+      "evidence": [
+        {
+          "record": {
+            "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/252_WBS66一回目締切四担当引渡し照合結果.json",
+            "sha256": "29dc1d47fee73fc1b9509d67bca7b8a52d0ebe879436041a41a4fe9c2cd8c9f6"
+          },
+          "proof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38332-wbs66-first-deadline-handoff-current-v1/manifest.json",
+            "sha256": "4f4b3892baf7a38ff6efe3c02dbbd4028944559bb2cd60821ec824f21a89a1ef"
+          },
+          "sourceAtRecord": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+          "productionCoreAtRecord": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+          "role": "LIMITED_OR_HISTORICAL_INTAKE",
+          "appliedAsCurrentFormalQualification": false
+        }
+      ],
+      "newAcceptance": false,
+      "state": "RECEIPT_INCOMPLETE",
+      "allowedFormalClosing": false,
+      "replacesPriorEvidence": false,
+      "currentLocalSupplements": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39616-wbs66-four-module-edge-and-handoff-v1/manifest.json",
+          "sha256": "16f1a493a1f284c0476454b645ce96be9d845df19cabc1c96d914863fbd2afe3"
+        }
+      ],
+      "outstandingSpecificEvidence": "現実行先で14設定の実効Unit・Inspector終了・owner・native postを照合"
+    },
+    {
+      "item": "WBS-P018-02",
+      "topFive": false,
+      "criterionCount": 4,
+      "directCriterionIds": [
+        "WBS-P018-02/reuse",
+        "WBS-P018-02/criterion/contract",
+        "WBS-P018-02/criterion/scope",
+        "WBS-P018-02/criterion/quality"
+      ],
+      "terminalDecisionIds": "閉/WBS-P018-02",
+      "sharedCriteria": "",
+      "missingEvidence": "署名とrelease inventoryの普通値検証あり。実配置対象の正規署名・BOM／hashと拒否・所有の証拠が必要",
+      "receiptOwner": "署名・配布担当とQA-057／058",
+      "evidence": [
+        {
+          "record": {
+            "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/100_P01802五所有物・二通常再利用とraw不足返却.json",
+            "sha256": "6f7de052c7ef839151fddbf1abcaaf732f66feb4bfb272ca60e029b29edf8ef6"
+          },
+          "proof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37416-p01802-five-criteria-return-v1/manifest.json",
+            "sha256": "68ddec74eccc9e52a414468885d00b01f46626a3f0c18443aeab0c620e13515c"
+          },
+          "sourceAtRecord": "9fd2f7dfd18c76c3695a204c679b6794f12abec8",
+          "productionCoreAtRecord": "c529fd5634e5489ae75b7e5f0e4380dd18557bdd",
+          "role": "LIMITED_OR_HISTORICAL_INTAKE",
+          "appliedAsCurrentFormalQualification": false
+        },
+        {
+          "record": {
+            "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/102_ReleaseInventory十八raw全三十九・五所有物返却.json",
+            "sha256": "167cf421328795d8ca69bf53820ed0ce6cb562bec806cebf6ee6ecd9f4028b78"
+          },
+          "proof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37442-inventory18-criteria-return-v1/manifest.json",
+            "sha256": "102517b89fae2f12e4e543d593c7f01f0aff55d8b453a89ecaaab94b557294c5"
+          },
+          "sourceAtRecord": "f6bfae014bc6b185f193d644ae31d30c8ef97d86",
+          "productionCoreAtRecord": null,
+          "role": "LIMITED_OR_HISTORICAL_INTAKE",
+          "appliedAsCurrentFormalQualification": false
+        }
+      ],
+      "newAcceptance": false,
+      "state": "RECEIPT_INCOMPLETE",
+      "allowedFormalClosing": false,
+      "replacesPriorEvidence": false,
+      "currentLocalSupplements": [],
+      "outstandingSpecificEvidence": "現候補の正規署名、実配置のBOM、対象と拒否の受渡し・終了証拠"
+    },
+    {
+      "item": "WBS-P018-10",
+      "topFive": false,
+      "criterionCount": 9,
+      "directCriterionIds": [
+        "WBS-P018-10.01/reuse",
+        "WBS-P018-10.01/criterion/deliverable",
+        "WBS-P018-10.01/criterion/quality",
+        "WBS-P018-10.02/reuse",
+        "WBS-P018-10.02/criterion/deliverable",
+        "WBS-P018-10.02/criterion/quality",
+        "WBS-P018-10.03/reuse",
+        "WBS-P018-10.03/criterion/deliverable",
+        "WBS-P018-10.03/criterion/quality"
+      ],
+      "terminalDecisionIds": "閉/WBS-P018-10.01、閉/WBS-P018-10.02、閉/WBS-P018-10.03",
+      "sharedCriteria": "",
+      "missingEvidence": "個別の固定診断は進展。構造化監査の実producer、残catalog、関連whole試験、全451の結果が必要",
+      "receiptOwner": "ログ担当とQA-056／058",
+      "evidence": [
+        {
+          "record": {
+            "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/272_WBS66_AuthContext値診断横展開通常十三件結果.json",
+            "sha256": "aa53659712d1b1252dd1203831a7e18800a6aaaee18e483de55fa9a9dfd4fd3f"
+          },
+          "proof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38430-p01810-auth-context-diagnostic-independent-v1/manifest.json",
+            "sha256": "45b1561b9b90fd56003ca186bee15d6fd4314af127e86f3fee090e2d17371bd4"
+          },
+          "sourceAtRecord": "d5c74153bfee38801395beeeb8daa63907a138ed",
+          "productionCoreAtRecord": "713885ee295be89b2c2362594c67879827cfba50",
+          "role": "LIMITED_OR_HISTORICAL_INTAKE",
+          "appliedAsCurrentFormalQualification": false
+        },
+        {
+          "record": {
+            "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/300_P01810Canonical固定診断の結果.json",
+            "sha256": "d593fd3764e6a6e3906d6c486e6ca5873aaa945ea1527b45019a086775fafdc2"
+          },
+          "proof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38520-p01810-canonical-value-diagnostics-independent-v1/manifest.json",
+            "sha256": "3773b2fafddd62ae2308499197d0055c154ea6666cd5314448ab0c76b59140fd"
+          },
+          "sourceAtRecord": "34960a2c6d9db53c2cc82fa3242ead8ff7b9ab10",
+          "productionCoreAtRecord": "56afd159dc6919c1c2647730d9f17401defaf2d1",
+          "role": "LIMITED_OR_HISTORICAL_INTAKE",
+          "appliedAsCurrentFormalQualification": false
+        },
+        {
+          "record": {
+            "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/304_P01810PendingReply固定診断の結果.json",
+            "sha256": "77ef8f919cb3293a1d6e7743717eb865315d19473894659133010d6ac5df2c2b"
+          },
+          "proof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38540-p01810-pending-reply-fixed-diagnostic-independent-v1/manifest.json",
+            "sha256": "ca812c665ef242d4b725c728622f82ab9f76d8870ce95c036de245d6d41cce01"
+          },
+          "sourceAtRecord": "c30e3afe62af93c368bd755c6ccde6542574ae65",
+          "productionCoreAtRecord": "a5ee838b8170749ac162051b17390c98de9a6a5e",
+          "role": "LIMITED_OR_HISTORICAL_INTAKE",
+          "appliedAsCurrentFormalQualification": false
+        },
+        {
+          "record": {
+            "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/308_P01810API値四診断の結果.json",
+            "sha256": "4a0de475d1ad38e56c96eaea8323334912ea32590952031774715f7ea028aa14"
+          },
+          "proof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38562-p01810-api-value-diagnostics-independent-v1/manifest.json",
+            "sha256": "bc5fbf6cc9e3fa306f8e5df0511a6ddbe23396005620c31d2027bd8442999674"
+          },
+          "sourceAtRecord": "40b0f24b7c28eb3d266f7d11771481dc9f2c1b6a",
+          "productionCoreAtRecord": "31748ed33367119278407a3bce0fe2c82641dc1b",
+          "role": "LIMITED_OR_HISTORICAL_INTAKE",
+          "appliedAsCurrentFormalQualification": false
+        }
+      ],
+      "newAcceptance": false,
+      "state": "RECEIPT_INCOMPLETE",
+      "allowedFormalClosing": false,
+      "replacesPriorEvidence": false,
+      "currentLocalSupplements": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39850-p01810-weblog-three-fixed-diagnostic-oracles-v1/manifest.json",
+          "sha256": "ad03113df9a1265b57ee89d002e18318db7216b1eb1969064bddedc49a0eb1fc"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39884-p01810-backup-four-fixed-diagnostics-v1/manifest.json",
+          "sha256": "50335096551175b2f1a8ab02cda023e92d95a7155c52fd65965a4367003abaf8"
+        }
+      ],
+      "outstandingSpecificEvidence": "実producerからsinkまでの証拠、残catalogと当source全scope、全451"
+    },
+    {
+      "item": "WBS-P004-02",
+      "topFive": false,
+      "criterionCount": 4,
+      "directCriterionIds": [
+        "WBS-P004-02/reuse",
+        "WBS-P004-02/criterion/contract",
+        "WBS-P004-02/criterion/scope",
+        "WBS-P004-02/criterion/quality"
+      ],
+      "terminalDecisionIds": "閉/WBS-P004-02",
+      "sharedCriteria": "",
+      "missingEvidence": "summaryの通常PTと範囲内生計測あり。参照保護の現DB後条件及び他所有物・終了依存が必要",
+      "receiptOwner": "DB担当とQA-056／058",
+      "evidence": [
+        {
+          "record": {
+            "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/093_P00402原十一raw再測定・三所有物不足返却.json",
+            "sha256": "8b4aeec1e80b6e5993498c155ff4ece50e4739d41f8af11107314b27a3eda09e"
+          },
+          "proof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37362-p00402-current-criteria-audit-v1/manifest.json",
+            "sha256": "d85d897300b2d86d95578b2ba98504a0684a70329ee485ed48e537d3e7c28803"
+          },
+          "sourceAtRecord": "6551b43ad639370471ff748e7ef865194c176327",
+          "productionCoreAtRecord": "208d9483135c2d13298e2511a9945dcd524c5cd7",
+          "role": "LIMITED_OR_HISTORICAL_INTAKE",
+          "appliedAsCurrentFormalQualification": false
+        },
+        {
+          "record": {
+            "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/098_P00402summary二十三六全二十八完了・元受入保留.json",
+            "sha256": "6ffdd1cb33f513699cb207c17e6359057670833c4c5229a4585150c003cd5460"
+          },
+          "proof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37404-summary23-criteria-return-v1/manifest.json",
+            "sha256": "e0804db93b8a4ba8e54ce815eaa4562ea1ed5f48c79e869f76e8a47839c75a3b"
+          },
+          "sourceAtRecord": "c529fd5634e5489ae75b7e5f0e4380dd18557bdd",
+          "productionCoreAtRecord": null,
+          "role": "LIMITED_OR_HISTORICAL_INTAKE",
+          "appliedAsCurrentFormalQualification": false
+        }
+      ],
+      "newAcceptance": false,
+      "state": "RECEIPT_INCOMPLETE",
+      "allowedFormalClosing": false,
+      "replacesPriorEvidence": false,
+      "currentLocalSupplements": [],
+      "outstandingSpecificEvidence": "正規の現DB参照保護と終了依存、当sourceの全対象"
+    },
+    {
+      "item": "WBS-P018-07",
+      "topFive": false,
+      "criterionCount": 4,
+      "directCriterionIds": [
+        "WBS-P018-07/reuse",
+        "WBS-P018-07/criterion/contract",
+        "WBS-P018-07/criterion/scope",
+        "WBS-P018-07/criterion/quality"
+      ],
+      "terminalDecisionIds": "閉/WBS-P018-07",
+      "sharedCriteria": "",
+      "missingEvidence": "Caddy／serviceの通常fixture証跡あり。親deadline、同一owner/generation、API/Web/Caddy実TLSと正規停止が必要",
+      "receiptOwner": "実行環境担当とQA-058",
+      "evidence": [
+        {
+          "record": {
+            "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/066_P01807_Caddy通常20閉鎖・実接続11method残.json",
+            "sha256": "04edf679cf30bc3b8edd241c53be23af59d96a429bd5e6f4e521f80e8c30cfe0"
+          },
+          "proof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37142-caddy20-criteria-return-v1/manifest.json",
+            "sha256": "04d2a00c0e6b1d5ef9abece6b8095d7467e4b0228bc1ed7f4917567a1c575b0b"
+          },
+          "sourceAtRecord": "01c3b1a34ee01f4a43fcfd1eaa4cc945010675c9",
+          "productionCoreAtRecord": null,
+          "role": "LIMITED_OR_HISTORICAL_INTAKE",
+          "appliedAsCurrentFormalQualification": false
+        },
+        {
+          "record": {
+            "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/070_P01807現12成功・通常13method完了・実接続残.json",
+            "sha256": "106ac83307fbdc9530b0a1bef662feb92d04da5792f6e9720dcb7698b50ca32c"
+          },
+          "proof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37198-service12-criteria-return-v1/manifest.json",
+            "sha256": "35f9001fe3bebcb3816bb9974a4f089e889b7d9f3b8075e5b8984f94c1bbe0cd"
+          },
+          "sourceAtRecord": "fefac4b6c8d14df495deacef39eaade275f1348a",
+          "productionCoreAtRecord": null,
+          "role": "LIMITED_OR_HISTORICAL_INTAKE",
+          "appliedAsCurrentFormalQualification": false
+        }
+      ],
+      "newAcceptance": false,
+      "state": "RECEIPT_INCOMPLETE",
+      "allowedFormalClosing": false,
+      "replacesPriorEvidence": false,
+      "currentLocalSupplements": [],
+      "outstandingSpecificEvidence": "実Caddy/TLS、同じ親deadline・owner/generation、実API/Web連鎖と正規停止"
+    },
+    {
+      "item": "WBS-P019-02",
+      "topFive": false,
+      "criterionCount": 0,
+      "directCriterionIds": [],
+      "terminalDecisionIds": "閉/元項目判定/WBS-P019-02",
+      "sharedCriteria": "WBS-P018-02/criterion/contract、WBS-P018-02/criterion/quality、WBS-P018-02/criterion/scope、WBS-P018-02/reuse",
+      "missingEvidence": "P018-02の四共通criteria・別終端受付を参照。固有試験と追加費は0",
+      "receiptOwner": "P018-02担当",
+      "evidence": [],
+      "newAcceptance": false,
+      "state": "RECEIPT_INCOMPLETE",
+      "allowedFormalClosing": false,
+      "replacesPriorEvidence": false,
+      "currentLocalSupplements": [],
+      "outstandingSpecificEvidence": "P018-02の四共通条件・元作業の終了判断。固有試験と追加費0"
+    },
+    {
+      "item": "WBS-P020-01",
+      "topFive": false,
+      "criterionCount": 9,
+      "directCriterionIds": [
+        "WBS-P020-01.01/reuse",
+        "WBS-P020-01.01/criterion/deliverable",
+        "WBS-P020-01.01/criterion/quality",
+        "WBS-P020-01.02/reuse",
+        "WBS-P020-01.02/criterion/deliverable",
+        "WBS-P020-01.02/criterion/quality",
+        "WBS-P020-01.03/reuse",
+        "WBS-P020-01.03/criterion/deliverable",
+        "WBS-P020-01.03/criterion/quality"
+      ],
+      "terminalDecisionIds": "閉/WBS-P020-01.01、閉/WBS-P020-01.02、閉/WBS-P020-01.03",
+      "sharedCriteria": "",
+      "missingEvidence": "CLIの通常比較と資料照合あり。各子の必要当source証跡、実NK/DIFに関する終了依存、全451の正式判定が必要",
+      "receiptOwner": "互換担当とQA-051／058",
+      "evidence": [
+        {
+          "record": {
+            "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/051_P020全体照合終了.json",
+            "sha256": "13bf6d31ea32a88e9cee8ad491d3be5e853f743a69aaeb2b9c8519f9736d11ad"
+          },
+          "proof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37004-p020-whole-scope-audit-v1/manifest.json",
+            "sha256": "c5ac002d4f3906031f99b3fef0ff0a721935a16ebb52e5025c3a8cbd0fca1c0c"
+          },
+          "sourceAtRecord": "01c3b1a34ee01f4a43fcfd1eaa4cc945010675c9",
+          "productionCoreAtRecord": null,
+          "role": "LIMITED_OR_HISTORICAL_INTAKE",
+          "appliedAsCurrentFormalQualification": false
+        },
+        {
+          "record": {
+            "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/057_P020個別判定返却・原残.json",
+            "sha256": "894343598c4124bee8e4aebc40ed2e5c6324e234d0ff831fb2e5882e3a3baea6"
+          },
+          "proof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37030-p020-original-criteria-decision-v1/manifest.json",
+            "sha256": "ecf5f10eb576a17745c5ed5ff48ae77fd4d4d5f93d60685687bc3a34ea8c142b"
+          },
+          "sourceAtRecord": "01c3b1a34ee01f4a43fcfd1eaa4cc945010675c9",
+          "productionCoreAtRecord": null,
+          "role": "LIMITED_OR_HISTORICAL_INTAKE",
+          "appliedAsCurrentFormalQualification": false
+        },
+        {
+          "record": {
+            "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/087_P020工具142raw232全100・再提出枠完了.json",
+            "sha256": "761e353c93019caf48f9481a8976a2e44483a238da81846bbb18c8a8c7ba74d0"
+          },
+          "proof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37326-p020-current-criteria-return-v1/manifest.json",
+            "sha256": "93885a64f831ace3acd2384a244087d8acdef6c3faad81a0c9f0b5091c5df67c"
+          },
+          "sourceAtRecord": "fd69f7d62595c021ceff48509ea032a5ff17c5d2",
+          "productionCoreAtRecord": null,
+          "role": "LIMITED_OR_HISTORICAL_INTAKE",
+          "appliedAsCurrentFormalQualification": false
+        }
+      ],
+      "newAcceptance": false,
+      "state": "RECEIPT_INCOMPLETE",
+      "allowedFormalClosing": false,
+      "replacesPriorEvidence": false,
+      "currentLocalSupplements": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39834-p020-definition-independent-v1/manifest.json",
+          "sha256": "c638b0e950c64fb9132b46cafaf2920e4e3e58fa245424e60a641de1b1e6b88b"
+        }
+      ],
+      "outstandingSpecificEvidence": "資格host空き20GiBでの正常preflight、実NK CHR/DIF、各子と451"
+    }
+  ],
+  "shortTermTargets": 12,
+  "shortTermDistinct": 11,
+  "directCriteria": 59,
+  "priorityFiveCriteria": 25,
+  "priorityFiveAccepted": 0,
+  "officialAccepted": 17,
+  "officialAll": 190,
+  "netIncrease": 0,
+  "officialPt": 1964,
+  "officialScope": 53,
+  "requiredNet": 10,
+  "requiredDistinctOfEleven": 10,
+  "requiredAllFive": true,
+  "shortPricePp": 143.371,
+  "effortPercent": null,
+  "handoffRoles": [
+    {
+      "owner": "F02",
+      "state": "LOCAL_FOUR_MODULE_EVIDENCE",
+      "receipts": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39862-service-db-state-lock-four-main-v1/manifest.json",
+          "sha256": "9433dae6e53e1d97a1b942175e930c315c118da9dea870cdffb0b26072e6a035"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39870-f02-service-state-lock-edges-and-trace-v1/manifest.json",
+          "sha256": "e95cdfc8954261ea392f89bd53bee2ed01d188a5b2e74e3cbf415444cf123d62"
+        }
+      ],
+      "missing": "現API/Web全型、StorageのSQLException依存3、未移管上位72・旧入口、同source全六と13要求・451"
+    },
+    {
+      "owner": "F03",
+      "state": "LOCAL_TYPED_ANALYSIS_EVIDENCE",
+      "receipts": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36628-ssc447-current152-quality-return-v1/manifest.json",
+          "sha256": "eccacdc78f0ea40993950ee5a0b6b25a4981c9e54fa3a01db59bf316a9128597"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39814-f03-storage-bootstrap-static-independent-v1/manifest.json",
+          "sha256": "e3139ccf79da928f0f9ca472549a79f7935753eacfedd5aef1e60f7587cf9539"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39864-service-db-state-lock-static-v1/manifest.json",
+          "sha256": "262eb265401d0c5134c29949a5317911bfb58d14558fb9b474aaf0c4e83aa01e"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39865-service-db-state-lock-test-static-v2/manifest.json",
+          "sha256": "fd600cef0c4db5d76104fc3eb58b886145a58c985876e191c92afccaca313750"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39888-f03-batch-eight-current-typed-delta-v1/manifest.json",
+          "sha256": "085ffe7b8ea250c434d4560d46e2d15f2bd817db91c445f6dc4efec1fcdf0e85"
+        }
+      ],
+      "missing": "保護Main4/Test32、Root11、六モジュールの型付き全域、Native監視のPMD適用未解決、全451"
+    },
+    {
+      "owner": "C02",
+      "state": "ENVIRONMENT_BLOCKED",
+      "receipts": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39616-wbs66-four-module-edge-and-handoff-v1/manifest.json",
+          "sha256": "16f1a493a1f284c0476454b645ce96be9d845df19cabc1c96d914863fbd2afe3"
+        }
+      ],
+      "missing": "現実行先で14設定の実効Unit・Inspector終了・owner・native postを照合"
+    },
+    {
+      "owner": "F04",
+      "state": "QA058_AUTHENTICATION_AND_OWNER_UNRESOLVED",
+      "receipts": [
+        {
+          "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/495_11月25日四担当引渡し候補追補_20261119.md",
+          "sha256": "e9f356a42d049b77d98fc1a61905afacaae6bd07dbe04d6fb361d73e805cca90"
+        }
+      ],
+      "missing": "harukaで対象scopeの現owner・認証・正規remote観測。前回の接続終了255で観測本体未開始"
+    }
+  ],
+  "externalHandoffReceipt": null,
+  "deadlineJST": {
+    "priorityFive": "2026-12-02T23:29:00+09:00",
+    "plannedTwelve": "2026-12-06T18:00:00+09:00",
+    "fourHandoff": "2026-11-25T23:29:00+09:00"
+  },
+  "historicalSsc447": {
+    "success": 152,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "notRun": 0,
+    "source": "e4794ddf45487268883334d0f8773d89bd47dcba",
+    "rawMiss": {
+      "L": 4,
+      "M": 4,
+      "C": 0,
+      "B": 58,
+      "I": 85
+    },
+    "references": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36620-ssc447-cache-owners-unit-v1/manifest.json",
+        "sha256": "f9cd070ba7c4abe9d3fe4c783a00c7a5cae09cfd98a5c5ab4c87e8aebfcfe976"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36624-ssc447-cache-owners-unfiltered-v1/manifest.json",
+        "sha256": "f734306708d21c3d94057461cab035c75a7bb33840323016d5f930f2c8dc3490"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36628-ssc447-current152-quality-return-v1/manifest.json",
+        "sha256": "eccacdc78f0ea40993950ee5a0b6b25a4981c9e54fa3a01db59bf316a9128597"
+      }
+    ],
+    "appliedToCurrentSource": false
+  },
+  "newTests": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "freshCurrentCoverageCalculated": false,
+  "terminalAtUTC": "2026-11-18T16:42:40.538203+00:00",
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5243_wbs66_short12_handoff.py",
+    "sha256": "b172acdfd417591cacb3fb1809fe02cd7215e93d75f85601598670cf8872b853"
+  }
+}
