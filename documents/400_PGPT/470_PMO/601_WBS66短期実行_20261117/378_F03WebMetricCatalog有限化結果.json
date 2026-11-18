@@ -1,0 +1,145 @@
+{
+  "eventId": "PGPT-20261008-5910",
+  "actualExit": 0,
+  "workStatus": "PARTIAL",
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-WEB-METRIC-CATALOG-BOUNDED-OWNER-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-F03-WEB-METRIC-CATALOG-BOUNDED-OWNER-20261118",
+    "workAttributionKind": "REWORK",
+    "workScope": "F03/2-2 and P018-09 metric label catalogue, YKT2387. Owned executor try-with-resources lacks an await deadline even though per-Future budget is present. Fix only WEBCAT014 ownership and retain 14 independent metric label and readback tests, anchored actual Root compiler/static and raw count. No actual metrics service, runtime auth/credentials/DB/native, no ship boundary.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2705_両Catalog単一exec全面測定56_単体テスト仕様書.md",
+        "sha256": "304b6d46dfa203219a778f4265347f091bcdae23f94321e1c6a59aaf5c76e212"
+      }
+    ],
+    "productionCoreMain": "29f3b433952ad19d4ad34c4e1a31ed310bebde6a",
+    "source": "ca4c4e370fc31be35b04304a78f223487ada4f9a",
+    "wbsLeafIds": [
+      "WBS-F03",
+      "WBS-P018-09"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2",
+      "YKT-2387"
+    ],
+    "run": "PG38996-f03-web-metric-catalog-independent-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.35,
+      "base": 0.95,
+      "high": 2.6
+    },
+    "groupCapPp": 4.0,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "relatedBug": "BUG-3250",
+    "relatedYkt": "YKT-2387",
+    "quotaAfter": {
+      "usedPercent": 32,
+      "remainingPercent": 68,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "9b16bcfbd8368d5315314132b6c3a328d535ebe73c43bb337ca010ed831d42c0",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T08:46:10.623000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 32,
+          "remainingPercent": 68,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T08:45:33.554122+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 32,
+      "remainingPercent": 68,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-5909",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38996-f03-web-metric-catalog-independent-v1/manifest.json",
+      "sha256": "888828298ea363f99f27ddeb9313daaee70db00d54523638f1781242f95e2406"
+    },
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortCompletionRate": null,
+    "firstProductRunSuccess": true,
+    "firstIndependentPostSuccess": true,
+    "firstQualityAdmitted": true,
+    "productTestsExecuted": 14,
+    "newDefinitions": 0,
+    "caseDenominator": 14,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "notRun": 0,
+    "relatedBugs": [
+      "BUG-3250",
+      "BUG-3251"
+    ],
+    "crossRefYkt": [
+      "YKT-2387"
+    ],
+    "targetRaw": {
+      "INSTRUCTION": [
+        5,
+        260
+      ],
+      "BRANCH": [
+        0,
+        14
+      ],
+      "LINE": [
+        1,
+        49
+      ],
+      "COMPLEXITY": [
+        1,
+        17
+      ],
+      "METHOD": [
+        1,
+        10
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "completedAdditionalPricePp": 0,
+    "additionalCompletedPriceTotalPp": 42.9,
+    "originalCompletedPriceTotalPp": 9.538,
+    "shortTermTwelvePlanPp": 143.371,
+    "retryReasons": [],
+    "reviewStatus": "FINITE_FIXTURE_CLOSED_RAW_PUBLIC_LABEL_OVERLOAD_GAP_SEPARATE",
+    "nextCondition": "Add independent public label name/list contract in the same limited fixture after BUG3251. Existing broad historical scrape results do not substitute for the exact fresh coverage. Then next allowed WBS criterion."
+  }
+}
