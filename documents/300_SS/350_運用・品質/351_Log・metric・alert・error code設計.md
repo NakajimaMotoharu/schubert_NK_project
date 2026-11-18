@@ -297,6 +297,8 @@ SSC-455。EncryptedAuthContext.toStringは「EncryptedAuthContext[keyVersion/cip
 
 SSC-458。CanonicalField.toStringは「CanonicalField[<redacted>]」、CanonicalRequest.toStringは「CanonicalRequest[<redacted>]」の固定値とする。field名・型版、layout ID・版、owner・target・fieldsの実値を一般診断文字列に連結しない。SS324 §3の正規化・暗号入力・固定layout・値アクセサーと、本書§3の項目別に許可した構造化ログを維持する。
 
+SSC-459。PendingReply.toStringは「PendingReply[correlationId/deadline/body=<redacted>]」の固定値とし、実相関ID・締切・応答bodyを一般診断に連結しない。SS321の相関照合・単調な期限判断・一回終端と、本書§3で許可する明示構造化相関項目及び所有copyの契約を維持する。
+
 
 - DEBUGだけ機密除外を緩和、request/response/fixed body、exception/SQLの`toString()`を無制限出力。
 - Username/IP/message/token/path等の高cardinality/機密値をmetric label化。
