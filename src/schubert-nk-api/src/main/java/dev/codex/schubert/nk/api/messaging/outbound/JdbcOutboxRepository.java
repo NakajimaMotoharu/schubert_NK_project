@@ -17,6 +17,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.IntSupplier;
+import org.jspecify.annotations.Nullable;
 
 /**
  * PostgreSQL application-outbox repository using SS 332's SKIP LOCKED claim contract.
@@ -56,7 +57,9 @@ public final class JdbcOutboxRepository {
             + "layout_version,body,status,attempt_count,next_attempt_at,created_at,"
             + "dlq_original_message_id,dlq_original_transport_id,dlq_delivery_count,dlq_error_code,dlq_detected_at) "
             + "values(?,?,?,?,?,?,'PENDING',0,?,?,?,?,?,?,?) returning id";
-    try (PreparedStatement statement = connection.prepareStatement(sql)) {
+    PreparedStatement statement = requireValue(connection.prepareStatement(sql));
+    @Nullable Throwable statementFailure = null;
+    try {
       statement.setObject(1, request.messageId());
       statement.setObject(2, request.correlationId());
       statement.setString(3, request.destination().address());
@@ -79,13 +82,25 @@ public final class JdbcOutboxRepository {
         statement.setNull(12, java.sql.Types.VARCHAR);
         statement.setNull(13, java.sql.Types.TIMESTAMP_WITH_TIMEZONE);
       }
-      try (ResultSet result = statement.executeQuery()) {
+      ResultSet result = requireValue(statement.executeQuery());
+      @Nullable Throwable resultFailure = null;
+      try {
         if (!result.next()) {
           throw new OutboxIntegrityException("outbox insert returned no identifier");
         }
         // BUG2366/YKT2111: SQL NULL must not become a successful primitive zero.
         return requireValue(result.getObject(1, Long.class));
+      } catch (Throwable failure) {
+        resultFailure = failure;
+        throw failure;
+      } finally {
+        closeRows(result, resultFailure);
       }
+    } catch (Throwable failure) {
+      statementFailure = failure;
+      throw failure;
+    } finally {
+      closeStatement(statement, statementFailure);
     }
   }
 
@@ -98,13 +113,17 @@ public final class JdbcOutboxRepository {
       throw new IllegalArgumentException("claim limit must be between 1 and 100");
     }
     Instant leaseUntil = now.plusSeconds(10);
-    try (PreparedStatement statement = connection.prepareStatement(CLAIM_SQL)) {
+    PreparedStatement statement = requireValue(connection.prepareStatement(CLAIM_SQL));
+    @Nullable Throwable statementFailure = null;
+    try {
       statement.setObject(1, now.atOffset(java.time.ZoneOffset.UTC));
       statement.setObject(2, now.atOffset(java.time.ZoneOffset.UTC));
       statement.setInt(3, limit);
       statement.setString(4, owner);
       statement.setObject(5, leaseUntil.atOffset(java.time.ZoneOffset.UTC));
-      try (ResultSet result = statement.executeQuery()) {
+      ResultSet result = requireValue(statement.executeQuery());
+      @Nullable Throwable resultFailure = null;
+      try {
         List<OutboxEntry> entries = new ArrayList<>();
         while (result.next()) {
           entries.add(read(result));
@@ -112,7 +131,17 @@ public final class JdbcOutboxRepository {
         entries.sort(
             Comparator.comparing(OutboxEntry::nextAttemptAt).thenComparingLong(OutboxEntry::id));
         return List.copyOf(entries);
+      } catch (Throwable failure) {
+        resultFailure = failure;
+        throw failure;
+      } finally {
+        closeRows(result, resultFailure);
       }
+    } catch (Throwable failure) {
+      statementFailure = failure;
+      throw failure;
+    } finally {
+      closeStatement(statement, statementFailure);
     }
   }
 
@@ -125,11 +154,18 @@ public final class JdbcOutboxRepository {
         "update schubert.mq_outbox set status='SENT',sent_at=?,lease_owner=null,"
             + "lease_until=null,last_error_code=null,last_error_detail=null "
             + "where id=? and lease_owner=? and status in ('PENDING','ERROR')";
-    try (PreparedStatement statement = connection.prepareStatement(sql)) {
+    PreparedStatement statement = requireValue(connection.prepareStatement(sql));
+    @Nullable Throwable statementFailure = null;
+    try {
       statement.setObject(1, sentAt.atOffset(java.time.ZoneOffset.UTC));
       statement.setLong(2, entry.id());
       statement.setString(3, entry.leaseOwner());
       return statement.executeUpdate() == 1;
+    } catch (Throwable failure) {
+      statementFailure = failure;
+      throw failure;
+    } finally {
+      closeStatement(statement, statementFailure);
     }
   }
 
@@ -154,7 +190,9 @@ public final class JdbcOutboxRepository {
             + "lease_owner=null,lease_until=null,sent_at=null,last_error_code=?,"
             + "last_error_detail=? where id=? and lease_owner=? and attempt_count=? "
             + "and status in ('PENDING','ERROR')";
-    try (PreparedStatement statement = connection.prepareStatement(sql)) {
+    PreparedStatement statement = requireValue(connection.prepareStatement(sql));
+    @Nullable Throwable statementFailure = null;
+    try {
       statement.setInt(1, nextAttempt);
       statement.setObject(2, dueAt.atOffset(java.time.ZoneOffset.UTC));
       statement.setString(3, code);
@@ -163,6 +201,31 @@ public final class JdbcOutboxRepository {
       statement.setString(6, entry.leaseOwner());
       statement.setInt(7, entry.attemptCount());
       return statement.executeUpdate() == 1;
+    } catch (Throwable failure) {
+      statementFailure = failure;
+      throw failure;
+    } finally {
+      closeStatement(statement, statementFailure);
+    }
+  }
+
+  // SSC-471: preserve the exact try-with-resources primary and suppression rules.
+  private static void closeRows(ResultSet rows, @Nullable Throwable primary) throws SQLException {
+    try {
+      rows.close();
+    } catch (Throwable secondary) {
+      if (primary == null) throw secondary;
+      primary.addSuppressed(secondary);
+    }
+  }
+
+  private static void closeStatement(PreparedStatement statement, @Nullable Throwable primary)
+      throws SQLException {
+    try {
+      statement.close();
+    } catch (Throwable secondary) {
+      if (primary == null) throw secondary;
+      primary.addSuppressed(secondary);
     }
   }
 

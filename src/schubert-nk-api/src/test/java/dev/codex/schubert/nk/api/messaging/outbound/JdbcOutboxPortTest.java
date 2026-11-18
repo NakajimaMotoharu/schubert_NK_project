@@ -28,10 +28,16 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
 /** PT-OUT-JDBC001..008; SS331/332 independent SQL/UTC/lease/retry oracle; BUG2366/YKT2111. */
 final class JdbcOutboxPortTest {
+  private static final String AUTO_COMMIT_POINT = "connection.getAutoCommit";
+  private static final String PREPARE_POINT = "connection.prepareStatement";
+  private static final String NEXT_POINT = "result.next";
+  private static final String ROWS_CLOSE_POINT = "result.close";
+  private static final String STATEMENT_CLOSE_POINT = "statement.close";
   private static final Instant NOW = Instant.parse("2026-01-02T03:04:05.123456Z");
   private static final UUID MESSAGE = UUID.fromString("00000000-0000-4000-8000-000000000001");
   private static final UUID CORRELATION = UUID.fromString("00000000-0000-4000-8000-000000000002");
@@ -123,6 +129,9 @@ final class JdbcOutboxPortTest {
     private final Map<Integer, Integer> nullTypes = new HashMap<>();
     private final List<Map<Object, Object>> rows = new ArrayList<>();
     private final List<String> calls = new ArrayList<>();
+    private final Map<String, SQLException> additionalFaults = new HashMap<>();
+    private boolean missingStatement;
+    private boolean missingRows;
     private int index = -1;
     private int affected = 1;
     private boolean autoCommit;
@@ -137,6 +146,9 @@ final class JdbcOutboxPortTest {
       if (point.equals(fail)) {
         throw failure;
       }
+
+      @Nullable SQLException extra = additionalFaults.get(point);
+      if (extra != null) throw extra;
     }
 
     private ResultSet result() {
@@ -181,7 +193,7 @@ final class JdbcOutboxPortTest {
               return null;
             }
             return switch (operation) {
-              case "executeQuery" -> result();
+              case "executeQuery" -> missingRows ? null : result();
               case "executeUpdate" -> affected;
               case "close" -> {
                 statementClosed = true;
@@ -202,7 +214,7 @@ final class JdbcOutboxPortTest {
               case "getAutoCommit" -> autoCommit;
               case "prepareStatement" -> {
                 sql = (String) args[0];
-                yield statement();
+                yield missingStatement ? null : statement();
               }
               default -> throw new AssertionError("borrowed transaction changed: " + operation);
             };
@@ -556,17 +568,17 @@ final class JdbcOutboxPortTest {
     var repository = new JdbcOutboxRepository(() -> 0);
     for (String point :
         List.of(
-            "connection.getAutoCommit",
-            "connection.prepareStatement",
+            AUTO_COMMIT_POINT,
+            PREPARE_POINT,
             "statement.setObject",
             "statement.setString",
             "statement.setBytes",
             "statement.setNull",
             "statement.executeQuery",
-            "result.next",
+            NEXT_POINT,
             "result.getObject",
-            "result.close",
-            "statement.close")) {
+            ROWS_CLOSE_POINT,
+            STATEMENT_CLOSE_POINT)) {
       var f = new Fixture();
       f.rows.add(Map.of(1, 7L));
       f.fail = point;
@@ -608,7 +620,8 @@ final class JdbcOutboxPortTest {
   @Test
   void sharedRepositoryParallelCallsKeepOwnRowsBindingsAndBody() throws Exception {
     var repository = new JdbcOutboxRepository(() -> 0);
-    try (var pool = Executors.newFixedThreadPool(2)) {
+    var pool = Executors.newFixedThreadPool(2);
+    try {
       var jobs = new ArrayList<java.util.concurrent.Future<Long>>();
       for (int index = 0; index < 16; index++) {
         long id = index + 1;
@@ -631,6 +644,92 @@ final class JdbcOutboxPortTest {
       for (int index = 0; index < jobs.size(); index++) {
         assertEquals(index + 1L, jobs.get(index).get(10, TimeUnit.SECONDS));
       }
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
+  }
+
+  @FunctionalInterface
+  private interface RepositoryCall {
+    void run(Fixture fixture) throws SQLException;
+  }
+
+  private static List<RepositoryCall> queryCalls(JdbcOutboxRepository repository) {
+    return List.of(
+        fixture -> repository.enqueue(fixture.connection(), request(false)),
+        fixture -> repository.claim(fixture.connection(), OWNER, NOW, 1));
+  }
+
+  private static void assertRequiredSqlFailure(RepositoryCall call, Fixture fixture) {
+    var failure = assertThrows(SQLDataException.class, () -> call.run(fixture));
+    assertEquals("22004", failure.getSQLState());
+    assertEquals("required database value is missing", failure.getMessage());
+    assertEquals(0, failure.getSuppressed().length);
+    fixture.borrowed();
+  }
+
+  @Test
+  void requiredStatementNullStopsAllFourOperationsBeforeBinding() {
+    var repository = new JdbcOutboxRepository(() -> 0);
+    var calls = new ArrayList<>(queryCalls(repository));
+    calls.add(fixture -> repository.markSent(fixture.connection(), entry(0), NOW));
+    calls.add(fixture -> repository.markFailure(fixture.connection(), entry(0), NOW, CODE, DETAIL));
+    for (var call : calls) {
+      var fixture = new Fixture();
+      fixture.missingStatement = true;
+      assertRequiredSqlFailure(call, fixture);
+      assertEquals(List.of(AUTO_COMMIT_POINT, PREPARE_POINT), fixture.calls);
+      assertFalse(fixture.statementClosed);
+      assertFalse(fixture.resultClosed);
+    }
+  }
+
+  @Test
+  void requiredRowsNullClosesTheAlreadyAcquiredStatementExactlyOnce() {
+    var repository = new JdbcOutboxRepository(() -> 0);
+    for (var call : queryCalls(repository)) {
+      var fixture = new Fixture();
+      fixture.missingRows = true;
+      assertRequiredSqlFailure(call, fixture);
+      assertTail(fixture, "statement.executeQuery", STATEMENT_CLOSE_POINT);
+      assertEquals(1, fixture.calls.stream().filter(STATEMENT_CLOSE_POINT::equals).count());
+      assertTrue(fixture.statementClosed);
+      assertFalse(fixture.resultClosed);
+      assertFalse(fixture.calls.stream().anyMatch(point -> point.startsWith("result.")));
+    }
+  }
+
+  @Test
+  void jdbcPrimarySuppressionAndJdkSelfFailureCloseRowsBeforeStatement() {
+    var repository = new JdbcOutboxRepository(() -> 0);
+    for (boolean self : List.of(false, true)) {
+      var fixture = new Fixture();
+      fixture.fail = NEXT_POINT;
+      var statementFailure = new SQLException("public statement cleanup failure");
+      var rowsFailure = self ? fixture.failure : new SQLException("public row cleanup failure");
+      fixture.additionalFaults.put(ROWS_CLOSE_POINT, rowsFailure);
+      fixture.additionalFaults.put(STATEMENT_CLOSE_POINT, statementFailure);
+      var call = queryCalls(repository).getFirst();
+      if (self) {
+        var failure = assertThrows(IllegalArgumentException.class, () -> call.run(fixture));
+        assertSame(fixture.failure, failure.getCause());
+        assertEquals(List.of(statementFailure), List.of(failure.getSuppressed()));
+        assertEquals(List.of(), List.of(fixture.failure.getSuppressed()));
+      } else {
+        var failure = assertThrows(SQLException.class, () -> call.run(fixture));
+        assertSame(fixture.failure, failure);
+        assertEquals(List.of(rowsFailure, statementFailure), List.of(failure.getSuppressed()));
+      }
+      assertTail(fixture, NEXT_POINT, ROWS_CLOSE_POINT, STATEMENT_CLOSE_POINT);
+      assertEquals(1, fixture.calls.stream().filter(ROWS_CLOSE_POINT::equals).count());
+      assertEquals(1, fixture.calls.stream().filter(STATEMENT_CLOSE_POINT::equals).count());
+      fixture.borrowed();
+    }
+  }
+
+  private static void assertTail(Fixture fixture, String... suffix) {
+    int size = fixture.calls.size();
+    assertEquals(List.of(suffix), fixture.calls.subList(size - suffix.length, size));
   }
 }
