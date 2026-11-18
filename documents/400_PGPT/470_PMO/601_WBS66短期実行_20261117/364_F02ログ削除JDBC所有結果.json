@@ -1,0 +1,206 @@
+{
+  "eventId": "PGPT-20261008-5896",
+  "actualExit": 0,
+  "workStatus": "PARTIAL",
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F02-LOG-CLEANUP-GRAPH-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-F02-LOG-CLEANUP-GRAPH-20261118",
+    "workAttributionKind": "REWORK",
+    "workScope": "WBS-F02-a and P017-07.02, SSC461 BUG3233/YKT2680. Move seven LogCleanupService JDBC failure graph calls to Bootstrap; preserve SQL, borrowed transaction, rollback and restoration order, Error identity and redaction. Exact existing 21 stand-alone proxy cases include cause/suppressed/SQL-next graphs; bounded existing Guard signature and six symbols analysis only, no external DB, filesystem delete commands, secrets, runtime authority. End same-source static/ABI/raw scope plus independent terminal and scope gaps.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/4210_Log現在十九原試験と追加二例外単体仕様.md",
+        "sha256": "ecf99f0a805bee939193d4d5f9844b2dda1fca4cbf2cd629e4a542b47d587834"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28456-log-analysis-context-post-v1/manifest.json",
+        "sha256": "3c423d5172314d3a5962e8f13397f14c99a4ba7e7a8d41fe06cb211e0f524c31"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38734-f03-cleanup-raw-owner-proof-v1/manifest.json",
+        "sha256": "06b502f2f7b0d0941bacb52bbb8b03fdc7c866dac5ec621a8cb0147292b87d0e"
+      }
+    ],
+    "productionCoreMain": "a6b7a248aa84570fd49ac2069f6b847e220429b1",
+    "source": "d5f0c4b3e93778af765c480c6e4fa12de1f4b1f5",
+    "wbsLeafIds": [
+      "WBS-F02",
+      "WBS-P017-07.02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a",
+      "SSC-461",
+      "YKT-2680"
+    ],
+    "run": "PG38879-f02-log-cleanup-independent-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.55,
+      "base": 1.35,
+      "high": 3.4
+    },
+    "groupCapPp": 5.5,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "relatedBug": "BUG-3233",
+    "relatedYkt": "YKT-2680",
+    "quotaAfter": {
+      "usedPercent": 31,
+      "remainingPercent": 69,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "677aadc034a5c10f0b9dd5657432888af79e545fc3d51d8aa653e9b2587dbd85",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T07:32:11.992000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 31,
+          "remainingPercent": 69,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T07:31:15.733322+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 31,
+      "remainingPercent": 69,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-5895",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38879-f02-log-cleanup-independent-v1/manifest.json",
+      "sha256": "9955367f7e6c69ed508312b3ebf6f1c85ab7684541f5b2bb7889d5d705e30c31"
+    },
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortCompletionRate": null,
+    "firstProductRunSuccess": true,
+    "firstQualityAdmitted": true,
+    "productTestsExecuted": 21,
+    "newDefinitions": 0,
+    "caseDenominator": 21,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "notRun": 0,
+    "transferredThis": 7,
+    "migratedUpperSites": 22,
+    "upperInitialSites": 104,
+    "relatedBugs": [
+      "BUG-3233",
+      "BUG-3245"
+    ],
+    "crossRefYkt": [
+      "YKT-2680",
+      "YKT-2683"
+    ],
+    "targetRaw": {
+      "LINE": [
+        0,
+        171
+      ],
+      "METHOD": [
+        3,
+        17
+      ],
+      "CLASS": [
+        0,
+        3
+      ],
+      "BRANCH": [
+        4,
+        72
+      ],
+      "INSTRUCTION": [
+        14,
+        629
+      ]
+    },
+    "unfilteredDeficits": {
+      "dev/codex/schubert/nk/batch/cleanup/LogCleanupService$ChunkProgress": {
+        "INSTRUCTION": [
+          10,
+          15
+        ],
+        "BRANCH": [
+          0,
+          0
+        ],
+        "LINE": [
+          0,
+          1
+        ],
+        "COMPLEXITY": [
+          3,
+          3
+        ],
+        "METHOD": [
+          3,
+          3
+        ],
+        "CLASS": [
+          0,
+          1
+        ]
+      },
+      "dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SessionLease": {
+        "INSTRUCTION": [
+          4,
+          225
+        ],
+        "BRANCH": [
+          4,
+          30
+        ],
+        "LINE": [
+          0,
+          66
+        ],
+        "COMPLEXITY": [
+          4,
+          16
+        ],
+        "METHOD": [
+          0,
+          3
+        ],
+        "CLASS": [
+          0,
+          1
+        ]
+      }
+    },
+    "completedAdditionalPricePp": 0,
+    "additionalCompletedPriceTotalPp": 42.9,
+    "originalCompletedPriceTotalPp": 9.538,
+    "shortTermTwelvePlanPp": 143.371,
+    "reviewStatus": "LOG_CLEANUP_SEVEN_GRAPH_OWNERS_TRANSFERRED_RAW_NESTED_DEFICITS_OPEN",
+    "nextCondition": "BUG3245 close owned statement and result branches and obsolete private progress methods, preserving all old observations; preserve all whole scope gaps. Six-module same-source, Storage direct file callbacks and legacy entry still open."
+  }
+}
