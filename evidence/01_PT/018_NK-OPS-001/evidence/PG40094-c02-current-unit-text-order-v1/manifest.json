@@ -1,0 +1,178 @@
+{
+  "actualExit": 0,
+  "sourceCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "head": "d3ce986c16c0c0a8283834c98dfadc3723bf8581",
+  "currentFiles": [
+    {
+      "path": "src/deployment/systemd/artemis.service",
+      "source": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+      "sha256": "1b8fe8eaab683ac658bfe8c23816e709725431a0a2b80816bba5449d129c5266"
+    },
+    {
+      "path": "src/deployment/systemd/caddy.service.d/schubert-nk-startup-policy.conf",
+      "source": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+      "sha256": "6711ce8ddf9fcf54f733acfb30c10e4970a051d55dba340bc55f70970060440e"
+    },
+    {
+      "path": "src/deployment/systemd/caddy.service.d/schubert-nk-stop-policy.conf",
+      "source": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+      "sha256": "3710be0c023a4bbbf3a8f095cd2d91c5b97b40ed76056ddd4ff433d4f4e066bc"
+    },
+    {
+      "path": "src/deployment/systemd/optional/inbox-inspector-context-previous.conf",
+      "source": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+      "sha256": "4e1de7eb4bee81acb1afb9fa34d41f01b26829030c225e74d92f1bce122dfd13"
+    },
+    {
+      "path": "src/deployment/systemd/optional/inbox-inspector-response-previous.conf",
+      "source": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+      "sha256": "8629e3e009a38a164b9954326f25cbfcc6faa590fc838fd52307da6c9120e9b4"
+    },
+    {
+      "path": "src/deployment/systemd/schubert-nk-api.service.template",
+      "source": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+      "sha256": "c81f848198dff4e24f7d607aef3caf3b3fa5d401278eeb0b1707662bdbc2d630"
+    },
+    {
+      "path": "src/deployment/systemd/schubert-nk-backup.service.template",
+      "source": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+      "sha256": "2328437591829502f9318c39358b3c5f9ed06afb4d4116febcb3d1860d3b2b8a"
+    },
+    {
+      "path": "src/deployment/systemd/schubert-nk-bootstrap-admin.service.template",
+      "source": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+      "sha256": "e38a6021b2881ec832a8ca7fa8961f8754619b110415ef35a6aa0992e556d392"
+    },
+    {
+      "path": "src/deployment/systemd/schubert-nk-cleanup.service.template",
+      "source": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+      "sha256": "a7446238928b4446a65fdd6088a7a5ad374b5a4507ade1adf9084190091c34a2"
+    },
+    {
+      "path": "src/deployment/systemd/schubert-nk-expiry-cleanup.service.template",
+      "source": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+      "sha256": "0e6c3453373e4eb9c20ff175408ff66db731acda376c0b343e89f3541cf30709"
+    },
+    {
+      "path": "src/deployment/systemd/schubert-nk-inbox-inspector.service",
+      "source": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+      "sha256": "225adff0cee398c1ad7d25bd587e666018b9698a3d0256788c38cf029d8262d8"
+    },
+    {
+      "path": "src/deployment/systemd/schubert-nk-morning-controller.service.template",
+      "source": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+      "sha256": "e9ce87045404893edede09b86dfb55523698ed26eeef3c4cb2b386f16518613b"
+    },
+    {
+      "path": "src/deployment/systemd/schubert-nk-morning.target.template",
+      "source": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+      "sha256": "befb463e738a7cec5379b98cbb9ca68026fe49bb5ab7c593038bae9df8ebfacb"
+    },
+    {
+      "path": "src/deployment/systemd/schubert-nk-web.service.template",
+      "source": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+      "sha256": "eb3980ad64852645ffe2a07ac2ac4f453aeb8ce9cedd1d9147e1a1d3d863acbc"
+    }
+  ],
+  "fixedOrderEdges": 28,
+  "graphNodes": 11,
+  "canonical": {
+    "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "sha256": "07ab19dd27038241ba8257a1e4dcf180117a844b68479ec6848658a938445192"
+  },
+  "tests": [
+    {
+      "testId": "PT-C02-TEXT-001",
+      "passed": true,
+      "configurations": 14,
+      "orderEdges": 28,
+      "graphNodes": 11
+    },
+    {
+      "testId": "PT-C02-TEXT-002",
+      "unit": "schubert-nk-api.service",
+      "expected": "TYPE_TIME_EXIT_POLICY",
+      "actual": "TYPE_TIME_EXIT_POLICY",
+      "passed": true
+    },
+    {
+      "testId": "PT-C02-TEXT-003",
+      "unit": "schubert-nk-expiry-cleanup.service",
+      "expected": "TYPE_TIME_EXIT_POLICY",
+      "actual": "TYPE_TIME_EXIT_POLICY",
+      "passed": true
+    },
+    {
+      "testId": "PT-C02-TEXT-004",
+      "unit": "artemis.service",
+      "expected": "SIGKILL_POLICY",
+      "actual": "SIGKILL_POLICY",
+      "passed": true
+    },
+    {
+      "testId": "PT-C02-TEXT-005",
+      "unit": "schubert-nk-morning.target",
+      "expected": "NO_PARALLEL_CHILD_ACTIVATION",
+      "actual": "NO_PARALLEL_CHILD_ACTIVATION",
+      "passed": true
+    },
+    {
+      "testId": "PT-C02-TEXT-006",
+      "unit": "schubert-nk-api.service",
+      "expected": "SIGNED_REQUIRES",
+      "actual": "SIGNED_REQUIRES",
+      "passed": true
+    },
+    {
+      "testId": "PT-C02-TEXT-007",
+      "unit": "artemis.service",
+      "expected": "ORDER_CYCLE",
+      "actual": "ORDER_CYCLE",
+      "passed": true
+    },
+    {
+      "testId": "PT-C02-TEXT-008",
+      "unit": "schubert-nk-web.service",
+      "expected": "REPEATED_DIRECTIVE",
+      "actual": "REPEATED_DIRECTIVE",
+      "passed": true
+    },
+    {
+      "testId": "PT-C02-TEXT-009",
+      "unit": "caddy.service.d/schubert-nk-stop-policy.conf",
+      "expected": "STOP_ONLY",
+      "actual": "STOP_ONLY",
+      "passed": true
+    }
+  ],
+  "sourceOnly": true,
+  "returnedUnitEvidence": false,
+  "currentHostObservation": false,
+  "caddyWebEffectiveAfterRequires": "Unverified in base Unit; source drop-ins are Service-only",
+  "inspectorOwnerAndTerminalAccepted": false,
+  "systemdOrRuntimeInvocations": 0,
+  "productTests": 0,
+  "wholeC02Accepted": false,
+  "whole451Accepted": false,
+  "newAcceptance": 0,
+  "references": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40042-wbs66-current-four-roles-update-v1/manifest.json",
+      "sha256": "83e1cb2431018d84be1b608b7529dec1dbf2454237676a982f46ef9c935a8e92"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG7038-c02-four-template-post-v1/manifest.json",
+      "sha256": "86e8d32bf2b07f73bb57e727be495f1f27b190a58979f872c50c848cfd22d9ef"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/485_WBS網羅性・受入対応.json",
+      "sha256": "af112e99029a8e6ed8eefa4f8bd567e2720b94d15d93f7ec310460fa31dd1800"
+    }
+  ],
+  "terminalAtUTC": "2026-11-18T19:36:23.446782+00:00",
+  "verifier": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/5276_c02_unit_text_order.py",
+    "sha256": "9a131aa8c942be11639bf686e40ea1a19d28b4f5d06b556ddae8222f72157ca5"
+  }
+}
