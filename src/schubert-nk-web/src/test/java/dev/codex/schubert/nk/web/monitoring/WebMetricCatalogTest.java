@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import io.micrometer.core.instrument.Meter;
 import io.micrometer.core.instrument.Tag;
@@ -335,7 +336,8 @@ class WebMetricCatalogTest {
 
   @Test
   void webcat014FiniteConcurrentCallsHaveNoRetainedMutableState() throws Exception {
-    try (var workers = Executors.newFixedThreadPool(4)) {
+    var workers = Executors.newFixedThreadPool(4);
+    try {
       var jobs = new ArrayList<Future<?>>();
       for (int index = 0; index < 64; index++)
         jobs.add(
@@ -349,6 +351,9 @@ class WebMetricCatalogTest {
                   assertEquals(1, catalog.timers().size());
                 }));
       for (var job : jobs) job.get(10, TimeUnit.SECONDS);
+    } finally {
+      workers.shutdownNow();
+      assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 }
