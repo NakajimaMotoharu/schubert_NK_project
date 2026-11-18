@@ -521,3 +521,7 @@ Minor/patch導入時は必ず導入versionの公式資料とconfig validatorで�
 ## SSC309 same-PID exec世代の一時状態
 
 世代専用の再照合はLinux非leader exec切替中のstat Zを同PID/startTicksの未終端確認として保持する。Z単体から生存/ready/終了を発行しない。self/PID1/初回Root捕捉のstate制限は不変更。boot/Unit/Invocation/cgroup/ticksは従来どおり二読一致、X/x/未知/不正/再利用は拒否。ordinaryのUID/GID/groups/caps/NNP・cmdline・所有socket・実HTTP200 UP/infoの前後照合を必須にし、true zombie/未readyは元期限内のpending、期限延長/再起動/UNKNOWN正常化なし。SS343/354・SSC164/BUG1470/YKT1233に横断追跡する。
+
+## SSC-468 API／Web接続確認と取得で共有する固定role
+
+ServiceDatabaseAdmissionは、非nullのService値に対しAPI→schubert_app、WEB→schubert_web_sessionの閉じた不変対応表を使用する。表に定義のない値で既roleへfallbackしない。ServiceDatabaseSourceは同じ初期化で検証済みAdmissionのpackage内roleを参照し、取得時のuser設定に用いる。既定applicationName、URL形式、DBおよびrole確認、サービス外入力の拒否、既SQLSTATE、設定や認可・資格記録・公開ABIの変更はない。提供元への接続や実認証の再試験とは分け、既承認のメモリ内二Port全31、当source/build、型ごとの単一exec、生のbranch/line/method/class、例外の同一性と資源順を確認する。別のServiceDatabaseSource.closeに残るlock/wipe例外後条件の測定は独立管理する。

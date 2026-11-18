@@ -470,3 +470,7 @@ BUG3126/YKT2597。上位RD/UI変更不要。RunReferenceRepository.readのResult
 ## SSC-461 SQL例外graphの取得境界と順位
 
 JdbcFailureGraph.preserveFatalはjava.sql.SQLExceptionからnextを取得する唯一の新共通adapter。Throwableの元Error、cause、そのsuppressed配列順、最後のSQL nextの各辺を同じ幅優先キューで扱い、nodeはidentityで一度だけ探索する。JDBC admissionの既primary/secondary適用条件、固定診断・close優先・SQLstateは変更しない。旧入口の結果も移管期間中は保持。実DB・Root・全451は別検証。
+
+## SSC-468 サービス接続確認の型付き解放
+
+ServiceDatabaseAdmission.verifyのResultSet／PreparedStatementを解放する既処理を、それぞれnullを受けるprivate static型付きclose helperへまとめる。各finallyは当該helperを一回呼び、取得しなかった資源に対して何も行わない。取得済みなら必ず当該closeを一回行う。SQLException・RuntimeException・Errorのsecondaryは既JdbcAdmissionFailures.replaceへ渡し、既判定が真の場合だけ同一secondaryをthrowする。行→文の逆順、借用Connection非解放、元のJDBC確認SQL・role／DB／primary確認、SQLSTATE 08001固定診断と未知例外同一性、外側JdbcFailureGraphによる対応は維持する。helper引渡しのために資源取得後のcallbackを追加生成しない。
