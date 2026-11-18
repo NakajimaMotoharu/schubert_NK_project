@@ -32,6 +32,8 @@ PHASES = {
         '561_P020*', E/'PG40014-p020-game-onchange176-v1', 176, 182),
     'PG40035-p020-l01-required-actions-v2': (
         '561_P020*', E/'PG40014-p020-game-onchange176-v1', 176, 182),
+    'PG40056-p020-error-disclosure187-v1': (
+        '572_P020*', E/'PG40035-p020-l01-required-actions-v2', 182, 187),
 }
 TEST_PACKAGE='dev.codex.schubert.characterization.'
 JAVA_DIR=Path(TEST_PACKAGE.rstrip('.').replace('.','/'))

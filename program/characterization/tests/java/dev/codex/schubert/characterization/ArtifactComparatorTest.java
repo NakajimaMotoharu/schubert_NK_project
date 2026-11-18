@@ -43,6 +43,15 @@ class ArtifactComparatorTest {
   private static final String FIXTURE_DIF_012 = "DIF-012";
   private static final String FIXTURE_DIF_013 = "DIF-013";
   private static final String FIXTURE_CHR_S02 = "CHR-S02";
+  private static final String FIXTURE_CHR_E01 = "CHR-E01";
+  private static final String FIXTURE_SECRET_LEAK = "secretLeak";
+  private static final String FIXTURE_PATH_LEAK = "absolutePathLeak";
+  private static final String FIXTURE_EXCEPTION_LEAK = "exceptionClassLeak";
+  private static final List<String> FIXTURE_ERROR_FLAGS =
+      List.of(FIXTURE_SECRET_LEAK, FIXTURE_PATH_LEAK, FIXTURE_EXCEPTION_LEAK);
+  private static final String FIXTURE_UI_ERROR_POINTER = "/dif/DIF-005";
+  private static final String FIXTURE_CURRENT_ERROR_PREFIX = "CURRENT_ERROR_DISCLOSURE:";
+  private static final String FIXTURE_NK_ERROR_PREFIX = "NK_ERROR_DISCLOSURE:";
   private static final String FIXTURE_GAME_CHANGE = "gameOnchange";
   private static final String FIXTURE_GAME_CHANGE_POINTER = "/gameOnchange";
   private static final String FIXTURE_GAME_CHANGE_FIELD = "game.change";
@@ -195,7 +204,7 @@ class ArtifactComparatorTest {
               "PostgreSQL/MQ USER ADMIN"),
           new Oracle(
               "DIF-005",
-              "CHR-E01",
+              FIXTURE_CHR_E01,
               "error.presentation",
               FIXTURE_DIFFERENCE,
               FIXTURE_SEMANTIC,
@@ -1329,6 +1338,97 @@ class ArtifactComparatorTest {
         result.failures());
   }
 
+  @Test
+  void acceptsTheCommonErrorPresentationWithThreeExplicitFalseLeakFlags() throws Exception {
+    var result = compare(fixture("error-projection-closed"));
+    assertTrue(result.passed(), result.failures().toString());
+    assertTrue(result.usedDifferences().contains("DIF-005"));
+  }
+
+  @Test
+  void rejectsEveryPositiveLeakOnEachSide() throws Exception {
+    int variant = 0;
+    for (String field : FIXTURE_ERROR_FLAGS) {
+      Fixture fixture = fixture("positive-disclosure-" + variant++);
+      for (Path artifacts : List.of(fixture.current(), fixture.nk())) {
+        Path projection = errorProjection(artifacts);
+        mutate(projection, root -> root.put(field, true));
+
+        var result = compare(fixture);
+        String prefix =
+            artifacts.equals(fixture.current())
+                ? FIXTURE_CURRENT_ERROR_PREFIX
+                : FIXTURE_NK_ERROR_PREFIX;
+        assertFalse(result.passed());
+        assertContains(result.failures(), prefix + field);
+        assertEquals(List.of(FIXTURE_CHR_E01 + ":/" + field), result.unregisteredDifferences());
+
+        mutate(projection, root -> root.put(field, false));
+      }
+    }
+  }
+
+  @Test
+  void rejectsAnIdenticalPositiveLeakEvenWithoutAChangedField() throws Exception {
+    Fixture fixture = fixture("shared-positive-disclosure");
+    for (Path artifacts : List.of(fixture.current(), fixture.nk()))
+      mutate(errorProjection(artifacts), root -> root.put(FIXTURE_SECRET_LEAK, true));
+
+    var result = compare(fixture);
+
+    assertFalse(result.passed());
+    assertTrue(result.unregisteredDifferences().isEmpty());
+    assertContains(result.failures(), FIXTURE_CURRENT_ERROR_PREFIX + FIXTURE_SECRET_LEAK);
+    assertContains(result.failures(), FIXTURE_NK_ERROR_PREFIX + FIXTURE_SECRET_LEAK);
+  }
+
+  @Test
+  void rejectsMissingNullAndTextualLeakFlags() throws Exception {
+    Fixture fixture = fixture("disclosure-flag-type");
+    mutate(
+        errorProjection(fixture.nk()),
+        root -> {
+          root.remove(FIXTURE_SECRET_LEAK);
+          root.putNull(FIXTURE_PATH_LEAK);
+          root.put(FIXTURE_EXCEPTION_LEAK, "false");
+        });
+
+    var result = compare(fixture);
+
+    assertFalse(result.passed());
+    for (String field : FIXTURE_ERROR_FLAGS)
+      assertContains(result.failures(), FIXTURE_NK_ERROR_PREFIX + field);
+  }
+
+  @Test
+  void rejectsAnErrorStyleClaimThatTriesToCoverAChangedLeakFlag() throws Exception {
+    Fixture fixture = fixture("style-claim-on-disclosure");
+    mutate(errorProjection(fixture.nk()), root -> root.put(FIXTURE_PATH_LEAK, true));
+    mutate(
+        fixture.observations(),
+        root -> {
+          var claims = (ArrayNode) root.path(FIXTURE_OBSERVATIONS);
+          var claim =
+              (ObjectNode)
+                  claims.get(findObservation(claims, FIXTURE_CHR_E01, FIXTURE_UI_ERROR_POINTER));
+          claim
+              .put(FIXTURE_POINTER, "/" + FIXTURE_PATH_LEAK)
+              .put(FIXTURE_EXPECTED_CURRENT, false)
+              .put(FIXTURE_EXPECTED_NK, true);
+        });
+
+    var result = compare(fixture);
+
+    assertFalse(result.passed());
+    assertContains(
+        result.failures(), "OBSERVATION_ERROR_DISCLOSURE_FIELD:DIF-005:CHR-E01:/absolutePathLeak");
+    assertTrue(result.unregisteredDifferences().contains("CHR-E01:/absolutePathLeak"));
+  }
+
+  private static Path errorProjection(Path artifacts) {
+    return artifacts.resolve(FIXTURE_CHR_E01 + FIXTURE_JSON_SUFFIX);
+  }
+
   private static ArtifactComparator.ComparisonResult compare(Fixture fixture) throws IOException {
     return ArtifactComparator.compare(
         fixture.project(), fixture.current(), fixture.nk(), fixture.observations());
@@ -1379,6 +1479,11 @@ class ArtifactComparatorTest {
       nkArtifacts.put(
           caseId,
           JSON.createObjectNode().put(FIXTURE_CASEID, caseId).put(FIXTURE_STATUS, FIXTURE_PASS));
+    }
+
+    for (String field : FIXTURE_ERROR_FLAGS) {
+      currentArtifacts.get(FIXTURE_CHR_E01).put(field, false);
+      nkArtifacts.get(FIXTURE_CHR_E01).put(field, false);
     }
 
     ArrayNode observationItems = JSON.createArrayNode();

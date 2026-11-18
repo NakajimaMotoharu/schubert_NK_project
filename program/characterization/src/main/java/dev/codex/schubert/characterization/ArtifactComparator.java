@@ -38,6 +38,9 @@ public final class ArtifactComparator {
   private static final String GAME_CHANGE_DIFFERENCE = "DIF-013";
   private static final String GAME_CHANGE_CASE = "CHR-S02";
   private static final String GAME_CHANGE_FALLBACK = "javascriptDisabledSubmitButton";
+  private static final String ERROR_CASE = "CHR-E01";
+  private static final List<String> ERROR_NON_DISCLOSURE =
+      List.of("secretLeak", "absolutePathLeak", "exceptionClassLeak");
   private static final String SESSION_DIFFERENCE = "DIF-016";
   private static final String SESSION_CASE = "CHR-A02";
   private static final String LOGIN_TITLE = "CHR-A01:/title";
@@ -173,6 +176,16 @@ public final class ArtifactComparator {
             "NK_GAME_CHANGE_FALLBACK",
             failures);
       }
+      if (ERROR_CASE.equals(caseId)) {
+        for (String field : ERROR_NON_DISCLOSURE) {
+          require(
+              BooleanNode.FALSE.equals(current.path(field)),
+              "CURRENT_ERROR_DISCLOSURE:" + field,
+              failures);
+          require(
+              BooleanNode.FALSE.equals(nk.path(field)), "NK_ERROR_DISCLOSURE:" + field, failures);
+        }
+      }
       collectDifferences(caseId, "", current, nk, rawDifferences);
       comparedCases++;
     }
@@ -272,6 +285,10 @@ public final class ArtifactComparator {
       JsonNode actualCurrent = currentByCase.get(caseId).at(pointer);
       JsonNode actualNk = nkByCase.get(caseId).at(pointer);
       String differenceKey = key(caseId, pointer);
+      if (ERROR_CASE.equals(caseId) && ERROR_NON_DISCLOSURE.contains(pointer.substring(1))) {
+        failures.add("OBSERVATION_ERROR_DISCLOSURE_FIELD:" + observationKey);
+        valid = false;
+      }
       // L01 has its own log projection. The empty search field is specific to S04.
       Map<String, List<JsonNode>> fixed =
           EMPTY_MESSAGE_DIFFERENCE.equals(id) && !EMPTY_SEARCH_CASE.equals(caseId)
