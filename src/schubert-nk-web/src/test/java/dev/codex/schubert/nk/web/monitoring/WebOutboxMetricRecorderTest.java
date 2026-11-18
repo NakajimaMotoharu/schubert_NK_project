@@ -234,7 +234,7 @@ class WebOutboxMetricRecorderTest {
     try (var registry = new Registry()) {
       assertThrows(NullPointerException.class, () -> new WebOutboxMetricRecorder(null, DEBUG_MODE));
       assertThrows(NullPointerException.class, () -> new WebOutboxMetricRecorder(registry, null));
-      for (String mode : List.of("", "debug", "unknown"))
+      for (String mode : List.of("", "debug", "unknown", "DEBTf", "STANDAQc"))
         assertEquals(
             "CONFIG_INVALID",
             assertThrows(

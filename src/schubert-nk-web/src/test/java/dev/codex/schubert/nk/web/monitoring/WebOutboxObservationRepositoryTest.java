@@ -466,10 +466,14 @@ class WebOutboxObservationRepositoryTest {
             return actual.pending();
           });
     }
-    try (var pool = Executors.newFixedThreadPool(8)) {
+    var pool = Executors.newFixedThreadPool(8);
+    try {
       var results = pool.invokeAll(tasks, 5, TimeUnit.SECONDS);
       for (int index = 0; index < 64; index++)
         assertEquals(index + 1L, results.get(index).get(5, TimeUnit.SECONDS));
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(5, TimeUnit.SECONDS));
     }
     var later = new Fixture(Row.row(FIXTURE_PENDING_B11DB31F, 1, 3));
     assertEquals(

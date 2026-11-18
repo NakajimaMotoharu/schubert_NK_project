@@ -169,7 +169,7 @@ class WebOutboxMetricCollectorTest {
           () -> new WebOutboxMetricCollector(repo, null, FIXTURE_DEBUG_B6DFBABB));
       assertThrows(
           NullPointerException.class, () -> new WebOutboxMetricCollector(repo, registry, null));
-      for (String mode : List.of("", "debug", "unknown"))
+      for (String mode : List.of("", "debug", "unknown", "DEBTf", "STANDAQc"))
         assertEquals(
             "CONFIG_INVALID",
             assertThrows(
@@ -233,58 +233,63 @@ class WebOutboxMetricCollectorTest {
   @Test
   void webObxConn006OwnedContenderReallyBlocksUntilReadonlyAcquisitionAndPublicationFinish()
       throws Exception {
-    try (var registry = new Registry();
-        var executor = Executors.newFixedThreadPool(2)) {
-      var collector =
-          new WebOutboxMetricCollector(
-              new WebOutboxObservationRepository(), registry, FIXTURE_DEBUG_B6DFBABB);
-      var entered = new CountDownLatch(1);
-      var release = new CountDownLatch(1);
-      var attempted = new CountDownLatch(1);
-      var contender = new AtomicReference<Thread>();
-      var first = new Fixture(Row.row(FIXTURE_PENDING_B11DB31F, 3, 2));
-      var second = new Fixture(Row.row(FIXTURE_ERROR_F717E7D8, 7, 6));
-      var seen = new AtomicReference<Observation>();
-      first.beforeStatementClose =
-          () -> {
-            assertTrue(collector.snapshot().isEmpty());
-            unknown(registry);
-            entered.countDown();
-            await(release);
-          };
-      second.beforeStatementClose =
-          () -> {
-            seen.set(collector.snapshot().orElseThrow());
-            values(registry, 3, 0, 0, 2, 0, 0);
-          };
-      var a = executor.submit(() -> collector.collect(first.connection(), AS_OF));
+    try (var registry = new Registry()) {
+      var executor = Executors.newFixedThreadPool(2);
       try {
-        await(entered);
-        var b =
-            executor.submit(
-                () -> {
-                  contender.set(Thread.currentThread());
-                  attempted.countDown();
-                  return collector.collect(second.connection(), AS_OF);
-                });
-        await(attempted);
-        long deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(5);
-        while (contender.get().getState() != Thread.State.BLOCKED && System.nanoTime() < deadline)
-          Thread.onSpinWait();
-        assertEquals(Thread.State.BLOCKED, contender.get().getState());
-        assertEquals(0, second.prepared);
-        assertTrue(collector.snapshot().isEmpty());
-        release.countDown();
-        var one = a.get(5, TimeUnit.SECONDS).orElseThrow();
-        var two = b.get(5, TimeUnit.SECONDS).orElseThrow();
-        assertSame(one, seen.get());
-        assertSame(two, collector.snapshot().orElseThrow());
-        values(registry, 0, 0, 7, 0, 0, 6);
+        var collector =
+            new WebOutboxMetricCollector(
+                new WebOutboxObservationRepository(), registry, FIXTURE_DEBUG_B6DFBABB);
+        var entered = new CountDownLatch(1);
+        var release = new CountDownLatch(1);
+        var attempted = new CountDownLatch(1);
+        var contender = new AtomicReference<Thread>();
+        var first = new Fixture(Row.row(FIXTURE_PENDING_B11DB31F, 3, 2));
+        var second = new Fixture(Row.row(FIXTURE_ERROR_F717E7D8, 7, 6));
+        var seen = new AtomicReference<Observation>();
+        first.beforeStatementClose =
+            () -> {
+              assertTrue(collector.snapshot().isEmpty());
+              unknown(registry);
+              entered.countDown();
+              await(release);
+            };
+        second.beforeStatementClose =
+            () -> {
+              seen.set(collector.snapshot().orElseThrow());
+              values(registry, 3, 0, 0, 2, 0, 0);
+            };
+        var a = executor.submit(() -> collector.collect(first.connection(), AS_OF));
+        try {
+          await(entered);
+          var b =
+              executor.submit(
+                  () -> {
+                    contender.set(Thread.currentThread());
+                    attempted.countDown();
+                    return collector.collect(second.connection(), AS_OF);
+                  });
+          await(attempted);
+          long deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(5);
+          while (contender.get().getState() != Thread.State.BLOCKED && System.nanoTime() < deadline)
+            Thread.onSpinWait();
+          assertEquals(Thread.State.BLOCKED, contender.get().getState());
+          assertEquals(0, second.prepared);
+          assertTrue(collector.snapshot().isEmpty());
+          release.countDown();
+          var one = a.get(5, TimeUnit.SECONDS).orElseThrow();
+          var two = b.get(5, TimeUnit.SECONDS).orElseThrow();
+          assertSame(one, seen.get());
+          assertSame(two, collector.snapshot().orElseThrow());
+          values(registry, 0, 0, 7, 0, 0, 6);
+        } finally {
+          release.countDown();
+        }
+        first.complete();
+        second.complete();
       } finally {
-        release.countDown();
+        executor.shutdownNow();
+        assertTrue(executor.awaitTermination(5, TimeUnit.SECONDS));
       }
-      first.complete();
-      second.complete();
     }
   }
 
@@ -292,59 +297,64 @@ class WebOutboxMetricCollectorTest {
   void webObxConn007ParallelIndependentConnectionResultsMatchPrecomputedOwnerVectors()
       throws Exception {
     try (var registry = new Registry();
-        var other = new Registry();
-        var executor = Executors.newFixedThreadPool(8)) {
-      var collector =
-          new WebOutboxMetricCollector(
-              new WebOutboxObservationRepository(), registry, FIXTURE_DEBUG_B6DFBABB);
-      var expected = new ArrayList<long[]>();
-      var jobs = new ArrayList<Callable<Optional<Observation>>>();
-      for (int i = 1; i <= 64; i++) {
-        long p = i;
-        long s = i + 1L;
-        long e = i + 2L;
-        expected.add(new long[] {p, s, e});
-        jobs.add(
-            () -> {
-              var f =
-                  new Fixture(
-                      Row.row(FIXTURE_PENDING_B11DB31F, p, p),
-                      Row.row("SENT", s, s),
-                      Row.row(FIXTURE_ERROR_F717E7D8, e, e));
-              var value = collector.collect(f.connection(), AS_OF);
-              f.complete();
-              return value;
-            });
+        var other = new Registry()) {
+      var executor = Executors.newFixedThreadPool(8);
+      try {
+        var collector =
+            new WebOutboxMetricCollector(
+                new WebOutboxObservationRepository(), registry, FIXTURE_DEBUG_B6DFBABB);
+        var expected = new ArrayList<long[]>();
+        var jobs = new ArrayList<Callable<Optional<Observation>>>();
+        for (int i = 1; i <= 64; i++) {
+          long p = i;
+          long s = i + 1L;
+          long e = i + 2L;
+          expected.add(new long[] {p, s, e});
+          jobs.add(
+              () -> {
+                var f =
+                    new Fixture(
+                        Row.row(FIXTURE_PENDING_B11DB31F, p, p),
+                        Row.row("SENT", s, s),
+                        Row.row(FIXTURE_ERROR_F717E7D8, e, e));
+                var value = collector.collect(f.connection(), AS_OF);
+                f.complete();
+                return value;
+              });
+        }
+        var returned = new ArrayList<Observation>();
+        var futures = executor.invokeAll(jobs, 5, TimeUnit.SECONDS);
+        for (int i = 0; i < 64; i++) {
+          var value = futures.get(i).get(5, TimeUnit.SECONDS).orElseThrow();
+          returned.add(value);
+          var vector = expected.get(i);
+          assertEquals(vector[0], value.pending());
+          assertEquals(vector[1], value.sent());
+          assertEquals(vector[2], value.error());
+          assertEquals(Duration.ofSeconds(vector[0]), value.pendingAge());
+          assertEquals(Duration.ofSeconds(vector[1]), value.sentAge());
+          assertEquals(Duration.ofSeconds(vector[2]), value.errorAge());
+        }
+        var selected = collector.snapshot().orElseThrow();
+        int owner = -1;
+        for (int i = 0; i < returned.size(); i++) if (returned.get(i) == selected) owner = i;
+        assertTrue(owner >= 0);
+        var vector = expected.get(owner);
+        values(registry, vector[0], vector[1], vector[2], vector[0], vector[1], vector[2]);
+        var independent =
+            new WebOutboxMetricCollector(
+                new WebOutboxObservationRepository(), other, FIXTURE_DEBUG_B6DFBABB);
+        unknown(other);
+        var f = new Fixture(Row.row(FIXTURE_ERROR_F717E7D8, 9, 8));
+        independent.collect(f.connection(), AS_OF);
+        values(other, 0, 0, 9, 0, 0, 8);
+        f.complete();
+        assertSame(selected, collector.snapshot().orElseThrow());
+        values(registry, vector[0], vector[1], vector[2], vector[0], vector[1], vector[2]);
+      } finally {
+        executor.shutdownNow();
+        assertTrue(executor.awaitTermination(5, TimeUnit.SECONDS));
       }
-      var returned = new ArrayList<Observation>();
-      var futures = executor.invokeAll(jobs, 5, TimeUnit.SECONDS);
-      for (int i = 0; i < 64; i++) {
-        var value = futures.get(i).get(5, TimeUnit.SECONDS).orElseThrow();
-        returned.add(value);
-        var vector = expected.get(i);
-        assertEquals(vector[0], value.pending());
-        assertEquals(vector[1], value.sent());
-        assertEquals(vector[2], value.error());
-        assertEquals(Duration.ofSeconds(vector[0]), value.pendingAge());
-        assertEquals(Duration.ofSeconds(vector[1]), value.sentAge());
-        assertEquals(Duration.ofSeconds(vector[2]), value.errorAge());
-      }
-      var selected = collector.snapshot().orElseThrow();
-      int owner = -1;
-      for (int i = 0; i < returned.size(); i++) if (returned.get(i) == selected) owner = i;
-      assertTrue(owner >= 0);
-      var vector = expected.get(owner);
-      values(registry, vector[0], vector[1], vector[2], vector[0], vector[1], vector[2]);
-      var independent =
-          new WebOutboxMetricCollector(
-              new WebOutboxObservationRepository(), other, FIXTURE_DEBUG_B6DFBABB);
-      unknown(other);
-      var f = new Fixture(Row.row(FIXTURE_ERROR_F717E7D8, 9, 8));
-      independent.collect(f.connection(), AS_OF);
-      values(other, 0, 0, 9, 0, 0, 8);
-      f.complete();
-      assertSame(selected, collector.snapshot().orElseThrow());
-      values(registry, vector[0], vector[1], vector[2], vector[0], vector[1], vector[2]);
     }
   }
 
