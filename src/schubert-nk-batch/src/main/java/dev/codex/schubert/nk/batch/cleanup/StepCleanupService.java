@@ -1,12 +1,12 @@
 package dev.codex.schubert.nk.batch.cleanup;
 
+import dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph;
 import dev.codex.schubert.nk.batch.repository.BatchRepositoryException;
 import dev.codex.schubert.nk.batch.repository.BatchStepAttempt;
 import dev.codex.schubert.nk.batch.repository.CleanupCounts;
 import dev.codex.schubert.nk.batch.repository.CleanupKind;
 import dev.codex.schubert.nk.batch.repository.CleanupStepChunk;
 import dev.codex.schubert.nk.batch.repository.CleanupStepRepository;
-import dev.codex.schubert.nk.storage.StorageIoException;
 import java.sql.Connection;
 import java.sql.SQLDataException;
 import java.sql.SQLException;
@@ -71,10 +71,10 @@ public final class StepCleanupService {
         expected = Optional.of(after);
       }
     } catch (CleanupStoppedException failure) {
-      StorageIoException.preserveFatal(failure);
+      JdbcFailureGraph.preserveFatal(failure);
       throw new CleanupStoppedException(failure.reason());
     } catch (SQLException | BatchRepositoryException failure) {
-      StorageIoException.preserveFatal(failure);
+      JdbcFailureGraph.preserveFatal(failure);
       throw new CleanupStoppedException(CleanupStopReason.DATABASE_FAILURE);
     }
   }
@@ -118,8 +118,8 @@ public final class StepCleanupService {
         if (cleanupFailure instanceof RuntimeException
             && !(cleanupFailure instanceof BatchRepositoryException)
             && !(cleanupFailure instanceof CleanupStoppedException)) throw cleanupFailure;
-        StorageIoException.preserveFatal(failure);
-        StorageIoException.preserveFatal(cleanupFailure);
+        JdbcFailureGraph.preserveFatal(failure);
+        JdbcFailureGraph.preserveFatal(cleanupFailure);
         throw new CleanupStoppedException(CleanupStopReason.DATABASE_FAILURE);
       }
       throw failure;

@@ -1,0 +1,68 @@
+{
+  "eventId": "PGPT-20261008-5899",
+  "groupId": "PGPT-WBS66-F02-STEP-CLEANUP-JDBC-OWNER-20261118",
+  "baseCore": "421b1f35ee0733c4b357e4a862e1e2dc55e9b780",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-18T07:42:47.529000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 31,
+      "remainingPercent": 69,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F02-STEP-CLEANUP-JDBC-OWNER-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-F02-STEP-CLEANUP-JDBC-OWNER-20261118",
+    "workAttributionKind": "REWORK",
+    "workScope": "F02-a and short-term P004-05 JDBC transaction contract, SSC461/BUG3233/YKT2680. Move StepCleanupService's four independent JDBC-aware Throwable boundary calls into Bootstrap; retain the existing actual DB StepCleanupServiceTest HOLD. Add separate ordinary strict public method tests with borrowed in-memory JDBC, synthetic rows, literal SQL bindings and primary/secondary/Error/restore/no-success conditions and ABI. Do not substitute for provider, lock, real DB, permission or native run.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38899-f03-log-lease-independent-v1/manifest.json",
+        "sha256": "5b3282d3716b3e498d2c24400e4b57cee950a648f9b017068fbc0d5a5c7c91bc"
+      },
+      {
+        "path": "evidence/01_PT/017_NK-BAT-001/064_NK-BAT-001_CleanupStep資源横展開仕様.md",
+        "sha256": "2a0b569d0f891b53081b5d8481650bb5ba1cc8a0e94a6374f4293068ec7b8272"
+      },
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/318_SSC461例外伝播責務候補と着手依存.md",
+        "sha256": "5ea09dd138d7129f04bc455dcb9bd785cc94c96684291e86c5d7f517c1ee3788"
+      }
+    ],
+    "productionCoreMain": "421b1f35ee0733c4b357e4a862e1e2dc55e9b780",
+    "source": "0a0a007494fb94e1a531d38740fa0923780f5ea9",
+    "wbsLeafIds": [
+      "WBS-F02",
+      "WBS-P004-05",
+      "WBS-P017-07.02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a",
+      "SSC-461",
+      "YKT-2680"
+    ],
+    "run": "PG38916-f02-step-cleanup-independent-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 1.1,
+      "base": 2.6,
+      "high": 5.4
+    },
+    "groupCapPp": 7.0,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "relatedBug": "BUG-3233",
+    "relatedYkt": "YKT-2680"
+  }
+}
