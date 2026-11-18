@@ -1,0 +1,118 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-5828",
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F02-SYS005-WEB-CONTROLLER-ADAPTER-FENCES-20261118",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F02-SYS005-WEB-CONTROLLER-ADAPTER-FENCES-20261118",
+    "workAttributionKind": "SOURCE_REQUALIFICATION",
+    "workScope": "WBS-F02-a / SYS-005 / SS311 5.2: source-only direct platform dependency constraint on all 13 Web controllers. Compare all imports including static and explicit qualified uses against JDBC/JMS/filesystem namespaces. No typed API/Web compilation, held types, runtime or whole ArchUnit inference. Exit: authoritative inventory, exact origin hashes, findings and typed/runtime gaps.",
+    "oracleReferences": [
+      {
+        "path": "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md",
+        "sha256": "d42091c0f419fab98233766eb8f7ce13b25c0500c252f582d2c64f009775b583"
+      },
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/217_F02_現行十三要求引渡し.md",
+        "sha256": "8ddfaf368fb4cf561b465e68d35588794ff4c711a22dfe89e404bcdfc221a799"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38450-f02-latest-six-source-four-physical-evidence-v1/manifest.json",
+        "sha256": "c30acffec68386e48ec2f7a169feea6a03759a07dafdb98497077d9cf2dc9ac6"
+      }
+    ],
+    "source": "280d6181d166eefc48adcfecda24df36bd4f3c95",
+    "productionCoreMain": "280d6181d166eefc48adcfecda24df36bd4f3c95",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a",
+      "SYS-005"
+    ],
+    "run": "PG38500-f02-controller-direct-adapters-source-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.12,
+      "base": 0.35,
+      "high": 0.85
+    },
+    "groupCapPp": 1.2,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "startAssemblyRetry": "First pre-work metadata validation rejected unknown category/kind, no event appended or product action started.",
+    "startEvent": "PGPT-20261008-5827",
+    "terminalAtUTC": "2026-11-18T03:41:24.664926+00:00",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38500-f02-controller-direct-adapters-source-v1/manifest.json",
+      "sha256": "b2195ada37a6553e28911bf191931cc885af1608b3e0127405c70195ce337422"
+    },
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortCompletionRate": null,
+    "productTestsExecuted": 0,
+    "newStaticEvidence": {
+      "criterion": "SYS-005 SS311 §5.2 explicit direct platform references",
+      "controllerFiles": 13,
+      "imports": 384,
+      "memberSelections": 1167,
+      "directFindings": 0
+    },
+    "completedAdditionalPriceForGroupPp": 0,
+    "additionalCompletedPriceTotalPp": 37.8,
+    "remainingCriteria": [
+      "Typed references including inferred receiver, inherited member and dynamic calls",
+      "Whole six-module ArchUnit digests and runtime transfer",
+      "Controller/facade direction and separate process acceptance"
+    ],
+    "firstProductRunSuccess": null,
+    "initialScopeCheckerReadFailed": true,
+    "initialScopeCheckerCause": "Initial expected selector count omitted five package-name components. Reused the exact first checker output and independently re-counted the tree levels. No product audit had started or was replayed.",
+    "quotaAfter": {
+      "usedPercent": 27,
+      "remainingPercent": 73,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "4c51f1a0a17cf080cca8e52a60b8c7bd5ebe65ebc8760a4acc5fe8568ce170d2",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T03:41:37.492000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 27,
+          "remainingPercent": 73,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 27,
+      "remainingPercent": 73,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true
+  }
+}
