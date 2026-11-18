@@ -1,0 +1,5233 @@
+{
+  "actualExit": 0,
+  "source": "95af03fbc9e2271bd2b51cfc0e1a88adcd0f0fdd",
+  "productionCoreMain": "bcc9e0673287c51950ecab9b36350abfcd4b2c69",
+  "run": "PG39374-BUG3272-API-METRIC-CONTEXT-FINITE-V1",
+  "tests": 33,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "firstProductRunSuccess": true,
+  "firstIndependentPostSuccess": true,
+  "newTestDefinitions": 0,
+  "changedExistingTests": [
+    "apimctx004",
+    "apimctx021",
+    "apimctx023",
+    "apimctx024",
+    "apimctx033"
+  ],
+  "addedIndependentInvalidInputs": 2,
+  "originalFiniteFixtureAssertionsByTokens": 40,
+  "productionMainDiff": 0,
+  "physicalClasses": 27,
+  "positiveMainCrc": 19,
+  "sdkArtifactCount": 11,
+  "staticApplicable": 0,
+  "staticRawPmd": 25,
+  "firstEvidenceCheckerFailure": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39382-f03-api-context-finite-independent-v1/first-verifier-failure.json",
+    "sha256": "cdcc462e40808104f7442122fe9564c6412b2619b8f1514f47b397ef8d009266"
+  },
+  "secondEvidenceCheckerFailure": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39382-f03-api-context-finite-independent-v1/second-verifier-failure.json",
+    "sha256": "119579a8148b93a30c0a39685ed8964c0472dcc3461ea357e372acce887651d4"
+  },
+  "priorRawEvidenceRecoveredWithoutReplay": true,
+  "preliminaryStyleFailure": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39366-bug3272-api-context-prestyle-v1/manifest.json",
+    "sha256": "976404e11fda37e4beba85e3bda2824b15bda39b246151d9b574cbafd50bed85"
+  },
+  "priorHelperPhysicalExact": 6,
+  "priorHelperEvidence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39350-bug3269-api-standard-source-prepare-v1/manifest.json",
+    "sha256": "62bbffc2afe9674b0f367eaa9dc9e753319e538b63e18639a7d067bac8570700"
+  },
+  "unfilteredTarget": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 366
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 34
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 80
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 31
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 13
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "unfilteredClassCounters": {
+    "dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSource": {
+      "INSTRUCTION": {
+        "missed": 39,
+        "covered": 192
+      },
+      "BRANCH": {
+        "missed": 14,
+        "covered": 12
+      },
+      "LINE": {
+        "missed": 3,
+        "covered": 43
+      },
+      "COMPLEXITY": {
+        "missed": 13,
+        "covered": 10
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 9
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/monitoring/ApiStandardMetrics": {
+      "INSTRUCTION": {
+        "missed": 19,
+        "covered": 94
+      },
+      "BRANCH": {
+        "missed": 9,
+        "covered": 5
+      },
+      "LINE": {
+        "missed": 2,
+        "covered": 19
+      },
+      "COMPLEXITY": {
+        "missed": 8,
+        "covered": 6
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 6
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistration": {
+      "INSTRUCTION": {
+        "missed": 24,
+        "covered": 73
+      },
+      "BRANCH": {
+        "missed": 10,
+        "covered": 6
+      },
+      "LINE": {
+        "missed": 2,
+        "covered": 16
+      },
+      "COMPLEXITY": {
+        "missed": 9,
+        "covered": 5
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 5
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/monitoring/ApiJvmMetrics": {
+      "INSTRUCTION": {
+        "missed": 24,
+        "covered": 92
+      },
+      "BRANCH": {
+        "missed": 10,
+        "covered": 8
+      },
+      "LINE": {
+        "missed": 3,
+        "covered": 15
+      },
+      "COMPLEXITY": {
+        "missed": 9,
+        "covered": 5
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 4
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/monitoring/ApiSystemMetrics": {
+      "INSTRUCTION": {
+        "missed": 24,
+        "covered": 84
+      },
+      "BRANCH": {
+        "missed": 10,
+        "covered": 8
+      },
+      "LINE": {
+        "missed": 3,
+        "covered": 15
+      },
+      "COMPLEXITY": {
+        "missed": 9,
+        "covered": 5
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 4
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/monitoring/ApiMetricContext": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 366
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 34
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 80
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 31
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 13
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry": {
+      "INSTRUCTION": {
+        "missed": 68,
+        "covered": 43
+      },
+      "BRANCH": {
+        "missed": 13,
+        "covered": 1
+      },
+      "LINE": {
+        "missed": 15,
+        "covered": 8
+      },
+      "COMPLEXITY": {
+        "missed": 10,
+        "covered": 3
+      },
+      "METHOD": {
+        "missed": 3,
+        "covered": 3
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/monitoring/ApiCustomMetricPayload": {
+      "INSTRUCTION": {
+        "missed": 5,
+        "covered": 89
+      },
+      "BRANCH": {
+        "missed": 4,
+        "covered": 12
+      },
+      "LINE": {
+        "missed": 1,
+        "covered": 13
+      },
+      "COMPLEXITY": {
+        "missed": 4,
+        "covered": 8
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 3
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/monitoring/ApiMetricScrape": {
+      "INSTRUCTION": {
+        "missed": 7,
+        "covered": 45
+      },
+      "BRANCH": {
+        "missed": 2,
+        "covered": 2
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 11
+      },
+      "COMPLEXITY": {
+        "missed": 2,
+        "covered": 2
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter": {
+      "INSTRUCTION": {
+        "missed": 197,
+        "covered": 267
+      },
+      "BRANCH": {
+        "missed": 22,
+        "covered": 14
+      },
+      "LINE": {
+        "missed": 33,
+        "covered": 60
+      },
+      "COMPLEXITY": {
+        "missed": 22,
+        "covered": 13
+      },
+      "METHOD": {
+        "missed": 7,
+        "covered": 10
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter": {
+      "INSTRUCTION": {
+        "missed": 292,
+        "covered": 134
+      },
+      "BRANCH": {
+        "missed": 39,
+        "covered": 9
+      },
+      "LINE": {
+        "missed": 54,
+        "covered": 33
+      },
+      "COMPLEXITY": {
+        "missed": 28,
+        "covered": 6
+      },
+      "METHOD": {
+        "missed": 6,
+        "covered": 4
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/monitoring/ApiMetricCatalog": {
+      "INSTRUCTION": {
+        "missed": 33,
+        "covered": 378
+      },
+      "BRANCH": {
+        "missed": 5,
+        "covered": 9
+      },
+      "LINE": {
+        "missed": 6,
+        "covered": 73
+      },
+      "COMPLEXITY": {
+        "missed": 6,
+        "covered": 12
+      },
+      "METHOD": {
+        "missed": 1,
+        "covered": 10
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry$ExactSummary": {
+      "INSTRUCTION": {
+        "missed": 150,
+        "covered": 0
+      },
+      "BRANCH": {
+        "missed": 10,
+        "covered": 0
+      },
+      "LINE": {
+        "missed": 24,
+        "covered": 0
+      },
+      "COMPLEXITY": {
+        "missed": 12,
+        "covered": 0
+      },
+      "METHOD": {
+        "missed": 7,
+        "covered": 0
+      },
+      "CLASS": {
+        "missed": 1,
+        "covered": 0
+      }
+    },
+    "dev/codex/schubert/nk/protocol/header/ResultCode": {
+      "INSTRUCTION": {
+        "missed": 32,
+        "covered": 168
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 0
+      },
+      "LINE": {
+        "missed": 6,
+        "covered": 18
+      },
+      "COMPLEXITY": {
+        "missed": 5,
+        "covered": 5
+      },
+      "METHOD": {
+        "missed": 5,
+        "covered": 5
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/protocol/header/InteractionKind": {
+      "INSTRUCTION": {
+        "missed": 41,
+        "covered": 47
+      },
+      "BRANCH": {
+        "missed": 6,
+        "covered": 0
+      },
+      "LINE": {
+        "missed": 9,
+        "covered": 7
+      },
+      "COMPLEXITY": {
+        "missed": 8,
+        "covered": 3
+      },
+      "METHOD": {
+        "missed": 4,
+        "covered": 3
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/protocol/header/MessageKind": {
+      "INSTRUCTION": {
+        "missed": 41,
+        "covered": 47
+      },
+      "BRANCH": {
+        "missed": 6,
+        "covered": 0
+      },
+      "LINE": {
+        "missed": 9,
+        "covered": 7
+      },
+      "COMPLEXITY": {
+        "missed": 8,
+        "covered": 3
+      },
+      "METHOD": {
+        "missed": 4,
+        "covered": 3
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/protocol/layout/LayoutRegistry": {
+      "INSTRUCTION": {
+        "missed": 58,
+        "covered": 863
+      },
+      "BRANCH": {
+        "missed": 8,
+        "covered": 22
+      },
+      "LINE": {
+        "missed": 13,
+        "covered": 100
+      },
+      "COMPLEXITY": {
+        "missed": 10,
+        "covered": 18
+      },
+      "METHOD": {
+        "missed": 3,
+        "covered": 10
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/protocol/layout/LayoutDefinition": {
+      "INSTRUCTION": {
+        "missed": 97,
+        "covered": 123
+      },
+      "BRANCH": {
+        "missed": 12,
+        "covered": 16
+      },
+      "LINE": {
+        "missed": 15,
+        "covered": 26
+      },
+      "COMPLEXITY": {
+        "missed": 19,
+        "covered": 11
+      },
+      "METHOD": {
+        "missed": 9,
+        "covered": 7
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/protocol/layout/LayoutId": {
+      "INSTRUCTION": {
+        "missed": 30,
+        "covered": 22
+      },
+      "BRANCH": {
+        "missed": 1,
+        "covered": 1
+      },
+      "LINE": {
+        "missed": 4,
+        "covered": 6
+      },
+      "COMPLEXITY": {
+        "missed": 6,
+        "covered": 3
+      },
+      "METHOD": {
+        "missed": 5,
+        "covered": 3
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/protocol/layout/LayoutValidationException": {
+      "INSTRUCTION": {
+        "missed": 9,
+        "covered": 0
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 0
+      },
+      "LINE": {
+        "missed": 4,
+        "covered": 0
+      },
+      "COMPLEXITY": {
+        "missed": 2,
+        "covered": 0
+      },
+      "METHOD": {
+        "missed": 2,
+        "covered": 0
+      },
+      "CLASS": {
+        "missed": 1,
+        "covered": 0
+      }
+    },
+    "dev/codex/schubert/nk/protocol/layout/UnsupportedLayoutException": {
+      "INSTRUCTION": {
+        "missed": 4,
+        "covered": 0
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 0
+      },
+      "LINE": {
+        "missed": 2,
+        "covered": 0
+      },
+      "COMPLEXITY": {
+        "missed": 1,
+        "covered": 0
+      },
+      "METHOD": {
+        "missed": 1,
+        "covered": 0
+      },
+      "CLASS": {
+        "missed": 1,
+        "covered": 0
+      }
+    },
+    "dev/codex/schubert/nk/protocol/transport/BrokerTopology": {
+      "INSTRUCTION": {
+        "missed": 55,
+        "covered": 118
+      },
+      "BRANCH": {
+        "missed": 6,
+        "covered": 0
+      },
+      "LINE": {
+        "missed": 9,
+        "covered": 16
+      },
+      "COMPLEXITY": {
+        "missed": 9,
+        "covered": 6
+      },
+      "METHOD": {
+        "missed": 6,
+        "covered": 6
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/monitoring/package-info": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 0
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 0
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 0
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 0
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 0
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 0
+      }
+    },
+    "dev/codex/schubert/nk/api/monitoring/ExactDurationSupport": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 0
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 0
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 0
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 0
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 0
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 0
+      }
+    },
+    "dev/codex/schubert/nk/protocol/header/package-info": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 0
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 0
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 0
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 0
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 0
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 0
+      }
+    },
+    "dev/codex/schubert/nk/protocol/layout/package-info": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 0
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 0
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 0
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 0
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 0
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 0
+      }
+    },
+    "dev/codex/schubert/nk/protocol/transport/package-info": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 0
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 0
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 0
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 0
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 0
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 0
+      }
+    }
+  },
+  "unfilteredDeficits": [
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSource",
+      "method": "bind",
+      "line": 46,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 1,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSource",
+      "method": "bind",
+      "line": 47,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 6
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 2
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSource",
+      "method": "bind",
+      "line": 48,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSource",
+      "method": "bind",
+      "line": 53,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSource",
+      "method": "bind",
+      "line": 62,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 7
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSource",
+      "method": "scrape",
+      "line": 72,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSource",
+      "method": "scrape",
+      "line": 73,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 6
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 2
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSource",
+      "method": "scrape",
+      "line": 76,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 7
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSource",
+      "method": "detailed",
+      "line": 81,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 6,
+          "covered": 20
+        },
+        "BRANCH": {
+          "missed": 7,
+          "covered": 3
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSource",
+      "method": "detailed",
+      "line": 83,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSource",
+      "method": "detailed",
+      "line": 84,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiStandardMetrics",
+      "method": "install",
+      "line": 39,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 6,
+          "covered": 20
+        },
+        "BRANCH": {
+          "missed": 7,
+          "covered": 3
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiStandardMetrics",
+      "method": "install",
+      "line": 41,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiStandardMetrics",
+      "method": "install",
+      "line": 42,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiStandardMetrics",
+      "method": "install",
+      "line": 44,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 1,
+          "covered": 2
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiStandardMetrics",
+      "method": "install",
+      "line": 45,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistration",
+      "method": "install",
+      "line": 34,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 6,
+          "covered": 20
+        },
+        "BRANCH": {
+          "missed": 7,
+          "covered": 3
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistration",
+      "method": "install",
+      "line": 36,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistration",
+      "method": "install",
+      "line": 37,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistration",
+      "method": "install",
+      "line": 39,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 1,
+          "covered": 2
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistration",
+      "method": "install",
+      "line": 40,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistration",
+      "method": "activateOwned",
+      "line": 47,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 4
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiJvmMetrics",
+      "method": "install",
+      "line": 33,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 6,
+          "covered": 20
+        },
+        "BRANCH": {
+          "missed": 7,
+          "covered": 3
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiJvmMetrics",
+      "method": "install",
+      "line": 35,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiJvmMetrics",
+      "method": "install",
+      "line": 36,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiJvmMetrics",
+      "method": "install",
+      "line": 38,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 1,
+          "covered": 2
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiJvmMetrics",
+      "method": "install",
+      "line": 39,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiJvmMetrics",
+      "method": "install",
+      "line": 41,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 4
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiJvmMetrics",
+      "method": "install",
+      "line": 42,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiSystemMetrics",
+      "method": "install",
+      "line": 31,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 6,
+          "covered": 20
+        },
+        "BRANCH": {
+          "missed": 7,
+          "covered": 3
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiSystemMetrics",
+      "method": "install",
+      "line": 33,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiSystemMetrics",
+      "method": "install",
+      "line": 34,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiSystemMetrics",
+      "method": "install",
+      "line": 36,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 1,
+          "covered": 2
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiSystemMetrics",
+      "method": "install",
+      "line": 37,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiSystemMetrics",
+      "method": "install",
+      "line": 39,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 4
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiSystemMetrics",
+      "method": "install",
+      "line": 40,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry",
+      "method": "<init>",
+      "line": 26,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry",
+      "method": "<init>",
+      "line": 27,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 1,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry",
+      "method": "requireCompatible",
+      "line": 35,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry",
+      "method": "requireCompatible",
+      "line": 36,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry",
+      "method": "newDistributionSummary",
+      "line": 42,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry",
+      "method": "newDistributionSummary",
+      "line": 43,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 6,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry",
+      "method": "newDistributionSummary",
+      "line": 44,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 6,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry",
+      "method": "exactDurationSummary",
+      "line": 49,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 6,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry",
+      "method": "exactDurationSummary",
+      "line": 50,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry",
+      "method": "exactDurationSummary",
+      "line": 51,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 6,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry",
+      "method": "exactDurationSummary",
+      "line": 52,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry",
+      "method": "exactDurationSummary",
+      "line": 53,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry",
+      "method": "exactDurationSummary",
+      "line": 54,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry",
+      "method": "exactDurationSummary",
+      "line": 55,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry",
+      "method": "exactDurationSummary",
+      "line": 56,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry",
+      "method": "exactDurationSummary",
+      "line": 57,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiCustomMetricPayload",
+      "method": "render",
+      "line": 34,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 26
+        },
+        "BRANCH": {
+          "missed": 4,
+          "covered": 6
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiCustomMetricPayload",
+      "method": "render",
+      "line": 37,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiMetricScrape",
+      "method": "scrape",
+      "line": 19,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 4
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiMetricScrape",
+      "method": "scrape",
+      "line": 20,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 4
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter",
+      "method": "scrapeCounters",
+      "line": 37,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter",
+      "method": "scrapeCounters",
+      "line": 40,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter",
+      "method": "scrapeGauges",
+      "line": 45,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter",
+      "method": "scrapeGauges",
+      "line": 48,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter",
+      "method": "encodeCounters",
+      "line": 73,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 6,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter",
+      "method": "encodeCounters",
+      "line": 87,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter",
+      "method": "encodeCounters",
+      "line": 88,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 7,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter",
+      "method": "encodeCounters",
+      "line": 89,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter",
+      "method": "encodeCounters",
+      "line": 91,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 15,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter",
+      "method": "encodeCounters",
+      "line": 92,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter",
+      "method": "encodeCounters",
+      "line": 93,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 7,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 4,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter",
+      "method": "encodeCounters",
+      "line": 94,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter",
+      "method": "encodeCounters",
+      "line": 95,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter",
+      "method": "encodeCounters",
+      "line": 96,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter",
+      "method": "encodeCounters",
+      "line": 97,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 9,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter",
+      "method": "encodeCounters",
+      "line": 98,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 1,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter",
+      "method": "encodeGauges",
+      "line": 109,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 6,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter",
+      "method": "encodeGauges",
+      "line": 123,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 1,
+          "covered": 2
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter",
+      "method": "encodeGauges",
+      "line": 124,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 7
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter",
+      "method": "encodeGauges",
+      "line": 125,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter",
+      "method": "encodeGauges",
+      "line": 127,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 12
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter",
+      "method": "prepare",
+      "line": 160,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter",
+      "method": "labels",
+      "line": 165,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter",
+      "method": "labels",
+      "line": 166,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 11,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter",
+      "method": "labels",
+      "line": 167,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter",
+      "method": "labels",
+      "line": 168,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 6,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter",
+      "method": "labels",
+      "line": 169,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 6,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter",
+      "method": "labels",
+      "line": 170,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter",
+      "method": "labels",
+      "line": 171,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter",
+      "method": "labels",
+      "line": 172,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 1,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter",
+      "method": "labels",
+      "line": 173,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter",
+      "method": "labels",
+      "line": 174,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter",
+      "method": "labels",
+      "line": 175,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 12,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter",
+      "method": "write",
+      "line": 182,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 1,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter",
+      "method": "write",
+      "line": 183,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 6,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter",
+      "method": "lambda$prepare$0",
+      "line": 152,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 7
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter",
+      "method": "lambda$prepare$0",
+      "line": 153,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter",
+      "method": "lambda$prepare$0",
+      "line": 156,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 9
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 2
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter",
+      "method": "lambda$prepare$0",
+      "line": 157,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter",
+      "method": "lambda$encodeCounters$1",
+      "line": 102,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 13,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter",
+      "method": "lambda$encodeCounters$0",
+      "line": 96,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "scrape",
+      "line": 46,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "scrape",
+      "line": 49,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "encode",
+      "line": 67,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 6,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "encode",
+      "line": 90,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "encode",
+      "line": 96,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "encode",
+      "line": 97,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 7,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "encode",
+      "line": 98,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "encode",
+      "line": 99,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "encode",
+      "line": 100,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "encode",
+      "line": 101,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "encode",
+      "line": 102,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 1,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "encode",
+      "line": 104,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "encode",
+      "line": 105,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 8,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "encode",
+      "line": 106,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "encode",
+      "line": 107,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 1,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "encode",
+      "line": 118,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 1,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "encode",
+      "line": 119,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 6,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "labels",
+      "line": 125,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "labels",
+      "line": 126,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 11,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "labels",
+      "line": 127,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 8,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "labels",
+      "line": 128,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "labels",
+      "line": 129,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "labels",
+      "line": 130,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "labels",
+      "line": 131,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 12,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "point",
+      "line": 135,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 6,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "point",
+      "line": 136,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 14,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 6,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "point",
+      "line": 137,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "point",
+      "line": 138,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 6,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "point",
+      "line": 139,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 8,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "point",
+      "line": 140,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 6,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "point",
+      "line": 141,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 6,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "point",
+      "line": 142,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "point",
+      "line": 143,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "point",
+      "line": 144,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 8,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "point",
+      "line": 145,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 7,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "point",
+      "line": 146,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "point",
+      "line": 147,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "point",
+      "line": 149,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 8,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 4,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "point",
+      "line": 151,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 9,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 4,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "point",
+      "line": 153,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 9,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 4,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "point",
+      "line": 155,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "point",
+      "line": 156,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "point",
+      "line": 157,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "point",
+      "line": 158,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "point",
+      "line": 159,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 6,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "point",
+      "line": 160,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "point",
+      "line": 161,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "point",
+      "line": 163,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "point",
+      "line": 164,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 8,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "point",
+      "line": 165,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "point",
+      "line": 166,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "point",
+      "line": 167,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "lambda$encode$2",
+      "line": 112,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 6,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "lambda$encode$2",
+      "line": 113,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 7,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "lambda$encode$1",
+      "line": 100,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "lambda$encode$0",
+      "line": 82,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 2
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "lambda$encode$0",
+      "line": 83,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "lambda$encode$0",
+      "line": 86,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 9
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 2
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter",
+      "method": "lambda$encode$0",
+      "line": 87,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiMetricCatalog",
+      "method": "labels",
+      "line": 162,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiMetricCatalog",
+      "method": "labels",
+      "line": 163,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiMetricCatalog",
+      "method": "labels",
+      "line": 164,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiMetricCatalog",
+      "method": "domain",
+      "line": 174,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 2
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiMetricCatalog",
+      "method": "copy",
+      "line": 185,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 6
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 2
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiMetricCatalog",
+      "method": "copy",
+      "line": 186,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiMetricCatalog",
+      "method": "copy",
+      "line": 187,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 5
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiMetricCatalog",
+      "method": "copy",
+      "line": 188,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiMetricCatalog",
+      "method": "copy",
+      "line": 190,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 6
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiMetricCatalog",
+      "method": "copy",
+      "line": 191,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry$ExactSummary",
+      "method": "<init>",
+      "line": 63,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry$ExactSummary",
+      "method": "<init>",
+      "line": 64,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry$ExactSummary",
+      "method": "<init>",
+      "line": 69,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry$ExactSummary",
+      "method": "<init>",
+      "line": 70,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry$ExactSummary",
+      "method": "<init>",
+      "line": 71,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 1,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry$ExactSummary",
+      "method": "getId",
+      "line": 75,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry$ExactSummary",
+      "method": "record",
+      "line": 81,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 8,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 4,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry$ExactSummary",
+      "method": "record",
+      "line": 82,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry$ExactSummary",
+      "method": "record",
+      "line": 83,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry$ExactSummary",
+      "method": "record",
+      "line": 84,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 6,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry$ExactSummary",
+      "method": "record",
+      "line": 85,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 6,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry$ExactSummary",
+      "method": "record",
+      "line": 86,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 6,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry$ExactSummary",
+      "method": "record",
+      "line": 87,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 22,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 4,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry$ExactSummary",
+      "method": "record",
+      "line": 88,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 8,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry$ExactSummary",
+      "method": "record",
+      "line": 89,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 1,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry$ExactSummary",
+      "method": "count",
+      "line": 93,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry$ExactSummary",
+      "method": "totalAmount",
+      "line": 98,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry$ExactSummary",
+      "method": "max",
+      "line": 103,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry$ExactSummary",
+      "method": "takeSnapshot",
+      "line": 108,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry$ExactSummary",
+      "method": "takeSnapshot",
+      "line": 109,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry$ExactSummary",
+      "method": "takeSnapshot",
+      "line": 110,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 8,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry$ExactSummary",
+      "method": "takeSnapshot",
+      "line": 111,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 14,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry$ExactSummary",
+      "method": "takeSnapshot",
+      "line": 112,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 16,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry$ExactSummary",
+      "method": "takeSnapshot",
+      "line": 114,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/header/ResultCode",
+      "method": "valueOf",
+      "line": 7,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/header/ResultCode",
+      "method": "usesSuccessProfile",
+      "line": 34,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/header/ResultCode",
+      "method": "fromWire",
+      "line": 38,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/header/ResultCode",
+      "method": "fromWire",
+      "line": 39,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/header/ResultCode",
+      "method": "fromWire",
+      "line": 40,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 1,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/header/ResultCode",
+      "method": "fromWire",
+      "line": 41,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/header/ResultCode",
+      "method": "fromWire",
+      "line": 42,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/header/ResultCode",
+      "method": "lambda$fromWire$1",
+      "line": 42,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/header/ResultCode",
+      "method": "lambda$fromWire$0",
+      "line": 40,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/header/InteractionKind",
+      "method": "values",
+      "line": 6,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/header/InteractionKind",
+      "method": "valueOf",
+      "line": 6,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/header/InteractionKind",
+      "method": "wireValue",
+      "line": 20,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/header/InteractionKind",
+      "method": "fromWire",
+      "line": 24,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/header/InteractionKind",
+      "method": "fromWire",
+      "line": 25,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/header/InteractionKind",
+      "method": "fromWire",
+      "line": 26,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/header/InteractionKind",
+      "method": "fromWire",
+      "line": 28,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 4,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/header/InteractionKind",
+      "method": "fromWire",
+      "line": 29,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/header/InteractionKind",
+      "method": "fromWire",
+      "line": 30,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/header/InteractionKind",
+      "method": "fromWire",
+      "line": 31,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/header/InteractionKind",
+      "method": "fromWire",
+      "line": 32,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/header/MessageKind",
+      "method": "values",
+      "line": 6,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/header/MessageKind",
+      "method": "valueOf",
+      "line": 6,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/header/MessageKind",
+      "method": "wireValue",
+      "line": 20,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/header/MessageKind",
+      "method": "fromWire",
+      "line": 24,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/header/MessageKind",
+      "method": "fromWire",
+      "line": 25,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/header/MessageKind",
+      "method": "fromWire",
+      "line": 26,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/header/MessageKind",
+      "method": "fromWire",
+      "line": 28,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 4,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/header/MessageKind",
+      "method": "fromWire",
+      "line": 29,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/header/MessageKind",
+      "method": "fromWire",
+      "line": 30,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/header/MessageKind",
+      "method": "fromWire",
+      "line": 31,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/header/MessageKind",
+      "method": "fromWire",
+      "line": 32,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutRegistry",
+      "method": "validateDefinitions",
+      "line": 26,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutRegistry",
+      "method": "validateDefinitions",
+      "line": 27,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 1,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutRegistry",
+      "method": "validatedIndex",
+      "line": 37,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 5
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutRegistry",
+      "method": "validatedIndex",
+      "line": 38,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutRegistry",
+      "method": "validatedIndex",
+      "line": 41,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutRegistry",
+      "method": "validatedIndex",
+      "line": 42,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutRegistry",
+      "method": "require",
+      "line": 56,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutRegistry",
+      "method": "require",
+      "line": 57,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 8,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutRegistry",
+      "method": "require",
+      "line": 58,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutRegistry",
+      "method": "require",
+      "line": 59,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutRegistry",
+      "method": "require",
+      "line": 61,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutRegistry",
+      "method": "require",
+      "line": 65,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutRegistry",
+      "method": "require",
+      "line": 66,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 8,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutRegistry",
+      "method": "validateIdentifierKind",
+      "line": 80,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 1,
+          "covered": 10
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutRegistry",
+      "method": "validateIdentifierKind",
+      "line": 81,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 6
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 2
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutRegistry",
+      "method": "validateIdentifierKind",
+      "line": 82,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutRegistry",
+      "method": "validateIdentifierKind",
+      "line": 90,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 4
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutRegistry",
+      "method": "validateIdentifierKind",
+      "line": 91,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutDefinition",
+      "method": "<init>",
+      "line": 32,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 12,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutDefinition",
+      "method": "<init>",
+      "line": 40,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 1,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutDefinition",
+      "method": "<init>",
+      "line": 41,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 1,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutDefinition",
+      "method": "<init>",
+      "line": 47,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutDefinition",
+      "method": "<init>",
+      "line": 48,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutDefinition",
+      "method": "<init>",
+      "line": 53,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 11
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 5
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutDefinition",
+      "method": "<init>",
+      "line": 54,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutDefinition",
+      "method": "<init>",
+      "line": 58,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutDefinition",
+      "method": "<init>",
+      "line": 59,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutDefinition",
+      "method": "<init>",
+      "line": 62,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 6
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 3
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutDefinition",
+      "method": "<init>",
+      "line": 63,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutDefinition",
+      "method": "<init>",
+      "line": 65,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 6
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 3
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutDefinition",
+      "method": "<init>",
+      "line": 66,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutDefinition",
+      "method": "totalLengthFor",
+      "line": 72,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 6,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 4,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutDefinition",
+      "method": "totalLengthFor",
+      "line": 73,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutDefinition",
+      "method": "totalLengthFor",
+      "line": 75,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 7,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutDefinition",
+      "method": "validateDeclaredLength",
+      "line": 79,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 5
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 2
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutDefinition",
+      "method": "validateDeclaredLength",
+      "line": 80,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 6,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutDefinition",
+      "method": "calculateMaximumTotal",
+      "line": 94,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 1,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutDefinition",
+      "method": "calculateMaximumTotal",
+      "line": 95,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 6,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutDefinition",
+      "method": "calculateMaximumTotal",
+      "line": 97,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutDefinition",
+      "method": "calculateMaximumTotal",
+      "line": 98,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutDefinition",
+      "method": "toString",
+      "line": 8,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutDefinition",
+      "method": "hashCode",
+      "line": 8,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutDefinition",
+      "method": "equals",
+      "line": 8,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutDefinition",
+      "method": "dataLength",
+      "line": 8,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutDefinition",
+      "method": "recordLength",
+      "line": 8,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutDefinition",
+      "method": "maximumRecordCount",
+      "line": 8,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutDefinition",
+      "method": "maximumTotalLength",
+      "line": 8,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutId",
+      "method": "<init>",
+      "line": 12,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 5
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutId",
+      "method": "<init>",
+      "line": 13,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutId",
+      "method": "compareTo",
+      "line": 19,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutId",
+      "method": "compareTo",
+      "line": 20,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 6,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutId",
+      "method": "toString",
+      "line": 25,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutId",
+      "method": "hashCode",
+      "line": 7,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutId",
+      "method": "equals",
+      "line": 7,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutId",
+      "method": "compareTo",
+      "line": 7,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutValidationException",
+      "method": "<init>",
+      "line": 8,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutValidationException",
+      "method": "<init>",
+      "line": 9,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 1,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutValidationException",
+      "method": "<init>",
+      "line": 12,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutValidationException",
+      "method": "<init>",
+      "line": 13,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 1,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/UnsupportedLayoutException",
+      "method": "<init>",
+      "line": 8,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/UnsupportedLayoutException",
+      "method": "<init>",
+      "line": 9,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 1,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/transport/BrokerTopology",
+      "method": "valueOf",
+      "line": 6,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/transport/BrokerTopology",
+      "method": "fullyQualifiedQueue",
+      "line": 37,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/transport/BrokerTopology",
+      "method": "maximumBodyLength",
+      "line": 41,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/transport/BrokerTopology",
+      "method": "timeToLiveMillis",
+      "line": 45,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/transport/BrokerTopology",
+      "method": "expirationRequired",
+      "line": 49,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 9,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/transport/BrokerTopology",
+      "method": "requireAddress",
+      "line": 54,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/transport/BrokerTopology",
+      "method": "requireAddress",
+      "line": 55,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 16,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/transport/BrokerTopology",
+      "method": "requireAddress",
+      "line": 56,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/transport/BrokerTopology",
+      "method": "requireAddress",
+      "line": 57,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/transport/BrokerTopology",
+      "method": "requireAddress",
+      "line": 60,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    }
+  ],
+  "standardScope": {
+    "INSTRUCTION": {
+      "covered": 2991,
+      "missed": 1141
+    },
+    "BRANCH": {
+      "covered": 138,
+      "missed": 159
+    },
+    "LINE": {
+      "covered": 557,
+      "missed": 216
+    },
+    "COMPLEXITY": {
+      "covered": 139,
+      "missed": 161
+    },
+    "METHOD": {
+      "covered": 99,
+      "missed": 47
+    },
+    "CLASS": {
+      "covered": 19,
+      "missed": 3
+    }
+  },
+  "oldExecUnion": 0,
+  "noManualExclusions": true,
+  "whole451Accepted": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "terminalAtUTC": "2026-11-18T11:21:35.835303+00:00",
+  "proofs": {
+    "prestyle": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39367-bug3272-api-context-prestyle-v2/manifest.json",
+      "sha256": "661b1534cd536a493063548019dd2472685b5e9af8715d91c02000c91acf1a2d"
+    },
+    "prepare": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39368-bug3272-api-context-prepare-v1/manifest.json",
+      "sha256": "6d831b9c48a36ba36e002e09aec33b204477396c230f49acee873429cdd5152d"
+    },
+    "static": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39370-bug3272-api-context-static-v1/manifest.json",
+      "sha256": "37ca0c77e407e1136cdc5d1b19894e2343ddc9bd00861856a82f9b6c4cbc10e0"
+    },
+    "preflight": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39372-bug3272-api-context-preflight-v1/manifest.json",
+      "sha256": "a0816454f05c47abec1967b7be77a77e79f43a4157153a4a192aac55090e6bd8"
+    },
+    "unit": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39374-bug3272-api-context-unit-v1/manifest.json",
+      "sha256": "f4ccdd7a21c770cd4742b675aad0f833df6deb93cbab8e1ffd6d21ff77c0447b"
+    },
+    "post": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39378-bug3272-api-context-post-v1/manifest.json",
+      "sha256": "111d2f0d913dca3d068de58f438c7c7d37e2ca6a2baa11c27319184240accaab"
+    }
+  },
+  "raw": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39382-f03-api-context-finite-independent-v1/unfiltered.tsv",
+    "sha256": "1e5311e73e81e6cb9da27d43a319bd82a39747550821422a6b7385798d4f8750"
+  },
+  "rawCommand": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39382-f03-api-context-finite-independent-v1/raw-command.json",
+    "sha256": "c72ebaef1bbf87b88991c4c5fab04b819ea19fe6c54a078d2dc9520b63d2b4f1"
+  },
+  "archive": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39382-f03-api-context-finite-independent-v1/retention.json",
+    "sha256": "4e635ad8e978ccaeff946cc878d713f8c3b3612404a4df5fb9c018f613f48762"
+  },
+  "verifier": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/5139_bug3272_context_independent_checks.py",
+    "sha256": "eab0395140cca83a78112f29c3b840e7362bb067c2dd5b6645c3998badc4d45e"
+  }
+}

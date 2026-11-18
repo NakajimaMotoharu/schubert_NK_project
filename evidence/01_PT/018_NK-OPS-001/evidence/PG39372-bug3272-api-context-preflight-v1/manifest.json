@@ -1,0 +1,268 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5137_bug3272_api_context_profile.json",
+    "sha256": "575dde180bf518cb35245d7cef8739148725d7f74043b1aae1140ca50ef63929"
+  },
+  "inputHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContext.java": "613ffed97367b365ddbd84dddd5f8ed40df8a6a48fc018372331593b410534f5",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ExactDurationSupport.java": "5750f04c6fd9b6453c3412323cbffdb60dfca37be224414ab94c24a9d3efde5b",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry.java": "20f47112dcc5776b4f18c190adbcd782c03355815adce2e380d23cf6d9551108",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiCustomMetricPayload.java": "932b53486aa559e5c52a124c04a3a61b86c8fc01542e4deef69c559db849e996",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiMetricScrape.java": "5f37aad0fd0717c025cdda2a00b372c98e649bdfeb90f50917edc97b93dde1be",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter.java": "08f9ab87b7cd994f70fbb47c352d1e22def6dd787ab73625e73e6779527999ff",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter.java": "8c60f981ee23028f0566d61447fb2bffdad75008d3bb0e206c3e91d4cac1e6af",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiMetricCatalog.java": "c3d1fc99a2679fa8ef4e8ce19c4da32da376efba8cfb8c1dc8291ce8d0202979",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSource.java": "86c6210b1a321537cb63785678c6f0f0ef375548808bef5bd178be920773edb4",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetrics.java": "d43ac2b841fe471bfb4985d719e4a48a493a94bf11355b40b83b00ee0a2fec1f",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistration.java": "392d9c500076bb4898a859ee03f63990ca73b923508a2fc8a79f4454c8252e3b",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiJvmMetrics.java": "3dcd35d8abdf8941f82d7d13b15072003d70598b64135928c0cf3efa156cd4bb",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiSystemMetrics.java": "869f450b660a3e711f2fe8246f32239fcef9a9ae8c30a07999063553374a7cf6",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/package-info.java": "8dd0a4c1cf6eca2f906c5d9aee5afc0f40c990ccfa35925ecc8b5edfb2194193",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/ResultCode.java": "ade5ac5514ed62f2be57419eeab2d3a5e27da98a1c6607621be60e3a11c162f4",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/InteractionKind.java": "5424c3f1ad90de3965e298380da683ec72644ecd8fae80117c01001d1d0aa620",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/MessageKind.java": "3b003356680171b300d7c5d680b05cec255f4267190907c62cfaec3261a920a0",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/package-info.java": "f42304f14cb1bfeeb78be2d4589366593f6a9903eedb95514462a30f37ea47c3",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutRegistry.java": "6c8f5806097d9827a02058f8c1b53f108e2e40f28ef190ead2a7f9140be080f8",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutDefinition.java": "d4ad2f50f40e9cb860786af43875583ac324fd2e6055f0bee1e6804101257d5d",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutId.java": "87c8f01b5f84f211a8902d323eba221d11dc6b6add1cfe2a514fdbb68e82bc24",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutValidationException.java": "b99e562fe3afd1f1e11a7ff415f25999c14e46016d5a115022706d4f8674a9df",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/UnsupportedLayoutException.java": "ed22caff978204b37fce0e3b9221758e7539596b64e3c19be77f76f7b7901dd2",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/package-info.java": "2fbe92d4140d6941e535183ca3d276c9adbd10aae25286246a1ee3d38a1624c2",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/BrokerTopology.java": "57e7967fe6b44f7e37eb510bd0d2c0a877e5257c73e7d688c0fdab59379f46c5",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/package-info.java": "85e0d120423af8a1a8a3aa17a51f99e49a73a0a26f1486b30c880474d9f3c7b9",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java": "86b0b0dc9689c6052314f065907211bd4ef035f6a0f225f3114088415f25502c",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-api/pom.xml": "2aff7af3d90feaee1f6c09f7ad300627ed911e8372504fcfd383391429a58114",
+    "src/schubert-nk-protocol/pom.xml": "f76b730fa1cb1b34a88182ca5b685ca14fb71361c037f9418f0895d2a3022d7d",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39368-bug3272-api-context-prepare-v1/manifest.json",
+    "sha256": "6d831b9c48a36ba36e002e09aec33b204477396c230f49acee873429cdd5152d"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39370-bug3272-api-context-static-v1/manifest.json",
+    "sha256": "37ca0c77e407e1136cdc5d1b19894e2343ddc9bd00861856a82f9b6c4cbc10e0"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5138_bug3272_api_context_admission.json",
+    "sha256": "d9a76d7d1a4fbf6ea19e341ccc7b65f6520af2c2cd930f6f2eac76abd27ff00c"
+  },
+  "classified": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry.java",
+      "rule": "AvoidSynchronizedStatement",
+      "line": "83",
+      "reason": "Same private stateLock atomically updates count, sum, maximum and all five buckets in a bounded numeric loop without I/O or callbacks.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Use ReentrantLock rather than synchronization"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry.java",
+      "rule": "AvoidSynchronizedStatement",
+      "line": "108",
+      "reason": "Same private stateLock creates a defensive snapshot of the coherent count, sum, maximum and all five buckets, with no I/O or foreign callbacks. It pairs with the independently proved update in 2384.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Use ReentrantLock rather than synchronization"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "48",
+      "reason": "This site is in the owned local finite worker fixture or immediate restoration of the fixture thread interruption. Worker submission, latch and release are bounded. It starts no production worker.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "rule": "CloseResource",
+      "line": "126",
+      "reason": "The Harness passes the actual standard recorder owner to its context at construction; Harness.close always closes context, which owns the standard owner. Tests assert both owned registry release paths.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ApiStandardMetricSource object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "rule": "CloseResource",
+      "line": "493",
+      "reason": "The local test owns its single worker, releases the local latch and always requests shutdown before asserting a bounded 30 second termination in finally.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "493",
+      "reason": "This site is in the owned local finite worker fixture or immediate restoration of the fixture thread interruption. Worker submission, latch and release are bounded. It starts no production worker.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "495",
+      "reason": "This site is in the owned local finite worker fixture or immediate restoration of the fixture thread interruption. Worker submission, latch and release are bounded. It starts no production worker.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "510",
+      "reason": "This site is in the owned local finite worker fixture or immediate restoration of the fixture thread interruption. Worker submission, latch and release are bounded. It starts no production worker.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "511",
+      "reason": "This site is in the owned local finite worker fixture or immediate restoration of the fixture thread interruption. Worker submission, latch and release are bounded. It starts no production worker.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "rule": "CloseResource",
+      "line": "552",
+      "reason": "The local test owns its single worker, releases the local latch and always requests shutdown before asserting a bounded 30 second termination in finally.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "552",
+      "reason": "This site is in the owned local finite worker fixture or immediate restoration of the fixture thread interruption. Worker submission, latch and release are bounded. It starts no production worker.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "554",
+      "reason": "This site is in the owned local finite worker fixture or immediate restoration of the fixture thread interruption. Worker submission, latch and release are bounded. It starts no production worker.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "570",
+      "reason": "This site is in the owned local finite worker fixture or immediate restoration of the fixture thread interruption. Worker submission, latch and release are bounded. It starts no production worker.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "571",
+      "reason": "This site is in the owned local finite worker fixture or immediate restoration of the fixture thread interruption. Worker submission, latch and release are bounded. It starts no production worker.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "rule": "CloseResource",
+      "line": "588",
+      "reason": "The local test owns its single worker, releases the local latch and always requests shutdown before asserting a bounded 30 second termination in finally.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "588",
+      "reason": "This site is in the owned local finite worker fixture or immediate restoration of the fixture thread interruption. Worker submission, latch and release are bounded. It starts no production worker.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "590",
+      "reason": "This site is in the owned local finite worker fixture or immediate restoration of the fixture thread interruption. Worker submission, latch and release are bounded. It starts no production worker.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "604",
+      "reason": "This site is in the owned local finite worker fixture or immediate restoration of the fixture thread interruption. Worker submission, latch and release are bounded. It starts no production worker.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "605",
+      "reason": "This site is in the owned local finite worker fixture or immediate restoration of the fixture thread interruption. Worker submission, latch and release are bounded. It starts no production worker.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "rule": "CloseResource",
+      "line": "766",
+      "reason": "The reentrant stop test owns its own context and calls context.close in an unconditional finally after the sampled render attempt. It asserts that its registry actually closed.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ApiMetricContext object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "rule": "CloseResource",
+      "line": "811",
+      "reason": "The local test owns its single worker, releases the local latch and always requests shutdown before asserting a bounded 30 second termination in finally.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "811",
+      "reason": "This site is in the owned local finite worker fixture or immediate restoration of the fixture thread interruption. Worker submission, latch and release are bounded. It starts no production worker.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "814",
+      "reason": "This site is in the owned local finite worker fixture or immediate restoration of the fixture thread interruption. Worker submission, latch and release are bounded. It starts no production worker.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "829",
+      "reason": "This site is in the owned local finite worker fixture or immediate restoration of the fixture thread interruption. Worker submission, latch and release are bounded. It starts no production worker.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "830",
+      "reason": "This site is in the owned local finite worker fixture or immediate restoration of the fixture thread interruption. Worker submission, latch and release are bounded. It starts no production worker.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    }
+  ],
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "rootCompilerUnchanged": true,
+  "independentSourceAnchorsExact": true,
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_stages.py",
+    "sha256": "ce7b33beb41744d0042bc0fb94aee01930016254f5f08fbba03707f1b568016b"
+  }
+}
