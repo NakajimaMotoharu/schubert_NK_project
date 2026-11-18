@@ -1,0 +1,102 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5103_ssc466_buffer_diagnostic_profile.json",
+    "sha256": "ccbff36b6fe2560f18f416fc41ce0fbe41f58b3d74b67cdda15b036b1611002e"
+  },
+  "inputHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.java": "c1669b5ad4c3a00909576d8e2a0ebb1b135da39d734a0b1b8492d64e05d2d304",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java": "e86a86a77aad33c5629a5724f21d421e1ca0f359247122abf63538586d8ace89",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalRequest.java": "cb8244f32401bd7e2336c08bf76353fb5b388b59541ef426711bfcb38d29ca9b",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/OperationFingerprint.java": "25f0c77746cdb01ce938f83fe0b019929f0aeb2e073db4f043abb3a41ba0995b",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/package-info.java": "456d04bff4a8fcb406f84ae47df14e72be906d74888f5f074edbb64d7a57eb6c",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/SecretBufferTest.java": "911fe129924c28d4ec109e7cdd2a48643edab607569cb050c1edfe17df73989a",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-api/pom.xml": "2aff7af3d90feaee1f6c09f7ad300627ed911e8372504fcfd383391429a58114",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39132-ssc466-buffer-diagnostic-prepare-v1/manifest.json",
+    "sha256": "5985bf7bb49a951c3169d013afdbac7d9ab24e3f7207f43f5b3c943ce2c98aef"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39134-ssc466-buffer-diagnostic-static-v1/manifest.json",
+    "sha256": "0d3966afbe2993e01498bb6cf2942cfd7b9a193fdd295bb9a9ba312d755ce4f1"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5104_ssc466_buffer_diagnostic_admission.json",
+    "sha256": "27f47dc0edb44d161bc8ab4dcc21ee9914558482c2b500327126d3488d7145db"
+  },
+  "classified": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java",
+      "rule": "NullAssignment",
+      "line": "22",
+      "reason": "The CanonicalField nullable byte value distinguishes absence from present empty in the approved canonical protocol, and clones present bytes without retaining the caller array.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Assigning an Object to null is a code smell.  Consider refactoring."
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java",
+      "rule": "ReturnEmptyCollectionRatherThanNull",
+      "line": "27",
+      "reason": "The nullable byte array uses null for the canonical wire -1 marker and empty for length zero. Interchanging them changes the keyed fingerprint under SS324.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Return an empty collection rather than null."
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/OperationFingerprint.java",
+      "rule": "CloseResource",
+      "line": "49",
+      "reason": "Each CanonicalField comes from a caller-owned CanonicalRequest; serialization borrows the field and erases only its temporary copy. The caller closes each field through the request owner.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this CanonicalField object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.java",
+      "rule": "AvoidSynchronizedAtMethodLevel",
+      "line": "20",
+      "reason": "YKT-194 preserves ByteArrayOutputStream intrinsic-monitor semantics for the package-private owned subtype and its inherited API. The diagnostic text changes, its synchronization contract is maintained.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Use block level locking rather than method level synchronization"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.java",
+      "rule": "AvoidSynchronizedAtMethodLevel",
+      "line": "27",
+      "reason": "YKT-194 preserves ByteArrayOutputStream intrinsic-monitor semantics for the package-private owned subtype and its inherited API. The diagnostic text changes, its synchronization contract is maintained.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Use block level locking rather than method level synchronization"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.java",
+      "rule": "AvoidSynchronizedAtMethodLevel",
+      "line": "47",
+      "reason": "YKT-194 preserves ByteArrayOutputStream intrinsic-monitor semantics for the package-private owned subtype and its inherited API. The diagnostic text changes, its synchronization contract is maintained.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Use block level locking rather than method level synchronization"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.java",
+      "rule": "AvoidSynchronizedAtMethodLevel",
+      "line": "58",
+      "reason": "YKT-194 preserves ByteArrayOutputStream intrinsic-monitor semantics for the package-private owned subtype and its inherited API. The diagnostic text changes, its synchronization contract is maintained.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Use block level locking rather than method level synchronization"
+    }
+  ],
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "rootCompilerUnchanged": true,
+  "independentSourceAnchorsExact": true,
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_stages.py",
+    "sha256": "ce7b33beb41744d0042bc0fb94aee01930016254f5f08fbba03707f1b568016b"
+  }
+}

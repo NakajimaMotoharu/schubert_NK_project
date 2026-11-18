@@ -1,0 +1,126 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-5928",
+  "values": {
+    "quotaAfter": {
+      "usedPercent": 33,
+      "remainingPercent": 67,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "226d832f6e2cf88b5ab80724efe727490162884a0d5c87c5e79f3eba4d820b95",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T09:43:56.261000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 33,
+          "remainingPercent": 67,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T09:42:37.113344+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P01810-WIPING-STREAM-GENERAL-DIAGNOSTIC-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-P01810-WIPING-STREAM-GENERAL-DIAGNOSTIC-20261118",
+    "workAttributionKind": "ADDITIONAL_FINDING",
+    "workScope": "WBS-P018-10.03 CATALOG-015 with P006-01 owner. Correct generic WipingByteArrayOutputStream no-arg toString length disclosure under fixed diagnostic contract. Keep size(), wipe/lifetime, byte boundaries, canonical serialization/HMAC and all caller contracts. Publish only canonical SS and SSC register first. Existing two buffer tests and HMAC smoke plus one fixed independent empty/different lengths/cleared diagnostic case. No actual keys, provider files, protected SnapshotCodec/FingerprintKeyRing or runtime caller actions.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37452-p01810-independent-case-catalog-v1/planned93-independent-cases.json",
+        "sha256": "b830c7bbbbb1375f5d11e1a67c22608e0ccf8f829febfa1b24fe12194471d54c"
+      },
+      {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.java",
+        "sha256": "1f751a0267c7d9f894806d67e5b9b3c05955038353d6f6bd6a44cfe3bd1217de"
+      },
+      {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/SecretBufferTest.java",
+        "sha256": "32743b02e36a6d15cc90d4510de108ccdc86f1ddb3e27920b2299b85566fbd32"
+      }
+    ],
+    "productionCoreMain": "5618f55f0efef93b4e002e3d931ade66e8d7519b",
+    "source": "b417a85f764be01e6310c5e29f24245aa1de27e5",
+    "wbsLeafIds": [
+      "WBS-F03",
+      "WBS-P018-10.03",
+      "WBS-P006-01"
+    ],
+    "managementWorkIds": [
+      "PT-P01810-CATALOG-015",
+      "BUG-3258",
+      "YKT-2689",
+      "SSC-466"
+    ],
+    "run": "PG39148-p01810-buffer-diagnostic-independent-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.5,
+      "base": 1.6,
+      "high": 3.5
+    },
+    "groupCapPp": 5.0,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "groupBoundary": "END",
+    "startEvent": "PGPT-20261008-5927",
+    "fixedTestSource": "f6fc7eee091a945c620db2f1d504e326b8855e8e",
+    "quotaBefore": {
+      "usedPercent": 33,
+      "remainingPercent": 67,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "fullObservationPreservedInReceipt": true,
+    "actualDedicatedPp": null,
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39148-p01810-buffer-diagnostic-independent-v1/manifest.json",
+      "sha256": "da122171599ff5f2f364a4dec723f2008e86b8ecdb67773d7af12e41e693ab1f"
+    },
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortCompletionRate": null,
+    "technical": {
+      "tests": 4,
+      "successful": 4,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "notRun": 0,
+      "firstProductAttempts": 4,
+      "firstProductSuccessful": 4,
+      "newTestDefinitions": 1,
+      "physical": 5,
+      "positiveCrc": 4,
+      "staticApplicable": 0,
+      "localAdditionalGroupBasePp": 1.6,
+      "mainCanonicalPr": 433
+    },
+    "remainingCriteria": [
+      "P018-10 diagnostic catalog other boundaries and actual producer/sink",
+      "F03 full six module and 451",
+      "Held ResponseSnapshotCodec and FingerprintKeyRing unchanged"
+    ]
+  }
+}
