@@ -101,8 +101,19 @@ CONFIG = {
         'units': {'PG40105-p020-u01-menu204-v2': ('firstUnit', 204),
                   'PG40107-p020-u01-menu204-v3': ('unit', 204)},
         'post': 'PG40108-p020-u01-menu-independent-v1',
-        'rejected': 'PG40104-p020-u01-menu204-v1',
+        'rejected': ('PG40104-p020-u01-menu204-v1', 204, 51, 1),
         'firstPmdCount': 8,
+    },
+    '619': {
+        'history': ('PG40112-g07-u01-trace-public-delta-v1',
+                    'PG40096-g07-s08-c02-public-delta-v1',
+                    'PG40084-g07-o01-journal-public-delta-v1',
+                    'PG40072-g07-e01-f02-trace-public-delta-v1'),
+        'units': {'PG40124-p020-path-contract-green206-v1': ('firstUnit', 206),
+                  'PG40128-p020-path-contract-green206-v2': ('unit', 206)},
+        'post': 'PG40132-p020-path-contract-independent-v1',
+        'rejected': ('PG40122-p020-path-contract-red206-v1', 206, 2, 0),
+        'firstPmdCount': 11,
     },
 }
 
@@ -211,7 +222,7 @@ def journal_value_probe(B, row, meta, unit_folder):
                 toolExecutionRepeated=False,priorStaticFailureRemains=False)
 
 
-def rejected_comparator_probe(B, row, meta, folder, post):
+def rejected_comparator_probe(B, row, meta, folder, post, expected, fails, errors):
     qualified = B.load(post)
     unit = B.load(folder / 'manifest.json')
     original = unit['stages']['unit']
@@ -223,13 +234,14 @@ def rejected_comparator_probe(B, row, meta, folder, post):
     assert B.ref(xml.relative_to(Path.cwd())) == qualified['firstRejectedXml']
     tests = ET.parse(xml).getroot().findall('.//testcase')
     counts = {tag: sum(case.find(tag) is not None for case in tests) for tag in ('failure', 'error', 'skipped')}
-    assert len(tests) == unit['expected'] == 204
-    assert counts == {'failure': 51, 'error': 1, 'skipped': 0}
-    assert qualified['initialFES'] == dict(passed=152, failures=51, errors=1, skipped=0, notRun=0)
+    assert len(tests) == unit['expected'] == expected
+    assert counts == {'failure': fails, 'error': errors, 'skipped': 0}
+    assert qualified['initialFES'] == dict(passed=expected-fails-errors, failures=fails, errors=errors, skipped=0, notRun=0)
     terminal = qualified['failedReadOnly']
-    decoded = Path(qualified['failedProbeFile']['path'])
+    archive = qualified.get('failedProbeFile', terminal['log'])
+    decoded = Path(archive['path'])
     assert terminal['actualExit'] == 0 and terminal['command'][-2:] == ['execinfo', str(folder / 'jacoco.exec')]
-    assert B.ref(decoded) == qualified['failedProbeFile'] and terminal['log']['sha256'] == qualified['failedProbeFile']['sha256']
+    assert B.ref(decoded) == archive and terminal['log']['sha256'] == archive['sha256']
     report = decoded.read_text()
     assert re.findall(r'^Session "([^"]+)":', report, re.M) == [unit['session']]
     rows = re.findall(r'^([0-9a-f]{16})\s+(\d+) of\s+(\d+)\s+(\S+)$', report, re.M)
@@ -282,11 +294,12 @@ def classify():
                 assert path.resolve()==unit_folder/'jacoco.exec'
                 verified.append(journal_value_probe(B,row,by_key[row['path'],row['blob']],unit_folder))
                 continue
-            if row.get('actualExit') != 0 and name == settings.get('rejected') and path.name == 'jacoco.exec':
+            rejected = settings.get('rejected')
+            if row.get('actualExit') != 0 and rejected and name == rejected[0] and path.name == 'jacoco.exec':
                 folder = E / name
                 assert path.resolve() == folder / 'jacoco.exec'
                 verified.append(rejected_comparator_probe(B, row, by_key[row['path'], row['blob']],
-                                                          folder, E / settings['post'] / 'manifest.json'))
+                                                          folder, E / settings['post'] / 'manifest.json', *rejected[1:]))
                 continue
             if row.get('actualExit')==0 or name not in settings['units'] or path.name!='jacoco.exec':
                 continue
@@ -355,6 +368,40 @@ def classify():
             assert b'G07remaining3315+22actualSecretCountnull, freshquota10percent' in line
             return dict(kind='Exact preserved planning counts and unknown polarity',
                         path=progress,originalCommit=V['fromCommit'],line=old.index(line)+1,lineSha256=known_line)
+        if not normal and GROUP=='619':
+            bindings = {
+                '58270b6efda938fceb3b041eb1a1fd8ba39bdd57a36c497469ddd0b70f4971dc': (9, 115),
+                '6b1cecae46a389d14094010ec9115575c2bccee124ca521e0f175e815e730109': (9, 118),
+                '9414ada4f818b82ed89b6462550ea937f0dbd91247e84e34b24b5dfcebc413a1': (9, 120),
+                '36bdfd0b26c08bbcd8dc61cac56fc7ea7409b991ecf82f82294dfd9bbf9b105b': (9, 113),
+            }
+            line_hash = B.sha(line)
+            if bindings.get(line_hash) == (start,end):
+                entry = re.fullmatch(rb' {6}"(dev\.codex\.schubert\.nk\.(api|bootstrap)\.[A-Za-z]+)": "([a-f0-9]{64})",?', line)
+                assert entry
+                proof = E/'PG40118-f02-framework-fences-independent-v1'/'manifest.json'
+                result = B.load(proof)
+                first, last = (Path(result[stage]['path']) for stage in ('before','after'))
+                assert B.ref(first)==result['before'] and B.ref(last)==result['after']
+                assert result['physicalCanaryClasses']==16 and result['productClassesLoaded']==0
+                name, module, sha = (part.decode() for part in entry.groups())
+                assert B.load(first)['artifacts'][module][name]==B.load(last)['artifacts'][module][name]==sha
+                return dict(kind='Exact synthetic fixture class digest in both audits',
+                            independentPost=B.ref(proof), className=name, lineSha256=line_hash)
+            if line_hash=='a5d64ec1460aea82fe678cacabb87d47acfa9d0a55fdfa70471a5e278e58c874' and (start,end)==(40,84):
+                old_tool='evidence/01_PT/018_NK-OPS-001/input/5248_g07_login_title_quality_delta.py'
+                saved_terminal=B.load(E/HISTORY[0]/'scan/manifest.json')
+                old_lines=B.git('show',f"{saved_terminal['throughCommit']}:{old_tool}").splitlines()
+                assert line not in old_lines
+                source_path='documents/400_PGPT/450_品質/460_基盤残件・再開優先順.md'
+                token=b'G07remaining3315+22actualSecretCountnull, freshquota10percent'
+                assert line.strip()==b"assert b'"+token+b"' in line"
+                text_lines=B.git('show',f"{V['fromCommit']}:{source_path}").splitlines()
+                preserved, = [L for L in text_lines if token in L]
+                assert B.sha(preserved)=='b5d6756add19f5ffa0bc023ee60a7734418de2c532fbefafe5cc10b147045b59'
+                return dict(kind='Exact assertion on preserved planning counts',
+                            historicalProof=B.ref(E/HISTORY[0]/'scan/manifest.json'), lineSha256=line_hash)
+            return None
         if normal or GROUP!='559':
             return normal
         known_line='2407d662eeca6d2478a97780e1a71fdb2194e38e34255f22a41671e0c88ad520'
@@ -379,9 +426,9 @@ def retain():
     set_worker(p.w)
     value=p.p.load(OUT/'qualified-cached-initial.json')
     assert value['unresolvedCandidates']==value['unqualifiedBinary']==0
-    original=p.p.load(RETAIN/'initial-classification'/'qualified-cached-initial.json') if GROUP in ('551','559','580','609') else None
+    original=p.p.load(RETAIN/'initial-classification'/'qualified-cached-initial.json') if GROUP in ('551','559','580','609','619') else None
     if original:
-        assert original['unresolvedCandidates']==(8 if GROUP=='580' else 1) and original['unqualifiedBinary']==0
+        assert original['unresolvedCandidates']=={'580':8,'619':9}.get(GROUP,1) and original['unqualifiedBinary']==0
     p.p.write(OUT/'qualified-final-private-detail.json',dict(
         value,verifier=p.p.ref(HERE),scannerExecutionCount=1,initialClassificationExit=int(GROUP in ('532','559','588','609')),
         initialIssue='Exact archived path was relative instead of absolute' if GROUP in ('532','559','588','609') else None,

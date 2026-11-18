@@ -1,0 +1,112 @@
+{
+  "eventId": "PGPT-20261008-6141",
+  "actualExit": 0,
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-G07-FRAMEWORK-DIF015-PUBLIC-DELTA-20261119",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-G07-FRAMEWORK-DIF015-PUBLIC-DELTA-20261119",
+    "workAttributionKind": "REQUALIFICATION",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "G07",
+      "WBS-F03/2-3"
+    ],
+    "source": "0085869a0c61c15f082d8363e3de21d9619529a6",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "fromCommit": "8c5b148d8fd62856f0d783ccf3c41302ce7aa0d0",
+    "run": "PG40136-g07-framework-dif015-public-delta-v1",
+    "volatileStaging": "/dev/shm/schubert-nk-pg40136-1000",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.25,
+      "base": 0.65,
+      "high": 1.85
+    },
+    "groupCapPp": 4,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40112-g07-u01-trace-public-delta-v1/scan/manifest.json",
+        "sha256": "540a2768975edd60a81e3522832fa9b81be859fe8a87287717406ac5081c2a83"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40132-p020-path-contract-independent-v1/manifest.json",
+        "sha256": "af18f4c6b12643581fa71f0faa1cd25dcc6cb30b862df6575584145afc862cf5"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40134-g08-f02-dif015-tool-trace-v1/manifest.json",
+        "sha256": "480f192aa8e4c885e6d1a35652136f64116efd17f89a2a043a8944f1e7fe4681"
+      }
+    ],
+    "workScope": "One fixed public interval, F02 evidence and DIF-015 red/interim/final original binaries. No PT replay, old range scan or runtime operation.",
+    "durableAvailableBytesAtStart": 795373568,
+    "tmpfsAvailableBytesAtStart": 7948283904,
+    "quotaAfter": {
+      "usedPercent": 48,
+      "remainingPercent": 52,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "f0257e3f783387ee1f91eab194c366d6dd996da1c91d032686177319bcf81076",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T20:25:47.319000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 48,
+          "remainingPercent": 52,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T20:24:50.721499+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 48,
+      "remainingPercent": 52,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "publicEvidence": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40136-g07-framework-dif015-public-delta-v1/scan/manifest.json",
+        "sha256": "00562b88675b8a8792607e5df91199d29d74ca0893092f282e2e9a6ac28d330d"
+      }
+    ],
+    "commits": 9,
+    "trackedVersions": 176,
+    "candidates": 60,
+    "binaries": 3,
+    "initialUnclassified": 9,
+    "unresolved": 0,
+    "confirmedSecrets": 0,
+    "addedFormal": 0,
+    "currentAccepted": 17,
+    "productTests": 0,
+    "result": "Qualified only this published interval; initially unclassified eight exact synthetic fixture-class digests and one planning count resolved using original provenance. No scanner/PT rerun, red unit remains failed."
+  }
+}
