@@ -25,9 +25,20 @@ public final class ArtifactComparator {
   private static final String MODE_CONTRACT = "contract";
   private static final String LOGIN_CASE = "CHR-A01";
   private static final String BRAND_DIFFERENCE = "DIF-001";
-  private static final String LOGIN_TITLE_POINTER = "/title";
-  private static final String CURRENT_LOGIN_TITLE = "schubert - ログイン";
-  private static final String NK_LOGIN_TITLE = "schubert NK - ログイン";
+  private static final String LOGIN_TITLE = "CHR-A01:/title";
+  private static final String CURRENT_BRAND = "schubert";
+  private static final String NK_BRAND = "schubert NK";
+  // UI264 and SS355 §8 identify these exact case fields. Other title entries remain comparable.
+  private static final Map<String, List<String>> BRAND_EXPECTATIONS =
+      Map.of(
+          LOGIN_TITLE,
+          List.of("schubert - ログイン", "schubert NK - ログイン"),
+          "CHR-U01:/brand",
+          List.of(CURRENT_BRAND, NK_BRAND),
+          "CHR-U02:/titles/0",
+          List.of(CURRENT_BRAND, NK_BRAND),
+          "CHR-U02:/titles/1",
+          List.of("schubert - 検索", "schubert NK - 検索"));
   private static final ObjectMapper JSON = new ObjectMapper();
   private static final Set<String> MODES = Set.of(MODE_DIFFERENCE, "required", MODE_CONTRACT);
 
@@ -121,7 +132,7 @@ public final class ArtifactComparator {
     Set<String> usedRules = new TreeSet<>();
     Set<String> claimedDifferences = new HashSet<>();
     Set<String> observationKeys = new HashSet<>();
-    boolean approvedLoginTitleObserved = false;
+    Set<String> pendingBrandObservations = new TreeSet<>(BRAND_EXPECTATIONS.keySet());
     int observationCount = 0;
     for (JsonNode observation : observations.path("observations")) {
       observationCount++;
@@ -188,22 +199,10 @@ public final class ArtifactComparator {
 
       JsonNode actualCurrent = currentByCase.get(caseId).at(pointer);
       JsonNode actualNk = nkByCase.get(caseId).at(pointer);
-      boolean loginBrand = LOGIN_CASE.equals(caseId) && BRAND_DIFFERENCE.equals(id);
-      if (loginBrand) {
-        // UI264 / SS355 §8 / SSC-074: A01 narrows brand to this exact title and values.
-        valid &=
-            require(
-                LOGIN_TITLE_POINTER.equals(pointer), "OBSERVATION_LOGIN_TITLE_POINTER", failures);
-        valid &=
-            require(
-                CURRENT_LOGIN_TITLE.equals(actualCurrent.textValue()),
-                "OBSERVATION_LOGIN_TITLE_CURRENT",
-                failures);
-        valid &=
-            require(
-                NK_LOGIN_TITLE.equals(actualNk.textValue()),
-                "OBSERVATION_LOGIN_TITLE_NK",
-                failures);
+      String differenceKey = key(caseId, pointer);
+      boolean brand = BRAND_DIFFERENCE.equals(id);
+      if (brand) {
+        valid &= checkBrand(caseId, differenceKey, actualCurrent, actualNk, failures);
       }
       valid &=
           require(
@@ -223,7 +222,6 @@ public final class ArtifactComparator {
               "OBSERVATION_NK_VALUE:" + observationKey,
               failures);
 
-      String differenceKey = key(caseId, pointer);
       boolean changed = rawDifferences.contains(differenceKey);
       if (MODE_DIFFERENCE.equals(mode)) {
         valid &= require(changed, "OBSERVATION_DIFFERENCE_REQUIRED:" + observationKey, failures);
@@ -241,10 +239,13 @@ public final class ArtifactComparator {
         if (valid) claimedDifferences.add(differenceKey);
       }
       if (valid) usedRules.add(id);
-      approvedLoginTitleObserved |= loginBrand && valid;
+      if (valid && brand) pendingBrandObservations.remove(differenceKey);
     }
 
-    require(approvedLoginTitleObserved, "LOGIN_TITLE_DIF_REQUIRED", failures);
+    for (String target : pendingBrandObservations) {
+      failures.add(
+          LOGIN_TITLE.equals(target) ? "LOGIN_TITLE_DIF_REQUIRED" : "BRAND_DIF_REQUIRED:" + target);
+    }
     List<String> unregistered =
         rawDifferences.stream().filter(key -> !claimedDifferences.contains(key)).toList();
     unregistered.forEach(value -> failures.add("UNREGISTERED_DIFF:" + value));
@@ -261,6 +262,18 @@ public final class ArtifactComparator {
         unused,
         unregistered,
         List.copyOf(failures));
+  }
+
+  private static boolean checkBrand(
+      String caseId, String differenceKey, JsonNode current, JsonNode nk, List<String> failures) {
+    String prefix = LOGIN_CASE.equals(caseId) ? "OBSERVATION_LOGIN_TITLE_" : "OBSERVATION_BRAND_";
+    List<String> pair = BRAND_EXPECTATIONS.get(differenceKey);
+    if (pair == null) {
+      failures.add(prefix + "POINTER");
+      return false;
+    }
+    return require(pair.getFirst().equals(current.textValue()), prefix + "CURRENT", failures)
+        & require(pair.getLast().equals(nk.textValue()), prefix + "NK", failures);
   }
 
   private static void requireInput(Path value, String label) {

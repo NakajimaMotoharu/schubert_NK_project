@@ -31,9 +31,12 @@ class ArtifactComparatorTest {
   private static final String ASYNC_MENU_DIFFERENCE = "DIF-003";
   private static final String FIXTURE_CHR_A01 = "CHR-A01";
   private static final String FIXTURE_CHR_U01 = "CHR-U01";
+  private static final String FIXTURE_CHR_U02 = "CHR-U02";
   private static final String FIXTURE_CHR_L01 = "CHR-L01";
   private static final String FIXTURE_DIF_001 = "DIF-001";
   private static final String FIXTURE_BRAND = "brand";
+  private static final String FIXTURE_BRAND_POINTER = "/brand";
+  private static final String FIXTURE_POINTER = "jsonPointer";
   private static final String FIXTURE_DIFFERENCE = "difference";
   private static final String FIXTURE_SEMANTIC = "semantic";
   private static final String FIXTURE_SCHUBERT = "schubert";
@@ -51,6 +54,15 @@ class ArtifactComparatorTest {
   private static final String FIXTURE_UNAPPROVED_LOGIN_TITLE = "public synthetic different title";
   private static final String FIXTURE_LOGIN_TITLE_REQUIRED = "LOGIN_TITLE_DIF_REQUIRED";
   private static final String FIXTURE_UNREGISTERED_LOGIN_TITLE = "CHR-A01:/title";
+  private static final String FIXTURE_TITLES = "titles";
+  private static final String FIXTURE_MENU_TITLE_POINTER = "/titles/0";
+  private static final String FIXTURE_SEARCH_TITLE_POINTER = "/titles/1";
+  private static final String FIXTURE_CURRENT_SEARCH_TITLE = "schubert - 検索";
+  private static final String FIXTURE_NK_SEARCH_TITLE = "schubert NK - 検索";
+  private static final String FIXTURE_CHR_U02_JSON = "CHR-U02.json";
+  private static final String BRAND_SEARCH_REQUIRED = "BRAND_DIF_REQUIRED:CHR-U02:/titles/1";
+  private static final String UNREGISTERED_SEARCH = "CHR-U02:/titles/1";
+  private static final String UNREGISTERED_BRAND = "CHR-U01:/brand";
   private static final String FIXTURE_CASEID = "caseId";
   private static final String FIXTURE_SAME = "same";
   private static final String FIXTURE_CURRENT = "current";
@@ -253,8 +265,8 @@ class ArtifactComparatorTest {
     assertEquals(FIXTURE_PASS, report.path(FIXTURE_STATUS).asText());
     assertEquals(24, report.path("expectedCaseCount").asInt());
     assertEquals(24, report.path("comparedCaseCount").asInt());
-    assertEquals(15, report.path("rawDifferenceCount").asInt());
-    assertEquals(17, report.path("observationCount").asInt());
+    assertEquals(17, report.path("rawDifferenceCount").asInt());
+    assertEquals(19, report.path("observationCount").asInt());
     assertEquals(16, report.path("usedDifferences").size());
     assertTrue(report.path("unusedDifferences").isEmpty());
     assertTrue(report.path("unregisteredDifferences").isEmpty());
@@ -268,8 +280,8 @@ class ArtifactComparatorTest {
     assertEquals(FIXTURE_PASS, direct.status());
     assertEquals(24, direct.expectedCaseCount());
     assertEquals(24, direct.comparedCaseCount());
-    assertEquals(15, direct.rawDifferenceCount());
-    assertEquals(17, direct.observationCount());
+    assertEquals(17, direct.rawDifferenceCount());
+    assertEquals(19, direct.observationCount());
     assertEquals(16, direct.usedDifferences().size());
     assertTrue(direct.unusedDifferences().isEmpty());
     assertTrue(direct.unregisteredDifferences().isEmpty());
@@ -302,7 +314,7 @@ class ArtifactComparatorTest {
 
     assertFalse(result.passed());
     assertEquals(List.of("DIF_DUPLICATE:DIF-001"), result.failures());
-    assertEquals(17, result.observationCount());
+    assertEquals(19, result.observationCount());
     assertEquals(16, result.usedDifferences().size());
   }
 
@@ -448,7 +460,7 @@ class ArtifactComparatorTest {
     assertContains(result.failures(), "OBSERVATION_VERSION");
     assertContains(result.failures(), "OBSERVATIONS_NOT_ARRAY");
     assertEquals(16, result.unusedDifferences().size());
-    assertEquals(15, result.unregisteredDifferences().size());
+    assertEquals(17, result.unregisteredDifferences().size());
   }
 
   @Test
@@ -784,12 +796,13 @@ class ArtifactComparatorTest {
         ArtifactComparator.compare(
             invalid.project(), invalid.current(), invalid.nk(), invalid.observations());
     assertFalse(rejected.passed());
-    assertEquals(List.of("CHR-U01:/dif/DIF-001"), rejected.unregisteredDifferences());
+    assertEquals(List.of(UNREGISTERED_BRAND), rejected.unregisteredDifferences());
     assertTrue(rejected.unusedDifferences().isEmpty());
     assertEquals(
         List.of(
-            "OBSERVATION_NK_VALUE:DIF-001:CHR-U01:/dif/DIF-001",
-            "UNREGISTERED_DIFF:CHR-U01:/dif/DIF-001"),
+            "OBSERVATION_NK_VALUE:DIF-001:CHR-U01:/brand",
+            "BRAND_DIF_REQUIRED:CHR-U01:/brand",
+            "UNREGISTERED_DIFF:CHR-U01:/brand"),
         rejected.failures());
   }
 
@@ -820,7 +833,7 @@ class ArtifactComparatorTest {
         envelope -> {
           JsonNode observations = envelope.path(FIXTURE_OBSERVATIONS);
           var login = (ObjectNode) observations.get(observations.size() - 1);
-          login.put("jsonPointer", "/missingLoginField");
+          login.put(FIXTURE_POINTER, "/missingLoginField");
         });
 
     var result =
@@ -864,6 +877,102 @@ class ArtifactComparatorTest {
     assertEquals(List.of(FIXTURE_UNREGISTERED_LOGIN_TITLE), result.unregisteredDifferences());
   }
 
+  @Test
+  void requiresSearchTitleEvidenceEvenWithoutAnyUnregisteredDrift() throws Exception {
+    Fixture fixture = fixture("unchanged-search-title-without-observation");
+    mutate(
+        fixture.nk().resolve(FIXTURE_CHR_U02_JSON),
+        root -> ((ArrayNode) root.path(FIXTURE_TITLES)).set(1, FIXTURE_CURRENT_SEARCH_TITLE));
+    removeObservation(fixture, FIXTURE_CHR_U02, FIXTURE_SEARCH_TITLE_POINTER);
+
+    var result = compare(fixture);
+    assertFalse(result.passed());
+    assertEquals(List.of(BRAND_SEARCH_REQUIRED), result.failures());
+    assertTrue(result.unregisteredDifferences().isEmpty());
+  }
+
+  @Test
+  void requiresMenuBrandEvidenceFromTheMenuCase() throws Exception {
+    Fixture fixture = fixture("missing-menu-brand-observation");
+    removeObservation(fixture, FIXTURE_CHR_U01, FIXTURE_BRAND_POINTER);
+
+    var result = compare(fixture);
+    assertFalse(result.passed());
+    assertTrue(result.usedDifferences().contains(FIXTURE_DIF_001));
+    assertContains(result.failures(), "BRAND_DIF_REQUIRED:CHR-U01:/brand");
+    assertEquals(List.of(UNREGISTERED_BRAND), result.unregisteredDifferences());
+  }
+
+  @Test
+  void requiresBothCommonStyleTitlesWhenTheSecondOneChanged() throws Exception {
+    Fixture fixture = fixture("missing-common-style-search-observation");
+    removeObservation(fixture, FIXTURE_CHR_U02, FIXTURE_SEARCH_TITLE_POINTER);
+
+    var result = compare(fixture);
+    assertFalse(result.passed());
+    assertContains(result.failures(), BRAND_SEARCH_REQUIRED);
+    assertEquals(List.of(UNREGISTERED_SEARCH), result.unregisteredDifferences());
+  }
+
+  @Test
+  void refusesCommonStyleTitleOutsideApprovedBrandPositions() throws Exception {
+    Fixture fixture = fixture("different-common-style-title-pointer");
+    mutate(
+        fixture.observations(),
+        root -> {
+          var claims = (ArrayNode) root.path(FIXTURE_OBSERVATIONS);
+          ((ObjectNode)
+                  claims.get(
+                      findObservation(claims, FIXTURE_CHR_U02, FIXTURE_SEARCH_TITLE_POINTER)))
+              .put(FIXTURE_POINTER, "/titles/2");
+        });
+
+    var result = compare(fixture);
+    assertFalse(result.passed());
+    assertContains(result.failures(), "OBSERVATION_BRAND_POINTER");
+    assertContains(result.failures(), BRAND_SEARCH_REQUIRED);
+    assertEquals(List.of(UNREGISTERED_SEARCH), result.unregisteredDifferences());
+  }
+
+  @Test
+  void leavesNonBrandTitleChangeUnregistered() throws Exception {
+    Fixture fixture = fixture("changed-unapproved-sibling-title");
+    mutate(
+        fixture.nk().resolve(FIXTURE_CHR_U02_JSON),
+        root -> ((ArrayNode) root.path(FIXTURE_TITLES)).set(2, "synthetic unrelated title change"));
+
+    var result = compare(fixture);
+    assertFalse(result.passed());
+    assertEquals(List.of("CHR-U02:/titles/2"), result.unregisteredDifferences());
+    assertEquals(List.of("UNREGISTERED_DIFF:CHR-U02:/titles/2"), result.failures());
+  }
+
+  private static ArtifactComparator.ComparisonResult compare(Fixture fixture) throws IOException {
+    return ArtifactComparator.compare(
+        fixture.project(), fixture.current(), fixture.nk(), fixture.observations());
+  }
+
+  private static void removeObservation(Fixture fixture, String caseId, String pointer)
+      throws Exception {
+    mutate(
+        fixture.observations(),
+        root -> {
+          var claims = (ArrayNode) root.path(FIXTURE_OBSERVATIONS);
+          claims.remove(findObservation(claims, caseId, pointer));
+        });
+  }
+
+  private static int findObservation(ArrayNode claims, String caseId, String pointer) {
+    for (int i = 0; i < claims.size(); i++) {
+      JsonNode claim = claims.get(i);
+      if (caseId.equals(claim.path(FIXTURE_CASEID).asText())
+          && pointer.equals(claim.path(FIXTURE_POINTER).asText())) {
+        return i;
+      }
+    }
+    throw new AssertionError("independent observation missing");
+  }
+
   private Fixture fixture(String name) throws Exception {
     Path root = temporaryDirectory.resolve(name);
     Path project = root.resolve("project");
@@ -899,7 +1008,11 @@ class ArtifactComparatorTest {
       String pointer = "/dif/" + oracle.id();
       JsonNode currentValue = TextNode.valueOf(oracle.currentValue());
       JsonNode nkValue = TextNode.valueOf(oracle.nkValue());
-      if (ASYNC_MENU_DIFFERENCE.equals(oracle.id())) {
+      if (FIXTURE_DIF_001.equals(oracle.id())) {
+        currentArtifact.set(FIXTURE_BRAND, currentValue);
+        nkArtifact.set(FIXTURE_BRAND, nkValue);
+        pointer = FIXTURE_BRAND_POINTER;
+      } else if (ASYNC_MENU_DIFFERENCE.equals(oracle.id())) {
         currentDif.set(oracle.id(), JSON.valueToTree(List.of(FIXTURE_SAME, oracle.currentValue())));
         nkDif.set(oracle.id(), JSON.valueToTree(List.of(FIXTURE_SAME, oracle.nkValue())));
         pointer += "/1";
@@ -919,6 +1032,36 @@ class ArtifactComparatorTest {
               oracle.currentValue(),
               oracle.nkValue()));
     }
+    var commonCurrent = currentArtifacts.get(FIXTURE_CHR_U02).putArray(FIXTURE_TITLES);
+    var commonNk = nkArtifacts.get(FIXTURE_CHR_U02).putArray(FIXTURE_TITLES);
+    commonCurrent.add(FIXTURE_SCHUBERT).add(FIXTURE_CURRENT_SEARCH_TITLE);
+    commonNk.add(FIXTURE_SCHUBERT_NK).add(FIXTURE_NK_SEARCH_TITLE);
+    for (String unchangedTitle : List.of("Scenario Games", "Animation", "Music", "Logs")) {
+      commonCurrent.add(unchangedTitle);
+      commonNk.add(unchangedTitle);
+    }
+    observationItems.add(
+        observation(
+            FIXTURE_DIF_001,
+            FIXTURE_CHR_U02,
+            FIXTURE_BRAND,
+            FIXTURE_DIFFERENCE,
+            FIXTURE_SEMANTIC,
+            FIXTURE_BRAND,
+            FIXTURE_MENU_TITLE_POINTER,
+            FIXTURE_SCHUBERT,
+            FIXTURE_SCHUBERT_NK));
+    observationItems.add(
+        observation(
+            FIXTURE_DIF_001,
+            FIXTURE_CHR_U02,
+            FIXTURE_BRAND,
+            FIXTURE_DIFFERENCE,
+            FIXTURE_SEMANTIC,
+            FIXTURE_BRAND,
+            FIXTURE_SEARCH_TITLE_POINTER,
+            FIXTURE_CURRENT_SEARCH_TITLE,
+            FIXTURE_NK_SEARCH_TITLE));
     currentArtifacts.get(FIXTURE_CHR_A01).put(FIXTURE_LOGIN_TITLE, FIXTURE_CURRENT_LOGIN_TITLE);
     nkArtifacts.get(FIXTURE_CHR_A01).put(FIXTURE_LOGIN_TITLE, FIXTURE_NK_LOGIN_TITLE);
     observationItems.add(
@@ -964,7 +1107,7 @@ class ArtifactComparatorTest {
         .put("mode", mode)
         .put("selectorType", selectorType)
         .put("selector", selector)
-        .put("jsonPointer", pointer)
+        .put(FIXTURE_POINTER, pointer)
         .put("expectedCurrent", expectedCurrent)
         .put(FIXTURE_EXPECTED_NK, expectedNk);
   }
