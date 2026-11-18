@@ -1,0 +1,1044 @@
+{
+  "actualExit": 0,
+  "pmdGenuineExit": 4,
+  "terminalAtUTC": "2026-11-18T05:57:21.318762+00:00",
+  "source": "d0b8ee6057132d73f0234becf9fdef3073308f87",
+  "sourceCount": 12,
+  "rawCount": 56,
+  "applied": 0,
+  "unclassified": 0,
+  "exactSourceAndSiteEvidence": true,
+  "processingErrors": 0,
+  "distinctMaterialsWithRaw": 5,
+  "policy": {
+    "path": "tools/quality/static/pmd.xml",
+    "sha256": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de"
+  },
+  "raw": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38768-f03-twelve-current-main-pmd-v1/raw.json",
+    "sha256": "0c109780be5d81fb27f68459ef7a440dd9fd36680540a4c3199264a54a850a78"
+  },
+  "report": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38768-f03-twelve-current-main-pmd-v1/pmd.xml",
+    "sha256": "ed7d3fdc215cef5f935111344240fca9a7cb9dd4424ebf2f367b2fd577d8eda1"
+  },
+  "terminal": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38768-f03-twelve-current-main-pmd-v1/terminal.json",
+    "sha256": "750a6a0b8bc7713ac6c2f54f70b6cd08e8342195b89b9ecaa91d05f1254e4d58"
+  },
+  "decisions": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
+      "rule": "CloseResource",
+      "line": 133,
+      "message": "Ensure that resources like this PreparedStatement object are closed after use",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "var query = present(statement);",
+      "sourceSha256": "39848dad36f65f8de855c60b52ece8ca9d1e89088a91071870070c30430faf0f",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      },
+      "reason": "BackupStepRepository.java inspect, line 133: nullable provider result is explicitly acquired before the applicable try and required inside it; the corresponding finally releases the nonnull row or statement even on projection failure. A null result has no JDBC owner. Borrowed connection is caller-owned. Original SS332 owned close contracts and exact tests cover the applicable SQL/unknown diagnostics."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
+      "rule": "CloseResource",
+      "line": 140,
+      "message": "Ensure that resources like this ResultSet object are closed after use",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "var row = present(rows);",
+      "sourceSha256": "39848dad36f65f8de855c60b52ece8ca9d1e89088a91071870070c30430faf0f",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      },
+      "reason": "BackupStepRepository.java inspect, line 140: nullable provider result is explicitly acquired before the applicable try and required inside it; the corresponding finally releases the nonnull row or statement even on projection failure. A null result has no JDBC owner. Borrowed connection is caller-owned. Original SS332 owned close contracts and exact tests cover the applicable SQL/unknown diagnostics."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 153,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceSha256": "39848dad36f65f8de855c60b52ece8ca9d1e89088a91071870070c30430faf0f",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      },
+      "reason": "BackupStepRepository.java inspect, line 153: this catch captures the exact primary for the owned finally, then rethrows that same instance. It does not convert unexpected Runtime or Error into an allowed result. The approved close-priority rule requires retaining this primary category and observing the appropriate JDBC closes."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 153,
+      "message": "Avoid catching Error in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceSha256": "39848dad36f65f8de855c60b52ece8ca9d1e89088a91071870070c30430faf0f",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      },
+      "reason": "BackupStepRepository.java inspect, line 153: this catch captures the exact primary for the owned finally, then rethrows that same instance. It does not convert unexpected Runtime or Error into an allowed result. The approved close-priority rule requires retaining this primary category and observing the appropriate JDBC closes."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 159,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceSha256": "39848dad36f65f8de855c60b52ece8ca9d1e89088a91071870070c30430faf0f",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      },
+      "reason": "BackupStepRepository.java inspect, line 159: this catch captures the exact primary for the owned finally, then rethrows that same instance. It does not convert unexpected Runtime or Error into an allowed result. The approved close-priority rule requires retaining this primary category and observing the appropriate JDBC closes."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 159,
+      "message": "Avoid catching Error in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceSha256": "39848dad36f65f8de855c60b52ece8ca9d1e89088a91071870070c30430faf0f",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      },
+      "reason": "BackupStepRepository.java inspect, line 159: this catch captures the exact primary for the owned finally, then rethrows that same instance. It does not convert unexpected Runtime or Error into an allowed result. The approved close-priority rule requires retaining this primary category and observing the appropriate JDBC closes."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 189,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "sourceSha256": "39848dad36f65f8de855c60b52ece8ca9d1e89088a91071870070c30430faf0f",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      },
+      "reason": "BackupStepRepository.java closeRows, line 189: this handler encloses an owned JDBC close and exists to preserve SS332 precedence and redaction for known SQL and unknown provider failure. The scope rethrows the selected failure or keeps the original primary with only the fixed secondary, and closes the outer resource in order."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 189,
+      "message": "Avoid catching Error in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "sourceSha256": "39848dad36f65f8de855c60b52ece8ca9d1e89088a91071870070c30430faf0f",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      },
+      "reason": "BackupStepRepository.java closeRows, line 189: this handler encloses an owned JDBC close and exists to preserve SS332 precedence and redaction for known SQL and unknown provider failure. The scope rethrows the selected failure or keeps the original primary with only the fixed secondary, and closes the outer resource in order."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 200,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "sourceSha256": "39848dad36f65f8de855c60b52ece8ca9d1e89088a91071870070c30430faf0f",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      },
+      "reason": "BackupStepRepository.java closeStatement, line 200: this handler encloses an owned JDBC close and exists to preserve SS332 precedence and redaction for known SQL and unknown provider failure. The scope rethrows the selected failure or keeps the original primary with only the fixed secondary, and closes the outer resource in order."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 200,
+      "message": "Avoid catching Error in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "sourceSha256": "39848dad36f65f8de855c60b52ece8ca9d1e89088a91071870070c30430faf0f",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      },
+      "reason": "BackupStepRepository.java closeStatement, line 200: this handler encloses an owned JDBC close and exists to preserve SS332 precedence and redaction for known SQL and unknown provider failure. The scope rethrows the selected failure or keeps the original primary with only the fixed secondary, and closes the outer resource in order."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 58,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceSha256": "b7a918a20a19b0e687d09a50da2186cdca2d8b8d740474edb12c2e395b146118",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5050_bug3238_cleanup_fixed_sql_admission.json",
+        "sha256": "f2cafeb48f2df05a216f8fd151db5c3846c695fc706d195b49967be830663757"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38721-bug3237-cleanup-owner-prepare-v2/manifest.json",
+        "sha256": "7a856e813c24541550019052045dec3638d27cc0e75064550bbcbaaebd9c862f"
+      },
+      "reason": "CleanupRepository.java execute row scope records the exact primary then immediately rethrows. Its owned finally calls a direct, typed closer. The existing fixed priority matrix requires the identity, ordered close and fixed secondary diagnostic, leaving the Connection caller owned."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 58,
+      "message": "Avoid catching Error in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceSha256": "b7a918a20a19b0e687d09a50da2186cdca2d8b8d740474edb12c2e395b146118",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5050_bug3238_cleanup_fixed_sql_admission.json",
+        "sha256": "f2cafeb48f2df05a216f8fd151db5c3846c695fc706d195b49967be830663757"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38721-bug3237-cleanup-owner-prepare-v2/manifest.json",
+        "sha256": "7a856e813c24541550019052045dec3638d27cc0e75064550bbcbaaebd9c862f"
+      },
+      "reason": "CleanupRepository.java execute row scope records the exact primary then immediately rethrows. Its owned finally calls a direct, typed closer. The existing fixed priority matrix requires the identity, ordered close and fixed secondary diagnostic, leaving the Connection caller owned."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 64,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceSha256": "b7a918a20a19b0e687d09a50da2186cdca2d8b8d740474edb12c2e395b146118",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5050_bug3238_cleanup_fixed_sql_admission.json",
+        "sha256": "f2cafeb48f2df05a216f8fd151db5c3846c695fc706d195b49967be830663757"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38721-bug3237-cleanup-owner-prepare-v2/manifest.json",
+        "sha256": "7a856e813c24541550019052045dec3638d27cc0e75064550bbcbaaebd9c862f"
+      },
+      "reason": "CleanupRepository.java execute statement scope records the exact primary then immediately rethrows. Its owned finally calls a direct, typed closer. The existing fixed priority matrix requires the identity, ordered close and fixed secondary diagnostic, leaving the Connection caller owned."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 64,
+      "message": "Avoid catching Error in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceSha256": "b7a918a20a19b0e687d09a50da2186cdca2d8b8d740474edb12c2e395b146118",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5050_bug3238_cleanup_fixed_sql_admission.json",
+        "sha256": "f2cafeb48f2df05a216f8fd151db5c3846c695fc706d195b49967be830663757"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38721-bug3237-cleanup-owner-prepare-v2/manifest.json",
+        "sha256": "7a856e813c24541550019052045dec3638d27cc0e75064550bbcbaaebd9c862f"
+      },
+      "reason": "CleanupRepository.java execute statement scope records the exact primary then immediately rethrows. Its owned finally calls a direct, typed closer. The existing fixed priority matrix requires the identity, ordered close and fixed secondary diagnostic, leaving the Connection caller owned."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 97,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceSha256": "b7a918a20a19b0e687d09a50da2186cdca2d8b8d740474edb12c2e395b146118",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5050_bug3238_cleanup_fixed_sql_admission.json",
+        "sha256": "f2cafeb48f2df05a216f8fd151db5c3846c695fc706d195b49967be830663757"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38721-bug3237-cleanup-owner-prepare-v2/manifest.json",
+        "sha256": "7a856e813c24541550019052045dec3638d27cc0e75064550bbcbaaebd9c862f"
+      },
+      "reason": "CleanupRepository.java readLogProgress row scope records the exact primary then immediately rethrows. Its owned finally calls a direct, typed closer. The existing fixed priority matrix requires the identity, ordered close and fixed secondary diagnostic, leaving the Connection caller owned."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 97,
+      "message": "Avoid catching Error in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceSha256": "b7a918a20a19b0e687d09a50da2186cdca2d8b8d740474edb12c2e395b146118",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5050_bug3238_cleanup_fixed_sql_admission.json",
+        "sha256": "f2cafeb48f2df05a216f8fd151db5c3846c695fc706d195b49967be830663757"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38721-bug3237-cleanup-owner-prepare-v2/manifest.json",
+        "sha256": "7a856e813c24541550019052045dec3638d27cc0e75064550bbcbaaebd9c862f"
+      },
+      "reason": "CleanupRepository.java readLogProgress row scope records the exact primary then immediately rethrows. Its owned finally calls a direct, typed closer. The existing fixed priority matrix requires the identity, ordered close and fixed secondary diagnostic, leaving the Connection caller owned."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 103,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceSha256": "b7a918a20a19b0e687d09a50da2186cdca2d8b8d740474edb12c2e395b146118",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5050_bug3238_cleanup_fixed_sql_admission.json",
+        "sha256": "f2cafeb48f2df05a216f8fd151db5c3846c695fc706d195b49967be830663757"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38721-bug3237-cleanup-owner-prepare-v2/manifest.json",
+        "sha256": "7a856e813c24541550019052045dec3638d27cc0e75064550bbcbaaebd9c862f"
+      },
+      "reason": "CleanupRepository.java readLogProgress statement scope records the exact primary then immediately rethrows. Its owned finally calls a direct, typed closer. The existing fixed priority matrix requires the identity, ordered close and fixed secondary diagnostic, leaving the Connection caller owned."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 103,
+      "message": "Avoid catching Error in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceSha256": "b7a918a20a19b0e687d09a50da2186cdca2d8b8d740474edb12c2e395b146118",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5050_bug3238_cleanup_fixed_sql_admission.json",
+        "sha256": "f2cafeb48f2df05a216f8fd151db5c3846c695fc706d195b49967be830663757"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38721-bug3237-cleanup-owner-prepare-v2/manifest.json",
+        "sha256": "7a856e813c24541550019052045dec3638d27cc0e75064550bbcbaaebd9c862f"
+      },
+      "reason": "CleanupRepository.java readLogProgress statement scope records the exact primary then immediately rethrows. Its owned finally calls a direct, typed closer. The existing fixed priority matrix requires the identity, ordered close and fixed secondary diagnostic, leaving the Connection caller owned."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 151,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "sourceSha256": "b7a918a20a19b0e687d09a50da2186cdca2d8b8d740474edb12c2e395b146118",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5050_bug3238_cleanup_fixed_sql_admission.json",
+        "sha256": "f2cafeb48f2df05a216f8fd151db5c3846c695fc706d195b49967be830663757"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38721-bug3237-cleanup-owner-prepare-v2/manifest.json",
+        "sha256": "7a856e813c24541550019052045dec3638d27cc0e75064550bbcbaaebd9c862f"
+      },
+      "reason": "CleanupRepository.java.closeRow catches only the independent JDBC close call. Declared SQL and unmodeled Runtime/Error are classified by existing JdbcResourceFailures: it preserves the body and its fixed secondary or selects the close fault according to existing contract. An unknown failure is never converted to success."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 151,
+      "message": "Avoid catching Error in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "sourceSha256": "b7a918a20a19b0e687d09a50da2186cdca2d8b8d740474edb12c2e395b146118",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5050_bug3238_cleanup_fixed_sql_admission.json",
+        "sha256": "f2cafeb48f2df05a216f8fd151db5c3846c695fc706d195b49967be830663757"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38721-bug3237-cleanup-owner-prepare-v2/manifest.json",
+        "sha256": "7a856e813c24541550019052045dec3638d27cc0e75064550bbcbaaebd9c862f"
+      },
+      "reason": "CleanupRepository.java.closeRow catches only the independent JDBC close call. Declared SQL and unmodeled Runtime/Error are classified by existing JdbcResourceFailures: it preserves the body and its fixed secondary or selects the close fault according to existing contract. An unknown failure is never converted to success."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 160,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "sourceSha256": "b7a918a20a19b0e687d09a50da2186cdca2d8b8d740474edb12c2e395b146118",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5050_bug3238_cleanup_fixed_sql_admission.json",
+        "sha256": "f2cafeb48f2df05a216f8fd151db5c3846c695fc706d195b49967be830663757"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38721-bug3237-cleanup-owner-prepare-v2/manifest.json",
+        "sha256": "7a856e813c24541550019052045dec3638d27cc0e75064550bbcbaaebd9c862f"
+      },
+      "reason": "CleanupRepository.java.closeStatement catches only the independent JDBC close call. Declared SQL and unmodeled Runtime/Error are classified by existing JdbcResourceFailures: it preserves the body and its fixed secondary or selects the close fault according to existing contract. An unknown failure is never converted to success."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 160,
+      "message": "Avoid catching Error in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "sourceSha256": "b7a918a20a19b0e687d09a50da2186cdca2d8b8d740474edb12c2e395b146118",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5050_bug3238_cleanup_fixed_sql_admission.json",
+        "sha256": "f2cafeb48f2df05a216f8fd151db5c3846c695fc706d195b49967be830663757"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38721-bug3237-cleanup-owner-prepare-v2/manifest.json",
+        "sha256": "7a856e813c24541550019052045dec3638d27cc0e75064550bbcbaaebd9c862f"
+      },
+      "reason": "CleanupRepository.java.closeStatement catches only the independent JDBC close call. Declared SQL and unmodeled Runtime/Error are classified by existing JdbcResourceFailures: it preserves the body and its fixed secondary or selects the close fault according to existing contract. An unknown failure is never converted to success."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java",
+      "rule": "CloseResource",
+      "line": 42,
+      "message": "Ensure that resources like this PreparedStatement object are closed after use",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "var query = present(statement);",
+      "sourceSha256": "674adb1842cb28a6ac911b249d0d78e74bc500fb3e229efd42c1ddcb8d2da27c",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5050_bug3238_cleanup_fixed_sql_admission.json",
+        "sha256": "f2cafeb48f2df05a216f8fd151db5c3846c695fc706d195b49967be830663757"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38721-bug3237-cleanup-owner-prepare-v2/manifest.json",
+        "sha256": "7a856e813c24541550019052045dec3638d27cc0e75064550bbcbaaebd9c862f"
+      },
+      "reason": "Owned statement is passed to its typed private closer from unconditional finally; a null result fails the original SQL contract and no absent resource is closed. Resource cleanup runs on all body outcomes in row-before-statement order. Independent CLNPORT probes validate actual attempt and count."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java",
+      "rule": "CloseResource",
+      "line": 54,
+      "message": "Ensure that resources like this ResultSet object are closed after use",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "var row = present(rows);",
+      "sourceSha256": "674adb1842cb28a6ac911b249d0d78e74bc500fb3e229efd42c1ddcb8d2da27c",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5050_bug3238_cleanup_fixed_sql_admission.json",
+        "sha256": "f2cafeb48f2df05a216f8fd151db5c3846c695fc706d195b49967be830663757"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38721-bug3237-cleanup-owner-prepare-v2/manifest.json",
+        "sha256": "7a856e813c24541550019052045dec3638d27cc0e75064550bbcbaaebd9c862f"
+      },
+      "reason": "Owned rows is passed to its typed private closer from unconditional finally; a null result fails the original SQL contract and no absent resource is closed. Resource cleanup runs on all body outcomes in row-before-statement order. Independent CLNPORT probes validate actual attempt and count."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 76,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceSha256": "674adb1842cb28a6ac911b249d0d78e74bc500fb3e229efd42c1ddcb8d2da27c",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5050_bug3238_cleanup_fixed_sql_admission.json",
+        "sha256": "f2cafeb48f2df05a216f8fd151db5c3846c695fc706d195b49967be830663757"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38721-bug3237-cleanup-owner-prepare-v2/manifest.json",
+        "sha256": "7a856e813c24541550019052045dec3638d27cc0e75064550bbcbaaebd9c862f"
+      },
+      "reason": "CleanupStepRepository.java execute row scope records the exact primary then immediately rethrows. Its owned finally calls a direct, typed closer. The existing fixed priority matrix requires the identity, ordered close and fixed secondary diagnostic, leaving the Connection caller owned."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 76,
+      "message": "Avoid catching Error in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceSha256": "674adb1842cb28a6ac911b249d0d78e74bc500fb3e229efd42c1ddcb8d2da27c",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5050_bug3238_cleanup_fixed_sql_admission.json",
+        "sha256": "f2cafeb48f2df05a216f8fd151db5c3846c695fc706d195b49967be830663757"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38721-bug3237-cleanup-owner-prepare-v2/manifest.json",
+        "sha256": "7a856e813c24541550019052045dec3638d27cc0e75064550bbcbaaebd9c862f"
+      },
+      "reason": "CleanupStepRepository.java execute row scope records the exact primary then immediately rethrows. Its owned finally calls a direct, typed closer. The existing fixed priority matrix requires the identity, ordered close and fixed secondary diagnostic, leaving the Connection caller owned."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 82,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceSha256": "674adb1842cb28a6ac911b249d0d78e74bc500fb3e229efd42c1ddcb8d2da27c",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5050_bug3238_cleanup_fixed_sql_admission.json",
+        "sha256": "f2cafeb48f2df05a216f8fd151db5c3846c695fc706d195b49967be830663757"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38721-bug3237-cleanup-owner-prepare-v2/manifest.json",
+        "sha256": "7a856e813c24541550019052045dec3638d27cc0e75064550bbcbaaebd9c862f"
+      },
+      "reason": "CleanupStepRepository.java execute statement scope records the exact primary then immediately rethrows. Its owned finally calls a direct, typed closer. The existing fixed priority matrix requires the identity, ordered close and fixed secondary diagnostic, leaving the Connection caller owned."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 82,
+      "message": "Avoid catching Error in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceSha256": "674adb1842cb28a6ac911b249d0d78e74bc500fb3e229efd42c1ddcb8d2da27c",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5050_bug3238_cleanup_fixed_sql_admission.json",
+        "sha256": "f2cafeb48f2df05a216f8fd151db5c3846c695fc706d195b49967be830663757"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38721-bug3237-cleanup-owner-prepare-v2/manifest.json",
+        "sha256": "7a856e813c24541550019052045dec3638d27cc0e75064550bbcbaaebd9c862f"
+      },
+      "reason": "CleanupStepRepository.java execute statement scope records the exact primary then immediately rethrows. Its owned finally calls a direct, typed closer. The existing fixed priority matrix requires the identity, ordered close and fixed secondary diagnostic, leaving the Connection caller owned."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 101,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "sourceSha256": "674adb1842cb28a6ac911b249d0d78e74bc500fb3e229efd42c1ddcb8d2da27c",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5050_bug3238_cleanup_fixed_sql_admission.json",
+        "sha256": "f2cafeb48f2df05a216f8fd151db5c3846c695fc706d195b49967be830663757"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38721-bug3237-cleanup-owner-prepare-v2/manifest.json",
+        "sha256": "7a856e813c24541550019052045dec3638d27cc0e75064550bbcbaaebd9c862f"
+      },
+      "reason": "CleanupStepRepository.java.closeRows catches only the independent JDBC close call. Declared SQL and unmodeled Runtime/Error are classified by existing JdbcResourceFailures: it preserves the body and its fixed secondary or selects the close fault according to existing contract. An unknown failure is never converted to success."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 101,
+      "message": "Avoid catching Error in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "sourceSha256": "674adb1842cb28a6ac911b249d0d78e74bc500fb3e229efd42c1ddcb8d2da27c",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5050_bug3238_cleanup_fixed_sql_admission.json",
+        "sha256": "f2cafeb48f2df05a216f8fd151db5c3846c695fc706d195b49967be830663757"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38721-bug3237-cleanup-owner-prepare-v2/manifest.json",
+        "sha256": "7a856e813c24541550019052045dec3638d27cc0e75064550bbcbaaebd9c862f"
+      },
+      "reason": "CleanupStepRepository.java.closeRows catches only the independent JDBC close call. Declared SQL and unmodeled Runtime/Error are classified by existing JdbcResourceFailures: it preserves the body and its fixed secondary or selects the close fault according to existing contract. An unknown failure is never converted to success."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 112,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "sourceSha256": "674adb1842cb28a6ac911b249d0d78e74bc500fb3e229efd42c1ddcb8d2da27c",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5050_bug3238_cleanup_fixed_sql_admission.json",
+        "sha256": "f2cafeb48f2df05a216f8fd151db5c3846c695fc706d195b49967be830663757"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38721-bug3237-cleanup-owner-prepare-v2/manifest.json",
+        "sha256": "7a856e813c24541550019052045dec3638d27cc0e75064550bbcbaaebd9c862f"
+      },
+      "reason": "CleanupStepRepository.java.closeStatement catches only the independent JDBC close call. Declared SQL and unmodeled Runtime/Error are classified by existing JdbcResourceFailures: it preserves the body and its fixed secondary or selects the close fault according to existing contract. An unknown failure is never converted to success."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 112,
+      "message": "Avoid catching Error in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "sourceSha256": "674adb1842cb28a6ac911b249d0d78e74bc500fb3e229efd42c1ddcb8d2da27c",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5050_bug3238_cleanup_fixed_sql_admission.json",
+        "sha256": "f2cafeb48f2df05a216f8fd151db5c3846c695fc706d195b49967be830663757"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38721-bug3237-cleanup-owner-prepare-v2/manifest.json",
+        "sha256": "7a856e813c24541550019052045dec3638d27cc0e75064550bbcbaaebd9c862f"
+      },
+      "reason": "CleanupStepRepository.java.closeStatement catches only the independent JDBC close call. Declared SQL and unmodeled Runtime/Error are classified by existing JdbcResourceFailures: it preserves the body and its fixed secondary or selects the close fault according to existing contract. An unknown failure is never converted to success."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "DoNotUseThreads",
+      "line": 31,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "require(!Thread.currentThread().isInterrupted());",
+      "sourceSha256": "389d41ce3928ac25a5001a08fc5a4562ba44df84144721b2f3a8f36f16747edb",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      },
+      "reason": "SS332 single-owner borrowed-connection read observes the current thread interrupt at entry and after both owned JDBC resources close. It creates no thread, executor, daemon or J2EE container work."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "CloseResource",
+      "line": 42,
+      "message": "Ensure that resources like this PreparedStatement object are closed after use",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "var checked = present(statement);",
+      "sourceSha256": "389d41ce3928ac25a5001a08fc5a4562ba44df84144721b2f3a8f36f16747edb",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      },
+      "reason": "checked is a non-null alias of the acquired statement. Its original statement reference is closed exactly once in the outer finally after row close; explicit precedence is SS332. RRF-PURE-004/005/006 asserts acquired equals close count."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "CloseResource",
+      "line": 49,
+      "message": "Ensure that resources like this ResultSet object are closed after use",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "var values = present(row);",
+      "sourceSha256": "389d41ce3928ac25a5001a08fc5a4562ba44df84144721b2f3a8f36f16747edb",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      },
+      "reason": "values is a non-null alias of the acquired ResultSet. The original row reference is closed exactly once in the inner finally, including projection/null/runtime/error failures; statement still closes afterward. RRF-PURE-004/005/006 checks counters."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 61,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceSha256": "389d41ce3928ac25a5001a08fc5a4562ba44df84144721b2f3a8f36f16747edb",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      },
+      "reason": "SS332/SSC063 mandates explicit resource-failure precedence: capture and rethrow identical RuntimeException/Error after both finally blocks, never normalise an NPE or swallow fatal. Exact primary/secondary matrix is RRF-PURE-006."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 61,
+      "message": "Avoid catching Error in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceSha256": "389d41ce3928ac25a5001a08fc5a4562ba44df84144721b2f3a8f36f16747edb",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      },
+      "reason": "SS332/SSC063 mandates explicit resource-failure precedence: capture and rethrow identical RuntimeException/Error after both finally blocks, never normalise an NPE or swallow fatal. Exact primary/secondary matrix is RRF-PURE-006."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 67,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceSha256": "389d41ce3928ac25a5001a08fc5a4562ba44df84144721b2f3a8f36f16747edb",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      },
+      "reason": "SS332/SSC063 mandates explicit resource-failure precedence: capture and rethrow identical RuntimeException/Error after both finally blocks, never normalise an NPE or swallow fatal. Exact primary/secondary matrix is RRF-PURE-006."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 67,
+      "message": "Avoid catching Error in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceSha256": "389d41ce3928ac25a5001a08fc5a4562ba44df84144721b2f3a8f36f16747edb",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      },
+      "reason": "SS332/SSC063 mandates explicit resource-failure precedence: capture and rethrow identical RuntimeException/Error after both finally blocks, never normalise an NPE or swallow fatal. Exact primary/secondary matrix is RRF-PURE-006."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "DoNotUseThreads",
+      "line": 73,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "require(!Thread.currentThread().isInterrupted());",
+      "sourceSha256": "389d41ce3928ac25a5001a08fc5a4562ba44df84144721b2f3a8f36f16747edb",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      },
+      "reason": "SS332 single-owner borrowed-connection read observes the current thread interrupt at entry and after both owned JDBC resources close. It creates no thread, executor, daemon or J2EE container work."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 88,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "sourceSha256": "389d41ce3928ac25a5001a08fc5a4562ba44df84144721b2f3a8f36f16747edb",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      },
+      "reason": "SS332/SSC063 mandates explicit resource-failure precedence: capture and rethrow identical RuntimeException/Error after both finally blocks, never normalise an NPE or swallow fatal. Exact primary/secondary matrix is RRF-PURE-006."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 88,
+      "message": "Avoid catching Error in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "sourceSha256": "389d41ce3928ac25a5001a08fc5a4562ba44df84144721b2f3a8f36f16747edb",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      },
+      "reason": "SS332/SSC063 mandates explicit resource-failure precedence: capture and rethrow identical RuntimeException/Error after both finally blocks, never normalise an NPE or swallow fatal. Exact primary/secondary matrix is RRF-PURE-006."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 98,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "sourceSha256": "389d41ce3928ac25a5001a08fc5a4562ba44df84144721b2f3a8f36f16747edb",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      },
+      "reason": "SS332/SSC063 mandates explicit resource-failure precedence: capture and rethrow identical RuntimeException/Error after both finally blocks, never normalise an NPE or swallow fatal. Exact primary/secondary matrix is RRF-PURE-006."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 98,
+      "message": "Avoid catching Error in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "sourceSha256": "389d41ce3928ac25a5001a08fc5a4562ba44df84144721b2f3a8f36f16747edb",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5053_bug3239_backup_pair_fixture_admission.json",
+        "sha256": "00b3ea8139379b393974737b50cc9a80b0475d7d296e02a08f6a3d2ff61ca8df"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38746-ssc461-backup-pair-prepare-v2/manifest.json",
+        "sha256": "2dd11dcbf3ff75410c0f4f6d92892b5d7d3f14a19e61bd71e239d9dcec669f82"
+      },
+      "reason": "SS332/SSC063 mandates explicit resource-failure precedence: capture and rethrow identical RuntimeException/Error after both finally blocks, never normalise an NPE or swallow fatal. Exact primary/secondary matrix is RRF-PURE-006."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "rule": "DoNotUseThreads",
+      "line": 86,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "require(!Thread.currentThread().isInterrupted());",
+      "sourceSha256": "3952e261ed57274a3cfe9dfa183e0d79848e6011c37570f0150d52bea79595b7",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5043_bug3235_schema_nullable_close_admission.json",
+        "sha256": "cd82ecf0ff11670f46ef7cf3c13113bab6271c1e4514c716b7c0e1082d0ff987"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38663-bug3235-schema-owner-prepare-v3/manifest.json",
+        "sha256": "381ebba7dc44e7ddcc8b905351a195946793001cab9a011cf334b1aa0bf4afae"
+      },
+      "reason": "This is the existing Thread.currentThread().isInterrupted observation at the pre-query boundary. It creates or starts no thread; the borrowed JDBC statement/rows are still closed by finally and the IRQ flag remains set on failure. SS343SSC095 requires these interruption checks; standalone startup admission is not a J2EE-managed webapp."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "rule": "CloseResource",
+      "line": 90,
+      "message": "Ensure that resources like this PreparedStatement object are closed after use",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "var query = required(statement);",
+      "sourceSha256": "3952e261ed57274a3cfe9dfa183e0d79848e6011c37570f0150d52bea79595b7",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5043_bug3235_schema_nullable_close_admission.json",
+        "sha256": "cd82ecf0ff11670f46ef7cf3c13113bab6271c1e4514c716b7c0e1082d0ff987"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38663-bug3235-schema-owner-prepare-v3/manifest.json",
+        "sha256": "381ebba7dc44e7ddcc8b905351a195946793001cab9a011cf334b1aa0bf4afae"
+      },
+      "reason": "The statement is captured at the original JDBC boundary and is passed to closeStatement from the unconditional outer finally before returning or normalizing SQL failure. The typed helper closes exactly once when present. Null provider results are independently rejected as 08001 and the borrowed Connection remains caller-owned. Fixed priority and close counts are independently checked by original SCHEMA fixture cases."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "rule": "CloseResource",
+      "line": 95,
+      "message": "Ensure that resources like this ResultSet object are closed after use",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "var values = required(rows);",
+      "sourceSha256": "3952e261ed57274a3cfe9dfa183e0d79848e6011c37570f0150d52bea79595b7",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5043_bug3235_schema_nullable_close_admission.json",
+        "sha256": "cd82ecf0ff11670f46ef7cf3c13113bab6271c1e4514c716b7c0e1082d0ff987"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38663-bug3235-schema-owner-prepare-v3/manifest.json",
+        "sha256": "381ebba7dc44e7ddcc8b905351a195946793001cab9a011cf334b1aa0bf4afae"
+      },
+      "reason": "The rows are captured before the inner ownership scope and passed to closeRows unconditionally from that scope's finally, even when validated data or interruption fails. The typed helper checks absent rows and closes an acquired result set once before outer statement close. The explicit failure-priority rule is preserved and the independent SCHEMA fixture checks ordered release."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "rule": "DoNotUseThreads",
+      "line": 114,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "require(!Thread.currentThread().isInterrupted());",
+      "sourceSha256": "3952e261ed57274a3cfe9dfa183e0d79848e6011c37570f0150d52bea79595b7",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5043_bug3235_schema_nullable_close_admission.json",
+        "sha256": "cd82ecf0ff11670f46ef7cf3c13113bab6271c1e4514c716b7c0e1082d0ff987"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38663-bug3235-schema-owner-prepare-v3/manifest.json",
+        "sha256": "381ebba7dc44e7ddcc8b905351a195946793001cab9a011cf334b1aa0bf4afae"
+      },
+      "reason": "This is the existing Thread.currentThread().isInterrupted observation at the post-row-loop boundary. It creates or starts no thread; the borrowed JDBC statement/rows are still closed by finally and the IRQ flag remains set on failure. SS343SSC095 requires these interruption checks; standalone startup admission is not a J2EE-managed webapp."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 115,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceSha256": "3952e261ed57274a3cfe9dfa183e0d79848e6011c37570f0150d52bea79595b7",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5043_bug3235_schema_nullable_close_admission.json",
+        "sha256": "cd82ecf0ff11670f46ef7cf3c13113bab6271c1e4514c716b7c0e1082d0ff987"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38663-bug3235-schema-owner-prepare-v3/manifest.json",
+        "sha256": "381ebba7dc44e7ddcc8b905351a195946793001cab9a011cf334b1aa0bf4afae"
+      },
+      "reason": "This closed JDBC boundary records the exact primary SQLException/RuntimeException/Error and immediately rethrows it; it does not normalize unknown Runtime/Error or mark admission successful. Recording primary is required by the following finally to preserve ordinary64-type identity/priority and close both owned JDBC children. Only the outer knownSQL catch performs fixed redaction after all close attempts."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 115,
+      "message": "Avoid catching Error in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceSha256": "3952e261ed57274a3cfe9dfa183e0d79848e6011c37570f0150d52bea79595b7",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5043_bug3235_schema_nullable_close_admission.json",
+        "sha256": "cd82ecf0ff11670f46ef7cf3c13113bab6271c1e4514c716b7c0e1082d0ff987"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38663-bug3235-schema-owner-prepare-v3/manifest.json",
+        "sha256": "381ebba7dc44e7ddcc8b905351a195946793001cab9a011cf334b1aa0bf4afae"
+      },
+      "reason": "This closed JDBC boundary records the exact primary SQLException/RuntimeException/Error and immediately rethrows it; it does not normalize unknown Runtime/Error or mark admission successful. Recording primary is required by the following finally to preserve ordinary64-type identity/priority and close both owned JDBC children. Only the outer knownSQL catch performs fixed redaction after all close attempts."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 121,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceSha256": "3952e261ed57274a3cfe9dfa183e0d79848e6011c37570f0150d52bea79595b7",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5043_bug3235_schema_nullable_close_admission.json",
+        "sha256": "cd82ecf0ff11670f46ef7cf3c13113bab6271c1e4514c716b7c0e1082d0ff987"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38663-bug3235-schema-owner-prepare-v3/manifest.json",
+        "sha256": "381ebba7dc44e7ddcc8b905351a195946793001cab9a011cf334b1aa0bf4afae"
+      },
+      "reason": "This closed JDBC boundary records the exact primary SQLException/RuntimeException/Error and immediately rethrows it; it does not normalize unknown Runtime/Error or mark admission successful. Recording primary is required by the following finally to preserve ordinary64-type identity/priority and close both owned JDBC children. Only the outer knownSQL catch performs fixed redaction after all close attempts."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 121,
+      "message": "Avoid catching Error in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceSha256": "3952e261ed57274a3cfe9dfa183e0d79848e6011c37570f0150d52bea79595b7",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5043_bug3235_schema_nullable_close_admission.json",
+        "sha256": "cd82ecf0ff11670f46ef7cf3c13113bab6271c1e4514c716b7c0e1082d0ff987"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38663-bug3235-schema-owner-prepare-v3/manifest.json",
+        "sha256": "381ebba7dc44e7ddcc8b905351a195946793001cab9a011cf334b1aa0bf4afae"
+      },
+      "reason": "This closed JDBC boundary records the exact primary SQLException/RuntimeException/Error and immediately rethrows it; it does not normalize unknown Runtime/Error or mark admission successful. Recording primary is required by the following finally to preserve ordinary64-type identity/priority and close both owned JDBC children. Only the outer knownSQL catch performs fixed redaction after all close attempts."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 140,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "sourceSha256": "3952e261ed57274a3cfe9dfa183e0d79848e6011c37570f0150d52bea79595b7",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5043_bug3235_schema_nullable_close_admission.json",
+        "sha256": "cd82ecf0ff11670f46ef7cf3c13113bab6271c1e4514c716b7c0e1082d0ff987"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38663-bug3235-schema-owner-prepare-v3/manifest.json",
+        "sha256": "381ebba7dc44e7ddcc8b905351a195946793001cab9a011cf334b1aa0bf4afae"
+      },
+      "reason": "The catch encloses only the owned ResultSet close call and handles the declared SQL plus unmodeled Runtime/Error categories through the explicit JdbcAdmissionFailures contract. It never suppresses success uncertainty: absent primary or SQL-to-unknown follows specified replacement, unknown primary retains identity with a fixed safe diagnostic. KnownSQL nestedfatal is classified before any discard; original64 and newSCHEMA010 independently cover these cases."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 140,
+      "message": "Avoid catching Error in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "sourceSha256": "3952e261ed57274a3cfe9dfa183e0d79848e6011c37570f0150d52bea79595b7",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5043_bug3235_schema_nullable_close_admission.json",
+        "sha256": "cd82ecf0ff11670f46ef7cf3c13113bab6271c1e4514c716b7c0e1082d0ff987"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38663-bug3235-schema-owner-prepare-v3/manifest.json",
+        "sha256": "381ebba7dc44e7ddcc8b905351a195946793001cab9a011cf334b1aa0bf4afae"
+      },
+      "reason": "The catch encloses only the owned ResultSet close call and handles the declared SQL plus unmodeled Runtime/Error categories through the explicit JdbcAdmissionFailures contract. It never suppresses success uncertainty: absent primary or SQL-to-unknown follows specified replacement, unknown primary retains identity with a fixed safe diagnostic. KnownSQL nestedfatal is classified before any discard; original64 and newSCHEMA010 independently cover these cases."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 151,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "sourceSha256": "3952e261ed57274a3cfe9dfa183e0d79848e6011c37570f0150d52bea79595b7",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5043_bug3235_schema_nullable_close_admission.json",
+        "sha256": "cd82ecf0ff11670f46ef7cf3c13113bab6271c1e4514c716b7c0e1082d0ff987"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38663-bug3235-schema-owner-prepare-v3/manifest.json",
+        "sha256": "381ebba7dc44e7ddcc8b905351a195946793001cab9a011cf334b1aa0bf4afae"
+      },
+      "reason": "The catch encloses only the owned PreparedStatement close call and handles the declared SQL plus unmodeled Runtime/Error categories through the explicit JdbcAdmissionFailures contract. It never suppresses success uncertainty: absent primary or SQL-to-unknown follows specified replacement, unknown primary retains identity with a fixed safe diagnostic. KnownSQL nestedfatal is classified before any discard; original64 and newSCHEMA010 independently cover these cases."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": 151,
+      "message": "Avoid catching Error in try-catch block",
+      "disposition": "NOT_APPLICABLE",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "sourceSha256": "3952e261ed57274a3cfe9dfa183e0d79848e6011c37570f0150d52bea79595b7",
+      "previousExactAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5043_bug3235_schema_nullable_close_admission.json",
+        "sha256": "cd82ecf0ff11670f46ef7cf3c13113bab6271c1e4514c716b7c0e1082d0ff987"
+      },
+      "previousPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38663-bug3235-schema-owner-prepare-v3/manifest.json",
+        "sha256": "381ebba7dc44e7ddcc8b905351a195946793001cab9a011cf334b1aa0bf4afae"
+      },
+      "reason": "The catch encloses only the owned PreparedStatement close call and handles the declared SQL plus unmodeled Runtime/Error categories through the explicit JdbcAdmissionFailures contract. It never suppresses success uncertainty: absent primary or SQL-to-unknown follows specified replacement, unknown primary retains identity with a fixed safe diagnostic. KnownSQL nestedfatal is classified before any discard; original64 and newSCHEMA010 independently cover these cases."
+    }
+  ],
+  "fullProductOrWhole451Accepted": false,
+  "productTestsExecuted": 0,
+  "unexecutedOtherSameSourceFiles": 470,
+  "formalUpdated": false,
+  "newAcceptance": 0
+}

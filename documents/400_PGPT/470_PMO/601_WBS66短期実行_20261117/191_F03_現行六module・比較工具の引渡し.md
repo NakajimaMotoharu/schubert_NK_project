@@ -16,3 +16,6 @@ CheckstyleはPG38200の同一run・全1,026現行Main。SpotBugsは4moduleの1,1
 比較工具のPG37322は独立したtool source `fd69f7d62595c021ceff48509ea032a5ff17c5d2` の142成功。元SSC447はPG36620の152成功・失敗0・エラー0・skip 0・未実行0。現Coreの製品PTや実CHRへの加算は0。独立判断証跡は [PG38218 manifest](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG38218-wbs66-f03-current-owner-handoff-v1/manifest.json)。
 
 F02の宣言依存はPG38186、実classfileの4moduleはPG38202。QA056対象を含むAPI/Web全体と実Artemis境界、各SYSのruntime、451、両親の終了依存は継続。正式17/190、1964PT/53scope、当群増0。
+
+
+2026-11-18追補。Core d0b8ee6057132d73f0234becf9fdef3073308f87の四製品Main482／物理1102をPG38764でビルド・静的照合。変更12を現class pathでPMD全規則実行、真正exit4、5ファイルに生56、残7ファイル生0。全56を同source SHA／規則／位置／message／既理由に結び、適用0、未分類0、解析エラー0。残470＋API/Web全体と451は別。evidence/01_PT/018_NK-OPS-001/evidence/PG38768-f03-twelve-current-main-pmd-v1/manifest.json SHA256 20dac536703cbe5f9469a5f3280be594273cd05df0364eca7a63bf3eb001260e。
