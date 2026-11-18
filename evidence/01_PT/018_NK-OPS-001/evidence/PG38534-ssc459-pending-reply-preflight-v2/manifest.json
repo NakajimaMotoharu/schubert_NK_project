@@ -1,0 +1,85 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5026_ssc459_pending_reply_profile_v2.json",
+    "sha256": "083055d341b232407b9f0a623fcc80eb2f8280a5df0193d024397ff2b63a4542"
+  },
+  "inputHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/PendingReply.java": "81563c7215b1c1f37e816a838b96c0349e0f4aa0316fc20f7e2f42b499b4b6ea",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry.java": "1a28f9d8ec9438f13621358c02181557fdc3a19f4afd55303ad727ce6fc9ed75",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/package-info.java": "5b3d0f04dff20d2e3b538f4dfcd89c479ec2feea7cb1743e0a009cf2256e6ad1",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistryTest.java": "9926bf64d977a8b130b14c8d4e0e9308420fc1d4fa3b9ef86376c0cb0f2b9c5f",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/PendingReplyDiagnosticTest.java": "0a53df0545b54ba0c4b7183bda4efb183065f00b3d62c82e0741765107d3d3a6",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-web/pom.xml": "9b6c47c3ab3ba0d105f41f081de10b2234af4653fdc371a8eacdf9cabb78761b",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38529-ssc459-pending-reply-prepare-v2/manifest.json",
+    "sha256": "3ada0ff0d145728d0cda563b4e8635e78819ad2626c13fef4ed361f69ec9689d"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38532-ssc459-pending-reply-static-v2/manifest.json",
+    "sha256": "d0ce7c047f27c626def23b02a3f39395a16da0c10394eb399f6bf7b28d00690d"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5027_ssc459_pending_reply_admission.json",
+    "sha256": "5abd80784e71a60c1830f3e2599e12064d5279fd29eb39912539325e1b25aa51"
+  },
+  "classified": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistryTest.java",
+      "rule": "CloseResource",
+      "line": "111",
+      "reason": "Existing linked standalone JUnit test, not a container counterpart. It owns the executor and tests one success winner versus 99 late outcomes. The latch and each Future have five-second bounds; try/finally calls shutdownNow and requires bounded awaitTermination. Nothing is leaked on failure.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistryTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "111",
+      "reason": "Existing linked standalone JUnit test, not a container counterpart. It owns the executor and tests one success winner versus 99 late outcomes. The latch and each Future have five-second bounds; try/finally calls shutdownNow and requires bounded awaitTermination. Nothing is leaked on failure.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistryTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "116",
+      "reason": "Existing linked standalone JUnit test, not a container counterpart. It owns the executor and tests one success winner versus 99 late outcomes. The latch and each Future have five-second bounds; try/finally calls shutdownNow and requires bounded awaitTermination. Nothing is leaked on failure.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistryTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "130",
+      "reason": "Existing linked standalone JUnit test, not a container counterpart. It owns the executor and tests one success winner versus 99 late outcomes. The latch and each Future have five-second bounds; try/finally calls shutdownNow and requires bounded awaitTermination. Nothing is leaked on failure.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistryTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "131",
+      "reason": "Existing linked standalone JUnit test, not a container counterpart. It owns the executor and tests one success winner versus 99 late outcomes. The latch and each Future have five-second bounds; try/finally calls shutdownNow and requires bounded awaitTermination. Nothing is leaked on failure.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    }
+  ],
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "rootCompilerUnchanged": true,
+  "independentSourceAnchorsExact": true,
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_stages.py",
+    "sha256": "ce7b33beb41744d0042bc0fb94aee01930016254f5f08fbba03707f1b568016b"
+  }
+}

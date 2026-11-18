@@ -1,0 +1,69 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG38536-SSC459-PENDING-REPLY",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38529-ssc459-pending-reply-prepare-v2/manifest.json",
+    "sha256": "3ada0ff0d145728d0cda563b4e8635e78819ad2626c13fef4ed361f69ec9689d"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38532-ssc459-pending-reply-static-v2/manifest.json",
+    "sha256": "d0ce7c047f27c626def23b02a3f39395a16da0c10394eb399f6bf7b28d00690d"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistryTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "ExecutorService executor = Executors.newFixedThreadPool(16);",
+      "sourceLine": 111,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "Existing linked standalone JUnit test, not a container counterpart. It owns the executor and tests one success winner versus 99 late outcomes. The latch and each Future have five-second bounds; try/finally calls shutdownNow and requires bounded awaitTermination. Nothing is leaked on failure.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistryTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "ExecutorService executor = Executors.newFixedThreadPool(16);",
+      "sourceLine": 111,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "Existing linked standalone JUnit test, not a container counterpart. It owns the executor and tests one success winner versus 99 late outcomes. The latch and each Future have five-second bounds; try/finally calls shutdownNow and requires bounded awaitTermination. Nothing is leaked on failure.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistryTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "executor.submit(",
+      "sourceLine": 116,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "Existing linked standalone JUnit test, not a container counterpart. It owns the executor and tests one success winner versus 99 late outcomes. The latch and each Future have five-second bounds; try/finally calls shutdownNow and requires bounded awaitTermination. Nothing is leaked on failure.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistryTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "executor.shutdownNow();",
+      "sourceLine": 130,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "Existing linked standalone JUnit test, not a container counterpart. It owns the executor and tests one success winner versus 99 late outcomes. The latch and each Future have five-second bounds; try/finally calls shutdownNow and requires bounded awaitTermination. Nothing is leaked on failure.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistryTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "assertTrue(executor.awaitTermination(5, TimeUnit.SECONDS));",
+      "sourceLine": 131,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "Existing linked standalone JUnit test, not a container counterpart. It owns the executor and tests one success winner versus 99 late outcomes. The latch and each Future have five-second bounds; try/finally calls shutdownNow and requires bounded awaitTermination. Nothing is leaked on failure.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    }
+  ]
+}
