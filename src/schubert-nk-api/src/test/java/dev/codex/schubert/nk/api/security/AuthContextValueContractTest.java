@@ -71,7 +71,8 @@ final class AuthContextValueContractTest {
     assertEquals(2, ciphertexts.size());
     assertEquals("cipher-a", ciphertexts.get(cipherA));
     assertEquals("cipher-b", ciphertexts.get(cipherB));
-    assertEquals("EncryptedAuthContext[keyVersion=v1, ciphertext=<redacted>]", cipherA.toString());
+    assertEquals("EncryptedAuthContext[keyVersion/ciphertext=<redacted>]", cipherA.toString());
+    assertEquals("EncryptedAuthContext[keyVersion/ciphertext=<redacted>]", otherVersion.toString());
   }
 
   @Test

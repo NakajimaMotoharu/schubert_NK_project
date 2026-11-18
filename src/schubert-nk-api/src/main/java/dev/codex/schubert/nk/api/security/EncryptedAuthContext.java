@@ -23,6 +23,6 @@ public record EncryptedAuthContext(String keyVersion, byte[] ciphertext) {
 
   @Override
   public String toString() {
-    return "EncryptedAuthContext[keyVersion=" + keyVersion + ", ciphertext=<redacted>]";
+    return "EncryptedAuthContext[keyVersion/ciphertext=<redacted>]";
   }
 }

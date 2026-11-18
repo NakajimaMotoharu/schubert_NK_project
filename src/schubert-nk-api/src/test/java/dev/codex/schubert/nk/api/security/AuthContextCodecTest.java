@@ -82,7 +82,7 @@ final class AuthContextCodecTest {
       EncryptedAuthContext copied = new EncryptedAuthContext("v1", supplied);
       supplied[0] = 0;
       assertArrayEquals(expected, copied.ciphertext());
-      assertEquals("EncryptedAuthContext[keyVersion=v1, ciphertext=<redacted>]", copied.toString());
+      assertEquals("EncryptedAuthContext[keyVersion/ciphertext=<redacted>]", copied.toString());
       assertEquals(
           IDENTITY.sessionId(), new AuthContextIdentity(IDENTITY.sessionId(), 7).sessionId());
       assertEquals(7, IDENTITY.userId());
