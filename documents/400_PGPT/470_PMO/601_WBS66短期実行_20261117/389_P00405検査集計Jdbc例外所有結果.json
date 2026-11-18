@@ -1,0 +1,126 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-5920",
+  "values": {
+    "quotaAfter": {
+      "usedPercent": 32,
+      "remainingPercent": 68,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "63b034ed6f5d645efc3bf0fce1ff63efbe7f212b1150d573ef34e57a98ccc136",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T09:18:05.122000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 32,
+          "remainingPercent": 68,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T09:17:14.150233+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P00405-INSPECTION-SUMMARY-JDBC-GRAPH-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-P00405-INSPECTION-SUMMARY-JDBC-GRAPH-20261118",
+    "workAttributionKind": "SOURCE_REQUALIFICATION",
+    "workScope": "WBS-P004-05/2 and F02-a/F03/2-2. Requalify changed JdbcResourceFailures transitive behavior for InspectionSummaryRepository. Existing nine owned JDBC proxy cases and one graph oracle plus new INSPPORT010 for SQL-next nested fatal identity and statement/row close order under changed Bootstrap adapter. No real DB, pooled connections, Root, actual owner/principal, permit or protected class. Same-source ABI, static gate, independent raw and XML. Existing no-network borrowed-only fixture.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/4486_P00402summary所有nonnull・value追加三PT仕様.md",
+        "sha256": "7a1d13368ae9844699af9b296b778f8a50e7770dae403c17220f811be03c0394"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37402-summary23-independent-v1/manifest.json",
+        "sha256": "606478465b75ba56fd3d4299b43b9917728761e0ba385a80407e4ad7889dc94f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38734-f03-cleanup-raw-owner-proof-v1/manifest.json",
+        "sha256": "06b502f2f7b0d0941bacb52bbb8b03fdc7c866dac5ec621a8cb0147292b87d0e"
+      }
+    ],
+    "productionCoreMain": "29f3b433952ad19d4ad34c4e1a31ed310bebde6a",
+    "source": "25a5dbf8b9514420bf2e11ca0e5966739262c818",
+    "wbsLeafIds": [
+      "WBS-F02",
+      "WBS-F03",
+      "WBS-P004-05",
+      "WBS-P004-02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a",
+      "WBS-F03/2-2",
+      "WBS-P004-05/2"
+    ],
+    "run": "PG39086-p00405-inspection-summary-jdbc-independent-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.45,
+      "base": 1.45,
+      "high": 3.25
+    },
+    "groupCapPp": 4.0,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "groupBoundary": "END",
+    "startEvent": "PGPT-20261008-5919",
+    "fixedTestSource": "865870eb9aa7dd0cc9039bc2b548f5034673dc06",
+    "quotaBefore": {
+      "usedPercent": 32,
+      "remainingPercent": 68,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "fullObservationPreservedInReceipt": true,
+    "actualDedicatedPp": null,
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39086-p00405-inspection-summary-jdbc-independent-v1/manifest.json",
+      "sha256": "15a13ba69cf439e27253d5c81853def31b92309abf79e6ed2149176546c5a0c6"
+    },
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortCompletionRate": null,
+    "technical": {
+      "tests": 11,
+      "successful": 11,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "notRun": 0,
+      "firstProductAttempts": 11,
+      "firstProductSuccessful": 11,
+      "newTestDefinitions": 1,
+      "localCoreCoverageClassesFull": 3,
+      "profilePriorRejectedBeforeCompile": 1,
+      "physical": 10,
+      "positiveCrc": 8,
+      "staticApplicable": 0
+    },
+    "remainingCriteria": [
+      "P004-05 actual current PostgreSQL commit/rollback, UTC timezone and pool after-state",
+      "F02 full six module and Storage fence",
+      "F03 full quality and 451"
+    ]
+  }
+}
