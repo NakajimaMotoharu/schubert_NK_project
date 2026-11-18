@@ -57,7 +57,7 @@ public final class ServiceDatabaseSource implements DataSource, AutoCloseable {
       admission = new ServiceDatabaseAdmission(service, url);
       if (ownedPassword.length < 1 || ownedPassword.length > 65536)
         throw new IllegalArgumentException("service database credential unavailable");
-      role = service == ServiceConfigFiles.Service.API ? "schubert_app" : "schubert_web_session";
+      role = admission.role();
       applicationName =
           service == ServiceConfigFiles.Service.API ? "schubert-nk-api" : "schubert-nk-web";
       password = ownedPassword.clone();

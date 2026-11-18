@@ -2,8 +2,11 @@ package dev.codex.schubert.nk.api.bootstrap;
 
 import dev.codex.schubert.nk.storage.ServiceConfigFiles;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLNonTransientConnectionException;
+import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Pattern;
 import org.jspecify.annotations.NullMarked;
@@ -16,6 +19,10 @@ import org.jspecify.annotations.Nullable;
  */
 @NullMarked
 public final class ServiceDatabaseAdmission {
+  private static final Map<ServiceConfigFiles.Service, String> SERVICE_ROLES =
+      Map.of(
+          ServiceConfigFiles.Service.API, "schubert_app",
+          ServiceConfigFiles.Service.WEB, "schubert_web_session");
   private static final Pattern URL =
       Pattern.compile(
           "jdbc:postgresql://127\\.0\\.0\\.1:([1-9][0-9]{0,4})/([a-z_][a-z0-9_]{0,62})");
@@ -28,10 +35,8 @@ public final class ServiceDatabaseAdmission {
 
   public ServiceDatabaseAdmission(ServiceConfigFiles.Service service, String url) {
     role =
-        switch (Objects.requireNonNull(service, "service")) {
-          case API -> "schubert_app";
-          case WEB -> "schubert_web_session";
-        };
+        Objects.requireNonNull(
+            SERVICE_ROLES.get(Objects.requireNonNull(service, "service")), "service role");
     var match = URL.matcher(Objects.requireNonNull(url, "database URL"));
     if (!match.matches() || Integer.parseInt(Objects.requireNonNull(match.group(1))) > 65535)
       throw new IllegalArgumentException("service database URL is invalid");
@@ -60,29 +65,44 @@ public final class ServiceDatabaseAdmission {
           rowFailure = failure;
           throw failure;
         } finally {
-          if (rows != null) {
-            try {
-              rows.close();
-            } catch (SQLException | RuntimeException | Error secondary) {
-              if (JdbcAdmissionFailures.replace(rowFailure, secondary)) throw secondary;
-            }
-          }
+          closeRows(rows, rowFailure);
         }
       } catch (SQLException | RuntimeException | Error failure) {
         primary = failure;
         throw failure;
       } finally {
-        if (statement != null) {
-          try {
-            statement.close();
-          } catch (SQLException | RuntimeException | Error secondary) {
-            if (JdbcAdmissionFailures.replace(primary, secondary)) throw secondary;
-          }
-        }
+        closeStatement(statement, primary);
       }
     } catch (SQLException failure) {
       JdbcFailureGraph.preserveFatal(failure);
       throw unavailable();
+    }
+  }
+
+  String role() {
+    return role;
+  }
+
+  // SSC-468: a single typed cleanup path preserves existing resource and failure ordering.
+  private static void closeRows(@Nullable ResultSet rows, @Nullable Throwable primary)
+      throws SQLException {
+    if (rows != null) {
+      try {
+        rows.close();
+      } catch (SQLException | RuntimeException | Error secondary) {
+        if (JdbcAdmissionFailures.replace(primary, secondary)) throw secondary;
+      }
+    }
+  }
+
+  private static void closeStatement(
+      @Nullable PreparedStatement statement, @Nullable Throwable primary) throws SQLException {
+    if (statement != null) {
+      try {
+        statement.close();
+      } catch (SQLException | RuntimeException | Error secondary) {
+        if (JdbcAdmissionFailures.replace(primary, secondary)) throw secondary;
+      }
     }
   }
 
