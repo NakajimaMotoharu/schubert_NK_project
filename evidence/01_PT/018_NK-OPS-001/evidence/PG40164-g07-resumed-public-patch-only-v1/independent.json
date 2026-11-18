@@ -1,0 +1,61 @@
+{
+  "actualExit": 0,
+  "source": "24dbd1261c3b09a3a27f99df5bedafb278e8c0e6",
+  "fromCommit": "461418808464aa7bee69bf1284ba9f68971d5932",
+  "commits": 10,
+  "distinctFiles": 67,
+  "candidateCount": 2,
+  "initialScannerExit": 1,
+  "findings": [
+    {
+      "commit": "aff5a1e8d10f5262c9fd623ad7912e0682ca27ba",
+      "file": "evidence/01_PT/018_NK-OPS-001/evidence/PG40144-f02-controller-spring-jdbc-after-v1/manifest.json",
+      "rule": "generic-api-key",
+      "startLine": 23,
+      "endLine": 23,
+      "startColumn": 9,
+      "endColumn": 114,
+      "resolution": "Exact SHA-256 of a compile-only synthetic class",
+      "className": "dev.codex.schubert.nk.api.OwnedCanary",
+      "lineSha256": "2fedde84fd8a7dd47eec541d0a61877c28bc793f61f0e425abfbd6d38574532c",
+      "audit": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40144-f02-controller-spring-jdbc-after-v1/manifest.json",
+        "sha256": "3022e0998dde18ccd6c78f6b87adca7c4260dd052e1bcfc55ae6426ae30b199b"
+      }
+    },
+    {
+      "commit": "e7e26f88bab321f89ac552612555d5c3a85435eb",
+      "file": "evidence/01_PT/018_NK-OPS-001/evidence/PG40142-f02-controller-spring-jdbc-before-v1/manifest.json",
+      "rule": "generic-api-key",
+      "startLine": 23,
+      "endLine": 23,
+      "startColumn": 9,
+      "endColumn": 114,
+      "resolution": "Exact SHA-256 of a compile-only synthetic class",
+      "className": "dev.codex.schubert.nk.api.OwnedCanary",
+      "lineSha256": "2fedde84fd8a7dd47eec541d0a61877c28bc793f61f0e425abfbd6d38574532c",
+      "audit": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40142-f02-controller-spring-jdbc-before-v1/manifest.json",
+        "sha256": "0730683cf352d4d578bdecfbee27846ce7c84bf6cd6c312566377b79b707d52b"
+      }
+    }
+  ],
+  "confirmedSecrets": 0,
+  "unresolved": 0,
+  "rawScanner": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40164-g07-resumed-public-patch-only-v1/manifest.json",
+    "sha256": "dfef58d92ebe8e660af19ad5cf6ffc9a81b209eaaefce9f7706f2285cd1db2d6"
+  },
+  "uniqueStaticPost": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40146-f02-controller-spring-jdbc-independent-v1/manifest.json",
+    "sha256": "0063e08dee0f27f0d1d950aec2c172e0136c43dbda5fb0ccfc52077d181e450d"
+  },
+  "scannedRangeOnly": true,
+  "scopedTextPatchesOnly": true,
+  "executableOrArchiveCoverage": false,
+  "scannerRepeated": false,
+  "wholeG07Accepted": false,
+  "whole451Accepted": false,
+  "newFormalAcceptance": 0,
+  "terminalAtUTC": "2026-11-18T22:38:41.804078+00:00"
+}
