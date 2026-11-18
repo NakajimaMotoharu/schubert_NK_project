@@ -1,0 +1,667 @@
+{
+  "actualExit": 0,
+  "source": "8800ed7277964b28bc3cdce2e7cffcd021e2e5e2",
+  "productionCoreMain": "bcc9e0673287c51950ecab9b36350abfcd4b2c69",
+  "run": "PG39356-BUG3269-API-STANDARD-SOURCE-FINITE-V1",
+  "tests": 16,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "firstProductRunSuccess": true,
+  "firstIndependentPostSuccess": true,
+  "newTestDefinitions": 0,
+  "addedIndependentInvalidInputs": 4,
+  "modeAndFiniteWorkerChangeOnlyPreservesOriginalAssertions": true,
+  "productionMainDiff": 0,
+  "physicalClasses": 6,
+  "positiveMainCrc": 5,
+  "sdkArtifactCount": 11,
+  "staticApplicable": 0,
+  "staticRawPmd": 9,
+  "preliminaryStyleFailure": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39348-bug3269-api-standard-source-prestyle-v1/manifest.json",
+    "sha256": "e0585aea92d72cb52507753eb2c7dd757d3e2bebf392b033e9e79cf306316dc2"
+  },
+  "firstPrelaunchPinFailure": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39354-bug3269-api-standard-source-preflight-v1/first-run-admission-failure.json",
+    "sha256": "b485406eaa55371c7aa0ef5030c8092f9171140d62a458165163f39dbc630dda"
+  },
+  "testingRerunCount": 0,
+  "priorHelperPhysicalExact": 5,
+  "priorHelperEvidence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39332-bug3268-api-standard-metrics-prepare-v1/manifest.json",
+    "sha256": "ad49021041a1f6b3dfd4d5a6a865476acd0c3e2c25a2a09b7354dedb68ba8c43"
+  },
+  "unfilteredTarget": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 231
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 26
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 46
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 23
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 9
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "unfilteredClassCounters": {
+    "dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSource": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 231
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 26
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 46
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 23
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 9
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/monitoring/ApiStandardMetrics": {
+      "INSTRUCTION": {
+        "missed": 19,
+        "covered": 94
+      },
+      "BRANCH": {
+        "missed": 9,
+        "covered": 5
+      },
+      "LINE": {
+        "missed": 2,
+        "covered": 19
+      },
+      "COMPLEXITY": {
+        "missed": 8,
+        "covered": 6
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 6
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistration": {
+      "INSTRUCTION": {
+        "missed": 24,
+        "covered": 73
+      },
+      "BRANCH": {
+        "missed": 10,
+        "covered": 6
+      },
+      "LINE": {
+        "missed": 2,
+        "covered": 16
+      },
+      "COMPLEXITY": {
+        "missed": 9,
+        "covered": 5
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 5
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/monitoring/ApiJvmMetrics": {
+      "INSTRUCTION": {
+        "missed": 24,
+        "covered": 92
+      },
+      "BRANCH": {
+        "missed": 10,
+        "covered": 8
+      },
+      "LINE": {
+        "missed": 3,
+        "covered": 15
+      },
+      "COMPLEXITY": {
+        "missed": 9,
+        "covered": 5
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 4
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/monitoring/ApiSystemMetrics": {
+      "INSTRUCTION": {
+        "missed": 24,
+        "covered": 84
+      },
+      "BRANCH": {
+        "missed": 10,
+        "covered": 8
+      },
+      "LINE": {
+        "missed": 3,
+        "covered": 15
+      },
+      "COMPLEXITY": {
+        "missed": 9,
+        "covered": 5
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 4
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/monitoring/package-info": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 0
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 0
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 0
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 0
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 0
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 0
+      }
+    }
+  },
+  "unfilteredDeficits": [
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiStandardMetrics",
+      "method": "install",
+      "line": 39,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 6,
+          "covered": 20
+        },
+        "BRANCH": {
+          "missed": 7,
+          "covered": 3
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiStandardMetrics",
+      "method": "install",
+      "line": 41,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiStandardMetrics",
+      "method": "install",
+      "line": 42,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiStandardMetrics",
+      "method": "install",
+      "line": 44,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 1,
+          "covered": 2
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiStandardMetrics",
+      "method": "install",
+      "line": 45,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistration",
+      "method": "install",
+      "line": 34,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 6,
+          "covered": 20
+        },
+        "BRANCH": {
+          "missed": 7,
+          "covered": 3
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistration",
+      "method": "install",
+      "line": 36,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistration",
+      "method": "install",
+      "line": 37,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistration",
+      "method": "install",
+      "line": 39,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 1,
+          "covered": 2
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistration",
+      "method": "install",
+      "line": 40,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistration",
+      "method": "activateOwned",
+      "line": 47,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 4
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiJvmMetrics",
+      "method": "install",
+      "line": 33,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 6,
+          "covered": 20
+        },
+        "BRANCH": {
+          "missed": 7,
+          "covered": 3
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiJvmMetrics",
+      "method": "install",
+      "line": 35,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiJvmMetrics",
+      "method": "install",
+      "line": 36,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiJvmMetrics",
+      "method": "install",
+      "line": 38,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 1,
+          "covered": 2
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiJvmMetrics",
+      "method": "install",
+      "line": 39,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiJvmMetrics",
+      "method": "install",
+      "line": 41,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 4
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiJvmMetrics",
+      "method": "install",
+      "line": 42,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiSystemMetrics",
+      "method": "install",
+      "line": 31,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 6,
+          "covered": 20
+        },
+        "BRANCH": {
+          "missed": 7,
+          "covered": 3
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiSystemMetrics",
+      "method": "install",
+      "line": 33,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiSystemMetrics",
+      "method": "install",
+      "line": 34,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiSystemMetrics",
+      "method": "install",
+      "line": 36,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 1,
+          "covered": 2
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiSystemMetrics",
+      "method": "install",
+      "line": 37,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiSystemMetrics",
+      "method": "install",
+      "line": 39,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 4
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiSystemMetrics",
+      "method": "install",
+      "line": 40,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    }
+  ],
+  "standardScope": {
+    "INSTRUCTION": {
+      "covered": 499,
+      "missed": 67
+    },
+    "BRANCH": {
+      "covered": 38,
+      "missed": 19
+    },
+    "LINE": {
+      "covered": 108,
+      "missed": 10
+    },
+    "COMPLEXITY": {
+      "covered": 40,
+      "missed": 19
+    },
+    "METHOD": {
+      "covered": 28,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 5,
+      "missed": 0
+    }
+  },
+  "oldExecUnion": 0,
+  "noManualExclusions": true,
+  "whole451Accepted": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "terminalAtUTC": "2026-11-18T11:13:33.797131+00:00",
+  "proofs": {
+    "prestyle": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39349-bug3269-api-standard-source-prestyle-v2/manifest.json",
+      "sha256": "1b439d2f2a3fbec75bf6c8a6ae4f8c87de3b275fb2e7abc4c4229628779c78e2"
+    },
+    "prepare": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39350-bug3269-api-standard-source-prepare-v1/manifest.json",
+      "sha256": "62bbffc2afe9674b0f367eaa9dc9e753319e538b63e18639a7d067bac8570700"
+    },
+    "static": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39352-bug3269-api-standard-source-static-v1/manifest.json",
+      "sha256": "c49ff41b2ad4b1ab5da3fe6370b8a059eb670ac2b660ec28a504a94f51565881"
+    },
+    "preflight": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39354-bug3269-api-standard-source-preflight-v1/manifest.json",
+      "sha256": "c79c9165e099be2bb25b69d1fd732d3e19af38cc9e429125d45b1dfda02c9feb"
+    },
+    "unit": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39356-bug3269-api-standard-source-unit-v1/manifest.json",
+      "sha256": "876049301938342afc9b381b7b3f8413464d847413884cb18a2b2ef6a235c7b4"
+    },
+    "post": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39360-bug3269-api-standard-source-post-v1/manifest.json",
+      "sha256": "a01b106a0ea312d325c4edd58c6731671314103f7a822ed3ee463f205b3e7b58"
+    }
+  },
+  "raw": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39364-f03-api-standard-source-finite-independent-v1/unfiltered.tsv",
+    "sha256": "912abc45b4cafa4fa6cae0822bbfa315c99cfe08887addd7ce8d3a2f2ad48fd2"
+  },
+  "rawCommand": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39364-f03-api-standard-source-finite-independent-v1/raw-command.json",
+    "sha256": "000390fa92b59d076afca18a1351ff41b6c229521a45637948c845c642fa41c0"
+  },
+  "archive": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39364-f03-api-standard-source-finite-independent-v1/retention.json",
+    "sha256": "0671e50619f0372fc77ac350ce4a148555ffae994ba4dd15a9221f4b79d1c729"
+  }
+}
