@@ -1941,6 +1941,8 @@ Java25公開FFMでLinux/glibcのLP64 x86_64/amd64/aarch64 ABIに限定し、必�
 
 ### 6.4 Private AES file reader（SSC-049、PG-D-134）
 
+SSC-456。ServiceCredentialIdはAPIとWebを鍵とする不変対応表に、SSC-081既定の各5 IDを既定順の不変listとして保持する。明示されたserviceのlistを返し、入力nullは従来診断で拒否する。将来serviceを追加する場合、IDと対応表を同時に定義し、登録不足の状態では実行を拒否する。別serviceや空listへの代替は行わない。enum名、順序、fileName、Kind、公開署名、credential読み取りの条件を維持する。
+
 SSC-081通常Web/API readerの追加契約: §6.1で列挙したservice別必須5 IDだけを型付きallowlistで受け、caller文字列から任意file名を作らない。§6.2/6.3と同じ保持directory/entryの前後typed metadata・ACL/readonly・link/device/size、最大値＋1 byteのbounded READ、channel/entry/directory close完了、失敗時の一時byte消去と固定redacted失敗を満たす。AES/HMACはcodecに、DB/MQはstrict password codecへ独立所有copyで渡す。readerは別service ID、任意path、symlink/非regular/余分hardlinkを拒否し、失敗時に成功materialを返さない。root-manager由来credentialの実ACL/権限とservice起動はLinux ITで確認する。
 
 API file adapter InspectorCredentialLoaderはborrowed OwnedTransferDirectory、InodeSecurityCalls、専用EUID policyを使い、AesCredentialFileの4固定名（api-context-aes-current、api-context-aes-previous、api-inbox-response-aes-current、api-inbox-response-aes-previous）だけを読む。Caller入力から任意pathを組み立てない。currentは必須。previousはentry openがENOENTでcallbackに一度も入っていない場合だけOptional.emptyを許可し、permission・途中消失・metadata/ACL/closeエラーをprevious不在に変換しない。previousの有無を鍵内容やdecode結果から推定しない。
