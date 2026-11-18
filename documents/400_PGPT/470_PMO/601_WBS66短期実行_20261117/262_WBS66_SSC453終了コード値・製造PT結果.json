@@ -1,0 +1,144 @@
+{
+  "eventId": "PGPT-20261008-5796",
+  "actualExit": 0,
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-SSC453-INSPECTION-OUTCOME-CODES-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-SSC453-INSPECTION-OUTCOME-CODES-20261118",
+    "workAttributionKind": "ADDITIONAL_FINDING",
+    "workScope": "BUG3223 correction, a single InspectionExecution Main. F03 exact raw branch/instruction on P004-04 published constants. Design first, fixed five test cases, independent four-CRC and public ABI join; no full-branch credit, backend, Root or other execution. Charge the supplemental correction once; supplement prior run remains unchanged.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38368-p00404-inspection-execution-progress-independent-v1/manifest.json",
+        "sha256": "8a72b022aa6cd8541fcfab28a35cbd931ef3ca2bdfb83764f8f079109429eadc"
+      }
+    ],
+    "source": "ef91b902e931ac18d1b0d3a81b4ad515bdf76383",
+    "productionCoreMain": "35167d1390bdcedd31e5c35d8ee526089347fec6",
+    "run": "PG38384-ssc453-inspection-outcome-codes-independent-v1",
+    "wbsLeafIds": [
+      "WBS-F03",
+      "WBS-P004-04"
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.35,
+      "base": 1.25,
+      "high": 3
+    },
+    "groupCapPp": 4,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "relatedBug": "BUG-3223",
+    "relatedYkt": "YKT-2673",
+    "quotaAfter": {
+      "usedPercent": 26,
+      "remainingPercent": 74,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "c494e572e1fd745d1954657f0d6bcef04ea075fff76004c682630da8fc353b8c",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T01:41:56.475000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 26,
+          "remainingPercent": 74,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T01:41:09.482538+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 26,
+      "remainingPercent": 74,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-5795",
+    "productRuns": 1,
+    "productTestsExecuted": 5,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "notRun": 0,
+    "firstProductRunSuccess": {
+      "passed": 5,
+      "executed": 5
+    },
+    "newDefinitions": 0,
+    "scopeCodeCoverage": {
+      "LINE": {
+        "missed": 0,
+        "covered": 32
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 23
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 3
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 26
+      },
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 264
+      }
+    },
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38384-ssc453-inspection-outcome-codes-independent-v1/manifest.json",
+      "sha256": "0e1b4850194748897c827610c516bb9581e61eda17a0b4191c70c86ba9522048"
+    },
+    "completedAdditionalPriceForGroupPp": 1.25,
+    "additionalCompletedPriceTotalPp": 32.65,
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortCompletionRate": null,
+    "actualDedicatedPp": null,
+    "retries": [
+      {
+        "stage": "input provenance",
+        "reason": "old Core comparison included intervening tests; restricted to product paths before any test"
+      },
+      {
+        "stage": "independent post",
+        "reason": "short commit argument rejected; exact full commit succeeded with original unit"
+      },
+      {
+        "stage": "quota measurement",
+        "reason": "first after-receipt preceded final proof; recorded fresh after-terminal receipt without rerunning test or verifier"
+      }
+    ],
+    "remainingCriteria": [
+      "PG38354 is separate scope for Run/Step",
+      "production DB/Inspector, parent gates, API/Web quality HOLD, whole 451"
+    ]
+  }
+}
