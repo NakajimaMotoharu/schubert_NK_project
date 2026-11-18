@@ -7,8 +7,8 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
 /**
- * One redacted in-flight response promise owned by {@link ReplyCorrelationRegistry}.
- * NK-MSG-001, SS321/351, SSC-459, PT-JMS-008/PT-P01810-CATALOG-038.
+ * One redacted in-flight response promise owned by {@link ReplyCorrelationRegistry}. NK-MSG-001,
+ * SS321/351, SSC-459, PT-JMS-008/PT-P01810-CATALOG-038.
  */
 public final class PendingReply {
   private final UUID retainedCorrelationId;
