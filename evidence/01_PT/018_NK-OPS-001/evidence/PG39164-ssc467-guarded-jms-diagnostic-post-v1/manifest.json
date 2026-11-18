@@ -1,0 +1,238 @@
+{
+  "actualExit": 0,
+  "source": "7d090c06cd17bcc8ac78176529d8acf82ccddcfa",
+  "productionCoreMain": "bcc9e0673287c51950ecab9b36350abfcd4b2c69",
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5105_ssc467_guarded_jms_diagnostic_profile.json",
+    "sha256": "6ae14a404e9e0b8e8c95f2a5105e15bfdf7439c93c785929edfb790cda742f16"
+  },
+  "run": "PG39160-SSC467-GUARDED-JMS-DIAGNOSTIC-V1",
+  "tests": 2,
+  "newTestDefinitions": 2,
+  "physicalClasses": 8,
+  "positiveMainCrc": 4,
+  "coverage": {
+    "INSTRUCTION": {
+      "covered": 163,
+      "missed": 37
+    },
+    "BRANCH": {
+      "covered": 7,
+      "missed": 7
+    },
+    "LINE": {
+      "covered": 32,
+      "missed": 10
+    },
+    "COMPLEXITY": {
+      "covered": 7,
+      "missed": 11
+    },
+    "METHOD": {
+      "covered": 7,
+      "missed": 4
+    },
+    "CLASS": {
+      "covered": 4,
+      "missed": 1
+    }
+  },
+  "targetCounters": {
+    "dev/codex/schubert/nk/api/messaging/guard/GuardedJmsMessage": {
+      "INSTRUCTION": {
+        "covered": 28,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 7,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 3,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 3,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    }
+  },
+  "completeSourceComponentCounters": {
+    "COMPLEXITY": {
+      "covered": 3,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 1,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 7,
+      "missed": 0
+    },
+    "INSTRUCTION": {
+      "covered": 28,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 3,
+      "missed": 0
+    }
+  },
+  "completeSourceComponentFour100": false,
+  "wholeScopeFour100": false,
+  "uncoveredFullSourceClasses": {
+    "dev/codex/schubert/nk/protocol/layout/LayoutValidationException": {
+      "INSTRUCTION": 9,
+      "LINE": 4,
+      "COMPLEXITY": 2,
+      "METHOD": 2,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/LayoutId": {
+      "INSTRUCTION": 18,
+      "BRANCH": 1,
+      "LINE": 4,
+      "COMPLEXITY": 3,
+      "METHOD": 2
+    },
+    "dev/codex/schubert/nk/protocol/codec/TransportMetadata": {
+      "INSTRUCTION": 10,
+      "BRANCH": 6,
+      "LINE": 2,
+      "COMPLEXITY": 6
+    }
+  },
+  "naturalNoCodeClasses": [
+    "dev/codex/schubert/nk/api/messaging/guard/package-info",
+    "dev/codex/schubert/nk/protocol/codec/package-info",
+    "dev/codex/schubert/nk/protocol/layout/package-info"
+  ],
+  "naturalNoBranchClasses": [
+    "dev/codex/schubert/nk/api/messaging/guard/GuardedJmsMessage"
+  ],
+  "classIds": {
+    "dev/codex/schubert/nk/protocol/layout/package-info": "4d826d1b0d56d19e",
+    "dev/codex/schubert/nk/protocol/layout/LayoutId": "240169cacdc45dd7",
+    "dev/codex/schubert/nk/protocol/layout/LayoutValidationException": "172946afc5ba5e3f",
+    "dev/codex/schubert/nk/protocol/codec/package-info": "2c09672c6d6e58f5",
+    "dev/codex/schubert/nk/protocol/codec/TransportBodyType": "439179502827eea6",
+    "dev/codex/schubert/nk/protocol/codec/TransportMetadata": "73563a1b06736c49",
+    "dev/codex/schubert/nk/api/messaging/guard/package-info": "ff0408fbe46186ab",
+    "dev/codex/schubert/nk/api/messaging/guard/GuardedJmsMessage": "79e113ffef87a070"
+  },
+  "actualJvmCodeMethodCounts": {
+    "dev/codex/schubert/nk/protocol/layout/package-info": 0,
+    "dev/codex/schubert/nk/protocol/layout/LayoutId": 8,
+    "dev/codex/schubert/nk/protocol/layout/LayoutValidationException": 2,
+    "dev/codex/schubert/nk/protocol/codec/package-info": 0,
+    "dev/codex/schubert/nk/protocol/codec/TransportBodyType": 5,
+    "dev/codex/schubert/nk/protocol/codec/TransportMetadata": 15,
+    "dev/codex/schubert/nk/api/messaging/guard/package-info": 0,
+    "dev/codex/schubert/nk/api/messaging/guard/GuardedJmsMessage": 6
+  },
+  "hiddenJvmAdapters": {
+    "dev/codex/schubert/nk/protocol/codec/TransportMetadata$$Lambda+0x000000008a138498": "dev/codex/schubert/nk/protocol/codec/TransportMetadata"
+  },
+  "manualCoverageExclusions": [],
+  "oldExecCombined": false,
+  "preflight": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39156-ssc467-guarded-jms-diagnostic-preflight-v1/manifest.json",
+    "sha256": "058a49571db0ac89f4a687a1e9d1aba813c48f88a3a54a60d6872470972fa94a"
+  },
+  "inputHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/guard/GuardedJmsMessage.java": "9f50a140f32bcafb0a94a150ce693a2243c2f30a658909f010ca1b007ae378a0",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/guard/package-info.java": "4e8a3b76dfcb01673d169b3bb2938049976fab84dab648f408bbe283ee7b79ad",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/TransportMetadata.java": "198dac5e9cad2046e8e78a4323bfe2e0e2a4a3842044015e8088c1149fcdf646",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/TransportBodyType.java": "e0fdf54397d7d935407d498fcb0679fd957b7af091727fd978c9d67df74f81b8",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/package-info.java": "54d4e868e34662474a3178298f16cb6db1f3a298e893413f5d8bafe3686138ef",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutId.java": "87c8f01b5f84f211a8902d323eba221d11dc6b6add1cfe2a514fdbb68e82bc24",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutValidationException.java": "b99e562fe3afd1f1e11a7ff415f25999c14e46016d5a115022706d4f8674a9df",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/package-info.java": "2fbe92d4140d6941e535183ca3d276c9adbd10aae25286246a1ee3d38a1624c2",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/GuardedJmsDiagnosticTest.java": "1de7cdb1e85a6006a171e5a7707f797f89723e18e3baf6f4d327fe69db71a470",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-api/pom.xml": "2aff7af3d90feaee1f6c09f7ad300627ed911e8372504fcfd383391429a58114",
+    "src/schubert-nk-protocol/pom.xml": "f76b730fa1cb1b34a88182ca5b685ca14fb71361c037f9418f0895d2a3022d7d",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "dependencies": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "environment": {
+    "file.encoding": "UTF-8",
+    "java.version": "25.0.4",
+    "os.arch": "amd64",
+    "os.name": "Linux",
+    "user.timezone": "Asia/Tokyo"
+  },
+  "productTestsExecuted": 2,
+  "actualBackendNativeFsRootOrHeldClassActions": 0,
+  "formalUpdated": false,
+  "whole451Accepted": false,
+  "newAcceptance": 0,
+  "effortRate": null,
+  "files": {
+    "unit-classinfo-begin.safe.json": "8e7ea720aedc835f995631db05645f31e91b7c7f418b30b249e7b84af71541ba",
+    "unit-coverage.stdout": "2fef8a617b943077b5339b29f0385fbc689265c4067e430d1ae4191d73450a28",
+    "unit-execinfo-begin.safe.json": "dba46d11fc2064ac8de3ba59e8a8e2820bc0f240beb406d3f2695602abc0871f",
+    "unit-coverage-exit.safe.json": "bd572f57f5d43fa3def785160d1d8cc94fff37d7971c57cae48a48f8ef399e66",
+    "unit-classinfo-exit.safe.json": "8dfab84c40972f842cf36f3d5333ce20a4bedefb7118315d1252049cc201f8ae",
+    "unit-unit-begin.safe.json": "2aeeafb49ad820e792cab2915b7ae64ba0bb9dc9204eecf9a65821176e17f77f",
+    "unit-unit-process.safe.json": "a0d0a85c9bc1fc860fda6493987103cd44e9c8cdb3b1c2dde3bfd8101e1545b5",
+    "unit-coverage-begin.safe.json": "644da60621104cf6a653d6c1214148828425661559c8a51245a63f6bd1271585",
+    "unit-classinfo.stdout": "d3ebd49c3092714d41399f074d0289380f2c3764fd20d1b5f11a344f9f890064",
+    "unit-execinfo-process.safe.json": "c9ec13c15578aca54e27827dd53fcb43de514c7f3bfa9944c0fd76e7e4074305",
+    "unit-coverage-process.safe.json": "376845507babddc80abe6784d0177991fc616afc870440084f19b66249280cf2",
+    "unit-execinfo-exit.safe.json": "6b697e373b74c783e3f11b4952a14d6fb5fc879c2b784994f2d28f1abd2c9511",
+    "unit-execinfo.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "unit-execinfo.stdout": "25e2e22002711649557fe721aaa4c9e3a3787ebd81d68456fb75768fea4f2204",
+    "unit-begin.json": "db98ed5651896bf2705825c4ceba9128535b9798dba1a25574e7067971aa97aa",
+    "unit-unit-exit.safe.json": "7083f978878371ce6a1868eff7326c71a80ac2864a8ca99225b3182ecfb4473f",
+    "unit-classinfo-process.safe.json": "2dac37d593fb786cce8f1f3cd363900922a65aaf10454da041f794fafa711877",
+    "unit-unit.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "unit-manifest.json": "3c8a3c6bbb618d25130fb4e256074b22143048c405b672019f7ce27bee9a5973",
+    "unit-classinfo.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "unit-coverage.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "unit-unit.stdout": "b5b42c52b08381e4cfb0bb3af53e4d681b38a53265a0e3c6cf8167debbc1db90",
+    "original-coverage.xml": "d2ef74430739592124bcd5d4c508f235b0f3eaff67c7bfbc585b2a33772b8149",
+    "jacoco.exec": "d5aba420d9c2ac9f228e59742d7d5f78ddca29f49f6fe9d0f7a6a0932dd7bed0",
+    "original-class-init.stdout": "a54968ec2444362d5b5a2b796c21c711ba99471cc834bcc9e4e8ace7afd476f3",
+    "original-TEST-junit-platform-suite.xml": "7eed174610d9c84293732690924cab2970c2bb37f8c469f6971232a681201308",
+    "original-TEST-junit-vintage.xml": "e368847f0fd72b5f6e5dfbe4cd2bd6c8e100a440356ac9df38c1fc8a557608ee",
+    "original-TEST-junit-jupiter.xml": "646bab3d7c63f758630c4dacb4b9bd6517294e8126cfd4383d1de997cf28eb8f"
+  },
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_post_v3.py",
+    "sha256": "e85ddceaf23f84d14bca013629d97857804402b89c9ca825ead5ec5e967dfd36"
+  },
+  "defaultStandardFilteredSwitchMaps": {},
+  "forbiddenInitializedClasses": [],
+  "forbiddenInitializedClassesObserved": [],
+  "reviewedReflection": [],
+  "originalUnitXmlHashes": {
+    "original-TEST-junit-platform-suite.xml": "c6d6a2b13d2a7d631cbb6d69ab6be5ed89e2d7fde1cfd8bdb0c0f81fe974d95a",
+    "original-TEST-junit-vintage.xml": "b9c0a0b1bc259f2df7fc4f614d127c00a897e97f82e3c7aab536044092ac5ae3",
+    "original-TEST-junit-jupiter.xml": "f125be1ddd803b317233062d86ee5c0acfc22264e587ee9931c6d1e7962ec881"
+  },
+  "publicUnitXmlPropertyNames": [
+    "file.encoding",
+    "java.version",
+    "os.arch",
+    "os.name",
+    "user.timezone"
+  ],
+  "unitXmlSystemOutErrExported": false,
+  "unstartedProcess": null,
+  "unstartedProcessInitializationObserved": [],
+  "unqualifiedStreamingExecutionObserved": false,
+  "guardSignature": null,
+  "guardExecutionMode": null,
+  "analysisOnlyContext": null,
+  "reviewedArtemisSdk": null
+}

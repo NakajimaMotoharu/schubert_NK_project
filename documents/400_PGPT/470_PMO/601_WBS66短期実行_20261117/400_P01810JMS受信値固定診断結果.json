@@ -1,0 +1,127 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-5930",
+  "values": {
+    "quotaAfter": {
+      "usedPercent": 33,
+      "remainingPercent": 67,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "dae17775c193c1c1ba9e22310def89bbaa91a8a7b4901666dc2c2755f4da32de",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T09:52:35.951000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 33,
+          "remainingPercent": 67,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T09:51:21.948327+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P01810-GUARDED-JMS-VALUE-DIAGNOSTIC-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-P01810-GUARDED-JMS-VALUE-DIAGNOSTIC-20261118",
+    "workAttributionKind": "ADDITIONAL_FINDING",
+    "workScope": "P018-10.03 CATALOG-019 and P005-03 owner. Remove metadata values from generic GuardedJmsMessage string per fixed catalog; preserve explicit readback and clone ownership and transport semantics. Main canonical design first, dedicated pure record PT from literal owned metadata without Artemis, no actual broker, routes, held classes or guard retries. Update prior combined guard assertion for later qualified full run; publish scope gap/normal point counters.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37452-p01810-independent-case-catalog-v1/planned93-independent-cases.json",
+        "sha256": "b830c7bbbbb1375f5d11e1a67c22608e0ccf8f829febfa1b24fe12194471d54c"
+      },
+      {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/guard/GuardedJmsMessage.java",
+        "sha256": "6c8c70ef3872a2de673eb4a5af6a4eaefc52516403b5f08e9465a762b897cbad"
+      },
+      {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+        "sha256": "2e46083d14b3c4cc6333940bc99cc0958d302b45f6d4b97c65ded5b0905d299e"
+      }
+    ],
+    "productionCoreMain": "bcc9e0673287c51950ecab9b36350abfcd4b2c69",
+    "source": "21ae88d7a2d69a49cf3a39d6e52d7aa3178ed50f",
+    "wbsLeafIds": [
+      "WBS-F03",
+      "WBS-P018-10.03",
+      "WBS-P005-03"
+    ],
+    "managementWorkIds": [
+      "PT-P01810-CATALOG-019",
+      "BUG-3259",
+      "YKT-2690",
+      "SSC-467"
+    ],
+    "run": "PG39168-p01810-guarded-jms-value-independent-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.5,
+      "base": 1.75,
+      "high": 3.6
+    },
+    "groupCapPp": 5.0,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "groupBoundary": "END",
+    "startEvent": "PGPT-20261008-5929",
+    "fixedTestSource": "7d090c06cd17bcc8ac78176529d8acf82ccddcfa",
+    "quotaBefore": {
+      "usedPercent": 33,
+      "remainingPercent": 67,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "fullObservationPreservedInReceipt": true,
+    "actualDedicatedPp": null,
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39168-p01810-guarded-jms-value-independent-v1/manifest.json",
+      "sha256": "3a7449e61ac9390c506cf660023e736519c80bb4dd719736354ff804c7089ef6"
+    },
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortCompletionRate": null,
+    "technical": {
+      "tests": 2,
+      "successful": 2,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "notRunWithinSelection": 0,
+      "firstProductAttempts": 2,
+      "firstProductSuccessful": 2,
+      "newTestDefinitions": 2,
+      "physical": 8,
+      "positiveCrc": 4,
+      "staticApplicable": 0,
+      "legacyWholeJmsGuardExecuted": 0,
+      "localAdditionalGroupBasePp": 1.75,
+      "mainCanonicalPr": 434
+    },
+    "remainingCriteria": [
+      "P005-03 original whole guard and actual runtime",
+      "P018-10 actual producer/sink and other catalog entries",
+      "F03 full six module and 451"
+    ]
+  }
+}
