@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.BooleanNode;
 import com.fasterxml.jackson.databind.node.IntNode;
+import com.fasterxml.jackson.databind.node.NullNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
 import java.io.IOException;
@@ -1098,13 +1099,13 @@ class ArtifactComparatorTest {
   }
 
   private static void reviseRestartClaim(Fixture fixture, String pointer, JsonNode value)
-      throws IOException {
+      throws Exception {
     mutate(
         fixture.observations(),
         root -> {
           var claims = (ArrayNode) root.path(FIXTURE_OBSERVATIONS);
           ((ObjectNode) claims.get(findObservation(claims, FIXTURE_CHR_O01, pointer)))
-              .set("expectedNk", value);
+              .set(FIXTURE_EXPECTED_NK, value);
         });
   }
 
@@ -1737,16 +1738,20 @@ class ArtifactComparatorTest {
   }
 
   private static ObjectNode restartObservation(String pointer, JsonNode current, JsonNode nk) {
-    return observation(
-        FIXTURE_DIF_014,
-        FIXTURE_CHR_O01,
-        FIXTURE_RESTART_FIELD,
-        FIXTURE_DIFFERENCE,
-        FIXTURE_SEMANTIC,
-        FIXTURE_RESTART_FIELD,
-        pointer,
-        current,
-        nk);
+    var row =
+        observation(
+            FIXTURE_DIF_014,
+            FIXTURE_CHR_O01,
+            FIXTURE_RESTART_FIELD,
+            FIXTURE_DIFFERENCE,
+            FIXTURE_SEMANTIC,
+            FIXTURE_RESTART_FIELD,
+            pointer,
+            "",
+            "");
+    row.set(FIXTURE_EXPECTED_CURRENT, current);
+    row.set(FIXTURE_EXPECTED_NK, nk);
+    return row;
   }
 
   private static void addSessionObservations(
