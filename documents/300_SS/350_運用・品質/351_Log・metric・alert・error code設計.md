@@ -299,6 +299,8 @@ SSC-458。CanonicalField.toStringは「CanonicalField[<redacted>]」、Canonical
 
 SSC-459。PendingReply.toStringは「PendingReply[correlationId/deadline/body=<redacted>]」の固定値とし、実相関ID・締切・応答bodyを一般診断に連結しない。SS321の相関照合・単調な期限判断・一回終端と、本書§3で許可する明示構造化相関項目及び所有copyの契約を維持する。
 
+SSC-460。一般診断のFingerprint／InboxCompletion／InboxExecution／AuthenticatedActorのtoStringは、各型名と「[<redacted>]」を連結した固定値とする。鍵版ラベル、Inbox状態、認証済roleは必要な明示アクセサーと許可された構造化項目から扱う。照合用digest、状態判定、実行結果、認可の契約は従来どおり。
+
 
 - DEBUGだけ機密除外を緩和、request/response/fixed body、exception/SQLの`toString()`を無制限出力。
 - Username/IP/message/token/path等の高cardinality/機密値をmetric label化。
