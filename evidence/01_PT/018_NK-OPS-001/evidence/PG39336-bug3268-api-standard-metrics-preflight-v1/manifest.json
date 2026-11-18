@@ -1,0 +1,102 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5133_bug3268_api_standard_metrics_profile.json",
+    "sha256": "850ff1148b54b0329064011a996f3d003f4b6e9928a94de8d94fc147b0e5321b"
+  },
+  "inputHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetrics.java": "d43ac2b841fe471bfb4985d719e4a48a493a94bf11355b40b83b00ee0a2fec1f",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistration.java": "392d9c500076bb4898a859ee03f63990ca73b923508a2fc8a79f4454c8252e3b",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiJvmMetrics.java": "3dcd35d8abdf8941f82d7d13b15072003d70598b64135928c0cf3efa156cd4bb",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiSystemMetrics.java": "869f450b660a3e711f2fe8246f32239fcef9a9ae8c30a07999063553374a7cf6",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/package-info.java": "8dd0a4c1cf6eca2f906c5d9aee5afc0f40c990ccfa35925ecc8b5edfb2194193",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricsTest.java": "d465bb03b2f47dd3b02bd5b79cd064c9284c3d2a25e69f226965fbb62ac74df1",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-api/pom.xml": "2aff7af3d90feaee1f6c09f7ad300627ed911e8372504fcfd383391429a58114",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39332-bug3268-api-standard-metrics-prepare-v1/manifest.json",
+    "sha256": "ad49021041a1f6b3dfd4d5a6a865476acd0c3e2c25a2a09b7354dedb68ba8c43"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39334-bug3268-api-standard-metrics-static-v1/manifest.json",
+    "sha256": "8c0a8e000b3e31b747e09667ab3025d2ff9dffd4df8f7c76f2dfe0f521e3f403"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5134_bug3268_api_standard_metrics_admission.json",
+    "sha256": "0d73662cdebd7b6dbe6cc3eed22b59cae32b5fee31044648ce1b8138bb419a96"
+  },
+  "classified": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricsTest.java",
+      "rule": "CloseResource",
+      "line": "213",
+      "reason": "This fixture intentionally passes an already closed Registry to test the public contract; it closes its own Registry immediately before any other action.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this Registry object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricsTest.java",
+      "rule": "CloseResource",
+      "line": "330",
+      "reason": "This fixture intentionally passes an already closed Registry to test the public contract; it closes its own Registry immediately before any other action.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this Registry object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricsTest.java",
+      "rule": "CloseResource",
+      "line": "365",
+      "reason": "Executor ownership ends in a bounded finally with shutdownNow and ten second termination. Implicit close would allow waiting without a deadline.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricsTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "365",
+      "reason": "Only finite local unit test fixture threads are used; Future.get and executor release are bounded and there is no application or service thread.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricsTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "371",
+      "reason": "Only finite local unit test fixture threads are used; Future.get and executor release are bounded and there is no application or service thread.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricsTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "390",
+      "reason": "Only finite local unit test fixture threads are used; Future.get and executor release are bounded and there is no application or service thread.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricsTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "391",
+      "reason": "Only finite local unit test fixture threads are used; Future.get and executor release are bounded and there is no application or service thread.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    }
+  ],
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "rootCompilerUnchanged": true,
+  "independentSourceAnchorsExact": true,
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_stages.py",
+    "sha256": "ce7b33beb41744d0042bc0fb94aee01930016254f5f08fbba03707f1b568016b"
+  }
+}
