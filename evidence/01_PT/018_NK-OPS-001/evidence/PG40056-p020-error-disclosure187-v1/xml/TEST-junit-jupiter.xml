@@ -1,0 +1,1183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="JUnit Jupiter" tests="187" skipped="0" failures="0" errors="0" time="2.649" hostname="npc1" timestamp="2026-11-19T03:40:57">
+<properties>
+<property name="chr.unitProjectRoot" value="/home/mini/codex/project1/work/pgpt-runs/PG379/pg40056-p020-error-disclosure187-v1/snapshot"/>
+<property name="file.encoding" value="UTF-8"/>
+<property name="file.separator" value="/"/>
+<property name="java.awt.headless" value="true"/>
+<property name="java.class.path" value="/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar"/>
+<property name="java.class.version" value="69.0"/>
+<property name="java.home" value="/home/mini/codex/project1/work/toolchain/jdk-25.0.4"/>
+<property name="java.io.tmpdir" value="/home/mini/codex/project1/work/pgpt-runs/PG379/pg40056-p020-error-disclosure187-v1/tmp"/>
+<property name="java.library.path" value="/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib"/>
+<property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+<property name="java.runtime.version" value="25.0.4+7-1-26.04-Ubuntu"/>
+<property name="java.specification.name" value="Java Platform API Specification"/>
+<property name="java.specification.vendor" value="Oracle Corporation"/>
+<property name="java.specification.version" value="25"/>
+<property name="java.vendor" value="Ubuntu"/>
+<property name="java.vendor.url" value="https://ubuntu.com/"/>
+<property name="java.vendor.url.bug" value="https://bugs.launchpad.net/ubuntu/+source/openjdk-25"/>
+<property name="java.version" value="25.0.4"/>
+<property name="java.version.date" value="2026-07-21"/>
+<property name="java.vm.compressedOopsMode" value="32-bit"/>
+<property name="java.vm.info" value="mixed mode, sharing"/>
+<property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+<property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+<property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+<property name="java.vm.specification.version" value="25"/>
+<property name="java.vm.vendor" value="Ubuntu"/>
+<property name="java.vm.version" value="25.0.4+7-1-26.04-Ubuntu"/>
+<property name="jdk.debug" value="release"/>
+<property name="junit.docs.version" value="1.13.4"/>
+<property name="line.separator" value="&#10;"/>
+<property name="native.encoding" value="UTF-8"/>
+<property name="os.arch" value="amd64"/>
+<property name="os.name" value="Linux"/>
+<property name="os.version" value="7.0.0-43-generic"/>
+<property name="path.separator" value=":"/>
+<property name="stderr.encoding" value="UTF-8"/>
+<property name="stdin.encoding" value="UTF-8"/>
+<property name="stdout.encoding" value="UTF-8"/>
+<property name="sun.arch.data.model" value="64"/>
+<property name="sun.boot.library.path" value="/home/mini/codex/project1/work/toolchain/jdk-25.0.4/lib"/>
+<property name="sun.cpu.endian" value="little"/>
+<property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+<property name="sun.java.command" value="/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar execute --disable-banner --details=summary --fail-if-no-tests --class-path /home/mini/codex/project1/work/pgpt-runs/PG379/pg40056-p020-error-disclosure187-v1/snapshot/program/characterization/target/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg40056-p020-error-disclosure187-v1/testclasses:/home/mini/codex/project1/work/pgpt-runs/PG379/pg40056-p020-error-disclosure187-v1/snapshot/program/characterization/tests/resources:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/microsoft/playwright/playwright/1.55.0/playwright-1.55.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.19.2/jackson-annotations-2.19.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-core/2.19.2/jackson-core-2.19.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-databind/2.19.2/jackson-databind-2.19.2.jar --reports-dir /home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40056-p020-error-disclosure187-v1/xml --select-class dev.codex.schubert.characterization.ArtifactComparatorTest --select-class dev.codex.schubert.characterization.GateCliTest --select-class dev.codex.schubert.characterization.GateContractTest --select-class dev.codex.schubert.characterization.GateContractValidatorNegativeTest --select-class dev.codex.schubert.characterization.TargetAdapterTest --select-class dev.codex.schubert.characterization.ArtifactComparatorEmptyInputTest --select-class dev.codex.schubert.characterization.BaselineNumericMetadataTest --select-class dev.codex.schubert.characterization.CharacterizationHashTest --select-class dev.codex.schubert.characterization.CorrelatedLogEvidenceValidatorTest --select-class dev.codex.schubert.characterization.CorrelatedLogHttpNumberTest --select-class dev.codex.schubert.characterization.CorrelatedMenuActionContractTest --select-class dev.codex.schubert.characterization.GateBaselineMetadataTest --select-class dev.codex.schubert.characterization.GateDefinitionDocumentsTest --select-class dev.codex.schubert.characterization.GateDefinitionNumericTest --select-class dev.codex.schubert.characterization.GateEvidenceDocumentsTest --select-class dev.codex.schubert.characterization.GateMetricsCountTest --select-class dev.codex.schubert.characterization.GateSyntheticRunPortTest --select-class dev.codex.schubert.characterization.CommonValueContractTest --select-class dev.codex.schubert.characterization.CharacterizationIoScopeTest --select-class dev.codex.schubert.characterization.GateOutputFailureContractTest --config=junit.jupiter.execution.parallel.enabled=false"/>
+<property name="sun.java.launcher" value="SUN_STANDARD"/>
+<property name="sun.jnu.encoding" value="UTF-8"/>
+<property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+<property name="user.country" value="JP"/>
+<property name="user.dir" value="/home/mini/codex/project1/work/pgpt-runs/PG379/pg40056-p020-error-disclosure187-v1"/>
+<property name="user.home" value="/home/mini"/>
+<property name="user.language" value="ja"/>
+<property name="user.name" value="mini"/>
+<property name="user.timezone" value="Asia/Tokyo"/>
+</properties>
+<testcase name="rejectsEveryNonPassExecutionStatus(String)[1]" classname="dev.codex.schubert.characterization.GateContractValidatorNegativeTest" time="0.02">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateContractValidatorNegativeTest]/[test-template:rejectsEveryNonPassExecutionStatus(java.lang.String)]/[test-template-invocation:#1]
+display-name: [1] FAIL
+]]></system-out>
+</testcase>
+<testcase name="rejectsEveryNonPassExecutionStatus(String)[2]" classname="dev.codex.schubert.characterization.GateContractValidatorNegativeTest" time="0.02">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateContractValidatorNegativeTest]/[test-template:rejectsEveryNonPassExecutionStatus(java.lang.String)]/[test-template-invocation:#2]
+display-name: [2] FAILED
+]]></system-out>
+</testcase>
+<testcase name="rejectsAnInvalidRangeStatusOfAnotherHttpError()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.022">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:rejectsAnInvalidRangeStatusOfAnotherHttpError()]
+display-name: rejectsAnInvalidRangeStatusOfAnotherHttpError()
+]]></system-out>
+</testcase>
+<testcase name="rejectsEveryNonPassExecutionStatus(String)[5]" classname="dev.codex.schubert.characterization.GateContractValidatorNegativeTest" time="0.022">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateContractValidatorNegativeTest]/[test-template:rejectsEveryNonPassExecutionStatus(java.lang.String)]/[test-template-invocation:#5]
+display-name: [5] SKIPPED
+]]></system-out>
+</testcase>
+<testcase name="rejectsEveryNonPassExecutionStatus(String)[6]" classname="dev.codex.schubert.characterization.GateContractValidatorNegativeTest" time="0.014">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateContractValidatorNegativeTest]/[test-template:rejectsEveryNonPassExecutionStatus(java.lang.String)]/[test-template-invocation:#6]
+display-name: [6] DISABLED
+]]></system-out>
+</testcase>
+<testcase name="rejectsEveryNonPassExecutionStatus(String)[3]" classname="dev.codex.schubert.characterization.GateContractValidatorNegativeTest" time="0.014">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateContractValidatorNegativeTest]/[test-template:rejectsEveryNonPassExecutionStatus(java.lang.String)]/[test-template-invocation:#3]
+display-name: [3] FLAKY
+]]></system-out>
+</testcase>
+<testcase name="distinctSecondaryIsSuppressedEvenWhenItIsAnError()" classname="dev.codex.schubert.characterization.CharacterizationIoScopeTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.CharacterizationIoScopeTest]/[method:distinctSecondaryIsSuppressedEvenWhenItIsAnError()]
+display-name: distinctSecondaryIsSuppressedEvenWhenItIsAnError()
+]]></system-out>
+</testcase>
+<testcase name="rejectsMissingNullAndTextualLeakFlags()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.012">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:rejectsMissingNullAndTextualLeakFlags()]
+display-name: rejectsMissingNullAndTextualLeakFlags()
+]]></system-out>
+</testcase>
+<testcase name="rejectsEveryNonPassExecutionStatus(String)[4]" classname="dev.codex.schubert.characterization.GateContractValidatorNegativeTest" time="0.014">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateContractValidatorNegativeTest]/[test-template:rejectsEveryNonPassExecutionStatus(java.lang.String)]/[test-template-invocation:#4]
+display-name: [4] SKIP
+]]></system-out>
+</testcase>
+<testcase name="completeL01DoesNotAcceptBothSidesOmittingTheLogSearchAction()" classname="dev.codex.schubert.characterization.CorrelatedMenuActionContractTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.CorrelatedMenuActionContractTest]/[method:completeL01DoesNotAcceptBothSidesOmittingTheLogSearchAction()]
+display-name: completeL01DoesNotAcceptBothSidesOmittingTheLogSearchAction()
+]]></system-out>
+</testcase>
+<testcase name="concurrentFrozenFramesKeepTheirDiagnosticsIndependent()" classname="dev.codex.schubert.characterization.GateEvidenceDocumentsTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateEvidenceDocumentsTest]/[method:concurrentFrozenFramesKeepTheirDiagnosticsIndependent()]
+display-name: concurrentFrozenFramesKeepTheirDiagnosticsIndependent()
+]]></system-out>
+</testcase>
+<testcase name="requiresOldestInvalidationEvidenceAlongsideTheCorrectCount()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.012">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:requiresOldestInvalidationEvidenceAlongsideTheCorrectCount()]
+display-name: requiresOldestInvalidationEvidenceAlongsideTheCorrectCount()
+]]></system-out>
+</testcase>
+<testcase name="targetEnumerationOwnsItsArrayAndHashCollisionIsStillUnknown()" classname="dev.codex.schubert.characterization.CommonValueContractTest" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.CommonValueContractTest]/[method:targetEnumerationOwnsItsArrayAndHashCollisionIsStillUnknown()]
+display-name: targetEnumerationOwnsItsArrayAndHashCollisionIsStillUnknown()
+]]></system-out>
+</testcase>
+<testcase name="rejectsLoginTitleObservationAtAnotherPointer()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:rejectsLoginTitleObservationAtAnotherPointer()]
+display-name: rejectsLoginTitleObservationAtAnotherPointer()
+]]></system-out>
+</testcase>
+<testcase name="rejectsEveryNonPassExecutionStatus(String)[7]" classname="dev.codex.schubert.characterization.GateContractValidatorNegativeTest" time="0.018">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateContractValidatorNegativeTest]/[test-template:rejectsEveryNonPassExecutionStatus(java.lang.String)]/[test-template-invocation:#7]
+display-name: [7] NOT_RUN
+]]></system-out>
+</testcase>
+<testcase name="sourceHashesRequireCanonicalTextOnBothSides()" classname="dev.codex.schubert.characterization.GateEvidenceDocumentsTest" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateEvidenceDocumentsTest]/[method:sourceHashesRequireCanonicalTextOnBothSides()]
+display-name: sourceHashesRequireCanonicalTextOnBothSides()
+]]></system-out>
+</testcase>
+<testcase name="qa054log005OperationBindingAndDatabaseReplayCountsRemainStrict()" classname="dev.codex.schubert.characterization.CorrelatedMenuActionContractTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.CorrelatedMenuActionContractTest]/[method:qa054log005OperationBindingAndDatabaseReplayCountsRemainStrict()]
+display-name: qa054log005OperationBindingAndDatabaseReplayCountsRemainStrict()
+]]></system-out>
+</testcase>
+<testcase name="rejectsTheAbsentFallbackButtonEvenIfBothArtifactsAgree()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.007">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:rejectsTheAbsentFallbackButtonEvenIfBothArtifactsAgree()]
+display-name: rejectsTheAbsentFallbackButtonEvenIfBothArtifactsAgree()
+]]></system-out>
+</testcase>
+<testcase name="baselineCountComparisonRejectsCoercionAndRespectsExactIntegerBoundary()" classname="dev.codex.schubert.characterization.GateMetricsCountTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateMetricsCountTest]/[method:baselineCountComparisonRejectsCoercionAndRespectsExactIntegerBoundary()]
+display-name: baselineCountComparisonRejectsCoercionAndRespectsExactIntegerBoundary()
+]]></system-out>
+</testcase>
+<testcase name="catalogHasExactlyTwentyFourUniqueCasesAndOnlyN01IsNkOnly()" classname="dev.codex.schubert.characterization.GateContractTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateContractTest]/[method:catalogHasExactlyTwentyFourUniqueCasesAndOnlyN01IsNkOnly()]
+display-name: catalogHasExactlyTwentyFourUniqueCasesAndOnlyN01IsNkOnly()
+]]></system-out>
+</testcase>
+<testcase name="requiresMenuBrandEvidenceFromTheMenuCase()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:requiresMenuBrandEvidenceFromTheMenuCase()]
+display-name: requiresMenuBrandEvidenceFromTheMenuCase()
+]]></system-out>
+</testcase>
+<testcase name="requestWitnessesMustBeBothStagesOfTheSameLogicalEventAndSameHttpFields()" classname="dev.codex.schubert.characterization.CorrelatedLogEvidenceValidatorTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.CorrelatedLogEvidenceValidatorTest]/[method:requestWitnessesMustBeBothStagesOfTheSameLogicalEventAndSameHttpFields()]
+display-name: requestWitnessesMustBeBothStagesOfTheSameLogicalEventAndSameHttpFields()
+]]></system-out>
+</testcase>
+<testcase name="acceptsPinnedPublicDefinitionsWithoutMutationAndReturnsImmutableDiagnostics()" classname="dev.codex.schubert.characterization.GateDefinitionDocumentsTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateDefinitionDocumentsTest]/[method:acceptsPinnedPublicDefinitionsWithoutMutationAndReturnsImmutableDiagnostics()]
+display-name: acceptsPinnedPublicDefinitionsWithoutMutationAndReturnsImmutableDiagnostics()
+]]></system-out>
+</testcase>
+<testcase name="successReturnsIndependentValueAfterExactlyOneClose()" classname="dev.codex.schubert.characterization.CharacterizationIoScopeTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.CharacterizationIoScopeTest]/[method:successReturnsIndependentValueAfterExactlyOneClose()]
+display-name: successReturnsIndependentValueAfterExactlyOneClose()
+]]></system-out>
+</testcase>
+<testcase name="targetHashCollisionsRemainUnknownAfterLowercasing()" classname="dev.codex.schubert.characterization.GateOutputFailureContractTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateOutputFailureContractTest]/[method:targetHashCollisionsRemainUnknownAfterLowercasing()]
+display-name: targetHashCollisionsRemainUnknownAfterLowercasing()
+]]></system-out>
+</testcase>
+<testcase name="rejectsCacheControlOtherThanApprovedNoStore()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:rejectsCacheControlOtherThanApprovedNoStore()]
+display-name: rejectsCacheControlOtherThanApprovedNoStore()
+]]></system-out>
+</testcase>
+<testcase name="unavailableDeclarationArraysAreOmittedInsteadOfReportedAsZero()" classname="dev.codex.schubert.characterization.GateMetricsCountTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateMetricsCountTest]/[method:unavailableDeclarationArraysAreOmittedInsteadOfReportedAsZero()]
+display-name: unavailableDeclarationArraysAreOmittedInsteadOfReportedAsZero()
+]]></system-out>
+</testcase>
+<testcase name="adapterRejectsCrossOriginPathsBadCaseIdsAndMalformedCatalogs()" classname="dev.codex.schubert.characterization.TargetAdapterTest" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.TargetAdapterTest]/[method:adapterRejectsCrossOriginPathsBadCaseIdsAndMalformedCatalogs()]
+display-name: adapterRejectsCrossOriginPathsBadCaseIdsAndMalformedCatalogs()
+]]></system-out>
+</testcase>
+<testcase name="allFourVersionCallersRejectCoercionOverflowMissingAndNull()" classname="dev.codex.schubert.characterization.GateDefinitionDocumentsTest" time="0.021">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateDefinitionDocumentsTest]/[method:allFourVersionCallersRejectCoercionOverflowMissingAndNull()]
+display-name: allFourVersionCallersRejectCoercionOverflowMissingAndNull()
+]]></system-out>
+</testcase>
+<testcase name="requiresBothCommonStyleTitlesWhenTheSecondOneChanged()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.007">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:requiresBothCommonStyleTitlesWhenTheSecondOneChanged()]
+display-name: requiresBothCommonStyleTitlesWhenTheSecondOneChanged()
+]]></system-out>
+</testcase>
+<testcase name="comparisonResultOwnsImmutableNonNullListSnapshots()" classname="dev.codex.schubert.characterization.ArtifactComparatorEmptyInputTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorEmptyInputTest]/[method:comparisonResultOwnsImmutableNonNullListSnapshots()]
+display-name: comparisonResultOwnsImmutableNonNullListSnapshots()
+]]></system-out>
+</testcase>
+<testcase name="malformedJsonShapesProduceFailuresRatherThanNpe()" classname="dev.codex.schubert.characterization.GateDefinitionDocumentsTest" time="0.01">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateDefinitionDocumentsTest]/[method:malformedJsonShapesProduceFailuresRatherThanNpe()]
+display-name: malformedJsonShapesProduceFailuresRatherThanNpe()
+]]></system-out>
+</testcase>
+<testcase name="rejectsUnknownOutOfScopeBroadWrongOverlappingAndUnusedObservations()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.051">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:rejectsUnknownOutOfScopeBroadWrongOverlappingAndUnusedObservations()]
+display-name: rejectsUnknownOutOfScopeBroadWrongOverlappingAndUnusedObservations()
+]]></system-out>
+</testcase>
+<testcase name="rejectsBroadAndMalformedDifferenceRules()" classname="dev.codex.schubert.characterization.GateContractValidatorNegativeTest" time="0.015">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateContractValidatorNegativeTest]/[method:rejectsBroadAndMalformedDifferenceRules()]
+display-name: rejectsBroadAndMalformedDifferenceRules()
+]]></system-out>
+</testcase>
+<testcase name="validActionMappingRequestChainAndKnownNullOldRowsRemainDistinct()" classname="dev.codex.schubert.characterization.CorrelatedLogEvidenceValidatorTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.CorrelatedLogEvidenceValidatorTest]/[method:validActionMappingRequestChainAndKnownNullOldRowsRemainDistinct()]
+display-name: validActionMappingRequestChainAndKnownNullOldRowsRemainDistinct()
+]]></system-out>
+</testcase>
+<testcase name="rejectsAMissingGameChangeFieldInsteadOfAnObservedAbsentAttribute()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.012">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:rejectsAMissingGameChangeFieldInsteadOfAnObservedAbsentAttribute()]
+display-name: rejectsAMissingGameChangeFieldInsteadOfAnObservedAbsentAttribute()
+]]></system-out>
+</testcase>
+<testcase name="preflightMetadataUsesTypedCapacityAndExactStaticMarkers()" classname="dev.codex.schubert.characterization.GateEvidenceDocumentsTest" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateEvidenceDocumentsTest]/[method:preflightMetadataUsesTypedCapacityAndExactStaticMarkers()]
+display-name: preflightMetadataUsesTypedCapacityAndExactStaticMarkers()
+]]></system-out>
+</testcase>
+<testcase name="eachCloseFailurePreventsSuccessfulReturnWithoutSecondClose()" classname="dev.codex.schubert.characterization.CharacterizationIoScopeTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.CharacterizationIoScopeTest]/[method:eachCloseFailurePreventsSuccessfulReturnWithoutSecondClose()]
+display-name: eachCloseFailurePreventsSuccessfulReturnWithoutSecondClose()
+]]></system-out>
+</testcase>
+<testcase name="rejectsLoginOnlyEvidenceAtTheFullL01Gate()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.007">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:rejectsLoginOnlyEvidenceAtTheFullL01Gate()]
+display-name: rejectsLoginOnlyEvidenceAtTheFullL01Gate()
+]]></system-out>
+</testcase>
+<testcase name="baselineNumbersUseAllThreeTypedComponentsInValueIdentity()" classname="dev.codex.schubert.characterization.CommonValueContractTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.CommonValueContractTest]/[method:baselineNumbersUseAllThreeTypedComponentsInValueIdentity()]
+display-name: baselineNumbersUseAllThreeTypedComponentsInValueIdentity()
+]]></system-out>
+</testcase>
+<testcase name="preservesAllBeforeRowsAndRejectsEveryMissingDuplicateOrUncorrelatedNewEvent()" classname="dev.codex.schubert.characterization.CorrelatedLogEvidenceValidatorTest" time="0.009">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.CorrelatedLogEvidenceValidatorTest]/[method:preservesAllBeforeRowsAndRejectsEveryMissingDuplicateOrUncorrelatedNewEvent()]
+display-name: preservesAllBeforeRowsAndRejectsEveryMissingDuplicateOrUncorrelatedNewEvent()
+]]></system-out>
+</testcase>
+<testcase name="validSnapshotUsesExactProvidedCountsAndIsImmutable()" classname="dev.codex.schubert.characterization.GateMetricsCountTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateMetricsCountTest]/[method:validSnapshotUsesExactProvidedCountsAndIsImmutable()]
+display-name: validSnapshotUsesExactProvidedCountsAndIsImmutable()
+]]></system-out>
+</testcase>
+<testcase name="repeatComparisonRequiresTwentyEightIdenticalArtifacts()" classname="dev.codex.schubert.characterization.GateCliTest" time="0.021">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateCliTest]/[method:repeatComparisonRequiresTwentyEightIdenticalArtifacts()]
+display-name: repeatComparisonRequiresTwentyEightIdenticalArtifacts()
+]]></system-out>
+</testcase>
+<testcase name="differencesRejectUnknownModesCasesBroadSelectorsDuplicatesAndEmptyValues()" classname="dev.codex.schubert.characterization.GateDefinitionDocumentsTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateDefinitionDocumentsTest]/[method:differencesRejectUnknownModesCasesBroadSelectorsDuplicatesAndEmptyValues()]
+display-name: differencesRejectUnknownModesCasesBroadSelectorsDuplicatesAndEmptyValues()
+]]></system-out>
+</testcase>
+<testcase name="reportMapsEveryGateAndRejectsSecretCanaries()" classname="dev.codex.schubert.characterization.GateCliTest" time="0.144">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateCliTest]/[method:reportMapsEveryGateAndRejectsSecretCanaries()]
+display-name: reportMapsEveryGateAndRejectsSecretCanaries()
+]]></system-out>
+</testcase>
+<testcase name="hashFixedVectorsIncludeEmptyMultiBufferNullAndMissingFile()" classname="dev.codex.schubert.characterization.GateSyntheticRunPortTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateSyntheticRunPortTest]/[method:hashFixedVectorsIncludeEmptyMultiBufferNullAndMissingFile()]
+display-name: hashFixedVectorsIncludeEmptyMultiBufferNullAndMissingFile()
+]]></system-out>
+</testcase>
+<testcase name="missingAndMalformedRequiredDocumentsAreIoFailuresNeverPassingGate()" classname="dev.codex.schubert.characterization.GateSyntheticRunPortTest" time="0.032">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateSyntheticRunPortTest]/[method:missingAndMalformedRequiredDocumentsAreIoFailuresNeverPassingGate()]
+display-name: missingAndMalformedRequiredDocumentsAreIoFailuresNeverPassingGate()
+]]></system-out>
+</testcase>
+<testcase name="comparisonResultKeepsValueIdentityAfterCallerListMutation()" classname="dev.codex.schubert.characterization.CommonValueContractTest" time="0.008">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.CommonValueContractTest]/[method:comparisonResultKeepsValueIdentityAfterCallerListMutation()]
+display-name: comparisonResultKeepsValueIdentityAfterCallerListMutation()
+]]></system-out>
+</testcase>
+<testcase name="refusesCommonStyleTitleOutsideApprovedBrandPositions()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.007">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:refusesCommonStyleTitleOutsideApprovedBrandPositions()]
+display-name: refusesCommonStyleTitleOutsideApprovedBrandPositions()
+]]></system-out>
+</testcase>
+<testcase name="rejectsNkLoginTitleOutsideTheApprovedPair()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.015">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:rejectsNkLoginTitleOutsideTheApprovedPair()]
+display-name: rejectsNkLoginTitleOutsideTheApprovedPair()
+]]></system-out>
+</testcase>
+<testcase name="preflightRejectsParentlessLogPathWithoutNpe()" classname="dev.codex.schubert.characterization.GateCliTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateCliTest]/[method:preflightRejectsParentlessLogPathWithoutNpe()]
+display-name: PT-CHR-PATH-001 parentless log path rejected before IO
+]]></system-out>
+</testcase>
+<testcase name="nkOnlySupplementalAllowedOnlyForExplicitApprovedCheckAndEvidence()" classname="dev.codex.schubert.characterization.GateSyntheticRunPortTest" time="0.031">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateSyntheticRunPortTest]/[method:nkOnlySupplementalAllowedOnlyForExplicitApprovedCheckAndEvidence()]
+display-name: nkOnlySupplementalAllowedOnlyForExplicitApprovedCheckAndEvidence()
+]]></system-out>
+</testcase>
+<testcase name="failureAtEachOutputPhaseDeletesTemporaryAndReleasesClaim()" classname="dev.codex.schubert.characterization.GateOutputFailureContractTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateOutputFailureContractTest]/[method:failureAtEachOutputPhaseDeletesTemporaryAndReleasesClaim()]
+display-name: failureAtEachOutputPhaseDeletesTemporaryAndReleasesClaim()
+]]></system-out>
+</testcase>
+<testcase name="rejectsMissingFailedAndIncompleteRunArtifacts()" classname="dev.codex.schubert.characterization.GateContractValidatorNegativeTest" time="0.02">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateContractValidatorNegativeTest]/[method:rejectsMissingFailedAndIncompleteRunArtifacts()]
+display-name: rejectsMissingFailedAndIncompleteRunArtifacts()
+]]></system-out>
+</testcase>
+<testcase name="browserManifestPinsExecutableRevisionAndLocale()" classname="dev.codex.schubert.characterization.GateContractTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateContractTest]/[method:browserManifestPinsExecutableRevisionAndLocale()]
+display-name: browserManifestPinsExecutableRevisionAndLocale()
+]]></system-out>
+</testcase>
+<testcase name="completeL01RequiresBothInitialOperationsAndTheirCompanionRequests()" classname="dev.codex.schubert.characterization.CorrelatedMenuActionContractTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.CorrelatedMenuActionContractTest]/[method:completeL01RequiresBothInitialOperationsAndTheirCompanionRequests()]
+display-name: completeL01RequiresBothInitialOperationsAndTheirCompanionRequests()
+]]></system-out>
+</testcase>
+<testcase name="optionalResponseBytesAndSameSizeFieldReplacementStayStrict()" classname="dev.codex.schubert.characterization.CorrelatedLogEvidenceValidatorTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.CorrelatedLogEvidenceValidatorTest]/[method:optionalResponseBytesAndSameSizeFieldReplacementStayStrict()]
+display-name: optionalResponseBytesAndSameSizeFieldReplacementStayStrict()
+]]></system-out>
+</testcase>
+<testcase name="allSixKnownHashCollisionsAreUnknownCommandsBeforeDispatch()" classname="dev.codex.schubert.characterization.GateOutputFailureContractTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateOutputFailureContractTest]/[method:allSixKnownHashCollisionsAreUnknownCommandsBeforeDispatch()]
+display-name: allSixKnownHashCollisionsAreUnknownCommandsBeforeDispatch()
+]]></system-out>
+</testcase>
+<testcase name="reportsCatalogArtifactStatusSetSymlinkAndUnregisteredDrift()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.038">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:reportsCatalogArtifactStatusSetSymlinkAndUnregisteredDrift()]
+display-name: reportsCatalogArtifactStatusSetSymlinkAndUnregisteredDrift()
+]]></system-out>
+</testcase>
+<testcase name="javaNullAndNegativeProvidedCountsFailWithoutNpe()" classname="dev.codex.schubert.characterization.GateMetricsCountTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateMetricsCountTest]/[method:javaNullAndNegativeProvidedCountsFailWithoutNpe()]
+display-name: javaNullAndNegativeProvidedCountsFailWithoutNpe()
+]]></system-out>
+</testcase>
+<testcase name="contractCountsOrderIdentifiersAndHashesUseIndependentConstraints()" classname="dev.codex.schubert.characterization.GateDefinitionDocumentsTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateDefinitionDocumentsTest]/[method:contractCountsOrderIdentifiersAndHashesUseIndependentConstraints()]
+display-name: contractCountsOrderIdentifiersAndHashesUseIndependentConstraints()
+]]></system-out>
+</testcase>
+<testcase name="screenshotHashAndUnknownArtifactNamesFailOrIgnoreByExplicitContract()" classname="dev.codex.schubert.characterization.GateSyntheticRunPortTest" time="0.055">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateSyntheticRunPortTest]/[method:screenshotHashAndUnknownArtifactNamesFailOrIgnoreByExplicitContract()]
+display-name: screenshotHashAndUnknownArtifactNamesFailOrIgnoreByExplicitContract()
+]]></system-out>
+</testcase>
+<testcase name="acceptsIndependentManifestItemsWithoutMutatingInputsAndReturnsImmutableList()" classname="dev.codex.schubert.characterization.GateBaselineMetadataTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateBaselineMetadataTest]/[method:acceptsIndependentManifestItemsWithoutMutatingInputsAndReturnsImmutableList()]
+display-name: acceptsIndependentManifestItemsWithoutMutatingInputsAndReturnsImmutableList()
+]]></system-out>
+</testcase>
+<testcase name="fixedAndBoundaryValuesStayExactAndInputsRemainFrozen()" classname="dev.codex.schubert.characterization.BaselineNumericMetadataTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.BaselineNumericMetadataTest]/[method:fixedAndBoundaryValuesStayExactAndInputsRemainFrozen()]
+display-name: fixedAndBoundaryValuesStayExactAndInputsRemainFrozen()
+]]></system-out>
+</testcase>
+<testcase name="requiresLoginTitleObservationEvenWhenAnotherCaseUsesBrandDifference()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:requiresLoginTitleObservationEvenWhenAnotherCaseUsesBrandDifference()]
+display-name: requiresLoginTitleObservationEvenWhenAnotherCaseUsesBrandDifference()
+]]></system-out>
+</testcase>
+<testcase name="acceptsAbsentAndIntegralN12BoundariesWithoutNormalizingKnownNullOldRows()" classname="dev.codex.schubert.characterization.CorrelatedLogHttpNumberTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.CorrelatedLogHttpNumberTest]/[method:acceptsAbsentAndIntegralN12BoundariesWithoutNormalizingKnownNullOldRows()]
+display-name: acceptsAbsentAndIntegralN12BoundariesWithoutNormalizingKnownNullOldRows()
+]]></system-out>
+</testcase>
+<testcase name="rejectsAnUnapprovedConfiguredMaximum()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:rejectsAnUnapprovedConfiguredMaximum()]
+display-name: rejectsAnUnapprovedConfiguredMaximum()
+]]></system-out>
+</testcase>
+<testcase name="invalidScalarKindsFractionsOverflowAndNegativeNumbersAreRejected()" classname="dev.codex.schubert.characterization.BaselineNumericMetadataTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.BaselineNumericMetadataTest]/[method:invalidScalarKindsFractionsOverflowAndNegativeNumbersAreRejected()]
+display-name: invalidScalarKindsFractionsOverflowAndNegativeNumbersAreRejected()
+]]></system-out>
+</testcase>
+<testcase name="treeStatsPreserveOrderedSymlinkValuesInDiagnosticAndIdentity()" classname="dev.codex.schubert.characterization.CommonValueContractTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.CommonValueContractTest]/[method:treeStatsPreserveOrderedSymlinkValuesInDiagnosticAndIdentity()]
+display-name: treeStatsPreserveOrderedSymlinkValuesInDiagnosticAndIdentity()
+]]></system-out>
+</testcase>
+<testcase name="acceptsTheCommonErrorPresentationWithThreeExplicitFalseLeakFlags()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:acceptsTheCommonErrorPresentationWithThreeExplicitFalseLeakFlags()]
+display-name: acceptsTheCommonErrorPresentationWithThreeExplicitFalseLeakFlags()
+]]></system-out>
+</testcase>
+<testcase name="operationSetsCannotDriftAndExtraTechnicalRowsRequireTheirOwnIndependentExpectation()" classname="dev.codex.schubert.characterization.CorrelatedLogEvidenceValidatorTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.CorrelatedLogEvidenceValidatorTest]/[method:operationSetsCannotDriftAndExtraTechnicalRowsRequireTheirOwnIndependentExpectation()]
+display-name: operationSetsCannotDriftAndExtraTechnicalRowsRequireTheirOwnIndependentExpectation()
+]]></system-out>
+</testcase>
+<testcase name="rejectsASelfReportedDifferentNkEmptySearchLabel()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:rejectsASelfReportedDifferentNkEmptySearchLabel()]
+display-name: rejectsASelfReportedDifferentNkEmptySearchLabel()
+]]></system-out>
+</testcase>
+<testcase name="eachWorkFailureIsRetainedAndResourceClosedOnce()" classname="dev.codex.schubert.characterization.CharacterizationIoScopeTest" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.CharacterizationIoScopeTest]/[method:eachWorkFailureIsRetainedAndResourceClosedOnce()]
+display-name: eachWorkFailureIsRetainedAndResourceClosedOnce()
+]]></system-out>
+</testcase>
+<testcase name="strengthenedGateContractAcceptsTwoCompleteRepeatableRuns()" classname="dev.codex.schubert.characterization.GateContractTest" time="0.009">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateContractTest]/[method:strengthenedGateContractAcceptsTwoCompleteRepeatableRuns()]
+display-name: strengthenedGateContractAcceptsTwoCompleteRepeatableRuns()
+]]></system-out>
+</testcase>
+<testcase name="rejectsRepeatedCaseDefinitionEvenWhenTwentyFourCasesStillCompare()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.009">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:rejectsRepeatedCaseDefinitionEvenWhenTwentyFourCasesStillCompare()]
+display-name: rejectsRepeatedCaseDefinitionEvenWhenTwentyFourCasesStillCompare()
+]]></system-out>
+</testcase>
+<testcase name="rejectsAnIdenticalPositiveLeakEvenWithoutAChangedField()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:rejectsAnIdenticalPositiveLeakEvenWithoutAChangedField()]
+display-name: rejectsAnIdenticalPositiveLeakEvenWithoutAChangedField()
+]]></system-out>
+</testcase>
+<testcase name="requiresAnExplicitGameChangeClaim()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.008">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:requiresAnExplicitGameChangeClaim()]
+display-name: requiresAnExplicitGameChangeClaim()
+]]></system-out>
+</testcase>
+<testcase name="invalidOrMissingCurrentCountIsUnknownAndNeverAZeroOrCoercedValue()" classname="dev.codex.schubert.characterization.GateMetricsCountTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateMetricsCountTest]/[method:invalidOrMissingCurrentCountIsUnknownAndNeverAZeroOrCoercedValue()]
+display-name: invalidOrMissingCurrentCountIsUnknownAndNeverAZeroOrCoercedValue()
+]]></system-out>
+</testcase>
+<testcase name="rejectsStringCountEvenWhenItsCharactersMatchTheApprovedNumber()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:rejectsStringCountEvenWhenItsCharactersMatchTheApprovedNumber()]
+display-name: rejectsStringCountEvenWhenItsCharactersMatchTheApprovedNumber()
+]]></system-out>
+</testcase>
+<testcase name="rejectsAlteredBaselineManifestTreeAndCommit()" classname="dev.codex.schubert.characterization.GateContractValidatorNegativeTest" time="0.022">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateContractValidatorNegativeTest]/[method:rejectsAlteredBaselineManifestTreeAndCommit()]
+display-name: rejectsAlteredBaselineManifestTreeAndCommit()
+]]></system-out>
+</testcase>
+<testcase name="rejectsRepeatedDifferenceDefinitionEvenWhenSixteenRulesStillMatch()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.01">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:rejectsRepeatedDifferenceDefinitionEvenWhenSixteenRulesStillMatch()]
+display-name: rejectsRepeatedDifferenceDefinitionEvenWhenSixteenRulesStillMatch()
+]]></system-out>
+</testcase>
+<testcase name="refusesTheGameChangeClaimAtAnotherField()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.009">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:refusesTheGameChangeClaimAtAnotherField()]
+display-name: refusesTheGameChangeClaimAtAnotherField()
+]]></system-out>
+</testcase>
+<testcase name="rejectsNonEmptyCompositeReportsAndMissingMobileScreenshot()" classname="dev.codex.schubert.characterization.GateContractValidatorNegativeTest" time="0.013">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateContractValidatorNegativeTest]/[method:rejectsNonEmptyCompositeReportsAndMissingMobileScreenshot()]
+display-name: rejectsNonEmptyCompositeReportsAndMissingMobileScreenshot()
+]]></system-out>
+</testcase>
+<testcase name="completeSyntheticTreeAcceptsIndependentAggregateAndOwnsImmutableReports()" classname="dev.codex.schubert.characterization.GateSyntheticRunPortTest" time="0.031">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateSyntheticRunPortTest]/[method:completeSyntheticTreeAcceptsIndependentAggregateAndOwnsImmutableReports()]
+display-name: completeSyntheticTreeAcceptsIndependentAggregateAndOwnsImmutableReports()
+]]></system-out>
+</testcase>
+<testcase name="rejectsIncompleteRequirementMatrix()" classname="dev.codex.schubert.characterization.GateContractValidatorNegativeTest" time="0.015">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateContractValidatorNegativeTest]/[method:rejectsIncompleteRequirementMatrix()]
+display-name: rejectsIncompleteRequirementMatrix()
+]]></system-out>
+</testcase>
+<testcase name="catalogRejectsDuplicateMalformedUnknownAndShortIdsAndWrongModes()" classname="dev.codex.schubert.characterization.GateDefinitionDocumentsTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateDefinitionDocumentsTest]/[method:catalogRejectsDuplicateMalformedUnknownAndShortIdsAndWrongModes()]
+display-name: catalogRejectsDuplicateMalformedUnknownAndShortIdsAndWrongModes()
+]]></system-out>
+</testcase>
+<testcase name="qa054log001ApprovedPairsAndMenuWitnessesPassWithoutMutatingEvidence()" classname="dev.codex.schubert.characterization.CorrelatedMenuActionContractTest" time="0.01">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.CorrelatedMenuActionContractTest]/[method:qa054log001ApprovedPairsAndMenuWitnessesPassWithoutMutatingEvidence()]
+display-name: qa054log001ApprovedPairsAndMenuWitnessesPassWithoutMutatingEvidence()
+]]></system-out>
+</testcase>
+<testcase name="fullByteScanIncludesLargeFilesBoundariesPrefixesEmptyAndIo(Path)" classname="dev.codex.schubert.characterization.GateContractTest" time="0.218">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateContractTest]/[method:fullByteScanIncludesLargeFilesBoundariesPrefixesEmptyAndIo(java.nio.file.Path)]
+display-name: fullByteScanIncludesLargeFilesBoundariesPrefixesEmptyAndIo(Path)
+]]></system-out>
+</testcase>
+<testcase name="differenceAllowlistIsCompleteUniqueAndNarrow()" classname="dev.codex.schubert.characterization.GateContractTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateContractTest]/[method:differenceAllowlistIsCompleteUniqueAndNarrow()]
+display-name: differenceAllowlistIsCompleteUniqueAndNarrow()
+]]></system-out>
+</testcase>
+<testcase name="rejectsCacheObservationForADifferentField()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.007">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:rejectsCacheObservationForADifferentField()]
+display-name: rejectsCacheObservationForADifferentField()
+]]></system-out>
+</testcase>
+<testcase name="secretScanHandlesCredentialSessionMissingLargeAndBinaryInputs()" classname="dev.codex.schubert.characterization.GateCliTest" time="0.076">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateCliTest]/[method:secretScanHandlesCredentialSessionMissingLargeAndBinaryInputs()]
+display-name: secretScanHandlesCredentialSessionMissingLargeAndBinaryInputs()
+]]></system-out>
+</testcase>
+<testcase name="rejectsNullMissingAndWrongInputTypesWithoutNpe()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.009">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:rejectsNullMissingAndWrongInputTypesWithoutNpe()]
+display-name: rejectsNullMissingAndWrongInputTypesWithoutNpe()
+]]></system-out>
+</testcase>
+<testcase name="rejectsEveryPositiveLeakOnEachSide()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.026">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:rejectsEveryPositiveLeakOnEachSide()]
+display-name: rejectsEveryPositiveLeakOnEachSide()
+]]></system-out>
+</testcase>
+<testcase name="nestedSameOutputIsRejectedWithoutReleasingOuterClaim()" classname="dev.codex.schubert.characterization.GateOutputFailureContractTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateOutputFailureContractTest]/[method:nestedSameOutputIsRejectedWithoutReleasingOuterClaim()]
+display-name: nestedSameOutputIsRejectedWithoutReleasingOuterClaim()
+]]></system-out>
+</testcase>
+<testcase name="requiresTheOldestSessionsObservedRedirect()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.009">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:requiresTheOldestSessionsObservedRedirect()]
+display-name: requiresTheOldestSessionsObservedRedirect()
+]]></system-out>
+</testcase>
+<testcase name="requiresAnExplicitEmptySearchObservation()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:requiresAnExplicitEmptySearchObservation()]
+display-name: requiresAnExplicitEmptySearchObservation()
+]]></system-out>
+</testcase>
+<testcase name="acceptsActualBaselineCommitAndRejectsMissingBaselineDirectories()" classname="dev.codex.schubert.characterization.GateContractValidatorNegativeTest" time="0.032">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateContractValidatorNegativeTest]/[method:acceptsActualBaselineCommitAndRejectsMissingBaselineDirectories()]
+display-name: acceptsActualBaselineCommitAndRejectsMissingBaselineDirectories()
+]]></system-out>
+</testcase>
+<testcase name="rejectsConsistentlyInvalidNewResponseBytesAcrossBothSidesAndAllStages()" classname="dev.codex.schubert.characterization.CorrelatedLogHttpNumberTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.CorrelatedLogHttpNumberTest]/[method:rejectsConsistentlyInvalidNewResponseBytesAcrossBothSidesAndAllStages()]
+display-name: rejectsConsistentlyInvalidNewResponseBytesAcrossBothSidesAndAllStages()
+]]></system-out>
+</testcase>
+<testcase name="lexicalArtifactNamesRejectNullAndNamelessPathsBeforeDereference()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:lexicalArtifactNamesRejectNullAndNamelessPathsBeforeDereference()]
+display-name: lexicalArtifactNamesRejectNullAndNamelessPathsBeforeDereference()
+]]></system-out>
+</testcase>
+<testcase name="qa054log002MenuNeedsExactlyOneLocalAndOutboxWitnessEach()" classname="dev.codex.schubert.characterization.CorrelatedMenuActionContractTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.CorrelatedMenuActionContractTest]/[method:qa054log002MenuNeedsExactlyOneLocalAndOutboxWitnessEach()]
+display-name: qa054log002MenuNeedsExactlyOneLocalAndOutboxWitnessEach()
+]]></system-out>
+</testcase>
+<testcase name="mainRejectsMissingUnknownAndIncompleteCommands()" classname="dev.codex.schubert.characterization.GateCliTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateCliTest]/[method:mainRejectsMissingUnknownAndIncompleteCommands()]
+display-name: mainRejectsMissingUnknownAndIncompleteCommands()
+]]></system-out>
+</testcase>
+<testcase name="expectedBaselineContainsAllStaticCounts()" classname="dev.codex.schubert.characterization.GateContractTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateContractTest]/[method:expectedBaselineContainsAllStaticCounts()]
+display-name: expectedBaselineContainsAllStaticCounts()
+]]></system-out>
+</testcase>
+<testcase name="reviewMetadataRequiresBooleanChecksAndTypedRoleWithoutGrantingApproval()" classname="dev.codex.schubert.characterization.GateEvidenceDocumentsTest" time="0.012">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateEvidenceDocumentsTest]/[method:reviewMetadataRequiresBooleanChecksAndTypedRoleWithoutGrantingApproval()]
+display-name: reviewMetadataRequiresBooleanChecksAndTypedRoleWithoutGrantingApproval()
+]]></system-out>
+</testcase>
+<testcase name="hashRejectsNullSourceBeforeIoWithFixedDiagnostic()" classname="dev.codex.schubert.characterization.GateCliTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateCliTest]/[method:hashRejectsNullSourceBeforeIoWithFixedDiagnostic()]
+display-name: hashRejectsNullSourceBeforeIoWithFixedDiagnostic()
+]]></system-out>
+</testcase>
+<testcase name="rejectsMissingOrUncorrelatedL01ProjectionEvenWhenDifClaimsAreValid()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.085">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:rejectsMissingOrUncorrelatedL01ProjectionEvenWhenDifClaimsAreValid()]
+display-name: rejectsMissingOrUncorrelatedL01ProjectionEvenWhenDifClaimsAreValid()
+]]></system-out>
+</testcase>
+<testcase name="strictVersionPredicateNeverCoercesMissingFractionalTextOrOversizedValues()" classname="dev.codex.schubert.characterization.CorrelatedLogEvidenceValidatorTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.CorrelatedLogEvidenceValidatorTest]/[method:strictVersionPredicateNeverCoercesMissingFractionalTextOrOversizedValues()]
+display-name: strictVersionPredicateNeverCoercesMissingFractionalTextOrOversizedValues()
+]]></system-out>
+</testcase>
+<testcase name="completeL01MenuActionAndRequestNeedOneHttpRequestIdentity()" classname="dev.codex.schubert.characterization.CorrelatedMenuActionContractTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.CorrelatedMenuActionContractTest]/[method:completeL01MenuActionAndRequestNeedOneHttpRequestIdentity()]
+display-name: completeL01MenuActionAndRequestNeedOneHttpRequestIdentity()
+]]></system-out>
+</testcase>
+<testcase name="validIntegralRepresentationsStayEquivalentAndDifferentIntegersFail()" classname="dev.codex.schubert.characterization.GateDefinitionNumericTest" time="0.033">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateDefinitionNumericTest]/[method:validIntegralRepresentationsStayEquivalentAndDifferentIntegersFail()]
+display-name: validIntegralRepresentationsStayEquivalentAndDifferentIntegersFail()
+]]></system-out>
+</testcase>
+<testcase name="acceptsTwentyFourPassCasesAndExactlySixteenApprovedDifferences()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.009">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:acceptsTwentyFourPassCasesAndExactlySixteenApprovedDifferences()]
+display-name: acceptsTwentyFourPassCasesAndExactlySixteenApprovedDifferences()
+]]></system-out>
+</testcase>
+<testcase name="missingAndNullDocumentsOrFieldsNeverBecomeZeroDefaults()" classname="dev.codex.schubert.characterization.BaselineNumericMetadataTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.BaselineNumericMetadataTest]/[method:missingAndNullDocumentsOrFieldsNeverBecomeZeroDefaults()]
+display-name: missingAndNullDocumentsOrFieldsNeverBecomeZeroDefaults()
+]]></system-out>
+</testcase>
+<testcase name="schemaAndBrowserIntegersRejectTextFractionAndOverflow()" classname="dev.codex.schubert.characterization.GateDefinitionNumericTest" time="0.022">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateDefinitionNumericTest]/[method:schemaAndBrowserIntegersRejectTextFractionAndOverflow()]
+display-name: schemaAndBrowserIntegersRejectTextFractionAndOverflow()
+]]></system-out>
+</testcase>
+<testcase name="rejectsAnErrorStyleClaimThatTriesToCoverAChangedLeakFlag()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.007">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:rejectsAnErrorStyleClaimThatTriesToCoverAChangedLeakFlag()]
+display-name: rejectsAnErrorStyleClaimThatTriesToCoverAChangedLeakFlag()
+]]></system-out>
+</testcase>
+<testcase name="refusesASelfReportedNewInlineChangeHandler()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.007">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:refusesASelfReportedNewInlineChangeHandler()]
+display-name: refusesASelfReportedNewInlineChangeHandler()
+]]></system-out>
+</testcase>
+<testcase name="leavesAnAdditionalSessionLossUnregistered()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.008">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:leavesAnAdditionalSessionLossUnregistered()]
+display-name: leavesAnAdditionalSessionLossUnregistered()
+]]></system-out>
+</testcase>
+<testcase name="qa054log003MenuKeepsHttpContractAndApiSearchNeverUsesWebWitness()" classname="dev.codex.schubert.characterization.CorrelatedMenuActionContractTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.CorrelatedMenuActionContractTest]/[method:qa054log003MenuKeepsHttpContractAndApiSearchNeverUsesWebWitness()]
+display-name: qa054log003MenuKeepsHttpContractAndApiSearchNeverUsesWebWitness()
+]]></system-out>
+</testcase>
+<testcase name="equalMalformedExpectedAndObservedNumbersNeverValidateThroughDefaultZero()" classname="dev.codex.schubert.characterization.GateDefinitionNumericTest" time="0.011">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateDefinitionNumericTest]/[method:equalMalformedExpectedAndObservedNumbersNeverValidateThroughDefaultZero()]
+display-name: equalMalformedExpectedAndObservedNumbersNeverValidateThroughDefaultZero()
+]]></system-out>
+</testcase>
+<testcase name="secretScannerHandlesBinaryEvidenceWithoutUtf8Decoding(Path)" classname="dev.codex.schubert.characterization.GateContractTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateContractTest]/[method:secretScannerHandlesBinaryEvidenceWithoutUtf8Decoding(java.nio.file.Path)]
+display-name: secretScannerHandlesBinaryEvidenceWithoutUtf8Decoding(Path)
+]]></system-out>
+</testcase>
+<testcase name="expectedPayloadsUseClosedSafeFieldsAndExplicitRequestHttpValues()" classname="dev.codex.schubert.characterization.CorrelatedLogEvidenceValidatorTest" time="0.014">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.CorrelatedLogEvidenceValidatorTest]/[method:expectedPayloadsUseClosedSafeFieldsAndExplicitRequestHttpValues()]
+display-name: expectedPayloadsUseClosedSafeFieldsAndExplicitRequestHttpValues()
+]]></system-out>
+</testcase>
+<testcase name="promotionRejectsNullAndUnnamedSourceBeforeAnyIo()" classname="dev.codex.schubert.characterization.GateCliTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateCliTest]/[method:promotionRejectsNullAndUnnamedSourceBeforeAnyIo()]
+display-name: PT-CHR-PATH-003 unnamed source run rejected before IO
+]]></system-out>
+</testcase>
+<testcase name="primitiveRecordConstructorEstablishesRangeInvariants()" classname="dev.codex.schubert.characterization.BaselineNumericMetadataTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.BaselineNumericMetadataTest]/[method:primitiveRecordConstructorEstablishesRangeInvariants()]
+display-name: primitiveRecordConstructorEstablishesRangeInvariants()
+]]></system-out>
+</testcase>
+<testcase name="contractChangeAndInvalidClaimCannotHideUnregisteredDrift()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.015">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:contractChangeAndInvalidClaimCannotHideUnregisteredDrift()]
+display-name: contractChangeAndInvalidClaimCannotHideUnregisteredDrift()
+]]></system-out>
+</testcase>
+<testcase name="rejectsMissingScreenshotDirectoriesAndOptionalReports()" classname="dev.codex.schubert.characterization.GateContractValidatorNegativeTest" time="0.012">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateContractValidatorNegativeTest]/[method:rejectsMissingScreenshotDirectoriesAndOptionalReports()]
+display-name: rejectsMissingScreenshotDirectoriesAndOptionalReports()
+]]></system-out>
+</testcase>
+<testcase name="rejectsEveryJavaNullBoundaryAndReportsJsonNullWithoutNpe()" classname="dev.codex.schubert.characterization.GateEvidenceDocumentsTest" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateEvidenceDocumentsTest]/[method:rejectsEveryJavaNullBoundaryAndReportsJsonNullWithoutNpe()]
+display-name: rejectsEveryJavaNullBoundaryAndReportsJsonNullWithoutNpe()
+]]></system-out>
+</testcase>
+<testcase name="identicalSecondaryIsNotSelfSuppressedOrReplaced()" classname="dev.codex.schubert.characterization.CharacterizationIoScopeTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.CharacterizationIoScopeTest]/[method:identicalSecondaryIsNotSelfSuppressedOrReplaced()]
+display-name: identicalSecondaryIsNotSelfSuppressedOrReplaced()
+]]></system-out>
+</testcase>
+<testcase name="preflightValidatesFilesPermissionsStorageNetworkAndPorts()" classname="dev.codex.schubert.characterization.GateCliTest" time="0.016">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateCliTest]/[method:preflightValidatesFilesPermissionsStorageNetworkAndPorts()]
+display-name: preflightValidatesFilesPermissionsStorageNetworkAndPorts()
+]]></system-out>
+</testcase>
+<testcase name="baselineMetadataAndHashRejectNullBeforeIoWithFixedDiagnostics()" classname="dev.codex.schubert.characterization.GateContractTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateContractTest]/[method:baselineMetadataAndHashRejectNullBeforeIoWithFixedDiagnostics()]
+display-name: baselineMetadataAndHashRejectNullBeforeIoWithFixedDiagnostics()
+]]></system-out>
+</testcase>
+<testcase name="staticToolFactoriesRejectReflectiveConstructionAndRestoreAccess()" classname="dev.codex.schubert.characterization.CharacterizationIoScopeTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.CharacterizationIoScopeTest]/[method:staticToolFactoriesRejectReflectiveConstructionAndRestoreAccess()]
+display-name: staticToolFactoriesRejectReflectiveConstructionAndRestoreAccess()
+]]></system-out>
+</testcase>
+<testcase name="rejectsTheOtherApprovedHeaderSelectorAtTheStatusPointer()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.007">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:rejectsTheOtherApprovedHeaderSelectorAtTheStatusPointer()]
+display-name: rejectsTheOtherApprovedHeaderSelectorAtTheStatusPointer()
+]]></system-out>
+</testcase>
+<testcase name="concurrentSeparateTreesNeverShareFailuresOrInputMutation()" classname="dev.codex.schubert.characterization.GateSyntheticRunPortTest" time="0.073">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateSyntheticRunPortTest]/[method:concurrentSeparateTreesNeverShareFailuresOrInputMutation()]
+display-name: concurrentSeparateTreesNeverShareFailuresOrInputMutation()
+]]></system-out>
+</testcase>
+<testcase name="sourceAndInventoryCountsRejectCoercionDefaultsOverflowAndNegativeValues()" classname="dev.codex.schubert.characterization.GateEvidenceDocumentsTest" time="0.055">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateEvidenceDocumentsTest]/[method:sourceAndInventoryCountsRejectCoercionDefaultsOverflowAndNegativeValues()]
+display-name: sourceAndInventoryCountsRejectCoercionDefaultsOverflowAndNegativeValues()
+]]></system-out>
+</testcase>
+<testcase name="bothReadersMatchPublicVectorsAndTheIndependentOverBufferVector()" classname="dev.codex.schubert.characterization.CharacterizationHashTest" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.CharacterizationHashTest]/[method:bothReadersMatchPublicVectorsAndTheIndependentOverBufferVector()]
+display-name: bothReadersMatchPublicVectorsAndTheIndependentOverBufferVector()
+]]></system-out>
+</testcase>
+<testcase name="concurrentManifestFramesNeverShareMutationsOrFailures()" classname="dev.codex.schubert.characterization.GateBaselineMetadataTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateBaselineMetadataTest]/[method:concurrentManifestFramesNeverShareMutationsOrFailures()]
+display-name: concurrentManifestFramesNeverShareMutationsOrFailures()
+]]></system-out>
+</testcase>
+<testcase name="caddyFixturePreservesAllForwardedRequestHeaders()" classname="dev.codex.schubert.characterization.GateContractTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateContractTest]/[method:caddyFixturePreservesAllForwardedRequestHeaders()]
+display-name: caddyFixturePreservesAllForwardedRequestHeaders()
+]]></system-out>
+</testcase>
+<testcase name="everyBrowserConstraintHasAnIndependentWrongValueIncludingSecondaryDimensions()" classname="dev.codex.schubert.characterization.GateDefinitionDocumentsTest" time="0.009">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateDefinitionDocumentsTest]/[method:everyBrowserConstraintHasAnIndependentWrongValueIncludingSecondaryDimensions()]
+display-name: everyBrowserConstraintHasAnIndependentWrongValueIncludingSecondaryDimensions()
+]]></system-out>
+</testcase>
+<testcase name="jsonWriterRejectsParentlessOutputWithoutNpe()" classname="dev.codex.schubert.characterization.GateCliTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateCliTest]/[method:jsonWriterRejectsParentlessOutputWithoutNpe()]
+display-name: PT-CHR-PATH-002 parentless output rejected before temporary path
+]]></system-out>
+</testcase>
+<testcase name="requirementsRejectMissingCoreKeysDuplicatesUnknownAndUnboundSupplementals()" classname="dev.codex.schubert.characterization.GateDefinitionDocumentsTest" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateDefinitionDocumentsTest]/[method:requirementsRejectMissingCoreKeysDuplicatesUnknownAndUnboundSupplementals()]
+display-name: requirementsRejectMissingCoreKeysDuplicatesUnknownAndUnboundSupplementals()
+]]></system-out>
+</testcase>
+<testcase name="environmentAndTargetUseExactMarkersAndIntegerBrowserRevision()" classname="dev.codex.schubert.characterization.GateBaselineMetadataTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateBaselineMetadataTest]/[method:environmentAndTargetUseExactMarkersAndIntegerBrowserRevision()]
+display-name: environmentAndTargetUseExactMarkersAndIntegerBrowserRevision()
+]]></system-out>
+</testcase>
+<testcase name="fileInventoryUtilitiesHandleMissingFilteredNestedAndLinkedFiles()" classname="dev.codex.schubert.characterization.GateCliTest" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateCliTest]/[method:fileInventoryUtilitiesHandleMissingFilteredNestedAndLinkedFiles()]
+display-name: fileInventoryUtilitiesHandleMissingFilteredNestedAndLinkedFiles()
+]]></system-out>
+</testcase>
+<testcase name="rejectsMalformedObservationEnvelope()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.125">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:rejectsMalformedObservationEnvelope()]
+display-name: rejectsMalformedObservationEnvelope()
+]]></system-out>
+</testcase>
+<testcase name="nullAndUnavailableInputsNeverBecomeAnEmptyOrSuccessfulDigest()" classname="dev.codex.schubert.characterization.CharacterizationHashTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.CharacterizationHashTest]/[method:nullAndUnavailableInputsNeverBecomeAnEmptyOrSuccessfulDigest()]
+display-name: nullAndUnavailableInputsNeverBecomeAnEmptyOrSuccessfulDigest()
+]]></system-out>
+</testcase>
+<testcase name="sourceAndDocumentHashesMustBeCanonicalMatchingText()" classname="dev.codex.schubert.characterization.GateBaselineMetadataTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateBaselineMetadataTest]/[method:sourceAndDocumentHashesMustBeCanonicalMatchingText()]
+display-name: sourceAndDocumentHashesMustBeCanonicalMatchingText()
+]]></system-out>
+</testcase>
+<testcase name="concurrentIndependentSnapshotsNeverShareUnknownValues()" classname="dev.codex.schubert.characterization.GateMetricsCountTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateMetricsCountTest]/[method:concurrentIndependentSnapshotsNeverShareUnknownValues()]
+display-name: concurrentIndependentSnapshotsNeverShareUnknownValues()
+]]></system-out>
+</testcase>
+<testcase name="rejectsCurrentLoginTitleOutsideTheApprovedPair()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:rejectsCurrentLoginTitleOutsideTheApprovedPair()]
+display-name: rejectsCurrentLoginTitleOutsideTheApprovedPair()
+]]></system-out>
+</testcase>
+<testcase name="cleanupFailureHasExistingFinallyPrecedenceAndClaimIsStillReleased()" classname="dev.codex.schubert.characterization.GateOutputFailureContractTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateOutputFailureContractTest]/[method:cleanupFailureHasExistingFinallyPrecedenceAndClaimIsStillReleased()]
+display-name: cleanupFailureHasExistingFinallyPrecedenceAndClaimIsStillReleased()
+]]></system-out>
+</testcase>
+<testcase name="verifySourceAcceptsIndependentInventoryAndRejectsDriftAndSymlink()" classname="dev.codex.schubert.characterization.GateCliTest" time="0.017">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateCliTest]/[method:verifySourceAcceptsIndependentInventoryAndRejectsDriftAndSymlink()]
+display-name: verifySourceAcceptsIndependentInventoryAndRejectsDriftAndSymlink()
+]]></system-out>
+</testcase>
+<testcase name="acceptsAnAbsentInlineAttributeWithTheDisabledScriptSubmitButton()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.007">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:acceptsAnAbsentInlineAttributeWithTheDisabledScriptSubmitButton()]
+display-name: acceptsAnAbsentInlineAttributeWithTheDisabledScriptSubmitButton()
+]]></system-out>
+</testcase>
+<testcase name="rejectsAnEmptySearchClaimOnAnUnrelatedField()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.007">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:rejectsAnEmptySearchClaimOnAnUnrelatedField()]
+display-name: rejectsAnEmptySearchClaimOnAnUnrelatedField()
+]]></system-out>
+</testcase>
+<testcase name="masterCountsAndBytesRejectCoercionDefaultsAndOverflowOnBothSides()" classname="dev.codex.schubert.characterization.GateBaselineMetadataTest" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateBaselineMetadataTest]/[method:masterCountsAndBytesRejectCoercionDefaultsAndOverflowOnBothSides()]
+display-name: masterCountsAndBytesRejectCoercionDefaultsAndOverflowOnBothSides()
+]]></system-out>
+</testcase>
+<testcase name="expectedBrowserRevisionRejectsMissingTypeAndIntegerOverflow()" classname="dev.codex.schubert.characterization.GateDefinitionDocumentsTest" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateDefinitionDocumentsTest]/[method:expectedBrowserRevisionRejectsMissingTypeAndIntegerOverflow()]
+display-name: expectedBrowserRevisionRejectsMissingTypeAndIntegerOverflow()
+]]></system-out>
+</testcase>
+<testcase name="rejectsAContentRangeWithTheWrongVideoSize()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.008">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:rejectsAContentRangeWithTheWrongVideoSize()]
+display-name: rejectsAContentRangeWithTheWrongVideoSize()
+]]></system-out>
+</testcase>
+<testcase name="manifestCardinalitiesMustBeTypedExactIntegers()" classname="dev.codex.schubert.characterization.GateBaselineMetadataTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateBaselineMetadataTest]/[method:manifestCardinalitiesMustBeTypedExactIntegers()]
+display-name: manifestCardinalitiesMustBeTypedExactIntegers()
+]]></system-out>
+</testcase>
+<testcase name="acceptsTheExactEmptySearchMessageAtItsVisibleField()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.012">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:acceptsTheExactEmptySearchMessageAtItsVisibleField()]
+display-name: acceptsTheExactEmptySearchMessageAtItsVisibleField()
+]]></system-out>
+</testcase>
+<testcase name="rejectsNonIntegralOrOversizedObservationVersions()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.021">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:rejectsNonIntegralOrOversizedObservationVersions()]
+display-name: rejectsNonIntegralOrOversizedObservationVersions()
+]]></system-out>
+</testcase>
+<testcase name="requiresTheSecondMediaCaseToReportItsOwnRangeStatus()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.007">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:requiresTheSecondMediaCaseToReportItsOwnRangeStatus()]
+display-name: requiresTheSecondMediaCaseToReportItsOwnRangeStatus()
+]]></system-out>
+</testcase>
+<testcase name="comparisonCountsAndEmptyDifferenceCollectionsMustBeStrict()" classname="dev.codex.schubert.characterization.GateEvidenceDocumentsTest" time="0.007">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateEvidenceDocumentsTest]/[method:comparisonCountsAndEmptyDifferenceCollectionsMustBeStrict()]
+display-name: comparisonCountsAndEmptyDifferenceCollectionsMustBeStrict()
+]]></system-out>
+</testcase>
+<testcase name="acceptsIndependentLiteralMetadataAndKeepsInputsAndResultsImmutable()" classname="dev.codex.schubert.characterization.GateEvidenceDocumentsTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateEvidenceDocumentsTest]/[method:acceptsIndependentLiteralMetadataAndKeepsInputsAndResultsImmutable()]
+display-name: acceptsIndependentLiteralMetadataAndKeepsInputsAndResultsImmutable()
+]]></system-out>
+</testcase>
+<testcase name="validationResultValueIncludesBothFailuresAndMetrics()" classname="dev.codex.schubert.characterization.CommonValueContractTest" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.CommonValueContractTest]/[method:validationResultValueIncludesBothFailuresAndMetrics()]
+display-name: validationResultValueIncludesBothFailuresAndMetrics()
+]]></system-out>
+</testcase>
+<testcase name="atomicJsonWriterRejectsConcurrentUseOfTheSameOutput()" classname="dev.codex.schubert.characterization.GateCliTest" time="0.012">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateCliTest]/[method:atomicJsonWriterRejectsConcurrentUseOfTheSameOutput()]
+display-name: atomicJsonWriterRejectsConcurrentUseOfTheSameOutput()
+]]></system-out>
+</testcase>
+<testcase name="rejectsUnknownCatalogGroupAndSecondaryViewportMismatches()" classname="dev.codex.schubert.characterization.GateContractValidatorNegativeTest" time="0.014">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateContractValidatorNegativeTest]/[method:rejectsUnknownCatalogGroupAndSecondaryViewportMismatches()]
+display-name: rejectsUnknownCatalogGroupAndSecondaryViewportMismatches()
+]]></system-out>
+</testcase>
+<testcase name="nullPortIsRejectedBeforeAnyOutputClaim()" classname="dev.codex.schubert.characterization.GateOutputFailureContractTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateOutputFailureContractTest]/[method:nullPortIsRejectedBeforeAnyOutputClaim()]
+display-name: nullPortIsRejectedBeforeAnyOutputClaim()
+]]></system-out>
+</testcase>
+<testcase name="leavesNonBrandTitleChangeUnregistered()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.012">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:leavesNonBrandTitleChangeUnregistered()]
+display-name: leavesNonBrandTitleChangeUnregistered()
+]]></system-out>
+</testcase>
+<testcase name="rejectsComparisonSourceInventoryPreflightAndReviewFailures()" classname="dev.codex.schubert.characterization.GateContractValidatorNegativeTest" time="0.021">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateContractValidatorNegativeTest]/[method:rejectsComparisonSourceInventoryPreflightAndReviewFailures()]
+display-name: rejectsComparisonSourceInventoryPreflightAndReviewFailures()
+]]></system-out>
+</testcase>
+<testcase name="qa054log004OnlyExactActionCategoryAliasesAreApproved()" classname="dev.codex.schubert.characterization.CorrelatedMenuActionContractTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.CorrelatedMenuActionContractTest]/[method:qa054log004OnlyExactActionCategoryAliasesAreApproved()]
+display-name: qa054log004OnlyExactActionCategoryAliasesAreApproved()
+]]></system-out>
+</testcase>
+<testcase name="statusMarkersAndRepeatInventoryCannotSubstituteDifferentEvidence()" classname="dev.codex.schubert.characterization.GateEvidenceDocumentsTest" time="0.016">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateEvidenceDocumentsTest]/[method:statusMarkersAndRepeatInventoryCannotSubstituteDifferentEvidence()]
+display-name: statusMarkersAndRepeatInventoryCannotSubstituteDifferentEvidence()
+]]></system-out>
+</testcase>
+<testcase name="requiresSearchTitleEvidenceEvenWithoutAnyUnregisteredDrift()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.007">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:requiresSearchTitleEvidenceEvenWithoutAnyUnregisteredDrift()]
+display-name: requiresSearchTitleEvidenceEvenWithoutAnyUnregisteredDrift()
+]]></system-out>
+</testcase>
+<testcase name="inclusiveHttpBoundariesAndOptionalFieldsArePreservedExactly()" classname="dev.codex.schubert.characterization.CorrelatedLogEvidenceValidatorTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.CorrelatedLogEvidenceValidatorTest]/[method:inclusiveHttpBoundariesAndOptionalFieldsArePreservedExactly()]
+display-name: inclusiveHttpBoundariesAndOptionalFieldsArePreservedExactly()
+]]></system-out>
+</testcase>
+<testcase name="concurrentIndependentValidAndInvalidInputsPreserveTheirOwnResults()" classname="dev.codex.schubert.characterization.BaselineNumericMetadataTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.BaselineNumericMetadataTest]/[method:concurrentIndependentValidAndInvalidInputsPreserveTheirOwnResults()]
+display-name: concurrentIndependentValidAndInvalidInputsPreserveTheirOwnResults()
+]]></system-out>
+</testcase>
+<testcase name="completeL01DoesNotAcceptBothSidesOmittingTheMenuAction()" classname="dev.codex.schubert.characterization.CorrelatedMenuActionContractTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.CorrelatedMenuActionContractTest]/[method:completeL01DoesNotAcceptBothSidesOmittingTheMenuAction()]
+display-name: completeL01DoesNotAcceptBothSidesOmittingTheMenuAction()
+]]></system-out>
+</testcase>
+<testcase name="qa054log006TwoActionsInBothExpectationsCannotHideDuplicateSuccess()" classname="dev.codex.schubert.characterization.CorrelatedMenuActionContractTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.CorrelatedMenuActionContractTest]/[method:qa054log006TwoActionsInBothExpectationsCannotHideDuplicateSuccess()]
+display-name: qa054log006TwoActionsInBothExpectationsCannotHideDuplicateSuccess()
+]]></system-out>
+</testcase>
+<testcase name="completeL01ChecksCompanionRequestCountRouteMethodAndStatus()" classname="dev.codex.schubert.characterization.CorrelatedMenuActionContractTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.CorrelatedMenuActionContractTest]/[method:completeL01ChecksCompanionRequestCountRouteMethodAndStatus()]
+display-name: completeL01ChecksCompanionRequestCountRouteMethodAndStatus()
+]]></system-out>
+</testcase>
+<testcase name="envelopeVersionAndIndependentOracleBindingAreRequired()" classname="dev.codex.schubert.characterization.CorrelatedLogEvidenceValidatorTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.CorrelatedLogEvidenceValidatorTest]/[method:envelopeVersionAndIndependentOracleBindingAreRequired()]
+display-name: envelopeVersionAndIndependentOracleBindingAreRequired()
+]]></system-out>
+</testcase>
+<testcase name="javaNullBoundariesFailWithFixedSignalAndJsonNullNeverCausesNpe()" classname="dev.codex.schubert.characterization.GateBaselineMetadataTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateBaselineMetadataTest]/[method:javaNullBoundariesFailWithFixedSignalAndJsonNullNeverCausesNpe()]
+display-name: javaNullBoundariesFailWithFixedSignalAndJsonNullNeverCausesNpe()
+]]></system-out>
+</testcase>
+<testcase name="baselinePromotionIsImmutableCommitBoundAndSymlinkSafe()" classname="dev.codex.schubert.characterization.GateCliTest" time="0.011">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateCliTest]/[method:baselinePromotionIsImmutableCommitBoundAndSymlinkSafe()]
+display-name: baselinePromotionIsImmutableCommitBoundAndSymlinkSafe()
+]]></system-out>
+</testcase>
+<testcase name="currentAndNkUseSameCatalogWithOnlyDeclaredApplicabilityDifference()" classname="dev.codex.schubert.characterization.TargetAdapterTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.TargetAdapterTest]/[method:currentAndNkUseSameCatalogWithOnlyDeclaredApplicabilityDifference()]
+display-name: currentAndNkUseSameCatalogWithOnlyDeclaredApplicabilityDifference()
+]]></system-out>
+</testcase>
+<testcase name="requiresCacheObservationEvenWhenTheOldHeaderWasUnchanged()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.007">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:requiresCacheObservationEvenWhenTheOldHeaderWasUnchanged()]
+display-name: requiresCacheObservationEvenWhenTheOldHeaderWasUnchanged()
+]]></system-out>
+</testcase>
+<testcase name="adapterRejectsNullUnknownExternalAndOverwriteInputs()" classname="dev.codex.schubert.characterization.TargetAdapterTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.TargetAdapterTest]/[method:adapterRejectsNullUnknownExternalAndOverwriteInputs()]
+display-name: adapterRejectsNullUnknownExternalAndOverwriteInputs()
+]]></system-out>
+</testcase>
+<testcase name="concurrentValidAndInvalidDefinitionsRemainIndependent()" classname="dev.codex.schubert.characterization.GateDefinitionDocumentsTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateDefinitionDocumentsTest]/[method:concurrentValidAndInvalidDefinitionsRemainIndependent()]
+display-name: concurrentValidAndInvalidDefinitionsRemainIndependent()
+]]></system-out>
+</testcase>
+<testcase name="schemaDraftShapeAndItemConstraintsCannotBeWeakened()" classname="dev.codex.schubert.characterization.GateDefinitionDocumentsTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateDefinitionDocumentsTest]/[method:schemaDraftShapeAndItemConstraintsCannotBeWeakened()]
+display-name: schemaDraftShapeAndItemConstraintsCannotBeWeakened()
+]]></system-out>
+</testcase>
+<testcase name="emptyJsonInputsFailClosedWithoutNullDereference()" classname="dev.codex.schubert.characterization.ArtifactComparatorEmptyInputTest" time="0.008">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorEmptyInputTest]/[method:emptyJsonInputsFailClosedWithoutNullDereference()]
+display-name: emptyJsonInputsFailClosedWithoutNullDereference()
+]]></system-out>
+</testcase>
+<testcase name="rejectsMalformedContractSchemaCatalogAndBrowser()" classname="dev.codex.schubert.characterization.GateContractValidatorNegativeTest" time="0.02">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateContractValidatorNegativeTest]/[method:rejectsMalformedContractSchemaCatalogAndBrowser()]
+display-name: rejectsMalformedContractSchemaCatalogAndBrowser()
+]]></system-out>
+</testcase>
+<testcase name="contractCountsRejectCoercionAndKeepPinnedTwentyThreeAndTwentySeven()" classname="dev.codex.schubert.characterization.GateBaselineMetadataTest" time="0.012">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateBaselineMetadataTest]/[method:contractCountsRejectCoercionAndKeepPinnedTwentyThreeAndTwentySeven()]
+display-name: contractCountsRejectCoercionAndKeepPinnedTwentyThreeAndTwentySeven()
+]]></system-out>
+</testcase>
+<testcase name="rejectsEveryJavaNullDocumentWithFixedSignal()" classname="dev.codex.schubert.characterization.GateDefinitionDocumentsTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.GateDefinitionDocumentsTest]/[method:rejectsEveryJavaNullDocumentWithFixedSignal()]
+display-name: rejectsEveryJavaNullDocumentWithFixedSignal()
+]]></system-out>
+</testcase>
+<testcase name="qa054log007OptionalResponseBytesHaveIndependentUnsignedN12Boundaries()" classname="dev.codex.schubert.characterization.CorrelatedMenuActionContractTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.CorrelatedMenuActionContractTest]/[method:qa054log007OptionalResponseBytesHaveIndependentUnsignedN12Boundaries()]
+display-name: qa054log007OptionalResponseBytesHaveIndependentUnsignedN12Boundaries()
+]]></system-out>
+</testcase>
+<testcase name="invalidCallbacksAndAcquisitionNeverCreateAnUnownedResource()" classname="dev.codex.schubert.characterization.CharacterizationIoScopeTest" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.CharacterizationIoScopeTest]/[method:invalidCallbacksAndAcquisitionNeverCreateAnUnownedResource()]
+display-name: invalidCallbacksAndAcquisitionNeverCreateAnUnownedResource()
+]]></system-out>
+</testcase>
+<testcase name="concurrentValidAndInvalidSnapshotsKeepTheirDiagnosticsAndInputsIsolated()" classname="dev.codex.schubert.characterization.CorrelatedLogEvidenceValidatorTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.CorrelatedLogEvidenceValidatorTest]/[method:concurrentValidAndInvalidSnapshotsKeepTheirDiagnosticsAndInputsIsolated()]
+display-name: concurrentValidAndInvalidSnapshotsKeepTheirDiagnosticsAndInputsIsolated()
+]]></system-out>
+</testcase>
+<testcase name="doesNotTreatAnL01ClaimAsTheRequiredS04Observation()" classname="dev.codex.schubert.characterization.ArtifactComparatorTest" time="0.007">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.ArtifactComparatorTest]/[method:doesNotTreatAnL01ClaimAsTheRequiredS04Observation()]
+display-name: doesNotTreatAnL01ClaimAsTheRequiredS04Observation()
+]]></system-out>
+</testcase>
+<testcase name="qa054ActionPairsAreOncePerOperationAndMenuRequiresExactHttpAndWitnesses()" classname="dev.codex.schubert.characterization.CorrelatedLogEvidenceValidatorTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.characterization.CorrelatedLogEvidenceValidatorTest]/[method:qa054ActionPairsAreOncePerOperationAndMenuRequiresExactHttpAndWitnesses()]
+display-name: qa054ActionPairsAreOncePerOperationAndMenuRequiresExactHttpAndWitnesses()
+]]></system-out>
+</testcase>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]
+display-name: JUnit Jupiter
+]]></system-out>
+</testsuite>

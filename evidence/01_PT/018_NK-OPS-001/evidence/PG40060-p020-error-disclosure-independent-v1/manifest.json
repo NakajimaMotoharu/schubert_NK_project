@@ -1,0 +1,204 @@
+{
+  "actualExit": 0,
+  "source": "a75b103b840e59e1c07a63cbccd1d41ea8dad589",
+  "unit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40057-p020-error-disclosure187-v2/manifest.json",
+    "sha256": "3dd7ece7a96aa3d10f2e147e3ffe61838b8894ecf9b3238bef233fd983897658"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40059-p020-error-disclosure-static-v2/manifest.json",
+    "sha256": "9467ac3d9a2464e0d7f0f67eadcc7fe61696931287a73e0cde63ba0257fb59d2"
+  },
+  "firstUnit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40056-p020-error-disclosure187-v1/manifest.json",
+    "sha256": "f7c8b279d00b30ac42016c28394abb41eff63ac02fb2ecfe271d4ce63b16d2e9"
+  },
+  "firstStaticFailure": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40058-p020-error-disclosure-static-v1/manifest.json",
+    "sha256": "72fbddf0eb6cb7b1bb84715638c0c23ac7623a1cb1daa698c48a83e405ad3297"
+  },
+  "independentOracle": {
+    "caseId": "CHR-E01",
+    "closedFlags": {
+      "secretLeak": false,
+      "absolutePathLeak": false,
+      "exceptionClassLeak": false
+    },
+    "baseline": {
+      "path": "program/characterization/baseline/current/artifacts/CHR-E01.json",
+      "sha256": "d5864a7688d23239062bfb4b95cf94c4b3da1abf746295d66787e6232a3f0fca"
+    },
+    "design": "documents/200_UI/260_引継ぎ・監査/264_現行互換性Characterization Test仕様.md"
+  },
+  "tests": 187,
+  "suites": 20,
+  "originalTests": 182,
+  "newDefinitions": 5,
+  "firstSuccess": 187,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "testIds": {
+    "PT-CHR-DEF055": "acceptsTheCommonErrorPresentationWithThreeExplicitFalseLeakFlags",
+    "PT-CHR-DEF056": "rejectsEveryPositiveLeakOnEachSide",
+    "PT-CHR-DEF057": "rejectsAnIdenticalPositiveLeakEvenWithoutAChangedField",
+    "PT-CHR-DEF058": "rejectsMissingNullAndTextualLeakFlags",
+    "PT-CHR-DEF059": "rejectsAnErrorStyleClaimThatTriesToCoverAChangedLeakFlag"
+  },
+  "comparatorCounters": {
+    "INSTRUCTION": 1542,
+    "BRANCH": 150,
+    "LINE": 295,
+    "COMPLEXITY": 119,
+    "METHOD": 44,
+    "CLASS": 2
+  },
+  "raw": {
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38642-schema-raw-line-tool-v1/toolclasses:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+      "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+      "--line-deficits",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG40057-p020-error-disclosure187-v2/jacoco.exec",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40057-p020-error-disclosure187-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/ArtifactComparator$ComparisonResult.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40057-p020-error-disclosure187-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/ArtifactComparator.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40057-p020-error-disclosure187-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope$Open.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40057-p020-error-disclosure187-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope$Release.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40057-p020-error-disclosure187-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope$Work.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40057-p020-error-disclosure187-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40057-p020-error-disclosure187-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40057-p020-error-disclosure187-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$BaselineNumbers.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40057-p020-error-disclosure187-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$FileJsonOutput.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40057-p020-error-disclosure187-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$JsonOutput.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40057-p020-error-disclosure187-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$TreeStats.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40057-p020-error-disclosure187-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$UsableSpace.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40057-p020-error-disclosure187-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40057-p020-error-disclosure187-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateContractValidator$ValidationResult.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40057-p020-error-disclosure187-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateContractValidator.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40057-p020-error-disclosure187-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/TargetAdapter$Target.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40057-p020-error-disclosure187-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/TargetAdapter.class"
+    ],
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40060-p020-error-disclosure-independent-v1/raw.tsv",
+      "sha256": "210026ab54ca4789c6753f7d4fba19a9809b5fd19d84f700103f6e6ebf3e1c6a"
+    },
+    "actualExit": 0,
+    "noCode": [
+      "dev/codex/schubert/characterization/CharacterizationIoScope$Open",
+      "dev/codex/schubert/characterization/CharacterizationIoScope$Release",
+      "dev/codex/schubert/characterization/CharacterizationIoScope$Work",
+      "dev/codex/schubert/characterization/GateCli$JsonOutput",
+      "dev/codex/schubert/characterization/GateCli$UsableSpace"
+    ],
+    "tool": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38642-f03-schema-raw-line-deficits-v1/begin.json",
+      "sha256": "7f91863199af3f9ce301b3b3eeefc24ff34fb8825524669fe8469bee1ccf8786"
+    },
+    "lineDeficits": [
+      [
+        "dev/codex/schubert/characterization/GateCli",
+        "main",
+        "([Ljava/lang/String;)V",
+        "92",
+        "INSTRUCTION:0:52",
+        "BRANCH:1:25"
+      ],
+      [
+        "dev/codex/schubert/characterization/GateCli",
+        "main",
+        "([Ljava/lang/String;)V",
+        "98",
+        "INSTRUCTION:7:0",
+        "BRANCH:0:0"
+      ],
+      [
+        "dev/codex/schubert/characterization/GateCli",
+        "preflight",
+        "(Ljava/nio/file/Path;Ljava/nio/file/Path;)V",
+        "202",
+        "INSTRUCTION:4:0",
+        "BRANCH:0:0"
+      ],
+      [
+        "dev/codex/schubert/characterization/GateCli",
+        "preflight",
+        "(Ljava/nio/file/Path;Ljava/nio/file/Path;)V",
+        "203",
+        "INSTRUCTION:1:0",
+        "BRANCH:0:0"
+      ]
+    ],
+    "rawTotals": {
+      "LINE": {
+        "missed": 2,
+        "covered": 1566
+      },
+      "METHOD": {
+        "missed": 1,
+        "covered": 242
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 12
+      },
+      "BRANCH": {
+        "missed": 1,
+        "covered": 962
+      },
+      "INSTRUCTION": {
+        "missed": 12,
+        "covered": 8293
+      }
+    },
+    "missedMethods": [
+      {
+        "className": "dev/codex/schubert/characterization/GateCli",
+        "method": "main",
+        "descriptor": "([Ljava/lang/String;)V",
+        "misses": [
+          "INSTRUCTION:7:141",
+          "BRANCH:1:27",
+          "LINE:1:27",
+          "COMPLEXITY:1:19"
+        ]
+      },
+      {
+        "className": "dev/codex/schubert/characterization/GateCli",
+        "method": "preflight",
+        "descriptor": "(Ljava/nio/file/Path;Ljava/nio/file/Path;)V",
+        "misses": [
+          "INSTRUCTION:5:0",
+          "LINE:2:0",
+          "COMPLEXITY:1:0",
+          "METHOD:1:0"
+        ]
+      }
+    ]
+  },
+  "pmdReviews": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40060-p020-error-disclosure-independent-v1/pmd-per-site.json",
+    "sha256": "9d4fbff9f71a0bb94816eafe68bde98a6a66164c6dbfff160ba7b30802c4de35"
+  },
+  "pmdRaw": 6,
+  "pmdApplicable": 0,
+  "pmdUnclassified": 0,
+  "actualNkChr": false,
+  "actualBackendActions": 0,
+  "originalBaselineUnchanged": true,
+  "oldCoverageTransferred": false,
+  "classInit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40060-p020-error-disclosure-independent-v1/class-init.log.gz",
+    "sha256": "543f0e3e7a9bdd14ad5fb621439cd2b64db2e4bd2e678881d2039b437eeed646"
+  },
+  "productTests": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "whole451Accepted": false,
+  "terminalAtUTC": "2026-11-18T18:42:56.547034+00:00",
+  "verifier": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/5265_p020_error_disclosure_post.py",
+    "sha256": "b1ef1e1691e16345a444d1cfcb29ec9339c299dc845a79027c42d55887115563"
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "eventId": "PGPT-20261008-6094",
+  "actualExit": 0,
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P020-E01-UNCHANGED-DISCLOSURE-FLAGS-20261119",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-P020-E01-UNCHANGED-DISCLOSURE-FLAGS-20261119",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P020-01.02"
+    ],
+    "managementWorkIds": [
+      "WBS-P020-01.02/2"
+    ],
+    "source": "a5700d0f9eaf56263b9119c4860503d259bdc7d9",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "characterizationBase": "9d26713b715b995a9c05eec7792102aaa00b2aa2",
+    "run": "PG40056-p020-error-disclosure187-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.35,
+      "base": 1.05,
+      "high": 2.65
+    },
+    "groupCapPp": 5,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40035-p020-l01-required-actions-v2/begin.json",
+        "sha256": "b8577589b884e571fc96f81c611c52f628347785bb6640216ae79a970d722ec8"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40038-p020-l01-required-actions-independent-v1/manifest.json",
+        "sha256": "f36d5771703941802d030454ee02f9fe24af803bfbb5ff63585b6da91545b4a4"
+      }
+    ],
+    "workScope": "Offline comparison ties three existing E01 non-disclosure boolean fields to UI264/current independent false values in both artifacts. Reject DIF claims on those protected comparison fields. DIF005 full DOM/error style and actual CHR remain separate.",
+    "quotaAfter": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-18T18:47:29.398000+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 46,
+        "remainingPercent": 54,
+        "resetsAt": 1795445752,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "quotaReceipt": {
+      "sha256": "d2467214cf4b96b1abf61ebd19db8a825b41bde251c6c91ab6a5cdb939a9a8b4",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T18:47:29.398000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 46,
+          "remainingPercent": 54,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T18:42:56.547034+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "publicEvidence": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40056-p020-error-disclosure187-v1/manifest.json",
+        "sha256": "f7c8b279d00b30ac42016c28394abb41eff63ac02fb2ecfe271d4ce63b16d2e9"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40057-p020-error-disclosure187-v2/manifest.json",
+        "sha256": "3dd7ece7a96aa3d10f2e147e3ffe61838b8894ecf9b3238bef233fd983897658"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40058-p020-error-disclosure-static-v1/manifest.json",
+        "sha256": "72fbddf0eb6cb7b1bb84715638c0c23ac7623a1cb1daa698c48a83e405ad3297"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40059-p020-error-disclosure-static-v2/manifest.json",
+        "sha256": "9467ac3d9a2464e0d7f0f67eadcc7fe61696931287a73e0cde63ba0257fb59d2"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40060-p020-error-disclosure-independent-v1/manifest.json",
+        "sha256": "ba602b60c05f18e38a8dc93c160321ce09f6849fa024d1cd10e28d88064d54aa"
+      }
+    ],
+    "result": "E01 explicit false on both sides for all three existing fields; local characterization tool only, actual NK and DIF005 actual DOM outstanding.",
+    "toolSource": "a75b103b840e59e1c07a63cbccd1d41ea8dad589",
+    "toolTests": 187,
+    "toolSuites": 20,
+    "firstDynamicPass": 187,
+    "firstStaticApplicable": 1,
+    "finalStaticApplicable": 0,
+    "finalStaticUnclassified": 0,
+    "productTests": 0,
+    "formalIntake": 0,
+    "currentAccepted": 17,
+    "originalLeafStatus": "OPEN",
+    "runtimeHoldsPreserved": true,
+    "comparatorCounters": {
+      "INSTRUCTION": 1542,
+      "BRANCH": 150,
+      "LINE": 295,
+      "COMPLEXITY": 119,
+      "METHOD": 44,
+      "CLASS": 2
+    }
+  }
+}
