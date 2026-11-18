@@ -67,7 +67,7 @@ final class JmsMessageGuardTest {
     assertEquals(MESSAGE_ID, guarded.metadata().nkMessageId().toString());
     assertEquals(CORRELATION_ID, guarded.metadata().correlationId().toString());
     assertEquals("LOGREQ01", guarded.metadata().nkLayoutId().toString());
-    assertTrue(guarded.toString().contains("body=<redacted>"));
+    assertEquals("GuardedJmsMessage[<redacted>]", guarded.toString());
     assertThrows(NullPointerException.class, () -> new GuardedJmsMessage(null, guarded.metadata()));
     assertThrows(NullPointerException.class, () -> new GuardedJmsMessage(new byte[0], null));
   }
