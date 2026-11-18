@@ -14,7 +14,9 @@ import org.jspecify.annotations.Nullable;
  */
 @NullMarked
 final class ProcessResourceScope {
-  private ProcessResourceScope() {}
+  private ProcessResourceScope() {
+    throw new AssertionError("process resource scope is static");
+  }
 
   @FunctionalInterface
   interface QueryWork {
