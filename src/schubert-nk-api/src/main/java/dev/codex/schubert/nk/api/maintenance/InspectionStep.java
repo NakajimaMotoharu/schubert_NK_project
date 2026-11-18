@@ -24,6 +24,6 @@ public record InspectionStep(Outcome outcome, Optional<UUID> cursor) {
 
   @Override
   public String toString() {
-    return "InspectionStep[outcome=" + outcome + ", cursor=<redacted>]";
+    return "InspectionStep[<redacted>]";
   }
 }
