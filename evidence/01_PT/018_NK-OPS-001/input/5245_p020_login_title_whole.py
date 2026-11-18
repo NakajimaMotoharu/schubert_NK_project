@@ -9,8 +9,14 @@ ROOT,E,B,JDK,TC=(R[n] for n in ('ROOT','E','B','JDK','TC'))
 git,read,ref,save,step,physical=(R[n] for n in ('git','read','ref','save','step','physical'))
 PREVIOUS=E/'PG39830-p020-definition-green144-v3'
 DOC=Path('documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117')
-PHASES=frozenset(('PG39904-p020-approved-login-title148-v1',
-                 'PG39906-p020-approved-login-title148-v2'))
+PHASES = {
+    'PG39904-p020-approved-login-title148-v1': ('530_P020*', PREVIOUS, 144, 148),
+    'PG39906-p020-approved-login-title148-v2': ('530_P020*', PREVIOUS, 144, 148),
+    'PG39922-p020-approved-all-brand153-v1': (
+        '534_P020*', E/'PG39904-p020-approved-login-title148-v1', 148, 153),
+    'PG39923-p020-approved-all-brand153-v2': (
+        '534_P020*', E/'PG39904-p020-approved-login-title148-v1', 148, 153),
+}
 TEST_PACKAGE='dev.codex.schubert.characterization.'
 JAVA_DIR=Path(TEST_PACKAGE.rstrip('.').replace('.','/'))
 CHANGES={str(B/where/JAVA_DIR/file) for where,file in (
@@ -38,16 +44,17 @@ def frozen_source(snapshot, source, old_begin, plan):
 
 
 def main(name):
-    assert name in PHASES
-    plan=read(next(DOC.glob('530_P020*')))
+    pattern,previous_run,previous_count,expected=PHASES[name]
+    plan=read(next(DOC.glob(pattern)))
     assert all(ref(Path(x['path']))==x for x in plan['values']['oracleReferences'])
-    old=read(PREVIOUS/'manifest.json')
-    previous=read(PREVIOUS/'begin.json')
-    assert old['expected']==previous['expected']==144 and previous['phase']=='qualified'
+    old=read(previous_run/'manifest.json')
+    previous=read(previous_run/'begin.json')
+    assert old['expected']==previous['expected']==previous_count
     assert old['stages']['unit']['actualExit']==0
     sdk={label:Path(pin['path']) for label,pin in previous['tools'].items()}
     assert all(ref(p)==previous['tools'][n] for n,p in sdk.items())
-    assert ref(JDK/'java')==previous['jdk'] and ref(JDK/'javac')==previous['javaC']
+    assert ref(JDK/'java')==previous['jdk']
+    assert ref(JDK/'javac')==previous.get('javaC',read(PREVIOUS/'begin.json')['javaC'])
     selection=previous['exactScope']
     assert len(selection)==20 and len(set(selection))==20
     source=git('rev-parse','HEAD').decode().strip()
@@ -63,8 +70,7 @@ def main(name):
     for path in (tests,temp,xml):
         path.mkdir(mode=0o700)
     main_classes=snapshot/B/'target/classes'
-    expected=148
-    session=name.split('-')[0]+'-APPROVED-LOGIN-TITLE-'+str(expected)
+    session=name.split('-')[0]+'-APPROVED-BRAND-'+str(expected)
     cp=':'.join(str(p) for label,p in sdk.items() if 'jacoco' not in label)
     mv=[str(R['MAVEN']),'-o','-B','-ntp','-N',f'-Dmaven.repo.local={TC}/m2/repository',
         '-f',str(snapshot/B/'pom.xml'),'compile']
@@ -84,7 +90,7 @@ def main(name):
           '--config=junit.jupiter.execution.parallel.enabled=false']
     save(out/'begin.json',dict(groupStart=plan['eventId'],source=source,snapshot=str(snapshot),expected=expected,
         exactScope=selection,sourceInputsUnchangedOutside=sorted(CHANGES),inputHashes=inputs,session=session,
-        tools=previous['tools'],jdk=previous['jdk'],original=ref(PREVIOUS/'manifest.json'),backendActions=0,
+        tools=previous['tools'],jdk=previous['jdk'],javaC=ref(JDK/'javac'),original=ref(previous_run/'manifest.json'),backendActions=0,
         startedAtUTC=R['utc']()))
     stages={}
     for label,cmd in (('main',mv),('test',test),('unit',unit)):

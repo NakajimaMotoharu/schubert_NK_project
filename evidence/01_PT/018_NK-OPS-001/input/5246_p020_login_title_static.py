@@ -22,7 +22,9 @@ def main(unit_name, out_name):
     prior_unit=read(PREVIOUS/'begin.json')
     begin=read(unit_dir/'begin.json')
     assert actual['source']==begin['source']==R['git']('rev-parse','HEAD').decode().strip()
-    assert actual['expected']==148 and actual['stages']['unit']['actualExit']==0
+    assert (actual['expected'],unit_name) in {(148,'PG39904-p020-approved-login-title148-v1'),
+        (153,'PG39922-p020-approved-all-brand153-v1'),(153,'PG39923-p020-approved-all-brand153-v2')}
+    assert actual['stages']['unit']['actualExit']==0
     snapshot=Path(begin['snapshot'])
     classes=Path(actual['classesDir'])
     assert len(actual['mainPhysical'])==17 and R['physical'](classes)==actual['mainPhysical']
