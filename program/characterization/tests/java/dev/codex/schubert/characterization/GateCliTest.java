@@ -28,7 +28,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
-import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executors;
@@ -56,6 +55,7 @@ class GateCliTest {
   private static final String ORACLE_GATES = "gates";
   private static final String ORACLE_COMMIT_PROPERTY = "chr.gateCommit";
   private static final String ORACLE_COMMIT = "abcdef1";
+  private static final long ORACLE_MINIMUM_EVIDENCE_BYTES = 21_474_836_480L;
   private static final ObjectMapper JSON = new ObjectMapper();
   private static final HexFormat HEX = HexFormat.of();
   private static final Path SOURCE_ROOT =
@@ -171,68 +171,75 @@ class GateCliTest {
 
   @Test
   void preflightValidatesFilesPermissionsStorageNetworkAndPorts() throws Exception {
-    Path highDiskRuntime =
-        SOURCE_ROOT
-            .resolve("program/characterization/target/preflight-test")
-            .resolve(UUID.randomUUID().toString());
-    try {
-      PreflightFixture valid = preflightFixture("valid", highDiskRuntime);
-      Path passOutput = temporaryDirectory.resolve("preflight-pass.json");
-      withProperties(
-          valid.properties(),
-          () -> GateCli.main(new String[] {"preflight", passOutput.toString()}));
-      JsonNode pass = JSON.readTree(passOutput.toFile());
-      assertEquals(ORACLE_PASS, pass.path(ORACLE_STATUS).asText());
-      assertEquals("0600", pass.path("credentialPermission").asText());
+    Path runtime = temporaryDirectory.resolve("runtime-at-threshold");
+    PreflightFixture valid = preflightFixture("valid", runtime);
+    Path passOutput = temporaryDirectory.resolve("preflight-pass.json");
+    withProperties(
+        valid.properties(),
+        () ->
+            GateCli.preflight(
+                valid.projectRoot(),
+                passOutput,
+                directory -> {
+                  assertEquals(runtime, directory);
+                  return ORACLE_MINIMUM_EVIDENCE_BYTES;
+                }));
+    JsonNode pass = JSON.readTree(passOutput.toFile());
+    assertEquals(ORACLE_PASS, pass.path(ORACLE_STATUS).asText());
+    assertEquals("0600", pass.path("credentialPermission").asText());
+    assertEquals(ORACLE_MINIMUM_EVIDENCE_BYTES, pass.path("freeBytes").asLong());
 
-      PreflightFixture invalid =
-          preflightFixture("invalid", temporaryDirectory.resolve("low-disk-runtime"));
-      Path externalSource = temporaryDirectory.resolve("external-source");
-      Files.createDirectories(externalSource);
-      Path source = invalid.currentRoot().resolve("program/app/src");
-      Files.delete(source);
-      Files.createSymbolicLink(source, externalSource);
-      Path notAssetDirectory = write(temporaryDirectory.resolve("not-assets"), "file");
-      Path notPgDirectory = write(temporaryDirectory.resolve("not-pgdata"), "file");
-      Files.setPosixFilePermissions(
-          invalid.usersFile(),
-          Set.of(
-              PosixFilePermission.OWNER_READ,
-              PosixFilePermission.OWNER_WRITE,
-              PosixFilePermission.GROUP_READ));
-      Map<String, String> invalidProperties = new LinkedHashMap<>(invalid.properties());
-      invalidProperties.put(
-          "chr.currentJar", invalid.currentRoot().resolve("data/master").toString());
-      invalidProperties.put("chr.assetRoot", notAssetDirectory.toString());
-      invalidProperties.put(
-          "chr.javaExecutable", temporaryDirectory.resolve("missing-java").toString());
-      invalidProperties.put(
-          "chr.caddyExecutable", temporaryDirectory.resolve("missing-caddy").toString());
-      invalidProperties.put("chr.pgCtl", temporaryDirectory.resolve("missing-pgctl").toString());
-      invalidProperties.put("chr.pgData", notPgDirectory.toString());
-      invalidProperties.put("chr.dbUrl", "jdbc:postgresql://external.example:5432/db");
-      invalidProperties.put("chr.appPort", "1");
-      invalidProperties.put("chr.proxyPort", "1025");
-      Path invalidOutput = temporaryDirectory.resolve("preflight-invalid.json");
-      withProperties(
-          invalidProperties,
-          () ->
-              assertThrows(
-                  IllegalStateException.class,
-                  () -> GateCli.main(new String[] {"preflight", invalidOutput.toString()})));
-      List<String> failures = strings(JSON.readTree(invalidOutput.toFile()).path(ORACLE_FAILURES));
-      assertTrue(failures.contains("currentJar is not a regular file"));
-      assertTrue(failures.contains("assetRoot is not a directory"));
-      assertTrue(failures.contains("current source root escapes currentRoot"));
-      assertTrue(failures.contains("usersFile permission must be 0600"));
-      assertTrue(failures.contains("evidence storage must have at least 20GiB free"));
-      assertTrue(failures.contains("dbUrl must target loopback allowlist"));
+    PreflightFixture invalid =
+        preflightFixture("invalid", temporaryDirectory.resolve("runtime-below-threshold"));
+    Path externalSource = temporaryDirectory.resolve("external-source");
+    Files.createDirectories(externalSource);
+    Path source = invalid.currentRoot().resolve("program/app/src");
+    Files.delete(source);
+    Files.createSymbolicLink(source, externalSource);
+    Path notAssetDirectory = write(temporaryDirectory.resolve("not-assets"), "file");
+    Path notPgDirectory = write(temporaryDirectory.resolve("not-pgdata"), "file");
+    Files.setPosixFilePermissions(
+        invalid.usersFile(),
+        Set.of(
+            PosixFilePermission.OWNER_READ,
+            PosixFilePermission.OWNER_WRITE,
+            PosixFilePermission.GROUP_READ));
+    Map<String, String> invalidProperties = new LinkedHashMap<>(invalid.properties());
+    invalidProperties.put(
+        "chr.currentJar", invalid.currentRoot().resolve("data/master").toString());
+    invalidProperties.put("chr.assetRoot", notAssetDirectory.toString());
+    invalidProperties.put(
+        "chr.javaExecutable", temporaryDirectory.resolve("missing-java").toString());
+    invalidProperties.put(
+        "chr.caddyExecutable", temporaryDirectory.resolve("missing-caddy").toString());
+    invalidProperties.put("chr.pgCtl", temporaryDirectory.resolve("missing-pgctl").toString());
+    invalidProperties.put("chr.pgData", notPgDirectory.toString());
+    invalidProperties.put("chr.dbUrl", "jdbc:postgresql://external.example:5432/db");
+    invalidProperties.put("chr.appPort", "1");
+    invalidProperties.put("chr.proxyPort", "1025");
+    Path invalidOutput = temporaryDirectory.resolve("preflight-invalid.json");
+    withProperties(
+        invalidProperties,
+        () ->
+            assertThrows(
+                IllegalStateException.class,
+                () ->
+                    GateCli.preflight(
+                        invalid.projectRoot(),
+                        invalidOutput,
+                        directory -> ORACLE_MINIMUM_EVIDENCE_BYTES - 1)));
+    JsonNode fail = JSON.readTree(invalidOutput.toFile());
+    assertEquals(ORACLE_MINIMUM_EVIDENCE_BYTES - 1, fail.path("freeBytes").asLong());
+    List<String> failures = strings(fail.path(ORACLE_FAILURES));
+    assertTrue(failures.contains("currentJar is not a regular file"));
+    assertTrue(failures.contains("assetRoot is not a directory"));
+    assertTrue(failures.contains("current source root escapes currentRoot"));
+    assertTrue(failures.contains("usersFile permission must be 0600"));
+    assertTrue(failures.contains("evidence storage must have at least 20GiB free"));
+    assertTrue(failures.contains("dbUrl must target loopback allowlist"));
 
-      assertPortFailure(valid, 1025, 1, "proxy-privileged");
-      assertPortFailure(valid, 1025, 1025, "ports-equal");
-    } finally {
-      deleteTree(highDiskRuntime);
-    }
+    assertPortFailure(valid, 1025, 1, "proxy-privileged");
+    assertPortFailure(valid, 1025, 1025, "ports-equal");
   }
 
   @Test
@@ -595,7 +602,7 @@ class GateCliTest {
         () ->
             assertThrows(
                 IllegalStateException.class,
-                () -> GateCli.preflight(fixture.projectRoot(), output)));
+                () -> GateCli.main(new String[] {"preflight", output.toString()})));
     assertTrue(
         strings(JSON.readTree(output.toFile()).path(ORACLE_FAILURES))
             .contains("app/proxy ports must be distinct non-privileged ports"));
@@ -730,15 +737,6 @@ class GateCliTest {
         } else {
           Files.copy(path, target, StandardCopyOption.COPY_ATTRIBUTES);
         }
-      }
-    }
-  }
-
-  private static void deleteTree(Path root) throws IOException {
-    if (root == null || !Files.exists(root, LinkOption.NOFOLLOW_LINKS)) return;
-    try (Stream<Path> paths = Files.walk(root)) {
-      for (Path path : paths.sorted(Comparator.reverseOrder()).toList()) {
-        Files.deleteIfExists(path);
       }
     }
   }

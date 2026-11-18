@@ -19,6 +19,10 @@ METHODS=('rejectsRepeatedCaseDefinitionEvenWhenTwentyFourCasesStillCompare',
          'rejectsRepeatedDifferenceDefinitionEvenWhenSixteenRulesStillMatch')
 MAIN_PATH=B/'src/main/java'/P/'ArtifactComparator.java'
 TEST_PATH=B/'tests/java'/P/'ArtifactComparatorTest.java'
+GATE_SOURCE=B/'src/main/java'/P/'GateCli.java'
+GATE_TEST=B/'tests/java'/P/'GateCliTest.java'
+PHASE_CHANGES={'red':{TEST_PATH},'green':{TEST_PATH,MAIN_PATH},
+               'corrected':{TEST_PATH,MAIN_PATH,GATE_SOURCE,GATE_TEST}}
 MAVEN=TC/'m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn'
 
 
@@ -92,7 +96,7 @@ def collect_inputs(source, original, allowed_tests, helpers, phase):
     tree={Path(p) for p in git('ls-tree','-r','--name-only',source,'--',str(B)).decode().splitlines()}
     assert tree==set(map(Path,history))
     changed=set(map(Path,git('diff','--name-only',original['sourceCore'],source,'--',str(B)).decode().splitlines()))
-    assert changed=={TEST_PATH} if phase=='red' else changed=={TEST_PATH,MAIN_PATH}
+    assert changed==PHASE_CHANGES[phase]
     test_root=B/'tests/java'/P
     allowed={test_root/(name+'.java') for name in allowed_tests}
     allowed.update(Path(row['path']) for row in helpers)
@@ -109,7 +113,7 @@ def collect_inputs(source, original, allowed_tests, helpers, phase):
 
 
 def main(phase):
-    assert phase in ('red','green') and os.getuid()!=0
+    assert phase in PHASE_CHANGES and os.getuid()!=0
     start=read(next(D.glob('507_*')))
     parent,old_unit,old_package=[Path(x['path']) for x in start['values']['oracleReferences']]
     for path,pin in zip((parent,old_unit,old_package),start['values']['oracleReferences'],strict=True):
@@ -122,7 +126,8 @@ def main(phase):
     source=git('rev-parse','HEAD').decode().strip()
     assert not git('diff','--name-only','HEAD','--',str(B))
     data,inputs,srcs,selected=collect_inputs(source,original,selection,audit['helperReferences'],phase)
-    name={'red':'PG39822-p020-definition-red-v1','green':'PG39826-p020-definition-green144-v1'}[phase]
+    name={'red':'PG39822-p020-definition-red-v1','green':'PG39826-p020-definition-green144-v1',
+          'corrected':'PG39828-p020-definition-green144-v2'}[phase]
     out=E/name
     work=ROOT.parent/'pgpt-runs/PG379'/name.lower()
     assert not out.exists() and not work.exists()
@@ -165,7 +170,7 @@ def main(phase):
     session=name.split('-')[0]+'-COMMON-'+str(expected)
     if stages.get('test',{}).get('actualExit')==0:
         agent=sdk['org.jacoco.agent-0.8.15-runtime.jar']
-        coverage=[f'-javaagent:{agent}=destfile={out.resolve()/"jacoco.exec"},sessionid={session},append=false'] if phase=='green' else []
+        coverage=[f'-javaagent:{agent}=destfile={out.resolve()/"jacoco.exec"},sessionid={session},append=false'] if phase!='red' else []
         cmd=[str(JDK/'java'),'-Xmx1g','-Djava.awt.headless=true','-Duser.language=ja','-Duser.country=JP',
              '-Duser.timezone=Asia/Tokyo','-Dchr.unitProjectRoot='+str(snapshot),
              '-Djava.io.tmpdir='+str(tmp),'-Xlog:class+init=info:file='+str(work/'class-init.log'),*coverage,
@@ -174,7 +179,7 @@ def main(phase):
              ':'.join([str(classes),str(test),str(snapshot/B/'tests/resources'),cp]),
              '--reports-dir',str(xml.resolve()),*expression,'--config=junit.jupiter.execution.parallel.enabled=false']
         stages['unit']=step('unit',cmd,work,out,180)
-    if phase=='green' and stages.get('unit',{}).get('actualExit')==0:
+    if phase!='red' and stages.get('unit',{}).get('actualExit')==0:
         cli=[str(JDK/'java'),'-jar',str(sdk['org.jacoco.cli-0.8.15-nodeps.jar'])]
         exec_=str(out.resolve()/'jacoco.exec')
         stages['coverage']=step('coverage',[*cli,'report',exec_,'--classfiles',str(classes),

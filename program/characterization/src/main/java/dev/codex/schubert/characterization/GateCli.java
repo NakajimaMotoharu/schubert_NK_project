@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.FileStore;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
@@ -25,6 +24,7 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Stream;
+import org.jspecify.annotations.NullMarked;
 
 public final class GateCli {
   private static final String VALUE_CHR_PROJECTROOT = "chr.projectRoot";
@@ -198,6 +198,17 @@ public final class GateCli {
 
   static void preflight(Path projectRoot, Path output)
       throws IOException, NoSuchAlgorithmException {
+    preflight(projectRoot, output, path -> Files.getFileStore(path).getUsableSpace());
+  }
+
+  @FunctionalInterface
+  @NullMarked
+  interface UsableSpace {
+    long bytes(Path directory) throws IOException;
+  }
+
+  @NullMarked
+  static void preflight(Path projectRoot, Path output, UsableSpace usableSpace) throws IOException {
     Path currentRoot = pathProperty("chr.currentRoot");
     Path currentJar = pathProperty("chr.currentJar");
     Path assetRoot = pathProperty("chr.assetRoot");
@@ -231,8 +242,7 @@ public final class GateCli {
     if (!isOwnerOnly(usersFile)) {
       failures.add("usersFile permission must be 0600");
     }
-    FileStore store = Files.getFileStore(runtimeRoot);
-    long usableBytes = store.getUsableSpace();
+    long usableBytes = usableSpace.bytes(runtimeRoot);
     if (usableBytes < 20L * 1024 * 1024 * 1024) {
       failures.add("evidence storage must have at least 20GiB free");
     }
