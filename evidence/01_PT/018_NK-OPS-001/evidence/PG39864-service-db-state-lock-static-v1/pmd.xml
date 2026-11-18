@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-11-19T01:13:41.041">
+<file name="/home/mini/codex/project1/work/pgpt-runs/PG379/pg39862-service-db-state-lock-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java">
+<violation beginline="91" endline="91" begincolumn="16" endcolumn="32" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.bootstrap" class="ServiceDatabaseSource" method="connectWhileLocked" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching RuntimeException in try-catch block
+</violation>
+<violation beginline="91" endline="91" begincolumn="35" endcolumn="40" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.bootstrap" class="ServiceDatabaseSource" method="connectWhileLocked" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Error in try-catch block
+</violation>
+<violation beginline="124" endline="124" begincolumn="14" endcolumn="30" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.bootstrap" class="ServiceDatabaseSource" method="discard" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching RuntimeException in try-catch block
+</violation>
+<violation beginline="124" endline="124" begincolumn="33" endcolumn="38" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.bootstrap" class="ServiceDatabaseSource" method="discard" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Error in try-catch block
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-runs/PG379/pg39862-service-db-state-lock-four-main-v1/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSourcePortTest.java">
+<violation beginline="247" endline="247" begincolumn="13" endcolumn="18" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.bootstrap" class="ServiceDatabaseSourcePortTest" method="dbSource002BothRolesFixedPropertiesAndEachPhysicalAdmission" variable="first" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this Connection object are closed after use
+</violation>
+<violation beginline="248" endline="248" begincolumn="13" endcolumn="19" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.bootstrap" class="ServiceDatabaseSourcePortTest" method="dbSource002BothRolesFixedPropertiesAndEachPhysicalAdmission" variable="second" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this Connection object are closed after use
+</violation>
+<violation beginline="521" endline="521" begincolumn="11" endcolumn="19" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.bootstrap" class="ServiceDatabaseSourcePortTest" method="dbSource013ParallelIndependentConnectionsAndPropertiesClear" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ExecutorService object are closed after use
+</violation>
+<violation beginline="521" endline="521" begincolumn="22" endcolumn="65" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.bootstrap" class="ServiceDatabaseSourcePortTest" method="dbSource013ParallelIndependentConnectionsAndPropertiesClear" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="526" endline="529" begincolumn="15" endcolumn="21" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.bootstrap" class="ServiceDatabaseSourcePortTest" method="dbSource013ParallelIndependentConnectionsAndPropertiesClear" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="532" endline="532" begincolumn="15" endcolumn="25" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.bootstrap" class="ServiceDatabaseSourcePortTest" method="dbSource013ParallelIndependentConnectionsAndPropertiesClear" variable="connection" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this Connection object are closed after use
+</violation>
+<violation beginline="533" endline="533" begincolumn="20" endcolumn="28" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.bootstrap" class="ServiceDatabaseSourcePortTest" method="dbSource013ParallelIndependentConnectionsAndPropertiesClear" variable="previous" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this Connection object are closed after use
+</violation>
+<violation beginline="539" endline="539" begincolumn="9" endcolumn="31" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.bootstrap" class="ServiceDatabaseSourcePortTest" method="dbSource013ParallelIndependentConnectionsAndPropertiesClear" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="540" endline="540" begincolumn="20" endcolumn="66" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.bootstrap" class="ServiceDatabaseSourcePortTest" method="dbSource013ParallelIndependentConnectionsAndPropertiesClear" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="561" endline="561" begincolumn="17" endcolumn="23" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.bootstrap" class="ServiceDatabaseSourcePortTest" method="dbSource014CloseRaceHasFiniteCallerOwnershipPostcondition" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="566" endline="566" begincolumn="11" endcolumn="19" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.bootstrap" class="ServiceDatabaseSourcePortTest" method="dbSource014CloseRaceHasFiniteCallerOwnershipPostcondition" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ExecutorService object are closed after use
+</violation>
+<violation beginline="566" endline="566" begincolumn="22" endcolumn="65" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.bootstrap" class="ServiceDatabaseSourcePortTest" method="dbSource014CloseRaceHasFiniteCallerOwnershipPostcondition" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="569" endline="572" begincolumn="13" endcolumn="19" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.bootstrap" class="ServiceDatabaseSourcePortTest" method="dbSource014CloseRaceHasFiniteCallerOwnershipPostcondition" variable="acquiring" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="575" endline="575" begincolumn="25" endcolumn="55" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.bootstrap" class="ServiceDatabaseSourcePortTest" method="dbSource014CloseRaceHasFiniteCallerOwnershipPostcondition" variable="closing" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="589" endline="589" begincolumn="9" endcolumn="31" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.bootstrap" class="ServiceDatabaseSourcePortTest" method="dbSource014CloseRaceHasFiniteCallerOwnershipPostcondition" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="590" endline="590" begincolumn="20" endcolumn="66" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.bootstrap" class="ServiceDatabaseSourcePortTest" method="dbSource014CloseRaceHasFiniteCallerOwnershipPostcondition" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="621" endline="621" begincolumn="46" endcolumn="47" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.api.bootstrap" class="ServiceDatabaseSourcePortTest" method="dbSource016ConnectorFailureReleasesTheStateLockForAnotherThread" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 1 in if statements
+</violation>
+<violation beginline="629" endline="629" begincolumn="11" endcolumn="17" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.bootstrap" class="ServiceDatabaseSourcePortTest" method="dbSource016ConnectorFailureReleasesTheStateLockForAnotherThread" variable="worker" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ExecutorService object are closed after use
+</violation>
+<violation beginline="629" endline="629" begincolumn="20" endcolumn="63" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.bootstrap" class="ServiceDatabaseSourcePortTest" method="dbSource016ConnectorFailureReleasesTheStateLockForAnotherThread" variable="worker" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="632" endline="635" begincolumn="13" endcolumn="19" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.bootstrap" class="ServiceDatabaseSourcePortTest" method="dbSource016ConnectorFailureReleasesTheStateLockForAnotherThread" variable="retry" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="642" endline="642" begincolumn="9" endcolumn="29" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.bootstrap" class="ServiceDatabaseSourcePortTest" method="dbSource016ConnectorFailureReleasesTheStateLockForAnotherThread" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="643" endline="643" begincolumn="20" endcolumn="64" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.bootstrap" class="ServiceDatabaseSourcePortTest" method="dbSource016ConnectorFailureReleasesTheStateLockForAnotherThread" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+</pmd>
