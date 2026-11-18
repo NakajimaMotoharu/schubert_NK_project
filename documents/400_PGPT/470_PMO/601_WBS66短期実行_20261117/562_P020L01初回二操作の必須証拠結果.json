@@ -1,0 +1,134 @@
+{
+  "eventId": "PGPT-20261008-6084",
+  "actualExit": 0,
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P020-L01-REQUIRED-INITIAL-ACTIONS-20261119",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-P020-L01-REQUIRED-INITIAL-ACTIONS-20261119",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P020-01.02"
+    ],
+    "managementWorkIds": [
+      "WBS-P020-01.02/2"
+    ],
+    "source": "bc382e43916aeeb24d50575e16a3d1bb1dcd8d1a",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "characterizationBase": "ee86a8c647860d0bf22e8620d83d67f68521b74e",
+    "run": "PG40034-p020-l01-required-actions-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.55,
+      "base": 1.65,
+      "high": 3.75
+    },
+    "groupCapPp": 6,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40014-p020-game-onchange176-v1/begin.json",
+        "sha256": "23051f7bc0e67268dd1d472960bb17e60ccb12f17580adc7cf92ced1873b6d73"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40018-p020-game-onchange-independent-v1/manifest.json",
+        "sha256": "2c1c576c46ea8cbac99e89b9ce0b2158e4d8df17717f365b836834b0dd1f4d1f"
+      }
+    ],
+    "workScope": "QA054 SS355 8.1.1 full L01 comparison must include MENU_VIEWED and LOG_SEARCHED initial operations and their distinct correlated REQUEST. Missing symmetric actions or only partial login must fail full comparator. Preserve existing partial validator, product/log behavior and baseline. Whole offline tool, no real log/DB/runtime/auth/native.",
+    "quotaAfter": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-18T18:24:00.792000+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 45,
+        "remainingPercent": 55,
+        "resetsAt": 1795445752,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "quotaReceipt": {
+      "sha256": "a4cf9da4018e639fd2516e328efd685dd1aaa9c27912b952637f003dde18bb8f",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T18:24:00.792000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 45,
+          "remainingPercent": 55,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T18:23:07.077578+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "publicEvidence": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40038-p020-l01-required-actions-independent-v1/manifest.json",
+        "sha256": "f36d5771703941802d030454ee02f9fe24af803bfbb5ff63585b6da91545b4a4"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40035-p020-l01-required-actions-v2/manifest.json",
+        "sha256": "3f469812ad841194b3865f9410ea1e6cc6793bb2af957241fb317de92d33f031"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40037-p020-l01-required-actions-static-v2/manifest.json",
+        "sha256": "883ad57369604eb044366db885b98df2cfaa294004df95299f446cfb185390e8"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40034-p020-l01-required-actions-v1/manifest.json",
+        "sha256": "f3710f239a4a9ca297d9bd3f152977328bf97b7375b38925178c7d8c80479e8e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40036-p020-l01-required-actions-static-v1/manifest.json",
+        "sha256": "eb81b08a3478eb57cd8ac49028f662bb83d13a7e136d95c7c88941f841b1543e"
+      }
+    ],
+    "result": "Complete L01 now requires both approved initial operations and one companion request per operation. First 182 and four static findings preserved; final 182 independently checked.",
+    "toolSource": "9d26713b715b995a9c05eec7792102aaa00b2aa2",
+    "toolTests": 182,
+    "toolTestDefinitions": 6,
+    "firstVerificationDenominator": 182,
+    "firstVerificationSuccess": 182,
+    "firstStaticApplicable": 4,
+    "productTests": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "notRun": 0,
+    "pmdApplicable": 0,
+    "pmdUnclassified": 0,
+    "affectedCounters": {
+      "INSTRUCTION": 2688,
+      "BRANCH": 388,
+      "LINE": 502,
+      "COMPLEXITY": 264,
+      "METHOD": 70,
+      "CLASS": 3
+    },
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortCompletionRate": null,
+    "remainingOriginalDetailBasePp": 1089.848,
+    "nextCommand": "Prioritize another independent WBS66 core criterion; G07 next boundary c7598aaeb0 onward; hold actual L01 and runtime authorization unchanged."
+  }
+}
