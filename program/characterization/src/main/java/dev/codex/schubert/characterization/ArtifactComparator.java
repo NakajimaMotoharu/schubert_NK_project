@@ -272,8 +272,10 @@ public final class ArtifactComparator {
       failures.add(prefix + "POINTER");
       return false;
     }
-    return require(pair.getFirst().equals(current.textValue()), prefix + "CURRENT", failures)
-        & require(pair.getLast().equals(nk.textValue()), prefix + "NK", failures);
+    boolean currentMatches =
+        require(pair.getFirst().equals(current.textValue()), prefix + "CURRENT", failures);
+    boolean nkMatches = require(pair.getLast().equals(nk.textValue()), prefix + "NK", failures);
+    return currentMatches && nkMatches;
   }
 
   private static void requireInput(Path value, String label) {
