@@ -1,0 +1,114 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "id": "PG39646-BUG3296-BUSINESS-OUTBOX-REQUIRED-RESOURCE-V2",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productOwnerByMainPath": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository.java": "WBS-P006-02",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination.java": "WBS-P006-02",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry.java": "WBS-P006-02",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest.java": "WBS-P006-02",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata.java": "WBS-P006-02",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule.java": "WBS-P006-02",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxIntegrityException.java": "WBS-P006-02",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/package-info.java": "WBS-P005-03",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/RequiredColumn.java": "WBS-P004-05",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/package-info.java": "WBS-P018-05"
+  },
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/006_NK-MSG-002/007_JdbcOutbox\u81ea\u5df1\u6240\u6709\u5883\u754c\u5358\u4f53\u4ed5\u69d8.md",
+      "sha256": "008c242626e18643f932f8abd45f46a4deae9267526bc6ef403ce63b4210912a"
+    },
+    {
+      "path": "evidence/01_PT/006_NK-MSG-002/4688_SSC471_\u696d\u52d9Outbox\u5fc5\u9808\u8cc7\u6e90\u5358\u4f53\u4ed5\u69d8.md",
+      "sha256": "a0cffc4f2bff1cf317af76d1eaf83673a3c97af24fcafcea28aeb01e1e53a0b6"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/006_NK-MSG-002/evidence/PG21028-outbox-jdbc-independent-post-v1/manifest.json",
+      "sha256": "b18528ee8a1f967d7f0bb5503fc3ff9768c00090aadab5b90ec1bb01e9378009"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39634-p00405-business-outbox-before-v1/manifest.json",
+      "sha256": "8d40ce3af1a43a9d647c4e187200605145ba94124eb26c27642627d0d8bf0e0c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26656-outbox-twelve-public-contract-v1/manifest.json",
+      "sha256": "566cac49a0aab4f3d18582966ebc9a198bb2ee7f3dbbcbf21c5e5cf41d35e51d"
+    }
+  ],
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "productionCoreMain": "d43edb1b9167dd903444c074e4a9438e781eb9d7",
+  "mainSources": [
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxIntegrityException.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/package-info.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/RequiredColumn.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/package-info.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxPortTest.java",
+      "tests": 11
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxReturningIdContractTest.java",
+      "tests": 1
+    }
+  ],
+  "expectedTests": 12,
+  "resources": [],
+  "sdkJars": [
+    "com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar"
+  ],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository.class",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination.class",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry.class",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest.class",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata.class",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule.class",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxIntegrityException.class",
+    "dev/codex/schubert/nk/api/messaging/outbound/package-info.class",
+    "dev/codex/schubert/nk/api/database/RequiredColumn.class",
+    "dev/codex/schubert/nk/api/database/package-info.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository"
+  ],
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-api/pom.xml"
+  ],
+  "systemProperties": {},
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG39641-bug3296-business-outbox-prestyle-v2",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG39642-bug3296-business-outbox-prepare-v2",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG39643-bug3296-business-outbox-static-v2",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG39644-bug3296-business-outbox-preflight-v1",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG39646-bug3296-business-outbox-unit-v1",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG39650-bug3296-business-outbox-post-v1"
+  },
+  "privateDirs": {
+    "prepare": "pg39642-bug3296-business-outbox-prepare-v2",
+    "unit": "pg39646-bug3296-business-outbox-unit-v1"
+  },
+  "newTestDefinitions": 3,
+  "standardCompilerSwitchMaps": [],
+  "forbiddenInitializedClasses": []
+}

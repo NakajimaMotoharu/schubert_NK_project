@@ -1,0 +1,275 @@
+{
+  "actualExit": 0,
+  "source": "583dad40fbfe1e7a29c445351da0a3d9c66346d3",
+  "productionCoreMain": "15ee95822be0f4387e1e127cf43d43a08945c3c6",
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5193_ssc471_business_outbox_profile.json",
+    "sha256": "d7aa90b1a7290bfc7d50ee1f86e54cd26d2d8abcd3d2d5c1005d0ffaf8e1710e"
+  },
+  "run": "PG39653-BUG3296-BUSINESS-OUTBOX-REQUIRED-RESOURCE-V3",
+  "tests": 12,
+  "newTestDefinitions": 3,
+  "physicalClasses": 10,
+  "positiveMainCrc": 8,
+  "coverage": {
+    "INSTRUCTION": {
+      "covered": 1226,
+      "missed": 70
+    },
+    "BRANCH": {
+      "covered": 90,
+      "missed": 21
+    },
+    "LINE": {
+      "covered": 299,
+      "missed": 18
+    },
+    "COMPLEXITY": {
+      "covered": 89,
+      "missed": 30
+    },
+    "METHOD": {
+      "covered": 53,
+      "missed": 9
+    },
+    "CLASS": {
+      "covered": 8,
+      "missed": 0
+    }
+  },
+  "targetCounters": {
+    "dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository": {
+      "INSTRUCTION": {
+        "covered": 663,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 40,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 172,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 33,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 13,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    }
+  },
+  "completeSourceComponentCounters": {
+    "INSTRUCTION": {
+      "covered": 663,
+      "missed": 0
+    },
+    "BRANCH": {
+      "covered": 40,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 13,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 172,
+      "missed": 0
+    },
+    "COMPLEXITY": {
+      "covered": 33,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 1,
+      "missed": 0
+    }
+  },
+  "completeSourceComponentFour100": true,
+  "wholeScopeFour100": false,
+  "uncoveredFullSourceClasses": {
+    "dev/codex/schubert/nk/api/database/RequiredColumn": {
+      "INSTRUCTION": 7,
+      "LINE": 2,
+      "COMPLEXITY": 1,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule": {
+      "INSTRUCTION": 5,
+      "BRANCH": 2,
+      "LINE": 1,
+      "COMPLEXITY": 2
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry": {
+      "INSTRUCTION": 17,
+      "BRANCH": 3,
+      "LINE": 6,
+      "COMPLEXITY": 9,
+      "METHOD": 6
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest": {
+      "INSTRUCTION": 7,
+      "BRANCH": 1,
+      "LINE": 2,
+      "COMPLEXITY": 2,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination": {
+      "INSTRUCTION": 5,
+      "BRANCH": 1,
+      "LINE": 1,
+      "COMPLEXITY": 1
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata": {
+      "INSTRUCTION": 29,
+      "BRANCH": 14,
+      "LINE": 6,
+      "COMPLEXITY": 15,
+      "METHOD": 1
+    }
+  },
+  "naturalNoCodeClasses": [
+    "dev/codex/schubert/nk/api/database/package-info",
+    "dev/codex/schubert/nk/api/messaging/outbound/package-info"
+  ],
+  "naturalNoBranchClasses": [],
+  "classIds": {
+    "dev/codex/schubert/nk/api/database/package-info": "f18da971ae72077b",
+    "dev/codex/schubert/nk/api/database/RequiredColumn": "acbdd66ef7fda4d1",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry": "ac4ae91fe82237bb",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata": "9e5357f71c963062",
+    "dev/codex/schubert/nk/api/messaging/outbound/package-info": "42820cb6a7515a3b",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule": "60500b8b9cf1018d",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxIntegrityException": "b89ee343be190b02",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination": "f335df72f09e3b86",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest": "a8b05f6c75d6c176",
+    "dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository": "121ba7e51653e855"
+  },
+  "actualJvmCodeMethodCounts": {
+    "dev/codex/schubert/nk/api/database/package-info": 0,
+    "dev/codex/schubert/nk/api/database/RequiredColumn": 2,
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry": 19,
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata": 12,
+    "dev/codex/schubert/nk/api/messaging/outbound/package-info": 0,
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule": 7,
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxIntegrityException": 2,
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination": 9,
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest": 12,
+    "dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository": 13
+  },
+  "hiddenJvmAdapters": {
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination$$Lambda+0x000000001513dd38": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination",
+    "dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository$$Lambda+0x0000000015188000": "dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata$$Lambda+0x0000000015188b10": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata",
+    "dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository$$Lambda+0x0000000015194000": "dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository",
+    "dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository$$Lambda+0x0000000015188248": "dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository",
+    "dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository$$Lambda+0x00000000150d1c80": "dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination$$Lambda+0x000000001513dad8": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination"
+  },
+  "manualCoverageExclusions": [],
+  "oldExecCombined": false,
+  "preflight": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39649-bug3296-business-outbox-preflight-v3/manifest.json",
+    "sha256": "d8d0511c9b2ae8bd824603547584a1f671a39f8a8c18a9867a35c6f3b90ecef4"
+  },
+  "inputHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository.java": "1db71eadabee0bb1ae3de1bc8e04930e97a6d1c68d30f01362c6acaa915c2173",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination.java": "8ab0216109c17c6d5cf96039b6ac968dd2cb6fc401c2f93b0f92cc08c3ed8e80",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry.java": "0c2baec34188b2781764560e36bbb0629fdb0d55504f6f79b50d0149a94f458c",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest.java": "841e7bb6bdbd5fb9a9d7d08f3588f3abbf0d112cbd4c2c4d92f5610c2d3aa9bd",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata.java": "ef0be1f11629947394710ce2f537567c19401737e2329a3d54719471ea5b7f53",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule.java": "f565b0413b5e262907e209f523915e3050beb7062fec3b369d178124c58e8854",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxIntegrityException.java": "56a5f3af8ccf296acef3aa0991920755756862223d6ea1c111e248448d63941a",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/package-info.java": "b2173a4f8d686f429b7252e180d479896d8e09f326033d14fac7b9b83cfc0ce5",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/RequiredColumn.java": "8cd379b0c607eaba8b1642c77bcbdcfb7cc613c1bc1f7c1c2976a4d0283bc7d2",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/package-info.java": "9f28051696b527a1dee26618b554c0bf6f9d47cdc7324dcba733cb896156e04e",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxPortTest.java": "02c2b2bcd516450620ccccd81d822bf6a8e6de44e957a4d5b6e5b163c098ab0a",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxReturningIdContractTest.java": "a2b97f85348f8f5f9eea61f734e5093fdcad1d8e27e14e6cfb31b9e2ce130ef9",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-api/pom.xml": "2aff7af3d90feaee1f6c09f7ad300627ed911e8372504fcfd383391429a58114",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "dependencies": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7"
+  },
+  "environment": {
+    "file.encoding": "UTF-8",
+    "java.version": "25.0.4",
+    "os.arch": "amd64",
+    "os.name": "Linux",
+    "user.timezone": "Asia/Tokyo"
+  },
+  "productTestsExecuted": 12,
+  "actualBackendNativeFsRootOrHeldClassActions": 0,
+  "formalUpdated": false,
+  "whole451Accepted": false,
+  "newAcceptance": 0,
+  "effortRate": null,
+  "files": {
+    "unit-classinfo-begin.safe.json": "bedca79ead6c700c6c79f5cd01a3c4bd217d2a4a745837b52dec997cfa5f91b2",
+    "unit-coverage.stdout": "cfc921872d44ff1489c1f2c77fd03653994ccc3b70ed3092cbc75c5c2e2a5fba",
+    "unit-execinfo-begin.safe.json": "250426b05c67195a862a99392085ab66d1c77b3555558772b9284eb8b917d6e5",
+    "unit-coverage-exit.safe.json": "a10e0d25f6a6659c03bde4c437fa2d0e321e74c97ecc127918142cbe8f38fde8",
+    "unit-classinfo-exit.safe.json": "305bdb2503ccaa20ed6a26df8ce57b4a831329b06a400ae387d44c3658ec0359",
+    "unit-unit-begin.safe.json": "acf1669e1388ae2d9d2bf237eb4ddedcc5f20c3edea3176f5ed852ee199f0070",
+    "unit-unit-process.safe.json": "0b2070e3136ef5c159c104916617fa237b2f7328cf5dbf9e5e41a2e5aaf2560c",
+    "unit-coverage-begin.safe.json": "ed9fcc7c9c69658a5329d6d45228fa0cb880241d0adb9c2699df861c560f1202",
+    "unit-classinfo.stdout": "8844dc7299c79344cda6b44c8d124520adf03367130aa47769310d1dc3913ffa",
+    "unit-execinfo-process.safe.json": "428c83012a5f8a8b112e92fab77524f14c03c98be5614c17c4efaee75f25f2ac",
+    "unit-coverage-process.safe.json": "ee31c4f149d820fc78c6e7bcac28336772d237aa8724b8ce1aee353b1761ed0b",
+    "unit-execinfo-exit.safe.json": "6048c8fe738c2a256019284dd708058db46a1045b70fd7a880ed373981ba042e",
+    "unit-execinfo.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "unit-execinfo.stdout": "e73d0bdce07c6a28073ed24b80430aea0f74eb41c24e02b9679cbeccefe9aeb4",
+    "unit-begin.json": "d75655e87461c7711194195eedbaa8c3bd526bb4dfe673d91a9c82ee5737c602",
+    "unit-unit-exit.safe.json": "0ae3301c60a7bc232d9af71891ff9db28c0476e393b75d9adc3dafabb4a6b798",
+    "unit-classinfo-process.safe.json": "c2f1d858da3cb61b9a77a1bf0caaa2037e2ee8e3c746a1d81186f87758e637ce",
+    "unit-unit.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "unit-manifest.json": "ca73000f39d0638679101e16b6afc68b9d4f74aa96ffa737b5eca6715609c36c",
+    "unit-classinfo.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "unit-coverage.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "unit-unit.stdout": "f6d95ea3259d3fd99b757e8342df2966af4178455bff8736e18839d8103e9fd6",
+    "original-coverage.xml": "6f8c6275c778e7cbe411f3d42b2030718a1abc20333a6e8c1fe87e8df8da4a64",
+    "jacoco.exec": "a6989c830c4fb62e443fdc4aa0c252859b7d17b28ebf9f20e8b1ef18d3fab846",
+    "original-class-init.stdout": "cd7314e2e1b09e3ca19619b052f5ca3e8c72ed10a022c664570184f07418671b",
+    "original-TEST-junit-platform-suite.xml": "51730de57b68d974ae327d7e51ccf27bb3dbb075fcf64cdaac6edafc5db56110",
+    "original-TEST-junit-vintage.xml": "e6a2b2ca76c7d0babc27b7e3c653749bfb90c1c004fdf4ca38c55bef50810e9c",
+    "original-TEST-junit-jupiter.xml": "af40c29748648c804cdd167fe047b3811105aa430d7e5f02bc9ecf7c73204c56"
+  },
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_post_v3.py",
+    "sha256": "e85ddceaf23f84d14bca013629d97857804402b89c9ca825ead5ec5e967dfd36"
+  },
+  "defaultStandardFilteredSwitchMaps": {},
+  "forbiddenInitializedClasses": [],
+  "forbiddenInitializedClassesObserved": [],
+  "reviewedReflection": [],
+  "originalUnitXmlHashes": {
+    "original-TEST-junit-platform-suite.xml": "dd27d7fa19dee55a0ad00d218483ab588c162874fd29eddd9aa99a0ad99c61f6",
+    "original-TEST-junit-vintage.xml": "741f606624fb6c7720f6e892e189e7039688a61c2d7a68c50c709947606bb78f",
+    "original-TEST-junit-jupiter.xml": "6f855eba69a839cb4e7326e19949bf7706e688f78ac5b2e600bf99c12b1e376d"
+  },
+  "publicUnitXmlPropertyNames": [
+    "file.encoding",
+    "java.version",
+    "os.arch",
+    "os.name",
+    "user.timezone"
+  ],
+  "unitXmlSystemOutErrExported": false,
+  "unstartedProcess": null,
+  "unstartedProcessInitializationObserved": [],
+  "unqualifiedStreamingExecutionObserved": false,
+  "guardSignature": null,
+  "guardExecutionMode": null,
+  "analysisOnlyContext": null,
+  "reviewedArtemisSdk": null
+}

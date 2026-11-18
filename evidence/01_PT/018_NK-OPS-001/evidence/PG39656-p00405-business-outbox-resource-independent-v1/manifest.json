@@ -1,0 +1,743 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-18T13:50:48.039805+00:00",
+  "source": "583dad40fbfe1e7a29c445351da0a3d9c66346d3",
+  "productionCoreMain": "15ee95822be0f4387e1e127cf43d43a08945c3c6",
+  "tests": 12,
+  "firstProductRunSuccess": true,
+  "firstBaseIndependentSuccess": true,
+  "originalNineExactOracleAndBusinessControl": true,
+  "newTestDefinitions": 3,
+  "acceptedBoundaries": {
+    "nullStatements": 4,
+    "nullResultSets": 2,
+    "suppressionCases": 2
+  },
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "witnessChanges": {
+    "JdbcOutboxPortTest": [
+      "jdbcPrimarySuppressionAndJdkSelfFailureCloseRowsBeforeStatement",
+      "requiredRowsNullClosesTheAlreadyAcquiredStatementExactlyOnce",
+      "requiredStatementNullStopsAllFourOperationsBeforeBinding"
+    ]
+  },
+  "unchangedSqlUtcLeaseRetryAndPublicAbi": true,
+  "whole451Accepted": false,
+  "newAcceptance": 0,
+  "rawTarget": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 699
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 40
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 178
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 33
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 13
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "rawPerClass": {
+    "dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 699
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 40
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 178
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 33
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 13
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination": {
+      "INSTRUCTION": {
+        "missed": 10,
+        "covered": 65
+      },
+      "BRANCH": {
+        "missed": 1,
+        "covered": 1
+      },
+      "LINE": {
+        "missed": 1,
+        "covered": 12
+      },
+      "COMPLEXITY": {
+        "missed": 2,
+        "covered": 8
+      },
+      "METHOD": {
+        "missed": 1,
+        "covered": 8
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry": {
+      "INSTRUCTION": {
+        "missed": 17,
+        "covered": 201
+      },
+      "BRANCH": {
+        "missed": 3,
+        "covered": 15
+      },
+      "LINE": {
+        "missed": 6,
+        "covered": 45
+      },
+      "COMPLEXITY": {
+        "missed": 9,
+        "covered": 19
+      },
+      "METHOD": {
+        "missed": 6,
+        "covered": 13
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest": {
+      "INSTRUCTION": {
+        "missed": 7,
+        "covered": 108
+      },
+      "BRANCH": {
+        "missed": 1,
+        "covered": 1
+      },
+      "LINE": {
+        "missed": 2,
+        "covered": 25
+      },
+      "COMPLEXITY": {
+        "missed": 2,
+        "covered": 11
+      },
+      "METHOD": {
+        "missed": 1,
+        "covered": 11
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata": {
+      "INSTRUCTION": {
+        "missed": 32,
+        "covered": 141
+      },
+      "BRANCH": {
+        "missed": 14,
+        "covered": 20
+      },
+      "LINE": {
+        "missed": 6,
+        "covered": 25
+      },
+      "COMPLEXITY": {
+        "missed": 16,
+        "covered": 13
+      },
+      "METHOD": {
+        "missed": 2,
+        "covered": 10
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule": {
+      "INSTRUCTION": {
+        "missed": 14,
+        "covered": 75
+      },
+      "BRANCH": {
+        "missed": 2,
+        "covered": 11
+      },
+      "LINE": {
+        "missed": 1,
+        "covered": 14
+      },
+      "COMPLEXITY": {
+        "missed": 4,
+        "covered": 11
+      },
+      "METHOD": {
+        "missed": 2,
+        "covered": 5
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxIntegrityException": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 9
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 0
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 4
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 2
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/package-info": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 0
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 0
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 0
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 0
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 0
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 0
+      }
+    },
+    "dev/codex/schubert/nk/api/database/RequiredColumn": {
+      "INSTRUCTION": {
+        "missed": 7,
+        "covered": 10
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 2
+      },
+      "LINE": {
+        "missed": 2,
+        "covered": 3
+      },
+      "COMPLEXITY": {
+        "missed": 1,
+        "covered": 2
+      },
+      "METHOD": {
+        "missed": 1,
+        "covered": 1
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/database/package-info": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 0
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 0
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 0
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 0
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 0
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 0
+      }
+    }
+  },
+  "supportingDeficits": [
+    {
+      "type": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination",
+      "member": "valueOf",
+      "line": 6,
+      "counters": [
+        "INSTRUCTION:5:0",
+        "BRANCH:0:0"
+      ]
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination",
+      "member": "fromAddress",
+      "line": 21,
+      "counters": [
+        "INSTRUCTION:0:2",
+        "BRANCH:1:1"
+      ]
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination",
+      "member": "fromAddress",
+      "line": 22,
+      "counters": [
+        "INSTRUCTION:5:0",
+        "BRANCH:0:0"
+      ]
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry",
+      "member": "<init>",
+      "line": 69,
+      "counters": [
+        "INSTRUCTION:0:8",
+        "BRANCH:1:3"
+      ]
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry",
+      "member": "<init>",
+      "line": 72,
+      "counters": [
+        "INSTRUCTION:0:5",
+        "BRANCH:1:3"
+      ]
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry",
+      "member": "messageId",
+      "line": 105,
+      "counters": [
+        "INSTRUCTION:3:0",
+        "BRANCH:0:0"
+      ]
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry",
+      "member": "correlationId",
+      "line": 109,
+      "counters": [
+        "INSTRUCTION:3:0",
+        "BRANCH:0:0"
+      ]
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry",
+      "member": "destination",
+      "line": 113,
+      "counters": [
+        "INSTRUCTION:3:0",
+        "BRANCH:0:0"
+      ]
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry",
+      "member": "layoutId",
+      "line": 117,
+      "counters": [
+        "INSTRUCTION:3:0",
+        "BRANCH:0:0"
+      ]
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry",
+      "member": "layoutVersion",
+      "line": 121,
+      "counters": [
+        "INSTRUCTION:3:0",
+        "BRANCH:0:0"
+      ]
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry",
+      "member": "toString",
+      "line": 154,
+      "counters": [
+        "INSTRUCTION:2:0",
+        "BRANCH:0:0"
+      ]
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry",
+      "member": "requireLeaseOwner",
+      "line": 175,
+      "counters": [
+        "INSTRUCTION:0:7",
+        "BRANCH:1:3"
+      ]
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest",
+      "member": "<init>",
+      "line": 57,
+      "counters": [
+        "INSTRUCTION:0:3",
+        "BRANCH:1:1"
+      ]
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest",
+      "member": "<init>",
+      "line": 58,
+      "counters": [
+        "INSTRUCTION:5:0",
+        "BRANCH:0:0"
+      ]
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest",
+      "member": "toString",
+      "line": 110,
+      "counters": [
+        "INSTRUCTION:2:0",
+        "BRANCH:0:0"
+      ]
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata",
+      "member": "<init>",
+      "line": 30,
+      "counters": [
+        "INSTRUCTION:0:4",
+        "BRANCH:1:1"
+      ]
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata",
+      "member": "<init>",
+      "line": 31,
+      "counters": [
+        "INSTRUCTION:0:4",
+        "BRANCH:1:1"
+      ]
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata",
+      "member": "<init>",
+      "line": 32,
+      "counters": [
+        "INSTRUCTION:0:4",
+        "BRANCH:1:1"
+      ]
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata",
+      "member": "<init>",
+      "line": 33,
+      "counters": [
+        "INSTRUCTION:5:0",
+        "BRANCH:0:0"
+      ]
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata",
+      "member": "<init>",
+      "line": 34,
+      "counters": [
+        "INSTRUCTION:0:3",
+        "BRANCH:1:1"
+      ]
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata",
+      "member": "<init>",
+      "line": 35,
+      "counters": [
+        "INSTRUCTION:5:0",
+        "BRANCH:0:0"
+      ]
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata",
+      "member": "<init>",
+      "line": 36,
+      "counters": [
+        "INSTRUCTION:0:4",
+        "BRANCH:1:1"
+      ]
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata",
+      "member": "<init>",
+      "line": 37,
+      "counters": [
+        "INSTRUCTION:5:0",
+        "BRANCH:0:0"
+      ]
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata",
+      "member": "<init>",
+      "line": 38,
+      "counters": [
+        "INSTRUCTION:0:6",
+        "BRANCH:1:1"
+      ]
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata",
+      "member": "<init>",
+      "line": 39,
+      "counters": [
+        "INSTRUCTION:0:3",
+        "BRANCH:1:1"
+      ]
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata",
+      "member": "<init>",
+      "line": 40,
+      "counters": [
+        "INSTRUCTION:0:4",
+        "BRANCH:1:1"
+      ]
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata",
+      "member": "<init>",
+      "line": 41,
+      "counters": [
+        "INSTRUCTION:5:0",
+        "BRANCH:0:0"
+      ]
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata",
+      "member": "toString",
+      "line": 47,
+      "counters": [
+        "INSTRUCTION:2:0",
+        "BRANCH:0:0"
+      ]
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata",
+      "member": "requireProfile",
+      "line": 61,
+      "counters": [
+        "INSTRUCTION:0:8",
+        "BRANCH:1:1"
+      ]
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata",
+      "member": "requireProfile",
+      "line": 62,
+      "counters": [
+        "INSTRUCTION:0:4",
+        "BRANCH:1:1"
+      ]
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata",
+      "member": "requireProfile",
+      "line": 63,
+      "counters": [
+        "INSTRUCTION:0:5",
+        "BRANCH:2:2"
+      ]
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata",
+      "member": "requireProfile",
+      "line": 65,
+      "counters": [
+        "INSTRUCTION:5:0",
+        "BRANCH:0:0"
+      ]
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata",
+      "member": "hashCode",
+      "line": 13,
+      "counters": [
+        "INSTRUCTION:3:0",
+        "BRANCH:0:0"
+      ]
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata",
+      "member": "lambda$new$0",
+      "line": 32,
+      "counters": [
+        "INSTRUCTION:2:8",
+        "BRANCH:2:2"
+      ]
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule",
+      "member": "values",
+      "line": 8,
+      "counters": [
+        "INSTRUCTION:4:0",
+        "BRANCH:0:0"
+      ]
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule",
+      "member": "valueOf",
+      "line": 8,
+      "counters": [
+        "INSTRUCTION:5:0",
+        "BRANCH:0:0"
+      ]
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule",
+      "member": "delayAfterFailure",
+      "line": 12,
+      "counters": [
+        "INSTRUCTION:0:6",
+        "BRANCH:2:2"
+      ]
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule",
+      "member": "delayAfterFailure",
+      "line": 13,
+      "counters": [
+        "INSTRUCTION:5:0",
+        "BRANCH:0:0"
+      ]
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/database/RequiredColumn",
+      "member": "<init>",
+      "line": 12,
+      "counters": [
+        "INSTRUCTION:2:0",
+        "BRANCH:0:0"
+      ]
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/database/RequiredColumn",
+      "member": "<init>",
+      "line": 13,
+      "counters": [
+        "INSTRUCTION:5:0",
+        "BRANCH:0:0"
+      ]
+    }
+  ],
+  "rawDigest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39656-p00405-business-outbox-resource-independent-v1/unfiltered.tsv",
+    "sha256": "f3f5db28f337850f7b54f3005cb6d2b86353008a8fbfca23053af823e20d8990"
+  },
+  "rawCommand": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39656-p00405-business-outbox-resource-independent-v1/raw-command.json",
+    "sha256": "ffcdab759e2dfe8b5e44767eb9948dd3d04eaf8d670729466f5ef1f26cf34dc6"
+  },
+  "structuralCoverageExclusions": 0,
+  "execCombined": false,
+  "designPullRequest": 438,
+  "canonicalDesign": "907de7ce26b0cc2bfc1a7530fc75f8ae845e9161",
+  "positiveMainCrc": 8,
+  "physicalClasses": 10,
+  "noneActualBackendNativeFsRootOrHeldClassActions": true,
+  "technicalStaticApplicable": 0,
+  "staticRawPmd": 27,
+  "originalRawProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39634-p00405-business-outbox-before-v1/manifest.json",
+    "sha256": "8d40ce3af1a43a9d647c4e187200605145ba94124eb26c27642627d0d8bf0e0c"
+  },
+  "earlierTestProof": {
+    "path": "evidence/01_PT/006_NK-MSG-002/evidence/PG21014-outbox-null-oracle-nine-v1/manifest.json",
+    "sha256": "6bd69944333c32d39180928c51cfa00ba0b063af77cef142a4907e23c99b5685"
+  },
+  "preparationMetadataFailures": [
+    "Ambiguous spec glob resolved to exact numbered spec.",
+    "Sole package owners checked against 485 (two package-info owners)."
+  ],
+  "proofs": {
+    "prestyle": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39645-bug3296-business-outbox-prestyle-v3/manifest.json",
+      "sha256": "2d814e929b36f2e9af2c25d213ecfb5a8882ff20e862913dbfc0d6baa7943dc2"
+    },
+    "prepare": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39647-bug3296-business-outbox-prepare-v3/manifest.json",
+      "sha256": "85c3520d2cc5f35a66ff56d69ea77361d3f3c4a3bc4bddaa12f42fdc3ae6d925"
+    },
+    "static": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39648-bug3296-business-outbox-static-v3/manifest.json",
+      "sha256": "a0c190eeb76250a77f9dbfb112b3d182ac7474329ef6d5774e4ef0c44a91e40f"
+    },
+    "preflight": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39649-bug3296-business-outbox-preflight-v3/manifest.json",
+      "sha256": "d8d0511c9b2ae8bd824603547584a1f671a39f8a8c18a9867a35c6f3b90ecef4"
+    },
+    "unit": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39653-bug3296-business-outbox-unit-v1/manifest.json",
+      "sha256": "ca73000f39d0638679101e16b6afc68b9d4f74aa96ffa737b5eca6715609c36c"
+    },
+    "post": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39654-bug3296-business-outbox-post-v1/manifest.json",
+      "sha256": "0288c1a00d9b2f149df8b8b506e703be54f5c651bbb7311fed48636b6a7f58b8"
+    }
+  },
+  "retention": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39656-p00405-business-outbox-resource-independent-v1/retention.json",
+    "sha256": "2c2027e162da01f570fcc07986f47f814716bd5a59b0d4f6116cbe004d949f2b"
+  },
+  "verifier": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/5195_ssc471_business_outbox_independent.py",
+    "sha256": "9250c5d713d93baafbc21317c176030a8701e6fb838b6154b53c64f98dda693a"
+  }
+}

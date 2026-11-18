@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-11-18T22:47:26.078">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository.java">
+<violation beginline="94" endline="94" begincolumn="16" endcolumn="25" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.outbound" class="JdbcOutboxRepository" method="enqueue" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Throwable in try-catch block
+</violation>
+<violation beginline="100" endline="100" begincolumn="14" endcolumn="23" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.outbound" class="JdbcOutboxRepository" method="enqueue" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Throwable in try-catch block
+</violation>
+<violation beginline="135" endline="135" begincolumn="16" endcolumn="25" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.outbound" class="JdbcOutboxRepository" method="claim" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Throwable in try-catch block
+</violation>
+<violation beginline="141" endline="141" begincolumn="14" endcolumn="23" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.outbound" class="JdbcOutboxRepository" method="claim" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Throwable in try-catch block
+</violation>
+<violation beginline="165" endline="165" begincolumn="14" endcolumn="23" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.outbound" class="JdbcOutboxRepository" method="markSent" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Throwable in try-catch block
+</violation>
+<violation beginline="205" endline="205" begincolumn="14" endcolumn="23" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.outbound" class="JdbcOutboxRepository" method="markFailure" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Throwable in try-catch block
+</violation>
+<violation beginline="218" endline="218" begincolumn="14" endcolumn="23" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.outbound" class="JdbcOutboxRepository" method="closeRows" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Throwable in try-catch block
+</violation>
+<violation beginline="228" endline="228" begincolumn="14" endcolumn="23" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.outbound" class="JdbcOutboxRepository" method="closeStatement" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Throwable in try-catch block
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxPortTest.java">
+<violation beginline="107" endline="107" begincolumn="25" endcolumn="49" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.api.messaging.outbound" class="JdbcOutboxPortTest" method="row" variable="values" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="124" endline="124" begincolumn="45" endcolumn="66" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.outbound" class="JdbcOutboxPortTest" method="port" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="128" endline="128" begincolumn="40" endcolumn="68" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.api.messaging.outbound" class="JdbcOutboxPortTest.Fixture" variable="parameters" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="129" endline="129" begincolumn="41" endcolumn="68" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.api.messaging.outbound" class="JdbcOutboxPortTest.Fixture" variable="nullTypes" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="132" endline="132" begincolumn="45" endcolumn="79" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.api.messaging.outbound" class="JdbcOutboxPortTest.Fixture" variable="additionalFaults" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="623" endline="623" begincolumn="9" endcolumn="13" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.outbound" class="JdbcOutboxPortTest" method="sharedRepositoryParallelCallsKeepOwnRowsBindingsAndBody" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ExecutorService object are closed after use
+</violation>
+<violation beginline="623" endline="623" begincolumn="16" endcolumn="47" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.messaging.outbound" class="JdbcOutboxPortTest" method="sharedRepositoryParallelCallsKeepOwnRowsBindingsAndBody" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="629" endline="642" begincolumn="13" endcolumn="19" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.messaging.outbound" class="JdbcOutboxPortTest" method="sharedRepositoryParallelCallsKeepOwnRowsBindingsAndBody" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="648" endline="648" begincolumn="7" endcolumn="25" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.messaging.outbound" class="JdbcOutboxPortTest" method="sharedRepositoryParallelCallsKeepOwnRowsBindingsAndBody" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="649" endline="649" begincolumn="18" endcolumn="61" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.messaging.outbound" class="JdbcOutboxPortTest" method="sharedRepositoryParallelCallsKeepOwnRowsBindingsAndBody" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxReturningIdContractTest.java">
+<violation beginline="19" endline="19" begincolumn="45" endcolumn="66" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.outbound" class="OutboxReturningIdContractTest" method="port" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="36" endline="36" begincolumn="23" endcolumn="32" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.outbound" class="OutboxReturningIdContractTest" method="sqlNullReturningIdentifierCannotBecomeSuccessfulZero" variable="statement" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this PreparedStatement object are closed after use
+</violation>
+<violation beginline="48" endline="48" begincolumn="16" endcolumn="26" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.messaging.outbound" class="OutboxReturningIdContractTest" method="sqlNullReturningIdentifierCannotBecomeSuccessfulZero" variable="connection" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this Connection object are closed after use
+</violation>
+</file>
+</pmd>

@@ -1,0 +1,133 @@
+{
+  "eventId": "PGPT-20261008-6002",
+  "actualExit": 0,
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P00405-BUSINESS-OUTBOX-REQUIRED-RESOURCES-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-P00405-BUSINESS-OUTBOX-REQUIRED-RESOURCES-20261118",
+    "workAttributionKind": "REWORK",
+    "workScope": "P004-05/2, P006-02 PG03, F03/2-2. Business JdbcOutboxRepository four statements/two result handles must reject null using existing SQLDataException(22004), retain borrowed semantics and exact TWR graph with one explicit close per acquired handle. Original nine whole tests and new fixed six null cases plus independent SQL suppression across both resources, current raw and ABI; qualify finite fixture owner. No held business dispatch, real DB/broker, or VM.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/006_NK-MSG-002/007_JdbcOutbox自己所有境界単体仕様.md",
+        "sha256": "008c242626e18643f932f8abd45f46a4deae9267526bc6ef403ce63b4210912a"
+      },
+      {
+        "path": "evidence/01_PT/006_NK-MSG-002/evidence/PG21028-outbox-jdbc-independent-post-v1/manifest.json",
+        "sha256": "b18528ee8a1f967d7f0bb5503fc3ff9768c00090aadab5b90ec1bb01e9378009"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26656-outbox-twelve-public-contract-v1/manifest.json",
+        "sha256": "566cac49a0aab4f3d18582966ebc9a198bb2ee7f3dbbcbf21c5e5cf41d35e51d"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39606-p00405-api-outbox-typed-close-independent-v1/manifest.json",
+        "sha256": "1e3b26551a7f121e31b6afedfe7a562a557e02d6f2fd59dd1ce9bfbb71348424"
+      }
+    ],
+    "productionCoreMain": "15ee95822be0f4387e1e127cf43d43a08945c3c6",
+    "source": "583dad40fbfe1e7a29c445351da0a3d9c66346d3",
+    "wbsLeafIds": [
+      "WBS-F03",
+      "WBS-P004-05",
+      "WBS-P006-02"
+    ],
+    "managementWorkIds": [
+      "WBS-P004-05/2",
+      "P00602-PG03",
+      "F03/2-2",
+      "YKT-2597",
+      "BUG-3296",
+      "SSC-471"
+    ],
+    "run": "PG39656-p00405-business-outbox-resource-independent-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 1.0,
+      "base": 3.5,
+      "high": 7.8
+    },
+    "groupCapPp": 9,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "quotaAfter": {
+      "usedPercent": 40,
+      "remainingPercent": 60,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "7d5dc39f46b50f254e284c8bd44e5ff7b46e1302f49dc60db321d3a83b622b12",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T13:52:19.687000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 40,
+          "remainingPercent": 60,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T13:50:48.039805+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 40,
+      "remainingPercent": 60,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "priorProductionCore": "5e0b5575cf14416389a30be0175b52f7ec685983",
+    "result": "SSC471_ORIGINAL9_AND_ADDED3_22004_AND_RAW_REPOSITORY_ALL",
+    "actualPaths": [
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG39656-p00405-business-outbox-resource-independent-v1/manifest.json"
+    ],
+    "publicEvidence": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39656-p00405-business-outbox-resource-independent-v1/manifest.json",
+        "sha256": "284573282c4f427c0a0c16072b3019af4485d264b952667ab44d470fd8d82aee"
+      }
+    ],
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "applicationTrials": 12,
+    "distinctTestCasesAddedToExecutionCount": 12,
+    "newTestDefinitions": 3,
+    "effortCompletionRate": null,
+    "remainingOriginalDetailBasePp": 1089.848,
+    "attempt": 1,
+    "attemptResult": "PASS_LOCAL_TARGET_RAW_ALL",
+    "firstIndependentSuccess": 12,
+    "firstIndependentDenominator": 12,
+    "executedProductRetries": 0,
+    "toolPreparationFailures": [
+      "Exact spec and artifact-owner metadata corrected before static qualification."
+    ],
+    "staticPreProductFailures": [
+      "PG39640 original OBL3. PG39643 ownership annotation-only still OBL3. PG39648 uses same protected source checks and clears all."
+    ],
+    "unaccepted": [
+      "Support value classes keep raw limits; no whole source run.",
+      "P004-05 real owner, P006-02 held dispatch between DB and JMS, QA056–058 and whole451."
+    ],
+    "nextCommand": "Select next independent actionable short target. Propagate current test/static additions only after hash check and do not replay current 12."
+  }
+}
