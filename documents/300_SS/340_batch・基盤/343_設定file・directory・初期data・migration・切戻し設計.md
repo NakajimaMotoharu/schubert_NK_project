@@ -1916,6 +1916,8 @@ InspectorAesCredential.consume(byte[])は入力arrayの排他的所有を引き�
 
 ### 6.2 Runtime credential権限の限定（SSC-049、PG-D-132）
 
+SSC-457。通常Web/APIのServiceCredentialLocationは、入力Mapの値をJava Pathへ変換する際のInvalidPathExceptionを、既存の固定診断「service credential location unavailable」のIllegalArgumentExceptionへ置き換える。変換元例外、入力名、path値をcause・suppressed・診断へ保存しない。既存のnull Map契約、欠落・長さ・文字・字句妥当性、正常値、実pathのinode/ACL確認、後段の運用error分類を維持する。
+
 非公開検査processは非rootの専用UID（1～4294967294）で動作する。保持inodeの属性とaccess ACLは以下の2形式だけを許可する。ACL検査単体はfileを読まない。後続IO adapterが同じ保持inodeから取得した型付き属性、実際のfilesystem readonly flag、`system.posix_acl_access`を渡し、取得失敗を空ACLへ変換しない。
 
 SSC-081: 通常Web/APIのsystemd runtime credential directory/fileにも同表を、それぞれの非root専用service UIDで適用する。検査用UIDや`schubert`共有groupを代入せず、root+対象service ACLと対象service owner+read-only filesystemの2形だけを許可する。password fileのサイズだけ1～65536、鍵fileは54～69。両serviceの`CREDENTIALS_DIRECTORY`は位置入力にすぎず、実root/fileを保持inodeで検証する前にsecretを読まない。
