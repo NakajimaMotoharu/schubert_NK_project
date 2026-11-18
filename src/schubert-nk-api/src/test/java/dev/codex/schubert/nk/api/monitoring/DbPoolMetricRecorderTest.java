@@ -155,7 +155,7 @@ class DbPoolMetricRecorderTest {
       assertThrows(NullPointerException.class, () -> recorder.record(null));
       assertThrows(NullPointerException.class, () -> new DbPoolMetricRecorder(null, DEBUG_MODE));
       assertThrows(NullPointerException.class, () -> new DbPoolMetricRecorder(registry, null));
-      for (String mode : List.of("", "debug", "unknown-canary"))
+      for (String mode : List.of("", "debug", "unknown-canary", "DEBTf", "STANDAQc"))
         assertEquals(
             "CONFIG_INVALID",
             assertThrows(
