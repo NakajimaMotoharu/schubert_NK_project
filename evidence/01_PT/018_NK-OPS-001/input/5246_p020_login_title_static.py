@@ -26,7 +26,8 @@ def main(unit_name, out_name, prior_same_main=None):
         (153,'PG39922-p020-approved-all-brand153-v1'),(153,'PG39923-p020-approved-all-brand153-v2'),
         (161,'PG39944-p020-cache-and-session161-v1'),(161,'PG39946-p020-cache-and-session161-v2'),
         (165,'PG39964-p020-invalid-range165-v1'),(165,'PG39965-p020-invalid-range165-v2'),
-        (170,'PG39990-p020-search-empty170-v1')}
+        (170,'PG39990-p020-search-empty170-v1'),
+        (176,'PG40014-p020-game-onchange176-v1')}
     assert actual['stages']['unit']['actualExit']==0
     snapshot=Path(begin['snapshot'])
     classes=Path(actual['classesDir'])

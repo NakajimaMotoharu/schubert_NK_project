@@ -26,7 +26,7 @@ TEST_IDS = {
 }
 
 
-def decisions(old, analysis):
+def decisions(old, analysis, static=STATIC):
     reports = analysis['reports']
     assert reports['checkstyle']['findings'] == 0 and reports['checkstyle']['hasAllInputRows']
     sb = reports['spotbugs']
@@ -36,7 +36,7 @@ def decisions(old, analysis):
         assert ref(Path(report['raw']['path'])) == report['raw']
     historic = read(Path(old['pmdReviews']['path']))
     known={(p['owner'],p['rule'],p['anchor'],p['message']):p['reason'] for p in historic}
-    root = ET.parse(STATIC/'pmd.xml')
+    root = ET.parse(static/'pmd.xml')
     observed=[]
     for group in root.findall('{*}file'):
         path=Path(group.get('name'))

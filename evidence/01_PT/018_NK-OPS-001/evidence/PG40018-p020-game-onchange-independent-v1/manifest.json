@@ -1,0 +1,197 @@
+{
+  "actualExit": 0,
+  "source": "ee86a8c647860d0bf22e8620d83d67f68521b74e",
+  "unit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40014-p020-game-onchange176-v1/manifest.json",
+    "sha256": "c94ab0e9d8b58a91e54f555f63a52709efcc61c8fb02520a5abb1e7bcb8b13f6"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40016-p020-game-onchange-static-v1/manifest.json",
+    "sha256": "23126ec561c296e6945c41cc0f52cdcb044385780b43a4c57eb925b4e60ac15c"
+  },
+  "tests": 176,
+  "suites": 20,
+  "originalTests": 170,
+  "newDefinitions": 6,
+  "firstSuccess": 176,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "oracle": {
+    "caseId": "CHR-S02",
+    "pointer": "/gameOnchange",
+    "current": "this.form.submit()",
+    "nk": null,
+    "disabledScriptFallbackBoth": true,
+    "baseline": {
+      "path": "program/characterization/baseline/current/artifacts/CHR-S02.json",
+      "sha256": "f24e9682e094f5a3a3983860afa4a7082fd5ac15101a633ad03b93b482641f87"
+    },
+    "design": "documents/200_UI/260_引継ぎ・監査/264_現行互換性Characterization Test仕様.md"
+  },
+  "testIds": {
+    "PT-CHR-DEF043": "acceptsAnAbsentInlineAttributeWithTheDisabledScriptSubmitButton",
+    "PT-CHR-DEF044": "rejectsAMissingGameChangeFieldInsteadOfAnObservedAbsentAttribute",
+    "PT-CHR-DEF045": "refusesASelfReportedNewInlineChangeHandler",
+    "PT-CHR-DEF046": "refusesTheGameChangeClaimAtAnotherField",
+    "PT-CHR-DEF047": "rejectsTheAbsentFallbackButtonEvenIfBothArtifactsAgree",
+    "PT-CHR-DEF048": "requiresAnExplicitGameChangeClaim"
+  },
+  "comparatorCounters": {
+    "INSTRUCTION": 1485,
+    "BRANCH": 142,
+    "LINE": 282,
+    "COMPLEXITY": 115,
+    "METHOD": 44,
+    "CLASS": 2
+  },
+  "raw": {
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38642-schema-raw-line-tool-v1/toolclasses:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+      "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+      "--line-deficits",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG40014-p020-game-onchange176-v1/jacoco.exec",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40014-p020-game-onchange176-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/ArtifactComparator$ComparisonResult.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40014-p020-game-onchange176-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/ArtifactComparator.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40014-p020-game-onchange176-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope$Open.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40014-p020-game-onchange176-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope$Release.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40014-p020-game-onchange176-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope$Work.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40014-p020-game-onchange176-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40014-p020-game-onchange176-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40014-p020-game-onchange176-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$BaselineNumbers.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40014-p020-game-onchange176-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$FileJsonOutput.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40014-p020-game-onchange176-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$JsonOutput.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40014-p020-game-onchange176-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$TreeStats.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40014-p020-game-onchange176-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$UsableSpace.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40014-p020-game-onchange176-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40014-p020-game-onchange176-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateContractValidator$ValidationResult.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40014-p020-game-onchange176-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateContractValidator.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40014-p020-game-onchange176-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/TargetAdapter$Target.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40014-p020-game-onchange176-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/TargetAdapter.class"
+    ],
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40018-p020-game-onchange-independent-v1/raw.tsv",
+      "sha256": "1cffbaed9656c1c835c2bdc9d9345f4ced14266c721968645ed0b66003b64a49"
+    },
+    "actualExit": 0,
+    "noCode": [
+      "dev/codex/schubert/characterization/CharacterizationIoScope$Open",
+      "dev/codex/schubert/characterization/CharacterizationIoScope$Release",
+      "dev/codex/schubert/characterization/CharacterizationIoScope$Work",
+      "dev/codex/schubert/characterization/GateCli$JsonOutput",
+      "dev/codex/schubert/characterization/GateCli$UsableSpace"
+    ],
+    "tool": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38642-f03-schema-raw-line-deficits-v1/begin.json",
+      "sha256": "7f91863199af3f9ce301b3b3eeefc24ff34fb8825524669fe8469bee1ccf8786"
+    },
+    "lineDeficits": [
+      [
+        "dev/codex/schubert/characterization/GateCli",
+        "main",
+        "([Ljava/lang/String;)V",
+        "92",
+        "INSTRUCTION:0:52",
+        "BRANCH:1:25"
+      ],
+      [
+        "dev/codex/schubert/characterization/GateCli",
+        "main",
+        "([Ljava/lang/String;)V",
+        "98",
+        "INSTRUCTION:7:0",
+        "BRANCH:0:0"
+      ],
+      [
+        "dev/codex/schubert/characterization/GateCli",
+        "preflight",
+        "(Ljava/nio/file/Path;Ljava/nio/file/Path;)V",
+        "202",
+        "INSTRUCTION:4:0",
+        "BRANCH:0:0"
+      ],
+      [
+        "dev/codex/schubert/characterization/GateCli",
+        "preflight",
+        "(Ljava/nio/file/Path;Ljava/nio/file/Path;)V",
+        "203",
+        "INSTRUCTION:1:0",
+        "BRANCH:0:0"
+      ]
+    ],
+    "rawTotals": {
+      "LINE": {
+        "missed": 2,
+        "covered": 1524
+      },
+      "METHOD": {
+        "missed": 1,
+        "covered": 234
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 12
+      },
+      "BRANCH": {
+        "missed": 1,
+        "covered": 934
+      },
+      "INSTRUCTION": {
+        "missed": 12,
+        "covered": 8090
+      }
+    },
+    "missedMethods": [
+      {
+        "className": "dev/codex/schubert/characterization/GateCli",
+        "method": "main",
+        "descriptor": "([Ljava/lang/String;)V",
+        "misses": [
+          "INSTRUCTION:7:141",
+          "BRANCH:1:27",
+          "LINE:1:27",
+          "COMPLEXITY:1:19"
+        ]
+      },
+      {
+        "className": "dev/codex/schubert/characterization/GateCli",
+        "method": "preflight",
+        "descriptor": "(Ljava/nio/file/Path;Ljava/nio/file/Path;)V",
+        "misses": [
+          "INSTRUCTION:5:0",
+          "LINE:2:0",
+          "COMPLEXITY:1:0",
+          "METHOD:1:0"
+        ]
+      }
+    ]
+  },
+  "originalBaselineUnchanged": true,
+  "oldCoverageTransferred": false,
+  "pmdReviews": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40018-p020-game-onchange-independent-v1/pmd-per-site.json",
+    "sha256": "ad5a7b31ded484d265742918241e792bd5226c3e3211a0d28e3dae23f5013cfe"
+  },
+  "pmdRaw": 6,
+  "pmdApplicable": 0,
+  "pmdUnclassified": 0,
+  "actualNkChr": false,
+  "classInit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40018-p020-game-onchange-independent-v1/class-init.log.gz",
+    "sha256": "3c85a80032f4c39202fb2d9600c37caa72b70c29eefdb47e5073ef37d6b8fb1e"
+  },
+  "remainingRuntimePreflight": "BUG-3311",
+  "horizontalOpen": "YKT-2699",
+  "productTests": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "whole451Accepted": false,
+  "terminalAtUTC": "2026-11-18T18:02:55.544277+00:00",
+  "verifier": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/5258_p020_game_onchange_independent.py",
+    "sha256": "448bb8c7fff8c3024615c8e991bf8a969682802366b93717405bc92f055b3e30"
+  }
+}
