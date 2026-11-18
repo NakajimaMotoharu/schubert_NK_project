@@ -1,0 +1,195 @@
+{
+  "actualExit": 0,
+  "source": "2a3cc0ae173e2ee10da127f277b2cfb79b169270",
+  "run": "PG39904-p020-approved-login-title148-v1",
+  "unit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39904-p020-approved-login-title148-v1/manifest.json",
+    "sha256": "f9ff26be1b2277c4ecfe65fa0265528a0a7f499365d05a93cfbd88d68f0379bf"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39908-p020-approved-login-title-static-v1/manifest.json",
+    "sha256": "3bf2b4fcf492b4ba1dbcee55c100a5f5107cf984ebd1a45686fd0de7556bad61"
+  },
+  "originalTests": 144,
+  "newDefinitions": 4,
+  "tests": 148,
+  "suites": 20,
+  "firstSuccess": 148,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "approvedOracle": {
+    "current": "schubert - ログイン",
+    "nk": "schubert NK - ログイン",
+    "dif": "DIF-001",
+    "caseId": "CHR-A01",
+    "jsonPointer": "/title",
+    "canonicalOriginMainSS": "documents/300_SS/350_運用・品質/355_Characterization Test実行準備・PG開始gate.md"
+  },
+  "testIds": {
+    "PT-CHR-DEF017": "requiresLoginTitleObservationEvenWhenAnotherCaseUsesBrandDifference",
+    "PT-CHR-DEF018": "rejectsLoginTitleObservationAtAnotherPointer",
+    "PT-CHR-DEF019": "rejectsCurrentLoginTitleOutsideTheApprovedPair",
+    "PT-CHR-DEF020": "rejectsNkLoginTitleOutsideTheApprovedPair"
+  },
+  "raw": {
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38642-schema-raw-line-tool-v1/toolclasses:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+      "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+      "--line-deficits",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG39904-p020-approved-login-title148-v1/jacoco.exec",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39904-p020-approved-login-title148-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/ArtifactComparator$ComparisonResult.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39904-p020-approved-login-title148-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/ArtifactComparator.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39904-p020-approved-login-title148-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope$Open.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39904-p020-approved-login-title148-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope$Release.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39904-p020-approved-login-title148-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope$Work.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39904-p020-approved-login-title148-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39904-p020-approved-login-title148-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39904-p020-approved-login-title148-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$BaselineNumbers.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39904-p020-approved-login-title148-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$FileJsonOutput.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39904-p020-approved-login-title148-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$JsonOutput.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39904-p020-approved-login-title148-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$TreeStats.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39904-p020-approved-login-title148-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$UsableSpace.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39904-p020-approved-login-title148-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39904-p020-approved-login-title148-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateContractValidator$ValidationResult.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39904-p020-approved-login-title148-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateContractValidator.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39904-p020-approved-login-title148-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/TargetAdapter$Target.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39904-p020-approved-login-title148-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/TargetAdapter.class"
+    ],
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39910-p020-login-title-independent-v1/raw.tsv",
+      "sha256": "2b80306a9ed5ab62c1deca7459ff0de62b0f3011bb0bca053bcba1a5cb97ac5d"
+    },
+    "actualExit": 0,
+    "noCode": [
+      "dev/codex/schubert/characterization/CharacterizationIoScope$Open",
+      "dev/codex/schubert/characterization/CharacterizationIoScope$Release",
+      "dev/codex/schubert/characterization/CharacterizationIoScope$Work",
+      "dev/codex/schubert/characterization/GateCli$JsonOutput",
+      "dev/codex/schubert/characterization/GateCli$UsableSpace"
+    ],
+    "tool": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38642-f03-schema-raw-line-deficits-v1/begin.json",
+      "sha256": "7f91863199af3f9ce301b3b3eeefc24ff34fb8825524669fe8469bee1ccf8786"
+    },
+    "lineDeficits": [
+      [
+        "dev/codex/schubert/characterization/GateCli",
+        "main",
+        "([Ljava/lang/String;)V",
+        "92",
+        "INSTRUCTION:0:52",
+        "BRANCH:1:25"
+      ],
+      [
+        "dev/codex/schubert/characterization/GateCli",
+        "main",
+        "([Ljava/lang/String;)V",
+        "98",
+        "INSTRUCTION:7:0",
+        "BRANCH:0:0"
+      ],
+      [
+        "dev/codex/schubert/characterization/GateCli",
+        "preflight",
+        "(Ljava/nio/file/Path;Ljava/nio/file/Path;)V",
+        "202",
+        "INSTRUCTION:4:0",
+        "BRANCH:0:0"
+      ],
+      [
+        "dev/codex/schubert/characterization/GateCli",
+        "preflight",
+        "(Ljava/nio/file/Path;Ljava/nio/file/Path;)V",
+        "203",
+        "INSTRUCTION:1:0",
+        "BRANCH:0:0"
+      ]
+    ],
+    "rawTotals": {
+      "LINE": {
+        "missed": 2,
+        "covered": 1475
+      },
+      "METHOD": {
+        "missed": 1,
+        "covered": 231
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 12
+      },
+      "BRANCH": {
+        "missed": 1,
+        "covered": 908
+      },
+      "INSTRUCTION": {
+        "missed": 12,
+        "covered": 7856
+      }
+    },
+    "missedMethods": [
+      {
+        "className": "dev/codex/schubert/characterization/GateCli",
+        "method": "main",
+        "descriptor": "([Ljava/lang/String;)V",
+        "misses": [
+          "INSTRUCTION:7:141",
+          "BRANCH:1:27",
+          "LINE:1:27",
+          "COMPLEXITY:1:19"
+        ]
+      },
+      {
+        "className": "dev/codex/schubert/characterization/GateCli",
+        "method": "preflight",
+        "descriptor": "(Ljava/nio/file/Path;Ljava/nio/file/Path;)V",
+        "misses": [
+          "INSTRUCTION:5:0",
+          "LINE:2:0",
+          "COMPLEXITY:1:0",
+          "METHOD:1:0"
+        ]
+      }
+    ]
+  },
+  "fullCounterForTwoComparatorPhysical": {
+    "INSTRUCTION": 1251,
+    "BRANCH": 116,
+    "LINE": 233,
+    "COMPLEXITY": 99,
+    "METHOD": 41,
+    "CLASS": 2
+  },
+  "pmdRaw": 6,
+  "pmdNotApplicable": 6,
+  "pmdApplicable": 0,
+  "pmdUnclassified": 0,
+  "pmdReviews": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39910-p020-login-title-independent-v1/pmd-per-site.json",
+    "sha256": "1c2ef828da56a57613cc151a0eac9337ad5702070aebf38298a701e9a213376b"
+  },
+  "originalBaselineUnchanged": true,
+  "oldCoverageTransferred": false,
+  "priorOpenNormalPreflightDeficitRemains": "BUG-3311",
+  "resolvedBug": "BUG-3314",
+  "horizontalOpen": "YKT-2699",
+  "keyOrExternalOrNativeActions": 0,
+  "actualNkChr": false,
+  "newAcceptance": 0,
+  "productTests": 0,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "classInit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39910-p020-login-title-independent-v1/class-init.log.gz",
+    "sha256": "6281c43dc1268a01227232caaabd1314151e262b550d2c104e44402aa0ab842b"
+  },
+  "terminalAtUTC": "2026-11-18T16:55:09.110610+00:00",
+  "verifier": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/5247_p020_login_title_independent.py",
+    "sha256": "7c101f4902f13b5dbefe6ed3c4ddd763b9dcab2c0ccd638ef4388d8119d54cfb"
+  }
+}
