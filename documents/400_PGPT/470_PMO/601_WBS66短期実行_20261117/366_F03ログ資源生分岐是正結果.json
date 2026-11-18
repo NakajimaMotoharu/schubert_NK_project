@@ -1,0 +1,171 @@
+{
+  "eventId": "PGPT-20261008-5898",
+  "actualExit": 0,
+  "workStatus": "PARTIAL",
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-LOG-CLEANUP-OWNED-RAW-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-F03-LOG-CLEANUP-OWNED-RAW-20261118",
+    "workAttributionKind": "REWORK",
+    "workScope": "WBS-F03/P017-07.02, pre-filed BUG3245/YKT2683. Remove the four compiled duplicate result and statement close decisions via top-level typed ownership helpers and use a private holder without unused record value methods. Keep borrowed transaction, null contract and every synthetic known/unknown case (whole 21). Same source public ABI and raw targeted counters. No actual DB, deletion, environment, credentials or HOLD operation.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/4616_SSC461ログ削除JDBC例外伝播単体仕様.md",
+        "sha256": "902420335a9a45589efd5ad96ebeea860f584c592ab53d3a56c8b70edac1cd3f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38879-f02-log-cleanup-independent-v1/manifest.json",
+        "sha256": "9955367f7e6c69ed508312b3ebf6f1c85ab7684541f5b2bb7889d5d705e30c31"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38734-f03-cleanup-raw-owner-proof-v1/manifest.json",
+        "sha256": "06b502f2f7b0d0941bacb52bbb8b03fdc7c866dac5ec621a8cb0147292b87d0e"
+      }
+    ],
+    "productionCoreMain": "421b1f35ee0733c4b357e4a862e1e2dc55e9b780",
+    "source": "53f8a148f89e1118efa0e73aebac83b283a85647",
+    "wbsLeafIds": [
+      "WBS-F03",
+      "WBS-P017-07.02"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-1",
+      "BUG-3245",
+      "YKT-2683"
+    ],
+    "run": "PG38899-f03-log-lease-independent-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.6,
+      "base": 1.4,
+      "high": 3.4
+    },
+    "groupCapPp": 5.5,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "relatedBug": "BUG-3245",
+    "relatedYkt": "YKT-2683",
+    "quotaAfter": {
+      "usedPercent": 31,
+      "remainingPercent": 69,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "4eb659c6ee5e0f8b60d702faff36dd66b40fd97b29768347ae7b1f9525b4c6ec",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T07:38:07.576000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 31,
+          "remainingPercent": 69,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T07:37:29.058528+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 31,
+      "remainingPercent": 69,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-5897",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38899-f03-log-lease-independent-v1/manifest.json",
+      "sha256": "5b3282d3716b3e498d2c24400e4b57cee950a648f9b017068fbc0d5a5c7c91bc"
+    },
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortCompletionRate": null,
+    "firstProductRunSuccess": true,
+    "firstQualityAdmitted": true,
+    "productTestsExecuted": 21,
+    "newDefinitions": 0,
+    "caseDenominator": 21,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "notRun": 0,
+    "migratedUpperSites": 22,
+    "upperInitialSites": 104,
+    "relatedBugs": [
+      "BUG-3245"
+    ],
+    "crossRefYkt": [
+      "YKT-2683"
+    ],
+    "targetRaw": {
+      "LINE": [
+        0,
+        168
+      ],
+      "METHOD": [
+        0,
+        17
+      ],
+      "CLASS": [
+        0,
+        3
+      ],
+      "BRANCH": [
+        0,
+        64
+      ],
+      "INSTRUCTION": [
+        0,
+        593
+      ]
+    },
+    "priorRaw": {
+      "LINE": [
+        0,
+        171
+      ],
+      "METHOD": [
+        3,
+        17
+      ],
+      "CLASS": [
+        0,
+        3
+      ],
+      "BRANCH": [
+        4,
+        72
+      ],
+      "INSTRUCTION": [
+        14,
+        629
+      ]
+    },
+    "completedAdditionalPricePp": 0,
+    "additionalCompletedPriceTotalPp": 42.9,
+    "originalCompletedPriceTotalPp": 9.538,
+    "shortTermTwelvePlanPp": 143.371,
+    "reviewStatus": "LOG_LEASE_RAW_DEFICIT_CLOSED_AT_NAMED_SCOPE_ONLY",
+    "nextCondition": "Continue next approved core condition with ordinary fixture and no broadened Guard. BUG3245 local closure; F03 full quality unavailable until gates and same-source six result. Remaining YKT2683 recorded separately."
+  }
+}

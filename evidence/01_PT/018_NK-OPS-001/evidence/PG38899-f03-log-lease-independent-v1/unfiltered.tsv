@@ -1,0 +1,255 @@
+CLASS	dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph	0b299811c9b7ad33	true	4	1537	INSTRUCTION:0:15	BRANCH:0:2	LINE:0:3	COMPLEXITY:0:3	METHOD:0:2	CLASS:0:1
+METHOD	dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph	preserveFatal	(Ljava/lang/Throwable;)V	9	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:2	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph	lambda$preserveFatal$0	(Ljava/lang/Throwable;)Ljava/lang/Throwable;	4106	INSTRUCTION:0:11	BRANCH:0:2	LINE:0:1	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/batch/cleanup/CleanupStopReason	e0c5d8eec8ca0c01	true	10	16433	INSTRUCTION:0:70	BRANCH:0:0	LINE:0:6	COMPLEXITY:0:5	METHOD:0:5	CLASS:0:1
+METHOD	dev/codex/schubert/nk/batch/cleanup/CleanupStopReason	values	()[Ldev/codex/schubert/nk/batch/cleanup/CleanupStopReason;	9	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/cleanup/CleanupStopReason	valueOf	(Ljava/lang/String;)Ldev/codex/schubert/nk/batch/cleanup/CleanupStopReason;	9	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/cleanup/CleanupStopReason	<init>	(Ljava/lang/String;I)V	2	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/cleanup/CleanupStopReason	$values	()[Ldev/codex/schubert/nk/batch/cleanup/CleanupStopReason;	4106	INSTRUCTION:0:23	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/cleanup/CleanupStopReason	<clinit>	()V	8	INSTRUCTION:0:33	BRANCH:0:0	LINE:0:6	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/batch/cleanup/CleanupStoppedException	01213ca2c6ba76cc	true	3	49	INSTRUCTION:0:13	BRANCH:0:0	LINE:0:4	COMPLEXITY:0:2	METHOD:0:2	CLASS:0:1
+METHOD	dev/codex/schubert/nk/batch/cleanup/CleanupStoppedException	<init>	(Ldev/codex/schubert/nk/batch/cleanup/CleanupStopReason;)V	1	INSTRUCTION:0:10	BRANCH:0:0	LINE:0:3	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/cleanup/CleanupStoppedException	reason	()Ldev/codex/schubert/nk/batch/cleanup/CleanupStopReason;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/batch/cleanup/LogCleanupService$ChunkProgress	c2f62b52067ad1ba	true	1	48	INSTRUCTION:0:9	BRANCH:0:0	LINE:0:4	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:1
+METHOD	dev/codex/schubert/nk/batch/cleanup/LogCleanupService$ChunkProgress	<init>	(Ldev/codex/schubert/nk/batch/repository/CleanupCounts;Ldev/codex/schubert/nk/batch/repository/LogCleanupProgress;)V	0	INSTRUCTION:0:9	BRANCH:0:0	LINE:0:4	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SessionLease	d49b22c11af258fc	true	45	48	INSTRUCTION:0:195	BRANCH:0:22	LINE:0:60	COMPLEXITY:0:16	METHOD:0:5	CLASS:0:1
+METHOD	dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SessionLease	<init>	(Ljava/sql/Connection;)V	0	INSTRUCTION:0:6	BRANCH:0:0	LINE:0:3	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SessionLease	acquire	()V	0	INSTRUCTION:0:84	BRANCH:0:8	LINE:0:21	COMPLEXITY:0:5	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SessionLease	closeRow	(Ljava/sql/ResultSet;Ljava/lang/Throwable;)V	10	INSTRUCTION:0:11	BRANCH:0:2	LINE:0:5	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SessionLease	closeStatement	(Ljava/sql/PreparedStatement;Ljava/lang/Throwable;)V	10	INSTRUCTION:0:11	BRANCH:0:2	LINE:0:5	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SessionLease	close	()V	1	INSTRUCTION:0:83	BRANCH:0:10	LINE:0:26	COMPLEXITY:0:6	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SqlAction	25ab5d7b4157faf1	false	0	1536	INSTRUCTION:0:0	BRANCH:0:0	LINE:0:0	COMPLEXITY:0:0	METHOD:0:0	CLASS:0:0
+CLASS	dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SqlRelease	81279efe6149dcaa	false	0	1536	INSTRUCTION:0:0	BRANCH:0:0	LINE:0:0	COMPLEXITY:0:0	METHOD:0:0	CLASS:0:0
+CLASS	dev/codex/schubert/nk/batch/cleanup/LogCleanupService	a4b421b7787eeb24	true	98	49	INSTRUCTION:0:389	BRANCH:0:42	LINE:0:104	COMPLEXITY:0:32	METHOD:0:11	CLASS:0:1
+METHOD	dev/codex/schubert/nk/batch/cleanup/LogCleanupService	<init>	()V	1	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:2	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/cleanup/LogCleanupService	<init>	(Ljava/util/function/LongSupplier;)V	0	INSTRUCTION:0:14	BRANCH:0:0	LINE:0:4	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/cleanup/LogCleanupService	withOwner	(Ldev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Guard;)Ldev/codex/schubert/nk/batch/cleanup/LogCleanupService;	9	INSTRUCTION:0:8	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/cleanup/LogCleanupService	<init>	(Ldev/codex/schubert/nk/batch/cleanup/MaintenanceMutationGuard;)V	2	INSTRUCTION:0:9	BRANCH:0:0	LINE:0:4	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/cleanup/LogCleanupService	execute	(Ljava/sql/Connection;Ldev/codex/schubert/nk/batch/repository/BatchRun;)Ldev/codex/schubert/nk/batch/cleanup/LogCleanupSummary;	1	INSTRUCTION:0:59	BRANCH:0:2	LINE:0:15	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/cleanup/LogCleanupService	check	(J)V	2	INSTRUCTION:0:39	BRANCH:0:8	LINE:0:9	COMPLEXITY:0:5	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/cleanup/LogCleanupService	owned	(Ldev/codex/schubert/nk/batch/cleanup/LogCleanupService$SqlRelease;Ldev/codex/schubert/nk/batch/cleanup/LogCleanupService$SqlAction;)Ljava/lang/Object;	10	INSTRUCTION:0:21	BRANCH:0:2	LINE:0:10	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/cleanup/LogCleanupService	replace	(Ljava/lang/Throwable;Ljava/lang/Throwable;)Z	10	INSTRUCTION:0:26	BRANCH:0:8	LINE:0:6	COMPLEXITY:0:5	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/cleanup/LogCleanupService	known	(Ljava/lang/Throwable;)Z	10	INSTRUCTION:0:13	BRANCH:0:6	LINE:0:1	COMPLEXITY:0:4	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/cleanup/LogCleanupService	transaction	(Ljava/sql/Connection;Ldev/codex/schubert/nk/batch/repository/BatchRun;Ljava/util/Optional;)Ldev/codex/schubert/nk/batch/cleanup/LogCleanupService$ChunkProgress;	2	INSTRUCTION:0:155	BRANCH:0:14	LINE:0:43	COMPLEXITY:0:8	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/cleanup/LogCleanupService	lambda$execute$0	(Ldev/codex/schubert/nk/batch/cleanup/LogCleanupService$SessionLease;Ljava/sql/Connection;Ldev/codex/schubert/nk/batch/repository/BatchRun;J)Ldev/codex/schubert/nk/batch/cleanup/LogCleanupSummary;	4098	INSTRUCTION:0:41	BRANCH:0:2	LINE:0:9	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/batch/cleanup/LogCleanupSummary	97cd31cb277493cd	true	31	65585	INSTRUCTION:26:98	BRANCH:5:7	LINE:5:16	COMPLEXITY:9:6	METHOD:4:5	CLASS:0:1
+METHOD	dev/codex/schubert/nk/batch/cleanup/LogCleanupSummary	<init>	(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ldev/codex/schubert/nk/batch/repository/CleanupCounts;Ldev/codex/schubert/nk/batch/repository/LogCleanupProgress;)V	1	INSTRUCTION:5:53	BRANCH:5:5	LINE:1:10	COMPLEXITY:5:1	METHOD:0:1	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/batch/cleanup/LogCleanupSummary	<init>	(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ldev/codex/schubert/nk/batch/repository/CleanupCounts;Ldev/codex/schubert/nk/batch/repository/LogCleanupProgress;)V	19	INSTRUCTION:0:6	BRANCH:1:1
+DEFICIT	dev/codex/schubert/nk/batch/cleanup/LogCleanupSummary	<init>	(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ldev/codex/schubert/nk/batch/repository/CleanupCounts;Ldev/codex/schubert/nk/batch/repository/LogCleanupProgress;)V	20	INSTRUCTION:0:3	BRANCH:1:1
+DEFICIT	dev/codex/schubert/nk/batch/cleanup/LogCleanupSummary	<init>	(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ldev/codex/schubert/nk/batch/repository/CleanupCounts;Ldev/codex/schubert/nk/batch/repository/LogCleanupProgress;)V	21	INSTRUCTION:0:7	BRANCH:1:1
+DEFICIT	dev/codex/schubert/nk/batch/cleanup/LogCleanupSummary	<init>	(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ldev/codex/schubert/nk/batch/repository/CleanupCounts;Ldev/codex/schubert/nk/batch/repository/LogCleanupProgress;)V	22	INSTRUCTION:0:7	BRANCH:1:1
+DEFICIT	dev/codex/schubert/nk/batch/cleanup/LogCleanupSummary	<init>	(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ldev/codex/schubert/nk/batch/repository/CleanupCounts;Ldev/codex/schubert/nk/batch/repository/LogCleanupProgress;)V	23	INSTRUCTION:0:6	BRANCH:1:1
+DEFICIT	dev/codex/schubert/nk/batch/cleanup/LogCleanupSummary	<init>	(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ldev/codex/schubert/nk/batch/repository/CleanupCounts;Ldev/codex/schubert/nk/batch/repository/LogCleanupProgress;)V	24	INSTRUCTION:5:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/batch/cleanup/LogCleanupSummary	attemptCounts	()Ldev/codex/schubert/nk/batch/repository/CleanupCounts;	1	INSTRUCTION:0:28	BRANCH:0:0	LINE:0:4	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/cleanup/LogCleanupSummary	exitCode	()I	1	INSTRUCTION:0:11	BRANCH:0:2	LINE:0:1	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/cleanup/LogCleanupSummary	toString	()Ljava/lang/String;	1	INSTRUCTION:11:0	BRANCH:0:0	LINE:4:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/batch/cleanup/LogCleanupSummary	toString	()Ljava/lang/String;	40	INSTRUCTION:2:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/cleanup/LogCleanupSummary	toString	()Ljava/lang/String;	41	INSTRUCTION:4:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/cleanup/LogCleanupSummary	toString	()Ljava/lang/String;	43	INSTRUCTION:3:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/cleanup/LogCleanupSummary	toString	()Ljava/lang/String;	45	INSTRUCTION:2:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/batch/cleanup/LogCleanupSummary	hashCode	()I	17	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/batch/cleanup/LogCleanupSummary	hashCode	()I	13	INSTRUCTION:3:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/batch/cleanup/LogCleanupSummary	equals	(Ljava/lang/Object;)Z	17	INSTRUCTION:4:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/batch/cleanup/LogCleanupSummary	equals	(Ljava/lang/Object;)Z	13	INSTRUCTION:4:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/batch/cleanup/LogCleanupSummary	run	()Ldev/codex/schubert/nk/batch/repository/BatchRun;	1	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/batch/cleanup/LogCleanupSummary	run	()Ldev/codex/schubert/nk/batch/repository/BatchRun;	13	INSTRUCTION:3:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/batch/cleanup/LogCleanupSummary	before	()Ldev/codex/schubert/nk/batch/repository/CleanupCounts;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/cleanup/LogCleanupSummary	after	()Ldev/codex/schubert/nk/batch/repository/LogCleanupProgress;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/batch/cleanup/MaintenanceMutationGuard	6380354e1b520061	true	42	49	INSTRUCTION:40:108	BRANCH:10:10	LINE:3:30	COMPLEXITY:8:6	METHOD:0:4	CLASS:0:1
+METHOD	dev/codex/schubert/nk/batch/cleanup/MaintenanceMutationGuard	<init>	()V	0	INSTRUCTION:0:6	BRANCH:0:0	LINE:0:3	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/cleanup/MaintenanceMutationGuard	<init>	(Ldev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Guard;)V	1	INSTRUCTION:0:10	BRANCH:0:0	LINE:0:3	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/cleanup/MaintenanceMutationGuard	check	()V	1	INSTRUCTION:0:18	BRANCH:0:2	LINE:0:6	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/cleanup/MaintenanceMutationGuard	bind	(Ljava/sql/Connection;)V	1	INSTRUCTION:40:74	BRANCH:10:8	LINE:3:18	COMPLEXITY:8:2	METHOD:0:1	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/batch/cleanup/MaintenanceMutationGuard	bind	(Ljava/sql/Connection;)V	43	INSTRUCTION:5:3	BRANCH:1:1
+DEFICIT	dev/codex/schubert/nk/batch/cleanup/MaintenanceMutationGuard	bind	(Ljava/sql/Connection;)V	47	INSTRUCTION:1:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/cleanup/MaintenanceMutationGuard	bind	(Ljava/sql/Connection;)V	48	INSTRUCTION:5:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/cleanup/MaintenanceMutationGuard	bind	(Ljava/sql/Connection;)V	50	INSTRUCTION:12:2	BRANCH:2:0
+DEFICIT	dev/codex/schubert/nk/batch/cleanup/MaintenanceMutationGuard	bind	(Ljava/sql/Connection;)V	56	INSTRUCTION:12:3	BRANCH:2:0
+DEFICIT	dev/codex/schubert/nk/batch/cleanup/MaintenanceMutationGuard	bind	(Ljava/sql/Connection;)V	58	INSTRUCTION:0:13	BRANCH:3:3
+DEFICIT	dev/codex/schubert/nk/batch/cleanup/MaintenanceMutationGuard	bind	(Ljava/sql/Connection;)V	59	INSTRUCTION:5:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/cleanup/MaintenanceMutationGuard	bind	(Ljava/sql/Connection;)V	60	INSTRUCTION:0:5	BRANCH:1:1
+DEFICIT	dev/codex/schubert/nk/batch/cleanup/MaintenanceMutationGuard	bind	(Ljava/sql/Connection;)V	61	INSTRUCTION:0:5	BRANCH:1:1
+CLASS	dev/codex/schubert/nk/batch/repository/BatchRepositoryException	87ddf065baea68a9	true	1	49	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:2	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:1
+METHOD	dev/codex/schubert/nk/batch/repository/BatchRepositoryException	<init>	()V	1	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:2	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/batch/repository/BatchRun	7ebe79e62602f09c	true	15	65585	INSTRUCTION:10:42	BRANCH:3:3	LINE:2:8	COMPLEXITY:5:4	METHOD:2:4	CLASS:0:1
+METHOD	dev/codex/schubert/nk/batch/repository/BatchRun	<init>	(Ljava/util/UUID;Ljava/time/Instant;)V	1	INSTRUCTION:5:32	BRANCH:3:3	LINE:1:7	COMPLEXITY:3:1	METHOD:0:1	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/BatchRun	<init>	(Ljava/util/UUID;Ljava/time/Instant;)V	14	INSTRUCTION:0:7	BRANCH:1:1
+DEFICIT	dev/codex/schubert/nk/batch/repository/BatchRun	<init>	(Ljava/util/UUID;Ljava/time/Instant;)V	15	INSTRUCTION:0:4	BRANCH:1:1
+DEFICIT	dev/codex/schubert/nk/batch/repository/BatchRun	<init>	(Ljava/util/UUID;Ljava/time/Instant;)V	16	INSTRUCTION:0:4	BRANCH:1:1
+DEFICIT	dev/codex/schubert/nk/batch/repository/BatchRun	<init>	(Ljava/util/UUID;Ljava/time/Instant;)V	17	INSTRUCTION:5:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/BatchRun	toString	()Ljava/lang/String;	1	INSTRUCTION:2:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/BatchRun	toString	()Ljava/lang/String;	22	INSTRUCTION:2:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/BatchRun	hashCode	()I	17	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/BatchRun	hashCode	()I	9	INSTRUCTION:3:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/BatchRun	equals	(Ljava/lang/Object;)Z	17	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/BatchRun	id	()Ljava/util/UUID;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/BatchRun	cutoff	()Ljava/time/Instant;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/batch/repository/BatchStep	3a814d328e8e73bf	true	16	16433	INSTRUCTION:12:124	BRANCH:0:0	LINE:1:14	COMPLEXITY:3:3	METHOD:3:3	CLASS:0:1
+METHOD	dev/codex/schubert/nk/batch/repository/BatchStep	values	()[Ldev/codex/schubert/nk/batch/repository/BatchStep;	9	INSTRUCTION:4:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/BatchStep	values	()[Ldev/codex/schubert/nk/batch/repository/BatchStep;	6	INSTRUCTION:4:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/BatchStep	valueOf	(Ljava/lang/String;)Ldev/codex/schubert/nk/batch/repository/BatchStep;	9	INSTRUCTION:5:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/BatchStep	valueOf	(Ljava/lang/String;)Ldev/codex/schubert/nk/batch/repository/BatchStep;	6	INSTRUCTION:5:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/BatchStep	<init>	(Ljava/lang/String;IZ)V	2	INSTRUCTION:0:8	BRANCH:0:0	LINE:0:3	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/BatchStep	backup	()Z	1	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/BatchStep	backup	()Z	26	INSTRUCTION:3:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/BatchStep	$values	()[Ldev/codex/schubert/nk/batch/repository/BatchStep;	4106	INSTRUCTION:0:43	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/BatchStep	<clinit>	()V	8	INSTRUCTION:0:73	BRANCH:0:0	LINE:0:11	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/batch/repository/CleanupChunk	52c41f2735f3c93c	true	13	65585	INSTRUCTION:15:31	BRANCH:1:3	LINE:1:6	COMPLEXITY:4:4	METHOD:3:3	CLASS:0:1
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupChunk	<init>	(Ldev/codex/schubert/nk/batch/repository/CleanupCounts;Ldev/codex/schubert/nk/batch/repository/CleanupReason;)V	1	INSTRUCTION:5:25	BRANCH:1:3	LINE:1:5	COMPLEXITY:1:2	METHOD:0:1	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupChunk	<init>	(Ldev/codex/schubert/nk/batch/repository/CleanupCounts;Ldev/codex/schubert/nk/batch/repository/CleanupReason;)V	15	INSTRUCTION:0:8	BRANCH:1:3
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupChunk	<init>	(Ldev/codex/schubert/nk/batch/repository/CleanupCounts;Ldev/codex/schubert/nk/batch/repository/CleanupReason;)V	16	INSTRUCTION:5:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupChunk	toString	()Ljava/lang/String;	17	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupChunk	toString	()Ljava/lang/String;	10	INSTRUCTION:3:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupChunk	hashCode	()I	17	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupChunk	hashCode	()I	10	INSTRUCTION:3:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupChunk	equals	(Ljava/lang/Object;)Z	17	INSTRUCTION:4:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupChunk	equals	(Ljava/lang/Object;)Z	10	INSTRUCTION:4:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupChunk	counts	()Ldev/codex/schubert/nk/batch/repository/CleanupCounts;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupChunk	reason	()Ldev/codex/schubert/nk/batch/repository/CleanupReason;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/batch/repository/CleanupCounts	6a52dcaf3ebdb461	true	13	65585	INSTRUCTION:6:52	BRANCH:4:6	LINE:0:5	COMPLEXITY:6:6	METHOD:2:5	CLASS:0:1
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupCounts	<init>	(JJJ)V	1	INSTRUCTION:0:39	BRANCH:4:6	LINE:0:4	COMPLEXITY:4:2	METHOD:0:1	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupCounts	<init>	(JJJ)V	9	INSTRUCTION:0:22	BRANCH:4:6
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupCounts	toString	()Ljava/lang/String;	17	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupCounts	toString	()Ljava/lang/String;	6	INSTRUCTION:3:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupCounts	hashCode	()I	17	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupCounts	hashCode	()I	6	INSTRUCTION:3:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupCounts	equals	(Ljava/lang/Object;)Z	17	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupCounts	target	()J	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupCounts	deleted	()J	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupCounts	skipped	()J	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/batch/repository/CleanupKind	42a5bd6c1cc33cad	true	19	16433	INSTRUCTION:11:148	BRANCH:0:0	LINE:2:16	COMPLEXITY:3:5	METHOD:3:5	CLASS:0:1
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupKind	values	()[Ldev/codex/schubert/nk/batch/repository/CleanupKind;	9	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupKind	valueOf	(Ljava/lang/String;)Ldev/codex/schubert/nk/batch/repository/CleanupKind;	9	INSTRUCTION:5:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupKind	valueOf	(Ljava/lang/String;)Ldev/codex/schubert/nk/batch/repository/CleanupKind;	10	INSTRUCTION:5:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupKind	<init>	(Ljava/lang/String;ILjava/lang/String;ILdev/codex/schubert/nk/batch/repository/BatchStep;)V	2	INSTRUCTION:0:18	BRANCH:0:0	LINE:0:5	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupKind	function	()Ljava/lang/String;	1	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupKind	function	()Ljava/lang/String;	32	INSTRUCTION:3:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupKind	maximumRows	()I	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupKind	step	()Ldev/codex/schubert/nk/batch/repository/BatchStep;	1	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupKind	step	()Ldev/codex/schubert/nk/batch/repository/BatchStep;	44	INSTRUCTION:3:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupKind	$values	()[Ldev/codex/schubert/nk/batch/repository/CleanupKind;	4106	INSTRUCTION:0:39	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupKind	<clinit>	()V	8	INSTRUCTION:0:84	BRANCH:0:0	LINE:0:10	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/batch/repository/CleanupReason	1f491c49aed2a6a2	true	8	16433	INSTRUCTION:0:50	BRANCH:0:0	LINE:0:4	COMPLEXITY:0:5	METHOD:0:5	CLASS:0:1
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupReason	values	()[Ldev/codex/schubert/nk/batch/repository/CleanupReason;	9	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupReason	valueOf	(Ljava/lang/String;)Ldev/codex/schubert/nk/batch/repository/CleanupReason;	9	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupReason	<init>	(Ljava/lang/String;I)V	2	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupReason	$values	()[Ldev/codex/schubert/nk/batch/repository/CleanupReason;	4106	INSTRUCTION:0:15	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupReason	<clinit>	()V	8	INSTRUCTION:0:21	BRANCH:0:0	LINE:0:4	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/batch/repository/CleanupRepository$1	9129b9719ab52a1f	true	20	4128	INSTRUCTION:9:59	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:1
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupRepository$1	<clinit>	()V	8	INSTRUCTION:9:59	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository$1	<clinit>	()V	116	INSTRUCTION:9:59	BRANCH:0:0
+CLASS	dev/codex/schubert/nk/batch/repository/CleanupRepository	3a0f94c45bfd31ab	true	85	49	INSTRUCTION:162:229	BRANCH:22:10	LINE:38:61	COMPLEXITY:20:10	METHOD:0:10	CLASS:0:1
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupRepository	<init>	(Ljava/sql/Connection;)V	1	INSTRUCTION:0:9	BRANCH:0:0	LINE:0:3	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupRepository	execute	(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ldev/codex/schubert/nk/batch/repository/CleanupKind;I)Ldev/codex/schubert/nk/batch/repository/CleanupChunk;	1	INSTRUCTION:48:87	BRANCH:5:5	LINE:12:23	COMPLEXITY:5:1	METHOD:0:1	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	execute	(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ldev/codex/schubert/nk/batch/repository/CleanupKind;I)Ldev/codex/schubert/nk/batch/repository/CleanupChunk;	33	INSTRUCTION:0:7	BRANCH:2:2
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	execute	(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ldev/codex/schubert/nk/batch/repository/CleanupKind;I)Ldev/codex/schubert/nk/batch/repository/CleanupChunk;	34	INSTRUCTION:5:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	execute	(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ldev/codex/schubert/nk/batch/repository/CleanupKind;I)Ldev/codex/schubert/nk/batch/repository/CleanupChunk;	45	INSTRUCTION:5:3	BRANCH:1:1
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	execute	(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ldev/codex/schubert/nk/batch/repository/CleanupKind;I)Ldev/codex/schubert/nk/batch/repository/CleanupChunk;	47	INSTRUCTION:0:6	BRANCH:1:1
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	execute	(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ldev/codex/schubert/nk/batch/repository/CleanupKind;I)Ldev/codex/schubert/nk/batch/repository/CleanupChunk;	48	INSTRUCTION:5:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	execute	(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ldev/codex/schubert/nk/batch/repository/CleanupKind;I)Ldev/codex/schubert/nk/batch/repository/CleanupChunk;	53	INSTRUCTION:1:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	execute	(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ldev/codex/schubert/nk/batch/repository/CleanupKind;I)Ldev/codex/schubert/nk/batch/repository/CleanupChunk;	54	INSTRUCTION:5:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	execute	(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ldev/codex/schubert/nk/batch/repository/CleanupKind;I)Ldev/codex/schubert/nk/batch/repository/CleanupChunk;	56	INSTRUCTION:5:3	BRANCH:1:1
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	execute	(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ldev/codex/schubert/nk/batch/repository/CleanupKind;I)Ldev/codex/schubert/nk/batch/repository/CleanupChunk;	58	INSTRUCTION:1:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	execute	(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ldev/codex/schubert/nk/batch/repository/CleanupKind;I)Ldev/codex/schubert/nk/batch/repository/CleanupChunk;	59	INSTRUCTION:2:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	execute	(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ldev/codex/schubert/nk/batch/repository/CleanupKind;I)Ldev/codex/schubert/nk/batch/repository/CleanupChunk;	60	INSTRUCTION:2:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	execute	(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ldev/codex/schubert/nk/batch/repository/CleanupKind;I)Ldev/codex/schubert/nk/batch/repository/CleanupChunk;	62	INSTRUCTION:4:3	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	execute	(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ldev/codex/schubert/nk/batch/repository/CleanupKind;I)Ldev/codex/schubert/nk/batch/repository/CleanupChunk;	63	INSTRUCTION:2:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	execute	(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ldev/codex/schubert/nk/batch/repository/CleanupKind;I)Ldev/codex/schubert/nk/batch/repository/CleanupChunk;	64	INSTRUCTION:1:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	execute	(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ldev/codex/schubert/nk/batch/repository/CleanupKind;I)Ldev/codex/schubert/nk/batch/repository/CleanupChunk;	65	INSTRUCTION:2:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	execute	(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ldev/codex/schubert/nk/batch/repository/CleanupKind;I)Ldev/codex/schubert/nk/batch/repository/CleanupChunk;	66	INSTRUCTION:2:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	execute	(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ldev/codex/schubert/nk/batch/repository/CleanupKind;I)Ldev/codex/schubert/nk/batch/repository/CleanupChunk;	68	INSTRUCTION:4:3	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	execute	(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ldev/codex/schubert/nk/batch/repository/CleanupKind;I)Ldev/codex/schubert/nk/batch/repository/CleanupChunk;	69	INSTRUCTION:2:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupRepository	readLogProgress	(Ldev/codex/schubert/nk/batch/repository/BatchRun;)Ldev/codex/schubert/nk/batch/repository/LogCleanupProgress;	1	INSTRUCTION:39:58	BRANCH:2:2	LINE:11:16	COMPLEXITY:2:1	METHOD:0:1	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	readLogProgress	(Ldev/codex/schubert/nk/batch/repository/BatchRun;)Ldev/codex/schubert/nk/batch/repository/LogCleanupProgress;	91	INSTRUCTION:5:3	BRANCH:1:1
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	readLogProgress	(Ldev/codex/schubert/nk/batch/repository/BatchRun;)Ldev/codex/schubert/nk/batch/repository/LogCleanupProgress;	95	INSTRUCTION:5:3	BRANCH:1:1
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	readLogProgress	(Ldev/codex/schubert/nk/batch/repository/BatchRun;)Ldev/codex/schubert/nk/batch/repository/LogCleanupProgress;	97	INSTRUCTION:1:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	readLogProgress	(Ldev/codex/schubert/nk/batch/repository/BatchRun;)Ldev/codex/schubert/nk/batch/repository/LogCleanupProgress;	98	INSTRUCTION:2:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	readLogProgress	(Ldev/codex/schubert/nk/batch/repository/BatchRun;)Ldev/codex/schubert/nk/batch/repository/LogCleanupProgress;	99	INSTRUCTION:2:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	readLogProgress	(Ldev/codex/schubert/nk/batch/repository/BatchRun;)Ldev/codex/schubert/nk/batch/repository/LogCleanupProgress;	101	INSTRUCTION:4:3	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	readLogProgress	(Ldev/codex/schubert/nk/batch/repository/BatchRun;)Ldev/codex/schubert/nk/batch/repository/LogCleanupProgress;	102	INSTRUCTION:2:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	readLogProgress	(Ldev/codex/schubert/nk/batch/repository/BatchRun;)Ldev/codex/schubert/nk/batch/repository/LogCleanupProgress;	103	INSTRUCTION:1:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	readLogProgress	(Ldev/codex/schubert/nk/batch/repository/BatchRun;)Ldev/codex/schubert/nk/batch/repository/LogCleanupProgress;	104	INSTRUCTION:2:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	readLogProgress	(Ldev/codex/schubert/nk/batch/repository/BatchRun;)Ldev/codex/schubert/nk/batch/repository/LogCleanupProgress;	105	INSTRUCTION:2:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	readLogProgress	(Ldev/codex/schubert/nk/batch/repository/BatchRun;)Ldev/codex/schubert/nk/batch/repository/LogCleanupProgress;	107	INSTRUCTION:4:3	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	readLogProgress	(Ldev/codex/schubert/nk/batch/repository/BatchRun;)Ldev/codex/schubert/nk/batch/repository/LogCleanupProgress;	108	INSTRUCTION:2:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	readLogProgress	(Ldev/codex/schubert/nk/batch/repository/BatchRun;)Ldev/codex/schubert/nk/batch/repository/LogCleanupProgress;	109	INSTRUCTION:1:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	readLogProgress	(Ldev/codex/schubert/nk/batch/repository/BatchRun;)Ldev/codex/schubert/nk/batch/repository/LogCleanupProgress;	110	INSTRUCTION:2:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	readLogProgress	(Ldev/codex/schubert/nk/batch/repository/BatchRun;)Ldev/codex/schubert/nk/batch/repository/LogCleanupProgress;	111	INSTRUCTION:4:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupRepository	prepare	(Ldev/codex/schubert/nk/batch/repository/CleanupKind;)Ljava/sql/PreparedStatement;	2	INSTRUCTION:45:11	BRANCH:9:1	LINE:8:2	COMPLEXITY:9:1	METHOD:0:1	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	prepare	(Ldev/codex/schubert/nk/batch/repository/CleanupKind;)Ljava/sql/PreparedStatement;	116	INSTRUCTION:6:6	BRANCH:9:1
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	prepare	(Ldev/codex/schubert/nk/batch/repository/CleanupKind;)Ljava/sql/PreparedStatement;	118	INSTRUCTION:5:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	prepare	(Ldev/codex/schubert/nk/batch/repository/CleanupKind;)Ljava/sql/PreparedStatement;	121	INSTRUCTION:5:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	prepare	(Ldev/codex/schubert/nk/batch/repository/CleanupKind;)Ljava/sql/PreparedStatement;	124	INSTRUCTION:5:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	prepare	(Ldev/codex/schubert/nk/batch/repository/CleanupKind;)Ljava/sql/PreparedStatement;	127	INSTRUCTION:5:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	prepare	(Ldev/codex/schubert/nk/batch/repository/CleanupKind;)Ljava/sql/PreparedStatement;	133	INSTRUCTION:5:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	prepare	(Ldev/codex/schubert/nk/batch/repository/CleanupKind;)Ljava/sql/PreparedStatement;	136	INSTRUCTION:5:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	prepare	(Ldev/codex/schubert/nk/batch/repository/CleanupKind;)Ljava/sql/PreparedStatement;	139	INSTRUCTION:5:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	prepare	(Ldev/codex/schubert/nk/batch/repository/CleanupKind;)Ljava/sql/PreparedStatement;	142	INSTRUCTION:4:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupRepository	closeRow	(Ljava/sql/ResultSet;Ljava/lang/Throwable;)V	10	INSTRUCTION:7:4	BRANCH:2:0	LINE:2:3	COMPLEXITY:1:1	METHOD:0:1	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	closeRow	(Ljava/sql/ResultSet;Ljava/lang/Throwable;)V	151	INSTRUCTION:1:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	closeRow	(Ljava/sql/ResultSet;Ljava/lang/Throwable;)V	152	INSTRUCTION:6:0	BRANCH:2:0
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupRepository	closeStatement	(Ljava/sql/PreparedStatement;Ljava/lang/Throwable;)V	10	INSTRUCTION:7:4	BRANCH:2:0	LINE:2:3	COMPLEXITY:1:1	METHOD:0:1	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	closeStatement	(Ljava/sql/PreparedStatement;Ljava/lang/Throwable;)V	160	INSTRUCTION:1:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	closeStatement	(Ljava/sql/PreparedStatement;Ljava/lang/Throwable;)V	161	INSTRUCTION:6:0	BRANCH:2:0
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupRepository	requireTransaction	()V	2	INSTRUCTION:5:5	BRANCH:1:1	LINE:1:2	COMPLEXITY:1:1	METHOD:0:1	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	requireTransaction	()V	166	INSTRUCTION:0:4	BRANCH:1:1
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	requireTransaction	()V	167	INSTRUCTION:5:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupRepository	bind	(Ljava/sql/PreparedStatement;Ldev/codex/schubert/nk/batch/repository/BatchRun;)V	10	INSTRUCTION:0:13	BRANCH:0:0	LINE:0:3	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupRepository	counts	(Ljava/sql/ResultSet;)Ldev/codex/schubert/nk/batch/repository/CleanupCounts;	10	INSTRUCTION:6:34	BRANCH:0:0	LINE:2:4	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	counts	(Ljava/sql/ResultSet;)Ldev/codex/schubert/nk/batch/repository/CleanupCounts;	181	INSTRUCTION:1:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	counts	(Ljava/sql/ResultSet;)Ldev/codex/schubert/nk/batch/repository/CleanupCounts;	182	INSTRUCTION:5:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupRepository	required	(Ljava/lang/Object;)Ljava/lang/Object;	10	INSTRUCTION:5:4	BRANCH:1:1	LINE:0:2	COMPLEXITY:1:1	METHOD:0:1	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/CleanupRepository	required	(Ljava/lang/Object;)Ljava/lang/Object;	187	INSTRUCTION:5:2	BRANCH:1:1
+CLASS	dev/codex/schubert/nk/batch/repository/JdbcResourceFailures	ce7471ab69e0bcf6	false	9	1536	INSTRUCTION:25:0	BRANCH:8:0	LINE:6:0	COMPLEXITY:5:0	METHOD:1:0	CLASS:1:0
+METHOD	dev/codex/schubert/nk/batch/repository/JdbcResourceFailures	replace	(Ljava/lang/Throwable;Ljava/lang/Throwable;)Z	9	INSTRUCTION:25:0	BRANCH:8:0	LINE:6:0	COMPLEXITY:5:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/JdbcResourceFailures	replace	(Ljava/lang/Throwable;Ljava/lang/Throwable;)Z	15	INSTRUCTION:8:0	BRANCH:6:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/JdbcResourceFailures	replace	(Ljava/lang/Throwable;Ljava/lang/Throwable;)Z	16	INSTRUCTION:2:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/JdbcResourceFailures	replace	(Ljava/lang/Throwable;Ljava/lang/Throwable;)Z	17	INSTRUCTION:9:0	BRANCH:2:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/JdbcResourceFailures	replace	(Ljava/lang/Throwable;Ljava/lang/Throwable;)Z	19	INSTRUCTION:2:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/JdbcResourceFailures	replace	(Ljava/lang/Throwable;Ljava/lang/Throwable;)Z	20	INSTRUCTION:2:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/JdbcResourceFailures	replace	(Ljava/lang/Throwable;Ljava/lang/Throwable;)Z	22	INSTRUCTION:2:0	BRANCH:0:0
+CLASS	dev/codex/schubert/nk/batch/repository/LogCleanupProgress	527bfa73a5a56118	true	9	65585	INSTRUCTION:10:29	BRANCH:0:0	LINE:0:5	COMPLEXITY:3:4	METHOD:3:4	CLASS:0:1
+METHOD	dev/codex/schubert/nk/batch/repository/LogCleanupProgress	<init>	(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ldev/codex/schubert/nk/batch/repository/CleanupCounts;Z)V	1	INSTRUCTION:0:20	BRANCH:0:0	LINE:0:4	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/LogCleanupProgress	toString	()Ljava/lang/String;	17	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/LogCleanupProgress	toString	()Ljava/lang/String;	10	INSTRUCTION:3:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/LogCleanupProgress	hashCode	()I	17	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/LogCleanupProgress	hashCode	()I	10	INSTRUCTION:3:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/LogCleanupProgress	equals	(Ljava/lang/Object;)Z	17	INSTRUCTION:4:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/batch/repository/LogCleanupProgress	equals	(Ljava/lang/Object;)Z	10	INSTRUCTION:4:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/LogCleanupProgress	run	()Ldev/codex/schubert/nk/batch/repository/BatchRun;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/LogCleanupProgress	counts	()Ldev/codex/schubert/nk/batch/repository/CleanupCounts;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/LogCleanupProgress	complete	()Z	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Guard	b5b153f7fd9d91fa	true	5	1537	INSTRUCTION:4:20	BRANCH:2:2	LINE:0:5	COMPLEXITY:2:2	METHOD:0:2	CLASS:0:1
+METHOD	dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Guard	check	()V	1	INSTRUCTION:2:6	BRANCH:1:1	LINE:0:2	COMPLEXITY:1:1	METHOD:0:1	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Guard	check	()V	41	INSTRUCTION:2:5	BRANCH:1:1
+METHOD	dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Guard	queryTimeoutSeconds	()I	1	INSTRUCTION:2:14	BRANCH:1:1	LINE:0:3	COMPLEXITY:1:1	METHOD:0:1	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Guard	queryTimeoutSeconds	()I	47	INSTRUCTION:2:4	BRANCH:1:1
+CLASS	dev/codex/schubert/nk/storage/StorageIoException$Reason	a64b044af8a34f92	false	8	16433	INSTRUCTION:50:0	BRANCH:0:0	LINE:4:0	COMPLEXITY:5:0	METHOD:5:0	CLASS:1:0
+METHOD	dev/codex/schubert/nk/storage/StorageIoException$Reason	values	()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;	9	INSTRUCTION:4:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/storage/StorageIoException$Reason	values	()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;	12	INSTRUCTION:4:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/storage/StorageIoException$Reason	valueOf	(Ljava/lang/String;)Ldev/codex/schubert/nk/storage/StorageIoException$Reason;	9	INSTRUCTION:5:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/storage/StorageIoException$Reason	valueOf	(Ljava/lang/String;)Ldev/codex/schubert/nk/storage/StorageIoException$Reason;	12	INSTRUCTION:5:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/storage/StorageIoException$Reason	<init>	(Ljava/lang/String;I)V	2	INSTRUCTION:5:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/storage/StorageIoException$Reason	<init>	(Ljava/lang/String;I)V	12	INSTRUCTION:5:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/storage/StorageIoException$Reason	$values	()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;	4106	INSTRUCTION:15:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/storage/StorageIoException$Reason	$values	()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;	12	INSTRUCTION:15:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/storage/StorageIoException$Reason	<clinit>	()V	8	INSTRUCTION:21:0	BRANCH:0:0	LINE:4:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/storage/StorageIoException$Reason	<clinit>	()V	12	INSTRUCTION:3:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/storage/StorageIoException$Reason	<clinit>	()V	13	INSTRUCTION:6:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/storage/StorageIoException$Reason	<clinit>	()V	14	INSTRUCTION:6:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/storage/StorageIoException$Reason	<clinit>	()V	15	INSTRUCTION:6:0	BRANCH:0:0
+CLASS	dev/codex/schubert/nk/storage/StorageIoException	1271c02831786cbb	true	25	49	INSTRUCTION:29:64	BRANCH:3:9	LINE:7:16	COMPLEXITY:6:5	METHOD:4:1	CLASS:0:1
+METHOD	dev/codex/schubert/nk/storage/StorageIoException	<init>	(Ldev/codex/schubert/nk/storage/StorageIoException$Reason;)V	1	INSTRUCTION:10:0	BRANCH:0:0	LINE:3:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/storage/StorageIoException	<init>	(Ldev/codex/schubert/nk/storage/StorageIoException$Reason;)V	21	INSTRUCTION:3:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/storage/StorageIoException	<init>	(Ldev/codex/schubert/nk/storage/StorageIoException$Reason;)V	22	INSTRUCTION:6:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/storage/StorageIoException	<init>	(Ldev/codex/schubert/nk/storage/StorageIoException$Reason;)V	23	INSTRUCTION:1:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/storage/StorageIoException	reason	()Ldev/codex/schubert/nk/storage/StorageIoException$Reason;	1	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/storage/StorageIoException	reason	()Ldev/codex/schubert/nk/storage/StorageIoException$Reason;	26	INSTRUCTION:3:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/storage/StorageIoException	preserveFatal	(Ljava/lang/Throwable;)V	9	INSTRUCTION:4:0	BRANCH:0:0	LINE:2:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/storage/StorageIoException	preserveFatal	(Ljava/lang/Throwable;)V	31	INSTRUCTION:3:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/storage/StorageIoException	preserveFatal	(Ljava/lang/Throwable;)V	35	INSTRUCTION:1:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/storage/StorageIoException	preserveFatal	(Ljava/lang/Throwable;Ljava/util/function/Function;)V	9	INSTRUCTION:1:64	BRANCH:1:9	LINE:0:16	COMPLEXITY:1:5	METHOD:0:1	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/storage/StorageIoException	preserveFatal	(Ljava/lang/Throwable;Ljava/util/function/Function;)V	47	INSTRUCTION:1:4	BRANCH:1:1
+METHOD	dev/codex/schubert/nk/storage/StorageIoException	lambda$preserveFatal$0	(Ljava/lang/Throwable;)Ljava/lang/Throwable;	4106	INSTRUCTION:11:0	BRANCH:2:0	LINE:1:0	COMPLEXITY:2:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/storage/StorageIoException	lambda$preserveFatal$0	(Ljava/lang/Throwable;)Ljava/lang/Throwable;	34	INSTRUCTION:11:0	BRANCH:2:0
+CLASS	dev/codex/schubert/nk/storage/package-info	422653fb36e474e9	false	0	5632	INSTRUCTION:0:0	BRANCH:0:0	LINE:0:0	COMPLEXITY:0:0	METHOD:0:0	CLASS:0:0
