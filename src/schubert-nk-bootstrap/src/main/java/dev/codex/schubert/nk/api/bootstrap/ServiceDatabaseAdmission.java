@@ -79,7 +79,7 @@ public final class ServiceDatabaseAdmission {
     }
   }
 
-  String role() {
+  String expectedRole() {
     return role;
   }
 
