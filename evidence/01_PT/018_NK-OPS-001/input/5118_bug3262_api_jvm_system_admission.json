@@ -1,0 +1,154 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG39240-BUG3262-API-JVM-SYSTEM-FINITE-V1",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39234-bug3262-api-jvm-system-prepare-v1/manifest.json",
+    "sha256": "c38de32fa23885cf93bcd438192e5bb150091551670f03d1343e6bf969b7b31f"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39236-bug3262-api-jvm-system-static-v1/manifest.json",
+    "sha256": "9a6dcb0b123c1e5640a6264aef29f8624b75783480bf09a8ec7070c3ad9c68a6"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiJvmMetricsTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this Registry object are closed after use",
+      "sourceLine": 191,
+      "sourceAnchor": "var source = new Registry();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This distinct Registry is closed in the immediately following statement before any assertion. Tests require the closed owner boundary."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiJvmMetricsTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this Registry object are closed after use",
+      "sourceLine": 338,
+      "sourceAnchor": "var source = new Registry();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This distinct Registry is closed in the immediately following statement before any assertion. Tests require the closed owner boundary."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiJvmMetricsTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceLine": 380,
+      "sourceAnchor": "var workers = Executors.newFixedThreadPool(4);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Owned executor always gets shutdownNow and is required to terminate within ten seconds. ExecutorService.close would be unbounded."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiJvmMetricsTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 380,
+      "sourceAnchor": "var workers = Executors.newFixedThreadPool(4);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Isolated JUnit worker which creates no application/service thread, using distinct borrowed registries, finite Future.get and settled shutdown in finally."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiJvmMetricsTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 386,
+      "sourceAnchor": "workers.submit(",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Isolated JUnit worker which creates no application/service thread, using distinct borrowed registries, finite Future.get and settled shutdown in finally."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiJvmMetricsTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 408,
+      "sourceAnchor": "workers.shutdownNow();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Isolated JUnit worker which creates no application/service thread, using distinct borrowed registries, finite Future.get and settled shutdown in finally."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiJvmMetricsTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 409,
+      "sourceAnchor": "assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Isolated JUnit worker which creates no application/service thread, using distinct borrowed registries, finite Future.get and settled shutdown in finally."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiSystemMetricsTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this Registry object are closed after use",
+      "sourceLine": 198,
+      "sourceAnchor": "var source = new Registry();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This distinct Registry is closed in the immediately following statement before any assertion. Tests require the closed owner boundary."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiSystemMetricsTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this Registry object are closed after use",
+      "sourceLine": 347,
+      "sourceAnchor": "var source = new Registry();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This distinct Registry is closed in the immediately following statement before any assertion. Tests require the closed owner boundary."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiSystemMetricsTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceLine": 389,
+      "sourceAnchor": "var workers = Executors.newFixedThreadPool(4);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Owned executor always gets shutdownNow and is required to terminate within ten seconds. ExecutorService.close would be unbounded."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiSystemMetricsTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 389,
+      "sourceAnchor": "var workers = Executors.newFixedThreadPool(4);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Isolated JUnit worker which creates no application/service thread, using distinct borrowed registries, finite Future.get and settled shutdown in finally."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiSystemMetricsTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 395,
+      "sourceAnchor": "workers.submit(",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Isolated JUnit worker which creates no application/service thread, using distinct borrowed registries, finite Future.get and settled shutdown in finally."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiSystemMetricsTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 417,
+      "sourceAnchor": "workers.shutdownNow();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Isolated JUnit worker which creates no application/service thread, using distinct borrowed registries, finite Future.get and settled shutdown in finally."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiSystemMetricsTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 418,
+      "sourceAnchor": "assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Isolated JUnit worker which creates no application/service thread, using distinct borrowed registries, finite Future.get and settled shutdown in finally."
+    }
+  ]
+}
