@@ -1,0 +1,107 @@
+{
+  "eventId": "PGPT-20261008-5808",
+  "actualExit": 0,
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-G07-MODEL-RESUME-PUBLIC-DELTA-20261118",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F03-G07-MODEL-RESUME-PUBLIC-DELTA-20261118",
+    "workAttributionKind": "SOURCE_REQUALIFICATION",
+    "workScope": "WBS-G07/F03 handoff, incremental approved Git delta from model-resume checkpoint to current public HEAD, using pinned Gitleaks with sanitized results only. Original whole repository or compressed output body coverage not inferred. Verify source and tracked changes only, no actual credential material, remote runtime, untracked paths, private artifacts or previous process. Any findings retain count/rule/controlled evidence without token content.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38430-p01810-auth-context-diagnostic-independent-v1/manifest.json",
+        "sha256": "45b1561b9b90fd56003ca186bee15d6fd4314af127e86f3fee090e2d17371bd4"
+      },
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/173_利用者モデル切替一時停止・再開点.json",
+        "sha256": "9b0a6267f12fa3aafb4d6ec9f531a963f324b456e1228b242d91881cf1e3114a"
+      }
+    ],
+    "source": "a579607426aaa00c33d500eac370febdb914e1fe",
+    "productionCoreMain": "713885ee295be89b2c2362594c67879827cfba50",
+    "run": "PG38434-f03-g07-tracked-resume-delta-scan-v1",
+    "wbsLeafIds": [
+      "WBS-G07"
+    ],
+    "managementWorkIds": [
+      "WBS-G07/criterion/quality"
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.1,
+      "base": 0.5,
+      "high": 1.2
+    },
+    "groupCapPp": 1.8,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "gitBaseline": "cc64fbee4d21bb0b805fb364d8537de3169909e9",
+    "quotaAfter": {
+      "usedPercent": 27,
+      "remainingPercent": 73,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "b5ee74e584ff9ccbf90b116f718b5ab66893ace5ea49f656d3144950eb19fe84",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T02:42:29.039000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 27,
+          "remainingPercent": 73,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T02:41:30.141453+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 26,
+      "remainingPercent": 74,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-5807",
+    "productRuns": 0,
+    "productTestsExecuted": 0,
+    "scannerActualExit": 5,
+    "findings": 282,
+    "verifiedDigestFalsePositives": 282,
+    "unresolvedForTrackedTextDelta": 0,
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38434-f03-g07-tracked-resume-delta-scan-v1/triage-final.json",
+      "sha256": "c304b4ccbbdd720fdb403ecc4f8ad591aae645bc8bda72e6f7c2047c006d67b7"
+    },
+    "additionalCompletedPriceTotalPp": 35.45,
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortCompletionRate": null,
+    "actualDedicatedPp": null,
+    "remainingCriteria": [
+      "66 binary net delta and scan of any intervening versions, whole repository external or unknown",
+      "Whole G07 formal gate remains open"
+    ]
+  }
+}
