@@ -1,0 +1,69 @@
+{
+  "eventId": "PGPT-20261008-5923",
+  "groupId": "PGPT-WBS66-F03-WEB-JVM-SYSTEM-FIXTURE-FINITE-20261118",
+  "baseCore": "29f3b433952ad19d4ad34c4e1a31ed310bebde6a",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-18T09:25:42.089000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 32,
+      "remainingPercent": 68,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-WEB-JVM-SYSTEM-FIXTURE-FINITE-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-F03-WEB-JVM-SYSTEM-FIXTURE-FINITE-20261118",
+    "workAttributionKind": "REWORK",
+    "workScope": "F03/2-2 and P018-09 YKT2387. Close two Web JVM/System Metrics fixtures WEBJVM014/WEBSYS014. Preserve 64 independent in-memory registries each, exact 256 and 128 calls, fixed reference values, no J2EE, HTTP, DB, external JVM or runtime/approved-hold operation. Verify whole original 28 and raw counters for both bound types using same fixed one-run source.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2837_Web標準SDK五whole73_単体テスト仕様.md",
+        "sha256": "bbd7e2eb1d7f678d5c1a054c6c2c6c0372bda9ce5632222ba846704e22016569"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39054-f03-web-standard-finite-independent-v1/manifest.json",
+        "sha256": "fe32a217574899af2daeb32bebceee8a88ddcc492d6c152245d55cfd728bb7ff"
+      },
+      {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebJvmMetricsTest.java",
+        "sha256": "17ef23f2aba67dcec1fa659edb851f61f3317aedca7bee367868fc92ea2c258d"
+      },
+      {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebSystemMetricsTest.java",
+        "sha256": "c468da61ae6a63ada1435ce49fa04160f06f5aaaca99dfcc5f8aefd4e1176211"
+      }
+    ],
+    "productionCoreMain": "29f3b433952ad19d4ad34c4e1a31ed310bebde6a",
+    "source": "ccc460f5c3708659b6ab6061637b20a48c60eee4",
+    "wbsLeafIds": [
+      "WBS-F03",
+      "WBS-P018-09"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2",
+      "YKT-2387"
+    ],
+    "run": "PG39120-f03-web-jvm-system-finite-independent-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.4,
+      "base": 1.35,
+      "high": 3.0
+    },
+    "groupCapPp": 4.0,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "relatedBug": "BUG-3257"
+  }
+}
