@@ -1,0 +1,99 @@
+{
+  "actualExit": 0,
+  "sourceCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "source": {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFiles.java",
+    "sha256": "a2551cf269b67fd205515e17d2b41380b0dfcde4072e424635340ba9a1fe26e2"
+  },
+  "evidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37254-monitor-lock113-criteria-return-v2/remaining-source-findings.json",
+      "sha256": "bae7ed79012520486991581a379ca89a792b8875252b84c8cc28d6eee31aecd5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36960-current287-root-pmd-v1/manifest.json",
+      "sha256": "33cabcf09b2ba0e6f996759cae2592771920828e637d78ea24a782380abc77a5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39862-service-db-state-lock-four-main-v1/manifest.json",
+      "sha256": "9433dae6e53e1d97a1b942175e930c315c118da9dea870cdffb0b26072e6a035"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40050-f03-maintenance-run-monitors-v1/manifest.json",
+      "sha256": "823c62a61586151b330b30603ddcb472e19b287021a5b3629f364f9ca35f9504"
+    }
+  ],
+  "decisions": [
+    {
+      "index": 132,
+      "method": "requireClear",
+      "line": 262,
+      "witnessSpanSha256": "778e2e21c2925280a21646e8fa0d9fadfcf070dfa1266e0855209eb735e10eed",
+      "status": "APPLICABLE_OPEN",
+      "reason": "Directory enumeration and its guard are inside the held monitor."
+    },
+    {
+      "index": 133,
+      "method": "requireOwnedNames",
+      "line": 292,
+      "witnessSpanSha256": "727253327ed1a80ecc97366d135838fc96a69d260658a02fcc17198054c53423",
+      "status": "APPLICABLE_OPEN",
+      "reason": "The monitor covers the enumeration and membership check as one operation."
+    },
+    {
+      "index": 134,
+      "method": "prepareBytes",
+      "line": 330,
+      "witnessSpanSha256": "0f9f47e46a46e859dda4057e65a79c9cb5ea9cb3dab3c3740ab5bbef8b27f5e6",
+      "status": "APPLICABLE_OPEN",
+      "reason": "Owned staging write and before/after byte and identity confirmation run while held."
+    },
+    {
+      "index": 135,
+      "method": "readBytes",
+      "line": 374,
+      "witnessSpanSha256": "83f6fde49bb2cebd216b284ad9bdfd358359576f074ba63526a53da9216954ef",
+      "status": "APPLICABLE_OPEN",
+      "reason": "Borrowed I/O and its identity comparison are protected by the same monitor."
+    },
+    {
+      "index": 136,
+      "method": "retireBytes",
+      "line": 410,
+      "witnessSpanSha256": "f7423b5346ac3e324b80dbf3172879e30d49efc7b106fd6f85eda60ae34782ec",
+      "status": "APPLICABLE_OPEN",
+      "reason": "Entry ownership comparison and a reentrant call to the same monitored read are held."
+    }
+  ],
+  "priorPlanUnclassified": 41,
+  "afterSubsetUnclassified": 36,
+  "knownApplicableInOriginal45": 9,
+  "originalRawRetained": true,
+  "noReanalysis": true,
+  "sameMonitorReentrantRead": true,
+  "preparationExit1": "Checked compile inventory also contains StartupSource metadata.",
+  "priorRootUnclassifiedUntouched": 10,
+  "physicalReceipt": {
+    "dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFiles$OwnerSource.class": "2222ae42a18f847885eb91536172d9f1c0aac4fc28bdfa62b70f2a10df10905c",
+    "dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFiles$StartupName.class": "935a4d74f978f88b20bdd8f80775f141cb9b1b5df55246d2ce63033123b3de3d",
+    "dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFiles$StartupSource.class": "b736f28dc77bd7765d146ffe151a8efb3c7cc764b0a1b3e8dd734d9d6d43c777",
+    "dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFiles.class": "f50418d8d6b8c48cd4ab6fc385f3e1764134552ae00e5641901e177af1945495"
+  },
+  "design": {
+    "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "sha256": "ac1968b36bdc90e5892bb9239eff49868b4bf977945724e02abe2876db6c7399"
+  },
+  "productTests": 0,
+  "heldOperations": 0,
+  "actualRuntimePost": 0,
+  "formalUpdated": false,
+  "wholeF03Accepted": false,
+  "whole451Accepted": false,
+  "newAcceptance": 0,
+  "terminalAtUTC": "2026-11-18T19:19:32.851814+00:00",
+  "verifier": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/5273_f03_cleanup_request_monitor_review.py",
+    "sha256": "55a1b5833eb3c8b419d2ce8bf0adc56d79766acb0a816b946612c3c8b4bde0d1"
+  }
+}
