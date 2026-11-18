@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
 /** SS351/1808 APIHOST001..016; independent ownership counts and official own-JVM CPU oracle. */
 class ApiStandardMetricSourceTest {
   private static final String STANDARD_MODE = "STANDARD";
+  private static final String INVALID_MODE = "CONFIG_INVALID";
   private static final String DEBUG_MODE = "DEBUG";
 
   @Test
@@ -104,11 +105,19 @@ class ApiStandardMetricSourceTest {
       assertThrows(NullPointerException.class, () -> owner.bind(null));
       assertThrows(NullPointerException.class, () -> owner.scrape(null));
       assertEquals(
-          "CONFIG_INVALID",
+          INVALID_MODE,
           assertThrows(IllegalArgumentException.class, () -> owner.bind("unknown")).getMessage());
       assertEquals(
-          "CONFIG_INVALID",
+          INVALID_MODE,
           assertThrows(IllegalArgumentException.class, () -> owner.scrape("")).getMessage());
+      for (String value : List.of("DEBTf", "STANDAQc")) {
+        assertEquals(
+            INVALID_MODE,
+            assertThrows(IllegalArgumentException.class, () -> owner.bind(value)).getMessage());
+        assertEquals(
+            INVALID_MODE,
+            assertThrows(IllegalArgumentException.class, () -> owner.scrape(value)).getMessage());
+      }
       assertEquals(0, count.get());
       owner.close();
     } finally {
@@ -335,34 +344,29 @@ class ApiStandardMetricSourceTest {
     source.entered = Optional.of(entered);
     source.release = Optional.of(release);
     var owner = new ApiStandardMetricSource(() -> source, (value, ack) -> {});
+    var executor = Executors.newFixedThreadPool(2);
     try {
       owner.bind(DEBUG_MODE);
-      try (var executor = Executors.newFixedThreadPool(2)) {
-        try {
-          var scrape = executor.submit(() -> owner.scrape(DEBUG_MODE));
-          assertTrue(entered.await(10, TimeUnit.SECONDS));
-          var attemptedClose = new CountDownLatch(1);
-          var close =
-              executor.submit(
-                  () -> {
-                    attemptedClose.countDown();
-                    owner.close();
-                  });
-          assertTrue(attemptedClose.await(10, TimeUnit.SECONDS));
-          assertFalse(source.isClosed());
-          release.countDown();
-          assertEquals("standard", scrape.get(10, TimeUnit.SECONDS));
-          close.get(10, TimeUnit.SECONDS);
-          assertTrue(source.isClosed());
-          assertThrows(IllegalStateException.class, () -> owner.scrape(DEBUG_MODE));
-        } finally {
-          release.countDown();
-          executor.shutdownNow();
-          assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
-          owner.close();
-        }
-      }
+      var scrape = executor.submit(() -> owner.scrape(DEBUG_MODE));
+      assertTrue(entered.await(10, TimeUnit.SECONDS));
+      var attemptedClose = new CountDownLatch(1);
+      var close =
+          executor.submit(
+              () -> {
+                attemptedClose.countDown();
+                owner.close();
+              });
+      assertTrue(attemptedClose.await(10, TimeUnit.SECONDS));
+      assertFalse(source.isClosed());
+      release.countDown();
+      assertEquals("standard", scrape.get(10, TimeUnit.SECONDS));
+      close.get(10, TimeUnit.SECONDS);
+      assertTrue(source.isClosed());
+      assertThrows(IllegalStateException.class, () -> owner.scrape(DEBUG_MODE));
     } finally {
+      release.countDown();
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
       owner.close();
     }
   }

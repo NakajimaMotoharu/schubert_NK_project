@@ -1,0 +1,104 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG39356-BUG3269-API-STANDARD-SOURCE-FINITE-V1",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39350-bug3269-api-standard-source-prepare-v1/manifest.json",
+    "sha256": "62bbffc2afe9674b0f367eaa9dc9e753319e538b63e18639a7d067bac8570700"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39352-bug3269-api-standard-source-static-v1/manifest.json",
+    "sha256": "c49ff41b2ad4b1ab5da3fe6370b8a059eb670ac2b660ec28a504a94f51565881"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSourceTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ProbeGc object are closed after use",
+      "sourceLine": 241,
+      "sourceAnchor": "var gc = new ProbeGc(order);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The fixture transfers its GC handle by the acknowledged callback to the one managed owner. The owner closes the handle before the registry and the test asserts that order."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSourceTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ProbeGc object are closed after use",
+      "sourceLine": 265,
+      "sourceAnchor": "var gc = new ProbeGc(order);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The fixture transfers its GC handle by the acknowledged callback to the one managed owner. The owner closes the handle before the registry and the test asserts that order."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSourceTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceLine": 347,
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(2);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The fixture owns the local executor. Finally releases the local latch, cancels workers, and verifies termination within ten seconds before the owner is closed."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSourceTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 347,
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(2);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This site belongs to the fixture-owned local worker or preserves its interruption, with bounded latch and future waits. No application worker or service is launched."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSourceTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 350,
+      "sourceAnchor": "var scrape = executor.submit(() -> owner.scrape(DEBUG_MODE));",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This site belongs to the fixture-owned local worker or preserves its interruption, with bounded latch and future waits. No application worker or service is launched."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSourceTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 354,
+      "sourceAnchor": "executor.submit(",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This site belongs to the fixture-owned local worker or preserves its interruption, with bounded latch and future waits. No application worker or service is launched."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSourceTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 368,
+      "sourceAnchor": "executor.shutdownNow();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This site belongs to the fixture-owned local worker or preserves its interruption, with bounded latch and future waits. No application worker or service is launched."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSourceTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 369,
+      "sourceAnchor": "assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This site belongs to the fixture-owned local worker or preserves its interruption, with bounded latch and future waits. No application worker or service is launched."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSourceTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 393,
+      "sourceAnchor": "Thread.currentThread().interrupt();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This site belongs to the fixture-owned local worker or preserves its interruption, with bounded latch and future waits. No application worker or service is launched."
+    }
+  ]
+}
