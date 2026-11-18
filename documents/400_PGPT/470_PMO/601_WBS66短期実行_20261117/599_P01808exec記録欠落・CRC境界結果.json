@@ -1,0 +1,102 @@
+{
+  "eventId": "PGPT-20261008-6120",
+  "actualExit": 0,
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P01808-EXEC-ABSENCE-AND-EXACT-CRC-VECTORS-20261119",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-P01808-EXEC-ABSENCE-AND-EXACT-CRC-VECTORS-20261119",
+    "workAttributionKind": "TOOL_FIX",
+    "wbsLeafIds": [
+      "WBS-P018-08.03"
+    ],
+    "managementWorkIds": [
+      "WBS-P018-08.03/2"
+    ],
+    "source": "227512f825e737e8134301bb3383e15dde4d15f3",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "run": "PG40098-p01808-exec-record-presence-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.2,
+      "base": 0.65,
+      "high": 1.5
+    },
+    "groupCapPp": 4,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40024-p01808-binary-session-signed-green-v1/manifest.json",
+        "sha256": "052beae67bd3f1d7caf404f93eadfa532450f04302e0c2c6c513f8b82b5396ae"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39710-p01808-session-long-boundary-v1/manifest.json",
+        "sha256": "1a20dd261bda65d669cf844fad6bd5470256e35e1ac5c21da11249da5a2ca585"
+      },
+      {
+        "path": "tools/quality/jacoco_readonly_exec_subset.py",
+        "sha256": "7f79a4ce86216acfc6cec698b7a5a48c450747a6c543ae1f0353fa581c594056"
+      }
+    ],
+    "workScope": "Run only added tiny binary record and target negatives against unchanged offline reader: no target, no session, same name/different CRC, same CRC/different names, typed input, oversized canonical count, and unsigned CRC bit/boundary. Preserve existing results; no native action or workload.",
+    "quotaAfter": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-18T19:42:03.320000+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 47,
+        "remainingPercent": 53,
+        "resetsAt": 1795445752,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "quotaReceipt": {
+      "sha256": "0b645375fcae32647f68a82db947621dbdff7510b1a04fb2af0dee455d4fbf26",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T19:42:03.320000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 47,
+          "remainingPercent": 53,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T19:41:23.067435+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "publicEvidence": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40098-p01808-exec-record-presence-v1/manifest.json",
+        "sha256": "c7de5efd6c00425490f94b6e555ed6e1bea513e5b587256f7e6047ab38eae8cb"
+      }
+    ],
+    "offlineReaderChecks": 8,
+    "firstDynamicPass": 8,
+    "earlierReaderChecksReferenced": 9,
+    "totalProductTests": 0,
+    "formalIntake": 0,
+    "currentAccepted": 17,
+    "originalLeafStatus": "OPEN",
+    "result": "Eight first-run standalone vectors, including missing records and duplicate names/CRC. No product coverage or host provenance advanced."
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "actualExit": 0,
+  "source": "1514c4c3d1f2523165250eaba717c75d3a6ad80d",
+  "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "run": "PG40098-p01808-exec-record-presence-v1",
+  "command": [
+    "/usr/bin/python3",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tools/quality",
+    "-p",
+    "jacoco_readonly_exec_subset_presence_test.py",
+    "-v"
+  ],
+  "python": "3.14.4",
+  "inputs": [
+    {
+      "path": "tools/quality/jacoco_readonly_exec_subset.py",
+      "sha256": "7f79a4ce86216acfc6cec698b7a5a48c450747a6c543ae1f0353fa581c594056"
+    },
+    {
+      "path": "tools/quality/jacoco_readonly_exec_subset_presence_test.py",
+      "sha256": "d95edb3bec1dd6f66a2557275da20ba2a865f05ef3503d19b9ede6b5ef1b234f"
+    }
+  ],
+  "log": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40098-p01808-exec-record-presence-v1/unittest-output.txt",
+    "sha256": "199d5bb98660f33e26dff50746c6d420c4e94d567e4cbbc8183fbc9bcdac5727"
+  },
+  "harness": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/5278_p01808_exec_presence_run.py",
+    "sha256": "b77332b795cd1f0093d083f098b36c01d5474a33e1c8376616d028b92c6faf09"
+  },
+  "startedAtUTC": "2026-11-18T19:41:22.984515+00:00",
+  "terminalAtUTC": "2026-11-18T19:41:23.067435+00:00",
+  "expectedCases": 8,
+  "namedCases": 8,
+  "testIds": {
+    "PT-P01808-BIN-010": "test_absent_target_is_not_a_zero_probe_report",
+    "PT-P01808-BIN-011": "test_target_name_with_conflicting_crc_stays_unqualified",
+    "PT-P01808-BIN-012": "test_two_names_for_one_crc_stay_unqualified",
+    "PT-P01808-BIN-013": "test_missing_session_does_not_qualify_a_present_class",
+    "PT-P01808-BIN-014": "test_compact_count_outside_java_int_does_not_read_probe_data",
+    "PT-P01808-BIN-015": "test_unsigned_crc_and_probe_bits_keep_exact_identity",
+    "PT-P01808-BIN-016": "test_mutable_input_is_outside_readonly_contract",
+    "PT-P01808-BIN-017": "test_unicode_names_are_outside_explicit_ascii_subset"
+  },
+  "results": {
+    "test_absent_target_is_not_a_zero_probe_report": "ok",
+    "test_compact_count_outside_java_int_does_not_read_probe_data": "ok",
+    "test_missing_session_does_not_qualify_a_present_class": "ok",
+    "test_mutable_input_is_outside_readonly_contract": "ok",
+    "test_target_name_with_conflicting_crc_stays_unqualified": "ok",
+    "test_two_names_for_one_crc_stay_unqualified": "ok",
+    "test_unicode_names_are_outside_explicit_ascii_subset": "ok",
+    "test_unsigned_crc_and_probe_bits_keep_exact_identity": "ok"
+  },
+  "earlierNine": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40024-p01808-binary-session-signed-green-v1/manifest.json",
+    "sha256": "052beae67bd3f1d7caf404f93eadfa532450f04302e0c2c6c513f8b82b5396ae"
+  },
+  "earlierSuiteReexecutions": 0,
+  "productTests": 0,
+  "realNativeOrHostOperations": 0,
+  "measuredProductCounters": 0,
+  "whole451Accepted": false,
+  "newAcceptance": 0
+}
