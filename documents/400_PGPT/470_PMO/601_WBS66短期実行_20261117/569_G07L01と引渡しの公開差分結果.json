@@ -1,0 +1,115 @@
+{
+  "eventId": "PGPT-20261008-6090",
+  "actualExit": 0,
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-G07-L01-HANDOFF-20261119",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-G07-L01-HANDOFF-20261119",
+    "workAttributionKind": "REQUALIFICATION",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "G07",
+      "WBS-F03/2-3"
+    ],
+    "source": "0641b3e3f78c4f3530d3c0d5355283fa22ee3d8e",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "fromCommit": "c7598aaeb000a87a53df2212c76f9583847f1436",
+    "run": "PG40046-g07-l01-handoff-public-delta-v1",
+    "volatileStaging": "/dev/shm/schubert-nk-pg40046-1000",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.3,
+      "base": 1.0,
+      "high": 3.0
+    },
+    "groupCapPp": 5,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40028-g07-value-onchange-signed-delta-v1/scan/manifest.json",
+        "sha256": "bc386b44f4f6a0b5f3efa231628d4b17bec10b18c929b80909967794420d7b72"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40038-p020-l01-required-actions-independent-v1/manifest.json",
+        "sha256": "f36d5771703941802d030454ee02f9fe24af803bfbb5ff63585b6da91545b4a4"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40042-wbs66-current-four-roles-update-v1/manifest.json",
+        "sha256": "83e1cb2431018d84be1b608b7529dec1dbf2454237676a982f46ef9c935a8e92"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40044-g07-preserve-older-public-projection-v1/manifest.json",
+        "sha256": "bdbdd0250a4ed158b69dec6ba1aa884e3594bb7d437cdbdb33227cc1cd132430"
+      }
+    ],
+    "workScope": "Run one redacted exact tracked interval scan and verify two unchanged-vs-fixture L01 session archives against explicit earlier static result. Do not replay unit tests.",
+    "quotaAfter": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-18T18:32:27.767000+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 46,
+        "remainingPercent": 54,
+        "resetsAt": 1795445752,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "quotaReceipt": {
+      "sha256": "feb1799667657fd41bb01f1c34cee983e16fbea554822d7c9ef6113012e41ea9",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T18:32:27.767000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 46,
+          "remainingPercent": 54,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T18:32:15.907329+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "publicEvidence": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40046-g07-l01-handoff-public-delta-v1/scan/manifest.json",
+        "sha256": "b79ea6d771721e45529d3bc39b3f7d73b235af7acdc18cee4cc7574766f1385a"
+      }
+    ],
+    "firstVerificationDenominator": 1,
+    "firstVerificationSuccess": 1,
+    "result": "Eight commits, 114 exact public versions and two different eligible L01 offsets. 32 candidates resolved, zero confirmed or unknown.",
+    "rawScannerExit": 1,
+    "findings": 32,
+    "trackedBlobVersions": 114,
+    "qualifiedBinaries": 2,
+    "scannerRetries": 0,
+    "newProductTrials": 0,
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortCompletionRate": null,
+    "remainingOriginalDetailBasePp": 1089.848,
+    "nextCommand": "Resolve the eligible MaintenanceRunFiles static dispositions by source/lock ownership; preserve native hold."
+  }
+}

@@ -53,6 +53,16 @@ CONFIG = {
         'post': 'PG40018-p020-game-onchange-independent-v1',
         'detachedValue': 'PG40008-p01810-broker-evidence-value-v2',
     },
+    '568': {
+        'history': ('PG40028-g07-value-onchange-signed-delta-v1',
+                    'PG39998-g07-jars-batch-empty-public-delta-v1',
+                    'PG39974-g07-cache-session-range-public-delta-v1',
+                    'PG39730-g07-weblog-session-and-comparator-public-delta-v1'),
+        'units': {'PG40034-p020-l01-required-actions-v1': ('firstUnit', 182),
+                  'PG40035-p020-l01-required-actions-v2': ('unit', 182)},
+        'post': 'PG40038-p020-l01-required-actions-independent-v1',
+        'firstPmdCount': 13,
+    },
 }
 GROUP=sys.argv[2] if len(sys.argv)==3 else '532'
 settings=CONFIG[GROUP]
@@ -161,7 +171,8 @@ def classify():
                 if typed_failure:
                     assert static_result['stageExits']['spotbugs']==1
                 else:
-                    assert static_result['stageExits']['pmd']==4 and static_result['reports']['pmd']['findings']==8
+                    assert static_result['stageExits']['pmd']==4
+                    assert static_result['reports']['pmd']['findings']==settings.get('firstPmdCount',8)
             terminal=unit['stages']['execinfo']
             assert terminal==B.load(unit_folder/'execinfo-exit.json') and terminal['actualExit']==0
             decoded=Path(terminal['log']['path'])
