@@ -1,0 +1,135 @@
+{
+  "eventId": "PGPT-20261008-6040",
+  "actualExit": 0,
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P00405-SERVICE-DB-STATE-LOCK-20261119",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-P00405-SERVICE-DB-STATE-LOCK-20261119",
+    "workAttributionKind": "REWORK",
+    "wbsLeafIds": [
+      "WBS-P004-05"
+    ],
+    "managementWorkIds": [
+      "WBS-P004-05/2",
+      "WBS-F03/2-2",
+      "BUG-3282",
+      "DBSOURCE-PORT016"
+    ],
+    "source": "61152cbd8fb2ef04636d3a715d3b9828c88aa3ae",
+    "productionCoreMain": "278839e0272a15a40a6a42b898eb2f6429597a5f",
+    "run": "PG39860-p00405-service-database-state-lock-v1",
+    "workScope": "WBS-P004-05/2 and F03. Reuse one ServiceDatabaseSource state-lock owner across close and getConnection without changing lock instance, selected role, SQL, connection admission, typed failure precedence, password handling or public API. Verify existing independent 31 whole port tests plus one cross-thread normal retry after connector failure. No DriverManager connector, DB, configuration, properties outside synthetic fixtures, Root, or protected classes are produced or initialized within tests. Include exact current four module build and independent raw counters.",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.65,
+      "base": 2.15,
+      "high": 5.0
+    },
+    "groupCapPp": 7,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39476-p00405-admission-single-cleanup-independent-v1/manifest.json",
+        "sha256": "0c2fac616d225b0e12b3ecc551fc4833186b8e38a96741ba2c7162a1c607db82"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39804-cleanup-fixed-statement-four-main-v1/compile/manifest.json",
+        "sha256": "f9ff6fdbb0300c821fbecfb348fe58c00855ee7ed96fb48a45d06132f5090d29"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39814-f03-storage-bootstrap-static-independent-v1/manifest.json",
+        "sha256": "e3139ccf79da928f0f9ca472549a79f7935753eacfedd5aef1e60f7587cf9539"
+      }
+    ],
+    "quotaAfter": {
+      "usedPercent": 43,
+      "remainingPercent": 57,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "5adde0845ceab13ac97092484730084d2e63ec30a4b7aac4c53cd5cced624fb2",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T16:17:50.141000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 43,
+          "remainingPercent": 57,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T16:17:10.830985+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 43,
+      "remainingPercent": 57,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "actualPaths": [
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG39868-p00405-service-db-state-lock-independent-v1/manifest.json"
+    ],
+    "publicEvidence": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39868-p00405-service-db-state-lock-independent-v1/manifest.json",
+        "sha256": "5aa80f04cdef294762b856adb9acd95b1079f7105d90f0042ec6ee499b476c5d"
+      }
+    ],
+    "result": "P00405_ONE_DB_SOURCE_LOCK_BOTH_ENTRY_POINTS_32_ORDINARY_PT_AND_CURRENT_FOUR_MAIN_BUILD",
+    "actualProductionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "actualUnitSource": "73e0eae9be642e30e4a84694a4aede3f38cdc9f8",
+    "applicationTrials": 32,
+    "distinctTestCasesAddedToExecutionCount": 1,
+    "newTestDefinitions": 1,
+    "modelSwitchTotalApplicationTrials": 1097,
+    "modelSwitchTotalDistinct": 788,
+    "modelSwitchTotalNewDefinitions": 71,
+    "firstVerificationSuccess": 32,
+    "firstVerificationDenominator": 32,
+    "executedProductRetries": 0,
+    "firstStaticSourceFinding1Retained": true,
+    "initialVerifierSetupExits": [
+      1
+    ],
+    "testsRunForFailedPreparation": 0,
+    "localTargetBoundaries": [
+      "one shared ReentrantLock",
+      "cross-thread retry after failure",
+      "public ABI equal",
+      "two raw class counters fully hit"
+    ],
+    "whole451Accepted": false,
+    "formalUpdated": false,
+    "newAcceptance": 0,
+    "effortCompletionRate": null,
+    "remainingOriginalDetailBasePp": 1089.848,
+    "unaccepted": [
+      "Actual PostgreSQL P004-05",
+      "F02 API/Web/Storage JDBC compatibility",
+      "F03 full six",
+      "451"
+    ],
+    "nextCommand": "Bind the two changed Bootstrap physical files in PG39862 to F02 current class edge and register new TestID against PG39868; only necessary static edge refresh, no test replay."
+  }
+}

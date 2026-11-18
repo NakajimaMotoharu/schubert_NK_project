@@ -1,0 +1,527 @@
+{
+  "actualExit": 0,
+  "source": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "unitSource": "73e0eae9be642e30e4a84694a4aede3f38cdc9f8",
+  "run": "PG39866-SERVICE-DB-STATE-LOCK-32",
+  "tests": 32,
+  "oldTests": 31,
+  "newTests": 1,
+  "firstSuccess": 32,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "unit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39866-service-db-state-lock-unit-v1/manifest.json",
+    "sha256": "62c05db394652f9bc42abd34659740e927d95bc294c0e8d4b50efbeb77c9d33a"
+  },
+  "sourceContract": {
+    "actualLockAcquisitionsBefore": 2,
+    "actualLockAcquisitionsAfter": 1,
+    "connectionBodyExact": true,
+    "sameCredentialWipeAndClosedOrder": true,
+    "sameOtherMethods": true,
+    "throwAndUnlockSameFinally": true,
+    "main": {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java",
+      "sha256": "bb803935da6a638fb3589b481acc1bfe25c7e9f644036d781646f22b692977b9"
+    }
+  },
+  "abi": {
+    "previous": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/target/classes/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.class",
+      "sha256": "3ee7636798e887790c2371eadd40b3311847e60690bc86396523cf70c02cb02a"
+    },
+    "current": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39862-service-db-state-lock-four-main-v1/src/schubert-nk-bootstrap/target/classes/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.class",
+      "sha256": "699810d7f9354f5f6213ab2ec12a009f6050fd59f1638a66ee78f6e807ebd5be"
+    },
+    "abiEqual": true
+  },
+  "raw": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39868-p00405-service-db-state-lock-independent-v1/raw.tsv",
+    "sha256": "e8a0ad95d4881756aff37d0129d1011eaaa596724ecf01fea0de36800ab41823"
+  },
+  "rawCommand": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+    "-cp",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38642-schema-raw-line-tool-v1/toolclasses:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+    "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+    "--line-deficits",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG39866-service-db-state-lock-unit-v1/jacoco.exec",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39862-service-db-state-lock-four-main-v1/src/schubert-nk-bootstrap/target/classes/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39862-service-db-state-lock-four-main-v1/src/schubert-nk-bootstrap/target/classes/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39862-service-db-state-lock-four-main-v1/src/schubert-nk-bootstrap/target/classes/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39862-service-db-state-lock-four-main-v1/src/schubert-nk-bootstrap/target/classes/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39862-service-db-state-lock-four-main-v1/src/schubert-nk-bootstrap/target/classes/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource$Connector.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39862-service-db-state-lock-four-main-v1/src/schubert-nk-bootstrap/target/classes/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource$StateAction.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39862-service-db-state-lock-four-main-v1/src/schubert-nk-storage/target/classes/dev/codex/schubert/nk/storage/ServiceConfigFiles$Service.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39862-service-db-state-lock-four-main-v1/src/schubert-nk-storage/target/classes/dev/codex/schubert/nk/storage/StorageIoException.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39862-service-db-state-lock-four-main-v1/src/schubert-nk-storage/target/classes/dev/codex/schubert/nk/storage/StorageIoException$Reason.class"
+  ],
+  "actualWholeCases": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39866-service-db-state-lock-unit-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "bf61d266c7185b79955c109ebc7c240ffd9da7c8af9808017e26d349da95a18e"
+  },
+  "originalWholeCases": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39464-ssc468-admission-ports-unit-v1/TEST-junit-jupiter.xml",
+    "sha256": "e1276a568df47e08f8a3623dc594d4b6ed392c81d69539025559ce70b23ea230"
+  },
+  "singleExec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39866-service-db-state-lock-unit-v1/jacoco.exec",
+    "sha256": "704875f2f86b64a4158416e7a41db4b72f7023f72b4f8c8bbfae0714c4a87c8b"
+  },
+  "classes": {
+    "dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures": {
+      "crc": "da8baea11f64c98d",
+      "positive": true,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 7,
+          "covered": 45
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 16
+        },
+        "LINE": {
+          "missed": 2,
+          "covered": 11
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 10
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 2
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph": {
+      "crc": "0b299811c9b7ad33",
+      "positive": true,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 1,
+          "covered": 14
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 3
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 2
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 2
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission": {
+      "crc": "c11bb7227d1b8c5c",
+      "positive": true,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 202
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 30
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 57
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 23
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 8
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource": {
+      "crc": "a09b41c18a855e68",
+      "positive": true,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 284
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 22
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 75
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 30
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 19
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource$Connector": {
+      "crc": "e205dee73edbf935",
+      "positive": false,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource$StateAction": {
+      "crc": "c673ff5018b091b3",
+      "positive": false,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    "dev/codex/schubert/nk/storage/ServiceConfigFiles$Service": {
+      "crc": "b6da8fae75d6f6c6",
+      "positive": true,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 40
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 6
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 4
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 4
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/storage/StorageIoException": {
+      "crc": "1271c02831786cbb",
+      "positive": true,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 29,
+          "covered": 64
+        },
+        "BRANCH": {
+          "missed": 3,
+          "covered": 9
+        },
+        "LINE": {
+          "missed": 7,
+          "covered": 16
+        },
+        "COMPLEXITY": {
+          "missed": 6,
+          "covered": 5
+        },
+        "METHOD": {
+          "missed": 4,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason": {
+      "crc": "a64b044af8a34f92",
+      "positive": false,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 50,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 4,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 5,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 5,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 1,
+          "covered": 0
+        }
+      }
+    }
+  },
+  "unfilteredDeficits": [
+    [
+      "dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures",
+      "<init>",
+      "()V",
+      "15",
+      "INSTRUCTION:2:0",
+      "BRANCH:0:0"
+    ],
+    [
+      "dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures",
+      "<init>",
+      "()V",
+      "16",
+      "INSTRUCTION:5:0",
+      "BRANCH:0:0"
+    ],
+    [
+      "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph",
+      "lambda$preserveFatal$0",
+      "(Ljava/lang/Throwable;)Ljava/lang/Throwable;",
+      "14",
+      "INSTRUCTION:1:10",
+      "BRANCH:1:1"
+    ],
+    [
+      "dev/codex/schubert/nk/storage/ServiceConfigFiles$Service",
+      "valueOf",
+      "(Ljava/lang/String;)Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;",
+      "59",
+      "INSTRUCTION:5:0",
+      "BRANCH:0:0"
+    ],
+    [
+      "dev/codex/schubert/nk/storage/StorageIoException",
+      "<init>",
+      "(Ldev/codex/schubert/nk/storage/StorageIoException$Reason;)V",
+      "21",
+      "INSTRUCTION:3:0",
+      "BRANCH:0:0"
+    ],
+    [
+      "dev/codex/schubert/nk/storage/StorageIoException",
+      "<init>",
+      "(Ldev/codex/schubert/nk/storage/StorageIoException$Reason;)V",
+      "22",
+      "INSTRUCTION:6:0",
+      "BRANCH:0:0"
+    ],
+    [
+      "dev/codex/schubert/nk/storage/StorageIoException",
+      "<init>",
+      "(Ldev/codex/schubert/nk/storage/StorageIoException$Reason;)V",
+      "23",
+      "INSTRUCTION:1:0",
+      "BRANCH:0:0"
+    ],
+    [
+      "dev/codex/schubert/nk/storage/StorageIoException",
+      "reason",
+      "()Ldev/codex/schubert/nk/storage/StorageIoException$Reason;",
+      "26",
+      "INSTRUCTION:3:0",
+      "BRANCH:0:0"
+    ],
+    [
+      "dev/codex/schubert/nk/storage/StorageIoException",
+      "preserveFatal",
+      "(Ljava/lang/Throwable;)V",
+      "31",
+      "INSTRUCTION:3:0",
+      "BRANCH:0:0"
+    ],
+    [
+      "dev/codex/schubert/nk/storage/StorageIoException",
+      "preserveFatal",
+      "(Ljava/lang/Throwable;)V",
+      "35",
+      "INSTRUCTION:1:0",
+      "BRANCH:0:0"
+    ],
+    [
+      "dev/codex/schubert/nk/storage/StorageIoException",
+      "preserveFatal",
+      "(Ljava/lang/Throwable;Ljava/util/function/Function;)V",
+      "47",
+      "INSTRUCTION:1:4",
+      "BRANCH:1:1"
+    ],
+    [
+      "dev/codex/schubert/nk/storage/StorageIoException",
+      "lambda$preserveFatal$0",
+      "(Ljava/lang/Throwable;)Ljava/lang/Throwable;",
+      "34",
+      "INSTRUCTION:11:0",
+      "BRANCH:2:0"
+    ],
+    [
+      "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+      "values",
+      "()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;",
+      "12",
+      "INSTRUCTION:4:0",
+      "BRANCH:0:0"
+    ],
+    [
+      "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+      "valueOf",
+      "(Ljava/lang/String;)Ldev/codex/schubert/nk/storage/StorageIoException$Reason;",
+      "12",
+      "INSTRUCTION:5:0",
+      "BRANCH:0:0"
+    ],
+    [
+      "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+      "<init>",
+      "(Ljava/lang/String;I)V",
+      "12",
+      "INSTRUCTION:5:0",
+      "BRANCH:0:0"
+    ],
+    [
+      "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+      "$values",
+      "()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;",
+      "12",
+      "INSTRUCTION:15:0",
+      "BRANCH:0:0"
+    ],
+    [
+      "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+      "<clinit>",
+      "()V",
+      "12",
+      "INSTRUCTION:3:0",
+      "BRANCH:0:0"
+    ],
+    [
+      "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+      "<clinit>",
+      "()V",
+      "13",
+      "INSTRUCTION:6:0",
+      "BRANCH:0:0"
+    ],
+    [
+      "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+      "<clinit>",
+      "()V",
+      "14",
+      "INSTRUCTION:6:0",
+      "BRANCH:0:0"
+    ],
+    [
+      "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+      "<clinit>",
+      "()V",
+      "15",
+      "INSTRUCTION:6:0",
+      "BRANCH:0:0"
+    ]
+  ],
+  "targetBinaries": 2,
+  "otherMeasuresNotTreatedAsPass": true,
+  "commentsOrControlFlowExclusions": 0,
+  "currentFourModuleBuild": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39862-service-db-state-lock-four-main-v1/manifest.json",
+    "sha256": "9433dae6e53e1d97a1b942175e930c315c118da9dea870cdffb0b26072e6a035"
+  },
+  "bootstrapSpotBugsCurrentPhysical201": true,
+  "scopeStaticRaw": 25,
+  "applicableOrUnclassified": 0,
+  "noOldExecUnion": true,
+  "noRealJdbcOrServiceOperations": true,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/5238_p00405_jdbc_lock_independent.py",
+    "sha256": "ce36b85d2aa24e8fb831ffb177241930a27451a65d87ce658eedacc7abdcef0f"
+  },
+  "terminalAtUTC": "2026-11-18T16:17:10.830985+00:00"
+}
