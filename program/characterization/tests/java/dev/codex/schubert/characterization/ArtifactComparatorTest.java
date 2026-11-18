@@ -76,6 +76,16 @@ class ArtifactComparatorTest {
   private static final String FIXTURE_CACHE_BEFORE =
       "no-cache, no-store, max-age=0, must-revalidate";
   private static final String FIXTURE_CACHE_AFTER = "no-store";
+  private static final String FIXTURE_DIF_009 = "DIF-009";
+  private static final String FIXTURE_CHR_S08 = "CHR-S08";
+  private static final String FIXTURE_VOICE_FIELD = "voice.grouping";
+  private static final String FIXTURE_VOICE_EVIDENCE = "multipleVoiceEvidence";
+  private static final String FIXTURE_VOICE_NK = "S08_VOICE_NK";
+  private static final String FIXTURE_VOICE_ROWS = "renderedEntryRows";
+  private static final String FIXTURE_VOICE_BODIES = "renderedBodies";
+  private static final String FIXTURE_VOICE_LINKS = "linkedVoiceCount";
+  private static final String FIXTURE_VOICE_PLAYERS = "renderedAudioPlayers";
+  private static final String FIXTURE_TARGET_NK = "nk";
   private static final String FIXTURE_DIF_014 = "DIF-014";
   private static final String FIXTURE_RESTART_FIELD = "session.restart";
   private static final String FIXTURE_RESTART_STATE = "sessionAfterRestart";
@@ -250,15 +260,6 @@ class ArtifactComparatorTest {
               "",
               FIXTURE_SEARCH_EMPTY_NK),
           new Oracle(
-              "DIF-009",
-              "CHR-S08",
-              "voice.grouping",
-              FIXTURE_DIFFERENCE,
-              FIXTURE_SEMANTIC,
-              "voice.grouping",
-              "body may repeat",
-              "one body per entry"),
-          new Oracle(
               "DIF-010",
               FIXTURE_CHR_L01,
               "log.filters",
@@ -298,8 +299,8 @@ class ArtifactComparatorTest {
     assertEquals(FIXTURE_PASS, report.path(FIXTURE_STATUS).asText());
     assertEquals(24, report.path("expectedCaseCount").asInt());
     assertEquals(24, report.path("comparedCaseCount").asInt());
-    assertEquals(25, report.path("rawDifferenceCount").asInt());
-    assertEquals(26, report.path("observationCount").asInt());
+    assertEquals(24, report.path("rawDifferenceCount").asInt());
+    assertEquals(25, report.path("observationCount").asInt());
     assertEquals(16, report.path("usedDifferences").size());
     assertTrue(report.path("unusedDifferences").isEmpty());
     assertTrue(report.path("unregisteredDifferences").isEmpty());
@@ -313,8 +314,8 @@ class ArtifactComparatorTest {
     assertEquals(FIXTURE_PASS, direct.status());
     assertEquals(24, direct.expectedCaseCount());
     assertEquals(24, direct.comparedCaseCount());
-    assertEquals(25, direct.rawDifferenceCount());
-    assertEquals(26, direct.observationCount());
+    assertEquals(24, direct.rawDifferenceCount());
+    assertEquals(25, direct.observationCount());
     assertEquals(16, direct.usedDifferences().size());
     assertTrue(direct.unusedDifferences().isEmpty());
     assertTrue(direct.unregisteredDifferences().isEmpty());
@@ -347,7 +348,7 @@ class ArtifactComparatorTest {
 
     assertFalse(result.passed());
     assertEquals(List.of("DIF_DUPLICATE:DIF-001"), result.failures());
-    assertEquals(26, result.observationCount());
+    assertEquals(25, result.observationCount());
     assertEquals(16, result.usedDifferences().size());
   }
 
@@ -493,7 +494,7 @@ class ArtifactComparatorTest {
     assertContains(result.failures(), "OBSERVATION_VERSION");
     assertContains(result.failures(), "OBSERVATIONS_NOT_ARRAY");
     assertEquals(16, result.unusedDifferences().size());
-    assertEquals(25, result.unregisteredDifferences().size());
+    assertEquals(24, result.unregisteredDifferences().size());
   }
 
   @Test
@@ -1024,6 +1025,121 @@ class ArtifactComparatorTest {
     assertContains(result.failures(), FIXTURE_FIXED_POINTER);
     assertContains(result.failures(), FIXTURE_CACHE_REQUIRED);
     assertEquals(List.of("CHR-O01:/cacheControl"), result.unregisteredDifferences());
+  }
+
+  @Test
+  void comparesMultipleVoicesWithoutConvertingTheNormalScenarioProjection() throws Exception {
+    Fixture fixture = fixture("separate-multiple-voice-supplement");
+    String artifact = FIXTURE_CHR_S08 + FIXTURE_JSON_SUFFIX;
+    assertEquals(
+        objectFile(fixture.current().resolve(artifact)),
+        objectFile(fixture.nk().resolve(artifact)));
+    var result = compare(fixture);
+    assertTrue(result.passed());
+    assertTrue(result.usedDifferences().contains(FIXTURE_DIF_009));
+    assertTrue(result.unregisteredDifferences().isEmpty());
+  }
+
+  @Test
+  void requiresBothMultipleVoiceSidesAndTheNamedApproval() throws Exception {
+    Fixture missing = fixture("missing-multiple-voice-supplement");
+    mutate(missing.observations(), root -> root.remove(FIXTURE_VOICE_EVIDENCE));
+    var absent = compare(missing);
+    assertContains(absent.failures(), "S08_VOICE_SHAPE");
+    assertTrue(absent.unusedDifferences().contains(FIXTURE_DIF_009));
+
+    Fixture extra = fixture("extra-multiple-voice-side");
+    mutate(
+        extra.observations(),
+        root -> ((ObjectNode) root.path(FIXTURE_VOICE_EVIDENCE)).putObject(FIXTURE_EXTRA));
+    assertContains(compare(extra).failures(), "S08_VOICE_SHAPE");
+
+    Fixture approval = fixture("missing-multiple-voice-approval");
+    Path rules =
+        approval
+            .project()
+            .resolve("program/characterization/tests/resources/cases/dif-allowlist.json");
+    mutate(
+        rules,
+        root -> {
+          var values = (ArrayNode) root.path("differences");
+          for (int index = 0; index < values.size(); index++) {
+            if (FIXTURE_DIF_009.equals(values.get(index).path("id").asText())) {
+              values.remove(index);
+              return;
+            }
+          }
+        });
+    assertContains(compare(approval).failures(), "S08_MULTIPLE_VOICE_RULE");
+  }
+
+  @Test
+  void rejectsDuplicatedRowsOrBodiesWithTheCorrectPlayerCount() throws Exception {
+    for (String field : List.of(FIXTURE_VOICE_ROWS, FIXTURE_VOICE_BODIES)) {
+      Fixture test = fixture("multiple-voice-duplicate-" + field);
+      changeVoiceField(test, FIXTURE_TARGET_NK, field, IntNode.valueOf(2));
+      var result = compare(test);
+      assertFalse(result.passed());
+      assertContains(result.failures(), FIXTURE_VOICE_NK);
+    }
+  }
+
+  @Test
+  void rejectsLostPlayersLostLinksAndStringCounts() throws Exception {
+    for (String field : List.of(FIXTURE_VOICE_PLAYERS, FIXTURE_VOICE_LINKS)) {
+      Fixture test = fixture("multiple-voice-loss-" + field);
+      changeVoiceField(test, FIXTURE_TARGET_NK, field, IntNode.valueOf(1));
+      assertContains(compare(test).failures(), FIXTURE_VOICE_NK);
+    }
+    Fixture text = fixture("multiple-voice-string-count");
+    changeVoiceField(text, FIXTURE_TARGET_NK, FIXTURE_VOICE_ROWS, TextNode.valueOf("1"));
+    assertContains(compare(text).failures(), FIXTURE_VOICE_NK);
+  }
+
+  @Test
+  void rejectsWrongCurrentGroupingEvenWithCorrectNkGrouping() throws Exception {
+    Fixture test = fixture("wrong-current-voice-witness");
+    changeVoiceField(test, FIXTURE_CURRENT, FIXTURE_VOICE_BODIES, IntNode.valueOf(1));
+    var result = compare(test);
+    assertFalse(result.passed());
+    assertContains(result.failures(), "S08_VOICE_CURRENT");
+    assertTrue(result.unusedDifferences().contains(FIXTURE_DIF_009));
+  }
+
+  @Test
+  void rejectsUsingTheVoiceApprovalToConsumeAnOrdinaryArtifactDrift() throws Exception {
+    Fixture test = fixture("voice-approval-for-normal-artifact");
+    String artifact = FIXTURE_CHR_S08 + FIXTURE_JSON_SUFFIX;
+    String field = "normalArtifactValue";
+    String pointer = "/" + field;
+    mutate(test.current().resolve(artifact), root -> root.put(field, "fixed"));
+    mutate(test.nk().resolve(artifact), root -> root.put(field, "unexpected"));
+    mutate(
+        test.observations(),
+        root ->
+            ((ArrayNode) root.path(FIXTURE_OBSERVATIONS))
+                .add(
+                    observation(
+                        FIXTURE_DIF_009,
+                        FIXTURE_CHR_S08,
+                        FIXTURE_VOICE_FIELD,
+                        FIXTURE_DIFFERENCE,
+                        FIXTURE_SEMANTIC,
+                        FIXTURE_VOICE_FIELD,
+                        pointer,
+                        "fixed",
+                        "unexpected")));
+    var result = compare(test);
+    assertFalse(result.passed());
+    assertContains(result.failures(), "S08_MULTIPLE_VOICE_SUPPLEMENT_ONLY");
+    assertEquals(List.of(FIXTURE_CHR_S08 + ":" + pointer), result.unregisteredDifferences());
+  }
+
+  private static void changeVoiceField(Fixture fixture, String side, String field, JsonNode value)
+      throws Exception {
+    mutate(
+        fixture.observations(),
+        root -> ((ObjectNode) root.path(FIXTURE_VOICE_EVIDENCE).path(side)).set(field, value));
   }
 
   @Test
@@ -1696,12 +1812,23 @@ class ArtifactComparatorTest {
     Path observations = root.resolve("observations.json");
     ObjectNode envelope = JSON.createObjectNode().put("version", 1);
     envelope.set(FIXTURE_OBSERVATIONS, observationItems);
+    var multipleVoice = envelope.putObject(FIXTURE_VOICE_EVIDENCE);
+    writeVoiceFixture(multipleVoice.putObject(FIXTURE_CURRENT), 2);
+    writeVoiceFixture(multipleVoice.putObject(FIXTURE_TARGET_NK), 1);
     envelope.set("correlatedLogEvidence", CorrelatedMenuActionContractTest.fixture());
     ObjectNode artifactBinding = envelope.putObject("correlatedLogArtifacts");
     artifactBinding.set(FIXTURE_CURRENT, currentArtifacts.get(FIXTURE_CHR_L01).deepCopy());
     artifactBinding.set("nk", nkArtifacts.get(FIXTURE_CHR_L01).deepCopy());
     writeJson(observations, envelope);
     return new Fixture(project, current, nk, observations);
+  }
+
+  private static void writeVoiceFixture(ObjectNode object, int groupedRows) {
+    object
+        .put(FIXTURE_VOICE_LINKS, 2)
+        .put(FIXTURE_VOICE_ROWS, groupedRows)
+        .put(FIXTURE_VOICE_BODIES, groupedRows)
+        .put(FIXTURE_VOICE_PLAYERS, 2);
   }
 
   private static void addCacheObservation(

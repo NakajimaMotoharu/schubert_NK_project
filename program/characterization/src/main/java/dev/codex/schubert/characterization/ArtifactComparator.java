@@ -38,6 +38,7 @@ public final class ArtifactComparator {
   private static final String GAME_CHANGE_DIFFERENCE = "DIF-013";
   private static final String GAME_CHANGE_CASE = "CHR-S02";
   private static final String GAME_CHANGE_FALLBACK = "javascriptDisabledSubmitButton";
+  private static final String VOICE_DIFFERENCE = "DIF-009";
   private static final String ERROR_CASE = "CHR-E01";
   private static final List<String> ERROR_NON_DISCLOSURE =
       List.of("secretLeak", "absolutePathLeak", "exceptionClassLeak");
@@ -98,6 +99,8 @@ public final class ArtifactComparator {
               "CHR-A02:/sessionRedirectsOldestToNewest/0",
                   textPair("/", "/login?session-expired")));
   private static final ObjectMapper JSON = new ObjectMapper();
+  private static final JsonNode CURRENT_MULTIPLE_VOICE = multipleVoiceProjection(2);
+  private static final JsonNode NK_MULTIPLE_VOICE = multipleVoiceProjection(1);
   private static final Set<String> MODES = Set.of(MODE_DIFFERENCE, "required", MODE_CONTRACT);
 
   private ArtifactComparator() {
@@ -217,6 +220,10 @@ public final class ArtifactComparator {
     require(observations.path("observations").isArray(), "OBSERVATIONS_NOT_ARRAY", failures);
 
     Set<String> usedRules = new TreeSet<>();
+    if (require(rules.containsKey(VOICE_DIFFERENCE), "S08_MULTIPLE_VOICE_RULE", failures)
+        & validateMultipleVoiceEvidence(observations.path("multipleVoiceEvidence"), failures)) {
+      usedRules.add(VOICE_DIFFERENCE);
+    }
     Set<String> claimedDifferences = new HashSet<>();
     Set<String> observationKeys = new HashSet<>();
     Set<String> pendingFixedObservations = new TreeSet<>();
@@ -235,6 +242,8 @@ public final class ArtifactComparator {
       String pointer = observation.path("jsonPointer").asText();
       String observationKey = id + ":" + caseId + ":" + pointer;
       boolean valid = true;
+      valid &=
+          require(!VOICE_DIFFERENCE.equals(id), "S08_MULTIPLE_VOICE_SUPPLEMENT_ONLY", failures);
       valid &=
           require(
               observationKeys.add(observationKey),
@@ -368,6 +377,24 @@ public final class ArtifactComparator {
 
   private static List<JsonNode> textPair(String current, String nk) {
     return List.of(TextNode.valueOf(current), TextNode.valueOf(nk));
+  }
+
+  private static JsonNode multipleVoiceProjection(int rows) {
+    return JSON.createObjectNode()
+        .put("linkedVoiceCount", 2)
+        .put("renderedEntryRows", rows)
+        .put("renderedBodies", rows)
+        .put("renderedAudioPlayers", 2);
+  }
+
+  private static boolean validateMultipleVoiceEvidence(JsonNode evidence, List<String> failures) {
+    boolean valid =
+        require(evidence.isObject() && evidence.size() == 2, "S08_VOICE_SHAPE", failures);
+    valid &=
+        require(
+            CURRENT_MULTIPLE_VOICE.equals(evidence.path("current")), "S08_VOICE_CURRENT", failures);
+    valid &= require(NK_MULTIPLE_VOICE.equals(evidence.path("nk")), "S08_VOICE_NK", failures);
+    return valid;
   }
 
   private static String missingObservation(String target) {
