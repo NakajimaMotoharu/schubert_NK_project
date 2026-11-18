@@ -1,0 +1,146 @@
+{
+  "eventId": "PGPT-20261008-6032",
+  "actualExit": 0,
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P02001-COMPARATOR-DUPLICATE-DEFINITION-20261119",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-P02001-COMPARATOR-DUPLICATE-DEFINITION-20261119",
+    "workAttributionKind": "REWORK",
+    "wbsLeafIds": [
+      "WBS-P020-01.02"
+    ],
+    "managementWorkIds": [
+      "WBS-P020-01.02/2",
+      "WBS-P020-01.02/criterion/quality",
+      "G06"
+    ],
+    "source": "eafe4a74dbf5ea0522d754771fccb0df7aa2a071",
+    "productionCoreMain": "278839e0272a15a40a6a42b898eb2f6429597a5f",
+    "run": "PG39820-p020-comparator-definition-uniqueness-v1",
+    "workScope": "Ensure local offline compare-nk refuses duplicate definitions in its frozen catalog and allowlist even when the previous distinct counts match. Use SS355 and the existing GateContractValidator contract; pre-register discovered invariant violation, add independent temp fixture tests, preserve current baseline, compare reports and sixteen approved DIF. No real CHR, target adapter, browser, remote, access or service operation.",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.5,
+      "base": 1.55,
+      "high": 4.6
+    },
+    "groupCapPp": 6,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39720-p020-current-tool-f02-exit-lineage-v1/manifest.json",
+        "sha256": "608dce98ca512e67814ade8699f40f1183fe2437f91df0be289ee9c52f28dcae"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37324-p020-whole142-independent-v1/manifest.json",
+        "sha256": "d6978905003f0678ab1653a5e83bf0eabab8763b7437dc78559e8b4c7a4e414e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37318-p020-public-package-v1/manifest.json",
+        "sha256": "1a6aa277db63b2a26ae346bf5b32f7d6e9f73474d2b4f44615ec0500742b0023"
+      }
+    ],
+    "quotaAfter": {
+      "usedPercent": 42,
+      "remainingPercent": 58,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "6f8617cf3e3fce0adcceffaaaf27d37c4bd31d88bace631556ac771ba23cf95d",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T15:50:53.386000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 42,
+          "remainingPercent": 58,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T15:50:16.321604+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 42,
+      "remainingPercent": 58,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "actualPaths": [
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG39834-p020-definition-independent-v1/manifest.json"
+    ],
+    "publicEvidence": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39834-p020-definition-independent-v1/manifest.json",
+        "sha256": "c638b0e950c64fb9132b46cafaf2920e4e3e58fa245424e60a641de1b1e6b88b"
+      }
+    ],
+    "result": "P020_OFFLINE_DEFINITION_UNIQUENESS_AND_DETERMINISTIC_PREFLIGHT_144_WITH_REAL_PREFLIGHT_COVERAGE_GAP",
+    "actualProductionCoreMain": "278839e0272a15a40a6a42b898eb2f6429597a5f",
+    "actualToolSource": "c02f33718c628f1e935ea98df93230334eb3c832",
+    "newToolDefinitions": 2,
+    "currentToolCases": 144,
+    "firstVerificationSuccess": 143,
+    "firstVerificationDenominator": 144,
+    "expectedRedReproduction": 2,
+    "executedToolSuiteRetries": 1,
+    "executedProductRetries": 0,
+    "separateNullAwayFailedCompileBeforeRetry": 1,
+    "independentSetupCorrections": 1,
+    "applicationTrials": 0,
+    "whole451Accepted": false,
+    "formalUpdated": false,
+    "newAcceptance": 0,
+    "effortCompletionRate": null,
+    "remainingOriginalDetailBasePp": 1089.848,
+    "toolRaw": {
+      "LINE": {
+        "missed": 2,
+        "covered": 1461
+      },
+      "METHOD": {
+        "missed": 1,
+        "covered": 231
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 12
+      },
+      "BRANCH": {
+        "missed": 1,
+        "covered": 898
+      },
+      "INSTRUCTION": {
+        "missed": 12,
+        "covered": 7796
+      }
+    },
+    "unaccepted": [
+      "Actual successful CLI live FileStore preflight with at least 20GiB",
+      "Current tool 100 percent; two methods and one branch remain",
+      "Actual CHR",
+      "P020-01.02 formal exit dependency F02 then P020-01.01"
+    ],
+    "nextCommand": "Run G07 for the exact committed public delta from c0cce768, with quarantined non-secret proof for JUnit/JaCoCo composites; then continue independent short-term work without repeating PG39830."
+  }
+}

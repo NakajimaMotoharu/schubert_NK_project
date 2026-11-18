@@ -1,0 +1,314 @@
+[
+  {
+    "source": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39830-p020-definition-green144-v3/snapshot/program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+      "sha256": "c00224625010f4b3907da5ffb90fe8141d84b2cc4180334638e2cf244b46f46a"
+    },
+    "line": 75,
+    "rule": "UseConcurrentHashMap",
+    "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+    "anchor": "Map<String, JsonNode> currentByCase = new TreeMap<>();",
+    "disposition": "NOT_APPLICABLE",
+    "reason": "Current artifacts are accumulated in a TreeMap local to one compare call; key order is stable."
+  },
+  {
+    "source": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39830-p020-definition-green144-v3/snapshot/program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+      "sha256": "c00224625010f4b3907da5ffb90fe8141d84b2cc4180334638e2cf244b46f46a"
+    },
+    "line": 76,
+    "rule": "UseConcurrentHashMap",
+    "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+    "anchor": "Map<String, JsonNode> nkByCase = new TreeMap<>();",
+    "disposition": "NOT_APPLICABLE",
+    "reason": "NK artifacts are accumulated in a TreeMap local to one compare call; key order is stable."
+  },
+  {
+    "source": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39830-p020-definition-green144-v3/snapshot/program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+      "sha256": "c00224625010f4b3907da5ffb90fe8141d84b2cc4180334638e2cf244b46f46a"
+    },
+    "line": 104,
+    "rule": "UseConcurrentHashMap",
+    "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+    "anchor": "Map<String, JsonNode> rules = new LinkedHashMap<>();",
+    "disposition": "NOT_APPLICABLE",
+    "reason": "DIF rules are first-seen and ordered in the calling thread; insertion order controls unused DIF diagnostics."
+  },
+  {
+    "source": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39830-p020-definition-green144-v3/snapshot/program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+      "sha256": "c00224625010f4b3907da5ffb90fe8141d84b2cc4180334638e2cf244b46f46a"
+    },
+    "line": 255,
+    "rule": "UseConcurrentHashMap",
+    "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+    "anchor": "Map<String, Path> files = new TreeMap<>();",
+    "disposition": "NOT_APPLICABLE",
+    "reason": "The artifact index is built privately in each call and used after that call returns to its caller."
+  },
+  {
+    "source": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39830-p020-definition-green144-v3/snapshot/program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+      "sha256": "a58a7ae66a4e2c95ff02c2b8493ca75ca091f75235e17f246865039121a7b0ba"
+    },
+    "line": 164,
+    "rule": "UseConcurrentHashMap",
+    "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+    "anchor": "Map<String, Object> actual = new LinkedHashMap<>();",
+    "disposition": "NOT_APPLICABLE",
+    "reason": "Source verification builds this report in one call and serializes it before returning."
+  },
+  {
+    "source": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39830-p020-definition-green144-v3/snapshot/program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+      "sha256": "a58a7ae66a4e2c95ff02c2b8493ca75ca091f75235e17f246865039121a7b0ba"
+    },
+    "line": 260,
+    "rule": "UseConcurrentHashMap",
+    "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+    "anchor": "Map<String, Object> result = new LinkedHashMap<>();",
+    "disposition": "NOT_APPLICABLE",
+    "reason": "Preflight builds this one report serially after its local checks and writes it without sharing the map."
+  },
+  {
+    "source": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39830-p020-definition-green144-v3/snapshot/program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+      "sha256": "a58a7ae66a4e2c95ff02c2b8493ca75ca091f75235e17f246865039121a7b0ba"
+    },
+    "line": 311,
+    "rule": "UseConcurrentHashMap",
+    "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+    "anchor": "Map<String, Object> result = new LinkedHashMap<>();",
+    "disposition": "NOT_APPLICABLE",
+    "reason": "Current repeat comparison writes this local report after serial ordered file comparisons."
+  },
+  {
+    "source": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39830-p020-definition-green144-v3/snapshot/program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+      "sha256": "a58a7ae66a4e2c95ff02c2b8493ca75ca091f75235e17f246865039121a7b0ba"
+    },
+    "line": 382,
+    "rule": "UseConcurrentHashMap",
+    "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+    "anchor": "Map<String, Object> result = new LinkedHashMap<>();",
+    "disposition": "NOT_APPLICABLE",
+    "reason": "Gate reporting builds this entry-ordered local result before serialization and does not return a mutable map."
+  },
+  {
+    "source": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39830-p020-definition-green144-v3/snapshot/program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+      "sha256": "a58a7ae66a4e2c95ff02c2b8493ca75ca091f75235e17f246865039121a7b0ba"
+    },
+    "line": 553,
+    "rule": "UseConcurrentHashMap",
+    "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+    "anchor": "Map<String, Object> manifest = new LinkedHashMap<>();",
+    "disposition": "NOT_APPLICABLE",
+    "reason": "Promotion writes this local baseline manifest before return; the reported ordinary tests use isolated copies."
+  },
+  {
+    "source": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39830-p020-definition-green144-v3/snapshot/program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+      "sha256": "a58a7ae66a4e2c95ff02c2b8493ca75ca091f75235e17f246865039121a7b0ba"
+    },
+    "line": 624,
+    "rule": "UseConcurrentHashMap",
+    "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+    "anchor": "Map<String, String> result = new TreeMap<>();",
+    "disposition": "NOT_APPLICABLE",
+    "reason": "The prefixed index is a new ordered map filled by one caller-thread iteration."
+  },
+  {
+    "source": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39830-p020-definition-green144-v3/snapshot/program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+      "sha256": "a58a7ae66a4e2c95ff02c2b8493ca75ca091f75235e17f246865039121a7b0ba"
+    },
+    "line": 630,
+    "rule": "UseConcurrentHashMap",
+    "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+    "anchor": "Map<String, String> result = new TreeMap<>();",
+    "disposition": "NOT_APPLICABLE",
+    "reason": "The file hash index is accumulated in lexical order by one caller and is never shared while mutable."
+  },
+  {
+    "source": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39830-p020-definition-green144-v3/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorTest.java",
+      "sha256": "64eb3ac628169ca74953d0c3179ef2b795ae7ffea5e0e77e6f465b20fb09f6fe"
+    },
+    "line": 805,
+    "rule": "UseConcurrentHashMap",
+    "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+    "anchor": "java.util.Map<String, ObjectNode> currentArtifacts = new java.util.LinkedHashMap<>();",
+    "disposition": "NOT_APPLICABLE",
+    "reason": "A local Current observation map belongs solely to this test invocation and its own temporary directory."
+  },
+  {
+    "source": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39830-p020-definition-green144-v3/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorTest.java",
+      "sha256": "64eb3ac628169ca74953d0c3179ef2b795ae7ffea5e0e77e6f465b20fb09f6fe"
+    },
+    "line": 806,
+    "rule": "UseConcurrentHashMap",
+    "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+    "anchor": "java.util.Map<String, ObjectNode> nkArtifacts = new java.util.LinkedHashMap<>();",
+    "disposition": "NOT_APPLICABLE",
+    "reason": "A local NK observation map belongs solely to this test invocation and its own temporary directory."
+  },
+  {
+    "source": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39830-p020-definition-green144-v3/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateCliTest.java",
+      "sha256": "2e477dd5cd1b3af2f11606738c382907e8da8fd422cff59f1f5d9f29fe611518"
+    },
+    "line": 80,
+    "rule": "UseConcurrentHashMap",
+    "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+    "anchor": "Map<String, String> missingProjectRoot = new LinkedHashMap<>();",
+    "disposition": "NOT_APPLICABLE",
+    "reason": "Local ordered property fixture for missing project root retains a deliberate null sentinel."
+  },
+  {
+    "source": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39830-p020-definition-green144-v3/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateCliTest.java",
+      "sha256": "2e477dd5cd1b3af2f11606738c382907e8da8fd422cff59f1f5d9f29fe611518"
+    },
+    "line": 123,
+    "rule": "UseConcurrentHashMap",
+    "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+    "anchor": "Map<String, Object> expected = new LinkedHashMap<>();",
+    "disposition": "NOT_APPLICABLE",
+    "reason": "Local ordered source verification fixture uses a single test and restores all changed system properties."
+  },
+  {
+    "source": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39830-p020-definition-green144-v3/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateCliTest.java",
+      "sha256": "2e477dd5cd1b3af2f11606738c382907e8da8fd422cff59f1f5d9f29fe611518"
+    },
+    "line": 209,
+    "rule": "UseConcurrentHashMap",
+    "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+    "anchor": "Map<String, String> invalidProperties = new LinkedHashMap<>(invalid.properties());",
+    "disposition": "NOT_APPLICABLE",
+    "reason": "Local negative preflight property map is constructed before withProperties consumes it."
+  },
+  {
+    "source": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39830-p020-definition-green144-v3/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateCliTest.java",
+      "sha256": "2e477dd5cd1b3af2f11606738c382907e8da8fd422cff59f1f5d9f29fe611518"
+    },
+    "line": 306,
+    "rule": "UseConcurrentHashMap",
+    "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+    "anchor": "Map<String, String> properties = new LinkedHashMap<>(fixture.properties());",
+    "disposition": "NOT_APPLICABLE",
+    "reason": "Local gate report properties are used by the test thread only and restored after the callback."
+  },
+  {
+    "source": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39830-p020-definition-green144-v3/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateCliTest.java",
+      "sha256": "2e477dd5cd1b3af2f11606738c382907e8da8fd422cff59f1f5d9f29fe611518"
+    },
+    "line": 572,
+    "rule": "CloseResource",
+    "message": "Ensure that resources like this ExecutorService object are closed after use",
+    "anchor": "var executor = Executors.newVirtualThreadPerTaskExecutor();",
+    "disposition": "NOT_APPLICABLE",
+    "reason": "The test owns the executor; finally cancels, releases its latch and waits up to ten seconds for termination."
+  },
+  {
+    "source": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39830-p020-definition-green144-v3/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateCliTest.java",
+      "sha256": "2e477dd5cd1b3af2f11606738c382907e8da8fd422cff59f1f5d9f29fe611518"
+    },
+    "line": 572,
+    "rule": "DoNotUseThreads",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "anchor": "var executor = Executors.newVirtualThreadPerTaskExecutor();",
+    "disposition": "NOT_APPLICABLE",
+    "reason": "The owned finite JUnit executor implements the independent concurrent serialization test, outside any container."
+  },
+  {
+    "source": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39830-p020-definition-green144-v3/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateCliTest.java",
+      "sha256": "2e477dd5cd1b3af2f11606738c382907e8da8fd422cff59f1f5d9f29fe611518"
+    },
+    "line": 575,
+    "rule": "DoNotUseThreads",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "anchor": "executor.submit(",
+    "disposition": "NOT_APPLICABLE",
+    "reason": "Submitting one callable models concurrent ownership; completion is bounded by its get and finally termination."
+  },
+  {
+    "source": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39830-p020-definition-green144-v3/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateCliTest.java",
+      "sha256": "2e477dd5cd1b3af2f11606738c382907e8da8fd422cff59f1f5d9f29fe611518"
+    },
+    "line": 589,
+    "rule": "DoNotUseThreads",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "anchor": "executor.shutdownNow();",
+    "disposition": "NOT_APPLICABLE",
+    "reason": "The JUnit fixture stops its own executor in finally and does not own a service or container."
+  },
+  {
+    "source": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39830-p020-definition-green144-v3/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateCliTest.java",
+      "sha256": "2e477dd5cd1b3af2f11606738c382907e8da8fd422cff59f1f5d9f29fe611518"
+    },
+    "line": 590,
+    "rule": "DoNotUseThreads",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "anchor": "assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));",
+    "disposition": "NOT_APPLICABLE",
+    "reason": "The bounded await verifies owned JUnit shutdown rather than managing any application threads."
+  },
+  {
+    "source": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39830-p020-definition-green144-v3/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateCliTest.java",
+      "sha256": "2e477dd5cd1b3af2f11606738c382907e8da8fd422cff59f1f5d9f29fe611518"
+    },
+    "line": 598,
+    "rule": "UseConcurrentHashMap",
+    "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+    "anchor": "Map<String, String> properties = new LinkedHashMap<>(fixture.properties());",
+    "disposition": "NOT_APPLICABLE",
+    "reason": "Local negative fixture uses a null value to model missing chr.dbUrl, consumed serially."
+  },
+  {
+    "source": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39830-p020-definition-green144-v3/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateCliTest.java",
+      "sha256": "2e477dd5cd1b3af2f11606738c382907e8da8fd422cff59f1f5d9f29fe611518"
+    },
+    "line": 618,
+    "rule": "UseConcurrentHashMap",
+    "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+    "anchor": "Map<String, String> properties = new LinkedHashMap<>(fixture.properties());",
+    "disposition": "NOT_APPLICABLE",
+    "reason": "Local per-port properties are populated and consumed by one test thread."
+  },
+  {
+    "source": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39830-p020-definition-green144-v3/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateCliTest.java",
+      "sha256": "2e477dd5cd1b3af2f11606738c382907e8da8fd422cff59f1f5d9f29fe611518"
+    },
+    "line": 646,
+    "rule": "UseConcurrentHashMap",
+    "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+    "anchor": "Map<String, String> properties = new LinkedHashMap<>();",
+    "disposition": "NOT_APPLICABLE",
+    "reason": "Local fixture property map has one owner prior to use by the test thread."
+  },
+  {
+    "source": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39830-p020-definition-green144-v3/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateCliTest.java",
+      "sha256": "2e477dd5cd1b3af2f11606738c382907e8da8fd422cff59f1f5d9f29fe611518"
+    },
+    "line": 768,
+    "rule": "UseConcurrentHashMap",
+    "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+    "anchor": "Map<String, String> previous = new TreeMap<>();",
+    "disposition": "NOT_APPLICABLE",
+    "reason": "Local map saves old nullable values for deterministic serial restoration in finally."
+  }
+]
