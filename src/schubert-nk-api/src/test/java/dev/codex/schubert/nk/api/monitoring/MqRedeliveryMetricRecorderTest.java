@@ -187,7 +187,7 @@ class MqRedeliveryMetricRecorderTest {
           NullPointerException.class, () -> new MqRedeliveryMetricRecorder(null, DEBUG_MODE));
       assertThrows(
           NullPointerException.class, () -> new MqRedeliveryMetricRecorder(registry, null));
-      for (String mode : List.of("", "debug", "unknown-mode"))
+      for (String mode : List.of("", "debug", "unknown-mode", "DEBTf", "STANDAQc"))
         assertEquals(
             "CONFIG_INVALID",
             assertThrows(

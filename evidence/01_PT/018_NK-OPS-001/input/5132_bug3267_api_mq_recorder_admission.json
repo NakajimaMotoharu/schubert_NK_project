@@ -1,0 +1,124 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG39320-BUG3267-API-MQ-RECORDER-MODE-V1",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39316-bug3267-api-mq-recorder-prepare-v1/manifest.json",
+    "sha256": "bad21f62ac2533a0788f43a2368b0cdbc8c24abc4cde0298c3ec3bb39daad555"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39318-bug3267-api-mq-recorder-static-v1/manifest.json",
+    "sha256": "92528ab238fec92f97a4d65dbd282cf17bf790289a50e5f70eeafc00371e3937"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqPressureMetricRecorderTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceLine": 307,
+      "sourceAnchor": "var pool = Executors.newFixedThreadPool(8);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Owned fixture pool is unconditionally shut down and awaited for at most ten seconds in finally before its owned registry closes. Implicit close waits without that bound."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqPressureMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 307,
+      "sourceAnchor": "var pool = Executors.newFixedThreadPool(8);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The site applies to isolated unit-owned finite test threads, lifetime and results are guarded and application/service threads are never created."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqPressureMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 309,
+      "sourceAnchor": "for (var result : pool.invokeAll(tasks, 10, TimeUnit.SECONDS))",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The site applies to isolated unit-owned finite test threads, lifetime and results are guarded and application/service threads are never created."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqPressureMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 312,
+      "sourceAnchor": "pool.shutdownNow();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The site applies to isolated unit-owned finite test threads, lifetime and results are guarded and application/service threads are never created."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqPressureMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 313,
+      "sourceAnchor": "assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The site applies to isolated unit-owned finite test threads, lifetime and results are guarded and application/service threads are never created."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqPressureMetricRecorderTest.java",
+      "rule": "EqualsNull",
+      "message": "Avoid using equals() to compare against null",
+      "sourceLine": 351,
+      "sourceAnchor": "assertFalse(value.equals(null));",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This JUnit assertion explicitly specifies the generated Snapshot equality contract for a null input. Passing null is necessary to distinguish value equality from instance identity."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqRedeliveryMetricRecorderTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceLine": 280,
+      "sourceAnchor": "var pool = Executors.newFixedThreadPool(8);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Owned fixture pool is unconditionally shut down and awaited for at most ten seconds in finally before its owned registry closes. Implicit close waits without that bound."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqRedeliveryMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 280,
+      "sourceAnchor": "var pool = Executors.newFixedThreadPool(8);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The site applies to isolated unit-owned finite test threads, lifetime and results are guarded and application/service threads are never created."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqRedeliveryMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 282,
+      "sourceAnchor": "for (var result : pool.invokeAll(tasks, 10, TimeUnit.SECONDS))",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The site applies to isolated unit-owned finite test threads, lifetime and results are guarded and application/service threads are never created."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqRedeliveryMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 285,
+      "sourceAnchor": "pool.shutdownNow();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The site applies to isolated unit-owned finite test threads, lifetime and results are guarded and application/service threads are never created."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqRedeliveryMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 286,
+      "sourceAnchor": "assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The site applies to isolated unit-owned finite test threads, lifetime and results are guarded and application/service threads are never created."
+    }
+  ]
+}
