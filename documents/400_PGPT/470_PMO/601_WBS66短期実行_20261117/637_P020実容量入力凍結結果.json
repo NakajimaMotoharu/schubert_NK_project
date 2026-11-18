@@ -1,0 +1,100 @@
+{
+  "eventId": "PGPT-20261008-6158",
+  "actualExit": 0,
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P020-HARUKA-FROZEN-SNAPSHOT-PREP-20261119",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-P020-HARUKA-FROZEN-SNAPSHOT-PREP-20261119",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P020-01.01"
+    ],
+    "managementWorkIds": [
+      "WBS-P020-01.01/2-b"
+    ],
+    "source": "d1668df51820d7587c086d8a9bffe81e3750db47",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "characterizationBase": "4d239658f12ead59fe8bfa6b8da4ae6aebecbcf5",
+    "run": "PG40162-p020-filestore-artifact-prep-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.5,
+      "high": 1.4
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40128-p020-path-contract-green206-v2/begin.json",
+        "sha256": "488fb5c534903843a32d6b1240e4eea9f794557c44c92e92568d3bb5502e5928"
+      }
+    ],
+    "workScope": "Prepare only a hash-pinned ordinary GateCli preflight run input and fixture plan for use after authorized host precheck. No network, transfer, fixture creation on haruka, or capacity-dependent test run.",
+    "canonicalDesignSource": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "approvedEnvironmentRecordSha256": "e6785b287359e3bc20562e23a351c0b7bebe877ad43d8ca90d67c5b00765b8cb",
+    "quotaAfter": {
+      "usedPercent": 49,
+      "remainingPercent": 51,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "78b8a088206e7f47dffe7bd61179621baa79704555f8f586858b457482b1cb4f",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T22:36:55.291000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 49,
+          "remainingPercent": 51,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T22:36:05.669023+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 49,
+      "remainingPercent": 51,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "publicEvidence": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40162-p020-filestore-artifact-prep-v1/manifest.json",
+        "sha256": "dd84cd3db3408463d2bcf25191ed6368e059e2aab7e1df37a1fb8bf3d2feed3d"
+      }
+    ],
+    "preparedSources": 6,
+    "validatedPhysical": 17,
+    "differingBytes": 0,
+    "externalTransfer": false,
+    "capacityTestStarted": false,
+    "productTests": 0,
+    "formalIntake": 0,
+    "currentAccepted": 17,
+    "result": "Prepared the small reusable CLI-only input. Local strict javac reproduced all 17 frozen physical class bytes from the qualified 206 tool suite. No positive CLI preflight execution, coverage reuse or transfer until host is admitted."
+  }
+}

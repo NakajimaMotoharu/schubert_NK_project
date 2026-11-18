@@ -137,3 +137,7 @@ SS311 §5.2、WBS-F02-a、ModuleDependencyAudit.jdbc。JDK25.0.4／ArchUnit1.4.2
 ## PT-P01808-BIN-018〜023 固定JaCoCo writerの長さ・padding
 
 SS354、WBS-P018-08.03/2、jacoco_readonly_exec_subset.decode。固定0.8.15 writerをjavapで読取照合。独立hexで冗長な0／3の符号、対象／対象外のunused bit非0を拒否。空、127／129、全8bitと端数9bitで正規符号の件数を保持する。実行は input/5292_p01808_exec_canonical_run.py red/green、照合は input/5293_p01808_exec_canonical_post.py。製品nativeを採取しない。
+
+## PT-CHR-PREFLIGHT-FS-001 実FileStoreの正常入口
+
+SS355、WBS-P020-01.01/2-b、BUG3311。GateCli.mainのpreflight分岐と二引数preflightを、実行先の専有run・JDK25で確認する。PG40162のMain 6とSDK pinを用い、compileの17物理を再照合する。引数は通常の `preflight <owned-output.json>`。Runtime rootを実行先の承認済みlocal実FS上に置き、独立したstatvfsと真正FileStoreの双方で20GiB以上。Current source形状、asset、0600の非秘密fixture、Caddy/pgCtl等の非実行placeholder、閉じたloopback URLと別非特権portは全て専有run下の合成物とする。期待はexit0、JSONのPASS、空failures、実測freeBytes、0600、既定allowlistと当runのpath。GateCliが起動する対象は当Java工具のみ。実DB／Current／NK／Caddy／nativeは起動しない。開始PID／boot、各入力SHA、probe独立sessionと終了codeを記録し、実行前の準備や低容量での未実行は成功へ算入しない。
