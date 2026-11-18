@@ -1,0 +1,114 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "id": "PG38668-BUG3234-SCHEMA-OWNER-CLOSE",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productOwnerByMainPath": {
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java": "WBS-P019-01",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.java": "WBS-P019-01",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java": "WBS-P003-04",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.java": "WBS-P004-05",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/package-info.java": "WBS-P003-04"
+  },
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4592_BUG3234SchemaHistory\u6240\u6709\u3068Row\u306e\u88dc\u5145\u4ed5\u69d8.md",
+      "sha256": "124b3e92c95d6d3b00cea8cb9390f6804f35f09fc6b50072ab2e92056cce08a2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4590_SSC461SchemaHistory\u5883\u754c\u30fb\u5358\u4f53\u30c6\u30b9\u30c8\u4ed5\u69d8\u66f8.md",
+      "sha256": "46384d5fed0c3ba39ef7dbf59cb6f649945878a356cc3f5411e03d6d38a1a47e"
+    },
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/004_NK-MIG-001_SQL\u91cd\u5927\u4f8b\u5916\u30fb\u539f\u4e5d\u65b0\u4e00\u901a\u5e38\u5341\u4ed5\u69d8.md",
+      "sha256": "348146a26115b2f49cfe301483883a392837ab17e4e4015e69ce3052c803246b"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38661-bug3235-schema-nullable-closure-v3/manifest.json",
+      "sha256": "b677efa576b4ebffaca63eeabdb2ac3ce4be4fcf37f38590a822cc1bc26c09e4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38647-bug3235-schema-acquisition-closure-v2/manifest.json",
+      "sha256": "ff0cd87f9d46079da21c77be700c1dd011d80d5617c2e95ffdc02afea89a38bc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38644-bug3234-schema-owned-close-closure-v1/manifest.json",
+      "sha256": "aa0232c72352a3d6d4013d6598df50e3b5cafcc1c192ace69a73a5163117d947"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38624-ssc461-schema-history-closure-v1/manifest.json",
+      "sha256": "6037f57cd7e95ce3ca81316c25d5cd84c6bb576f48c85ff54316d47904bf4803"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29178-schema10-literal-pool-correction-v1/manifest.json",
+      "sha256": "0b65e2e34ad0584c9372c1e985a89ffa9f3ef436fc105450936ba2b3b5842d7b"
+    }
+  ],
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "productionCoreMain": "9ad70c3fa00bb45010767fab382fd334352c2763",
+  "mainSources": [
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.java",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.java",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/package-info.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/SchemaHistoryAdmissionTest.java",
+      "tests": 10
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/SchemaHistoryRowValueTest.java",
+      "tests": 1
+    }
+  ],
+  "expectedTests": 11,
+  "resources": [],
+  "sdkJars": [
+    "com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar"
+  ],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.class",
+    "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission$Row.class",
+    "dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.class",
+    "dev/codex/schubert/nk/storage/StorageIoException.class",
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason.class",
+    "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class",
+    "dev/codex/schubert/nk/storage/package-info.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission",
+    "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission$Row"
+  ],
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-bootstrap/pom.xml"
+  ],
+  "systemProperties": {},
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG38662-bug3235-schema-owner-prestyle-v3",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG38663-bug3235-schema-owner-prepare-v3",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG38664-bug3235-schema-owner-static-v3",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG38665-bug3235-schema-owner-preflight-v3",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG38668-bug3235-schema-owner-unit-v3",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG38669-bug3235-schema-owner-post-v3"
+  },
+  "privateDirs": {
+    "prepare": "pg38663-bug3235-schema-owner-prepare-v3",
+    "unit": "pg38668-bug3235-schema-owner-unit-v3"
+  },
+  "newTestDefinitions": 1,
+  "standardCompilerSwitchMaps": [],
+  "forbiddenInitializedClasses": []
+}
