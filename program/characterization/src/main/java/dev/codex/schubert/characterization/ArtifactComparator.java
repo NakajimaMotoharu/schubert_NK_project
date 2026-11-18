@@ -33,6 +33,7 @@ public final class ArtifactComparator {
   private static final String BRAND_DIFFERENCE = "DIF-001";
   private static final String MENU_DIFF = "DIF-003";
   private static final String MENU_CASE = "CHR-U01";
+  private static final String MENU_POINTER = "/cards";
   private static final String EMPTY_MESSAGE_DIFFERENCE = "DIF-008";
   private static final String EMPTY_SEARCH_CASE = "CHR-S04";
   private static final String CACHE_DIFFERENCE = "DIF-011";
@@ -70,7 +71,7 @@ public final class ArtifactComparator {
               textPair("schubert - 検索", "schubert NK - 検索")),
           MENU_DIFF,
           Map.of(
-              MENU_CASE + ":/cards",
+              MENU_CASE + ":" + MENU_POINTER,
               List.of(
                   menuCards("シナリオ閲覧", "検索", "アニメ視聴", "音楽", "ログ照会"),
                   menuCards(
@@ -491,6 +492,11 @@ public final class ArtifactComparator {
   private static void collectDifferences(
       String caseId, String pointer, JsonNode current, JsonNode nk, Set<String> differences) {
     if (current.equals(nk)) return;
+    // DIF-003 compares the entire U01 list so an insertion cannot hide a change in a sibling card.
+    if (MENU_CASE.equals(caseId) && MENU_POINTER.equals(pointer)) {
+      differences.add(key(caseId, pointer));
+      return;
+    }
     if (current.isObject() && nk.isObject()) {
       Set<String> names = new TreeSet<>();
       current.propertyStream().forEach(entry -> names.add(entry.getKey()));
