@@ -1,0 +1,67 @@
+{
+  "eventId": "PGPT-20261008-5929",
+  "groupId": "PGPT-WBS66-P01810-GUARDED-JMS-VALUE-DIAGNOSTIC-20261118",
+  "baseCore": "5618f55f0efef93b4e002e3d931ade66e8d7519b",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-18T09:47:00.401000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 33,
+      "remainingPercent": 67,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P01810-GUARDED-JMS-VALUE-DIAGNOSTIC-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-P01810-GUARDED-JMS-VALUE-DIAGNOSTIC-20261118",
+    "workAttributionKind": "ADDITIONAL_FINDING",
+    "workScope": "P018-10.03 CATALOG-019 and P005-03 owner. Remove metadata values from generic GuardedJmsMessage string per fixed catalog; preserve explicit readback and clone ownership and transport semantics. Main canonical design first, dedicated pure record PT from literal owned metadata without Artemis, no actual broker, routes, held classes or guard retries. Update prior combined guard assertion for later qualified full run; publish scope gap/normal point counters.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37452-p01810-independent-case-catalog-v1/planned93-independent-cases.json",
+        "sha256": "b830c7bbbbb1375f5d11e1a67c22608e0ccf8f829febfa1b24fe12194471d54c"
+      },
+      {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/guard/GuardedJmsMessage.java",
+        "sha256": "6c8c70ef3872a2de673eb4a5af6a4eaefc52516403b5f08e9465a762b897cbad"
+      },
+      {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+        "sha256": "2e46083d14b3c4cc6333940bc99cc0958d302b45f6d4b97c65ded5b0905d299e"
+      }
+    ],
+    "productionCoreMain": "5618f55f0efef93b4e002e3d931ade66e8d7519b",
+    "source": "21ae88d7a2d69a49cf3a39d6e52d7aa3178ed50f",
+    "wbsLeafIds": [
+      "WBS-F03",
+      "WBS-P018-10.03",
+      "WBS-P005-03"
+    ],
+    "managementWorkIds": [
+      "PT-P01810-CATALOG-019",
+      "BUG-3259",
+      "YKT-2690",
+      "SSC-467"
+    ],
+    "run": "PG39168-p01810-guarded-jms-value-independent-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.5,
+      "base": 1.75,
+      "high": 3.6
+    },
+    "groupCapPp": 5.0,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848
+  }
+}
