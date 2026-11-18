@@ -3,7 +3,7 @@ package dev.codex.schubert.nk.api.messaging.guard;
 import dev.codex.schubert.nk.protocol.codec.TransportMetadata;
 import java.util.Objects;
 
-/** Redacted, immutable snapshot produced after the JMS transport boundary checks. */
+/** Redacted, immutable snapshot after transport checks. NK-MSG-001; SS321/351; SSC-467. */
 public record GuardedJmsMessage(byte[] body, TransportMetadata metadata) {
   public GuardedJmsMessage {
     Objects.requireNonNull(body, "body");
@@ -18,6 +18,6 @@ public record GuardedJmsMessage(byte[] body, TransportMetadata metadata) {
 
   @Override
   public String toString() {
-    return "GuardedJmsMessage[body=<redacted>, metadata=" + metadata + "]";
+    return "GuardedJmsMessage[<redacted>]";
   }
 }
