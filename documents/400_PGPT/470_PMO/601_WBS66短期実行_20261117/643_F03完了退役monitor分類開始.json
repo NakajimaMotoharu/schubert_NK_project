@@ -1,0 +1,65 @@
+{
+  "eventId": "PGPT-20261008-6164",
+  "groupId": "PGPT-WBS66-F03-READY-RETIREMENT-MONITOR-328-20261119",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-18T23:24:05.206000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 49,
+      "remainingPercent": 51,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-READY-RETIREMENT-MONITOR-328-20261119",
+    "workCategory": "REVIEW",
+    "workDetailCategory": "PGPT-WBS66-F03-READY-RETIREMENT-MONITOR-328-20261119",
+    "workAttributionKind": "REQUALIFICATION",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "source": "a3c8f509e2d53ce0aebc60f148f68ed37f9f71a8",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "run": "PG40168-f03-ready-retirement-monitor-328-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.08,
+      "base": 0.22,
+      "high": 0.6
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37254-monitor-lock113-criteria-return-v2/remaining-source-findings.json",
+        "sha256": "bae7ed79012520486991581a379ca89a792b8875252b84c8cc28d6eee31aecd5"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36960-current287-root-pmd-v1/manifest.json",
+        "sha256": "33cabcf09b2ba0e6f996759cae2592771920828e637d78ea24a782380abc77a5"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39862-service-db-state-lock-four-main-v1/manifest.json",
+        "sha256": "9433dae6e53e1d97a1b942175e930c315c118da9dea870cdffb0b26072e6a035"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40154-f03-retained-read-monitor-327-v1/manifest.json",
+        "sha256": "5c2fc536b55502114e1c54c8c4977d939601fdd5244f6909d125c7f710dbf38f"
+      }
+    ],
+    "workScope": "F03/2-2 original PMD 328 only: compare the frozen diagnostic, current synchronized method, static caller and completion gates. No retirement, testing, SSH, local GateCli or backend."
+  }
+}

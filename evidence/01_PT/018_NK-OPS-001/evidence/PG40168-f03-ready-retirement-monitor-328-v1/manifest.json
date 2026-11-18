@@ -1,0 +1,35 @@
+{
+  "actualExit": 0,
+  "source": "a3c8f509e2d53ce0aebc60f148f68ed37f9f71a8",
+  "sourceCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "findingId": 328,
+  "rule": "AvoidSynchronizedStatement",
+  "method": "BackupUnitStartClient.Attempt.retireReadyAfter",
+  "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+  "line": 562,
+  "sourceSha256": "5701431aeaea563ada90e518817d0e7d339a63b48625e975c99bb2fbaada1934",
+  "synchronizedSpanSha256": "e735d5d3476443bd5536958d3fcb029a910d6149c8bf3552e832fbca76debec2",
+  "caller": {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.java",
+    "sha256": "e6e1b637427e2120e97d8c882cfd3b0bcbd10d020dd43960494c122d4edfebcd",
+    "methodReferenceLines": [
+      386,
+      387,
+      388
+    ]
+  },
+  "decision": "APPLICABLE_OPEN",
+  "basis": "The lifecycle caller passes live service callbacks covering both the nested resource retirement and the post-proof under the same monitor.",
+  "nextEvidence": "Authorized same-owner before/after completion evidence with callback failure and concurrency, plus preserved UNKNOWN if the post-proof fails. No DONE is credited by source review.",
+  "previousUnclassified": 31,
+  "unclassifiedAfter": 30,
+  "applicableOpenInOriginal45": 15,
+  "runtimeReachabilityMeasured": false,
+  "productTests": 0,
+  "retirementOperations": 0,
+  "externalOperations": 0,
+  "wholeF03Accepted": false,
+  "whole451Accepted": false,
+  "newFormalAcceptance": 0,
+  "terminalAtUTC": "2026-11-18T23:24:38.407009+00:00"
+}
