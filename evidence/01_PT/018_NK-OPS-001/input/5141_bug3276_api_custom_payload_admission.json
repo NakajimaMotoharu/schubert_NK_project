@@ -1,0 +1,204 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG39392-BUG3276-API-CUSTOM-PAYLOAD-FINITE-V1",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39387-bug3276-api-custom-payload-prepare-v2/manifest.json",
+    "sha256": "8c1202216da8e00d322cbb7faf3d985b5cb81943a357fae609dfce2bbdc64a9a"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39389-bug3276-api-custom-payload-static-v2/manifest.json",
+    "sha256": "f830d4f622aaa08ada8a3069be66e94a54899aa26e64b7f4bd50ca0025cdb9cd"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry.java",
+      "rule": "AvoidSynchronizedStatement",
+      "message": "Use ReentrantLock rather than synchronization",
+      "sourceLine": 83,
+      "sourceAnchor": "synchronized (stateLock) {",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Same private stateLock atomically updates count, sum, maximum and all five buckets in a bounded numeric loop without I/O or callbacks."
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry.java",
+      "rule": "AvoidSynchronizedStatement",
+      "message": "Use ReentrantLock rather than synchronization",
+      "sourceLine": 108,
+      "sourceAnchor": "synchronized (stateLock) {",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Same private stateLock creates a defensive snapshot of the coherent count, sum, maximum and all five buckets, with no I/O or foreign callbacks. It pairs with the independently proved update in 2384."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiCustomMetricPayloadTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this Borrowed object are closed after use",
+      "sourceLine": 241,
+      "sourceAnchor": "var source = new Borrowed();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Fixture is closed immediately by its owner before invoking the rejection oracle. It does not lend lifecycle control to the payload renderer."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiCustomMetricPayloadTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceLine": 263,
+      "sourceAnchor": "var workers = Executors.newFixedThreadPool(4);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The test owns the finite executor and always requests shutdown and requires actual termination before releasing the other owners. No implicit indefinite wait remains."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiCustomMetricPayloadTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 263,
+      "sourceAnchor": "var workers = Executors.newFixedThreadPool(4);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Local fixture threads, submissions, interruption and completion are bounded by the test. There is no application or OS process worker."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiCustomMetricPayloadTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 270,
+      "sourceAnchor": "workers.submit(",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Local fixture threads, submissions, interruption and completion are bounded by the test. There is no application or OS process worker."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiCustomMetricPayloadTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 286,
+      "sourceAnchor": "workers.shutdownNow();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Local fixture threads, submissions, interruption and completion are bounded by the test. There is no application or OS process worker."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiCustomMetricPayloadTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 287,
+      "sourceAnchor": "assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Local fixture threads, submissions, interruption and completion are bounded by the test. There is no application or OS process worker."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiCustomMetricPayloadTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceLine": 586,
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(4);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The test owns the finite executor and always requests shutdown and requires actual termination before releasing the other owners. No implicit indefinite wait remains."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiCustomMetricPayloadTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 586,
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(4);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Local fixture threads, submissions, interruption and completion are bounded by the test. There is no application or OS process worker."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiCustomMetricPayloadTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 595,
+      "sourceAnchor": "for (var future : executor.invokeAll(tasks, 30, TimeUnit.SECONDS)) {",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Local fixture threads, submissions, interruption and completion are bounded by the test. There is no application or OS process worker."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiCustomMetricPayloadTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 603,
+      "sourceAnchor": "executor.shutdownNow();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Local fixture threads, submissions, interruption and completion are bounded by the test. There is no application or OS process worker."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiCustomMetricPayloadTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 604,
+      "sourceAnchor": "assertTrue(executor.awaitTermination(30, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Local fixture threads, submissions, interruption and completion are bounded by the test. There is no application or OS process worker."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiCustomMetricPayloadTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceLine": 620,
+      "sourceAnchor": "var executor = Executors.newSingleThreadExecutor();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The test owns the finite executor and always requests shutdown and requires actual termination before releasing the other owners. No implicit indefinite wait remains."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiCustomMetricPayloadTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 620,
+      "sourceAnchor": "var executor = Executors.newSingleThreadExecutor();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Local fixture threads, submissions, interruption and completion are bounded by the test. There is no application or OS process worker."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiCustomMetricPayloadTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 623,
+      "sourceAnchor": "executor.submit(",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Local fixture threads, submissions, interruption and completion are bounded by the test. There is no application or OS process worker."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiCustomMetricPayloadTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 647,
+      "sourceAnchor": "executor.shutdownNow();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Local fixture threads, submissions, interruption and completion are bounded by the test. There is no application or OS process worker."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiCustomMetricPayloadTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 648,
+      "sourceAnchor": "assertTrue(executor.awaitTermination(30, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Local fixture threads, submissions, interruption and completion are bounded by the test. There is no application or OS process worker."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiCustomMetricPayloadTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 661,
+      "sourceAnchor": "Thread.currentThread().interrupt();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Local fixture threads, submissions, interruption and completion are bounded by the test. There is no application or OS process worker."
+    }
+  ]
+}
