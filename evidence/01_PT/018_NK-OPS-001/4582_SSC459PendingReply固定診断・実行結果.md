@@ -1,0 +1,5 @@
+# SSC-459 PendingReply固定診断の実行結果
+
+Core a5ee838b8170749ac162051b17390c98de9a6a5e、Unit source c30e3afe62af93c368bd755c6ccde6542574ae65。PG38536元Registry全7＋新PT-JMS-008-DIAG001 1、初回8/8成功・真正0、F/E/skip/選定内未実行0。独立XML、実行CRC2とpackage-info自然NoCodeを照合。PG38540未フィルタは281命令、22分岐、74行、17method、2 classで未到達0。物理変更はPendingReply一型、公開ABI二型同一。旧の絶対締切・重複・並行・copyへ新しい合成値の一般診断を追加した。
+
+GJFのみの初回準備失敗をPG38525／BUG3230へ保存、Javadoc正規化後はGJF/CS/SB0。PMD生5は元有界workerの規則を各位置に対応付けた。独立ABI照合の初回は旧metadataのclass名キー表現違いで停止し、保存済みrawから確認を完了。実行・測定再起動なし。BUG3229とYKT2678は限定CLOSED。実Artemis、実ログと全451は未成立。証跡 evidence/01_PT/018_NK-OPS-001/evidence/PG38540-p01810-pending-reply-fixed-diagnostic-independent-v1/manifest.json SHA256 ca812c665ef242d4b725c728622f82ab9f76d8870ce95c036de245d6d41cce01。
