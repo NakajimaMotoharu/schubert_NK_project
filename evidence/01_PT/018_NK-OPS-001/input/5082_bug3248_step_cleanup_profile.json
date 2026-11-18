@@ -1,0 +1,190 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "id": "PG38944-BUG3248-STEP-CLEANUP-RAW",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productOwnerByMainPath": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/CleanupStopReason.java": "WBS-P017-07",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/CleanupStoppedException.java": "WBS-P017-07",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/MaintenanceMutationGuard.java": "WBS-P017-12",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java": "WBS-P017-07",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupSummary.java": "WBS-P017-07",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.java": "WBS-P017-02",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java": "WBS-P017-02",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStep.java": "WBS-P017-02",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStepAttempt.java": "WBS-P017-12",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupCounts.java": "WBS-P017-07",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupKind.java": "WBS-P017-07",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepChunk.java": "WBS-P017-07",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java": "WBS-P017-07",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java": "WBS-P017-01",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java": "WBS-P004-03",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferences.java": "WBS-P017-12",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.java": "WBS-P004-05",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java": "WBS-P003-04",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/package-info.java": "WBS-P003-04"
+  },
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4620_SSC461ステップ削除JDBC伝播単体仕様.md",
+      "sha256": "898e55203ce5c3c1b0b379785e688756e7d6c21d114ae2add555f86979d727b7"
+    },
+    {
+      "path": "evidence/01_PT/017_NK-BAT-001/064_NK-BAT-001_CleanupStep資源横展開仕様.md",
+      "sha256": "2a0b569d0f891b53081b5d8481650bb5ba1cc8a0e94a6374f4293068ec7b8272"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4621_BUG3247ステップ削除timeout結合追補仕様.md",
+      "sha256": "e0dbf582e2cca04a3d5a92e7d4763c52cdaeddabf4b2ba809164ff095347ef7a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4623_BUG3248ステップ削除生境界追補仕様.md",
+      "sha256": "e139419bf6ff9e9cc6feab10402a75161b05bed8d1f84f2b653ebc4fd81d382e"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28388-real-guard-exact-byte-signature-witness-v1/manifest.json",
+      "sha256": "31fb19e33f6e2f93f4a71ea22a7909d7e622710ee34b0b451b4dcddb6fa52084"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28428-six-analysis-symbols-exact-byte-witness-v1/manifest.json",
+      "sha256": "5155c32b4ae1790f1099aab7a2409e7b2c7da27e000f74df176f048cf7bf2ca5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38899-f03-log-lease-independent-v1/manifest.json",
+      "sha256": "5b3282d3716b3e498d2c24400e4b57cee950a648f9b017068fbc0d5a5c7c91bc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38734-f03-cleanup-raw-owner-proof-v1/manifest.json",
+      "sha256": "06b502f2f7b0d0941bacb52bbb8b03fdc7c866dac5ec621a8cb0147292b87d0e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38904-ssc461-step-cleanup-static-v1/manifest.json",
+      "sha256": "e61c5d8083725670913b3b7fe9a601842d696edfd83aa0c3335f27ed8a77068a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38915-ssc461-step-cleanup-first-post-gap-v1/manifest.json",
+      "sha256": "3443d978da6c5cefc0aa8c9b933298af0f0418314accf2687ecc1f5b20d8b6ea"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38930-f02-step-cleanup-independent-v1/manifest.json",
+      "sha256": "750abae5df3dc3540519a1a88ff4b8b00fcfed9e51008253acf78b09dea60563"
+    }
+  ],
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "productionCoreMain": "13f2fd9bc1345a4dceb360849add2c329bc9b90f",
+  "mainSources": [
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/CleanupStopReason.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/CleanupStoppedException.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/MaintenanceMutationGuard.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupSummary.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStep.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStepAttempt.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupCounts.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupKind.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepChunk.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferences.java",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.java",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/package-info.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupTransactionPortTest.java",
+      "tests": 11
+    }
+  ],
+  "expectedTests": 11,
+  "resources": [],
+  "sdkJars": [
+    "com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar"
+  ],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class",
+    "dev/codex/schubert/nk/batch/cleanup/CleanupStopReason.class",
+    "dev/codex/schubert/nk/batch/cleanup/CleanupStoppedException.class",
+    "dev/codex/schubert/nk/batch/cleanup/MaintenanceMutationGuard.class",
+    "dev/codex/schubert/nk/batch/cleanup/StepCleanupService.class",
+    "dev/codex/schubert/nk/batch/cleanup/StepCleanupSummary.class",
+    "dev/codex/schubert/nk/batch/repository/BatchRepositoryException.class",
+    "dev/codex/schubert/nk/batch/repository/BatchRun.class",
+    "dev/codex/schubert/nk/batch/repository/BatchStep.class",
+    "dev/codex/schubert/nk/batch/repository/BatchStepAttempt.class",
+    "dev/codex/schubert/nk/batch/repository/CleanupCounts.class",
+    "dev/codex/schubert/nk/batch/repository/CleanupKind.class",
+    "dev/codex/schubert/nk/batch/repository/CleanupStepChunk.class",
+    "dev/codex/schubert/nk/batch/repository/CleanupStepRepository.class",
+    "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.class",
+    "dev/codex/schubert/nk/batch/repository/RunReferenceRepository.class",
+    "dev/codex/schubert/nk/batch/repository/RunReferences.class",
+    "dev/codex/schubert/nk/storage/StorageIoException.class",
+    "dev/codex/schubert/nk/storage/package-info.class",
+    "dev/codex/schubert/nk/batch/repository/CleanupStepChunk$Reason.class",
+    "dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Guard.class",
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/batch/cleanup/StepCleanupService"
+  ],
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-batch/pom.xml",
+    "src/schubert-nk-storage/pom.xml",
+    "src/schubert-nk-bootstrap/pom.xml"
+  ],
+  "systemProperties": {},
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG38932-bug3248-step-cleanup-prestyle-v1",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG38934-bug3248-step-cleanup-prepare-v1",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG38936-bug3248-step-cleanup-static-v1",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG38938-bug3248-step-cleanup-preflight-v1",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG38944-bug3248-step-cleanup-unit-v1",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG38946-bug3248-step-cleanup-post-v1"
+  },
+  "privateDirs": {
+    "prepare": "pg38934-bug3248-step-cleanup-prepare-v1",
+    "unit": "pg38944-bug3248-step-cleanup-unit-v1"
+  },
+  "newTestDefinitions": 4,
+  "reviewedGuardSignature": {
+    "witness": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28388-real-guard-exact-byte-signature-witness-v1/manifest.json",
+      "sha256": "31fb19e33f6e2f93f4a71ea22a7909d7e622710ee34b0b451b4dcddb6fa52084"
+    },
+    "source": {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame.java",
+      "sha256": "48645538321f59775ceca14b6c4ee201db6cbad142e7ca7551e35145f886f4e7"
+    }
+  },
+  "forbiddenInitializedClasses": [
+    "dev/codex/schubert/nk/bootstrap/ChildStartupContext",
+    "dev/codex/schubert/nk/bootstrap/ChildStartupContext$MaintenanceParent",
+    "dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame",
+    "dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Clock",
+    "dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Parent",
+    "dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$ParentProbe",
+    "dev/codex/schubert/nk/storage/LinuxMonotonicClock"
+  ],
+  "standardCompilerSwitchMaps": [],
+  "reviewedAnalysisOnlyContext": {
+    "witness": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28428-six-analysis-symbols-exact-byte-witness-v1/manifest.json",
+      "sha256": "5155c32b4ae1790f1099aab7a2409e7b2c7da27e000f74df176f048cf7bf2ca5"
+    }
+  }
+}
