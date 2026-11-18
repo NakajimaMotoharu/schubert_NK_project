@@ -1,0 +1,106 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "id": "PG39680-BUG3300-WEBLOG-OUTBOX-REQUIRED-RESOURCE-V1",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productOwnerByMainPath": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogOutboxRepository.java": "WBS-P006-03",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/ClaimedWebLog.java": "WBS-P006-04",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload.java": "WBS-P006-04",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity.java": "WBS-P006-04",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/package-info.java": "WBS-P006-04"
+  },
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/015_NK-WEB-001/046_WebLogOutbox\u5168JDBCport_\u5358\u4f53\u30c6\u30b9\u30c8\u4ed5\u69d8.md",
+      "sha256": "fae45ddcb61fddf338e19870fc67e9f49a1e3f2add625eb4eae4323e8c3242ae"
+    },
+    {
+      "path": "evidence/01_PT/015_NK-WEB-001/4690_SSC472_WebLogOutbox\u5fc5\u9808\u8cc7\u6e90\u5358\u4f53\u4ed5\u69d8.md",
+      "sha256": "8bbea6715be6a825ec5250ba212b95aafdfff1d313ef8ddf07e7461b28f3adae"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG19638-web-outbox-jdbc-twenty-v1/manifest.json",
+      "sha256": "b458c4282e6b95bee8cc8616cb236de9cbe56e23ab7bd57e1a2ba7ec9111fdc7"
+    },
+    {
+      "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG19638-web-outbox-jdbc-twenty-v1/pg19646-web-outbox-jdbc-independent-post-v1/manifest.safe.json",
+      "sha256": "6536ba4117a71632bbabaa7fa33dcbd2313a88a0f0e4528e95c917a9236f5eeb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39668-p00405-weblog-outbox-before-v1/manifest.json",
+      "sha256": "0d670d73af539017f85ff0784d783f8ec1ba3638edd4d8ef69b15f9b3b10a40d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39656-p00405-business-outbox-resource-independent-v1/manifest.json",
+      "sha256": "284573282c4f427c0a0c16072b3019af4485d264b952667ab44d470fd8d82aee"
+    }
+  ],
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "productionCoreMain": "0e93b5a35d126bdf2500d0820082d7c2e4ff5db7",
+  "mainSources": [
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogOutboxRepository.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/ClaimedWebLog.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/package-info.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogOutboxPortTest.java",
+      "tests": 23
+    }
+  ],
+  "expectedTests": 23,
+  "resources": [],
+  "sdkJars": [
+    "com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar"
+  ],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/web/logging/WebLogOutboxRepository.class",
+    "dev/codex/schubert/nk/web/logging/ClaimedWebLog.class",
+    "dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload.class",
+    "dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity.class",
+    "dev/codex/schubert/nk/web/logging/package-info.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/web/logging/WebLogOutboxRepository"
+  ],
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-web/pom.xml"
+  ],
+  "systemProperties": {},
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG39670-bug3300-weblog-outbox-prestyle-v1",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG39672-bug3300-weblog-outbox-prepare-v1",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG39674-bug3300-weblog-outbox-static-v1",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG39678-bug3300-weblog-outbox-preflight-v1",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG39680-bug3300-weblog-outbox-unit-v1",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG39684-bug3300-weblog-outbox-post-v1"
+  },
+  "privateDirs": {
+    "prepare": "pg39672-bug3300-weblog-outbox-prepare-v1",
+    "unit": "pg39680-bug3300-weblog-outbox-unit-v1"
+  },
+  "newTestDefinitions": 3,
+  "standardCompilerSwitchMaps": [],
+  "forbiddenInitializedClasses": [],
+  "buildNotes": {
+    "metadataOnly": "Web provides SpotBugs annotations 4.10.4, whose published POM compile-transitively provides the already pinned JSR305 3.0.2. No POM or SDK version modification.",
+    "transitivePom": {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/com/github/spotbugs/spotbugs-annotations/4.10.4/spotbugs-annotations-4.10.4.pom",
+      "sha256": "b832475e1a2f077938cbbf7b79450f1f11bdbaaee17acddd8a71278aee6abdcc"
+    }
+  }
+}
