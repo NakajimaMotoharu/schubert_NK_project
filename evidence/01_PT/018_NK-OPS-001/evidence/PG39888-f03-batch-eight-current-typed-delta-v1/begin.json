@@ -1,0 +1,83 @@
+{
+  "command": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+    "-Xmx2g",
+    "-cp",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/github/spotbugs/spotbugs/4.10.4/spotbugs-4.10.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-analysis/9.10.1/asm-analysis-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-util/9.10.1/asm-util-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/bcel/bcel/6.12.0/bcel-6.12.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/github/stephenc/jcip/jcip-annotations/1.0-1/jcip-annotations-1.0-1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/dom4j/dom4j/2.2.0/dom4j-2.2.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/commons/commons-lang3/3.20.0/commons-lang3-3.20.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/commons/commons-text/1.15.0/commons-text-1.15.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/github/spotbugs/spotbugs-annotations/4.10.4/spotbugs-annotations-4.10.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/jaxen/jaxen/2.0.6/jaxen-2.0.6.jar:/home/mini/codex/project1/work/toolchain/m2/repository/net/sf/saxon/Saxon-HE/12.10/Saxon-HE-12.10.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/logging/log4j/log4j-api/2.26.1/log4j-api-2.26.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.26.1/log4j-to-slf4j-2.26.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-simple/2.0.18/slf4j-simple-2.0.18.jar:/home/mini/codex/project1/work/toolchain/m2/repository/commons-io/commons-io/2.22.0/commons-io-2.22.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/xmlresolver/xmlresolver/5.3.3/xmlresolver-5.3.3.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/xmlresolver/xmlresolver/5.3.3/xmlresolver-5.3.3-data.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+    "edu.umd.cs.findbugs.FindBugs2",
+    "-effort:max",
+    "-low",
+    "-xml:withMessages",
+    "-exitcode",
+    "-auxclasspathFromFile",
+    "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG39888-f03-batch-eight-current-typed-delta-v1/spotbugs-aux.txt",
+    "-output",
+    "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG39888-f03-batch-eight-current-typed-delta-v1/spotbugs.xml",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39862-service-db-state-lock-four-main-v1/src/schubert-nk-batch/target/classes/dev/codex/schubert/nk/batch/backup/BackupCommitService.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39862-service-db-state-lock-four-main-v1/src/schubert-nk-batch/target/classes/dev/codex/schubert/nk/batch/cleanup/LogCleanupService$ChunkProgress.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39862-service-db-state-lock-four-main-v1/src/schubert-nk-batch/target/classes/dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SessionLease.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39862-service-db-state-lock-four-main-v1/src/schubert-nk-batch/target/classes/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39862-service-db-state-lock-four-main-v1/src/schubert-nk-batch/target/classes/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39862-service-db-state-lock-four-main-v1/src/schubert-nk-batch/target/classes/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39862-service-db-state-lock-four-main-v1/src/schubert-nk-batch/target/classes/dev/codex/schubert/nk/batch/repository/CleanupRepository$StatementFactory.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39862-service-db-state-lock-four-main-v1/src/schubert-nk-batch/target/classes/dev/codex/schubert/nk/batch/repository/CleanupRepository.class"
+  ],
+  "groupStart": {
+    "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/523_F03Batch八物理の現型付き差分開始.json",
+    "sha256": "c54b38b6b2f036762fbb2363ac7b7fb9292f800928e4be2d72db47f97bda43ac"
+  },
+  "prior": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39862-service-db-state-lock-four-main-v1/manifest.json",
+      "sha256": "9433dae6e53e1d97a1b942175e930c315c118da9dea870cdffb0b26072e6a035"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38760-wbs66-four-own-main-current-v1/compile/manifest.json",
+      "sha256": "9150e6f095658478a0b371b38a680871bba0831b50bd4e12ed8d13e5ace154f5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38762-wbs66-four-current-static-v1/manifest.json",
+      "sha256": "427c95d702cc13b9722f903d69c7dcb111492c900752d214e7a475df4fb9890a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39812-f03-storage-bootstrap-annotation-peer-v1/manifest.json",
+      "sha256": "21c4c0ff8d1eb8de52d379c2f43a0e352b876a4be83d42611cb18b83b38b5522"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39810-f03-storage-bootstrap-whole-static-v1/begin.json",
+      "sha256": "297015371033b754eb1663c70a2e582905b1ff2859ea1f9b87f2f6dea331e25c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39870-f02-service-state-lock-edges-and-trace-v1/manifest.json",
+      "sha256": "e95cdfc8954261ea392f89bd53bee2ed01d188a5b2e74e3cbf415444cf123d62"
+    }
+  ],
+  "source": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "targets": {
+    "dev/codex/schubert/nk/batch/backup/BackupCommitService.class": "0617df8ae283495ba2942b4df133048639e435f0a4b1b5ba1f91c0fc23cd557e",
+    "dev/codex/schubert/nk/batch/cleanup/LogCleanupService$ChunkProgress.class": "803f2ca4d5e5b545b23befe07a5f1597afa6a590fe66e8ed14fb3d1b6c0e586d",
+    "dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SessionLease.class": "6df154ca68d2d5ed3678714bde2d36c407c8819c3496e230204ba4beb05972c8",
+    "dev/codex/schubert/nk/batch/cleanup/LogCleanupService.class": "71e6b4a6e5831f27d0441a6f0e618cb532753ab0b987ce5358ff68c9e0c78549",
+    "dev/codex/schubert/nk/batch/cleanup/StepCleanupService.class": "1e6850ba8cfcc433dd396602e10c804cee800e0a6d75ebbb360e0d11a4f3050a",
+    "dev/codex/schubert/nk/batch/platform/ProcessResourceScope.class": "71b77902d02e6e16594508d4913bbd2bb2ac2dc4873a3a2fd77a360ec2897611",
+    "dev/codex/schubert/nk/batch/repository/CleanupRepository$StatementFactory.class": "5175193ec974893aacb025bd793bb2b411046950585320e8124886af320ff6c2",
+    "dev/codex/schubert/nk/batch/repository/CleanupRepository.class": "d5702335f6dc9c1fa71d894ebfeda39445e2b6ea834ade51de5e67008a480659"
+  },
+  "allowedMain": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java": "a8d2d6afaff8bafbed6d9f34cdcec0cff6e716bb36d9af8b58892afebad2f9cc",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java": "2dcbb6a8d2f2e1e7bbb1705ffe182a8493ca0407101a9ad261460fb2d95604c9",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java": "021f37f96635be99f99306c2fec1dd5ae2d68a6d43f51210de9e079ac6306d50"
+  },
+  "externalSdkCount": 11,
+  "closedAux": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39888-f03-batch-eight-current-typed-delta-v1/closed-physical-aux.jar",
+    "sha256": "757c32b4ffffd33bdc412a6ac30dd070f55989e95e97b023f7f3286a9a6c5628"
+  },
+  "excludedFromTargetsAndAux": 53,
+  "auxInputCount": 1041,
+  "includedRootTypeBodies": 0,
+  "productJobs": 0,
+  "startedAtUTC": "2026-11-18T16:38:19.183545+00:00"
+}
