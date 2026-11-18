@@ -1,0 +1,40 @@
+{
+  "source": "39cc7efe2104a2bc206682f90bfe03fc56ca1676",
+  "productionCoreMain": "13f2fd9bc1345a4dceb360849add2c329bc9b90f",
+  "command": [
+    "python3",
+    "-B",
+    "tools/quality/pgpt_closed_host_post_v3.py",
+    "evidence/01_PT/018_NK-OPS-001/input/5078_ssc461_step_cleanup_profile_v2.json",
+    "39cc7efe2104a2bc206682f90bfe03fc56ca1676"
+  ],
+  "postExit": 1,
+  "postException": "ValueError: fresh real Guard execution required",
+  "firstUnit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38912-ssc461-step-cleanup-unit-v2/manifest.json",
+    "sha256": "37e9b6f9bd6f6063454f75000ad3a83dc771f2fe49137ed252551730b8b70afd"
+  },
+  "unitExit": 0,
+  "unitPassed": 6,
+  "noIndependentPost": true,
+  "wholeScopeAccepted": false,
+  "groupStart": "PGPT-20261008-5899",
+  "quota": {
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-18T07:54:17.385000+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 31,
+        "remainingPercent": 69,
+        "resetsAt": 1795445753,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "sha256": "fca8892862b26f8a069a46d254a01ddc5737c809550e39472cb2214ced0a2b49"
+  },
+  "qualificationRetryReason": "Add a distinct positive Guard interface timeout readback expectation with an isolated in-memory fixture; retain then-current six successes and post failure. No guard mutation, no real owner/DB/runtime.",
+  "formalUpdated": false,
+  "newAcceptance": 0
+}
