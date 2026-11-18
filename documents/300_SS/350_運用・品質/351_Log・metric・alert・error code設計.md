@@ -295,6 +295,8 @@ SSC-454。Webの値型の一般診断では、EncryptedWebLogPayload.toStringは
 
 SSC-455。EncryptedAuthContext.toStringは「EncryptedAuthContext[keyVersion/ciphertext=<redacted>]」の固定値とし、鍵versionや暗号文の実値を一般診断へ連結しない。認証・再送の構造化ログやmetricのallowlist、値取得、保存列、暗号key選択の契約を維持する。
 
+SSC-458。CanonicalField.toStringは「CanonicalField[<redacted>]」、CanonicalRequest.toStringは「CanonicalRequest[<redacted>]」の固定値とする。field名・型版、layout ID・版、owner・target・fieldsの実値を一般診断文字列に連結しない。SS324 §3の正規化・暗号入力・固定layout・値アクセサーと、本書§3の項目別に許可した構造化ログを維持する。
+
 
 - DEBUGだけ機密除外を緩和、request/response/fixed body、exception/SQLの`toString()`を無制限出力。
 - Username/IP/message/token/path等の高cardinality/機密値をmetric label化。
