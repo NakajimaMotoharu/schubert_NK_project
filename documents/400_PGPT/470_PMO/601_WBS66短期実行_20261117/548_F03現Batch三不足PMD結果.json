@@ -1,0 +1,123 @@
+{
+  "eventId": "PGPT-20261008-6070",
+  "actualExit": 0,
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-BATCH-CHANGED-THREE-FULL-PMD-20261119",
+    "workCategory": "REVIEW",
+    "workDetailCategory": "PGPT-WBS66-F03-BATCH-CHANGED-THREE-FULL-PMD-20261119",
+    "workAttributionKind": "REQUALIFICATION",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "source": "0c543d44aafbb0cf7b6e768e22f8928983b78c9d",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "run": "PG39984-f03-batch-three-current-pmd-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.35,
+      "base": 1.0,
+      "high": 2.5
+    },
+    "groupCapPp": 5,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39862-service-db-state-lock-four-main-v1/manifest.json",
+        "sha256": "9433dae6e53e1d97a1b942175e930c315c118da9dea870cdffb0b26072e6a035"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39888-f03-batch-eight-current-typed-delta-v1/begin.json",
+        "sha256": "08010a7a2bcd6f2a432d31433c487be3f17df9240a23e5fa4abb3b2ba8c81e5f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36960-current287-root-pmd-v1/manifest.json",
+        "sha256": "33cabcf09b2ba0e6f996759cae2592771920828e637d78ea24a782380abc77a5"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39754-process-resource-scope-static-v1/manifest.json",
+        "sha256": "4e33847876102431ab27c1177ec5e0f2e2483d91d078aeb52d6d61216c68af30"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39794-cleanup-fixed-statement-static-v1/manifest.json",
+        "sha256": "d4d0fa0442a27a486d81bce2b01d10918d8c38d51e2daecae13028fedd34e46b"
+      }
+    ],
+    "preparationGuard": "First append rejected an unregistered work category; no event or PMD started.",
+    "workScope": "Run existing full PMD rules once on exact three current changed Batch Main lacking a current full-rules receipt. Reuse compiler and eligible auxiliary exact type inputs. Preserve all findings and classify individually, no suppressed findings or Product execution. ResourceScope and CleanupRepository use separately preserved evidence.",
+    "quotaAfter": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-18T17:39:04.254000+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 45,
+        "remainingPercent": 55,
+        "resetsAt": 1795445752,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "quotaReceipt": {
+      "sha256": "377c769039de33c6b0ad638762ac364b319c97197ea3d4a587368c9d52f0d281",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T17:39:04.254000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 45,
+          "remainingPercent": 55,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T17:38:52.724294+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "publicEvidence": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39984-f03-batch-three-current-pmd-v1/manifest.json",
+        "sha256": "e58d32a6486249e3c667980decf6a756239f5f1331dabcc1c58ac14dced5f6c7"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39984-f03-batch-three-current-pmd-v1/independent.json",
+        "sha256": "8d8b25afb0634e92cc50d0669c7e8ea5cfeca68f74a8e70d5a753fd06be5cf93"
+      }
+    ],
+    "result": "Three current Batch Main full typed PMD scans; raw61 reviewed across33 sites; no applicable or unclassified in this scope",
+    "firstVerificationDenominator": 1,
+    "firstVerificationSuccess": 1,
+    "preparationExit1": 2,
+    "rawToolExit": 4,
+    "rawFindings": 61,
+    "reviewedSites": 33,
+    "applicable": 0,
+    "unclassified": 0,
+    "executedStaticRetries": 0,
+    "newProductTests": 0,
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortCompletionRate": null,
+    "remainingOriginalDetailBasePp": 1089.848,
+    "nextCommand": "Admit exact whole synthetic transaction-port suites for finally-close and rollback evidence only where not already same-source qualified"
+  }
+}

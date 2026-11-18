@@ -1,0 +1,1200 @@
+{
+  "actualExit": 0,
+  "source": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "raw": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39984-f03-batch-three-current-pmd-v1/pmd.xml",
+    "sha256": "f48a730eb35285fad930318c87f19e35f8b165fd0524a63d65c723bead624b54"
+  },
+  "manifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39984-f03-batch-three-current-pmd-v1/manifest.json",
+    "sha256": "e58d32a6486249e3c667980decf6a756239f5f1331dabcc1c58ac14dced5f6c7"
+  },
+  "productionRuleAndThresholdUnmodified": true,
+  "rawFindingCount": 61,
+  "reviewedSiteCount": 33,
+  "applicable": 0,
+  "unclassified": 0,
+  "toolExit": 4,
+  "processingErrors": 0,
+  "designsSource": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+  "designPins": {
+    "SS332": {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "sha256": "4c09a2f66d9cb4def976c24d2952953aa5a287a0d545548dc4feda4968ff5bef"
+    },
+    "SS341": {
+      "path": "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md",
+      "sha256": "857b4062d624ab8b99a2bfc72524f380c655c930db9388755968981e7c76d6c5"
+    },
+    "SS342": {
+      "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+      "sha256": "07ab19dd27038241ba8257a1e4dcf180117a844b68479ec6848658a938445192"
+    }
+  },
+  "rows": [
+    {
+      "rawIndex": 1,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+        "start": 35,
+        "end": 35,
+        "column": 31,
+        "rule": "AvoidCatchingGenericException",
+        "text": "Avoid catching RuntimeException in try-catch block"
+      },
+      "inputSha256": "a8d2d6afaff8bafbed6d9f34cdcec0cff6e716bb36d9af8b58892afebad2f9cc",
+      "lineSha256": "bc57f65257257f58ee963f9be9f84751b9f6d3b9e64905160c3f0c2e4ac7cfa6",
+      "decision": "TYPED_FAILURE_AND_OWNED_RESOURCE_CONTRACT",
+      "scopeReason": "Before transaction commit, one rollback and auto-commit recovery is attempted for each typed failure; successful recovery rethrows the original.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 2,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+        "start": 35,
+        "end": 35,
+        "column": 50,
+        "rule": "AvoidCatchingGenericException",
+        "text": "Avoid catching Error in try-catch block"
+      },
+      "inputSha256": "a8d2d6afaff8bafbed6d9f34cdcec0cff6e716bb36d9af8b58892afebad2f9cc",
+      "lineSha256": "bc57f65257257f58ee963f9be9f84751b9f6d3b9e64905160c3f0c2e4ac7cfa6",
+      "decision": "TYPED_FAILURE_AND_OWNED_RESOURCE_CONTRACT",
+      "scopeReason": "Before transaction commit, one rollback and auto-commit recovery is attempted for each typed failure; successful recovery rethrows the original.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 3,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+        "start": 39,
+        "end": 39,
+        "column": 33,
+        "rule": "AvoidCatchingGenericException",
+        "text": "Avoid catching RuntimeException in try-catch block"
+      },
+      "inputSha256": "a8d2d6afaff8bafbed6d9f34cdcec0cff6e716bb36d9af8b58892afebad2f9cc",
+      "lineSha256": "4565c565923cef0811334f37002dcf2bafad4b686b0d26307bd32f4bb249d6e7",
+      "decision": "TYPED_FAILURE_AND_OWNED_RESOURCE_CONTRACT",
+      "scopeReason": "The rollback/setAutoCommit failure is secondary; preserve unknown original/cleanup identity and choose the fixed repository error only after fatal graph checks.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 4,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+        "start": 39,
+        "end": 39,
+        "column": 52,
+        "rule": "AvoidCatchingGenericException",
+        "text": "Avoid catching Error in try-catch block"
+      },
+      "inputSha256": "a8d2d6afaff8bafbed6d9f34cdcec0cff6e716bb36d9af8b58892afebad2f9cc",
+      "lineSha256": "4565c565923cef0811334f37002dcf2bafad4b686b0d26307bd32f4bb249d6e7",
+      "decision": "TYPED_FAILURE_AND_OWNED_RESOURCE_CONTRACT",
+      "scopeReason": "The rollback/setAutoCommit failure is secondary; preserve unknown original/cleanup identity and choose the fixed repository error only after fatal graph checks.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 5,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+        "start": 40,
+        "end": 40,
+        "column": 34,
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "text": "An instanceof check is being performed on the caught exception. Create a separate catch clause for Error."
+      },
+      "inputSha256": "a8d2d6afaff8bafbed6d9f34cdcec0cff6e716bb36d9af8b58892afebad2f9cc",
+      "lineSha256": "83ccc8cec80cbb000c923c6dee6776751572ccc402ef6e9de8ff8be17558ca0c",
+      "decision": "TWO_FAILURE_IDENTITIES_AND_SPECIFIED_PRIORITY",
+      "scopeReason": "These type checks select the separately captured original unknown Error/runtime identity and a fixed secondary diagnostic.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 6,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+        "start": 40,
+        "end": 40,
+        "column": 34,
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "text": "An instanceof check is being performed on the caught exception. Create a separate catch clause for Error."
+      },
+      "inputSha256": "a8d2d6afaff8bafbed6d9f34cdcec0cff6e716bb36d9af8b58892afebad2f9cc",
+      "lineSha256": "83ccc8cec80cbb000c923c6dee6776751572ccc402ef6e9de8ff8be17558ca0c",
+      "decision": "TWO_FAILURE_IDENTITIES_AND_SPECIFIED_PRIORITY",
+      "scopeReason": "These type checks select the separately captured original unknown Error/runtime identity and a fixed secondary diagnostic.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 7,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+        "start": 41,
+        "end": 41,
+        "column": 38,
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "text": "An instanceof check is being performed on the caught exception. Create a separate catch clause for RuntimeException."
+      },
+      "inputSha256": "a8d2d6afaff8bafbed6d9f34cdcec0cff6e716bb36d9af8b58892afebad2f9cc",
+      "lineSha256": "229153ba2ff66396b58103f3a9ebd4d4b06407257a05007c962e0be3e52def11",
+      "decision": "TWO_FAILURE_IDENTITIES_AND_SPECIFIED_PRIORITY",
+      "scopeReason": "These type checks select the separately captured original unknown Error/runtime identity and a fixed secondary diagnostic.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 8,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+        "start": 41,
+        "end": 41,
+        "column": 38,
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "text": "An instanceof check is being performed on the caught exception. Create a separate catch clause for RuntimeException."
+      },
+      "inputSha256": "a8d2d6afaff8bafbed6d9f34cdcec0cff6e716bb36d9af8b58892afebad2f9cc",
+      "lineSha256": "229153ba2ff66396b58103f3a9ebd4d4b06407257a05007c962e0be3e52def11",
+      "decision": "TWO_FAILURE_IDENTITIES_AND_SPECIFIED_PRIORITY",
+      "scopeReason": "These type checks select the separately captured original unknown Error/runtime identity and a fixed secondary diagnostic.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 9,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+        "start": 42,
+        "end": 42,
+        "column": 43,
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "text": "An instanceof check is being performed on the caught exception. Create a separate catch clause for BatchRepositoryException."
+      },
+      "inputSha256": "a8d2d6afaff8bafbed6d9f34cdcec0cff6e716bb36d9af8b58892afebad2f9cc",
+      "lineSha256": "7ec84ccf38bd46eab22c5bfb7ab61bba24a4cf7fafaf415dad71c6932bf0dad1",
+      "decision": "TWO_FAILURE_IDENTITIES_AND_SPECIFIED_PRIORITY",
+      "scopeReason": "These type checks select the separately captured original unknown Error/runtime identity and a fixed secondary diagnostic.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 10,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+        "start": 42,
+        "end": 42,
+        "column": 43,
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "text": "An instanceof check is being performed on the caught exception. Create a separate catch clause for BatchRepositoryException."
+      },
+      "inputSha256": "a8d2d6afaff8bafbed6d9f34cdcec0cff6e716bb36d9af8b58892afebad2f9cc",
+      "lineSha256": "7ec84ccf38bd46eab22c5bfb7ab61bba24a4cf7fafaf415dad71c6932bf0dad1",
+      "decision": "TWO_FAILURE_IDENTITIES_AND_SPECIFIED_PRIORITY",
+      "scopeReason": "These type checks select the separately captured original unknown Error/runtime identity and a fixed secondary diagnostic.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 11,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+        "start": 46,
+        "end": 46,
+        "column": 41,
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "text": "An instanceof check is being performed on the caught exception. Create a separate catch clause for Error."
+      },
+      "inputSha256": "a8d2d6afaff8bafbed6d9f34cdcec0cff6e716bb36d9af8b58892afebad2f9cc",
+      "lineSha256": "2ee00767a5b4fbe86b45eee6f3f3628db07d5705a1c9ec94a113721cfe4de425",
+      "decision": "TWO_FAILURE_IDENTITIES_AND_SPECIFIED_PRIORITY",
+      "scopeReason": "Only when original is known, choose the separately captured unknown rollback/restore Error or RuntimeException; otherwise inspect both fatal graphs.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 12,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+        "start": 46,
+        "end": 46,
+        "column": 41,
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "text": "An instanceof check is being performed on the caught exception. Create a separate catch clause for Error."
+      },
+      "inputSha256": "a8d2d6afaff8bafbed6d9f34cdcec0cff6e716bb36d9af8b58892afebad2f9cc",
+      "lineSha256": "2ee00767a5b4fbe86b45eee6f3f3628db07d5705a1c9ec94a113721cfe4de425",
+      "decision": "TWO_FAILURE_IDENTITIES_AND_SPECIFIED_PRIORITY",
+      "scopeReason": "Only when original is known, choose the separately captured unknown rollback/restore Error or RuntimeException; otherwise inspect both fatal graphs.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 13,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+        "start": 47,
+        "end": 47,
+        "column": 41,
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "text": "An instanceof check is being performed on the caught exception. Create a separate catch clause for RuntimeException."
+      },
+      "inputSha256": "a8d2d6afaff8bafbed6d9f34cdcec0cff6e716bb36d9af8b58892afebad2f9cc",
+      "lineSha256": "8a0c02ed5343a5ae3d6b335fb49a608aff231da7b7779e48327c8f076b94871a",
+      "decision": "TWO_FAILURE_IDENTITIES_AND_SPECIFIED_PRIORITY",
+      "scopeReason": "Only when original is known, choose the separately captured unknown rollback/restore Error or RuntimeException; otherwise inspect both fatal graphs.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 14,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+        "start": 47,
+        "end": 47,
+        "column": 41,
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "text": "An instanceof check is being performed on the caught exception. Create a separate catch clause for RuntimeException."
+      },
+      "inputSha256": "a8d2d6afaff8bafbed6d9f34cdcec0cff6e716bb36d9af8b58892afebad2f9cc",
+      "lineSha256": "8a0c02ed5343a5ae3d6b335fb49a608aff231da7b7779e48327c8f076b94871a",
+      "decision": "TWO_FAILURE_IDENTITIES_AND_SPECIFIED_PRIORITY",
+      "scopeReason": "Only when original is known, choose the separately captured unknown rollback/restore Error or RuntimeException; otherwise inspect both fatal graphs.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 15,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+        "start": 48,
+        "end": 48,
+        "column": 46,
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "text": "An instanceof check is being performed on the caught exception. Create a separate catch clause for BatchRepositoryException."
+      },
+      "inputSha256": "a8d2d6afaff8bafbed6d9f34cdcec0cff6e716bb36d9af8b58892afebad2f9cc",
+      "lineSha256": "6c2b749b75329d21767d063dd3a22c750ae519add004a811c98dc7fc38931324",
+      "decision": "TWO_FAILURE_IDENTITIES_AND_SPECIFIED_PRIORITY",
+      "scopeReason": "Only when original is known, choose the separately captured unknown rollback/restore Error or RuntimeException; otherwise inspect both fatal graphs.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 16,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+        "start": 48,
+        "end": 48,
+        "column": 46,
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "text": "An instanceof check is being performed on the caught exception. Create a separate catch clause for BatchRepositoryException."
+      },
+      "inputSha256": "a8d2d6afaff8bafbed6d9f34cdcec0cff6e716bb36d9af8b58892afebad2f9cc",
+      "lineSha256": "6c2b749b75329d21767d063dd3a22c750ae519add004a811c98dc7fc38931324",
+      "decision": "TWO_FAILURE_IDENTITIES_AND_SPECIFIED_PRIORITY",
+      "scopeReason": "Only when original is known, choose the separately captured unknown rollback/restore Error or RuntimeException; otherwise inspect both fatal graphs.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 17,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+        "start": 65,
+        "end": 65,
+        "column": 9,
+        "rule": "DoNotUseThreads",
+        "text": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "inputSha256": "a8d2d6afaff8bafbed6d9f34cdcec0cff6e716bb36d9af8b58892afebad2f9cc",
+      "lineSha256": "a7ff7364431ded78c5c2833f10ae05056dc149b7eb82d2b76d3b890121b62598",
+      "decision": "RULE_DOES_NOT_APPLY_TO_THREAD_STATUS_READ",
+      "scopeReason": "Only reads current thread interrupt status before admitted work; no Thread is created or scheduled.",
+      "requirements": [
+        "SS341",
+        "SS342"
+      ]
+    },
+    {
+      "rawIndex": 18,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+        "start": 89,
+        "end": 89,
+        "column": 9,
+        "rule": "DoNotUseThreads",
+        "text": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "inputSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+      "lineSha256": "98b5371b34dfbfe820e8f8c9904533a15d8a1eeecec6b7d8fb5b3da72c4fcebe",
+      "decision": "RULE_DOES_NOT_APPLY_TO_THREAD_STATUS_READ",
+      "scopeReason": "Only reads current thread interrupt status before and after the clock observation; no Thread is created or scheduled.",
+      "requirements": [
+        "SS341",
+        "SS342"
+      ]
+    },
+    {
+      "rawIndex": 19,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+        "start": 93,
+        "end": 93,
+        "column": 9,
+        "rule": "DoNotUseThreads",
+        "text": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "inputSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+      "lineSha256": "98b5371b34dfbfe820e8f8c9904533a15d8a1eeecec6b7d8fb5b3da72c4fcebe",
+      "decision": "RULE_DOES_NOT_APPLY_TO_THREAD_STATUS_READ",
+      "scopeReason": "Only reads current thread interrupt status before and after the clock observation; no Thread is created or scheduled.",
+      "requirements": [
+        "SS341",
+        "SS342"
+      ]
+    },
+    {
+      "rawIndex": 20,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+        "start": 125,
+        "end": 125,
+        "column": 29,
+        "rule": "AvoidCatchingGenericException",
+        "text": "Avoid catching RuntimeException in try-catch block"
+      },
+      "inputSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+      "lineSha256": "38b4b6303f93c115d3229074fe2a3053ef88ebe77f20619bed22a57dd675980a",
+      "decision": "TYPED_FAILURE_AND_OWNED_RESOURCE_CONTRACT",
+      "scopeReason": "Owned advisory lock release is called after callback failures of each eligible category; an original is rethrown unless approved cleanup precedence selects secondary.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 21,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+        "start": 125,
+        "end": 125,
+        "column": 48,
+        "rule": "AvoidCatchingGenericException",
+        "text": "Avoid catching Error in try-catch block"
+      },
+      "inputSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+      "lineSha256": "38b4b6303f93c115d3229074fe2a3053ef88ebe77f20619bed22a57dd675980a",
+      "decision": "TYPED_FAILURE_AND_OWNED_RESOURCE_CONTRACT",
+      "scopeReason": "Owned advisory lock release is called after callback failures of each eligible category; an original is rethrown unless approved cleanup precedence selects secondary.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 22,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+        "start": 128,
+        "end": 128,
+        "column": 31,
+        "rule": "AvoidCatchingGenericException",
+        "text": "Avoid catching RuntimeException in try-catch block"
+      },
+      "inputSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+      "lineSha256": "f07a2efd34a52c644baf07ac1c63de9872ef76b8db5b7efbac5fdb8e1717480a",
+      "decision": "TYPED_FAILURE_AND_OWNED_RESOURCE_CONTRACT",
+      "scopeReason": "An actual release failure is a separate throwable from the failed action; replace applies known/unknown precedence and safe suppression.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 23,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+        "start": 128,
+        "end": 128,
+        "column": 50,
+        "rule": "AvoidCatchingGenericException",
+        "text": "Avoid catching Error in try-catch block"
+      },
+      "inputSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+      "lineSha256": "f07a2efd34a52c644baf07ac1c63de9872ef76b8db5b7efbac5fdb8e1717480a",
+      "decision": "TYPED_FAILURE_AND_OWNED_RESOURCE_CONTRACT",
+      "scopeReason": "An actual release failure is a separate throwable from the failed action; replace applies known/unknown precedence and safe suppression.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 24,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+        "start": 187,
+        "end": 187,
+        "column": 29,
+        "rule": "AvoidCatchingGenericException",
+        "text": "Avoid catching RuntimeException in try-catch block"
+      },
+      "inputSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+      "lineSha256": "f029ae33c4f69e1fb3b36485cae9a952a4c0ff11a4829caddd7029f1048c8662",
+      "decision": "TYPED_FAILURE_AND_OWNED_RESOURCE_CONTRACT",
+      "scopeReason": "Durable committed chunks bypass rollback; before commit a failing mutation uses rollback and restore, preserving the original if recovery succeeds.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 25,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+        "start": 187,
+        "end": 187,
+        "column": 48,
+        "rule": "AvoidCatchingGenericException",
+        "text": "Avoid catching Error in try-catch block"
+      },
+      "inputSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+      "lineSha256": "f029ae33c4f69e1fb3b36485cae9a952a4c0ff11a4829caddd7029f1048c8662",
+      "decision": "TYPED_FAILURE_AND_OWNED_RESOURCE_CONTRACT",
+      "scopeReason": "Durable committed chunks bypass rollback; before commit a failing mutation uses rollback and restore, preserving the original if recovery succeeds.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 26,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+        "start": 192,
+        "end": 192,
+        "column": 31,
+        "rule": "AvoidCatchingGenericException",
+        "text": "Avoid catching RuntimeException in try-catch block"
+      },
+      "inputSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+      "lineSha256": "b0cbd80008e663cfa32038abe0dee5e3d81d5b75193e7ddcb8a1bf458401f7be",
+      "decision": "TYPED_FAILURE_AND_OWNED_RESOURCE_CONTRACT",
+      "scopeReason": "Rollback/restore failure priority is separately applied via known, fixed secondary diagnostics, and finite fatal graph checks.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 27,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+        "start": 192,
+        "end": 192,
+        "column": 50,
+        "rule": "AvoidCatchingGenericException",
+        "text": "Avoid catching Error in try-catch block"
+      },
+      "inputSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+      "lineSha256": "b0cbd80008e663cfa32038abe0dee5e3d81d5b75193e7ddcb8a1bf458401f7be",
+      "decision": "TYPED_FAILURE_AND_OWNED_RESOURCE_CONTRACT",
+      "scopeReason": "Rollback/restore failure priority is separately applied via known, fixed secondary diagnostics, and finite fatal graph checks.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 28,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+        "start": 231,
+        "end": 231,
+        "column": 33,
+        "rule": "AvoidCatchingGenericException",
+        "text": "Avoid catching RuntimeException in try-catch block"
+      },
+      "inputSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+      "lineSha256": "162ce5922428f7b7c42ca6ae57954c65b9b7a50a55b77349663435ce31f4a21d",
+      "decision": "TYPED_FAILURE_AND_OWNED_RESOURCE_CONTRACT",
+      "scopeReason": "Each held JDBC row saves and rethrows the actual primary for its single close helper during both advisory acquisition and release.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 29,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+        "start": 231,
+        "end": 231,
+        "column": 52,
+        "rule": "AvoidCatchingGenericException",
+        "text": "Avoid catching Error in try-catch block"
+      },
+      "inputSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+      "lineSha256": "162ce5922428f7b7c42ca6ae57954c65b9b7a50a55b77349663435ce31f4a21d",
+      "decision": "TYPED_FAILURE_AND_OWNED_RESOURCE_CONTRACT",
+      "scopeReason": "Each held JDBC row saves and rethrows the actual primary for its single close helper during both advisory acquisition and release.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 30,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+        "start": 237,
+        "end": 237,
+        "column": 31,
+        "rule": "AvoidCatchingGenericException",
+        "text": "Avoid catching RuntimeException in try-catch block"
+      },
+      "inputSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+      "lineSha256": "bc57f65257257f58ee963f9be9f84751b9f6d3b9e64905160c3f0c2e4ac7cfa6",
+      "decision": "TYPED_FAILURE_AND_OWNED_RESOURCE_CONTRACT",
+      "scopeReason": "Each held JDBC statement saves and rethrows its actual primary for single close after nested row closure during acquisition and release.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 31,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+        "start": 237,
+        "end": 237,
+        "column": 50,
+        "rule": "AvoidCatchingGenericException",
+        "text": "Avoid catching Error in try-catch block"
+      },
+      "inputSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+      "lineSha256": "bc57f65257257f58ee963f9be9f84751b9f6d3b9e64905160c3f0c2e4ac7cfa6",
+      "decision": "TYPED_FAILURE_AND_OWNED_RESOURCE_CONTRACT",
+      "scopeReason": "Each held JDBC statement saves and rethrows its actual primary for single close after nested row closure during acquisition and release.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 32,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+        "start": 249,
+        "end": 249,
+        "column": 31,
+        "rule": "AvoidCatchingGenericException",
+        "text": "Avoid catching RuntimeException in try-catch block"
+      },
+      "inputSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+      "lineSha256": "f07a2efd34a52c644baf07ac1c63de9872ef76b8db5b7efbac5fdb8e1717480a",
+      "decision": "TYPED_FAILURE_AND_OWNED_RESOURCE_CONTRACT",
+      "scopeReason": "The row close helper alone applies primary/secondary precedence; qualifying secondary is rethrown, all later statement ownership remains outside this catch.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 33,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+        "start": 249,
+        "end": 249,
+        "column": 50,
+        "rule": "AvoidCatchingGenericException",
+        "text": "Avoid catching Error in try-catch block"
+      },
+      "inputSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+      "lineSha256": "f07a2efd34a52c644baf07ac1c63de9872ef76b8db5b7efbac5fdb8e1717480a",
+      "decision": "TYPED_FAILURE_AND_OWNED_RESOURCE_CONTRACT",
+      "scopeReason": "The row close helper alone applies primary/secondary precedence; qualifying secondary is rethrown, all later statement ownership remains outside this catch.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 34,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+        "start": 258,
+        "end": 258,
+        "column": 31,
+        "rule": "AvoidCatchingGenericException",
+        "text": "Avoid catching RuntimeException in try-catch block"
+      },
+      "inputSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+      "lineSha256": "f07a2efd34a52c644baf07ac1c63de9872ef76b8db5b7efbac5fdb8e1717480a",
+      "decision": "TYPED_FAILURE_AND_OWNED_RESOURCE_CONTRACT",
+      "scopeReason": "The statement close helper alone applies primary/secondary precedence; the row is already finished before this helper.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 35,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+        "start": 258,
+        "end": 258,
+        "column": 50,
+        "rule": "AvoidCatchingGenericException",
+        "text": "Avoid catching Error in try-catch block"
+      },
+      "inputSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+      "lineSha256": "f07a2efd34a52c644baf07ac1c63de9872ef76b8db5b7efbac5fdb8e1717480a",
+      "decision": "TYPED_FAILURE_AND_OWNED_RESOURCE_CONTRACT",
+      "scopeReason": "The statement close helper alone applies primary/secondary precedence; the row is already finished before this helper.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 36,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+        "start": 279,
+        "end": 279,
+        "column": 35,
+        "rule": "AvoidCatchingGenericException",
+        "text": "Avoid catching RuntimeException in try-catch block"
+      },
+      "inputSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+      "lineSha256": "05cf327cb9a6a29f7e6f5daba3ea97a67dc30d3e78051473da70c6688383edc0",
+      "decision": "TYPED_FAILURE_AND_OWNED_RESOURCE_CONTRACT",
+      "scopeReason": "Each held JDBC row saves and rethrows the actual primary for its single close helper during both advisory acquisition and release.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 37,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+        "start": 279,
+        "end": 279,
+        "column": 54,
+        "rule": "AvoidCatchingGenericException",
+        "text": "Avoid catching Error in try-catch block"
+      },
+      "inputSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+      "lineSha256": "05cf327cb9a6a29f7e6f5daba3ea97a67dc30d3e78051473da70c6688383edc0",
+      "decision": "TYPED_FAILURE_AND_OWNED_RESOURCE_CONTRACT",
+      "scopeReason": "Each held JDBC row saves and rethrows the actual primary for its single close helper during both advisory acquisition and release.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 38,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+        "start": 285,
+        "end": 285,
+        "column": 33,
+        "rule": "AvoidCatchingGenericException",
+        "text": "Avoid catching RuntimeException in try-catch block"
+      },
+      "inputSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+      "lineSha256": "162ce5922428f7b7c42ca6ae57954c65b9b7a50a55b77349663435ce31f4a21d",
+      "decision": "TYPED_FAILURE_AND_OWNED_RESOURCE_CONTRACT",
+      "scopeReason": "Each held JDBC statement saves and rethrows its actual primary for single close after nested row closure during acquisition and release.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 39,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+        "start": 285,
+        "end": 285,
+        "column": 52,
+        "rule": "AvoidCatchingGenericException",
+        "text": "Avoid catching Error in try-catch block"
+      },
+      "inputSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+      "lineSha256": "162ce5922428f7b7c42ca6ae57954c65b9b7a50a55b77349663435ce31f4a21d",
+      "decision": "TYPED_FAILURE_AND_OWNED_RESOURCE_CONTRACT",
+      "scopeReason": "Each held JDBC statement saves and rethrows its actual primary for single close after nested row closure during acquisition and release.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 40,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+        "start": 103,
+        "end": 103,
+        "column": 29,
+        "rule": "AvoidCatchingGenericException",
+        "text": "Avoid catching RuntimeException in try-catch block"
+      },
+      "inputSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+      "lineSha256": "f029ae33c4f69e1fb3b36485cae9a952a4c0ff11a4829caddd7029f1048c8662",
+      "decision": "TYPED_FAILURE_AND_OWNED_RESOURCE_CONTRACT",
+      "scopeReason": "Durable committed chunks bypass rollback; otherwise rollback/restore handles each typed failure and rethrows original on successful recovery.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 41,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+        "start": 103,
+        "end": 103,
+        "column": 48,
+        "rule": "AvoidCatchingGenericException",
+        "text": "Avoid catching Error in try-catch block"
+      },
+      "inputSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+      "lineSha256": "f029ae33c4f69e1fb3b36485cae9a952a4c0ff11a4829caddd7029f1048c8662",
+      "decision": "TYPED_FAILURE_AND_OWNED_RESOURCE_CONTRACT",
+      "scopeReason": "Durable committed chunks bypass rollback; otherwise rollback/restore handles each typed failure and rethrows original on successful recovery.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 42,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+        "start": 108,
+        "end": 108,
+        "column": 31,
+        "rule": "AvoidCatchingGenericException",
+        "text": "Avoid catching RuntimeException in try-catch block"
+      },
+      "inputSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+      "lineSha256": "b0cbd80008e663cfa32038abe0dee5e3d81d5b75193e7ddcb8a1bf458401f7be",
+      "decision": "TYPED_FAILURE_AND_OWNED_RESOURCE_CONTRACT",
+      "scopeReason": "Separately captured rollback/restore failure is compared against the original, including approved cleanup stop as a known category.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 43,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+        "start": 108,
+        "end": 108,
+        "column": 50,
+        "rule": "AvoidCatchingGenericException",
+        "text": "Avoid catching Error in try-catch block"
+      },
+      "inputSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+      "lineSha256": "b0cbd80008e663cfa32038abe0dee5e3d81d5b75193e7ddcb8a1bf458401f7be",
+      "decision": "TYPED_FAILURE_AND_OWNED_RESOURCE_CONTRACT",
+      "scopeReason": "Separately captured rollback/restore failure is compared against the original, including approved cleanup stop as a known category.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 44,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+        "start": 110,
+        "end": 110,
+        "column": 32,
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "text": "An instanceof check is being performed on the caught exception. Create a separate catch clause for Error."
+      },
+      "inputSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+      "lineSha256": "77747732cc93d18946b74e3ebc09c32de47b0937e0e7beaceab8a73a29ee0721",
+      "decision": "TWO_FAILURE_IDENTITIES_AND_SPECIFIED_PRIORITY",
+      "scopeReason": "Priority of the separately captured original requires checking both fatal/runtime and two explicit known cleanup/repository types.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 45,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+        "start": 110,
+        "end": 110,
+        "column": 32,
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "text": "An instanceof check is being performed on the caught exception. Create a separate catch clause for Error."
+      },
+      "inputSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+      "lineSha256": "77747732cc93d18946b74e3ebc09c32de47b0937e0e7beaceab8a73a29ee0721",
+      "decision": "TWO_FAILURE_IDENTITIES_AND_SPECIFIED_PRIORITY",
+      "scopeReason": "Priority of the separately captured original requires checking both fatal/runtime and two explicit known cleanup/repository types.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 46,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+        "start": 111,
+        "end": 111,
+        "column": 36,
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "text": "An instanceof check is being performed on the caught exception. Create a separate catch clause for RuntimeException."
+      },
+      "inputSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+      "lineSha256": "9a43afacf7d4ca139c0e02f9b8f8a0b8824e52dcc953995a7ca3737a3cd2f65a",
+      "decision": "TWO_FAILURE_IDENTITIES_AND_SPECIFIED_PRIORITY",
+      "scopeReason": "Priority of the separately captured original requires checking both fatal/runtime and two explicit known cleanup/repository types.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 47,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+        "start": 111,
+        "end": 111,
+        "column": 36,
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "text": "An instanceof check is being performed on the caught exception. Create a separate catch clause for RuntimeException."
+      },
+      "inputSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+      "lineSha256": "9a43afacf7d4ca139c0e02f9b8f8a0b8824e52dcc953995a7ca3737a3cd2f65a",
+      "decision": "TWO_FAILURE_IDENTITIES_AND_SPECIFIED_PRIORITY",
+      "scopeReason": "Priority of the separately captured original requires checking both fatal/runtime and two explicit known cleanup/repository types.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 48,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+        "start": 112,
+        "end": 112,
+        "column": 41,
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "text": "An instanceof check is being performed on the caught exception. Create a separate catch clause for BatchRepositoryException."
+      },
+      "inputSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+      "lineSha256": "1d1f06300724db2f691865ea6a85b2e05ccdc1d63d7a80351a195705a5e1aa51",
+      "decision": "TWO_FAILURE_IDENTITIES_AND_SPECIFIED_PRIORITY",
+      "scopeReason": "Priority of the separately captured original requires checking both fatal/runtime and two explicit known cleanup/repository types.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 49,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+        "start": 112,
+        "end": 112,
+        "column": 41,
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "text": "An instanceof check is being performed on the caught exception. Create a separate catch clause for BatchRepositoryException."
+      },
+      "inputSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+      "lineSha256": "1d1f06300724db2f691865ea6a85b2e05ccdc1d63d7a80351a195705a5e1aa51",
+      "decision": "TWO_FAILURE_IDENTITIES_AND_SPECIFIED_PRIORITY",
+      "scopeReason": "Priority of the separately captured original requires checking both fatal/runtime and two explicit known cleanup/repository types.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 50,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+        "start": 113,
+        "end": 113,
+        "column": 41,
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "text": "An instanceof check is being performed on the caught exception. Create a separate catch clause for CleanupStoppedException."
+      },
+      "inputSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+      "lineSha256": "836258b404312f6d7b942520574dfdf477c8c9550183821af7acb247449310b0",
+      "decision": "TWO_FAILURE_IDENTITIES_AND_SPECIFIED_PRIORITY",
+      "scopeReason": "Priority of the separately captured original requires checking both fatal/runtime and two explicit known cleanup/repository types.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 51,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+        "start": 113,
+        "end": 113,
+        "column": 41,
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "text": "An instanceof check is being performed on the caught exception. Create a separate catch clause for CleanupStoppedException."
+      },
+      "inputSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+      "lineSha256": "836258b404312f6d7b942520574dfdf477c8c9550183821af7acb247449310b0",
+      "decision": "TWO_FAILURE_IDENTITIES_AND_SPECIFIED_PRIORITY",
+      "scopeReason": "Priority of the separately captured original requires checking both fatal/runtime and two explicit known cleanup/repository types.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 52,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+        "start": 117,
+        "end": 117,
+        "column": 39,
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "text": "An instanceof check is being performed on the caught exception. Create a separate catch clause for Error."
+      },
+      "inputSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+      "lineSha256": "7f9187b8ebcd551925a665d27ea4059bc4bbd1f3a2ddb736ecaac1bbe389b0e7",
+      "decision": "TWO_FAILURE_IDENTITIES_AND_SPECIFIED_PRIORITY",
+      "scopeReason": "If original is known, a separately captured unknown/fatal cleanup failure wins. Both known failures receive independent fatal graph checks before fixed diagnostic.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 53,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+        "start": 117,
+        "end": 117,
+        "column": 39,
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "text": "An instanceof check is being performed on the caught exception. Create a separate catch clause for Error."
+      },
+      "inputSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+      "lineSha256": "7f9187b8ebcd551925a665d27ea4059bc4bbd1f3a2ddb736ecaac1bbe389b0e7",
+      "decision": "TWO_FAILURE_IDENTITIES_AND_SPECIFIED_PRIORITY",
+      "scopeReason": "If original is known, a separately captured unknown/fatal cleanup failure wins. Both known failures receive independent fatal graph checks before fixed diagnostic.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 54,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+        "start": 118,
+        "end": 118,
+        "column": 39,
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "text": "An instanceof check is being performed on the caught exception. Create a separate catch clause for RuntimeException."
+      },
+      "inputSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+      "lineSha256": "692264fe46a1c40c2584f625946e2de9f81f1781906ca888fff643f07275b4b3",
+      "decision": "TWO_FAILURE_IDENTITIES_AND_SPECIFIED_PRIORITY",
+      "scopeReason": "If original is known, a separately captured unknown/fatal cleanup failure wins. Both known failures receive independent fatal graph checks before fixed diagnostic.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 55,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+        "start": 118,
+        "end": 118,
+        "column": 39,
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "text": "An instanceof check is being performed on the caught exception. Create a separate catch clause for RuntimeException."
+      },
+      "inputSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+      "lineSha256": "692264fe46a1c40c2584f625946e2de9f81f1781906ca888fff643f07275b4b3",
+      "decision": "TWO_FAILURE_IDENTITIES_AND_SPECIFIED_PRIORITY",
+      "scopeReason": "If original is known, a separately captured unknown/fatal cleanup failure wins. Both known failures receive independent fatal graph checks before fixed diagnostic.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 56,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+        "start": 119,
+        "end": 119,
+        "column": 44,
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "text": "An instanceof check is being performed on the caught exception. Create a separate catch clause for BatchRepositoryException."
+      },
+      "inputSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+      "lineSha256": "e22e52ecd3594f2c8fafe41dd49e20375475b6b493939a7c746d9dcf3eccb86e",
+      "decision": "TWO_FAILURE_IDENTITIES_AND_SPECIFIED_PRIORITY",
+      "scopeReason": "If original is known, a separately captured unknown/fatal cleanup failure wins. Both known failures receive independent fatal graph checks before fixed diagnostic.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 57,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+        "start": 119,
+        "end": 119,
+        "column": 44,
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "text": "An instanceof check is being performed on the caught exception. Create a separate catch clause for BatchRepositoryException."
+      },
+      "inputSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+      "lineSha256": "e22e52ecd3594f2c8fafe41dd49e20375475b6b493939a7c746d9dcf3eccb86e",
+      "decision": "TWO_FAILURE_IDENTITIES_AND_SPECIFIED_PRIORITY",
+      "scopeReason": "If original is known, a separately captured unknown/fatal cleanup failure wins. Both known failures receive independent fatal graph checks before fixed diagnostic.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 58,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+        "start": 120,
+        "end": 120,
+        "column": 44,
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "text": "An instanceof check is being performed on the caught exception. Create a separate catch clause for CleanupStoppedException."
+      },
+      "inputSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+      "lineSha256": "e80927b7d788b4cda507f12d714566c53674a70156ef375f4ca435356471c64e",
+      "decision": "TWO_FAILURE_IDENTITIES_AND_SPECIFIED_PRIORITY",
+      "scopeReason": "If original is known, a separately captured unknown/fatal cleanup failure wins. Both known failures receive independent fatal graph checks before fixed diagnostic.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 59,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+        "start": 120,
+        "end": 120,
+        "column": 44,
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "text": "An instanceof check is being performed on the caught exception. Create a separate catch clause for CleanupStoppedException."
+      },
+      "inputSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+      "lineSha256": "e80927b7d788b4cda507f12d714566c53674a70156ef375f4ca435356471c64e",
+      "decision": "TWO_FAILURE_IDENTITIES_AND_SPECIFIED_PRIORITY",
+      "scopeReason": "If original is known, a separately captured unknown/fatal cleanup failure wins. Both known failures receive independent fatal graph checks before fixed diagnostic.",
+      "requirements": [
+        "SS332",
+        "SS341"
+      ]
+    },
+    {
+      "rawIndex": 60,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+        "start": 133,
+        "end": 133,
+        "column": 9,
+        "rule": "DoNotUseThreads",
+        "text": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "inputSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+      "lineSha256": "98b5371b34dfbfe820e8f8c9904533a15d8a1eeecec6b7d8fb5b3da72c4fcebe",
+      "decision": "RULE_DOES_NOT_APPLY_TO_THREAD_STATUS_READ",
+      "scopeReason": "Only reads current thread interrupt status before and after clock observation; no Thread is created or scheduled.",
+      "requirements": [
+        "SS341",
+        "SS342"
+      ]
+    },
+    {
+      "rawIndex": 61,
+      "finding": {
+        "file": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+        "start": 137,
+        "end": 137,
+        "column": 9,
+        "rule": "DoNotUseThreads",
+        "text": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "inputSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+      "lineSha256": "98b5371b34dfbfe820e8f8c9904533a15d8a1eeecec6b7d8fb5b3da72c4fcebe",
+      "decision": "RULE_DOES_NOT_APPLY_TO_THREAD_STATUS_READ",
+      "scopeReason": "Only reads current thread interrupt status before and after clock observation; no Thread is created or scheduled.",
+      "requirements": [
+        "SS341",
+        "SS342"
+      ]
+    }
+  ],
+  "noSuppressionAdded": true,
+  "additionalProductTrials": 0,
+  "wholeF03Accepted": false,
+  "whole451Accepted": false,
+  "terminalAtUTC": "2026-11-18T17:38:52.724294+00:00"
+}
