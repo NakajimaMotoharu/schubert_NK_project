@@ -1,6 +1,5 @@
 package dev.codex.schubert.nk.api.bootstrap;
 
-import dev.codex.schubert.nk.storage.StorageIoException;
 import java.sql.SQLException;
 import java.sql.SQLNonTransientConnectionException;
 import java.util.Objects;
@@ -30,8 +29,8 @@ final class JdbcAdmissionFailures {
   /** Classify only known SQL failures before discarding them; unknown primary identity stays. */
   static void beforeDiscard(@Nullable Throwable primary, Throwable secondary) {
     Objects.requireNonNull(secondary, "secondary failure");
-    if (primary instanceof SQLException) StorageIoException.preserveFatal(primary);
+    if (primary instanceof SQLException) JdbcFailureGraph.preserveFatal(primary);
     if ((primary == null || primary instanceof SQLException) && secondary instanceof SQLException)
-      StorageIoException.preserveFatal(secondary);
+      JdbcFailureGraph.preserveFatal(secondary);
   }
 }
