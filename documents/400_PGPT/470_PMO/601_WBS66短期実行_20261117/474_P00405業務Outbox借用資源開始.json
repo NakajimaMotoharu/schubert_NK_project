@@ -1,0 +1,73 @@
+{
+  "eventId": "PGPT-20261008-6001",
+  "groupId": "PGPT-WBS66-P00405-BUSINESS-OUTBOX-REQUIRED-RESOURCES-20261118",
+  "baseCore": "5e0b5575cf14416389a30be0175b52f7ec685983",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-18T13:40:05.582000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 40,
+      "remainingPercent": 60,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P00405-BUSINESS-OUTBOX-REQUIRED-RESOURCES-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-P00405-BUSINESS-OUTBOX-REQUIRED-RESOURCES-20261118",
+    "workAttributionKind": "REWORK",
+    "workScope": "P004-05/2, P006-02 PG03, F03/2-2. Business JdbcOutboxRepository four statements/two result handles must reject null using existing SQLDataException(22004), retain borrowed semantics and exact TWR graph with one explicit close per acquired handle. Original nine whole tests and new fixed six null cases plus independent SQL suppression across both resources, current raw and ABI; qualify finite fixture owner. No held business dispatch, real DB/broker, or VM.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/006_NK-MSG-002/007_JdbcOutbox自己所有境界単体仕様.md",
+        "sha256": "008c242626e18643f932f8abd45f46a4deae9267526bc6ef403ce63b4210912a"
+      },
+      {
+        "path": "evidence/01_PT/006_NK-MSG-002/evidence/PG21028-outbox-jdbc-independent-post-v1/manifest.json",
+        "sha256": "b18528ee8a1f967d7f0bb5503fc3ff9768c00090aadab5b90ec1bb01e9378009"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26656-outbox-twelve-public-contract-v1/manifest.json",
+        "sha256": "566cac49a0aab4f3d18582966ebc9a198bb2ee7f3dbbcbf21c5e5cf41d35e51d"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39606-p00405-api-outbox-typed-close-independent-v1/manifest.json",
+        "sha256": "1e3b26551a7f121e31b6afedfe7a562a557e02d6f2fd59dd1ce9bfbb71348424"
+      }
+    ],
+    "productionCoreMain": "5e0b5575cf14416389a30be0175b52f7ec685983",
+    "source": "edb57878dec5d3bf92506a3bd35631bfcf7aa9f5",
+    "wbsLeafIds": [
+      "WBS-F03",
+      "WBS-P004-05",
+      "WBS-P006-02"
+    ],
+    "managementWorkIds": [
+      "WBS-P004-05/2",
+      "P00602-PG03",
+      "F03/2-2",
+      "YKT-2597",
+      "BUG-3296",
+      "SSC-471"
+    ],
+    "run": "PG39656-p00405-business-outbox-resource-independent-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 1.0,
+      "base": 3.5,
+      "high": 7.8
+    },
+    "groupCapPp": 9,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848
+  }
+}

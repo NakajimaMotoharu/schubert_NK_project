@@ -1,0 +1,94 @@
+{
+  "actualExit": 0,
+  "original": {
+    "path": "evidence/01_PT/006_NK-MSG-002/evidence/PG21014-outbox-null-oracle-nine-v1/manifest.json",
+    "sha256": "6bd69944333c32d39180928c51cfa00ba0b063af77cef142a4907e23c99b5685"
+  },
+  "originalIndependent": {
+    "path": "evidence/01_PT/006_NK-MSG-002/evidence/PG21028-outbox-jdbc-independent-post-v1/manifest.json",
+    "sha256": "b18528ee8a1f967d7f0bb5503fc3ff9768c00090aadab5b90ec1bb01e9378009"
+  },
+  "unchangedOriginalMainAndFixtureInput": true,
+  "historicalSource": "03eeef1a3d6cfb93000641bcb87f83507a1f3f4d",
+  "archivedClass": {
+    "path": "../pgpt-runs/PG379/pg21014-outbox-null-oracle-nine-unit-v1/component/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository.class",
+    "sha256": "d49dcec8e24914880a8ac9e6ec40057f6fe5ce6fdd18f91541a4468f9a871937"
+  },
+  "sourceOwnershipAbsentNullCheck": [
+    [
+      59,
+      "statement",
+      "try (PreparedStatement statement = connection.prepareStatement(sql)) {"
+    ],
+    [
+      82,
+      "result",
+      "try (ResultSet result = statement.executeQuery()) {"
+    ],
+    [
+      101,
+      "statement",
+      "try (PreparedStatement statement = connection.prepareStatement(CLAIM_SQL)) {"
+    ],
+    [
+      107,
+      "result",
+      "try (ResultSet result = statement.executeQuery()) {"
+    ],
+    [
+      128,
+      "statement",
+      "try (PreparedStatement statement = connection.prepareStatement(sql)) {"
+    ],
+    [
+      157,
+      "statement",
+      "try (PreparedStatement statement = connection.prepareStatement(sql)) {"
+    ]
+  ],
+  "originalRawCounters": {
+    "INSTRUCTION": {
+      "missed": 24,
+      "covered": 621
+    },
+    "BRANCH": {
+      "missed": 12,
+      "covered": 44
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 128
+    },
+    "COMPLEXITY": {
+      "missed": 12,
+      "covered": 27
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 11
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "oldExecSingle": {
+    "path": "evidence/01_PT/006_NK-MSG-002/evidence/PG21014-outbox-null-oracle-nine-v1/jacoco.exec",
+    "sha256": "eae146f6afb247b714a66ded4b84ab54da704bdbb3a440f4ad6ab4788cf509e7"
+  },
+  "analysis": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+    "-cp",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38642-schema-raw-line-tool-v1/toolclasses:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+    "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+    "--line-deficits",
+    "evidence/01_PT/006_NK-MSG-002/evidence/PG21014-outbox-null-oracle-nine-v1/jacoco.exec",
+    "../pgpt-runs/PG379/pg21014-outbox-null-oracle-nine-unit-v1/component/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository.class"
+  ],
+  "output": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39634-p00405-business-outbox-before-v1/unfiltered.tsv",
+    "sha256": "c2d770c58411b9d7489fedb0886a62000394bf2a2a4d66fd9b0e86132cf8250d"
+  },
+  "originalNineReexecuted": 0,
+  "productTestsExecuted": 0
+}
