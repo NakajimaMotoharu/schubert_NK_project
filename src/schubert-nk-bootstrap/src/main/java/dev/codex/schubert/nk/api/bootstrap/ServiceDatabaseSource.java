@@ -68,34 +68,48 @@ public final class ServiceDatabaseSource implements DataSource, AutoCloseable {
 
   @Override
   public Connection getConnection() throws SQLException {
-    stateLock.lock();
+    return underStateLock(this::connectWhileLocked);
+  }
+
+  private Connection connectWhileLocked() throws SQLException {
+    if (closed) throw unavailable();
+    var properties = new Properties();
+    properties.setProperty("user", role);
+    properties.setProperty("password", new String(password));
+    properties.setProperty("connectTimeout", "3");
+    properties.setProperty("ApplicationName", applicationName);
     try {
-      if (closed) throw unavailable();
-      var properties = new Properties();
-      properties.setProperty("user", role);
-      properties.setProperty("password", new String(password));
-      properties.setProperty("connectTimeout", "3");
-      properties.setProperty("ApplicationName", applicationName);
+      Connection connection = connector.connect(url, properties);
+      if (connection == null) throw unavailable();
       try {
-        Connection connection = connector.connect(url, properties);
-        if (connection == null) throw unavailable();
-        try {
-          admission.verify(connection);
-          return connection;
-        } catch (SQLException failure) {
-          discard(connection, failure);
-          JdbcFailureGraph.preserveFatal(failure);
-          throw unavailable();
-        } catch (RuntimeException | Error failure) {
-          discard(connection, failure);
-          throw failure;
-        }
+        admission.verify(connection);
+        return connection;
       } catch (SQLException failure) {
+        discard(connection, failure);
         JdbcFailureGraph.preserveFatal(failure);
         throw unavailable();
-      } finally {
-        properties.clear();
+      } catch (RuntimeException | Error failure) {
+        discard(connection, failure);
+        throw failure;
       }
+    } catch (SQLException failure) {
+      JdbcFailureGraph.preserveFatal(failure);
+      throw unavailable();
+    } finally {
+      properties.clear();
+    }
+  }
+
+  @FunctionalInterface
+  private interface StateAction<T extends @Nullable Object, E extends Exception> {
+    T run() throws E;
+  }
+
+  private <T extends @Nullable Object, E extends Exception> T underStateLock(
+      StateAction<T, E> action) throws E {
+    stateLock.lock();
+    try {
+      return action.run();
     } finally {
       stateLock.unlock();
     }
@@ -158,15 +172,14 @@ public final class ServiceDatabaseSource implements DataSource, AutoCloseable {
 
   @Override
   public void close() {
-    stateLock.lock();
-    try {
-      if (!closed) {
-        Arrays.fill(password, '\0');
-        closed = true;
-      }
-    } finally {
-      stateLock.unlock();
-    }
+    underStateLock(
+        () -> {
+          if (!closed) {
+            Arrays.fill(password, '\0');
+            closed = true;
+          }
+          return null;
+        });
   }
 
   @Override
