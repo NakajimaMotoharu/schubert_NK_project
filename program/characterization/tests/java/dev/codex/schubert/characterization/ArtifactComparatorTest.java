@@ -26,6 +26,9 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** DIF narrow-allowlist oracle. PT-CHR-G05-003/004, PT-CHR-NK-002。 */
 class ArtifactComparatorTest {
+  private static final String FIXTURE_DIFFERENCES_ARRAY = "differences";
+  private static final String FIXTURE_DIFF_ALLOWLIST_PATH =
+      "program/characterization/tests/resources/cases/dif-allowlist.json";
   private static final String FIXTURE_DIF015 = "DIF-015";
   private static final String FIXTURE_OBSERVATIONS = "observations";
   private static final String FIXTURE_EXPECTED_NK = "expectedNk";
@@ -340,7 +343,7 @@ class ArtifactComparatorTest {
   @Test
   void rejectsRepeatedDifferenceDefinitionEvenWhenSixteenRulesStillMatch() throws Exception {
     Fixture fixture = fixture("duplicate-difference-definition");
-    appendDuplicateDefinition(fixture, "dif-allowlist.json", "differences");
+    appendDuplicateDefinition(fixture, "dif-allowlist.json", FIXTURE_DIFFERENCES_ARRAY);
 
     ArtifactComparator.ComparisonResult result =
         ArtifactComparator.compare(
@@ -417,10 +420,8 @@ class ArtifactComparatorTest {
           ((ObjectNode) cases.get(1)).put("id", FIXTURE_CHR_A01);
         });
     mutate(
-        fixture
-            .project()
-            .resolve("program/characterization/tests/resources/cases/dif-allowlist.json"),
-        root -> ((ArrayNode) root.path("differences")).remove(15));
+        fixture.project().resolve(FIXTURE_DIFF_ALLOWLIST_PATH),
+        root -> ((ArrayNode) root.path(FIXTURE_DIFFERENCES_ARRAY)).remove(15));
     Files.delete(fixture.current().resolve(FIXTURE_CHR_A01_JSON));
     Files.delete(fixture.nk().resolve("CHR-M04.json"));
     write(
@@ -652,10 +653,8 @@ class ArtifactComparatorTest {
             FIXTURE_CURRENT,
             "nk"));
     mutate(
-        fixture
-            .project()
-            .resolve("program/characterization/tests/resources/cases/dif-allowlist.json"),
-        root -> ((ObjectNode) root.path("differences").get(1)).put("mode", "wildcard"));
+        fixture.project().resolve(FIXTURE_DIFF_ALLOWLIST_PATH),
+        root -> ((ObjectNode) root.path(FIXTURE_DIFFERENCES_ARRAY).get(1)).put("mode", "wildcard"));
     observations.add(
         observation(
             "DIF-002",
@@ -1055,14 +1054,11 @@ class ArtifactComparatorTest {
     assertContains(compare(extra).failures(), "S08_VOICE_SHAPE");
 
     Fixture approval = fixture("missing-multiple-voice-approval");
-    Path rules =
-        approval
-            .project()
-            .resolve("program/characterization/tests/resources/cases/dif-allowlist.json");
+    Path rules = approval.project().resolve(FIXTURE_DIFF_ALLOWLIST_PATH);
     mutate(
         rules,
         root -> {
-          var values = (ArrayNode) root.path("differences");
+          var values = (ArrayNode) root.path(FIXTURE_DIFFERENCES_ARRAY);
           for (int index = 0; index < values.size(); index++) {
             if (FIXTURE_DIF_009.equals(values.get(index).path("id").asText())) {
               values.remove(index);
@@ -1665,7 +1661,7 @@ class ArtifactComparatorTest {
         resources.resolve("catalog.json"),
         StandardCopyOption.COPY_ATTRIBUTES);
     Files.copy(
-        SOURCE_ROOT.resolve("program/characterization/tests/resources/cases/dif-allowlist.json"),
+        SOURCE_ROOT.resolve(FIXTURE_DIFF_ALLOWLIST_PATH),
         resources.resolve("dif-allowlist.json"),
         StandardCopyOption.COPY_ATTRIBUTES);
     Path current = Files.createDirectories(root.resolve(FIXTURE_CURRENT));

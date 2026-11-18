@@ -220,8 +220,11 @@ public final class ArtifactComparator {
     require(observations.path("observations").isArray(), "OBSERVATIONS_NOT_ARRAY", failures);
 
     Set<String> usedRules = new TreeSet<>();
-    if (require(rules.containsKey(VOICE_DIFFERENCE), "S08_MULTIPLE_VOICE_RULE", failures)
-        & validateMultipleVoiceEvidence(observations.path("multipleVoiceEvidence"), failures)) {
+    boolean voiceApproval =
+        require(rules.containsKey(VOICE_DIFFERENCE), "S08_MULTIPLE_VOICE_RULE", failures);
+    boolean voiceMatches =
+        validateMultipleVoiceEvidence(observations.path("multipleVoiceEvidence"), failures);
+    if (voiceApproval && voiceMatches) {
       usedRules.add(VOICE_DIFFERENCE);
     }
     Set<String> claimedDifferences = new HashSet<>();
