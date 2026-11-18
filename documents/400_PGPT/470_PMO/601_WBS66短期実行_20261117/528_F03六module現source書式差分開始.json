@@ -1,0 +1,109 @@
+{
+  "eventId": "PGPT-20261008-6051",
+  "groupId": "PGPT-WBS66-F03-ELIGIBLE-SIX-MODULE-STYLE-CURRENT-20261119",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-18T16:45:29.473000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 43,
+      "remainingPercent": 57,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-ELIGIBLE-SIX-MODULE-STYLE-CURRENT-20261119",
+    "workCategory": "REVIEW",
+    "workDetailCategory": "PGPT-WBS66-F03-ELIGIBLE-SIX-MODULE-STYLE-CURRENT-20261119",
+    "workAttributionKind": "REQUALIFICATION",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "source": "5839b3d09e6d3f18b40733d07724d39c37078f1c",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "run": "PG39896-f03-current-source-only-32-delta-v1",
+    "workScope": "Update all six-module eligible source-only lint/format evidence from PG39310. Join only exact 32 changed tracked sources to current known receipts; retain the 4 and 32 held scopes. Run the unchanged required source-only rules exclusively on any exact eligible gap. No typed full analysis, protected body access, or repeated application test.",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.3,
+      "base": 0.95,
+      "high": 2.75
+    },
+    "groupCapPp": 6,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39310-f03-current-source-lint-join-v3/manifest.json",
+        "sha256": "dbaa8869cb19a769ca8caae9957f3f74299856cac642eb8d532aac78a4380f9a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39406-bug3278-four-api-recorders-static-v1/manifest.json",
+        "sha256": "fa83d9172ece02fa98163ad0bfc5a5a3e1cac9d47746edd4bb116915443d73be"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39424-bug3279-resource-static-v1/manifest.json",
+        "sha256": "cb78c7e492424643aa13f9dda1b87795e5c73792f0029c673c63960bec171a04"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39482-bug3284-web-payload-static-v1/manifest.json",
+        "sha256": "5bfbf14f64737b6b02a49db4b30627dbf70d2f52d00996d5ee34ecf7b6517815"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39506-bug3286-web-context-static-v1/manifest.json",
+        "sha256": "d320b40de9bca97eb5d95f2432a773dab0e1e98249ef4c7e76525ee7697dd201"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39524-bug3287-web-standard-static-v1/manifest.json",
+        "sha256": "3ec94e2dac1795364068d946f659b49a4a0199c839c3e2629bc3985ca4723df8"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39543-bug3288-web-outbox-static-v2/manifest.json",
+        "sha256": "685fafe57da51a02b8159fe53c6144b328d63866d3a03eb6eb4f8002a7cf9953"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39560-bug3290-web-outbox-static-v1/manifest.json",
+        "sha256": "ef9509216c846ab7d75310eee9b7e0a9d77746f3209ff797a18c9c44b56ff138"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39590-bug3292-api-outbox-static-v1/manifest.json",
+        "sha256": "12bfb37964cb4866e37f9e67cd1644537d8a02f8986ff14113e7ffc0858523d2"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39648-bug3296-business-outbox-static-v3/manifest.json",
+        "sha256": "a0c190eeb76250a77f9dbfb112b3d182ac7474329ef6d5774e4ef0c44a91e40f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39674-bug3300-weblog-outbox-static-v1/manifest.json",
+        "sha256": "7ed1461232457e29c3d0047f2d931240bbe3a1a1df34bbdd348744034076b164"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39754-process-resource-scope-static-v1/manifest.json",
+        "sha256": "4e33847876102431ab27c1177ec5e0f2e2483d91d078aeb52d6d61216c68af30"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39794-cleanup-fixed-statement-static-v1/manifest.json",
+        "sha256": "d4d0fa0442a27a486d81bce2b01d10918d8c38d51e2daecae13028fedd34e46b"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39864-service-db-state-lock-static-v1/manifest.json",
+        "sha256": "262eb265401d0c5134c29949a5317911bfb58d14558fb9b474aaf0c4e83aa01e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39865-service-db-state-lock-test-static-v2/manifest.json",
+        "sha256": "fd600cef0c4db5d76104fc3eb58b886145a58c985876e191c92afccaca313750"
+      }
+    ]
+  }
+}

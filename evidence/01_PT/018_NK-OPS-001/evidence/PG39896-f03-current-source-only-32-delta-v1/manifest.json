@@ -1,0 +1,105 @@
+{
+  "actualExit": 0,
+  "source": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "testSource": "5839b3d09e6d3f18b40733d07724d39c37078f1c",
+  "oldSource": "158b3f052b0a1b5aaef30ec054a1c050c6bf9f15",
+  "staticSourceScope": "Current six-module eligible source-only policy",
+  "currentTypedOrRunMerged": false,
+  "eligibleMain": 1023,
+  "allMain": 1027,
+  "eligibleTest": 1102,
+  "allTest": 1134,
+  "heldMain": 4,
+  "heldTest": 32,
+  "firstMetadataGuardExit": 1,
+  "firstMetadataGuardReason": "one new Batch PT source in 32 changed names",
+  "changedTrackedCurrent32": 32,
+  "newAnalysedSource": 8,
+  "reusedExactSource": 24,
+  "newProductTrials": 0,
+  "overallF03Accepted": false,
+  "overall451Accepted": false,
+  "newAcceptance": 0,
+  "priorJoin": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39896-f03-current-source-only-32-delta-v1/prior-origins.json",
+    "sha256": "cdb31caff51eb280eb1c661476e0ad4f215698103eab9786b5d3f4ae06047225"
+  },
+  "asNeeded": {
+    "actualExit": 0,
+    "stages": {
+      "checkstyle": {
+        "command": [
+          "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+          "-Xmx768m",
+          "-jar",
+          "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+          "-c",
+          "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+          "-f",
+          "xml",
+          "-o",
+          "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG39896-f03-current-source-only-32-delta-v1/as-needed/checkstyle.xml",
+          "@/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG39896-f03-current-source-only-32-delta-v1/as-needed/sources.txt"
+        ],
+        "actualExit": 0,
+        "stdout": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39896-f03-current-source-only-32-delta-v1/as-needed/checkstyle.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39896-f03-current-source-only-32-delta-v1/as-needed/checkstyle.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "terminalAtUTC": "2026-11-18T16:46:48.769866+00:00"
+      },
+      "format": {
+        "command": [
+          "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+          "-Xmx768m",
+          "-jar",
+          "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+          "--skip-reflowing-long-strings",
+          "--dry-run",
+          "--set-exit-if-changed",
+          "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiCustomMetricPayloadTest.java",
+          "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSourceTest.java",
+          "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricsTest.java",
+          "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqPressureMetricRecorderTest.java",
+          "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqRedeliveryMetricRecorderTest.java",
+          "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+          "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmissionPortTest.java"
+        ],
+        "actualExit": 0,
+        "stdout": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39896-f03-current-source-only-32-delta-v1/as-needed/format.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39896-f03-current-source-only-32-delta-v1/as-needed/format.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "terminalAtUTC": "2026-11-18T16:46:49.480314+00:00"
+      }
+    },
+    "xml": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39896-f03-current-source-only-32-delta-v1/as-needed/checkstyle.xml",
+      "sha256": "1a430b6dc47359ca139823dd3689bd9441eb8158ac8ffd3833d73fe1f1dbce40"
+    },
+    "ownSourceHashes": {
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java": "1131dc9f22baf374d616ebc11458ca9c8bbee8ac2f8cf7d5defaaf00076f6d78",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmissionPortTest.java": "7f2d2a2b09110efcc85c6bfaae7c8ceea7bf29fd6f1e8588e2a2aef2ad8eb265",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java": "86b0b0dc9689c6052314f065907211bd4ef035f6a0f225f3114088415f25502c",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricsTest.java": "d465bb03b2f47dd3b02bd5b79cd064c9284c3d2a25e69f226965fbb62ac74df1",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiCustomMetricPayloadTest.java": "140f420e80eb8011387796160e3cebce695e99907a81127829512ddc3a6ece5e",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqPressureMetricRecorderTest.java": "901e9c68a3f528bd4c5a24ae4b7bde54ed95e9e73b7404b6b0d892573af2dc4e",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSourceTest.java": "7a11c4735f62cd01a55569255ed35761be268991da7d8224b9814a2d9f714bae",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqRedeliveryMetricRecorderTest.java": "ec98b54dd90645384f13198144e1bf8fd912a151b0ef3fb544e3e590345dba9e"
+    }
+  },
+  "terminalAtUTC": "2026-11-18T16:46:49.481094+00:00",
+  "verifier": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/5244_f03_current_source_only_32_delta.py",
+    "sha256": "f19c9033f31904656d1f399c09e55ff9b4a5d252cfd952e2ccf5af909fe611eb"
+  }
+}
