@@ -483,4 +483,19 @@ class WebOutboxObservationRepositoryTest {
         Duration.ofSeconds(4), repo.read(later.connection(), AS_OF.plusSeconds(1)).pendingAge());
     later.complete();
   }
+
+  @Test
+  void webObxDb011SameBodyAndCloseFailureKeepsSelfSuppressionAndReleasesStatement() {
+    var fixture = new Fixture(Row.row(FIXTURE_PENDING_B11DB31F, 3, 5));
+    var repeated = new SQLException("owned same failure");
+    fixture.faults.put(FIXTURE_COUNT_CC3EC73C, repeated);
+    fixture.faults.put("RSclose", repeated);
+    var outcome =
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> new WebOutboxObservationRepository().read(fixture.connection(), AS_OF));
+    assertSame(repeated, outcome.getCause());
+    assertEquals(0, repeated.getSuppressed().length);
+    fixture.complete();
+  }
 }
