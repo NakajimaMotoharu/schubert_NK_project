@@ -44,6 +44,15 @@ CONFIG = {
         'units': {'PG39990-p020-search-empty170-v1': ('unit', 170)},
         'post': 'PG39994-p020-search-empty-independent-v1',
     },
+    '559': {
+        'history': ('PG39998-g07-jars-batch-empty-public-delta-v1',
+                    'PG39974-g07-cache-session-range-public-delta-v1',
+                    'PG39932-g07-four-brand-public-delta-v1',
+                    'PG39730-g07-weblog-session-and-comparator-public-delta-v1'),
+        'units': {'PG40014-p020-game-onchange176-v1': ('unit', 176)},
+        'post': 'PG40018-p020-game-onchange-independent-v1',
+        'detachedValue': 'PG40008-p01810-broker-evidence-value-v2',
+    },
 }
 GROUP=sys.argv[2] if len(sys.argv)==3 else '532'
 settings=CONFIG[GROUP]
@@ -58,6 +67,36 @@ HISTORY=settings['history']
 
 def set_worker(worker):
     worker.OUT,worker.START,worker.TEMP,worker.RETAIN=OUT,START,WORK,RETAIN
+
+
+def detached_value_probe(B, row, meta, unit_folder):
+    post=unit_folder/'independent.json'
+    witness=B.load(post)
+    report=B.load(unit_folder/'manifest.json')
+    original=Path(witness['manifest']['path'])
+    assert original.resolve()==unit_folder/'manifest.json'
+    assert B.ref(original)['sha256']==witness['manifest']['sha256']==B.ref(unit_folder/'manifest.json')['sha256']
+    assert witness['actualExit']==0 and witness['firstDynamicSuccess']==witness['firstDynamicTotal']==3
+    assert witness['realBroker']==witness['actualNative']==0
+    path=Path(row['path'])
+    assert B.ref(WORK/meta['relativeProjection'])['sha256']==B.ref(path)['sha256']==meta['blobSha256']
+    terminal=report['stages']['execinfo']
+    assert terminal==B.load(unit_folder/'execinfo-exit.json') and terminal['actualExit']==0
+    decoded=Path(terminal['log']['path'])
+    assert decoded.resolve()==unit_folder/'execinfo.log' and B.ref(decoded)==terminal['log']
+    assert terminal['command'][-2:]==['execinfo',str(path.resolve())]
+    root=ET.parse(unit_folder/'xml/TEST-junit-jupiter.xml').getroot()
+    assert len(list(root.iter('testcase')))==3
+    assert not any(n.tag in ('failure','error','skipped') for n in root.iter())
+    output=decoded.read_text()
+    assert re.findall(r'^Session "([^"]+)":',output,re.M)==[report['session']]
+    decoded_rows=re.findall(r'^([0-9a-f]{16})\s+(\d+) of\s+(\d+)\s+(\S+)$',output,re.M)
+    assert any(crc==witness['recordCrc64'] and name==report['target'] and int(hit)>0 for crc,hit,_,name in decoded_rows)
+    assert not any(n.startswith(('org/apache/activemq/','org/postgresql/','com/microsoft/playwright/'))
+                   for _,_,_,n in decoded_rows)
+    return dict(row,actualExit=0,originalUnitExit=0,ordinaryProbeDataOnly=True,decodedOrigin=terminal['log'],
+                qualifiedOriginal=B.ref(post),session=report['session'],decodedRows=len(decoded_rows),
+                toolExecutionRepeated=False,priorStaticFailureRemains=False)
 
 
 def classify():
@@ -91,6 +130,11 @@ def classify():
         for row in original:
             path=Path(row['path'])
             name=path.parent.name
+            if row.get('actualExit')!=0 and name==settings.get('detachedValue') and path.name=='jacoco.exec':
+                unit_folder=E/name
+                assert path.resolve()==unit_folder/'jacoco.exec'
+                verified.append(detached_value_probe(B,row,by_key[row['path'],row['blob']],unit_folder))
+                continue
             if row.get('actualExit')==0 or name not in settings['units'] or path.name!='jacoco.exec':
                 continue
             unit_folder=E/name
@@ -141,7 +185,24 @@ def classify():
 
     p.exact_previous=old_rows
     p.t.extra_binary=all_binary
-    p.proven_content=before_ref
+    def current_content(line, start, end, digests, reachable):
+        normal=before_ref(line,start,end,digests,reachable)
+        if normal or GROUP!='559':
+            return normal
+        known_line='2407d662eeca6d2478a97780e1a71fdb2194e38e34255f22a41671e0c88ad520'
+        if B.sha(line)!=known_line or (start,end)!=(1155,1196):
+            return None
+        a,z=start-1,end
+        assert line[:a].endswith(b'from current Java/public evidence; no private logs, actual secrets/')
+        assert line[z:].startswith(b'actions. Identify missing ordinary redaction contract')
+        assert re.fullmatch(rb'keys, Root/[A-Za-z]{6}/VM/DB/permit/[A-Za-z]{10} ',line[a:z])
+        progress='documents/400_PGPT/450_品質/456_領域別進捗・利用枠・中断再開管理.md'
+        old=B.git('show',f"{V['fromCommit']}:{progress}").splitlines()
+        assert old.count(line)==1
+        return dict(kind='Exact preserved work-scope prose',path=progress,
+                    originalCommit=V['fromCommit'],line=old.index(line)+1,lineSha256=known_line)
+
+    p.proven_content=current_content
     p.main()
 
 
@@ -150,12 +211,12 @@ def retain():
     set_worker(p.w)
     value=p.p.load(OUT/'qualified-cached-initial.json')
     assert value['unresolvedCandidates']==value['unqualifiedBinary']==0
-    original=p.p.load(RETAIN/'initial-classification'/'qualified-cached-initial.json') if GROUP=='551' else None
+    original=p.p.load(RETAIN/'initial-classification'/'qualified-cached-initial.json') if GROUP in ('551','559') else None
     if original:
         assert original['unresolvedCandidates']==1 and original['unqualifiedBinary']==0
     p.p.write(OUT/'qualified-final-private-detail.json',dict(
-        value,verifier=p.p.ref(HERE),scannerExecutionCount=1,initialClassificationExit=int(GROUP=='532'),
-        initialIssue='Exact archived path was relative instead of absolute' if GROUP=='532' else None,
+        value,verifier=p.p.ref(HERE),scannerExecutionCount=1,initialClassificationExit=int(GROUP in ('532','559')),
+        initialIssue='Exact archived path was relative instead of absolute' if GROUP in ('532','559') else None,
         initialSetupExit=int(GROUP=='551'),
         initialSetupIssue='Public run directory parent was absent before scanner start' if GROUP=='551' else None,
         firstUnclassified=original['unresolvedCandidates'] if original else None,
