@@ -20,6 +20,9 @@ import org.junit.jupiter.api.Test;
 /** PT-IDEM-OUTCOME001..004; SS324/331/352/354: inert data, never crypto/DB/session authority. */
 final class InboxOutcomeValueContractTest {
   private static final String KEY_VERSION = "v1";
+  private static final String COMPLETION_DIAGNOSTIC = "InboxCompletion[<redacted>]";
+  private static final String EXECUTION_DIAGNOSTIC = "InboxExecution[<redacted>]";
+  private static final String SECOND_KEY_VERSION = "v2";
   private static final String LAYOUT = "QRYRSP01";
   private static final String VERSION = "001";
   private static final UUID ID = new UUID(0, 1);
@@ -47,7 +50,7 @@ final class InboxOutcomeValueContractTest {
     assertEquals(value, value);
     assertNotEquals(value, null);
     assertNotEquals(value, VERSION);
-    assertNotEquals(value, new EncryptedResponseSnapshot("v2", expected));
+    assertNotEquals(value, new EncryptedResponseSnapshot(SECOND_KEY_VERSION, expected));
     assertNotEquals(value, new EncryptedResponseSnapshot(KEY_VERSION, new byte[30]));
     for (String version : List.of("a", "1", "V1", "a".repeat(16))) {
       var snapshot = new EncryptedResponseSnapshot(version, expected);
@@ -104,7 +107,7 @@ final class InboxOutcomeValueContractTest {
           assertEquals(version, actual.responseVersion());
           assertEquals(Optional.empty(), actual.responseSnapshot());
           assertEquals(Instant.EPOCH, actual.completedAt());
-          assertEquals("InboxCompletion[<redacted>]", actual.toString());
+          assertEquals(COMPLETION_DIAGNOSTIC, actual.toString());
         }
       }
     }
@@ -275,7 +278,7 @@ final class InboxOutcomeValueContractTest {
           InboxExecution actual = new InboxExecution(status, optional);
           assertSame(status, actual.status());
           assertEquals(optional, actual.completion());
-          assertEquals("InboxExecution[<redacted>]", actual.toString());
+          assertEquals(EXECUTION_DIAGNOSTIC, actual.toString());
           allowed++;
         } else {
           IllegalArgumentException failure =
@@ -343,6 +346,50 @@ final class InboxOutcomeValueContractTest {
             new BoundInboxExecution(ID, InboxExecution.executed(completed()))));
     assertThrows(NullPointerException.class, () -> new BoundInboxExecution(null, execution));
     assertThrows(NullPointerException.class, () -> new BoundInboxExecution(ID, null));
+  }
+
+  @Test
+  void outcome005SnapshotBearingCompletedAndErrorResultsKeepFixedDiagnosticsThroughReplay() {
+    String layout = "LOGRSP01";
+    var completedSnapshot = new EncryptedResponseSnapshot(KEY_VERSION, new byte[29]);
+    var errorSnapshot = new EncryptedResponseSnapshot(SECOND_KEY_VERSION, new byte[30]);
+    var completed =
+        new InboxCompletion(
+            InboxCompletionState.COMPLETED,
+            InboxResultReference.authSession(OTHER_ID),
+            layout,
+            VERSION,
+            Optional.of(completedSnapshot),
+            Instant.ofEpochSecond(23));
+    var error =
+        new InboxCompletion(
+            InboxCompletionState.ERROR,
+            InboxResultReference.none(),
+            layout,
+            VERSION,
+            Optional.of(errorSnapshot),
+            Instant.ofEpochSecond(97));
+
+    for (var stored : List.of(completed, error)) {
+      assertEquals(COMPLETION_DIAGNOSTIC, stored.toString());
+      var first = InboxExecution.executed(stored);
+      var replay = InboxExecution.replay(stored);
+      assertSame(InboxExecutionStatus.EXECUTED, first.status());
+      assertSame(InboxExecutionStatus.REPLAY, replay.status());
+      assertSame(stored, first.completion().orElseThrow());
+      assertSame(stored, replay.completion().orElseThrow());
+      assertEquals(EXECUTION_DIAGNOSTIC, first.toString());
+      assertEquals(EXECUTION_DIAGNOSTIC, replay.toString());
+    }
+
+    assertSame(completedSnapshot, completed.responseSnapshot().orElseThrow());
+    assertSame(errorSnapshot, error.responseSnapshot().orElseThrow());
+    assertEquals(29, completed.responseSnapshot().orElseThrow().ciphertext().length);
+    assertEquals(30, error.responseSnapshot().orElseThrow().ciphertext().length);
+    assertEquals(Optional.of(OTHER_ID), completed.resultReference().uuid());
+    assertSame(InboxResultReferenceType.NONE, error.resultReference().type());
+    assertEquals(Instant.ofEpochSecond(23), completed.completedAt());
+    assertEquals(Instant.ofEpochSecond(97), error.completedAt());
   }
 
   private static InboxCompletion completed() {

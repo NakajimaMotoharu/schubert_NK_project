@@ -1,0 +1,34 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG39296-P01810-INBOX-TERMINAL-SNAPSHOT-V1",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39290-p01810-inbox-terminal-snapshot-prepare-v1/manifest.json",
+    "sha256": "9f3ea595d7e5a6b7bb35fcd57ee806617620a1eaa0dcc7429993114a5a208045"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39292-p01810-inbox-terminal-snapshot-static-v1/manifest.json",
+    "sha256": "f2b32d794db5eb6fe38a374391d5652217add505c9a12e717f9f458376593853"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/InboxOutcomeValueContractTest.java",
+      "rule": "NullAssignment",
+      "message": "Assigning an Object to null is a code smell.  Consider refactoring.",
+      "sourceLine": 116,
+      "sourceAnchor": "copy[0] = null;",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Deliberate mutation of a fixture-owned enum values array proves the next values call returns independent contents. The null element is observed only by the fixture and is never passed to production."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/InboxOutcomeValueContractTest.java",
+      "rule": "NullAssignment",
+      "message": "Assigning an Object to null is a code smell.  Consider refactoring.",
+      "sourceLine": 297,
+      "sourceAnchor": "copy[0] = null;",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Deliberate mutation of a fixture-owned enum values array proves the next values call returns independent contents. The null element is observed only by the fixture and is never passed to production."
+    }
+  ]
+}
