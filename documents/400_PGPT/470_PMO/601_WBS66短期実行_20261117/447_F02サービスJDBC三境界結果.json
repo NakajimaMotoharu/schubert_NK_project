@@ -1,0 +1,123 @@
+{
+  "eventId": "PGPT-20261008-5976",
+  "actualExit": 0,
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F02-SERVICE-DB-ADMISSION-SOURCE-GRAPH-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-F02-SERVICE-DB-ADMISSION-SOURCE-GRAPH-20261118",
+    "workAttributionKind": "REWORK",
+    "workScope": "F02 / SSC461: move three known SQL-only ownership checks in ServiceDatabaseAdmission and ServiceDatabaseSource to their same-module JdbcFailureGraph. Normal existing whole 15+14 Connector/proxy tests with finite close, add independent SQL exception path identity/cleanup; no DB driver connection, runtime, credentials or permission workflows. Requires current closed ports and one final source ABI/XML/same-exec before three migrated sites counted.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38582-f02-jdbc-exception-ownership-review-v1/manifest.json",
+        "sha256": "4c29301e66cd473c219320a3dfa8cf5d846b787eb477caa0bd38599f678a4e92"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23656-service-db-admission-independent-v1/manifest.json",
+        "sha256": "9d40975e1b15b7737d4c9cc1d45336d5ed0aa14bb0c10a117f567e3d3b9ccd73"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23704-service-database-source-independent-v1/manifest.json",
+        "sha256": "77ac4912e39373967f603ea6c88ad89c9a369f2c82281d3f17af6ee588accc73"
+      }
+    ],
+    "productionCoreMain": "6a77bba460dfb8304d63357bd173302dd1c29436",
+    "source": "6a77bba460dfb8304d63357bd173302dd1c29436",
+    "wbsLeafIds": [
+      "WBS-F02",
+      "WBS-P004-05"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a",
+      "WBS-P004-05/2",
+      "SSC-461",
+      "BUG-3233",
+      "YKT-2680",
+      "YKT-2387"
+    ],
+    "run": "PG39452-f02-service-db-port-graph-independent-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.8,
+      "base": 3.2,
+      "high": 6.6
+    },
+    "groupCapPp": 8.0,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "quotaAfter": {
+      "usedPercent": 36,
+      "remainingPercent": 64,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "bfbb97ac3f476c6d1027113a3946779089960f908028d8f37a4def5437f62ad3",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T12:05:37.421000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 36,
+          "remainingPercent": 64,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T12:05:27.538558+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 35,
+      "remainingPercent": 65,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "initialCore": "bcc9e0673287c51950ecab9b36350abfcd4b2c69",
+    "result": "THREE_JDBC_MIGRATIONS_31_PASS_RAW_MISSES_RETAINED",
+    "actualPaths": [
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG39452-f02-service-db-port-graph-independent-v1/manifest.json"
+    ],
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "applicationTrials": 31,
+    "distinctTestCasesAddedToExecutionCount": 31,
+    "newTestDefinitions": 2,
+    "effortCompletionRate": null,
+    "remainingOriginalDetailBasePp": 1089.848,
+    "publicEvidence": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39452-f02-service-db-port-graph-independent-v1/manifest.json",
+        "sha256": "c4b3228a74c2b89d64388807764898e1a500d62aea0c40fd23d48e2d22b5d92c"
+      }
+    ],
+    "attempt": 1,
+    "attemptResult": "PASS_LOCAL_WITH_SOURCE_COUNTER_REMAINDER",
+    "firstIndependentSuccess": 31,
+    "firstIndependentDenominator": 31,
+    "toolPreparationFailures": [
+      "Original Maven SpotBugs peer analysis reported bootstrap3 and batch7 MissingClass although exit0. Same source fresh peers CLI resolved the tool issue. Original retained."
+    ],
+    "unaccepted": [
+      "ServiceDatabaseAdmission has five raw branches and eight raw instructions missed; ServiceDatabaseSource six raw instructions missed. Supporting raw deficits preserved.",
+      "F02: 72 remaining upper calls, three Storage direct calls, compatibility entry/physical SQLException edge. Current whole6, whole451 and required operating evidence remain pending."
+    ]
+  }
+}
