@@ -236,12 +236,13 @@ class ApiMetricContextTest {
     assertThrows(
         NullPointerException.class,
         () -> new ApiMetricContext<String>(null, registry -> FIXTURE_BINDING));
-    assertEquals(
-        "CONFIG_INVALID",
-        assertThrows(
-                IllegalArgumentException.class,
-                () -> new ApiMetricContext<String>("unknown", registry -> FIXTURE_BINDING))
-            .getMessage());
+    for (String mode : List.of("unknown", "DEBTf", "STANDAQc"))
+      assertEquals(
+          "CONFIG_INVALID",
+          assertThrows(
+                  IllegalArgumentException.class,
+                  () -> new ApiMetricContext<String>(mode, registry -> FIXTURE_BINDING))
+              .getMessage());
   }
 
   @Test
@@ -489,27 +490,25 @@ class ApiMetricContextTest {
                 entered.countDown();
                 await(release);
               });
-      try (var executor = Executors.newSingleThreadExecutor()) {
-        try {
-          var active = executor.submit(() -> h.context.render(true));
-          assertTrue(entered.await(30, TimeUnit.SECONDS));
-          assertEquals(
-              UNCONFIRMED,
-              assertThrows(IllegalStateException.class, h.context::close).getMessage());
-          assertFalse(h.customRegistry.isClosed());
-          assertFalse(h.standardRegistry.isClosed());
-          release.countDown();
-          assertEquals(READY_ONE + STANDARD, active.get(30, TimeUnit.SECONDS));
-          assertThrows(IllegalStateException.class, () -> h.context.render(true));
-          assertThrows(IllegalStateException.class, h.context::bindings);
-          h.customRegistry.onRead = Optional.empty();
-          h.context.close();
-          assertEquals(List.of("S", "C"), h.order);
-        } finally {
-          release.countDown();
-          executor.shutdownNow();
-          assertTrue(executor.awaitTermination(30, TimeUnit.SECONDS));
-        }
+      var executor = Executors.newSingleThreadExecutor();
+      try {
+        var active = executor.submit(() -> h.context.render(true));
+        assertTrue(entered.await(30, TimeUnit.SECONDS));
+        assertEquals(
+            UNCONFIRMED, assertThrows(IllegalStateException.class, h.context::close).getMessage());
+        assertFalse(h.customRegistry.isClosed());
+        assertFalse(h.standardRegistry.isClosed());
+        release.countDown();
+        assertEquals(READY_ONE + STANDARD, active.get(30, TimeUnit.SECONDS));
+        assertThrows(IllegalStateException.class, () -> h.context.render(true));
+        assertThrows(IllegalStateException.class, h.context::bindings);
+        h.customRegistry.onRead = Optional.empty();
+        h.context.close();
+        assertEquals(List.of("S", "C"), h.order);
+      } finally {
+        release.countDown();
+        executor.shutdownNow();
+        assertTrue(executor.awaitTermination(30, TimeUnit.SECONDS));
       }
     }
   }
@@ -550,27 +549,26 @@ class ApiMetricContextTest {
             };
         if (duringFactory) h.beforeCustom = Optional.of(pause);
         else h.beforeSetup = Optional.of(pause);
-        try (var executor = Executors.newSingleThreadExecutor()) {
-          try {
-            var init = executor.submit(h.context::initialize);
-            assertTrue(entered.await(30, TimeUnit.SECONDS));
-            assertEquals(
-                UNCONFIRMED,
-                assertThrows(IllegalStateException.class, h.context::close).getMessage());
-            release.countDown();
-            var rejected =
-                assertThrows(ExecutionException.class, () -> init.get(30, TimeUnit.SECONDS));
-            assertEquals(IllegalStateException.class, rejected.getCause().getClass());
-            assertEquals(duringFactory ? 0 : 1, h.setups.get());
-            assertEquals(0, h.standardCreates.get());
-            assertFalse(h.customRegistry.isClosed());
-            h.context.close();
-            assertTrue(h.customRegistry.isClosed());
-          } finally {
-            release.countDown();
-            executor.shutdownNow();
-            assertTrue(executor.awaitTermination(30, TimeUnit.SECONDS));
-          }
+        var executor = Executors.newSingleThreadExecutor();
+        try {
+          var init = executor.submit(h.context::initialize);
+          assertTrue(entered.await(30, TimeUnit.SECONDS));
+          assertEquals(
+              UNCONFIRMED,
+              assertThrows(IllegalStateException.class, h.context::close).getMessage());
+          release.countDown();
+          var rejected =
+              assertThrows(ExecutionException.class, () -> init.get(30, TimeUnit.SECONDS));
+          assertEquals(IllegalStateException.class, rejected.getCause().getClass());
+          assertEquals(duringFactory ? 0 : 1, h.setups.get());
+          assertEquals(0, h.standardCreates.get());
+          assertFalse(h.customRegistry.isClosed());
+          h.context.close();
+          assertTrue(h.customRegistry.isClosed());
+        } finally {
+          release.countDown();
+          executor.shutdownNow();
+          assertTrue(executor.awaitTermination(30, TimeUnit.SECONDS));
         }
       }
     }
@@ -587,27 +585,24 @@ class ApiMetricContextTest {
                 entered.countDown();
                 await(release);
               });
-      try (var executor = Executors.newSingleThreadExecutor()) {
-        try {
-          var init = executor.submit(h.context::initialize);
-          assertTrue(entered.await(30, TimeUnit.SECONDS));
-          assertEquals(
-              UNCONFIRMED,
-              assertThrows(IllegalStateException.class, h.context::close).getMessage());
-          release.countDown();
-          var rejected =
-              assertThrows(ExecutionException.class, () -> init.get(30, TimeUnit.SECONDS));
-          assertEquals(IllegalStateException.class, rejected.getCause().getClass());
-          assertFalse(h.standardRegistry.isClosed());
-          assertFalse(h.customRegistry.isClosed());
-          assertThrows(IllegalStateException.class, h.context::bindings);
-          h.context.close();
-          assertEquals(List.of("S", "C"), h.order);
-        } finally {
-          release.countDown();
-          executor.shutdownNow();
-          assertTrue(executor.awaitTermination(30, TimeUnit.SECONDS));
-        }
+      var executor = Executors.newSingleThreadExecutor();
+      try {
+        var init = executor.submit(h.context::initialize);
+        assertTrue(entered.await(30, TimeUnit.SECONDS));
+        assertEquals(
+            UNCONFIRMED, assertThrows(IllegalStateException.class, h.context::close).getMessage());
+        release.countDown();
+        var rejected = assertThrows(ExecutionException.class, () -> init.get(30, TimeUnit.SECONDS));
+        assertEquals(IllegalStateException.class, rejected.getCause().getClass());
+        assertFalse(h.standardRegistry.isClosed());
+        assertFalse(h.customRegistry.isClosed());
+        assertThrows(IllegalStateException.class, h.context::bindings);
+        h.context.close();
+        assertEquals(List.of("S", "C"), h.order);
+      } finally {
+        release.countDown();
+        executor.shutdownNow();
+        assertTrue(executor.awaitTermination(30, TimeUnit.SECONDS));
       }
     }
   }
@@ -813,33 +808,28 @@ class ApiMetricContextTest {
               entered.countDown();
               await(proceed);
             });
-    try (var worker = Executors.newSingleThreadExecutor()) {
+    var worker = Executors.newSingleThreadExecutor();
+    try {
+      context.initialize();
+      var future = worker.submit(() -> context.render(true));
       try {
-        context.initialize();
-        var future = worker.submit(() -> context.render(true));
-        try {
-          await(entered);
-          assertEquals(
-              UNCONFIRMED, assertThrows(IllegalStateException.class, context::close).getMessage());
-          assertFalse(observed.get().isClosed());
-        } finally {
-          proceed.countDown();
-        }
-        var failure =
-            assertThrows(ExecutionException.class, () -> future.get(30, TimeUnit.SECONDS));
-        assertEquals(IllegalStateException.class, failure.getCause().getClass());
-        assertThrows(IllegalStateException.class, context::bindings);
+        await(entered);
+        assertEquals(
+            UNCONFIRMED, assertThrows(IllegalStateException.class, context::close).getMessage());
         assertFalse(observed.get().isClosed());
       } finally {
         proceed.countDown();
-        worker.shutdownNow();
-        try {
-          assertTrue(worker.awaitTermination(30, TimeUnit.SECONDS));
-        } finally {
-          context.close();
-        }
       }
-      assertTrue(observed.get().isClosed());
+      var failure = assertThrows(ExecutionException.class, () -> future.get(30, TimeUnit.SECONDS));
+      assertEquals(IllegalStateException.class, failure.getCause().getClass());
+      assertThrows(IllegalStateException.class, context::bindings);
+      assertFalse(observed.get().isClosed());
+    } finally {
+      proceed.countDown();
+      worker.shutdownNow();
+      assertTrue(worker.awaitTermination(30, TimeUnit.SECONDS));
+      context.close();
     }
+    assertTrue(observed.get().isClosed());
   }
 }
