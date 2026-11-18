@@ -28,6 +28,8 @@ class ArtifactComparatorTest {
   private static final String FIXTURE_DIF015 = "DIF-015";
   private static final String FIXTURE_OBSERVATIONS = "observations";
   private static final String FIXTURE_EXPECTED_NK = "expectedNk";
+  private static final String FIXTURE_EXPECTED_CURRENT = "expectedCurrent";
+  private static final String FIXTURE_JSON_SUFFIX = ".json";
   private static final String FIXTURE_EXTRA = "extra";
 
   private static final String ASYNC_MENU_DIFFERENCE = "DIF-003";
@@ -558,7 +560,7 @@ class ArtifactComparatorTest {
             "/dif/DIF-002",
             "AUTHENTICATED",
             "ADMIN");
-    missingExpected.remove("expectedCurrent");
+    missingExpected.remove(FIXTURE_EXPECTED_CURRENT);
     missingExpected.remove(FIXTURE_EXPECTED_NK);
     observations.add(missingExpected);
 
@@ -1081,7 +1083,7 @@ class ArtifactComparatorTest {
   void rejectsAContentRangeWithTheWrongVideoSize() throws Exception {
     Fixture fixture = fixture("wrong-video-total-in-range");
     mutate(
-        fixture.nk().resolve(FIXTURE_CHR_M04 + ".json"),
+        fixture.nk().resolve(FIXTURE_CHR_M04 + FIXTURE_JSON_SUFFIX),
         root -> object(root, FIXTURE_INVALID_RANGE).put(FIXTURE_CONTENT_RANGE, "bytes */84084293"));
 
     var result = compare(fixture);
@@ -1113,7 +1115,7 @@ class ArtifactComparatorTest {
   void rejectsAnInvalidRangeStatusOfAnotherHttpError() throws Exception {
     Fixture fixture = fixture("wrong-audio-range-http-status");
     mutate(
-        fixture.nk().resolve(FIXTURE_CHR_M07 + ".json"),
+        fixture.nk().resolve(FIXTURE_CHR_M07 + FIXTURE_JSON_SUFFIX),
         root -> object(root, FIXTURE_INVALID_RANGE).put(FIXTURE_STATUS, 404));
 
     var result = compare(fixture);
@@ -1269,9 +1271,11 @@ class ArtifactComparatorTest {
             FIXTURE_CURRENT_LOGIN_TITLE,
             FIXTURE_NK_LOGIN_TITLE));
     currentArtifacts.forEach(
-        (caseId, artifact) -> uncheckedWriteJson(current.resolve(caseId + ".json"), artifact));
+        (caseId, artifact) ->
+            uncheckedWriteJson(current.resolve(caseId + FIXTURE_JSON_SUFFIX), artifact));
     nkArtifacts.forEach(
-        (caseId, artifact) -> uncheckedWriteJson(nk.resolve(caseId + ".json"), artifact));
+        (caseId, artifact) ->
+            uncheckedWriteJson(nk.resolve(caseId + FIXTURE_JSON_SUFFIX), artifact));
     Path observations = root.resolve("observations.json");
     ObjectNode envelope = JSON.createObjectNode().put("version", 1);
     envelope.set(FIXTURE_OBSERVATIONS, observationItems);
@@ -1346,7 +1350,7 @@ class ArtifactComparatorTest {
             FIXTURE_INVALID_RANGE_STATUS,
             "",
             "");
-    status.put("expectedCurrent", 500).put(FIXTURE_EXPECTED_NK, 416);
+    status.put(FIXTURE_EXPECTED_CURRENT, 500).put(FIXTURE_EXPECTED_NK, 416);
     observations.add(status);
     observations.add(
         observation(
@@ -1373,7 +1377,7 @@ class ArtifactComparatorTest {
             pointer,
             "",
             "");
-    row.set("expectedCurrent", current);
+    row.set(FIXTURE_EXPECTED_CURRENT, current);
     row.set(FIXTURE_EXPECTED_NK, nk);
     return row;
   }
@@ -1396,7 +1400,7 @@ class ArtifactComparatorTest {
         .put("selectorType", selectorType)
         .put("selector", selector)
         .put(FIXTURE_POINTER, pointer)
-        .put("expectedCurrent", expectedCurrent)
+        .put(FIXTURE_EXPECTED_CURRENT, expectedCurrent)
         .put(FIXTURE_EXPECTED_NK, expectedNk);
   }
 
