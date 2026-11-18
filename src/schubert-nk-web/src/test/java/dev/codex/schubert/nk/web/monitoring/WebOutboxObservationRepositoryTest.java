@@ -140,7 +140,8 @@ class WebOutboxObservationRepositoryTest {
                 switch (method.getName()) {
                   case FIXTURE_NEXT_CA1733B5:
                     fault(FIXTURE_NEXT_CA1733B5);
-                    return ++cursor < rows.size();
+                    cursor++;
+                    return cursor < rows.size();
                   case "getString":
                     assertEquals(FIXTURE_STATUS_CFC31BCC, arguments[0]);
                     fault(FIXTURE_STATUS_CFC31BCC);
@@ -255,11 +256,13 @@ class WebOutboxObservationRepositoryTest {
     var absent = new Fixture();
     assertThrows(NullPointerException.class, () -> repo.read(absent.connection(), null));
     assertEquals(0, absent.prepared);
-    for (int variant = 0; variant < 3; variant++) {
+    for (var invalidConnection :
+        List.<java.util.function.Consumer<Fixture>>of(
+            f -> f.autoCommit = true,
+            f -> f.readOnly = false,
+            f -> f.isolation = Connection.TRANSACTION_SERIALIZABLE)) {
       var f = new Fixture();
-      if (variant == 0) f.autoCommit = true;
-      if (variant == 1) f.readOnly = false;
-      if (variant == 2) f.isolation = Connection.TRANSACTION_SERIALIZABLE;
+      invalidConnection.accept(f);
       assertEquals(
           "Web outbox metric source rejected",
           assertThrows(SQLException.class, () -> repo.read(f.connection(), AS_OF)).getMessage());

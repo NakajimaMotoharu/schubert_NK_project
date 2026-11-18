@@ -1,0 +1,394 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG39546-BUG3288-WEB-OUTBOX-PROXY-FINITE-V2",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39541-bug3288-web-outbox-prepare-v2/manifest.json",
+    "sha256": "417e399bc9533d801c5e558fc31ca3455887a5a995d68fb35711972d7106beae"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39543-bug3288-web-outbox-static-v2/manifest.json",
+    "sha256": "685fafe57da51a02b8159fe53c6144b328d63866d3a03eb6eb4f8002a7cf9953"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricCollector.java",
+      "sourceLine": 29,
+      "rule": "AvoidSynchronizedStatement",
+      "message": "Use ReentrantLock rather than synchronization",
+      "sourceAnchor": "synchronized (lock) {",
+      "occurrences": 1,
+      "reason": "SS351 requires each supplied observation to be serialized from read through atomic publication. This private monitor coordinates per-owner state and has neither exposed lock selection nor external worker creation. WEBOBXCONN006 verifies no metric publication or second query before the first completes.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricCollector.java",
+      "sourceLine": 35,
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error unavailableObservation) {",
+      "occurrences": 1,
+      "reason": "The collector clears the borrowed metric observation and rethrows the identical SQLException, RuntimeException or Error. The supported failure domains are not swallowed or converted to a success.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricCollector.java",
+      "sourceLine": 35,
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Error in try-catch block",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error unavailableObservation) {",
+      "occurrences": 1,
+      "reason": "The collector clears the borrowed metric observation and rethrows the identical SQLException, RuntimeException or Error. The supported failure domains are not swallowed or converted to a success.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebOutboxObservationRepository.java",
+      "sourceLine": 38,
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this PreparedStatement object are closed after use",
+      "sourceAnchor": "@Nullable PreparedStatement statement = connection.prepareStatement(SQL);",
+      "occurrences": 1,
+      "reason": "In the exact source path a null acquisition fails and a nonnull acquisition is protected by existing nested try-with-resources. Owned rows close before statement; connection itself remains borrowed.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebOutboxObservationRepository.java",
+      "sourceLine": 42,
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ResultSet object are closed after use",
+      "sourceAnchor": "@Nullable ResultSet rows = statement.executeQuery();",
+      "occurrences": 1,
+      "reason": "In the exact source path a null acquisition fails and a nonnull acquisition is protected by existing nested try-with-resources. Owned rows close before statement; connection itself remains borrowed.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricCollectorTest.java",
+      "sourceLine": 38,
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "Thread.currentThread().interrupt();",
+      "occurrences": 1,
+      "reason": "The site belongs to the finite synthetic JUnit worker, state observation or owned test thread interruption. Application execution or background scheduling is not started.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricCollectorTest.java",
+      "sourceLine": 237,
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(2);",
+      "occurrences": 1,
+      "reason": "The original in-memory fixture owns this executor and explicitly requests shutdown and verifies bounded termination inside the owner lifecycle. Its supplier never opens a service.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricCollectorTest.java",
+      "sourceLine": 237,
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(2);",
+      "occurrences": 1,
+      "reason": "The site belongs to the finite synthetic JUnit worker, state observation or owned test thread interruption. Application execution or background scheduling is not started.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricCollectorTest.java",
+      "sourceLine": 245,
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "var contender = new AtomicReference<Thread>();",
+      "occurrences": 1,
+      "reason": "The site belongs to the finite synthetic JUnit worker, state observation or owned test thread interruption. Application execution or background scheduling is not started.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricCollectorTest.java",
+      "sourceLine": 261,
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "var a = executor.submit(() -> collector.collect(first.connection(), AS_OF));",
+      "occurrences": 1,
+      "reason": "The site belongs to the finite synthetic JUnit worker, state observation or owned test thread interruption. Application execution or background scheduling is not started.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricCollectorTest.java",
+      "sourceLine": 265,
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "executor.submit(",
+      "occurrences": 1,
+      "reason": "The site belongs to the finite synthetic JUnit worker, state observation or owned test thread interruption. Application execution or background scheduling is not started.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricCollectorTest.java",
+      "sourceLine": 267,
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "contender.set(Thread.currentThread());",
+      "occurrences": 1,
+      "reason": "The site belongs to the finite synthetic JUnit worker, state observation or owned test thread interruption. Application execution or background scheduling is not started.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricCollectorTest.java",
+      "sourceLine": 273,
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "while (contender.get().getState() != Thread.State.BLOCKED && System.nanoTime() < deadline)",
+      "occurrences": 1,
+      "reason": "The site belongs to the finite synthetic JUnit worker, state observation or owned test thread interruption. Application execution or background scheduling is not started.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricCollectorTest.java",
+      "sourceLine": 275,
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "assertEquals(Thread.State.BLOCKED, contender.get().getState());",
+      "occurrences": 1,
+      "reason": "The site belongs to the finite synthetic JUnit worker, state observation or owned test thread interruption. Application execution or background scheduling is not started.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricCollectorTest.java",
+      "sourceLine": 290,
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "executor.shutdownNow();",
+      "occurrences": 1,
+      "reason": "The site belongs to the finite synthetic JUnit worker, state observation or owned test thread interruption. Application execution or background scheduling is not started.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricCollectorTest.java",
+      "sourceLine": 291,
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "assertTrue(executor.awaitTermination(5, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "reason": "The site belongs to the finite synthetic JUnit worker, state observation or owned test thread interruption. Application execution or background scheduling is not started.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricCollectorTest.java",
+      "sourceLine": 301,
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(8);",
+      "occurrences": 1,
+      "reason": "The original in-memory fixture owns this executor and explicitly requests shutdown and verifies bounded termination inside the owner lifecycle. Its supplier never opens a service.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricCollectorTest.java",
+      "sourceLine": 301,
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(8);",
+      "occurrences": 1,
+      "reason": "The site belongs to the finite synthetic JUnit worker, state observation or owned test thread interruption. Application execution or background scheduling is not started.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricCollectorTest.java",
+      "sourceLine": 326,
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "var futures = executor.invokeAll(jobs, 5, TimeUnit.SECONDS);",
+      "occurrences": 1,
+      "reason": "The site belongs to the finite synthetic JUnit worker, state observation or owned test thread interruption. Application execution or background scheduling is not started.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricCollectorTest.java",
+      "sourceLine": 340,
+      "rule": "CompareObjectsWithEquals",
+      "message": "Use equals() to compare object references.",
+      "sourceAnchor": "for (int i = 0; i < returned.size(); i++) if (returned.get(i) == selected) owner = i;",
+      "occurrences": 1,
+      "reason": "Independent per-call vectors are joined by the exact returned publication identity. Structural equals would not prove which borrowed fixture supplied the snapshot.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricCollectorTest.java",
+      "sourceLine": 355,
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "executor.shutdownNow();",
+      "occurrences": 1,
+      "reason": "The site belongs to the finite synthetic JUnit worker, state observation or owned test thread interruption. Application execution or background scheduling is not started.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricCollectorTest.java",
+      "sourceLine": 356,
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "assertTrue(executor.awaitTermination(5, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "reason": "The site belongs to the finite synthetic JUnit worker, state observation or owned test thread interruption. Application execution or background scheduling is not started.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricRecorderTest.java",
+      "sourceLine": 157,
+      "rule": "NullAssignment",
+      "message": "Assigning an Object to null is a code smell.  Consider refactoring.",
+      "sourceAnchor": "absent[field] = null;",
+      "occurrences": 1,
+      "reason": "This negative value vector intentionally omits each required record component to test the specified null rejection, rather than assigning null during product use.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricRecorderTest.java",
+      "sourceLine": 292,
+      "rule": "EqualsNull",
+      "message": "Avoid using equals() to compare against null",
+      "sourceAnchor": "assertFalse(a.equals(null));",
+      "occurrences": 1,
+      "reason": "The independent equals law explicitly requires a nonnull observation to compare false to null, as distinct from assigning or leaking null into a field.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricRecorderTest.java",
+      "sourceLine": 321,
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceAnchor": "var pool = Executors.newFixedThreadPool(8);",
+      "occurrences": 1,
+      "reason": "The original in-memory fixture owns this executor and explicitly requests shutdown and verifies bounded termination inside the owner lifecycle. Its supplier never opens a service.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricRecorderTest.java",
+      "sourceLine": 321,
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "var pool = Executors.newFixedThreadPool(8);",
+      "occurrences": 1,
+      "reason": "The site belongs to the finite synthetic JUnit worker, state observation or owned test thread interruption. Application execution or background scheduling is not started.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricRecorderTest.java",
+      "sourceLine": 340,
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "for (var f : pool.invokeAll(tasks, 5, TimeUnit.SECONDS)) f.get(5, TimeUnit.SECONDS);",
+      "occurrences": 1,
+      "reason": "The site belongs to the finite synthetic JUnit worker, state observation or owned test thread interruption. Application execution or background scheduling is not started.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricRecorderTest.java",
+      "sourceLine": 356,
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "pool.shutdownNow();",
+      "occurrences": 1,
+      "reason": "The site belongs to the finite synthetic JUnit worker, state observation or owned test thread interruption. Application execution or background scheduling is not started.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricRecorderTest.java",
+      "sourceLine": 357,
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "assertTrue(pool.awaitTermination(10, java.util.concurrent.TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "reason": "The site belongs to the finite synthetic JUnit worker, state observation or owned test thread interruption. Application execution or background scheduling is not started.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxObservationRepositoryTest.java",
+      "sourceLine": 59,
+      "rule": "UseConcurrentHashMap",
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+      "sourceAnchor": "final Map<String, Throwable> faults = new HashMap<>();",
+      "occurrences": 1,
+      "reason": "The per-test fake fault map is owned and configured by one worker, with cross-thread observations only after latch/Future synchronization. There are no concurrent mutations.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxObservationRepositoryTest.java",
+      "sourceLine": 83,
+      "rule": "UseProperClassLoader",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+      "sourceAnchor": "Connection.class.getClassLoader(),",
+      "occurrences": 1,
+      "reason": "The loader is intentionally the actual JDK java.sql interface loader so the proxy only implements that closed platform interface. No application-defined or service class is opened.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxObservationRepositoryTest.java",
+      "sourceLine": 110,
+      "rule": "UseProperClassLoader",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+      "sourceAnchor": "PreparedStatement.class.getClassLoader(),",
+      "occurrences": 1,
+      "reason": "The loader is intentionally the actual JDK java.sql interface loader so the proxy only implements that closed platform interface. No application-defined or service class is opened.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxObservationRepositoryTest.java",
+      "sourceLine": 137,
+      "rule": "UseProperClassLoader",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+      "sourceAnchor": "ResultSet.class.getClassLoader(),",
+      "occurrences": 1,
+      "reason": "The loader is intentionally the actual JDK java.sql interface loader so the proxy only implements that closed platform interface. No application-defined or service class is opened.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxObservationRepositoryTest.java",
+      "sourceLine": 472,
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceAnchor": "var pool = Executors.newFixedThreadPool(8);",
+      "occurrences": 1,
+      "reason": "The original in-memory fixture owns this executor and explicitly requests shutdown and verifies bounded termination inside the owner lifecycle. Its supplier never opens a service.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxObservationRepositoryTest.java",
+      "sourceLine": 472,
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "var pool = Executors.newFixedThreadPool(8);",
+      "occurrences": 1,
+      "reason": "The site belongs to the finite synthetic JUnit worker, state observation or owned test thread interruption. Application execution or background scheduling is not started.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxObservationRepositoryTest.java",
+      "sourceLine": 474,
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "var results = pool.invokeAll(tasks, 5, TimeUnit.SECONDS);",
+      "occurrences": 1,
+      "reason": "The site belongs to the finite synthetic JUnit worker, state observation or owned test thread interruption. Application execution or background scheduling is not started.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxObservationRepositoryTest.java",
+      "sourceLine": 478,
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "pool.shutdownNow();",
+      "occurrences": 1,
+      "reason": "The site belongs to the finite synthetic JUnit worker, state observation or owned test thread interruption. Application execution or background scheduling is not started.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxObservationRepositoryTest.java",
+      "sourceLine": 479,
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "assertTrue(pool.awaitTermination(5, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "reason": "The site belongs to the finite synthetic JUnit worker, state observation or owned test thread interruption. Application execution or background scheduling is not started.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ]
+}
