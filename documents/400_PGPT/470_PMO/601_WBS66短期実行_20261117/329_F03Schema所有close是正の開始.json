@@ -1,0 +1,65 @@
+{
+  "eventId": "PGPT-20261008-5861",
+  "groupId": "PGPT-WBS66-F03-SCHEMA-OWNED-CLOSE-20261118",
+  "baseCore": "d15952579fea3067180a9fc65523045002e50482",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-18T05:01:26.207000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 29,
+      "remainingPercent": 71,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-SCHEMA-OWNED-CLOSE-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-F03-SCHEMA-OWNED-CLOSE-20261118",
+    "workAttributionKind": "REWORK",
+    "workScope": "F03 / P004-05 related schema readiness / BUG3234. Establish query/resultset non-null at ownership acquisition and coalesce duplicated finally decisions into type-specific direct close helpers; preserve old identical SQL, borrowed connection, close order and established error selection. Add independently specified exact Row record value check. Whole original ten + new one against fixed source; bindings, static, exact XML and raw. No exclusions or real services.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38642-f03-schema-raw-line-deficits-v1/manifest.json",
+        "sha256": "908e76dfc9015947bfbc1b000fb44cf720c29c4136d53ee8b69ed15771c75e28"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38640-f02-schema-history-jdbc-owner-independent-v1/manifest.json",
+        "sha256": "ec173e2018f0dadf7883fa6ea988a34b6206935a0d4cd4e75dac9394fb70b3a7"
+      },
+      {
+        "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+        "sha256": "7c5a6ba0c5ee191a18a6ba1b928c13af1b8b540f749246e9edb0e8ad857b8ab7"
+      }
+    ],
+    "productionCoreMain": "d15952579fea3067180a9fc65523045002e50482",
+    "source": "d15952579fea3067180a9fc65523045002e50482",
+    "wbsLeafIds": [
+      "WBS-F03",
+      "WBS-P004-05"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2",
+      "BUG-3234"
+    ],
+    "run": "PG38660-f03-schema-owned-close-raw-independent-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.3,
+      "base": 1.35,
+      "high": 3.5
+    },
+    "groupCapPp": 4.5,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "relatedBug": "BUG-3234"
+  }
+}
