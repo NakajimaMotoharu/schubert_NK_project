@@ -1,0 +1,134 @@
+{
+  "eventId": "PGPT-20261008-6066",
+  "actualExit": 0,
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-G07-CACHE-SESSION-RANGE-PUBLIC-DELTA-20261119",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-G07-CACHE-SESSION-RANGE-PUBLIC-DELTA-20261119",
+    "workAttributionKind": "REQUALIFICATION",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "G07",
+      "WBS-F03/2-3"
+    ],
+    "source": "ecc875c54e6262e2af8ebb3af643798300112bc7",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "run": "PG39974-g07-cache-session-range-public-delta-v1",
+    "fromCommit": "47fd400bba7137a0637e43445da72ff769d1d042",
+    "volatileStaging": "/dev/shm/schubert-nk-pg39974-1000",
+    "workScope": "Scan only the exact new public Git interval covering the offline approved cache, session and invalid-range comparison phases. Authenticate the three probe artifacts on their original exec/session/source. Do not rerun application or tools and retain first applicable static records.",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.3,
+      "base": 1,
+      "high": 2.85
+    },
+    "groupCapPp": 5,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39932-g07-four-brand-public-delta-v1/scan/manifest.json",
+        "sha256": "71964827e0fbc321af1d6a4029bf3189b4b5eedffd60416a627bc7296ba5ab30"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39954-p020-cache-and-session-independent-v1/manifest.json",
+        "sha256": "c9b8c811bccc4dc68d3b8cb697b216dbe66955d7cbfb344ed715e85fd01bfe79"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39964-p020-invalid-range165-v1/manifest.json",
+        "sha256": "6c4a5116cb34460e378d93574b3041d44a398020bcceea64c13c5a835078a725"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39965-p020-invalid-range165-v2/manifest.json",
+        "sha256": "dc56fdcd8308ad3cb5aab06eba5a24d8b2b59d84c4269681d536f3e5f434de8e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39970-p020-invalid-range-independent-v1/manifest.json",
+        "sha256": "6f55d07f90b0fda668c7dc607258cf4c5223eee68ab48c9b33fa24dd66df7a12"
+      }
+    ],
+    "quotaAfter": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-18T17:25:27.334000+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 44,
+        "remainingPercent": 56,
+        "resetsAt": 1795445752,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "quotaReceipt": {
+      "sha256": "9ce36d8c8fe13ebbb3277967f1fc5db6515b7f5b3ac95ee74fbb962631632c89",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T17:25:27.334000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 44,
+          "remainingPercent": 56,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T17:24:56.308099+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 44,
+      "remainingPercent": 56,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "actualPaths": [
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG39974-g07-cache-session-range-public-delta-v1/scan/manifest.json"
+    ],
+    "publicEvidence": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39974-g07-cache-session-range-public-delta-v1/scan/manifest.json",
+        "sha256": "41dbf58f85766d4f8ee76fbcc68b979b0c07e10f760196672fab4b72ebc88093"
+      }
+    ],
+    "result": "G07_EXACT_CACHE_SESSION_RANGE_PUBLIC_ADVANCE",
+    "throughCommit": "ecc875c54e6262e2af8ebb3af643798300112bc7",
+    "trackedBlobVersions": 154,
+    "physicalCommits": 9,
+    "findings": 37,
+    "confirmedSecrets": 0,
+    "unclassified": 0,
+    "qualifiedBinaries": 3,
+    "firstVerificationSuccess": 1,
+    "firstVerificationDenominator": 1,
+    "preservedFirstApplicableStatic": 1,
+    "executedScannerRetries": 0,
+    "applicationTrials": 0,
+    "executedProductRetries": 0,
+    "formalUpdated": false,
+    "newAcceptance": 0,
+    "effortCompletionRate": null,
+    "remainingOriginalDetailBasePp": 1089.848,
+    "rawScannerExit": 1,
+    "nextCommand": "Advance F02/F03 or another independent eligible WBS short criterion on the recorded latest core; record the exact absence of new external evidence without repeating known operations."
+  }
+}

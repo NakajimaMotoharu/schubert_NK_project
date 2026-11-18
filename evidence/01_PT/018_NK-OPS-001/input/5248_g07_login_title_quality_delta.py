@@ -24,6 +24,17 @@ CONFIG = {
                   'PG39923-p020-approved-all-brand153-v2': ('unit', 153)},
         'post': 'PG39928-p020-approved-all-brand-independent-v1',
     },
+    '542': {
+        'history': ('PG39932-g07-four-brand-public-delta-v1',
+                    'PG39914-g07-approved-login-title-and-quality-delta-v1',
+                    'PG39880-g07-service-state-lock-public-delta-v1'),
+        'units': {'PG39944-p020-cache-and-session161-v1': ('unit', 161),
+                  'PG39964-p020-invalid-range165-v1': ('firstUnit', 165),
+                  'PG39965-p020-invalid-range165-v2': ('unit', 165)},
+        'posts': {'PG39944-p020-cache-and-session161-v1': 'PG39954-p020-cache-and-session-independent-v1',
+                  'PG39964-p020-invalid-range165-v1': 'PG39970-p020-invalid-range-independent-v1',
+                  'PG39965-p020-invalid-range165-v2': 'PG39970-p020-invalid-range-independent-v1'},
+    },
 }
 GROUP=sys.argv[2] if len(sys.argv)==3 else '532'
 settings=CONFIG[GROUP]
@@ -33,7 +44,7 @@ OUT=E/V['run']/'scan'
 WORK=Path(V['volatileStaging'])
 RETAIN=Path.cwd().parent/'pgpt-runs/PG379'/V['run'].lower()
 HISTORY=settings['history']
-POST=E/settings['post']/'manifest.json'
+
 
 
 def set_worker(worker):
@@ -79,7 +90,8 @@ def classify():
             meta=by_key[row['path'],row['blob']]
             unit=B.load(unit_folder/'manifest.json')
             start=B.load(unit_folder/'begin.json')
-            finished=B.load(POST)
+            post=E/(settings.get('post') or settings['posts'][name])/'manifest.json'
+            finished=B.load(post)
             assert start['source']==unit['source']
             assert Path(finished[ticket]['path']).resolve()==unit_folder/'manifest.json'
             assert finished[ticket]['sha256']==B.ref(unit_folder/'manifest.json')['sha256']
@@ -88,9 +100,15 @@ def classify():
                 assert unit['source']==finished['source']
             else:
                 assert unit['source']!=finished['source']
-                prior_static=Path(finished['firstStaticNonzero']['path'])
-                assert B.ref(prior_static)==finished['firstStaticNonzero']
-                assert B.load(prior_static)['stageExits']['spotbugs']==1
+                typed_failure=finished.get('firstStaticNonzero')
+                static_failure=typed_failure or finished['firstStaticFailure']
+                prior_static=Path(static_failure['path'])
+                assert B.ref(prior_static)==static_failure
+                static_result=B.load(prior_static)
+                if typed_failure:
+                    assert static_result['stageExits']['spotbugs']==1
+                else:
+                    assert static_result['stageExits']['pmd']==4 and static_result['reports']['pmd']['findings']==8
             terminal=unit['stages']['execinfo']
             assert terminal==B.load(unit_folder/'execinfo-exit.json') and terminal['actualExit']==0
             decoded=Path(terminal['log']['path'])
@@ -107,7 +125,7 @@ def classify():
             assert any(n=='dev/codex/schubert/characterization/ArtifactComparator' and int(hit)>0 for _,hit,_,n in rows)
             assert not any(n.startswith(('dev/codex/schubert/nk/','org/postgresql/','com/microsoft/playwright/')) for _,_,_,n in rows)
             verified.append(dict(row,actualExit=0,originalUnitExit=0,ordinaryProbeDataOnly=True,
-                                 decodedOrigin=terminal['log'],qualifiedOriginal=B.ref(POST),
+                                 decodedOrigin=terminal['log'],qualifiedOriginal=B.ref(post),
                                  session=unit['session'],decodedRows=len(rows),toolExecutionRepeated=False,
                                  priorStaticFailureRemains=ticket!='unit'))
         return verified

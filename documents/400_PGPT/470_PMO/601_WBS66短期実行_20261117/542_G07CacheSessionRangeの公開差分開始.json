@@ -1,0 +1,72 @@
+{
+  "eventId": "PGPT-20261008-6065",
+  "groupId": "PGPT-WBS66-G07-CACHE-SESSION-RANGE-PUBLIC-DELTA-20261119",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-18T17:23:52.694000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 44,
+      "remainingPercent": 56,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-G07-CACHE-SESSION-RANGE-PUBLIC-DELTA-20261119",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-G07-CACHE-SESSION-RANGE-PUBLIC-DELTA-20261119",
+    "workAttributionKind": "REQUALIFICATION",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "G07",
+      "WBS-F03/2-3"
+    ],
+    "source": "ecc875c54e6262e2af8ebb3af643798300112bc7",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "run": "PG39974-g07-cache-session-range-public-delta-v1",
+    "fromCommit": "47fd400bba7137a0637e43445da72ff769d1d042",
+    "volatileStaging": "/dev/shm/schubert-nk-pg39974-1000",
+    "workScope": "Scan only the exact new public Git interval covering the offline approved cache, session and invalid-range comparison phases. Authenticate the three probe artifacts on their original exec/session/source. Do not rerun application or tools and retain first applicable static records.",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.3,
+      "base": 1,
+      "high": 2.85
+    },
+    "groupCapPp": 5,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39932-g07-four-brand-public-delta-v1/scan/manifest.json",
+        "sha256": "71964827e0fbc321af1d6a4029bf3189b4b5eedffd60416a627bc7296ba5ab30"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39954-p020-cache-and-session-independent-v1/manifest.json",
+        "sha256": "c9b8c811bccc4dc68d3b8cb697b216dbe66955d7cbfb344ed715e85fd01bfe79"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39964-p020-invalid-range165-v1/manifest.json",
+        "sha256": "6c4a5116cb34460e378d93574b3041d44a398020bcceea64c13c5a835078a725"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39965-p020-invalid-range165-v2/manifest.json",
+        "sha256": "dc56fdcd8308ad3cb5aab06eba5a24d8b2b59d84c4269681d536f3e5f434de8e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39970-p020-invalid-range-independent-v1/manifest.json",
+        "sha256": "6f55d07f90b0fda668c7dc607258cf4c5223eee68ab48c9b33fa24dd66df7a12"
+      }
+    ]
+  }
+}
