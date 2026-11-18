@@ -38,6 +38,17 @@ class ArtifactComparatorTest {
   private static final String FIXTURE_CHR_O01 = "CHR-O01";
   private static final String FIXTURE_CHR_O01_JSON = "CHR-O01.json";
   private static final String FIXTURE_DIF_011 = "DIF-011";
+  private static final String FIXTURE_DIF_012 = "DIF-012";
+  private static final String FIXTURE_CHR_M04 = "CHR-M04";
+  private static final String FIXTURE_CHR_M07 = "CHR-M07";
+  private static final String FIXTURE_INVALID_RANGE = "invalidRange";
+  private static final String FIXTURE_INVALID_RANGE_STATUS = "/invalidRange/status";
+  private static final String AUDIO_STATUS_DIFFERENCE = "CHR-M07:/invalidRange/status";
+  private static final String FIXTURE_INVALID_RANGE_HEADER = "/invalidRange/contentRange";
+  private static final String FIXTURE_CONTENT_RANGE = "contentRange";
+  private static final String FIXTURE_RANGE_SELECTOR = "content-range";
+  private static final String FIXTURE_RANGE_FIELD = "invalid.range";
+  private static final String FIXTURE_HEADER = "header";
   private static final String FIXTURE_CACHE_CONTROL = "cacheControl";
   private static final String FIXTURE_CACHE_POINTER = "/cacheControl";
   private static final String FIXTURE_CACHE_BEFORE =
@@ -215,15 +226,6 @@ class ArtifactComparatorTest {
               "limited",
               "WARN date MQ SYSTEM BATCH"),
           new Oracle(
-              "DIF-012",
-              "CHR-M04",
-              "invalid.range",
-              FIXTURE_DIFFERENCE,
-              "header",
-              "content-range",
-              "baseline capture",
-              "416 with total Content-Range"),
-          new Oracle(
               "DIF-013",
               "CHR-S02",
               "game.change",
@@ -272,8 +274,8 @@ class ArtifactComparatorTest {
     assertEquals(FIXTURE_PASS, report.path(FIXTURE_STATUS).asText());
     assertEquals(24, report.path("expectedCaseCount").asInt());
     assertEquals(24, report.path("comparedCaseCount").asInt());
-    assertEquals(21, report.path("rawDifferenceCount").asInt());
-    assertEquals(22, report.path("observationCount").asInt());
+    assertEquals(24, report.path("rawDifferenceCount").asInt());
+    assertEquals(25, report.path("observationCount").asInt());
     assertEquals(16, report.path("usedDifferences").size());
     assertTrue(report.path("unusedDifferences").isEmpty());
     assertTrue(report.path("unregisteredDifferences").isEmpty());
@@ -287,8 +289,8 @@ class ArtifactComparatorTest {
     assertEquals(FIXTURE_PASS, direct.status());
     assertEquals(24, direct.expectedCaseCount());
     assertEquals(24, direct.comparedCaseCount());
-    assertEquals(21, direct.rawDifferenceCount());
-    assertEquals(22, direct.observationCount());
+    assertEquals(24, direct.rawDifferenceCount());
+    assertEquals(25, direct.observationCount());
     assertEquals(16, direct.usedDifferences().size());
     assertTrue(direct.unusedDifferences().isEmpty());
     assertTrue(direct.unregisteredDifferences().isEmpty());
@@ -321,7 +323,7 @@ class ArtifactComparatorTest {
 
     assertFalse(result.passed());
     assertEquals(List.of("DIF_DUPLICATE:DIF-001"), result.failures());
-    assertEquals(22, result.observationCount());
+    assertEquals(25, result.observationCount());
     assertEquals(16, result.usedDifferences().size());
   }
 
@@ -467,7 +469,7 @@ class ArtifactComparatorTest {
     assertContains(result.failures(), "OBSERVATION_VERSION");
     assertContains(result.failures(), "OBSERVATIONS_NOT_ARRAY");
     assertEquals(16, result.unusedDifferences().size());
-    assertEquals(21, result.unregisteredDifferences().size());
+    assertEquals(24, result.unregisteredDifferences().size());
   }
 
   @Test
@@ -1063,6 +1065,63 @@ class ArtifactComparatorTest {
         List.of("CHR-A02:/sessionRedirectsOldestToNewest/0"), result.unregisteredDifferences());
   }
 
+  @Test
+  void requiresTheSecondMediaCaseToReportItsOwnRangeStatus() throws Exception {
+    Fixture fixture = fixture("missing-audio-range-status-observation");
+    removeObservation(fixture, FIXTURE_CHR_M07, FIXTURE_INVALID_RANGE_STATUS);
+
+    var result = compare(fixture);
+    assertFalse(result.passed());
+    assertTrue(result.usedDifferences().contains(FIXTURE_DIF_012));
+    assertContains(result.failures(), "FIXED_DIF_REQUIRED:CHR-M07:/invalidRange/status");
+    assertEquals(List.of(AUDIO_STATUS_DIFFERENCE), result.unregisteredDifferences());
+  }
+
+  @Test
+  void rejectsAContentRangeWithTheWrongVideoSize() throws Exception {
+    Fixture fixture = fixture("wrong-video-total-in-range");
+    mutate(
+        fixture.nk().resolve(FIXTURE_CHR_M04 + ".json"),
+        root -> object(root, FIXTURE_INVALID_RANGE).put(FIXTURE_CONTENT_RANGE, "bytes */84084293"));
+
+    var result = compare(fixture);
+    assertFalse(result.passed());
+    assertContains(result.failures(), FIXTURE_FIXED_NK);
+    assertEquals(List.of("CHR-M04:/invalidRange/contentRange"), result.unregisteredDifferences());
+  }
+
+  @Test
+  void rejectsTheOtherApprovedHeaderSelectorAtTheStatusPointer() throws Exception {
+    Fixture fixture = fixture("wrong-selector-for-range-status");
+    mutate(
+        fixture.observations(),
+        root -> {
+          var claims = (ArrayNode) root.path(FIXTURE_OBSERVATIONS);
+          ((ObjectNode)
+                  claims.get(
+                      findObservation(claims, FIXTURE_CHR_M04, FIXTURE_INVALID_RANGE_STATUS)))
+              .put("selector", FIXTURE_RANGE_SELECTOR);
+        });
+
+    var result = compare(fixture);
+    assertFalse(result.passed());
+    assertContains(result.failures(), "OBSERVATION_RANGE_SELECTOR");
+    assertEquals(List.of("CHR-M04:/invalidRange/status"), result.unregisteredDifferences());
+  }
+
+  @Test
+  void rejectsAnInvalidRangeStatusOfAnotherHttpError() throws Exception {
+    Fixture fixture = fixture("wrong-audio-range-http-status");
+    mutate(
+        fixture.nk().resolve(FIXTURE_CHR_M07 + ".json"),
+        root -> object(root, FIXTURE_INVALID_RANGE).put(FIXTURE_STATUS, 404));
+
+    var result = compare(fixture);
+    assertFalse(result.passed());
+    assertContains(result.failures(), FIXTURE_FIXED_NK);
+    assertEquals(List.of(AUDIO_STATUS_DIFFERENCE), result.unregisteredDifferences());
+  }
+
   private static ArtifactComparator.ComparisonResult compare(Fixture fixture) throws IOException {
     return ArtifactComparator.compare(
         fixture.project(), fixture.current(), fixture.nk(), fixture.observations());
@@ -1182,6 +1241,20 @@ class ArtifactComparatorTest {
         currentArtifacts.get(FIXTURE_CHR_O01), nkArtifacts.get(FIXTURE_CHR_O01), observationItems);
     addSessionObservations(
         currentArtifacts.get(FIXTURE_CHR_A02), nkArtifacts.get(FIXTURE_CHR_A02), observationItems);
+    addRangeObservations(
+        observationItems,
+        FIXTURE_CHR_M04,
+        currentArtifacts.get(FIXTURE_CHR_M04),
+        nkArtifacts.get(FIXTURE_CHR_M04),
+        "bytes 999999999999-84084291/84084292",
+        "bytes */84084292");
+    addRangeObservations(
+        observationItems,
+        FIXTURE_CHR_M07,
+        currentArtifacts.get(FIXTURE_CHR_M07),
+        nkArtifacts.get(FIXTURE_CHR_M07),
+        "bytes 999999999999-3388626/3388627",
+        "bytes */3388627");
     currentArtifacts.get(FIXTURE_CHR_A01).put(FIXTURE_LOGIN_TITLE, FIXTURE_CURRENT_LOGIN_TITLE);
     nkArtifacts.get(FIXTURE_CHR_A01).put(FIXTURE_LOGIN_TITLE, FIXTURE_NK_LOGIN_TITLE);
     observationItems.add(
@@ -1246,6 +1319,46 @@ class ArtifactComparatorTest {
             FIXTURE_REDIRECT_POINTER,
             TextNode.valueOf("/"),
             TextNode.valueOf(FIXTURE_SESSION_EXPIRED)));
+  }
+
+  private static void addRangeObservations(
+      ArrayNode observations,
+      String caseId,
+      ObjectNode current,
+      ObjectNode nk,
+      String currentContentRange,
+      String nkContentRange) {
+    current
+        .putObject(FIXTURE_INVALID_RANGE)
+        .put(FIXTURE_STATUS, 500)
+        .put(FIXTURE_CONTENT_RANGE, currentContentRange);
+    nk.putObject(FIXTURE_INVALID_RANGE)
+        .put(FIXTURE_STATUS, 416)
+        .put(FIXTURE_CONTENT_RANGE, nkContentRange);
+    var status =
+        observation(
+            FIXTURE_DIF_012,
+            caseId,
+            FIXTURE_RANGE_FIELD,
+            FIXTURE_DIFFERENCE,
+            FIXTURE_HEADER,
+            FIXTURE_STATUS,
+            FIXTURE_INVALID_RANGE_STATUS,
+            "",
+            "");
+    status.put("expectedCurrent", 500).put(FIXTURE_EXPECTED_NK, 416);
+    observations.add(status);
+    observations.add(
+        observation(
+            FIXTURE_DIF_012,
+            caseId,
+            FIXTURE_RANGE_FIELD,
+            FIXTURE_DIFFERENCE,
+            FIXTURE_HEADER,
+            FIXTURE_RANGE_SELECTOR,
+            FIXTURE_INVALID_RANGE_HEADER,
+            currentContentRange,
+            nkContentRange));
   }
 
   private static ObjectNode sessionObservation(String pointer, JsonNode current, JsonNode nk) {

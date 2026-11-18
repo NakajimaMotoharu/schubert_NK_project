@@ -30,6 +30,8 @@ public final class ArtifactComparator {
   private static final String LOGIN_CASE = "CHR-A01";
   private static final String BRAND_DIFFERENCE = "DIF-001";
   private static final String CACHE_DIFFERENCE = "DIF-011";
+  private static final String RANGE_DIFFERENCE = "DIF-012";
+  private static final String RANGE_STATUS_POINTER = "/invalidRange/status";
   private static final String SESSION_DIFFERENCE = "DIF-016";
   private static final String SESSION_CASE = "CHR-A02";
   private static final String LOGIN_TITLE = "CHR-A01:/title";
@@ -37,6 +39,8 @@ public final class ArtifactComparator {
   private static final String NK_BRAND = "schubert NK";
   private static final String CONFIGURED_SESSIONS = "configuredMaximumSessions";
   private static final IntNode MAX_ACTIVE_SESSIONS = IntNode.valueOf(2);
+  private static final List<JsonNode> INVALID_RANGE_STATUS =
+      List.of(IntNode.valueOf(500), IntNode.valueOf(416));
   // UI264 and SS355 §8: treat only these exact case fields as the approved change.
   private static final Map<String, Map<String, List<JsonNode>>> FIXED_EXPECTATIONS =
       Map.of(
@@ -54,6 +58,16 @@ public final class ArtifactComparator {
           Map.of(
               "CHR-O01:/cacheControl",
               textPair("no-cache, no-store, max-age=0, must-revalidate", "no-store")),
+          RANGE_DIFFERENCE,
+          Map.of(
+              "CHR-M04:/invalidRange/status",
+              INVALID_RANGE_STATUS,
+              "CHR-M04:/invalidRange/contentRange",
+              textPair("bytes 999999999999-84084291/84084292", "bytes */84084292"),
+              "CHR-M07:/invalidRange/status",
+              INVALID_RANGE_STATUS,
+              "CHR-M07:/invalidRange/contentRange",
+              textPair("bytes 999999999999-3388626/3388627", "bytes */3388627")),
           SESSION_DIFFERENCE,
           Map.of(
               "CHR-A02:/observedActiveSessionCount",
@@ -239,6 +253,10 @@ public final class ArtifactComparator {
       if (fixed != null) {
         valid &=
             checkFixed(id, caseId, fixed.get(differenceKey), actualCurrent, actualNk, failures);
+      }
+      if (RANGE_DIFFERENCE.equals(id)) {
+        String requiredSelector = RANGE_STATUS_POINTER.equals(pointer) ? "status" : "content-range";
+        valid &= require(requiredSelector.equals(selector), "OBSERVATION_RANGE_SELECTOR", failures);
       }
       valid &=
           require(
