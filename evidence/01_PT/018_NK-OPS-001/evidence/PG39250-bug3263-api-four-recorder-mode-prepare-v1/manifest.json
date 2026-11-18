@@ -1,0 +1,269 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5119_bug3263_api_four_recorder_mode_profile.json",
+    "sha256": "d3aa756a98cb4aaad2e07d07792d2979988bdf5b0a62e6603c5512f608792623"
+  },
+  "inputHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/AsyncJobMetricRecorder.java": "bcbe814f37ba7a9cdba482369fa7ab70c5688713249ab780c35b6eeba3190cd6",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OutboxRowsMetricRecorder.java": "c0d709475517e31192afe8486be24f7a88232a87dd43d0db4e77ce34dd78a7d5",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OutboxAgeMetricRecorder.java": "dd027385f27bbe03bebbd5e7dd67a78626d8e27550eb1ed7428e876fc3ab9700",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OperationMismatchMetricRecorder.java": "74cef118229b3163b561702d8001e9cd0509bcc6ff6d6a56d2ccccf98de9de55",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/package-info.java": "8dd0a4c1cf6eca2f906c5d9aee5afc0f40c990ccfa35925ecc8b5edfb2194193",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/AsyncJobMetricRecorderTest.java": "1de07f9b3030d5d0b8df5daf28185f91877d903d84d14d3ff0e221fec4a9c230",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxRowsMetricRecorderTest.java": "7e11ce2a5aba37b2b475cc9776291bc6cf0401e846c63a2094b9d1ff2ba0e283",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxAgeMetricRecorderTest.java": "ca2037f3f0eef78cdbfa19e830acf43dd4a84ed3868d8e4e0b53cbb6604d1069",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OperationMismatchMetricRecorderTest.java": "9e20fa49840e77533f7d7158cbbe6d1ea1c8fb6a468d9ddfd73d9a94b95e3109",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-api/pom.xml": "2aff7af3d90feaee1f6c09f7ad300627ed911e8372504fcfd383391429a58114",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "dependencies": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar": "9ca47dfa831409b40253c8dc98c17b9d3e050ebbde4d1543c5521dca2b95ad56",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-commons/1.17.1/micrometer-commons-1.17.1.jar": "f2cee6ef046e72eec8128474c7f58c6217173b45ae373c30de0289f2a56ab0fd",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-observation/1.17.1/micrometer-observation-1.17.1.jar": "eb34f0cd84a879393ae5c21160fc06385ccdc74f36a4d1e31b199f59acfdaf71"
+  },
+  "toolHashes": {
+    "tools/quality/pgpt_closed_host_profile.py": "0645d453b22a5ab2a4432fb388b187c64cf360eafa1a6c929e1670d7c3f5791e",
+    "tools/quality/pgpt_closed_host_stages.py": "ce7b33beb41744d0042bc0fb94aee01930016254f5f08fbba03707f1b568016b",
+    "tools/quality/pgpt_closed_host_post.py": "1313c29788f650eee74e1bb622c960d54e5b87bda10418fbbe8810d51acbdc15",
+    "tools/quality/pgpt_guard_signature.py": "e0210a12cf229df0d438fc543c572fa6ec4fb7cb5d833b10f98c2c2159dd4590",
+    "tools/quality/pgpt_analysis_symbols.py": "0aba31d0a781e38449a237bd3934e2bfd0a9588bd0e1412bc8642691cdca982e",
+    "tools/quality/pgpt_artemis_sdk.py": "46edc9ecc28825b14af120522935ffb15c5810bd7b62fed4461b44a8956bd12a",
+    "tools/quality/pgpt_unstarted_process.py": "bdff8d1faaa00975b4264686e22386b7cdb3f7f9322c167447d3ddbc03689173",
+    "tools/quality/pgpt_public_unit_xml.py": "08270c1a6add3f8adf75f46e9ce88c557084d3ac3e6c0ad612360ceefaf50619",
+    "tools/quality/pgpt_protocol_public_oracle.py": "e559e9bb071a9ed24b5846ad3f6aa1b5cb80f2afd218131f01a1f2b053e2e30b",
+    "tools/quality/pgpt_spotbugs_contract.py": "f05ecdb4599528ced8753e95c66db2ee361867b1918fda7e69ad39e43c44674b"
+  },
+  "physicalClassHashes": {
+    "dev/codex/schubert/nk/api/monitoring/OutboxAgeMetricRecorder.class": "b1fa45f1cbfa8b7601debed886de243d1d767cf787ea0f3be9ef260226e4ef2d",
+    "dev/codex/schubert/nk/api/monitoring/OutboxAgeMetricRecorder$Ages.class": "6a2fc10b63065bb36fa04236eccfef34c4ea06449f0cffb214fce03ae5ee467e",
+    "dev/codex/schubert/nk/api/monitoring/package-info.class": "2c267c3a7f4cb2eb0e04e2e459ad4658735b02d04c64967861f7f1ba8b39eaae",
+    "dev/codex/schubert/nk/api/monitoring/OutboxRowsMetricRecorder$Counts.class": "fc7dd9e1bcba005f001133e0651f84f5b41e34ba6fa9808389c0c529d32bfc87",
+    "dev/codex/schubert/nk/api/monitoring/OperationMismatchMetricRecorder$Operation.class": "c071274b8bb2da9b36bc310adbb379e5d454dc1567785ac4f0c523cb83da31fb",
+    "dev/codex/schubert/nk/api/monitoring/AsyncJobMetricRecorder.class": "1a70b58558e71a9cb67d1a80bd45a4afbbecd713a0e234e7eb97934fecf1b32f",
+    "dev/codex/schubert/nk/api/monitoring/AsyncJobMetricRecorder$State.class": "adf7c0fa477eadea1ad0c564e218f19bb28e9a7c719c2b1a88851f75ed031dc6",
+    "dev/codex/schubert/nk/api/monitoring/OutboxRowsMetricRecorder.class": "7840c3ad181234aebf3a5f2b3fef404a08087b253f9d3b160aaec3f8d34493e3",
+    "dev/codex/schubert/nk/api/monitoring/AsyncJobMetricRecorder$Snapshot.class": "6cda15a434650f9719d6702b35eb3f09c0f09dd6ed534e81b5a0b066242151d8",
+    "dev/codex/schubert/nk/api/monitoring/OutboxRowsMetricRecorder$Status.class": "aab37e0bc9e508a9fd6c4ef0cece55243b164e5a21a5f06c2322c725e0678d9f",
+    "dev/codex/schubert/nk/api/monitoring/OperationMismatchMetricRecorder.class": "7422ebef187752d3a7b0d2397eed4c9e0d990e0bc267ae945e55e0019880afaf"
+  },
+  "testClassHashes": {
+    "dev/codex/schubert/nk/api/monitoring/OutboxRowsMetricRecorderTest.class": "d54ceac97d623dcc9ba7b1f5a221e75752c5f6f855e810e94e5ad1135ca88dd1",
+    "dev/codex/schubert/nk/api/monitoring/OutboxAgeMetricRecorderTest.class": "5fc4e96c515e7fbf250f7edaffef7a52a6859e5d8bec21e1599844ab768f5d00",
+    "dev/codex/schubert/nk/api/monitoring/OperationMismatchMetricRecorderTest.class": "11ae7d66bc52a6614df340c1544d687acddfb3f2c61e9a6ffbcfd1717feab7a0",
+    "dev/codex/schubert/nk/api/monitoring/AsyncJobMetricRecorderTest$UnformattableFailure.class": "c08b4a1c8c3b6dd6dc47988c22a91bb45ea5e710a83776c7ee92984c5498bb00",
+    "dev/codex/schubert/nk/api/monitoring/OutboxAgeMetricRecorderTest$Registry.class": "12f7a035fbd69e1a6395a859fef5528c9f7d926cdf4563dc67610ab068f0ca5d",
+    "dev/codex/schubert/nk/api/monitoring/OperationMismatchMetricRecorderTest$Registry$1.class": "eaedf78ee49ffb900438025163695c4e0e20144c13520cb54533310aed22e047",
+    "dev/codex/schubert/nk/api/monitoring/OperationMismatchMetricRecorderTest$UnformattableFailure.class": "398d1e8dd3783145b7fc06bee59ecbdbbf64df55afe02b96a8d54fb8e5afd14f",
+    "dev/codex/schubert/nk/api/monitoring/AsyncJobMetricRecorderTest$Registry.class": "0c2ae16cc7c0093f1da9240ece0f1db9ca888f61292fd73e3f66e1993d2bff45",
+    "dev/codex/schubert/nk/api/monitoring/AsyncJobMetricRecorderTest.class": "1228d927299342e73271c0204714327246956c0cdd6c505e4e0ee282493ea5da",
+    "dev/codex/schubert/nk/api/monitoring/OperationMismatchMetricRecorderTest$Registry.class": "50c4747c9bea6ccaa1e8a5e82b4897d57a7d3b0df14f321d6b28465f33c6c4ca",
+    "dev/codex/schubert/nk/api/monitoring/OutboxRowsMetricRecorderTest$Registry.class": "f9d4b81286b80941c0fc3d64bafe09197497e571a1a8ae6c86f9a874efa31132"
+  },
+  "expectedCases": [
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.AsyncJobMetricRecorderTest",
+      "name": "asyncGauge001ActualDebugHasFiveCanonicalUnknownGaugesAndBorrowedOwner()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.AsyncJobMetricRecorderTest",
+      "name": "asyncGauge002LiteralCountsRemainImmutableAndUnknownNamesCannotBecomeLabels()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.AsyncJobMetricRecorderTest",
+      "name": "asyncGauge003TrueZeroAndMissingAreDistinctAndKnownValuesRecover()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.AsyncJobMetricRecorderTest",
+      "name": "asyncGauge004StandardDoesNotRegisterOrRetainAndStillRejectsInvalidBoundaries()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.AsyncJobMetricRecorderTest",
+      "name": "asyncGauge005NullMissingAndNegativeCountsCannotChangeExistingSnapshot()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.AsyncJobMetricRecorderTest",
+      "name": "asyncGauge006MaximumLongIsExactInSnapshotAndOverflowCannotWrap()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.AsyncJobMetricRecorderTest",
+      "name": "asyncGauge007ParallelSnapshotsRemainCompleteWithoutCrossOwnerOrSeriesGrowth()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.AsyncJobMetricRecorderTest",
+      "name": "asyncGauge008PartialProviderFailureKeepsIdentityAndCallerOwnedRegistry()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.OutboxRowsMetricRecorderTest",
+      "name": "outboxMetric001DebugHasThreeCanonicalUnknownSeries()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.OutboxRowsMetricRecorderTest",
+      "name": "outboxMetric002LiteralCountValuesAndImmutableSnapshotMatchSdk()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.OutboxRowsMetricRecorderTest",
+      "name": "outboxMetric003TrueZeroAndMissingStayDistinctAndRecover()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.OutboxRowsMetricRecorderTest",
+      "name": "outboxMetric004StandardDoesNotRegisterOrRetainAndStillRejectsNull()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.OutboxRowsMetricRecorderTest",
+      "name": "outboxMetric005InvalidBoundariesCannotEchoOrWrapMaximumValues()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.OutboxRowsMetricRecorderTest",
+      "name": "outboxMetric006ParallelSnapshotsRemainCompleteAndImmutable()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.OutboxRowsMetricRecorderTest",
+      "name": "outboxMetric007PartialRegistrationFailureKeepsIdentityAndCallerOwnership()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.OutboxRowsMetricRecorderTest",
+      "name": "outboxMetric008OwnersAndRepeatedValuesCannotShareOrGrowSeries()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.OutboxAgeMetricRecorderTest",
+      "name": "outboxAge001CanonicalUnknownSeriesDoNotClaimObservedZero()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.OutboxAgeMetricRecorderTest",
+      "name": "outboxAge002ExactFractionalSecondsAndSuppliedSnapshotAreIndependent()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.OutboxAgeMetricRecorderTest",
+      "name": "outboxAge003ZeroMissingRecoveryAndMaximumDurationNeverOverflow()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.OutboxAgeMetricRecorderTest",
+      "name": "outboxAge004StandardRegistersAndRetainsNothingButChecksNull()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.OutboxAgeMetricRecorderTest",
+      "name": "outboxAge005NullNegativeAndUnknownModesCannotChangeExistingObservation()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.OutboxAgeMetricRecorderTest",
+      "name": "outboxAge006OneOwnerPublishesWholeImmutableSnapshotsConcurrently()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.OutboxAgeMetricRecorderTest",
+      "name": "outboxAge007PartialProviderFailureKeepsCallerResourcesAndFailureIdentity()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.OutboxAgeMetricRecorderTest",
+      "name": "outboxAge008SeparateOwnersAndGeneratedValueContractsAreExact()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.OperationMismatchMetricRecorderTest",
+      "name": "opMis001DebugHasExactlyEightCanonicalZeroCounters()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.OperationMismatchMetricRecorderTest",
+      "name": "opMis002EachObservationIncrementsOnlyItsCanonicalCounterOnce()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.OperationMismatchMetricRecorderTest",
+      "name": "opMis003StandardHasNoDetailedRegistrationOrIncrement()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.OperationMismatchMetricRecorderTest",
+      "name": "opMis004NullUnknownAndAliasedBoundariesCannotBecomeSeriesOrDiagnosticValues()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.OperationMismatchMetricRecorderTest",
+      "name": "opMis005PartialRegistrationFailureKeepsIdentityAndRegistryOwnership()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.OperationMismatchMetricRecorderTest",
+      "name": "opMis006IncrementFailuresAreNeverRetriedOrCompensated()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.OperationMismatchMetricRecorderTest",
+      "name": "opMis007ParallelObservationsHaveExactCountsWithoutCardinalityGrowth()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.OperationMismatchMetricRecorderTest",
+      "name": "opMis008IndependentOwnersAndRepeatedObservationsDoNotShareCounts()"
+    }
+  ],
+  "selectedClasses": [
+    "dev.codex.schubert.nk.api.monitoring.AsyncJobMetricRecorderTest",
+    "dev.codex.schubert.nk.api.monitoring.OperationMismatchMetricRecorderTest",
+    "dev.codex.schubert.nk.api.monitoring.OutboxAgeMetricRecorderTest",
+    "dev.codex.schubert.nk.api.monitoring.OutboxRowsMetricRecorderTest"
+  ],
+  "stages": {
+    "nullaway-compile": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-18T10:29:59.629717+00:00",
+      "endUTC": "2026-11-18T10:30:03.105871+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "--no-transfer-progress",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-Dmaven.test.skip=true",
+        "compile"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39250-bug3263-api-four-recorder-mode-prepare-v1",
+      "stdoutSha256": "0d4e972cc6e6f9cddd06333bbfbbe5b5ae73d96df8f45fbf9366af2c7ee73c48",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "test-compile": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-18T10:30:03.106362+00:00",
+      "endUTC": "2026-11-18T10:30:04.374197+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-proc:none",
+        "-implicit:none",
+        "-encoding",
+        "UTF-8",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39250-bug3263-api-four-recorder-mode-prepare-v1/target/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-commons/1.17.1/micrometer-commons-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-observation/1.17.1/micrometer-observation-1.17.1.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39250-bug3263-api-four-recorder-mode-prepare-v1/test-classes",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/AsyncJobMetricRecorderTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxRowsMetricRecorderTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxAgeMetricRecorderTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OperationMismatchMetricRecorderTest.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "preliminaryStyle": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39248-bug3263-api-four-recorder-mode-prestyle-v1/manifest.json",
+    "sha256": "46b7d7992ade21b3d5d3f61e4bc497fce884a6ee06d9472cf85fddc0a74ac461"
+  },
+  "rootCompilerSha256": "a062ec2cf62ddc0e140d41bed89be7814071f798feac2dd0bcdc297a2d2d00cb",
+  "subsetPomSha256": "55b83488f3fa653268ffef4a8f7e04e935e7fadefd690bf459c23082ca358526",
+  "productTestsExecuted": 0,
+  "MainCompiled": true,
+  "wholeProjectMainRebuilt": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_profile.py",
+    "sha256": "0645d453b22a5ab2a4432fb388b187c64cf360eafa1a6c929e1670d7c3f5791e"
+  },
+  "unstartedProcess": null,
+  "analysisOnlyContext": null,
+  "guardSignature": null,
+  "freshMainSourceCount": 5,
+  "reusedRuntimeSignatureClassCount": 0
+}

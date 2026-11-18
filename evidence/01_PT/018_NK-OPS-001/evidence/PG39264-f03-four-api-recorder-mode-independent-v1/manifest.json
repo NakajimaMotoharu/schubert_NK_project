@@ -1,0 +1,605 @@
+{
+  "actualExit": 0,
+  "source": "5825a18e141a9816df2a102926387ff108e046a8",
+  "productionCoreMain": "bcc9e0673287c51950ecab9b36350abfcd4b2c69",
+  "run": "PG39256-BUG3263-API-FOUR-RECORDER-MODE-V1",
+  "tests": 32,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "firstProductRunSuccess": true,
+  "firstIndependentPostSuccess": true,
+  "newTestDefinitions": 0,
+  "addedIndependentInvalidInputs": 8,
+  "productionMainDiff": 0,
+  "testBodies": {
+    "AsyncJobMetricRecorderTest": {
+      "bodyOutsideModeFixtureExact": true,
+      "originalTests": 8,
+      "fixtureAnchor": "for (String invalid : List.of(\"\", \"debug\", \" DEBUG\", \"PT_CANARY_ONLY\", \"DEBTf\", \"STANDAQc\"))"
+    },
+    "OutboxRowsMetricRecorderTest": {
+      "bodyOutsideModeFixtureExact": true,
+      "originalTests": 8,
+      "fixtureAnchor": "for (String mode : List.of(\"debug\", \"\", \"unknown-mode\", \"DEBTf\", \"STANDAQc\"))"
+    },
+    "OutboxAgeMetricRecorderTest": {
+      "bodyOutsideModeFixtureExact": true,
+      "originalTests": 8,
+      "fixtureAnchor": "for (String mode : List.of(\"debug\", \"\", \"unknown-mode\", \"DEBTf\", \"STANDAQc\"))"
+    },
+    "OperationMismatchMetricRecorderTest": {
+      "bodyOutsideModeFixtureExact": true,
+      "originalTests": 8,
+      "fixtureAnchor": "for (String mode : List.of(\"debug\", \"\", \"unknown-mode\", \"DEBTf\", \"STANDAQc\"))"
+    }
+  },
+  "physicalClasses": 11,
+  "positiveMainCrc": 10,
+  "staticApplicable": 0,
+  "staticRawPmd": 26,
+  "standardScope": {
+    "INSTRUCTION": {
+      "covered": 813,
+      "missed": 0
+    },
+    "BRANCH": {
+      "covered": 74,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 157,
+      "missed": 0
+    },
+    "COMPLEXITY": {
+      "covered": 77,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 38,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 10,
+      "missed": 0
+    }
+  },
+  "unfilteredClassCounters": {
+    "dev/codex/schubert/nk/api/monitoring/AsyncJobMetricRecorder": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 157
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 20
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 26
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 19
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 8
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/monitoring/AsyncJobMetricRecorder$Snapshot": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 69
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 6
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 15
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 6
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 3
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/monitoring/AsyncJobMetricRecorder$State": {
+      "INSTRUCTION": {
+        "missed": 5,
+        "covered": 65
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 0
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 6
+      },
+      "COMPLEXITY": {
+        "missed": 1,
+        "covered": 4
+      },
+      "METHOD": {
+        "missed": 1,
+        "covered": 4
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/monitoring/OutboxRowsMetricRecorder": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 160
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 20
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 27
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 19
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 8
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/monitoring/OutboxRowsMetricRecorder$Counts": {
+      "INSTRUCTION": {
+        "missed": 10,
+        "covered": 57
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 10
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 9
+      },
+      "COMPLEXITY": {
+        "missed": 3,
+        "covered": 10
+      },
+      "METHOD": {
+        "missed": 3,
+        "covered": 5
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/monitoring/OutboxRowsMetricRecorder$Status": {
+      "INSTRUCTION": {
+        "missed": 5,
+        "covered": 45
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 0
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 4
+      },
+      "COMPLEXITY": {
+        "missed": 1,
+        "covered": 4
+      },
+      "METHOD": {
+        "missed": 1,
+        "covered": 4
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/monitoring/OutboxAgeMetricRecorder": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 138
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 16
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 25
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 17
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 8
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/monitoring/OutboxAgeMetricRecorder$Ages": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 76
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 10
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 12
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 13
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 8
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/monitoring/OperationMismatchMetricRecorder": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 135
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 20
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 26
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 15
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 4
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/monitoring/OperationMismatchMetricRecorder$Operation": {
+      "INSTRUCTION": {
+        "missed": 5,
+        "covered": 95
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 0
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 9
+      },
+      "COMPLEXITY": {
+        "missed": 1,
+        "covered": 4
+      },
+      "METHOD": {
+        "missed": 1,
+        "covered": 4
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/monitoring/package-info": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 0
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 0
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 0
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 0
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 0
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 0
+      }
+    }
+  },
+  "unfilteredConstructorCounters": {
+    "dev/codex/schubert/nk/api/monitoring/AsyncJobMetricRecorder": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 81
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 14
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 15
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 9
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 1
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 0
+      }
+    },
+    "dev/codex/schubert/nk/api/monitoring/OutboxRowsMetricRecorder": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 84
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 14
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 16
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 9
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 1
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 0
+      }
+    },
+    "dev/codex/schubert/nk/api/monitoring/OutboxAgeMetricRecorder": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 84
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 14
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 16
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 9
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 1
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 0
+      }
+    },
+    "dev/codex/schubert/nk/api/monitoring/OperationMismatchMetricRecorder": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 83
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 14
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 16
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 9
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 1
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 0
+      }
+    }
+  },
+  "unfilteredDeficits": [
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/AsyncJobMetricRecorder$State",
+      "method": "valueOf",
+      "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/api/monitoring/AsyncJobMetricRecorder$State;",
+      "firstLine": 16,
+      "counts": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/OutboxRowsMetricRecorder$Counts",
+      "method": "toString",
+      "descriptor": "()Ljava/lang/String;",
+      "firstLine": 19,
+      "counts": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/OutboxRowsMetricRecorder$Counts",
+      "method": "hashCode",
+      "descriptor": "()I",
+      "firstLine": 19,
+      "counts": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/OutboxRowsMetricRecorder$Counts",
+      "method": "equals",
+      "descriptor": "(Ljava/lang/Object;)Z",
+      "firstLine": 19,
+      "counts": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/OutboxRowsMetricRecorder$Status",
+      "method": "valueOf",
+      "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/api/monitoring/OutboxRowsMetricRecorder$Status;",
+      "firstLine": 13,
+      "counts": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/OperationMismatchMetricRecorder$Operation",
+      "method": "valueOf",
+      "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/api/monitoring/OperationMismatchMetricRecorder$Operation;",
+      "firstLine": 11,
+      "counts": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    }
+  ],
+  "oldExecUnion": 0,
+  "noManualExclusions": true,
+  "whole451Accepted": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "terminalAtUTC": "2026-11-18T10:32:18.223381+00:00",
+  "actualBackendNativeFsRootOrHeldClassActions": 0,
+  "proofs": {
+    "prestyle": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39248-bug3263-api-four-recorder-mode-prestyle-v1/manifest.json",
+      "sha256": "46b7d7992ade21b3d5d3f61e4bc497fce884a6ee06d9472cf85fddc0a74ac461"
+    },
+    "prepare": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39250-bug3263-api-four-recorder-mode-prepare-v1/manifest.json",
+      "sha256": "63396f0cecd185e8f40349ab8cee24940fe91b8feeff944f0470fcacf77d4354"
+    },
+    "static": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39252-bug3263-api-four-recorder-mode-static-v1/manifest.json",
+      "sha256": "805e76644ecfc477036f1d6880b2aba01d13423b2aa19c6a000634042debfe61"
+    },
+    "preflight": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39254-bug3263-api-four-recorder-mode-preflight-v1/manifest.json",
+      "sha256": "7ec54514f110d2ac5a3762c1f4a5a5a46944691010f6757ad1c28fee54cc05ab"
+    },
+    "unit": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39256-bug3263-api-four-recorder-mode-unit-v1/manifest.json",
+      "sha256": "147106cd0e953d5eaf6589c1e01d685caee79a9ac817a47196ec9c3a5b64751e"
+    },
+    "post": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39260-bug3263-api-four-recorder-mode-post-v1/manifest.json",
+      "sha256": "336a2b8100baf6137035e7025fd5a95471f489a9fe09971748c5b28622a27955"
+    }
+  },
+  "raw": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39264-f03-four-api-recorder-mode-independent-v1/unfiltered.tsv",
+    "sha256": "e5c7d338fa94e442dc21c8f6340b48180c0990990a394bf8534a3516f2190014"
+  },
+  "rawCommand": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39264-f03-four-api-recorder-mode-independent-v1/raw-command.json",
+    "sha256": "b35e84e90b34cbc29c2b7d192a5b3da0c9622a78ab76fdcd8e0c83520f9febed"
+  },
+  "archive": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39264-f03-four-api-recorder-mode-independent-v1/retention.json",
+    "sha256": "86aad4844e479d1c3d4bb01504b33a351872d0fd151aa552a3fa40929eb6ab77"
+  }
+}
