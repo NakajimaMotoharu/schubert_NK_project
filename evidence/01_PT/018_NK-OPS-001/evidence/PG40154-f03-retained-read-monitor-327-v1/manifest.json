@@ -1,0 +1,30 @@
+{
+  "actualExit": 0,
+  "source": "c971c31dec492b5afa0665baa1776c2a15973494",
+  "sourceCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "findingId": 327,
+  "rule": "AvoidSynchronizedStatement",
+  "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+  "method": "BackupUnitStartClient.Attempt.requireRetained",
+  "line": 543,
+  "sourceSha256": "5701431aeaea563ada90e518817d0e7d339a63b48625e975c99bb2fbaada1934",
+  "attemptClassSha256": "925a86d8f1de0e450e58db085bfe00b16411e796135295149ab006743eb9336a",
+  "synchronizedSpanSha256": "ed0c640aa4fc5c2e7e9fa270ab51396184e7bdf1b086573bf6280997e88765b0",
+  "staticCallerLines": [
+    472,
+    473
+  ],
+  "decision": "APPLICABLE_OPEN",
+  "basis": "Read-only API/Web proof can run the owner callback and retained-resource verification under the same monitor.",
+  "nextEvidence": "Authorized independent owner-proof success/failure and concurrent lifecycle tests, demonstrating retained observations without a readiness or retirement receipt.",
+  "previousUnclassified": 32,
+  "unclassifiedAfter": 31,
+  "applicableOpenInOriginal45": 14,
+  "dynamicTests": 0,
+  "runtimeReachabilityMeasured": false,
+  "externalOperations": 0,
+  "newFormalAcceptance": 0,
+  "wholeF03Accepted": false,
+  "whole451Accepted": false,
+  "terminalAtUTC": "2026-11-18T22:29:03.288694+00:00"
+}
