@@ -1,0 +1,106 @@
+{
+  "eventId": "PGPT-20261008-6162",
+  "actualExit": 0,
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-HARUKA-AUTH-LOCAL-DIAGNOSIS-20261119",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-HARUKA-AUTH-LOCAL-DIAGNOSIS-20261119",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P020-01.01"
+    ],
+    "managementWorkIds": [
+      "WBS-P020-01.01/2-b"
+    ],
+    "source": "ef2b8ba9d03af2dd5cd35f7ec8779813806521c8",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "characterizationBase": "4d239658f12ead59fe8bfa6b8da4ae6aebecbcf5",
+    "run": "PG40166-haruka-local-auth-mode-compare-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.12,
+      "base": 0.38,
+      "high": 1.0
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40158-haruka-filestore-readonly-precheck-v1/manifest.json",
+        "sha256": "a0a99be708da083c6c18343145a79c79f6e520bc4cbbcda9a1f66d47ef0d81dd"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30664-haruka-readonly-gate-eligibility-after-legitimate-repair-v3/manifest.json",
+        "sha256": "4a35e98b1dc0ae78c8f3bc38571848f05fc7a3e7ca9fa3f65d8b834243f28a47"
+      },
+      {
+        "path": "../PMO/hourly-monitor/haruka-iori-validation-20261119.json",
+        "sha256": "e6785b287359e3bc20562e23a351c0b7bebe877ad43d8ca90d67c5b00765b8cb"
+      }
+    ],
+    "workScope": "Compare exact prior pinned success, most recent PMO success scope, and failed local OpenSSH options. Local ssh -G and ssh-add metadata only. Zero network auth, remote transfer, cleanup or GateCli execution.",
+    "canonicalDesignSource": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "approvedEnvironmentRecordSha256": "e6785b287359e3bc20562e23a351c0b7bebe877ad43d8ca90d67c5b00765b8cb",
+    "quotaAfter": {
+      "usedPercent": 49,
+      "remainingPercent": 51,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "15530cc858139ab91668504a02fa375818ee8bebb5bfe23654911a788186c8c3",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T22:41:34.098000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 49,
+          "remainingPercent": 51,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T22:40:45.196610+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 49,
+      "remainingPercent": 51,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "publicEvidence": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40166-haruka-local-auth-mode-compare-v1/manifest.json",
+        "sha256": "f5ff8cb3a95bb4f99e238f53a2d4b67866d3ee9c2752601c67f4997301814ec6"
+      }
+    ],
+    "authSourceMismatchObserved": true,
+    "exactExitCause": "UNDETERMINED_WITHOUT_ORIGINAL_AUTH_DIAGNOSTIC",
+    "harukaAttempts": 0,
+    "ioriUsed": false,
+    "formalIntake": 0,
+    "currentAccepted": 17,
+    "result": "Proved exact same host-key pin, historic prompt-capable success and failed noninteractive options. Current local configured identity files zero and agent identities zero. Current PMO success receipt does not state its method. No retry; stage only after the applicable approved execution-side auth is established."
+  }
+}
