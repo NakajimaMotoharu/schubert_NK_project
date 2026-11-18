@@ -43,6 +43,7 @@ final class ServiceDatabaseSourcePortTest {
   private static final int INVALID_URL_CASE = 3;
   private static final int EMPTY_PASSWORD_CASE = 4;
   private static final int OVERLONG_PASSWORD_CASE = 5;
+  private static final int FIRST_CONNECTOR_CALL = 1;
   private static final String URL = "jdbc:postgresql://127.0.0.1:5432/sample";
   private static final String API_ROLE = "schubert_app";
   private static final String WEB_ROLE = "schubert_web_session";
@@ -618,7 +619,7 @@ final class ServiceDatabaseSourcePortTest {
     try (var source =
         source(
             (url, properties) -> {
-              if (calls.incrementAndGet() == 1) {
+              if (calls.incrementAndGet() == FIRST_CONNECTOR_CALL) {
                 captured.set(properties);
                 throw firstFailure;
               }
