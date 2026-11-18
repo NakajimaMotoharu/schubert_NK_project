@@ -119,3 +119,13 @@ WBS-P018-04.01,WBS-P018-04.02,WBS-P018-04.03公開source契約/独立期待値/T
 
 
 停止snapshot原whole7有限workerと12値独立oracle・全4四100は[4268](4268_停止snapshot原七同source・独立通常PT結果.md)、Core3f65/Test1970/PG30122・30124。実停止/全451未。
+
+## PT-F02-ARCH-013〜022 Framework所有の型付き検査
+
+対象は ModuleDependencyAudit.forbiddenFramework。設計 SS311 §2・§3・SSC084／SSC088、SYS-011、WBS-F02-a。JDK 25.0.4／ArchUnit 1.4.2で合成6 JARのclass定義だけを読む。外部stubをcompile時のみに置き、製品owner・実サービスを含めない。fixture二世代の証跡を保存する。
+
+- 013〜016でBootstrapからSpring JMS、Spring HTTP、JDK HTTP、Jakarta JMSの直接型参照をそれぞれ拒否。
+- 017〜019でAPI／BatchのMVC注釈、APIからserver response型の参照をそれぞれ拒否。
+- 020〜022でBootstrap JDBC、API業務JMS、Batch Artemis管理を許可。
+
+走行は `python3 -B evidence/01_PT/018_NK-OPS-001/input/5283_f02_framework_fences.py before|after`（いずれか一回用ディレクトリ）、独立照合は `5284_f02_framework_fences_post.py`。手書きownerと型の期待対を終了receipt、監査stdout、class SHAと照合。禁止fixtureの監査exit1は想定。実行結果、sourceとhashはPG40118へ。動的製品PT・coverage対象外。

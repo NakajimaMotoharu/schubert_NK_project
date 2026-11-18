@@ -85,3 +85,7 @@ WBS-P018-04.01,WBS-P018-04.02,WBS-P018-04.03公開source契約/独立期待値/T
 
 
 原argv5のsource是正と通常PT未実行HOLDは[4270](4270_原argv五件source是正・通常PT保留結果.md)。BUG2870/2871未完、製品試験加算0。
+
+## PT-F02-ARCH-013〜022 Framework所有（PG40115〜118）
+
+開始sourceで期待一致4/10、修正工具 de82086a7d で10/10。正例3と禁止7を分離。PG40114の誤ownerを含むfixtureは準備失敗として保存。独立 `evidence/PG40118-f02-framework-fences-independent-v1/manifest.json`、SHA-256 `e089d163ffefb776d7fa14158b1285d939ac37774aaafe4be2e70e868f6c356a`。製品Core ecf8a00fbd37720b80f8e107d59727723c706a12 を更新していない。BUG3338／YKT2704工具範囲完了、全F02と全451は未受入。

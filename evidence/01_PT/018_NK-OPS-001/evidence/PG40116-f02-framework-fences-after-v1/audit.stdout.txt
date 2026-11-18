@@ -1,0 +1,20 @@
+ARCHUNIT	1.4.2	16	16
+MODULE	api	4
+MODULE	batch	3
+MODULE	bootstrap	6
+MODULE	protocol	1
+MODULE	storage	1
+MODULE	web	1
+RULE	CONTROLLER_BOUNDARY	0
+RULE	FRAMEWORK_FENCES	7
+FINDING	FRAMEWORK_FENCES	dev.codex.schubert.nk.api.BrowserResponse	org.springframework.http.server.ServerHttpResponse
+FINDING	FRAMEWORK_FENCES	dev.codex.schubert.nk.api.ControllerAnnotation	org.springframework.web.bind.annotation.RestController
+FINDING	FRAMEWORK_FENCES	dev.codex.schubert.nk.batch.ControllerAnnotation	org.springframework.web.bind.annotation.RestController
+FINDING	FRAMEWORK_FENCES	dev.codex.schubert.nk.bootstrap.JdkHttp	java.net.http.HttpClient
+FINDING	FRAMEWORK_FENCES	dev.codex.schubert.nk.bootstrap.JmsApi	jakarta.jms.Connection
+FINDING	FRAMEWORK_FENCES	dev.codex.schubert.nk.bootstrap.SpringHttp	org.springframework.web.client.RestClient
+FINDING	FRAMEWORK_FENCES	dev.codex.schubert.nk.bootstrap.SpringMessaging	org.springframework.jms.core.JmsTemplate
+RULE	INTERNAL_OWNER	0
+RULE	MODULE_EDGES	0
+RULE	REPOSITORY_DIRECTION	0
+INSPECTED	43	17

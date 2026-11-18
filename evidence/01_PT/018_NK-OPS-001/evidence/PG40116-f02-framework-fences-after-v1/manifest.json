@@ -1,0 +1,219 @@
+{
+  "actualExit": 0,
+  "childAuditExit": 1,
+  "phase": "after",
+  "source": "de82086a7dc5152a27126d06c0e0dafad6a714ce",
+  "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "start": {
+    "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/611_F02Framework境界開始.json",
+    "sha256": "57ac85ad03924162e1e5e2ecf3898293c0025446aff274e2fb18996dae96a8c6"
+  },
+  "toolSha256": "29d3f28ff3f2fa2e35a364f4a8fc6e8e36bbe5515cb3bc8fcd100bab138f02ed",
+  "canonical": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+  "designSha256": "422cc9febdcb165af7ceba1c58a53c39831d0458f9c8858095fcfe099b70680f",
+  "artifacts": {
+    "protocol": {
+      "dev.codex.schubert.nk.protocol.KnownValue": "e899ee9215ea456bf885d74c8b8d0ef9ca6f6f2a50923dfa98cc5f46473732e0"
+    },
+    "storage": {
+      "dev.codex.schubert.nk.storage.KnownValue": "e233934fb2a298d2ebe1a060b06ac14ff2ef742baf53901bc4aa7533ac29f149"
+    },
+    "bootstrap": {
+      "dev.codex.schubert.nk.bootstrap.JdbcAdmission": "82f45243f0f27006ec75cdc690dd494ae12e8033900c5d1816941ff710069d1b",
+      "dev.codex.schubert.nk.bootstrap.JdkHttp": "360af6cb9e3a942f7fbc185b47718cddc87ec60dcc51b288ec6e4c5ddc967b28",
+      "dev.codex.schubert.nk.bootstrap.JmsApi": "20b0d70752d5d1fba0dcd539c93880d4699b591e5b9fc094a21e2eb0adf75a1d",
+      "dev.codex.schubert.nk.bootstrap.KnownValue": "0dd4c5647fc6468eceda1f135611cb7253e7e314ee0f7990229402cfe8c7b3fd",
+      "dev.codex.schubert.nk.bootstrap.SpringHttp": "e565f9c885845e9ee10eda8bf12f64bd79c5fc85ddec13ca96f7f76f69c56882",
+      "dev.codex.schubert.nk.bootstrap.SpringMessaging": "2e6c11ab1209dcc4aa363e9f581759c6bf47316885984ebbfb774204b8d62765"
+    },
+    "api": {
+      "dev.codex.schubert.nk.api.BrowserResponse": "9165877c82b4525cb6ece7acd2e1ad70f0e503845b0367ddd928cc263eabfc89",
+      "dev.codex.schubert.nk.api.BusinessMessaging": "c841fe6e0f0afbfebe86732fc8a66314cd6a01ac3a5cd09d0f4650fcba9afdc6",
+      "dev.codex.schubert.nk.api.ControllerAnnotation": "8364ffa5905b3f05d1992c8cd43361f29bc6726fd5e6b88eec4203c62edda876",
+      "dev.codex.schubert.nk.api.KnownValue": "3f7ea1c432596aed1b415cfc9ea19d8363986e892c93f884b92c5d1db251ea81"
+    },
+    "web": {
+      "dev.codex.schubert.nk.web.KnownValue": "53b888ceb3f31e1038187e0a739d19e7712ff8cef7c5c54699fca96ab5d5cf3c"
+    },
+    "batch": {
+      "dev.codex.schubert.nk.batch.BrokerManagement": "c414510e01b195f6e77b5cb0b4f872ea749b79d13faf4c3fa2908d1d602a2f63",
+      "dev.codex.schubert.nk.batch.ControllerAnnotation": "4a8492d9ccb8db826b5fa46ff9bb4a3d89bde0db6c165a3207809774a85e434f",
+      "dev.codex.schubert.nk.batch.KnownValue": "25cf6c9506fa13f5cb8c2dfebee9fe291c5ab51b07e02950c1340c9013f46705"
+    }
+  },
+  "productClassesInitialized": 0,
+  "productTests": 0,
+  "externalOperations": 0,
+  "cases": [
+    {
+      "testId": "PT-F02-ARCH-013",
+      "origin": "dev.codex.schubert.nk.bootstrap.SpringMessaging",
+      "target": "org.springframework.jms.core.JmsTemplate",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "testId": "PT-F02-ARCH-014",
+      "origin": "dev.codex.schubert.nk.bootstrap.SpringHttp",
+      "target": "org.springframework.web.client.RestClient",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "testId": "PT-F02-ARCH-015",
+      "origin": "dev.codex.schubert.nk.bootstrap.JdkHttp",
+      "target": "java.net.http.HttpClient",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "testId": "PT-F02-ARCH-016",
+      "origin": "dev.codex.schubert.nk.bootstrap.JmsApi",
+      "target": "jakarta.jms.Connection",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "testId": "PT-F02-ARCH-017",
+      "origin": "dev.codex.schubert.nk.api.ControllerAnnotation",
+      "target": "org.springframework.web.bind.annotation.RestController",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "testId": "PT-F02-ARCH-018",
+      "origin": "dev.codex.schubert.nk.batch.ControllerAnnotation",
+      "target": "org.springframework.web.bind.annotation.RestController",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "testId": "PT-F02-ARCH-019",
+      "origin": "dev.codex.schubert.nk.api.BrowserResponse",
+      "target": "org.springframework.http.server.ServerHttpResponse",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "testId": "PT-F02-ARCH-020",
+      "origin": "dev.codex.schubert.nk.bootstrap.JdbcAdmission",
+      "target": "java.sql.Connection",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-ARCH-021",
+      "origin": "dev.codex.schubert.nk.api.BusinessMessaging",
+      "target": "org.springframework.jms.core.JmsTemplate",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-ARCH-022",
+      "origin": "dev.codex.schubert.nk.batch.BrokerManagement",
+      "target": "org.apache.activemq.artemis.api.core.management.ActiveMQServerControl",
+      "expected": false,
+      "observed": false
+    }
+  ],
+  "correct": 10,
+  "total": 10,
+  "receipts": {
+    "tool-compile": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40116-f02-framework-fences-after-v1/tool-compile.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40116-f02-framework-fences-after-v1/tool-compile.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "-d",
+        "/dev/shm/pgpt-f02-framework-aqeyafuj/audit",
+        "/dev/shm/pgpt-f02-framework-aqeyafuj/ModuleDependencyAudit.java"
+      ]
+    },
+    "fixture-compile": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40116-f02-framework-fences-after-v1/fixture-compile.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40116-f02-framework-fences-after-v1/fixture-compile.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-d",
+        "/dev/shm/pgpt-f02-framework-aqeyafuj/fixtures",
+        "/dev/shm/pgpt-f02-framework-aqeyafuj/src/dev/codex/schubert/nk/api/BrowserResponse.java",
+        "/dev/shm/pgpt-f02-framework-aqeyafuj/src/dev/codex/schubert/nk/api/BusinessMessaging.java",
+        "/dev/shm/pgpt-f02-framework-aqeyafuj/src/dev/codex/schubert/nk/api/ControllerAnnotation.java",
+        "/dev/shm/pgpt-f02-framework-aqeyafuj/src/dev/codex/schubert/nk/api/KnownValue.java",
+        "/dev/shm/pgpt-f02-framework-aqeyafuj/src/dev/codex/schubert/nk/batch/BrokerManagement.java",
+        "/dev/shm/pgpt-f02-framework-aqeyafuj/src/dev/codex/schubert/nk/batch/ControllerAnnotation.java",
+        "/dev/shm/pgpt-f02-framework-aqeyafuj/src/dev/codex/schubert/nk/batch/KnownValue.java",
+        "/dev/shm/pgpt-f02-framework-aqeyafuj/src/dev/codex/schubert/nk/bootstrap/JdbcAdmission.java",
+        "/dev/shm/pgpt-f02-framework-aqeyafuj/src/dev/codex/schubert/nk/bootstrap/JdkHttp.java",
+        "/dev/shm/pgpt-f02-framework-aqeyafuj/src/dev/codex/schubert/nk/bootstrap/JmsApi.java",
+        "/dev/shm/pgpt-f02-framework-aqeyafuj/src/dev/codex/schubert/nk/bootstrap/KnownValue.java",
+        "/dev/shm/pgpt-f02-framework-aqeyafuj/src/dev/codex/schubert/nk/bootstrap/SpringHttp.java",
+        "/dev/shm/pgpt-f02-framework-aqeyafuj/src/dev/codex/schubert/nk/bootstrap/SpringMessaging.java",
+        "/dev/shm/pgpt-f02-framework-aqeyafuj/src/dev/codex/schubert/nk/protocol/KnownValue.java",
+        "/dev/shm/pgpt-f02-framework-aqeyafuj/src/dev/codex/schubert/nk/storage/KnownValue.java",
+        "/dev/shm/pgpt-f02-framework-aqeyafuj/src/dev/codex/schubert/nk/web/KnownValue.java",
+        "/dev/shm/pgpt-f02-framework-aqeyafuj/src/jakarta/jms/Connection.java",
+        "/dev/shm/pgpt-f02-framework-aqeyafuj/src/org/apache/activemq/artemis/api/core/management/ActiveMQServerControl.java",
+        "/dev/shm/pgpt-f02-framework-aqeyafuj/src/org/springframework/http/server/ServerHttpResponse.java",
+        "/dev/shm/pgpt-f02-framework-aqeyafuj/src/org/springframework/jms/core/JmsTemplate.java",
+        "/dev/shm/pgpt-f02-framework-aqeyafuj/src/org/springframework/web/bind/annotation/RestController.java",
+        "/dev/shm/pgpt-f02-framework-aqeyafuj/src/org/springframework/web/client/RestClient.java"
+      ]
+    },
+    "audit": {
+      "actualExit": 1,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40116-f02-framework-fences-after-v1/audit.stdout.txt",
+        "sha256": "354170a9ace2b59f86ff4c548600c1dff083d8c2b4178fb51bdc9f63cdced408"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40116-f02-framework-fences-after-v1/audit.stderr.txt",
+        "sha256": "2c58b87a0350a39bb1c3b5f4891defeeb9a785e84aa11a466dc9ddb21253bf58"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/dev/shm/pgpt-f02-framework-aqeyafuj/audit:/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "ModuleDependencyAudit",
+        "protocol=/dev/shm/pgpt-f02-framework-aqeyafuj/protocol.jar",
+        "storage=/dev/shm/pgpt-f02-framework-aqeyafuj/storage.jar",
+        "bootstrap=/dev/shm/pgpt-f02-framework-aqeyafuj/bootstrap.jar",
+        "api=/dev/shm/pgpt-f02-framework-aqeyafuj/api.jar",
+        "web=/dev/shm/pgpt-f02-framework-aqeyafuj/web.jar",
+        "batch=/dev/shm/pgpt-f02-framework-aqeyafuj/batch.jar"
+      ]
+    }
+  },
+  "wholeF02Accepted": false,
+  "terminalAtUTC": "2026-11-18T20:07:51.185942+00:00",
+  "verifier": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/5283_f02_framework_fences.py",
+    "sha256": "b443f7a4c99b99c2c680ab898f0b0d36da3db7f1f2764bcd6f3fcb048d809b6f"
+  }
+}
