@@ -25,6 +25,8 @@ import java.util.stream.Stream;
  * <p>Program: NK-CHR-001. Tests: PT-CHR-G01-* through PT-CHR-G06-*.
  */
 final class GateContractValidator {
+  static final String LEGACY_PATH_DIFFERENCE = "DIF-015";
+  static final String LEGACY_PATH_CONTRACT_SHAPE = "DIF-015_CONTRACT_SHAPE";
   private static final String HASH_SUFFIX = "Sha256";
   private static final String FIELD_CASE_ORDER = "caseOrder";
   private static final String FIELD_CURRENT_APPLICABLE_COUNT = "currentApplicableCount";
@@ -387,11 +389,20 @@ final class GateContractValidator {
       require(!difference.path("nk").asText().isBlank(), "DIF_NK:" + id, failures);
     }
     require(strings(expectedIdsNode).equals(ids), "DIF_ID_SEQUENCE", failures);
-    JsonNode pathContract = findDifference(differences, "DIF-015");
+    JsonNode pathContract = findDifference(differences, LEGACY_PATH_DIFFERENCE);
     require(
         expectedCases.equals(strings(pathContract.path(FIELD_CASES))),
         "DIF-015_CASE_COVERAGE",
         failures);
+    require(isApprovedLegacyPathContract(pathContract), LEGACY_PATH_CONTRACT_SHAPE, failures);
+  }
+
+  /** UI264 §6/TST-005: the unchanged path contract never authorizes a difference. */
+  static boolean isApprovedLegacyPathContract(JsonNode rule) {
+    return "contract".equals(rule.path("mode").asText())
+        && "http.path".equals(rule.path("field").asText())
+        && "semantic".equals(rule.path("selectorType").asText())
+        && List.of("http.path").equals(strings(rule.path("selectors")));
   }
 
   private static JsonNode findDifference(JsonNode differences, String id) {

@@ -32,7 +32,8 @@ def main(unit_name, out_name, prior_same_main=None):
         (187,'PG40056-p020-error-disclosure187-v1'),(187,'PG40057-p020-error-disclosure187-v2'),
         (192,'PG40074-p020-o01-restart192-v1'),(192,'PG40075-p020-o01-restart192-v2'),
         (198,'PG40088-p020-s08-voice198-v1'),(198,'PG40089-p020-s08-voice198-v2'),
-        (204,'PG40104-p020-u01-menu204-v1'),(204,'PG40105-p020-u01-menu204-v2'),(204,'PG40107-p020-u01-menu204-v3')}
+        (204,'PG40104-p020-u01-menu204-v1'),(204,'PG40105-p020-u01-menu204-v2'),(204,'PG40107-p020-u01-menu204-v3'),
+        (206,'PG40124-p020-path-contract-green206-v1')}
     assert actual['stages']['unit']['actualExit']==0
     snapshot=Path(begin['snapshot'])
     classes=Path(actual['classesDir'])
@@ -41,7 +42,7 @@ def main(unit_name, out_name, prior_same_main=None):
     assert read(BASE/'manifest.json')['stageExits']['spotbugs']==0
     out.mkdir()
     src={name:begin['inputHashes'][name] for name in begin['sourceInputsUnchangedOutside']}
-    assert len(src)==(4 if 'l01-required-actions' in unit_name else 2)
+    assert len(src)==(4 if any(name in unit_name for name in ('l01-required-actions','path-contract-')) else 2)
     for name,digest in src.items():
         assert ref(snapshot/name)['sha256']==digest
     listing=out/'sources.txt'

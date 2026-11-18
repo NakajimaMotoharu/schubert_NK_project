@@ -224,6 +224,14 @@ public final class ArtifactComparator {
       require(rules.putIfAbsent(id, rule) == null, "DIF_DUPLICATE:" + id, failures);
     }
     require(rules.size() == 16, "DIF_RULE_COUNT", failures);
+    boolean approvedPathContract =
+        require(
+            GateContractValidator.isApprovedLegacyPathContract(
+                rules.getOrDefault(
+                    GateContractValidator.LEGACY_PATH_DIFFERENCE,
+                    JsonNodeFactory.instance.missingNode())),
+            GateContractValidator.LEGACY_PATH_CONTRACT_SHAPE,
+            failures);
     require(
         CorrelatedLogEvidenceValidator.versionOne(observations.path("version")),
         "OBSERVATION_VERSION",
@@ -255,7 +263,8 @@ public final class ArtifactComparator {
       String selector = observation.path("selector").asText();
       String pointer = observation.path("jsonPointer").asText();
       String observationKey = id + ":" + caseId + ":" + pointer;
-      boolean valid = true;
+      boolean valid =
+          approvedPathContract || !GateContractValidator.LEGACY_PATH_DIFFERENCE.equals(id);
       valid &=
           require(!VOICE_DIFFERENCE.equals(id), "S08_MULTIPLE_VOICE_SUPPLEMENT_ONLY", failures);
       valid &=
