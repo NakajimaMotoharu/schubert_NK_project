@@ -1,0 +1,66 @@
+{
+  "eventId": "PGPT-20261008-5867",
+  "groupId": "PGPT-WBS66-F03-CLEANUP-RAW-OWNERS-20261118",
+  "baseCore": "1d04874a68ea51db48a80604943a6203b9150ca4",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-18T05:26:09.418000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 29,
+      "remainingPercent": 71,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-CLEANUP-RAW-OWNERS-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-F03-CLEANUP-RAW-OWNERS-20261118",
+    "workAttributionKind": "REWORK",
+    "workScope": "F03/P017-07.02 limited remediation of BUG3237 observed raw 9 branches. Starting contract: original nullability is distinct between repositories; SS332 requires direct owner-private cleanup, fixed borrowed ownership and exact approved 9 statements. Reuse fixed enum identifier in SQL (no user-provided identifier). End: exact same-source ordinary 18 and tests if needed, unchanged ABI, same compile gates, raw no manual exclusions; record any separate remaining P017/F03 criteria. No operations against live file owners/database/client etc.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38710-f02-cleanup-jdbc-owner-independent-v1/manifest.json",
+        "sha256": "61feb8b3c256ddb9274d58255c2dfdb55f7e04ffd60e13494e982c024e7c7616"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38670-f03-schema-owner-raw-independent-v3/manifest.json",
+        "sha256": "7f55734dd7bc0adcaf0cb5506c2f543da117d9a75aeb1d4e58b0ab2ec56ec643"
+      },
+      {
+        "path": "evidence/01_PT/017_NK-BAT-001/705_Cleanup基底query_単体テスト仕様書.md",
+        "sha256": "c73a4622fff04e4d8271038c36255b0078fbbbdfc7e578e7e0764c79c0a11d88"
+      }
+    ],
+    "productionCoreMain": "1d04874a68ea51db48a80604943a6203b9150ca4",
+    "source": "963ed048492310a92550fee53468bbbdc392383b",
+    "wbsLeafIds": [
+      "WBS-F03",
+      "WBS-P017-07.02"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2",
+      "BUG-3237"
+    ],
+    "run": "PG38734-f03-cleanup-raw-owner-proof-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.4,
+      "base": 1.55,
+      "high": 4.2
+    },
+    "groupCapPp": 5.8,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "relatedBug": "BUG-3237",
+    "relatedYkt": "YKT-2683"
+  }
+}

@@ -1,0 +1,5 @@
+# BUG-3237／3238 Cleanup固定SQL保持の再試験仕様
+
+4598の所有解放、借用Connection、例外優先、独立CLNQUERY／CLNPORT18を適用する。PG38718の非定数SQL指摘を受け、各JDBC prepareに供給する原九つのリテラルと既switchの本文を完全に保持する。固定enum識別子の組み立て案は採用しなかった。原SQLとともにjavac生成defaultとSwitchMapの実測を保持する。
+
+型付きprivate closeで手書きの重複8分岐を解消できることと、旧分岐の本来の正常・異常（取得時の各null、close優先、行→文、借用owner）を18で維持することを同execで検証する。元の固定SQLは独立CLNQUERY001と既入力制約で照合。手書き分岐、コンパイラ生成分岐と情報を分け、未到達分のある場合はBUG3237とWBS判定を継続する。実JDBC・削除・VM・権限操作は発行しない。
