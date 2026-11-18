@@ -1,0 +1,291 @@
+{
+  "actualExit": 0,
+  "childArchUnitExit": 1,
+  "source": "b3bb657b14c1dce8502f3144db8802d3c9ad1858",
+  "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "toolInput": {
+    "path": "tools/quality/architecture/ModuleDependencyAudit.java",
+    "sha256": "108e8b3d8be2bacd0b6e0d9a158fa65212354126a34fd7181d80623fbdc6fbb1"
+  },
+  "receipts": {
+    "tool-compile": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40064-f02-controller-fences-archunit-v1/tool-compile.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40064-f02-controller-fences-archunit-v1/tool-compile.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "-d",
+        "/dev/shm/pgpt-controller-archunit-ewct8wsy/tool",
+        "/dev/shm/pgpt-controller-archunit-ewct8wsy/ModuleDependencyAudit.java"
+      ]
+    },
+    "fixture-compile": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40064-f02-controller-fences-archunit-v1/fixture-compile.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40064-f02-controller-fences-archunit-v1/fixture-compile.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-d",
+        "/dev/shm/pgpt-controller-archunit-ewct8wsy/fixtures",
+        "/dev/shm/pgpt-controller-archunit-ewct8wsy/source/dev/codex/schubert/nk/api/KnownValue.java",
+        "/dev/shm/pgpt-controller-archunit-ewct8wsy/source/dev/codex/schubert/nk/batch/KnownValue.java",
+        "/dev/shm/pgpt-controller-archunit-ewct8wsy/source/dev/codex/schubert/nk/bootstrap/KnownValue.java",
+        "/dev/shm/pgpt-controller-archunit-ewct8wsy/source/dev/codex/schubert/nk/protocol/KnownValue.java",
+        "/dev/shm/pgpt-controller-archunit-ewct8wsy/source/dev/codex/schubert/nk/storage/KnownValue.java",
+        "/dev/shm/pgpt-controller-archunit-ewct8wsy/source/dev/codex/schubert/nk/web/KnownValue.java",
+        "/dev/shm/pgpt-controller-archunit-ewct8wsy/source/dev/codex/schubert/nk/web/canary/AnnotatedEndpoint.java",
+        "/dev/shm/pgpt-controller-archunit-ewct8wsy/source/dev/codex/schubert/nk/web/canary/FacadeController.java",
+        "/dev/shm/pgpt-controller-archunit-ewct8wsy/source/dev/codex/schubert/nk/web/canary/FileChannelController.java",
+        "/dev/shm/pgpt-controller-archunit-ewct8wsy/source/dev/codex/schubert/nk/web/canary/HttpController.java",
+        "/dev/shm/pgpt-controller-archunit-ewct8wsy/source/dev/codex/schubert/nk/web/canary/JakartaController.java",
+        "/dev/shm/pgpt-controller-archunit-ewct8wsy/source/dev/codex/schubert/nk/web/canary/JavaxController.java",
+        "/dev/shm/pgpt-controller-archunit-ewct8wsy/source/dev/codex/schubert/nk/web/canary/JdbcController.java",
+        "/dev/shm/pgpt-controller-archunit-ewct8wsy/source/dev/codex/schubert/nk/web/canary/LegacyFileController.java",
+        "/dev/shm/pgpt-controller-archunit-ewct8wsy/source/dev/codex/schubert/nk/web/canary/NamedHandler.java",
+        "/dev/shm/pgpt-controller-archunit-ewct8wsy/source/dev/codex/schubert/nk/web/canary/NioFilesController.java",
+        "/dev/shm/pgpt-controller-archunit-ewct8wsy/source/dev/codex/schubert/nk/web/canary/SafeFacade.java",
+        "/dev/shm/pgpt-controller-archunit-ewct8wsy/source/dev/codex/schubert/nk/web/canary/SpringJmsController.java",
+        "/dev/shm/pgpt-controller-archunit-ewct8wsy/source/dev/codex/schubert/nk/web/canary/StorageController.java",
+        "/dev/shm/pgpt-controller-archunit-ewct8wsy/source/jakarta/jms/Message.java",
+        "/dev/shm/pgpt-controller-archunit-ewct8wsy/source/javax/jms/Message.java",
+        "/dev/shm/pgpt-controller-archunit-ewct8wsy/source/org/springframework/jms/core/JmsTemplate.java",
+        "/dev/shm/pgpt-controller-archunit-ewct8wsy/source/org/springframework/stereotype/Controller.java",
+        "/dev/shm/pgpt-controller-archunit-ewct8wsy/source/org/springframework/web/bind/annotation/RestController.java"
+      ]
+    },
+    "audit": {
+      "actualExit": 1,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40064-f02-controller-fences-archunit-v1/audit.stdout.txt",
+        "sha256": "455068cabf3abcaec1a6a5a66a25a299f13e4bc84e15c6d8c43ff71ca21c39e3"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40064-f02-controller-fences-archunit-v1/audit.stderr.txt",
+        "sha256": "2c58b87a0350a39bb1c3b5f4891defeeb9a785e84aa11a466dc9ddb21253bf58"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/dev/shm/pgpt-controller-archunit-ewct8wsy/tool:/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "ModuleDependencyAudit",
+        "protocol=/dev/shm/pgpt-controller-archunit-ewct8wsy/protocol.jar",
+        "storage=/dev/shm/pgpt-controller-archunit-ewct8wsy/storage.jar",
+        "bootstrap=/dev/shm/pgpt-controller-archunit-ewct8wsy/bootstrap.jar",
+        "api=/dev/shm/pgpt-controller-archunit-ewct8wsy/api.jar",
+        "web=/dev/shm/pgpt-controller-archunit-ewct8wsy/web.jar",
+        "batch=/dev/shm/pgpt-controller-archunit-ewct8wsy/batch.jar"
+      ]
+    }
+  },
+  "syntheticArtifacts": [
+    {
+      "module": "protocol",
+      "classes": [
+        "dev.codex.schubert.nk.protocol.KnownValue"
+      ],
+      "sha256": "9b906857093b6b118f01b096e0be918e08d450cad7a1bab753f222fd79a4a408"
+    },
+    {
+      "module": "storage",
+      "classes": [
+        "dev.codex.schubert.nk.storage.KnownValue"
+      ],
+      "sha256": "bbfc40b3a2d515b64d67d85d884c31ec207dc6bf758e4e98c9b09d6fb3327d7d"
+    },
+    {
+      "module": "bootstrap",
+      "classes": [
+        "dev.codex.schubert.nk.bootstrap.KnownValue"
+      ],
+      "sha256": "1232904843171328bd45d0f5e163fbfbdd4d4cde4884829076af1f197831e9ad"
+    },
+    {
+      "module": "api",
+      "classes": [
+        "dev.codex.schubert.nk.api.KnownValue"
+      ],
+      "sha256": "32409479710bd39282ccbe3c08acfadcf6986944ba2ed24ebd017a41748d7443"
+    },
+    {
+      "module": "web",
+      "classes": [
+        "dev.codex.schubert.nk.web.KnownValue",
+        "org.springframework.jms.core.JmsTemplate",
+        "jakarta.jms.Message",
+        "javax.jms.Message",
+        "org.springframework.web.bind.annotation.RestController",
+        "org.springframework.stereotype.Controller",
+        "dev.codex.schubert.nk.web.canary.SafeFacade",
+        "dev.codex.schubert.nk.web.canary.FacadeController",
+        "dev.codex.schubert.nk.web.canary.HttpController",
+        "dev.codex.schubert.nk.web.canary.JdbcController",
+        "dev.codex.schubert.nk.web.canary.StorageController",
+        "dev.codex.schubert.nk.web.canary.SpringJmsController",
+        "dev.codex.schubert.nk.web.canary.JakartaController",
+        "dev.codex.schubert.nk.web.canary.JavaxController",
+        "dev.codex.schubert.nk.web.canary.NioFilesController",
+        "dev.codex.schubert.nk.web.canary.FileChannelController",
+        "dev.codex.schubert.nk.web.canary.LegacyFileController",
+        "dev.codex.schubert.nk.web.canary.AnnotatedEndpoint",
+        "dev.codex.schubert.nk.web.canary.NamedHandler"
+      ],
+      "sha256": "6ced245dcd9f192ad3ab2bff255889c98621bbc253ba191a44a0ec9a08b9d2c2"
+    },
+    {
+      "module": "batch",
+      "classes": [
+        "dev.codex.schubert.nk.batch.KnownValue"
+      ],
+      "sha256": "8ae2350a0ac11f31bd1a9909b903a3c5ac935fa96c8c4e4a28601007c820d180"
+    }
+  ],
+  "tested": 12,
+  "correct": 4,
+  "incorrect": 8,
+  "cases": [
+    {
+      "testId": "PT-F02-ARCH-001",
+      "origin": "dev.codex.schubert.nk.web.canary.FacadeController",
+      "expected": [],
+      "actual": [],
+      "correct": true
+    },
+    {
+      "testId": "PT-F02-ARCH-002",
+      "origin": "dev.codex.schubert.nk.web.canary.HttpController",
+      "expected": [],
+      "actual": [],
+      "correct": true
+    },
+    {
+      "testId": "PT-F02-ARCH-003",
+      "origin": "dev.codex.schubert.nk.web.canary.JdbcController",
+      "expected": [
+        "java.sql.Connection"
+      ],
+      "actual": [
+        "java.sql.Connection"
+      ],
+      "correct": true
+    },
+    {
+      "testId": "PT-F02-ARCH-004",
+      "origin": "dev.codex.schubert.nk.web.canary.StorageController",
+      "expected": [
+        "dev.codex.schubert.nk.storage.KnownValue"
+      ],
+      "actual": [
+        "dev.codex.schubert.nk.storage.KnownValue"
+      ],
+      "correct": true
+    },
+    {
+      "testId": "PT-F02-ARCH-005",
+      "origin": "dev.codex.schubert.nk.web.canary.SpringJmsController",
+      "expected": [
+        "org.springframework.jms.core.JmsTemplate"
+      ],
+      "actual": [],
+      "correct": false
+    },
+    {
+      "testId": "PT-F02-ARCH-006",
+      "origin": "dev.codex.schubert.nk.web.canary.JakartaController",
+      "expected": [
+        "jakarta.jms.Message"
+      ],
+      "actual": [],
+      "correct": false
+    },
+    {
+      "testId": "PT-F02-ARCH-007",
+      "origin": "dev.codex.schubert.nk.web.canary.JavaxController",
+      "expected": [
+        "javax.jms.Message"
+      ],
+      "actual": [],
+      "correct": false
+    },
+    {
+      "testId": "PT-F02-ARCH-008",
+      "origin": "dev.codex.schubert.nk.web.canary.NioFilesController",
+      "expected": [
+        "java.nio.file.Files"
+      ],
+      "actual": [],
+      "correct": false
+    },
+    {
+      "testId": "PT-F02-ARCH-009",
+      "origin": "dev.codex.schubert.nk.web.canary.FileChannelController",
+      "expected": [
+        "java.nio.channels.FileChannel"
+      ],
+      "actual": [],
+      "correct": false
+    },
+    {
+      "testId": "PT-F02-ARCH-010",
+      "origin": "dev.codex.schubert.nk.web.canary.LegacyFileController",
+      "expected": [
+        "java.io.File"
+      ],
+      "actual": [],
+      "correct": false
+    },
+    {
+      "testId": "PT-F02-ARCH-011",
+      "origin": "dev.codex.schubert.nk.web.canary.AnnotatedEndpoint",
+      "expected": [
+        "java.nio.file.Path"
+      ],
+      "actual": [],
+      "correct": false
+    },
+    {
+      "testId": "PT-F02-ARCH-012",
+      "origin": "dev.codex.schubert.nk.web.canary.NamedHandler",
+      "expected": [
+        "javax.jms.Message"
+      ],
+      "actual": [],
+      "correct": false
+    }
+  ],
+  "measurement": "STATIC_ARCHITECTURE_CANARY_ONLY",
+  "productTests": 0,
+  "productClassesLoaded": 0,
+  "productJarsScanned": 0,
+  "wholeF02Accepted": false,
+  "canonicalDesign": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+  "terminalAtUTC": "2026-11-18T18:54:53.524968+00:00",
+  "verifier": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/5267_f02_controller_archunit_canaries.py",
+    "sha256": "14a33f8a95a96b8925aae6443ec70285450021bba379bace0298021c02ec428b"
+  },
+  "externalOperations": 0
+}

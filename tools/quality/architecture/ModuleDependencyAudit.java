@@ -23,6 +23,11 @@ public final class ModuleDependencyAudit {
   private static final String INTERNAL = "dev.codex.schubert.nk.";
   private static final Set<String> MODULES =
       Set.of("protocol", "storage", "bootstrap", "api", "web", "batch");
+  private static final Set<String> FILE_IO_TYPES =
+      Set.of(
+          "java.io.File", "java.io.FileInputStream", "java.io.FileOutputStream",
+          "java.io.FileReader", "java.io.FileWriter", "java.io.RandomAccessFile",
+          "java.nio.channels.FileChannel", "java.nio.channels.AsynchronousFileChannel");
   private static final Map<String, Set<String>> ALLOWED =
       Map.of(
           "protocol", Set.of(),
@@ -81,6 +86,7 @@ public final class ModuleDependencyAudit {
       for (JavaClass type : classes) {
         String origin = type.getName();
         String module = owners.get(origin);
+        boolean controller = module.equals("web") && isController(type);
         for (var dependency : type.getDirectDependenciesFromSelf()) {
           dependencies++;
           String target = component(dependency.getTargetClass().getName());
@@ -91,13 +97,14 @@ public final class ModuleDependencyAudit {
           if (target.startsWith(INTERNAL) && targetModule == null)
             violations.get("INTERNAL_OWNER").add(pair);
           if (forbiddenFramework(module, target)) violations.get("FRAMEWORK_FENCES").add(pair);
-          if (module.equals("web") && origin.substring(origin.lastIndexOf('.') + 1).contains("Controller")
-              && (jdbc(target) || "storage".equals(targetModule)))
+          if (controller && (jdbc(target) || jms(target) || "storage".equals(targetModule)))
             violations.get("CONTROLLER_BOUNDARY").add(pair);
         }
         for (var access : type.getCodeUnitAccessesFromSelf()) {
           calls++;
           String target = access.getTargetOwner().getName();
+          if (controller && filesystem(target))
+            violations.get("CONTROLLER_BOUNDARY").add(origin + "\t" + target);
           if (module.equals("api") && origin.startsWith(INTERNAL + "api.persistence.")
               && target.startsWith(INTERNAL + "api.application."))
             violations.get("REPOSITORY_DIRECTION").add(origin + "\t" + target);
@@ -127,15 +134,32 @@ public final class ModuleDependencyAudit {
     return target.startsWith("java.sql.") || target.startsWith("javax.sql.");
   }
 
+  private static boolean isController(JavaClass type) {
+    return type.getSimpleName().contains("Controller")
+        || type.isAnnotatedWith("org.springframework.stereotype.Controller")
+        || type.isAnnotatedWith("org.springframework.web.bind.annotation.RestController");
+  }
+
+  private static boolean jms(String target) {
+    return jmsApi(target) || target.startsWith("org.springframework.jms.");
+  }
+
+  private static boolean jmsApi(String target) {
+    return target.startsWith("jakarta.jms.") || target.startsWith("javax.jms.");
+  }
+
+  private static boolean filesystem(String target) {
+    return target.startsWith("java.nio.file.") || FILE_IO_TYPES.contains(target);
+  }
+
   private static boolean forbiddenFramework(String module, String target) {
-    boolean jms = target.startsWith("jakarta.jms.") || target.startsWith("javax.jms.");
     boolean spring = target.startsWith("org.springframework.");
     boolean mvc = target.startsWith("org.springframework.web.servlet.") || target.startsWith("org.thymeleaf.")
         || target.startsWith("jakarta.servlet.") || target.startsWith("javax.servlet.");
     boolean server = target.startsWith("com.sun.net.httpserver.");
     return switch (module) {
-      case "protocol", "storage" -> jdbc(target) || jms || spring;
-      case "bootstrap" -> jms || mvc || server;
+      case "protocol", "storage" -> jdbc(target) || jmsApi(target) || spring;
+      case "bootstrap" -> jmsApi(target) || mvc || server;
       case "api" -> mvc;
       case "batch" -> mvc || server;
       case "web" -> false;
