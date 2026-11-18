@@ -435,3 +435,8 @@ EncryptedResponseSnapshotの一般診断はSS351の固定文字列を返す。ke
 ### SSC-463 Inbox結果参照の一般診断（2026-11-18）
 
 InboxResultReferenceはSS351で定めた固定診断を返す。type()、numericId()、uuid()の値と、種別別の妥当性、保存・再送、既電文と一般診断を区別する。PT-IDEM-REFERENCE001～003とCATALOG-013で全種別と独立値を照合する。
+
+
+### SSC-464 Outbox値の一般診断（2026-11-18）
+
+OutboxEntry／OutboxRequestの一般診断はSS351の固定文言とする。宛先、ID、DLQ、本文copy、retry時間・SQL行、電文・順序と各明示取得の契約を維持する。CATALOG-022/023は閉じた合成値の独立試験で確認し、実送達と監査は別条件。
