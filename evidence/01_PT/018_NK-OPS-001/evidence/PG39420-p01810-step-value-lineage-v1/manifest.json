@@ -1,0 +1,260 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-18T11:42:38.621076+00:00",
+  "source": "a24cee8288e92837d739c97296f7686ea9bcfeb5",
+  "productionCoreMain": "bcc9e0673287c51950ecab9b36350abfcd4b2c69",
+  "designSource": "2c6ad9fe4cf5682b21ae4377309b724a3ba06e23",
+  "designBasis": [
+    {
+      "path": "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md",
+      "blob": "b180c5d663a8fe171c8a33a7d072957dc074c47c"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+      "blob": "8148e87c643e4fffcac2c6924ec511cb7299eed0"
+    }
+  ],
+  "catalog": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37452-p01810-independent-case-catalog-v1/planned93-independent-cases.json",
+    "sha256": "b830c7bbbbb1375f5d11e1a67c22608e0ccf8f829febfa1b24fe12194471d54c"
+  },
+  "results": [
+    {
+      "plannedCaseId": "PT-P01810-CATALOG-046",
+      "owningRows": [
+        "WBS-P017-07"
+      ],
+      "main": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupSummary.java",
+      "test": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupStepValuesTest.java",
+      "exactMethod": "dev.codex.schubert.nk.batch.repository.CleanupStepValuesTest#nullAndRedaction",
+      "expectedFixedLiteral": "StepCleanupSummary[observation=<redacted>]",
+      "originalWholeRun": "PG35102",
+      "gitBlobsMatchCurrent": {
+        "main": "9ca6b4fa0a8135fc2ea848facc01c36947b761e7",
+        "test": "78ef40ad3e945b91cc44a9b10ed4090a21e10b92"
+      },
+      "originalRunClassSha256": "06678074f89b2858df7895a905fe49fe009ba7425b164b279e6520a0607fcaf7",
+      "historicalRawClassCounters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 105
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 12
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 14
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 17
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 11
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "plannedCaseId": "PT-P01810-CATALOG-082",
+      "owningRows": [
+        "WBS-P017-12"
+      ],
+      "main": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStepAttempt.java",
+      "test": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/StepObservationValueContractTest.java",
+      "exactMethod": "dev.codex.schubert.nk.batch.repository.StepObservationValueContractTest#stepvalue001AttemptAllComponentsBoundsNullsAndCivilDatesAreIndependent",
+      "expectedFixedLiteral": "BatchStepAttempt[identity/time=<redacted>]",
+      "originalWholeRun": "PG35102",
+      "gitBlobsMatchCurrent": {
+        "main": "9f9c2f0aa5c1c1ff4094cd081fdf0d28b3b03f13",
+        "test": "d0f8892d53a5c89dea503b3ae37a8455a12a9490"
+      },
+      "originalRunClassSha256": "d61f86c115e29d12da29964711253fcd3e8fc64b8cb2d263efd87702295ae547",
+      "historicalRawClassCounters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 111
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 14
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 16
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 19
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 12
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "plannedCaseId": "PT-P01810-CATALOG-083",
+      "owningRows": [
+        "WBS-P017-02"
+      ],
+      "main": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStepResult.java",
+      "test": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchStepResultContractTest.java",
+      "exactMethod": "dev.codex.schubert.nk.batch.repository.BatchStepResultContractTest#result004AllSixValueComponentsHashLookupNullsAndDiagnosticAreExact",
+      "expectedFixedLiteral": "BatchStepResult[observation=<redacted>]",
+      "originalWholeRun": "PG35172",
+      "gitBlobsMatchCurrent": {
+        "main": "48d4c8e7bc160f7d22703d44ee0074b0cb1382a2",
+        "test": "94140b87719fb5ab23b6ee8df383ffba642e32c8"
+      },
+      "originalRunClassSha256": "d30ca3fc460ebcceb4daee963ab618f582adb9dfdd916e9daeb51f3207a77417",
+      "historicalRawClassCounters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 107
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 24
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 9
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 22
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 10
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "plannedCaseId": "PT-P01810-CATALOG-084",
+      "owningRows": [
+        "WBS-P017-07"
+      ],
+      "main": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepChunk.java",
+      "test": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupStepValuesTest.java",
+      "exactMethod": "dev.codex.schubert.nk.batch.repository.CleanupStepValuesTest#nullAndRedaction",
+      "expectedFixedLiteral": "CleanupStepChunk[observation=<redacted>]",
+      "originalWholeRun": "PG35102",
+      "gitBlobsMatchCurrent": {
+        "main": "8029921cd4a62055fc8b93daa49d0dd6ccc9eb52",
+        "test": "78ef40ad3e945b91cc44a9b10ed4090a21e10b92"
+      },
+      "originalRunClassSha256": "4584b0b2ae603a5542c5f2282d9df81dd95e161710c1e8bdeac5c70044e1b6d3",
+      "historicalRawClassCounters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 185
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 34
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 26
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 30
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 13
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    }
+  ],
+  "priorRunEvidence": {
+    "PG35102": {
+      "unitSource": "9cc43d1db13760ea60e17d99e44d08829fe41982",
+      "productionCore": "da78f7b4adf905c2a562cb46c9b43821d6c3bd9b",
+      "testTotal": 10,
+      "failed": 0,
+      "error": 0,
+      "skipped": 0,
+      "independent": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35102-step-observation10-independent-v1/manifest.json",
+        "sha256": "f1188aa2f7edb668f9b654797f7f5fc30d295e3687d8dcf2d99dcd9f3e6cba45"
+      },
+      "junit": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35102-step-observation10-independent-v1/sanitized-TEST-junit-jupiter.xml",
+        "sha256": "7b57d9eb4ecdb8b47ce173e0fb6a2fc8fe6901aa460c3c286accd7052f840379"
+      },
+      "exit": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35102-step-observation10-independent-v1/unit-unit-exit.safe.json",
+        "sha256": "2faa14be6739be9b0b7c34ab6ffe3081e6a21a4b37ffe96a08fc0f8a146dba72"
+      },
+      "singleExec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35102-step-observation10-independent-v1/jacoco.exec",
+        "sha256": "b7b7c6a1c26bb3b0a061a4f68d7990313cf61f8547d57376e13352e43af9ca61"
+      },
+      "raw": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35104-step-observation10-unfiltered-same-exec-v1/manifest.json",
+        "sha256": "99b143c46acb547378920d2bb9fb91453be7582a4ce115ebb05e600e43c80d12"
+      }
+    },
+    "PG35172": {
+      "unitSource": "e46d8feabc549ed7c0b88ae1218125d327ef4967",
+      "productionCore": "deaed367cb4f234af95fe9e96014f6c01e30486d",
+      "testTotal": 4,
+      "failed": 0,
+      "error": 0,
+      "skipped": 0,
+      "independent": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35172-ssc438-result4-independent-v1/manifest.json",
+        "sha256": "2a2bafb2b52ceb4c8357c8b708508e19579348494e47cb26d43f458c5d50c831"
+      },
+      "junit": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35172-ssc438-result4-independent-v1/sanitized-TEST-junit-jupiter.xml",
+        "sha256": "5dd6ff00e304388fe27b9f8480876f730f35201a642115e901847146900a7a4c"
+      },
+      "exit": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35172-ssc438-result4-independent-v1/unit-unit-exit.safe.json",
+        "sha256": "dffe64a9e50d93b08e454543bd4ae18f834b45d4a9be4eed0be1da08d23f2030"
+      },
+      "singleExec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35172-ssc438-result4-independent-v1/jacoco.exec",
+        "sha256": "0107d274358af5ca4f22130dc04c96e86d48e34889c282f39200d6782dbc20bf"
+      },
+      "raw": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35174-ssc438-result4-unfiltered-same-exec-v1/manifest.json",
+        "sha256": "648ee2fa7fd8ed19ecab9f1a36ee398f9daa88d6e88ab75b140f5ef5eb9d48c4"
+      }
+    }
+  },
+  "uniqueHistoricalTestMethods": 3,
+  "establishes": "Four fixed value-display contracts linked to independent historical successes with exact current Main and Test blob identity. Prior closed typed graphs and CRC remain historical.",
+  "remaining": [
+    "Real cleanup/retained-runtime owner and structured producer route, authorized receiver, persistence and negative observations still require their own evidence.",
+    "Current complete-source technical counters, 451, CHR and closing acceptance not evidenced here."
+  ],
+  "historicalExecCombined": false,
+  "applicationTestsExecuted": 0,
+  "currentCoverageMeasured": false,
+  "newAcceptance": 0,
+  "effortCompletionRate": null
+}
