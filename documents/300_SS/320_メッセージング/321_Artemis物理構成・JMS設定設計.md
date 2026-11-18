@@ -313,3 +313,7 @@ consumer count、address bytes、paging、journal sync、connection countを取�
 | 2026-08-31 | 横断監査でUI容量を`max-size-*`とみなすBLOCK設計のJVM不整合をUIC-002/QA-042へ起票し、PAGE・memory high-water・page limit案を提示。 |
 | 2026-09-01 | QA-041/UIC-001承認を反映し、再配送設定と実効test oracleを1秒、5秒、25秒へ確定。 |
 | 2026-09-01 | QA-042/UIC-002承認を反映し、用途別合計保存上限を維持したmemory high-water・disk paging・page/disk full設定を確定。 |
+
+## SSC-467 受信封筒の通常診断
+
+`GuardedJmsMessage.toString()` は `GuardedJmsMessage[<redacted>]` に固定する。配送上の値、内部ID、アドレス、metadata/bodyを通常診断へ連結しない。明示 `metadata()` と `body()`、配列の所有とコピー、配送・電文・既構造化監査の規則を維持する。SS351、PT-P01810-CATALOG-019。

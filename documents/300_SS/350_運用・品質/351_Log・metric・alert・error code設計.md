@@ -311,6 +311,8 @@ SSC-465。InspectionStep.toStringは「InspectionStep[<redacted>]」を返す。
 
 SSC-466。一時バッファの通常 `toString()` は `WipingByteArrayOutputStream[<redacted>]` とし、長さ・容量・内容を表示しない。許可済みの構造化統計や、所有処理が直接使う `size()` と区別する。SS324、PT-P01810-CATALOG-015。
 
+SSC-467。JMS受信封筒の通常 `toString()` は `GuardedJmsMessage[<redacted>]` に固定する。用途が個別に承認された構造化ログの明示欄と、汎用diagnostic出力を区別する。SS321、PT-P01810-CATALOG-019。
+
 
 - DEBUGだけ機密除外を緩和、request/response/fixed body、exception/SQLの`toString()`を無制限出力。
 - Username/IP/message/token/path等の高cardinality/機密値をmetric label化。
