@@ -1,0 +1,84 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG39338-BUG3268-API-STANDARD-METRICS-MODE-V1",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39332-bug3268-api-standard-metrics-prepare-v1/manifest.json",
+    "sha256": "ad49021041a1f6b3dfd4d5a6a865476acd0c3e2c25a2a09b7354dedb68ba8c43"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39334-bug3268-api-standard-metrics-static-v1/manifest.json",
+    "sha256": "8c0a8e000b3e31b747e09667ab3025d2ff9dffd4df8f7c76f2dfe0f521e3f403"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricsTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this Registry object are closed after use",
+      "sourceLine": 213,
+      "sourceAnchor": "var source = new Registry();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This fixture intentionally passes an already closed Registry to test the public contract; it closes its own Registry immediately before any other action."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricsTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this Registry object are closed after use",
+      "sourceLine": 330,
+      "sourceAnchor": "var source = new Registry();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This fixture intentionally passes an already closed Registry to test the public contract; it closes its own Registry immediately before any other action."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricsTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceLine": 365,
+      "sourceAnchor": "var workers = Executors.newFixedThreadPool(4);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Executor ownership ends in a bounded finally with shutdownNow and ten second termination. Implicit close would allow waiting without a deadline."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricsTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 365,
+      "sourceAnchor": "var workers = Executors.newFixedThreadPool(4);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Only finite local unit test fixture threads are used; Future.get and executor release are bounded and there is no application or service thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricsTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 371,
+      "sourceAnchor": "workers.submit(",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Only finite local unit test fixture threads are used; Future.get and executor release are bounded and there is no application or service thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricsTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 390,
+      "sourceAnchor": "workers.shutdownNow();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Only finite local unit test fixture threads are used; Future.get and executor release are bounded and there is no application or service thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricsTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 391,
+      "sourceAnchor": "assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Only finite local unit test fixture threads are used; Future.get and executor release are bounded and there is no application or service thread."
+    }
+  ]
+}

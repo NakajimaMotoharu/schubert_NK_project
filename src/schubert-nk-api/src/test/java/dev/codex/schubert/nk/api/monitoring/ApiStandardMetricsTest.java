@@ -195,7 +195,7 @@ class ApiStandardMetricsTest {
             throw new AssertionError(UNEXPECTED_PHASE_ACCESS);
           };
       source.reads.set(0);
-      for (String mode : List.of("", "debug", "DEBUG ", "UNKNOWN"))
+      for (String mode : List.of("", "debug", "DEBUG ", "UNKNOWN", "DEBTf", "STANDAQc"))
         assertEquals(
             "CONFIG_INVALID",
             assertThrows(
@@ -362,7 +362,8 @@ class ApiStandardMetricsTest {
 
   @Test
   void apistd013FiniteIndependentConcurrentCompositions() throws Exception {
-    try (var workers = Executors.newFixedThreadPool(4)) {
+    var workers = Executors.newFixedThreadPool(4);
+    try {
       var jobs = new ArrayList<Future<?>>();
       var total = new AtomicInteger();
       for (int i = 0; i < 64; i++)
@@ -385,6 +386,9 @@ class ApiStandardMetricsTest {
                 }));
       for (var job : jobs) job.get(10, TimeUnit.SECONDS);
       assertEquals(192, total.get());
+    } finally {
+      workers.shutdownNow();
+      assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 }
