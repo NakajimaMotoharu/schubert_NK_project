@@ -1,6 +1,6 @@
 package dev.codex.schubert.nk.web.bootstrap;
 
-import dev.codex.schubert.nk.storage.StorageIoException;
+import dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.security.MessageDigest;
@@ -116,7 +116,7 @@ public final class WebNonSecretConfig {
       }
       return values;
     } catch (RuntimeException failure) {
-      StorageIoException.preserveFatal(failure);
+      JdbcFailureGraph.preserveFatal(failure);
       throw invalid();
     }
   }
@@ -165,7 +165,7 @@ public final class WebNonSecretConfig {
           || asset.startsWith(transfer)
           || transfer.startsWith(asset)) throw invalid();
     } catch (RuntimeException failure) {
-      StorageIoException.preserveFatal(failure);
+      JdbcFailureGraph.preserveFatal(failure);
       throw invalid();
     }
   }
