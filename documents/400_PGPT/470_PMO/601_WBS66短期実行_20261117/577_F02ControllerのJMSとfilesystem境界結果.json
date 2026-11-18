@@ -1,0 +1,111 @@
+{
+  "eventId": "PGPT-20261008-6098",
+  "actualExit": 0,
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F02-CONTROLLER-JMS-FILESYSTEM-ARCHUNIT-20261119",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-F02-CONTROLLER-JMS-FILESYSTEM-ARCHUNIT-20261119",
+    "workAttributionKind": "REQUALIFICATION",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a",
+      "WBS-F02/criterion/contract"
+    ],
+    "source": "b3bb657b14c1dce8502f3144db8802d3c9ad1858",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "run": "PG40064-f02-controller-fences-archunit-v1",
+    "workScope": "Confirm and correct missing SS311 section 5.2 direct JMS/file-system controller architecture rules. Use only handwritten canary bytecode, no authored product/held classes on classpath or initialized. Verify original and corrected distinct tool sources; API/Web full same-Core JARs remain required.",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.4,
+      "base": 1.25,
+      "high": 3.1
+    },
+    "groupCapPp": 5,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "tools/quality/architecture/ModuleDependencyAudit.java",
+        "sha256": "108e8b3d8be2bacd0b6e0d9a158fa65212354126a34fd7181d80623fbdc6fbb1"
+      },
+      {
+        "path": "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md",
+        "sha256": "72427a8609a9c4753ff459cbfa92e3ad27669544c59d53eb9191b97b911c74d2"
+      }
+    ],
+    "quotaAfter": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-18T18:57:35.785000+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 46,
+        "remainingPercent": 54,
+        "resetsAt": 1795445753,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "quotaReceipt": {
+      "sha256": "d7b7ef4263b644b6c93722a6747e280fadff7d4900fa3516c8eacc98c9cfe30b",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T18:57:35.785000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 46,
+          "remainingPercent": 54,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T18:56:23.355127+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "publicEvidence": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40064-f02-controller-fences-archunit-v1/manifest.json",
+        "sha256": "770c7b9001341442c545ffe41a7881bfcd1c74034654da23169939432907d5b9"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40066-f02-controller-fences-archunit-v2/manifest.json",
+        "sha256": "ce0498c72e7cf019a6620f36cabf5054dfaa6b4afaf50028e5e8955cb76d824a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40068-f02-controller-fences-independent-v1/manifest.json",
+        "sha256": "14561ac6e542dcf01dd06165d2360586e51ad8ffd0e1e9c6d175b7258d171ef7"
+      }
+    ],
+    "toolSource": "43eeb656b0fd7e0772885573eca9086420394598",
+    "criterion": "contract direct Web Controller fences: tool-level correct; exact six-product Main run still open",
+    "initialCanariesCorrect": 4,
+    "initialCanariesMissed": 8,
+    "correctedCanariesCorrect": 12,
+    "correctedCanariesMissed": 0,
+    "syntheticArtifacts": 6,
+    "actualProductTests": 0,
+    "formalIntake": 0,
+    "currentAccepted": 17,
+    "parentAccepted": false,
+    "result": "SS311 direct Controller fences were incomplete in the checker. Hand-written 24 class fixtures proved eight initially missed and 12 correctly classified after correction. No product was compiled, loaded or certified."
+  }
+}
