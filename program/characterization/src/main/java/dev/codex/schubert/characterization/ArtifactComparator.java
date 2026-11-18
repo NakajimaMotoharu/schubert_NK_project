@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.BooleanNode;
 import com.fasterxml.jackson.databind.node.IntNode;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.NullNode;
 import com.fasterxml.jackson.databind.node.TextNode;
 import java.io.IOException;
@@ -30,6 +31,8 @@ public final class ArtifactComparator {
   private static final String MODE_CONTRACT = "contract";
   private static final String LOGIN_CASE = "CHR-A01";
   private static final String BRAND_DIFFERENCE = "DIF-001";
+  private static final String MENU_DIFF = "DIF-003";
+  private static final String MENU_CASE = "CHR-U01";
   private static final String EMPTY_MESSAGE_DIFFERENCE = "DIF-008";
   private static final String EMPTY_SEARCH_CASE = "CHR-S04";
   private static final String CACHE_DIFFERENCE = "DIF-011";
@@ -65,6 +68,13 @@ public final class ArtifactComparator {
               textPair(CURRENT_BRAND, NK_BRAND),
               "CHR-U02:/titles/1",
               textPair("schubert - 検索", "schubert NK - 検索")),
+          MENU_DIFF,
+          Map.of(
+              MENU_CASE + ":/cards",
+              List.of(
+                  menuCards("シナリオ閲覧", "検索", "アニメ視聴", "音楽", "ログ照会"),
+                  menuCards(
+                      "シナリオ閲覧", "検索", "アニメ視聴", "音楽", "質問する", "通知", "質問回答", "ログ照会", "User管理"))),
           EMPTY_MESSAGE_DIFFERENCE,
           Map.of(EMPTY_SEARCH_CASE + ":/emptyVisibleText", textPair("", "該当するデータはありません")),
           CACHE_DIFFERENCE,
@@ -306,11 +316,8 @@ public final class ArtifactComparator {
         failures.add("OBSERVATION_ERROR_DISCLOSURE_FIELD:" + observationKey);
         valid = false;
       }
-      // L01 has its own log projection. The empty search field is specific to S04.
-      Map<String, List<JsonNode>> fixed =
-          EMPTY_MESSAGE_DIFFERENCE.equals(id) && !EMPTY_SEARCH_CASE.equals(caseId)
-              ? null
-              : FIXED_EXPECTATIONS.get(id);
+      // L01 has its own log projection. N01 has independent role/menu acceptance evidence.
+      Map<String, List<JsonNode>> fixed = fixedForCase(id, caseId);
       if (fixed != null) {
         valid &=
             checkFixed(id, caseId, fixed.get(differenceKey), actualCurrent, actualNk, failures);
@@ -382,6 +389,18 @@ public final class ArtifactComparator {
     return List.of(TextNode.valueOf(current), TextNode.valueOf(nk));
   }
 
+  private static JsonNode menuCards(String... titles) {
+    var list = JsonNodeFactory.instance.arrayNode();
+    for (String title : titles) list.add(title);
+    return list;
+  }
+
+  private static @Nullable Map<String, List<JsonNode>> fixedForCase(String id, String caseId) {
+    if (EMPTY_MESSAGE_DIFFERENCE.equals(id) && !EMPTY_SEARCH_CASE.equals(caseId)) return null;
+    if (MENU_DIFF.equals(id) && !MENU_CASE.equals(caseId)) return null;
+    return FIXED_EXPECTATIONS.get(id);
+  }
+
   private static JsonNode multipleVoiceProjection(int rows) {
     return JSON.createObjectNode()
         .put("linkedVoiceCount", 2)
@@ -402,7 +421,8 @@ public final class ArtifactComparator {
 
   private static String missingObservation(String target) {
     if (LOGIN_TITLE.equals(target)) return "LOGIN_TITLE_DIF_REQUIRED";
-    if (target.startsWith("CHR-U0")) return "BRAND_DIF_REQUIRED:" + target;
+    if (FIXED_EXPECTATIONS.get(BRAND_DIFFERENCE).containsKey(target))
+      return "BRAND_DIF_REQUIRED:" + target;
     return "FIXED_DIF_REQUIRED:" + target;
   }
 

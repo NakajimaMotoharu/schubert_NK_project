@@ -31,7 +31,8 @@ def main(unit_name, out_name, prior_same_main=None):
         (182,'PG40034-p020-l01-required-actions-v1'),(182,'PG40035-p020-l01-required-actions-v2'),
         (187,'PG40056-p020-error-disclosure187-v1'),(187,'PG40057-p020-error-disclosure187-v2'),
         (192,'PG40074-p020-o01-restart192-v1'),(192,'PG40075-p020-o01-restart192-v2'),
-        (198,'PG40088-p020-s08-voice198-v1'),(198,'PG40089-p020-s08-voice198-v2')}
+        (198,'PG40088-p020-s08-voice198-v1'),(198,'PG40089-p020-s08-voice198-v2'),
+        (204,'PG40104-p020-u01-menu204-v1'),(204,'PG40105-p020-u01-menu204-v2')}
     assert actual['stages']['unit']['actualExit']==0
     snapshot=Path(begin['snapshot'])
     classes=Path(actual['classesDir'])

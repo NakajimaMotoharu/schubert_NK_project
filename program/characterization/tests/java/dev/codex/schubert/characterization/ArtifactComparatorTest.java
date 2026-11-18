@@ -36,7 +36,18 @@ class ArtifactComparatorTest {
   private static final String FIXTURE_JSON_SUFFIX = ".json";
   private static final String FIXTURE_EXTRA = "extra";
 
-  private static final String ASYNC_MENU_DIFFERENCE = "DIF-003";
+  private static final String FIXTURE_DIF_003 = "DIF-003";
+  private static final String FIXTURE_MENU_FIELD = "menu.cards";
+  private static final String FIXTURE_MENU_CARDS = "cards";
+  private static final String FIXTURE_MENU_POINTER = "/cards";
+  private static final String FIXTURE_U01_MENU_DIFF = "CHR-U01:/cards";
+  private static final String FIXTURE_U01_MENU_REQUIRED = "FIXED_DIF_REQUIRED:CHR-U01:/cards";
+  private static final String FIXTURE_CHR_N01 = "CHR-N01";
+  private static final String FIXTURE_CHR_U01_JSON = "CHR-U01.json";
+  private static final List<String> FIXTURE_CURRENT_CARDS =
+      List.of("シナリオ閲覧", "検索", "アニメ視聴", "音楽", "ログ照会");
+  private static final List<String> FIXTURE_NK_ADMIN_CARDS =
+      List.of("シナリオ閲覧", "検索", "アニメ視聴", "音楽", "質問する", "通知", "質問回答", "ログ照会", "User管理");
   private static final String FIXTURE_CHR_A01 = "CHR-A01";
   private static final String FIXTURE_CHR_A02 = "CHR-A02";
   private static final String FIXTURE_CHR_A02_JSON = "CHR-A02.json";
@@ -186,7 +197,7 @@ class ArtifactComparatorTest {
           "CHR-M07",
           FIXTURE_CHR_L01,
           "CHR-E01",
-          "CHR-N01",
+          FIXTURE_CHR_N01,
           "CHR-O01");
   private static final List<Oracle> ORACLES =
       List.of(
@@ -208,15 +219,6 @@ class ArtifactComparatorTest {
               FIXTURE_AUTHORIZATION_LOG,
               "AUTHENTICATED",
               "ADMIN"),
-          new Oracle(
-              "DIF-003",
-              FIXTURE_CHR_U01,
-              "menu.cards",
-              FIXTURE_DIFFERENCE,
-              FIXTURE_SEMANTIC,
-              "menu.cards",
-              "4 legacy plus log",
-              "legacy plus question notification answer and admin user"),
           new Oracle(
               "DIF-004",
               FIXTURE_CHR_A01,
@@ -1027,6 +1029,99 @@ class ArtifactComparatorTest {
   }
 
   @Test
+  void acceptsTheFiveLegacyAndNineApprovedAdministratorCardsInOrder() throws Exception {
+    var result = compare(fixture("valid-admin-menu-card-array"));
+    assertTrue(result.passed());
+    assertTrue(result.usedDifferences().contains(FIXTURE_DIF_003));
+    assertTrue(result.unregisteredDifferences().isEmpty());
+  }
+
+  @Test
+  void requiresTheMenuCardArrayObservationOnU01() throws Exception {
+    Fixture fixture = fixture("unobserved-menu-array");
+    removeObservation(fixture, FIXTURE_CHR_U01, FIXTURE_MENU_POINTER);
+    var result = compare(fixture);
+    assertContains(result.failures(), FIXTURE_U01_MENU_REQUIRED);
+    assertEquals(List.of(FIXTURE_U01_MENU_DIFF), result.unregisteredDifferences());
+  }
+
+  @Test
+  void rejectsRenamingACurrentFunctionEvenIfTheClaimMatches() throws Exception {
+    var names = new ArrayList<>(FIXTURE_NK_ADMIN_CARDS);
+    names.set(0, "別名");
+    var result = compareWithNkMenuCards("renamed-legacy-menu-card", names);
+    assertContains(result.failures(), FIXTURE_FIXED_NK);
+    assertEquals(List.of(FIXTURE_U01_MENU_DIFF), result.unregisteredDifferences());
+  }
+
+  @Test
+  void rejectsReorderingLegacyFunctionsWithinTheAdministratorMenu() throws Exception {
+    var names = new ArrayList<>(FIXTURE_NK_ADMIN_CARDS);
+    java.util.Collections.swap(names, 0, 1);
+    var result = compareWithNkMenuCards("reordered-legacy-menu-cards", names);
+    assertContains(result.failures(), FIXTURE_FIXED_NK);
+    assertEquals(List.of(FIXTURE_U01_MENU_DIFF), result.unregisteredDifferences());
+  }
+
+  @Test
+  void rejectsAUserMenuOrAnUnrelatedPointerAsTheAdministratorObservation() throws Exception {
+    var stripped =
+        compareWithNkMenuCards(
+            "7-user-cards-on-admin-comparison", FIXTURE_NK_ADMIN_CARDS.subList(0, 7));
+    assertContains(stripped.failures(), FIXTURE_FIXED_NK);
+    assertEquals(List.of(FIXTURE_U01_MENU_DIFF), stripped.unregisteredDifferences());
+
+    Fixture moved = fixture("unrelated-pointer-as-menu-proof");
+    mutate(
+        moved.observations(),
+        root -> {
+          var rows = (ArrayNode) root.path(FIXTURE_OBSERVATIONS);
+          ((ObjectNode) rows.get(findObservation(rows, FIXTURE_CHR_U01, FIXTURE_MENU_POINTER)))
+              .put(FIXTURE_POINTER, "/notMenuCards");
+        });
+    var result = compare(moved);
+    assertContains(result.failures(), FIXTURE_FIXED_POINTER);
+    assertContains(result.failures(), FIXTURE_U01_MENU_REQUIRED);
+    assertEquals(List.of(FIXTURE_U01_MENU_DIFF), result.unregisteredDifferences());
+  }
+
+  @Test
+  void aSeparateN01ClaimCannotSatisfyTheU01MenuContract() throws Exception {
+    Fixture fixture = fixture("n01-claim-without-u01-menu");
+    removeObservation(fixture, FIXTURE_CHR_U01, FIXTURE_MENU_POINTER);
+    String n01 = FIXTURE_CHR_N01 + FIXTURE_JSON_SUFFIX;
+    String example = "approvedAdditions";
+    mutate(fixture.current().resolve(n01), root -> root.put(example, false));
+    mutate(fixture.nk().resolve(n01), root -> root.put(example, true));
+    mutate(
+        fixture.observations(),
+        root ->
+            ((ArrayNode) root.path(FIXTURE_OBSERVATIONS))
+                .add(
+                    menuClaim(
+                        FIXTURE_CHR_N01, "/" + example, BooleanNode.FALSE, BooleanNode.TRUE)));
+    var result = compare(fixture);
+    assertContains(result.failures(), FIXTURE_U01_MENU_REQUIRED);
+    assertEquals(List.of(FIXTURE_U01_MENU_DIFF), result.unregisteredDifferences());
+  }
+
+  private ArtifactComparator.ComparisonResult compareWithNkMenuCards(
+      String name, List<String> cards) throws Exception {
+    Fixture fixture = fixture(name);
+    JsonNode values = JSON.valueToTree(cards);
+    mutate(
+        fixture.nk().resolve(FIXTURE_CHR_U01_JSON), root -> root.set(FIXTURE_MENU_CARDS, values));
+    mutate(
+        fixture.observations(),
+        root -> {
+          var rows = (ArrayNode) root.path(FIXTURE_OBSERVATIONS);
+          ((ObjectNode) rows.get(findObservation(rows, FIXTURE_CHR_U01, FIXTURE_MENU_POINTER)))
+              .set(FIXTURE_EXPECTED_NK, values);
+        });
+    return compare(fixture);
+  }
+
+  @Test
   void comparesMultipleVoicesWithoutConvertingTheNormalScenarioProjection() throws Exception {
     Fixture fixture = fixture("separate-multiple-voice-supplement");
     String artifact = FIXTURE_CHR_S08 + FIXTURE_JSON_SUFFIX;
@@ -1699,10 +1794,6 @@ class ArtifactComparatorTest {
         currentArtifact.set(FIXTURE_SEARCH_EMPTY_TEXT, currentValue);
         nkArtifact.set(FIXTURE_SEARCH_EMPTY_TEXT, nkValue);
         pointer = FIXTURE_SEARCH_EMPTY_POINTER;
-      } else if (ASYNC_MENU_DIFFERENCE.equals(oracle.id())) {
-        currentDif.set(oracle.id(), JSON.valueToTree(List.of(FIXTURE_SAME, oracle.currentValue())));
-        nkDif.set(oracle.id(), JSON.valueToTree(List.of(FIXTURE_SAME, oracle.nkValue())));
-        pointer += "/1";
       } else {
         currentDif.set(oracle.id(), currentValue);
         nkDif.set(oracle.id(), nkValue);
@@ -1749,6 +1840,8 @@ class ArtifactComparatorTest {
             FIXTURE_SEARCH_TITLE_POINTER,
             FIXTURE_CURRENT_SEARCH_TITLE,
             FIXTURE_NK_SEARCH_TITLE));
+    addMenuObservation(
+        currentArtifacts.get(FIXTURE_CHR_U01), nkArtifacts.get(FIXTURE_CHR_U01), observationItems);
     addCacheObservation(
         currentArtifacts.get(FIXTURE_CHR_O01), nkArtifacts.get(FIXTURE_CHR_O01), observationItems);
     addRestartObservations(
@@ -1817,6 +1910,32 @@ class ArtifactComparatorTest {
     artifactBinding.set("nk", nkArtifacts.get(FIXTURE_CHR_L01).deepCopy());
     writeJson(observations, envelope);
     return new Fixture(project, current, nk, observations);
+  }
+
+  private static void addMenuObservation(ObjectNode current, ObjectNode nk, ArrayNode claims) {
+    JsonNode before = JSON.valueToTree(FIXTURE_CURRENT_CARDS);
+    JsonNode after = JSON.valueToTree(FIXTURE_NK_ADMIN_CARDS);
+    current.set(FIXTURE_MENU_CARDS, before);
+    nk.set(FIXTURE_MENU_CARDS, after);
+    claims.add(menuClaim(FIXTURE_CHR_U01, FIXTURE_MENU_POINTER, before, after));
+  }
+
+  private static ObjectNode menuClaim(
+      String caseId, String pointer, JsonNode before, JsonNode after) {
+    var row =
+        observation(
+            FIXTURE_DIF_003,
+            caseId,
+            FIXTURE_MENU_FIELD,
+            FIXTURE_DIFFERENCE,
+            FIXTURE_SEMANTIC,
+            FIXTURE_MENU_FIELD,
+            pointer,
+            "",
+            "");
+    row.set(FIXTURE_EXPECTED_CURRENT, before);
+    row.set(FIXTURE_EXPECTED_NK, after);
+    return row;
   }
 
   private static void writeVoiceFixture(ObjectNode object, int groupedRows) {

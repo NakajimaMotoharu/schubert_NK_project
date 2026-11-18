@@ -44,6 +44,10 @@ PHASES = {
         '592_P020*', E/'PG40075-p020-o01-restart192-v2', 192, 198),
     'PG40089-p020-s08-voice198-v2': (
         '592_P020*', E/'PG40075-p020-o01-restart192-v2', 192, 198),
+    'PG40104-p020-u01-menu204-v1': (
+        '605_P020*', E/'PG40089-p020-s08-voice198-v2', 198, 204),
+    'PG40105-p020-u01-menu204-v2': (
+        '605_P020*', E/'PG40089-p020-s08-voice198-v2', 198, 204),
 }
 TEST_PACKAGE='dev.codex.schubert.characterization.'
 JAVA_DIR=Path(TEST_PACKAGE.rstrip('.').replace('.','/'))
