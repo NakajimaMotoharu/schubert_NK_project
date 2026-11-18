@@ -1,0 +1,92 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5092_bug3251_web_metric_capture_profile_v2.json",
+    "sha256": "24f8892abaa438b9bc8b56fa69438c5c181924f0f698abe6f6979be46d2fee03"
+  },
+  "inputHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebMetricCatalog.java": "dc32190fea57bb5e2082bc9bd52f3db51873c149cb4d23a524b0ca21dba6e17b",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/HttpMetricContract.java": "019f126d38fdfbfd60baf8f38c254201db2427e7a0c2087e052712812a889c03",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricCatalogTest.java": "10e4589a8af2eb58eb3c3105c33c4dbcef57eaf48a154ade05fb8dddf175c1fc",
+    "src/schubert-nk-web/src/test/resources/monitoring/http-route-labels.txt": "1777c4710e6448bdb459d5fd2beccf389f57ec4ea9effdca171cdbd6888d5331",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-web/pom.xml": "9b6c47c3ab3ba0d105f41f081de10b2234af4653fdc371a8eacdf9cabb78761b",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39007-bug3251-web-metric-captured-prepare-v2/manifest.json",
+    "sha256": "4091c169fc5abf4ae93ff25f478e89e693811a40b697e44cb677e03df87b06bc"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39009-bug3251-web-metric-captured-static-v2/manifest.json",
+    "sha256": "c946b7491d9034bd5372cdde568362bb6aea2c71aae6470bb52b0df47d0fb8c5"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5093_bug3251_web_metric_capture_admission.json",
+    "sha256": "a8c00841b89f15b748e4e7b09c234aba359003cff90dcfe035782f71ca3d53e0"
+  },
+  "classified": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricCatalogTest.java",
+      "rule": "OverrideBothEqualsAndHashCodeOnComparable",
+      "line": "116",
+      "reason": "MutableTag intentionally models a driver alias and invalid null values for WEBCAT010-011. It is only an ordered input to read-and-copy, never a stable object or hash key, and equality by mutable fields would undermine the independent alias oracle.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "When implementing Comparable, both equals() and hashCode() should be overridden"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricCatalogTest.java",
+      "rule": "CloseResource",
+      "line": "339",
+      "reason": "The exact test-owned executor is stopped in an unconditional finally using shutdownNow, and awaitTermination10s must pass. Java25 ExecutorService.close has no finite end and is deliberately replaced, retaining the old 64 tasks and each get10s.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricCatalogTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "339",
+      "reason": "The servlet scheduling rule does not govern this isolated JUnit worker fixture. Four owned worker threads, exact literal catalog tasks, per-task deadlines and asserted unconditional termination have no external service effects.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricCatalogTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "344",
+      "reason": "The servlet scheduling rule does not govern this isolated JUnit worker fixture. Four owned worker threads, exact literal catalog tasks, per-task deadlines and asserted unconditional termination have no external service effects.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricCatalogTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "355",
+      "reason": "The servlet scheduling rule does not govern this isolated JUnit worker fixture. Four owned worker threads, exact literal catalog tasks, per-task deadlines and asserted unconditional termination have no external service effects.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricCatalogTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "356",
+      "reason": "The servlet scheduling rule does not govern this isolated JUnit worker fixture. Four owned worker threads, exact literal catalog tasks, per-task deadlines and asserted unconditional termination have no external service effects.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    }
+  ],
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "rootCompilerUnchanged": true,
+  "independentSourceAnchorsExact": true,
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_stages.py",
+    "sha256": "ce7b33beb41744d0042bc0fb94aee01930016254f5f08fbba03707f1b568016b"
+  }
+}

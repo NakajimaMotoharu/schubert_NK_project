@@ -1,0 +1,147 @@
+{
+  "eventId": "PGPT-20261008-5912",
+  "actualExit": 0,
+  "workStatus": "PARTIAL",
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-WEB-METRIC-CAPTURED-LABELS-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-F03-WEB-METRIC-CAPTURED-LABELS-20261118",
+    "workAttributionKind": "REWORK",
+    "workScope": "F03: BUG3251 separate captured-name package-private label path. Add one independent unit on exact seven families' existing allowed labels and synthetic missing/unknown/immutable provider readback for the previously unmeasured overload. Keep existing 14 tests and run all 15 once from the new Test source. Main, HTTP and metrics actual runtime unchanged. Verify one current exec counters from unfiltered meter catalog and preserve support deficits.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38996-f03-web-metric-catalog-independent-v1/manifest.json",
+        "sha256": "888828298ea363f99f27ddeb9313daaee70db00d54523638f1781242f95e2406"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/4629_BUG3250WebMetricCatalog有限実行結果.md",
+        "sha256": "267fc6720bbd24e78bdde344905740bd3e303dd78785a90df0845e92e9f08a31"
+      }
+    ],
+    "productionCoreMain": "29f3b433952ad19d4ad34c4e1a31ed310bebde6a",
+    "source": "4ad03c5775b3ef63887836609096610acc1b21aa",
+    "wbsLeafIds": [
+      "WBS-F03",
+      "WBS-P018-09"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2",
+      "BUG-3251"
+    ],
+    "run": "PG39016-f03-web-metric-captured-independent-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.3,
+      "base": 0.85,
+      "high": 2.2
+    },
+    "groupCapPp": 3.5,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "relatedBug": "BUG-3251",
+    "quotaAfter": {
+      "usedPercent": 32,
+      "remainingPercent": 68,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "d3cc50a8407eeeb02184e579b7e4ef77e392468201b16faa56ceaf85213c138b",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T08:51:56.237000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 32,
+          "remainingPercent": 68,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T08:51:26.025397+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 32,
+      "remainingPercent": 68,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-5911",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39016-f03-web-metric-captured-independent-v1/manifest.json",
+      "sha256": "0bdcc5bf655ef2a1b81bb150465636a6468510ff07748a8af257b0d6903008d8"
+    },
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortCompletionRate": null,
+    "firstProductRunSuccess": true,
+    "firstIndependentPostSuccess": true,
+    "firstQualityAdmitted": false,
+    "productTestsExecuted": 15,
+    "newDefinitions": 1,
+    "caseDenominator": 15,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "notRun": 0,
+    "relatedBugs": [
+      "BUG-3251",
+      "BUG-3252"
+    ],
+    "targetRaw": {
+      "INSTRUCTION": [
+        0,
+        265
+      ],
+      "BRANCH": [
+        0,
+        14
+      ],
+      "LINE": [
+        0,
+        50
+      ],
+      "COMPLEXITY": [
+        0,
+        18
+      ],
+      "METHOD": [
+        0,
+        11
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "completedAdditionalPricePp": 0,
+    "additionalCompletedPriceTotalPp": 42.9,
+    "originalCompletedPriceTotalPp": 9.538,
+    "shortTermTwelvePlanPp": 143.371,
+    "retryReasons": [
+      "prestyle identified a duplicate fixture literal before build, fixed following BUG3252"
+    ],
+    "reviewStatus": "WEB_METRIC_CAPTION_NAME_SCOPE_RAW_FOUR_CLOSED",
+    "nextCondition": "Refresh 11/25 current handoff package at exact current source using only new evidence, then continue next authorized runnable WBS individual condition without replay."
+  }
+}
