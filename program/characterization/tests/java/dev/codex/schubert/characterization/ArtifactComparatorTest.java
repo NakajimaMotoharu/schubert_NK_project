@@ -41,6 +41,16 @@ class ArtifactComparatorTest {
   private static final String FIXTURE_CHR_O01_JSON = "CHR-O01.json";
   private static final String FIXTURE_DIF_011 = "DIF-011";
   private static final String FIXTURE_DIF_012 = "DIF-012";
+  private static final String FIXTURE_DIF_013 = "DIF-013";
+  private static final String FIXTURE_CHR_S02 = "CHR-S02";
+  private static final String FIXTURE_GAME_CHANGE = "gameOnchange";
+  private static final String FIXTURE_GAME_CHANGE_POINTER = "/gameOnchange";
+  private static final String FIXTURE_GAME_CHANGE_FIELD = "game.change";
+  private static final String FIXTURE_GAME_CHANGE_FALLBACK = "javascriptDisabledSubmitButton";
+  private static final String FIXTURE_CURRENT_HANDLER = "this.form.submit()";
+  private static final String FIXTURE_OTHER_HANDLER = "syntheticHandler()";
+  private static final String GAME_CHANGE_DIFFERENCE = "CHR-S02:/gameOnchange";
+  private static final String REQUIRED_GAME_CHANGE = "FIXED_DIF_REQUIRED:CHR-S02:/gameOnchange";
   private static final String FIXTURE_CHR_M04 = "CHR-M04";
   private static final String FIXTURE_CHR_M07 = "CHR-M07";
   private static final String FIXTURE_INVALID_RANGE = "invalidRange";
@@ -237,15 +247,6 @@ class ArtifactComparatorTest {
               "log.filters",
               "limited",
               "WARN date MQ SYSTEM BATCH"),
-          new Oracle(
-              "DIF-013",
-              "CHR-S02",
-              "game.change",
-              FIXTURE_DIFFERENCE,
-              FIXTURE_SEMANTIC,
-              "game.change",
-              "inline onchange",
-              "external same-origin JS plus button"),
           new Oracle(
               "DIF-014",
               "CHR-O01",
@@ -1214,6 +1215,102 @@ class ArtifactComparatorTest {
         });
   }
 
+  @Test
+  void acceptsAnAbsentInlineAttributeWithTheDisabledScriptSubmitButton() throws Exception {
+    var result = compare(fixture("approved-game-change-observation"));
+    assertTrue(result.passed(), result.failures().toString());
+    assertTrue(result.usedDifferences().contains(FIXTURE_DIF_013));
+  }
+
+  @Test
+  void rejectsAMissingGameChangeFieldInsteadOfAnObservedAbsentAttribute() throws Exception {
+    Fixture fixture = fixture("missing-game-attribute-projection");
+    mutate(
+        fixture.nk().resolve(FIXTURE_CHR_S02 + FIXTURE_JSON_SUFFIX),
+        root -> root.remove(FIXTURE_GAME_CHANGE));
+
+    var result = compare(fixture);
+
+    assertFalse(result.passed());
+    assertContains(result.failures(), "OBSERVATION_NK_POINTER:DIF-013:CHR-S02:/gameOnchange");
+    assertEquals(List.of(GAME_CHANGE_DIFFERENCE), result.unregisteredDifferences());
+  }
+
+  @Test
+  void refusesASelfReportedNewInlineChangeHandler() throws Exception {
+    Fixture fixture = fixture("inline-change-handler-remains");
+    mutate(
+        fixture.nk().resolve(FIXTURE_CHR_S02 + FIXTURE_JSON_SUFFIX),
+        root -> root.put(FIXTURE_GAME_CHANGE, FIXTURE_OTHER_HANDLER));
+    changeGameClaim(fixture, row -> row.put(FIXTURE_EXPECTED_NK, FIXTURE_OTHER_HANDLER));
+
+    var result = compare(fixture);
+
+    assertFalse(result.passed());
+    assertContains(result.failures(), FIXTURE_FIXED_NK);
+    assertEquals(List.of(GAME_CHANGE_DIFFERENCE), result.unregisteredDifferences());
+  }
+
+  @Test
+  void refusesTheGameChangeClaimAtAnotherField() throws Exception {
+    Fixture fixture = fixture("game-change-claim-on-extra-field");
+    mutate(
+        fixture.current().resolve(FIXTURE_CHR_S02 + FIXTURE_JSON_SUFFIX),
+        root -> root.put(FIXTURE_EXTRA, FIXTURE_CURRENT_HANDLER));
+    mutate(
+        fixture.nk().resolve(FIXTURE_CHR_S02 + FIXTURE_JSON_SUFFIX),
+        root -> root.putNull(FIXTURE_EXTRA));
+    changeGameClaim(fixture, row -> row.put(FIXTURE_POINTER, "/" + FIXTURE_EXTRA));
+
+    var result = compare(fixture);
+
+    assertFalse(result.passed());
+    assertContains(result.failures(), FIXTURE_FIXED_POINTER);
+    assertTrue(result.unregisteredDifferences().contains("CHR-S02:/extra"));
+  }
+
+  @Test
+  void rejectsTheAbsentFallbackButtonEvenIfBothArtifactsAgree() throws Exception {
+    Fixture fixture = fixture("game-change-submit-button-lost");
+    for (Path artifacts : List.of(fixture.current(), fixture.nk())) {
+      mutate(
+          artifacts.resolve(FIXTURE_CHR_S02 + FIXTURE_JSON_SUFFIX),
+          root -> root.put(FIXTURE_GAME_CHANGE_FALLBACK, false));
+    }
+
+    var result = compare(fixture);
+
+    assertFalse(result.passed());
+    assertEquals(
+        List.of("CURRENT_GAME_CHANGE_FALLBACK", "NK_GAME_CHANGE_FALLBACK"), result.failures());
+    assertTrue(result.unregisteredDifferences().isEmpty());
+  }
+
+  @Test
+  void requiresAnExplicitGameChangeClaim() throws Exception {
+    Fixture fixture = fixture("game-change-without-observation");
+    removeObservation(fixture, FIXTURE_CHR_S02, FIXTURE_GAME_CHANGE_POINTER);
+
+    var result = compare(fixture);
+
+    assertFalse(result.passed());
+    assertContains(result.failures(), REQUIRED_GAME_CHANGE);
+    assertEquals(List.of(GAME_CHANGE_DIFFERENCE), result.unregisteredDifferences());
+  }
+
+  private static void changeGameClaim(Fixture fixture, Consumer<ObjectNode> change)
+      throws Exception {
+    mutate(
+        fixture.observations(),
+        root -> {
+          var claims = (ArrayNode) root.path(FIXTURE_OBSERVATIONS);
+          change.accept(
+              (ObjectNode)
+                  claims.get(
+                      findObservation(claims, FIXTURE_CHR_S02, FIXTURE_GAME_CHANGE_POINTER)));
+        });
+  }
+
   private static ArtifactComparator.ComparisonResult compare(Fixture fixture) throws IOException {
     return ArtifactComparator.compare(
         fixture.project(), fixture.current(), fixture.nk(), fixture.observations());
@@ -1335,6 +1432,23 @@ class ArtifactComparatorTest {
             FIXTURE_NK_SEARCH_TITLE));
     addCacheObservation(
         currentArtifacts.get(FIXTURE_CHR_O01), nkArtifacts.get(FIXTURE_CHR_O01), observationItems);
+    ObjectNode currentGame = currentArtifacts.get(FIXTURE_CHR_S02);
+    ObjectNode nkGame = nkArtifacts.get(FIXTURE_CHR_S02);
+    currentGame
+        .put(FIXTURE_GAME_CHANGE, FIXTURE_CURRENT_HANDLER)
+        .put(FIXTURE_GAME_CHANGE_FALLBACK, true);
+    nkGame.putNull(FIXTURE_GAME_CHANGE).put(FIXTURE_GAME_CHANGE_FALLBACK, true);
+    observationItems.add(
+        observation(
+            FIXTURE_DIF_013,
+            FIXTURE_CHR_S02,
+            FIXTURE_GAME_CHANGE_FIELD,
+            FIXTURE_DIFFERENCE,
+            FIXTURE_SEMANTIC,
+            FIXTURE_GAME_CHANGE_FIELD,
+            FIXTURE_GAME_CHANGE_POINTER,
+            FIXTURE_CURRENT_HANDLER,
+            null));
     addSessionObservations(
         currentArtifacts.get(FIXTURE_CHR_A02), nkArtifacts.get(FIXTURE_CHR_A02), observationItems);
     addRangeObservations(

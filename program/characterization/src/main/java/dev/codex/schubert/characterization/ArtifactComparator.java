@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.BooleanNode;
 import com.fasterxml.jackson.databind.node.IntNode;
+import com.fasterxml.jackson.databind.node.NullNode;
 import com.fasterxml.jackson.databind.node.TextNode;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -34,6 +35,9 @@ public final class ArtifactComparator {
   private static final String CACHE_DIFFERENCE = "DIF-011";
   private static final String RANGE_DIFFERENCE = "DIF-012";
   private static final String RANGE_STATUS_POINTER = "/invalidRange/status";
+  private static final String GAME_CHANGE_DIFFERENCE = "DIF-013";
+  private static final String GAME_CHANGE_CASE = "CHR-S02";
+  private static final String GAME_CHANGE_FALLBACK = "javascriptDisabledSubmitButton";
   private static final String SESSION_DIFFERENCE = "DIF-016";
   private static final String SESSION_CASE = "CHR-A02";
   private static final String LOGIN_TITLE = "CHR-A01:/title";
@@ -72,6 +76,10 @@ public final class ArtifactComparator {
               INVALID_RANGE_STATUS,
               "CHR-M07:/invalidRange/contentRange",
               textPair("bytes 999999999999-3388626/3388627", "bytes */3388627")),
+          GAME_CHANGE_DIFFERENCE,
+          Map.of(
+              GAME_CHANGE_CASE + ":/gameOnchange",
+              List.of(TextNode.valueOf("this.form.submit()"), NullNode.getInstance())),
           SESSION_DIFFERENCE,
           Map.of(
               "CHR-A02:/observedActiveSessionCount",
@@ -153,6 +161,16 @@ public final class ArtifactComparator {
             failures);
         require(
             MAX_ACTIVE_SESSIONS.equals(nk.path(CONFIGURED_SESSIONS)), "NK_SESSION_LIMIT", failures);
+      }
+      if (GAME_CHANGE_CASE.equals(caseId)) {
+        require(
+            BooleanNode.TRUE.equals(current.path(GAME_CHANGE_FALLBACK)),
+            "CURRENT_GAME_CHANGE_FALLBACK",
+            failures);
+        require(
+            BooleanNode.TRUE.equals(nk.path(GAME_CHANGE_FALLBACK)),
+            "NK_GAME_CHANGE_FALLBACK",
+            failures);
       }
       collectDifferences(caseId, "", current, nk, rawDifferences);
       comparedCases++;

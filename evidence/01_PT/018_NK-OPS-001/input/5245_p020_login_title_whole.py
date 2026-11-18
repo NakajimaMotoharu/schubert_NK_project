@@ -26,6 +26,8 @@ PHASES = {
         '540_P020*', E/'PG39944-p020-cache-and-session161-v1', 161, 165),
     'PG39990-p020-search-empty170-v1': (
         '549_P020*', E/'PG39965-p020-invalid-range165-v2', 165, 170),
+    'PG40014-p020-game-onchange176-v1': (
+        '555_P020*', E/'PG39990-p020-search-empty170-v1', 170, 176),
 }
 TEST_PACKAGE='dev.codex.schubert.characterization.'
 JAVA_DIR=Path(TEST_PACKAGE.rstrip('.').replace('.','/'))
