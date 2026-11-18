@@ -1,0 +1,463 @@
+{
+  "actualExit": 0,
+  "id": "W66-HANDOFF-20261118-06",
+  "startEvent": "PGPT-20261008-5977",
+  "terminalAtUTC": "2026-11-18T12:10:26.409606+00:00",
+  "source": "6a77bba460dfb8304d63357bd173302dd1c29436",
+  "inspectionHead": "e411d4664ebedd74cb39e8c389456964cc2730db",
+  "remoteHeadVerified": true,
+  "previous": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39312-wbs66-four-role-current-receipts-v1/manifest.json",
+    "sha256": "a0ca142fc7e581d795b1001b3640972b1174272ffb73fb46431a5d43e7d8cbc1"
+  },
+  "criteriaByRole": {
+    "WBS-F02": [
+      "WBS-F02/reuse",
+      "WBS-F02/criterion/contract",
+      "WBS-F02/criterion/scope",
+      "WBS-F02/criterion/quality"
+    ],
+    "WBS-F03": [
+      "WBS-F03/reuse",
+      "WBS-F03/criterion/contract",
+      "WBS-F03/criterion/scope",
+      "WBS-F03/criterion/quality"
+    ],
+    "WBS-C02": [
+      "WBS-C02/reuse",
+      "WBS-C02/criterion/contract",
+      "WBS-C02/criterion/scope",
+      "WBS-C02/criterion/quality"
+    ],
+    "WBS-F04": [
+      "WBS-F04/reuse",
+      "WBS-F04/criterion/contract",
+      "WBS-F04/criterion/scope",
+      "WBS-F04/criterion/quality"
+    ]
+  },
+  "ssc447Historical": {
+    "source": "e4794ddf45487268883334d0f8773d89bd47dcba",
+    "unitSource": "0601086e6ae95ba09c4fc137cff45ffa7a9ba239",
+    "tests": 152,
+    "success": 152,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "notRun": 0,
+    "physical": 175,
+    "wholeRawMiss": {
+      "line": 4,
+      "method": 4,
+      "class": 0,
+      "branch": 58,
+      "instruction": 85
+    },
+    "rawTargetParentsFull": true,
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36628-ssc447-current152-quality-return-v1/manifest.json",
+      "sha256": "eccacdc78f0ea40993950ee5a0b6b25a4981c9e54fa3a01db59bf316a9128597"
+    },
+    "laterProtocolSeparate": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38320-f03-ssc451452-protocol-full-module-byte-lineage-v1/manifest.json",
+      "sha256": "778f01c0fd1e2f8c35dcf110463a8014f4e59e0cfae96136a4fb5960c9a6a014"
+    }
+  },
+  "f02": {
+    "fourMain": 482,
+    "physical": 1102,
+    "buildActualExit": 0,
+    "receipt": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39452-f02-service-db-port-graph-independent-v1/manifest.json",
+      "sha256": "c4b3228a74c2b89d64388807764898e1a500d62aea0c40fd23d48e2d22b5d92c"
+    },
+    "migratedUpperSites": 32,
+    "remainingUpperSites": 72,
+    "newArchitectureExecution": 0,
+    "priorStorageEdgeStillExactBytes": true,
+    "need": [
+      "API/Web typed gate and QA056",
+      "72 upper / three Storage and original entry",
+      "current whole architecture and runtime/451"
+    ]
+  },
+  "f03": {
+    "previousMain": {
+      "total": 1027,
+      "sameEligible": 992,
+      "storedIndependentStorageDelta": 2,
+      "existingIndividual": 29,
+      "newRequired": 0,
+      "qa056Hold": 4,
+      "currentEligibleConfirmed": 1023
+    },
+    "previousTest": {
+      "total": 1133,
+      "confirmed": 1101,
+      "baselineHeld": 32,
+      "revisedInputs": 15,
+      "existingIndividual": 14,
+      "legacySourceOnly": 1,
+      "newRequired": 0
+    },
+    "newMainExactReplacementPaths": [
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java"
+    ],
+    "newTestExactReplacementPaths": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiCustomMetricPayloadTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSourceTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricsTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorderTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/InboxReplayMetricRecorderTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqMessageMetricRecorderTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqPressureMetricRecorderTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqProcessingDurationMetricRecorderTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqRedeliveryMetricRecorderTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmissionPortTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSourcePortTest.java",
+      "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+      "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ResourceScopeTest.java"
+    ],
+    "testProofs": {
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqPressureMetricRecorderTest.java": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39324-bug3267-api-mq-recorder-post-v1/manifest.json",
+        "sha256": "1834209dcd0a8050988105defa63068772aca5c28a597dcfc0aa51990aaabbc6"
+      },
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqRedeliveryMetricRecorderTest.java": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39324-bug3267-api-mq-recorder-post-v1/manifest.json",
+        "sha256": "1834209dcd0a8050988105defa63068772aca5c28a597dcfc0aa51990aaabbc6"
+      },
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricsTest.java": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39342-bug3268-api-standard-metrics-post-v1/manifest.json",
+        "sha256": "91fb4b2ab508ae7dea94b3b1c7a8a650b5cbb22a648f8b177d92f77a1e9da1ed"
+      },
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSourceTest.java": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39360-bug3269-api-standard-source-post-v1/manifest.json",
+        "sha256": "a01b106a0ea312d325c4edd58c6731671314103f7a822ed3ee463f205b3e7b58"
+      },
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39378-bug3272-api-context-post-v1/manifest.json",
+        "sha256": "111d2f0d913dca3d068de58f438c7c7d37e2ca6a2baa11c27319184240accaab"
+      },
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiCustomMetricPayloadTest.java": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39396-bug3276-api-custom-payload-post-v1/manifest.json",
+        "sha256": "a60ea0f2b3821288cd6f8e95297bb8e02cfdfd9a9db5de1299103573f4a53548"
+      },
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqMessageMetricRecorderTest.java": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39414-bug3278-four-api-recorders-post-v1/manifest.json",
+        "sha256": "5f77e66caf98a9b155c8451cbfdc95ed183a1a803499aac3fb27545bfe204749"
+      },
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqProcessingDurationMetricRecorderTest.java": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39414-bug3278-four-api-recorders-post-v1/manifest.json",
+        "sha256": "5f77e66caf98a9b155c8451cbfdc95ed183a1a803499aac3fb27545bfe204749"
+      },
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/InboxReplayMetricRecorderTest.java": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39414-bug3278-four-api-recorders-post-v1/manifest.json",
+        "sha256": "5f77e66caf98a9b155c8451cbfdc95ed183a1a803499aac3fb27545bfe204749"
+      },
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorderTest.java": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39414-bug3278-four-api-recorders-post-v1/manifest.json",
+        "sha256": "5f77e66caf98a9b155c8451cbfdc95ed183a1a803499aac3fb27545bfe204749"
+      },
+      "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ResourceScopeTest.java": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39428-bug3279-resource-post-v1/manifest.json",
+        "sha256": "87c73357092393e4d3f6f5d9c0c312144d5085d4e837967e2ea82b4f63f73654"
+      },
+      "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39428-bug3279-resource-post-v1/manifest.json",
+        "sha256": "87c73357092393e4d3f6f5d9c0c312144d5085d4e837967e2ea82b4f63f73654"
+      },
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmissionPortTest.java": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39452-f02-service-db-port-graph-independent-v1/manifest.json",
+        "sha256": "c4b3228a74c2b89d64388807764898e1a500d62aea0c40fd23d48e2d22b5d92c"
+      },
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSourcePortTest.java": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39452-f02-service-db-port-graph-independent-v1/manifest.json",
+        "sha256": "c4b3228a74c2b89d64388807764898e1a500d62aea0c40fd23d48e2d22b5d92c"
+      }
+    },
+    "currentMainEligibleConfirmed": 1023,
+    "currentTestEligibleConfirmed": 1101,
+    "fourModulesSpotBugsMissing0": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39440-service-jdbc-spotbugs-current-peers-v1/manifest.json",
+      "sha256": "454c1e9144b1a9560f61361fa7aabf9f80c8f8a9e7c4903401881447762b176a"
+    },
+    "currentWholeSixStatus": "UNACCEPTED",
+    "need": [
+      "Main4 / Test32 held",
+      "Root11, PMD45, six typed and 451"
+    ]
+  },
+  "c02": {
+    "activeRuntimeConfirmed": false,
+    "verifiedTemplateHashes": {
+      "src/deployment/systemd/artemis.service": "1b8fe8eaab683ac658bfe8c23816e709725431a0a2b80816bba5449d129c5266",
+      "src/deployment/systemd/caddy.service.d/schubert-nk-startup-policy.conf": "6711ce8ddf9fcf54f733acfb30c10e4970a051d55dba340bc55f70970060440e",
+      "src/deployment/systemd/caddy.service.d/schubert-nk-stop-policy.conf": "3710be0c023a4bbbf3a8f095cd2d91c5b97b40ed76056ddd4ff433d4f4e066bc",
+      "src/deployment/systemd/optional/inbox-inspector-context-previous.conf": "4e1de7eb4bee81acb1afb9fa34d41f01b26829030c225e74d92f1bce122dfd13",
+      "src/deployment/systemd/optional/inbox-inspector-response-previous.conf": "8629e3e009a38a164b9954326f25cbfcc6faa590fc838fd52307da6c9120e9b4",
+      "src/deployment/systemd/schubert-nk-api.service.template": "c81f848198dff4e24f7d607aef3caf3b3fa5d401278eeb0b1707662bdbc2d630",
+      "src/deployment/systemd/schubert-nk-backup.service.template": "2328437591829502f9318c39358b3c5f9ed06afb4d4116febcb3d1860d3b2b8a",
+      "src/deployment/systemd/schubert-nk-bootstrap-admin.service.template": "e38a6021b2881ec832a8ca7fa8961f8754619b110415ef35a6aa0992e556d392",
+      "src/deployment/systemd/schubert-nk-cleanup.service.template": "a7446238928b4446a65fdd6088a7a5ad374b5a4507ade1adf9084190091c34a2",
+      "src/deployment/systemd/schubert-nk-expiry-cleanup.service.template": "0e6c3453373e4eb9c20ff175408ff66db731acda376c0b343e89f3541cf30709",
+      "src/deployment/systemd/schubert-nk-inbox-inspector.service": "225adff0cee398c1ad7d25bd587e666018b9698a3d0256788c38cf029d8262d8",
+      "src/deployment/systemd/schubert-nk-morning-controller.service.template": "e9ce87045404893edede09b86dfb55523698ed26eeef3c4cb2b386f16518613b",
+      "src/deployment/systemd/schubert-nk-morning.target.template": "befb463e738a7cec5379b98cbb9ca68026fe49bb5ab7c593038bae9df8ebfacb",
+      "src/deployment/systemd/schubert-nk-web.service.template": "eb3980ad64852645ffe2a07ac2ac4f453aeb8ce9cedd1d9147e1a1d3d863acbc"
+    },
+    "need": "Effective units and Inspector terminal with native ownership, correct host and required 451."
+  },
+  "f04": {
+    "authenticated": false,
+    "previousAuthBodyDidNotRun": true,
+    "previousActualExit": 255,
+    "remaining": "QA058 access or approved independently attested current source, boot, capacity, owner and terminal."
+  },
+  "scopesTrace": {
+    "sourceOwner": {
+      "path": "documents/400_PGPT/470_PMO/485_WBS網羅性・受入対応.json",
+      "sha256": "61dd93caab9c0911a0d087524f46255813a121e1d2e96cc130bd4e839bcea4c2"
+    },
+    "changedCurrentMainAndTest": [
+      {
+        "main": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+        "program": "NK-OPS-001",
+        "artifactOwner": "WBS-P018-05",
+        "requirements": [
+          "SYS-002",
+          "SYS-004",
+          "DAT-001"
+        ],
+        "relatedCriteria": [
+          "WBS-F02-a",
+          "WBS-P004-05/2",
+          "WBS-P018-05"
+        ],
+        "canonicalDesignSource": "2c6ad9fe4cf5682b21ae4377309b724a3ba06e23",
+        "design": [
+          {
+            "path": "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md",
+            "blob": "d9dd974f692577120b60ad7d62ebbc77b5d1fe23"
+          },
+          {
+            "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+            "blob": "2802f54b6d064001b9fd5bbb0f1040069069382f"
+          },
+          {
+            "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+            "blob": "cc233a6006e1ea878bdb4e1cdf20f59ed13f65f6"
+          },
+          {
+            "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+            "blob": "7b537b31890b1486a108a24d9729c3e7c53e687e"
+          }
+        ],
+        "test": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmissionPortTest.java",
+        "methods": [
+          {
+            "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+            "method": "dbAdmission001UrlBoundsAndBothRoles()"
+          },
+          {
+            "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+            "method": "dbAdmission016FatalNextExceptionSurvivesOrderedRelease()"
+          },
+          {
+            "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+            "method": "dbAdmission002InvalidUrlsAndNullConstructorInputs()"
+          },
+          {
+            "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+            "method": "dbAdmission014TwoCloseFaultsAlwaysAttemptReverseOrder()"
+          },
+          {
+            "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+            "method": "dbAdmission010ErrorFaultIdentityAndCleanup()"
+          },
+          {
+            "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+            "method": "dbAdmission004ConnectionSettingsAndNullContract()"
+          },
+          {
+            "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+            "method": "dbAdmission007EachSqlFaultIsFixedAndSanitized()"
+          },
+          {
+            "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+            "method": "dbAdmission008SqlCloseFaultCannotReturnSuccess()"
+          },
+          {
+            "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+            "method": "dbAdmission009RuntimeFaultIdentityAndCleanup()"
+          },
+          {
+            "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+            "method": "dbAdmission015RepeatAndParallelUseIndependentBorrowedPorts()"
+          },
+          {
+            "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+            "method": "dbAdmission011KnownSqlBodyYieldsToUnknownClose()"
+          },
+          {
+            "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+            "method": "dbAdmission012UnknownPrimaryRetainsOnlyFixedSecondary()"
+          },
+          {
+            "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+            "method": "dbAdmission003FixedProjectionAndBorrowedConnection()"
+          },
+          {
+            "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+            "method": "dbAdmission013ErrorPrimaryAndBothCloseFaultsRetainIdentity()"
+          },
+          {
+            "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+            "method": "dbAdmission006MissingStatementAndRowsCloseOnlyAcquiredPorts()"
+          },
+          {
+            "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+            "method": "dbAdmission005EachProjectionInvariantFailsClosed()"
+          }
+        ],
+        "spec": {
+          "path": "evidence/01_PT/018_NK-OPS-001/4672_SSC461サービスJDBC三境界_単体テスト仕様.md",
+          "sha256": "a5c00a7d62e8dad2067d11bfa0bb0fe079ac24dfc491309846a3a8e8eaf431c2"
+        },
+        "result": {
+          "path": "evidence/01_PT/018_NK-OPS-001/4673_SSC461サービスJDBC三境界_実行結果.md",
+          "sha256": "74df9de2143d06341643046d1e5b928ca774cb36fb0bfe2cc61ed6c8446ea96e"
+        },
+        "evidence": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39452-f02-service-db-port-graph-independent-v1/manifest.json",
+          "sha256": "c4b3228a74c2b89d64388807764898e1a500d62aea0c40fd23d48e2d22b5d92c"
+        }
+      },
+      {
+        "main": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java",
+        "program": "NK-OPS-001",
+        "artifactOwner": "WBS-P018-05",
+        "requirements": [
+          "SYS-002",
+          "SYS-004",
+          "DAT-001"
+        ],
+        "relatedCriteria": [
+          "WBS-F02-a",
+          "WBS-P004-05/2",
+          "WBS-P018-05"
+        ],
+        "canonicalDesignSource": "2c6ad9fe4cf5682b21ae4377309b724a3ba06e23",
+        "design": [
+          {
+            "path": "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md",
+            "blob": "d9dd974f692577120b60ad7d62ebbc77b5d1fe23"
+          },
+          {
+            "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+            "blob": "2802f54b6d064001b9fd5bbb0f1040069069382f"
+          },
+          {
+            "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+            "blob": "cc233a6006e1ea878bdb4e1cdf20f59ed13f65f6"
+          },
+          {
+            "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+            "blob": "7b537b31890b1486a108a24d9729c3e7c53e687e"
+          }
+        ],
+        "test": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSourcePortTest.java",
+        "methods": [
+          {
+            "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+            "method": "dbSource013ParallelIndependentConnectionsAndPropertiesClear()"
+          },
+          {
+            "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+            "method": "dbSource010UnsupportedOptionsAndMemoryWriterOnly()"
+          },
+          {
+            "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+            "method": "dbSource009DiscardSqlRuntimeErrorMatrixAndSameThrowable()"
+          },
+          {
+            "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+            "method": "dbSource001PublicConstructionErasesInputWithoutConnecting()"
+          },
+          {
+            "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+            "method": "dbSource006NullConnectionCannotEscapeAsSuccess()"
+          },
+          {
+            "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+            "method": "dbSource007FailedIdentityAdmissionDiscardsExactlyOnce()"
+          },
+          {
+            "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+            "method": "dbSource002BothRolesFixedPropertiesAndEachPhysicalAdmission()"
+          },
+          {
+            "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+            "method": "dbSource003InvalidConstructionStillConsumesOwnedInput()"
+          },
+          {
+            "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+            "method": "dbSource015FatalConnectorGraphRetainsIdentityAndClearsProperties()"
+          },
+          {
+            "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+            "method": "dbSource014CloseRaceHasFiniteCallerOwnershipPostcondition()"
+          },
+          {
+            "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+            "method": "dbSource011WrapperTypeContractAndNullBoundary()"
+          },
+          {
+            "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+            "method": "dbSource004MaterialBoundsAndConstructorCloneAreIndependent()"
+          },
+          {
+            "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+            "method": "dbSource008AdmissionRuntimeAndErrorRetainOriginalIdentity()"
+          },
+          {
+            "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+            "method": "dbSource005ConnectorFaultsClearPropertiesAndKeepUnknownIdentity()"
+          },
+          {
+            "className": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+            "method": "dbSource012CloseIsIdempotentAndPreservesCallerOwnedConnection()"
+          }
+        ],
+        "spec": {
+          "path": "evidence/01_PT/018_NK-OPS-001/4672_SSC461サービスJDBC三境界_単体テスト仕様.md",
+          "sha256": "a5c00a7d62e8dad2067d11bfa0bb0fe079ac24dfc491309846a3a8e8eaf431c2"
+        },
+        "result": {
+          "path": "evidence/01_PT/018_NK-OPS-001/4673_SSC461サービスJDBC三境界_実行結果.md",
+          "sha256": "74df9de2143d06341643046d1e5b928ca774cb36fb0bfe2cc61ed6c8446ea96e"
+        },
+        "evidence": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39452-f02-service-db-port-graph-independent-v1/manifest.json",
+          "sha256": "c4b3228a74c2b89d64388807764898e1a500d62aea0c40fd23d48e2d22b5d92c"
+        }
+      }
+    ],
+    "storageWorkerRecord": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39426-f03-storage-resource-finite-independent-v1/manifest.json",
+      "sha256": "e3017080a9b979fa58b0d17fe1984a53ee8073c1190c1f10f2f4ca30dea87ffd"
+    }
+  },
+  "deadlineJST": "2026-11-25T23:29:00+09:00",
+  "externalAcknowledgement": null,
+  "externalActions": 0,
+  "addedProductExecutions": 0,
+  "formalAcceptance": 17,
+  "formalDenominator": 190,
+  "newAcceptance": 0,
+  "officialPt": 1964,
+  "officialScope": 53,
+  "effortCompletionRate": null
+}
