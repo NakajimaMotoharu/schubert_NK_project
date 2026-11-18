@@ -1,0 +1,103 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-18T16:29:06.441739+00:00",
+  "fromCommit": "54ecfaf9f0e87fda60f5611bf2bb576651a50841",
+  "throughCommit": "8416138b8bfaa177d6cba2c383faab581160e283",
+  "source": "8416138b8bfaa177d6cba2c383faab581160e283",
+  "commits": 10,
+  "trackedBlobVersions": 118,
+  "text": 117,
+  "binary": 1,
+  "heldMetadataOnly": 0,
+  "scannerCommand": [
+    "/home/mini/codex/project1/work/toolchain/gitleaks-8.30.1-linux-x64/gitleaks",
+    "dir",
+    "--no-banner",
+    "--no-color",
+    "--redact=100",
+    "--ignore-gitleaks-allow",
+    "--gitleaks-ignore-path",
+    "/dev/shm/schubert-nk-pg39880-1000/text",
+    "--report-format=json",
+    "--report-path",
+    "/dev/shm/schubert-nk-pg39880-1000/scanner-redacted.json",
+    "--timeout",
+    "75",
+    "/dev/shm/schubert-nk-pg39880-1000/text"
+  ],
+  "scannerSha256": "88f91962aa2f93ac6ab281d553b9e125f5197bbbce38f9f2437f7299c32e5509",
+  "scannerExit": 1,
+  "scannerStartUTC": "2026-11-18T16:26:40.838239+00:00",
+  "scannerTerminalUTC": "2026-11-18T16:26:43.794575+00:00",
+  "findingsCount": 83,
+  "confirmedSecrets": 0,
+  "unresolvedCandidates": 0,
+  "unqualifiedBinary": 0,
+  "grounds": {
+    "Exact prior adjudicated line and scanner coordinate": 82,
+    "Exact manifest key and current physical SHA at the split scanner span": 1
+  },
+  "exactPrivateProjectionReceipts": {
+    "projection.json": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39880-g07-service-state-lock-public-delta-v1/projection.json",
+      "sha256": "612361253666ff320c4603c61ac42ab12c6cd7022d4e7841fda728da1c1f6a5f"
+    },
+    "scanner-redacted.json": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39880-g07-service-state-lock-public-delta-v1/scanner-redacted.json",
+      "sha256": "aecad47515fff4b47ce6959f23440badb193f71f32120ce8f7ecc0325929c577"
+    }
+  },
+  "exactPrivateProofFiles": {
+    "scan-terminal.json": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39880-g07-service-state-lock-public-delta-v1/qualification-detail/scan-terminal.json",
+      "sha256": "4d748825c1ef4b6b09b5ecd01ed753d0b348544197ae04d3a2062cecf055240c"
+    },
+    "qualified-cached-initial.json": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39880-g07-service-state-lock-public-delta-v1/qualification-detail/qualified-cached-initial.json",
+      "sha256": "868754b5984858d97c4ba83209a36af2bcab72571afcfe78aa84a9dc048fe5f4"
+    },
+    "qualified-final-private-detail.json": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39880-g07-service-state-lock-public-delta-v1/qualification-detail/qualified-final-private-detail.json",
+      "sha256": "d617664c9f137c90625885c2251d4ae6f2a8357236011bab9154d36e18342ebf"
+    },
+    "classified-findings.json": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39880-g07-service-state-lock-public-delta-v1/qualification-detail/classified-findings.json",
+      "sha256": "b2047f3f2d6c13a34dc15cf71e2e74132007c469ad3763c188f7465eea2d4496"
+    },
+    "remaining-origins.json": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39880-g07-service-state-lock-public-delta-v1/qualification-detail/remaining-origins.json",
+      "sha256": "c80d481ab1cc2a35d6305daacc4cbd27b326f834890780ce249bc40adbd65539"
+    },
+    "binary-qualification.json": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39880-g07-service-state-lock-public-delta-v1/qualification-detail/binary-qualification.json",
+      "sha256": "91f1e8b078db353f294635d60297aef0a5e43f9be443ccb5b8ca96beba634f58"
+    },
+    "additional-build-origins.json": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39880-g07-service-state-lock-public-delta-v1/qualification-detail/additional-build-origins.json",
+      "sha256": "360300327f5eaa9cffadf4feb714787da81e26ce90d5b9d1c1d5034b6efbd389"
+    }
+  },
+  "projectionPersistedAsVolatileDuplicateOnly": true,
+  "releasedProjectionFiles": 118,
+  "allReleasedFilesIndividuallyHashChecked": true,
+  "originalGitBlobsPreserved": true,
+  "projectionReconstructionBasis": "Exact Git blob and gzip-decoded SHA per retained projection index",
+  "compactPublicReceipt": true,
+  "secretCandidateOutput": [
+    "scanner match strings",
+    "credential values",
+    "private runtime content",
+    "raw HTTP or database output"
+  ],
+  "retainedReportHasValuesRedacted": true,
+  "activeRemoteBusinessWork": 0,
+  "productTests": 0,
+  "localFreeBeforeCleanup": 1467711488,
+  "localFreeAfterCleanup": 1467707392,
+  "tmpFreeBeforeCleanup": 7866900480,
+  "tmpFreeAfterCleanup": 7948283904,
+  "sameRangeScannerRepeated": false,
+  "qualifiedRangeOnly": true,
+  "wholeG07Accepted": false,
+  "whole451Accepted": false
+}
