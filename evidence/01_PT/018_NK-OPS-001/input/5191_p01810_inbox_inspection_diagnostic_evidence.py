@@ -3,6 +3,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 import re
 import runpy
+import subprocess
 from xml.etree import ElementTree as ET
 
 ENTRY = Path(__file__).resolve()
@@ -73,7 +74,13 @@ def observe(case, rows, values):
     if tag == '012':
         raw_file = h['matching_path']('PG35844*/manifest.json')
         raw = h['load'](raw_file)
-        assert raw['originalSingleExec'] == h['ref'](f / 'jacoco.exec')
+        joined_file = h['matching_path']('PG35843*/manifest.json')
+        joined = h['load'](joined_file)
+        assert joined['source'] == post['source'] and joined['run'] == post['run']
+        assert joined['originalGenericPost'] == h['ref'](postfile)
+        copied = joined_file.parent / 'jacoco.exec'
+        assert raw['originalSingleExec'] == h['ref'](copied)
+        assert h['ref'](copied)['sha256'] == post['files']['jacoco.exec']
         assert raw['actualUnitSource'] == post['source']
         assert raw['actualExit'] == 0
     else:
@@ -94,7 +101,8 @@ def observe(case, rows, values):
 def main():
     start = h['load'](next(D.glob('472_*')))
     values = start['values']
-    assert h['git']('rev-parse', 'HEAD').decode().strip() == values['source']
+    assert subprocess.run(['git', 'merge-base', '--is-ancestor', values['source'], 'HEAD']).returncode == 0
+    assert not h['git']('diff', '--name-only', values['source'], 'HEAD', '--', 'src')
     assert h['git']('rev-parse', 'origin/dev-foundation').decode().strip() == values['source']
     assert all(h['ref'](Path(v['path'])) == v for v in values['oracleReferences'])
     cat = h['matching_path']('PG38818*/attempt-02/catalog-evidence.json')
@@ -105,6 +113,7 @@ def main():
                   catalogReference=h['ref'](cat), matchedIndependentDiagnosticContracts=2,
                   items=items, productTestsRerun=0, firstCandidateStaticWitness=2, reusedOriginalExecUnion=0,
                   wholeCurrentCoverageCredited=0, actualProducerSinksProved=False, newAcceptance=0,
+                  initialAttempt=h['ref'](OUT / 'first-verifier-failure.json'),
                   originalRowPriceAddedPp=0, QAOrHoldChanged=0, verifier=h['ref'](ENTRY.relative_to(Path.cwd())))
     output = OUT / 'manifest.json'
     h['write'](output, result)

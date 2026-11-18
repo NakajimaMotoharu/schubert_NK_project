@@ -1,0 +1,146 @@
+{
+  "actualExit": 0,
+  "startEvent": "PGPT-20261008-5999",
+  "productionCore": "5e0b5575cf14416389a30be0175b52f7ec685983",
+  "source": "0b63a612aa3d700d89b15d0ab1d0f66712c2522e",
+  "terminalAtUTC": "2026-11-18T13:35:28.881736+00:00",
+  "catalogReference": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38818-p01810-ordinary-diagnostic-catalog-current-v1/attempt-02/catalog-evidence.json",
+    "sha256": "12bbd6119a32f4bfeedf30505bf7e74f3e19c474ad662c86b2e5bb0f3cbd40e5"
+  },
+  "matchedIndependentDiagnosticContracts": 2,
+  "items": [
+    {
+      "catalogId": "PT-P01810-CATALOG-012",
+      "mainPath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxRequest.java",
+      "mainSha256": "5c4f01d72d17a234d201ee5de6e0a47fc5fed5be4d328b4f283544e0eaf69e1a",
+      "testPath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/InboxRequestValueContractTest.java",
+      "testSha256": "2ba361f89b2a4ac57fbf7c12c66b7dc8dba0d969a7deaf20455331ecbf3b16cf",
+      "witnessClass": "dev.codex.schubert.nk.api.idempotency.InboxRequestValueContractTest",
+      "witnessMethod": "requestValue002OrderedValueComponentsAndFixedRedactionRetainBorrowedCanonical",
+      "expectedLiteral": "InboxRequest[message/correlation/owner/token/request/time=<redacted>]",
+      "staticMethodIndependentOfInstanceState": true,
+      "historicalSource": "0ab86bfd53c1e670c5a9f40995dc64722438bca5",
+      "historicalCore": "44ec859d0c8aaf5f2b5a77c9d1c8d57fbe7db9f3",
+      "historicalClassCrc": "afc5a75668b2bad9",
+      "actualRelevantOriginalCases": 1,
+      "originalWholeCases": 21,
+      "originalMethodCounters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 2
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "naturalNoBranch": true,
+      "originalFiles": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35842-ssc441-inbox21-post-v2/original-TEST-junit-jupiter.xml",
+          "sha256": "7640d365b26eb62d78de78ca81b883a625d1c59a8cdccf246c728b995fd8a177"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35842-ssc441-inbox21-post-v2/original-coverage.xml",
+          "sha256": "53262bd6fccdc596de586f771f77b345c345a828bfa34533f52c2ce1caa44373"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35842-ssc441-inbox21-post-v2/jacoco.exec",
+          "sha256": "fea5f69dd250c4774a913216445313cacfa92452a0c628a1a9a3730224557184"
+        }
+      ],
+      "originalProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35842-ssc441-inbox21-post-v2/manifest.json",
+        "sha256": "9a7bce25913440d5931b84009d3d63ac8769f260a09d0aa3d879d40c3902674a"
+      },
+      "supplementalProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35844-ssc441-inbox21-unfiltered-v2/manifest.json",
+        "sha256": "f2bbd71fb3f57c27f15d4aa127fb13bd7cedb21e5f5109ff117970854ba7db2f"
+      },
+      "currentCandidateClaim": "IDENTICAL_FOCUSED_MAIN_AND_TEST_ONLY"
+    },
+    {
+      "catalogId": "PT-P01810-CATALOG-045",
+      "mainPath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/InspectionAttempt.java",
+      "mainSha256": "87e838668d69c083eaf0b9e9420a59f47ec344629a492c8002edd7adbfc8a8a7",
+      "testPath": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/InspectionAttemptTest.java",
+      "testSha256": "e470927d66599488f16a7d9db8253372a728ad5e7579e8da52989d11b2e4606c",
+      "witnessClass": "dev.codex.schubert.nk.batch.cleanup.InspectionAttemptTest",
+      "witnessMethod": "redactionAndValueOwnership",
+      "expectedLiteral": "InspectionAttempt[observation=<redacted>]",
+      "staticMethodIndependentOfInstanceState": true,
+      "historicalSource": "b8f5261a03405b7fd7e2cfafa2e22dbb11e9220f",
+      "historicalCore": "bba3e0cd94e426e82bceec3182060c3695cd0ec6",
+      "historicalClassCrc": "bc2e2e4586ea813f",
+      "actualRelevantOriginalCases": 1,
+      "originalWholeCases": 8,
+      "originalMethodCounters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 2
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "naturalNoBranch": true,
+      "originalFiles": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29434-attempt8-post-v1/original-TEST-junit-jupiter.xml",
+          "sha256": "d2f69f91ae08e4475ec06fc160cb93873150a3a5c249e8f51afcc6dd0f482850"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29434-attempt8-post-v1/original-coverage.xml",
+          "sha256": "18fd0d7dd42f1de3779461b947572f2078da5e007cd7dac204fbf96d9033a3aa"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29434-attempt8-post-v1/jacoco.exec",
+          "sha256": "563caf5118f958b7c260c47ba6ec36f16a74d87709ffa3d6d2e0bae05b7ceaf4"
+        }
+      ],
+      "originalProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29434-attempt8-post-v1/manifest.json",
+        "sha256": "a2a61b3def2b92069c84e7b751df1daa21e451beaabd5e1a677ceebee024718b"
+      },
+      "supplementalProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29438-attempt8-current-source-join-v1/manifest.json",
+        "sha256": "834710c3f217664113e60b555f4eec557b61f20383197fe6bcc623a51d175527"
+      },
+      "currentCandidateClaim": "IDENTICAL_FOCUSED_MAIN_AND_TEST_ONLY"
+    }
+  ],
+  "productTestsRerun": 0,
+  "firstCandidateStaticWitness": 2,
+  "reusedOriginalExecUnion": 0,
+  "wholeCurrentCoverageCredited": 0,
+  "actualProducerSinksProved": false,
+  "newAcceptance": 0,
+  "initialAttempt": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39628-p01810-inbox-inspection-diagnostic-lineage-v1/first-verifier-failure.json",
+    "sha256": "3167460b20ca5f0b1b1a773a573d687fb36ece1901981c9e053168c8d2ff9158"
+  },
+  "originalRowPriceAddedPp": 0,
+  "QAOrHoldChanged": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5191_p01810_inbox_inspection_diagnostic_evidence.py",
+    "sha256": "8280da7812b4baeb069b12727802977d3ce59cc7f4ab95fbfd587bc154865058"
+  }
+}
