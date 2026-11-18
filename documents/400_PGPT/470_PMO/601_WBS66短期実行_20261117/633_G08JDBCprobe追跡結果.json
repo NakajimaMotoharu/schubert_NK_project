@@ -1,0 +1,101 @@
+{
+  "eventId": "PGPT-20261008-6154",
+  "actualExit": 0,
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-G08-F02-P01808-TOOL-TRACE-20261119",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-G08-F02-P01808-TOOL-TRACE-20261119",
+    "workAttributionKind": "REQUALIFICATION",
+    "wbsLeafIds": [
+      "WBS-G08"
+    ],
+    "managementWorkIds": [
+      "G08",
+      "WBS-F02-a",
+      "WBS-P018-08.03/2"
+    ],
+    "source": "4935fe4642254611d84ba0cfe54cccfabc9adf44",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "run": "PG40156-g08-jdbc-probe-tool-trace-v1",
+    "workScope": "Register the four F02 canaries and six P018-08 decoder tests as tool scope only, by exact source, test IDs and artifact hashes. No rerun and no product transfer.",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.1,
+      "base": 0.28,
+      "high": 0.8
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40146-f02-controller-spring-jdbc-independent-v1/manifest.json",
+        "sha256": "0063e08dee0f27f0d1d950aec2c172e0136c43dbda5fb0ccfc52077d181e450d"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40152-p01808-exec-canonical-independent-v1/manifest.json",
+        "sha256": "590abba3c27c02115265323ce1806f439e8f700c4ba7ab8d7a9f01c154e3d9bb"
+      }
+    ],
+    "quotaAfter": {
+      "usedPercent": 48,
+      "remainingPercent": 52,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "b47fb2a5308d7485d8f4d20fb3408a1ea62d413ad5563342d13c3f4086499c3f",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T22:30:59.786000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 48,
+          "remainingPercent": 52,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T22:30:33.144739+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 48,
+      "remainingPercent": 52,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "publicEvidence": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40156-g08-jdbc-probe-tool-trace-v1/manifest.json",
+        "sha256": "ee5b0c9031c82bb48de05821e20056b2d8633c99a37175ea90f78dac3a17d04f"
+      }
+    ],
+    "canaries": 4,
+    "probeDefinitions": 6,
+    "productTests": 0,
+    "wholeG08Accepted": false,
+    "formalIntake": 0,
+    "currentAccepted": 17,
+    "result": "Matched ten exact new tool tests to artifacts and owners. No repeated test, full-product coverage or formal intake."
+  }
+}
