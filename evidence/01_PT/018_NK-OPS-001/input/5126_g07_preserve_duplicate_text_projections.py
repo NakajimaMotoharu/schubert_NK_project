@@ -51,7 +51,7 @@ def verify_member_inventory(archive, expected):
     assert seen == set(expected)
 
 
-def preserve(name, final_name, count):
+def preserve(name, final_name, count, *, legacy=False):
     public = EVIDENCE / name
     work = RUNS / name.lower()
     assert work.is_dir() and work.resolve() == work and work.stat().st_uid == os.getuid()
@@ -59,18 +59,29 @@ def preserve(name, final_name, count):
     proof = load(public / final_name)
     scan_path = public / "scan-terminal.json"
     scan = load(scan_path)
-    assert proof["unresolvedCandidates"] == proof["unqualifiedBinary"] == proof["confirmedSecrets"] == 0
+    assert proof["unresolvedCandidates"] == proof["confirmedSecrets"] == 0
+    if legacy:
+        assert (name, final_name, count) == ("PG38950-g07-new-published-blobs", "manifest.json", 1195)
+        assert len(scan["binary"]) == proof["qualifiedBinary"] == 8
+        assert proof["privateRuntimeRead"] == proof["untrackedRead"] == 0
+    else:
+        assert proof["unqualifiedBinary"] == 0
     assert proof["scan"] == {"path": str(scan_path), "sha256": hash_file(scan_path)}
     index = work / "projection.json"
     report = work / "scanner-redacted.json"
     assert hash_file(index) == scan["projectionSha256"]
-    assert hash_file(report) == scan["reportSha256"]
+    report_hash = scan["redactedReportSha256" if legacy else "reportSha256"]
+    assert hash_file(report) == report_hash
     expected = {}
     for row in load(index):
-        if row["treatment"] != "text":
+        is_text = row["text"] is True if legacy else row["treatment"] == "text"
+        if not is_text:
             continue
         rel = Path(row["relativeProjection"])
-        assert len(rel.parts) == 3 and rel.parts[0] == "text" and len(rel.parts[1]) == 6 and rel.parts[1].isdigit()
+        assert len(rel.parts) == 3 and rel.parts[0] == "text"
+        assert len(rel.parts[1]) == (5 if legacy else 6) and rel.parts[1].isdigit()
+        assert Path(row["path"]).name not in {"SnapshotKeyCloseWitness.java", "pg9892_snapshot_key_close_witness.py"}
+        assert rel.name not in {".", ".."}
         path = work / rel
         info = path.lstat()
         assert path.resolve() == path and stat.S_ISREG(info.st_mode) and info.st_uid == os.getuid() and info.st_nlink == 1
@@ -94,7 +105,7 @@ def preserve(name, final_name, count):
     receipt = work / "text-projection-retained.json"
     data = dict(actualExit=0, archive=str(archive), archiveSha256=a_sha, archiveBytes=archive.stat().st_size,
                 files=count, uncompressedBytes=sum(v["bytes"] for v in expected.values()),
-                decodedIndexSha256=scan["projectionSha256"], redactedReportSha256=scan["reportSha256"],
+                decodedIndexSha256=scan["projectionSha256"], redactedReportSha256=report_hash,
                 restoreCommand=["tar", "-xzf", str(archive), "--no-same-owner", "-C", str(work)],
                 sourceEvidence=str(public / final_name), sourceEvidenceSha256=hash_file(public / final_name),
                 everyMemberVerified=True, gitOriginalAndScannerReportPreserved=True)
@@ -106,7 +117,7 @@ def preserve(name, final_name, count):
         path.unlink()
     assert not list((work / "text").glob("*/*"))
     assert hash_file(index) == scan["projectionSha256"]
-    assert hash_file(report) == scan["reportSha256"]
+    assert hash_file(report) == report_hash
     after = shutil.disk_usage(work).free
     return dict(data, receipt=str(receipt), receiptSha256=hash_file(receipt),
                 availableBefore=before, availableAfter=after, duplicateTextCopiesReleased=count)

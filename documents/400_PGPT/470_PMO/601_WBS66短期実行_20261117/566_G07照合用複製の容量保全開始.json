@@ -1,0 +1,61 @@
+{
+  "eventId": "PGPT-20261008-6087",
+  "groupId": "PGPT-WBS66-G07-SAFE-DUPLICATE-CAPACITY-20261119",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-18T18:28:40.597000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 46,
+      "remainingPercent": 54,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-G07-SAFE-DUPLICATE-CAPACITY-20261119",
+    "workCategory": "ADMIN",
+    "workDetailCategory": "PGPT-WBS66-G07-SAFE-DUPLICATE-CAPACITY-20261119",
+    "workAttributionKind": "RECOVERY",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "G07"
+    ],
+    "source": "c28ce359bc379c94cc1e3b31774c8dd701295b1d",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "run": "PG40044-g07-preserve-older-public-projection-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.2,
+      "base": 0.55,
+      "high": 1.4
+    },
+    "groupCapPp": 3,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38950-g07-new-published-blobs/manifest.json",
+        "sha256": "e99359d01a482a1eb70b74fece55e418ce18a1a4c5ca95060b6933172e86699c"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38950-g07-new-published-blobs/scan-terminal.json",
+        "sha256": "54f628b6bf4293968bc6601bb89e5cb49778dab49dfd9fd954a5990c7996ebb6"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5126_g07_preserve_duplicate_text_projections.py",
+        "sha256": "c93d608d920a0da2cdd72e25d9d1d701d263f786df5493bc544e15e50f129cbd"
+      }
+    ],
+    "workScope": "Reversible preservation of exactly 1195 earlier PG38950 public text projection copies. Use stored Git/manifest SHA, verify every archive member and restore commands before releasing redundant copies. Keep originals, binary, index, redacted report, preexisting source and directories. No external contact or PT."
+  }
+}
