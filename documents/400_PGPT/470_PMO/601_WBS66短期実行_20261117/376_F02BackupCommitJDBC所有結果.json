@@ -1,0 +1,161 @@
+{
+  "eventId": "PGPT-20261008-5908",
+  "actualExit": 0,
+  "workStatus": "PARTIAL",
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F02-BACKUP-COMMIT-JDBC-OWNER-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-F02-BACKUP-COMMIT-JDBC-OWNER-20261118",
+    "workAttributionKind": "REWORK",
+    "workScope": "WBS-F02-a/P004-05 and Backup named product owner P017-06. SSC461 BUG3233/YKT2680. Migrate three public BackupCommitService JDBC known-failure graph points; existing memory BackupPair SQL-literal fixtures, new wrapper transaction/identity/rollback/restore-only ordinary tests. Existing actual DB/Backup fixture remains unchanged/held; no original file, lock, service or owner operation. End safe initial whole current source and independent coverage, ABI and static.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/017_NK-BAT-001/699_Backup監査ペア_単体テスト仕様書.md",
+        "sha256": "65b0466fecf6447d5eb99dc493c382d6db34e28795ccb04bf142895b4c1748cb"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38756-f02-backup-pair-jdbc-owner-independent-v1/manifest.json",
+        "sha256": "6eef723f66a03e442111fdcb31ef91c9ec695b8aaa4ff426a1c5e7456f684932"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38959-f02-current-four-physical-independent-v1/manifest.json",
+        "sha256": "6aae48af70d2fb968e922e9b73881dc1d69ba6419ccf7189fdf65a467776a9d3"
+      }
+    ],
+    "productionCoreMain": "29f3b433952ad19d4ad34c4e1a31ed310bebde6a",
+    "source": "3d14ee820e86def80645947158c815ff82eff6a8",
+    "wbsLeafIds": [
+      "WBS-F02",
+      "WBS-P004-05",
+      "WBS-P017-06"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a",
+      "SSC-461",
+      "YKT-2680"
+    ],
+    "run": "PG38977-f02-backup-commit-owner-independent-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.65,
+      "base": 1.75,
+      "high": 4.0
+    },
+    "groupCapPp": 6.0,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "relatedBug": "BUG-3233",
+    "relatedYkt": "YKT-2680",
+    "quotaAfter": {
+      "usedPercent": 32,
+      "remainingPercent": 68,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "fe96005d89689567e2dec6b54bb3f7c55c90db476481dc0a2609eedee6b43dba",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T08:23:00.205000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 32,
+          "remainingPercent": 68,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T08:22:22.168456+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 32,
+      "remainingPercent": 68,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-5907",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38977-f02-backup-commit-owner-independent-v1/manifest.json",
+      "sha256": "042fb16b654ce1dee15f38c2df4f467bc07b8e0498dad101b44d89d8b287f51c"
+    },
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortCompletionRate": null,
+    "firstProductRunSuccess": true,
+    "firstIndependentPostSuccess": true,
+    "firstQualityAdmitted": false,
+    "productTestsExecuted": 16,
+    "newDefinitions": 6,
+    "caseDenominator": 16,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "notRun": 0,
+    "transferredThis": 3,
+    "migratedUpperSites": 29,
+    "upperInitialSites": 104,
+    "relatedBugs": [
+      "BUG-3233",
+      "BUG-3249"
+    ],
+    "crossRefYkt": [
+      "YKT-2680"
+    ],
+    "targetRaw": {
+      "INSTRUCTION": [
+        0,
+        116
+      ],
+      "BRANCH": [
+        0,
+        20
+      ],
+      "LINE": [
+        0,
+        37
+      ],
+      "COMPLEXITY": [
+        0,
+        13
+      ],
+      "METHOD": [
+        0,
+        3
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "completedAdditionalPricePp": 0,
+    "additionalCompletedPriceTotalPp": 42.9,
+    "originalCompletedPriceTotalPp": 9.538,
+    "shortTermTwelvePlanPp": 143.371,
+    "retryReasons": [
+      "prestyle one real fixture naming defect corrected after BUG3249",
+      "static receipt writer initially rejected ambiguous repeat anchors before preflight; original current test-line mapping corrected without re-run"
+    ],
+    "reviewStatus": "BACKUP_COMMIT_TARGET_FOUR100_REAL_DB_AND_EXTERNAL_OWNER_PENDING",
+    "nextCondition": "Select next permitted ordinary P004-05/F02 JDBC scope or separately admissible priority criterion; no backup originals or live authorization."
+  }
+}
