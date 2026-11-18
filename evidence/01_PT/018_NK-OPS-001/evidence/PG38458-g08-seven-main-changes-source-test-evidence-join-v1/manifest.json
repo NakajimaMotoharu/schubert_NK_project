@@ -1,0 +1,315 @@
+{
+  "run": "PG38458-g08-seven-main-changes-source-test-evidence-join-v1",
+  "actualExit": 0,
+  "source": "713885ee295be89b2c2362594c67879827cfba50",
+  "baseline": "cc64fbee4d21bb0b805fb364d8537de3169909e9",
+  "terminalAtUTC": "2026-11-18T03:06:10.690554+00:00",
+  "rows": [
+    {
+      "program": "InspectionExecution",
+      "owner": "WBS-P004-04",
+      "main": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectionExecution.java",
+        "sha256": "a6386577f68382a34d5f58bfd81f5bd50746622c610511af3c49c110063e44af"
+      },
+      "testSpec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/4565_SSC453終了コード値所有・単体テスト仕様書.md",
+        "sha256": "587879a2a0b0d9cd888eb00507591b66f5e73fa2a516ae3d4157be6b848e79dc"
+      },
+      "testsInOriginalScopedUnit": 5,
+      "programMapping": [
+        "NK-DAT-001",
+        "UI251",
+        "SS324",
+        "SS341"
+      ],
+      "tickets": [
+        "SSC-453",
+        "BUG-3223",
+        "YKT-2673"
+      ],
+      "actualSource": "35167d1390bdcedd31e5c35d8ee526089347fec6",
+      "actualMeasuredSource": "ef91b902e931ac18d1b0d3a81b4ad515bdf76383",
+      "run": "PG38384-ssc453-inspection-outcome-codes-independent-v1",
+      "unitProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38384-ssc453-inspection-outcome-codes-independent-v1/manifest.json",
+        "sha256": "0e1b4850194748897c827610c516bb9581e61eda17a0b4191c70c86ba9522048"
+      },
+      "presentMainBytesEqual": true,
+      "scopeMerged": false
+    },
+    {
+      "program": "EncryptedAuthContext",
+      "owner": "WBS-P007-03",
+      "main": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/EncryptedAuthContext.java",
+        "sha256": "3d8291bb1c35119e37a89e69b6895a73369d124be29ec73d7567b023834c0a83"
+      },
+      "testSpec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/4573_SSC455認証コンテキスト診断・単体テスト仕様書.md",
+        "sha256": "9281316697312f2e78beabad37552460b9a595895b890a7840b10ea80de1723f"
+      },
+      "testsInOriginalScopedUnit": 13,
+      "programMapping": [
+        "NK-AUT-001",
+        "UI226",
+        "SS351",
+        "SS352"
+      ],
+      "tickets": [
+        "SSC-455",
+        "BUG-3225",
+        "YKT-2674"
+      ],
+      "actualSource": "713885ee295be89b2c2362594c67879827cfba50",
+      "actualMeasuredSource": "d5c74153bfee38801395beeeb8daa63907a138ed",
+      "run": "PG38430-p01810-auth-context-diagnostic-independent-v1",
+      "unitProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38430-p01810-auth-context-diagnostic-independent-v1/manifest.json",
+        "sha256": "45b1561b9b90fd56003ca186bee15d6fd4314af127e86f3fee090e2d17371bd4"
+      },
+      "presentMainBytesEqual": true,
+      "scopeMerged": false
+    },
+    {
+      "program": "TransferContentVerifier",
+      "owner": "WBS-P008-03",
+      "main": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/TransferContentVerifier.java",
+        "sha256": "ddda7066f611cb0d57f408e2ee9d654c09170e9897c1b887e7f6862fd7487d20"
+      },
+      "testSpec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/4556_自己所有合成fileのcopy検証・原五全Code仕様.md",
+        "sha256": "5964d7197037e0607d8db2bb30e434aeaa677cc9b034dd80abbb8fc3e967d1bd"
+      },
+      "testsInOriginalScopedUnit": 7,
+      "programMapping": [
+        "RD-FUN-005/007",
+        "SS333"
+      ],
+      "tickets": [
+        "BUG-3209",
+        "YKT-2664"
+      ],
+      "actualSource": "b00f871804b6d25f1c3e5e6d3b77d7bcca340923",
+      "actualMeasuredSource": "b00f871804b6d25f1c3e5e6d3b77d7bcca340923",
+      "run": "PG38196-BORROWED-FILE-WHOLE7",
+      "unitProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38198-borrowed-file-whole7-independent-v1/manifest.json",
+        "sha256": "9a43a88185a4cf30dc6746bd2709f06c427cc7321de5fac67382606a619292af"
+      },
+      "presentMainBytesEqual": true,
+      "scopeMerged": false
+    },
+    {
+      "program": "BackupManifestCodec",
+      "owner": "WBS-P017-05",
+      "main": {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupManifestCodec.java",
+        "sha256": "be52607e0993e41a73b31cb28e9a7084201f658a763fee8fbe7549c30b065b8f"
+      },
+      "testSpec": {
+        "path": "evidence/01_PT/017_NK-BAT-001/4560_BackupManifestCodec原十六・非instance単体仕様.md",
+        "sha256": "245a7c9c2581ff62b1df73f7320f55cc32d3510301efb3dd3177ba6e3b85a08f"
+      },
+      "testsInOriginalScopedUnit": 17,
+      "programMapping": [
+        "NK-BAT-001",
+        "SS341",
+        "SS343"
+      ],
+      "tickets": [
+        "BUG-3213",
+        "BUG-3214"
+      ],
+      "actualSource": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+      "actualMeasuredSource": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+      "run": "PG38226-BACKUP-MANIFEST17",
+      "unitProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38228-backup-manifest17-independent-v1/manifest.json",
+        "sha256": "6b01141de2d64078a30492a635d088b0933521722737572638e8317762748a22"
+      },
+      "presentMainBytesEqual": true,
+      "scopeMerged": false
+    },
+    {
+      "program": "EncryptedWebLogPayload",
+      "owner": "WBS-P006-04",
+      "main": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload.java",
+        "sha256": "9318b03aefff1e169886a4c274236bb2ca1a7fd722b6fddc1dc25cc3e738f014"
+      },
+      "testSpec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/4569_SSC454Web値診断固定化・単体テスト仕様書.md",
+        "sha256": "4f391dd6176a64f747cb73fc99aa1b10eb08c2a5fcffc024605188c8f4a9aa28"
+      },
+      "testsInOriginalScopedUnit": 7,
+      "programMapping": [
+        "MON-003",
+        "UI242",
+        "SS331",
+        "SS351",
+        "SS352"
+      ],
+      "tickets": [
+        "SSC-454",
+        "BUG-3224",
+        "YKT-2674"
+      ],
+      "actualSource": "1224e04183d4f291e97cdb52832c3004bbe41289",
+      "actualMeasuredSource": "53bc17dc565728561f9fa9e2c1713301c679d8a5",
+      "run": "PG38408-p01810-web-value-privacy-independent-v1",
+      "unitProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38408-p01810-web-value-privacy-independent-v1/manifest.json",
+        "sha256": "c5b8c9387986e3d489e1cc11d983610e5c5a9870a3329fb36a08791550da5669"
+      },
+      "presentMainBytesEqual": true,
+      "scopeMerged": false
+    },
+    {
+      "program": "MediaBodyStreamer",
+      "owner": "WBS-P009-04",
+      "main": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/MediaBodyStreamer.java",
+        "sha256": "dccf3918d3891a520cf7a01537c774a5450dd450e28bf77b922ea1134b6ad163"
+      },
+      "testSpec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/4556_自己所有合成fileのcopy検証・原五全Code仕様.md",
+        "sha256": "5964d7197037e0607d8db2bb30e434aeaa677cc9b034dd80abbb8fc3e967d1bd"
+      },
+      "testsInOriginalScopedUnit": 7,
+      "programMapping": [
+        "DIF-media unchanged",
+        "UI237",
+        "SS333"
+      ],
+      "tickets": [
+        "BUG-3209",
+        "YKT-2664"
+      ],
+      "actualSource": "b00f871804b6d25f1c3e5e6d3b77d7bcca340923",
+      "actualMeasuredSource": "b00f871804b6d25f1c3e5e6d3b77d7bcca340923",
+      "run": "PG38196-BORROWED-FILE-WHOLE7",
+      "unitProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38198-borrowed-file-whole7-independent-v1/manifest.json",
+        "sha256": "9a43a88185a4cf30dc6746bd2709f06c427cc7321de5fac67382606a619292af"
+      },
+      "presentMainBytesEqual": true,
+      "scopeMerged": false
+    },
+    {
+      "program": "ValidatedReply",
+      "owner": "WBS-P005-02",
+      "main": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ValidatedReply.java",
+        "sha256": "1d54367bc3065f294a34c128faab57d29b3ade2491f8ba4dde17c02e4010f1ec"
+      },
+      "testSpec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/4569_SSC454Web値診断固定化・単体テスト仕様書.md",
+        "sha256": "4f391dd6176a64f747cb73fc99aa1b10eb08c2a5fcffc024605188c8f4a9aa28"
+      },
+      "testsInOriginalScopedUnit": 7,
+      "programMapping": [
+        "MQ-004/005",
+        "UI231",
+        "SS321",
+        "SS351"
+      ],
+      "tickets": [
+        "SSC-454",
+        "BUG-3224",
+        "YKT-2674"
+      ],
+      "actualSource": "1224e04183d4f291e97cdb52832c3004bbe41289",
+      "actualMeasuredSource": "53bc17dc565728561f9fa9e2c1713301c679d8a5",
+      "run": "PG38408-p01810-web-value-privacy-independent-v1",
+      "unitProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38408-p01810-web-value-privacy-independent-v1/manifest.json",
+        "sha256": "c5b8c9387986e3d489e1cc11d983610e5c5a9870a3329fb36a08791550da5669"
+      },
+      "presentMainBytesEqual": true,
+      "scopeMerged": false
+    }
+  ],
+  "changedProductMain": 7,
+  "changedTestFiles": 15,
+  "changedTests": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectionProgressExecutionValueContractTest.java",
+      "sha256": "9c139f6e81f5d556ca7e60ec3fe392e1dbbff30027dcd4c7be08818253df97fd"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectionRunStepValueContractTest.java",
+      "sha256": "a02fe0bf5849fd770662f90696ee3be6e722d02b6612efe3aba3f2fb589f140b"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/DeliveryMetadataValueContractTest.java",
+      "sha256": "d9223065e27375da02ad3c418a5791c96de92894a4e091557d5eed9a5a70b3b8"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadataValueContractTest.java",
+      "sha256": "d460107d7e3f8c27b72a03156f9c1b4b0d898df6eb9d10cc2660b4192e9f901e"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxRetainedValueContractTest.java",
+      "sha256": "347b7efb33413fc6cd9e44cb680ebfc8ed177650151904ae2718b2835928a35f"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthContextCodecTest.java",
+      "sha256": "460ca910481dcb0d6243b555efd1f255bd85de96c43921158b2f774c3c591401"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthContextValueContractTest.java",
+      "sha256": "e7905f9c8aa572dcc3eb4af477d43682b2d0a7bb62a22a1f744ba3bbc2597334"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferContentVerifierNamespaceContractTest.java",
+      "sha256": "7f2c8bc9eecc2275e3a6435ac630499291671745c3bb939bda972c5bfeee7daf"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/backup/BackupProfileValueIdentityTest.java",
+      "sha256": "2c90cc0b78b811cde4fb9c5106dcca0795778d7af0ca8668857c2fcd7c0295e5"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupManifestCodecNamespaceContractTest.java",
+      "sha256": "fa9a5c4fb60a54018f7283435bd5552a240ad9ce11f47a160ce3b5e681c3fb16"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest.java",
+      "sha256": "ae0bcd82210684bd9ae045124519ff2280621edd3eb522fb9db73a9d09715368"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogValueContractTest.java",
+      "sha256": "7655700a868614ea23120398ce90bb0eeaaec0ba24567d0094854b569cf4ba2f"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaBodyStreamerNamespaceContractTest.java",
+      "sha256": "2fddee1639efd0810c0c7954b7022d993fe49a3c6c4ed3ebb866c19e2c75db7d"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyValueContractTest.java",
+      "sha256": "3715e988f993ec10e5774b2b2801dd00782595106f9aee9c440f857f945a3908"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceValueContractTest.java",
+      "sha256": "96946ad195c8896b4d08b3297e0e18170b071c41f235357c5e877564774a8893"
+    }
+  ],
+  "currentMainEvidenceMatches": 7,
+  "distinctHistoricalExecutions": 5,
+  "latestAffectedCodecRegression": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38414-p01810-ssc454-web-log-codec-nine-v1/manifest.json",
+    "sha256": "1a4d901085e4a5d5bc24f46ca46ed80f1ae9012329e2927b8b1f68716efdf1b9"
+  },
+  "testsExecutedByThisJoin": 0,
+  "toolsExecutedByThisJoin": 0,
+  "DifferentScopeCoverageUnion": false,
+  "wholeG08Accepted": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "remaining": [
+    "Fresh whole 451 for final candidate",
+    "runtime ownership and six modules",
+    "Other origin source artifacts and trace signs not covered"
+  ]
+}
