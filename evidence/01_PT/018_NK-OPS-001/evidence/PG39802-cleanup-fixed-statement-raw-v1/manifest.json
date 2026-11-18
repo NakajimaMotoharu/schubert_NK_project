@@ -1,0 +1,514 @@
+{
+  "actualExit": 0,
+  "startEvent": "PGPT-20261008-6025",
+  "source": "d6860ce65eaf09863bc416dd66ab47f635f254be",
+  "productionCoreMain": "278839e0272a15a40a6a42b898eb2f6429597a5f",
+  "run": "PG39798-CLEANUP-FIXED-STATEMENT-TABLE",
+  "tests": 18,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "firstSuccessful": 18,
+  "newTestDefinitions": 0,
+  "sourceAndSql": {
+    "main": {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "sha256": "021f37f96635be99f99306c2fec1dd5ae2d68a6d43f51210de9e079ac6306d50"
+    },
+    "unchangedMethodsOutsideDispatch": true,
+    "originalFixedSqlBytes": {
+      "NOTIFICATIONS": "select target_count,deleted_count,skipped_count,reason_code from schubert.maintenance_cleanup_notifications(?,?,?)",
+      "QUESTIONS": "select target_count,deleted_count,skipped_count,reason_code from schubert.maintenance_cleanup_questions(?,?,?)",
+      "SESSIONS": "select target_count,deleted_count,skipped_count,reason_code from schubert.maintenance_cleanup_sessions(?,?,?)",
+      "OUTBOX": "select target_count,deleted_count,skipped_count,reason_code from schubert.maintenance_cleanup_message_stores(?,?,?)",
+      "LOGS": "select target_count,deleted_count,skipped_count,reason_code from schubert.maintenance_cleanup_logs(?,?,?)",
+      "WEB_RECEIPTS": "select target_count,deleted_count,skipped_count,reason_code from schubert.maintenance_cleanup_web_receipt_references(?,?,?)",
+      "BATCH_RUNS": "select target_count,deleted_count,skipped_count,reason_code from schubert.maintenance_cleanup_batch_runs(?,?,?)",
+      "INBOX_PROGRESS": "select target_count,deleted_count,skipped_count,reason_code from schubert.maintenance_cleanup_inbox_progress(?,?,?)",
+      "LOG_PROGRESS": "select target_count,deleted_count,skipped_count,reason_code from schubert.maintenance_cleanup_log_progress(?,?,?)"
+    },
+    "independentFixture": {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupQueryPortTest.java",
+      "sha256": "b7517573044d2ba929a57914956194b2db053cf189d464af443932619eba7387"
+    },
+    "compiledLiteralBindings": 9,
+    "publicAbiEqual": true
+  },
+  "measurement": {
+    "raw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39802-cleanup-fixed-statement-raw-v1/raw.tsv",
+      "sha256": "749d03b918ff95939d50e6d3a46d79e42e6de870fbe1fe645430734bbbdae78f"
+    },
+    "target": {
+      "dev/codex/schubert/nk/batch/repository/CleanupRepository": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 403
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 22
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 102
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 31
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 20
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "dev/codex/schubert/nk/batch/repository/CleanupStepRepository": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 325
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 28
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 75
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 21
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 7
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "xml": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39800-cleanup-fixed-statement-post-v1/original-TEST-junit-jupiter.xml",
+      "sha256": "79fe7b7a62a1b44fdc642eda9778f480674f9d82a3e4d0f3d5833df6c037e3ee"
+    },
+    "noCodeFactory": true,
+    "support": {
+      "dev/codex/schubert/nk/storage/StorageIoException$Reason": {
+        "INSTRUCTION": {
+          "missed": 50,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 4,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 5,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 5,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 1,
+          "covered": 0
+        }
+      },
+      "dev/codex/schubert/nk/storage/StorageIoException": {
+        "INSTRUCTION": {
+          "missed": 42,
+          "covered": 51
+        },
+        "BRANCH": {
+          "missed": 6,
+          "covered": 6
+        },
+        "LINE": {
+          "missed": 7,
+          "covered": 16
+        },
+        "COMPLEXITY": {
+          "missed": 9,
+          "covered": 2
+        },
+        "METHOD": {
+          "missed": 4,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph": {
+        "INSTRUCTION": {
+          "missed": 1,
+          "covered": 14
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 3
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 2
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 2
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "dev/codex/schubert/nk/batch/repository/RunReferenceRepository": {
+        "INSTRUCTION": {
+          "missed": 50,
+          "covered": 180
+        },
+        "BRANCH": {
+          "missed": 10,
+          "covered": 14
+        },
+        "LINE": {
+          "missed": 12,
+          "covered": 47
+        },
+        "COMPLEXITY": {
+          "missed": 8,
+          "covered": 10
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 6
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "dev/codex/schubert/nk/batch/repository/CleanupChunk": {
+        "INSTRUCTION": {
+          "missed": 10,
+          "covered": 36
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 4
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 7
+        },
+        "COMPLEXITY": {
+          "missed": 3,
+          "covered": 5
+        },
+        "METHOD": {
+          "missed": 3,
+          "covered": 3
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "dev/codex/schubert/nk/batch/repository/CleanupStepChunk": {
+        "INSTRUCTION": {
+          "missed": 32,
+          "covered": 153
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 33
+        },
+        "LINE": {
+          "missed": 4,
+          "covered": 22
+        },
+        "COMPLEXITY": {
+          "missed": 6,
+          "covered": 24
+        },
+        "METHOD": {
+          "missed": 5,
+          "covered": 8
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "dev/codex/schubert/nk/batch/repository/BatchStep": {
+        "INSTRUCTION": {
+          "missed": 12,
+          "covered": 124
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 14
+        },
+        "COMPLEXITY": {
+          "missed": 3,
+          "covered": 3
+        },
+        "METHOD": {
+          "missed": 3,
+          "covered": 3
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "dev/codex/schubert/nk/batch/repository/CleanupCounts": {
+        "INSTRUCTION": {
+          "missed": 6,
+          "covered": 52
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 10
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 5
+        },
+        "COMPLEXITY": {
+          "missed": 2,
+          "covered": 10
+        },
+        "METHOD": {
+          "missed": 2,
+          "covered": 5
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "dev/codex/schubert/nk/batch/repository/BatchRun": {
+        "INSTRUCTION": {
+          "missed": 14,
+          "covered": 38
+        },
+        "BRANCH": {
+          "missed": 3,
+          "covered": 3
+        },
+        "LINE": {
+          "missed": 2,
+          "covered": 8
+        },
+        "COMPLEXITY": {
+          "missed": 6,
+          "covered": 3
+        },
+        "METHOD": {
+          "missed": 3,
+          "covered": 3
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "dev/codex/schubert/nk/batch/repository/BatchStepAttempt": {
+        "INSTRUCTION": {
+          "missed": 27,
+          "covered": 84
+        },
+        "BRANCH": {
+          "missed": 7,
+          "covered": 7
+        },
+        "LINE": {
+          "missed": 4,
+          "covered": 12
+        },
+        "COMPLEXITY": {
+          "missed": 11,
+          "covered": 8
+        },
+        "METHOD": {
+          "missed": 4,
+          "covered": 8
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "dev/codex/schubert/nk/batch/repository/CleanupKind": {
+        "INSTRUCTION": {
+          "missed": 12,
+          "covered": 147
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 17
+        },
+        "COMPLEXITY": {
+          "missed": 3,
+          "covered": 5
+        },
+        "METHOD": {
+          "missed": 3,
+          "covered": 5
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "dev/codex/schubert/nk/batch/repository/LogCleanupProgress": {
+        "INSTRUCTION": {
+          "missed": 10,
+          "covered": 29
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 5
+        },
+        "COMPLEXITY": {
+          "missed": 3,
+          "covered": 4
+        },
+        "METHOD": {
+          "missed": 3,
+          "covered": 4
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "dev/codex/schubert/nk/batch/repository/RunReferences": {
+        "INSTRUCTION": {
+          "missed": 42,
+          "covered": 20
+        },
+        "BRANCH": {
+          "missed": 13,
+          "covered": 1
+        },
+        "LINE": {
+          "missed": 3,
+          "covered": 4
+        },
+        "COMPLEXITY": {
+          "missed": 14,
+          "covered": 2
+        },
+        "METHOD": {
+          "missed": 7,
+          "covered": 2
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    }
+  },
+  "build": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39804-cleanup-fixed-statement-four-main-v1/compile/manifest.json",
+    "sha256": "f9ff6fdbb0300c821fbecfb348fe58c00855ee7ed96fb48a45d06132f5090d29"
+  },
+  "originalFourInputs": 490,
+  "startBuildProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39764-process-resource-scope-four-main-v1/compile/manifest.json",
+    "sha256": "00e96d2b06b9858ae4931f700e5db0b3cf7d793085999d20b3aeb40dc63611c9"
+  },
+  "buildArchives": [
+    {
+      "originalPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG39804-cleanup-fixed-statement-four-main-v1/compile/maven.stdout.log",
+      "originalSha256": "e70e176f732c6aaa18d7f274affd990525ae61090e5040886de623647851cb06",
+      "archived": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39802-cleanup-fixed-statement-raw-v1/maven.stdout.log.gz",
+        "sha256": "d70292e4bd77d2125676d458de4fe821b0e5cb54eb82e9c46a762394d51dac48"
+      }
+    },
+    {
+      "originalPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG39804-cleanup-fixed-statement-four-main-v1/compile/maven.stderr.log",
+      "originalSha256": "05ed4976f99856c1417eead6c52058f5565d748a00ae7939fa02188545fafda4",
+      "archived": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39802-cleanup-fixed-statement-raw-v1/maven.stderr.log.gz",
+        "sha256": "7097fbfb15f55c833e6de8e49ccc4ae96e0a90c2af25ebe49e5a16ff0b5e14ae"
+      }
+    }
+  ],
+  "exactByteUniverse": 1101,
+  "unchangedPhysical1099": true,
+  "compiledSqlPhysicalChanged": 1,
+  "staticRawPreviouslyClassified": 44,
+  "staticApplicable": 0,
+  "oldWholeReplayedOnlyAfterNewSource": true,
+  "physicalGenerationRemoved": "dev/codex/schubert/nk/batch/repository/CleanupRepository$1.class",
+  "naturalNoCodeInterface": "dev/codex/schubert/nk/batch/repository/CleanupRepository$StatementFactory.class",
+  "manualExclusions": 0,
+  "oldExecCombined": false,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "absoluteScopeNativeOrDatabaseActions": 0,
+  "proofs": {
+    "prestyle": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39791-cleanup-fixed-statement-prestyle-v1/manifest.json",
+      "sha256": "09b9704f3a0eaa39b01cbf39e939a6c7ba283912765b7ddb53d1583beec08b9f"
+    },
+    "prepare": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39792-cleanup-fixed-statement-prepare-v1/manifest.json",
+      "sha256": "d921545df4f26301c3278b2ef24e54c90d75ee53e01911c5f6088ef0e7f57068"
+    },
+    "static": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39794-cleanup-fixed-statement-static-v1/manifest.json",
+      "sha256": "d4d0fa0442a27a486d81bce2b01d10918d8c38d51e2daecae13028fedd34e46b"
+    },
+    "preflight": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39796-cleanup-fixed-statement-preflight-v1/manifest.json",
+      "sha256": "b36cba53120cc84af5b5e674c88f176ebd08794b35afdf1f19e651f7a13ea1d3"
+    },
+    "unit": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39798-cleanup-fixed-statement-unit-v1/manifest.json",
+      "sha256": "e5db62934ea5f22d810443db8d7fdc3a0da8a720ccbd345885e020a5c1676ec3"
+    },
+    "post": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39800-cleanup-fixed-statement-post-v1/manifest.json",
+      "sha256": "3f19070b5caf0792fa4d543d2440ecd4ef23fed887cb5bd4510d9b4ea9aebfe4"
+    }
+  },
+  "terminalAtUTC": "2026-11-18T15:17:32.216577+00:00",
+  "verifier": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/5222_cleanup_fixed_statement_independent.py",
+    "sha256": "cd395dfea299e222eaaae02ffb60b0b7430315e5709cf41d93f00112981500f3"
+  }
+}
