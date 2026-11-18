@@ -23,7 +23,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
-/** WEBCAT001..014/1763: expected domains are SS literals and an independent route fixture. */
+/** WEBCAT001..015/1763: expected domains are SS literals and an independent route fixture. */
 class WebMetricCatalogTest {
   private static final String SERVICE_LABEL = "service";
   private static final String WEB_SERVICE_VALUE = "WEB";
@@ -355,5 +355,37 @@ class WebMetricCatalogTest {
       workers.shutdownNow();
       assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));
     }
+  }
+
+  @Test
+  void webcat015CapturedNameUsesTheSameClosedDetachedLabelContract() {
+    FIXED.forEach(
+        (name, expected) -> {
+          List<Tag> input =
+              expected.entrySet().stream().map(e -> Tag.of(e.getKey(), e.getValue())).toList();
+          labels(expected, catalog.labels(name, input));
+        });
+
+    var mutable = new MutableTag(STATE_LABEL, ACTIVE_POOL_STATE);
+    var input = new ArrayList<Tag>();
+    input.add(mutable);
+    input.add(Tag.of(SERVICE_LABEL, WEB_SERVICE_VALUE));
+    Labels checked = catalog.labels(POOL, input);
+    mutable.key = "actor";
+    mutable.value = "INVALID_CAPTURED_STATE";
+    input.clear();
+    labels(Map.of(SERVICE_LABEL, WEB_SERVICE_VALUE, STATE_LABEL, ACTIVE_POOL_STATE), checked);
+
+    var missing =
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> catalog.labels(POOL, List.of(Tag.of(STATE_LABEL, ACTIVE_POOL_STATE))));
+    assertEquals("missing Web metric label", missing.getMessage());
+    var unknown =
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> catalog.labels("nk_unregistered_fixture_name", List.of()));
+    assertEquals("unknown Web metric", unknown.getMessage());
+    assertThrows(NullPointerException.class, () -> catalog.labels(POOL, null));
   }
 }
