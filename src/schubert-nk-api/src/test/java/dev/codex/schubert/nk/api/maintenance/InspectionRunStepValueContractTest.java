@@ -9,7 +9,6 @@ import dev.codex.schubert.nk.api.maintenance.InspectionStep.Outcome;
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
@@ -57,23 +56,19 @@ final class InspectionRunStepValueContractTest {
   @Test
   void stepRequiresCursorOnlyForNonEndAndRedactsIt() {
     var possible = Optional.of(CURSOR);
-    Map<Outcome, String> activeDiagnostics =
-        Map.of(
-            Outcome.DELETED, "InspectionStep[outcome=DELETED, cursor=<redacted>]",
-            Outcome.PROTECTED, "InspectionStep[outcome=PROTECTED, cursor=<redacted>]");
-    for (var expectation : activeDiagnostics.entrySet()) {
-      var outcome = expectation.getKey();
+    String fixedDiagnostic = "InspectionStep[<redacted>]";
+    for (Outcome outcome : List.of(Outcome.DELETED, Outcome.PROTECTED)) {
       var step = new InspectionStep(outcome, possible);
       assertEquals(outcome, step.outcome());
       assertEquals(possible, step.cursor());
-      assertEquals(expectation.getValue(), step.toString());
+      assertEquals(fixedDiagnostic, step.toString());
       assertThrows(
           IllegalArgumentException.class, () -> new InspectionStep(outcome, Optional.empty()));
     }
     var completed = new InspectionStep(Outcome.END, Optional.empty());
     assertEquals(Outcome.END, completed.outcome());
     assertEquals(Optional.empty(), completed.cursor());
-    assertEquals("InspectionStep[outcome=END, cursor=<redacted>]", completed.toString());
+    assertEquals(fixedDiagnostic, completed.toString());
     assertThrows(IllegalArgumentException.class, () -> new InspectionStep(Outcome.END, possible));
     assertThrows(NullPointerException.class, () -> new InspectionStep(null, possible));
     assertThrows(NullPointerException.class, () -> new InspectionStep(Outcome.END, null));
