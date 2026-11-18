@@ -1,0 +1,126 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-18T00:38:38.787851+00:00",
+  "source": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+  "ykt": "YKT-2672",
+  "scope": [
+    "BackupProfile",
+    "BackupVersions",
+    "BackupFileDigest",
+    "BackupManifest"
+  ],
+  "profileRun": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38318-backup-profile-value-identity-independent-v1/manifest.json",
+    "sha256": "3e68727ff0647c50201859dbf8aee6928f8a9d46988bfde55a70ea323b8b689a"
+  },
+  "standaloneSiblingRun": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38228-backup-manifest17-independent-v1/manifest.json",
+    "sha256": "6b01141de2d64078a30492a635d088b0933521722737572638e8317762748a22"
+  },
+  "siblingSourceClosure": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38222-backup-manifest17-prepare-v1/manifest.json",
+    "sha256": "b7f56187c5e3c085be9706cc4f5cc1d50c6e3d43ff19ff9b31314c580a4b23fb"
+  },
+  "currentBuild": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38256-wbs66-four-current-compile-v1/compile/manifest.json",
+    "sha256": "12154ad780501aaa8caad123e7ea11faa1ed418cdad2ed61c5ef5f39da3ab472"
+  },
+  "decisions": {
+    "BackupVersions": {
+      "sourceSha256": "49fc0ea957098ae3f5d0dc40fbbbbf28abfed7353c4e46a0ccea7593951f9dc2",
+      "physicalSha256": "fb610109423526e8bff897cf647626204fb0a6219db5efe0d08fa0c79228bb01",
+      "priorSeparateRaw": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 104
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 8
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 11
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 16
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 12
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "decision": "Already had the full raw scope in PG38228. Same source and exact current physical byte; additional replay unnecessary."
+    },
+    "BackupFileDigest": {
+      "sourceSha256": "5cc172c91118403e73b9b562d8c0286ba6716391b8dd156181ad5e3d0b1bfd65",
+      "physicalSha256": "a1ec5379964ee9a19476438c6bf90aa8c511ac49a90a2210435361fb2fc95494",
+      "priorSeparateRaw": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 41
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 4
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 7
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 8
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 6
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "decision": "Already had the full raw scope in PG38228. Same source and exact current physical byte; additional replay unnecessary."
+    },
+    "BackupManifest": {
+      "sourceSha256": "4edbbd1ad918c5222a534cf6d9330aecd40f9e76118c555a529374cb04bfe6ac",
+      "physicalSha256": "2bd9b8c79b4ce859c4356197a171e705550b2185cb4068bf3ba3b45cc6d02af1",
+      "priorSeparateRaw": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 247
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 26
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 42
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 32
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 19
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "decision": "Already had the full raw scope in PG38228. Same source and exact current physical byte; additional replay unnecessary."
+    }
+  },
+  "preventiveCheck": "Require unfiltered method descriptors/counters with original exec CRC, then separately count skipped and XML outcomes on every value-qualification run. Profile’s negative unlike versions and hash keys confirm equality and hash behavior as well as invocation.",
+  "oldExecCombined": false,
+  "global451Accepted": false
+}

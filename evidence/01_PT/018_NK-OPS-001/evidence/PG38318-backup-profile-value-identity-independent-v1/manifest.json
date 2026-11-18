@@ -1,0 +1,924 @@
+{
+  "actualExit": 0,
+  "run": "PG38318-backup-profile-value-identity-independent-v1",
+  "source": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+  "unitSource": "09862ad703c1822893f14a9b6078cc5e9e5f7fc5",
+  "terminalAtUTC": "2026-11-18T00:37:56.848567+00:00",
+  "productTests": 5,
+  "newTests": 1,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "productCommand": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+    "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/pg38314-backup-profile-value-five-unit-v1/tmp",
+    "-Dfile.encoding=UTF-8",
+    "-Duser.timezone=Asia/Tokyo",
+    "-Djunit.jupiter.execution.parallel.enabled=false",
+    "-Djunit.jupiter.extensions.autodetection.enabled=false",
+    "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg38314-backup-profile-value-five-unit-v1/jacoco.exec,sessionid=PG38314-BACKUP-PROFILE-VALUE-FIVE,append=false",
+    "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg38314-backup-profile-value-five-unit-v1/class-init.log",
+    "-jar",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+    "execute",
+    "--disable-banner",
+    "--class-path",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38310-backup-profile-value-five-prepare-v1/target/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg38310-backup-profile-value-five-prepare-v1/test-classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+    "--select-class",
+    "dev.codex.schubert.nk.batch.backup.BackupProfileTest",
+    "--select-class",
+    "dev.codex.schubert.nk.batch.backup.BackupProfileValueIdentityTest",
+    "--reports-dir",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38314-backup-profile-value-five-unit-v1/xml",
+    "--fail-if-no-tests",
+    "--details",
+    "summary"
+  ],
+  "measurementCommand": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+    "-cp",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31432-generated-code-supplemental-tool-v1/toolclasses:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+    "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG38316-backup-profile-value-five-post-v1/jacoco.exec",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38310-backup-profile-value-five-prepare-v1/component/dev/codex/schubert/nk/batch/backup/BackupProfile.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38310-backup-profile-value-five-prepare-v1/component/dev/codex/schubert/nk/batch/backup/BackupVersions.class"
+  ],
+  "currentCodeEvidence": {
+    "dev/codex/schubert/nk/batch/backup/BackupProfile": {
+      "crc": "a20ca571a82db772",
+      "positive": true,
+      "methods": {
+        "<init>(Ldev/codex/schubert/nk/batch/backup/BackupVersions;Ljava/util/Map;)V": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 42
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 6
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 6
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 4
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "toolHashes()Ljava/util/Map;": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 4
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "encode()[B": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 77
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 4
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 14
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 3
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "consume([B)Ldev/codex/schubert/nk/batch/backup/BackupProfile;": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 126
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 16
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 21
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 9
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "group(Ljava/util/regex/Matcher;I)Ljava/lang/String;": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 7
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "field(Ljava/lang/StringBuilder;Ljava/lang/String;Ljava/lang/String;)V": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 13
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 2
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "grammar()Ljava/util/regex/Pattern;": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 49
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 4
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 5
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 3
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "invalid()Ljava/lang/IllegalArgumentException;": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 5
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "toString()Ljava/lang/String;": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 2
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "hashCode()I": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 3
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "equals(Ljava/lang/Object;)Z": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 4
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "versions()Ldev/codex/schubert/nk/batch/backup/BackupVersions;": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 3
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "<clinit>()V": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 22
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 5
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        }
+      },
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 357
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 30
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 58
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 28
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 13
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/batch/backup/BackupVersions": {
+      "crc": "d72d425c0126a55b",
+      "positive": true,
+      "methods": {
+        "<init>(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V": {
+          "INSTRUCTION": {
+            "missed": 5,
+            "covered": 66
+          },
+          "BRANCH": {
+            "missed": 2,
+            "covered": 6
+          },
+          "LINE": {
+            "missed": 1,
+            "covered": 8
+          },
+          "COMPLEXITY": {
+            "missed": 2,
+            "covered": 3
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "toString()Ljava/lang/String;": {
+          "INSTRUCTION": {
+            "missed": 2,
+            "covered": 0
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 1,
+            "covered": 0
+          },
+          "COMPLEXITY": {
+            "missed": 1,
+            "covered": 0
+          },
+          "METHOD": {
+            "missed": 1,
+            "covered": 0
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "hashCode()I": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 3
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "equals(Ljava/lang/Object;)Z": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 4
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "host()Ljava/lang/String;": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 3
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "app()Ljava/lang/String;": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 3
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "schema()Ljava/lang/String;": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 3
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "os()Ljava/lang/String;": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 3
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "jdk()Ljava/lang/String;": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 3
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "postgresql()Ljava/lang/String;": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 3
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "artemis()Ljava/lang/String;": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 3
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "age()Ljava/lang/String;": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 3
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        }
+      },
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 7,
+          "covered": 97
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 6
+        },
+        "LINE": {
+          "missed": 2,
+          "covered": 9
+        },
+        "COMPLEXITY": {
+          "missed": 3,
+          "covered": 13
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 11
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    }
+  },
+  "currentTarget": "dev/codex/schubert/nk/batch/backup/BackupProfile",
+  "completeTargetRawCounters": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 357
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 30
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 58
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 28
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 13
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "positivePhysicalCrc": 2,
+  "physicalClassHashes": {
+    "dev/codex/schubert/nk/batch/backup/BackupVersions.class": "fb610109423526e8bff897cf647626204fb0a6219db5efe0d08fa0c79228bb01",
+    "dev/codex/schubert/nk/batch/backup/BackupProfile.class": "96b8c9305804f434844f7147b2f598671b44062536e69f86dec52a3b04489a33"
+  },
+  "unit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38314-backup-profile-value-five-unit-v1/manifest.json",
+    "sha256": "1d33916de1fd32b3b94ded2b8f74bd99cdb35baf5e3f47a2e810b90d13030adb"
+  },
+  "independentStandardPost": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38316-backup-profile-value-five-post-v1/manifest.json",
+    "sha256": "53e13bea5f1175bc96ef875dc75ca270f311dd6a15f711f8f4cfbd60f6b135ad"
+  },
+  "spec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/4558_BackupProfile公開値同値・キー検索単体試験仕様書.md",
+    "sha256": "d1755fdf09782c616aab01da20d53ae67014281ca429fd65412a483e2f01ef6f"
+  },
+  "unitExecSha256": "7d220b72b50055e7de56c4817b6770fbbf3b85ff6bde5a1f6f360ebfc394e1d1",
+  "raw": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38318-backup-profile-value-identity-independent-v1/unfiltered.tsv",
+    "sha256": "c31242ef9baef057ecce2ecde11a4cb0037bb6c16195bd122e7c5f3c863bef44"
+  },
+  "relatedSiblingsHistoricalSeparateRun": {
+    "manifest": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38228-backup-manifest17-independent-v1/manifest.json",
+      "sha256": "6b01141de2d64078a30492a635d088b0933521722737572638e8317762748a22"
+    },
+    "raw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38228-backup-manifest17-independent-v1/unfiltered.stdout",
+      "sha256": "f9050c46ee659e8b627a3570663567f8636ff3e026474da9f09e808650ed71c3"
+    },
+    "results": {
+      "BackupVersions": {
+        "priorRunObserved": true,
+        "counters": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 104
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 8
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 11
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 16
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 12
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        }
+      },
+      "BackupFileDigest": {
+        "priorRunObserved": true,
+        "counters": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 41
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 4
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 7
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 8
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 6
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        }
+      },
+      "BackupManifest": {
+        "priorRunObserved": true,
+        "counters": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 247
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 26
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 42
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 32
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 19
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        }
+      }
+    }
+  },
+  "oldExecCombined": false,
+  "sourcesChanged": false,
+  "formalUpdated": false,
+  "newAcceptance": 0,
+  "wholeF03Accepted": false,
+  "whole451Accepted": false,
+  "bugs": [
+    "BUG-3220",
+    "BUG-3221"
+  ],
+  "ykt": [
+    "YKT-2672"
+  ]
+}
