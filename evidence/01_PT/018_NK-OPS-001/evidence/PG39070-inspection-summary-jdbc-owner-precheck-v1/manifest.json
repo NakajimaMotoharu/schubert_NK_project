@@ -1,0 +1,53 @@
+{
+  "actualExit": 1,
+  "failedAt": "checked_inputs.validate_owners",
+  "actualCommand": [
+    "python3",
+    "-B",
+    "tools/quality/pgpt_closed_host_profile.py",
+    "prestyle",
+    "evidence/01_PT/018_NK-OPS-001/input/5097_inspection_summary_jdbc_graph_profile.json"
+  ],
+  "source": "29f3b433952ad19d4ad34c4e1a31ed310bebde6a",
+  "difference": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupCounts.java": {
+      "supplied": "WBS-P004-02",
+      "required": "WBS-P017-07"
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java": {
+      "supplied": "WBS-P004-05",
+      "required": "WBS-P017-02"
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.java": {
+      "supplied": "WBS-P004-05",
+      "required": "WBS-P017-02"
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java": {
+      "supplied": "WBS-P004-05",
+      "required": "WBS-P017-01"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.java": {
+      "supplied": "WBS-F02",
+      "required": "WBS-P004-05"
+    },
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java": {
+      "supplied": "WBS-F02",
+      "required": "WBS-P003-04"
+    },
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/package-info.java": {
+      "supplied": "WBS-F02",
+      "required": "WBS-P003-04"
+    }
+  },
+  "profile": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5097_inspection_summary_jdbc_graph_profile.json",
+    "sha256": "ef0bae4d8fdd85def07c248eb4484d5ef4876f8fcf2b07522805ae1eba446f34"
+  },
+  "inventory": {
+    "path": "documents/400_PGPT/470_PMO/485_WBS\u7db2\u7f85\u6027\u30fb\u53d7\u5165\u5bfe\u5fdc.json",
+    "sha256": "61dd93caab9c0911a0d087524f46255813a121e1d2e96cc130bd4e839bcea4c2"
+  },
+  "productClassesReadOrInitialized": 0,
+  "productTestsExecuted": 0,
+  "terminalAtUTC": "2026-11-18T09:15:28.722269+00:00"
+}

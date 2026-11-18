@@ -1,0 +1,107 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "id": "PG39080-P00405-INSPECTION-SUMMARY-JDBC-V1",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productOwnerByMainPath": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java": "WBS-P004-02",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummary.java": "WBS-P004-02",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupCounts.java": "WBS-P004-02",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java": "WBS-P004-05",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.java": "WBS-P004-05",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java": "WBS-P004-05",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.java": "WBS-F02",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java": "WBS-F02",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/package-info.java": "WBS-F02"
+  },
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4634_P00405\u691c\u67fb\u96c6\u8a08SQL\u4f8b\u5916\u6240\u6709\u5358\u4f53\u4ed5\u69d8.md",
+      "sha256": "5bd05a876c62c9584095f492c8855fe7d0897c20d1039743aea4e90056f91ccb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4486_P00402summary\u6240\u6709nonnull\u30fbvalue\u8ffd\u52a0\u4e09PT\u4ed5\u69d8.md",
+      "sha256": "7a1d13368ae9844699af9b296b778f8a50e7770dae403c17220f811be03c0394"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37402-summary23-independent-v1/manifest.json",
+      "sha256": "606478465b75ba56fd3d4299b43b9917728761e0ba385a80407e4ad7889dc94f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38734-f03-cleanup-raw-owner-proof-v1/manifest.json",
+      "sha256": "06b502f2f7b0d0941bacb52bbb8b03fdc7c866dac5ec621a8cb0147292b87d0e"
+    }
+  ],
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "productionCoreMain": "29f3b433952ad19d4ad34c4e1a31ed310bebde6a",
+  "mainSources": [
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummary.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupCounts.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.java",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/package-info.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryPortTest.java",
+      "tests": 10
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryGraphContractTest.java",
+      "tests": 1
+    }
+  ],
+  "expectedTests": 11,
+  "resources": [],
+  "sdkJars": [],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.class",
+    "dev/codex/schubert/nk/batch/repository/InspectionSummary.class",
+    "dev/codex/schubert/nk/batch/repository/CleanupCounts.class",
+    "dev/codex/schubert/nk/batch/repository/BatchRun.class",
+    "dev/codex/schubert/nk/batch/repository/BatchRepositoryException.class",
+    "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.class",
+    "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class",
+    "dev/codex/schubert/nk/storage/StorageIoException.class",
+    "dev/codex/schubert/nk/storage/package-info.class",
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository"
+  ],
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-batch/pom.xml",
+    "src/schubert-nk-bootstrap/pom.xml",
+    "src/schubert-nk-storage/pom.xml"
+  ],
+  "systemProperties": {},
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG39070-inspection-summary-jdbc-prestyle-v1",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG39072-inspection-summary-jdbc-prepare-v1",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG39074-inspection-summary-jdbc-static-v1",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG39076-inspection-summary-jdbc-preflight-v1",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG39080-inspection-summary-jdbc-unit-v1",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG39082-inspection-summary-jdbc-post-v1"
+  },
+  "privateDirs": {
+    "prepare": "pg39072-inspection-summary-jdbc-prepare-v1",
+    "unit": "pg39080-inspection-summary-jdbc-unit-v1"
+  },
+  "newTestDefinitions": 1,
+  "standardCompilerSwitchMaps": [],
+  "forbiddenInitializedClasses": []
+}
