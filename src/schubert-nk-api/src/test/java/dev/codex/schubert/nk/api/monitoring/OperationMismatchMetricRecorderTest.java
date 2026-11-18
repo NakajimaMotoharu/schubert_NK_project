@@ -179,7 +179,7 @@ class OperationMismatchMetricRecorderTest {
                     IllegalArgumentException.class,
                     () -> OperationMismatchMetricRecorder.operation(value))
                 .getMessage());
-      for (String mode : List.of("debug", "", "unknown-mode"))
+      for (String mode : List.of("debug", "", "unknown-mode", "DEBTf", "STANDAQc"))
         assertEquals(
             "CONFIG_INVALID",
             assertThrows(

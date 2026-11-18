@@ -1,0 +1,247 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG39256-BUG3263-API-FOUR-RECORDER-MODE-V1",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39250-bug3263-api-four-recorder-mode-prepare-v1/manifest.json",
+    "sha256": "63396f0cecd185e8f40349ab8cee24940fe91b8feeff944f0470fcacf77d4354"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39252-bug3263-api-four-recorder-mode-static-v1/manifest.json",
+    "sha256": "805e76644ecfc477036f1d6880b2aba01d13423b2aa19c6a000634042debfe61"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/AsyncJobMetricRecorderTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceLine": 255,
+      "sourceAnchor": "var pool = Executors.newFixedThreadPool(8);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This fixture owns the executor, invokes shutdownNow unconditionally in finally and requires actual termination within ten seconds before the owned registry closes. The generic AutoCloseable method introduces an unbounded wait."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/AsyncJobMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 255,
+      "sourceAnchor": "var pool = Executors.newFixedThreadPool(8);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The site operates on fixture-owned unit test workers with maximum ten-second invokeAll and bounded termination. No application or service thread is spawned."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/AsyncJobMetricRecorderTest.java",
+      "rule": "CompareObjectsWithEquals",
+      "message": "Use equals() to compare object references.",
+      "sourceLine": 268,
+      "sourceAnchor": "return read == first || read == second;",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The oracle requires the exact published immutable snapshot object to be one of the two submitted references. Value equality would permit a different instance and would not prove this design condition.",
+      "rawMultiplicity": 2
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/AsyncJobMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 271,
+      "sourceAnchor": "for (var result : pool.invokeAll(jobs, 10, TimeUnit.SECONDS)) assertTrue(result.get());",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The site operates on fixture-owned unit test workers with maximum ten-second invokeAll and bounded termination. No application or service thread is spawned."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/AsyncJobMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 280,
+      "sourceAnchor": "pool.shutdownNow();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The site operates on fixture-owned unit test workers with maximum ten-second invokeAll and bounded termination. No application or service thread is spawned."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/AsyncJobMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 281,
+      "sourceAnchor": "assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The site operates on fixture-owned unit test workers with maximum ten-second invokeAll and bounded termination. No application or service thread is spawned."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OperationMismatchMetricRecorderTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceLine": 254,
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(8);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This fixture owns the executor, invokes shutdownNow unconditionally in finally and requires actual termination within ten seconds before the owned registry closes. The generic AutoCloseable method introduces an unbounded wait."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OperationMismatchMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 254,
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(8);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The site operates on fixture-owned unit test workers with maximum ten-second invokeAll and bounded termination. No application or service thread is spawned."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OperationMismatchMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 266,
+      "sourceAnchor": "for (var result : executor.invokeAll(tasks, 10, TimeUnit.SECONDS)) assertTrue(result.get());",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The site operates on fixture-owned unit test workers with maximum ten-second invokeAll and bounded termination. No application or service thread is spawned."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OperationMismatchMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 271,
+      "sourceAnchor": "executor.shutdownNow();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The site operates on fixture-owned unit test workers with maximum ten-second invokeAll and bounded termination. No application or service thread is spawned."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OperationMismatchMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 272,
+      "sourceAnchor": "assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The site operates on fixture-owned unit test workers with maximum ten-second invokeAll and bounded termination. No application or service thread is spawned."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxAgeMetricRecorderTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceLine": 190,
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(8);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This fixture owns the executor, invokes shutdownNow unconditionally in finally and requires actual termination within ten seconds before the owned registry closes. The generic AutoCloseable method introduces an unbounded wait."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxAgeMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 190,
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(8);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The site operates on fixture-owned unit test workers with maximum ten-second invokeAll and bounded termination. No application or service thread is spawned."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxAgeMetricRecorderTest.java",
+      "rule": "CompareObjectsWithEquals",
+      "message": "Use equals() to compare object references.",
+      "sourceLine": 203,
+      "sourceAnchor": "return actual == one || actual == two;",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The oracle requires the exact published immutable snapshot object to be one of the two submitted references. Value equality would permit a different instance and would not prove this design condition.",
+      "rawMultiplicity": 2
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxAgeMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 206,
+      "sourceAnchor": "for (var actual : executor.invokeAll(tasks, 10, TimeUnit.SECONDS)) assertTrue(actual.get());",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The site operates on fixture-owned unit test workers with maximum ten-second invokeAll and bounded termination. No application or service thread is spawned."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxAgeMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 211,
+      "sourceAnchor": "executor.shutdownNow();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The site operates on fixture-owned unit test workers with maximum ten-second invokeAll and bounded termination. No application or service thread is spawned."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxAgeMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 212,
+      "sourceAnchor": "assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The site operates on fixture-owned unit test workers with maximum ten-second invokeAll and bounded termination. No application or service thread is spawned."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxRowsMetricRecorderTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceLine": 190,
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(8);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This fixture owns the executor, invokes shutdownNow unconditionally in finally and requires actual termination within ten seconds before the owned registry closes. The generic AutoCloseable method introduces an unbounded wait."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxRowsMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 190,
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(8);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The site operates on fixture-owned unit test workers with maximum ten-second invokeAll and bounded termination. No application or service thread is spawned."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxRowsMetricRecorderTest.java",
+      "rule": "CompareObjectsWithEquals",
+      "message": "Use equals() to compare object references.",
+      "sourceLine": 203,
+      "sourceAnchor": "return actual == one || actual == two;",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The oracle requires the exact published immutable snapshot object to be one of the two submitted references. Value equality would permit a different instance and would not prove this design condition.",
+      "rawMultiplicity": 2
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxRowsMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 206,
+      "sourceAnchor": "for (var actual : executor.invokeAll(tasks, 10, TimeUnit.SECONDS)) assertTrue(actual.get());",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The site operates on fixture-owned unit test workers with maximum ten-second invokeAll and bounded termination. No application or service thread is spawned."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxRowsMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 211,
+      "sourceAnchor": "executor.shutdownNow();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The site operates on fixture-owned unit test workers with maximum ten-second invokeAll and bounded termination. No application or service thread is spawned."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxRowsMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 212,
+      "sourceAnchor": "assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The site operates on fixture-owned unit test workers with maximum ten-second invokeAll and bounded termination. No application or service thread is spawned."
+    }
+  ]
+}

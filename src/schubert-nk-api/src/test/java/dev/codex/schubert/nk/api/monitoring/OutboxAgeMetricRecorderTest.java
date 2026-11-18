@@ -168,7 +168,7 @@ class OutboxAgeMetricRecorderTest {
     try (var registry = new Registry()) {
       assertThrows(NullPointerException.class, () -> new OutboxAgeMetricRecorder(null, DEBUG_MODE));
       assertThrows(NullPointerException.class, () -> new OutboxAgeMetricRecorder(registry, null));
-      for (String mode : List.of("debug", "", "unknown-mode"))
+      for (String mode : List.of("debug", "", "unknown-mode", "DEBTf", "STANDAQc"))
         assertEquals(
             "CONFIG_INVALID",
             assertThrows(

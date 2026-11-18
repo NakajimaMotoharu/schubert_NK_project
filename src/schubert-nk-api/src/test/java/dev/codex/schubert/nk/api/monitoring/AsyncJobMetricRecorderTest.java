@@ -183,9 +183,13 @@ class AsyncJobMetricRecorderTest {
     assertThrows(NullPointerException.class, () -> new AsyncJobMetricRecorder(null, "STANDARD"));
     try (var registry = new Registry()) {
       assertThrows(NullPointerException.class, () -> new AsyncJobMetricRecorder(registry, null));
-      for (String invalid : List.of("", "debug", " DEBUG", "PT_CANARY_ONLY"))
-        assertThrows(
-            IllegalArgumentException.class, () -> new AsyncJobMetricRecorder(registry, invalid));
+      for (String invalid : List.of("", "debug", " DEBUG", "PT_CANARY_ONLY", "DEBTf", "STANDAQc"))
+        assertEquals(
+            "CONFIG_INVALID",
+            assertThrows(
+                    IllegalArgumentException.class,
+                    () -> new AsyncJobMetricRecorder(registry, invalid))
+                .getMessage());
       assertEquals(0, registry.calls.get());
       var recorder = new AsyncJobMetricRecorder(registry, "STANDARD");
       assertFalse(recorder.detailedMetricsRequested());
