@@ -27,6 +27,7 @@ import org.junit.jupiter.api.Test;
 
 /** WEBOBXDB001..010/1721: own JDBC doubles only, not actual DB/driver/source admission. */
 class WebOutboxObservationRepositoryTest {
+  private static final String ROWS_CLOSE = "RSclose";
   private static final String FIXTURE_PREPARE_1F4EE68F = "prepare";
   private static final String FIXTURE_TIMEOUT_492BD020 = "timeout";
   private static final String FIXTURE_EXECUTE_7FB37A54 = "execute";
@@ -160,7 +161,7 @@ class WebOutboxObservationRepositoryTest {
                     return rows.get(cursor).sqlNull();
                   case "close":
                     closes.add("RS");
-                    fault("RSclose");
+                    fault(ROWS_CLOSE);
                     return null;
                   default:
                     throw new AssertionError("unexpected result-set operation");
@@ -390,7 +391,7 @@ class WebOutboxObservationRepositoryTest {
 
   @Test
   void webObxDb008CloseFailuresKeepOriginalAndSuppressedOrderWithoutBorrowedConnectionChanges() {
-    for (String point : List.of("RSclose", "PSclose"))
+    for (String point : List.of(ROWS_CLOSE, "PSclose"))
       for (var failure :
           List.<Throwable>of(
               new SQLException("owned close"),
@@ -410,7 +411,7 @@ class WebOutboxObservationRepositoryTest {
     var rs = new SQLException("owned rows close");
     var ps = new SQLException("owned statement close");
     f.faults.put(FIXTURE_COUNT_CC3EC73C, primary);
-    f.faults.put("RSclose", rs);
+    f.faults.put(ROWS_CLOSE, rs);
     f.faults.put("PSclose", ps);
     assertSame(
         primary,
@@ -489,7 +490,7 @@ class WebOutboxObservationRepositoryTest {
     var fixture = new Fixture(Row.row(FIXTURE_PENDING_B11DB31F, 3, 5));
     var repeated = new SQLException("owned same failure");
     fixture.faults.put(FIXTURE_COUNT_CC3EC73C, repeated);
-    fixture.faults.put("RSclose", repeated);
+    fixture.faults.put(ROWS_CLOSE, repeated);
     var outcome =
         assertThrows(
             IllegalArgumentException.class,

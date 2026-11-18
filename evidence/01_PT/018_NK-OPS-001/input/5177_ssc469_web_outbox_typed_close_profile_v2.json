@@ -1,0 +1,106 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "id": "PG39564-BUG3290-WEB-OUTBOX-TYPED-CLOSE-V2",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productOwnerByMainPath": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricCollector.java": "WBS-P018-09",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricRecorder.java": "WBS-P018-09",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebOutboxObservationRepository.java": "WBS-P018-09",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/package-info.java": "WBS-P018-09"
+  },
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/2665_WebOutbox供給監視元whole26_単体テスト仕様.md",
+      "sha256": "7ab37f8cbca32c4b51f7811c97b248b2c25e0a26cf6aa129b18c9bfb95873d66"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4684_SSC469_WebOutbox単一型付き解放_単体テスト仕様.md",
+      "sha256": "2ce19f61ce4f326fdb5f1cc2a3e8e8ef16b40ec6c12759ab6a780b80209a12ea"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39554-p00405-web-outbox-proxy-independent-v1/manifest.json",
+      "sha256": "dfd372a59868de84a798b5bcc16509c3fa9ce95b39ba2e1502772d2c72eb6582"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39476-p00405-admission-single-cleanup-independent-v1/manifest.json",
+      "sha256": "0c2fac616d225b0e12b3ecc551fc4833186b8e38a96741ba2c7162a1c607db82"
+    }
+  ],
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "productionCoreMain": "f8b668a320e091ce8ebb6c8835aac47366d8ca70",
+  "mainSources": [
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricRecorder.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricCollector.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebOutboxObservationRepository.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/package-info.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricRecorderTest.java",
+      "tests": 8
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricCollectorTest.java",
+      "tests": 8
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxObservationRepositoryTest.java",
+      "tests": 11
+    }
+  ],
+  "expectedTests": 27,
+  "resources": [],
+  "sdkJars": [
+    "io/micrometer/micrometer-commons/1.17.1/micrometer-commons-1.17.1.jar",
+    "io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar",
+    "io/micrometer/micrometer-observation/1.17.1/micrometer-observation-1.17.1.jar"
+  ],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar": "9ca47dfa831409b40253c8dc98c17b9d3e050ebbde4d1543c5521dca2b95ad56",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-commons/1.17.1/micrometer-commons-1.17.1.jar": "f2cee6ef046e72eec8128474c7f58c6217173b45ae373c30de0289f2a56ab0fd",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-observation/1.17.1/micrometer-observation-1.17.1.jar": "eb34f0cd84a879393ae5c21160fc06385ccdc74f36a4d1e31b199f59acfdaf71"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/web/monitoring/WebOutboxMetricRecorder.class",
+    "dev/codex/schubert/nk/web/monitoring/WebOutboxMetricCollector.class",
+    "dev/codex/schubert/nk/web/monitoring/WebOutboxObservationRepository.class",
+    "dev/codex/schubert/nk/web/monitoring/package-info.class",
+    "dev/codex/schubert/nk/web/monitoring/WebOutboxMetricRecorder$Status.class",
+    "dev/codex/schubert/nk/web/monitoring/WebOutboxMetricRecorder$Observation.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/web/monitoring/WebOutboxMetricRecorder",
+    "dev/codex/schubert/nk/web/monitoring/WebOutboxMetricCollector",
+    "dev/codex/schubert/nk/web/monitoring/WebOutboxObservationRepository",
+    "dev/codex/schubert/nk/web/monitoring/WebOutboxMetricRecorder$Status",
+    "dev/codex/schubert/nk/web/monitoring/WebOutboxMetricRecorder$Observation"
+  ],
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-web/pom.xml"
+  ],
+  "systemProperties": {},
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG39557-bug3290-web-outbox-prestyle-v2",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG39558-bug3290-web-outbox-prepare-v1",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG39560-bug3290-web-outbox-static-v1",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG39562-bug3290-web-outbox-preflight-v1",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG39564-bug3290-web-outbox-unit-v1",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG39568-bug3290-web-outbox-post-v1"
+  },
+  "privateDirs": {
+    "prepare": "pg39558-bug3290-web-outbox-prepare-v1",
+    "unit": "pg39564-bug3290-web-outbox-unit-v1"
+  },
+  "newTestDefinitions": 1,
+  "standardCompilerSwitchMaps": [],
+  "forbiddenInitializedClasses": []
+}
