@@ -59,14 +59,13 @@ public final class ArtifactComparator {
     failures.addAll(
         CorrelatedLogEvidenceValidator.validate(observations.path("correlatedLogEvidence")));
 
-    Set<String> expectedCases = strings(catalog.path("cases"), "id");
-    require(expectedCases.size() == 24, "CATALOG_CASE_COUNT", failures);
+    Set<String> expectedCases = new LinkedHashSet<>();
     for (JsonNode item : catalog.path("cases")) {
-      require(
-          "RUN".equals(item.path("nk").asText()),
-          "CATALOG_NK:" + item.path("id").asText(),
-          failures);
+      String id = item.path("id").asText();
+      require(expectedCases.add(id), "CATALOG_DUPLICATE:" + id, failures);
+      require("RUN".equals(item.path("nk").asText()), "CATALOG_NK:" + id, failures);
     }
+    require(expectedCases.size() == 24, "CATALOG_CASE_COUNT", failures);
 
     Map<String, Path> currentFiles = artifactFiles(currentArtifacts, failures, "CURRENT");
     Map<String, Path> nkFiles = artifactFiles(nkArtifacts, failures, "NK");
@@ -104,7 +103,8 @@ public final class ArtifactComparator {
 
     Map<String, JsonNode> rules = new LinkedHashMap<>();
     for (JsonNode rule : allowlist.path("differences")) {
-      rules.put(rule.path("id").asText(), rule);
+      String id = rule.path("id").asText();
+      require(rules.putIfAbsent(id, rule) == null, "DIF_DUPLICATE:" + id, failures);
     }
     require(rules.size() == 16, "DIF_RULE_COUNT", failures);
     require(
@@ -321,12 +321,6 @@ public final class ArtifactComparator {
         && !pointer.contains("*")
         && !pointer.contains("..")
         && !pointer.endsWith("/");
-  }
-
-  private static Set<String> strings(JsonNode values, String field) {
-    Set<String> result = new LinkedHashSet<>();
-    values.forEach(value -> result.add(value.path(field).asText()));
-    return result;
   }
 
   private static List<String> strings(JsonNode values) {
