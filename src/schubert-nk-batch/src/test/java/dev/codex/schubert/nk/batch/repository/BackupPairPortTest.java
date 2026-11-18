@@ -1,10 +1,13 @@
 package dev.codex.schubert.nk.batch.repository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import dev.codex.schubert.nk.batch.backup.BackupCommitService;
 import dev.codex.schubert.nk.batch.backup.BackupFileDigest;
 import dev.codex.schubert.nk.batch.backup.BackupManifest;
 import dev.codex.schubert.nk.batch.backup.BackupVersions;
@@ -22,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
+import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
@@ -59,6 +63,11 @@ final class BackupPairPortTest {
   private static final Instant END = BASE.plusSeconds(5);
   private static final BatchRun RUN = new BatchRun(new UUID(0, 1), BASE);
   private static final String DIAGNOSTIC = "batch repository operation failed";
+  private static final String BEGIN = "begin";
+  private static final String COMMIT = "commit";
+  private static final String RESTORE = "restore";
+  private static final String ROLLBACK = "rollback";
+  private static final String TX_FAULT = "synthetic transaction defect";
 
   @Test
   void runningAndSuccessReadExactPairSqlBindingsAndCloseBeforeReturning() {
@@ -363,6 +372,193 @@ final class BackupPairPortTest {
               expected.getClass(),
               () -> BackupStepRepository.readTerminal(driver, BackupTerminalRows.DB, END)));
     }
+  }
+
+  @Test
+  void bkpcommit461001FreshPairAndReplayPreserveCommitOrder() {
+    for (boolean replay : List.of(false, true)) {
+      var tx = new TransactionFixture();
+      tx.rows.observations = replay ? List.of(pair(true)) : List.of(pair(false), pair(true));
+      assertEquals(END, commit(tx));
+      assertEquals(List.of(BEGIN, COMMIT, RESTORE), tx.events);
+      assertEquals(replay ? 0 : 2, tx.rows.updates.size());
+      assertTrue(tx.autoCommit);
+      tx.rows.assertClosed();
+    }
+  }
+
+  @Test
+  void bkpcommit461002MissingInputsAndInvalidParentStateHaveNoOwnedCalls() {
+    var service = new BackupCommitService();
+    var tx = new TransactionFixture();
+    var claim = manifest();
+    assertThrows(NullPointerException.class, () -> service.complete(null, claim, END));
+    assertThrows(NullPointerException.class, () -> service.complete(tx.connection, null, END));
+    assertThrows(NullPointerException.class, () -> service.complete(tx.connection, claim, null));
+    for (int scenario = 0; scenario < 3; scenario++) {
+      tx.autoCommit = scenario != 0;
+      tx.readOnly = scenario == 1;
+      tx.isolation = scenario == 2 ? Connection.TRANSACTION_REPEATABLE_READ : 2;
+      catalog(() -> commit(tx));
+    }
+    assertTrue(tx.events.isEmpty());
+    assertTrue(tx.rows.sql.isEmpty());
+  }
+
+  @Test
+  void bkpcommit461003PreserveFatalPrimaryOrRollbackGraphIdentity() {
+    for (int edge = 0; edge < 3; edge++) {
+      for (boolean primary : List.of(false, true)) {
+        var tx = new TransactionFixture();
+        var error = new AssertionError(TX_FAULT);
+        SQLException graph = txGraph(edge, error);
+        tx.beginFailure = primary ? graph : new SQLException(TX_FAULT);
+        tx.rollbackFailure = primary ? new SQLException(TX_FAULT) : graph;
+        assertSame(error, assertThrows(AssertionError.class, () -> commit(tx)));
+        assertEquals(List.of(BEGIN, ROLLBACK), tx.events);
+        assertEquals(0, error.getSuppressed().length);
+        assertTrue(tx.rows.sql.isEmpty());
+      }
+      var outer = new TransactionFixture();
+      var error = new AssertionError(TX_FAULT);
+      outer.entryFailure = txGraph(edge, error);
+      assertSame(error, assertThrows(AssertionError.class, () -> commit(outer)));
+      assertTrue(outer.events.isEmpty());
+    }
+  }
+
+  @Test
+  void bkpcommit461004RepositoryFailureRollsBackAndRestoresBeforeFixedFailure() {
+    var tx = new TransactionFixture();
+    tx.rows.faults.put("prepare", new SQLException(TX_FAULT));
+    catalog(() -> commit(tx));
+    assertEquals(List.of(BEGIN, ROLLBACK, RESTORE), tx.events);
+    assertTrue(tx.autoCommit);
+    assertEquals(0, tx.rows.updates.size());
+    tx.rows.assertClosed();
+  }
+
+  @Test
+  void bkpcommit461005CompoundFailuresPreserveTheDeclaredPrecedence() {
+    for (Throwable known : List.of(new SQLException(TX_FAULT), new BatchRepositoryException())) {
+      for (Throwable second : List.of(new SQLException(TX_FAULT), new BatchRepositoryException())) {
+        var tx = new TransactionFixture();
+        tx.beginFailure = known;
+        tx.rollbackFailure = second;
+        catalog(() -> commit(tx));
+        assertEquals(List.of(BEGIN, ROLLBACK), tx.events);
+      }
+      for (Throwable second :
+          List.of(new IllegalStateException(TX_FAULT), new AssertionError(TX_FAULT))) {
+        var tx = new TransactionFixture();
+        tx.beginFailure = known;
+        tx.rollbackFailure = second;
+        assertSame(second, assertThrows(second.getClass(), () -> commit(tx)));
+        assertEquals(List.of(BEGIN, ROLLBACK), tx.events);
+      }
+    }
+    for (Throwable primary :
+        List.of(new IllegalStateException(TX_FAULT), new AssertionError(TX_FAULT))) {
+      var tx = new TransactionFixture();
+      tx.beginFailure = primary;
+      tx.rollbackFailure = primary;
+      assertSame(primary, assertThrows(primary.getClass(), () -> commit(tx)));
+      var secondary = primary.getSuppressed();
+      assertEquals(1, secondary.length);
+      assertEquals(BatchRepositoryException.class, secondary[0].getClass());
+      assertEquals(DIAGNOSTIC, secondary[0].getMessage());
+      assertNull(secondary[0].getCause());
+      assertEquals(List.of(BEGIN, ROLLBACK), tx.events);
+    }
+  }
+
+  @Test
+  void bkpcommit461006ConfirmedCommitIsNotRepresentedAsRollbackOnLateFailure() {
+    var tx = new TransactionFixture();
+    tx.rows.observations = List.of(pair(true));
+    tx.restoreFailure = new SQLException(TX_FAULT);
+    catalog(() -> commit(tx));
+    assertEquals(List.of(BEGIN, COMMIT, RESTORE), tx.events);
+    assertFalse(tx.autoCommit);
+    tx.rows.assertClosed();
+
+    var interrupted = new TransactionFixture();
+    interrupted.rows.observations = List.of(pair(true));
+    interrupted.interruptAfterCommit = true;
+    try {
+      catalog(() -> commit(interrupted));
+      assertTrue(Thread.currentThread().isInterrupted());
+      assertEquals(List.of(BEGIN, COMMIT, RESTORE), interrupted.events);
+      assertTrue(interrupted.autoCommit);
+    } finally {
+      Thread.interrupted();
+    }
+    interrupted.rows.assertClosed();
+  }
+
+  private static Instant commit(TransactionFixture tx) {
+    return new BackupCommitService().complete(tx.connection, manifest(), END);
+  }
+
+  private static SQLException txGraph(int edge, Error fatal) {
+    var graph = new SQLException(TX_FAULT);
+    switch (edge) {
+      case 0 -> graph.initCause(fatal);
+      case 1 -> graph.addSuppressed(fatal);
+      case 2 -> graph.setNextException(new SQLException(TX_FAULT, fatal));
+      default -> throw new AssertionError("fixture edge");
+    }
+    return graph;
+  }
+
+  private static final class TransactionFixture {
+    private final Fixture rows = new Fixture();
+    private final List<String> events = new ArrayList<>();
+    private boolean autoCommit = true;
+    private boolean readOnly;
+    private int isolation = Connection.TRANSACTION_READ_COMMITTED;
+    private boolean interruptAfterCommit;
+    @Nullable private Throwable entryFailure;
+    @Nullable private Throwable beginFailure;
+    @Nullable private Throwable rollbackFailure;
+    @Nullable private Throwable restoreFailure;
+    private final Connection connection =
+        (Connection)
+            Proxy.newProxyInstance(
+                Connection.class.getClassLoader(),
+                new Class<?>[] {Connection.class},
+                (ignored, method, args) -> {
+                  switch (method.getName()) {
+                    case "getAutoCommit":
+                      if (entryFailure != null) throw entryFailure;
+                      return autoCommit;
+                    case "isReadOnly":
+                      return readOnly;
+                    case "getTransactionIsolation":
+                      return isolation;
+                    case "setAutoCommit":
+                      boolean setting = (boolean) args[0];
+                      events.add(setting ? RESTORE : BEGIN);
+                      Throwable fault = setting ? restoreFailure : beginFailure;
+                      if (fault != null) throw fault;
+                      autoCommit = setting;
+                      return null;
+                    case COMMIT:
+                      assertFalse(autoCommit);
+                      events.add(COMMIT);
+                      if (interruptAfterCommit) Thread.currentThread().interrupt();
+                      return null;
+                    case ROLLBACK:
+                      events.add(ROLLBACK);
+                      if (rollbackFailure != null) throw rollbackFailure;
+                      return null;
+                    case "prepareStatement":
+                      assertFalse(autoCommit);
+                      return rows.statement((String) args[0]);
+                    default:
+                      throw new AssertionError(method.getName());
+                  }
+                });
   }
 
   private static BackupManifest manifest() {
