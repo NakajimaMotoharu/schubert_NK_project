@@ -1,0 +1,134 @@
+{
+  "eventId": "PGPT-20261008-5824",
+  "actualExit": 0,
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-SSC456-STORAGE-CREDENTIAL-CATALOG-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-SSC456-STORAGE-CREDENTIAL-CATALOG-20261118",
+    "workAttributionKind": "ADDITIONAL_FINDING",
+    "workScope": "A2-29.01 / P003-07 / F03: SS fixed two-service catalog represented by keyed immutable lookup, no other service fallback, keep original order/labels/Kind/API/null semantics. One Main, original whole5 plus two ordinary enum value contracts for missed public methods. Build Storage only and validate full affected namespace raw without compiler artifact exclusions. Actual credentials/file/host/root/held class uncalled, scoped ABI only.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38462-a22901-storage-catalog-raw-original-v1/manifest.json",
+        "sha256": "61eb2051655d15698fcdcc8d3121ef109bdfca60ffd779c68059541ae6f9a266"
+      }
+    ],
+    "source": "4a1ed6d155507f7d2be65f2917f21b685c0494c6",
+    "productionCoreMain": "383b068a3209a0a35f139725f44b18934a0f3dbd",
+    "wbsLeafIds": [
+      "WBS-F03",
+      "WBS-P003-07"
+    ],
+    "managementWorkIds": [
+      "A2-29.01"
+    ],
+    "run": "PG38480-ssc456-storage-fixed-catalog-independent-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.35,
+      "base": 1.35,
+      "high": 3.2
+    },
+    "groupCapPp": 4.5,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "relatedBug": "BUG-3226",
+    "relatedYkt": "YKT-2675",
+    "quotaAfter": {
+      "usedPercent": 27,
+      "remainingPercent": 73,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "2d285f2ff2af9bb9b800b0f50a01025aeae8325fc3f645830a1c2762614f03e0",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T03:25:40.197000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 27,
+          "remainingPercent": 73,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T03:23:41.428712+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 27,
+      "remainingPercent": 73,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-5823",
+    "productRuns": 1,
+    "productTestsExecuted": 7,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "notRun": 0,
+    "firstProductRunSuccess": {
+      "passed": 7,
+      "executed": 7
+    },
+    "newDefinitions": 2,
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38480-ssc456-storage-fixed-catalog-independent-v1/manifest.json",
+      "sha256": "73afa8af830c640c651a878dfd991bb958342c93b6ca716800921d513ed6d03e"
+    },
+    "scopeCodeCoverage": {
+      "LINE": {
+        "missed": 0,
+        "covered": 31
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 14
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 2
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 0
+      },
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 240
+      }
+    },
+    "completedAdditionalPriceForGroupPp": 1.35,
+    "additionalCompletedPriceTotalPp": 36.8,
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortCompletionRate": null,
+    "actualDedicatedPp": null,
+    "remainingCriteria": [
+      "Full Storage operations and A2-29.01/whole F03",
+      "F02 typed API/Web QA056 and F04 auth QA058",
+      "Whole451 and descriptor/CHR coverage on release"
+    ]
+  }
+}
