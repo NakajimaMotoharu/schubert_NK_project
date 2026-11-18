@@ -1,0 +1,453 @@
+{
+  "actualExit": 0,
+  "source": "cf2f89a3132797cdecaa815c8445feb692c585b8",
+  "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "designCanonical": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+  "ownerRegistryBefore": {
+    "path": "documents/400_PGPT/470_PMO/485_WBS網羅性・受入対応.json",
+    "sha256": "61dd93caab9c0911a0d087524f46255813a121e1d2e96cc130bd4e839bcea4c2"
+  },
+  "trace": [
+    {
+      "scope": "PRODUCT_VALUE_RECORD",
+      "owner": "WBS-P017-10",
+      "consumer": "WBS-P018-10.03",
+      "commonPriceChargedAgain": false,
+      "docs": [
+        {
+          "path": "documents/200_UI/230_インターフェース/231_MQ論理構成設計.md",
+          "sha256": "5ad4cbff20353d678aa2c159ea7ddf1bfaabb0f8ad73f2e577869218fcef1d8b",
+          "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774"
+        },
+        {
+          "path": "documents/200_UI/250_運用・非機能/251_朝バッチ・バックアップ・起動停止設計.md",
+          "sha256": "6dc961aebad948e77567b6c2d584d01c00eb62aee27826aefd47dd41e286f7dd",
+          "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774"
+        },
+        {
+          "path": "documents/200_UI/250_運用・非機能/253_性能・容量・可用性・セキュリティ設計.md",
+          "sha256": "edc41bda36671fb2f5e1a446ec2167b4ded902889876cedaffd07d2a6d34de07",
+          "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774"
+        },
+        {
+          "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+          "sha256": "a48d9744e6138fd0ce9e99fd9b9e1ed4c3e6fa18aea2448bcdfb1acadf89b156",
+          "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774"
+        },
+        {
+          "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+          "sha256": "07ab19dd27038241ba8257a1e4dcf180117a844b68479ec6848658a938445192",
+          "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774"
+        },
+        {
+          "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+          "sha256": "860f584a2f032e9b06112907f8ec138a12d0b69b94546f7e17ad7dfb9b65414c",
+          "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774"
+        }
+      ],
+      "fixture": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisStartupEvidenceValueTest.java",
+        "sha256": "b8163935386deaceab0ee3c59fc4d2bd0489ba2d3e62226486d540f69b5165ce",
+        "source": "4162eb60f357593fb4eb5f8bfa66eda3f2332010"
+      },
+      "main": [
+        {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisStartupObservation.java",
+          "sha256": "3422dd26caa2efa2a7fd44682ef3d87f877254f0144f3cc0dd28332949085aac",
+          "source": "ecf8a00fbd37720b80f8e107d59727723c706a12"
+        }
+      ],
+      "spec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/4699_Artemis観測値の独立所有と固定診断の単体仕様.md",
+        "sha256": "320a5f782b0a7207652849e6d2afae573f220a0b50607857088b71b148f46326"
+      },
+      "xml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40008-p01810-broker-evidence-value-v2/xml/TEST-junit-jupiter.xml",
+        "sha256": "5d5149abe9c02cffd604e7f981216afe2e19982195ba9bbe6f79fb2eec49e9d7"
+      },
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40008-p01810-broker-evidence-value-v2/independent.json",
+        "sha256": "3aa8093c01e74ae060bc992a78ab6603b323e431e122000d39c54403c8166fe9"
+      },
+      "qualifiedPhysical": {
+        "sha256": "b5550b056bfdcc6c3472e3fc9b4c413c1ec1fcb2f9724ea08d52af447890f23f",
+        "crc64": "ff60118e5a89d372",
+        "counters": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 116
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 21
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 14
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 14
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        }
+      },
+      "tests": [
+        {
+          "testId": "PT-P01810-CATALOG-062A",
+          "xmlClass": "dev.codex.schubert.nk.batch.mq.ArtemisStartupEvidenceValueTest",
+          "xmlMethod": "ownsAllNestedValueInputsBeforeAndAfterCallerMutatesThem()"
+        },
+        {
+          "testId": "PT-P01810-CATALOG-062B",
+          "xmlClass": "dev.codex.schubert.nk.batch.mq.ArtemisStartupEvidenceValueTest",
+          "xmlMethod": "comparesOwnedValueDataWhileItsGeneralDiagnosticsStayFixed()"
+        },
+        {
+          "testId": "PT-P01810-CATALOG-062C",
+          "xmlClass": "dev.codex.schubert.nk.batch.mq.ArtemisStartupEvidenceValueTest",
+          "xmlMethod": "rejectsMissingNestedInputsWhileTakingOwnership()"
+        }
+      ],
+      "realRuntimeProved": false
+    },
+    {
+      "scope": "OFFLINE_TOOL",
+      "contract": "S04/DIF-008",
+      "localIssue": "BUG-3320",
+      "owner": "WBS-P020-01",
+      "main": [
+        {
+          "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+          "sha256": "e8eadfb80ce07cf1b0b5b252c08630e7905f1fb07c4ca3d782fe284ebe70dba4",
+          "source": "cd8df4e856834cd9de3d258d8a816a6b802fce93"
+        }
+      ],
+      "fixtures": [
+        {
+          "path": "program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorTest.java",
+          "sha256": "4b97c6f89fb58f983686c4e2a4e9a89bd584b59d686172755e033e19c4ad9257",
+          "source": "cd8df4e856834cd9de3d258d8a816a6b802fce93"
+        }
+      ],
+      "docs": [
+        {
+          "path": "documents/200_UI/260_引継ぎ・監査/264_現行互換性Characterization Test仕様.md",
+          "sha256": "0b0973e6e1e94858e840bc1b85df1daff35e3a0fe9f28ea12331823c2cbcf781",
+          "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774"
+        },
+        {
+          "path": "documents/300_SS/350_運用・品質/355_Characterization Test実行準備・PG開始gate.md",
+          "sha256": "aff2aafe8f952de073e6dd2e7f5840152539f348f9816c6fa31e84ced93bef45",
+          "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774"
+        }
+      ],
+      "spec": {
+        "path": "evidence/01_PT/020_NK-CHR-001/042_DIF008検索零件の比較単体仕様.md",
+        "sha256": "38639975aa5f6a64cba4ac47f6cf73577021cfe7bfaa7ba7a978189d87166c73"
+      },
+      "wholeToolTests": 170,
+      "tests": [
+        {
+          "testId": "PT-CHR-DEF038",
+          "xmlClass": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "xmlMethod": "acceptsTheExactEmptySearchMessageAtItsVisibleField()"
+        },
+        {
+          "testId": "PT-CHR-DEF039",
+          "xmlClass": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "xmlMethod": "requiresAnExplicitEmptySearchObservation()"
+        },
+        {
+          "testId": "PT-CHR-DEF040",
+          "xmlClass": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "xmlMethod": "rejectsASelfReportedDifferentNkEmptySearchLabel()"
+        },
+        {
+          "testId": "PT-CHR-DEF041",
+          "xmlClass": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "xmlMethod": "rejectsAnEmptySearchClaimOnAnUnrelatedField()"
+        },
+        {
+          "testId": "PT-CHR-DEF042",
+          "xmlClass": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "xmlMethod": "doesNotTreatAnL01ClaimAsTheRequiredS04Observation()"
+        }
+      ],
+      "run": "PG39990-p020-search-empty170-v1",
+      "xml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39990-p020-search-empty170-v1/xml/TEST-junit-jupiter.xml",
+        "sha256": "bea4307de0c142606c14e8c963709788fb1e75c6e27f6ec26e4a2e090aec6121"
+      },
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39994-p020-search-empty-independent-v1/manifest.json",
+        "sha256": "3f252e8bac345079192d4523d08ae78dd1fc57038297bd5662acc28859947192"
+      },
+      "realRuntimeProved": false
+    },
+    {
+      "scope": "OFFLINE_TOOL",
+      "contract": "S02/DIF-013",
+      "localIssue": "BUG-3321",
+      "owner": "WBS-P020-01",
+      "main": [
+        {
+          "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+          "sha256": "1579c5d169dd19f66ab7abd8bce90a9377bcb7b6577f2eea3ba4a371693c1b97",
+          "source": "ee86a8c647860d0bf22e8620d83d67f68521b74e"
+        }
+      ],
+      "fixtures": [
+        {
+          "path": "program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorTest.java",
+          "sha256": "89b55ba015ab34ad2b76ded4d54748442548305a8963d65aa81ade0dff923e41",
+          "source": "ee86a8c647860d0bf22e8620d83d67f68521b74e"
+        }
+      ],
+      "docs": [
+        {
+          "path": "documents/200_UI/260_引継ぎ・監査/264_現行互換性Characterization Test仕様.md",
+          "sha256": "0b0973e6e1e94858e840bc1b85df1daff35e3a0fe9f28ea12331823c2cbcf781",
+          "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774"
+        },
+        {
+          "path": "documents/300_SS/350_運用・品質/355_Characterization Test実行準備・PG開始gate.md",
+          "sha256": "aff2aafe8f952de073e6dd2e7f5840152539f348f9816c6fa31e84ced93bef45",
+          "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774"
+        }
+      ],
+      "spec": {
+        "path": "evidence/01_PT/020_NK-CHR-001/044_DIF013変更時inline属性とbuttonの単体仕様.md",
+        "sha256": "b6b30ab82bac24ad2ac55b6ea26fb79ed36de44780dd6577caca4a4ba25f1339"
+      },
+      "wholeToolTests": 176,
+      "tests": [
+        {
+          "testId": "PT-CHR-DEF043",
+          "xmlClass": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "xmlMethod": "acceptsAnAbsentInlineAttributeWithTheDisabledScriptSubmitButton()"
+        },
+        {
+          "testId": "PT-CHR-DEF044",
+          "xmlClass": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "xmlMethod": "rejectsAMissingGameChangeFieldInsteadOfAnObservedAbsentAttribute()"
+        },
+        {
+          "testId": "PT-CHR-DEF045",
+          "xmlClass": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "xmlMethod": "refusesASelfReportedNewInlineChangeHandler()"
+        },
+        {
+          "testId": "PT-CHR-DEF046",
+          "xmlClass": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "xmlMethod": "refusesTheGameChangeClaimAtAnotherField()"
+        },
+        {
+          "testId": "PT-CHR-DEF047",
+          "xmlClass": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "xmlMethod": "rejectsTheAbsentFallbackButtonEvenIfBothArtifactsAgree()"
+        },
+        {
+          "testId": "PT-CHR-DEF048",
+          "xmlClass": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "xmlMethod": "requiresAnExplicitGameChangeClaim()"
+        }
+      ],
+      "run": "PG40014-p020-game-onchange176-v1",
+      "xml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40014-p020-game-onchange176-v1/xml/TEST-junit-jupiter.xml",
+        "sha256": "6b015728d4a6f8ed969955129ccbcf0f7cd97ecf24da8fe744757d3b95ae34e4"
+      },
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40018-p020-game-onchange-independent-v1/manifest.json",
+        "sha256": "2c1c576c46ea8cbac99e89b9ce0b2158e4d8df17717f365b836834b0dd1f4d1f"
+      },
+      "realRuntimeProved": false
+    },
+    {
+      "scope": "OFFLINE_TOOL",
+      "contract": "L01/QA-054",
+      "localIssue": "BUG-3323/3324",
+      "owner": "WBS-P020-01",
+      "main": [
+        {
+          "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+          "sha256": "6aca8f86c1dfdb6b98d9889b8b229aa88d544ac7244ec041df8e21e098d706c9",
+          "source": "9d26713b715b995a9c05eec7792102aaa00b2aa2"
+        },
+        {
+          "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.java",
+          "sha256": "5dd057ba194844cf3b25cd23bed425690bfc6be04308a552d67aaa0710d05457",
+          "source": "9d26713b715b995a9c05eec7792102aaa00b2aa2"
+        }
+      ],
+      "fixtures": [
+        {
+          "path": "program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorTest.java",
+          "sha256": "01108ee50ae61307a8db3ae0355a29ede19fb6a84ca9169623a961f2b030ba77",
+          "source": "9d26713b715b995a9c05eec7792102aaa00b2aa2"
+        },
+        {
+          "path": "program/characterization/tests/java/dev/codex/schubert/characterization/CorrelatedMenuActionContractTest.java",
+          "sha256": "da43fa04caaa1e30c6b28fd1602e7458e7e340bb951a3173a363738aac57d7f5",
+          "source": "9d26713b715b995a9c05eec7792102aaa00b2aa2"
+        }
+      ],
+      "docs": [
+        {
+          "path": "documents/200_UI/260_引継ぎ・監査/264_現行互換性Characterization Test仕様.md",
+          "sha256": "0b0973e6e1e94858e840bc1b85df1daff35e3a0fe9f28ea12331823c2cbcf781",
+          "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774"
+        },
+        {
+          "path": "documents/300_SS/350_運用・品質/355_Characterization Test実行準備・PG開始gate.md",
+          "sha256": "aff2aafe8f952de073e6dd2e7f5840152539f348f9816c6fa31e84ced93bef45",
+          "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774"
+        }
+      ],
+      "spec": {
+        "path": "evidence/01_PT/020_NK-CHR-001/046_QA054L01二初回操作の必須証拠単体仕様.md",
+        "sha256": "6f886d1eccf5733f58f1e82839fae70b2ef9fe83ed311bbbde7e1c0341efbe75"
+      },
+      "wholeToolTests": 182,
+      "tests": [
+        {
+          "testId": "PT-CHR-DEF049",
+          "xmlClass": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "xmlMethod": "rejectsLoginOnlyEvidenceAtTheFullL01Gate()"
+        },
+        {
+          "testId": "PT-CHR-DEF050",
+          "xmlClass": "dev.codex.schubert.characterization.CorrelatedMenuActionContractTest",
+          "xmlMethod": "completeL01RequiresBothInitialOperationsAndTheirCompanionRequests()"
+        },
+        {
+          "testId": "PT-CHR-DEF051",
+          "xmlClass": "dev.codex.schubert.characterization.CorrelatedMenuActionContractTest",
+          "xmlMethod": "completeL01DoesNotAcceptBothSidesOmittingTheMenuAction()"
+        },
+        {
+          "testId": "PT-CHR-DEF052",
+          "xmlClass": "dev.codex.schubert.characterization.CorrelatedMenuActionContractTest",
+          "xmlMethod": "completeL01DoesNotAcceptBothSidesOmittingTheLogSearchAction()"
+        },
+        {
+          "testId": "PT-CHR-DEF053",
+          "xmlClass": "dev.codex.schubert.characterization.CorrelatedMenuActionContractTest",
+          "xmlMethod": "completeL01ChecksCompanionRequestCountRouteMethodAndStatus()"
+        },
+        {
+          "testId": "PT-CHR-DEF054",
+          "xmlClass": "dev.codex.schubert.characterization.CorrelatedMenuActionContractTest",
+          "xmlMethod": "completeL01MenuActionAndRequestNeedOneHttpRequestIdentity()"
+        }
+      ],
+      "run": "PG40035-p020-l01-required-actions-v2",
+      "xml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40035-p020-l01-required-actions-v2/xml/TEST-junit-jupiter.xml",
+        "sha256": "08a91508a3fdca231a9aac9aaba585bd89644ea6a2d02575982dd861c4d5ac03"
+      },
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40038-p020-l01-required-actions-independent-v1/manifest.json",
+        "sha256": "f36d5771703941802d030454ee02f9fe24af803bfbb5ff63585b6da91545b4a4"
+      },
+      "realRuntimeProved": false
+    },
+    {
+      "scope": "OFFLINE_TOOL",
+      "contract": "E01/DIF-005",
+      "localIssue": "BUG-3326/3327",
+      "owner": "WBS-P020-01",
+      "main": [
+        {
+          "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+          "sha256": "ff5c54284410a31fd5e5e4d18ef66b0a78dfde72b2a4f5aaa157d47aa468cdab",
+          "source": "a75b103b840e59e1c07a63cbccd1d41ea8dad589"
+        }
+      ],
+      "fixtures": [
+        {
+          "path": "program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorTest.java",
+          "sha256": "408e4e6f85d290792e42845da33445d0525eed6a8a66a7e5e47ad1673023d45c",
+          "source": "a75b103b840e59e1c07a63cbccd1d41ea8dad589"
+        }
+      ],
+      "docs": [
+        {
+          "path": "documents/200_UI/260_引継ぎ・監査/264_現行互換性Characterization Test仕様.md",
+          "sha256": "0b0973e6e1e94858e840bc1b85df1daff35e3a0fe9f28ea12331823c2cbcf781",
+          "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774"
+        },
+        {
+          "path": "documents/300_SS/350_運用・品質/355_Characterization Test実行準備・PG開始gate.md",
+          "sha256": "aff2aafe8f952de073e6dd2e7f5840152539f348f9816c6fa31e84ced93bef45",
+          "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774"
+        }
+      ],
+      "spec": {
+        "path": "evidence/01_PT/020_NK-CHR-001/048_E01非表示三条件の比較単体仕様.md",
+        "sha256": "b2eab37305a70f0dceeb4de6be734776b1b4bdf7175dc29d24a6644bc2025324"
+      },
+      "wholeToolTests": 187,
+      "tests": [
+        {
+          "testId": "PT-CHR-DEF055",
+          "xmlClass": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "xmlMethod": "acceptsTheCommonErrorPresentationWithThreeExplicitFalseLeakFlags()"
+        },
+        {
+          "testId": "PT-CHR-DEF056",
+          "xmlClass": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "xmlMethod": "rejectsEveryPositiveLeakOnEachSide()"
+        },
+        {
+          "testId": "PT-CHR-DEF057",
+          "xmlClass": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "xmlMethod": "rejectsAnIdenticalPositiveLeakEvenWithoutAChangedField()"
+        },
+        {
+          "testId": "PT-CHR-DEF058",
+          "xmlClass": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "xmlMethod": "rejectsMissingNullAndTextualLeakFlags()"
+        },
+        {
+          "testId": "PT-CHR-DEF059",
+          "xmlClass": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "xmlMethod": "rejectsAnErrorStyleClaimThatTriesToCoverAChangedLeakFlag()"
+        }
+      ],
+      "run": "PG40057-p020-error-disclosure187-v2",
+      "xml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40057-p020-error-disclosure187-v2/xml/TEST-junit-jupiter.xml",
+        "sha256": "a0ef275c7b9b4f2c761be6d5df69b6b863baa2f87a0b742cfe71bda567937901"
+      },
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40060-p020-error-disclosure-independent-v1/manifest.json",
+        "sha256": "ba602b60c05f18e38a8dc93c160321ce09f6849fa024d1cd10e28d88064d54aa"
+      },
+      "realRuntimeProved": false
+    }
+  ],
+  "productCases": 3,
+  "offlineToolCases": 22,
+  "newTestExecutions": 0,
+  "initialMetadataGuard": "PG40038 entries use explicit class/method pairs; the first read aborted before writing evidence.",
+  "priorRunsCombined": false,
+  "newMeasuredCoverage": 0,
+  "wholeG08Accepted": false,
+  "whole451Accepted": false,
+  "newAcceptance": 0,
+  "effortRate": null,
+  "terminalAtUTC": "2026-11-18T18:50:10.302367+00:00",
+  "verifier": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/5266_g08_artemis_characterization_trace.py",
+    "sha256": "f781c75d500ae5e7d26e03418cac9a4d6f15dba44f6756b62871d16206a07180"
+  }
+}
