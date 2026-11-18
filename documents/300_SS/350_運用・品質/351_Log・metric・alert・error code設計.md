@@ -309,6 +309,8 @@ SSC-464。OutboxEntry.toStringは「OutboxEntry[<redacted>]」、OutboxRequest.t
 
 SSC-465。InspectionStep.toStringは「InspectionStep[<redacted>]」を返す。outcomeとcursorの実値を一般診断へ連結しない。明示outcome/cursor、既終了条件及び本書の許可済み構造化結果欄は既契約。
 
+SSC-466。一時バッファの通常 `toString()` は `WipingByteArrayOutputStream[<redacted>]` とし、長さ・容量・内容を表示しない。許可済みの構造化統計や、所有処理が直接使う `size()` と区別する。SS324、PT-P01810-CATALOG-015。
+
 
 - DEBUGだけ機密除外を緩和、request/response/fixed body、exception/SQLの`toString()`を無制限出力。
 - Username/IP/message/token/path等の高cardinality/機密値をmetric label化。
