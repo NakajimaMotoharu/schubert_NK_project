@@ -72,6 +72,16 @@ class ArtifactComparatorTest {
   private static final String FIXTURE_CHR_U02 = "CHR-U02";
   private static final String FIXTURE_CHR_L01 = "CHR-L01";
   private static final String FIXTURE_DIF_001 = "DIF-001";
+  private static final String FIXTURE_DIF_008 = "DIF-008";
+  private static final String FIXTURE_CHR_S04 = "CHR-S04";
+  private static final String FIXTURE_SEARCH_EMPTY_TEXT = "emptyVisibleText";
+  private static final String FIXTURE_SEARCH_EMPTY_POINTER = "/emptyVisibleText";
+  private static final String FIXTURE_SEARCH_EMPTY_FIELD = "empty.message";
+  private static final String FIXTURE_SEARCH_EMPTY_NK = "該当するデータはありません";
+  private static final String FIXTURE_SEARCH_EMPTY_REQUIRED =
+      "FIXED_DIF_REQUIRED:CHR-S04:/emptyVisibleText";
+  private static final String SEARCH_EMPTY_DIFFERENCE = "CHR-S04:/emptyVisibleText";
+  private static final String FIXTURE_UNAPPROVED_EMPTY_LABEL = "synthetic empty label";
   private static final String FIXTURE_BRAND = "brand";
   private static final String FIXTURE_BRAND_POINTER = "/brand";
   private static final String FIXTURE_POINTER = "jsonPointer";
@@ -201,14 +211,14 @@ class ArtifactComparatorTest {
               "partial",
               "username role logout"),
           new Oracle(
-              "DIF-008",
-              "CHR-S04",
-              "empty.message",
+              FIXTURE_DIF_008,
+              FIXTURE_CHR_S04,
+              FIXTURE_SEARCH_EMPTY_FIELD,
               FIXTURE_DIFFERENCE,
               FIXTURE_SEMANTIC,
-              "empty.message",
-              "may be blank",
-              "該当するデータはありません"),
+              FIXTURE_SEARCH_EMPTY_FIELD,
+              "",
+              FIXTURE_SEARCH_EMPTY_NK),
           new Oracle(
               "DIF-009",
               "CHR-S08",
@@ -1124,6 +1134,86 @@ class ArtifactComparatorTest {
     assertEquals(List.of(AUDIO_STATUS_DIFFERENCE), result.unregisteredDifferences());
   }
 
+  @Test
+  void acceptsTheExactEmptySearchMessageAtItsVisibleField() throws Exception {
+    var result = compare(fixture("approved-empty-search-message"));
+
+    assertTrue(result.passed(), result.failures().toString());
+    assertTrue(result.usedDifferences().contains(FIXTURE_DIF_008));
+  }
+
+  @Test
+  void requiresAnExplicitEmptySearchObservation() throws Exception {
+    Fixture fixture = fixture("missing-empty-search-observation");
+    removeObservation(fixture, FIXTURE_CHR_S04, FIXTURE_SEARCH_EMPTY_POINTER);
+
+    var result = compare(fixture);
+
+    assertFalse(result.passed());
+    assertContains(result.failures(), FIXTURE_SEARCH_EMPTY_REQUIRED);
+    assertEquals(List.of(SEARCH_EMPTY_DIFFERENCE), result.unregisteredDifferences());
+  }
+
+  @Test
+  void rejectsASelfReportedDifferentNkEmptySearchLabel() throws Exception {
+    Fixture fixture = fixture("self-reported-empty-search-label");
+    mutate(
+        fixture.nk().resolve(FIXTURE_CHR_S04 + FIXTURE_JSON_SUFFIX),
+        root -> root.put(FIXTURE_SEARCH_EMPTY_TEXT, FIXTURE_UNAPPROVED_EMPTY_LABEL));
+    changeSearchEmptyClaim(
+        fixture, claim -> claim.put(FIXTURE_EXPECTED_NK, FIXTURE_UNAPPROVED_EMPTY_LABEL));
+
+    var result = compare(fixture);
+
+    assertFalse(result.passed());
+    assertContains(result.failures(), FIXTURE_FIXED_NK);
+    assertEquals(List.of(SEARCH_EMPTY_DIFFERENCE), result.unregisteredDifferences());
+  }
+
+  @Test
+  void rejectsAnEmptySearchClaimOnAnUnrelatedField() throws Exception {
+    Fixture fixture = fixture("empty-search-claim-on-extra-field");
+    mutate(
+        fixture.current().resolve(FIXTURE_CHR_S04 + FIXTURE_JSON_SUFFIX),
+        root -> root.put(FIXTURE_EXTRA, ""));
+    mutate(
+        fixture.nk().resolve(FIXTURE_CHR_S04 + FIXTURE_JSON_SUFFIX),
+        root -> root.put(FIXTURE_EXTRA, FIXTURE_SEARCH_EMPTY_NK));
+    changeSearchEmptyClaim(fixture, claim -> claim.put(FIXTURE_POINTER, "/" + FIXTURE_EXTRA));
+
+    var result = compare(fixture);
+
+    assertFalse(result.passed());
+    assertContains(result.failures(), FIXTURE_FIXED_POINTER);
+    assertTrue(result.unregisteredDifferences().contains("CHR-S04:/extra"));
+  }
+
+  @Test
+  void doesNotTreatAnL01ClaimAsTheRequiredS04Observation() throws Exception {
+    Fixture fixture = fixture("empty-claim-from-log-case");
+    changeSearchEmptyClaim(fixture, claim -> claim.put(FIXTURE_CASEID, FIXTURE_CHR_L01));
+
+    var result = compare(fixture);
+
+    assertFalse(result.passed());
+    assertContains(result.failures(), FIXTURE_SEARCH_EMPTY_REQUIRED);
+    assertFalse(result.failures().contains(FIXTURE_FIXED_POINTER));
+    assertEquals(List.of(SEARCH_EMPTY_DIFFERENCE), result.unregisteredDifferences());
+  }
+
+  private static void changeSearchEmptyClaim(Fixture fixture, Consumer<ObjectNode> change)
+      throws Exception {
+    mutate(
+        fixture.observations(),
+        root -> {
+          var claims = (ArrayNode) root.path(FIXTURE_OBSERVATIONS);
+          change.accept(
+              (ObjectNode)
+                  claims.get(
+                      findObservation(claims, FIXTURE_CHR_S04, FIXTURE_SEARCH_EMPTY_POINTER)));
+        });
+  }
+
   private static ArtifactComparator.ComparisonResult compare(Fixture fixture) throws IOException {
     return ArtifactComparator.compare(
         fixture.project(), fixture.current(), fixture.nk(), fixture.observations());
@@ -1189,6 +1279,10 @@ class ArtifactComparatorTest {
         currentArtifact.set(FIXTURE_BRAND, currentValue);
         nkArtifact.set(FIXTURE_BRAND, nkValue);
         pointer = FIXTURE_BRAND_POINTER;
+      } else if (FIXTURE_DIF_008.equals(oracle.id())) {
+        currentArtifact.set(FIXTURE_SEARCH_EMPTY_TEXT, currentValue);
+        nkArtifact.set(FIXTURE_SEARCH_EMPTY_TEXT, nkValue);
+        pointer = FIXTURE_SEARCH_EMPTY_POINTER;
       } else if (ASYNC_MENU_DIFFERENCE.equals(oracle.id())) {
         currentDif.set(oracle.id(), JSON.valueToTree(List.of(FIXTURE_SAME, oracle.currentValue())));
         nkDif.set(oracle.id(), JSON.valueToTree(List.of(FIXTURE_SAME, oracle.nkValue())));

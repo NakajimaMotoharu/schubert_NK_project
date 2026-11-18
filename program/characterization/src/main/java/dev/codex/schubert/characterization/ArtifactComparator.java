@@ -29,6 +29,8 @@ public final class ArtifactComparator {
   private static final String MODE_CONTRACT = "contract";
   private static final String LOGIN_CASE = "CHR-A01";
   private static final String BRAND_DIFFERENCE = "DIF-001";
+  private static final String EMPTY_MESSAGE_DIFFERENCE = "DIF-008";
+  private static final String EMPTY_SEARCH_CASE = "CHR-S04";
   private static final String CACHE_DIFFERENCE = "DIF-011";
   private static final String RANGE_DIFFERENCE = "DIF-012";
   private static final String RANGE_STATUS_POINTER = "/invalidRange/status";
@@ -54,6 +56,8 @@ public final class ArtifactComparator {
               textPair(CURRENT_BRAND, NK_BRAND),
               "CHR-U02:/titles/1",
               textPair("schubert - 検索", "schubert NK - 検索")),
+          EMPTY_MESSAGE_DIFFERENCE,
+          Map.of(EMPTY_SEARCH_CASE + ":/emptyVisibleText", textPair("", "該当するデータはありません")),
           CACHE_DIFFERENCE,
           Map.of(
               "CHR-O01:/cacheControl",
@@ -249,7 +253,11 @@ public final class ArtifactComparator {
       JsonNode actualCurrent = currentByCase.get(caseId).at(pointer);
       JsonNode actualNk = nkByCase.get(caseId).at(pointer);
       String differenceKey = key(caseId, pointer);
-      Map<String, List<JsonNode>> fixed = FIXED_EXPECTATIONS.get(id);
+      // L01 has its own log projection. The empty search field is specific to S04.
+      Map<String, List<JsonNode>> fixed =
+          EMPTY_MESSAGE_DIFFERENCE.equals(id) && !EMPTY_SEARCH_CASE.equals(caseId)
+              ? null
+              : FIXED_EXPECTATIONS.get(id);
       if (fixed != null) {
         valid &=
             checkFixed(id, caseId, fixed.get(differenceKey), actualCurrent, actualNk, failures);
