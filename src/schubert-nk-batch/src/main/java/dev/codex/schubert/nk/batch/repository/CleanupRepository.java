@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLDataException;
 import java.sql.SQLException;
 import java.util.Objects;
+import javax.annotation.WillClose;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -58,21 +59,13 @@ public final class CleanupRepository {
           rowFailure = failure;
           throw failure;
         } finally {
-          try {
-            row.close();
-          } catch (SQLException | RuntimeException | Error secondary) {
-            if (JdbcResourceFailures.replace(rowFailure, secondary)) throw secondary;
-          }
+          closeRow(row, rowFailure);
         }
       } catch (SQLException | RuntimeException | Error failure) {
         statementFailure = failure;
         throw failure;
       } finally {
-        try {
-          statement.close();
-        } catch (SQLException | RuntimeException | Error secondary) {
-          if (JdbcResourceFailures.replace(statementFailure, secondary)) throw secondary;
-        }
+        closeStatement(statement, statementFailure);
       }
     } catch (SQLException failure) {
       JdbcFailureGraph.preserveFatal(failure);
@@ -105,21 +98,13 @@ public final class CleanupRepository {
           rowFailure = failure;
           throw failure;
         } finally {
-          try {
-            row.close();
-          } catch (SQLException | RuntimeException | Error secondary) {
-            if (JdbcResourceFailures.replace(rowFailure, secondary)) throw secondary;
-          }
+          closeRow(row, rowFailure);
         }
       } catch (SQLException | RuntimeException | Error failure) {
         statementFailure = failure;
         throw failure;
       } finally {
-        try {
-          statement.close();
-        } catch (SQLException | RuntimeException | Error secondary) {
-          if (JdbcResourceFailures.replace(statementFailure, secondary)) throw secondary;
-        }
+        closeStatement(statement, statementFailure);
       }
     } catch (SQLException failure) {
       JdbcFailureGraph.preserveFatal(failure);
@@ -128,35 +113,28 @@ public final class CleanupRepository {
   }
 
   private PreparedStatement prepare(CleanupKind kind) throws SQLException {
-    return switch (kind) {
-      case NOTIFICATIONS ->
-          connection.prepareStatement(
-              "select target_count,deleted_count,skipped_count,reason_code from schubert.maintenance_cleanup_notifications(?,?,?)");
-      case QUESTIONS ->
-          connection.prepareStatement(
-              "select target_count,deleted_count,skipped_count,reason_code from schubert.maintenance_cleanup_questions(?,?,?)");
-      case SESSIONS ->
-          connection.prepareStatement(
-              "select target_count,deleted_count,skipped_count,reason_code from schubert.maintenance_cleanup_sessions(?,?,?)");
-      case OUTBOX ->
-          connection.prepareStatement(
-              "select target_count,deleted_count,skipped_count,reason_code from schubert.maintenance_cleanup_message_stores(?,?,?)");
-      case LOGS ->
-          connection.prepareStatement(
-              "select target_count,deleted_count,skipped_count,reason_code from schubert.maintenance_cleanup_logs(?,?,?)");
-      case WEB_RECEIPTS ->
-          connection.prepareStatement(
-              "select target_count,deleted_count,skipped_count,reason_code from schubert.maintenance_cleanup_web_receipt_references(?,?,?)");
-      case BATCH_RUNS ->
-          connection.prepareStatement(
-              "select target_count,deleted_count,skipped_count,reason_code from schubert.maintenance_cleanup_batch_runs(?,?,?)");
-      case INBOX_PROGRESS ->
-          connection.prepareStatement(
-              "select target_count,deleted_count,skipped_count,reason_code from schubert.maintenance_cleanup_inbox_progress(?,?,?)");
-      case LOG_PROGRESS ->
-          connection.prepareStatement(
-              "select target_count,deleted_count,skipped_count,reason_code from schubert.maintenance_cleanup_log_progress(?,?,?)");
-    };
+    return connection.prepareStatement(
+        "select target_count,deleted_count,skipped_count,reason_code from "
+            + kind.function()
+            + "(?,?,?)");
+  }
+
+  private static void closeRow(@WillClose ResultSet row, @Nullable Throwable primary)
+      throws SQLException {
+    try {
+      row.close();
+    } catch (SQLException | RuntimeException | Error secondary) {
+      if (JdbcResourceFailures.replace(primary, secondary)) throw secondary;
+    }
+  }
+
+  private static void closeStatement(
+      @WillClose PreparedStatement statement, @Nullable Throwable primary) throws SQLException {
+    try {
+      statement.close();
+    } catch (SQLException | RuntimeException | Error secondary) {
+      if (JdbcResourceFailures.replace(primary, secondary)) throw secondary;
+    }
   }
 
   private void requireTransaction() throws SQLException {

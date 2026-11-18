@@ -2,11 +2,14 @@ package dev.codex.schubert.nk.batch.repository;
 
 import dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLDataException;
 import java.sql.SQLException;
 import java.time.ZoneOffset;
 import java.util.Objects;
 import java.util.Optional;
+import javax.annotation.WillClose;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -74,31 +77,40 @@ public final class CleanupStepRepository {
           rowFailure = failure;
           throw failure;
         } finally {
-          if (rows != null) {
-            try {
-              rows.close();
-            } catch (SQLException | RuntimeException | Error failure) {
-              if (JdbcResourceFailures.replace(rowFailure, failure)) throw failure;
-            }
-          }
+          closeRows(rows, rowFailure);
         }
       } catch (SQLException | RuntimeException | Error failure) {
         statementFailure = failure;
         throw failure;
       } finally {
-        if (statement != null) {
-          try {
-            statement.close();
-          } catch (SQLException | RuntimeException | Error failure) {
-            if (JdbcResourceFailures.replace(statementFailure, failure)) throw failure;
-          }
-        }
+        closeStatement(statement, statementFailure);
       }
       require(references.read(attempt.run()).identityConsistent());
       return result;
     } catch (SQLException failure) {
       JdbcFailureGraph.preserveFatal(failure);
       throw new BatchRepositoryException();
+    }
+  }
+
+  private static void closeRows(@WillClose @Nullable ResultSet rows, @Nullable Throwable primary)
+      throws SQLException {
+    if (rows == null) return;
+    try {
+      rows.close();
+    } catch (SQLException | RuntimeException | Error secondary) {
+      if (JdbcResourceFailures.replace(primary, secondary)) throw secondary;
+    }
+  }
+
+  private static void closeStatement(
+      @WillClose @Nullable PreparedStatement statement, @Nullable Throwable primary)
+      throws SQLException {
+    if (statement == null) return;
+    try {
+      statement.close();
+    } catch (SQLException | RuntimeException | Error secondary) {
+      if (JdbcResourceFailures.replace(primary, secondary)) throw secondary;
     }
   }
 
