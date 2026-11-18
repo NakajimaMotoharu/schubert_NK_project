@@ -8,6 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.BooleanNode;
+import com.fasterxml.jackson.databind.node.IntNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
 import java.io.IOException;
@@ -30,6 +32,29 @@ class ArtifactComparatorTest {
 
   private static final String ASYNC_MENU_DIFFERENCE = "DIF-003";
   private static final String FIXTURE_CHR_A01 = "CHR-A01";
+  private static final String FIXTURE_CHR_A02 = "CHR-A02";
+  private static final String FIXTURE_CHR_A02_JSON = "CHR-A02.json";
+  private static final String FIXTURE_DIF_016 = "DIF-016";
+  private static final String FIXTURE_CHR_O01 = "CHR-O01";
+  private static final String FIXTURE_CHR_O01_JSON = "CHR-O01.json";
+  private static final String FIXTURE_DIF_011 = "DIF-011";
+  private static final String FIXTURE_CACHE_CONTROL = "cacheControl";
+  private static final String FIXTURE_CACHE_POINTER = "/cacheControl";
+  private static final String FIXTURE_CACHE_BEFORE =
+      "no-cache, no-store, max-age=0, must-revalidate";
+  private static final String FIXTURE_CACHE_AFTER = "no-store";
+  private static final String FIXTURE_COUNT = "observedActiveSessionCount";
+  private static final String FIXTURE_COUNT_POINTER = "/observedActiveSessionCount";
+  private static final String FIXTURE_OLDEST = "oldestSessionInvalidated";
+  private static final String FIXTURE_ACTIVE = "sessionActiveOldestToNewest";
+  private static final String FIXTURE_REDIRECT = "sessionRedirectsOldestToNewest";
+  private static final String FIXTURE_REDIRECT_POINTER = "/sessionRedirectsOldestToNewest/0";
+  private static final String FIXTURE_LIMIT = "configuredMaximumSessions";
+  private static final String FIXTURE_RULE_SESSION = "session.concurrentLimit";
+  private static final String FIXTURE_SESSION_EXPIRED = "/login?session-expired";
+  private static final String FIXTURE_FIXED_POINTER = "OBSERVATION_FIXED_POINTER";
+  private static final String FIXTURE_FIXED_NK = "OBSERVATION_FIXED_NK";
+  private static final String FIXTURE_CACHE_REQUIRED = "FIXED_DIF_REQUIRED:CHR-O01:/cacheControl";
   private static final String FIXTURE_CHR_U01 = "CHR-U01";
   private static final String FIXTURE_CHR_U02 = "CHR-U02";
   private static final String FIXTURE_CHR_L01 = "CHR-L01";
@@ -190,15 +215,6 @@ class ArtifactComparatorTest {
               "limited",
               "WARN date MQ SYSTEM BATCH"),
           new Oracle(
-              "DIF-011",
-              "CHR-O01",
-              "cache.control",
-              "required",
-              "header",
-              "cache-control",
-              "no-store",
-              "no-store"),
-          new Oracle(
               "DIF-012",
               "CHR-M04",
               "invalid.range",
@@ -233,16 +249,7 @@ class ArtifactComparatorTest {
               FIXTURE_SEMANTIC,
               FIXTURE_HTTP_PATH,
               "/same-path",
-              "/same-path"),
-          new Oracle(
-              "DIF-016",
-              "CHR-A02",
-              "session.concurrentLimit",
-              FIXTURE_DIFFERENCE,
-              FIXTURE_SEMANTIC,
-              "session.concurrentLimit",
-              "three observed sessions remain active despite configured maximum 2",
-              "maximum 2; third login revokes oldest"));
+              "/same-path"));
 
   @TempDir Path temporaryDirectory;
 
@@ -265,8 +272,8 @@ class ArtifactComparatorTest {
     assertEquals(FIXTURE_PASS, report.path(FIXTURE_STATUS).asText());
     assertEquals(24, report.path("expectedCaseCount").asInt());
     assertEquals(24, report.path("comparedCaseCount").asInt());
-    assertEquals(17, report.path("rawDifferenceCount").asInt());
-    assertEquals(19, report.path("observationCount").asInt());
+    assertEquals(21, report.path("rawDifferenceCount").asInt());
+    assertEquals(22, report.path("observationCount").asInt());
     assertEquals(16, report.path("usedDifferences").size());
     assertTrue(report.path("unusedDifferences").isEmpty());
     assertTrue(report.path("unregisteredDifferences").isEmpty());
@@ -280,8 +287,8 @@ class ArtifactComparatorTest {
     assertEquals(FIXTURE_PASS, direct.status());
     assertEquals(24, direct.expectedCaseCount());
     assertEquals(24, direct.comparedCaseCount());
-    assertEquals(17, direct.rawDifferenceCount());
-    assertEquals(19, direct.observationCount());
+    assertEquals(21, direct.rawDifferenceCount());
+    assertEquals(22, direct.observationCount());
     assertEquals(16, direct.usedDifferences().size());
     assertTrue(direct.unusedDifferences().isEmpty());
     assertTrue(direct.unregisteredDifferences().isEmpty());
@@ -314,7 +321,7 @@ class ArtifactComparatorTest {
 
     assertFalse(result.passed());
     assertEquals(List.of("DIF_DUPLICATE:DIF-001"), result.failures());
-    assertEquals(19, result.observationCount());
+    assertEquals(22, result.observationCount());
     assertEquals(16, result.usedDifferences().size());
   }
 
@@ -460,7 +467,7 @@ class ArtifactComparatorTest {
     assertContains(result.failures(), "OBSERVATION_VERSION");
     assertContains(result.failures(), "OBSERVATIONS_NOT_ARRAY");
     assertEquals(16, result.unusedDifferences().size());
-    assertEquals(17, result.unregisteredDifferences().size());
+    assertEquals(21, result.unregisteredDifferences().size());
   }
 
   @Test
@@ -947,6 +954,115 @@ class ArtifactComparatorTest {
     assertEquals(List.of("UNREGISTERED_DIFF:CHR-U02:/titles/2"), result.failures());
   }
 
+  @Test
+  void requiresCacheObservationEvenWhenTheOldHeaderWasUnchanged() throws Exception {
+    Fixture fixture = fixture("missing-cache-control-observation");
+    mutate(
+        fixture.nk().resolve(FIXTURE_CHR_O01_JSON),
+        root -> root.put(FIXTURE_CACHE_CONTROL, FIXTURE_CACHE_BEFORE));
+    removeObservation(fixture, FIXTURE_CHR_O01, FIXTURE_CACHE_POINTER);
+
+    var result = compare(fixture);
+    assertFalse(result.passed());
+    assertEquals(List.of(FIXTURE_CACHE_REQUIRED, "UNUSED_DIF:DIF-011"), result.failures());
+    assertTrue(result.unregisteredDifferences().isEmpty());
+  }
+
+  @Test
+  void rejectsCacheControlOtherThanApprovedNoStore() throws Exception {
+    Fixture fixture = fixture("incorrect-cache-control");
+    mutate(
+        fixture.nk().resolve(FIXTURE_CHR_O01_JSON),
+        root -> root.put(FIXTURE_CACHE_CONTROL, "private, max-age=0"));
+
+    var result = compare(fixture);
+    assertFalse(result.passed());
+    assertContains(result.failures(), FIXTURE_FIXED_NK);
+    assertContains(result.failures(), FIXTURE_CACHE_REQUIRED);
+    assertEquals(List.of("CHR-O01:/cacheControl"), result.unregisteredDifferences());
+  }
+
+  @Test
+  void rejectsCacheObservationForADifferentField() throws Exception {
+    Fixture fixture = fixture("wrong-cache-control-field");
+    mutate(
+        fixture.observations(),
+        root -> {
+          var claims = (ArrayNode) root.path(FIXTURE_OBSERVATIONS);
+          ((ObjectNode) claims.get(findObservation(claims, FIXTURE_CHR_O01, FIXTURE_CACHE_POINTER)))
+              .put(FIXTURE_POINTER, "/cacheControlMissing");
+        });
+
+    var result = compare(fixture);
+    assertFalse(result.passed());
+    assertContains(result.failures(), FIXTURE_FIXED_POINTER);
+    assertContains(result.failures(), FIXTURE_CACHE_REQUIRED);
+    assertEquals(List.of("CHR-O01:/cacheControl"), result.unregisteredDifferences());
+  }
+
+  @Test
+  void rejectsStringCountEvenWhenItsCharactersMatchTheApprovedNumber() throws Exception {
+    Fixture fixture = fixture("session-count-is-not-numeric");
+    mutate(fixture.nk().resolve(FIXTURE_CHR_A02_JSON), root -> root.put(FIXTURE_COUNT, "2"));
+
+    var result = compare(fixture);
+    assertFalse(result.passed());
+    assertContains(result.failures(), FIXTURE_FIXED_NK);
+    assertEquals(List.of("CHR-A02:/observedActiveSessionCount"), result.unregisteredDifferences());
+  }
+
+  @Test
+  void requiresOldestInvalidationEvidenceAlongsideTheCorrectCount() throws Exception {
+    Fixture fixture = fixture("missing-oldest-invalidation-observation");
+    mutate(fixture.nk().resolve(FIXTURE_CHR_A02_JSON), root -> root.put(FIXTURE_OLDEST, false));
+    removeObservation(fixture, FIXTURE_CHR_A02, "/oldestSessionInvalidated");
+
+    var result = compare(fixture);
+    assertFalse(result.passed());
+    assertEquals(
+        List.of("FIXED_DIF_REQUIRED:CHR-A02:/oldestSessionInvalidated"), result.failures());
+    assertTrue(result.unregisteredDifferences().isEmpty());
+  }
+
+  @Test
+  void leavesAnAdditionalSessionLossUnregistered() throws Exception {
+    Fixture fixture = fixture("also-inactivated-newest-session");
+    mutate(
+        fixture.nk().resolve(FIXTURE_CHR_A02_JSON),
+        root -> ((ArrayNode) root.path(FIXTURE_ACTIVE)).set(2, BooleanNode.FALSE));
+
+    var result = compare(fixture);
+    assertFalse(result.passed());
+    assertEquals(
+        List.of("CHR-A02:/sessionActiveOldestToNewest/2"), result.unregisteredDifferences());
+    assertEquals(
+        List.of("UNREGISTERED_DIFF:CHR-A02:/sessionActiveOldestToNewest/2"), result.failures());
+  }
+
+  @Test
+  void rejectsAnUnapprovedConfiguredMaximum() throws Exception {
+    Fixture fixture = fixture("unapproved-session-maximum");
+    mutate(fixture.nk().resolve(FIXTURE_CHR_A02_JSON), root -> root.put(FIXTURE_LIMIT, 3));
+
+    var result = compare(fixture);
+    assertFalse(result.passed());
+    assertContains(result.failures(), "NK_SESSION_LIMIT");
+    assertEquals(List.of("CHR-A02:/configuredMaximumSessions"), result.unregisteredDifferences());
+  }
+
+  @Test
+  void requiresTheOldestSessionsObservedRedirect() throws Exception {
+    Fixture fixture = fixture("missing-oldest-redirect-observation");
+    removeObservation(fixture, FIXTURE_CHR_A02, FIXTURE_REDIRECT_POINTER);
+
+    var result = compare(fixture);
+    assertFalse(result.passed());
+    assertContains(
+        result.failures(), "FIXED_DIF_REQUIRED:CHR-A02:/sessionRedirectsOldestToNewest/0");
+    assertEquals(
+        List.of("CHR-A02:/sessionRedirectsOldestToNewest/0"), result.unregisteredDifferences());
+  }
+
   private static ArtifactComparator.ComparisonResult compare(Fixture fixture) throws IOException {
     return ArtifactComparator.compare(
         fixture.project(), fixture.current(), fixture.nk(), fixture.observations());
@@ -1062,6 +1178,10 @@ class ArtifactComparatorTest {
             FIXTURE_SEARCH_TITLE_POINTER,
             FIXTURE_CURRENT_SEARCH_TITLE,
             FIXTURE_NK_SEARCH_TITLE));
+    addCacheObservation(
+        currentArtifacts.get(FIXTURE_CHR_O01), nkArtifacts.get(FIXTURE_CHR_O01), observationItems);
+    addSessionObservations(
+        currentArtifacts.get(FIXTURE_CHR_A02), nkArtifacts.get(FIXTURE_CHR_A02), observationItems);
     currentArtifacts.get(FIXTURE_CHR_A01).put(FIXTURE_LOGIN_TITLE, FIXTURE_CURRENT_LOGIN_TITLE);
     nkArtifacts.get(FIXTURE_CHR_A01).put(FIXTURE_LOGIN_TITLE, FIXTURE_NK_LOGIN_TITLE);
     observationItems.add(
@@ -1088,6 +1208,61 @@ class ArtifactComparatorTest {
     artifactBinding.set("nk", nkArtifacts.get(FIXTURE_CHR_L01).deepCopy());
     writeJson(observations, envelope);
     return new Fixture(project, current, nk, observations);
+  }
+
+  private static void addCacheObservation(
+      ObjectNode current, ObjectNode nk, ArrayNode observations) {
+    current.put(FIXTURE_CACHE_CONTROL, FIXTURE_CACHE_BEFORE);
+    nk.put(FIXTURE_CACHE_CONTROL, FIXTURE_CACHE_AFTER);
+    observations.add(
+        observation(
+            FIXTURE_DIF_011,
+            FIXTURE_CHR_O01,
+            "cache.control",
+            "required",
+            "header",
+            "cache-control",
+            FIXTURE_CACHE_POINTER,
+            FIXTURE_CACHE_BEFORE,
+            FIXTURE_CACHE_AFTER));
+  }
+
+  private static void addSessionObservations(
+      ObjectNode current, ObjectNode nk, ArrayNode observations) {
+    current.put(FIXTURE_LIMIT, 2).put(FIXTURE_COUNT, 3).put(FIXTURE_OLDEST, false);
+    nk.put(FIXTURE_LIMIT, 2).put(FIXTURE_COUNT, 2).put(FIXTURE_OLDEST, true);
+    current.putArray(FIXTURE_ACTIVE).add(true).add(true).add(true);
+    nk.putArray(FIXTURE_ACTIVE).add(false).add(true).add(true);
+    current.putArray(FIXTURE_REDIRECT).add("/").add("/").add("/");
+    nk.putArray(FIXTURE_REDIRECT).add(FIXTURE_SESSION_EXPIRED).add("/").add("/");
+    observations.add(
+        sessionObservation(FIXTURE_COUNT_POINTER, IntNode.valueOf(3), IntNode.valueOf(2)));
+    observations.add(
+        sessionObservation("/oldestSessionInvalidated", BooleanNode.FALSE, BooleanNode.TRUE));
+    observations.add(
+        sessionObservation("/sessionActiveOldestToNewest/0", BooleanNode.TRUE, BooleanNode.FALSE));
+    observations.add(
+        sessionObservation(
+            FIXTURE_REDIRECT_POINTER,
+            TextNode.valueOf("/"),
+            TextNode.valueOf(FIXTURE_SESSION_EXPIRED)));
+  }
+
+  private static ObjectNode sessionObservation(String pointer, JsonNode current, JsonNode nk) {
+    var row =
+        observation(
+            FIXTURE_DIF_016,
+            FIXTURE_CHR_A02,
+            FIXTURE_RULE_SESSION,
+            FIXTURE_DIFFERENCE,
+            FIXTURE_SEMANTIC,
+            FIXTURE_RULE_SESSION,
+            pointer,
+            "",
+            "");
+    row.set("expectedCurrent", current);
+    row.set(FIXTURE_EXPECTED_NK, nk);
+    return row;
   }
 
   private static ObjectNode observation(

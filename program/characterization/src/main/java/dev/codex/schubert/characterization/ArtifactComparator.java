@@ -2,6 +2,9 @@ package dev.codex.schubert.characterization;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.BooleanNode;
+import com.fasterxml.jackson.databind.node.IntNode;
+import com.fasterxml.jackson.databind.node.TextNode;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
@@ -16,6 +19,7 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.stream.Stream;
+import org.jspecify.annotations.Nullable;
 
 /** Narrow DIF oracle for normalized Current baseline and NK artifacts. SS 355 §8, §12. */
 public final class ArtifactComparator {
@@ -25,20 +29,40 @@ public final class ArtifactComparator {
   private static final String MODE_CONTRACT = "contract";
   private static final String LOGIN_CASE = "CHR-A01";
   private static final String BRAND_DIFFERENCE = "DIF-001";
+  private static final String CACHE_DIFFERENCE = "DIF-011";
+  private static final String SESSION_DIFFERENCE = "DIF-016";
+  private static final String SESSION_CASE = "CHR-A02";
   private static final String LOGIN_TITLE = "CHR-A01:/title";
   private static final String CURRENT_BRAND = "schubert";
   private static final String NK_BRAND = "schubert NK";
-  // UI264 and SS355 §8 identify these exact case fields. Other title entries remain comparable.
-  private static final Map<String, List<String>> BRAND_EXPECTATIONS =
+  private static final String CONFIGURED_SESSIONS = "configuredMaximumSessions";
+  private static final IntNode MAX_ACTIVE_SESSIONS = IntNode.valueOf(2);
+  // UI264 and SS355 §8: treat only these exact case fields as the approved change.
+  private static final Map<String, Map<String, List<JsonNode>>> FIXED_EXPECTATIONS =
       Map.of(
-          LOGIN_TITLE,
-          List.of("schubert - ログイン", "schubert NK - ログイン"),
-          "CHR-U01:/brand",
-          List.of(CURRENT_BRAND, NK_BRAND),
-          "CHR-U02:/titles/0",
-          List.of(CURRENT_BRAND, NK_BRAND),
-          "CHR-U02:/titles/1",
-          List.of("schubert - 検索", "schubert NK - 検索"));
+          BRAND_DIFFERENCE,
+          Map.of(
+              LOGIN_TITLE,
+              textPair("schubert - ログイン", "schubert NK - ログイン"),
+              "CHR-U01:/brand",
+              textPair(CURRENT_BRAND, NK_BRAND),
+              "CHR-U02:/titles/0",
+              textPair(CURRENT_BRAND, NK_BRAND),
+              "CHR-U02:/titles/1",
+              textPair("schubert - 検索", "schubert NK - 検索")),
+          CACHE_DIFFERENCE,
+          Map.of(
+              "CHR-O01:/cacheControl",
+              textPair("no-cache, no-store, max-age=0, must-revalidate", "no-store")),
+          SESSION_DIFFERENCE,
+          Map.of(
+              "CHR-A02:/observedActiveSessionCount",
+                  List.of(IntNode.valueOf(3), MAX_ACTIVE_SESSIONS),
+              "CHR-A02:/oldestSessionInvalidated", List.of(BooleanNode.FALSE, BooleanNode.TRUE),
+              "CHR-A02:/sessionActiveOldestToNewest/0",
+                  List.of(BooleanNode.TRUE, BooleanNode.FALSE),
+              "CHR-A02:/sessionRedirectsOldestToNewest/0",
+                  textPair("/", "/login?session-expired")));
   private static final ObjectMapper JSON = new ObjectMapper();
   private static final Set<String> MODES = Set.of(MODE_DIFFERENCE, "required", MODE_CONTRACT);
 
@@ -104,6 +128,14 @@ public final class ArtifactComparator {
       require(
           VALUE_PASS.equals(current.path("status").asText()), "CURRENT_STATUS:" + caseId, failures);
       require(VALUE_PASS.equals(nk.path("status").asText()), "NK_STATUS:" + caseId, failures);
+      if (SESSION_CASE.equals(caseId)) {
+        require(
+            MAX_ACTIVE_SESSIONS.equals(current.path(CONFIGURED_SESSIONS)),
+            "CURRENT_SESSION_LIMIT",
+            failures);
+        require(
+            MAX_ACTIVE_SESSIONS.equals(nk.path(CONFIGURED_SESSIONS)), "NK_SESSION_LIMIT", failures);
+      }
       collectDifferences(caseId, "", current, nk, rawDifferences);
       comparedCases++;
     }
@@ -132,7 +164,10 @@ public final class ArtifactComparator {
     Set<String> usedRules = new TreeSet<>();
     Set<String> claimedDifferences = new HashSet<>();
     Set<String> observationKeys = new HashSet<>();
-    Set<String> pendingBrandObservations = new TreeSet<>(BRAND_EXPECTATIONS.keySet());
+    Set<String> pendingFixedObservations = new TreeSet<>();
+    for (Map<String, List<JsonNode>> expectations : FIXED_EXPECTATIONS.values()) {
+      pendingFixedObservations.addAll(expectations.keySet());
+    }
     int observationCount = 0;
     for (JsonNode observation : observations.path("observations")) {
       observationCount++;
@@ -200,9 +235,10 @@ public final class ArtifactComparator {
       JsonNode actualCurrent = currentByCase.get(caseId).at(pointer);
       JsonNode actualNk = nkByCase.get(caseId).at(pointer);
       String differenceKey = key(caseId, pointer);
-      boolean brand = BRAND_DIFFERENCE.equals(id);
-      if (brand) {
-        valid &= checkBrand(caseId, differenceKey, actualCurrent, actualNk, failures);
+      Map<String, List<JsonNode>> fixed = FIXED_EXPECTATIONS.get(id);
+      if (fixed != null) {
+        valid &=
+            checkFixed(id, caseId, fixed.get(differenceKey), actualCurrent, actualNk, failures);
       }
       valid &=
           require(
@@ -239,12 +275,11 @@ public final class ArtifactComparator {
         if (valid) claimedDifferences.add(differenceKey);
       }
       if (valid) usedRules.add(id);
-      if (valid && brand) pendingBrandObservations.remove(differenceKey);
+      if (valid && fixed != null) pendingFixedObservations.remove(differenceKey);
     }
 
-    for (String target : pendingBrandObservations) {
-      failures.add(
-          LOGIN_TITLE.equals(target) ? "LOGIN_TITLE_DIF_REQUIRED" : "BRAND_DIF_REQUIRED:" + target);
+    for (String target : pendingFixedObservations) {
+      failures.add(missingObservation(target));
     }
     List<String> unregistered =
         rawDifferences.stream().filter(key -> !claimedDifferences.contains(key)).toList();
@@ -264,17 +299,33 @@ public final class ArtifactComparator {
         List.copyOf(failures));
   }
 
-  private static boolean checkBrand(
-      String caseId, String differenceKey, JsonNode current, JsonNode nk, List<String> failures) {
-    String prefix = LOGIN_CASE.equals(caseId) ? "OBSERVATION_LOGIN_TITLE_" : "OBSERVATION_BRAND_";
-    List<String> pair = BRAND_EXPECTATIONS.get(differenceKey);
+  private static List<JsonNode> textPair(String current, String nk) {
+    return List.of(TextNode.valueOf(current), TextNode.valueOf(nk));
+  }
+
+  private static String missingObservation(String target) {
+    if (LOGIN_TITLE.equals(target)) return "LOGIN_TITLE_DIF_REQUIRED";
+    if (target.startsWith("CHR-U0")) return "BRAND_DIF_REQUIRED:" + target;
+    return "FIXED_DIF_REQUIRED:" + target;
+  }
+
+  private static boolean checkFixed(
+      String id,
+      String caseId,
+      @Nullable List<JsonNode> pair,
+      JsonNode current,
+      JsonNode nk,
+      List<String> failures) {
+    String prefix = "OBSERVATION_FIXED_";
+    if (BRAND_DIFFERENCE.equals(id)) {
+      prefix = LOGIN_CASE.equals(caseId) ? "OBSERVATION_LOGIN_TITLE_" : "OBSERVATION_BRAND_";
+    }
     if (pair == null) {
       failures.add(prefix + "POINTER");
       return false;
     }
-    boolean currentMatches =
-        require(pair.getFirst().equals(current.textValue()), prefix + "CURRENT", failures);
-    boolean nkMatches = require(pair.getLast().equals(nk.textValue()), prefix + "NK", failures);
+    boolean currentMatches = require(pair.getFirst().equals(current), prefix + "CURRENT", failures);
+    boolean nkMatches = require(pair.getLast().equals(nk), prefix + "NK", failures);
     return currentMatches && nkMatches;
   }
 
