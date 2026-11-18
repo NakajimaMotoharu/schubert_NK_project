@@ -1,0 +1,284 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG39096-P00405-INSPECTION-SUMMARY-JDBC-V2",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39090-inspection-summary-jdbc-prepare-v2/manifest.json",
+    "sha256": "2d8f74880602e9919bc34f2de474e033ec94a8bf35a73be94bfa136dd8fed187"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39092-inspection-summary-jdbc-static-v2/manifest.json",
+    "sha256": "e59eb1b81792ef6035c99ce668e057b364282be7dc858d649a3589ab5c54e4df"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 30,
+      "sourceAnchor": "require(!Thread.currentThread().isInterrupted());",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Batch checks interrupt before and after owned JDBC operations; the code observes the caller flag and creates no thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceLine": 65,
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "At each owned row/statement boundary the typed catch remembers the primary and rethrows the same object, or delegates cleanup precedence. SS332 requires exact unchecked identity, exactly-once closure and a fixed public SQL catalogue."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceLine": 65,
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "message": "Avoid catching Error in try-catch block",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "At each owned row/statement boundary the typed catch remembers the primary and rethrows the same object, or delegates cleanup precedence. SS332 requires exact unchecked identity, exactly-once closure and a fixed public SQL catalogue."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceLine": 71,
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "At each owned row/statement boundary the typed catch remembers the primary and rethrows the same object, or delegates cleanup precedence. SS332 requires exact unchecked identity, exactly-once closure and a fixed public SQL catalogue."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceLine": 71,
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "message": "Avoid catching Error in try-catch block",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "At each owned row/statement boundary the typed catch remembers the primary and rethrows the same object, or delegates cleanup precedence. SS332 requires exact unchecked identity, exactly-once closure and a fixed public SQL catalogue."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 77,
+      "sourceAnchor": "require(!Thread.currentThread().isInterrupted());",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Batch checks interrupt before and after owned JDBC operations; the code observes the caller flag and creates no thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceLine": 89,
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "At each owned row/statement boundary the typed catch remembers the primary and rethrows the same object, or delegates cleanup precedence. SS332 requires exact unchecked identity, exactly-once closure and a fixed public SQL catalogue."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceLine": 89,
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "message": "Avoid catching Error in try-catch block",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "At each owned row/statement boundary the typed catch remembers the primary and rethrows the same object, or delegates cleanup precedence. SS332 requires exact unchecked identity, exactly-once closure and a fixed public SQL catalogue."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceLine": 98,
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "At each owned row/statement boundary the typed catch remembers the primary and rethrows the same object, or delegates cleanup precedence. SS332 requires exact unchecked identity, exactly-once closure and a fixed public SQL catalogue."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceLine": 98,
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "message": "Avoid catching Error in try-catch block",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "At each owned row/statement boundary the typed catch remembers the primary and rethrows the same object, or delegates cleanup precedence. SS332 requires exact unchecked identity, exactly-once closure and a fixed public SQL catalogue."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryPortTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 237,
+      "sourceAnchor": "boolean parentFlag = Thread.currentThread().isInterrupted();",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "JUnit-only thread interruption/cleanup observation in the owned worker, with bounded Future and termination. No web application thread or runtime operation."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryPortTest.java",
+      "rule": "CloseResource",
+      "sourceLine": 238,
+      "sourceAnchor": "var worker = Executors.newSingleThreadExecutor();",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The exact fixture worker is shut down unconditionally in finally and awaitTermination5 is asserted. ExecutorService.close would lose the required bounded termination."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryPortTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 238,
+      "sourceAnchor": "var worker = Executors.newSingleThreadExecutor();",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "JUnit-only thread interruption/cleanup observation in the owned worker, with bounded Future and termination. No web application thread or runtime operation."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryPortTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 241,
+      "sourceAnchor": "worker",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "JUnit-only thread interruption/cleanup observation in the owned worker, with bounded Future and termination. No web application thread or runtime operation."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryPortTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 247,
+      "sourceAnchor": "if (before) Thread.currentThread().interrupt();",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "JUnit-only thread interruption/cleanup observation in the owned worker, with bounded Future and termination. No web application thread or runtime operation."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryPortTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 249,
+      "sourceAnchor": "assertTrue(Thread.currentThread().isInterrupted());",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "JUnit-only thread interruption/cleanup observation in the owned worker, with bounded Future and termination. No web application thread or runtime operation."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryPortTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 254,
+      "sourceAnchor": "Thread.interrupted();",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "JUnit-only thread interruption/cleanup observation in the owned worker, with bounded Future and termination. No web application thread or runtime operation."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryPortTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 256,
+      "sourceAnchor": "assertFalse(Thread.currentThread().isInterrupted());",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "JUnit-only thread interruption/cleanup observation in the owned worker, with bounded Future and termination. No web application thread or runtime operation."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryPortTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 261,
+      "sourceAnchor": "worker.shutdownNow();",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "JUnit-only thread interruption/cleanup observation in the owned worker, with bounded Future and termination. No web application thread or runtime operation."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryPortTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 262,
+      "sourceAnchor": "assertTrue(worker.awaitTermination(5, TimeUnit.SECONDS));",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "JUnit-only thread interruption/cleanup observation in the owned worker, with bounded Future and termination. No web application thread or runtime operation."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryPortTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 264,
+      "sourceAnchor": "assertEquals(parentFlag, Thread.currentThread().isInterrupted());",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "JUnit-only thread interruption/cleanup observation in the owned worker, with bounded Future and termination. No web application thread or runtime operation."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryPortTest.java",
+      "rule": "UseConcurrentHashMap",
+      "sourceLine": 330,
+      "sourceAnchor": "private final Map<String, Throwable> faults = new HashMap<>();",
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Each map is owned by a fresh Fixture scoped to one test call or one worker; no concurrent access or publication of either map."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryPortTest.java",
+      "rule": "UseConcurrentHashMap",
+      "sourceLine": 332,
+      "sourceAnchor": "private final Map<Integer, Object> bindings = new HashMap<>();",
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Each map is owned by a fresh Fixture scoped to one test call or one worker; no concurrent access or publication of either map."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryPortTest.java",
+      "rule": "UseProperClassLoader",
+      "sourceLine": 350,
+      "sourceAnchor": "Fixture.class.getClassLoader(),",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Isolated test loader for the known JDK JDBC Proxy interfaces. No app container or context-loader policy is used; the fixture loader can resolve these exact interfaces."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryPortTest.java",
+      "rule": "UseProperClassLoader",
+      "sourceLine": 383,
+      "sourceAnchor": "Fixture.class.getClassLoader(),",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Isolated test loader for the known JDK JDBC Proxy interfaces. No app container or context-loader policy is used; the fixture loader can resolve these exact interfaces."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryPortTest.java",
+      "rule": "UseProperClassLoader",
+      "sourceLine": 415,
+      "sourceAnchor": "Fixture.class.getClassLoader(),",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Isolated test loader for the known JDK JDBC Proxy interfaces. No app container or context-loader policy is used; the fixture loader can resolve these exact interfaces."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryPortTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 433,
+      "sourceAnchor": "if (interruptOnRowClose) Thread.currentThread().interrupt();",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "JUnit-only thread interruption/cleanup observation in the owned worker, with bounded Future and termination. No web application thread or runtime operation."
+    }
+  ]
+}

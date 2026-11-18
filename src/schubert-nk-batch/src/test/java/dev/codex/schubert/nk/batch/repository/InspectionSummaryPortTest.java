@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
-/** INSPPORT001..008: inspection data only, never actual child/owner/OS/DB verification. */
+/** INSPPORT001..010: borrowed inspection data only, no actual database or child owner. */
 final class InspectionSummaryPortTest {
   private static final String TEXT_AUTO = "auto";
   private static final String TEXT_COMPLETE = "complete";
@@ -209,6 +209,27 @@ final class InspectionSummaryPortTest {
           }
           fixture.assertClosed();
         }
+  }
+
+  @Test
+  void sqlPairPreservesGraphFatalIdentityAndClosesOwnedResourcesInOrder() {
+    for (var errorOnBody : List.of(false, true)) {
+      var fixture = new Fixture();
+      var body = new SQLException("public inspection read fixture");
+      var rowClose = new SQLException("public inspection row close fixture");
+      var fatal = new AssertionError("public inspection sentinel");
+      var next = new SQLException("public SQL next fixture", fatal);
+      (errorOnBody ? body : rowClose).setNextException(next);
+      fixture.faults.put(TEXT_COMPLETE, body);
+      fixture.faults.put(TEXT_ROWCLOSE, rowClose);
+
+      assertSame(fatal, assertThrows(AssertionError.class, fixture::read));
+      assertEquals(0, fatal.getSuppressed().length);
+      int end = fixture.visited.size();
+      assertEquals(
+          List.of(TEXT_ROWCLOSE, TEXT_STATEMENTCLOSE), fixture.visited.subList(end - 2, end));
+      fixture.assertClosed();
+    }
   }
 
   @Test
