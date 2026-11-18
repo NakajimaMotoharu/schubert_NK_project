@@ -1,0 +1,7 @@
+# P018-08.02 Terminal Profile現依存の実行結果
+
+PG38390、Core 35167d1390bdcedd31e5c35d8ee526089347fec6、Unit 27e4b6706e3f0bbc15b9112ae89ddc9994945f05。変更されたCheckpointへの依存を持つ既存NC196001～004は初回4/4成功、失敗／エラー／skip／未実行0。旧期待値とTest本文は同一。最初の厳格コンパイルで既存のFixture依存が不足した。元の仕組みを取り込み、依存テストは選択せずコンパイル終了0。PMD/Checkstyle指摘0。
+
+独立したXMLとclass-initで同じ4件を照合し、保持対象の初期化0、8物理Classの同一execヒット。Profileの6行・2method・7branch、依存Checkpointの16行・3method・27branchは当scope未到達。旧5件を合算せず、実native・正規owner・後続451は未受入。
+
+公開証跡 evidence/01_PT/018_NK-OPS-001/evidence/PG38390-p01808-terminal-profile-four-v1/manifest.json SHA256 c788e17dece60a22628289d6e598e8576a9c8b4bc1617c1b3d851af1736a350a。

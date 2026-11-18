@@ -1,0 +1,122 @@
+{
+  "eventId": "PGPT-20261008-5798",
+  "actualExit": 0,
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P01808-TERMINAL-PROFILE-FOUR-20261118",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "PGPT-WBS66-P01808-TERMINAL-PROFILE-FOUR-20261118",
+    "workAttributionKind": "SOURCE_REQUALIFICATION",
+    "workScope": "WBS-P018-08.02/2: four original TerminalNativeCoverageProfileTest cases, with own JVM without reserved flags and memory-only test exports; Checkpoint changed relative to original 14. Preserve Test IDs and fixed oracle. No real capture, target, OS actor, remote connection or held type. Fixed parser five unchanged do not replay. Whole execution/CRC/init/raw, no original acceptance until end dependencies.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38334-p01808-profile-terminal-ordinary-proof-v1/manifest.json",
+        "sha256": "c6f2a72749d53259f75b6a35687155e9f67fb8326456f5235c155de6ce1b9d90"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38340-p01808-terminal-current-checkpoint-independent-v1/manifest.json",
+        "sha256": "5fa505f4d88d98f9c4a612bd6947dfdfb1d882bcb6e53b22ba0613003394f916"
+      }
+    ],
+    "source": "27e4b6706e3f0bbc15b9112ae89ddc9994945f05",
+    "productionCoreMain": "35167d1390bdcedd31e5c35d8ee526089347fec6",
+    "run": "PG38390-p01808-terminal-profile-four-v1",
+    "wbsLeafIds": [
+      "WBS-P018-08.02"
+    ],
+    "managementWorkIds": [
+      "WBS-P018-08.02/2"
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.35,
+      "base": 0.85,
+      "high": 1.8
+    },
+    "groupCapPp": 2.5,
+    "originalRowBasePricePp": 0.65,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "quotaAfter": {
+      "usedPercent": 26,
+      "remainingPercent": 74,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "1af9a9742a8082fa51e71285ae768cf56644916565fc0ed0b9c16a97d2bd419b",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T01:50:44.475000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 26,
+          "remainingPercent": 74,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T01:49:59.966306+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 26,
+      "remainingPercent": 74,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-5797",
+    "productRuns": 1,
+    "productTestsExecuted": 4,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "notRun": 0,
+    "firstProductRunSuccess": {
+      "passed": 4,
+      "executed": 4
+    },
+    "newDefinitions": 0,
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38390-p01808-terminal-profile-four-v1/manifest.json",
+      "sha256": "c788e17dece60a22628289d6e598e8576a9c8b4bc1617c1b3d851af1736a350a"
+    },
+    "additionalCompletedPriceTotalPp": 32.65,
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortCompletionRate": null,
+    "actualDedicatedPp": null,
+    "retries": [
+      {
+        "stage": "fixture source check",
+        "reason": "initial token substring also matched the ServiceConfigFiles class, corrected identifier-only match before compile"
+      },
+      {
+        "stage": "strict compile",
+        "reason": "the first command missed the unchanged original FixedServiceIdentityTest.Fixture source; strict compile passed with the original helper, dependency test class not selected"
+      }
+    ],
+    "remainingCriteria": [
+      "P018-08.02/2 actual native target, owner, source/class/CRC, closure and full counters remain absent; no inferred PASS",
+      "QAs 056/057 and whole 451 remain"
+    ]
+  }
+}
