@@ -1,0 +1,146 @@
+{
+  "eventId": "PGPT-20261008-5878",
+  "actualExit": 0,
+  "workStatus": "PARTIAL",
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P01810-RESPONSE-SNAPSHOT-VALUE-DIAGNOSTIC-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-P01810-RESPONSE-SNAPSHOT-VALUE-DIAGNOSTIC-20261118",
+    "workAttributionKind": "ADDITIONAL_FINDING",
+    "workScope": "WBS-P018-10.03 catalog008/F03. Source review found EncryptedResponseSnapshot generic diagnostic includes key version. Record BUG3240/YKT2685 and SSC462, publish design-only main; use ordinary synthetic snapshot and outcome value fixtures on selected public Java components. Preserve accessor/storage/selection and structured log contract. No actual key/codec/request execution, protected symbols, or backend. End fixed diagnostic, old independent value invariants, static/ABI/unfiltered target and explicit residuals.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37452-p01810-independent-case-catalog-v1/manifest.json",
+        "sha256": "f08e5491b516f7c2638807d9ecab3f260073376833f3e37f5ef0e935e6b08c49"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38562-p01810-api-value-diagnostics-independent-v1/manifest.json",
+        "sha256": "bc5fbf6cc9e3fa306f8e5df0511a6ddbe23396005620c31d2027bd8442999674"
+      },
+      {
+        "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+        "sha256": "854672e923b3ea4fc64c1e3e1b65c8bdad2a2ea6320629738570e9575e5fb7c7"
+      }
+    ],
+    "productionCoreMain": "c58e98bd297adcff2351447e52b2449e1b558255",
+    "source": "568b4e28e1f2b7e0d7ecf307647721a17acaef82",
+    "wbsLeafIds": [
+      "WBS-P018-10.03",
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-P018-10.03/2",
+      "CATALOG-008"
+    ],
+    "run": "PG38790-p01810-encrypted-response-diagnostic-independent-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.4,
+      "base": 1.45,
+      "high": 4.0
+    },
+    "groupCapPp": 5.75,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "relatedBug": "BUG-3240",
+    "relatedYkt": "YKT-2685",
+    "quotaAfter": {
+      "usedPercent": 30,
+      "remainingPercent": 70,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "89757fd7498e30327e5ba1550f04018401b8291e05d93fcbc392186f2b35cc3a",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T06:12:29.784000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 30,
+          "remainingPercent": 70,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T06:12:09.738118+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 30,
+      "remainingPercent": 70,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-5877",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38790-p01810-encrypted-response-diagnostic-independent-v1/manifest.json",
+      "sha256": "e14bd67800a4ceafd35e3979f48706c9fbc91595b9f709fe958af823a17286a0"
+    },
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortCompletionRate": null,
+    "firstProductRunSuccess": true,
+    "firstQualityAdmitted": true,
+    "productTestsExecuted": 4,
+    "newDefinitions": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "notRun": 0,
+    "targetRaw": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 60
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 6
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 12
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 9
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 6
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "designPR": 429,
+    "designMain": "3c5e28da45cc6713797c80af65bb78105f042a01",
+    "authoritativeDesignMerged": true,
+    "completedAdditionalPriceForGroupPp": 0,
+    "additionalCompletedPriceTotalPp": 42.9,
+    "remainingCriteria": [
+      "Deferred ResponseSnapshotCodecTest expectation only updated; QA056 typed compile/higher behavior held",
+      "Structured logs and original WBS P018-10.03 and whole451 not accepted."
+    ]
+  }
+}

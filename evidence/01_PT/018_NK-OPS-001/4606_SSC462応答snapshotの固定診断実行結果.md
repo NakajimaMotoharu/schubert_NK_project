@@ -1,0 +1,7 @@
+# SSC462 応答snapshotの固定診断 実行結果
+
+Core c58e98bd297adcff2351447e52b2449e1b558255、固定試験source 568b4e28e1f2b7e0d7ecf307647721a17acaef82、PG38784。元OUTCOME四件は初回4/4成功。失敗、skip、エラー、選択内の未実行0。固定診断、複数合成versionの明示取得、配列copyおよび既状態期待を照合。対象は未フィルタ12L／6M／1C／6B／60Iの全到達、8物理／8CRC、公開ABI差0、NullAway・Checkstyle・SpotBugs0、PMD検出2は独立fixtureのnull反例で適用0。
+
+SS324／351はPR429、origin/main 3c5e28da45。Doc反映時のSSC461履歴と最新追補を両方保持。旧ResponseSnapshotCodecTestの期待文字列を同期したがQA056のためcompile・実行なし。他の既固定3値型は旧証拠と現source完全一致を確認し、再実行・算術加算なし。
+
+BUG3240は当値型で完了。YKT2685の別caller試験、実構造化監査、P018-10全体、451を継続。証跡 evidence/01_PT/018_NK-OPS-001/evidence/PG38790-p01810-encrypted-response-diagnostic-independent-v1/manifest.json SHA256 e14bd67800a4ceafd35e3979f48706c9fbc91595b9f709fe958af823a17286a0。
