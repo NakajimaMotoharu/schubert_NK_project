@@ -84,11 +84,13 @@ public final class SchemaHistoryAdmission {
     var observed = new ArrayList<Row>();
     try {
       require(!Thread.currentThread().isInterrupted());
-      var query = required(connection.prepareStatement(SQL));
+      var query = connection.prepareStatement(SQL);
+      if (query == null) throw unavailable();
       @Nullable Throwable primary = null;
       try {
         query.setQueryTimeout(5);
-        var values = required(query.executeQuery());
+        var values = query.executeQuery();
+        if (values == null) throw unavailable();
         @Nullable Throwable rowFailure = null;
         try {
           for (Row row : expected) {
