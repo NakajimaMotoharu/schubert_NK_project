@@ -1,0 +1,68 @@
+{
+  "eventId": "PGPT-20261008-5975",
+  "groupId": "PGPT-WBS66-F02-SERVICE-DB-ADMISSION-SOURCE-GRAPH-20261118",
+  "baseCore": "bcc9e0673287c51950ecab9b36350abfcd4b2c69",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-18T11:56:29.993000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 35,
+      "remainingPercent": 65,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F02-SERVICE-DB-ADMISSION-SOURCE-GRAPH-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-F02-SERVICE-DB-ADMISSION-SOURCE-GRAPH-20261118",
+    "workAttributionKind": "REWORK",
+    "workScope": "F02 / SSC461: move three known SQL-only ownership checks in ServiceDatabaseAdmission and ServiceDatabaseSource to their same-module JdbcFailureGraph. Normal existing whole 15+14 Connector/proxy tests with finite close, add independent SQL exception path identity/cleanup; no DB driver connection, runtime, credentials or permission workflows. Requires current closed ports and one final source ABI/XML/same-exec before three migrated sites counted.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38582-f02-jdbc-exception-ownership-review-v1/manifest.json",
+        "sha256": "4c29301e66cd473c219320a3dfa8cf5d846b787eb477caa0bd38599f678a4e92"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23656-service-db-admission-independent-v1/manifest.json",
+        "sha256": "9d40975e1b15b7737d4c9cc1d45336d5ed0aa14bb0c10a117f567e3d3b9ccd73"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23704-service-database-source-independent-v1/manifest.json",
+        "sha256": "77ac4912e39373967f603ea6c88ad89c9a369f2c82281d3f17af6ee588accc73"
+      }
+    ],
+    "productionCoreMain": "bcc9e0673287c51950ecab9b36350abfcd4b2c69",
+    "source": "7fc7b82f10f9724b988a5f46ba74622ee25c0472",
+    "wbsLeafIds": [
+      "WBS-F02",
+      "WBS-P004-05"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a",
+      "WBS-P004-05/2",
+      "SSC-461",
+      "BUG-3233",
+      "YKT-2680",
+      "YKT-2387"
+    ],
+    "run": "PG39452-f02-service-db-port-graph-independent-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.8,
+      "base": 3.2,
+      "high": 6.6
+    },
+    "groupCapPp": 8.0,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848
+  }
+}
