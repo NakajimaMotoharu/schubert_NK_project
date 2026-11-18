@@ -1,0 +1,384 @@
+{
+  "actualExit": 0,
+  "head": "750a66084f8333e0e89657ff9b5eba67317eaf28",
+  "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "canonicalDesign": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+  "scopeRegistryBefore": {
+    "path": "documents/400_PGPT/470_PMO/485_WBS網羅性・受入対応.json",
+    "sha256": "af112e99029a8e6ed8eefa4f8bd567e2720b94d15d93f7ec310460fa31dd1800"
+  },
+  "product": {
+    "scope": "PRODUCT_JOURNAL_VALUE_RECORDS",
+    "sharedOwner": "WBS-P017-10",
+    "consumer": "WBS-P018-10.03",
+    "costReapplied": false,
+    "main": {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BrokerJournalEvidence.java",
+      "sha256": "18f067e88b43658b276d06a0ef889adde32d039a50e2b1ba8dd654488d2d70bb",
+      "source": "ecf8a00fbd37720b80f8e107d59727723c706a12"
+    },
+    "fixture": {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/BrokerJournalValueContractTest.java",
+      "sha256": "3f289b5ceff86388402129f475d5a0dd7434f862692d37930c871072793263da",
+      "source": "5f11aa844b24722f7ff76429f81bb51462bedf90"
+    },
+    "docs": [
+      {
+        "path": "documents/200_UI/250_運用・非機能/251_朝バッチ・バックアップ・起動停止設計.md",
+        "sha256": "6dc961aebad948e77567b6c2d584d01c00eb62aee27826aefd47dd41e286f7dd",
+        "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774"
+      },
+      {
+        "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+        "sha256": "ac1968b36bdc90e5892bb9239eff49868b4bf977945724e02abe2876db6c7399",
+        "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774"
+      },
+      {
+        "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+        "sha256": "860f584a2f032e9b06112907f8ec138a12d0b69b94546f7e17ad7dfb9b65414c",
+        "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774"
+      }
+    ],
+    "xml": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40080-p01810-detached-journal-values-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "1a4d2b593b10bbc8ddb638b7b268c26a1dafc827af48565a2ac7099b62a8e6f5"
+    },
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40080-p01810-detached-journal-values-v1/independent.json",
+      "sha256": "e4c631b6e6b7b9334b570523614e78a0a7b5a3bdec4010b140488cd1e503974c"
+    },
+    "spec": {
+      "path": "evidence/01_PT/018_NK-OPS-001/4703_Journal二値の所有と固定診断の単体仕様.md",
+      "sha256": "b22f59ed0b2fdc531e663a9d8441c25018524fef34ec04b2f5e0207886878da0"
+    },
+    "physical": [
+      {
+        "testId": "PT-P01810-CATALOG-065A",
+        "classFileSha256": "b7df2a163d34c0a751f22cff1776a0a5cfda7d7582d02aea9ff08c4be93716ac",
+        "crc64": "00afb37da5c39979",
+        "rawCounters": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 24
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 2
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 6
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 6
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        }
+      },
+      {
+        "testId": "PT-P01810-CATALOG-065B",
+        "classFileSha256": "3da590285eb7f868290f9cc6ae8250a715f88132adf6629cec1ae0c9ab89a3b3",
+        "crc64": "03ba24213b5afc99",
+        "rawCounters": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 36
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 2
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 8
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 8
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        }
+      }
+    ],
+    "tests": [
+      {
+        "testId": "PT-P01810-CATALOG-065A",
+        "xmlClass": "dev.codex.schubert.nk.batch.platform.BrokerJournalValueContractTest",
+        "xmlMethod": "summaryPreservesIndependentValuesWithoutRenderingThem()"
+      },
+      {
+        "testId": "PT-P01810-CATALOG-065B",
+        "xmlClass": "dev.codex.schubert.nk.batch.platform.BrokerJournalValueContractTest",
+        "xmlMethod": "anchorPreservesAllWitnessValuesWithoutRenderingThem()"
+      }
+    ],
+    "realJournalOrBroker": false
+  },
+  "tool": [
+    {
+      "scope": "OFFLINE_TOOL",
+      "contract": "O01/DIF-014",
+      "localIssue": "BUG-3330",
+      "owner": "WBS-P020-01",
+      "main": [
+        {
+          "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+          "sha256": "99fc3d0b005af21204d00cfe0f6da927f197f38a7247c007bce3ddf7285302f3",
+          "source": "33a195a0d943608709c12a220848e941609a78d4"
+        }
+      ],
+      "fixtures": [
+        {
+          "path": "program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorTest.java",
+          "sha256": "d941280aa743293640740212f814f0c1a212ac4cb3fb91541035b20e0e905a04",
+          "source": "33a195a0d943608709c12a220848e941609a78d4"
+        }
+      ],
+      "docs": [
+        {
+          "path": "documents/200_UI/260_引継ぎ・監査/264_現行互換性Characterization Test仕様.md",
+          "sha256": "0b0973e6e1e94858e840bc1b85df1daff35e3a0fe9f28ea12331823c2cbcf781",
+          "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774"
+        },
+        {
+          "path": "documents/300_SS/350_運用・品質/355_Characterization Test実行準備・PG開始gate.md",
+          "sha256": "aff2aafe8f952de073e6dd2e7f5840152539f348f9816c6fa31e84ced93bef45",
+          "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774"
+        }
+      ],
+      "spec": {
+        "path": "evidence/01_PT/020_NK-CHR-001/050_O01再起動セッションの比較単体仕様.md",
+        "sha256": "7edded0f86a7b775bad080de1dfc7ef6029f97421125a08e2041759982e17c48"
+      },
+      "wholeToolTests": 192,
+      "tests": [
+        {
+          "testId": "PT-CHR-DEF060",
+          "xmlClass": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "xmlMethod": "acceptsTheApprovedRestartSessionOutcomeAndInvalidationEvidence()"
+        },
+        {
+          "testId": "PT-CHR-DEF061",
+          "xmlClass": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "xmlMethod": "requiresTheRestartInvalidationObservationSeparatelyFromOutcome()"
+        },
+        {
+          "testId": "PT-CHR-DEF062",
+          "xmlClass": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "xmlMethod": "rejectsASelfReportedNewLoginAfterRestart()"
+        },
+        {
+          "testId": "PT-CHR-DEF063",
+          "xmlClass": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "xmlMethod": "rejectsTextualAndNullInvalidationValuesEvenWhenSelfReported()"
+        },
+        {
+          "testId": "PT-CHR-DEF064",
+          "xmlClass": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "xmlMethod": "rejectsRestartDifferenceClaimsAgainstAnUnrelatedField()"
+        }
+      ],
+      "run": "PG40075-p020-o01-restart192-v2",
+      "xml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40075-p020-o01-restart192-v2/xml/TEST-junit-jupiter.xml",
+        "sha256": "be6613e4a47767105283c4edf487cf8d6699e611f0380762971ea64e947308bf"
+      },
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40078-p020-o01-restart-independent-v1/manifest.json",
+        "sha256": "3c7e86e84c49d42e66c5909c274930ad704c5b5476b342091ef0ed859882f697"
+      },
+      "realRuntimeProved": false
+    },
+    {
+      "scope": "OFFLINE_TOOL",
+      "contract": "S08/DIF-009",
+      "localIssue": "BUG-3333/3334",
+      "owner": "WBS-P020-01",
+      "main": [
+        {
+          "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+          "sha256": "73a8fee73cc8156ae83014e6d6cedb4981e1cc7638121a38cc0527bad029bdb7",
+          "source": "2fbb130c23901265d0a54f02f73d4d449c783232"
+        }
+      ],
+      "fixtures": [
+        {
+          "path": "program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorTest.java",
+          "sha256": "fa5a228ba51cbabc679436ff9dd5b836d30e280a109822d674707a862ea303a0",
+          "source": "2fbb130c23901265d0a54f02f73d4d449c783232"
+        }
+      ],
+      "docs": [
+        {
+          "path": "documents/200_UI/260_引継ぎ・監査/264_現行互換性Characterization Test仕様.md",
+          "sha256": "0b0973e6e1e94858e840bc1b85df1daff35e3a0fe9f28ea12331823c2cbcf781",
+          "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774"
+        },
+        {
+          "path": "documents/300_SS/350_運用・品質/355_Characterization Test実行準備・PG開始gate.md",
+          "sha256": "aff2aafe8f952de073e6dd2e7f5840152539f348f9816c6fa31e84ced93bef45",
+          "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774"
+        }
+      ],
+      "spec": {
+        "path": "evidence/01_PT/020_NK-CHR-001/052_S08複数voice補助比較の単体仕様.md",
+        "sha256": "a42abb8a75eb661b6978fd560c54883803e5b9bda5d7fb7b5a5aa3806520c4bc"
+      },
+      "wholeToolTests": 198,
+      "tests": [
+        {
+          "testId": "PT-CHR-DEF065",
+          "xmlClass": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "xmlMethod": "comparesMultipleVoicesWithoutConvertingTheNormalScenarioProjection()"
+        },
+        {
+          "testId": "PT-CHR-DEF066",
+          "xmlClass": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "xmlMethod": "requiresBothMultipleVoiceSidesAndTheNamedApproval()"
+        },
+        {
+          "testId": "PT-CHR-DEF067",
+          "xmlClass": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "xmlMethod": "rejectsDuplicatedRowsOrBodiesWithTheCorrectPlayerCount()"
+        },
+        {
+          "testId": "PT-CHR-DEF068",
+          "xmlClass": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "xmlMethod": "rejectsLostPlayersLostLinksAndStringCounts()"
+        },
+        {
+          "testId": "PT-CHR-DEF069",
+          "xmlClass": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "xmlMethod": "rejectsWrongCurrentGroupingEvenWithCorrectNkGrouping()"
+        },
+        {
+          "testId": "PT-CHR-DEF070",
+          "xmlClass": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "xmlMethod": "rejectsUsingTheVoiceApprovalToConsumeAnOrdinaryArtifactDrift()"
+        }
+      ],
+      "run": "PG40089-p020-s08-voice198-v2",
+      "xml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40089-p020-s08-voice198-v2/xml/TEST-junit-jupiter.xml",
+        "sha256": "b92bc0f5fdc1ceec1efbf6edb0afa47546af0d94958f176deefcc25448b9f833"
+      },
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40092-p020-s08-voice-independent-v1/manifest.json",
+        "sha256": "5550ab27000561ec095ee75e3f1439646ee2b1ad396fa88eee8e2517f203ef51"
+      },
+      "realRuntimeProved": false
+    },
+    {
+      "scope": "OFFLINE_TOOL",
+      "contract": "U01/DIF-003",
+      "localIssue": "BUG-3335/3336/3337",
+      "owner": "WBS-P020-01",
+      "main": [
+        {
+          "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+          "sha256": "eee64abadbf740f58533ad6f1aff313024f0fcdd6b477bcd45464de073a72337",
+          "source": "4d239658f12ead59fe8bfa6b8da4ae6aebecbcf5"
+        }
+      ],
+      "fixtures": [
+        {
+          "path": "program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorTest.java",
+          "sha256": "4af1e24fcc41f8c24a503dd5cb9c082f7c26f1c531ffa1d7ff9655c62827a98e",
+          "source": "4d239658f12ead59fe8bfa6b8da4ae6aebecbcf5"
+        }
+      ],
+      "docs": [
+        {
+          "path": "documents/200_UI/260_引継ぎ・監査/264_現行互換性Characterization Test仕様.md",
+          "sha256": "0b0973e6e1e94858e840bc1b85df1daff35e3a0fe9f28ea12331823c2cbcf781",
+          "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774"
+        },
+        {
+          "path": "documents/300_SS/350_運用・品質/355_Characterization Test実行準備・PG開始gate.md",
+          "sha256": "aff2aafe8f952de073e6dd2e7f5840152539f348f9816c6fa31e84ced93bef45",
+          "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774"
+        }
+      ],
+      "spec": {
+        "path": "evidence/01_PT/020_NK-CHR-001/054_U01メニュー配列の比較単体仕様.md",
+        "sha256": "aaa93e621f21780ff037f42b467b17603956a160d41e87a0bade1ed296fc2815"
+      },
+      "wholeToolTests": 204,
+      "tests": [
+        {
+          "testId": "PT-CHR-DEF071",
+          "xmlClass": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "xmlMethod": "acceptsTheFiveLegacyAndNineApprovedAdministratorCardsInOrder()"
+        },
+        {
+          "testId": "PT-CHR-DEF072",
+          "xmlClass": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "xmlMethod": "requiresTheMenuCardArrayObservationOnU01()"
+        },
+        {
+          "testId": "PT-CHR-DEF073",
+          "xmlClass": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "xmlMethod": "rejectsRenamingACurrentFunctionEvenIfTheClaimMatches()"
+        },
+        {
+          "testId": "PT-CHR-DEF074",
+          "xmlClass": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "xmlMethod": "rejectsReorderingLegacyFunctionsWithinTheAdministratorMenu()"
+        },
+        {
+          "testId": "PT-CHR-DEF075",
+          "xmlClass": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "xmlMethod": "rejectsAUserMenuOrAnUnrelatedPointerAsTheAdministratorObservation()"
+        },
+        {
+          "testId": "PT-CHR-DEF076",
+          "xmlClass": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "xmlMethod": "aSeparateN01ClaimCannotSatisfyTheU01MenuContract()"
+        }
+      ],
+      "run": "PG40107-p020-u01-menu204-v3",
+      "xml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40107-p020-u01-menu204-v3/xml/TEST-junit-jupiter.xml",
+        "sha256": "a66932f9485720178efcb1612bda00ca5ce270860417457520c92dccd0d27f90"
+      },
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40108-p020-u01-menu-independent-v1/manifest.json",
+        "sha256": "5975c52044ca3c0712ca87618ead68072b7bcd3efa4fffcccbe0102754100c94"
+      },
+      "realRuntimeProved": false
+    }
+  ],
+  "productCases": 2,
+  "offlineToolCases": 17,
+  "priorRunsCombined": false,
+  "newTestsExecuted": 0,
+  "initialSetupExits": [
+    1,
+    1
+  ],
+  "initialSetupCause": "Legacy reference helper requires Path",
+  "newCoverageMeasured": 0,
+  "wholeG08Accepted": false,
+  "whole451Accepted": false,
+  "formalIntake": 0,
+  "terminalAtUTC": "2026-11-18T19:58:12.067060+00:00",
+  "verifier": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/5282_g08_journal_recent_characterization_trace.py",
+    "sha256": "893626e1e1bfa1b70d38e6eab3048545b13bc2a06a8d9b9f3c6f549bc61ec014"
+  }
+}

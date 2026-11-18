@@ -1,0 +1,68 @@
+{
+  "eventId": "PGPT-20261008-6127",
+  "groupId": "PGPT-WBS66-G08-JOURNAL-O01-S08-U01-TRACE-20261119",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-18T19:57:15.211000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 47,
+      "remainingPercent": 53,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-G08-JOURNAL-O01-S08-U01-TRACE-20261119",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-G08-JOURNAL-O01-S08-U01-TRACE-20261119",
+    "workAttributionKind": "REQUALIFICATION",
+    "wbsLeafIds": [
+      "WBS-G08"
+    ],
+    "managementWorkIds": [
+      "WBS-G08/criterion/scope",
+      "WBS-G08/criterion/contract",
+      "WBS-F03"
+    ],
+    "source": "750a66084f8333e0e89657ff9b5eba67317eaf28",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "run": "PG40110-g08-journal-o01-s08-u01-trace-v1",
+    "workScope": "Bind nineteen distinct test IDs to their original exact scopes and current registry: two Journal product value records and seventeen standalone offline characterization cases across O01, S08, U01. No coverage or PT replay; no formal promotion.",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.16,
+      "base": 0.48,
+      "high": 1.3
+    },
+    "groupCapPp": 4,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40078-p020-o01-restart-independent-v1/manifest.json",
+        "sha256": "3c7e86e84c49d42e66c5909c274930ad704c5b5476b342091ef0ed859882f697"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40092-p020-s08-voice-independent-v1/manifest.json",
+        "sha256": "5550ab27000561ec095ee75e3f1439646ee2b1ad396fa88eee8e2517f203ef51"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40108-p020-u01-menu-independent-v1/manifest.json",
+        "sha256": "5975c52044ca3c0712ca87618ead68072b7bcd3efa4fffcccbe0102754100c94"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40080-p01810-detached-journal-values-v1/independent.json",
+        "sha256": "e4c631b6e6b7b9334b570523614e78a0a7b5a3bdec4010b140488cd1e503974c"
+      }
+    ],
+    "preStartGuard": "Unregistered TRACE category failed before start; reused prior CONTRACT_AUDIT category and a fresh receipt."
+  }
+}
