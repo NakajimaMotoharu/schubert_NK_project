@@ -43,13 +43,17 @@ def write(path, value):
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n")
 
 
-def main(group):
+def main(group, retry=False):
     assert group in ("724", "727")
+    assert not retry or group == "727"
     start = read(next(D.glob(group + "_*.json")))
     v = start["values"]
     test_ids = dict(zip(v["testIds"], v.get("testMethods", IDS.values()), strict=True))
     count = len(test_ids)
-    out = E / v["run"]
+    initial = E / v["run"]
+    if retry:
+        assert read(initial / "manifest.json")["stageResults"]["pmd"]["actualExit"] == 4
+    out = E / "PG40276-p01810-backup-versions-complete-value-retest-v1" if retry else initial
     out.mkdir()
     core = v["productionCoreMain"]
     source = subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
@@ -140,7 +144,7 @@ def main(group):
         xml = out / "xml"
         xml.mkdir()
         binary = out / "jacoco.exec"
-        session = v["run"].split("-", 1)[0] + "-VERSION-CLAIM-VALUES"
+        session = out.name.split("-", 1)[0] + "-VERSION-CLAIM-VALUES"
         agent_opt = (f'-javaagent:{jars["agent"]["path"]}=destfile={binary},sessionid={session},'
                      'append=false,includes=dev.codex.schubert.nk.batch.backup.BackupVersions')
         unit = execute("unit", [java, "-Djava.io.tmpdir=" + str(tmp), agent_opt, "-jar", jars["junit"]["path"],
@@ -180,4 +184,6 @@ def main(group):
 
 
 if __name__ == "__main__":
+    if sys.argv[1:] == ["727", "--retry"]:
+        raise SystemExit(main("727", retry=True))
     raise SystemExit(main(sys.argv[1] if len(sys.argv) == 2 else "724"))
