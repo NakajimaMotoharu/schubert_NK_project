@@ -1,0 +1,86 @@
+{
+  "eventId": "PGPT-20261008-6293",
+  "groupId": "PGPT-WBS66-F02-SSC461-ARTEMIS-OBSERVATION-UPPER-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-19T22:37:07.744000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 54,
+      "remainingPercent": 46,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F02-SSC461-ARTEMIS-OBSERVATION-UPPER-20261120",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-F02-SSC461-ARTEMIS-OBSERVATION-UPPER-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a",
+      "WBS-P017-10"
+    ],
+    "source": "2eb96f48d5471203f18c67a80d9856d6514ee54c",
+    "productionCoreMain": "58c612f6a2e9e1c2a8723449d0f6625c1b48a491",
+    "canonicalDesignSource": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "run": "PG40320-f02-ssc461-borrowed-broker-observation-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.25,
+      "base": 0.75,
+      "high": 1.7
+    },
+    "groupCapPp": 3.0,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/772_F02公開RFC検証と次条件継続点.json",
+        "sha256": "92ff90e2478dd29911f286bf6da5f48560f75ab859c67613217c2e2cfa17c224"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39980-f02-current-four-production-jars-v1/manifest.json",
+        "sha256": "3a06700c504ef0f93f3edc89dab8f4197b46ff6742b3c7d56e1c17a7a09a32ba"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40314-f02-ssc461-offline-release-verifier-v1/compiled-classes.json",
+        "sha256": "ead0ea555a56b4573b9bef4c2b0d8ad160dee146b91a1c84bd0d391b1ccac77e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38522-f02-six-resolved-maven-dependency-model-v1/manifest.json",
+        "sha256": "dd478111437fdd65aeefe3dae47bebe556ff4a9eee54d851dd34018ba1db1a5a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38582-f02-jdbc-exception-ownership-review-v1/manifest.json",
+        "sha256": "4c29301e66cd473c219320a3dfa8cf5d846b787eb477caa0bd38599f678a4e92"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/038_NK-OPS-001_Artemis起動前観測単体テスト仕様書.md",
+        "sha256": "96daf4bb79f0cdf9b59d06522de3a8261cb35a76161e32f674f1b5371d5d8a58"
+      },
+      {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisStartupObservationTest.java",
+        "sha256": "15f71ae921877c0974a07017f6e2607dc30b61d43426eed49e873e3241537fc9"
+      },
+      {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisStartupObservation.java",
+        "sha256": "3422dd26caa2efa2a7fd44682ef3d87f877254f0144f3cc0dd28332949085aac"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "bug": "BUG-3233",
+    "designCorrection": "SSC-461",
+    "startBasis": "Two upper catches in ArtemisStartupObservation. All three original methods in the dedicated fixture use an explicit borrowed ClientSession local interface proxy whose calls fail locally. No embedded broker or server used by the fixture.",
+    "endCondition": "Move exactly two calls. Rebuild permitted four-module closure, exact physical delta, ABI. Run three existing ordinary local proxy methods and two bound new graph-path assertions. Preserve raw counters and PMD disposition; no live broker proof.",
+    "workScope": "Borrowed local Java interfaces and finite in-memory values; no real broker connection, session creation, query, embedded broker, network, endpoints, deployment, services, permissions or held fixture selection."
+  }
+}

@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.lang.reflect.Proxy;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -129,6 +130,59 @@ final class ArtemisStartupObservationTest {
     assertThrows(
         NullPointerException.class,
         () -> new ArtemisStartupObservation(valid, valid, valid, valid, valid, null));
+  }
+
+  @Test
+  void opsMqObsGraph001PreservesFatalFromIsolatedTopologyPort() {
+    var fatal = new AssertionError("synthetic topology observation marker");
+    var failure = topologyFailure(fatal);
+    var calls = new AtomicInteger();
+    Consumer<ClientSession> later = ignored -> calls.incrementAndGet();
+    var observer =
+        new ArtemisStartupObservation(
+            ignored -> {
+              throw failure;
+            },
+            later,
+            later,
+            later,
+            later,
+            ignored -> {
+              calls.incrementAndGet();
+              return pressures();
+            });
+
+    assertSame(fatal, assertThrows(AssertionError.class, () -> observer.inspect(unusedSession())));
+    assertEquals(0, calls.get());
+  }
+
+  @Test
+  void opsMqObsGraph002PreservesFatalFromBorrowedDetailedObservation() {
+    var fatal = new AssertionError("synthetic detailed observation marker");
+    var failure = topologyFailure(fatal);
+    var calls = new AtomicInteger();
+    var local =
+        (ClientSession)
+            Proxy.newProxyInstance(
+                ClientSession.class.getClassLoader(),
+                new Class<?>[] {ClientSession.class},
+                (ignored, method, arguments) -> {
+                  assertEquals("addressQuery", method.getName());
+                  calls.incrementAndGet();
+                  throw failure;
+                });
+
+    var observer = new ArtemisStartupObservation();
+    assertSame(fatal, assertThrows(AssertionError.class, () -> observer.inspectEvidence(local)));
+    assertEquals(1, calls.get());
+  }
+
+  private static ArtemisReadinessException topologyFailure(AssertionError fatal) {
+    var first = new SQLException("synthetic first observation failure");
+    first.setNextException(new SQLException("synthetic next observation failure", fatal));
+    var declared = new ArtemisReadinessException();
+    declared.addSuppressed(first);
+    return declared;
   }
 
   private static ArtemisStartupObservation assembly(
