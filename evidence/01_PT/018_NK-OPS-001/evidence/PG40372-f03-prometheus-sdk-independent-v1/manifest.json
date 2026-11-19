@@ -1,0 +1,44 @@
+{
+  "actualExit": 0,
+  "source": "26f1b44294d2dcb8555a4067a838c99281ff35cf",
+  "productionCore": "a165978ea649ab94593d881835df759f7e118038",
+  "analysis": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40370-f03-prometheus-sdk-local-retest-v1/manifest.json",
+    "sha256": "4756f15a01c123b02bb1f790001f3622ad6c860a6245b80d9f25491dbd12f168"
+  },
+  "previous": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40366-f03-admitted-four-current-typed-scope-v1/manifest.json",
+    "sha256": "1134d8aeef5e8d122fe7cc5753447103851c50d9746aa5de67a178b6234d3a22"
+  },
+  "currentSpotBugsExit": 0,
+  "target": "dev/codex/schubert/nk/batch/monitoring/BatchStandardMetricSource.class",
+  "originalBroadExit": 2,
+  "originalHoldMissing": 9,
+  "configurationCorrectionCommit": "d2554b56cefeafe3e5996fbb50057402e1b4b6c1",
+  "negativePinRejected": true,
+  "originalBroadReplayed": false,
+  "affectedSetup": "5333 selected metrics peer and future admitted broad scope",
+  "checkedConsumers": [
+    {
+      "scope": "5242 / PG39888 exact Batch delta",
+      "decision": "Does not select BatchStandardMetricSource; closed original missing-types report remains unchanged."
+    },
+    {
+      "scope": "Root-assisted groups and QA056",
+      "decision": "Hold preserved; no operations or typing substitutions."
+    },
+    {
+      "scope": "PMD 5327",
+      "decision": "Independent explicit Maven source and SDK selection; does not reuse the filtered SpotBugs metrics list."
+    },
+    {
+      "scope": "PG38762 normal Maven plugin",
+      "decision": "Own Maven resolution consumed prior model; historical current-source mismatch remains."
+    }
+  ],
+  "newProductTests": 0,
+  "newFormalAcceptance": 0,
+  "wholeF03Accepted": false,
+  "whole451Accepted": false,
+  "terminalAtUTC": "2026-11-19T23:20:28.243230+00:00"
+}
