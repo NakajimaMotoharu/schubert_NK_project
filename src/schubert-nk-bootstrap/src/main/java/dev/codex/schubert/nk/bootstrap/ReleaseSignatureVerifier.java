@@ -1,6 +1,6 @@
 package dev.codex.schubert.nk.bootstrap;
 
-import dev.codex.schubert.nk.storage.StorageIoException;
+import dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.security.KeyFactory;
@@ -53,7 +53,7 @@ public final class ReleaseSignatureVerifier {
         try {
           if (!crypto.verify(key, message, signature)) throw unavailable();
         } catch (GeneralSecurityException invalid) {
-          StorageIoException.preserveFatal(invalid);
+          JdbcFailureGraph.preserveFatal(invalid);
           throw unavailable();
         } finally {
           Arrays.fill(signature, (byte) 0);
