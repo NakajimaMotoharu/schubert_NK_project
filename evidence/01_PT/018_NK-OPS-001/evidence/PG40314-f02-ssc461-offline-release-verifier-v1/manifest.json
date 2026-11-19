@@ -1,0 +1,248 @@
+{
+  "source": "58c612f6a2e9e1c2a8723449d0f6625c1b48a491",
+  "productionCore": "58c612f6a2e9e1c2a8723449d0f6625c1b48a491",
+  "productionPrevious": "bd982905f83d6bec39c588ebb187870f6049fdd7",
+  "testFixture": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifierTest.java",
+  "productionTarget": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier.java",
+  "stages": {
+    "compile": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-pl",
+        "src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-batch",
+        "-am",
+        "compile"
+      ],
+      "beginUTC": "2026-11-19T22:32:18.844895+00:00",
+      "terminalAtUTC": "2026-11-19T22:32:53.749246+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40314-f02-ssc461-offline-release-verifier-v1/compile.stdout.log.gz",
+        "sha256": "fd2883201b4c0b7af332310c64dc87796e0ffb3ad8321f65b2c536d81807dd9b"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40314-f02-ssc461-offline-release-verifier-v1/compile.stderr.log.gz",
+        "sha256": "7097fbfb15f55c833e6de8e49ccc4ae96e0a90c2af25ebe49e5a16ff0b5e14ae"
+      }
+    },
+    "format": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "/dev/shm/pgpt-f02-group-lookup-0kuwn0ir/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier.java",
+        "/dev/shm/pgpt-f02-group-lookup-0kuwn0ir/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifierTest.java"
+      ],
+      "beginUTC": "2026-11-19T22:32:53.749266+00:00",
+      "terminalAtUTC": "2026-11-19T22:32:54.148376+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40314-f02-ssc461-offline-release-verifier-v1/format.stdout.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40314-f02-ssc461-offline-release-verifier-v1/format.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "checkstyle": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "-o",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40314-f02-ssc461-offline-release-verifier-v1/checkstyle.xml",
+        "@/dev/shm/pgpt-f02-group-lookup-0kuwn0ir/static-sources.txt"
+      ],
+      "beginUTC": "2026-11-19T22:32:54.148397+00:00",
+      "terminalAtUTC": "2026-11-19T22:32:54.801201+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40314-f02-ssc461-offline-release-verifier-v1/checkstyle.stdout.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40314-f02-ssc461-offline-release-verifier-v1/checkstyle.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "abi-before": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-classpath",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39980-f02-current-four-production-jars-v1/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+        "-p",
+        "-s",
+        "dev.codex.schubert.nk.bootstrap.ReleaseSignatureVerifier"
+      ],
+      "beginUTC": "2026-11-19T22:32:54.801221+00:00",
+      "terminalAtUTC": "2026-11-19T22:32:54.978969+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40314-f02-ssc461-offline-release-verifier-v1/abi-before.stdout.log.gz",
+        "sha256": "47ebfd6a758340e78784dc283faaff30d908bde3844645ca99b3677f02658673"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40314-f02-ssc461-offline-release-verifier-v1/abi-before.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "abi-after": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-classpath",
+        "/dev/shm/pgpt-f02-group-lookup-0kuwn0ir/src/schubert-nk-bootstrap/target/classes",
+        "-p",
+        "-s",
+        "dev.codex.schubert.nk.bootstrap.ReleaseSignatureVerifier"
+      ],
+      "beginUTC": "2026-11-19T22:32:54.978989+00:00",
+      "terminalAtUTC": "2026-11-19T22:32:55.109738+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40314-f02-ssc461-offline-release-verifier-v1/abi-after.stdout.log.gz",
+        "sha256": "47ebfd6a758340e78784dc283faaff30d908bde3844645ca99b3677f02658673"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40314-f02-ssc461-offline-release-verifier-v1/abi-after.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "behavior-after": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-classpath",
+        "/dev/shm/pgpt-f02-group-lookup-0kuwn0ir/src/schubert-nk-bootstrap/target/classes",
+        "-p",
+        "-c",
+        "dev.codex.schubert.nk.bootstrap.ReleaseSignatureVerifier"
+      ],
+      "beginUTC": "2026-11-19T22:32:55.109759+00:00",
+      "terminalAtUTC": "2026-11-19T22:32:55.274645+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40314-f02-ssc461-offline-release-verifier-v1/behavior-after.stdout.log.gz",
+        "sha256": "e1e5c3fbd138f6698e6410879980798a9fddce9c64229a36c75afb07d09caf46"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40314-f02-ssc461-offline-release-verifier-v1/behavior-after.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "testcompile": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/dev/shm/pgpt-f02-group-lookup-0kuwn0ir/src/schubert-nk-protocol/target/classes:/dev/shm/pgpt-f02-group-lookup-0kuwn0ir/src/schubert-nk-storage/target/classes:/dev/shm/pgpt-f02-group-lookup-0kuwn0ir/src/schubert-nk-bootstrap/target/classes:/dev/shm/pgpt-f02-group-lookup-0kuwn0ir/src/schubert-nk-batch/target/classes:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "-d",
+        "/dev/shm/pgpt-f02-group-lookup-0kuwn0ir/selected-test",
+        "/dev/shm/pgpt-f02-group-lookup-0kuwn0ir/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifierTest.java"
+      ],
+      "beginUTC": "2026-11-19T22:32:55.274660+00:00",
+      "terminalAtUTC": "2026-11-19T22:32:55.976919+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40314-f02-ssc461-offline-release-verifier-v1/testcompile.stdout.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40314-f02-ssc461-offline-release-verifier-v1/testcompile.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "unit": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Xmx256m",
+        "-Xlog:class+init=info:file=/dev/shm/pgpt-f02-group-lookup-0kuwn0ir/class-init.log",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40314-f02-ssc461-offline-release-verifier-v1/jacoco.exec,sessionid=PG40314-PUBLIC-RFC,append=false",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--details=summary",
+        "--fail-if-no-tests",
+        "--class-path",
+        "/dev/shm/pgpt-f02-group-lookup-0kuwn0ir/selected-test:/dev/shm/pgpt-f02-group-lookup-0kuwn0ir/src/schubert-nk-protocol/target/classes:/dev/shm/pgpt-f02-group-lookup-0kuwn0ir/src/schubert-nk-storage/target/classes:/dev/shm/pgpt-f02-group-lookup-0kuwn0ir/src/schubert-nk-bootstrap/target/classes:/dev/shm/pgpt-f02-group-lookup-0kuwn0ir/src/schubert-nk-batch/target/classes:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40314-f02-ssc461-offline-release-verifier-v1/xml",
+        "--select-class=dev.codex.schubert.nk.bootstrap.ReleaseSignatureVerifierTest"
+      ],
+      "beginUTC": "2026-11-19T22:32:55.976940+00:00",
+      "terminalAtUTC": "2026-11-19T22:32:57.408926+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40314-f02-ssc461-offline-release-verifier-v1/unit.stdout.log.gz",
+        "sha256": "da1f9f8b655dea8576738447caca7fe1f6c02a3b6f674410dcac1effc98c97ec"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40314-f02-ssc461-offline-release-verifier-v1/unit.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "coverage": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40314-f02-ssc461-offline-release-verifier-v1/jacoco.exec",
+        "--classfiles",
+        "/dev/shm/pgpt-f02-group-lookup-0kuwn0ir/src/schubert-nk-bootstrap/target/classes",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40314-f02-ssc461-offline-release-verifier-v1/coverage.xml"
+      ],
+      "beginUTC": "2026-11-19T22:32:57.408962+00:00",
+      "terminalAtUTC": "2026-11-19T22:32:57.696087+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40314-f02-ssc461-offline-release-verifier-v1/coverage.stdout.log.gz",
+        "sha256": "e83602ec2e0c2e21acc7f59927e68d4ef1f91246926af876b03ea48ee9b9c7ac"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40314-f02-ssc461-offline-release-verifier-v1/coverage.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    }
+  },
+  "frozenCommandFiles": [
+    "pom.xml",
+    "program/characterization/pom.xml",
+    "src/schubert-nk-api/pom.xml",
+    "src/schubert-nk-web/pom.xml",
+    "src/schubert-nk-protocol",
+    "src/schubert-nk-storage",
+    "src/schubert-nk-bootstrap",
+    "src/schubert-nk-batch"
+  ],
+  "selectedTests": [
+    "--select-class=dev.codex.schubert.nk.bootstrap.ReleaseSignatureVerifierTest"
+  ],
+  "notRun": [],
+  "namedActualHostActions": 0,
+  "session": "PG40314-PUBLIC-RFC",
+  "compiled": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40314-f02-ssc461-offline-release-verifier-v1/compiled-classes.json",
+    "sha256": "ead0ea555a56b4573b9bef4c2b0d8ad160dee146b91a1c84bd0d391b1ccac77e"
+  },
+  "actualExit": 0,
+  "wholeF02Accepted": false,
+  "whole451Accepted": false,
+  "terminalAtUTC": "2026-11-19T22:32:57.759812+00:00"
+}

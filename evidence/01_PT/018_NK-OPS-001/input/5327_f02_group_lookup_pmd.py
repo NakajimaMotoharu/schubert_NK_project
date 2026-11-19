@@ -1,4 +1,4 @@
-"""Measure PMD on the exact old and new lookup scope without replaying any product PT."""
+"""Measure PMD on explicitly frozen upper-boundary deltas without replaying any product PT."""
 
 from collections import Counter
 from datetime import datetime, timezone
@@ -6,6 +6,7 @@ import json
 import os
 from pathlib import Path
 import runpy
+import sys
 from tempfile import TemporaryDirectory
 import xml.etree.ElementTree as ET
 
@@ -29,9 +30,11 @@ def report(path):
     return counts
 
 
-def main():
+def main(profile="lookup"):
+    assert profile in ("lookup", "public-rfc")
+    release = profile == "public-rfc"
     read = RUNNER["read"]
-    start = read(next(PLAN.glob("767_*")))
+    start = read(next(PLAN.glob("770_*" if release else "767_*")))
     work = start["values"]
     fixed = read(next(STORE.glob("PG39980-*/manifest.json")))
     rules = read(next(STORE.glob("PG40210-*/begin.json")))
@@ -45,10 +48,12 @@ def main():
     assert len(tool_dependencies) == 2
     assert all(pin(Path(p["path"])) == p for p in tool_dependencies)
     new_source = git("rev-parse", "HEAD").decode().strip()
-    assert new_source == "cfdedf39165ce5b2a50aaf1ebc884b084309ad9a"
+    expected = ("58c612f6a2e9e1c2a8723449d0f6625c1b48a491" if release
+                else "cfdedf39165ce5b2a50aaf1ebc884b084309ad9a")
+    assert new_source == expected
     old_source = work["source"]
     scope = work["oracleReferences"][-2:]
-    out = STORE / "PG40310-f02-group-lookup-pmd-delta-v1"
+    out = STORE / ("PG40316-f02-public-rfc-pmd-delta-v1" if release else "PG40310-f02-group-lookup-pmd-delta-v1")
     out.mkdir()
     stages, counts = {}, {}
     with TemporaryDirectory(dir="/dev/shm", prefix="pgpt-lookup-pmd-") as temp:
@@ -91,4 +96,4 @@ def main():
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(main(*sys.argv[1:]))

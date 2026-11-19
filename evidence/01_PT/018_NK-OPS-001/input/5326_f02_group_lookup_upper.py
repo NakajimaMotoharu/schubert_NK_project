@@ -1,4 +1,4 @@
-"""Compile the four permitted modules and run the isolated lookup-reader fixture."""
+"""Compile the four permitted modules and run one explicitly selected upper-boundary fixture."""
 
 from datetime import datetime, timezone
 import gzip
@@ -8,6 +8,7 @@ import os
 from pathlib import Path
 import runpy
 import subprocess
+import sys
 import tarfile
 from tempfile import TemporaryDirectory
 
@@ -21,6 +22,7 @@ CLASS = "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest"
 METHODS = ("canonicalByteBoundaries", "malformedAndNull", "ownedCommandAndExit",
            "timeoutInterruptAndTermination", "stdioFailureMatrix", "sourceBufferAndNoLeak",
            "concurrentLookup", "gid009PreservesFatalReaderFailureThroughTheJdbcEdge")
+RELEASE_CLASS = "dev.codex.schubert.nk.bootstrap.ReleaseSignatureVerifierTest"
 
 
 def read(path):
@@ -40,11 +42,17 @@ def run(out, label, command, cwd, env):
                 beginUTC=begin, terminalAtUTC=datetime.now(timezone.utc).isoformat(), **files)
 
 
-def main():
-    start = read(next(PLAN.glob("767_*")))
+def main(profile="lookup"):
+    assert profile in ("lookup", "public-rfc")
+    release = profile == "public-rfc"
+    test_class = RELEASE_CLASS if release else CLASS
+    output_module = "bootstrap" if release else "batch"
+    session = "PG40314-PUBLIC-RFC" if release else "PG40308-GID"
+    start = read(next(PLAN.glob("770_*" if release else "767_*")))
     job = start["values"]
     git, pin = (COMMON[key] for key in ("git", "pin"))
-    source, core = git("rev-parse", "HEAD").decode().strip(), git("rev-parse", "HEAD^").decode().strip()
+    source = git("rev-parse", "HEAD").decode().strip()
+    core = source if release else git("rev-parse", "HEAD^").decode().strip()
     fixture, target = [item["path"] for item in job["oracleReferences"][-2:]]
     for meta in job["oracleReferences"]:
         path = meta["path"]
@@ -80,7 +88,8 @@ def main():
     annotations = tool("jspecify-1.0.1.jar")
     out = (EVIDENCE / job["run"]).resolve()
     out.mkdir()
-    selected = [f"--select-method={CLASS}#{method}" for method in METHODS]
+    selected = ([f"--select-class={test_class}"] if release
+                else [f"--select-method={test_class}#{method}" for method in METHODS])
     paths = ["pom.xml", "program/characterization/pom.xml", "src/schubert-nk-api/pom.xml",
              "src/schubert-nk-web/pom.xml", *(f"src/schubert-nk-{module}" for module in MODULES)]
     stages = {}
@@ -103,8 +112,8 @@ def main():
         checkstyle = rules["commands"]["checkstyle"][:]
         checkstyle[checkstyle.index("-o") + 1] = out / "checkstyle.xml"
         checkstyle[-1] = "@" + str(sources)
-        production = CLASS.removesuffix("Test")
-        old_jar = read(job["oracleReferences"][1]["path"])["jars"]["batch"]["artifact"]
+        production = test_class.removesuffix("Test")
+        old_jar = read(job["oracleReferences"][1]["path"])["jars"][output_module]["artifact"]
         assert pin(Path(old_jar["path"])) == old_jar
         javap = java.with_name("javap")
         commands = {
@@ -112,16 +121,16 @@ def main():
             "format": [*rules["commands"]["format"][:6], work / target, work / fixture],
             "checkstyle": checkstyle,
             "abi-before": [javap, "-classpath", old_jar["path"], "-p", "-s", production],
-            "abi-after": [javap, "-classpath", modules["batch"], "-p", "-s", production],
-            "behavior-after": [javap, "-classpath", modules["batch"], "-p", "-c", production],
+            "abi-after": [javap, "-classpath", modules[output_module], "-p", "-s", production],
+            "behavior-after": [javap, "-classpath", modules[output_module], "-p", "-c", production],
             "testcompile": [java.with_name("javac"), "--release", "25", "-Xlint:all", "-Werror",
                             "-proc:none", "-cp", cp, "-d", work / "selected-test", work / fixture],
             "unit": [java, "-Xmx256m", f"-Xlog:class+init=info:file={init}",
-                     f"-javaagent:{agent}=destfile={execution},sessionid=PG40308-GID,append=false",
+                     f"-javaagent:{agent}=destfile={execution},sessionid={session},append=false",
                      "-jar", junit, "execute", "--disable-banner", "--details=summary", "--fail-if-no-tests",
                      "--class-path", str(work / "selected-test") + os.pathsep + cp,
                      "--reports-dir", xml, *selected],
-            "coverage": [java, "-jar", coverage_cli, "report", execution, "--classfiles", modules["batch"],
+            "coverage": [java, "-jar", coverage_cli, "report", execution, "--classfiles", modules[output_module],
                          "--xml", out / "coverage.xml"],
         }
         for label, command in commands.items():
@@ -138,17 +147,27 @@ def main():
             produced = {name: {str(p.relative_to(folder)): pin(p)["sha256"]
                                for p in sorted(folder.rglob("*.class"))}
                         for name, folder in modules.items()}
-            prior = maven_reference["physicalClassHashes"]
+            prior = read(job["oracleReferences"][2]["path"])["classHashes"] if release else maven_reference["physicalClassHashes"]
             delta = {name: sorted(entry for entry in current.keys() | prior[name].keys()
                                   if current.get(entry) != prior[name].get(entry))
                      for name, current in produced.items()}
             facts = dict(modules={name: len(rows) for name, rows in produced.items()},
                          physicalDelta=delta, classHashes=produced)
+            if release:
+                crc = runpy.run_path(str(OPS / "input/5257_p01810_broker_evidence_value_post.py"))["crc64"]
+                name = production.replace(".", "/")
+                exact = [name + extension for extension in (".class", "$NativeCrypto.class", "$Crypto.class")]
+                facts["selectedPhysicalCrc"] = {
+                    item.removesuffix(".class"): crc((modules[output_module] / item).read_bytes())
+                    for item in exact
+                }
             with (out / "compiled-classes.json").open("x") as stream:
                 json.dump(facts, stream, indent=2)
     result = dict(source=source, productionCore=core, productionPrevious=job["productionCoreMain"],
                   testFixture=fixture, productionTarget=target, stages=stages, frozenCommandFiles=paths,
-                  selectedTests=list(METHODS), notRun=["nativeFactory"], namedActualHostActions=0,
+                  selectedTests=selected if release else list(METHODS),
+                  notRun=[] if release else ["nativeFactory"], namedActualHostActions=0,
+                  session=session,
                   compiled=pin(out / "compiled-classes.json") if facts else None,
                   actualExit=next((stage["actualExit"] for stage in stages.values()
                                    if stage["actualExit"] != 0), 0),
@@ -159,4 +178,4 @@ def main():
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(main(*sys.argv[1:]))
