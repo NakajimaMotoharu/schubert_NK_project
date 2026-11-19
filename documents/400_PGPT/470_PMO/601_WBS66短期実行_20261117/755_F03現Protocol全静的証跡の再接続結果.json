@@ -1,0 +1,152 @@
+{
+  "eventId": "PGPT-20261008-6276",
+  "groupId": "PGPT-WBS66-F03-CURRENT-PROTOCOL-RECEIPT-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-19T22:11:21.496000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 54,
+      "remainingPercent": 46,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-CURRENT-PROTOCOL-RECEIPT-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F03-CURRENT-PROTOCOL-RECEIPT-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2",
+      "WBS-F03/2-3"
+    ],
+    "source": "3b7f814ace71ff7f0079ca49b4f3cdb59cd15351",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "canonicalDesignSource": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "run": "PG40300-f03-current-protocol-typed-static-binding-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.1,
+      "base": 0.3,
+      "high": 0.6
+    },
+    "groupCapPp": 1.0,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/753_P01801公開設定UTF8と次条件継続点.json",
+        "sha256": "175c92a39c45f50bfd5c22acaba9a06571b4a76d3431df690e3e91ed78f2d065"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38300-f03-current-protocol-full-pmd-v1/manifest.json",
+        "sha256": "75bf158ae41ec8557cc03edcd19730a416c356f701f8b08b556bb8e93b04bd2b"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38300-f03-current-protocol-full-pmd-v1/independent-dispositions.json",
+        "sha256": "94afc9821e6cffaed12903a2276b002fbb501d17921d5387af284a059f288fd8"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38300-f03-current-protocol-full-pmd-v1/begin.json",
+        "sha256": "23e6ca47ae12a5565cd541d234eca48b4a4f00fbdb72cb7145365ba9307eea49"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38256-wbs66-four-current-compile-v1/compile/manifest.json",
+        "sha256": "12154ad780501aaa8caad123e7ea11faa1ed418cdad2ed61c5ef5f39da3ab472"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38764-wbs66-four-current-independent-v1/manifest.json",
+        "sha256": "16291db6b23b38b02224e53e2a6d632b6676378b735009c0955605144540dd4a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39862-service-db-state-lock-four-main-v1/manifest.json",
+        "sha256": "9433dae6e53e1d97a1b942175e930c315c118da9dea870cdffb0b26072e6a035"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39980-f02-current-four-production-jars-v1/manifest.json",
+        "sha256": "3a06700c504ef0f93f3edc89dab8f4197b46ff6742b3c7d56e1c17a7a09a32ba"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38320-f03-ssc451452-protocol-full-module-byte-lineage-v1/manifest.json",
+        "sha256": "778f01c0fd1e2f8c35dcf110463a8014f4e59e0cfae96136a4fb5960c9a6a014"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "WBS66 F03/2-2: original PMD and typed static have a historical source. PG39980 supplies the current Protocol JAR and PG39862 supplies the current compile inputs.",
+    "endCondition": "Require Git source equality for 169 Protocol production files, admitted configuration and compiler and tool pins, exact current JAR equality for all 176 class hashes, unchanged legacy dispositions, and distinct current/test-only changes. Keep whole-six F03 and whole 451 open.",
+    "workScope": "Local receipts and repository-owned published build artifact only. No build or test replay and no operation on QA056/057 or native/DB/hosts.",
+    "preStartAdministrativeCorrection": "Two rejected metadata appends (unregistered category and management ID used as canonical leaf); no event/audit ran. Original quota receipts preserved; fresh canonical WBS-F03 / CONTRACT_AUDIT used.",
+    "quotaAfter": {
+      "usedPercent": 54,
+      "remainingPercent": 46,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "f48914fa614d5350b60c817a57b36d1905b79e6910e73101f3bc81683cb5b83b",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-19T22:11:21.496000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 54,
+          "remainingPercent": 46,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-19T22:10:59.301813+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 54,
+      "remainingPercent": 46,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6275",
+    "attempt": 1,
+    "attemptResult": "CURRENT_PROTOCOL_STATIC_RECEIPT_JOINED",
+    "firstValidationPassed": 1,
+    "firstValidationDenominator": 1,
+    "retries": 0,
+    "preStartMetadataCorrections": 2,
+    "priorSuccessReruns": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40300-f03-current-protocol-typed-static-binding-v1/manifest.json",
+        "sha256": "c0c1d8a197ed9b5b5de75fee6bbdd94cb73c1ab94cfc1d581d3e799cb1e7843e"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "F03 simultaneous all-module static eligibility / active applicability / gate closure",
+      "Protocol current suite with four changes since PG37652 is separate from this static-only receipt"
+    ]
+  }
+}
