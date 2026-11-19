@@ -15,6 +15,7 @@ SUITES = {
     "lgs": ("682_*", "LogSearchWireUnicodeTest", 2, "PG40226-PROTOCOL-LOG-WIRE"),
     "qss-nts": ("687_*", "QuestionNotificationWireTest", 4, "PG40232-PROTOCOL-QSS-NTS"),
     "qss-nts-retest": ("687_*", "QuestionNotificationWireTest", 4, "PG40234-PROTOCOL-QSS-NTS"),
+    "usr": ("692_*", "UserListReplyWireTest", 4, "PG40240-PROTOCOL-USR-REPLY"),
 }
 
 

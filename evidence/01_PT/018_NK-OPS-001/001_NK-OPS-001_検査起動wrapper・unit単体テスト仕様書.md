@@ -172,3 +172,7 @@ UI235 §11、SS322/323 §9.5、WBS-P018-09/2、YKT-2328 site1。656 byte、空�
 - PT-PRO-NTS-WIRE-001/002（§8.1）。64 byte DATA。種別1/12、From 13/17、To 30/17、Page 47/6、Page size 53/3。3定義値とspace、日付なし、固定JSTからUTCへの変換、未知値、不正日付、逆順を確認。
 
 PG39980のProtocol JARを同SHA・同所有で利用し、テストから入力値を独立構成。JDK25、strict javac、限定PMD/Checkstyle、同run実測。実API、DB・HMAC・JMS、LGSの既済試験は選択外。
+
+## PT-PRO-USR-WIRE-001〜004 USRRSP01 Usernameの固定欄
+
+P016-15/2、UI234 PAGED48、UI236 §3.3、SS323、YKT-2328 site34。DATA 48、1件のrecord 168、Username 13/64必須。001は固定NFC多byteと64 byteぴったりの補助文字・隣接Role保持。002は全spaceを必須欠落として拒否。003は不正surrogateバイト列と64 byte欄末の途中UTF-8を拒否。004は非NFC結合列を拒否。期待は固定byte・typed String・固定例外、実WebやSQL順の判定は別。PG39980凍結JARの同SHA・所有、JDK25、同source/runの範囲と未網羅を記録。
