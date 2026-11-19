@@ -1,0 +1,80 @@
+{
+  "eventId": "PGPT-20261008-6296",
+  "groupId": "PGPT-WBS66-F02-CURRENT-FOUR-JARS-THREE-EDGE-DELTA-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-19T22:43:21.819000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 54,
+      "remainingPercent": 46,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F02-CURRENT-FOUR-JARS-THREE-EDGE-DELTA-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F02-CURRENT-FOUR-JARS-THREE-EDGE-DELTA-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a",
+      "WBS-F02-b"
+    ],
+    "source": "16d9894e1a23a66df97d3cdd9e01ac87856c52ce",
+    "productionCoreMain": "e79dd91d5d6449b08facef1e4c73429b8a227544",
+    "canonicalDesignSource": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "run": "PG40326-f02-current-four-jars-three-edge-delta-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.2,
+      "base": 0.6,
+      "high": 1.2
+    },
+    "groupCapPp": 2.5,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/775_F02貸借Artemis観測と次条件継続点.json",
+        "sha256": "510a041756b72a9167984fe6a47f627a037c3217c2ba0784b340e3b07cf3d9df"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39980-f02-current-four-production-jars-v1/manifest.json",
+        "sha256": "3a06700c504ef0f93f3edc89dab8f4197b46ff6742b3c7d56e1c17a7a09a32ba"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40320-f02-ssc461-borrowed-broker-observation-v1/compiled-classes.json",
+        "sha256": "a605228b60a20c758fb5b925c4d4b6e7b5026f7e09a043026d765c1dd1bfab9e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40324-f02-borrowed-broker-independent-v1/manifest.json",
+        "sha256": "aa53da363c0824a52fa674215e1d2a52413d8f1545a334b03ab861c10fb8af1e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40312-f02-ssc461-group-lookup-independent-v1/manifest.json",
+        "sha256": "096ce9ea58761ff61c7ee061cdde03bc8043daeedb27f4c23acbe02cba3772f5"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40318-f02-public-rfc-independent-v1/manifest.json",
+        "sha256": "07115fb53923ed58c635ef0ac2ac345c6b7cc30cdff986838bf3b2e5ef3273f9"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39862-service-db-state-lock-four-main-v1/manifest.json",
+        "sha256": "9433dae6e53e1d97a1b942175e930c315c118da9dea870cdffb0b26072e6a035"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "Current PG40320 proves a typed 1102 build without preserved JAR files. PG39980 old JARs are a compare-only origin before three approved upper migrations.",
+    "endCondition": "Construct normal four JAR artifacts from current offline compile output. Verify all 1102 exact class bytes with PG40320, independent CRC/archive/POM, and exact typed edge delta for three affected classes. Retain artifacts for later local matching.",
+    "workScope": "Four allowed product Maven modules, other reactor POM metadata only. No product PT replay, protected API/Web class, unit/service, signature, release or access action."
+  }
+}

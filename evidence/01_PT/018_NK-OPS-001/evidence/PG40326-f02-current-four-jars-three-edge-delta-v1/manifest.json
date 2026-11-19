@@ -1,0 +1,258 @@
+{
+  "actualExit": 0,
+  "run": "PG40326-f02-current-four-jars-three-edge-delta-v1",
+  "startEvent": "PGPT-20261008-6296",
+  "sourceCore": "e79dd91d5d6449b08facef1e4c73429b8a227544",
+  "gitHead": "16d9894e1a23a66df97d3cdd9e01ac87856c52ce",
+  "inputClassCount": 1102,
+  "sourceMain": {
+    "protocol": 169,
+    "storage": 25,
+    "bootstrap": 88,
+    "batch": 200
+  },
+  "jars": {
+    "protocol": {
+      "artifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40326-f02-current-four-jars-three-edge-delta-v1/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+        "sha256": "54ea27a019959e22882810a546843ab4c8e0d4c8bb0f858d88d5e528b69ca8eb"
+      },
+      "coordinates": {
+        "artifactId": "schubert-nk-protocol",
+        "groupId": "dev.codex.schubert",
+        "version": "0.1.0-SNAPSHOT"
+      },
+      "classes": 176,
+      "nonClassEntries": 3,
+      "crcOK": true,
+      "classMajor": 69,
+      "allClassHashesMatch": true
+    },
+    "storage": {
+      "artifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40326-f02-current-four-jars-three-edge-delta-v1/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+        "sha256": "91aec330d9b509218f89ead5bd56cc8f46c5d99f8e891f280608d3a9fb45fbee"
+      },
+      "coordinates": {
+        "artifactId": "schubert-nk-storage",
+        "groupId": "dev.codex.schubert",
+        "version": "0.1.0-SNAPSHOT"
+      },
+      "classes": 79,
+      "nonClassEntries": 3,
+      "crcOK": true,
+      "classMajor": 69,
+      "allClassHashesMatch": true
+    },
+    "bootstrap": {
+      "artifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40326-f02-current-four-jars-three-edge-delta-v1/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+        "sha256": "49ab2186e9a734560f03374498ff3cd4a655fa924aa6251b46e240a9690e40c7"
+      },
+      "coordinates": {
+        "artifactId": "schubert-nk-bootstrap",
+        "groupId": "dev.codex.schubert",
+        "version": "0.1.0-SNAPSHOT"
+      },
+      "classes": 201,
+      "nonClassEntries": 3,
+      "crcOK": true,
+      "classMajor": 69,
+      "allClassHashesMatch": true
+    },
+    "batch": {
+      "artifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40326-f02-current-four-jars-three-edge-delta-v1/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+        "sha256": "b0aee9b7cf3cfa54968dd4e39788c8fc1c110c9e9f885cb3094333e549abe46b"
+      },
+      "coordinates": {
+        "artifactId": "schubert-nk-batch",
+        "groupId": "dev.codex.schubert",
+        "version": "0.1.0-SNAPSHOT"
+      },
+      "classes": 646,
+      "nonClassEntries": 3,
+      "crcOK": true,
+      "classMajor": 69,
+      "allClassHashesMatch": true
+    }
+  },
+  "changedClassesFromOldJars": {
+    "protocol": [],
+    "storage": [],
+    "bootstrap": [
+      "dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier.class"
+    ],
+    "batch": [
+      "dev/codex/schubert/nk/batch/mq/ArtemisStartupObservation.class",
+      "dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.class"
+    ]
+  },
+  "exactMatchedCurrentCompiledClassCount": 1102,
+  "exactNewTypedEdges": {
+    "dev.codex.schubert.nk.batch.mq.ArtemisStartupObservation": {
+      "added": [
+        "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph"
+      ],
+      "removed": [
+        "dev.codex.schubert.nk.storage.StorageIoException"
+      ],
+      "identicalCount": 33
+    },
+    "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolver": {
+      "added": [
+        "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph"
+      ],
+      "removed": [
+        "dev.codex.schubert.nk.storage.StorageIoException"
+      ],
+      "identicalCount": 39
+    },
+    "dev.codex.schubert.nk.bootstrap.ReleaseSignatureVerifier": {
+      "added": [
+        "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph"
+      ],
+      "removed": [
+        "dev.codex.schubert.nk.storage.StorageIoException"
+      ],
+      "identicalCount": 13
+    }
+  },
+  "mavenPlugin": {
+    "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/maven/plugins/maven-jar-plugin/3.4.1/maven-jar-plugin-3.4.1.jar",
+    "sha256": "25e0a5b55b872d95e3a09a5d825bc1061f5ce25ee81f147e623405d8ebedfa5f"
+  },
+  "execution": {
+    "actualExit": 0,
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+      "-o",
+      "-B",
+      "-ntp",
+      "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+      "-pl",
+      "src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-batch",
+      "org.apache.maven.plugins:maven-jar-plugin:3.4.1:jar"
+    ],
+    "beginUTC": "2026-11-19T22:44:45.287798+00:00",
+    "terminalAtUTC": "2026-11-19T22:44:47.067058+00:00",
+    "stdout": {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40326-f02-current-four-jars-three-edge-delta-v1/jar.stdout.log.gz",
+      "sha256": "70d52ec40eef5329d62a9ca44a85884d2270eff949190730c48934d6bb44f2a4"
+    },
+    "stderr": {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40326-f02-current-four-jars-three-edge-delta-v1/jar.stderr.log.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    }
+  },
+  "stages": {
+    "compile": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-pl",
+        "src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-batch",
+        "-am",
+        "compile"
+      ],
+      "beginUTC": "2026-11-19T22:44:14.708190+00:00",
+      "terminalAtUTC": "2026-11-19T22:44:45.252782+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40326-f02-current-four-jars-three-edge-delta-v1/compile.stdout.log.gz",
+        "sha256": "d939f13dbbf52d4c3c578aca4a5b2519100b1485331b4fba009d5177ad228e6b"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40326-f02-current-four-jars-three-edge-delta-v1/compile.stderr.log.gz",
+        "sha256": "7097fbfb15f55c833e6de8e49ccc4ae96e0a90c2af25ebe49e5a16ff0b5e14ae"
+      }
+    },
+    "jar": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-pl",
+        "src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-batch",
+        "org.apache.maven.plugins:maven-jar-plugin:3.4.1:jar"
+      ],
+      "beginUTC": "2026-11-19T22:44:45.287798+00:00",
+      "terminalAtUTC": "2026-11-19T22:44:47.067058+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40326-f02-current-four-jars-three-edge-delta-v1/jar.stdout.log.gz",
+        "sha256": "70d52ec40eef5329d62a9ca44a85884d2270eff949190730c48934d6bb44f2a4"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40326-f02-current-four-jars-three-edge-delta-v1/jar.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "edges-before": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/jdeps",
+        "-verbose:class",
+        "-filter:none",
+        "--ignore-missing-deps",
+        "/dev/shm/pgpt-four-jars-30iboaea/old/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier.class",
+        "/dev/shm/pgpt-four-jars-30iboaea/old/dev/codex/schubert/nk/batch/mq/ArtemisStartupObservation.class",
+        "/dev/shm/pgpt-four-jars-30iboaea/old/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.class"
+      ],
+      "beginUTC": "2026-11-19T22:44:47.176661+00:00",
+      "terminalAtUTC": "2026-11-19T22:44:47.456482+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40326-f02-current-four-jars-three-edge-delta-v1/edges-before.stdout.log.gz",
+        "sha256": "3e6139f6573eddfe020e31386846f096a904be1353abffd8e33f8a40b3755cb3"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40326-f02-current-four-jars-three-edge-delta-v1/edges-before.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "edges-after": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/jdeps",
+        "-verbose:class",
+        "-filter:none",
+        "--ignore-missing-deps",
+        "/dev/shm/pgpt-four-jars-30iboaea/src/schubert-nk-bootstrap/target/classes/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier.class",
+        "/dev/shm/pgpt-four-jars-30iboaea/src/schubert-nk-batch/target/classes/dev/codex/schubert/nk/batch/mq/ArtemisStartupObservation.class",
+        "/dev/shm/pgpt-four-jars-30iboaea/src/schubert-nk-batch/target/classes/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.class"
+      ],
+      "beginUTC": "2026-11-19T22:44:47.456507+00:00",
+      "terminalAtUTC": "2026-11-19T22:44:47.737079+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40326-f02-current-four-jars-three-edge-delta-v1/edges-after.stdout.log.gz",
+        "sha256": "c34e7fadf1a302c50b5b9c23bfaa717fb9ddb22687d8a5a474229c575eed2ad5"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40326-f02-current-four-jars-three-edge-delta-v1/edges-after.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    }
+  },
+  "priorBuildOnly": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40320-f02-ssc461-borrowed-broker-observation-v1/compiled-classes.json",
+    "sha256": "a605228b60a20c758fb5b925c4d4b6e7b5026f7e09a043026d765c1dd1bfab9e"
+  },
+  "originalPackagedJars": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39980-f02-current-four-production-jars-v1/manifest.json",
+    "sha256": "3a06700c504ef0f93f3edc89dab8f4197b46ff6742b3c7d56e1c17a7a09a32ba"
+  },
+  "testsExecuted": 0,
+  "actualHostActions": 0,
+  "wholeF02Accepted": false,
+  "whole451Accepted": false,
+  "untestedModules": [
+    "api",
+    "web"
+  ],
+  "terminalAtUTC": "2026-11-19T22:44:47.749228+00:00"
+}

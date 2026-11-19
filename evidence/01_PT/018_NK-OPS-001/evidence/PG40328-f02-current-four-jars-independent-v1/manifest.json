@@ -1,0 +1,81 @@
+{
+  "actualExit": 0,
+  "source": "16d9894e1a23a66df97d3cdd9e01ac87856c52ce",
+  "productionCore": "e79dd91d5d6449b08facef1e4c73429b8a227544",
+  "packageManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40326-f02-current-four-jars-three-edge-delta-v1/manifest.json",
+    "sha256": "a0c4f06d31e2dc13e551bb1616fc10d219f66dc598bb06b7368cf90fd3e835d3"
+  },
+  "qualifiedLocalArtifacts": {
+    "protocol": {
+      "physical": 176,
+      "artifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40326-f02-current-four-jars-three-edge-delta-v1/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+        "sha256": "54ea27a019959e22882810a546843ab4c8e0d4c8bb0f858d88d5e528b69ca8eb"
+      }
+    },
+    "storage": {
+      "physical": 79,
+      "artifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40326-f02-current-four-jars-three-edge-delta-v1/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+        "sha256": "91aec330d9b509218f89ead5bd56cc8f46c5d99f8e891f280608d3a9fb45fbee"
+      }
+    },
+    "bootstrap": {
+      "physical": 201,
+      "artifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40326-f02-current-four-jars-three-edge-delta-v1/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+        "sha256": "49ab2186e9a734560f03374498ff3cd4a655fa924aa6251b46e240a9690e40c7"
+      }
+    },
+    "batch": {
+      "physical": 646,
+      "artifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40326-f02-current-four-jars-three-edge-delta-v1/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+        "sha256": "b0aee9b7cf3cfa54968dd4e39788c8fc1c110c9e9f885cb3094333e549abe46b"
+      }
+    }
+  },
+  "measuredDeltas": {
+    "dev.codex.schubert.nk.batch.mq.ArtemisStartupObservation": {
+      "added": [
+        "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph"
+      ],
+      "removed": [
+        "dev.codex.schubert.nk.storage.StorageIoException"
+      ],
+      "identicalCount": 33
+    },
+    "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolver": {
+      "added": [
+        "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph"
+      ],
+      "removed": [
+        "dev.codex.schubert.nk.storage.StorageIoException"
+      ],
+      "identicalCount": 39
+    },
+    "dev.codex.schubert.nk.bootstrap.ReleaseSignatureVerifier": {
+      "added": [
+        "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph"
+      ],
+      "removed": [
+        "dev.codex.schubert.nk.storage.StorageIoException"
+      ],
+      "identicalCount": 13
+    }
+  },
+  "provenPhysical": 1102,
+  "stillOpenStorageTypedViolation": [
+    {
+      "origin": "dev.codex.schubert.nk.storage.StorageIoException",
+      "target": "java.sql.SQLException",
+      "artifact": "java.sql"
+    }
+  ],
+  "noNewTests": 0,
+  "sixModuleBuild": false,
+  "wholeF02Accepted": false,
+  "whole451Accepted": false,
+  "terminalAtUTC": "2026-11-19T22:45:20.089216+00:00"
+}
