@@ -54,6 +54,7 @@ def main(profile="lookup"):
         "borrowed-catalog": ("19a9f050366e32e0cc93246e2e6ef91aeb443ec1", "PG40340-f02-borrowed-catalog-pmd-delta-v1"),
         "borrowed-settings": ("becdc696ea194c5296b70f538caeb0b5941e5bdd", "PG40346-f02-borrowed-settings-pmd-delta-v1"),
         "borrowed-expiry": ("a165978ea649ab94593d881835df759f7e118038", "PG40352-f02-borrowed-expiry-pmd-delta-v1"),
+        "public-checkpoint": ("cb1411d94a1d97aedafe1af60400aaec0ae8c8e8", "PG40376-f02-public-checkpoint-pmd-delta-v1"),
     }[profile]
     assert new_source == expected
     old_source = work["source"]
@@ -65,10 +66,13 @@ def main(profile="lookup"):
         scope = work["oracleReferences"][-2:]
     out = STORE / out_name
     dependencies = []
-    if profile == "borrowed-broker" or "tests" in work:
+    if profile.startswith("borrowed-"):
         maven = read(next(STORE.glob("PG39862-*/manifest.json")))["maven"]["command"]
         repo = Path(next(part.split("=", 1)[1] for part in maven if part.startswith("-Dmaven.repo.local=")))
         dependencies = RUNNER["broker_dependencies"](work, repo)
+    elif profile == "public-checkpoint":
+        _, annotation = RUNNER["checkpoint_dependencies"](work)
+        dependencies = [annotation]
     out.mkdir()
     stages, counts = {}, {}
     with TemporaryDirectory(dir="/dev/shm", prefix="pgpt-lookup-pmd-") as temp:

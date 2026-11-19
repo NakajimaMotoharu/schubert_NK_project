@@ -1,0 +1,272 @@
+{
+  "source": "cb1411d94a1d97aedafe1af60400aaec0ae8c8e8",
+  "productionCore": "cb1411d94a1d97aedafe1af60400aaec0ae8c8e8",
+  "productionPrevious": "a165978ea649ab94593d881835df759f7e118038",
+  "testFixture": [
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/CheckpointFatalBoundaryTest.java"
+  ],
+  "productionTarget": [
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint.java"
+  ],
+  "stages": {
+    "compile": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-pl",
+        "src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-batch",
+        "-am",
+        "compile"
+      ],
+      "beginUTC": "2026-11-19T23:26:44.527264+00:00",
+      "terminalAtUTC": "2026-11-19T23:27:20.502278+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40374-f02-ssc461-public-checkpoint-v1/compile.stdout.log.gz",
+        "sha256": "12bda9d7dd6ea973a46b0117c1dc13d96670b09ccf4cddf5d1ea16fb550ca035"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40374-f02-ssc461-public-checkpoint-v1/compile.stderr.log.gz",
+        "sha256": "7097fbfb15f55c833e6de8e49ccc4ae96e0a90c2af25ebe49e5a16ff0b5e14ae"
+      }
+    },
+    "format": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "/dev/shm/pgpt-f02-group-lookup-sre8jvzx/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint.java",
+        "/dev/shm/pgpt-f02-group-lookup-sre8jvzx/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/CheckpointFatalBoundaryTest.java"
+      ],
+      "beginUTC": "2026-11-19T23:27:20.502299+00:00",
+      "terminalAtUTC": "2026-11-19T23:27:20.952887+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40374-f02-ssc461-public-checkpoint-v1/format.stdout.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40374-f02-ssc461-public-checkpoint-v1/format.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "checkstyle": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "-o",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40374-f02-ssc461-public-checkpoint-v1/checkstyle.xml",
+        "@/dev/shm/pgpt-f02-group-lookup-sre8jvzx/static-sources.txt"
+      ],
+      "beginUTC": "2026-11-19T23:27:20.952907+00:00",
+      "terminalAtUTC": "2026-11-19T23:27:21.627057+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40374-f02-ssc461-public-checkpoint-v1/checkstyle.stdout.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40374-f02-ssc461-public-checkpoint-v1/checkstyle.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "abi-before": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-classpath",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40356-f02-current-four-jars-six-artemis-edges-v1/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+        "-p",
+        "-s",
+        "dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpoint$PublicAgent"
+      ],
+      "beginUTC": "2026-11-19T23:27:21.627085+00:00",
+      "terminalAtUTC": "2026-11-19T23:27:21.789890+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40374-f02-ssc461-public-checkpoint-v1/abi-before.stdout.log.gz",
+        "sha256": "94209b8a36946b1532fbbe57a43e4ccb8461a41a844dd925967bca74a289cb1f"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40374-f02-ssc461-public-checkpoint-v1/abi-before.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "abi-after": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-classpath",
+        "/dev/shm/pgpt-f02-group-lookup-sre8jvzx/src/schubert-nk-bootstrap/target/classes",
+        "-p",
+        "-s",
+        "dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpoint$PublicAgent"
+      ],
+      "beginUTC": "2026-11-19T23:27:21.789912+00:00",
+      "terminalAtUTC": "2026-11-19T23:27:21.927950+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40374-f02-ssc461-public-checkpoint-v1/abi-after.stdout.log.gz",
+        "sha256": "94209b8a36946b1532fbbe57a43e4ccb8461a41a844dd925967bca74a289cb1f"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40374-f02-ssc461-public-checkpoint-v1/abi-after.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "behavior-after": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-classpath",
+        "/dev/shm/pgpt-f02-group-lookup-sre8jvzx/src/schubert-nk-bootstrap/target/classes",
+        "-p",
+        "-c",
+        "dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpoint$PublicAgent"
+      ],
+      "beginUTC": "2026-11-19T23:27:21.927968+00:00",
+      "terminalAtUTC": "2026-11-19T23:27:22.094912+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40374-f02-ssc461-public-checkpoint-v1/behavior-after.stdout.log.gz",
+        "sha256": "4c38b6a2ca9bd7b2d1ac4958c41eea3461beba5524c5b417219751e768e77df1"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40374-f02-ssc461-public-checkpoint-v1/behavior-after.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "testcompile": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/dev/shm/pgpt-f02-group-lookup-sre8jvzx/src/schubert-nk-protocol/target/classes:/dev/shm/pgpt-f02-group-lookup-sre8jvzx/src/schubert-nk-storage/target/classes:/dev/shm/pgpt-f02-group-lookup-sre8jvzx/src/schubert-nk-bootstrap/target/classes:/dev/shm/pgpt-f02-group-lookup-sre8jvzx/src/schubert-nk-batch/target/classes:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/github/spotbugs/spotbugs-annotations/4.10.4/spotbugs-annotations-4.10.4.jar:/dev/shm/pgpt-f02-group-lookup-sre8jvzx/selected-test",
+        "-d",
+        "/dev/shm/pgpt-f02-group-lookup-sre8jvzx/selected-test",
+        "/dev/shm/pgpt-f02-group-lookup-sre8jvzx/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/CheckpointFatalBoundaryTest.java"
+      ],
+      "beginUTC": "2026-11-19T23:27:22.094934+00:00",
+      "terminalAtUTC": "2026-11-19T23:27:22.794552+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40374-f02-ssc461-public-checkpoint-v1/testcompile.stdout.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40374-f02-ssc461-public-checkpoint-v1/testcompile.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "unit": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Xmx256m",
+        "-Xlog:class+init=info:file=/dev/shm/pgpt-f02-group-lookup-sre8jvzx/class-init.log",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40374-f02-ssc461-public-checkpoint-v1/jacoco.exec,sessionid=PG40374-PUBLIC-CHECKPOINT,append=false",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--details=summary",
+        "--fail-if-no-tests",
+        "--class-path",
+        "/dev/shm/pgpt-f02-group-lookup-sre8jvzx/src/schubert-nk-protocol/target/classes:/dev/shm/pgpt-f02-group-lookup-sre8jvzx/src/schubert-nk-storage/target/classes:/dev/shm/pgpt-f02-group-lookup-sre8jvzx/src/schubert-nk-bootstrap/target/classes:/dev/shm/pgpt-f02-group-lookup-sre8jvzx/src/schubert-nk-batch/target/classes:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/github/spotbugs/spotbugs-annotations/4.10.4/spotbugs-annotations-4.10.4.jar:/dev/shm/pgpt-f02-group-lookup-sre8jvzx/selected-test",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40374-f02-ssc461-public-checkpoint-v1/xml",
+        "--select-class=dev.codex.schubert.nk.bootstrap.CheckpointFatalBoundaryTest"
+      ],
+      "beginUTC": "2026-11-19T23:27:22.794575+00:00",
+      "terminalAtUTC": "2026-11-19T23:27:23.886642+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40374-f02-ssc461-public-checkpoint-v1/unit.stdout.log.gz",
+        "sha256": "1107e4f0c32c062b54e135a1ee03627745201cacbef205dbd9299c342a51d1af"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40374-f02-ssc461-public-checkpoint-v1/unit.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "coverage": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40374-f02-ssc461-public-checkpoint-v1/jacoco.exec",
+        "--classfiles",
+        "/dev/shm/pgpt-f02-group-lookup-sre8jvzx/src/schubert-nk-bootstrap/target/classes",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40374-f02-ssc461-public-checkpoint-v1/coverage.xml"
+      ],
+      "beginUTC": "2026-11-19T23:27:23.886669+00:00",
+      "terminalAtUTC": "2026-11-19T23:27:24.249705+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40374-f02-ssc461-public-checkpoint-v1/coverage.stdout.log.gz",
+        "sha256": "482b30532a953791f6e8f6b3c786cc1dbef574c415a011905c62b1dcf3e70c0a"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40374-f02-ssc461-public-checkpoint-v1/coverage.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    }
+  },
+  "frozenCommandFiles": [
+    "pom.xml",
+    "program/characterization/pom.xml",
+    "src/schubert-nk-api/pom.xml",
+    "src/schubert-nk-web/pom.xml",
+    "src/schubert-nk-protocol",
+    "src/schubert-nk-storage",
+    "src/schubert-nk-bootstrap",
+    "src/schubert-nk-batch"
+  ],
+  "selectedTests": [
+    "--select-class=dev.codex.schubert.nk.bootstrap.CheckpointFatalBoundaryTest"
+  ],
+  "notRun": [],
+  "namedActualHostActions": 0,
+  "session": "PG40374-PUBLIC-CHECKPOINT",
+  "extraDependencies": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/com/github/spotbugs/spotbugs-annotations/4.10.4/spotbugs-annotations-4.10.4.jar",
+      "sha256": "28fa4befaddce5d7b79b07c68e7c12fa27c5d9282c4229528717971606661ea3"
+    }
+  ],
+  "companionClasses": {
+    "dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpointTest.class": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg36990-checkpoint16-prepare-v1/test-classes/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpointTest.class",
+      "sha256": "0621400ba4127a188a0bc53dc70bff7c6a9b8134216f1c988226a263dd644d9e"
+    },
+    "dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpointTest$PublicFixture.class": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg36990-checkpoint16-prepare-v1/test-classes/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpointTest$PublicFixture.class",
+      "sha256": "5f8556c269aaa9d496e811b074ef063d1a9be2e26ef6ab56856523506073e50d"
+    },
+    "dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpointTest$PublicRtFixture.class": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg36990-checkpoint16-prepare-v1/test-classes/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpointTest$PublicRtFixture.class",
+      "sha256": "9c02fffad94de3ccc3c5a594b1a5dd43f6881ff7f488d54b71ff127286838a87"
+    }
+  },
+  "compiled": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40374-f02-ssc461-public-checkpoint-v1/compiled-classes.json",
+    "sha256": "2ead0a11b7173dd6368dd6dd5909e78aee4370a10621941305049c24a2a39e90"
+  },
+  "actualExit": 0,
+  "wholeF02Accepted": false,
+  "whole451Accepted": false,
+  "terminalAtUTC": "2026-11-19T23:27:24.318549+00:00"
+}
