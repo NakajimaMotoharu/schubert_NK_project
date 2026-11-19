@@ -1,0 +1,89 @@
+{
+  "eventId": "PGPT-20261008-6238",
+  "source": "9baf597cb93d8b60ebee988ba35b16f948e71542",
+  "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "previousCheckpoint": "PGPT-20261008-6235",
+  "groupEvents": [
+    "PGPT-20261008-6234",
+    "PGPT-20261008-6237"
+  ],
+  "quotaAfter": {
+    "usedPercent": 52,
+    "remainingPercent": 48,
+    "resetsAt": 1795445752,
+    "windowDurationMins": 10080
+  },
+  "fullQuotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-19T20:37:36.731000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 52,
+      "remainingPercent": 48,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "kind": "WBS66_P01808_AGGREGATE_AND_SELECTION_CHECKPOINT",
+  "acceptedOriginal": 17,
+  "total": 190,
+  "coreAccepted": 0,
+  "coreTotal": 5,
+  "newFormalAcceptance": 0,
+  "officialPtTests": 1964,
+  "officialPtScopes": 53,
+  "effortRate": null,
+  "actualAllocatedPp": null,
+  "newProductTests": 0,
+  "recordedOwnedJobsInFlight": 0,
+  "ownedJobsStartedHere": 0,
+  "offlineToolTestsPassed": 4,
+  "outcomeEvidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40262-p01808-ykt2714-aggregate-contract-review-v1/manifest.json",
+      "sha256": "eac15f64aa27c57d5d83fd1bc7a79fb3bd2395db26d96137fb3564fdc6326236"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40264-p01808-offline-class-selection-scope-v1/manifest.json",
+      "sha256": "8f0c5300e03dad1d151eed294988c2cf66ab9b7d10580cd56a2e60a6a7a31685"
+    }
+  ],
+  "historicalToolScope": "HISTORICAL_AGGREGATE_ONLY_NO_MAINTAINED_ACCEPTANCE_LINK",
+  "heldF02": {
+    "wbs": "WBS-F02-a",
+    "bug": "BUG-3233",
+    "ssc": "SSC-461",
+    "owner": "Storage/Bootstrap and native FD maintainers",
+    "currentCallSites": [
+      "OwnedTransferDirectory.execute FileAlreadyExistsException",
+      "OwnedTransferDirectory.execute NoSuchFileException",
+      "OwnedTransferDirectory.execute IOException or NoSuchAlgorithmException"
+    ],
+    "requirement": "Authorized exact-scope callback/FD ownership proof and an approved migration preserving priority, identity, cleanup and callers before retiring the legacy entry. 460 documents this independent HOLD."
+  },
+  "unchangedHolds": [
+    "QA056",
+    "QA057",
+    "real Unit, Root, backup execution",
+    "full 451"
+  ],
+  "nextEvidence": [
+    {
+      "owner": "G07 evidence owner",
+      "requirement": "Keep the original tools, source pins and receipts. Future aggregate-only work requires a separately scoped fixture/receipt and must keep numeric-only historic output and independent provenance judgment."
+    },
+    {
+      "owner": "P018 native quality and release owner",
+      "requirement": "Use a versioned strict current-source reader plus separately admitted same-source byte/physical CRC/session/owner/terminal evidence. Never import counts from PG15836 or PG15838 as current PT, coverage, secret classification, or approval."
+    },
+    {
+      "owner": "PGPT quality tools owner",
+      "requirement": "The named historical branch of YKT-2714 is classified. Review separately identified maintained consumers in their admitted scope and retain other open YKT and 451 conditions."
+    },
+    {
+      "owner": "P018 current evidence owner",
+      "requirement": "Require an explicit nonempty expected class manifest when claiming per-class CRC. Session-only evidence must preserve zero per-class qualification. Require exact current-source association, admitted owner and terminal before using any real proof."
+    }
+  ]
+}

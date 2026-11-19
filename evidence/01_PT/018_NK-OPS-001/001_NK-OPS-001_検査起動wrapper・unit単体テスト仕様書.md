@@ -180,3 +180,7 @@ P016-15/2、UI234 PAGED48、UI236 §3.3、SS323、YKT-2328 site34。DATA 48、1�
 ### PT-OPS-EXEC-MUTF-001〜004 独立JaCoCo読取工具
 
 WBS-P018-08.03/2・SS354／451・BUG-3354。対象 jacoco_readonly_exec_subset.decode。001はJava writeUTFのNUL・1/2/3 byte境界・単体surrogateとpairを含む固定20-byte列をsession／非選択classへ与え、元bytes・選択XのCRCとprobe・2件のrecordを照合。002は空欄を同形式で保持。003／004は不正9パターンを各文字欄へ挿入し固定ValueErrorを期待。実sourceとcommand、前後出力、独立JDKの合成全65,536 code unitのhashはPG40256／40258／40260 manifest。製品coverageは未測定。
+
+### PT-OPS-EXEC-SCOPE-001〜004 選択class証明の範囲
+
+P018-08.03/2・SS354／451。ツール jacoco_readonly_exec_subset.decode。独立0x1007固定hex、classを要求しないsessionだけと対象外class付き、二件の明示classと別CRC/probe、片方欠落と同prefixの別classを入力。空選択はclass結果0、複数は指定二件だけ、部分一致は固定ValueError。期待は固定hexのrecord・bitsで定義。PG40264に実command・対象hash・4/4結果。製品・実native・coverage実測なし。

@@ -1,0 +1,140 @@
+{
+  "eventId": "PGPT-20261008-6237",
+  "groupId": "PGPT-WBS66-P01808-STRICT-SESSION-AND-CLASS-BOUNDARY-20261120",
+  "source": "9baf597cb93d8b60ebee988ba35b16f948e71542",
+  "productionCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-19T20:37:36.731000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 52,
+      "remainingPercent": 48,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P01808-STRICT-SESSION-AND-CLASS-BOUNDARY-20261120",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "PGPT-WBS66-P01808-STRICT-SESSION-AND-CLASS-BOUNDARY-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P018-08.03"
+    ],
+    "managementWorkIds": [
+      "WBS-P018-08.03/2"
+    ],
+    "source": "9baf597cb93d8b60ebee988ba35b16f948e71542",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "run": "PG40264-p01808-offline-class-selection-scope-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.08,
+      "base": 0.25,
+      "high": 0.55
+    },
+    "groupCapPp": 1,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/714_P01808公開集計工具と次条件継続点.json",
+        "sha256": "ba2fe8e3aef93099b3cbaa4eedcc9010a405ef316b6f69ae1d6145162dddf3f3"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40262-p01808-ykt2714-aggregate-contract-review-v1/manifest.json",
+        "sha256": "eac15f64aa27c57d5d83fd1bc7a79fb3bd2395db26d96137fb3564fdc6326236"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40260-p01808-exec-modified-utf-independent-v1/manifest.json",
+        "sha256": "a9c9c03612f6a0972f58742a0c8e91264b164d98bafab157ca08b369c2ee9e60"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40098-p01808-exec-record-presence-v1/manifest.json",
+        "sha256": "c7de5efd6c00425490f94b6e555ed6e1bea513e5b587256f7e6047ab38eae8cb"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "Existing PG40098 covered single-target missing/name and CRC conflicts. No focused evidence for the distinction between explicitly empty selection and complete multi-target selection.",
+    "endCondition": "Four synthetic tool-only tests: empty target with session only and with class structure; two targets with distinct CRC/probes and an unselected same-prefix class; missing second target discards the partial report.",
+    "workScope": "Synthetic byte literals, existing strict tool only. No old receipt or actual stream replay, protected code execution, runtime ownership, or source qualification.",
+    "target": {
+      "path": "tools/quality/jacoco_readonly_exec_subset.py",
+      "sha256": "f0c073ee2ae166a5d2338666f27fde122b5663499ff2aa15c58225d9420b5d6d"
+    },
+    "testIds": [
+      "PT-OPS-EXEC-SCOPE-001",
+      "PT-OPS-EXEC-SCOPE-002",
+      "PT-OPS-EXEC-SCOPE-003",
+      "PT-OPS-EXEC-SCOPE-004"
+    ],
+    "quotaAfter": {
+      "usedPercent": 52,
+      "remainingPercent": 48,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "5b415daf5d60405beae1898da7fb623ce90722a0f23ced76adb37833a5d36689",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-19T20:37:36.731000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 52,
+          "remainingPercent": 48,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-19T20:36:59.568227+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 52,
+      "remainingPercent": 48,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "publicEvidence": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40264-p01808-offline-class-selection-scope-v1/manifest.json",
+        "sha256": "8f0c5300e03dad1d151eed294988c2cf66ab9b7d10580cd56a2e60a6a7a31685"
+      }
+    ],
+    "completedSource": "9baf597cb93d8b60ebee988ba35b16f948e71542",
+    "startedAtEvent": "PGPT-20261008-6236",
+    "actualExit": 0,
+    "attempt": 1,
+    "firstVerification": {
+      "toolTestsSelected": 4,
+      "toolTestsPassed": 4
+    },
+    "attemptResult": "FOUR_OFFLINE_SCOPE_TESTS_PASS",
+    "productTests": 0,
+    "toolTests": 4,
+    "newAcceptanceCount": 0,
+    "actualBackendActions": 0,
+    "oldReceiptReexecutions": 0,
+    "replayedEarlierTests": 0
+  }
+}

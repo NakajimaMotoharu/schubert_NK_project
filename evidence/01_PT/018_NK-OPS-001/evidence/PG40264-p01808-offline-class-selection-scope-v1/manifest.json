@@ -1,0 +1,52 @@
+{
+  "actualExit": 0,
+  "source": "9baf597cb93d8b60ebee988ba35b16f948e71542",
+  "productionCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "startEvent": "PGPT-20261008-6236",
+  "command": [
+    "python3",
+    "-B",
+    "-m",
+    "unittest",
+    "-v",
+    "jacoco_readonly_exec_subset_scope_test"
+  ],
+  "environment": {
+    "PYTHONPATH": "tools/quality",
+    "python": "Python 3.14.4"
+  },
+  "testIds": {
+    "PT-OPS-EXEC-SCOPE-001": "test_empty_target_set_accepts_session_structure_without_class_evidence",
+    "PT-OPS-EXEC-SCOPE-002": "test_empty_target_set_keeps_only_count_when_class_data_exists",
+    "PT-OPS-EXEC-SCOPE-003": "test_multiple_targets_each_keep_their_own_crc_and_probes",
+    "PT-OPS-EXEC-SCOPE-004": "test_missing_second_target_rejects_partial_match_despite_shared_prefix"
+  },
+  "tool": {
+    "path": "tools/quality/jacoco_readonly_exec_subset.py",
+    "sha256": "f0c073ee2ae166a5d2338666f27fde122b5663499ff2aa15c58225d9420b5d6d"
+  },
+  "fixture": {
+    "path": "tools/quality/jacoco_readonly_exec_subset_scope_test.py",
+    "sha256": "304b215215c2e4a18df44af66695866e8746433b08e95e757b146b380c22687f"
+  },
+  "resultLog": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40264-p01808-offline-class-selection-scope-v1/unit-output.txt",
+    "sha256": "0574bc84be1b55f58356345344ff82dfe2adac02deb406fa52fc84f63cb6c5a4"
+  },
+  "cases": 4,
+  "passed": 4,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "earlierTestsReexecuted": 0,
+  "localFormatOpaqueIdentitiesOnly": true,
+  "sourceBindingAndExpectedCRCSeparate": true,
+  "productTests": 0,
+  "coverage": null,
+  "actualNativeActions": 0,
+  "oldReceiptReexecutions": 0,
+  "newFormalAcceptance": 0,
+  "startedAtUTC": "2026-11-19T20:36:59.522148+00:00",
+  "terminalAtUTC": "2026-11-19T20:36:59.568227+00:00"
+}
