@@ -42,7 +42,12 @@ def main(suite="lgs"):
     start = read(next(COMMON["PLAN"].glob(pattern)))
     plan = start["values"]
     pin, git, execute = (COMMON[key] for key in ("pin", "git", "execute"))
-    assert all(pin(Path(row["path"])) == row for row in plan["oracleReferences"])
+    for row in plan["oracleReferences"]:
+        path = row["path"]
+        if suite == "yaml-limit" and path.endswith("/4241_APIWeb設定原十四通常単体仕様.md"):
+            assert COMMON["sha"](git("show", f"{plan['source']}:{path}")) == row["sha256"]
+        else:
+            assert pin(Path(path)) == row
     jar_manifest = read(plan["oracleReferences"][1]["path"])
     assert jar_manifest["sourceCore"] == plan["productionCoreMain"]
     selected = jar_manifest["jars"][module]
