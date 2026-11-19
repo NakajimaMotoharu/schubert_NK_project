@@ -1,0 +1,106 @@
+{
+  "actualExit": 0,
+  "source": "1360953171b06a263e7c6730e6bec569b5801b31",
+  "productionCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "testId": "PT-OPS-EXEC-CRC-001",
+  "compileExit": 0,
+  "java": {
+    "path": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+    "sha256": "c324471f8b7933a3cb401eafbc35a7055443779b438a3ab928bda3867a1b8ab1"
+  },
+  "javac": {
+    "path": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+    "sha256": "2136da000c36cd6ea5e714ecf8ea7fb4e41f29c75849b6b7e62531373b91a3b1"
+  },
+  "dependencies": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+      "sha256": "ade1e0fdb4cd80d8537b57c6edb70a1360c47fdc518c20c65314517479bc4d0d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar",
+      "sha256": "ed825d10ab1399c8c0cb669e688cf0c8c82629b4c8399b58352b68e92ca10fcb"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar",
+      "sha256": "6d0abefb7cbf972ea16edb37ec14835372505063a45f976ab7ea889ed9497895"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+      "sha256": "3dfb0d5b6a106cd40b5b250e39935fbf2f927f4477546a5369a3ac609cf0506b"
+    }
+  ],
+  "tools": [
+    {
+      "path": "tools/quality/jacoco_readonly_exec_subset.py",
+      "sha256": "f0c073ee2ae166a5d2338666f27fde122b5663499ff2aa15c58225d9420b5d6d"
+    },
+    {
+      "path": "tools/quality/jacoco/UnfilteredCodeMeasurement.java",
+      "sha256": "fd632f24994b08218f6554133dc2e60db5b8e8647064af250d8c3aae0219528f"
+    }
+  ],
+  "explicitClassNames": [
+    "physicalfixture/First",
+    "physicalfixture/Second"
+  ],
+  "expectedIndependentCrc": {
+    "physicalfixture/First": "34d0aecddd09fd4b",
+    "physicalfixture/Second": "10040f0570caae2a"
+  },
+  "fixtureSourceHashes": {
+    "physicalfixture/First": "fef18d663b33e9b06716f259f4eba488362b39ed1971e50ef1f53144227bb11c",
+    "physicalfixture/Second": "dc648ad20d8200af5ef60c9d720b1f26fe0317eaa63fe7078c08813c51a0fd8b"
+  },
+  "fixtureClassHashes": {
+    "physicalfixture/First": "84c664772942acaf7212796b7343fbdf8b6563f82fc7ff724edd4279d6212267",
+    "physicalfixture/Second": "ab492b6ddfafd7ba0d530699009a2c49d586f311ac99792bc4a3e5069316c6f4"
+  },
+  "executions": [
+    {
+      "case": "two-exact",
+      "actualExit": 0,
+      "expectedExit": 0,
+      "visibleClassRows": [
+        "physicalfixture/First",
+        "physicalfixture/Second"
+      ],
+      "wholeSyntheticMeasurement": true,
+      "inputExecSha256": "feaff063fc14d76b88aa89f7a6b2cc16453537ad988a7946e5350cec46dabf6f",
+      "classIdsSeenByStrictReader": {
+        "physicalfixture/First": "34d0aecddd09fd4b",
+        "physicalfixture/Second": "10040f0570caae2a"
+      },
+      "stdoutSha256": "e02bd6a6e049a71da41535a084468fa333ac2d42963d2b5de9ba798a801ffb69",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "second-crc-mismatch",
+      "actualExit": 1,
+      "expectedExit": 1,
+      "visibleClassRows": [
+        "physicalfixture/First"
+      ],
+      "wholeSyntheticMeasurement": false,
+      "inputExecSha256": "fcfd5c49c94687b2f82083d1077bd81a651df9cc20451bdf4e3f205b2d308b1f",
+      "classIdsSeenByStrictReader": {
+        "physicalfixture/First": "34d0aecddd09fd4b",
+        "physicalfixture/Second": "10040f0570caae2b"
+      },
+      "stdoutSha256": "6d42af62c2415a4a81a06ba8b9be601eb5a8ac134a7b60da9041f6105160d0cc",
+      "stderrSha256": "1dbaf867a28ae198156e90d29784e3b2ad23e05226c3d5d3658f4f4396391619"
+    }
+  ],
+  "originalMeasurementCasesReexecuted": 0,
+  "productTests": 0,
+  "actualNativeActions": 0,
+  "codeCoverage": null,
+  "newFormalAcceptance": 0,
+  "command": "python3 -B /home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/5333_p01808_mixed_physical_crc.py",
+  "verifier": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/5333_p01808_mixed_physical_crc.py",
+    "sha256": "130bec0ed94234a398a6d667aa229606f575c33321be79c0b3150934b8bca506"
+  },
+  "startedAtUTC": "2026-11-19T21:27:56.873517+00:00",
+  "terminalAtUTC": "2026-11-19T21:27:57.609224+00:00"
+}

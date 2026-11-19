@@ -1,0 +1,120 @@
+{
+  "schema": "PGPT_STATIC_CONTRACT_REVIEW_V1",
+  "run": "PG40266-p01808-strict-physical-crc-join-review-v1",
+  "startEvent": "PGPT-20261008-6239",
+  "source": "1360953171b06a263e7c6730e6bec569b5801b31",
+  "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "owner": "P018 native evidence and PGPT quality verification maintainers",
+  "decision": "FORMAT_PHYSICAL_AND_ACCEPTANCE_STAGES_SEPARATE",
+  "originalEvidence": [
+    {
+      "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/717_P01808集計と照合範囲の継続点.json",
+      "sha256": "cc8e3e42e4f8d31d377305712bfc242ce4a665c1efe47663a17dd0e6bc9133e1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40264-p01808-offline-class-selection-scope-v1/manifest.json",
+      "sha256": "8f0c5300e03dad1d151eed294988c2cf66ab9b7d10580cd56a2e60a6a7a31685"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39868-p00405-service-db-state-lock-independent-v1/manifest.json",
+      "sha256": "5aa80f04cdef294762b856adb9acd95b1079f7105d90f0042ec6ee499b476c5d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39980-f02-current-four-production-jars-v1/manifest.json",
+      "sha256": "3a06700c504ef0f93f3edc89dab8f4197b46ff6742b3c7d56e1c17a7a09a32ba"
+    }
+  ],
+  "sourceRefs": [
+    {
+      "path": "tools/quality/jacoco_readonly_exec_subset.py",
+      "sha256": "f0c073ee2ae166a5d2338666f27fde122b5663499ff2aa15c58225d9420b5d6d"
+    },
+    {
+      "path": "tools/quality/jacoco/UnfilteredCodeMeasurement.java",
+      "sha256": "fd632f24994b08218f6554133dc2e60db5b8e8647064af250d8c3aae0219528f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/5238_p00405_jdbc_lock_independent.py",
+      "sha256": "ce36b85d2aa24e8fb831ffb177241930a27451a65d87ce658eedacc7abdcef0f"
+    },
+    {
+      "path": "tools/quality/pg17854_codefree_official_passive54_recovery_v3.py",
+      "sha256": "721cc6422a9be1a64784d01a71beea53bf122ebd1a8fe8931540db5a83b4870f"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/354_PT・IT試験観点詳細設計.md",
+      "sha256": "2707b6b3b53b87abc803626737dbdc1366eae695fdfda8ddb0c93e35ea11b2b7"
+    },
+    {
+      "path": "documents/400_PGPT/450_品質/451_Build・静的解析・coverage方針.md",
+      "sha256": "7980a204c02574b235d588e3a05ae8fb7b26ecb18313f4f000918c9135da6f4c"
+    }
+  ],
+  "qualifiedScope": {
+    "source": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "localRun": "PG39866-SERVICE-DB-STATE-LOCK-32",
+    "sameSourceBuild": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39862-service-db-state-lock-four-main-v1/manifest.json",
+      "sha256": "9433dae6e53e1d97a1b942175e930c315c118da9dea870cdffb0b26072e6a035"
+    },
+    "expectedExplicitPhysicalClasses": 9,
+    "positivePhysicalMatches": 6,
+    "notPositivePhysicalRows": 3,
+    "physicalClassSha256": {
+      "dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures": "45e370200c04a1cb4e32ba1b458548f80c3351131543ccc52e0443788c7e3264",
+      "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph": "cc8265242a1cd41cc7c77b8e12185cbc387fb583d70e1d1171ba467cb0f3d552",
+      "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission": "01866d208fa10fe0b82e5fa1be3e46a0ce254e378dd4165c965df43b6964c1c6",
+      "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource$Connector": "31add0ef102e2b6cb48fa94052688b7d6f8c67fdb21fb2de132d29c82e1e24a6",
+      "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource$StateAction": "382d6f6ec89a087bad136010343376c9de5622caf7ad83b11fdc935645bcedc1",
+      "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource": "699810d7f9354f5f6213ab2ec12a009f6050fd59f1638a66ee78f6e807ebd5be",
+      "dev/codex/schubert/nk/storage/ServiceConfigFiles$Service": "3ba3120b773b03b8627f97b7438d31744fa327262d9a9bee0a523eb91d82955d",
+      "dev/codex/schubert/nk/storage/StorageIoException$Reason": "a113bd839666ee3a4038dd3703af0cfb772282278cc6fbfe1e3cccf98286ffec",
+      "dev/codex/schubert/nk/storage/StorageIoException": "85f86d702a139f126afdd72ca8e221583db824f159351ecd9f07b15fcc569c88"
+    },
+    "actualNativeClaim": false,
+    "evidenceHashOnly": "704875f2f86b64a4158416e7a41db4b72f7023f72b4f8c8bbfae0714c4a87c8b"
+  },
+  "boundary": [
+    "Strict decode verifies one session and exact selected class names. It returns observed IDs and probe data; no expected physical CRC is passed into this decoder.",
+    "UnfilteredCodeMeasurement requires at least one explicit .class. It computes CRC on the bytes, reads the internal name from those bytes, rejects same-name/wrong-CRC and same-CRC/wrong-name, and separately checks probe layout. Its class records can report missing execution.",
+    "The PG39868 caller freezes the nonempty nine-path list from a defined scope, checks compiled hashes and measurement names, requires true command completion before processing rows, and compares positive IDs with saved same-run session/class output. Negative/no-Code rows keep their own status.",
+    "The known empty-set consumer uses the reader output for session only and checks a separate physical metadata inventory. Zero requested class results carries zero class qualification.",
+    "PG40268 independently supplies two Java25 class files and CRC from their bytes. Late second-class mismatch emits one good first row, then exit 1. The strict reader alone reports both named records, so accepting a name match or partial rows would miss physical failure.",
+    "451 requires a source/run-bound aggregate and full independent current qualification. The provided receipts do not include same-current-source owned native capture, complete class/CRC, owner/session and terminal proof."
+  ],
+  "existingIndependentCases": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38254-p01808-offline-measurement-evidence-v1/manifest.json",
+    "sha256": "273c49de6b2d0bb94c3cb7553691804ad8349b27cffa992b181b5bbf8e1df963"
+  },
+  "measurementCompatibility": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38642-f03-schema-raw-line-deficits-v1/begin.json",
+      "sha256": "7f91863199af3f9ce301b3b3eeefc24ff34fb8825524669fe8469bee1ccf8786"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38642-f03-schema-raw-line-deficits-v1/manifest.json",
+      "sha256": "908e76dfc9015947bfbc1b000fb44cf720c29c4136d53ee8b69ed15771c75e28"
+    }
+  ],
+  "novelSyntheticBoundary": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40268-p01808-mixed-physical-crc-v1/manifest.json",
+    "sha256": "9b57dde3b4de179855b1219873600c03cfffd2d299c3b6f4df098fe19ec02422"
+  },
+  "nextEvidence": [
+    {
+      "owner": "P018 current source/run owner",
+      "claim": "Provide a signed or independently pinned nonempty expected physical map with byte hashes and classes. Validate exact run, ownership and truthful terminal before native consumption."
+    },
+    {
+      "owner": "Native acceptance/quality owner",
+      "claim": "Compare expected and observed names and CRCs, reject any missing required code outcome and nonzero or incomplete measurement, and keep session-only/natural no-Code records out of class coverage credit. Apply all 451 conditions."
+    }
+  ],
+  "actualNativeActions": 0,
+  "actualExecFilesOpened": 0,
+  "earlierProductOrToolTestsReexecuted": 0,
+  "newProductTests": 0,
+  "newFormalAcceptance": 0,
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-19T21:28:33.605011+00:00"
+}

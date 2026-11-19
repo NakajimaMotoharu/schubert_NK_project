@@ -1,0 +1,107 @@
+{
+  "eventId": "PGPT-20261008-6241",
+  "source": "1360953171b06a263e7c6730e6bec569b5801b31",
+  "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "previousCheckpoint": "PGPT-20261008-6238",
+  "groupEvents": [
+    "PGPT-20261008-6240"
+  ],
+  "quotaAfter": {
+    "usedPercent": 52,
+    "remainingPercent": 48,
+    "resetsAt": 1795445753,
+    "windowDurationMins": 10080
+  },
+  "fullQuotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-19T21:29:41.905000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 52,
+      "remainingPercent": 48,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "kind": "WBS66_P01808_PHYSICAL_CRC_AND_NEXT_CHECKPOINT",
+  "acceptedOriginal": 17,
+  "total": 190,
+  "coreAccepted": 0,
+  "coreTotal": 5,
+  "newFormalAcceptance": 0,
+  "officialPtTests": 1964,
+  "officialPtScopes": 53,
+  "effortRate": null,
+  "actualAllocatedPp": null,
+  "newProductTests": 0,
+  "recordedOwnedJobsInFlight": 0,
+  "ownedJobsStartedHere": 0,
+  "rawLocalScope": {
+    "source": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "localRun": "PG39866-SERVICE-DB-STATE-LOCK-32",
+    "sameSourceBuild": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39862-service-db-state-lock-four-main-v1/manifest.json",
+      "sha256": "9433dae6e53e1d97a1b942175e930c315c118da9dea870cdffb0b26072e6a035"
+    },
+    "expectedExplicitPhysicalClasses": 9,
+    "positivePhysicalMatches": 6,
+    "notPositivePhysicalRows": 3,
+    "physicalClassSha256": {
+      "dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures": "45e370200c04a1cb4e32ba1b458548f80c3351131543ccc52e0443788c7e3264",
+      "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph": "cc8265242a1cd41cc7c77b8e12185cbc387fb583d70e1d1171ba467cb0f3d552",
+      "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission": "01866d208fa10fe0b82e5fa1be3e46a0ce254e378dd4165c965df43b6964c1c6",
+      "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource$Connector": "31add0ef102e2b6cb48fa94052688b7d6f8c67fdb21fb2de132d29c82e1e24a6",
+      "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource$StateAction": "382d6f6ec89a087bad136010343376c9de5622caf7ad83b11fdc935645bcedc1",
+      "dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource": "699810d7f9354f5f6213ab2ec12a009f6050fd59f1638a66ee78f6e807ebd5be",
+      "dev/codex/schubert/nk/storage/ServiceConfigFiles$Service": "3ba3120b773b03b8627f97b7438d31744fa327262d9a9bee0a523eb91d82955d",
+      "dev/codex/schubert/nk/storage/StorageIoException$Reason": "a113bd839666ee3a4038dd3703af0cfb772282278cc6fbfe1e3cccf98286ffec",
+      "dev/codex/schubert/nk/storage/StorageIoException": "85f86d702a139f126afdd72ca8e221583db824f159351ecd9f07b15fcc569c88"
+    },
+    "actualNativeClaim": false,
+    "evidenceHashOnly": "704875f2f86b64a4158416e7a41db4b72f7023f72b4f8c8bbfae0714c4a87c8b"
+  },
+  "outcomeEvidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40266-p01808-strict-physical-crc-join-review-v1/manifest.json",
+      "sha256": "a55fc4410915f31517d8f6e03e865f2984299fe7aca971bb8f72d463308ed2c0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40268-p01808-mixed-physical-crc-v1/manifest.json",
+      "sha256": "9b57dde3b4de179855b1219873600c03cfffd2d299c3b6f4df098fe19ec02422"
+    }
+  ],
+  "heldF02": {
+    "wbs": "WBS-F02-a",
+    "bug": "BUG-3233",
+    "ssc": "SSC-461",
+    "owner": "Storage/Bootstrap and native FD maintainers",
+    "currentCallSites": [
+      "OwnedTransferDirectory.execute FileAlreadyExistsException",
+      "OwnedTransferDirectory.execute NoSuchFileException",
+      "OwnedTransferDirectory.execute IOException or NoSuchAlgorithmException"
+    ],
+    "requirement": "Authorized exact-scope callback/FD ownership proof and an approved migration preserving priority, identity, cleanup and callers before retiring the legacy entry. 460 documents this independent HOLD."
+  },
+  "unchangedHolds": [
+    "QA056",
+    "QA057",
+    "real Unit, Root, backup execution",
+    "full 451"
+  ],
+  "nextEvidence": [
+    {
+      "owner": "P018 current source/run owner",
+      "claim": "Provide a signed or independently pinned nonempty expected physical map with byte hashes and classes. Validate exact run, ownership and truthful terminal before native consumption."
+    },
+    {
+      "owner": "Native acceptance/quality owner",
+      "claim": "Compare expected and observed names and CRCs, reject any missing required code outcome and nonzero or incomplete measurement, and keep session-only/natural no-Code records out of class coverage credit. Apply all 451 conditions."
+    },
+    {
+      "owner": "P004-03 data repository owner",
+      "wbs": "WBS-P004-03/2",
+      "claim": "Compare the RunReferenceRepository memory/JDBC-port proof in PG39700 and PG38688 to the current compile PG39862. Require exact referenced physical and fixture bytes; preserve source/run and real DAO/FD holds. Do not run prior eight tests."
+    }
+  ]
+}

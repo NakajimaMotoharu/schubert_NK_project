@@ -1,0 +1,76 @@
+{
+  "eventId": "PGPT-20261008-6239",
+  "groupId": "PGPT-WBS66-P01808-PHYSICAL-CRC-ACCEPTANCE-BOUNDARY-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-19T21:25:56.068000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 52,
+      "remainingPercent": 48,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P01808-PHYSICAL-CRC-ACCEPTANCE-BOUNDARY-20261120",
+    "workCategory": "REVIEW",
+    "workDetailCategory": "PGPT-WBS66-P01808-PHYSICAL-CRC-ACCEPTANCE-BOUNDARY-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P018-08.03"
+    ],
+    "managementWorkIds": [
+      "WBS-P018-08.03/2"
+    ],
+    "source": "1360953171b06a263e7c6730e6bec569b5801b31",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "run": "PG40266-p01808-strict-physical-crc-join-review-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.5,
+      "high": 0.9
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/717_P01808集計と照合範囲の継続点.json",
+        "sha256": "cc8e3e42e4f8d31d377305712bfc242ce4a665c1efe47663a17dd0e6bc9133e1"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40264-p01808-offline-class-selection-scope-v1/manifest.json",
+        "sha256": "8f0c5300e03dad1d151eed294988c2cf66ab9b7d10580cd56a2e60a6a7a31685"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39868-p00405-service-db-state-lock-independent-v1/manifest.json",
+        "sha256": "5aa80f04cdef294762b856adb9acd95b1079f7105d90f0042ec6ee499b476c5d"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39980-f02-current-four-production-jars-v1/manifest.json",
+        "sha256": "3a06700c504ef0f93f3edc89dab8f4197b46ff6742b3c7d56e1c17a7a09a32ba"
+      }
+    ],
+    "toolReferences": [
+      {
+        "path": "tools/quality/jacoco_readonly_exec_subset.py",
+        "sha256": "f0c073ee2ae166a5d2338666f27fde122b5663499ff2aa15c58225d9420b5d6d"
+      },
+      {
+        "path": "tools/quality/jacoco/UnfilteredCodeMeasurement.java",
+        "sha256": "fd632f24994b08218f6554133dc2e60db5b8e8647064af250d8c3aae0219528f"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "717 and PG40264 separate session-only from exact class selection. Current Core has a source-bound local CRC receipt but real native proof remains held.",
+    "endCondition": "Locate where explicitly nonempty selected physical class set, actual internal name and physical CRC, and session-only zero class credit are validated. Audit actual saved source/owner scope and record missing proof. If a permitted synthetic condition lacks evidence, test that condition only.",
+    "workScope": "Public tools/published manifest metadata. Only self-owned synthetic tool fixtures if needed. No old case replay, actual exec, native, FD, DB, ownership changes or 451 escalation."
+  }
+}

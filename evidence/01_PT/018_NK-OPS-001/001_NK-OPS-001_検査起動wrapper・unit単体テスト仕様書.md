@@ -184,3 +184,7 @@ WBS-P018-08.03/2・SS354／451・BUG-3354。対象 jacoco_readonly_exec_subset.d
 ### PT-OPS-EXEC-SCOPE-001〜004 選択class証明の範囲
 
 P018-08.03/2・SS354／451。ツール jacoco_readonly_exec_subset.decode。独立0x1007固定hex、classを要求しないsessionだけと対象外class付き、二件の明示classと別CRC/probe、片方欠落と同prefixの別classを入力。空選択はclass結果0、複数は指定二件だけ、部分一致は固定ValueError。期待は固定hexのrecord・bitsで定義。PG40264に実command・対象hash・4/4結果。製品・実native・coverage実測なし。
+
+### PT-OPS-EXEC-CRC-001 複数物理classの途中不一致
+
+P018-08.03/2、SS354・451。Java25の自作インターフェース二物理だけを固定し、独立bitwise CRCで明示一覧と0x1007合成データを作る。両CRC一致なら二行・exit0、後続のみ異CRCなら厳密format読取は二名を返すが実体測定は先行一行＋固定診断・exit1。終了と全名／CRCの両条件を必要とし、部分出力に合格を付けない。PG40268に源・依存hash・実終了、PG40266に受入境界。実native・製品・旧exec再実行なし。
