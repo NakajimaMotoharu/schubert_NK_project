@@ -194,3 +194,7 @@ P018-08.03/2、SS354・451。Java25の自作インターフェース二物理だ
 SS341 §6.4・SS351 §3、PG39884元044の固定診断を保持。合成8成分は位置ごとに一値だけ変更し、両方向非同値、Mapキー不一致、同値別instanceで取得可能を独立期待とする。null／異型とは非同値、診断は固定文。PG40272に実JUnit、固定Batch JAR SHA／class CRC、静的結果と生counter。実Backup／接続なし。
 
 PT-P01810-CATALOG-044C／044D追補。各8アクセサーの固定入力と位置、128文字正例・129拒否、000／非数字schemaの固定例外、全8欠落を独立期待で確認。PG40274の初回静的失敗とPG40276の4/4、PG40278の同一exec L11／M12／C1／B8全到達。元2は同run集計に必要な再資格として記録。
+
+### PT-PRO-USER-WIRE-001〜004 管理向け二電文のUTF-8境界
+
+UI236 §4.1／6.3・SS322／323、YKT-2328 site19。UCRREQ01の65/256とUPWREQ01の13/256に独立hexを挿入。128二byteと64四byteで有効256byteを受理し、Role/Enabled、User ID/Versionを保持。各欄の不正surrogate・終端欠落・非NFCを固定診断で拒否。PG40294に対象JAR・実scope・coverage・JUnitを保存。合成値以外の認証情報、実操作なし。

@@ -17,6 +17,7 @@ SUITES = {
     "qss-nts-retest": ("687_*", "QuestionNotificationWireTest", 4, "PG40234-PROTOCOL-QSS-NTS"),
     "usr": ("692_*", "UserListReplyWireTest", 4, "PG40240-PROTOCOL-USR-REPLY"),
     "usr-retest": ("692_*", "UserListReplyWireTest", 4, "PG40242-PROTOCOL-USR-REPLY"),
+    "user-command": ("748_*", "UserCommandWireUnicodeTest", 4, "PG40292-PROTOCOL-USER-COMMAND"),
 }
 RETESTS = {
     "qss-nts-retest": ("PG40234-protocol-qss-nts-fixed-wire-retest-v1", "unit", 1),

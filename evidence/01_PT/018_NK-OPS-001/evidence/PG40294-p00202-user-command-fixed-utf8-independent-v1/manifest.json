@@ -1,0 +1,151 @@
+{
+  "actualExit": 0,
+  "source": "cf0c5f026d2a07a23dcd20669c15025002b4f0d9",
+  "productionCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "cases": {
+    "PT-PRO-USER-WIRE-001": "createAccepts128TwoByteCodePointsWithoutConsumingRoleOrEnabled",
+    "PT-PRO-USER-WIRE-002": "resetAccepts64FourByteCodePointsWithoutConsumingVersion",
+    "PT-PRO-USER-WIRE-003": "bothFieldsRejectEncodedSurrogateAndTruncationAtTheirOwnBoundary",
+    "PT-PRO-USER-WIRE-004": "bothFieldsRejectNoncanonicalButWellFormedUtf8"
+  },
+  "passed": 4,
+  "errors": 0,
+  "failed": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "scopedPhysical": {
+    "dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator": {
+      "INSTRUCTION": {
+        "missed": 1338,
+        "covered": 207
+      },
+      "BRANCH": {
+        "missed": 214,
+        "covered": 32
+      },
+      "LINE": {
+        "missed": 285,
+        "covered": 47
+      },
+      "COMPLEXITY": {
+        "missed": 153,
+        "covered": 7
+      },
+      "METHOD": {
+        "missed": 32,
+        "covered": 5
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/protocol/codec/FieldCodec": {
+      "INSTRUCTION": {
+        "missed": 283,
+        "covered": 189
+      },
+      "BRANCH": {
+        "missed": 58,
+        "covered": 26
+      },
+      "LINE": {
+        "missed": 71,
+        "covered": 48
+      },
+      "COMPLEXITY": {
+        "missed": 46,
+        "covered": 12
+      },
+      "METHOD": {
+        "missed": 7,
+        "covered": 8
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/protocol/layout/admin/PasswordResetRequestData": {
+      "INSTRUCTION": {
+        "missed": 2,
+        "covered": 88
+      },
+      "LINE": {
+        "missed": 1,
+        "covered": 17
+      },
+      "COMPLEXITY": {
+        "missed": 1,
+        "covered": 3
+      },
+      "METHOD": {
+        "missed": 1,
+        "covered": 3
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/protocol/layout/admin/UserCreateRequestData": {
+      "INSTRUCTION": {
+        "missed": 2,
+        "covered": 102
+      },
+      "LINE": {
+        "missed": 1,
+        "covered": 19
+      },
+      "COMPLEXITY": {
+        "missed": 1,
+        "covered": 3
+      },
+      "METHOD": {
+        "missed": 1,
+        "covered": 3
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "observedCrc": {
+    "dev/codex/schubert/nk/protocol/codec/FieldCodec": "15b3485e13391edf",
+    "dev/codex/schubert/nk/protocol/layout/admin/UserCreateRequestData": "1d4c664bc0d2939b",
+    "dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator": "6cdfe20cf9320f49",
+    "dev/codex/schubert/nk/protocol/layout/admin/PasswordResetRequestData": "cae58ad3de9b2f18"
+  },
+  "noEarlierTests": true,
+  "actualBackendActions": 0,
+  "newFormalAcceptance": 0,
+  "execution": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40292-p00202-user-command-fixed-utf8-v1/manifest.json",
+    "sha256": "cd03745136ce32a78b67e9560fabdfd69ae3bb17077cd5908849e34e2f42561b"
+  },
+  "xml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40292-p00202-user-command-fixed-utf8-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "a22413f4a66a7826453e315d64e15e024ad29a11be11129bf7bb13b8d53020e3"
+  },
+  "exec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40292-p00202-user-command-fixed-utf8-v1/jacoco.exec",
+    "sha256": "5c3668b054674ce921c4462677d73df2795e39ebedf1c17313081c01761e8ec8"
+  },
+  "init": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40292-p00202-user-command-fixed-utf8-v1/class-init.log.gz",
+    "sha256": "95e1a8012a27c098f3fc3a8d764f897d8735652b5e2d88882c04b680b8ad980a"
+  },
+  "canonicalInputLayouts": {
+    "UCRREQ01": {
+      "textStart": 65,
+      "textBytes": 256
+    },
+    "UPWREQ01": {
+      "textStart": 13,
+      "textBytes": 256
+    }
+  },
+  "noCredentialValueLogged": true,
+  "terminalAtUTC": "2026-11-19T21:57:23.100848+00:00"
+}

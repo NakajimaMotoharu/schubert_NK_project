@@ -1,0 +1,69 @@
+{
+  "eventId": "PGPT-20261008-6269",
+  "groupId": "PGPT-WBS66-P00202-SITE19-FIXED-UTF8-PT-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-19T21:56:15.178000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 53,
+      "remainingPercent": 47,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P00202-SITE19-FIXED-UTF8-PT-20261120",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "PGPT-WBS66-P00202-SITE19-FIXED-UTF8-PT-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P002-02"
+    ],
+    "managementWorkIds": [
+      "WBS-P002-02"
+    ],
+    "source": "d8c1b47d913817e88e8fd4d67e61b8b6e9fe6100",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "canonicalDesignSource": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "run": "PG40292-p00202-user-command-fixed-utf8-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.45,
+      "high": 0.8
+    },
+    "groupCapPp": 1.5,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/747_P00202電文前提と欄別PT継続点.json",
+        "sha256": "4669a13752addf70d2c487e9c0142aa4676f2b3ffb1d2f9cea09f3153622923c"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39980-f02-current-four-production-jars-v1/manifest.json",
+        "sha256": "3a06700c504ef0f93f3edc89dab8f4197b46ff6742b3c7d56e1c17a7a09a32ba"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40290-p00202-payload-semantic-utf8-review-v1/manifest.json",
+        "sha256": "7f5b9939fc8b4dac8ef064be4a244ebc6867de555fbb4d20121d45112c0f6d82"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "PG40290 identifies exact layout offsets and previously differentiated direct semantic PT; new on-wire tests do not touch live paths.",
+    "endCondition": "Use current PG39980 Protocol JAR with matched artifact identity. Four selected tests prove valid exact 256 bytes in 65/256 or 13/256 with adjacent fields intact, malformed surrogate and truncated byte sequence, and non-NFC. Keep earlier protocol suites unexecuted.",
+    "workScope": "Closed pure Protocol parsing of public synthetic fixed bytes only. No actual user/auth operation, credential, HMAC, API/Web/SQL, network, database or six-module qualification.",
+    "testIds": [
+      "PT-PRO-USER-WIRE-001",
+      "PT-PRO-USER-WIRE-002",
+      "PT-PRO-USER-WIRE-003",
+      "PT-PRO-USER-WIRE-004"
+    ]
+  }
+}
