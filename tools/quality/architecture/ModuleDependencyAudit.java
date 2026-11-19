@@ -140,9 +140,21 @@ public final class ModuleDependencyAudit {
   }
 
   private static boolean isController(JavaClass type) {
-    return type.getSimpleName().contains("Controller")
-        || type.isAnnotatedWith("org.springframework.stereotype.Controller")
-        || type.isAnnotatedWith("org.springframework.web.bind.annotation.RestController");
+    Set<JavaClass> visited = new HashSet<>();
+    JavaClass enclosing = type;
+    while (visited.add(enclosing)) {
+      if (enclosing.getSimpleName().contains("Controller")
+          || enclosing.isAnnotatedWith("org.springframework.stereotype.Controller")
+          || enclosing.isAnnotatedWith("org.springframework.web.bind.annotation.RestController")) {
+        return true;
+      }
+      var parent = enclosing.getEnclosingClass();
+      if (parent.isEmpty()) {
+        return false;
+      }
+      enclosing = parent.orElseThrow();
+    }
+    throw new IllegalArgumentException("cyclic enclosing class");
   }
 
   private static boolean jms(String target) {
