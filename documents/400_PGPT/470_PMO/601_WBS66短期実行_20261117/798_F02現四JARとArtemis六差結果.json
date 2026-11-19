@@ -1,0 +1,157 @@
+{
+  "eventId": "PGPT-20261008-6318",
+  "groupId": "PGPT-WBS66-F02-CURRENT-FOUR-JARS-SIX-ARTEMIS-EDGE-DELTA-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-19T23:08:38.493000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 55,
+      "remainingPercent": 45,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F02-CURRENT-FOUR-JARS-SIX-ARTEMIS-EDGE-DELTA-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F02-CURRENT-FOUR-JARS-SIX-ARTEMIS-EDGE-DELTA-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a",
+      "WBS-F02-b"
+    ],
+    "source": "e3e3d206ef6bad7ecaf5b3e37527d174cda99199",
+    "productionCoreMain": "a165978ea649ab94593d881835df759f7e118038",
+    "canonicalDesignSource": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "run": "PG40356-f02-current-four-jars-six-artemis-edges-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.2,
+      "base": 0.55,
+      "high": 1.1
+    },
+    "groupCapPp": 2.5,
+    "completedOriginalRowPricePp": 0,
+    "expectedChangedClasses": {
+      "batch": [
+        "ArtemisReadinessClient.class",
+        "ArtemisAcceptorReadinessClient.class",
+        "ArtemisManagementReadinessClient.class",
+        "ArtemisAddressSettingsReadinessClient.class",
+        "ArtemisRoleReadinessClient.class",
+        "ArtemisExpiryPurgeClient.class"
+      ]
+    },
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/796_F02Expiry早期失敗と継続点.json",
+        "sha256": "99ee20c00dec09d47334bd2c3bc9a2eba4c3d95c84e3514b63f9e13d9c3cea05"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40326-f02-current-four-jars-three-edge-delta-v1/manifest.json",
+        "sha256": "a0c4f06d31e2dc13e551bb1616fc10d219f66dc598bb06b7368cf90fd3e835d3"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40350-f02-ssc461-expiry-early-failure-v1/compiled-classes.json",
+        "sha256": "25ea456f0477291539b9d1ddec4935971bf23cdefe95377d4563382566e26b3b"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40342-f02-borrowed-catalog-independent-v1/manifest.json",
+        "sha256": "ecfdb0f1ae245b7fc707b72b1bd627c8332fc70fb121f9615399991c2f2e11c7"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40348-f02-borrowed-settings-independent-v1/manifest.json",
+        "sha256": "09d1d31296cb7529cdcca918a738720900ac6ad7e2f26b25845394476cbc1705"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40354-f02-borrowed-expiry-independent-v1/manifest.json",
+        "sha256": "8e2ba7782b7bf9d45d2fe64fe91d094b3f083431673a01bf37572fbff350df07"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39862-service-db-state-lock-four-main-v1/manifest.json",
+        "sha256": "9433dae6e53e1d97a1b942175e930c315c118da9dea870cdffb0b26072e6a035"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "Package current four on updated Core after 8 calls migrated on six Artemis classes. PG40326 is qualified old archive only; PG40350 supplies latest compile hashes.",
+    "endCondition": "Actual current JARs match all 1102 exact classes; six typed additions/removals agree with local production changes. Preserve package artifacts and marks.",
+    "workScope": "Four product artifacts and relevant public Maven model; no product PT replay, test launch, real broker, actual ownership action, API/Web body or full451.",
+    "quotaAfter": {
+      "usedPercent": 55,
+      "remainingPercent": 45,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "5dcac5f17e9097238173ab820bde3a44b0889777ea06576146272eaee1882d0e",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-19T23:08:38.493000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 55,
+          "remainingPercent": 45,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-19T23:08:13.159848+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 55,
+      "remainingPercent": 45,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6317",
+    "attempt": 1,
+    "attemptResult": "CURRENT_FOUR_ARTIFACTS_WITH_SIX_MEASURED_EDGE_DELTAS",
+    "firstValidationPassed": 4,
+    "firstValidationDenominator": 4,
+    "retries": 0,
+    "priorSuccessReruns": 0,
+    "requiredBuildRequalification": 1,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40356-f02-current-four-jars-six-artemis-edges-v1/manifest.json",
+        "sha256": "8934c21f9afab0e8967999d61543051a4c2874670a9ba97eaeaf808deb240b1d"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40358-f02-current-artemis-jars-independent-v1/manifest.json",
+        "sha256": "ba7e2e46580ccf26613fc566f0ce4228b5e86805944a643269887fa099c2867c"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "Other upper calls (45/104 migrated), Storage direct 3 and legacy JDBC edge.",
+      "API/Web actual artifacts, full static and 451, real environment contracts."
+    ]
+  }
+}

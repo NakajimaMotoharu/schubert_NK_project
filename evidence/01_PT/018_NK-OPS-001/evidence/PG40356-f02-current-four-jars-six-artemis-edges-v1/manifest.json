@@ -1,0 +1,293 @@
+{
+  "actualExit": 0,
+  "run": "PG40356-f02-current-four-jars-six-artemis-edges-v1",
+  "startEvent": "PGPT-20261008-6317",
+  "sourceCore": "a165978ea649ab94593d881835df759f7e118038",
+  "gitHead": "e3e3d206ef6bad7ecaf5b3e37527d174cda99199",
+  "inputClassCount": 1102,
+  "sourceMain": {
+    "protocol": 169,
+    "storage": 25,
+    "bootstrap": 88,
+    "batch": 200
+  },
+  "jars": {
+    "protocol": {
+      "artifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40356-f02-current-four-jars-six-artemis-edges-v1/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+        "sha256": "388740eede72546cf9b33df1b4f4f3f9936654f187655e2a65791ddcfe08c870"
+      },
+      "coordinates": {
+        "artifactId": "schubert-nk-protocol",
+        "groupId": "dev.codex.schubert",
+        "version": "0.1.0-SNAPSHOT"
+      },
+      "classes": 176,
+      "nonClassEntries": 3,
+      "crcOK": true,
+      "classMajor": 69,
+      "allClassHashesMatch": true
+    },
+    "storage": {
+      "artifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40356-f02-current-four-jars-six-artemis-edges-v1/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+        "sha256": "6be0b094e918f1879dcd48b5bf37032ceda13b2c29d6d4405f3a619fbaa61154"
+      },
+      "coordinates": {
+        "artifactId": "schubert-nk-storage",
+        "groupId": "dev.codex.schubert",
+        "version": "0.1.0-SNAPSHOT"
+      },
+      "classes": 79,
+      "nonClassEntries": 3,
+      "crcOK": true,
+      "classMajor": 69,
+      "allClassHashesMatch": true
+    },
+    "bootstrap": {
+      "artifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40356-f02-current-four-jars-six-artemis-edges-v1/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+        "sha256": "5b9232f512f8321b67173805e7c3d453d87ef5d26434f6c2b04624b78a915cc0"
+      },
+      "coordinates": {
+        "artifactId": "schubert-nk-bootstrap",
+        "groupId": "dev.codex.schubert",
+        "version": "0.1.0-SNAPSHOT"
+      },
+      "classes": 201,
+      "nonClassEntries": 3,
+      "crcOK": true,
+      "classMajor": 69,
+      "allClassHashesMatch": true
+    },
+    "batch": {
+      "artifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40356-f02-current-four-jars-six-artemis-edges-v1/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+        "sha256": "d0c36b0eaffc9dc075d2f169e4185c2c545fc9035dbf11d2d7bad5fc8f2907ea"
+      },
+      "coordinates": {
+        "artifactId": "schubert-nk-batch",
+        "groupId": "dev.codex.schubert",
+        "version": "0.1.0-SNAPSHOT"
+      },
+      "classes": 646,
+      "nonClassEntries": 3,
+      "crcOK": true,
+      "classMajor": 69,
+      "allClassHashesMatch": true
+    }
+  },
+  "changedClassesFromOldJars": {
+    "protocol": [],
+    "storage": [],
+    "bootstrap": [],
+    "batch": [
+      "dev/codex/schubert/nk/batch/mq/ArtemisAcceptorReadinessClient.class",
+      "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient.class",
+      "dev/codex/schubert/nk/batch/mq/ArtemisExpiryPurgeClient.class",
+      "dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.class",
+      "dev/codex/schubert/nk/batch/mq/ArtemisReadinessClient.class",
+      "dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient.class"
+    ]
+  },
+  "exactMatchedCurrentCompiledClassCount": 1102,
+  "exactNewTypedEdges": {
+    "dev.codex.schubert.nk.batch.mq.ArtemisAcceptorReadinessClient": {
+      "added": [
+        "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph"
+      ],
+      "removed": [
+        "dev.codex.schubert.nk.storage.StorageIoException"
+      ],
+      "identicalCount": 27
+    },
+    "dev.codex.schubert.nk.batch.mq.ArtemisAddressSettingsReadinessClient": {
+      "added": [
+        "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph"
+      ],
+      "removed": [
+        "dev.codex.schubert.nk.storage.StorageIoException"
+      ],
+      "identicalCount": 28
+    },
+    "dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClient": {
+      "added": [
+        "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph"
+      ],
+      "removed": [
+        "dev.codex.schubert.nk.storage.StorageIoException"
+      ],
+      "identicalCount": 25
+    },
+    "dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClient": {
+      "added": [
+        "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph"
+      ],
+      "removed": [
+        "dev.codex.schubert.nk.storage.StorageIoException"
+      ],
+      "identicalCount": 44
+    },
+    "dev.codex.schubert.nk.batch.mq.ArtemisReadinessClient": {
+      "added": [
+        "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph"
+      ],
+      "removed": [
+        "dev.codex.schubert.nk.storage.StorageIoException"
+      ],
+      "identicalCount": 20
+    },
+    "dev.codex.schubert.nk.batch.mq.ArtemisRoleReadinessClient": {
+      "added": [
+        "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph"
+      ],
+      "removed": [
+        "dev.codex.schubert.nk.storage.StorageIoException"
+      ],
+      "identicalCount": 31
+    }
+  },
+  "mavenPlugin": {
+    "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/maven/plugins/maven-jar-plugin/3.4.1/maven-jar-plugin-3.4.1.jar",
+    "sha256": "25e0a5b55b872d95e3a09a5d825bc1061f5ce25ee81f147e623405d8ebedfa5f"
+  },
+  "execution": {
+    "actualExit": 0,
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+      "-o",
+      "-B",
+      "-ntp",
+      "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+      "-pl",
+      "src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-batch",
+      "org.apache.maven.plugins:maven-jar-plugin:3.4.1:jar"
+    ],
+    "beginUTC": "2026-11-19T23:08:01.343264+00:00",
+    "terminalAtUTC": "2026-11-19T23:08:03.132016+00:00",
+    "stdout": {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40356-f02-current-four-jars-six-artemis-edges-v1/jar.stdout.log.gz",
+      "sha256": "f9b26dae99f27e3508bf60e2f20a90f94e093e2ce5c95fb3858c097f637bc727"
+    },
+    "stderr": {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40356-f02-current-four-jars-six-artemis-edges-v1/jar.stderr.log.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    }
+  },
+  "stages": {
+    "compile": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-pl",
+        "src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-batch",
+        "-am",
+        "compile"
+      ],
+      "beginUTC": "2026-11-19T23:07:31.603081+00:00",
+      "terminalAtUTC": "2026-11-19T23:08:01.314470+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40356-f02-current-four-jars-six-artemis-edges-v1/compile.stdout.log.gz",
+        "sha256": "d1e6a2019d5d6dd625d076f2b2c4db02368a83f5db49564a5a00576735d1749f"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40356-f02-current-four-jars-six-artemis-edges-v1/compile.stderr.log.gz",
+        "sha256": "7097fbfb15f55c833e6de8e49ccc4ae96e0a90c2af25ebe49e5a16ff0b5e14ae"
+      }
+    },
+    "jar": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-pl",
+        "src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-batch",
+        "org.apache.maven.plugins:maven-jar-plugin:3.4.1:jar"
+      ],
+      "beginUTC": "2026-11-19T23:08:01.343264+00:00",
+      "terminalAtUTC": "2026-11-19T23:08:03.132016+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40356-f02-current-four-jars-six-artemis-edges-v1/jar.stdout.log.gz",
+        "sha256": "f9b26dae99f27e3508bf60e2f20a90f94e093e2ce5c95fb3858c097f637bc727"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40356-f02-current-four-jars-six-artemis-edges-v1/jar.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "edges-before": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/jdeps",
+        "-verbose:class",
+        "-filter:none",
+        "--ignore-missing-deps",
+        "/dev/shm/pgpt-four-jars-u5o8_2zw/old/dev/codex/schubert/nk/batch/mq/ArtemisAcceptorReadinessClient.class",
+        "/dev/shm/pgpt-four-jars-u5o8_2zw/old/dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient.class",
+        "/dev/shm/pgpt-four-jars-u5o8_2zw/old/dev/codex/schubert/nk/batch/mq/ArtemisExpiryPurgeClient.class",
+        "/dev/shm/pgpt-four-jars-u5o8_2zw/old/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.class",
+        "/dev/shm/pgpt-four-jars-u5o8_2zw/old/dev/codex/schubert/nk/batch/mq/ArtemisReadinessClient.class",
+        "/dev/shm/pgpt-four-jars-u5o8_2zw/old/dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient.class"
+      ],
+      "beginUTC": "2026-11-19T23:08:03.235932+00:00",
+      "terminalAtUTC": "2026-11-19T23:08:03.528572+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40356-f02-current-four-jars-six-artemis-edges-v1/edges-before.stdout.log.gz",
+        "sha256": "ba408899b36968a7a77f1879ca5ddfaa18b0da35e42fcb3dc37ea613be31bbff"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40356-f02-current-four-jars-six-artemis-edges-v1/edges-before.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "edges-after": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/jdeps",
+        "-verbose:class",
+        "-filter:none",
+        "--ignore-missing-deps",
+        "/dev/shm/pgpt-four-jars-u5o8_2zw/src/schubert-nk-batch/target/classes/dev/codex/schubert/nk/batch/mq/ArtemisAcceptorReadinessClient.class",
+        "/dev/shm/pgpt-four-jars-u5o8_2zw/src/schubert-nk-batch/target/classes/dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient.class",
+        "/dev/shm/pgpt-four-jars-u5o8_2zw/src/schubert-nk-batch/target/classes/dev/codex/schubert/nk/batch/mq/ArtemisExpiryPurgeClient.class",
+        "/dev/shm/pgpt-four-jars-u5o8_2zw/src/schubert-nk-batch/target/classes/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.class",
+        "/dev/shm/pgpt-four-jars-u5o8_2zw/src/schubert-nk-batch/target/classes/dev/codex/schubert/nk/batch/mq/ArtemisReadinessClient.class",
+        "/dev/shm/pgpt-four-jars-u5o8_2zw/src/schubert-nk-batch/target/classes/dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient.class"
+      ],
+      "beginUTC": "2026-11-19T23:08:03.528596+00:00",
+      "terminalAtUTC": "2026-11-19T23:08:03.795670+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40356-f02-current-four-jars-six-artemis-edges-v1/edges-after.stdout.log.gz",
+        "sha256": "518cd76c0c0aa4f501af6f9dcf47dff3a34febca92140447fab07f6036e8fa01"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40356-f02-current-four-jars-six-artemis-edges-v1/edges-after.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    }
+  },
+  "priorBuildOnly": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40350-f02-ssc461-expiry-early-failure-v1/compiled-classes.json",
+    "sha256": "25ea456f0477291539b9d1ddec4935971bf23cdefe95377d4563382566e26b3b"
+  },
+  "originalPackagedJars": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40326-f02-current-four-jars-three-edge-delta-v1/manifest.json",
+    "sha256": "a0c4f06d31e2dc13e551bb1616fc10d219f66dc598bb06b7368cf90fd3e835d3"
+  },
+  "testsExecuted": 0,
+  "actualHostActions": 0,
+  "wholeF02Accepted": false,
+  "whole451Accepted": false,
+  "untestedModules": [
+    "api",
+    "web"
+  ],
+  "terminalAtUTC": "2026-11-19T23:08:03.806823+00:00"
+}

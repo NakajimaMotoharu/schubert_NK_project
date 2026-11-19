@@ -8,6 +8,7 @@ from pathlib import Path
 import runpy
 import stat
 import subprocess
+import sys
 from zipfile import ZipFile
 
 
@@ -25,8 +26,8 @@ def read(path):
     return json.loads(Path(path).read_bytes())
 
 
-def main():
-    start = read(next(PLAN.glob("776_*")))
+def main(plan_prefix="776_*", independent_id="PG40328-f02-current-four-jars-independent-v1"):
+    start = read(next(PLAN.glob(plan_prefix)))
     job = start["values"]
     unit = EVIDENCE / job["run"] / "manifest.json"
     manifest = read(unit)
@@ -56,8 +57,8 @@ def main():
             archive_pom = f"META-INF/maven/dev.codex.schubert/schubert-nk-{name}/pom.xml"
             assert archive.read(archive_pom) == blob
         assert keep.lstat() == st
-        hashes[name] = jars_entry = dict(physical=len(classes), artifact=jar["artifact"])
-        assert jars_entry["physical"] == jar["classes"]
+        assert len(classes) == jar["classes"]
+        hashes[name] = dict(physical=len(classes), artifact=jar["artifact"])
     assert sum(r["physical"] for r in hashes.values()) == 1102
     old_scope = read(next(EVIDENCE.glob("PG40252-f02-storage-jdbc-saved-edges-v1/manifest.json")))
     assert manifest["changedClassesFromOldJars"]["storage"] == []
@@ -69,7 +70,11 @@ def main():
     actual = {name: dict(added=sorted(after[name]-before[name]), removed=sorted(before[name]-after[name]),
                          identicalCount=len(before[name] & after[name])) for name in sorted(after)}
     assert actual == manifest["exactNewTypedEdges"]
-    json_path = EVIDENCE / "PG40328-f02-current-four-jars-independent-v1" / "manifest.json"
+    expected_count = 3
+    if "expectedChangedClasses" in job:
+        expected_count = sum(map(len, job["expectedChangedClasses"].values()))
+    assert len(actual) == expected_count
+    json_path = EVIDENCE / independent_id / "manifest.json"
     json_path.parent.mkdir()
     data = dict(actualExit=0, source=manifest["gitHead"], productionCore=manifest["sourceCore"],
                 packageManifest=pin(unit), qualifiedLocalArtifacts=hashes, measuredDeltas=actual,
@@ -83,4 +88,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main(*sys.argv[1:])

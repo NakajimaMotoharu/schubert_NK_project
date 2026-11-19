@@ -9,6 +9,7 @@ import re
 import runpy
 import shutil
 import stat
+import sys
 import tarfile
 from tempfile import TemporaryDirectory
 from zipfile import ZipFile
@@ -30,9 +31,9 @@ def dependency_rows(receipt):
     return result
 
 
-def main():
+def main(plan_prefix="776_*"):
     read = UPPER["read"]
-    start = read(next(PLAN.glob("776_*")))
+    start = read(next(PLAN.glob(plan_prefix)))
     job = start["values"]
     git, pin, dump = (COMMON[name] for name in ("git", "pin", "dump"))
     assert git("rev-parse", "HEAD").decode().strip() == job["source"]
@@ -80,8 +81,11 @@ def main():
         jar_log = gzip.decompress(Path(stages["jar"]["stdout"]["path"]).read_bytes())
         assert jar_log.count(b"Building jar:") == 4 and b"BUILD SUCCESS" in jar_log
         differences = {}
-        subsequent = {"batch": ["ConfigurationGroupResolver.class", "ArtemisStartupObservation.class"],
-                      "bootstrap": ["ReleaseSignatureVerifier.class"]}
+        subsequent = job.get(
+            "expectedChangedClasses",
+            {"batch": ["ConfigurationGroupResolver.class", "ArtemisStartupObservation.class"],
+             "bootstrap": ["ReleaseSignatureVerifier.class"]},
+        )
         for name, folder in folders.items():
             artifact_name = folder.name
             archive = folder / f"target/{artifact_name}-0.1.0-SNAPSHOT.jar"
@@ -114,7 +118,7 @@ def main():
             stages[kind] = UPPER["run"](out, kind, [*common, *inputs], work, env)
             assert stages[kind]["actualExit"] == 0
         before, after = (dependency_rows(stages[k]) for k in ("edges-before", "edges-after"))
-        assert before.keys() == after.keys() and len(after) == 3
+        assert before.keys() == after.keys() and len(after) == sum(map(len, subsequent.values()))
         jdbc = "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph"
         storage = "dev.codex.schubert.nk.storage.StorageIoException"
         assert all(after[k] - before[k] == {jdbc} and before[k] - after[k] == {storage}
@@ -133,4 +137,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main(*sys.argv[1:])

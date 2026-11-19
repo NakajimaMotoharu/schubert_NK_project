@@ -1,0 +1,108 @@
+{
+  "actualExit": 0,
+  "source": "e3e3d206ef6bad7ecaf5b3e37527d174cda99199",
+  "productionCore": "a165978ea649ab94593d881835df759f7e118038",
+  "packageManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40356-f02-current-four-jars-six-artemis-edges-v1/manifest.json",
+    "sha256": "8934c21f9afab0e8967999d61543051a4c2874670a9ba97eaeaf808deb240b1d"
+  },
+  "qualifiedLocalArtifacts": {
+    "protocol": {
+      "physical": 176,
+      "artifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40356-f02-current-four-jars-six-artemis-edges-v1/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+        "sha256": "388740eede72546cf9b33df1b4f4f3f9936654f187655e2a65791ddcfe08c870"
+      }
+    },
+    "storage": {
+      "physical": 79,
+      "artifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40356-f02-current-four-jars-six-artemis-edges-v1/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+        "sha256": "6be0b094e918f1879dcd48b5bf37032ceda13b2c29d6d4405f3a619fbaa61154"
+      }
+    },
+    "bootstrap": {
+      "physical": 201,
+      "artifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40356-f02-current-four-jars-six-artemis-edges-v1/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+        "sha256": "5b9232f512f8321b67173805e7c3d453d87ef5d26434f6c2b04624b78a915cc0"
+      }
+    },
+    "batch": {
+      "physical": 646,
+      "artifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40356-f02-current-four-jars-six-artemis-edges-v1/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+        "sha256": "d0c36b0eaffc9dc075d2f169e4185c2c545fc9035dbf11d2d7bad5fc8f2907ea"
+      }
+    }
+  },
+  "measuredDeltas": {
+    "dev.codex.schubert.nk.batch.mq.ArtemisAcceptorReadinessClient": {
+      "added": [
+        "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph"
+      ],
+      "removed": [
+        "dev.codex.schubert.nk.storage.StorageIoException"
+      ],
+      "identicalCount": 27
+    },
+    "dev.codex.schubert.nk.batch.mq.ArtemisAddressSettingsReadinessClient": {
+      "added": [
+        "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph"
+      ],
+      "removed": [
+        "dev.codex.schubert.nk.storage.StorageIoException"
+      ],
+      "identicalCount": 28
+    },
+    "dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClient": {
+      "added": [
+        "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph"
+      ],
+      "removed": [
+        "dev.codex.schubert.nk.storage.StorageIoException"
+      ],
+      "identicalCount": 25
+    },
+    "dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClient": {
+      "added": [
+        "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph"
+      ],
+      "removed": [
+        "dev.codex.schubert.nk.storage.StorageIoException"
+      ],
+      "identicalCount": 44
+    },
+    "dev.codex.schubert.nk.batch.mq.ArtemisReadinessClient": {
+      "added": [
+        "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph"
+      ],
+      "removed": [
+        "dev.codex.schubert.nk.storage.StorageIoException"
+      ],
+      "identicalCount": 20
+    },
+    "dev.codex.schubert.nk.batch.mq.ArtemisRoleReadinessClient": {
+      "added": [
+        "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph"
+      ],
+      "removed": [
+        "dev.codex.schubert.nk.storage.StorageIoException"
+      ],
+      "identicalCount": 31
+    }
+  },
+  "provenPhysical": 1102,
+  "stillOpenStorageTypedViolation": [
+    {
+      "origin": "dev.codex.schubert.nk.storage.StorageIoException",
+      "target": "java.sql.SQLException",
+      "artifact": "java.sql"
+    }
+  ],
+  "noNewTests": 0,
+  "sixModuleBuild": false,
+  "wholeF02Accepted": false,
+  "whole451Accepted": false,
+  "terminalAtUTC": "2026-11-19T23:08:13.159848+00:00"
+}
