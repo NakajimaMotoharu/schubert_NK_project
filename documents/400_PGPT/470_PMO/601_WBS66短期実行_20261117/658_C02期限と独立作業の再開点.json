@@ -1,0 +1,99 @@
+{
+  "eventId": "PGPT-20261008-6179",
+  "actualExit": 0,
+  "kind": "WBS66_C02_EXISTING_SOURCE_EVIDENCE_CONTINUATION",
+  "source": "498b1262dbbb3a1077f4377286fd08080238308a",
+  "headAtCheckpoint": "498b1262dbbb3a1077f4377286fd08080238308a",
+  "originDevelopment": "498b1262dbbb3a1077f4377286fd08080238308a",
+  "productionCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "canonicalDesign": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+  "resumedFrom": {
+    "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/651_F03F02C02検証と再開点.json",
+    "sha256": "7f461b22e3dd646724efdf96397ef3126a7a2c5e0385c2326a94f951c67140b6"
+  },
+  "resumedFromEvent": "PGPT-20261008-6172",
+  "lastWorkEvent": "PGPT-20261008-6178",
+  "evidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40184-c02-api-web-timeout-existing-proof-join-v1/manifest.json",
+      "sha256": "6c862cc57c118845d63b6314c5dbef2a8d403956edf10e79447e77a85771dcc7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40186-g08-repository-shutdown-tool-trace-v1/manifest.json",
+      "sha256": "61bee913bf4ab4ea6d19fce695059201b5b032fe7426bc665e2508498c2bd7c7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40188-g07-c02-resumed-patch-only-v1/independent.json",
+      "sha256": "cf09752e4494edcf990d1d2cbf43588c40ea0f9ec30f5edc1f059bdb2b8ea0c9"
+    }
+  ],
+  "handoff": {
+    "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/602_11月25日四担当引渡し現行追補.md",
+    "sha256": "cc5ded6cbb47c06fe2aa5bd72bea5559becdd34513411d5223ff1591d11d3950"
+  },
+  "wbsC02": {
+    "textReused": {
+      "api": {
+        "startSeconds": 120,
+        "stopSeconds": 60
+      },
+      "web": {
+        "startSeconds": 120,
+        "stopSeconds": 30
+      }
+    },
+    "effectiveValuesObserved": 0,
+    "terminalReceiptsAdded": 0,
+    "existingTestsReexecuted": 0,
+    "formalAcceptance": 0
+  },
+  "formalAccepted": 17,
+  "formalDenominator": 190,
+  "formalIncrement": 0,
+  "coreAccepted": 0,
+  "coreDenominator": 5,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortCompletionRate": null,
+  "newProductTests": 0,
+  "pendingHolds": [
+    "QA-056",
+    "QA-057",
+    "QA-058",
+    "actual DB/native/Root",
+    "451"
+  ],
+  "sshAttempts": 0,
+  "systemdOperations": 0,
+  "realFileStoreTestExecuted": false,
+  "harukaExecutionSideEstablished": false,
+  "harukaRunAllocated": false,
+  "ioriUsed": false,
+  "ioriOverflowOnly": true,
+  "ownedLocalJobs": 0,
+  "preservedStashes": 7,
+  "preservedUntrackedCount": 1537,
+  "quotaReceipt": {
+    "sha256": "6a1393303fa36b6fb793fb7657082ea34b0dc321c62c028cfff46b6fea628faa",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-19T00:29:04.738000+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 49,
+        "remainingPercent": 51,
+        "resetsAt": 1795445752,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    }
+  },
+  "actualAllocatedPp": null,
+  "tokenTotals": null,
+  "originalShortPlanPp": 143.371,
+  "originalRemainingDetailBasePp": 1089.848,
+  "nextSafeCommand": "git status -sb --untracked-files=no && git rev-parse HEAD origin/dev-foundation origin/main",
+  "nextC02": "After qualified operation admission, obtain same-source boot and owner, both effective timeout fields, same-invocation true start/stop postconditions, then Caddy/Inspector/native/451.",
+  "nextGateCli": "PG40160 after authenticated haruka execution-side proof; reuse PG40162 frozen input.",
+  "pgptAllComplete": false
+}
