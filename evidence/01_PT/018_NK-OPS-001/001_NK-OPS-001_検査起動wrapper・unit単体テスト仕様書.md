@@ -153,3 +153,7 @@ SS341 SSC101、SS342、WBS-C02。現14の凍結設定を用いて固定対象8�
 ## PT-F02-ARCH-031〜037 Protocol・StorageのHTTP型依存
 
 SS311 §2、SYS-005、WBS-F02-a、BUG-3345／YKT-2711。六合成JARのfield型をArchUnit 1.4.2で調べる。031/032はProtocolのHttpRequestとHttpExchange、033/034はStorageのHttpResponseとHttpServerを各拒否。035のProtocol URI、036のStorage Path、037のAPI HttpExchangeには当違反がない。各期待は設計のHTTPモデル禁止と既存ライブラリ／管理HTTP責務から固定し、JUnit本数や製品JARへ加えない。実際の同class bytes、前後exit、各FINDINGと静的後条件を独立照合する。
+
+## PT-CHR-CMP-A02-001〜002 A02観測3件と最古だけの失効
+
+UI264 DIF-016、SS355 §8、WBS-P020-01.02、BUG-3346／YKT-2712。期待はCurrent [true,true,true]、NK [false,true,true]。001は両側で新しいsessionを誤ってfalse、002は両側で後続2件を欠落させる。いずれも独立の固定比較と拒否理由を確認。単側だけの追加失効に対する既未承認差分も保持。productionのログイン・収集元・Current baseline・許容差分は不変。
