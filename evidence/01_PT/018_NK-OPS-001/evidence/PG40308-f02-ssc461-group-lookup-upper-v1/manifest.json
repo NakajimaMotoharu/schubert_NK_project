@@ -1,0 +1,263 @@
+{
+  "source": "cfdedf39165ce5b2a50aaf1ebc884b084309ad9a",
+  "productionCore": "bd982905f83d6bec39c588ebb187870f6049fdd7",
+  "productionPrevious": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "testFixture": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolverTest.java",
+  "productionTarget": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+  "stages": {
+    "compile": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-pl",
+        "src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-batch",
+        "-am",
+        "compile"
+      ],
+      "beginUTC": "2026-11-19T22:25:23.637451+00:00",
+      "terminalAtUTC": "2026-11-19T22:25:55.030626+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40308-f02-ssc461-group-lookup-upper-v1/compile.stdout.log.gz",
+        "sha256": "04e820278f4d684aba91de94252bbb16ce41817cd9fe4e7633551f8a716f746d"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40308-f02-ssc461-group-lookup-upper-v1/compile.stderr.log.gz",
+        "sha256": "7097fbfb15f55c833e6de8e49ccc4ae96e0a90c2af25ebe49e5a16ff0b5e14ae"
+      }
+    },
+    "format": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "/dev/shm/pgpt-f02-group-lookup-hvytz0y5/src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+        "/dev/shm/pgpt-f02-group-lookup-hvytz0y5/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolverTest.java"
+      ],
+      "beginUTC": "2026-11-19T22:25:55.030643+00:00",
+      "terminalAtUTC": "2026-11-19T22:25:55.514034+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40308-f02-ssc461-group-lookup-upper-v1/format.stdout.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40308-f02-ssc461-group-lookup-upper-v1/format.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "checkstyle": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "-o",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40308-f02-ssc461-group-lookup-upper-v1/checkstyle.xml",
+        "@/dev/shm/pgpt-f02-group-lookup-hvytz0y5/static-sources.txt"
+      ],
+      "beginUTC": "2026-11-19T22:25:55.514054+00:00",
+      "terminalAtUTC": "2026-11-19T22:25:56.321984+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40308-f02-ssc461-group-lookup-upper-v1/checkstyle.stdout.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40308-f02-ssc461-group-lookup-upper-v1/checkstyle.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "abi-before": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-classpath",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39980-f02-current-four-production-jars-v1/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+        "-p",
+        "-s",
+        "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolver"
+      ],
+      "beginUTC": "2026-11-19T22:25:56.322002+00:00",
+      "terminalAtUTC": "2026-11-19T22:25:56.508655+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40308-f02-ssc461-group-lookup-upper-v1/abi-before.stdout.log.gz",
+        "sha256": "afff29dfd4ff51eb938d6e9a4fef7d57815a9c9d52c9da069486d4d25c6ec78f"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40308-f02-ssc461-group-lookup-upper-v1/abi-before.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "abi-after": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-classpath",
+        "/dev/shm/pgpt-f02-group-lookup-hvytz0y5/src/schubert-nk-batch/target/classes",
+        "-p",
+        "-s",
+        "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolver"
+      ],
+      "beginUTC": "2026-11-19T22:25:56.508689+00:00",
+      "terminalAtUTC": "2026-11-19T22:25:56.650712+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40308-f02-ssc461-group-lookup-upper-v1/abi-after.stdout.log.gz",
+        "sha256": "afff29dfd4ff51eb938d6e9a4fef7d57815a9c9d52c9da069486d4d25c6ec78f"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40308-f02-ssc461-group-lookup-upper-v1/abi-after.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "behavior-after": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-classpath",
+        "/dev/shm/pgpt-f02-group-lookup-hvytz0y5/src/schubert-nk-batch/target/classes",
+        "-p",
+        "-c",
+        "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolver"
+      ],
+      "beginUTC": "2026-11-19T22:25:56.650732+00:00",
+      "terminalAtUTC": "2026-11-19T22:25:56.841725+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40308-f02-ssc461-group-lookup-upper-v1/behavior-after.stdout.log.gz",
+        "sha256": "be4141f509f3e84472d9a110de60adf87b1f15f7792052cbe72b20edadcf68f9"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40308-f02-ssc461-group-lookup-upper-v1/behavior-after.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "testcompile": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/dev/shm/pgpt-f02-group-lookup-hvytz0y5/src/schubert-nk-protocol/target/classes:/dev/shm/pgpt-f02-group-lookup-hvytz0y5/src/schubert-nk-storage/target/classes:/dev/shm/pgpt-f02-group-lookup-hvytz0y5/src/schubert-nk-bootstrap/target/classes:/dev/shm/pgpt-f02-group-lookup-hvytz0y5/src/schubert-nk-batch/target/classes:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "-d",
+        "/dev/shm/pgpt-f02-group-lookup-hvytz0y5/selected-test",
+        "/dev/shm/pgpt-f02-group-lookup-hvytz0y5/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolverTest.java"
+      ],
+      "beginUTC": "2026-11-19T22:25:56.841760+00:00",
+      "terminalAtUTC": "2026-11-19T22:25:57.713831+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40308-f02-ssc461-group-lookup-upper-v1/testcompile.stdout.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40308-f02-ssc461-group-lookup-upper-v1/testcompile.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "unit": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Xmx256m",
+        "-Xlog:class+init=info:file=/dev/shm/pgpt-f02-group-lookup-hvytz0y5/class-init.log",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40308-f02-ssc461-group-lookup-upper-v1/jacoco.exec,sessionid=PG40308-GID,append=false",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--details=summary",
+        "--fail-if-no-tests",
+        "--class-path",
+        "/dev/shm/pgpt-f02-group-lookup-hvytz0y5/selected-test:/dev/shm/pgpt-f02-group-lookup-hvytz0y5/src/schubert-nk-protocol/target/classes:/dev/shm/pgpt-f02-group-lookup-hvytz0y5/src/schubert-nk-storage/target/classes:/dev/shm/pgpt-f02-group-lookup-hvytz0y5/src/schubert-nk-bootstrap/target/classes:/dev/shm/pgpt-f02-group-lookup-hvytz0y5/src/schubert-nk-batch/target/classes:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40308-f02-ssc461-group-lookup-upper-v1/xml",
+        "--select-method=dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest#canonicalByteBoundaries",
+        "--select-method=dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest#malformedAndNull",
+        "--select-method=dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest#ownedCommandAndExit",
+        "--select-method=dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest#timeoutInterruptAndTermination",
+        "--select-method=dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest#stdioFailureMatrix",
+        "--select-method=dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest#sourceBufferAndNoLeak",
+        "--select-method=dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest#concurrentLookup",
+        "--select-method=dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest#gid009PreservesFatalReaderFailureThroughTheJdbcEdge"
+      ],
+      "beginUTC": "2026-11-19T22:25:57.713851+00:00",
+      "terminalAtUTC": "2026-11-19T22:25:58.841340+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40308-f02-ssc461-group-lookup-upper-v1/unit.stdout.log.gz",
+        "sha256": "54fbd77e19df953cb3db6d5383b036253bc1e6a4bd83c35555e7eba1c231cc42"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40308-f02-ssc461-group-lookup-upper-v1/unit.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "coverage": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40308-f02-ssc461-group-lookup-upper-v1/jacoco.exec",
+        "--classfiles",
+        "/dev/shm/pgpt-f02-group-lookup-hvytz0y5/src/schubert-nk-batch/target/classes",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40308-f02-ssc461-group-lookup-upper-v1/coverage.xml"
+      ],
+      "beginUTC": "2026-11-19T22:25:58.841359+00:00",
+      "terminalAtUTC": "2026-11-19T22:25:59.390256+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40308-f02-ssc461-group-lookup-upper-v1/coverage.stdout.log.gz",
+        "sha256": "ad1b893a7edc710f8687067a2707ff07233568b8c9d3baf49dfa245a1226eb51"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40308-f02-ssc461-group-lookup-upper-v1/coverage.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    }
+  },
+  "frozenCommandFiles": [
+    "pom.xml",
+    "program/characterization/pom.xml",
+    "src/schubert-nk-api/pom.xml",
+    "src/schubert-nk-web/pom.xml",
+    "src/schubert-nk-protocol",
+    "src/schubert-nk-storage",
+    "src/schubert-nk-bootstrap",
+    "src/schubert-nk-batch"
+  ],
+  "selectedTests": [
+    "canonicalByteBoundaries",
+    "malformedAndNull",
+    "ownedCommandAndExit",
+    "timeoutInterruptAndTermination",
+    "stdioFailureMatrix",
+    "sourceBufferAndNoLeak",
+    "concurrentLookup",
+    "gid009PreservesFatalReaderFailureThroughTheJdbcEdge"
+  ],
+  "notRun": [
+    "nativeFactory"
+  ],
+  "namedActualHostActions": 0,
+  "compiled": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40308-f02-ssc461-group-lookup-upper-v1/compiled-classes.json",
+    "sha256": "e7de915c8af18101a5ed49e4bfcd85c40fbb363bcc6ad6575b99fe7f39abf1c9"
+  },
+  "actualExit": 0,
+  "wholeF02Accepted": false,
+  "whole451Accepted": false,
+  "terminalAtUTC": "2026-11-19T22:25:59.441271+00:00"
+}
