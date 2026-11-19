@@ -1,0 +1,289 @@
+{
+  "source": "19a9f050366e32e0cc93246e2e6ef91aeb443ec1",
+  "productionCore": "19a9f050366e32e0cc93246e2e6ef91aeb443ec1",
+  "productionPrevious": "e79dd91d5d6449b08facef1e4c73429b8a227544",
+  "testFixture": [
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisCatalogFatalBoundaryTest.java",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/TopologyQueryPortTest.java"
+  ],
+  "productionTarget": [
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisReadinessClient.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAcceptorReadinessClient.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.java"
+  ],
+  "stages": {
+    "compile": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-pl",
+        "src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-batch",
+        "-am",
+        "compile"
+      ],
+      "beginUTC": "2026-11-19T22:55:46.625872+00:00",
+      "terminalAtUTC": "2026-11-19T22:56:21.459311+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40338-f02-ssc461-borrowed-catalog-four-calls-v1/compile.stdout.log.gz",
+        "sha256": "e5151f61f7728d96c6379bd8450cd2800f0b590a9c6b7961e66a482167edc1d8"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40338-f02-ssc461-borrowed-catalog-four-calls-v1/compile.stderr.log.gz",
+        "sha256": "7097fbfb15f55c833e6de8e49ccc4ae96e0a90c2af25ebe49e5a16ff0b5e14ae"
+      }
+    },
+    "format": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "/dev/shm/pgpt-f02-group-lookup-q44cn3gp/src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisReadinessClient.java",
+        "/dev/shm/pgpt-f02-group-lookup-q44cn3gp/src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAcceptorReadinessClient.java",
+        "/dev/shm/pgpt-f02-group-lookup-q44cn3gp/src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.java",
+        "/dev/shm/pgpt-f02-group-lookup-q44cn3gp/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisCatalogFatalBoundaryTest.java",
+        "/dev/shm/pgpt-f02-group-lookup-q44cn3gp/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/TopologyQueryPortTest.java"
+      ],
+      "beginUTC": "2026-11-19T22:56:21.459328+00:00",
+      "terminalAtUTC": "2026-11-19T22:56:22.006337+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40338-f02-ssc461-borrowed-catalog-four-calls-v1/format.stdout.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40338-f02-ssc461-borrowed-catalog-four-calls-v1/format.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "checkstyle": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "-o",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40338-f02-ssc461-borrowed-catalog-four-calls-v1/checkstyle.xml",
+        "@/dev/shm/pgpt-f02-group-lookup-q44cn3gp/static-sources.txt"
+      ],
+      "beginUTC": "2026-11-19T22:56:22.006357+00:00",
+      "terminalAtUTC": "2026-11-19T22:56:22.864362+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40338-f02-ssc461-borrowed-catalog-four-calls-v1/checkstyle.stdout.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40338-f02-ssc461-borrowed-catalog-four-calls-v1/checkstyle.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "abi-before": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-classpath",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40326-f02-current-four-jars-three-edge-delta-v1/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+        "-p",
+        "-s",
+        "dev.codex.schubert.nk.batch.mq.ArtemisReadinessClient",
+        "dev.codex.schubert.nk.batch.mq.ArtemisAcceptorReadinessClient",
+        "dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClient"
+      ],
+      "beginUTC": "2026-11-19T22:56:22.864381+00:00",
+      "terminalAtUTC": "2026-11-19T22:56:23.049810+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40338-f02-ssc461-borrowed-catalog-four-calls-v1/abi-before.stdout.log.gz",
+        "sha256": "7d4c1f4eea3658038287465c63eb3c2ae068c49c8c3ef5f09da5fb3dcecef259"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40338-f02-ssc461-borrowed-catalog-four-calls-v1/abi-before.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "abi-after": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-classpath",
+        "/dev/shm/pgpt-f02-group-lookup-q44cn3gp/src/schubert-nk-batch/target/classes",
+        "-p",
+        "-s",
+        "dev.codex.schubert.nk.batch.mq.ArtemisReadinessClient",
+        "dev.codex.schubert.nk.batch.mq.ArtemisAcceptorReadinessClient",
+        "dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClient"
+      ],
+      "beginUTC": "2026-11-19T22:56:23.049842+00:00",
+      "terminalAtUTC": "2026-11-19T22:56:23.209481+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40338-f02-ssc461-borrowed-catalog-four-calls-v1/abi-after.stdout.log.gz",
+        "sha256": "7d4c1f4eea3658038287465c63eb3c2ae068c49c8c3ef5f09da5fb3dcecef259"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40338-f02-ssc461-borrowed-catalog-four-calls-v1/abi-after.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "behavior-after": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-classpath",
+        "/dev/shm/pgpt-f02-group-lookup-q44cn3gp/src/schubert-nk-batch/target/classes",
+        "-p",
+        "-c",
+        "dev.codex.schubert.nk.batch.mq.ArtemisReadinessClient",
+        "dev.codex.schubert.nk.batch.mq.ArtemisAcceptorReadinessClient",
+        "dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClient"
+      ],
+      "beginUTC": "2026-11-19T22:56:23.209506+00:00",
+      "terminalAtUTC": "2026-11-19T22:56:23.423923+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40338-f02-ssc461-borrowed-catalog-four-calls-v1/behavior-after.stdout.log.gz",
+        "sha256": "486f1c9a1737a88875803b61db0bf7ca096ddc36179e9e72f700927b6c0a3e9e"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40338-f02-ssc461-borrowed-catalog-four-calls-v1/behavior-after.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "testcompile": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/dev/shm/pgpt-f02-group-lookup-q44cn3gp/src/schubert-nk-protocol/target/classes:/dev/shm/pgpt-f02-group-lookup-q44cn3gp/src/schubert-nk-storage/target/classes:/dev/shm/pgpt-f02-group-lookup-q44cn3gp/src/schubert-nk-bootstrap/target/classes:/dev/shm/pgpt-f02-group-lookup-q44cn3gp/src/schubert-nk-batch/target/classes:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-buffer/4.1.137.Final/netty-buffer-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-common/4.1.137.Final/netty-common-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "-d",
+        "/dev/shm/pgpt-f02-group-lookup-q44cn3gp/selected-test",
+        "/dev/shm/pgpt-f02-group-lookup-q44cn3gp/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisCatalogFatalBoundaryTest.java",
+        "/dev/shm/pgpt-f02-group-lookup-q44cn3gp/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/TopologyQueryPortTest.java"
+      ],
+      "beginUTC": "2026-11-19T22:56:23.423941+00:00",
+      "terminalAtUTC": "2026-11-19T22:56:24.293465+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40338-f02-ssc461-borrowed-catalog-four-calls-v1/testcompile.stdout.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40338-f02-ssc461-borrowed-catalog-four-calls-v1/testcompile.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "unit": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Xmx256m",
+        "-Xlog:class+init=info:file=/dev/shm/pgpt-f02-group-lookup-q44cn3gp/class-init.log",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40338-f02-ssc461-borrowed-catalog-four-calls-v1/jacoco.exec,sessionid=PG40338-CATALOG,append=false",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--details=summary",
+        "--fail-if-no-tests",
+        "--class-path",
+        "/dev/shm/pgpt-f02-group-lookup-q44cn3gp/selected-test:/dev/shm/pgpt-f02-group-lookup-q44cn3gp/src/schubert-nk-protocol/target/classes:/dev/shm/pgpt-f02-group-lookup-q44cn3gp/src/schubert-nk-storage/target/classes:/dev/shm/pgpt-f02-group-lookup-q44cn3gp/src/schubert-nk-bootstrap/target/classes:/dev/shm/pgpt-f02-group-lookup-q44cn3gp/src/schubert-nk-batch/target/classes:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-buffer/4.1.137.Final/netty-buffer-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-common/4.1.137.Final/netty-common-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40338-f02-ssc461-borrowed-catalog-four-calls-v1/xml",
+        "--select-class=dev.codex.schubert.nk.batch.mq.ArtemisCatalogFatalBoundaryTest",
+        "--select-class=dev.codex.schubert.nk.batch.mq.TopologyQueryPortTest"
+      ],
+      "beginUTC": "2026-11-19T22:56:24.293482+00:00",
+      "terminalAtUTC": "2026-11-19T22:56:25.556378+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40338-f02-ssc461-borrowed-catalog-four-calls-v1/unit.stdout.log.gz",
+        "sha256": "5ea7c03ce20668c4ba300c23d8506fa9b27279178d1be678818249f4adc56d21"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40338-f02-ssc461-borrowed-catalog-four-calls-v1/unit.stderr.log.gz",
+        "sha256": "62e3a1e5b46182bdcafa6075fbbfa38535aecb94eef2b1dda0d6120f4fe0c3a0"
+      }
+    },
+    "coverage": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40338-f02-ssc461-borrowed-catalog-four-calls-v1/jacoco.exec",
+        "--classfiles",
+        "/dev/shm/pgpt-f02-group-lookup-q44cn3gp/src/schubert-nk-batch/target/classes",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40338-f02-ssc461-borrowed-catalog-four-calls-v1/coverage.xml"
+      ],
+      "beginUTC": "2026-11-19T22:56:25.556397+00:00",
+      "terminalAtUTC": "2026-11-19T22:56:26.081735+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40338-f02-ssc461-borrowed-catalog-four-calls-v1/coverage.stdout.log.gz",
+        "sha256": "6abca856f40e133315af24ee7eae50599f777fe4b9e1424424000dbbb420bd69"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40338-f02-ssc461-borrowed-catalog-four-calls-v1/coverage.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    }
+  },
+  "frozenCommandFiles": [
+    "pom.xml",
+    "program/characterization/pom.xml",
+    "src/schubert-nk-api/pom.xml",
+    "src/schubert-nk-web/pom.xml",
+    "src/schubert-nk-protocol",
+    "src/schubert-nk-storage",
+    "src/schubert-nk-bootstrap",
+    "src/schubert-nk-batch"
+  ],
+  "selectedTests": [
+    "--select-class=dev.codex.schubert.nk.batch.mq.ArtemisCatalogFatalBoundaryTest",
+    "--select-class=dev.codex.schubert.nk.batch.mq.TopologyQueryPortTest"
+  ],
+  "notRun": [],
+  "namedActualHostActions": 0,
+  "session": "PG40338-CATALOG",
+  "extraDependencies": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar",
+      "sha256": "02b43c47403dd0ef6dcd4573d0744bc6bae935edae016eb19f2d4ebb5eb33722"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar",
+      "sha256": "111cbc7a359b5597085b5328ab74c2f81dd40e7211d07bd12e6ffa83d9de99d9"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-buffer/4.1.137.Final/netty-buffer-4.1.137.Final.jar",
+      "sha256": "f474b14c7734f15e0540394cb6f39d67777b7581a42919e4ac89d253d4efd929"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-common/4.1.137.Final/netty-common-4.1.137.Final.jar",
+      "sha256": "d31926b01adcc07af86f5e27b81b6d6c115df17d366e835d1fc3f5a1924e7e52"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+      "sha256": "44508fd1576500688c790b190acdd16fec4f8c79a3e0b900afd70503cf055f55"
+    }
+  ],
+  "compiled": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40338-f02-ssc461-borrowed-catalog-four-calls-v1/compiled-classes.json",
+    "sha256": "bab6fc2c8bb0ddf50a5e3f6b8448153defba02d12a477906758369f8a25471e0"
+  },
+  "actualExit": 0,
+  "wholeF02Accepted": false,
+  "whole451Accepted": false,
+  "terminalAtUTC": "2026-11-19T22:56:26.159990+00:00"
+}

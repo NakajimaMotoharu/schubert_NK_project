@@ -51,13 +51,14 @@ def main(profile="lookup"):
         "lookup": ("cfdedf39165ce5b2a50aaf1ebc884b084309ad9a", "PG40310-f02-group-lookup-pmd-delta-v1"),
         "public-rfc": ("58c612f6a2e9e1c2a8723449d0f6625c1b48a491", "PG40316-f02-public-rfc-pmd-delta-v1"),
         "borrowed-broker": ("ee12345caecf4beb690fab1e2c8fbee26e61f710", "PG40322-f02-borrowed-broker-pmd-delta-v1"),
+        "borrowed-catalog": ("19a9f050366e32e0cc93246e2e6ef91aeb443ec1", "PG40340-f02-borrowed-catalog-pmd-delta-v1"),
     }[profile]
     assert new_source == expected
     old_source = work["source"]
-    scope = work["oracleReferences"][-2:]
+    scope = work["oracleReferences"][-5:] if profile == "borrowed-catalog" else work["oracleReferences"][-2:]
     out = STORE / out_name
     dependencies = []
-    if profile == "borrowed-broker":
+    if profile in ("borrowed-broker", "borrowed-catalog"):
         maven = read(next(STORE.glob("PG39862-*/manifest.json")))["maven"]["command"]
         repo = Path(next(part.split("=", 1)[1] for part in maven if part.startswith("-Dmaven.repo.local=")))
         dependencies = RUNNER["broker_dependencies"](work, repo)

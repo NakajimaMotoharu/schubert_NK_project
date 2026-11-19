@@ -28,6 +28,7 @@ PROFILES = {
     "lookup": ("767_*", CLASS, "batch", "PG40308-GID"),
     "public-rfc": ("770_*", RELEASE_CLASS, "bootstrap", "PG40314-PUBLIC-RFC"),
     "borrowed-broker": ("773_*", BROKER_CLASS, "batch", "PG40320-BORROWED"),
+    "borrowed-catalog": ("788_*", "", "batch", "PG40338-CATALOG"),
 }
 
 
@@ -76,22 +77,29 @@ def main(profile="lookup"):
     job = start["values"]
     git, pin = (COMMON[key] for key in ("git", "pin"))
     source = git("rev-parse", "HEAD").decode().strip()
-    core = source if profile == "public-rfc" else git("rev-parse", "HEAD^").decode().strip()
-    fixture, target = [item["path"] for item in job["oracleReferences"][-2:]]
+    catalog = profile == "borrowed-catalog"
+    core = source if profile in ("public-rfc", "borrowed-catalog") else git("rev-parse", "HEAD^").decode().strip()
+    fixtures = job["tests"] if catalog else [job["oracleReferences"][-2]["path"]]
+    targets = job["targets"] if catalog else [job["oracleReferences"][-1]["path"]]
     for meta in job["oracleReferences"]:
         path = meta["path"]
-        if path in (fixture, target) or path.endswith("/038_NK-OPS-001_Artemis起動前観測単体テスト仕様書.md"):
+        if path in [*fixtures, *targets] or path.endswith("/038_NK-OPS-001_Artemis起動前観測単体テスト仕様書.md"):
             assert COMMON["sha"](git("show", f"{job['source']}:{path}")) == meta["sha256"]
         else:
             assert pin(Path(path)) == meta
-    assert git("diff", "--name-only", job["productionCoreMain"], core, "--",
-               "src", ":(exclude)src/**/src/test/**").decode().splitlines() == [target]
+    assert sorted(git("diff", "--name-only", job["productionCoreMain"], core, "--",
+                      "src", ":(exclude)src/**/src/test/**").decode().splitlines()) == sorted(targets)
     assert not git("diff", "--name-only", core, source, "--",
                    "src", ":(exclude)src/**/src/test/**")
-    before = git("show", f"{job['source']}:{target}")
-    after = git("show", f"{core}:{target}")
-    assert after.replace(b"api.bootstrap.JdbcFailureGraph", b"storage.StorageIoException").replace(
-        b"JdbcFailureGraph.preserveFatal", b"StorageIoException.preserveFatal") == before
+    for target in targets:
+        before = git("show", f"{job['source']}:{target}")
+        after = git("show", f"{core}:{target}")
+        restored = after.replace(b"api.bootstrap.JdbcFailureGraph", b"storage.StorageIoException").replace(
+            b"JdbcFailureGraph.preserveFatal", b"StorageIoException.preserveFatal")
+        restored = restored.replace(
+            b"import dev.codex.schubert.nk.storage.StorageIoException;\nimport dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame;",
+            b"import dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame;\nimport dev.codex.schubert.nk.storage.StorageIoException;")
+        assert restored == before
 
     maven_reference = read(next(EVIDENCE.glob("PG39862-*/manifest.json")))
     old_unit = read(next(EVIDENCE.glob("PG40128-*/begin.json")))
@@ -111,14 +119,16 @@ def main(profile="lookup"):
     coverage_cli = tool("org.jacoco.cli-0.8.15-nodeps.jar")
     annotations = tool("jspecify-1.0.1.jar")
     dependencies = []
-    if profile == "borrowed-broker":
+    if profile in ("borrowed-broker", "borrowed-catalog"):
         repo = Path(next(part.split("=", 1)[1] for part in maven if part.startswith("-Dmaven.repo.local=")))
         dependencies = broker_dependencies(job, repo)
     pins = [pin(path) for path in dependencies]
     out = (EVIDENCE / job["run"]).resolve()
     out.mkdir()
+    selected_classes = [path.split("/src/test/java/")[1].removesuffix(".java").replace("/", ".")
+                        for path in fixtures]
     selected = ([f"--select-method={test_class}#{method}" for method in METHODS] if lookup
-                else [f"--select-class={test_class}"])
+                else [f"--select-class={name}" for name in selected_classes])
     paths = ["pom.xml", "program/characterization/pom.xml", "src/schubert-nk-api/pom.xml",
              "src/schubert-nk-web/pom.xml", *(f"src/schubert-nk-{module}" for module in MODULES)]
     stages = {}
@@ -137,23 +147,26 @@ def main(profile="lookup"):
         xml.mkdir()
         init = work / "class-init.log"
         sources = work / "static-sources.txt"
-        sources.write_text(str(work / target) + "\n" + str(work / fixture) + "\n")
+        source_paths = [work / path for path in [*targets, *fixtures]]
+        sources.write_text("".join(str(path) + "\n" for path in source_paths))
         checkstyle = rules["commands"]["checkstyle"][:]
         checkstyle[checkstyle.index("-o") + 1] = out / "checkstyle.xml"
         checkstyle[-1] = "@" + str(sources)
-        production = test_class.removesuffix("Test")
+        production = [path.split("/src/main/java/")[1].removesuffix(".java").replace("/", ".")
+                      for path in targets]
         old_jar = read(job["oracleReferences"][1]["path"])["jars"][output_module]["artifact"]
         assert pin(Path(old_jar["path"])) == old_jar
         javap = java.with_name("javap")
         commands = {
             "compile": maven,
-            "format": [*rules["commands"]["format"][:6], work / target, work / fixture],
+            "format": [*rules["commands"]["format"][:6], *source_paths],
             "checkstyle": checkstyle,
-            "abi-before": [javap, "-classpath", old_jar["path"], "-p", "-s", production],
-            "abi-after": [javap, "-classpath", modules[output_module], "-p", "-s", production],
-            "behavior-after": [javap, "-classpath", modules[output_module], "-p", "-c", production],
+            "abi-before": [javap, "-classpath", old_jar["path"], "-p", "-s", *production],
+            "abi-after": [javap, "-classpath", modules[output_module], "-p", "-s", *production],
+            "behavior-after": [javap, "-classpath", modules[output_module], "-p", "-c", *production],
             "testcompile": [java.with_name("javac"), "--release", "25", "-Xlint:all", "-Werror",
-                            "-proc:none", "-cp", cp, "-d", work / "selected-test", work / fixture],
+                            "-proc:none", "-cp", cp, "-d", work / "selected-test",
+                            *(work / path for path in fixtures)],
             "unit": [java, "-Xmx256m", f"-Xlog:class+init=info:file={init}",
                      f"-javaagent:{agent}=destfile={execution},sessionid={session},append=false",
                      "-jar", junit, "execute", "--disable-banner", "--details=summary", "--fail-if-no-tests",
@@ -184,9 +197,9 @@ def main(profile="lookup"):
                          physicalDelta=delta, classHashes=produced)
             if not lookup:
                 crc = runpy.run_path(str(OPS / "input/5257_p01810_broker_evidence_value_post.py"))["crc64"]
-                name = production.replace(".", "/")
+                names = [name.replace(".", "/") for name in production]
                 exact = [item for item in produced[output_module]
-                         if item == name + ".class" or item.startswith(name + "$")]
+                         if any(item == name + ".class" or item.startswith(name + "$") for name in names)]
                 facts["selectedPhysicalCrc"] = {
                     item.removesuffix(".class"): crc((modules[output_module] / item).read_bytes())
                     for item in exact
@@ -194,7 +207,9 @@ def main(profile="lookup"):
             with (out / "compiled-classes.json").open("x") as stream:
                 json.dump(facts, stream, indent=2)
     result = dict(source=source, productionCore=core, productionPrevious=job["productionCoreMain"],
-                  testFixture=fixture, productionTarget=target, stages=stages, frozenCommandFiles=paths,
+                  testFixture=fixtures if catalog else fixtures[0],
+                  productionTarget=targets if catalog else targets[0],
+                  stages=stages, frozenCommandFiles=paths,
                   selectedTests=list(METHODS) if lookup else selected,
                   notRun=["nativeFactory"] if lookup else [], namedActualHostActions=0,
                   session=session,

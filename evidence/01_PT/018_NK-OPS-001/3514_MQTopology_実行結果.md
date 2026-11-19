@@ -1,5 +1,7 @@
 # MQTopology 実行結果
 
+SSC-461追補（2026-11-20 JST）。Core `19a9f050366e32e0cc93246e2e6ef91aeb443ec1` のPG40338は既存2組11件成功、失敗／エラー／skip／未実行0。PG40340のPMD raw20→20、PG40342で三物理のABI・CRCと独立結果を確認。Topology生L52／M5／C1／B36／I247全到達。Acceptor L16/51・B0/34とManagement L15/126・B2/60は当scopeの実測。合成口のみ、実接続や全451へ加算しない。[PG40342 manifest](evidence/PG40342-f02-borrowed-catalog-independent-v1/manifest.json)
+
 2026-11-05T20:36:09.906097+09:00 / dev-foundation / Test source 4874c478e1a81ce5390a79ba09a73e9552dfb9ff / verifier source 24d9417468efd2125313894af6699ec76bb41e12 / Core Main b093不変更。
 
 PG19218全6/1classは初回真正終了0、F/E/S/aborted0。独立postはSDK method閉包欠落で原1、その後PG19228は子Python import経路設定不足で開始前1、PG19230は元runを読取検証して0。製品PTの再実行0、成功の算術加算0。全51line/5method/1class/36branchが同一execの実測100%、normal Batch全physical1/CRC/単session/全@Test/HELD四0。canonical evidence/01_PT/018_NK-OPS-001/evidence/PG19218-mq-topology-port-six-v1/manifest.json / SHA256 810adf8a31c874a459c3dd8c243ae199b9c8ce2c480f7d6b1e7c78e97a71bbab。真正command/OS終端/元XMLhash/独立safeXML/coverage/execと環境補足は同evidence。3513の6TestIDはselectedTestMethodsと一意対応。期待値は6 literal topology/14field/例外・null・別snapshot・全flag境界、productionからexpected生成なし。

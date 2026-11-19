@@ -1,5 +1,7 @@
 # MQ Topology 単体テスト仕様書
 
+SSC-461追補。既OPS-TOPO-PORT-001〜006と既MQCAT001〜005を同sourceの完全な二組として実施する。Topology／Acceptor／Managementの例外処理を共通graphへ移した後、定義済み型、元Error、割込と貸借元の順序を既存独立期待で確認。元fixtureを変更せず、実brokerとembedded suiteは個別保留。実行成果はPG40338〜342に保存。
+
 NK-OPS-001 / ArtemisReadinessClient全Source / WBS-P017-10 / MQ001002009010・SYS004/UI231251/SS311・321§4/10/13・341・342/451/822。Main b093不変更、PGレビューとPT並行、新TopologyQueryPortTest全6・OPS-TOPO-PORT-001～006（既使用0確認）。実broker付き旧Testはcompile/選択しない。
 
 六literalAddress/Queue/.q/2queryの順、存在/ANYCAST/durableと禁止flag、各field一差・欠落null/list0/2/unknownname/null要素、SDK checked固定失敗/Runtime-Error原値、全14string観測・両Map immutable・借用sessionのread-only範囲を独立goldenで確認。expectedsixnames/bit/tableをproductionprivate定数/predicateから生成しない。vendorQuery DTOは一queryの安定snapshotであり、原session/Role/OS所有の資格ではない。
