@@ -176,3 +176,7 @@ PG39980のProtocol JARを同SHA・同所有で利用し、テストから入力�
 ## PT-PRO-USR-WIRE-001〜004 USRRSP01 Usernameの固定欄
 
 P016-15/2、UI234 PAGED48、UI236 §3.3、SS323、YKT-2328 site34。DATA 48、1件のrecord 168、Username 13/64必須。001は固定NFC多byteと64 byteぴったりの補助文字・隣接Role保持。002は全spaceを必須欠落として拒否。003は不正surrogateバイト列と64 byte欄末の途中UTF-8を拒否。004は非NFC結合列を拒否。期待は固定byte・typed String・固定例外、実WebやSQL順の判定は別。PG39980凍結JARの同SHA・所有、JDK25、同source/runの範囲と未網羅を記録。
+
+### PT-OPS-EXEC-MUTF-001〜004 独立JaCoCo読取工具
+
+WBS-P018-08.03/2・SS354／451・BUG-3354。対象 jacoco_readonly_exec_subset.decode。001はJava writeUTFのNUL・1/2/3 byte境界・単体surrogateとpairを含む固定20-byte列をsession／非選択classへ与え、元bytes・選択XのCRCとprobe・2件のrecordを照合。002は空欄を同形式で保持。003／004は不正9パターンを各文字欄へ挿入し固定ValueErrorを期待。実sourceとcommand、前後出力、独立JDKの合成全65,536 code unitのhashはPG40256／40258／40260 manifest。製品coverageは未測定。

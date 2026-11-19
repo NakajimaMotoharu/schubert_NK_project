@@ -1,0 +1,110 @@
+{
+  "eventId": "PGPT-20261008-6232",
+  "source": "7e5f34d4b73d88849f5ddbead535405f5cdf10a5",
+  "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "previousCheckpoint": "PGPT-20261008-6229",
+  "groupEvents": [
+    "PGPT-20261008-6231"
+  ],
+  "quotaAfter": {
+    "usedPercent": 52,
+    "remainingPercent": 48,
+    "resetsAt": 1795445753,
+    "windowDurationMins": 10080
+  },
+  "fullQuotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-19T19:42:40.834000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 52,
+      "remainingPercent": 48,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "kind": "WBS66_EXEC_MODIFIED_UTF_AND_F02_HOLD_CHECKPOINT",
+  "acceptedOriginal": 17,
+  "total": 190,
+  "coreAccepted": 0,
+  "coreTotal": 5,
+  "newFormalAcceptance": 0,
+  "officialPtTests": 1964,
+  "officialPtScopes": 53,
+  "effortRate": null,
+  "actualAllocatedPp": null,
+  "newProductTests": 0,
+  "recordedOwnedJobsInFlight": 0,
+  "ownedJobsStartedHere": 0,
+  "heldF02": {
+    "wbs": "WBS-F02-a",
+    "bug": "BUG-3233",
+    "ssc": "SSC-461",
+    "owner": "Storage/Bootstrap and native FD maintainers",
+    "currentCallSites": [
+      "OwnedTransferDirectory.execute FileAlreadyExistsException",
+      "OwnedTransferDirectory.execute NoSuchFileException",
+      "OwnedTransferDirectory.execute IOException or NoSuchAlgorithmException"
+    ],
+    "requirement": "Authorized exact-scope callback/FD ownership proof and an approved migration preserving priority, identity, cleanup and callers before retiring the legacy entry. 460 documents this independent HOLD."
+  },
+  "modifiedUtfTool": {
+    "success": 20,
+    "priorFailure": 18,
+    "regressionMethods": 23,
+    "verifiedWriterUnits": 65536
+  },
+  "outcomeEvidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40256-p01808-exec-modified-utf-red-v1/manifest.json",
+      "sha256": "ca9ae8980748a9d08dace667aedad61f795e5b2729312f464cbef10e400598b8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40258-p01808-exec-modified-utf-green-v1/manifest.json",
+      "sha256": "c24b87906b43235adff7fbd5382da51d6083ac3ea74f1e8248c7d36f5516f307"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40260-p01808-exec-modified-utf-independent-v1/manifest.json",
+      "sha256": "a9c9c03612f6a0972f58742a0c8e91264b164d98bafab157ca08b369c2ee9e60"
+    }
+  ],
+  "priorF02Evidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40252-f02-storage-jdbc-saved-edges-preflight-v1/manifest.json",
+      "sha256": "719cd099578cf047f2ae2432d49204a7b5a9b9383b49fff209ea7cf25dec7123"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40252-f02-storage-jdbc-saved-edges-v1/manifest.json",
+      "sha256": "c07b262505a082fee7f5c75a0ec5be73d136114ea6c413e2e86f70b51d3cef79"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40254-f02-protocol-jdbc-saved-edges-v1/manifest.json",
+      "sha256": "58b44ffd81c0087b4f614169c2574cad15718b5d02eb19a7ec11e59f5437a7a5"
+    }
+  ],
+  "unchangedHolds": [
+    "QA056",
+    "QA057",
+    "real Unit, Root, backup execution",
+    "full 451"
+  ],
+  "nextEvidence": [
+    {
+      "owner": "Storage/Bootstrap and native FD maintainers",
+      "requirement": "Authorized exact-scope callback/FD ownership proof and an approved migration preserving priority, identity, cleanup and callers before retiring the legacy entry. 460 documents this independent HOLD."
+    },
+    {
+      "owner": "Native proof and operating environment maintainers",
+      "requirement": "Admitted and sealed same-source real exec source/owner/CRC/session and terminal evidence. Synthetic writer vectors do not advance these gates."
+    },
+    {
+      "owner": "Quality proof tool maintainers",
+      "requirement": "YKT-2714: verify eligibility and role of subsequent proof consumers and any use of the broader metadata classifier. Preserve historical receipts; analyze newly admitted proof scopes without replay."
+    },
+    {
+      "owner": "Build and quality maintainers",
+      "requirement": "F02/F03 six-module build/static/451 evidence and existing QA056/057 decisions remain open. Choose the next independent short-term condition."
+    }
+  ]
+}

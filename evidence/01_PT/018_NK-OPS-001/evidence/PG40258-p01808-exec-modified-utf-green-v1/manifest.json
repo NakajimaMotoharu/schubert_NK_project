@@ -1,0 +1,85 @@
+{
+  "actualExit": 0,
+  "source": "7e5f34d4b73d88849f5ddbead535405f5cdf10a5",
+  "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "previous": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40256-p01808-exec-modified-utf-red-v1/manifest.json",
+    "sha256": "ca9ae8980748a9d08dace667aedad61f795e5b2729312f464cbef10e400598b8"
+  },
+  "testIds": [
+    "PT-OPS-EXEC-MUTF-001",
+    "PT-OPS-EXEC-MUTF-002",
+    "PT-OPS-EXEC-MUTF-003",
+    "PT-OPS-EXEC-MUTF-004"
+  ],
+  "runs": {
+    "selected": {
+      "command": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "-v",
+        "jacoco_readonly_exec_subset_modified_utf_test"
+      ],
+      "actualExit": 0,
+      "cases": 4,
+      "log": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40258-p01808-exec-modified-utf-green-v1/selected.log.gz",
+        "sha256": "91faefeaf91e91da7e5dae6a9df7d3afb7116f9228cb6483e65e2efbad195874"
+      }
+    },
+    "changed-tool-regression": {
+      "command": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "-v",
+        "jacoco_readonly_exec_subset_test",
+        "jacoco_readonly_exec_subset_presence_test",
+        "jacoco_readonly_exec_subset_encoding_test"
+      ],
+      "actualExit": 0,
+      "cases": 23,
+      "log": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40258-p01808-exec-modified-utf-green-v1/changed-tool-regression.log.gz",
+        "sha256": "85ba5d34fc50ef07521d1d63162ef4643f8a9cfa6c36fcb96dc5fef3bb211cf0"
+      }
+    }
+  },
+  "files": [
+    {
+      "path": "tools/quality/jacoco_readonly_exec_subset.py",
+      "sha256": "f0c073ee2ae166a5d2338666f27fde122b5663499ff2aa15c58225d9420b5d6d"
+    },
+    {
+      "path": "tools/quality/jacoco_readonly_exec_subset_modified_utf_test.py",
+      "sha256": "6e7287887a0563df30bbeac8fd04ddf8ea7cc11d038370c443ad2fa3b72caf45"
+    },
+    {
+      "path": "tools/quality/jacoco_readonly_exec_subset_test.py",
+      "sha256": "f6659bbabdc5b002aae5a9024b684a8c3e1057070ab81229146452b27a70a65d"
+    },
+    {
+      "path": "tools/quality/jacoco_readonly_exec_subset_presence_test.py",
+      "sha256": "d95edb3bec1dd6f66a2557275da20ba2a865f05ef3503d19b9ede6b5ef1b234f"
+    },
+    {
+      "path": "tools/quality/jacoco_readonly_exec_subset_encoding_test.py",
+      "sha256": "69e387c19ec42d5a61a028042069cd79aeb5687352ca7e4ce6675e3e67ad5a0b"
+    }
+  ],
+  "newToolTests": 4,
+  "newToolVectors": 20,
+  "vectorsPassed": 20,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "syntacticCompileCount": 5,
+  "nativeOperations": 0,
+  "newProductTests": 0,
+  "productCoverage": null,
+  "newFormalAcceptance": 0,
+  "terminalAtUTC": "2026-11-19T19:41:02.973465+00:00"
+}
