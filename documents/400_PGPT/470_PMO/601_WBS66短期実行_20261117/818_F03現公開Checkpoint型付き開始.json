@@ -1,0 +1,91 @@
+{
+  "eventId": "PGPT-20261008-6338",
+  "groupId": "PGPT-WBS66-F03-CURRENT-PUBLIC-CHECKPOINT-TYPED-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-19T23:31:41.073000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 55,
+      "remainingPercent": 45,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-CURRENT-PUBLIC-CHECKPOINT-TYPED-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F03-CURRENT-PUBLIC-CHECKPOINT-TYPED-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "source": "49987abf02d3546adf434da05bbcd732f785633a",
+    "productionCoreMain": "cb1411d94a1d97aedafe1af60400aaec0ae8c8e8",
+    "canonicalDesignSource": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "run": "PG40384-f03-current-public-checkpoint-typed-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.38,
+      "high": 0.8
+    },
+    "groupCapPp": 1.4,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/817_F02現四JAR公開Checkpointと継続点.json",
+        "sha256": "68240acf0727666a747384e97f1ce920e55fe8dc135b46fdc523cc94eefbddf1"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40380-f02-current-four-jars-public-checkpoint-v1/manifest.json",
+        "sha256": "50ab463424ef12a32e3aa6f38ec38d3175876f33826e412e4371943a3a9116e2"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40374-f02-ssc461-public-checkpoint-v1/compiled-classes.json",
+        "sha256": "2ead0a11b7173dd6368dd6dd5909e78aee4370a10621941305049c24a2a39e90"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39888-f03-batch-eight-current-typed-delta-v1/begin.json",
+        "sha256": "08010a7a2bcd6f2a432d31433c487be3f17df9240a23e5fa4abb3b2ba8c81e5f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39810-f03-storage-bootstrap-whole-static-v1/begin.json",
+        "sha256": "297015371033b754eb1663c70a2e582905b1ff2859ea1f9b87f2f6dea331e25c"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39812-f03-storage-bootstrap-annotation-peer-v1/manifest.json",
+        "sha256": "21c4c0ff8d1eb8de52d379c2f43a0e352b876a4be83d42611cb18b83b38b5522"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40382-f02-public-checkpoint-jars-independent-v1/manifest.json",
+        "sha256": "353ba7026a16916c98594134394879bc690a1001680e6f0f42c759aacb273f97"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40378-f02-public-checkpoint-independent-v1/manifest.json",
+        "sha256": "a1f7cb2c470124084a9921bb19e3d7dca536ecb847fc0e689afd44f5dbb4714b"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40362-f03-current-six-artemis-typed-independent-v1/manifest.json",
+        "sha256": "8a33dcc036e3fb45c260c4d4977505698f50dd8e9d819ceafd2d4908f6964da8"
+      }
+    ],
+    "expectedChangedCount": 1,
+    "selectedClassNames": [
+      "dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint$PublicAgent.class"
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "PG40382 verified current JARs; PG40378 fixed selected physical type. Other recent typed evidence pinned by identity.",
+    "endCondition": "One changed type, exact target from compiled bytes, configured SpotBugs max/low exit zero and full local XML absence check.",
+    "workScope": "Only admitted artifacts without 53 protected peers. Do not replay tool over unchanged four-module broad scope."
+  }
+}
