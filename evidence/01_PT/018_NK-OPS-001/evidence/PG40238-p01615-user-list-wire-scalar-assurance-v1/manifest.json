@@ -1,0 +1,77 @@
+{
+  "actualExit": 0,
+  "site": 34,
+  "source": "1f5e96794d4eb768fa3b9860142542b2c29391b4",
+  "productionCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "ownedWbs": "WBS-P016-15",
+  "startEventId": "PGPT-20261008-6210",
+  "canonical": {
+    "path": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+    "commit": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "sha256": "0468f20da240ed61e056084f80e88f3b3f5d60b3afb70f23710a8320c5c653c9"
+  },
+  "proofPaths": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/UserListViewModel.java",
+      "sha256": "3ab853dea7f6e95aa94c6553180ad7d355c1af6761636dc9828a9ada969f5eb6"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/UserAdminController.java",
+      "sha256": "88412d5abb9f239a50160da79f03d88ea52f541a4c4d772dc2d2847428d5d727"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ProtectedReadWireClient.java",
+      "sha256": "908ce446ac3fe4b2b3c5c2dc3764ed9e51779805d0a967e65a45847c73ae29ec"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java",
+      "sha256": "41521248b2ad34c0d21fe00f75d9b7982fb023d9e9ae29ad6f87650b3bd559e9"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java",
+      "sha256": "bbff720fbbcdd7264e625d8d92c1530cc1fdd7e7dbd8454e7c9b947dafc67279"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java",
+      "sha256": "2285971a065af1f6b264c361659cab8fc75b2ee142005746e42c7462493224c0"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog.java",
+      "sha256": "dceefa8cc10a2a511ed716e7289cbddcff01e2f09c5da0eb98ad8aaa1ec099a6"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/admin/UserRecord.java",
+      "sha256": "5c74402ddfb935a3a7f59af52fa6758859c43d67ceedb6f0e082ad7548ba392a"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/TypedFieldValues.java",
+      "sha256": "33f49285e7a00c15bc5c0b5874d82cfe4fc7eb2d4ec60ea3e0a81170a11cbd11"
+    }
+  ],
+  "sourceCalls": [
+    "1f5e96794d4eb768fa3b9860142542b2c29391b4:src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/UserAdminController.java:565:          UserListViewModel.success(",
+    "1f5e96794d4eb768fa3b9860142542b2c29391b4:src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/UserListViewModel.java:45:  public static UserListViewModel success("
+  ],
+  "disposition": "STATICALLY_PROVEN_FOR_NORMAL_USRRSP01_WIRE_RECORDS",
+  "coverageOfCause": "Both compared usernames come from a success-response USRRSP01 record. It has a mandatory X field at 13/64, strict UTF-8 REPORT and NFC before the typed required field. Neither String can contain an unpaired surrogate on that production path.",
+  "separateBoundary": "Public DTO/model factory accepts direct Java arguments; no guarantee for invalid direct-construction inputs is being inferred. Frontend, SQL C-order and operation-authorization tests remain separate.",
+  "nextEvidence": "Protocol-only independent USRRSP01 record fixture for exact username positions if needed, then the permitted Web and SQL sorting proof with responsible maintainers.",
+  "priorProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26328-media-ending-independent-v1/all35-current-owner-dispositions.json",
+      "sha256": "a77113d9d851a9131669686e979c5518cb156ab0007fba575f61d1043e6698e0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37654-ssc452-grammar-post-v2/manifest.json",
+      "sha256": "4aa8a332a654a74bfa127eeac3790874249f61b09273d93f32a9398868622ce2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38320-f03-ssc451452-protocol-full-module-byte-lineage-v1/manifest.json",
+      "sha256": "778f01c0fd1e2f8c35dcf110463a8014f4e59e0cfae96136a4fb5960c9a6a014"
+    }
+  ],
+  "productTests": 0,
+  "newFormalAcceptance": 0,
+  "whole451Accepted": false,
+  "terminalAtUTC": "2026-11-19T15:33:12.223752+00:00"
+}
