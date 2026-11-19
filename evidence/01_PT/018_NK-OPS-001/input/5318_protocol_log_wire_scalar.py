@@ -16,6 +16,11 @@ SUITES = {
     "qss-nts": ("687_*", "QuestionNotificationWireTest", 4, "PG40232-PROTOCOL-QSS-NTS"),
     "qss-nts-retest": ("687_*", "QuestionNotificationWireTest", 4, "PG40234-PROTOCOL-QSS-NTS"),
     "usr": ("692_*", "UserListReplyWireTest", 4, "PG40240-PROTOCOL-USR-REPLY"),
+    "usr-retest": ("692_*", "UserListReplyWireTest", 4, "PG40242-PROTOCOL-USR-REPLY"),
+}
+RETESTS = {
+    "qss-nts-retest": ("PG40234-protocol-qss-nts-fixed-wire-retest-v1", "unit", 1),
+    "usr-retest": ("PG40242-protocol-user-list-fixed-wire-retest-v1", "pmd", 4),
 }
 
 
@@ -60,10 +65,12 @@ def main(suite="lgs"):
     agent = tool("org.jacoco.agent-0.8.15-runtime.jar")
     cli = tool("org.jacoco.cli-0.8.15-nodeps.jar")
     annotations = tool("jspecify-1.0.1.jar")
-    run = ("PG40234-protocol-qss-nts-fixed-wire-retest-v1" if suite == "qss-nts-retest" else plan["run"])
-    if suite == "qss-nts-retest":
+    run = plan["run"]
+    if suite in RETESTS:
+        run, failed_stage, expected_exit = RETESTS[suite]
         initial = read(EVIDENCE / plan["run"] / "manifest.json")
-        assert initial["stages"]["unit"]["actualExit"] == 1 and initial["jar"] == selected["artifact"]
+        assert initial["stages"][failed_stage]["actualExit"] == expected_exit
+        assert initial["jar"] == selected["artifact"]
     out = (EVIDENCE / run).resolve()
     out.mkdir()
     with TemporaryDirectory(dir="/dev/shm", prefix="pgpt-protocol-wire-") as temp:

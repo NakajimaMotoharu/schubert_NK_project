@@ -20,6 +20,7 @@ final class UserListReplyWireTest {
   private static final int USERNAME_START = 13;
   private static final LayoutId USER_LIST = new LayoutId("USRRSP01");
   private static final String ASTRAL_HEX = "f09f9880";
+  private static final String ONE_NINE_DIGITS = "000000001";
 
   @Test
   void usr001DecodesNfcAndPreservesTheNextFieldAtThe64ByteLimit() {
@@ -57,10 +58,10 @@ final class UserListReplyWireTest {
     Arrays.fill(data, (byte) ' ');
     ascii(data, 1, "000001");
     ascii(data, 7, "050");
-    ascii(data, 10, "000000001");
+    ascii(data, 10, ONE_NINE_DIGITS);
     ascii(data, 19, "000001");
-    ascii(data, 25, "000000001");
-    ascii(data, 34, "000000001");
+    ascii(data, 25, ONE_NINE_DIGITS);
+    ascii(data, 34, ONE_NINE_DIGITS);
 
     byte[] record = new byte[168];
     Arrays.fill(record, (byte) ' ');
@@ -70,7 +71,7 @@ final class UserListReplyWireTest {
     ascii(record, 82, "ACTIVE");
     ascii(record, 124, "20260101090000000");
     ascii(record, 141, "20260101090000000");
-    ascii(record, 158, "000000001");
+    ascii(record, 158, ONE_NINE_DIGITS);
     var decoded =
         PayloadCodec.standard().decode(USER_LIST, data, List.of(record), ResultCode.SUCCESS);
     return assertInstanceOf(
