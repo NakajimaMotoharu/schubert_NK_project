@@ -8,6 +8,7 @@ import os
 from pathlib import Path
 import runpy
 import shlex
+import subprocess
 import sys
 import tarfile
 from tempfile import TemporaryDirectory
@@ -83,13 +84,13 @@ def prepare():
     assert ref(old_launch["java"]["path"]) == old_launch["java"]
     assert ref(old_launch["javac"]["path"]) == old_launch["javac"]
     fixture = HERE.with_name("5341_GateOwnedFileStoreContract.java")
-    fixture_hash = sha(git("show", f"{source}:{fixture}"))
+    object_path = fixture.resolve().relative_to(Path.cwd())
+    fixture_hash = sha(git("show", f"{source}:{object_path}"))
     test_compile = older["stages"]["test"]["command"]
     cp_end = test_compile.index("-cp") + 2
     with TemporaryDirectory(dir="/dev/shm", prefix="pgpt-char-owned-current-") as name:
         temp = Path(name)
         assert fixture_hash == ref(fixture)["sha256"]
-        import subprocess
         args = [*test_compile[:cp_end], "-proc:none", "-d", temp, fixture]
         result = subprocess.run(args, check=False, capture_output=True, timeout=30)
         assert result.returncode == 0
