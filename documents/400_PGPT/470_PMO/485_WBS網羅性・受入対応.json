@@ -1,4 +1,94 @@
 {
+  "currentG08PublicCheckpointCallsPG40388": {
+    "productionCore": "cb1411d94a1d97aedafe1af60400aaec0ae8c8e8",
+    "measuredTestSource": "cb1411d94a1d97aedafe1af60400aaec0ae8c8e8",
+    "originalOwner": "WBS-P018-08",
+    "secondaryScopes": [
+      "WBS-F02-a",
+      "WBS-F03/2-2"
+    ],
+    "design": [
+      "SS354",
+      "451",
+      "SSC-461"
+    ],
+    "bug": "BUG-3233",
+    "testExisting": 4,
+    "newProductCases": 0,
+    "migratedCalls": 3,
+    "tests": [
+      {
+        "selector": "dev.codex.schubert.nk.bootstrap.CheckpointFatalBoundaryTest#ncheckFatal001ConstructorKeepsSameErrorFromSourceAndInvocation()",
+        "testId": "NCHECK-FATAL-001",
+        "method": "FixedNativeCoverageCheckpoint$PublicAgent.<init>",
+        "purpose": "migrated call with existing independent oracle"
+      },
+      {
+        "selector": "dev.codex.schubert.nk.bootstrap.CheckpointFatalBoundaryTest#ncheckFatal002BothStringGettersKeepSameGraphErrorAndFixedNonfatal()",
+        "testId": "NCHECK-FATAL-002",
+        "method": "FixedNativeCoverageCheckpoint$PublicAgent.string",
+        "purpose": "migrated call with existing independent oracle"
+      },
+      {
+        "selector": "dev.codex.schubert.nk.bootstrap.CheckpointFatalBoundaryTest#ncheckFatal003DataGetterKeepsSameGraphErrorAndNeverRequestsReset()",
+        "testId": "NCHECK-FATAL-003",
+        "method": "FixedNativeCoverageCheckpoint$PublicAgent.executionDataWithoutReset",
+        "purpose": "migrated call with existing independent oracle"
+      },
+      {
+        "selector": "dev.codex.schubert.nk.bootstrap.CheckpointFatalBoundaryTest#ncheckClosing004FixedPointValuesEarlyConsumptionAndNormalClosing()",
+        "testId": "existing exact display name",
+        "method": "FixedNativeCoverageCheckpoint.capture",
+        "purpose": "unchanged ordering co-test"
+      }
+    ],
+    "currentProduct": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40378-f02-public-checkpoint-independent-v1/manifest.json",
+      "sha256": "a1f7cb2c470124084a9921bb19e3d7dca536ecb847fc0e689afd44f5dbb4714b"
+    },
+    "currentJar": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40382-f02-public-checkpoint-jars-independent-v1/manifest.json",
+      "sha256": "353ba7026a16916c98594134394879bc690a1001680e6f0f42c759aacb273f97"
+    },
+    "currentSpotBugs": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40386-f03-public-checkpoint-typed-independent-v1/manifest.json",
+      "sha256": "dfa70869bf6487b45cd58e525315b1daf67f2c6ba045490f57c0d135357af15c"
+    },
+    "rawCoverage": {
+      "INSTRUCTION": {
+        "covered": 92,
+        "missed": 103
+      },
+      "BRANCH": {
+        "covered": 7,
+        "missed": 15
+      },
+      "LINE": {
+        "covered": 25,
+        "missed": 19
+      },
+      "COMPLEXITY": {
+        "covered": 3,
+        "missed": 17
+      },
+      "METHOD": {
+        "covered": 3,
+        "missed": 6
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "mergedCoverageRuns": false,
+    "plannedCompletionPricePp": 0,
+    "formalAdded": 0,
+    "stillOpen": [
+      "Actual current native actor/session and full physical CRC",
+      "451",
+      "All P018-08 children and F02/F03 ending dependencies"
+    ]
+  },
   "currentQssNtsWireAndUserListTracePG40238": {
     "productionCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
     "testSource": "3a334da3dc2027eb55e2f0d7b233a5a9c68dabdd",

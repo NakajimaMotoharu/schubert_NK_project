@@ -1,0 +1,125 @@
+{
+  "actualExit": 0,
+  "source": "990d14df7dbaabbb8424873306cd5150707fdf91",
+  "productionCore": "cb1411d94a1d97aedafe1af60400aaec0ae8c8e8",
+  "startEvent": "PGPT-20261008-6341",
+  "trace": {
+    "productionCore": "cb1411d94a1d97aedafe1af60400aaec0ae8c8e8",
+    "measuredTestSource": "cb1411d94a1d97aedafe1af60400aaec0ae8c8e8",
+    "originalOwner": "WBS-P018-08",
+    "secondaryScopes": [
+      "WBS-F02-a",
+      "WBS-F03/2-2"
+    ],
+    "design": [
+      "SS354",
+      "451",
+      "SSC-461"
+    ],
+    "bug": "BUG-3233",
+    "testExisting": 4,
+    "newProductCases": 0,
+    "migratedCalls": 3,
+    "tests": [
+      {
+        "selector": "dev.codex.schubert.nk.bootstrap.CheckpointFatalBoundaryTest#ncheckFatal001ConstructorKeepsSameErrorFromSourceAndInvocation()",
+        "testId": "NCHECK-FATAL-001",
+        "method": "FixedNativeCoverageCheckpoint$PublicAgent.<init>",
+        "purpose": "migrated call with existing independent oracle"
+      },
+      {
+        "selector": "dev.codex.schubert.nk.bootstrap.CheckpointFatalBoundaryTest#ncheckFatal002BothStringGettersKeepSameGraphErrorAndFixedNonfatal()",
+        "testId": "NCHECK-FATAL-002",
+        "method": "FixedNativeCoverageCheckpoint$PublicAgent.string",
+        "purpose": "migrated call with existing independent oracle"
+      },
+      {
+        "selector": "dev.codex.schubert.nk.bootstrap.CheckpointFatalBoundaryTest#ncheckFatal003DataGetterKeepsSameGraphErrorAndNeverRequestsReset()",
+        "testId": "NCHECK-FATAL-003",
+        "method": "FixedNativeCoverageCheckpoint$PublicAgent.executionDataWithoutReset",
+        "purpose": "migrated call with existing independent oracle"
+      },
+      {
+        "selector": "dev.codex.schubert.nk.bootstrap.CheckpointFatalBoundaryTest#ncheckClosing004FixedPointValuesEarlyConsumptionAndNormalClosing()",
+        "testId": "existing exact display name",
+        "method": "FixedNativeCoverageCheckpoint.capture",
+        "purpose": "unchanged ordering co-test"
+      }
+    ],
+    "currentProduct": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40378-f02-public-checkpoint-independent-v1/manifest.json",
+      "sha256": "a1f7cb2c470124084a9921bb19e3d7dca536ecb847fc0e689afd44f5dbb4714b"
+    },
+    "currentJar": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40382-f02-public-checkpoint-jars-independent-v1/manifest.json",
+      "sha256": "353ba7026a16916c98594134394879bc690a1001680e6f0f42c759aacb273f97"
+    },
+    "currentSpotBugs": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40386-f03-public-checkpoint-typed-independent-v1/manifest.json",
+      "sha256": "dfa70869bf6487b45cd58e525315b1daf67f2c6ba045490f57c0d135357af15c"
+    },
+    "rawCoverage": {
+      "INSTRUCTION": {
+        "covered": 92,
+        "missed": 103
+      },
+      "BRANCH": {
+        "covered": 7,
+        "missed": 15
+      },
+      "LINE": {
+        "covered": 25,
+        "missed": 19
+      },
+      "COMPLEXITY": {
+        "covered": 3,
+        "missed": 17
+      },
+      "METHOD": {
+        "covered": 3,
+        "missed": 6
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "mergedCoverageRuns": false,
+    "plannedCompletionPricePp": 0,
+    "formalAdded": 0,
+    "stillOpen": [
+      "Actual current native actor/session and full physical CRC",
+      "451",
+      "All P018-08 children and F02/F03 ending dependencies"
+    ]
+  },
+  "inventoryBefore": {
+    "path": "documents/400_PGPT/470_PMO/485_WBS網羅性・受入対応.json",
+    "sha256": "c6dda3e1bfcffb966a5126a90820d12b6e2dfa6a5cf43ad0caed1eaa049aa063"
+  },
+  "inventoryAfter": {
+    "path": "documents/400_PGPT/470_PMO/485_WBS網羅性・受入対応.json",
+    "sha256": "dfb51214199424f41c70dec2a1de28ecdd274283da7df6e833fb8a5de07582ad"
+  },
+  "snapshotBefore": {
+    "path": "documents/400_PGPT/470_PMO/486_WBS現行実績.json",
+    "sha256": "8a0532cc91df30d507d172eeb460378adcf2de06aac181fa0e39260fb826af18"
+  },
+  "snapshotAfter": {
+    "path": "documents/400_PGPT/470_PMO/486_WBS現行実績.json",
+    "sha256": "a5dba8b9d8d89b1712adf2e66b1db31053b2e36cd7d2ef3b0256cc8b0a27e49e"
+  },
+  "handoffBefore": {
+    "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/760_11月25日四担当の引渡し現行差分.md",
+    "sha256": "47bd5ce81b32c34156ca60a6c37434c341f980c840be4106e76a2b38a8cee1ff"
+  },
+  "handoffAfter": {
+    "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/760_11月25日四担当の引渡し現行差分.md",
+    "sha256": "c8ebda2c7dffab80f8d6bb08883f8241bb8a6fe256e520a3290b38f0a0b00d82"
+  },
+  "testsActuallyRun": 0,
+  "mergedCoverageRuns": false,
+  "formalScopesChanged": 0,
+  "whole451Accepted": false,
+  "terminalAtUTC": "2026-11-19T23:34:25.166858+00:00"
+}
