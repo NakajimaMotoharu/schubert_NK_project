@@ -1,0 +1,137 @@
+{
+  "eventId": "PGPT-20261008-6189",
+  "groupId": "PGPT-WBS66-F02-LIBRARY-HTTP-BOUNDARY-20261119",
+  "source": "02087e045ee9cacc3a3c1b025470b4a8bc1a6b99",
+  "productionCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-19T13:26:44.818000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 50,
+      "remainingPercent": 50,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "originalRemainingDetailBasePp": 1089.848,
+    "canonicalDesignSource": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "workCategory": "IMPLEMENTATION",
+    "contextGroupId": "PGPT-WBS66-F02-LIBRARY-HTTP-BOUNDARY-20261119",
+    "workDetailCategory": "PGPT-WBS66-F02-LIBRARY-HTTP-BOUNDARY-20261119",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a"
+    ],
+    "source": "55432353e6618d0c83e7945c2cb45b4af18ea927",
+    "run": "PG40202-f02-library-http-independent-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.35,
+      "base": 0.8,
+      "high": 1.6
+    },
+    "groupCapPp": 3,
+    "completedOriginalRowPricePp": 0,
+    "testIds": [
+      "PT-F02-ARCH-031",
+      "PT-F02-ARCH-032",
+      "PT-F02-ARCH-033",
+      "PT-F02-ARCH-034",
+      "PT-F02-ARCH-035",
+      "PT-F02-ARCH-036",
+      "PT-F02-ARCH-037"
+    ],
+    "bug": "BUG-3345",
+    "ykt": "YKT-2711",
+    "workScope": "SS311 section 2. Prove JDK HTTP model fences for Protocol and Storage with seven data-only synthetic classes. Permit general URI, Storage Path, and the existing API native HTTP listener boundary. Product JARs, class initialization and all live operations excluded.",
+    "oracleReferences": [
+      {
+        "path": "tools/quality/architecture/ModuleDependencyAudit.java",
+        "sha256": "880b1e5fc43b518d2c354cfb29ed2ccaa7e1a693fc36426f04984cc45d74826d"
+      },
+      {
+        "path": "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md",
+        "sha256": "422cc9febdcb165af7ceba1c58a53c39831d0458f9c8858095fcfe099b70680f"
+      }
+    ],
+    "quotaAfter": {
+      "usedPercent": 50,
+      "remainingPercent": 50,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "ce3fd30a75d099003b5809a4fe5f8518b311ceb08593d3b5969020ca77861393",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-19T13:26:44.818000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 50,
+          "remainingPercent": 50,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-19T13:25:54.865145+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 50,
+      "remainingPercent": 50,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "completedSource": "02087e045ee9cacc3a3c1b025470b4a8bc1a6b99",
+    "publicEvidence": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40202-f02-library-http-independent-v1/manifest.json",
+        "sha256": "ee5ed964e3bbb7727e3790b14c82d0d9b8f7814e616ca2cdb3257144ebbd3956"
+      }
+    ],
+    "actualExit": 0,
+    "startedAtEvent": "PGPT-20261008-6188",
+    "newAcceptanceCount": 0,
+    "productTests": 0,
+    "actualProductJars": 0,
+    "firstVerification": {
+      "matched": 3,
+      "required": 7
+    },
+    "correctedVerification": {
+      "matched": 7,
+      "required": 7
+    },
+    "attempt": 2,
+    "attemptResult": "PASS_BOUNDED_SYNTHETIC_ARCHITECTURE",
+    "retryReasons": [
+      "Confirmed four missed F02 tool findings before repair, then verified changed tool with same fixture byte"
+    ]
+  }
+}

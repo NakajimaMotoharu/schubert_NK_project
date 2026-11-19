@@ -1,0 +1,79 @@
+{
+  "actualExit": 0,
+  "source": "02087e045ee9cacc3a3c1b025470b4a8bc1a6b99",
+  "productionCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "independentOracle": "SS311 §2 explicit test table",
+  "beforeMatched": 3,
+  "afterMatched": 7,
+  "denied": 4,
+  "permitted": 3,
+  "evidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40198-f02-library-http-before-v1/manifest.json",
+      "sha256": "d0083269ec4bafdabbb3333b18998c1f9f0ddc3bd1ea6fa4714d052a830c4aa7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40200-f02-library-http-after-v1/manifest.json",
+      "sha256": "0675e3efea144032880ce76027d0cdb0e31bd0209f8fc3445f1a57a1fadf46cc"
+    }
+  ],
+  "tests": [
+    {
+      "testId": "PT-F02-ARCH-031",
+      "origin": "dev.codex.schubert.nk.protocol.ClientRequest",
+      "target": "java.net.http.HttpRequest",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "testId": "PT-F02-ARCH-032",
+      "origin": "dev.codex.schubert.nk.protocol.ServerExchange",
+      "target": "com.sun.net.httpserver.HttpExchange",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "testId": "PT-F02-ARCH-033",
+      "origin": "dev.codex.schubert.nk.storage.ClientResponse",
+      "target": "java.net.http.HttpResponse",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "testId": "PT-F02-ARCH-034",
+      "origin": "dev.codex.schubert.nk.storage.ServerHandle",
+      "target": "com.sun.net.httpserver.HttpServer",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "testId": "PT-F02-ARCH-035",
+      "origin": "dev.codex.schubert.nk.protocol.GeneralUri",
+      "target": "java.net.URI",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-ARCH-036",
+      "origin": "dev.codex.schubert.nk.storage.DirectoryPath",
+      "target": "java.nio.file.Path",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-ARCH-037",
+      "origin": "dev.codex.schubert.nk.api.LocalListener",
+      "target": "com.sun.net.httpserver.HttpExchange",
+      "expected": false,
+      "observed": false
+    }
+  ],
+  "sameSyntheticClassHashes": 13,
+  "compileWarningsTreatedAsErrors": true,
+  "productTests": 0,
+  "productJars": 0,
+  "wholeF02Accepted": false,
+  "whole451Accepted": false,
+  "newFormalAcceptance": 0,
+  "terminalAtUTC": "2026-11-19T13:25:54.865145+00:00"
+}

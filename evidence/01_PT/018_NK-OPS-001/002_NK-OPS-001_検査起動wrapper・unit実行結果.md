@@ -109,3 +109,7 @@ PG40178は2/6、PG40180は6/6。元14設定のbyte差0、API/Webの既定継承�
 ## PT-CHR-PREFLIGHT-FS-001 haruka実FileStore（2026-11-19 JST）
 
 PG40160、JDK25.0.4、固定ホスト鍵、通常mini認証1回、同boot、専有0700。6 source、17 class一致、SSH／javac／試験／report exit0。実FreeBytes 224,683,773,952、期待PASS、実際PASS。PG40190独立 SHA-256 45d97c98185f803646ece9db54761b0a2c9a01740966154d61be8ae199101ea3。二引数正常return L2/M1/I5を当sessionで確認。正式全source/run coverageと実CHRは別。
+
+## PT-F02-ARCH-031〜037 実行結果（2026-11-19 JST）
+
+02087e045ee9cacc3a3c1b025470b4a8bc1a6b99、PG40198／40200の固定JDK25 javac、ArchUnit 1.4.2。元3/7、修正7/7。後段の監査exit 1は禁止4件を正しく拒否した期待値、許容3。Phase間の全13 class同一をPG40202で独立照合。SHA-256 ee5ed964e3bbb7727e3790b14c82d0d9b8f7814e616ca2cdb3257144ebbd3956。BUG3345／YKT2711、製品JAR・製品Coverage・全451は未測定。
