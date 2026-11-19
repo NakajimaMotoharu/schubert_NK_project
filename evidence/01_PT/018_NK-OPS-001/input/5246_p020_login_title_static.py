@@ -33,7 +33,8 @@ def main(unit_name, out_name, prior_same_main=None):
         (192,'PG40074-p020-o01-restart192-v1'),(192,'PG40075-p020-o01-restart192-v2'),
         (198,'PG40088-p020-s08-voice198-v1'),(198,'PG40089-p020-s08-voice198-v2'),
         (204,'PG40104-p020-u01-menu204-v1'),(204,'PG40105-p020-u01-menu204-v2'),(204,'PG40107-p020-u01-menu204-v3'),
-        (206,'PG40124-p020-path-contract-green206-v1'), (206,'PG40128-p020-path-contract-green206-v2')}
+        (206,'PG40124-p020-path-contract-green206-v1'), (206,'PG40128-p020-path-contract-green206-v2'),
+        (208,'PG40208-p020-a02-session-census-green208-v1')}
     assert actual['stages']['unit']['actualExit']==0
     snapshot=Path(begin['snapshot'])
     classes=Path(actual['classesDir'])

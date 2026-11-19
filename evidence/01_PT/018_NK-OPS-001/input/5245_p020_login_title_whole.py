@@ -56,6 +56,10 @@ PHASES = {
         '615_P020*', E/'PG40107-p020-u01-menu204-v3', 204, 206),
     'PG40128-p020-path-contract-green206-v2': (
         '615_P020*', E/'PG40107-p020-u01-menu204-v3', 204, 206),
+    'PG40206-p020-a02-session-census-red208-v1': (
+        '671_P020*', E/'PG40128-p020-path-contract-green206-v2', 206, 2),
+    'PG40208-p020-a02-session-census-green208-v1': (
+        '671_P020*', E/'PG40128-p020-path-contract-green206-v2', 206, 208),
 }
 TEST_PACKAGE='dev.codex.schubert.characterization.'
 JAVA_DIR=Path(TEST_PACKAGE.rstrip('.').replace('.','/'))
@@ -106,7 +110,10 @@ def main(name):
     out.mkdir()
     owned.mkdir(mode=0o700)
     snapshot=owned/'snapshot'
-    if 'path-contract-' in name:
+    a02_red = 'a02-session-census-red' in name
+    if a02_red:
+        changed_paths = {str(B/'tests/java'/JAVA_DIR/'ArtifactComparatorTest.java')}
+    elif 'path-contract-' in name:
         changed_paths = {str(B / 'tests/java' / JAVA_DIR / file)
                          for file in ('ArtifactComparatorTest.java', 'GateContractValidatorNegativeTest.java')}
         if '-green' in name:
@@ -131,16 +138,21 @@ def main(name):
     exec_file=out.resolve()/'jacoco.exec'
     agent=sdk['org.jacoco.agent-0.8.15-runtime.jar']
     init=owned/'class-init.log'
+    selectors = [("--select-class", TEST_PACKAGE+n) for n in selection]
+    if a02_red:
+        selectors = [("--select-method", TEST_PACKAGE+'ArtifactComparatorTest#'+method)
+                     for method in ('rejectsContradictoryActivityOfTheNewestSessionInBothReports',
+                                    'rejectsActivityReportsThatOmitBothNewerSessions')]
     unit=[str(JDK/'java'),'-Xmx1g','-Djava.awt.headless=true','-Duser.language=ja','-Duser.country=JP',
           '-Duser.timezone=Asia/Tokyo','-Dchr.unitProjectRoot='+str(snapshot),'-Djava.io.tmpdir='+str(temp),
           '-Xlog:class+init=info:file='+str(init),f'-javaagent:{agent}=destfile={exec_file},sessionid={session},append=false',
           '-jar',str(sdk['junit-platform-console-standalone-1.13.4.jar']),'execute',
           '--disable-banner','--details=summary','--fail-if-no-tests','--class-path',
           f'{main_classes}:{tests}:{snapshot/B/"tests/resources"}:{cp}','--reports-dir',str(xml.resolve()),
-          *(piece for n in selection for piece in ('--select-class',TEST_PACKAGE+n)),
+          *(piece for pair in selectors for piece in pair),
           '--config=junit.jupiter.execution.parallel.enabled=false']
     save(out/'begin.json',dict(groupStart=plan['eventId'],source=source,snapshot=str(snapshot),expected=expected,
-        exactScope=selection,sourceInputsUnchangedOutside=sorted(changed_paths),inputHashes=inputs,session=session,
+        exactScope=selection,selectors=selectors,sourceInputsUnchangedOutside=sorted(changed_paths),inputHashes=inputs,session=session,
         tools=previous['tools'],jdk=previous['jdk'],javaC=ref(JDK/'javac'),original=ref(previous_run/'manifest.json'),backendActions=0,
         startedAtUTC=R['utc']()))
     stages={}

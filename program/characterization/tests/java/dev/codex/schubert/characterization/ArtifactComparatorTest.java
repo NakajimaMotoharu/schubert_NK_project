@@ -117,6 +117,8 @@ class ArtifactComparatorTest {
   private static final String FIXTURE_COUNT_POINTER = "/observedActiveSessionCount";
   private static final String FIXTURE_OLDEST = "oldestSessionInvalidated";
   private static final String FIXTURE_ACTIVE = "sessionActiveOldestToNewest";
+  private static final String FIXTURE_CURRENT_SESSION_ACTIVITY = "CURRENT_SESSION_ACTIVITY";
+  private static final String FIXTURE_NK_SESSION_ACTIVITY = "NK_SESSION_ACTIVITY";
   private static final String FIXTURE_REDIRECT = "sessionRedirectsOldestToNewest";
   private static final String FIXTURE_REDIRECT_POINTER = "/sessionRedirectsOldestToNewest/0";
   private static final String FIXTURE_LIMIT = "configuredMaximumSessions";
@@ -1378,6 +1380,37 @@ class ArtifactComparatorTest {
     assertEquals(
         List.of("FIXED_DIF_REQUIRED:CHR-A02:/oldestSessionInvalidated"), result.failures());
     assertTrue(result.unregisteredDifferences().isEmpty());
+  }
+
+  @Test
+  void rejectsContradictoryActivityOfTheNewestSessionInBothReports() throws Exception {
+    Fixture fixture = fixture("a02-both-report-newest-inactive");
+    for (Path folder : List.of(fixture.current(), fixture.nk())) {
+      mutate(
+          folder.resolve(FIXTURE_CHR_A02_JSON),
+          root -> ((ArrayNode) root.path(FIXTURE_ACTIVE)).set(2, BooleanNode.FALSE));
+    }
+
+    var result = compare(fixture);
+    assertFalse(result.passed());
+    assertEquals(
+        List.of(FIXTURE_CURRENT_SESSION_ACTIVITY, FIXTURE_NK_SESSION_ACTIVITY), result.failures());
+  }
+
+  @Test
+  void rejectsActivityReportsThatOmitBothNewerSessions() throws Exception {
+    Fixture fixture = fixture("a02-both-omit-newer-sessions");
+    mutate(
+        fixture.current().resolve(FIXTURE_CHR_A02_JSON),
+        root -> root.putArray(FIXTURE_ACTIVE).add(true));
+    mutate(
+        fixture.nk().resolve(FIXTURE_CHR_A02_JSON),
+        root -> root.putArray(FIXTURE_ACTIVE).add(false));
+
+    var result = compare(fixture);
+    assertFalse(result.passed());
+    assertEquals(
+        List.of(FIXTURE_CURRENT_SESSION_ACTIVITY, FIXTURE_NK_SESSION_ACTIVITY), result.failures());
   }
 
   @Test
