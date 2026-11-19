@@ -1,0 +1,170 @@
+{
+  "eventId": "PGPT-20261008-6312",
+  "groupId": "PGPT-WBS66-F02-SSC461-BORROWED-ADDRESS-ROLE-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-19T23:01:20.980000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 55,
+      "remainingPercent": 45,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F02-SSC461-BORROWED-ADDRESS-ROLE-20261120",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-F02-SSC461-BORROWED-ADDRESS-ROLE-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a",
+      "WBS-P017-10",
+      "WBS-P005-01"
+    ],
+    "source": "becdc696ea194c5296b70f538caeb0b5941e5bdd",
+    "productionCoreMain": "becdc696ea194c5296b70f538caeb0b5941e5bdd",
+    "canonicalDesignSource": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "run": "PG40344-f02-ssc461-borrowed-address-role-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.2,
+      "base": 0.6,
+      "high": 1.3
+    },
+    "groupCapPp": 2.5,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/790_F02貸借Artemis四口と継続点.json",
+        "sha256": "d9d23709cdaf6622cd35f8b392bfa622c56d4316eff7172df1d14db46dfedea0"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40326-f02-current-four-jars-three-edge-delta-v1/manifest.json",
+        "sha256": "a0c4f06d31e2dc13e551bb1616fc10d219f66dc598bb06b7368cf90fd3e835d3"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40338-f02-ssc461-borrowed-catalog-four-calls-v1/compiled-classes.json",
+        "sha256": "bab6fc2c8bb0ddf50a5e3f6b8448153defba02d12a477906758369f8a25471e0"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38522-f02-six-resolved-maven-dependency-model-v1/manifest.json",
+        "sha256": "dd478111437fdd65aeefe3dae47bebe556ff4a9eee54d851dd34018ba1db1a5a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38582-f02-jdbc-exception-ownership-review-v1/manifest.json",
+        "sha256": "4c29301e66cd473c219320a3dfa8cf5d846b787eb477caa0bd38599f678a4e92"
+      },
+      {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/AddressSettingsProjectionPortTest.java",
+        "sha256": "f3c8e0c57f9bfa54fa4307bccd30017c74a9c712bbc0208daab32097f7866308"
+      },
+      {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/RoleSettingsProjectionPortTest.java",
+        "sha256": "d51d6ccc84e05657d7f8678bf5733f945f51ebbe3aead20bf24fb8b4eea3582a"
+      },
+      {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient.java",
+        "sha256": "8733ed7e17c9b6b1a6dddb29cec099615196d80440355f84c53172f7b5d2b539"
+      },
+      {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient.java",
+        "sha256": "97451e64315eb5c783e85f580f0cb03b27f02feb43e7b4a9c7ee811b161a281b"
+      }
+    ],
+    "tests": [
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/AddressSettingsProjectionPortTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/RoleSettingsProjectionPortTest.java"
+    ],
+    "targets": [
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient.java"
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "bug": "BUG-3233",
+    "designCorrection": "SSC-461",
+    "startBasis": "Two source owners with original full 5 ASET and 4 RMAP fixtures and session interfaces rejecting all calls from injected projection. Embedded broker suites are outside this group.",
+    "endCondition": "Migrate two graph calls with frozen source and no fixture changes. Same-source compile four, full original nine, exact physical/ABI/CRC and measured static delta. Independent partial/full counters as observed.",
+    "workScope": "Local Java proxy and validated public literal JSON only. No actual broker or query, permissions, auth state, signature, service, network or held test.",
+    "quotaAfter": {
+      "usedPercent": 55,
+      "remainingPercent": 45,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "d5c098efb0b6b99aee250bd57e243b7127db11793184d12026a86f1f8719089d",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-19T23:01:20.980000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 55,
+          "remainingPercent": 45,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-19T23:00:50.963461+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 55,
+      "remainingPercent": 45,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6311",
+    "attempt": 1,
+    "attemptResult": "BORROWED_SETTINGS_TWO_CALLS_WITH_9_REGRESSIONS",
+    "firstValidationPassed": 9,
+    "firstValidationDenominator": 9,
+    "retries": 0,
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 9,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40344-f02-ssc461-borrowed-address-role-v1/manifest.json",
+        "sha256": "cf12692c287c331187aef90ed853e22a128374b7aa47ad6448d7c3027ee1adab"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40346-f02-borrowed-settings-pmd-delta-v1/manifest.json",
+        "sha256": "9fc4805f0089aebf64ceabcff9ff48813999549eef7fe3d46c66f536477bd951"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40348-f02-borrowed-settings-independent-v1/manifest.json",
+        "sha256": "09d1d31296cb7529cdcca918a738720900ac6ad7e2f26b25845394476cbc1705"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "Other upper calls (43/104 migrated), Storage 3 direct and legacy entry.",
+      "External broker, actual role/environment and 451 separately held."
+    ]
+  }
+}

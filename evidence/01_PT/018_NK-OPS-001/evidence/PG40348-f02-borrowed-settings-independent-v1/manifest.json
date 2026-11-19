@@ -1,0 +1,132 @@
+{
+  "actualExit": 0,
+  "source": "becdc696ea194c5296b70f538caeb0b5941e5bdd",
+  "productionCore": "becdc696ea194c5296b70f538caeb0b5941e5bdd",
+  "firstPass": 9,
+  "selected": 9,
+  "requiredRequalification": 9,
+  "newProductCases": 0,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "cases": {
+    "dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest": [
+      "aset003RejectsQuotedNumbersAndBooleansAtThirdReadWithoutReturningPartialResult()",
+      "aset004RejectsMalformedOrMissingProjectionAndPreservesProviderFailureIdentity()",
+      "aset001ReturnsExactApprovedFieldsForAllSixAddressesWithoutUsingSession()",
+      "aset002ImmutableSnapshotsRemainIndependentAcrossLaterFailureAndSuccess()",
+      "aset005VerifyUsesSameSixReadContractAndDefaultAssemblyDoesNotOpenSession()"
+    ],
+    "dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest": [
+      "rmap001ReturnsAll324ApprovedBooleanValuesWithoutAnySessionOperation()",
+      "rmap003FifthReadFailureNeverPublishesPartialSnapshotOrContinuesReading()",
+      "rmap002AllThreeSnapshotLayersAreImmutableAndIndependent()",
+      "rmap004NullMalformedAndVerifyContractKeepBorrowedSessionUntouched()"
+    ]
+  },
+  "privateAndPublicAbiSame": true,
+  "newAdapterCalls": 2,
+  "oldAdapterCallsInTarget": 0,
+  "physicalDelta": {
+    "protocol": [],
+    "storage": [],
+    "bootstrap": [],
+    "batch": [
+      "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient.class",
+      "dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient.class"
+    ]
+  },
+  "physicalReadinessCrc": {
+    "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient": "4c202ef602da64d6",
+    "dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient": "dec9eef0556986cb"
+  },
+  "pmdRaw": 2,
+  "newPmdFindings": 0,
+  "partialRawCoverage": {
+    "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient": {
+      "INSTRUCTION": {
+        "covered": 391,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 10,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 68,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 13,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 8,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient": {
+      "INSTRUCTION": {
+        "covered": 425,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 28,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 87,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 22,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 8,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    }
+  },
+  "actualBrokerActions": 0,
+  "embeddedBrokerInitialized": false,
+  "wholeF02Accepted": false,
+  "whole451Accepted": false,
+  "newFormalAcceptance": 0,
+  "evidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40344-f02-ssc461-borrowed-address-role-v1/manifest.json",
+      "sha256": "cf12692c287c331187aef90ed853e22a128374b7aa47ad6448d7c3027ee1adab"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40346-f02-borrowed-settings-pmd-delta-v1/manifest.json",
+      "sha256": "9fc4805f0089aebf64ceabcff9ff48813999549eef7fe3d46c66f536477bd951"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40344-f02-ssc461-borrowed-address-role-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "af604234d824ca33a306aa45d41186a83a184db2e111f7de2f55a28c5d3ae6fd"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40344-f02-ssc461-borrowed-address-role-v1/class-init.log.gz",
+      "sha256": "fd4d5357264bb60825f4592aae57d33f4f26223f741379167b7354180476920d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40344-f02-ssc461-borrowed-address-role-v1/coverage.xml",
+      "sha256": "f8e77d0e91e317814d7343340ad3fa84575084c865ff6b2376efa6db97dfdfb1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40344-f02-ssc461-borrowed-address-role-v1/jacoco.exec",
+      "sha256": "803b844a404ec27c73d7884504a7e5cc40328e4e179cd2324118da1f4ae58f84"
+    }
+  ],
+  "terminalAtUTC": "2026-11-19T23:00:50.963461+00:00"
+}

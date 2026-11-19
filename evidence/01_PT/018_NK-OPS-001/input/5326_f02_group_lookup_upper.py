@@ -29,6 +29,7 @@ PROFILES = {
     "public-rfc": ("770_*", RELEASE_CLASS, "bootstrap", "PG40314-PUBLIC-RFC"),
     "borrowed-broker": ("773_*", BROKER_CLASS, "batch", "PG40320-BORROWED"),
     "borrowed-catalog": ("788_*", "", "batch", "PG40338-CATALOG"),
+    "borrowed-settings": ("791_*", "", "batch", "PG40344-SETTINGS"),
 }
 
 
@@ -77,8 +78,8 @@ def main(profile="lookup"):
     job = start["values"]
     git, pin = (COMMON[key] for key in ("git", "pin"))
     source = git("rev-parse", "HEAD").decode().strip()
-    catalog = profile == "borrowed-catalog"
-    core = source if profile in ("public-rfc", "borrowed-catalog") else git("rev-parse", "HEAD^").decode().strip()
+    catalog = "tests" in job
+    core = source if profile == "public-rfc" or catalog else git("rev-parse", "HEAD^").decode().strip()
     fixtures = job["tests"] if catalog else [job["oracleReferences"][-2]["path"]]
     targets = job["targets"] if catalog else [job["oracleReferences"][-1]["path"]]
     for meta in job["oracleReferences"]:
@@ -119,7 +120,7 @@ def main(profile="lookup"):
     coverage_cli = tool("org.jacoco.cli-0.8.15-nodeps.jar")
     annotations = tool("jspecify-1.0.1.jar")
     dependencies = []
-    if profile in ("borrowed-broker", "borrowed-catalog"):
+    if profile == "borrowed-broker" or catalog:
         repo = Path(next(part.split("=", 1)[1] for part in maven if part.startswith("-Dmaven.repo.local=")))
         dependencies = broker_dependencies(job, repo)
     pins = [pin(path) for path in dependencies]

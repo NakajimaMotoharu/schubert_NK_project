@@ -1,0 +1,284 @@
+{
+  "source": "becdc696ea194c5296b70f538caeb0b5941e5bdd",
+  "productionCore": "becdc696ea194c5296b70f538caeb0b5941e5bdd",
+  "productionPrevious": "19a9f050366e32e0cc93246e2e6ef91aeb443ec1",
+  "testFixture": [
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/AddressSettingsProjectionPortTest.java",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/RoleSettingsProjectionPortTest.java"
+  ],
+  "productionTarget": [
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient.java"
+  ],
+  "stages": {
+    "compile": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-pl",
+        "src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-batch",
+        "-am",
+        "compile"
+      ],
+      "beginUTC": "2026-11-19T22:59:51.180383+00:00",
+      "terminalAtUTC": "2026-11-19T23:00:25.536489+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40344-f02-ssc461-borrowed-address-role-v1/compile.stdout.log.gz",
+        "sha256": "c069b680bce3979bec9137a611eaa65db1e4b35991c08c0d06040e08cd0a6218"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40344-f02-ssc461-borrowed-address-role-v1/compile.stderr.log.gz",
+        "sha256": "7097fbfb15f55c833e6de8e49ccc4ae96e0a90c2af25ebe49e5a16ff0b5e14ae"
+      }
+    },
+    "format": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "/dev/shm/pgpt-f02-group-lookup-4dmenwf7/src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient.java",
+        "/dev/shm/pgpt-f02-group-lookup-4dmenwf7/src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient.java",
+        "/dev/shm/pgpt-f02-group-lookup-4dmenwf7/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/AddressSettingsProjectionPortTest.java",
+        "/dev/shm/pgpt-f02-group-lookup-4dmenwf7/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/RoleSettingsProjectionPortTest.java"
+      ],
+      "beginUTC": "2026-11-19T23:00:25.536512+00:00",
+      "terminalAtUTC": "2026-11-19T23:00:26.077706+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40344-f02-ssc461-borrowed-address-role-v1/format.stdout.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40344-f02-ssc461-borrowed-address-role-v1/format.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "checkstyle": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "-o",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40344-f02-ssc461-borrowed-address-role-v1/checkstyle.xml",
+        "@/dev/shm/pgpt-f02-group-lookup-4dmenwf7/static-sources.txt"
+      ],
+      "beginUTC": "2026-11-19T23:00:26.077731+00:00",
+      "terminalAtUTC": "2026-11-19T23:00:26.922112+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40344-f02-ssc461-borrowed-address-role-v1/checkstyle.stdout.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40344-f02-ssc461-borrowed-address-role-v1/checkstyle.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "abi-before": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-classpath",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40326-f02-current-four-jars-three-edge-delta-v1/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+        "-p",
+        "-s",
+        "dev.codex.schubert.nk.batch.mq.ArtemisAddressSettingsReadinessClient",
+        "dev.codex.schubert.nk.batch.mq.ArtemisRoleReadinessClient"
+      ],
+      "beginUTC": "2026-11-19T23:00:26.922136+00:00",
+      "terminalAtUTC": "2026-11-19T23:00:27.110939+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40344-f02-ssc461-borrowed-address-role-v1/abi-before.stdout.log.gz",
+        "sha256": "761d163248807479fa54ba6258b1b6a43b9aa73669bb06f2feac45dea5ffba2e"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40344-f02-ssc461-borrowed-address-role-v1/abi-before.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "abi-after": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-classpath",
+        "/dev/shm/pgpt-f02-group-lookup-4dmenwf7/src/schubert-nk-batch/target/classes",
+        "-p",
+        "-s",
+        "dev.codex.schubert.nk.batch.mq.ArtemisAddressSettingsReadinessClient",
+        "dev.codex.schubert.nk.batch.mq.ArtemisRoleReadinessClient"
+      ],
+      "beginUTC": "2026-11-19T23:00:27.110958+00:00",
+      "terminalAtUTC": "2026-11-19T23:00:27.252513+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40344-f02-ssc461-borrowed-address-role-v1/abi-after.stdout.log.gz",
+        "sha256": "761d163248807479fa54ba6258b1b6a43b9aa73669bb06f2feac45dea5ffba2e"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40344-f02-ssc461-borrowed-address-role-v1/abi-after.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "behavior-after": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-classpath",
+        "/dev/shm/pgpt-f02-group-lookup-4dmenwf7/src/schubert-nk-batch/target/classes",
+        "-p",
+        "-c",
+        "dev.codex.schubert.nk.batch.mq.ArtemisAddressSettingsReadinessClient",
+        "dev.codex.schubert.nk.batch.mq.ArtemisRoleReadinessClient"
+      ],
+      "beginUTC": "2026-11-19T23:00:27.252536+00:00",
+      "terminalAtUTC": "2026-11-19T23:00:27.475354+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40344-f02-ssc461-borrowed-address-role-v1/behavior-after.stdout.log.gz",
+        "sha256": "f3c84f0eae48bfb8c32b4cad03cf55fa458313bc71e67b99f0cbf826692786b6"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40344-f02-ssc461-borrowed-address-role-v1/behavior-after.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "testcompile": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/dev/shm/pgpt-f02-group-lookup-4dmenwf7/src/schubert-nk-protocol/target/classes:/dev/shm/pgpt-f02-group-lookup-4dmenwf7/src/schubert-nk-storage/target/classes:/dev/shm/pgpt-f02-group-lookup-4dmenwf7/src/schubert-nk-bootstrap/target/classes:/dev/shm/pgpt-f02-group-lookup-4dmenwf7/src/schubert-nk-batch/target/classes:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-buffer/4.1.137.Final/netty-buffer-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-common/4.1.137.Final/netty-common-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "-d",
+        "/dev/shm/pgpt-f02-group-lookup-4dmenwf7/selected-test",
+        "/dev/shm/pgpt-f02-group-lookup-4dmenwf7/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/AddressSettingsProjectionPortTest.java",
+        "/dev/shm/pgpt-f02-group-lookup-4dmenwf7/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/RoleSettingsProjectionPortTest.java"
+      ],
+      "beginUTC": "2026-11-19T23:00:27.475370+00:00",
+      "terminalAtUTC": "2026-11-19T23:00:28.361797+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40344-f02-ssc461-borrowed-address-role-v1/testcompile.stdout.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40344-f02-ssc461-borrowed-address-role-v1/testcompile.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "unit": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Xmx256m",
+        "-Xlog:class+init=info:file=/dev/shm/pgpt-f02-group-lookup-4dmenwf7/class-init.log",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40344-f02-ssc461-borrowed-address-role-v1/jacoco.exec,sessionid=PG40344-SETTINGS,append=false",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--details=summary",
+        "--fail-if-no-tests",
+        "--class-path",
+        "/dev/shm/pgpt-f02-group-lookup-4dmenwf7/selected-test:/dev/shm/pgpt-f02-group-lookup-4dmenwf7/src/schubert-nk-protocol/target/classes:/dev/shm/pgpt-f02-group-lookup-4dmenwf7/src/schubert-nk-storage/target/classes:/dev/shm/pgpt-f02-group-lookup-4dmenwf7/src/schubert-nk-bootstrap/target/classes:/dev/shm/pgpt-f02-group-lookup-4dmenwf7/src/schubert-nk-batch/target/classes:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-buffer/4.1.137.Final/netty-buffer-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-common/4.1.137.Final/netty-common-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40344-f02-ssc461-borrowed-address-role-v1/xml",
+        "--select-class=dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest",
+        "--select-class=dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest"
+      ],
+      "beginUTC": "2026-11-19T23:00:28.361817+00:00",
+      "terminalAtUTC": "2026-11-19T23:00:29.673184+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40344-f02-ssc461-borrowed-address-role-v1/unit.stdout.log.gz",
+        "sha256": "aea1f9d683a11601508d440776ee77037b2fb7076423ff9f2f9713864640afae"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40344-f02-ssc461-borrowed-address-role-v1/unit.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "coverage": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40344-f02-ssc461-borrowed-address-role-v1/jacoco.exec",
+        "--classfiles",
+        "/dev/shm/pgpt-f02-group-lookup-4dmenwf7/src/schubert-nk-batch/target/classes",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40344-f02-ssc461-borrowed-address-role-v1/coverage.xml"
+      ],
+      "beginUTC": "2026-11-19T23:00:29.673206+00:00",
+      "terminalAtUTC": "2026-11-19T23:00:30.169350+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40344-f02-ssc461-borrowed-address-role-v1/coverage.stdout.log.gz",
+        "sha256": "c4c63ae7ce0d2333a18cb8c2f087b98c377fa7b7bab2545be5befffa663bcd44"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40344-f02-ssc461-borrowed-address-role-v1/coverage.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    }
+  },
+  "frozenCommandFiles": [
+    "pom.xml",
+    "program/characterization/pom.xml",
+    "src/schubert-nk-api/pom.xml",
+    "src/schubert-nk-web/pom.xml",
+    "src/schubert-nk-protocol",
+    "src/schubert-nk-storage",
+    "src/schubert-nk-bootstrap",
+    "src/schubert-nk-batch"
+  ],
+  "selectedTests": [
+    "--select-class=dev.codex.schubert.nk.batch.mq.AddressSettingsProjectionPortTest",
+    "--select-class=dev.codex.schubert.nk.batch.mq.RoleSettingsProjectionPortTest"
+  ],
+  "notRun": [],
+  "namedActualHostActions": 0,
+  "session": "PG40344-SETTINGS",
+  "extraDependencies": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar",
+      "sha256": "02b43c47403dd0ef6dcd4573d0744bc6bae935edae016eb19f2d4ebb5eb33722"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar",
+      "sha256": "111cbc7a359b5597085b5328ab74c2f81dd40e7211d07bd12e6ffa83d9de99d9"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-buffer/4.1.137.Final/netty-buffer-4.1.137.Final.jar",
+      "sha256": "f474b14c7734f15e0540394cb6f39d67777b7581a42919e4ac89d253d4efd929"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-common/4.1.137.Final/netty-common-4.1.137.Final.jar",
+      "sha256": "d31926b01adcc07af86f5e27b81b6d6c115df17d366e835d1fc3f5a1924e7e52"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+      "sha256": "44508fd1576500688c790b190acdd16fec4f8c79a3e0b900afd70503cf055f55"
+    }
+  ],
+  "compiled": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40344-f02-ssc461-borrowed-address-role-v1/compiled-classes.json",
+    "sha256": "c2134d5f043713c405940fae94c22cc2d18835378cedca3bf8dbec31d5530552"
+  },
+  "actualExit": 0,
+  "wholeF02Accepted": false,
+  "whole451Accepted": false,
+  "terminalAtUTC": "2026-11-19T23:00:30.242739+00:00"
+}
