@@ -106,12 +106,12 @@ final class QuestionNotificationWireTest {
         assertThrows(
             LayoutValidationException.class,
             () -> decodeNotification(notification("COMPLETED", JANUARY_2025, JANUARY_2024)));
-    assertEquals("date range is reversed", reversed.getMessage());
+    assertEquals("layout semantic violation: date range is reversed", reversed.getMessage());
     var tooLong =
         assertThrows(
             LayoutValidationException.class,
             () -> decodeNotification(notification("ERROR", JANUARY_2024, "20250101090000001")));
-    assertEquals("date range is too long", tooLong.getMessage());
+    assertEquals("layout semantic violation: date range is too long", tooLong.getMessage());
   }
 
   private static byte[] notification(String type, String from, String to) {

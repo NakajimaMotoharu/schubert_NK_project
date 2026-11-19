@@ -14,6 +14,7 @@ EVIDENCE = COMMON["OPS"]
 SUITES = {
     "lgs": ("682_*", "LogSearchWireUnicodeTest", 2, "PG40226-PROTOCOL-LOG-WIRE"),
     "qss-nts": ("687_*", "QuestionNotificationWireTest", 4, "PG40232-PROTOCOL-QSS-NTS"),
+    "qss-nts-retest": ("687_*", "QuestionNotificationWireTest", 4, "PG40234-PROTOCOL-QSS-NTS"),
 }
 
 
@@ -58,7 +59,11 @@ def main(suite="lgs"):
     agent = tool("org.jacoco.agent-0.8.15-runtime.jar")
     cli = tool("org.jacoco.cli-0.8.15-nodeps.jar")
     annotations = tool("jspecify-1.0.1.jar")
-    out = (EVIDENCE / plan["run"]).resolve()
+    run = ("PG40234-protocol-qss-nts-fixed-wire-retest-v1" if suite == "qss-nts-retest" else plan["run"])
+    if suite == "qss-nts-retest":
+        initial = read(EVIDENCE / plan["run"] / "manifest.json")
+        assert initial["stages"]["unit"]["actualExit"] == 1 and initial["jar"] == selected["artifact"]
+    out = (EVIDENCE / run).resolve()
     out.mkdir()
     with TemporaryDirectory(dir="/dev/shm", prefix="pgpt-protocol-wire-") as temp:
         work = Path(temp)
@@ -104,7 +109,7 @@ def main(suite="lgs"):
             ownership.st_dev, ownership.st_ino, ownership.st_uid, ownership.st_mode, ownership.st_mtime_ns
         )
         assert pin(jar) == selected["artifact"]
-        result = dict(run=plan["run"], actualExit=next((row["actualExit"] for row in results.values()
+        result = dict(run=run, actualExit=next((row["actualExit"] for row in results.values()
                                                        if row["actualExit"] != 0), 0),
                       session=session, source=source, productionCore=plan["productionCoreMain"],
                       testFixture=source_path, testSha256=pin(fixture)["sha256"], jar=selected["artifact"],
