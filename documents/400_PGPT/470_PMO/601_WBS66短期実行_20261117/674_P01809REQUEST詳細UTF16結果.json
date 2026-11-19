@@ -1,0 +1,140 @@
+{
+  "eventId": "PGPT-20261008-6195",
+  "groupId": "PGPT-WBS66-P01809-REQUEST-DETAILS-MALFORMED-UNICODE-20261119",
+  "source": "cf6b1b86641754e50526609febb457cbaddfdbbf",
+  "productionCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-19T13:46:38.007000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 51,
+      "remainingPercent": 49,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "originalRemainingDetailBasePp": 1089.848,
+    "canonicalDesignSource": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "contextGroupId": "PGPT-WBS66-P01809-REQUEST-DETAILS-MALFORMED-UNICODE-20261119",
+    "workDetailCategory": "PGPT-WBS66-P01809-REQUEST-DETAILS-MALFORMED-UNICODE-20261119",
+    "workCategory": "IMPLEMENTATION",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P018-09"
+    ],
+    "managementWorkIds": [
+      "WBS-P018-09/2"
+    ],
+    "source": "018799d4f638fb1a938b12e29b5625be6418de8e",
+    "run": "PG40214-p01809-request-details-scalar-guard-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.25,
+      "base": 0.65,
+      "high": 1.6
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "testIds": [
+      "PT-IDEM-012-UTF16"
+    ],
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37342-request-details-prepare-v1/manifest.json",
+        "sha256": "9883a7ed06750b4b38553ef415bb0cdba54fc1b13b9d4a7a795a88ca8c7c70e0"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37348-request-details5-independent-v1/manifest.json",
+        "sha256": "d65b38f4465490aafdf15e54a257e530fa5254691063193e303f0c437d391d84"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26328-media-ending-independent-v1/all35-current-owner-dispositions.json",
+        "sha256": "a77113d9d851a9131669686e979c5518cb156ab0007fba575f61d1043e6698e0"
+      },
+      {
+        "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+        "sha256": "860f584a2f032e9b06112907f8ec138a12d0b69b94546f7e17ad7dfb9b65414c"
+      }
+    ],
+    "relatedYkt": "YKT-2328",
+    "priorSiteIndex": 6,
+    "workScope": "SS351 strict REQUEST details grammar. One new in-memory test proves malformed UTF16 surrogate spellings in member names and family cannot survive the fixed ASCII allowlist; ordinary ASCII escape remains equivalent. Exact admitted API parser class and narrowed compiled dependencies only; no production changes, no existing test replay, no provider, real key, DB or Mq.",
+    "quotaAfter": {
+      "usedPercent": 51,
+      "remainingPercent": 49,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "5e3e3fc70d225b61f8f19399af18537e6fe49bb42e1480f8311cbe216a946008",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-19T13:46:38.007000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 51,
+          "remainingPercent": 49,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-19T13:46:00.723877+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 51,
+      "remainingPercent": 49,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "completedSource": "cf6b1b86641754e50526609febb457cbaddfdbbf",
+    "completedRun": "PG40216-p01809-request-details-scalar-guard-v2",
+    "publicEvidence": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40218-p01809-request-details-scalar-independent-v1/manifest.json",
+        "sha256": "2fd49d305fbb3f1efa0ad042089f7378edc914404f116fe789c767a33da634ce"
+      }
+    ],
+    "actualExit": 0,
+    "startedAtEvent": "PGPT-20261008-6194",
+    "newAcceptanceCount": 0,
+    "productTests": 1,
+    "firstVerification": {
+      "preparationExit": 1,
+      "productCasesStarted": 0
+    },
+    "correctedVerification": {
+      "passed": 1,
+      "selected": 1
+    },
+    "attemptResult": "PASS_ONE_NEW_LOCAL_REQUEST_DETAIL_CASE",
+    "attempt": 2,
+    "retryReasons": [
+      "Corrected exact fixture classpath anchoring before any test ran.",
+      "Class-init independent inspection separately classified already-executed parser/test adapters."
+    ]
+  }
+}

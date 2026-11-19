@@ -1,0 +1,96 @@
+{
+  "actualExit": 0,
+  "source": "cf6b1b86641754e50526609febb457cbaddfdbbf",
+  "productionCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "testId": "PT-IDEM-012-UTF16",
+  "step": "P018-09/2",
+  "related": "YKT-2328 site 6",
+  "expected": {
+    "reject": "PermanentProtocolException with fixed message and no cause",
+    "accept": "normalized family A for an ASCII escape",
+    "rejectedValues": 8,
+    "acceptedValues": 1
+  },
+  "proved": "Raw and escaped lone surrogate forms reject in both recognized-key and value positions. Existing strict ASCII projection cannot persist any substituted character. ASCII escape behavior remains established.",
+  "starts": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40214-p01809-request-details-scalar-guard-v1/manifest.json",
+      "sha256": "f020041ea852a0cd0a09d5008f8f6d1320b85fdad8acff8b6e0bf0213ef75ff1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40216-p01809-request-details-scalar-guard-v2/manifest.json",
+      "sha256": "2010f5943d37b33fe328b815836cae5bef19a837dbf6e1747da360b01bd29ea3"
+    }
+  ],
+  "firstIndependentCheck": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40217-p01809-request-details-post-initial-v1/manifest.json",
+    "sha256": "acd45968b2fc10f409342e32642e07751089d80aa6a129761a323eb67de19910"
+  },
+  "junit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40216-p01809-request-details-scalar-guard-v2/xml/TEST-junit-jupiter.xml",
+    "sha256": "0b8d8a34e2e8d1039e8d6adcf2111f96a92740b7ecf8ef28df77e029efec36d7"
+  },
+  "coverage": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40216-p01809-request-details-scalar-guard-v2/coverage.xml",
+    "sha256": "7f6afe4b51903263a34ee1198404684d20d29fccfd59d3877e4a184c933cf59e"
+  },
+  "exec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40216-p01809-request-details-scalar-guard-v2/jacoco.exec",
+    "sha256": "aeec7829aab471196180df2c07b627105937e164bc8cceb8b39d196c5870c768"
+  },
+  "init": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40216-p01809-request-details-scalar-guard-v2/class-init.log.gz",
+    "sha256": "7c27f517f6c4d46578254901ec8b842265c54d0a8c3bb2b73e8d759e7a56518f"
+  },
+  "regularClasses": [
+    "dev/codex/schubert/nk/api/logging/RequestLogDetails",
+    "dev/codex/schubert/nk/api/logging/RequestLogDetailsTest",
+    "dev/codex/schubert/nk/protocol/codec/PermanentProtocolException"
+  ],
+  "lambdaAdapterOwners": [
+    "dev/codex/schubert/nk/api/logging/RequestLogDetails",
+    "dev/codex/schubert/nk/api/logging/RequestLogDetailsTest"
+  ],
+  "session": "PG40214-REQUEST-DETAILS-UTF16",
+  "legacyTestRerun": 0,
+  "result": "PASS_ONE_NEW_LOCAL_CASE",
+  "productTests": 1,
+  "localMeasuredCounters": {
+    "INSTRUCTION": {
+      "covered": 105,
+      "missed": 69
+    },
+    "BRANCH": {
+      "covered": 9,
+      "missed": 14
+    },
+    "LINE": {
+      "covered": 30,
+      "missed": 20
+    },
+    "COMPLEXITY": {
+      "covered": 6,
+      "missed": 12
+    },
+    "METHOD": {
+      "covered": 3,
+      "missed": 2
+    },
+    "CLASS": {
+      "covered": 1,
+      "missed": 0
+    }
+  },
+  "eligibleOwnerClasses": [
+    "dev/codex/schubert/nk/api/logging/RequestLogDetails.class",
+    "dev/codex/schubert/nk/api/logging/package-info.class",
+    "dev/codex/schubert/nk/protocol/codec/PermanentProtocolException.class",
+    "dev/codex/schubert/nk/protocol/layout/semantic/UserRole.class",
+    "dev/codex/schubert/nk/protocol/layout/semantic/WireEnum.class"
+  ],
+  "staticApplicable": 0,
+  "staticUnclassified": 0,
+  "whole451Accepted": false,
+  "newFormalAcceptance": 0,
+  "terminalAtUTC": "2026-11-19T13:46:00.723877+00:00"
+}

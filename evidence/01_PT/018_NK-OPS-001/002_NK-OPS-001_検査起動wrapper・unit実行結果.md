@@ -117,3 +117,7 @@ PG40160、JDK25.0.4、固定ホスト鍵、通常mini認証1回、同boot、専�
 ## PT-CHR-CMP-A02-001〜002 実行結果（2026-11-19 JST）
 
 2a0e29270e1b770e4c89e1bd2979d887e0df8ff7。PG40206は修正前2選択で2失敗、PG40208は20 suite・208成功、失敗/エラー/skip/未実行0。PG40210はformat/Checkstyle/SpotBugs 0、PMD原6は前根拠と対応。PG40212独立SHA-256 d8f11e393676af1b80ba8ebf58817051bb7fde1eb3acf5d94bb7354127b1799a。比較器二物理L345/M49/C2/B176 miss0、他工具未網羅保持。BUG3346/3347、YKT2712/2713。元Current不変。実A02、製品PT、451全体は別。
+
+## PT-IDEM-012-UTF16 実行結果（2026-11-19 JST）
+
+PG40216は1試験、失敗/エラー/skip/未実行0、8拒否と1正常、format・PMD・Checkstyle各0。PG40218独立、SHA-256 2fd49d305fbb3f1efa0ad042089f7378edc914404f116fe789c767a33da634ce。実測L30/50、M3/5、C1/1、B9/23、旧PG37348の全5・旧coverageと合算なし。準備失敗PG40214と独立初回PG40217を保全。
