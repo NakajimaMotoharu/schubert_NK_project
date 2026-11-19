@@ -1,0 +1,143 @@
+{
+  "eventId": "PGPT-20261008-6273",
+  "groupId": "PGPT-WBS66-P01801-F02-UTF8-YAML-LIMIT-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-19T22:04:32.630000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 53,
+      "remainingPercent": 47,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P01801-F02-UTF8-YAML-LIMIT-20261120",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "PGPT-WBS66-P01801-F02-UTF8-YAML-LIMIT-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P018-01"
+    ],
+    "managementWorkIds": [
+      "WBS-P018-01",
+      "WBS-F02"
+    ],
+    "source": "196a930032b84c500d95978d6abf895eb4003bfa",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "canonicalDesignSource": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "run": "PG40296-public-config-yaml-utf8-limit-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.4,
+      "high": 0.85
+    },
+    "groupCapPp": 1.5,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/750_P00202電文UTF8と次条件継続点.json",
+        "sha256": "8ce9145d7df08a192a573206759e6089829a955ca5b36dee7d3030c415fd479a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39980-f02-current-four-production-jars-v1/manifest.json",
+        "sha256": "3a06700c504ef0f93f3edc89dab8f4197b46ff6742b3c7d56e1c17a7a09a32ba"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38864-f02-nonsecret-config-independent-v1/manifest.json",
+        "sha256": "c02641886551b4d4dd68f86777585d7e6a2241bc6fb80f9030ba4744bf827371"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38862-ssc461-nonsecret-config-unit-v1/begin.json",
+        "sha256": "b35891647ad17cb5f714bbe8e12ad16d132676838ffc9618129e38bc458c7ddc"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/4241_APIWeb設定原十四通常単体仕様.md",
+        "sha256": "410a4f43ca76aac7bd6997c6cc2b9191216d6c1f5d2663f2ecfc6637c52a7692"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "Approved SS343 sections 4–5 and 4241 configured byte cap; old tests only pin the all-ASCII over-limit reject. ServiceConfigFiles uses strict UTF-8 on the held file path; this group is limited to the ordinary in-memory closed parser boundary.",
+    "endCondition": "Pinned current Bootstrap and Storage jars with known YAML/JUnit/annotation deps. Both public parser entry points must accept a 16384-byte multibyte configuration with an explicit known scalar, reject at exactly 16385 bytes with the published fixed diagnostics, and pass exact fixture static gates and independent XML/physical verification.",
+    "workScope": "Local in-memory synthetic comments and a documented scalar. No actual files, API/Web assembly, environment overrides, native, DB or updates to held classes. Shared F02 quality/edge reference only, no additional cost.",
+    "testIds": [
+      "PT-OPS-APICFG008",
+      "PT-OPS-WEBCFG008"
+    ],
+    "quotaAfter": {
+      "usedPercent": 53,
+      "remainingPercent": 47,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "5b60a9edfe1b2a575d80b6222689d02c2d23021d161b13d525df773d7ead8766",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-19T22:04:32.630000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 53,
+          "remainingPercent": 47,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-19T22:04:23.489418+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 53,
+      "remainingPercent": 47,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6272",
+    "attempt": 1,
+    "attemptResult": "LIMITED_ACCEPTANCE_EVIDENCE_PRESERVED",
+    "firstValidationPassed": 2,
+    "firstValidationDenominator": 2,
+    "retries": 0,
+    "priorSuccessReruns": 0,
+    "newProductTests": 2,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40296-public-config-yaml-utf8-limit-v1/manifest.json",
+        "sha256": "e780d5b5cf32371c4edd08e6917cea0115085d9afe0db302f453a23ba2549e0b"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40298-public-config-yaml-utf8-limit-independent-v1/manifest.json",
+        "sha256": "b0e4c32b8ea8a055ac22d5f374a9b5786dbcaedf631877b3d4ef04c49529e9cb"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "F02 full current six-module module boundaries / scope / quality",
+      "P018-01 other configuration ingress, file ownership and deployment provenance",
+      "451 same-source all scope"
+    ]
+  }
+}
