@@ -1,0 +1,100 @@
+{
+  "actualExit": 0,
+  "source": "cfcf7834e399c5dcf5b27c91b19ce6805ae7d269",
+  "productionCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "run": "PG40290-p00202-payload-semantic-utf8-review-v1",
+  "startEvent": "PGPT-20261008-6266",
+  "wbs": "WBS-P002-02",
+  "finding": "YKT-2328/site19",
+  "decision": "FIXED_WIRE_NORMAL_PATH_GUARDS_UNICODE_BEFORE_SEMANTIC_LENGTH",
+  "originalFinding": {
+    "index": 19,
+    "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.java",
+    "sha256": "017a222b4b91b48c450336f21ea5efd46ac444dbbee7274c56f5c7559d63893f",
+    "siteLines": [
+      301
+    ],
+    "status": "PENDING_SPECIFIC_CALL_GUARD_OR_INDEPENDENT_NORMAL_PROOF",
+    "basis": "getBytes site exists but arbitrary input reachability/caller validation and owned normal proof are not established by source substring alone.",
+    "remaining": "Resolve concrete caller/domain/independent expected and permitted footprint before execution; if implemented contract violation then915 before fix, price new necessary work before start. No actual key/auth/DB/VM/held/cohort experiment.",
+    "currentSourceRunTestExecutedHere": false,
+    "globalYktTargetClosed": false,
+    "costOwner": "WBS-P002-02",
+    "feeRule": "Retain existing original owner contract/quality work; no source-shared implementation double fee."
+  },
+  "sourceReferences": [
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.java",
+      "sha256": "8570121e1e0461a0db760ef0bd4cb5ee40f36d3b77dde144d568cf4c3b23e8ef"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog.java",
+      "sha256": "dceefa8cc10a2a511ed716e7289cbddcff01e2f09c5da0eb98ad8aaa1ec099a6"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldValue.java",
+      "sha256": "6f50d333720aaedf58b714be1f84c298297ae80398e8b8f7afb0ec7341d98041"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/admin/UserCreateRequestData.java",
+      "sha256": "975f2cf129e380283678c4d99122c8613e21622b31725ac88494f7da0de10883"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/admin/PasswordResetRequestData.java",
+      "sha256": "07b1b58d8ccd0cff7c1fd5a836abfd0b5cdf36b7906b6b31e1f1c41de1a91abe"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java",
+      "sha256": "bbff720fbbcdd7264e625d8d92c1530cc1fdd7e7dbd8454e7c9b947dafc67279"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java",
+      "sha256": "41521248b2ad34c0d21fe00f75d9b7982fb023d9e9ae29ad6f87650b3bd559e9"
+    }
+  ],
+  "design": [
+    {
+      "path": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+      "sha256": "0468f20da240ed61e056084f80e88f3b3f5d60b3afb70f23710a8320c5c653c9",
+      "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/322_固定長電文codec実装設計.md",
+      "sha256": "4050c672abea8bc7ca1c70bc47783185914206cdc6d126d55fe274971fab5d4a",
+      "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "sha256": "9c64f99f058d676723353e8bd99eb6d070bdb062d98ee7f4a0fc4e4ae942f6d3",
+      "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774"
+    }
+  ],
+  "layouts": [
+    {
+      "layout": "UCRREQ01",
+      "start": 65,
+      "bytes": 256,
+      "area": 372
+    },
+    {
+      "layout": "UPWREQ01",
+      "start": 13,
+      "bytes": 256,
+      "area": 324
+    }
+  ],
+  "conclusion": [
+    "The wire decoder slices each fixed X field, rejects malformed UTF-8 and non-NFC before the typed catalog runs semantic validation.",
+    "A directly constructed Java Text is an intermediate representation, not a validated wire. The semantic byte count alone does not establish scalar correctness. The outbound fixed codec rejects malformed UTF-16 before producing bytes and applies NFC per SS322.",
+    "Existing SEM001 tests direct semantic character/byte limits. A named on-wire test at these two exact offsets with compiler-independent bytes and adjacent fields is unrepresented among the checked ordinary proofs."
+  ],
+  "existingTestSource": {
+    "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/SemanticDirectBoundaryTest.java",
+    "sha256": "1046e924ccb83eb256c0d87d77d5dcb7581544ada44eb42ed2942b539d2ff1ef"
+  },
+  "nextEligible": "Ordinary same pinned Protocol JAR, both layouts: NFC exact limit; invalid surrogate and truncated four-byte at field boundary; non-NFC. No authentication action.",
+  "actualBackendActions": 0,
+  "productTests": 0,
+  "newFormalAcceptance": 0,
+  "terminalAtUTC": "2026-11-19T21:55:18.334841+00:00"
+}
