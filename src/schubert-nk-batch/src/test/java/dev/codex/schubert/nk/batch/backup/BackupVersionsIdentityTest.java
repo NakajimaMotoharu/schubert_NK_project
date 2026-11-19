@@ -3,6 +3,7 @@ package dev.codex.schubert.nk.batch.backup;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.HashMap;
 import java.util.List;
@@ -37,6 +38,46 @@ final class BackupVersionsIdentityTest {
     assertNotEquals(base, CLAIMS);
     assertNotEquals(base, null);
     assertEquals("BackupVersions[release=<redacted>]", base.toString());
+  }
+
+  @Test
+  void exposesEveryIndependentClaimAtItsComponent() {
+    var value = versions(CLAIMS.toArray(String[]::new));
+    assertEquals(
+        CLAIMS,
+        List.of(
+            value.host(),
+            value.app(),
+            value.schema(),
+            value.os(),
+            value.jdk(),
+            value.postgresql(),
+            value.artemis(),
+            value.age()));
+    String[] longest = CLAIMS.toArray(String[]::new);
+    longest[0] = "x".repeat(128);
+    assertEquals(longest[0], versions(longest).host());
+  }
+
+  @Test
+  void rejectsInvalidReleaseTokensAndSchemasBeforeUse() {
+    String[] tooLong = CLAIMS.toArray(String[]::new);
+    tooLong[0] = "x".repeat(129);
+    assertEquals(
+        "invalid backup release token",
+        assertThrows(IllegalArgumentException.class, () -> versions(tooLong)).getMessage());
+    for (String badSchema : List.of("000", "A01")) {
+      String[] invalid = CLAIMS.toArray(String[]::new);
+      invalid[2] = badSchema;
+      assertEquals(
+          "invalid backup schema",
+          assertThrows(IllegalArgumentException.class, () -> versions(invalid)).getMessage());
+    }
+    for (int index = 0; index < CLAIMS.size(); index++) {
+      String[] missing = CLAIMS.toArray(String[]::new);
+      missing[index] = null;
+      assertThrows(NullPointerException.class, () -> versions(missing), "claim index " + index);
+    }
   }
 
   private static BackupVersions versions(String[] claims) {
