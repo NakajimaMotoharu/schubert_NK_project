@@ -1,7 +1,7 @@
 package dev.codex.schubert.nk.batch.mq;
 
 import dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame;
-import dev.codex.schubert.nk.storage.StorageIoException;
+import dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph;
 import java.io.IOException;
 import java.util.HexFormat;
 import java.util.LinkedHashMap;
@@ -107,7 +107,7 @@ public final class ArtemisManagementReadinessClient {
 
   private static ArtemisManagementReadinessException managementFailure(Exception failure) {
     if (failure instanceof InterruptedException) Thread.currentThread().interrupt();
-    if (!(failure instanceof IOException)) StorageIoException.preserveFatal(failure);
+    if (!(failure instanceof IOException)) JdbcFailureGraph.preserveFatal(failure);
     return new ArtemisManagementReadinessException();
   }
 
@@ -286,7 +286,7 @@ public final class ArtemisManagementReadinessClient {
       return exchange.query(session, attribute);
     } catch (InterruptedException failure) {
       Thread.currentThread().interrupt();
-      StorageIoException.preserveFatal(failure);
+      JdbcFailureGraph.preserveFatal(failure);
       throw new ArtemisManagementReadinessException();
     }
   }
