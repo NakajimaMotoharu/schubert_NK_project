@@ -1,0 +1,138 @@
+{
+  "eventId": "PGPT-20261008-6228",
+  "groupId": "PGPT-WBS66-F02-PROTOCOL-JDBC-SAVED-EDGES-20261120",
+  "source": "33e5d0eacf98ce3ee942edc2e7173597e2480787",
+  "productionCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-19T18:37:47.596000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 52,
+      "remainingPercent": 48,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F02-PROTOCOL-JDBC-SAVED-EDGES-20261120",
+    "workCategory": "REVIEW",
+    "workDetailCategory": "PGPT-WBS66-F02-PROTOCOL-JDBC-SAVED-EDGES-20261120",
+    "workAttributionKind": "REQUALIFICATION",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a"
+    ],
+    "source": "33e5d0eacf98ce3ee942edc2e7173597e2480787",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "canonicalDesignSource": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "run": "PG40254-f02-protocol-jdbc-saved-edges-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.08,
+      "base": 0.2,
+      "high": 0.45
+    },
+    "groupCapPp": 1,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/705_F02StorageJDBC継続点.json",
+        "sha256": "91df167ba312668fe5b4a3c4542bb22d9bcc7c627f142bdce6c83070f997f6de"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40204-f02-library-http-saved-product-edges-v1/manifest.json",
+        "sha256": "e3b5d99d31bb35c8995252594b90e2ba667ee8c63809cb34d5ecb0205e55a892"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39980-f02-current-four-production-jars-v1/manifest.json",
+        "sha256": "3a06700c504ef0f93f3edc89dab8f4197b46ff6742b3c7d56e1c17a7a09a32ba"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39870-f02-service-state-lock-edges-and-trace-v1/manifest.json",
+        "sha256": "e95cdfc8954261ea392f89bd53bee2ed01d188a5b2e74e3cbf415444cf123d62"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38959-f02-current-four-physical-independent-v1/manifest.json",
+        "sha256": "6aae48af70d2fb968e922e9b73881dc1d69ba6419ccf7189fdf65a467776a9d3"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "Protocol JDBC is a separate SS311 table rule independent of the blocked Storage remediations. Historical PG38959 had a four-output rule; current PG40204 was HTTP only.",
+    "endCondition": "Show all Protocol JAR class hashes match the producing manifest, confirm exact same stored-edge input and determine the JDBC subset result without a new analyzer or build.",
+    "workScope": "One Protocol-only SS311 rule. Keep Storage finding open. No product execution, active JAR code, DB or held operations.",
+    "preStartRetry": "Wrong metadata workCategory rejected before event append. Corrected to REVIEW; no analysis was started.",
+    "quotaAfter": {
+      "usedPercent": 52,
+      "remainingPercent": 48,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "61607bcb6f632f6c807f49d85f0497f0fdfc622fbb55e7bc715480486217c9fe",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-19T18:37:47.596000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 52,
+          "remainingPercent": 48,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-19T18:37:15.339082+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 52,
+      "remainingPercent": 48,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "publicEvidence": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40254-f02-protocol-jdbc-saved-edges-v1/manifest.json",
+        "sha256": "58b44ffd81c0087b4f614169c2574cad15718b5d02eb19a7ec11e59f5437a7a5"
+      }
+    ],
+    "completedSource": "33e5d0eacf98ce3ee942edc2e7173597e2480787",
+    "startedAtEvent": "PGPT-20261008-6227",
+    "actualExit": 0,
+    "firstVerification": {
+      "localRuleCompleted": 1,
+      "targetRules": 1
+    },
+    "attempt": 1,
+    "retryReasons": [],
+    "productTests": 0,
+    "newAcceptanceCount": 0,
+    "actualBackendActions": 0,
+    "replayedEarlierTests": 0,
+    "attemptResult": "PROTOCOL_JDBC_CLEAR_IN_SAVED_TYPED_EDGES",
+    "physicalClasses": 176,
+    "typedEdges": 2609,
+    "prohibitedEdges": []
+  }
+}

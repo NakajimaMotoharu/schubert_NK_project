@@ -1,0 +1,92 @@
+{
+  "actualExit": 0,
+  "source": "33e5d0eacf98ce3ee942edc2e7173597e2480787",
+  "productionCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "startEventId": "PGPT-20261008-6227",
+  "criterionResult": "PROTOCOL_JDBC_CLEAR_IN_SAVED_TYPED_EDGES",
+  "scope": "Protocol only. Storage BUG-3233 and cross-module end conditions remain open.",
+  "originalEvidence": [
+    {
+      "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/705_F02StorageJDBC継続点.json",
+      "sha256": "91df167ba312668fe5b4a3c4542bb22d9bcc7c627f142bdce6c83070f997f6de"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40204-f02-library-http-saved-product-edges-v1/manifest.json",
+      "sha256": "e3b5d99d31bb35c8995252594b90e2ba667ee8c63809cb34d5ecb0205e55a892"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39980-f02-current-four-production-jars-v1/manifest.json",
+      "sha256": "3a06700c504ef0f93f3edc89dab8f4197b46ff6742b3c7d56e1c17a7a09a32ba"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39870-f02-service-state-lock-edges-and-trace-v1/manifest.json",
+      "sha256": "e95cdfc8954261ea392f89bd53bee2ed01d188a5b2e74e3cbf415444cf123d62"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38959-f02-current-four-physical-independent-v1/manifest.json",
+      "sha256": "6aae48af70d2fb968e922e9b73881dc1d69ba6419ccf7189fdf65a467776a9d3"
+    }
+  ],
+  "physicalBuild": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39862-service-db-state-lock-four-main-v1/manifest.json",
+    "sha256": "9433dae6e53e1d97a1b942175e930c315c118da9dea870cdffb0b26072e6a035"
+  },
+  "typedEdgeArchive": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39870-f02-service-state-lock-edges-and-trace-v1/jdeps-command.json",
+    "sha256": "e75dab582c1dda8ac13b6065f17ab35a70f442255ba4942a6ed069c5cd703f82"
+  },
+  "design": {
+    "path": "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md",
+    "sha256": "422cc9febdcb165af7ceba1c58a53c39831d0458f9c8858095fcfe099b70680f",
+    "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "section": "2 product module table, Protocol JDBC prohibition"
+  },
+  "protocolJar": {
+    "artifact": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39980-f02-current-four-production-jars-v1/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+      "sha256": "b83654e743f863794df40ce2563e91b4237b159622dcd7ad1829b6ef84c14974"
+    },
+    "size": 299374,
+    "ownerUid": 1000,
+    "ownerGid": 1000,
+    "mode": "0664",
+    "links": 1,
+    "classEntries": 176,
+    "matchedPhysicalClassHashes": 176,
+    "crcVerified": true
+  },
+  "protocolTypedEdgeDenominator": 2609,
+  "violations": [],
+  "jdbcClassNamespaces": [
+    "java.sql.",
+    "javax.sql.",
+    "org.springframework.jdbc.",
+    "org.postgresql."
+  ],
+  "matchedJdkArtifact": "java.sql",
+  "observedAggregate": {
+    "total": 17867,
+    "internal": 6009,
+    "edges": {
+      "batch->bootstrap": 213,
+      "batch->storage": 678,
+      "bootstrap->storage": 133
+    },
+    "internalUnresolved": [],
+    "externalUnresolved": 385
+  },
+  "historicalReplays": 0,
+  "newProductTests": 0,
+  "newJdepsRuns": 0,
+  "newBuilds": 0,
+  "newFormalAcceptance": 0,
+  "verifier": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/5331_f02_protocol_jdbc_saved_edges.py",
+    "sha256": "6fd11c07ef1f33e6ab4a5d3067f161e600057dd54a109d7c55c2a9f537d1db7c"
+  },
+  "sharedVerifier": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/5330_f02_storage_jdbc_saved_edges.py",
+    "sha256": "8e6041d9f55fb205481f747ec3c557d64c3a55d73f1a0581cb2bf8c086407c06"
+  },
+  "terminalAtUTC": "2026-11-19T18:37:15.339082+00:00"
+}
