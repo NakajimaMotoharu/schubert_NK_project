@@ -73,9 +73,12 @@ final class BackupVersionsIdentityTest {
           "invalid backup schema",
           assertThrows(IllegalArgumentException.class, () -> versions(invalid)).getMessage());
     }
-    for (int index = 0; index < CLAIMS.size(); index++) {
-      String[] missing = CLAIMS.toArray(String[]::new);
-      missing[index] = null;
+    String[] valid = CLAIMS.toArray(String[]::new);
+    for (int index = 0; index < valid.length; index++) {
+      String[] missing = new String[valid.length];
+      System.arraycopy(valid, 0, missing, 0, index);
+      int after = index + 1;
+      System.arraycopy(valid, after, missing, after, valid.length - after);
       assertThrows(NullPointerException.class, () -> versions(missing), "claim index " + index);
     }
   }
