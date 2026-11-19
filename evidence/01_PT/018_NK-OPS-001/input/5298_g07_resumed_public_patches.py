@@ -29,12 +29,12 @@ def sha(data):
     return hashlib.sha256(data).hexdigest()
 
 
-def main():
-    start = json.loads(next(D.glob('638_G07*')).read_bytes())['values']
+def main(start_pattern='638_G07*', expected_commits=10, expected_files=67, added_line_limit=4000):
+    start = json.loads(next(D.glob(start_pattern)).read_bytes())['values']
     first, last = start['fromCommit'], start['source']
     assert last == git('rev-parse', 'HEAD').decode().strip()
     chain = git('rev-list', '--reverse', f'{first}..{last}').decode().splitlines()
-    assert len(chain) == 10
+    assert len(chain) == expected_commits
     file_set = set()
     lines = 0
     for commit in chain:
@@ -46,7 +46,7 @@ def main():
             assert raw in TOOLS or raw.startswith(ALLOWED)
             file_set.add(raw)
             lines += int(added)
-    assert len(file_set) == 67 and lines <= 4000
+    assert len(file_set) == expected_files and lines <= added_line_limit
     tool, = start['oracleReferences']
     assert sha(Path(tool['path']).read_bytes()) == tool['sha256']
     command = [

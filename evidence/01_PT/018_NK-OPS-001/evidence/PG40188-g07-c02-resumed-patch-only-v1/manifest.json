@@ -1,0 +1,55 @@
+{
+  "actualExit": 1,
+  "start": "24dbd1261c3b09a3a27f99df5bedafb278e8c0e6",
+  "source": "987e855ddfba635c5ba303988f1cae68abb1bf4b",
+  "commits": 12,
+  "distinctFiles": 72,
+  "addedLinesAcrossCommits": 4174,
+  "candidates": [
+    {
+      "commit": "45d7c88932721f61120489f5a060842f72456bc9",
+      "file": "evidence/01_PT/018_NK-OPS-001/evidence/PG40172-f02-monitoring-repository-after-v1/manifest.json",
+      "rule": "generic-api-key",
+      "startLine": 18,
+      "endLine": 18,
+      "startColumn": 9,
+      "endColumn": 114
+    },
+    {
+      "commit": "5d1c465d0d4e387638e8f9fedbf78c3ef0091ea7",
+      "file": "evidence/01_PT/018_NK-OPS-001/evidence/PG40170-f02-monitoring-repository-before-v1/manifest.json",
+      "rule": "generic-api-key",
+      "startLine": 18,
+      "endLine": 18,
+      "startColumn": 9,
+      "endColumn": 114
+    }
+  ],
+  "found": 2,
+  "confirmedSecrets": null,
+  "unresolved": 2,
+  "command": [
+    "/home/mini/codex/project1/work/toolchain/gitleaks-8.30.1-linux-x64/gitleaks",
+    "git",
+    "--no-banner",
+    "--no-color",
+    "--redact=100",
+    "--ignore-gitleaks-allow",
+    "--gitleaks-ignore-path=/dev/null",
+    "--report-format=json",
+    "--report-path=-",
+    "--timeout=45",
+    "--log-opts=--no-merges --no-renames 24dbd1261c3b09a3a27f99df5bedafb278e8c0e6..987e855ddfba635c5ba303988f1cae68abb1bf4b",
+    "."
+  ],
+  "rawMatchPublished": false,
+  "binaryArtifactsInRange": 0,
+  "coveredSlice": "Committed text patches only",
+  "fullTreeOrHistoryScan": false,
+  "archiveExpansion": false,
+  "wholeG07Accepted": false,
+  "whole451Accepted": false,
+  "productTests": 0,
+  "newFormalAcceptance": 0,
+  "terminalAtUTC": "2026-11-19T00:26:46.312274+00:00"
+}
