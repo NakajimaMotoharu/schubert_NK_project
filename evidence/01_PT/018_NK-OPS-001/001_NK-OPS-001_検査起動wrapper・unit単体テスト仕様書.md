@@ -165,3 +165,10 @@ NK-MSG-002、SS351 §3.3、WBS-P018-09/2、YKT-2328 site 6。固定4キー、ASC
 ## PT-PRO-LOG-UTF8-001〜002 LGSREQ01自由入力の欄別strict decode
 
 UI235 §11、SS322/323 §9.5、WBS-P018-09/2、YKT-2328 site1。656 byte、空欄0x20、Keyword/Action/Pathの欄先頭1/273/337、Page 635、Page size 641。001は独立hexのNFC文字・補助文字、enumと固定JST時刻のtyped読戻し、全space欠落を期待。002は三欄それぞれraw surrogate UTF-8表現と非NFC結合列を拒否し、固定例外を期待。対象は認定済みProtocol JARのみ。
+
+## P013-01 UI236 質問・通知の独立固定長試験
+
+- PT-PRO-QSS-WIRE-001/002（§11.1）。384 byte DATA。Keyword 1/256、Username 257/64、回答状態 321/12、From 333/17、To 350/17、Page 367/6、Page size 373/3。独立byteでNFCと補助文字、両欄のspace欠落、両欄それぞれの不正UTF-8と非NFC拒否。Actorの認可は別。
+- PT-PRO-NTS-WIRE-001/002（§8.1）。64 byte DATA。種別1/12、From 13/17、To 30/17、Page 47/6、Page size 53/3。3定義値とspace、日付なし、固定JSTからUTCへの変換、未知値、不正日付、逆順を確認。
+
+PG39980のProtocol JARを同SHA・同所有で利用し、テストから入力値を独立構成。JDK25、strict javac、限定PMD/Checkstyle、同run実測。実API、DB・HMAC・JMS、LGSの既済試験は選択外。
