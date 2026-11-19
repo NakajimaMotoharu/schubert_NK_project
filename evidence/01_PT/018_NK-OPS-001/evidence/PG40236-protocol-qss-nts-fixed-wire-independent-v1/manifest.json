@@ -1,0 +1,151 @@
+{
+  "actualExit": 0,
+  "source": "3a334da3dc2027eb55e2f0d7b233a5a9c68dabdd",
+  "productionCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "jar": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39980-f02-current-four-production-jars-v1/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+    "sha256": "b83654e743f863794df40ce2563e91b4237b159622dcd7ad1829b6ef84c14974"
+  },
+  "jarOwnership": {
+    "uid": 1000,
+    "mode": "0o664",
+    "regularFile": true,
+    "sameBeforeAndAfter": true
+  },
+  "cases": {
+    "PT-PRO-QSS-WIRE-001": "qss001DecodesExactKeywordUsernameAndBlankFields",
+    "PT-PRO-QSS-WIRE-002": "qss002RejectsMalformedAndNonNfcAtBothTextOffsets",
+    "PT-PRO-NTS-WIRE-001": "nts001DecodesEveryDefinedTypeAndTheExactUtcDateBoundary",
+    "PT-PRO-NTS-WIRE-002": "nts002RejectsUnknownTypeInvalidDateReversalAndOneMillisecondOver"
+  },
+  "resultsByLayout": {
+    "QSSREQ01": {
+      "success": 2,
+      "wireBytes": 384,
+      "fieldOffsets": {
+        "keyword": [
+          1,
+          256
+        ],
+        "username": [
+          257,
+          64
+        ]
+      },
+      "expected": "問題😀, Café, blank optionals; reject malformed UTF-8 and non-NFC at both offsets"
+    },
+    "NTSREQ01": {
+      "success": 2,
+      "wireBytes": 64,
+      "fieldOffsets": {
+        "type": [
+          1,
+          12
+        ],
+        "from": [
+          13,
+          17
+        ],
+        "to": [
+          30,
+          17
+        ]
+      },
+      "expected": "Three closed types plus absent; UTC conversion and 366-day inclusive boundary; reject unknown, invalid, reversed, and over-limit"
+    }
+  },
+  "observed": {
+    "QSSREQ01": {
+      "crc64": "b66014023c3a17bb",
+      "counters": {
+        "INSTRUCTION": {
+          "hit": 145,
+          "miss": 2
+        },
+        "LINE": {
+          "hit": 26,
+          "miss": 1
+        },
+        "COMPLEXITY": {
+          "hit": 3,
+          "miss": 1
+        },
+        "METHOD": {
+          "hit": 3,
+          "miss": 1
+        },
+        "CLASS": {
+          "hit": 1,
+          "miss": 0
+        }
+      }
+    },
+    "NTSREQ01": {
+      "crc64": "4b97d84529d70720",
+      "counters": {
+        "INSTRUCTION": {
+          "hit": 109,
+          "miss": 2
+        },
+        "LINE": {
+          "hit": 20,
+          "miss": 1
+        },
+        "COMPLEXITY": {
+          "hit": 3,
+          "miss": 1
+        },
+        "METHOD": {
+          "hit": 3,
+          "miss": 1
+        },
+        "CLASS": {
+          "hit": 1,
+          "miss": 0
+        }
+      }
+    }
+  },
+  "firstRun": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40232-protocol-qss-nts-fixed-wire-v1/manifest.json",
+    "sha256": "1238d7df90206a021bf91e1ccac977a2d469b7f26de4961ffb8dc1a782e16fd7"
+  },
+  "firstXml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40232-protocol-qss-nts-fixed-wire-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "6267f94be198f985cf17e9d058322335310e44e890ed43bf21c77b63a641abf4"
+  },
+  "firstSuccess": 3,
+  "firstFailure": 1,
+  "retestSuccess": 4,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "retryReason": "Expected semantic message omitted its standard prefix; product and JAR unchanged",
+  "retest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40234-protocol-qss-nts-fixed-wire-retest-v1/manifest.json",
+    "sha256": "4d8f350bf2cc7c32fa6f1fb4fa155f533777d938d74dcbb8ff4187c64a43a794"
+  },
+  "xml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40234-protocol-qss-nts-fixed-wire-retest-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "37ea28e68daf0ceaa30a989161ec47fac8edcf962226864be42f73c99d991176"
+  },
+  "coverage": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40234-protocol-qss-nts-fixed-wire-retest-v1/coverage.xml",
+    "sha256": "75b96afb95e7166711e39e25e3a89718d4b9717a00740ca7fe45fab368e1ba4d"
+  },
+  "execution": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40234-protocol-qss-nts-fixed-wire-retest-v1/jacoco.exec",
+    "sha256": "45301ebb0086496cc667a7b0dcbd0a13f0ccf3b66e4ecb6f4e9817ba5f7f290e"
+  },
+  "init": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40234-protocol-qss-nts-fixed-wire-retest-v1/class-init.log.gz",
+    "sha256": "738efa88d34f46543ba31770dbaff34c70dec89189b19875a37fdc290317d37a"
+  },
+  "toolsStaticViolations": 0,
+  "lgsReplayed": 0,
+  "apiOrBackendExecuted": 0,
+  "whole451Accepted": false,
+  "newFormalAcceptance": 0,
+  "terminalAtUTC": "2026-11-19T15:31:07.586731+00:00"
+}

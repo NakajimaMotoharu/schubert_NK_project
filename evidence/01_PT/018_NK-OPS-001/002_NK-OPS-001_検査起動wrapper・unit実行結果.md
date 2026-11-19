@@ -125,3 +125,7 @@ PG40216は1試験、失敗/エラー/skip/未実行0、8拒否と1正常、forma
 ## PT-PRO-LOG-UTF8-001〜002 実行結果（2026-11-19 JST）
 
 当source 6351e424bd1490f2946a0761a37e3731a840a18b、PG40226／40228、2試験すべて成功。独立オフセットと六拒否、正常typed値・欄欠落。FieldCodec.decodeText L21/22 B9/10 M1/1、他試験coverage合算なし。証跡 SHA-256 3943d008988b11cbb6249bcd295525afc9e0fa6906857ce33e4b4f0e89eea453。
+
+## P013-01 質問・通知固定長PT結果（2026-11-20 JST）
+
+PG40234、3a334da3dc2027eb55e2f0d7b233a5a9c68dabdd。QSS2／NTS2、F/E/S/未実行各0。PG40232の3成功1失敗は別保持、BUG-3350。QSSの両自由入力とNTSの種別／日時を独立照合。入力位置・固定期待値・Jar所有はPG40236、SHA-256 c75c45c64b56f5010ee8b8d340577866c4f0e42425ebe827f597c51a2ecefe7e。実測はQSS型L26/27・M3/4、NTS型L20/21・M3/4、各C1/1。全451や業務経路の合格は未成立。
