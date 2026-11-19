@@ -1,0 +1,79 @@
+{
+  "eventId": "PGPT-20261008-6230",
+  "groupId": "PGPT-WBS66-P01808-EXEC-MODIFIED-UTF-BOUNDARY-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-19T19:38:24.807000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 52,
+      "remainingPercent": 48,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P01808-EXEC-MODIFIED-UTF-BOUNDARY-20261120",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-P01808-EXEC-MODIFIED-UTF-BOUNDARY-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P018-08.03"
+    ],
+    "managementWorkIds": [
+      "WBS-P018-08.03/2"
+    ],
+    "source": "6dbffb827cb29ce4c3fcf26bfe2a24367817685b",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "canonicalDesignSource": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "run": "PG40256-p01808-exec-modified-utf-red-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.45,
+      "high": 0.9
+    },
+    "groupCapPp": 1.5,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/708_F02両libraryJDBC照合継続点.json",
+        "sha256": "cdea8a8f48f04db9aa50e6a29a4d0a30cb395367b89f8c7be9d936f90aee77ea"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40252-f02-storage-jdbc-saved-edges-v1/manifest.json",
+        "sha256": "c07b262505a082fee7f5c75a0ec5be73d136114ea6c413e2e86f70b51d3cef79"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40152-p01808-exec-canonical-independent-v1/manifest.json",
+        "sha256": "590abba3c27c02115265323ce1806f439e8f700c4ba7ab8d7a9f01c154e3d9bb"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40098-p01808-exec-record-presence-v1/manifest.json",
+        "sha256": "c7de5efd6c00425490f94b6e555ed6e1bea513e5b587256f7e6047ab38eae8cb"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "PG40152 sealed count/padding, PG40098 record presence and CRC; neither scoped DataOutput modified UTF field encoding.",
+    "endCondition": "Pin local writer. Test canonical modified UTF-8 label and off-target name vectors, and independently reject impossible byte patterns at both fields; keep exact ASCII selection and opaque byte output. Record original and corrected tool results without product PT.",
+    "workScope": "Offline Python tool, synthetic immutable bytes and pinned installed disassembly only. No product class load, actual native stream, held files or host operations.",
+    "deferredF02": {
+      "wbs": "WBS-F02-a",
+      "bug": "BUG-3233",
+      "ssc": "SSC-461",
+      "owner": "Storage/Bootstrap and native FD maintainers",
+      "currentCallSites": [
+        "OwnedTransferDirectory.execute FileAlreadyExistsException",
+        "OwnedTransferDirectory.execute NoSuchFileException",
+        "OwnedTransferDirectory.execute IOException or NoSuchAlgorithmException"
+      ],
+      "requirement": "Authorized exact-scope callback/FD ownership proof and an approved migration preserving priority, identity, cleanup and callers before retiring the legacy entry. 460 documents this independent HOLD."
+    }
+  }
+}

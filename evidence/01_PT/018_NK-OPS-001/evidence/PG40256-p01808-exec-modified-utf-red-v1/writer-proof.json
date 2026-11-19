@@ -1,0 +1,52 @@
+{
+  "jar": {
+    "path": "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+    "sha256": "d2b74b20b415163c1f53261e7c5ef4445b788327094208ff821e0c2baf9bc8f1"
+  },
+  "javap": {
+    "path": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+    "sha256": "59d0b7cf9e1936f16cd6dd39d5214a0c8507a1d5895a1e9b95c52aa4f436d71b"
+  },
+  "java": {
+    "path": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+    "sha256": "c324471f8b7933a3cb401eafbc35a7055443779b438a3ab928bda3867a1b8ab1"
+  },
+  "commands": [
+    [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+      "-classpath",
+      "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+      "-c",
+      "org.jacoco.cli.internal.core.data.ExecutionDataWriter"
+    ],
+    [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+      "-p",
+      "-c",
+      "java.io.DataOutputStream"
+    ],
+    [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "<scratch>/LocalModifiedUtfProbe.java"
+    ]
+  ],
+  "outputs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40256-p01808-exec-modified-utf-red-v1/pinned-writer-javap.txt",
+      "sha256": "92f1f9387a30d6a10dc6edb501a77a157b2bf496b6e87e8666adbc72eab709f8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40256-p01808-exec-modified-utf-red-v1/pinned-jdk-writeutf-javap.txt",
+      "sha256": "40e691ba009132892e4ebf7aacc90f529f3596b8c057907c43470fb887c15d6a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40256-p01808-exec-modified-utf-red-v1/LocalModifiedUtfProbe.java.txt",
+      "sha256": "5a82ad2ac747dbb4b537dbf6b39acb346e43122b1bf8c98ee5a954ef174776c2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40256-p01808-exec-modified-utf-red-v1/jdk-synthetic-writer.txt",
+      "sha256": "052e351fda63326f88f1da6bffd66f9935fa542e8f1518447a5212fff7b57ea5"
+    }
+  ],
+  "metadataPreflightRetry": "JDK 25 implements length handling without the earlier assumed bytecode integer literals. Direct format oracle captured as separate synthetic writer output."
+}

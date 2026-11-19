@@ -1,0 +1,13 @@
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.util.HexFormat;
+
+class LocalModifiedUtfProbe {
+    public static void main(String[] args) throws Exception {
+        var bytes = new ByteArrayOutputStream();
+        try (var output = new DataOutputStream(bytes)) {
+            output.writeUTF(new String(new char[]{0, 1, 127, 128, 2047, 2048, 0xd800, 0xd83d, 0xde00}));
+        }
+        System.out.println(HexFormat.of().formatHex(bytes.toByteArray()));
+    }
+}

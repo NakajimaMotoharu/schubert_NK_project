@@ -1,0 +1,135 @@
+Compiled from "ExecutionDataWriter.java"
+public class org.jacoco.cli.internal.core.data.ExecutionDataWriter implements org.jacoco.cli.internal.core.data.ISessionInfoVisitor,org.jacoco.cli.internal.core.data.IExecutionDataVisitor {
+  public static final char FORMAT_VERSION;
+
+  public static final char MAGIC_NUMBER;
+
+  public static final byte BLOCK_HEADER;
+
+  public static final byte BLOCK_SESSIONINFO;
+
+  public static final byte BLOCK_EXECUTIONDATA;
+
+  protected final org.jacoco.cli.internal.core.internal.data.CompactDataOutput out;
+
+  public org.jacoco.cli.internal.core.data.ExecutionDataWriter(java.io.OutputStream) throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: invokespecial #29                 // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: new           #31                 // class org/jacoco/cli/internal/core/internal/data/CompactDataOutput
+         8: dup
+         9: aload_1
+        10: invokespecial #33                 // Method org/jacoco/cli/internal/core/internal/data/CompactDataOutput."<init>":(Ljava/io/OutputStream;)V
+        13: putfield      #35                 // Field out:Lorg/jacoco/cli/internal/core/internal/data/CompactDataOutput;
+        16: aload_0
+        17: invokespecial #38                 // Method writeHeader:()V
+        20: return
+
+  public void flush() throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: getfield      #35                 // Field out:Lorg/jacoco/cli/internal/core/internal/data/CompactDataOutput;
+         4: invokevirtual #54                 // Method org/jacoco/cli/internal/core/internal/data/CompactDataOutput.flush:()V
+         7: return
+
+  public void visitSessionInfo(org.jacoco.cli.internal.core.data.SessionInfo);
+    Code:
+         0: aload_0
+         1: getfield      #35                 // Field out:Lorg/jacoco/cli/internal/core/internal/data/CompactDataOutput;
+         4: bipush        16
+         6: invokevirtual #46                 // Method org/jacoco/cli/internal/core/internal/data/CompactDataOutput.writeByte:(I)V
+         9: aload_0
+        10: getfield      #35                 // Field out:Lorg/jacoco/cli/internal/core/internal/data/CompactDataOutput;
+        13: aload_1
+        14: invokevirtual #62                 // Method org/jacoco/cli/internal/core/data/SessionInfo.getId:()Ljava/lang/String;
+        17: invokevirtual #66                 // Method org/jacoco/cli/internal/core/internal/data/CompactDataOutput.writeUTF:(Ljava/lang/String;)V
+        20: aload_0
+        21: getfield      #35                 // Field out:Lorg/jacoco/cli/internal/core/internal/data/CompactDataOutput;
+        24: aload_1
+        25: invokevirtual #70                 // Method org/jacoco/cli/internal/core/data/SessionInfo.getStartTimeStamp:()J
+        28: invokevirtual #74                 // Method org/jacoco/cli/internal/core/internal/data/CompactDataOutput.writeLong:(J)V
+        31: aload_0
+        32: getfield      #35                 // Field out:Lorg/jacoco/cli/internal/core/internal/data/CompactDataOutput;
+        35: aload_1
+        36: invokevirtual #77                 // Method org/jacoco/cli/internal/core/data/SessionInfo.getDumpTimeStamp:()J
+        39: invokevirtual #74                 // Method org/jacoco/cli/internal/core/internal/data/CompactDataOutput.writeLong:(J)V
+        42: goto          55
+        45: astore_2
+        46: new           #79                 // class java/lang/RuntimeException
+        49: dup
+        50: aload_2
+        51: invokespecial #82                 // Method java/lang/RuntimeException."<init>":(Ljava/lang/Throwable;)V
+        54: athrow
+        55: return
+      Exception table:
+         from    to  target type
+             0    42    45   Class java/io/IOException
+
+  public void visitClassExecution(org.jacoco.cli.internal.core.data.ExecutionData);
+    Code:
+         0: aload_1
+         1: invokevirtual #94                 // Method org/jacoco/cli/internal/core/data/ExecutionData.hasHits:()Z
+         4: ifeq          62
+         7: aload_0
+         8: getfield      #35                 // Field out:Lorg/jacoco/cli/internal/core/internal/data/CompactDataOutput;
+        11: bipush        17
+        13: invokevirtual #46                 // Method org/jacoco/cli/internal/core/internal/data/CompactDataOutput.writeByte:(I)V
+        16: aload_0
+        17: getfield      #35                 // Field out:Lorg/jacoco/cli/internal/core/internal/data/CompactDataOutput;
+        20: aload_1
+        21: invokevirtual #96                 // Method org/jacoco/cli/internal/core/data/ExecutionData.getId:()J
+        24: invokevirtual #74                 // Method org/jacoco/cli/internal/core/internal/data/CompactDataOutput.writeLong:(J)V
+        27: aload_0
+        28: getfield      #35                 // Field out:Lorg/jacoco/cli/internal/core/internal/data/CompactDataOutput;
+        31: aload_1
+        32: invokevirtual #99                 // Method org/jacoco/cli/internal/core/data/ExecutionData.getName:()Ljava/lang/String;
+        35: invokevirtual #66                 // Method org/jacoco/cli/internal/core/internal/data/CompactDataOutput.writeUTF:(Ljava/lang/String;)V
+        38: aload_0
+        39: getfield      #35                 // Field out:Lorg/jacoco/cli/internal/core/internal/data/CompactDataOutput;
+        42: aload_1
+        43: invokevirtual #103                // Method org/jacoco/cli/internal/core/data/ExecutionData.getProbes:()[Z
+        46: invokevirtual #107                // Method org/jacoco/cli/internal/core/internal/data/CompactDataOutput.writeBooleanArray:([Z)V
+        49: goto          62
+        52: astore_2
+        53: new           #79                 // class java/lang/RuntimeException
+        56: dup
+        57: aload_2
+        58: invokespecial #82                 // Method java/lang/RuntimeException."<init>":(Ljava/lang/Throwable;)V
+        61: athrow
+        62: return
+      Exception table:
+         from    to  target type
+             7    49    52   Class java/io/IOException
+
+  public static byte[] getFileHeader();
+    Code:
+         0: new           #113                // class java/io/ByteArrayOutputStream
+         3: dup
+         4: invokespecial #114                // Method java/io/ByteArrayOutputStream."<init>":()V
+         7: astore_0
+         8: new           #2                  // class org/jacoco/cli/internal/core/data/ExecutionDataWriter
+        11: dup
+        12: aload_0
+        13: invokespecial #115                // Method "<init>":(Ljava/io/OutputStream;)V
+        16: pop
+        17: goto          30
+        20: astore_1
+        21: new           #117                // class java/lang/AssertionError
+        24: dup
+        25: aload_1
+        26: invokespecial #120                // Method java/lang/AssertionError."<init>":(Ljava/lang/Object;)V
+        29: athrow
+        30: aload_0
+        31: invokevirtual #123                // Method java/io/ByteArrayOutputStream.toByteArray:()[B
+        34: areturn
+      Exception table:
+         from    to  target type
+             8    17    20   Class java/io/IOException
+
+  static {};
+    Code:
+         0: sipush        4103
+         3: putstatic     #51                 // Field FORMAT_VERSION:C
+         6: return
+}

@@ -1,0 +1,437 @@
+Compiled from "DataOutputStream.java"
+public class java.io.DataOutputStream extends java.io.FilterOutputStream implements java.io.DataOutput {
+  private static final jdk.internal.access.JavaLangAccess JLA;
+
+  protected int written;
+
+  private byte[] bytearr;
+
+  private final byte[] writeBuffer;
+
+  public java.io.DataOutputStream(java.io.OutputStream);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokespecial #1                  // Method java/io/FilterOutputStream."<init>":(Ljava/io/OutputStream;)V
+         5: aload_0
+         6: aconst_null
+         7: putfield      #7                  // Field bytearr:[B
+        10: aload_0
+        11: bipush        8
+        13: newarray       byte
+        15: putfield      #13                 // Field writeBuffer:[B
+        18: return
+
+  private void incCount(int);
+    Code:
+         0: aload_0
+         1: getfield      #16                 // Field written:I
+         4: iload_1
+         5: iadd
+         6: istore_2
+         7: iload_2
+         8: ifge          14
+        11: ldc           #22                 // int 2147483647
+        13: istore_2
+        14: aload_0
+        15: iload_2
+        16: putfield      #16                 // Field written:I
+        19: return
+
+  public synchronized void write(int) throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: getfield      #23                 // Field out:Ljava/io/OutputStream;
+         4: iload_1
+         5: invokevirtual #27                 // Method java/io/OutputStream.write:(I)V
+         8: aload_0
+         9: iconst_1
+        10: invokevirtual #33                 // Method incCount:(I)V
+        13: return
+
+  public synchronized void write(byte[], int, int) throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: getfield      #23                 // Field out:Ljava/io/OutputStream;
+         4: aload_1
+         5: iload_2
+         6: iload_3
+         7: invokevirtual #36                 // Method java/io/OutputStream.write:([BII)V
+        10: aload_0
+        11: iload_3
+        12: invokevirtual #33                 // Method incCount:(I)V
+        15: return
+
+  public void flush() throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: getfield      #23                 // Field out:Ljava/io/OutputStream;
+         4: invokevirtual #39                 // Method java/io/OutputStream.flush:()V
+         7: return
+
+  public final void writeBoolean(boolean) throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: getfield      #23                 // Field out:Ljava/io/OutputStream;
+         4: iload_1
+         5: ifeq          12
+         8: iconst_1
+         9: goto          13
+        12: iconst_0
+        13: invokevirtual #27                 // Method java/io/OutputStream.write:(I)V
+        16: aload_0
+        17: iconst_1
+        18: invokevirtual #33                 // Method incCount:(I)V
+        21: return
+
+  public final void writeByte(int) throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: getfield      #23                 // Field out:Ljava/io/OutputStream;
+         4: iload_1
+         5: invokevirtual #27                 // Method java/io/OutputStream.write:(I)V
+         8: aload_0
+         9: iconst_1
+        10: invokevirtual #33                 // Method incCount:(I)V
+        13: return
+
+  public final void writeShort(int) throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: getfield      #13                 // Field writeBuffer:[B
+         4: iconst_0
+         5: iload_1
+         6: invokestatic  #43                 // Method jdk/internal/util/ByteArray.setUnsignedShort:([BII)V
+         9: aload_0
+        10: getfield      #23                 // Field out:Ljava/io/OutputStream;
+        13: aload_0
+        14: getfield      #13                 // Field writeBuffer:[B
+        17: iconst_0
+        18: iconst_2
+        19: invokevirtual #36                 // Method java/io/OutputStream.write:([BII)V
+        22: aload_0
+        23: iconst_2
+        24: invokevirtual #33                 // Method incCount:(I)V
+        27: return
+
+  public final void writeChar(int) throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: getfield      #13                 // Field writeBuffer:[B
+         4: iconst_0
+         5: iload_1
+         6: invokestatic  #43                 // Method jdk/internal/util/ByteArray.setUnsignedShort:([BII)V
+         9: aload_0
+        10: getfield      #23                 // Field out:Ljava/io/OutputStream;
+        13: aload_0
+        14: getfield      #13                 // Field writeBuffer:[B
+        17: iconst_0
+        18: iconst_2
+        19: invokevirtual #36                 // Method java/io/OutputStream.write:([BII)V
+        22: aload_0
+        23: iconst_2
+        24: invokevirtual #33                 // Method incCount:(I)V
+        27: return
+
+  public final void writeInt(int) throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: getfield      #13                 // Field writeBuffer:[B
+         4: iconst_0
+         5: iload_1
+         6: invokestatic  #48                 // Method jdk/internal/util/ByteArray.setInt:([BII)V
+         9: aload_0
+        10: getfield      #23                 // Field out:Ljava/io/OutputStream;
+        13: aload_0
+        14: getfield      #13                 // Field writeBuffer:[B
+        17: iconst_0
+        18: iconst_4
+        19: invokevirtual #36                 // Method java/io/OutputStream.write:([BII)V
+        22: aload_0
+        23: iconst_4
+        24: invokevirtual #33                 // Method incCount:(I)V
+        27: return
+
+  public final void writeLong(long) throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: getfield      #13                 // Field writeBuffer:[B
+         4: iconst_0
+         5: lload_1
+         6: invokestatic  #51                 // Method jdk/internal/util/ByteArray.setLong:([BIJ)V
+         9: aload_0
+        10: getfield      #23                 // Field out:Ljava/io/OutputStream;
+        13: aload_0
+        14: getfield      #13                 // Field writeBuffer:[B
+        17: iconst_0
+        18: bipush        8
+        20: invokevirtual #36                 // Method java/io/OutputStream.write:([BII)V
+        23: aload_0
+        24: bipush        8
+        26: invokevirtual #33                 // Method incCount:(I)V
+        29: return
+
+  public final void writeFloat(float) throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: getfield      #13                 // Field writeBuffer:[B
+         4: iconst_0
+         5: fload_1
+         6: invokestatic  #55                 // Method jdk/internal/util/ByteArray.setFloat:([BIF)V
+         9: aload_0
+        10: getfield      #23                 // Field out:Ljava/io/OutputStream;
+        13: aload_0
+        14: getfield      #13                 // Field writeBuffer:[B
+        17: iconst_0
+        18: iconst_4
+        19: invokevirtual #36                 // Method java/io/OutputStream.write:([BII)V
+        22: aload_0
+        23: iconst_4
+        24: invokevirtual #33                 // Method incCount:(I)V
+        27: return
+
+  public final void writeDouble(double) throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: getfield      #13                 // Field writeBuffer:[B
+         4: iconst_0
+         5: dload_1
+         6: invokestatic  #59                 // Method jdk/internal/util/ByteArray.setDouble:([BID)V
+         9: aload_0
+        10: getfield      #23                 // Field out:Ljava/io/OutputStream;
+        13: aload_0
+        14: getfield      #13                 // Field writeBuffer:[B
+        17: iconst_0
+        18: bipush        8
+        20: invokevirtual #36                 // Method java/io/OutputStream.write:([BII)V
+        23: aload_0
+        24: bipush        8
+        26: invokevirtual #33                 // Method incCount:(I)V
+        29: return
+
+  public final void writeBytes(java.lang.String) throws java.io.IOException;
+    Code:
+         0: aload_1
+         1: invokevirtual #63                 // Method java/lang/String.length:()I
+         4: istore_2
+         5: iconst_0
+         6: istore_3
+         7: iload_3
+         8: iload_2
+         9: if_icmpge     31
+        12: aload_0
+        13: getfield      #23                 // Field out:Ljava/io/OutputStream;
+        16: aload_1
+        17: iload_3
+        18: invokevirtual #69                 // Method java/lang/String.charAt:(I)C
+        21: i2b
+        22: invokevirtual #27                 // Method java/io/OutputStream.write:(I)V
+        25: iinc          3, 1
+        28: goto          7
+        31: aload_0
+        32: iload_2
+        33: invokevirtual #33                 // Method incCount:(I)V
+        36: return
+
+  public final void writeChars(java.lang.String) throws java.io.IOException;
+    Code:
+         0: aload_1
+         1: invokevirtual #63                 // Method java/lang/String.length:()I
+         4: istore_2
+         5: iconst_0
+         6: istore_3
+         7: iload_3
+         8: iload_2
+         9: if_icmpge     48
+        12: aload_1
+        13: iload_3
+        14: invokevirtual #69                 // Method java/lang/String.charAt:(I)C
+        17: istore        4
+        19: aload_0
+        20: getfield      #13                 // Field writeBuffer:[B
+        23: iconst_0
+        24: iload         4
+        26: invokestatic  #43                 // Method jdk/internal/util/ByteArray.setUnsignedShort:([BII)V
+        29: aload_0
+        30: getfield      #23                 // Field out:Ljava/io/OutputStream;
+        33: aload_0
+        34: getfield      #13                 // Field writeBuffer:[B
+        37: iconst_0
+        38: iconst_2
+        39: invokevirtual #36                 // Method java/io/OutputStream.write:([BII)V
+        42: iinc          3, 1
+        45: goto          7
+        48: aload_0
+        49: iload_2
+        50: iconst_2
+        51: imul
+        52: invokevirtual #33                 // Method incCount:(I)V
+        55: return
+
+  public final void writeUTF(java.lang.String) throws java.io.IOException;
+    Code:
+         0: aload_1
+         1: aload_0
+         2: invokestatic  #73                 // Method writeUTF:(Ljava/lang/String;Ljava/io/DataOutput;)I
+         5: pop
+         6: return
+
+  static int writeUTF(java.lang.String, java.io.DataOutput) throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: invokevirtual #63                 // Method java/lang/String.length:()I
+         4: istore_2
+         5: getstatic     #77                 // Field JLA:Ljdk/internal/access/JavaLangAccess;
+         8: aload_0
+         9: invokeinterface #81,  2           // InterfaceMethod jdk/internal/access/JavaLangAccess.countNonZeroAscii:(Ljava/lang/String;)I
+        14: istore_3
+        15: aload_0
+        16: iload_3
+        17: invokestatic  #87                 // Method jdk/internal/util/ModifiedUtf.utfLen:(Ljava/lang/String;I)I
+        20: istore        4
+        22: iload         4
+        24: ldc           #93                 // int 65535
+        26: if_icmpgt     35
+        29: iload         4
+        31: iload_2
+        32: if_icmpge     49
+        35: new           #94                 // class java/io/UTFDataFormatException
+        38: dup
+        39: aload_0
+        40: iload         4
+        42: invokestatic  #96                 // Method tooLongMsg:(Ljava/lang/String;I)Ljava/lang/String;
+        45: invokespecial #100                // Method java/io/UTFDataFormatException."<init>":(Ljava/lang/String;)V
+        48: athrow
+        49: aload_1
+        50: instanceof    #8                  // class java/io/DataOutputStream
+        53: ifeq          106
+        56: aload_1
+        57: checkcast     #8                  // class java/io/DataOutputStream
+        60: astore        6
+        62: aload         6
+        64: getfield      #7                  // Field bytearr:[B
+        67: ifnull        83
+        70: aload         6
+        72: getfield      #7                  // Field bytearr:[B
+        75: arraylength
+        76: iload         4
+        78: iconst_2
+        79: iadd
+        80: if_icmpge     96
+        83: aload         6
+        85: iload         4
+        87: iconst_2
+        88: imul
+        89: iconst_2
+        90: iadd
+        91: newarray       byte
+        93: putfield      #7                  // Field bytearr:[B
+        96: aload         6
+        98: getfield      #7                  // Field bytearr:[B
+       101: astore        5
+       103: goto          114
+       106: iload         4
+       108: iconst_2
+       109: iadd
+       110: newarray       byte
+       112: astore        5
+       114: iconst_0
+       115: istore        6
+       117: aload         5
+       119: iload         6
+       121: iload         4
+       123: invokestatic  #43                 // Method jdk/internal/util/ByteArray.setUnsignedShort:([BII)V
+       126: iinc          6, 2
+       129: aload_0
+       130: iconst_0
+       131: iload_3
+       132: aload         5
+       134: iload         6
+       136: invokevirtual #103                // Method java/lang/String.getBytes:(II[BI)V
+       139: iload         6
+       141: iload_3
+       142: iadd
+       143: istore        6
+       145: iload_3
+       146: istore        7
+       148: iload         7
+       150: iload_2
+       151: if_icmpge     175
+       154: aload         5
+       156: iload         6
+       158: aload_0
+       159: iload         7
+       161: iinc          7, 1
+       164: invokevirtual #69                 // Method java/lang/String.charAt:(I)C
+       167: invokestatic  #107                // Method jdk/internal/util/ModifiedUtf.putChar:([BIC)I
+       170: istore        6
+       172: goto          148
+       175: aload_1
+       176: aload         5
+       178: iconst_0
+       179: iload         4
+       181: iconst_2
+       182: iadd
+       183: invokeinterface #111,  4          // InterfaceMethod java/io/DataOutput.write:([BII)V
+       188: iload         4
+       190: iconst_2
+       191: iadd
+       192: ireturn
+
+  private static java.lang.String tooLongMsg(java.lang.String, int);
+    Code:
+         0: aload_0
+         1: invokevirtual #63                 // Method java/lang/String.length:()I
+         4: istore_2
+         5: aload_0
+         6: iconst_0
+         7: bipush        8
+         9: invokevirtual #114                // Method java/lang/String.substring:(II)Ljava/lang/String;
+        12: astore_3
+        13: aload_0
+        14: iload_2
+        15: bipush        8
+        17: isub
+        18: iload_2
+        19: invokevirtual #114                // Method java/lang/String.substring:(II)Ljava/lang/String;
+        22: astore        4
+        24: iload_2
+        25: i2l
+        26: iload_1
+        27: iload_2
+        28: isub
+        29: invokestatic  #118                // Method java/lang/Integer.toUnsignedLong:(I)J
+        32: ladd
+        33: lstore        5
+        35: new           #122                // class java/lang/StringBuilder
+        38: dup
+        39: invokespecial #124                // Method java/lang/StringBuilder."<init>":()V
+        42: ldc           #126                // String encoded string (
+        44: invokevirtual #128                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        47: aload_3
+        48: invokevirtual #128                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        51: ldc           #132                // String ...
+        53: invokevirtual #128                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        56: aload         4
+        58: invokevirtual #128                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        61: ldc           #134                // String ) too long:
+        63: invokevirtual #128                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        66: lload         5
+        68: invokevirtual #136                // Method java/lang/StringBuilder.append:(J)Ljava/lang/StringBuilder;
+        71: ldc           #139                // String  bytes
+        73: invokevirtual #128                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        76: invokevirtual #141                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+        79: areturn
+
+  public final int size();
+    Code:
+         0: aload_0
+         1: getfield      #16                 // Field written:I
+         4: ireturn
+
+  static {};
+    Code:
+         0: invokestatic  #145                // Method jdk/internal/access/SharedSecrets.getJavaLangAccess:()Ljdk/internal/access/JavaLangAccess;
+         3: putstatic     #77                 // Field JLA:Ljdk/internal/access/JavaLangAccess;
+         6: return
+}
