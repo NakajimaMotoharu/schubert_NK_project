@@ -1,0 +1,169 @@
+{
+  "actualExit": 0,
+  "outcome": "TERMINAL_RETURNED",
+  "sshExit": 0,
+  "sshSignal": null,
+  "authPrompts": 1,
+  "admission": {
+    "host": "haruka",
+    "boot": "7f3dbb6e-29b8-4c24-a9a1-6f3778a98fa8",
+    "uid": 1000,
+    "workspaceMode": "0700",
+    "workspace": "/home/mini/schubert-nk-pgpt/validation-work",
+    "device": 64512,
+    "freeBytes": 224268185600,
+    "runAbsent": true,
+    "activeOwnedWorkspaceJobs": 0,
+    "observedAtUTC": "2026-11-19T23:49:44.569359+00:00"
+  },
+  "capsuleSent": true,
+  "terminal": {
+    "actualExit": 0,
+    "stage": "terminal",
+    "allocatedRun": true,
+    "boot": "7f3dbb6e-29b8-4c24-a9a1-6f3778a98fa8",
+    "ownerUid": 1000,
+    "workspace": "/home/mini/schubert-nk-pgpt/validation-work/PG40396-p020-single-session-filestore-target-v1",
+    "session": "PG40396-CHARACTERIZATION-209-FILESTORE",
+    "terminalAtUTC": "2026-11-19T23:49:50.795653+00:00",
+    "steps": {
+      "unit": {
+        "actualExit": 0,
+        "expectedExit": 0,
+        "stdoutSha256": "eb09d270d8867b40c7ff64a0a432ba73c8fc1924f5e4514d755d2e16f805a24c",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "command": [
+          "/opt/schubert-nk-test-tools/jdk-25.0.4/bin/java",
+          "-Xmx1g",
+          "-Djava.awt.headless=true",
+          "-Duser.language=ja",
+          "-Duser.country=JP",
+          "-Duser.timezone=Asia/Tokyo",
+          "-Dchr.unitProjectRoot=/home/mini/schubert-nk-pgpt/validation-work/PG40396-p020-single-session-filestore-target-v1/snapshot",
+          "-Djava.io.tmpdir=/home/mini/schubert-nk-pgpt/validation-work/PG40396-p020-single-session-filestore-target-v1/tmp",
+          "-Xlog:class+init=info:file=/home/mini/schubert-nk-pgpt/validation-work/PG40396-p020-single-session-filestore-target-v1/class-init.log",
+          "-javaagent:/home/mini/schubert-nk-pgpt/validation-work/PG40396-p020-single-session-filestore-target-v1/sdk/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/schubert-nk-pgpt/validation-work/PG40396-p020-single-session-filestore-target-v1/combined.exec,sessionid=PG40396-CHARACTERIZATION-209-FILESTORE,append=false",
+          "-jar",
+          "/home/mini/schubert-nk-pgpt/validation-work/PG40396-p020-single-session-filestore-target-v1/sdk/junit-platform-console-standalone-1.13.4.jar",
+          "execute",
+          "--disable-banner",
+          "--details=summary",
+          "--fail-if-no-tests",
+          "--class-path",
+          "/home/mini/schubert-nk-pgpt/validation-work/PG40396-p020-single-session-filestore-target-v1/classes:/home/mini/schubert-nk-pgpt/validation-work/PG40396-p020-single-session-filestore-target-v1/testclasses:/home/mini/schubert-nk-pgpt/validation-work/PG40396-p020-single-session-filestore-target-v1/snapshot/program/characterization/tests/resources:/home/mini/schubert-nk-pgpt/validation-work/PG40396-p020-single-session-filestore-target-v1/sdk/jackson-annotations-2.19.2.jar:/home/mini/schubert-nk-pgpt/validation-work/PG40396-p020-single-session-filestore-target-v1/sdk/jackson-core-2.19.2.jar:/home/mini/schubert-nk-pgpt/validation-work/PG40396-p020-single-session-filestore-target-v1/sdk/jackson-databind-2.19.2.jar:/home/mini/schubert-nk-pgpt/validation-work/PG40396-p020-single-session-filestore-target-v1/sdk/jspecify-1.0.1.jar:/home/mini/schubert-nk-pgpt/validation-work/PG40396-p020-single-session-filestore-target-v1/sdk/junit-platform-console-standalone-1.13.4.jar:/home/mini/schubert-nk-pgpt/validation-work/PG40396-p020-single-session-filestore-target-v1/sdk/org.jacoco.agent-0.8.15-runtime.jar:/home/mini/schubert-nk-pgpt/validation-work/PG40396-p020-single-session-filestore-target-v1/sdk/org.jacoco.cli-0.8.15-nodeps.jar:/home/mini/schubert-nk-pgpt/validation-work/PG40396-p020-single-session-filestore-target-v1/sdk/playwright-1.55.0.jar",
+          "--reports-dir",
+          "/home/mini/schubert-nk-pgpt/validation-work/PG40396-p020-single-session-filestore-target-v1/xml",
+          "--config=junit.jupiter.execution.parallel.enabled=false",
+          "--select-class=dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "--select-class=dev.codex.schubert.characterization.GateCliTest",
+          "--select-class=dev.codex.schubert.characterization.GateContractTest",
+          "--select-class=dev.codex.schubert.characterization.GateContractValidatorNegativeTest",
+          "--select-class=dev.codex.schubert.characterization.TargetAdapterTest",
+          "--select-class=dev.codex.schubert.characterization.ArtifactComparatorEmptyInputTest",
+          "--select-class=dev.codex.schubert.characterization.BaselineNumericMetadataTest",
+          "--select-class=dev.codex.schubert.characterization.CharacterizationHashTest",
+          "--select-class=dev.codex.schubert.characterization.CorrelatedLogEvidenceValidatorTest",
+          "--select-class=dev.codex.schubert.characterization.CorrelatedLogHttpNumberTest",
+          "--select-class=dev.codex.schubert.characterization.CorrelatedMenuActionContractTest",
+          "--select-class=dev.codex.schubert.characterization.GateBaselineMetadataTest",
+          "--select-class=dev.codex.schubert.characterization.GateDefinitionDocumentsTest",
+          "--select-class=dev.codex.schubert.characterization.GateDefinitionNumericTest",
+          "--select-class=dev.codex.schubert.characterization.GateEvidenceDocumentsTest",
+          "--select-class=dev.codex.schubert.characterization.GateMetricsCountTest",
+          "--select-class=dev.codex.schubert.characterization.GateSyntheticRunPortTest",
+          "--select-class=dev.codex.schubert.characterization.CommonValueContractTest",
+          "--select-class=dev.codex.schubert.characterization.CharacterizationIoScopeTest",
+          "--select-class=dev.codex.schubert.characterization.GateOutputFailureContractTest",
+          "--select-class=dev.codex.schubert.characterization.GateOwnedFileStoreContract"
+        ]
+      },
+      "report": {
+        "actualExit": 0,
+        "expectedExit": 0,
+        "stdoutSha256": "fee8f61fa53dd654624b08aaca87e99abf2b669f67d3f7f19bb98475a585dc0e",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "command": [
+          "/opt/schubert-nk-test-tools/jdk-25.0.4/bin/java",
+          "-jar",
+          "/home/mini/schubert-nk-pgpt/validation-work/PG40396-p020-single-session-filestore-target-v1/sdk/org.jacoco.cli-0.8.15-nodeps.jar",
+          "report",
+          "/home/mini/schubert-nk-pgpt/validation-work/PG40396-p020-single-session-filestore-target-v1/combined.exec",
+          "--classfiles",
+          "/home/mini/schubert-nk-pgpt/validation-work/PG40396-p020-single-session-filestore-target-v1/classes",
+          "--xml",
+          "/home/mini/schubert-nk-pgpt/validation-work/PG40396-p020-single-session-filestore-target-v1/coverage.xml"
+        ]
+      }
+    },
+    "totals": {
+      "tests": 209,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "actualBackendActions": 0,
+    "sourceXmlSha256": "5ae0db9347e3b14eb24f0b1174de4b03e11b9bb08bdcb9de84baaf4c59be658e",
+    "classInitSha256": "893d10e56557721967cf8a9070a7c18ffbfd67f540f39e818b041bf7ef1a342e",
+    "methods": {
+      "main": {
+        "INSTRUCTION": {
+          "covered": 106,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 9,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 28,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 8,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "preflight": {
+        "INSTRUCTION": {
+          "covered": 5,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 2,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 1,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 1,
+          "missed": 0
+        }
+      }
+    }
+  },
+  "artifacts": {
+    "cases.json": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40396-p020-single-session-filestore-target-v1/cases.json",
+      "sha256": "099bb4efb7ec6a99902e50d18ced8ad4e6cde43ab54f7ca08bb31e435e82d6ae"
+    },
+    "combined.exec": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40396-p020-single-session-filestore-target-v1/combined.exec",
+      "sha256": "fac0f998ae953a075952ef6d96e9a5a59eb0633a446f96497333f5d8d30266fe"
+    },
+    "coverage.xml": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40396-p020-single-session-filestore-target-v1/coverage.xml",
+      "sha256": "6e5806b847d35a749da8c115ca0f02d0e5c5d1f7c16b71b980e49c5603f3c5c4"
+    }
+  },
+  "newFormalAcceptance": 0,
+  "productTests": 0,
+  "actualBackendActions": 0,
+  "whole451Accepted": false,
+  "terminalAtUTC": "2026-11-19T23:49:50.953882+00:00"
+}
