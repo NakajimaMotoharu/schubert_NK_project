@@ -1,0 +1,173 @@
+{
+  "actualExit": 0,
+  "phase": "before",
+  "source": "f9999300e357124d25324a97400c33ee3e581772",
+  "productionCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "auditSha256": "880b1e5fc43b518d2c354cfb29ed2ccaa7e1a693fc36426f04984cc45d74826d",
+  "tests": [
+    {
+      "testId": "PT-F02-ARCH-031",
+      "origin": "dev.codex.schubert.nk.protocol.ClientRequest",
+      "target": "java.net.http.HttpRequest",
+      "expected": true,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-ARCH-032",
+      "origin": "dev.codex.schubert.nk.protocol.ServerExchange",
+      "target": "com.sun.net.httpserver.HttpExchange",
+      "expected": true,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-ARCH-033",
+      "origin": "dev.codex.schubert.nk.storage.ClientResponse",
+      "target": "java.net.http.HttpResponse",
+      "expected": true,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-ARCH-034",
+      "origin": "dev.codex.schubert.nk.storage.ServerHandle",
+      "target": "com.sun.net.httpserver.HttpServer",
+      "expected": true,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-ARCH-035",
+      "origin": "dev.codex.schubert.nk.protocol.GeneralUri",
+      "target": "java.net.URI",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-ARCH-036",
+      "origin": "dev.codex.schubert.nk.storage.DirectoryPath",
+      "target": "java.nio.file.Path",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-ARCH-037",
+      "origin": "dev.codex.schubert.nk.api.LocalListener",
+      "target": "com.sun.net.httpserver.HttpExchange",
+      "expected": false,
+      "observed": false
+    }
+  ],
+  "physical": {
+    "protocol": {
+      "dev.codex.schubert.nk.protocol.OwnedCanary": "d07c42d792f7d50ddf00bc2d64937d45c2f8108360e647c5ec39bd1ba85ad3a1",
+      "dev.codex.schubert.nk.protocol.ClientRequest": "d3c0159e5029f6072b26c8e78c16de467e5ee372b58a9ba4c01e1d7359d48269",
+      "dev.codex.schubert.nk.protocol.ServerExchange": "af225d5c1f3eb47190f285ea1fb77b2d9e4a0de23b4e3ded391da2f3ceb392d8",
+      "dev.codex.schubert.nk.protocol.GeneralUri": "5b09c00c64a5d37377a35a791df7f6429810ec9aec59e7d8f2608efa27305e83"
+    },
+    "storage": {
+      "dev.codex.schubert.nk.storage.OwnedCanary": "747db0b0dd3612dae2941e7480297f786a1bbf148bdfdfefb9e5f8288f7c90e8",
+      "dev.codex.schubert.nk.storage.ClientResponse": "02231bb898ca9779d431ca3b337e35bda1e6466654837f92674e6f6923fd06e3",
+      "dev.codex.schubert.nk.storage.ServerHandle": "0b56ee56834edbb999bebb8908a562e866dd0b2d8262ff4ee611d5f0f0b5d947",
+      "dev.codex.schubert.nk.storage.DirectoryPath": "d6bc962fef41ee5a74e3b58edcb7c03399044194b4e2fb7be76aeedba93fc254"
+    },
+    "bootstrap": {
+      "dev.codex.schubert.nk.bootstrap.OwnedCanary": "ce8bb5845d31b9201f459203b7deb37058a1968ca3f62c75c3387fdf0a990e54"
+    },
+    "api": {
+      "dev.codex.schubert.nk.api.OwnedCanary": "a577a113eb3f6b778fd72d785843a9194cc5af5666223e6b14c14e03b88e57f0",
+      "dev.codex.schubert.nk.api.LocalListener": "a4cb32f386ac8cb4e4526113d2fdb227de1a5264c88afd4372b6f8a9acd19323"
+    },
+    "web": {
+      "dev.codex.schubert.nk.web.OwnedCanary": "96e3f9c35cd632da1257a2ccee140d2f29656a9c8b1e544f76de367a21d2ac59"
+    },
+    "batch": {
+      "dev.codex.schubert.nk.batch.OwnedCanary": "1c7ee73e196ff761ebca71ebd9f03056dcc2f6a6e6b2e04e4d4efddc67e16cc1"
+    }
+  },
+  "receipts": {
+    "tool-compile": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40198-f02-library-http-before-v1/tool-compile.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40198-f02-library-http-before-v1/tool-compile.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "-d",
+        "/dev/shm/pgpt-f02-library-http-2gspggid/tool",
+        "/dev/shm/pgpt-f02-library-http-2gspggid/ModuleDependencyAudit.java"
+      ]
+    },
+    "fixture-compile": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40198-f02-library-http-before-v1/fixture-compile.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40198-f02-library-http-before-v1/fixture-compile.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-d",
+        "/dev/shm/pgpt-f02-library-http-2gspggid/classes",
+        "/dev/shm/pgpt-f02-library-http-2gspggid/fixtures/dev/codex/schubert/nk/protocol/OwnedCanary.java",
+        "/dev/shm/pgpt-f02-library-http-2gspggid/fixtures/dev/codex/schubert/nk/protocol/ClientRequest.java",
+        "/dev/shm/pgpt-f02-library-http-2gspggid/fixtures/dev/codex/schubert/nk/protocol/ServerExchange.java",
+        "/dev/shm/pgpt-f02-library-http-2gspggid/fixtures/dev/codex/schubert/nk/protocol/GeneralUri.java",
+        "/dev/shm/pgpt-f02-library-http-2gspggid/fixtures/dev/codex/schubert/nk/storage/OwnedCanary.java",
+        "/dev/shm/pgpt-f02-library-http-2gspggid/fixtures/dev/codex/schubert/nk/storage/ClientResponse.java",
+        "/dev/shm/pgpt-f02-library-http-2gspggid/fixtures/dev/codex/schubert/nk/storage/ServerHandle.java",
+        "/dev/shm/pgpt-f02-library-http-2gspggid/fixtures/dev/codex/schubert/nk/storage/DirectoryPath.java",
+        "/dev/shm/pgpt-f02-library-http-2gspggid/fixtures/dev/codex/schubert/nk/bootstrap/OwnedCanary.java",
+        "/dev/shm/pgpt-f02-library-http-2gspggid/fixtures/dev/codex/schubert/nk/api/OwnedCanary.java",
+        "/dev/shm/pgpt-f02-library-http-2gspggid/fixtures/dev/codex/schubert/nk/api/LocalListener.java",
+        "/dev/shm/pgpt-f02-library-http-2gspggid/fixtures/dev/codex/schubert/nk/web/OwnedCanary.java",
+        "/dev/shm/pgpt-f02-library-http-2gspggid/fixtures/dev/codex/schubert/nk/batch/OwnedCanary.java"
+      ]
+    },
+    "audit": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40198-f02-library-http-before-v1/audit.stdout.txt",
+        "sha256": "66f5e354fd0b7f44f2f1fd8681a47406c598e0a53155e19a2fb1f95e9c4a89af"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40198-f02-library-http-before-v1/audit.stderr.txt",
+        "sha256": "2c58b87a0350a39bb1c3b5f4891defeeb9a785e84aa11a466dc9ddb21253bf58"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/dev/shm/pgpt-f02-library-http-2gspggid/tool:/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "ModuleDependencyAudit",
+        "protocol=/dev/shm/pgpt-f02-library-http-2gspggid/protocol.jar",
+        "storage=/dev/shm/pgpt-f02-library-http-2gspggid/storage.jar",
+        "bootstrap=/dev/shm/pgpt-f02-library-http-2gspggid/bootstrap.jar",
+        "api=/dev/shm/pgpt-f02-library-http-2gspggid/api.jar",
+        "web=/dev/shm/pgpt-f02-library-http-2gspggid/web.jar",
+        "batch=/dev/shm/pgpt-f02-library-http-2gspggid/batch.jar"
+      ]
+    }
+  },
+  "matched": 3,
+  "productJars": 0,
+  "productTests": 0,
+  "wholeF02Accepted": false,
+  "terminalAtUTC": "2026-11-19T13:24:57.178729+00:00"
+}

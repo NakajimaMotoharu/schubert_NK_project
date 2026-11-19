@@ -165,12 +165,13 @@ public final class ModuleDependencyAudit {
         || target.startsWith("org.thymeleaf.")
         || target.startsWith("jakarta.servlet.") || target.startsWith("javax.servlet.");
     boolean server = target.startsWith("com.sun.net.httpserver.");
+    boolean httpClient = target.startsWith("java.net.http.");
     return switch (module) {
-      case "protocol", "storage" -> jdbc(target) || jmsApi(target) || spring;
+      case "protocol", "storage" -> jdbc(target) || jmsApi(target) || spring || server || httpClient;
       case "bootstrap" -> jms(target) || mvc || server
           || target.startsWith("org.springframework.web.")
           || target.startsWith("org.springframework.http.")
-          || target.startsWith("java.net.http.");
+          || httpClient;
       case "api" -> mvc;
       case "batch" -> mvc || server;
       case "web" -> false;
