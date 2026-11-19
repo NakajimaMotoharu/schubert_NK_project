@@ -1,0 +1,106 @@
+{
+  "eventId": "PGPT-20261008-6176",
+  "actualExit": 0,
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-G08-F02-C02-TOOL-TRACE-20261119",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-G08-F02-C02-TOOL-TRACE-20261119",
+    "workAttributionKind": "REQUALIFICATION",
+    "wbsLeafIds": [
+      "WBS-G08"
+    ],
+    "managementWorkIds": [
+      "G08",
+      "WBS-F02-a",
+      "WBS-C02-a"
+    ],
+    "source": "4cebb37f7dcc9b2b64982ee448feaaa472b8df88",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "run": "PG40186-g08-repository-shutdown-tool-trace-v1",
+    "workScope": "Register ten saved F02 and C02 tool test identities with owner, exact source and artifact; preserve timeout references as reuse. No product operation, test rerun or acceptance.",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.08,
+      "base": 0.21,
+      "high": 0.65
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40174-f02-monitoring-repository-independent-v1/manifest.json",
+        "sha256": "d56e097bf7f80357ac4609534666c3f745dec384558fcb9a41bf23134aef9904"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40182-c02-source-killmode-independent-v1/manifest.json",
+        "sha256": "a00fd714e1971cb0426f7ffd7af4d3b7498f7e920a63e8584ad561d4b09a713a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40184-c02-api-web-timeout-existing-proof-join-v1/manifest.json",
+        "sha256": "6c862cc57c118845d63b6314c5dbef2a8d403956edf10e79447e77a85771dcc7"
+      }
+    ],
+    "quotaAfter": {
+      "usedPercent": 49,
+      "remainingPercent": 51,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "dfe4102f5c8b66653880c3de2c1bdc684c2d70a7e7ef13a6e3c1c30352bf578a",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-19T00:26:03.849000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 49,
+          "remainingPercent": 51,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-19T00:25:32.178092+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 49,
+      "remainingPercent": 51,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "publicEvidence": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40186-g08-repository-shutdown-tool-trace-v1/manifest.json",
+        "sha256": "61bee913bf4ab4ea6d19fce695059201b5b032fe7426bc665e2508498c2bd7c7"
+      }
+    ],
+    "f02ToolCases": 4,
+    "c02ToolCases": 6,
+    "c02ExistingTimeoutTestCount": 1,
+    "c02ReusedTimeoutControlCount": 4,
+    "productTests": 0,
+    "formalIntake": 0,
+    "currentAccepted": 17,
+    "result": "Ten existing tool-only test IDs bound to exact WBS and original proofs. Existing timeout test attached once, with no new test or effective-systemd evidence."
+  }
+}

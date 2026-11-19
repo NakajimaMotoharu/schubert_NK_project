@@ -1,4 +1,142 @@
 {
+  "currentG08RepositoryAndShutdownToolTracePG40186": {
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40186-g08-repository-shutdown-tool-trace-v1/manifest.json",
+      "sha256": "61bee913bf4ab4ea6d19fce695059201b5b032fe7426bc665e2508498c2bd7c7"
+    },
+    "productionCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "toolRows": [
+      {
+        "testId": "PT-F02-ARCH-027",
+        "activity": "WBS-F02-a",
+        "design": "SS311 §3",
+        "source": "5d1c465d0d4e387638e8f9fedbf78c3ef0091ea7",
+        "evidence": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40172-f02-monitoring-repository-after-v1/manifest.json",
+          "sha256": "8bb9b66d41b4c321584af167b96f82b713de341f101b13917e64baf71aac6829"
+        },
+        "scope": "SYNTHETIC_ARCHITECTURE",
+        "condition": "dev.codex.schubert.nk.api.persistence.DummyRepository → dev.codex.schubert.nk.api.application.log.DummyService"
+      },
+      {
+        "testId": "PT-F02-ARCH-028",
+        "activity": "WBS-F02-a",
+        "design": "SS311 §3",
+        "source": "5d1c465d0d4e387638e8f9fedbf78c3ef0091ea7",
+        "evidence": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40172-f02-monitoring-repository-after-v1/manifest.json",
+          "sha256": "8bb9b66d41b4c321584af167b96f82b713de341f101b13917e64baf71aac6829"
+        },
+        "scope": "SYNTHETIC_ARCHITECTURE",
+        "condition": "dev.codex.schubert.nk.api.monitoring.persistence.MonitoringRepository → dev.codex.schubert.nk.api.application.log.DummyService"
+      },
+      {
+        "testId": "PT-F02-ARCH-029",
+        "activity": "WBS-F02-a",
+        "design": "SS311 §3",
+        "source": "5d1c465d0d4e387638e8f9fedbf78c3ef0091ea7",
+        "evidence": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40172-f02-monitoring-repository-after-v1/manifest.json",
+          "sha256": "8bb9b66d41b4c321584af167b96f82b713de341f101b13917e64baf71aac6829"
+        },
+        "scope": "SYNTHETIC_ARCHITECTURE",
+        "condition": "dev.codex.schubert.nk.api.application.log.DummyService → dev.codex.schubert.nk.api.persistence.DummyRepository"
+      },
+      {
+        "testId": "PT-F02-ARCH-030",
+        "activity": "WBS-F02-a",
+        "design": "SS311 §3",
+        "source": "5d1c465d0d4e387638e8f9fedbf78c3ef0091ea7",
+        "evidence": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40172-f02-monitoring-repository-after-v1/manifest.json",
+          "sha256": "8bb9b66d41b4c321584af167b96f82b713de341f101b13917e64baf71aac6829"
+        },
+        "scope": "SYNTHETIC_ARCHITECTURE",
+        "condition": "dev.codex.schubert.nk.api.monitoring.persistence.LocalRepository → java.time.Clock"
+      },
+      {
+        "testId": "PT-C02-TEXT-010",
+        "activity": "WBS-C02-a",
+        "design": "SS341/342",
+        "source": "4f1b2afe49f3663cc15f642dc5eb135223415f1b",
+        "evidence": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40180-c02-source-killmode-green-v1/manifest.json",
+          "sha256": "bbec4984d048959d6f6a5436db2a11c5c28751816cbbc85e2eb6e20d4ed01641"
+        },
+        "scope": "SOURCE_TEMPLATE_ONLY",
+        "expectedRejection": null
+      },
+      {
+        "testId": "PT-C02-TEXT-011",
+        "activity": "WBS-C02-a",
+        "design": "SS341/342",
+        "source": "4f1b2afe49f3663cc15f642dc5eb135223415f1b",
+        "evidence": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40180-c02-source-killmode-green-v1/manifest.json",
+          "sha256": "bbec4984d048959d6f6a5436db2a11c5c28751816cbbc85e2eb6e20d4ed01641"
+        },
+        "scope": "SOURCE_TEMPLATE_ONLY",
+        "expectedRejection": "KILLMODE_EXPLICIT_REQUIRED"
+      },
+      {
+        "testId": "PT-C02-TEXT-012",
+        "activity": "WBS-C02-a",
+        "design": "SS341/342",
+        "source": "4f1b2afe49f3663cc15f642dc5eb135223415f1b",
+        "evidence": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40180-c02-source-killmode-green-v1/manifest.json",
+          "sha256": "bbec4984d048959d6f6a5436db2a11c5c28751816cbbc85e2eb6e20d4ed01641"
+        },
+        "scope": "SOURCE_TEMPLATE_ONLY",
+        "expectedRejection": "KILLMODE_EXPLICIT_REQUIRED"
+      },
+      {
+        "testId": "PT-C02-TEXT-013",
+        "activity": "WBS-C02-a",
+        "design": "SS341/342",
+        "source": "4f1b2afe49f3663cc15f642dc5eb135223415f1b",
+        "evidence": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40180-c02-source-killmode-green-v1/manifest.json",
+          "sha256": "bbec4984d048959d6f6a5436db2a11c5c28751816cbbc85e2eb6e20d4ed01641"
+        },
+        "scope": "SOURCE_TEMPLATE_ONLY",
+        "expectedRejection": "KILLMODE_INVALID_OVERRIDE"
+      },
+      {
+        "testId": "PT-C02-TEXT-014",
+        "activity": "WBS-C02-a",
+        "design": "SS341/342",
+        "source": "4f1b2afe49f3663cc15f642dc5eb135223415f1b",
+        "evidence": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40180-c02-source-killmode-green-v1/manifest.json",
+          "sha256": "bbec4984d048959d6f6a5436db2a11c5c28751816cbbc85e2eb6e20d4ed01641"
+        },
+        "scope": "SOURCE_TEMPLATE_ONLY",
+        "expectedRejection": "REPEATED_DIRECTIVE"
+      },
+      {
+        "testId": "PT-C02-TEXT-015",
+        "activity": "WBS-C02-a",
+        "design": "SS341/342",
+        "source": "4f1b2afe49f3663cc15f642dc5eb135223415f1b",
+        "evidence": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40180-c02-source-killmode-green-v1/manifest.json",
+          "sha256": "bbec4984d048959d6f6a5436db2a11c5c28751816cbbc85e2eb6e20d4ed01641"
+        },
+        "scope": "SOURCE_TEMPLATE_ONLY",
+        "expectedRejection": null
+      }
+    ],
+    "priorTimeoutReused": {
+      "testId": "PT-C02-TEXT-001",
+      "conditions": 4,
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40184-c02-api-web-timeout-existing-proof-join-v1/manifest.json",
+        "sha256": "6c862cc57c118845d63b6314c5dbef2a8d403956edf10e79447e77a85771dcc7"
+      }
+    },
+    "wholeG08Accepted": false
+  },
   "currentG08JdbcAndProbeEncodingToolTracePG40156": {
     "proof": {
       "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40156-g08-jdbc-probe-tool-trace-v1/manifest.json",
