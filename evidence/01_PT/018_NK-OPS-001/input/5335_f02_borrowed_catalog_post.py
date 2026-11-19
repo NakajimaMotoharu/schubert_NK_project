@@ -19,6 +19,9 @@ PROFILES = {
     "borrowed-settings": ("PG40344-*", "PG40346-*/manifest.json", "791_*",
                           "PG40348-f02-borrowed-settings-independent-v1", 2,
                           {"AddressSettingsProjectionPortTest": 5, "RoleSettingsProjectionPortTest": 4}),
+    "borrowed-expiry": ("PG40350-*", "PG40352-*/manifest.json", "794_*",
+                        "PG40354-f02-borrowed-expiry-independent-v1", 2,
+                        {"ArtemisUnknownBoundaryTest": 4}),
 }
 
 

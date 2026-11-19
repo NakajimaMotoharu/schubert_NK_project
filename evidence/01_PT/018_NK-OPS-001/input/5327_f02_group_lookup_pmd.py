@@ -53,6 +53,7 @@ def main(profile="lookup"):
         "borrowed-broker": ("ee12345caecf4beb690fab1e2c8fbee26e61f710", "PG40322-f02-borrowed-broker-pmd-delta-v1"),
         "borrowed-catalog": ("19a9f050366e32e0cc93246e2e6ef91aeb443ec1", "PG40340-f02-borrowed-catalog-pmd-delta-v1"),
         "borrowed-settings": ("becdc696ea194c5296b70f538caeb0b5941e5bdd", "PG40346-f02-borrowed-settings-pmd-delta-v1"),
+        "borrowed-expiry": ("a165978ea649ab94593d881835df759f7e118038", "PG40352-f02-borrowed-expiry-pmd-delta-v1"),
     }[profile]
     assert new_source == expected
     old_source = work["source"]

@@ -1,5 +1,7 @@
 # 2507 ArtemisUnknown 現whole4通常PT仕様
 
+SSC-461追補。既MQUNKNOWN003がメモリ内で `count` 直後の既知／未知失敗を用意し、`observe` と `purgeObserved` の二口で後続処理を拒否する。旧whole4を当sourceで再資格した。元fixtureは同一、実broker・実削除は実行対象外。PG40350〜354に対象source、コマンド、独立結果、部分coverageを保存した。
+
 2026-10-29、PG-D819予定、source17ab52b25/normal13596/静的13599、save3b42b0c4031903aebd5f1e9900d82216dc9e4cbb/push26465真正0/remote一致。開始0.5/2/4pp cap10・fresh共有28残72/reset1793774153、主F03/canonical担当費WBS-P017-10参照のみ追加親予算0。全体正式/17-190/工数null/QA051final/実操作HOLD不変更。
 
 ## 着手前判定 PT_DEFAULT

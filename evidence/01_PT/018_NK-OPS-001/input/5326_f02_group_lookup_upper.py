@@ -6,6 +6,7 @@ import io
 import json
 import os
 from pathlib import Path
+import re
 import runpy
 import subprocess
 import sys
@@ -30,6 +31,7 @@ PROFILES = {
     "borrowed-broker": ("773_*", BROKER_CLASS, "batch", "PG40320-BORROWED"),
     "borrowed-catalog": ("788_*", "", "batch", "PG40338-CATALOG"),
     "borrowed-settings": ("791_*", "", "batch", "PG40344-SETTINGS"),
+    "borrowed-expiry": ("794_*", "", "batch", "PG40350-EXPIRY"),
 }
 
 
@@ -97,9 +99,9 @@ def main(profile="lookup"):
         after = git("show", f"{core}:{target}")
         restored = after.replace(b"api.bootstrap.JdbcFailureGraph", b"storage.StorageIoException").replace(
             b"JdbcFailureGraph.preserveFatal", b"StorageIoException.preserveFatal")
-        restored = restored.replace(
-            b"import dev.codex.schubert.nk.storage.StorageIoException;\nimport dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame;",
-            b"import dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame;\nimport dev.codex.schubert.nk.storage.StorageIoException;")
+        restored = re.sub(rb"(?:^import [^\n]+\n)+",
+                          lambda match: b"".join(sorted(match[0].splitlines(keepends=True))),
+                          restored, flags=re.MULTILINE)
         assert restored == before
 
     maven_reference = read(next(EVIDENCE.glob("PG39862-*/manifest.json")))

@@ -1,5 +1,7 @@
 # 2508 ArtemisUnknown 現whole4実行結果
 
+SSC-461追補。Core `a165978ea649ab94593d881835df759f7e118038`、PG40350の既4初回成功、失敗／エラー／skip／未実行0。PG40352 PMD raw8→8。PG40354で現一物理のABI・CRCと報告を照合。Expiryの生L30/67、M4/9、C1/1、B10/44。合成口の早期失敗のみで実broker・実削除・全451は別。[PG40354 manifest](evidence/PG40354-f02-borrowed-expiry-independent-v1/manifest.json)
+
 2026-10-29、2507/PG-D819、START2886→END2887。Production17ab52b253282ce45016f0586c0167a22029fd8c/Main/Test不変更、開始0.5/2/4cap10・fresh28→28同reset1793774153、専有N/T・配賦・工数null（丸め差0≠無料）。
 
 |真正証拠|結果とSHA256|
