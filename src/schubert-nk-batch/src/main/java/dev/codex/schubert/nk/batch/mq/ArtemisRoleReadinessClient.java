@@ -1,6 +1,6 @@
 package dev.codex.schubert.nk.batch.mq;
 
-import dev.codex.schubert.nk.storage.StorageIoException;
+import dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -205,7 +205,7 @@ public final class ArtemisRoleReadinessClient {
     } catch (org.apache.activemq.artemis.commons.shaded.json.JsonException
         | ClassCastException
         | IllegalStateException malformed) {
-      StorageIoException.preserveFatal(malformed);
+      JdbcFailureGraph.preserveFatal(malformed);
       throw new ArtemisManagementReadinessException();
     }
   }
