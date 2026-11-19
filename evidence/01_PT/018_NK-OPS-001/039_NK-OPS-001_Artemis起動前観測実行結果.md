@@ -1,5 +1,7 @@
 # NK-OPS-001 Artemis起動前観測PT実行結果
 
+SSC-461追補（2026-11-20 JST）。Core `e79dd91d5d6449b08facef1e4c73429b8a227544`、実行source `ee12345caecf4beb690fab1e2c8fbee26e61f710`。PG40320で既3と新2が5成功、失敗／エラー／skip／未実行0。PG40322のPMD raw7には新規2があり、PG40324でJDK Proxyの借用と固定interface loaderを個別非該当と判定した。outer実測L36/53・M8/9・C1/1・B9/10。Evidence 0/20行は当選択外の未到達として保持。現実のbroker観測と正式品質は別。[PG40324 manifest](evidence/PG40324-f02-borrowed-broker-independent-v1/manifest.json)
+
 2026-09-25 PG267/PT-OPS-MQ-029～031選択段階: JDK25.0.4/Maven3.9.12/Linux、branch `dev-foundation`、未commit差分で`ArtemisStartupObservationTest` 3/3、failure/error/skipped0。Production class instruction125/125・line24/24・method4/4・class1/1・branch2/2。初回選択runはtest-only proxyが`addressQuery`で投げるfatalを固定Runtimeと誤期待し1failure/exit1、試験oracleをfatal identityへ修正して再実行した。不合格試行を正式合格に含めない。証明対象は既存6実Broker個別clientの順序・失敗遮断・6件不変snapshotであり、全体Broker readinessや外部API/Web起動ではない。正式全reactor/静的解析/保存manifest/hashは未実施で不認定。
 
 正式`PT-WEB-20260925-02`/source`45656f69c4fa838ee43be881170e88ac05d02dbb`、branch`dev-foundation`、00:47:35～00:59:56 JST、全1882PT（CHR41/Protocol80/Storage85/API742/Web530/Batch404）、failure/error/skipped0。Java6 Production instruction/line/method/class/branch missed0、SpotBugs0、103負canary・53scope/hash/保存manifest再照合PASS。対象3PTをNK-OPS-001へ限定認定。root manifest SHA-256 `40ba8f844469271813e03d40095a4a45847b1a39bc7ec1cb20bdb44cb43d1250`。本scopeの`evidence/manifest.json`へJDK/OS/Maven、全実行command/exit、Test ID→method、input/独立期待/actual、coverage、file hashを保存し、raw credential/管理reply/secretは非保存。関連障害なし。journal復旧エラー、credential出自、Expiry保守、最終起動判断、実NK CHR・IT/STは未完了。

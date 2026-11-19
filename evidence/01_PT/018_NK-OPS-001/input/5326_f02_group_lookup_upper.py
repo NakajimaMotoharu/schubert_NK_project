@@ -23,10 +23,37 @@ METHODS = ("canonicalByteBoundaries", "malformedAndNull", "ownedCommandAndExit",
            "timeoutInterruptAndTermination", "stdioFailureMatrix", "sourceBufferAndNoLeak",
            "concurrentLookup", "gid009PreservesFatalReaderFailureThroughTheJdbcEdge")
 RELEASE_CLASS = "dev.codex.schubert.nk.bootstrap.ReleaseSignatureVerifierTest"
+BROKER_CLASS = "dev.codex.schubert.nk.batch.mq.ArtemisStartupObservationTest"
+PROFILES = {
+    "lookup": ("767_*", CLASS, "batch", "PG40308-GID"),
+    "public-rfc": ("770_*", RELEASE_CLASS, "bootstrap", "PG40314-PUBLIC-RFC"),
+    "borrowed-broker": ("773_*", BROKER_CLASS, "batch", "PG40320-BORROWED"),
+}
 
 
 def read(path):
     return json.loads(Path(path).read_bytes())
+
+
+def broker_dependencies(plan, local_repo):
+    manifest = Path(plan["oracleReferences"][3]["path"])
+    assert COMMON["pin"](manifest) == plan["oracleReferences"][3]
+    tree = read(manifest.with_name("batch-tree.json"))
+    names = {"artemis-core-client", "artemis-commons", "netty-buffer", "netty-common", "slf4j-api"}
+    resolved = {}
+    pending = [tree]
+    while pending:
+        node = pending.pop()
+        name = node["artifactId"]
+        if name in names and node["scope"] in ("compile", "runtime") and node["type"] == "jar":
+            version = node["version"]
+            path = local_repo.joinpath(*node["groupId"].split("."), name, version, f"{name}-{version}.jar")
+            assert name not in resolved or resolved[name] == path
+            resolved[name] = path
+        pending.extend(node.get("children", []))
+    assert set(resolved) == names
+    assert all(path.is_file() and path.resolve() == path for path in resolved.values())
+    return [resolved[key] for key in sorted(resolved)]
 
 
 def run(out, label, command, cwd, env):
@@ -43,20 +70,17 @@ def run(out, label, command, cwd, env):
 
 
 def main(profile="lookup"):
-    assert profile in ("lookup", "public-rfc")
-    release = profile == "public-rfc"
-    test_class = RELEASE_CLASS if release else CLASS
-    output_module = "bootstrap" if release else "batch"
-    session = "PG40314-PUBLIC-RFC" if release else "PG40308-GID"
-    start = read(next(PLAN.glob("770_*" if release else "767_*")))
+    pattern, test_class, output_module, session = PROFILES[profile]
+    lookup = profile == "lookup"
+    start = read(next(PLAN.glob(pattern)))
     job = start["values"]
     git, pin = (COMMON[key] for key in ("git", "pin"))
     source = git("rev-parse", "HEAD").decode().strip()
-    core = source if release else git("rev-parse", "HEAD^").decode().strip()
+    core = source if profile == "public-rfc" else git("rev-parse", "HEAD^").decode().strip()
     fixture, target = [item["path"] for item in job["oracleReferences"][-2:]]
     for meta in job["oracleReferences"]:
         path = meta["path"]
-        if path in (fixture, target):
+        if path in (fixture, target) or path.endswith("/038_NK-OPS-001_Artemis起動前観測単体テスト仕様書.md"):
             assert COMMON["sha"](git("show", f"{job['source']}:{path}")) == meta["sha256"]
         else:
             assert pin(Path(path)) == meta
@@ -86,10 +110,15 @@ def main(profile="lookup"):
     agent = tool("org.jacoco.agent-0.8.15-runtime.jar")
     coverage_cli = tool("org.jacoco.cli-0.8.15-nodeps.jar")
     annotations = tool("jspecify-1.0.1.jar")
+    dependencies = []
+    if profile == "borrowed-broker":
+        repo = Path(next(part.split("=", 1)[1] for part in maven if part.startswith("-Dmaven.repo.local=")))
+        dependencies = broker_dependencies(job, repo)
+    pins = [pin(path) for path in dependencies]
     out = (EVIDENCE / job["run"]).resolve()
     out.mkdir()
-    selected = ([f"--select-class={test_class}"] if release
-                else [f"--select-method={test_class}#{method}" for method in METHODS])
+    selected = ([f"--select-method={test_class}#{method}" for method in METHODS] if lookup
+                else [f"--select-class={test_class}"])
     paths = ["pom.xml", "program/characterization/pom.xml", "src/schubert-nk-api/pom.xml",
              "src/schubert-nk-web/pom.xml", *(f"src/schubert-nk-{module}" for module in MODULES)]
     stages = {}
@@ -102,7 +131,7 @@ def main(profile="lookup"):
         env = {"JAVA_HOME": str(java.parents[1]), "PATH": str(java.parent) + ":/usr/bin:/bin",
                "LANG": "C.UTF-8", "USER": "mini"}
         modules = {name: work / f"src/schubert-nk-{name}/target/classes" for name in MODULES}
-        cp = os.pathsep.join(map(str, (*modules.values(), junit, annotations)))
+        cp = os.pathsep.join(map(str, (*modules.values(), junit, annotations, *dependencies)))
         execution = out / "jacoco.exec"
         xml = out / "xml"
         xml.mkdir()
@@ -147,16 +176,17 @@ def main(profile="lookup"):
             produced = {name: {str(p.relative_to(folder)): pin(p)["sha256"]
                                for p in sorted(folder.rglob("*.class"))}
                         for name, folder in modules.items()}
-            prior = read(job["oracleReferences"][2]["path"])["classHashes"] if release else maven_reference["physicalClassHashes"]
+            prior = maven_reference["physicalClassHashes"] if lookup else read(job["oracleReferences"][2]["path"])["classHashes"]
             delta = {name: sorted(entry for entry in current.keys() | prior[name].keys()
                                   if current.get(entry) != prior[name].get(entry))
                      for name, current in produced.items()}
             facts = dict(modules={name: len(rows) for name, rows in produced.items()},
                          physicalDelta=delta, classHashes=produced)
-            if release:
+            if not lookup:
                 crc = runpy.run_path(str(OPS / "input/5257_p01810_broker_evidence_value_post.py"))["crc64"]
                 name = production.replace(".", "/")
-                exact = [name + extension for extension in (".class", "$NativeCrypto.class", "$Crypto.class")]
+                exact = [item for item in produced[output_module]
+                         if item == name + ".class" or item.startswith(name + "$")]
                 facts["selectedPhysicalCrc"] = {
                     item.removesuffix(".class"): crc((modules[output_module] / item).read_bytes())
                     for item in exact
@@ -165,13 +195,15 @@ def main(profile="lookup"):
                 json.dump(facts, stream, indent=2)
     result = dict(source=source, productionCore=core, productionPrevious=job["productionCoreMain"],
                   testFixture=fixture, productionTarget=target, stages=stages, frozenCommandFiles=paths,
-                  selectedTests=selected if release else list(METHODS),
-                  notRun=[] if release else ["nativeFactory"], namedActualHostActions=0,
+                  selectedTests=list(METHODS) if lookup else selected,
+                  notRun=["nativeFactory"] if lookup else [], namedActualHostActions=0,
                   session=session,
+                  extraDependencies=pins,
                   compiled=pin(out / "compiled-classes.json") if facts else None,
                   actualExit=next((stage["actualExit"] for stage in stages.values()
                                    if stage["actualExit"] != 0), 0),
                   wholeF02Accepted=False, whole451Accepted=False, terminalAtUTC=COMMON["timestamp"]())
+    assert [pin(path) for path in dependencies] == pins
     COMMON["dump"](out / "manifest.json", result)
     print(pin(out / "manifest.json"), result["actualExit"])
     return result["actualExit"]

@@ -1,5 +1,7 @@
 # NK-OPS-001 Artemis起動前観測単体テスト仕様書
 
+SSC-461／BUG-3233のPT-OPS-MQ-OBS-GRAPH-001／002は、それぞれ `inspect` の注入済みtopology口と `inspectEvidence` のローカルCore interface proxyが対象。独立した例外チェーンから同じError参照を返し、後続観測0回または先頭 `addressQuery` だけ1回で止まることを期待する。方法は新規2と既存029〜031をJava 25で同一source実行。実session取得、embedded broker、外部照会は使わない。対象commit、実結果、部分coverageはPG40320〜324を参照。
+
 Program `NK-OPS-001`、PG267、class `ArtemisStartupObservation`、method `inspect`。RD MQ-001/002/009/010・SYS-004、UI231/251/253、SS321 §10/13・342 §4。既存の実Broker個別検査 PT-OPS-MQ-001～021 を、caller所有のOps Core sessionの上で順番に呼ぶ境界である。Productionは順に全6組Topology、Broker実効値、6 Address設定、loopback acceptor、role、6 Queue pressureを照会する。運用のgo/no-go決定、journal復旧エラー、credential出自、Expiry maintenanceは別の必須gateである。
 
 | Test ID / method | fixture・入力・操作 | 独立した期待値と根拠 |

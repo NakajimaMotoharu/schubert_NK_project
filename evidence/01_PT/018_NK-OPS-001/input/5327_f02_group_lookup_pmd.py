@@ -31,10 +31,9 @@ def report(path):
 
 
 def main(profile="lookup"):
-    assert profile in ("lookup", "public-rfc")
-    release = profile == "public-rfc"
+    pattern = RUNNER["PROFILES"][profile][0]
     read = RUNNER["read"]
-    start = read(next(PLAN.glob("770_*" if release else "767_*")))
+    start = read(next(PLAN.glob(pattern)))
     work = start["values"]
     fixed = read(next(STORE.glob("PG39980-*/manifest.json")))
     rules = read(next(STORE.glob("PG40210-*/begin.json")))
@@ -48,12 +47,20 @@ def main(profile="lookup"):
     assert len(tool_dependencies) == 2
     assert all(pin(Path(p["path"])) == p for p in tool_dependencies)
     new_source = git("rev-parse", "HEAD").decode().strip()
-    expected = ("58c612f6a2e9e1c2a8723449d0f6625c1b48a491" if release
-                else "cfdedf39165ce5b2a50aaf1ebc884b084309ad9a")
+    expected, out_name = {
+        "lookup": ("cfdedf39165ce5b2a50aaf1ebc884b084309ad9a", "PG40310-f02-group-lookup-pmd-delta-v1"),
+        "public-rfc": ("58c612f6a2e9e1c2a8723449d0f6625c1b48a491", "PG40316-f02-public-rfc-pmd-delta-v1"),
+        "borrowed-broker": ("ee12345caecf4beb690fab1e2c8fbee26e61f710", "PG40322-f02-borrowed-broker-pmd-delta-v1"),
+    }[profile]
     assert new_source == expected
     old_source = work["source"]
     scope = work["oracleReferences"][-2:]
-    out = STORE / ("PG40316-f02-public-rfc-pmd-delta-v1" if release else "PG40310-f02-group-lookup-pmd-delta-v1")
+    out = STORE / out_name
+    dependencies = []
+    if profile == "borrowed-broker":
+        maven = read(next(STORE.glob("PG39862-*/manifest.json")))["maven"]["command"]
+        repo = Path(next(part.split("=", 1)[1] for part in maven if part.startswith("-Dmaven.repo.local=")))
+        dependencies = RUNNER["broker_dependencies"](work, repo)
     out.mkdir()
     stages, counts = {}, {}
     with TemporaryDirectory(dir="/dev/shm", prefix="pgpt-lookup-pmd-") as temp:
@@ -74,7 +81,7 @@ def main(profile="lookup"):
             files.write_text("".join(str(p) + "\n" for p in sources))
             command = rules["commands"]["pmd"][:]
             java = Path(command[0])
-            paths = [p["path"] for p in [*artifacts, *tool_dependencies]]
+            paths = [p["path"] for p in [*artifacts, *tool_dependencies]] + list(map(str, dependencies))
             paths.append(str(java.parents[1] / "lib/jrt-fs.jar"))
             command[command.index("--file-list") + 1] = files
             command[command.index("--aux-classpath") + 1] = os.pathsep.join(paths)
