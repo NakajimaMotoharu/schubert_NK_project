@@ -1,0 +1,60 @@
+{
+  "eventId": "PGPT-20261008-6218",
+  "groupId": "PGPT-WBS66-F03-BACKUP-QUIESCENT-MONITOR-343-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-19T17:30:38.627000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 52,
+      "remainingPercent": 48,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-BACKUP-QUIESCENT-MONITOR-343-20261120",
+    "workCategory": "REVIEW",
+    "workDetailCategory": "PGPT-WBS66-F03-BACKUP-QUIESCENT-MONITOR-343-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "source": "67c8d56191e69e35868f431c4a1af02c3e9db53f",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "canonicalDesignSource": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "run": "PG40248-f03-backup-quiescent-monitor-343-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.08,
+      "base": 0.25,
+      "high": 0.6
+    },
+    "groupCapPp": 1,
+    "completedOriginalRowPricePp": 0,
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37254-monitor-lock113-criteria-return-v2/remaining-source-findings.json",
+        "sha256": "bae7ed79012520486991581a379ca89a792b8875252b84c8cc28d6eee31aecd5"
+      },
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/696_ユーザー一覧固定電文とjournal継続点.json",
+        "sha256": "ec7806dca4b0f73b6d1f11582542ccbede6208b1fd32126d11b1f9b5a9c1f872"
+      }
+    ],
+    "startBasis": "PG37254 row 343 still unclassified, matching method and rule. Prior 625/644/648 concern other original rows. Current Core untouched since checkpoint.",
+    "endCondition": "Bind original finding to exact current body and direct callers; classify one site based on lock ownership, state, blocking scope, existing tests and design, and state the missing acceptance evidence and owner.",
+    "workScope": "Read only, no Unit/Root/Backup or QA056/057 experiment, no test, no repeated wire or journal.",
+    "recordedOwnedJobsInFlight": 0
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "eventId": "PGPT-20261008-6220",
+  "source": "67c8d56191e69e35868f431c4a1af02c3e9db53f",
+  "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "previousCheckpoint": "PGPT-20261008-6217",
+  "groupEvents": [
+    "PGPT-20261008-6219"
+  ],
+  "quotaAfter": {
+    "usedPercent": 52,
+    "remainingPercent": 48,
+    "resetsAt": 1795445752,
+    "windowDurationMins": 10080
+  },
+  "fullQuotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-19T17:33:02.999000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 52,
+      "remainingPercent": 48,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "kind": "WBS66_F03_BACKUP_TERMINATION_MONITOR_APPLICABILITY_CHECKPOINT",
+  "acceptedOriginal": 17,
+  "total": 190,
+  "newFormalAcceptance": 0,
+  "coreAccepted": 0,
+  "coreTotal": 5,
+  "officialPtTests": 1964,
+  "officialPtScopes": 53,
+  "effortRate": null,
+  "actualAllocatedPp": null,
+  "ownedJobsStartedHere": 0,
+  "recordedOwnedJobsInFlight": 0,
+  "originalF03FindingsNewlyClassified": [
+    343
+  ],
+  "closedOriginalWbsItems": 0,
+  "outcomeEvidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40248-f03-backup-quiescent-monitor-343-v1/manifest.json",
+      "sha256": "d288e3e572cc33309616f79a58b92aef2f95f6f0f188f01b9a39e45f2547048e"
+    }
+  ],
+  "nextEvidence": [
+    {
+      "owner": "Batch platform and static-quality maintainers",
+      "requirement": "Preserve single-adapter serialization and ownership. Submit a reviewed disposition or change, current-source static output, and authorized independent PT for same-adapter contention, interruption/timeout and finally cleanup if behavior is changed."
+    },
+    {
+      "owner": "Morning, Backup and Cleanup operating environment maintainers",
+      "requirement": "After current real-environment admission, separately establish same-owner terminal observations and caller behavior with current-source evidence as required for acceptance."
+    }
+  ],
+  "nextIndependentCandidate": {
+    "wbs": "WBS-F03/2-2",
+    "originalFindingIndex": 387,
+    "condition": "Check that no previous review already classified the static PMD site and that the exact source review is in permitted scope. No stop operation or dynamic reproduction."
+  },
+  "unchangedHolds": [
+    "QA056",
+    "QA057",
+    "real Unit, Root, backup execution",
+    "full 451"
+  ]
+}

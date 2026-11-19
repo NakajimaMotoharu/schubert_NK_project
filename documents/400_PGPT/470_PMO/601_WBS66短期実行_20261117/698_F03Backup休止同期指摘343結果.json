@@ -1,0 +1,133 @@
+{
+  "eventId": "PGPT-20261008-6219",
+  "groupId": "PGPT-WBS66-F03-BACKUP-QUIESCENT-MONITOR-343-20261120",
+  "source": "67c8d56191e69e35868f431c4a1af02c3e9db53f",
+  "productionCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-19T17:33:02.999000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 52,
+      "remainingPercent": 48,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-BACKUP-QUIESCENT-MONITOR-343-20261120",
+    "workCategory": "REVIEW",
+    "workDetailCategory": "PGPT-WBS66-F03-BACKUP-QUIESCENT-MONITOR-343-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "source": "67c8d56191e69e35868f431c4a1af02c3e9db53f",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "canonicalDesignSource": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "run": "PG40248-f03-backup-quiescent-monitor-343-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.08,
+      "base": 0.25,
+      "high": 0.6
+    },
+    "groupCapPp": 1,
+    "completedOriginalRowPricePp": 0,
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37254-monitor-lock113-criteria-return-v2/remaining-source-findings.json",
+        "sha256": "bae7ed79012520486991581a379ca89a792b8875252b84c8cc28d6eee31aecd5"
+      },
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/696_ユーザー一覧固定電文とjournal継続点.json",
+        "sha256": "ec7806dca4b0f73b6d1f11582542ccbede6208b1fd32126d11b1f9b5a9c1f872"
+      }
+    ],
+    "startBasis": "PG37254 row 343 still unclassified, matching method and rule. Prior 625/644/648 concern other original rows. Current Core untouched since checkpoint.",
+    "endCondition": "Bind original finding to exact current body and direct callers; classify one site based on lock ownership, state, blocking scope, existing tests and design, and state the missing acceptance evidence and owner.",
+    "workScope": "Read only, no Unit/Root/Backup or QA056/057 experiment, no test, no repeated wire or journal.",
+    "recordedOwnedJobsInFlight": 0,
+    "quotaAfter": {
+      "usedPercent": 52,
+      "remainingPercent": 48,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "ccab087738d624d8a21ace27aee2e4a514a906c06d56ef508956d669fbef41c6",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-19T17:33:02.999000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 52,
+          "remainingPercent": 48,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-19T17:32:14.756951+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 52,
+      "remainingPercent": 48,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "publicEvidence": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40248-f03-backup-quiescent-monitor-343-v1/manifest.json",
+        "sha256": "d288e3e572cc33309616f79a58b92aef2f95f6f0f188f01b9a39e45f2547048e"
+      }
+    ],
+    "actualExit": 0,
+    "startedAtEvent": "PGPT-20261008-6218",
+    "completedSource": "67c8d56191e69e35868f431c4a1af02c3e9db53f",
+    "newAcceptanceCount": 0,
+    "productTests": 0,
+    "attempt": 1,
+    "retryReasons": [],
+    "firstVerification": {
+      "staticApplicabilityCompleted": 1,
+      "targetFindings": 1
+    },
+    "actualBackendActions": 0,
+    "replayedEarlierTests": 0,
+    "attemptResult": "ORIGINAL_343_APPLICABLE_OPEN",
+    "remainingEvidence": [
+      {
+        "owner": "Batch platform and static-quality maintainers",
+        "requirement": "Preserve single-adapter serialization and ownership. Submit a reviewed disposition or change, current-source static output, and authorized independent PT for same-adapter contention, interruption/timeout and finally cleanup if behavior is changed."
+      },
+      {
+        "owner": "Morning, Backup and Cleanup operating environment maintainers",
+        "requirement": "After current real-environment admission, separately establish same-owner terminal observations and caller behavior with current-source evidence as required for acceptance."
+      }
+    ]
+  }
+}

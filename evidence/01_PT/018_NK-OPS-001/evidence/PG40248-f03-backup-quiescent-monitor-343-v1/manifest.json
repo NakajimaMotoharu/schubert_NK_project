@@ -1,0 +1,149 @@
+{
+  "schema": "PGPT_STATIC_CONTRACT_REVIEW_V1",
+  "run": "PG40248-f03-backup-quiescent-monitor-343-v1",
+  "startEvent": "PGPT-20261008-6218",
+  "source": "67c8d56191e69e35868f431c4a1af02c3e9db53f",
+  "sourceCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "wbs": "WBS-F03/2-2",
+  "rawFindingIndex": 343,
+  "rawRule": "AvoidSynchronizedStatement",
+  "originalTotalRows": 45,
+  "originalSourceMatchesExact": true,
+  "originalSite": {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitTermination.java",
+    "beginline": "118",
+    "endline": "118",
+    "begincolumn": "5",
+    "endcolumn": "17",
+    "rule": "AvoidSynchronizedStatement",
+    "ruleset": "Multithreading",
+    "package": "dev.codex.schubert.nk.batch.platform",
+    "class": "BackupUnitTermination",
+    "method": "quiescent",
+    "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement",
+    "priority": "3",
+    "message": "Use ReentrantLock rather than synchronization"
+  },
+  "productionSource": {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitTermination.java",
+    "sha256": "e3c8c4eebb3f1d4ac53f3b32f3f497ccaebea609a0821bd9aeaabe61fe64b6f9"
+  },
+  "productionCallers": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningProcessMain.java",
+      "sha256": "6c6afac131d994f8f37d7dfd88e4d93421c0b5ef9a07b7686bc2b1ff5f28cc0b",
+      "line": 94,
+      "purpose": "Parent backup callback observation"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningCleanupExecution.java",
+      "sha256": "36649443598a528b56a048aff50a26ebc74c04b936628fb40cffd49ef8e71a14",
+      "line": 129,
+      "purpose": "Parent failed-receipt precheck and retained request completion"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupNativeExecution.java",
+      "sha256": "6ee015e4ad65dfbe2fd4f5cc7627c6941c3b107f58592933acc9c8e0328727ba",
+      "line": 86,
+      "purpose": "Cleanup failed-backup receipt read guard"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningBrokerUnitCycle.java",
+      "sha256": "5c69b77ddb52446e8fc833222d8402da87e23ae589b8c0cdc90c6a8061c649c5",
+      "line": 133,
+      "purpose": "Parent broker baseline and stopped-proof recheck"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle.java",
+      "sha256": "d2686fed8d6c620411de1b92ed4a7bf19507e9f37f18d65b753208b3631de68a",
+      "line": 173,
+      "purpose": "Phase cycle terminal observation"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitReceiptGate.java",
+      "sha256": "530ea41bdd7331185907f353e68441f92c5072bf1e764a5149499f0dc3e004aa",
+      "line": 112,
+      "purpose": "Gate baseline and terminal matching"
+    }
+  ],
+  "canonicalDesign": [
+    {
+      "path": "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md",
+      "sha256": "857b4062d624ab8b99a2bfc72524f380c655c930db9388755968981e7c76d6c5",
+      "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+      "scope": "SSC093 and SSC124"
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "sha256": "ac1968b36bdc90e5892bb9239eff49868b4bf977945724e02abe2876db6c7399",
+      "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+      "scope": "SSC093 and SSC124"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md",
+      "sha256": "130633a5915be6ad3a88d33264f00aa143ed8522a804f8f1503599bd0bb3a56f",
+      "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+      "scope": "F03 original scope"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/354_PT・IT試験観点詳細設計.md",
+      "sha256": "2707b6b3b53b87abc803626737dbdc1366eae695fdfda8ddb0c93e35ea11b2b7",
+      "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+      "scope": "F03 original quality verification scope"
+    }
+  ],
+  "decision": "APPLICABLE_OPEN",
+  "scopeClosed": "Original finding applicability only",
+  "reasoning": [
+    "The private final monitor serializes observations on one adapter. The monitor spans context authentication, manager projections, repeated kernel namespace checks and verification before return. The method does blocking observation under this monitor.",
+    "Per-instance serialization is required to be preserved if the locking mechanism changes. The monitor does not serialize other adapters or processes. Separate ownership, manager/kernel observations, M/A where applicable, and fail-closed outcomes remain in the scope of SS341 and SS343.",
+    "The interrupt checks run after acquisition and around observation. Waiting for synchronized acquisition itself has no interrupt or deadline contract. BTERM006 has synthetic interruption positions and shared/unshared instances, but its source does not control acquisition order or show deadline while another call already holds the lock.",
+    "PMD applicability does not by itself establish a production contract violation or mandate a specific replacement. Static zero, any disposition, and authorized evidence are still required by 451."
+  ],
+  "fixtureSource": {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/BackupUnitTerminationTest.java",
+    "sha256": "69a366cfbbbfc941c086958a172ece8232e094d1d5f1da856acb99e91ab1acba",
+    "specification": {
+      "path": "evidence/01_PT/018_NK-OPS-001/141_PG310_root親終端契約_PT仕様書.md",
+      "sha256": "10575f877bda5b9a61717250c8d31ef0f11d6cb0e13f91f5a0aa634b2b45a255"
+    },
+    "testId": "PT-OPS-BTERM-006",
+    "presentInSource": true
+  },
+  "historicalProof": {
+    "manifest": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG468-caddy-reload-full/manifest.json",
+      "sha256": "648020121ed2dde426f78b91fd2a79a25f2d069200c3dbb138d5af0185adc4a9"
+    },
+    "junit": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG468-caddy-reload-full/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.BackupUnitTerminationTest.xml",
+      "sha256": "d7bbf03a767bbc809948c3e1868f18683cc2809a0cf72797631dda51ff102bba"
+    },
+    "source": "bbb244e5191e68adee2f6251dfdbbba53e9b64b4",
+    "oldResult": "PASS",
+    "currentSourceCredit": 0
+  },
+  "distinctEarlierRow": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40176-f03-parent-retirement-monitor-330-v1/manifest.json",
+    "sha256": "5b74099dc07275b262392a2bdc01dea09e3b1cc6a77c41dedb499b219123a0b2",
+    "originalIndex": 330
+  },
+  "nextEvidence": [
+    {
+      "owner": "Batch platform and static-quality maintainers",
+      "requirement": "Preserve single-adapter serialization and ownership. Submit a reviewed disposition or change, current-source static output, and authorized independent PT for same-adapter contention, interruption/timeout and finally cleanup if behavior is changed."
+    },
+    {
+      "owner": "Morning, Backup and Cleanup operating environment maintainers",
+      "requirement": "After current real-environment admission, separately establish same-owner terminal observations and caller behavior with current-source evidence as required for acceptance."
+    }
+  ],
+  "closedOriginalWbsItems": 0,
+  "newFormalAcceptance": 0,
+  "productTests": 0,
+  "coverage": null,
+  "actualBackendActions": 0,
+  "replayedEarlierTests": 0,
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-19T17:32:14.756951+00:00"
+}
