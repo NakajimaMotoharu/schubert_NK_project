@@ -16,7 +16,9 @@ UPPER = runpy.run_path(str(INPUT / "5326_f02_group_lookup_upper.py"))
 OPS, PLAN, COMMON = (UPPER[name] for name in ("EVIDENCE", "PLAN", "COMMON"))
 
 
-def main(plan_prefix="779_*"):
+def main(plan_prefix="779_*", analysis_scope="delta"):
+    assert analysis_scope in ("delta", "admitted")
+    admitted = analysis_scope == "admitted"
     read = UPPER["read"]
     start = read(next(PLAN.glob(plan_prefix)))
     work = start["values"]
@@ -28,7 +30,11 @@ def main(plan_prefix="779_*"):
     assert jar_manifest["sourceCore"] == core
     assert all(x["actualExit"] == 0 for x in
                (jar_manifest, annotation, *(read(row["path"]) for row in work["oracleReferences"][6:])))
-    expected = {name for rows in jar_manifest["changedClassesFromOldJars"].values() for name in rows}
+    if admitted:
+        expected = {name for entries in compile_manifest["classHashes"].values()
+                    for name in entries if PRIOR["allowed"](name)}
+    else:
+        expected = {name for rows in jar_manifest["changedClassesFromOldJars"].values() for name in rows}
     assert len(expected) == work.get("expectedChangedCount", 3)
     assert all(PRIOR["allowed"](name) for name in expected)
     prior_command = prior["command"]
@@ -74,9 +80,17 @@ def main(plan_prefix="779_*"):
         assert excluded == prior["excludedFromTargetsAndAux"]
         assert aux_hits + excluded + len(expected) == 1102
         auxdef = out / "spotbugs-aux.txt"
-        auxdef.write_text("\n".join([str(peer), *sorted(sdk)]) + "\n")
+        analysis_inputs = [scratch / path for path in sorted(expected)]
+        if admitted:
+            packed = scratch / "all-admitted-current-classes.jar"
+            with ZipFile(packed, "x", compression=ZIP_DEFLATED) as targets:
+                for name in sorted(expected):
+                    targets.write(scratch / name, name)
+            analysis_inputs = [packed]
+        extra_peers = [] if admitted else [str(peer)]
+        auxdef.write_text("\n".join([*extra_peers, *sorted(sdk)]) + "\n")
         command = [*prior_command[:prior_command.index("-auxclasspathFromFile")+1],
-                   auxdef, "-output", xml, *(scratch / path for path in sorted(expected))]
+                   auxdef, "-output", xml, *analysis_inputs]
         result = UPPER["run"](out, "spotbugs", command, scratch,
                               {"PATH": "/usr/bin:/bin", "LANG": "C.UTF-8"})
     if xml.exists():
@@ -97,7 +111,7 @@ def main(plan_prefix="779_*"):
                    wholeF03Accepted=False, whole451Accepted=False, newFormalAcceptance=0,
                    terminalAtUTC=datetime.now(timezone.utc).isoformat())
     COMMON["dump"](out / "manifest.json", outcome)
-    print(pin(out / "manifest.json"), result["actualExit"], findings, errors, missing)
+    print(pin(out / "manifest.json"), result["actualExit"], len(observed), len(findings), errors, len(missing))
     return outcome["actualExit"]
 
 
