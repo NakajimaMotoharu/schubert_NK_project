@@ -1,0 +1,61 @@
+{
+  "eventId": "PGPT-20261008-6215",
+  "groupId": "PGPT-WBS66-P01710-DETACHED-JOURNAL-SCALAR-AUDIT-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-19T16:40:22.679000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 52,
+      "remainingPercent": 48,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "canonicalDesignSource": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "contextGroupId": "PGPT-WBS66-P01710-DETACHED-JOURNAL-SCALAR-AUDIT-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-P01710-DETACHED-JOURNAL-SCALAR-AUDIT-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P017-10"
+    ],
+    "managementWorkIds": [
+      "WBS-P017-10/2"
+    ],
+    "source": "66e750218279a5030b4762975d88132731801253",
+    "run": "PG40246-p01710-journal-utf8-boundary-audit-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.1,
+      "base": 0.3,
+      "high": 0.65
+    },
+    "groupCapPp": 1,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26328-media-ending-independent-v1/all35-current-owner-dispositions.json",
+        "sha256": "a77113d9d851a9131669686e979c5518cb156ab0007fba575f61d1043e6698e0"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40080-p01810-detached-journal-values-v1/manifest.json",
+        "sha256": "10c55159f5f0450e741db45d74f424b8dda846200dfa3b30e7c5652dca680cc4"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG13694-broker-journal-whole-twelve-post-v1/manifest.json",
+        "sha256": "422b1a3b1e9646ee625afcff9df6b212eb0f826fdd3d9d2c45b925fb334f035c"
+      }
+    ],
+    "workScope": "Read-only YKT2328 site14. Strict raw UTF-8 decode before extracting last line and strict encoder on JSON-decoded strings, scoped to existing detached journal code. No broker/systemd execution, no real journal, no permission change."
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "schema": "PGPT_STATIC_CONTRACT_REVIEW_V1",
+  "run": "PG40246-p01710-journal-utf8-boundary-audit-v1",
+  "startEvent": "PGPT-20261008-6215",
+  "source": "66e750218279a5030b4762975d88132731801253",
+  "productionCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "wbs": "WBS-P017-10/2",
+  "site": {
+    "register": "YKT-2328",
+    "index": 14,
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BrokerJournalEvidence.java",
+    "line": 158
+  },
+  "canonicalDesign": {
+    "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "sha256": "ac1968b36bdc90e5892bb9239eff49868b4bf977945724e02abe2876db6c7399",
+    "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "section": "SSC132／BUG386 journal再読補足"
+  },
+  "sourceFiles": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BrokerJournalEvidence.java",
+      "sha256": "18f067e88b43658b276d06a0ef889adde32d039a50e2b1ba8dd654488d2d70bb"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningPreviousBroker.java",
+      "sha256": "6d93d8d06aef73476b0cae74fd1edbeaf73c5bdd133ae05b872089044c996629"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/BrokerJournalEvidenceTest.java",
+      "sha256": "73ec7a8bca1a6540dec83520b7072b56fd7c988e55d9d1a86afb67b0a9125a02"
+    }
+  ],
+  "references": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26328-media-ending-independent-v1/all35-current-owner-dispositions.json",
+      "sha256": "a77113d9d851a9131669686e979c5518cb156ab0007fba575f61d1043e6698e0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40080-p01810-detached-journal-values-v1/manifest.json",
+      "sha256": "10c55159f5f0450e741db45d74f424b8dda846200dfa3b30e7c5652dca680cc4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG13694-broker-journal-whole-twelve-post-v1/manifest.json",
+      "sha256": "422b1a3b1e9646ee625afcff9df6b212eb0f826fdd3d9d2c45b925fb334f035c"
+    }
+  ],
+  "finding": "NORMAL_CLOSED_HISTORY_REENCODING_SCALAR_REPLACEMENT_NOT_APPLICABLE_STATIC",
+  "reasoning": [
+    "The only production caller passes captured closed-history bytes and anchors the same invocation before and after consumeClosedHistory.",
+    "The last complete line is derived from a strict UTF-8 byte decode. Malformed UTF-8 cannot reach the re-encoding. Removing and restoring ASCII LF preserves Unicode scalar boundaries.",
+    "An ASCII JSON escape can still decode to an unpaired surrogate in a field. contentSha256 encodes parsed field values with REPORT for malformed and unmappable input before assembling the canonical hex digest.",
+    "Neither path normalizes NFC. SS343 binds the original raw SHA separately from the strict canonical field-value SHA."
+  ],
+  "historicalRelatedCase": {
+    "classname": "dev.codex.schubert.nk.batch.platform.BrokerJournalEvidenceTest",
+    "name": "bj2478003ClosedHistoryRequiresIndependentCursorTimeAndCanonicalDigest",
+    "nonPass": [],
+    "result": "PASS",
+    "source": "17ab52b253282ce45016f0586c0167a22029fd8c",
+    "comparableFiles": {
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BrokerJournalEvidence.java": true,
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/BrokerJournalEvidenceTest.java": true
+    },
+    "scope": "ASCII normal history and independent cursor, time, digest, and null guard checks. Historical context only."
+  },
+  "sameCoreDetachedCases": {
+    "count": 2,
+    "scope": "Summary and Anchor value checks only"
+  },
+  "productTests": 0,
+  "coverage": null,
+  "replayedEarlierTests": 0,
+  "actualBackendActions": 0,
+  "newFormalAcceptance": 0,
+  "open": [
+    "Same-source isolated Unicode bytes fixture PT if independently admitted and required",
+    "Ordinary Artemis runtime, Unit identity and owner provision evidence",
+    "Other YKT-2328 sites and 451 closure"
+  ],
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-19T16:42:58.665815+00:00"
+}
