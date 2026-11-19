@@ -1,6 +1,30 @@
 """Read-only independent 0x1007 exec decoder. Class names stay bytes; no JVM/writer dependency."""
 
 
+def validate_modified_utf(encoded):
+    """Check canonical DataOutput.writeUTF code units without decoding their values."""
+    offset = 0
+    while offset < len(encoded):
+        lead = encoded[offset]
+        offset += 1
+        if 0x01 <= lead <= 0x7f:
+            continue
+        if offset < len(encoded):
+            second = encoded[offset]
+            if lead == 0xc0 and second == 0x80:
+                offset += 1
+                continue
+            if 0xc2 <= lead <= 0xdf and 0x80 <= second <= 0xbf:
+                offset += 1
+                continue
+            lower = 0xa0 if lead == 0xe0 else 0x80
+            if (0xe0 <= lead <= 0xef and lower <= second <= 0xbf
+                    and offset + 1 < len(encoded) and 0x80 <= encoded[offset + 1] <= 0xbf):
+                offset += 2
+                continue
+        raise ValueError('invalid modified UTF field')
+
+
 def decode(raw,wanted):
     if type(raw) is not bytes or not isinstance(wanted,set) or any(type(n) is not str or not n.isascii() for n in wanted):
         raise ValueError('immutable bytes and explicit ASCII target names')
@@ -18,7 +42,9 @@ def decode(raw,wanted):
         return int.from_bytes(take(size),'big')
 
     def utf_bytes():
-        return take(number(2))
+        encoded = take(number(2))
+        validate_modified_utf(encoded)
+        return encoded
 
     def varint():
         value = 0
