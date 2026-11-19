@@ -188,3 +188,7 @@ P018-08.03/2・SS354／451。ツール jacoco_readonly_exec_subset.decode。独�
 ### PT-OPS-EXEC-CRC-001 複数物理classの途中不一致
 
 P018-08.03/2、SS354・451。Java25の自作インターフェース二物理だけを固定し、独立bitwise CRCで明示一覧と0x1007合成データを作る。両CRC一致なら二行・exit0、後続のみ異CRCなら厳密format読取は二名を返すが実体測定は先行一行＋固定診断・exit1。終了と全名／CRCの両条件を必要とし、部分出力に合格を付けない。PG40268に源・依存hash・実終了、PG40266に受入境界。実native・製品・旧exec再実行なし。
+
+### PT-P01810-CATALOG-044A／044B BackupVersionsの値同一性
+
+SS341 §6.4・SS351 §3、PG39884元044の固定診断を保持。合成8成分は位置ごとに一値だけ変更し、両方向非同値、Mapキー不一致、同値別instanceで取得可能を独立期待とする。null／異型とは非同値、診断は固定文。PG40272に実JUnit、固定Batch JAR SHA／class CRC、静的結果と生counter。実Backup／接続なし。

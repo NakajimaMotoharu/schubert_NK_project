@@ -1,0 +1,91 @@
+{
+  "eventId": "PGPT-20261008-6247",
+  "source": "853354af33b060af4bc8de749050769cfbdc0c71",
+  "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "previousCheckpoint": "PGPT-20261008-6244",
+  "groupEvents": [
+    "PGPT-20261008-6246"
+  ],
+  "quotaAfter": {
+    "usedPercent": 53,
+    "remainingPercent": 47,
+    "resetsAt": 1795445752,
+    "windowDurationMins": 10080
+  },
+  "fullQuotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-19T21:36:10.440000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 53,
+      "remainingPercent": 47,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "kind": "WBS66_P01810_BACKUP_VERSION_CHECKPOINT",
+  "acceptedOriginal": 17,
+  "total": 190,
+  "coreAccepted": 0,
+  "coreTotal": 5,
+  "newFormalAcceptance": 0,
+  "officialPtTests": 1964,
+  "officialPtScopes": 53,
+  "effortRate": null,
+  "actualAllocatedPp": null,
+  "ownedJobsStartedHere": 0,
+  "recordedOwnedJobsInFlight": 0,
+  "newProductTests": 2,
+  "outcomeEvidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40272-p01810-backup-versions-identity-v1/manifest.json",
+      "sha256": "30b444cec31f52386e3a4c1c8659acf4affd5a30a872b2cec4cc99696c1466e9"
+    }
+  ],
+  "heldF02": {
+    "wbs": "WBS-F02-a",
+    "bug": "BUG-3233",
+    "ssc": "SSC-461",
+    "owner": "Storage/Bootstrap and native FD maintainers",
+    "currentCallSites": [
+      "OwnedTransferDirectory.execute FileAlreadyExistsException",
+      "OwnedTransferDirectory.execute NoSuchFileException",
+      "OwnedTransferDirectory.execute IOException or NoSuchAlgorithmException"
+    ],
+    "requirement": "Authorized exact-scope callback/FD ownership proof and an approved migration preserving priority, identity, cleanup and callers before retiring the legacy entry. 460 documents this independent HOLD."
+  },
+  "unchangedHolds": [
+    "QA056",
+    "QA057",
+    "real Unit, Root, backup execution",
+    "full 451"
+  ],
+  "nextEvidence": [
+    {
+      "owner": "Batch value and P018-10 diagnostic owner",
+      "work": "WBS-P018-10.03/2",
+      "requirement": "Cover remaining eight individual accessors and three constructor branches in a single exact-source value-only run together with the two selected cases. Keep old compound manifest tests separate."
+    },
+    {
+      "owner": "P018 current source/run owner",
+      "claim": "Provide a signed or independently pinned nonempty expected physical map with byte hashes and classes. Validate exact run, ownership and truthful terminal before native consumption."
+    },
+    {
+      "owner": "Native acceptance/quality owner",
+      "claim": "Compare expected and observed names and CRCs, reject any missing required code outcome and nonzero or incomplete measurement, and keep session-only/natural no-Code records out of class coverage credit. Apply all 451 conditions."
+    },
+    {
+      "owner": "P004-03 DBA and authorized runtime owner",
+      "requirement": "Real admitted DAO SQL/function authorization, UTC semantics, committed postconditions and owner evidence for current run."
+    },
+    {
+      "owner": "Maintenance and native storage owner",
+      "requirement": "Retain held DurableRecordFiles/MaintenanceRunFiles reference and obtain independent actual FD/owner/terminal when admitted."
+    },
+    {
+      "owner": "P004-03 quality owner",
+      "requirement": "All five source/run/criteria and full 451 still required. Never count the eight historical port tests as newly run."
+    }
+  ]
+}

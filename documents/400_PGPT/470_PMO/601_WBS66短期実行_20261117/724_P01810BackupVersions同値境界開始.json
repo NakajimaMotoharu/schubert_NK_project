@@ -1,0 +1,75 @@
+{
+  "eventId": "PGPT-20261008-6245",
+  "groupId": "PGPT-WBS66-P01810-BACKUP-RELEASE-TOKEN-IDENTITY-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-19T21:33:28.098000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 53,
+      "remainingPercent": 47,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P01810-BACKUP-RELEASE-TOKEN-IDENTITY-20261120",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "PGPT-WBS66-P01810-BACKUP-RELEASE-TOKEN-IDENTITY-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P018-10.03"
+    ],
+    "managementWorkIds": [
+      "WBS-P018-10.03/2"
+    ],
+    "source": "4ea4739938080d363c05776128fe98d929891567",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "canonicalDesignSource": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "run": "PG40272-p01810-backup-versions-identity-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.18,
+      "base": 0.5,
+      "high": 0.9
+    },
+    "groupCapPp": 1.5,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/723_P01808物理CRCとP00403借用証跡継続点.json",
+        "sha256": "f808a6767eb8ca88005b3963e98ec0014064af0c9d0d8cf7ee20b4befcc7af90"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39884-p01810-backup-four-fixed-diagnostics-v1/manifest.json",
+        "sha256": "50335096551175b2f1a8ab02cda023e92d95a7155c52fd65965a4367003abaf8"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38306-p01810-three-published-boundary-clauses-v1/manifest.json",
+        "sha256": "5e4a3be432c83103c8f9407c39d08f4477290a3b6b60900eebfd86799800f492"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39980-f02-current-four-production-jars-v1/manifest.json",
+        "sha256": "3a06700c504ef0f93f3edc89dab8f4197b46ff6742b3c7d56e1c17a7a09a32ba"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39862-service-db-state-lock-four-main-v1/manifest.json",
+        "sha256": "9433dae6e53e1d97a1b942175e930c315c118da9dea870cdffb0b26072e6a035"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "Primary F02/F03/P004/P018-08 remaining runtime/authority constraints remain individually held. The named BackupVersions pure record is permitted independent work in the existing short-term P018-10 priority. PG39884 binds redaction only; prior PG28166 validates tokens and equality of equal values, not all eight one-field inequality positions.",
+    "endCondition": "Same pinned Batch physical BackupVersions class only. Independently vary each of eight valid claims one at a time, compare both directions and map lookup, plus null/foreign type. Record selected execution, coverage only for this case, and fixed diagnostic unaffected. Preserve existing token-validation cases without replay.",
+    "workScope": "Isolated local synthetic JUnit, one pure value class and pinned JDK; no real backup, operations, native, DB, credential, release or owned resources.",
+    "testIds": [
+      "PT-P01810-CATALOG-044A",
+      "PT-P01810-CATALOG-044B"
+    ]
+  }
+}
