@@ -105,3 +105,7 @@ PG40170で3/4、PG40172で4/4。通常persistence／監視persistenceの禁止2�
 ## PT-C02-TEXT-010〜015 終了対象範囲の文面（2026-11-19 JST）
 
 PG40178は2/6、PG40180は6/6。元14設定のbyte差0、API/Webの既定継承を実効値として計上する行は0。独立PG40182 SHA-256 a00fd714e1971cb0426f7ffd7af4d3b7498f7e920a63e8584ad561d4b09a713a。
+
+## PT-CHR-PREFLIGHT-FS-001 haruka実FileStore（2026-11-19 JST）
+
+PG40160、JDK25.0.4、固定ホスト鍵、通常mini認証1回、同boot、専有0700。6 source、17 class一致、SSH／javac／試験／report exit0。実FreeBytes 224,683,773,952、期待PASS、実際PASS。PG40190独立 SHA-256 45d97c98185f803646ece9db54761b0a2c9a01740966154d61be8ae199101ea3。二引数正常return L2/M1/I5を当sessionで確認。正式全source/run coverageと実CHRは別。

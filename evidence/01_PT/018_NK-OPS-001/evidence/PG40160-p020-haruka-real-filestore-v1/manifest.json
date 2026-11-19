@@ -1,0 +1,194 @@
+{
+  "actualExit": 0,
+  "source": "60e00a7b4a868384659e08c60aa2a86a8e3546c0",
+  "productionCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "toolSource": "e81d98a11946b6c0e1c20c38d30b38056d14aa46",
+  "sshExit": 0,
+  "sshSignal": null,
+  "authPrompts": 1,
+  "outcome": "TERMINAL_RETURNED",
+  "admission": {
+    "host": "haruka",
+    "boot": "f23ced36-91cd-4f41-96dd-5b8cc48f03fd",
+    "uid": 1000,
+    "workspaceMode": "0700",
+    "workspace": "/home/mini/schubert-nk-pgpt/validation-work",
+    "device": 64512,
+    "freeBytes": 224688103424,
+    "runAbsent": true,
+    "activeOwnedWorkspaceJobs": 0,
+    "observedAtUTC": "2026-11-19T13:08:12.542933+00:00"
+  },
+  "capsuleSent": true,
+  "terminal": {
+    "actualExit": 0,
+    "allocatedRun": true,
+    "boot": "f23ced36-91cd-4f41-96dd-5b8cc48f03fd",
+    "ownerUid": 1000,
+    "workspace": "/home/mini/schubert-nk-pgpt/validation-work/PG40160-p020-haruka-real-filestore-v1",
+    "invocationPid": 6385,
+    "terminalAtUTC": "2026-11-19T13:08:15.118338+00:00",
+    "session": "PG40160-HARUKA-OWNED-FILESTORE-ONLY",
+    "fileStoreIndependentBytes": {
+      "before": 224683778048,
+      "after": 224683749376
+    },
+    "methods": {
+      "main": {
+        "INSTRUCTION": {
+          "covered": 21,
+          "missed": 85
+        },
+        "BRANCH": {
+          "covered": 2,
+          "missed": 7
+        },
+        "LINE": {
+          "covered": 4,
+          "missed": 24
+        },
+        "COMPLEXITY": {
+          "covered": 1,
+          "missed": 7
+        },
+        "METHOD": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "preflight": {
+        "INSTRUCTION": {
+          "covered": 5,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 2,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 1,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 1,
+          "missed": 0
+        }
+      }
+    },
+    "stages": {
+      "javac": {
+        "actualExit": 0,
+        "expectedExit": 0,
+        "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "command": [
+          "/opt/schubert-nk-test-tools/jdk-25.0.4/bin/javac",
+          "--release",
+          "25",
+          "-g",
+          "-Xlint:all",
+          "-Werror",
+          "-proc:none",
+          "-cp",
+          "/home/mini/schubert-nk-pgpt/validation-work/PG40160-p020-haruka-real-filestore-v1/sdk/jackson-annotations-2.19.2.jar:/home/mini/schubert-nk-pgpt/validation-work/PG40160-p020-haruka-real-filestore-v1/sdk/jackson-core-2.19.2.jar:/home/mini/schubert-nk-pgpt/validation-work/PG40160-p020-haruka-real-filestore-v1/sdk/jackson-databind-2.19.2.jar:/home/mini/schubert-nk-pgpt/validation-work/PG40160-p020-haruka-real-filestore-v1/sdk/jspecify-1.0.1.jar:/home/mini/schubert-nk-pgpt/validation-work/PG40160-p020-haruka-real-filestore-v1/sdk/playwright-1.55.0.jar",
+          "-d",
+          "/home/mini/schubert-nk-pgpt/validation-work/PG40160-p020-haruka-real-filestore-v1/classes",
+          "/home/mini/schubert-nk-pgpt/validation-work/PG40160-p020-haruka-real-filestore-v1/program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+          "/home/mini/schubert-nk-pgpt/validation-work/PG40160-p020-haruka-real-filestore-v1/program/characterization/src/main/java/dev/codex/schubert/characterization/CharacterizationIoScope.java",
+          "/home/mini/schubert-nk-pgpt/validation-work/PG40160-p020-haruka-real-filestore-v1/program/characterization/src/main/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.java",
+          "/home/mini/schubert-nk-pgpt/validation-work/PG40160-p020-haruka-real-filestore-v1/program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+          "/home/mini/schubert-nk-pgpt/validation-work/PG40160-p020-haruka-real-filestore-v1/program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+          "/home/mini/schubert-nk-pgpt/validation-work/PG40160-p020-haruka-real-filestore-v1/program/characterization/src/main/java/dev/codex/schubert/characterization/TargetAdapter.java"
+        ]
+      },
+      "unit": {
+        "actualExit": 0,
+        "expectedExit": 0,
+        "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "command": [
+          "/opt/schubert-nk-test-tools/jdk-25.0.4/bin/java",
+          "-Xmx512m",
+          "-Dchr.projectRoot=/home/mini/schubert-nk-pgpt/validation-work/PG40160-p020-haruka-real-filestore-v1",
+          "-Dchr.currentRoot=/home/mini/schubert-nk-pgpt/validation-work/PG40160-p020-haruka-real-filestore-v1/current",
+          "-Dchr.currentJar=/home/mini/schubert-nk-pgpt/validation-work/PG40160-p020-haruka-real-filestore-v1/non-executable-current.jar",
+          "-Dchr.assetRoot=/home/mini/schubert-nk-pgpt/validation-work/PG40160-p020-haruka-real-filestore-v1/assets",
+          "-Dchr.usersFile=/home/mini/schubert-nk-pgpt/validation-work/PG40160-p020-haruka-real-filestore-v1/test-users.txt",
+          "-Dchr.javaExecutable=/opt/schubert-nk-test-tools/jdk-25.0.4/bin/java",
+          "-Dchr.caddyExecutable=/home/mini/schubert-nk-pgpt/validation-work/PG40160-p020-haruka-real-filestore-v1/non-executable-caddy",
+          "-Dchr.runtimeRoot=/home/mini/schubert-nk-pgpt/validation-work/PG40160-p020-haruka-real-filestore-v1/runtime",
+          "-Dchr.pgCtl=/home/mini/schubert-nk-pgpt/validation-work/PG40160-p020-haruka-real-filestore-v1/non-executable-pgctl",
+          "-Dchr.pgData=/home/mini/schubert-nk-pgpt/validation-work/PG40160-p020-haruka-real-filestore-v1/pg-data",
+          "-Dchr.pgLog=/home/mini/schubert-nk-pgpt/validation-work/PG40160-p020-haruka-real-filestore-v1/diagnostics/pg.log",
+          "-Dchr.pgSocket=/home/mini/schubert-nk-pgpt/validation-work/PG40160-p020-haruka-real-filestore-v1/runtime/pgsocket",
+          "-Dchr.dbUrl=jdbc:postgresql://127.0.0.1:15432/synthetic",
+          "-Dchr.appPort=18081",
+          "-Dchr.proxyPort=18082",
+          "-javaagent:/home/mini/schubert-nk-pgpt/validation-work/PG40160-p020-haruka-real-filestore-v1/sdk/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/schubert-nk-pgpt/validation-work/PG40160-p020-haruka-real-filestore-v1/file-store.exec,sessionid=PG40160-HARUKA-OWNED-FILESTORE-ONLY,append=false",
+          "-cp",
+          "/home/mini/schubert-nk-pgpt/validation-work/PG40160-p020-haruka-real-filestore-v1/classes:/home/mini/schubert-nk-pgpt/validation-work/PG40160-p020-haruka-real-filestore-v1/sdk/jackson-annotations-2.19.2.jar:/home/mini/schubert-nk-pgpt/validation-work/PG40160-p020-haruka-real-filestore-v1/sdk/jackson-core-2.19.2.jar:/home/mini/schubert-nk-pgpt/validation-work/PG40160-p020-haruka-real-filestore-v1/sdk/jackson-databind-2.19.2.jar:/home/mini/schubert-nk-pgpt/validation-work/PG40160-p020-haruka-real-filestore-v1/sdk/jspecify-1.0.1.jar:/home/mini/schubert-nk-pgpt/validation-work/PG40160-p020-haruka-real-filestore-v1/sdk/playwright-1.55.0.jar",
+          "dev.codex.schubert.characterization.GateCli",
+          "preflight",
+          "/home/mini/schubert-nk-pgpt/validation-work/PG40160-p020-haruka-real-filestore-v1/preflight.json"
+        ]
+      },
+      "report": {
+        "actualExit": 0,
+        "expectedExit": 0,
+        "stdoutSha256": "0a4cd433f6a92f9e55bd9cfcb59c2134255574a86abb30fd6e87b3ac275064e2",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "command": [
+          "/opt/schubert-nk-test-tools/jdk-25.0.4/bin/java",
+          "-jar",
+          "/home/mini/schubert-nk-pgpt/validation-work/PG40160-p020-haruka-real-filestore-v1/sdk/org.jacoco.cli-0.8.15-nodeps.jar",
+          "report",
+          "/home/mini/schubert-nk-pgpt/validation-work/PG40160-p020-haruka-real-filestore-v1/file-store.exec",
+          "--classfiles",
+          "/home/mini/schubert-nk-pgpt/validation-work/PG40160-p020-haruka-real-filestore-v1/classes",
+          "--xml",
+          "/home/mini/schubert-nk-pgpt/validation-work/PG40160-p020-haruka-real-filestore-v1/coverage.xml"
+        ]
+      }
+    },
+    "physical": {
+      "dev/codex/schubert/characterization/GateCli$FileJsonOutput.class": "bd5fd55b643e60a7f7a999a69ad858d2fde54639b4fb3334269673795ee00827",
+      "dev/codex/schubert/characterization/TargetAdapter$Target.class": "bbdfbbdc098fffcb83102bef3eb8e1d84af8860217330d104cc11114fbc00c53",
+      "dev/codex/schubert/characterization/GateCli.class": "563ddaecfe4b1d95523f5bb827f0728c2e73f978bb2cf3a4163c770dca113431",
+      "dev/codex/schubert/characterization/CharacterizationIoScope$Work.class": "fb34fa7cd207d0b356cf01e34ef6d886caec2cfdc062f3df6c7c720a21e3795a",
+      "dev/codex/schubert/characterization/TargetAdapter.class": "a31b5fb44c9933b6660936e6cbffb59ff9b0021636b7aae42393b3c957e3852b",
+      "dev/codex/schubert/characterization/CharacterizationIoScope.class": "f76c2ce062349d736a5ba3bbc6174e64bc413826c1d28e6ab8efc9bbfba4d3ad",
+      "dev/codex/schubert/characterization/GateContractValidator$ValidationResult.class": "d36ef7e88596a6b3e170d3703212e817c18b9ac1171538dcf30ab8a2cea3c5cb",
+      "dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.class": "91fbc7022ef4b213c12b7c259c1aac9013afe76da4d5026667d3fc3b44b3a6df",
+      "dev/codex/schubert/characterization/GateContractValidator.class": "f219bc72b844fc0f329969a204b1e79c58188f0d00ddc946ac751e53787780ad",
+      "dev/codex/schubert/characterization/CharacterizationIoScope$Release.class": "95ecedd79ce4de9045b81712251dfa379ee68c991e6947d70112f7a429c546cc",
+      "dev/codex/schubert/characterization/GateCli$UsableSpace.class": "d5ba88d5f1f47cd3e9f233632fd1687cc7be6a64c8090a768b73741b4948a42c",
+      "dev/codex/schubert/characterization/GateCli$BaselineNumbers.class": "205fe28d46ff14b80072db17ec4d628d4a89432cd4b6bfb52865a9f0edb662ce",
+      "dev/codex/schubert/characterization/ArtifactComparator$ComparisonResult.class": "816538440ab8051588ca725f3f5607aabe083ee7f39352afd092fe6b1fc50d95",
+      "dev/codex/schubert/characterization/ArtifactComparator.class": "b1f5fe0270fb0b8167ed4332cc0268c26db246dabe4651bcb710cd72600253af",
+      "dev/codex/schubert/characterization/CharacterizationIoScope$Open.class": "f2393025ee9c5ef01c62d4b231e864409394562fbd2b4202906202d49ef9e27e",
+      "dev/codex/schubert/characterization/GateCli$JsonOutput.class": "8d7047d7bf57b8d93b832edfdfbcaa023022e1c03b8e9221a955277c49427c1f",
+      "dev/codex/schubert/characterization/GateCli$TreeStats.class": "b07d4b91a80f06c93862e110e1552b83122f09456818d89330603113545860ec"
+    },
+    "productTests": 0,
+    "realBackendActions": 0
+  },
+  "artifacts": {
+    "preflight.json": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40160-p020-haruka-real-filestore-v1/preflight.json",
+      "sha256": "f81d885306f0ff14e45fe8e57ff2d4a4348859386370a8cefba0ae49063df60a"
+    },
+    "file-store.exec": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40160-p020-haruka-real-filestore-v1/file-store.exec",
+      "sha256": "b1763ef9640cb6805e6d95cf1f4fb35c4de68a4c15e44613dc6e2e26d694ed03"
+    },
+    "coverage.xml": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40160-p020-haruka-real-filestore-v1/coverage.xml",
+      "sha256": "4faaf03fbe43a06d4b36b5653d05707658cc4f1b1e409a40e70de43d148ad557"
+    }
+  },
+  "rawAuthOutputSaved": false,
+  "remoteWorkspaceRetained": true,
+  "terminalAtUTC": "2026-11-19T13:08:15.459635+00:00",
+  "newFormalAcceptance": 0,
+  "whole451Accepted": false
+}
