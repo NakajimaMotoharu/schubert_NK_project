@@ -90,4 +90,21 @@ final class RequestLogDetailsTest {
   private static String normalize(String text) {
     return RequestLogDetails.normalize(Optional.of(text), Optional.empty());
   }
+
+  @Test
+  void rejectsMalformedUnicodeInKeysAndFamilyButPreservesAsciiEscapes() {
+    for (String spelling :
+        List.of(Character.toString(0xd800), Character.toString(0xdc00), "\\uD800", "\\uDC00")) {
+      for (String invalid :
+          List.of(
+              "{\"trunc" + spelling + "ated\":true}",
+              "{\"userAgentFamily\":\"A" + spelling + "\"}")) {
+        var failure = assertThrows(PermanentProtocolException.class, () -> normalize(invalid));
+        assertEquals(
+            "REQUEST log details violate the safe projection contract", failure.getMessage());
+        assertNull(failure.getCause());
+      }
+    }
+    assertEquals("{\"userAgentFamily\":\"A\"}", normalize("{\"userAgentFamily\":\"\\u0041\"}"));
+  }
 }

@@ -157,3 +157,7 @@ SS311 §2、SYS-005、WBS-F02-a、BUG-3345／YKT-2711。六合成JARのfield型�
 ## PT-CHR-CMP-A02-001〜002 A02観測3件と最古だけの失効
 
 UI264 DIF-016、SS355 §8、WBS-P020-01.02、BUG-3346／YKT-2712。期待はCurrent [true,true,true]、NK [false,true,true]。001は両側で新しいsessionを誤ってfalse、002は両側で後続2件を欠落させる。いずれも独立の固定比較と拒否理由を確認。単側だけの追加失効に対する既未承認差分も保持。productionのログイン・収集元・Current baseline・許容差分は不変。
+
+## PT-IDEM-012-UTF16 REQUEST detailsの不正Unicode
+
+NK-MSG-002、SS351 §3.3、WBS-P018-09/2、YKT-2328 site 6。固定4キー、ASCIIのfamily／状態／bool／数値の許可を前提にする。孤立上位・下位surrogate各2表現を名前またはfamilyへ含めた8入力は固定PermanentProtocolException、causeなしを期待。正常はASCIIのJSON unicode escapeをfamily Aへ正規化する。既のPG37348独立証跡と現対象Main及び依存を照合し、今回の新methodだけ実行。旧5は元sourceのまま保持。
