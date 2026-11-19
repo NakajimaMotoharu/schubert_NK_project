@@ -17,7 +17,7 @@ TARGETS = {
     "protocol": [PROTOPREFIX + "codec/PermanentProtocolException",
                  PROTOPREFIX + "layout/semantic/UserRole", PROTOPREFIX + "layout/semantic/WireEnum"],
 }
-RUN = "PG40214-p01809-request-details-scalar-guard-v1"
+RUN = "PG40216-p01809-request-details-scalar-guard-v2"
 METHOD = "rejectsMalformedUnicodeInKeysAndFamilyButPreservesAsciiEscapes"
 
 
@@ -38,7 +38,11 @@ def main():
     assert not git("diff", "--name-only", values["productionCoreMain"], source, "--",
                    "src", ":(exclude)src/**/src/test/**")
     assert set(git("diff", "--name-only", values["source"], source, "--", "src").decode().splitlines()) == {TEST}
-    fixtures = Path(prepare["classPath"].split(os.pathsep)[0]).parents[4]
+    compiled = [Path(entry) for entry in prepare["classPath"].split(os.pathsep)
+                if not entry.endswith(".jar")]
+    fixture_dirs = {path.parents[1].name.removeprefix("schubert-nk-"): path for path in compiled}
+    assert all(path.name == "classes" and path.parent.name == "target" for path in compiled)
+    assert len(fixture_dirs) == len(compiled) and TARGETS.keys() <= fixture_dirs.keys()
     tools = COMMON["TC"]
     java = tools / "jdk-25.0.4/bin/java"
     junit = tools / "junit-platform-console-standalone-1.13.4.jar"
@@ -63,7 +67,7 @@ def main():
         for module, classnames in TARGETS.items():
             for name in classnames:
                 label = name + ".class"
-                oldclass = fixtures / f"src/schubert-nk-{module}/target/classes" / label
+                oldclass = fixture_dirs[module] / label
                 data = oldclass.read_bytes()
                 expected = prepare["physicalClassHashes"][module][label]
                 assert sha(data) == expected
@@ -116,7 +120,7 @@ def main():
             with (out / "class-init.log.gz").open("xb") as stream:
                 stream.write(gzip.compress(init.read_bytes(), mtime=0))
         actual = next((r["actualExit"] for name, r in receipts.items()
-                       if r["actualExit"] and name != "pmd"), 0)
+                       if r["actualExit"] not in ((0, 4) if name == "pmd" else (0,))), 0)
         manifest = dict(actualExit=actual, source=source, productionCore=values["productionCoreMain"],
                         selectedMethod=METHOD, testSourceSha256=sha(test_file.read_bytes()), archivedMain=physical,
                         historicalParser=values["oracleReferences"][:2], stages=receipts,
