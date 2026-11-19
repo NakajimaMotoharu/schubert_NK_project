@@ -1,0 +1,63 @@
+{
+  "actualExit": 0,
+  "source": "c11a7caaa9e4adfa41751f0fba4c2d26d641fe17",
+  "productionCore": "cb1411d94a1d97aedafe1af60400aaec0ae8c8e8",
+  "packageManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40380-f02-current-four-jars-public-checkpoint-v1/manifest.json",
+    "sha256": "50ab463424ef12a32e3aa6f38ec38d3175876f33826e412e4371943a3a9116e2"
+  },
+  "qualifiedLocalArtifacts": {
+    "protocol": {
+      "physical": 176,
+      "artifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40380-f02-current-four-jars-public-checkpoint-v1/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+        "sha256": "b771ffe2664b7a68bf894c2620a02c26787a1ab403771497dc47e7b9ae2bd789"
+      }
+    },
+    "storage": {
+      "physical": 79,
+      "artifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40380-f02-current-four-jars-public-checkpoint-v1/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+        "sha256": "8af1499d79caea77402a800f3efc968c5c792be96e1229d9b704b453c49edbac"
+      }
+    },
+    "bootstrap": {
+      "physical": 201,
+      "artifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40380-f02-current-four-jars-public-checkpoint-v1/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+        "sha256": "b2bd02d98ecf5c728512de68d87f6323d200bdbc76fc721fb4c39990914851f3"
+      }
+    },
+    "batch": {
+      "physical": 646,
+      "artifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40380-f02-current-four-jars-public-checkpoint-v1/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+        "sha256": "8b17821b396b56bf53e66c241b41f47492deace434f6904f924d059d671b5563"
+      }
+    }
+  },
+  "measuredDeltas": {
+    "dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpoint$PublicAgent": {
+      "added": [
+        "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph"
+      ],
+      "removed": [
+        "dev.codex.schubert.nk.storage.StorageIoException"
+      ],
+      "identicalCount": 30
+    }
+  },
+  "provenPhysical": 1102,
+  "stillOpenStorageTypedViolation": [
+    {
+      "origin": "dev.codex.schubert.nk.storage.StorageIoException",
+      "target": "java.sql.SQLException",
+      "artifact": "java.sql"
+    }
+  ],
+  "noNewTests": 0,
+  "sixModuleBuild": false,
+  "wholeF02Accepted": false,
+  "whole451Accepted": false,
+  "terminalAtUTC": "2026-11-19T23:30:09.516036+00:00"
+}
