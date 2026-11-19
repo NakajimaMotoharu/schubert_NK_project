@@ -1,0 +1,72 @@
+{
+  "eventId": "PGPT-20261008-6184",
+  "groupId": "PGPT-WBS66-P01810-PUBLISHED-FIXED-DIAGNOSTIC-TRACE-20261119",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-19T13:19:10.048000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 50,
+      "remainingPercent": 50,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "originalRemainingDetailBasePp": 1089.848,
+    "canonicalDesignSource": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "workCategory": "IMPLEMENTATION",
+    "contextGroupId": "PGPT-WBS66-P01810-PUBLISHED-FIXED-DIAGNOSTIC-TRACE-20261119",
+    "workDetailCategory": "PGPT-WBS66-P01810-PUBLISHED-FIXED-DIAGNOSTIC-TRACE-20261119",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P018-10.02"
+    ],
+    "managementWorkIds": [
+      "WBS-P018-10.02/2"
+    ],
+    "source": "302421f21f57c6066a213299bb012738c06652af",
+    "run": "PG40194-p01810-four-published-diagnostic-oracles-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.2,
+      "base": 0.4,
+      "high": 0.75
+    },
+    "groupCapPp": 1,
+    "completedOriginalRowPricePp": 0,
+    "testIds": [
+      "PT-P01810-CATALOG-015",
+      "PT-P01810-CATALOG-019",
+      "PT-P01810-CATALOG-020",
+      "PT-P01810-CATALOG-021"
+    ],
+    "workScope": "Qualify exact existing fixed diagnostic oracles for four independent in-memory types at unchanged Main and original Test bytes; no Maven, test replay, live provider, protected source or new formal acceptance.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39144-ssc466-buffer-diagnostic-post-v1/manifest.json",
+        "sha256": "d11c3c9d8886fab25c00ba2c08b6cce6307595e33b8b9d0d6ad3e73fda1e39a9"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39168-p01810-guarded-jms-value-independent-v1/manifest.json",
+        "sha256": "3a7449e61ac9390c506cf660023e736519c80bb4dd719736354ff804c7089ef6"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38238-delivery-metadata-independent-v1/manifest.json",
+        "sha256": "37f2f5fa0745d9023ddcf105f55d0b8ebe6d4ecd7b44777085e35129976c8dc2"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38268-outbox-dlq-metadata-independent-v1/manifest.json",
+        "sha256": "a7ea935ca501b5d02ce4ab006185c331d80e75947c85d0e21971fe81964523be"
+      }
+    ]
+  }
+}

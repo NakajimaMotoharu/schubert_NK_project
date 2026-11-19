@@ -1,0 +1,153 @@
+{
+  "run": "PG40194-p01810-four-published-diagnostic-oracles-v1",
+  "source": "302421f21f57c6066a213299bb012738c06652af",
+  "productionCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "startEventId": "PGPT-20261008-6184",
+  "terminalAtUTC": "2026-11-19T13:20:06.313661+00:00",
+  "actualExit": 0,
+  "catalog": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37794-p01810-negative-oracle-mapping-v1/planned93-negative-status.json",
+    "sha256": "2405323fe2b4b3e11734e25674745246d9d2e668341dba179e0c59c0a93a17cf"
+  },
+  "cases": [
+    {
+      "testId": "PT-P01810-CATALOG-015",
+      "design": "SS351 / SSC466",
+      "criterion": "WBS-P018-10.02:deliverable",
+      "result": "FIXED_DIAGNOSTIC_ORACLE_PROVEN_BY_EXACT_EXISTING_MAIN_AND_TEST_SOURCE_BYTES",
+      "expected": "WipingByteArrayOutputStream[<redacted>]",
+      "proofRun": "PG39140-SSC466-BUFFER-DIAGNOSTIC-V1",
+      "proofSource": "f6fc7eee091a945c620db2f1d504e326b8855e8e",
+      "production": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.java",
+        "sha256": "c1669b5ad4c3a00909576d8e2a0ebb1b135da39d734a0b1b8492d64e05d2d304"
+      },
+      "test": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/SecretBufferTest.java",
+        "sha256": "911fe129924c28d4ec109e7cdd2a48643edab607569cb050c1edfe17df73989a",
+        "xmlSelector": "diagnosticIsIdenticalAcrossDifferentSizesAndAfterWiping",
+        "source": "PT-IDEM-WIPE-004"
+      },
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39144-ssc466-buffer-diagnostic-post-v1/manifest.json",
+        "sha256": "d11c3c9d8886fab25c00ba2c08b6cce6307595e33b8b9d0d6ad3e73fda1e39a9"
+      },
+      "xml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39144-ssc466-buffer-diagnostic-post-v1/original-TEST-junit-jupiter.xml",
+        "sha256": "96c417ee8ac9fd89b37adff84c780769ebfbda4ff5b6c05a877cd39e683c5efe"
+      },
+      "independentPost": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39144-ssc466-buffer-diagnostic-post-v1/manifest.json",
+        "sha256": "d11c3c9d8886fab25c00ba2c08b6cce6307595e33b8b9d0d6ad3e73fda1e39a9"
+      },
+      "open": "Complete applicable ingress/sink and prior leaf dependencies; current whole run is not established by this type case."
+    },
+    {
+      "testId": "PT-P01810-CATALOG-019",
+      "design": "SS351 / SSC467",
+      "criterion": "WBS-P018-10.02:deliverable",
+      "result": "FIXED_DIAGNOSTIC_ORACLE_PROVEN_BY_EXACT_EXISTING_MAIN_AND_TEST_SOURCE_BYTES",
+      "expected": "GuardedJmsMessage[<redacted>]",
+      "proofRun": "PG39160-SSC467-GUARDED-JMS-DIAGNOSTIC-V1",
+      "proofSource": "7d090c06cd17bcc8ac78176529d8acf82ccddcfa",
+      "production": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/guard/GuardedJmsMessage.java",
+        "sha256": "9f50a140f32bcafb0a94a150ce693a2243c2f30a658909f010ca1b007ae378a0"
+      },
+      "test": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/GuardedJmsDiagnosticTest.java",
+        "sha256": "1de7cdb1e85a6006a171e5a7707f797f89723e18e3baf6f4d327fe69db71a470",
+        "xmlSelector": "differentBodiesAndMetadataProduceOneFixedDiagnosticWithoutChangingReadback",
+        "source": "GuardedJmsDiagnosticTest"
+      },
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39168-p01810-guarded-jms-value-independent-v1/manifest.json",
+        "sha256": "3a7449e61ac9390c506cf660023e736519c80bb4dd719736354ff804c7089ef6"
+      },
+      "xml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39164-ssc467-guarded-jms-diagnostic-post-v1/original-TEST-junit-jupiter.xml",
+        "sha256": "646bab3d7c63f758630c4dacb4b9bd6517294e8126cfd4383d1de997cf28eb8f"
+      },
+      "independentPost": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39164-ssc467-guarded-jms-diagnostic-post-v1/manifest.json",
+        "sha256": "bc2e936830cf812302d2e548018466738d67e4b3f3658724397cb99e240f45cf"
+      },
+      "open": "Complete applicable ingress/sink and prior leaf dependencies; current whole run is not established by this type case."
+    },
+    {
+      "testId": "PT-P01810-CATALOG-020",
+      "design": "SS312 / SSC153 / SS351",
+      "criterion": "WBS-P018-10.02:deliverable",
+      "result": "FIXED_DIAGNOSTIC_ORACLE_PROVEN_BY_EXACT_EXISTING_MAIN_AND_TEST_SOURCE_BYTES",
+      "expected": "DeliveryMetadata[metadata=<redacted>]",
+      "proofRun": "PG38236-DELIVERY-METADATA-3",
+      "proofSource": "dfcdf44b142064a7497e3d8e87cd38b533d54b77",
+      "production": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/DeliveryMetadata.java",
+        "sha256": "6d87d23892dd6f43a52ce58149943070375a8b2288e5cd9569ec0991e557057f"
+      },
+      "test": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/DeliveryMetadataValueContractTest.java",
+        "sha256": "d9223065e27375da02ad3c418a5791c96de92894a4e091557d5eed9a5a70b3b8",
+        "xmlSelector": "allThreeFieldsDefineValueIdentityWithoutChangingDiagnostic",
+        "source": "PT-JMS-EVENT-DELIVERY-VALUE"
+      },
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38238-delivery-metadata-independent-v1/manifest.json",
+        "sha256": "37f2f5fa0745d9023ddcf105f55d0b8ebe6d4ecd7b44777085e35129976c8dc2"
+      },
+      "xml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38238-delivery-metadata-independent-v1/xml/TEST-junit-jupiter.xml",
+        "sha256": "0678f67b17d89fc6c5e13727181d3803002ac337f178f5119375967d62de8926"
+      },
+      "independentPost": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38238-delivery-metadata-independent-v1/manifest.json",
+        "sha256": "37f2f5fa0745d9023ddcf105f55d0b8ebe6d4ecd7b44777085e35129976c8dc2"
+      },
+      "open": "Complete applicable ingress/sink and prior leaf dependencies; current whole run is not established by this type case."
+    },
+    {
+      "testId": "PT-P01810-CATALOG-021",
+      "design": "SS331 / SSC155 / SS351",
+      "criterion": "WBS-P018-10.02:deliverable",
+      "result": "FIXED_DIAGNOSTIC_ORACLE_PROVEN_BY_EXACT_EXISTING_MAIN_AND_TEST_SOURCE_BYTES",
+      "expected": "OutboxDlqMetadata[<redacted>]",
+      "proofRun": "PG38266-OUTBOX-METADATA-3",
+      "proofSource": "dcf6c9be86d610701bff23c7aef518527ccc3d37",
+      "production": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata.java",
+        "sha256": "ef0be1f11629947394710ce2f537567c19401737e2329a3d54719471ea5b7f53"
+      },
+      "test": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadataValueContractTest.java",
+        "sha256": "d460107d7e3f8c27b72a03156f9c1b4b0d898df6eb9d10cc2660b4192e9f901e",
+        "xmlSelector": "originalDeliveryFieldsDetermineValueAndStayOutOfDiagnostics",
+        "source": "PT-QST-DLQ-MODEL value contract"
+      },
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38268-outbox-dlq-metadata-independent-v1/manifest.json",
+        "sha256": "a7ea935ca501b5d02ce4ab006185c331d80e75947c85d0e21971fe81964523be"
+      },
+      "xml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38268-outbox-dlq-metadata-independent-v1/xml/TEST-junit-jupiter.xml",
+        "sha256": "8852951828ea3e5f1b29442e9979ef718fb6c00836436168cbab4bb15311f739"
+      },
+      "independentPost": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38268-outbox-dlq-metadata-independent-v1/manifest.json",
+        "sha256": "a7ea935ca501b5d02ce4ab006185c331d80e75947c85d0e21971fe81964523be"
+      },
+      "open": "Complete applicable ingress/sink and prior leaf dependencies; current whole run is not established by this type case."
+    }
+  ],
+  "exactCatalogCaseClauseMatches": 4,
+  "reusedArtifactEvidence": true,
+  "newDynamicTestCount": 0,
+  "newProductTestCount": 0,
+  "newFormalAcceptance": 0,
+  "whole451Accepted": false,
+  "selectedScope": "Four value/diagnostic clauses; no live JMS, key, DB, service or other protected operation.",
+  "outstanding": {
+    "deliverable": "Remaining catalog clauses and all ingress/sink routes",
+    "startAndExit": "WBS-P018-10.01 and per-target dependencies, whole451, all P018-10 children and source/run"
+  }
+}
