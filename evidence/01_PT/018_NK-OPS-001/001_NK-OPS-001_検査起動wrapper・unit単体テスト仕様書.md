@@ -161,3 +161,7 @@ UI264 DIF-016、SS355 §8、WBS-P020-01.02、BUG-3346／YKT-2712。期待はCurr
 ## PT-IDEM-012-UTF16 REQUEST detailsの不正Unicode
 
 NK-MSG-002、SS351 §3.3、WBS-P018-09/2、YKT-2328 site 6。固定4キー、ASCIIのfamily／状態／bool／数値の許可を前提にする。孤立上位・下位surrogate各2表現を名前またはfamilyへ含めた8入力は固定PermanentProtocolException、causeなしを期待。正常はASCIIのJSON unicode escapeをfamily Aへ正規化する。既のPG37348独立証跡と現対象Main及び依存を照合し、今回の新methodだけ実行。旧5は元sourceのまま保持。
+
+## PT-PRO-LOG-UTF8-001〜002 LGSREQ01自由入力の欄別strict decode
+
+UI235 §11、SS322/323 §9.5、WBS-P018-09/2、YKT-2328 site1。656 byte、空欄0x20、Keyword/Action/Pathの欄先頭1/273/337、Page 635、Page size 641。001は独立hexのNFC文字・補助文字、enumと固定JST時刻のtyped読戻し、全space欠落を期待。002は三欄それぞれraw surrogate UTF-8表現と非NFC結合列を拒否し、固定例外を期待。対象は認定済みProtocol JARのみ。
