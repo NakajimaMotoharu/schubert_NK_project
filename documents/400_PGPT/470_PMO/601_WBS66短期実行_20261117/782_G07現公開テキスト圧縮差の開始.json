@@ -1,0 +1,75 @@
+{
+  "eventId": "PGPT-20261008-6302",
+  "groupId": "PGPT-WBS66-G07-NEW-PRODUCT-AND-EVIDENCE-RANGE-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-19T22:49:53.353000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 55,
+      "remainingPercent": 45,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-G07-NEW-PRODUCT-AND-EVIDENCE-RANGE-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-G07-NEW-PRODUCT-AND-EVIDENCE-RANGE-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-G07"
+    ],
+    "managementWorkIds": [
+      "WBS-G07"
+    ],
+    "source": "ea19e8e2cc918ba89037a1d17414258456871ad0",
+    "productionCoreMain": "e79dd91d5d6449b08facef1e4c73429b8a227544",
+    "canonicalDesignSource": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "run": "PG40334-g07-current-published-text-and-gzip-delta-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.35,
+      "high": 0.7
+    },
+    "groupCapPp": 1.5,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/781_F03現三変更と次条件継続点.json",
+        "sha256": "ad447aa55d46d2abab0ad5b0d6012bd5140c97d0d87889d52f61e8cfb799f817"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40282-g07-recent-public-text-increment-v1/manifest.json",
+        "sha256": "3b676cdace602f35ee0b163808a5c251ef2548830c6e057f7555d746e43c00bd"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40286-g07-public-local-gzip-increment-v1/manifest.json",
+        "sha256": "61e0fe0ba7d2617a576c8946d9e9bd855c63de2fcb6b4e1ee7994f4f3bdebcde"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40312-f02-ssc461-group-lookup-independent-v1/class-hash-scan-disposition.json",
+        "sha256": "5a0d73b5d52040b62cc6d5f569b17873d3069115edd6247c6c36d64715f7c764"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40318-f02-public-rfc-independent-v1/class-hash-scan-disposition.json",
+        "sha256": "558215928139dcd896b2bea9b2413c9a2ee8001bba35766778f07fcd6ee69657"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40324-f02-borrowed-broker-independent-v1/class-hash-scan-disposition.json",
+        "sha256": "83585dc63cb1a03e0553fe4c657beb3fc3c936d0498992d527b13a17d3919979"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "The previous cumulative scanner stops at PG40282. Current public patch range includes three verified class hash maps and separate local logs.",
+    "endCondition": "Check exact pinned current net patch, enumerate and bound published gzip text only, and distinguish known SHA-only maps by exact hash. Inventory other binary paths without opening.",
+    "workScope": "Read only already-published repository blobs. No product test, backend, actual release, private logs, key material, environment or held evidence access."
+  }
+}
