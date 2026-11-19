@@ -8,6 +8,7 @@ import json
 from pathlib import Path
 import runpy
 import subprocess
+import sys
 from tempfile import TemporaryDirectory
 from xml.etree import ElementTree
 from zipfile import ZipFile
@@ -42,9 +43,12 @@ def write(path, value):
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n")
 
 
-def main():
-    start = read(next(D.glob("724_*.json")))
+def main(group):
+    assert group in ("724", "727")
+    start = read(next(D.glob(group + "_*.json")))
     v = start["values"]
+    test_ids = dict(zip(v["testIds"], v.get("testMethods", IDS.values()), strict=True))
+    count = len(test_ids)
     out = E / v["run"]
     out.mkdir()
     core = v["productionCoreMain"]
@@ -93,7 +97,7 @@ def main():
 
     def terminal(exit_code, extra=None):
         report = dict(actualExit=exit_code, source=source, sourceCore=core, startEvent=start["eventId"], classData=physical,
-                      jar=artifact, fixture=fixture, testIds=IDS, stageResults=stages,
+                      jar=artifact, fixture=fixture, testIds=test_ids, stageResults=stages,
                       caseCount=0, testResultsNotStarted="unit" not in stages, newFormalAcceptance=0,
                       actualBackupDbNativeOperations=0, priorTestsReplayed=0, verifier=ref(__file__),
                       startedAtUTC=began, terminalAtUTC=datetime.now(timezone.utc).isoformat())
@@ -136,7 +140,7 @@ def main():
         xml = out / "xml"
         xml.mkdir()
         binary = out / "jacoco.exec"
-        session = "PG40272-VERSION-CLAIM-VALUES"
+        session = v["run"].split("-", 1)[0] + "-VERSION-CLAIM-VALUES"
         agent_opt = (f'-javaagent:{jars["agent"]["path"]}=destfile={binary},sessionid={session},'
                      'append=false,includes=dev.codex.schubert.nk.batch.backup.BackupVersions')
         unit = execute("unit", [java, "-Djava.io.tmpdir=" + str(tmp), agent_opt, "-jar", jars["junit"]["path"],
@@ -148,9 +152,9 @@ def main():
             return terminal(unit.returncode)
         case_xml = xml / "TEST-junit-jupiter.xml"
         tree = ElementTree.parse(case_xml).getroot()
-        assert len(tree.findall("testcase")) == 2
-        assert {item.get("name") for item in tree.findall("testcase")} == {n + "()" for n in IDS.values()}
-        assert [tree.get(k) for k in ("tests", "failures", "errors", "skipped")] == ["2", "0", "0", "0"]
+        assert len(tree.findall("testcase")) == count
+        assert {item.get("name") for item in tree.findall("testcase")} == {n + "()" for n in test_ids.values()}
+        assert [tree.get(k) for k in ("tests", "failures", "errors", "skipped")] == [str(count), "0", "0", "0"]
         decoder = runpy.run_path("tools/quality/jacoco_readonly_exec_subset.py")["decode"]
         observed = decoder(binary.read_bytes(), {member.removesuffix(".class")})
         assert observed["totalClassRecords"] == 1 and len(observed["sessions"]) == 1
@@ -165,11 +169,15 @@ def main():
         for entry in row[6:]:
             label, missed, covered = entry.split(":")
             metrics[label] = dict(missed=int(missed), covered=int(covered))
-        return terminal(0, dict(caseCount=2, testResultsNotStarted=False, expectedCaseCount=2,
+        expected = v.get("terminalExpectedCounters")
+        covered = expected is None or all(metrics[name] == dict(missed=0, covered=value)
+                                          for name, value in expected.items())
+        return terminal(0 if covered else 1, dict(caseCount=count, testResultsNotStarted=False, expectedCaseCount=count,
                                 failed=0, errors=0, skipped=0, notRun=0, junitXml=ref(case_xml),
                                 exec=ref(binary), crc=row[2], rawCounters=metrics,
-                                oneProductClassOnly=True, whole451Accepted=False))
+                                requiredFourCounterResult=covered if expected is not None else None,
+                                necessarySameSourceRetests=count - 2, oneProductClassOnly=True, whole451Accepted=False))
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(main(sys.argv[1] if len(sys.argv) == 2 else "724"))
