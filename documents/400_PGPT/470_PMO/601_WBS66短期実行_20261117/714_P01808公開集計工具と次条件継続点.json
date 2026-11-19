@@ -1,0 +1,80 @@
+{
+  "eventId": "PGPT-20261008-6235",
+  "source": "55beeb451ce1ce2fd6ca9ccbf6853615cba4f099",
+  "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "previousCheckpoint": "PGPT-20261008-6232",
+  "groupEvents": [
+    "PGPT-20261008-6234"
+  ],
+  "quotaAfter": {
+    "usedPercent": 52,
+    "remainingPercent": 48,
+    "resetsAt": 1795445753,
+    "windowDurationMins": 10080
+  },
+  "fullQuotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-19T20:35:57.778000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 52,
+      "remainingPercent": 48,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "kind": "WBS66_P01808_AGGREGATE_TOOL_SCOPE_CHECKPOINT",
+  "acceptedOriginal": 17,
+  "total": 190,
+  "coreAccepted": 0,
+  "coreTotal": 5,
+  "newFormalAcceptance": 0,
+  "officialPtTests": 1964,
+  "officialPtScopes": 53,
+  "effortRate": null,
+  "actualAllocatedPp": null,
+  "newProductTests": 0,
+  "recordedOwnedJobsInFlight": 0,
+  "ownedJobsStartedHere": 0,
+  "historicalToolScope": "HISTORICAL_AGGREGATE_ONLY_NO_MAINTAINED_ACCEPTANCE_LINK",
+  "outcomeEvidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40262-p01808-ykt2714-aggregate-contract-review-v1/manifest.json",
+      "sha256": "eac15f64aa27c57d5d83fd1bc7a79fb3bd2395db26d96137fb3564fdc6326236"
+    }
+  ],
+  "heldF02": {
+    "wbs": "WBS-F02-a",
+    "bug": "BUG-3233",
+    "ssc": "SSC-461",
+    "owner": "Storage/Bootstrap and native FD maintainers",
+    "currentCallSites": [
+      "OwnedTransferDirectory.execute FileAlreadyExistsException",
+      "OwnedTransferDirectory.execute NoSuchFileException",
+      "OwnedTransferDirectory.execute IOException or NoSuchAlgorithmException"
+    ],
+    "requirement": "Authorized exact-scope callback/FD ownership proof and an approved migration preserving priority, identity, cleanup and callers before retiring the legacy entry. 460 documents this independent HOLD."
+  },
+  "unchangedHolds": [
+    "QA056",
+    "QA057",
+    "real Unit, Root, backup execution",
+    "full 451"
+  ],
+  "nextEvidence": [
+    {
+      "owner": "G07 evidence owner",
+      "requirement": "Keep the original tools, source pins and receipts. Future aggregate-only work requires a separately scoped fixture/receipt and must keep numeric-only historic output and independent provenance judgment."
+    },
+    {
+      "owner": "P018 native quality and release owner",
+      "requirement": "Use a versioned strict current-source reader plus separately admitted same-source byte/physical CRC/session/owner/terminal evidence. Never import counts from PG15836 or PG15838 as current PT, coverage, secret classification, or approval."
+    },
+    {
+      "owner": "PGPT quality tools owner",
+      "requirement": "The named historical branch of YKT-2714 is classified. Review separately identified maintained consumers in their admitted scope and retain other open YKT and 451 conditions."
+    }
+  ],
+  "nextIndependentCondition": "Current P018-08.03/2 strict reader: distinguish the intentional empty target session metadata view from positive multi-class exact identity and one-missing-target failure using only synthetic frames."
+}

@@ -1,0 +1,127 @@
+{
+  "schema": "PGPT_STATIC_CONTRACT_REVIEW_V1",
+  "run": "PG40262-p01808-ykt2714-aggregate-contract-review-v1",
+  "startEvent": "PGPT-20261008-6233",
+  "source": "55beeb451ce1ce2fd6ca9ccbf6853615cba4f099",
+  "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "wbs": "WBS-P018-08.03/2",
+  "relatedWbs": "WBS-G07",
+  "crossCutting": "YKT-2714",
+  "decision": "HISTORICAL_AGGREGATE_ONLY_NO_MAINTAINED_ACCEPTANCE_LINK",
+  "coveredImporters": [
+    "tools/quality/pg15836_g07_public_exec_format.py",
+    "tools/quality/pg15838_g07_public_exec_format_post.py"
+  ],
+  "downstreamHistoricalConsumer": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG15842-g07-public-exec-producer-preflight-v1/manifest.json",
+    "sha256": "99485b46ac1d11d208902a32e56e4d14b5936f5f469b2c5f207737d8baf6182f"
+  },
+  "sourceReferences": [
+    {
+      "path": "tools/quality/public_jacoco_exec_format_v1.py",
+      "sha256": "3852ec2b30f22b4f38bcfb046d7d4a29f751fafdd792ce07d8ce8fc08fc44cec"
+    },
+    {
+      "path": "tools/quality/pg15836_g07_public_exec_format.py",
+      "sha256": "445f788f933a9e73abf90a3670da6c403056ec7ccda4003174fcdc2bc8aecf23"
+    },
+    {
+      "path": "tools/quality/pg15838_g07_public_exec_format_post.py",
+      "sha256": "63075743de0c97711fdf530542ec29c6ec47db3b2e91881d159d97a64780d8c7"
+    },
+    {
+      "path": "tools/quality/jacoco_readonly_exec_subset.py",
+      "sha256": "f0c073ee2ae166a5d2338666f27fde122b5663499ff2aa15c58225d9420b5d6d"
+    },
+    {
+      "path": "tools/quality/pg15842_g07_public_exec_producer_preflight.py",
+      "sha256": "da0070b68af2d56cffbd55032eec89dabc41d6c8614939794a6278ef823c1600"
+    }
+  ],
+  "originalEvidence": [
+    {
+      "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/711_P01808文字列境界とF02保留継続点.json",
+      "sha256": "307a0c4aa8b03d15317edc0eb872e5c4b32eb318efe8fedca4103f32bb5c8772"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40260-p01808-exec-modified-utf-independent-v1/manifest.json",
+      "sha256": "a9c9c03612f6a0972f58742a0c8e91264b164d98bafab157ca08b369c2ee9e60"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG15836-g07-public-exec-format-v1/manifest.json",
+      "sha256": "f8371195e95594877a815e32f19e86bef246376207b68f5c06ef5227781028d2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG15838-g07-public-exec-format-post-v1/manifest.json",
+      "sha256": "a014f3e734bdb2c966dfc6887522363c034f78c165a0b206e4a644c0148f0228"
+    }
+  ],
+  "historicalFormatScope": {
+    "files": 10,
+    "bytes": 155226,
+    "contract": {
+      "path": "evidence/01_PT/018_NK-OPS-001/3021_G07公開exec十件_形式境界限定仕様.md",
+      "sha256": "1c40ce0415526bab9c13492ff77eba6854b460218113f95ec6bf3d21bf09265f"
+    },
+    "producerScopeResult": {
+      "path": "evidence/01_PT/018_NK-OPS-001/3024_G07公開exec生成元_確認可能性結果.md",
+      "sha256": "88d478d3ae1f056584f042a357ebcff41f122274b29b38c70c150196d6f0b824"
+    }
+  },
+  "roles": [
+    {
+      "source": "tools/quality/public_jacoco_exec_format_v1.py",
+      "role": "Structural aggregate for fixed bounded input. No label, class name, CRC or probe arrays returned. Class CRC is skipped, headers can repeat and padding is a diagnostic. String reader accepts reader-compatible encoded UTF-16 including forms that the current writer would not emit."
+    },
+    {
+      "source": "tools/quality/pg15836_g07_public_exec_format.py",
+      "role": "Historical runner only. Fixed ten manifest-bound public paths. Compares Python declared-field counters to a pinned official-reader helper and records a provisional structure result."
+    },
+    {
+      "source": "tools/quality/pg15838_g07_public_exec_format_post.py",
+      "role": "Historical independent post only. Imports aggregate keys (COMMON), validates fixed parent and stored numeric schema. It does not invoke the Python decoder and expressly bars source, secret or formal escalation."
+    },
+    {
+      "source": "tools/quality/jacoco_readonly_exec_subset.py",
+      "role": "Current single-stream offline subset tool. Requires one ordered session, canonical modified UTF field bytes and exact selected class identities/probes. Local format result is independent from artifact provenance and runtime qualification."
+    }
+  ],
+  "formats": [
+    {
+      "field": "header and stream",
+      "historical": "bounded 5..1048576 bytes, initial 0x1007 magic + zero or more additional headers encountered by the reader",
+      "current": "pinned first header and no appended header"
+    },
+    {
+      "field": "UTF fields",
+      "historical": "decode/count Java reader-compatible UTF-16 units internally, aggregate printable-ASCII counts",
+      "current": "validate pinned writer canonical modified UTF encoding for all fields and preserve raw bytes for exact ASCII target selection"
+    },
+    {
+      "field": "probes",
+      "historical": "aggregate declared and hit bits; count nonzero padding",
+      "current": "minimal count, zero padding, no duplicate class CRC, match selected classes"
+    }
+  ],
+  "nextEvidence": [
+    {
+      "owner": "G07 evidence owner",
+      "requirement": "Keep the original tools, source pins and receipts. Future aggregate-only work requires a separately scoped fixture/receipt and must keep numeric-only historic output and independent provenance judgment."
+    },
+    {
+      "owner": "P018 native quality and release owner",
+      "requirement": "Use a versioned strict current-source reader plus separately admitted same-source byte/physical CRC/session/owner/terminal evidence. Never import counts from PG15836 or PG15838 as current PT, coverage, secret classification, or approval."
+    },
+    {
+      "owner": "PGPT quality tools owner",
+      "requirement": "The named historical branch of YKT-2714 is classified. Review separately identified maintained consumers in their admitted scope and retain other open YKT and 451 conditions."
+    }
+  ],
+  "newProductTests": 0,
+  "oldReceiptReexecutions": 0,
+  "actualExecFilesOpened": 0,
+  "actualNativeActions": 0,
+  "newFormalAcceptance": 0,
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-19T20:35:08.106138+00:00"
+}
