@@ -1,0 +1,99 @@
+{
+  "eventId": "PGPT-20261008-6244",
+  "source": "dfd2faba2deae2ef483e455bc4531a1b9110ff30",
+  "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "previousCheckpoint": "PGPT-20261008-6241",
+  "groupEvents": [
+    "PGPT-20261008-6240",
+    "PGPT-20261008-6243"
+  ],
+  "quotaAfter": {
+    "usedPercent": 53,
+    "remainingPercent": 47,
+    "resetsAt": 1795445752,
+    "windowDurationMins": 10080
+  },
+  "fullQuotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-19T21:31:36.797000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 53,
+      "remainingPercent": 47,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "kind": "WBS66_PHYSICAL_AND_BORROWED_JDBC_CONTINUATION",
+  "acceptedOriginal": 17,
+  "total": 190,
+  "coreAccepted": 0,
+  "coreTotal": 5,
+  "newFormalAcceptance": 0,
+  "officialPtTests": 1964,
+  "officialPtScopes": 53,
+  "effortRate": null,
+  "actualAllocatedPp": null,
+  "newProductTests": 0,
+  "recordedOwnedJobsInFlight": 0,
+  "ownedJobsStartedHere": 0,
+  "outcomeEvidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40266-p01808-strict-physical-crc-join-review-v1/manifest.json",
+      "sha256": "a55fc4410915f31517d8f6e03e865f2984299fe7aca971bb8f72d463308ed2c0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40268-p01808-mixed-physical-crc-v1/manifest.json",
+      "sha256": "9b57dde3b4de179855b1219873600c03cfffd2d299c3b6f4df098fe19ec02422"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40270-p00403-run-reference-physical-lineage-v1/manifest.json",
+      "sha256": "f54169aae04cfd7af607bfc1f11da82fdd5133477e8e0032d71b8466e37f4125"
+    }
+  ],
+  "heldF02": {
+    "wbs": "WBS-F02-a",
+    "bug": "BUG-3233",
+    "ssc": "SSC-461",
+    "owner": "Storage/Bootstrap and native FD maintainers",
+    "currentCallSites": [
+      "OwnedTransferDirectory.execute FileAlreadyExistsException",
+      "OwnedTransferDirectory.execute NoSuchFileException",
+      "OwnedTransferDirectory.execute IOException or NoSuchAlgorithmException"
+    ],
+    "requirement": "Authorized exact-scope callback/FD ownership proof and an approved migration preserving priority, identity, cleanup and callers before retiring the legacy entry. 460 documents this independent HOLD."
+  },
+  "unchangedHolds": [
+    "QA056",
+    "QA057",
+    "real Unit, Root, backup execution",
+    "full 451"
+  ],
+  "exactRunReferenceClassPins": 9,
+  "originalJdbcPortTests": 8,
+  "originalJdbcPortTestsReplayed": 0,
+  "nextEvidence": [
+    {
+      "owner": "P018 current source/run owner",
+      "claim": "Provide a signed or independently pinned nonempty expected physical map with byte hashes and classes. Validate exact run, ownership and truthful terminal before native consumption."
+    },
+    {
+      "owner": "Native acceptance/quality owner",
+      "claim": "Compare expected and observed names and CRCs, reject any missing required code outcome and nonzero or incomplete measurement, and keep session-only/natural no-Code records out of class coverage credit. Apply all 451 conditions."
+    },
+    {
+      "owner": "P004-03 DBA and authorized runtime owner",
+      "requirement": "Real admitted DAO SQL/function authorization, UTC semantics, committed postconditions and owner evidence for current run."
+    },
+    {
+      "owner": "Maintenance and native storage owner",
+      "requirement": "Retain held DurableRecordFiles/MaintenanceRunFiles reference and obtain independent actual FD/owner/terminal when admitted."
+    },
+    {
+      "owner": "P004-03 quality owner",
+      "requirement": "All five source/run/criteria and full 451 still required. Never count the eight historical port tests as newly run."
+    }
+  ],
+  "nextIndependentWork": "Select a newly missing approved criterion in the WBS66 priority group using the saved current source. Preserve qualified local RunReferenceRepository and earlier P018 evidence without replay."
+}

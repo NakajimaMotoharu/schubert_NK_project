@@ -1,0 +1,209 @@
+{
+  "actualExit": 0,
+  "source": "dfd2faba2deae2ef483e455bc4531a1b9110ff30",
+  "productionCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "wbs": "WBS-P004-03/2",
+  "startEvent": "PGPT-20261008-6242",
+  "disposition": "HISTORICAL_LOCAL_PORT_SCOPE_REUSABLE_BY_BYTE_LINEAGE",
+  "originalEvidence": [
+    {
+      "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/720_P01808物理CRCとP00403継続点.json",
+      "sha256": "bd41b426a079873269cd189c58064a1b349595b9e6780a73a8c456df85ce892f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39700-p00403-five-artifacts-current-lineage-v1/manifest.json",
+      "sha256": "3330f615bf9ba231d66eb5a2e89689a990aec2f6753ca7a4f99d1d252a21c7ab"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38688-f02-run-reference-jdbc-owner-independent-v1/manifest.json",
+      "sha256": "78f34f3d56273bc732a7fe579f017bb6dbaac39f7d728bf19bd0a0077c7aac1e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39862-service-db-state-lock-four-main-v1/manifest.json",
+      "sha256": "9433dae6e53e1d97a1b942175e930c315c118da9dea870cdffb0b26072e6a035"
+    }
+  ],
+  "design": {
+    "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+    "sha256": "4c09a2f66d9cb4def976c24d2952953aa5a287a0d545548dc4feda4968ff5bef",
+    "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "section": "RunReferenceRepository/SSC461 and RRF-PURE"
+  },
+  "specification": {
+    "path": "evidence/01_PT/004_NK-DAT-001/447_WBS66参照DAO純JDBC単体仕様.md",
+    "sha256": "bbff30ba4b39920569871b7aff72b4ff0e23b1bbc7473c8e52b82ed6b4458c0c"
+  },
+  "ownerInventory": {
+    "path": "documents/400_PGPT/470_PMO/485_WBS網羅性・受入対応.json",
+    "sha256": "4aaf0c0b2e45c265cf981f28b0ac8f49be7b4694e6aa337ec5cbae59a06822a6"
+  },
+  "owner": "WBS-P004-03",
+  "costOwner": "WBS-P004-03",
+  "sourcePins": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "sha256": "389d41ce3928ac25a5001a08fc5a4562ba44df84144721b2f3a8f36f16747edb",
+      "originalSha256": "389d41ce3928ac25a5001a08fc5a4562ba44df84144721b2f3a8f36f16747edb",
+      "exact": true
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryPureJdbcTest.java",
+      "sha256": "d34ce497a39a8d4226003fa8aaf6533bfdd73a7c15466dcd63a4f3e5d3a52898",
+      "originalSha256": "d34ce497a39a8d4226003fa8aaf6533bfdd73a7c15466dcd63a4f3e5d3a52898",
+      "exact": true
+    }
+  ],
+  "oldToCurrentPhysical": [
+    {
+      "module": "storage",
+      "physical": "dev/codex/schubert/nk/storage/package-info.class",
+      "originalSha256": "b9c4509338ea3545a2ee90fee9391cc4b356ef7f60309562a752596d05c81583",
+      "currentSha256": "b9c4509338ea3545a2ee90fee9391cc4b356ef7f60309562a752596d05c81583",
+      "exact": true
+    },
+    {
+      "module": "storage",
+      "physical": "dev/codex/schubert/nk/storage/StorageIoException$Reason.class",
+      "originalSha256": "a113bd839666ee3a4038dd3703af0cfb772282278cc6fbfe1e3cccf98286ffec",
+      "currentSha256": "a113bd839666ee3a4038dd3703af0cfb772282278cc6fbfe1e3cccf98286ffec",
+      "exact": true
+    },
+    {
+      "module": "storage",
+      "physical": "dev/codex/schubert/nk/storage/StorageIoException.class",
+      "originalSha256": "85f86d702a139f126afdd72ca8e221583db824f159351ecd9f07b15fcc569c88",
+      "currentSha256": "85f86d702a139f126afdd72ca8e221583db824f159351ecd9f07b15fcc569c88",
+      "exact": true
+    },
+    {
+      "module": "bootstrap",
+      "physical": "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class",
+      "originalSha256": "cc8265242a1cd41cc7c77b8e12185cbc387fb583d70e1d1171ba467cb0f3d552",
+      "currentSha256": "cc8265242a1cd41cc7c77b8e12185cbc387fb583d70e1d1171ba467cb0f3d552",
+      "exact": true
+    },
+    {
+      "module": "batch",
+      "physical": "dev/codex/schubert/nk/batch/repository/RunReferenceRepository.class",
+      "originalSha256": "dc394e1d15ba729bbecd4f895c264b3adb042233f8ac7d603cab68d6e91682bb",
+      "currentSha256": "dc394e1d15ba729bbecd4f895c264b3adb042233f8ac7d603cab68d6e91682bb",
+      "exact": true
+    },
+    {
+      "module": "batch",
+      "physical": "dev/codex/schubert/nk/batch/repository/BatchRun.class",
+      "originalSha256": "5cb0c42832ea17425dbf60da6025f2c4783d687e665b18f6cd8e88abc399c909",
+      "currentSha256": "5cb0c42832ea17425dbf60da6025f2c4783d687e665b18f6cd8e88abc399c909",
+      "exact": true
+    },
+    {
+      "module": "batch",
+      "physical": "dev/codex/schubert/nk/batch/repository/BatchRepositoryException.class",
+      "originalSha256": "391b1aac7be2dd58cf9c3dee11cdd12941417fa7d029513475dfffbe4a3d2cb1",
+      "currentSha256": "391b1aac7be2dd58cf9c3dee11cdd12941417fa7d029513475dfffbe4a3d2cb1",
+      "exact": true
+    },
+    {
+      "module": "batch",
+      "physical": "dev/codex/schubert/nk/batch/repository/RunReferences.class",
+      "originalSha256": "9cd7197824647e7ad066678a66a54bfdf196f0251027bebeb765b6babd8d8fe2",
+      "currentSha256": "9cd7197824647e7ad066678a66a54bfdf196f0251027bebeb765b6babd8d8fe2",
+      "exact": true
+    },
+    {
+      "module": "batch",
+      "physical": "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.class",
+      "originalSha256": "f181015412f1f293e91c0eea24a3ac33127d5ef5015f3dc9fb73ac732e0cc009",
+      "currentSha256": "f181015412f1f293e91c0eea24a3ac33127d5ef5015f3dc9fb73ac732e0cc009",
+      "exact": true
+    }
+  ],
+  "physicalMatches": 9,
+  "physicalTotal": 9,
+  "originalRun": {
+    "source": "bdea127fb2ef4959c47c04c73ed065acfdd0cbfd",
+    "core": "9179ca302fdfba5d7cee9e2b68b5c5fff00acd6f",
+    "run": "PG38684-SSC461-RUN-REFERENCE-JDBC",
+    "tests": 8,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "notRun": 0,
+    "xml": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38686-ssc461-run-reference-post-v1/original-TEST-junit-jupiter.xml",
+        "sha256": "6d142d3fc511ef5afd20a91379aa21338bac0d0b41727a7151667682dce9ce64"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38686-ssc461-run-reference-post-v1/original-TEST-junit-platform-suite.xml",
+        "sha256": "9e7c7ea148fee74507692aac3d38454f526ae629f43b4591148157944bc4d23e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38686-ssc461-run-reference-post-v1/original-TEST-junit-vintage.xml",
+        "sha256": "e72eac01fdb2aa81db947c0fa7a15048287e5b9a13c7189dcbf18a52ffd17118"
+      }
+    ],
+    "classExecSha256": "09e057490d27008f86735a7807d3b5bc8e48091e950aa963a63b6fd09b0fd494",
+    "selectedMethods": [
+      "everySqlFailurePositionClosesOwnedResources",
+      "fatalProviderGraphIsNotDiscarded",
+      "independentBooleanProjections",
+      "independentConnectionsCanRunConcurrently",
+      "literalSqlAndUtcBindings",
+      "missingProjectionAndCardinality",
+      "nullTransactionAndInterruptContracts",
+      "uncheckedAndCloseFailurePrecedence"
+    ],
+    "historicalTargetCounters": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 230
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 24
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 59
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 18
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 6
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "requirements": [
+    "Fixed SQL/UTC bind and timeout, exact projection",
+    "Borrowed connection ownership, cleanup order, failure identity, interruption and concurrency"
+  ],
+  "unresolved": [
+    {
+      "owner": "P004-03 DBA and authorized runtime owner",
+      "requirement": "Real admitted DAO SQL/function authorization, UTC semantics, committed postconditions and owner evidence for current run."
+    },
+    {
+      "owner": "Maintenance and native storage owner",
+      "requirement": "Retain held DurableRecordFiles/MaintenanceRunFiles reference and obtain independent actual FD/owner/terminal when admitted."
+    },
+    {
+      "owner": "P004-03 quality owner",
+      "requirement": "All five source/run/criteria and full 451 still required. Never count the eight historical port tests as newly run."
+    }
+  ],
+  "oldExecOpened": false,
+  "oldTestsReexecuted": 0,
+  "newProductTests": 0,
+  "actualBackendActions": 0,
+  "whole451Accepted": false,
+  "newFormalAcceptance": 0,
+  "terminalAtUTC": "2026-11-19T21:31:04.684495+00:00"
+}
