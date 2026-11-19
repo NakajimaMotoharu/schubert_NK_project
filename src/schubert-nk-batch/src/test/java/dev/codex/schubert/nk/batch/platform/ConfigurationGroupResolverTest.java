@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.IdentityHashMap;
@@ -336,6 +337,18 @@ final class ConfigurationGroupResolverTest {
     fatal.readBehavior = "error";
     assertSame(fatal.fatal, assertThrows(AssertionError.class, () -> resolver(fatal).resolve()));
     fatal.closedAndCleared();
+  }
+
+  @Test
+  void gid009PreservesFatalReaderFailureThroughTheJdbcEdge() {
+    var child = new Child(RECORD);
+    child.runtimeAt = FIXTURE_READ_6F365882;
+    var first = new SQLException("synthetic first failure");
+    first.setNextException(new SQLException("synthetic next failure", child.fatal));
+    child.runtime.addSuppressed(first);
+
+    assertSame(child.fatal, assertThrows(AssertionError.class, () -> resolver(child).resolve()));
+    child.closedAndCleared();
   }
 
   @Test

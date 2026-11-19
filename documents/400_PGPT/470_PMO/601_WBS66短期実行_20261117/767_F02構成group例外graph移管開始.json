@@ -1,0 +1,77 @@
+{
+  "eventId": "PGPT-20261008-6287",
+  "groupId": "PGPT-WBS66-F02-SSC461-GROUP-LOOKUP-UPPER-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-19T22:22:57.142000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 54,
+      "remainingPercent": 46,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F02-SSC461-GROUP-LOOKUP-UPPER-20261120",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-F02-SSC461-GROUP-LOOKUP-UPPER-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a"
+    ],
+    "source": "21c37145c29ceb3f0c47bf8d9f63842b68832fc8",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "canonicalDesignSource": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "run": "PG40308-f02-ssc461-group-lookup-upper-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.25,
+      "base": 0.75,
+      "high": 1.8
+    },
+    "groupCapPp": 3,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/766_G08六件追跡と次条件継続点.json",
+        "sha256": "1fc65bf2b4cb6f79b13e8fc9dbc2cfb2880c5d9b72ec0c3d27ae920a6a49e787"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39980-f02-current-four-production-jars-v1/manifest.json",
+        "sha256": "3a06700c504ef0f93f3edc89dab8f4197b46ff6742b3c7d56e1c17a7a09a32ba"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38582-f02-jdbc-exception-ownership-review-v1/manifest.json",
+        "sha256": "4c29301e66cd473c219320a3dfa8cf5d846b787eb477caa0bd38599f678a4e92"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38600-f02-sql-graph-adapter-first-ownership-v1/manifest.json",
+        "sha256": "96228eea5480500522997a9fed861a04950a2c44acedec5071453cc91bcaa923"
+      },
+      {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolverTest.java",
+        "sha256": "78c7f605d7f8215caf08b0391d7fc037fcef6b0ca0c504bf6f8f9edea6896aeb"
+      },
+      {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+        "sha256": "da4f331f230ab0bbb66f0f63451b9e7d164be6a73bc9bb6bcdb5a13597b903cb"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "bug": "BUG-3233",
+    "designCorrection": "SSC-461",
+    "startBasis": "F02-a and SSC461 use the Bootstrap graph adapter for outstanding upper links. Historical PG38582 lists ConfigurationGroupResolver as ordinary review; existing seven process-free synthetic assertions are isolated from active nativeFactory.",
+    "endCondition": "Exact product diff of adapter references at both current call sites. Current typed compile+ABI+bytecode, original seven synthetic methods and separate independent regression for hidden fatal identity. Static applicability and misses preserved. Actual getent and nativeFactory stay held.",
+    "workScope": "Owned workspace, public memory-only fixture. No real NSS, shell/exec of child fixture commands, deployment, permission change or held jobs/controls."
+  }
+}
