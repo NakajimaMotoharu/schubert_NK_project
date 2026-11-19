@@ -1,0 +1,145 @@
+{
+  "actualExit": 0,
+  "source": "9a9485dabf939c09cef1413746a703840e467750",
+  "productionCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "startEventId": "PGPT-20261008-6201",
+  "site": 1,
+  "wbs": "WBS-P018-09/2",
+  "status": "STATICALLY_PROVEN_FOR_NORMAL_WIRE_INPUTS",
+  "criteriaScope": "Unpaired UTF-16 cannot arise from the normal input reaching optional; covers all seven optional fields and absence preserved.",
+  "sourceInputs": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogRequest.java",
+      "sha256": "df7ec576fc91533d2cc84e6d1217420c42ea6f589d38f73acb96a37dd5fbba30"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryApplicationService.java",
+      "sha256": "48a0381ddf09f251b50b4b2e7882511d0f64aa83ff7d7c9bc63efae306070d8e"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java",
+      "sha256": "41521248b2ad34c0d21fe00f75d9b7982fb023d9e9ae29ad6f87650b3bd559e9"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java",
+      "sha256": "bbff720fbbcdd7264e625d8d92c1530cc1fdd7e7dbd8454e7c9b947dafc67279"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutRegistry.java",
+      "sha256": "6c8f5806097d9827a02058f8c1b53f108e2e40f28ef190ead2a7f9140be080f8"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java",
+      "sha256": "2285971a065af1f6b264c361659cab8fc75b2ee142005746e42c7462493224c0"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog.java",
+      "sha256": "dceefa8cc10a2a511ed716e7289cbddcff01e2f09c5da0eb98ad8aaa1ec099a6"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/log/LogSearchRequestData.java",
+      "sha256": "5f78131cdb62aa454eb68ac962d1e58cf542947c45f94753697a63ebc4d09ad6"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/TypedFieldValues.java",
+      "sha256": "33f49285e7a00c15bc5c0b5874d82cfe4fc7eb2d4ec60ea3e0a81170a11cbd11"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/LogType.java",
+      "sha256": "6977e3028c290197f23cc2d71f6ca241160d30720ebc8a71fdf65a83b71bdc88"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/LogLevel.java",
+      "sha256": "34f8fe67f4f97f1ff339402003a11bd7ae5fe4e38208813f4562dc0eb9919839"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/time/JstWireTimestamp.java",
+      "sha256": "c5751e9edcd477059661e634d945e66bb6d8d1e5eddae516faccff007c8ccd55"
+    }
+  ],
+  "canonicalEvidence": [
+    {
+      "path": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+      "sha256": "ef3526f0be56007b81318e442b064db936a696db6a52a4fc8ffbc45b87acff6f",
+      "commit": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "sha256": "9c64f99f058d676723353e8bd99eb6d070bdb062d98ee7f4a0fc4e4ae942f6d3",
+      "commit": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774"
+    }
+  ],
+  "cases": [
+    {
+      "field": "keyword",
+      "precondition": "Strict UTF-8 decode (REPORT) and NFC; typed optionalText preserves decoded value"
+    },
+    {
+      "field": "action",
+      "precondition": "Strict UTF-8 decode (REPORT) and NFC; typed optionalText preserves decoded value"
+    },
+    {
+      "field": "path",
+      "precondition": "Strict UTF-8 decode (REPORT) and NFC; typed optionalText preserves decoded value"
+    },
+    {
+      "field": "logType",
+      "precondition": "Closed wire enum conversion; wireValue returns declared ASCII text"
+    },
+    {
+      "field": "level",
+      "precondition": "Closed wire enum conversion; wireValue returns declared ASCII text"
+    },
+    {
+      "field": "fromAt",
+      "precondition": "Fixed wire timestamp parses to Instant, then Instant.toString yields ISO-8601 ASCII"
+    },
+    {
+      "field": "toAt",
+      "precondition": "Fixed wire timestamp parses to Instant, then Instant.toString yields ISO-8601 ASCII"
+    }
+  ],
+  "normalFactory": "LogRequest.decode -> PayloadCodec.decode -> FieldCodec.decodeText -> PayloadTypeCatalog.decode -> LogSearchRequestData -> canonical/optional",
+  "caller": "LogQueryApplicationService.process decodes before passing the same object to inspect and complete/execute. Two canonical call sites.",
+  "optionalMissing": "all-space optional maps to Optional.empty, canonical null LP FFFFFFFF",
+  "priorProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26328-media-ending-independent-v1/all35-current-owner-dispositions.json",
+      "sha256": "a77113d9d851a9131669686e979c5518cb156ab0007fba575f61d1043e6698e0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40218-p01809-request-details-scalar-independent-v1/manifest.json",
+      "sha256": "2fd49d305fbb3f1efa0ad042089f7378edc914404f116fe789c767a33da634ce"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37654-ssc452-grammar-post-v2/manifest.json",
+      "sha256": "4aa8a332a654a74bfa127eeac3790874249f61b09273d93f32a9398868622ce2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38320-f03-ssc451452-protocol-full-module-byte-lineage-v1/manifest.json",
+      "sha256": "778f01c0fd1e2f8c35dcf110463a8014f4e59e0cfae96136a4fb5960c9a6a014"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39980-f02-current-four-production-jars-v1/manifest.json",
+      "sha256": "3a06700c504ef0f93f3edc89dab8f4197b46ff6742b3c7d56e1c17a7a09a32ba"
+    }
+  ],
+  "previousProtocolProof": {
+    "source": "f08897ce8742091dbf1c7575e25780d31b30c089",
+    "xml": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37654-ssc452-grammar-post-v2/original-TEST-junit-jupiter.xml",
+      "sha256": "a579b559ab886f20b09d1518678eeea09ab35ae9cb443feee3001ae398126e33"
+    },
+    "tests": {
+      "sem002InclusiveDateLimitsAndOneSidedFilters()": "dev.codex.schubert.nk.protocol.layout.SemanticDirectBoundaryTest",
+      "malformedAndOverflowFailuresRetainDiagnosticCauseWithoutEchoingInput()": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest"
+    },
+    "currentProtocolMainMatchesIntermediateSource": true
+  },
+  "incomplete": "The old protocol tests prove the shared decoder and typed date rule. A fixed-position LGSREQ01 raw-wire test for all three X1 values is an independent gap. Whole LogRequestTest/HMAC/DB remains held.",
+  "nextAdmissible": "Protocol only, exact PG39980 JAR, fixed UI235 offsets; inspect empty and NFC Japanese+supplementary case, reject isolated surrogate encoded on wire and non-NFC. Never select API or old fixture.",
+  "productTests": 0,
+  "whole451Accepted": false,
+  "newFormalAcceptance": 0,
+  "terminalAtUTC": "2026-11-19T14:32:17.420432+00:00"
+}
