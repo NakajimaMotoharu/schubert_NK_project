@@ -1,4 +1,4 @@
-"""Run explicit fixed-wire suites on the approved Protocol JAR in a local scratch directory."""
+"""Run explicit fixed-wire and YAML boundary suites on approved local JARs."""
 
 import gzip
 import json
@@ -18,6 +18,7 @@ SUITES = {
     "usr": ("692_*", "UserListReplyWireTest", 4, "PG40240-PROTOCOL-USR-REPLY"),
     "usr-retest": ("692_*", "UserListReplyWireTest", 4, "PG40242-PROTOCOL-USR-REPLY"),
     "user-command": ("748_*", "UserCommandWireUnicodeTest", 4, "PG40292-PROTOCOL-USER-COMMAND"),
+    "yaml-limit": ("751_*", "NonSecretYamlUtf8LimitTest", 2, "PG40296-BOOTSTRAP-YAML-LIMIT"),
 }
 RETESTS = {
     "qss-nts-retest": ("PG40234-protocol-qss-nts-fixed-wire-retest-v1", "unit", 1),
@@ -31,17 +32,22 @@ def read(path):
 
 def main(suite="lgs"):
     pattern, simple_name, count, session = SUITES[suite]
-    test = "dev.codex.schubert.nk.protocol.codec." + simple_name
-    source_path = "src/schubert-nk-protocol/src/test/java/" + test.replace(".", "/") + ".java"
+    module, package, classes = (
+        ("bootstrap", "api.bootstrap", 201)
+        if suite == "yaml-limit"
+        else ("protocol", "protocol.codec", 176)
+    )
+    test = f"dev.codex.schubert.nk.{package}.{simple_name}"
+    source_path = f"src/schubert-nk-{module}/src/test/java/" + test.replace(".", "/") + ".java"
     start = read(next(COMMON["PLAN"].glob(pattern)))
     plan = start["values"]
     pin, git, execute = (COMMON[key] for key in ("pin", "git", "execute"))
     assert all(pin(Path(row["path"])) == row for row in plan["oracleReferences"])
     jar_manifest = read(plan["oracleReferences"][1]["path"])
     assert jar_manifest["sourceCore"] == plan["productionCoreMain"]
-    selected = jar_manifest["jars"]["protocol"]
+    selected = jar_manifest["jars"][module]
     jar = Path(selected["artifact"]["path"])
-    assert pin(jar) == selected["artifact"] and selected["classes"] == 176
+    assert pin(jar) == selected["artifact"] and selected["classes"] == classes
     ownership = jar.lstat()
     assert stat.S_ISREG(ownership.st_mode) and jar.resolve() == jar
     assert ownership.st_uid == os.getuid() and not ownership.st_mode & stat.S_IWOTH
@@ -66,6 +72,14 @@ def main(suite="lgs"):
     agent = tool("org.jacoco.agent-0.8.15-runtime.jar")
     cli = tool("org.jacoco.cli-0.8.15-nodeps.jar")
     annotations = tool("jspecify-1.0.1.jar")
+    dependencies = []
+    if module == "bootstrap":
+        storage = jar_manifest["jars"]["storage"]["artifact"]
+        assert pin(Path(storage["path"])) == storage
+        stored = read(plan["oracleReferences"][3]["path"])["dependencies"]
+        yaml = next(path for path in stored if path.endswith("/snakeyaml-engine-3.1.1.jar"))
+        assert pin(Path(yaml))["sha256"] == stored[yaml]
+        dependencies = [storage, pin(Path(yaml))]
     run = plan["run"]
     if suite in RETESTS:
         run, failed_stage, expected_exit = RETESTS[suite]
@@ -80,7 +94,8 @@ def main(suite="lgs"):
         fixture.write_bytes(git("show", f"{source}:{source_path}"))
         sources = work / "sources.txt"
         sources.write_text(str(fixture) + "\n")
-        cp = os.pathsep.join(map(str, (jar, junit, annotations)))
+        cp = os.pathsep.join([str(jar), str(junit), str(annotations),
+                             *(entry["path"] for entry in dependencies)])
         pmd = rules["commands"]["pmd"][:]
         pmd[pmd.index("--file-list") + 1] = sources
         pmd[pmd.index("--aux-classpath") + 1] = cp + os.pathsep + str(java.parents[1] / "lib/jrt-fs.jar")
@@ -118,15 +133,18 @@ def main(suite="lgs"):
             ownership.st_dev, ownership.st_ino, ownership.st_uid, ownership.st_mode, ownership.st_mtime_ns
         )
         assert pin(jar) == selected["artifact"]
+        assert all(pin(Path(entry["path"])) == entry for entry in dependencies)
         result = dict(run=run, actualExit=next((row["actualExit"] for row in results.values()
                                                        if row["actualExit"] != 0), 0),
                       session=session, source=source, productionCore=plan["productionCoreMain"],
                       testFixture=source_path, testSha256=pin(fixture)["sha256"], jar=selected["artifact"],
                       jarOwnership=dict(uid=ownership.st_uid, mode=oct(stat.S_IMODE(ownership.st_mode)),
                                         regularFile=True, sameBeforeAndAfter=True),
-                      scopes=["protocol"], selectedTests=count, executedPreviouslyApprovedTests=0,
+                      scopes=[module], selectedTests=count, executedPreviouslyApprovedTests=0,
                       stages=results, actualBackendActions=0, whole451Accepted=False,
                       terminalAtUTC=COMMON["timestamp"]())
+    if dependencies:
+        result["localDependencyPins"] = dependencies
     COMMON["dump"](out / "manifest.json", result)
     print(pin(out / "manifest.json"), result["actualExit"])
     return result["actualExit"]
