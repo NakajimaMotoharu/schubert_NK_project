@@ -1,0 +1,23 @@
+ARCHUNIT	1.4.2	36	36
+MODULE	api	1
+MODULE	batch	1
+MODULE	bootstrap	1
+MODULE	protocol	1
+MODULE	storage	1
+MODULE	web	31
+RULE	CONTROLLER_BOUNDARY	10
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.canary.AnnotatedEndpoint	java.nio.file.Path
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.canary.FileChannelController	java.nio.channels.FileChannel
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.canary.JakartaController	jakarta.jms.Message
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.canary.JavaxController	javax.jms.Message
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.canary.JdbcController	java.sql.Connection
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.canary.LegacyFileController	java.io.File
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.canary.NamedHandler	javax.jms.Message
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.canary.NioFilesController	java.nio.file.Files
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.canary.SpringJmsController	org.springframework.jms.core.JmsTemplate
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.canary.StorageController	dev.codex.schubert.nk.storage.KnownValue
+RULE	FRAMEWORK_FENCES	0
+RULE	INTERNAL_OWNER	0
+RULE	MODULE_EDGES	0
+RULE	REPOSITORY_DIRECTION	0
+INSPECTED	117	46
