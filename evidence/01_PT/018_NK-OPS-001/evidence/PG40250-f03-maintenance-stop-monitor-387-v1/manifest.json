@@ -1,0 +1,98 @@
+{
+  "schema": "PGPT_STATIC_CONTRACT_REVIEW_V1",
+  "run": "PG40250-f03-maintenance-stop-monitor-387-v1",
+  "startEvent": "PGPT-20261008-6221",
+  "source": "a9efd9badb53923e52c571a51a305b96479dc779",
+  "sourceCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "wbs": "WBS-F03/2-2",
+  "rawFindingIndex": 387,
+  "rawRule": "AvoidSynchronizedStatement",
+  "originalSourceMatchesExact": true,
+  "target": {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopClient.java",
+    "sha256": "ae53eb1a23d05cadb270554222d74c84d64a29adedab5666f15b2e20135470c2",
+    "line": 177,
+    "method": "Attempt.awaitClient"
+  },
+  "sameMonitorReaderLine": 170,
+  "decision": "APPLICABLE_OPEN",
+  "scopeClosed": "Applicability of original finding 387 only; the adjacent reader and other sites were not classified in this group.",
+  "reasoning": [
+    "One Attempt shares the same private monitor across status and awaitClient. Waiting for the owned process and closing streams occurs below awaitClient acquisition, while the monitor protects retained state and one-time resource release.",
+    "The process wait has a separate time bound. Acquiring the monitor itself is not bounded by that wait, and the same monitor must be acquired for status. Calls that have already acquired it handle interruption and preserve UNKNOWN if completion is unproven.",
+    "Production callers retain the same Attempt while status is UNKNOWN. External ownership and the real Unit terminal checks remain independent of the Attempt monitor and of the client exit status.",
+    "Prior PT-OPS-MON10-002 established private monitor identity only. Current fixture code exercises timeout, interruption, and independence from the caller monitor. A historical result is not evidence for current-source internal-lock contention."
+  ],
+  "callers": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningStopPass.java",
+      "sha256": "42c1f37aa5f8c40d5c1b1f8900028eb54022eae678f1850307e4156e854c8e88",
+      "line": 119
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle.java",
+      "sha256": "d2686fed8d6c620411de1b92ed4a7bf19507e9f37f18d65b753208b3631de68a",
+      "line": 352
+    }
+  ],
+  "designReferences": [
+    {
+      "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+      "sha256": "07ab19dd27038241ba8257a1e4dcf180117a844b68479ec6848658a938445192",
+      "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+      "scope": "SSC137/S3失敗停止追補"
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "sha256": "ac1968b36bdc90e5892bb9239eff49868b4bf977945724e02abe2876db6c7399",
+      "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+      "scope": "SSC135/BUG388"
+    }
+  ],
+  "earlierOwnershipScope": {
+    "path": "evidence/01_PT/018_NK-OPS-001/3553_F03残Monitor所有十の仕様.md",
+    "sha256": "090a47e314bea896c6d6adbdbf737fecb024caab2d4ac90d542d07e42f0a9f78"
+  },
+  "existingFixture": {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopClientTest.java",
+    "sha256": "e24ffa677ae7e0ede3be40bcba1c2d5abadc63fd0ef53cfaa45da2e4a94019a8",
+    "testMethods": [
+      "monitor002CallerLockCannotBlockOwnedStopStatus",
+      "mclient004TimeoutRetainsLiveProcessAndReapsSameOwner",
+      "mclient007InterruptionKeepsOwnerWithoutAutomaticKill"
+    ]
+  },
+  "historicalEvidence": {
+    "manifest": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG468-caddy-reload-full/manifest.json",
+      "sha256": "648020121ed2dde426f78b91fd2a79a25f2d069200c3dbb138d5af0185adc4a9"
+    },
+    "xml": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG468-caddy-reload-full/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MaintenanceUnitStopClientTest.xml",
+      "sha256": "6be8b0207c130969637836d93093247048d9152e0f39456d99f01ca84bf30f20"
+    },
+    "source": "bbb244e5191e68adee2f6251dfdbbba53e9b64b4",
+    "verifiedCases": [
+      "mclient004TimeoutRetainsLiveProcessAndReapsSameOwner",
+      "mclient007InterruptionKeepsOwnerWithoutAutomaticKill"
+    ],
+    "currentSourceCredit": 0
+  },
+  "nextEvidence": [
+    {
+      "owner": "Batch platform and static-quality maintainers",
+      "requirement": "Review a disposition or change that preserves one-time stream close, status visibility and UNKNOWN. Obtain same-source static and separately admitted independent PT for internal contention and interruption/deadline behavior if changed."
+    },
+    {
+      "owner": "Morning operating environment maintainers",
+      "requirement": "After existing admission requirements are met, obtain separately authorized same-owner Unit terminal evidence; existing holds persist."
+    }
+  ],
+  "productTests": 0,
+  "actualBackendActions": 0,
+  "replayedEarlierTests": 0,
+  "coverage": null,
+  "actualExit": 0,
+  "newFormalAcceptance": 0,
+  "terminalAtUTC": "2026-11-19T17:34:34.618618+00:00"
+}

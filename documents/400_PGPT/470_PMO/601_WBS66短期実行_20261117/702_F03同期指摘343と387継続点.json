@@ -1,0 +1,81 @@
+{
+  "eventId": "PGPT-20261008-6223",
+  "source": "a9efd9badb53923e52c571a51a305b96479dc779",
+  "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "previousCheckpoint": "PGPT-20261008-6220",
+  "groupEvents": [
+    "PGPT-20261008-6219",
+    "PGPT-20261008-6222"
+  ],
+  "quotaAfter": {
+    "usedPercent": 52,
+    "remainingPercent": 48,
+    "resetsAt": 1795445752,
+    "windowDurationMins": 10080
+  },
+  "fullQuotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-19T17:35:08.504000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 52,
+      "remainingPercent": 48,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "kind": "WBS66_F03_TWO_MONITOR_APPLICABILITY_CHECKPOINT",
+  "acceptedOriginal": 17,
+  "total": 190,
+  "coreAccepted": 0,
+  "coreTotal": 5,
+  "newFormalAcceptance": 0,
+  "officialPtTests": 1964,
+  "officialPtScopes": 53,
+  "effortRate": null,
+  "actualAllocatedPp": null,
+  "originalF03FindingsNewlyClassified": [
+    343,
+    387
+  ],
+  "closedOriginalWbsItems": 0,
+  "productTests": 0,
+  "recordedOwnedJobsInFlight": 0,
+  "ownedJobsStartedHere": 0,
+  "outcomeEvidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40248-f03-backup-quiescent-monitor-343-v1/manifest.json",
+      "sha256": "d288e3e572cc33309616f79a58b92aef2f95f6f0f188f01b9a39e45f2547048e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40250-f03-maintenance-stop-monitor-387-v1/manifest.json",
+      "sha256": "d5be23eff09813dee9e3838b080278c23c1c87a82c53e1ac3b3050aec8636cdb"
+    }
+  ],
+  "nextEvidence": [
+    {
+      "owner": "Batch platform and static-quality maintainers",
+      "requirement": "Preserve single-adapter serialization and ownership. Submit a reviewed disposition or change, current-source static output, and authorized independent PT for same-adapter contention, interruption/timeout and finally cleanup if behavior is changed."
+    },
+    {
+      "owner": "Morning, Backup and Cleanup operating environment maintainers",
+      "requirement": "After current real-environment admission, separately establish same-owner terminal observations and caller behavior with current-source evidence as required for acceptance."
+    },
+    {
+      "owner": "Batch platform and static-quality maintainers",
+      "requirement": "Review a disposition or change that preserves one-time stream close, status visibility and UNKNOWN. Obtain same-source static and separately admitted independent PT for internal contention and interruption/deadline behavior if changed."
+    },
+    {
+      "owner": "Morning operating environment maintainers",
+      "requirement": "After existing admission requirements are met, obtain separately authorized same-owner Unit terminal evidence; existing holds persist."
+    }
+  ],
+  "unchangedHolds": [
+    "QA056",
+    "QA057",
+    "real Unit, Root, backup execution",
+    "full 451"
+  ],
+  "nextIndependentWork": "Select an independently permitted F02, F03 or other short-term criterion based on existing 679 handoff and current evidence. Maintain real Unit and QA056/057 holds."
+}

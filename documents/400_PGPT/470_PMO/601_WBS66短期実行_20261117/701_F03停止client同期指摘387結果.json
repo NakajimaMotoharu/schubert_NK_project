@@ -1,0 +1,132 @@
+{
+  "eventId": "PGPT-20261008-6222",
+  "groupId": "PGPT-WBS66-F03-MAINTENANCE-STOP-PUBLIC-MONITOR-387-20261120",
+  "source": "a9efd9badb53923e52c571a51a305b96479dc779",
+  "productionCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-19T17:35:08.504000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 52,
+      "remainingPercent": 48,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-MAINTENANCE-STOP-PUBLIC-MONITOR-387-20261120",
+    "workCategory": "REVIEW",
+    "workDetailCategory": "PGPT-WBS66-F03-MAINTENANCE-STOP-PUBLIC-MONITOR-387-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "source": "a9efd9badb53923e52c571a51a305b96479dc779",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "canonicalDesignSource": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "run": "PG40250-f03-maintenance-stop-monitor-387-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.08,
+      "base": 0.25,
+      "high": 0.6
+    },
+    "groupCapPp": 1,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37254-monitor-lock113-criteria-return-v2/remaining-source-findings.json",
+        "sha256": "bae7ed79012520486991581a379ca89a792b8875252b84c8cc28d6eee31aecd5"
+      },
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/699_F03Backup休止同期継続点.json",
+        "sha256": "4c476027e94ab3de86544952efb24ad1d3e4845f047c05cd11fab9cef7a55149"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "460 permitted public-static backlog, pinned record 699. Original index 387 has no candidate and no matching prior decision record.",
+    "endCondition": "One read-only applicability decision based on exact source, lock scope and callers. Separate current acceptance requirements.",
+    "workScope": "Public source and evidence only. No Unit operation, simulation, reproduction, runtime job or authorization change.",
+    "quotaAfter": {
+      "usedPercent": 52,
+      "remainingPercent": 48,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "9afbb1b2b910b6973522b1852e8a0c4bea3387a6a5695e40fbacbc711c0453a7",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-19T17:35:08.504000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 52,
+          "remainingPercent": 48,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-19T17:34:34.618618+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 52,
+      "remainingPercent": 48,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "publicEvidence": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40250-f03-maintenance-stop-monitor-387-v1/manifest.json",
+        "sha256": "d5be23eff09813dee9e3838b080278c23c1c87a82c53e1ac3b3050aec8636cdb"
+      }
+    ],
+    "completedSource": "a9efd9badb53923e52c571a51a305b96479dc779",
+    "startedAtEvent": "PGPT-20261008-6221",
+    "actualExit": 0,
+    "firstVerification": {
+      "staticApplicabilityCompleted": 1,
+      "targetFindings": 1
+    },
+    "attempt": 1,
+    "retryReasons": [],
+    "productTests": 0,
+    "newAcceptanceCount": 0,
+    "actualBackendActions": 0,
+    "replayedEarlierTests": 0,
+    "attemptResult": "ORIGINAL_387_APPLICABLE_OPEN",
+    "remainingEvidence": [
+      {
+        "owner": "Batch platform and static-quality maintainers",
+        "requirement": "Review a disposition or change that preserves one-time stream close, status visibility and UNKNOWN. Obtain same-source static and separately admitted independent PT for internal contention and interruption/deadline behavior if changed."
+      },
+      {
+        "owner": "Morning operating environment maintainers",
+        "requirement": "After existing admission requirements are met, obtain separately authorized same-owner Unit terminal evidence; existing holds persist."
+      }
+    ]
+  }
+}
