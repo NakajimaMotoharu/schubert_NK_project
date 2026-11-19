@@ -1,0 +1,59 @@
+{
+  "eventId": "PGPT-20261008-6254",
+  "groupId": "PGPT-WBS66-G07-PUBLIC-DELTA-ONLY-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-19T21:43:19.357000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 53,
+      "remainingPercent": 47,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-G07-PUBLIC-DELTA-ONLY-20261120",
+    "workCategory": "REVIEW",
+    "workDetailCategory": "PGPT-WBS66-G07-PUBLIC-DELTA-ONLY-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-G07"
+    ],
+    "managementWorkIds": [
+      "WBS-G07"
+    ],
+    "source": "a219d68db08b137402c0732789f5ce15c5790485",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "run": "PG40282-g07-recent-public-text-increment-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.35,
+      "high": 0.75
+    },
+    "groupCapPp": 1.5,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/732_G08形式・借用JDBC・値型追跡継続点.json",
+        "sha256": "5d2f84ce6b1e6e3169537b4b588715d7b3aae310583b96191d90d3ead17b50eb"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40222-g07-a02-and-log-evidence-increment-v1/independent.json",
+        "sha256": "507c2d8358e4334e24dc15db6bf1f597d43ae183b6af7d33433147d436431529"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "fromCommit": "c70920ff8fa30457a0a1457356cd8aff8cbaf974",
+    "startBasis": "PG40222 fixed previous public inspection end. Recent publication in this continuation introduces test fixtures, docs and local proof metadata.",
+    "endCondition": "Inventory exact Git public patch, bounded textual scan and scanner exit/report; list binaries separate as ineligible for text scan. Preserve old binary/history/open counts and keep global G07 open.",
+    "workScope": "Public tracked net diff only from previous qualified cursor. No old commits/exec/gzip content/private/raw, no source or environment changes."
+  }
+}
