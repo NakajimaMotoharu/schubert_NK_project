@@ -1,0 +1,108 @@
+{
+  "actualExit": 0,
+  "source": "3ce2ce2a4db56c34401f402657149e190264ae33",
+  "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "run": "PG40284-p020-dif007-observation-admission-v1",
+  "wbs": "WBS-P020-01.02/2",
+  "startEvent": "PGPT-20261008-6257",
+  "disposition": "DIF007_NORMALIZED_ORACLE_AND_CONTROLLED_OBSERVATION_REQUIRED",
+  "immutableCurrent": {
+    "path": "program/characterization/baseline/current/artifacts/CHR-U02.json",
+    "sha256": "08755d79fb4795a3f5c391b9fb0e880c7c1c142c3417885dea96973af929f4d1",
+    "keys": [
+      "caseId",
+      "focusOutlineStyle",
+      "language",
+      "navLinkCounts",
+      "status",
+      "stylesheet",
+      "titles"
+    ]
+  },
+  "design": [
+    {
+      "path": "documents/200_UI/260_引継ぎ・監査/264_現行互換性Characterization Test仕様.md",
+      "sha256": "0b0973e6e1e94858e840bc1b85df1daff35e3a0fe9f28ea12331823c2cbcf781",
+      "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774"
+    },
+    {
+      "path": "documents/200_UI/220_画面・認証/222_画面共通・レイアウト設計.md",
+      "sha256": "8a52f0de895933c5696d7d5d385287729480a40384cd1855ea99d3d9a914763c",
+      "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/355_Characterization Test実行準備・PG開始gate.md",
+      "sha256": "aff2aafe8f952de073e6dd2e7f5840152539f348f9816c6fa31e84ced93bef45",
+      "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774"
+    }
+  ],
+  "sourceReferences": [
+    {
+      "path": "program/characterization/baseline/current/artifacts/CHR-U02.json",
+      "sha256": "08755d79fb4795a3f5c391b9fb0e880c7c1c142c3417885dea96973af929f4d1"
+    },
+    {
+      "path": "program/characterization/tests/resources/cases/dif-allowlist.json",
+      "sha256": "43239fe3d3f42c488dcbeb58017fde78830ba3771930a9c97cd65c3c7a7c5cb6"
+    },
+    {
+      "path": "program/characterization/tests/resources/cases/case-requirements.json",
+      "sha256": "f31eaff19732157415dccc960d85bf6a68e0eb188bf98b79d54a7c0887dea569"
+    },
+    {
+      "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+      "sha256": "c0c35712f35e079d51235ff946cb84708ff63b67e83ac2ba66c5a2a7c1f60c6a"
+    },
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/CurrentCharacterizationTest.java",
+      "sha256": "e7df3676b1b1a86849459855310fd4e4efa8b3613903134e165181ffdd29cbe1"
+    },
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorTest.java",
+      "sha256": "c5f28a438c47c6d6a58ecf67804e4f3da3ce29d40dc58bc0f2db858f50318d18"
+    }
+  ],
+  "allowlistMetadata": {
+    "id": "DIF-007",
+    "cases": [
+      "CHR-U02"
+    ],
+    "field": "topbar.identity",
+    "mode": "difference",
+    "selectorType": "semantic",
+    "selectors": [
+      "topbar.identity"
+    ],
+    "current": "partial",
+    "nk": "username role logout"
+  },
+  "contracts": [
+    "UI264 requires username, role and logout on protected NK pages. Historical U02 records title, navigation count and presentation data without the individual identity requirements.",
+    "The current comparison verifies semantic scope labels and reporter-supplied literal values. DIF-007 has no specific guard that prevents applying it to an unrelated U02 pointer.",
+    "The comparator fixture uses /dif/DIF-007 through a generic helper. It provides scaffolding rather than independent measured observations.",
+    "Before accepting the semantic difference, bind an exact supplemental normalized projection and independently observe the three facts under the existing approved scope. Preserve Current baseline hash."
+  ],
+  "auditRetry": "The first metadata read addressed the case at the document root. The fixed read uses the explicit requirements object; no product action in either attempt.",
+  "issue": "BUG-3356",
+  "crossCutting": "YKT-2699",
+  "runtimeActions": 0,
+  "testsExecuted": 0,
+  "newFormalAcceptance": 0,
+  "preservedCurrentBaseline": true,
+  "completeDIF007Accepted": false,
+  "nextEvidence": [
+    {
+      "owner": "CHR normalization/design owner",
+      "needed": "Approved supplemental normalized field contract from UI222/UI264/SS355 and per-screen expected evidence without mutating Current."
+    },
+    {
+      "owner": "Browser evidence owner",
+      "needed": "Admitted same-source paired capture with safe presence-only username/role/logout output."
+    },
+    {
+      "owner": "Comparator and quality owner",
+      "needed": "Verify exact fields, remove unrelated or missing self-claims from allowed differences and acquire current-source quality evidence."
+    }
+  ],
+  "terminalAtUTC": "2026-11-19T21:47:28.634015+00:00"
+}
