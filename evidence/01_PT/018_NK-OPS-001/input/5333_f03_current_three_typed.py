@@ -14,6 +14,31 @@ INPUT = Path(__file__).parent
 PRIOR = runpy.run_path(str(INPUT / "5242_f03_batch_current_static_delta.py"))
 UPPER = runpy.run_path(str(INPUT / "5326_f02_group_lookup_upper.py"))
 OPS, PLAN, COMMON = (UPPER[name] for name in ("EVIDENCE", "PLAN", "COMMON"))
+METRICS_TARGET = "dev/codex/schubert/nk/batch/monitoring/BatchStandardMetricSource.class"
+
+
+def metrics_sdk(work):
+    """BUG-3357: resolve the admitted metrics-model peer from the saved Maven tree."""
+    refs = work["oracleReferences"]
+    model = next(ref for ref in refs if "/PG38522-" in ref["path"])
+    missing = next(ref for ref in refs if "/PG40368-" in ref["path"])
+    read = UPPER["read"]
+    batch = next(row["model"] for row in read(model["path"])["modules"] if row["module"] == "batch")
+    assert COMMON["pin"](Path(batch["path"])) == batch
+    pending = [read(batch["path"])]
+    models = set()
+    while pending:
+        node = pending.pop()
+        if node["groupId"] == "io.prometheus" and node["artifactId"] == "prometheus-metrics-model":
+            assert node["scope"] == "compile" and node["type"] == "jar"
+            models.add(node["version"])
+        pending.extend(node.get("children", []))
+    version, = models
+    name = f"prometheus-metrics-model-{version}.jar"
+    jar = Path.cwd().parent / "toolchain/m2/repository/io/prometheus/prometheus-metrics-model" / version / name
+    pinned = read(missing["path"])["admittedModelDependency"]
+    assert COMMON["pin"](jar) == pinned and jar.resolve() == jar
+    return pinned
 
 
 def main(plan_prefix="779_*", analysis_scope="delta"):
@@ -30,7 +55,10 @@ def main(plan_prefix="779_*", analysis_scope="delta"):
     assert jar_manifest["sourceCore"] == core
     assert all(x["actualExit"] == 0 for x in
                (jar_manifest, annotation, *(read(row["path"]) for row in work["oracleReferences"][6:])))
-    if admitted:
+    if "selectedClassNames" in work:
+        assert not admitted
+        expected = set(work["selectedClassNames"])
+    elif admitted:
         expected = {name for entries in compile_manifest["classHashes"].values()
                     for name in entries if PRIOR["allowed"](name)}
     else:
@@ -43,6 +71,11 @@ def main(plan_prefix="779_*", analysis_scope="delta"):
     sdk = dict(tools["sdkJars"])
     sdk[new_sdk["path"]] = new_sdk["sha256"]
     assert len(sdk) == prior["externalSdkCount"]
+    new_dependency = None
+    if METRICS_TARGET in expected:
+        new_dependency = metrics_sdk(work)
+        assert new_dependency["path"] not in sdk
+        sdk[new_dependency["path"]] = new_dependency["sha256"]
     assert all(pin(Path(path))["sha256"] == value for path, value in sdk.items())
     tool_pins = {p["path"]: p["sha256"] for p in tools["toolAndRulePins"]}
     classpath = prior_command[prior_command.index("-cp") + 1].split(":")
@@ -107,6 +140,7 @@ def main(plan_prefix="779_*", analysis_scope="delta"):
                    startEvent=start["eventId"], terminal=result, observedClassStats=sorted(observed),
                    targetHashes=analyzed, errors=errors, spots=findings, missing=missing,
                    excludedEarlierHoldClasses=excluded, testedAuxInput=aux_hits,
+                   explicitMetricsSdk=new_dependency,
                    report=pin(xml) if xml.exists() else None, productTestsExecuted=0,
                    wholeF03Accepted=False, whole451Accepted=False, newFormalAcceptance=0,
                    terminalAtUTC=datetime.now(timezone.utc).isoformat())
