@@ -1,0 +1,83 @@
+{
+  "eventId": "PGPT-20261008-6260",
+  "groupId": "PGPT-WBS66-G07-PUBLIC-LOCAL-GZIP-OMISSIONS-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-19T21:48:52.304000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 53,
+      "remainingPercent": 47,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-G07-PUBLIC-LOCAL-GZIP-OMISSIONS-20261120",
+    "workCategory": "REVIEW",
+    "workDetailCategory": "PGPT-WBS66-G07-PUBLIC-LOCAL-GZIP-OMISSIONS-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-G07"
+    ],
+    "managementWorkIds": [
+      "WBS-G07"
+    ],
+    "source": "87e6993869cce8336e589affd227de3b0c4e06d8",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "run": "PG40286-g07-public-local-gzip-increment-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.12,
+      "base": 0.35,
+      "high": 0.7
+    },
+    "groupCapPp": 1.5,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/738_P020DIF007観測保留継続点.json",
+        "sha256": "c409dec53b996ed2f79c4457cb2808e09939a840e832186f42bf17c1d97ede41"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40282-g07-recent-public-text-increment-v1/manifest.json",
+        "sha256": "3b676cdace602f35ee0b163808a5c251ef2548830c6e057f7555d746e43c00bd"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "fixedGzipPaths": [
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG40226-protocol-log-wire-scalar-v1/class-init.log.gz",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG40232-protocol-qss-nts-fixed-wire-v1/class-init.log.gz",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG40234-protocol-qss-nts-fixed-wire-retest-v1/class-init.log.gz",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG40242-protocol-user-list-fixed-wire-retest-v1/class-init.log.gz",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG40256-p01808-exec-modified-utf-red-v1/unit-output.txt.gz",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG40258-p01808-exec-modified-utf-green-v1/changed-tool-regression.log.gz",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG40258-p01808-exec-modified-utf-green-v1/selected.log.gz",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG40272-p01810-backup-versions-identity-v1/checkstyle.log.gz",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG40272-p01810-backup-versions-identity-v1/format.log.gz",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG40272-p01810-backup-versions-identity-v1/javac.log.gz",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG40272-p01810-backup-versions-identity-v1/pmd.log.gz",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG40272-p01810-backup-versions-identity-v1/raw.log.gz",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG40272-p01810-backup-versions-identity-v1/unit.log.gz",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG40274-p01810-backup-versions-complete-value-v1/checkstyle.log.gz",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG40274-p01810-backup-versions-complete-value-v1/format.log.gz",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG40274-p01810-backup-versions-complete-value-v1/javac.log.gz",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG40274-p01810-backup-versions-complete-value-v1/pmd.log.gz",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG40276-p01810-backup-versions-complete-value-retest-v1/checkstyle.log.gz",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG40276-p01810-backup-versions-complete-value-retest-v1/format.log.gz",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG40276-p01810-backup-versions-complete-value-retest-v1/javac.log.gz",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG40276-p01810-backup-versions-complete-value-retest-v1/pmd.log.gz",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG40276-p01810-backup-versions-complete-value-retest-v1/raw.log.gz",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG40276-p01810-backup-versions-complete-value-retest-v1/unit.log.gz"
+    ],
+    "startBasis": "PG40282 explicitly excluded these 23 published, local host/test logs from text scan.",
+    "endCondition": "Verify each gzip committed byte identity and finite UTF-8 decompression, run read-only redacted scan, retain aggregate count and six exec exclusions.",
+    "workScope": "Exact allowlisted published synthetic/tool logs only. No old scan replay, raw/private/native exec, DB, ownership or approval operations."
+  }
+}
