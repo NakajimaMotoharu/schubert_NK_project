@@ -1,7 +1,37 @@
 """Execute the fixed characterization-only roster after the existing haruka admission."""
 
 from collections import Counter
+import gzip
 import re
+
+
+def read_combined_capsule(spec):
+    encoded = bytearray()
+    while True:
+        line = sys.stdin.buffer.readline(2000)
+        assert line.endswith(b"\n")
+        if line == b"PAYLOAD-END\n":
+            break
+        encoded.extend(line[:-1])
+        assert len(encoded) < 10 * 1024**2
+    body = base64.b64decode(encoded, validate=True)
+    assert 0 < spec["size"] == len(body) < 7 * 1024**2
+    assert sha(body) == spec["capsuleSha256"]
+    with gzip.GzipFile(fileobj=io.BytesIO(body)) as stream:
+        raw = stream.read(12 * 1024**2)
+    assert 0 < spec["rawTarSize"] == len(raw) < 12 * 1024**2
+    assert sha(raw) == spec["rawTarSha256"]
+    result = {}
+    with tarfile.open(fileobj=io.BytesIO(raw), mode="r:") as archive:
+        for entry in archive.getmembers():
+            name = entry.name
+            assert entry.isfile() and not Path(name).is_absolute() and ".." not in Path(name).parts
+            assert name in spec["files"] and name not in result
+            data = archive.extractfile(entry).read()
+            assert sha(data) == spec["files"][name]
+            result[name] = data
+    assert result.keys() == spec["files"].keys()
+    return result
 
 
 def single_session(spec):
@@ -13,7 +43,7 @@ def single_session(spec):
         before = host_proof(spec)
         send("HARUKA_READY ", before)
         stage = "capsule"
-        files = read_capsule(spec)
+        files = read_combined_capsule(spec)
         assert set(files) == set(spec["files"])
         assert boot_id() == before["boot"] and shutil.disk_usage(ROOT).free >= MIN_BYTES
         assert ROOT.stat().st_dev == before["device"]

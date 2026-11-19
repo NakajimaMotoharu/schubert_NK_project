@@ -107,15 +107,18 @@ def prepare():
             entry = tarfile.TarInfo(path)
             entry.size, entry.mode = len(data), 0o600
             tar.addfile(entry, io.BytesIO(data))
-    payload = packed.getvalue()
+    raw = packed.getvalue()
+    assert 0 < len(raw) < 12 * 1024**2
+    payload = gzip.compress(raw, mtime=0)
     assert 0 < len(payload) < 7 * 1024**2
     OUT.mkdir()
     STORE.mkdir(mode=0o700)
-    capsule = STORE / "verified-characterization.tar"
+    capsule = STORE / "verified-characterization.tar.gz"
     with capsule.open("xb") as stream:
         os.fchmod(stream.fileno(), 0o600)
         stream.write(payload)
-    spec = dict(capsuleSha256=sha(payload), size=len(payload), files={k: sha(v) for k, v in files.items()},
+    spec = dict(capsuleSha256=sha(payload), size=len(payload), rawTarSha256=sha(raw), rawTarSize=len(raw),
+                files={k: sha(v) for k, v in files.items()},
                 physical=older["mainPhysical"], tests={k: sha(v) for k, v in tests.items()},
                 selectors=selected + [CASE], session=SESSION, java=old_launch["java"]["sha256"],
                 javac=old_launch["javac"]["sha256"])
