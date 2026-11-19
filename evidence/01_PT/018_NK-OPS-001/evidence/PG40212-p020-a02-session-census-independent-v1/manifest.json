@@ -1,0 +1,215 @@
+{
+  "actualExit": 0,
+  "source": "2a0e29270e1b770e4c89e1bd2979d887e0df8ff7",
+  "productionCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "red": {
+    "unit": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40206-p020-a02-session-census-red208-v1/manifest.json",
+      "sha256": "195bed2f1254e0b7ce3a38652fccc07ce36ecebbcb0d32233b0c7f458fa96529"
+    },
+    "xml": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40206-p020-a02-session-census-red208-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "ee6163bd7c9535eaa512c866ecacf7ff47499f521e92535333f806d62c146667"
+    },
+    "exec": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40206-p020-a02-session-census-red208-v1/jacoco.exec",
+      "sha256": "7494d34b9fbd42754e69abf9bdfaa291d4e90cc803fc9835407f566c4150c8ba"
+    },
+    "actualExit": 1,
+    "tests": 2,
+    "failures": 2
+  },
+  "run": "PG40208-p020-a02-session-census-green208-v1",
+  "unit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40208-p020-a02-session-census-green208-v1/manifest.json",
+    "sha256": "3838c87daac501c3589024589aadb8c54a04e15780f1fb3da22a385caadcfca5"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40210-p020-a02-session-census-static-v1/manifest.json",
+    "sha256": "0db38ddc933ab271321e210bf54006adccda152f7258dee47c587ce436c80609"
+  },
+  "firstIndependentFailure": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40211-p020-a02-independent-initial-assertion-v1/manifest.json",
+    "sha256": "155710e26abcb60ec07b0708ea9e916ed6f50589ffe0b9cd24d82f9a84c32f05"
+  },
+  "changedPhysical": [
+    "dev/codex/schubert/characterization/ArtifactComparator$ComparisonResult.class",
+    "dev/codex/schubert/characterization/ArtifactComparator.class"
+  ],
+  "nestedCodeAndDeclarationsEqual": true,
+  "cases": {
+    "PT-CHR-CMP-A02-001": "rejectsContradictoryActivityOfTheNewestSessionInBothReports",
+    "PT-CHR-CMP-A02-002": "rejectsActivityReportsThatOmitBothNewerSessions"
+  },
+  "expectedActivity": {
+    "current": [
+      true,
+      true,
+      true
+    ],
+    "nk": [
+      false,
+      true,
+      true
+    ]
+  },
+  "design": "SS355 §8 / UI264 DIF-016",
+  "classInit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40212-p020-a02-session-census-independent-v1/class-init.log.gz",
+    "sha256": "b101d6d9ad5d39eeba3ba551af3c3ca74c7a76cec5d070e182c2fd89bb72cd60"
+  },
+  "raw": {
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38642-schema-raw-line-tool-v1/toolclasses:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+      "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+      "--line-deficits",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG40208-p020-a02-session-census-green208-v1/jacoco.exec",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40208-p020-a02-session-census-green208-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/ArtifactComparator$ComparisonResult.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40208-p020-a02-session-census-green208-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/ArtifactComparator.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40208-p020-a02-session-census-green208-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope$Open.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40208-p020-a02-session-census-green208-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope$Release.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40208-p020-a02-session-census-green208-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope$Work.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40208-p020-a02-session-census-green208-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40208-p020-a02-session-census-green208-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40208-p020-a02-session-census-green208-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$BaselineNumbers.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40208-p020-a02-session-census-green208-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$FileJsonOutput.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40208-p020-a02-session-census-green208-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$JsonOutput.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40208-p020-a02-session-census-green208-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$TreeStats.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40208-p020-a02-session-census-green208-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$UsableSpace.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40208-p020-a02-session-census-green208-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40208-p020-a02-session-census-green208-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateContractValidator$ValidationResult.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40208-p020-a02-session-census-green208-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateContractValidator.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40208-p020-a02-session-census-green208-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/TargetAdapter$Target.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40208-p020-a02-session-census-green208-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/TargetAdapter.class"
+    ],
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40212-p020-a02-session-census-independent-v1/raw.tsv",
+      "sha256": "ebebe4fcf35aa975eba26ae7599db158a39dd4ac58754ada888d651630c4e66f"
+    },
+    "actualExit": 0,
+    "noCode": [
+      "dev/codex/schubert/characterization/CharacterizationIoScope$Open",
+      "dev/codex/schubert/characterization/CharacterizationIoScope$Release",
+      "dev/codex/schubert/characterization/CharacterizationIoScope$Work",
+      "dev/codex/schubert/characterization/GateCli$JsonOutput",
+      "dev/codex/schubert/characterization/GateCli$UsableSpace"
+    ],
+    "tool": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38642-f03-schema-raw-line-deficits-v1/begin.json",
+      "sha256": "7f91863199af3f9ce301b3b3eeefc24ff34fb8825524669fe8469bee1ccf8786"
+    },
+    "lineDeficits": [
+      [
+        "dev/codex/schubert/characterization/GateCli",
+        "main",
+        "([Ljava/lang/String;)V",
+        "92",
+        "INSTRUCTION:0:52",
+        "BRANCH:1:25"
+      ],
+      [
+        "dev/codex/schubert/characterization/GateCli",
+        "main",
+        "([Ljava/lang/String;)V",
+        "98",
+        "INSTRUCTION:7:0",
+        "BRANCH:0:0"
+      ],
+      [
+        "dev/codex/schubert/characterization/GateCli",
+        "preflight",
+        "(Ljava/nio/file/Path;Ljava/nio/file/Path;)V",
+        "202",
+        "INSTRUCTION:4:0",
+        "BRANCH:0:0"
+      ],
+      [
+        "dev/codex/schubert/characterization/GateCli",
+        "preflight",
+        "(Ljava/nio/file/Path;Ljava/nio/file/Path;)V",
+        "203",
+        "INSTRUCTION:1:0",
+        "BRANCH:0:0"
+      ]
+    ],
+    "rawTotals": {
+      "LINE": {
+        "missed": 2,
+        "covered": 1621
+      },
+      "METHOD": {
+        "missed": 1,
+        "covered": 248
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 12
+      },
+      "BRANCH": {
+        "missed": 1,
+        "covered": 996
+      },
+      "INSTRUCTION": {
+        "missed": 12,
+        "covered": 8605
+      }
+    },
+    "missedMethods": [
+      {
+        "className": "dev/codex/schubert/characterization/GateCli",
+        "method": "main",
+        "descriptor": "([Ljava/lang/String;)V",
+        "misses": [
+          "INSTRUCTION:7:141",
+          "BRANCH:1:27",
+          "LINE:1:27",
+          "COMPLEXITY:1:19"
+        ]
+      },
+      {
+        "className": "dev/codex/schubert/characterization/GateCli",
+        "method": "preflight",
+        "descriptor": "(Ljava/nio/file/Path;Ljava/nio/file/Path;)V",
+        "misses": [
+          "INSTRUCTION:5:0",
+          "LINE:2:0",
+          "COMPLEXITY:1:0",
+          "METHOD:1:0"
+        ]
+      }
+    ]
+  },
+  "comparatorCounters": {
+    "INSTRUCTION": 1816,
+    "BRANCH": 176,
+    "LINE": 345,
+    "COMPLEXITY": 137,
+    "METHOD": 49,
+    "CLASS": 2
+  },
+  "pmdRaw": 6,
+  "pmdReviews": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40212-p020-a02-session-census-independent-v1/pmd-per-site.json",
+    "sha256": "2d2668e8fc5139b07ecec17dc789ee29be73aaf0673b85b96d103e68d142c8c0"
+  },
+  "pmdApplicable": 0,
+  "pmdUnclassified": 0,
+  "tests": 208,
+  "suites": 20,
+  "failed": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "newDefinitions": 2,
+  "baselineUnchanged": true,
+  "productTests": 0,
+  "actualNkChr": false,
+  "whole451Accepted": false,
+  "newAcceptance": 0,
+  "terminalAtUTC": "2026-11-19T13:36:58.872437+00:00",
+  "verifier": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/5316_p020_a02_census_post.py",
+    "sha256": "c52f29f03015a210c04289cc5045211c196a1f638fa8b3d00ef974aa84308bfe"
+  }
+}

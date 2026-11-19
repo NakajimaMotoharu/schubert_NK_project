@@ -1,0 +1,147 @@
+{
+  "eventId": "PGPT-20261008-6193",
+  "groupId": "PGPT-WBS66-P020-A02-ALIVE-SESSIONS-OFFLINE-20261119",
+  "source": "2a0e29270e1b770e4c89e1bd2979d887e0df8ff7",
+  "productionCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-19T13:37:43.187000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 51,
+      "remainingPercent": 49,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "originalRemainingDetailBasePp": 1089.848,
+    "canonicalDesignSource": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "contextGroupId": "PGPT-WBS66-P020-A02-ALIVE-SESSIONS-OFFLINE-20261119",
+    "workDetailCategory": "PGPT-WBS66-P020-A02-ALIVE-SESSIONS-OFFLINE-20261119",
+    "workCategory": "IMPLEMENTATION",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P020-01.02"
+    ],
+    "managementWorkIds": [
+      "WBS-P020-01.02/2"
+    ],
+    "source": "9473187a7d98a568848fecfdfef482973a769ec7",
+    "characterizationBase": "e81d98a11946b6c0e1c20c38d30b38056d14aa46",
+    "run": "PG40206-p020-a02-session-census-red208-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.45,
+      "base": 1.3,
+      "high": 3
+    },
+    "groupCapPp": 4,
+    "completedOriginalRowPricePp": 0,
+    "testIds": [
+      "PT-CHR-CMP-A02-001",
+      "PT-CHR-CMP-A02-002"
+    ],
+    "bug": "BUG-3346",
+    "ykt": "YKT-2712",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40128-p020-path-contract-green206-v2/begin.json",
+        "sha256": "488fb5c534903843a32d6b1240e4eea9f794557c44c92e92568d3bb5502e5928"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40132-p020-path-contract-independent-v1/manifest.json",
+        "sha256": "af18f4c6b12643581fa71f0faa1cd25dcc6cb30b862df6575584145afc862cf5"
+      },
+      {
+        "path": "documents/200_UI/260_引継ぎ・監査/264_現行互換性Characterization Test仕様.md",
+        "sha256": "0b0973e6e1e94858e840bc1b85df1daff35e3a0fe9f28ea12331823c2cbcf781"
+      },
+      {
+        "path": "documents/300_SS/350_運用・品質/355_Characterization Test実行準備・PG開始gate.md",
+        "sha256": "aff2aafe8f952de073e6dd2e7f5840152539f348f9816c6fa31e84ced93bef45"
+      },
+      {
+        "path": "program/characterization/baseline/current/artifacts/CHR-A02.json",
+        "sha256": "8af1ba4d2381bebe7ce52f74992e5dabc728841b996779a2f90ded043001ce75"
+      }
+    ],
+    "workScope": "SS355 and UI264 DIF-016. Offline comparator only, require ordered three observed activity booleans and validate the two retained sessions even where both observation inputs have the same omission. One changed comparator and associated fixtures. No live authentication, re-run of current baselines, service, native or environment operations.",
+    "quotaAfter": {
+      "usedPercent": 51,
+      "remainingPercent": 49,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "51c2bbaea1434846b077b5f0c1a3942000e672524f50ed8b64f05143bfead2fd",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-19T13:37:43.187000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 51,
+          "remainingPercent": 49,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 1,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-19T13:36:58.872437+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 50,
+      "remainingPercent": 50,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "completedSource": "2a0e29270e1b770e4c89e1bd2979d887e0df8ff7",
+    "completedRun": "PG40208-p020-a02-session-census-green208-v1",
+    "publicEvidence": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40212-p020-a02-session-census-independent-v1/manifest.json",
+        "sha256": "d8f11e393676af1b80ba8ebf58817051bb7fde1eb3acf5d94bb7354127b1799a"
+      }
+    ],
+    "actualExit": 0,
+    "startedAtEvent": "PGPT-20261008-6192",
+    "newAcceptanceCount": 0,
+    "productTests": 0,
+    "toolTests": 208,
+    "firstVerification": {
+      "reproducedFailures": 2,
+      "selected": 2
+    },
+    "correctedVerification": {
+      "passed": 208,
+      "selected": 208
+    },
+    "attemptResult": "PASS_CHANGED_OFFLINE_COMPARATOR",
+    "attempt": 2,
+    "retryReasons": [
+      "Two before-fix assertions disproved the former comparator contract.",
+      "Independent post needed a bounded verifier-only fix for code-equal nested debug differences."
+    ]
+  }
+}

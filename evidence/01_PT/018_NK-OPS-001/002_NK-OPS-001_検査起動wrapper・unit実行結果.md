@@ -113,3 +113,7 @@ PG40160、JDK25.0.4、固定ホスト鍵、通常mini認証1回、同boot、専�
 ## PT-F02-ARCH-031〜037 実行結果（2026-11-19 JST）
 
 02087e045ee9cacc3a3c1b025470b4a8bc1a6b99、PG40198／40200の固定JDK25 javac、ArchUnit 1.4.2。元3/7、修正7/7。後段の監査exit 1は禁止4件を正しく拒否した期待値、許容3。Phase間の全13 class同一をPG40202で独立照合。SHA-256 ee5ed964e3bbb7727e3790b14c82d0d9b8f7814e616ca2cdb3257144ebbd3956。BUG3345／YKT2711、製品JAR・製品Coverage・全451は未測定。
+
+## PT-CHR-CMP-A02-001〜002 実行結果（2026-11-19 JST）
+
+2a0e29270e1b770e4c89e1bd2979d887e0df8ff7。PG40206は修正前2選択で2失敗、PG40208は20 suite・208成功、失敗/エラー/skip/未実行0。PG40210はformat/Checkstyle/SpotBugs 0、PMD原6は前根拠と対応。PG40212独立SHA-256 d8f11e393676af1b80ba8ebf58817051bb7fde1eb3acf5d94bb7354127b1799a。比較器二物理L345/M49/C2/B176 miss0、他工具未網羅保持。BUG3346/3347、YKT2712/2713。元Current不変。実A02、製品PT、451全体は別。
