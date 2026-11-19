@@ -1,7 +1,7 @@
 package dev.codex.schubert.nk.bootstrap;
 
+import dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph;
 import dev.codex.schubert.nk.storage.ServiceConfigFiles;
-import dev.codex.schubert.nk.storage.StorageIoException;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import edu.umd.cs.findbugs.annotations.SuppressMatchType;
 import java.io.IOException;
@@ -203,7 +203,7 @@ public final class FixedNativeCoverageCheckpoint {
         retainedSession = type.getMethod("getSessionId");
         data = type.getMethod("getExecutionData", boolean.class);
       } catch (ReflectiveOperationException | java.net.URISyntaxException | IOException failure) {
-        StorageIoException.preserveFatal(failure);
+        JdbcFailureGraph.preserveFatal(failure);
         throw unavailable();
       }
     }
@@ -237,7 +237,7 @@ public final class FixedNativeCoverageCheckpoint {
         if (!(value instanceof String text)) throw unavailable();
         return text;
       } catch (ReflectiveOperationException failure) {
-        StorageIoException.preserveFatal(failure);
+        JdbcFailureGraph.preserveFatal(failure);
         throw unavailable();
       }
     }
@@ -249,7 +249,7 @@ public final class FixedNativeCoverageCheckpoint {
         if (!(value instanceof byte[] bytes)) throw unavailable();
         return bytes;
       } catch (ReflectiveOperationException failure) {
-        StorageIoException.preserveFatal(failure);
+        JdbcFailureGraph.preserveFatal(failure);
         throw unavailable();
       }
     }
