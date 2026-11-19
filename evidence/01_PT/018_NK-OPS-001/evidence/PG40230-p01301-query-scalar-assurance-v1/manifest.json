@@ -1,0 +1,91 @@
+{
+  "actualExit": 0,
+  "source": "98f2b5a7e053d288905ec7b4a9f0fdfaae99ff91",
+  "productionCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "site": 2,
+  "startEventId": "PGPT-20261008-6205",
+  "coverageOfCallArguments": {
+    "QSSREQ01": {
+      "keyword": "strict UTF-8/NFC",
+      "username": "strict UTF-8/NFC",
+      "answerState": "fixed enum ASCII",
+      "submittedFrom": "Instant ISO-8601 ASCII",
+      "submittedTo": "Instant ISO-8601 ASCII"
+    },
+    "NTSREQ01": {
+      "notificationType": "fixed enum ASCII",
+      "submittedFrom": "Instant ISO-8601 ASCII",
+      "submittedTo": "Instant ISO-8601 ASCII"
+    },
+    "QSDREQ01": "only numeric questionId; optional unreachable",
+    "NTDREQ01": "only numeric notificationId; optional unreachable"
+  },
+  "fixedDesign": {
+    "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+    "sha256": "9c64f99f058d676723353e8bd99eb6d070bdb062d98ee7f4a0fc4e4ae942f6d3",
+    "commit": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774"
+  },
+  "sourceInputs": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryRequest.java",
+      "sha256": "7e8ed5ca4175bb673a3396612d7cb3e0f7c9aca239bd1ae8f6337155e5201181"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryApplicationService.java",
+      "sha256": "93029308e85bad6c693ffcf30ab435f42fef2b4a56de713f5ec1e7752f071275"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java",
+      "sha256": "41521248b2ad34c0d21fe00f75d9b7982fb023d9e9ae29ad6f87650b3bd559e9"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java",
+      "sha256": "bbff720fbbcdd7264e625d8d92c1530cc1fdd7e7dbd8454e7c9b947dafc67279"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java",
+      "sha256": "2285971a065af1f6b264c361659cab8fc75b2ee142005746e42c7462493224c0"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog.java",
+      "sha256": "dceefa8cc10a2a511ed716e7289cbddcff01e2f09c5da0eb98ad8aaa1ec099a6"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/QuestionSearchRequestData.java",
+      "sha256": "e93c0affdb135f6af27adbc223d5de106748df8514188513a3ab4f66687c9128"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/NotificationSearchRequestData.java",
+      "sha256": "c33f1d8853f19f0b927b903f2856d6029bc807f666de8700f26c8e062ec600e2"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/AnswerState.java",
+      "sha256": "bf012f1ce68157a7d4b62e17f6f996362454d58684301de5fb079d9e2281d29c"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/NotificationType.java",
+      "sha256": "0226b90638a1c81e4a60cedb85ac3aa261069a982a745d79711a691bc0f76753"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/time/JstWireTimestamp.java",
+      "sha256": "c5751e9edcd477059661e634d945e66bb6d8d1e5eddae516faccff007c8ccd55"
+    }
+  ],
+  "ownedFactory": "Private constructor called only after wire parse. Normal service passes that resulting request to two canonical call sites.",
+  "status": "STATICALLY_PROVEN_FOR_NORMAL_QSS_NTS_WIRE_INPUTS",
+  "priorProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26328-media-ending-independent-v1/all35-current-owner-dispositions.json",
+      "sha256": "a77113d9d851a9131669686e979c5518cb156ab0007fba575f61d1043e6698e0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40224-p01809-log-request-scalar-assurance-v1/manifest.json",
+      "sha256": "04a89836bddbe42ae56034495deb4c0d6970d9e1565b10aa940409b8cc5618dc"
+    }
+  ],
+  "separateRemaining": "QSS/NTS-specific independent fixed-wire vectors and whole API ownership/DB/HMAC evidence remain separate. The whole QuestionQueryRequestTest instantiates a held type; no static classification result is a dynamic pass.",
+  "productTests": 0,
+  "newFormalAcceptance": 0,
+  "whole451Accepted": false,
+  "terminalAtUTC": "2026-11-19T14:37:18.510751+00:00"
+}

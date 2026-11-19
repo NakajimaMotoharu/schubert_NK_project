@@ -1,0 +1,75 @@
+{
+  "eventId": "PGPT-20261008-6207",
+  "source": "98f2b5a7e053d288905ec7b4a9f0fdfaae99ff91",
+  "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "previousCheckpoint": "PGPT-20261008-6200",
+  "groupEvents": [
+    "PGPT-20261008-6202",
+    "PGPT-20261008-6204",
+    "PGPT-20261008-6206"
+  ],
+  "quotaAfter": {
+    "usedPercent": 51,
+    "remainingPercent": 49,
+    "resetsAt": 1795445752,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-19T14:38:02.143000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 51,
+      "remainingPercent": 49,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "kind": "WBS66_YKT2328_CONTINUATION_CHECKPOINT",
+  "acceptedOriginal": 17,
+  "total": 190,
+  "newFormalAcceptance": 0,
+  "coreAccepted": 0,
+  "coreTotal": 5,
+  "effortRate": null,
+  "actualAllocatedPp": null,
+  "ownedJobsInFlight": 0,
+  "wireProductTests": 2,
+  "sourceCasesTraced": {
+    "logOptionalCalls": 7,
+    "questionNotificationOptionalCalls": 8
+  },
+  "outcomeEvidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40224-p01809-log-request-scalar-assurance-v1/manifest.json",
+      "sha256": "04a89836bddbe42ae56034495deb4c0d6970d9e1565b10aa940409b8cc5618dc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40228-protocol-log-wire-scalar-independent-v1/manifest.json",
+      "sha256": "3943d008988b11cbb6249bcd295525afc9e0fa6906857ce33e4b4f0e89eea453"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40230-p01301-query-scalar-assurance-v1/manifest.json",
+      "sha256": "a527de9ae105e10549bdf818be5591eb10f6a7f234530245c84303ded03785a1"
+    }
+  ],
+  "nextEvidence": [
+    {
+      "wbs": "WBS-P013-01/2",
+      "owner": "Protocol / question and notification maintainer",
+      "requirement": "Independent QSS/NTS wire vectors can use prior pinned Protocol JAR for their own offsets; QSS keyword & username, NTS fixed types and dates. No reuse of LGS PASS. Whole API fixture holds and original fee retained."
+    },
+    {
+      "wbs": "WBS-P018-09/2",
+      "owner": "API log-query maintainer",
+      "requirement": "Existing whole LogRequestTest uses DB-related and held FingerprintKeyRing dependencies. Require operation-specific admission before full API/HMAC/DB evidence; existing Log protocol subset retained."
+    },
+    {
+      "wbs": "F02/F03/C02/P004/P018-08",
+      "owner": "Quality / operation owners",
+      "requirement": "Keep individual gates and responsibilities in 679, QA-056/057 and other operating holds intact."
+    }
+  ],
+  "safeNextRead": "git status -sb --untracked-files=no; git rev-parse HEAD origin/dev-foundation origin/main; read 456/460 and verify archived Protocol JAR SHA against PG39980 before creating distinct, narrowly selected Protocol-only test."
+}
