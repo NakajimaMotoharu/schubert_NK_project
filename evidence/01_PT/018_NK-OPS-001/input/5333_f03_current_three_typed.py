@@ -1,9 +1,10 @@
-"""Check the three current changed binaries under the existing protected-scope filter."""
+"""Check explicitly selected changed binaries under the existing protected-scope filter."""
 
 from datetime import datetime, timezone
 import hashlib
 from pathlib import Path
 import runpy
+import sys
 from tempfile import TemporaryDirectory
 import xml.etree.ElementTree as ET
 from zipfile import ZipFile, ZIP_DEFLATED
@@ -15,9 +16,9 @@ UPPER = runpy.run_path(str(INPUT / "5326_f02_group_lookup_upper.py"))
 OPS, PLAN, COMMON = (UPPER[name] for name in ("EVIDENCE", "PLAN", "COMMON"))
 
 
-def main():
+def main(plan_prefix="779_*"):
     read = UPPER["read"]
-    start = read(next(PLAN.glob("779_*")))
+    start = read(next(PLAN.glob(plan_prefix)))
     work = start["values"]
     pin = COMMON["pin"]
     assert all(pin(Path(meta["path"])) == meta for meta in work["oracleReferences"])
@@ -28,7 +29,8 @@ def main():
     assert all(x["actualExit"] == 0 for x in
                (jar_manifest, annotation, *(read(row["path"]) for row in work["oracleReferences"][6:])))
     expected = {name for rows in jar_manifest["changedClassesFromOldJars"].values() for name in rows}
-    assert len(expected) == 3 and all(PRIOR["allowed"](name) for name in expected)
+    assert len(expected) == work.get("expectedChangedCount", 3)
+    assert all(PRIOR["allowed"](name) for name in expected)
     prior_command = prior["command"]
     new_sdk = annotation["onlyAdditionalAux"]
     assert pin(Path(new_sdk["path"])) == new_sdk
@@ -100,4 +102,4 @@ def main():
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(main(*sys.argv[1:]))
