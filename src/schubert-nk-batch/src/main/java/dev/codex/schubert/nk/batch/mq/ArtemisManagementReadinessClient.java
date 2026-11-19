@@ -1,7 +1,7 @@
 package dev.codex.schubert.nk.batch.mq;
 
-import dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame;
 import dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph;
+import dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame;
 import java.io.IOException;
 import java.util.HexFormat;
 import java.util.LinkedHashMap;
