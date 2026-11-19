@@ -1,0 +1,126 @@
+{
+  "run": "PG40192-f04-haruka-case-qualified-handoff-v1",
+  "evidenceOnly": true,
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-19T13:15:45.697779+00:00",
+  "startEventId": "PGPT-20261008-6182",
+  "source": "2d5192404f075becb51278c5e98ff5fa0f9427d6",
+  "productionCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "caseEvidenceSource": "60e00a7b4a868384659e08c60aa2a86a8e3546c0",
+  "schedule": {
+    "revision": 58,
+    "source": {
+      "path": "../PMO/hourly-monitor/wbs66-20261116/58_直近20pp不足時の対象と予算判断を実行用の検収表へ渡す/実行計画.tsv",
+      "sha256": "0eb4695f95dd35fe057997e81106d711fb1d70044fe9f7257bee4cdfcd6e94ff"
+    },
+    "rows": {
+      "WBS-F04-既存環境": {
+        "row": 12,
+        "planPricePp": 0.3,
+        "startDependency": null
+      },
+      "WBS-F04-条件対応": {
+        "row": 134,
+        "planPricePp": 0.45,
+        "startDependency": "WBS-F04-既存環境"
+      },
+      "WBS-F04-引渡し": {
+        "row": 158,
+        "planPricePp": 0.75,
+        "startDependency": "WBS-F04-条件対応"
+      }
+    }
+  },
+  "criteriaSource": {
+    "path": "../PMO/hourly-monitor/wbs66-20261116/58_直近20pp不足時の対象と予算判断を実行用の検収表へ渡す/922条件の受入照合.tsv",
+    "sha256": "531f525df5bb8003c69b66296d13e5ad159990384c3e399d1ae5a3b56946c15f"
+  },
+  "case": {
+    "testId": "PT-CHR-PREFLIGHT-FS-001",
+    "ownerWbs": "WBS-P020-01.01/2-b",
+    "referencedBy": "WBS-F04",
+    "design": "SS355",
+    "specification": {
+      "path": "evidence/01_PT/018_NK-OPS-001/001_NK-OPS-001_検査起動wrapper・unit単体テスト仕様書.md",
+      "sha256": "820daecb2a3eafe2a3c1500f00f3f0586a84117c9476ebbb5460e6ca0ff8e52a"
+    },
+    "result": {
+      "path": "evidence/01_PT/018_NK-OPS-001/002_NK-OPS-001_検査起動wrapper・unit実行結果.md",
+      "sha256": "1fb85582de8b028db4faffe0662bbffba2e20ab48fe25cae63c02c5af3f1e7c9"
+    },
+    "originRun": "PG40160-p020-haruka-real-filestore-v1",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40160-p020-haruka-real-filestore-v1/manifest.json",
+      "sha256": "b861c5b5460b4b145419ba207c5490251e44bf3a4bf838db6aed0fa869249875"
+    },
+    "independentPost": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40190-p020-haruka-filestore-independent-v1/manifest.json",
+      "sha256": "45d97c98185f803646ece9db54761b0a2c9a01740966154d61be8ae199101ea3"
+    },
+    "frozen": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40162-p020-filestore-artifact-prep-v1/manifest.json",
+      "sha256": "dd84cd3db3408463d2bcf25191ed6368e059e2aab7e1df37a1fb8bf3d2feed3d"
+    },
+    "toolSourceBytes": 6,
+    "physicalClasses": 17,
+    "newlyObservedProbeIds": [
+      22,
+      101
+    ],
+    "priceAppliedToF04": 0
+  },
+  "priorEnvironment": {
+    "sha256": "794d283c66cf05a2446403845eac80e97539efcdd0d17944f1140b516045bdf7",
+    "status": "DIRECT_OS_BASELINE_READY",
+    "origin": "PMO haruka-transition-20261114",
+    "scope": "Installation provenance only. Case user, filesystem and JDK from PG40160."
+  },
+  "directObservation": {
+    "user": "mini",
+    "ownerUid": 1000,
+    "sameBoot": true,
+    "workspaceMode": "0700",
+    "activeJobsAtAdmission": 0,
+    "earlierRunFinished": true,
+    "java": "25.0.4",
+    "freeBytes": 224683773952,
+    "thresholdBytes": 21474836480
+  },
+  "decisions": [
+    {
+      "id": "WBS-F04/reuse",
+      "status": "LIMITED_PROVEN",
+      "proved": "Direct ordinary user, Java runtime and filesystem evidence apply to this case on its observed boot.",
+      "missing": "Requalify boot and case ownership when each other operation is admitted. Historical environment baselines are not current operation proofs."
+    },
+    {
+      "id": "WBS-F04/criterion/contract",
+      "status": "PARTIAL",
+      "proved": "Ordinary owned workspace, JDK25, and real FileStore against an independent oracle. SS355 directly specifies this case. SS342 sections 5 and 8 and SS343 section 7 supply environment context.",
+      "missing": "Prove applicable SS342/343 service and DB identity, isolation, preservation and reproduction. Obtain environment equivalence or a design determination for legacy VM-specific criteria."
+    },
+    {
+      "id": "WBS-F04/criterion/scope",
+      "status": "PARTIAL",
+      "proved": "One PT specification/result joined to 6 source hashes and 17 physical classes.",
+      "missing": "Complete environment, artifact and owned-resource inventory. Current release and its original backups are outside the tested space."
+    },
+    {
+      "id": "WBS-F04/criterion/quality",
+      "status": "PARTIAL",
+      "proved": "Independent normal FileStore observation, exit and verified two-argument method L2/M1/I5 plus main dispatch and two probes.",
+      "missing": "Applicable exceptions, resource postconditions and 451 same-source/run counters remain open."
+    }
+  ],
+  "exitDependency": {
+    "id": "閉/WBS-F04",
+    "decision": "NOT_ACCEPTED",
+    "requires": "All criteria, applicable operation qualification and 451"
+  },
+  "resumedHaruka": false,
+  "dynamicTestsExecutedByGroup": 0,
+  "productTestIncrement": 0,
+  "newFormalAcceptance": 0,
+  "completedOriginalRowPricePp": 0,
+  "whole451Accepted": false
+}
