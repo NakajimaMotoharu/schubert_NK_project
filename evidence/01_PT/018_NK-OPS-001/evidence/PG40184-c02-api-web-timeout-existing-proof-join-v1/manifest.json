@@ -1,0 +1,111 @@
+{
+  "actualExit": 0,
+  "source": "304cd4738c8b96f5aed5dfbe06873dae071d79ed",
+  "productionCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "canonical": {
+    "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "sha256": "07ab19dd27038241ba8257a1e4dcf180117a844b68479ec6848658a938445192"
+  },
+  "acceptanceRows": {
+    "WBS-C02-a": {
+      "sequence": 11,
+      "subject": "14設定と有効Unit・Inspectorの既存証拠を照合",
+      "closure": "14件の名義・差分・不足owner"
+    },
+    "WBS-C02-b": {
+      "sequence": 158,
+      "subject": "有効Unitの終端・native owner・451を照合",
+      "closure": "実効値、真正終了、個別判定を保存。実機費用は元N担当"
+    }
+  },
+  "timeoutRows": [
+    {
+      "service": "api",
+      "directive": "TimeoutStartSec",
+      "literal": "120s",
+      "file": "src/deployment/systemd/schubert-nk-api.service.template",
+      "line": 27,
+      "fileSha256": "c81f848198dff4e24f7d607aef3caf3b3fa5d401278eeb0b1707662bdbc2d630",
+      "designLine": 271,
+      "existingTest": "PT-C02-TEXT-001",
+      "textStatus": "QUALIFIED_REUSED",
+      "effectiveProperty": "TimeoutStartUSec",
+      "effectiveObserved": null,
+      "runtimeTerminalAccepted": false
+    },
+    {
+      "service": "api",
+      "directive": "TimeoutStopSec",
+      "literal": "60s",
+      "file": "src/deployment/systemd/schubert-nk-api.service.template",
+      "line": 28,
+      "fileSha256": "c81f848198dff4e24f7d607aef3caf3b3fa5d401278eeb0b1707662bdbc2d630",
+      "designLine": 272,
+      "existingTest": "PT-C02-TEXT-001",
+      "textStatus": "QUALIFIED_REUSED",
+      "effectiveProperty": "TimeoutStopUSec",
+      "effectiveObserved": null,
+      "runtimeTerminalAccepted": false
+    },
+    {
+      "service": "web",
+      "directive": "TimeoutStartSec",
+      "literal": "120s",
+      "file": "src/deployment/systemd/schubert-nk-web.service.template",
+      "line": 27,
+      "fileSha256": "eb3980ad64852645ffe2a07ac2ac4f453aeb8ce9cedd1d9147e1a1d3d863acbc",
+      "designLine": 271,
+      "existingTest": "PT-C02-TEXT-001",
+      "textStatus": "QUALIFIED_REUSED",
+      "effectiveProperty": "TimeoutStartUSec",
+      "effectiveObserved": null,
+      "runtimeTerminalAccepted": false
+    },
+    {
+      "service": "web",
+      "directive": "TimeoutStopSec",
+      "literal": "30s",
+      "file": "src/deployment/systemd/schubert-nk-web.service.template",
+      "line": 28,
+      "fileSha256": "eb3980ad64852645ffe2a07ac2ac4f453aeb8ce9cedd1d9147e1a1d3d863acbc",
+      "designLine": 272,
+      "existingTest": "PT-C02-TEXT-001",
+      "textStatus": "QUALIFIED_REUSED",
+      "effectiveProperty": "TimeoutStopUSec",
+      "effectiveObserved": null,
+      "runtimeTerminalAccepted": false
+    }
+  ],
+  "references": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40094-c02-current-unit-text-order-v1/manifest.json",
+      "sha256": "5bb81a5b4c3cea4d870eef5071041b03e8be00d44ef1a6f78f3fd1ffc78a49ef"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40182-c02-source-killmode-independent-v1/manifest.json",
+      "sha256": "a00fd714e1971cb0426f7ffd7af4d3b7498f7e920a63e8584ad561d4b09a713a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/input/5276_c02_unit_text_order.py",
+      "sha256": "9a131aa8c942be11639bf686e40ea1a19d28b4f5d06b556ddae8222f72157ca5"
+    },
+    {
+      "path": "../PMO/hourly-monitor/更新判断-20261207/短期目標優先の実行順.tsv",
+      "sha256": "1503be2d9c736a778e044a84ee10a45a5178f18a51bacdcbda211e43a4159992"
+    }
+  ],
+  "missingEvidence": [
+    "Same deployment source/boot and retained owner, with effective API/Web start and stop times.",
+    "Same invocation readiness and genuine start and stop terminal results, including owned resource postconditions.",
+    "Separate Web to Caddy readiness, TLS, Inspector terminal and native ownership, plus 451."
+  ],
+  "priorTestsReused": 1,
+  "priorTestsReexecuted": 0,
+  "newProductTests": 0,
+  "systemdInvocations": 0,
+  "sshAttempts": 0,
+  "wholeC02Accepted": false,
+  "newFormalAcceptance": 0,
+  "terminalAtUTC": "2026-11-19T00:24:08.056962+00:00"
+}

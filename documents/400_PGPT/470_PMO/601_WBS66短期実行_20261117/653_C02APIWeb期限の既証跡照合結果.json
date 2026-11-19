@@ -1,0 +1,110 @@
+{
+  "eventId": "PGPT-20261008-6174",
+  "actualExit": 0,
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-C02-API-WEB-TIMEOUT-PROOF-JOIN-20261119",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-C02-API-WEB-TIMEOUT-PROOF-JOIN-20261119",
+    "workAttributionKind": "REQUALIFICATION",
+    "wbsLeafIds": [
+      "WBS-C02"
+    ],
+    "managementWorkIds": [
+      "WBS-C02-a"
+    ],
+    "source": "304cd4738c8b96f5aed5dfbe06873dae071d79ed",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "run": "PG40184-c02-api-web-timeout-existing-proof-join-v1",
+    "workScope": "Reuse previous test and align the four signed API/Web timeout literals to SS342 and the acceptance rows. Read-only fixture and receipts. No rerun, haruka/systemd/GateCli or product execution.",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.06,
+      "base": 0.18,
+      "high": 0.45
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40094-c02-current-unit-text-order-v1/manifest.json",
+        "sha256": "5bb81a5b4c3cea4d870eef5071041b03e8be00d44ef1a6f78f3fd1ffc78a49ef"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40182-c02-source-killmode-independent-v1/manifest.json",
+        "sha256": "a00fd714e1971cb0426f7ffd7af4d3b7498f7e920a63e8584ad561d4b09a713a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5276_c02_unit_text_order.py",
+        "sha256": "9a131aa8c942be11639bf686e40ea1a19d28b4f5d06b556ddae8222f72157ca5"
+      },
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/短期目標優先の実行順.tsv",
+        "sha256": "1503be2d9c736a778e044a84ee10a45a5178f18a51bacdcbda211e43a4159992"
+      }
+    ],
+    "canonicalDesign": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "testIds": "Existing PT-C02-TEXT-001; PG40182 is complementary source-only evidence",
+    "quotaAfter": {
+      "usedPercent": 49,
+      "remainingPercent": 51,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "809ba9da73cebdc9121eadb7cd342e735446aa2c73db0fcec675a6a71500f2a8",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-19T00:24:39.800000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 49,
+          "remainingPercent": 51,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-19T00:24:08.056962+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 49,
+      "remainingPercent": 51,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "publicEvidence": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40184-c02-api-web-timeout-existing-proof-join-v1/manifest.json",
+        "sha256": "6c862cc57c118845d63b6314c5dbef2a8d403956edf10e79447e77a85771dcc7"
+      }
+    ],
+    "textControlsReused": 4,
+    "effectiveOrTerminalControlsAdded": 0,
+    "helperInitialExit": 1,
+    "helperInitialFailure": "Archived verifier stored absolute path; current pin used repository-relative path. SHA identical; compare same resolved path.",
+    "productTests": 0,
+    "formalIntake": 0,
+    "currentAccepted": 17,
+    "result": "SS342 four API/Web timeout literals already qualified by PT-C02-TEXT-001 and tied to WBS-C02-a/b. PG40182 complements text only. No new execution."
+  }
+}
