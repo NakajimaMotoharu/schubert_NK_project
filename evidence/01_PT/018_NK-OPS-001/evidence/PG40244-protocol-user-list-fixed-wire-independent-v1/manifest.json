@@ -1,0 +1,127 @@
+{
+  "actualExit": 0,
+  "source": "e071661092a537fd5712d62e77af7d83f56b361d",
+  "productionCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "jar": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39980-f02-current-four-production-jars-v1/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+    "sha256": "b83654e743f863794df40ce2563e91b4237b159622dcd7ad1829b6ef84c14974"
+  },
+  "jarOwnership": {
+    "uid": 1000,
+    "mode": "0o664",
+    "regularFile": true,
+    "sameBeforeAndAfter": true
+  },
+  "cases": {
+    "PT-PRO-USR-WIRE-001": "usr001DecodesNfcAndPreservesTheNextFieldAtThe64ByteLimit",
+    "PT-PRO-USR-WIRE-002": "usr002RejectsTheAllSpaceMandatoryField",
+    "PT-PRO-USR-WIRE-003": "usr003RejectsSurrogateEncodingAndTruncationAtTheFieldEnd",
+    "PT-PRO-USR-WIRE-004": "usr004RejectsValidUtf8ThatIsNotNfc"
+  },
+  "success": 4,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "field": {
+    "layout": "USRRSP01",
+    "dataBytes": 48,
+    "recordBytes": 168,
+    "name": "Username",
+    "oneBasedOffset": 13,
+    "length": 64,
+    "required": true,
+    "valid": [
+      "名😀",
+      "60 ASCII bytes followed by one four-byte character"
+    ],
+    "rejected": [
+      "all-space",
+      "surrogate encoding",
+      "truncation at byte 64",
+      "non-NFC"
+    ]
+  },
+  "firstStatic": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40240-protocol-user-list-fixed-wire-v1/manifest.json",
+    "sha256": "b74ac7d9327e6e4c8eed57351bdcc2211fdea8c438be49ed5920b4f1bffbb781"
+  },
+  "firstStaticExit": 4,
+  "firstRunTests": 0,
+  "firstIndependentExit": 1,
+  "postCorrection": "ElementTree namespace-aware findall instead of iter wildcard",
+  "fixtureRefactoringLiteralOnly": true,
+  "retest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40242-protocol-user-list-fixed-wire-retest-v1/manifest.json",
+    "sha256": "1ac02d28ab661beb1f92fb6c666eb705884dc83ae108ae00471ba2d825d0e7b1"
+  },
+  "junit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40242-protocol-user-list-fixed-wire-retest-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "f40ea8ab9bd4476e6a07e07da05655afd69fef235007ce7b361714857e9991c6"
+  },
+  "coverage": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40242-protocol-user-list-fixed-wire-retest-v1/coverage.xml",
+    "sha256": "1a0a908d3e9142d0d24db672810f987159292de8b4093aec37df714365d0dfb0"
+  },
+  "exec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40242-protocol-user-list-fixed-wire-retest-v1/jacoco.exec",
+    "sha256": "1bc8b3d70d88b729d3ddaa9067abf8b57d539d5d9086e54b736b77a30182df50"
+  },
+  "init": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40242-protocol-user-list-fixed-wire-retest-v1/class-init.log.gz",
+    "sha256": "525920fb2471112cc75be166b70ded5cce0ec78760493cf05b5cad3943454a8f"
+  },
+  "methodCounters": {
+    "INSTRUCTION": {
+      "hit": 66,
+      "miss": 0
+    },
+    "BRANCH": {
+      "hit": 10,
+      "miss": 0
+    },
+    "LINE": {
+      "hit": 22,
+      "miss": 0
+    },
+    "COMPLEXITY": {
+      "hit": 6,
+      "miss": 0
+    },
+    "METHOD": {
+      "hit": 1,
+      "miss": 0
+    }
+  },
+  "userRecordCounters": {
+    "INSTRUCTION": {
+      "hit": 182,
+      "miss": 2
+    },
+    "LINE": {
+      "hit": 32,
+      "miss": 1
+    },
+    "COMPLEXITY": {
+      "hit": 3,
+      "miss": 1
+    },
+    "METHOD": {
+      "hit": 3,
+      "miss": 1
+    },
+    "CLASS": {
+      "hit": 1,
+      "miss": 0
+    }
+  },
+  "classCrcs": {
+    "dev/codex/schubert/nk/protocol/codec/FieldCodec": "15b3485e13391edf",
+    "dev/codex/schubert/nk/protocol/layout/admin/UserRecord": "391ba6e5b3dc447c"
+  },
+  "priorTestsReplayed": 0,
+  "actualBackendActions": 0,
+  "newFormalAcceptance": 0,
+  "whole451Accepted": false,
+  "terminalAtUTC": "2026-11-19T16:38:41.101202+00:00"
+}

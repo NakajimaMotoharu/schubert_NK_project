@@ -129,3 +129,7 @@ PG40216は1試験、失敗/エラー/skip/未実行0、8拒否と1正常、forma
 ## P013-01 質問・通知固定長PT結果（2026-11-20 JST）
 
 PG40234、3a334da3dc2027eb55e2f0d7b233a5a9c68dabdd。QSS2／NTS2、F/E/S/未実行各0。PG40232の3成功1失敗は別保持、BUG-3350。QSSの両自由入力とNTSの種別／日時を独立照合。入力位置・固定期待値・Jar所有はPG40236、SHA-256 c75c45c64b56f5010ee8b8d340577866c4f0e42425ebe827f597c51a2ecefe7e。実測はQSS型L26/27・M3/4、NTS型L20/21・M3/4、各C1/1。全451や業務経路の合格は未成立。
+
+## PT-PRO-USR-WIRE-001〜004 実行結果（2026-11-20 JST）
+
+PG40242、e071661092a537fd5712d62e77af7d83f56b361d。4/4成功、F/E/S/未実行0。PG40240はPMD指摘1で動的未起動、独立XMLの初回照合失敗は試験と分離。PG40244 SHA-256 de7f9a9b81c2bd10e6df6f4e6b82be39ee9075a148f8ea5a680f8c8c4708732d。decodeText L22/22 B10/10、UserRecord L32/33 M3/4 C1/1。Web表示順・権限・SQLは未検証。
