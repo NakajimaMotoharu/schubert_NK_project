@@ -1,0 +1,99 @@
+{
+  "eventId": "PGPT-20261008-6332",
+  "groupId": "PGPT-WBS66-F02-SSC461-PUBLIC-CHECKPOINT-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-19T23:26:05.435000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 55,
+      "remainingPercent": 45,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F02-SSC461-PUBLIC-CHECKPOINT-20261120",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-F02-SSC461-PUBLIC-CHECKPOINT-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a",
+      "WBS-P018-08"
+    ],
+    "source": "9a3f02c22befc77800ed8a13cf25812138419de0",
+    "productionCoreMain": "a165978ea649ab94593d881835df759f7e118038",
+    "canonicalDesignSource": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "run": "PG40374-f02-ssc461-public-checkpoint-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.25,
+      "base": 0.7,
+      "high": 1.6
+    },
+    "groupCapPp": 2.5,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/811_F03補助SDKと継続点.json",
+        "sha256": "4a35f81ab887d3be504da7e31a9b56be9d03c5569b6a043b3cbcecb62dd12272"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40356-f02-current-four-jars-six-artemis-edges-v1/manifest.json",
+        "sha256": "8934c21f9afab0e8967999d61543051a4c2874670a9ba97eaeaf808deb240b1d"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40350-f02-ssc461-expiry-early-failure-v1/compiled-classes.json",
+        "sha256": "25ea456f0477291539b9d1ddec4935971bf23cdefe95377d4563382566e26b3b"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36990-checkpoint16-prepare-static-v1/manifest.json",
+        "sha256": "32b23cb91073e0c6bad78e901c2c3492da9def1a0300e3342cafd707a32ecc49"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36994-checkpoint16-unit-v1/manifest.json",
+        "sha256": "f5854069fdc30dba6251709076a03f2a3052d6c55170a42dc550e091a3b8e021"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36996-checkpoint16-independent-post-v1/manifest.json",
+        "sha256": "41b8a6478394dfde4bd93b3c7c72e2a8ddba0d46d80c24cbb11de1ab172af84e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/4459_P01808現Checkpoint通常PT・fatal三境界仕様.md",
+        "sha256": "1546eaf0355e01b36a4c9d3664d0827e1be908c6d7b84faf014b912f3e7cd4b2"
+      },
+      {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/CheckpointFatalBoundaryTest.java",
+        "sha256": "d7425943facc1ceead90994fb340a82e3b4d2c39fa05c0ea65b67cdc093016d2"
+      },
+      {
+        "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint.java",
+        "sha256": "2bcf68e2b9b0a54e91c6c53635471c1febcec591116c42eee50d6ab7fed7c112"
+      }
+    ],
+    "tests": [
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/CheckpointFatalBoundaryTest.java"
+    ],
+    "targets": [
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint.java"
+    ],
+    "analysisTypes": [
+      "dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpoint$PublicAgent"
+    ],
+    "bug": "BUG-3233",
+    "designCorrection": "SSC-461",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "Prior PG36990/94/96 public fixture qualification and current JAR physical baseline. Four exact existing CheckpointFatalBoundaryTest cases and two archived public fixture classes; legacy 12 excluded.",
+    "endCondition": "Migrate three failure graph calls, require ABI equality, exact physical nested type, four local product assertions, CRC and static delta; leave native/original scope and full 451 pending.",
+    "workScope": "Ordinary finite in-memory fixture, approved public provider; no native attachment, actual reserved agent, external VM, service, DB, deployment, file authority or held fixture."
+  }
+}
