@@ -49,6 +49,7 @@ public final class ArtifactComparator {
   private static final String RESTART_DIFFERENCE = "DIF-014";
   private static final String SESSION_DIFFERENCE = "DIF-016";
   private static final String SESSION_CASE = "CHR-A02";
+  private static final String SESSION_ACTIVITY = "sessionActiveOldestToNewest";
   private static final String LOGIN_TITLE = "CHR-A01:/title";
   private static final String CURRENT_BRAND = "schubert";
   private static final String NK_BRAND = "schubert NK";
@@ -184,6 +185,8 @@ public final class ArtifactComparator {
             failures);
         require(
             MAX_ACTIVE_SESSIONS.equals(nk.path(CONFIGURED_SESSIONS)), "NK_SESSION_LIMIT", failures);
+        require(sessionActivityMatches(current, true), "CURRENT_SESSION_ACTIVITY", failures);
+        require(sessionActivityMatches(nk, false), "NK_SESSION_ACTIVITY", failures);
       }
       if (GAME_CHANGE_CASE.equals(caseId)) {
         require(
@@ -550,6 +553,15 @@ public final class ArtifactComparator {
     List<String> result = new ArrayList<>();
     values.forEach(value -> result.add(value.asText()));
     return result;
+  }
+
+  private static boolean sessionActivityMatches(JsonNode artifact, boolean oldestActive) {
+    return JsonNodeFactory.instance
+        .arrayNode()
+        .add(oldestActive)
+        .add(true)
+        .add(true)
+        .equals(artifact.path(SESSION_ACTIVITY));
   }
 
   private static boolean require(boolean condition, String failure, List<String> failures) {

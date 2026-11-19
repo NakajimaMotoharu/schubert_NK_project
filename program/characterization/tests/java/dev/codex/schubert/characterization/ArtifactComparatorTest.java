@@ -1425,7 +1425,10 @@ class ArtifactComparatorTest {
     assertEquals(
         List.of("CHR-A02:/sessionActiveOldestToNewest/2"), result.unregisteredDifferences());
     assertEquals(
-        List.of("UNREGISTERED_DIFF:CHR-A02:/sessionActiveOldestToNewest/2"), result.failures());
+        List.of(
+            FIXTURE_NK_SESSION_ACTIVITY,
+            "UNREGISTERED_DIFF:CHR-A02:/sessionActiveOldestToNewest/2"),
+        result.failures());
   }
 
   @Test
