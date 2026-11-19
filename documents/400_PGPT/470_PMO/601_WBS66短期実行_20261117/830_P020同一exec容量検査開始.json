@@ -1,0 +1,80 @@
+{
+  "eventId": "PGPT-20261008-6350",
+  "groupId": "PGPT-WBS66-P02001-CURRENT-SINGLE-SESSION-REAL-FILESTORE-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-19T23:44:04.421000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 56,
+      "remainingPercent": 44,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P02001-CURRENT-SINGLE-SESSION-REAL-FILESTORE-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-P02001-CURRENT-SINGLE-SESSION-REAL-FILESTORE-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P020-01.01"
+    ],
+    "managementWorkIds": [
+      "WBS-P020-01.01/2",
+      "WBS-P020-01.02/2"
+    ],
+    "source": "010f8e28d4c2c5f41ff9b82b84f762071f0b4f98",
+    "productionCoreMain": "cb1411d94a1d97aedafe1af60400aaec0ae8c8e8",
+    "canonicalDesignSource": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "run": "PG40396-p020-single-session-filestore-target-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.7,
+      "base": 1.7,
+      "high": 3.1
+    },
+    "groupCapPp": 4.5,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/829_P00402P00405検査JDBCと継続点.json",
+        "sha256": "e0c7764d45b182bdc5524d0bf2fad884f7deced5ad1b37704b7fafec0cb2bc99"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40208-p020-a02-session-census-green208-v1/manifest.json",
+        "sha256": "3838c87daac501c3589024589aadb8c54a04e15780f1fb3da22a385caadcfca5"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40212-p020-a02-session-census-independent-v1/manifest.json",
+        "sha256": "d8f11e393676af1b80ba8ebf58817051bb7fde1eb3acf5d94bb7354127b1799a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40160-p020-haruka-real-filestore-v1/manifest.json",
+        "sha256": "b861c5b5460b4b145419ba207c5490251e44bf3a4bf838db6aed0fa869249875"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40190-p020-haruka-filestore-independent-v1/manifest.json",
+        "sha256": "45d97c98185f803646ece9db54761b0a2c9a01740966154d61be8ae199101ea3"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5310_haruka_filestore_owned_runner.py",
+        "sha256": "74753e5bb7eafaedae8350249d71de6c941f3c837954bbe2b727aa49a44a4f50"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5311_p020_prompted_haruka_one_shot.py",
+        "sha256": "3e60ee8859ee43a04bf676b44e0ad2ea3a16aa9d94121dd8439319da706468a5"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "Existing safe offline 208 comparison harness run and separate admitted ordinary haruka FileStore success. Current gate CLI has two exact missed methods in the 208 single run.",
+    "endCondition": "Preserve prior test inputs and tool physicals. Qualify same-source and single exec combining registered ordinary fixture and real filesystem check in scoped haruka owner. Record all raw misses and actual execution only.",
+    "workScope": "Approved non-operative fixture only; no current app, VM, DB, process control, service activation, key access, real screenshots, signed release, or held scope. No repeats of original standalone jobs. Before host execution verify current owner/reservation and payload."
+  }
+}
