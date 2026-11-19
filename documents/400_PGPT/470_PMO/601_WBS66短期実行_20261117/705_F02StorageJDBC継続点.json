@@ -1,0 +1,77 @@
+{
+  "eventId": "PGPT-20261008-6226",
+  "source": "b49f398c456046c0798516f433857665bf964465",
+  "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "previousCheckpoint": "PGPT-20261008-6223",
+  "groupEvents": [
+    "PGPT-20261008-6225"
+  ],
+  "quotaAfter": {
+    "usedPercent": 52,
+    "remainingPercent": 48,
+    "resetsAt": 1795445753,
+    "windowDurationMins": 10080
+  },
+  "fullQuotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-19T18:35:03.292000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 52,
+      "remainingPercent": 48,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "kind": "WBS66_F02_STORAGE_JDBC_EVIDENCE_CHECKPOINT",
+  "acceptedOriginal": 17,
+  "total": 190,
+  "coreAccepted": 0,
+  "coreTotal": 5,
+  "newFormalAcceptance": 0,
+  "officialPtTests": 1964,
+  "officialPtScopes": 53,
+  "effortRate": null,
+  "actualAllocatedPp": null,
+  "closedOriginalWbsItems": 0,
+  "productTests": 0,
+  "recordedOwnedJobsInFlight": 0,
+  "ownedJobsStartedHere": 0,
+  "storageRule": "NOT_SATISFIED",
+  "storagePhysical": 79,
+  "storageTypedEdges": 983,
+  "storageForbiddenEdges": 1,
+  "knownOpenBug": "BUG-3233",
+  "outcomeEvidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40252-f02-storage-jdbc-saved-edges-preflight-v1/manifest.json",
+      "sha256": "719cd099578cf047f2ae2432d49204a7b5a9b9383b49fff209ea7cf25dec7123"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40252-f02-storage-jdbc-saved-edges-v1/manifest.json",
+      "sha256": "c07b262505a082fee7f5c75a0ec5be73d136114ea6c413e2e86f70b51d3cef79"
+    }
+  ],
+  "f03ConditionsRetainedFrom": "PGPT-20261008-6223",
+  "unchangedHolds": [
+    "QA056",
+    "QA057",
+    "real Unit, Root, backup execution",
+    "full 451"
+  ],
+  "nextEvidence": [
+    {
+      "owner": "Storage/Bootstrap maintainers",
+      "requirement": "Complete SSC461 caller transfers including the direct callbacks and legacy entry. Preserve SQL exception propagation and confirm the revised same-source packaged Storage graph has zero prohibited edges."
+    },
+    {
+      "owner": "Build and quality maintainers",
+      "requirement": "Obtain admitted same-source API/Web and six-module build/typed edges, runtime and 451 evidence. Existing four-artifact result stays in scope."
+    },
+    {
+      "owner": "Native coverage evidence maintainers",
+      "requirement": "Check P018-08 existing isolated file-format proof and choose only an unmet and permitted condition independent of runtime holds."
+    }
+  ]
+}

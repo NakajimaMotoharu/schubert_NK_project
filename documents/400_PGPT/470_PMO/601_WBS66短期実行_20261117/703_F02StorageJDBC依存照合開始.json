@@ -1,0 +1,72 @@
+{
+  "eventId": "PGPT-20261008-6224",
+  "groupId": "PGPT-WBS66-F02-STORAGE-JDBC-SAVED-EDGES-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-19T18:31:55.770000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 52,
+      "remainingPercent": 48,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F02-STORAGE-JDBC-SAVED-EDGES-20261120",
+    "workCategory": "REVIEW",
+    "workDetailCategory": "PGPT-WBS66-F02-STORAGE-JDBC-SAVED-EDGES-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a"
+    ],
+    "source": "b49f398c456046c0798516f433857665bf964465",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "canonicalDesignSource": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "run": "PG40252-f02-storage-jdbc-saved-edges-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.12,
+      "base": 0.35,
+      "high": 0.75
+    },
+    "groupCapPp": 1,
+    "completedOriginalRowPricePp": 0,
+    "originalPlanningRowBasePp": 0.6,
+    "originalPlanningRow": {
+      "path": "../PMO/hourly-monitor/wbs66-20261116/58_直近20pp不足時の対象と予算判断を実行用の検収表へ渡す/WBS.tsv",
+      "sha256": "31f8be31c8b3a1c3bbc87d049f682d1523c285b83ec6471d91840f825ded3794"
+    },
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/702_F03同期指摘343と387継続点.json",
+        "sha256": "b9faa3cf63ad3ab43311a71c18a82b5cec8d851e3690e9b4d814e4aabaf91368"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40204-f02-library-http-saved-product-edges-v1/manifest.json",
+        "sha256": "e3b5d99d31bb35c8995252594b90e2ba667ee8c63809cb34d5ecb0205e55a892"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39980-f02-current-four-production-jars-v1/manifest.json",
+        "sha256": "3a06700c504ef0f93f3edc89dab8f4197b46ff6742b3c7d56e1c17a7a09a32ba"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39870-f02-service-state-lock-edges-and-trace-v1/manifest.json",
+        "sha256": "e95cdfc8954261ea392f89bd53bee2ed01d188a5b2e74e3cbf415444cf123d62"
+      }
+    ],
+    "startBasis": "PG40204 left Storage JDBC rule explicitly open. PG39980 packages same Core Storage; PG39870 retains typed edges.",
+    "endCondition": "Join exact Stored JAR class inventory and per-entry hashes to PG39862 physical build and PG39870 saved typed graph; apply SS311 Storage JDBC prohibition, record denominator, edge details and untested scopes.",
+    "workScope": "Read-only project artifact and saved graph. No build, new jdeps, class initialization, real DB, protected source, credential or permission operations."
+  }
+}
