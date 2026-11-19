@@ -1,0 +1,67 @@
+{
+  "actualExit": 0,
+  "source": "6351e424bd1490f2946a0761a37e3731a840a18b",
+  "productionCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "tests": {
+    "PT-PRO-LOG-UTF8-001": "retainsNfcAndSupplementaryCharactersWithoutConflatingAbsentFields",
+    "PT-PRO-LOG-UTF8-002": "rejectsMalformedAndNonNfcInputAtEachFreeTextPosition"
+  },
+  "selectors": 2,
+  "success": 2,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "methodFootprint": {
+    "INSTRUCTION": {
+      "covered": 61,
+      "missed": 5
+    },
+    "BRANCH": {
+      "covered": 9,
+      "missed": 1
+    },
+    "LINE": {
+      "covered": 21,
+      "missed": 1
+    },
+    "COMPLEXITY": {
+      "covered": 5,
+      "missed": 1
+    },
+    "METHOD": {
+      "covered": 1,
+      "missed": 0
+    }
+  },
+  "dataCrc": "15b3485e13391edf",
+  "oracle": "UI235 independent fixed positions. Three fields preserve NFC and supplementary scalars; both invalid encoding and valid non-NFC text are rejected at each offset. All-space absence, enum values and fixed UTC conversion preserved.",
+  "qualifier": "Protocol decoder only. API caller, HMAC, DB and runtime remain separately held.",
+  "unit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40226-protocol-log-wire-scalar-v1/manifest.json",
+    "sha256": "9bb60e1fcbb4f9777735541a4067cc90bfb0f4778736c55a3d4879cef7f13ac7"
+  },
+  "junit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40226-protocol-log-wire-scalar-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "48965578735e3db416d62e9193c98770bb24746bb3e87e5a62b472ff98b95776"
+  },
+  "classInit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40226-protocol-log-wire-scalar-v1/class-init.log.gz",
+    "sha256": "deccbeed5ccbf6824b61e76573d9395baa066a5739609933f1d457bbd7fe371b"
+  },
+  "exec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40226-protocol-log-wire-scalar-v1/jacoco.exec",
+    "sha256": "9f138bc930dcea8eec7947c5dacf2783b52b8dd04a8c1ae203f47e78b55d7ce9"
+  },
+  "coverage": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40226-protocol-log-wire-scalar-v1/coverage.xml",
+    "sha256": "3da4820cbbd64cc75354dc8049e7eda11e211ca7bd83da180e65a4a5687e61e6"
+  },
+  "firstReview": "Initial verifier rejected JUnit system-out metadata; corrected XML parser only.",
+  "limitedToProtocolInitialization": true,
+  "priorTestsExecuted": 0,
+  "actualBackendActions": 0,
+  "whole451Accepted": false,
+  "newFormalAcceptance": 0,
+  "terminalAtUTC": "2026-11-19T14:35:37.212453+00:00"
+}

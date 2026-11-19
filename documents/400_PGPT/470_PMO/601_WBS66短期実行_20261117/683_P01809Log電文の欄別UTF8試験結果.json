@@ -1,0 +1,123 @@
+{
+  "eventId": "PGPT-20261008-6204",
+  "groupId": "PGPT-WBS66-LOG-WIRE-RAW-TEXT-PT-20261119",
+  "source": "6351e424bd1490f2946a0761a37e3731a840a18b",
+  "productionCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-19T14:36:05.890000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 51,
+      "remainingPercent": 49,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "originalRemainingDetailBasePp": 1089.848,
+    "canonicalDesignSource": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "contextGroupId": "PGPT-WBS66-LOG-WIRE-RAW-TEXT-PT-20261119",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-LOG-WIRE-RAW-TEXT-PT-20261119",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P018-09"
+    ],
+    "managementWorkIds": [
+      "WBS-P018-09/2"
+    ],
+    "source": "4e6d5f18615d4f984fe08bc0049122eb0f5992f7",
+    "run": "PG40226-protocol-log-wire-scalar-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.55,
+      "high": 1
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "testIds": [
+      "PT-PRO-LOG-UTF8-001",
+      "PT-PRO-LOG-UTF8-002"
+    ],
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40224-p01809-log-request-scalar-assurance-v1/manifest.json",
+        "sha256": "04a89836bddbe42ae56034495deb4c0d6970d9e1565b10aa940409b8cc5618dc"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39980-f02-current-four-production-jars-v1/manifest.json",
+        "sha256": "3a06700c504ef0f93f3edc89dab8f4197b46ff6742b3c7d56e1c17a7a09a32ba"
+      }
+    ],
+    "workScope": "Independently construct valid and malformed fixed wire (656 bytes, UI235), exercise Protocol library only. Do not execute LogRequest, held API types, prior fixtures or runtime authentication.",
+    "quotaAfter": {
+      "usedPercent": 51,
+      "remainingPercent": 49,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "3ff9a823dab10da554985d4dc7d19f37d8e1641c24ec133a98817ee2dabf1a3b",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-19T14:36:05.890000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 51,
+          "remainingPercent": 49,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-19T14:35:37.212453+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 51,
+      "remainingPercent": 49,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "publicEvidence": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40228-protocol-log-wire-scalar-independent-v1/manifest.json",
+        "sha256": "3943d008988b11cbb6249bcd295525afc9e0fa6906857ce33e4b4f0e89eea453"
+      }
+    ],
+    "actualExit": 0,
+    "completedSource": "6351e424bd1490f2946a0761a37e3731a840a18b",
+    "startedAtEvent": "PGPT-20261008-6203",
+    "newAcceptanceCount": 0,
+    "productTests": 2,
+    "attempt": 1,
+    "attemptResult": "PASS_TWO_NEW_PROTOCOL_TESTS",
+    "firstVerification": {
+      "passed": 2,
+      "selected": 2
+    },
+    "postPreparationRetry": "JUnit XML includes system-out metadata; only verifier adjusted, PT rerun zero."
+  }
+}

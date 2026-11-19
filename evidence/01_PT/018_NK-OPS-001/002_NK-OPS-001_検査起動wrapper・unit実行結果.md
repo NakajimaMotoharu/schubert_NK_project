@@ -121,3 +121,7 @@ PG40160、JDK25.0.4、固定ホスト鍵、通常mini認証1回、同boot、専�
 ## PT-IDEM-012-UTF16 実行結果（2026-11-19 JST）
 
 PG40216は1試験、失敗/エラー/skip/未実行0、8拒否と1正常、format・PMD・Checkstyle各0。PG40218独立、SHA-256 2fd49d305fbb3f1efa0ad042089f7378edc914404f116fe789c767a33da634ce。実測L30/50、M3/5、C1/1、B9/23、旧PG37348の全5・旧coverageと合算なし。準備失敗PG40214と独立初回PG40217を保全。
+
+## PT-PRO-LOG-UTF8-001〜002 実行結果（2026-11-19 JST）
+
+当source 6351e424bd1490f2946a0761a37e3731a840a18b、PG40226／40228、2試験すべて成功。独立オフセットと六拒否、正常typed値・欄欠落。FieldCodec.decodeText L21/22 B9/10 M1/1、他試験coverage合算なし。証跡 SHA-256 3943d008988b11cbb6249bcd295525afc9e0fa6906857ce33e4b4f0e89eea453。
