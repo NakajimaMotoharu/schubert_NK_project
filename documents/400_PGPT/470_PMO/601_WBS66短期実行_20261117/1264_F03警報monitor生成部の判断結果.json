@@ -1,0 +1,133 @@
+{
+  "eventId": "PGPT-20261008-6780",
+  "groupId": "WBS66_F03_ALERT_GENERATED_MONITOR_REVIEW",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T12:58:08.294000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 69,
+      "remainingPercent": 31,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66_F03_ALERT_GENERATED_MONITOR_REVIEW",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "WBS66_F03_ALERT_GENERATED_MONITOR_REVIEW",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-1",
+      "WBS-P018-09/2"
+    ],
+    "source": "ecb167b509cf6d5b0d3b225a562f6eacfe686c35",
+    "productionCoreMain": "cdb649a5f054bc2ceed72ef57e55605f14a590d1",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40854-f03-alert-monitor-review-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.1,
+      "base": 0.3,
+      "high": 0.7
+    },
+    "groupCapPp": 10,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1261_短期受入の不足条件と保全点.json",
+        "sha256": "dc03ed64c09424808111f41ce8b021826888752147038441fef9e9fb60220d3c"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40828-f03-alert-lifecycle-single-coverage-v1/manifest.json",
+        "sha256": "8fc16d8edd9e0805d2b7ffd716cb8656fd166bfcb96717fc7b5c6a777e1c8dc7"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40830-f03-alert-snapshot-unfiltered-location-v1/manifest.json",
+        "sha256": "3b6711c32c91ab7536d143707302d3bc6b484aeaa911e5e51854ac08f8f8ca69"
+      },
+      {
+        "path": "documents/400_PGPT/450_品質/451_Build・静的解析・coverage方針.md",
+        "sha256": "7980a204c02574b235d588e3a05ae8fb7b26ecb18313f4f000918c9135da6f4c"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "対象raw差と既実行を現Core及び試験snapshotへ照合。",
+    "endCondition": "通常入力到達の根拠有無、残カウンター、451レビューの一行を保存。",
+    "workScope": "既証拠のみ。実試験・解析再演0。",
+    "quotaAfter": {
+      "usedPercent": 69,
+      "remainingPercent": 31,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "09c91a5e9f3a8c28f389f8efebccd047586dfe631ed51910a2df993d90b90018",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T12:58:08.294000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 69,
+          "remainingPercent": 31,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T12:57:57.831977+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 69,
+      "remainingPercent": 31,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6779",
+    "attempt": 1,
+    "attemptResult": "RAW_GAP_RETAINED_FOR_QUALITY_REVIEW",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40854-f03-alert-monitor-review-v1/manifest.json",
+        "sha256": "7cb3065bb6c4374a2e164fd488cf990d268ea809c82fe08a7e4f31f2559a800a"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "451 review of generated snapshot cleanup and full six-module quality"
+    ],
+    "matchedInputFiles": 6,
+    "crc": "583a3f7e29887e32",
+    "rawLineMissed": 1,
+    "rawInstructionsMissed": 5,
+    "ordinaryProductTestsRerun": 0,
+    "appliedExclusions": 0
+  }
+}
