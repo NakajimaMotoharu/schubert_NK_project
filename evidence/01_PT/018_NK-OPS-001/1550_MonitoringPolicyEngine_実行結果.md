@@ -14,3 +14,7 @@ ObservationContextはcompiler生成record。source明示constructorのnull/負�
 PMD raw9/exit4は全source/行/文面が1548の当9件と一致し、新2Mainに追加findingなし。各意味審査（mode3・metric3・private同期2・percentage上限1）を1544/1546/1548へ参照し、当48必要回帰で不変/並行/独立literal/負境界を確認。未分類0、抑止/除外/品質変更0、rawを偽0化0。F03 Root11の全体審査は別HOLD。
 
 pure経路以外のlive collector/正規source/owner/連続観測/原因撤去/外部制御/永続化/配布は未受入。旧4222/common44/nativeをこのsourceへ算術合算0、正式1964/53・歴史17/190・前回source別新7・工数null/QA051final/PTALT0は不変更。次1551の完成単位品質として同じc285 source六moduleのcompile/packageと新physical/既byte/ArchUnit境界を照合する。compile-onlyはPT成功や全451合格ではない。
+
+## 現候補の同一exec追補（2026-11-21）
+
+`62142212de26387dd718026a1c839fbb1dc6b2a9`、7 Mainの公開通常閉包。MONPIPE001～008／ASYNCBYTE001／RESTARTFLAG001 10/10。生Engine L36/M17/C1/I199全、B分母0。ObservationContext L7/M5/7/C1/B2/I45/51、補助型は測定範囲外。元PG7026とPG40938は別実行として保持。全451や実監視は未受入。 [PG40966](evidence/PG40966-f03-current-monitor-policy-engine-unit-scope-v1/manifest.json) SHA-256 `26e4613c706c7cf90d16bf9c649192f528c36b81250da55a4ea1a1d62f87acf3`。

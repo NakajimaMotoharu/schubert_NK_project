@@ -1,0 +1,67 @@
+{
+  "eventId": "PGPT-20261008-6926",
+  "groupId": "f03-current-monitor-policy-engine-unit-scope",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T15:48:51.846000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 73,
+      "remainingPercent": 27,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "f03-current-monitor-policy-engine-unit-scope",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "f03-current-monitor-policy-engine-unit-scope",
+    "workAttributionKind": "SOURCE_REQUALIFICATION",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/criterion/quality"
+    ],
+    "source": "2d4e59ecb7ab20d4a03559ccd3dc64e98db453ca",
+    "productionCoreMain": "62142212de26387dd718026a1c839fbb1dc6b2a9",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40966-f03-current-monitor-policy-engine-unit-scope-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.12,
+      "base": 0.32,
+      "high": 0.78
+    },
+    "groupCapPp": 0.95,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1409_F02現六module引渡し差分継続点.json",
+        "sha256": "70a739417e55ec28f46c394200d9eefebdfdadcabdd4464e096d16978ede9757"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40938-p01809-recovery-per-key-v1/manifest.json",
+        "sha256": "1bb109849a4e69c6a2b873e1eea6534df2ecfaa0ec0b8ae5b1f33b7d4da7b811"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/1549_MonitoringPolicyEngine_単体テスト仕様書.md",
+        "sha256": "eb70f77ff5ac9f821185153b2f7e99779b2cd77fcb1855b7e4bebc6121795b80"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/1550_MonitoringPolicyEngine_実行結果.md",
+        "sha256": "0b3fc5f53ad37952dea851b138d61700b1aa3d16b527b60cabadf662c1f68f5e"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "MONPIPE原七試験後に回復中の閾値変更・二入口・欠測試験が入った。同候補のEngine whole10/bare byteは未確認。",
+    "endCondition": "whole10を一execで検証し、Engineの生L/M/C/B/Iを保存。自然B0は分母なし。支援classの未到達は明示。",
+    "workScope": "既通常fixtureの閉包7 Main。局所Engine品質。既個別を合算せず、別成功の確認再演はしない。実監視、保留型、環境操作0。"
+  }
+}
