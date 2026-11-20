@@ -1,0 +1,63 @@
+{
+  "eventId": "PGPT-20261008-7206",
+  "groupId": "WBS66-G07-CURRENT-MEDIA-COMPARATOR-SCAN",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T22:35:46.562000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 83,
+      "remainingPercent": 17,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66-G07-CURRENT-MEDIA-COMPARATOR-SCAN",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "WBS66-G07-CURRENT-MEDIA-COMPARATOR-SCAN",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-G07"
+    ],
+    "managementWorkIds": [
+      "WBS-G07"
+    ],
+    "source": "75ec1848bb6743c29ac0b6e2b01d50f8e6936dc7",
+    "productionCoreMain": "a8913bc836f81632613b34243f84b7b15eb3e054",
+    "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "run": "PG41292-g07-current-media-comparison-scan-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.1,
+      "base": 0.33,
+      "high": 0.75
+    },
+    "groupCapPp": 1.0,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1690_F02現Protocol検査と次の短期項目.json",
+        "sha256": "2106ae1b947fde0f5c7b948f58fd9492d983ef5c5719f6efa67a41457ea54be6"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41242-g07-current-archive-and-range-delta-v1/manifest.json",
+        "sha256": "f06f0a59add26c42012631de268d4cadf5e48f5072ac610a7c27d52cd198385f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41244-g07-current-baseline-candidate-resolved-v1/manifest.json",
+        "sha256": "32ac00ccd5e86861cd6599225161e65ecb2a32a4edd827c5ee8881c668721b64"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "先行2c58318a6bまでのPG41244解決証票とrepo公開diff。新規公開exec五を構造・同hash・印字列まで確認。",
+    "endCondition": "先行cursorから現repo headの全公開差分。未分類なしなら区間を照合済記録、秘密数が確定しなければsuccessにしない。",
+    "workScope": "公開Gitのみ、稼働プロセス、原本、私有rawと認証情報へアクセスしない。"
+  }
+}
