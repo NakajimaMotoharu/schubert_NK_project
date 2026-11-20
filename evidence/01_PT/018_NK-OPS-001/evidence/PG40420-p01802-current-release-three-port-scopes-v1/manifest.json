@@ -1,0 +1,216 @@
+{
+  "actualExit": 0,
+  "source": "515af9faec9ccaa5dc1ba54243bf5c5efeb93b2a",
+  "productionCore": "cb1411d94a1d97aedafe1af60400aaec0ae8c8e8",
+  "canonicalDesign": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+  "scopedReferenceOnly": true,
+  "approval": {
+    "originalCount": 8,
+    "matchingMain": true,
+    "matchingTest": true,
+    "rawCounters": {
+      "LINE": {
+        "missed": 0,
+        "covered": 22
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 7
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 10
+      },
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 108
+      }
+    },
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG13874-release-approval-whole-eight-post-v1/manifest.json",
+      "sha256": "b2c9af63478b1fab703c9e4db791b302da772b000807dceba4293437cec34ba0"
+    }
+  },
+  "currentSignature": {
+    "originalCount": 10,
+    "matchingThreePhysical": true,
+    "matchingTest": true,
+    "rawUnfiltered": {
+      "dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier$Crypto": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      },
+      "dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier$NativeCrypto": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 24
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 6
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 2
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 2
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 140
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 10
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 30
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 11
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 6
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "missing": {},
+    "measurement": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40420-p01802-current-release-three-port-scopes-v1/public-rfc-unfiltered.tsv",
+      "sha256": "af2d4164ad7239cb08eb868a5807fbe28a9790053f4c073cc3b71e2f362885f3"
+    },
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38642-schema-raw-line-tool-v1/toolclasses:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+      "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+      "--line-deficits",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG40314-f02-ssc461-offline-release-verifier-v1/jacoco.exec",
+      "/dev/shm/pgpt-public-rfc-raw-68mk2mco/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier$Crypto.class",
+      "/dev/shm/pgpt-public-rfc-raw-68mk2mco/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier$NativeCrypto.class",
+      "/dev/shm/pgpt-public-rfc-raw-68mk2mco/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier.class"
+    ],
+    "ownRawFour100": true,
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40318-f02-public-rfc-independent-v1/manifest.json",
+      "sha256": "07115fb53923ed58c635ef0ac2ac345c6b7cc30cdff986838bf3b2e5ef3273f9"
+    }
+  },
+  "inventory": {
+    "originalCount": 18,
+    "ownerPhysicalsStillSame": 3,
+    "matchingSources": {
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java": false,
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseInventory.java": true,
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseInventoryTest.java": true,
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseInventoryRawContractTest.java": true
+    },
+    "changedLiveComponentClasses": [
+      "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission",
+      "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission$Row"
+    ],
+    "currentWholeFixtureNotRequalified": true,
+    "originIndependent": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37440-inventory18-independent-v1/manifest.json",
+      "sha256": "755b8fe312771c0b4f79a2fd015813b723b2cb69d47161b83758382db8e7821f"
+    },
+    "originUnit": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37438-inventory-whole18-unit-v1/manifest.json",
+      "sha256": "2dd326a0734bfe6027440adf15e62cafee0ad4e4f423458311d03b33fb3e6ae0"
+    }
+  },
+  "originalRunsCombined": false,
+  "newProductTests": 0,
+  "actualNativeOrSigningActions": 0,
+  "heldTwoOwners": [
+    "ReleasePayloadVerification",
+    "StartupReleaseManifest"
+  ],
+  "formalDelta": 0,
+  "whole451Accepted": false,
+  "wholeP01802Accepted": false,
+  "sourceEvidence": [
+    {
+      "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/844_F02Protocolファイル実装境界と継続点.json",
+      "sha256": "10d25f8a54170c99a85ec15eecb3a832e9859998bdb6ee00add1ae42bdb7b054"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40382-f02-public-checkpoint-jars-independent-v1/manifest.json",
+      "sha256": "353ba7026a16916c98594134394879bc690a1001680e6f0f42c759aacb273f97"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40374-f02-ssc461-public-checkpoint-v1/compiled-classes.json",
+      "sha256": "2ead0a11b7173dd6368dd6dd5909e78aee4370a10621941305049c24a2a39e90"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40318-f02-public-rfc-independent-v1/manifest.json",
+      "sha256": "07115fb53923ed58c635ef0ac2ac345c6b7cc30cdff986838bf3b2e5ef3273f9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37440-inventory18-independent-v1/manifest.json",
+      "sha256": "755b8fe312771c0b4f79a2fd015813b723b2cb69d47161b83758382db8e7821f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG13874-release-approval-whole-eight-post-v1/manifest.json",
+      "sha256": "b2c9af63478b1fab703c9e4db791b302da772b000807dceba4293437cec34ba0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4487_P01802五所有物・署名BOM既存証拠照合仕様.md",
+      "sha256": "ac061a23f70624094047f3a1ddc08054a1dd72f4a6477bd65538ea12842bc611"
+    },
+    {
+      "path": "../PMO/hourly-monitor/更新判断-20261207/短期目標優先の実行順.tsv",
+      "sha256": "1503be2d9c736a778e044a84ee10a45a5178f18a51bacdcbda211e43a4159992"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37414-p01802-original-raw-v1/manifest.json",
+      "sha256": "be36ce81cbb9022df6075d4698dbdf98d61ec7601aed1871fcafb46d1bae720d"
+    }
+  ],
+  "terminalAtUTC": "2026-11-20T00:16:15.614783+00:00"
+}
