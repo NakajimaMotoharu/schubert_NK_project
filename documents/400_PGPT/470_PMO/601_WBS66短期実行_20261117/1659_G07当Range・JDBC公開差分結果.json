@@ -1,0 +1,134 @@
+{
+  "eventId": "PGPT-20261008-7174",
+  "groupId": "G07-RangeJdbcArchiveAndReaderPublishedDelta",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T21:33:22.517000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 82,
+      "remainingPercent": 18,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "G07-RangeJdbcArchiveAndReaderPublishedDelta",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "G07-RangeJdbcArchiveAndReaderPublishedDelta",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-G07"
+    ],
+    "managementWorkIds": [
+      "WBS-G07"
+    ],
+    "source": "2c58318a6b943262f101744c5dd9d279c9f41ea3",
+    "productionCoreMain": "6c2e8b027818c8dac0ed0f895edb85658e9c4ff1",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG41242-g07-current-archive-and-range-delta-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.5,
+      "high": 0.95
+    },
+    "groupCapPp": 1.2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1657_P01808独立元exec全binary名完了・次工程.json",
+        "sha256": "78dc042fd19285b13852093148fb3c607c7e2d9048558733a03db783f51df796"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41186-g07-public-view-tests-scan-v1/manifest.json",
+        "sha256": "1b6efed83ca48ad716cb1695c30044ca6d6ffefe2dce0442fad638cbe9a5d85a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41240-p01808-independent-global-names-post-v1/manifest.json",
+        "sha256": "c2f3d9b6eb76c9f6ccc9274cba3c56b4e626e5c35af4585e0f066962f114f5de"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "PG41186公開cursor直後の差分のみ、現Git HEAD/追跡remote一致。公開文字列と明示済み合成証跡6のみ。",
+    "endCondition": "分類済みscannerヒット0件の秘密、対象path・hash・固定commit列、Current baselineの一致。合成exec6は既原本SHAと厳密構文を照合。",
+    "workScope": "公開追跡Git blobのみ。未追跡／DB／原本／raw私有ファイル／HOLD型／実稼働をアクセスしない。",
+    "quotaAfter": {
+      "usedPercent": 82,
+      "remainingPercent": 18,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "15edd3ed4379582ad8eac07384a505e4d9745e4ea533f5ac5338cafb74f062ef",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T21:33:22.517000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 82,
+          "remainingPercent": 18,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T21:33:17.571215+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 82,
+      "remainingPercent": 18,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-7173",
+    "attempt": 1,
+    "attemptResult": "公開27commit/192path、元検出計32はGit commit／固定Current tree／合成class SHAとして照合、秘密0、未分類0。合成exec6は全元hash／厳密名／可読部scan。",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41242-g07-current-archive-and-range-delta-v1/manifest.json",
+        "sha256": "f06f0a59add26c42012631de268d4cadf5e48f5072ac610a7c27d52cd198385f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41244-g07-current-baseline-candidate-resolved-v1/manifest.json",
+        "sha256": "32ac00ccd5e86861cd6599225161e65ecb2a32a4edd827c5ee8881c668721b64"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "全G07／全451、資格停止と実環境HOLD"
+    ],
+    "publishedCommits": 27,
+    "publicPaths": 192,
+    "originalToolScanExit": 1,
+    "independentResolutionExit": 0,
+    "confirmedSecretFindings": 0,
+    "nextG07BaseExclusive": "2c58318a6b943262f101744c5dd9d279c9f41ea3",
+    "currentBaselineTree": "cd377044e4ca058ea219ca6a2fec82159559c72c",
+    "toolStaticOnly": true
+  }
+}
