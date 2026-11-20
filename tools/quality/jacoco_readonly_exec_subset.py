@@ -1,4 +1,4 @@
-"""Read-only independent 0x1007 exec decoder. Class names stay bytes; no JVM/writer dependency."""
+"""Read-only 0x1007 exec decoder. Exact binary names stay bytes throughout validation."""
 
 
 def validate_modified_utf(encoded):
@@ -67,6 +67,7 @@ def decode(raw,wanted):
         raise ValueError('pinned exec header required')
     wanted_bytes = {n.encode('ascii'):n for n in wanted}
     found,sessions,identities = {},[],set()
+    binary_names = set()
     records = 0
     while offset < len(raw):
         tag = number(1)
@@ -87,11 +88,14 @@ def decode(raw,wanted):
             final_bits = count % 8
             if final_bits and packed[-1] >> final_bits:
                 raise ValueError('nonzero final probe padding')
+            if name in binary_names:
+                if name in wanted_bytes:
+                    raise ValueError('one target class identity only')
+                raise ValueError('no duplicate original binary name')
+            binary_names.add(name)
             records += 1
             if name in wanted_bytes:
                 key = wanted_bytes[name]
-                if key in found:
-                    raise ValueError('one target class identity only')
                 hit = [i for i in range(count) if packed[i // 8] & (1 << (i % 8))]
                 found[key] = dict(crc64=format(identity,'x'),probeCount=count,hitProbeIds=hit,
                     missedProbeIds=[i for i in range(count) if not packed[i // 8] & (1 << (i % 8))])
