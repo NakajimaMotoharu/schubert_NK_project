@@ -1,0 +1,63 @@
+{
+  "eventId": "PGPT-20261008-6656",
+  "groupId": "wbs66-g07-current-action-publication-increment",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T08:37:19.968000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 66,
+      "remainingPercent": 34,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "wbs66-g07-current-action-publication-increment",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "wbs66-g07-current-action-publication-increment",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-G07"
+    ],
+    "managementWorkIds": [
+      "WBS-G07"
+    ],
+    "source": "b5aebdd82ee7412af7b22ff94206601c5faf2397",
+    "productionCoreMain": "517a23cddc9f3883550942f6fa90a4256ef39b73",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40770-g07-bounded-public-increment-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.4,
+      "high": 0.9
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1137_静的範囲訂正と独立作業の継続点.json",
+        "sha256": "332c646e4da356270ae393185bda411d5c749d750ad3de9a23d58327f5b8f47d"
+      },
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1101_短期17群の受入実績・再開点.json",
+        "sha256": "b7d014bdf5925eac5c6a0c5303291436600aa98aa5157f4bd8435e93b597b070"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40768-static-admission-correction-v1/manifest.json",
+        "sha256": "2bf75ce4913f909df9e67a6a557d790e0ebb86f202246c1b4c8843c30f4d1f62"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "Current execution produced public evidence, corrections and index notes. The per-commit Git-diff scan exists without a bounded same-range inventory of all published versions. This is a separate public-only gate.",
+    "endCondition": "Scan only exact bounded public versions, identify any excluded archive with evidence preservation, report proven scope only and no whole G07 inference.",
+    "workScope": "Local already published Git objects and pinned Gitleaks, no external operations or protected files, no quarantined PG40750/PG40766 data contents."
+  }
+}
