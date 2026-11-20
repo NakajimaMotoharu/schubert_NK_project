@@ -1,0 +1,111 @@
+{
+  "core": "cdb649a5f054bc2ceed72ef57e55605f14a590d1",
+  "findings": [
+    {
+      "source": "InspectionSummaryRepository.java",
+      "line": "31",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceText": "require(!Thread.currentThread().isInterrupted());",
+      "disposition": "NON_APPLICABLE",
+      "reason": "Existing Batch uses the caller thread only to read its interrupt state before and after acquisition. The web-thread restriction does not apply.",
+      "branchChanged": false
+    },
+    {
+      "source": "InspectionSummaryRepository.java",
+      "line": "66",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceText": "} catch (SQLException | RuntimeException | Error failure) {",
+      "disposition": "NON_APPLICABLE",
+      "reason": "Existing SS332 SSC063 resource boundary records or resolves the original failure while guaranteeing reverse order release. The caught runtime or error is neither swallowed nor reclassified as SQL, per ownership precedence.",
+      "branchChanged": false
+    },
+    {
+      "source": "InspectionSummaryRepository.java",
+      "line": "66",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Error in try-catch block",
+      "sourceText": "} catch (SQLException | RuntimeException | Error failure) {",
+      "disposition": "NON_APPLICABLE",
+      "reason": "Existing SS332 SSC063 resource boundary records or resolves the original failure while guaranteeing reverse order release. The caught runtime or error is neither swallowed nor reclassified as SQL, per ownership precedence.",
+      "branchChanged": false
+    },
+    {
+      "source": "InspectionSummaryRepository.java",
+      "line": "72",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceText": "} catch (SQLException | RuntimeException | Error failure) {",
+      "disposition": "NON_APPLICABLE",
+      "reason": "Existing SS332 SSC063 resource boundary records or resolves the original failure while guaranteeing reverse order release. The caught runtime or error is neither swallowed nor reclassified as SQL, per ownership precedence.",
+      "branchChanged": false
+    },
+    {
+      "source": "InspectionSummaryRepository.java",
+      "line": "72",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Error in try-catch block",
+      "sourceText": "} catch (SQLException | RuntimeException | Error failure) {",
+      "disposition": "NON_APPLICABLE",
+      "reason": "Existing SS332 SSC063 resource boundary records or resolves the original failure while guaranteeing reverse order release. The caught runtime or error is neither swallowed nor reclassified as SQL, per ownership precedence.",
+      "branchChanged": false
+    },
+    {
+      "source": "InspectionSummaryRepository.java",
+      "line": "78",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceText": "require(!Thread.currentThread().isInterrupted());",
+      "disposition": "NON_APPLICABLE",
+      "reason": "Existing Batch uses the caller thread only to read its interrupt state before and after acquisition. The web-thread restriction does not apply.",
+      "branchChanged": false
+    },
+    {
+      "source": "InspectionSummaryRepository.java",
+      "line": "91",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceText": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "disposition": "NON_APPLICABLE",
+      "reason": "Existing SS332 SSC063 resource boundary records or resolves the original failure while guaranteeing reverse order release. The caught runtime or error is neither swallowed nor reclassified as SQL, per ownership precedence.",
+      "branchChanged": false
+    },
+    {
+      "source": "InspectionSummaryRepository.java",
+      "line": "91",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Error in try-catch block",
+      "sourceText": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "disposition": "NON_APPLICABLE",
+      "reason": "Existing SS332 SSC063 resource boundary records or resolves the original failure while guaranteeing reverse order release. The caught runtime or error is neither swallowed nor reclassified as SQL, per ownership precedence.",
+      "branchChanged": false
+    },
+    {
+      "source": "InspectionSummaryRepository.java",
+      "line": "100",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceText": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "disposition": "NON_APPLICABLE",
+      "reason": "Existing SS332 SSC063 resource boundary records or resolves the original failure while guaranteeing reverse order release. The caught runtime or error is neither swallowed nor reclassified as SQL, per ownership precedence.",
+      "branchChanged": false
+    },
+    {
+      "source": "InspectionSummaryRepository.java",
+      "line": "100",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Error in try-catch block",
+      "sourceText": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "disposition": "NON_APPLICABLE",
+      "reason": "Existing SS332 SSC063 resource boundary records or resolves the original failure while guaranteeing reverse order release. The caught runtime or error is neither swallowed nor reclassified as SQL, per ownership precedence.",
+      "branchChanged": false
+    }
+  ],
+  "unchangedAnchors": 10,
+  "applicable": 0,
+  "unclassified": 0,
+  "suppressed": 0,
+  "frameworkJdbcLegacyFindingClosed": false,
+  "wholeF03": false
+}
