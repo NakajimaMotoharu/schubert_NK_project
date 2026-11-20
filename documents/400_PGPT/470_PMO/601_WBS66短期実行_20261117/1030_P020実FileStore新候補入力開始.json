@@ -1,0 +1,75 @@
+{
+  "eventId": "PGPT-20261008-6549",
+  "groupId": "PGPT-WBS66-P020-NEW-COMPARATOR-FILESTORE-HANDOFF-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T04:25:24.647000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 62,
+      "remainingPercent": 38,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P020-NEW-COMPARATOR-FILESTORE-HANDOFF-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-P020-NEW-COMPARATOR-FILESTORE-HANDOFF-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P020-01.01"
+    ],
+    "managementWorkIds": [
+      "WBS-P020-01.01/2-b"
+    ],
+    "source": "283ab134ee25025c0d57f248d379686a361f5d87",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40664-p020-current-211-filestore-input-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.25,
+      "base": 0.6,
+      "high": 1.15
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1029_P020三件遷移先の比較継続点.json",
+        "sha256": "f512eceefd4b8737efd9badb1b131580400aa4e6682a3c8302b55731a9a4f7ad"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40658-p020-a02-redirect-green-v1/manifest.json",
+        "sha256": "1196c69cc6ba69fe734991fe9abd742a46a24afe2af327b245755a4780d3c64d"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40662-p020-a02-redirect-independent-v1/manifest.json",
+        "sha256": "b23ed3c1f843a121e12466e16774f2c6c95d36a35a192d60ac6eebf302ee9b3e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40396-p020-single-session-filestore-target-v1/begin.json",
+        "sha256": "025bb10e62425de321d23e1b5e329ab8f8191bd6edb68de991a60c968d7bc7a4"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40398-p020-single-session-filestore-independent-v1/manifest.json",
+        "sha256": "a0ae64abd7a6b63bfcefed5f497b7acc8d83c615d6c73f48ec1321e5b0e000dd"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5341_GateOwnedFileStoreContract.java",
+        "sha256": "e731f71932611be143cc3d55c23591a5615a32def591fa91a8e1d87238426c95"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "既承認haruka直接OS向け。旧209 runは比較Source2a0eの履歴。現比較b35a4は210 offline成功。実FileStore1を加えるための入力を凍結する。",
+    "endCondition": "同じ現sourceと元Fixtureで合計211の入力をshaで再認証し、前回条件に対して変更部分と実行前の現owner/auth/容量の要件を明示。",
+    "workScope": "host内準備だけ。対象実行は新たな通常接続による入場成立後。QA056・Root・DB・認証の製品動作・VM・旧job再作成はなし。"
+  }
+}
