@@ -1,0 +1,62 @@
+{
+  "currentSource": "62142212de26387dd718026a1c839fbb1dc6b2a9",
+  "staticResult": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40960-f03-current-api-exchange-static-v1/manifest.json",
+    "sha256": "ae4ff48292cc0ffe09be7dc75093fae1816765106160f688d62d41ea3d118728"
+  },
+  "unitAndRaw": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40958-f03-api-metric-exchange-owner-v2/manifest.json",
+    "sha256": "9027d6db9a8facbfdeaa35fff5128645e5803d81c547c4751ee1996c1e5ee686"
+  },
+  "assignedWbs": [
+    "WBS-F03",
+    "WBS-P018-09"
+  ],
+  "testId": "APIMHTTP025",
+  "productionType": "ApiMetricHttpHandler",
+  "methods": [
+    "handle",
+    "closeOwnedExchange"
+  ],
+  "design": [
+    "RD171",
+    "UI252",
+    "SS342",
+    "SS351",
+    "451"
+  ],
+  "testSpec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/5517_API監視交換の自己抑制仕様.md",
+    "sha256": "9aa99d4806b2f10f724feb2e4f82857feee19d8bb01107307ce82808d8bbae94"
+  },
+  "pmdFindings": [
+    {
+      "rule": "AvoidCatchingGenericException",
+      "line": 36,
+      "column": 14,
+      "disposition": "NO_CHANGE_SUPPORTED_FOR_THIS_SITE",
+      "oracleTestIds": "APIMHTTP007～009／024",
+      "reason": "応答失敗の一次例外を保持し、その参照を解放処理へ渡して元のまま再throwする。非成功の扱いと公開例外は保持。"
+    },
+    {
+      "rule": "AvoidCatchingGenericException",
+      "line": 48,
+      "column": 14,
+      "disposition": "NO_CHANGE_SUPPORTED_FOR_THIS_SITE",
+      "oracleTestIds": "APIMHTTP024／025",
+      "reason": "解放失敗は一次なしで元のまま伝播。一次ありではJDK規則で抑制し、同一例外の自己抑制も保持。"
+    }
+  ],
+  "appliedFindings": 0,
+  "suppressions": 0,
+  "spotBugsExit": 0,
+  "pmdExit": 4,
+  "newRunTests": 0,
+  "unresolved": [
+    "API real HTTP",
+    "ApiManagementServer.respond YKT-2748",
+    "QA-056",
+    "F03 all six modules and 451"
+  ],
+  "formalDelta": 0
+}

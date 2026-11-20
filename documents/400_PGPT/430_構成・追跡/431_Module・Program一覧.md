@@ -906,3 +906,8 @@ NK-DAT-001／NK-BAT-001の共通参照、WBS-P004-02/2、P004-05/2、F02/F03。I
 - NK-OPS-001／WBS-P004-05／OutboxObservationRepository.read／OUTBOXDB012。DAT-009／UI241／UI252／SS332 SSC-470。当候補の新規1件で一次例外と二次例外、所有した資源の解放を確認。 [結果](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40954-p00405-outbox-pair-close-v1/manifest.json)
 
 各実行の生計測は個別に保持。実環境、全451、正式受入を継続。
+
+
+## 2026-11-21 API監視交換の所有終了
+
+NK-OPS-001／WBS-F03、P018-09／ApiMetricHttpHandler.handle、closeOwnedExchange／APIMHTTP025／RD171、UI252、SS342、SS351、451。現候補 `62142212de26387dd718026a1c839fbb1dc6b2a9` で新1＋回帰24の単一実行。現対象は生L36/M4/C1/B6/I115各未到達0、公開ABI一致、SpotBugs0、PMD原2の適用判断を保存。実HTTPと全451は継続。[実行](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40958-f03-api-metric-exchange-owner-v2/manifest.json) [静的判定](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40960-f03-current-api-exchange-static-v1/dispositions.json)

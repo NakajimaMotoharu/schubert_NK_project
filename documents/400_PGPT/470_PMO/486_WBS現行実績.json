@@ -9085,7 +9085,7 @@
   },
   "beforeSsc261InventorySha256": "443af5012e6a3d2a9088bb38d4a28ae3f7ff7645e6e4689fde2bea543fe19b9b",
   "beforeStrictReferenceCandidateInventorySha256": "44976d5ce11f24a89ea7db68c4d5ce1674f9a72032b6a96e453adc461a850968",
-  "inventorySha256": "2ebb103641c7e020e9fd09a1dd17bf90333afbb0f95793b53a53f6590153d619",
+  "inventorySha256": "d561e7ba56e66f2c9f92a41fb9cdffee8a2f895db7fbc0a7f9af1b05de2363ed",
   "expiryCandidateObservation": {
     "source": "1ec19782a1afe22d1de75b05f4cd12b8a8a8a172",
     "run": "PG713/714+PG715/717/719+PG722/725/728/729/730+PG737/738/739",
@@ -47903,5 +47903,50 @@
     "currentCriterionFormalDelta": 0,
     "chargedOriginalRowPricePp": 0,
     "differentExecutionsMerged": false
+  },
+  "apiMetricExchangeOwnerPG40960": {
+    "source": "62142212de26387dd718026a1c839fbb1dc6b2a9",
+    "testId": "APIMHTTP025",
+    "primaryOwner": "WBS-P018-09",
+    "qualityOwner": "WBS-F03",
+    "methods": [
+      "handle",
+      "closeOwnedExchange"
+    ],
+    "design": [
+      "RD171",
+      "UI252",
+      "SS342",
+      "SS351",
+      "451"
+    ],
+    "main": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiMetricHttpHandler.java",
+      "sha256": "03d90a8377612a8450264f13eb151f2b605bc5eefaee20158912452d80c1508e"
+    },
+    "spec": {
+      "path": "evidence/01_PT/018_NK-OPS-001/5517_API監視交換の自己抑制仕様.md",
+      "sha256": "9aa99d4806b2f10f724feb2e4f82857feee19d8bb01107307ce82808d8bbae94"
+    },
+    "unit": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40958-f03-api-metric-exchange-owner-v2/manifest.json",
+      "sha256": "9027d6db9a8facbfdeaa35fff5128645e5803d81c547c4751ee1996c1e5ee686"
+    },
+    "static": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40960-f03-current-api-exchange-static-v1/manifest.json",
+      "sha256": "ae4ff48292cc0ffe09be7dc75093fae1816765106160f688d62d41ea3d118728"
+    },
+    "dispositions": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40960-f03-current-api-exchange-static-v1/dispositions.json",
+      "sha256": "9209a167657fb3f96d3a3cc0142d7b50636528a13abc50584757c0046693a7b9"
+    },
+    "formalDelta": 0,
+    "closedOriginalRowPricePp": 0,
+    "remaining": [
+      "API real HTTP",
+      "ApiManagementServer.respond YKT-2748",
+      "QA-056",
+      "F03 all six modules and 451"
+    ]
   }
 }
