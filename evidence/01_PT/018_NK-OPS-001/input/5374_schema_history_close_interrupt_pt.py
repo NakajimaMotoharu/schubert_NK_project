@@ -1,8 +1,6 @@
 """Exercise the two added interruption checks with owned in-memory JDBC proxies."""
 
-from collections import Counter
 import gzip
-import json
 import os
 from pathlib import Path
 import runpy
@@ -14,7 +12,6 @@ from zipfile import ZipFile
 
 U = runpy.run_path(str(Path(__file__).with_name("5362_migration_utc42_current_unit.py")))
 H, OPS, PLAN, JAVA = (U[n] for n in ("H","OPS","PLAN","JAVA"))
-WORKTREE = Path.cwd()
 MODULE = Path("src/schubert-nk-bootstrap/src")
 PK = "dev/codex/schubert/nk/api/bootstrap/"
 TEST_PK = "dev/codex/schubert/nk/api/maintenance/"
@@ -59,8 +56,10 @@ def main(attempt, candidate):
         "junit-platform-console-standalone-1.13.4.jar","org.jacoco.agent-0.8.15-runtime.jar",
         "org.jacoco.cli-0.8.15-nodeps.jar","jspecify-1.0.1.jar")}
     assert all(pin(v)==env["tools"][k] for k,v in jars.items())
-    junit,agent,cli,jspec=list(jars.values())
-    assert junit.name.startswith("junit") and "agent" in agent.name and "cli" in cli.name and "jspecify" in jspec.name
+    junit = jars["junit-platform-console-standalone-1.13.4.jar"]
+    agent = jars["org.jacoco.agent-0.8.15-runtime.jar"]
+    cli = jars["org.jacoco.cli-0.8.15-nodeps.jar"]
+    jspec = jars["jspecify-1.0.1.jar"]
     meta=read(next(OPS.glob("PG33674-*/manifest.json")))
     jsr,=[Path(n) for n in meta["dependencies"] if Path(n).name.startswith("jsr305")]
     assert pin(jsr)["sha256"]==meta["dependencies"][str(jsr)]
