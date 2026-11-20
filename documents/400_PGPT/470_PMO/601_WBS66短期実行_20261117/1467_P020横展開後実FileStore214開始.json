@@ -1,0 +1,87 @@
+{
+  "eventId": "PGPT-20261008-6983",
+  "groupId": "P020-final-reader-214-with-owned-filestore",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T17:02:45.425000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 75,
+      "remainingPercent": 25,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "P020-final-reader-214-with-owned-filestore",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "P020-final-reader-214-with-owned-filestore",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P020-01.03"
+    ],
+    "managementWorkIds": [
+      "WBS-P020-01.03/criterion/quality"
+    ],
+    "source": "6e963a559ded935bd43048220654fa010fcbf476",
+    "productionCoreMain": "2b16a8ed20778fe5896099cb4798cfd1ff96b176",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG41014-p020-current-214-owned-filestore-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.2,
+      "base": 0.65,
+      "high": 1.6
+    },
+    "groupCapPp": 2.4,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1466_P020比較工具単一文書横展開継続点.json",
+        "sha256": "e5a1a2aba4a2838661d07a962de98f607fef5dfe560b2c5ff57aa70c09b063a4"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41010-p020-reader-framing-green-v1/manifest.json",
+        "sha256": "e5c2f2e555a65f955ab82644e3f05eb501a57ef813b283c9e3d3d163fd95caf4"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41002-f04-haruka-current-resource-check-v1/manifest.json",
+        "sha256": "71b5b5fb99025b6381bdb69bafa47ef95639a2044379d317aba9431f7aec2c4e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40706-p020-current-211-approved-filestore-v1/begin.json",
+        "sha256": "c2c17d78a75c1c62972df4d86a6dea24061cf05e9ea4e12dad94bd3cab99fc37"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41006-p020-current-212-independent-v1/manifest.json",
+        "sha256": "fd0cdcabf5b931edf8ca91d69983d35e984707435f0544802831bd4b56c79c64"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40658-p020-a02-redirect-green-v1/begin.json",
+        "sha256": "09060f8b73131cf1b7af6a1ccabfc1405639cdf265da5f6aed05fd4824d461a8"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5342_haruka_single_filestore_runner.py",
+        "sha256": "d2f6a6a7798e720e0d2c82f00b0048895a07a53e500c5463d502f499d205d6e1"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5343_p020_single_filestore_host.py",
+        "sha256": "513f3e286eea0efaa2e394e1f5e09489b3a6a2b29314ffdfa4ea58c83ec08860"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41004-p020-current-212-owned-filestore-v1/manifest.json",
+        "sha256": "aade056c5a8a9868c610a016c417d72832d82af12f8efe6f852522dee01372bf"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "WBS-P020-01.03/2、YKT-2753。旧212 runは真正終了、現工具ece4b36の213を固定。旧許可boot hash保持、新runの前提を送信前に同一認証で取得。",
+    "endCondition": "同一工具source・214/21、真正終了、全物理CRC・単一exec・無フィルター各100。同run名を二度起動しない。",
+    "workScope": "同じ許可済みharuka、固定鍵、通常認証、同boot／所有／空き／run不存在を一回の実行で確認。比較工具のみ、製品や実CHR等は対象外。"
+  }
+}
