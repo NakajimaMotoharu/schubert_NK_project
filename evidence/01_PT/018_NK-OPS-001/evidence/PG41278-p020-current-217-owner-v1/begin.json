@@ -1,0 +1,154 @@
+{
+  "run": "PG41278-p020-current-217-owner-v1",
+  "source": "26cb251b9a30901f1c15fa6f0e193ae39005226d",
+  "toolSource": "26cb251b9a30901f1c15fa6f0e193ae39005226d",
+  "productionCore": "a8913bc836f81632613b34243f84b7b15eb3e054",
+  "session": "PG41278-CHARACTERIZATION-COMPARISON-DEFINITIONS-217",
+  "expectedTests": 217,
+  "selectors": [
+    "dev.codex.schubert.characterization.ArtifactComparatorTest",
+    "dev.codex.schubert.characterization.GateCliTest",
+    "dev.codex.schubert.characterization.GateContractTest",
+    "dev.codex.schubert.characterization.GateContractValidatorNegativeTest",
+    "dev.codex.schubert.characterization.TargetAdapterTest",
+    "dev.codex.schubert.characterization.ArtifactComparatorEmptyInputTest",
+    "dev.codex.schubert.characterization.BaselineNumericMetadataTest",
+    "dev.codex.schubert.characterization.CharacterizationHashTest",
+    "dev.codex.schubert.characterization.CorrelatedLogEvidenceValidatorTest",
+    "dev.codex.schubert.characterization.CorrelatedLogHttpNumberTest",
+    "dev.codex.schubert.characterization.CorrelatedMenuActionContractTest",
+    "dev.codex.schubert.characterization.GateBaselineMetadataTest",
+    "dev.codex.schubert.characterization.GateDefinitionDocumentsTest",
+    "dev.codex.schubert.characterization.GateDefinitionNumericTest",
+    "dev.codex.schubert.characterization.GateEvidenceDocumentsTest",
+    "dev.codex.schubert.characterization.GateMetricsCountTest",
+    "dev.codex.schubert.characterization.GateSyntheticRunPortTest",
+    "dev.codex.schubert.characterization.CommonValueContractTest",
+    "dev.codex.schubert.characterization.CharacterizationIoScopeTest",
+    "dev.codex.schubert.characterization.GateOutputFailureContractTest",
+    "dev.codex.schubert.characterization.GateOwnedFileStoreContract"
+  ],
+  "unchangedBaselineTree": true,
+  "preparationStages": {
+    "package": {
+      "argv": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-N",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-f",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41278-p020-current-217-owner-v1/snapshot/program/characterization/pom.xml",
+        "-Dmaven.test.skip=true",
+        "package"
+      ],
+      "startedAtUTC": "2026-11-20T22:19:20.370303+00:00",
+      "terminalAtUTC": "2026-11-20T22:19:26.662386+00:00",
+      "exitCode": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41278-p020-current-217-owner-v1/package.stdout",
+        "sha256": "a9c5ba7d99dff18d7844d403096f2eea0fdab57883f23d07974e8c7faf92f453"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41278-p020-current-217-owner-v1/package.stderr",
+        "sha256": "05ed4976f99856c1417eead6c52058f5565d748a00ae7939fa02188545fafda4"
+      }
+    },
+    "compile-tests": {
+      "argv": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41278-p020-current-217-owner-v1/snapshot/program/characterization/target/classes:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/microsoft/playwright/playwright/1.55.0/playwright-1.55.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.19.2/jackson-annotations-2.19.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-core/2.19.2/jackson-core-2.19.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-databind/2.19.2/jackson-databind-2.19.2.jar",
+        "-sourcepath",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41278-p020-current-217-owner-v1/snapshot/program/characterization/tests/java",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41278-p020-current-217-owner-v1/tests",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41278-p020-current-217-owner-v1/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41278-p020-current-217-owner-v1/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateCliTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41278-p020-current-217-owner-v1/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateContractTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41278-p020-current-217-owner-v1/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateContractValidatorNegativeTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41278-p020-current-217-owner-v1/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/TargetAdapterTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41278-p020-current-217-owner-v1/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorEmptyInputTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41278-p020-current-217-owner-v1/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/BaselineNumericMetadataTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41278-p020-current-217-owner-v1/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/CharacterizationHashTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41278-p020-current-217-owner-v1/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidatorTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41278-p020-current-217-owner-v1/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/CorrelatedLogHttpNumberTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41278-p020-current-217-owner-v1/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/CorrelatedMenuActionContractTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41278-p020-current-217-owner-v1/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateBaselineMetadataTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41278-p020-current-217-owner-v1/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionDocumentsTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41278-p020-current-217-owner-v1/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionNumericTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41278-p020-current-217-owner-v1/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateEvidenceDocumentsTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41278-p020-current-217-owner-v1/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateMetricsCountTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41278-p020-current-217-owner-v1/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateSyntheticRunPortTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41278-p020-current-217-owner-v1/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/CommonValueContractTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41278-p020-current-217-owner-v1/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/CharacterizationIoScopeTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41278-p020-current-217-owner-v1/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateOutputFailureContractTest.java"
+      ],
+      "startedAtUTC": "2026-11-20T22:19:26.665073+00:00",
+      "terminalAtUTC": "2026-11-20T22:19:29.090002+00:00",
+      "exitCode": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41278-p020-current-217-owner-v1/compile-tests.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41278-p020-current-217-owner-v1/compile-tests.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "sourceDiff": [
+    "classes/dev/codex/schubert/characterization/ArtifactComparator$ComparisonResult.class",
+    "classes/dev/codex/schubert/characterization/ArtifactComparator.class",
+    "snapshot/program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+    "snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorTest.java",
+    "testclasses/dev/codex/schubert/characterization/ArtifactComparatorTest$Fixture.class",
+    "testclasses/dev/codex/schubert/characterization/ArtifactComparatorTest$Oracle.class",
+    "testclasses/dev/codex/schubert/characterization/ArtifactComparatorTest.class"
+  ],
+  "samePackagedClasses": 17,
+  "immutableBaselineFixturePaths": 27,
+  "physical": {
+    "dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.class": "91fbc7022ef4b213c12b7c259c1aac9013afe76da4d5026667d3fc3b44b3a6df",
+    "dev/codex/schubert/characterization/GateCli.class": "fb055d3db3e72e307b6624f31e204c517e11c80c4c1a625537d9519f72b91ff3",
+    "dev/codex/schubert/characterization/GateCli$BaselineNumbers.class": "f42911db04f894f5fe3fa64377c3514878ff16f75aab081b4554ba1fb2386812",
+    "dev/codex/schubert/characterization/GateCli$UsableSpace.class": "d5ba88d5f1f47cd3e9f233632fd1687cc7be6a64c8090a768b73741b4948a42c",
+    "dev/codex/schubert/characterization/CharacterizationIoScope$Open.class": "f2393025ee9c5ef01c62d4b231e864409394562fbd2b4202906202d49ef9e27e",
+    "dev/codex/schubert/characterization/GateCli$FileJsonOutput.class": "667e70369ec0aa172646f8ed8265833a5994ec1fc218c084f0287b401f849c74",
+    "dev/codex/schubert/characterization/TargetAdapter$Target.class": "bbdfbbdc098fffcb83102bef3eb8e1d84af8860217330d104cc11114fbc00c53",
+    "dev/codex/schubert/characterization/ArtifactComparator.class": "78ee5765b42989eda33ecd19a0be9bdb8ef9f8e837f7fa4863aad5472670f81d",
+    "dev/codex/schubert/characterization/ArtifactComparator$ComparisonResult.class": "e82f59de5036d0aaba0c430cb4410f4c9181fde97666c7ebb1518ba227c02689",
+    "dev/codex/schubert/characterization/CharacterizationIoScope$Work.class": "fb34fa7cd207d0b356cf01e34ef6d886caec2cfdc062f3df6c7c720a21e3795a",
+    "dev/codex/schubert/characterization/GateCli$JsonOutput.class": "8d7047d7bf57b8d93b832edfdfbcaa023022e1c03b8e9221a955277c49427c1f",
+    "dev/codex/schubert/characterization/GateCli$TreeStats.class": "b6ce1e4494583aa2dd04f5938dca4e8489d330208bd214cb36ee0bf45c2c65d1",
+    "dev/codex/schubert/characterization/GateContractValidator.class": "d0efcc2862786b6c8de8a034d694e98360786bdcaccd44fa1c5863eb231c974e",
+    "dev/codex/schubert/characterization/CharacterizationIoScope.class": "f76c2ce062349d736a5ba3bbc6174e64bc413826c1d28e6ab8efc9bbfba4d3ad",
+    "dev/codex/schubert/characterization/TargetAdapter.class": "a31b5fb44c9933b6660936e6cbffb59ff9b0021636b7aae42393b3c957e3852b",
+    "dev/codex/schubert/characterization/GateContractValidator$ValidationResult.class": "fa20e38fa6897ef960b2c6c20dd8315e19684e68ee0708153b34ebb700ab8037",
+    "dev/codex/schubert/characterization/CharacterizationIoScope$Release.class": "95ecedd79ce4de9045b81712251dfa379ee68c991e6947d70112f7a429c546cc"
+  },
+  "packagingJar": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41278-p020-current-217-owner-v1/snapshot/program/characterization/target/schubert-characterization-0.1.0-SNAPSHOT.jar",
+    "sha256": "9863b281e174f00a532fb3ad3d95b3df7b42db01b25a08651256f1bc38fd7b01"
+  },
+  "inputScopeCount": 326,
+  "existingFileStoreClassPreserved": true,
+  "preparedAtUTC": "2026-11-20T22:19:29.361687+00:00",
+  "jobStarted": false,
+  "realBackendActions": 0,
+  "prepared": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41278-p020-current-217-owner-v1/prepared.json",
+    "sha256": "4c006f3cb8fa0bfdddfc2a7cf27ae019b1afd7f8dfc133250b7523815cadc7cd"
+  },
+  "capsule": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41278-p020-current-217-owner-v1/characterization-217.tar.gz",
+    "sha256": "695998a7e37c51724a6184ce39de38b8cdb4015f136fa5651f0597b488ac54db"
+  },
+  "formalDelta": 0
+}
