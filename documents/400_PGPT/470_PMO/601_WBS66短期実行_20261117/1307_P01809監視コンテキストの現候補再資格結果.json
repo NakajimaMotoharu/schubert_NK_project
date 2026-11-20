@@ -1,0 +1,149 @@
+{
+  "eventId": "PGPT-20261008-6823",
+  "groupId": "P01809-sdk-consumer-core-requalification",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T13:47:28.727000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 70,
+      "remainingPercent": 30,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "P01809-sdk-consumer-core-requalification",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "P01809-sdk-consumer-core-requalification",
+    "workAttributionKind": "SOURCE_REQUALIFICATION",
+    "wbsLeafIds": [
+      "WBS-P018-09"
+    ],
+    "managementWorkIds": [],
+    "source": "1ef27cb1171a64440dcf7fcb31e3029bd9671fc5",
+    "productionCoreMain": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40892-p01809-api-web-metric-context-66-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.35,
+      "base": 0.85,
+      "high": 1.8
+    },
+    "groupCapPp": 2.2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1305_G1301現監視SDKの担当引渡し継続点.json",
+        "sha256": "db06f1070e7a3404e5f68d2674a296078ee3ca4f91394e72c1bd5bf2c25d4f68"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39368-bug3272-api-context-prepare-v1/manifest.json",
+        "sha256": "6d831b9c48a36ba36e002e09aec33b204477396c230f49acee873429cdd5152d"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39504-bug3286-web-context-prepare-v1/manifest.json",
+        "sha256": "3a399cb8d4c518cbedce9ad5c3ad63bc952194876cf991a0282be310f1dc0603"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39382-f03-api-context-finite-independent-v1/manifest.json",
+        "sha256": "2c224be355a8face8c1be2af922877f952d6bd5b187a6c87e533be57d2e396b3"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39518-f03-web-metric-context-independent-v1/manifest.json",
+        "sha256": "1ec8c01f367d6a1e1349f6bf2129fa80ee0119c7b574f987802135ea66022573"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40882-f03-standard-sdk-fixed-receipt-v1/manifest.json",
+        "sha256": "6adca0588a3675b4c853b14a61a75873c9ec0bab1aa67186d16db09523792427"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "承認済み33ずつ、Main／Test 45 source入力のうち直接依存Api/Web StandardMetricSourceだけ差。元fixture・固定SDK・独立期待は同一。",
+    "endCondition": "現Coreで各33の必要回帰を一度、元case集合と照合。純自己SDKでclose失敗・コンテキスト停止の既順序を確認し、関連局所coverageを保存。",
+    "workScope": "必要再資格、製品新規試験0。API/Web runtime・DB/JMS/Root・保留型・全451なし。",
+    "quotaAfter": {
+      "usedPercent": 70,
+      "remainingPercent": 30,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "0afc5232bc6881a2c28f3a0cfc3eb44bf22def0e8b3693442e83d27d18866f46",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T13:47:28.727000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 70,
+          "remainingPercent": 30,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T13:47:17.818938+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 70,
+      "remainingPercent": 30,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6822",
+    "attempt": 1,
+    "attemptResult": "CHANGED_DEPENDENCIES_REQUALIFIED",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 66,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40892-p01809-api-web-metric-context-66-v1/manifest.json",
+        "sha256": "aebae08a000cfa47ac4958c8f6ebfd8e7ec70b2373969712e93d33f79a0995c7"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40892-p01809-api-web-metric-context-66-v1/coverage.xml",
+        "sha256": "0eb7bd36d3eec5bd387ef51a9a2b1c31d202161f446c4a5a2705280662dd09f4"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5474_metric_context_consumer_requalification.py",
+        "sha256": "ca82032ffacc1ed6ce8ff0f17a3acad61bcf55d20c76424ffec681c8c541fd99"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "P018-09/C07の実監視",
+      "F02/F03六製品・全451",
+      "短期正式受入"
+    ],
+    "necessarySelectedRequalifications": 66,
+    "selectedPassed": 66,
+    "selectedFailed": 0,
+    "changedDirectDependencies": 2,
+    "candidateSource": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+    "bothLocalTargetFour100": true,
+    "qualificationOnly": true
+  }
+}
