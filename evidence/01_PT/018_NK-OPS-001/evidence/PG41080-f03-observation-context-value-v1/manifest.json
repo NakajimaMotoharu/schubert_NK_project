@@ -1,0 +1,298 @@
+{
+  "actualExit": 0,
+  "productionCore": "559f5b5945e82374e0843dcfae11a8d07faef1ea",
+  "fixtureSource": "0df4b57bc21b58f0bda611f0931651087ccbf0fb",
+  "exactTests": [
+    "asyncByte001EngineUsesStorageBytesIndependentOfMessageCount",
+    "monPipe001ObservationContextInvariantsAndImmutableValues",
+    "monPipe002EveryNormalAndWarningEndpointIdentity",
+    "monPipe003EveryCriticalEndpointAndCauseAwareRecovery",
+    "monPipe004RejectedInputsDoNotPartiallyUpdateState",
+    "monPipe005ModeConsistencyDoesNotChangeAlerts",
+    "monPipe006ConcurrentSingleEntryKeepsOneOwner",
+    "monPipe007AllSeventyTwoFixedKeysAndImmutableProjection",
+    "monPipe008MissingObservationResetsOnlyItsConditionAndService",
+    "restartFlag001RateLimitIsIndependentOfCountAndInvalidCountCannotMutateState"
+  ],
+  "extendedCase": "PT-OPS-MONPIPE-001",
+  "newTestDefinitions": 0,
+  "tests": 10,
+  "errors": 0,
+  "failures": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "session": "PG41080",
+  "raw": [
+    {
+      "name": "dev/codex/schubert/nk/batch/monitoring/ObservationContext",
+      "crc64": "45dd5ef40bfe0038",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 51
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 2
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 7
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 8
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 7
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "name": "dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine",
+      "crc64": "3bed84c2f506392a",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 199
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 36
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 17
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 17
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    }
+  ],
+  "currentBatchClassBytes": [
+    {
+      "classPath": "dev/codex/schubert/nk/batch/monitoring/ObservationContext.class",
+      "sha256": "b3ff5e32cbbc02848950edf814043343fb53c25eda1968aa1e8ae4dafed23644"
+    },
+    {
+      "classPath": "dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine.class",
+      "sha256": "a3b1fbb10a66f67330d01cdb9676ca98de849ee834a591e8c64e1ae62bf9f2b9"
+    }
+  ],
+  "priorMissingMethods": 2,
+  "priorMissingInstructions": 6,
+  "measuredClasses": 2,
+  "otherClassCoverageClaimed": 0,
+  "unchangedFixtureTests": 9,
+  "fixture": {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngineTest.java",
+    "sha256": "48b8a15a81a033eaf2f14184b294283eca000c8265b028491dfe1a73b146a3e6"
+  },
+  "mainSourcePins": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java",
+      "sha256": "0559748eefb1031ecdc00cd68e008d4e4d8ef9ebbaa78c228af09487ba7a5bf0"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertRegistry.java",
+      "sha256": "24fc6ea876fa229d117024732ad12adbad089ef72083060f55883c40017567ea"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholds.java",
+      "sha256": "b0fd95f08991fa72ba262f023c0b64029ed2e9f1678dfd99cebeb14c26ed7aac"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy.java",
+      "sha256": "3f152853fbd798a28dd56d0566fd9f873a5c1bce6ec83f4004916ae3c4a745f3"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine.java",
+      "sha256": "8ce6319ce1cc66796725d2d2d773abb10e4d181cf8d24276de2d7c171f987978"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ObservationContext.java",
+      "sha256": "5685db8a219acb224d463f9372c403ad9dfe36ac1d0c6a0fad308d377454cb26"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/package-info.java",
+      "sha256": "009823dd0566a5c0e2a7f06af4b540c122629bec50003bc1585d5303c488d924"
+    }
+  ],
+  "xmlOriginal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41080-f03-observation-context-value-v1/junit/TEST-junit-jupiter.xml",
+    "sha256": "d41456e90ba6bcbb282647ba55707551c95c662ed0f597e99c7ce215eeadb2da"
+  },
+  "execOriginal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41080-f03-observation-context-value-v1/unit.exec",
+    "sha256": "302ceaf7969d8539d56a4d3d8c8d8a7bec3ce8fc1386a9eb897086756e956e19"
+  },
+  "rawOriginal": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41080-f03-observation-context-value-v1/unfiltered.tsv",
+    "sha256": "1d4d0cb49f0c48921e81566f84ad2361c6abde2bbb6d3150a70e744df797e501"
+  },
+  "independentDecoderSha256": "fd3fa6b3d4c7a40d888125ce4e32b390749f7fedd493234279c63a1c41ce8f8e",
+  "steps": [
+    {
+      "stage": "format",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngineTest.java"
+      ],
+      "exit": 0,
+      "terminalAtUTC": "2026-11-20T18:22:56.809251+00:00",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "stage": "checkstyle",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "-o",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41080-f03-observation-context-value-v1/checkstyle.xml",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngineTest.java"
+      ],
+      "exit": 0,
+      "terminalAtUTC": "2026-11-20T18:22:57.534880+00:00",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "stage": "main-compile",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "-d",
+        "/dev/shm/pgpt-observation-value-q2m29pjl/prod",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertRegistry.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholds.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ObservationContext.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/package-info.java"
+      ],
+      "exit": 0,
+      "terminalAtUTC": "2026-11-20T18:22:58.238982+00:00",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "stage": "fixture-compile",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/dev/shm/pgpt-observation-value-q2m29pjl/prod:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "-d",
+        "/dev/shm/pgpt-observation-value-q2m29pjl/test",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngineTest.java"
+      ],
+      "exit": 0,
+      "terminalAtUTC": "2026-11-20T18:22:58.978987+00:00",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "stage": "unit",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/PG41080-f03-observation-context-value-v1/unit.exec,sessionid=PG41080,append=false",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-ansi-colors",
+        "--fail-if-no-tests",
+        "--class-path",
+        "/dev/shm/pgpt-observation-value-q2m29pjl/prod:/dev/shm/pgpt-observation-value-q2m29pjl/test:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "--select-class",
+        "dev.codex.schubert.nk.batch.monitoring.MonitoringPolicyEngineTest",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41080-f03-observation-context-value-v1/junit"
+      ],
+      "exit": 0,
+      "terminalAtUTC": "2026-11-20T18:23:00.065665+00:00",
+      "stdoutSha256": "33e90e919bfbedef161fc2bc90369d5fbc84fc7900add4dd9cc29b037208e4b0",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "stage": "raw-compile",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "-d",
+        "/dev/shm/pgpt-observation-value-q2m29pjl/analyzer",
+        "/dev/shm/pgpt-observation-value-q2m29pjl/UnfilteredCodeMeasurement.java"
+      ],
+      "exit": 0,
+      "terminalAtUTC": "2026-11-20T18:23:00.627218+00:00",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "stage": "raw",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/dev/shm/pgpt-observation-value-q2m29pjl/analyzer:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41080-f03-observation-context-value-v1/unit.exec",
+        "/dev/shm/pgpt-observation-value-q2m29pjl/prod/dev/codex/schubert/nk/batch/monitoring/ObservationContext.class",
+        "/dev/shm/pgpt-observation-value-q2m29pjl/prod/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine.class"
+      ],
+      "exit": 0,
+      "terminalAtUTC": "2026-11-20T18:23:00.705178+00:00",
+      "stdoutSha256": "1d4d0cb49f0c48921e81566f84ad2361c6abde2bbb6d3150a70e744df797e501",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "externalOperations": 0,
+  "oldExecsCombined": 0,
+  "whole451": false,
+  "formalDelta": 0,
+  "terminalAtUTC": "2026-11-20T18:23:00.718228+00:00"
+}

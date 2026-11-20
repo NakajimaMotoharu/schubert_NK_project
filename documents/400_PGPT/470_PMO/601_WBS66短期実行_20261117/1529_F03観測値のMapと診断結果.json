@@ -1,0 +1,138 @@
+{
+  "eventId": "PGPT-20261008-7044",
+  "groupId": "PGPT-WBS66-F03-OBSERVATION-CONTEXT-WHOLE-VALUE-20261121",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T18:23:11.822000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 77,
+      "remainingPercent": 23,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-OBSERVATION-CONTEXT-WHOLE-VALUE-20261121",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "PGPT-WBS66-F03-OBSERVATION-CONTEXT-WHOLE-VALUE-20261121",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2",
+      "WBS-P018-09"
+    ],
+    "source": "e326ea6808214e59a53420b3e6f51da1e1911b86",
+    "productionCoreMain": "559f5b5945e82374e0843dcfae11a8d07faef1ea",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG41080-f03-observation-context-value-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.2,
+      "base": 0.55,
+      "high": 1.2
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1527_P00405現Outbox原二suite継続点.json",
+        "sha256": "267385f98dbbb9c64370313dbc04ab11844aa3756e85e7a6b4090531fc93a9f0"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40966-f03-current-monitor-policy-engine-unit-scope-v1/manifest.json",
+        "sha256": "26e4613c706c7cf90d16bf9c649192f528c36b81250da55a4ea1a1d62f87acf3"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41070-f03-alert-owner-state-final-v1/manifest.json",
+        "sha256": "ef7ffcdc03a960dc3a2f2d5246029fa244fcfd18e920092a3f804a31f7e24095"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41074-f02-current-alert-batch-maven-v1/manifest.json",
+        "sha256": "2373767cfeaf06ab0138b4ff584901bcded516b4f12067daeee3184df3ca16cb"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "1412で残されたObservationContextの未到達2 method。PG41070にも同CRC・M2/I6不足。",
+    "endCondition": "元10を保持し観測値のMapキーと診断投影を試験。両対象の生coreと正規Batch byteを一実行で確認。",
+    "workScope": "純値と既MonitoringPolicyEngineTest全10だけ。App、実監視、inactive保留型を入れない。",
+    "quotaAfter": {
+      "usedPercent": 77,
+      "remainingPercent": 23,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "ac1e748b2875b4d5880582c3e5273d2519206e8894bc76314a3d7abab6943a9c",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T18:23:11.822000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 77,
+          "remainingPercent": 23,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T18:23:00.718228+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 77,
+      "remainingPercent": 23,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-7043",
+    "attempt": 1,
+    "attemptResult": "PASS_LOCAL_OBSERVATION_VALUE_CRITERION",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/5566_F03観測値のMapと診断投影結果.md",
+        "sha256": "8b908a506abda5f73e23362036db7467f6936d6cd2786abb76659c20270d4779"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41080-f03-observation-context-value-v1/manifest.json",
+        "sha256": "330aeb682b26a50b68fe8770db24f9a9d80f0af80eb0d055fdfab0eb3215298e"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": "実監視sink、保留4Main/32Test/Root11、型付き六製品と全451は継続。",
+    "finalProductTests": 10,
+    "finalProductFailures": 0,
+    "suites": 1,
+    "locallyRequalifiedCases": 10,
+    "definitionsAdded": 0,
+    "productMainChanges": 0,
+    "coveredPriorUnhitMethods": 2,
+    "firstSetupNotRun": "多行本文の局所前処理正規表現。残九本文と全case同一で正規条件へ。",
+    "strictCrcs": 2
+  }
+}
