@@ -1,0 +1,71 @@
+{
+  "eventId": "PGPT-20261008-6644",
+  "groupId": "wbs66-f03-current-six-style-stable-sources",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T08:25:28.309000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 65,
+      "remainingPercent": 35,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "wbs66-f03-current-six-style-stable-sources",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "wbs66-f03-current-six-style-stable-sources",
+    "workAttributionKind": "SOURCE_REQUALIFICATION",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "source": "56390757143160f303500cc3a5e7eaa17295511f",
+    "productionCoreMain": "517a23cddc9f3883550942f6fa90a4256ef39b73",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40762-f03-current-six-source-style-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.2,
+      "base": 0.55,
+      "high": 1.1
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1125_F03Cleanup静的個別終端と継続点.json",
+        "sha256": "e06850b255a295e2b9fe0bcaed0b78231ab9b16b617ebfc36b11b5232e7b33ce"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40554-f03-six-main-source-style-lineage-v1/manifest.json",
+        "sha256": "ccf5af5b3f8b9aaf134f5b23761ec4d4e33448edbbf7fb7dff0b25d39590035a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40556-f03-six-main-style-independent-v1/manifest.json",
+        "sha256": "0e12bf94b5a4573f9219b19211a2cc1b6258483dc72c1e868fefdb9aafa36354"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40732-f03-expiry-ownership-independent-v1/manifest.json",
+        "sha256": "c5b1f768a9cd52828fb8321f74a2de13287ec3b3e62dfdf1e52690f7fd2b2796"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40742-f02-cleanup-success-reference-independent-v1/manifest.json",
+        "sha256": "a43c8b36a3ada63abdffc4c151e2c71b157df2e14f5114b55110838837e1f927"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "F03 original WK2 row82. Prior six-file scope had source-only format and Checkstyle for all 1027 exact source paths. Two current Main differences have independently saved format and Checkstyle.",
+    "endCondition": "Verify Git object IDs, both changed source SHA and matching original tools/config, and current Checkstyle XML on precisely changed files. Report present six-module file style only; keep binary QA, whole 451 and other checks pending.",
+    "workScope": "Public manifests and tracked Git metadata, with changed two approved source files and existing XML only; no application, full six compile, held bytecode, static or PT re-execution."
+  }
+}
