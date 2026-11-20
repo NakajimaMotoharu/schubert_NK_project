@@ -36,7 +36,10 @@ def main():
     maven=old_compiler["maven"]["command"]
     assert pin(java)["sha256"]==old_compiler["tools"]["javaSha256"]
     assert pin(Path(maven[0]))["sha256"]==old_compiler["tools"]["mavenLauncherSha256"]
-    assert pin(Path(previous["mavenPlugin"]["path"]))==previous["mavenPlugin"]
+    plugin_lineage=previous["oldJarManifest"]
+    assert pin(Path(plugin_lineage["path"]))==plugin_lineage
+    maven_plugin=read(plugin_lineage["path"])["mavenPlugin"]
+    assert pin(Path(maven_plugin["path"]))==maven_plugin
     env={"JAVA_HOME":str(java.parents[1]),"PATH":str(java.parent)+":/usr/bin:/bin","LANG":"C.UTF-8"}
     tree=["pom.xml","program/characterization/pom.xml","src/schubert-nk-api/pom.xml","src/schubert-nk-web/pom.xml"]
     for module in MODULES:
@@ -108,6 +111,7 @@ def main():
     okay=len(stages)==5 and all(x["actualExit"]==0 for x in stages.values()) and abi and +        ast==["dev.codex.schubert.nk.api.bootstrap.SchemaHistoryAdmission"] and [bugs,missing,errors]==[0,0,0]
     d=dict(actualExit=0 if okay else 1, productionCore=core, source=core, canonicalDesign=green["canonicalDesign"],
            stages=stages,baseFour=pin(Path(w["oracleReferences"][3]["path"])),packagedBuild=artifacts,
+           mavenPlugin=maven_plugin,
            changedPhysical=delta,freshPhysicalCount=1102 if artifacts else 0,spotbugsClassStats=ast,
            spotbugsFindings=bugs,spotbugsMissing=missing,spotbugsErrors=errors,publicAbiEqual=abi,
            samePhysicalAsFocused13=equivalent,focusedRun=pin(green_path),sourcedMainCount=482,
