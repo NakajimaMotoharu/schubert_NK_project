@@ -45,11 +45,9 @@ public enum MonitoringModePolicy {
   /** Strict external value; malformed values are never echoed into a diagnostic. */
   public static MonitoringModePolicy parse(String value) {
     Objects.requireNonNull(value, "monitoring mode");
-    return switch (value) {
-      case "DEBUG" -> DEBUG;
-      case "STANDARD" -> STANDARD;
-      default -> throw new IllegalArgumentException("CONFIG_INVALID");
-    };
+    if (DEBUG.name().equals(value)) return DEBUG;
+    if (STANDARD.name().equals(value)) return STANDARD;
+    throw new IllegalArgumentException("CONFIG_INVALID");
   }
 
   public boolean detailedMetricsEnabled() {
