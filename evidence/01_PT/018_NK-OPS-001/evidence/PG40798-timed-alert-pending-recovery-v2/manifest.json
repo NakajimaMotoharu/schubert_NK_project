@@ -1,0 +1,772 @@
+{
+  "actualExit": 0,
+  "source": "da20ad7753279ae4e8017593866502d3341ec0e5",
+  "phase": "after",
+  "startedAtUTC": "2026-11-20T11:14:39.878415+00:00",
+  "terminalAtUTC": "2026-11-20T11:14:45.359040+00:00",
+  "testState": "PASS",
+  "relatedBug": "BUG-3415",
+  "relatedYkt": "YKT-2738",
+  "inputs": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java",
+      "sha256": "ad79f4efc8b3cb9927251473f6325ac18e4b316fe2e6205e4af0f52fb6962a21"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertRegistry.java",
+      "sha256": "24fc6ea876fa229d117024732ad12adbad089ef72083060f55883c40017567ea"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholds.java",
+      "sha256": "b0fd95f08991fa72ba262f023c0b64029ed2e9f1678dfd99cebeb14c26ed7aac"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow.java",
+      "sha256": "89b651524b151fc772903dfd4a29bfa8bc41eb6984c9ca646d555363bba614ca"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy.java",
+      "sha256": "9eb653ff3b80236306ed03e7621b3d6dc6d4d86764760ba625aa7f203118da73"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine.java",
+      "sha256": "8ce6319ce1cc66796725d2d2d773abb10e4d181cf8d24276de2d7c171f987978"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ObservationContext.java",
+      "sha256": "5685db8a219acb224d463f9372c403ad9dfe36ac1d0c6a0fad308d377454cb26"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor.java",
+      "sha256": "3196f051b34ca46d8ec94e1cd58a914f07474e2e9cbdb326480213697d55acb0"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.java",
+      "sha256": "5e8a474737f4fbdc71e672a44fa268c48a62d167e0d80e7a86323f902e173e73"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.java",
+      "sha256": "5588e1ab7234b3799d1c6e1a02fc2a78ee75e447734d2b5b29760dc721ea7990"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor.java",
+      "sha256": "9615b3c88bfe6d6b28bf7cea5a67860ea0756f6f98d94ce861b252f5bb571484"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/package-info.java",
+      "sha256": "009823dd0566a5c0e2a7f06af4b540c122629bec50003bc1585d5303c488d924"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringStatusText.java",
+      "sha256": "31b30e2b7ad7d3dcdb0dd9df1e0d4bd00c3c9f694443955ad600709d0485dc8a"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedAlertPendingRecoveryTest.java",
+      "sha256": "bbe6994676ae502f36acefda253626ff7edd8c400d5e0dbfc185446d26ad00ee"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+      "sha256": "a07de65f75dc2f617e1250f6db15ac4c213bbf25ba0079bf55e975d46e615ccf"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertRegistryTest.java",
+      "sha256": "cda14d500331e2ca2b92e6308fb325c65c8bd9ea81da012cecc709533fcd66d8"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholdsTest.java",
+      "sha256": "16b1540705fc6542d8ad73bc2add5f8925b892e6ba0f2a8fbaf4ac8c9301aa53"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngineTest.java",
+      "sha256": "64b3ee74b7b5f66464594169332d5806ec7f77436c2797fe76607bcc7d6562d9"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitorTest.java",
+      "sha256": "aaac0144d732ba723350fb7034e9ba42e05f7b7fb38bc045d693da15a0c5a2c9"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitorTest.java",
+      "sha256": "a0bd8efc24fd8062d77966e82251af46c2511245ec62f469df6dc1c31c546936"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitorTest.java",
+      "sha256": "4c4bda479a43021bd08338dd1ef7896ed4b6eba7d4eb10217169fe04c522ea93"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitorTest.java",
+      "sha256": "f66f5eefe7409adf245a148a7f7fda9428ee15a83adad610d0fde54a34bd006f"
+    }
+  ],
+  "steps": {
+    "formatter": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertRegistry.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholds.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ObservationContext.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/package-info.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringStatusText.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedAlertPendingRecoveryTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "checkstyle": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "-o",
+        "/dev/shm/pg40798-pwj_dxzy/checkstyle.xml",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertRegistry.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholds.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ObservationContext.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/package-info.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringStatusText.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedAlertPendingRecoveryTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "mainCompile": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-g",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "-d",
+        "/dev/shm/pg40798-pwj_dxzy/product",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertRegistry.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholds.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ObservationContext.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/package-info.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringStatusText.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "testCompile": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-g",
+        "-proc:none",
+        "-cp",
+        "/dev/shm/pg40798-pwj_dxzy/product:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "-d",
+        "/dev/shm/pg40798-pwj_dxzy/tests",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedAlertPendingRecoveryTest.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertRegistryTest.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholdsTest.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngineTest.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitorTest.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitorTest.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitorTest.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitorTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "unit": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/dev/shm/pg40798-pwj_dxzy/coverage.exec,append=false,sessionid=PG40798",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--disable-ansi-colors",
+        "--class-path",
+        "/dev/shm/pg40798-pwj_dxzy/product:/dev/shm/pg40798-pwj_dxzy/tests:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "--select-class",
+        "dev.codex.schubert.nk.batch.monitoring.TimedAlertPendingRecoveryTest",
+        "--select-class",
+        "dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest",
+        "--select-class",
+        "dev.codex.schubert.nk.batch.monitoring.AlertRegistryTest",
+        "--select-class",
+        "dev.codex.schubert.nk.batch.monitoring.AlertThresholdsTest",
+        "--select-class",
+        "dev.codex.schubert.nk.batch.monitoring.MonitoringPolicyEngineTest",
+        "--select-class",
+        "dev.codex.schubert.nk.batch.monitoring.TimedDbPoolMonitorTest",
+        "--select-class",
+        "dev.codex.schubert.nk.batch.monitoring.TimedFilesystemMonitorTest",
+        "--select-class",
+        "dev.codex.schubert.nk.batch.monitoring.TimedJvmHeapMonitorTest",
+        "--select-class",
+        "dev.codex.schubert.nk.batch.monitoring.TimedSyncLatencyMonitorTest",
+        "--reports-dir",
+        "/dev/shm/pg40798-pwj_dxzy/reports",
+        "--fail-if-no-tests"
+      ],
+      "exit": 0,
+      "stdoutSha256": "066aef9806b55aa0274fbdcbf899cba0380a07b07589d3ba7116406e0036be45",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "xmlSha256": "2049d6aa12286fad083eb1236bec3882a16f0c3a2dd8004ed7c6bf0508769126"
+    },
+    "coverage": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/dev/shm/pg40798-pwj_dxzy/coverage.exec",
+        "--classfiles",
+        "/dev/shm/pg40798-pwj_dxzy/product",
+        "--xml",
+        "/dev/shm/pg40798-pwj_dxzy/coverage.xml"
+      ],
+      "exit": 0,
+      "stdoutSha256": "7b48d0b12ca3f8a15abd176456f8ab1f00611b8db82707d51b59d41ac653006f",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "xmlSha256": "40181e0f29c7a2340c41925fbcc73e9f6e8a3e8fa2f7a89febee26776c0176f2"
+    }
+  },
+  "cases": [
+    {
+      "testId": "AlertThresholdsTest.threshold012IntegrityNeverWarnsOrAutomaticallyRepairs",
+      "method": "threshold012IntegrityNeverWarnsOrAutomaticallyRepairs",
+      "suite": "AlertThresholdsTest",
+      "status": "passed"
+    },
+    {
+      "testId": "AlertLifecycleTest.alert002DedupEscalationAndNoAutomaticDowngrade",
+      "method": "alert002DedupEscalationAndNoAutomaticDowngrade",
+      "suite": "AlertLifecycleTest",
+      "status": "passed"
+    },
+    {
+      "testId": "TimedSyncLatencyMonitorTest.syncTime005NullInvalidAndBackwardsInputsCannotMutateExistingState",
+      "method": "syncTime005NullInvalidAndBackwardsInputsCannotMutateExistingState",
+      "suite": "TimedSyncLatencyMonitorTest",
+      "status": "passed"
+    },
+    {
+      "testId": "TimedDbPoolMonitorTest.dbTime008BoundariesMaximumCountsAndOwnersStayIndependent",
+      "method": "dbTime008BoundariesMaximumCountsAndOwnersStayIndependent",
+      "suite": "TimedDbPoolMonitorTest",
+      "status": "passed"
+    },
+    {
+      "testId": "AlertThresholdsTest.threshold015AsyncByteRatiosDistinguishAdjacentValuesAtLongCapacity",
+      "method": "threshold015AsyncByteRatiosDistinguishAdjacentValuesAtLongCapacity",
+      "suite": "AlertThresholdsTest",
+      "status": "passed"
+    },
+    {
+      "testId": "PT-TIMED-RECOVERY-002",
+      "method": "timedFilesystemDoesNotRecoverWhileUsageRemainsAtEightyPercent",
+      "suite": "TimedAlertPendingRecoveryTest",
+      "status": "passed"
+    },
+    {
+      "testId": "TimedSyncLatencyMonitorTest.syncTime006ExplicitGapRestartsViolationAndRecoveryWithStickyCritical",
+      "method": "syncTime006ExplicitGapRestartsViolationAndRecoveryWithStickyCritical",
+      "suite": "TimedSyncLatencyMonitorTest",
+      "status": "passed"
+    },
+    {
+      "testId": "PT-TIMED-RECOVERY-005",
+      "method": "policySyncLatencyDoesNotCountPendingWarningAsRecovery",
+      "suite": "TimedAlertPendingRecoveryTest",
+      "status": "passed"
+    },
+    {
+      "testId": "AlertThresholdsTest.threshold004WebLogCountAndOldestAge",
+      "method": "threshold004WebLogCountAndOldestAge",
+      "suite": "AlertThresholdsTest",
+      "status": "passed"
+    },
+    {
+      "testId": "AlertThresholdsTest.threshold008HeapPercentDwellAndOutOfMemory",
+      "method": "threshold008HeapPercentDwellAndOutOfMemory",
+      "suite": "AlertThresholdsTest",
+      "status": "passed"
+    },
+    {
+      "testId": "TimedDbPoolMonitorTest.dbTime003UnknownCutsViolationAndNormalRecoveryWithoutInventingZero",
+      "method": "dbTime003UnknownCutsViolationAndNormalRecoveryWithoutInventingZero",
+      "suite": "TimedDbPoolMonitorTest",
+      "status": "passed"
+    },
+    {
+      "testId": "AlertLifecycleTest.protectedAlert001AllKeysHonorNoAutomaticCloseDespiteConfirmedCause",
+      "method": "protectedAlert001AllKeysHonorNoAutomaticCloseDespiteConfirmedCause",
+      "suite": "AlertLifecycleTest",
+      "status": "passed"
+    },
+    {
+      "testId": "TimedJvmHeapMonitorTest.heapTime005NullInvalidAndBackwardsInputsNeverMutateState",
+      "method": "heapTime005NullInvalidAndBackwardsInputsNeverMutateState",
+      "suite": "TimedJvmHeapMonitorTest",
+      "status": "passed"
+    },
+    {
+      "testId": "TimedDbPoolMonitorTest.dbTime002PendingOrTimeoutIsImmediateAndNeedsCauseAndTenNormalMinutes",
+      "method": "dbTime002PendingOrTimeoutIsImmediateAndNeedsCauseAndTenNormalMinutes",
+      "suite": "TimedDbPoolMonitorTest",
+      "status": "passed"
+    },
+    {
+      "testId": "TimedSyncLatencyMonitorTest.syncTime008FiniteMaximumAndWarningRecoveryDoNotMixSeparateOwners",
+      "method": "syncTime008FiniteMaximumAndWarningRecoveryDoNotMixSeparateOwners",
+      "suite": "TimedSyncLatencyMonitorTest",
+      "status": "passed"
+    },
+    {
+      "testId": "PT-TIMED-RECOVERY-001",
+      "method": "timedSyncLatencyDoesNotRecoverWhileLatencyRemainsAboveTwoSeconds",
+      "suite": "TimedAlertPendingRecoveryTest",
+      "status": "passed"
+    },
+    {
+      "testId": "AlertLifecycleTest.alert003WarningFiveMinuteExactBoundary",
+      "method": "alert003WarningFiveMinuteExactBoundary",
+      "suite": "AlertLifecycleTest",
+      "status": "passed"
+    },
+    {
+      "testId": "MonitoringPolicyEngineTest.monPipe005ModeConsistencyDoesNotChangeAlerts",
+      "method": "monPipe005ModeConsistencyDoesNotChangeAlerts",
+      "suite": "MonitoringPolicyEngineTest",
+      "status": "passed"
+    },
+    {
+      "testId": "PT-TIMED-RECOVERY-004",
+      "method": "timedDbPoolDoesNotRecoverWhileUsageRemainsAtEightyPercent",
+      "suite": "TimedAlertPendingRecoveryTest",
+      "status": "passed"
+    },
+    {
+      "testId": "AlertThresholdsTest.threshold007PoolUtilizationPendingAndTimeout",
+      "method": "threshold007PoolUtilizationPendingAndTimeout",
+      "suite": "AlertThresholdsTest",
+      "status": "passed"
+    },
+    {
+      "testId": "AlertThresholdsTest.threshold010BackupScheduleSuccessAndConsecutiveFailures",
+      "method": "threshold010BackupScheduleSuccessAndConsecutiveFailures",
+      "suite": "AlertThresholdsTest",
+      "status": "passed"
+    },
+    {
+      "testId": "TimedSyncLatencyMonitorTest.syncTime007ConcurrentSameEpochMaintainsExactImmutableEventCounts",
+      "method": "syncTime007ConcurrentSameEpochMaintainsExactImmutableEventCounts",
+      "suite": "TimedSyncLatencyMonitorTest",
+      "status": "passed"
+    },
+    {
+      "testId": "AlertLifecycleTest.alert010AllClosedConditionServiceIdentities",
+      "method": "alert010AllClosedConditionServiceIdentities",
+      "suite": "AlertLifecycleTest",
+      "status": "passed"
+    },
+    {
+      "testId": "AlertThresholdsTest.threshold001FilesystemPercentAndDwellBoundaries",
+      "method": "threshold001FilesystemPercentAndDwellBoundaries",
+      "suite": "AlertThresholdsTest",
+      "status": "passed"
+    },
+    {
+      "testId": "TimedDbPoolMonitorTest.dbTime007ConcurrentSameEpochKeepsImmutableExactEventCount",
+      "method": "dbTime007ConcurrentSameEpochKeepsImmutableExactEventCount",
+      "suite": "TimedDbPoolMonitorTest",
+      "status": "passed"
+    },
+    {
+      "testId": "AlertThresholdsTest.threshold005DlqNonemptyInvestigationAndGrowth",
+      "method": "threshold005DlqNonemptyInvestigationAndGrowth",
+      "suite": "AlertThresholdsTest",
+      "status": "passed"
+    },
+    {
+      "testId": "TimedFilesystemMonitorTest.timedFs006ConcurrentOwnerAndLocalStatusLiteral",
+      "method": "timedFs006ConcurrentOwnerAndLocalStatusLiteral",
+      "suite": "TimedFilesystemMonitorTest",
+      "status": "passed"
+    },
+    {
+      "testId": "PT-TIMED-RECOVERY-006",
+      "method": "policyFilesystemDoesNotCountPendingWarningAsRecovery",
+      "suite": "TimedAlertPendingRecoveryTest",
+      "status": "passed"
+    },
+    {
+      "testId": "TimedDbPoolMonitorTest.dbTime005InvalidNullAndBackwardsInputsCannotMutateState",
+      "method": "dbTime005InvalidNullAndBackwardsInputsCannotMutateState",
+      "suite": "TimedDbPoolMonitorTest",
+      "status": "passed"
+    },
+    {
+      "testId": "AlertLifecycleTest.alert005AnyViolationRestartsContinuousNormalPeriod",
+      "method": "alert005AnyViolationRestartsContinuousNormalPeriod",
+      "suite": "AlertLifecycleTest",
+      "status": "passed"
+    },
+    {
+      "testId": "MonitoringPolicyEngineTest.monPipe007AllSeventyTwoFixedKeysAndImmutableProjection",
+      "method": "monPipe007AllSeventyTwoFixedKeysAndImmutableProjection",
+      "suite": "MonitoringPolicyEngineTest",
+      "status": "passed"
+    },
+    {
+      "testId": "TimedJvmHeapMonitorTest.heapTime007ConcurrentSameEpochKeepsOneEventAndImmutableSnapshot",
+      "method": "heapTime007ConcurrentSameEpochKeepsOneEventAndImmutableSnapshot",
+      "suite": "TimedJvmHeapMonitorTest",
+      "status": "passed"
+    },
+    {
+      "testId": "AlertLifecycleTest.alert006ClosedEventRetiredAndNewViolationStartsFresh",
+      "method": "alert006ClosedEventRetiredAndNewViolationStartsFresh",
+      "suite": "AlertLifecycleTest",
+      "status": "passed"
+    },
+    {
+      "testId": "TimedSyncLatencyMonitorTest.syncTime001StrictTwoSecondWarningNeedsFiveMinutes",
+      "method": "syncTime001StrictTwoSecondWarningNeedsFiveMinutes",
+      "suite": "TimedSyncLatencyMonitorTest",
+      "status": "passed"
+    },
+    {
+      "testId": "TimedSyncLatencyMonitorTest.syncTime003UnknownCutsBothViolationWindowsRatherThanBecomingZero",
+      "method": "syncTime003UnknownCutsBothViolationWindowsRatherThanBecomingZero",
+      "suite": "TimedSyncLatencyMonitorTest",
+      "status": "passed"
+    },
+    {
+      "testId": "AlertRegistryTest.alertReg001PerKeyDedupIndependentIdentityAndImmutableOrder",
+      "method": "alertReg001PerKeyDedupIndependentIdentityAndImmutableOrder",
+      "suite": "AlertRegistryTest",
+      "status": "passed"
+    },
+    {
+      "testId": "AlertThresholdsTest.threshold011RestartWindowBoundaries",
+      "method": "threshold011RestartWindowBoundaries",
+      "suite": "AlertThresholdsTest",
+      "status": "passed"
+    },
+    {
+      "testId": "TimedDbPoolMonitorTest.dbTime004KnownCountsAreIndependentOfUnknownPercent",
+      "method": "dbTime004KnownCountsAreIndependentOfUnknownPercent",
+      "suite": "TimedDbPoolMonitorTest",
+      "status": "passed"
+    },
+    {
+      "testId": "MonitoringPolicyEngineTest.restartFlag001RateLimitIsIndependentOfCountAndInvalidCountCannotMutateState",
+      "method": "restartFlag001RateLimitIsIndependentOfCountAndInvalidCountCannotMutateState",
+      "suite": "MonitoringPolicyEngineTest",
+      "status": "passed"
+    },
+    {
+      "testId": "AlertLifecycleTest.alert004CriticalNeedsTenMinutesAndCauseConfirmation",
+      "method": "alert004CriticalNeedsTenMinutesAndCauseConfirmation",
+      "suite": "AlertLifecycleTest",
+      "status": "passed"
+    },
+    {
+      "testId": "TimedFilesystemMonitorTest.timedFs001WarningBoundaryAndFiveMinuteRecovery",
+      "method": "timedFs001WarningBoundaryAndFiveMinuteRecovery",
+      "suite": "TimedFilesystemMonitorTest",
+      "status": "passed"
+    },
+    {
+      "testId": "TimedJvmHeapMonitorTest.heapTime004ReportedOomIsIndependentOfMissingUsageAndNeverInventsZero",
+      "method": "heapTime004ReportedOomIsIndependentOfMissingUsageAndNeverInventsZero",
+      "suite": "TimedJvmHeapMonitorTest",
+      "status": "passed"
+    },
+    {
+      "testId": "AlertLifecycleTest.alert008WallClockJumpDoesNotShortenRecoveryOrOverflow",
+      "method": "alert008WallClockJumpDoesNotShortenRecoveryOrOverflow",
+      "suite": "AlertLifecycleTest",
+      "status": "passed"
+    },
+    {
+      "testId": "TimedDbPoolMonitorTest.dbTime006ExplicitGapRestartsWindowAndCriticalRemainsSticky",
+      "method": "dbTime006ExplicitGapRestartsWindowAndCriticalRemainsSticky",
+      "suite": "TimedDbPoolMonitorTest",
+      "status": "passed"
+    },
+    {
+      "testId": "AlertThresholdsTest.threshold009StrictP95AndFiveMinuteDwell",
+      "method": "threshold009StrictP95AndFiveMinuteDwell",
+      "suite": "AlertThresholdsTest",
+      "status": "passed"
+    },
+    {
+      "testId": "TimedJvmHeapMonitorTest.heapTime001WarningNeedsTenMinutesAndFiveNormalMinutesToClose",
+      "method": "heapTime001WarningNeedsTenMinutesAndFiveNormalMinutesToClose",
+      "suite": "TimedJvmHeapMonitorTest",
+      "status": "passed"
+    },
+    {
+      "testId": "PT-TIMED-RECOVERY-008",
+      "method": "policyDbPoolDoesNotCountPendingWarningAsRecovery",
+      "suite": "TimedAlertPendingRecoveryTest",
+      "status": "passed"
+    },
+    {
+      "testId": "PT-TIMED-RECOVERY-003",
+      "method": "timedHeapDoesNotRecoverWhileUsageRemainsAtSeventyFivePercent",
+      "suite": "TimedAlertPendingRecoveryTest",
+      "status": "passed"
+    },
+    {
+      "testId": "AlertThresholdsTest.threshold003AsyncCountRatioAndNoOverflow",
+      "method": "threshold003AsyncCountRatioAndNoOverflow",
+      "suite": "AlertThresholdsTest",
+      "status": "passed"
+    },
+    {
+      "testId": "MonitoringPolicyEngineTest.monPipe004RejectedInputsDoNotPartiallyUpdateState",
+      "method": "monPipe004RejectedInputsDoNotPartiallyUpdateState",
+      "suite": "MonitoringPolicyEngineTest",
+      "status": "passed"
+    },
+    {
+      "testId": "TimedFilesystemMonitorTest.timedFs005InvalidInputsCannotChangeOwnerState",
+      "method": "timedFs005InvalidInputsCannotChangeOwnerState",
+      "suite": "TimedFilesystemMonitorTest",
+      "status": "passed"
+    },
+    {
+      "testId": "MonitoringPolicyEngineTest.monPipe006ConcurrentSingleEntryKeepsOneOwner",
+      "method": "monPipe006ConcurrentSingleEntryKeepsOneOwner",
+      "suite": "MonitoringPolicyEngineTest",
+      "status": "passed"
+    },
+    {
+      "testId": "TimedSyncLatencyMonitorTest.syncTime002StrictTwoPointFiveNeedsFiveMinutesBeforeCriticalPromotion",
+      "method": "syncTime002StrictTwoPointFiveNeedsFiveMinutesBeforeCriticalPromotion",
+      "suite": "TimedSyncLatencyMonitorTest",
+      "status": "passed"
+    },
+    {
+      "testId": "MonitoringPolicyEngineTest.monPipe001ObservationContextInvariantsAndImmutableValues",
+      "method": "monPipe001ObservationContextInvariantsAndImmutableValues",
+      "suite": "MonitoringPolicyEngineTest",
+      "status": "passed"
+    },
+    {
+      "testId": "TimedDbPoolMonitorTest.dbTime001EightyNeedsFiveMinutesAndWarningNeedsFiveNormalMinutes",
+      "method": "dbTime001EightyNeedsFiveMinutesAndWarningNeedsFiveNormalMinutes",
+      "suite": "TimedDbPoolMonitorTest",
+      "status": "passed"
+    },
+    {
+      "testId": "AlertThresholdsTest.threshold013InvalidInputsNeverBecomeNormal",
+      "method": "threshold013InvalidInputsNeverBecomeNormal",
+      "suite": "AlertThresholdsTest",
+      "status": "passed"
+    },
+    {
+      "testId": "TimedJvmHeapMonitorTest.heapTime008CriticalIsStickyAcrossWarningAndReportedOomResetsRecovery",
+      "method": "heapTime008CriticalIsStickyAcrossWarningAndReportedOomResetsRecovery",
+      "suite": "TimedJvmHeapMonitorTest",
+      "status": "passed"
+    },
+    {
+      "testId": "AlertThresholdsTest.threshold014ConcurrentStatelessEvaluations",
+      "method": "threshold014ConcurrentStatelessEvaluations",
+      "suite": "AlertThresholdsTest",
+      "status": "passed"
+    },
+    {
+      "testId": "MonitoringPolicyEngineTest.monPipe002EveryNormalAndWarningEndpointIdentity",
+      "method": "monPipe002EveryNormalAndWarningEndpointIdentity",
+      "suite": "MonitoringPolicyEngineTest",
+      "status": "passed"
+    },
+    {
+      "testId": "PT-TIMED-RECOVERY-007",
+      "method": "policyHeapDoesNotCountPendingWarningAsRecovery",
+      "suite": "TimedAlertPendingRecoveryTest",
+      "status": "passed"
+    },
+    {
+      "testId": "TimedJvmHeapMonitorTest.heapTime003UnknownBreaksBothViolationAndRecoveryWithoutInventingNormal",
+      "method": "heapTime003UnknownBreaksBothViolationAndRecoveryWithoutInventingNormal",
+      "suite": "TimedJvmHeapMonitorTest",
+      "status": "passed"
+    },
+    {
+      "testId": "AlertRegistryTest.alertReg002ExactlySeventyTwoKeysAndAllRecovery",
+      "method": "alertReg002ExactlySeventyTwoKeysAndAllRecovery",
+      "suite": "AlertRegistryTest",
+      "status": "passed"
+    },
+    {
+      "testId": "AlertLifecycleTest.alert007NullAndInvalidElapsedLeaveStateUnchanged",
+      "method": "alert007NullAndInvalidElapsedLeaveStateUnchanged",
+      "suite": "AlertLifecycleTest",
+      "status": "passed"
+    },
+    {
+      "testId": "TimedFilesystemMonitorTest.timedFs003MissingBreaksViolationWithoutClearingOpenEvent",
+      "method": "timedFs003MissingBreaksViolationWithoutClearingOpenEvent",
+      "suite": "TimedFilesystemMonitorTest",
+      "status": "passed"
+    },
+    {
+      "testId": "AlertThresholdsTest.threshold002TransferBytesFilesAndOrBoundaries",
+      "method": "threshold002TransferBytesFilesAndOrBoundaries",
+      "suite": "AlertThresholdsTest",
+      "status": "passed"
+    },
+    {
+      "testId": "TimedSyncLatencyMonitorTest.syncTime004UnknownCutsCriticalRecoveryAndCauseMustBeConfirmed",
+      "method": "syncTime004UnknownCutsCriticalRecoveryAndCauseMustBeConfirmed",
+      "suite": "TimedSyncLatencyMonitorTest",
+      "status": "passed"
+    },
+    {
+      "testId": "AlertLifecycleTest.alert009ConcurrentSameTickCountsAndPrivateMonitor",
+      "method": "alert009ConcurrentSameTickCountsAndPrivateMonitor",
+      "suite": "AlertLifecycleTest",
+      "status": "passed"
+    },
+    {
+      "testId": "AlertRegistryTest.alertReg003MissingInputsDoNotChangeExistingKey",
+      "method": "alertReg003MissingInputsDoNotChangeExistingKey",
+      "suite": "AlertRegistryTest",
+      "status": "passed"
+    },
+    {
+      "testId": "MonitoringPolicyEngineTest.monPipe003EveryCriticalEndpointAndCauseAwareRecovery",
+      "method": "monPipe003EveryCriticalEndpointAndCauseAwareRecovery",
+      "suite": "MonitoringPolicyEngineTest",
+      "status": "passed"
+    },
+    {
+      "testId": "TimedFilesystemMonitorTest.timedFs004MissingAndExplicitGapBreakNormalRecovery",
+      "method": "timedFs004MissingAndExplicitGapBreakNormalRecovery",
+      "suite": "TimedFilesystemMonitorTest",
+      "status": "passed"
+    },
+    {
+      "testId": "TimedJvmHeapMonitorTest.heapTime006ExplicitGapRestartsViolationAndNormalRecovery",
+      "method": "heapTime006ExplicitGapRestartsViolationAndNormalRecovery",
+      "suite": "TimedJvmHeapMonitorTest",
+      "status": "passed"
+    },
+    {
+      "testId": "AlertLifecycleTest.alert001InitialNormalAndFirstWarningIdentity",
+      "method": "alert001InitialNormalAndFirstWarningIdentity",
+      "suite": "AlertLifecycleTest",
+      "status": "passed"
+    },
+    {
+      "testId": "MonitoringPolicyEngineTest.asyncByte001EngineUsesStorageBytesIndependentOfMessageCount",
+      "method": "asyncByte001EngineUsesStorageBytesIndependentOfMessageCount",
+      "suite": "MonitoringPolicyEngineTest",
+      "status": "passed"
+    },
+    {
+      "testId": "AlertLifecycleTest.protectedAlert002ConcurrentNormalSamplesCannotRetireOrChangeProtectedEvent",
+      "method": "protectedAlert002ConcurrentNormalSamplesCannotRetireOrChangeProtectedEvent",
+      "suite": "AlertLifecycleTest",
+      "status": "passed"
+    },
+    {
+      "testId": "AlertThresholdsTest.threshold006ExpiryCountBoundaries",
+      "method": "threshold006ExpiryCountBoundaries",
+      "suite": "AlertThresholdsTest",
+      "status": "passed"
+    },
+    {
+      "testId": "TimedFilesystemMonitorTest.timedFs002CriticalBoundaryAndExplicitCause",
+      "method": "timedFs002CriticalBoundaryAndExplicitCause",
+      "suite": "TimedFilesystemMonitorTest",
+      "status": "passed"
+    },
+    {
+      "testId": "TimedJvmHeapMonitorTest.heapTime002NinetyIsImmediateAndCriticalNeedsCauseAndTenMinutes",
+      "method": "heapTime002NinetyIsImmediateAndCriticalNeedsCauseAndTenMinutes",
+      "suite": "TimedJvmHeapMonitorTest",
+      "status": "passed"
+    },
+    {
+      "testId": "AlertRegistryTest.alertReg004ConcurrentCallersShareOneKeyOwner",
+      "method": "alertReg004ConcurrentCallersShareOneKeyOwner",
+      "suite": "AlertRegistryTest",
+      "status": "passed"
+    }
+  ],
+  "selectedJaCoCoDefaultCoverage": {
+    "INSTRUCTION": {
+      "covered": 2427,
+      "missed": 95
+    },
+    "BRANCH": {
+      "covered": 266,
+      "missed": 17
+    },
+    "LINE": {
+      "covered": 456,
+      "missed": 17
+    },
+    "COMPLEXITY": {
+      "covered": 226,
+      "missed": 19
+    },
+    "METHOD": {
+      "covered": 96,
+      "missed": 7
+    },
+    "CLASS": {
+      "covered": 23,
+      "missed": 1
+    }
+  },
+  "productionFullCoverage": null,
+  "externalOperations": 0,
+  "formalDelta": 0,
+  "whole451": false
+}

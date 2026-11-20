@@ -1,0 +1,172 @@
+{
+  "eventId": "PGPT-20261008-6699",
+  "groupId": "PGPT-WBS66-P01809-TIMED-ALERT-PENDING-RECOVERY-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T11:16:41.623000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 67,
+      "remainingPercent": 33,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P01809-TIMED-ALERT-PENDING-RECOVERY-20261120",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "PGPT-WBS66-P01809-TIMED-ALERT-PENDING-RECOVERY-20261120",
+    "workAttributionKind": "ADDITIONAL_FINDING",
+    "wbsLeafIds": [
+      "WBS-P018-09"
+    ],
+    "managementWorkIds": [
+      "WBS-P018-09/2",
+      "WBS-C07"
+    ],
+    "source": "2e71ff986cc58f98baa96f56e09bac56d06c0273",
+    "productionCoreMain": "da20ad7753279ae4e8017593866502d3341ec0e5",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40798-timed-alert-pending-recovery-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.45,
+      "base": 1.1,
+      "high": 2.2
+    },
+    "groupCapPp": 3,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1180_C07復旧単体と局所coverage継続点.json",
+        "sha256": "485efc507cc8b6a539e6349f262541dda9b5a6fcae2efabfe92e154914f9d0ef"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/1607_SyncP95時系列警報_単体テスト仕様書.md",
+        "sha256": "ca92a818f02d03bb56643926b411d50bc3dd14b343454b2d53ab82769eaea3a4"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40796-async-byte-recovery-composition-v1/manifest.json",
+        "sha256": "6bbcccde806917b331a1966c1aabc4b2fef98a492551921e220d57ac1b1025cf"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "SS351の発火待機と正常復旧は別観測。同期p95、FS、JVM heap、DB pool四型が未発火の連続超過をlifecycle.NORMALに渡すsource差。",
+    "endCondition": "先行BUG-3415/YKT-2738、同一fixtureの修正前不一致と修正後合格、小閉包の旧動作・局所JaCoCo、横展開の対象外根拠を保存する。",
+    "workScope": "純粋な四monitorと固定時刻の既通常fixture。実観測/JMX/SKD/DB/broker/Unit/保留class・JARなし。",
+    "baselineProductSource": "517a23cddc9f3883550942f6fa90a4256ef39b73",
+    "quotaAfter": {
+      "usedPercent": 67,
+      "remainingPercent": 33,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "b687aa38220253c804a783e484890fd9b14313706b426deccead1b02ae815a69",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T11:16:41.623000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 67,
+          "remainingPercent": 33,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T11:14:45.359040+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 67,
+      "remainingPercent": 33,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6698",
+    "attempt": 1,
+    "attemptResult": "同期p95等8入口の修正前不一致8→修正後78成功。初回コンパイル準備不足は保全。",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 70,
+    "newProductTests": 8,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40798-timed-alert-pending-recovery-before-v1/manifest.json",
+        "sha256": "a650a3ecf3dc938bea257b653bbe3c610567d2cd075d8bc78ac8ebcd88e51d36"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40798-timed-alert-pending-recovery-v1/manifest.json",
+        "sha256": "b587b3fe05c9e49c18e399c1cf1185acd9f5b700f1ea9e28fcd5f4406b955b72"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40798-timed-alert-pending-recovery-v2/manifest.json",
+        "sha256": "75a60a041819ef5129da4fd6f8d527ac354d4e1ce3acf32062b3fcd88cd5f8af"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/4741_警報発火待機と正常復旧の分離単体仕様.md",
+        "sha256": "d8c562f27a22531d6df0c31dadc621df93eb1e7c0a23e0e1afda89169c9cc3af"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "当candidateのNullAway/SpotBugs・raw全coverage/451",
+      "C07の実観測・sink・保持",
+      "F02/F03全体と実環境の証票"
+    ],
+    "toolPreparationFailures": 1,
+    "selectedCasesPassed": 78,
+    "existingChangedSourceRequalified": 70,
+    "checkpointPreparationFailures": 1,
+    "candidateSource": "da20ad7753279ae4e8017593866502d3341ec0e5",
+    "bug": "BUG-3415",
+    "lateral": "YKT-2738",
+    "firstProductExecutionPassesAtCandidate": 78,
+    "localDefaultCoverage": {
+      "INSTRUCTION": {
+        "covered": 2427,
+        "missed": 95
+      },
+      "BRANCH": {
+        "covered": 266,
+        "missed": 17
+      },
+      "LINE": {
+        "covered": 456,
+        "missed": 17
+      },
+      "COMPLEXITY": {
+        "covered": 226,
+        "missed": 19
+      },
+      "METHOD": {
+        "covered": 96,
+        "missed": 7
+      },
+      "CLASS": {
+        "covered": 23,
+        "missed": 1
+      }
+    }
+  }
+}

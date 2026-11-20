@@ -63,7 +63,8 @@ def main():
     source = git("rev-parse", args.source).decode().strip()
     is_after = args.phase == "after"
     suites = (NEW_SUITE, *PRIOR_SUITES) if is_after else (NEW_SUITE,)
-    main_paths = [PRODUCTION / f"{name}.java" for name in MAIN_NAMES]
+    production_names = (*MAIN_NAMES, "MonitoringStatusText") if is_after else MAIN_NAMES
+    main_paths = [PRODUCTION / f"{name}.java" for name in production_names]
     fixture = [TEST / f"{name}.java" for name in suites]
     for path in main_paths + (fixture if is_after else []):
         assert path.read_bytes() == git("show", f"{source}:{path}"), path
@@ -101,7 +102,7 @@ def main():
         check_xml = tmp / "checkstyle.xml"
         runtime_data = tmp / "coverage.exec"
         coverage_xml = tmp / "coverage.xml"
-        assert len(main_paths) == 12
+        assert len(main_paths) == (13 if is_after else 12)
         style_paths = [*main_paths, fixture[0]] if is_after else fixture
         if (run("formatter", java, "-jar", formatter, "--skip-reflowing-long-strings",
                 "--dry-run", "--set-exit-if-changed", *style_paths) == 0
