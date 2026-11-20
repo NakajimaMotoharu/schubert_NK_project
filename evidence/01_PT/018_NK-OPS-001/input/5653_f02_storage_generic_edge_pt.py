@@ -1,9 +1,11 @@
 """Execute the generic Storage graph contract against the admitted packaged classes."""
 
 from datetime import datetime, timezone
+import os
 from pathlib import Path
 import runpy
 import subprocess
+import sys
 from tempfile import TemporaryDirectory
 from xml.etree import ElementTree as XML
 from zipfile import ZipFile
@@ -24,7 +26,7 @@ def git(*args):
     return subprocess.check_output(["git", *args], cwd=ROOT, timeout=16)
 
 
-def main():
+def main(recover=False):
     ctx = read(next(PLAN.glob("1694_*.json")))["values"]
     refs = [checked(row) for row in ctx["oracleReferences"]]
     tested = git("rev-parse", "HEAD").decode().strip()
@@ -41,9 +43,14 @@ def main():
         paths[0].as_posix()
     }
     out = OPS / ctx["run"]
-    out.mkdir()
     private = ROOT.parent / "pgpt-runs/PG379" / ctx["run"]
-    private.mkdir(mode=0o700)
+    if not recover:
+        out.mkdir()
+        private.mkdir(mode=0o700)
+    else:
+        diagnostics = out / "unfiltered.stderr"
+        assert "FileNotFoundException: --strict-original-exec" in diagnostics.read_text()
+        assert not (out / "manifest.json").exists()
     with TemporaryDirectory(dir="/dev/shm", prefix="pgpt-storage-edge-") as tmp:
         root = Path(tmp)
         src, classes, tests = root / "source", root / "classes", root / "tests"
@@ -60,20 +67,29 @@ def main():
                 obj.write_bytes(jar.read(name))
         bodies = {name: pin(classes / name)["sha256"] for name in PHYSICAL}
         strict = [JAVA.with_name("javac"), "--release", "25", "-Xlint:all", "-Werror", "-proc:none"]
-        stages = {"compile": run([*strict, "-cp", f"{classes}:{JUNIT}:{NULLABILITY}", "-d", tests, *inputs],
-                                 root, out, "compile")}
-        assert stages["compile"]["actualExit"] == 0
         reports = private / "xml"
         original = private / "unit.exec"
         session = "PG41294-F02-STORAGE-EXTRA-EDGE"
-        stages["unit"] = run([JAVA, f"-javaagent:{AGENT}=destfile={original},sessionid={session},"
-                                   f"append=false,includes={PKG}.StorageIoException*",
-                              "-jar", JUNIT, "execute", "--disable-banner", "--disable-ansi-colors",
-                              "--fail-if-no-tests", "--class-path", f"{classes}:{tests}",
-                              "--reports-dir", reports,
-                              *[item for name in NAMES for item in ("--select-class", PKG + "." + name)]],
-                             root, out, "unit")
-        assert stages["unit"]["actualExit"] == 0
+        if recover:
+            # The original wrapper reached the coverage analyzer only after both zero-exit checks.
+            stages = {name: dict(actualExit=0, evidenceBasis="original runner passed its exit assertion",
+                                 stdout=pin(out / (name + ".stdout")),
+                                 stderr=pin(out / (name + ".stderr")))
+                      for name in ("compile", "unit")}
+        else:
+            stages = {"compile": run([*strict, "-cp", f"{classes}:{JUNIT}:{NULLABILITY}", "-d", tests, *inputs],
+                                     root, out, "compile")}
+            write(private / "compile-terminal.json", stages["compile"])
+            assert stages["compile"]["actualExit"] == 0
+            stages["unit"] = run([JAVA, f"-javaagent:{AGENT}=destfile={original},sessionid={session},"
+                                       f"append=false,includes={PKG}.StorageIoException*",
+                                  "-jar", JUNIT, "execute", "--disable-banner", "--disable-ansi-colors",
+                                  "--fail-if-no-tests", "--class-path", f"{classes}:{tests}",
+                                  "--reports-dir", reports,
+                                  *[item for name in NAMES for item in ("--select-class", PKG + "." + name)]],
+                                 root, out, "unit")
+            write(private / "unit-terminal.json", stages["unit"])
+            assert stages["unit"]["actualExit"] == 0
         raw_xml = reports / "TEST-junit-jupiter.xml"
         junit = XML.parse(raw_xml).getroot()
         assert {k: int(junit.attrib[k]) for k in ("tests", "failures", "errors", "skipped")} == {
@@ -81,10 +97,19 @@ def main():
         actual = {(item.attrib["classname"], item.attrib["name"]) for item in junit.iter("testcase")}
         expected = {(item["className"], item["name"]) for item in origin["executedExactCases"]}
         assert actual == expected | {(PKG + ".StorageFailureGraphTest", name) for name in NEW}
-        cp = H["bin_report"](next(OPS.glob("PG40602-*/manifest.json")))
-        stages["coverage"] = run([JAVA, "-cp", cp, "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+        repo = H["REPO"]
+        libraries = [repo / "org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar"]
+        libraries += [repo / f"org/ow2/asm/{name}/9.10.1/{name}-9.10.1.jar"
+                      for name in ("asm", "asm-commons", "asm-tree")]
+        cp = os.pathsep.join(map(str, libraries))
+        analyzer = ROOT / "tools/quality/jacoco/UnfilteredCodeMeasurement.java"
+        compiled = root / "analyzer"
+        stages["analyzer"] = run([JAVA.with_name("javac"), "--release", "25", "-proc:none",
+                                  "-cp", cp, "-d", compiled, analyzer], root, out, "analyzer")
+        assert stages["analyzer"]["actualExit"] == 0
+        stages["coverage"] = run([JAVA, "-cp", f"{compiled}{os.pathsep}{cp}", "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
                                   "--strict-original-exec", original, *[classes / name for name in PHYSICAL]],
-                                 root, out, "unfiltered")
+                                 root, out, "strict")
         assert stages["coverage"]["actualExit"] == 0
         report = Path(stages["coverage"]["stdout"]["path"]).read_text().splitlines()
         rows = {p[1] + ".class": p[2:] for p in (line.split("\t") for line in report) if p[0] == "CLASS"}
@@ -106,10 +131,13 @@ def main():
         cases=[dict(className=c, method=m) for c, m in sorted(actual)], exactPackagedMain=pin(artifact),
         actualMainClassSha256=bodies, crc=observed, raw=coverage, originalExec=pin(original),
         originalXml=pin(raw_xml), session=session, testInputs=list(map(pin, paths)), prior=pin(refs[2]),
-        stages=stages, liveDbOrFileOperations=0, oldExecMerged=False, whole451=False,
+        stages=stages, analyzerSource=pin(analyzer), recoveredOriginal=recover,
+        analyzerInitialError=pin(out / "unfiltered.stderr") if recover else None,
+        liveDbOrFileOperations=0, oldExecMerged=False, whole451=False,
         formalDelta=0, terminalAtUTC=datetime.now(timezone.utc).isoformat()))
     print(pin(out / "manifest.json"), coverage)
 
 
 if __name__ == "__main__":
-    main()
+    assert sys.argv[1:] in ([], ["--recover-post"])
+    main(sys.argv[1:] == ["--recover-post"])
