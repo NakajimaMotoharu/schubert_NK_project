@@ -1,0 +1,493 @@
+{
+  "actualExit": 0,
+  "core": "cdb649a5f054bc2ceed72ef57e55605f14a590d1",
+  "snapshot": "c5911c7e3cc8c49164d14b63496e763184ffcb67",
+  "startEvent": "PGPT-20261008-6773",
+  "approvedRules": {
+    "path": "../PMO/hourly-monitor/更新判断-20261207/更新判定基準.json",
+    "sha256": "e1a0d6309be727f0bb30fdb7c878dee2b8b2e514f3e019b0a694dc22ea645515"
+  },
+  "originalCriteria": {
+    "path": "../PMO/hourly-monitor/wbs66-20261116/58_直近20pp不足時の対象と予算判断を実行用の検収表へ渡す/922条件の受入照合.tsv",
+    "sha256": "531f525df5bb8003c69b66296d13e5ad159990384c3e399d1ae5a3b56946c15f"
+  },
+  "originalParents": {
+    "path": "../PMO/hourly-monitor/wbs66-20261116/58_直近20pp不足時の対象と予算判断を実行用の検収表へ渡す/190元項目から条件と終端判断を引く.tsv",
+    "sha256": "05b9d1590a24b67ceb20b2b4f62123fc9b735f73e63db0054aa32bba51b463b3"
+  },
+  "previousProof": {
+    "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/996_短期12現証拠と次の受入条件.md",
+    "sha256": "3841ce554dd872415462145f13bd0633b397c6cf894ef446c29aa2ff225f5478"
+  },
+  "rows": [
+    {
+      "id": "F02",
+      "original": "WBS-F02",
+      "countsTowardUniqueGoal": true,
+      "requiredCriteria": [
+        "WBS-F02/reuse",
+        "WBS-F02/criterion/contract",
+        "WBS-F02/criterion/scope",
+        "WBS-F02/criterion/quality"
+      ],
+      "originalParent": {
+        "元項目": "WBS-F02",
+        "開始状態": "NOT_ACCEPTED",
+        "終了判断ID": "閉/WBS-F02",
+        "全子が判定可能になる窓": "2",
+        "固有条件数": "4",
+        "固有条件の出典ID": "WBS-F02/reuse、WBS-F02/criterion/contract、WBS-F02/criterion/scope、WBS-F02/criterion/quality",
+        "共通主担当を参照する根拠": "",
+        "求める成果": "JDK/Maven/toolchain・6module build・依存境界",
+        "終了後の扱い": "署名と当候補の必要証拠の成立で受入。欠落・保留は判断理由を記録"
+      },
+      "provisionalEvidence": "現Batch新組立、三ライブラリは入力同一参照、六宣言",
+      "remainingFirstEvidence": "API／Web実buildと許可範囲内の型付き全六（QA-056）、SSC-461旧Storage JDBC一辺、実runtime。",
+      "proofFiles": {
+        "40840": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40840-f02-inspection-corrected-batch-package-v1/manifest.json",
+          "sha256": "04b2c3c8fe15caa5f2558fc306660d5f111f71f187d5d2b6791eadbdc53cbaba"
+        },
+        "40844": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40844-f02-inspection-repository-exact-abi-v1/manifest.json",
+          "sha256": "bce2ad96c1a5b095503075c9fd41794a81318cc9620b2998ce25c07a2c6cf138"
+        },
+        "40820": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40820-f02-declared-four-package-boundary-v2/manifest.json",
+          "sha256": "8c95de963ba76c436cc451119eef1d4fe0b439c353961bf1cf7f1e811fd89b37"
+        }
+      },
+      "status": "NOT_ACCEPTED",
+      "commonReleaseAnd451StillRequired": true
+    },
+    {
+      "id": "F03",
+      "original": "WBS-F03",
+      "countsTowardUniqueGoal": true,
+      "requiredCriteria": [
+        "WBS-F03/reuse",
+        "WBS-F03/criterion/contract",
+        "WBS-F03/criterion/scope",
+        "WBS-F03/criterion/quality"
+      ],
+      "originalParent": {
+        "元項目": "WBS-F03",
+        "開始状態": "NOT_ACCEPTED",
+        "終了判断ID": "閉/WBS-F03",
+        "全子が判定可能になる窓": "2",
+        "固有条件数": "4",
+        "固有条件の出典ID": "WBS-F03/reuse、WBS-F03/criterion/contract、WBS-F03/criterion/scope、WBS-F03/criterion/quality",
+        "共通主担当を参照する根拠": "",
+        "求める成果": "NullAway/format/Werror/静的解析gateの稼働",
+        "終了後の扱い": "署名と当候補の必要証拠の成立で受入。欠落・保留は判断理由を記録"
+      },
+      "provisionalEvidence": "Main 1027・Test 1119/1151、局所型付きと既三の適用、snapshot raw差",
+      "remainingFirstEvidence": "保留32 Test、API/Web・Batch保留、Root11と当候補の全六、raw生成部のレビューと451。",
+      "proofFiles": {
+        "40818": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40818-f03-g08-current-lineage-v1/manifest.json",
+          "sha256": "385e1c31e5095fc64325afede924ea9a30260e4af57176c81a14ced940aa934d"
+        },
+        "40830": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40830-f03-alert-snapshot-unfiltered-location-v1/manifest.json",
+          "sha256": "3b6711c32c91ab7536d143707302d3bc6b484aeaa911e5e51854ac08f8f8ca69"
+        },
+        "40838": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40838-f03-inspection-summary-typed-v1/manifest.json",
+          "sha256": "90afa7c14c66be40bf8c55d2193d56955a1e3f19b1f934ee8819649e1a484ed6"
+        },
+        "40848": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40848-f03-unchanged-three-receipt-applicability-v1/manifest.json",
+          "sha256": "818fa17f4e592828f8bf3edc15dae6053555a24d89c17498edc50f112d5ffd09"
+        }
+      },
+      "status": "NOT_ACCEPTED",
+      "commonReleaseAnd451StillRequired": true
+    },
+    {
+      "id": "P004-03",
+      "original": "WBS-P004-03",
+      "countsTowardUniqueGoal": true,
+      "requiredCriteria": [
+        "WBS-P004-03/reuse",
+        "WBS-P004-03/criterion/contract",
+        "WBS-P004-03/criterion/scope",
+        "WBS-P004-03/criterion/quality"
+      ],
+      "originalParent": {
+        "元項目": "WBS-P004-03",
+        "開始状態": "NOT_ACCEPTED",
+        "終了判断ID": "閉/WBS-P004-03",
+        "全子が判定可能になる窓": "2",
+        "固有条件数": "4",
+        "固有条件の出典ID": "WBS-P004-03/reuse、WBS-P004-03/criterion/contract、WBS-P004-03/criterion/scope、WBS-P004-03/criterion/quality",
+        "共通主担当を参照する根拠": "",
+        "求める成果": "参照原本DAO・保持・退役",
+        "終了後の扱い": "署名と当候補の必要証拠の成立で受入。欠落・保留は判断理由を記録"
+      },
+      "provisionalEvidence": "局所3/5、旧借用DAO証拠",
+      "remainingFirstEvidence": "DurableRecordFiles／MaintenanceRunFilesの承認済み実所有と終端・原本保全、実DAOの認証とDB後条件。",
+      "proofFiles": {
+        "40582": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40582-p00403-current-three-allowed-owner-artifacts-v1/manifest.json",
+          "sha256": "fb7b307ed88bab7e237ba81a5bdb72392306d977f0f4a7007d56b063d6a73179"
+        },
+        "40270": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40270-p00403-run-reference-physical-lineage-v1/manifest.json",
+          "sha256": "f54169aae04cfd7af607bfc1f11da82fdd5133477e8e0032d71b8466e37f4125"
+        }
+      },
+      "status": "NOT_ACCEPTED",
+      "commonReleaseAnd451StillRequired": true
+    },
+    {
+      "id": "P004-05",
+      "original": "WBS-P004-05",
+      "countsTowardUniqueGoal": true,
+      "requiredCriteria": [
+        "WBS-P004-05/reuse",
+        "WBS-P004-05/criterion/contract",
+        "WBS-P004-05/criterion/scope",
+        "WBS-P004-05/criterion/quality"
+      ],
+      "originalParent": {
+        "元項目": "WBS-P004-05",
+        "開始状態": "NOT_ACCEPTED",
+        "終了判断ID": "閉/WBS-P004-05",
+        "全子が判定可能になる窓": "2",
+        "固有条件数": "4",
+        "固有条件の出典ID": "WBS-P004-05/reuse、WBS-P004-05/criterion/contract、WBS-P004-05/criterion/scope、WBS-P004-05/criterion/quality",
+        "共通主担当を参照する根拠": "",
+        "求める成果": "JDBC UTC・SQL exception・transaction境界",
+        "終了後の扱い": "署名と当候補の必要証拠の成立で受入。欠落・保留は判断理由を記録"
+      },
+      "provisionalEvidence": "二所有型、UTC既driver、新Summary13の共有",
+      "remainingFirstEvidence": "実PostgreSQL role・pool・commit／rollback・資源、JdbcSyncRequestProcessorの実監査後条件。",
+      "proofFiles": {
+        "40580": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40580-p00405-current-owner-criterion-receipts-v1/manifest.json",
+          "sha256": "cc629b1ef330defb598b93503b0e4d62808bc6c8d84c3aad8b2dcd98f6892487"
+        },
+        "40608": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40608-p00405-jdbc42-vendor-row-independent-v1/manifest.json",
+          "sha256": "6a46eba63ad552fe49873e66993f19e6e4ce2d915b33350fd301f5d891e924aa"
+        },
+        "40842": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40842-p00402-inspection-sql-cycle-raw-v1/manifest.json",
+          "sha256": "b6cfcde4f75ee961bb25039283d662f914c31d7c240f6f38d0305b33f04e8231"
+        }
+      },
+      "status": "NOT_ACCEPTED",
+      "commonReleaseAnd451StillRequired": true
+    },
+    {
+      "id": "P018-08",
+      "original": "WBS-P018-08",
+      "countsTowardUniqueGoal": true,
+      "requiredCriteria": [
+        "WBS-P018-08.01/reuse",
+        "WBS-P018-08.01/criterion/deliverable",
+        "WBS-P018-08.01/criterion/quality",
+        "WBS-P018-08.02/reuse",
+        "WBS-P018-08.02/criterion/deliverable",
+        "WBS-P018-08.02/criterion/quality",
+        "WBS-P018-08.03/reuse",
+        "WBS-P018-08.03/criterion/deliverable",
+        "WBS-P018-08.03/criterion/quality"
+      ],
+      "originalParent": {
+        "元項目": "WBS-P018-08",
+        "開始状態": "NOT_ACCEPTED",
+        "終了判断ID": "閉/WBS-P018-08.01、閉/WBS-P018-08.02、閉/WBS-P018-08.03",
+        "全子が判定可能になる窓": "6",
+        "固有条件数": "9",
+        "固有条件の出典ID": "WBS-P018-08.01/reuse、WBS-P018-08.01/criterion/deliverable、WBS-P018-08.01/criterion/quality、WBS-P018-08.02/reuse、WBS-P018-08.02/criterion/deliverable、WBS-P018-08.02/criterion/quality、WBS-P018-08.03/reuse、WBS-P018-08.03/criterion/deliverable、WBS-P018-08.03/criterion/quality",
+        "共通主担当を参照する根拠": "",
+        "求める成果": "native coverage正常/異常/停止checkpoint",
+        "終了後の扱い": "署名と当候補の必要証拠の成立で受入。欠落・保留は判断理由を記録"
+      },
+      "provisionalEvidence": "独立decoder/物理照合の合成、局所Java実測",
+      "remainingFirstEvidence": "実native stream、CRC/session、真正owner・終端、正常／異常／停止の全三子。",
+      "proofFiles": {
+        "40260": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40260-p01808-exec-modified-utf-independent-v1/manifest.json",
+          "sha256": "a9c9c03612f6a0972f58742a0c8e91264b164d98bafab157ca08b369c2ee9e60"
+        },
+        "40268": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40268-p01808-mixed-physical-crc-v1/manifest.json",
+          "sha256": "9b57dde3b4de179855b1219873600c03cfffd2d299c3b6f4df098fe19ec02422"
+        },
+        "40842": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40842-p00402-inspection-sql-cycle-raw-v1/manifest.json",
+          "sha256": "b6cfcde4f75ee961bb25039283d662f914c31d7c240f6f38d0305b33f04e8231"
+        }
+      },
+      "status": "NOT_ACCEPTED",
+      "commonReleaseAnd451StillRequired": true
+    },
+    {
+      "id": "P018-02",
+      "original": "WBS-P018-02",
+      "countsTowardUniqueGoal": true,
+      "requiredCriteria": [
+        "WBS-P018-02/reuse",
+        "WBS-P018-02/criterion/contract",
+        "WBS-P018-02/criterion/scope",
+        "WBS-P018-02/criterion/quality"
+      ],
+      "originalParent": {
+        "元項目": "WBS-P018-02",
+        "開始状態": "NOT_ACCEPTED",
+        "終了判断ID": "閉/WBS-P018-02",
+        "全子が判定可能になる窓": "3",
+        "固有条件数": "4",
+        "固有条件の出典ID": "WBS-P018-02/reuse、WBS-P018-02/criterion/contract、WBS-P018-02/criterion/scope、WBS-P018-02/criterion/quality",
+        "共通主担当を参照する根拠": "",
+        "求める成果": "署名BOM・全artifact・host immutable",
+        "終了後の扱い": "署名と当候補の必要証拠の成立で受入。欠落・保留は判断理由を記録"
+      },
+      "provisionalEvidence": "五所有の局所値・形式",
+      "remainingFirstEvidence": "当sourceの署名付きrelease/BOMと現hostのbyte、公開・権限・保持の独立post。",
+      "proofFiles": {
+        "40430": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40430-p01802-return-five-owner-criteria-v1/manifest.json",
+          "sha256": "0e82c98f5e5338403f4eb6f9cda3da74c9da9d0dafee2760277180081adb4aa5"
+        }
+      },
+      "status": "NOT_ACCEPTED",
+      "commonReleaseAnd451StillRequired": true
+    },
+    {
+      "id": "P018-10",
+      "original": "WBS-P018-10",
+      "countsTowardUniqueGoal": true,
+      "requiredCriteria": [
+        "WBS-P018-10.01/reuse",
+        "WBS-P018-10.01/criterion/deliverable",
+        "WBS-P018-10.01/criterion/quality",
+        "WBS-P018-10.02/reuse",
+        "WBS-P018-10.02/criterion/deliverable",
+        "WBS-P018-10.02/criterion/quality",
+        "WBS-P018-10.03/reuse",
+        "WBS-P018-10.03/criterion/deliverable",
+        "WBS-P018-10.03/criterion/quality"
+      ],
+      "originalParent": {
+        "元項目": "WBS-P018-10",
+        "開始状態": "NOT_ACCEPTED",
+        "終了判断ID": "閉/WBS-P018-10.01、閉/WBS-P018-10.02、閉/WBS-P018-10.03",
+        "全子が判定可能になる窓": "5",
+        "固有条件数": "9",
+        "固有条件の出典ID": "WBS-P018-10.01/reuse、WBS-P018-10.01/criterion/deliverable、WBS-P018-10.01/criterion/quality、WBS-P018-10.02/reuse、WBS-P018-10.02/criterion/deliverable、WBS-P018-10.02/criterion/quality、WBS-P018-10.03/reuse、WBS-P018-10.03/criterion/deliverable、WBS-P018-10.03/criterion/quality",
+        "共通主担当を参照する根拠": "",
+        "求める成果": "command/log redaction・監査",
+        "終了後の扱い": "署名と当候補の必要証拠の成立で受入。欠落・保留は判断理由を記録"
+      },
+      "provisionalEvidence": "合成のREQUEST Details新2、旧純値・固定診断",
+      "remainingFirstEvidence": "全入口・三子の独立出力、実sink・実NSS、当releaseの未漏洩証拠。",
+      "proofFiles": {
+        "40684": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40684-p01810-current-audit-lineage-v1/manifest.json",
+          "sha256": "e64b3070f5a5cbd0437a0e3c0a4871daba5f67e2d2c836d3c5a93043a1530311"
+        },
+        "40826": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40826-p01810-exact-request-details-json-v2/manifest.json",
+          "sha256": "e7845a08657ae3a3d9ea555cc14f8a64a657a591f361113a18da764f094cc942"
+        }
+      },
+      "status": "NOT_ACCEPTED",
+      "commonReleaseAnd451StillRequired": true
+    },
+    {
+      "id": "P004-02",
+      "original": "WBS-P004-02",
+      "countsTowardUniqueGoal": true,
+      "requiredCriteria": [
+        "WBS-P004-02/reuse",
+        "WBS-P004-02/criterion/contract",
+        "WBS-P004-02/criterion/scope",
+        "WBS-P004-02/criterion/quality"
+      ],
+      "originalParent": {
+        "元項目": "WBS-P004-02",
+        "開始状態": "NOT_ACCEPTED",
+        "終了判断ID": "閉/WBS-P004-02",
+        "全子が判定可能になる窓": "3",
+        "固有条件数": "4",
+        "固有条件の出典ID": "WBS-P004-02/reuse、WBS-P004-02/criterion/contract、WBS-P004-02/criterion/scope、WBS-P004-02/criterion/quality",
+        "共通主担当を参照する根拠": "",
+        "求める成果": "Inbox参照保護・summaryのSQL契約",
+        "終了後の扱い": "署名と当候補の必要証拠の成立で受入。欠落・保留は判断理由を記録"
+      },
+      "provisionalEvidence": "Summary実13、raw四100、型付き、ABI差0",
+      "remainingFirstEvidence": "実Inbox参照保護、該当型・DB role/TX・実後条件。",
+      "proofFiles": {
+        "40838": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40838-f03-inspection-summary-typed-v1/manifest.json",
+          "sha256": "90afa7c14c66be40bf8c55d2193d56955a1e3f19b1f934ee8819649e1a484ed6"
+        },
+        "40842": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40842-p00402-inspection-sql-cycle-raw-v1/manifest.json",
+          "sha256": "b6cfcde4f75ee961bb25039283d662f914c31d7c240f6f38d0305b33f04e8231"
+        },
+        "40844": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40844-f02-inspection-repository-exact-abi-v1/manifest.json",
+          "sha256": "bce2ad96c1a5b095503075c9fd41794a81318cc9620b2998ce25c07a2c6cf138"
+        }
+      },
+      "status": "NOT_ACCEPTED",
+      "commonReleaseAnd451StillRequired": true
+    },
+    {
+      "id": "P018-07",
+      "original": "WBS-P018-07",
+      "countsTowardUniqueGoal": true,
+      "requiredCriteria": [
+        "WBS-P018-07/reuse",
+        "WBS-P018-07/criterion/contract",
+        "WBS-P018-07/criterion/scope",
+        "WBS-P018-07/criterion/quality"
+      ],
+      "originalParent": {
+        "元項目": "WBS-P018-07",
+        "開始状態": "NOT_ACCEPTED",
+        "終了判断ID": "閉/WBS-P018-07",
+        "全子が判定可能になる窓": "3",
+        "固有条件数": "4",
+        "固有条件の出典ID": "WBS-P018-07/reuse、WBS-P018-07/criterion/contract、WBS-P018-07/criterion/scope、WBS-P018-07/criterion/quality",
+        "共通主担当を参照する根拠": "",
+        "求める成果": "Caddy同parent deadline・TLS/ready",
+        "終了後の扱い": "署名と当候補の必要証拠の成立で受入。欠落・保留は判断理由を記録"
+      },
+      "provisionalEvidence": "公開Caddy設定と分離した純値6",
+      "remainingFirstEvidence": "Caddy20のRoot型依存、承認済み同parent/Unit、TLS・readiness・deadline・終端。",
+      "proofFiles": {
+        "40612": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40612-p01807-ordinary-readiness-lineage-v1/manifest.json",
+          "sha256": "644b5b68811547c2b71a0bad43c432b94e51acdcc04399ed3a50b41c19a0180c"
+        },
+        "40616": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40616-f03-storage-caddy-companions-independent-v1/manifest.json",
+          "sha256": "9a338a4a854e82b12029677962c16d1702169c5994af42de0d3c43ac097392d3"
+        }
+      },
+      "status": "NOT_ACCEPTED",
+      "commonReleaseAnd451StillRequired": true
+    },
+    {
+      "id": "P019-02",
+      "original": "WBS-P019-02",
+      "countsTowardUniqueGoal": false,
+      "requiredCriteria": [],
+      "originalParent": {
+        "元項目": "WBS-P019-02",
+        "開始状態": "NOT_ACCEPTED",
+        "終了判断ID": "閉/元項目判定/WBS-P019-02",
+        "全子が判定可能になる窓": "3",
+        "固有条件数": "0",
+        "固有条件の出典ID": "",
+        "共通主担当を参照する根拠": "WBS-P018-02/criterion/contract、WBS-P018-02/criterion/quality、WBS-P018-02/criterion/scope、WBS-P018-02/reuse",
+        "求める成果": "配布manifest・version・署名検証",
+        "終了後の扱い": "署名と当候補の必要証拠の成立で受入。欠落・保留は判断理由を記録"
+      },
+      "provisionalEvidence": "P018-02共有・追加費0",
+      "remainingFirstEvidence": "配布manifest/署名判断とP018-02成立。固有最低件数には算入しない。",
+      "proofFiles": {
+        "40430": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40430-p01802-return-five-owner-criteria-v1/manifest.json",
+          "sha256": "0e82c98f5e5338403f4eb6f9cda3da74c9da9d0dafee2760277180081adb4aa5"
+        }
+      },
+      "status": "NOT_ACCEPTED",
+      "commonReleaseAnd451StillRequired": true
+    },
+    {
+      "id": "C02",
+      "original": "WBS-C02",
+      "countsTowardUniqueGoal": true,
+      "requiredCriteria": [
+        "WBS-C02/reuse",
+        "WBS-C02/criterion/contract",
+        "WBS-C02/criterion/scope",
+        "WBS-C02/criterion/quality"
+      ],
+      "originalParent": {
+        "元項目": "WBS-C02",
+        "開始状態": "NOT_ACCEPTED",
+        "終了判断ID": "閉/WBS-C02",
+        "全子が判定可能になる窓": "3",
+        "固有条件数": "4",
+        "固有条件の出典ID": "WBS-C02/reuse、WBS-C02/criterion/contract、WBS-C02/criterion/scope、WBS-C02/criterion/quality",
+        "共通主担当を参照する根拠": "",
+        "求める成果": "systemd全Unit/依存/timeout/hardening設定",
+        "終了後の扱い": "署名と当候補の必要証拠の成立で受入。欠落・保留は判断理由を記録"
+      },
+      "provisionalEvidence": "14公開設定と旧Unit timeoutの証拠",
+      "remainingFirstEvidence": "同boot/Invocationの実効Unit/所有/真正始終端、Web→Caddy・Inspectorと停止後条件。",
+      "proofFiles": {
+        "40184": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40184-c02-api-web-timeout-existing-proof-join-v1/manifest.json",
+          "sha256": "6c862cc57c118845d63b6314c5dbef2a8d403956edf10e79447e77a85771dcc7"
+        },
+        "40846": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40846-wbs66-current-criteria-handoff-v1/manifest.json",
+          "sha256": "85f0f6c29da2c7b3eeac4f7f94388b438ef38c67aae4bd2feddadaab200da16d"
+        }
+      },
+      "status": "NOT_ACCEPTED",
+      "commonReleaseAnd451StillRequired": true
+    },
+    {
+      "id": "P020-01",
+      "original": "WBS-P020-01",
+      "countsTowardUniqueGoal": true,
+      "requiredCriteria": [
+        "WBS-P020-01.01/reuse",
+        "WBS-P020-01.01/criterion/deliverable",
+        "WBS-P020-01.01/criterion/quality",
+        "WBS-P020-01.02/reuse",
+        "WBS-P020-01.02/criterion/deliverable",
+        "WBS-P020-01.02/criterion/quality",
+        "WBS-P020-01.03/reuse",
+        "WBS-P020-01.03/criterion/deliverable",
+        "WBS-P020-01.03/criterion/quality"
+      ],
+      "originalParent": {
+        "元項目": "WBS-P020-01",
+        "開始状態": "NOT_ACCEPTED",
+        "終了判断ID": "閉/WBS-P020-01.01、閉/WBS-P020-01.02、閉/WBS-P020-01.03",
+        "全子が判定可能になる窓": "5",
+        "固有条件数": "9",
+        "固有条件の出典ID": "WBS-P020-01.01/reuse、WBS-P020-01.01/criterion/deliverable、WBS-P020-01.01/criterion/quality、WBS-P020-01.02/reuse、WBS-P020-01.02/criterion/deliverable、WBS-P020-01.02/criterion/quality、WBS-P020-01.03/reuse、WBS-P020-01.03/criterion/deliverable、WBS-P020-01.03/criterion/quality",
+        "共通主担当を参照する根拠": "",
+        "求める成果": "Current/NK共通harness・比較・DIF/G01～G06",
+        "終了後の扱い": "署名と当候補の必要証拠の成立で受入。欠落・保留は判断理由を記録"
+      },
+      "provisionalEvidence": "既比較器211と独立raw",
+      "remainingFirstEvidence": "真正Current/NK実adapter、Browser、DIF/QA051 final・全三子とG01～G06。",
+      "proofFiles": {
+        "40706": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40706-p020-current-211-approved-filestore-v1/manifest.json",
+          "sha256": "19820a37f33df2d488f3661a874ff03d70f3c4b0c496e65e97f60d5b917aa47d"
+        },
+        "40708": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40708-p020-current-211-independent-v1/manifest.json",
+          "sha256": "994c74a3d9cb58f5c053746fb06bb7ab1cce08d150aa740a3f16adf9d9bd5e22"
+        }
+      },
+      "status": "NOT_ACCEPTED",
+      "commonReleaseAnd451StillRequired": true
+    }
+  ],
+  "uniqueCriteria": 59,
+  "preparationValidationCorrections": 1,
+  "coreAccepted": 0,
+  "shortAccepted": 0,
+  "originalAccepted": 17,
+  "formalDelta": 0,
+  "effortRate": null,
+  "authorizedRuntimeOperations": 0,
+  "newProductTests": 0,
+  "whole451": false,
+  "terminalAtUTC": "2026-11-20T12:29:57.462643+00:00"
+}
