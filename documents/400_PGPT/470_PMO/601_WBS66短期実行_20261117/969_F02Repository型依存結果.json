@@ -1,0 +1,135 @@
+{
+  "eventId": "PGPT-20261008-6489",
+  "groupId": "PGPT-WBS66-F02-REPOSITORY-DECLARATION-EDGES-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T03:00:45.336000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 60,
+      "remainingPercent": 40,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F02-REPOSITORY-DECLARATION-EDGES-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F02-REPOSITORY-DECLARATION-EDGES-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a"
+    ],
+    "source": "89a58af38bed583bc088979ce19f3aab4ff2ae0c",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40584-f02-repository-declaration-before-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.25,
+      "base": 0.65,
+      "high": 1.1
+    },
+    "groupCapPp": 1.7,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/967_P00403現三所有継続点.json",
+        "sha256": "ebfc19f1b0fccc1b6352c4d962ccd24fcee0f8b8cdd5d3fc15c5ad1d59ef5e26"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40576-f02-vendor-jdbc-jms-independent-v1/manifest.json",
+        "sha256": "cbfaa049a9b7cff2e6aa1e7b42e4bd054ac7e21cbdeaef7df79d2bdc292bdf74"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40578-f02-real-protocol-storage-vendor-edge-audit-v1/manifest.json",
+        "sha256": "b9566774ad9ea8efd7a3d97a4ed1664688296a425178a68fd613f991a9a12aee"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "WBS66 F02-a、正本SS311 §3のAPI依存方向、工具89a58af38bで署名やfieldは規則対象から漏れる。現製品Core e7bは不変。",
+    "endCondition": "固定合成型宣言の元見逃し・是正後の一致と既55controls、scope・終了値・証拠SHAを確認。",
+    "workScope": "手書き合成fixtureと監査工具、製品classや環境は扱わない。",
+    "quotaAfter": {
+      "usedPercent": 60,
+      "remainingPercent": 40,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "500ad5187920f08e7f09778ba3e374f0187297562788b4fdadbf16f2e27525c8",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T03:00:45.336000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 60,
+          "remainingPercent": 40,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T03:00:29.794327+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 60,
+      "remainingPercent": 40,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6488",
+    "attempt": 1,
+    "attemptResult": "工具局所成立、製品の受入と分離",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40588-f02-repository-declaration-independent-v1/manifest.json",
+        "sha256": "e1a9cf5c9c19c3fb3fc42fdd7cd3633fe6435fcda79d5297fc7d4e3d2c45d768"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "F02のAPI/Web実JARとStorage残JDBC",
+      "現六module全型とruntime",
+      "451とHOLD"
+    ],
+    "newToolChecks": 10,
+    "priorToolRegressionControls": 55,
+    "productJarExecutions": 0,
+    "bug": "BUG-3390",
+    "ykt": "YKT-2724",
+    "toolSource": "aa2da6a8eb3aa319a5c9d0efbcea1f5a2a5deca8",
+    "firstCheckMatches": 3,
+    "firstCheckDenominator": 10,
+    "afterMatches": 10,
+    "syntheticPhysical": 101,
+    "rawIntentionalFindings": 42
+  }
+}
