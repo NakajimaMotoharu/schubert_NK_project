@@ -1,0 +1,171 @@
+{
+  "eventId": "PGPT-20261008-6605",
+  "groupId": "wbs66-f03-expiry-update-ownership-raw",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T06:39:45.394000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 64,
+      "remainingPercent": 36,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "wbs66-f03-expiry-update-ownership-raw",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "wbs66-f03-expiry-update-ownership-raw",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "source": "303683783ecf4caaad6b9c5427e1accb9fe30d02",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40730-f03-expiry-update-ownership-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.45,
+      "base": 1.2,
+      "high": 2.8
+    },
+    "groupCapPp": 4,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1085_F03ExpiryAuditread解放と継続点.json",
+        "sha256": "71182f846f1a91cea2449d29f9c139661f29d56fc3dc5e7ddd653283586be1b7"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40726-f03-expiry-read-single-cleanup-v1/manifest.json",
+        "sha256": "fb6f03d3d3db26453a6db596f2791eca14aa9699440bddf69d087b50115a48d3"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40728-f03-expiry-read-ownership-independent-v1/manifest.json",
+        "sha256": "bcb9a60866e73aa4b7c4db7c02fc53dbbd5e6eafe671887ff87e2c39390f0188"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40704-f02-current-four-expiry-jars-v1/manifest.json",
+        "sha256": "c58df3b46be9501d68256a6b8578efa8c0f7021f66f0e477d58de8c907b62da1"
+      },
+      {
+        "path": "evidence/01_PT/017_NK-BAT-001/697_Expiry監査SQL・状態契約単体仕様.md",
+        "sha256": "aa479aede238f3ef09822276f513cbb8b9dcd753f307cb7f933c0c4d8a3609da"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "PG40726 remaining stage/finish raw4 from Java TWR on known nonnull acquisition. Keep exact Java TWR non-null, primary identity, suppressed ordering, SQL, bound positions and guard. Local helper handles already-owned update statement only.",
+    "endCondition": "One exact local source run 30 cases with one new compound test exercising both owners, full no-exclusion counters for all seven physical; retain formal scope gates.",
+    "workScope": "No real DB/service/worker, no failure cohort, no changed RD/UI/SS behavior.",
+    "quotaAfter": {
+      "usedPercent": 64,
+      "remainingPercent": 36,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "bfff882936245a22f089427810bd0c3ddd7f4180f8141ad23de327d51d0866ba",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T06:39:45.394000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 64,
+          "remainingPercent": 36,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T06:39:02.451030+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 64,
+      "remainingPercent": 36,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6604",
+    "attempt": 1,
+    "attemptResult": "PASS_LOCAL_EXPIRY_30_RAW_ALL",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 1,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40730-f03-expiry-update-ownership-v1/manifest.json",
+        "sha256": "0f86bd44fadf2879f544990327aeab1ff55719b24f49c7fbdb8c8e8bcf6e6345"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40732-f03-expiry-ownership-independent-v1/manifest.json",
+        "sha256": "c5b1f768a9cd52828fb8321f74a2de13287ec3b3e62dfdf1e52690f7fd2b2796"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "current actual Maven artifact exact byte matches local30",
+      "new candidate typed static after read/update ownership changes",
+      "whole F02 F03 451 and environmental holds"
+    ],
+    "firstVerificationPass": 1,
+    "firstVerificationDenominator": 1,
+    "neededCurrentSourceCases": 30,
+    "oldCasesInSameExec": 29,
+    "newCase": 1,
+    "candidateProductionSource": "0e3c521c59cf379f3a948d6ce9fd6e7b08b3b6d6",
+    "rawMetrics": {
+      "LINE": {
+        "covered": 284,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 52,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 4,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 190,
+        "missed": 0
+      },
+      "INSTRUCTION": {
+        "covered": 1416,
+        "missed": 0
+      }
+    },
+    "newSelectedTests": 1,
+    "bugFixed": "BUG-3408",
+    "crossCutting": "YKT-2732",
+    "noCoverageExclusions": true,
+    "publicAbiSame": true,
+    "sqlSame": true,
+    "prior40726PreviouslyNewOnceOnly": 3
+  }
+}
