@@ -35,9 +35,13 @@ def read(path):
 
 
 def main(mode):
+    update_ownership = mode == "update-ownership"
     new_read = mode == "read-ownership"
+    new_main = new_read or update_ownership
     include_value_ownership = mode != "base-26"
     start_doc = "1083_F03*" if new_read else "1080_F03*" if include_value_ownership else "1077_F03*"
+    if update_ownership:
+        start_doc = "1086_F03*"
     event = read(next(PLAN.glob(start_doc)))
     v = event["values"]
     assert all(pin(row["path"]) == row for row in v["oracleReferences"])
@@ -48,12 +52,15 @@ def main(mode):
     assert static["codeCandidate"] == core and pkg["verify"]["focusedPhysicalByteEqual"]
     assert scoped["actualExit"] == static["actualExit"] == 0
     assert v["source"] == git("rev-parse", "HEAD").decode().strip()
-    assert not git("diff", "--name-only", core, v["source"], "--", "pom.xml", "src",
+    checkout_base = read(next(PLAN.glob("1085_F03*")))["candidateProductionSource"] if update_ownership else core
+    assert not git("diff", "--name-only", checkout_base, v["source"], "--", "pom.xml", "src",
                    ":(exclude)src/**/src/test/**")
     additions = {"ExpiryAuditValueOwnershipTest": 3} if include_value_ownership else {}
     selected = {**TESTS, **additions}
+    if update_ownership:
+        selected["ExpiryAuditPortTest"] = 10
     cohort = "PG40724-f03-expiry-current-29-proxy-v1" if include_value_ownership else "PG40720-f03-expiry-current-26-proxy-v3"
-    if new_read:
+    if new_main:
         cohort = v["run"]
     out = (E / cohort).resolve()
     out.mkdir()
@@ -61,6 +68,8 @@ def main(mode):
     session = "PG40724-EXPIRY-AUDIT-SAME-29" if include_value_ownership else "PG40720-EXPIRY-AUDIT-SAME-26"
     if new_read:
         session = "PG40726-EXPIRY-READ-OWNERSHIP-29"
+    if update_ownership:
+        session = "PG40730-EXPIRY-UPDATE-OWNERSHIP-30"
     dep_report = read(next(E.glob("PG40712-*/manifest.json")))
     family = dep_report["physicalHashes"]
     prefix = str(PKG).replace("/", ".")
@@ -81,7 +90,7 @@ def main(mode):
                 assert pin(node)["sha256"] == fingerprint
         stages = {}
         input_main = P["TARGET"]
-        if new_read:
+        if new_main:
             assert git("diff", "--name-only", v["source"], "--", "src",
                        ":(exclude)src/**/src/test/**").decode().splitlines() == [str(input_main)]
             snapshot = root / input_main.name
@@ -104,7 +113,8 @@ def main(mode):
         inputs = {}
         for name in (*selected, *SUPPORT):
             path = P["BATCH"] / "test/java" / PKG / (name + ".java")
-            body = path.read_bytes() if name in additions else git("show", f"{core}:{path}")
+            changed_test = update_ownership and name == "ExpiryAuditPortTest"
+            body = path.read_bytes() if name in additions or changed_test else git("show", f"{core}:{path}")
             assert body == path.read_bytes() and all(word.encode() not in body for word in FORBIDDEN)
             fixture = root / path.name
             fixture.write_bytes(body)
@@ -137,21 +147,22 @@ def main(mode):
         if runtime.is_file() and cases:
             old = read(next(E.glob("PG40696-*-after/manifest.json")))
             raw = old["stages"]["unfiltered"]["command"][:4]
-            if new_read:
+            if new_main:
                 precise = read(next(E.glob("PG40662-*/manifest.json")))
                 raw = precise["raw"]["command"][:5]
             stages["coverage"] = run("coverage", [*raw, runtime, *(main / name for name in sorted(family))], out, root)
             if stages["coverage"]["actualExit"] == 0:
                 coverage = POST["counters"](out / "coverage.stdout", family)
-        success = (len(stages) == (5 if new_read else 3) and all(step["actualExit"] == 0 for step in stages.values())
+        success = (len(stages) == (5 if new_main else 3) and all(step["actualExit"] == 0 for step in stages.values())
                    and observed == selected and all(row["outcome"] == "pass" for row in cases)
                    and len(cases) == len({(row["testClass"], row["name"]) for row in cases}) == sum(selected.values()))
     data = dict(actualExit=0 if success else 1, source=v["source"], baselinePackagedProductionSource=core,
-                candidateProductionSource=None if new_read else core, candidateMain=pin(input_main),
+                candidateProductionSource=None if new_main else core, candidateMain=pin(input_main),
                 stages=stages, sourceInputs=inputs, physical=family, testClassCounts=observed, session=session,
                 compileOnlyHelpers=list(SUPPORT),
                 actualTests=len(cases), isolatedSameExec=coverage, previouslyScopedEightNotAddedToFormal=8,
-                newSelectedCases=sum(additions.values()), oldSuccessInRequiredExpandedExec=sum(TESTS.values()),
+                newSelectedCases=1 if update_ownership else 0 if new_read else sum(additions.values()),
+                oldSuccessInRequiredExpandedExec=29 if new_main else sum(TESTS.values()),
                 legacyCasesRequalifiedInWidenedScope=18, maxCoverage=True if coverage and all(
                     coverage[k]["missed"] == 0 for k in ("LINE", "METHOD", "CLASS", "BRANCH")) else False,
                 actualExternalActions=0, realDataSource=False, originalProgramInputsUnchanged=True,
@@ -163,5 +174,5 @@ def main(mode):
 
 
 if __name__ == "__main__":
-    assert sys.argv[1:] in ([], ["include-value-ownership"], ["read-ownership"])
+    assert sys.argv[1:] in ([], ["include-value-ownership"], ["read-ownership"], ["update-ownership"])
     raise SystemExit(main(sys.argv[1] if len(sys.argv) == 2 else "base-26"))

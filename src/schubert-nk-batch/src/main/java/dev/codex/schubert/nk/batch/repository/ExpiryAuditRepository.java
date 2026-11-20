@@ -164,25 +164,35 @@ public final class ExpiryAuditRepository {
     Stage stage =
         new Stage(attempt.run().cutoff().minus(7, ChronoUnit.DAYS), before, target, estimatedBytes);
     guarded(attempt.run());
-    try (PreparedStatement statement =
-        required(
-            connection.prepareStatement(
-                "update schubert.batch_runs set expiry_cutoff_at=?,expiry_before_count=?,"
-                    + "target_count=?,byte_count=? where "
-                    + HANDLE
-                    + " and status='RUNNING' and ended_at is null"
-                    + " and expiry_cutoff_at is null and expiry_before_count is null"
-                    + " and expiry_after_count is null and target_count=0 and success_count=0"
-                    + " and failure_count=0 and byte_count=0"))) {
-      statement.setQueryTimeout(5);
-      statement.setObject(1, stage.cutoff().atOffset(ZoneOffset.UTC));
-      statement.setLong(2, stage.before());
-      statement.setLong(3, stage.target());
-      statement.setLong(4, stage.estimatedBytes());
-      bindHandle(statement, 5, attempt);
-      int changed = statement.executeUpdate();
-      // id is the table PK, so a real UPDATE can affect only zero or one row.
-      if (changed == 0 && !matchesStage(read(attempt), stage)) throw new BatchRepositoryException();
+    try {
+      PreparedStatement statement =
+          required(
+              connection.prepareStatement(
+                  "update schubert.batch_runs set expiry_cutoff_at=?,expiry_before_count=?,"
+                      + "target_count=?,byte_count=? where "
+                      + HANDLE
+                      + " and status='RUNNING' and ended_at is null"
+                      + " and expiry_cutoff_at is null and expiry_before_count is null"
+                      + " and expiry_after_count is null and target_count=0 and success_count=0"
+                      + " and failure_count=0 and byte_count=0"));
+      @Nullable Throwable primary = null;
+      try {
+        statement.setQueryTimeout(5);
+        statement.setObject(1, stage.cutoff().atOffset(ZoneOffset.UTC));
+        statement.setLong(2, stage.before());
+        statement.setLong(3, stage.target());
+        statement.setLong(4, stage.estimatedBytes());
+        bindHandle(statement, 5, attempt);
+        int changed = statement.executeUpdate();
+        // id is the table PK, so a real UPDATE can affect only zero or one row.
+        if (changed == 0 && !matchesStage(read(attempt), stage))
+          throw new BatchRepositoryException();
+      } catch (Throwable failure) {
+        primary = failure;
+        throw failure;
+      } finally {
+        closeUpdateStatement(statement, primary);
+      }
     } catch (SQLException | RuntimeException failure) {
       JdbcFailureGraph.preserveFatal(failure);
       throw new BatchRepositoryException();
@@ -217,37 +227,60 @@ public final class ExpiryAuditRepository {
                     && result.success() != stage.target()))))
       throw new IllegalArgumentException("invalid Expiry terminal");
     guarded(attempt.run());
-    try (PreparedStatement statement =
-        required(
-            connection.prepareStatement(
-                "update schubert.batch_runs set"
-                    + " ended_at=?,status=?,success_count=?,failure_count=?,error_code=?,error_summary=?,expiry_after_count=?"
-                    + " where "
-                    + HANDLE
-                    + " and status='RUNNING' and ended_at is null"
-                    + " and expiry_cutoff_at=? and expiry_before_count=?"
-                    + " and target_count=? and byte_count=? and expiry_after_count is null"))) {
-      statement.setQueryTimeout(5);
-      statement.setObject(1, ended.atOffset(ZoneOffset.UTC));
-      statement.setString(2, result.status().name());
-      statement.setLong(3, result.success());
-      statement.setLong(4, result.failure());
-      statement.setString(5, result.reason().code());
-      statement.setString(6, result.reason().summary());
-      statement.setObject(7, actualAfter);
-      bindHandle(statement, 8, attempt);
-      statement.setObject(13, stage.cutoff().atOffset(ZoneOffset.UTC));
-      statement.setLong(14, stage.before());
-      statement.setLong(15, stage.target());
-      statement.setLong(16, stage.estimatedBytes());
-      int changed = statement.executeUpdate();
-      if (changed == 0 && !matchesTerminal(read(attempt), stage, ended, actualAfter, result))
-        throw new BatchRepositoryException();
+    try {
+      PreparedStatement statement =
+          required(
+              connection.prepareStatement(
+                  "update schubert.batch_runs set"
+                      + " ended_at=?,status=?,success_count=?,failure_count=?,error_code=?,error_summary=?,expiry_after_count=?"
+                      + " where "
+                      + HANDLE
+                      + " and status='RUNNING' and ended_at is null"
+                      + " and expiry_cutoff_at=? and expiry_before_count=?"
+                      + " and target_count=? and byte_count=? and expiry_after_count is null"));
+      @Nullable Throwable primary = null;
+      try {
+        statement.setQueryTimeout(5);
+        statement.setObject(1, ended.atOffset(ZoneOffset.UTC));
+        statement.setString(2, result.status().name());
+        statement.setLong(3, result.success());
+        statement.setLong(4, result.failure());
+        statement.setString(5, result.reason().code());
+        statement.setString(6, result.reason().summary());
+        statement.setObject(7, actualAfter);
+        bindHandle(statement, 8, attempt);
+        statement.setObject(13, stage.cutoff().atOffset(ZoneOffset.UTC));
+        statement.setLong(14, stage.before());
+        statement.setLong(15, stage.target());
+        statement.setLong(16, stage.estimatedBytes());
+        int changed = statement.executeUpdate();
+        if (changed == 0 && !matchesTerminal(read(attempt), stage, ended, actualAfter, result))
+          throw new BatchRepositoryException();
+      } catch (Throwable failure) {
+        primary = failure;
+        throw failure;
+      } finally {
+        closeUpdateStatement(statement, primary);
+      }
     } catch (SQLException | RuntimeException failure) {
       JdbcFailureGraph.preserveFatal(failure);
       throw new BatchRepositoryException();
     }
     guarded(attempt.run());
+  }
+
+  /** The update already owns a nonnull statement. Preserve Java TWR's failure ordering. */
+  private static void closeUpdateStatement(PreparedStatement statement, @Nullable Throwable primary)
+      throws SQLException {
+    if (primary == null) {
+      statement.close();
+      return;
+    }
+    try {
+      statement.close();
+    } catch (Throwable secondary) {
+      primary.addSuppressed(secondary);
+    }
   }
 
   public Optional<Snapshot> read(BatchStepAttempt attempt) {

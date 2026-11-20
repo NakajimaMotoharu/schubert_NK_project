@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.batch.repository;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
@@ -254,6 +255,26 @@ final class ExpiryAuditPortTest {
     assertEquals(1L, warning.only(FINISH).bindings.get(3));
     assertEquals(2L, warning.only(FINISH).bindings.get(7));
     warning.assertClosed();
+  }
+
+  @Test
+  void updateCompoundFailurePreservesTheOwnedStatementPrimaryAndCloseFailure() {
+    for (var route : List.of(STAGE, FINISH)) {
+      var primary = new LinkageError("public update failure fixture");
+      var secondary = new SQLException("public close failure fixture");
+      var fixture = new Fixture();
+      fixture.faults = Map.of(route + "." + UPDATE, primary, route + "." + CLOSE, secondary);
+      var failure =
+          assertThrows(
+              LinkageError.class,
+              () -> {
+                if (route.equals(STAGE)) fixture.repository().stage(ATTEMPT, 3, 2, 200);
+                else fixture.repository().finish(ATTEMPT, STAGED, END_AT, 1L, RESULT);
+              });
+      assertSame(primary, failure);
+      assertArrayEquals(new Throwable[] {secondary}, failure.getSuppressed());
+      fixture.assertClosed();
+    }
   }
 
   @Test
