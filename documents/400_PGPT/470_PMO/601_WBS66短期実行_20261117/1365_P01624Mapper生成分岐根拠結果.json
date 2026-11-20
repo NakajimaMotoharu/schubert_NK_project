@@ -1,0 +1,137 @@
+{
+  "eventId": "PGPT-20261008-6881",
+  "groupId": "p01624-mapper-generated-bytecode-gap",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T14:53:28.859000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 72,
+      "remainingPercent": 28,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "p01624-mapper-generated-bytecode-gap",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "p01624-mapper-generated-bytecode-gap",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P016-24"
+    ],
+    "managementWorkIds": [
+      "A1-36.05"
+    ],
+    "source": "daf7c7cebc6ea4a39020888f4acb6b967418001d",
+    "productionCoreMain": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40936-p01624-mapper-bytecode-gap-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.06,
+      "base": 0.18,
+      "high": 0.36
+    },
+    "groupCapPp": 0.6,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1363_P01624公開error状態単体継続点.json",
+        "sha256": "f030c86f62fcec43a1789ee31fcfb202732b072d6f6f45e053d12d8b78d99948"
+      },
+      {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG40932-p01624-current-protocol-closed22-v1/raw-manifest.json",
+        "sha256": "45a5d29235cc3fe7ce0065ccebdae60d2d85633cdc21e895aa5107396ba70c20"
+      },
+      {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG40934-p01624-error-status-domain-v1/manifest.json",
+        "sha256": "c72dd89e29b9a40e2b4f8bd0b2dd5bdaf8cfaec22f1443fa495bce96a699729f"
+      },
+      {
+        "path": "documents/400_PGPT/450_品質/451_Build・静的解析・coverage方針.md",
+        "sha256": "7980a204c02574b235d588e3a05ae8fb7b26ecb18313f4f000918c9135da6f4c"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "PG40932 rawの六命令／一分岐と補助12命令、PG40934はStatus別実行。資格済み二classを固定する。",
+    "endCondition": "実bytecodeでjvm switch/handlerを確認し、規約451上の未成立を保全。新テスト可否や仕様の対象を区別。",
+    "workScope": "指名二classのjavap/manifest metadataのみ。byte変更、実行、除外、異版組合せ、外部作業なし。",
+    "quotaAfter": {
+      "usedPercent": 72,
+      "remainingPercent": 28,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "95c5319d1bc50a30712fa9ceab1c00b6eca462eb75d8d14bb7b48e9892bae805",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T14:53:28.859000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 72,
+          "remainingPercent": 28,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T14:52:43.287691+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 72,
+      "remainingPercent": 28,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6880",
+    "attempt": 1,
+    "attemptResult": "RAW_UNCOVERED_RETAINED_WITH_BINARY_CAUSE",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG40936-p01624-mapper-bytecode-gap-v1/manifest.json",
+        "sha256": "dd7812825e64b97724dbfa7d6c98337ebd1dc8bee609b59fd187a5da206bda8b"
+      },
+      {
+        "path": "evidence/01_PT/016_NK-WEB-002/input/4936_mapper_raw_gap_audit.py",
+        "sha256": "bd22bed6adce3869f4e9828a801d2b0b8e761e347dee7e57e26ff53f02c5d7f1"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "P016-24、一つの現source/runでrawの4指標",
+      "MapperのMatchException分岐一、補助NoSuchFieldError処理12、実Webと全451"
+    ],
+    "physicalDisassemblies": 2,
+    "missingFieldHandlers": 12,
+    "identifiedUnfilteredBranchGap": 1,
+    "actualProductTestRuns": 0,
+    "actualAnalyzerRuns": 2,
+    "actualExternalActions": 0
+  }
+}

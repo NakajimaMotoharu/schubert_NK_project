@@ -1,0 +1,67 @@
+{
+  "eventId": "PGPT-20261008-6880",
+  "groupId": "p01624-mapper-generated-bytecode-gap",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T14:52:09.777000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 72,
+      "remainingPercent": 28,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "p01624-mapper-generated-bytecode-gap",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "p01624-mapper-generated-bytecode-gap",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P016-24"
+    ],
+    "managementWorkIds": [
+      "A1-36.05"
+    ],
+    "source": "daf7c7cebc6ea4a39020888f4acb6b967418001d",
+    "productionCoreMain": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40936-p01624-mapper-bytecode-gap-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.06,
+      "base": 0.18,
+      "high": 0.36
+    },
+    "groupCapPp": 0.6,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1363_P01624公開error状態単体継続点.json",
+        "sha256": "f030c86f62fcec43a1789ee31fcfb202732b072d6f6f45e053d12d8b78d99948"
+      },
+      {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG40932-p01624-current-protocol-closed22-v1/raw-manifest.json",
+        "sha256": "45a5d29235cc3fe7ce0065ccebdae60d2d85633cdc21e895aa5107396ba70c20"
+      },
+      {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG40934-p01624-error-status-domain-v1/manifest.json",
+        "sha256": "c72dd89e29b9a40e2b4f8bd0b2dd5bdaf8cfaec22f1443fa495bce96a699729f"
+      },
+      {
+        "path": "documents/400_PGPT/450_品質/451_Build・静的解析・coverage方針.md",
+        "sha256": "7980a204c02574b235d588e3a05ae8fb7b26ecb18313f4f000918c9135da6f4c"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "PG40932 rawの六命令／一分岐と補助12命令、PG40934はStatus別実行。資格済み二classを固定する。",
+    "endCondition": "実bytecodeでjvm switch/handlerを確認し、規約451上の未成立を保全。新テスト可否や仕様の対象を区別。",
+    "workScope": "指名二classのjavap/manifest metadataのみ。byte変更、実行、除外、異版組合せ、外部作業なし。"
+  }
+}

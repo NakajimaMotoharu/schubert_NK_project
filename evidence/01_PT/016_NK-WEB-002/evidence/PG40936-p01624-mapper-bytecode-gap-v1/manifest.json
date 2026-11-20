@@ -1,0 +1,124 @@
+{
+  "actualExit": 0,
+  "source": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+  "startEvent": "PGPT-20261008-6880",
+  "terminalAtUTC": "2026-11-20T14:52:43.287691+00:00",
+  "originals": [
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG40932-p01624-current-protocol-closed22-v1/raw-manifest.json",
+      "sha256": "45a5d29235cc3fe7ce0065ccebdae60d2d85633cdc21e895aa5107396ba70c20"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG40934-p01624-error-status-domain-v1/manifest.json",
+      "sha256": "c72dd89e29b9a40e2b4f8bd0b2dd5bdaf8cfaec22f1443fa495bce96a699729f"
+    },
+    {
+      "path": "documents/400_PGPT/450_品質/451_Build・静的解析・coverage方針.md",
+      "sha256": "7980a204c02574b235d588e3a05ae8fb7b26ecb18313f4f000918c9135da6f4c"
+    }
+  ],
+  "inspected": [
+    {
+      "input": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40932-p01624-current-protocol-closed22-v1/products/dev/codex/schubert/nk/web/error/WebResultMapper.class",
+        "sha256": "ac01f87fbb92abe11d3d8763bca86d33ba7f12c89685d27b0181f5d17b847da7"
+      },
+      "command": [
+        "../toolchain/jdk-25.0.4/bin/javap",
+        "-p",
+        "-c",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40932-p01624-current-protocol-closed22-v1/products/dev/codex/schubert/nk/web/error/WebResultMapper.class"
+      ],
+      "exitCode": 0,
+      "javap": "Compiled from \"WebResultMapper.java\"\npublic final class dev.codex.schubert.nk.web.error.WebResultMapper {\n  public dev.codex.schubert.nk.web.error.WebResultMapper();\n    Code:\n         0: aload_0\n         1: invokespecial #1                  // Method java/lang/Object.\"<init>\":()V\n         4: return\n\n  public int httpStatus(dev.codex.schubert.nk.protocol.header.ResultCode);\n    Code:\n         0: aload_1\n         1: ldc           #7                  // String code\n         3: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;\n         6: pop\n         7: getstatic     #15                 // Field dev/codex/schubert/nk/web/error/WebResultMapper$1.$SwitchMap$dev$codex$schubert$nk$protocol$header$ResultCode:[I\n        10: aload_1\n        11: invokevirtual #21                 // Method dev/codex/schubert/nk/protocol/header/ResultCode.ordinal:()I\n        14: iaload\n        15: tableswitch   { // 1 to 12\n                       1: 86\n                       2: 86\n                       3: 92\n                       4: 98\n                       5: 98\n                       6: 104\n                       7: 110\n                       8: 116\n                       9: 116\n                      10: 122\n                      11: 128\n                      12: 128\n                 default: 76\n            }\n        76: new           #27                 // class java/lang/MatchException\n        79: dup\n        80: aconst_null\n        81: aconst_null\n        82: invokespecial #29                 // Method java/lang/MatchException.\"<init>\":(Ljava/lang/String;Ljava/lang/Throwable;)V\n        85: athrow\n        86: sipush        200\n        89: goto          131\n        92: sipush        400\n        95: goto          131\n        98: sipush        401\n       101: goto          131\n       104: sipush        403\n       107: goto          131\n       110: sipush        404\n       113: goto          131\n       116: sipush        409\n       119: goto          131\n       122: sipush        429\n       125: goto          131\n       128: sipush        503\n       131: ireturn\n}\n",
+      "historicalRawCounters": [
+        {
+          "kind": "INSTRUCTION",
+          "missed": 6,
+          "covered": 28
+        },
+        {
+          "kind": "BRANCH",
+          "missed": 1,
+          "covered": 8
+        },
+        {
+          "kind": "LINE",
+          "missed": 0,
+          "covered": 11
+        },
+        {
+          "kind": "COMPLEXITY",
+          "missed": 1,
+          "covered": 9
+        },
+        {
+          "kind": "METHOD",
+          "missed": 0,
+          "covered": 2
+        },
+        {
+          "kind": "CLASS",
+          "missed": 0,
+          "covered": 1
+        }
+      ]
+    },
+    {
+      "input": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40932-p01624-current-protocol-closed22-v1/products/dev/codex/schubert/nk/web/error/WebResultMapper$1.class",
+        "sha256": "6ad3bbf60562d698cd06b9e0bd674d5d0b81e401b02a2d79485a696a3184bb81"
+      },
+      "command": [
+        "../toolchain/jdk-25.0.4/bin/javap",
+        "-p",
+        "-c",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40932-p01624-current-protocol-closed22-v1/products/dev/codex/schubert/nk/web/error/WebResultMapper$1.class"
+      ],
+      "exitCode": 0,
+      "javap": "Compiled from \"WebResultMapper.java\"\nclass dev.codex.schubert.nk.web.error.WebResultMapper$1 {\n  static final int[] $SwitchMap$dev$codex$schubert$nk$protocol$header$ResultCode;\n\n  static {};\n    Code:\n         0: invokestatic  #1                  // Method dev/codex/schubert/nk/protocol/header/ResultCode.values:()[Ldev/codex/schubert/nk/protocol/header/ResultCode;\n         3: arraylength\n         4: newarray       int\n         6: putstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$header$ResultCode:[I\n         9: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$header$ResultCode:[I\n        12: getstatic     #13                 // Field dev/codex/schubert/nk/protocol/header/ResultCode.SUCCESS:Ldev/codex/schubert/nk/protocol/header/ResultCode;\n        15: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/header/ResultCode.ordinal:()I\n        18: iconst_1\n        19: iastore\n        20: goto          24\n        23: astore_0\n        24: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$header$ResultCode:[I\n        27: getstatic     #23                 // Field dev/codex/schubert/nk/protocol/header/ResultCode.IDEMPOTENT_SUCCESS:Ldev/codex/schubert/nk/protocol/header/ResultCode;\n        30: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/header/ResultCode.ordinal:()I\n        33: iconst_2\n        34: iastore\n        35: goto          39\n        38: astore_0\n        39: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$header$ResultCode:[I\n        42: getstatic     #26                 // Field dev/codex/schubert/nk/protocol/header/ResultCode.VALIDATION_ERROR:Ldev/codex/schubert/nk/protocol/header/ResultCode;\n        45: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/header/ResultCode.ordinal:()I\n        48: iconst_3\n        49: iastore\n        50: goto          54\n        53: astore_0\n        54: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$header$ResultCode:[I\n        57: getstatic     #29                 // Field dev/codex/schubert/nk/protocol/header/ResultCode.AUTHENTICATION_FAILED:Ldev/codex/schubert/nk/protocol/header/ResultCode;\n        60: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/header/ResultCode.ordinal:()I\n        63: iconst_4\n        64: iastore\n        65: goto          69\n        68: astore_0\n        69: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$header$ResultCode:[I\n        72: getstatic     #32                 // Field dev/codex/schubert/nk/protocol/header/ResultCode.SESSION_INVALID:Ldev/codex/schubert/nk/protocol/header/ResultCode;\n        75: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/header/ResultCode.ordinal:()I\n        78: iconst_5\n        79: iastore\n        80: goto          84\n        83: astore_0\n        84: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$header$ResultCode:[I\n        87: getstatic     #35                 // Field dev/codex/schubert/nk/protocol/header/ResultCode.FORBIDDEN:Ldev/codex/schubert/nk/protocol/header/ResultCode;\n        90: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/header/ResultCode.ordinal:()I\n        93: bipush        6\n        95: iastore\n        96: goto          100\n        99: astore_0\n       100: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$header$ResultCode:[I\n       103: getstatic     #38                 // Field dev/codex/schubert/nk/protocol/header/ResultCode.NOT_FOUND:Ldev/codex/schubert/nk/protocol/header/ResultCode;\n       106: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/header/ResultCode.ordinal:()I\n       109: bipush        7\n       111: iastore\n       112: goto          116\n       115: astore_0\n       116: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$header$ResultCode:[I\n       119: getstatic     #41                 // Field dev/codex/schubert/nk/protocol/header/ResultCode.CONFLICT:Ldev/codex/schubert/nk/protocol/header/ResultCode;\n       122: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/header/ResultCode.ordinal:()I\n       125: bipush        8\n       127: iastore\n       128: goto          132\n       131: astore_0\n       132: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$header$ResultCode:[I\n       135: getstatic     #44                 // Field dev/codex/schubert/nk/protocol/header/ResultCode.NOT_CANCELLABLE:Ldev/codex/schubert/nk/protocol/header/ResultCode;\n       138: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/header/ResultCode.ordinal:()I\n       141: bipush        9\n       143: iastore\n       144: goto          148\n       147: astore_0\n       148: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$header$ResultCode:[I\n       151: getstatic     #47                 // Field dev/codex/schubert/nk/protocol/header/ResultCode.LOCKED:Ldev/codex/schubert/nk/protocol/header/ResultCode;\n       154: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/header/ResultCode.ordinal:()I\n       157: bipush        10\n       159: iastore\n       160: goto          164\n       163: astore_0\n       164: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$header$ResultCode:[I\n       167: getstatic     #50                 // Field dev/codex/schubert/nk/protocol/header/ResultCode.TEMPORARY_FAILURE:Ldev/codex/schubert/nk/protocol/header/ResultCode;\n       170: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/header/ResultCode.ordinal:()I\n       173: bipush        11\n       175: iastore\n       176: goto          180\n       179: astore_0\n       180: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$header$ResultCode:[I\n       183: getstatic     #53                 // Field dev/codex/schubert/nk/protocol/header/ResultCode.RESOURCE_LIMIT:Ldev/codex/schubert/nk/protocol/header/ResultCode;\n       186: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/header/ResultCode.ordinal:()I\n       189: bipush        12\n       191: iastore\n       192: goto          196\n       195: astore_0\n       196: return\n      Exception table:\n         from    to  target type\n             9    20    23   Class java/lang/NoSuchFieldError\n            24    35    38   Class java/lang/NoSuchFieldError\n            39    50    53   Class java/lang/NoSuchFieldError\n            54    65    68   Class java/lang/NoSuchFieldError\n            69    80    83   Class java/lang/NoSuchFieldError\n            84    96    99   Class java/lang/NoSuchFieldError\n           100   112   115   Class java/lang/NoSuchFieldError\n           116   128   131   Class java/lang/NoSuchFieldError\n           132   144   147   Class java/lang/NoSuchFieldError\n           148   160   163   Class java/lang/NoSuchFieldError\n           164   176   179   Class java/lang/NoSuchFieldError\n           180   192   195   Class java/lang/NoSuchFieldError\n}\n",
+      "historicalRawCounters": [
+        {
+          "kind": "INSTRUCTION",
+          "missed": 12,
+          "covered": 77
+        },
+        {
+          "kind": "BRANCH",
+          "missed": 0,
+          "covered": 0
+        },
+        {
+          "kind": "LINE",
+          "missed": 0,
+          "covered": 1
+        },
+        {
+          "kind": "COMPLEXITY",
+          "missed": 0,
+          "covered": 1
+        },
+        {
+          "kind": "METHOD",
+          "missed": 0,
+          "covered": 1
+        },
+        {
+          "kind": "CLASS",
+          "missed": 0,
+          "covered": 1
+        }
+      ]
+    }
+  ],
+  "switchDefaultOffset": 76,
+  "enumMissingFieldHandlerCount": 12,
+  "rawCoverageWaived": false,
+  "testScopeChanged": false,
+  "productSourceChanged": false,
+  "otherRunCombined": false,
+  "unitReruns": 0,
+  "actualExternalActions": 0,
+  "whole451": false,
+  "formalDelta": 0
+}
