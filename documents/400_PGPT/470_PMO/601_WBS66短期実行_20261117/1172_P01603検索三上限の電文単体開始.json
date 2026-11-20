@@ -1,0 +1,71 @@
+{
+  "eventId": "PGPT-20261008-6689",
+  "groupId": "PGPT-WBS66-P01603-SCENARIO-SEARCH-COMPOSITE-WIRE-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T10:59:09.755000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 67,
+      "remainingPercent": 33,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P01603-SCENARIO-SEARCH-COMPOSITE-WIRE-20261120",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "PGPT-WBS66-P01603-SCENARIO-SEARCH-COMPOSITE-WIRE-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P016-03"
+    ],
+    "managementWorkIds": [
+      "WBS-P016-03/2"
+    ],
+    "source": "c4f84ba912da3ea866bdeaffcf53d7a8aa915dae",
+    "productionCoreMain": "517a23cddc9f3883550942f6fa90a4256ef39b73",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40792-scenario-search-composite-wire-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.4,
+      "high": 0.85
+    },
+    "groupCapPp": 1.5,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1171_WBS66現成果と受入の必要証拠.json",
+        "sha256": "d5e8ee4222719fa266358fbaabd5d5a34a974b8e92143de4bd1d5dcac9639d46"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40744-f02-cleanup-terminal-current-four-jars-v1/manifest.json",
+        "sha256": "b09a2e11492f508e5b1a503877f3efc9b5ac72412e7a9b8a68960e62d56dc2a0"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40602-f03-current-protocol-maven-independent-v1/manifest.json",
+        "sha256": "94b3c550c89f0903370ef0f2544e011cf74341ae309c3eff880843e3942cc6f7"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26064-mq-c04-preparation-v1/manifest.json",
+        "sha256": "4a1259991c57e54f760940a1e9a34306b07cd8e0b4cd375d644b158617e421f9"
+      },
+      {
+        "path": "evidence/01_PT/016_NK-WEB-002/4130_P01603SCR003検索入力結果原四artifact契約対応.md",
+        "sha256": "2a518142a1561107534f4a7d39aadb6c2378bda524a6fa08feacca46f3fb8fa2"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "SS313/323・UI234の公開済み契約。P01603元formは独立値確認、SRCREQ01既電文は別fixture。現局所の三上限同時結合が未取得。",
+    "endCondition": "三欄同時上限の672値、Game/entry padding、maxページと固定100、各一byte超過時の欄別拒否を独立値で試験。HTTP・実CHR・451は保留。",
+    "workScope": "ScenarioSearchForm一型、既許可Protocol JARと純粋な新JUnit二件のみ。JMS/DB/HTTP/権限/外部hostなし。"
+  }
+}
