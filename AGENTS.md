@@ -5,3 +5,4 @@
 - 未承認案・調査中draftは確定設計と分ける。設計反映を実装・PT・工程完了として扱わず、台帳の実装/PT未完了状態を維持する。
 - 実装が未受入ならmain起点の隔離worktree/branchで設計関連ファイルだけを反映する。未受入のコード・配備設定・工具・証跡をまとめてmainへmergeしない。実施worktreeの既存変更・stash・processは保全する。
 - source commit、main反映commit、対象文書、残る未確定事項を記録する。mainの並行更新はfetchして照合し、force push・保護規則迂回はしない。push/merge/remote確認が未完なら反映済みと報告しない。
+- 485または486を変更する手動commitでは、485の全バイトのSHA-256を486の `inventorySha256` に反映し、必要なファイルをstageしてから `python3 -B tools/quality/wbs_index_binding.py` を実行する。stage済みの二文書が一致したことを確認してからcommitする。

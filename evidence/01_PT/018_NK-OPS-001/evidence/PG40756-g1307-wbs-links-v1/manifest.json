@@ -1,0 +1,61 @@
+{
+  "actualExit": 0,
+  "run": "PG40756-g1307-wbs-links-v1",
+  "startEvent": "PGPT-20261008-6635",
+  "beforeSha256": "6978dd3370dacd08aab0433abd4583c3a3c20c3eb1e1325fb52a2bf21ebd80e9",
+  "core": "517a23cddc9f3883550942f6fa90a4256ef39b73",
+  "terminalAtUTC": "2026-11-20T08:19:20.793547+00:00",
+  "inventorySha256": "e20540e7b0e8b44693989661bbfaccf9a9755f3db6a8daebda220e87feb217a2",
+  "newSnapshotSha256": "57b5e8197ffafbd6ee6a573ceff53d1cd189685eb041919c38bb83c3029eccd1",
+  "onlySnapshotFieldChanged": "inventorySha256",
+  "canonicalHistoricalVersionsUnchanged": true,
+  "checks": {
+    "580_wbs_inventory_reference_guard.py": {
+      "exitCode": 0,
+      "command": [
+        "python3",
+        "-B",
+        "evidence/01_PT/018_NK-OPS-001/input/580_wbs_inventory_reference_guard.py"
+      ],
+      "output": {
+        "bindingValid": true,
+        "inventorySha256": "e20540e7b0e8b44693989661bbfaccf9a9755f3db6a8daebda220e87feb217a2",
+        "productTestsExecuted": 0
+      },
+      "sha256": "fe3ec9c2089a6152498b3a54b18e27bb38f5d987686127cc20691b111e9d45b0"
+    },
+    "wbs_index_binding.py": {
+      "exitCode": 0,
+      "command": [
+        "python3",
+        "-B",
+        "tools/quality/wbs_index_binding.py"
+      ],
+      "output": {
+        "bindingValid": true,
+        "inventorySha256": "e20540e7b0e8b44693989661bbfaccf9a9755f3db6a8daebda220e87feb217a2",
+        "productTestsExecuted": 0
+      },
+      "sha256": "4886ed37df765245329e8a50a6f38696205017e90c4a85cca409b21f7d5acd2b"
+    }
+  },
+  "regression": {
+    "command": "PYTHONPATH=tools/quality python3 -B -m unittest discover -s tools/quality/tests -p test_wbs_index_binding.py -v",
+    "exitCode": 0,
+    "scopeCount": 4,
+    "passed": 4,
+    "failures": 0,
+    "skipped": 0,
+    "notRun": 0,
+    "fixtureSha256": "a08794af170dd6b582f9e431c731e9e54d71f0c71ffd752087c41c59101bed38",
+    "cases": [
+      "test_both_matching_changes_are_admitted",
+      "test_missing_staged_snapshot_is_reported",
+      "test_partial_add_fails_even_when_worktree_hash_matches",
+      "test_unchanged_staged_pair_ignores_dirty_worktree"
+    ]
+  },
+  "productCases": 0,
+  "formalAcceptance": 0,
+  "whole451": false
+}
