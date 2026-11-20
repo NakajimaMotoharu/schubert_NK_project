@@ -1,0 +1,146 @@
+{
+  "eventId": "PGPT-20261008-7047",
+  "groupId": "PGPT-WBS66-P01808-STRICT-ORIGINAL-EXEC-20261121",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T18:28:22.233000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 77,
+      "remainingPercent": 23,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P01808-STRICT-ORIGINAL-EXEC-20261121",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-P01808-STRICT-ORIGINAL-EXEC-20261121",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P018-08.03"
+    ],
+    "managementWorkIds": [
+      "WBS-P018-08.03/2",
+      "WBS-F03/2-2"
+    ],
+    "source": "08e8a8a3ceafbb70d652e5ea3657fe50e60c1ebb",
+    "productionCoreMain": "559f5b5945e82374e0843dcfae11a8d07faef1ea",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG41082-p01808-original-exec-merge-before-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.3,
+      "base": 0.8,
+      "high": 1.8
+    },
+    "groupCapPp": 3,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1530_F03観測値のMapと診断継続点.json",
+        "sha256": "9858962cc8572192d99b484b64570a40b59ae177d0f4817f4ec87d64179f6742"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41056-p01808-raw-duplicate-class-final-v1/manifest.json",
+        "sha256": "a1eb4f73b97e64cdc6350cb9d7e3b55ea85c7b57c797f57d4873c71c3c48dc0a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40260-p01808-exec-modified-utf-independent-v1/manifest.json",
+        "sha256": "a9c9c03612f6a0972f58742a0c8e91264b164d98bafab157ca08b369c2ee9e60"
+      },
+      {
+        "path": "tools/quality/jacoco/UnfilteredCodeMeasurement.java",
+        "sha256": "054298b222db049f7908603da5f756a027c4637c75dcdad5ae8b6069063e5f5f"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "現Java raw工具のExecFileLoaderはclass recordを合成する。P018-08の単一元stream検査に専用条件が必要。",
+    "endCondition": "header一つ、session一つ、同class ID重複なしをsynthetic original modeで検証し、独立decoderと旧参考モードを比較。",
+    "workScope": "自己所有合成classと作成済みbyte vectorのみ。native agent接続、実stream回収、実環境なし。",
+    "quotaAfter": {
+      "usedPercent": 77,
+      "remainingPercent": 23,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "9b2d93080d8bfa475ae55b40f6f4a221ba11fa67f80569a6b79bde75362c6782",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T18:28:22.233000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 77,
+          "remainingPercent": 23,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T18:28:16.968598+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 77,
+      "remainingPercent": 23,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-7046",
+    "attempt": 1,
+    "attemptResult": "PASS_RAW_TOOL_ORIGINAL_STREAM_ONLY",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/5567_P01808単一元exec読取仕様・結果.md",
+        "sha256": "d3e10a89c9accf9c6e87903ad80b44cf9add9cb190a2c00e5a5e453a25f9f972"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41082-p01808-original-exec-merge-before-v1/manifest.json",
+        "sha256": "dbd836c3d60e6634bcfb3f8f7603525f26ef60690b895e6c75a83341852a7a90"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41084-p01808-original-exec-strict-after-v1/manifest.json",
+        "sha256": "93071e5684b9d31a96bee70224be18dd6438b923769bef455f8862ade3eb4e0a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41086-p01808-strict-original-static-v1/manifest.json",
+        "sha256": "e1c8775853bb05353a02b4f3980ded9856e4637e5bfedaaa9b500814ecb23126"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": "当sourceの実native stream、owner・終端・同一物理、全F03／451は継続。",
+    "toolChecks": 8,
+    "firstUnmetBuilderConditions": 6,
+    "finalUnmetBuilderConditions": 0,
+    "independentDecoderAgreement": 8,
+    "wholeProductRuns": 0,
+    "legacyModeChecks": 6,
+    "toolSource": "52692b06b9047588c5d0e982a3884a2c6f4c12dd",
+    "eventPreflightRejectedManagementId": 1,
+    "scopePreflightNotRun": 1
+  }
+}
