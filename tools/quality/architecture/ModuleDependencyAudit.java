@@ -64,7 +64,8 @@ public final class ModuleDependencyAudit {
       Set.of(
           "java.io.File", "java.io.FileInputStream", "java.io.FileOutputStream",
           "java.io.FileReader", "java.io.FileWriter", "java.io.RandomAccessFile",
-          "java.nio.channels.FileChannel", "java.nio.channels.AsynchronousFileChannel");
+          "java.nio.channels.FileChannel", "java.nio.channels.AsynchronousFileChannel",
+          "java.util.zip.ZipFile", "java.util.jar.JarFile");
   private static final Set<String> FILE_OPENING_WRITERS =
       Set.of("java.io.PrintWriter", "java.io.PrintStream", "java.util.Formatter");
   private static final Map<String, Set<String>> ALLOWED =
@@ -162,7 +163,8 @@ public final class ModuleDependencyAudit {
           if (controller && (filesystem(target) || opensFileInConstructor(access)))
             violations.get("CONTROLLER_BOUNDARY").add(origin + "\t" + target);
           if (module.equals("protocol")
-              && protocolFilesystem(target, access.getTarget().getName())) {
+              && (protocolFilesystem(target, access.getTarget().getName())
+                  || opensFileInConstructor(access))) {
             violations.get("FRAMEWORK_FENCES").add(origin + "\t" + target);
           }
         }
