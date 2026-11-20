@@ -25,7 +25,7 @@ import java.util.UUID;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
-/** EXPPORT-J001..009: borrowed JDBC and Guard callbacks, no true owner/session/DB/Root. */
+/** EXPPORT-J001..011: borrowed JDBC and Guard callbacks, no true owner/session/DB/Root. */
 final class ExpiryAuditPortTest {
   private static final String HANDLE =
       "id=? and run_id=? and business_date=? and step='CLEAN_EXPIRY' and attempt=? and"
@@ -275,6 +275,37 @@ final class ExpiryAuditPortTest {
       assertArrayEquals(new Throwable[] {secondary}, failure.getSuppressed());
       fixture.assertClosed();
     }
+  }
+
+  @Test
+  void updateAndCloseWithTheSameFailureKeepThePublicFailureContract() {
+    for (var route : List.of(STAGE, FINISH)) {
+      var fatal = new LinkageError("public shared error fixture");
+      var fatalFixture = new Fixture();
+      fatalFixture.faults = Map.of(route + "." + UPDATE, fatal, route + "." + CLOSE, fatal);
+      assertSame(fatal, assertThrows(LinkageError.class, expiryUpdate(route, fatalFixture)));
+      assertEquals(0, fatal.getSuppressed().length);
+      assertEquals(
+          List.of(REF, route), fatalFixture.ports.stream().map(port -> port.route).toList());
+      fatalFixture.assertClosed();
+
+      var sql = new SQLException("public shared SQL fixture");
+      var sqlFixture = new Fixture();
+      sqlFixture.faults = Map.of(route + "." + UPDATE, sql, route + "." + CLOSE, sql);
+      var mapped = assertThrows(BatchRepositoryException.class, expiryUpdate(route, sqlFixture));
+      assertNull(mapped.getCause());
+      assertEquals(0, mapped.getSuppressed().length);
+      assertEquals(0, sql.getSuppressed().length);
+      assertEquals(List.of(REF, route), sqlFixture.ports.stream().map(port -> port.route).toList());
+      sqlFixture.assertClosed();
+    }
+  }
+
+  private static Executable expiryUpdate(String route, Fixture fixture) {
+    return () -> {
+      if (route.equals(STAGE)) fixture.repository().stage(ATTEMPT, 3, 2, 200);
+      else fixture.repository().finish(ATTEMPT, STAGED, END_AT, 1L, RESULT);
+    };
   }
 
   @Test

@@ -1,0 +1,69 @@
+{
+  "eventId": "PGPT-20261008-6785",
+  "groupId": "P01711-Expiry-update-shared-failure",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T13:04:06.490000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 70,
+      "remainingPercent": 30,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "P01711-Expiry-update-shared-failure",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "P01711-Expiry-update-shared-failure",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P017-11"
+    ],
+    "managementWorkIds": [],
+    "source": "9f9bf0ca421461806bbfc15526c4542b10a5d375",
+    "productionCoreMain": "cdb649a5f054bc2ceed72ef57e55605f14a590d1",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40858-expiry-update-shared-failure-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.1,
+      "base": 0.25,
+      "high": 0.55
+    },
+    "groupCapPp": 0.8,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1268_CleanupStep単独SQLと継続点.json",
+        "sha256": "761c1a9343e358bc65c04f3afba24bd8943077c5736a106fc5bbb93625a9d8c1"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40730-f03-expiry-update-ownership-v1/manifest.json",
+        "sha256": "0f86bd44fadf2879f544990327aeab1ff55719b24f49c7fbdb8c8e8bcf6e6345"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40712-f03-expiry-current-batch-static-v1/manifest.json",
+        "sha256": "21d151eb874be92969bc279cb74e6019cb5358cbab012eb38634d68a630803c0"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40704-f02-current-four-expiry-jars-v1/manifest.json",
+        "sha256": "c58df3b46be9501d68256a6b8578efa8c0f7021f66f0e477d58de8c907b62da1"
+      },
+      {
+        "path": "evidence/01_PT/017_NK-BAT-001/4735_Expiry監査更新の資源所有・複合失敗仕様.md",
+        "sha256": "487ed2d9b5c2c4bafc902d88586bc1212fb0afcc06b9d603bc2c8f0cd143f91c"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "PG40730のJDK借用proxyとPG40712の16型のみ。対象と試験は現Coreへ照合する。旧30件は参照。",
+    "endCondition": "EXPPORT-J011のstage/finish同一例外4変種、解放回数と固定例外、対象16型とJava25の局所結果を記録。",
+    "workScope": "P017-11監査更新の新規選択PTのみ。実DB、実削除、全JAR解析、旧30件再演、451正式は範囲外。"
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "eventId": "PGPT-20261008-6787",
+  "wbsLeafIds": [
+    "WBS-P017-11"
+  ],
+  "managementWorkIds": [],
+  "workCategory": "SELECTED_TEST",
+  "source": "9f9bf0ca421461806bbfc15526c4542b10a5d375",
+  "productionCoreMain": "cdb649a5f054bc2ceed72ef57e55605f14a590d1",
+  "previousCheckpoint": "PGPT-20261008-6784",
+  "groupEvents": [
+    "PGPT-20261008-6786"
+  ],
+  "acceptedOriginal": 17,
+  "total": 190,
+  "coreAccepted": 0,
+  "coreTotal": 5,
+  "officialPtTests": 1964,
+  "officialPtScopes": 53,
+  "newFormalAcceptance": 0,
+  "effortRate": null,
+  "actualAllocatedPp": null,
+  "newProductTests": 1,
+  "recordedOwnedJobsInFlight": 0,
+  "ownedBackendJobsStartedHere": 0,
+  "modelObserved": "gpt-6.2-sol",
+  "reasoningObserved": null,
+  "speedObserved": null,
+  "outcomeEvidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40858-expiry-update-shared-failure-v1/manifest.json",
+      "sha256": "e4a7e4237e062a577972e242e00a092428458197418ce05331666bfe0ccf06a1"
+    },
+    {
+      "path": "evidence/01_PT/017_NK-BAT-001/4745_Expiry監査更新の同一例外仕様.md",
+      "sha256": "24651372629c2c5ce63b19abf8d27e028b3c20ea3b4a497516a2645b102e9448"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/input/5460_expiry_update_shared_failure_pt.py",
+      "sha256": "4120faa1010c45fe0b23aa6011ed21b51e306f9472b6802e67a781990d7a389f"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditPortTest.java",
+      "sha256": "3fac4645064839e5f922cea5f3d05c2e86ccaaab63574894e89c15dc65f6c570"
+    }
+  ],
+  "fullQuotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T13:06:43.839000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 70,
+      "remainingPercent": 30,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "quotaAfter": {
+    "usedPercent": 70,
+    "remainingPercent": 30,
+    "resetsAt": 1795445752,
+    "windowDurationMins": 10080
+  },
+  "sharedDeltaPp": null,
+  "completedOriginalRowPricePp": 0,
+  "remainingCriteria": [
+    "P017-11実削除・実DB・全終了依存・451",
+    "F02/F03広域条件、指定短期項目の残り"
+  ],
+  "nextEvidence": "F02/F03とP018/P004の同Core許可済み条件から、未確認の通常入力を一件選択。旧証拠を流用せず必要な同一入力照合を明記。",
+  "testId": "EXPPORT-J011",
+  "oldTestsRerun": 0,
+  "preflightStops": 1,
+  "firstPtAttemptPassed": true,
+  "preflightCause": "PG40730の開始HEADを変更後ファイルの根拠にした。candidateMain hashと現Coreの実byteに訂正。"
+}
