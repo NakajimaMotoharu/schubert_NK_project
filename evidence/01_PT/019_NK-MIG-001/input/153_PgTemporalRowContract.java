@@ -40,6 +40,7 @@ public final class PgTemporalRowContract {
           case "getEncoding" -> Encoding.getJVMEncoding("UTF-8");
           case "getQueryExecutor" -> backendProperties;
           case "getLogger" -> Logger.getAnonymousLogger();
+          case "getTypeInfo" -> new TypeInfoCache((BaseConnection) instance, 0);
           default -> throw new AssertionError("unexpected connection method " + method.getName());
         });
     BaseStatement statement =
@@ -66,10 +67,11 @@ public final class PgTemporalRowContract {
       BaseStatement statement, String id, int format, byte[] raw, String expected) throws SQLException {
     Field field = new Field("synthetic_timestamp", Oid.TIMESTAMPTZ);
     field.setFormat(format);
-    try (var rows =
+    var rows =
         new PgResultSet(null, statement, new Field[] {field},
             List.of(new Tuple(new byte[][] {raw})), null, 0, 0,
-            ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY, ResultSet.CLOSE_CURSORS_AT_COMMIT, false)) {
+            ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY, ResultSet.CLOSE_CURSORS_AT_COMMIT, false);
+    try {
       if (!rows.next()) {
         throw new AssertionError("synthetic row missing " + id);
       }
@@ -79,6 +81,11 @@ public final class PgTemporalRowContract {
         throw new AssertionError("unexpected JDBC temporal projection " + id + " " + actual);
       }
       System.out.println(id + "\t" + actual);
+    } finally {
+      rows.closeInternally();
+      if (!rows.isClosed()) {
+        throw new AssertionError("synthetic row not closed " + id);
+      }
     }
   }
 

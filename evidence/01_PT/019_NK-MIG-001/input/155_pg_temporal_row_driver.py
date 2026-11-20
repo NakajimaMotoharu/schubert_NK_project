@@ -49,9 +49,11 @@ def call(cmd, cwd, out, label):
 def main():
     last = next(PLAN.glob("983_*"))
     start = json.loads(last.read_bytes())["values"]
-    out = OPS / start["run"]
+    first = OPS / start["run"] / "manifest.json"
+    assert json.loads(first.read_bytes())["actualExit"] == 1
+    out = OPS / "PG40606-p00405-jdbc42-vendor-row-corrected-v1"
+    out.mkdir()
     assert all(record(Path(row["path"])) == row for row in start["oracleReferences"])
-    assert (out / "first-compile.json").exists()
     vendor = CACHE / "org/postgresql/postgresql/42.7.13/postgresql-42.7.13.jar"
     annotations = CACHE / "org/checkerframework/checker-qual/3.55.1/checker-qual-3.55.1.jar"
     pom = subprocess.check_output(
@@ -92,7 +94,8 @@ def main():
     success = good == all_expected and all(v["actualExit"] == 0 for v in phases.values())
     with (out / "manifest.json").open("x") as f:
         json.dump(dict(actualExit=int(not success), productionCore=start["productionCoreMain"],
-                       fixtureSource="17fb9c3397", stages=phases, inputs=inputs,
+                       fixtureSource=subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip(),
+                       initialAttempts=record(first), stages=phases, inputs=inputs,
                        matches=good, expected=all_expected, zones=ZONES, oldProductRunsRepeated=0,
                        jdbcClass="org.postgresql.jdbc.PgResultSet", realDbConnections=0,
                        actualServerSessionZones=0, wholeP00405Accepted=False, whole451Accepted=False,
