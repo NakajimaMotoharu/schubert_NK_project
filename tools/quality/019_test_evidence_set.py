@@ -2930,6 +2930,40 @@ class EvidenceSetTest(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     gate.local_file(directory, relative)
 
+    def test_manifest_json_has_unique_keys_and_integer_exit(self):
+        with tempfile.TemporaryDirectory(prefix="nk-manifest-schema-") as temporary:
+            root = Path(temporary)
+            scope = "009_NK-MED-001/evidence"
+            self.write_scope(root, scope)
+            directory = root / scope
+            path = directory / "manifest.json"
+            original = path.read_text()
+            self.assertEqual(
+                scope, gate.validate_scope(root, scope, "PT-WEB-TEST", "a" * 40, "dev-foundation")["scope"]
+            )
+            invalid = {
+                "boolean_exit": original.replace('"exitCode": 0', '"exitCode": false'),
+                "decimal_exit": original.replace('"exitCode": 0', '"exitCode": 0.0'),
+                "duplicate_exit": original.replace('"exitCode": 0', '"exitCode": 1, "exitCode": 0'),
+                "duplicate_nested_key": original.replace(
+                    '"path": "results.xml"', '"path": "wrong.xml", "path": "results.xml"'
+                ),
+                "non_json_number": original[:-1] + ', "elapsed": NaN}',
+            }
+            for label, data in invalid.items():
+                with self.subTest(label=label):
+                    self.assertNotEqual(original, data)
+                    path.write_text(data)
+                    (directory / "checksums.sha256").write_text(
+                        "".join(
+                            hashlib.sha256((directory / name).read_bytes()).hexdigest()
+                            + "  " + name + "\n"
+                            for name in ("manifest.json", "results.xml")
+                        )
+                    )
+                    with self.assertRaises(ValueError):
+                        gate.validate_scope(root, scope, "PT-WEB-TEST", "a" * 40, "dev-foundation")
+
     def test_collection_stops_at_each_failure(self):
         for failed_at in range(52):
             calls = []
