@@ -1,0 +1,138 @@
+{
+  "eventId": "PGPT-20261008-6429",
+  "groupId": "PGPT-WBS66-F03-RETAINED-CATCHES-AND-MONITOR-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T01:57:06.629000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 59,
+      "remainingPercent": 41,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-RETAINED-CATCHES-AND-MONITOR-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F03-RETAINED-CATCHES-AND-MONITOR-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "source": "b4b190df2a9c04599042e0839297368ca3c50fe9",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40516-f03-retained-catches-and-monitor-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.1,
+      "base": 0.3,
+      "high": 0.6
+    },
+    "groupCapPp": 0.8,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/907_F03公開設定と継続点.json",
+        "sha256": "cef7c42f976a76eee7eaa78feb98c6064df28349c8efe07d8fbbc2ccd76ff641"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40514-f03-nonsecret-config-raw-four-v1/manifest.json",
+        "sha256": "978bbfd357f8affd1670207ff8327bf5eeb06890c4277c4b1bc9fbf3eb781a39"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39814-f03-storage-bootstrap-static-independent-v1/manifest.json",
+        "sha256": "e3139ccf79da928f0f9ca472549a79f7935753eacfedd5aef1e60f7587cf9539"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/manifest.json",
+        "sha256": "ce61527bfbc1cc771977c2060a8a19ce8cbdafd690ae84459550e903f8cc93a6"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38446-f03-native-checkpoint-source-disposition-v1/manifest.json",
+        "sha256": "412559f07f307a1186cfe2735fd4621a1e746d7f0282f94ff0d573c0f70dfa93"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "WBS-F03/2-2の三製品moduleの元281中残20。旧公開適用性と現在sourceが照合可能。開始依存は元raw座標、証拠のSHA、ソース一致。",
+    "endCondition": "既存証拠と現在source・元rawを一対一で照合。適用中の懸案と証拠転用不能を分け、F03六製品全体の不足を残す。",
+    "workScope": "公開sourceの同一性および既存公開証跡の読取。実systemd・native・serviceを実行しない。",
+    "quotaAfter": {
+      "usedPercent": 59,
+      "remainingPercent": 41,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "344088cc56021678c55e8c6d36d76b43fd98a1905b507beb4d38e5c7d8075048",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T01:57:06.629000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 59,
+          "remainingPercent": 41,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T01:56:55.502463+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 59,
+      "remainingPercent": 41,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6428",
+    "attempt": 1,
+    "attemptResult": "RETAINED_NINETEEN_EXACT_AND_NATIVE_MONITOR_LEFT_OPEN",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40516-f03-retained-catches-and-monitor-v1/manifest.json",
+        "sha256": "25d7451408ac49163bb5c61bdbb589fd6e93a2a7d3af4d61e310f31cb657c48c"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "元281の未分類は現在sourceの監視一件のみ。六module全面・451・実nativeは保留。"
+    ],
+    "firstValidationPassed": 19,
+    "firstValidationDenominator": 20,
+    "retries": 0,
+    "rawOriginal": 281,
+    "retainedNonApplicableAdded": 19,
+    "totalAssignedFromOriginal": 280,
+    "unclassifiedFromOriginal": 1,
+    "ordinaryPTStarted": 0
+  }
+}
