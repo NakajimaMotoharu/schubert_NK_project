@@ -1,0 +1,159 @@
+{
+  "eventId": "PGPT-20261008-6878",
+  "groupId": "p01624-error-status-enum-domain",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T14:51:10.396000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 72,
+      "remainingPercent": 28,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "p01624-error-status-enum-domain",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "p01624-error-status-enum-domain",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P016-24"
+    ],
+    "managementWorkIds": [
+      "A1-36.05"
+    ],
+    "source": "be485d9a0b4cde0d00f1057960efc965bcdd5e1c",
+    "productionCoreMain": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40934-p01624-error-status-domain-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.12,
+      "base": 0.35,
+      "high": 0.65
+    },
+    "groupCapPp": 0.9,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1360_P01624現Protocol依存全二十二継続点.json",
+        "sha256": "b4395f1f6b4bfd37479cdd2794326ecb76565781db63b39d7ae613e89a9ab66a"
+      },
+      {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG40932-p01624-current-protocol-closed22-v1/manifest.json",
+        "sha256": "f39f7ef29c6d545de900ea189d6b6fa1eedb2e8222f363d15a31735c37a91a04"
+      },
+      {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG40932-p01624-current-protocol-closed22-v1/raw-manifest.json",
+        "sha256": "45a5d29235cc3fe7ce0065ccebdae60d2d85633cdc21e895aa5107396ba70c20"
+      },
+      {
+        "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+        "sha256": "2b4e1ebb15b348b1f25d1502130d6a4a3607893868d7ea5e57d231ec7f3e58ef"
+      },
+      {
+        "path": "documents/200_UI/220_画面・認証/222_画面共通・レイアウト設計.md",
+        "sha256": "8a52f0de895933c5696d7d5d385287729480a40384cd1855ea99d3d9a914763c"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "SS313 SSC047で定義された9状態とUI222の固定表示。raw現execで公enum values/valueOfに2 method不足。実装は不変。",
+    "endCondition": "独立定義の9名称・HTTPの対応、列挙の閉集合・配列独立性、未定義名の拒否を一新Testで観測。Status物理のrawを同一新execで取得。",
+    "workScope": "同closed fixtureの追加一メソッド、現在承認済みProtocol/保持Web/SDK、外部操作なし。先行22と二実行を足さない。",
+    "quotaAfter": {
+      "usedPercent": 72,
+      "remainingPercent": 28,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "0859475bbcbde256102c62d26c55db5487570641969df459d634df485a9c61fb",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T14:51:10.396000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 72,
+          "remainingPercent": 28,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T14:50:47.601947+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 72,
+      "remainingPercent": 28,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6877",
+    "attempt": 1,
+    "attemptResult": "SELECTED_NEW_STATUS_CATALOG_CASE_PASS",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 1,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG40934-p01624-error-status-domain-v1/manifest.json",
+        "sha256": "c72dd89e29b9a40e2b4f8bd0b2dd5bdaf8cfaec22f1443fa495bce96a699729f"
+      },
+      {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG40934-p01624-error-status-domain-v1/status-unfiltered.tsv",
+        "sha256": "f725271e75707cac1f1a265b030e045097ef6f6f8339a21590219b48e030d806"
+      },
+      {
+        "path": "evidence/01_PT/016_NK-WEB-002/input/4935_error_status_catalog_current.py",
+        "sha256": "cc61eabb9b551f70449abab02e0d0a54d2a6e1af2098c81dc3cba49188a135e2"
+      },
+      {
+        "path": "evidence/01_PT/016_NK-WEB-002/4933_P01624公開error状態単体仕様.md",
+        "sha256": "1a58a685b72d5fcea08ab14fdec4f7cc8a711cfdecf40fd7ce414e9ce91fc6a6"
+      },
+      {
+        "path": "evidence/01_PT/016_NK-WEB-002/4934_P01624公開error状態単体結果.md",
+        "sha256": "50a886d8c8e8f15a5da6abf33ec36297c2e08853ffc6750558c566b2dfb82055"
+      },
+      {
+        "path": "tools/quality/architecture/ErrorValueContractTest.java",
+        "sha256": "11d2ad00b9dc679a3fc8fd35ccaf4de32259eff742aa0d26d5ca471759cfd712"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "同一scope/runでのP016-24全raw",
+      "WebResultMapperの未到達分岐と補助命令の扱い",
+      "current actual Web and 451"
+    ],
+    "newStatusCases": 1,
+    "successfulNewCases": 1,
+    "rawStatusMethods": 5,
+    "rawStatusMissed": 0,
+    "testId": "ERROR-VALUE007",
+    "actualExternalActions": 0,
+    "prior22ReexecutedHere": 0
+  }
+}

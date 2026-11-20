@@ -16,10 +16,11 @@ import dev.codex.schubert.nk.web.view.TopBarViewModel;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
-/** NK-WEB-001/SCR090; UI222 section7, SS313 section9; ERROR-VALUE001..006. */
+/** NK-WEB-001/SCR090; UI222 section7, SS313 section9; ERROR-VALUE001..007. */
 final class ErrorValueContractTest {
   private static final UUID REQUEST = new UUID(0, 73);
   private static final Status[] STATUSES = {
@@ -150,5 +151,31 @@ final class ErrorValueContractTest {
     assertSame(selected, factory.create(404, REQUEST, selected).getTopBar());
     assertEquals("PUBLIC_DISPLAY", bar.getUsername());
     assertEquals("USER", bar.getRole());
+  }
+
+  @Test
+  void errorValue007PublicStatusCatalogIsClosedAndEachNameRetainsItsHttpStatus() {
+    String[] names = {
+      "BAD_REQUEST",
+      "UNAUTHENTICATED",
+      "FORBIDDEN",
+      "NOT_FOUND",
+      "METHOD_NOT_ALLOWED",
+      "CONFLICT",
+      "RANGE_INVALID",
+      "RATE_LIMITED",
+      "UNAVAILABLE"
+    };
+    assertEquals(Set.of(STATUSES), Set.of(Status.values()));
+    for (int i = 0; i < names.length; i++) {
+      Status selected = Status.valueOf(names[i]);
+      assertSame(STATUSES[i], selected);
+      assertEquals(HTTP[i], ErrorViewModel.of(selected, REQUEST, Optional.empty()).getStatus());
+    }
+    Status[] callerCopy = Status.values();
+    callerCopy[0] = null;
+    assertEquals(Set.of(STATUSES), Set.of(Status.values()));
+    assertThrows(IllegalArgumentException.class, () -> Status.valueOf("INTERNAL_SERVER_ERROR"));
+    assertThrows(NullPointerException.class, () -> Status.valueOf(null));
   }
 }
