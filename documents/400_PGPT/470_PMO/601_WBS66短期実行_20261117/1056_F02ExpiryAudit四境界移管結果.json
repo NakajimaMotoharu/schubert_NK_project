@@ -1,0 +1,188 @@
+{
+  "eventId": "PGPT-20261008-6575",
+  "groupId": "wbs66-f02-ssc461-expiry-audit-jdbc-owner",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T06:06:20.038000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 63,
+      "remainingPercent": 37,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "wbs66-f02-ssc461-expiry-audit-jdbc-owner",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "wbs66-f02-ssc461-expiry-audit-jdbc-owner",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a",
+      "WBS-F02-b"
+    ],
+    "source": "dae7bb55f0629442aa0f64fe15c662c9d9bfb116",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40694-f02-expiry-audit-jdbc-owner-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.6,
+      "base": 1.5,
+      "high": 2.5
+    },
+    "groupCapPp": 4,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1054_F03Outbox二型と継続点.json",
+        "sha256": "179ce1a3d86717d99540232b9ff698a404493ee2be262d229586932121fcdae1"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40438-f02-ssc461-exact-current-callers-v1/manifest.json",
+        "sha256": "e79cbfbcdc9c2ebe645b74f86875db19d7a35252d5c8961600075eb38bfd6ea5"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40498-schema-history-packaged-proof-recovered-v1/manifest.json",
+        "sha256": "bba0cb1781e36039e9014b8a7f27e4ab2354ef78283181a704bae5dba9fd9b0f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40692-f03-outbox-static-independent-v1/manifest.json",
+        "sha256": "37037bbc2a513992feaa8d151329bd8777afdd7a9b141484d4578484e24ecfcd"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "Approved SSC461 existing JdbcFailureGraph; inspect the four remaining ExpiryAuditRepository JDBC diagnostic sites. Run only in-memory Java interface-proxy tests with an offline compile.",
+    "endCondition": "Transfer 4 caller sites to framework-owned adapter, test exact fatal identity and nonfatal fixed diagnosis on each entry, prove no live DB, no transaction/SQL/ABI change. Keep legacy Storage edge open.",
+    "workScope": "WBS-F02/SYS-005; BL-BAT PT-BAT-284..287; SSC461 BUG3233 YKT2680. No actual deletion, broker, DB, service, Root/permit, or held class.",
+    "quotaAfter": {
+      "usedPercent": 63,
+      "remainingPercent": 37,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "b6f52ee08d1f71129fdd3e11e51725b75186280e10e4cb4deeec4a1103887601",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T06:06:20.038000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 63,
+          "remainingPercent": 37,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T06:05:28.619052+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 63,
+      "remainingPercent": 37,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6574",
+    "attempt": 1,
+    "attemptResult": "PASS_LOCAL_PG_PT_8_AFTER",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 8,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40696-f02-expiry-audit-jdbc-owner-v2-before/manifest.json",
+        "sha256": "8bda16601922f14de0a7ee445a41c840cb7c03dcbb20925820124a390a2a3716"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40696-f02-expiry-audit-jdbc-owner-v2-after/manifest.json",
+        "sha256": "16153697ac2a9c051cb133354bd2982c6b21e53d85848273c6a0799d21c63dfc"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40698-f02-expiry-audit-jdbc-independent-v1/manifest.json",
+        "sha256": "6e009299dbba22fa572d8ea7c9822f77c2d7fd0f79f33d3a3e84a5a730b899e6"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/4732_ExpiryAuditのJDBC例外責務移管仕様.md",
+        "sha256": "7a803795fa5d1b7e586d4aaa193db5b17d656f0706fd863333a24bf553da24c6"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "remaining permitted and held upper callers",
+      "three Storage direct sites and legacy java.sql package physical edge",
+      "six current module source/JAR, runtime and QA-056",
+      "same-source full 451 and formal F02"
+    ],
+    "beforeCases": 8,
+    "afterCases": 8,
+    "failed": 0,
+    "skipped": 0,
+    "notRun": 0,
+    "firstVerificationPass": 0,
+    "firstVerificationDenominator": 1,
+    "retries": 2,
+    "scopedSelectedProductTests": 8,
+    "scopedBeforeCasesNotAdded": 8,
+    "candidateProductionSource": "82de9065ca8216542cd4e12ddd61003d9bb07ab2",
+    "candidateMainSha256": "a7342deaf0a4047e6a8c257385ef7d1e3d4581f7cd2a5e71153e5e42b6b64618",
+    "candidateWhole451Qualified": false,
+    "abiEqual": true,
+    "callSitesMoved": 4,
+    "rawScopedCoverage": {
+      "LINE": {
+        "covered": 63,
+        "missed": 196
+      },
+      "METHOD": {
+        "covered": 14,
+        "missed": 35
+      },
+      "CLASS": {
+        "covered": 2,
+        "missed": 2
+      },
+      "BRANCH": {
+        "covered": 19,
+        "missed": 193
+      },
+      "INSTRUCTION": {
+        "covered": 265,
+        "missed": 1164
+      }
+    },
+    "bugs": [
+      "BUG-3402",
+      "BUG-3403"
+    ],
+    "retestReasons": [
+      "two missing fixed linkage dependencies",
+      "Legacy XML and console parameter names differ"
+    ],
+    "lastQualifiedCore": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461"
+  }
+}
