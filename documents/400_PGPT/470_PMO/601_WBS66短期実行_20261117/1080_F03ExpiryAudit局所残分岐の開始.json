@@ -1,0 +1,71 @@
+{
+  "eventId": "PGPT-20261008-6598",
+  "groupId": "wbs66-f03-expiry-remaining-local-contract",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T06:30:17.370000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 64,
+      "remainingPercent": 36,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "wbs66-f03-expiry-remaining-local-contract",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "wbs66-f03-expiry-remaining-local-contract",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "source": "567575748cd02c99508309cfba2a7ef559b2d932",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40722-f03-expiry-local-coverage-deficits-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.3,
+      "base": 0.8,
+      "high": 1.9
+    },
+    "groupCapPp": 3,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1079_F03ExpiryAudit同一26継続点.json",
+        "sha256": "2eb6b1f53d0f49f5050b595374df9601b5e163263c911b3eb0bed005788e10d8"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40720-f03-expiry-current-26-proxy-v3/manifest.json",
+        "sha256": "57002f5cc7f12267868be74a783a463c3c71a5f30b3c0ee82cf0d6c0b77b99ae"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40704-f02-current-four-expiry-jars-v1/manifest.json",
+        "sha256": "c58df3b46be9501d68256a6b8578efa8c0f7021f66f0e477d58de8c907b62da1"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40698-f02-expiry-audit-jdbc-independent-v1/manifest.json",
+        "sha256": "6e009299dbba22fa572d8ea7c9822f77c2d7fd0f79f33d3a3e84a5a730b899e6"
+      },
+      {
+        "path": "evidence/01_PT/017_NK-BAT-001/697_Expiry監査SQL・状態契約単体仕様.md",
+        "sha256": "aa479aede238f3ef09822276f513cbb8b9dcd753f307cb7f933c0c4d8a3609da"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "Case cohort 26 on 7 exact physical types. Review unfiltered deficits; document expected equality/index semantics and existing JDBC close priority from SS and independent fixtures.",
+    "endCondition": "Exact deficit attribution, ordinary independent cases for reachable missing cases, one expanded same-source exec with all raw counters and concrete residual output. No ease exclusions.",
+    "workScope": "Existing in-memory ports and immutable values only. No resource owner/DB/Root/native operations."
+  }
+}
