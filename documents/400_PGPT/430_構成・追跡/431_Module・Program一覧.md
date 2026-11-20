@@ -993,3 +993,5 @@ PT-OPS-EXEC-CRC-004、WBS-P018-08.03/2、SS354／451。厳密readerのname一意
 PT-OPS-EXEC-CRC-005、WBS-P018-08.03/2、SS354／451。元execの正規符号化、独立期待値、保存元読取。 [仕様・証跡](../../../evidence/01_PT/018_NK-OPS-001/5603_P01808元exec正規符号化仕様・結果.md)。
 
 PT-F02-WEB-FILE-CTOR-001～015、WBS-F02-a、SS311 §5.2／PG-D516。Controllerの直接File openと既streamの区別。 [仕様・証跡](../../../evidence/01_PT/018_NK-OPS-001/5607_F02画面直接File生成境界仕様・結果.md)。
+
+PT-WEB-SCR012-COUNT-001、WBS-P016-12/2-照合、SS313 §2・UI235 §8。区分件数の反対方向不一致。 [局所仕様](../../../evidence/01_PT/016_NK-WEB-002/4938_SCR012区分件数不足側の単体仕様.md)。
