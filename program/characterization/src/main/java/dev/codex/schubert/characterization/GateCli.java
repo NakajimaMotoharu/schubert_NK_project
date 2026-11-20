@@ -193,10 +193,16 @@ public final class GateCli {
 
   private static void compare(
       JsonNode expected, Map<String, Object> actual, String field, List<String> failures) {
-    String expectedValue = expected.path(field).asText();
-    String actualValue = String.valueOf(actual.get(field));
-    if (!expectedValue.equals(actualValue)) {
-      failures.add(field + " expected=" + expectedValue + " actual=" + actualValue);
+    JsonNode expectedValue = expected.path(field);
+    Object actualValue = actual.get(field);
+    boolean matches =
+        actualValue instanceof Number count
+            ? expectedValue.isIntegralNumber()
+                && expectedValue.canConvertToLong()
+                && expectedValue.longValue() == count.longValue()
+            : expectedValue.isTextual() && expectedValue.textValue().equals(actualValue);
+    if (!matches) {
+      failures.add(field + " expected=" + expectedValue.asText() + " actual=" + actualValue);
     }
   }
 
