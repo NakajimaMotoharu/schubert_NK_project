@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<BugCollection version="4.10.4" sequence="0" timestamp="1795208741292" analysisTimestamp="1795208742057" release="">
+  <Project projectName="">
+    <Jar>/dev/shm/pgpt-jdbc-order-proof-n4vh_61c/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class</Jar>
+    <Jar>/dev/shm/pgpt-jdbc-order-proof-n4vh_61c/dev/codex/schubert/nk/storage/StorageIoException.class</Jar>
+    <Jar>/dev/shm/pgpt-jdbc-order-proof-n4vh_61c/dev/codex/schubert/nk/storage/StorageIoException$Reason.class</Jar>
+    <Jar>/dev/shm/pgpt-jdbc-order-proof-n4vh_61c/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraphOrderTest.class</Jar>
+    <Jar>/dev/shm/pgpt-jdbc-order-proof-n4vh_61c/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraphOrderTest$CountingSql.class</Jar>
+    <AuxClasspathEntry>/dev/shm/pgpt-jdbc-order-proof-n4vh_61c</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar</AuxClasspathEntry>
+  </Project>
+  <BugInstance type="EI_EXPOSE_REP" priority="2" rank="18" abbrev="EI" category="MALICIOUS_CODE" instanceHash="dee6402a58513ef6b911ca4615c2abe8" instanceOccurrenceNum="0" instanceOccurrenceMax="0" cweid="374">
+    <ShortMessage>May expose internal representation by returning reference to mutable object</ShortMessage>
+    <LongMessage>dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraphOrderTest$CountingSql.getNextException() may expose internal representation by returning JdbcFailureGraphOrderTest$CountingSql.peer</LongMessage>
+    <Class classname="dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraphOrderTest$CountingSql" primary="true">
+      <SourceLine classname="dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraphOrderTest$CountingSql" start="74" end="86" sourcefile="JdbcFailureGraphOrderTest.java" sourcepath="dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraphOrderTest.java">
+        <Message>At JdbcFailureGraphOrderTest.java:[lines 74-86]</Message>
+      </SourceLine>
+      <Message>In class dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraphOrderTest$CountingSql</Message>
+    </Class>
+    <Method classname="dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraphOrderTest$CountingSql" name="getNextException" signature="()Ljava/sql/SQLException;" isStatic="false" primary="true">
+      <SourceLine classname="dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraphOrderTest$CountingSql" start="85" end="86" startBytecode="0" endBytecode="84" sourcefile="JdbcFailureGraphOrderTest.java" sourcepath="dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraphOrderTest.java"/>
+      <Message>In method dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraphOrderTest$CountingSql.getNextException()</Message>
+    </Method>
+    <Field classname="dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraphOrderTest$CountingSql" name="peer" signature="Ljava/sql/SQLException;" isStatic="false" primary="true">
+      <SourceLine classname="dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraphOrderTest$CountingSql" sourcefile="JdbcFailureGraphOrderTest.java" sourcepath="dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraphOrderTest.java">
+        <Message>In JdbcFailureGraphOrderTest.java</Message>
+      </SourceLine>
+      <Message>Field dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraphOrderTest$CountingSql.peer</Message>
+    </Field>
+    <SourceLine classname="dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraphOrderTest$CountingSql" primary="true" start="86" end="86" startBytecode="29" endBytecode="29" sourcefile="JdbcFailureGraphOrderTest.java" sourcepath="dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraphOrderTest.java">
+      <Message>At JdbcFailureGraphOrderTest.java:[line 86]</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugCategory category="MALICIOUS_CODE">
+    <Description>Malicious code vulnerability</Description>
+  </BugCategory>
+  <BugPattern type="EI_EXPOSE_REP" abbrev="EI" category="MALICIOUS_CODE" cweid="374">
+    <ShortDescription>May expose internal representation by returning reference to mutable object</ShortDescription>
+    <Details><![CDATA[
+
+  <p> Returning a reference to a mutable object value stored in one of the object's fields
+  exposes the internal representation of the object.&nbsp;
+   If instances
+   are accessed by untrusted code, and unchecked changes to
+   the mutable object would compromise security or other
+   important properties, you will need to do something different.
+  Returning a new copy of the object is better approach in many situations.</p>
+  <p>See <a href="https://cwe.mitre.org/data/definitions/374.html">CWE-374: Passing Mutable Objects to an Untrusted Method</a>.
+</p>
+
+    ]]></Details>
+  </BugPattern>
+  <BugCode abbrev="EI">
+    <Description>Method may expose internal representation</Description>
+  </BugCode>
+  <Errors errors="0" missingClasses="0"></Errors>
+  <FindBugsSummary timestamp="Sat, 21 Nov 2026 06:05:41 +0900" total_classes="5" referenced_classes="79" total_bugs="1" total_size="111" num_packages="2" java_version="25.0.4" vm_version="25.0.4+7-1-26.04-Ubuntu" cpu_seconds="9.41" clock_seconds="2.10" peak_mbytes="195.74" alloc_mbytes="1024.00" gc_seconds="0.02" priority_2="1">
+    <FileStats path="dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.java" bugCount="0" size="6"/>
+    <FileStats path="dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraphOrderTest.java" bugCount="1" size="60" bugHash="fe53ccddd0b2540db7748622ff3279c8"/>
+    <FileStats path="dev/codex/schubert/nk/storage/StorageIoException.java" bugCount="0" size="45"/>
+    <PackageStats package="dev.codex.schubert.nk.api.bootstrap" total_bugs="1" total_types="3" total_size="66" priority_2="1">
+      <ClassStats class="dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph" sourceFile="JdbcFailureGraph.java" interface="true" size="6" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraphOrderTest" sourceFile="JdbcFailureGraphOrderTest.java" interface="false" size="48" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraphOrderTest$CountingSql" sourceFile="JdbcFailureGraphOrderTest.java" interface="false" size="12" bugs="1" priority_2="1"/>
+    </PackageStats>
+    <PackageStats package="dev.codex.schubert.nk.storage" total_bugs="0" total_types="2" total_size="45">
+      <ClassStats class="dev.codex.schubert.nk.storage.StorageIoException" sourceFile="StorageIoException.java" interface="false" size="31" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.StorageIoException$Reason" sourceFile="StorageIoException.java" interface="false" size="14" bugs="0"/>
+    </PackageStats>
+    <FindBugsProfile>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassInfoAnalysisEngine" totalMilliseconds="326" invocations="776" avgMicrosecondsPerInvocation="420" maxMicrosecondsPerInvocation="14195" standardDeviationMicrosecondsPerInvocation="982"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FieldItemSummary" totalMilliseconds="153" invocations="79" avgMicrosecondsPerInvocation="1949" maxMicrosecondsPerInvocation="16359" standardDeviationMicrosecondsPerInvocation="3150"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindNoSideEffectMethods" totalMilliseconds="125" invocations="79" avgMicrosecondsPerInvocation="1582" maxMicrosecondsPerInvocation="12515" standardDeviationMicrosecondsPerInvocation="2527"/>
+      <ClassProfile name="edu.umd.cs.findbugs.OpcodeStack$JumpInfoFactory" totalMilliseconds="116" invocations="308" avgMicrosecondsPerInvocation="378" maxMicrosecondsPerInvocation="3692" standardDeviationMicrosecondsPerInvocation="477"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassDataAnalysisEngine" totalMilliseconds="68" invocations="784" avgMicrosecondsPerInvocation="87" maxMicrosecondsPerInvocation="3154" standardDeviationMicrosecondsPerInvocation="133"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.JavaClassAnalysisEngine" totalMilliseconds="57" invocations="123" avgMicrosecondsPerInvocation="464" maxMicrosecondsPerInvocation="14038" standardDeviationMicrosecondsPerInvocation="1342"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FunctionsThatMightBeMistakenForProcedures" totalMilliseconds="54" invocations="79" avgMicrosecondsPerInvocation="695" maxMicrosecondsPerInvocation="13096" standardDeviationMicrosecondsPerInvocation="1670"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.NoteDirectlyRelevantTypeQualifiers" totalMilliseconds="52" invocations="79" avgMicrosecondsPerInvocation="659" maxMicrosecondsPerInvocation="4592" standardDeviationMicrosecondsPerInvocation="946"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.TypeDataflowFactory" totalMilliseconds="49" invocations="56" avgMicrosecondsPerInvocation="884" maxMicrosecondsPerInvocation="10091" standardDeviationMicrosecondsPerInvocation="1750"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.ValueNumberDataflowFactory" totalMilliseconds="48" invocations="56" avgMicrosecondsPerInvocation="858" maxMicrosecondsPerInvocation="10688" standardDeviationMicrosecondsPerInvocation="1865"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.MethodGenFactory" totalMilliseconds="43" invocations="56" avgMicrosecondsPerInvocation="775" maxMicrosecondsPerInvocation="24728" standardDeviationMicrosecondsPerInvocation="3291"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.OverridingEqualsNotSymmetrical" totalMilliseconds="36" invocations="79" avgMicrosecondsPerInvocation="458" maxMicrosecondsPerInvocation="5815" standardDeviationMicrosecondsPerInvocation="908"/>
+      <ClassProfile name="edu.umd.cs.findbugs.util.TopologicalSort" totalMilliseconds="35" invocations="727" avgMicrosecondsPerInvocation="48" maxMicrosecondsPerInvocation="1331" standardDeviationMicrosecondsPerInvocation="91"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.CalledMethods" totalMilliseconds="33" invocations="79" avgMicrosecondsPerInvocation="425" maxMicrosecondsPerInvocation="3749" standardDeviationMicrosecondsPerInvocation="686"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.BuildObligationPolicyDatabase" totalMilliseconds="32" invocations="79" avgMicrosecondsPerInvocation="414" maxMicrosecondsPerInvocation="3471" standardDeviationMicrosecondsPerInvocation="595"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.CFGFactory" totalMilliseconds="31" invocations="56" avgMicrosecondsPerInvocation="566" maxMicrosecondsPerInvocation="7965" standardDeviationMicrosecondsPerInvocation="1114"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.BuildStringPassthruGraph" totalMilliseconds="25" invocations="79" avgMicrosecondsPerInvocation="322" maxMicrosecondsPerInvocation="2987" standardDeviationMicrosecondsPerInvocation="566"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindReturnRef" totalMilliseconds="25" invocations="5" avgMicrosecondsPerInvocation="5005" maxMicrosecondsPerInvocation="15802" standardDeviationMicrosecondsPerInvocation="6124"/>
+    </FindBugsProfile>
+  </FindBugsSummary>
+  <ClassFeatures></ClassFeatures>
+  <History></History>
+</BugCollection>
