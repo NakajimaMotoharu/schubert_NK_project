@@ -143,7 +143,8 @@ public final class ModuleDependencyAudit {
   private static boolean jdbc(String target) {
     return target.startsWith("java.sql.")
         || target.startsWith("javax.sql.")
-        || target.startsWith("org.springframework.jdbc.");
+        || target.startsWith("org.springframework.jdbc.")
+        || target.startsWith("org.postgresql.");
   }
 
   private static boolean isController(JavaClass type) {
@@ -191,7 +192,9 @@ public final class ModuleDependencyAudit {
   }
 
   private static boolean jmsApi(String target) {
-    return target.startsWith("jakarta.jms.") || target.startsWith("javax.jms.");
+    return target.startsWith("jakarta.jms.")
+        || target.startsWith("javax.jms.")
+        || target.startsWith("org.apache.activemq.artemis.");
   }
 
   private static boolean filesystem(String target) {

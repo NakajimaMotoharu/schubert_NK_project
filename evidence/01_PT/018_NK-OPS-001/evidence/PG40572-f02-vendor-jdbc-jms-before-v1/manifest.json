@@ -1,0 +1,209 @@
+{
+  "actualExit": 1,
+  "source": "bce56c820f015ce90ac3afd824d787260269582f",
+  "productionCore": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+  "toolSha256": "bb7f4c3cbac7d37a3e5fdcd57dde9b1460ae10956f075d3977cb2067e32eda5c",
+  "actualAuditExit": 0,
+  "checks": [
+    {
+      "id": "PT-F02-VENDOR-001",
+      "origin": "dev.codex.schubert.nk.storage.DriverStore",
+      "target": "org.postgresql.PGConnection",
+      "rule": "FRAMEWORK_FENCES",
+      "expected": true,
+      "observed": false
+    },
+    {
+      "id": "PT-F02-VENDOR-002",
+      "origin": "dev.codex.schubert.nk.protocol.DriverCodec",
+      "target": "org.postgresql.PGConnection",
+      "rule": "FRAMEWORK_FENCES",
+      "expected": true,
+      "observed": false
+    },
+    {
+      "id": "PT-F02-VENDOR-003",
+      "origin": "dev.codex.schubert.nk.storage.DirectBroker",
+      "target": "org.apache.activemq.artemis.api.core.client.ClientSession",
+      "rule": "FRAMEWORK_FENCES",
+      "expected": true,
+      "observed": false
+    },
+    {
+      "id": "PT-F02-VENDOR-004",
+      "origin": "dev.codex.schubert.nk.protocol.DirectJms",
+      "target": "org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory",
+      "rule": "FRAMEWORK_FENCES",
+      "expected": true,
+      "observed": false
+    },
+    {
+      "id": "PT-F02-VENDOR-005",
+      "origin": "dev.codex.schubert.nk.web.DriverController",
+      "target": "org.postgresql.PGConnection",
+      "rule": "CONTROLLER_BOUNDARY",
+      "expected": true,
+      "observed": false
+    },
+    {
+      "id": "PT-F02-VENDOR-006",
+      "origin": "dev.codex.schubert.nk.web.JmsController",
+      "target": "org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory",
+      "rule": "CONTROLLER_BOUNDARY",
+      "expected": true,
+      "observed": false
+    },
+    {
+      "id": "PT-F02-VENDOR-007",
+      "origin": "dev.codex.schubert.nk.bootstrap.CopyAdapter",
+      "target": "org.postgresql.PGConnection",
+      "rule": "FRAMEWORK_FENCES",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "id": "PT-F02-VENDOR-008",
+      "origin": "dev.codex.schubert.nk.batch.ManagementAdapter",
+      "target": "org.apache.activemq.artemis.api.core.client.ClientSession",
+      "rule": "FRAMEWORK_FENCES",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "id": "PT-F02-VENDOR-009",
+      "origin": "dev.codex.schubert.nk.api.messaging.JmsAdapter",
+      "target": "org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory",
+      "rule": "FRAMEWORK_FENCES",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "id": "PT-F02-VENDOR-010",
+      "origin": "dev.codex.schubert.nk.web.session.SessionDriver",
+      "target": "org.postgresql.PGConnection",
+      "rule": "CONTROLLER_BOUNDARY",
+      "expected": false,
+      "observed": false
+    }
+  ],
+  "correct": 4,
+  "regressionControls": 0,
+  "compiledOnlyVendorTypes": [
+    "org.apache.activemq.artemis.api.core.client.ClientSession",
+    "org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory",
+    "org.postgresql.PGConnection"
+  ],
+  "inputPhysical": {
+    "dev.codex.schubert.nk.api.Marker": "7668cc69a88d212a0c1ce18373ba7eeb5a0cd540b9084490d6225c54f9eb41f9",
+    "dev.codex.schubert.nk.api.messaging.JmsAdapter": "8dd0778915680ad78d9c7595b35e927efecdda857655510d467264e75a1b47b9",
+    "dev.codex.schubert.nk.batch.ManagementAdapter": "9cbd18f61adff1f57925c18b1bdbbecd59318999f74282ebcd109be284ab9226",
+    "dev.codex.schubert.nk.batch.Marker": "820a4940dc9ceef4d15f65eca01b4c546988dcc18b9a32e2bce268f7b2978e22",
+    "dev.codex.schubert.nk.bootstrap.CopyAdapter": "f4d36ceb2b36fc6b34082c41af5104028a7a80087b40e24ee111948d35a6065d",
+    "dev.codex.schubert.nk.bootstrap.Marker": "3fb6edf4ae133ef101894ff7e0e60a3ae126ab6df37dad027a83147c94a367d3",
+    "dev.codex.schubert.nk.protocol.DirectJms": "b76a7cbb78627a2cef75e9f840a71f634a476c822358168455fd00087da633b2",
+    "dev.codex.schubert.nk.protocol.DriverCodec": "f5a5595b03b6b2d170d2bcf1002e3496d8c49cd0c6e260eeffe4106b41c84896",
+    "dev.codex.schubert.nk.protocol.Marker": "799ea69aa1f9e2bbe880d7a73b67a27a63669cc4963dddee817f5541de2ac66d",
+    "dev.codex.schubert.nk.storage.DirectBroker": "893b66c6d0a209effa8397b36336f6a4e2e6eac7996a38d69c823194e8a3b342",
+    "dev.codex.schubert.nk.storage.DriverStore": "3724f1e29aa647cd1d6fab7c3cb90d318b4b3c1aafc8bdba70c516d1fe6662a7",
+    "dev.codex.schubert.nk.storage.Marker": "2bd75c26846458273cc83ea5df9ca9de0e4d303eab5eac12ba604f16a4967c36",
+    "dev.codex.schubert.nk.web.DriverController": "725a58a6972f0146fc0b710cc9fe637536e13265cebffd63a0fe70b31207a6fd",
+    "dev.codex.schubert.nk.web.JmsController": "42e6a186ec282c20caf48e3b701a2597133de0f9841cf6767cbed5e4ac2b7e72",
+    "dev.codex.schubert.nk.web.Marker": "bb30e9f97402afad95c1fdb4390e7b79fd6621cbb3152a463831735af20fcaa2",
+    "dev.codex.schubert.nk.web.session.SessionDriver": "b60ca23d95890f413ed07e703f01479df9c2bdd3c43feddcb1f2c16e3afa272a"
+  },
+  "receipts": {
+    "compile-tool": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40572-f02-vendor-jdbc-jms-before-v1/compile-tool.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40572-f02-vendor-jdbc-jms-before-v1/compile-tool.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "-d",
+        "/dev/shm/pgpt-vendor-f02-ul8aw5ik/tool",
+        "/dev/shm/pgpt-vendor-f02-ul8aw5ik/ModuleDependencyAudit.java"
+      ]
+    },
+    "compile-fixture": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40572-f02-vendor-jdbc-jms-before-v1/compile-fixture.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40572-f02-vendor-jdbc-jms-before-v1/compile-fixture.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-d",
+        "/dev/shm/pgpt-vendor-f02-ul8aw5ik/classes",
+        "/dev/shm/pgpt-vendor-f02-ul8aw5ik/fixture/dev/codex/schubert/nk/protocol/Marker.java",
+        "/dev/shm/pgpt-vendor-f02-ul8aw5ik/fixture/dev/codex/schubert/nk/storage/Marker.java",
+        "/dev/shm/pgpt-vendor-f02-ul8aw5ik/fixture/dev/codex/schubert/nk/bootstrap/Marker.java",
+        "/dev/shm/pgpt-vendor-f02-ul8aw5ik/fixture/dev/codex/schubert/nk/api/Marker.java",
+        "/dev/shm/pgpt-vendor-f02-ul8aw5ik/fixture/dev/codex/schubert/nk/web/Marker.java",
+        "/dev/shm/pgpt-vendor-f02-ul8aw5ik/fixture/dev/codex/schubert/nk/batch/Marker.java",
+        "/dev/shm/pgpt-vendor-f02-ul8aw5ik/fixture/org/apache/activemq/artemis/api/core/client/ClientSession.java",
+        "/dev/shm/pgpt-vendor-f02-ul8aw5ik/fixture/org/postgresql/PGConnection.java",
+        "/dev/shm/pgpt-vendor-f02-ul8aw5ik/fixture/org/apache/activemq/artemis/jms/client/ActiveMQConnectionFactory.java",
+        "/dev/shm/pgpt-vendor-f02-ul8aw5ik/fixture/dev/codex/schubert/nk/storage/DriverStore.java",
+        "/dev/shm/pgpt-vendor-f02-ul8aw5ik/fixture/dev/codex/schubert/nk/protocol/DriverCodec.java",
+        "/dev/shm/pgpt-vendor-f02-ul8aw5ik/fixture/dev/codex/schubert/nk/storage/DirectBroker.java",
+        "/dev/shm/pgpt-vendor-f02-ul8aw5ik/fixture/dev/codex/schubert/nk/protocol/DirectJms.java",
+        "/dev/shm/pgpt-vendor-f02-ul8aw5ik/fixture/dev/codex/schubert/nk/web/DriverController.java",
+        "/dev/shm/pgpt-vendor-f02-ul8aw5ik/fixture/dev/codex/schubert/nk/web/JmsController.java",
+        "/dev/shm/pgpt-vendor-f02-ul8aw5ik/fixture/dev/codex/schubert/nk/bootstrap/CopyAdapter.java",
+        "/dev/shm/pgpt-vendor-f02-ul8aw5ik/fixture/dev/codex/schubert/nk/batch/ManagementAdapter.java",
+        "/dev/shm/pgpt-vendor-f02-ul8aw5ik/fixture/dev/codex/schubert/nk/api/messaging/JmsAdapter.java",
+        "/dev/shm/pgpt-vendor-f02-ul8aw5ik/fixture/dev/codex/schubert/nk/web/session/SessionDriver.java"
+      ]
+    },
+    "audit": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40572-f02-vendor-jdbc-jms-before-v1/audit.stdout.txt",
+        "sha256": "683fa111808d40bcc550181f198d1523ea9fa669a27fc334087c47e97dfed873"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40572-f02-vendor-jdbc-jms-before-v1/audit.stderr.txt",
+        "sha256": "2c58b87a0350a39bb1c3b5f4891defeeb9a785e84aa11a466dc9ddb21253bf58"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/dev/shm/pgpt-vendor-f02-ul8aw5ik/tool:/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "ModuleDependencyAudit",
+        "api=/dev/shm/pgpt-vendor-f02-ul8aw5ik/api.jar",
+        "batch=/dev/shm/pgpt-vendor-f02-ul8aw5ik/batch.jar",
+        "bootstrap=/dev/shm/pgpt-vendor-f02-ul8aw5ik/bootstrap.jar",
+        "protocol=/dev/shm/pgpt-vendor-f02-ul8aw5ik/protocol.jar",
+        "storage=/dev/shm/pgpt-vendor-f02-ul8aw5ik/storage.jar",
+        "web=/dev/shm/pgpt-vendor-f02-ul8aw5ik/web.jar"
+      ]
+    }
+  },
+  "rawCounts": {},
+  "productJars": 0,
+  "productTests": 0,
+  "wholeF02Accepted": false,
+  "whole451Accepted": false,
+  "terminalAtUTC": "2026-11-20T02:47:40.071055+00:00"
+}
