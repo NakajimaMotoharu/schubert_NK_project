@@ -1,0 +1,142 @@
+{
+  "eventId": "PGPT-20261008-6480",
+  "groupId": "PGPT-WBS66-F02-CURRENT-LIBRARY-VENDOR-EDGES-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T02:51:34.616000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 60,
+      "remainingPercent": 40,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F02-CURRENT-LIBRARY-VENDOR-EDGES-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F02-CURRENT-LIBRARY-VENDOR-EDGES-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a"
+    ],
+    "source": "378cf4d6f7ecaba41c4eb7c88da1215089ade7dc",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40578-f02-real-protocol-storage-vendor-edge-audit-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.45,
+      "high": 0.85
+    },
+    "groupCapPp": 1.1,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/958_F02実装型境界と継続点.json",
+        "sha256": "588fc77dc67ee278ad84497a54a03e2ccec11e5a9aa81bfcd358dcacdacad4f2"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40576-f02-vendor-jdbc-jms-independent-v1/manifest.json",
+        "sha256": "cbfaa049a9b7cff2e6aa1e7b42e4bd054ac7e21cbdeaef7df79d2bdc292bdf74"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40204-f02-library-http-saved-product-edges-v1/manifest.json",
+        "sha256": "e3b5d99d31bb35c8995252594b90e2ba667ee8c63809cb34d5ecb0205e55a892"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39870-f02-service-state-lock-edges-and-trace-v1/manifest.json",
+        "sha256": "e95cdfc8954261ea392f89bd53bee2ed01d188a5b2e74e3cbf415444cf123d62"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39862-service-db-state-lock-four-main-v1/manifest.json",
+        "sha256": "9433dae6e53e1d97a1b942175e930c315c118da9dea870cdffb0b26072e6a035"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40498-schema-history-packaged-proof-recovered-v1/manifest.json",
+        "sha256": "bba0cb1781e36039e9014b8a7f27e4ab2354ef78283181a704bae5dba9fd9b0f"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "旧実物255ライブラリ物理のtyped edgesを現source実JARと比較する。全class SHAが現と同一の場合だけvendor・JDBC/JMSの既生を利用。現候補4jar packageを固定。",
+    "endCondition": "本物Protocol/Storageの元生辺と当同byteでvendor直依存を判定。既Storage JDBCの禁止辺は保留のまま。実API/Web／全六は別。",
+    "workScope": "既公開raw jdepsと許可済みライブラリJARのみ。古い試験・jdepsの再演や実Opsは行わない。",
+    "quotaAfter": {
+      "usedPercent": 60,
+      "remainingPercent": 40,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "f8582a9a2ef6044faae69e9a8a61e3a665864582813155cefce1ed321efe76bf",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T02:51:34.616000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 60,
+          "remainingPercent": 40,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T02:51:13.224037+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 60,
+      "remainingPercent": 40,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6479",
+    "attempt": 1,
+    "attemptResult": "CURRENT_REAL_LIBRARY_255_EXACT_3592_RETAINED_TYPED_ROWS",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40578-f02-real-protocol-storage-vendor-edge-audit-v1/manifest.json",
+        "sha256": "b9566774ad9ea8efd7a3d97a4ed1664688296a425178a68fd613f991a9a12aee"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "StorageのJDK SQLException直辺、API/Web全型、全六現runtime、451。"
+    ],
+    "firstValidationPassed": 2,
+    "firstValidationDenominator": 2,
+    "retries": 0,
+    "realLibraryPhysical": 255,
+    "formattedRetainedTypedRows": 3592,
+    "vendorViolations": 0,
+    "previousStorageJdbcViolation": 1,
+    "productRuntime": 0
+  }
+}
