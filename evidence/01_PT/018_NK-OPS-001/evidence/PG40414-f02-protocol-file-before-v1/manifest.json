@@ -1,0 +1,185 @@
+{
+  "actualExit": 0,
+  "source": "36df2e03f615b6c04f74bc87bfa63e75b705a107",
+  "productionCore": "cb1411d94a1d97aedafe1af60400aaec0ae8c8e8",
+  "phase": "before",
+  "exactDesignRoot": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+  "toolSha256": "3039f67a76fa8cf3c24ad1cb5594a4b30c234ed0b6084a022c66e960e60e36b2",
+  "originalStaticScopeOnly": true,
+  "caseChecks": [
+    {
+      "testId": "PT-F02-PROFILE-001",
+      "origin": "dev.codex.schubert.nk.protocol.FilesRead",
+      "target": "java.nio.file.Files",
+      "expected": true,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-PROFILE-002",
+      "origin": "dev.codex.schubert.nk.protocol.FileStream",
+      "target": "java.io.FileInputStream",
+      "expected": true,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-PROFILE-003",
+      "origin": "dev.codex.schubert.nk.protocol.FileChannelCall",
+      "target": "java.nio.channels.FileChannel",
+      "expected": true,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-PROFILE-004",
+      "origin": "dev.codex.schubert.nk.protocol.ProviderCall",
+      "target": "java.nio.file.spi.FileSystemProvider",
+      "expected": true,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-PROFILE-005",
+      "origin": "dev.codex.schubert.nk.protocol.PathValue",
+      "target": "java.nio.file.Path",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-PROFILE-006",
+      "origin": "dev.codex.schubert.nk.protocol.BorrowedByteStream",
+      "target": "java.io.InputStream",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-PROFILE-007",
+      "origin": "dev.codex.schubert.nk.storage.LowLevelFile",
+      "target": "java.nio.file.Files",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-PROFILE-008",
+      "origin": "dev.codex.schubert.nk.batch.FilePort",
+      "target": "java.nio.file.Files",
+      "expected": false,
+      "observed": false
+    }
+  ],
+  "inputPhysical": {
+    "protocol": {
+      "dev.codex.schubert.nk.protocol.Marker": "799ea69aa1f9e2bbe880d7a73b67a27a63669cc4963dddee817f5541de2ac66d",
+      "dev.codex.schubert.nk.protocol.FilesRead": "eaa9843b094947d20f1901c842466460155b8ab2a01434110118f6d111137b7c",
+      "dev.codex.schubert.nk.protocol.FileStream": "d33283a62caf60c60ca9dbf0848260942d6b7bef0c721b30be893c27e25d389c",
+      "dev.codex.schubert.nk.protocol.FileChannelCall": "7dd1fc028c0ef025247137a6ed694f65be5b66bd246e9c2db11445180fe681c9",
+      "dev.codex.schubert.nk.protocol.ProviderCall": "6f149a26d84ecce15c29d40c19dff4792048c0360811b90b002b5c99b98e5f9b",
+      "dev.codex.schubert.nk.protocol.PathValue": "a3be3f90de1b379a712a049f7e4e02be2699838cbe28f0697f4c04b2d785d17c",
+      "dev.codex.schubert.nk.protocol.BorrowedByteStream": "cff2cddd3c571b921db510bafe3b5291617e2694284429aeff06e0fbe3cb7b45"
+    },
+    "storage": {
+      "dev.codex.schubert.nk.storage.Marker": "2bd75c26846458273cc83ea5df9ca9de0e4d303eab5eac12ba604f16a4967c36",
+      "dev.codex.schubert.nk.storage.LowLevelFile": "525ca2f4513969530b41f82b71298954bfb97d03fdf708f39867649d11c2a743"
+    },
+    "bootstrap": {
+      "dev.codex.schubert.nk.bootstrap.Marker": "3fb6edf4ae133ef101894ff7e0e60a3ae126ab6df37dad027a83147c94a367d3"
+    },
+    "api": {
+      "dev.codex.schubert.nk.api.Marker": "7668cc69a88d212a0c1ce18373ba7eeb5a0cd540b9084490d6225c54f9eb41f9"
+    },
+    "web": {
+      "dev.codex.schubert.nk.web.Marker": "bb30e9f97402afad95c1fdb4390e7b79fd6621cbb3152a463831735af20fcaa2"
+    },
+    "batch": {
+      "dev.codex.schubert.nk.batch.Marker": "820a4940dc9ceef4d15f65eca01b4c546988dcc18b9a32e2bce268f7b2978e22",
+      "dev.codex.schubert.nk.batch.FilePort": "d5f00e50cda7e6af1e9817345c3ae8955d7e3329b0d932aa1f7500d82e0597af"
+    }
+  },
+  "correct": 4,
+  "stages": {
+    "tool-compile": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40414-f02-protocol-file-before-v1/tool-compile.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40414-f02-protocol-file-before-v1/tool-compile.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "-d",
+        "/dev/shm/pgpt-f02-protocol-file-clntjnfc/toolclasses",
+        "/dev/shm/pgpt-f02-protocol-file-clntjnfc/ModuleDependencyAudit.java"
+      ]
+    },
+    "fixtures-compile": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40414-f02-protocol-file-before-v1/fixtures-compile.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40414-f02-protocol-file-before-v1/fixtures-compile.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-d",
+        "/dev/shm/pgpt-f02-protocol-file-clntjnfc/classes",
+        "/dev/shm/pgpt-f02-protocol-file-clntjnfc/fixture/dev/codex/schubert/nk/protocol/Marker.java",
+        "/dev/shm/pgpt-f02-protocol-file-clntjnfc/fixture/dev/codex/schubert/nk/protocol/FilesRead.java",
+        "/dev/shm/pgpt-f02-protocol-file-clntjnfc/fixture/dev/codex/schubert/nk/protocol/FileStream.java",
+        "/dev/shm/pgpt-f02-protocol-file-clntjnfc/fixture/dev/codex/schubert/nk/protocol/FileChannelCall.java",
+        "/dev/shm/pgpt-f02-protocol-file-clntjnfc/fixture/dev/codex/schubert/nk/protocol/ProviderCall.java",
+        "/dev/shm/pgpt-f02-protocol-file-clntjnfc/fixture/dev/codex/schubert/nk/protocol/PathValue.java",
+        "/dev/shm/pgpt-f02-protocol-file-clntjnfc/fixture/dev/codex/schubert/nk/protocol/BorrowedByteStream.java",
+        "/dev/shm/pgpt-f02-protocol-file-clntjnfc/fixture/dev/codex/schubert/nk/storage/Marker.java",
+        "/dev/shm/pgpt-f02-protocol-file-clntjnfc/fixture/dev/codex/schubert/nk/storage/LowLevelFile.java",
+        "/dev/shm/pgpt-f02-protocol-file-clntjnfc/fixture/dev/codex/schubert/nk/bootstrap/Marker.java",
+        "/dev/shm/pgpt-f02-protocol-file-clntjnfc/fixture/dev/codex/schubert/nk/api/Marker.java",
+        "/dev/shm/pgpt-f02-protocol-file-clntjnfc/fixture/dev/codex/schubert/nk/web/Marker.java",
+        "/dev/shm/pgpt-f02-protocol-file-clntjnfc/fixture/dev/codex/schubert/nk/batch/Marker.java",
+        "/dev/shm/pgpt-f02-protocol-file-clntjnfc/fixture/dev/codex/schubert/nk/batch/FilePort.java"
+      ]
+    },
+    "audit": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40414-f02-protocol-file-before-v1/audit.stdout.txt",
+        "sha256": "2d38cd173c77c30a4f58b3c6a2e82d37cc3270bf9ad97abaa2f39608b55eaff4"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40414-f02-protocol-file-before-v1/audit.stderr.txt",
+        "sha256": "2c58b87a0350a39bb1c3b5f4891defeeb9a785e84aa11a466dc9ddb21253bf58"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/dev/shm/pgpt-f02-protocol-file-clntjnfc/toolclasses:/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "ModuleDependencyAudit",
+        "protocol=/dev/shm/pgpt-f02-protocol-file-clntjnfc/protocol.jar",
+        "storage=/dev/shm/pgpt-f02-protocol-file-clntjnfc/storage.jar",
+        "bootstrap=/dev/shm/pgpt-f02-protocol-file-clntjnfc/bootstrap.jar",
+        "api=/dev/shm/pgpt-f02-protocol-file-clntjnfc/api.jar",
+        "web=/dev/shm/pgpt-f02-protocol-file-clntjnfc/web.jar",
+        "batch=/dev/shm/pgpt-f02-protocol-file-clntjnfc/batch.jar"
+      ]
+    }
+  },
+  "productJarInputs": 0,
+  "productTests": 0,
+  "nativeActions": 0,
+  "wholeF02Accepted": false,
+  "terminalAtUTC": "2026-11-20T00:08:58.603650+00:00"
+}
