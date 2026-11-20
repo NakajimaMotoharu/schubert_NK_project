@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.web.media;
 
 import java.util.Objects;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 /**
  * First-range selection only; no HTTP, authentication or file ownership. NK-MED-001;
@@ -9,6 +10,8 @@ import java.util.Optional;
  */
 public final class HttpByteRangeParser {
   private static final long MAX_BODY = 1_048_576;
+  // SS333 §10.1 / BUG-3470: the HTTP token uses ASCII-only case matching.
+  private static final Pattern BYTE_UNIT = Pattern.compile("bytes=", Pattern.CASE_INSENSITIVE);
 
   /** PG-D1175/BUG3178: this namespace never owns an instance, including internal misuse. */
   private HttpByteRangeParser() {
@@ -44,8 +47,9 @@ public final class HttpByteRangeParser {
     if (total <= 0) return Unsatisfiable.INSTANCE;
     if (header.isEmpty()) return new Full(total);
     String value = header.orElseThrow();
-    if (!value.regionMatches(true, 0, "bytes=", 0, 6)) return Unsatisfiable.INSTANCE;
-    String spec = value.substring(6);
+    var unit = BYTE_UNIT.matcher(value);
+    if (!unit.lookingAt()) return Unsatisfiable.INSTANCE;
+    String spec = value.substring(unit.end());
     int comma = spec.indexOf(',');
     if (comma >= 0) spec = spec.substring(0, comma);
     spec = spec.trim();
