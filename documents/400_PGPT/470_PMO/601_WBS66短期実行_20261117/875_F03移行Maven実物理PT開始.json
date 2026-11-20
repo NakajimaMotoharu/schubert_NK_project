@@ -1,0 +1,74 @@
+{
+  "eventId": "PGPT-20261008-6395",
+  "groupId": "PGPT-WBS66-SSC473-MAVEN-CLASS-UTC42-PT-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T01:02:32.799000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 57,
+      "remainingPercent": 43,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-SSC473-MAVEN-CLASS-UTC42-PT-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-SSC473-MAVEN-CLASS-UTC42-PT-20261120",
+    "workAttributionKind": "SOURCE_REQUALIFICATION",
+    "wbsLeafIds": [
+      "WBS-P019-03.01"
+    ],
+    "managementWorkIds": [
+      "WBS-P019-03.01/2",
+      "WBS-F02-b",
+      "WBS-F03/2-2",
+      "WBS-P004-05/2"
+    ],
+    "source": "4a6391b06f7f9204db6d4cec99649a2622eb0ffe",
+    "productionCoreMain": "2cc96ab800b8753b0f0eafac8e008bd5b69d9a59",
+    "canonicalDesignSource": "6dcd9fb65a3dad2011abeac1babc75e52394785d",
+    "run": "PG40462-migration-utc42-maven-exact87-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.18,
+      "base": 0.55,
+      "high": 1.1
+    },
+    "groupCapPp": 1.5,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/874_F02現UTC42四JAR継続点.json",
+        "sha256": "447fae09a0db0dde3c0ca8b0a8ced4916f95ade5a80526351f8c679c6be3d516"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40460-f02-utc42-physical-and-test-alignment-v1/manifest.json",
+        "sha256": "09acc06d5080221e14c0835555b7d7e24272be6a2b04e0835d28d5b3b517c909"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40458-f02-utc42-current-four-jars-v1/manifest.json",
+        "sha256": "2c62141ae1d59953e9d1d44e91c927d7a3b05213c659256df0f237bdf336d188"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40452-migration-utc42-proxy-87-typed-v1/manifest.json",
+        "sha256": "9a3f3990a94b619e060ede633eb3ae09dd0ab1aa1d75d07e4a7bd245282d6686"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40456-migration-utc42-product-and-tool-proof-v1/manifest.json",
+        "sha256": "39b35eaafb1011fb3f8b4ab9003730f174838fe498bce5962eae497c2b1d3180"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "PG40458現実Bootstrapに対して直前87の局所Javacと同Core・物理2不一致をPG40460で確認。独立元87のoracleを引き継ぐ。実JAR sourceと私有格納のowner・SHAを構成確認。",
+    "endCondition": "同Coreのまま82許可型だけをMaven JARから安全に限定抽出し、Main再compileなしで同一JVMの87と同物理対象の標準/生coverage、全XML/CRCを照合。上位同費用二重計上なし。",
+    "workScope": "局所合成Proxyのみ。旧失敗の再試行は終了済み。DB、実移行、Main protected、実サービスの操作なし。"
+  }
+}

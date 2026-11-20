@@ -1,0 +1,292 @@
+{
+  "actualExit": 0,
+  "source": "2cc96ab800b8753b0f0eafac8e008bd5b69d9a59",
+  "productionCore": "2cc96ab800b8753b0f0eafac8e008bd5b69d9a59",
+  "retainedBaselineCore": "cb1411d94a1d97aedafe1af60400aaec0ae8c8e8",
+  "canonicalDesign": "6dcd9fb65a3dad2011abeac1babc75e52394785d",
+  "admission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33674-copyverify1050-prepare-v1/manifest.json",
+    "sha256": "5ebea20bf3ff51d3953d9fec80366a7e07bee7d636a7b56cc99e39819d741a00"
+  },
+  "previousCurrentJar": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40458-f02-utc42-current-four-jars-v1/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+    "sha256": "765cf135e12c9077ad3b058601f72f05eed0b10772a393395a4b71ec70bf76d9"
+  },
+  "inputPins": {
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationGamesVerifier.java": "628f1bc4de515e37fccabe4943a105a9d200f7bcaa587f8e455ae9c6dc58110b",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterContentVerifier.java": "a62381dbe686910a463127525fb508d13e2da7279ba3f54f38f2ca290afaa1d2",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationGamesVerifierTest.java": "8cfc0ab101d6772cc9417b71b812cd687b08a0a9417c75b649202ec55786224f",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterContentVerifierTest.java": "75270b5f0310ab6fd9c181256eb293604615faf495512553b45822cd809bfdac",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterTargetPublisherTest.java": "b8ca1ce1083e491e54787e93e6a916c9463e2885aabcf94e58b47b6708bc5d3f"
+  },
+  "expected": 87,
+  "outcome": {
+    "pass": 87
+  },
+  "stages": {
+    "closure": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40462-migration-utc42-maven-exact87-v1/closure.stdout.txt",
+        "sha256": "414fce696799af73e67ba894960fd8f9fc7eadb4eb63b0394c5f2be19fb6abac"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40462-migration-utc42-maven-exact87-v1/closure.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/jdeps",
+        "-verbose:class",
+        "-filter:none",
+        "--ignore-missing-deps",
+        "--class-path",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+        "/dev/shm/pgpt-migration-utc42-916jzpqy/classes"
+      ]
+    },
+    "tests": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40462-migration-utc42-maven-exact87-v1/tests.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40462-migration-utc42-maven-exact87-v1/tests.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/dev/shm/pgpt-migration-utc42-916jzpqy/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "-d",
+        "/dev/shm/pgpt-migration-utc42-916jzpqy/tests",
+        "/dev/shm/pgpt-migration-utc42-916jzpqy/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationGamesVerifierTest.java",
+        "/dev/shm/pgpt-migration-utc42-916jzpqy/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterContentVerifierTest.java",
+        "/dev/shm/pgpt-migration-utc42-916jzpqy/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterTargetPublisherTest.java"
+      ]
+    },
+    "unit": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40462-migration-utc42-maven-exact87-v1/unit.stdout.log.gz",
+        "sha256": "7553fb2527f1092a0e2941f81d313f1819a545f81d0b394f00f7541943f43eb1",
+        "expandedSha256": "d0381dab6db376690e9c31283d56431516e457b861df846a5efc031c5c34f617"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40462-migration-utc42-maven-exact87-v1/unit.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+        "expandedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Duser.timezone=Pacific/Honolulu",
+        "-Xlog:class+init=info:file=/dev/shm/pgpt-migration-utc42-916jzpqy/class-init.log",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40462-migration-utc42-maven-exact87-v1/jacoco.exec,sessionid=PG40462-migration-utc42-maven-exact87-v1,append=false",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--fail-if-no-tests",
+        "--details=summary",
+        "--class-path",
+        "/dev/shm/pgpt-migration-utc42-916jzpqy/tests:/dev/shm/pgpt-migration-utc42-916jzpqy/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40462-migration-utc42-maven-exact87-v1/xml",
+        "--config=junit.jupiter.execution.parallel.enabled=false",
+        "--select-class=dev.codex.schubert.nk.migration.MigrationGamesVerifierTest",
+        "--select-class=dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest",
+        "--select-class=dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest"
+      ]
+    },
+    "standard": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40462-migration-utc42-maven-exact87-v1/standard.stdout.txt",
+        "sha256": "b04958cd60ade89f3adc047f9ffe786c8eec66a39fd262a63a0dc702f1a7034e"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40462-migration-utc42-maven-exact87-v1/standard.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40462-migration-utc42-maven-exact87-v1/jacoco.exec",
+        "--classfiles",
+        "/dev/shm/pgpt-migration-utc42-916jzpqy/classes",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40462-migration-utc42-maven-exact87-v1/coverage.xml"
+      ]
+    },
+    "raw": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40462-migration-utc42-maven-exact87-v1/raw.stdout.txt",
+        "sha256": "7703cba2c28dea2f5f40ee6e8dfac61eaf687da7a7dd122701ed5b49173c7f18"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40462-migration-utc42-maven-exact87-v1/raw.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38642-schema-raw-line-tool-v1/toolclasses:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+        "--line-deficits",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40462-migration-utc42-maven-exact87-v1/jacoco.exec",
+        "/dev/shm/pgpt-migration-utc42-916jzpqy/classes/dev/codex/schubert/nk/migration/MigrationGamesVerifier.class",
+        "/dev/shm/pgpt-migration-utc42-916jzpqy/classes/dev/codex/schubert/nk/migration/MigrationMasterContentVerifier.class"
+      ]
+    }
+  },
+  "runtimeTimezone": "Pacific/Honolulu",
+  "changedSinceHistory": {
+    "dev/codex/schubert/nk/migration/AssetStagingTables$Table.class": "0527198a6481a851dc82a6365311e77a3f86ac867c0965c7ff3d16ca66600f45",
+    "dev/codex/schubert/nk/migration/AssetStagingTables.class": "87a32b86456bafe55d52bdaa03d6c50996109596ae9083df2eda05601e1a118c",
+    "dev/codex/schubert/nk/migration/MigrationGamesVerifier.class": "f4d916aa12edcd5274dffb0d91bcdb65ebd7a568b554e116d58b38d0620c561d",
+    "dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier.class": "859366d6bc0877292fdd5e8ee1a339e75e1489fdc60ba7d24dfa33890367809d",
+    "dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifier.class": "7844d9ccfac4da2e8794d4ad5fca5bc009b684f5a60c7f5a517696e1a6bfb0bb",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier.class": "0b28b54ead31ca5d3b954a6378211be3862b9084dbd43a96ae331b8ae235b105",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer.class": "bde2891311415390cba4fab71357385d96943e9a426028abd2e904d4a302eb8a",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier.class": "ef0969f5ad29d40aa6c0b778f358508322e1d7fa2ee51a10813aa63d02673b4f"
+  },
+  "privateSqlCompanions": [
+    "dev/codex/schubert/nk/migration/AssetStagingTables$SqlMutation.class",
+    "dev/codex/schubert/nk/migration/AssetStagingTables$SqlQuery.class",
+    "dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier$SqlQuery.class",
+    "dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifier$SqlQuery.class",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$SqlQuery.class",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlMutation.class",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlPrepare.class",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlQuery.class",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$SqlQuery.class"
+  ],
+  "exactCurrentPhysical": {
+    "dev/codex/schubert/nk/migration/AssetMigrationManifest$Comparison.class": "463c12753ee773c6ced01b61d1b44577fd5c8ac930703d0b8492114739893252",
+    "dev/codex/schubert/nk/migration/AssetMigrationManifest$Entry.class": "c142c95aa8207e4f61ccb38e6e161731d0f3b3f9d7e0b7667bc0c497819a9b8a",
+    "dev/codex/schubert/nk/migration/AssetMigrationManifest$Kind.class": "052609ecd805be4d271934f36f4202ab6018a177f3ab81b0469dc07c0fc39ed1",
+    "dev/codex/schubert/nk/migration/AssetMigrationManifest$Observation.class": "52976a0c5d5c14c935479d9a22533cd96af48ae7805233d96b1debe89d8efdaa",
+    "dev/codex/schubert/nk/migration/AssetMigrationManifest.class": "ec7d3623be95f92790b89d24cd25cad47c088bfe4a8301d92db71cd504ad6339",
+    "dev/codex/schubert/nk/migration/AssetStagingTables$SqlMutation.class": "3fbee73b2238af233b03995b2e64be54f3b78ca20647f32b1b195a1debd5d62d",
+    "dev/codex/schubert/nk/migration/AssetStagingTables$SqlQuery.class": "16b9b773fd4369e1bad9ebc4085d035a721c0ead7e947ba0d989718b56d28d3f",
+    "dev/codex/schubert/nk/migration/AssetStagingTables$Table.class": "0527198a6481a851dc82a6365311e77a3f86ac867c0965c7ff3d16ca66600f45",
+    "dev/codex/schubert/nk/migration/AssetStagingTables.class": "87a32b86456bafe55d52bdaa03d6c50996109596ae9083df2eda05601e1a118c",
+    "dev/codex/schubert/nk/migration/AudioCopyDataset.class": "d09917c25977312f611df8b7a5234ae3a800633132ac97747260e90cf66111f3",
+    "dev/codex/schubert/nk/migration/AudioFileCopyRow.class": "ea50b38127af77e325c23f0d9810232341fd2eb2e0e4b17f179d4e9bae20500f",
+    "dev/codex/schubert/nk/migration/AudioMigrationMap$AudioMapping.class": "8c1f19806ec861dc94af05bc1a75fd074785d240665b81a6a9ac49946b7ac514",
+    "dev/codex/schubert/nk/migration/AudioMigrationMap.class": "a27f9f97f629b280d2c2d1724c8b1caac85324297096f4d37f66e142dc01b32e",
+    "dev/codex/schubert/nk/migration/CurrentAudioLinkMapper$LinkOrder.class": "86fbfbd581afc827d185980f758dd6b1beeb23aa15793c4285e5ebd0531f20fe",
+    "dev/codex/schubert/nk/migration/CurrentAudioLinkMapper.class": "466409d0d98dec9962d324f6e2f981959530a2f4447384ec97f2bc252316cb61",
+    "dev/codex/schubert/nk/migration/CurrentAudioLinkProjectionReader.class": "262ae81e31cfaa8b05f1a700554801ace2eb561f554f10e53d3bd388fff5bfb1",
+    "dev/codex/schubert/nk/migration/CurrentAudioProjectionReader.class": "1e001a449e355455515b9823aeeba1405f175473b8d752e7432e98b816a1c2eb",
+    "dev/codex/schubert/nk/migration/CurrentMigrationAssembler.class": "1de5908b6099d9593c53fffa62e9fe387681fd903c29b86e640a2819678470b7",
+    "dev/codex/schubert/nk/migration/CurrentMigrationMappingManifest.class": "ee01f9f60a2be218ae8cb6cf433a0ff0f79b0ffc791b719856f19f0fae7f71a0",
+    "dev/codex/schubert/nk/migration/CurrentMigrationMappingVerifier.class": "51eca103b3c55f9acee44ba71cc8a7c7d4b745fc3bf024efb3901180066f81be",
+    "dev/codex/schubert/nk/migration/CurrentMigrationProjection$SourceSnapshot.class": "bb5e1fcc6600e87ace1b1e0c96cda67655673b8842493c10a19f4365f120d235",
+    "dev/codex/schubert/nk/migration/CurrentMigrationProjection.class": "c04613e8b94952006611cd023fbd211afd84899a2118ddb4c55b1834fec83fd1",
+    "dev/codex/schubert/nk/migration/CurrentMigrationTransfer$SourceCounts.class": "fa2b08f0304941b8cd34eb1eb4006fd6efcd897657cc55fc59fa708e4765eabe",
+    "dev/codex/schubert/nk/migration/CurrentMigrationTransfer.class": "897b1ee0e5102a1ff5e367f2fa0333054224f5bf31e396022650036f3366bc83",
+    "dev/codex/schubert/nk/migration/CurrentScenarioEntryMapper.class": "20b1b2d1f19cdbc958def05f594abf60458ee9d0c10b3352525d58b87f49b533",
+    "dev/codex/schubert/nk/migration/CurrentScenarioEntryProjectionReader.class": "a5c8be1f9aa1507a9a16ed059d713766afce2dd3b355f7eca5ad01c0ad9d33c1",
+    "dev/codex/schubert/nk/migration/CurrentScenarioFileMapper.class": "a8c4c9d6eb9b5c4ab9bb749d9e9080d7301589262093bc4456376a2bca68a79c",
+    "dev/codex/schubert/nk/migration/CurrentScenarioFileProjectionReader.class": "a33b8ad3bb4446d5ba598d013a372f35f125974d409226ddf5fdb1e2fd33dcdc",
+    "dev/codex/schubert/nk/migration/CurrentSpeakerProjectionReader.class": "74c0f3d5ff9c70e11d0ef5941f3a0deb0d787a8da050cb92f294348753ab1957",
+    "dev/codex/schubert/nk/migration/MediaAssetCopyBatch.class": "edd73340517260eba115de2113124133be11b45db9079caa45484c070b6962e4",
+    "dev/codex/schubert/nk/migration/MediaAssetCopyRow.class": "6c5adc60b233b941b9d509dfdae40bbf8f2b0218a41b25776d31c23a99459555",
+    "dev/codex/schubert/nk/migration/MigrationCopyDataset.class": "cd86b847f1aeb03d1e5affce0ab51edf9fa63b64c7c3227d4642832900ce495f",
+    "dev/codex/schubert/nk/migration/MigrationCopyPort.class": "fa0c528b8e8760a7605b02a729ff3330e4bf03776c56ac77aa8bca00e93a8a37",
+    "dev/codex/schubert/nk/migration/MigrationGamesVerifier.class": "f4d916aa12edcd5274dffb0d91bcdb65ebd7a568b554e116d58b38d0620c561d",
+    "dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier$SqlQuery.class": "5dff53239648245a1b2debe800292e87665de3d82a0d6f46a18b36700cc73647",
+    "dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier.class": "859366d6bc0877292fdd5e8ee1a339e75e1489fdc60ba7d24dfa33890367809d",
+    "dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifier$SqlQuery.class": "078fab7bb0c028f1700cfbe78ccc9a45a61f26a4de905f149a369e69e2ccc4ca",
+    "dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifier.class": "7844d9ccfac4da2e8794d4ad5fca5bc009b684f5a60c7f5a517696e1a6bfb0bb",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$SqlQuery.class": "e24a25588c4be1ceac27cad50e00ae3ced1437e2ab93c714a45a7613edcbaf4e",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier.class": "0b28b54ead31ca5d3b954a6378211be3862b9084dbd43a96ae331b8ae235b105",
+    "dev/codex/schubert/nk/migration/MigrationMasterCopyCoordinator.class": "4e3aade3f6a9677940641800cb79172f4eebf9c4289a62e0aa42979f71ab1212",
+    "dev/codex/schubert/nk/migration/MigrationMasterCopyDataset.class": "f3054c1d75307a205041513d8bfaced40b74d39fbf5670170b689c8ba1c700be",
+    "dev/codex/schubert/nk/migration/MigrationMasterCopyFingerprint$DigestSink.class": "8059cdd9095abc069f9461851bb8f31b56b05d71179172618b70be9bbcd7d02a",
+    "dev/codex/schubert/nk/migration/MigrationMasterCopyFingerprint$TableFingerprint.class": "c56ed782920edbd09a7c00035a7e4ab41ccf1fd67a150b4116053f74d4acfc8c",
+    "dev/codex/schubert/nk/migration/MigrationMasterCopyFingerprint.class": "9db2a2beed7ad751bddfa19ea8f141e9d269c1f5ae4a0fd21ab1eb7c517d928d",
+    "dev/codex/schubert/nk/migration/MigrationMasterCopyManifest.class": "aa1cdbff5e4c1d911db404e57a234ec633f86ec78b4135181be01368346cf2e2",
+    "dev/codex/schubert/nk/migration/MigrationMasterCopyVerifier.class": "aac1c411039aeef997d5d28385f1a556adc631e2e696c48694592e84a51eae18",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlMutation.class": "280a68a08f5952d5c50362be5985e253924c9ad7b78de412a5cb5bc6fdc3ebca",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlPrepare.class": "0f44866ce87b336d058eda313478e0f572137b08f41b79331e399b2489702745",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlQuery.class": "9fe3ff53f7f37497b479dab8cc40c617b262222b12052c9eb3ed06d002b94728",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer.class": "bde2891311415390cba4fab71357385d96943e9a426028abd2e904d4a302eb8a",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$SqlQuery.class": "5ba9211f59b868c8289a4e9add576491ec1dfb436d7be5423bb4bb75efc91576",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier.class": "ef0969f5ad29d40aa6c0b778f358508322e1d7fa2ee51a10813aa63d02673b4f",
+    "dev/codex/schubert/nk/migration/MigrationMasterTargetPublisher.class": "107f22b1b692fd0bf4246c0566b96e361e59c5e083aa09734e38739210bfbec6",
+    "dev/codex/schubert/nk/migration/MusicLogicalId.class": "24079b291b751577369f256ef32a31d9dd86b0e83885a5d79b51d761a04dd59b",
+    "dev/codex/schubert/nk/migration/MusicMigrationCatalogue.class": "34eb5ddf2163c6795a32de4dda56d46161f64d28d295d1d900c9e464266f0797",
+    "dev/codex/schubert/nk/migration/MusicMigrationPairing$Pair.class": "b694e38b9096c2cb043521e4e9cd532a2c7d965125a21aeb2d8d4a7e78a8505e",
+    "dev/codex/schubert/nk/migration/MusicMigrationPairing$Result.class": "f3d5a86b7d60ae7cf3712a46b0589e3abd09569308b28f5304283cf86639d4bb",
+    "dev/codex/schubert/nk/migration/MusicMigrationPairing.class": "159b664a335849db4b32cec979fcf55db4029934d2fe25c6df8e7dc41eb2d232",
+    "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder.class": "d92993e0256be418b35ffd962f68d96ad6457020a1c8f547694c068b5e46f83d",
+    "dev/codex/schubert/nk/migration/PostgresCopyTextWriter.class": "e498970c4ef48d9af38f4de7f0e292f32188a9da38e153d9d235c4f1c4e697f2",
+    "dev/codex/schubert/nk/migration/ScenarioCopyDataset.class": "11ba4b4b475b205cd69d21c87211d507e1eec4e13c066c2053791194aabb59fa",
+    "dev/codex/schubert/nk/migration/ScenarioEntryCopyBatch.class": "85e1e2dfee1d13b7c45c3e0f4813b9f90ab335e2bbe182f51f89a99a297b2fbf",
+    "dev/codex/schubert/nk/migration/ScenarioEntryCopyRow.class": "369d40e90619f69d4747f9e4d8fa821637153d1a442dd5de80736277ca1f0109",
+    "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$IdPair.class": "53e54e1f27334878352ffd5e0e222f439c01e03653de0e668e2ed7485d4dca28",
+    "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$MappedEntry.class": "07a4cc7ce7c32e6f16e5df45b85c10401eb5bce9fc8947c3a935dba5b919c9f7",
+    "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap.class": "ca16026d985c464470c266e887056a88b671c3c455c7eb6a33b5a8d0ab5b62c1",
+    "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$PlacedEntry.class": "0decb1b7b350b7d023ec0e6da08587bcfcd24c46ae109c2ad8fcce56fce760b3",
+    "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$Placement.class": "0e768edb60604b9829a724c52487391ed24c897b0625ae41414da089aea1b054",
+    "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap.class": "cf6890389883a8d6dc7a4033ca35a124a4796b9a4bcd239e586ab5fa5f2dd0f1",
+    "dev/codex/schubert/nk/migration/ScenarioFileCopyBatch.class": "62013aa1df711baa5719c7c8e86f15493b46aa79b50134b0e948e8f81d44a2e3",
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$FilePair.class": "d487add339f71bd42ca456dc838be7a15f2d2569f6f08b38572f8aa30212ea52",
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$MappedFile.class": "447b030258eb82c86fbad715d2618b51601e7f6a5952786d812d86d04f287b6f",
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap.class": "e396c01d1b8c4697dce412f04195006365142d762a7f3d35cea31652850d9258",
+    "dev/codex/schubert/nk/migration/ScenarioStagingTables.class": "a92d5ff8b6118fb2e22c4c340199eb9c56c278ac64955905e5dde44d428dd87c",
+    "dev/codex/schubert/nk/migration/SpeakerCopyBatch.class": "1b54712d173109ac3f84cc6746d4e0256e89d240ec55ad9e9f97c61373548643",
+    "dev/codex/schubert/nk/migration/SpeakerCopyRow.class": "ff7c6bf1584c9882a999bd2687197aa4d877d5a08e667afda002d165f9dc9289",
+    "dev/codex/schubert/nk/migration/SpeakerMigrationMap$SpeakerMapping.class": "9bc1cef50e4369ba332190a219e14f8ab837cd832c0354cdab7260285953a49f",
+    "dev/codex/schubert/nk/migration/SpeakerMigrationMap.class": "725428047774ed193279ad073e991ca39ecf031f57f3c6ac2b563687807269e2",
+    "dev/codex/schubert/nk/migration/SpeakerStagingTable.class": "5eb2110a72d0f207103e5c997aa091e58f1b34b2c8d2b1863d351aceaae01e19",
+    "dev/codex/schubert/nk/migration/VideoMigrationCatalogue$Video.class": "533c662155df1e89826c55fef6248969ae724b1c54b2b6ae20be71409793cf45",
+    "dev/codex/schubert/nk/migration/VideoMigrationCatalogue.class": "3a8a646fb71fccd99de24723a44ebc2b2fc0a81f8b9bbe59e706f1ca28e0de3f"
+  },
+  "affectedClasses": [
+    "dev/codex/schubert/nk/migration/MigrationGamesVerifier.class",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier.class"
+  ],
+  "mavenPackagedMainUsed": true,
+  "samePhysicalMainRecompiled": false,
+  "artifactAlignment": {
+    "dev/codex/schubert/nk/migration/MigrationGamesVerifier.class": {
+      "mavenPackaged": "f4d916aa12edcd5274dffb0d91bcdb65ebd7a568b554e116d58b38d0620c561d",
+      "javacFixtureRun": "919ed2024e79e73838b08ac799c37a82e1bbb0079b9232d2032208d80ec87a9c",
+      "exactTransfer": false
+    },
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier.class": {
+      "mavenPackaged": "0b28b54ead31ca5d3b954a6378211be3862b9084dbd43a96ae331b8ae235b105",
+      "javacFixtureRun": "b2a26cc83092d763c9b0a9aef8fdfd2aea594e1f3c4b35ea3b3bdc5d8034ba24",
+      "exactTransfer": false
+    }
+  },
+  "scriptsAndConfigs": {
+    "runner": {
+      "path": "evidence/01_PT/018_NK-OPS-001/input/5362_migration_utc42_current_unit.py",
+      "sha256": "2a625ccc50aab2a13454add5b80a5c80bcdb6ae8ef7ee96c3ec622c2c9cbbc21"
+    }
+  },
+  "tools": {
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar": "d2b74b20b415163c1f53261e7c5ef4445b788327094208ff821e0c2baf9bc8f1",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar": "fb5b0036a0899ea97edfa0fc2c7985b55f3f7c5695028163e5e60d4f3cf6075d",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7"
+  },
+  "actualDbSessions": 0,
+  "actualBackendActions": 0,
+  "whole451Accepted": false,
+  "formalDelta": 0,
+  "terminalAtUTC": "2026-11-20T01:03:24.342681+00:00"
+}

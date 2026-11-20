@@ -7,6 +7,8 @@ import os
 from pathlib import Path
 import re
 import runpy
+from stat import S_IMODE
+import sys
 from tempfile import TemporaryDirectory
 from xml.etree import ElementTree
 from zipfile import ZipFile
@@ -22,6 +24,7 @@ MODULE = Path("src/schubert-nk-bootstrap/src")
 SOURCE = "2cc96ab800b8753b0f0eafac8e008bd5b69d9a59"
 DESIGN = "6dcd9fb65a3dad2011abeac1babc75e52394785d"
 RUN = "PG40452-migration-utc42-proxy-87-typed-v1"
+MAVEN_RUN = "PG40462-migration-utc42-maven-exact87-v1"
 SQL_CLOSURE = {
     "AssetStagingTables": ("SqlMutation", "SqlQuery"),
     "MigrationMasterColumnVerifier": ("SqlQuery",),
@@ -72,7 +75,7 @@ def pack_text(out, receipt):
     (out / "unit-exit.json").write_text(json.dumps(receipt, indent=2) + "\n")
 
 
-def main():
+def main(packaged=False):
     pin, git, execute, sha = (H[key] for key in ("pin", "git", "execute", "sha"))
     start = read(next(PLAN.glob("869_*")))
     change = start["values"]
@@ -90,8 +93,25 @@ def main():
     history = read(history_pins["prepare"]["path"])
     assert primary["sourceCore"] == source_main
     bootstrap = primary["jars"]["bootstrap"]["artifact"]
+    run = RUN
+    source_alignment = None
+    package_receipt = None
+    if packaged:
+        run = MAVEN_RUN
+        receipt = read(next(PLAN.glob("875_*")))
+        assert receipt["values"]["productionCoreMain"] == SOURCE and receipt["values"]["run"] == run
+        package_ref = receipt["values"]["oracleReferences"][2]
+        alignment_ref = receipt["values"]["oracleReferences"][1]
+        assert pin(Path(package_ref["path"])) == package_ref and pin(Path(alignment_ref["path"])) == alignment_ref
+        package_receipt = read(package_ref["path"])
+        source_alignment = read(alignment_ref["path"])
+        assert package_receipt["sourceCore"] == source_alignment["productionCore"] == SOURCE
+        assert source_alignment["newPackageReceipt"] == package_ref
+        bootstrap = package_receipt["packagedJars"]["bootstrap"]["artifact"]
+        assert bootstrap == source_alignment["qualifiedLocalArtifacts"]["bootstrap"]["artifact"]
     bootstrap_path = Path(bootstrap["path"])
     assert pin(bootstrap_path) == bootstrap
+    assert S_IMODE(bootstrap_path.lstat().st_mode) == 0o600 and bootstrap_path.lstat().st_uid == os.getuid()
     old_classes = history["physicalClassHashes"]
     assert len(old_classes) == 73 and all(p.startswith(SCOPE) for p in old_classes)
     companions = {SCOPE + f"{owner}${name}.class" for owner, names in SQL_CLOSURE.items() for name in names}
@@ -123,7 +143,7 @@ def main():
     expected = {(r["classname"], r["name"]) for r in history["expectedCases"]
                 if r["classname"] in selectors}
     assert len(expected) == 87
-    out = OPS / RUN
+    out = OPS / run
     out.mkdir()
     report = out / "xml"
     report.mkdir()
@@ -145,7 +165,7 @@ def main():
                 value = sha(data)
                 if item in old_classes and value != old_classes[item]:
                     prior_changes[item] = value
-                if item not in recompiled:
+                if packaged or item not in recompiled:
                     path = classes / item
                     path.parent.mkdir(exist_ok=True, parents=True)
                     path.write_bytes(data)
@@ -156,6 +176,8 @@ def main():
             "MigrationMasterContentVerifier.class", "MigrationMasterFinalizer.class",
             "MigrationMasterReferenceVerifier.class",
         }
+        if packaged:
+            bundled_prior.add("MigrationGamesVerifier.class")
         assert set(prior_changes) == {SCOPE + name for name in bundled_prior}
         cp = str(classes) + os.pathsep + model
         sequence = dict(
@@ -164,7 +186,7 @@ def main():
                      "--class-path", model, classes],
             tests=[*compiler, "-cp", cp + os.pathsep + str(junit), "-d", tests, *test_paths],
             unit=[JAVA, "-Duser.timezone=Pacific/Honolulu", f"-Xlog:class+init=info:file={trace}",
-                  f"-javaagent:{agent}=destfile={metrics.resolve()},sessionid={RUN},append=false",
+                  f"-javaagent:{agent}=destfile={metrics.resolve()},sessionid={run},append=false",
                   "-jar", junit, "execute", "--disable-banner", "--fail-if-no-tests", "--details=summary",
                   "--class-path", str(tests) + os.pathsep + cp, "--reports-dir", report.resolve(),
                   "--config=junit.jupiter.execution.parallel.enabled=false",
@@ -172,6 +194,11 @@ def main():
             standard=[JAVA, "-jar", cli, "report", metrics.resolve(), "--classfiles", classes,
                       "--xml", (out / "coverage.xml").resolve()],
         )
+        if packaged:
+            sequence.pop("main")
+            assert set(source_alignment["requalificationRequired"]) == targets
+            assert all(physical[name] == rec["mavenPackaged"] and physical[name] != rec["javacFixtureRun"]
+                       for name, rec in source_alignment["requalificationRequired"].items())
         known = {name.removesuffix(".class").replace("/", ".") for name in full_scope}
         for stage, command in sequence.items():
             stages[stage], stdout = execute(out, stage, command, root)
@@ -201,7 +228,7 @@ def main():
             raw = read(next(OPS.glob("PG40422-*/manifest.json")))["stages"]["raw"]["command"]
             stages["raw"], _ = execute(out, "raw", [*raw[:5], metrics.resolve(),
                 *(classes / name for name in sorted(targets))], root)
-    checked = (len(stages) == 6 and all(r["actualExit"] == 0 for r in stages.values())
+    checked = (len(stages) == (5 if packaged else 6) and all(r["actualExit"] == 0 for r in stages.values())
                and counts == {"pass": 87})
     terminal = dict(actualExit=0 if checked else 1, source=SOURCE, productionCore=SOURCE,
                     retainedBaselineCore=source_main, canonicalDesign=DESIGN, admission=history_pins["prepare"],
@@ -209,6 +236,8 @@ def main():
                     expected=87, outcome=counts, stages=stages, runtimeTimezone="Pacific/Honolulu",
                     changedSinceHistory=prior_changes, privateSqlCompanions=sorted(companions),
                     exactCurrentPhysical=physical, affectedClasses=sorted(targets),
+                    mavenPackagedMainUsed=packaged, samePhysicalMainRecompiled=not packaged,
+                    artifactAlignment=(source_alignment["requalificationRequired"] if packaged else None),
                     scriptsAndConfigs={"runner": pin(Path(__file__).relative_to(Path.cwd()))},
                     tools={str(p): value for p, value in pins.items()}, actualDbSessions=0, actualBackendActions=0,
                     whole451Accepted=False, formalDelta=0, terminalAtUTC=H["timestamp"]())
@@ -218,4 +247,5 @@ def main():
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    assert sys.argv[1:] in ([], ["--packaged-maven"])
+    raise SystemExit(main(bool(sys.argv[1:])))
