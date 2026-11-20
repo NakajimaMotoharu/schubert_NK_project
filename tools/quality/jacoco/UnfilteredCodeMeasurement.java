@@ -9,8 +9,13 @@ package org.jacoco.core.internal.analysis;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.security.DigestInputStream;
+import java.security.DigestOutputStream;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -33,7 +38,7 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.tree.MethodNode;
 
 /**
- * F03/451; TOOL-CODEMEASURE001..012 / PT-OPS-EXEC-CRC-002. Outputs original counters without
+ * F03/451; TOOL-CODEMEASURE001..012 / PT-OPS-EXEC-CRC-002, 005. Outputs original counters without
  * applying analysis filters.
  */
 public final class UnfilteredCodeMeasurement {
@@ -96,8 +101,26 @@ public final class UnfilteredCodeMeasurement {
       loader.load(file.toFile());
       return loader.getExecutionDataStore();
     }
-    try (var input = new BufferedInputStream(Files.newInputStream(file))) {
-      return new OriginalExecutionReader(input).load();
+    var originalDigest = sha256();
+    var canonicalDigest = sha256();
+    try (var input =
+            new DigestInputStream(
+                new BufferedInputStream(Files.newInputStream(file)), originalDigest);
+        var canonical = new DigestOutputStream(OutputStream.nullOutputStream(), canonicalDigest)) {
+      var records = new OriginalExecutionReader(input, new ExecutionDataWriter(canonical)).load();
+      // The pinned reader normalizes some encodings. The writer's encoding must match the original.
+      if (!MessageDigest.isEqual(originalDigest.digest(), canonicalDigest.digest())) {
+        throw new IOException("noncanonical original execution stream");
+      }
+      return records;
+    }
+  }
+
+  private static MessageDigest sha256() {
+    try {
+      return MessageDigest.getInstance("SHA-256");
+    } catch (NoSuchAlgorithmException exception) {
+      throw new IllegalStateException("required SHA-256 digest unavailable", exception);
     }
   }
 
@@ -106,11 +129,13 @@ public final class UnfilteredCodeMeasurement {
     private static final String REQUIRED_SESSION = "single ordered execution session required";
 
     private final ExecutionDataStore records = new ExecutionDataStore();
+    private final ExecutionDataWriter canonical;
     private boolean headerSeen;
     private boolean sessionSeen;
 
-    private OriginalExecutionReader(InputStream input) {
+    private OriginalExecutionReader(InputStream input, ExecutionDataWriter canonical) {
       super(input);
+      this.canonical = canonical;
       setSessionInfoVisitor(this::visitSession);
       setExecutionDataVisitor(this::visitExecution);
     }
@@ -137,6 +162,7 @@ public final class UnfilteredCodeMeasurement {
         throw new IllegalArgumentException(REQUIRED_SESSION);
       }
       sessionSeen = true;
+      canonical.visitSessionInfo(session);
     }
 
     private void visitExecution(ExecutionData record) {
@@ -147,6 +173,7 @@ public final class UnfilteredCodeMeasurement {
         throw new IllegalArgumentException("duplicate execution class name");
       }
       records.put(record);
+      canonical.visitClassExecution(record);
     }
   }
 
