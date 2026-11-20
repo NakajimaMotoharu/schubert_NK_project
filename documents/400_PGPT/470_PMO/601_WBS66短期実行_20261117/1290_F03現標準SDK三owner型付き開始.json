@@ -1,0 +1,75 @@
+{
+  "eventId": "PGPT-20261008-6806",
+  "groupId": "F03-three-standard-sdk-owners-static",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T13:32:54.551000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 70,
+      "remainingPercent": 30,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "F03-three-standard-sdk-owners-static",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "F03-three-standard-sdk-owners-static",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "source": "4570e1b2afee9e4766e4a99d22090a8d3c49d5ab",
+    "productionCoreMain": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40880-f03-standard-sdk-owners-typed-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.3,
+      "base": 0.7,
+      "high": 1.55
+    },
+    "groupCapPp": 2.1,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1289_P01809APIWeb標準SDK段階解放の継続点.json",
+        "sha256": "b8295535c807f440d6551983a549c4b85123357650ed47081bdd495e04ecde5b"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40874-batch-standard-gc-partial-close-v1-after/manifest.json",
+        "sha256": "38a871d3db549245ab693df9adf3f24a58c8d4e392d6896b2e7b02e7e0c5fc9c"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40878-api-web-standard-gc-partial-close-v1-after-api/manifest.json",
+        "sha256": "ade0bc84d4630858c8b7e52d0625e9a388a26271c9fa6c95c6eaa89da17fcadf"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40878-api-web-standard-gc-partial-close-v1-after-web/manifest.json",
+        "sha256": "3ba813ddf78d5129f025a5b151040d7e6e7729eb432f0bd73005f3496ee5f5f1"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40838-f03-inspection-summary-typed-v1/manifest.json",
+        "sha256": "90afa7c14c66be40bf8c55d2193d56955a1e3f19b1f934ee8819649e1a484ed6"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG8170-prometheus-sdk-prepare-v1/manifest.json",
+        "sha256": "371004a7bcadce5d398059e765ef8f3dc876a7ea004fced60ba8ceb05fad123a"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "PG40874/78既通常閉包のMainとSDKだけを現候補へ照合し、F03の型付き局所を確認。対象の変更は標準監視owner三型のみ。",
+    "endCondition": "固定三ownerを現Coreの狭い閉包でMaven NullAway・Werror。SpotBugs/PMDの対象・補助資料を点検して指摘・rawを保存。製品PT再演なし。",
+    "workScope": "F03局所。API/Webの全製品buildや保留class、F02全六、実監視は対象外。"
+  }
+}
