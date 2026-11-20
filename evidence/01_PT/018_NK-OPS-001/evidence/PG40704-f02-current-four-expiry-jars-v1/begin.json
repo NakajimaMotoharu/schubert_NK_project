@@ -1,0 +1,31 @@
+{
+  "run": "PG40704-f02-current-four-expiry-jars-v1",
+  "candidate": "82de9065ca8216542cd4e12ddd61003d9bb07ab2",
+  "startEvent": "PGPT-20261008-6583",
+  "inputArchivePaths": [
+    "pom.xml",
+    "program/characterization/pom.xml",
+    "src/schubert-nk-api/pom.xml",
+    "src/schubert-nk-web/pom.xml",
+    "src/schubert-nk-protocol/pom.xml",
+    "src/schubert-nk-protocol/src/main",
+    "src/schubert-nk-storage/pom.xml",
+    "src/schubert-nk-storage/src/main",
+    "src/schubert-nk-bootstrap/pom.xml",
+    "src/schubert-nk-bootstrap/src/main",
+    "src/schubert-nk-batch/pom.xml",
+    "src/schubert-nk-batch/src/main"
+  ],
+  "javaFiles": 482,
+  "command": [
+    "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+    "-o",
+    "-B",
+    "-ntp",
+    "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+    "-pl",
+    "src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-batch",
+    "-am",
+    "compile"
+  ]
+}

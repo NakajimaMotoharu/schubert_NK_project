@@ -1,0 +1,233 @@
+{
+  "actualExit": 0,
+  "gitHead": "d16d7e08c60301681be0b144f13de0be53085826",
+  "candidateProductionSource": "82de9065ca8216542cd4e12ddd61003d9bb07ab2",
+  "lastQualifiedCore": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+  "startEvent": "PGPT-20261008-6583",
+  "commands": {
+    "compile": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-pl",
+        "src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-batch",
+        "-am",
+        "compile"
+      ],
+      "beginUTC": "2026-11-20T06:14:40.038039+00:00",
+      "terminalAtUTC": "2026-11-20T06:15:09.311384+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40704-f02-current-four-expiry-jars-v1/compile.stdout.log.gz",
+        "sha256": "dfb9ac3b66357c5f752efb353bf357a3e91c5632f0a43017dfdc36ca67fa6786"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40704-f02-current-four-expiry-jars-v1/compile.stderr.log.gz",
+        "sha256": "7097fbfb15f55c833e6de8e49ccc4ae96e0a90c2af25ebe49e5a16ff0b5e14ae"
+      }
+    },
+    "package": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-pl",
+        "src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-batch",
+        "org.apache.maven.plugins:maven-jar-plugin:3.4.1:jar"
+      ],
+      "beginUTC": "2026-11-20T06:15:09.311408+00:00",
+      "terminalAtUTC": "2026-11-20T06:15:11.213949+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40704-f02-current-four-expiry-jars-v1/package.stdout.log.gz",
+        "sha256": "447f2195d65a9ea9eff8a73c19c954f2627ede236dfaffc710ffd30839d2afab"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40704-f02-current-four-expiry-jars-v1/package.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "jdeps-before": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/jdeps",
+        "-verbose:class",
+        "-filter:none",
+        "--ignore-missing-deps",
+        "/dev/shm/pgpt-current-expiry-four-n3alj1_z/before/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.class"
+      ],
+      "beginUTC": "2026-11-20T06:15:11.356219+00:00",
+      "terminalAtUTC": "2026-11-20T06:15:11.604617+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40704-f02-current-four-expiry-jars-v1/jdeps-before.stdout.log.gz",
+        "sha256": "9805bd9ee129cc8dd139fffa48bb2e8d9bdba53eb52080bfe24c1c71810d0a38"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40704-f02-current-four-expiry-jars-v1/jdeps-before.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "abi-before": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-public",
+        "-s",
+        "/dev/shm/pgpt-current-expiry-four-n3alj1_z/before/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.class"
+      ],
+      "beginUTC": "2026-11-20T06:15:11.604651+00:00",
+      "terminalAtUTC": "2026-11-20T06:15:11.762496+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40704-f02-current-four-expiry-jars-v1/abi-before.stdout.log.gz",
+        "sha256": "f266bccb594339684ec2c1d2d0c12014b136ac3a0a42b88ec6961733436b4b25"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40704-f02-current-four-expiry-jars-v1/abi-before.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "jdeps-after": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/jdeps",
+        "-verbose:class",
+        "-filter:none",
+        "--ignore-missing-deps",
+        "/dev/shm/pgpt-current-expiry-four-n3alj1_z/src/schubert-nk-batch/target/classes/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.class"
+      ],
+      "beginUTC": "2026-11-20T06:15:11.762529+00:00",
+      "terminalAtUTC": "2026-11-20T06:15:12.053983+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40704-f02-current-four-expiry-jars-v1/jdeps-after.stdout.log.gz",
+        "sha256": "82d15ac4efaee50a33127ce3dd68be4ce2b265f10b8d85c968c9bb053a691e8c"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40704-f02-current-four-expiry-jars-v1/jdeps-after.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "abi-after": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-public",
+        "-s",
+        "/dev/shm/pgpt-current-expiry-four-n3alj1_z/src/schubert-nk-batch/target/classes/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.class"
+      ],
+      "beginUTC": "2026-11-20T06:15:12.054016+00:00",
+      "terminalAtUTC": "2026-11-20T06:15:12.198718+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40704-f02-current-four-expiry-jars-v1/abi-after.stdout.log.gz",
+        "sha256": "f266bccb594339684ec2c1d2d0c12014b136ac3a0a42b88ec6961733436b4b25"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40704-f02-current-four-expiry-jars-v1/abi-after.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    }
+  },
+  "privateJars": {
+    "protocol": {
+      "artifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40704-f02-current-four-expiry-jars-v1/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+        "sha256": "771c7ca5d7e0cd07a62c9874f300e62830043a010e7bcc5c2d5badf46cd07e5b"
+      },
+      "coordinates": {
+        "artifactId": "schubert-nk-protocol",
+        "groupId": "dev.codex.schubert",
+        "version": "0.1.0-SNAPSHOT"
+      },
+      "classes": 176,
+      "nonClassEntries": 3,
+      "crcOK": true,
+      "classMajor": 69,
+      "allClassHashesMatch": true
+    },
+    "storage": {
+      "artifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40704-f02-current-four-expiry-jars-v1/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+        "sha256": "c6e04586f4629a180083de5315972dd7026a27d3870f71226af4c39f0fe970f4"
+      },
+      "coordinates": {
+        "artifactId": "schubert-nk-storage",
+        "groupId": "dev.codex.schubert",
+        "version": "0.1.0-SNAPSHOT"
+      },
+      "classes": 79,
+      "nonClassEntries": 3,
+      "crcOK": true,
+      "classMajor": 69,
+      "allClassHashesMatch": true
+    },
+    "bootstrap": {
+      "artifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40704-f02-current-four-expiry-jars-v1/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+        "sha256": "f82de99af85e1e19a49fa3ef170841d49f98164cf407906f9ecfb8e966ce2d0f"
+      },
+      "coordinates": {
+        "artifactId": "schubert-nk-bootstrap",
+        "groupId": "dev.codex.schubert",
+        "version": "0.1.0-SNAPSHOT"
+      },
+      "classes": 201,
+      "nonClassEntries": 3,
+      "crcOK": true,
+      "classMajor": 69,
+      "allClassHashesMatch": true
+    },
+    "batch": {
+      "artifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40704-f02-current-four-expiry-jars-v1/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+        "sha256": "6651809d0b0cfe05020fda9f0766209c583036f3e9e2f70895a40f524a2f2be8"
+      },
+      "coordinates": {
+        "artifactId": "schubert-nk-batch",
+        "groupId": "dev.codex.schubert",
+        "version": "0.1.0-SNAPSHOT"
+      },
+      "classes": 646,
+      "nonClassEntries": 3,
+      "crcOK": true,
+      "classMajor": 69,
+      "allClassHashesMatch": true
+    }
+  },
+  "changedPhysical": {
+    "protocol": [],
+    "storage": [],
+    "bootstrap": [],
+    "batch": [
+      "dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.class"
+    ]
+  },
+  "verify": {
+    "focusedPhysicalByteEqual": true,
+    "removedEdges": [
+      "dev.codex.schubert.nk.storage.StorageIoException"
+    ],
+    "addedEdges": [
+      "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph"
+    ],
+    "publicAbiEqual": true
+  },
+  "mavenModules": [
+    "protocol",
+    "storage",
+    "bootstrap",
+    "batch"
+  ],
+  "sources": 482,
+  "physical": 1102,
+  "productTestsStarted": 0,
+  "apiWebMainIncluded": false,
+  "operationalActions": 0,
+  "fullSixBuild": false,
+  "whole451": false,
+  "newFormalAcceptance": 0,
+  "terminalAtUTC": "2026-11-20T06:15:12.207072+00:00"
+}

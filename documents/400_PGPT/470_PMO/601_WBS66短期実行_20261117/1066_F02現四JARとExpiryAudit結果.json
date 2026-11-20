@@ -1,0 +1,144 @@
+{
+  "eventId": "PGPT-20261008-6584",
+  "groupId": "wbs66-f02-current-four-expiry-package",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T06:15:42.610000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 64,
+      "remainingPercent": 36,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "wbs66-f02-current-four-expiry-package",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "wbs66-f02-current-four-expiry-package",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a"
+    ],
+    "source": "d16d7e08c60301681be0b144f13de0be53085826",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40704-f02-current-four-expiry-jars-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.5,
+      "base": 1.2,
+      "high": 2.8
+    },
+    "groupCapPp": 4,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1064_F02現SSC461残数と再開条件.json",
+        "sha256": "d33f589390a530c957633a1801758f58bde7a7ac219d21c9724dfdd5168f70fc"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40498-schema-history-packaged-proof-recovered-v1/manifest.json",
+        "sha256": "bba0cb1781e36039e9014b8a7f27e4ab2354ef78283181a704bae5dba9fd9b0f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40698-f02-expiry-audit-jdbc-independent-v1/manifest.json",
+        "sha256": "6e009299dbba22fa572d8ea7c9822f77c2d7fd0f79f33d3a3e84a5a730b899e6"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40702-f02-ssc461-current-roster-delta-v1/manifest.json",
+        "sha256": "9a5ff725f4c56eb0598e5b7f4ced99cc7e42eb850fffd9ab4e7227700e3a34ac"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39862-service-db-state-lock-four-main-v1/manifest.json",
+        "sha256": "9433dae6e53e1d97a1b942175e930c315c118da9dea870cdffb0b26072e6a035"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "Same authorized 4 Maven Main-only module scope as PG40496; new source changes exact single ExpiryAudit Main. No API/Web product sources, tests, Root execution or held operation.",
+    "endCondition": "Actual compile and package exits, 4 artifact class counts, all class hash differences, released ABI and actual jdeps before/after for changed class. Match candidate file with focused PT; leave four-of-six and old JDBC edge open.",
+    "workScope": "Offline Maven and /dev/shm isolated. Only Java build outputs and private owned JAR copies. No app backend, DB, native or SSH.",
+    "quotaAfter": {
+      "usedPercent": 64,
+      "remainingPercent": 36,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "f1e94041d066dd2f8b084da619d4c586fe3b1cb6a0995f86dbd28a7314ce0b7f",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T06:15:42.610000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 64,
+          "remainingPercent": 36,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T06:15:12.207072+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 64,
+      "remainingPercent": 36,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6583",
+    "attempt": 1,
+    "attemptResult": "PASS_FOUR_CURRENT_JARS_LOCAL_PT_BYTE_EQUAL",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40704-f02-current-four-expiry-jars-v1/manifest.json",
+        "sha256": "c58df3b46be9501d68256a6b8578efa8c0f7021f66f0e477d58de8c907b62da1"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "whole six module physical topologies and 13 criteria",
+      "Storage legacy java.sql edge and remaining SSC461 sites",
+      "QA-056/057 and actual runtime/451",
+      "P020 exact current 211 and true independent terminal"
+    ],
+    "firstVerificationPass": 1,
+    "firstVerificationDenominator": 1,
+    "mavenModulesPackaged": 4,
+    "compiledPhysical": 1102,
+    "actualMainFiles": 482,
+    "changedPhysicalCount": 1,
+    "scopedPtPreviouslyMeasured": 8,
+    "candidateProductionSource": "82de9065ca8216542cd4e12ddd61003d9bb07ab2",
+    "formerCore": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "exactChangedPhysicalWithScopedPt": true,
+    "existingScopedPtNotReplayed": true
+  }
+}
