@@ -9085,7 +9085,7 @@
   },
   "beforeSsc261InventorySha256": "443af5012e6a3d2a9088bb38d4a28ae3f7ff7645e6e4689fde2bea543fe19b9b",
   "beforeStrictReferenceCandidateInventorySha256": "44976d5ce11f24a89ea7db68c4d5ce1674f9a72032b6a96e453adc461a850968",
-  "inventorySha256": "86b6e5a6193b8c4ec9bfa0a4e00c6d843cf5fe640517a6c0fe691224ce134692",
+  "inventorySha256": "340b208a1d0512438ba1ef667f61e26d69a112164494487d8b4cf2f70f05bffb",
   "expiryCandidateObservation": {
     "source": "1ec19782a1afe22d1de75b05f4cd12b8a8a8a172",
     "run": "PG713/714+PG715/717/719+PG722/725/728/729/730+PG737/738/739",
@@ -47987,5 +47987,45 @@
       "P018-10 other required boundaries",
       "whole451"
     ]
+  },
+  "loginComparisonAndProjectionPG40974": {
+    "source": "ec21bc4dc2e267f107d65a53337bbaf2f07a38a7",
+    "main": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAttemptRepository.java",
+      "sha256": "15d5a5a1ffe4de19519c49a83540bf2bdf942ef7fd523eb8fe1472c147f4950e"
+    },
+    "fixture": {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginAttemptPortTest.java",
+      "sha256": "2596df8f7c7d85a450cbdb0b8c970f530f896012fb60b6a45807b187d3177926"
+    },
+    "testId": "PT-AUT-ATTEMPTPORT011",
+    "spec": {
+      "path": "evidence/01_PT/018_NK-OPS-001/5528_認証比較キーの厳密UTF8単体仕様.md",
+      "sha256": "70a7b26d99b954252c2922c85c9efa42ec703f695c7283f14edb924a818c4783"
+    },
+    "expectedProjectionCases": "PT-AUT-ATTEMPTPORT001～010",
+    "oldRun": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40972-p00701-utf8-comparison-value-v1/manifest.json",
+      "sha256": "e5ff879759a79fceebbc36a5ef4f19d25f60ae29fd66263d0f95360bd8361e70"
+    },
+    "newRun": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40974-f03-borrowed-closed-role-status-branches-v2/manifest.json",
+      "sha256": "78824f818d57cc0c980c60a3edfbf5fd11c374872d2dffbf92dac335ac1f1c70"
+    },
+    "static": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40974-f03-borrowed-closed-role-status-branches-v2/dispositions.json",
+      "sha256": "da566e3324ae2c5aafa46092ebedb77cda1080d66ddae78a790beebbb2cbdea7"
+    },
+    "owner": "WBS-P007-01",
+    "qualityWbs": "WBS-F03",
+    "design": [
+      "UI226",
+      "SS314",
+      "SS331",
+      "SS332",
+      "451"
+    ],
+    "formalDelta": 0,
+    "fullExternalPathsNotObserved": true
   }
 }

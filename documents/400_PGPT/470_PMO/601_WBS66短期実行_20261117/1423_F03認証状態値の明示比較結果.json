@@ -1,0 +1,166 @@
+{
+  "eventId": "PGPT-20261008-6939",
+  "groupId": "f03-borrowed-closed-role-status-branches",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T16:09:12.815000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 74,
+      "remainingPercent": 26,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "f03-borrowed-closed-role-status-branches",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "f03-borrowed-closed-role-status-branches",
+    "workAttributionKind": "REWORK",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/criterion/quality"
+    ],
+    "source": "9046c05e06fa37b190b604f48b7f5565fabce310",
+    "productionCoreMain": "5e211af832d1794a25cdb9fe34c9eec6fe9e2ad6",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40974-f03-borrowed-closed-role-status-branches-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.25,
+      "base": 0.7,
+      "high": 1.5
+    },
+    "groupCapPp": 1.9,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1421_P00701比較キーUTF8境界継続点.json",
+        "sha256": "1705bec2a17f6a3f4db9e664f0bb80201931a96f6306c1fbf90b20c980e7a574"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40972-p00701-utf8-comparison-value-v1/manifest.json",
+        "sha256": "e5ff879759a79fceebbc36a5ef4f19d25f60ae29fd66263d0f95360bd8361e70"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/5528_認証比較キーの厳密UTF8単体仕様.md",
+        "sha256": "70a7b26d99b954252c2922c85c9efa42ec703f695c7283f14edb924a818c4783"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "PG40972 生B42/46・default全。現javapはrole/statusの二string switchを四lookupswitchへ生成。既定closed値の明示比較へ移す。",
+    "endCondition": "他ソースと公開ABI不変。PT-AUT-ATTEMPTPORT元11を同一変更sourceで一実行し、当一型の無filter B四不足、既SQL・null/unknown退避と資源後条件を確認。",
+    "workScope": "既自己所有JDBC proxy閉包13Mainのみ、実DB／認証／保留経路なし。現対象へのSpotBugs/PMDを追加。",
+    "quotaAfter": {
+      "usedPercent": 74,
+      "remainingPercent": 26,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "92388b78d58e6d38e823c867e6e58fbe6b527591439fd385f649a174bde50b99",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T16:09:12.815000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 74,
+          "remainingPercent": 26,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T16:07:57.554698+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 74,
+      "remainingPercent": 26,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6938",
+    "attempt": 1,
+    "attemptResult": "CLOSED_LOGIN_PROJECTION_RAW_BRANCHES",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 22,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40974-f03-borrowed-closed-role-status-branches-v1/manifest.json",
+        "sha256": "2189f6b856879dd791a40af96a1d0acee992cf7b49ea893f3460dfa35fefbed7"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40974-f03-borrowed-closed-role-status-branches-v1/pmd.xml",
+        "sha256": "51edc43a5dfc76e69ad13adb0704b908d1c0e7d2647a09e31319c2e7560a2185"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40974-f03-borrowed-closed-role-status-branches-v2/manifest.json",
+        "sha256": "78824f818d57cc0c980c60a3edfbf5fd11c374872d2dffbf92dac335ac1f1c70"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40974-f03-borrowed-closed-role-status-branches-v2/dispositions.json",
+        "sha256": "da566e3324ae2c5aafa46092ebedb77cda1080d66ddae78a790beebbb2cbdea7"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40974-f03-borrowed-closed-role-status-branches-v2/unfiltered.tsv",
+        "sha256": "d68432410e0b6c64a7c29ece84b6c98a7548de3ec71fcf6b76a7f15762c034df"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40974-f03-borrowed-closed-role-status-branches-v2/spotbugs.xml",
+        "sha256": "e6c0c2ae28853943fa8ff7c59b53f1b601df4ba1edd33096427e98e4404985ca"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40974-f03-borrowed-closed-role-status-branches-v2/pmd.xml",
+        "sha256": "545c70943333e10445dc0fadb4ba87ae59bdfbadca18ea6015921406b1c8e90b"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5530_f03_login_role_status_raw.py",
+        "sha256": "9b03615c45ef7b8adeef55cdfa6ef78b8ee5ea7ec0158c34bb6c89669077c3ee"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "YKT2749実経路と現caller確認",
+      "実DB、QA056、F03と451全体"
+    ],
+    "affectedUnitCasesV1": 11,
+    "affectedUnitCasesFinal": 11,
+    "rawBranchesCovered": 34,
+    "rawBranchesMissing": 0,
+    "initialPmdApplicable": 4,
+    "finalPmdApplied": 0,
+    "finalPmdRaw": 21,
+    "candidateSource": "ec21bc4dc2e267f107d65a53337bbaf2f07a38a7",
+    "beforeCandidate": "5e211af832d1794a25cdb9fe34c9eec6fe9e2ad6",
+    "bug": [
+      "BUG-3433",
+      "BUG-3434",
+      "BUG-3435"
+    ],
+    "ykt": "YKT-2750"
+  }
+}
