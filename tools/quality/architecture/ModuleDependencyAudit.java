@@ -252,10 +252,11 @@ public final class ModuleDependencyAudit {
 
   private static boolean opensFileInConstructor(JavaCodeUnitAccess<?> access) {
     var constructor = access.getTarget();
-    if (!constructor.getName().equals("<init>") || constructor.getRawParameterTypes().isEmpty()) {
-      return false;
-    }
+    if (!constructor.getName().equals("<init>")) return false;
     String owner = access.getTargetOwner().getName();
+    // Every FileHandler constructor opens its owned log, including the configured default.
+    if (owner.equals("java.util.logging.FileHandler")) return true;
+    if (constructor.getRawParameterTypes().isEmpty()) return false;
     String firstType = constructor.getRawParameterTypes().getFirst().getName();
     if (FILE_OPENING_WRITERS.contains(owner)) {
       return firstType.equals("java.lang.String") || firstType.equals("java.io.File");
