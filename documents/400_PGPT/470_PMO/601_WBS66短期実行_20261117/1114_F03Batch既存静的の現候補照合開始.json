@@ -1,0 +1,79 @@
+{
+  "eventId": "PGPT-20261008-6632",
+  "groupId": "wbs66-f03-batch-allowed-pmd-current-lineage",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T08:13:10.889000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 65,
+      "remainingPercent": 35,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "wbs66-f03-batch-allowed-pmd-current-lineage",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "wbs66-f03-batch-allowed-pmd-current-lineage",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "source": "992ef54cf1de5fb61051abdef170306099ea771c",
+    "productionCoreMain": "517a23cddc9f3883550942f6fa90a4256ef39b73",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40754-f03-current-batch-pmd-lineage-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.25,
+      "base": 0.7,
+      "high": 1.3
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1113_日付QA保留と独立WBSの継続点.json",
+        "sha256": "f29d66bfbadb5fb1c1fe689da09799c070b7403dc114388ef9353e672a1cdcde"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40524-f03-batch-closed-current-pmd-v1/manifest.json",
+        "sha256": "46d81a6a33cfbaea0d0100fe423f24614f1b94e76e310879165664a3033e5ffe"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40538-f03-batch-config-artemis-policy-v1/manifest.json",
+        "sha256": "2b95117b04df4a19679babf44ccdd0e2f53bb99a18283823e35e21c9c7e00249"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40738-f03-expiry-final-ownership-independent-v1/manifest.json",
+        "sha256": "43c78b23b9a2c4c905ac0d6687c05c82d9bbcde0f7a0a192f3a21bfb8e39cff1"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40748-f03-cleanup-terminal-current-typed-v1/manifest.json",
+        "sha256": "31119851e87b8fadca786f92986caddfbcf40ef81093a21409025aaf9efda8e9"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40750-f02-current-four-artifact-dependency-v1/manifest.json",
+        "sha256": "01c3d88eea68514b4a8821f92e013aef3093d8375ae136e9e17ee513ff1f6e64"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40744-f02-cleanup-terminal-current-four-jars-v1/manifest.json",
+        "sha256": "b09a2e11492f508e5b1a503877f3efc9b5ac72412e7a9b8a68960e62d56dc2a0"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "Previous admitted Batch PMD enumerated 128 sources, 397 observations, 385 with prior dispositions. Two Main files changed since that snapshot. Actual candidate PMD exists for both, and actual four graph and binaries are saved. No source-bound reuse ledger exists for the resulting scope.",
+    "endCondition": "Check unchanged admitted source and physical hashes, hold unmatched or affected callers through a conservative reverse dependency closure, map the latest two typed reports to their own artifact, retain legacy exclusions and all open disposition counts.",
+    "workScope": "Existing public PMD reports, admitted Batch class byte hashes and already published JAR graph only. No product or static execution, no permit/backup entry action, no foreign/VM/DB work."
+  }
+}
