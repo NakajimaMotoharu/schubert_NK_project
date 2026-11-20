@@ -102,24 +102,20 @@ public final class MediaRangeService {
     int status;
     long start = 0;
     long length;
-    switch (selection) {
-      case HttpByteRangeParser.Full full -> {
-        status = 200;
-        length = full.length();
-      }
-      case HttpByteRangeParser.Partial partial -> {
-        status = 206;
-        start = partial.start();
-        length = partial.length();
-        headers.put(
-            "Content-Range",
-            "bytes " + start + "-" + partial.end() + "/" + descriptor.byteLength());
-      }
-      case HttpByteRangeParser.Unsatisfiable ignored -> {
-        status = 416;
-        length = 0;
-        headers.put("Content-Range", "bytes */" + descriptor.byteLength());
-      }
+    if (selection instanceof HttpByteRangeParser.Full full) {
+      status = 200;
+      length = full.length();
+    } else if (selection instanceof HttpByteRangeParser.Partial partial) {
+      status = 206;
+      start = partial.start();
+      length = partial.length();
+      headers.put(
+          "Content-Range", "bytes " + start + "-" + partial.end() + "/" + descriptor.byteLength());
+    } else {
+      // SS333 / PG-D-1190: the remaining parser result is the bodyless Unsatisfiable.
+      status = 416;
+      length = 0;
+      headers.put("Content-Range", "bytes */" + descriptor.byteLength());
     }
     headers.put("Content-Length", Long.toString(length));
     response.begin(status, Map.copyOf(headers));

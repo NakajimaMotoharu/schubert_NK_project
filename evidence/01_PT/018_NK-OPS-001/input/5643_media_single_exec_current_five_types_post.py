@@ -5,6 +5,7 @@ import json
 import os
 from pathlib import Path
 import runpy
+import sys
 from tempfile import TemporaryDirectory
 
 
@@ -17,10 +18,10 @@ def measure_fields(values):
             for entity,miss,hit in (part.split(":") for part in values)}
 
 
-def main():
-    active=OPS/h["RUN"]/"manifest.json"
+def main(fixed):
+    active=OPS/h["FIXED_RUN" if fixed else "RUN"]/"manifest.json"
     m=read(active)
-    assert m["actualExit"]==0 and m["tests"]==27 and m["fixtureCanary"]==1
+    assert m["actualExit"]==0 and m["tests"]==(28 if fixed else 27) and m["fixtureCanary"]==1
     for item in m["original"]+m["admittedPhysical"]+m["inputMain"]+m["inputTests"]:
         assert pin(Path(item["path"]))==item
     original=active.parent/"media.exec"
@@ -33,7 +34,9 @@ def main():
         for part in ("asm","asm-commons","asm-tree")
     ]
     src=Path("tools/quality/jacoco/UnfilteredCodeMeasurement.java")
-    out=OPS/"PG41258-media-current-five-types-single-independent-v1"
+    name=("PG41262-media-current-five-types-corrected-independent-v1" if fixed else
+          "PG41258-media-current-five-types-single-independent-v1")
+    out=OPS/name
     out.mkdir()
     stages={}
     with TemporaryDirectory(dir="/dev/shm",prefix="pgpt-five-media-measure-") as temp:
@@ -73,7 +76,8 @@ def main():
     assert bytecode.returncode==0
     text=bytecode.stdout.decode()
     method=text[text.index(" respond("):]
-    assert "tableswitch" in method and "java/lang/MatchException" in method
+    emitted_fallback="tableswitch" in method and "java/lang/MatchException" in method
+    assert emitted_fallback!=fixed
     bytecode_post=out/"media-service-bytecode.txt"
     bytecode_post.write_bytes(bytecode.stdout)
     remaining=[record for record in lines if record["counters"]["BRANCH"]["missed"]]
@@ -81,7 +85,7 @@ def main():
            source=m["source"],productionCore=m["productionCore"],originalExec=pin(original),
            originalUnit=pin(active),tool=pin(src),status="PARTIAL" if any(v["missed"] for v in totals.values()) else "FULL",
            tools=stages,classes=classes,wholeRaw=totals,methodMisses=method_misses,
-           branchDeficitSites=remaining,compilerSwitchFallbackObserved=True,
+           branchDeficitSites=remaining,compilerSwitchFallbackObserved=emitted_fallback,
            standaloneOnly=True,selectedExistingPtRerunHere=0,
            actualRuntimeOrNative=0,manualCoverageExclusions=0,
            originalArtifacts=[pin(report),pin(bytecode_post)],whole451=False,formalDelta=0)
@@ -93,4 +97,5 @@ def main():
 
 
 if __name__=="__main__":
-    main()
+    assert sys.argv[1:] in ([],["--fixed"])
+    main(bool(sys.argv[1:]))

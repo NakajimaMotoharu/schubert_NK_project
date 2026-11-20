@@ -24,4 +24,28 @@ final class ExceptionValueContractTest {
     }
     assertThrows(NullPointerException.class, () -> new MediaDeliveryException(null));
   }
+
+  @Test
+  void mediaFailureNamesResolveOnlyToTheDefinedReasons() {
+    // PT-MED-FAILURE-NAME-001 / SS333: named reasons keep the public failure metadata.
+    var invalid =
+        new MediaDeliveryException(MediaDeliveryException.Reason.valueOf("INVALID_DESCRIPTOR"));
+    var busy = new MediaDeliveryException(MediaDeliveryException.Reason.valueOf("BUSY"));
+    var unavailable =
+        new MediaDeliveryException(MediaDeliveryException.Reason.valueOf("UNAVAILABLE"));
+    assertSame(MediaDeliveryException.Reason.INVALID_DESCRIPTOR, invalid.reason());
+    assertSame(MediaDeliveryException.Reason.BUSY, busy.reason());
+    assertSame(MediaDeliveryException.Reason.UNAVAILABLE, unavailable.reason());
+    assertEquals(503, invalid.httpStatus());
+    assertEquals(503, busy.httpStatus());
+    assertEquals(503, unavailable.httpStatus());
+    assertEquals(OptionalInt.empty(), invalid.retryAfterSeconds());
+    assertEquals(OptionalInt.of(1), busy.retryAfterSeconds());
+    assertEquals(OptionalInt.empty(), unavailable.retryAfterSeconds());
+    assertThrows(
+        IllegalArgumentException.class, () -> MediaDeliveryException.Reason.valueOf("busy"));
+    assertThrows(
+        IllegalArgumentException.class, () -> MediaDeliveryException.Reason.valueOf("OTHER"));
+    assertThrows(NullPointerException.class, () -> MediaDeliveryException.Reason.valueOf(null));
+  }
 }
