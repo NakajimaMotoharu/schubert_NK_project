@@ -1,0 +1,75 @@
+{
+  "eventId": "PGPT-20261008-7152",
+  "groupId": "F03-RangeCurrentNullAwayAndPmd",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T20:58:09.487000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 81,
+      "remainingPercent": 19,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "F03-RangeCurrentNullAwayAndPmd",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "F03-RangeCurrentNullAwayAndPmd",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "source": "c82b4f7e83aa69de6b71f5b41859ce706f12f3fa",
+    "productionCoreMain": "6c2e8b027818c8dac0ed0f895edb85658e9c4ff1",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG41208",
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.4,
+      "high": 0.8
+    },
+    "groupCapPp": 1.0,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1636_Range単位ASCII限定完了・F03次工程.json",
+        "sha256": "e4d7a03ade92c2462ab84b2f7174977a7ddd9b89bac771fe666ab628573315b3"
+      },
+      {
+        "path": "pom.xml",
+        "sha256": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37540-range-namespace5-prepare-v1/manifest.json",
+        "sha256": "58749637b44b8a5eb440b38fff3f32fd9c7dda90974a8e152901cc6cd508df36"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37542-range-namespace5-static-v1/manifest.json",
+        "sha256": "cffa5c03c55d71bbcb6d185d413b0b3490b131f3d044cdacf12975ce45e83817"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41204-range-unit-ascii-affected-v1/manifest.json",
+        "sha256": "c879718e0132f37d326ac917d29378479347d11bc58ba49b9050a28c703f3d10"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41206-range-unit-ascii-independent-v1/manifest.json",
+        "sha256": "28cffcf61b6a98dfbf31a6fb09cd5c50adaf13374d61ffbf534cafa88479e04d"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "SS352/354・WBS66の管理行F03/2-2。6c2e8b0278の変更Mainと新Testに限定、PG37540/42の既承認ローカル検査契約を適用。",
+    "endCondition": "Rootと同一のCompiler XMLで変更Main＋package-infoのNullAway/Werror、変更Mainと新Testの生PMDを同sourceへ返す。既存10件や未許可範囲の状態を動かさない。",
+    "workScope": "低依存の二Main入力・追加Testを公開artifactだけで解析。既済JUnitは再演なし。"
+  }
+}
