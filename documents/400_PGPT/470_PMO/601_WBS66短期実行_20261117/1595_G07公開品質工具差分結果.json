@@ -1,0 +1,127 @@
+{
+  "eventId": "PGPT-20261008-7110",
+  "groupId": "WBS66-G07-APPROVED-PUB-TEXT-DIFF",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T19:47:26.325000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 79,
+      "remainingPercent": 21,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66-G07-APPROVED-PUB-TEXT-DIFF",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "WBS66-G07-APPROVED-PUB-TEXT-DIFF",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-G07"
+    ],
+    "managementWorkIds": [
+      "WBS-G07"
+    ],
+    "source": "7cf9030eaabe7325e3d1a999652fb97cfa2f52d5",
+    "productionCoreMain": "559f5b5945e82374e0843dcfae11a8d07faef1ea",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG41172-g07-new-published-quality-tool-delta-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.1,
+      "base": 0.25,
+      "high": 0.7
+    },
+    "groupCapPp": 1.0,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1593_F02画面の直接File生成境界継続点.json",
+        "sha256": "c53f5964d4657dc9bdcc4289fc8693a805f090fdf1ed4a9b059e6dcc65c1de1a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41138-g07-repository-and-inventory-public-delta-v1/manifest.json",
+        "sha256": "14aeced13304c736a525bef24d6f2ea853e093f2b29dcbf411d2579d3eac30d7"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "source公開と元scan cursor。この区間で変わった公開テキストのみ",
+    "endCondition": "既scanの次の公開テキスト区間検査、元Current tree一致",
+    "workScope": "Git published patch only; no worktree/private data/held contents",
+    "quotaAfter": {
+      "usedPercent": 79,
+      "remainingPercent": 21,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "645ea9850f24990cbf20769a93ec55f76c44458f751aa503bbf8c7ebfcd8cb57",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T19:47:26.325000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 79,
+          "remainingPercent": 21,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T19:47:22.417268+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 79,
+      "remainingPercent": 21,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-7109",
+    "attempt": 1,
+    "attemptResult": "NEW_PUBLISHED_TEXT_INTERVAL_SCANNED_NO_FINDINGS",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41172-g07-new-published-quality-tool-delta-v1/manifest.json",
+        "sha256": "c0cfd4ef300810952359e407ba2b8c45028fc03b2dea562ffcec72ece9668314"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5608_g07_published_tool_text_delta.py",
+        "sha256": "fef01dfe0bbcaa5772151af49185a184911ea35bb3316377fb898c04579aa763"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": "全G07未分類と当全451は現区間証拠の外。実候補F02/F03・DB・native・CHR保留。",
+    "scannerStarts": 1,
+    "scriptPreflightBeforeScannerRejected": 1,
+    "scriptPreflightCause": "Four exact published static stdout/stderr suffixes not previously whitelisted. Documented approved exact blob addendum only.",
+    "scannedCommits": 15,
+    "scannedTextPaths": 99,
+    "secretFindings": 0,
+    "protectedReads": 0
+  }
+}
