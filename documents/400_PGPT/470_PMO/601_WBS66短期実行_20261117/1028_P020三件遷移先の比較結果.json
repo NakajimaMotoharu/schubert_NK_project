@@ -1,0 +1,159 @@
+{
+  "eventId": "PGPT-20261008-6547",
+  "groupId": "PGPT-WBS66-P020-A02-ORDERED-REDIRECT-EVIDENCE-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T04:21:08.110000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 62,
+      "remainingPercent": 38,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P020-A02-ORDERED-REDIRECT-EVIDENCE-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-P020-A02-ORDERED-REDIRECT-EVIDENCE-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P020-01.02"
+    ],
+    "managementWorkIds": [
+      "WBS-P020-01.02/2"
+    ],
+    "source": "5ee4e6df2a5840d8f802d705b1ca78010d605912",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40656-p020-a02-redirect-red-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.55,
+      "base": 1.4,
+      "high": 3.0
+    },
+    "groupCapPp": 4,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1026_G07コンパイラ証跡差分継続点.json",
+        "sha256": "e51dad71aaea9d7881701de82dc69479c339a979d739160ce6babee1b3aea1e1"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40208-p020-a02-session-census-green208-v1/begin.json",
+        "sha256": "f1de8e28ed80cc0d247912a53579da92fcee7164f4a03d1193627edd65c992cf"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40212-p020-a02-session-census-independent-v1/manifest.json",
+        "sha256": "d8f11e393676af1b80ba8ebf58817051bb7fde1eb3acf5d94bb7354127b1799a"
+      },
+      {
+        "path": "program/characterization/baseline/current/artifacts/CHR-A02.json",
+        "sha256": "8af1ba4d2381bebe7ce52f74992e5dabc728841b996779a2f90ded043001ce75"
+      },
+      {
+        "path": "documents/200_UI/260_引継ぎ・監査/264_現行互換性Characterization Test仕様.md",
+        "sha256": "0b0973e6e1e94858e840bc1b85df1daff35e3a0fe9f28ea12331823c2cbcf781"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "WBS66行150と既PG40212比較器208。UI264/226、SS355 §6・8、DIF-016、凍結Current A02と独立結果の3件順。比較器のみ着手可能。",
+    "endCondition": "元toolで後続遷移先の両側欠落・同じ誤りを見落とすことを確認し、両側の順序配列を独立検証する。新2と元208を同source通常回帰し生coverageを照合。",
+    "workScope": "全fixtureは合成artifact。Current baseline、実ブラウザ、認証、セッションまでの実処理、Root等は別。集めた比較結果を実CHRに加算しない。",
+    "quotaAfter": {
+      "usedPercent": 62,
+      "remainingPercent": 38,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "6330e2747f85666a8c8698ee4608e220fb4d3ab3f97f7f5b8fe4fcaeeaca89a1",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T04:21:08.110000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 62,
+          "remainingPercent": 38,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T04:20:58.733500+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 62,
+      "remainingPercent": 38,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6546",
+    "attempt": 1,
+    "attemptResult": "比較器の許可済み範囲限定PASS。元新2件failure後に修正し、そのsourceで全210/20成功。独立照合はCoreを比較する工具の誤りを是正後成功。",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40656-p020-a02-redirect-red-v1/manifest.json",
+        "sha256": "ed0919bb93c99ffb7f16b558bfb3ff382151107e207b0657bb8f6889d93cd8ec"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40658-p020-a02-redirect-green-v1/manifest.json",
+        "sha256": "1196c69cc6ba69fe734991fe9abd742a46a24afe2af327b245755a4780d3c64d"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40660-p020-a02-redirect-static-v1/manifest.json",
+        "sha256": "cb6f43d414a5fb7ff8686e84fc10b6122faebaed4f2a16ffdab5d1102503cd93"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40662-p020-a02-redirect-independent-v1/manifest.json",
+        "sha256": "b23ed3c1f843a121e12466e16774f2c6c95d36a35a192d60ac6eebf302ee9b3e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/4709_P020A02全遷移先の比較単体仕様.md",
+        "sha256": "ce8d59f9ad7b68ecade38b029760f5762c416be0d1818f132a559d4937409acd"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "P020の実FileStoreを含む同source・同run/四指標",
+      "全三子・実Current/NK比較・G01〜G06・451・終了依存"
+    ],
+    "toolUnitTests": 210,
+    "newToolTestDefinitions": 2,
+    "originalRedFailures": 2,
+    "postPreparationFailures": 1,
+    "bugs": [
+      "BUG-3398",
+      "BUG-3399"
+    ],
+    "horizontal": "YKT-2727",
+    "comparisonSource": "b35a4a07b0bd79459b397e524835f3e88b5f0600",
+    "testedComparatorPhysical": 2,
+    "realNkBrowserOperations": 0
+  }
+}
