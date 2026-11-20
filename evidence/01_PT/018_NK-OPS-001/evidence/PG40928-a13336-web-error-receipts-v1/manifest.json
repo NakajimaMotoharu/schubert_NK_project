@@ -1,0 +1,199 @@
+{
+  "actualExit": 0,
+  "source": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+  "startEvent": "PGPT-20261008-6868",
+  "terminalAtUTC": "2026-11-20T14:41:24.793628+00:00",
+  "oldIndex": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40926-g1307-current-a1-candidate-join-v1/manifest.json",
+    "sha256": "e3c4e02f05537b71154af52f7aed558575f1732277862f509133acdc43078041"
+  },
+  "rows": [
+    {
+      "workId": "A1-33.02",
+      "owner": "WBS-P015-02",
+      "main": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/InternalErrorDispatchRouter.java",
+      "fixture": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorDispatchRouterPortTest.java",
+      "retainedOriginal": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28112-router18-independent-v1/manifest.json",
+        "sha256": "8917d0d6abb8b579747e177680d463d12841c61dc0cf6bf67ad2db9bece1c9bd"
+      },
+      "historicalJUnit": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28112-router18-independent-v1/original-TEST-junit-jupiter.xml",
+        "sha256": "5ad40f2d68cb4574846a3bf398195ce19b915bad13da90305e0366a9d9d34213"
+      },
+      "historicalCohort": 18,
+      "historicalRelevantCaseNames": [
+        "nullAndNonHttpBoundaryRejectBeforeRoutingOrContextCleanup()",
+        "concurrentRoutesKeepEightSuppliedContextsAndCallbacksThreadLocal()",
+        "errorInitializationFailureCleansBothInReverseOrderEvenIfCleanupThrows()",
+        "destructionAlwaysInvokesBusinessAfterErrorsAndPreservesFinallyPrecedence()",
+        "initializationIsBusinessThenErrorsAndBusinessFailureStopsImmediately()",
+        "constructorRequiresBothIndependentCallbackPorts()",
+        "missingContextAndAllCallbackFailuresClearOnlyOwnThreadAndNeverRetry()",
+        "onlyExactInternalErrorWithSuppliedContextRoutesToErrorCallback()"
+      ],
+      "historicalTargetCounters": {
+        "INSTRUCTION": {
+          "covered": 98,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 8,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 28,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 8,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 4,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "verifiedJavaInputCount": 9,
+      "changedJavaInputs": [],
+      "targetMainAndFixtureIdentical": true,
+      "currentSameRunEvidence": false,
+      "currentReleaseOrActualHttpVerified": false
+    },
+    {
+      "workId": "A1-36.05",
+      "owner": "WBS-P016-24",
+      "main": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebErrorDispatchFilter.java",
+      "fixture": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorDispatchRestorePortTest.java",
+      "retainedOriginal": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28024-common-error22-independent-v1/manifest.json",
+        "sha256": "4938f692f754715d37884c8a1f80f3a1876e5316aa8f249e02df8c3d8fcb96d6"
+      },
+      "historicalJUnit": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28024-common-error22-independent-v1/original-TEST-junit-jupiter.xml",
+        "sha256": "4e294ee373e02ca34adf345f02c1cb79364636e3e10f296072b332afcf928189"
+      },
+      "historicalCohort": 22,
+      "historicalRelevantCaseNames": [
+        "attributeAndCallbackFailuresPropagateWithoutFallback()",
+        "nonHttpRequestAndResponseRejectBeforeAttributeAccess()",
+        "nullContractsDoNotReadRequestOrRunChain()",
+        "onlyErrorDispatcherAndExactErrorPathCanRestore()",
+        "corruptSnapshotNeverRestoresOrInvokesCallback()",
+        "userAndAdminSnapshotsRestoreOnlyParsedDisplayToken()",
+        "anonymousRestoreRemovesBothAliasesAndNeverReadsSessionOrPrincipal()",
+        "eightConcurrentRequestsKeepRestoredAndAnonymousAttributesSeparate()"
+      ],
+      "historicalTargetCounters": {
+        "INSTRUCTION": {
+          "covered": 50,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 8,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 11,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 6,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 2,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "verifiedJavaInputCount": 182,
+      "changedJavaInputs": [
+        {
+          "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java",
+          "originalSha256": "43a625c478114afea49c8ee423926d7d330d58dd56b3667a803108c068121513",
+          "currentSha256": "bbff720fbbcdd7264e625d8d92c1530cc1fdd7e7dbd8454e7c9b947dafc67279"
+        },
+        {
+          "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java",
+          "originalSha256": "fd024359248f91a8914f150c0c08a693471d9fbc1598f1814128cbc018d88853",
+          "currentSha256": "41521248b2ad34c0d21fe00f75d9b7982fb023d9e9ae29ad6f87650b3bd559e9"
+        },
+        {
+          "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/ProtocolValidator.java",
+          "originalSha256": "34b7707426eadec20b44d245c8a6dde5e2b7ad4cd3323625eb30a0a8822a5b70",
+          "currentSha256": "f1442a2520dc29ab884c9e8330ce75f7ee85e5f8464a9cec6c35ad2521fd3616"
+        },
+        {
+          "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/ContentDisposition.java",
+          "originalSha256": "d48090054661c31083cfc359d177c49d59b37db0c00acb367c305d783ab0c500",
+          "currentSha256": "df7fa20e05f2cfcfea5f8404798f61dee40717f89fcc3fecd607f976ccc1d01b"
+        },
+        {
+          "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/LargeResultRecordCodec.java",
+          "originalSha256": "687e584880dc5feec5e8a44e5a71834cc4a60ca7e80655ad402a283712ecbff0",
+          "currentSha256": "5d50eaf4da45152c788ab687ab784f7329da8561c071d7b2559e98952bae649d"
+        },
+        {
+          "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator.java",
+          "originalSha256": "5860289eecdf5fc5619f2f7a6f83974cc9a581073ecc067ada0e01d9919150cd",
+          "currentSha256": "a1399fa882f0bc6074bc9fbc08671ed75b87ad9545b1e5f04b3553703af9ced1"
+        },
+        {
+          "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldDefinition.java",
+          "originalSha256": "7aee31bed1ddf707311f1aac8568c8de71907d9b19986261e80f92e5fe86f263",
+          "currentSha256": "c243c87210e7effaab907af802be190f23d16c15dfc8b9d956251952acb3d4fc"
+        },
+        {
+          "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java",
+          "originalSha256": "3146b6c3d044f3191fcfa4e8687afbb0d57ee7645ff233ec4a0f02bdeb5421a2",
+          "currentSha256": "2285971a065af1f6b264c361659cab8fc75b2ee142005746e42c7462493224c0"
+        },
+        {
+          "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.java",
+          "originalSha256": "017a222b4b91b48c450336f21ea5efd46ac444dbbee7274c56f5c7559d63893f",
+          "currentSha256": "8570121e1e0461a0db760ef0bd4cb5ee40f36d3b77dde144d568cf4c3b23e8ef"
+        },
+        {
+          "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog.java",
+          "originalSha256": "39c381766f47ebf2e71ccac4709ebb13272ee2c1dde8720ab888774456b62440",
+          "currentSha256": "dceefa8cc10a2a511ed716e7289cbddcff01e2f09c5da0eb98ad8aaa1ec099a6"
+        },
+        {
+          "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/TypedFieldValues.java",
+          "originalSha256": "1f109d93cb6e8e802ab1a9c0484cfe48689253a34f1322111dfbce58bd0a8cde",
+          "currentSha256": "33f49285e7a00c15bc5c0b5874d82cfe4fc7eb2d4ec60ea3e0a81170a11cbd11"
+        },
+        {
+          "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/IdValue.java",
+          "originalSha256": "3bf4d89066c5da24649c0f970e5f0655c37d34f0bbd6120539b9a518c4905cd1",
+          "currentSha256": "f08d12175c9185fa1549862923976f3fe92a179a46599757f09b56320d63a72c"
+        },
+        {
+          "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/PathSyntax.java",
+          "originalSha256": "891c1c2ad213be265b4535abebdf8ee43a332ab952cabc4a9ca76372657b07b3",
+          "currentSha256": "27ba161b9590a968ee70c8fa4a9983927b415a3fbeefc6e0ba019af33e4884e2"
+        },
+        {
+          "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/time/JstWireTimestamp.java",
+          "originalSha256": "277dc29b07a2531b8c7d8307c0226762ff6b76fa2caef3849007bbcaf6aaffbc",
+          "currentSha256": "c5751e9edcd477059661e634d945e66bb6d8d1e5eddae516faccff007c8ccd55"
+        }
+      ],
+      "targetMainAndFixtureIdentical": true,
+      "currentSameRunEvidence": false,
+      "currentReleaseOrActualHttpVerified": false
+    }
+  ],
+  "productTestsRerun": 0,
+  "totalPriorCasesCountedAsNew": 0,
+  "whole451": false,
+  "formalDelta": 0
+}
