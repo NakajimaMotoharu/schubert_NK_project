@@ -1,0 +1,163 @@
+{
+  "eventId": "PGPT-20261008-7035",
+  "groupId": "PGPT-WBS66-F03-ALERT-STATE-MONITOR-20261121",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T18:13:23.795000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 77,
+      "remainingPercent": 23,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-ALERT-STATE-MONITOR-20261121",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-F03-ALERT-STATE-MONITOR-20261121",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "source": "e30fa9479a163798270d0afa089264ac1fc55d5a",
+    "productionCoreMain": "559f5b5945e82374e0843dcfae11a8d07faef1ea",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG41068-f03-alert-owner-snapshot-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.55,
+      "base": 1.35,
+      "high": 2.8
+    },
+    "groupCapPp": 4,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1518_F02ProtocolPath入出力境界継続点.json",
+        "sha256": "1475349752c8f032d74d9f05dbb82b3286b787375acc3c76fb015c12a7ee8868"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40828-f03-alert-lifecycle-single-coverage-v1/manifest.json",
+        "sha256": "8fc16d8edd9e0805d2b7ffd716cb8656fd166bfcb96717fc7b5c6a777e1c8dc7"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40830-f03-alert-snapshot-unfiltered-location-v1/manifest.json",
+        "sha256": "3b6711c32c91ab7536d143707302d3bc6b484aeaa911e5e51854ac08f8f8ca69"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40798-timed-alert-pending-recovery-v2/manifest.json",
+        "sha256": "75a60a041819ef5129da4fd6f8d527ac354d4e1ce3acf32062b3fcd88cd5f8af"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40800-f03-timed-alert-static-v1/manifest.json",
+        "sha256": "65a9b48a1c6ffcbc388ad994f6cba6a01022e03e70892e2972b00adc2f5c062c"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "元PG40828の生1行5命令が未達。現AlertLifecycleのsnapshotと更新は一つの非公開monitorを使う。現同入力と純観測fixtureを固定。",
+    "endCondition": "同じmonitorの暗黙同期getter、同一ABI・警報の独立全影響通常PT・生counter・型静的、生成除外なしを実証。",
+    "workScope": "Batch警報の純観測だけ。実台帳や外部monitor、保留class、物理接続を使用しない。",
+    "precedingProductionCore": "24da3b252f65f0ea56736cb791cd13165bf62c24",
+    "quotaAfter": {
+      "usedPercent": 77,
+      "remainingPercent": 23,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "c99a21fa7ef92669d577f6e550b17a641d305ede52af95aaaed3316749543dd3",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T18:13:23.795000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 77,
+          "remainingPercent": 23,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T18:13:17.974045+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 77,
+      "remainingPercent": 23,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-7034",
+    "attempt": 1,
+    "attemptResult": "PASS_LOCAL_ALERT_STATE",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/5564_F03警報状態とスナップショットの再試験仕様・結果.md",
+        "sha256": "e6fc5e3301a4c0769652a12bcf09c71c072e12f68a7841522d5e4b7f61645ad9"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41068-f03-alert-owner-snapshot-v1/receipt.json",
+        "sha256": "3ccb364fe8d75efa7a220ad8df7efe6177e05f8b95a6fc24d0552aa1987613d3"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41070-f03-alert-owner-state-final-v1/manifest.json",
+        "sha256": "ef7ffcdc03a960dc3a2f2d5246029fa244fcfd18e920092a3f804a31f7e24095"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41072-f03-alert-owner-state-independent-v1/manifest.json",
+        "sha256": "ec299fcb068605c3cb58b629e7f945ff862dc09fad8956cbcb1cbb0c80b2d058"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": "全F03／451、実監視、同候補のBatch全包装はまだ未完。",
+    "attemptInitialProductTests": 84,
+    "attemptInitialProductFailures": 0,
+    "attemptInitialStaticFindings": 1,
+    "finalProductTests": 84,
+    "finalProductFailures": 0,
+    "suites": 11,
+    "locallyRequalifiedCases": 84,
+    "staticSpotBugsFinal": 0,
+    "pmdRaw": 14,
+    "pmdLocallyClassifiedNew": 4,
+    "nextEvidenceCount": 0,
+    "firstFailedBecause": "IS2_INCONSISTENT_SYNC on shared internal active; initial JUnit green retained",
+    "priorSourceAndRunNotAdded": true,
+    "setupNotRuns": 2,
+    "postProcessingRetry": 1,
+    "snapshotRaw": {
+      "LINE": 111,
+      "METHOD": 41,
+      "CLASS": 7,
+      "BRANCH": 34,
+      "INSTRUCTION": 667
+    }
+  }
+}

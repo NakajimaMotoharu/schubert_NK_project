@@ -1,0 +1,80 @@
+{
+  "actualExit": 0,
+  "productionCore": "559f5b5945e82374e0843dcfae11a8d07faef1ea",
+  "run": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41070-f03-alert-owner-state-final-v1/manifest.json",
+    "sha256": "ef7ffcdc03a960dc3a2f2d5246029fa244fcfd18e920092a3f804a31f7e24095"
+  },
+  "jvmSession": "PG41070",
+  "sessionOriginalSha256": "06b9c40c41a1887c2f3e1578245cea53791e4c20afc0d7ec093112613e6134fc",
+  "ownClassCrcCount": 7,
+  "independentDecoderSource": "dba164629c0a8fc887d76872a500f22d36e5849b",
+  "independentDecoderSha256": "fd3fa6b3d4c7a40d888125ce4e32b390749f7fedd493234279c63a1c41ce8f8e",
+  "suiteCount": 11,
+  "passed": 84,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "rawAlertCounters": {
+    "LINE": 111,
+    "METHOD": 41,
+    "CLASS": 7,
+    "BRANCH": 34,
+    "INSTRUCTION": 667
+  },
+  "rawMissed": {
+    "LINE": 0,
+    "METHOD": 0,
+    "CLASS": 0,
+    "BRANCH": 0,
+    "INSTRUCTION": 0
+  },
+  "manualExclusions": 0,
+  "extraScopeUnfilteredDataRetained": true,
+  "scopedSpotBugsIssues": 0,
+  "pmdRaw": 14,
+  "pmdRawExit": 4,
+  "pmdSuppressed": 0,
+  "newSyncDisposition": [
+    {
+      "line": 168,
+      "rule": "AvoidSynchronizedAtMethodLevel",
+      "method": "snapshot()",
+      "disposition": "FULL_PRIVATE_ATOMIC_METHOD",
+      "reason": "全体はactive Optionalの同一monitor読取一つ。同期範囲の縮小余地がない。"
+    },
+    {
+      "line": 172,
+      "rule": "AvoidSynchronizedAtMethodLevel",
+      "method": "interrupt(Duration elapsed)",
+      "disposition": "FULL_PRIVATE_ATOMIC_METHOD",
+      "reason": "時刻の検査・確定と復旧窓の中断、active返却を一遷移で実施。"
+    },
+    {
+      "line": 178,
+      "rule": "AvoidSynchronizedAtMethodLevel",
+      "method": "violation(Severity observed, Instant at, Duration elapsed)",
+      "disposition": "FULL_PRIVATE_ATOMIC_METHOD",
+      "reason": "時刻、解除の中断、先行イベント、件数・重症度、active置換が一つの更新。"
+    },
+    {
+      "line": 191,
+      "rule": "AvoidSynchronizedAtMethodLevel",
+      "method": "normal(CauseClearance clearance, Duration elapsed)",
+      "disposition": "FULL_PRIVATE_ATOMIC_METHOD",
+      "reason": "時刻、保護・復旧窓、所定期限、activeの閉鎖を一遷移で実施。"
+    }
+  ],
+  "otherExistingPmdOccurrences": 10,
+  "previousStatic": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40800-f03-timed-alert-static-v1/manifest.json",
+    "sha256": "65a9b48a1c6ffcbc388ad994f6cba6a01022e03e70892e2972b00adc2f5c062c"
+  },
+  "selectedOriginalResultReplayed": 0,
+  "productBackendOperations": 0,
+  "allF03": false,
+  "whole451": false,
+  "formalDelta": 0,
+  "terminalAtUTC": "2026-11-20T18:13:17.974045+00:00"
+}

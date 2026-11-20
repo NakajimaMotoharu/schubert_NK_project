@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-11-21T03:11:39.888">
+<file name="/dev/shm/pgpt-alert-state-6mive3ix/scope/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java">
+<violation beginline="168" endline="168" begincolumn="42" endcolumn="50" rule="AvoidSynchronizedAtMethodLevel" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="AlertLifecycle.State" method="snapshot" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedatmethodlevel" priority="3">
+Use block level locking rather than method level synchronization
+</violation>
+<violation beginline="172" endline="172" begincolumn="42" endcolumn="51" rule="AvoidSynchronizedAtMethodLevel" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="AlertLifecycle.State" method="interrupt" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedatmethodlevel" priority="3">
+Use block level locking rather than method level synchronization
+</violation>
+<violation beginline="178" endline="178" begincolumn="42" endcolumn="51" rule="AvoidSynchronizedAtMethodLevel" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="AlertLifecycle.State" method="violation" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedatmethodlevel" priority="3">
+Use block level locking rather than method level synchronization
+</violation>
+<violation beginline="191" endline="191" begincolumn="42" endcolumn="48" rule="AvoidSynchronizedAtMethodLevel" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="AlertLifecycle.State" method="normal" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedatmethodlevel" priority="3">
+Use block level locking rather than method level synchronization
+</violation>
+</file>
+<file name="/dev/shm/pgpt-alert-state-6mive3ix/scope/src/main/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow.java">
+<violation beginline="27" endline="27" begincolumn="5" endcolumn="17" rule="AvoidSynchronizedStatement" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="ContinuousConditionWindow" method="observe" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement" priority="3">
+Use ReentrantLock rather than synchronization
+</violation>
+<violation beginline="32" endline="32" begincolumn="26" endcolumn="30" rule="NullAssignment" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.monitoring" class="ContinuousConditionWindow" method="observe" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#nullassignment" priority="3">
+Assigning an Object to null is a code smell.  Consider refactoring.
+</violation>
+</file>
+<file name="/dev/shm/pgpt-alert-state-6mive3ix/scope/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor.java">
+<violation beginline="48" endline="48" begincolumn="5" endcolumn="17" rule="AvoidSynchronizedStatement" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="TimedDbPoolMonitor" method="observe" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement" priority="3">
+Use ReentrantLock rather than synchronization
+</violation>
+<violation beginline="72" endline="72" begincolumn="5" endcolumn="17" rule="AvoidSynchronizedStatement" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="TimedDbPoolMonitor" method="snapshot" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement" priority="3">
+Use ReentrantLock rather than synchronization
+</violation>
+</file>
+<file name="/dev/shm/pgpt-alert-state-6mive3ix/scope/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.java">
+<violation beginline="42" endline="42" begincolumn="5" endcolumn="17" rule="AvoidSynchronizedStatement" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="TimedFilesystemMonitor" method="observe" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement" priority="3">
+Use ReentrantLock rather than synchronization
+</violation>
+<violation beginline="71" endline="71" begincolumn="5" endcolumn="17" rule="AvoidSynchronizedStatement" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="TimedFilesystemMonitor" method="snapshot" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement" priority="3">
+Use ReentrantLock rather than synchronization
+</violation>
+</file>
+<file name="/dev/shm/pgpt-alert-state-6mive3ix/scope/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.java">
+<violation beginline="45" endline="45" begincolumn="5" endcolumn="17" rule="AvoidSynchronizedStatement" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="TimedJvmHeapMonitor" method="observe" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement" priority="3">
+Use ReentrantLock rather than synchronization
+</violation>
+<violation beginline="69" endline="69" begincolumn="5" endcolumn="17" rule="AvoidSynchronizedStatement" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="TimedJvmHeapMonitor" method="snapshot" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement" priority="3">
+Use ReentrantLock rather than synchronization
+</violation>
+</file>
+<file name="/dev/shm/pgpt-alert-state-6mive3ix/scope/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor.java">
+<violation beginline="42" endline="42" begincolumn="5" endcolumn="17" rule="AvoidSynchronizedStatement" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="TimedSyncLatencyMonitor" method="observe" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement" priority="3">
+Use ReentrantLock rather than synchronization
+</violation>
+<violation beginline="70" endline="70" begincolumn="5" endcolumn="17" rule="AvoidSynchronizedStatement" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="TimedSyncLatencyMonitor" method="snapshot" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement" priority="3">
+Use ReentrantLock rather than synchronization
+</violation>
+</file>
+</pmd>

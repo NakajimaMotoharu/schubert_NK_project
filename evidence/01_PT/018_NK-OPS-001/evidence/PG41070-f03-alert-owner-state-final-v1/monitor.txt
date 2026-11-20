@@ -1,0 +1,619 @@
+Classfile /dev/shm/pgpt-alert-state-6mive3ix/scope/target/classes/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State.class
+  Last modified Nov 21, 2026; size 6048 bytes
+  SHA-256 checksum 1d140156f6787265537ad923d4c2bb2da3b43cb0373353ef1034cf8aaaafd246
+  Compiled from "AlertLifecycle.java"
+final class dev.codex.schubert.nk.batch.monitoring.AlertLifecycle$State
+  minor version: 0
+  major version: 69
+  flags: (0x0030) ACC_FINAL, ACC_SUPER
+  this_class: #16                         // dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State
+  super_class: #4                         // java/lang/Object
+  interfaces: 0, fields: 5, methods: 6, attributes: 4
+Constant pool:
+    #1 = Class              #2            // dev/codex/schubert/nk/batch/monitoring/AlertLifecycle
+    #2 = Utf8               dev/codex/schubert/nk/batch/monitoring/AlertLifecycle
+    #3 = Methodref          #4.#5         // java/lang/Object."<init>":()V
+    #4 = Class              #6            // java/lang/Object
+    #5 = NameAndType        #7:#8         // "<init>":()V
+    #6 = Utf8               java/lang/Object
+    #7 = Utf8               <init>
+    #8 = Utf8               ()V
+    #9 = Methodref          #10.#11       // java/util/Optional.empty:()Ljava/util/Optional;
+   #10 = Class              #12           // java/util/Optional
+   #11 = NameAndType        #13:#14       // empty:()Ljava/util/Optional;
+   #12 = Utf8               java/util/Optional
+   #13 = Utf8               empty
+   #14 = Utf8               ()Ljava/util/Optional;
+   #15 = Fieldref           #16.#17       // dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State.active:Ljava/util/Optional;
+   #16 = Class              #18           // dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State
+   #17 = NameAndType        #19:#20       // active:Ljava/util/Optional;
+   #18 = Utf8               dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State
+   #19 = Utf8               active
+   #20 = Utf8               Ljava/util/Optional;
+   #21 = Fieldref           #16.#22       // dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State.recoveringSince:Ljava/util/Optional;
+   #22 = NameAndType        #23:#20       // recoveringSince:Ljava/util/Optional;
+   #23 = Utf8               recoveringSince
+   #24 = Fieldref           #16.#25       // dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State.lastElapsed:Ljava/util/Optional;
+   #25 = NameAndType        #26:#20       // lastElapsed:Ljava/util/Optional;
+   #26 = Utf8               lastElapsed
+   #27 = Fieldref           #16.#28       // dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State.conditionKey:Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition;
+   #28 = NameAndType        #29:#30       // conditionKey:Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition;
+   #29 = Utf8               conditionKey
+   #30 = Utf8               Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition;
+   #31 = Fieldref           #16.#32       // dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State.serviceKey:Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service;
+   #32 = NameAndType        #33:#34       // serviceKey:Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service;
+   #33 = Utf8               serviceKey
+   #34 = Utf8               Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service;
+   #35 = Methodref          #16.#36       // dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State.advance:(Ljava/time/Duration;)V
+   #36 = NameAndType        #37:#38       // advance:(Ljava/time/Duration;)V
+   #37 = Utf8               advance
+   #38 = Utf8               (Ljava/time/Duration;)V
+   #39 = InvokeDynamic      #0:#40        // #0:apply:()Ljava/util/function/Function;
+   #40 = NameAndType        #41:#42       // apply:()Ljava/util/function/Function;
+   #41 = Utf8               apply
+   #42 = Utf8               ()Ljava/util/function/Function;
+   #43 = Methodref          #10.#44       // java/util/Optional.map:(Ljava/util/function/Function;)Ljava/util/Optional;
+   #44 = NameAndType        #45:#46       // map:(Ljava/util/function/Function;)Ljava/util/Optional;
+   #45 = Utf8               map
+   #46 = Utf8               (Ljava/util/function/Function;)Ljava/util/Optional;
+   #47 = Methodref          #10.#48       // java/util/Optional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+   #48 = NameAndType        #49:#50       // orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+   #49 = Utf8               orElse
+   #50 = Utf8               (Ljava/lang/Object;)Ljava/lang/Object;
+   #51 = Class              #52           // java/time/Instant
+   #52 = Utf8               java/time/Instant
+   #53 = InvokeDynamic      #1:#40        // #1:apply:()Ljava/util/function/Function;
+   #54 = Fieldref           #55.#56       // java/math/BigInteger.ZERO:Ljava/math/BigInteger;
+   #55 = Class              #57           // java/math/BigInteger
+   #56 = NameAndType        #58:#59       // ZERO:Ljava/math/BigInteger;
+   #57 = Utf8               java/math/BigInteger
+   #58 = Utf8               ZERO
+   #59 = Utf8               Ljava/math/BigInteger;
+   #60 = Fieldref           #55.#61       // java/math/BigInteger.ONE:Ljava/math/BigInteger;
+   #61 = NameAndType        #62:#59       // ONE:Ljava/math/BigInteger;
+   #62 = Utf8               ONE
+   #63 = Methodref          #55.#64       // java/math/BigInteger.add:(Ljava/math/BigInteger;)Ljava/math/BigInteger;
+   #64 = NameAndType        #65:#66       // add:(Ljava/math/BigInteger;)Ljava/math/BigInteger;
+   #65 = Utf8               add
+   #66 = Utf8               (Ljava/math/BigInteger;)Ljava/math/BigInteger;
+   #67 = Methodref          #10.#68       // java/util/Optional.isPresent:()Z
+   #68 = NameAndType        #69:#70       // isPresent:()Z
+   #69 = Utf8               isPresent
+   #70 = Utf8               ()Z
+   #71 = Methodref          #10.#72       // java/util/Optional.orElseThrow:()Ljava/lang/Object;
+   #72 = NameAndType        #73:#74       // orElseThrow:()Ljava/lang/Object;
+   #73 = Utf8               orElseThrow
+   #74 = Utf8               ()Ljava/lang/Object;
+   #75 = Class              #76           // dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event
+   #76 = Utf8               dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event
+   #77 = Methodref          #75.#78       // dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event.severity:()Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity;
+   #78 = NameAndType        #79:#80       // severity:()Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity;
+   #79 = Utf8               severity
+   #80 = Utf8               ()Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity;
+   #81 = Fieldref           #82.#83       // dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity.CRITICAL:Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity;
+   #82 = Class              #84           // dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity
+   #83 = NameAndType        #85:#86       // CRITICAL:Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity;
+   #84 = Utf8               dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity
+   #85 = Utf8               CRITICAL
+   #86 = Utf8               Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity;
+   #87 = Methodref          #75.#88       // dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event."<init>":(Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition;Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service;Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity;Ljava/time/Instant;Ljava/time/Instant;Ljava/math/BigInteger;Z)V
+   #88 = NameAndType        #7:#89        // "<init>":(Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition;Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service;Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity;Ljava/time/Instant;Ljava/time/Instant;Ljava/math/BigInteger;Z)V
+   #89 = Utf8               (Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition;Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service;Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity;Ljava/time/Instant;Ljava/time/Instant;Ljava/math/BigInteger;Z)V
+   #90 = Methodref          #10.#91       // java/util/Optional.of:(Ljava/lang/Object;)Ljava/util/Optional;
+   #91 = NameAndType        #92:#93       // of:(Ljava/lang/Object;)Ljava/util/Optional;
+   #92 = Utf8               of
+   #93 = Utf8               (Ljava/lang/Object;)Ljava/util/Optional;
+   #94 = Methodref          #10.#95       // java/util/Optional.isEmpty:()Z
+   #95 = NameAndType        #96:#70       // isEmpty:()Z
+   #96 = Utf8               isEmpty
+   #97 = Fieldref           #98.#99       // dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition.DLQ:Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition;
+   #98 = Class              #100          // dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition
+   #99 = NameAndType        #101:#30      // DLQ:Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition;
+  #100 = Utf8               dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition
+  #101 = Utf8               DLQ
+  #102 = Fieldref           #98.#103      // dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition.INTEGRITY_CONFIG:Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition;
+  #103 = NameAndType        #104:#30      // INTEGRITY_CONFIG:Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition;
+  #104 = Utf8               INTEGRITY_CONFIG
+  #105 = Class              #106          // java/time/Duration
+  #106 = Utf8               java/time/Duration
+  #107 = Fieldref           #1.#108       // dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.CRITICAL_RECOVERY:Ljava/time/Duration;
+  #108 = NameAndType        #109:#110     // CRITICAL_RECOVERY:Ljava/time/Duration;
+  #109 = Utf8               CRITICAL_RECOVERY
+  #110 = Utf8               Ljava/time/Duration;
+  #111 = Fieldref           #1.#112       // dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.WARNING_RECOVERY:Ljava/time/Duration;
+  #112 = NameAndType        #113:#110     // WARNING_RECOVERY:Ljava/time/Duration;
+  #113 = Utf8               WARNING_RECOVERY
+  #114 = Methodref          #105.#115     // java/time/Duration.minus:(Ljava/time/Duration;)Ljava/time/Duration;
+  #115 = NameAndType        #116:#117     // minus:(Ljava/time/Duration;)Ljava/time/Duration;
+  #116 = Utf8               minus
+  #117 = Utf8               (Ljava/time/Duration;)Ljava/time/Duration;
+  #118 = Methodref          #105.#119     // java/time/Duration.compareTo:(Ljava/time/Duration;)I
+  #119 = NameAndType        #120:#121     // compareTo:(Ljava/time/Duration;)I
+  #120 = Utf8               compareTo
+  #121 = Utf8               (Ljava/time/Duration;)I
+  #122 = Fieldref           #123.#124     // dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance.CONFIRMED:Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance;
+  #123 = Class              #125          // dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance
+  #124 = NameAndType        #126:#127     // CONFIRMED:Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance;
+  #125 = Utf8               dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance
+  #126 = Utf8               CONFIRMED
+  #127 = Utf8               Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance;
+  #128 = Methodref          #75.#129      // dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event.firstSeen:()Ljava/time/Instant;
+  #129 = NameAndType        #130:#131     // firstSeen:()Ljava/time/Instant;
+  #130 = Utf8               firstSeen
+  #131 = Utf8               ()Ljava/time/Instant;
+  #132 = Methodref          #75.#133      // dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event.lastSeen:()Ljava/time/Instant;
+  #133 = NameAndType        #134:#131     // lastSeen:()Ljava/time/Instant;
+  #134 = Utf8               lastSeen
+  #135 = Methodref          #75.#136      // dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event.count:()Ljava/math/BigInteger;
+  #136 = NameAndType        #137:#138     // count:()Ljava/math/BigInteger;
+  #137 = Utf8               count
+  #138 = Utf8               ()Ljava/math/BigInteger;
+  #139 = Class              #140          // java/lang/IllegalArgumentException
+  #140 = Utf8               java/lang/IllegalArgumentException
+  #141 = String             #142          // invalid alert elapsed time
+  #142 = Utf8               invalid alert elapsed time
+  #143 = Methodref          #139.#144     // java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+  #144 = NameAndType        #7:#145       // "<init>":(Ljava/lang/String;)V
+  #145 = Utf8               (Ljava/lang/String;)V
+  #146 = Utf8               Signature
+  #147 = Utf8               Ljava/util/Optional<Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event;>;
+  #148 = Utf8               Ljava/util/Optional<Ljava/time/Duration;>;
+  #149 = Utf8               (Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition;Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service;)V
+  #150 = Utf8               Code
+  #151 = Utf8               LineNumberTable
+  #152 = Utf8               LocalVariableTable
+  #153 = Utf8               this
+  #154 = Utf8               Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State;
+  #155 = Utf8               condition
+  #156 = Utf8               service
+  #157 = Utf8               snapshot
+  #158 = Utf8               ()Ljava/util/Optional<Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event;>;
+  #159 = Utf8               interrupt
+  #160 = Utf8               (Ljava/time/Duration;)Ljava/util/Optional;
+  #161 = Utf8               elapsed
+  #162 = Utf8               (Ljava/time/Duration;)Ljava/util/Optional<Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event;>;
+  #163 = Utf8               violation
+  #164 = Utf8               (Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity;Ljava/time/Instant;Ljava/time/Duration;)Ljava/util/Optional;
+  #165 = Utf8               observed
+  #166 = Utf8               at
+  #167 = Utf8               Ljava/time/Instant;
+  #168 = Utf8               first
+  #169 = Utf8               level
+  #170 = Utf8               StackMapTable
+  #171 = Utf8               (Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity;Ljava/time/Instant;Ljava/time/Duration;)Ljava/util/Optional<Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event;>;
+  #172 = Utf8               normal
+  #173 = Utf8               (Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance;Ljava/time/Duration;)Ljava/util/Optional;
+  #174 = Utf8               closed
+  #175 = Utf8               Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event;
+  #176 = Utf8               clearance
+  #177 = Utf8               since
+  #178 = Utf8               event
+  #179 = Utf8               recovery
+  #180 = Utf8               enough
+  #181 = Utf8               Z
+  #182 = Utf8               (Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance;Ljava/time/Duration;)Ljava/util/Optional<Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event;>;
+  #183 = Utf8               SourceFile
+  #184 = Utf8               AlertLifecycle.java
+  #185 = Utf8               NestHost
+  #186 = Utf8               BootstrapMethods
+  #187 = MethodType         #50           //  (Ljava/lang/Object;)Ljava/lang/Object;
+  #188 = MethodHandle       5:#128        // REF_invokeVirtual dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event.firstSeen:()Ljava/time/Instant;
+  #189 = MethodType         #190          //  (Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event;)Ljava/time/Instant;
+  #190 = Utf8               (Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event;)Ljava/time/Instant;
+  #191 = MethodHandle       5:#135        // REF_invokeVirtual dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event.count:()Ljava/math/BigInteger;
+  #192 = MethodType         #193          //  (Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event;)Ljava/math/BigInteger;
+  #193 = Utf8               (Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event;)Ljava/math/BigInteger;
+  #194 = MethodHandle       6:#195        // REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #195 = Methodref          #196.#197     // java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #196 = Class              #198          // java/lang/invoke/LambdaMetafactory
+  #197 = NameAndType        #199:#200     // metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #198 = Utf8               java/lang/invoke/LambdaMetafactory
+  #199 = Utf8               metafactory
+  #200 = Utf8               (Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #201 = Utf8               InnerClasses
+  #202 = Utf8               State
+  #203 = Utf8               Condition
+  #204 = Class              #205          // dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service
+  #205 = Utf8               dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service
+  #206 = Utf8               Service
+  #207 = Utf8               Event
+  #208 = Utf8               Severity
+  #209 = Utf8               CauseClearance
+  #210 = Class              #211          // java/lang/invoke/MethodHandles$Lookup
+  #211 = Utf8               java/lang/invoke/MethodHandles$Lookup
+  #212 = Class              #213          // java/lang/invoke/MethodHandles
+  #213 = Utf8               java/lang/invoke/MethodHandles
+  #214 = Utf8               Lookup
+{
+  private final dev.codex.schubert.nk.batch.monitoring.AlertLifecycle$Condition conditionKey;
+    descriptor: Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition;
+    flags: (0x0012) ACC_PRIVATE, ACC_FINAL
+
+  private final dev.codex.schubert.nk.batch.monitoring.AlertLifecycle$Service serviceKey;
+    descriptor: Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service;
+    flags: (0x0012) ACC_PRIVATE, ACC_FINAL
+
+  private java.util.Optional<dev.codex.schubert.nk.batch.monitoring.AlertLifecycle$Event> active;
+    descriptor: Ljava/util/Optional;
+    flags: (0x0002) ACC_PRIVATE
+    Signature: #147                         // Ljava/util/Optional<Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event;>;
+
+  private java.util.Optional<java.time.Duration> recoveringSince;
+    descriptor: Ljava/util/Optional;
+    flags: (0x0002) ACC_PRIVATE
+    Signature: #148                         // Ljava/util/Optional<Ljava/time/Duration;>;
+
+  private java.util.Optional<java.time.Duration> lastElapsed;
+    descriptor: Ljava/util/Optional;
+    flags: (0x0002) ACC_PRIVATE
+    Signature: #148                         // Ljava/util/Optional<Ljava/time/Duration;>;
+
+  private dev.codex.schubert.nk.batch.monitoring.AlertLifecycle$State(dev.codex.schubert.nk.batch.monitoring.AlertLifecycle$Condition, dev.codex.schubert.nk.batch.monitoring.AlertLifecycle$Service);
+    descriptor: (Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition;Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service;)V
+    flags: (0x0002) ACC_PRIVATE
+    Code:
+      stack=2, locals=3, args_size=3
+         0: aload_0
+         1: invokespecial #3                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: invokestatic  #9                  // Method java/util/Optional.empty:()Ljava/util/Optional;
+         8: putfield      #15                 // Field active:Ljava/util/Optional;
+        11: aload_0
+        12: invokestatic  #9                  // Method java/util/Optional.empty:()Ljava/util/Optional;
+        15: putfield      #21                 // Field recoveringSince:Ljava/util/Optional;
+        18: aload_0
+        19: invokestatic  #9                  // Method java/util/Optional.empty:()Ljava/util/Optional;
+        22: putfield      #24                 // Field lastElapsed:Ljava/util/Optional;
+        25: aload_0
+        26: aload_1
+        27: putfield      #27                 // Field conditionKey:Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition;
+        30: aload_0
+        31: aload_2
+        32: putfield      #31                 // Field serviceKey:Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service;
+        35: return
+      LineNumberTable:
+        line 163: 0
+        line 159: 4
+        line 160: 11
+        line 161: 18
+        line 164: 25
+        line 165: 30
+        line 166: 35
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      36     0  this   Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State;
+            0      36     1 condition   Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition;
+            0      36     2 service   Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service;
+
+  private synchronized java.util.Optional<dev.codex.schubert.nk.batch.monitoring.AlertLifecycle$Event> snapshot();
+    descriptor: ()Ljava/util/Optional;
+    flags: (0x0022) ACC_PRIVATE, ACC_SYNCHRONIZED
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #15                 // Field active:Ljava/util/Optional;
+         4: areturn
+      LineNumberTable:
+        line 169: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State;
+    Signature: #158                         // ()Ljava/util/Optional<Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event;>;
+
+  private synchronized java.util.Optional<dev.codex.schubert.nk.batch.monitoring.AlertLifecycle$Event> interrupt(java.time.Duration);
+    descriptor: (Ljava/time/Duration;)Ljava/util/Optional;
+    flags: (0x0022) ACC_PRIVATE, ACC_SYNCHRONIZED
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: invokevirtual #35                 // Method advance:(Ljava/time/Duration;)V
+         5: aload_0
+         6: invokestatic  #9                  // Method java/util/Optional.empty:()Ljava/util/Optional;
+         9: putfield      #21                 // Field recoveringSince:Ljava/util/Optional;
+        12: aload_0
+        13: getfield      #15                 // Field active:Ljava/util/Optional;
+        16: areturn
+      LineNumberTable:
+        line 173: 0
+        line 174: 5
+        line 175: 12
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      17     0  this   Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State;
+            0      17     1 elapsed   Ljava/time/Duration;
+    Signature: #162                         // (Ljava/time/Duration;)Ljava/util/Optional<Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event;>;
+
+  private synchronized java.util.Optional<dev.codex.schubert.nk.batch.monitoring.AlertLifecycle$Event> violation(dev.codex.schubert.nk.batch.monitoring.AlertLifecycle$Severity, java.time.Instant, java.time.Duration);
+    descriptor: (Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity;Ljava/time/Instant;Ljava/time/Duration;)Ljava/util/Optional;
+    flags: (0x0022) ACC_PRIVATE, ACC_SYNCHRONIZED
+    Code:
+      stack=10, locals=7, args_size=4
+         0: aload_0
+         1: aload_3
+         2: invokevirtual #35                 // Method advance:(Ljava/time/Duration;)V
+         5: aload_0
+         6: invokestatic  #9                  // Method java/util/Optional.empty:()Ljava/util/Optional;
+         9: putfield      #21                 // Field recoveringSince:Ljava/util/Optional;
+        12: aload_0
+        13: getfield      #15                 // Field active:Ljava/util/Optional;
+        16: invokedynamic #39,  0             // InvokeDynamic #0:apply:()Ljava/util/function/Function;
+        21: invokevirtual #43                 // Method java/util/Optional.map:(Ljava/util/function/Function;)Ljava/util/Optional;
+        24: aload_2
+        25: invokevirtual #47                 // Method java/util/Optional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+        28: checkcast     #51                 // class java/time/Instant
+        31: astore        4
+        33: aload_0
+        34: getfield      #15                 // Field active:Ljava/util/Optional;
+        37: invokedynamic #53,  0             // InvokeDynamic #1:apply:()Ljava/util/function/Function;
+        42: invokevirtual #43                 // Method java/util/Optional.map:(Ljava/util/function/Function;)Ljava/util/Optional;
+        45: getstatic     #54                 // Field java/math/BigInteger.ZERO:Ljava/math/BigInteger;
+        48: invokevirtual #47                 // Method java/util/Optional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+        51: checkcast     #55                 // class java/math/BigInteger
+        54: getstatic     #60                 // Field java/math/BigInteger.ONE:Ljava/math/BigInteger;
+        57: invokevirtual #63                 // Method java/math/BigInteger.add:(Ljava/math/BigInteger;)Ljava/math/BigInteger;
+        60: astore        5
+        62: aload_1
+        63: astore        6
+        65: aload_0
+        66: getfield      #15                 // Field active:Ljava/util/Optional;
+        69: invokevirtual #67                 // Method java/util/Optional.isPresent:()Z
+        72: ifeq          99
+        75: aload_0
+        76: getfield      #15                 // Field active:Ljava/util/Optional;
+        79: invokevirtual #71                 // Method java/util/Optional.orElseThrow:()Ljava/lang/Object;
+        82: checkcast     #75                 // class dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event
+        85: invokevirtual #77                 // Method dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event.severity:()Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity;
+        88: getstatic     #81                 // Field dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity.CRITICAL:Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity;
+        91: if_acmpne     99
+        94: getstatic     #81                 // Field dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity.CRITICAL:Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity;
+        97: astore        6
+        99: aload_0
+       100: new           #75                 // class dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event
+       103: dup
+       104: aload_0
+       105: getfield      #27                 // Field conditionKey:Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition;
+       108: aload_0
+       109: getfield      #31                 // Field serviceKey:Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service;
+       112: aload         6
+       114: aload         4
+       116: aload_2
+       117: aload         5
+       119: iconst_1
+       120: invokespecial #87                 // Method dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event."<init>":(Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition;Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service;Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity;Ljava/time/Instant;Ljava/time/Instant;Ljava/math/BigInteger;Z)V
+       123: invokestatic  #90                 // Method java/util/Optional.of:(Ljava/lang/Object;)Ljava/util/Optional;
+       126: putfield      #15                 // Field active:Ljava/util/Optional;
+       129: aload_0
+       130: getfield      #15                 // Field active:Ljava/util/Optional;
+       133: areturn
+      LineNumberTable:
+        line 180: 0
+        line 181: 5
+        line 182: 12
+        line 183: 33
+        line 184: 62
+        line 185: 65
+        line 186: 94
+        line 187: 99
+        line 188: 129
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0     134     0  this   Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State;
+            0     134     1 observed   Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity;
+            0     134     2    at   Ljava/time/Instant;
+            0     134     3 elapsed   Ljava/time/Duration;
+           33     101     4 first   Ljava/time/Instant;
+           62      72     5 count   Ljava/math/BigInteger;
+           65      69     6 level   Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity;
+      StackMapTable: number_of_entries = 1
+        frame_type = 254 /* append */
+          offset_delta = 99
+          locals = [ class java/time/Instant, class java/math/BigInteger, class dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity ]
+    Signature: #171                         // (Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity;Ljava/time/Instant;Ljava/time/Duration;)Ljava/util/Optional<Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event;>;
+
+  private synchronized java.util.Optional<dev.codex.schubert.nk.batch.monitoring.AlertLifecycle$Event> normal(dev.codex.schubert.nk.batch.monitoring.AlertLifecycle$CauseClearance, java.time.Duration);
+    descriptor: (Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance;Ljava/time/Duration;)Ljava/util/Optional;
+    flags: (0x0022) ACC_PRIVATE, ACC_SYNCHRONIZED
+    Code:
+      stack=9, locals=8, args_size=3
+         0: aload_0
+         1: aload_2
+         2: invokevirtual #35                 // Method advance:(Ljava/time/Duration;)V
+         5: aload_0
+         6: getfield      #15                 // Field active:Ljava/util/Optional;
+         9: invokevirtual #94                 // Method java/util/Optional.isEmpty:()Z
+        12: ifeq          19
+        15: invokestatic  #9                  // Method java/util/Optional.empty:()Ljava/util/Optional;
+        18: areturn
+        19: aload_0
+        20: getfield      #27                 // Field conditionKey:Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition;
+        23: getstatic     #97                 // Field dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition.DLQ:Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition;
+        26: if_acmpeq     39
+        29: aload_0
+        30: getfield      #27                 // Field conditionKey:Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition;
+        33: getstatic     #102                // Field dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition.INTEGRITY_CONFIG:Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition;
+        36: if_acmpne     44
+        39: aload_0
+        40: getfield      #15                 // Field active:Ljava/util/Optional;
+        43: areturn
+        44: aload_0
+        45: getfield      #21                 // Field recoveringSince:Ljava/util/Optional;
+        48: aload_2
+        49: invokevirtual #47                 // Method java/util/Optional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+        52: checkcast     #105                // class java/time/Duration
+        55: astore_3
+        56: aload_0
+        57: aload_3
+        58: invokestatic  #90                 // Method java/util/Optional.of:(Ljava/lang/Object;)Ljava/util/Optional;
+        61: putfield      #21                 // Field recoveringSince:Ljava/util/Optional;
+        64: aload_0
+        65: getfield      #15                 // Field active:Ljava/util/Optional;
+        68: invokevirtual #71                 // Method java/util/Optional.orElseThrow:()Ljava/lang/Object;
+        71: checkcast     #75                 // class dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event
+        74: astore        4
+        76: aload         4
+        78: invokevirtual #77                 // Method dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event.severity:()Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity;
+        81: getstatic     #81                 // Field dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity.CRITICAL:Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity;
+        84: if_acmpne     93
+        87: getstatic     #107                // Field dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.CRITICAL_RECOVERY:Ljava/time/Duration;
+        90: goto          96
+        93: getstatic     #111                // Field dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.WARNING_RECOVERY:Ljava/time/Duration;
+        96: astore        5
+        98: aload_2
+        99: aload_3
+       100: invokevirtual #114                // Method java/time/Duration.minus:(Ljava/time/Duration;)Ljava/time/Duration;
+       103: aload         5
+       105: invokevirtual #118                // Method java/time/Duration.compareTo:(Ljava/time/Duration;)I
+       108: iflt          115
+       111: iconst_1
+       112: goto          116
+       115: iconst_0
+       116: istore        6
+       118: iload         6
+       120: ifeq          199
+       123: aload         4
+       125: invokevirtual #77                 // Method dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event.severity:()Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity;
+       128: getstatic     #81                 // Field dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity.CRITICAL:Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity;
+       131: if_acmpne     141
+       134: aload_1
+       135: getstatic     #122                // Field dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance.CONFIRMED:Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance;
+       138: if_acmpne     199
+       141: new           #75                 // class dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event
+       144: dup
+       145: aload_0
+       146: getfield      #27                 // Field conditionKey:Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition;
+       149: aload_0
+       150: getfield      #31                 // Field serviceKey:Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service;
+       153: aload         4
+       155: invokevirtual #77                 // Method dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event.severity:()Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity;
+       158: aload         4
+       160: invokevirtual #128                // Method dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event.firstSeen:()Ljava/time/Instant;
+       163: aload         4
+       165: invokevirtual #132                // Method dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event.lastSeen:()Ljava/time/Instant;
+       168: aload         4
+       170: invokevirtual #135                // Method dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event.count:()Ljava/math/BigInteger;
+       173: iconst_0
+       174: invokespecial #87                 // Method dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event."<init>":(Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition;Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service;Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity;Ljava/time/Instant;Ljava/time/Instant;Ljava/math/BigInteger;Z)V
+       177: astore        7
+       179: aload_0
+       180: invokestatic  #9                  // Method java/util/Optional.empty:()Ljava/util/Optional;
+       183: putfield      #15                 // Field active:Ljava/util/Optional;
+       186: aload_0
+       187: invokestatic  #9                  // Method java/util/Optional.empty:()Ljava/util/Optional;
+       190: putfield      #21                 // Field recoveringSince:Ljava/util/Optional;
+       193: aload         7
+       195: invokestatic  #90                 // Method java/util/Optional.of:(Ljava/lang/Object;)Ljava/util/Optional;
+       198: areturn
+       199: aload_0
+       200: getfield      #15                 // Field active:Ljava/util/Optional;
+       203: areturn
+      LineNumberTable:
+        line 192: 0
+        line 193: 5
+        line 195: 19
+        line 196: 39
+        line 197: 44
+        line 198: 56
+        line 199: 64
+        line 201: 76
+        line 202: 98
+        line 203: 118
+        line 204: 125
+        line 205: 141
+        line 209: 155
+        line 210: 160
+        line 211: 165
+        line 212: 170
+        line 214: 179
+        line 215: 186
+        line 216: 193
+        line 218: 199
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+          179      20     7 closed   Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event;
+            0     204     0  this   Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State;
+            0     204     1 clearance   Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance;
+            0     204     2 elapsed   Ljava/time/Duration;
+           56     148     3 since   Ljava/time/Duration;
+           76     128     4 event   Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event;
+           98     106     5 recovery   Ljava/time/Duration;
+          118      86     6 enough   Z
+      StackMapTable: number_of_entries = 9
+        frame_type = 19 /* same */
+        frame_type = 19 /* same */
+        frame_type = 4 /* same */
+        frame_type = 253 /* append */
+          offset_delta = 48
+          locals = [ class java/time/Duration, class dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event ]
+        frame_type = 66 /* same_locals_1_stack_item */
+          stack = [ class java/time/Duration ]
+        frame_type = 252 /* append */
+          offset_delta = 18
+          locals = [ class java/time/Duration ]
+        frame_type = 64 /* same_locals_1_stack_item */
+          stack = [ int ]
+        frame_type = 252 /* append */
+          offset_delta = 24
+          locals = [ int ]
+        frame_type = 57 /* same */
+    Signature: #182                         // (Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance;Ljava/time/Duration;)Ljava/util/Optional<Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event;>;
+
+  private void advance(java.time.Duration);
+    descriptor: (Ljava/time/Duration;)V
+    flags: (0x0002) ACC_PRIVATE
+    Code:
+      stack=3, locals=2, args_size=2
+         0: aload_0
+         1: getfield      #24                 // Field lastElapsed:Ljava/util/Optional;
+         4: invokevirtual #67                 // Method java/util/Optional.isPresent:()Z
+         7: ifeq          37
+        10: aload_1
+        11: aload_0
+        12: getfield      #24                 // Field lastElapsed:Ljava/util/Optional;
+        15: invokevirtual #71                 // Method java/util/Optional.orElseThrow:()Ljava/lang/Object;
+        18: checkcast     #105                // class java/time/Duration
+        21: invokevirtual #118                // Method java/time/Duration.compareTo:(Ljava/time/Duration;)I
+        24: ifge          37
+        27: new           #139                // class java/lang/IllegalArgumentException
+        30: dup
+        31: ldc           #141                // String invalid alert elapsed time
+        33: invokespecial #143                // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        36: athrow
+        37: aload_0
+        38: aload_1
+        39: invokestatic  #90                 // Method java/util/Optional.of:(Ljava/lang/Object;)Ljava/util/Optional;
+        42: putfield      #24                 // Field lastElapsed:Ljava/util/Optional;
+        45: return
+      LineNumberTable:
+        line 223: 0
+        line 224: 27
+        line 225: 37
+        line 226: 45
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      46     0  this   Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State;
+            0      46     1 elapsed   Ljava/time/Duration;
+      StackMapTable: number_of_entries = 1
+        frame_type = 37 /* same */
+}
+SourceFile: "AlertLifecycle.java"
+NestHost: class dev/codex/schubert/nk/batch/monitoring/AlertLifecycle
+BootstrapMethods:
+  0: #194 REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #187 (Ljava/lang/Object;)Ljava/lang/Object;
+      #188 REF_invokeVirtual dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event.firstSeen:()Ljava/time/Instant;
+      #189 (Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event;)Ljava/time/Instant;
+  1: #194 REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #187 (Ljava/lang/Object;)Ljava/lang/Object;
+      #191 REF_invokeVirtual dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event.count:()Ljava/math/BigInteger;
+      #192 (Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event;)Ljava/math/BigInteger;
+InnerClasses:
+  private static final #202= #16 of #1;   // State=class dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State of class dev/codex/schubert/nk/batch/monitoring/AlertLifecycle
+  public static final #203= #98 of #1;    // Condition=class dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition of class dev/codex/schubert/nk/batch/monitoring/AlertLifecycle
+  public static final #206= #204 of #1;   // Service=class dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service of class dev/codex/schubert/nk/batch/monitoring/AlertLifecycle
+  public static final #207= #75 of #1;    // Event=class dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event of class dev/codex/schubert/nk/batch/monitoring/AlertLifecycle
+  public static final #208= #82 of #1;    // Severity=class dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity of class dev/codex/schubert/nk/batch/monitoring/AlertLifecycle
+  public static final #209= #123 of #1;   // CauseClearance=class dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance of class dev/codex/schubert/nk/batch/monitoring/AlertLifecycle
+  public static final #214= #210 of #212; // Lookup=class java/lang/invoke/MethodHandles$Lookup of class java/lang/invoke/MethodHandles

@@ -1,0 +1,144 @@
+Compiled from "AlertLifecycle.java"
+public final class dev.codex.schubert.nk.batch.monitoring.AlertLifecycle {
+  private static final java.lang.String INVALID_ELAPSED;
+
+  private static final java.time.Duration WARNING_RECOVERY;
+
+  private static final java.time.Duration CRITICAL_RECOVERY;
+
+  private final dev.codex.schubert.nk.batch.monitoring.AlertLifecycle$State state;
+
+  public dev.codex.schubert.nk.batch.monitoring.AlertLifecycle(dev.codex.schubert.nk.batch.monitoring.AlertLifecycle$Condition, dev.codex.schubert.nk.batch.monitoring.AlertLifecycle$Service);
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: new           #7                  // class dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State
+         8: dup
+         9: aload_1
+        10: ldc           #9                  // String alert condition
+        12: invokestatic  #11                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        15: checkcast     #17                 // class dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition
+        18: aload_2
+        19: ldc           #19                 // String alert service
+        21: invokestatic  #11                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        24: checkcast     #21                 // class dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service
+        27: invokespecial #23                 // Method dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State."<init>":(Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition;Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service;)V
+        30: putfield      #26                 // Field state:Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State;
+        33: return
+
+  public java.util.Optional<dev.codex.schubert.nk.batch.monitoring.AlertLifecycle$Event> observe(dev.codex.schubert.nk.batch.monitoring.AlertLifecycle$Severity, dev.codex.schubert.nk.batch.monitoring.AlertLifecycle$CauseClearance, java.time.Instant, java.time.Duration);
+    Code:
+         0: aload_1
+         1: ldc           #32                 // String alert severity
+         3: invokestatic  #11                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: aload_2
+         8: ldc           #34                 // String cause clearance
+        10: invokestatic  #11                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        13: pop
+        14: aload_3
+        15: ldc           #36                 // String observation time
+        17: invokestatic  #11                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        20: pop
+        21: aload         4
+        23: ldc           #38                 // String monotonic elapsed
+        25: invokestatic  #11                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        28: pop
+        29: aload         4
+        31: invokevirtual #40                 // Method java/time/Duration.isNegative:()Z
+        34: ifeq          47
+        37: new           #46                 // class java/lang/IllegalArgumentException
+        40: dup
+        41: ldc           #48                 // String invalid alert elapsed time
+        43: invokespecial #50                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        46: athrow
+        47: aload_1
+        48: getstatic     #53                 // Field dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity.NORMAL:Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity;
+        51: if_acmpne     67
+        54: aload_0
+        55: getfield      #26                 // Field state:Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State;
+        58: aload_2
+        59: aload         4
+        61: invokevirtual #59                 // Method dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State.normal:(Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance;Ljava/time/Duration;)Ljava/util/Optional;
+        64: goto          78
+        67: aload_0
+        68: getfield      #26                 // Field state:Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State;
+        71: aload_1
+        72: aload_3
+        73: aload         4
+        75: invokevirtual #63                 // Method dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State.violation:(Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity;Ljava/time/Instant;Ljava/time/Duration;)Ljava/util/Optional;
+        78: areturn
+
+  public void interruptContinuity(java.time.Duration);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokevirtual #67                 // Method interruptRecovery:(Ljava/time/Duration;)Ljava/util/Optional;
+         5: pop
+         6: return
+
+  java.util.Optional<dev.codex.schubert.nk.batch.monitoring.AlertLifecycle$Event> observeWindowed(dev.codex.schubert.nk.batch.monitoring.AlertLifecycle$Severity, boolean, dev.codex.schubert.nk.batch.monitoring.ObservationContext);
+    Code:
+         0: aload_3
+         1: ldc           #71                 // String observation context
+         3: invokestatic  #11                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: aload_1
+         8: getstatic     #53                 // Field dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity.NORMAL:Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity;
+        11: if_acmpne     27
+        14: iload_2
+        15: ifeq          27
+        18: aload_0
+        19: aload_3
+        20: invokevirtual #73                 // Method dev/codex/schubert/nk/batch/monitoring/ObservationContext.elapsed:()Ljava/time/Duration;
+        23: invokevirtual #67                 // Method interruptRecovery:(Ljava/time/Duration;)Ljava/util/Optional;
+        26: areturn
+        27: aload_0
+        28: aload_1
+        29: aload_3
+        30: invokevirtual #79                 // Method dev/codex/schubert/nk/batch/monitoring/ObservationContext.clearance:()Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance;
+        33: aload_3
+        34: invokevirtual #83                 // Method dev/codex/schubert/nk/batch/monitoring/ObservationContext.at:()Ljava/time/Instant;
+        37: aload_3
+        38: invokevirtual #73                 // Method dev/codex/schubert/nk/batch/monitoring/ObservationContext.elapsed:()Ljava/time/Duration;
+        41: invokevirtual #87                 // Method observe:(Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity;Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance;Ljava/time/Instant;Ljava/time/Duration;)Ljava/util/Optional;
+        44: areturn
+
+  private java.util.Optional<dev.codex.schubert.nk.batch.monitoring.AlertLifecycle$Event> interruptRecovery(java.time.Duration);
+    Code:
+         0: aload_1
+         1: ldc           #38                 // String monotonic elapsed
+         3: invokestatic  #11                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: aload_1
+         8: invokevirtual #40                 // Method java/time/Duration.isNegative:()Z
+        11: ifeq          24
+        14: new           #46                 // class java/lang/IllegalArgumentException
+        17: dup
+        18: ldc           #48                 // String invalid alert elapsed time
+        20: invokespecial #50                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        23: athrow
+        24: aload_0
+        25: getfield      #26                 // Field state:Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State;
+        28: aload_1
+        29: invokevirtual #91                 // Method dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State.interrupt:(Ljava/time/Duration;)Ljava/util/Optional;
+        32: areturn
+
+  public java.util.Optional<dev.codex.schubert.nk.batch.monitoring.AlertLifecycle$Event> snapshot();
+    Code:
+         0: aload_0
+         1: getfield      #26                 // Field state:Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State;
+         4: invokevirtual #94                 // Method dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State.snapshot:()Ljava/util/Optional;
+         7: areturn
+
+  static {};
+    Code:
+         0: ldc2_w        #98                 // long 5l
+         3: invokestatic  #100                // Method java/time/Duration.ofMinutes:(J)Ljava/time/Duration;
+         6: putstatic     #104                // Field WARNING_RECOVERY:Ljava/time/Duration;
+         9: ldc2_w        #108                // long 10l
+        12: invokestatic  #100                // Method java/time/Duration.ofMinutes:(J)Ljava/time/Duration;
+        15: putstatic     #110                // Field CRITICAL_RECOVERY:Ljava/time/Duration;
+        18: return
+}

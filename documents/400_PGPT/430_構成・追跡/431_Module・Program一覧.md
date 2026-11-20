@@ -961,3 +961,7 @@ WBS-P018-08.03/2、F03/2-2、SS354、451、PT-OPS-EXEC-CRC-002。 [独立仕様�
 ### F02 ProtocolのPath値・入出力境界
 
 WBS-F02-a、SS311 §2～4、BUG-3454／YKT-2758、PT-F02-PATH-IO-001～008。 [仕様と判定](../../../evidence/01_PT/018_NK-OPS-001/5563_F02ProtocolPath入出力境界の試験仕様・結果.md) [独立結果](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41066-f02-protocol-path-io-independent-v1/manifest.json)。
+
+### F03 警報状態の同一monitor
+
+NK-OPS-001、RD MON005～009／013、UI252、SS351、PT-OPS-ALERT-009、BUG-3455／3456、YKT-2759、F03/2-2・P018-09。 [現仕様・結果](../../../evidence/01_PT/018_NK-OPS-001/5564_F03警報状態とスナップショットの再試験仕様・結果.md)。
