@@ -13,7 +13,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
 
-/** PT-AUT-ACTORVALUE001..003; SS314/331/451; synthetic verified-row value contracts only. */
+/** PT-AUT-ACTORVALUE001..004; SS314/331/451; synthetic verified-row value contracts only. */
 @Timeout(value = 5, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
 final class AuthenticatedActorValueContractTest {
   private static final String OWNER_NAME = "synthetic-owner";
@@ -90,5 +90,20 @@ final class AuthenticatedActorValueContractTest {
     assertEquals(Role.USER, Role.valueOf("USER"));
     assertEquals(Role.ADMIN, Role.valueOf("ADMIN"));
     assertThrows(IllegalArgumentException.class, () -> Role.valueOf("user"));
+  }
+
+  @Test
+  void actorValue004RejectsNonScalarsWithoutChangingValidSupplementaryText() {
+    for (String invalid : List.of("\uD800", "\uDC00", "\uDC00\uD800", "x\uD800y")) {
+      var failure =
+          assertThrows(
+              IllegalArgumentException.class, () -> new AuthenticatedActor(7, invalid, Role.USER));
+      assertEquals("actor username length is invalid", failure.getMessage());
+    }
+
+    String valid = "😀" + "a".repeat(60);
+    var actor = new AuthenticatedActor(7, valid, Role.USER);
+    assertEquals(valid, actor.username());
+    assertEquals("AuthenticatedActor[<redacted>]", actor.toString());
   }
 }

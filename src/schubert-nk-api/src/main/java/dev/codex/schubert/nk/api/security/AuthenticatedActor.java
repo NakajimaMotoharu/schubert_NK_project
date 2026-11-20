@@ -12,8 +12,9 @@ public record AuthenticatedActor(long userId, String username, Role role) {
     if (userId < 1 || userId > 999_999_999_999L) {
       throw new IllegalArgumentException("actor ID is outside N12");
     }
-    int bytes = username.getBytes(StandardCharsets.UTF_8).length;
-    if (bytes < 1 || bytes > 64) {
+    if (username.isEmpty()
+        || !StandardCharsets.UTF_8.newEncoder().canEncode(username)
+        || username.getBytes(StandardCharsets.UTF_8).length > 64) {
       throw new IllegalArgumentException("actor username length is invalid");
     }
   }
