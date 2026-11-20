@@ -1,0 +1,75 @@
+{
+  "eventId": "PGPT-20261008-6522",
+  "groupId": "PGPT-WBS66-F03-PUBLIC-CONFIG-RECONCILIATION-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T03:46:30.122000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 61,
+      "remainingPercent": 39,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-PUBLIC-CONFIG-RECONCILIATION-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F03-PUBLIC-CONFIG-RECONCILIATION-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "source": "d90fc9f032e7e5533109f3cfd4bb8467f2a018d1",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40622-f03-api-public-config-closed-classification-join-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.12,
+      "base": 0.3,
+      "high": 0.65
+    },
+    "groupCapPp": 1,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1002_短期目標の外部依存と保存点.json",
+        "sha256": "84427042cb34981645afd8528f1209b24b710b5c4bb2b655f9d63fac80bbdb84"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40488-f03-current-282-static-independent-v1/manifest.json",
+        "sha256": "0d9478bc49663a9f02026ab58bcf06a41aef86044b47cf971ce1b78269b31be1"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40514-f03-nonsecret-config-raw-four-v1/manifest.json",
+        "sha256": "978bbfd357f8affd1670207ff8327bf5eeb06890c4277c4b1bc9fbf3eb781a39"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40516-f03-retained-catches-and-monitor-v1/manifest.json",
+        "sha256": "25d7451408ac49163bb5c61bdbb589fd6e93a2a7d3af4d61e310f31cb657c48c"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38864-f02-nonsecret-config-independent-v1/manifest.json",
+        "sha256": "c02641886551b4d4dd68f86777585d7e6a2241bc6fb80f9030ba4744bf827371"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40298-public-config-yaml-utf8-limit-independent-v1/manifest.json",
+        "sha256": "b0e4c32b8ea8a055ac22d5f374a9b5786dbcaedf631877b3d4ef04c49529e9cb"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "PG40488発見位置1・2の現候補、公開設定契約、元試験を照合。",
+    "endCondition": "該当分類の実現在と残証拠を確定。適用済みを再計上しない。",
+    "workScope": "公開source、資料と既存manifestのみ。HOLD・実環境・実設定不使用。"
+  }
+}
