@@ -1,0 +1,65 @@
+{
+  "eventId": "PGPT-20261008-6791",
+  "groupId": "G08-cleanup-expiry-audit-prov",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T13:14:31.544000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 70,
+      "remainingPercent": 30,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "G08-cleanup-expiry-audit-prov",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "G08-cleanup-expiry-audit-prov",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-G08"
+    ],
+    "managementWorkIds": [],
+    "source": "d70e8c8e3f3a029bb4a59c158ea537b1a57c90a3",
+    "productionCoreMain": "cdb649a5f054bc2ceed72ef57e55605f14a590d1",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40864-g08-three-current-outcome-bindings-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.1,
+      "base": 0.3,
+      "high": 0.65
+    },
+    "groupCapPp": 1.0,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1274_P0181003監査writer保留点.json",
+        "sha256": "01f8b15a466e39fe9dc868fb1093b9a7586c43c13bd5d9d11c81da2d392bf690"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40856-cleanup-step-single-sql-graph-v1/manifest.json",
+        "sha256": "0750cab96187af77d2d47a1a99aee74a97fdb88dcf5edb24f94e5348ab4f3b88"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40858-expiry-update-shared-failure-v1/manifest.json",
+        "sha256": "e4a7e4237e062a577972e242e00a092428458197418ce05331666bfe0ccf06a1"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40860-log-search-audit-null-v1-before/manifest.json",
+        "sha256": "bbfef44e5551cc112bbf444811c639e659ab19fab6238040490bcdb8d000e313"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "既保存の三結果、現Core、ProgramとWBS既ownerを読む。開始依存は公開hash、当source、既結果のみ。",
+    "endCondition": "成功2と準備中断1を別記し、Test ID、実行又はproposal、手順、hashを485/486と接続。stage済みのbinding checker成功。",
+    "workScope": "追跡性G08の増分のみ。原試験再実行、保留型読取、実環境、利用者承認、品品質昇格なし。"
+  }
+}

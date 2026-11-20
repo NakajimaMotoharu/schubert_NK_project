@@ -716229,5 +716229,91 @@
     ],
     "realDatabaseEvidence": false,
     "whole451": false
+  },
+  "currentCleanupExpiryAuditTracePG40864": {
+    "source": "cdb649a5f054bc2ceed72ef57e55605f14a590d1",
+    "originalProductScopeUnchanged": true,
+    "rows": [
+      {
+        "testId": "CLNPORT010",
+        "owner": "WBS-P017-07",
+        "costOwner": "WBS-P017-07",
+        "production": {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java",
+          "sha256": "674adb1842cb28a6ac911b249d0d78e74bc500fb3e229efd42c1ddcb8d2da27c"
+        },
+        "fixture": {
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupStepPortTest.java",
+          "sha256": "ab71b15ffb3e283849585f7f7393ca684bfb009b0beaf8707bc35e45f57eb58c"
+        },
+        "spec": {
+          "path": "evidence/01_PT/017_NK-BAT-001/4744_CleanupStep単独SQL例外の単体仕様.md",
+          "sha256": "f2d9b8c53f8abc9a2d248343027fb340beb6b212653cf5f8206465319a427da2"
+        },
+        "proof": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40856-cleanup-step-single-sql-graph-v1/manifest.json",
+          "sha256": "0750cab96187af77d2d47a1a99aee74a97fdb88dcf5edb24f94e5348ab4f3b88"
+        },
+        "outcome": "LOCAL_PT_PASS",
+        "source": "cdb649a5f054bc2ceed72ef57e55605f14a590d1",
+        "xmlSha256": "6267d83049be5763d2eae4792d065d506b128ec2cc41e799640d195c9c64ceca",
+        "formalDelta": 0
+      },
+      {
+        "testId": "EXPPORT-J011",
+        "owner": "WBS-P017-11",
+        "costOwner": "WBS-P017-11",
+        "production": {
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+          "sha256": "001a0e2d7f22fe28fe746b96a13b58d83a4ce1c68f177330b59bc0bd74986a12"
+        },
+        "fixture": {
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditPortTest.java",
+          "sha256": "3fac4645064839e5f922cea5f3d05c2e86ccaaab63574894e89c15dc65f6c570"
+        },
+        "spec": {
+          "path": "evidence/01_PT/017_NK-BAT-001/4745_Expiry監査更新の同一例外仕様.md",
+          "sha256": "24651372629c2c5ce63b19abf8d27e028b3c20ea3b4a497516a2645b102e9448"
+        },
+        "proof": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40858-expiry-update-shared-failure-v1/manifest.json",
+          "sha256": "e4a7e4237e062a577972e242e00a092428458197418ce05331666bfe0ccf06a1"
+        },
+        "outcome": "LOCAL_PT_PASS",
+        "source": "cdb649a5f054bc2ceed72ef57e55605f14a590d1",
+        "xmlSha256": "b8fc2b5635df793e33b7a548d06aaa27fe787d3a763d35282a83a2fe7dffc19e",
+        "formalDelta": 0
+      },
+      {
+        "testId": "PT-ADM-SEARCHPORT009",
+        "owner": "WBS-P010-04",
+        "costOwner": "WBS-P018-10.03",
+        "costSharedWithOwner": false,
+        "production": {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryAuditWriter.java",
+          "sha256": "cf74fa263488cf9ae7c3199724630c735dd4b35c26b7fb20152883979773d1f5"
+        },
+        "proposal": {
+          "path": "evidence/01_PT/018_NK-OPS-001/input/5462_log_search_audit_statement_null_proposed.patch",
+          "sha256": "f376e812e0e38531b30a00ac81d1de9f8739935d1c82188b9bfdb604a1f36a92"
+        },
+        "proof": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40860-log-search-audit-null-v1-before/manifest.json",
+          "sha256": "bbfef44e5551cc112bbf444811c639e659ab19fab6238040490bcdb8d000e313"
+        },
+        "outcome": "NOT_RUN_QA_056_PREREQUISITE",
+        "source": "cdb649a5f054bc2ceed72ef57e55605f14a590d1",
+        "bug": "BUG-3417",
+        "expansion": "YKT-2739",
+        "xmlSha256": null,
+        "formalDelta": 0
+      }
+    ],
+    "measuredLocalPass": 2,
+    "notRun": 1,
+    "formalDelta": 0,
+    "newProductExecutions": 0,
+    "mixedSourceCoverage": false,
+    "whole451": false
   }
 }
