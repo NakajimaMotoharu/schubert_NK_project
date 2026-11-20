@@ -1,5 +1,6 @@
 package dev.codex.schubert.characterization;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.BooleanNode;
@@ -114,7 +115,8 @@ public final class ArtifactComparator {
               List.of(BooleanNode.TRUE, BooleanNode.FALSE),
               "CHR-A02:/" + SESSION_DESTINATIONS + "/0",
               textPair(MENU_DESTINATION, SESSION_EXPIRED_DESTINATION)));
-  private static final ObjectMapper JSON = new ObjectMapper();
+  private static final ObjectMapper JSON =
+      new ObjectMapper().enable(DeserializationFeature.FAIL_ON_TRAILING_TOKENS);
   private static final JsonNode CURRENT_MULTIPLE_VOICE = multipleVoiceProjection(2);
   private static final JsonNode NK_MULTIPLE_VOICE = multipleVoiceProjection(1);
   private static final Set<String> MODES = Set.of(MODE_DIFFERENCE, "required", MODE_CONTRACT);

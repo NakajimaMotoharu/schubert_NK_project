@@ -1,5 +1,6 @@
 package dev.codex.schubert.characterization;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -42,6 +43,7 @@ public final class GateCli {
   private static final int EXPECTED_REPEAT_FILE_COUNT = 28;
   private static final ObjectMapper JSON =
       new ObjectMapper()
+          .enable(DeserializationFeature.FAIL_ON_TRAILING_TOKENS)
           .enable(SerializationFeature.INDENT_OUTPUT)
           .enable(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS);
   private static final HexFormat HEX = HexFormat.of();
