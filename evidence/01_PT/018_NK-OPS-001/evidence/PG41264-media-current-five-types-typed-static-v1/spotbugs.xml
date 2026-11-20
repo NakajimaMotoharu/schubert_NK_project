@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<BugCollection version="4.10.4" sequence="0" timestamp="1795211935224" analysisTimestamp="1795211935995" release="">
+  <Project projectName="">
+    <Jar>/dev/shm/pgpt-media-typed-static-87i4mrym/target/classes/dev/codex/schubert/nk/web/media/ContentDispositionFactory.class</Jar>
+    <Jar>/dev/shm/pgpt-media-typed-static-87i4mrym/target/classes/dev/codex/schubert/nk/web/media/HttpByteRangeParser$Full.class</Jar>
+    <Jar>/dev/shm/pgpt-media-typed-static-87i4mrym/target/classes/dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial.class</Jar>
+    <Jar>/dev/shm/pgpt-media-typed-static-87i4mrym/target/classes/dev/codex/schubert/nk/web/media/HttpByteRangeParser$Selection.class</Jar>
+    <Jar>/dev/shm/pgpt-media-typed-static-87i4mrym/target/classes/dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable.class</Jar>
+    <Jar>/dev/shm/pgpt-media-typed-static-87i4mrym/target/classes/dev/codex/schubert/nk/web/media/HttpByteRangeParser.class</Jar>
+    <Jar>/dev/shm/pgpt-media-typed-static-87i4mrym/target/classes/dev/codex/schubert/nk/web/media/MediaBodyStreamer.class</Jar>
+    <Jar>/dev/shm/pgpt-media-typed-static-87i4mrym/target/classes/dev/codex/schubert/nk/web/media/MediaDeliveryException$Reason.class</Jar>
+    <Jar>/dev/shm/pgpt-media-typed-static-87i4mrym/target/classes/dev/codex/schubert/nk/web/media/MediaDeliveryException.class</Jar>
+    <Jar>/dev/shm/pgpt-media-typed-static-87i4mrym/target/classes/dev/codex/schubert/nk/web/media/MediaRangeService$FileSource.class</Jar>
+    <Jar>/dev/shm/pgpt-media-typed-static-87i4mrym/target/classes/dev/codex/schubert/nk/web/media/MediaRangeService$ReadOperation.class</Jar>
+    <Jar>/dev/shm/pgpt-media-typed-static-87i4mrym/target/classes/dev/codex/schubert/nk/web/media/MediaRangeService$Response.class</Jar>
+    <Jar>/dev/shm/pgpt-media-typed-static-87i4mrym/target/classes/dev/codex/schubert/nk/web/media/MediaRangeService.class</Jar>
+    <Jar>/dev/shm/pgpt-media-typed-static-87i4mrym/test/dev/codex/schubert/nk/web/media/ExceptionValueContractTest.class</Jar>
+    <AuxClasspathEntry>/dev/shm/pgpt-media-typed-static-87i4mrym/target/classes</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG37688-web-enum-current-protocol176-v1/current-protocol176.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar</AuxClasspathEntry>
+  </Project>
+  <BugInstance type="NP_NULL_PARAM_DEREF_NONVIRTUAL" priority="1" rank="6" abbrev="NP" category="CORRECTNESS" instanceHash="937417b3e6c628160babc74322e02f96" instanceOccurrenceNum="0" instanceOccurrenceMax="0" cweid="476">
+    <ShortMessage>Non-virtual method call passes null for non-null parameter</ShortMessage>
+    <LongMessage>Non-virtual method call in dev.codex.schubert.nk.web.media.ExceptionValueContractTest.lambda$exc007MediaStatusAndRetryRemainClosedAndNonNull$0() passes null for non-null parameter of new MediaDeliveryException(MediaDeliveryException$Reason)</LongMessage>
+    <Class classname="dev.codex.schubert.nk.web.media.ExceptionValueContractTest" primary="true">
+      <SourceLine classname="dev.codex.schubert.nk.web.media.ExceptionValueContractTest" start="12" end="50" sourcefile="ExceptionValueContractTest.java" sourcepath="dev/codex/schubert/nk/web/media/ExceptionValueContractTest.java">
+        <Message>At ExceptionValueContractTest.java:[lines 12-50]</Message>
+      </SourceLine>
+      <Message>In class dev.codex.schubert.nk.web.media.ExceptionValueContractTest</Message>
+    </Class>
+    <Method classname="dev.codex.schubert.nk.web.media.ExceptionValueContractTest" name="lambda$exc007MediaStatusAndRetryRemainClosedAndNonNull$0" signature="()V" isStatic="true" primary="true">
+      <SourceLine classname="dev.codex.schubert.nk.web.media.ExceptionValueContractTest" start="25" end="25" startBytecode="0" endBytecode="33" sourcefile="ExceptionValueContractTest.java" sourcepath="dev/codex/schubert/nk/web/media/ExceptionValueContractTest.java"/>
+      <Message>In method dev.codex.schubert.nk.web.media.ExceptionValueContractTest.lambda$exc007MediaStatusAndRetryRemainClosedAndNonNull$0()</Message>
+    </Method>
+    <Method classname="dev.codex.schubert.nk.web.media.MediaDeliveryException" name="&lt;init&gt;" signature="(Ldev/codex/schubert/nk/web/media/MediaDeliveryException$Reason;)V" isStatic="false" role="METHOD_CALLED">
+      <SourceLine classname="dev.codex.schubert.nk.web.media.MediaDeliveryException" start="20" end="22" startBytecode="0" endBytecode="79" sourcefile="MediaDeliveryException.java" sourcepath="dev/codex/schubert/nk/web/media/MediaDeliveryException.java"/>
+      <Message>Called method new dev.codex.schubert.nk.web.media.MediaDeliveryException(MediaDeliveryException$Reason)</Message>
+    </Method>
+    <SourceLine classname="dev.codex.schubert.nk.web.media.ExceptionValueContractTest" primary="true" start="25" end="25" startBytecode="5" endBytecode="5" sourcefile="ExceptionValueContractTest.java" sourcepath="dev/codex/schubert/nk/web/media/ExceptionValueContractTest.java">
+      <Message>At ExceptionValueContractTest.java:[line 25]</Message>
+    </SourceLine>
+    <Int value="1" role="INT_NULL_ARG">
+      <Message>Argument 1 is definitely null but must not be null</Message>
+    </Int>
+    <Property name="edu.umd.cs.findbugs.detect.NullArgumentWarningProperty.ACTUAL_PARAMETER_GUARANTEED_NULL" value="true"/>
+    <Property name="edu.umd.cs.findbugs.detect.NullArgumentWarningProperty.ALL_DANGEROUS_TARGETS" value="true"/>
+    <Property name="edu.umd.cs.findbugs.detect.NullArgumentWarningProperty.ARG_DEFINITELY_NULL" value="true"/>
+    <Property name="edu.umd.cs.findbugs.detect.NullArgumentWarningProperty.MONOMORPHIC_CALL_SITE" value="true"/>
+  </BugInstance>
+  <BugInstance type="RV_EXCEPTION_NOT_THROWN" priority="1" rank="1" abbrev="RV" category="CORRECTNESS" instanceHash="fef0c7fe1854ac79748aa1983282ac47" instanceOccurrenceNum="0" instanceOccurrenceMax="0" cweid="440">
+    <ShortMessage>Exception created and dropped rather than thrown</ShortMessage>
+    <LongMessage>new MediaDeliveryException(MediaDeliveryException$Reason) not thrown in dev.codex.schubert.nk.web.media.ExceptionValueContractTest.lambda$exc007MediaStatusAndRetryRemainClosedAndNonNull$0()</LongMessage>
+    <Class classname="dev.codex.schubert.nk.web.media.ExceptionValueContractTest" primary="true">
+      <SourceLine classname="dev.codex.schubert.nk.web.media.ExceptionValueContractTest" start="12" end="50" sourcefile="ExceptionValueContractTest.java" sourcepath="dev/codex/schubert/nk/web/media/ExceptionValueContractTest.java">
+        <Message>At ExceptionValueContractTest.java:[lines 12-50]</Message>
+      </SourceLine>
+      <Message>In class dev.codex.schubert.nk.web.media.ExceptionValueContractTest</Message>
+    </Class>
+    <Method classname="dev.codex.schubert.nk.web.media.ExceptionValueContractTest" name="lambda$exc007MediaStatusAndRetryRemainClosedAndNonNull$0" signature="()V" isStatic="true" primary="true">
+      <SourceLine classname="dev.codex.schubert.nk.web.media.ExceptionValueContractTest" start="25" end="25" startBytecode="0" endBytecode="33" sourcefile="ExceptionValueContractTest.java" sourcepath="dev/codex/schubert/nk/web/media/ExceptionValueContractTest.java"/>
+      <Message>In method dev.codex.schubert.nk.web.media.ExceptionValueContractTest.lambda$exc007MediaStatusAndRetryRemainClosedAndNonNull$0()</Message>
+    </Method>
+    <Method classname="dev.codex.schubert.nk.web.media.MediaDeliveryException" name="&lt;init&gt;" signature="(Ldev/codex/schubert/nk/web/media/MediaDeliveryException$Reason;)V" isStatic="false" role="METHOD_CALLED">
+      <SourceLine classname="dev.codex.schubert.nk.web.media.MediaDeliveryException" start="20" end="22" startBytecode="0" endBytecode="79" sourcefile="MediaDeliveryException.java" sourcepath="dev/codex/schubert/nk/web/media/MediaDeliveryException.java"/>
+      <Message>Called method new dev.codex.schubert.nk.web.media.MediaDeliveryException(MediaDeliveryException$Reason)</Message>
+    </Method>
+    <SourceLine classname="dev.codex.schubert.nk.web.media.ExceptionValueContractTest" primary="true" start="25" end="25" startBytecode="5" endBytecode="5" sourcefile="ExceptionValueContractTest.java" sourcepath="dev/codex/schubert/nk/web/media/ExceptionValueContractTest.java">
+      <Message>At ExceptionValueContractTest.java:[line 25]</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugCategory category="CORRECTNESS">
+    <Description>Correctness</Description>
+  </BugCategory>
+  <BugPattern type="NP_NULL_PARAM_DEREF_NONVIRTUAL" abbrev="NP" category="CORRECTNESS">
+    <ShortDescription>Non-virtual method call passes null for non-null parameter</ShortDescription>
+    <Details><![CDATA[
+      
+      <p>
+      A possibly-null value is passed to a non-null method parameter.
+    Either the parameter is annotated as a parameter that should
+    always be non-null, or analysis has shown that it will always be
+    dereferenced.
+      </p>
+      
+   ]]></Details>
+  </BugPattern>
+  <BugPattern type="RV_EXCEPTION_NOT_THROWN" abbrev="RV" category="CORRECTNESS">
+    <ShortDescription>Exception created and dropped rather than thrown</ShortDescription>
+    <Details><![CDATA[
+
+   <p> This code creates an exception (or error) object, but doesn't do anything with it. For example,
+something like </p>
+<pre><code>if (x &lt; 0) {
+    new IllegalArgumentException("x must be nonnegative");
+}
+</code></pre>
+<p>It was probably the intent of the programmer to throw the created exception:</p>
+<pre><code>if (x &lt; 0) {
+    throw new IllegalArgumentException("x must be nonnegative");
+}
+</code></pre>
+
+    ]]></Details>
+  </BugPattern>
+  <BugCode abbrev="NP" cweid="476">
+    <Description>Null pointer dereference</Description>
+  </BugCode>
+  <BugCode abbrev="RV" cweid="440">
+    <Description>Bad use of return value from method</Description>
+  </BugCode>
+  <Errors errors="0" missingClasses="0"></Errors>
+  <FindBugsSummary timestamp="Sat, 21 Nov 2026 06:58:55 +0900" total_classes="14" referenced_classes="95" total_bugs="2" total_size="246" num_packages="1" java_version="25.0.4" vm_version="25.0.4+7-1-26.04-Ubuntu" cpu_seconds="10.91" clock_seconds="2.37" peak_mbytes="195.30" alloc_mbytes="1024.00" gc_seconds="0.02" priority_1="2">
+    <FileStats path="dev/codex/schubert/nk/web/media/ContentDispositionFactory.java" bugCount="0" size="12"/>
+    <FileStats path="dev/codex/schubert/nk/web/media/ExceptionValueContractTest.java" bugCount="2" size="40" bugHash="b589688244292ad2f4026105411bcb14"/>
+    <FileStats path="dev/codex/schubert/nk/web/media/HttpByteRangeParser.java" bugCount="0" size="77"/>
+    <FileStats path="dev/codex/schubert/nk/web/media/MediaBodyStreamer.java" bugCount="0" size="24"/>
+    <FileStats path="dev/codex/schubert/nk/web/media/MediaDeliveryException.java" bugCount="0" size="27"/>
+    <FileStats path="dev/codex/schubert/nk/web/media/MediaRangeService.java" bugCount="0" size="66"/>
+    <PackageStats package="dev.codex.schubert.nk.web.media" total_bugs="2" total_types="14" total_size="246" priority_1="2">
+      <ClassStats class="dev.codex.schubert.nk.web.media.ContentDispositionFactory" sourceFile="ContentDispositionFactory.java" interface="false" size="12" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.media.ExceptionValueContractTest" sourceFile="ExceptionValueContractTest.java" interface="false" size="40" bugs="2" priority_1="2"/>
+      <ClassStats class="dev.codex.schubert.nk.web.media.HttpByteRangeParser" sourceFile="HttpByteRangeParser.java" interface="false" size="39" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.media.HttpByteRangeParser$Full" sourceFile="HttpByteRangeParser.java" interface="false" size="11" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.media.HttpByteRangeParser$Partial" sourceFile="HttpByteRangeParser.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.media.HttpByteRangeParser$Selection" sourceFile="HttpByteRangeParser.java" interface="true" size="1" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.media.HttpByteRangeParser$Unsatisfiable" sourceFile="HttpByteRangeParser.java" interface="false" size="10" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.media.MediaBodyStreamer" sourceFile="MediaBodyStreamer.java" interface="false" size="24" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.media.MediaDeliveryException" sourceFile="MediaDeliveryException.java" interface="false" size="13" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.media.MediaDeliveryException$Reason" sourceFile="MediaDeliveryException.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.media.MediaRangeService" sourceFile="MediaRangeService.java" interface="false" size="59" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.media.MediaRangeService$FileSource" sourceFile="MediaRangeService.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.media.MediaRangeService$ReadOperation" sourceFile="MediaRangeService.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.media.MediaRangeService$Response" sourceFile="MediaRangeService.java" interface="true" size="3" bugs="0"/>
+    </PackageStats>
+    <FindBugsProfile>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassInfoAnalysisEngine" totalMilliseconds="354" invocations="859" avgMicrosecondsPerInvocation="413" maxMicrosecondsPerInvocation="15376" standardDeviationMicrosecondsPerInvocation="1035"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FieldItemSummary" totalMilliseconds="140" invocations="95" avgMicrosecondsPerInvocation="1481" maxMicrosecondsPerInvocation="13191" standardDeviationMicrosecondsPerInvocation="2655"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindNoSideEffectMethods" totalMilliseconds="109" invocations="95" avgMicrosecondsPerInvocation="1149" maxMicrosecondsPerInvocation="16068" standardDeviationMicrosecondsPerInvocation="2216"/>
+      <ClassProfile name="edu.umd.cs.findbugs.OpcodeStack$JumpInfoFactory" totalMilliseconds="99" invocations="321" avgMicrosecondsPerInvocation="310" maxMicrosecondsPerInvocation="3065" standardDeviationMicrosecondsPerInvocation="425"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassDataAnalysisEngine" totalMilliseconds="81" invocations="865" avgMicrosecondsPerInvocation="94" maxMicrosecondsPerInvocation="9370" standardDeviationMicrosecondsPerInvocation="337"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.JavaClassAnalysisEngine" totalMilliseconds="55" invocations="144" avgMicrosecondsPerInvocation="383" maxMicrosecondsPerInvocation="13566" standardDeviationMicrosecondsPerInvocation="1212"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.NoteDirectlyRelevantTypeQualifiers" totalMilliseconds="52" invocations="95" avgMicrosecondsPerInvocation="554" maxMicrosecondsPerInvocation="6378" standardDeviationMicrosecondsPerInvocation="1030"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.TypeDataflowFactory" totalMilliseconds="44" invocations="47" avgMicrosecondsPerInvocation="943" maxMicrosecondsPerInvocation="9208" standardDeviationMicrosecondsPerInvocation="1771"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FunctionsThatMightBeMistakenForProcedures" totalMilliseconds="41" invocations="95" avgMicrosecondsPerInvocation="432" maxMicrosecondsPerInvocation="4622" standardDeviationMicrosecondsPerInvocation="831"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.ValueNumberDataflowFactory" totalMilliseconds="38" invocations="47" avgMicrosecondsPerInvocation="814" maxMicrosecondsPerInvocation="6741" standardDeviationMicrosecondsPerInvocation="1350"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.IsNullValueDataflowFactory" totalMilliseconds="38" invocations="46" avgMicrosecondsPerInvocation="827" maxMicrosecondsPerInvocation="5243" standardDeviationMicrosecondsPerInvocation="1246"/>
+      <ClassProfile name="edu.umd.cs.findbugs.ba.npe.NullDerefAndRedundantComparisonFinder" totalMilliseconds="36" invocations="46" avgMicrosecondsPerInvocation="800" maxMicrosecondsPerInvocation="7087" standardDeviationMicrosecondsPerInvocation="1386"/>
+      <ClassProfile name="edu.umd.cs.findbugs.util.TopologicalSort" totalMilliseconds="36" invocations="803" avgMicrosecondsPerInvocation="45" maxMicrosecondsPerInvocation="953" standardDeviationMicrosecondsPerInvocation="88"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.UnconditionalValueDerefDataflowFactory" totalMilliseconds="32" invocations="46" avgMicrosecondsPerInvocation="711" maxMicrosecondsPerInvocation="5854" standardDeviationMicrosecondsPerInvocation="1206"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.BuildObligationPolicyDatabase" totalMilliseconds="31" invocations="95" avgMicrosecondsPerInvocation="334" maxMicrosecondsPerInvocation="4248" standardDeviationMicrosecondsPerInvocation="642"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.CalledMethods" totalMilliseconds="31" invocations="95" avgMicrosecondsPerInvocation="333" maxMicrosecondsPerInvocation="2654" standardDeviationMicrosecondsPerInvocation="550"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.OverridingEqualsNotSymmetrical" totalMilliseconds="30" invocations="95" avgMicrosecondsPerInvocation="325" maxMicrosecondsPerInvocation="7759" standardDeviationMicrosecondsPerInvocation="856"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.CFGFactory" totalMilliseconds="29" invocations="50" avgMicrosecondsPerInvocation="582" maxMicrosecondsPerInvocation="6296" standardDeviationMicrosecondsPerInvocation="1092"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.BuildStringPassthruGraph" totalMilliseconds="27" invocations="95" avgMicrosecondsPerInvocation="294" maxMicrosecondsPerInvocation="4649" standardDeviationMicrosecondsPerInvocation="691"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.MethodGenFactory" totalMilliseconds="27" invocations="50" avgMicrosecondsPerInvocation="548" maxMicrosecondsPerInvocation="17598" standardDeviationMicrosecondsPerInvocation="2456"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindDeadLocalStores" totalMilliseconds="23" invocations="14" avgMicrosecondsPerInvocation="1658" maxMicrosecondsPerInvocation="16828" standardDeviationMicrosecondsPerInvocation="4257"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindRefComparison$SpecialTypeAnalysis" totalMilliseconds="21" invocations="32" avgMicrosecondsPerInvocation="674" maxMicrosecondsPerInvocation="3855" standardDeviationMicrosecondsPerInvocation="952"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.ReflectiveClasses" totalMilliseconds="21" invocations="95" avgMicrosecondsPerInvocation="221" maxMicrosecondsPerInvocation="1681" standardDeviationMicrosecondsPerInvocation="368"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.BuildAccessMethodsDatabase" totalMilliseconds="20" invocations="95" avgMicrosecondsPerInvocation="220" maxMicrosecondsPerInvocation="1762" standardDeviationMicrosecondsPerInvocation="376"/>
+    </FindBugsProfile>
+  </FindBugsSummary>
+  <ClassFeatures></ClassFeatures>
+  <History></History>
+</BugCollection>

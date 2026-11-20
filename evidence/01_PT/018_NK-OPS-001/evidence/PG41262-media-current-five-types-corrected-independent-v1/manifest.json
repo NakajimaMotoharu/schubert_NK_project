@@ -1,0 +1,457 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-20T21:57:46.612098+00:00",
+  "source": "a8913bc836f81632613b34243f84b7b15eb3e054",
+  "productionCore": "a8913bc836f81632613b34243f84b7b15eb3e054",
+  "originalExec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41260-media-current-five-types-corrected-v1/media.exec",
+    "sha256": "dcadca4888ce6c5eb639e66a98e03317a09b38346caa622ac47d9aa1b3337555"
+  },
+  "originalUnit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41260-media-current-five-types-corrected-v1/manifest.json",
+    "sha256": "26a4aa4ab0adf7826d73691d8dde64a53d77ba8565568ae2c525d51735841775"
+  },
+  "tool": {
+    "path": "tools/quality/jacoco/UnfilteredCodeMeasurement.java",
+    "sha256": "acfb221d8853ceac834f862a19717a3242d67bbb8c7508ff1a00fd5db060ef15"
+  },
+  "status": "FULL",
+  "tools": {
+    "compile": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "-d",
+        "/dev/shm/pgpt-five-media-measure-na8dsha6",
+        "tools/quality/jacoco/UnfilteredCodeMeasurement.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "measure": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/dev/shm/pgpt-five-media-measure-na8dsha6:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+        "--strict-original-exec",
+        "--line-deficits",
+        "evidence/01_PT/018_NK-OPS-001/evidence/PG41260-media-current-five-types-corrected-v1/media.exec",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41260-media-current-five-types-corrected-v1/physical/ContentDispositionFactory.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41260-media-current-five-types-corrected-v1/physical/HttpByteRangeParser$Full.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41260-media-current-five-types-corrected-v1/physical/HttpByteRangeParser$Partial.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41260-media-current-five-types-corrected-v1/physical/HttpByteRangeParser$Selection.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41260-media-current-five-types-corrected-v1/physical/HttpByteRangeParser$Unsatisfiable.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41260-media-current-five-types-corrected-v1/physical/HttpByteRangeParser.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41260-media-current-five-types-corrected-v1/physical/MediaBodyStreamer.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41260-media-current-five-types-corrected-v1/physical/MediaDeliveryException$Reason.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41260-media-current-five-types-corrected-v1/physical/MediaDeliveryException.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41260-media-current-five-types-corrected-v1/physical/MediaRangeService$FileSource.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41260-media-current-five-types-corrected-v1/physical/MediaRangeService$ReadOperation.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41260-media-current-five-types-corrected-v1/physical/MediaRangeService$Response.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41260-media-current-five-types-corrected-v1/physical/MediaRangeService.class"
+      ],
+      "exit": 0,
+      "stdoutSha256": "9fb53ec9553e487f263a0e61685e2462c5ac63dc1643131e3cce76485628c3fc",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "bytecode": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-c",
+        "-p",
+        "-l",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41260-media-current-five-types-corrected-v1/physical/MediaRangeService.class"
+      ],
+      "exit": 0,
+      "stdoutSha256": "19c98e1d1b7f3ab445bdd358b951c405cc3598a7837ac4ff6653015f8458ce3d",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "classes": {
+    "dev/codex/schubert/nk/web/media/ContentDispositionFactory": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 34
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 2
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 9
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 3
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/web/media/HttpByteRangeParser$Full": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 28
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 2
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 4
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 6
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 5
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 52
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 6
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 6
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 10
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 7
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/web/media/HttpByteRangeParser$Selection": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 0
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 0
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 0
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 0
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 0
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 0
+      }
+    },
+    "dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 30
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 0
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 2
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 5
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 5
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/web/media/HttpByteRangeParser": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 163
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 24
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 32
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 16
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 4
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/web/media/MediaBodyStreamer": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 100
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 12
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 21
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 8
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/web/media/MediaDeliveryException$Reason": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 50
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 0
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 4
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 5
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 5
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/web/media/MediaDeliveryException": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 24
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 2
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 6
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 5
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 4
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/web/media/MediaRangeService$FileSource": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 0
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 0
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 0
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 0
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 0
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 0
+      }
+    },
+    "dev/codex/schubert/nk/web/media/MediaRangeService$ReadOperation": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 0
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 0
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 0
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 0
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 0
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 0
+      }
+    },
+    "dev/codex/schubert/nk/web/media/MediaRangeService$Response": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 0
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 0
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 0
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 0
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 0
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 0
+      }
+    },
+    "dev/codex/schubert/nk/web/media/MediaRangeService": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 241
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 26
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 51
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 18
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 5
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "wholeRaw": {
+    "LINE": {
+      "covered": 135,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 39,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 9,
+      "missed": 0
+    },
+    "BRANCH": {
+      "covered": 74,
+      "missed": 0
+    },
+    "INSTRUCTION": {
+      "covered": 722,
+      "missed": 0
+    }
+  },
+  "methodMisses": {},
+  "branchDeficitSites": [],
+  "compilerSwitchFallbackObserved": false,
+  "standaloneOnly": true,
+  "selectedExistingPtRerunHere": 0,
+  "actualRuntimeOrNative": 0,
+  "manualCoverageExclusions": 0,
+  "originalArtifacts": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41262-media-current-five-types-corrected-independent-v1/raw-coverage.tsv",
+      "sha256": "9fb53ec9553e487f263a0e61685e2462c5ac63dc1643131e3cce76485628c3fc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41262-media-current-five-types-corrected-independent-v1/media-service-bytecode.txt",
+      "sha256": "19c98e1d1b7f3ab445bdd358b951c405cc3598a7837ac4ff6653015f8458ce3d"
+    }
+  ],
+  "whole451": false,
+  "formalDelta": 0
+}

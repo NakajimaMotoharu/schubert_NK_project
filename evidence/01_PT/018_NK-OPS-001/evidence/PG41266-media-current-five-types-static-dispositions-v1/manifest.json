@@ -1,0 +1,74 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-20T22:00:19.500468+00:00",
+  "source": "a8913bc836f81632613b34243f84b7b15eb3e054",
+  "inheritedRaw": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41264-media-current-five-types-typed-static-v1/manifest.json",
+    "sha256": "7374a34cfd77b221b9aab14a8f72d9347fc0f5db1cd661f9a6fbacadf1a6f8c7"
+  },
+  "oldUnit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41256-media-current-five-types-single-exec-v1/manifest.json",
+    "sha256": "c23190b1eb8a0ebfa6a4e8efefbc0a758b11da2411144cb60b428933c8780755"
+  },
+  "newUnit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41260-media-current-five-types-corrected-v1/manifest.json",
+    "sha256": "26a4aa4ab0adf7826d73691d8dde64a53d77ba8565568ae2c525d51735841775"
+  },
+  "findings": [
+    {
+      "raw": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "owner": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/ExceptionValueContractTest.java",
+      "line": 25,
+      "method": "lambda$exc007MediaStatusAndRetryRemainClosedAndNonNull$0",
+      "verdict": "TEST_NEGATIVE_NULL_REJECTION_NOT_PRODUCT_DEFECT",
+      "rationale": "The checked JUnit lambda deliberately calls the constructor with null and expects the exception; it uses no returned exception object. This source line is identical to the previous tested fixture."
+    },
+    {
+      "raw": "RV_EXCEPTION_NOT_THROWN",
+      "owner": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/ExceptionValueContractTest.java",
+      "line": 25,
+      "method": "lambda$exc007MediaStatusAndRetryRemainClosedAndNonNull$0",
+      "verdict": "TEST_NEGATIVE_NULL_REJECTION_NOT_PRODUCT_DEFECT",
+      "rationale": "The checked JUnit lambda deliberately calls the constructor with null and expects the exception; it uses no returned exception object. This source line is identical to the previous tested fixture."
+    },
+    {
+      "raw": "UseConcurrentHashMap",
+      "owner": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/MediaRangeService.java",
+      "line": 96,
+      "verdict": "REQUEST_LOCAL_MAP_NOT_CONCURRENTLY_SHARED",
+      "rationale": "This method allocates the map on each invocation. Only the immutable copy is handed to the response; no instance, static, or callback retains the mutable object."
+    }
+  ],
+  "inScopeRaw": 3,
+  "applicableFindings": 0,
+  "unclassified": 0,
+  "rulesOrCoverageExclusionsChanged": false,
+  "publicDescriptorEqual": true,
+  "oldJavap": {
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+      "-public",
+      "-s",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41256-media-current-five-types-single-exec-v1/physical/MediaRangeService.class"
+    ],
+    "exit": 0,
+    "stdoutSha256": "d570a709bee841986ce5c7793ebda104cd9778aa383d8648a5bf746082ba8ef5",
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "newJavap": {
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+      "-public",
+      "-s",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41260-media-current-five-types-corrected-v1/physical/MediaRangeService.class"
+    ],
+    "exit": 0,
+    "stdoutSha256": "d570a709bee841986ce5c7793ebda104cd9778aa383d8648a5bf746082ba8ef5",
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "abiSha256": "d570a709bee841986ce5c7793ebda104cd9778aa383d8648a5bf746082ba8ef5",
+  "productTestsReplayed": 0,
+  "wholeF03": false,
+  "whole451": false,
+  "formalDelta": 0
+}
