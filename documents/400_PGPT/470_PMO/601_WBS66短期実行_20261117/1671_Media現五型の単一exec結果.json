@@ -1,0 +1,174 @@
+{
+  "eventId": "PGPT-20261008-7186",
+  "groupId": "P00904-FiveCurrentClassesSingleExec",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T21:54:29.411000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 82,
+      "remainingPercent": 18,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "P00904-FiveCurrentClassesSingleExec",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "P00904-FiveCurrentClassesSingleExec",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P009-04"
+    ],
+    "managementWorkIds": [
+      "WBS-P009-04/2"
+    ],
+    "source": "f0667d5d025dc0a8cdc0e5e4049925c20f61a963",
+    "productionCoreMain": "6c2e8b027818c8dac0ed0f895edb85658e9c4ff1",
+    "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "run": "PG41256",
+    "estimateAtGroupStartPp": {
+      "low": 0.25,
+      "base": 0.75,
+      "high": 1.4
+    },
+    "groupCapPp": 1.8,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1669_G08現重点と独立試験のtrace完了・次工程.json",
+        "sha256": "c3a2a126074fb4c709084e3ad159f239530c7b3b9c3927342f77f6e04666058e"
+      },
+      {
+        "path": "evidence/01_PT/009_NK-MED-001/4099_Media配信での無効Range応答単体仕様・結果.md",
+        "sha256": "d24fe7221556b568e78b08a272bbd1cf0d34a95c79df7f81b25eda33380d9bbb"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41204-range-unit-ascii-affected-v1/manifest.json",
+        "sha256": "c879718e0132f37d326ac917d29378479347d11bc58ba49b9050a28c703f3d10"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41250-media-current-range-response-port-v1/manifest.json",
+        "sha256": "4157fa87b942a680279fb1195873ebe34f7353a80c92cf53a6a880c13927f6d7"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41252-media-current-range-independent-v1/manifest.json",
+        "sha256": "d96aa29fef40d137f2421e10b7ea9a6eeee17c0bbc5ad362e078c970e1e66cbd"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38198-borrowed-file-whole7-independent-v1/manifest.json",
+        "sha256": "9a43a88185a4cf30dc6746bd2709f06c427cc7321de5fac67382606a619292af"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "現13物理の旧12case実execにはB16欠落。JDKのmatch switch defaultと実不足を同execで位置付ける。以前の各部分成功は合算不可。",
+    "endCondition": "単一当source/runで既承認の全港scope27を一回実行し、元XML/exec→13 classの行・method・branchを独立実測。未到達と実環境HOLDを明記。",
+    "workScope": "純粋parser、memory response、閉じたvalue、既承認PT-MED-006自己所有TempDirだけ。MediaRangeServiceTest実Linux/Nativeは未選択・抽出なし。",
+    "quotaAfter": {
+      "usedPercent": 82,
+      "remainingPercent": 18,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "7059d2f4db7e8f52223fa42f7117c0aadeb95542b8633a2997c81a8b0bac8496",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T21:54:29.411000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 82,
+          "remainingPercent": 18,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T21:54:02.623401+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 82,
+      "remainingPercent": 18,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-7185",
+    "attempt": 1,
+    "attemptResult": "現Mainの11 class 27既試験全成功、元を合算せず生L139/M38/C9/B73。残M1はReason.valueOf、残B1はrespondのコンパイラMatchException。",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 26,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41256-media-current-five-types-single-exec-v1/manifest.json",
+        "sha256": "c23190b1eb8a0ebfa6a4e8efefbc0a758b11da2411144cb60b428933c8780755"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41258-media-current-five-types-single-independent-v1/manifest.json",
+        "sha256": "74428097ca05f898775078a4005c02233dc123140b7b57fd88eed896a5a2eebe"
+      },
+      {
+        "path": "evidence/01_PT/009_NK-MED-001/4100_Media五型の同一実行・残coverage.md",
+        "sha256": "8f97c64f7a483feff4c475dcdcb9808bd1e47284043f32ad8dd238a81de9a2df"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41256-media-current-five-types-single-exec-v1/preflight.json",
+        "sha256": "24db53bc1e3bc7d44d07f2ed8fff47aaac40eb7207dec58b6ac1c90b06e4040e"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "実HTTP/Native/asset owner、Coverage M1B1残、全451/CHR"
+    ],
+    "existingProductRequalifications": 26,
+    "fixtureProbe": 1,
+    "junitAttempts": 1,
+    "preflightFailures": 1,
+    "rawCounters": {
+      "LINE": {
+        "covered": 139,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 38,
+        "missed": 1
+      },
+      "CLASS": {
+        "covered": 9,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 73,
+        "missed": 1
+      },
+      "INSTRUCTION": {
+        "covered": 725,
+        "missed": 11
+      }
+    },
+    "noOldExecUnion": true,
+    "noCoverageExclusions": true
+  }
+}
