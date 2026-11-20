@@ -1,0 +1,147 @@
+{
+  "eventId": "PGPT-20261008-6642",
+  "groupId": "wbs66-f03-cleanup-pmd-exact-prior-reconciliation",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T08:24:03.109000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 65,
+      "remainingPercent": 35,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "wbs66-f03-cleanup-pmd-exact-prior-reconciliation",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "wbs66-f03-cleanup-pmd-exact-prior-reconciliation",
+    "workAttributionKind": "SOURCE_REQUALIFICATION",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "source": "14251af1509895d1451a14ea577187eacb3d9c8d",
+    "productionCoreMain": "517a23cddc9f3883550942f6fa90a4256ef39b73",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40760-f03-cleanup-24-retained-pmd-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.2,
+      "base": 0.55,
+      "high": 1.1
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1122_短期引渡し適用結果と継続点.json",
+        "sha256": "3ebb4d8d7a1135c5a9f90d1d9b59bac82a01e5968ad1ed0536f291fb055ba87b"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40748-f03-cleanup-terminal-current-typed-v1/manifest.json",
+        "sha256": "31119851e87b8fadca786f92986caddfbcf40ef81093a21409025aaf9efda8e9"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40528-f03-batch-raw-exact-historical-lookups-v1/manifest.json",
+        "sha256": "f482a7aeca548564c9fe1b5166d61647f4e688192e47e2a766deb733661bcd90"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40524-f03-batch-closed-current-pmd-v1/manifest.json",
+        "sha256": "46d81a6a33cfbaea0d0100fe423f24614f1b94e76e310879165664a3033e5ffe"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40754-f03-current-batch-pmd-lineage-v1/manifest.json",
+        "sha256": "9dfe9b982c55ab163ddfddb4b47b20fa413f00ad60af55236f8c6b1b9f950c80"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "24 current unclassified Cleanup diagnostics in read/readRejected remain after PG40748. The exact historical classification table covers both. Check existing source line equivalence and binding only.",
+    "endCondition": "For each current raw occurrence, verify exact old rule, method, coordinate mapping, message and its original verdict ID with old/source SHA. Any source delta or unresolved correlation stays open.",
+    "workScope": "Static evidence only. No held execution, failing cohort recovery analysis, new static gate run or DB operation.",
+    "quotaAfter": {
+      "usedPercent": 65,
+      "remainingPercent": 35,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "8b108d7ddcfbe32f7cd96a5aae3a2fe09ca01cf238666d01f22eab51e215f173",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T08:24:03.109000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 65,
+          "remainingPercent": 35,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T08:23:50.765205+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 65,
+      "remainingPercent": 35,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6641",
+    "attempt": 2,
+    "attemptResult": "CURRENT_CLEANUP_REMAINING_24_STATIC_DISPOSITIONS_BOUND",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40760-f03-cleanup-24-retained-pmd-v1/manifest.json",
+        "sha256": "c69c329e14f69287f7ffa2887bd79840978034763ed1ec998e088fe50ff8817c"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "F03 12 prior held raw in eligible Batch scope, 72 prior excluded Main and all six modules",
+      "F03 Root/QA-056/057 and 451",
+      "F02 full six/runtime and QA-060 date"
+    ],
+    "sourceRequalifiedDispositions": 24,
+    "currentRawForThisClass": 48,
+    "currentRemainingAtThisClass": 0,
+    "newTestsInvoked": 0,
+    "wholeF03": false,
+    "acceptedIndividualSubconditions": [
+      "Current remaining 24 PMD rows directly correlated with previous class-level decision and byte-stable site. Combined with separately PG40748 reviewed same raw 24, all 48 on this class have determinations."
+    ],
+    "caseMethods": {
+      "read": 12,
+      "readRejected": 12
+    },
+    "firstAttemptCause": "Historic method column includes qualified names or null; normalize only non-null names and retain all rule/path/line/column checks.",
+    "runReplay": 0,
+    "reopened": 0
+  }
+}
