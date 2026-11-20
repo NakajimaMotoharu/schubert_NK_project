@@ -22,11 +22,14 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import org.junit.jupiter.api.Test;
+import org.opentest4j.AssertionFailedError;
 
 /** PT-MED-PORT001..010. Memory-only response/byte-channel ports; no path, native or HTTP client. */
 final class MediaRangePortTest {
@@ -39,7 +42,7 @@ final class MediaRangePortTest {
   private static final String SYNTHETIC_FAILURE = "own synthetic port failure";
 
   @Test
-  void literalStatusHeadersAndByteIntervals() throws Exception {
+  void literalStatusHeadersAndByteIntervals() throws MediaDeliveryException {
     for (Vector vector :
         List.of(
             new Vector(Optional.empty(), 200, 0, SIZE, null),
@@ -72,7 +75,7 @@ final class MediaRangePortTest {
   }
 
   @Test
-  void headNeverRequestsBodyAndAttachmentIgnoresRange() throws Exception {
+  void headNeverRequestsBodyAndAttachmentIgnoresRange() throws MediaDeliveryException {
     Probe source = new Probe();
     MediaRangeService service = new MediaRangeService(source);
     for (Optional<String> range :
@@ -94,7 +97,7 @@ final class MediaRangePortTest {
   }
 
   @Test
-  void descriptorBindingRejectsEachMismatchBeforeSourceAdmission() throws Exception {
+  void descriptorBindingRejectsEachMismatchBeforeSourceAdmission() throws MediaDeliveryException {
     Probe source = new Probe();
     MediaRangeService service = new MediaRangeService(source, 1);
     MediaDescriptor descriptor = descriptor(ContentDisposition.INLINE);
@@ -123,7 +126,8 @@ final class MediaRangePortTest {
   }
 
   @Test
-  void configuredBoundariesAndDefaultTwentyRejectTwentyFirstAndRecover() throws Exception {
+  void configuredBoundariesAndDefaultTwentyRejectTwentyFirstAndRecover()
+      throws MediaDeliveryException {
     for (int invalid : new int[] {Integer.MIN_VALUE, 0, 21, Integer.MAX_VALUE}) {
       assertThrows(
           IllegalArgumentException.class, () -> new MediaRangeService(new Probe(), invalid));
@@ -152,7 +156,7 @@ final class MediaRangePortTest {
   }
 
   @Test
-  void eachCheckedFailureIsRedactedAndReleasesSinglePermit() throws Exception {
+  void eachCheckedFailureIsRedactedAndReleasesSinglePermit() throws MediaDeliveryException {
     for (String fault : List.of("source", "begin", "body", "write", "read")) {
       Probe source = new Probe();
       source.fault = fault;
@@ -178,7 +182,7 @@ final class MediaRangePortTest {
   }
 
   @Test
-  void runtimeFailureEscapesUnchangedAndStillReleasesPermit() throws Exception {
+  void runtimeFailureEscapesUnchangedAndStillReleasesPermit() throws MediaDeliveryException {
     Probe source = new Probe();
     IllegalStateException original = new IllegalStateException(SYNTHETIC_FAILURE);
     AtomicInteger attempts = new AtomicInteger();
@@ -206,7 +210,8 @@ final class MediaRangePortTest {
   }
 
   @Test
-  void directErrorBeforeResponseEscapesUnchangedAndReleasesThePermit() throws Exception {
+  void directErrorBeforeResponseEscapesUnchangedAndReleasesThePermit()
+      throws MediaDeliveryException {
     var fatal = new AssertionError("synthetic fatal port failure");
     var source = new Probe();
     var attempts = new AtomicInteger();
@@ -238,7 +243,8 @@ final class MediaRangePortTest {
   }
 
   @Test
-  void writeErrorAfterBeginClosesSourceWithoutRetryingAndReleasesThePermit() throws Exception {
+  void writeErrorAfterBeginClosesSourceWithoutRetryingAndReleasesThePermit()
+      throws MediaDeliveryException {
     var fatal = new AssertionError("synthetic fatal write failure");
     var source = new Probe();
     var service = new MediaRangeService(source, 1);
@@ -302,7 +308,7 @@ final class MediaRangePortTest {
   }
 
   @Test
-  void nullContractGuardsRejectBeforeAnyPortAndDoNotConsumePermit() throws Exception {
+  void nullContractGuardsRejectBeforeAnyPortAndDoNotConsumePermit() throws MediaDeliveryException {
     Probe source = new Probe();
     assertThrows(NullPointerException.class, () -> new MediaRangeService(null));
     MediaRangeService service = new MediaRangeService(source, 1);
@@ -329,7 +335,8 @@ final class MediaRangePortTest {
   }
 
   @Test
-  void twoConcurrentRequestsObserveOnePermitWithoutSharingResponseState() throws Exception {
+  void twoConcurrentRequestsObserveOnePermitWithoutSharingResponseState()
+      throws MediaDeliveryException, InterruptedException, ExecutionException, TimeoutException {
     Probe source = new Probe();
     CountDownLatch entered = new CountDownLatch(1);
     CountDownLatch release = new CountDownLatch(1);
@@ -496,7 +503,6 @@ final class MediaRangePortTest {
     if (contentRange != null) headers.put(CONTENT_RANGE, contentRange);
     assertEquals(status, reply.status);
     assertEquals(headers, reply.headers);
-    assertThrows(UnsupportedOperationException.class, () -> reply.headers.put("X", "Y"));
     byte[] expected = new byte[head ? 0 : length];
     for (int i = 0; i < expected.length; i++) expected[i] = (byte) ((start + i) * 19 + 7);
     assertArrayEquals(expected, reply.bytes.toByteArray());
@@ -531,6 +537,17 @@ final class MediaRangePortTest {
     }
   }
 
+  @Test
+  void replyFixtureRejectsMutableHeadersBeforeTakingItsSnapshot() {
+    var reply = new Reply();
+    var mutable = new java.util.HashMap<String, String>();
+    mutable.put("Content-Length", "3");
+
+    assertThrows(AssertionFailedError.class, () -> reply.begin(206, mutable));
+    assertEquals(0, reply.status);
+    assertTrue(reply.headers.isEmpty());
+  }
+
   private static final class Reply implements MediaRangeService.Response {
     String fault = "none";
     int status;
@@ -544,8 +561,9 @@ final class MediaRangePortTest {
     public void begin(int value, Map<String, String> values) throws IOException {
       begins++;
       if (fault.equals("begin")) throw new IOException(SYNTHETIC_FAILURE);
+      assertThrows(UnsupportedOperationException.class, () -> values.put("X", "Y"));
       status = value;
-      headers = values;
+      headers = Map.copyOf(values);
     }
 
     @Override
