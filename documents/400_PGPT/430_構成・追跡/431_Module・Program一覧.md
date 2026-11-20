@@ -1001,3 +1001,5 @@ PT-WEB-SCR011-COUNT-001、WBS-P016-11/2-照合、SS313 §2・UI235 §7。カテ�
 PT-WEB-SCR009-COUNT-001、WBS-P016-09/2-照合、SS313 §2・UI235 §5。Animation一覧の件数過大申告。 [局所仕様](../../../evidence/01_PT/016_NK-WEB-002/4942_SCR009Animation件数過大側の単体仕様.md)。
 
 PT-WEB-SCR013-COUNT-001、WBS-P016-13/2、SS313 §2・UI235 §9。曲一覧の件数過大申告。 [局所仕様](../../../evidence/01_PT/016_NK-WEB-002/4944_SCR013曲一覧件数過大側の単体仕様.md)。
+
+PT-MED-RANGE-LONG-001、WBS-P009-04/2、SS333 §10.1–10.2。符号付き上限のRange演算。 [局所仕様](../../../evidence/01_PT/009_NK-MED-001/4090_Range長整数上限の隣接境界仕様・結果.md)。

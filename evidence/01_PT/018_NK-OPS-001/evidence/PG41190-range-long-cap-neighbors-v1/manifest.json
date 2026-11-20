@@ -1,0 +1,176 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-20T20:33:02.683032+00:00",
+  "testId": "PT-MED-RANGE-LONG-001",
+  "productionCore": "559f5b5945e82374e0843dcfae11a8d07faef1ea",
+  "run": "PG41190-range-long-cap-neighbors-v1",
+  "canonicalSS333Sha256": "20a5caaddf102186787680b06199821bebcf5522f65feebd41635d90ae228f12",
+  "sharedEarlierInputs": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37552-range-namespace5-independent-v1/manifest.json",
+    "sha256": "3fd0724a8f33293237b25d779ac5b504fb974e2df75b33c3a76d1f36a9441603"
+  },
+  "testSource": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeLongBoundaryTest.java",
+    "sha256": "5e5d9c536d63eefbb3e11a2df87fda97edad4845a5ee14b068e67291af590124"
+  },
+  "cases": 1,
+  "vectors": 2,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "stages": {
+    "format": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeLongBoundaryTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "checkstyle": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeLongBoundaryTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "d17b77cd4501a55acf695504fd2e8b053868169e5c058378efb9d3e8076bf0b5",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compile": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "-d",
+        "/dev/shm/pgpt-range-long-9ka5mglv/classes",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/HttpByteRangeParser.java",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeLongBoundaryTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "junit": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Dfile.encoding=UTF-8",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/PG41190-range-long-cap-neighbors-v1/unit.exec,append=false,sessionid=PG41190-range-long-cap-neighbors-v1",
+        "-cp",
+        "/dev/shm/pgpt-range-long-9ka5mglv/classes:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "org.junit.platform.console.ConsoleLauncher",
+        "execute",
+        "--disable-banner",
+        "--details=summary",
+        "--fail-if-no-tests",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41190-range-long-cap-neighbors-v1/xml",
+        "--select-class",
+        "dev.codex.schubert.nk.web.media.HttpByteRangeLongBoundaryTest"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e1d7d90fe47489926abeada80db284fba057420dd9298cd980c558a8058bab94",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "independentArithmetic": {
+    "total": 9223372036854775807,
+    "cap": 1048576,
+    "firstStart": 9223372036853727232,
+    "end": 9223372036854775806,
+    "length": 1048575,
+    "nextStart": 9223372036853727233,
+    "expectedOverflowAfterMaximum": 9223372036854775808
+  },
+  "physical": {
+    "dev/codex/schubert/nk/web/media/HttpByteRangeParser$Full.class": "5541bfc3116d2d5c17af2e3306124a9cae2c28cfee1bdf3d93717a645ef199ac",
+    "dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial.class": "1ab4ebb2d0a5e8aab23e2bf1abd205a333f1b7a6064f4931813df968e18ec541",
+    "dev/codex/schubert/nk/web/media/HttpByteRangeParser$Selection.class": "44bbe8f708ab5b50ffb0c0bc64776e7e31361eb7ba88efb22873d40fb0f23bbe",
+    "dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable.class": "77b54edaf661cb1002809bbc53bc325c6c1b21839cf969e5a071a7f5aa82e8de",
+    "dev/codex/schubert/nk/web/media/HttpByteRangeParser.class": "c5192aac6be81add9fb43a1c43aba92c4f0c83ee4525557b7fa0b11d96b97c72"
+  },
+  "sameOldPhysical": {
+    "dev/codex/schubert/nk/web/media/HttpByteRangeParser$Full.class": false,
+    "dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial.class": false,
+    "dev/codex/schubert/nk/web/media/HttpByteRangeParser$Selection.class": true,
+    "dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable.class": false,
+    "dev/codex/schubert/nk/web/media/HttpByteRangeParser.class": false
+  },
+  "actualProbeRecords": {
+    "crc64": "e038021ed1d9ecee",
+    "probeCount": 35,
+    "hitProbeIds": [
+      4,
+      6,
+      7,
+      8,
+      10,
+      11,
+      13,
+      16,
+      17,
+      22,
+      23,
+      25,
+      27,
+      30,
+      31,
+      32,
+      34
+    ],
+    "missedProbeIds": [
+      0,
+      1,
+      2,
+      3,
+      5,
+      9,
+      12,
+      14,
+      15,
+      18,
+      19,
+      20,
+      21,
+      24,
+      26,
+      28,
+      29,
+      33
+    ]
+  },
+  "locallyPreserved": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41190-range-long-cap-neighbors-v1/terminal.json",
+      "sha256": "f464bfeb6e65df3c00ee9f83ce72f98ba0c78f7e7ec8a586003b411f27008b0a"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41190-range-long-cap-neighbors-v1/unit.exec",
+      "sha256": "c7e91d6d67c60e868fc5caf206ebf4c7a2da26330cfecd0a89678ecd97ad7b7e"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41190-range-long-cap-neighbors-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "5988ae80dc31b71261f85a1382b8d39e4fef9e843aee51cf497aae73e6b05056"
+    }
+  ],
+  "oldSuccessReplayed": 0,
+  "actualHttpFsOrMediaActions": 0,
+  "whole451": false,
+  "formalDelta": 0
+}

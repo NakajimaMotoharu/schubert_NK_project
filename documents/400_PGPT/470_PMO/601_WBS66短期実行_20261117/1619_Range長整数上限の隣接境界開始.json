@@ -1,0 +1,63 @@
+{
+  "eventId": "PGPT-20261008-7134",
+  "groupId": "WBS66-P00904-RANGE-LONG-CAP-NEIGHBORS",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T20:31:58.874000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 80,
+      "remainingPercent": 20,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66-P00904-RANGE-LONG-CAP-NEIGHBORS",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "WBS66-P00904-RANGE-LONG-CAP-NEIGHBORS",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P009-04"
+    ],
+    "managementWorkIds": [
+      "WBS-P009-04/2"
+    ],
+    "source": "eff398d2b1b95c959b9457712ca9e985b1edecbe",
+    "productionCoreMain": "559f5b5945e82374e0843dcfae11a8d07faef1ea",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG41190-range-long-cap-neighbors-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.39,
+      "high": 0.85
+    },
+    "groupCapPp": 1.0,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1618_SCR013局所試験と次工程.json",
+        "sha256": "54e71d90efbb26a28b2f9579a88fdea60b7ecfc29e1f1fe208a39bf1b6c5308a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37552-range-namespace5-independent-v1/manifest.json",
+        "sha256": "3fd0724a8f33293237b25d779ac5b504fb974e2df75b33c3a76d1f36a9441603"
+      },
+      {
+        "path": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+        "sha256": "20a5caaddf102186787680b06199821bebcf5522f65feebd41635d90ae228f12"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "SS333 §10.1，10.2の加算overflow規則。既5の一般overflowと範囲上限証拠に隣接2境界を追加。合成String/longだけ",
+    "endCondition": "厳密な最大合計値が表現可能と超過する2入力で、区間と無選択を独立比較し原XML/exec/対象CRCを確認",
+    "workScope": "PT-MED-RANGE-LONG-001; JDK/JUnit only, no HTTP/DB/stream or file content access; compile /dev/shm <32MiB"
+  }
+}

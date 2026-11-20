@@ -1,0 +1,130 @@
+{
+  "eventId": "PGPT-20261008-7135",
+  "groupId": "WBS66-P00904-RANGE-LONG-CAP-NEIGHBORS",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T20:33:57.936000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 80,
+      "remainingPercent": 20,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66-P00904-RANGE-LONG-CAP-NEIGHBORS",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "WBS66-P00904-RANGE-LONG-CAP-NEIGHBORS",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P009-04"
+    ],
+    "managementWorkIds": [
+      "WBS-P009-04/2"
+    ],
+    "source": "eff398d2b1b95c959b9457712ca9e985b1edecbe",
+    "productionCoreMain": "559f5b5945e82374e0843dcfae11a8d07faef1ea",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG41190-range-long-cap-neighbors-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.39,
+      "high": 0.85
+    },
+    "groupCapPp": 1.0,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1618_SCR013局所試験と次工程.json",
+        "sha256": "54e71d90efbb26a28b2f9579a88fdea60b7ecfc29e1f1fe208a39bf1b6c5308a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37552-range-namespace5-independent-v1/manifest.json",
+        "sha256": "3fd0724a8f33293237b25d779ac5b504fb974e2df75b33c3a76d1f36a9441603"
+      },
+      {
+        "path": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+        "sha256": "20a5caaddf102186787680b06199821bebcf5522f65feebd41635d90ae228f12"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "SS333 §10.1，10.2の加算overflow規則。既5の一般overflowと範囲上限証拠に隣接2境界を追加。合成String/longだけ",
+    "endCondition": "厳密な最大合計値が表現可能と超過する2入力で、区間と無選択を独立比較し原XML/exec/対象CRCを確認",
+    "workScope": "PT-MED-RANGE-LONG-001; JDK/JUnit only, no HTTP/DB/stream or file content access; compile /dev/shm <32MiB",
+    "quotaAfter": {
+      "usedPercent": 80,
+      "remainingPercent": 20,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "fd6843cff74f44a36738bd313d885d971c90d24a3627164ccce2865bb869dd40",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T20:33:57.936000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 80,
+          "remainingPercent": 20,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T20:33:44.144710+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 80,
+      "remainingPercent": 20,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-7134",
+    "attempt": 1,
+    "attemptResult": "PRODUCT_BOUNDARY_PASSED_WITH_INDEPENDENT_CRC",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 1,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41190-range-long-cap-neighbors-v1/manifest.json",
+        "sha256": "8c182db6c47e37efd11197ba18b064de2c4370e7ee334c1c9a7e90915472fa39"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41192-range-long-cap-independent-v1/manifest.json",
+        "sha256": "121928cffcbc74a9e4ec88ea06eb5bfbf3b407816800203b7b49f8db24c20d64"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": "現HTTP、実配信、451とP009-04終了依存は未成立。PG37652旧156はProtocol、SCR012の対象外。",
+    "firstActualProductCases": 1,
+    "firstActualProductPassed": 1,
+    "independentVariants": 3,
+    "testId": "PT-MED-RANGE-LONG-001",
+    "actualHttpOrMediaOperations": 0,
+    "oldCasesReplayed": 0
+  }
+}
