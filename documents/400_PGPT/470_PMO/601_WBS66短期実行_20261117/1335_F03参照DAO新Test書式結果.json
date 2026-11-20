@@ -1,0 +1,137 @@
+{
+  "eventId": "PGPT-20261008-6851",
+  "groupId": "f03-rrf009-single-test-style",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T14:25:46.134000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 71,
+      "remainingPercent": 29,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "f03-rrf009-single-test-style",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "f03-rrf009-single-test-style",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "source": "09753272d1bbbe8569b773343d77846b19b35426",
+    "productionCoreMain": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40916-f03-run-reference-test-style-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.08,
+      "base": 0.22,
+      "high": 0.45
+    },
+    "groupCapPp": 0.75,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1333_P00403参照DAO三経路例外順位継続点.json",
+        "sha256": "d07b09dce5797f0449165995f15b1ab8da7399a8c9908b77c87ed75a8a8eb642"
+      },
+      {
+        "path": "evidence/01_PT/004_NK-DAT-001/evidence/PG40914-p00403-run-reference-combined-close-v1/manifest.json",
+        "sha256": "c89f23be14bf928e68927b0e4638aed4db8ab975a35949393792dc72bcb7522d"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40888-f03-current-style-lineage-v1/manifest.json",
+        "sha256": "4ef7e6e62b21b985dc9bb718261961638ab3771e01337b8909af61a22e9e90f6"
+      },
+      {
+        "path": "tools/quality/static/checkstyle.xml",
+        "sha256": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "PG40914にRRF-PURE-009の新しい単体成功と固定Main7・Test1。実行候補は変更Test一つのみ。",
+    "endCondition": "変更Testが現在HEADとPG40914の同一バイト。JDK25でGJFと無除外Checkstyle既案を実行し各exitと期待を保存。過去main広域を再演しない。",
+    "workScope": "承認済み静的工具が読む変更Test一つ。製品jar/QA056/全回帰/実環境は対象外。",
+    "quotaAfter": {
+      "usedPercent": 71,
+      "remainingPercent": 29,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "61839a7bbcfc4b684948475fc4dab5a2e9fedbfbcae8a9f9c5c1178757ede2b4",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T14:25:46.134000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 71,
+          "remainingPercent": 29,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T14:25:18.755364+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 71,
+      "remainingPercent": 29,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6850",
+    "attempt": 1,
+    "attemptResult": "SCOPED_STYLE_VERIFIED",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/004_NK-DAT-001/evidence/PG40916-f03-run-reference-test-style-v1/manifest.json",
+        "sha256": "795f26a51862805f98397ea4eb17fd82bfa56096359899ca17575fdcdde3258d"
+      },
+      {
+        "path": "evidence/01_PT/004_NK-DAT-001/input/457_run_reference_combined_close_style.py",
+        "sha256": "0932c1cd3a490dead67c12815a678b9a5ec1648b7866dfcfd3de55aa2b545679"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "F03全六moduleのRoot11／保留32Test／型付き終端",
+      "P004-03実DB、原本と全451"
+    ],
+    "changedTestsChecked": 1,
+    "formatterFindings": 0,
+    "checkstyleFindings": 0,
+    "actualProductTestRuns": 0,
+    "actualAnalyzerRuns": 2,
+    "actualExternalActions": 0
+  }
+}

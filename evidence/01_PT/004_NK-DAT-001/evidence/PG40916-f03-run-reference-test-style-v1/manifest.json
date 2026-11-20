@@ -1,0 +1,64 @@
+{
+  "actualExit": 0,
+  "source": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+  "testCommit": "09753272d1bbbe8569b773343d77846b19b35426",
+  "startEvent": "PGPT-20261008-6850",
+  "testId": "RRF-PURE-009",
+  "terminalAtUTC": "2026-11-20T14:25:18.755364+00:00",
+  "fixture": {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryPureJdbcTest.java",
+    "sha256": "9985c4ea628dc9ac8178f680882383bf15cb4a74798d1c70b29c01b62dbd40eb"
+  },
+  "inputs": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/release",
+      "sha256": "fc1b6c466fbf603872858a3a18c1afe444d68d97c560237dcfde52cfa25f10a1"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+      "sha256": "25b400f003089d23cc5320cdaf1a16cabee19b8aa3434d0ff021b3d9f42154b4"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+      "sha256": "754e218ab1fcabb1e1c5f8530e9d3aa37636806c22987bb279dd907a6ee749b2"
+    },
+    {
+      "path": "tools/quality/static/checkstyle.xml",
+      "sha256": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+    }
+  ],
+  "formatting": {
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-jar",
+      "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+      "--dry-run",
+      "--set-exit-if-changed",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryPureJdbcTest.java"
+    ],
+    "exitCode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "checkstyle": {
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-jar",
+      "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+      "-c",
+      "tools/quality/static/checkstyle.xml",
+      "-f",
+      "xml",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryPureJdbcTest.java"
+    ],
+    "exitCode": 0,
+    "stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<checkstyle version=\"14.3.0\">\n<file name=\"/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryPureJdbcTest.java\">\n</file>\n</checkstyle>\n",
+    "stderr": ""
+  },
+  "observedFiles": 1,
+  "observedFindings": 0,
+  "testsRerun": 0,
+  "productMainAnalyzed": 0,
+  "wholeF03": false,
+  "formalDelta": 0
+}
