@@ -340,6 +340,39 @@ final class WebLogPayloadCodecTest {
     }
   }
 
+  /** PT-WEB-WEBLOG-OWN002: admission failure order and borrowed key ownership. */
+  @Test
+  void invalidConfigurationPreservesFailureOrderAndBorrowedKeys() {
+    byte[] current = sequence(32, 0);
+    byte[] previous = sequence(32, 32);
+    assertEquals(
+        "web log key must contain exactly 256 bits",
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new WebLogPayloadCodec("v2", new byte[31], "v1", null, null))
+            .getMessage());
+    assertEquals(
+        "previous web log key and version must be paired",
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new WebLogPayloadCodec("v2", current, null, previous, null))
+            .getMessage());
+    assertEquals(
+        "web log key versions must be distinct",
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new WebLogPayloadCodec("v2", current, "v2", previous, null))
+            .getMessage());
+    assertEquals(
+        "random",
+        assertThrows(
+                NullPointerException.class,
+                () -> new WebLogPayloadCodec("v2", current, "v1", previous, null))
+            .getMessage());
+    assertArrayEquals(sequence(32, 0), current);
+    assertArrayEquals(sequence(32, 32), previous);
+  }
+
   @Test
   void unavailableCipherProviderHasBoundedFailureAndNoRawProviderCause() throws Exception {
     EncryptedWebLogPayload payload = independentPayload("v2", CURRENT, goldenWire());
