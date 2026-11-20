@@ -1,0 +1,69 @@
+{
+  "eventId": "PGPT-20261008-6884",
+  "groupId": "p01809-missing-observation-isolation",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T15:03:36.602000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 72,
+      "remainingPercent": 28,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "p01809-missing-observation-isolation",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "p01809-missing-observation-isolation",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P018-09"
+    ],
+    "managementWorkIds": [],
+    "source": "7ece8456a784806b2851733722ef0458b697df96",
+    "productionCoreMain": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40938-p01809-recovery-per-key-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.13,
+      "base": 0.35,
+      "high": 0.72
+    },
+    "groupCapPp": 0.9,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1367_WBS66短期受入の保留条件と現保全点.json",
+        "sha256": "d4c3b73b0e9e132747a20751c0c3144e0dbc4705a3370c8fd74793581c20967f"
+      },
+      {
+        "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+        "sha256": "860f584a2f032e9b06112907f8ec138a12d0b69b94546f7e17ad7dfb9b65414c"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25474-web-http-terminal-source-review-v1/manifest.json",
+        "sha256": "fde33244650c350469ee4f8ab5bb9041ddc8f1b35b0d9b32058c571808645539"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25476-web-http-terminal-source-independent-v1/manifest.json",
+        "sha256": "9a0b510cf52a06473343d00f3f075429406d44f6fdd4c7aeaf7c5d92e12ae33b"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40798-timed-alert-pending-recovery-v2/manifest.json",
+        "sha256": "75a60a041819ef5129da4fd6f8d527ac354d4e1ce3acf32062b3fcd88cd5f8af"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "A1-38.01 HttpMetricValve原HTTPTERM001–008はPG25474/25476のsource reviewのみ。WebStartupException classfile依存をHOLD、MetricContext66流用0。独立Batch側へ移る。",
+    "endCondition": "SS351 §7に基づく一条件一サービスの復旧。欠測対象の1キーだけ回復窓が再開され、同条件別サービス、同サービス別条件は300秒で閉じる新規一件の真正終端を確認。",
+    "workScope": "MonitoringPolicyEngine/AlertRegistryの合成時刻・純値だけ。既Test再演、実観測、DB、HTTP、Tomcat、QA056、起動なし。"
+  }
+}

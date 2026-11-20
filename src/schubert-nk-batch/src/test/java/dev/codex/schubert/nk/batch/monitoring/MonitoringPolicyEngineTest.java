@@ -1,6 +1,7 @@
 package dev.codex.schubert.nk.batch.monitoring;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -15,6 +16,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.Callable;
@@ -22,7 +24,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
-/** Independent SS351 input literals and fixed expected identity/levels; PT-OPS-MONPIPE-001..007. */
+/** Independent SS351 input literals and fixed expected identity/levels; PT-OPS-MONPIPE-001..008. */
 class MonitoringPolicyEngineTest {
   private static final Instant TIME = Instant.parse("2026-10-23T00:00:00Z");
   private static final Duration ZERO = Duration.ZERO;
@@ -335,5 +337,42 @@ class MonitoringPolicyEngineTest {
       }
     }
     assertThrows(UnsupportedOperationException.class, actual::clear);
+  }
+
+  @Test
+  void monPipe008MissingObservationResetsOnlyItsConditionAndService() {
+    var engine = new MonitoringPolicyEngine();
+    var initial = context(0, CauseClearance.UNCONFIRMED);
+    engine.filesystem(Service.WEB, 80, FIVE, ZERO, initial);
+    engine.filesystem(Service.API, 80, FIVE, ZERO, initial);
+    engine.transfer(Service.WEB, 3_500_000_000L, 0, initial);
+
+    var firstNormal = context(1, CauseClearance.UNCONFIRMED);
+    engine.filesystem(Service.WEB, 0, ZERO, ZERO, firstNormal);
+    engine.filesystem(Service.API, 0, ZERO, ZERO, firstNormal);
+    engine.transfer(Service.WEB, 0, 0, firstNormal);
+    engine.observationMissing(Condition.FILESYSTEM, Service.WEB, Duration.ofSeconds(150));
+
+    var peerDeadline = context(301, CauseClearance.UNCONFIRMED);
+    var api = engine.filesystem(Service.API, 0, ZERO, ZERO, peerDeadline).orElseThrow();
+    var transfer = engine.transfer(Service.WEB, 0, 0, peerDeadline).orElseThrow();
+    var web = engine.filesystem(Service.WEB, 0, ZERO, ZERO, peerDeadline).orElseThrow();
+    assertFalse(api.isOpen());
+    assertFalse(transfer.isOpen());
+    assertTrue(web.isOpen());
+    assertEquals(List.of(web), engine.activeAlerts());
+    assertEquals(BigInteger.ONE, web.count());
+
+    assertTrue(
+        engine
+            .filesystem(Service.WEB, 0, ZERO, ZERO, context(600, CauseClearance.UNCONFIRMED))
+            .orElseThrow()
+            .isOpen());
+    assertFalse(
+        engine
+            .filesystem(Service.WEB, 0, ZERO, ZERO, context(601, CauseClearance.UNCONFIRMED))
+            .orElseThrow()
+            .isOpen());
+    assertTrue(engine.activeAlerts().isEmpty());
   }
 }

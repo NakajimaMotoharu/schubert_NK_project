@@ -1,0 +1,153 @@
+{
+  "eventId": "PGPT-20261008-6885",
+  "groupId": "p01809-missing-observation-isolation",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T15:05:28.406000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 72,
+      "remainingPercent": 28,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "p01809-missing-observation-isolation",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "p01809-missing-observation-isolation",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P018-09"
+    ],
+    "managementWorkIds": [],
+    "source": "7ece8456a784806b2851733722ef0458b697df96",
+    "productionCoreMain": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40938-p01809-recovery-per-key-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.13,
+      "base": 0.35,
+      "high": 0.72
+    },
+    "groupCapPp": 0.9,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1367_WBS66短期受入の保留条件と現保全点.json",
+        "sha256": "d4c3b73b0e9e132747a20751c0c3144e0dbc4705a3370c8fd74793581c20967f"
+      },
+      {
+        "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+        "sha256": "860f584a2f032e9b06112907f8ec138a12d0b69b94546f7e17ad7dfb9b65414c"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25474-web-http-terminal-source-review-v1/manifest.json",
+        "sha256": "fde33244650c350469ee4f8ab5bb9041ddc8f1b35b0d9b32058c571808645539"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25476-web-http-terminal-source-independent-v1/manifest.json",
+        "sha256": "9a0b510cf52a06473343d00f3f075429406d44f6fdd4c7aeaf7c5d92e12ae33b"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40798-timed-alert-pending-recovery-v2/manifest.json",
+        "sha256": "75a60a041819ef5129da4fd6f8d527ac354d4e1ce3acf32062b3fcd88cd5f8af"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "A1-38.01 HttpMetricValve原HTTPTERM001–008はPG25474/25476のsource reviewのみ。WebStartupException classfile依存をHOLD、MetricContext66流用0。独立Batch側へ移る。",
+    "endCondition": "SS351 §7に基づく一条件一サービスの復旧。欠測対象の1キーだけ回復窓が再開され、同条件別サービス、同サービス別条件は300秒で閉じる新規一件の真正終端を確認。",
+    "workScope": "MonitoringPolicyEngine/AlertRegistryの合成時刻・純値だけ。既Test再演、実観測、DB、HTTP、Tomcat、QA056、起動なし。",
+    "quotaAfter": {
+      "usedPercent": 72,
+      "remainingPercent": 28,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "d0e60f7aef6a9c4ce8be078ca970566dba7f37709de27f19874890598c8529d5",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T15:05:28.406000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 72,
+          "remainingPercent": 28,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T15:04:53.310574+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 72,
+      "remainingPercent": 28,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6884",
+    "attempt": 1,
+    "attemptResult": "NEW_KEY_ISOLATION_UNIT_PASS",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 1,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40938-p01809-recovery-per-key-v1/manifest.json",
+        "sha256": "1bb109849a4e69c6a2b873e1eea6534df2ecfaa0ec0b8ae5b1f33b7d4da7b811"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40938-p01809-recovery-per-key-v1/coverage.xml",
+        "sha256": "2f325f6e6253bc96fbf972a9b0efd4a3f54dbe3de0e2d246d8ffb192a261cf3c"
+      },
+      {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngineTest.java",
+        "sha256": "20fd64bbd917876f63de65b96c9b1ce9812228809a095ad24cb99763a2d90009"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/5498_警報回復における観測欠落のキー分離仕様.md",
+        "sha256": "469e56aafb9634c3eb45775cfe3249c9214a74d72816d2c00df9316cc9b3632a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5500_monitor_missing_key_pt.py",
+        "sha256": "332251c3f0262b4bbd668e938685234379158ea0f92b3c8918ec773c7ecb8991"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "A1-38.01 HTTPTERM001–008 current dynamic HOLD, QA056 classfile",
+      "P018-09 actual owner and remote sampling",
+      "451"
+    ],
+    "testCount": 1,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "notRun": 0,
+    "testId": "PT-OPS-MONPIPE-008",
+    "actualExternalActions": 0
+  }
+}
