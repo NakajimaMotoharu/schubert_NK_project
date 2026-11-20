@@ -457,7 +457,8 @@ class OutboxObservationRepositoryTest {
     assertSame(ages, actual.ages());
     assertEquals(96447, actual.hashCode());
     assertEquals(
-        "Snapshot[counts=Counts[pending=3, sent=5, error=7], ages=Ages[pending=PT2S, sent=PT4S, error=PT6S]]",
+        "Snapshot[counts=Counts[pending=3, sent=5, error=7], ages=Ages[pending=PT2S, sent=PT4S,"
+            + " error=PT6S]]",
         actual.toString());
     assertThrows(NullPointerException.class, () -> new Snapshot(null, ages));
     assertThrows(NullPointerException.class, () -> new Snapshot(counts, null));
@@ -494,5 +495,36 @@ class OutboxObservationRepositoryTest {
     assertEquals(0, statement.executed);
     assertEquals(1, statement.timeout);
     assertEquals(List.of("PS"), statement.closes);
+  }
+
+  @Test
+  void outboxDb012CompleteReadWithTwoCloseFailuresKeepsFirstReleaseAsPrimary() {
+    var repository = new OutboxObservationRepository();
+    var sql = new SQLException("owned close fixture SQL");
+    var fatal = new AssertionError("owned close fixture fatal");
+    var rows = new Fixture(Row.row(FIXTURE_PENDING_B11DB31F, 3, 5));
+    rows.faults.put(ROWS_CLOSE_POINT, sql);
+    rows.faults.put(STATEMENT_CLOSE_POINT, fatal);
+
+    assertSame(
+        sql, assertThrows(SQLException.class, () -> repository.read(rows.connection(), AS_OF)));
+    assertEquals(1, rows.cursor);
+    assertEquals(List.of(fatal), List.of(sql.getSuppressed()));
+    assertEquals(0, fatal.getSuppressed().length);
+    rows.complete();
+
+    var separateFatal = new AssertionError("owned rows close fixture fatal");
+    var separateSql = new SQLException("owned statement close fixture SQL");
+    var reversed = new Fixture(Row.row(FIXTURE_PENDING_B11DB31F, 3, 5));
+    reversed.faults.put(ROWS_CLOSE_POINT, separateFatal);
+    reversed.faults.put(STATEMENT_CLOSE_POINT, separateSql);
+
+    assertSame(
+        separateFatal,
+        assertThrows(AssertionError.class, () -> repository.read(reversed.connection(), AS_OF)));
+    assertEquals(1, reversed.cursor);
+    assertEquals(List.of(separateSql), List.of(separateFatal.getSuppressed()));
+    assertEquals(0, separateSql.getSuppressed().length);
+    reversed.complete();
   }
 }
