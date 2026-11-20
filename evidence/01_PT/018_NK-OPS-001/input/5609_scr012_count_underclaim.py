@@ -2,7 +2,6 @@
 
 from datetime import datetime, timezone
 from hashlib import sha256
-import io
 import json
 import os
 from pathlib import Path
@@ -23,7 +22,7 @@ OWNER = 'dev.codex.schubert.nk.web.view.MusicSectionCountBoundaryTest'
 TEST = WEB/'test/java'/Path(OWNER.replace('.', '/')+'.java')
 BIN = Path('../toolchain/jdk-25.0.4/bin').resolve()
 TARGET = 'dev/codex/schubert/nk/web/view/MusicSectionViewModel'
-RUN = 'PG41174-scr012-section-count-underclaim-v1'
+RUN = 'PG41176-scr012-section-count-underclaim-fresh-proof-v1'
 
 
 def sha(data):
@@ -115,19 +114,24 @@ def main():
                                                   '-cp',cp,'-d',active,TEST])
         if compiled.returncode:
             raise RuntimeError(compiled.stderr.decode())
-        exec_file = private/'unit.exec'
-        xml = private/'xml'
+        preserved = Path('../pgpt-runs/PG379')/RUN
+        preserved.mkdir()
+        exec_file = preserved.resolve()/'unit.exec'
+        xml = preserved.resolve()/'xml'
         stages['test'], junit = check([BIN/'java','-Dfile.encoding=UTF-8','-Duser.timezone=Asia/Tokyo',
             f'-javaagent:{agent}=destfile={exec_file},append=false,sessionid={RUN}',
             '-cp',cp,'org.junit.platform.console.ConsoleLauncher','execute','--disable-banner',
             '--details=summary','--fail-if-no-tests','--reports-dir',xml,'--select-class',OWNER])
+        (preserved/'terminal.json').write_text(json.dumps(stages['test'],indent=2)+'\n')
         if junit.returncode:
             raise RuntimeError(junit.stdout.decode()+junit.stderr.decode())
         xml_data = (xml/'TEST-junit-jupiter.xml').read_bytes()
         suite = ElementTree.fromstring(xml_data)
         tests = suite.findall('testcase')
         assert len(tests)==1 and tests[0].attrib['classname']==OWNER
-        assert tests[0].attrib['name']=='rejectsDeclaredZeroWhenOneSectionRecordIsPresent()' and not list(tests[0])
+        assert tests[0].attrib['name']=='rejectsDeclaredZeroWhenOneSectionRecordIsPresent()'
+        nonpass = {'failure','error','skipped','flakyFailure','flakyError','rerunFailure','rerunError'}
+        assert not any(child.tag in nonpass for child in tests[0])
         assert [suite.get(k) for k in ('tests','failures','errors','skipped')]==['1','0','0','0']
         new_exec = exec_file.read_bytes()
         measurement = runpy.run_path('tools/quality/jacoco_readonly_exec_subset.py')['decode'](new_exec,{TARGET})
@@ -148,9 +152,11 @@ def main():
                   input=dict(declaredSectionCount=0,actualSectionRows=1,singleRowTrackCount=9),
                   expected='IllegalArgumentException',actual='IllegalArgumentException',
                   datasourceActions=0,webServiceActions=0,sourceFixturesChanged=0,formalDelta=0)
-    for name, blob in [('unit.exec',new_exec),('junit.xml',xml_data)]:
-        with (output/name).open('xb') as f:
-            f.write(blob)
+    normalized = dict(suite={k:suite.get(k) for k in ('tests','failures','errors','skipped')},
+                      testcase={k:tests[0].get(k) for k in ('classname','name')}, rawSha256=sha(xml_data))
+    (output/'case.json').write_text(json.dumps(normalized,indent=2)+'\n')
+    record['case']=pin(output/'case.json')
+    record['localOriginals']=list(map(pin,(preserved/'terminal.json',exec_file,xml/'TEST-junit-jupiter.xml')))
     with path.open('x') as f:
         json.dump(record,f,ensure_ascii=False,indent=2)
         f.write('\n')
