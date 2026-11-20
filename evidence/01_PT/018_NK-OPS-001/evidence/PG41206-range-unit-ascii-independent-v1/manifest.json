@@ -1,0 +1,331 @@
+{
+  "run": "PG41206-range-unit-ascii-independent-v1",
+  "terminalAtUTC": "2026-11-20T20:55:33.821642+00:00",
+  "actualExit": 0,
+  "source": "6c2e8b027818c8dac0ed0f895edb85658e9c4ff1",
+  "prior": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41202-range-unit-ascii-baseline-v1/manifest.json",
+    "sha256": "f3fa8f0f99235a847e4143813925626c7b4da5cf37654fac2a17fb46511b24ed"
+  },
+  "unit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41204-range-unit-ascii-affected-v1/manifest.json",
+    "sha256": "c879718e0132f37d326ac917d29378479347d11bc58ba49b9050a28c703f3d10"
+  },
+  "newProductTestInvocations": 0,
+  "checkedProofs": [
+    {
+      "path": "tools/quality/jacoco/UnfilteredCodeMeasurement.java",
+      "sha256": "acfb221d8853ceac834f862a19717a3242d67bbb8c7508ff1a00fd5db060ef15"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+      "sha256": "ade1e0fdb4cd80d8537b57c6edb70a1360c47fdc518c20c65314517479bc4d0d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar",
+      "sha256": "ed825d10ab1399c8c0cb669e688cf0c8c82629b4c8399b58352b68e92ca10fcb"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar",
+      "sha256": "6d0abefb7cbf972ea16edb37ec14835372505063a45f976ab7ea889ed9497895"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+      "sha256": "3dfb0d5b6a106cd40b5b250e39935fbf2f927f4477546a5369a3ac609cf0506b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41162-p01808-canonical-original-static-v1/manifest.json",
+      "sha256": "8f06a30ef50b5aa969c698bcde4692ce6a819b4bc7115d806507e8085ff7a110"
+    }
+  ],
+  "sourceEntrypoint": {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/HttpByteRangeParser.java",
+    "sha256": "03f48ae2174399c97ec18e3f72451cc1efc698304226bb38c7eeb958a187891f"
+  },
+  "stages": {
+    "compileMeasure": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "-d",
+        "/dev/shm/pgpt-range-receipt-tyd43d9r",
+        "tools/quality/jacoco/UnfilteredCodeMeasurement.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "unfiltered": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/dev/shm/pgpt-range-receipt-tyd43d9r:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+        "--strict-original-exec",
+        "evidence/01_PT/018_NK-OPS-001/evidence/PG41204-range-unit-ascii-affected-v1/unit.exec",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41204-range-unit-ascii-affected-v1/physical/HttpByteRangeParser$Full.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41204-range-unit-ascii-affected-v1/physical/HttpByteRangeParser$Partial.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41204-range-unit-ascii-affected-v1/physical/HttpByteRangeParser$Selection.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41204-range-unit-ascii-affected-v1/physical/HttpByteRangeParser$Unsatisfiable.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41204-range-unit-ascii-affected-v1/physical/HttpByteRangeParser.class"
+      ],
+      "exit": 0,
+      "stdoutSha256": "b30433ea7479f8c63d655aff0fad8a02867ea58e5debc8ddf919a6f47f607cdb",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compileNewTest": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/dev/shm/pgpt-range-receipt-tyd43d9r:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "-d",
+        "/dev/shm/pgpt-range-receipt-tyd43d9r",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeUnitTokenTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "spotbugs": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Xmx1g",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/com/github/spotbugs/spotbugs/4.10.4/spotbugs-4.10.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-analysis/9.10.1/asm-analysis-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-util/9.10.1/asm-util-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/bcel/bcel/6.12.0/bcel-6.12.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/github/stephenc/jcip/jcip-annotations/1.0-1/jcip-annotations-1.0-1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/dom4j/dom4j/2.2.0/dom4j-2.2.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/commons/commons-lang3/3.20.0/commons-lang3-3.20.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/commons/commons-text/1.15.0/commons-text-1.15.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/github/spotbugs/spotbugs-annotations/4.10.4/spotbugs-annotations-4.10.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/jaxen/jaxen/2.0.6/jaxen-2.0.6.jar:/home/mini/codex/project1/work/toolchain/m2/repository/net/sf/saxon/Saxon-HE/12.10/Saxon-HE-12.10.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/logging/log4j/log4j-api/2.26.1/log4j-api-2.26.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.26.1/log4j-to-slf4j-2.26.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-simple/2.0.18/slf4j-simple-2.0.18.jar:/home/mini/codex/project1/work/toolchain/m2/repository/commons-io/commons-io/2.22.0/commons-io-2.22.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/xmlresolver/xmlresolver/5.3.3/xmlresolver-5.3.3.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/xmlresolver/xmlresolver/5.3.3/xmlresolver-5.3.3-data.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+        "edu.umd.cs.findbugs.FindBugs2",
+        "-effort:max",
+        "-low",
+        "-xml:withMessages",
+        "-exitcode",
+        "-auxclasspath",
+        "/dev/shm/pgpt-range-receipt-tyd43d9r:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "-output",
+        "evidence/01_PT/018_NK-OPS-001/evidence/PG41206-range-unit-ascii-independent-v1/spotbugs.xml",
+        "/dev/shm/pgpt-range-receipt-tyd43d9r/dev/codex/schubert/nk/web/media/HttpByteRangeParser$Full.class",
+        "/dev/shm/pgpt-range-receipt-tyd43d9r/dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial.class",
+        "/dev/shm/pgpt-range-receipt-tyd43d9r/dev/codex/schubert/nk/web/media/HttpByteRangeParser$Selection.class",
+        "/dev/shm/pgpt-range-receipt-tyd43d9r/dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable.class",
+        "/dev/shm/pgpt-range-receipt-tyd43d9r/dev/codex/schubert/nk/web/media/HttpByteRangeParser.class",
+        "/dev/shm/pgpt-range-receipt-tyd43d9r/dev/codex/schubert/nk/web/media/HttpByteRangeUnitTokenTest.class"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "83febadc46f214e89709b832aae077e8a743258c2778ad97727d55ed33462071"
+    }
+  },
+  "typedPhysicalHashes": {
+    "HttpByteRangeParser$Full.class": "07a096b771e062b939083c71daf97ee3e07c146fb7c36dfbc77fa85854932e7d",
+    "HttpByteRangeParser$Partial.class": "9c4e54f7715a0b18ef5db819dc6aca51d7ec6b5293bc05c68b658645e7f87d08",
+    "HttpByteRangeParser$Selection.class": "44bbe8f708ab5b50ffb0c0bc64776e7e31361eb7ba88efb22873d40fb0f23bbe",
+    "HttpByteRangeParser$Unsatisfiable.class": "b342e7e1ebca20fc5d87b29ac3a43274473efd6a8c076119e4bde044637cea39",
+    "HttpByteRangeParser.class": "94a6f9e676b8ec4d60adbcd95f3e823991a32b0550975d347b946a78c30f57d6",
+    "HttpByteRangeUnitTokenTest.class": "f1a5304823caa42ef612dd121fd324086e4b85f098564da187cefcb9750e724c"
+  },
+  "findings": [],
+  "missing": 0,
+  "errors": 0,
+  "counters": {
+    "LINE": {
+      "missed": 0,
+      "covered": 44
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 21
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 4
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 32
+    },
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 273
+    }
+  },
+  "classes": {
+    "dev/codex/schubert/nk/web/media/HttpByteRangeParser$Full": {
+      "id": "7f9cc32e6ec8732b",
+      "present": true,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 28
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 2
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 4
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 6
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 5
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial": {
+      "id": "bbe7cdfd2205d6ef",
+      "present": true,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 52
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 6
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 6
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 10
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 7
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/web/media/HttpByteRangeParser$Selection": {
+      "id": "6362b5e57e81bd9a",
+      "present": false,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    "dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable": {
+      "id": "96a7429abeab3202",
+      "present": true,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 30
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 2
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 5
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 5
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/web/media/HttpByteRangeParser": {
+      "id": "99ed5f7f9415a96e",
+      "present": true,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 163
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 24
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 32
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 16
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 4
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    }
+  },
+  "noCounters": [
+    "dev/codex/schubert/nk/web/media/HttpByteRangeParser$Selection"
+  ],
+  "manualExclusions": 0,
+  "output": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41206-range-unit-ascii-independent-v1/spotbugs.xml",
+      "sha256": "6756e6c1a18bdc3d2bf765cbef96ad0662071c7c0005494c412d78e6d0d08c70"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41206-range-unit-ascii-independent-v1/coverage.stdout",
+      "sha256": "b30433ea7479f8c63d655aff0fad8a02867ea58e5debc8ddf919a6f47f607cdb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41206-range-unit-ascii-independent-v1/coverage.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "whole451": false,
+  "formalDelta": 0
+}

@@ -1,0 +1,233 @@
+{
+  "run": "PG41204-range-unit-ascii-affected-v1",
+  "source": "6c2e8b027818c8dac0ed0f895edb85658e9c4ff1",
+  "productionCore": "6c2e8b027818c8dac0ed0f895edb85658e9c4ff1",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-20T20:54:47.621003+00:00",
+  "group": {
+    "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1634_Range単位ASCII限定着手.json",
+    "sha256": "14e7b1ebf3f5bc7ddc52187ddc1a97da51b5b6ccc876f592ffcbf90bed6dab07"
+  },
+  "main": {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/HttpByteRangeParser.java",
+    "sha256": "03f48ae2174399c97ec18e3f72451cc1efc698304226bb38c7eeb958a187891f"
+  },
+  "testsInput": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeUnitTokenTest.java",
+      "sha256": "4b30772d7b8add28b81255de052d229b76c3fe6e61a05414b009ffedb16de516"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeParserTest.java",
+      "sha256": "be41709d419d9ef36785c257575fecfc5a837f911210e58ac6de87ccf3af7378"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeNamespaceContractTest.java",
+      "sha256": "56f12ad9169957a068270b6c2e1de90d6c458b4d21b72972cd550ccd2dd9c04e"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeLongBoundaryTest.java",
+      "sha256": "5e5d9c536d63eefbb3e11a2df87fda97edad4845a5ee14b068e67291af590124"
+    }
+  ],
+  "tests": 8,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "cases": [
+    {
+      "name": "oneHundredConcurrentParsesHaveNoSharedState()",
+      "classname": "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest",
+      "testId": null,
+      "result": "PASS"
+    },
+    {
+      "name": "invalidGrammarBoundsAndArithmeticNeverSelectBytes()",
+      "classname": "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest",
+      "testId": null,
+      "result": "PASS"
+    },
+    {
+      "name": "namespace001StaticUtilityRejectsConstructionAndRestoresAccess()",
+      "classname": "dev.codex.schubert.nk.web.media.HttpByteRangeNamespaceContractTest",
+      "testId": null,
+      "result": "PASS"
+    },
+    {
+      "name": "rejectsNonAsciiCaseEquivalentInTheUnit()",
+      "classname": "dev.codex.schubert.nk.web.media.HttpByteRangeUnitTokenTest",
+      "testId": "PT-MED-RANGE-UNIT-001",
+      "result": "PASS"
+    },
+    {
+      "name": "nullAndConstructedSelectionsKeepInvariants()",
+      "classname": "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest",
+      "testId": null,
+      "result": "PASS"
+    },
+    {
+      "name": "literalRangesPreserveFirstSpecAndOneMebibyteCap()",
+      "classname": "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest",
+      "testId": null,
+      "result": "PASS"
+    },
+    {
+      "name": "acceptsMixedAsciiCaseAndSelectsTheFirstInterval()",
+      "classname": "dev.codex.schubert.nk.web.media.HttpByteRangeUnitTokenTest",
+      "testId": "PT-MED-RANGE-UNIT-002",
+      "result": "PASS"
+    },
+    {
+      "name": "distinguishesTheLastRepresentableCapFromTheFirstOverflow()",
+      "classname": "dev.codex.schubert.nk.web.media.HttpByteRangeLongBoundaryTest",
+      "testId": null,
+      "result": "PASS"
+    }
+  ],
+  "stages": {
+    "format": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "../toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/HttpByteRangeParser.java",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeUnitTokenTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "checkstyle": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "../toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/HttpByteRangeParser.java",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeUnitTokenTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "c1dd8a1d21b30bf83168085a9cd4d38501b885433bc36b91f206c57e78afa613",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compileMain": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "-g",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-d",
+        "/dev/shm/pgpt-range-unit-a9v15d6j/classes",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/HttpByteRangeParser.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compileTest": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "-g",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/dev/shm/pgpt-range-unit-a9v15d6j/classes:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "-d",
+        "/dev/shm/pgpt-range-unit-a9v15d6j/test-classes",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeUnitTokenTest.java",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeParserTest.java",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeNamespaceContractTest.java",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeLongBoundaryTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "junit": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Dfile.encoding=UTF-8",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/PG41204-range-unit-ascii-affected-v1/unit.exec,append=false,sessionid=PG41204-range-unit-ascii-affected-v1",
+        "-cp",
+        "/dev/shm/pgpt-range-unit-a9v15d6j/test-classes:/dev/shm/pgpt-range-unit-a9v15d6j/classes:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "org.junit.platform.console.ConsoleLauncher",
+        "execute",
+        "--disable-banner",
+        "--details=summary",
+        "--fail-if-no-tests",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41204-range-unit-ascii-affected-v1/xml",
+        "--select-class",
+        "dev.codex.schubert.nk.web.media.HttpByteRangeUnitTokenTest",
+        "--select-class",
+        "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest",
+        "--select-class",
+        "dev.codex.schubert.nk.web.media.HttpByteRangeNamespaceContractTest",
+        "--select-class",
+        "dev.codex.schubert.nk.web.media.HttpByteRangeLongBoundaryTest"
+      ],
+      "exit": 0,
+      "stdoutSha256": "c5c39e7a60c37efc9a702d15e3f32b55a3d808214e795a6d6db991619265d9ec",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "junit": {
+    "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+    "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "agent": {
+    "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar",
+    "sha256": "fb5b0036a0899ea97edfa0fc2c7985b55f3f7c5695028163e5e60d4f3cf6075d"
+  },
+  "originals": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41204-range-unit-ascii-affected-v1/terminal.json",
+      "sha256": "5960376710b9a82d5a98523b5c423caade6c9826a7627ebf8f83ce10df1146f4"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41204-range-unit-ascii-affected-v1/unit.exec",
+      "sha256": "2733b5d43297f235879d4f172d3fcfe3d1dcb5656f1b0cb27de984d4137506cb"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41204-range-unit-ascii-affected-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "6911a82a4cbdceb3fe6a1509d4bf63740070f5561db10e33e90649c32d171314"
+    }
+  ],
+  "physical": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41204-range-unit-ascii-affected-v1/physical/HttpByteRangeParser$Full.class",
+      "sha256": "07a096b771e062b939083c71daf97ee3e07c146fb7c36dfbc77fa85854932e7d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41204-range-unit-ascii-affected-v1/physical/HttpByteRangeParser$Partial.class",
+      "sha256": "9c4e54f7715a0b18ef5db819dc6aca51d7ec6b5293bc05c68b658645e7f87d08"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41204-range-unit-ascii-affected-v1/physical/HttpByteRangeParser$Selection.class",
+      "sha256": "44bbe8f708ab5b50ffb0c0bc64776e7e31361eb7ba88efb22873d40fb0f23bbe"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41204-range-unit-ascii-affected-v1/physical/HttpByteRangeParser$Unsatisfiable.class",
+      "sha256": "b342e7e1ebca20fc5d87b29ac3a43274473efd6a8c076119e4bde044637cea39"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41204-range-unit-ascii-affected-v1/physical/HttpByteRangeParser.class",
+      "sha256": "94a6f9e676b8ec4d60adbcd95f3e823991a32b0550975d347b946a78c30f57d6"
+    }
+  ],
+  "actualExternalOperations": 0,
+  "oldExecCombined": false,
+  "formalDelta": 0
+}
