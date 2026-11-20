@@ -1,0 +1,97 @@
+{
+  "actualExit": 0,
+  "catalogId": "PT-P01810-CATALOG-068",
+  "source": "56b3d166d71b21d5f4a3ddc39e2fe180fe354b0c",
+  "productionCore": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+  "trialSource": "cfdedf39165ce5b2a50aaf1ebc884b084309ad9a",
+  "trialProductionCore": "bd982905f83d6bec39c588ebb187870f6049fdd7",
+  "canonicalDesign": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+  "ss351": {
+    "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+    "sha256": "860f584a2f032e9b06112907f8ec138a12d0b69b94546f7e17ad7dfb9b65414c"
+  },
+  "ss343": {
+    "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "sha256": "3874975e619ba279814df4d6f79fd161098756cad882e00d580651fb2d7387cb"
+  },
+  "main": {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+    "sha256": "ae4997ec9035af4261fb6229567841644385135752488f982a43824f7aaab62b"
+  },
+  "test": {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolverTest.java",
+    "sha256": "858340efe5aaffbe7acc1b3886ae0df706153284283fb49e2e2e7d6e0d4b7cb0"
+  },
+  "xml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40308-f02-ssc461-group-lookup-upper-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "570428410757ccdb02703e9a7e8ebc531bfe37eb8107e5dc9f096d797229ab25"
+  },
+  "catalog": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37452-p01810-independent-case-catalog-v1/planned93-independent-cases.json",
+    "sha256": "b830c7bbbbb1375f5d11e1a67c22608e0ccf8f829febfa1b24fe12194471d54c"
+  },
+  "independentOriginalProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40312-f02-ssc461-group-lookup-independent-v1/manifest.json",
+    "sha256": "096ce9ea58761ff61c7ee061cdde03bc8043daeedb27f4c23acbe02cba3772f5"
+  },
+  "originalSuiteSelected": 8,
+  "originalResults": {
+    "pass_": 8,
+    "fail": 0,
+    "error": 0,
+    "skip": 0,
+    "notRun": 1
+  },
+  "localOracleBindings": [
+    {
+      "testId": "PT-OPS-GID-002",
+      "method": "malformedAndNull",
+      "observedByExistingXml": true,
+      "independentExpectation": "Malformed and excess synthetic output rejects with the fixed exception. The fake process can already have been created."
+    },
+    {
+      "testId": "PT-OPS-GID-003",
+      "method": "ownedCommandAndExit",
+      "observedByExistingXml": true,
+      "independentExpectation": "Owns only the fixed argv and consumes the expected fixture streams. Nonzero exit and injected start IOException enter the fixed diagnostic boundary."
+    },
+    {
+      "testId": "PT-OPS-GID-004",
+      "method": "timeoutInterruptAndTermination",
+      "observedByExistingXml": true,
+      "independentExpectation": "Interrupted before start: the owned fake process receives zero events; late interruption and timeout refuse and preserve the corresponding ownership or interrupted state."
+    },
+    {
+      "testId": "PT-OPS-GID-005",
+      "method": "stdioFailureMatrix",
+      "observedByExistingXml": true,
+      "independentExpectation": "Public synthetic provider messages and suppressed cleanup exceptions do not appear in the fixed known diagnostic; unknown failures remain failures."
+    },
+    {
+      "testId": "PT-OPS-GID-006",
+      "method": "sourceBufferAndNoLeak",
+      "observedByExistingXml": true,
+      "independentExpectation": "Old independent canary remains outside the fixed message and owned reader bytes are cleared."
+    },
+    {
+      "testId": "PT-OPS-GID-009",
+      "method": "gid009PreservesFatalReaderFailureThroughTheJdbcEdge",
+      "observedByExistingXml": true,
+      "independentExpectation": "Original fatal identity remains, with three fake stream closures."
+    }
+  ],
+  "ownedBackendRuns": 0,
+  "newProductTests": 0,
+  "originalScopeReusedWithoutCostDuplication": true,
+  "costOwner": "WBS-P018-10.03/2-照合",
+  "referencedOwner": "WBS-P018-01",
+  "formalDelta": 0,
+  "excluded": [
+    "PT-OPS-GID-008 actual NSS/host command and environment",
+    "End-to-end SS351 sink output",
+    "same-source all 451"
+  ],
+  "wholeAcceptance": false,
+  "releaseOrAdmissionGranted": false,
+  "terminalAtUTC": "2026-11-20T02:21:23.079233+00:00"
+}
