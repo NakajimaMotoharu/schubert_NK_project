@@ -1,0 +1,89 @@
+{
+  "eventId": "PGPT-20261008-6796",
+  "wbsLeafIds": [
+    "WBS-P017-07.01"
+  ],
+  "managementWorkIds": [],
+  "workCategory": "SELECTED_TEST",
+  "source": "84f99a7a87ee02dfee16844da0793951ad6b4ca5",
+  "productionCoreMain": "cdb649a5f054bc2ceed72ef57e55605f14a590d1",
+  "previousCheckpoint": "PGPT-20261008-6793",
+  "groupEvents": [
+    "PGPT-20261008-6795"
+  ],
+  "acceptedOriginal": 17,
+  "total": 190,
+  "coreAccepted": 0,
+  "coreTotal": 5,
+  "officialPtTests": 1964,
+  "officialPtScopes": 53,
+  "newFormalAcceptance": 0,
+  "effortRate": null,
+  "actualAllocatedPp": null,
+  "newProductTests": 1,
+  "recordedOwnedJobsInFlight": 0,
+  "ownedBackendJobsStartedHere": 0,
+  "modelObserved": null,
+  "reasoningObserved": null,
+  "speedObserved": null,
+  "outcomeEvidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40868-cleanup-query-jdbc-next-owner-v1/manifest.json",
+      "sha256": "0697aff9eeadc182ba6986dccb006fea6d6705d0f5c547b15de88a12b184e4b0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40866-cleanup-query-jdbc-next-owner-v3/manifest.json",
+      "sha256": "7ea63cfc6aa156b40c7d112a719590afa701f19f6ce4c9521ed60f6a72ab1bb8"
+    },
+    {
+      "path": "evidence/01_PT/017_NK-BAT-001/4746_CleanupQuery_SQL次辺・資源所有の単体仕様.md",
+      "sha256": "e5274ab5d1c3bb57c0a760acfdf043758cd58b4cbbba794224e2ca445e34b4ff"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/input/5464_cleanup_query_jdbc_next_pt.py",
+      "sha256": "ac66e2aaebf7f7ddc63401789673401bbd7a434fc7bead9a6ebdde3728ee04c1"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupQueryPortTest.java",
+      "sha256": "8b341b6b222bc74f479244d1146d0e97ac4419d0b3de844ea3321f1672f8c500"
+    },
+    {
+      "path": "evidence/01_PT/017_NK-BAT-001/4747_CleanupQuery_SQL次辺・資源所有の実行結果.md",
+      "sha256": "90f82eec1da0ca0d857ad8ec4b790d1abda613405553578c01fbf06c7a4a2ac3"
+    }
+  ],
+  "fullQuotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T13:19:18.879000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 70,
+      "remainingPercent": 30,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "quotaAfter": {
+    "usedPercent": 70,
+    "remainingPercent": 30,
+    "resetsAt": 1795445752,
+    "windowDurationMins": 10080
+  },
+  "sharedDeltaPp": 0,
+  "completedOriginalRowPricePp": 0,
+  "remainingCriteria": [
+    "P017-07.01実cleanupとP004-05実DB",
+    "F02/F03全scopeと451",
+    "YKT-2359全体"
+  ],
+  "nextEvidence": "YKT-2359の実DB・保留を保持。次は現候補の通常検証または承認・実環境と独立のF02/F03 P004-05条件へ。",
+  "testId": "CLNQUERY010",
+  "startGuardsRejected": 2,
+  "startGuardReasons": [
+    "stale receipt",
+    "split parent instead of leaf"
+  ],
+  "firstPtAttemptPassed": true,
+  "priorSuccessRunAgain": 0
+}

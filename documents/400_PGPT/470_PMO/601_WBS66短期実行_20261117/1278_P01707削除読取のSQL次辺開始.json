@@ -1,0 +1,61 @@
+{
+  "eventId": "PGPT-20261008-6794",
+  "groupId": "P01707-cleanup-query-jdbc-next-owner",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T13:17:45.519000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 70,
+      "remainingPercent": 30,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "P01707-cleanup-query-jdbc-next-owner",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "P01707-cleanup-query-jdbc-next-owner",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P017-07.01"
+    ],
+    "managementWorkIds": [],
+    "source": "84f99a7a87ee02dfee16844da0793951ad6b4ca5",
+    "productionCoreMain": "cdb649a5f054bc2ceed72ef57e55605f14a590d1",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40866-cleanup-query-jdbc-next-owner-v3",
+    "estimateAtGroupStartPp": {
+      "low": 0.12,
+      "base": 0.3,
+      "high": 0.65
+    },
+    "groupCapPp": 1.0,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1277_G08削除期限監査三結果の継続点.json",
+        "sha256": "83397e9eab60a99bf217a29260c47a3f73cb03a21604c4ff4bb6ddd72962bd79"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38710-f02-cleanup-jdbc-owner-independent-v1/manifest.json",
+        "sha256": "61feb8b3c256ddb9274d58255c2dfdb55f7e04ffd60e13494e982c024e7c7616"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40856-cleanup-step-single-sql-graph-v1/manifest.json",
+        "sha256": "0750cab96187af77d2d47a1a99aee74a97fdb88dcf5edb24f94e5348ab4f3b88"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "PG38710の借用JDBC proxyと現Coreの直接閉包。既9は参照。開始前受付v1は証票の鮮度、v2は分割親ID、両方開始なし。",
+    "endCondition": "CLNQUERY010でexecuteとreadLogProgressの文取得時・行取得後のSQL nextを確認。Error同一性、行→文解放、借用接続を4変種で測定。",
+    "workScope": "P017-07.01とP004-05の局所横展開。実DB／削除・外部実行・451は別。"
+  }
+}

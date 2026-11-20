@@ -20,7 +20,7 @@ import java.util.UUID;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
-/** CLNQUERY001..009: hand-written SQL and JDBC rows, no actual DB/DELETE or owner. */
+/** CLNQUERY001..010: hand-written SQL and JDBC rows, no actual DB/DELETE or owner. */
 final class CleanupQueryPortTest {
   private static final String TEXT_COMPLETE = "complete";
   private static final String TEXT_DELETED_COUNT = "deleted_count";
@@ -222,6 +222,41 @@ final class CleanupQueryPortTest {
           fixture.assertClosed();
         }
     }
+  }
+
+  @Test
+  void nestedSqlNextErrorPreservesIdentityAtBothResourceBoundaries() {
+    for (boolean progress : List.of(false, true)) {
+      var beforeAcquisition = new Fixture(progress);
+      var afterAcquisition = new Fixture(progress);
+      var before = new LinkageError("public acquisition fixture");
+      var after = new LinkageError("public row fixture");
+      beforeAcquisition.faults.put("prepare", withNextError(before));
+      afterAcquisition.faults.put(TEXT_TARGET_COUNT, withNextError(after));
+
+      assertSame(before, assertThrows(LinkageError.class, beforeAcquisition::call));
+      assertEquals(0, before.getSuppressed().length);
+      assertEquals(List.of("auto", "prepare"), beforeAcquisition.visited);
+      assertEquals(0, beforeAcquisition.openedStatements);
+      assertEquals(0, beforeAcquisition.openedRows);
+      beforeAcquisition.assertClosed();
+
+      assertSame(after, assertThrows(LinkageError.class, afterAcquisition::call));
+      assertEquals(0, after.getSuppressed().length);
+      assertEquals(
+          List.of(TEXT_TARGET_COUNT, "rowClose", TEXT_STATEMENTCLOSE),
+          afterAcquisition.visited.subList(
+              afterAcquisition.visited.size() - 3, afterAcquisition.visited.size()));
+      assertEquals(1, afterAcquisition.openedStatements);
+      assertEquals(1, afterAcquisition.openedRows);
+      afterAcquisition.assertClosed();
+    }
+  }
+
+  private static SQLException withNextError(LinkageError fatal) {
+    var sql = new SQLException("public JDBC failure fixture");
+    sql.setNextException(new SQLException("public next fixture", fatal));
+    return sql;
   }
 
   @Test
