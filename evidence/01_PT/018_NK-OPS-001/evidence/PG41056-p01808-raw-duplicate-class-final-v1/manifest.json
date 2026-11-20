@@ -1,0 +1,332 @@
+{
+  "actualExit": 0,
+  "phase": "narrowed",
+  "source": "e02e75b21d82f903b886ba8951e04da15c643489",
+  "productionCore": "24da3b252f65f0ea56736cb791cd13165bf62c24",
+  "run": "PG41056-p01808-raw-duplicate-class-final-v1",
+  "startEvent": "PGPT-20261008-7025",
+  "terminalAtUTC": "2026-11-20T17:52:23.862774+00:00",
+  "testId": "PT-OPS-EXEC-CRC-002",
+  "inputTool": {
+    "path": "tools/quality/jacoco/UnfilteredCodeMeasurement.java",
+    "sha256": "054298b222db049f7908603da5f756a027c4637c75dcdad5ae8b6069063e5f5f"
+  },
+  "independentDecoder": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/jacoco_readonly_exec_subset.py",
+    "sha256": "f0c073ee2ae166a5d2338666f27fde122b5663499ff2aa15c58225d9420b5d6d"
+  },
+  "standaloneSyntheticFixtures": true,
+  "cases": [
+    {
+      "case": "distinct",
+      "expectedExit": 0,
+      "actualExit": 0,
+      "completeMeasurementCredit": true,
+      "visible": [
+        "physicalfixture/First",
+        "physicalfixture/Second"
+      ],
+      "orderedClassCRC": [
+        "34d0aecddd09fd4b",
+        "10040f0570caae2a"
+      ],
+      "stream": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/distinct.exec",
+        "sha256": "feaff063fc14d76b88aa89f7a6b2cc16453537ad988a7946e5350cec46dabf6f"
+      },
+      "selectedClassPaths": [
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/classes/physicalfixture/First.class",
+          "sha256": "84c664772942acaf7212796b7343fbdf8b6563f82fc7ff724edd4279d6212267"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/classes/physicalfixture/Second.class",
+          "sha256": "ab492b6ddfafd7ba0d530699009a2c49d586f311ac99792bc4a3e5069316c6f4"
+        }
+      ]
+    },
+    {
+      "case": "crc-late",
+      "expectedExit": 1,
+      "actualExit": 1,
+      "completeMeasurementCredit": false,
+      "visible": [
+        "physicalfixture/First"
+      ],
+      "orderedClassCRC": [
+        "34d0aecddd09fd4b"
+      ],
+      "stream": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/crc-late.exec",
+        "sha256": "fcfd5c49c94687b2f82083d1077bd81a651df9cc20451bdf4e3f205b2d308b1f"
+      },
+      "selectedClassPaths": [
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/classes/physicalfixture/First.class",
+          "sha256": "84c664772942acaf7212796b7343fbdf8b6563f82fc7ff724edd4279d6212267"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/classes/physicalfixture/Second.class",
+          "sha256": "ab492b6ddfafd7ba0d530699009a2c49d586f311ac99792bc4a3e5069316c6f4"
+        }
+      ]
+    },
+    {
+      "case": "same-path",
+      "expectedExit": 1,
+      "actualExit": 1,
+      "completeMeasurementCredit": false,
+      "visible": [
+        "physicalfixture/First"
+      ],
+      "orderedClassCRC": [
+        "34d0aecddd09fd4b"
+      ],
+      "stream": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/same-path.exec",
+        "sha256": "feaff063fc14d76b88aa89f7a6b2cc16453537ad988a7946e5350cec46dabf6f"
+      },
+      "selectedClassPaths": [
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/classes/physicalfixture/First.class",
+          "sha256": "84c664772942acaf7212796b7343fbdf8b6563f82fc7ff724edd4279d6212267"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/classes/physicalfixture/First.class",
+          "sha256": "84c664772942acaf7212796b7343fbdf8b6563f82fc7ff724edd4279d6212267"
+        }
+      ]
+    },
+    {
+      "case": "same-bytes-different-path",
+      "expectedExit": 1,
+      "actualExit": 1,
+      "completeMeasurementCredit": false,
+      "visible": [
+        "physicalfixture/First"
+      ],
+      "orderedClassCRC": [
+        "34d0aecddd09fd4b"
+      ],
+      "stream": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/same-bytes-different-path.exec",
+        "sha256": "feaff063fc14d76b88aa89f7a6b2cc16453537ad988a7946e5350cec46dabf6f"
+      },
+      "selectedClassPaths": [
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/classes/physicalfixture/First.class",
+          "sha256": "84c664772942acaf7212796b7343fbdf8b6563f82fc7ff724edd4279d6212267"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/first-copy.class",
+          "sha256": "84c664772942acaf7212796b7343fbdf8b6563f82fc7ff724edd4279d6212267"
+        }
+      ]
+    },
+    {
+      "case": "same-name-different-bytes",
+      "expectedExit": 1,
+      "actualExit": 1,
+      "completeMeasurementCredit": false,
+      "visible": [
+        "physicalfixture/First"
+      ],
+      "orderedClassCRC": [
+        "34d0aecddd09fd4b"
+      ],
+      "stream": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/same-name-different-bytes.exec",
+        "sha256": "3813a3444867c76e9ecf61be4c78fba5944f3064285a9143d4a9ec443b388fb0"
+      },
+      "selectedClassPaths": [
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/classes/physicalfixture/First.class",
+          "sha256": "84c664772942acaf7212796b7343fbdf8b6563f82fc7ff724edd4279d6212267"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/changed/physicalfixture/First.class",
+          "sha256": "d7ff09b34959f50c85e1f44055077634fbc992738d19ed4c67cedad6c7ea3d6e"
+        }
+      ]
+    }
+  ],
+  "steps": [
+    {
+      "name": "compile-fixed",
+      "argv": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/classes",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/jacoco/UnfilteredCodeMeasurement.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/fixture/First.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/fixture/Second.java"
+      ],
+      "exitCode": 0,
+      "startedAtUTC": "2026-11-20T17:52:22.594955+00:00",
+      "terminalAtUTC": "2026-11-20T17:52:23.155037+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/compile-fixed.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/compile-fixed.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "compile-distinct",
+      "argv": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/changed",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/alternative/First.java"
+      ],
+      "exitCode": 0,
+      "startedAtUTC": "2026-11-20T17:52:23.155087+00:00",
+      "terminalAtUTC": "2026-11-20T17:52:23.545814+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/compile-distinct.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/compile-distinct.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "distinct",
+      "argv": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/distinct.exec",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/classes/physicalfixture/First.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/classes/physicalfixture/Second.class"
+      ],
+      "exitCode": 0,
+      "startedAtUTC": "2026-11-20T17:52:23.546702+00:00",
+      "terminalAtUTC": "2026-11-20T17:52:23.608628+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/distinct.stdout",
+        "sha256": "e02bd6a6e049a71da41535a084468fa333ac2d42963d2b5de9ba798a801ffb69"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/distinct.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "crc-late",
+      "argv": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/crc-late.exec",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/classes/physicalfixture/First.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/classes/physicalfixture/Second.class"
+      ],
+      "exitCode": 1,
+      "startedAtUTC": "2026-11-20T17:52:23.608784+00:00",
+      "terminalAtUTC": "2026-11-20T17:52:23.675525+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/crc-late.stdout",
+        "sha256": "6d42af62c2415a4a81a06ba8b9be601eb5a8ac134a7b60da9041f6105160d0cc"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/crc-late.stderr",
+        "sha256": "3fcde71ab2efa79247ada4362c16140cc4fa102fb0823d4ac99b68b18ad4bf42"
+      }
+    },
+    {
+      "name": "same-path",
+      "argv": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/same-path.exec",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/classes/physicalfixture/First.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/classes/physicalfixture/First.class"
+      ],
+      "exitCode": 1,
+      "startedAtUTC": "2026-11-20T17:52:23.675697+00:00",
+      "terminalAtUTC": "2026-11-20T17:52:23.738055+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/same-path.stdout",
+        "sha256": "6d42af62c2415a4a81a06ba8b9be601eb5a8ac134a7b60da9041f6105160d0cc"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/same-path.stderr",
+        "sha256": "24439e3b6a07d1da1e4afb39518a59c84a81e4177fa9570fd25e48d38520d837"
+      }
+    },
+    {
+      "name": "same-bytes-different-path",
+      "argv": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/same-bytes-different-path.exec",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/classes/physicalfixture/First.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/first-copy.class"
+      ],
+      "exitCode": 1,
+      "startedAtUTC": "2026-11-20T17:52:23.738161+00:00",
+      "terminalAtUTC": "2026-11-20T17:52:23.799236+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/same-bytes-different-path.stdout",
+        "sha256": "6d42af62c2415a4a81a06ba8b9be601eb5a8ac134a7b60da9041f6105160d0cc"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/same-bytes-different-path.stderr",
+        "sha256": "24439e3b6a07d1da1e4afb39518a59c84a81e4177fa9570fd25e48d38520d837"
+      }
+    },
+    {
+      "name": "same-name-different-bytes",
+      "argv": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/same-name-different-bytes.exec",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/classes/physicalfixture/First.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/changed/physicalfixture/First.class"
+      ],
+      "exitCode": 1,
+      "startedAtUTC": "2026-11-20T17:52:23.799315+00:00",
+      "terminalAtUTC": "2026-11-20T17:52:23.862610+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/same-name-different-bytes.stdout",
+        "sha256": "40c3d16a9ef365f5e65c0c5268f5397acccc1071bb87f30fdb8f4131f1a84664"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41056-p01808-raw-duplicate-class-final-v1/same-name-different-bytes.stderr",
+        "sha256": "24439e3b6a07d1da1e4afb39518a59c84a81e4177fa9570fd25e48d38520d837"
+      }
+    }
+  ],
+  "reproducedDefects": 0,
+  "callerUnionAllowed": false,
+  "productPt": 0,
+  "realNative": 0,
+  "coverage": null,
+  "formalDelta": 0
+}
