@@ -1,0 +1,144 @@
+{
+  "eventId": "PGPT-20261008-6857",
+  "groupId": "a101-inspector-two-public-inputs",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T14:30:26.574000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 72,
+      "remainingPercent": 28,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "a101-inspector-two-public-inputs",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "a101-inspector-two-public-inputs",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P004-04"
+    ],
+    "managementWorkIds": [
+      "A1-01.04",
+      "A1-01.05"
+    ],
+    "source": "78b61d03fad58cdc90decc09f4d0a9f496de57cf",
+    "productionCoreMain": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40920-a101-inspector-public-receipt-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.1,
+      "base": 0.3,
+      "high": 0.6
+    },
+    "groupCapPp": 0.8,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1339_G08参照DAO新Test追跡継続点.json",
+        "sha256": "0236d73d51a13acf10a8a30e05e7b564927a0f9a1163f4ae69dae5d687ea58a1"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29354-p00404-all24-public-original-contract-v1/manifest.json",
+        "sha256": "cccabf496d4a68c31147cce18ec40b994ad2ee07c34d9f3f8923bcfc532833a3"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29360-p00404-owner-test-safety-index-v1/manifest.json",
+        "sha256": "0f93299b205d61450cd6d5694fabdbabb352f63acc622edb17e6fa193ea121d7"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29402-inspector-six-main-source-check-v1/manifest.json",
+        "sha256": "3f7e50837e30e17fd4b07fbb389c7d23fe8cdee04c9163ad1082fbb2ebe3d9e2"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29404-inspector-six-main-source-review-v1/manifest.json",
+        "sha256": "69d52f37f5503d5ccb7d4d07403cf2e899260937bfbc8f9c4fe06a2199002697"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "58版A1-01.04/05は対象path固定。P004-04の元/1は既記録。PG29354の独立期待、PG29360のTestメタデータ・公開の局所静的だけを確認できる。",
+    "endCondition": "元行と固定Mainのbyte、元試験定義と実行可否を別々に記録し、再利用できる資料・欠ける同source結果と担当を明記。元費用や受入は増やさない。",
+    "workScope": "公開Git blob、承認設計の既存仕様参照、公開manifestのみ。Inspector/DB/Root・認証・実権限・コンパイル・動的PTは扱わない。",
+    "quotaAfter": {
+      "usedPercent": 72,
+      "remainingPercent": 28,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "13798d13e314047db841cf0b0b016f529169353938b5b547bfd65022670e4e46",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T14:30:26.574000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 72,
+          "remainingPercent": 28,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T14:30:02.719912+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 72,
+      "remainingPercent": 28,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6856",
+    "attempt": 1,
+    "attemptResult": "PUBLIC_TRACE_PARTIAL_OPEN",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40920-a101-inspector-public-receipt-v1/manifest.json",
+        "sha256": "70a8932388ff9c8ebd489f50bfae2478fd68d4d0d9a09e222f1f2b03341be0df"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5486_a101_inspector_public_receipts.py",
+        "sha256": "6e8947dd44921fb4766f9e8c66c08410adc3094fc37f87031adad4b59c221c22"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "元A1-01.04/05の動的Test資格・正式終端",
+      "P004-04 actual Inspector owner and DB terminal",
+      "451"
+    ],
+    "wbsRowsTraced": 2,
+    "definitionsMetadataOnly": 16,
+    "sourceOnlyCorrectedRows": 1,
+    "unchangedOriginalRows": 1,
+    "actualProductTestRuns": 0,
+    "actualAnalyzerRuns": 0,
+    "actualExternalActions": 0
+  }
+}

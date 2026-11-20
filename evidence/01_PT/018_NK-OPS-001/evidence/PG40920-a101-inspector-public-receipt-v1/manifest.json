@@ -1,0 +1,91 @@
+{
+  "actualExit": 0,
+  "plan": {
+    "path": "/home/mini/codex/project1/work/PMO/hourly-monitor/wbs66-20261116/58_直近20pp不足時の対象と予算判断を実行用の検収表へ渡す/WBS.tsv",
+    "sha256": "31f8be31c8b3a1c3bbc87d049f682d1523c285b83ec6471d91840f825ded3794"
+  },
+  "source": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+  "startEvent": "PGPT-20261008-6856",
+  "terminalAtUTC": "2026-11-20T14:30:02.719912+00:00",
+  "receipts": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29354-p00404-all24-public-original-contract-v1/manifest.json",
+      "sha256": "cccabf496d4a68c31147cce18ec40b994ad2ee07c34d9f3f8923bcfc532833a3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29360-p00404-owner-test-safety-index-v1/manifest.json",
+      "sha256": "0f93299b205d61450cd6d5694fabdbabb352f63acc622edb17e6fa193ea121d7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29402-inspector-six-main-source-check-v1/manifest.json",
+      "sha256": "3f7e50837e30e17fd4b07fbb389c7d23fe8cdee04c9163ad1082fbb2ebe3d9e2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29404-inspector-six-main-source-review-v1/manifest.json",
+      "sha256": "69d52f37f5503d5ccb7d4d07403cf2e899260937bfbc8f9c4fe06a2199002697"
+    }
+  ],
+  "selected": [
+    {
+      "wbsWorkId": "A1-01.04",
+      "owner": "WBS-P004-04",
+      "costOwner": "WBS-P004-04",
+      "originalPlanPricePp": 1.95,
+      "currentMain": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectionRunExecutor.java",
+        "sha256": "3225e7f1dc7a1cdfd78f8cb5ffc4569124850af497b1768c91418a4c9277fdf2"
+      },
+      "originalContractMainSha256": "3196dff45c7b012c37238df8dfeb83538d47bc5a6318385ac7cb9c57c5f50bc0",
+      "mainChangedSinceOriginal": true,
+      "oracleId": "P00404-ORACLE07",
+      "originalTestIds": [
+        "DB-INBOX097..104"
+      ],
+      "originalPreparationAlreadyCounted": true,
+      "staticSourceApplicability": "EXACT_RETAINED_CORRECTION_BYTES",
+      "testSource": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectionRunExecutorTest.java",
+        "sha256": "02bad2de1b8ef1656a9cec07a5c9f966851c277af4724ad653f7134d375ca5a2"
+      },
+      "testDefinitionsMetadataOnly": 9,
+      "testLifecycleRequiresQualification": true,
+      "acceptedProductTests": 0,
+      "requiredNextEvidence": "Authorized current-source whole Test and independent terminal receipt by Inspector owner",
+      "currentJudgement": "PUBLIC_TRACE_ONLY_AWAITING_CURRENT_RUNTIME_QUALIFICATION"
+    },
+    {
+      "wbsWorkId": "A1-01.05",
+      "owner": "WBS-P004-04",
+      "costOwner": "WBS-P004-04",
+      "originalPlanPricePp": 1.65,
+      "currentMain": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorDatabaseConnections.java",
+        "sha256": "aec17fa943139c5969a89363a7eaa7b78837253ee0262e57e603ef9e1181343d"
+      },
+      "originalContractMainSha256": "aec17fa943139c5969a89363a7eaa7b78837253ee0262e57e603ef9e1181343d",
+      "mainChangedSinceOriginal": false,
+      "oracleId": "P00404-ORACLE09",
+      "originalTestIds": [
+        "DB-INBOX202..208",
+        "INSPECTOR-GRAPH329001..006"
+      ],
+      "originalPreparationAlreadyCounted": true,
+      "staticSourceApplicability": "NO_NEW_STATIC_PROOF",
+      "testSource": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorDatabaseConnectionsTest.java",
+        "sha256": "0fb3ff90cc3130985b6c788428b31a897b226810f2f55a2b254a9c9cbbfd3036"
+      },
+      "testDefinitionsMetadataOnly": 7,
+      "testLifecycleRequiresQualification": true,
+      "acceptedProductTests": 0,
+      "requiredNextEvidence": "Authorized current-source whole Test and independent terminal receipt by Inspector owner",
+      "currentJudgement": "PUBLIC_TRACE_ONLY_AWAITING_CURRENT_RUNTIME_QUALIFICATION"
+    }
+  ],
+  "productTestsExecuted": 0,
+  "compileOrStaticExecutions": 0,
+  "realRuntimeActions": 0,
+  "formalDelta": 0,
+  "originalRowPriceCompletedPp": 0,
+  "whole451": false
+}
