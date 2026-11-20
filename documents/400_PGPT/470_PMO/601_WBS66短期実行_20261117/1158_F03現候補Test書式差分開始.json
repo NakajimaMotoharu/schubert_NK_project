@@ -1,0 +1,83 @@
+{
+  "eventId": "PGPT-20261008-6675",
+  "groupId": "PGPT-WBS66-F03-CURRENT-TEST-STYLE-DELTA-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T10:01:11.384000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 67,
+      "remainingPercent": 33,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-CURRENT-TEST-STYLE-DELTA-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F03-CURRENT-TEST-STYLE-DELTA-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "source": "425bef01e9f00d54df28c47be5c99adce20e446e",
+    "productionCoreMain": "517a23cddc9f3883550942f6fa90a4256ef39b73",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40784-f03-current-test-style-delta-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.45,
+      "high": 0.9
+    },
+    "groupCapPp": 1.4,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1157_F02SYS014引渡しと独立継続点.json",
+        "sha256": "89145b296e9404c73a29439745a8ac289a12bd8c0748a4eed6c2bd30b39b093e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40592-f03-eligible-test-source-quality-join-v1/manifest.json",
+        "sha256": "216942e7b496cf1465ea61d8518c9e25ce8b541de0ceaf636ff501537503c12c"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40594-f03-eligible-test-checkstyle-independent-v1/manifest.json",
+        "sha256": "2785529ad5c46bb36181ab3c65c941c9ae7d8e3fd95f6050b2a874689d13d51e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40616-f03-storage-caddy-companions-independent-v1/manifest.json",
+        "sha256": "9a338a4a854e82b12029677962c16d1702169c5994af42de0d3c43ac097392d3"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40640-c07-async-queue-int64-independent-v1/manifest.json",
+        "sha256": "c14697ae4dfa11c4d8cbde7ad9f07a296aafaadda6c364cd9475e7375e1da639"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40698-f02-expiry-audit-jdbc-independent-v1/manifest.json",
+        "sha256": "6e009299dbba22fa572d8ea7c9822f77c2d7fd0f79f33d3a3e84a5a730b899e6"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40732-f03-expiry-ownership-independent-v1/manifest.json",
+        "sha256": "c5b1f768a9cd52828fb8321f74a2de13287ec3b3e62dfdf1e52690f7fd2b2796"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40742-f02-cleanup-success-reference-independent-v1/manifest.json",
+        "sha256": "a43c8b36a3ada63abdffc4c151e2c71b157df2e14f5114b55110838837e1f927"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "PG40594で有効1,110と保留32。現候補の六Test差分は既保留32と交差しない。",
+    "endCondition": "現候補の差分を既存のSHA・Checkstyleプロファイル・独立XMLへ接続し、証拠不足分のみ同一手順で確認する。",
+    "workScope": "非保留の六Test source textのみ。Testの実行、コンパイル、製品class/JAR、実環境は対象外。"
+  }
+}

@@ -1,0 +1,170 @@
+{
+  "actualExit": 0,
+  "startEvent": "PGPT-20261008-6675",
+  "source": "425bef01e9f00d54df28c47be5c99adce20e446e",
+  "productionCore": "517a23cddc9f3883550942f6fa90a4256ef39b73",
+  "toolInputs": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "sha256": "c324471f8b7933a3cb401eafbc35a7055443779b438a3ab928bda3867a1b8ab1"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+      "sha256": "754e218ab1fcabb1e1c5f8530e9d3aa37636806c22987bb279dd907a6ee749b2"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+      "sha256": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+      "sha256": "25b400f003089d23cc5320cdaf1a16cabee19b8aa3434d0ff021b3d9f42154b4"
+    }
+  ],
+  "runner": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40784-f03-current-test-style-delta-v1/verify_test_style.py",
+    "sha256": "99ddddf67450f00209616b19bc8514d38ec9aa2f3f6c1a2fcc9d58d3f48a07a4"
+  },
+  "outsideScope": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38504-f03-current-test-source-delta-v1/manifest.json",
+    "sha256": "0a33f850576813ff014ada3969c20506fe8ec964ab49d4ab81a321bc33792b0c"
+  },
+  "testSourcesTotal": 1145,
+  "unchangedAndReused": 1107,
+  "exactPreviouslyCheckedDelta": {
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageFailureGraphTest.java": {
+      "source": {
+        "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageFailureGraphTest.java",
+        "sha256": "291073ab1604fd24f23dc8fce1d5cb408c77c924e77d0aec2fe6f3c33b74cf02"
+      },
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40616-f03-storage-caddy-companions-independent-v1/manifest.json",
+        "sha256": "9a338a4a854e82b12029677962c16d1702169c5994af42de0d3c43ac097392d3"
+      },
+      "xml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40616-f03-storage-caddy-companions-independent-v1/checkstyle.xml",
+        "sha256": "8fae0131b194d3e040523d8adadedbcf21dd3b1a3785102d14dbbd96da2e9f96"
+      }
+    },
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholdsTest.java": {
+      "source": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholdsTest.java",
+        "sha256": "16b1540705fc6542d8ad73bc2add5f8925b892e6ba0f2a8fbaf4ac8c9301aa53"
+      },
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40640-c07-async-queue-int64-independent-v1/manifest.json",
+        "sha256": "c14697ae4dfa11c4d8cbde7ad9f07a296aafaadda6c364cd9475e7375e1da639"
+      },
+      "xml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40640-c07-async-queue-int64-independent-v1/checkstyle.xml",
+        "sha256": "5995579c01069d7e92d95198a35ca381caa687b786c1d50924db913b969aaa54"
+      }
+    },
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditJdbcFailureGraphTest.java": {
+      "source": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditJdbcFailureGraphTest.java",
+        "sha256": "6ee8351e1b83811ecff7975ddaa3c9b042245979bc018e5a8f7a1a782877e917"
+      },
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40698-f02-expiry-audit-jdbc-independent-v1/manifest.json",
+        "sha256": "6e009299dbba22fa572d8ea7c9822f77c2d7fd0f79f33d3a3e84a5a730b899e6"
+      },
+      "xml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40698-f02-expiry-audit-jdbc-independent-v1/checkstyle.xml",
+        "sha256": "6fbfc31c03ec83890e2a57444b8ca9fe759cd9d7191879443b6bea929fcb7acc"
+      }
+    },
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditPortTest.java": {
+      "source": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditPortTest.java",
+        "sha256": "047d60ee4aa764e8e261107f055ad289dc3708e26b31821b026babe5dd5dc807"
+      },
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40732-f03-expiry-ownership-independent-v1/manifest.json",
+        "sha256": "c5b1f768a9cd52828fb8321f74a2de13287ec3b3e62dfdf1e52690f7fd2b2796"
+      },
+      "xml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40732-f03-expiry-ownership-independent-v1/checkstyle.xml",
+        "sha256": "cf0e2d32be66fb0a99a68cbfaa57e9ffa7cfe95d07c5be77724ea816151da6d4"
+      }
+    },
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalReferencesJdbcGraphTest.java": {
+      "source": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalReferencesJdbcGraphTest.java",
+        "sha256": "9af2d7770cfeef3a00bd75c49267f259660aebf8d1fc821bcebb9d759e6bf246"
+      },
+      "previous": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40742-f02-cleanup-success-reference-independent-v1/manifest.json",
+        "sha256": "a43c8b36a3ada63abdffc4c151e2c71b157df2e14f5114b55110838837e1f927"
+      },
+      "xml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40742-f02-cleanup-success-reference-independent-v1/checkstyle.xml",
+        "sha256": "d204f50e16c421dd59e1efc17ee13b391e42dfd51208909e63b4c36285139a4a"
+      }
+    }
+  },
+  "newlyChecked": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditValueOwnershipTest.java",
+      "sha256": "719a440df36d7438f487d3da4226f4efa545d751ff1ea73ce9b59cb0fad950a3"
+    }
+  ],
+  "newCheckstyleXml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40784-f03-current-test-style-delta-v1/checkstyle.xml",
+    "sha256": "1158a7416dd338a293e972c90334dde00a3ea82393f356e8a55eee0b0fd739a7"
+  },
+  "newCheckstyleFindings": 0,
+  "checkstyleConfirmed": 1113,
+  "heldMetadataOnly": 32,
+  "heldContentsRead": 0,
+  "analyzers": {
+    "checkstyle": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "-o",
+        "evidence/01_PT/018_NK-OPS-001/evidence/PG40784-f03-current-test-style-delta-v1/checkstyle.xml",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditValueOwnershipTest.java"
+      ],
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40784-f03-current-test-style-delta-v1/checkstyle.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40784-f03-current-test-style-delta-v1/checkstyle.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "format": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditValueOwnershipTest.java"
+      ],
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40784-f03-current-test-style-delta-v1/format.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40784-f03-current-test-style-delta-v1/format.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "productionTestsExecuted": 0,
+  "productClassfilesRead": 0,
+  "wholeF03": false,
+  "formalDelta": 0,
+  "terminalAtUTC": "2026-11-20T10:02:39.422828+00:00"
+}
