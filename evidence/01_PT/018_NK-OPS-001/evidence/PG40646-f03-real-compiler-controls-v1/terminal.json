@@ -1,0 +1,94 @@
+{
+  "source": "89a023e2bbf1c3b860342424dbe24a76bb2784bb",
+  "productionCore": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+  "begin": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40646-f03-real-compiler-controls-v1/begin.json",
+    "sha256": "64b99608e302b463dd5514975c1889a0a0086cd412bc80f35c1ce92d6a0e41b5"
+  },
+  "terminalAtUTC": "2026-11-20T04:07:49.583456+00:00",
+  "observedOutcomes": {
+    "valid": {
+      "actualExit": 0,
+      "finishedAtUTC": "2026-11-20T04:07:43.492104+00:00",
+      "command": [
+        "/home/mini/.m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-N",
+        "-B",
+        "-o",
+        "-ntp",
+        "-Dstyle.color=never",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-f",
+        "<SCOPE>/src/schubert-nk-protocol/pom.xml",
+        "compile"
+      ],
+      "rawSha256": "34430a192def172dfc702da2d518c144e2916f514faeb62207c499870b8e4216",
+      "source": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40646-f03-real-compiler-controls-v1/valid.java.txt",
+        "sha256": "2c519c4708cf6c782b616daa203763459c64a9f9002f29bb43374e1852442c0f"
+      },
+      "log": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40646-f03-real-compiler-controls-v1/valid.txt",
+        "sha256": "3670069913304877e577746a885ca87fbe3c2b8267ac195c16d0f04b9dc3f5ed"
+      },
+      "resultingClassNames": [
+        "CompilerContractCanary.class"
+      ]
+    },
+    "nullable": {
+      "actualExit": 1,
+      "finishedAtUTC": "2026-11-20T04:07:46.614906+00:00",
+      "command": [
+        "/home/mini/.m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-N",
+        "-B",
+        "-o",
+        "-ntp",
+        "-Dstyle.color=never",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-f",
+        "<SCOPE>/src/schubert-nk-protocol/pom.xml",
+        "compile"
+      ],
+      "rawSha256": "89adc3a8ccec3fd70dfa4359fdb49d28949664a797b7b2cc0ab2d8d25e065e25",
+      "source": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40646-f03-real-compiler-controls-v1/nullable.java.txt",
+        "sha256": "37d82413260fd914af6390a4a783e4b7430c849925196faada1a2b9d54c956ff"
+      },
+      "log": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40646-f03-real-compiler-controls-v1/nullable.txt",
+        "sha256": "9b563a4a6ead08d2747ea9abf3fcd90b7038aee2c10aedb984a50c55aef2fdb1"
+      },
+      "resultingClassNames": []
+    },
+    "unchecked": {
+      "actualExit": 1,
+      "finishedAtUTC": "2026-11-20T04:07:49.582943+00:00",
+      "command": [
+        "/home/mini/.m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-N",
+        "-B",
+        "-o",
+        "-ntp",
+        "-Dstyle.color=never",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-f",
+        "<SCOPE>/src/schubert-nk-protocol/pom.xml",
+        "compile"
+      ],
+      "rawSha256": "8f6e7f8e48575f2b5ad96a4a3931246e97ca93855b0b2e34867a791c552af5b9",
+      "source": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40646-f03-real-compiler-controls-v1/unchecked.java.txt",
+        "sha256": "a1f221db97e24a7e8876a2ef520dcfc535adf0d27935117fa158782cd65a6878"
+      },
+      "log": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40646-f03-real-compiler-controls-v1/unchecked.txt",
+        "sha256": "f607f6b890c6af4078b0dd39375e786f7fe7ab544372a4a41b2f21ff66014a0a"
+      },
+      "resultingClassNames": []
+    }
+  },
+  "actualProductionFilesCompiled": 0,
+  "productTests": 0,
+  "vmsOrServicesStarted": 0
+}

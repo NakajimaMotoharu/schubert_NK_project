@@ -1,0 +1,11 @@
+package dev.codex.schubert.nk.protocol;
+
+import java.util.List;
+import org.jspecify.annotations.NullMarked;
+
+@NullMarked
+final class CompilerContractCanary {
+  static List<String> list(Object value) {
+    return (List<String>) value;
+  }
+}

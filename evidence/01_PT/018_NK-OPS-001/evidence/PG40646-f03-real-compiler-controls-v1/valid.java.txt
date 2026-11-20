@@ -1,0 +1,11 @@
+package dev.codex.schubert.nk.protocol;
+
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+
+@NullMarked
+final class CompilerContractCanary {
+  static int length(@Nullable String value) {
+    return value == null ? 0 : value.length();
+  }
+}
