@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-11-21T00:20:09.446">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricCollector.java">
+<violation beginline="27" endline="27" begincolumn="5" endcolumn="17" rule="AvoidSynchronizedStatement" ruleset="Multithreading" package="dev.codex.schubert.nk.api.monitoring" class="DbPoolMetricCollector" method="collect" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement" priority="3">
+Use ReentrantLock rather than synchronization
+</violation>
+<violation beginline="34" endline="34" begincolumn="16" endcolumn="32" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.monitoring" class="DbPoolMetricCollector" method="collect" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching RuntimeException in try-catch block
+</violation>
+<violation beginline="34" endline="34" begincolumn="35" endcolumn="40" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.monitoring" class="DbPoolMetricCollector" method="collect" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Error in try-catch block
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry.java">
+<violation beginline="83" endline="83" begincolumn="7" endcolumn="19" rule="AvoidSynchronizedStatement" ruleset="Multithreading" package="dev.codex.schubert.nk.api.monitoring" class="ExactDurationMeterRegistry.ExactSummary" method="record" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement" priority="3">
+Use ReentrantLock rather than synchronization
+</violation>
+<violation beginline="108" endline="108" begincolumn="7" endcolumn="19" rule="AvoidSynchronizedStatement" ruleset="Multithreading" package="dev.codex.schubert.nk.api.monitoring" class="ExactDurationMeterRegistry.ExactSummary" method="takeSnapshot" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement" priority="3">
+Use ReentrantLock rather than synchronization
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/persistence/OutboxObservationRepository.java">
+<violation beginline="47" endline="47" begincolumn="33" endcolumn="42" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.monitoring.persistence" class="OutboxObservationRepository" method="read" variable="statement" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this PreparedStatement object are closed after use
+</violation>
+<violation beginline="52" endline="52" begincolumn="27" endcolumn="31" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.monitoring.persistence" class="OutboxObservationRepository" method="read" variable="rows" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ResultSet object are closed after use
+</violation>
+<violation beginline="67" endline="67" begincolumn="16" endcolumn="25" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.monitoring.persistence" class="OutboxObservationRepository" method="read" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Throwable in try-catch block
+</violation>
+<violation beginline="73" endline="73" begincolumn="14" endcolumn="23" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.monitoring.persistence" class="OutboxObservationRepository" method="read" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Throwable in try-catch block
+</violation>
+<violation beginline="94" endline="94" begincolumn="14" endcolumn="23" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.monitoring.persistence" class="OutboxObservationRepository" method="closeRows" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Throwable in try-catch block
+</violation>
+<violation beginline="104" endline="104" begincolumn="14" endcolumn="23" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.monitoring.persistence" class="OutboxObservationRepository" method="closeStatement" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Throwable in try-catch block
+</violation>
+</file>
+</pmd>
