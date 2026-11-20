@@ -1,0 +1,170 @@
+{
+  "eventId": "PGPT-20261008-6696",
+  "groupId": "PGPT-WBS66-P01809-ASYNC-BYTE-RECOVERY-COMPOSITION-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T11:08:51.758000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 67,
+      "remainingPercent": 33,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P01809-ASYNC-BYTE-RECOVERY-COMPOSITION-20261120",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "PGPT-WBS66-P01809-ASYNC-BYTE-RECOVERY-COMPOSITION-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P018-09"
+    ],
+    "managementWorkIds": [
+      "WBS-P018-09/2",
+      "WBS-C07"
+    ],
+    "source": "951a1e6335a52fa89a9f3f5c9d4b3230f87628b6",
+    "productionCoreMain": "517a23cddc9f3883550942f6fa90a4256ef39b73",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40796-async-byte-recovery-composition-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.1,
+      "base": 0.3,
+      "high": 0.65
+    },
+    "groupCapPp": 1.2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1177_F03Test1146と独立継続点.json",
+        "sha256": "7ae1631b7d5b87bb01ec40f2ff8b8d956247deddc71e85d493ec4534074b54f7"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40640-c07-async-queue-int64-independent-v1/manifest.json",
+        "sha256": "c14697ae4dfa11c4d8cbde7ad9f07a296aafaadda6c364cd9475e7375e1da639"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/1679_AsyncQueueバイト割合是正_単体テスト仕様書.md",
+        "sha256": "95caecf96e11effd2442cfb86b0b6647939b39fb53ce9d7cb786383b7994764a"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "SS351 §7と1679の通常観測。旧ratio・欠測・critical個別試験は再演せず保全。既知bytes片側でcritical、欠測で復旧中断、原因確認の同一event結合が未取得。",
+    "endCondition": "正しい棚卸数・状態・時刻の独立期待で、新規合成の通常監視2件を確認する。負数を欠測と扱う推測や設計変更は含めない。",
+    "workScope": "同sourceの純粋なBatch監視六型と新Testのみ。全Batch JAR、実収集、ブローカー、操作、既成功試験なし。",
+    "quotaAfter": {
+      "usedPercent": 67,
+      "remainingPercent": 33,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "d0d60f94810c29d9da492ceeb2137f2921ab10bb24a453b22c649e5ec6eb4c87",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T11:08:51.758000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 67,
+          "remainingPercent": 33,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T11:07:57.893411+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 67,
+      "remainingPercent": 33,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6695",
+    "attempt": 1,
+    "attemptResult": "キュー片側情報からのcriticalと欠測後の同一event復旧、二条件同時の一件countを2/2初回で確認。",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 2,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40796-async-byte-recovery-composition-v1/manifest.json",
+        "sha256": "6bbcccde806917b331a1966c1aabc4b2fef98a492551921e220d57ac1b1025cf"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/4740_非同期キュー片側観測と復旧単体仕様.md",
+        "sha256": "017718d2cf39ee056f48afb919b3fd06e3f81ae22741ec27d48d930028a227e0"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40794-f03-new-test-source-receipt-v1/manifest.json",
+        "sha256": "e6b57e504db371c1fc05b12bcee8b700902e05feb8dc4307741c270394668e0b"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "C07実観測・sink・保持",
+      "P018-09全scope",
+      "正式451"
+    ],
+    "selectedPasses": 2,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "notRun": 0,
+    "firstAttemptTests": 2,
+    "firstAttemptPasses": 2,
+    "eligibleCheckstyleConfirmed": 1115,
+    "testSourceCount": 1147,
+    "heldTestCount": 32,
+    "localJaCoCo": {
+      "INSTRUCTION": {
+        "covered": 776,
+        "missed": 511
+      },
+      "BRANCH": {
+        "covered": 57,
+        "missed": 109
+      },
+      "LINE": {
+        "covered": 158,
+        "missed": 90
+      },
+      "COMPLEXITY": {
+        "covered": 50,
+        "missed": 85
+      },
+      "METHOD": {
+        "covered": 31,
+        "missed": 21
+      },
+      "CLASS": {
+        "covered": 12,
+        "missed": 1
+      }
+    },
+    "rawWholeCoverage": false
+  }
+}
