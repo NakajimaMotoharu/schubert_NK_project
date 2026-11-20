@@ -1,0 +1,323 @@
+{
+  "actualExit": 0,
+  "source": "2b16a8ed20778fe5896099cb4798cfd1ff96b176",
+  "checkedTree": "af79f33a106c95cf1c0d06209e240350e34750f2",
+  "terminalAtUTC": "2026-11-20T17:15:15.446265+00:00",
+  "startEvent": "PGPT-20261008-6995",
+  "wbs": "WBS-F03/2-2",
+  "horizontal": "YKT-2751",
+  "scope": "Existing single PG37736 exec; historic six-class HTTP contract and mode disposition only",
+  "original": {
+    "run": "PG37736-WEB-MONITORING41",
+    "source": "e4f4931a238344b28a4b0aa81513e3caa08c95a5",
+    "productionCore": "a013a6d676454082de3c59bc199e87f37fefe159",
+    "post": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37738-web-monitoring41-independent-v1/manifest.json",
+      "sha256": "f3bc4fca2ae1feaa1d431809d93e0dda58cc3dfc297f1eb9fee667db55cd41a6"
+    },
+    "unit": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37736-web-monitoring41-unit-v1/manifest.json",
+      "sha256": "e5702b4dd11140b6c45d371a338866181719ed35add0857068f540a64952c173"
+    },
+    "unfiltered": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37738-web-monitoring41-independent-v1/unfiltered.stdout",
+      "sha256": "8a81eb5fd129c488a45a555b5be1d4fc60ad4093568e0b2fb64d1bb417632c2b"
+    },
+    "exec": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37738-web-monitoring41-independent-v1/jacoco.exec",
+      "sha256": "42bdbe51ec5b84182c3d4582ae9a760aef5998f7669dcdff5dcae8c230d54dc3"
+    },
+    "xml": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37738-web-monitoring41-independent-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "e217999549bc247afca6a0b5b4ea45cecc703a28fa84d6bea431e917cba10711"
+    },
+    "suiteTests": 41,
+    "selectedNames": [
+      "httpMetric001ApprovedCatalogModesAndBuckets()",
+      "httpMetric002IndependentWholeFiniteLabelMatrix()",
+      "httpMetric003UnknownUserValuesCannotGrowLabelSpace()",
+      "httpMetric004NullUnknownAndStatusBoundariesAreExplicit()",
+      "httpMetric005AllReturnedCollectionsAreImmutable()",
+      "httpMetric006ConcurrentClassifiersAreStateless()"
+    ]
+  },
+  "unchangedGitSources": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/HttpMetricContract.java",
+      "sha256": "019f126d38fdfbfd60baf8f38c254201db2427e7a0c2087e052712812a889c03",
+      "gitBlob": "e93914f596dced23f5bc76d3325a55a1ae1f28ee"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricContractTest.java",
+      "sha256": "ddd4b35be315b612cc80587f619dad24e0c009280c92e471c4bb557fbe7ec950",
+      "gitBlob": "775e9bf6013f4cc84d34fc157bc1769e2e968a10"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/resources/monitoring/http-route-labels.txt",
+      "sha256": "1777c4710e6448bdb459d5fd2beccf389f57ec4ea9effdca171cdbd6888d5331",
+      "gitBlob": "5f09003e7d59368662b66d65f7a16a292da5652a"
+    }
+  ],
+  "originalPhysical": {
+    "dev/codex/schubert/nk/web/monitoring/HttpMetricContract": {
+      "CRC64": "b96a4a1a6bd5a8b1",
+      "sha256": "75d77ef38c7733b739c54098d58f915d0c6992d2bcaaec2429c51e461b8d0cec",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 89
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 10
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 21
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 14
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 8
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/web/monitoring/HttpMetricContract$Labels": {
+      "CRC64": "132e1c4462717b1a",
+      "sha256": "027eebec184d100c8e2ce1d77e0255fdf373caa70667a55ef8f3d36d71366093",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 67
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 11
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 9
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 9
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/web/monitoring/HttpMetricContract$Method": {
+      "CRC64": "a3f6ef695aeb8ce0",
+      "sha256": "295b08827d1342f21a403f93478f96f41524b4cd8bf9c6357c05c0cca7b795b1",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 130
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 15
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 6
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 6
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/web/monitoring/HttpMetricContract$Metric": {
+      "CRC64": "abe268e3a3e71170",
+      "sha256": "bd0fab310b53f0cde5dcde5eb9f2d3eb411ba184fba0402c6c22616093a9b481",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 103
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 4
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 15
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 11
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 9
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/web/monitoring/HttpMetricContract$Route": {
+      "CRC64": "47b8326be6fad100",
+      "sha256": "84a897107a84c6cf18686887fc910bb1c79546ae2c6f756614e91dd22729dc55",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 450
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 2
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 46
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 9
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 8
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/web/monitoring/HttpMetricContract$Status": {
+      "CRC64": "6c1c548555e371b4",
+      "sha256": "9c4f6916d4fe1dfe592dc05b1468a7e177ee72d6a730045befa5d177f217265c",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 100
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 4
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 13
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 9
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 7
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    }
+  },
+  "modeMethod": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 35
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 10
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 4
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 7
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 1
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 0
+    }
+  },
+  "partialSource": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39536-f03-web-standard-source-independent-v1/manifest.json",
+    "sha256": "4c2a538e2a0a4b6b5aa46a133bec9ff465dda27cb239a8bcc41e5a533299da3f"
+  },
+  "supersedesPartialLookup": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40990-f03-mode-horizontal-recorded-raw-v1/manifest.json",
+    "sha256": "795219dd09a543b21580ccc2d9bdc2cb236147cfca0edfd930436eade4ba9b73"
+  },
+  "commonCauseDisposition": "Original mode test covers the named method and all six classes in the same execution. No mode rewrite needed.",
+  "remainingHorizontal": {
+    "status": "HOLD_QA-056",
+    "dependencyReferences": {
+      "ApiOutboxObservationPump": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxObservationPump.java",
+        "sha256": "25eed3a03c68fd2f0bb7c68bf576239e238a2e2ecd4b4003ddc3d076348c2f41",
+        "reference": "ApiReadOnlyObservationAttempt",
+        "referenceLines": [
+          24,
+          29,
+          38,
+          58,
+          82,
+          87
+        ]
+      },
+      "ApiOutboxObservationSource": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxObservationSource.java",
+        "sha256": "1d2c0e44fab847e256b794a04bdabd3bf770db3deb59afe37c8e3a80faaccc3d",
+        "reference": "ApiReadOnlyObservationAttempt",
+        "referenceLines": [
+          63
+        ]
+      },
+      "ApiReadOnlyObservationAttempt": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiReadOnlyObservationAttempt.java",
+        "sha256": "fe7fbb7d9858f05579839ab7ce6b80ec58566d90dbfc0d13d69a73aa730319ea",
+        "reference": "TemporaryInfrastructureException",
+        "referenceLines": [
+          3,
+          74,
+          75
+        ]
+      }
+    },
+    "register": {
+      "path": "documents/900_OTHER/910_台帳/911_確認事項一覧.md",
+      "sha256": "d0b3fd7b4247db035544f4ee2c20ab1d0002a706060b21f9636b77dbaac2380a"
+    }
+  },
+  "compiledCurrentPhysical": 0,
+  "testsStarted": 0,
+  "wholeF03Accepted": false,
+  "whole451Accepted": false,
+  "formalDelta": 0
+}
