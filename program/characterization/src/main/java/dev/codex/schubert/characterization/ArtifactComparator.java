@@ -116,7 +116,9 @@ public final class ArtifactComparator {
               "CHR-A02:/" + SESSION_DESTINATIONS + "/0",
               textPair(MENU_DESTINATION, SESSION_EXPIRED_DESTINATION)));
   private static final ObjectMapper JSON =
-      new ObjectMapper().enable(DeserializationFeature.FAIL_ON_TRAILING_TOKENS);
+      new ObjectMapper()
+          .enable(DeserializationFeature.FAIL_ON_TRAILING_TOKENS)
+          .enable(DeserializationFeature.FAIL_ON_READING_DUP_TREE_KEY);
   private static final JsonNode CURRENT_MULTIPLE_VOICE = multipleVoiceProjection(2);
   private static final JsonNode NK_MULTIPLE_VOICE = multipleVoiceProjection(1);
   private static final Set<String> MODES = Set.of(MODE_DIFFERENCE, "required", MODE_CONTRACT);

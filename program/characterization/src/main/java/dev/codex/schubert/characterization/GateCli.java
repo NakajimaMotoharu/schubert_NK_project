@@ -44,6 +44,7 @@ public final class GateCli {
   private static final ObjectMapper JSON =
       new ObjectMapper()
           .enable(DeserializationFeature.FAIL_ON_TRAILING_TOKENS)
+          .enable(DeserializationFeature.FAIL_ON_READING_DUP_TREE_KEY)
           .enable(SerializationFeature.INDENT_OUTPUT)
           .enable(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS);
   private static final HexFormat HEX = HexFormat.of();

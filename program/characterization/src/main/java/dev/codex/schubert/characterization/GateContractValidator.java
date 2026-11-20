@@ -43,7 +43,9 @@ final class GateContractValidator {
   private static final String FIELD_ENVIRONMENT = "environment";
 
   private static final ObjectMapper JSON =
-      new ObjectMapper().enable(DeserializationFeature.FAIL_ON_TRAILING_TOKENS);
+      new ObjectMapper()
+          .enable(DeserializationFeature.FAIL_ON_TRAILING_TOKENS)
+          .enable(DeserializationFeature.FAIL_ON_READING_DUP_TREE_KEY);
   private static final Set<String> MODES = Set.of("difference", "required", "contract");
   private static final Set<String> SELECTOR_TYPES = Set.of("semantic", "header", "json-pointer");
 
