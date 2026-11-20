@@ -7,6 +7,7 @@ import json
 import os
 from pathlib import Path
 import subprocess
+import sys
 from tempfile import TemporaryDirectory
 from xml.etree import ElementTree as ET
 
@@ -55,13 +56,26 @@ def execute(stage, command, directory, java_home):
                 terminalAtUTC=datetime.now(timezone.utc).isoformat(), **files)
 
 
-def main():
+def main(retry):
+    global OUT
+    original = None
+    if retry:
+        first = OUT / "manifest.json"
+        original = read(first)
+        OUT = EVIDENCE / "PG40690-f03-outbox-annotation-spotbugs-only-v1"
+        assert original["actualExit"] == 1 and original["staticResults"]["spotbugs"]["errors"] == 1
+        assert first.read_bytes() == git("show", f"HEAD:{first.relative_to(ROOT)}")
     start = read(next(PLAN.glob("1052_F03*")))
     group = start["values"]
     assert group["run"] == RUN
     assert all(digest_file(ref["path"]) == ref["sha256"] for ref in group["oracleReferences"])
     core = group["productionCoreMain"]
-    assert group["source"] == git("rev-parse", "HEAD").decode().strip()
+    head = git("rev-parse", "HEAD").decode().strip()
+    if not retry:
+        assert group["source"] == head
+    else:
+        assert original["source"] == group["source"]
+        assert not git("diff", group["source"], head, "--", "pom.xml", "src", "tools/quality/static")
     old, joined = (read(entry["path"]) for entry in group["oracleReferences"][1:3])
     assert old["currentRaw"] == joined["originalRaw"] == 281
     assert joined["assignedBefore"] + joined["closedHere"] + joined["remaining"] == 281
@@ -97,10 +111,14 @@ def main():
         classes = work / "target/classes"
         classes.mkdir(parents=True)
         pom = work / "pom.xml"
+        dependency = (
+            "<dependencies><dependency><groupId>org.jspecify</groupId><artifactId>jspecify</artifactId>"
+            "<version>1.0.1</version></dependency></dependencies>" if retry else ""
+        )
         pom.write_text(
             '<project xmlns="http://maven.apache.org/POM/4.0.0">'
             '<modelVersion>4.0.0</modelVersion><groupId>dev.codex.schubert.pt</groupId>'
-            '<artifactId>outbox-values-static</artifactId><version>1</version></project>\n'
+            f'<artifactId>outbox-values-static</artifactId><version>1</version>{dependency}</project>\n'
         )
         put("begin.json", dict(groupStart=start["eventId"], source=group["source"], productionCore=core,
                               sourceHashes=inputs, module="schubert-nk-api", productSources=2,
@@ -121,6 +139,9 @@ def main():
                     "--no-cache", "--format", "xml", "--report-file", OUT / "pmd.xml"],
             "spotbugs": [*commands["spotbugs"][:7], pom, *commands["spotbugs"][8:]],
         }
+        if retry:
+            assert physical == original["physical"]
+            report = {"spotbugs": report["spotbugs"]}
         with ThreadPoolExecutor(max_workers=3) as pool:
             pending = {name: pool.submit(execute, name, cmd, work, java_home) for name, cmd in report.items()}
             stages.update({name: future.result() for name, future in pending.items()})
@@ -133,6 +154,8 @@ def main():
             ("pmd", ".//p:violation", (".//p:error", ".//p:configerror", ".//p:suppressedviolation")),
             ("spotbugs", ".//BugInstance", (".//Error", ".//MissingClass")),
         ):
+            if name not in report:
+                continue
             path = OUT / f"{name}.xml"
             if not path.is_file():
                 results[name] = {"reportExists": False}
@@ -144,17 +167,19 @@ def main():
             if name == "spotbugs":
                 observed = {row.get("class") for row in xml.findall(".//ClassStats")}
                 results[name]["observedTypes"] = sorted(observed)
-                results[name]["expectedTypesSeen"] = {
-                    f"{str(PACKAGE).replace('/', '.')}.{key}" for key in NAMES
-                }.issubset(observed)
+                results[name]["expectedTypesSeen"] = observed == {
+                    path.removesuffix(".class").replace("/", ".") for path in physical
+                }
         assert physical == {str(p.relative_to(classes)): digest_file(p) for p in classes.rglob("*.class")}
         okay = all(row["actualExit"] == 0 for row in stages.values()) and all(
             row.get("findings") == row.get("errors") == 0 for row in results.values()
         ) and results["spotbugs"].get("expectedTypesSeen") is True
         put("manifest.json", dict(
-            run=RUN, groupStart=start["eventId"], source=group["source"], productionCore=core,
+            run=OUT.name, groupStart=start["eventId"], source=group["source"], executionHead=head, productionCore=core,
             actualExit=0 if okay else 1, stages=stages, staticResults=results, physical=physical,
             priorScope=dict(raw=281, dispositions=280, remainingHeld=held),
+            retainedStaticFromFirst=[item for item in ("format", "checkstyle", "pmd") if retry],
+            onlyAdditionalAux="org.jspecify:jspecify:1.0.1" if retry else None,
             runtimePt=0, oldPtReplayed=0, coverageAdded=0, heldTypesOpened=0, externalActions=0,
             nullAwayApplied=False, whole451Accepted=False, wholeF03Accepted=False, formalDelta=0,
             terminalAtUTC=datetime.now(timezone.utc).isoformat()))
@@ -163,4 +188,5 @@ def main():
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    assert sys.argv[1:] in ([], ["spotbugs-only"])
+    raise SystemExit(main(sys.argv[1:] == ["spotbugs-only"]))

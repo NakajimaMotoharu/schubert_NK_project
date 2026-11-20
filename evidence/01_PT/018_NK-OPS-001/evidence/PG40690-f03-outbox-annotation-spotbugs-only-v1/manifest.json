@@ -1,0 +1,123 @@
+{
+  "run": "PG40690-f03-outbox-annotation-spotbugs-only-v1",
+  "groupStart": "PGPT-20261008-6571",
+  "source": "c93c9862215a2195041ca2b238f55b5a848e395e",
+  "executionHead": "dc7736119a28c3c1ae596c77e11665cdcb84d9fb",
+  "productionCore": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+  "actualExit": 0,
+  "stages": {
+    "compile": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "-d",
+        "/dev/shm/pgpt-f03-outbox-values-0xww08e3/target/classes",
+        "/dev/shm/pgpt-f03-outbox-values-0xww08e3/source/dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule.java",
+        "/dev/shm/pgpt-f03-outbox-values-0xww08e3/source/dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport.java",
+        "/dev/shm/pgpt-f03-outbox-values-0xww08e3/source/dev/codex/schubert/nk/api/messaging/outbound/package-info.java"
+      ],
+      "startedAtUTC": "2026-11-20T05:57:11.933989+00:00",
+      "terminalAtUTC": "2026-11-20T05:57:12.434645+00:00",
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40690-f03-outbox-annotation-spotbugs-only-v1/compile.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40690-f03-outbox-annotation-spotbugs-only-v1/compile.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "spotbugs": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-N",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-f",
+        "/dev/shm/pgpt-f03-outbox-values-0xww08e3/pom.xml",
+        "-Dmaven.test.skip=true",
+        "-Dspotbugs.effort=Max",
+        "-Dspotbugs.threshold=Low",
+        "-Dspotbugs.failOnError=true",
+        "-Dspotbugs.xmlOutput=true",
+        "com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check"
+      ],
+      "startedAtUTC": "2026-11-20T05:57:12.435738+00:00",
+      "terminalAtUTC": "2026-11-20T05:57:17.558424+00:00",
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40690-f03-outbox-annotation-spotbugs-only-v1/spotbugs.stdout",
+        "sha256": "adf612396c443876cc4ec768ced6604f888c42e71735e7d293f96190ebe4c046"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40690-f03-outbox-annotation-spotbugs-only-v1/spotbugs.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "staticResults": {
+    "spotbugs": {
+      "reportExists": true,
+      "sha256": "f4513b8bec23e6b8f76a2a3ba95eae23e86ddcaef3657aa020a21983bf33db3f",
+      "findings": 0,
+      "errors": 0,
+      "observedTypes": [
+        "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatchReport",
+        "dev.codex.schubert.nk.api.messaging.outbound.OutboxRetrySchedule",
+        "dev.codex.schubert.nk.api.messaging.outbound.package-info"
+      ],
+      "expectedTypesSeen": true
+    }
+  },
+  "physical": {
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport.class": "8ff6befd3035549f10d5c4895e6660693ce860a7872e16d7597d4db995382696",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule.class": "6c7cb9e19daad2bbda798b658e773d69b262f6527c576d019add02f09e7287a1",
+    "dev/codex/schubert/nk/api/messaging/outbound/package-info.class": "8b27ff9b19d5dc8b5889a1a4fe3488ce50fb6dc83ddd543b38e5f2cbc212bb9e"
+  },
+  "priorScope": {
+    "raw": 281,
+    "dispositions": 280,
+    "remainingHeld": {
+      "occurrence": 55,
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint.java",
+      "rule": "AvoidSynchronizedStatement",
+      "line": "117",
+      "column": "5",
+      "method": "capture",
+      "sourceSha256": "ed84f2265e7270fc0efc93d578debcf31ef80a3f9e9c86de71fee0208dd9940f",
+      "priorDecisionIndex": 54,
+      "priorProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38446-f03-native-checkpoint-source-disposition-v1/manifest.json",
+        "sha256": "412559f07f307a1186cfe2735fd4621a1e746d7f0282f94ff0d573c0f70dfa93"
+      },
+      "retainedDecision": "APPLICABLE_PRODUCTION_SYNCHRONIZATION_PENDING_NATIVE_GATE",
+      "priorSourceSha256": "2bcf68e2b9b0a54e91c6c53635471c1febcec591116c42eee50d6ab7fed7c112",
+      "reason": "Historical synchronization disposition is applicable/open. Source SHA changed; no transfer of prior source review or native result. Current serialized capture and independent terminal ownership conditions require their own evidence."
+    }
+  },
+  "retainedStaticFromFirst": [
+    "format",
+    "checkstyle",
+    "pmd"
+  ],
+  "onlyAdditionalAux": "org.jspecify:jspecify:1.0.1",
+  "runtimePt": 0,
+  "oldPtReplayed": 0,
+  "coverageAdded": 0,
+  "heldTypesOpened": 0,
+  "externalActions": 0,
+  "nullAwayApplied": false,
+  "whole451Accepted": false,
+  "wholeF03Accepted": false,
+  "formalDelta": 0,
+  "terminalAtUTC": "2026-11-20T05:57:17.559913+00:00"
+}
