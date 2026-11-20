@@ -1455,6 +1455,41 @@ class ArtifactComparatorTest {
         List.of("CHR-A02:/sessionRedirectsOldestToNewest/0"), result.unregisteredDifferences());
   }
 
+  /** PT-CHR-CMP-A02-003. */
+  @Test
+  void rejectsReportsThatBothOmitTheTwoRetainedSessionDestinations() throws Exception {
+    Fixture fixture = fixture("a02-both-omit-retained-destinations");
+    mutate(
+        fixture.current().resolve(FIXTURE_CHR_A02_JSON),
+        root -> root.putArray(FIXTURE_REDIRECT).add("/"));
+    mutate(
+        fixture.nk().resolve(FIXTURE_CHR_A02_JSON),
+        root -> root.putArray(FIXTURE_REDIRECT).add(FIXTURE_SESSION_EXPIRED));
+
+    var result = compare(fixture);
+    assertFalse(result.passed());
+    assertEquals(
+        List.of("CURRENT_SESSION_DESTINATIONS", "NK_SESSION_DESTINATIONS"), result.failures());
+    assertEquals(List.of(), result.unregisteredDifferences());
+  }
+
+  /** PT-CHR-CMP-A02-004. */
+  @Test
+  void rejectsReportsThatBothRedirectTheMiddleSessionDespiteActiveEvidence() throws Exception {
+    Fixture fixture = fixture("a02-both-redirect-retained-session");
+    for (Path resultDirectory : List.of(fixture.current(), fixture.nk())) {
+      mutate(
+          resultDirectory.resolve(FIXTURE_CHR_A02_JSON),
+          root -> ((ArrayNode) root.path(FIXTURE_REDIRECT)).set(1, TextNode.valueOf("/login")));
+    }
+
+    var result = compare(fixture);
+    assertFalse(result.passed());
+    assertEquals(
+        List.of("CURRENT_SESSION_DESTINATIONS", "NK_SESSION_DESTINATIONS"), result.failures());
+    assertEquals(List.of(), result.unregisteredDifferences());
+  }
+
   @Test
   void requiresTheSecondMediaCaseToReportItsOwnRangeStatus() throws Exception {
     Fixture fixture = fixture("missing-audio-range-status-observation");
