@@ -1,0 +1,63 @@
+{
+  "eventId": "PGPT-20261008-6543",
+  "groupId": "PGPT-WBS66-G07-PUBLIC-COMPILER-EVIDENCE-DELTA-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T04:12:33.329000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 62,
+      "remainingPercent": 38,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-G07-PUBLIC-COMPILER-EVIDENCE-DELTA-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-G07-PUBLIC-COMPILER-EVIDENCE-DELTA-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-G07"
+    ],
+    "managementWorkIds": [
+      "WBS-G07"
+    ],
+    "source": "3281e57067685d6af98121f97ec3a7acaf053162",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40652-g07-current-compiler-evidence-delta-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.2,
+      "base": 0.45,
+      "high": 0.8
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1023_F02現六モデル引渡し継続点.json",
+        "sha256": "9239b29ac6a4f33432587dec8555f33ca59469a9672af4bba30e1e5762300990"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40620-g07-protocol-jdbc-current-v1/manifest.json",
+        "sha256": "7a9238211d4ffca3a60a5918e863a4527a89e8da7011994a37535e1df6b03861"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5365_g07_public_history_utc42.py",
+        "sha256": "d7966aaa21d628178e45e138d9f62b015432297961bb45cd4fd411fff1b4df24"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "G07 公開証拠の差分。前回の認証済みカーソルから今回の追加を対象。",
+    "endCondition": "全新規差分を既固定版のredact scan、信号があれば出所を証明できるものだけ分類。真の秘密は値を出さず保留。",
+    "workScope": "公開Gitオブジェクトの当差分限定。私有ログや秘密を検索せず、署名/運用/試験操作なし。"
+  }
+}

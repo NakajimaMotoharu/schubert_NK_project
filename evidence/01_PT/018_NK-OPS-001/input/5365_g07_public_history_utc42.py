@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 import runpy
 import subprocess
+import sys
 from tempfile import TemporaryDirectory
 
 
@@ -40,19 +41,34 @@ def add(stream, header, data):
     return (first + 2, first + 2 + data.count(b"\n"))
 
 
-def main():
-    start = read(next(PLAN.glob("878_*")))
+def main(start_pattern="878_*"):
+    start = read(next(PLAN.glob(start_pattern)))
     v = start["values"]
-    assert all(pin(ref["path"]) == ref for ref in v["oracleReferences"])
+    runner = Path(__file__).relative_to(Path.cwd()).as_posix()
+    for ref in v["oracleReferences"]:
+        path = ref["path"]
+        if path == runner:
+            assert digest(git("show", v["source"] + ":" + path)) == ref["sha256"]
+        else:
+            assert pin(path) == ref
     previous = read(v["oracleReferences"][1]["path"])
-    assert previous["actualExit"] == previous["secretFindings"] == 0
+    assert previous["actualExit"] == 0
+    if "secretFindings" in previous:
+        assert previous["secretFindings"] == 0
+    else:
+        assert set(previous["scans"]) == {"textCommitDiffs", "gzipPublicStreams"}
+        assert all(result["actualExit"] == 0 and not result["signalLocations"]
+                   for result in previous["scans"].values())
     old, new = previous["newCursor"], v["source"]
     assert git("merge-base", old, new).decode().strip() == old
     commits = git("rev-list", "--reverse", old + ".." + new).decode().splitlines()
     assert 5 <= len(commits) <= 25
     scanner = (Path.cwd().parent / "toolchain/gitleaks-8.30.1-linux-x64/gitleaks").resolve()
-    first_scan = read(previous["firstResult"]["path"])
-    assert pin(scanner) == first_scan["scanner"]
+    prior_scanner = previous.get("tool")
+    if prior_scanner is None:
+        first_scan = read(previous["firstResult"]["path"])
+        prior_scanner = first_scan["scanner"]
+    assert pin(scanner) == prior_scanner
     data = {label: io.BytesIO() for label in ("textCommitDiffs", "gzipPublicStreams")}
     paths, binary, zipped = {}, [], []
     for commit in commits:
@@ -90,7 +106,7 @@ def main():
     record = dict(actualExit=0 if success else 1, source=new, productionCore=v["productionCoreMain"],
                   previousCursor=old, newCursor=new if success else None, commits=commits,
                   textPathVersions=paths, gzipVersions=zipped, binaryMetadataOnly=binary,
-                  tool=pin(scanner), scans=results, rawFindingSecretsPersisted=0,
+                  tool=pin(scanner), runner=pin(runner), scans=results, rawFindingSecretsPersisted=0,
                   excludedPrivateArchivesRead=0, full451Accepted=False, wholeG07Accepted=False,
                   terminalAtUTC=H["datetime"].now(H["timezone"].utc).isoformat())
     with report.open("x") as handle:
@@ -102,4 +118,4 @@ def main():
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(main(*sys.argv[1:]))

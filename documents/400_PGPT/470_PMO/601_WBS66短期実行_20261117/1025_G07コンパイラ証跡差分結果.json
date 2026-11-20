@@ -1,0 +1,134 @@
+{
+  "eventId": "PGPT-20261008-6544",
+  "groupId": "PGPT-WBS66-G07-PUBLIC-COMPILER-EVIDENCE-DELTA-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T04:14:50.494000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 62,
+      "remainingPercent": 38,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-G07-PUBLIC-COMPILER-EVIDENCE-DELTA-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-G07-PUBLIC-COMPILER-EVIDENCE-DELTA-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-G07"
+    ],
+    "managementWorkIds": [
+      "WBS-G07"
+    ],
+    "source": "3281e57067685d6af98121f97ec3a7acaf053162",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40652-g07-current-compiler-evidence-delta-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.2,
+      "base": 0.45,
+      "high": 0.8
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1023_F02現六モデル引渡し継続点.json",
+        "sha256": "9239b29ac6a4f33432587dec8555f33ca59469a9672af4bba30e1e5762300990"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40620-g07-protocol-jdbc-current-v1/manifest.json",
+        "sha256": "7a9238211d4ffca3a60a5918e863a4527a89e8da7011994a37535e1df6b03861"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5365_g07_public_history_utc42.py",
+        "sha256": "d7966aaa21d628178e45e138d9f62b015432297961bb45cd4fd411fff1b4df24"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "G07 公開証拠の差分。前回の認証済みカーソルから今回の追加を対象。",
+    "endCondition": "全新規差分を既固定版のredact scan、信号があれば出所を証明できるものだけ分類。真の秘密は値を出さず保留。",
+    "workScope": "公開Gitオブジェクトの当差分限定。私有ログや秘密を検索せず、署名/運用/試験操作なし。",
+    "quotaAfter": {
+      "usedPercent": 62,
+      "remainingPercent": 38,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "cf083c658e4d036d1e574394437e1aa8aaaa851e0866d144bcca88b0b5516714",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T04:14:50.494000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 62,
+          "remainingPercent": 38,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T04:14:40.683935+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 62,
+      "remainingPercent": 38,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6543",
+    "attempt": 1,
+    "attemptResult": "公開差分限定。初回準備で自身の旧工具SHAを誤参照し、BUG-3397修正後に一回走査。検出24件はすべて合成classのSHA、独立確認後の秘密0。",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40652-g07-current-compiler-evidence-delta-v1/manifest.json",
+        "sha256": "6974f9477cd6479e57a6661f533d7b56ac073086b05cba36926d68e64d8f9740"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40654-g07-current-compiler-evidence-delta-independent-v1/manifest.json",
+        "sha256": "a4b06fdef30558906ecc7828aedb4ba554422ef4d68031575d1f58e624122a45"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "G07の全source・全履歴の正式判定",
+      "短期12の個別criteria・当候補451・終了依存"
+    ],
+    "historyCommits": 16,
+    "textPaths": 115,
+    "secretFindings": 0,
+    "originalScannerSignals": 24,
+    "preparationFailures": 1,
+    "bug": "BUG-3397",
+    "scannerIntervalCursor": "3281e57067"
+  }
+}
