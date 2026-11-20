@@ -1,0 +1,68 @@
+{
+  "eventId": "PGPT-20261008-7043",
+  "groupId": "PGPT-WBS66-F03-OBSERVATION-CONTEXT-WHOLE-VALUE-20261121",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T18:21:21.724000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 77,
+      "remainingPercent": 23,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-OBSERVATION-CONTEXT-WHOLE-VALUE-20261121",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "PGPT-WBS66-F03-OBSERVATION-CONTEXT-WHOLE-VALUE-20261121",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2",
+      "WBS-P018-09"
+    ],
+    "source": "e326ea6808214e59a53420b3e6f51da1e1911b86",
+    "productionCoreMain": "559f5b5945e82374e0843dcfae11a8d07faef1ea",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG41080-f03-observation-context-value-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.2,
+      "base": 0.55,
+      "high": 1.2
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1527_P00405現Outbox原二suite継続点.json",
+        "sha256": "267385f98dbbb9c64370313dbc04ab11844aa3756e85e7a6b4090531fc93a9f0"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40966-f03-current-monitor-policy-engine-unit-scope-v1/manifest.json",
+        "sha256": "26e4613c706c7cf90d16bf9c649192f528c36b81250da55a4ea1a1d62f87acf3"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41070-f03-alert-owner-state-final-v1/manifest.json",
+        "sha256": "ef7ffcdc03a960dc3a2f2d5246029fa244fcfd18e920092a3f804a31f7e24095"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41074-f02-current-alert-batch-maven-v1/manifest.json",
+        "sha256": "2373767cfeaf06ab0138b4ff584901bcded516b4f12067daeee3184df3ca16cb"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "1412で残されたObservationContextの未到達2 method。PG41070にも同CRC・M2/I6不足。",
+    "endCondition": "元10を保持し観測値のMapキーと診断投影を試験。両対象の生coreと正規Batch byteを一実行で確認。",
+    "workScope": "純値と既MonitoringPolicyEngineTest全10だけ。App、実監視、inactive保留型を入れない。"
+  }
+}
