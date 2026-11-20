@@ -1,0 +1,146 @@
+{
+  "eventId": "PGPT-20261008-6945",
+  "groupId": "F03-production-compiler-werror-controls",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T16:19:56.766000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 74,
+      "remainingPercent": 26,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "F03-production-compiler-werror-controls",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "F03-production-compiler-werror-controls",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/criterion/quality"
+    ],
+    "source": "3d01e86116483ceb7643f08b5d90257097b20b06",
+    "productionCoreMain": "5372bf018acf0efa6dfe451467bf18b2e3fc0780",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40978-f03-production-compiler-werror-controls-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.1,
+      "base": 0.4,
+      "high": 0.8
+    },
+    "groupCapPp": 1.2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1427_P00701LoginAccount格納UTF8継続点.json",
+        "sha256": "86daa53188df941e361ef95a9899d9b847f9f2f699178c1618999868dcf28c0e"
+      },
+      {
+        "path": "pom.xml",
+        "sha256": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38"
+      },
+      {
+        "path": "documents/400_PGPT/450_品質/451_Build・静的解析・coverage方針.md",
+        "sha256": "7980a204c02574b235d588e3a05ae8fb7b26ecb18313f4f000918c9135da6f4c"
+      },
+      {
+        "path": "documents/400_PGPT/450_品質/453_Null解析gate検証仕様.md",
+        "sha256": "311b01f90cb469285db78c39ab53da6b56c9da7cae1157a30633ef5716b98a0b"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "第58版 WBS-F03/2-2。現親default-compileのall lintとWerrorが実際に製品型クラスを作らせないことを合成型で確認。既453の四NullAway負例と既testCompileの検査を再実行しない。開始依存は現親POMとJava25／Maven実工具、合成のみ。",
+    "endCondition": "PT-F03-COMPILER-001で同一親POM・環境の正常対照と警告対照を一回ずつ。同一APIの非推奨・移行済み呼出を分け、正常exit0と警告・Werrorの診断付きexit1、拒否class未生成を保存。",
+    "workScope": "合成Java型2個と親POM。製品型・HOLD・native・遠隔・実env操作なし。",
+    "quotaAfter": {
+      "usedPercent": 74,
+      "remainingPercent": 26,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "73b7a98c0cc1d7a83fd2f37fa0b42fb700501379f6e2633bba5f34c5524c84bb",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T16:19:56.766000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 74,
+          "remainingPercent": 26,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T16:19:25.583008+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 74,
+      "remainingPercent": 26,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6944",
+    "attempt": 1,
+    "attemptResult": "LOCAL_SCOPED_PASS",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40978-f03-production-compiler-werror-controls-v1/manifest.json",
+        "sha256": "2ad58c23b8ddf09755433e491aebb076acf4fa42dc9bb466af1476e2657d0ea6"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/5533_F03製品コンパイラ警告ゲート仕様.md",
+        "sha256": "3a9aa59141bf69234e2190612e530aa0ab234428ee88786e26091ee0715b65b4"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5533_f03_production_compiler_controls.py",
+        "sha256": "d2ef77dbcfe8e26261d32274949efbbdecbf116df6e08a5491df5b5137553e57"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/5534_F03製品コンパイラ警告ゲート実行結果.md",
+        "sha256": "427b58648f36ef9dd208c14a8d568edc35cfd0b63fdfd2782606b4da3b1ea90f"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "F03六製品全静的",
+      "F02依存／ABI",
+      "当source全451",
+      "既個別HOLD"
+    ],
+    "toolControlsPassed": 2,
+    "toolControlsTotal": 2,
+    "firstVerificationSuccess": 2,
+    "firstVerificationDenominator": 2,
+    "retryCount": 0
+  }
+}

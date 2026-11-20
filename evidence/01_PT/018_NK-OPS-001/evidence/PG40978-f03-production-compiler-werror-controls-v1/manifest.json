@@ -1,0 +1,162 @@
+{
+  "source": "5372bf018acf0efa6dfe451467bf18b2e3fc0780",
+  "documentationHead": "3d01e86116483ceb7643f08b5d90257097b20b06",
+  "startEvent": "PGPT-20261008-6944",
+  "run": "PG40978-f03-production-compiler-werror-controls-v1",
+  "testId": "PT-F03-COMPILER-001",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-20T16:19:25.583008+00:00",
+  "os": "Linux",
+  "java": "25.0.4",
+  "maven": "3.9.12",
+  "tools": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+      "sha256": "2136da000c36cd6ea5e714ecf8ea7fb4e41f29c75849b6b7e62531373b91a3b1"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+      "sha256": "f9381d0cb98abaaf9592dae421eddc497e84ed9bfb723b84c111d1350863c3a2"
+    }
+  ],
+  "rootPom": {
+    "path": "pom.xml",
+    "sha256": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38"
+  },
+  "specification": {
+    "path": "evidence/01_PT/018_NK-OPS-001/5533_F03製品コンパイラ警告ゲート仕様.md",
+    "sha256": "3a9aa59141bf69234e2190612e530aa0ab234428ee88786e26091ee0715b65b4"
+  },
+  "harness": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5533_f03_production_compiler_controls.py",
+    "sha256": "d2ef77dbcfe8e26261d32274949efbbdecbf116df6e08a5491df5b5137553e57"
+  },
+  "controls": [
+    {
+      "control": "valid",
+      "expectedExit": 0,
+      "actualExit": 0,
+      "startedAtUTC": "2026-11-20T16:19:19.813132+00:00",
+      "terminalAtUTC": "2026-11-20T16:19:22.812649+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "-N",
+        "-B",
+        "-ntp",
+        "-X",
+        "-f",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40978-f03-production-compiler-werror-controls-v1/valid/pom.xml",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "compile"
+      ],
+      "inputs": [
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40978-f03-production-compiler-werror-controls-v1/valid/pom.xml",
+          "sha256": "d3f20b715252711f77fb05c52fc66be26e8c571a37670f551c31f87f19346ff3"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40978-f03-production-compiler-werror-controls-v1/valid/src/main/java/dev/codex/schubert/nk/quality/TextApi.java",
+          "sha256": "0d2386a27be63dcd4d76b2e695f512d76c608c69cd52c391ff0b3728e1c84b0a"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40978-f03-production-compiler-werror-controls-v1/valid/src/main/java/dev/codex/schubert/nk/quality/CompilerControl.java",
+          "sha256": "c1b67abdb4cf6f0454845d880e5ef5fedd2a9e08ca39461a3e215ab38571347c"
+        }
+      ],
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40978-f03-production-compiler-werror-controls-v1/valid/maven.stdout",
+        "sha256": "c513a020e269be5e2a292ac3263e723e8e76b16d5f1a39450adcc5589bb00793"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40978-f03-production-compiler-werror-controls-v1/valid/maven.stderr",
+        "sha256": "05ed4976f99856c1417eead6c52058f5565d748a00ae7939fa02188545fafda4"
+      },
+      "signals": {
+        "defaultCompile": true,
+        "exactFlagsPresent": true,
+        "deprecationDiagnostic": false,
+        "warningRejected": false,
+        "anyCompilerWarning": false
+      },
+      "classfiles": [
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40978-f03-production-compiler-werror-controls-v1/valid/target/classes/dev/codex/schubert/nk/quality/CompilerControl.class",
+          "sha256": "ec65b90ebd112051ea0fd15eb091a7387274a67f17c5af2bc5ba02f5f4214413",
+          "major": 69
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40978-f03-production-compiler-werror-controls-v1/valid/target/classes/dev/codex/schubert/nk/quality/TextApi.class",
+          "sha256": "570e70288cfa9a28488546bddde43570d65fd9c597a48a36b5ef5184b6ec7e5e",
+          "major": 69
+        }
+      ],
+      "diagnostic": [],
+      "accepted": true
+    },
+    {
+      "control": "warning",
+      "expectedExit": 1,
+      "actualExit": 1,
+      "startedAtUTC": "2026-11-20T16:19:22.813706+00:00",
+      "terminalAtUTC": "2026-11-20T16:19:25.582373+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "-N",
+        "-B",
+        "-ntp",
+        "-X",
+        "-f",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40978-f03-production-compiler-werror-controls-v1/warning/pom.xml",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "compile"
+      ],
+      "inputs": [
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40978-f03-production-compiler-werror-controls-v1/warning/pom.xml",
+          "sha256": "d3f20b715252711f77fb05c52fc66be26e8c571a37670f551c31f87f19346ff3"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40978-f03-production-compiler-werror-controls-v1/warning/src/main/java/dev/codex/schubert/nk/quality/TextApi.java",
+          "sha256": "0d2386a27be63dcd4d76b2e695f512d76c608c69cd52c391ff0b3728e1c84b0a"
+        },
+        {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40978-f03-production-compiler-werror-controls-v1/warning/src/main/java/dev/codex/schubert/nk/quality/CompilerControl.java",
+          "sha256": "21ebbf94077757c11d05c511c4350cfb998f84d5338797a124d97a55f236171b"
+        }
+      ],
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40978-f03-production-compiler-werror-controls-v1/warning/maven.stdout",
+        "sha256": "2a14ac722b85d4d12895fcc891e28ad0b745e6b06c9054cd304a4b37b78ac915"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40978-f03-production-compiler-werror-controls-v1/warning/maven.stderr",
+        "sha256": "05ed4976f99856c1417eead6c52058f5565d748a00ae7939fa02188545fafda4"
+      },
+      "signals": {
+        "defaultCompile": true,
+        "exactFlagsPresent": true,
+        "deprecationDiagnostic": true,
+        "warningRejected": true,
+        "anyCompilerWarning": true
+      },
+      "classfiles": [],
+      "diagnostic": [
+        "[WARNING] /home/mini/codex/project1/work/pgpt-runs/PG379/PG40978-f03-production-compiler-werror-controls-v1/warning/src/main/java/dev/codex/schubert/nk/quality/CompilerControl.java:[5,18] [deprecation] legacyText() in TextApi has been deprecated",
+        "[ERROR] error: warnings found and -Werror specified",
+        "[ERROR] error: warnings found and -Werror specified",
+        "error: warnings found and -Werror specified",
+        "error: warnings found and -Werror specified"
+      ],
+      "accepted": true
+    }
+  ],
+  "productMainCompiled": 0,
+  "productTestsStarted": 0,
+  "productCoverage": null,
+  "realEnvironmentOperations": 0,
+  "wholeF03": false,
+  "whole451": false,
+  "formalDelta": 0
+}
