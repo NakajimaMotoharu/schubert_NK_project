@@ -1,0 +1,164 @@
+{
+  "actualExit": 0,
+  "source": "49c81eaef3e438387e9bcb998c37e309a6ad77e8",
+  "productionCore": "cb1411d94a1d97aedafe1af60400aaec0ae8c8e8",
+  "prior24NotCombined": true,
+  "testSources": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseInventoryTest.java",
+      "sha256": "5e31e9acb25f892a208e05b4f4e4b8e70969dd116c00643e32bee67a95a1ad4c"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseInventoryRawContractTest.java",
+      "sha256": "7c6da325c0d9ef939fbf27ed3411ee61c198d8e98b72c22c1f90a776edbdc94f"
+    }
+  ],
+  "expectedCases": 18,
+  "selectedSuites": [
+    "ReleaseInventoryTest",
+    "ReleaseInventoryRawContractTest"
+  ],
+  "inputClasses": {
+    "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission": {
+      "sha256": "22a90fb464b6c444e399d3b643b2d6987e2adc9b9540359d1ab2efd9310d7107",
+      "crc64": "07ed2baa5b045d64"
+    },
+    "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission$Row": {
+      "sha256": "daf77974a51a03171b27048a9eaf12367a60527ca8f6638aebe8b0fbaf1b5a1a",
+      "crc64": "90efabf55ea20961"
+    },
+    "dev/codex/schubert/nk/bootstrap/ReleaseInventory": {
+      "sha256": "e891c1882c88a1752f2b4e3c282b12f13b3b26003d8d8e3cf23f1848ff50ded1",
+      "crc64": "2d342f3febef6dfd"
+    },
+    "dev/codex/schubert/nk/bootstrap/ReleaseInventory$Artifact": {
+      "sha256": "2b1923e7a262a2e11a306f0b63751b043f3abf4a9776d1f8ca3799b9ca2e8125",
+      "crc64": "655dd5096f676595"
+    },
+    "dev/codex/schubert/nk/bootstrap/ReleaseInventory$Dependency": {
+      "sha256": "b1347d1dc0a34c6399998337806bf05e308e39cdcc4ddae031536e904e14adef",
+      "crc64": "7a23edc0f0085d12"
+    }
+  },
+  "priorTargetOwnByteSame": 3,
+  "sharedCurrentChanges": 2,
+  "actualBackendActions": 0,
+  "executableProductEntryPoints": 0,
+  "newProductDefinitions": 0,
+  "stages": {
+    "compile": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/dev/shm/pgpt-inventory18-current-le1d9glv/classes:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "-d",
+        "/dev/shm/pgpt-inventory18-current-le1d9glv/tests",
+        "/dev/shm/pgpt-inventory18-current-le1d9glv/ReleaseInventoryTest.java",
+        "/dev/shm/pgpt-inventory18-current-le1d9glv/ReleaseInventoryRawContractTest.java"
+      ],
+      "beginUTC": "2026-11-20T00:17:55.785252+00:00",
+      "terminalAtUTC": "2026-11-20T00:17:56.620752+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40422-p01802-current-inventory18-v1/compile.stdout.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40422-p01802-current-inventory18-v1/compile.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "unit": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Xmx384m",
+        "-Duser.timezone=Asia/Tokyo",
+        "-Xlog:class+init=info:file=/dev/shm/pgpt-inventory18-current-le1d9glv/class-init.log",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40422-p01802-current-inventory18-v1/jacoco.exec,sessionid=PG40422-CURRENT-INVENTORY-ORDINARY-18,append=false",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--fail-if-no-tests",
+        "--details=summary",
+        "--class-path",
+        "/dev/shm/pgpt-inventory18-current-le1d9glv/tests:/dev/shm/pgpt-inventory18-current-le1d9glv/classes:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40422-p01802-current-inventory18-v1/xml",
+        "--config=junit.jupiter.execution.parallel.enabled=false",
+        "--select-class=dev.codex.schubert.nk.bootstrap.ReleaseInventoryTest",
+        "--select-class=dev.codex.schubert.nk.bootstrap.ReleaseInventoryRawContractTest"
+      ],
+      "beginUTC": "2026-11-20T00:17:56.620775+00:00",
+      "terminalAtUTC": "2026-11-20T00:17:57.989645+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40422-p01802-current-inventory18-v1/unit.stdout.log.gz",
+        "sha256": "e6f2063f0176f21f0937f53dc988b947d4a277ae366b92f6793bf97f019a5fc8"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40422-p01802-current-inventory18-v1/unit.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "standard": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40422-p01802-current-inventory18-v1/jacoco.exec",
+        "--classfiles",
+        "/dev/shm/pgpt-inventory18-current-le1d9glv/classes",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40422-p01802-current-inventory18-v1/coverage.xml"
+      ],
+      "beginUTC": "2026-11-20T00:17:57.989663+00:00",
+      "terminalAtUTC": "2026-11-20T00:17:58.132217+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40422-p01802-current-inventory18-v1/standard.stdout.log.gz",
+        "sha256": "85476832b5d35d17e3969f4b47bea14da8ad852db7328f9b19e479f579d6190c"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40422-p01802-current-inventory18-v1/standard.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "raw": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38642-schema-raw-line-tool-v1/toolclasses:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+        "--line-deficits",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40422-p01802-current-inventory18-v1/jacoco.exec",
+        "/dev/shm/pgpt-inventory18-current-le1d9glv/classes/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.class",
+        "/dev/shm/pgpt-inventory18-current-le1d9glv/classes/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission$Row.class",
+        "/dev/shm/pgpt-inventory18-current-le1d9glv/classes/dev/codex/schubert/nk/bootstrap/ReleaseInventory.class",
+        "/dev/shm/pgpt-inventory18-current-le1d9glv/classes/dev/codex/schubert/nk/bootstrap/ReleaseInventory$Artifact.class",
+        "/dev/shm/pgpt-inventory18-current-le1d9glv/classes/dev/codex/schubert/nk/bootstrap/ReleaseInventory$Dependency.class"
+      ],
+      "beginUTC": "2026-11-20T00:17:58.132236+00:00",
+      "terminalAtUTC": "2026-11-20T00:17:58.239079+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40422-p01802-current-inventory18-v1/raw.stdout.log.gz",
+        "sha256": "ea251959458f5434460ea56115a15336fdaaa9ba5beadcb75920add36134da58"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40422-p01802-current-inventory18-v1/raw.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    }
+  },
+  "session": "PG40422-CURRENT-INVENTORY-ORDINARY-18",
+  "formalDelta": 0,
+  "whole451Accepted": false,
+  "terminalAtUTC": "2026-11-20T00:17:58.260966+00:00"
+}
