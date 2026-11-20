@@ -1,0 +1,343 @@
+{
+  "source": "8ae29687743f2b9851bae59a0fb9ff23b5fb2176",
+  "beforeSource": "62142212de26387dd718026a1c839fbb1dc6b2a9",
+  "startEvent": "PGPT-20261008-6929",
+  "run": "PG40968-p01810-actor-utf8-scalar-boundary-v1",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-20T15:54:00.662581+00:00",
+  "java": "25.0.4",
+  "maven": "3.9.12",
+  "os": "Linux",
+  "testId": "PT-AUT-ACTORVALUE004",
+  "inputs": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticatedActor.java",
+      "sha256": "c3e1cada9993b4180e513eb2ba314e55862cf9f1bb5157dd7105e1f8425fe29c"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/domain/Role.java",
+      "sha256": "e60e607a3f09e860ad7c28c62555672ebdca3e8590d98fcffa45f82b5c2f5fe8"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticatedActorValueContractTest.java",
+      "sha256": "c84d8ac4a5a7093a1ec5da3cf62dbcd77fa01fa3b6934b59aff7c7956ef05c4c"
+    }
+  ],
+  "rootPom": {
+    "path": "pom.xml",
+    "sha256": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38"
+  },
+  "schemaPOM": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40968-p01810-actor-utf8-scalar-boundary-v1/scope/pom.xml",
+    "sha256": "a71e24fce43b257f0f5620979de26cfa4067a4bf718e15cb8a6666d3a00ba9f8"
+  },
+  "fixtureSpec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/5522_認証値の厳密UTF8単体仕様.md",
+    "sha256": "94a82d896598f1e04fa635b94d67c437c18185011950a701969d8685a3aa9a9f"
+  },
+  "previousCases": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38572-ssc460-actor-boundary-unit-v2/manifest.json",
+    "sha256": "f68f1882071747854949e16ff9eb752353ab9a5241cf658d10e5f8c88c728908"
+  },
+  "testCounts": {
+    "tests": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "exactMethods": [
+    "actorValue001ValidScalarByteBoundariesPreserveExactRowText",
+    "actorValue002EqualDistinctRowsLookUpLiteralOwnerAndKeepDifferencesSeparate",
+    "actorValue003RejectsOutOfRangeRowsAndKeepsTheDeclaredRoleNames",
+    "actorValue004RejectsNonScalarsWithoutChangingValidSupplementaryText"
+  ],
+  "steps": [
+    {
+      "step": "format",
+      "exitCode": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticatedActor.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/domain/Role.java",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticatedActorValueContractTest.java"
+      ],
+      "startedAtUTC": "2026-11-20T15:53:54.200833+00:00",
+      "terminalAtUTC": "2026-11-20T15:53:54.580571+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40968-p01810-actor-utf8-scalar-boundary-v1/format.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40968-p01810-actor-utf8-scalar-boundary-v1/format.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "step": "checkstyle",
+      "exitCode": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticatedActor.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/domain/Role.java",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticatedActorValueContractTest.java"
+      ],
+      "startedAtUTC": "2026-11-20T15:53:54.580845+00:00",
+      "terminalAtUTC": "2026-11-20T15:53:55.066946+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40968-p01810-actor-utf8-scalar-boundary-v1/checkstyle.stdout",
+        "sha256": "5647e7b712f6ef44d0cb71ddd726bcc8092588e006bbf73e2f9ce869f4c56c2e"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40968-p01810-actor-utf8-scalar-boundary-v1/checkstyle.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "step": "typed",
+      "exitCode": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "-N",
+        "-B",
+        "-ntp",
+        "-X",
+        "-f",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40968-p01810-actor-utf8-scalar-boundary-v1/scope/pom.xml",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "compile"
+      ],
+      "startedAtUTC": "2026-11-20T15:53:55.067599+00:00",
+      "terminalAtUTC": "2026-11-20T15:53:58.178416+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40968-p01810-actor-utf8-scalar-boundary-v1/typed.stdout",
+        "sha256": "cb97bb2456e9aba130d922d5180187511295c481c305b11ea571852f40821ef8"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40968-p01810-actor-utf8-scalar-boundary-v1/typed.stderr",
+        "sha256": "05ed4976f99856c1417eead6c52058f5565d748a00ae7939fa02188545fafda4"
+      }
+    },
+    {
+      "step": "compile-test",
+      "exitCode": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-implicit:none",
+        "-sourcepath",
+        "",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40968-p01810-actor-utf8-scalar-boundary-v1/scope/target/classes:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40968-p01810-actor-utf8-scalar-boundary-v1/tests",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticatedActorValueContractTest.java"
+      ],
+      "startedAtUTC": "2026-11-20T15:53:58.178694+00:00",
+      "terminalAtUTC": "2026-11-20T15:53:58.794437+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40968-p01810-actor-utf8-scalar-boundary-v1/compile-test.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40968-p01810-actor-utf8-scalar-boundary-v1/compile-test.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "step": "unit",
+      "exitCode": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/PG40968-p01810-actor-utf8-scalar-boundary-v1/unit.exec,sessionid=PG40968-ACTOR-UTF8-FOUR,append=false",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-ansi-colors",
+        "--fail-if-no-tests",
+        "--class-path",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40968-p01810-actor-utf8-scalar-boundary-v1/scope/target/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/PG40968-p01810-actor-utf8-scalar-boundary-v1/tests",
+        "--select-class",
+        "dev.codex.schubert.nk.api.security.AuthenticatedActorValueContractTest",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40968-p01810-actor-utf8-scalar-boundary-v1/reports"
+      ],
+      "startedAtUTC": "2026-11-20T15:53:58.794646+00:00",
+      "terminalAtUTC": "2026-11-20T15:53:59.998544+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40968-p01810-actor-utf8-scalar-boundary-v1/unit.stdout",
+        "sha256": "7cc90540acf98cfcc6611e2ac07912c863cac2a26a48f2c3d88a5ce91391c1f7"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40968-p01810-actor-utf8-scalar-boundary-v1/unit.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "step": "raw-compile",
+      "exitCode": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40968-p01810-actor-utf8-scalar-boundary-v1/measure",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40968-p01810-actor-utf8-scalar-boundary-v1/UnfilteredCodeMeasurement.java"
+      ],
+      "startedAtUTC": "2026-11-20T15:54:00.019110+00:00",
+      "terminalAtUTC": "2026-11-20T15:54:00.578364+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40968-p01810-actor-utf8-scalar-boundary-v1/raw-compile.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40968-p01810-actor-utf8-scalar-boundary-v1/raw-compile.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "step": "raw",
+      "exitCode": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40968-p01810-actor-utf8-scalar-boundary-v1/measure:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40968-p01810-actor-utf8-scalar-boundary-v1/unit.exec",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40968-p01810-actor-utf8-scalar-boundary-v1/scope/target/classes/dev/codex/schubert/nk/api/security/AuthenticatedActor.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40968-p01810-actor-utf8-scalar-boundary-v1/scope/target/classes/dev/codex/schubert/nk/api/domain/Role.class"
+      ],
+      "startedAtUTC": "2026-11-20T15:54:00.578959+00:00",
+      "terminalAtUTC": "2026-11-20T15:54:00.662378+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40968-p01810-actor-utf8-scalar-boundary-v1/raw.stdout",
+        "sha256": "5c8007c498b1318f7620d97cbc05cff0a6b0e074b7ed4b9e9954277d7c06f6a4"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40968-p01810-actor-utf8-scalar-boundary-v1/raw.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "nullAwayFindings": 0,
+  "observed": {
+    "dev/codex/schubert/nk/api/security/AuthenticatedActor": {
+      "crc64": "050fa5a52cf28cce",
+      "counters": [
+        {
+          "kind": "INSTRUCTION",
+          "missed": 0,
+          "covered": 70
+        },
+        {
+          "kind": "BRANCH",
+          "missed": 0,
+          "covered": 10
+        },
+        {
+          "kind": "LINE",
+          "missed": 0,
+          "covered": 12
+        },
+        {
+          "kind": "COMPLEXITY",
+          "missed": 0,
+          "covered": 12
+        },
+        {
+          "kind": "METHOD",
+          "missed": 0,
+          "covered": 7
+        },
+        {
+          "kind": "CLASS",
+          "missed": 0,
+          "covered": 1
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/api/domain/Role": {
+      "crc64": "7287678cfafa895e",
+      "counters": [
+        {
+          "kind": "INSTRUCTION",
+          "missed": 0,
+          "covered": 40
+        },
+        {
+          "kind": "BRANCH",
+          "missed": 0,
+          "covered": 0
+        },
+        {
+          "kind": "LINE",
+          "missed": 0,
+          "covered": 3
+        },
+        {
+          "kind": "COMPLEXITY",
+          "missed": 0,
+          "covered": 5
+        },
+        {
+          "kind": "METHOD",
+          "missed": 0,
+          "covered": 5
+        },
+        {
+          "kind": "CLASS",
+          "missed": 0,
+          "covered": 1
+        }
+      ]
+    }
+  },
+  "physical": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40968-p01810-actor-utf8-scalar-boundary-v1/scope/target/classes/dev/codex/schubert/nk/api/security/AuthenticatedActor.class",
+      "sha256": "a8401606583b5d32f5087ab12662b474374edcefa5c3b606fcbffafa9911860b"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40968-p01810-actor-utf8-scalar-boundary-v1/scope/target/classes/dev/codex/schubert/nk/api/domain/Role.class",
+      "sha256": "d08b1ce036737e90c55127210b11c6ac492d14be64a61249d265c3ae34b86257"
+    }
+  ],
+  "junitXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40968-p01810-actor-utf8-scalar-boundary-v1/reports/TEST-junit-jupiter.xml",
+    "sha256": "25942e525711ff2215108c507e1d0cee09d57c9147699ef159061cb3784f3373"
+  },
+  "session": "PG40968-ACTOR-UTF8-FOUR",
+  "execData": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40968-p01810-actor-utf8-scalar-boundary-v1/unit.exec",
+    "sha256": "c38f3ddc14b9cc4aea8b6eb2756104384574ff5de613b39c80502ac3678aaff5"
+  },
+  "table": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40968-p01810-actor-utf8-scalar-boundary-v1/unfiltered.tsv",
+    "sha256": "5c8007c498b1318f7620d97cbc05cff0a6b0e074b7ed4b9e9954277d7c06f6a4"
+  },
+  "newTests": 1,
+  "requiredRegressions": 3,
+  "actualExternalOperations": 0,
+  "wholeF03": false,
+  "whole451": false,
+  "formalDelta": 0
+}

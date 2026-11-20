@@ -911,3 +911,8 @@ NK-DAT-001／NK-BAT-001の共通参照、WBS-P004-02/2、P004-05/2、F02/F03。I
 ## 2026-11-21 API監視交換の所有終了
 
 NK-OPS-001／WBS-F03、P018-09／ApiMetricHttpHandler.handle、closeOwnedExchange／APIMHTTP025／RD171、UI252、SS342、SS351、451。現候補 `62142212de26387dd718026a1c839fbb1dc6b2a9` で新1＋回帰24の単一実行。現対象は生L36/M4/C1/B6/I115各未到達0、公開ABI一致、SpotBugs0、PMD原2の適用判断を保存。実HTTPと全451は継続。[実行](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40958-f03-api-metric-exchange-owner-v2/manifest.json) [静的判定](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40960-f03-current-api-exchange-static-v1/dispositions.json)
+
+
+## 2026-11-21 認証済み表示名のUTF-8値契約
+
+NK-AUT-001／P018-10.03／CATALOG-026／AuthenticatedActor constructor／PT-AUT-ACTORVALUE004。UI226、SS314、331、351。候補 `8ae29687743f2b9851bae59a0fb9ff23b5fb2176` で新1＋影響既3。対象値型 raw L12/M7/C1/B10/I70未到達0。公開ABI一致、局所静的0、実DBと認証を保留。 [動的](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40968-p01810-actor-utf8-scalar-boundary-v1/manifest.json) [静的](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40968-p01810-actor-utf8-scalar-boundary-v1/typed-followup.json)
