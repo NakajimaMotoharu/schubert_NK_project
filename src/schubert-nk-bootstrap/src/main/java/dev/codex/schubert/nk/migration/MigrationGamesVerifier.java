@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import org.jspecify.annotations.NullMarked;
@@ -76,7 +76,7 @@ public final class MigrationGamesVerifier {
     @Nullable String title = result.getString(3);
     int order = result.getInt(4);
     if (result.wasNull()) throw invalid();
-    @Nullable Timestamp stamp = result.getTimestamp(5);
+    @Nullable OffsetDateTime stamp = result.getObject(5, OffsetDateTime.class);
     var actual = new ArrayList<@Nullable String>();
     actual.add(Integer.toString(id));
     actual.add(code);

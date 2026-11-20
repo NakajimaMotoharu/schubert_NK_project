@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -33,25 +33,37 @@ public final class MigrationMasterContentVerifier {
       List.of(
           statement ->
               statement.executeQuery(
-                  "SELECT id,game_id,name,normalized_name,is_protagonist,notes,created_at FROM schubert.speakers ORDER BY id"),
+                  "SELECT id,game_id,name,normalized_name,is_protagonist,notes,created_at FROM"
+                      + " schubert.speakers ORDER BY id"),
           statement ->
               statement.executeQuery(
-                  "SELECT id,game_id,display_order,storage_relative_path,display_path,file_name,section_code,chapter_title,sha256,byte_size,created_at FROM schubert.script_files ORDER BY id"),
+                  "SELECT"
+                      + " id,game_id,display_order,storage_relative_path,display_path,file_name,section_code,chapter_title,sha256,byte_size,created_at"
+                      + " FROM schubert.script_files ORDER BY id"),
           statement ->
               statement.executeQuery(
-                  "SELECT id,game_id,script_file_id,display_order,entry_index,line_number,entry_type,speaker_id,speaker_label,body,raw_block,created_at FROM schubert.script_entries ORDER BY id"),
+                  "SELECT"
+                      + " id,game_id,script_file_id,display_order,entry_index,line_number,entry_type,speaker_id,speaker_label,body,raw_block,created_at"
+                      + " FROM schubert.script_entries ORDER BY id"),
           statement ->
               statement.executeQuery(
-                  "SELECT id,game_id,storage_relative_path,display_path,file_name,basename,audio_role,container,duration_ms,byte_size,sha256,created_at FROM schubert.audio_files ORDER BY id"),
+                  "SELECT"
+                      + " id,game_id,storage_relative_path,display_path,file_name,basename,audio_role,container,duration_ms,byte_size,sha256,created_at"
+                      + " FROM schubert.audio_files ORDER BY id"),
           statement ->
               statement.executeQuery(
-                  "SELECT id,logical_id,media_type,title,category,section,storage_relative_path,display_path,file_name,byte_size,sha256,mime_type,parent_logical_id,pair_key,pair_role,display_order,created_at FROM schubert.media_assets ORDER BY id"),
+                  "SELECT"
+                      + " id,logical_id,media_type,title,category,section,storage_relative_path,display_path,file_name,byte_size,sha256,mime_type,parent_logical_id,pair_key,pair_role,display_order,created_at"
+                      + " FROM schubert.media_assets ORDER BY id"),
           statement ->
               statement.executeQuery(
-                  "SELECT entry_id,audio_file_id,game_id,link_type,display_order,created_at FROM schubert.entry_audio_links ORDER BY entry_id,audio_file_id,link_type COLLATE \"C\""),
+                  "SELECT entry_id,audio_file_id,game_id,link_type,display_order,created_at FROM"
+                      + " schubert.entry_audio_links ORDER BY entry_id,audio_file_id,link_type"
+                      + " COLLATE \"C\""),
           statement ->
               statement.executeQuery(
-                  "SELECT count(*) FROM schubert.script_entries WHERE body_search IS DISTINCT FROM pg_catalog.lower(body)"));
+                  "SELECT count(*) FROM schubert.script_entries WHERE body_search IS DISTINCT FROM"
+                      + " pg_catalog.lower(body)"));
   private static final List<String> KINDS =
       List.of(
           "LISSBST",
@@ -156,7 +168,7 @@ public final class MigrationMasterContentVerifier {
       return result.wasNull() ? null : Boolean.toString(actual);
     }
     if (kind == TYPE_TIMESTAMP) {
-      @Nullable Timestamp actual = result.getTimestamp(column);
+      @Nullable OffsetDateTime actual = result.getObject(column, OffsetDateTime.class);
       return actual == null ? null : actual.toInstant().toString();
     }
     return result.getString(column);

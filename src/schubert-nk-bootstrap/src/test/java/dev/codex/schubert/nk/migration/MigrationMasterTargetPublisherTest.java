@@ -12,8 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLWarning;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.time.Instant;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -72,7 +72,7 @@ final class MigrationMasterTargetPublisherTest {
   private static final String GET_LONG = "getLong";
   private static final String GET_INT = "getInt";
   private static final String GET_BOOLEAN = "getBoolean";
-  private static final String GET_TIMESTAMP = "getTimestamp";
+  private static final String GET_OFFSET_DATE_TIME = "getObject";
   private static final String GET_STRING = "getString";
   private static final int SETVAL_FIRST = 84;
   private static final int ANALYZE_FIRST = 89;
@@ -113,18 +113,372 @@ final class MigrationMasterTargetPublisherTest {
           List.of("2", "NUKITASHI2", "NUKITASHI2", "2", GAMES_STAMP));
   private static final List<String> CATALOG_SQL =
       List.of(
-          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END,CASE WHEN a.attidentity='d' THEN (SELECT count(*) FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))=1 AND EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid LEFT JOIN pg_catalog.pg_sequence sq ON sq.seqrelid=sc.oid LEFT JOIN pg_catalog.pg_type st ON st.oid=sq.seqtypid LEFT JOIN pg_catalog.pg_namespace stn ON stn.oid=st.typnamespace WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a') AND (dep.deptype='i' AND sc.relnamespace=c.relnamespace AND sc.relowner=c.relowner AND sc.relpersistence='p' AND stn.nspname='pg_catalog' AND st.typname='int8' AND sq.seqstart=1 AND sq.seqincrement=1 AND sq.seqmin=1 AND sq.seqmax=999999999999 AND sq.seqcache=1 AND NOT sq.seqcycle) IS TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a')) END,pg_catalog.pg_get_userbyid(c.relowner),CASE WHEN (c.relname='speakers' AND a.attname='is_protagonist') OR (c.relname='script_entries' AND a.attname='body_search') THEN a.atthasdef AND (SELECT count(*) FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum)=1 AND EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum AND pg_catalog.pg_get_expr(ad.adbin,ad.adrelid,false)=CASE WHEN c.relname='speakers' THEN 'false' ELSE 'lower(body)' END) ELSE NOT a.atthasdef AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='speakers' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
-          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END,CASE WHEN a.attidentity='d' THEN (SELECT count(*) FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))=1 AND EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid LEFT JOIN pg_catalog.pg_sequence sq ON sq.seqrelid=sc.oid LEFT JOIN pg_catalog.pg_type st ON st.oid=sq.seqtypid LEFT JOIN pg_catalog.pg_namespace stn ON stn.oid=st.typnamespace WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a') AND (dep.deptype='i' AND sc.relnamespace=c.relnamespace AND sc.relowner=c.relowner AND sc.relpersistence='p' AND stn.nspname='pg_catalog' AND st.typname='int8' AND sq.seqstart=1 AND sq.seqincrement=1 AND sq.seqmin=1 AND sq.seqmax=999999999999 AND sq.seqcache=1 AND NOT sq.seqcycle) IS TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a')) END,pg_catalog.pg_get_userbyid(c.relowner),CASE WHEN (c.relname='speakers' AND a.attname='is_protagonist') OR (c.relname='script_entries' AND a.attname='body_search') THEN a.atthasdef AND (SELECT count(*) FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum)=1 AND EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum AND pg_catalog.pg_get_expr(ad.adbin,ad.adrelid,false)=CASE WHEN c.relname='speakers' THEN 'false' ELSE 'lower(body)' END) ELSE NOT a.atthasdef AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='script_files' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
-          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END,CASE WHEN a.attidentity='d' THEN (SELECT count(*) FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))=1 AND EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid LEFT JOIN pg_catalog.pg_sequence sq ON sq.seqrelid=sc.oid LEFT JOIN pg_catalog.pg_type st ON st.oid=sq.seqtypid LEFT JOIN pg_catalog.pg_namespace stn ON stn.oid=st.typnamespace WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a') AND (dep.deptype='i' AND sc.relnamespace=c.relnamespace AND sc.relowner=c.relowner AND sc.relpersistence='p' AND stn.nspname='pg_catalog' AND st.typname='int8' AND sq.seqstart=1 AND sq.seqincrement=1 AND sq.seqmin=1 AND sq.seqmax=999999999999 AND sq.seqcache=1 AND NOT sq.seqcycle) IS TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a')) END,pg_catalog.pg_get_userbyid(c.relowner),CASE WHEN (c.relname='speakers' AND a.attname='is_protagonist') OR (c.relname='script_entries' AND a.attname='body_search') THEN a.atthasdef AND (SELECT count(*) FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum)=1 AND EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum AND pg_catalog.pg_get_expr(ad.adbin,ad.adrelid,false)=CASE WHEN c.relname='speakers' THEN 'false' ELSE 'lower(body)' END) ELSE NOT a.atthasdef AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='script_entries' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
-          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END,CASE WHEN a.attidentity='d' THEN (SELECT count(*) FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))=1 AND EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid LEFT JOIN pg_catalog.pg_sequence sq ON sq.seqrelid=sc.oid LEFT JOIN pg_catalog.pg_type st ON st.oid=sq.seqtypid LEFT JOIN pg_catalog.pg_namespace stn ON stn.oid=st.typnamespace WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a') AND (dep.deptype='i' AND sc.relnamespace=c.relnamespace AND sc.relowner=c.relowner AND sc.relpersistence='p' AND stn.nspname='pg_catalog' AND st.typname='int8' AND sq.seqstart=1 AND sq.seqincrement=1 AND sq.seqmin=1 AND sq.seqmax=999999999999 AND sq.seqcache=1 AND NOT sq.seqcycle) IS TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a')) END,pg_catalog.pg_get_userbyid(c.relowner),CASE WHEN (c.relname='speakers' AND a.attname='is_protagonist') OR (c.relname='script_entries' AND a.attname='body_search') THEN a.atthasdef AND (SELECT count(*) FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum)=1 AND EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum AND pg_catalog.pg_get_expr(ad.adbin,ad.adrelid,false)=CASE WHEN c.relname='speakers' THEN 'false' ELSE 'lower(body)' END) ELSE NOT a.atthasdef AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='audio_files' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
-          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END,CASE WHEN a.attidentity='d' THEN (SELECT count(*) FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))=1 AND EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid LEFT JOIN pg_catalog.pg_sequence sq ON sq.seqrelid=sc.oid LEFT JOIN pg_catalog.pg_type st ON st.oid=sq.seqtypid LEFT JOIN pg_catalog.pg_namespace stn ON stn.oid=st.typnamespace WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a') AND (dep.deptype='i' AND sc.relnamespace=c.relnamespace AND sc.relowner=c.relowner AND sc.relpersistence='p' AND stn.nspname='pg_catalog' AND st.typname='int8' AND sq.seqstart=1 AND sq.seqincrement=1 AND sq.seqmin=1 AND sq.seqmax=999999999999 AND sq.seqcache=1 AND NOT sq.seqcycle) IS TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a')) END,pg_catalog.pg_get_userbyid(c.relowner),CASE WHEN (c.relname='speakers' AND a.attname='is_protagonist') OR (c.relname='script_entries' AND a.attname='body_search') THEN a.atthasdef AND (SELECT count(*) FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum)=1 AND EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum AND pg_catalog.pg_get_expr(ad.adbin,ad.adrelid,false)=CASE WHEN c.relname='speakers' THEN 'false' ELSE 'lower(body)' END) ELSE NOT a.atthasdef AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='media_assets' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
-          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END,CASE WHEN a.attidentity='d' THEN (SELECT count(*) FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))=1 AND EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid LEFT JOIN pg_catalog.pg_sequence sq ON sq.seqrelid=sc.oid LEFT JOIN pg_catalog.pg_type st ON st.oid=sq.seqtypid LEFT JOIN pg_catalog.pg_namespace stn ON stn.oid=st.typnamespace WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a') AND (dep.deptype='i' AND sc.relnamespace=c.relnamespace AND sc.relowner=c.relowner AND sc.relpersistence='p' AND stn.nspname='pg_catalog' AND st.typname='int8' AND sq.seqstart=1 AND sq.seqincrement=1 AND sq.seqmin=1 AND sq.seqmax=999999999999 AND sq.seqcache=1 AND NOT sq.seqcycle) IS TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a')) END,pg_catalog.pg_get_userbyid(c.relowner),CASE WHEN (c.relname='speakers' AND a.attname='is_protagonist') OR (c.relname='script_entries' AND a.attname='body_search') THEN a.atthasdef AND (SELECT count(*) FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum)=1 AND EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum AND pg_catalog.pg_get_expr(ad.adbin,ad.adrelid,false)=CASE WHEN c.relname='speakers' THEN 'false' ELSE 'lower(body)' END) ELSE NOT a.atthasdef AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='entry_audio_links' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
-          "SELECT (row_number() OVER (ORDER BY k.conname COLLATE \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT k.conperiod),CASE WHEN k.contype='f' THEN rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')' ELSE '-' END,CASE WHEN k.contype='f' THEN k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND c.relname='speakers' AND c.relkind='r' AND c.relpersistence='p' AND k.contype NOT IN ('n','t') ORDER BY k.conname COLLATE \"C\"",
-          "SELECT (row_number() OVER (ORDER BY k.conname COLLATE \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT k.conperiod),CASE WHEN k.contype='f' THEN rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')' ELSE '-' END,CASE WHEN k.contype='f' THEN k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND c.relname='script_files' AND c.relkind='r' AND c.relpersistence='p' AND k.contype NOT IN ('n','t') ORDER BY k.conname COLLATE \"C\"",
-          "SELECT (row_number() OVER (ORDER BY k.conname COLLATE \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT k.conperiod),CASE WHEN k.contype='f' THEN rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')' ELSE '-' END,CASE WHEN k.contype='f' THEN k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND c.relname='script_entries' AND c.relkind='r' AND c.relpersistence='p' AND k.contype NOT IN ('n','t') ORDER BY k.conname COLLATE \"C\"",
-          "SELECT (row_number() OVER (ORDER BY k.conname COLLATE \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT k.conperiod),CASE WHEN k.contype='f' THEN rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')' ELSE '-' END,CASE WHEN k.contype='f' THEN k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND c.relname='audio_files' AND c.relkind='r' AND c.relpersistence='p' AND k.contype NOT IN ('n','t') ORDER BY k.conname COLLATE \"C\"",
-          "SELECT (row_number() OVER (ORDER BY k.conname COLLATE \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT k.conperiod),CASE WHEN k.contype='f' THEN rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')' ELSE '-' END,CASE WHEN k.contype='f' THEN k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND c.relname='media_assets' AND c.relkind='r' AND c.relpersistence='p' AND k.contype NOT IN ('n','t') ORDER BY k.conname COLLATE \"C\"",
-          "SELECT (row_number() OVER (ORDER BY k.conname COLLATE \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT k.conperiod),CASE WHEN k.contype='f' THEN rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')' ELSE '-' END,CASE WHEN k.contype='f' THEN k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND c.relname='entry_audio_links' AND c.relkind='r' AND c.relpersistence='p' AND k.contype NOT IN ('n','t') ORDER BY k.conname COLLATE \"C\"");
+          "SELECT"
+              + " a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE"
+              + " WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE"
+              + " nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND"
+              + " (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT"
+              + " nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0"
+              + " AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM"
+              + " pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND"
+              + " nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced"
+              + " AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND"
+              + " nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT"
+              + " TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE"
+              + " nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END,CASE WHEN"
+              + " a.attidentity='d' THEN (SELECT count(*) FROM pg_catalog.pg_depend dep JOIN"
+              + " pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE"
+              + " dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND"
+              + " dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid"
+              + " AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))=1"
+              + " AND EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON"
+              + " sc.oid=dep.objid LEFT JOIN pg_catalog.pg_sequence sq ON sq.seqrelid=sc.oid LEFT"
+              + " JOIN pg_catalog.pg_type st ON st.oid=sq.seqtypid LEFT JOIN"
+              + " pg_catalog.pg_namespace stn ON stn.oid=st.typnamespace WHERE"
+              + " dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND"
+              + " dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid"
+              + " AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a') AND"
+              + " (dep.deptype='i' AND sc.relnamespace=c.relnamespace AND sc.relowner=c.relowner"
+              + " AND sc.relpersistence='p' AND stn.nspname='pg_catalog' AND st.typname='int8' AND"
+              + " sq.seqstart=1 AND sq.seqincrement=1 AND sq.seqmin=1 AND sq.seqmax=999999999999"
+              + " AND sq.seqcache=1 AND NOT sq.seqcycle) IS TRUE) ELSE NOT EXISTS (SELECT 1 FROM"
+              + " pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE"
+              + " dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND"
+              + " dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid"
+              + " AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))"
+              + " END,pg_catalog.pg_get_userbyid(c.relowner),CASE WHEN (c.relname='speakers' AND"
+              + " a.attname='is_protagonist') OR (c.relname='script_entries' AND"
+              + " a.attname='body_search') THEN a.atthasdef AND (SELECT count(*) FROM"
+              + " pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum)=1 AND"
+              + " EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND"
+              + " ad.adnum=a.attnum AND pg_catalog.pg_get_expr(ad.adbin,ad.adrelid,false)=CASE WHEN"
+              + " c.relname='speakers' THEN 'false' ELSE 'lower(body)' END) ELSE NOT a.atthasdef"
+              + " AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND"
+              + " ad.adnum=a.attnum) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n"
+              + " ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN"
+              + " pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON"
+              + " tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='speakers' AND"
+              + " c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0"
+              + " AND NOT a.attisdropped ORDER BY a.attnum",
+          "SELECT"
+              + " a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE"
+              + " WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE"
+              + " nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND"
+              + " (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT"
+              + " nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0"
+              + " AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM"
+              + " pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND"
+              + " nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced"
+              + " AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND"
+              + " nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT"
+              + " TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE"
+              + " nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END,CASE WHEN"
+              + " a.attidentity='d' THEN (SELECT count(*) FROM pg_catalog.pg_depend dep JOIN"
+              + " pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE"
+              + " dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND"
+              + " dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid"
+              + " AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))=1"
+              + " AND EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON"
+              + " sc.oid=dep.objid LEFT JOIN pg_catalog.pg_sequence sq ON sq.seqrelid=sc.oid LEFT"
+              + " JOIN pg_catalog.pg_type st ON st.oid=sq.seqtypid LEFT JOIN"
+              + " pg_catalog.pg_namespace stn ON stn.oid=st.typnamespace WHERE"
+              + " dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND"
+              + " dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid"
+              + " AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a') AND"
+              + " (dep.deptype='i' AND sc.relnamespace=c.relnamespace AND sc.relowner=c.relowner"
+              + " AND sc.relpersistence='p' AND stn.nspname='pg_catalog' AND st.typname='int8' AND"
+              + " sq.seqstart=1 AND sq.seqincrement=1 AND sq.seqmin=1 AND sq.seqmax=999999999999"
+              + " AND sq.seqcache=1 AND NOT sq.seqcycle) IS TRUE) ELSE NOT EXISTS (SELECT 1 FROM"
+              + " pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE"
+              + " dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND"
+              + " dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid"
+              + " AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))"
+              + " END,pg_catalog.pg_get_userbyid(c.relowner),CASE WHEN (c.relname='speakers' AND"
+              + " a.attname='is_protagonist') OR (c.relname='script_entries' AND"
+              + " a.attname='body_search') THEN a.atthasdef AND (SELECT count(*) FROM"
+              + " pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum)=1 AND"
+              + " EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND"
+              + " ad.adnum=a.attnum AND pg_catalog.pg_get_expr(ad.adbin,ad.adrelid,false)=CASE WHEN"
+              + " c.relname='speakers' THEN 'false' ELSE 'lower(body)' END) ELSE NOT a.atthasdef"
+              + " AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND"
+              + " ad.adnum=a.attnum) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n"
+              + " ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN"
+              + " pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON"
+              + " tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='script_files' AND"
+              + " c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0"
+              + " AND NOT a.attisdropped ORDER BY a.attnum",
+          "SELECT"
+              + " a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE"
+              + " WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE"
+              + " nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND"
+              + " (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT"
+              + " nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0"
+              + " AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM"
+              + " pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND"
+              + " nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced"
+              + " AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND"
+              + " nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT"
+              + " TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE"
+              + " nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END,CASE WHEN"
+              + " a.attidentity='d' THEN (SELECT count(*) FROM pg_catalog.pg_depend dep JOIN"
+              + " pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE"
+              + " dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND"
+              + " dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid"
+              + " AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))=1"
+              + " AND EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON"
+              + " sc.oid=dep.objid LEFT JOIN pg_catalog.pg_sequence sq ON sq.seqrelid=sc.oid LEFT"
+              + " JOIN pg_catalog.pg_type st ON st.oid=sq.seqtypid LEFT JOIN"
+              + " pg_catalog.pg_namespace stn ON stn.oid=st.typnamespace WHERE"
+              + " dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND"
+              + " dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid"
+              + " AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a') AND"
+              + " (dep.deptype='i' AND sc.relnamespace=c.relnamespace AND sc.relowner=c.relowner"
+              + " AND sc.relpersistence='p' AND stn.nspname='pg_catalog' AND st.typname='int8' AND"
+              + " sq.seqstart=1 AND sq.seqincrement=1 AND sq.seqmin=1 AND sq.seqmax=999999999999"
+              + " AND sq.seqcache=1 AND NOT sq.seqcycle) IS TRUE) ELSE NOT EXISTS (SELECT 1 FROM"
+              + " pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE"
+              + " dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND"
+              + " dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid"
+              + " AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))"
+              + " END,pg_catalog.pg_get_userbyid(c.relowner),CASE WHEN (c.relname='speakers' AND"
+              + " a.attname='is_protagonist') OR (c.relname='script_entries' AND"
+              + " a.attname='body_search') THEN a.atthasdef AND (SELECT count(*) FROM"
+              + " pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum)=1 AND"
+              + " EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND"
+              + " ad.adnum=a.attnum AND pg_catalog.pg_get_expr(ad.adbin,ad.adrelid,false)=CASE WHEN"
+              + " c.relname='speakers' THEN 'false' ELSE 'lower(body)' END) ELSE NOT a.atthasdef"
+              + " AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND"
+              + " ad.adnum=a.attnum) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n"
+              + " ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN"
+              + " pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON"
+              + " tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='script_entries'"
+              + " AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND"
+              + " a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
+          "SELECT"
+              + " a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE"
+              + " WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE"
+              + " nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND"
+              + " (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT"
+              + " nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0"
+              + " AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM"
+              + " pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND"
+              + " nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced"
+              + " AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND"
+              + " nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT"
+              + " TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE"
+              + " nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END,CASE WHEN"
+              + " a.attidentity='d' THEN (SELECT count(*) FROM pg_catalog.pg_depend dep JOIN"
+              + " pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE"
+              + " dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND"
+              + " dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid"
+              + " AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))=1"
+              + " AND EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON"
+              + " sc.oid=dep.objid LEFT JOIN pg_catalog.pg_sequence sq ON sq.seqrelid=sc.oid LEFT"
+              + " JOIN pg_catalog.pg_type st ON st.oid=sq.seqtypid LEFT JOIN"
+              + " pg_catalog.pg_namespace stn ON stn.oid=st.typnamespace WHERE"
+              + " dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND"
+              + " dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid"
+              + " AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a') AND"
+              + " (dep.deptype='i' AND sc.relnamespace=c.relnamespace AND sc.relowner=c.relowner"
+              + " AND sc.relpersistence='p' AND stn.nspname='pg_catalog' AND st.typname='int8' AND"
+              + " sq.seqstart=1 AND sq.seqincrement=1 AND sq.seqmin=1 AND sq.seqmax=999999999999"
+              + " AND sq.seqcache=1 AND NOT sq.seqcycle) IS TRUE) ELSE NOT EXISTS (SELECT 1 FROM"
+              + " pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE"
+              + " dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND"
+              + " dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid"
+              + " AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))"
+              + " END,pg_catalog.pg_get_userbyid(c.relowner),CASE WHEN (c.relname='speakers' AND"
+              + " a.attname='is_protagonist') OR (c.relname='script_entries' AND"
+              + " a.attname='body_search') THEN a.atthasdef AND (SELECT count(*) FROM"
+              + " pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum)=1 AND"
+              + " EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND"
+              + " ad.adnum=a.attnum AND pg_catalog.pg_get_expr(ad.adbin,ad.adrelid,false)=CASE WHEN"
+              + " c.relname='speakers' THEN 'false' ELSE 'lower(body)' END) ELSE NOT a.atthasdef"
+              + " AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND"
+              + " ad.adnum=a.attnum) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n"
+              + " ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN"
+              + " pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON"
+              + " tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='audio_files' AND"
+              + " c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0"
+              + " AND NOT a.attisdropped ORDER BY a.attnum",
+          "SELECT"
+              + " a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE"
+              + " WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE"
+              + " nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND"
+              + " (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT"
+              + " nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0"
+              + " AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM"
+              + " pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND"
+              + " nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced"
+              + " AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND"
+              + " nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT"
+              + " TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE"
+              + " nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END,CASE WHEN"
+              + " a.attidentity='d' THEN (SELECT count(*) FROM pg_catalog.pg_depend dep JOIN"
+              + " pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE"
+              + " dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND"
+              + " dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid"
+              + " AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))=1"
+              + " AND EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON"
+              + " sc.oid=dep.objid LEFT JOIN pg_catalog.pg_sequence sq ON sq.seqrelid=sc.oid LEFT"
+              + " JOIN pg_catalog.pg_type st ON st.oid=sq.seqtypid LEFT JOIN"
+              + " pg_catalog.pg_namespace stn ON stn.oid=st.typnamespace WHERE"
+              + " dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND"
+              + " dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid"
+              + " AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a') AND"
+              + " (dep.deptype='i' AND sc.relnamespace=c.relnamespace AND sc.relowner=c.relowner"
+              + " AND sc.relpersistence='p' AND stn.nspname='pg_catalog' AND st.typname='int8' AND"
+              + " sq.seqstart=1 AND sq.seqincrement=1 AND sq.seqmin=1 AND sq.seqmax=999999999999"
+              + " AND sq.seqcache=1 AND NOT sq.seqcycle) IS TRUE) ELSE NOT EXISTS (SELECT 1 FROM"
+              + " pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE"
+              + " dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND"
+              + " dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid"
+              + " AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))"
+              + " END,pg_catalog.pg_get_userbyid(c.relowner),CASE WHEN (c.relname='speakers' AND"
+              + " a.attname='is_protagonist') OR (c.relname='script_entries' AND"
+              + " a.attname='body_search') THEN a.atthasdef AND (SELECT count(*) FROM"
+              + " pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum)=1 AND"
+              + " EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND"
+              + " ad.adnum=a.attnum AND pg_catalog.pg_get_expr(ad.adbin,ad.adrelid,false)=CASE WHEN"
+              + " c.relname='speakers' THEN 'false' ELSE 'lower(body)' END) ELSE NOT a.atthasdef"
+              + " AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND"
+              + " ad.adnum=a.attnum) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n"
+              + " ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN"
+              + " pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON"
+              + " tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='media_assets' AND"
+              + " c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0"
+              + " AND NOT a.attisdropped ORDER BY a.attnum",
+          "SELECT"
+              + " a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE"
+              + " WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE"
+              + " nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND"
+              + " (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT"
+              + " nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0"
+              + " AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM"
+              + " pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND"
+              + " nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced"
+              + " AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND"
+              + " nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT"
+              + " TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE"
+              + " nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END,CASE WHEN"
+              + " a.attidentity='d' THEN (SELECT count(*) FROM pg_catalog.pg_depend dep JOIN"
+              + " pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE"
+              + " dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND"
+              + " dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid"
+              + " AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))=1"
+              + " AND EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON"
+              + " sc.oid=dep.objid LEFT JOIN pg_catalog.pg_sequence sq ON sq.seqrelid=sc.oid LEFT"
+              + " JOIN pg_catalog.pg_type st ON st.oid=sq.seqtypid LEFT JOIN"
+              + " pg_catalog.pg_namespace stn ON stn.oid=st.typnamespace WHERE"
+              + " dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND"
+              + " dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid"
+              + " AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a') AND"
+              + " (dep.deptype='i' AND sc.relnamespace=c.relnamespace AND sc.relowner=c.relowner"
+              + " AND sc.relpersistence='p' AND stn.nspname='pg_catalog' AND st.typname='int8' AND"
+              + " sq.seqstart=1 AND sq.seqincrement=1 AND sq.seqmin=1 AND sq.seqmax=999999999999"
+              + " AND sq.seqcache=1 AND NOT sq.seqcycle) IS TRUE) ELSE NOT EXISTS (SELECT 1 FROM"
+              + " pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE"
+              + " dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND"
+              + " dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid"
+              + " AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))"
+              + " END,pg_catalog.pg_get_userbyid(c.relowner),CASE WHEN (c.relname='speakers' AND"
+              + " a.attname='is_protagonist') OR (c.relname='script_entries' AND"
+              + " a.attname='body_search') THEN a.atthasdef AND (SELECT count(*) FROM"
+              + " pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum)=1 AND"
+              + " EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND"
+              + " ad.adnum=a.attnum AND pg_catalog.pg_get_expr(ad.adbin,ad.adrelid,false)=CASE WHEN"
+              + " c.relname='speakers' THEN 'false' ELSE 'lower(body)' END) ELSE NOT a.atthasdef"
+              + " AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND"
+              + " ad.adnum=a.attnum) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n"
+              + " ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN"
+              + " pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON"
+              + " tn.oid=t.typnamespace WHERE n.nspname='schubert' AND"
+              + " c.relname='entry_audio_links' AND c.relkind='r' AND c.relpersistence='p' AND"
+              + " tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
+          "SELECT (row_number() OVER (ORDER BY k.conname COLLATE"
+              + " \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated"
+              + " AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal"
+              + " AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT"
+              + " k.conperiod),CASE WHEN k.contype='f' THEN"
+              + " rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')'"
+              + " ELSE '-' END,CASE WHEN k.contype='f' THEN"
+              + " k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE"
+              + " '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON"
+              + " c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN"
+              + " pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn"
+              + " ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND"
+              + " c.relname='speakers' AND c.relkind='r' AND c.relpersistence='p' AND k.contype NOT"
+              + " IN ('n','t') ORDER BY k.conname COLLATE \"C\"",
+          "SELECT (row_number() OVER (ORDER BY k.conname COLLATE"
+              + " \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated"
+              + " AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal"
+              + " AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT"
+              + " k.conperiod),CASE WHEN k.contype='f' THEN"
+              + " rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')'"
+              + " ELSE '-' END,CASE WHEN k.contype='f' THEN"
+              + " k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE"
+              + " '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON"
+              + " c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN"
+              + " pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn"
+              + " ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND"
+              + " c.relname='script_files' AND c.relkind='r' AND c.relpersistence='p' AND k.contype"
+              + " NOT IN ('n','t') ORDER BY k.conname COLLATE \"C\"",
+          "SELECT (row_number() OVER (ORDER BY k.conname COLLATE"
+              + " \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated"
+              + " AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal"
+              + " AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT"
+              + " k.conperiod),CASE WHEN k.contype='f' THEN"
+              + " rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')'"
+              + " ELSE '-' END,CASE WHEN k.contype='f' THEN"
+              + " k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE"
+              + " '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON"
+              + " c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN"
+              + " pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn"
+              + " ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND"
+              + " c.relname='script_entries' AND c.relkind='r' AND c.relpersistence='p' AND"
+              + " k.contype NOT IN ('n','t') ORDER BY k.conname COLLATE \"C\"",
+          "SELECT (row_number() OVER (ORDER BY k.conname COLLATE"
+              + " \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated"
+              + " AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal"
+              + " AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT"
+              + " k.conperiod),CASE WHEN k.contype='f' THEN"
+              + " rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')'"
+              + " ELSE '-' END,CASE WHEN k.contype='f' THEN"
+              + " k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE"
+              + " '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON"
+              + " c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN"
+              + " pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn"
+              + " ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND"
+              + " c.relname='audio_files' AND c.relkind='r' AND c.relpersistence='p' AND k.contype"
+              + " NOT IN ('n','t') ORDER BY k.conname COLLATE \"C\"",
+          "SELECT (row_number() OVER (ORDER BY k.conname COLLATE"
+              + " \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated"
+              + " AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal"
+              + " AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT"
+              + " k.conperiod),CASE WHEN k.contype='f' THEN"
+              + " rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')'"
+              + " ELSE '-' END,CASE WHEN k.contype='f' THEN"
+              + " k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE"
+              + " '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON"
+              + " c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN"
+              + " pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn"
+              + " ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND"
+              + " c.relname='media_assets' AND c.relkind='r' AND c.relpersistence='p' AND k.contype"
+              + " NOT IN ('n','t') ORDER BY k.conname COLLATE \"C\"",
+          "SELECT (row_number() OVER (ORDER BY k.conname COLLATE"
+              + " \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated"
+              + " AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal"
+              + " AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT"
+              + " k.conperiod),CASE WHEN k.contype='f' THEN"
+              + " rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')'"
+              + " ELSE '-' END,CASE WHEN k.contype='f' THEN"
+              + " k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE"
+              + " '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON"
+              + " c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN"
+              + " pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn"
+              + " ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND"
+              + " c.relname='entry_audio_links' AND c.relkind='r' AND c.relpersistence='p' AND"
+              + " k.contype NOT IN ('n','t') ORDER BY k.conname COLLATE \"C\"");
   private static final List<List<String>> CATALOG_ROWS =
       List.of(
           List.of(
@@ -134,7 +488,8 @@ final class MigrationMasterTargetPublisherTest {
               "4\tnormalized_name\ttext\ttext\ttrue\t\t\ttrue\ttrue\tnk_owner\ttrue",
               "5\tis_protagonist\tbool\tboolean\ttrue\t\t\ttrue\ttrue\tnk_owner\ttrue",
               "6\tnotes\ttext\ttext\tfalse\t\t\ttrue\ttrue\tnk_owner\ttrue",
-              "7\tcreated_at\ttimestamptz\ttimestamp with time zone\ttrue\t\t\ttrue\ttrue\tnk_owner\ttrue"),
+              "7\tcreated_at\ttimestamptz\ttimestamp with time zone\ttrue\t\t\ttrue\ttrue\tnk_owner"
+                  + "\ttrue"),
           List.of(
               CATALOG_IDENTITY_COLUMN,
               CATALOG_GAME_COLUMN,
@@ -142,11 +497,13 @@ final class MigrationMasterTargetPublisherTest {
               "4\tstorage_relative_path\ttext\ttext\ttrue\t\t\ttrue\ttrue\tnk_owner\ttrue",
               "5\tdisplay_path\ttext\ttext\ttrue\t\t\ttrue\ttrue\tnk_owner\ttrue",
               "6\tfile_name\ttext\ttext\ttrue\t\t\ttrue\ttrue\tnk_owner\ttrue",
-              "7\tsection_code\tvarchar\tcharacter varying(64)\tfalse\t\t\ttrue\ttrue\tnk_owner\ttrue",
+              "7\tsection_code\tvarchar\tcharacter varying(64)\tfalse\t\t\ttrue\ttrue\tnk_owner"
+                  + "\ttrue",
               "8\tchapter_title\ttext\ttext\tfalse\t\t\ttrue\ttrue\tnk_owner\ttrue",
               "9\tsha256\tbpchar\tcharacter(64)\ttrue\t\t\ttrue\ttrue\tnk_owner\ttrue",
               "10\tbyte_size\tint8\tbigint\ttrue\t\t\ttrue\ttrue\tnk_owner\ttrue",
-              "11\tcreated_at\ttimestamptz\ttimestamp with time zone\ttrue\t\t\ttrue\ttrue\tnk_owner\ttrue"),
+              "11\tcreated_at\ttimestamptz\ttimestamp with time zone\ttrue\t\t\ttrue\ttrue"
+                  + "\tnk_owner\ttrue"),
           List.of(
               CATALOG_IDENTITY_COLUMN,
               CATALOG_GAME_COLUMN,
@@ -160,7 +517,8 @@ final class MigrationMasterTargetPublisherTest {
               "10\tbody\ttext\ttext\ttrue\t\t\ttrue\ttrue\tnk_owner\ttrue",
               "11\tbody_search\ttext\ttext\tfalse\t\ts\ttrue\ttrue\tnk_owner\ttrue",
               "12\traw_block\ttext\ttext\ttrue\t\t\ttrue\ttrue\tnk_owner\ttrue",
-              "13\tcreated_at\ttimestamptz\ttimestamp with time zone\ttrue\t\t\ttrue\ttrue\tnk_owner\ttrue"),
+              "13\tcreated_at\ttimestamptz\ttimestamp with time zone\ttrue\t\t\ttrue\ttrue"
+                  + "\tnk_owner\ttrue"),
           List.of(
               CATALOG_IDENTITY_COLUMN,
               CATALOG_GAME_COLUMN,
@@ -173,7 +531,8 @@ final class MigrationMasterTargetPublisherTest {
               "9\tduration_ms\tint8\tbigint\tfalse\t\t\ttrue\ttrue\tnk_owner\ttrue",
               "10\tbyte_size\tint8\tbigint\ttrue\t\t\ttrue\ttrue\tnk_owner\ttrue",
               "11\tsha256\tbpchar\tcharacter(64)\ttrue\t\t\ttrue\ttrue\tnk_owner\ttrue",
-              "12\tcreated_at\ttimestamptz\ttimestamp with time zone\ttrue\t\t\ttrue\ttrue\tnk_owner\ttrue"),
+              "12\tcreated_at\ttimestamptz\ttimestamp with time zone\ttrue\t\t\ttrue\ttrue"
+                  + "\tnk_owner\ttrue"),
           List.of(
               CATALOG_IDENTITY_COLUMN,
               "2\tlogical_id\tvarchar\tcharacter varying(64)\ttrue\t\t\ttrue\ttrue\tnk_owner\ttrue",
@@ -187,18 +546,21 @@ final class MigrationMasterTargetPublisherTest {
               "10\tbyte_size\tint8\tbigint\ttrue\t\t\ttrue\ttrue\tnk_owner\ttrue",
               "11\tsha256\tbpchar\tcharacter(64)\ttrue\t\t\ttrue\ttrue\tnk_owner\ttrue",
               "12\tmime_type\tvarchar\tcharacter varying(64)\ttrue\t\t\ttrue\ttrue\tnk_owner\ttrue",
-              "13\tparent_logical_id\tvarchar\tcharacter varying(64)\tfalse\t\t\ttrue\ttrue\tnk_owner\ttrue",
+              "13\tparent_logical_id\tvarchar\tcharacter varying(64)\tfalse\t\t\ttrue\ttrue"
+                  + "\tnk_owner\ttrue",
               "14\tpair_key\ttext\ttext\tfalse\t\t\ttrue\ttrue\tnk_owner\ttrue",
               "15\tpair_role\tbpchar\tcharacter(1)\tfalse\t\t\ttrue\ttrue\tnk_owner\ttrue",
               "16\tdisplay_order\tint4\tinteger\ttrue\t\t\ttrue\ttrue\tnk_owner\ttrue",
-              "17\tcreated_at\ttimestamptz\ttimestamp with time zone\ttrue\t\t\ttrue\ttrue\tnk_owner\ttrue"),
+              "17\tcreated_at\ttimestamptz\ttimestamp with time zone\ttrue\t\t\ttrue\ttrue"
+                  + "\tnk_owner\ttrue"),
           List.of(
               "1\tentry_id\tint8\tbigint\ttrue\t\t\ttrue\ttrue\tnk_owner\ttrue",
               "2\taudio_file_id\tint8\tbigint\ttrue\t\t\ttrue\ttrue\tnk_owner\ttrue",
               "3\tgame_id\tint2\tsmallint\ttrue\t\t\ttrue\ttrue\tnk_owner\ttrue",
               "4\tlink_type\tvarchar\tcharacter varying(5)\ttrue\t\t\ttrue\ttrue\tnk_owner\ttrue",
               "5\tdisplay_order\tint2\tsmallint\ttrue\t\t\ttrue\ttrue\tnk_owner\ttrue",
-              "6\tcreated_at\ttimestamptz\ttimestamp with time zone\ttrue\t\t\ttrue\ttrue\tnk_owner\ttrue"),
+              "6\tcreated_at\ttimestamptz\ttimestamp with time zone\ttrue\t\t\ttrue\ttrue\tnk_owner"
+                  + "\ttrue"),
           List.of(
               "1\tck_speakers_id_n12\tc\t1\ttrue\t-\t-",
               "2\tck_speakers_name_bytes\tc\t3\ttrue\t-\t-",
@@ -232,8 +594,10 @@ final class MigrationMasterTargetPublisherTest {
               "7\tck_script_entries_speaker_by_type\tc\t7,8\ttrue\t-\t-",
               "8\tck_script_entries_speaker_label_bytes\tc\t9\ttrue\t-\t-",
               "9\tfk_script_entries_games_game_id\tf\t2\ttrue\tschubert.games(1)\ta/r/s",
-              "10\tfk_script_entries_script_files_file_game\tf\t3,2\ttrue\tschubert.script_files(1,2)\ta/c/s",
-              "11\tfk_script_entries_speakers_speaker_game\tf\t8,2\ttrue\tschubert.speakers(1,2)\ta/r/s",
+              "10\tfk_script_entries_script_files_file_game\tf\t3,2\ttrue"
+                  + "\tschubert.script_files(1,2)\ta/c/s",
+              "11\tfk_script_entries_speakers_speaker_game\tf\t8,2\ttrue\tschubert.speakers(1,2)"
+                  + "\ta/r/s",
               "12\tpk_script_entries\tp\t1\ttrue\t-\t-",
               "13\tuq_script_entries_display_order\tu\t4\ttrue\t-\t-",
               "14\tuq_script_entries_file_entry_index\tu\t3,5\ttrue\t-\t-",
@@ -269,26 +633,41 @@ final class MigrationMasterTargetPublisherTest {
               "13\tck_media_assets_storage_path_bytes\tc\t7\ttrue\t-\t-",
               "14\tck_media_assets_storage_path_safe\tc\t7\ttrue\t-\t-",
               "15\tck_media_assets_title_bytes\tc\t4\ttrue\t-\t-",
-              "16\tfk_media_assets_media_assets_parent_logical_id\tf\t13\ttrue\tschubert.media_assets(2)\ta/r/s",
+              "16\tfk_media_assets_media_assets_parent_logical_id\tf\t13\ttrue"
+                  + "\tschubert.media_assets(2)\ta/r/s",
               "17\tpk_media_assets\tp\t1\ttrue\t-\t-",
               "18\tuq_media_assets_logical_id\tu\t2\ttrue\t-\t-",
               "19\tuq_media_assets_type_storage_path\tu\t3,7\ttrue\t-\t-"),
           List.of(
               "1\tck_entry_audio_links_display_order\tc\t5\ttrue\t-\t-",
               "2\tck_entry_audio_links_link_type\tc\t4\ttrue\t-\t-",
-              "3\tfk_entry_audio_links_audio_files_audio_game\tf\t2,3\ttrue\tschubert.audio_files(1,2)\ta/r/s",
-              "4\tfk_entry_audio_links_script_entries_entry_game\tf\t1,3\ttrue\tschubert.script_entries(1,2)\ta/c/s",
+              "3\tfk_entry_audio_links_audio_files_audio_game\tf\t2,3\ttrue"
+                  + "\tschubert.audio_files(1,2)\ta/r/s",
+              "4\tfk_entry_audio_links_script_entries_entry_game\tf\t1,3\ttrue"
+                  + "\tschubert.script_entries(1,2)\ta/c/s",
               "5\tpk_entry_audio_links\tp\t1,2,4\ttrue\t-\t-",
               "6\tuq_entry_audio_links_entry_type_order\tu\t1,4,5\ttrue\t-\t-"));
   private static final List<String> CONTENT_SQL =
       List.of(
-          "SELECT id,game_id,name,normalized_name,is_protagonist,notes,created_at FROM schubert.speakers ORDER BY id",
-          "SELECT id,game_id,display_order,storage_relative_path,display_path,file_name,section_code,chapter_title,sha256,byte_size,created_at FROM schubert.script_files ORDER BY id",
-          "SELECT id,game_id,script_file_id,display_order,entry_index,line_number,entry_type,speaker_id,speaker_label,body,raw_block,created_at FROM schubert.script_entries ORDER BY id",
-          "SELECT id,game_id,storage_relative_path,display_path,file_name,basename,audio_role,container,duration_ms,byte_size,sha256,created_at FROM schubert.audio_files ORDER BY id",
-          "SELECT id,logical_id,media_type,title,category,section,storage_relative_path,display_path,file_name,byte_size,sha256,mime_type,parent_logical_id,pair_key,pair_role,display_order,created_at FROM schubert.media_assets ORDER BY id",
-          "SELECT entry_id,audio_file_id,game_id,link_type,display_order,created_at FROM schubert.entry_audio_links ORDER BY entry_id,audio_file_id,link_type COLLATE \"C\"",
-          "SELECT count(*) FROM schubert.script_entries WHERE body_search IS DISTINCT FROM pg_catalog.lower(body)");
+          "SELECT id,game_id,name,normalized_name,is_protagonist,notes,created_at FROM"
+              + " schubert.speakers ORDER BY id",
+          "SELECT"
+              + " id,game_id,display_order,storage_relative_path,display_path,file_name,section_code,chapter_title,sha256,byte_size,created_at"
+              + " FROM schubert.script_files ORDER BY id",
+          "SELECT"
+              + " id,game_id,script_file_id,display_order,entry_index,line_number,entry_type,speaker_id,speaker_label,body,raw_block,created_at"
+              + " FROM schubert.script_entries ORDER BY id",
+          "SELECT"
+              + " id,game_id,storage_relative_path,display_path,file_name,basename,audio_role,container,duration_ms,byte_size,sha256,created_at"
+              + " FROM schubert.audio_files ORDER BY id",
+          "SELECT"
+              + " id,logical_id,media_type,title,category,section,storage_relative_path,display_path,file_name,byte_size,sha256,mime_type,parent_logical_id,pair_key,pair_role,display_order,created_at"
+              + " FROM schubert.media_assets ORDER BY id",
+          "SELECT entry_id,audio_file_id,game_id,link_type,display_order,created_at FROM"
+              + " schubert.entry_audio_links ORDER BY entry_id,audio_file_id,link_type COLLATE"
+              + " \"C\"",
+          "SELECT count(*) FROM schubert.script_entries WHERE body_search IS DISTINCT FROM"
+              + " pg_catalog.lower(body)");
   private static final List<String> CONTENT_TYPES =
       List.of(
           "LISSBST",
@@ -300,35 +679,415 @@ final class MigrationMasterTargetPublisherTest {
           "L");
   private static final List<String> SQL =
       List.of(
-          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END,CASE WHEN a.attidentity='d' THEN (SELECT count(*) FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))=1 AND EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid LEFT JOIN pg_catalog.pg_sequence sq ON sq.seqrelid=sc.oid LEFT JOIN pg_catalog.pg_type st ON st.oid=sq.seqtypid LEFT JOIN pg_catalog.pg_namespace stn ON stn.oid=st.typnamespace WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a') AND (dep.deptype='i' AND sc.relnamespace=c.relnamespace AND sc.relowner=c.relowner AND sc.relpersistence='p' AND stn.nspname='pg_catalog' AND st.typname='int8' AND sq.seqstart=1 AND sq.seqincrement=1 AND sq.seqmin=1 AND sq.seqmax=999999999999 AND sq.seqcache=1 AND NOT sq.seqcycle) IS TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a')) END,pg_catalog.pg_get_userbyid(c.relowner),CASE WHEN (c.relname='speakers' AND a.attname='is_protagonist') OR (c.relname='script_entries' AND a.attname='body_search') THEN a.atthasdef AND (SELECT count(*) FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum)=1 AND EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum AND pg_catalog.pg_get_expr(ad.adbin,ad.adrelid,false)=CASE WHEN c.relname='speakers' THEN 'false' ELSE 'lower(body)' END) ELSE NOT a.atthasdef AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='speakers' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
-          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END,CASE WHEN a.attidentity='d' THEN (SELECT count(*) FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))=1 AND EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid LEFT JOIN pg_catalog.pg_sequence sq ON sq.seqrelid=sc.oid LEFT JOIN pg_catalog.pg_type st ON st.oid=sq.seqtypid LEFT JOIN pg_catalog.pg_namespace stn ON stn.oid=st.typnamespace WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a') AND (dep.deptype='i' AND sc.relnamespace=c.relnamespace AND sc.relowner=c.relowner AND sc.relpersistence='p' AND stn.nspname='pg_catalog' AND st.typname='int8' AND sq.seqstart=1 AND sq.seqincrement=1 AND sq.seqmin=1 AND sq.seqmax=999999999999 AND sq.seqcache=1 AND NOT sq.seqcycle) IS TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a')) END,pg_catalog.pg_get_userbyid(c.relowner),CASE WHEN (c.relname='speakers' AND a.attname='is_protagonist') OR (c.relname='script_entries' AND a.attname='body_search') THEN a.atthasdef AND (SELECT count(*) FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum)=1 AND EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum AND pg_catalog.pg_get_expr(ad.adbin,ad.adrelid,false)=CASE WHEN c.relname='speakers' THEN 'false' ELSE 'lower(body)' END) ELSE NOT a.atthasdef AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='script_files' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
-          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END,CASE WHEN a.attidentity='d' THEN (SELECT count(*) FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))=1 AND EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid LEFT JOIN pg_catalog.pg_sequence sq ON sq.seqrelid=sc.oid LEFT JOIN pg_catalog.pg_type st ON st.oid=sq.seqtypid LEFT JOIN pg_catalog.pg_namespace stn ON stn.oid=st.typnamespace WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a') AND (dep.deptype='i' AND sc.relnamespace=c.relnamespace AND sc.relowner=c.relowner AND sc.relpersistence='p' AND stn.nspname='pg_catalog' AND st.typname='int8' AND sq.seqstart=1 AND sq.seqincrement=1 AND sq.seqmin=1 AND sq.seqmax=999999999999 AND sq.seqcache=1 AND NOT sq.seqcycle) IS TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a')) END,pg_catalog.pg_get_userbyid(c.relowner),CASE WHEN (c.relname='speakers' AND a.attname='is_protagonist') OR (c.relname='script_entries' AND a.attname='body_search') THEN a.atthasdef AND (SELECT count(*) FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum)=1 AND EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum AND pg_catalog.pg_get_expr(ad.adbin,ad.adrelid,false)=CASE WHEN c.relname='speakers' THEN 'false' ELSE 'lower(body)' END) ELSE NOT a.atthasdef AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='script_entries' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
-          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END,CASE WHEN a.attidentity='d' THEN (SELECT count(*) FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))=1 AND EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid LEFT JOIN pg_catalog.pg_sequence sq ON sq.seqrelid=sc.oid LEFT JOIN pg_catalog.pg_type st ON st.oid=sq.seqtypid LEFT JOIN pg_catalog.pg_namespace stn ON stn.oid=st.typnamespace WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a') AND (dep.deptype='i' AND sc.relnamespace=c.relnamespace AND sc.relowner=c.relowner AND sc.relpersistence='p' AND stn.nspname='pg_catalog' AND st.typname='int8' AND sq.seqstart=1 AND sq.seqincrement=1 AND sq.seqmin=1 AND sq.seqmax=999999999999 AND sq.seqcache=1 AND NOT sq.seqcycle) IS TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a')) END,pg_catalog.pg_get_userbyid(c.relowner),CASE WHEN (c.relname='speakers' AND a.attname='is_protagonist') OR (c.relname='script_entries' AND a.attname='body_search') THEN a.atthasdef AND (SELECT count(*) FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum)=1 AND EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum AND pg_catalog.pg_get_expr(ad.adbin,ad.adrelid,false)=CASE WHEN c.relname='speakers' THEN 'false' ELSE 'lower(body)' END) ELSE NOT a.atthasdef AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='audio_files' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
-          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END,CASE WHEN a.attidentity='d' THEN (SELECT count(*) FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))=1 AND EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid LEFT JOIN pg_catalog.pg_sequence sq ON sq.seqrelid=sc.oid LEFT JOIN pg_catalog.pg_type st ON st.oid=sq.seqtypid LEFT JOIN pg_catalog.pg_namespace stn ON stn.oid=st.typnamespace WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a') AND (dep.deptype='i' AND sc.relnamespace=c.relnamespace AND sc.relowner=c.relowner AND sc.relpersistence='p' AND stn.nspname='pg_catalog' AND st.typname='int8' AND sq.seqstart=1 AND sq.seqincrement=1 AND sq.seqmin=1 AND sq.seqmax=999999999999 AND sq.seqcache=1 AND NOT sq.seqcycle) IS TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a')) END,pg_catalog.pg_get_userbyid(c.relowner),CASE WHEN (c.relname='speakers' AND a.attname='is_protagonist') OR (c.relname='script_entries' AND a.attname='body_search') THEN a.atthasdef AND (SELECT count(*) FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum)=1 AND EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum AND pg_catalog.pg_get_expr(ad.adbin,ad.adrelid,false)=CASE WHEN c.relname='speakers' THEN 'false' ELSE 'lower(body)' END) ELSE NOT a.atthasdef AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='media_assets' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
-          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END,CASE WHEN a.attidentity='d' THEN (SELECT count(*) FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))=1 AND EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid LEFT JOIN pg_catalog.pg_sequence sq ON sq.seqrelid=sc.oid LEFT JOIN pg_catalog.pg_type st ON st.oid=sq.seqtypid LEFT JOIN pg_catalog.pg_namespace stn ON stn.oid=st.typnamespace WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a') AND (dep.deptype='i' AND sc.relnamespace=c.relnamespace AND sc.relowner=c.relowner AND sc.relpersistence='p' AND stn.nspname='pg_catalog' AND st.typname='int8' AND sq.seqstart=1 AND sq.seqincrement=1 AND sq.seqmin=1 AND sq.seqmax=999999999999 AND sq.seqcache=1 AND NOT sq.seqcycle) IS TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a')) END,pg_catalog.pg_get_userbyid(c.relowner),CASE WHEN (c.relname='speakers' AND a.attname='is_protagonist') OR (c.relname='script_entries' AND a.attname='body_search') THEN a.atthasdef AND (SELECT count(*) FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum)=1 AND EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum AND pg_catalog.pg_get_expr(ad.adbin,ad.adrelid,false)=CASE WHEN c.relname='speakers' THEN 'false' ELSE 'lower(body)' END) ELSE NOT a.atthasdef AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='entry_audio_links' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
-          "SELECT (row_number() OVER (ORDER BY k.conname COLLATE \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT k.conperiod),CASE WHEN k.contype='f' THEN rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')' ELSE '-' END,CASE WHEN k.contype='f' THEN k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND c.relname='speakers' AND c.relkind='r' AND c.relpersistence='p' AND k.contype NOT IN ('n','t') ORDER BY k.conname COLLATE \"C\"",
-          "SELECT (row_number() OVER (ORDER BY k.conname COLLATE \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT k.conperiod),CASE WHEN k.contype='f' THEN rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')' ELSE '-' END,CASE WHEN k.contype='f' THEN k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND c.relname='script_files' AND c.relkind='r' AND c.relpersistence='p' AND k.contype NOT IN ('n','t') ORDER BY k.conname COLLATE \"C\"",
-          "SELECT (row_number() OVER (ORDER BY k.conname COLLATE \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT k.conperiod),CASE WHEN k.contype='f' THEN rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')' ELSE '-' END,CASE WHEN k.contype='f' THEN k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND c.relname='script_entries' AND c.relkind='r' AND c.relpersistence='p' AND k.contype NOT IN ('n','t') ORDER BY k.conname COLLATE \"C\"",
-          "SELECT (row_number() OVER (ORDER BY k.conname COLLATE \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT k.conperiod),CASE WHEN k.contype='f' THEN rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')' ELSE '-' END,CASE WHEN k.contype='f' THEN k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND c.relname='audio_files' AND c.relkind='r' AND c.relpersistence='p' AND k.contype NOT IN ('n','t') ORDER BY k.conname COLLATE \"C\"",
-          "SELECT (row_number() OVER (ORDER BY k.conname COLLATE \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT k.conperiod),CASE WHEN k.contype='f' THEN rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')' ELSE '-' END,CASE WHEN k.contype='f' THEN k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND c.relname='media_assets' AND c.relkind='r' AND c.relpersistence='p' AND k.contype NOT IN ('n','t') ORDER BY k.conname COLLATE \"C\"",
-          "SELECT (row_number() OVER (ORDER BY k.conname COLLATE \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT k.conperiod),CASE WHEN k.contype='f' THEN rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')' ELSE '-' END,CASE WHEN k.contype='f' THEN k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND c.relname='entry_audio_links' AND c.relkind='r' AND c.relpersistence='p' AND k.contype NOT IN ('n','t') ORDER BY k.conname COLLATE \"C\"",
+          "SELECT"
+              + " a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE"
+              + " WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE"
+              + " nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND"
+              + " (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT"
+              + " nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0"
+              + " AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM"
+              + " pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND"
+              + " nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced"
+              + " AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND"
+              + " nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT"
+              + " TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE"
+              + " nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END,CASE WHEN"
+              + " a.attidentity='d' THEN (SELECT count(*) FROM pg_catalog.pg_depend dep JOIN"
+              + " pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE"
+              + " dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND"
+              + " dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid"
+              + " AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))=1"
+              + " AND EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON"
+              + " sc.oid=dep.objid LEFT JOIN pg_catalog.pg_sequence sq ON sq.seqrelid=sc.oid LEFT"
+              + " JOIN pg_catalog.pg_type st ON st.oid=sq.seqtypid LEFT JOIN"
+              + " pg_catalog.pg_namespace stn ON stn.oid=st.typnamespace WHERE"
+              + " dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND"
+              + " dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid"
+              + " AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a') AND"
+              + " (dep.deptype='i' AND sc.relnamespace=c.relnamespace AND sc.relowner=c.relowner"
+              + " AND sc.relpersistence='p' AND stn.nspname='pg_catalog' AND st.typname='int8' AND"
+              + " sq.seqstart=1 AND sq.seqincrement=1 AND sq.seqmin=1 AND sq.seqmax=999999999999"
+              + " AND sq.seqcache=1 AND NOT sq.seqcycle) IS TRUE) ELSE NOT EXISTS (SELECT 1 FROM"
+              + " pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE"
+              + " dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND"
+              + " dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid"
+              + " AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))"
+              + " END,pg_catalog.pg_get_userbyid(c.relowner),CASE WHEN (c.relname='speakers' AND"
+              + " a.attname='is_protagonist') OR (c.relname='script_entries' AND"
+              + " a.attname='body_search') THEN a.atthasdef AND (SELECT count(*) FROM"
+              + " pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum)=1 AND"
+              + " EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND"
+              + " ad.adnum=a.attnum AND pg_catalog.pg_get_expr(ad.adbin,ad.adrelid,false)=CASE WHEN"
+              + " c.relname='speakers' THEN 'false' ELSE 'lower(body)' END) ELSE NOT a.atthasdef"
+              + " AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND"
+              + " ad.adnum=a.attnum) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n"
+              + " ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN"
+              + " pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON"
+              + " tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='speakers' AND"
+              + " c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0"
+              + " AND NOT a.attisdropped ORDER BY a.attnum",
+          "SELECT"
+              + " a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE"
+              + " WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE"
+              + " nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND"
+              + " (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT"
+              + " nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0"
+              + " AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM"
+              + " pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND"
+              + " nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced"
+              + " AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND"
+              + " nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT"
+              + " TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE"
+              + " nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END,CASE WHEN"
+              + " a.attidentity='d' THEN (SELECT count(*) FROM pg_catalog.pg_depend dep JOIN"
+              + " pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE"
+              + " dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND"
+              + " dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid"
+              + " AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))=1"
+              + " AND EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON"
+              + " sc.oid=dep.objid LEFT JOIN pg_catalog.pg_sequence sq ON sq.seqrelid=sc.oid LEFT"
+              + " JOIN pg_catalog.pg_type st ON st.oid=sq.seqtypid LEFT JOIN"
+              + " pg_catalog.pg_namespace stn ON stn.oid=st.typnamespace WHERE"
+              + " dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND"
+              + " dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid"
+              + " AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a') AND"
+              + " (dep.deptype='i' AND sc.relnamespace=c.relnamespace AND sc.relowner=c.relowner"
+              + " AND sc.relpersistence='p' AND stn.nspname='pg_catalog' AND st.typname='int8' AND"
+              + " sq.seqstart=1 AND sq.seqincrement=1 AND sq.seqmin=1 AND sq.seqmax=999999999999"
+              + " AND sq.seqcache=1 AND NOT sq.seqcycle) IS TRUE) ELSE NOT EXISTS (SELECT 1 FROM"
+              + " pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE"
+              + " dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND"
+              + " dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid"
+              + " AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))"
+              + " END,pg_catalog.pg_get_userbyid(c.relowner),CASE WHEN (c.relname='speakers' AND"
+              + " a.attname='is_protagonist') OR (c.relname='script_entries' AND"
+              + " a.attname='body_search') THEN a.atthasdef AND (SELECT count(*) FROM"
+              + " pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum)=1 AND"
+              + " EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND"
+              + " ad.adnum=a.attnum AND pg_catalog.pg_get_expr(ad.adbin,ad.adrelid,false)=CASE WHEN"
+              + " c.relname='speakers' THEN 'false' ELSE 'lower(body)' END) ELSE NOT a.atthasdef"
+              + " AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND"
+              + " ad.adnum=a.attnum) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n"
+              + " ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN"
+              + " pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON"
+              + " tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='script_files' AND"
+              + " c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0"
+              + " AND NOT a.attisdropped ORDER BY a.attnum",
+          "SELECT"
+              + " a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE"
+              + " WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE"
+              + " nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND"
+              + " (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT"
+              + " nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0"
+              + " AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM"
+              + " pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND"
+              + " nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced"
+              + " AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND"
+              + " nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT"
+              + " TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE"
+              + " nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END,CASE WHEN"
+              + " a.attidentity='d' THEN (SELECT count(*) FROM pg_catalog.pg_depend dep JOIN"
+              + " pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE"
+              + " dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND"
+              + " dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid"
+              + " AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))=1"
+              + " AND EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON"
+              + " sc.oid=dep.objid LEFT JOIN pg_catalog.pg_sequence sq ON sq.seqrelid=sc.oid LEFT"
+              + " JOIN pg_catalog.pg_type st ON st.oid=sq.seqtypid LEFT JOIN"
+              + " pg_catalog.pg_namespace stn ON stn.oid=st.typnamespace WHERE"
+              + " dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND"
+              + " dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid"
+              + " AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a') AND"
+              + " (dep.deptype='i' AND sc.relnamespace=c.relnamespace AND sc.relowner=c.relowner"
+              + " AND sc.relpersistence='p' AND stn.nspname='pg_catalog' AND st.typname='int8' AND"
+              + " sq.seqstart=1 AND sq.seqincrement=1 AND sq.seqmin=1 AND sq.seqmax=999999999999"
+              + " AND sq.seqcache=1 AND NOT sq.seqcycle) IS TRUE) ELSE NOT EXISTS (SELECT 1 FROM"
+              + " pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE"
+              + " dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND"
+              + " dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid"
+              + " AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))"
+              + " END,pg_catalog.pg_get_userbyid(c.relowner),CASE WHEN (c.relname='speakers' AND"
+              + " a.attname='is_protagonist') OR (c.relname='script_entries' AND"
+              + " a.attname='body_search') THEN a.atthasdef AND (SELECT count(*) FROM"
+              + " pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum)=1 AND"
+              + " EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND"
+              + " ad.adnum=a.attnum AND pg_catalog.pg_get_expr(ad.adbin,ad.adrelid,false)=CASE WHEN"
+              + " c.relname='speakers' THEN 'false' ELSE 'lower(body)' END) ELSE NOT a.atthasdef"
+              + " AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND"
+              + " ad.adnum=a.attnum) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n"
+              + " ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN"
+              + " pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON"
+              + " tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='script_entries'"
+              + " AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND"
+              + " a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
+          "SELECT"
+              + " a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE"
+              + " WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE"
+              + " nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND"
+              + " (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT"
+              + " nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0"
+              + " AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM"
+              + " pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND"
+              + " nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced"
+              + " AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND"
+              + " nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT"
+              + " TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE"
+              + " nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END,CASE WHEN"
+              + " a.attidentity='d' THEN (SELECT count(*) FROM pg_catalog.pg_depend dep JOIN"
+              + " pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE"
+              + " dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND"
+              + " dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid"
+              + " AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))=1"
+              + " AND EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON"
+              + " sc.oid=dep.objid LEFT JOIN pg_catalog.pg_sequence sq ON sq.seqrelid=sc.oid LEFT"
+              + " JOIN pg_catalog.pg_type st ON st.oid=sq.seqtypid LEFT JOIN"
+              + " pg_catalog.pg_namespace stn ON stn.oid=st.typnamespace WHERE"
+              + " dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND"
+              + " dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid"
+              + " AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a') AND"
+              + " (dep.deptype='i' AND sc.relnamespace=c.relnamespace AND sc.relowner=c.relowner"
+              + " AND sc.relpersistence='p' AND stn.nspname='pg_catalog' AND st.typname='int8' AND"
+              + " sq.seqstart=1 AND sq.seqincrement=1 AND sq.seqmin=1 AND sq.seqmax=999999999999"
+              + " AND sq.seqcache=1 AND NOT sq.seqcycle) IS TRUE) ELSE NOT EXISTS (SELECT 1 FROM"
+              + " pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE"
+              + " dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND"
+              + " dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid"
+              + " AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))"
+              + " END,pg_catalog.pg_get_userbyid(c.relowner),CASE WHEN (c.relname='speakers' AND"
+              + " a.attname='is_protagonist') OR (c.relname='script_entries' AND"
+              + " a.attname='body_search') THEN a.atthasdef AND (SELECT count(*) FROM"
+              + " pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum)=1 AND"
+              + " EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND"
+              + " ad.adnum=a.attnum AND pg_catalog.pg_get_expr(ad.adbin,ad.adrelid,false)=CASE WHEN"
+              + " c.relname='speakers' THEN 'false' ELSE 'lower(body)' END) ELSE NOT a.atthasdef"
+              + " AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND"
+              + " ad.adnum=a.attnum) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n"
+              + " ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN"
+              + " pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON"
+              + " tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='audio_files' AND"
+              + " c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0"
+              + " AND NOT a.attisdropped ORDER BY a.attnum",
+          "SELECT"
+              + " a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE"
+              + " WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE"
+              + " nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND"
+              + " (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT"
+              + " nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0"
+              + " AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM"
+              + " pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND"
+              + " nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced"
+              + " AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND"
+              + " nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT"
+              + " TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE"
+              + " nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END,CASE WHEN"
+              + " a.attidentity='d' THEN (SELECT count(*) FROM pg_catalog.pg_depend dep JOIN"
+              + " pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE"
+              + " dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND"
+              + " dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid"
+              + " AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))=1"
+              + " AND EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON"
+              + " sc.oid=dep.objid LEFT JOIN pg_catalog.pg_sequence sq ON sq.seqrelid=sc.oid LEFT"
+              + " JOIN pg_catalog.pg_type st ON st.oid=sq.seqtypid LEFT JOIN"
+              + " pg_catalog.pg_namespace stn ON stn.oid=st.typnamespace WHERE"
+              + " dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND"
+              + " dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid"
+              + " AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a') AND"
+              + " (dep.deptype='i' AND sc.relnamespace=c.relnamespace AND sc.relowner=c.relowner"
+              + " AND sc.relpersistence='p' AND stn.nspname='pg_catalog' AND st.typname='int8' AND"
+              + " sq.seqstart=1 AND sq.seqincrement=1 AND sq.seqmin=1 AND sq.seqmax=999999999999"
+              + " AND sq.seqcache=1 AND NOT sq.seqcycle) IS TRUE) ELSE NOT EXISTS (SELECT 1 FROM"
+              + " pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE"
+              + " dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND"
+              + " dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid"
+              + " AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))"
+              + " END,pg_catalog.pg_get_userbyid(c.relowner),CASE WHEN (c.relname='speakers' AND"
+              + " a.attname='is_protagonist') OR (c.relname='script_entries' AND"
+              + " a.attname='body_search') THEN a.atthasdef AND (SELECT count(*) FROM"
+              + " pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum)=1 AND"
+              + " EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND"
+              + " ad.adnum=a.attnum AND pg_catalog.pg_get_expr(ad.adbin,ad.adrelid,false)=CASE WHEN"
+              + " c.relname='speakers' THEN 'false' ELSE 'lower(body)' END) ELSE NOT a.atthasdef"
+              + " AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND"
+              + " ad.adnum=a.attnum) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n"
+              + " ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN"
+              + " pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON"
+              + " tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='media_assets' AND"
+              + " c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0"
+              + " AND NOT a.attisdropped ORDER BY a.attnum",
+          "SELECT"
+              + " a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE"
+              + " WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE"
+              + " nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND"
+              + " (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT"
+              + " nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0"
+              + " AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM"
+              + " pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND"
+              + " nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced"
+              + " AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND"
+              + " nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT"
+              + " TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE"
+              + " nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END,CASE WHEN"
+              + " a.attidentity='d' THEN (SELECT count(*) FROM pg_catalog.pg_depend dep JOIN"
+              + " pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE"
+              + " dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND"
+              + " dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid"
+              + " AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))=1"
+              + " AND EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON"
+              + " sc.oid=dep.objid LEFT JOIN pg_catalog.pg_sequence sq ON sq.seqrelid=sc.oid LEFT"
+              + " JOIN pg_catalog.pg_type st ON st.oid=sq.seqtypid LEFT JOIN"
+              + " pg_catalog.pg_namespace stn ON stn.oid=st.typnamespace WHERE"
+              + " dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND"
+              + " dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid"
+              + " AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a') AND"
+              + " (dep.deptype='i' AND sc.relnamespace=c.relnamespace AND sc.relowner=c.relowner"
+              + " AND sc.relpersistence='p' AND stn.nspname='pg_catalog' AND st.typname='int8' AND"
+              + " sq.seqstart=1 AND sq.seqincrement=1 AND sq.seqmin=1 AND sq.seqmax=999999999999"
+              + " AND sq.seqcache=1 AND NOT sq.seqcycle) IS TRUE) ELSE NOT EXISTS (SELECT 1 FROM"
+              + " pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE"
+              + " dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND"
+              + " dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid"
+              + " AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))"
+              + " END,pg_catalog.pg_get_userbyid(c.relowner),CASE WHEN (c.relname='speakers' AND"
+              + " a.attname='is_protagonist') OR (c.relname='script_entries' AND"
+              + " a.attname='body_search') THEN a.atthasdef AND (SELECT count(*) FROM"
+              + " pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum)=1 AND"
+              + " EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND"
+              + " ad.adnum=a.attnum AND pg_catalog.pg_get_expr(ad.adbin,ad.adrelid,false)=CASE WHEN"
+              + " c.relname='speakers' THEN 'false' ELSE 'lower(body)' END) ELSE NOT a.atthasdef"
+              + " AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND"
+              + " ad.adnum=a.attnum) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n"
+              + " ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN"
+              + " pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON"
+              + " tn.oid=t.typnamespace WHERE n.nspname='schubert' AND"
+              + " c.relname='entry_audio_links' AND c.relkind='r' AND c.relpersistence='p' AND"
+              + " tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
+          "SELECT (row_number() OVER (ORDER BY k.conname COLLATE"
+              + " \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated"
+              + " AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal"
+              + " AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT"
+              + " k.conperiod),CASE WHEN k.contype='f' THEN"
+              + " rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')'"
+              + " ELSE '-' END,CASE WHEN k.contype='f' THEN"
+              + " k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE"
+              + " '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON"
+              + " c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN"
+              + " pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn"
+              + " ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND"
+              + " c.relname='speakers' AND c.relkind='r' AND c.relpersistence='p' AND k.contype NOT"
+              + " IN ('n','t') ORDER BY k.conname COLLATE \"C\"",
+          "SELECT (row_number() OVER (ORDER BY k.conname COLLATE"
+              + " \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated"
+              + " AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal"
+              + " AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT"
+              + " k.conperiod),CASE WHEN k.contype='f' THEN"
+              + " rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')'"
+              + " ELSE '-' END,CASE WHEN k.contype='f' THEN"
+              + " k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE"
+              + " '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON"
+              + " c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN"
+              + " pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn"
+              + " ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND"
+              + " c.relname='script_files' AND c.relkind='r' AND c.relpersistence='p' AND k.contype"
+              + " NOT IN ('n','t') ORDER BY k.conname COLLATE \"C\"",
+          "SELECT (row_number() OVER (ORDER BY k.conname COLLATE"
+              + " \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated"
+              + " AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal"
+              + " AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT"
+              + " k.conperiod),CASE WHEN k.contype='f' THEN"
+              + " rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')'"
+              + " ELSE '-' END,CASE WHEN k.contype='f' THEN"
+              + " k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE"
+              + " '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON"
+              + " c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN"
+              + " pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn"
+              + " ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND"
+              + " c.relname='script_entries' AND c.relkind='r' AND c.relpersistence='p' AND"
+              + " k.contype NOT IN ('n','t') ORDER BY k.conname COLLATE \"C\"",
+          "SELECT (row_number() OVER (ORDER BY k.conname COLLATE"
+              + " \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated"
+              + " AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal"
+              + " AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT"
+              + " k.conperiod),CASE WHEN k.contype='f' THEN"
+              + " rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')'"
+              + " ELSE '-' END,CASE WHEN k.contype='f' THEN"
+              + " k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE"
+              + " '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON"
+              + " c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN"
+              + " pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn"
+              + " ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND"
+              + " c.relname='audio_files' AND c.relkind='r' AND c.relpersistence='p' AND k.contype"
+              + " NOT IN ('n','t') ORDER BY k.conname COLLATE \"C\"",
+          "SELECT (row_number() OVER (ORDER BY k.conname COLLATE"
+              + " \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated"
+              + " AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal"
+              + " AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT"
+              + " k.conperiod),CASE WHEN k.contype='f' THEN"
+              + " rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')'"
+              + " ELSE '-' END,CASE WHEN k.contype='f' THEN"
+              + " k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE"
+              + " '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON"
+              + " c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN"
+              + " pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn"
+              + " ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND"
+              + " c.relname='media_assets' AND c.relkind='r' AND c.relpersistence='p' AND k.contype"
+              + " NOT IN ('n','t') ORDER BY k.conname COLLATE \"C\"",
+          "SELECT (row_number() OVER (ORDER BY k.conname COLLATE"
+              + " \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated"
+              + " AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal"
+              + " AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT"
+              + " k.conperiod),CASE WHEN k.contype='f' THEN"
+              + " rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')'"
+              + " ELSE '-' END,CASE WHEN k.contype='f' THEN"
+              + " k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE"
+              + " '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON"
+              + " c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN"
+              + " pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn"
+              + " ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND"
+              + " c.relname='entry_audio_links' AND c.relkind='r' AND c.relpersistence='p' AND"
+              + " k.contype NOT IN ('n','t') ORDER BY k.conname COLLATE \"C\"",
           GAMES_SQL,
-          "CREATE TEMP TABLE nk_mig_speakers ON COMMIT DROP AS SELECT id, game_id, name, normalized_name, is_protagonist, notes, created_at FROM schubert.speakers WITH NO DATA",
-          "CREATE TEMP TABLE nk_mig_script_files ON COMMIT DROP AS SELECT id, game_id, display_order, storage_relative_path, display_path, file_name, section_code, chapter_title, sha256, byte_size, created_at FROM schubert.script_files WITH NO DATA",
-          "CREATE TEMP TABLE nk_mig_script_entries ON COMMIT DROP AS SELECT id, game_id, script_file_id, display_order, entry_index, line_number, entry_type, speaker_id, speaker_label, body, raw_block, created_at FROM schubert.script_entries WITH NO DATA",
-          "CREATE TEMP TABLE nk_mig_audio_files ON COMMIT DROP AS SELECT id, game_id, storage_relative_path, display_path, file_name, basename, audio_role, container, duration_ms, byte_size, sha256, created_at FROM schubert.audio_files WITH NO DATA",
-          "CREATE TEMP TABLE nk_mig_media_assets ON COMMIT DROP AS SELECT id, logical_id, media_type, title, category, section, storage_relative_path, display_path, file_name, byte_size, sha256, mime_type, parent_logical_id, pair_key, pair_role, display_order, created_at FROM schubert.media_assets WITH NO DATA",
-          "CREATE TEMP TABLE nk_mig_entry_audio_links ON COMMIT DROP AS SELECT entry_id, audio_file_id, game_id, link_type, display_order, created_at FROM schubert.entry_audio_links WITH NO DATA",
+          "CREATE TEMP TABLE nk_mig_speakers ON COMMIT DROP AS SELECT id, game_id, name,"
+              + " normalized_name, is_protagonist, notes, created_at FROM schubert.speakers WITH NO"
+              + " DATA",
+          "CREATE TEMP TABLE nk_mig_script_files ON COMMIT DROP AS SELECT id, game_id,"
+              + " display_order, storage_relative_path, display_path, file_name, section_code,"
+              + " chapter_title, sha256, byte_size, created_at FROM schubert.script_files WITH NO"
+              + " DATA",
+          "CREATE TEMP TABLE nk_mig_script_entries ON COMMIT DROP AS SELECT id, game_id,"
+              + " script_file_id, display_order, entry_index, line_number, entry_type, speaker_id,"
+              + " speaker_label, body, raw_block, created_at FROM schubert.script_entries WITH NO"
+              + " DATA",
+          "CREATE TEMP TABLE nk_mig_audio_files ON COMMIT DROP AS SELECT id, game_id,"
+              + " storage_relative_path, display_path, file_name, basename, audio_role, container,"
+              + " duration_ms, byte_size, sha256, created_at FROM schubert.audio_files WITH NO"
+              + " DATA",
+          "CREATE TEMP TABLE nk_mig_media_assets ON COMMIT DROP AS SELECT id, logical_id,"
+              + " media_type, title, category, section, storage_relative_path, display_path,"
+              + " file_name, byte_size, sha256, mime_type, parent_logical_id, pair_key, pair_role,"
+              + " display_order, created_at FROM schubert.media_assets WITH NO DATA",
+          "CREATE TEMP TABLE nk_mig_entry_audio_links ON COMMIT DROP AS SELECT entry_id,"
+              + " audio_file_id, game_id, link_type, display_order, created_at FROM"
+              + " schubert.entry_audio_links WITH NO DATA",
           "SELECT count(*) FROM schubert.speakers",
           "SELECT count(*) FROM pg_temp.nk_mig_speakers",
-          "INSERT INTO schubert.speakers (id, game_id, name, normalized_name, is_protagonist, notes, created_at) SELECT id, game_id, name, normalized_name, is_protagonist, notes, created_at FROM pg_temp.nk_mig_speakers ORDER BY id",
+          "INSERT INTO schubert.speakers (id, game_id, name, normalized_name, is_protagonist,"
+              + " notes, created_at) SELECT id, game_id, name, normalized_name, is_protagonist,"
+              + " notes, created_at FROM pg_temp.nk_mig_speakers ORDER BY id",
           "SELECT count(*) FROM schubert.speakers",
           "SELECT count(*) FROM schubert.script_files",
           "SELECT count(*) FROM schubert.script_entries",
           "SELECT count(*) FROM pg_temp.nk_mig_script_files",
           "SELECT count(*) FROM pg_temp.nk_mig_script_entries",
-          "INSERT INTO schubert.script_files (id, game_id, display_order, storage_relative_path, display_path, file_name, section_code, chapter_title, sha256, byte_size, created_at) SELECT id, game_id, display_order, storage_relative_path, display_path, file_name, section_code, chapter_title, sha256, byte_size, created_at FROM pg_temp.nk_mig_script_files ORDER BY game_id, display_order",
-          "INSERT INTO schubert.script_entries (id, game_id, script_file_id, display_order, entry_index, line_number, entry_type, speaker_id, speaker_label, body, raw_block, created_at) SELECT id, game_id, script_file_id, display_order, entry_index, line_number, entry_type, speaker_id, speaker_label, body, raw_block, created_at FROM pg_temp.nk_mig_script_entries ORDER BY display_order",
+          "INSERT INTO schubert.script_files (id, game_id, display_order, storage_relative_path,"
+              + " display_path, file_name, section_code, chapter_title, sha256, byte_size,"
+              + " created_at) SELECT id, game_id, display_order, storage_relative_path,"
+              + " display_path, file_name, section_code, chapter_title, sha256, byte_size,"
+              + " created_at FROM pg_temp.nk_mig_script_files ORDER BY game_id, display_order",
+          "INSERT INTO schubert.script_entries (id, game_id, script_file_id, display_order,"
+              + " entry_index, line_number, entry_type, speaker_id, speaker_label, body, raw_block,"
+              + " created_at) SELECT id, game_id, script_file_id, display_order, entry_index,"
+              + " line_number, entry_type, speaker_id, speaker_label, body, raw_block, created_at"
+              + " FROM pg_temp.nk_mig_script_entries ORDER BY display_order",
           "SELECT count(*) FROM schubert.script_files",
           "SELECT count(*) FROM schubert.script_entries",
           "SELECT count(*) FROM schubert.audio_files",
@@ -337,9 +1096,22 @@ final class MigrationMasterTargetPublisherTest {
           "SELECT count(*) FROM pg_temp.nk_mig_audio_files",
           "SELECT count(*) FROM pg_temp.nk_mig_media_assets",
           "SELECT count(*) FROM pg_temp.nk_mig_entry_audio_links",
-          "INSERT INTO schubert.audio_files (id, game_id, storage_relative_path, display_path, file_name, basename, audio_role, container, duration_ms, byte_size, sha256, created_at) SELECT id, game_id, storage_relative_path, display_path, file_name, basename, audio_role, container, duration_ms, byte_size, sha256, created_at FROM pg_temp.nk_mig_audio_files ORDER BY id",
-          "INSERT INTO schubert.media_assets (id, logical_id, media_type, title, category, section, storage_relative_path, display_path, file_name, byte_size, sha256, mime_type, parent_logical_id, pair_key, pair_role, display_order, created_at) SELECT id, logical_id, media_type, title, category, section, storage_relative_path, display_path, file_name, byte_size, sha256, mime_type, parent_logical_id, pair_key, pair_role, display_order, created_at FROM pg_temp.nk_mig_media_assets ORDER BY id",
-          "INSERT INTO schubert.entry_audio_links (entry_id, audio_file_id, game_id, link_type, display_order, created_at) SELECT entry_id, audio_file_id, game_id, link_type, display_order, created_at FROM pg_temp.nk_mig_entry_audio_links ORDER BY entry_id, link_type, display_order, audio_file_id",
+          "INSERT INTO schubert.audio_files (id, game_id, storage_relative_path, display_path,"
+              + " file_name, basename, audio_role, container, duration_ms, byte_size, sha256,"
+              + " created_at) SELECT id, game_id, storage_relative_path, display_path, file_name,"
+              + " basename, audio_role, container, duration_ms, byte_size, sha256, created_at FROM"
+              + " pg_temp.nk_mig_audio_files ORDER BY id",
+          "INSERT INTO schubert.media_assets (id, logical_id, media_type, title, category, section,"
+              + " storage_relative_path, display_path, file_name, byte_size, sha256, mime_type,"
+              + " parent_logical_id, pair_key, pair_role, display_order, created_at) SELECT id,"
+              + " logical_id, media_type, title, category, section, storage_relative_path,"
+              + " display_path, file_name, byte_size, sha256, mime_type, parent_logical_id,"
+              + " pair_key, pair_role, display_order, created_at FROM pg_temp.nk_mig_media_assets"
+              + " ORDER BY id",
+          "INSERT INTO schubert.entry_audio_links (entry_id, audio_file_id, game_id, link_type,"
+              + " display_order, created_at) SELECT entry_id, audio_file_id, game_id, link_type,"
+              + " display_order, created_at FROM pg_temp.nk_mig_entry_audio_links ORDER BY"
+              + " entry_id, link_type, display_order, audio_file_id",
           "SELECT count(*) FROM schubert.audio_files",
           "SELECT count(*) FROM schubert.media_assets",
           "SELECT count(*) FROM schubert.entry_audio_links",
@@ -349,46 +1121,145 @@ final class MigrationMasterTargetPublisherTest {
           "SELECT count(*) FROM schubert.audio_files",
           "SELECT count(*) FROM schubert.media_assets",
           "SELECT count(*) FROM schubert.entry_audio_links",
-          "SELECT count(*) FROM schubert.script_files c LEFT JOIN schubert.games p ON p.id=c.game_id WHERE p.id IS NULL",
-          "SELECT count(*) FROM schubert.speakers c LEFT JOIN schubert.games p ON p.id=c.game_id WHERE p.id IS NULL",
-          "SELECT count(*) FROM schubert.script_entries c LEFT JOIN schubert.games p ON p.id=c.game_id WHERE p.id IS NULL",
-          "SELECT count(*) FROM schubert.audio_files c LEFT JOIN schubert.games p ON p.id=c.game_id WHERE p.id IS NULL",
-          "SELECT count(*) FROM schubert.script_entries c LEFT JOIN schubert.script_files p ON p.id=c.script_file_id AND p.game_id=c.game_id WHERE p.id IS NULL",
-          "SELECT count(*) FROM schubert.script_entries c LEFT JOIN schubert.speakers p ON p.id=c.speaker_id AND p.game_id=c.game_id WHERE c.speaker_id IS NOT NULL AND p.id IS NULL",
-          "SELECT count(*) FROM schubert.entry_audio_links c LEFT JOIN schubert.script_entries p ON p.id=c.entry_id AND p.game_id=c.game_id WHERE p.id IS NULL",
-          "SELECT count(*) FROM schubert.entry_audio_links c LEFT JOIN schubert.audio_files p ON p.id=c.audio_file_id AND p.game_id=c.game_id WHERE p.id IS NULL",
-          "SELECT count(*) FROM schubert.media_assets c LEFT JOIN schubert.media_assets p ON p.logical_id=c.parent_logical_id WHERE c.parent_logical_id IS NOT NULL AND p.logical_id IS NULL",
-          "SELECT count(*) FROM (SELECT entry_id,link_type FROM schubert.entry_audio_links GROUP BY entry_id,link_type HAVING count(*)>999 OR min(display_order)<1 OR max(display_order)>999 OR count(DISTINCT display_order)<>count(*)) violations",
-          "SELECT count(*) FROM schubert.speakers WHERE ((id BETWEEN 1 AND 999999999999) AND (octet_length(name) BETWEEN 1 AND 128) AND (octet_length(normalized_name) BETWEEN 1 AND 128)) IS FALSE",
-          "SELECT count(*) FROM schubert.script_files WHERE ((byte_size BETWEEN 0 AND 999999999999) AND (\n        chapter_title IS NULL OR octet_length(chapter_title) <= 256) AND (display_order BETWEEN 1 AND 999999999999) AND (octet_length(display_path) BETWEEN 1 AND 512) AND (octet_length(file_name) BETWEEN 1 AND 256) AND (id BETWEEN 1 AND 999999999999) AND (sha256 ~ '^[0-9a-f]{64}$') AND (octet_length(storage_relative_path) BETWEEN 1 AND 512) AND (\n        storage_relative_path !~ '(^/|\\\\|(^|/)\\.\\.?(/|$)|//)')) IS FALSE",
-          "SELECT count(*) FROM schubert.script_entries WHERE ((octet_length(body) BETWEEN 1 AND 4096) AND (display_order BETWEEN 1 AND 999999999999) AND (entry_index >= 0) AND (entry_type IN ('dialogue', 'narration')) AND (id BETWEEN 1 AND 999999999999) AND (line_number IS NULL OR line_number >= 1) AND (\n        (entry_type = 'dialogue' AND speaker_id IS NOT NULL)\n        OR (entry_type = 'narration' AND speaker_id IS NULL)) AND (\n        speaker_label IS NULL OR octet_length(speaker_label) <= 128)) IS FALSE",
-          "SELECT count(*) FROM schubert.audio_files WHERE ((octet_length(audio_role) BETWEEN 1 AND 11) AND (octet_length(basename) BETWEEN 1 AND 255) AND (byte_size BETWEEN 1 AND 999999999999) AND (octet_length(display_path) BETWEEN 1 AND 512) AND (duration_ms IS NULL OR duration_ms BETWEEN 0 AND 999999999999) AND (octet_length(file_name) BETWEEN 1 AND 256) AND (id BETWEEN 1 AND 999999999999) AND (sha256 ~ '^[0-9a-f]{64}$') AND (octet_length(storage_relative_path) BETWEEN 1 AND 512) AND (\n        storage_relative_path !~ '(^/|\\\\|(^|/)\\.\\.?(/|$)|//)')) IS FALSE",
-          "SELECT count(*) FROM schubert.media_assets WHERE ((byte_size BETWEEN 1 AND 999999999999) AND (octet_length(category) BETWEEN 1 AND 64) AND (display_order BETWEEN 1 AND 9999) AND (octet_length(display_path) BETWEEN 1 AND 512) AND (octet_length(file_name) BETWEEN 1 AND 256) AND (id BETWEEN 1 AND 999999999999) AND (octet_length(logical_id) BETWEEN 1 AND 64) AND (media_type IN ('VIDEO', 'MUSIC')) AND (\n        mime_type IN ('video/mp4', 'audio/mp4', 'audio/mpeg', 'audio/ogg', 'audio/wav', 'audio/flac')) AND ((\n        (media_type = 'VIDEO' AND pair_key IS NULL AND pair_role IS NULL)\n        OR (media_type = 'MUSIC' AND (\n            (pair_role IN ('M', 'I') AND octet_length(pair_key) BETWEEN 1 AND 256)\n            OR (pair_role = 'N' AND pair_key IS NULL)))\n    ) IS TRUE) AND (section IS NULL OR octet_length(section) <= 128) AND (sha256 ~ '^[0-9a-f]{64}$') AND (octet_length(storage_relative_path) BETWEEN 1 AND 512) AND (\n        storage_relative_path !~ '(^/|\\\\|(^|/)\\.\\.?(/|$)|//)') AND (octet_length(title) BETWEEN 1 AND 256)) IS FALSE",
-          "SELECT count(*) FROM schubert.entry_audio_links WHERE ((display_order BETWEEN 1 AND 999) AND (link_type IN ('voice', 'se', 'bgm', 'other'))) IS FALSE",
-          "SELECT count(*) FROM (SELECT 1 FROM schubert.speakers GROUP BY id HAVING count(*)>1 OR (id IS NULL) UNION ALL SELECT 1 FROM schubert.speakers WHERE game_id IS NOT NULL AND normalized_name IS NOT NULL GROUP BY game_id,normalized_name HAVING count(*)>1 UNION ALL SELECT 1 FROM schubert.speakers WHERE id IS NOT NULL AND game_id IS NOT NULL GROUP BY id,game_id HAVING count(*)>1) violations",
-          "SELECT count(*) FROM (SELECT 1 FROM schubert.script_files GROUP BY id HAVING count(*)>1 OR (id IS NULL) UNION ALL SELECT 1 FROM schubert.script_files WHERE game_id IS NOT NULL AND display_order IS NOT NULL GROUP BY game_id,display_order HAVING count(*)>1 UNION ALL SELECT 1 FROM schubert.script_files WHERE game_id IS NOT NULL AND storage_relative_path IS NOT NULL GROUP BY game_id,storage_relative_path HAVING count(*)>1 UNION ALL SELECT 1 FROM schubert.script_files WHERE id IS NOT NULL AND game_id IS NOT NULL GROUP BY id,game_id HAVING count(*)>1) violations",
-          "SELECT count(*) FROM (SELECT 1 FROM schubert.script_entries GROUP BY id HAVING count(*)>1 OR (id IS NULL) UNION ALL SELECT 1 FROM schubert.script_entries WHERE display_order IS NOT NULL GROUP BY display_order HAVING count(*)>1 UNION ALL SELECT 1 FROM schubert.script_entries WHERE script_file_id IS NOT NULL AND entry_index IS NOT NULL GROUP BY script_file_id,entry_index HAVING count(*)>1 UNION ALL SELECT 1 FROM schubert.script_entries WHERE id IS NOT NULL AND game_id IS NOT NULL GROUP BY id,game_id HAVING count(*)>1) violations",
-          "SELECT count(*) FROM (SELECT 1 FROM schubert.audio_files GROUP BY id HAVING count(*)>1 OR (id IS NULL) UNION ALL SELECT 1 FROM schubert.audio_files WHERE game_id IS NOT NULL AND storage_relative_path IS NOT NULL GROUP BY game_id,storage_relative_path HAVING count(*)>1 UNION ALL SELECT 1 FROM schubert.audio_files WHERE id IS NOT NULL AND game_id IS NOT NULL GROUP BY id,game_id HAVING count(*)>1) violations",
-          "SELECT count(*) FROM (SELECT 1 FROM schubert.media_assets GROUP BY id HAVING count(*)>1 OR (id IS NULL) UNION ALL SELECT 1 FROM schubert.media_assets WHERE logical_id IS NOT NULL GROUP BY logical_id HAVING count(*)>1 UNION ALL SELECT 1 FROM schubert.media_assets WHERE media_type IS NOT NULL AND storage_relative_path IS NOT NULL GROUP BY media_type,storage_relative_path HAVING count(*)>1) violations",
-          "SELECT count(*) FROM (SELECT 1 FROM schubert.entry_audio_links GROUP BY entry_id,audio_file_id,link_type HAVING count(*)>1 OR (entry_id IS NULL OR audio_file_id IS NULL OR link_type IS NULL) UNION ALL SELECT 1 FROM schubert.entry_audio_links WHERE entry_id IS NOT NULL AND link_type IS NOT NULL AND display_order IS NOT NULL GROUP BY entry_id,link_type,display_order HAVING count(*)>1) violations",
-          "SELECT id,game_id,name,normalized_name,is_protagonist,notes,created_at FROM schubert.speakers ORDER BY id",
-          "SELECT id,game_id,display_order,storage_relative_path,display_path,file_name,section_code,chapter_title,sha256,byte_size,created_at FROM schubert.script_files ORDER BY id",
-          "SELECT id,game_id,script_file_id,display_order,entry_index,line_number,entry_type,speaker_id,speaker_label,body,raw_block,created_at FROM schubert.script_entries ORDER BY id",
-          "SELECT id,game_id,storage_relative_path,display_path,file_name,basename,audio_role,container,duration_ms,byte_size,sha256,created_at FROM schubert.audio_files ORDER BY id",
-          "SELECT id,logical_id,media_type,title,category,section,storage_relative_path,display_path,file_name,byte_size,sha256,mime_type,parent_logical_id,pair_key,pair_role,display_order,created_at FROM schubert.media_assets ORDER BY id",
-          "SELECT entry_id,audio_file_id,game_id,link_type,display_order,created_at FROM schubert.entry_audio_links ORDER BY entry_id,audio_file_id,link_type COLLATE \"C\"",
-          "SELECT count(*) FROM schubert.script_entries WHERE body_search IS DISTINCT FROM pg_catalog.lower(body)",
+          "SELECT count(*) FROM schubert.script_files c LEFT JOIN schubert.games p ON"
+              + " p.id=c.game_id WHERE p.id IS NULL",
+          "SELECT count(*) FROM schubert.speakers c LEFT JOIN schubert.games p ON p.id=c.game_id"
+              + " WHERE p.id IS NULL",
+          "SELECT count(*) FROM schubert.script_entries c LEFT JOIN schubert.games p ON"
+              + " p.id=c.game_id WHERE p.id IS NULL",
+          "SELECT count(*) FROM schubert.audio_files c LEFT JOIN schubert.games p ON p.id=c.game_id"
+              + " WHERE p.id IS NULL",
+          "SELECT count(*) FROM schubert.script_entries c LEFT JOIN schubert.script_files p ON"
+              + " p.id=c.script_file_id AND p.game_id=c.game_id WHERE p.id IS NULL",
+          "SELECT count(*) FROM schubert.script_entries c LEFT JOIN schubert.speakers p ON"
+              + " p.id=c.speaker_id AND p.game_id=c.game_id WHERE c.speaker_id IS NOT NULL AND p.id"
+              + " IS NULL",
+          "SELECT count(*) FROM schubert.entry_audio_links c LEFT JOIN schubert.script_entries p ON"
+              + " p.id=c.entry_id AND p.game_id=c.game_id WHERE p.id IS NULL",
+          "SELECT count(*) FROM schubert.entry_audio_links c LEFT JOIN schubert.audio_files p ON"
+              + " p.id=c.audio_file_id AND p.game_id=c.game_id WHERE p.id IS NULL",
+          "SELECT count(*) FROM schubert.media_assets c LEFT JOIN schubert.media_assets p ON"
+              + " p.logical_id=c.parent_logical_id WHERE c.parent_logical_id IS NOT NULL AND"
+              + " p.logical_id IS NULL",
+          "SELECT count(*) FROM (SELECT entry_id,link_type FROM schubert.entry_audio_links GROUP BY"
+              + " entry_id,link_type HAVING count(*)>999 OR min(display_order)<1 OR"
+              + " max(display_order)>999 OR count(DISTINCT display_order)<>count(*)) violations",
+          "SELECT count(*) FROM schubert.speakers WHERE ((id BETWEEN 1 AND 999999999999) AND"
+              + " (octet_length(name) BETWEEN 1 AND 128) AND (octet_length(normalized_name) BETWEEN"
+              + " 1 AND 128)) IS FALSE",
+          "SELECT count(*) FROM schubert.script_files WHERE ((byte_size BETWEEN 0 AND 999999999999)"
+              + " AND (\n"
+              + "        chapter_title IS NULL OR octet_length(chapter_title) <= 256) AND"
+              + " (display_order BETWEEN 1 AND 999999999999) AND (octet_length(display_path)"
+              + " BETWEEN 1 AND 512) AND (octet_length(file_name) BETWEEN 1 AND 256) AND (id"
+              + " BETWEEN 1 AND 999999999999) AND (sha256 ~ '^[0-9a-f]{64}$') AND"
+              + " (octet_length(storage_relative_path) BETWEEN 1 AND 512) AND (\n"
+              + "        storage_relative_path !~ '(^/|\\\\|(^|/)\\.\\.?(/|$)|//)')) IS FALSE",
+          "SELECT count(*) FROM schubert.script_entries WHERE ((octet_length(body) BETWEEN 1 AND"
+              + " 4096) AND (display_order BETWEEN 1 AND 999999999999) AND (entry_index >= 0) AND"
+              + " (entry_type IN ('dialogue', 'narration')) AND (id BETWEEN 1 AND 999999999999) AND"
+              + " (line_number IS NULL OR line_number >= 1) AND (\n"
+              + "        (entry_type = 'dialogue' AND speaker_id IS NOT NULL)\n"
+              + "        OR (entry_type = 'narration' AND speaker_id IS NULL)) AND (\n"
+              + "        speaker_label IS NULL OR octet_length(speaker_label) <= 128)) IS FALSE",
+          "SELECT count(*) FROM schubert.audio_files WHERE ((octet_length(audio_role) BETWEEN 1 AND"
+              + " 11) AND (octet_length(basename) BETWEEN 1 AND 255) AND (byte_size BETWEEN 1 AND"
+              + " 999999999999) AND (octet_length(display_path) BETWEEN 1 AND 512) AND (duration_ms"
+              + " IS NULL OR duration_ms BETWEEN 0 AND 999999999999) AND (octet_length(file_name)"
+              + " BETWEEN 1 AND 256) AND (id BETWEEN 1 AND 999999999999) AND (sha256 ~"
+              + " '^[0-9a-f]{64}$') AND (octet_length(storage_relative_path) BETWEEN 1 AND 512) AND"
+              + " (\n"
+              + "        storage_relative_path !~ '(^/|\\\\|(^|/)\\.\\.?(/|$)|//)')) IS FALSE",
+          "SELECT count(*) FROM schubert.media_assets WHERE ((byte_size BETWEEN 1 AND 999999999999)"
+              + " AND (octet_length(category) BETWEEN 1 AND 64) AND (display_order BETWEEN 1 AND"
+              + " 9999) AND (octet_length(display_path) BETWEEN 1 AND 512) AND"
+              + " (octet_length(file_name) BETWEEN 1 AND 256) AND (id BETWEEN 1 AND 999999999999)"
+              + " AND (octet_length(logical_id) BETWEEN 1 AND 64) AND (media_type IN ('VIDEO',"
+              + " 'MUSIC')) AND (\n"
+              + "        mime_type IN ('video/mp4', 'audio/mp4', 'audio/mpeg', 'audio/ogg',"
+              + " 'audio/wav', 'audio/flac')) AND ((\n"
+              + "        (media_type = 'VIDEO' AND pair_key IS NULL AND pair_role IS NULL)\n"
+              + "        OR (media_type = 'MUSIC' AND (\n"
+              + "            (pair_role IN ('M', 'I') AND octet_length(pair_key) BETWEEN 1 AND"
+              + " 256)\n"
+              + "            OR (pair_role = 'N' AND pair_key IS NULL)))\n"
+              + "    ) IS TRUE) AND (section IS NULL OR octet_length(section) <= 128) AND (sha256 ~"
+              + " '^[0-9a-f]{64}$') AND (octet_length(storage_relative_path) BETWEEN 1 AND 512) AND"
+              + " (\n"
+              + "        storage_relative_path !~ '(^/|\\\\|(^|/)\\.\\.?(/|$)|//)') AND"
+              + " (octet_length(title) BETWEEN 1 AND 256)) IS FALSE",
+          "SELECT count(*) FROM schubert.entry_audio_links WHERE ((display_order BETWEEN 1 AND 999)"
+              + " AND (link_type IN ('voice', 'se', 'bgm', 'other'))) IS FALSE",
+          "SELECT count(*) FROM (SELECT 1 FROM schubert.speakers GROUP BY id HAVING count(*)>1 OR"
+              + " (id IS NULL) UNION ALL SELECT 1 FROM schubert.speakers WHERE game_id IS NOT NULL"
+              + " AND normalized_name IS NOT NULL GROUP BY game_id,normalized_name HAVING"
+              + " count(*)>1 UNION ALL SELECT 1 FROM schubert.speakers WHERE id IS NOT NULL AND"
+              + " game_id IS NOT NULL GROUP BY id,game_id HAVING count(*)>1) violations",
+          "SELECT count(*) FROM (SELECT 1 FROM schubert.script_files GROUP BY id HAVING count(*)>1"
+              + " OR (id IS NULL) UNION ALL SELECT 1 FROM schubert.script_files WHERE game_id IS"
+              + " NOT NULL AND display_order IS NOT NULL GROUP BY game_id,display_order HAVING"
+              + " count(*)>1 UNION ALL SELECT 1 FROM schubert.script_files WHERE game_id IS NOT"
+              + " NULL AND storage_relative_path IS NOT NULL GROUP BY game_id,storage_relative_path"
+              + " HAVING count(*)>1 UNION ALL SELECT 1 FROM schubert.script_files WHERE id IS NOT"
+              + " NULL AND game_id IS NOT NULL GROUP BY id,game_id HAVING count(*)>1) violations",
+          "SELECT count(*) FROM (SELECT 1 FROM schubert.script_entries GROUP BY id HAVING"
+              + " count(*)>1 OR (id IS NULL) UNION ALL SELECT 1 FROM schubert.script_entries WHERE"
+              + " display_order IS NOT NULL GROUP BY display_order HAVING count(*)>1 UNION ALL"
+              + " SELECT 1 FROM schubert.script_entries WHERE script_file_id IS NOT NULL AND"
+              + " entry_index IS NOT NULL GROUP BY script_file_id,entry_index HAVING count(*)>1"
+              + " UNION ALL SELECT 1 FROM schubert.script_entries WHERE id IS NOT NULL AND game_id"
+              + " IS NOT NULL GROUP BY id,game_id HAVING count(*)>1) violations",
+          "SELECT count(*) FROM (SELECT 1 FROM schubert.audio_files GROUP BY id HAVING count(*)>1"
+              + " OR (id IS NULL) UNION ALL SELECT 1 FROM schubert.audio_files WHERE game_id IS NOT"
+              + " NULL AND storage_relative_path IS NOT NULL GROUP BY game_id,storage_relative_path"
+              + " HAVING count(*)>1 UNION ALL SELECT 1 FROM schubert.audio_files WHERE id IS NOT"
+              + " NULL AND game_id IS NOT NULL GROUP BY id,game_id HAVING count(*)>1) violations",
+          "SELECT count(*) FROM (SELECT 1 FROM schubert.media_assets GROUP BY id HAVING count(*)>1"
+              + " OR (id IS NULL) UNION ALL SELECT 1 FROM schubert.media_assets WHERE logical_id IS"
+              + " NOT NULL GROUP BY logical_id HAVING count(*)>1 UNION ALL SELECT 1 FROM"
+              + " schubert.media_assets WHERE media_type IS NOT NULL AND storage_relative_path IS"
+              + " NOT NULL GROUP BY media_type,storage_relative_path HAVING count(*)>1) violations",
+          "SELECT count(*) FROM (SELECT 1 FROM schubert.entry_audio_links GROUP BY"
+              + " entry_id,audio_file_id,link_type HAVING count(*)>1 OR (entry_id IS NULL OR"
+              + " audio_file_id IS NULL OR link_type IS NULL) UNION ALL SELECT 1 FROM"
+              + " schubert.entry_audio_links WHERE entry_id IS NOT NULL AND link_type IS NOT NULL"
+              + " AND display_order IS NOT NULL GROUP BY entry_id,link_type,display_order HAVING"
+              + " count(*)>1) violations",
+          "SELECT id,game_id,name,normalized_name,is_protagonist,notes,created_at FROM"
+              + " schubert.speakers ORDER BY id",
+          "SELECT"
+              + " id,game_id,display_order,storage_relative_path,display_path,file_name,section_code,chapter_title,sha256,byte_size,created_at"
+              + " FROM schubert.script_files ORDER BY id",
+          "SELECT"
+              + " id,game_id,script_file_id,display_order,entry_index,line_number,entry_type,speaker_id,speaker_label,body,raw_block,created_at"
+              + " FROM schubert.script_entries ORDER BY id",
+          "SELECT"
+              + " id,game_id,storage_relative_path,display_path,file_name,basename,audio_role,container,duration_ms,byte_size,sha256,created_at"
+              + " FROM schubert.audio_files ORDER BY id",
+          "SELECT"
+              + " id,logical_id,media_type,title,category,section,storage_relative_path,display_path,file_name,byte_size,sha256,mime_type,parent_logical_id,pair_key,pair_role,display_order,created_at"
+              + " FROM schubert.media_assets ORDER BY id",
+          "SELECT entry_id,audio_file_id,game_id,link_type,display_order,created_at FROM"
+              + " schubert.entry_audio_links ORDER BY entry_id,audio_file_id,link_type COLLATE"
+              + " \"C\"",
+          "SELECT count(*) FROM schubert.script_entries WHERE body_search IS DISTINCT FROM"
+              + " pg_catalog.lower(body)",
           FLUSH_SQL,
           "SELECT COALESCE(MAX(id),0) FROM schubert.speakers",
           "SELECT COALESCE(MAX(id),0) FROM schubert.script_files",
           "SELECT COALESCE(MAX(id),0) FROM schubert.script_entries",
           "SELECT COALESCE(MAX(id),0) FROM schubert.audio_files",
           "SELECT COALESCE(MAX(id),0) FROM schubert.media_assets",
-          "SELECT pg_catalog.setval(pg_catalog.pg_get_serial_sequence('schubert.speakers', 'id'), ?, ?)",
-          "SELECT pg_catalog.setval(pg_catalog.pg_get_serial_sequence('schubert.script_files', 'id'), ?, ?)",
-          "SELECT pg_catalog.setval(pg_catalog.pg_get_serial_sequence('schubert.script_entries', 'id'), ?, ?)",
-          "SELECT pg_catalog.setval(pg_catalog.pg_get_serial_sequence('schubert.audio_files', 'id'), ?, ?)",
-          "SELECT pg_catalog.setval(pg_catalog.pg_get_serial_sequence('schubert.media_assets', 'id'), ?, ?)",
+          "SELECT pg_catalog.setval(pg_catalog.pg_get_serial_sequence('schubert.speakers', 'id'),"
+              + " ?, ?)",
+          "SELECT pg_catalog.setval(pg_catalog.pg_get_serial_sequence('schubert.script_files',"
+              + " 'id'), ?, ?)",
+          "SELECT pg_catalog.setval(pg_catalog.pg_get_serial_sequence('schubert.script_entries',"
+              + " 'id'), ?, ?)",
+          "SELECT pg_catalog.setval(pg_catalog.pg_get_serial_sequence('schubert.audio_files',"
+              + " 'id'), ?, ?)",
+          "SELECT pg_catalog.setval(pg_catalog.pg_get_serial_sequence('schubert.media_assets',"
+              + " 'id'), ?, ?)",
           "ANALYZE schubert.speakers",
           "ANALYZE schubert.script_files",
           "ANALYZE schubert.script_entries",
@@ -1135,7 +2006,7 @@ final class MigrationMasterTargetPublisherTest {
       case 'L' -> GET_LONG;
       case 'I' -> GET_INT;
       case 'B' -> GET_BOOLEAN;
-      case 'T' -> GET_TIMESTAMP;
+      case 'T' -> GET_OFFSET_DATE_TIME;
       default -> GET_STRING;
     };
   }
@@ -1500,12 +2371,16 @@ final class MigrationMasterTargetPublisherTest {
                   if (gamesCloseFailure != null) throw gamesCloseFailure;
                   return null;
                 }
-                if (List.of(GET_INT, GET_STRING, GET_TIMESTAMP).contains(name)) {
+                if (List.of(GET_INT, GET_STRING, GET_OFFSET_DATE_TIME).contains(name)) {
+                  if (name.equals(GET_OFFSET_DATE_TIME)) {
+                    assertEquals(2, args.length);
+                    assertSame(OffsetDateTime.class, args[1]);
+                  }
                   int field = (Integer) args[0] - 1;
                   assertEquals(
                       field == 0 || field == GAME_ORDER_FIELD
                           ? GET_INT
-                          : field == GAME_TIME_FIELD ? GET_TIMESTAMP : GET_STRING,
+                          : field == GAME_TIME_FIELD ? GET_OFFSET_DATE_TIME : GET_STRING,
                       name);
                   gamesFieldReads++;
                   boolean bad = position[0] == badGamesRow && field == badGamesField;
@@ -1523,8 +2398,7 @@ final class MigrationMasterTargetPublisherTest {
                   wasNull[0] = value == null;
                   return switch (name) {
                     case GET_INT -> value == null ? 0 : Integer.parseInt(value);
-                    case GET_TIMESTAMP ->
-                        value == null ? null : Timestamp.from(Instant.parse(value));
+                    case GET_OFFSET_DATE_TIME -> value == null ? null : OffsetDateTime.parse(value);
                     default -> value;
                   };
                 }
@@ -1611,8 +2485,12 @@ final class MigrationMasterTargetPublisherTest {
                   if (table == badContentTable && extraResult != null) throw extraResult;
                   return null;
                 }
-                if (List.of(GET_LONG, GET_INT, GET_BOOLEAN, GET_TIMESTAMP, GET_STRING)
+                if (List.of(GET_LONG, GET_INT, GET_BOOLEAN, GET_OFFSET_DATE_TIME, GET_STRING)
                     .contains(name)) {
+                  if (name.equals(GET_OFFSET_DATE_TIME)) {
+                    assertEquals(2, args.length);
+                    assertSame(OffsetDateTime.class, args[1]);
+                  }
                   int column = (Integer) args[0] - 1;
                   assertEquals(contentGetter(CONTENT_TYPES.get(table).charAt(column)), name);
                   contentFieldReads++;
@@ -1630,8 +2508,7 @@ final class MigrationMasterTargetPublisherTest {
                     case GET_LONG -> value == null ? 0L : Long.parseLong(value);
                     case GET_INT -> value == null ? 0 : Integer.parseInt(value);
                     case GET_BOOLEAN -> value != null && Boolean.parseBoolean(value);
-                    case GET_TIMESTAMP ->
-                        value == null ? null : Timestamp.from(Instant.parse(value));
+                    case GET_OFFSET_DATE_TIME -> value == null ? null : OffsetDateTime.parse(value);
                     default -> value;
                   };
                 }

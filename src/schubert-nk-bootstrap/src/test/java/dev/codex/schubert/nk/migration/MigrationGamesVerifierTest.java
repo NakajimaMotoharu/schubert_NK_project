@@ -11,8 +11,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
-import java.time.Instant;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -41,7 +40,8 @@ final class MigrationGamesVerifierTest {
   private static final String CALL_CODE = "getString:2";
   private static final String CALL_TITLE = "getString:3";
   private static final String CALL_ORDER = "getInt:4";
-  private static final String CALL_STAMP = "getTimestamp:5";
+  private static final String GET_OFFSET_DATE_TIME = "getObject";
+  private static final String CALL_STAMP = GET_OFFSET_DATE_TIME + ":5";
   private static final String CALL_NULL = "wasNull";
   private static final String CALL_RESULT_CLOSE = "result.close";
   private static final String CALL_STATEMENT_CLOSE = "statement.close";
@@ -168,7 +168,12 @@ final class MigrationGamesVerifierTest {
   }
 
   @Test
-  void games008CreatedAtIsTheExactV004Instant() {
+  void games008CreatedAtIsTheExactV004Instant() throws SQLException {
+    var equivalent = normal();
+    equivalent.data.get(0)[4] = OffsetDateTime.parse("2026-09-01T09:00:00+09:00");
+    equivalent.data.get(1)[4] = OffsetDateTime.parse("2026-08-31T17:00:00-07:00");
+    new MigrationGamesVerifier().verify(equivalent.connection());
+    assertEquals(2, equivalent.calls.stream().filter(CALL_STAMP::equals).count());
     for (String stamp :
         List.of(
             "2026-08-31T23:59:59Z",
@@ -176,7 +181,7 @@ final class MigrationGamesVerifierTest {
             "2026-09-01T00:00:00.000000001Z",
             "0001-01-01T00:00:00Z")) {
       var f = normal();
-      f.data.get(0)[4] = Timestamp.from(Instant.parse(stamp));
+      f.data.get(0)[4] = OffsetDateTime.parse(stamp);
       reject(f);
     }
   }
@@ -394,10 +399,8 @@ final class MigrationGamesVerifierTest {
 
   private static Fixture normal() {
     var f = new Fixture();
-    f.data.add(
-        new Object[] {1, "NUKITASHI1", "NUKITASHI", 1, Timestamp.from(Instant.parse(STAMP))});
-    f.data.add(
-        new Object[] {2, "NUKITASHI2", "NUKITASHI2", 2, Timestamp.from(Instant.parse(STAMP))});
+    f.data.add(new Object[] {1, "NUKITASHI1", "NUKITASHI", 1, OffsetDateTime.parse(STAMP)});
+    f.data.add(new Object[] {2, "NUKITASHI2", "NUKITASHI2", 2, OffsetDateTime.parse(STAMP)});
     return f;
   }
 
@@ -529,7 +532,11 @@ final class MigrationGamesVerifierTest {
                   call(name);
                   return lastNull;
                 }
-                if (List.of("getInt", "getString", "getTimestamp").contains(name)) {
+                if (List.of("getInt", "getString", GET_OFFSET_DATE_TIME).contains(name)) {
+                  if (name.equals(GET_OFFSET_DATE_TIME)) {
+                    assertEquals(2, args.length);
+                    assertSame(OffsetDateTime.class, args[1]);
+                  }
                   int column = (Integer) args[0];
                   call(name + ":" + column);
                   Object value = data.get(position)[column - 1];

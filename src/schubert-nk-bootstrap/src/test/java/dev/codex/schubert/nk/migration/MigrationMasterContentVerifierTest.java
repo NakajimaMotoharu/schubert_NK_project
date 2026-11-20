@@ -12,8 +12,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.time.Instant;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -41,7 +41,7 @@ final class MigrationMasterContentVerifierTest {
   private static final String GET_LONG = "getLong";
   private static final String GET_INT = "getInt";
   private static final String GET_BOOLEAN = "getBoolean";
-  private static final String GET_TIMESTAMP = "getTimestamp";
+  private static final String GET_OFFSET_DATE_TIME = "getObject";
   private static final String GET_STRING = "getString";
   private static final String CALL_AUTO = "auto";
   private static final String CALL_CREATE = "create";
@@ -62,13 +62,25 @@ final class MigrationMasterContentVerifierTest {
   private static final String TARGET_VIDEO_B = "video/b.mp4";
   private static final List<String> SQL =
       List.of(
-          "SELECT id,game_id,name,normalized_name,is_protagonist,notes,created_at FROM schubert.speakers ORDER BY id",
-          "SELECT id,game_id,display_order,storage_relative_path,display_path,file_name,section_code,chapter_title,sha256,byte_size,created_at FROM schubert.script_files ORDER BY id",
-          "SELECT id,game_id,script_file_id,display_order,entry_index,line_number,entry_type,speaker_id,speaker_label,body,raw_block,created_at FROM schubert.script_entries ORDER BY id",
-          "SELECT id,game_id,storage_relative_path,display_path,file_name,basename,audio_role,container,duration_ms,byte_size,sha256,created_at FROM schubert.audio_files ORDER BY id",
-          "SELECT id,logical_id,media_type,title,category,section,storage_relative_path,display_path,file_name,byte_size,sha256,mime_type,parent_logical_id,pair_key,pair_role,display_order,created_at FROM schubert.media_assets ORDER BY id",
-          "SELECT entry_id,audio_file_id,game_id,link_type,display_order,created_at FROM schubert.entry_audio_links ORDER BY entry_id,audio_file_id,link_type COLLATE \"C\"",
-          "SELECT count(*) FROM schubert.script_entries WHERE body_search IS DISTINCT FROM pg_catalog.lower(body)");
+          "SELECT id,game_id,name,normalized_name,is_protagonist,notes,created_at FROM"
+              + " schubert.speakers ORDER BY id",
+          "SELECT"
+              + " id,game_id,display_order,storage_relative_path,display_path,file_name,section_code,chapter_title,sha256,byte_size,created_at"
+              + " FROM schubert.script_files ORDER BY id",
+          "SELECT"
+              + " id,game_id,script_file_id,display_order,entry_index,line_number,entry_type,speaker_id,speaker_label,body,raw_block,created_at"
+              + " FROM schubert.script_entries ORDER BY id",
+          "SELECT"
+              + " id,game_id,storage_relative_path,display_path,file_name,basename,audio_role,container,duration_ms,byte_size,sha256,created_at"
+              + " FROM schubert.audio_files ORDER BY id",
+          "SELECT"
+              + " id,logical_id,media_type,title,category,section,storage_relative_path,display_path,file_name,byte_size,sha256,mime_type,parent_logical_id,pair_key,pair_role,display_order,created_at"
+              + " FROM schubert.media_assets ORDER BY id",
+          "SELECT entry_id,audio_file_id,game_id,link_type,display_order,created_at FROM"
+              + " schubert.entry_audio_links ORDER BY entry_id,audio_file_id,link_type COLLATE"
+              + " \"C\"",
+          "SELECT count(*) FROM schubert.script_entries WHERE body_search IS DISTINCT FROM"
+              + " pg_catalog.lower(body)");
   // Independent V002 getter contract, never obtained from the Production descriptor.
   private static final List<String> TYPES =
       List.of(
@@ -524,7 +536,7 @@ final class MigrationMasterContentVerifierTest {
       case 'L' -> GET_LONG;
       case 'I' -> GET_INT;
       case 'B' -> GET_BOOLEAN;
-      case 'T' -> GET_TIMESTAMP;
+      case 'T' -> GET_OFFSET_DATE_TIME;
       default -> GET_STRING;
     };
   }
@@ -911,8 +923,12 @@ final class MigrationMasterContentVerifierTest {
                   if (slot == resultFailureSlot && resultFailure != null) throw resultFailure;
                   return null;
                 }
-                if (List.of(GET_LONG, GET_INT, GET_BOOLEAN, GET_TIMESTAMP, GET_STRING)
+                if (List.of(GET_LONG, GET_INT, GET_BOOLEAN, GET_OFFSET_DATE_TIME, GET_STRING)
                     .contains(name)) {
+                  if (name.equals(GET_OFFSET_DATE_TIME)) {
+                    assertEquals(2, args.length);
+                    assertSame(OffsetDateTime.class, args[1]);
+                  }
                   int column = (Integer) args[0];
                   hit(key + ":" + name + ":" + column);
                   String value = rows.get(slot).get(position[0]).get(column - 1);
@@ -921,8 +937,7 @@ final class MigrationMasterContentVerifierTest {
                     case GET_LONG -> value == null ? 0L : Long.parseLong(value);
                     case GET_INT -> value == null ? 0 : Integer.parseInt(value);
                     case GET_BOOLEAN -> value != null && Boolean.parseBoolean(value);
-                    case GET_TIMESTAMP ->
-                        value == null ? null : Timestamp.from(Instant.parse(value));
+                    case GET_OFFSET_DATE_TIME -> value == null ? null : OffsetDateTime.parse(value);
                     default -> value;
                   };
                 }
