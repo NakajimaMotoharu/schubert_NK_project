@@ -17,18 +17,30 @@ OPS, PLAN, COMMON, PACKAGE, MODULES, UPPER = (
 TARGET = "dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.class"
 
 
-def main(final_ownership):
+def main(mode):
+    final_ownership = mode == "final-ownership"
+    terminal_success = mode == "terminal-success"
+    target_type = TARGET.replace("ExpiryAuditRepository", "CleanupTerminalRepository") if terminal_success else TARGET
     read = UPPER["read"]
     pin, sha, git, write = (COMMON[key] for key in ("pin", "sha", "git", "dump"))
-    group = read(next(PLAN.glob("1089_F02*" if final_ownership else "1065_F02*")))
+    start_doc = "1098_F02*" if terminal_success else "1089_F02*" if final_ownership else "1065_F02*"
+    group = read(next(PLAN.glob(start_doc)))
     task = group["values"]
     assert all(pin(Path(item["path"])) == item for item in task["oracleReferences"])
     previous, selected, prior, tools = (read(row["path"]) for row in task["oracleReferences"][1:])
     checkpoint = read(Path(task["oracleReferences"][0]["path"]))
-    candidate = checkpoint["candidateProductionSource"] if final_ownership else prior["candidateProductionSource"]
-    old_core = previous["productionCore"]
-    assert task["productionCoreMain"] == old_core == prior["lastQualifiedCore"]
-    selected_main = selected["candidateMain"] if final_ownership else selected["candidateSource"]
+    qualified = task["productionCoreMain"]
+    if terminal_success:
+        candidate = checkpoint["candidateProductionSource"]
+        old_core = previous["candidateProductionSource"]
+        assert old_core == selected["beforeProduct"] and qualified == previous["lastQualifiedCore"]
+        baseline_jars = previous["privateJars"]
+    else:
+        candidate = checkpoint["candidateProductionSource"] if final_ownership else prior["candidateProductionSource"]
+        old_core = previous["productionCore"]
+        assert qualified == old_core == prior["lastQualifiedCore"]
+        baseline_jars = previous["packagedBuild"]
+    selected_main = selected["candidateMain"] if final_ownership or terminal_success else selected["candidateSource"]
     changed = git("diff", "--name-only", old_core, candidate, "--", "src", "pom.xml",
                   ":(exclude)src/**/src/test/**").decode().splitlines()
     assert changed == [selected_main["path"]]
@@ -75,14 +87,14 @@ def main(final_ownership):
         if stages.get("package", {}).get("actualExit") == 0:
             private.mkdir(mode=0o700)
             for name, path in modules.items():
-                prior = previous["packagedBuild"][name]["artifact"]
+                prior = baseline_jars[name]["artifact"]
                 assert pin(Path(prior["path"])) == prior
                 with ZipFile(prior["path"]) as current:
                     before = {f: sha(current.read(f)) for f in current.namelist() if f.endswith(".class")}
                     if name == "batch":
-                        old_file = root / "before" / TARGET
+                        old_file = root / "before" / target_type
                         old_file.parent.mkdir(parents=True)
-                        old_file.write_bytes(current.read(TARGET))
+                        old_file.write_bytes(current.read(target_type))
                 target_dir = root / path / "target/classes"
                 after = PACKAGE["inventory"](target_dir)
                 assert set(before) == set(after)
@@ -92,11 +104,25 @@ def main(final_ownership):
                 jar.chmod(0o600)
                 artifacts[name] = PACKAGE["verify_jar"](jar, path.name, after, (root / path / "pom.xml").read_bytes())
             assert sum(item["classes"] for item in artifacts.values()) == 1102
-            assert {item for paths in deltas.values() for item in paths} == {TARGET}
-            new_file = root / modules["batch"] / "target/classes" / TARGET
+            changed_types = {item for paths in deltas.values() for item in paths}
+            if terminal_success:
+                assert target_type in changed_types and all(name.startswith(target_type[:-6]) for name in changed_types)
+            else:
+                assert changed_types == {target_type}
+            batch_classes = root / modules["batch"] / "target/classes"
+            new_file = batch_classes / target_type
             focused_glob = "PG40730-*/manifest.json" if final_ownership else "PG40696-*-after/manifest.json"
+            if terminal_success:
+                focused_glob = "PG40740-*-after/manifest.json"
             focused = read(next(OPS.glob(focused_glob)))
-            verify["focusedPhysicalByteEqual"] = sha(new_file.read_bytes()) == focused["physical"][TARGET]
+            verify["focusedPhysicalByteEqual"] = all(
+                sha((batch_classes/name).read_bytes()) == fingerprint for name, fingerprint in focused["physical"].items()
+            )
+            if terminal_success:
+                expiry = read(next(OPS.glob("PG40730-*/manifest.json")))["physical"]
+                verify["retainedExpiryPhysicalByteEqual"] = all(
+                    sha((batch_classes/name).read_bytes()) == fingerprint for name, fingerprint in expiry.items()
+                )
             for mode, file in (("before", old_file), ("after", new_file)):
                 stages[f"jdeps-{mode}"] = UPPER["run"](
                     out, f"jdeps-{mode}", [java.with_name("jdeps"), "-verbose:class", "-filter:none",
@@ -106,21 +132,22 @@ def main(final_ownership):
             before_edges, after_edges = (
                 PRECEDENT["G"]["dependency_rows"](stages[f"jdeps-{mode}"]) for mode in ("before", "after")
             )
-            origin = TARGET.removesuffix(".class").replace("/", ".")
+            origin = target_type.removesuffix(".class").replace("/", ".")
             assert before_edges.keys() == after_edges.keys() == {origin}
             verify["removedEdges"] = sorted(before_edges[origin] - after_edges[origin])
             verify["addedEdges"] = sorted(after_edges[origin] - before_edges[origin])
             verify["publicAbiEqual"] = (
                 stages["abi-before"]["stdout"]["sha256"] == stages["abi-after"]["stdout"]["sha256"]
             )
+    removed = [] if terminal_success else ["dev.codex.schubert.nk.storage.StorageIoException"]
     result = (
         len(stages) == 6 and all(row["actualExit"] == 0 for row in stages.values())
-        and verify.get("removedEdges") == ["dev.codex.schubert.nk.storage.StorageIoException"]
+        and verify.get("removedEdges") == removed
         and verify.get("addedEdges") == ["dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph"]
         and verify.get("publicAbiEqual") is True
     )
     receipt = dict(actualExit=0 if result else 1, gitHead=task["source"], candidateProductionSource=candidate,
-                   lastQualifiedCore=old_core, startEvent=group["eventId"], commands=stages,
+                   lastQualifiedCore=qualified, comparisonBuildCore=old_core, startEvent=group["eventId"], commands=stages,
                    privateJars=artifacts, changedPhysical=deltas, verify=verify, mavenModules=list(MODULES),
                    sources=482, physical=sum(item["classes"] for item in artifacts.values()),
                    productTestsStarted=0, apiWebMainIncluded=False, operationalActions=0,
@@ -132,5 +159,5 @@ def main(final_ownership):
 
 
 if __name__ == "__main__":
-    assert sys.argv[1:] in ([], ["final-ownership"])
-    raise SystemExit(main(bool(sys.argv[1:])))
+    assert sys.argv[1:] in ([], ["final-ownership"], ["terminal-success"])
+    raise SystemExit(main(sys.argv[1] if len(sys.argv) == 2 else "legacy-expiry"))
