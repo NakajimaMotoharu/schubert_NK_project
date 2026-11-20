@@ -29,6 +29,8 @@ class ArtifactComparatorTest {
   private static final String FIXTURE_DIFFERENCES_ARRAY = "differences";
   private static final String FIXTURE_DIFF_ALLOWLIST_PATH =
       "program/characterization/tests/resources/cases/dif-allowlist.json";
+  private static final String FIXTURE_CATALOG_PATH =
+      "program/characterization/tests/resources/cases/catalog.json";
   private static final String FIXTURE_DIF015 = "DIF-015";
   private static final String FIXTURE_MODE_FIELD = "mode";
   private static final String FIXTURE_DIFFERENCE_FIELD = "dif";
@@ -330,6 +332,48 @@ class ArtifactComparatorTest {
     assertTrue(direct.unusedDifferences().isEmpty());
     assertTrue(direct.unregisteredDifferences().isEmpty());
     assertTrue(direct.failures().isEmpty());
+  }
+
+  @Test
+  void rejectsUnrecognizedComparisonDefinitionVersions() throws Exception {
+    Fixture fixture = fixture("definition-versions");
+    mutate(fixture.project().resolve(FIXTURE_CATALOG_PATH), catalog -> catalog.put("version", 2));
+    mutate(
+        fixture.project().resolve(FIXTURE_DIFF_ALLOWLIST_PATH),
+        allowlist -> allowlist.put("version", "1"));
+
+    ArtifactComparator.ComparisonResult result =
+        ArtifactComparator.compare(
+            fixture.project(), fixture.current(), fixture.nk(), fixture.observations());
+
+    assertFalse(result.passed());
+    assertEquals(List.of("CATALOG_VERSION", "DIF_VERSION"), result.failures());
+  }
+
+  @Test
+  void rejectsNonArrayComparisonDefinitions() throws Exception {
+    Fixture fixture = fixture("definition-objects");
+    mutate(
+        fixture.project().resolve(FIXTURE_CATALOG_PATH),
+        catalog -> replaceDefinitionArrayWithObject(catalog, "cases"));
+    mutate(
+        fixture.project().resolve(FIXTURE_DIFF_ALLOWLIST_PATH),
+        allowlist -> replaceDefinitionArrayWithObject(allowlist, FIXTURE_DIFFERENCES_ARRAY));
+
+    ArtifactComparator.ComparisonResult result =
+        ArtifactComparator.compare(
+            fixture.project(), fixture.current(), fixture.nk(), fixture.observations());
+
+    assertFalse(result.passed());
+    assertEquals(List.of("CATALOG_CASES_NOT_ARRAY", "DIF_NOT_ARRAY"), result.failures());
+  }
+
+  private static void replaceDefinitionArrayWithObject(ObjectNode document, String field) {
+    JsonNode entries = document.path(field);
+    ObjectNode object = document.putObject(field);
+    for (int index = 0; index < entries.size(); index++) {
+      object.set(Integer.toString(index), entries.get(index));
+    }
   }
 
   @Test
@@ -1878,7 +1922,7 @@ class ArtifactComparatorTest {
     Path resources = project.resolve("program/characterization/tests/resources/cases");
     Files.createDirectories(resources);
     Files.copy(
-        SOURCE_ROOT.resolve("program/characterization/tests/resources/cases/catalog.json"),
+        SOURCE_ROOT.resolve(FIXTURE_CATALOG_PATH),
         resources.resolve("catalog.json"),
         StandardCopyOption.COPY_ATTRIBUTES);
     Files.copy(

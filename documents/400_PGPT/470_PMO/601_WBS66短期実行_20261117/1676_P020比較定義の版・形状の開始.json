@@ -1,0 +1,63 @@
+{
+  "eventId": "PGPT-20261008-7191",
+  "groupId": "WBS66-P020-COMPARE-DEFINITIONS",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T22:05:57+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 82,
+      "remainingPercent": 18,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66-P020-COMPARE-DEFINITIONS",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "WBS66-P020-COMPARE-DEFINITIONS",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P020-01.02"
+    ],
+    "managementWorkIds": [
+      "WBS-P020-01.02/2"
+    ],
+    "source": "56854ff871bb2099f745338b996b34c4263fb7f0",
+    "productionCoreMain": "a8913bc836f81632613b34243f84b7b15eb3e054",
+    "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "run": "PG41268-context",
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.488,
+      "high": 0.85
+    },
+    "groupCapPp": 1.0,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1675_Media現五型局所品質完了・次工程.json",
+        "sha256": "d449522d70116dcee4756af9e324f9f86f6ac1cb0db070cfc2c857e9474d60cc"
+      },
+      {
+        "path": "documents/300_SS/350_運用・品質/355_Characterization Test実行準備・PG開始gate.md",
+        "sha256": "aff2aafe8f952de073e6dd2e7f5840152539f348f9816c6fa31e84ced93bef45"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41128-p020-typed-inventory-filestore-independent-v1/manifest.json",
+        "sha256": "91c8b79ecb5ca4ff5f9d04a142df06cdf712ff8953121dfefe37c94c1c7b0268"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "SS355版固定、GateContractValidator既存診断、自己所有比較専用fixture。開始記録の管理行/2はWBS66管理IDに分離し、イベントIDは484の葉に対応。",
+    "endCondition": "固定した否定oracle二件と影響する同一comparator群。実CHR、451、元項目受入は別の終了依存。",
+    "workScope": "定義versionと配列形状の二軸。Current/実NK、外部環境、原本を操作しない。"
+  }
+}
