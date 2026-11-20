@@ -1,0 +1,218 @@
+{
+  "run": "PG40952-f02-current-characterization-package-v3",
+  "source": "4a8f9251d34f8d10a75989ec1d8f53369a94fdc9",
+  "productionCore": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+  "startEvent": "PGPT-20261008-6905",
+  "wbs": "WBS-F02-a",
+  "actualExit": 0,
+  "startedAtUTC": "2026-11-20T15:28:16.896381+00:00",
+  "terminalAtUTC": "2026-11-20T15:28:22.424750+00:00",
+  "os": "Linux",
+  "architecture": "x86_64",
+  "java": "JAVA_VERSION=\"25.0.4\"",
+  "maven": "3.9.12",
+  "command": [
+    "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+    "-B",
+    "-ntp",
+    "-o",
+    "-f",
+    "pom.xml",
+    "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+    "-pl",
+    "program/characterization",
+    "-am",
+    "-Dmaven.test.skip=true",
+    "package"
+  ],
+  "selectedMembers": [
+    "schubert-nk",
+    "schubert-characterization"
+  ],
+  "productPomMetadataOnly": [
+    "src/schubert-nk-api",
+    "src/schubert-nk-batch",
+    "src/schubert-nk-bootstrap",
+    "src/schubert-nk-protocol",
+    "src/schubert-nk-storage",
+    "src/schubert-nk-web"
+  ],
+  "sourceArchiveSha256": "c8d0e0fe6f11fc6dd4597546e918dfd3a91670b9637745ebc4fcd7cb2d3287a0",
+  "inputs": [
+    {
+      "path": "pom.xml",
+      "sha256": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38"
+    },
+    {
+      "path": "program/characterization/pom.xml",
+      "sha256": "e945f851958317aa2a80c4f1b06bcb310d789f69abd12ce38785c6bfb55d491b"
+    },
+    {
+      "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+      "sha256": "f3326006b8ab3cf83a71a24bbeb89ec4f3f96e9c407770f7c28c8bc3a462b0ed"
+    },
+    {
+      "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/CharacterizationIoScope.java",
+      "sha256": "da07865268475f3be05f53844367ebfce849a9b8ed5c01e9a6669a0ad72b80d6"
+    },
+    {
+      "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.java",
+      "sha256": "5dd057ba194844cf3b25cd23bed425690bfc6be04308a552d67aaa0710d05457"
+    },
+    {
+      "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+      "sha256": "a58a7ae66a4e2c95ff02c2b8493ca75ca091f75235e17f246865039121a7b0ba"
+    },
+    {
+      "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+      "sha256": "16e5e4abb5d2433224d3642dc18bbb5970c210a4e388a3d05a4fe0b9405d6c71"
+    },
+    {
+      "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/TargetAdapter.java",
+      "sha256": "c73d16ee3183dc7315fe8b03ea1af83a4972f1061616f218884308b4e8cc9003"
+    },
+    {
+      "path": "src/schubert-nk-api/pom.xml",
+      "sha256": "2aff7af3d90feaee1f6c09f7ad300627ed911e8372504fcfd383391429a58114"
+    },
+    {
+      "path": "src/schubert-nk-batch/pom.xml",
+      "sha256": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/pom.xml",
+      "sha256": "174e3974a5fe17a226c8c43a0cd49ae70d395cb4f236168da07cd7482a67908c"
+    },
+    {
+      "path": "src/schubert-nk-protocol/pom.xml",
+      "sha256": "f76b730fa1cb1b34a88182ca5b685ca14fb71361c037f9418f0895d2a3022d7d"
+    },
+    {
+      "path": "src/schubert-nk-storage/pom.xml",
+      "sha256": "d4ed59631b9ebf965db518fbe4b7894c2beb71ee3f7c1e9cdbf7b4241c8179c7"
+    },
+    {
+      "path": "src/schubert-nk-web/pom.xml",
+      "sha256": "9b6c47c3ab3ba0d105f41f081de10b2234af4653fdc371a8eacdf9cabb78761b"
+    }
+  ],
+  "productModulesPackagedHere": 0,
+  "packagedClassCount": 17,
+  "classes": [
+    {
+      "path": "dev/codex/schubert/characterization/ArtifactComparator$ComparisonResult.class",
+      "sha256": "5035cac34c750e71e7341c4c04f33ea3f554691f6d6a5ed62bed3bbc30822f8e",
+      "classfileMajor": 69
+    },
+    {
+      "path": "dev/codex/schubert/characterization/ArtifactComparator.class",
+      "sha256": "923cecef54d56ea46a00552762da1094e84819cf2210af915c5e6f06e8455697",
+      "classfileMajor": 69
+    },
+    {
+      "path": "dev/codex/schubert/characterization/CharacterizationIoScope$Open.class",
+      "sha256": "f2393025ee9c5ef01c62d4b231e864409394562fbd2b4202906202d49ef9e27e",
+      "classfileMajor": 69
+    },
+    {
+      "path": "dev/codex/schubert/characterization/CharacterizationIoScope$Release.class",
+      "sha256": "95ecedd79ce4de9045b81712251dfa379ee68c991e6947d70112f7a429c546cc",
+      "classfileMajor": 69
+    },
+    {
+      "path": "dev/codex/schubert/characterization/CharacterizationIoScope$Work.class",
+      "sha256": "fb34fa7cd207d0b356cf01e34ef6d886caec2cfdc062f3df6c7c720a21e3795a",
+      "classfileMajor": 69
+    },
+    {
+      "path": "dev/codex/schubert/characterization/CharacterizationIoScope.class",
+      "sha256": "f76c2ce062349d736a5ba3bbc6174e64bc413826c1d28e6ab8efc9bbfba4d3ad",
+      "classfileMajor": 69
+    },
+    {
+      "path": "dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.class",
+      "sha256": "91fbc7022ef4b213c12b7c259c1aac9013afe76da4d5026667d3fc3b44b3a6df",
+      "classfileMajor": 69
+    },
+    {
+      "path": "dev/codex/schubert/characterization/GateCli$BaselineNumbers.class",
+      "sha256": "205fe28d46ff14b80072db17ec4d628d4a89432cd4b6bfb52865a9f0edb662ce",
+      "classfileMajor": 69
+    },
+    {
+      "path": "dev/codex/schubert/characterization/GateCli$FileJsonOutput.class",
+      "sha256": "bd5fd55b643e60a7f7a999a69ad858d2fde54639b4fb3334269673795ee00827",
+      "classfileMajor": 69
+    },
+    {
+      "path": "dev/codex/schubert/characterization/GateCli$JsonOutput.class",
+      "sha256": "8d7047d7bf57b8d93b832edfdfbcaa023022e1c03b8e9221a955277c49427c1f",
+      "classfileMajor": 69
+    },
+    {
+      "path": "dev/codex/schubert/characterization/GateCli$TreeStats.class",
+      "sha256": "b07d4b91a80f06c93862e110e1552b83122f09456818d89330603113545860ec",
+      "classfileMajor": 69
+    },
+    {
+      "path": "dev/codex/schubert/characterization/GateCli$UsableSpace.class",
+      "sha256": "d5ba88d5f1f47cd3e9f233632fd1687cc7be6a64c8090a768b73741b4948a42c",
+      "classfileMajor": 69
+    },
+    {
+      "path": "dev/codex/schubert/characterization/GateCli.class",
+      "sha256": "563ddaecfe4b1d95523f5bb827f0728c2e73f978bb2cf3a4163c770dca113431",
+      "classfileMajor": 69
+    },
+    {
+      "path": "dev/codex/schubert/characterization/GateContractValidator$ValidationResult.class",
+      "sha256": "d36ef7e88596a6b3e170d3703212e817c18b9ac1171538dcf30ab8a2cea3c5cb",
+      "classfileMajor": 69
+    },
+    {
+      "path": "dev/codex/schubert/characterization/GateContractValidator.class",
+      "sha256": "f219bc72b844fc0f329969a204b1e79c58188f0d00ddc946ac751e53787780ad",
+      "classfileMajor": 69
+    },
+    {
+      "path": "dev/codex/schubert/characterization/TargetAdapter$Target.class",
+      "sha256": "bbdfbbdc098fffcb83102bef3eb8e1d84af8860217330d104cc11114fbc00c53",
+      "classfileMajor": 69
+    },
+    {
+      "path": "dev/codex/schubert/characterization/TargetAdapter.class",
+      "sha256": "a31b5fb44c9933b6660936e6cbffb59ff9b0021636b7aae42393b3c957e3852b",
+      "classfileMajor": 69
+    }
+  ],
+  "jar": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40952-f02-current-characterization-package-v3/source/program/characterization/target/schubert-characterization-0.1.0-SNAPSHOT.jar",
+    "sha256": "2abf65b4d4554eaa7198a2e47b6dac56b85fd0903c95abc53ea5846f3ce9c9fa",
+    "bytes": 74880
+  },
+  "buildLogSha256": "e540dd3426d1cf02e301de8462352ac30b709d3cf4143d86b2e261c642054abe",
+  "privateTerminalSha256": "6b4c4f037cd36bfd507726646cbb76d58665d30d867a18f86f2fef08053640ec",
+  "testsExecuted": 0,
+  "toolEntryPointsExecuted": 0,
+  "characterizationCasesExecuted": 0,
+  "baselineReadOrWrittenByBuild": false,
+  "externalOperations": 0,
+  "preparationAttempts": [
+    {
+      "version": 1,
+      "reason": "unregistered work category",
+      "mavenInvocations": 0
+    },
+    {
+      "version": 2,
+      "reason": "absent sibling module POMs",
+      "mavenInvocations": 1,
+      "actualExit": 1,
+      "terminalSha256": "b9bee7e0edd822a7279bb32b9cf2a2c6e4354eec7b747472fe5aecc6af88d283"
+    }
+  ],
+  "relatedDefect": "BUG-3429",
+  "wholeF02": false,
+  "whole451": false,
+  "formalDelta": 0
+}

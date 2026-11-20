@@ -1,0 +1,68 @@
+{
+  "eventId": "PGPT-20261008-6905",
+  "groupId": "f02-current-characterization-package",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T15:26:38.424000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 73,
+      "remainingPercent": 27,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "f02-current-characterization-package",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "f02-current-characterization-package",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a",
+      "WBS-F02/criterion/contract"
+    ],
+    "source": "4a8f9251d34f8d10a75989ec1d8f53369a94fdc9",
+    "productionCoreMain": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40952-f02-current-characterization-package-v2",
+    "estimateAtGroupStartPp": {
+      "low": 0.12,
+      "base": 0.35,
+      "high": 0.8
+    },
+    "groupCapPp": 1.1,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1388_F03API監視PMD原十一判定継続点.json",
+        "sha256": "c5c4f5aeb7ea5565d38b6e7bd62d99e88f2a21485275af7114b32faa01906684"
+      },
+      {
+        "path": "pom.xml",
+        "sha256": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38"
+      },
+      {
+        "path": "program/characterization/pom.xml",
+        "sha256": "e945f851958317aa2a80c4f1b06bcb310d789f69abd12ce38785c6bfb55d491b"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40658-p020-a02-redirect-green-v1/manifest.json",
+        "sha256": "1196c69cc6ba69fe734991fe9abd742a46a24afe2af327b245755a4780d3c64d"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "第58版の比較ツール別行。現比較Main6・POM二の固定。PG40658の通常試験を再演しない。",
+    "endCondition": "offline package真正終了、比較JARの全classとJava25、build memberの同一性、製品六からの分離を記録。",
+    "workScope": "比較ツールMainと通常Mavenのpackageのみ。製品compile、比較の実行、テスト、実CHR、Current baselineの読込変更なし。"
+  }
+}
