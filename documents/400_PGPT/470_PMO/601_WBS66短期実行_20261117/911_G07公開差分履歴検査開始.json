@@ -1,0 +1,63 @@
+{
+  "eventId": "PGPT-20261008-6431",
+  "groupId": "PGPT-WBS66-G07-PUBLIC-INCREMENT-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T01:57:06.629000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 59,
+      "remainingPercent": 41,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-G07-PUBLIC-INCREMENT-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-G07-PUBLIC-INCREMENT-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-G07"
+    ],
+    "managementWorkIds": [
+      "WBS-G07"
+    ],
+    "source": "3b7fcdb37e7ae2884fee49c8661559d9c9eee780",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40518-g07-public-history-increment-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.4,
+      "high": 0.9
+    },
+    "groupCapPp": 1.2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/910_F03元PMD残一・継続点.json",
+        "sha256": "d1964f91b6f28d9372680fab494a98b60ffd4d0db465fed4fa77fe7a4732a780"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40468-g07-public-utc42-history-verified-v1/manifest.json",
+        "sha256": "627733cc38e324f23c8976df8a2859ea74743bb7c5c760cd842ee791800247f6"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40516-f03-retained-catches-and-monitor-v1/manifest.json",
+        "sha256": "25d7451408ac49163bb5c61bdbb589fd6e93a2a7d3af4d61e310f31cb657c48c"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "最後に確認した公開commit c517c9から現HEADまでの23commit。開始依存は前cursorの独立判定と同一scanner。",
+    "endCondition": "公開textの各版および上限内の公開gzipを検査する。検出時は秘密の出力を保持せず根拠で分類し、その後にcursorを進める。",
+    "workScope": "既にcommit済みの公開差分のみ。秘密の保全物・稼働環境・未追跡内容へ触れない。"
+  }
+}
