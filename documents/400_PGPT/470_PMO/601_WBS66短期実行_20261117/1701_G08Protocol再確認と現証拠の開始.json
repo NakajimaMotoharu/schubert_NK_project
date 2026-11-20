@@ -1,0 +1,73 @@
+{
+  "eventId": "PGPT-20261008-7216",
+  "groupId": "WBS66-G08-PROTOCOL-REOPEN-RECEIPTS",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T22:56:27.550000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 84,
+      "remainingPercent": 16,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66-G08-PROTOCOL-REOPEN-RECEIPTS",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "WBS66-G08-PROTOCOL-REOPEN-RECEIPTS",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-G08"
+    ],
+    "managementWorkIds": [
+      "WBS-P002-01/2",
+      "WBS-F02-a",
+      "WBS-F03/2-2"
+    ],
+    "source": "7382ac76a812d38ec49e6e1f5c0497d6532d15ce",
+    "productionCoreMain": "62b239d4dad561da007e15a290f8a271a165dda9",
+    "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "run": "PG41308-g08-protocol-reopen-binding-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.07,
+      "base": 0.24,
+      "high": 0.5
+    },
+    "groupCapPp": 0.75,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1700_Protocol単独品質・正式再確認を継続.json",
+        "sha256": "5b6416b637020fdc0d036cde1f0b3308863ffda4bb05bc6c3bc52b5da65ceb2a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41304-protocol-numeric-physical-independent-v1/manifest.json",
+        "sha256": "77a3d80a48df4a2dab8036c5a3019a6cb58bf01f46a47731d2933b37b44dd90c"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41306-protocol-numeric-current-quality-v1/manifest.json",
+        "sha256": "3f1dc10633e045551809614f2ca60bb11d673fad05b095f1ba09c0a84909d525"
+      },
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1698_Protocol元P00201を再確認状態へ.json",
+        "sha256": "0635eedfff16984bb41df90bc73144dea3e78b2275775515d20ccbfb1290f729"
+      },
+      {
+        "path": "documents/400_PGPT/470_PMO/481_PGPT詳細WBS.json",
+        "sha256": "4227e20a23b10ab8eecd2b69550dd7f58c79bf43a2f77b4c7c98ec943e83a2d9"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "当Protocol JAR・独立生・受付RECHECK状態を早期反映。481状態と486古いsnapshotを照合し、該当一行のみ是正。",
+    "endCondition": "当source三元行・証拠hash、481/486全190行の状態一致、既認定sourceと前の条件維持。正式再受入・451は保持。",
+    "workScope": "管理証跡と静的検査のみ。過去成功試験や実環境を再試行しない。"
+  }
+}
