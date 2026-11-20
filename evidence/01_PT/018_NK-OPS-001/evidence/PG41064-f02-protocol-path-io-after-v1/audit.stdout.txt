@@ -1,0 +1,70 @@
+ARCHUNIT	1.4.2	130	130
+MODULE	api	34
+MODULE	batch	6
+MODULE	bootstrap	4
+MODULE	protocol	27
+MODULE	storage	8
+MODULE	web	51
+RULE	CONTROLLER_BOUNDARY	20
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.DriverController	org.postgresql.PGConnection
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.JmsController	org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.canary.AnnotatedEndpoint	java.nio.file.Path
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.canary.DisplayEndpoint$Dispatcher	jakarta.jms.Message
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.canary.FileChannelController	java.nio.channels.FileChannel
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.canary.JakartaController	jakarta.jms.Message
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.canary.JavaxController	javax.jms.Message
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.canary.JdbcController	java.sql.Connection
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.canary.JsonHandler$1	java.nio.file.Files
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.canary.LegacyFileController	java.io.File
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.canary.NamedHandler	javax.jms.Message
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.canary.NioFilesController	java.nio.file.Files
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.canary.ReportController$Holder$Deep	java.nio.channels.FileChannel
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.canary.ReportController$Loader	java.sql.Connection
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.canary.SpringJmsController	org.springframework.jms.core.JmsTemplate
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.canary.StorageController	dev.codex.schubert.nk.storage.KnownValue
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.ui.DirectController	dev.codex.schubert.nk.web.messaging.JmsRequestReplyClient
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.ui.FieldController	dev.codex.schubert.nk.web.messaging.JmsRequestReplyClient
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.ui.NestedController$Inner	dev.codex.schubert.nk.web.messaging.JmsRequestReplyClient$Port
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.ui.SignatureController	dev.codex.schubert.nk.web.messaging.JmsRequestReplyClient
+RULE	FRAMEWORK_FENCES	19
+FINDING	FRAMEWORK_FENCES	dev.codex.schubert.nk.protocol.DirectJms	org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory
+FINDING	FRAMEWORK_FENCES	dev.codex.schubert.nk.protocol.DriverCodec	org.postgresql.PGConnection
+FINDING	FRAMEWORK_FENCES	dev.codex.schubert.nk.protocol.FileChannelCall	java.nio.channels.FileChannel
+FINDING	FRAMEWORK_FENCES	dev.codex.schubert.nk.protocol.FileStream	java.io.FileInputStream
+FINDING	FRAMEWORK_FENCES	dev.codex.schubert.nk.protocol.FilesRead	java.nio.file.Files
+FINDING	FRAMEWORK_FENCES	dev.codex.schubert.nk.protocol.ProviderCall	java.nio.file.spi.FileSystemProvider
+FINDING	FRAMEWORK_FENCES	dev.codex.schubert.nk.protocol.RealPathRead	java.nio.file.Path
+FINDING	FRAMEWORK_FENCES	dev.codex.schubert.nk.protocol.RealPathReference	java.nio.file.Path
+FINDING	FRAMEWORK_FENCES	dev.codex.schubert.nk.protocol.SerialPort1	java.io.Serializable
+FINDING	FRAMEWORK_FENCES	dev.codex.schubert.nk.protocol.SerialPort2	java.io.Externalizable
+FINDING	FRAMEWORK_FENCES	dev.codex.schubert.nk.protocol.SerialPort3	java.io.ObjectInputStream
+FINDING	FRAMEWORK_FENCES	dev.codex.schubert.nk.protocol.SerialPort4	java.io.ObjectOutputStream
+FINDING	FRAMEWORK_FENCES	dev.codex.schubert.nk.protocol.SerialPort5	java.io.ObjectStreamClass
+FINDING	FRAMEWORK_FENCES	dev.codex.schubert.nk.protocol.SerialPort6	java.io.ObjectInputFilter
+FINDING	FRAMEWORK_FENCES	dev.codex.schubert.nk.protocol.SerialPort7	java.io.NotSerializableException
+FINDING	FRAMEWORK_FENCES	dev.codex.schubert.nk.protocol.WatchEvents	java.nio.file.Path
+FINDING	FRAMEWORK_FENCES	dev.codex.schubert.nk.protocol.WatchModifiers	java.nio.file.Path
+FINDING	FRAMEWORK_FENCES	dev.codex.schubert.nk.storage.DirectBroker	org.apache.activemq.artemis.api.core.client.ClientSession
+FINDING	FRAMEWORK_FENCES	dev.codex.schubert.nk.storage.DriverStore	org.postgresql.PGConnection
+RULE	INTERNAL_OWNER	0
+RULE	MODULE_EDGES	4
+FINDING	MODULE_EDGES	dev.codex.schubert.nk.api.application.UseCase	dev.codex.schubert.nk.storage.FileReference
+FINDING	MODULE_EDGES	dev.codex.schubert.nk.api.domain.Value	dev.codex.schubert.nk.storage.FileReference
+FINDING	MODULE_EDGES	dev.codex.schubert.nk.web.application.Facade	dev.codex.schubert.nk.storage.FileReference
+FINDING	MODULE_EDGES	dev.codex.schubert.nk.web.domain.View	dev.codex.schubert.nk.storage.FileReference
+RULE	REPOSITORY_DIRECTION	14
+FINDING	REPOSITORY_DIRECTION	dev.codex.schubert.nk.api.messaging.outbound.SendLedgerRepository	dev.codex.schubert.nk.api.application.audit.AuditService
+FINDING	REPOSITORY_DIRECTION	dev.codex.schubert.nk.api.monitoring.persistence.BuildPort	dev.codex.schubert.nk.api.application.audit.TypedService
+FINDING	REPOSITORY_DIRECTION	dev.codex.schubert.nk.api.monitoring.persistence.LiveCountPort	dev.codex.schubert.nk.api.application.audit.AuditService
+FINDING	REPOSITORY_DIRECTION	dev.codex.schubert.nk.api.persistence.FieldPort	dev.codex.schubert.nk.api.application.audit.TypedService
+FINDING	REPOSITORY_DIRECTION	dev.codex.schubert.nk.api.persistence.SqlPort	dev.codex.schubert.nk.api.application.audit.AuditService
+FINDING	REPOSITORY_DIRECTION	dev.codex.schubert.nk.api.security.LoginLedgerRepository	dev.codex.schubert.nk.api.application.audit.AuditService
+FINDING	REPOSITORY_DIRECTION	dev.codex.schubert.nk.api.support.AnnotatedListPort	dev.codex.schubert.nk.api.application.audit.AuditService
+FINDING	REPOSITORY_DIRECTION	dev.codex.schubert.nk.api.support.ArgumentRepository	dev.codex.schubert.nk.api.application.audit.TypedService
+FINDING	REPOSITORY_DIRECTION	dev.codex.schubert.nk.api.support.ArrayRepository	dev.codex.schubert.nk.api.application.audit.TypedService
+FINDING	REPOSITORY_DIRECTION	dev.codex.schubert.nk.api.support.CallRepository	dev.codex.schubert.nk.api.application.audit.TypedService
+FINDING	REPOSITORY_DIRECTION	dev.codex.schubert.nk.api.support.GenericRepository	dev.codex.schubert.nk.api.application.audit.TypedService
+FINDING	REPOSITORY_DIRECTION	dev.codex.schubert.nk.api.support.ReportRepository$Mapper	dev.codex.schubert.nk.api.application.audit.AuditService
+FINDING	REPOSITORY_DIRECTION	dev.codex.schubert.nk.api.support.ReturnRepository	dev.codex.schubert.nk.api.application.audit.TypedService
+FINDING	REPOSITORY_DIRECTION	dev.codex.schubert.nk.api.support.ThrowsRepository	dev.codex.schubert.nk.api.application.audit.TypedFailure
+INSPECTED	440	179

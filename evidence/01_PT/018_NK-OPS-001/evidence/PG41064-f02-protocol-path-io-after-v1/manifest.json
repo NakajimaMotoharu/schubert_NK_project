@@ -1,0 +1,797 @@
+{
+  "actualExit": 0,
+  "toolSource": "939a666fe7fc7aefe6440ccf1ca04ea9ee0ab8da",
+  "productionCore": "24da3b252f65f0ea56736cb791cd13165bf62c24",
+  "toolSourceSha256": "1391de4be24dfcf07a52b48f59d1addacbcca254cf85e111e013c5a8c7889568",
+  "sourceSpec": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/5571_f02_protocol_path_io.py",
+    "sha256": "7cfcbf2a2c1848bba59fb2ef9289cd5d3799d349ebc00625939f06525e84d778"
+  },
+  "priorControls": 82,
+  "priorReceipt": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40632-f02-protocol-serialization-after-v1/manifest.json",
+    "sha256": "4da779d17a29de8ca81fd7249e8e77ed8d5bb7ff4b2c4c2b0c76b8cf2b33cc79"
+  },
+  "fixtures": [
+    {
+      "testId": "PT-F02-PATH-IO-001",
+      "origin": "dev.codex.schubert.nk.protocol.RealPathRead",
+      "target": "java.nio.file.Path",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "testId": "PT-F02-PATH-IO-002",
+      "origin": "dev.codex.schubert.nk.protocol.WatchEvents",
+      "target": "java.nio.file.Path",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "testId": "PT-F02-PATH-IO-003",
+      "origin": "dev.codex.schubert.nk.protocol.WatchModifiers",
+      "target": "java.nio.file.Path",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "testId": "PT-F02-PATH-IO-004",
+      "origin": "dev.codex.schubert.nk.protocol.RealPathReference",
+      "target": "java.nio.file.Path",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "testId": "PT-F02-PATH-IO-005",
+      "origin": "dev.codex.schubert.nk.protocol.NormalizePath",
+      "target": "java.nio.file.Path",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-PATH-IO-006",
+      "origin": "dev.codex.schubert.nk.protocol.ResolvePath",
+      "target": "java.nio.file.Path",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-PATH-IO-007",
+      "origin": "dev.codex.schubert.nk.protocol.PathValue",
+      "target": "java.nio.file.Path",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-PATH-IO-008",
+      "origin": "dev.codex.schubert.nk.storage.AllowedPhysicalPath",
+      "target": "java.nio.file.Path",
+      "expected": false,
+      "observed": false
+    }
+  ],
+  "matched": 8,
+  "physical": [
+    {
+      "className": "dev.codex.schubert.nk.api.AuditMarker",
+      "sha256": "0c05131487a6cf86001d0ed69277e93ade05a287ecd74bfb8121141037b442ff"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.FileHelper",
+      "sha256": "b4539e8e27d69e4dc681ab24725033d685adc491ad6d2655229a6891f68b2f00"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.KnownValue",
+      "sha256": "3f7ea1c432596aed1b415cfc9ea19d8363986e892c93f884b92c5d1db251ea81"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.Marker",
+      "sha256": "7668cc69a88d212a0c1ce18373ba7eeb5a0cd540b9084490d6225c54f9eb41f9"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.application.Service",
+      "sha256": "35a9653cec42b5aee5d81b13b9cf824b712a3745fe537ff7b5bb047b19649d45"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.application.UseCase",
+      "sha256": "4b9e3c7a9f5c742de2fca1889e5fe867cf5e1a1f0a8deca6fc51c055725e2581"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.application.audit.AuditService",
+      "sha256": "75d6f0317637f74e3d327207cca98267e4b04c3b11ae77c29c3c20d807da33f3"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.application.audit.TypedFailure",
+      "sha256": "1240b307ef03bde65dea6709f23c3562cb2e90405aed0bba45d55436957a0d87"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.application.audit.TypedService",
+      "sha256": "9e479b6d718ce17476e5531d6bc2850a07a09d21baf8f56d2e22514d54f887f3"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.domain.AuditRow",
+      "sha256": "cb39ac3116091f9f1a29ae1e82ae4b4ee9bd975df6cc3795b9a1960f08950de5"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.domain.Value",
+      "sha256": "13b0ded115936ca8a41f26eca307a97d35e0a1da62f600c8e53003373096bd38"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.messaging.JmsAdapter",
+      "sha256": "8dd0778915680ad78d9c7595b35e927efecdda857655510d467264e75a1b47b9"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.messaging.outbound.SendLedgerRepository",
+      "sha256": "8d2ec1d42d8aed3809c818c169f4b28ce9642806111ca7b55285a05ab28b463e"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.monitoring.persistence.BuildPort",
+      "sha256": "08b048ee1f0fbeb73257766f0de0e114dcc68b6cd688abe2eede45f41d4070a1"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.monitoring.persistence.LiveCountPort",
+      "sha256": "17cc7e0db4c70371e8a122f7db214e6ce4733dc7f03442ef6efea24f1fb7deeb"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.persistence.FieldPort",
+      "sha256": "bf9db2b9be23fd87d37db40bc508506da340174c5f58574c99755d475f1e6dd8"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.persistence.SqlPort",
+      "sha256": "a97e5f6e687360e9350611bedb3b9f8f176f94ca201e18235712238b0f65ee94"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.security.LoginLedgerRepository",
+      "sha256": "d61de28d4f0fe06e61a05f87c31ce4544c6e7ed36263c1a58c50da0089d974b1"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.security.LowerRepository",
+      "sha256": "f4b55ca55edc8b51d6dcff5d0d227c1bdf7fa8f7abbae3b6c907bfbdfeeb966a"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.security.OrdinaryRoute",
+      "sha256": "e9651b15a738e06c2c09f5d07a8889793054e7c746f6b6465c75cb464c08f5d3"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.storage.Adapter",
+      "sha256": "722b777ab387165f2eae2fdf3ec810ba0bba4b1eae9749e6d5a8bd5111c50d15"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.support.AnnotatedListPort",
+      "sha256": "81e0b9bd70244632971df410e7fb015a9539aec141e1775bb0d76f56bdefa1e1"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.support.ArgumentRepository",
+      "sha256": "7466ede2bd74cfd8ef0183b49f39c600818c3ac1fa6abbb092084d82ccc31266"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.support.ArrayRepository",
+      "sha256": "c941632a1e843a83dab393226a81f434b51ecda06d214e75f3fbb974d2490b97"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.support.CallRepository",
+      "sha256": "a2e2258c5e717fd5d36057f7dcdb10f9720b396872f2a56f98d427e1142256b4"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.support.GenericRepository",
+      "sha256": "704d30e125f1d17fbd847b51914d144fb2563c965be0fbff12dfbf4b63b76347"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.support.LowerRepository",
+      "sha256": "9b910b07a4b90ef9695dd2aa196d75450e074a07b48e1f4fd3c4f58aa45124ff"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.support.NormalFlow",
+      "sha256": "03f598a7fa66b6a22153ce0f964151d8e70d9b7f1dcd11e285a7bdfa94f36da8"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.support.ReportRepository$Mapper",
+      "sha256": "198651c539c912aa0bdff83bdaffd09347226d54627f9c92d5377830b7b53029"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.support.ReportRepository",
+      "sha256": "097853bdb1a02d3a0909cc6390e3bbee5d180cff7d8f557e8d2619db041e33dc"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.support.RepositoryFactory",
+      "sha256": "8a1c3ca7a882f61e40c4a7eb256b6912b15a997f68ac0a99904e7685e0c3447d"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.support.ReturnRepository",
+      "sha256": "7e5ac010248ca6cb37b99769e1b8c561a90b74cd3fb64236f7c4ab9a2edd2c18"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.support.ThrowsRepository",
+      "sha256": "f7ef228a13e872f9e771e9cf9e8290e7aa920313c7fe7e06fa6044f14b012f40"
+    },
+    {
+      "className": "dev.codex.schubert.nk.batch.AuditMarker",
+      "sha256": "c2ad5268ba50d20bc90e4b30e38a2380502635e74a95bd954595640c96a58b69"
+    },
+    {
+      "className": "dev.codex.schubert.nk.batch.FilePort",
+      "sha256": "d5f00e50cda7e6af1e9817345c3ae8955d7e3329b0d932aa1f7500d82e0597af"
+    },
+    {
+      "className": "dev.codex.schubert.nk.batch.KnownValue",
+      "sha256": "25cf6c9506fa13f5cb8c2dfebee9fe291c5ab51b07e02950c1340c9013f46705"
+    },
+    {
+      "className": "dev.codex.schubert.nk.batch.ManagementAdapter",
+      "sha256": "9cbd18f61adff1f57925c18b1bdbbecd59318999f74282ebcd109be284ab9226"
+    },
+    {
+      "className": "dev.codex.schubert.nk.batch.Marker",
+      "sha256": "820a4940dc9ceef4d15f65eca01b4c546988dcc18b9a32e2bce268f7b2978e22"
+    },
+    {
+      "className": "dev.codex.schubert.nk.batch.file.Adapter",
+      "sha256": "56d75686b626242dbe3e767b9bd401993a0ee834ef82202420ac96dd701d6e39"
+    },
+    {
+      "className": "dev.codex.schubert.nk.bootstrap.AuditMarker",
+      "sha256": "cc33bc02c18a4d7df2a0660140c7d6c74668469953039f0d2eb8e47d1c3beb51"
+    },
+    {
+      "className": "dev.codex.schubert.nk.bootstrap.CopyAdapter",
+      "sha256": "f4d36ceb2b36fc6b34082c41af5104028a7a80087b40e24ee111948d35a6065d"
+    },
+    {
+      "className": "dev.codex.schubert.nk.bootstrap.KnownValue",
+      "sha256": "0dd4c5647fc6468eceda1f135611cb7253e7e314ee0f7990229402cfe8c7b3fd"
+    },
+    {
+      "className": "dev.codex.schubert.nk.bootstrap.Marker",
+      "sha256": "3fb6edf4ae133ef101894ff7e0e60a3ae126ab6df37dad027a83147c94a367d3"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.AuditMarker",
+      "sha256": "60f00de35b457a37312b9d71e3a1f4b6012af33decdae0931e22424a27a1ef71"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.BorrowedByteStream",
+      "sha256": "cff2cddd3c571b921db510bafe3b5291617e2694284429aeff06e0fbe3cb7b45"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.DirectJms",
+      "sha256": "b76a7cbb78627a2cef75e9f840a71f634a476c822358168455fd00087da633b2"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.DriverCodec",
+      "sha256": "f5a5595b03b6b2d170d2bcf1002e3496d8c49cd0c6e260eeffe4106b41c84896"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.FileChannelCall",
+      "sha256": "7dd1fc028c0ef025247137a6ed694f65be5b66bd246e9c2db11445180fe681c9"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.FileStream",
+      "sha256": "d33283a62caf60c60ca9dbf0848260942d6b7bef0c721b30be893c27e25d389c"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.FilesRead",
+      "sha256": "eaa9843b094947d20f1901c842466460155b8ab2a01434110118f6d111137b7c"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.KnownValue",
+      "sha256": "e899ee9215ea456bf885d74c8b8d0ef9ca6f6f2a50923dfa98cc5f46473732e0"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.Marker",
+      "sha256": "799ea69aa1f9e2bbe880d7a73b67a27a63669cc4963dddee817f5541de2ac66d"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.NormalizePath",
+      "sha256": "ef1534e433efe718f1d333970c10e78bed2ec71ac317f339f6a2e5b684fc21e2"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.PathValue",
+      "sha256": "a3be3f90de1b379a712a049f7e4e02be2699838cbe28f0697f4c04b2d785d17c"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.ProviderCall",
+      "sha256": "6f149a26d84ecce15c29d40c19dff4792048c0360811b90b002b5c99b98e5f9b"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.RealPathRead",
+      "sha256": "fcc0e3f1921ecbad49a1aa5b14c97ecc04336d0323fee19b142aa1c93ba97ea3"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.RealPathReference$Inspect",
+      "sha256": "a686390bd178dad577f24ff0cce2df4ac58c5455ad1315340d48da49189937ab"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.RealPathReference",
+      "sha256": "7d10845f45bf8efaec33750e025942d1dc2d00b14fcfa9e5d677e9028519ffc1"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.ResolvePath",
+      "sha256": "e30dc243091463b86233e8ecea8ecc7419a79f3d184d9c233aa321a046cd86be"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.SerialPort1",
+      "sha256": "c679114671139c7906baecc6255e53f976a9716f99a9c478bd9a00b079953257"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.SerialPort2",
+      "sha256": "eaf0f20f221c4ff772a3aff2415eec262790c56949cea2d3ec42ede6ef67c5b5"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.SerialPort3",
+      "sha256": "e916eb6cf7665d517b5584b4afe68b0cddcdd56ec713e0c72bcbf62d8ffa899a"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.SerialPort4",
+      "sha256": "3e0a67e415179223284be19b46bdcfd7b4cb14fc1b94dde0fabd6a917a0426f4"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.SerialPort5",
+      "sha256": "b96c348e2cb563d67c6b3ea7634d9da9ff3d24b3a72467e007b1519306519075"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.SerialPort6",
+      "sha256": "06cf7f487cb1a86d7e1925db6bc97bdc9696f2456cdfff419afaa01907bfcbe2"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.SerialPort7",
+      "sha256": "1abac621bc8b1b9f0fbb778a491dd9c55ae895820754e1e348039f0682e24846"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.SerialPort8",
+      "sha256": "4cbf7d80cd1547bd4d2684a506597cc4c6528369bf758dd1324d2756438032c1"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.SerialPort9",
+      "sha256": "67019b94fff6b16513e4c9e6ae0a09624770f905d748dee22d948e4ddb499789"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.WatchEvents",
+      "sha256": "cf23f1658d043ea27034f404382a528d04b441d77c1f4ec3daa1e9505b05b5cc"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.WatchModifiers",
+      "sha256": "97686bf8b14f5456061db46d40fc14ce89fa86a9c02d370bd54da6e69a09e36a"
+    },
+    {
+      "className": "dev.codex.schubert.nk.storage.AllowedPhysicalPath",
+      "sha256": "1fa5d39b871177f6c2512f40dae0cbfdb82acf12216417cd0a15880677b006d5"
+    },
+    {
+      "className": "dev.codex.schubert.nk.storage.AuditMarker",
+      "sha256": "f41d7fedb5dbb0b7c7a480a0d6300e332987255dbfacecec066ff36c759e09e0"
+    },
+    {
+      "className": "dev.codex.schubert.nk.storage.DirectBroker",
+      "sha256": "893b66c6d0a209effa8397b36336f6a4e2e6eac7996a38d69c823194e8a3b342"
+    },
+    {
+      "className": "dev.codex.schubert.nk.storage.DriverStore",
+      "sha256": "3724f1e29aa647cd1d6fab7c3cb90d318b4b3c1aafc8bdba70c516d1fe6662a7"
+    },
+    {
+      "className": "dev.codex.schubert.nk.storage.FileReference",
+      "sha256": "e0c58bce39d5ab1d2fea2f48b4ecb10b07ae7537d4eb3c0cb30f440ae4b05dda"
+    },
+    {
+      "className": "dev.codex.schubert.nk.storage.KnownValue",
+      "sha256": "e233934fb2a298d2ebe1a060b06ac14ff2ef742baf53901bc4aa7533ac29f149"
+    },
+    {
+      "className": "dev.codex.schubert.nk.storage.LowLevelFile",
+      "sha256": "525ca2f4513969530b41f82b71298954bfb97d03fdf708f39867649d11c2a743"
+    },
+    {
+      "className": "dev.codex.schubert.nk.storage.Marker",
+      "sha256": "2bd75c26846458273cc83ea5df9ca9de0e4d303eab5eac12ba604f16a4967c36"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.AuditMarker",
+      "sha256": "8711bac00e023aa45af51ec81a8a4ed16424e0c3c584d55416116e4fbc6f446a"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.DriverController",
+      "sha256": "725a58a6972f0146fc0b710cc9fe637536e13265cebffd63a0fe70b31207a6fd"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.JmsController",
+      "sha256": "42e6a186ec282c20caf48e3b701a2597133de0f9841cf6767cbed5e4ac2b7e72"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.KnownValue",
+      "sha256": "53b888ceb3f31e1038187e0a739d19e7712ff8cef7c5c54699fca96ab5d5cf3c"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.Marker",
+      "sha256": "bb30e9f97402afad95c1fdb4390e7b79fd6621cbb3152a463831735af20fcaa2"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.application.Facade",
+      "sha256": "83d86884c2f168f5a2dd5b1f49ebb6d770bca9bb6dd43d5cdaaa4b665c156da1"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.application.Presenter",
+      "sha256": "8bbcb08680d5db33a9252010e56f6580b24c51efea012c2bf5b31af9612b9125"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.application.ReplyFacade",
+      "sha256": "acd629ce5a21c286281e73971c040a79e69ca51b0172c4665d7bbdcd308d8254"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.canary.AnnotatedEndpoint",
+      "sha256": "2cc7868d94f731b670c7f00b7780154b7b5cedc2583e247b041cd17de75cb4a6"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.canary.AppController$Presenter",
+      "sha256": "1d1be113aef63a21e8db443d791b1c966ab92a05109d0c754d0500611a0a8d59"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.canary.AppController",
+      "sha256": "800e387729d3679e402f981f3411e112591e6fe26a2a7af435a84bed47a81e66"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.canary.BusinessFacade$Adapter",
+      "sha256": "2d65784a7d6a0569aa1e6412b8a9c139e7d7a0a33f0049ea2ecc8bca4ac63139"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.canary.BusinessFacade",
+      "sha256": "456e8ccf7fcec0e47a2242a44278d1ea22d1f63a00a2f83713005fac9dfabe17"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.canary.DisplayEndpoint$Dispatcher",
+      "sha256": "fef198514c0d3a2d21d18ddaabeb3e57d280692a1e4ae9c200e549af2418e771"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.canary.DisplayEndpoint",
+      "sha256": "8c8399e0063a2d7cd7e686200cb302099123e94a97156c7332f8b7d4946b4fc1"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.canary.FacadeController",
+      "sha256": "5a6e962f6b2d3cbc1370d1904c76b9196fc985f4cc51b8e058d80e116fb376f1"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.canary.FileChannelController",
+      "sha256": "b1028b6799ad479e4e5b19ad466fec9cdf3d1f6a33c55aabbd34d135dd16152c"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.canary.HttpController",
+      "sha256": "22547c184688c4b47b681f0d2543c76f47fcc29eb6bb49eedc6a67ef99b6348c"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.canary.JakartaController",
+      "sha256": "6eb92bb363e7d57cf3633388764a30d7863659fb8888887305dd7a5fbd26edc6"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.canary.JavaxController",
+      "sha256": "181d66af95c685d1b599eb89565fb6723351e46cdbe17d3fb0b0f0bfbd88beda"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.canary.JdbcController",
+      "sha256": "0c0d3a887d7d00455e87c099882757f8d49df87879eb55b50840745377fbac27"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.canary.JsonHandler$1",
+      "sha256": "eb53afcbfefd0763e262c805b03ff5154c97e0b1f5e5dbc13bb80770e7531f4d"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.canary.JsonHandler",
+      "sha256": "a8a890469855c2f377ee529ec65eba17652791bed46568f2f0a2de7ea6cae344"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.canary.LegacyFileController",
+      "sha256": "7419a4bbc97f30ba7467957589651f393729f99f548ce5bedc4415337227140f"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.canary.NamedHandler",
+      "sha256": "41c131e9e141f4e71c48facc4c55534e73c4b7103e25ab63a8aba3c00cfa18a3"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.canary.NioFilesController",
+      "sha256": "c0210ae778ef8b38f8f8651a62a6ce098372e9818a0bee9932b636d8b9cc62e1"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.canary.ReportController$Holder$Deep",
+      "sha256": "1d6818c23a20b392fecb0ed25a151f22036b7849a222d187533fdbfe7e714a5d"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.canary.ReportController$Holder",
+      "sha256": "31259ba5c0865bced2c721a576fa26510e400f6bba8d2fc9334bccfd6c66b733"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.canary.ReportController$Loader",
+      "sha256": "fddce29c14ee633d73af3aa96859c217006d8c0b8c884dbec75364d1fe1d66fb"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.canary.ReportController",
+      "sha256": "f7eafea880f799ba00c4e16560bdee457e525120e641a0385d67dc3a41c9c3f0"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.canary.SafeFacade",
+      "sha256": "394079a213bbb9c2571541a91288d30da066a9e60649177dc83f67b452a46cc0"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.canary.SpringJmsController",
+      "sha256": "1d278d62f7123465c1f64e75ffd4fa69406eb57217eded7a2290fd5b002b9b2d"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.canary.StorageController",
+      "sha256": "a9757f3909cdd81abdda6f4675b4723ad661d4cd8da46fb6f3c3e189fd946f9f"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.domain.View",
+      "sha256": "1058cba391379b88cb9739b0504240dc64a510f5012d71e15bfdcab742ba4bed"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClient$Port",
+      "sha256": "70f310252ff6185a5fadc771c492cea95c9a5658cf50b6fea5fbec3dd45b8d89"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClient",
+      "sha256": "c6561d010dede55c80ad912af3d6882f7c99207ade24ab2b0b365f9c9a724fcd"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientSupport",
+      "sha256": "544b38aaf78c4eb3f269443f3cfbc8557d50f6197800e9e978ef3b4f9cddcf08"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.session.SessionDriver",
+      "sha256": "b60ca23d95890f413ed07e703f01479df9c2bdd3c43feddcb1f2c16e3afa272a"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.storage.Adapter",
+      "sha256": "1d5fa8988ae8d653457bad60a83617602f794ca2dc022c070ea8070085d2380a"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.ui.DirectController",
+      "sha256": "7ac1bff7ce33e5d8cb02ceec0288cbc9ad16f3a9f5f3984d2f04932ea5b49bf9"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.ui.FieldController",
+      "sha256": "f0550c0bb395bc1900b1242bb8a5582725113e1d05007e90da3794325429e953"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.ui.IndependentController",
+      "sha256": "6210a322c004bde8d4cbb27efa1e8909a7b3e1d8905c919a5415010be22d5000"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.ui.NestedController$Inner",
+      "sha256": "07ed0749af49ef0c1dde8d6097534eeac884ed4c9ab4ad211a2d3ccdf8afc731"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.ui.NestedController",
+      "sha256": "a920882cf4161d7894af8118ecc81fe9bbfa38294370a4dfd17a7f4a2f8cdbd9"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.ui.OrderController",
+      "sha256": "4f3e96c97f74e8db826667f0761b228bad7cb6487a4025e09e90ca79e4f71aa9"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.ui.SignatureController",
+      "sha256": "1c7b9129ade91e093d8c528c725898d5236f8fbd05686c9538a76ff93a1134ac"
+    },
+    {
+      "className": "jakarta.jms.Message",
+      "sha256": "e97558907fe03004c9134e018f2e3bca6846b2d53779d14d4b6c1eb3cb609220"
+    },
+    {
+      "className": "javax.jms.Message",
+      "sha256": "9cd9c8960352ca6a759638dc2b2125d293b90cf3196d953ff1d9691fa963396f"
+    },
+    {
+      "className": "org.springframework.jms.core.JmsTemplate",
+      "sha256": "758628cccdc03eb50a51d08f1ff2bd82dfb9a65dd260fbe562cfa108c01ac34c"
+    },
+    {
+      "className": "org.springframework.stereotype.Controller",
+      "sha256": "55f954c50acd3b0bab7c4fea95cb857c72c3a3593b167eea6412902e9910bbec"
+    },
+    {
+      "className": "org.springframework.stereotype.Repository",
+      "sha256": "0dc6f1b24b9af6ce8098156d909ed53ee9989dad24440a787d25d9595041e5dc"
+    },
+    {
+      "className": "org.springframework.web.bind.annotation.RestController",
+      "sha256": "945ca2c7a076ad2b0280ed7364ebadddb4adc55537861f6b73efaad95256efce"
+    }
+  ],
+  "findings": 57,
+  "steps": {
+    "compile-tool": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41064-f02-protocol-path-io-after-v1/compile-tool.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41064-f02-protocol-path-io-after-v1/compile-tool.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "-d",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/tool",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/ModuleDependencyAudit.java"
+      ]
+    },
+    "compile-fixture": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41064-f02-protocol-path-io-after-v1/compile-fixture.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41064-f02-protocol-path-io-after-v1/compile-fixture.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-d",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/binary",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/protocol/RealPathRead.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/protocol/WatchEvents.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/protocol/WatchModifiers.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/protocol/RealPathReference.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/protocol/NormalizePath.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/protocol/ResolvePath.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/protocol/PathValue.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/storage/AllowedPhysicalPath.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/protocol/SerialPort1.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/protocol/SerialPort2.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/protocol/SerialPort3.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/protocol/SerialPort4.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/protocol/SerialPort5.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/protocol/SerialPort6.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/protocol/SerialPort7.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/protocol/SerialPort8.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/protocol/SerialPort9.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/api/FileHelper.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/api/AuditMarker.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/api/KnownValue.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/api/Marker.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/api/application/Service.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/api/application/UseCase.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/api/domain/Value.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/api/storage/Adapter.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/batch/AuditMarker.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/batch/FilePort.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/batch/KnownValue.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/batch/Marker.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/batch/file/Adapter.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/bootstrap/AuditMarker.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/bootstrap/KnownValue.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/bootstrap/Marker.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/protocol/AuditMarker.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/protocol/BorrowedByteStream.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/protocol/FileChannelCall.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/protocol/FileStream.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/protocol/FilesRead.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/protocol/KnownValue.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/protocol/Marker.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/protocol/PathValue.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/protocol/ProviderCall.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/storage/AuditMarker.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/storage/FileReference.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/storage/KnownValue.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/storage/LowLevelFile.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/storage/Marker.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/web/AuditMarker.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/web/KnownValue.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/web/Marker.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/web/application/Facade.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/web/application/Presenter.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/web/canary/AnnotatedEndpoint.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/web/canary/AppController.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/web/canary/BusinessFacade.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/web/canary/DisplayEndpoint.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/web/canary/FacadeController.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/web/canary/FileChannelController.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/web/canary/HttpController.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/web/canary/JakartaController.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/web/canary/JavaxController.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/web/canary/JdbcController.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/web/canary/JsonHandler.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/web/canary/LegacyFileController.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/web/canary/NamedHandler.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/web/canary/NioFilesController.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/web/canary/ReportController.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/web/canary/SafeFacade.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/web/canary/SpringJmsController.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/web/canary/StorageController.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/web/domain/View.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/web/storage/Adapter.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/jakarta/jms/Message.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/javax/jms/Message.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/org/springframework/jms/core/JmsTemplate.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/org/springframework/stereotype/Controller.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/org/springframework/web/bind/annotation/RestController.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/api/persistence/SqlPort.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/api/monitoring/persistence/LiveCountPort.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/api/security/LoginLedgerRepository.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/api/messaging/outbound/SendLedgerRepository.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/api/support/ReportRepository.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/api/application/audit/AuditService.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/api/support/RepositoryFactory.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/api/security/OrdinaryRoute.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/api/security/LowerRepository.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/org/springframework/stereotype/Repository.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/api/support/AnnotatedListPort.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/org/apache/activemq/artemis/api/core/client/ClientSession.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/org/postgresql/PGConnection.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/org/apache/activemq/artemis/jms/client/ActiveMQConnectionFactory.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/storage/DriverStore.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/protocol/DriverCodec.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/storage/DirectBroker.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/protocol/DirectJms.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/web/DriverController.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/web/JmsController.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/bootstrap/CopyAdapter.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/batch/ManagementAdapter.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/api/messaging/JmsAdapter.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/web/session/SessionDriver.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/api/application/audit/TypedService.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/api/domain/AuditRow.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/api/persistence/FieldPort.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/api/support/ReturnRepository.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/api/support/ArgumentRepository.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/api/support/GenericRepository.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/api/support/ArrayRepository.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/api/support/ThrowsRepository.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/api/monitoring/persistence/BuildPort.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/api/support/CallRepository.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/api/support/NormalFlow.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/api/support/LowerRepository.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/api/application/audit/TypedFailure.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClient.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClientSupport.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/web/ui/DirectController.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/web/ui/FieldController.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/web/ui/NestedController.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/web/ui/SignatureController.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/web/ui/OrderController.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/web/application/ReplyFacade.java",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/fixtures/dev/codex/schubert/nk/web/ui/IndependentController.java"
+      ]
+    },
+    "audit": {
+      "actualExit": 1,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41064-f02-protocol-path-io-after-v1/audit.stdout.txt",
+        "sha256": "018a7ad373e150dde07adacb584d73cd9ba93f877f3399625df2d605ba9049c6"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41064-f02-protocol-path-io-after-v1/audit.stderr.txt",
+        "sha256": "2c58b87a0350a39bb1c3b5f4891defeeb9a785e84aa11a466dc9ddb21253bf58"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/dev/shm/pgpt-protocol-path-io-n7ul9pt9/tool:/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "ModuleDependencyAudit",
+        "api=/dev/shm/pgpt-protocol-path-io-n7ul9pt9/api.jar",
+        "batch=/dev/shm/pgpt-protocol-path-io-n7ul9pt9/batch.jar",
+        "bootstrap=/dev/shm/pgpt-protocol-path-io-n7ul9pt9/bootstrap.jar",
+        "protocol=/dev/shm/pgpt-protocol-path-io-n7ul9pt9/protocol.jar",
+        "storage=/dev/shm/pgpt-protocol-path-io-n7ul9pt9/storage.jar",
+        "web=/dev/shm/pgpt-protocol-path-io-n7ul9pt9/web.jar"
+      ]
+    }
+  },
+  "productTests": 0,
+  "productJars": 0,
+  "fixtureMethodsInvoked": 0,
+  "filesystemOperationsInvoked": 0,
+  "wholeF02Accepted": false,
+  "whole451Accepted": false,
+  "terminalAtUTC": "2026-11-20T18:00:34.078180+00:00"
+}
