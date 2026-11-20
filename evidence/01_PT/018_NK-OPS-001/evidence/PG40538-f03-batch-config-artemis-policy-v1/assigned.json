@@ -1,0 +1,418 @@
+[
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.java",
+    "line": 101,
+    "column": 14,
+    "rule": "AvoidCatchingGenericException",
+    "method": "encodeOperation",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 133,
+    "sourceSha256": "80b2d90728c7eaaf6b4ba4502a70147b7b1dbcce1e5eed03f9465cd1d72c92e0",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40362-f03-current-six-artemis-typed-independent-v1/manifest.json",
+      "sha256": "8a33dcc036e3fb45c260c4d4977505698f50dd8e9d819ceafd2d4908f6964da8"
+    },
+    "decision": "NOT_APPLICABLE_APPROVED_PROVIDER_INTERRUPT_AND_OWNERSHIP_CONTRACT",
+    "reason": "Explicit same-instance unchecked rethrow precedes conversion of checked provider errors."
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.java",
+    "line": 101,
+    "column": 33,
+    "rule": "AvoidCatchingGenericException",
+    "method": "encodeOperation",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 134,
+    "sourceSha256": "80b2d90728c7eaaf6b4ba4502a70147b7b1dbcce1e5eed03f9465cd1d72c92e0",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40362-f03-current-six-artemis-typed-independent-v1/manifest.json",
+      "sha256": "8a33dcc036e3fb45c260c4d4977505698f50dd8e9d819ceafd2d4908f6964da8"
+    },
+    "decision": "NOT_APPLICABLE_APPROVED_PROVIDER_INTERRUPT_AND_OWNERSHIP_CONTRACT",
+    "reason": "Explicit same-instance unchecked rethrow precedes conversion of checked provider errors."
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.java",
+    "line": 103,
+    "column": 14,
+    "rule": "AvoidCatchingGenericException",
+    "method": "encodeOperation",
+    "message": "Avoid catching Exception in try-catch block",
+    "occurrence": 135,
+    "sourceSha256": "80b2d90728c7eaaf6b4ba4502a70147b7b1dbcce1e5eed03f9465cd1d72c92e0",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40362-f03-current-six-artemis-typed-independent-v1/manifest.json",
+      "sha256": "8a33dcc036e3fb45c260c4d4977505698f50dd8e9d819ceafd2d4908f6964da8"
+    },
+    "decision": "NOT_APPLICABLE_APPROVED_PROVIDER_INTERRUPT_AND_OWNERSHIP_CONTRACT",
+    "reason": "The generic operation encoder or ClientRequestor declares a checked Exception. Fixed diagnostic translation preserves fatal/interrupted categories after the prior unchecked rethrow."
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.java",
+    "line": 109,
+    "column": 50,
+    "rule": "DoNotUseThreads",
+    "method": "managementFailure",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 136,
+    "sourceSha256": "80b2d90728c7eaaf6b4ba4502a70147b7b1dbcce1e5eed03f9465cd1d72c92e0",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40362-f03-current-six-artemis-typed-independent-v1/manifest.json",
+      "sha256": "8a33dcc036e3fb45c260c4d4977505698f50dd8e9d819ceafd2d4908f6964da8"
+    },
+    "decision": "NOT_APPLICABLE_APPROVED_PROVIDER_INTERRUPT_AND_OWNERSHIP_CONTRACT",
+    "reason": "Restores the interrupt flag of the existing caller in the failed provider operation. No thread is created."
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.java",
+    "line": 288,
+    "column": 7,
+    "rule": "DoNotUseThreads",
+    "method": "read",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 137,
+    "sourceSha256": "80b2d90728c7eaaf6b4ba4502a70147b7b1dbcce1e5eed03f9465cd1d72c92e0",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40362-f03-current-six-artemis-typed-independent-v1/manifest.json",
+      "sha256": "8a33dcc036e3fb45c260c4d4977505698f50dd8e9d819ceafd2d4908f6964da8"
+    },
+    "decision": "NOT_APPLICABLE_APPROVED_PROVIDER_INTERRUPT_AND_OWNERSHIP_CONTRACT",
+    "reason": "Restores the interrupt flag of the existing caller in the failed provider operation. No thread is created."
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.java",
+    "line": 321,
+    "column": 14,
+    "rule": "AvoidCatchingGenericException",
+    "method": "query",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 138,
+    "sourceSha256": "80b2d90728c7eaaf6b4ba4502a70147b7b1dbcce1e5eed03f9465cd1d72c92e0",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40362-f03-current-six-artemis-typed-independent-v1/manifest.json",
+      "sha256": "8a33dcc036e3fb45c260c4d4977505698f50dd8e9d819ceafd2d4908f6964da8"
+    },
+    "decision": "NOT_APPLICABLE_APPROVED_PROVIDER_INTERRUPT_AND_OWNERSHIP_CONTRACT",
+    "reason": "Explicit same-instance unchecked rethrow precedes conversion of checked provider errors."
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.java",
+    "line": 321,
+    "column": 33,
+    "rule": "AvoidCatchingGenericException",
+    "method": "query",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 139,
+    "sourceSha256": "80b2d90728c7eaaf6b4ba4502a70147b7b1dbcce1e5eed03f9465cd1d72c92e0",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40362-f03-current-six-artemis-typed-independent-v1/manifest.json",
+      "sha256": "8a33dcc036e3fb45c260c4d4977505698f50dd8e9d819ceafd2d4908f6964da8"
+    },
+    "decision": "NOT_APPLICABLE_APPROVED_PROVIDER_INTERRUPT_AND_OWNERSHIP_CONTRACT",
+    "reason": "Explicit same-instance unchecked rethrow precedes conversion of checked provider errors."
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.java",
+    "line": 323,
+    "column": 14,
+    "rule": "AvoidCatchingGenericException",
+    "method": "query",
+    "message": "Avoid catching Exception in try-catch block",
+    "occurrence": 140,
+    "sourceSha256": "80b2d90728c7eaaf6b4ba4502a70147b7b1dbcce1e5eed03f9465cd1d72c92e0",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40362-f03-current-six-artemis-typed-independent-v1/manifest.json",
+      "sha256": "8a33dcc036e3fb45c260c4d4977505698f50dd8e9d819ceafd2d4908f6964da8"
+    },
+    "decision": "NOT_APPLICABLE_APPROVED_PROVIDER_INTERRUPT_AND_OWNERSHIP_CONTRACT",
+    "reason": "The generic operation encoder or ClientRequestor declares a checked Exception. Fixed diagnostic translation preserves fatal/interrupted categories after the prior unchecked rethrow."
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+    "line": 46,
+    "column": 14,
+    "rule": "DoNotUseThreads",
+    "method": "resolve",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 172,
+    "sourceSha256": "ae4997ec9035af4261fb6229567841644385135752488f982a43824f7aaab62b",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40312-f02-ssc461-group-lookup-independent-v1/manifest.json",
+      "sha256": "096ce9ea58761ff61c7ee061cdde03bc8043daeedb27f4c23acbe02cba3772f5"
+    },
+    "decision": "NOT_APPLICABLE_APPROVED_PROVIDER_INTERRUPT_AND_OWNERSHIP_CONTRACT",
+    "reason": "The standalone owner uses an explicit output reader and restores or observes the caller interrupt status. The J2EE rule does not apply. The actual NSS-owned process outcome is a separate condition."
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+    "line": 71,
+    "column": 45,
+    "rule": "DoNotUseThreads",
+    "method": "resolve",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 173,
+    "sourceSha256": "ae4997ec9035af4261fb6229567841644385135752488f982a43824f7aaab62b",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40312-f02-ssc461-group-lookup-independent-v1/manifest.json",
+      "sha256": "096ce9ea58761ff61c7ee061cdde03bc8043daeedb27f4c23acbe02cba3772f5"
+    },
+    "decision": "NOT_APPLICABLE_APPROVED_PROVIDER_INTERRUPT_AND_OWNERSHIP_CONTRACT",
+    "reason": "The standalone owner uses an explicit output reader and restores or observes the caller interrupt status. The J2EE rule does not apply. The actual NSS-owned process outcome is a separate condition."
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+    "line": 75,
+    "column": 51,
+    "rule": "DoNotUseThreads",
+    "method": "resolve",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 174,
+    "sourceSha256": "ae4997ec9035af4261fb6229567841644385135752488f982a43824f7aaab62b",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40312-f02-ssc461-group-lookup-independent-v1/manifest.json",
+      "sha256": "096ce9ea58761ff61c7ee061cdde03bc8043daeedb27f4c23acbe02cba3772f5"
+    },
+    "decision": "NOT_APPLICABLE_APPROVED_PROVIDER_INTERRUPT_AND_OWNERSHIP_CONTRACT",
+    "reason": "The standalone owner uses an explicit output reader and restores or observes the caller interrupt status. The J2EE rule does not apply. The actual NSS-owned process outcome is a separate condition."
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+    "line": 90,
+    "column": 16,
+    "rule": "DoNotUseThreads",
+    "method": "resolve",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 175,
+    "sourceSha256": "ae4997ec9035af4261fb6229567841644385135752488f982a43824f7aaab62b",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40312-f02-ssc461-group-lookup-independent-v1/manifest.json",
+      "sha256": "096ce9ea58761ff61c7ee061cdde03bc8043daeedb27f4c23acbe02cba3772f5"
+    },
+    "decision": "NOT_APPLICABLE_APPROVED_PROVIDER_INTERRUPT_AND_OWNERSHIP_CONTRACT",
+    "reason": "The standalone owner uses an explicit output reader and restores or observes the caller interrupt status. The J2EE rule does not apply. The actual NSS-owned process outcome is a separate condition."
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+    "line": 93,
+    "column": 7,
+    "rule": "DoNotUseThreads",
+    "method": "resolve",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 176,
+    "sourceSha256": "ae4997ec9035af4261fb6229567841644385135752488f982a43824f7aaab62b",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40312-f02-ssc461-group-lookup-independent-v1/manifest.json",
+      "sha256": "096ce9ea58761ff61c7ee061cdde03bc8043daeedb27f4c23acbe02cba3772f5"
+    },
+    "decision": "NOT_APPLICABLE_APPROVED_PROVIDER_INTERRUPT_AND_OWNERSHIP_CONTRACT",
+    "reason": "The standalone owner uses an explicit output reader and restores or observes the caller interrupt status. The J2EE rule does not apply. The actual NSS-owned process outcome is a separate condition."
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+    "line": 109,
+    "column": 51,
+    "rule": "AvoidCatchingGenericException",
+    "method": "scope",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 177,
+    "sourceSha256": "ae4997ec9035af4261fb6229567841644385135752488f982a43824f7aaab62b",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40312-f02-ssc461-group-lookup-independent-v1/manifest.json",
+      "sha256": "096ce9ea58761ff61c7ee061cdde03bc8043daeedb27f4c23acbe02cba3772f5"
+    },
+    "decision": "NOT_APPLICABLE_APPROVED_PROVIDER_INTERRUPT_AND_OWNERSHIP_CONTRACT",
+    "reason": "Owned close must run even for unchecked failures. The two failure categories stay available for the fixed priority policy and normal return is not possible here."
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+    "line": 109,
+    "column": 70,
+    "rule": "AvoidCatchingGenericException",
+    "method": "scope",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 178,
+    "sourceSha256": "ae4997ec9035af4261fb6229567841644385135752488f982a43824f7aaab62b",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40312-f02-ssc461-group-lookup-independent-v1/manifest.json",
+      "sha256": "096ce9ea58761ff61c7ee061cdde03bc8043daeedb27f4c23acbe02cba3772f5"
+    },
+    "decision": "NOT_APPLICABLE_APPROVED_PROVIDER_INTERRUPT_AND_OWNERSHIP_CONTRACT",
+    "reason": "Owned close must run even for unchecked failures. The two failure categories stay available for the fixed priority policy and normal return is not possible here."
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+    "line": 112,
+    "column": 30,
+    "rule": "AvoidCatchingGenericException",
+    "method": "scope",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 179,
+    "sourceSha256": "ae4997ec9035af4261fb6229567841644385135752488f982a43824f7aaab62b",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40312-f02-ssc461-group-lookup-independent-v1/manifest.json",
+      "sha256": "096ce9ea58761ff61c7ee061cdde03bc8043daeedb27f4c23acbe02cba3772f5"
+    },
+    "decision": "NOT_APPLICABLE_APPROVED_PROVIDER_INTERRUPT_AND_OWNERSHIP_CONTRACT",
+    "reason": "Owned close must run even for unchecked failures. The two failure categories stay available for the fixed priority policy and normal return is not possible here."
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+    "line": 112,
+    "column": 49,
+    "rule": "AvoidCatchingGenericException",
+    "method": "scope",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 180,
+    "sourceSha256": "ae4997ec9035af4261fb6229567841644385135752488f982a43824f7aaab62b",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40312-f02-ssc461-group-lookup-independent-v1/manifest.json",
+      "sha256": "096ce9ea58761ff61c7ee061cdde03bc8043daeedb27f4c23acbe02cba3772f5"
+    },
+    "decision": "NOT_APPLICABLE_APPROVED_PROVIDER_INTERRUPT_AND_OWNERSHIP_CONTRACT",
+    "reason": "Owned close must run even for unchecked failures. The two failure categories stay available for the fixed priority policy and normal return is not possible here."
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+    "line": 113,
+    "column": 33,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "scope",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for IOException.",
+    "occurrence": 181,
+    "sourceSha256": "ae4997ec9035af4261fb6229567841644385135752488f982a43824f7aaab62b",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40312-f02-ssc461-group-lookup-independent-v1/manifest.json",
+      "sha256": "096ce9ea58761ff61c7ee061cdde03bc8043daeedb27f4c23acbe02cba3772f5"
+    },
+    "decision": "NOT_APPLICABLE_APPROVED_PROVIDER_INTERRUPT_AND_OWNERSHIP_CONTRACT",
+    "reason": "Owned close assigns priority based on both primary and cleanup throwable kinds, while restoring cancellation when cleanup wins."
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+    "line": 113,
+    "column": 33,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "scope",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for IOException.",
+    "occurrence": 182,
+    "sourceSha256": "ae4997ec9035af4261fb6229567841644385135752488f982a43824f7aaab62b",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40312-f02-ssc461-group-lookup-independent-v1/manifest.json",
+      "sha256": "096ce9ea58761ff61c7ee061cdde03bc8043daeedb27f4c23acbe02cba3772f5"
+    },
+    "decision": "NOT_APPLICABLE_APPROVED_PROVIDER_INTERRUPT_AND_OWNERSHIP_CONTRACT",
+    "reason": "Owned close assigns priority based on both primary and cleanup throwable kinds, while restoring cancellation when cleanup wins."
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+    "line": 113,
+    "column": 67,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "scope",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for InterruptedException.",
+    "occurrence": 183,
+    "sourceSha256": "ae4997ec9035af4261fb6229567841644385135752488f982a43824f7aaab62b",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40312-f02-ssc461-group-lookup-independent-v1/manifest.json",
+      "sha256": "096ce9ea58761ff61c7ee061cdde03bc8043daeedb27f4c23acbe02cba3772f5"
+    },
+    "decision": "NOT_APPLICABLE_APPROVED_PROVIDER_INTERRUPT_AND_OWNERSHIP_CONTRACT",
+    "reason": "Owned close assigns priority based on both primary and cleanup throwable kinds, while restoring cancellation when cleanup wins."
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+    "line": 113,
+    "column": 67,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "scope",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for InterruptedException.",
+    "occurrence": 184,
+    "sourceSha256": "ae4997ec9035af4261fb6229567841644385135752488f982a43824f7aaab62b",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40312-f02-ssc461-group-lookup-independent-v1/manifest.json",
+      "sha256": "096ce9ea58761ff61c7ee061cdde03bc8043daeedb27f4c23acbe02cba3772f5"
+    },
+    "decision": "NOT_APPLICABLE_APPROVED_PROVIDER_INTERRUPT_AND_OWNERSHIP_CONTRACT",
+    "reason": "Owned close assigns priority based on both primary and cleanup throwable kinds, while restoring cancellation when cleanup wins."
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+    "line": 114,
+    "column": 37,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "scope",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for IOException.",
+    "occurrence": 185,
+    "sourceSha256": "ae4997ec9035af4261fb6229567841644385135752488f982a43824f7aaab62b",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40312-f02-ssc461-group-lookup-independent-v1/manifest.json",
+      "sha256": "096ce9ea58761ff61c7ee061cdde03bc8043daeedb27f4c23acbe02cba3772f5"
+    },
+    "decision": "NOT_APPLICABLE_APPROVED_PROVIDER_INTERRUPT_AND_OWNERSHIP_CONTRACT",
+    "reason": "Owned close assigns priority based on both primary and cleanup throwable kinds, while restoring cancellation when cleanup wins."
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+    "line": 114,
+    "column": 37,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "scope",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for IOException.",
+    "occurrence": 186,
+    "sourceSha256": "ae4997ec9035af4261fb6229567841644385135752488f982a43824f7aaab62b",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40312-f02-ssc461-group-lookup-independent-v1/manifest.json",
+      "sha256": "096ce9ea58761ff61c7ee061cdde03bc8043daeedb27f4c23acbe02cba3772f5"
+    },
+    "decision": "NOT_APPLICABLE_APPROVED_PROVIDER_INTERRUPT_AND_OWNERSHIP_CONTRACT",
+    "reason": "Owned close assigns priority based on both primary and cleanup throwable kinds, while restoring cancellation when cleanup wins."
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+    "line": 115,
+    "column": 34,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "scope",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for InterruptedException.",
+    "occurrence": 187,
+    "sourceSha256": "ae4997ec9035af4261fb6229567841644385135752488f982a43824f7aaab62b",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40312-f02-ssc461-group-lookup-independent-v1/manifest.json",
+      "sha256": "096ce9ea58761ff61c7ee061cdde03bc8043daeedb27f4c23acbe02cba3772f5"
+    },
+    "decision": "NOT_APPLICABLE_APPROVED_PROVIDER_INTERRUPT_AND_OWNERSHIP_CONTRACT",
+    "reason": "Owned close assigns priority based on both primary and cleanup throwable kinds, while restoring cancellation when cleanup wins."
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+    "line": 115,
+    "column": 34,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "scope",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for InterruptedException.",
+    "occurrence": 188,
+    "sourceSha256": "ae4997ec9035af4261fb6229567841644385135752488f982a43824f7aaab62b",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40312-f02-ssc461-group-lookup-independent-v1/manifest.json",
+      "sha256": "096ce9ea58761ff61c7ee061cdde03bc8043daeedb27f4c23acbe02cba3772f5"
+    },
+    "decision": "NOT_APPLICABLE_APPROVED_PROVIDER_INTERRUPT_AND_OWNERSHIP_CONTRACT",
+    "reason": "Owned close assigns priority based on both primary and cleanup throwable kinds, while restoring cancellation when cleanup wins."
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+    "line": 115,
+    "column": 56,
+    "rule": "DoNotUseThreads",
+    "method": "scope",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 189,
+    "sourceSha256": "ae4997ec9035af4261fb6229567841644385135752488f982a43824f7aaab62b",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40312-f02-ssc461-group-lookup-independent-v1/manifest.json",
+      "sha256": "096ce9ea58761ff61c7ee061cdde03bc8043daeedb27f4c23acbe02cba3772f5"
+    },
+    "decision": "NOT_APPLICABLE_APPROVED_PROVIDER_INTERRUPT_AND_OWNERSHIP_CONTRACT",
+    "reason": "The standalone owner uses an explicit output reader and restores or observes the caller interrupt status. The J2EE rule does not apply. The actual NSS-owned process outcome is a separate condition."
+  }
+]
