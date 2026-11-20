@@ -12,6 +12,7 @@ Program NK-ADM-001 / LogQueryAuditWriter.write、Event、LogQueryApplicationServ
 |PT-ADM-SEARCHPORT006|LogSearchAuditPortTest.searchPort006OwnedSqlFaultsAndUnknownRuntimeIdentityPropagate|prepare/bind/execute/closeのSQL/Runtime/Error同一instance、execute＋closeはprimary/suppressed同一、borrowed connection操作禁止|
 |PT-ADM-SEARCHPORT007|LogSearchAuditPortTest.searchPort007AllNonNullBoundaryContractsFailBeforeSql|全5nonnull引数nullを即拒否、prepare0。NPEを正常化するproduction実装なし|
 |PT-ADM-SEARCHPORT008|LogSearchAuditPortTest.searchPort008IndependentOwnedWorkersDoNotShareBindings|二ownedworker成功/REPLAYでbind混線0、join/close|
+|PT-ADM-SEARCHPORT009（提案・未実行）|LogSearchAuditPortTest.searchPort009MissingStatementUsesFixedSqlFailureBeforeBinding|五eventでprepareがnull。固定SQLDataException／22004、原因・抑制なし、prepare一回・bind/execute/closeなし。SS332の必須DB値分類とSS351の監査失敗契約、JDBCの未取得資源規則から独立に確定。BUG-3417／YKT-2739。PG40860はcompile終了1。試験の差分は `5462_log_search_audit_statement_null_proposed.patch` へ保全。|
 
 各入力は公開固定値だけ。contextは全0formatの合成値で発行・認証に使用せず出力しない。LogRequest.decode→protocolのみを呼び、canonical/キー/response snapshot/Inbox/APIサービスや実DB/JMS/Root/VM/nativeは実行しない。既LogVectors/LogApplicationFixtureはheld key経路を含むためcompile/selectしない。JDK JDBC Proxy以外のprovider0。expectedは承認設計/SQL仕様からliteralで記述しproduction関数で生成しない。
 

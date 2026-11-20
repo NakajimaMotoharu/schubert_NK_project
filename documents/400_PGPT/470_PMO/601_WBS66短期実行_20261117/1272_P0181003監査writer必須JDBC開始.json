@@ -1,0 +1,69 @@
+{
+  "eventId": "PGPT-20261008-6788",
+  "groupId": "P0181003-audit-writer-required-sql-resource",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T13:10:08.036000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 70,
+      "remainingPercent": 30,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "P0181003-audit-writer-required-sql-resource",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "P0181003-audit-writer-required-sql-resource",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P018-10.03"
+    ],
+    "managementWorkIds": [],
+    "source": "822825a5ecd7a1aeb14c18e2495021ed0aeced37",
+    "productionCoreMain": "cdb649a5f054bc2ceed72ef57e55605f14a590d1",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40860-log-search-audit-null-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.35,
+      "base": 0.65,
+      "high": 1.6
+    },
+    "groupCapPp": 2.5,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1271_P01711期限切れ監査の同一例外継続点.json",
+        "sha256": "4ab2160afefc8ea1f6f984d1d6d74e7279d38fa4645b24e815c8150d425f3c6c"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27120-log167-v1/manifest.json",
+        "sha256": "7d8d1d7e4ad5e1e28be98ce3849729bdbf74778c708c672a7f327cd80c7933e6"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27128-log167-independent-v1/manifest.json",
+        "sha256": "03fc998f8f9729a1dd5c7b6a759b41cd1e05c1a82981906d128560a057218fcf"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40840-f02-inspection-corrected-batch-package-v1/manifest.json",
+        "sha256": "04b2c3c8fe15caa5f2558fc306660d5f111f71f187d5d2b6791eadbdc53cbaba"
+      },
+      {
+        "path": "evidence/01_PT/010_NK-ADM-001/087_QA054ログ検索成功監査writer単体仕様.md",
+        "sha256": "253a5a5ef3b65de7ca4dec46c58b3f7c1be6722752da07feb5b438b0097782fc"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "既PG27120 LogSearchAuditPortの借用JDK proxyに限定。現WBS-P010-04も参照、費用はP018-10.03に一回だけ。",
+    "endCondition": "準備がnullを返す経路を新規独立試験で再現し、修正後は固定22004、準備一回、bind/close/Connection操作0。元8と修正後同sourceで必要回帰。",
+    "workScope": "通常のLogQueryAuditWriter単体のみ。実DB・業務persist・権限・ログ保存実経路と正式451は別。"
+  }
+}

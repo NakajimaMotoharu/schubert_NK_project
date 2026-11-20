@@ -1,0 +1,71 @@
+diff --git a/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/log/LogSearchAuditPortTest.java b/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/log/LogSearchAuditPortTest.java
+index 90147d3c70..3278504f33 100644
+--- a/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/log/LogSearchAuditPortTest.java
++++ b/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/log/LogSearchAuditPortTest.java
+@@ -1,6 +1,7 @@
+ package dev.codex.schubert.nk.api.application.log;
+ 
+ import static org.junit.jupiter.api.Assertions.assertEquals;
++import static org.junit.jupiter.api.Assertions.assertNull;
+ import static org.junit.jupiter.api.Assertions.assertSame;
+ import static org.junit.jupiter.api.Assertions.assertThrows;
+ import static org.junit.jupiter.api.Assertions.assertTrue;
+@@ -20,6 +21,7 @@ import java.lang.reflect.Proxy;
+ import java.nio.charset.StandardCharsets;
+ import java.sql.Connection;
+ import java.sql.PreparedStatement;
++import java.sql.SQLDataException;
+ import java.sql.SQLException;
+ import java.sql.Types;
+ import java.time.Instant;
+@@ -270,6 +272,33 @@ final class LogSearchAuditPortTest {
+     assertTrue(jdbc.operations.isEmpty());
+   }
+ 
++  @Test
++  void searchPort009MissingStatementUsesFixedSqlFailureBeforeBinding() {
++    for (Event event :
++        List.of(
++            Event.SESSION_INVALID,
++            Event.ROLE_DENIED,
++            Event.MESSAGE_MISMATCH,
++            Event.REPLAY,
++            Event.SEARCH_SUCCEEDED)) {
++      var jdbc = new Jdbc();
++      jdbc.missingStatement = true;
++      var failure =
++          assertThrows(
++              SQLDataException.class,
++              () ->
++                  new LogQueryAuditWriter()
++                      .write(jdbc.connection(), Optional.of(ADMIN), request(), event, NOW));
++      assertEquals("22004", failure.getSQLState());
++      assertEquals("required database value is missing", failure.getMessage());
++      assertNull(failure.getCause());
++      assertEquals(0, failure.getSuppressed().length);
++      assertEquals(List.of(PREPARE), jdbc.operations);
++      assertTrue(jdbc.binds.isEmpty());
++      assertTrue(jdbc.nullTypes.isEmpty());
++    }
++  }
++
+   @Test
+   void searchPort008IndependentOwnedWorkersDoNotShareBindings() throws Exception {
+     var workers = Executors.newFixedThreadPool(2);
+@@ -332,6 +361,7 @@ final class LogSearchAuditPortTest {
+     private final List<String> operations = new ArrayList<>();
+     private String sql = "";
+     private int rows = 1;
++    private boolean missingStatement;
+     private String faultAt = "";
+     private @Nullable Throwable fault;
+     private @Nullable Throwable closeFault;
+@@ -351,7 +381,7 @@ final class LogSearchAuditPortTest {
+                 operations.add(PREPARE);
+                 fail(PREPARE);
+                 sql = (String) args[0];
+-                return statement();
++                return missingStatement ? null : statement();
+               });
+     }
+ 

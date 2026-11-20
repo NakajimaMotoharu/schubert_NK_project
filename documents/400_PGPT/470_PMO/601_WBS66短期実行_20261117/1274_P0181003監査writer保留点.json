@@ -1,0 +1,81 @@
+{
+  "eventId": "PGPT-20261008-6790",
+  "wbsLeafIds": [
+    "WBS-P018-10.03"
+  ],
+  "managementWorkIds": [],
+  "workCategory": "IMPLEMENTATION",
+  "source": "822825a5ecd7a1aeb14c18e2495021ed0aeced37",
+  "productionCoreMain": "cdb649a5f054bc2ceed72ef57e55605f14a590d1",
+  "previousCheckpoint": "PGPT-20261008-6787",
+  "groupEvents": [
+    "PGPT-20261008-6789"
+  ],
+  "acceptedOriginal": 17,
+  "total": 190,
+  "coreAccepted": 0,
+  "coreTotal": 5,
+  "officialPtTests": 1964,
+  "officialPtScopes": 53,
+  "newFormalAcceptance": 0,
+  "effortRate": null,
+  "actualAllocatedPp": null,
+  "newProductTests": 0,
+  "recordedOwnedJobsInFlight": 0,
+  "ownedBackendJobsStartedHere": 0,
+  "modelObserved": "gpt-6.2-sol",
+  "reasoningObserved": null,
+  "speedObserved": null,
+  "outcomeEvidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40860-log-search-audit-null-v1-before/manifest.json",
+      "sha256": "bbfef44e5551cc112bbf444811c639e659ab19fab6238040490bcdb8d000e313"
+    },
+    {
+      "path": "evidence/01_PT/010_NK-ADM-001/087_QA054ログ検索成功監査writer単体仕様.md",
+      "sha256": "2874066c59c76387829ac1d9033cc7fd56263464a2eb69e56741657ac12898cb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/input/5462_log_search_audit_statement_null_proposed.patch",
+      "sha256": "f376e812e0e38531b30a00ac81d1de9f8739935d1c82188b9bfdb604a1f36a92"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/input/5461_log_search_audit_statement_null_pt.py",
+      "sha256": "924b2ba9897c3f7c4d5df64888cb2a4bd929b377712b90bbfe61be3c30e091a9"
+    }
+  ],
+  "fullQuotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T13:12:36.843000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 70,
+      "remainingPercent": 30,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "quotaAfter": {
+    "usedPercent": 70,
+    "remainingPercent": 30,
+    "resetsAt": 1795445753,
+    "windowDurationMins": 10080
+  },
+  "sharedDeltaPp": 0,
+  "completedOriginalRowPricePp": 0,
+  "remainingCriteria": [
+    "現LogQueryRepositoryのcompileに必要なQA-056の保留型",
+    "同sourceのPG/PTおよび関連4writerの判定・実監査・451"
+  ],
+  "nextEvidence": "QA-056の対象型を含めた実施条件が確定してから新規1件の修正前証拠を取得。現在は当依存を含まない通常PG/PTへ移行。",
+  "testId": "PT-ADM-SEARCHPORT009",
+  "knownHold": "QA-056",
+  "bugs": [
+    "BUG-3417"
+  ],
+  "expansion": [
+    "YKT-2739"
+  ],
+  "firstTrialReason": "旧19 Mainのclosureが現LogQueryRepositoryの保留依存を含まずjavac終了1。保留型を入力せず試験未起動。"
+}
