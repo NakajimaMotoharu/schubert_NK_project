@@ -1,0 +1,205 @@
+{
+  "source": "89a58af38bed583bc088979ce19f3aab4ff2ae0c",
+  "productionCore": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+  "toolSha256": "83558d412e4f6b8f790a0f6184029b44d8fbc6b01fd2e57eb4f0e488a4ac2b53",
+  "testInput": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/5384_f02_repository_type_dependencies.py",
+    "sha256": "0bc478a3acd1b874610bb7205e5d7447ab78860494b96cdab91473abb6b5bf95"
+  },
+  "previous55": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40574-f02-vendor-jdbc-jms-after-v1/manifest.json",
+    "sha256": "3cee0b2a644a128d45168578dd50ebd3f75ade0c44899590732bf752031ec02b"
+  },
+  "controlsVerified": 0,
+  "actualExit": 1,
+  "auditExpectedExit": 1,
+  "auditActualExit": 1,
+  "inputPhysical": {
+    "dev.codex.schubert.nk.api.Anchor": "b691280932ab1ea13b256104687d5923f9e70e226c2fb31a2a49c11764c2269b",
+    "dev.codex.schubert.nk.api.application.audit.TypedFailure": "1240b307ef03bde65dea6709f23c3562cb2e90405aed0bba45d55436957a0d87",
+    "dev.codex.schubert.nk.api.application.audit.TypedService": "9e479b6d718ce17476e5531d6bc2850a07a09d21baf8f56d2e22514d54f887f3",
+    "dev.codex.schubert.nk.api.domain.AuditRow": "cb39ac3116091f9f1a29ae1e82ae4b4ee9bd975df6cc3795b9a1960f08950de5",
+    "dev.codex.schubert.nk.api.monitoring.persistence.BuildPort": "08b048ee1f0fbeb73257766f0de0e114dcc68b6cd688abe2eede45f41d4070a1",
+    "dev.codex.schubert.nk.api.persistence.FieldPort": "bf9db2b9be23fd87d37db40bc508506da340174c5f58574c99755d475f1e6dd8",
+    "dev.codex.schubert.nk.api.support.ArgumentRepository": "7466ede2bd74cfd8ef0183b49f39c600818c3ac1fa6abbb092084d82ccc31266",
+    "dev.codex.schubert.nk.api.support.ArrayRepository": "c941632a1e843a83dab393226a81f434b51ecda06d214e75f3fbb974d2490b97",
+    "dev.codex.schubert.nk.api.support.CallRepository": "a2e2258c5e717fd5d36057f7dcdb10f9720b396872f2a56f98d427e1142256b4",
+    "dev.codex.schubert.nk.api.support.GenericRepository": "704d30e125f1d17fbd847b51914d144fb2563c965be0fbff12dfbf4b63b76347",
+    "dev.codex.schubert.nk.api.support.LowerRepository": "9b910b07a4b90ef9695dd2aa196d75450e074a07b48e1f4fd3c4f58aa45124ff",
+    "dev.codex.schubert.nk.api.support.NormalFlow": "03f598a7fa66b6a22153ce0f964151d8e70d9b7f1dcd11e285a7bdfa94f36da8",
+    "dev.codex.schubert.nk.api.support.ReturnRepository": "7e5ac010248ca6cb37b99769e1b8c561a90b74cd3fb64236f7c4ab9a2edd2c18",
+    "dev.codex.schubert.nk.api.support.ThrowsRepository": "f7ef228a13e872f9e771e9cf9e8290e7aa920313c7fe7e06fa6044f14b012f40",
+    "dev.codex.schubert.nk.batch.Anchor": "4dc370530233176eabdbadd79edf2966fd0a7e4afd3671b7a3114034c44eb9e3",
+    "dev.codex.schubert.nk.bootstrap.Anchor": "b7b4a06bb2e29b67f59b46320e8aee9074b1b5c32aa126ee928c13387e40199a",
+    "dev.codex.schubert.nk.protocol.Anchor": "af4c73c5e3cc60c38921bc6c9c810249e7a5f7d1f349f377ea0a4213c698df7c",
+    "dev.codex.schubert.nk.storage.Anchor": "3523fc5db14a0ccfea29f242e1ce59ff87542a25965a1d3274eb29de27f78042",
+    "dev.codex.schubert.nk.web.Anchor": "7a580ceef9ee6289fcfbef966085c3763ab5d6a6bfd5048cf1c6ddad770f3a15"
+  },
+  "measured": [
+    {
+      "testId": "PT-F02-REPO-TYPE-001",
+      "expected": true,
+      "actual": false,
+      "origin": "dev.codex.schubert.nk.api.persistence.FieldPort",
+      "target": "dev.codex.schubert.nk.api.application.audit.TypedService"
+    },
+    {
+      "testId": "PT-F02-REPO-TYPE-002",
+      "expected": true,
+      "actual": false,
+      "origin": "dev.codex.schubert.nk.api.support.ReturnRepository",
+      "target": "dev.codex.schubert.nk.api.application.audit.TypedService"
+    },
+    {
+      "testId": "PT-F02-REPO-TYPE-003",
+      "expected": true,
+      "actual": false,
+      "origin": "dev.codex.schubert.nk.api.support.ArgumentRepository",
+      "target": "dev.codex.schubert.nk.api.application.audit.TypedService"
+    },
+    {
+      "testId": "PT-F02-REPO-TYPE-004",
+      "expected": true,
+      "actual": false,
+      "origin": "dev.codex.schubert.nk.api.support.GenericRepository",
+      "target": "dev.codex.schubert.nk.api.application.audit.TypedService"
+    },
+    {
+      "testId": "PT-F02-REPO-TYPE-005",
+      "expected": true,
+      "actual": false,
+      "origin": "dev.codex.schubert.nk.api.support.ArrayRepository",
+      "target": "dev.codex.schubert.nk.api.application.audit.TypedService"
+    },
+    {
+      "testId": "PT-F02-REPO-TYPE-006",
+      "expected": true,
+      "actual": false,
+      "origin": "dev.codex.schubert.nk.api.support.ThrowsRepository",
+      "target": "dev.codex.schubert.nk.api.application.audit.TypedFailure"
+    },
+    {
+      "testId": "PT-F02-REPO-TYPE-007",
+      "expected": true,
+      "actual": false,
+      "origin": "dev.codex.schubert.nk.api.monitoring.persistence.BuildPort",
+      "target": "dev.codex.schubert.nk.api.application.audit.TypedService"
+    },
+    {
+      "testId": "PT-F02-REPO-TYPE-008",
+      "expected": true,
+      "actual": true,
+      "origin": "dev.codex.schubert.nk.api.support.CallRepository",
+      "target": "dev.codex.schubert.nk.api.application.audit.TypedService"
+    },
+    {
+      "testId": "PT-F02-REPO-TYPE-009",
+      "expected": false,
+      "actual": false,
+      "origin": "dev.codex.schubert.nk.api.support.NormalFlow",
+      "target": "dev.codex.schubert.nk.api.application.audit.TypedService"
+    },
+    {
+      "testId": "PT-F02-REPO-TYPE-010",
+      "expected": false,
+      "actual": false,
+      "origin": "dev.codex.schubert.nk.api.support.LowerRepository",
+      "target": "dev.codex.schubert.nk.api.domain.AuditRow"
+    }
+  ],
+  "matched": 3,
+  "rawFindingCount": 1,
+  "receipts": {
+    "compile-tool": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40584-f02-repository-declaration-before-v1/compile-tool.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40584-f02-repository-declaration-before-v1/compile-tool.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "-d",
+        "/dev/shm/pgpt-repository-decl-vkraxxqi/tool",
+        "/dev/shm/pgpt-repository-decl-vkraxxqi/ModuleDependencyAudit.java"
+      ]
+    },
+    "compile-fixture": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40584-f02-repository-declaration-before-v1/compile-fixture.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40584-f02-repository-declaration-before-v1/compile-fixture.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-d",
+        "/dev/shm/pgpt-repository-decl-vkraxxqi/classes",
+        "/dev/shm/pgpt-repository-decl-vkraxxqi/inputs/dev/codex/schubert/nk/api/application/audit/TypedService.java",
+        "/dev/shm/pgpt-repository-decl-vkraxxqi/inputs/dev/codex/schubert/nk/api/domain/AuditRow.java",
+        "/dev/shm/pgpt-repository-decl-vkraxxqi/inputs/dev/codex/schubert/nk/api/persistence/FieldPort.java",
+        "/dev/shm/pgpt-repository-decl-vkraxxqi/inputs/dev/codex/schubert/nk/api/support/ReturnRepository.java",
+        "/dev/shm/pgpt-repository-decl-vkraxxqi/inputs/dev/codex/schubert/nk/api/support/ArgumentRepository.java",
+        "/dev/shm/pgpt-repository-decl-vkraxxqi/inputs/dev/codex/schubert/nk/api/support/GenericRepository.java",
+        "/dev/shm/pgpt-repository-decl-vkraxxqi/inputs/dev/codex/schubert/nk/api/support/ArrayRepository.java",
+        "/dev/shm/pgpt-repository-decl-vkraxxqi/inputs/dev/codex/schubert/nk/api/support/ThrowsRepository.java",
+        "/dev/shm/pgpt-repository-decl-vkraxxqi/inputs/dev/codex/schubert/nk/api/monitoring/persistence/BuildPort.java",
+        "/dev/shm/pgpt-repository-decl-vkraxxqi/inputs/dev/codex/schubert/nk/api/support/CallRepository.java",
+        "/dev/shm/pgpt-repository-decl-vkraxxqi/inputs/dev/codex/schubert/nk/api/support/NormalFlow.java",
+        "/dev/shm/pgpt-repository-decl-vkraxxqi/inputs/dev/codex/schubert/nk/api/support/LowerRepository.java",
+        "/dev/shm/pgpt-repository-decl-vkraxxqi/inputs/dev/codex/schubert/nk/api/application/audit/TypedFailure.java",
+        "/dev/shm/pgpt-repository-decl-vkraxxqi/inputs/dev/codex/schubert/nk/protocol/Anchor.java",
+        "/dev/shm/pgpt-repository-decl-vkraxxqi/inputs/dev/codex/schubert/nk/storage/Anchor.java",
+        "/dev/shm/pgpt-repository-decl-vkraxxqi/inputs/dev/codex/schubert/nk/bootstrap/Anchor.java",
+        "/dev/shm/pgpt-repository-decl-vkraxxqi/inputs/dev/codex/schubert/nk/api/Anchor.java",
+        "/dev/shm/pgpt-repository-decl-vkraxxqi/inputs/dev/codex/schubert/nk/web/Anchor.java",
+        "/dev/shm/pgpt-repository-decl-vkraxxqi/inputs/dev/codex/schubert/nk/batch/Anchor.java"
+      ]
+    },
+    "audit": {
+      "actualExit": 1,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40584-f02-repository-declaration-before-v1/audit.stdout.txt",
+        "sha256": "41909947e4b6ec5948591c79b3e8cf5a0ccc2901554ea78e2a3f08fee5f3a5f7"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40584-f02-repository-declaration-before-v1/audit.stderr.txt",
+        "sha256": "2c58b87a0350a39bb1c3b5f4891defeeb9a785e84aa11a466dc9ddb21253bf58"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/dev/shm/pgpt-repository-decl-vkraxxqi/tool:/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "ModuleDependencyAudit",
+        "api=/dev/shm/pgpt-repository-decl-vkraxxqi/api.jar",
+        "batch=/dev/shm/pgpt-repository-decl-vkraxxqi/batch.jar",
+        "bootstrap=/dev/shm/pgpt-repository-decl-vkraxxqi/bootstrap.jar",
+        "protocol=/dev/shm/pgpt-repository-decl-vkraxxqi/protocol.jar",
+        "storage=/dev/shm/pgpt-repository-decl-vkraxxqi/storage.jar",
+        "web=/dev/shm/pgpt-repository-decl-vkraxxqi/web.jar"
+      ]
+    }
+  },
+  "productJars": 0,
+  "productTests": 0,
+  "wholeF02Accepted": false,
+  "terminalAtUTC": "2026-11-20T02:59:26.234196+00:00"
+}
