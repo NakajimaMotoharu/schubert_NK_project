@@ -1,0 +1,238 @@
+{
+  "actualExit": 1,
+  "source": "517a23cddc9f3883550942f6fa90a4256ef39b73",
+  "phase": "before",
+  "startedAtUTC": "2026-11-20T11:12:47.891880+00:00",
+  "terminalAtUTC": "2026-11-20T11:12:50.896830+00:00",
+  "testState": "EXPECTED_REGRESSION_REPRODUCED",
+  "relatedBug": "BUG-3415",
+  "relatedYkt": "YKT-2738",
+  "inputs": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java",
+      "sha256": "4a461128998ebb7debb2ba1b6f978d1eb4e6e92920f21d20d4e2b2d2dd1ccb61"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertRegistry.java",
+      "sha256": "fdf1f76469def079db2cb9298c3ff3f19cd264979f0b6b4a9deaa613ba34ca00"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholds.java",
+      "sha256": "6d1de8fc1244404c393f0564aadca13604473e23cc2aa1435db98e04d55e60e0"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow.java",
+      "sha256": "89b651524b151fc772903dfd4a29bfa8bc41eb6984c9ca646d555363bba614ca"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy.java",
+      "sha256": "9eb653ff3b80236306ed03e7621b3d6dc6d4d86764760ba625aa7f203118da73"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine.java",
+      "sha256": "e0d60836a26f9b4f6d2df13085967fb7297bc280ee1ea7352bffd1b845ee2e93"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ObservationContext.java",
+      "sha256": "5685db8a219acb224d463f9372c403ad9dfe36ac1d0c6a0fad308d377454cb26"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor.java",
+      "sha256": "bf02bb6b387398ce3a0f5f1229b1df747284eef521946984a7d37d834a4ac649"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.java",
+      "sha256": "f5419d0ad5c8403e7bc09911833f57f3f6f1ce4aebc88824c67bd95ec7e11729"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.java",
+      "sha256": "e17c6174e193584fcc681d26706390d165c7a29b7ea1c77a13ac3a7eb54566e4"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor.java",
+      "sha256": "fb6e3e4efc7d43f537bbe830537bfccd133f759640943be3f0204e83a92dd7a9"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/package-info.java",
+      "sha256": "009823dd0566a5c0e2a7f06af4b540c122629bec50003bc1585d5303c488d924"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedAlertPendingRecoveryTest.java",
+      "sha256": "bbe6994676ae502f36acefda253626ff7edd8c400d5e0dbfc185446d26ad00ee"
+    }
+  ],
+  "steps": {
+    "formatter": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedAlertPendingRecoveryTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "checkstyle": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "-o",
+        "/dev/shm/pg40798-t5f7xop5/checkstyle.xml",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedAlertPendingRecoveryTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "mainCompile": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-g",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "-d",
+        "/dev/shm/pg40798-t5f7xop5/product",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertRegistry.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholds.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ObservationContext.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/package-info.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "testCompile": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-g",
+        "-proc:none",
+        "-cp",
+        "/dev/shm/pg40798-t5f7xop5/product:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "-d",
+        "/dev/shm/pg40798-t5f7xop5/tests",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedAlertPendingRecoveryTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "unit": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--disable-ansi-colors",
+        "--class-path",
+        "/dev/shm/pg40798-t5f7xop5/product:/dev/shm/pg40798-t5f7xop5/tests:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "--select-class",
+        "dev.codex.schubert.nk.batch.monitoring.TimedAlertPendingRecoveryTest",
+        "--reports-dir",
+        "/dev/shm/pg40798-t5f7xop5/reports",
+        "--fail-if-no-tests"
+      ],
+      "exit": 1,
+      "stdoutSha256": "fb2124cabb7f3f7d2cb75eb9db05712e18b4238b762a12874602c353fd9a30fa",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "xmlSha256": "6f1e80eeb4ec76780143b152e38d84a8a50c09571f974421b8f786312f3914be"
+    }
+  },
+  "cases": [
+    {
+      "testId": "PT-TIMED-RECOVERY-001",
+      "method": "timedSyncLatencyDoesNotRecoverWhileLatencyRemainsAboveTwoSeconds",
+      "suite": "TimedAlertPendingRecoveryTest",
+      "status": "failure",
+      "type": "org.opentest4j.AssertionFailedError",
+      "assertion": "expected: <true> but was: <false>"
+    },
+    {
+      "testId": "PT-TIMED-RECOVERY-008",
+      "method": "policyDbPoolDoesNotCountPendingWarningAsRecovery",
+      "suite": "TimedAlertPendingRecoveryTest",
+      "status": "failure",
+      "type": "org.opentest4j.AssertionFailedError",
+      "assertion": "expected: <true> but was: <false>"
+    },
+    {
+      "testId": "PT-TIMED-RECOVERY-006",
+      "method": "policyFilesystemDoesNotCountPendingWarningAsRecovery",
+      "suite": "TimedAlertPendingRecoveryTest",
+      "status": "failure",
+      "type": "org.opentest4j.AssertionFailedError",
+      "assertion": "expected: <true> but was: <false>"
+    },
+    {
+      "testId": "PT-TIMED-RECOVERY-003",
+      "method": "timedHeapDoesNotRecoverWhileUsageRemainsAtSeventyFivePercent",
+      "suite": "TimedAlertPendingRecoveryTest",
+      "status": "failure",
+      "type": "org.opentest4j.AssertionFailedError",
+      "assertion": "expected: <true> but was: <false>"
+    },
+    {
+      "testId": "PT-TIMED-RECOVERY-004",
+      "method": "timedDbPoolDoesNotRecoverWhileUsageRemainsAtEightyPercent",
+      "suite": "TimedAlertPendingRecoveryTest",
+      "status": "failure",
+      "type": "org.opentest4j.AssertionFailedError",
+      "assertion": "expected: <true> but was: <false>"
+    },
+    {
+      "testId": "PT-TIMED-RECOVERY-002",
+      "method": "timedFilesystemDoesNotRecoverWhileUsageRemainsAtEightyPercent",
+      "suite": "TimedAlertPendingRecoveryTest",
+      "status": "failure",
+      "type": "org.opentest4j.AssertionFailedError",
+      "assertion": "expected: <true> but was: <false>"
+    },
+    {
+      "testId": "PT-TIMED-RECOVERY-007",
+      "method": "policyHeapDoesNotCountPendingWarningAsRecovery",
+      "suite": "TimedAlertPendingRecoveryTest",
+      "status": "failure",
+      "type": "org.opentest4j.AssertionFailedError",
+      "assertion": "expected: <true> but was: <false>"
+    },
+    {
+      "testId": "PT-TIMED-RECOVERY-005",
+      "method": "policySyncLatencyDoesNotCountPendingWarningAsRecovery",
+      "suite": "TimedAlertPendingRecoveryTest",
+      "status": "failure",
+      "type": "org.opentest4j.AssertionFailedError",
+      "assertion": "expected: <true> but was: <false>"
+    }
+  ],
+  "selectedJaCoCoDefaultCoverage": null,
+  "productionFullCoverage": null,
+  "externalOperations": 0,
+  "formalDelta": 0,
+  "whole451": false
+}

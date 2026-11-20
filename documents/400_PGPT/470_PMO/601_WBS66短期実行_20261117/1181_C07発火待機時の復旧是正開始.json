@@ -1,0 +1,64 @@
+{
+  "eventId": "PGPT-20261008-6698",
+  "groupId": "PGPT-WBS66-P01809-TIMED-ALERT-PENDING-RECOVERY-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T11:10:02.633000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 67,
+      "remainingPercent": 33,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P01809-TIMED-ALERT-PENDING-RECOVERY-20261120",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "PGPT-WBS66-P01809-TIMED-ALERT-PENDING-RECOVERY-20261120",
+    "workAttributionKind": "ADDITIONAL_FINDING",
+    "wbsLeafIds": [
+      "WBS-P018-09"
+    ],
+    "managementWorkIds": [
+      "WBS-P018-09/2",
+      "WBS-C07"
+    ],
+    "source": "2e71ff986cc58f98baa96f56e09bac56d06c0273",
+    "productionCoreMain": "517a23cddc9f3883550942f6fa90a4256ef39b73",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40798-timed-alert-pending-recovery-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.45,
+      "base": 1.1,
+      "high": 2.2
+    },
+    "groupCapPp": 3,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1180_C07復旧単体と局所coverage継続点.json",
+        "sha256": "485efc507cc8b6a539e6349f262541dda9b5a6fcae2efabfe92e154914f9d0ef"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/1607_SyncP95時系列警報_単体テスト仕様書.md",
+        "sha256": "ca92a818f02d03bb56643926b411d50bc3dd14b343454b2d53ab82769eaea3a4"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40796-async-byte-recovery-composition-v1/manifest.json",
+        "sha256": "6bbcccde806917b331a1966c1aabc4b2fef98a492551921e220d57ac1b1025cf"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "SS351の発火待機と正常復旧は別観測。同期p95、FS、JVM heap、DB pool四型が未発火の連続超過をlifecycle.NORMALに渡すsource差。",
+    "endCondition": "先行BUG-3415/YKT-2738、同一fixtureの修正前不一致と修正後合格、小閉包の旧動作・局所JaCoCo、横展開の対象外根拠を保存する。",
+    "workScope": "純粋な四monitorと固定時刻の既通常fixture。実観測/JMX/SKD/DB/broker/Unit/保留class・JARなし。"
+  }
+}
