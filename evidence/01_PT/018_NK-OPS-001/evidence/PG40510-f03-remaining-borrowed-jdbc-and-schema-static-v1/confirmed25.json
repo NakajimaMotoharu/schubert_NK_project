@@ -1,0 +1,402 @@
+[
+  {
+    "occurrence": 3,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+    "rule": "DoNotUseThreads",
+    "line": "86",
+    "column": "16",
+    "method": "inspect",
+    "verifiedCurrentSource": "7f539f38a79fb45e971142187b4a801bdb36af3ebcb0cac88898165320467e79",
+    "sourceFinding": "To be compliant to J2EE, a webapp should not use any thread.",
+    "confirmedScope": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40500-schema-history-close-static-and-junit-independent-v1/manifest.json",
+      "sha256": "caea692bdfb3615385369c6cff24553e4697b543d027c1ed92147ae7132184fe"
+    },
+    "decision": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Reading the caller interrupt flag is specified in SSC-474 and starts no thread"
+  },
+  {
+    "occurrence": 4,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+    "rule": "CloseResource",
+    "line": "90",
+    "column": "13",
+    "method": "inspect",
+    "verifiedCurrentSource": "7f539f38a79fb45e971142187b4a801bdb36af3ebcb0cac88898165320467e79",
+    "sourceFinding": "Ensure that resources like this PreparedStatement object are closed after use",
+    "confirmedScope": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40500-schema-history-close-static-and-junit-independent-v1/manifest.json",
+      "sha256": "caea692bdfb3615385369c6cff24553e4697b543d027c1ed92147ae7132184fe"
+    },
+    "decision": "NOT_APPLICABLE_PER_SITE",
+    "reason": "The acquired statement and result are each closed through their typed finally helper as shown by the ordinary resource oracle"
+  },
+  {
+    "occurrence": 5,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+    "rule": "CloseResource",
+    "line": "95",
+    "column": "15",
+    "method": "inspect",
+    "verifiedCurrentSource": "7f539f38a79fb45e971142187b4a801bdb36af3ebcb0cac88898165320467e79",
+    "sourceFinding": "Ensure that resources like this ResultSet object are closed after use",
+    "confirmedScope": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40500-schema-history-close-static-and-junit-independent-v1/manifest.json",
+      "sha256": "caea692bdfb3615385369c6cff24553e4697b543d027c1ed92147ae7132184fe"
+    },
+    "decision": "NOT_APPLICABLE_PER_SITE",
+    "reason": "The acquired statement and result are each closed through their typed finally helper as shown by the ordinary resource oracle"
+  },
+  {
+    "occurrence": 6,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+    "rule": "DoNotUseThreads",
+    "line": "114",
+    "column": "20",
+    "method": "inspect",
+    "verifiedCurrentSource": "7f539f38a79fb45e971142187b4a801bdb36af3ebcb0cac88898165320467e79",
+    "sourceFinding": "To be compliant to J2EE, a webapp should not use any thread.",
+    "confirmedScope": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40500-schema-history-close-static-and-junit-independent-v1/manifest.json",
+      "sha256": "caea692bdfb3615385369c6cff24553e4697b543d027c1ed92147ae7132184fe"
+    },
+    "decision": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Reading the caller interrupt flag is specified in SSC-474 and starts no thread"
+  },
+  {
+    "occurrence": 7,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "115",
+    "column": "33",
+    "method": "inspect",
+    "verifiedCurrentSource": "7f539f38a79fb45e971142187b4a801bdb36af3ebcb0cac88898165320467e79",
+    "sourceFinding": "Avoid catching RuntimeException in try-catch block",
+    "confirmedScope": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40500-schema-history-close-static-and-junit-independent-v1/manifest.json",
+      "sha256": "caea692bdfb3615385369c6cff24553e4697b543d027c1ed92147ae7132184fe"
+    },
+    "decision": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Required owned release and original Throwable precedence are verified by the independent borrowed or source fixture"
+  },
+  {
+    "occurrence": 8,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "115",
+    "column": "52",
+    "method": "inspect",
+    "verifiedCurrentSource": "7f539f38a79fb45e971142187b4a801bdb36af3ebcb0cac88898165320467e79",
+    "sourceFinding": "Avoid catching Error in try-catch block",
+    "confirmedScope": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40500-schema-history-close-static-and-junit-independent-v1/manifest.json",
+      "sha256": "caea692bdfb3615385369c6cff24553e4697b543d027c1ed92147ae7132184fe"
+    },
+    "decision": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Required owned release and original Throwable precedence are verified by the independent borrowed or source fixture"
+  },
+  {
+    "occurrence": 9,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "121",
+    "column": "31",
+    "method": "inspect",
+    "verifiedCurrentSource": "7f539f38a79fb45e971142187b4a801bdb36af3ebcb0cac88898165320467e79",
+    "sourceFinding": "Avoid catching RuntimeException in try-catch block",
+    "confirmedScope": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40500-schema-history-close-static-and-junit-independent-v1/manifest.json",
+      "sha256": "caea692bdfb3615385369c6cff24553e4697b543d027c1ed92147ae7132184fe"
+    },
+    "decision": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Required owned release and original Throwable precedence are verified by the independent borrowed or source fixture"
+  },
+  {
+    "occurrence": 10,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "121",
+    "column": "50",
+    "method": "inspect",
+    "verifiedCurrentSource": "7f539f38a79fb45e971142187b4a801bdb36af3ebcb0cac88898165320467e79",
+    "sourceFinding": "Avoid catching Error in try-catch block",
+    "confirmedScope": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40500-schema-history-close-static-and-junit-independent-v1/manifest.json",
+      "sha256": "caea692bdfb3615385369c6cff24553e4697b543d027c1ed92147ae7132184fe"
+    },
+    "decision": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Required owned release and original Throwable precedence are verified by the independent borrowed or source fixture"
+  },
+  {
+    "occurrence": 11,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "140",
+    "column": "29",
+    "method": "closeRows",
+    "verifiedCurrentSource": "7f539f38a79fb45e971142187b4a801bdb36af3ebcb0cac88898165320467e79",
+    "sourceFinding": "Avoid catching RuntimeException in try-catch block",
+    "confirmedScope": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40500-schema-history-close-static-and-junit-independent-v1/manifest.json",
+      "sha256": "caea692bdfb3615385369c6cff24553e4697b543d027c1ed92147ae7132184fe"
+    },
+    "decision": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Required owned release and original Throwable precedence are verified by the independent borrowed or source fixture"
+  },
+  {
+    "occurrence": 12,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "140",
+    "column": "48",
+    "method": "closeRows",
+    "verifiedCurrentSource": "7f539f38a79fb45e971142187b4a801bdb36af3ebcb0cac88898165320467e79",
+    "sourceFinding": "Avoid catching Error in try-catch block",
+    "confirmedScope": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40500-schema-history-close-static-and-junit-independent-v1/manifest.json",
+      "sha256": "caea692bdfb3615385369c6cff24553e4697b543d027c1ed92147ae7132184fe"
+    },
+    "decision": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Required owned release and original Throwable precedence are verified by the independent borrowed or source fixture"
+  },
+  {
+    "occurrence": 13,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "151",
+    "column": "29",
+    "method": "closeStatement",
+    "verifiedCurrentSource": "7f539f38a79fb45e971142187b4a801bdb36af3ebcb0cac88898165320467e79",
+    "sourceFinding": "Avoid catching RuntimeException in try-catch block",
+    "confirmedScope": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40500-schema-history-close-static-and-junit-independent-v1/manifest.json",
+      "sha256": "caea692bdfb3615385369c6cff24553e4697b543d027c1ed92147ae7132184fe"
+    },
+    "decision": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Required owned release and original Throwable precedence are verified by the independent borrowed or source fixture"
+  },
+  {
+    "occurrence": 14,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "151",
+    "column": "48",
+    "method": "closeStatement",
+    "verifiedCurrentSource": "7f539f38a79fb45e971142187b4a801bdb36af3ebcb0cac88898165320467e79",
+    "sourceFinding": "Avoid catching Error in try-catch block",
+    "confirmedScope": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40500-schema-history-close-static-and-junit-independent-v1/manifest.json",
+      "sha256": "caea692bdfb3615385369c6cff24553e4697b543d027c1ed92147ae7132184fe"
+    },
+    "decision": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Required owned release and original Throwable precedence are verified by the independent borrowed or source fixture"
+  },
+  {
+    "occurrence": 15,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+    "rule": "CloseResource",
+    "line": "57",
+    "column": "15",
+    "method": "verify",
+    "verifiedCurrentSource": "1131dc9f22baf374d616ebc11458ca9c8bbee8ac2f8cf7d5defaaf00076f6d78",
+    "sourceFinding": "Ensure that resources like this ResultSet object are closed after use",
+    "confirmedScope": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39476-p00405-admission-single-cleanup-independent-v1/manifest.json",
+      "sha256": "0c2fac616d225b0e12b3ecc551fc4833186b8e38a96741ba2c7162a1c607db82"
+    },
+    "decision": "NOT_APPLICABLE_PER_SITE",
+    "reason": "The acquired statement and result are each closed through their typed finally helper as shown by the ordinary resource oracle"
+  },
+  {
+    "occurrence": 16,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "64",
+    "column": "33",
+    "method": "verify",
+    "verifiedCurrentSource": "1131dc9f22baf374d616ebc11458ca9c8bbee8ac2f8cf7d5defaaf00076f6d78",
+    "sourceFinding": "Avoid catching RuntimeException in try-catch block",
+    "confirmedScope": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39476-p00405-admission-single-cleanup-independent-v1/manifest.json",
+      "sha256": "0c2fac616d225b0e12b3ecc551fc4833186b8e38a96741ba2c7162a1c607db82"
+    },
+    "decision": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Required owned release and original Throwable precedence are verified by the independent borrowed or source fixture"
+  },
+  {
+    "occurrence": 17,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "64",
+    "column": "52",
+    "method": "verify",
+    "verifiedCurrentSource": "1131dc9f22baf374d616ebc11458ca9c8bbee8ac2f8cf7d5defaaf00076f6d78",
+    "sourceFinding": "Avoid catching Error in try-catch block",
+    "confirmedScope": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39476-p00405-admission-single-cleanup-independent-v1/manifest.json",
+      "sha256": "0c2fac616d225b0e12b3ecc551fc4833186b8e38a96741ba2c7162a1c607db82"
+    },
+    "decision": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Required owned release and original Throwable precedence are verified by the independent borrowed or source fixture"
+  },
+  {
+    "occurrence": 18,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "70",
+    "column": "31",
+    "method": "verify",
+    "verifiedCurrentSource": "1131dc9f22baf374d616ebc11458ca9c8bbee8ac2f8cf7d5defaaf00076f6d78",
+    "sourceFinding": "Avoid catching RuntimeException in try-catch block",
+    "confirmedScope": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39476-p00405-admission-single-cleanup-independent-v1/manifest.json",
+      "sha256": "0c2fac616d225b0e12b3ecc551fc4833186b8e38a96741ba2c7162a1c607db82"
+    },
+    "decision": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Required owned release and original Throwable precedence are verified by the independent borrowed or source fixture"
+  },
+  {
+    "occurrence": 19,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "70",
+    "column": "50",
+    "method": "verify",
+    "verifiedCurrentSource": "1131dc9f22baf374d616ebc11458ca9c8bbee8ac2f8cf7d5defaaf00076f6d78",
+    "sourceFinding": "Avoid catching Error in try-catch block",
+    "confirmedScope": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39476-p00405-admission-single-cleanup-independent-v1/manifest.json",
+      "sha256": "0c2fac616d225b0e12b3ecc551fc4833186b8e38a96741ba2c7162a1c607db82"
+    },
+    "decision": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Required owned release and original Throwable precedence are verified by the independent borrowed or source fixture"
+  },
+  {
+    "occurrence": 20,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "92",
+    "column": "31",
+    "method": "closeRows",
+    "verifiedCurrentSource": "1131dc9f22baf374d616ebc11458ca9c8bbee8ac2f8cf7d5defaaf00076f6d78",
+    "sourceFinding": "Avoid catching RuntimeException in try-catch block",
+    "confirmedScope": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39476-p00405-admission-single-cleanup-independent-v1/manifest.json",
+      "sha256": "0c2fac616d225b0e12b3ecc551fc4833186b8e38a96741ba2c7162a1c607db82"
+    },
+    "decision": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Required owned release and original Throwable precedence are verified by the independent borrowed or source fixture"
+  },
+  {
+    "occurrence": 21,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "92",
+    "column": "50",
+    "method": "closeRows",
+    "verifiedCurrentSource": "1131dc9f22baf374d616ebc11458ca9c8bbee8ac2f8cf7d5defaaf00076f6d78",
+    "sourceFinding": "Avoid catching Error in try-catch block",
+    "confirmedScope": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39476-p00405-admission-single-cleanup-independent-v1/manifest.json",
+      "sha256": "0c2fac616d225b0e12b3ecc551fc4833186b8e38a96741ba2c7162a1c607db82"
+    },
+    "decision": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Required owned release and original Throwable precedence are verified by the independent borrowed or source fixture"
+  },
+  {
+    "occurrence": 22,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "103",
+    "column": "31",
+    "method": "closeStatement",
+    "verifiedCurrentSource": "1131dc9f22baf374d616ebc11458ca9c8bbee8ac2f8cf7d5defaaf00076f6d78",
+    "sourceFinding": "Avoid catching RuntimeException in try-catch block",
+    "confirmedScope": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39476-p00405-admission-single-cleanup-independent-v1/manifest.json",
+      "sha256": "0c2fac616d225b0e12b3ecc551fc4833186b8e38a96741ba2c7162a1c607db82"
+    },
+    "decision": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Required owned release and original Throwable precedence are verified by the independent borrowed or source fixture"
+  },
+  {
+    "occurrence": 23,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "103",
+    "column": "50",
+    "method": "closeStatement",
+    "verifiedCurrentSource": "1131dc9f22baf374d616ebc11458ca9c8bbee8ac2f8cf7d5defaaf00076f6d78",
+    "sourceFinding": "Avoid catching Error in try-catch block",
+    "confirmedScope": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39476-p00405-admission-single-cleanup-independent-v1/manifest.json",
+      "sha256": "0c2fac616d225b0e12b3ecc551fc4833186b8e38a96741ba2c7162a1c607db82"
+    },
+    "decision": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Required owned release and original Throwable precedence are verified by the independent borrowed or source fixture"
+  },
+  {
+    "occurrence": 24,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "91",
+    "column": "16",
+    "method": "connectWhileLocked",
+    "verifiedCurrentSource": "bb803935da6a638fb3589b481acc1bfe25c7e9f644036d781646f22b692977b9",
+    "sourceFinding": "Avoid catching RuntimeException in try-catch block",
+    "confirmedScope": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39868-p00405-service-db-state-lock-independent-v1/manifest.json",
+      "sha256": "5aa80f04cdef294762b856adb9acd95b1079f7105d90f0042ec6ee499b476c5d"
+    },
+    "decision": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Required owned release and original Throwable precedence are verified by the independent borrowed or source fixture"
+  },
+  {
+    "occurrence": 25,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "91",
+    "column": "35",
+    "method": "connectWhileLocked",
+    "verifiedCurrentSource": "bb803935da6a638fb3589b481acc1bfe25c7e9f644036d781646f22b692977b9",
+    "sourceFinding": "Avoid catching Error in try-catch block",
+    "confirmedScope": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39868-p00405-service-db-state-lock-independent-v1/manifest.json",
+      "sha256": "5aa80f04cdef294762b856adb9acd95b1079f7105d90f0042ec6ee499b476c5d"
+    },
+    "decision": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Required owned release and original Throwable precedence are verified by the independent borrowed or source fixture"
+  },
+  {
+    "occurrence": 26,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "124",
+    "column": "14",
+    "method": "discard",
+    "verifiedCurrentSource": "bb803935da6a638fb3589b481acc1bfe25c7e9f644036d781646f22b692977b9",
+    "sourceFinding": "Avoid catching RuntimeException in try-catch block",
+    "confirmedScope": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39868-p00405-service-db-state-lock-independent-v1/manifest.json",
+      "sha256": "5aa80f04cdef294762b856adb9acd95b1079f7105d90f0042ec6ee499b476c5d"
+    },
+    "decision": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Required owned release and original Throwable precedence are verified by the independent borrowed or source fixture"
+  },
+  {
+    "occurrence": 27,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "124",
+    "column": "33",
+    "method": "discard",
+    "verifiedCurrentSource": "bb803935da6a638fb3589b481acc1bfe25c7e9f644036d781646f22b692977b9",
+    "sourceFinding": "Avoid catching Error in try-catch block",
+    "confirmedScope": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39868-p00405-service-db-state-lock-independent-v1/manifest.json",
+      "sha256": "5aa80f04cdef294762b856adb9acd95b1079f7105d90f0042ec6ee499b476c5d"
+    },
+    "decision": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Required owned release and original Throwable precedence are verified by the independent borrowed or source fixture"
+  }
+]

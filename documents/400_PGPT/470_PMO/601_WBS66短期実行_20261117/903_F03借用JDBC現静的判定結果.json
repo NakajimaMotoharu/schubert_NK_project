@@ -1,0 +1,158 @@
+{
+  "eventId": "PGPT-20261008-6423",
+  "groupId": "PGPT-WBS66-F03-BORROWED-THREE-RAW-SITE-DISPOSITIONS-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T01:50:33.444000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 59,
+      "remainingPercent": 41,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-BORROWED-THREE-RAW-SITE-DISPOSITIONS-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F03-BORROWED-THREE-RAW-SITE-DISPOSITIONS-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2",
+      "WBS-P004-05/2"
+    ],
+    "source": "f2d78e0c38811ffca3ff61164ba43b14e47e99d5",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40510-f03-remaining-borrowed-jdbc-and-schema-static-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.16,
+      "base": 0.48,
+      "high": 1.0
+    },
+    "groupCapPp": 1.3,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/901_F03現移行PMD出現と継続点.json",
+        "sha256": "f4be458987ee7b28eff27436126b602a3a85177e60f8ad3e9dde0bf5f9a90f53"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40508-f03-migration-pmd-increment-independent-v1/manifest.json",
+        "sha256": "56bedb510837ffd27fa8985256dd276bd7002beaac36617deea42760ebc69c95"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40506-f03-migration-pmd-dispositions-current-v1/manifest.json",
+        "sha256": "96bb1f46ca4fa92f9df590e2c3566b7479940649d0525ae2f786e99955fd74b4"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40486-f03-current-three-main-pmd-checkstyle-v1/manifest.json",
+        "sha256": "2ec428e78149261ee2472ba49365614e28c445dd26be5d243d507e1099c62fe2"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40500-schema-history-close-static-and-junit-independent-v1/manifest.json",
+        "sha256": "caea692bdfb3615385369c6cff24553e4697b543d027c1ed92147ae7132184fe"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39868-p00405-service-db-state-lock-independent-v1/manifest.json",
+        "sha256": "5aa80f04cdef294762b856adb9acd95b1079f7105d90f0042ec6ee499b476c5d"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39864-service-db-state-lock-static-v1/manifest.json",
+        "sha256": "262eb265401d0c5134c29949a5317911bfb58d14558fb9b474aaf0c4e83aa01e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39864-service-db-state-lock-static-v1/begin.json",
+        "sha256": "0d22607b0f312fa02769a46cb77244ac01797240daa2447cf9a4ee936c0034ff"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38664-bug3235-schema-owner-static-v3/manifest.json",
+        "sha256": "34a412de34954b647c3a4eb0b5fbec04ed6f11c907a71683b6be11a9883a9a53"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "旧現行281の残49より実コード型が既承認通常JDBCの3path/25出現。依存同型、既32通常/PTおよびSSC474現13を使う。実環境はHOLD。",
+    "endCondition": "すべての今scope出現をsourceSHA/標準規則/既独立source/TDDへ対応。親元281の残量と現Schema変更分を別々に保存。新静的tool・製品PT再実行0。未成立を増やさない。",
+    "workScope": "この3つのJDBC sourceと固定公開検査証拠のみ。その他9対象の実資源、実接続等は保持。",
+    "quotaAfter": {
+      "usedPercent": 59,
+      "remainingPercent": 41,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "348537dcc7784994fdb39ffb12e652cae08db0567d329e2f8ccc54d5c52fca19",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T01:50:33.444000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 59,
+          "remainingPercent": 41,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T01:50:27.424469+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 58,
+      "remainingPercent": 42,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6422",
+    "attempt": 1,
+    "attemptResult": "BORROWED_JDBC_25_OCCURRENCES_INDEPENDENTLY_DISPOSITIONED",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40510-f03-remaining-borrowed-jdbc-and-schema-static-v1/manifest.json",
+        "sha256": "67e8880ae30d460a3ded9953dd696f3a1ad667305af8566783bd93006a801df6"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40512-f03-borrowed-jdbc-static-independent-v1/manifest.json",
+        "sha256": "38648b89194f15ed6b637a95ecda82cd8b01b90fe931c6639f9228178bd1a5f8"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "元PMD24未分類、F03 全六、実PostgreSQLと451"
+    ],
+    "firstValidationPassed": 25,
+    "firstValidationDenominator": 25,
+    "retries": 0,
+    "sameRawReportTotal": 281,
+    "remainingUnclassified": 24,
+    "addedSiteDisposition": 25,
+    "actualToolsReplayed": 0
+  }
+}
