@@ -1,0 +1,3972 @@
+[
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/InspectorLockHandoff.java",
+    "line": 35,
+    "column": 14,
+    "rule": "DoNotUseThreads",
+    "method": "execute",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 18,
+    "prior": {
+      "index": 17,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_J2EE_CONTAINER_POLICY",
+      "sourceSha256": "f14d52b486f8e263ba67f8c08ddb0e37c2aa2772b28f8e4e61f2717f27d4ab74"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/InspectorLockHandoff.java",
+    "line": 47,
+    "column": 16,
+    "rule": "AvoidCatchingGenericException",
+    "method": "execute",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 19,
+    "prior": {
+      "index": 18,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_IDENTICAL_THROWABLE_RETHROW",
+      "sourceSha256": "f14d52b486f8e263ba67f8c08ddb0e37c2aa2772b28f8e4e61f2717f27d4ab74"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/InspectorLockHandoff.java",
+    "line": 47,
+    "column": 35,
+    "rule": "AvoidCatchingGenericException",
+    "method": "execute",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 20,
+    "prior": {
+      "index": 19,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_IDENTICAL_THROWABLE_RETHROW",
+      "sourceSha256": "f14d52b486f8e263ba67f8c08ddb0e37c2aa2772b28f8e4e61f2717f27d4ab74"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/InspectorLockHandoff.java",
+    "line": 50,
+    "column": 9,
+    "rule": "DoNotThrowExceptionInFinally",
+    "method": "execute",
+    "message": "A throw statement in a finally block makes the control flow hard to understand.",
+    "occurrence": 21,
+    "prior": {
+      "index": 20,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_EXPLICIT_APPROVED_CLEANUP_PRIORITY",
+      "sourceSha256": "f14d52b486f8e263ba67f8c08ddb0e37c2aa2772b28f8e4e61f2717f27d4ab74"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/InspectorLockHandoff.java",
+    "line": 61,
+    "column": 16,
+    "rule": "DoNotUseThreads",
+    "method": "execute",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 22,
+    "prior": {
+      "index": 21,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_J2EE_CONTAINER_POLICY",
+      "sourceSha256": "f14d52b486f8e263ba67f8c08ddb0e37c2aa2772b28f8e4e61f2717f27d4ab74"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/InspectorLockHandoff.java",
+    "line": 75,
+    "column": 11,
+    "rule": "CloseResource",
+    "method": "scalar",
+    "message": "it is recommended to wrap resource 'checkedStatement' in try-with-resource declaration directly",
+    "occurrence": 23,
+    "prior": {
+      "index": 22,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_BORROWED_OR_ALREADY_OWNED_ALIAS",
+      "sourceSha256": "f14d52b486f8e263ba67f8c08ddb0e37c2aa2772b28f8e4e61f2717f27d4ab74"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/InspectorLockHandoff.java",
+    "line": 78,
+    "column": 13,
+    "rule": "CloseResource",
+    "method": "scalar",
+    "message": "it is recommended to wrap resource 'checkedRow' in try-with-resource declaration directly",
+    "occurrence": 24,
+    "prior": {
+      "index": 23,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_BORROWED_OR_ALREADY_OWNED_ALIAS",
+      "sourceSha256": "f14d52b486f8e263ba67f8c08ddb0e37c2aa2772b28f8e4e61f2717f27d4ab74"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/MaintenanceMutationGuard.java",
+    "line": 53,
+    "column": 11,
+    "rule": "CloseResource",
+    "method": "bind",
+    "message": "it is recommended to wrap resource 'checked' in try-with-resource declaration directly",
+    "occurrence": 47,
+    "prior": {
+      "index": 54,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+      "sourceSha256": "93e77b1a49c293d53683628f805b1a0047803ce6a2ad101ec27be4142b4a83e6"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/MaintenanceMutationGuard.java",
+    "line": 57,
+    "column": 13,
+    "rule": "CloseResource",
+    "method": "bind",
+    "message": "it is recommended to wrap resource 'row' in try-with-resource declaration directly",
+    "occurrence": 48,
+    "prior": {
+      "index": 55,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+      "sourceSha256": "93e77b1a49c293d53683628f805b1a0047803ce6a2ad101ec27be4142b4a83e6"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupArtifactVerifier.java",
+    "line": 185,
+    "column": 41,
+    "rule": "UseConcurrentHashMap",
+    "method": "observePending",
+    "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+    "occurrence": 71,
+    "prior": {
+      "index": 78,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_TO_CONCRETE_REQUIRED_CONTRACT",
+      "sourceSha256": "0e946af478bd664a8433a6096503169a73d4563f83d297e1ecbdd5bd51160e8e"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupArtifactVerifier.java",
+    "line": 186,
+    "column": 49,
+    "rule": "UseConcurrentHashMap",
+    "method": "observePending",
+    "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+    "occurrence": 72,
+    "prior": {
+      "index": 79,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_TO_CONCRETE_REQUIRED_CONTRACT",
+      "sourceSha256": "0e946af478bd664a8433a6096503169a73d4563f83d297e1ecbdd5bd51160e8e"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupArtifactVerifier.java",
+    "line": 245,
+    "column": 32,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "observePending",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for RuntimeException.",
+    "occurrence": 73,
+    "prior": {
+      "index": 80,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REQUIRED_TYPED_FAILURE_PRIORITY",
+      "sourceSha256": "0e946af478bd664a8433a6096503169a73d4563f83d297e1ecbdd5bd51160e8e"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupArtifactVerifier.java",
+    "line": 335,
+    "column": 30,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "retentionSizesAgree",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for RuntimeException.",
+    "occurrence": 74,
+    "prior": {
+      "index": 81,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REQUIRED_TYPED_FAILURE_PRIORITY",
+      "sourceSha256": "0e946af478bd664a8433a6096503169a73d4563f83d297e1ecbdd5bd51160e8e"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupArtifactVerifier.java",
+    "line": 493,
+    "column": 41,
+    "rule": "UseConcurrentHashMap",
+    "method": "verifyAt",
+    "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+    "occurrence": 75,
+    "prior": {
+      "index": 82,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_TO_CONCRETE_REQUIRED_CONTRACT",
+      "sourceSha256": "0e946af478bd664a8433a6096503169a73d4563f83d297e1ecbdd5bd51160e8e"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupArtifactVerifier.java",
+    "line": 494,
+    "column": 49,
+    "rule": "UseConcurrentHashMap",
+    "method": "verifyAt",
+    "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+    "occurrence": 76,
+    "prior": {
+      "index": 83,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_TO_CONCRETE_REQUIRED_CONTRACT",
+      "sourceSha256": "0e946af478bd664a8433a6096503169a73d4563f83d297e1ecbdd5bd51160e8e"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupArtifactVerifier.java",
+    "line": 570,
+    "column": 32,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "verifyAt",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for RuntimeException.",
+    "occurrence": 77,
+    "prior": {
+      "index": 84,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REQUIRED_TYPED_FAILURE_PRIORITY",
+      "sourceSha256": "0e946af478bd664a8433a6096503169a73d4563f83d297e1ecbdd5bd51160e8e"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupArtifactVerifier.java",
+    "line": 572,
+    "column": 49,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "verifyAt",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for StorageIoException.",
+    "occurrence": 78,
+    "prior": {
+      "index": 85,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REQUIRED_TYPED_FAILURE_PRIORITY",
+      "sourceSha256": "0e946af478bd664a8433a6096503169a73d4563f83d297e1ecbdd5bd51160e8e"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupArtifactVerifier.java",
+    "line": 731,
+    "column": 9,
+    "rule": "DoNotUseThreads",
+    "method": "guard",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 79,
+    "prior": {
+      "index": 86,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_J2EE_CONTAINER_POLICY",
+      "sourceSha256": "0e946af478bd664a8433a6096503169a73d4563f83d297e1ecbdd5bd51160e8e"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupArtifactVerifier.java",
+    "line": 734,
+    "column": 9,
+    "rule": "DoNotUseThreads",
+    "method": "guard",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 80,
+    "prior": {
+      "index": 87,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_J2EE_CONTAINER_POLICY",
+      "sourceSha256": "0e946af478bd664a8433a6096503169a73d4563f83d297e1ecbdd5bd51160e8e"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupDatabaseCopy.java",
+    "line": 110,
+    "column": 14,
+    "rule": "DoNotUseThreads",
+    "method": "guard",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 81,
+    "prior": {
+      "index": 92,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_J2EE_CONTAINER_POLICY",
+      "sourceSha256": "1ef0d4dd1cf5c73b8467ec147a83e00a966281cdd027cb40ab84522f40b8c47b"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupManifestPublisher.java",
+    "line": 281,
+    "column": 9,
+    "rule": "DoNotUseThreads",
+    "method": "guard",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 82,
+    "prior": {
+      "index": 97,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_J2EE_CONTAINER_POLICY",
+      "sourceSha256": "b2d9d8f78429348ad6382c2a279758e030c5e1cd2a7491e530195624ff8e3cb2"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupManifestPublisher.java",
+    "line": 283,
+    "column": 9,
+    "rule": "DoNotUseThreads",
+    "method": "guard",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 83,
+    "prior": {
+      "index": 98,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_J2EE_CONTAINER_POLICY",
+      "sourceSha256": "b2d9d8f78429348ad6382c2a279758e030c5e1cd2a7491e530195624ff8e3cb2"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupWorkerRequestFiles.java",
+    "line": 196,
+    "column": 14,
+    "rule": "DoNotUseThreads",
+    "method": "guard",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 89,
+    "prior": {
+      "index": 119,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_J2EE_CONTAINER_POLICY",
+      "sourceSha256": "f0f148b8345d9e5f33497f4fa3e8a90bb00140badd89cffe72376b0c066e458f"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/DurableRecordFiles.java",
+    "line": 201,
+    "column": 14,
+    "rule": "DoNotUseThreads",
+    "method": "begin",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 90,
+    "prior": {
+      "index": 138,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_J2EE_CONTAINER_POLICY",
+      "sourceSha256": "411726e5d96ccda9e8fa83c6861e8f1d5957aba39118e5aca8ffc6b3f962cbc5"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/DurableRecordFiles.java",
+    "line": 325,
+    "column": 14,
+    "rule": "DoNotUseThreads",
+    "method": "finish",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 91,
+    "prior": {
+      "index": 139,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_J2EE_CONTAINER_POLICY",
+      "sourceSha256": "411726e5d96ccda9e8fa83c6861e8f1d5957aba39118e5aca8ffc6b3f962cbc5"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/InspectorEnvironmentFiles.java",
+    "line": 128,
+    "column": 16,
+    "rule": "DoNotUseThreads",
+    "method": "execute",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 92,
+    "prior": {
+      "index": 140,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_J2EE_CONTAINER_POLICY",
+      "sourceSha256": "19912e7543513f77c76dc2f5b7d6255aa926357d094a8f8e042e52310a26e03c"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/InspectorEnvironmentFiles.java",
+    "line": 184,
+    "column": 66,
+    "rule": "DoNotUseThreads",
+    "method": "execute",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 93,
+    "prior": {
+      "index": 141,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_J2EE_CONTAINER_POLICY",
+      "sourceSha256": "19912e7543513f77c76dc2f5b7d6255aa926357d094a8f8e042e52310a26e03c"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/InspectorEnvironmentFiles.java",
+    "line": 191,
+    "column": 65,
+    "rule": "DoNotUseThreads",
+    "method": "execute",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 94,
+    "prior": {
+      "index": 142,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_J2EE_CONTAINER_POLICY",
+      "sourceSha256": "19912e7543513f77c76dc2f5b7d6255aa926357d094a8f8e042e52310a26e03c"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/InspectorEnvironmentFiles.java",
+    "line": 191,
+    "column": 65,
+    "rule": "CompareObjectsWithEquals",
+    "method": "execute",
+    "message": "Use equals() to compare object references.",
+    "occurrence": 95,
+    "prior": {
+      "index": 143,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_TO_CONCRETE_REQUIRED_CONTRACT",
+      "sourceSha256": "19912e7543513f77c76dc2f5b7d6255aa926357d094a8f8e042e52310a26e03c"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/InspectorEnvironmentFiles.java",
+    "line": 217,
+    "column": 18,
+    "rule": "DoNotUseThreads",
+    "method": "execute",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 96,
+    "prior": {
+      "index": 144,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_J2EE_CONTAINER_POLICY",
+      "sourceSha256": "19912e7543513f77c76dc2f5b7d6255aa926357d094a8f8e042e52310a26e03c"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/InspectorEnvironmentPublisher.java",
+    "line": 196,
+    "column": 14,
+    "rule": "DoNotUseThreads",
+    "method": "begin",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 97,
+    "prior": {
+      "index": 145,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_J2EE_CONTAINER_POLICY",
+      "sourceSha256": "fe47e92265b4472f5db4d6dbd08fd34cf388e8f5d348556da98e399814ae0957"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/InspectorEnvironmentPublisher.java",
+    "line": 234,
+    "column": 14,
+    "rule": "DoNotUseThreads",
+    "method": "finish",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 98,
+    "prior": {
+      "index": 146,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_J2EE_CONTAINER_POLICY",
+      "sourceSha256": "fe47e92265b4472f5db4d6dbd08fd34cf388e8f5d348556da98e399814ae0957"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/InspectorEnvironmentReader.java",
+    "line": 94,
+    "column": 14,
+    "rule": "DoNotUseThreads",
+    "method": "read",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 99,
+    "prior": {
+      "index": 147,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_J2EE_CONTAINER_POLICY",
+      "sourceSha256": "4492e263999d82a5a340f2f5a39a713be94cfc540bff040f7779a75c12936cee"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/InspectorEnvironmentReader.java",
+    "line": 114,
+    "column": 16,
+    "rule": "DoNotUseThreads",
+    "method": "read",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 100,
+    "prior": {
+      "index": 148,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_J2EE_CONTAINER_POLICY",
+      "sourceSha256": "4492e263999d82a5a340f2f5a39a713be94cfc540bff040f7779a75c12936cee"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/StartupAdmissionFile.java",
+    "line": 287,
+    "column": 18,
+    "rule": "AvoidCatchingGenericException",
+    "method": "close",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 101,
+    "prior": {
+      "index": 240,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_SPECIFIC_REQUIRED_LIFETIME_BOUNDARY",
+      "sourceSha256": "55fdbf46c65a1622f10f19e9ff018b8676c1d3b5a2dcf3ecc80ca5758637c61a"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/StartupAdmissionFile.java",
+    "line": 287,
+    "column": 37,
+    "rule": "AvoidCatchingGenericException",
+    "method": "close",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 102,
+    "prior": {
+      "index": 241,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_SPECIFIC_REQUIRED_LIFETIME_BOUNDARY",
+      "sourceSha256": "55fdbf46c65a1622f10f19e9ff018b8676c1d3b5a2dcf3ecc80ca5758637c61a"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/StartupAdmissionFile.java",
+    "line": 303,
+    "column": 18,
+    "rule": "AvoidCatchingGenericException",
+    "method": "closeAfterKnown",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 103,
+    "prior": {
+      "index": 242,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_SPECIFIC_REQUIRED_LIFETIME_BOUNDARY",
+      "sourceSha256": "55fdbf46c65a1622f10f19e9ff018b8676c1d3b5a2dcf3ecc80ca5758637c61a"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/StartupAdmissionFile.java",
+    "line": 303,
+    "column": 37,
+    "rule": "AvoidCatchingGenericException",
+    "method": "closeAfterKnown",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 104,
+    "prior": {
+      "index": 243,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_SPECIFIC_REQUIRED_LIFETIME_BOUNDARY",
+      "sourceSha256": "55fdbf46c65a1622f10f19e9ff018b8676c1d3b5a2dcf3ecc80ca5758637c61a"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/StartupAdmissionFile.java",
+    "line": 320,
+    "column": 39,
+    "rule": "AvoidCatchingGenericException",
+    "method": "drain",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 105,
+    "prior": {
+      "index": 244,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_SPECIFIC_REQUIRED_LIFETIME_BOUNDARY",
+      "sourceSha256": "55fdbf46c65a1622f10f19e9ff018b8676c1d3b5a2dcf3ecc80ca5758637c61a"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/StartupAdmissionFile.java",
+    "line": 320,
+    "column": 58,
+    "rule": "AvoidCatchingGenericException",
+    "method": "drain",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 106,
+    "prior": {
+      "index": 245,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_SPECIFIC_REQUIRED_LIFETIME_BOUNDARY",
+      "sourceSha256": "55fdbf46c65a1622f10f19e9ff018b8676c1d3b5a2dcf3ecc80ca5758637c61a"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/StartupPermitFiles.java",
+    "line": 428,
+    "column": 14,
+    "rule": "DoNotUseThreads",
+    "method": "begin",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 114,
+    "prior": {
+      "index": 254,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_J2EE_CONTAINER_POLICY",
+      "sourceSha256": "6a9aff26978de396200992a2aeda7c327dfc75aa10adfc9c412be06043287bf3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/StartupPermitFiles.java",
+    "line": 445,
+    "column": 14,
+    "rule": "DoNotUseThreads",
+    "method": "finish",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 115,
+    "prior": {
+      "index": 255,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_J2EE_CONTAINER_POLICY",
+      "sourceSha256": "6a9aff26978de396200992a2aeda7c327dfc75aa10adfc9c412be06043287bf3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java",
+    "line": 131,
+    "column": 5,
+    "rule": "AvoidSynchronizedStatement",
+    "method": "observe",
+    "message": "Use ReentrantLock rather than synchronization",
+    "occurrence": 116,
+    "prior": {
+      "index": 256,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_JAVA25_NONBLOCKING_MEMORY_ATOMICITY",
+      "sourceSha256": "4a461128998ebb7debb2ba1b6f978d1eb4e6e92920f21d20d4e2b2d2dd1ccb61"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java",
+    "line": 179,
+    "column": 5,
+    "rule": "AvoidSynchronizedStatement",
+    "method": "interruptContinuity",
+    "message": "Use ReentrantLock rather than synchronization",
+    "occurrence": 117,
+    "prior": {
+      "index": 257,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_JAVA25_NONBLOCKING_MEMORY_ATOMICITY",
+      "sourceSha256": "4a461128998ebb7debb2ba1b6f978d1eb4e6e92920f21d20d4e2b2d2dd1ccb61"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java",
+    "line": 188,
+    "column": 5,
+    "rule": "AvoidSynchronizedStatement",
+    "method": "snapshot",
+    "message": "Use ReentrantLock rather than synchronization",
+    "occurrence": 118,
+    "prior": {
+      "index": 258,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_JAVA25_NONBLOCKING_MEMORY_ATOMICITY",
+      "sourceSha256": "4a461128998ebb7debb2ba1b6f978d1eb4e6e92920f21d20d4e2b2d2dd1ccb61"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow.java",
+    "line": 27,
+    "column": 5,
+    "rule": "AvoidSynchronizedStatement",
+    "method": "observe",
+    "message": "Use ReentrantLock rather than synchronization",
+    "occurrence": 119,
+    "prior": {
+      "index": 260,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_JAVA25_NONBLOCKING_MEMORY_ATOMICITY",
+      "sourceSha256": "89b651524b151fc772903dfd4a29bfa8bc41eb6984c9ca646d555363bba614ca"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow.java",
+    "line": 32,
+    "column": 26,
+    "rule": "NullAssignment",
+    "method": "observe",
+    "message": "Assigning an Object to null is a code smell.  Consider refactoring.",
+    "occurrence": 120,
+    "prior": {
+      "index": 261,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_TO_CONCRETE_REQUIRED_CONTRACT",
+      "sourceSha256": "89b651524b151fc772903dfd4a29bfa8bc41eb6984c9ca646d555363bba614ca"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor.java",
+    "line": 48,
+    "column": 5,
+    "rule": "AvoidSynchronizedStatement",
+    "method": "observe",
+    "message": "Use ReentrantLock rather than synchronization",
+    "occurrence": 125,
+    "prior": {
+      "index": 269,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_JAVA25_NONBLOCKING_MEMORY_ATOMICITY",
+      "sourceSha256": "bf02bb6b387398ce3a0f5f1229b1df747284eef521946984a7d37d834a4ac649"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor.java",
+    "line": 73,
+    "column": 5,
+    "rule": "AvoidSynchronizedStatement",
+    "method": "snapshot",
+    "message": "Use ReentrantLock rather than synchronization",
+    "occurrence": 126,
+    "prior": {
+      "index": 270,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_JAVA25_NONBLOCKING_MEMORY_ATOMICITY",
+      "sourceSha256": "bf02bb6b387398ce3a0f5f1229b1df747284eef521946984a7d37d834a4ac649"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.java",
+    "line": 42,
+    "column": 5,
+    "rule": "AvoidSynchronizedStatement",
+    "method": "observe",
+    "message": "Use ReentrantLock rather than synchronization",
+    "occurrence": 127,
+    "prior": {
+      "index": 271,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_JAVA25_NONBLOCKING_MEMORY_ATOMICITY",
+      "sourceSha256": "f5419d0ad5c8403e7bc09911833f57f3f6f1ce4aebc88824c67bd95ec7e11729"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.java",
+    "line": 73,
+    "column": 5,
+    "rule": "AvoidSynchronizedStatement",
+    "method": "snapshot",
+    "message": "Use ReentrantLock rather than synchronization",
+    "occurrence": 128,
+    "prior": {
+      "index": 272,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_JAVA25_NONBLOCKING_MEMORY_ATOMICITY",
+      "sourceSha256": "f5419d0ad5c8403e7bc09911833f57f3f6f1ce4aebc88824c67bd95ec7e11729"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.java",
+    "line": 45,
+    "column": 5,
+    "rule": "AvoidSynchronizedStatement",
+    "method": "observe",
+    "message": "Use ReentrantLock rather than synchronization",
+    "occurrence": 129,
+    "prior": {
+      "index": 273,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_JAVA25_NONBLOCKING_MEMORY_ATOMICITY",
+      "sourceSha256": "e17c6174e193584fcc681d26706390d165c7a29b7ea1c77a13ac3a7eb54566e4"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.java",
+    "line": 70,
+    "column": 5,
+    "rule": "AvoidSynchronizedStatement",
+    "method": "snapshot",
+    "message": "Use ReentrantLock rather than synchronization",
+    "occurrence": 130,
+    "prior": {
+      "index": 274,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_JAVA25_NONBLOCKING_MEMORY_ATOMICITY",
+      "sourceSha256": "e17c6174e193584fcc681d26706390d165c7a29b7ea1c77a13ac3a7eb54566e4"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor.java",
+    "line": 42,
+    "column": 5,
+    "rule": "AvoidSynchronizedStatement",
+    "method": "observe",
+    "message": "Use ReentrantLock rather than synchronization",
+    "occurrence": 131,
+    "prior": {
+      "index": 275,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_JAVA25_NONBLOCKING_MEMORY_ATOMICITY",
+      "sourceSha256": "fb6e3e4efc7d43f537bbe830537bfccd133f759640943be3f0204e83a92dd7a9"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor.java",
+    "line": 71,
+    "column": 5,
+    "rule": "AvoidSynchronizedStatement",
+    "method": "snapshot",
+    "message": "Use ReentrantLock rather than synchronization",
+    "occurrence": 132,
+    "prior": {
+      "index": 276,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_JAVA25_NONBLOCKING_MEMORY_ATOMICITY",
+      "sourceSha256": "fb6e3e4efc7d43f537bbe830537bfccd133f759640943be3f0204e83a92dd7a9"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ApplicationStopGate.java",
+    "line": 40,
+    "column": 9,
+    "rule": "DoNotUseThreads",
+    "method": "checkInterrupt",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 141,
+    "prior": {
+      "index": 285,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_J2EE_CONTAINER_POLICY",
+      "sourceSha256": "8b4a740a515af46718400d17c8d9eb060d39c4aabed4358722ae47e86baaf405"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupArchiveProcess.java",
+    "line": 216,
+    "column": 9,
+    "rule": "DoNotUseThreads",
+    "method": "execute",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 142,
+    "prior": {
+      "index": 286,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_J2EE_CONTAINER_POLICY",
+      "sourceSha256": "a70de6c02dec8e284d145d5323d11c9c50c94a7078769136951d4f286ee7d743"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupArchiveProcess.java",
+    "line": 238,
+    "column": 23,
+    "rule": "DoNotUseThreads",
+    "method": "execute",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 143,
+    "prior": {
+      "index": 287,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_J2EE_CONTAINER_POLICY",
+      "sourceSha256": "a70de6c02dec8e284d145d5323d11c9c50c94a7078769136951d4f286ee7d743"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupArchiveProcess.java",
+    "line": 242,
+    "column": 23,
+    "rule": "DoNotUseThreads",
+    "method": "execute",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 144,
+    "prior": {
+      "index": 288,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_J2EE_CONTAINER_POLICY",
+      "sourceSha256": "a70de6c02dec8e284d145d5323d11c9c50c94a7078769136951d4f286ee7d743"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupArchiveProcess.java",
+    "line": 306,
+    "column": 11,
+    "rule": "CloseResource",
+    "method": "writeAndClose",
+    "message": "Ensure that resources like this OutputStream object are closed after use",
+    "occurrence": 145,
+    "prior": {
+      "index": 289,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_BORROWED_OR_ALREADY_OWNED_ALIAS",
+      "sourceSha256": "a70de6c02dec8e284d145d5323d11c9c50c94a7078769136951d4f286ee7d743"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupArchiveProcess.java",
+    "line": 346,
+    "column": 16,
+    "rule": "AvoidCatchingGenericException",
+    "method": "close",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 146,
+    "prior": {
+      "index": 290,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_SPECIFIC_REQUIRED_LIFETIME_BOUNDARY",
+      "sourceSha256": "a70de6c02dec8e284d145d5323d11c9c50c94a7078769136951d4f286ee7d743"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupArchiveProcess.java",
+    "line": 346,
+    "column": 35,
+    "rule": "AvoidCatchingGenericException",
+    "method": "close",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 147,
+    "prior": {
+      "index": 291,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_SPECIFIC_REQUIRED_LIFETIME_BOUNDARY",
+      "sourceSha256": "a70de6c02dec8e284d145d5323d11c9c50c94a7078769136951d4f286ee7d743"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupArchiveProcess.java",
+    "line": 360,
+    "column": 18,
+    "rule": "AvoidCatchingGenericException",
+    "method": "stopAll",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 148,
+    "prior": {
+      "index": 292,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_SPECIFIC_REQUIRED_LIFETIME_BOUNDARY",
+      "sourceSha256": "a70de6c02dec8e284d145d5323d11c9c50c94a7078769136951d4f286ee7d743"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupArchiveProcess.java",
+    "line": 360,
+    "column": 37,
+    "rule": "AvoidCatchingGenericException",
+    "method": "stopAll",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 149,
+    "prior": {
+      "index": 293,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_SPECIFIC_REQUIRED_LIFETIME_BOUNDARY",
+      "sourceSha256": "a70de6c02dec8e284d145d5323d11c9c50c94a7078769136951d4f286ee7d743"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupArchiveProcess.java",
+    "line": 374,
+    "column": 18,
+    "rule": "AvoidCatchingGenericException",
+    "method": "stopAfterKnown",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 150,
+    "prior": {
+      "index": 294,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_SPECIFIC_REQUIRED_LIFETIME_BOUNDARY",
+      "sourceSha256": "a70de6c02dec8e284d145d5323d11c9c50c94a7078769136951d4f286ee7d743"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupArchiveProcess.java",
+    "line": 374,
+    "column": 37,
+    "rule": "AvoidCatchingGenericException",
+    "method": "stopAfterKnown",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 151,
+    "prior": {
+      "index": 295,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_SPECIFIC_REQUIRED_LIFETIME_BOUNDARY",
+      "sourceSha256": "a70de6c02dec8e284d145d5323d11c9c50c94a7078769136951d4f286ee7d743"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupArchiveProcess.java",
+    "line": 387,
+    "column": 32,
+    "rule": "AvoidCatchingGenericException",
+    "method": "stopRest",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 152,
+    "prior": {
+      "index": 296,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_SPECIFIC_REQUIRED_LIFETIME_BOUNDARY",
+      "sourceSha256": "a70de6c02dec8e284d145d5323d11c9c50c94a7078769136951d4f286ee7d743"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupArchiveProcess.java",
+    "line": 387,
+    "column": 51,
+    "rule": "AvoidCatchingGenericException",
+    "method": "stopRest",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 153,
+    "prior": {
+      "index": 297,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_SPECIFIC_REQUIRED_LIFETIME_BOUNDARY",
+      "sourceSha256": "a70de6c02dec8e284d145d5323d11c9c50c94a7078769136951d4f286ee7d743"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupArchiveProcess.java",
+    "line": 395,
+    "column": 23,
+    "rule": "DoNotUseThreads",
+    "method": "holdAll",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 154,
+    "prior": {
+      "index": 298,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_J2EE_CONTAINER_POLICY",
+      "sourceSha256": "a70de6c02dec8e284d145d5323d11c9c50c94a7078769136951d4f286ee7d743"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupArchiveProcess.java",
+    "line": 401,
+    "column": 20,
+    "rule": "AvoidCatchingGenericException",
+    "method": "holdAll",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 155,
+    "prior": {
+      "index": 299,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_SPECIFIC_REQUIRED_LIFETIME_BOUNDARY",
+      "sourceSha256": "a70de6c02dec8e284d145d5323d11c9c50c94a7078769136951d4f286ee7d743"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupArchiveProcess.java",
+    "line": 401,
+    "column": 39,
+    "rule": "AvoidCatchingGenericException",
+    "method": "holdAll",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 156,
+    "prior": {
+      "index": 300,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_SPECIFIC_REQUIRED_LIFETIME_BOUNDARY",
+      "sourceSha256": "a70de6c02dec8e284d145d5323d11c9c50c94a7078769136951d4f286ee7d743"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupArchiveProcess.java",
+    "line": 407,
+    "column": 24,
+    "rule": "AvoidCatchingGenericException",
+    "method": "holdAll",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 157,
+    "prior": {
+      "index": 301,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_SPECIFIC_REQUIRED_LIFETIME_BOUNDARY",
+      "sourceSha256": "a70de6c02dec8e284d145d5323d11c9c50c94a7078769136951d4f286ee7d743"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupArchiveProcess.java",
+    "line": 407,
+    "column": 43,
+    "rule": "AvoidCatchingGenericException",
+    "method": "holdAll",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 158,
+    "prior": {
+      "index": 302,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_SPECIFIC_REQUIRED_LIFETIME_BOUNDARY",
+      "sourceSha256": "a70de6c02dec8e284d145d5323d11c9c50c94a7078769136951d4f286ee7d743"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupArchiveProcess.java",
+    "line": 418,
+    "column": 32,
+    "rule": "DoNotUseThreads",
+    "method": "holdAll",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 159,
+    "prior": {
+      "index": 303,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_J2EE_CONTAINER_POLICY",
+      "sourceSha256": "a70de6c02dec8e284d145d5323d11c9c50c94a7078769136951d4f286ee7d743"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupArchiveProcess.java",
+    "line": 433,
+    "column": 11,
+    "rule": "DoNotUseThreads",
+    "method": "stopOne",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 160,
+    "prior": {
+      "index": 304,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_J2EE_CONTAINER_POLICY",
+      "sourceSha256": "a70de6c02dec8e284d145d5323d11c9c50c94a7078769136951d4f286ee7d743"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupArchiveProcess.java",
+    "line": 449,
+    "column": 9,
+    "rule": "DoNotUseThreads",
+    "method": "holdTerminal",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 161,
+    "prior": {
+      "index": 305,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_J2EE_CONTAINER_POLICY",
+      "sourceSha256": "a70de6c02dec8e284d145d5323d11c9c50c94a7078769136951d4f286ee7d743"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupArchiveProcess.java",
+    "line": 450,
+    "column": 16,
+    "rule": "AvoidCatchingGenericException",
+    "method": "holdTerminal",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 162,
+    "prior": {
+      "index": 306,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_SPECIFIC_REQUIRED_LIFETIME_BOUNDARY",
+      "sourceSha256": "a70de6c02dec8e284d145d5323d11c9c50c94a7078769136951d4f286ee7d743"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupArchiveProcess.java",
+    "line": 450,
+    "column": 35,
+    "rule": "AvoidCatchingGenericException",
+    "method": "holdTerminal",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 163,
+    "prior": {
+      "index": 307,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_SPECIFIC_REQUIRED_LIFETIME_BOUNDARY",
+      "sourceSha256": "a70de6c02dec8e284d145d5323d11c9c50c94a7078769136951d4f286ee7d743"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupArchiveProcess.java",
+    "line": 465,
+    "column": 9,
+    "rule": "DoNotUseThreads",
+    "method": "holdAfterUnknown",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 164,
+    "prior": {
+      "index": 308,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_J2EE_CONTAINER_POLICY",
+      "sourceSha256": "a70de6c02dec8e284d145d5323d11c9c50c94a7078769136951d4f286ee7d743"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupArchiveProcess.java",
+    "line": 466,
+    "column": 16,
+    "rule": "AvoidCatchingGenericException",
+    "method": "holdAfterUnknown",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 165,
+    "prior": {
+      "index": 309,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_SPECIFIC_REQUIRED_LIFETIME_BOUNDARY",
+      "sourceSha256": "a70de6c02dec8e284d145d5323d11c9c50c94a7078769136951d4f286ee7d743"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupArchiveProcess.java",
+    "line": 466,
+    "column": 35,
+    "rule": "AvoidCatchingGenericException",
+    "method": "holdAfterUnknown",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 166,
+    "prior": {
+      "index": 310,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_SPECIFIC_REQUIRED_LIFETIME_BOUNDARY",
+      "sourceSha256": "a70de6c02dec8e284d145d5323d11c9c50c94a7078769136951d4f286ee7d743"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupArchiveProcess.java",
+    "line": 474,
+    "column": 9,
+    "rule": "DoNotUseThreads",
+    "method": "backoff",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 167,
+    "prior": {
+      "index": 311,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_J2EE_CONTAINER_POLICY",
+      "sourceSha256": "a70de6c02dec8e284d145d5323d11c9c50c94a7078769136951d4f286ee7d743"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupArchiveProcess.java",
+    "line": 526,
+    "column": 11,
+    "rule": "DoNotUseThreads",
+    "method": "hold",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 168,
+    "prior": {
+      "index": 312,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_J2EE_CONTAINER_POLICY",
+      "sourceSha256": "a70de6c02dec8e284d145d5323d11c9c50c94a7078769136951d4f286ee7d743"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupArchiveProcess.java",
+    "line": 548,
+    "column": 11,
+    "rule": "DoNotUseThreads",
+    "method": "execute",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 169,
+    "prior": {
+      "index": 313,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_J2EE_CONTAINER_POLICY",
+      "sourceSha256": "a70de6c02dec8e284d145d5323d11c9c50c94a7078769136951d4f286ee7d743"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupArchiveProcess.java",
+    "line": 551,
+    "column": 30,
+    "rule": "AvoidCatchingGenericException",
+    "method": "execute",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 170,
+    "prior": {
+      "index": 314,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_SPECIFIC_REQUIRED_LIFETIME_BOUNDARY",
+      "sourceSha256": "a70de6c02dec8e284d145d5323d11c9c50c94a7078769136951d4f286ee7d743"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupArchiveProcess.java",
+    "line": 551,
+    "column": 49,
+    "rule": "AvoidCatchingGenericException",
+    "method": "execute",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 171,
+    "prior": {
+      "index": 315,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_SPECIFIC_REQUIRED_LIFETIME_BOUNDARY",
+      "sourceSha256": "a70de6c02dec8e284d145d5323d11c9c50c94a7078769136951d4f286ee7d743"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/FixedUnitCgroupNamespace.java",
+    "line": 50,
+    "column": 14,
+    "rule": "DoNotUseThreads",
+    "method": "check",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 190,
+    "prior": {
+      "index": 365,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_J2EE_CONTAINER_POLICY",
+      "sourceSha256": "96e4b3cfcdb5129e4f7a60e1395ef201a466cea5239d01b488ffd91049382345"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/FixedUnitCgroupNamespace.java",
+    "line": 53,
+    "column": 14,
+    "rule": "DoNotUseThreads",
+    "method": "check",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 191,
+    "prior": {
+      "index": 366,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_J2EE_CONTAINER_POLICY",
+      "sourceSha256": "96e4b3cfcdb5129e4f7a60e1395ef201a466cea5239d01b488ffd91049382345"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/FixedUnitCgroupNamespace.java",
+    "line": 178,
+    "column": 18,
+    "rule": "AvoidCatchingGenericException",
+    "method": "close",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 192,
+    "prior": {
+      "index": 367,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_SPECIFIC_REQUIRED_LIFETIME_BOUNDARY",
+      "sourceSha256": "96e4b3cfcdb5129e4f7a60e1395ef201a466cea5239d01b488ffd91049382345"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/FixedUnitCgroupNamespace.java",
+    "line": 178,
+    "column": 37,
+    "rule": "AvoidCatchingGenericException",
+    "method": "close",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 193,
+    "prior": {
+      "index": 368,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_SPECIFIC_REQUIRED_LIFETIME_BOUNDARY",
+      "sourceSha256": "96e4b3cfcdb5129e4f7a60e1395ef201a466cea5239d01b488ffd91049382345"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/FixedUnitCgroupNamespace.java",
+    "line": 193,
+    "column": 18,
+    "rule": "AvoidCatchingGenericException",
+    "method": "closeAfterKnown",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 194,
+    "prior": {
+      "index": 369,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_SPECIFIC_REQUIRED_LIFETIME_BOUNDARY",
+      "sourceSha256": "96e4b3cfcdb5129e4f7a60e1395ef201a466cea5239d01b488ffd91049382345"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/FixedUnitCgroupNamespace.java",
+    "line": 193,
+    "column": 37,
+    "rule": "AvoidCatchingGenericException",
+    "method": "closeAfterKnown",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 195,
+    "prior": {
+      "index": 370,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_SPECIFIC_REQUIRED_LIFETIME_BOUNDARY",
+      "sourceSha256": "96e4b3cfcdb5129e4f7a60e1395ef201a466cea5239d01b488ffd91049382345"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/FixedUnitCgroupNamespace.java",
+    "line": 209,
+    "column": 39,
+    "rule": "AvoidCatchingGenericException",
+    "method": "drain",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 196,
+    "prior": {
+      "index": 371,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_SPECIFIC_REQUIRED_LIFETIME_BOUNDARY",
+      "sourceSha256": "96e4b3cfcdb5129e4f7a60e1395ef201a466cea5239d01b488ffd91049382345"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/FixedUnitCgroupNamespace.java",
+    "line": 209,
+    "column": 58,
+    "rule": "AvoidCatchingGenericException",
+    "method": "drain",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 197,
+    "prior": {
+      "index": 372,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_SPECIFIC_REQUIRED_LIFETIME_BOUNDARY",
+      "sourceSha256": "96e4b3cfcdb5129e4f7a60e1395ef201a466cea5239d01b488ffd91049382345"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceStopSnapshot.java",
+    "line": 43,
+    "column": 27,
+    "rule": "UseConcurrentHashMap",
+    "method": "parse",
+    "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+    "occurrence": 198,
+    "prior": {
+      "index": 382,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_SOURCE_EXACT",
+      "sourceSha256": "767e81698cf113cf65b1bd7a6d939dcff07dee94725d297dc78984d9817cc3b4"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/SystemctlStateSource.java",
+    "line": 92,
+    "column": 7,
+    "rule": "DoNotUseThreads",
+    "method": "read",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 229,
+    "prior": {
+      "index": 468,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_J2EE_CONTAINER_POLICY",
+      "sourceSha256": "09481db85c7f81e3202ad90191977fbe0ea9f2e17c6e925df7c76447243d4c1e"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/SystemctlStateSource.java",
+    "line": 98,
+    "column": 14,
+    "rule": "AvoidCatchingGenericException",
+    "method": "read",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 230,
+    "prior": {
+      "index": 469,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REQUIRED_REFUSAL_RETENTION_OR_ERASURE",
+      "sourceSha256": "09481db85c7f81e3202ad90191977fbe0ea9f2e17c6e925df7c76447243d4c1e"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/SystemctlStateSource.java",
+    "line": 98,
+    "column": 33,
+    "rule": "AvoidCatchingGenericException",
+    "method": "read",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 231,
+    "prior": {
+      "index": 470,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REQUIRED_REFUSAL_RETENTION_OR_ERASURE",
+      "sourceSha256": "09481db85c7f81e3202ad90191977fbe0ea9f2e17c6e925df7c76447243d4c1e"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 142,
+    "column": 13,
+    "rule": "CloseResource",
+    "method": "finish",
+    "message": "Ensure that resources like this PreparedStatement object are closed after use",
+    "occurrence": 242,
+    "prior": {
+      "index": 483,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 147,
+    "column": 31,
+    "rule": "AvoidCatchingGenericException",
+    "method": "finish",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 243,
+    "prior": {
+      "index": 484,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 147,
+    "column": 50,
+    "rule": "AvoidCatchingGenericException",
+    "method": "finish",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 244,
+    "prior": {
+      "index": 485,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 150,
+    "column": 9,
+    "rule": "DoNotThrowExceptionInFinally",
+    "method": "finish",
+    "message": "A throw statement in a finally block makes the control flow hard to understand.",
+    "occurrence": 245,
+    "prior": {
+      "index": 486,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 154,
+    "column": 35,
+    "rule": "AvoidCatchingGenericException",
+    "method": "finish",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 246,
+    "prior": {
+      "index": 487,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 154,
+    "column": 54,
+    "rule": "AvoidCatchingGenericException",
+    "method": "finish",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 247,
+    "prior": {
+      "index": 488,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 238,
+    "column": 11,
+    "rule": "CloseResource",
+    "method": "history",
+    "message": "Ensure that resources like this PreparedStatement object are closed after use",
+    "occurrence": 248,
+    "prior": {
+      "index": 489,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 245,
+    "column": 13,
+    "rule": "CloseResource",
+    "method": "history",
+    "message": "Ensure that resources like this ResultSet object are closed after use",
+    "occurrence": 249,
+    "prior": {
+      "index": 490,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 280,
+    "column": 31,
+    "rule": "AvoidCatchingGenericException",
+    "method": "history",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 250,
+    "prior": {
+      "index": 491,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 280,
+    "column": 50,
+    "rule": "AvoidCatchingGenericException",
+    "method": "history",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 251,
+    "prior": {
+      "index": 492,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 283,
+    "column": 9,
+    "rule": "DoNotThrowExceptionInFinally",
+    "method": "history",
+    "message": "A throw statement in a finally block makes the control flow hard to understand.",
+    "occurrence": 252,
+    "prior": {
+      "index": 493,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 287,
+    "column": 35,
+    "rule": "AvoidCatchingGenericException",
+    "method": "history",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 253,
+    "prior": {
+      "index": 494,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 287,
+    "column": 54,
+    "rule": "AvoidCatchingGenericException",
+    "method": "history",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 254,
+    "prior": {
+      "index": 495,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 292,
+    "column": 29,
+    "rule": "AvoidCatchingGenericException",
+    "method": "history",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 255,
+    "prior": {
+      "index": 496,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 292,
+    "column": 48,
+    "rule": "AvoidCatchingGenericException",
+    "method": "history",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 256,
+    "prior": {
+      "index": 497,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 295,
+    "column": 7,
+    "rule": "DoNotThrowExceptionInFinally",
+    "method": "history",
+    "message": "A throw statement in a finally block makes the control flow hard to understand.",
+    "occurrence": 257,
+    "prior": {
+      "index": 498,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 299,
+    "column": 33,
+    "rule": "AvoidCatchingGenericException",
+    "method": "history",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 258,
+    "prior": {
+      "index": 499,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 299,
+    "column": 52,
+    "rule": "AvoidCatchingGenericException",
+    "method": "history",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 259,
+    "prior": {
+      "index": 500,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 314,
+    "column": 11,
+    "rule": "CloseResource",
+    "method": "abandon",
+    "message": "Ensure that resources like this PreparedStatement object are closed after use",
+    "occurrence": 260,
+    "prior": {
+      "index": 501,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 323,
+    "column": 29,
+    "rule": "AvoidCatchingGenericException",
+    "method": "abandon",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 261,
+    "prior": {
+      "index": 502,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 323,
+    "column": 48,
+    "rule": "AvoidCatchingGenericException",
+    "method": "abandon",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 262,
+    "prior": {
+      "index": 503,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 326,
+    "column": 7,
+    "rule": "DoNotThrowExceptionInFinally",
+    "method": "abandon",
+    "message": "A throw statement in a finally block makes the control flow hard to understand.",
+    "occurrence": 263,
+    "prior": {
+      "index": 504,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 330,
+    "column": 33,
+    "rule": "AvoidCatchingGenericException",
+    "method": "abandon",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 264,
+    "prior": {
+      "index": 505,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 330,
+    "column": 52,
+    "rule": "AvoidCatchingGenericException",
+    "method": "abandon",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 265,
+    "prior": {
+      "index": 506,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 354,
+    "column": 11,
+    "rule": "CloseResource",
+    "method": "insert",
+    "message": "Ensure that resources like this PreparedStatement object are closed after use",
+    "occurrence": 266,
+    "prior": {
+      "index": 507,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 368,
+    "column": 13,
+    "rule": "CloseResource",
+    "method": "insert",
+    "message": "Ensure that resources like this ResultSet object are closed after use",
+    "occurrence": 267,
+    "prior": {
+      "index": 508,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 377,
+    "column": 31,
+    "rule": "AvoidCatchingGenericException",
+    "method": "insert",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 268,
+    "prior": {
+      "index": 509,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 377,
+    "column": 50,
+    "rule": "AvoidCatchingGenericException",
+    "method": "insert",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 269,
+    "prior": {
+      "index": 510,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 380,
+    "column": 9,
+    "rule": "DoNotThrowExceptionInFinally",
+    "method": "insert",
+    "message": "A throw statement in a finally block makes the control flow hard to understand.",
+    "occurrence": 270,
+    "prior": {
+      "index": 511,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 384,
+    "column": 35,
+    "rule": "AvoidCatchingGenericException",
+    "method": "insert",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 271,
+    "prior": {
+      "index": 512,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 384,
+    "column": 54,
+    "rule": "AvoidCatchingGenericException",
+    "method": "insert",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 272,
+    "prior": {
+      "index": 513,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 389,
+    "column": 29,
+    "rule": "AvoidCatchingGenericException",
+    "method": "insert",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 273,
+    "prior": {
+      "index": 514,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 389,
+    "column": 48,
+    "rule": "AvoidCatchingGenericException",
+    "method": "insert",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 274,
+    "prior": {
+      "index": 515,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 392,
+    "column": 7,
+    "rule": "DoNotThrowExceptionInFinally",
+    "method": "insert",
+    "message": "A throw statement in a finally block makes the control flow hard to understand.",
+    "occurrence": 275,
+    "prior": {
+      "index": 516,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 396,
+    "column": 33,
+    "rule": "AvoidCatchingGenericException",
+    "method": "insert",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 276,
+    "prior": {
+      "index": 517,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 396,
+    "column": 52,
+    "rule": "AvoidCatchingGenericException",
+    "method": "insert",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 277,
+    "prior": {
+      "index": 518,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 417,
+    "column": 11,
+    "rule": "CloseResource",
+    "method": "replayed",
+    "message": "Ensure that resources like this PreparedStatement object are closed after use",
+    "occurrence": 278,
+    "prior": {
+      "index": 519,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 424,
+    "column": 13,
+    "rule": "CloseResource",
+    "method": "replayed",
+    "message": "Ensure that resources like this ResultSet object are closed after use",
+    "occurrence": 279,
+    "prior": {
+      "index": 520,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 428,
+    "column": 31,
+    "rule": "AvoidCatchingGenericException",
+    "method": "replayed",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 280,
+    "prior": {
+      "index": 521,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 428,
+    "column": 50,
+    "rule": "AvoidCatchingGenericException",
+    "method": "replayed",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 281,
+    "prior": {
+      "index": 522,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 431,
+    "column": 9,
+    "rule": "DoNotThrowExceptionInFinally",
+    "method": "replayed",
+    "message": "A throw statement in a finally block makes the control flow hard to understand.",
+    "occurrence": 282,
+    "prior": {
+      "index": 523,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 435,
+    "column": 35,
+    "rule": "AvoidCatchingGenericException",
+    "method": "replayed",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 283,
+    "prior": {
+      "index": 524,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 435,
+    "column": 54,
+    "rule": "AvoidCatchingGenericException",
+    "method": "replayed",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 284,
+    "prior": {
+      "index": 525,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 440,
+    "column": 29,
+    "rule": "AvoidCatchingGenericException",
+    "method": "replayed",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 285,
+    "prior": {
+      "index": 526,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 440,
+    "column": 48,
+    "rule": "AvoidCatchingGenericException",
+    "method": "replayed",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 286,
+    "prior": {
+      "index": 527,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 443,
+    "column": 7,
+    "rule": "DoNotThrowExceptionInFinally",
+    "method": "replayed",
+    "message": "A throw statement in a finally block makes the control flow hard to understand.",
+    "occurrence": 287,
+    "prior": {
+      "index": 528,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 447,
+    "column": 33,
+    "rule": "AvoidCatchingGenericException",
+    "method": "replayed",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 288,
+    "prior": {
+      "index": 529,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "line": 447,
+    "column": 52,
+    "rule": "AvoidCatchingGenericException",
+    "method": "replayed",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 289,
+    "prior": {
+      "index": 530,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 184,
+    "column": 13,
+    "rule": "CloseResource",
+    "method": "read",
+    "message": "Ensure that resources like this PreparedStatement object are closed after use",
+    "occurrence": 312,
+    "prior": {
+      "index": 583,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_BORROWED_OR_ALREADY_OWNED_ALIAS",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 191,
+    "column": 15,
+    "rule": "CloseResource",
+    "method": "read",
+    "message": "Ensure that resources like this ResultSet object are closed after use",
+    "occurrence": 313,
+    "prior": {
+      "index": 584,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_BORROWED_OR_ALREADY_OWNED_ALIAS",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 207,
+    "column": 33,
+    "rule": "AvoidCatchingGenericException",
+    "method": "read",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 314,
+    "prior": {
+      "index": 585,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_IDENTICAL_THROWABLE_RETHROW",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 207,
+    "column": 52,
+    "rule": "AvoidCatchingGenericException",
+    "method": "read",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 315,
+    "prior": {
+      "index": 586,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_IDENTICAL_THROWABLE_RETHROW",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 210,
+    "column": 11,
+    "rule": "DoNotThrowExceptionInFinally",
+    "method": "read",
+    "message": "A throw statement in a finally block makes the control flow hard to understand.",
+    "occurrence": 316,
+    "prior": {
+      "index": 587,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_EXPLICIT_APPROVED_CLEANUP_PRIORITY",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 214,
+    "column": 37,
+    "rule": "AvoidCatchingGenericException",
+    "method": "read",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 317,
+    "prior": {
+      "index": 588,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_APPROVED_OWNED_JDBC_CLOSE_PRIORITY",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 214,
+    "column": 56,
+    "rule": "AvoidCatchingGenericException",
+    "method": "read",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 318,
+    "prior": {
+      "index": 589,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_APPROVED_OWNED_JDBC_CLOSE_PRIORITY",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 219,
+    "column": 31,
+    "rule": "AvoidCatchingGenericException",
+    "method": "read",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 319,
+    "prior": {
+      "index": 590,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_IDENTICAL_THROWABLE_RETHROW",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 219,
+    "column": 50,
+    "rule": "AvoidCatchingGenericException",
+    "method": "read",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 320,
+    "prior": {
+      "index": 591,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_IDENTICAL_THROWABLE_RETHROW",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 222,
+    "column": 9,
+    "rule": "DoNotThrowExceptionInFinally",
+    "method": "read",
+    "message": "A throw statement in a finally block makes the control flow hard to understand.",
+    "occurrence": 321,
+    "prior": {
+      "index": 592,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_EXPLICIT_APPROVED_CLEANUP_PRIORITY",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 226,
+    "column": 35,
+    "rule": "AvoidCatchingGenericException",
+    "method": "read",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 322,
+    "prior": {
+      "index": 593,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_APPROVED_OWNED_JDBC_CLOSE_PRIORITY",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 226,
+    "column": 54,
+    "rule": "AvoidCatchingGenericException",
+    "method": "read",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 323,
+    "prior": {
+      "index": 594,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_APPROVED_OWNED_JDBC_CLOSE_PRIORITY",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 283,
+    "column": 15,
+    "rule": "CloseResource",
+    "method": "references",
+    "message": "Ensure that resources like this PreparedStatement object are closed after use",
+    "occurrence": 324,
+    "prior": {
+      "index": 595,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_BORROWED_OR_ALREADY_OWNED_ALIAS",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 291,
+    "column": 17,
+    "rule": "CloseResource",
+    "method": "references",
+    "message": "Ensure that resources like this ResultSet object are closed after use",
+    "occurrence": 325,
+    "prior": {
+      "index": 596,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_BORROWED_OR_ALREADY_OWNED_ALIAS",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 313,
+    "column": 49,
+    "rule": "AvoidCatchingGenericException",
+    "method": "references",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 326,
+    "prior": {
+      "index": 597,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_IDENTICAL_THROWABLE_RETHROW",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 313,
+    "column": 68,
+    "rule": "AvoidCatchingGenericException",
+    "method": "references",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 327,
+    "prior": {
+      "index": 598,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_IDENTICAL_THROWABLE_RETHROW",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 316,
+    "column": 13,
+    "rule": "DoNotThrowExceptionInFinally",
+    "method": "references",
+    "message": "A throw statement in a finally block makes the control flow hard to understand.",
+    "occurrence": 328,
+    "prior": {
+      "index": 599,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_EXPLICIT_APPROVED_CLEANUP_PRIORITY",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 320,
+    "column": 39,
+    "rule": "AvoidCatchingGenericException",
+    "method": "references",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 329,
+    "prior": {
+      "index": 600,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_APPROVED_OWNED_JDBC_CLOSE_PRIORITY",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 320,
+    "column": 58,
+    "rule": "AvoidCatchingGenericException",
+    "method": "references",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 330,
+    "prior": {
+      "index": 601,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_APPROVED_OWNED_JDBC_CLOSE_PRIORITY",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 325,
+    "column": 47,
+    "rule": "AvoidCatchingGenericException",
+    "method": "references",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 331,
+    "prior": {
+      "index": 602,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_IDENTICAL_THROWABLE_RETHROW",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 325,
+    "column": 66,
+    "rule": "AvoidCatchingGenericException",
+    "method": "references",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 332,
+    "prior": {
+      "index": 603,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_IDENTICAL_THROWABLE_RETHROW",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 328,
+    "column": 11,
+    "rule": "DoNotThrowExceptionInFinally",
+    "method": "references",
+    "message": "A throw statement in a finally block makes the control flow hard to understand.",
+    "occurrence": 333,
+    "prior": {
+      "index": 604,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_EXPLICIT_APPROVED_CLEANUP_PRIORITY",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 332,
+    "column": 37,
+    "rule": "AvoidCatchingGenericException",
+    "method": "references",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 334,
+    "prior": {
+      "index": 605,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_APPROVED_OWNED_JDBC_CLOSE_PRIORITY",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 332,
+    "column": 56,
+    "rule": "AvoidCatchingGenericException",
+    "method": "references",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 335,
+    "prior": {
+      "index": 606,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_APPROVED_OWNED_JDBC_CLOSE_PRIORITY",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 370,
+    "column": 11,
+    "rule": "CloseResource",
+    "method": "progressSeal",
+    "message": "Ensure that resources like this PreparedStatement object are closed after use",
+    "occurrence": 336,
+    "prior": {
+      "index": 607,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_BORROWED_OR_ALREADY_OWNED_ALIAS",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 379,
+    "column": 13,
+    "rule": "CloseResource",
+    "method": "progressSeal",
+    "message": "Ensure that resources like this ResultSet object are closed after use",
+    "occurrence": 337,
+    "prior": {
+      "index": 608,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_BORROWED_OR_ALREADY_OWNED_ALIAS",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 384,
+    "column": 31,
+    "rule": "AvoidCatchingGenericException",
+    "method": "progressSeal",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 338,
+    "prior": {
+      "index": 609,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_IDENTICAL_THROWABLE_RETHROW",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 384,
+    "column": 50,
+    "rule": "AvoidCatchingGenericException",
+    "method": "progressSeal",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 339,
+    "prior": {
+      "index": 610,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_IDENTICAL_THROWABLE_RETHROW",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 387,
+    "column": 9,
+    "rule": "DoNotThrowExceptionInFinally",
+    "method": "progressSeal",
+    "message": "A throw statement in a finally block makes the control flow hard to understand.",
+    "occurrence": 340,
+    "prior": {
+      "index": 611,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_EXPLICIT_APPROVED_CLEANUP_PRIORITY",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 391,
+    "column": 35,
+    "rule": "AvoidCatchingGenericException",
+    "method": "progressSeal",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 341,
+    "prior": {
+      "index": 612,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_APPROVED_OWNED_JDBC_CLOSE_PRIORITY",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 391,
+    "column": 54,
+    "rule": "AvoidCatchingGenericException",
+    "method": "progressSeal",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 342,
+    "prior": {
+      "index": 613,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_APPROVED_OWNED_JDBC_CLOSE_PRIORITY",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 395,
+    "column": 29,
+    "rule": "AvoidCatchingGenericException",
+    "method": "progressSeal",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 343,
+    "prior": {
+      "index": 614,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_IDENTICAL_THROWABLE_RETHROW",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 395,
+    "column": 48,
+    "rule": "AvoidCatchingGenericException",
+    "method": "progressSeal",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 344,
+    "prior": {
+      "index": 615,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_IDENTICAL_THROWABLE_RETHROW",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 398,
+    "column": 7,
+    "rule": "DoNotThrowExceptionInFinally",
+    "method": "progressSeal",
+    "message": "A throw statement in a finally block makes the control flow hard to understand.",
+    "occurrence": 345,
+    "prior": {
+      "index": 616,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_EXPLICIT_APPROVED_CLEANUP_PRIORITY",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 402,
+    "column": 33,
+    "rule": "AvoidCatchingGenericException",
+    "method": "progressSeal",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 346,
+    "prior": {
+      "index": 617,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_APPROVED_OWNED_JDBC_CLOSE_PRIORITY",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 402,
+    "column": 52,
+    "rule": "AvoidCatchingGenericException",
+    "method": "progressSeal",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 347,
+    "prior": {
+      "index": 618,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_APPROVED_OWNED_JDBC_CLOSE_PRIORITY",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 507,
+    "column": 13,
+    "rule": "CloseResource",
+    "method": "readRejected",
+    "message": "Ensure that resources like this PreparedStatement object are closed after use",
+    "occurrence": 348,
+    "prior": {
+      "index": 619,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_BORROWED_OR_ALREADY_OWNED_ALIAS",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 514,
+    "column": 15,
+    "rule": "CloseResource",
+    "method": "readRejected",
+    "message": "Ensure that resources like this ResultSet object are closed after use",
+    "occurrence": 349,
+    "prior": {
+      "index": 620,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_BORROWED_OR_ALREADY_OWNED_ALIAS",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 521,
+    "column": 33,
+    "rule": "AvoidCatchingGenericException",
+    "method": "readRejected",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 350,
+    "prior": {
+      "index": 621,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_IDENTICAL_THROWABLE_RETHROW",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 521,
+    "column": 52,
+    "rule": "AvoidCatchingGenericException",
+    "method": "readRejected",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 351,
+    "prior": {
+      "index": 622,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_IDENTICAL_THROWABLE_RETHROW",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 524,
+    "column": 11,
+    "rule": "DoNotThrowExceptionInFinally",
+    "method": "readRejected",
+    "message": "A throw statement in a finally block makes the control flow hard to understand.",
+    "occurrence": 352,
+    "prior": {
+      "index": 623,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_EXPLICIT_APPROVED_CLEANUP_PRIORITY",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 528,
+    "column": 37,
+    "rule": "AvoidCatchingGenericException",
+    "method": "readRejected",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 353,
+    "prior": {
+      "index": 624,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_APPROVED_OWNED_JDBC_CLOSE_PRIORITY",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 528,
+    "column": 56,
+    "rule": "AvoidCatchingGenericException",
+    "method": "readRejected",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 354,
+    "prior": {
+      "index": 625,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_APPROVED_OWNED_JDBC_CLOSE_PRIORITY",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 533,
+    "column": 31,
+    "rule": "AvoidCatchingGenericException",
+    "method": "readRejected",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 355,
+    "prior": {
+      "index": 626,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_IDENTICAL_THROWABLE_RETHROW",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 533,
+    "column": 50,
+    "rule": "AvoidCatchingGenericException",
+    "method": "readRejected",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 356,
+    "prior": {
+      "index": 627,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_IDENTICAL_THROWABLE_RETHROW",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 536,
+    "column": 9,
+    "rule": "DoNotThrowExceptionInFinally",
+    "method": "readRejected",
+    "message": "A throw statement in a finally block makes the control flow hard to understand.",
+    "occurrence": 357,
+    "prior": {
+      "index": 628,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_EXPLICIT_APPROVED_CLEANUP_PRIORITY",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 540,
+    "column": 35,
+    "rule": "AvoidCatchingGenericException",
+    "method": "readRejected",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 358,
+    "prior": {
+      "index": 629,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_APPROVED_OWNED_JDBC_CLOSE_PRIORITY",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "line": 540,
+    "column": 54,
+    "rule": "AvoidCatchingGenericException",
+    "method": "readRejected",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 359,
+    "prior": {
+      "index": 630,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_APPROVED_OWNED_JDBC_CLOSE_PRIORITY",
+      "sourceSha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+    "line": 186,
+    "column": 29,
+    "rule": "AvoidCatchingGenericException",
+    "method": "stage",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 360,
+    "prior": {
+      "index": 631,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "25c64d75bc37274c1cc27cbca5ddf64af35983a43605c323456f007bfdfdacda"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+    "line": 246,
+    "column": 29,
+    "rule": "AvoidCatchingGenericException",
+    "method": "finish",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 361,
+    "prior": {
+      "index": 632,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "25c64d75bc37274c1cc27cbca5ddf64af35983a43605c323456f007bfdfdacda"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+    "line": 265,
+    "column": 13,
+    "rule": "CloseResource",
+    "method": "read",
+    "message": "Ensure that resources like this PreparedStatement object are closed after use",
+    "occurrence": 362,
+    "prior": {
+      "index": 633,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+      "sourceSha256": "25c64d75bc37274c1cc27cbca5ddf64af35983a43605c323456f007bfdfdacda"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+    "line": 271,
+    "column": 15,
+    "rule": "CloseResource",
+    "method": "read",
+    "message": "Ensure that resources like this ResultSet object are closed after use",
+    "occurrence": 363,
+    "prior": {
+      "index": 634,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+      "sourceSha256": "25c64d75bc37274c1cc27cbca5ddf64af35983a43605c323456f007bfdfdacda"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+    "line": 296,
+    "column": 33,
+    "rule": "AvoidCatchingGenericException",
+    "method": "read",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 364,
+    "prior": {
+      "index": 635,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "25c64d75bc37274c1cc27cbca5ddf64af35983a43605c323456f007bfdfdacda"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+    "line": 296,
+    "column": 52,
+    "rule": "AvoidCatchingGenericException",
+    "method": "read",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 365,
+    "prior": {
+      "index": 636,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "25c64d75bc37274c1cc27cbca5ddf64af35983a43605c323456f007bfdfdacda"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+    "line": 299,
+    "column": 11,
+    "rule": "DoNotThrowExceptionInFinally",
+    "method": "read",
+    "message": "A throw statement in a finally block makes the control flow hard to understand.",
+    "occurrence": 366,
+    "prior": {
+      "index": 637,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+      "sourceSha256": "25c64d75bc37274c1cc27cbca5ddf64af35983a43605c323456f007bfdfdacda"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+    "line": 303,
+    "column": 37,
+    "rule": "AvoidCatchingGenericException",
+    "method": "read",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 367,
+    "prior": {
+      "index": 638,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "25c64d75bc37274c1cc27cbca5ddf64af35983a43605c323456f007bfdfdacda"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+    "line": 303,
+    "column": 56,
+    "rule": "AvoidCatchingGenericException",
+    "method": "read",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 368,
+    "prior": {
+      "index": 639,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "25c64d75bc37274c1cc27cbca5ddf64af35983a43605c323456f007bfdfdacda"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+    "line": 307,
+    "column": 31,
+    "rule": "AvoidCatchingGenericException",
+    "method": "read",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 369,
+    "prior": {
+      "index": 640,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "25c64d75bc37274c1cc27cbca5ddf64af35983a43605c323456f007bfdfdacda"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+    "line": 307,
+    "column": 50,
+    "rule": "AvoidCatchingGenericException",
+    "method": "read",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 370,
+    "prior": {
+      "index": 641,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "25c64d75bc37274c1cc27cbca5ddf64af35983a43605c323456f007bfdfdacda"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+    "line": 310,
+    "column": 9,
+    "rule": "DoNotThrowExceptionInFinally",
+    "method": "read",
+    "message": "A throw statement in a finally block makes the control flow hard to understand.",
+    "occurrence": 371,
+    "prior": {
+      "index": 642,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+      "sourceSha256": "25c64d75bc37274c1cc27cbca5ddf64af35983a43605c323456f007bfdfdacda"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+    "line": 314,
+    "column": 35,
+    "rule": "AvoidCatchingGenericException",
+    "method": "read",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 372,
+    "prior": {
+      "index": 643,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "25c64d75bc37274c1cc27cbca5ddf64af35983a43605c323456f007bfdfdacda"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+    "line": 314,
+    "column": 54,
+    "rule": "AvoidCatchingGenericException",
+    "method": "read",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 373,
+    "prior": {
+      "index": 644,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "25c64d75bc37274c1cc27cbca5ddf64af35983a43605c323456f007bfdfdacda"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+    "line": 453,
+    "column": 14,
+    "rule": "AvoidCatchingGenericException",
+    "method": "usingJdbc",
+    "message": "Avoid catching Throwable in try-catch block",
+    "occurrence": 374,
+    "prior": {
+      "index": 645,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "25c64d75bc37274c1cc27cbca5ddf64af35983a43605c323456f007bfdfdacda"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+    "line": 456,
+    "column": 16,
+    "rule": "AvoidCatchingGenericException",
+    "method": "usingJdbc",
+    "message": "Avoid catching Throwable in try-catch block",
+    "occurrence": 375,
+    "prior": {
+      "index": 646,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_TYPED_CONTRACT",
+      "sourceSha256": "25c64d75bc37274c1cc27cbca5ddf64af35983a43605c323456f007bfdfdacda"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+    "line": 30,
+    "column": 16,
+    "rule": "DoNotUseThreads",
+    "method": "read",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 376,
+    "prior": {
+      "index": 48,
+      "decisionPosition": 48,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38792-f03-ordinary-batch-repository-pmd-v1/manifest.json",
+        "sha256": "f5398cc5631eb97a688174b0f5fbddb24a61ebc9163d1d6fef03cbd9b5a02ac9"
+      },
+      "decision": "NOT_APPLICABLE",
+      "sourceSha256": "fe6aacb6e84e4edcaee4bd8033b36e235f0575180f35e9060908a4c0eda34822"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+    "line": 65,
+    "column": 33,
+    "rule": "AvoidCatchingGenericException",
+    "method": "read",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 377,
+    "prior": {
+      "index": 49,
+      "decisionPosition": 49,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38792-f03-ordinary-batch-repository-pmd-v1/manifest.json",
+        "sha256": "f5398cc5631eb97a688174b0f5fbddb24a61ebc9163d1d6fef03cbd9b5a02ac9"
+      },
+      "decision": "NOT_APPLICABLE",
+      "sourceSha256": "fe6aacb6e84e4edcaee4bd8033b36e235f0575180f35e9060908a4c0eda34822"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+    "line": 65,
+    "column": 52,
+    "rule": "AvoidCatchingGenericException",
+    "method": "read",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 378,
+    "prior": {
+      "index": 50,
+      "decisionPosition": 50,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38792-f03-ordinary-batch-repository-pmd-v1/manifest.json",
+        "sha256": "f5398cc5631eb97a688174b0f5fbddb24a61ebc9163d1d6fef03cbd9b5a02ac9"
+      },
+      "decision": "NOT_APPLICABLE",
+      "sourceSha256": "fe6aacb6e84e4edcaee4bd8033b36e235f0575180f35e9060908a4c0eda34822"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+    "line": 71,
+    "column": 31,
+    "rule": "AvoidCatchingGenericException",
+    "method": "read",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 379,
+    "prior": {
+      "index": 51,
+      "decisionPosition": 51,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38792-f03-ordinary-batch-repository-pmd-v1/manifest.json",
+        "sha256": "f5398cc5631eb97a688174b0f5fbddb24a61ebc9163d1d6fef03cbd9b5a02ac9"
+      },
+      "decision": "NOT_APPLICABLE",
+      "sourceSha256": "fe6aacb6e84e4edcaee4bd8033b36e235f0575180f35e9060908a4c0eda34822"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+    "line": 71,
+    "column": 50,
+    "rule": "AvoidCatchingGenericException",
+    "method": "read",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 380,
+    "prior": {
+      "index": 52,
+      "decisionPosition": 52,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38792-f03-ordinary-batch-repository-pmd-v1/manifest.json",
+        "sha256": "f5398cc5631eb97a688174b0f5fbddb24a61ebc9163d1d6fef03cbd9b5a02ac9"
+      },
+      "decision": "NOT_APPLICABLE",
+      "sourceSha256": "fe6aacb6e84e4edcaee4bd8033b36e235f0575180f35e9060908a4c0eda34822"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+    "line": 77,
+    "column": 16,
+    "rule": "DoNotUseThreads",
+    "method": "read",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 381,
+    "prior": {
+      "index": 53,
+      "decisionPosition": 53,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38792-f03-ordinary-batch-repository-pmd-v1/manifest.json",
+        "sha256": "f5398cc5631eb97a688174b0f5fbddb24a61ebc9163d1d6fef03cbd9b5a02ac9"
+      },
+      "decision": "NOT_APPLICABLE",
+      "sourceSha256": "fe6aacb6e84e4edcaee4bd8033b36e235f0575180f35e9060908a4c0eda34822"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+    "line": 89,
+    "column": 29,
+    "rule": "AvoidCatchingGenericException",
+    "method": "closeRow",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 382,
+    "prior": {
+      "index": 54,
+      "decisionPosition": 54,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38792-f03-ordinary-batch-repository-pmd-v1/manifest.json",
+        "sha256": "f5398cc5631eb97a688174b0f5fbddb24a61ebc9163d1d6fef03cbd9b5a02ac9"
+      },
+      "decision": "NOT_APPLICABLE",
+      "sourceSha256": "fe6aacb6e84e4edcaee4bd8033b36e235f0575180f35e9060908a4c0eda34822"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+    "line": 89,
+    "column": 48,
+    "rule": "AvoidCatchingGenericException",
+    "method": "closeRow",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 383,
+    "prior": {
+      "index": 55,
+      "decisionPosition": 55,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38792-f03-ordinary-batch-repository-pmd-v1/manifest.json",
+        "sha256": "f5398cc5631eb97a688174b0f5fbddb24a61ebc9163d1d6fef03cbd9b5a02ac9"
+      },
+      "decision": "NOT_APPLICABLE",
+      "sourceSha256": "fe6aacb6e84e4edcaee4bd8033b36e235f0575180f35e9060908a4c0eda34822"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+    "line": 98,
+    "column": 29,
+    "rule": "AvoidCatchingGenericException",
+    "method": "closeStatement",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 384,
+    "prior": {
+      "index": 56,
+      "decisionPosition": 56,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38792-f03-ordinary-batch-repository-pmd-v1/manifest.json",
+        "sha256": "f5398cc5631eb97a688174b0f5fbddb24a61ebc9163d1d6fef03cbd9b5a02ac9"
+      },
+      "decision": "NOT_APPLICABLE",
+      "sourceSha256": "fe6aacb6e84e4edcaee4bd8033b36e235f0575180f35e9060908a4c0eda34822"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+    "line": 98,
+    "column": 48,
+    "rule": "AvoidCatchingGenericException",
+    "method": "closeStatement",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 385,
+    "prior": {
+      "index": 57,
+      "decisionPosition": 57,
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38792-f03-ordinary-batch-repository-pmd-v1/manifest.json",
+        "sha256": "f5398cc5631eb97a688174b0f5fbddb24a61ebc9163d1d6fef03cbd9b5a02ac9"
+      },
+      "decision": "NOT_APPLICABLE",
+      "sourceSha256": "fe6aacb6e84e4edcaee4bd8033b36e235f0575180f35e9060908a4c0eda34822"
+    }
+  }
+]
