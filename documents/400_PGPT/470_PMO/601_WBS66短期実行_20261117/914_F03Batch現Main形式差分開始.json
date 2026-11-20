@@ -1,0 +1,63 @@
+{
+  "eventId": "PGPT-20261008-6434",
+  "groupId": "PGPT-WBS66-F03-BATCH-MAIN-FORMAT-DELTA-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T02:00:36.219000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 59,
+      "remainingPercent": 41,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-BATCH-MAIN-FORMAT-DELTA-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F03-BATCH-MAIN-FORMAT-DELTA-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "source": "5f49401f0a32f30e0dcd283b730c397de8270835",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40520-f03-batch-main-format-delta-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.5,
+      "high": 0.95
+    },
+    "groupCapPp": 1.25,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/913_G07公開差分と継続点.json",
+        "sha256": "304a6908787621ec7448c35ae316500df3e0079c7a00cd5426689f75c6cf0557"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38442-f03-current-six-main-source-lint-v1/manifest.json",
+        "sha256": "b1f7a1b02e9bf473fa94f09a55ca8db16319cc732e4c15ee77001db6d45d75b5"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40484-f03-batch-current-closed-typed-independent-v1/manifest.json",
+        "sha256": "cff33ec745b38d2b89febc1131f1923e31237dc3799c13b2f5a0c53d80ad7b7c"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "WBS-F03/2-2のBatch Main formatter。PG38442の成功・工具ハッシュを起点にBatch200の差を確認し、変更20は独立の一括formatter差分の証拠がない。10:58取得値は120秒期限で受付前に失効したため、実行前に新規取得。",
+    "endCondition": "変更20だけを正式formatterオプションでdry-runし、終了codeと個別file hash、旧180の完全一致／全200対応を独立照合。F03の型付き要求・Unit/nativeは個別保留。",
+    "workScope": "許可済みBatch公開Mainのみ。製品コンパイル・起動・Root・管理接続・native・secretを扱わない。"
+  }
+}
