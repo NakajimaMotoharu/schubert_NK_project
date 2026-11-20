@@ -68,18 +68,16 @@ public final class LoginAttemptRepository {
             @Nullable Throwable jdbcFailure2 = null;
             try {
               if (row.next()) {
-                Role role =
-                    switch (requireValue(row.getString("role"))) {
-                      case "USER" -> Role.USER;
-                      case "ADMIN" -> Role.ADMIN;
-                      default -> throw new SQLException("invalid persisted role", "22000");
-                    };
-                boolean active =
-                    switch (requireValue(row.getString("status"))) {
-                      case "ACTIVE" -> true;
-                      case "DISABLED" -> false;
-                      default -> throw new SQLException("invalid persisted status", "22000");
-                    };
+                String persistedRole = requireValue(row.getString("role"));
+                Role role;
+                if ("USER".equals(persistedRole)) role = Role.USER;
+                else if ("ADMIN".equals(persistedRole)) role = Role.ADMIN;
+                else throw new SQLException("invalid persisted role", "22000");
+                String persistedStatus = requireValue(row.getString("status"));
+                boolean active;
+                if ("ACTIVE".equals(persistedStatus)) active = true;
+                else if ("DISABLED".equals(persistedStatus)) active = false;
+                else throw new SQLException("invalid persisted status", "22000");
                 account =
                     Optional.of(
                         new LoginAccount(

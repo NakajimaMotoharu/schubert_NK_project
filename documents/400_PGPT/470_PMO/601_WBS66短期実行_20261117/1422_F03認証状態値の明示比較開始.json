@@ -1,0 +1,63 @@
+{
+  "eventId": "PGPT-20261008-6938",
+  "groupId": "f03-borrowed-closed-role-status-branches",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T16:05:15.841000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 74,
+      "remainingPercent": 26,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "f03-borrowed-closed-role-status-branches",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "f03-borrowed-closed-role-status-branches",
+    "workAttributionKind": "REWORK",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/criterion/quality"
+    ],
+    "source": "9046c05e06fa37b190b604f48b7f5565fabce310",
+    "productionCoreMain": "5e211af832d1794a25cdb9fe34c9eec6fe9e2ad6",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40974-f03-borrowed-closed-role-status-branches-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.25,
+      "base": 0.7,
+      "high": 1.5
+    },
+    "groupCapPp": 1.9,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1421_P00701比較キーUTF8境界継続点.json",
+        "sha256": "1705bec2a17f6a3f4db9e664f0bb80201931a96f6306c1fbf90b20c980e7a574"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40972-p00701-utf8-comparison-value-v1/manifest.json",
+        "sha256": "e5ff879759a79fceebbc36a5ef4f19d25f60ae29fd66263d0f95360bd8361e70"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/5528_認証比較キーの厳密UTF8単体仕様.md",
+        "sha256": "70a7b26d99b954252c2922c85c9efa42ec703f695c7283f14edb924a818c4783"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "PG40972 生B42/46・default全。現javapはrole/statusの二string switchを四lookupswitchへ生成。既定closed値の明示比較へ移す。",
+    "endCondition": "他ソースと公開ABI不変。PT-AUT-ATTEMPTPORT元11を同一変更sourceで一実行し、当一型の無filter B四不足、既SQL・null/unknown退避と資源後条件を確認。",
+    "workScope": "既自己所有JDBC proxy閉包13Mainのみ、実DB／認証／保留経路なし。現対象へのSpotBugs/PMDを追加。"
+  }
+}
