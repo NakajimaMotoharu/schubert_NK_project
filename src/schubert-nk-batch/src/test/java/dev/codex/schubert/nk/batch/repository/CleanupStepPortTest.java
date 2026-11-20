@@ -22,7 +22,7 @@ import java.util.UUID;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
-/** CLNPORT001..009: V020 projection and borrowed JDBC, never an actual DELETE or owner. */
+/** CLNPORT001..010: V020 projection and borrowed JDBC, never an actual DELETE or owner. */
 final class CleanupStepPortTest {
   private static final String TEXT_FOREIGN_KEY_CONFLICT = "FOREIGN_KEY_CONFLICT";
   private static final String TEXT_COMPLETE = "complete";
@@ -243,6 +243,42 @@ final class CleanupStepPortTest {
         assertTrue(fixture.visited.contains(point), "planned fault point reached");
         fixture.assertClosed();
       }
+  }
+
+  @Test
+  void singleSqlFailureRetainsNestedErrorAndReleasesOnlyAcquiredResources() {
+    for (String point :
+        List.of("prepare", "query", TEXT_COMPLETE, "rowClose", TEXT_STATEMENTCLOSE)) {
+      for (String edge : List.of("cause", "suppressed", "next")) {
+        var fixture = new Fixture();
+        var original = new AssertionError("public cleanup fixture marker");
+        var failure = new SQLException("public cleanup fixture diagnostic");
+        switch (edge) {
+          case "cause" -> failure.initCause(original);
+          case "suppressed" -> failure.addSuppressed(original);
+          case "next" ->
+              failure.setNextException(new SQLException("public SQL next fixture", original));
+          default -> throw new AssertionError("invalid fixture edge");
+        }
+        fixture.faults.put(point, failure);
+        assertSame(
+            original, assertThrows(AssertionError.class, fixture::execute), point + " " + edge);
+        assertEquals(0, original.getSuppressed().length);
+        assertEquals(1, fixture.referenceCalls);
+        List<String> cleanupCloses =
+            fixture.visited.stream()
+                .filter(name -> name.equals("rowClose") || name.equals(TEXT_STATEMENTCLOSE))
+                .toList();
+        List<String> expectedCloses =
+            switch (point) {
+              case "prepare" -> List.of();
+              case "query" -> List.of(TEXT_STATEMENTCLOSE);
+              default -> List.of("rowClose", TEXT_STATEMENTCLOSE);
+            };
+        assertEquals(expectedCloses, cleanupCloses);
+        fixture.assertClosed();
+      }
+    }
   }
 
   @Test

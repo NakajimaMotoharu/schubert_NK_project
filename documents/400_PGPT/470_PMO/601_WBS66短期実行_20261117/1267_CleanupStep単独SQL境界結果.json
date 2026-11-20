@@ -1,0 +1,142 @@
+{
+  "eventId": "PGPT-20261008-6783",
+  "groupId": "WBS66_CLEANUP_STEP_SINGLE_SQL_GRAPH",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T13:00:20.919000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 69,
+      "remainingPercent": 31,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66_CLEANUP_STEP_SINGLE_SQL_GRAPH",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "WBS66_CLEANUP_STEP_SINGLE_SQL_GRAPH",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P017-07.01"
+    ],
+    "managementWorkIds": [
+      "WBS-P017-07.01/2",
+      "WBS-F03/2-1"
+    ],
+    "source": "a787b6ef4b1210928a6023995bc240fbf6902cb5",
+    "productionCoreMain": "cdb649a5f054bc2ceed72ef57e55605f14a590d1",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40856-cleanup-step-single-sql-graph-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.2,
+      "base": 0.55,
+      "high": 1.35
+    },
+    "groupCapPp": 10,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1265_F03警報残と独立作業継続点.json",
+        "sha256": "573b52819f74cd686b24b9346f135663ced9aadc5c58ad6ea952155c019e4223"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39802-cleanup-fixed-statement-raw-v1/manifest.json",
+        "sha256": "82634ac778832da63f5f19e3283835057499816054656900356a09416aec6575"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40842-p00402-inspection-sql-cycle-raw-v1/manifest.json",
+        "sha256": "b6cfcde4f75ee961bb25039283d662f914c31d7c240f6f38d0305b33f04e8231"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "既CleanupStepPort単独SQLは固定診断と直接Errorを検証。SQL内部Error・同一混合graph・資源後条件を独立確認。",
+    "endCondition": "新CLNPORT010の1件・5箇所の独立期待、現候補・既閉包と終了・証跡。",
+    "workScope": "既存インメモリ借用JDBCのみ。実DELETE/DB・Root・保留型・旧試験再演0。",
+    "quotaAfter": {
+      "usedPercent": 69,
+      "remainingPercent": 31,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "a970ad4c3f24503b878047baf7db08b9d7111c21ce7d0cf0fb0b3a70d72b3f86",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T13:00:20.919000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 69,
+          "remainingPercent": 31,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T12:59:57.688638+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 69,
+      "remainingPercent": 31,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6782",
+    "attempt": 1,
+    "attemptResult": "PASS_NEW_SINGLE_SQL_GRAPH",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 1,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40856-cleanup-step-single-sql-graph-v1/manifest.json",
+        "sha256": "0750cab96187af77d2d47a1a99aee74a97fdb88dcf5edb24f94e5348ab4f3b88"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5459_cleanup_single_sql_graph_pt.py",
+        "sha256": "c04b23fc88392e773f98f6548343c3632bbae894649027497a3487a45952a90d"
+      },
+      {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupStepPortTest.java",
+        "sha256": "ab71b15ffb3e283849585f7f7393ca684bfb009b0beaf8707bc35e45f57eb58c"
+      },
+      {
+        "path": "evidence/01_PT/017_NK-BAT-001/4744_CleanupStep単独SQL例外の単体仕様.md",
+        "sha256": "f2d9b8c53f8abc9a2d248343027fb340beb6b212653cf5f8206465319a427da2"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "P017-07 actual DB and cleanup postconditions",
+      "YKT2359 overall",
+      "whole451"
+    ],
+    "newTestId": "CLNPORT010",
+    "passed": 1,
+    "fixtureVariations": 15,
+    "oldTestsRerun": 0,
+    "operations": 0
+  }
+}
