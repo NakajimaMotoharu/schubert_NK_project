@@ -87,6 +87,10 @@ public final class ModuleDependencyAudit {
         String origin = type.getName();
         String module = owners.get(origin);
         boolean controller = module.equals("web") && isController(type);
+        boolean applicationOrDomain =
+            (module.equals("api") || module.equals("web"))
+                && (origin.startsWith(INTERNAL + module + ".application.")
+                    || origin.startsWith(INTERNAL + module + ".domain."));
         boolean apiRepository =
             module.equals("api")
                 && (origin.startsWith(INTERNAL + "api.persistence.")
@@ -96,8 +100,12 @@ public final class ModuleDependencyAudit {
           String target = component(dependency.getTargetClass().getName());
           String targetModule = owners.get(target);
           String pair = origin + "\t" + target;
-          if (targetModule != null && !targetModule.equals(module) && !ALLOWED.get(module).contains(targetModule))
+          if (targetModule != null
+              && !targetModule.equals(module)
+              && (!ALLOWED.get(module).contains(targetModule)
+                  || (applicationOrDomain && targetModule.equals("storage")))) {
             violations.get("MODULE_EDGES").add(pair);
+          }
           if (target.startsWith(INTERNAL) && targetModule == null)
             violations.get("INTERNAL_OWNER").add(pair);
           if (forbiddenFramework(module, target)) violations.get("FRAMEWORK_FENCES").add(pair);
