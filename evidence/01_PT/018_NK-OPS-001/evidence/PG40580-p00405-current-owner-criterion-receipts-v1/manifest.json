@@ -1,0 +1,106 @@
+{
+  "actualExit": 0,
+  "source": "4d80d2e01db5d044a3f8b427e5067d9ae7b8e768",
+  "productionCore": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+  "parent": "WBS-P004-05",
+  "criterionIds": [
+    "WBS-P004-05:contract",
+    "WBS-P004-05:scope",
+    "WBS-P004-05:quality"
+  ],
+  "explicitExitDependencies": [
+    "WBS-F02",
+    "WBS-F03"
+  ],
+  "fourOriginalOwners": {
+    "ApiJdbcPool": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool.java",
+    "RequiredColumn": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/RequiredColumn.java",
+    "JdbcSyncRequestProcessor": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/JdbcSyncRequestProcessor.java",
+    "LogProjectionDatabaseException": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/LogProjectionDatabaseException.java"
+  },
+  "basedOn": {
+    "path": "documents/400_PGPT/470_PMO/481_PGPT詳細WBS.json",
+    "sha256": "5cc6e11307a2c4f6a9717dfcc0b5cf5a99cc7ada7449fd231edef9fa2b196e71"
+  },
+  "localOwnerSourceBindings": [
+    {
+      "owner": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/RequiredColumn.java",
+      "datum": "SQL NULL contract",
+      "oldCore": "6a2259e1d6245af4c720a52001487f67fb28b2ba",
+      "oldUnit": "d661c779d3a098e4e416d45cc63670e11d40e172",
+      "verifiedAs": "EXACT_SOURCE_AND_TEST_GIT_BLOBS",
+      "evidence": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38042-two-namespace-whole4-criteria-return-v1/manifest.json",
+        "sha256": "088d2aec1690bc214cf16778bc7207866b38f3f3bc4a8f5fcdb18f1995d9ef79"
+      },
+      "fixtureFiles": [
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/RequiredColumnTest.java",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/RequiredColumnNamespaceContractTest.java"
+      ]
+    },
+    {
+      "owner": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/LogProjectionDatabaseException.java",
+      "datum": "fixed projection exception",
+      "oldCore": "01c3b1a34ee01f4a43fcfd1eaa4cc945010675c9",
+      "oldUnit": "1dc8698b03e0674cf7ee5b7cd9f5953c1444c147",
+      "verifiedAs": "EXACT_SOURCE_AND_TEST_GIT_BLOBS",
+      "evidence": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37114-p00405-projection1-unfiltered-v1/manifest.json",
+        "sha256": "99329382381729b42ff2817e9af7c18f3db4dc419a0463daac9fa7ec7017e047"
+      },
+      "fixtureFiles": [
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/logging/LogProjectionDatabaseExceptionContractTest.java"
+      ]
+    }
+  ],
+  "actualApiJarAttestedLocally": false,
+  "remaining": [
+    {
+      "owner": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool.java",
+      "needed": "Authorized actual PostgreSQL pool fixture with separately verified JDBC role, Connection ownership and resource close result"
+    },
+    {
+      "owner": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/JdbcSyncRequestProcessor.java",
+      "needed": "QA-056 held class scope; independently observed commit/rollback/borrowed resource/aliases against the same authorized runtime"
+    },
+    {
+      "owner": "WBS-P004-05:quality",
+      "needed": "Same-source complete 451, actual PostgreSQL UTC/identity and update/postconditions, F02 and F03 terminal dependencies"
+    }
+  ],
+  "sharedEvidence": [
+    {
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40464-migration-utc42-maven-exact-independent-v1/manifest.json",
+        "sha256": "2c7529cf1847c7a3d15352a53c47955d49ea99e6073788e10b820c6f351c5b20"
+      },
+      "cases": 87,
+      "originalCore": "2cc96ab800b8753b0f0eafac8e008bd5b69d9a59",
+      "reuse": "SCM/MIG typed JDBC 4.2, separate archived 87 run"
+    },
+    {
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40500-schema-history-close-static-and-junit-independent-v1/manifest.json",
+        "sha256": "caea692bdfb3615385369c6cff24553e4697b543d027c1ed92147ae7132184fe"
+      },
+      "cases": 13,
+      "originalCore": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+      "reuse": "current Schema owned close interruption, distinct 13 run"
+    },
+    {
+      "reference": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40532-f03-four-batch-dao-required-boundaries-v1/manifest.json",
+        "sha256": "d9a5852701e4c1817afd94bfab881a2b126565dcc6ba67422a104cbd8d2cdb8b"
+      },
+      "occurrences": 44,
+      "originalCore": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+      "reuse": "static Batch DAO close/fatal policy and distinct successful original fixtures"
+    }
+  ],
+  "sharedDuplicatePricePp": 0,
+  "caseTotalsMerged": 0,
+  "newProductTests": 0,
+  "formalAcceptance": false,
+  "whole451": false,
+  "terminalAtUTC": "2026-11-20T02:54:16.225003+00:00"
+}
