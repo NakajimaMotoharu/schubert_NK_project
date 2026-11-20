@@ -1,0 +1,71 @@
+{
+  "eventId": "PGPT-20261008-7164",
+  "groupId": "P01615-LastPageOverSuppliedCount",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T21:18:07.287000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 81,
+      "remainingPercent": 19,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "P01615-LastPageOverSuppliedCount",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "P01615-LastPageOverSuppliedCount",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P016-15"
+    ],
+    "managementWorkIds": [
+      "WBS-P016-15/2-照合"
+    ],
+    "source": "2a2c555fb2964e5c4d4d98046b691c9d136995cf",
+    "productionCoreMain": "6c2e8b027818c8dac0ed0f895edb85658e9c4ff1",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG41226",
+    "estimateAtGroupStartPp": {
+      "low": 0.1,
+      "base": 0.35,
+      "high": 0.75
+    },
+    "groupCapPp": 1.0,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1648_F02現Protocol実JAR限定完了・次工程.json",
+        "sha256": "267e6c81bdaff74dc16f515ebf83e7fc94e4aaeef089c269a4f5196da8979b5c"
+      },
+      {
+        "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+        "sha256": "2b4e1ebb15b348b1f25d1502130d6a4a3607893868d7ea5e57d231ec7f3e58ef"
+      },
+      {
+        "path": "evidence/01_PT/016_NK-WEB-002/4151_P01615User一覧原三artifact契約対応.md",
+        "sha256": "b4d4a72c05ed2da236cc180f040416694dc20e1127510ed7cdb4896017206580"
+      },
+      {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/UserAdminControllerTest.java",
+        "sha256": "08e54b6c79491bac211c8d8baf17b4b29c6a7a577f5941290dccbc9ff968e1fa"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27888-user-search8-independent-v1/manifest.json",
+        "sha256": "1f4d087f9cec1426602e1dcb8c21fb8a896087596a3c7dbe923db1902b92a206"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "WBS66原物理501。SS313/SCR015、元USER-HTTP006/010既表示は件数過小とnull/頁不整合。要求有効で応答件数を超える方向を独立通常値fixtureで確認。",
+    "endCondition": "全件51・第2頁の閉区間51～51、正常1行通過・余分2行を件数理由で拒否。現source／JAR許可内、成功XMLと対象byte/CRCの証跡。",
+    "workScope": "既UserAdminControllerTestはsourceのexpect照合だけで起動なし。実認証、API/DB、User追加や変更、fail cohort、本物session、実HTTPなし。"
+  }
+}
