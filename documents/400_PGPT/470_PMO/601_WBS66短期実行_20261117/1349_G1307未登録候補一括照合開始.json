@@ -1,0 +1,65 @@
+{
+  "eventId": "PGPT-20261008-6865",
+  "groupId": "g1307-current-a1-public-proof-triage",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T14:37:16.458000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 72,
+      "remainingPercent": 28,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "g1307-current-a1-public-proof-triage",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "g1307-current-a1-public-proof-triage",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-G13.07"
+    ],
+    "managementWorkIds": [],
+    "source": "ee2e6d4d0233d9b67bcb0ca374603379f93257c8",
+    "productionCoreMain": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40926-g1307-current-a1-candidate-join-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.12,
+      "base": 0.35,
+      "high": 0.72
+    },
+    "groupCapPp": 1.0,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1348_A30304プール既存証拠適用継続点.json",
+        "sha256": "0705beff407a65460a5dc804cd2f844b8e8626496ea6b8328d03d4673605ab4b"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG21678-remaining-public-proof-join-v1/manifest.json",
+        "sha256": "9d7e12b6b4b7522c7a8da2c2adcf3027e375533a3483b0412d2c0ac9f58b44d0"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG21680-remaining-public-proof-join-independent-v1/manifest.json",
+        "sha256": "e260a5eb3c8d39d5cad9da11f1df35301f72a81855d55c4998d5a95d4c35ff87"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40922-a101-remaining-public-receipt-v1/manifest.json",
+        "sha256": "5a6b00d86764118c1ff90da4e2930568516159ee8a09fdc1dd0d2710f7aa6c03"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "WBS66第58版A1候補行と過去の独立確認済み公開候補索引。個別成果・制約は維持。",
+    "endCondition": "ソースpath、WBS owner、二Git tree同じblobの条件を一括で照合。候補一覧と不一致を記録し、証跡なし/合格/適用可を推定しない。",
+    "workScope": "Git tree metadataと承認済みnormalized indexのみ。元実行やprivate/主権読取、成果移植なし。"
+  }
+}
