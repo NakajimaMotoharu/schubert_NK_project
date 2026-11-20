@@ -1,0 +1,153 @@
+{
+  "eventId": "PGPT-20261008-7065",
+  "groupId": "PGPT-WBS66-F03-CONTINUOUS-WINDOW-SAME-RAW-20261121",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T18:48:54.813000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 78,
+      "remainingPercent": 22,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-CONTINUOUS-WINDOW-SAME-RAW-20261121",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "PGPT-WBS66-F03-CONTINUOUS-WINDOW-SAME-RAW-20261121",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2",
+      "WBS-P018-09"
+    ],
+    "source": "122295da39750296e83f68c72676fd05f41112b5",
+    "productionCoreMain": "559f5b5945e82374e0843dcfae11a8d07faef1ea",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG41108-f03-window-state-joint-scope-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.25,
+      "base": 0.65,
+      "high": 1.35
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1548_G08正規manifestJSON形式継続点.json",
+        "sha256": "1736b8a102ea6a6560b64350df9c2a05b260c251f2c1c5418d7539a4267b1075"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG24962-monitor-window-mode-original-whole23-v1/manifest.json",
+        "sha256": "892e69a8f81e4e42dbbbcde61e886f07a200467f7278c9edf88c3c37cedd47c3"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG24964-monitor-window-mode-whole23-independent-v1/manifest.json",
+        "sha256": "14ae42a57b6effbf30d8a2cb1ce2aa63a3fcca77ff26998e7b9b27696ace06ab"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40986-f03-mode-policy-explicit-comparison-v2/manifest.json",
+        "sha256": "12165f5e40f95221a019cfe91fc82e2d3bfab6391416c51184a9e53f69f6163d"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41074-f02-current-alert-batch-maven-v1/manifest.json",
+        "sha256": "2373767cfeaf06ab0138b4ff584901bcded516b4f12067daeee3184df3ca16cb"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41084-p01808-original-exec-strict-after-v1/manifest.json",
+        "sha256": "93071e5684b9d31a96bee70224be18dd6438b923769bef455f8862ade3eb4e0a"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "PG41070の時間窓補助は生の部分測定。元PG24962の全時間窓が現同型。厳密生で不足があれば既値suiteを同runへ接続。",
+    "endCondition": "既23試験を再現せず元execの同byteを照合し、必要な時だけ原8+生成既7。同一execの二対象と正規JAR byte。",
+    "workScope": "純時間差と閉enum、合成JDK/Micrometer。実監視/DB/Unit/Rootを使用しない。",
+    "quotaAfter": {
+      "usedPercent": 78,
+      "remainingPercent": 22,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "5d16cefc4fa255c520e4aa65679b9a806d2c01d8f66b0025ba8c42703c87bb93",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T18:48:54.813000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 78,
+          "remainingPercent": 22,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T18:48:48.988959+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 78,
+      "remainingPercent": 22,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-7064",
+    "attempt": 1,
+    "attemptResult": "PASS_LOCAL_WINDOW_STATE_SAME_EXEC",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/5570_F03監視時間窓と状態factory単一実行結果.md",
+        "sha256": "eb965edb0d6a71be727343fc30410bcca9254318ec76ca14a35e5515ff07a38f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41108-f03-window-state-joint-scope-v1/manifest.json",
+        "sha256": "bb40cbbcabfea4f1e663dc03d682f5f4dc19d05b2b8b49cd6f26204a3402112a"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": "型付き全六・実観測・全451は継続。",
+    "finalProductTests": 15,
+    "finalProductFailures": 0,
+    "suites": 2,
+    "locallyRequalifiedCases": 15,
+    "oldMissingMethods": 2,
+    "oldMissingInstructions": 9,
+    "currentRaw": {
+      "INSTRUCTION": 127,
+      "BRANCH": 14,
+      "LINE": 18,
+      "COMPLEXITY": 14,
+      "METHOD": 7,
+      "CLASS": 2
+    },
+    "originalWholeReplayed": 0,
+    "singleSession": "PG41108"
+  }
+}
