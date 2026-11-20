@@ -104,11 +104,13 @@ public interface FieldCodec {
     if (minimum < 0 || maximum < minimum) {
       throw new IllegalArgumentException("invalid numeric semantic range");
     }
-    long value = 0;
     for (byte current : field) {
       if (current < '0' || current > '9') {
         throw new PermanentProtocolException("numeric field contains a non-digit byte");
       }
+    }
+    long value = 0;
+    for (byte current : field) {
       try {
         value = Math.addExact(Math.multiplyExact(value, 10), current - '0');
       } catch (ArithmeticException exception) {
