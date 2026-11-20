@@ -506,6 +506,18 @@ class ArtifactComparatorTest {
   }
 
   @Test
+  void observationInputContainsExactlyOneDocument() throws Exception {
+    Fixture fixture = fixture("observation-single-document");
+    Path path = fixture.observations();
+    String document = Files.readString(path);
+    Files.writeString(path, document + "\n \t\n");
+    assertTrue(compare(fixture).passed());
+
+    Files.writeString(path, document + "\n{}\n");
+    assertThrows(IOException.class, () -> compare(fixture));
+  }
+
+  @Test
   void rejectsUnknownOutOfScopeBroadWrongOverlappingAndUnusedObservations() throws Exception {
     Fixture fixture = fixture("observation-failures");
     ObjectNode envelope = (ObjectNode) JSON.readTree(fixture.observations().toFile());

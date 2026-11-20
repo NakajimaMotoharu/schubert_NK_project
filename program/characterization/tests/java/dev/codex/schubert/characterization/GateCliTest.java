@@ -172,6 +172,41 @@ class GateCliTest {
   }
 
   @Test
+  void sourceInventoryContainsExactlyOneDocument() throws Exception {
+    Path project = temporaryDirectory.resolve("inventory-project");
+    Path current = temporaryDirectory.resolve("inventory-current");
+    Path java = write(current.resolve("program/app/src/A.java"), "class A {}\n");
+    Path sql = write(current.resolve("program/database/schema.sql"), "schema\n");
+    Path load = write(current.resolve("program/database/load_scenario_data.sql"), "load\n");
+    Path generator =
+        write(current.resolve("program/database/generate_scenario_sql.py"), "generate\n");
+    Path document = write(current.resolve("documents/001.md"), "# document\n");
+    write(current.resolve("data/master/a.bin"), "abc");
+    Path inventory =
+        project.resolve("program/characterization/tests/resources/fixtures/expected.json");
+    writeJson(
+        inventory,
+        Map.of(
+            "sourceFileCount", 4,
+            "sourceAggregateSha256",
+                aggregateBySpecification(current, List.of(java, sql, load, generator)),
+            "documentFileCount", 1,
+            "documentAggregateSha256", aggregateBySpecification(current, List.of(document)),
+            "masterFileCount", 1,
+            "masterBytes", 3));
+    String contents = Files.readString(inventory);
+    Files.writeString(inventory, contents + "\n \t\n");
+    Path valid = temporaryDirectory.resolve("single-inventory.json");
+    GateCli.verifySource(project, current, valid);
+    assertEquals(ORACLE_PASS, JSON.readTree(valid.toFile()).path(ORACLE_STATUS).asText());
+
+    Files.writeString(inventory, contents + "\n{}\n");
+    Path rejected = temporaryDirectory.resolve("no-inventory-report.json");
+    assertThrows(IOException.class, () -> GateCli.verifySource(project, current, rejected));
+    assertFalse(Files.exists(rejected));
+  }
+
+  @Test
   void preflightValidatesFilesPermissionsStorageNetworkAndPorts() throws Exception {
     Path runtime = temporaryDirectory.resolve("runtime-at-threshold");
     PreflightFixture valid = preflightFixture("valid", runtime);
