@@ -44,6 +44,9 @@ public final class WebDbPoolMetricRecorder {
     }
   }
 
+  private static final String DEBUG_MODE = "DEBUG";
+  private static final String STANDARD_MODE = "STANDARD";
+
   private final boolean detailed;
   private final AtomicReference<Optional<Counts>> observedCounts =
       new AtomicReference<>(Optional.empty());
@@ -51,12 +54,10 @@ public final class WebDbPoolMetricRecorder {
   /** One instance owns Web pool metric namespace; registry lifetime remains caller-owned. */
   public WebDbPoolMetricRecorder(MeterRegistry registry, String mode) {
     Objects.requireNonNull(registry, "meter registry");
-    detailed =
-        switch (Objects.requireNonNull(mode, "monitoring mode")) {
-          case "DEBUG" -> true;
-          case "STANDARD" -> false;
-          default -> throw new IllegalArgumentException("CONFIG_INVALID");
-        };
+    Objects.requireNonNull(mode, "monitoring mode");
+    detailed = DEBUG_MODE.equals(mode);
+    if (!detailed && !STANDARD_MODE.equals(mode))
+      throw new IllegalArgumentException("CONFIG_INVALID");
     if (detailed)
       for (var state : State.values())
         Gauge.builder(
