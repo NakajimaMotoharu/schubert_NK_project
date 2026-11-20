@@ -1,0 +1,181 @@
+{
+  "actualExit": 0,
+  "source": "5372bf018acf0efa6dfe451467bf18b2e3fc0780",
+  "testTree": "fb92851ae4198a148b76e7de3e60e69fe8e77272",
+  "startEvent": "PGPT-20261008-6950",
+  "terminalAtUTC": "2026-11-20T16:26:01.220885+00:00",
+  "previous": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40888-f03-current-style-lineage-v1/manifest.json",
+    "sha256": "4ef7e6e62b21b985dc9bb718261961638ab3771e01337b8909af61a22e9e90f6"
+  },
+  "mainCount": 1027,
+  "mainUnchangedCount": 1023,
+  "mainChangedCount": 4,
+  "mainStyleFindings": 0,
+  "mainByModule": {
+    "schubert-nk-api": 283,
+    "schubert-nk-batch": 200,
+    "schubert-nk-bootstrap": 88,
+    "schubert-nk-protocol": 169,
+    "schubert-nk-storage": 25,
+    "schubert-nk-web": 262
+  },
+  "testCount": 1151,
+  "testCheckedCount": 1119,
+  "heldTestCount": 32,
+  "exactChanges": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngineTest.java",
+      "sha256": "20fd64bbd917876f63de65b96c9b1ce9812228809a095ad24cb99763a2d90009",
+      "originalProofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40938-p01809-recovery-per-key-v1/manifest.json",
+          "sha256": "1bb109849a4e69c6a2b873e1eea6534df2ecfaa0ec0b8ae5b1f33b7d4da7b811"
+        }
+      ],
+      "category": "test"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxObservationRepositoryTest.java",
+      "sha256": "a9a157c14fd0d4abc4582c0add1b2f5fbebb969086f1d28f3149c24b384166f9",
+      "originalProofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40954-p00405-outbox-pair-close-v1/manifest.json",
+          "sha256": "4222ed58b6ae5b785044e593584094a123e32f6be93ebcc10f2b8bbd6c5dde6d"
+        }
+      ],
+      "category": "test"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiMetricHttpHandler.java",
+      "sha256": "03d90a8377612a8450264f13eb151f2b605bc5eefaee20158912452d80c1508e",
+      "originalProofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40958-f03-api-metric-exchange-owner-v2/manifest.json",
+          "sha256": "9027d6db9a8facbfdeaa35fff5128645e5803d81c547c4751ee1996c1e5ee686"
+        }
+      ],
+      "category": "main"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricHttpHandlerTest.java",
+      "sha256": "5e7aef1ed9441e0eb26db2229bb70ea77c2d3c7e2ddd68abf74938091d0cdb5b",
+      "originalProofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40958-f03-api-metric-exchange-owner-v2/manifest.json",
+          "sha256": "9027d6db9a8facbfdeaa35fff5128645e5803d81c547c4751ee1996c1e5ee686"
+        }
+      ],
+      "category": "test"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticatedActor.java",
+      "sha256": "c3e1cada9993b4180e513eb2ba314e55862cf9f1bb5157dd7105e1f8425fe29c",
+      "originalProofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40968-p01810-actor-utf8-scalar-boundary-v1/manifest.json",
+          "sha256": "a973fc60a195d337d6864088c44fce879f57cc7baa926f79d5d65f3440c59298"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40976-p00701-login-account-utf8-storage-v1/manifest.json",
+          "sha256": "ead9eca38cd05975034b80d1f5955754e8bfcca0f72f06c9dcf867ad0f019f89"
+        }
+      ],
+      "category": "main"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticatedActorValueContractTest.java",
+      "sha256": "c84d8ac4a5a7093a1ec5da3cf62dbcd77fa01fa3b6934b59aff7c7956ef05c4c",
+      "originalProofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40968-p01810-actor-utf8-scalar-boundary-v1/manifest.json",
+          "sha256": "a973fc60a195d337d6864088c44fce879f57cc7baa926f79d5d65f3440c59298"
+        }
+      ],
+      "category": "test"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAttemptRepository.java",
+      "sha256": "15d5a5a1ffe4de19519c49a83540bf2bdf942ef7fd523eb8fe1472c147f4950e",
+      "originalProofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40974-f03-borrowed-closed-role-status-branches-v2/manifest.json",
+          "sha256": "78824f818d57cc0c980c60a3edfbf5fd11c374872d2dffbf92dac335ac1f1c70"
+        }
+      ],
+      "category": "main"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginAttemptPortTest.java",
+      "sha256": "2596df8f7c7d85a450cbdb0b8c970f530f896012fb60b6a45807b187d3177926",
+      "originalProofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40974-f03-borrowed-closed-role-status-branches-v2/manifest.json",
+          "sha256": "78824f818d57cc0c980c60a3edfbf5fd11c374872d2dffbf92dac335ac1f1c70"
+        }
+      ],
+      "category": "test"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAccount.java",
+      "sha256": "cf77e202f571c7f93a0adae58064b79134ad51f0cc0cb17bfeb599491196b599",
+      "originalProofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40976-p00701-login-account-utf8-storage-v1/manifest.json",
+          "sha256": "ead9eca38cd05975034b80d1f5955754e8bfcca0f72f06c9dcf867ad0f019f89"
+        }
+      ],
+      "category": "main"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginValueContractTest.java",
+      "sha256": "615a06f003681b5e8942f83302cf578721197552673ee8d4b959c97310c0bcf3",
+      "originalProofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40976-p00701-login-account-utf8-storage-v1/manifest.json",
+          "sha256": "ead9eca38cd05975034b80d1f5955754e8bfcca0f72f06c9dcf867ad0f019f89"
+        }
+      ],
+      "category": "test"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryPureJdbcTest.java",
+      "sha256": "9985c4ea628dc9ac8178f680882383bf15cb4a74798d1c70b29c01b62dbd40eb",
+      "originalProofs": [
+        {
+          "path": "evidence/01_PT/004_NK-DAT-001/evidence/PG40916-f03-run-reference-test-style-v1/manifest.json",
+          "sha256": "795f26a51862805f98397ea4eb17fd82bfa56096359899ca17575fdcdde3258d"
+        }
+      ],
+      "category": "test"
+    }
+  ],
+  "checkstyleSource": {
+    "path": "tools/quality/static/checkstyle.xml",
+    "sha256": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "toolPriorFailures": [
+    {
+      "bug": "BUG-3437",
+      "attempt": 1,
+      "exitCode": 1,
+      "analyzerExecutions": 0,
+      "source": "571102a0ec",
+      "reason": "duplicate style proof"
+    },
+    {
+      "bug": "BUG-3437",
+      "attempt": 2,
+      "exitCode": 1,
+      "analyzerExecutions": 0,
+      "reason": "command referenced a supplementary source without a source pin"
+    }
+  ],
+  "heldFileContentsRead": 0,
+  "formatterExecutions": 0,
+  "checkstyleExecutions": 0,
+  "productTestsRerun": 0,
+  "wholeF03": false,
+  "whole451": false,
+  "formalDelta": 0
+}

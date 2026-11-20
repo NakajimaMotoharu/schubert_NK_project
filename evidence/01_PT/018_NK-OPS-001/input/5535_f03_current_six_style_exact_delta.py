@@ -62,7 +62,11 @@ def main():
     start = json.loads(plan.read_bytes())
     scope = start["values"]
     core, head = scope["productionCoreMain"], scope["source"]
-    assert git("rev-parse", "HEAD", "origin/dev-foundation").decode().splitlines() == [head, head]
+    repo_head, remote = git("rev-parse", "HEAD", "origin/dev-foundation").decode().splitlines()
+    assert git("merge-base", head, repo_head).decode().strip() == head
+    assert git("merge-base", head, remote).decode().strip() == head
+    assert not git("diff", "--name-only", head, repo_head, "--", "src", "pom.xml", ".mvn",
+                   "tools/quality/static/checkstyle.xml")
     references = scope["oracleReferences"]
     assert all(pin(Path(row["path"])) == row for row in references)
     previous = json.loads(Path(references[1]["path"]).read_bytes())
@@ -83,11 +87,14 @@ def main():
     for reference in references[2:-1]:
         pins, inspected = load_style_record(reference)
         for name in sorted(changed & inspected):
-            assert name not in matched
             commit = core if name in main_delta else head
             expected = with_digest(name, git("show", f"{commit}:{name}"))
-            assert pins[name] == expected and pin(Path(name)) == expected
-            matched[name] = dict(**expected, originalProof=reference, category="main" if name in main_delta else "test")
+            assert pin(Path(name)) == expected
+            if pins.get(name) != expected:
+                continue
+            item = matched.setdefault(name, dict(**expected, originalProofs=[],
+                                                 category="main" if name in main_delta else "test"))
+            item["originalProofs"].append(reference)
     assert matched.keys() == changed
     assert len(current["main"]) == previous["currentMain"]["total"] == 1027
     assert len(current["test"]) == previous["currentTest"]["total"] == 1151
@@ -99,13 +106,18 @@ def main():
         module = name.split("/", 2)[1]
         counts[module] = counts.get(module, 0) + 1
     assert len(counts) == 6
-    ev = Path("evidence/01_PT/018_NK-OPS-001/evidence") / scope["run"]
+    ev = Path("evidence/01_PT/018_NK-OPS-001/evidence") / (scope["run"].removesuffix("-v1") + "-v3")
     ev.mkdir()
     record = dict(actualExit=0, source=core, testTree=head, startEvent=start["eventId"],
                   terminalAtUTC=datetime.now(timezone.utc).isoformat(), previous=references[1],
                   mainCount=1027, mainUnchangedCount=1023, mainChangedCount=4, mainStyleFindings=0,
                   mainByModule=counts, testCount=1151, testCheckedCount=eligible, heldTestCount=held,
                   exactChanges=list(matched.values()), checkstyleSource=references[-1],
+                  toolPriorFailures=[
+                      dict(bug="BUG-3437", attempt=1, exitCode=1, analyzerExecutions=0,
+                           source="571102a0ec", reason="duplicate style proof"),
+                      dict(bug="BUG-3437", attempt=2, exitCode=1, analyzerExecutions=0,
+                           reason="command referenced a supplementary source without a source pin")],
                   heldFileContentsRead=0, formatterExecutions=0, checkstyleExecutions=0,
                   productTestsRerun=0, wholeF03=False, whole451=False, formalDelta=0)
     (ev / "manifest.json").write_text(json.dumps(record, ensure_ascii=False, indent=2) + "\n")
