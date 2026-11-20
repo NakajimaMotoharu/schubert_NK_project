@@ -6,11 +6,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.util.Arrays;
 import java.util.UUID;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
 /** SSC104/SS341/342/343: independent fixed ASCII vectors, not deletion authority. */
@@ -165,11 +168,16 @@ final class CleanupWorkerRequestTest {
   void creq007ConcurrentIndependentBuffersAndParserLevelReplay() throws Exception {
     byte[] first = GOLDEN.getBytes(StandardCharsets.US_ASCII);
     byte[] second = GOLDEN.getBytes(StandardCharsets.US_ASCII);
-    try (var workers = java.util.concurrent.Executors.newVirtualThreadPerTaskExecutor()) {
+    var workers = Executors.newVirtualThreadPerTaskExecutor();
+    try {
       var a = workers.submit(() -> CleanupWorkerRequest.consume(first));
       var b = workers.submit(() -> CleanupWorkerRequest.consume(second));
-      assertEquals(new CleanupWorkerRequest(RUN, ACTIVATION, CUTOFF, DIGEST), a.get());
-      assertEquals(a.get(), b.get());
+      var firstResult = a.get(5, TimeUnit.SECONDS);
+      assertEquals(new CleanupWorkerRequest(RUN, ACTIVATION, CUTOFF, DIGEST), firstResult);
+      assertEquals(firstResult, b.get(5, TimeUnit.SECONDS));
+    } finally {
+      workers.shutdownNow();
+      assertTrue(workers.awaitTermination(5, TimeUnit.SECONDS));
     }
     assertArrayEquals(new byte[first.length], first);
     assertArrayEquals(new byte[second.length], second);
