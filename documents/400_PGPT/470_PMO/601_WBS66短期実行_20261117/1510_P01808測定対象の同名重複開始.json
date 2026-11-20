@@ -1,0 +1,68 @@
+{
+  "eventId": "PGPT-20261008-7025",
+  "groupId": "WBS66-P01808-PHYSICAL-NAME-UNIQUENESS",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T17:49:25.473000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 76,
+      "remainingPercent": 24,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66-P01808-PHYSICAL-NAME-UNIQUENESS",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "WBS66-P01808-PHYSICAL-NAME-UNIQUENESS",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P018-08.03"
+    ],
+    "managementWorkIds": [
+      "WBS-P018-08.03/2",
+      "WBS-F03/2-2"
+    ],
+    "source": "29ac3066778be2417da74cae15654b67c5220b9f",
+    "productionCoreMain": "24da3b252f65f0ea56736cb791cd13165bf62c24",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG41050-p01808-raw-duplicate-class-red-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.22,
+      "base": 0.5,
+      "high": 1.15
+    },
+    "groupCapPp": 2.0,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1508_F04直接OSと旧VM個別環境条件継続点.json",
+        "sha256": "d07a8887b3520dd40e89abb654ca6887f75f1d159cc53c7b3ff314e78ae29ce0"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40268-p01808-mixed-physical-crc-v1/manifest.json",
+        "sha256": "9b57dde3b4de179855b1219873600c03cfffd2d299c3b6f4df098fe19ec02422"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40264-p01808-offline-class-selection-scope-v1/manifest.json",
+        "sha256": "8f0c5300e03dad1d151eed294988c2cf66ab9b7d10580cd56a2e60a6a7a31685"
+      },
+      {
+        "path": "tools/quality/jacoco/UnfilteredCodeMeasurement.java",
+        "sha256": "fd632f24994b08218f6554133dc2e60db5b8e8647064af250d8c3aae0219528f"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "SS354の無除外・物理同一実測、既mixed CRC fixtureと単一合成streamのみ",
+    "endCondition": "同一機械名を再投入しても二重集計できない。既正例、後続CRC不一致、同名異byteを独立確認",
+    "workScope": "合成classと合成exec、公開品質工具だけ。実native/Root/実製品qualやscope変更は含めない"
+  }
+}
