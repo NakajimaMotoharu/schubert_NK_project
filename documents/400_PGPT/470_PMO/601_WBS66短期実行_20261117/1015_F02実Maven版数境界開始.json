@@ -1,0 +1,67 @@
+{
+  "eventId": "PGPT-20261008-6534",
+  "groupId": "PGPT-WBS66-F02-REAL-MAVEN-VERSION-BOUNDARY-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T04:02:55.594000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 62,
+      "remainingPercent": 38,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F02-REAL-MAVEN-VERSION-BOUNDARY-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F02-REAL-MAVEN-VERSION-BOUNDARY-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a"
+    ],
+    "source": "2868a47cb258aa912e835d48d418db9d34d0f447",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40642-f02-maven-lower-bound-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.25,
+      "base": 0.7,
+      "high": 1.35
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1014_C07キュー大分母境界単体継続点.json",
+        "sha256": "180c8846ae2b943c75dd3b36285dfab93cf40013258d5d457ba59ac28d2e9cc9"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40602-f03-current-protocol-maven-independent-v1/manifest.json",
+        "sha256": "94b3c550c89f0903370ef0f2544e011cf74341ae309c3eff880843e3942cc6f7"
+      },
+      {
+        "path": "pom.xml",
+        "sha256": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38"
+      },
+      {
+        "path": ".mvn/wrapper/maven-wrapper.properties",
+        "sha256": "e67de487071199117b7c9808dca5f56c73a44b656c925140ec68761947bdd384"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "WBS66実行行9。F02/criterion/contract、SYS系のビルドtoolchain。現候補Root POMと既3.9.12成功を固定。",
+    "endCondition": "採用下限3.9.12は保存成功を参照し、直前版3.9.11の実Mavenが同POMをoffline validateで配備・コンパイル前に拒否する元codeとruleを独立照合。",
+    "workScope": "公式3.9.11は合成負条件のため共有tmpfsへ取得。正規POMの非再帰validateのみ。六module build/PT、配備、実サービス、QA-056/HOLD対象を実施しない。"
+  }
+}

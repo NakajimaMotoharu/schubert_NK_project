@@ -1,0 +1,142 @@
+{
+  "eventId": "PGPT-20261008-6535",
+  "groupId": "PGPT-WBS66-F02-REAL-MAVEN-VERSION-BOUNDARY-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T04:04:56.185000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 62,
+      "remainingPercent": 38,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F02-REAL-MAVEN-VERSION-BOUNDARY-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F02-REAL-MAVEN-VERSION-BOUNDARY-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a"
+    ],
+    "source": "2868a47cb258aa912e835d48d418db9d34d0f447",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40642-f02-maven-lower-bound-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.25,
+      "base": 0.7,
+      "high": 1.35
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1014_C07キュー大分母境界単体継続点.json",
+        "sha256": "180c8846ae2b943c75dd3b36285dfab93cf40013258d5d457ba59ac28d2e9cc9"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40602-f03-current-protocol-maven-independent-v1/manifest.json",
+        "sha256": "94b3c550c89f0903370ef0f2544e011cf74341ae309c3eff880843e3942cc6f7"
+      },
+      {
+        "path": "pom.xml",
+        "sha256": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38"
+      },
+      {
+        "path": ".mvn/wrapper/maven-wrapper.properties",
+        "sha256": "e67de487071199117b7c9808dca5f56c73a44b656c925140ec68761947bdd384"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "WBS66実行行9。F02/criterion/contract、SYS系のビルドtoolchain。現候補Root POMと既3.9.12成功を固定。",
+    "endCondition": "採用下限3.9.12は保存成功を参照し、直前版3.9.11の実Mavenが同POMをoffline validateで配備・コンパイル前に拒否する元codeとruleを独立照合。",
+    "workScope": "公式3.9.11は合成負条件のため共有tmpfsへ取得。正規POMの非再帰validateのみ。六module build/PT、配備、実サービス、QA-056/HOLD対象を実施しない。",
+    "quotaAfter": {
+      "usedPercent": 62,
+      "remainingPercent": 38,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "aac0a6b208eccaace07c3c605ea26a3643899cd57081a5fb8cbfcd748b474f41",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T04:04:56.185000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 62,
+          "remainingPercent": 38,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T04:04:47.227464+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 62,
+      "remainingPercent": 38,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6534",
+    "attempt": 1,
+    "attemptResult": "限定PASS。期待されたEnforcer拒否を実Maven 3.9.11で一回実行。採用版3.9.12の同POM・同JDK成功を既存証拠から照合。",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40642-f02-maven-lower-bound-v1/terminal.json",
+        "sha256": "83253d6c368c67715d69b130e247b8d57b585750062d0c972317ee6b65121aeb"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40644-f02-maven-lower-bound-independent-v1/manifest.json",
+        "sha256": "ca115d8966105da96020cdd74aa04ed5b068ff07242108b237abf9d09681df31"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/4707_F02実Maven下限の単体仕様と結果.md",
+        "sha256": "1a31e55e974a8e576e1ad8ea37ed21672384be525e33c8d16fd5fdcad4255b7c"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "F02 六製品の正規buildと依存境界の当候補証拠",
+      "Storage JDBC一辺の段階移管、13要求と同候補451・終了依存"
+    ],
+    "executedToolCases": 1,
+    "reusedPositiveCases": 1,
+    "preparationFailures": 0,
+    "testId": "PT-F02-MAVEN-001",
+    "observedMavenExit": 1,
+    "expectedMavenExit": 1,
+    "productBuildLaunched": false
+  }
+}
