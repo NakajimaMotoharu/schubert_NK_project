@@ -1,0 +1,179 @@
+{
+  "actualExit": 0,
+  "run": "PG40992-f03-web-pool-retained-raw-v1",
+  "source": "af6db98d62e83ed4dd19d623034373365027dce3",
+  "historicalSource": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "startEvent": "PGPT-20261008-6965",
+  "startedAtUTC": "2026-11-20T16:39:57.071773+00:00",
+  "terminalAtUTC": "2026-11-20T16:39:57.140895+00:00",
+  "rawCommand": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+    "-cp",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40966-f03-current-monitor-policy-engine-unit-scope-v1/analyzer:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+    "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15060-web-pool-context-fifty-six-pt-v1/jacoco.exec",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15062-web-pool-context-fifty-six-post-v1/component/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15062-web-pool-context-fifty-six-post-v1/component/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder$Counts.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15062-web-pool-context-fifty-six-post-v1/component/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder$State.class"
+  ],
+  "productionSource": {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder.java",
+    "sha256": "059f2723ecf118084c7b192d28f5d86a9e6e91e4769195efaec7300b54891a24"
+  },
+  "physical": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15062-web-pool-context-fifty-six-post-v1/component/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder.class",
+      "sha256": "c23ffa46975777421369ea5df2aa09fbdf36b4a905d93a0ebc59ab06b400248b"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15062-web-pool-context-fifty-six-post-v1/component/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder$Counts.class",
+      "sha256": "08bdc4bb9936469f62ae641bc6110dd685015c6027d89eab524529ef44e52ff3"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15062-web-pool-context-fifty-six-post-v1/component/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder$State.class",
+      "sha256": "b29aa6a4fe33b1358769f6416940f16ff7ea9c338c261a1386b62971910e12de"
+    }
+  ],
+  "originalExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15060-web-pool-context-fifty-six-pt-v1/jacoco.exec",
+    "sha256": "b87c2164512cdcadbb040fbd2b747de85913d5ea03855555973b60743f4eb793"
+  },
+  "originalSession": "PG15060-ORIGINAL-WEB-POOL-CONTEXT56",
+  "previousEvidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40966-f03-current-monitor-policy-engine-unit-scope-v1/manifest.json",
+      "sha256": "26e4613c706c7cf90d16bf9c649192f528c36b81250da55a4ea1a1d62f87acf3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG15060-web-pool-context-fifty-six-pt-v1/manifest.json",
+      "sha256": "58b316ae27bde38797006d7e4a2a187a2abab3bd0f7c9a5f7dcea3530430c317"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG15062-web-pool-context-fifty-six-post-v1/manifest.json",
+      "sha256": "3bfa2745f68498e84cf99840121adfd628c891916d05a28b0278008fafd22b88"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40990-f03-mode-horizontal-recorded-raw-v1/manifest.json",
+      "sha256": "795219dd09a543b21580ccc2d9bdc2cb236147cfca0edfd930436eade4ba9b73"
+    }
+  ],
+  "originalTestCount": 56,
+  "originalFiltered": {
+    "BRANCH": {
+      "covered": 27,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 3,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 45,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 13,
+      "missed": 0
+    }
+  },
+  "actual": {
+    "dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder": {
+      "crc64": "04a83c51d6fe5459",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 160
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 18
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 27
+        },
+        "COMPLEXITY": {
+          "missed": 2,
+          "covered": 17
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 8
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder$Counts": {
+      "crc64": "a5d60413b34bf2c9",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 83
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 14
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 10
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 16
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 9
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder$State": {
+      "crc64": "8013827b7743a951",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 70
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 9
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 6
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 6
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    }
+  },
+  "rawOutput": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40992-f03-web-pool-retained-raw-v1/unfiltered.tsv",
+    "sha256": "585b7a4336b2234ba2c076ae07627a3d1893c8238e1ee9e24c0b348d3e726ba0"
+  },
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "productTestsReexecuted": 0,
+  "execStreamsCombined": 0,
+  "nativeOperations": 0,
+  "whole451": false,
+  "wholeF03": false,
+  "formalDelta": 0
+}
