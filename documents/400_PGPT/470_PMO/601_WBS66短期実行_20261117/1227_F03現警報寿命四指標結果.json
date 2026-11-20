@@ -1,0 +1,219 @@
+{
+  "eventId": "PGPT-20261008-6744",
+  "groupId": "WBS66_F03_CURRENT_ALERT_LIFECYCLE_RAW",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T11:58:10.907000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 68,
+      "remainingPercent": 32,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66_F03_CURRENT_ALERT_LIFECYCLE_RAW",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "WBS66_F03_CURRENT_ALERT_LIFECYCLE_RAW",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-P018-09/2",
+      "WBS-F03/2-1"
+    ],
+    "source": "40094f30c2258243fe0c9c6f5b5f5d2652b88ec1",
+    "productionCoreMain": "da20ad7753279ae4e8017593866502d3341ec0e5",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40828-f03-alert-lifecycle-single-coverage-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.35,
+      "base": 0.9,
+      "high": 2
+    },
+    "groupCapPp": 10,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1225_P01810REQUEST正規化と短期継続点.json",
+        "sha256": "482daa7742c14cc10248c62df3a8961580bf86f4462e08020d7ef9fabf7c1cb8"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40822-c07-alert-gap-status-current-v1/manifest.json",
+        "sha256": "4578bf74bda06285d7a13e30917c03992512b1fe270f3a269f98b8beda460df4"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2586_警報閾値・寿命・継続元whole三十六_現source通常PT仕様.md",
+        "sha256": "47e50668fcd48a0b31b4f187134c029b22df76c30a398fbece5fad707b8daf28"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/4741_警報発火待機と正常復旧の分離単体仕様.md",
+        "sha256": "cc02fb68c8a7ec7a9429a6738a1e4c754f1f4073edceae8278a67ce544f483b2"
+      },
+      {
+        "path": "tools/quality/jacoco/UnfilteredCodeMeasurement.java",
+        "sha256": "fd632f24994b08218f6554133dc2e60db5b8e8647064af250d8c3aae0219528f"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "BUG3415新window接続のnull・逆時刻・初回pendingと固定enum名が直接未照合。分割局所execを合算できない。",
+    "endCondition": "当候補の新3件と同一execに必要なAlertLifecycle12/Continuity2、固定6物理で既定・無filter四指標とCRCを取得。未達は明示。",
+    "workScope": "JDK値・固定clockのみ。元単一scopeのcoverageを得るため以外の再演なし。実native・全JAR検査・実環境なし。",
+    "quotaAfter": {
+      "usedPercent": 68,
+      "remainingPercent": 32,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "2b2720361ddcad424f46c0a39f1f2188daf53ea613b9d059dbb6414563560265",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T11:58:10.907000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 68,
+          "remainingPercent": 32,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T11:58:02.498146+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 68,
+      "remainingPercent": 32,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6743",
+    "attempt": 1,
+    "attemptResult": "PASS_TESTS_DEFAULT_FOUR100_RAW_GAP",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 3,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40828-f03-alert-lifecycle-single-coverage-v1/manifest.json",
+        "sha256": "8fc16d8edd9e0805d2b7ffd716cb8656fd166bfcb96717fc7b5c6a777e1c8dc7"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40828-f03-alert-lifecycle-single-coverage-v1/coverage.xml",
+        "sha256": "cbeaeffdc8bd5913f1b60cb20f7dd34dd3e9d119c4946908ea72abcdde02aca4"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40828-f03-alert-lifecycle-single-coverage-v1/unfiltered.tsv",
+        "sha256": "bf5bcbb4f2bef4f403480c271981eba381bc510a4f0aaec9e7c8a61db2165971"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5449_f03_alert_lifecycle_single_coverage.py",
+        "sha256": "311cfe1015bdc78aaedf68d73b9fdb9b5529916f8f62e5318c60be6da5154ab6"
+      },
+      {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertWindowedInputContractTest.java",
+        "sha256": "3082160bac6b33b50bef6d63b2981424cb3ab775a44abc2a0c940cd22a7af666"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/4743_警報待機観測境界と四指標限定仕様.md",
+        "sha256": "e89e64368d6c188c703f7c4d23d88db57e1195d3e8e4f64614627ebed677bf2a"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "Unfiltered AlertLifecycle snapshot line gap",
+      "ObservationContext raw support gaps",
+      "All six F03 and 451",
+      "C07 actual proof"
+    ],
+    "executed": 17,
+    "passed": 17,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "notRun": 0,
+    "firstProductJunitAttempt": 17,
+    "necessarySameExecPriorTestIds": 14,
+    "newUniqueCurrentCases": 3,
+    "currentDistinctSelectedCases": 189,
+    "sourceDefaultCoverage": {
+      "INSTRUCTION": {
+        "covered": 518,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 38,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 104,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 39,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 20,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 6,
+        "missed": 0
+      }
+    },
+    "primaryRawCounters": {
+      "LINE": {
+        "covered": 106,
+        "missed": 1
+      },
+      "METHOD": {
+        "covered": 36,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 6,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 38,
+        "missed": 0
+      },
+      "INSTRUCTION": {
+        "covered": 688,
+        "missed": 5
+      }
+    },
+    "runnerAuthoringSyntaxFailures": 1,
+    "rawCrcBoundPhysical": 6,
+    "oldExecMerged": false,
+    "currentTestCheckstyleConfirmed": 1119,
+    "currentTestSources": 1151,
+    "heldTestSources": 32,
+    "operations": 0
+  }
+}

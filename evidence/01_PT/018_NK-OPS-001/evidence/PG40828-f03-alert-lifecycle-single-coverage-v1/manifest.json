@@ -1,0 +1,658 @@
+{
+  "run": "PG40828-f03-alert-lifecycle-single-coverage-v1",
+  "startEvent": "PGPT-20261008-6743",
+  "source": "40094f30c2258243fe0c9c6f5b5f5d2652b88ec1",
+  "core": "da20ad7753279ae4e8017593866502d3341ec0e5",
+  "actualExit": 0,
+  "startedAtUTC": "2026-11-20T11:57:57.765982+00:00",
+  "terminalAtUTC": "2026-11-20T11:58:02.498146+00:00",
+  "os": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+  "jdk": "25.0.4",
+  "tools": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar",
+      "sha256": "fb5b0036a0899ea97edfa0fc2c7985b55f3f7c5695028163e5e60d4f3cf6075d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+      "sha256": "d2b74b20b415163c1f53261e7c5ef4445b788327094208ff821e0c2baf9bc8f1"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+      "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+      "sha256": "25b400f003089d23cc5320cdaf1a16cabee19b8aa3434d0ff021b3d9f42154b4"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+      "sha256": "754e218ab1fcabb1e1c5f8530e9d3aa37636806c22987bb279dd907a6ee749b2"
+    },
+    {
+      "path": "tools/quality/static/checkstyle.xml",
+      "sha256": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+    }
+  ],
+  "sources": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java",
+      "sha256": "ad79f4efc8b3cb9927251473f6325ac18e4b316fe2e6205e4af0f52fb6962a21"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ObservationContext.java",
+      "sha256": "5685db8a219acb224d463f9372c403ad9dfe36ac1d0c6a0fad308d377454cb26"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/package-info.java",
+      "sha256": "009823dd0566a5c0e2a7f06af4b540c122629bec50003bc1585d5303c488d924"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+      "sha256": "a07de65f75dc2f617e1250f6db15ac4c213bbf25ba0079bf55e975d46e615ccf"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertContinuityTest.java",
+      "sha256": "07b790376ed5c47504e3a6be9e6fbd011c0575f827456f804b91fbbca4ec2811"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertWindowedInputContractTest.java",
+      "sha256": "3082160bac6b33b50bef6d63b2981424cb3ab775a44abc2a0c940cd22a7af666"
+    }
+  ],
+  "fixtureSpec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/4743_警報待機観測境界と四指標限定仕様.md",
+    "sha256": "e89e64368d6c188c703f7c4d23d88db57e1195d3e8e4f64614627ebed677bf2a"
+  },
+  "rawToolReceipt": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31432-generated-code-supplemental-tool-v1/compile.json",
+    "sha256": "c8e7033722c9d00ff3d618bab1c6ab1bde8ac793b4f9e4d2a478db95a0d17401"
+  },
+  "compileClassNames": [
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance.class",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition.class",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event.class",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service.class",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity.class",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.class",
+    "dev/codex/schubert/nk/batch/monitoring/ObservationContext.class",
+    "dev/codex/schubert/nk/batch/monitoring/package-info.class"
+  ],
+  "steps": {
+    "format": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertContinuityTest.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertWindowedInputContractTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "checkstyle": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "-o",
+        "/dev/shm/pg40828-a3bwbzmt/checkstyle.xml",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertContinuityTest.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertWindowedInputContractTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "mainCompile": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "-d",
+        "/dev/shm/pg40828-a3bwbzmt/product",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ObservationContext.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/package-info.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "testCompile": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/dev/shm/pg40828-a3bwbzmt/product:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "-d",
+        "/dev/shm/pg40828-a3bwbzmt/fixture",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertContinuityTest.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertWindowedInputContractTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "test": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/dev/shm/pg40828-a3bwbzmt/selected.exec,append=false,sessionid=PG40828",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--disable-ansi-colors",
+        "--class-path",
+        "/dev/shm/pg40828-a3bwbzmt/product:/dev/shm/pg40828-a3bwbzmt/fixture:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "--select-class",
+        "dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest",
+        "--select-class",
+        "dev.codex.schubert.nk.batch.monitoring.AlertContinuityTest",
+        "--select-class",
+        "dev.codex.schubert.nk.batch.monitoring.AlertWindowedInputContractTest",
+        "--reports-dir",
+        "/dev/shm/pg40828-a3bwbzmt/test",
+        "--fail-if-no-tests"
+      ],
+      "exit": 0,
+      "stdoutSha256": "f120ec84af4fc0b1ea332a17c6b0ec81f5b40a33d357a2a462d4d32295f7661e",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "xmlSha256": "642141c3a5e96c33b25b758f224e0ef63f31274a54a3a497f2c86868f177fb7b"
+    },
+    "selectedCoverage": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/dev/shm/pg40828-a3bwbzmt/selected.exec",
+        "--classfiles",
+        "/dev/shm/pg40828-a3bwbzmt/product",
+        "--xml",
+        "/dev/shm/pg40828-a3bwbzmt/coverage.xml"
+      ],
+      "exit": 0,
+      "stdoutSha256": "ef2542227d19a0e259ae44a70e127de2b6ad40dcb1f3e0302a642b9894baa7a2",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "xmlSha256": "cbeaeffdc8bd5913f1b60cb20f7dd34dd3e9d119c4946908ea72abcdde02aca4"
+    },
+    "rawCompile": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "-d",
+        "/dev/shm/pg40828-a3bwbzmt/raw",
+        "/dev/shm/pg40828-a3bwbzmt/UnfilteredCodeMeasurement.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "rawMeasurement": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/dev/shm/pg40828-a3bwbzmt/raw:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+        "/dev/shm/pg40828-a3bwbzmt/selected.exec",
+        "/dev/shm/pg40828-a3bwbzmt/product/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance.class",
+        "/dev/shm/pg40828-a3bwbzmt/product/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition.class",
+        "/dev/shm/pg40828-a3bwbzmt/product/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event.class",
+        "/dev/shm/pg40828-a3bwbzmt/product/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service.class",
+        "/dev/shm/pg40828-a3bwbzmt/product/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity.class",
+        "/dev/shm/pg40828-a3bwbzmt/product/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.class",
+        "/dev/shm/pg40828-a3bwbzmt/product/dev/codex/schubert/nk/batch/monitoring/ObservationContext.class",
+        "/dev/shm/pg40828-a3bwbzmt/product/dev/codex/schubert/nk/batch/monitoring/package-info.class"
+      ],
+      "exit": 0,
+      "stdoutSha256": "bf5bcbb4f2bef4f403480c271981eba381bc510a4f0aaec9e7c8a61db2165971",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "cases": [
+    {
+      "testId": "AlertLifecycleTest.alert010AllClosedConditionServiceIdentities()",
+      "method": "alert010AllClosedConditionServiceIdentities()",
+      "owner": "AlertLifecycleTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "AlertLifecycleTest.alert008WallClockJumpDoesNotShortenRecoveryOrOverflow()",
+      "method": "alert008WallClockJumpDoesNotShortenRecoveryOrOverflow()",
+      "owner": "AlertLifecycleTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "AlertLifecycleTest.alert002DedupEscalationAndNoAutomaticDowngrade()",
+      "method": "alert002DedupEscalationAndNoAutomaticDowngrade()",
+      "owner": "AlertLifecycleTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "AlertLifecycleTest.alert007NullAndInvalidElapsedLeaveStateUnchanged()",
+      "method": "alert007NullAndInvalidElapsedLeaveStateUnchanged()",
+      "owner": "AlertLifecycleTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "PT-TIMED-RECOVERY-012",
+      "method": "invalidPendingObservationCannotResetAnExistingRecovery()",
+      "owner": "AlertWindowedInputContractTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "AlertLifecycleTest.alert005AnyViolationRestartsContinuousNormalPeriod()",
+      "method": "alert005AnyViolationRestartsContinuousNormalPeriod()",
+      "owner": "AlertLifecycleTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "PT-TIMED-RECOVERY-013",
+      "method": "diagnosticNamesRoundTripThroughTheClosedAlertVocabulary()",
+      "owner": "AlertWindowedInputContractTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "AlertContinuityTest.alertContinuity002WarningAndCriticalRecoveryCannotBridgeGap()",
+      "method": "alertContinuity002WarningAndCriticalRecoveryCannotBridgeGap()",
+      "owner": "AlertContinuityTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "AlertLifecycleTest.alert006ClosedEventRetiredAndNewViolationStartsFresh()",
+      "method": "alert006ClosedEventRetiredAndNewViolationStartsFresh()",
+      "owner": "AlertLifecycleTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "AlertLifecycleTest.alert009ConcurrentSameTickCountsAndPrivateMonitor()",
+      "method": "alert009ConcurrentSameTickCountsAndPrivateMonitor()",
+      "owner": "AlertLifecycleTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "AlertLifecycleTest.protectedAlert001AllKeysHonorNoAutomaticCloseDespiteConfirmedCause()",
+      "method": "protectedAlert001AllKeysHonorNoAutomaticCloseDespiteConfirmedCause()",
+      "owner": "AlertLifecycleTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "AlertLifecycleTest.alert001InitialNormalAndFirstWarningIdentity()",
+      "method": "alert001InitialNormalAndFirstWarningIdentity()",
+      "owner": "AlertLifecycleTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "AlertLifecycleTest.alert003WarningFiveMinuteExactBoundary()",
+      "method": "alert003WarningFiveMinuteExactBoundary()",
+      "owner": "AlertLifecycleTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "AlertLifecycleTest.protectedAlert002ConcurrentNormalSamplesCannotRetireOrChangeProtectedEvent()",
+      "method": "protectedAlert002ConcurrentNormalSamplesCannotRetireOrChangeProtectedEvent()",
+      "owner": "AlertLifecycleTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "AlertLifecycleTest.alert004CriticalNeedsTenMinutesAndCauseConfirmation()",
+      "method": "alert004CriticalNeedsTenMinutesAndCauseConfirmation()",
+      "owner": "AlertLifecycleTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "PT-TIMED-RECOVERY-011",
+      "method": "pendingBeforeFirstTriggerDoesNotCreateAnAlert()",
+      "owner": "AlertWindowedInputContractTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "AlertContinuityTest.alertContinuity001InvalidInterruptionHasNoStateChange()",
+      "method": "alertContinuity001InvalidInterruptionHasNoStateChange()",
+      "owner": "AlertContinuityTest",
+      "outcome": "passed"
+    }
+  ],
+  "expectation": "Fixed pending-to-warning times, state-preserving rejection, closed diagnostic vocabulary, plus unchanged lifecycle/continuity oracles in one execution.",
+  "passed": 17,
+  "notRun": 0,
+  "coverage": {
+    "INSTRUCTION": {
+      "covered": 545,
+      "missed": 5
+    },
+    "BRANCH": {
+      "covered": 39,
+      "missed": 1
+    },
+    "LINE": {
+      "covered": 110,
+      "missed": 0
+    },
+    "COMPLEXITY": {
+      "covered": 40,
+      "missed": 1
+    },
+    "METHOD": {
+      "covered": 21,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 7,
+      "missed": 0
+    }
+  },
+  "rawProductCoverage": null,
+  "primarySourceDefaultCoverage": {
+    "INSTRUCTION": {
+      "covered": 518,
+      "missed": 0
+    },
+    "BRANCH": {
+      "covered": 38,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 104,
+      "missed": 0
+    },
+    "COMPLEXITY": {
+      "covered": 39,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 20,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 6,
+      "missed": 0
+    }
+  },
+  "selectedRaw": {
+    "primary": {
+      "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance": {
+        "crc64": "93760117468cdc3d",
+        "execDataMatched": true,
+        "counters": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 40
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 3
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 5
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 5
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        }
+      },
+      "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition": {
+        "crc64": "d0e5072de1f5df7a",
+        "execDataMatched": true,
+        "counters": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 140
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 13
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 5
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 5
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        }
+      },
+      "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event": {
+        "crc64": "37ffe40c0ab54467",
+        "execDataMatched": true,
+        "counters": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 45
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 16
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 8
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 8
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        }
+      },
+      "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service": {
+        "crc64": "6e749e6167cd5860",
+        "execDataMatched": true,
+        "counters": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 80
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 7
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 5
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 5
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        }
+      },
+      "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity": {
+        "crc64": "c764319c1a2dc358",
+        "execDataMatched": true,
+        "counters": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 50
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 4
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 5
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 5
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        }
+      },
+      "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle": {
+        "crc64": "583a3f7e29887e32",
+        "execDataMatched": true,
+        "counters": {
+          "INSTRUCTION": {
+            "missed": 5,
+            "covered": 333
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 38
+          },
+          "LINE": {
+            "missed": 1,
+            "covered": 63
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 27
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 8
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        }
+      }
+    },
+    "otherClasses": {
+      "dev/codex/schubert/nk/batch/monitoring/ObservationContext": {
+        "crc64": "45dd5ef40bfe0038",
+        "execDataMatched": true,
+        "counters": {
+          "INSTRUCTION": {
+            "missed": 15,
+            "covered": 36
+          },
+          "BRANCH": {
+            "missed": 1,
+            "covered": 1
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 7
+          },
+          "COMPLEXITY": {
+            "missed": 4,
+            "covered": 4
+          },
+          "METHOD": {
+            "missed": 3,
+            "covered": 4
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        }
+      },
+      "dev/codex/schubert/nk/batch/monitoring/package-info": {
+        "crc64": "8c08e46c241109df",
+        "execDataMatched": false,
+        "counters": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 0
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 0
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 0
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 0
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        }
+      }
+    }
+  },
+  "coverageMethod": "JaCoCo default, two exact Main types plus package metadata, single selected run.",
+  "sameSourceCasesReplayed": 0,
+  "requiredSameExecPriorPaths": 14,
+  "newFixtureCases": 3,
+  "runtimeInfrastructureActions": 0,
+  "formalDelta": 0,
+  "wholeC07": false,
+  "whole451": false
+}
