@@ -1,0 +1,115 @@
+{
+  "actualExit": 0,
+  "mavenExit": 0,
+  "run": "PG40764-f03-batch-two-nulls-inherited-v1",
+  "source": "6281f502b53cd8af8fcde9b97d66ff8f46b6e286",
+  "productionCore": "517a23cddc9f3883550942f6fa90a4256ef39b73",
+  "startEvent": "PGPT-20261008-6647",
+  "command": [
+    "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+    "-o",
+    "-B",
+    "-ntp",
+    "-N",
+    "-X",
+    "-f",
+    "/dev/shm/pg40764-mkg5f6_b/scope/pom.xml",
+    "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+    "compile"
+  ],
+  "beginUTC": "2026-11-20T08:29:01.389424+00:00",
+  "terminalAtUTC": "2026-11-20T08:29:05.253336+00:00",
+  "controls": {
+    "errorProneActuallyInCompilerArgs": true,
+    "nullAwayAsError": true,
+    "jspecifyConfigured": true,
+    "nullAwayArtifactResolved": true,
+    "warningsAsErrors": true,
+    "exactTwoCompiled": true,
+    "mavenBuildSuccessful": true
+  },
+  "physical": {
+    "dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.class": "534463dfae829916b8a201751f40e2409ddf678763d8a6d843545caba36d1a93",
+    "dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$JdbcRead.class": "9fedde7f8fd2ceda99d2604384b72209ae3005228b7bc423f9488a19fdc69c51",
+    "dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$JdbcRelease.class": "c298098ef1fb8aa9aeb21680df29bc093ee0bebb4156678779fcf51796f7fd9e",
+    "dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$JdbcAcquire.class": "1e9bd6959698e28f0213098be7c8909bd5573786e6eedb88fa85b85c153c3a8e",
+    "dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Prior.class": "48f91fc8d3240de710b61c1fc2988d97bf09c33f26f7e67401f0c29f427e67c4",
+    "dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.class": "2394756c3a558df38394db0e03b2bb27c031812e13ed361c7b126d63a611aa97",
+    "dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Stage.class": "977ec26b8b12d01f5a252ddf54892712b222b9d8a1469b9e9ce0223b3851b28f",
+    "dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.class": "200e23c6fa5fd6e1aff5afc61780f5883b1d8f5b2521163f98f7479f24ca581c",
+    "dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository$Projection.class": "22ecc77c19041c95338b0aed303ea0e3e29534315cebe5f2cf2b6983c3f8af5c",
+    "dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository$RejectedSnapshot.class": "f67bfc551b345e6698f2b10b1889125c45963a1ee5c5d82351f895b43c0e2564",
+    "dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository$RejectedEntry.class": "13b74bd62a27d2e60077c30feecf721dfb7ac22b9f29ce988d655f867b27b7f8",
+    "dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository$Snapshot.class": "820d3f0d9b45d95b47a407575e1dc8d44c9cee16b91e7b98e681ab1364a8a468",
+    "dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository$Entry.class": "2e11a77e71576586b44d0febfbdaefa384141c638c8973aef6b83e83a3019aaf"
+  },
+  "exactPackagedClassBytes": 13,
+  "sourceInputs": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+      "sha256": "001a0e2d7f22fe28fe746b96a13b58d83a4ce1c68f177330b59bc0bd74986a12"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+      "sha256": "3e1780790085d15cf589f9a5c5984550cdae9230c836dc779c51a018cd85d2a2"
+    }
+  ],
+  "aux": {
+    "dev/codex/schubert/nk/batch/repository/BatchRepositoryException.class": "391b1aac7be2dd58cf9c3dee11cdd12941417fa7d029513475dfffbe4a3d2cb1",
+    "dev/codex/schubert/nk/batch/repository/BatchRun.class": "5cb0c42832ea17425dbf60da6025f2c4783d687e665b18f6cd8e88abc399c909",
+    "dev/codex/schubert/nk/batch/repository/BatchStep.class": "06e90b35ca09ac687bfd480caac794fa7be6a47dff9db3d397e682f75f010b1c",
+    "dev/codex/schubert/nk/batch/repository/BatchStepAttempt.class": "d61f86c115e29d12da29964711253fcd3e8fc64b8cb2d263efd87702295ae547",
+    "dev/codex/schubert/nk/batch/repository/BatchStepResult.class": "d30ca3fc460ebcceb4daee963ab618f582adb9dfdd916e9daeb51f3207a77417",
+    "dev/codex/schubert/nk/batch/repository/BatchStepResult$Status.class": "08893a338b6e7ffab7272cd1789215001855261ec7ac0a4dafa92f41af5a3a27",
+    "dev/codex/schubert/nk/batch/repository/BatchStepResult$Reason.class": "5006eeb26f8c82ba35e7830649019b41125edae1d8e396cdd411fee2f82830a7",
+    "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.class": "f181015412f1f293e91c0eea24a3ac33127d5ef5015f3dc9fb73ac732e0cc009",
+    "dev/codex/schubert/nk/batch/repository/RunReferenceRepository.class": "dc394e1d15ba729bbecd4f895c264b3adb042233f8ac7d603cab68d6e91682bb",
+    "dev/codex/schubert/nk/batch/repository/RunReferences.class": "9cd7197824647e7ad066678a66a54bfdf196f0251027bebeb765b6babd8d8fe2",
+    "dev/codex/schubert/nk/batch/repository/SuccessRunLookup.class": "ba6a3cd7a9d176ed849112546d0ad7bf3aebc9d22a4527c0bfd834247adfc525",
+    "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class": "cc8265242a1cd41cc7c77b8e12185cbc387fb583d70e1d1171ba467cb0f3d552",
+    "dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Guard.class": "53f2b39f586ec6ee172b0e3009d46638a60ca8f1ce8ad442f497affa6cbd869b",
+    "dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame.class": "cf12980ffcb4982da0b9cd5425730825a5cd8762bfdcdc581aa3cf6ab18b46ea",
+    "dev/codex/schubert/nk/storage/StorageIoException.class": "85f86d702a139f126afdd72ca8e221583db824f159351ecd9f07b15fcc569c88",
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason.class": "a113bd839666ee3a4038dd3703af0cfb772282278cc6fbfe1e3cccf98286ffec"
+  },
+  "sourceCount": 2,
+  "rootPomSha256": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+  "harnessPomSha256": "eef44ca9bb8bfe3393886610827c96c053fb03581d2a6db3c770ceef1de3e1df",
+  "stdoutSha256": "9b3ddb687158e0d608bb127194e14d2c503dcc35a454a14d80933e52a7b88004",
+  "stderrSha256": "05ed4976f99856c1417eead6c52058f5565d748a00ae7939fa02188545fafda4",
+  "tests": 0,
+  "heldOperations": 0,
+  "wholeF03": false,
+  "whole451": false,
+  "formalDelta": 0,
+  "references": [
+    {
+      "path": "documents/400_PGPT/470_PMO/601_WBS66\u77ed\u671f\u5b9f\u884c_20261117/1128_F03\u73fe\u516dMain\u66f8\u5f0f\u306e\u500b\u5225\u7d50\u679c\u3068\u7d99\u7d9a\u70b9.json",
+      "sha256": "77c8f72aee0aa7e1c923b05d14264a4c23b6ba0ba3003145b7b573b09543211c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40744-f02-cleanup-terminal-current-four-jars-v1/manifest.json",
+      "sha256": "b09a2e11492f508e5b1a503877f3efc9b5ac72412e7a9b8a68960e62d56dc2a0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40732-f03-expiry-ownership-independent-v1/manifest.json",
+      "sha256": "c5b1f768a9cd52828fb8321f74a2de13287ec3b3e62dfdf1e52690f7fd2b2796"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40742-f02-cleanup-success-reference-independent-v1/manifest.json",
+      "sha256": "a43c8b36a3ada63abdffc4c151e2c71b157df2e14f5114b55110838837e1f927"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40690-f03-outbox-annotation-spotbugs-only-v1/manifest.json",
+      "sha256": "0392f195c1168b4dcd3db3d88d3138fdc74574ea5745ab0708da82fbba75cd02"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40748-f03-cleanup-terminal-current-typed-v1/manifest.json",
+      "sha256": "31119851e87b8fadca786f92986caddfbcf40ef81093a21409025aaf9efda8e9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40700-f03-outbox-nullaway-maven-v1/manifest.json",
+      "sha256": "af7cf767170d6d09b5abf3e25d2ff3617836dd91d7100fc784e3e45958c869e7"
+    }
+  ]
+}
