@@ -1,0 +1,92 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-20T15:33:19.703735+00:00",
+  "cases": [
+    {
+      "source": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+      "testId": "APIMHTTP024",
+      "wbsOwner": "WBS-P018-09",
+      "method": "ApiMetricHttpHandler.handle",
+      "design": [
+        "RD171",
+        "UI252",
+        "SS342",
+        "SS351"
+      ],
+      "main": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiMetricHttpHandler.java",
+        "sha256": "16f24d090151ae319ddecb42af929e87e68ded3dbf655da055bc2a275b297654"
+      },
+      "fixture": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricHttpHandlerTest.java",
+        "sha256": "9130687e7903418eef6fe511829726942c86e4843e2f2c46797974c778a2d45b"
+      },
+      "specification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/5508_API監視応答の所有解放仕様.md",
+        "sha256": "39cd1984b0c8b88660049c0248c69742cdaa1b9671dfa63c58732fa56edbd126"
+      },
+      "testRun": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40944-p01809-api-handler-close-precedence-v1/manifest.json",
+        "sha256": "f06293095b5c28a42fabdebae58b88c52b4e406a1db60446c1b3d13635cdee34"
+      },
+      "measuredRun": "PG40944",
+      "unresolved": [
+        "API実HTTP",
+        "単一全生coverage",
+        "全451"
+      ],
+      "formalDelta": 0
+    },
+    {
+      "source": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+      "testId": "OUTBOXDB012",
+      "wbsOwner": "WBS-P004-05",
+      "method": "OutboxObservationRepository.read",
+      "design": [
+        "DAT-009",
+        "UI241",
+        "UI252",
+        "SS332 SSC-470"
+      ],
+      "main": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/persistence/OutboxObservationRepository.java",
+        "sha256": "b7ada6e63e1582885f067c5f166e94e790c8c1aee9d95c1ed61eb62d0d624657"
+      },
+      "fixture": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxObservationRepositoryTest.java",
+        "sha256": "a9a157c14fd0d4abc4582c0add1b2f5fbebb969086f1d28f3149c24b384166f9"
+      },
+      "specification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/4686_SSC470_APIOutbox単一型付き解放_単体テスト仕様.md",
+        "sha256": "12c49d4404c99a47aa58719206beabe9c03be2b561f362ca8523b075fc82fafb"
+      },
+      "testRun": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40954-p00405-outbox-pair-close-v1/manifest.json",
+        "sha256": "4222ed58b6ae5b785044e593584094a123e32f6be93ebcc10f2b8bbd6c5dde6d"
+      },
+      "measuredRun": "PG40954",
+      "unresolved": [
+        "実PostgreSQL/TX",
+        "P004-05全子と終了依存",
+        "全451"
+      ],
+      "formalDelta": 0
+    }
+  ],
+  "repeatedRuns": 0,
+  "currentCriterionFormalDelta": 0,
+  "chargedOriginalRowPricePp": 0,
+  "differentExecutionsMerged": false,
+  "wbsInventory": {
+    "path": "documents/400_PGPT/470_PMO/485_WBS網羅性・受入対応.json",
+    "sha256": "2ebb103641c7e020e9fd09a1dd17bf90333afbb0f95793b53a53f6590153d619"
+  },
+  "resultIndex": {
+    "path": "documents/400_PGPT/470_PMO/486_WBS現行実績.json",
+    "sha256": "1e9147d30cfaa8355f9ab66239d89717c0a8d1af2e4c128443e987c2368a6ef9"
+  },
+  "moduleRegistry": {
+    "path": "documents/400_PGPT/430_構成・追跡/431_Module・Program一覧.md",
+    "sha256": "f0ee790e41e2245597c732c34b99d8b90c69370830832482bc1e9ca95a3b181e"
+  }
+}

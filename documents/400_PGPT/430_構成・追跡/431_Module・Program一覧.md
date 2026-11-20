@@ -898,3 +898,11 @@ BUG3001/YKT2530は表示escape誤読による誤検知取り下げ、source修�
 ## 2026-11-20 検査サマリーの単独SQL失敗
 
 NK-DAT-001／NK-BAT-001の共通参照、WBS-P004-02/2、P004-05/2、F02/F03。InspectionSummaryRepository.read最外捕捉と既JdbcFailureGraph.preserveFatalをDAT009／OPS009、UI251、SS331 §3.13、SS332 SSC063、SS311 SSC461、BUG-3416／YKT-2359、INSPPORT011/012へ接続。現Core `cdb649a5f054bc2ceed72ef57e55605f14a590d1` の選択13、当物理raw四100、実DBと全451は継続。 [PT仕様](../../../evidence/01_PT/004_NK-DAT-001/454_P00402検査サマリー単独非fatal循環とraw単体仕様.md)、[PG40842](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40842-p00402-inspection-sql-cycle-raw-v1/manifest.json)
+
+
+## 2026-11-21 API監視とOutboxの所有終了
+
+- NK-OPS-001／WBS-P018-09／ApiMetricHttpHandler.handle／APIMHTTP024。RD171／UI252／SS342／SS351。当候補の新規1件で一次例外と二次例外、所有した資源の解放を確認。 [結果](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40944-p01809-api-handler-close-precedence-v1/manifest.json)
+- NK-OPS-001／WBS-P004-05／OutboxObservationRepository.read／OUTBOXDB012。DAT-009／UI241／UI252／SS332 SSC-470。当候補の新規1件で一次例外と二次例外、所有した資源の解放を確認。 [結果](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40954-p00405-outbox-pair-close-v1/manifest.json)
+
+各実行の生計測は個別に保持。実環境、全451、正式受入を継続。

@@ -1,0 +1,61 @@
+{
+  "eventId": "PGPT-20261008-6911",
+  "groupId": "g08-two-resource-precedence-trace",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T15:33:19.010000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 73,
+      "remainingPercent": 27,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "g08-two-resource-precedence-trace",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "g08-two-resource-precedence-trace",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-G08"
+    ],
+    "managementWorkIds": [],
+    "source": "e9b847d03b2af1073efed4c782198d8081e5fa1a",
+    "productionCoreMain": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40956-g08-two-resource-precedence-trace-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.08,
+      "base": 0.22,
+      "high": 0.5
+    },
+    "groupCapPp": 0.65,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1394_P00405Outbox二資源終了継続点.json",
+        "sha256": "82d01a913943d9a1161474d0211a4c60dff9899843bac3a6d820bbfe153d5bbe"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40944-p01809-api-handler-close-precedence-v1/manifest.json",
+        "sha256": "f06293095b5c28a42fabdebae58b88c52b4e406a1db60446c1b3d13635cdee34"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40954-p00405-outbox-pair-close-v1/manifest.json",
+        "sha256": "4222ed58b6ae5b785044e593584094a123e32f6be93ebcc10f2b8bbd6c5dde6d"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "直近の未結合二Test ID・各独立仕様と保存済みrunを現sourceから照合",
+    "endCondition": "431/485/486を2件結合しstage整合と秘密scanを確認。正式数不変。",
+    "workScope": "Git/PＴ公開traceのみ。各実行と別試験再資格は再演せず合算しない。"
+  }
+}
