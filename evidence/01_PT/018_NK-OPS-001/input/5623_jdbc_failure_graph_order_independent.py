@@ -16,8 +16,9 @@ BIN, OPS, TARGET, TEST_BINARY, check, pin, read = (
 )
 
 
-def main(fixed):
-    unit = OPS/g["FIXED" if fixed else "RUN"]/"manifest.json"
+def main(mode):
+    source_run = {"--fixed": "FIXED", "--style-fixed": "STYLE_FIXED"}.get(mode, "RUN")
+    unit = OPS/g[source_run]/"manifest.json"
     result = read(unit)
     assert result["actualExit"] == 0 and result["tests"] == 3 and result["oldTestsReplayed"] == 0
     for item in (*result["originalArtifacts"], *result["sealedPhysical"], *result["inputSources"]):
@@ -34,7 +35,10 @@ def main(fixed):
     cp = os.pathsep.join(map(str, deps))
     measurement = Path("tools/quality/jacoco/UnfilteredCodeMeasurement.java")
     classes = [Path(value["path"]) for value in result["sealedPhysical"]]
-    run = "PG41216-f02-ssc461-jdbc-order-fixed-independent-v1" if fixed else "PG41212-f02-ssc461-jdbc-order-independent-v1"
+    run = {
+        "--fixed": "PG41216-f02-ssc461-jdbc-order-fixed-independent-v1",
+        "--style-fixed": "PG41232-f03-jdbc-graph-fixture-expression-independent-v1",
+    }.get(mode, "PG41212-f02-ssc461-jdbc-order-independent-v1")
     out = OPS/run
     out.mkdir()
     report = out/"spotbugs.xml"
@@ -105,5 +109,5 @@ def main(fixed):
 
 
 if __name__ == "__main__":
-    assert sys.argv[1:] in ([], ["--fixed"])
-    raise SystemExit(main(bool(sys.argv[1:])))
+    assert sys.argv[1:] in ([], ["--fixed"], ["--style-fixed"])
+    raise SystemExit(main((sys.argv[1:] or ["--baseline"])[0]))

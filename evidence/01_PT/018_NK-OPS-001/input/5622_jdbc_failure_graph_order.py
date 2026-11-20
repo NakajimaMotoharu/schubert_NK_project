@@ -17,6 +17,7 @@ BIN, OPS, check, pin, read, successful_case = (
 )
 RUN = "PG41210-f02-ssc461-jdbc-order-identity-v1"
 FIXED = "PG41214-f02-ssc461-jdbc-order-identity-fixed-v1"
+STYLE_FIXED = "PG41230-f03-jdbc-graph-fixture-expression-fixed-v1"
 OWNER = "dev/codex/schubert/nk/api/bootstrap/"
 STORAGE = "dev/codex/schubert/nk/storage/StorageIoException"
 BOOTSTRAP = Path("src/schubert-nk-bootstrap/src")
@@ -34,7 +35,7 @@ TEST_NAMES = {
 
 def main(mode):
     recover = mode == "--recover"
-    run = FIXED if mode == "--fixed" else RUN
+    run = {"--fixed": FIXED, "--style-fixed": STYLE_FIXED}.get(mode, RUN)
     group, = Path("documents/400_PGPT/470_PMO").glob("601_*/1640_*.json")
     scope = read(group)["values"]
     for ref in scope["oracleReferences"]:
@@ -49,9 +50,9 @@ def main(mode):
         for rev in (scope["productionCoreMain"], previous["productionCoreMain"]):
             assert subprocess.check_output(["git", "show", f"{rev}:{src}"], timeout=12) == src.read_bytes()
     fixture_head = subprocess.check_output(["git", "rev-parse", "HEAD"], text=True, timeout=12).strip()
-    if mode == "--fixed":
+    if mode in ("--fixed", "--style-fixed"):
         assert subprocess.check_output(["git", "show", f"{fixture_head}:{TEST}"], timeout=12) == TEST.read_bytes()
-        initial = read(OPS/RUN/"manifest.json")
+        initial = read(OPS/(FIXED if mode == "--style-fixed" else RUN)/"manifest.json")
         assert initial["inputSources"][-1]["sha256"] != pin(TEST)["sha256"]
     sdk, = OPS.glob("PG37996-*/manifest.json")
     deps = [Path(p) for p in read(sdk)["dependencies"] if Path(p).name in {
@@ -126,7 +127,7 @@ def main(mode):
                    stages=stages, originalArtifacts=list(map(pin, [terminal, unit, archived])),
                    originalProbeRecords=original, sealedPhysical=list(map(pin, sorted(published_physical.iterdir()))),
                    naturallyUnloaded=[TARGET[2]], recoveredOriginalWithoutTestRerun=recover,
-                   fixedFixtureCommit=fixture_head if mode == "--fixed" else None,
+                   fixedFixtureCommit=fixture_head if mode in ("--fixed", "--style-fixed") else None,
                    wholeF02=False, whole451=False, formalDelta=0)
     target = out/"manifest.json"
     with target.open("x") as file:
@@ -136,5 +137,5 @@ def main(mode):
 
 
 if __name__ == "__main__":
-    assert sys.argv[1:] in ([], ["--recover"], ["--fixed"])
+    assert sys.argv[1:] in ([], ["--recover"], ["--fixed"], ["--style-fixed"])
     main((sys.argv[1:] or ["--baseline"])[0])

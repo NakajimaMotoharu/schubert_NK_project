@@ -5,6 +5,7 @@ import json
 import os
 from pathlib import Path
 import runpy
+import sys
 from tempfile import TemporaryDirectory
 from xml.etree import ElementTree as ET
 from zipfile import ZipFile
@@ -30,12 +31,22 @@ def prepare(compiled, sources, sdk):
     return stage
 
 
-def main():
+def main(fixed):
     start, = Path("documents/400_PGPT/470_PMO").glob("601_*/1652_*.json")
     inputs = read(start)["values"]["oracleReferences"]
     for ref in inputs:
         assert pin(Path(ref["path"])) == ref
     _, jdbc_ref, jdbc_static, user_ref, rules = [Path(row["path"]) for row in inputs]
+    earlier = None
+    if fixed:
+        earlier, = OPS.glob("PG41228-*/manifest.json")
+        prior = read(earlier)
+        assert {site["rule"] for site in prior["staticByTest"]["jdbc"]["rawPmd"]} == {
+            "AssignmentInOperand", "AvoidLiteralsInIfCondition"
+        }
+        assert not prior["staticByTest"]["user"]["rawPmd"]
+        jdbc_ref, = OPS.glob("PG41230-*/manifest.json")
+        jdbc_static, = OPS.glob("PG41232-*/manifest.json")
     j, s, u = (read(path) for path in (jdbc_ref, jdbc_static, user_ref))
     assert j["source"] == s["source"] == u["productionCore"]
     assert j["actualExit"] == s["actualExit"] == u["actualExit"] == 0
@@ -51,13 +62,16 @@ def main():
     ref, = OPS.glob("PG41162-*/manifest.json")
     spotbugs = read(ref)["stagedStatic"]["spotbugs"]["command"][:13]
     assert spotbugs[4] == "edu.umd.cs.findbugs.FindBugs2"
-    out = OPS/"PG41228-f03-current-user-jdbc-fixture-static-v1"
+    name = "PG41234-f03-jdbc-current-fixture-pmd-fixed-v1" if fixed else "PG41228-f03-current-user-jdbc-fixture-static-v1"
+    out = OPS/name
     out.mkdir()
     measurements = {}
     with TemporaryDirectory(dir="/dev/shm", prefix="pgpt-new-fixture-static-") as temporary:
         space = Path(temporary)
-        for role, rows, sdk in (("user", user_inputs, u["dependencies"]),
-                               ("jdbc", jdbc_inputs, j["dependencies"])):
+        scopes = [("jdbc", jdbc_inputs, j["dependencies"])]
+        if not fixed:
+            scopes.insert(0, ("user", user_inputs, u["dependencies"]))
+        for role, rows, sdk in scopes:
             classes = space/role
             dependencies = [Path(row["path"]) for row in sdk]
             java = [Path(row["path"]) for row in rows]
@@ -98,12 +112,14 @@ def main():
             else:
                 receipt["typedExistingResult"] = pin(jdbc_static)
             measurements[role] = receipt
-    typed = measurements["user"]["spotbugs"]
+    user_static = read(earlier)["staticByTest"]["user"] if fixed else measurements["user"]
+    typed = user_static["spotbugs"]
     valid = not typed["findings"] and typed["errors"]==typed["missing"]==typed["stage"]["exit"]==0
     valid = valid and all(not x["rawPmd"] and not x["pmdErrorsOrSuppressions"] for x in measurements.values())
     record = dict(run=out.name, terminalAtUTC=datetime.now(timezone.utc).isoformat(),
                   source=j["source"], actualExit=0 if valid else 1,
                   evidence=list(map(pin, (start,jdbc_ref,jdbc_static,user_ref,rules,static_pmd))),
+                  priorUserStatic=pin(earlier) if fixed else None,
                   staticByTest=measurements, dynamicProductTests=0, forbiddenArtifactReads=0,
                   changedProductSources=0, wholeF03=False, whole451=False, formalDelta=0)
     path = out/"manifest.json"
@@ -115,4 +131,5 @@ def main():
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    assert sys.argv[1:] in ([], ["--fixed"])
+    raise SystemExit(main(bool(sys.argv[1:])))

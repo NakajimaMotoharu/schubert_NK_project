@@ -73,11 +73,13 @@ final class JdbcFailureGraphOrderTest {
 
   private static final class CountingSql extends SQLException {
     @Serial private static final long serialVersionUID = 1L;
+    private static final int FIRST_VISIT = 1;
     private int visits;
 
     @Override
     public @Nullable SQLException getNextException() {
-      if (++visits != 1) throw new AssertionError("SQL instance revisited");
+      visits++;
+      if (visits != FIRST_VISIT) throw new AssertionError("SQL instance revisited");
       return super.getNextException();
     }
   }
