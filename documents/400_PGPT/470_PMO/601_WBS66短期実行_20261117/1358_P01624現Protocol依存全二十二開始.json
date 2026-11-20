@@ -1,0 +1,79 @@
+{
+  "eventId": "PGPT-20261008-6874",
+  "groupId": "p01624-closed22-current-protocol-dependency",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T14:45:20.850000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 72,
+      "remainingPercent": 28,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "p01624-closed22-current-protocol-dependency",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "p01624-closed22-current-protocol-dependency",
+    "workAttributionKind": "SOURCE_REQUALIFICATION",
+    "wbsLeafIds": [
+      "WBS-P016-24"
+    ],
+    "managementWorkIds": [
+      "A1-36.05"
+    ],
+    "source": "2e0188a256808a6b68e2b6cf94c439b62ce1f3e6",
+    "productionCoreMain": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40932-p01624-current-protocol-closed22-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.25,
+      "base": 0.65,
+      "high": 1.25
+    },
+    "groupCapPp": 1.5,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1357_G07最新公開差分秘密検査継続点.json",
+        "sha256": "ae3da5e1ac57a210965539f15f2d3327a5800dec3228481fd587189ea9b87acc"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40928-a13336-web-error-receipts-v1/manifest.json",
+        "sha256": "3e1f1ff30917e8df1a7b411c48f56ecb7820f536567834bd0b7aa2cc03b953f3"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28014-common-error22-normal-v1/manifest.json",
+        "sha256": "3d1c4f63e637b3df14e29d1375ae6360d56cd30cfbdf47e0d3ee829bc922207a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28018-common-error22-preflight-v1/manifest.json",
+        "sha256": "6ea30d9be2595d15e8884a9056fabbca17ed80588b5a63cb4a4b2550f8288275"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28024-common-error22-independent-v1/manifest.json",
+        "sha256": "4938f692f754715d37884c8a1f80f3a1876e5316aa8f249e02df8c3d8fcb96d6"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40802-f02-current-four-package-v1/manifest.json",
+        "sha256": "b00a0ae678c6a2d7cc23fb9106222b79cf0e655140298546d3b71c1d95e8a4b3"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40886-f02-batch-standard-sdk-package-v1/manifest.json",
+        "sha256": "ff73401dfe64ef19304476dac3ed24752ee32262034428f8b1196fd4424dc0b6"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "PG40928で元22のProtocol sourceに14差。他のWeb入力・元whole三クラス・SDK/型付き閉包を固定照合する。",
+    "endCondition": "PG40802正規Protocolは現候補とのmodule tree一致を確認。他の元同一classfile／SDKをhash固定し、元22同一閉包、独立期待、順序と全終端を観測。",
+    "workScope": "既許可の元pure Servlet/Modelの三Test全22のみ。元15 Web sourceは不変を要件、元許可以外のclassfile取得なし。DB/Root/native/実認証/Httpなし。"
+  }
+}

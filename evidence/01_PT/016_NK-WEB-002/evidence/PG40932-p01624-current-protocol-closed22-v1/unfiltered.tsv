@@ -1,0 +1,28 @@
+CLASS	dev/codex/schubert/nk/web/controller/ErrorController	2c10152ede295c23	true	20	49	INSTRUCTION:0:69	BRANCH:0:6	LINE:0:19	COMPLEXITY:0:5	METHOD:0:2	CLASS:0:1
+METHOD	dev/codex/schubert/nk/web/controller/ErrorController	<init>	(Ldev/codex/schubert/nk/web/error/ProblemViewFactory;)V	1	INSTRUCTION:0:9	BRANCH:0:0	LINE:0:3	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/controller/ErrorController	error	(Ljakarta/servlet/http/HttpServletRequest;Ljakarta/servlet/http/HttpServletResponse;Lorg/springframework/ui/Model;)Ljava/lang/String;	1	INSTRUCTION:0:60	BRANCH:0:6	LINE:0:16	COMPLEXITY:0:4	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/web/error/ProblemViewFactory	e22816e92e38d309	true	16	49	INSTRUCTION:0:45	BRANCH:0:14	LINE:0:18	COMPLEXITY:0:13	METHOD:0:2	CLASS:0:1
+METHOD	dev/codex/schubert/nk/web/error/ProblemViewFactory	<init>	()V	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/error/ProblemViewFactory	create	(Ljava/lang/Object;Ljava/util/UUID;Ljava/util/Optional;)Ldev/codex/schubert/nk/web/view/ErrorViewModel;	1	INSTRUCTION:0:42	BRANCH:0:14	LINE:0:17	COMPLEXITY:0:12	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/web/error/WebResultMapper	da5442bdae065fd9	true	12	49	INSTRUCTION:6:28	BRANCH:1:8	LINE:0:11	COMPLEXITY:1:9	METHOD:0:2	CLASS:0:1
+METHOD	dev/codex/schubert/nk/web/error/WebResultMapper	<init>	()V	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/error/WebResultMapper	httpStatus	(Ldev/codex/schubert/nk/protocol/header/ResultCode;)I	1	INSTRUCTION:6:25	BRANCH:1:8	LINE:0:10	COMPLEXITY:1:8	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/web/security/WebErrorDispatchFilter	0b5ad95c7786f6de	true	11	49	INSTRUCTION:0:50	BRANCH:0:8	LINE:0:11	COMPLEXITY:0:6	METHOD:0:2	CLASS:0:1
+METHOD	dev/codex/schubert/nk/web/security/WebErrorDispatchFilter	<init>	()V	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/security/WebErrorDispatchFilter	doFilter	(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V	1	INSTRUCTION:0:47	BRANCH:0:8	LINE:0:10	COMPLEXITY:0:5	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/web/view/ErrorViewModel	b42207f362551cf3	true	10	49	INSTRUCTION:0:45	BRANCH:0:0	LINE:0:14	COMPLEXITY:0:7	METHOD:0:7	CLASS:0:1
+METHOD	dev/codex/schubert/nk/web/view/ErrorViewModel	<init>	(Ldev/codex/schubert/nk/web/view/ErrorViewModel$Status;Ljava/util/UUID;Ljava/util/Optional;)V	2	INSTRUCTION:0:12	BRANCH:0:0	LINE:0:5	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/view/ErrorViewModel	of	(Ldev/codex/schubert/nk/web/view/ErrorViewModel$Status;Ljava/util/UUID;Ljava/util/Optional;)Ldev/codex/schubert/nk/web/view/ErrorViewModel;	9	INSTRUCTION:0:16	BRANCH:0:0	LINE:0:4	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/view/ErrorViewModel	getStatus	()I	1	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/view/ErrorViewModel	getMessage	()Ljava/lang/String;	1	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/view/ErrorViewModel	getRequestId	()Ljava/lang/String;	1	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/view/ErrorViewModel	getTopBar	()Ljava/util/Optional;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/view/ErrorViewModel	toString	()Ljava/lang/String;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/web/view/ErrorViewModel$Status	d14572dbbe09b833	true	14	16433	INSTRUCTION:9:125	BRANCH:0:0	LINE:0:14	COMPLEXITY:2:3	METHOD:2:3	CLASS:0:1
+METHOD	dev/codex/schubert/nk/web/view/ErrorViewModel$Status	values	()[Ldev/codex/schubert/nk/web/view/ErrorViewModel$Status;	9	INSTRUCTION:4:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/view/ErrorViewModel$Status	valueOf	(Ljava/lang/String;)Ldev/codex/schubert/nk/web/view/ErrorViewModel$Status;	9	INSTRUCTION:5:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/view/ErrorViewModel$Status	<init>	(Ljava/lang/String;IILjava/lang/String;)V	2	INSTRUCTION:0:11	BRANCH:0:0	LINE:0:4	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/view/ErrorViewModel$Status	$values	()[Ldev/codex/schubert/nk/web/view/ErrorViewModel$Status;	4106	INSTRUCTION:0:39	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/view/ErrorViewModel$Status	<clinit>	()V	8	INSTRUCTION:0:75	BRANCH:0:0	LINE:0:10	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/web/error/WebResultMapper$1	0382a96177223758	true	26	4128	INSTRUCTION:12:77	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:1
+METHOD	dev/codex/schubert/nk/web/error/WebResultMapper$1	<clinit>	()V	8	INSTRUCTION:12:77	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
