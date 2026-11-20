@@ -1,0 +1,653 @@
+{
+  "actualExit": 0,
+  "source": "ab63a9f880666311b4ffdd34f9c4b01d952dbb27",
+  "productionCore": "cb1411d94a1d97aedafe1af60400aaec0ae8c8e8",
+  "originalAuditSource": "31748ed33367119278407a3bce0fe2c82641dc1b",
+  "originalNamedMainSources": 52,
+  "originalUpper": 104,
+  "confirmedMigratedUpper": 48,
+  "confirmedRemainingUpper": 56,
+  "storageOwnedSites": 3,
+  "bridgeCount": 1,
+  "moduleCounts": {
+    "schubert-nk-api": {
+      "originalSites": 3,
+      "currentLegacySites": 3,
+      "migratedAdapterSites": 0
+    },
+    "schubert-nk-batch": {
+      "originalSites": 82,
+      "currentLegacySites": 48,
+      "migratedAdapterSites": 34
+    },
+    "schubert-nk-bootstrap": {
+      "originalSites": 19,
+      "currentLegacySites": 5,
+      "migratedAdapterSites": 14
+    },
+    "schubert-nk-storage": {
+      "originalSites": 3,
+      "currentLegacySites": 3,
+      "migratedAdapterSites": 0
+    }
+  },
+  "exactAnchors": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiProcessMain.java",
+      "module": "schubert-nk-api",
+      "originalCount": 2,
+      "migratedCurrentLines": [],
+      "legacyCurrentLines": [
+        86,
+        147
+      ],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/ApiApplicationPreparation.java",
+      "module": "schubert-nk-api",
+      "originalCount": 1,
+      "migratedCurrentLines": [],
+      "legacyCurrentLines": [
+        348
+      ],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+      "module": "schubert-nk-batch",
+      "originalCount": 3,
+      "migratedCurrentLines": [
+        49,
+        50,
+        59
+      ],
+      "legacyCurrentLines": [],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+      "module": "schubert-nk-batch",
+      "originalCount": 7,
+      "migratedCurrentLines": [
+        78,
+        82,
+        142,
+        143,
+        200,
+        201,
+        292
+      ],
+      "legacyCurrentLines": [],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+      "module": "schubert-nk-batch",
+      "originalCount": 4,
+      "migratedCurrentLines": [
+        74,
+        77,
+        121,
+        122
+      ],
+      "legacyCurrentLines": [],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupArtifactVerifier.java",
+      "module": "schubert-nk-batch",
+      "originalCount": 3,
+      "migratedCurrentLines": [],
+      "legacyCurrentLines": [
+        246,
+        336,
+        571
+      ],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupManifestReader.java",
+      "module": "schubert-nk-batch",
+      "originalCount": 2,
+      "migratedCurrentLines": [],
+      "legacyCurrentLines": [
+        167,
+        341
+      ],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CaddyPublicConfiguration.java",
+      "module": "schubert-nk-batch",
+      "originalCount": 1,
+      "migratedCurrentLines": [],
+      "legacyCurrentLines": [
+        121
+      ],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupBackupAdmission.java",
+      "module": "schubert-nk-batch",
+      "originalCount": 5,
+      "migratedCurrentLines": [],
+      "legacyCurrentLines": [
+        76,
+        92,
+        93,
+        101,
+        102
+      ],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupExpiryExecution.java",
+      "module": "schubert-nk-batch",
+      "originalCount": 3,
+      "migratedCurrentLines": [],
+      "legacyCurrentLines": [
+        178,
+        263,
+        270
+      ],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupMaintenanceWork.java",
+      "module": "schubert-nk-batch",
+      "originalCount": 3,
+      "migratedCurrentLines": [],
+      "legacyCurrentLines": [
+        168,
+        262,
+        290
+      ],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupNativeExecution.java",
+      "module": "schubert-nk-batch",
+      "originalCount": 1,
+      "migratedCurrentLines": [],
+      "legacyCurrentLines": [
+        184
+      ],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupNativePreflight.java",
+      "module": "schubert-nk-batch",
+      "originalCount": 1,
+      "migratedCurrentLines": [],
+      "legacyCurrentLines": [
+        125
+      ],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupProcessMain.java",
+      "module": "schubert-nk-batch",
+      "originalCount": 2,
+      "migratedCurrentLines": [],
+      "legacyCurrentLines": [
+        65,
+        81
+      ],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFiles.java",
+      "module": "schubert-nk-batch",
+      "originalCount": 2,
+      "migratedCurrentLines": [],
+      "legacyCurrentLines": [
+        269,
+        304
+      ],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningBrokerExecution.java",
+      "module": "schubert-nk-batch",
+      "originalCount": 1,
+      "migratedCurrentLines": [],
+      "legacyCurrentLines": [
+        294
+      ],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningPrestartEvidence.java",
+      "module": "schubert-nk-batch",
+      "originalCount": 1,
+      "migratedCurrentLines": [],
+      "legacyCurrentLines": [
+        291
+      ],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningProcessMain.java",
+      "module": "schubert-nk-batch",
+      "originalCount": 2,
+      "migratedCurrentLines": [],
+      "legacyCurrentLines": [
+        423,
+        567
+      ],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.java",
+      "module": "schubert-nk-batch",
+      "originalCount": 1,
+      "migratedCurrentLines": [],
+      "legacyCurrentLines": [
+        750
+      ],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupRoots.java",
+      "module": "schubert-nk-batch",
+      "originalCount": 1,
+      "migratedCurrentLines": [],
+      "legacyCurrentLines": [
+        148
+      ],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/RootStartupPending.java",
+      "module": "schubert-nk-batch",
+      "originalCount": 2,
+      "migratedCurrentLines": [],
+      "legacyCurrentLines": [
+        121,
+        133
+      ],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/TransferCleanup.java",
+      "module": "schubert-nk-batch",
+      "originalCount": 1,
+      "migratedCurrentLines": [],
+      "legacyCurrentLines": [
+        285
+      ],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAcceptorReadinessClient.java",
+      "module": "schubert-nk-batch",
+      "originalCount": 1,
+      "migratedCurrentLines": [
+        127
+      ],
+      "legacyCurrentLines": [],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient.java",
+      "module": "schubert-nk-batch",
+      "originalCount": 1,
+      "migratedCurrentLines": [
+        103
+      ],
+      "legacyCurrentLines": [],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisExpiryPurgeClient.java",
+      "module": "schubert-nk-batch",
+      "originalCount": 2,
+      "migratedCurrentLines": [
+        70,
+        119
+      ],
+      "legacyCurrentLines": [],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.java",
+      "module": "schubert-nk-batch",
+      "originalCount": 2,
+      "migratedCurrentLines": [
+        110,
+        289
+      ],
+      "legacyCurrentLines": [],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisReadinessClient.java",
+      "module": "schubert-nk-batch",
+      "originalCount": 1,
+      "migratedCurrentLines": [
+        83
+      ],
+      "legacyCurrentLines": [],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient.java",
+      "module": "schubert-nk-batch",
+      "originalCount": 1,
+      "migratedCurrentLines": [
+        208
+      ],
+      "legacyCurrentLines": [],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisStartupObservation.java",
+      "module": "schubert-nk-batch",
+      "originalCount": 2,
+      "migratedCurrentLines": [
+        137,
+        162
+      ],
+      "legacyCurrentLines": [],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+      "module": "schubert-nk-batch",
+      "originalCount": 2,
+      "migratedCurrentLines": [
+        94,
+        140
+      ],
+      "legacyCurrentLines": [],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorUnitProbe.java",
+      "module": "schubert-nk-batch",
+      "originalCount": 3,
+      "migratedCurrentLines": [],
+      "legacyCurrentLines": [
+        249,
+        319,
+        324
+      ],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/SystemctlStateSource.java",
+      "module": "schubert-nk-batch",
+      "originalCount": 2,
+      "migratedCurrentLines": [],
+      "legacyCurrentLines": [
+        88,
+        93
+      ],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupFailureSnapshot.java",
+      "module": "schubert-nk-batch",
+      "originalCount": 1,
+      "migratedCurrentLines": [],
+      "legacyCurrentLines": [
+        91
+      ],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
+      "module": "schubert-nk-batch",
+      "originalCount": 1,
+      "migratedCurrentLines": [
+        169
+      ],
+      "legacyCurrentLines": [],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupDatabaseSession.java",
+      "module": "schubert-nk-batch",
+      "originalCount": 3,
+      "migratedCurrentLines": [],
+      "legacyCurrentLines": [
+        210,
+        331,
+        332
+      ],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "module": "schubert-nk-batch",
+      "originalCount": 2,
+      "migratedCurrentLines": [
+        111,
+        150
+      ],
+      "legacyCurrentLines": [],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java",
+      "module": "schubert-nk-batch",
+      "originalCount": 1,
+      "migratedCurrentLines": [
+        91
+      ],
+      "legacyCurrentLines": [],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+      "module": "schubert-nk-batch",
+      "originalCount": 3,
+      "migratedCurrentLines": [],
+      "legacyCurrentLines": [
+        237,
+        357,
+        551
+      ],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+      "module": "schubert-nk-batch",
+      "originalCount": 4,
+      "migratedCurrentLines": [],
+      "legacyCurrentLines": [
+        157,
+        187,
+        247,
+        319
+      ],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java",
+      "module": "schubert-nk-batch",
+      "originalCount": 2,
+      "migratedCurrentLines": [
+        19,
+        20
+      ],
+      "legacyCurrentLines": [],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningSqlFailures.java",
+      "module": "schubert-nk-batch",
+      "originalCount": 1,
+      "migratedCurrentLines": [
+        20
+      ],
+      "legacyCurrentLines": [],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "module": "schubert-nk-batch",
+      "originalCount": 1,
+      "migratedCurrentLines": [
+        76
+      ],
+      "legacyCurrentLines": [],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig.java",
+      "module": "schubert-nk-bootstrap",
+      "originalCount": 2,
+      "migratedCurrentLines": [
+        125,
+        172
+      ],
+      "legacyCurrentLines": [],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.java",
+      "module": "schubert-nk-bootstrap",
+      "originalCount": 2,
+      "migratedCurrentLines": [
+        32,
+        34
+      ],
+      "legacyCurrentLines": [],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "module": "schubert-nk-bootstrap",
+      "originalCount": 1,
+      "migratedCurrentLines": [
+        129
+      ],
+      "legacyCurrentLines": [],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+      "module": "schubert-nk-bootstrap",
+      "originalCount": 1,
+      "migratedCurrentLines": [
+        77
+      ],
+      "legacyCurrentLines": [],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java",
+      "module": "schubert-nk-bootstrap",
+      "originalCount": 2,
+      "migratedCurrentLines": [
+        89,
+        96
+      ],
+      "legacyCurrentLines": [],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/InspectorCredentialLoader.java",
+      "module": "schubert-nk-bootstrap",
+      "originalCount": 5,
+      "migratedCurrentLines": [],
+      "legacyCurrentLines": [
+        70,
+        86,
+        144,
+        164,
+        193
+      ],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint.java",
+      "module": "schubert-nk-bootstrap",
+      "originalCount": 3,
+      "migratedCurrentLines": [
+        206,
+        240,
+        252
+      ],
+      "legacyCurrentLines": [],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier.java",
+      "module": "schubert-nk-bootstrap",
+      "originalCount": 1,
+      "migratedCurrentLines": [
+        56
+      ],
+      "legacyCurrentLines": [],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfig.java",
+      "module": "schubert-nk-bootstrap",
+      "originalCount": 2,
+      "migratedCurrentLines": [
+        119,
+        168
+      ],
+      "legacyCurrentLines": [],
+      "scope": "UPPER_CALLER_NEEDS_ITS_OWN_QA_AND_EXACT_PT_REVIEW"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/OwnedTransferDirectory.java",
+      "module": "schubert-nk-storage",
+      "originalCount": 3,
+      "migratedCurrentLines": [],
+      "legacyCurrentLines": [
+        343,
+        346,
+        349
+      ],
+      "scope": "OWNED_FILE_OPERATION_CONVERSION"
+    }
+  ],
+  "sourceProofOnly": true,
+  "staleGroupCountsExcluded": true,
+  "noSharedArtifactOrRuntimeMoved": true,
+  "remainingRequirements": [
+    "Original compatible Storage entry remains for all FileOperation callbacks.",
+    "No currently held classes, runtime DB, native or release action inferred.",
+    "Actual current six JARs, all F03 and 451 still require qualifying evidence."
+  ],
+  "sourceEvidence": [
+    {
+      "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/859_F02業務domainStorageと継続点.json",
+      "sha256": "ecd0fba91ad6493de4f3caa8d6520031463c96909eb515aa429aabda8f3e84a5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38582-f02-jdbc-exception-ownership-review-v1/manifest.json",
+      "sha256": "4c29301e66cd473c219320a3dfa8cf5d846b787eb477caa0bd38599f678a4e92"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38622-f02-storage-file-callback-boundary-v1/manifest.json",
+      "sha256": "3aee9e28b7f02270d6b4f3f1e08ef471a29ece7b5db4b8044f780681170a3db0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40378-f02-public-checkpoint-independent-v1/manifest.json",
+      "sha256": "a1f7cb2c470124084a9921bb19e3d7dca536ecb847fc0e689afd44f5dbb4714b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40382-f02-public-checkpoint-jars-independent-v1/manifest.json",
+      "sha256": "353ba7026a16916c98594134394879bc690a1001680e6f0f42c759aacb273f97"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40252-f02-storage-jdbc-saved-edges-v1/manifest.json",
+      "sha256": "c07b262505a082fee7f5c75a0ec5be73d136114ea6c413e2e86f70b51d3cef79"
+    },
+    {
+      "path": "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md",
+      "sha256": "72427a8609a9c4753ff459cbfa92e3ad27669544c59d53eb9191b97b911c74d2"
+    }
+  ],
+  "rerunProductTests": 0,
+  "actualBackendActions": 0,
+  "newFormalAcceptance": 0,
+  "terminalAtUTC": "2026-11-20T00:31:46.001840+00:00"
+}

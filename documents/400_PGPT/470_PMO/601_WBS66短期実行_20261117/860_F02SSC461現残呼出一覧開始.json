@@ -1,0 +1,80 @@
+{
+  "eventId": "PGPT-20261008-6380",
+  "groupId": "PGPT-WBS66-F02-SSC461-CURRENT-RESIDUAL-CALLERS-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T00:30:51.568000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 57,
+      "remainingPercent": 43,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F02-SSC461-CURRENT-RESIDUAL-CALLERS-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F02-SSC461-CURRENT-RESIDUAL-CALLERS-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a",
+      "WBS-F02-b"
+    ],
+    "source": "ab63a9f880666311b4ffdd34f9c4b01d952dbb27",
+    "productionCoreMain": "cb1411d94a1d97aedafe1af60400aaec0ae8c8e8",
+    "canonicalDesignSource": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "run": "PG40438-f02-ssc461-exact-current-callers-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.42,
+      "high": 0.9
+    },
+    "groupCapPp": 1.5,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/859_F02業務domainStorageと継続点.json",
+        "sha256": "ecd0fba91ad6493de4f3caa8d6520031463c96909eb515aa429aabda8f3e84a5"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38582-f02-jdbc-exception-ownership-review-v1/manifest.json",
+        "sha256": "4c29301e66cd473c219320a3dfa8cf5d846b787eb477caa0bd38599f678a4e92"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38622-f02-storage-file-callback-boundary-v1/manifest.json",
+        "sha256": "3aee9e28b7f02270d6b4f3f1e08ef471a29ece7b5db4b8044f780681170a3db0"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40378-f02-public-checkpoint-independent-v1/manifest.json",
+        "sha256": "a1f7cb2c470124084a9921bb19e3d7dca536ecb847fc0e689afd44f5dbb4714b"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40382-f02-public-checkpoint-jars-independent-v1/manifest.json",
+        "sha256": "353ba7026a16916c98594134394879bc690a1001680e6f0f42c759aacb273f97"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40252-f02-storage-jdbc-saved-edges-v1/manifest.json",
+        "sha256": "c07b262505a082fee7f5c75a0ec5be73d136114ea6c413e2e86f70b51d3cef79"
+      },
+      {
+        "path": "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md",
+        "sha256": "72427a8609a9c4753ff459cbfa92e3ad27669544c59d53eb9191b97b911c74d2"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "Original 104 upper calls and three low-level conversions. Current 48 has accumulated qualified migrations across smaller groups, with one graph adapter call counted separately.",
+    "endCondition": "Independently reconcile current 48/56 plus three Storage conversions and the bridge, by module and residual exact scope. Keep the original baseline and verify no incompatible old entry is removed.",
+    "workScope": "Approved Java source only; no protected classfile or actual Boot/DB/native operations. No products or earlier kits rerun."
+  }
+}
