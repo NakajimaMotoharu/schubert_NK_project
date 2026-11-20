@@ -1,0 +1,153 @@
+{
+  "eventId": "PGPT-20261008-7168",
+  "groupId": "F03-CurrentUserListAndJdbcTestsStatic",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T21:24:54.618000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 81,
+      "remainingPercent": 19,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "F03-CurrentUserListAndJdbcTestsStatic",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "F03-CurrentUserListAndJdbcTestsStatic",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "source": "e47603cc3c8af5e9e9aee161845874e77b9a621d",
+    "productionCoreMain": "6c2e8b027818c8dac0ed0f895edb85658e9c4ff1",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG41228",
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.45,
+      "high": 0.9
+    },
+    "groupCapPp": 1.0,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1651_SCR015最終頁の過剰行完了・次工程.json",
+        "sha256": "e2a55fd743a11c19941e908d32841e2e8c1f863bf215e583e9d3fa9f033a2f01"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41214-f02-ssc461-jdbc-order-identity-fixed-v1/manifest.json",
+        "sha256": "7872662787abf4f73c2b8453e3d2aa39fe2818e3db264704d008ff911f9560fa"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41216-f02-ssc461-jdbc-order-fixed-independent-v1/manifest.json",
+        "sha256": "246eb282b8b7982bde24092fd45bb1d9600ee2a24cd18a5a6c45183b74a8ca51"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41226-scr015-last-page-over-supplied-v1/manifest.json",
+        "sha256": "a2fbe37c8c5b0180a46cc2f74ec3da0f4ab7a446652c2a2506528ee8e1f42b67"
+      },
+      {
+        "path": "tools/quality/static/pmd.xml",
+        "sha256": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "SS352／354。二新Testの既JUnitと書式を保持、同じ当Mainに対するSpotBugsはUser Test一物理だけ新規、SSC461の当五物理は既済証拠を再利用。",
+    "endCondition": "対象二新Testの生PMD、User Test一物理SpotBugs、同compile byteと各元run source、補助SDKの既対象確認。全体F03は未達を保持。",
+    "workScope": "対象Mainは公開承認の七小source。原Test/業務DB/JDBC実接続・実HTTP/QA056型を起動／読取しない。",
+    "quotaAfter": {
+      "usedPercent": 81,
+      "remainingPercent": 19,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "02d30928e4d4b60cfc3c8867dee5c75df46087956078c758c26b2c231a7439fc",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T21:24:54.618000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 81,
+          "remainingPercent": 19,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T21:24:21.517371+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 81,
+      "remainingPercent": 19,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-7167",
+    "attempt": 1,
+    "attemptResult": "初回User静的0、JDBC PMD2は同fixture式。修正後JDBC3再資格全成功、5物理SpotBugs／PMD各0。Userの既成功再演なし。",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 3,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41228-f03-current-user-jdbc-fixture-static-v1/manifest.json",
+        "sha256": "80213ec083d9e4f6a8b61f930ce808b35bc1f399de181380cd5d54518c5454ce"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41230-f03-jdbc-graph-fixture-expression-fixed-v1/manifest.json",
+        "sha256": "3bfbde1125b667e770997c1c74dc33fc2d14db17c764dea6f77e32d56b248b28"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41232-f03-jdbc-graph-fixture-expression-independent-v1/manifest.json",
+        "sha256": "ba00a6753567adaa7d162fd6e82ce4a4193e67cafb358d616bd3242cdefa8466"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41234-f03-jdbc-current-fixture-pmd-fixed-v1/manifest.json",
+        "sha256": "cfd32340093ab62bd06ac2122f4ff41de4dc617855f4d3428f69bc47e9cdb283"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/5632_F03新User試験・JDBC循環fixture静的結果.md",
+        "sha256": "b42c6f49f2ba378d998a32f7310d8ee2e989d63838e7ae276333068df67542c6"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "全6製品、実経路、既HOLDの32 Test及び451"
+    ],
+    "pmdFoundFirst": 2,
+    "pmdFoundAfter": 0,
+    "currentFixtureRequalification": 3,
+    "userReplay": 0,
+    "partialSpotbugsLimit": 1,
+    "productionDelta": 0,
+    "heldArtifactReads": 0
+  }
+}
