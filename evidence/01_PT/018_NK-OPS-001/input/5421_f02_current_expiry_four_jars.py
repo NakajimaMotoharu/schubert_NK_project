@@ -4,6 +4,7 @@ import io
 from pathlib import Path
 import runpy
 import shutil
+import sys
 import tarfile
 from tempfile import TemporaryDirectory
 from zipfile import ZipFile
@@ -16,20 +17,22 @@ OPS, PLAN, COMMON, PACKAGE, MODULES, UPPER = (
 TARGET = "dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.class"
 
 
-def main():
+def main(final_ownership):
     read = UPPER["read"]
     pin, sha, git, write = (COMMON[key] for key in ("pin", "sha", "git", "dump"))
-    group = read(next(PLAN.glob("1065_F02*")))
+    group = read(next(PLAN.glob("1089_F02*" if final_ownership else "1065_F02*")))
     task = group["values"]
     assert all(pin(Path(item["path"])) == item for item in task["oracleReferences"])
-    previous, selected, roster, tools = (read(row["path"]) for row in task["oracleReferences"][1:])
-    candidate = roster["candidateProductionSource"]
+    previous, selected, prior, tools = (read(row["path"]) for row in task["oracleReferences"][1:])
+    checkpoint = read(Path(task["oracleReferences"][0]["path"]))
+    candidate = checkpoint["candidateProductionSource"] if final_ownership else prior["candidateProductionSource"]
     old_core = previous["productionCore"]
-    assert task["productionCoreMain"] == old_core == roster["lastQualifiedCore"]
+    assert task["productionCoreMain"] == old_core == prior["lastQualifiedCore"]
+    selected_main = selected["candidateMain"] if final_ownership else selected["candidateSource"]
     changed = git("diff", "--name-only", old_core, candidate, "--", "src", "pom.xml",
                   ":(exclude)src/**/src/test/**").decode().splitlines()
-    assert changed == [selected["candidateSource"]["path"]]
-    assert sha(git("show", f"{candidate}:{changed[0]}")) == selected["candidateSource"]["sha256"]
+    assert changed == [selected_main["path"]]
+    assert sha(git("show", f"{candidate}:{changed[0]}")) == selected_main["sha256"]
     assert git("rev-parse", "HEAD").decode().strip() == task["source"]
     assert not git("diff", "--name-only", candidate, task["source"], "--", "pom.xml", "src")
     java = Path(read(next(OPS.glob("PG40128-*/begin.json")))["jdk"]["path"])
@@ -91,7 +94,8 @@ def main():
             assert sum(item["classes"] for item in artifacts.values()) == 1102
             assert {item for paths in deltas.values() for item in paths} == {TARGET}
             new_file = root / modules["batch"] / "target/classes" / TARGET
-            focused = read(next(OPS.glob("PG40696-*-after/manifest.json")))
+            focused_glob = "PG40730-*/manifest.json" if final_ownership else "PG40696-*-after/manifest.json"
+            focused = read(next(OPS.glob(focused_glob)))
             verify["focusedPhysicalByteEqual"] = sha(new_file.read_bytes()) == focused["physical"][TARGET]
             for mode, file in (("before", old_file), ("after", new_file)):
                 stages[f"jdeps-{mode}"] = UPPER["run"](
@@ -128,4 +132,5 @@ def main():
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    assert sys.argv[1:] in ([], ["final-ownership"])
+    raise SystemExit(main(bool(sys.argv[1:])))
