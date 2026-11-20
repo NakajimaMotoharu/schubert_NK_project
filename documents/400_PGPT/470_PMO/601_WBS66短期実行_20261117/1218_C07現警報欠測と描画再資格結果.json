@@ -1,0 +1,162 @@
+{
+  "eventId": "PGPT-20261008-6735",
+  "groupId": "WBS66_C07_CURRENT_ALERT_GAP_STATUS",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T11:48:33.096000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 68,
+      "remainingPercent": 32,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66_C07_CURRENT_ALERT_GAP_STATUS",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "WBS66_C07_CURRENT_ALERT_GAP_STATUS",
+    "workAttributionKind": "SOURCE_REQUALIFICATION",
+    "wbsLeafIds": [
+      "WBS-P018-09"
+    ],
+    "managementWorkIds": [
+      "WBS-P018-09/2",
+      "WBS-C07"
+    ],
+    "source": "c3a0b000e45794090ca030ff9a3ceab89c15b3a6",
+    "productionCoreMain": "da20ad7753279ae4e8017593866502d3341ec0e5",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40822-c07-alert-gap-status-current-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.2,
+      "base": 0.45,
+      "high": 1.1
+    },
+    "groupCapPp": 10,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1216_F02現宣言依存と継続点.json",
+        "sha256": "38f5e39026ce56139be9266e40c5b5ff984031e2659dd2b0d5b0653f7cc77cae"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40818-f03-g08-current-lineage-v1/manifest.json",
+        "sha256": "385e1c31e5095fc64325afede924ea9a30260e4af57176c81a14ced940aa934d"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2586_警報閾値・寿命・継続元whole三十六_現source通常PT仕様.md",
+        "sha256": "47e50668fcd48a0b31b4f187134c029b22df76c30a398fbece5fad707b8daf28"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2811_Fake source・Clock八whole57_単体テスト仕様.md",
+        "sha256": "ac09ea1979bbf02f94c427d1774c7437c156792e25adc2cb275dbf86099e67da"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/4741_警報発火待機と正常復旧の分離単体仕様.md",
+        "sha256": "cc02fb68c8a7ec7a9429a6738a1e4c754f1f4073edceae8278a67ce544f483b2"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "当候補の変更AlertLifecycle・AlertRegistry・MonitoringPolicyEngineを直接通る元3suite11がPG40818の173件に含まれない。",
+    "endCondition": "欠測・null/負時刻・逆行時の状態保持、72キーの独立性、供給値リテラル描画を当候補で成功。単一runの局所測定は実nativeと区別。",
+    "workScope": "自己所有JDK値・有限worker・固定時計のみ。P018-08実nativeは既HOLDを維持。製品未変更、外部操作0。",
+    "quotaAfter": {
+      "usedPercent": 68,
+      "remainingPercent": 32,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "3c6ac8a78c82bcf7d3e8853c4c8108bd585dbbe0da19ae8469539e461b0fef37",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T11:48:33.096000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 68,
+          "remainingPercent": 32,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T11:48:17.718683+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 68,
+      "remainingPercent": 32,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6734",
+    "attempt": 1,
+    "attemptResult": "PASS_SELECTED_FIRST_ATTEMPT",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 11,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40822-c07-alert-gap-status-current-v1/manifest.json",
+        "sha256": "4578bf74bda06285d7a13e30917c03992512b1fe270f3a269f98b8beda460df4"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5446_c07_alert_gap_status_current.py",
+        "sha256": "eb0f2975edfe5a29c661c2d8a016335eec408894abe25d156769977c6bf38e28"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40822-c07-alert-gap-status-current-v1/coverage.xml",
+        "sha256": "20e58f4e6a27dbce3e138451341c499e53874a81df7b8e317e4eca39ed60613d"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "C07 actual collector and retention",
+      "P018-08 actual native same source and owner",
+      "Same-source whole451"
+    ],
+    "executed": 11,
+    "passed": 11,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "notRun": 0,
+    "firstAttemptQualifiedCases": 11,
+    "highlightedInterruptCounters": {
+      "189": {
+        "missed": 0,
+        "covered": 2
+      },
+      "191": {
+        "missed": 0,
+        "covered": 4
+      }
+    },
+    "currentScopedDistinctCases": 184,
+    "verifiedRequalification": 11,
+    "sourceChangedDuringGroup": false,
+    "operations": 0
+  }
+}

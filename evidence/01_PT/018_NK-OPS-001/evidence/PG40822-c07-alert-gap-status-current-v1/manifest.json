@@ -1,0 +1,337 @@
+{
+  "run": "PG40822-c07-alert-gap-status-current-v1",
+  "startEvent": "PGPT-20261008-6734",
+  "source": "c3a0b000e45794090ca030ff9a3ceab89c15b3a6",
+  "core": "da20ad7753279ae4e8017593866502d3341ec0e5",
+  "actualExit": 0,
+  "startedAtUTC": "2026-11-20T11:48:13.660923+00:00",
+  "terminalAtUTC": "2026-11-20T11:48:17.718683+00:00",
+  "os": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+  "jdk": "25.0.4",
+  "tools": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar",
+      "sha256": "fb5b0036a0899ea97edfa0fc2c7985b55f3f7c5695028163e5e60d4f3cf6075d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+      "sha256": "d2b74b20b415163c1f53261e7c5ef4445b788327094208ff821e0c2baf9bc8f1"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+      "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+      "sha256": "25b400f003089d23cc5320cdaf1a16cabee19b8aa3434d0ff021b3d9f42154b4"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+      "sha256": "754e218ab1fcabb1e1c5f8530e9d3aa37636806c22987bb279dd907a6ee749b2"
+    },
+    {
+      "path": "tools/quality/static/checkstyle.xml",
+      "sha256": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+    }
+  ],
+  "sources": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java",
+      "sha256": "ad79f4efc8b3cb9927251473f6325ac18e4b316fe2e6205e4af0f52fb6962a21"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertRegistry.java",
+      "sha256": "24fc6ea876fa229d117024732ad12adbad089ef72083060f55883c40017567ea"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholds.java",
+      "sha256": "b0fd95f08991fa72ba262f023c0b64029ed2e9f1678dfd99cebeb14c26ed7aac"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine.java",
+      "sha256": "8ce6319ce1cc66796725d2d2d773abb10e4d181cf8d24276de2d7c171f987978"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy.java",
+      "sha256": "9eb653ff3b80236306ed03e7621b3d6dc6d4d86764760ba625aa7f203118da73"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringStatusText.java",
+      "sha256": "31b30e2b7ad7d3dcdb0dd9df1e0d4bd00c3c9f694443955ad600709d0485dc8a"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ObservationContext.java",
+      "sha256": "5685db8a219acb224d463f9372c403ad9dfe36ac1d0c6a0fad308d377454cb26"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/package-info.java",
+      "sha256": "009823dd0566a5c0e2a7f06af4b540c122629bec50003bc1585d5303c488d924"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertContinuityTest.java",
+      "sha256": "07b790376ed5c47504e3a6be9e6fbd011c0575f827456f804b91fbbca4ec2811"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringMissingObservationTest.java",
+      "sha256": "64bfbd2e4fd2f43d20097e81070629d6af8993323aeb88511f639ef2840ae677"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringStatusTextTest.java",
+      "sha256": "4b083f731a9c47f9d860fc4887ddfde17cd8bb842864d20efd0bca5c8df3f34c"
+    }
+  ],
+  "compileClassNames": [
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance.class",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition.class",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event.class",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service.class",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity.class",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.class",
+    "dev/codex/schubert/nk/batch/monitoring/AlertRegistry.class",
+    "dev/codex/schubert/nk/batch/monitoring/AlertThresholds.class",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy$DetailService.class",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy$RetentionConfiguration.class",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy.class",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine.class",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringStatusText.class",
+    "dev/codex/schubert/nk/batch/monitoring/ObservationContext.class",
+    "dev/codex/schubert/nk/batch/monitoring/package-info.class"
+  ],
+  "steps": {
+    "format": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertContinuityTest.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringMissingObservationTest.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringStatusTextTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "checkstyle": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "-o",
+        "/dev/shm/pg40822-kuq24526/checkstyle.xml",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertContinuityTest.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringMissingObservationTest.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringStatusTextTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "mainCompile": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "-d",
+        "/dev/shm/pg40822-kuq24526/product",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertRegistry.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholds.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringStatusText.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ObservationContext.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/package-info.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "testCompile": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/dev/shm/pg40822-kuq24526/product:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "-d",
+        "/dev/shm/pg40822-kuq24526/fixture",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertContinuityTest.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringMissingObservationTest.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringStatusTextTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "test": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/dev/shm/pg40822-kuq24526/selected.exec,append=false,sessionid=PG40822",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--disable-ansi-colors",
+        "--class-path",
+        "/dev/shm/pg40822-kuq24526/product:/dev/shm/pg40822-kuq24526/fixture:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "--select-class",
+        "dev.codex.schubert.nk.batch.monitoring.AlertContinuityTest",
+        "--select-class",
+        "dev.codex.schubert.nk.batch.monitoring.MonitoringMissingObservationTest",
+        "--select-class",
+        "dev.codex.schubert.nk.batch.monitoring.MonitoringStatusTextTest",
+        "--reports-dir",
+        "/dev/shm/pg40822-kuq24526/test",
+        "--fail-if-no-tests"
+      ],
+      "exit": 0,
+      "stdoutSha256": "3889815a44775de4a01dc9b0cd5abb8954264df051dd048df1683ea32c3abd91",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "xmlSha256": "32977d74c4bf9a1cdaffcc2721b0717e8d3343a6d9b6dac5b59e15ca2fce4b87"
+    },
+    "selectedCoverage": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/dev/shm/pg40822-kuq24526/selected.exec",
+        "--classfiles",
+        "/dev/shm/pg40822-kuq24526/product",
+        "--xml",
+        "/dev/shm/pg40822-kuq24526/coverage.xml"
+      ],
+      "exit": 0,
+      "stdoutSha256": "5b13ff374e31889187ec936d0fff0e0c6a46701a1cd3729a79561f7e7e37bb03",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "xmlSha256": "20e58f4e6a27dbce3e138451341c499e53874a81df7b8e317e4eca39ed60613d"
+    }
+  },
+  "cases": [
+    {
+      "testId": "AlertContinuityTest.alertContinuity002WarningAndCriticalRecoveryCannotBridgeGap()",
+      "method": "alertContinuity002WarningAndCriticalRecoveryCannotBridgeGap()",
+      "owner": "AlertContinuityTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "MonitoringStatusTextTest.monStatus005FullInstantBoundaryGoldenVectors()",
+      "method": "monStatus005FullInstantBoundaryGoldenVectors()",
+      "owner": "MonitoringStatusTextTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "MonitoringMissingObservationTest.monMissing003ConcurrentAbsencePreservesImmutableSnapshot()",
+      "method": "monMissing003ConcurrentAbsencePreservesImmutableSnapshot()",
+      "owner": "MonitoringMissingObservationTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "MonitoringStatusTextTest.monStatus001EmptyModesHaveOnlySuppliedScopeAndColumns()",
+      "method": "monStatus001EmptyModesHaveOnlySuppliedScopeAndColumns()",
+      "owner": "MonitoringStatusTextTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "MonitoringMissingObservationTest.monMissing001AllRegistryKeysRequireFreshRecovery()",
+      "method": "monMissing001AllRegistryKeysRequireFreshRecovery()",
+      "owner": "MonitoringMissingObservationTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "MonitoringStatusTextTest.monStatus006ConcurrentStatelessFormatting()",
+      "method": "monStatus006ConcurrentStatelessFormatting()",
+      "owner": "MonitoringStatusTextTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "MonitoringStatusTextTest.monStatus003CanonicalOrderCountSeverityAndLastSeen()",
+      "method": "monStatus003CanonicalOrderCountSeverityAndLastSeen()",
+      "owner": "MonitoringStatusTextTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "MonitoringMissingObservationTest.monMissing002EngineBoundariesPreserveEachOwner()",
+      "method": "monMissing002EngineBoundariesPreserveEachOwner()",
+      "owner": "MonitoringMissingObservationTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "AlertContinuityTest.alertContinuity001InvalidInterruptionHasNoStateChange()",
+      "method": "alertContinuity001InvalidInterruptionHasNoStateChange()",
+      "owner": "AlertContinuityTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "MonitoringStatusTextTest.monStatus002LiteralSingleFrameAndNoRetainedCallerState()",
+      "method": "monStatus002LiteralSingleFrameAndNoRetainedCallerState()",
+      "owner": "MonitoringStatusTextTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "MonitoringStatusTextTest.monStatus004NullDuplicateClosedRejectedWithoutOwnerMutation()",
+      "method": "monStatus004NullDuplicateClosedRejectedWithoutOwnerMutation()",
+      "owner": "MonitoringStatusTextTest",
+      "outcome": "passed"
+    }
+  ],
+  "expectation": "Independent literal gap clock, missing observations over 72 owned keys, and fixed local status representation.",
+  "passed": 11,
+  "notRun": 0,
+  "coverage": {
+    "INSTRUCTION": {
+      "covered": 1051,
+      "missed": 630
+    },
+    "BRANCH": {
+      "covered": 69,
+      "missed": 116
+    },
+    "LINE": {
+      "covered": 216,
+      "missed": 96
+    },
+    "COMPLEXITY": {
+      "covered": 79,
+      "missed": 98
+    },
+    "METHOD": {
+      "covered": 52,
+      "missed": 32
+    },
+    "CLASS": {
+      "covered": 12,
+      "missed": 2
+    }
+  },
+  "rawProductCoverage": null,
+  "coverageMethod": "JaCoCo default, seven exact Main types plus package metadata, single selected run.",
+  "sameSourceCasesReplayed": 0,
+  "oldSourceTestsRequired": 11,
+  "oldSourceTestsRequalified": 11,
+  "runtimeInfrastructureActions": 0,
+  "formalDelta": 0,
+  "wholeC07": false,
+  "whole451": false
+}
