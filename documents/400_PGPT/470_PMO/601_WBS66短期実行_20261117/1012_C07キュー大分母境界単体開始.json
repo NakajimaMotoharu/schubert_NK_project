@@ -1,0 +1,67 @@
+{
+  "eventId": "PGPT-20261008-6531",
+  "groupId": "PGPT-WBS66-C07-ASYNC-QUEUE-EXACT-INT64-BOUNDARIES-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T03:55:39.186000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 62,
+      "remainingPercent": 38,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-C07-ASYNC-QUEUE-EXACT-INT64-BOUNDARIES-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-C07-ASYNC-QUEUE-EXACT-INT64-BOUNDARIES-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-C07"
+    ],
+    "managementWorkIds": [
+      "WBS-C07"
+    ],
+    "source": "11fe32d5300ce9cd7fed1e629cbe2e2c510ca0d7",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40636-c07-async-queue-int64-boundaries-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.25,
+      "base": 0.65,
+      "high": 1.5
+    },
+    "groupCapPp": 2.5,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1011_F02Protocol依存禁止照合継続点.json",
+        "sha256": "2088bdd9f7ce22312e35ae4cad15050f8ac71d8dd2aaff84cdc1089594250207"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25012-alert-threshold-whole14-independent-v1/manifest.json",
+        "sha256": "b5b00df3e7b42d4cded2bf44420edb53567d124d62a3fa49c64810862106ce4d"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40498-schema-history-packaged-proof-recovered-v1/manifest.json",
+        "sha256": "bba0cb1781e36039e9014b8a7f27e4ab2354ef78283181a704bae5dba9fd9b0f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40602-f03-current-protocol-maven-independent-v1/manifest.json",
+        "sha256": "94b3c550c89f0903370ef0f2544e011cf74341ae309c3eff880843e3942cc6f7"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "正本SS351 §7の70/90%と独立した件数。元14には小分母とLong全量があるが、大分母で隣接1byteの判定は未確認。",
+    "endCondition": "現Batch JARを固定し独立算術の隣接値4を新通常PT1へ追加。既fixtureと当同execの件数・raw coverageを照合。",
+    "workScope": "公開合成longのみ。実Artemis/DB/runtime/sink/Root/native・資格情報は使わない。"
+  }
+}

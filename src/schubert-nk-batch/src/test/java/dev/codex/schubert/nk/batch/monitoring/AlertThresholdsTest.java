@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
-/** Independent SS351 numbers/time boundaries; PT-OPS-THRESH-001..014/spec1547. */
+/** Independent SS351 numbers/time boundaries; PT-OPS-THRESH-001..015/spec1547. */
 class AlertThresholdsTest {
   private final AlertThresholds thresholds = new AlertThresholds();
   private static final Duration ZERO = Duration.ZERO;
@@ -63,6 +63,16 @@ class AlertThresholdsTest {
     assertEquals(Severity.NORMAL, thresholds.asyncQueue(4999, 0, 1));
     assertEquals(Severity.CRITICAL, thresholds.asyncQueue(0, Long.MAX_VALUE, Long.MAX_VALUE));
     assertEquals(Severity.CRITICAL, thresholds.asyncQueue(0, 100, 99));
+  }
+
+  @Test
+  void threshold015AsyncByteRatiosDistinguishAdjacentValuesAtLongCapacity() {
+    // Ceil(capacity * 70 / 100) and ceil(capacity * 90 / 100), computed independently.
+    long capacity = Long.MAX_VALUE;
+    assertEquals(Severity.NORMAL, thresholds.asyncQueue(0, 6_456_360_425_798_343_064L, capacity));
+    assertEquals(Severity.WARNING, thresholds.asyncQueue(0, 6_456_360_425_798_343_065L, capacity));
+    assertEquals(Severity.WARNING, thresholds.asyncQueue(0, 8_301_034_833_169_298_226L, capacity));
+    assertEquals(Severity.CRITICAL, thresholds.asyncQueue(0, 8_301_034_833_169_298_227L, capacity));
   }
 
   @Test
