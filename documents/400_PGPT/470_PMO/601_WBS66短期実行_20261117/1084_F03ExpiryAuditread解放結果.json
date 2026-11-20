@@ -1,0 +1,167 @@
+{
+  "eventId": "PGPT-20261008-6602",
+  "groupId": "wbs66-f03-expiry-read-single-cleanup-path",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T06:36:22.648000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 64,
+      "remainingPercent": 36,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "wbs66-f03-expiry-read-single-cleanup-path",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "wbs66-f03-expiry-read-single-cleanup-path",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "source": "71a909ddbcd43f4b5ce2d66d3293ac857ccfe825",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40726-f03-expiry-read-single-cleanup-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.4,
+      "base": 1.0,
+      "high": 2.3
+    },
+    "groupCapPp": 4,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1082_F03ExpiryAudit29継続点.json",
+        "sha256": "fd54a897dfbe34b25557b3408c9139bb71fffb91b9c93a60fcf38dbdb4bf1982"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40724-f03-expiry-current-29-proxy-v1/manifest.json",
+        "sha256": "c0f0c4706b1f5da63e7ae870954a6f198eb88acf607fdaed9aab7ccde7de0f62"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40704-f02-current-four-expiry-jars-v1/manifest.json",
+        "sha256": "c58df3b46be9501d68256a6b8578efa8c0f7021f66f0e477d58de8c907b62da1"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40722-f03-expiry-local-coverage-deficits-v1/independent-deficit-index.json",
+        "sha256": "0467bef95e5dabf207dd59e69181510f303cb3b7de0d6dd8f82edf24d5e9809f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40714-f03-expiry-typed-static-independent-v1/manifest.json",
+        "sha256": "98f7eb0b712008f956ca94ab1b04bcb7d7b34a07db96cf33c0ee84f491dde03e"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "SS332 SSC310 requires direct close on each acquired row then statement with existing priority. Two private typed close bodies match the already established RunReferenceRepository formulation; current duplicated finally emits 8 duplicate outcomes.",
+    "endCondition": "Same PT roster 29 on changed Main; exact public ABI and SQL, normal/early/catch cleanup once, known and unknown exceptions unchanged, all read branches measured. Report stage/finish separately.",
+    "workScope": "Explicit Java close helpers for read only. No real DB, owner, Root, provider or new business specification.",
+    "quotaAfter": {
+      "usedPercent": 64,
+      "remainingPercent": 36,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "f72c58bd7d267297ecbd0f657eb462292b474d29cd85ef026593877971e36b0f",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T06:36:22.648000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 64,
+          "remainingPercent": 36,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T06:35:44.440003+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 64,
+      "remainingPercent": 36,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6601",
+    "attempt": 1,
+    "attemptResult": "PASS_READ_OWNERSHIP_EXACT_29",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40726-f03-expiry-read-single-cleanup-v1/manifest.json",
+        "sha256": "fb6f03d3d3db26453a6db596f2791eca14aa9699440bddf69d087b50115a48d3"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40728-f03-expiry-read-ownership-independent-v1/manifest.json",
+        "sha256": "bcb9a60866e73aa4b7c4db7c02fc53dbbd5e6eafe671887ff87e2c39390f0188"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "raw stage and finish branch4 and instruction8",
+      "F02 F03 current full and 451",
+      "YKT-2731 held adjacent CleanupTerminal"
+    ],
+    "firstVerificationPass": 1,
+    "firstVerificationDenominator": 1,
+    "neededCurrentSourceCases": 29,
+    "readBranchesNowAllCovered": true,
+    "candidateProductionSource": "2402815557c095cf8512bc49bfb1ef44c228fb3c",
+    "rawMetrics": {
+      "LINE": {
+        "covered": 263,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 51,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 4,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 192,
+        "missed": 4
+      },
+      "INSTRUCTION": {
+        "covered": 1395,
+        "missed": 8
+      }
+    },
+    "bugFixed": "BUG-3407",
+    "crossCuttingOpen": "YKT-2731",
+    "publicAbiSame": true,
+    "sqlSame": true
+  }
+}

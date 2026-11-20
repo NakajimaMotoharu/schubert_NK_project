@@ -1,0 +1,94 @@
+{
+  "eventId": "PGPT-20261008-6603",
+  "wbsLeafIds": [
+    "WBS-F03"
+  ],
+  "managementWorkIds": [
+    "WBS-F03/2-2"
+  ],
+  "workCategory": "IMPLEMENTATION",
+  "source": "71a909ddbcd43f4b5ce2d66d3293ac857ccfe825",
+  "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+  "previousCheckpoint": "PGPT-20261008-6600",
+  "groupEvents": [
+    "PGPT-20261008-6602"
+  ],
+  "acceptedOriginal": 17,
+  "total": 190,
+  "coreAccepted": 0,
+  "coreTotal": 5,
+  "officialPtTests": 1964,
+  "officialPtScopes": 53,
+  "newFormalAcceptance": 0,
+  "effortRate": null,
+  "actualAllocatedPp": null,
+  "newProductTests": 0,
+  "recordedOwnedJobsInFlight": 0,
+  "ownedBackendJobsStartedHere": 0,
+  "modelObserved": "gpt-6.2-sol",
+  "reasoningObserved": null,
+  "speedObserved": null,
+  "outcomeEvidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40726-f03-expiry-read-single-cleanup-v1/manifest.json",
+      "sha256": "fb6f03d3d3db26453a6db596f2791eca14aa9699440bddf69d087b50115a48d3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40728-f03-expiry-read-ownership-independent-v1/manifest.json",
+      "sha256": "bcb9a60866e73aa4b7c4db7c02fc53dbbd5e6eafe671887ff87e2c39390f0188"
+    }
+  ],
+  "fullQuotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T06:36:22.648000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 64,
+      "remainingPercent": 36,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "quotaAfter": {
+    "usedPercent": 64,
+    "remainingPercent": 36,
+    "resetsAt": 1795445753,
+    "windowDurationMins": 10080
+  },
+  "sharedDeltaPp": 0,
+  "completedOriginalRowPricePp": 0,
+  "remainingCriteria": [
+    "raw stage and finish branch4 and instruction8",
+    "F02 F03 current full and 451",
+    "YKT-2731 held adjacent CleanupTerminal"
+  ],
+  "nextEvidence": "stage/finishのnonnull取得後のTWRを既Java25の同一性・抑制順と同値に整理し、事前起票と独立compound試験のあと残4分岐を検証。",
+  "candidateProductionSource": "2402815557c095cf8512bc49bfb1ef44c228fb3c",
+  "rawMetrics": {
+    "LINE": {
+      "covered": 263,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 51,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 4,
+      "missed": 0
+    },
+    "BRANCH": {
+      "covered": 192,
+      "missed": 4
+    },
+    "INSTRUCTION": {
+      "covered": 1395,
+      "missed": 8
+    }
+  },
+  "bugFixed": "BUG-3407",
+  "crossCuttingOpen": "YKT-2731",
+  "publicAbiSame": true,
+  "sqlSame": true
+}
