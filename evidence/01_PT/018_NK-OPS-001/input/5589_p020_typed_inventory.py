@@ -64,7 +64,9 @@ def main(red):
     changed = {TEST} if red else {TEST, CORE}
     assert {Path(name) for name in git("diff", "--name-only", old["source"], head, "--", MODULE)
             .decode().splitlines()} == changed
-    assert not git("diff", "--name-only", values["productionCoreMain"], head, "--", "src")
+    assert not git("diff", "--name-only", values["source"], head, "--", "src")
+    assert not git("diff", "--name-only", values["productionCoreMain"], head,
+                   "--", ":(glob)src/**/src/main/**")
     baseline = git("rev-parse", f"{head}:{MODULE}/baseline/current").decode().strip()
     assert baseline == old["unchangedCurrentTree"]
     run = values["run"] if red else "PG41118-p020-source-count-green-v1"
