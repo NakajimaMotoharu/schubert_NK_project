@@ -881,3 +881,8 @@ BUG3001/YKT2530は表示escape誤読による誤検知取り下げ、source修�
 価格1/3/8pp cap9はこのsource製造・PT source・強化レビュー段のみ。未実行SDK/PTの残工数を0としない。後続費用は元P019/全451費用に含む未確定内訳として保留、追加二重課金0、今回段完了を工程完了/工数完成率に換算しない。正式1964PT/53scope、正本184/625、元190新0、工数率nullを維持。
 
 2026-11-15 Wire13Source58計画: NK-MSG-001/P005-02のProtectedReadReasonContractTest PT-JMS-WIRE-REASON001（新1）と既57の必要同source再資格。RD MQ/AUT、UI232234235、SS311321322323352、仕様018/4273、準備33730/事前33732。Production13Source/current186旧入力不変を実証して旧NullAway/MainSB/Code194を再利用、新whole8Testだけcompile。まだ未実行、ownWebと全194/Protocolを分離し、全451/正式認定を更新しない。
+
+
+## 2026-11-20 検査サマリーの単独SQL失敗
+
+NK-DAT-001／NK-BAT-001の共通参照、WBS-P004-02/2、P004-05/2、F02/F03。InspectionSummaryRepository.read最外捕捉と既JdbcFailureGraph.preserveFatalをDAT009／OPS009、UI251、SS331 §3.13、SS332 SSC063、SS311 SSC461、BUG-3416／YKT-2359、INSPPORT011/012へ接続。現Core `cdb649a5f054bc2ceed72ef57e55605f14a590d1` の選択13、当物理raw四100、実DBと全451は継続。 [PT仕様](../../../evidence/01_PT/004_NK-DAT-001/454_P00402検査サマリー単独非fatal循環とraw単体仕様.md)、[PG40842](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40842-p00402-inspection-sql-cycle-raw-v1/manifest.json)
