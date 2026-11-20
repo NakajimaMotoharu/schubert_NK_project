@@ -64,16 +64,26 @@ public final class WebLogPayloadCodec implements AutoCloseable {
       byte @Nullable [] previousKey,
       SecureRandom random) {
     this.currentVersion = requireVersion(currentVersion);
-    this.currentKey = requireKey(currentKey);
+    requireKey(currentKey);
     if ((previousVersion == null) != (previousKey == null)) {
       throw new IllegalArgumentException("previous web log key and version must be paired");
     }
     this.previousVersion = previousVersion == null ? null : requireVersion(previousVersion);
-    this.previousKey = previousKey == null ? null : requireKey(previousKey);
+    if (previousKey != null) {
+      requireKey(previousKey);
+    }
     if (this.currentVersion.equals(this.previousVersion)) {
       throw new IllegalArgumentException("web log key versions must be distinct");
     }
     this.random = Objects.requireNonNull(random, "random");
+    // Own key bytes only after all configuration checks have succeeded.
+    this.currentKey = currentKey.clone();
+    try {
+      this.previousKey = previousKey == null ? null : previousKey.clone();
+    } catch (Error failure) {
+      Arrays.fill(this.currentKey, (byte) 0);
+      throw failure;
+    }
   }
 
   /** Validates identity and wire content, then encrypts with the current key and a new nonce. */
@@ -228,12 +238,11 @@ public final class WebLogPayloadCodec implements AutoCloseable {
     return version;
   }
 
-  private static byte[] requireKey(byte[] key) {
+  private static void requireKey(byte[] key) {
     Objects.requireNonNull(key, "key");
     if (key.length != AES_KEY_BYTES) {
       throw new IllegalArgumentException("web log key must contain exactly 256 bits");
     }
-    return key.clone();
   }
 
   private void ensureOpen() {
