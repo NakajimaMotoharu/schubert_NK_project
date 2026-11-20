@@ -941,3 +941,7 @@ NK-CHR-001、UI264、SS355 G01／G04、PT-CHR-SYN007、BUG-3441／YKT-2753。WBS
 ### CHR比較とソース照合の入力終端（PG41010）
 
 NK-CHR-001、UI264、SS355 G01／G04／G05、WBS-P020-01.03/2、ArtifactComparator／GateCli、PT-CHR-COMPARE-FRAME001／PT-CHR-VERIFY-FRAME001、BUG-3442／3443、YKT-2753。[仕様](../../../evidence/01_PT/018_NK-OPS-001/5549_P020比較工具単一JSON横展開仕様.md) [証跡](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41010-p020-reader-framing-green-v1/manifest.json)。
+
+### F03コンパイラ非推奨対照の正式Test ID
+
+WBS-F03/2-2、SS354、451、PT-F03-COMPILER-004、BUG-3445／YKT-2754。PG40978の非推奨対照は当004へ対応。001は元NullAway正常の識別子。[正本補足](../../../evidence/01_PT/018_NK-OPS-001/5555_F03製品コンパイラTestID訂正.md) [訂正](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41022-f03-compiler-control-trace-correction-v1/manifest.json)。

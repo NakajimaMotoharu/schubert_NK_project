@@ -1,0 +1,72 @@
+{
+  "eventId": "PGPT-20261008-6992",
+  "groupId": "F03-compiler-control-unique-test-id-correction",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T17:09:17.655000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 75,
+      "remainingPercent": 25,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "F03-compiler-control-unique-test-id-correction",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "F03-compiler-control-unique-test-id-correction",
+    "workAttributionKind": "REWORK",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2",
+      "WBS-F03/criterion/quality"
+    ],
+    "source": "be5f6c337bf209d37eda84455494e911e6405a2a",
+    "productionCoreMain": "2b16a8ed20778fe5896099cb4798cfd1ff96b176",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG41022-f03-compiler-control-trace-correction-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.04,
+      "base": 0.12,
+      "high": 0.3
+    },
+    "groupCapPp": 0.5,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1475_G07比較工具包装後の公開差分継続点.json",
+        "sha256": "ff00d4bb7dbf2cd535b67ec126b15e4e8c828b3aeb1826d24c697ca77b88df03"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40978-f03-production-compiler-werror-controls-v1/manifest.json",
+        "sha256": "2ad58c23b8ddf09755433e491aebb076acf4fa42dc9bb466af1476e2657d0ea6"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40648-f03-real-compiler-controls-independent-v1/manifest.json",
+        "sha256": "a241b704a1df37a23b6dc6bc8815feae934d85427f3fe247d3ea610b2f24b843"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/4708_F03実コンパイラ警告境界の単体仕様と結果.md",
+        "sha256": "056e7af13567bc7ba65838528e5cbe71838732518eba2e15f3deef2c94908072"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/5533_F03製品コンパイラ警告ゲート仕様.md",
+        "sha256": "3a9aa59141bf69234e2190612e530aa0ab234428ee88786e26091ee0715b65b4"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "WBS-F03/2-2と354/451追跡。PG40978の実deprecation fixtureがPG40646/48の001既IDを重ねた。",
+    "endCondition": "旧IDは原NullAway正常だけに保持。新deprecation組は空き004へ訂正overlayで一意化。全元証跡・hashを変更せず動的再演0。",
+    "workScope": "Git内公開ID・tool manifest・仕様・追跡のみ。製品scope・運用なし。"
+  }
+}
