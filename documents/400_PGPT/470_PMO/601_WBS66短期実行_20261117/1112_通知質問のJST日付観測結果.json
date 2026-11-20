@@ -1,0 +1,180 @@
+{
+  "eventId": "PGPT-20261008-6630",
+  "groupId": "wbs66-question-notification-civil-date-wire",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T08:11:36.221000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 65,
+      "remainingPercent": 35,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "wbs66-question-notification-civil-date-wire",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "wbs66-question-notification-civil-date-wire",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P016-20",
+      "WBS-P016-22"
+    ],
+    "managementWorkIds": [
+      "WBS-P016-20/2-照合",
+      "WBS-P016-22/2-照合"
+    ],
+    "source": "18dc3aa56436780bf0d425ea7ec594369e6b36b5",
+    "productionCoreMain": "517a23cddc9f3883550942f6fa90a4256ef39b73",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40752-search-civil-date-wire-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.25,
+      "base": 0.7,
+      "high": 1.5
+    },
+    "groupCapPp": 3,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1110_F02現四製品JAR全依存の継続点.json",
+        "sha256": "0a3dc4a2e7b5b7e1925019ea11defb50281bc10fcff3ced1ed5cf043fa55446e"
+      },
+      {
+        "path": "evidence/01_PT/016_NK-WEB-002/059_NK-WEB-002_通知一覧HTTP単体テスト仕様書.md",
+        "sha256": "2d23163a3813c561758b0e0c0b02b7d4f84a427a76ee854e223708e62bed2542"
+      },
+      {
+        "path": "evidence/01_PT/016_NK-WEB-002/063_NK-WEB-002_質問検索・明細参照HTTP単体テスト仕様書.md",
+        "sha256": "9b4024ea538c66c2aec98cf0e56e0f4137975246e076061b03af452ce4baa989"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40744-f02-cleanup-terminal-current-four-jars-v1/manifest.json",
+        "sha256": "b09a2e11492f508e5b1a503877f3efc9b5ac72412e7a9b8a68960e62d56dc2a0"
+      },
+      {
+        "path": "documents/300_SS/320_メッセージング/322_固定長電文codec実装設計.md",
+        "sha256": "4050c672abea8bc7ca1c70bc47783185914206cdc6d126d55fe274971fab5d4a"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "Both original WEB test specifications require year 0001 and JST start/close. The old form test checked a fixed offset independently from wire, while SS322 direct codec uses Asia/Tokyo. No existing composed lower calendar wire fixture found.",
+    "endCondition": "Record same-date literal golden vs actual for date-only start/end with modern control, against only current two forms and pinned Protocol. If difference is confirmed, log BUG/YKT before any product change and identify the canonical scope.",
+    "workScope": "Pure form parsing, DTO and PayloadCodec of normal synthetic non-sensitive dates. No service or HTTP, role authority, DB, held class/operation, or prior test rerun.",
+    "quotaAfter": {
+      "usedPercent": 65,
+      "remainingPercent": 35,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "a6a85eb94d8e98cfef58a4fde646e759eaea78bd6e8e7b7b31ef2986fe7b4792",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T08:11:36.221000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 65,
+          "remainingPercent": 35,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T08:08:38.528322+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 65,
+      "remainingPercent": 35,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6629",
+    "attempt": 1,
+    "attemptResult": "REPRODUCED_TWO_CIVIL_DATE_MISMATCHES_QA_DEFERRED",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG40752-search-civil-date-wire-v1/manifest.json",
+        "sha256": "c8c3700c2cad587c7f6170e7d6449f65f922fb9cd84c414af68e6bfe7d7553fc"
+      },
+      {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG40752-search-civil-date-wire-v1/observations.tsv",
+        "sha256": "398ffb2aba207a293398d4c9ede22623045d2f24e7767bba3329e53f8b83c7ac"
+      },
+      {
+        "path": "documents/900_OTHER/910_台帳/911_確認事項一覧.md",
+        "sha256": "d0b3fd7b4247db035544f4ee2c20ab1d0002a706060b21f9636b77dbaac2380a"
+      },
+      {
+        "path": "documents/900_OTHER/910_台帳/913_基本設計修正管理台帳.md",
+        "sha256": "2587a2839aca1b840817d0b3d2339679e9c1f27b7dedb099f47ab78d741b18dc"
+      },
+      {
+        "path": "documents/900_OTHER/910_台帳/914_詳細設計修正管理台帳.md",
+        "sha256": "b4ed74d76fdde194a2bbe5c17ef3e1061a7aac1bad55388d92ee4b1524a18deb"
+      },
+      {
+        "path": "documents/900_OTHER/910_台帳/915_障害表.md",
+        "sha256": "7184cd0b06df1f13594bbe07df5aac1ded0846556c1f9f09a7b298dfafe19ab6"
+      },
+      {
+        "path": "documents/900_OTHER/910_台帳/916_横展開管理台帳.md",
+        "sha256": "c085327d79965ab4179a9e6e9effbc59c21085a9eb1c2d734b5f81008fddaa1e"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "BUG-3410 actual fix and same-scope test",
+      "QA-060/UIC-013/SSC-475 date limit decision and cross-layer design",
+      "YKT-2733 neighboring LogSearchForm is separately fixed +09 under SSC073; determine separate scope if evidence shows drift, no modification under this QA",
+      "WBS-P016-20/22 HTTP/DOM, API and 451; F02/F03 full conditions continue"
+    ],
+    "selectedObservations": 4,
+    "syntheticObservationMatches": 2,
+    "syntheticObservationMismatches": 2,
+    "selectedObservationsNotRun": 0,
+    "compiledFormSources": 2,
+    "acceptedIndividualSubconditions": [],
+    "originalToolExit": 1,
+    "diagnosticRun": "PG40752-search-civil-date-wire-v1",
+    "bugId": "BUG-3410",
+    "horizontalReview": "YKT-2733",
+    "waitingOnUserOnlyForAffectedWork": [
+      "QA-060",
+      "UIC-013",
+      "SSC-475"
+    ],
+    "historicalWindowObservation": {
+      "inclusiveLocalDays": 366,
+      "elapsed": "PT8784H18M58.999S"
+    },
+    "oldFormTestsReplayed": 0,
+    "sourceChanged": false
+  }
+}
