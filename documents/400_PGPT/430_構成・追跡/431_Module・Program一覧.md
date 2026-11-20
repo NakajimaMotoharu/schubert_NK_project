@@ -977,3 +977,7 @@ SS311 §3／5.2、UI231、MQ-004／005、WBS-F02-a、PT-F02-WEB-TRANSPORT-001～
 ### 正式証跡manifestの曖昧性排除
 
 WBS-G08、F03/2-3、SS354、451、PT-QA-TRACE-004、BUG-3461／YKT-2763。[現仕様・結果](../../../evidence/01_PT/018_NK-OPS-001/5569_G08正式manifestの形式検証仕様・結果.md)。
+
+### F02 API repositoryの上位依存
+
+PT-F02-REPO-INBOUND-001～007、SS311 §3／PG-D516、WBS-F02-a。静的工具＋現source名寄せ。実API JARは別。 [仕様・証跡](../../../evidence/01_PT/018_NK-OPS-001/5588_F02Repository受信層依存仕様・結果.md)。
