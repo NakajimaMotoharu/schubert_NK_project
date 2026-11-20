@@ -1,0 +1,79 @@
+{
+  "eventId": "PGPT-20261008-6672",
+  "groupId": "wbs66-f02-sys014-entry-it-receipt",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T09:55:59.927000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 66,
+      "remainingPercent": 34,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "wbs66-f02-sys014-entry-it-receipt",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "wbs66-f02-sys014-entry-it-receipt",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a"
+    ],
+    "source": "14d8d0095238a1e7a22f7a74e04f29d84eae2ecd",
+    "productionCoreMain": "517a23cddc9f3883550942f6fa90a4256ef39b73",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40782-f02-sys014-it-receipt-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.45,
+      "high": 0.9
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1153_現行17作業群の成果・保留と継続条件.json",
+        "sha256": "3d551ab545b8949d62b03cf2cbc80d0d75c0aea3b97b1355508eaf83d2b2fb7e"
+      },
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/546_F02十三要求と現四JAR照合.md",
+        "sha256": "3cdeb63d5ac3f793a1005ddb2dd2d216bdf4d6a815441634dbf420b29d1ead89"
+      },
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/217_F02_現行十三要求引渡し.md",
+        "sha256": "667cac05cf0f33b2d99c8931c12038ee9e2bbb0d6d274e5213e36ca20e5a2f9a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38522-f02-six-resolved-maven-dependency-model-v1/manifest.json",
+        "sha256": "dd478111437fdd65aeefe3dae47bebe556ff4a9eee54d851dd34018ba1db1a5a"
+      },
+      {
+        "path": "src/deployment/caddy/Caddyfile.template",
+        "sha256": "2914bfd4134186911562071f92652ce750e513213a749672dd161615c3d8763c"
+      },
+      {
+        "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+        "sha256": "07ab19dd27038241ba8257a1e4dcf180117a844b68479ec6848658a938445192"
+      },
+      {
+        "path": "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md",
+        "sha256": "ecb5f59eee087fd8e32fcfecdd89753bee89ede00bb5eba31dc1c2a2e45be677"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "Existing 217/546 gives architecture and a generic IT gap. No conditions/receipt fields for replacing the entry while preserving application package identity.",
+    "endCondition": "Bind row-specific permitted future configuration delta, application invariants, IT acceptance controls and independent receipts to the current template and canonical design; distinguish initial deployment from future approved deployment and preserve actual receipt pending.",
+    "workScope": "Public design and template only; do not execute, access public endpoint, keys/certs, change configuration or inspect JARs."
+  }
+}
