@@ -1,0 +1,71 @@
+{
+  "eventId": "PGPT-20261008-7219",
+  "groupId": "WBS66-F03-STORAGE-FULL-STATIC-LINEAGE",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T23:02:31.290000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 84,
+      "remainingPercent": 16,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66-F03-STORAGE-FULL-STATIC-LINEAGE",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "WBS66-F03-STORAGE-FULL-STATIC-LINEAGE",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "source": "950bf38dddf27a5048e1b29394775ff57f3e06d3",
+    "productionCoreMain": "62b239d4dad561da007e15a290f8a271a165dda9",
+    "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "run": "PG41310-f03-storage-exact-static-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.2,
+      "base": 0.65,
+      "high": 1.35
+    },
+    "groupCapPp": 1.6,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1703_G08現受入16・次の独立作業.json",
+        "sha256": "00096290fbc11bee3b9bb125bd4f2f853d37d8f28d4b462514b50b87080fd77e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36824-storage-main-independent-v1/manifest.json",
+        "sha256": "c5d723b97a2fa9426ba79d46656c8a3adf83545ad00e328c980ce03996c6bdef"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40498-schema-history-packaged-proof-recovered-v1/manifest.json",
+        "sha256": "bba0cb1781e36039e9014b8a7f27e4ab2354ef78283181a704bae5dba9fd9b0f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41296-f03-storage-generic-edge-typed-v1/manifest.json",
+        "sha256": "04642ce85599e1c08e1a3e9a7e64aca9544b4028b7e9ae489724d3e0699152ad"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36826-storage-main-xml-return-v1/manifest.json",
+        "sha256": "1a99db7412166d3f3dcab795f1f7ba6d8af58545c8ec0944dd0331280d8889da"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "旧25 Main/80物理・Root静的と現正規Storage JAR。QA056四型、Root11実行に依存しないことを静的に確認。",
+    "endCondition": "現25/80の実差分、変化分の型付きSpotBugs・PMD・CS、既証拠・新静的を混同せず分類し、未証明範囲を担当資料へ。",
+    "workScope": "現正規Storage JARと公開Javaの読み取り・静的解析。資格、鍵、実native、稼働ジョブ、実file I/Oはなし。"
+  }
+}
