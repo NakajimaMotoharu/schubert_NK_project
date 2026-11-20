@@ -1,0 +1,63 @@
+{
+  "eventId": "PGPT-20261008-6685",
+  "groupId": "PGPT-WBS66-G07-CURRENT-PUBLIC-GIT-DELTA-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T10:11:23.698000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 67,
+      "remainingPercent": 33,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-G07-CURRENT-PUBLIC-GIT-DELTA-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-G07-CURRENT-PUBLIC-GIT-DELTA-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-G07"
+    ],
+    "managementWorkIds": [
+      "WBS-G07"
+    ],
+    "source": "253ed99b98232eeaddc4fdf993f1e02345fe9a3a",
+    "productionCoreMain": "517a23cddc9f3883550942f6fa90a4256ef39b73",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40790-g07-public-git-delta-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.1,
+      "base": 0.25,
+      "high": 0.6
+    },
+    "groupCapPp": 1,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1167_静的入力再発防止と残陽性証拠.json",
+        "sha256": "e15a95d9f419f516505a06c09b8a14c750baffc769d7605c29a0b90bc47cba4e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40770-g07-bounded-public-increment-v1/manifest.json",
+        "sha256": "f26a1d3b631c7cb85074e9bbd124ce3e3aaba2e181f85a558d7299fe9e1607ee"
+      },
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1140_G07限定範囲と残短期criteria.json",
+        "sha256": "ac384d6efd0f550c2c269a487d3fbf49dec0ff54392b646046946c93dde26e1e"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "前回の公開差分終端b5aebd以後の新規公開Git履歴。不明なuntracked、旧期間と保留artifactは除外。",
+    "endCondition": "固定範囲のcommit・各diff hash、検出と分類を保存する。451全量や別期間には適用しない。",
+    "workScope": "文書・公開証跡・品質工具・AGENTSの新規テキストdiffのみ。private、実運用、製品class/JARへのアクセスなし。"
+  }
+}
