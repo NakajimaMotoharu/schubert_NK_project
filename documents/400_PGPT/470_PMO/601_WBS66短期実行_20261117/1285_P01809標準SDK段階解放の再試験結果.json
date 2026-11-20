@@ -1,0 +1,163 @@
+{
+  "eventId": "PGPT-20261008-6801",
+  "groupId": "P01809-batch-standard-gc-close-once",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T13:28:28.434000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 70,
+      "remainingPercent": 30,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "P01809-batch-standard-gc-close-once",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "P01809-batch-standard-gc-close-once",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P018-09"
+    ],
+    "managementWorkIds": [],
+    "source": "08f2054ac82cd8cabc4a57c12162736edfa1cf31",
+    "productionCoreMain": "cdb649a5f054bc2ceed72ef57e55605f14a590d1",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40872-batch-standard-gc-partial-close-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.45,
+      "base": 1.0,
+      "high": 2.4
+    },
+    "groupCapPp": 3.0,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1283_F03検査サマリーの解析入力継続点.json",
+        "sha256": "8abdb8220593461448710e6761af28080588cc87d96260bdd68938be8350cd87"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25262-batch-standard-whole73-independent-v1/manifest.json",
+        "sha256": "6f1cf6ad912fbc987356e2cef7f6426ab90b80b8c04d99e6cb3d1f2497462177"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG8170-prometheus-sdk-prepare-v1/manifest.json",
+        "sha256": "371004a7bcadce5d398059e765ef8f3dc876a7ea004fced60ba8ceb05fad123a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/1810_WebBatchStandardMetricSource_単体テスト仕様.md",
+        "sha256": "d8240e706b616a3a1072f808038313d68cc4ed9b253f35eedbff6883f01fec9d"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "既BatchStandardMetricSourceTestと固定Micrometer SDKを用いる。標準SDK内部閉包、外部endpointなし。API/Web横展開は当Batch証拠とは別。",
+    "endCondition": "BATCHHOST017でGC解放成功後のregistry close失敗・明示再closeの順序を修正前後比較し、修正後は同ownerの既16も検証。元例外、scrape拒否、冪等を確認。",
+    "workScope": "P018-09監視SDK Batchの一所有経路、C07は参照費用加算なし。実運用監視・サービス・VM・451は別。",
+    "quotaAfter": {
+      "usedPercent": 70,
+      "remainingPercent": 30,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "a0cec567595edb31b6f3a539544a16089b0e6fcf69e56f9ecdc8a62029c86ffa",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T13:28:28.434000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 70,
+          "remainingPercent": 30,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T13:28:14.446317+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 70,
+      "remainingPercent": 30,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6800",
+    "attempt": 1,
+    "attemptResult": "BEFORE_FAILURE_CORRECTED_ON_FIXED_SOURCE",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 16,
+    "newProductTests": 1,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40874-batch-standard-gc-partial-close-v1-after/manifest.json",
+        "sha256": "38a871d3db549245ab693df9adf3f24a58c8d4e392d6896b2e7b02e7e0c5fc9c"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40872-batch-standard-gc-partial-close-v1-before/manifest.json",
+        "sha256": "c8a77fa6cfab9b1b8cae5d7e073c00e528eb875585d4aa334a0d3e83548d2b80"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/5466_Batch標準SDK段階解放の単体仕様.md",
+        "sha256": "37d613d927d4348e2cea23dd870b8f6a0a2ab5b1d52e3734100d6803ecb0c78b"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5466_batch_standard_gc_partial_close.py",
+        "sha256": "c1ea8879994486b07286f226a2ff6267fe944b97b6818ca10b62b97ebd9a2583"
+      },
+      {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/BatchStandardMetricSourceTest.java",
+        "sha256": "6d325cbbf8260f62d7b71a4250516b818cb8b73888e2e43f1a7d45c2a8dadd4d"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/5467_Batch標準SDK段階解放の実行結果.md",
+        "sha256": "582a974f25e98dae99619b69b135ae144ec56b2098269bc91e947123a9238be2"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40874-batch-standard-gc-partial-close-v1-after/coverage.xml",
+        "sha256": "0ea88e75369de700dd6f3c8740746ced0b2689efe84fc16f3c5439881b1ed1ee"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "YKT-2740 API/Web",
+      "型付きNullAway・PMD・候補現物理と全451",
+      "実監視"
+    ],
+    "selectedPassed": 17,
+    "firstBeforeFailures": 1,
+    "selectedFailedAfter": 0,
+    "line": 42,
+    "method": 9,
+    "classCount": 1,
+    "branch": 16,
+    "instruction": 177,
+    "candidateProductionSource": "55add7630760e956c20e534dca8f6c90d93707b7",
+    "testId": "BATCHHOST017",
+    "bug": "BUG-3418",
+    "expansion": "YKT-2740",
+    "newCaseCount": 1
+  }
+}
