@@ -1,0 +1,160 @@
+{
+  "run": "PG41202-range-unit-ascii-baseline-v1",
+  "source": "08106402843b738ab8d5a546fa3493da3359b332",
+  "productionCore": "559f5b5945e82374e0843dcfae11a8d07faef1ea",
+  "actualExit": 1,
+  "terminalAtUTC": "2026-11-20T20:53:34.172188+00:00",
+  "group": {
+    "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1634_Range単位ASCII限定着手.json",
+    "sha256": "14e7b1ebf3f5bc7ddc52187ddc1a97da51b5b6ccc876f592ffcbf90bed6dab07"
+  },
+  "main": {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/HttpByteRangeParser.java",
+    "sha256": "6a4033dfedc2148642b1bf5a83eb69719f36d0bc38813c495cf211e520595e88"
+  },
+  "testsInput": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeUnitTokenTest.java",
+      "sha256": "4b30772d7b8add28b81255de052d229b76c3fe6e61a05414b009ffedb16de516"
+    }
+  ],
+  "tests": 2,
+  "failures": 1,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "cases": [
+    {
+      "name": "rejectsNonAsciiCaseEquivalentInTheUnit()",
+      "classname": "dev.codex.schubert.nk.web.media.HttpByteRangeUnitTokenTest",
+      "testId": "PT-MED-RANGE-UNIT-001",
+      "result": "FAIL",
+      "expected": "Unsatisfiable",
+      "actual": "Partial[start=0, end=0]"
+    },
+    {
+      "name": "acceptsMixedAsciiCaseAndSelectsTheFirstInterval()",
+      "classname": "dev.codex.schubert.nk.web.media.HttpByteRangeUnitTokenTest",
+      "testId": "PT-MED-RANGE-UNIT-002",
+      "result": "PASS"
+    }
+  ],
+  "stages": {
+    "format": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "../toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeUnitTokenTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "checkstyle": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "../toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeUnitTokenTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "3bb5d9815f3c3aca4eb640d8371f4108aff429182b8f04dd1a4bbf388b277d39",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compile": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "-g",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "-d",
+        "/dev/shm/pgpt-range-unit-9h086hbx/classes",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/HttpByteRangeParser.java",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeUnitTokenTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "junit": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Dfile.encoding=UTF-8",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/PG41202-range-unit-ascii-baseline-v1/unit.exec,append=false,sessionid=PG41202-range-unit-ascii-baseline-v1",
+        "-cp",
+        "/dev/shm/pgpt-range-unit-9h086hbx/classes:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "org.junit.platform.console.ConsoleLauncher",
+        "execute",
+        "--disable-banner",
+        "--details=summary",
+        "--fail-if-no-tests",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41202-range-unit-ascii-baseline-v1/xml",
+        "--select-class",
+        "dev.codex.schubert.nk.web.media.HttpByteRangeUnitTokenTest"
+      ],
+      "exit": 1,
+      "stdoutSha256": "276b0d41ed9574d3a508fe2619ec8fa1df417ae73949b88d63a2a94fa70fc6e2",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "junit": {
+    "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+    "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "agent": {
+    "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar",
+    "sha256": "fb5b0036a0899ea97edfa0fc2c7985b55f3f7c5695028163e5e60d4f3cf6075d"
+  },
+  "originals": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41202-range-unit-ascii-baseline-v1/terminal.json",
+      "sha256": "27e85601a56c0df894d4a7dc5ea8fd4ebb6cc06719ff2eb1f05f474a796f9490"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41202-range-unit-ascii-baseline-v1/unit.exec",
+      "sha256": "5a88f053756306f01648aac1e4d87bd6c47bbf2654c3a6752d04044764ee358a"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41202-range-unit-ascii-baseline-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "26229d20c46fd4af9aa0176e6a62744f09a3a2e1a6573a4c79715b17e49a235a"
+    }
+  ],
+  "physical": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41202-range-unit-ascii-baseline-v1/physical/HttpByteRangeParser$Full.class",
+      "sha256": "e948ccd4eeb12d7327436468190c76b09b146a495d22cdc0941c676004dbe1df"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41202-range-unit-ascii-baseline-v1/physical/HttpByteRangeParser$Partial.class",
+      "sha256": "b77175a4ebd985aed4a8e173fbcdc49f07fb28cb662cd11e4a829a9f28a30bed"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41202-range-unit-ascii-baseline-v1/physical/HttpByteRangeParser$Selection.class",
+      "sha256": "44bbe8f708ab5b50ffb0c0bc64776e7e31361eb7ba88efb22873d40fb0f23bbe"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41202-range-unit-ascii-baseline-v1/physical/HttpByteRangeParser$Unsatisfiable.class",
+      "sha256": "39a818a285886a79656ed4d6f97c85915ae67958bb9d860a566d58059d3cc898"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41202-range-unit-ascii-baseline-v1/physical/HttpByteRangeParser.class",
+      "sha256": "59867affa5078028f021ca6c9205ded58467e53ccf5a36f66db8864f01b1abe9"
+    }
+  ],
+  "actualExternalOperations": 0,
+  "oldExecCombined": false,
+  "formalDelta": 0
+}

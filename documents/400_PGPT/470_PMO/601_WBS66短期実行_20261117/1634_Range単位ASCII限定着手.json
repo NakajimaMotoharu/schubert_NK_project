@@ -1,0 +1,67 @@
+{
+  "eventId": "PGPT-20261008-7149",
+  "groupId": "P00904-RangeUnitAscii",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T20:52:00.199000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 81,
+      "remainingPercent": 19,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "P00904-RangeUnitAscii",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "P00904-RangeUnitAscii",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P009-04"
+    ],
+    "managementWorkIds": [
+      "WBS-P009-04/2"
+    ],
+    "source": "08106402843b738ab8d5a546fa3493da3359b332",
+    "productionCoreMain": "559f5b5945e82374e0843dcfae11a8d07faef1ea",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG41202",
+    "estimateAtGroupStartPp": {
+      "low": 0.2,
+      "base": 0.6,
+      "high": 1.2
+    },
+    "groupCapPp": 1.5,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1633_F03Media配信試験限定完了と次工程.json",
+        "sha256": "1cdd28f115785db01d06ca4e3bcefc222f12be5eb02f270789aa99380ff982e5"
+      },
+      {
+        "path": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+        "sha256": "20a5caaddf102186787680b06199821bebcf5522f65feebd41635d90ae228f12"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37552-range-namespace5-independent-v1/manifest.json",
+        "sha256": "3fd0724a8f33293237b25d779ac5b504fb974e2df75b33c3a76d1f36a9441603"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41190-range-long-cap-neighbors-v1/manifest.json",
+        "sha256": "8c182db6c47e37efd11197ba18b064de2c4370e7ee334c1c9a7e90915472fa39"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "WBS66原WBS392・実行表728。SS333 §10.1 bytes=・RFC9110 §5.6.2/14.1、対象production Main Coreは前checkpoint、同parser原5＋境界1の保存結果を参照。",
+    "endCondition": "原sourceの限定反証を保存し、実障害を起票してからASCII単位境界を是正。同一修正sourceのparser全PT・raw CRCを照合。",
+    "workScope": "合成文字列を渡すJava純粋選択。実HTTP・VM・DB・original・認証・保留境界へアクセスなし。"
+  }
+}
