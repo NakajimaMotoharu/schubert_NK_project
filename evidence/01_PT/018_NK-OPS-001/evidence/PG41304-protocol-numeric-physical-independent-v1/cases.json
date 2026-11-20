@@ -1,0 +1,857 @@
+[
+  {
+    "className": "dev.codex.schubert.nk.protocol.ProtocolNamespaceContractTest",
+    "method": "fieldCodecHasOnlyTheEightDesignedStaticOperations",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.ProtocolNamespaceContractTest",
+    "method": "largeResultCodecHasOnlyWriteAndDecodeOperations",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.ProtocolNamespaceContractTest",
+    "method": "mediaValidatorExposesNoGrammarCacheOrInstanceOperation",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.ProtocolNamespaceContractTest",
+    "method": "semanticValidatorRetainsBothDesignedEntryPointsOnly",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest",
+    "method": "allOtherResponseErrorProfilesRetainTheirIndividualContracts",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest",
+    "method": "loginLockAndFailurePreserveOnlyApprovedErrorFields",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest",
+    "method": "malformedLoginErrorBoundariesAndTypesAreRejected",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest",
+    "method": "nfcGolden001HangulJamoFitsComposedByteWidth",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest",
+    "method": "nfcGolden002AngstromUsesCanonicalTwoByteScalarBeforeWidthCheck",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest",
+    "method": "nfcGolden003CanonicalCombiningOrderIsRequiredWithoutComposition",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+    "method": "booleanAndReservedFieldsRejectUnknownBytes",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+    "method": "malformedAndOverflowFailuresRetainDiagnosticCauseWithoutEchoingInput",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+    "method": "numericCodecChecksDigitsRangeAndOverflow",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+    "method": "numericDecodeValidatesEveryByteBeforeAccumulatingTheValue",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+    "method": "numericErrorFillerDoesNotBecomeBusinessZero",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+    "method": "numericSemanticCeilingIsIndependentOfWireAndLongCapacity",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+    "method": "textDecodeIsStrictCanonicalAndOptionalAware",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+    "method": "textEncodeNormalizesUtf8AndPadsWithAsciiSpace",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.LogSearchWireUnicodeTest",
+    "method": "rejectsMalformedAndNonNfcInputAtEachFreeTextPosition",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.LogSearchWireUnicodeTest",
+    "method": "retainsNfcAndSupplementaryCharactersWithoutConflatingAbsentFields",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+    "method": "fixedPayloadIsDefensiveAndWireMessageChecksLengths",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+    "method": "fullMessageRoundTripsAtByteBoundariesAndRejectsInvalidSizes",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+    "method": "headerDecoderRejectsEveryFixedFieldAndProfileCorruption",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+    "method": "headerEncodingMatchesIndependentUi232GoldenVector",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+    "method": "metadataAndExpectedRouteEstablishNullAndRangeContracts",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+    "method": "responseAndEventHeadersRoundTripWithoutLeakingContext",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+    "method": "transportAndRouteContractsRejectEveryMismatch",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+    "method": "allSixtyFourLayoutsRoundTripMinimumSuccessValues",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+    "method": "decodeRejectsLengthsNullsFixedValuesAndBadErrorFillers",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+    "method": "encodeRejectsUnknownMissingWrongTypeAndRecordViolations",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+    "method": "everyResponseLayoutUsesExactErrorFillersAndNoRecords",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+    "method": "fixedAndIndependentGoldenFieldsEncodeAtExactOffsets",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+    "method": "numericDigitLimitIsCheckedWithoutOverflow",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+    "method": "resultCodeProfilePreservesOnlyTheApprovedCancellationConflictState",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+    "method": "valuesAreImmutableNullSafeAndRedacted",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest",
+    "method": "allSixtyFourLayoutsMatchIndependentMinimumMaximumAndErrorHashes",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest",
+    "method": "everyRepeatingLayoutAcceptsItsMaximumRecordBoundary",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest",
+    "method": "sharedCodecProducesIdenticalBytesUnderConcurrentUse",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.QuestionNotificationWireTest",
+    "method": "nts001DecodesEveryDefinedTypeAndTheExactUtcDateBoundary",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.QuestionNotificationWireTest",
+    "method": "nts002RejectsUnknownTypeInvalidDateReversalAndOneMillisecondOver",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.QuestionNotificationWireTest",
+    "method": "qss001DecodesExactKeywordUsernameAndBlankFields",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.QuestionNotificationWireTest",
+    "method": "qss002RejectsMalformedAndNonNfcAtBothTextOffsets",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest",
+    "method": "rd02RejectsNullUnknownNonRecordLengthAndMalformedFieldBytes",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest",
+    "method": "rd02SingleRecordDecodeUsesLiteralGoldenAndOwnsItsValues",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest",
+    "method": "w03SingleRecordGoldenHasNoInventedDataAndRejectsNullUnknownAndNonRecordLayouts",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.UserCommandWireUnicodeTest",
+    "method": "bothFieldsRejectEncodedSurrogateAndTruncationAtTheirOwnBoundary",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.UserCommandWireUnicodeTest",
+    "method": "bothFieldsRejectNoncanonicalButWellFormedUtf8",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.UserCommandWireUnicodeTest",
+    "method": "createAccepts128TwoByteCodePointsWithoutConsumingRoleOrEnabled",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.UserCommandWireUnicodeTest",
+    "method": "resetAccepts64FourByteCodePointsWithoutConsumingVersion",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.UserListReplyWireTest",
+    "method": "usr001DecodesNfcAndPreservesTheNextFieldAtThe64ByteLimit",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.UserListReplyWireTest",
+    "method": "usr002RejectsTheAllSpaceMandatoryField",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.UserListReplyWireTest",
+    "method": "usr003RejectsSurrogateEncodingAndTruncationAtTheFieldEnd",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.UserListReplyWireTest",
+    "method": "usr004RejectsValidUtf8ThatIsNotNfc",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.WireMetadataValueContractTest",
+    "method": "expectedRouteRetainsValuesAndRejectsMissingOrInconsistentRoutes",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.WireMetadataValueContractTest",
+    "method": "largeContentUsesIndependent4800ByteEquationAndValueKeys",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.codec.WireMetadataValueContractTest",
+    "method": "transportSnapshotRetainsEveryComponentAndRejectsInvalidBoundaries",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest",
+    "method": "acceptsTheDocumentedTenThousandRecordFortyEightMillionByteMaximum",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest",
+    "method": "contentMetadataRejectsInvalidValues",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest",
+    "method": "decodeRejectsTruncationExtraHashAndIoFailure",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest",
+    "method": "descriptorAcceptsOnlyCanonicalPathHashAndLengthEquation",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest",
+    "method": "verificationRejectsAllThirtyTwoDigestBytePositions",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest",
+    "method": "writeRejectsNullCountLengthAndIoFailure",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest",
+    "method": "writesAndReadsHeaderlessExactRecordsWithIndependentHash",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.file.MediaDescriptorUnicodeBoundaryTest",
+    "method": "rejectsMalformedDisplayFileNameWithoutReplacement",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.file.MediaDescriptorUnicodeBoundaryTest",
+    "method": "rejectsMalformedLogicalIdentifierWithoutReplacement",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.file.MediaDescriptorUnicodeBoundaryTest",
+    "method": "rejectsMalformedStoragePathWithoutReplacement",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.file.MediaDescriptorUnicodeBoundaryTest",
+    "method": "supplementaryPairsKeepIndependentExactUtf8ByteBoundaries",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest",
+    "method": "acceptsExactlySevenSsc004ExtensionMimePairs",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest",
+    "method": "bug040StorageExtensionCannotBeHiddenByDisplayMetadata",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest",
+    "method": "constructorRejectsNullComponents",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest",
+    "method": "dispositionMapsOnlyIAndA",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest",
+    "method": "rejectsEveryMimeCrossProductAndVideoAttachment",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest",
+    "method": "rejectsNonCanonicalTextPathsNamesSizesAndHashes",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest",
+    "method": "utf8MaximumFieldsAndN12UseIndependentCanonicalBoundaries",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+    "method": "authenticationContextValidatesAndRedacts",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+    "method": "enumsMapOnlyApprovedWireValues",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+    "method": "headerConstructorRejectsEveryStructuralViolation",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+    "method": "headerLengthArithmeticAcceptsExactMillionAndRejectsTheNextByteAndOverflow",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+    "method": "headerReferencesRejectNullAtTheNamedInvariantBoundary",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+    "method": "headerValidateAgainstRejectsEachMetadataMismatch",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+    "method": "validHeadersCoverRequestResponseErrorAndEventProfiles",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest",
+    "method": "catalogMatchesIndependentUi234To236Fixture",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest",
+    "method": "layoutFieldsRejectWrongAreaGapLengthAndNull",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest",
+    "method": "parserRejectsMalformedUnknownAndDuplicateRows",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest",
+    "method": "layoutDefinitionChecksEveryLengthAndKindInvariant",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest",
+    "method": "layoutIdAndFieldDefinitionAreStrictAndOneBased",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest",
+    "method": "registryMatchesIndependentUi233Catalog",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest",
+    "method": "registryRejectsEmptyNullDuplicateAndKindMismatches",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.PayloadPaginationBoundaryTest",
+    "method": "page001SecondPageHasIndependentExpectedBounds",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.PayloadPaginationBoundaryTest",
+    "method": "page002MaximumEffectivePageKeepsExactNineDigitArithmetic",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.PayloadPaginationBoundaryTest",
+    "method": "page003RejectsIndependentRangeAndOneFieldArithmeticChanges",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+    "method": "deletedNotificationNeverContainsAnswer",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+    "method": "listRecordConditionsAndOrderingAreEnforced",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+    "method": "loginUserPasswordDateAndSessionRulesAreEnforced",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+    "method": "mediaAnimationAndMusicConditionsAreEnforced",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+    "method": "notificationCancellationAndQuestionStateConditionsAreEnforced",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+    "method": "pageConstantsCountsAndArithmeticAreEnforced",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+    "method": "receiptWebAndDefensiveContractsAreEnforced",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+    "method": "scenarioInlineAndLargeFileConditionsAreEnforced",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogStateContractTest",
+    "method": "concurrentReadersRetainAllIndependentSixtyFourTypeBindings",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+    "method": "allNamedTypesHaveIndependentDirectionalFieldMeaning",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+    "method": "allSixtyFourLayoutsRoundTripThroughSixtyNineExplicitNamedTypes",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+    "method": "catalogRejectsUnknownLayoutsAndMismatchedDataOrRecordTypes",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+    "method": "explicitCatalogMatchesIndependentSs323NamedTypeFixture",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+    "method": "optionalFieldsSupportUnsetAndPresentValuesWithoutLosingWireNames",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+    "method": "typedModelsAndHelpersRejectNullMissingAndWrongKinds",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.ProtocolAggregateValueContractTest",
+    "method": "fieldAndTypedPayloadWrappersKeepValueKeysAndDefensiveLists",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.ProtocolAggregateValueContractTest",
+    "method": "fieldMetadataRetainsIndependentOneBasedOffsetsAndActualValueKeys",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.ProtocolAggregateValueContractTest",
+    "method": "headerAndWireWrappersRetainTheirDeclaredComponentIdentity",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.ProtocolAggregateValueContractTest",
+    "method": "layoutCatalogCopiesItsInputAndUsesStructuralValueKeys",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.ProtocolMetadataValueContractTest",
+    "method": "metaValue001AllClosedEnumFactoriesAndCallerOwnedArrays",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.ProtocolMetadataValueContractTest",
+    "method": "metaValue002FieldValuesRetainIndependentHashAndRedactionContracts",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.ProtocolMetadataValueContractTest",
+    "method": "metaValue003HttpAndElapsedNumbersEnforceAsciiAndIndependentBoundaries",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.ProtocolMetadataValueContractTest",
+    "method": "metaValue004LayoutOrderingUsesTheActualComparableBridgeAndPreservesCauses",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.SemanticDirectBoundaryTest",
+    "method": "sem001PasswordCharacterByteAndUsernameLimits",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.SemanticDirectBoundaryTest",
+    "method": "sem002InclusiveDateLimitsAndOneSidedFilters",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.SemanticDirectBoundaryTest",
+    "method": "sem003QuestionAndWebLogTextContracts",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest",
+    "method": "semanticEncodingHelpersRejectNullReferences",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest",
+    "method": "semanticHelpersDecodeAndEncodeEverySupportedShape",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest",
+    "method": "semanticHelpersRejectInvalidWireValuesWithoutReturningPartialObjects",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest",
+    "method": "semanticValueObjectsNormalizeValidateCompareAndRedact",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest",
+    "method": "negativeAndFirstOverflowAreRejectedAtEverySupportedWidth",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest",
+    "method": "nullNameIsRejectedBeforeWidthAndValueValidation",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest",
+    "method": "unsupportedWidthsAreRejectedBeforeNumericRangeEvaluation",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest",
+    "method": "zeroAndMaximumAreAcceptedAtEverySupportedWidth",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+    "method": "anonymousRequestKeepsOptionalAuditMetadataAbsentOnTheWire",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+    "method": "crossedAndUnknownActionsAreNeverNormalizedToSuccess",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+    "method": "everyCanonicalConstructorReferenceRejectsNull",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+    "method": "everyOtherCategoryIsRejectedByNamedBoundary",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+    "method": "existingHttpMetadataAndReservedRulesRemainEnforced",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+    "method": "explicitRequestActionKeepsItsOwnClosedPair",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+    "method": "independentConcurrentCallersDoNotMixCategories",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+    "method": "legacyRequestMatchesIndependentOriginalBytes",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+    "method": "menuActionMatchesIndependentOffsetsAndRoundTrips",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+    "method": "missingBlankUnknownAndWrongCaseCategoryFail",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+    "method": "nfcAndExactUtf8ByteBoundaryHaveIndependentExpectedBytes",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+    "method": "omittedActionIsAllowedForRequestOnly",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+    "method": "recordFieldsAreCompleteImmutableAndRedacted",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.semantic.EnumWireCompatibilityTest",
+    "method": "enum001SerializedAnswerStateMatchesIndependentProtocolVector",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.semantic.EnumWireCompatibilityTest",
+    "method": "enum002EverySemanticEnumRetainsItsFieldIndependentSerialDescriptor",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.semantic.N12IdentifierValueContractTest",
+    "method": "n12Value001IndependentPositiveRangeAndFixedDiagnosticForEveryDeclaredKind",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.semantic.N12IdentifierValueContractTest",
+    "method": "n12Value002SameKindRecordContractIndependentHashAndLiteralText",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.semantic.N12IdentifierValueContractTest",
+    "method": "n12Value003AllKindPairsAndRealHashCollectionKeepEqualNumbersDistinct",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.semantic.PathLexicalValueContractTest",
+    "method": "pathValue001RelativeNormalBoundariesAndTypedHashContract",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.semantic.PathLexicalValueContractTest",
+    "method": "pathValue002RelativeRejectsEachRootSegmentAndByteBoundary",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.semantic.PathLexicalValueContractTest",
+    "method": "pathValue003DisplayOnlyPathsPreservePermittedTextAndRejectTraversal",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.semantic.PathUnicodeBoundaryTest",
+    "method": "displayPathRejectsMalformedUtf16ButPreservesValidSupplementaryScalars",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.semantic.PathUnicodeBoundaryTest",
+    "method": "relativePathRejectsMalformedUtf16ButPreservesValidSupplementaryScalars",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest",
+    "method": "allAllowlistedEnumsExposeExplicitWireValuesAndGenericConversion",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest",
+    "method": "allN12IdentifierTypesEnforceTheSharedPositiveRange",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest",
+    "method": "approvedEnumNamesWireValuesAndConversionMatchIndependentDesignTables",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest",
+    "method": "typedHelpersConvertIntAndIdentifiersWithoutLosingWireKinds",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest",
+    "method": "xNumericWrappersAndGeneratedNumericRangesRejectNonCanonicalValues",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.semantic.WireEnumCatalogValueContractTest",
+    "method": "wireValue001ClosedNamesOrderOrdinalWireAndActualGeneratedFactoryMatchIndependentTables",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.semantic.WireEnumCatalogValueContractTest",
+    "method": "wireValue002GeneratedNameLookupRejectsUnknownEmptyCaseSpaceNullAndWireAliases",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.semantic.WireEnumCatalogValueContractTest",
+    "method": "wireValue003ReturnedValueArraysAreIndependentCallerOwnedCopies",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.layout.semantic.WireEnumCatalogValueContractTest",
+    "method": "wireValue004RealHashCollectionKeepsAllFiftyEightTypedSingletonKeys",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest",
+    "method": "bug037ExpandedYearsAndUnrepresentableInstantsAreRejected",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest",
+    "method": "bug037HeaderSenderRejectsBadTimeAndPreservesAdjacentContext",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest",
+    "method": "bug037RequiredAndOptionalDataSendersRejectBadTime",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest",
+    "method": "formatsAndParsesStrictJstMilliseconds",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest",
+    "method": "nullUnknownAndNearMatchAddressesAreDenied",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest",
+    "method": "sixDestinationsMatchTheIndependentPhysicalAndLimitOracle",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest",
+    "method": "iso009PrimaryAndProtocolAreRequired",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest",
+    "method": "iso010SameNodeIsRetainedWithoutSelfSuppression",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest",
+    "method": "iso011EqualsTrueDoesNotHideDistinctProtocolIdentity",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest",
+    "method": "iso012DisabledPrimarySuppressionCannotHideProtocol",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest",
+    "method": "disabledPrimarySuppressionDoesNotHideRollbackFailure",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest",
+    "method": "distinctEqualValuedNodesAreBothRetained",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest",
+    "method": "primaryAndRollbackMustBothBePresent",
+    "outcome": "PASS"
+  },
+  {
+    "className": "dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest",
+    "method": "sameNodeIsRetainedOnceWithoutSelfSuppression",
+    "outcome": "PASS"
+  }
+]

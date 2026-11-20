@@ -1,0 +1,194 @@
+{
+  "eventId": "PGPT-20261008-7214",
+  "groupId": "WBS66-PROTOCOL-NUMERIC-BYTE-PRECEDENCE",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T22:54:48.801000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 84,
+      "remainingPercent": 16,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66-PROTOCOL-NUMERIC-BYTE-PRECEDENCE",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "WBS66-PROTOCOL-NUMERIC-BYTE-PRECEDENCE",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P002-01"
+    ],
+    "managementWorkIds": [
+      "WBS-P002-01/2",
+      "WBS-F02-a",
+      "WBS-F03/2-2"
+    ],
+    "source": "c84942302f60c7f77ce23d7d9f4cd422b11757e8",
+    "productionCoreMain": "a8913bc836f81632613b34243f84b7b15eb3e054",
+    "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "run": "PG41298-protocol-numeric-byte-precedence-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.35,
+      "base": 1.3,
+      "high": 2.5
+    },
+    "groupCapPp": 3.0,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1696_F02Storage追加辺の証拠・次工程.json",
+        "sha256": "2424868fa136bf69d91f9bbd5772609d8637c3ec48b844f411c468387561f8ee"
+      },
+      {
+        "path": "documents/300_SS/320_メッセージング/322_固定長電文codec実装設計.md",
+        "sha256": "4050c672abea8bc7ca1c70bc47783185914206cdc6d126d55fe274971fab5d4a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40602-f03-current-protocol-maven-independent-v1/manifest.json",
+        "sha256": "94b3c550c89f0903370ef0f2544e011cf74341ae309c3eff880843e3942cc6f7"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/094_FieldCodec原因診断・入力不変新1_単体仕様.md",
+        "sha256": "0e7ad493694eeabed300b18240a434bcbd2bdd224fd3ab23ed9ac1d458044b19"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "SS322 §6.2「全byteが0x30～0x39であることを先に検査」。旧試験は単独nondigit/overflowのみ。既正式の履歴を保存し、不適合が実証された範囲のみ再判定。",
+    "endCondition": "先行overflowと末尾nondigitの独立反例。既valid/FILLER/例外型不変。必要なら修正前起票＋現Protocolの通常試験・包装・静的・rawを旧再実行なしで再資格。",
+    "workScope": "固定長field codecのみ。実JMS・DB・browser・既HOLDは対象外。",
+    "quotaAfter": {
+      "usedPercent": 84,
+      "remainingPercent": 16,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "f628176a5b0268171d5dfc12c381f0222c98bb7824bc77e20b1d3c3e32db7f06",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T22:54:48.801000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 84,
+          "remainingPercent": 16,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T22:54:04.679120+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 83,
+      "remainingPercent": 17,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-7212",
+    "attempt": 1,
+    "attemptResult": "CURRENT_PROTOCOL_READY_LOCALLY_P00201_FORMAL_RECHECK_PENDING",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 1,
+    "newProductTests": 1,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/106_FieldCodec全byte検査順の実行結果.md",
+        "sha256": "146e02c92d49270d4b67dc31def56d084a1c509014a20cc9492edec4e70acf55"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG41298-protocol-numeric-byte-precedence-v1/manifest.json",
+        "sha256": "ce87c8a02fd55b7ad9c86e1e458bcad55a56c2b943764cc25b9869a4896f28be"
+      },
+      {
+        "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG41300-protocol-numeric-byte-precedence-fixed-v1/manifest.json",
+        "sha256": "1be4b0348d648972df1c545c689bcfcbb3d1f07f3fe6f5053f751f1b852d6f70"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41302-protocol-numeric-full-maven-v1/terminal.json",
+        "sha256": "13ab66e2058302aae3678a3f4b05d1b6b272c2066b142754dc7298b1a3644aa4"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41304-protocol-numeric-physical-independent-v1/manifest.json",
+        "sha256": "77a3d80a48df4a2dab8036c5a3019a6cb58bf01f46a47731d2933b37b44dd90c"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41306-protocol-numeric-current-quality-v1/manifest.json",
+        "sha256": "3f1dc10633e045551809614f2ca60bb11d673fad05b095f1ba09c0a84909d525"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41306-protocol-numeric-current-quality-v1/retained-original-xml.json",
+        "sha256": "9715ec50f0d649b7b0f6471a305263f054986481159e95fa087f838c496a982e"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "P002-01のRECHECK_REQUIRED、当全451と個別正式判定",
+      "F02/F03六製品、API/Web四型、Storage旧JDBC、全実runtime",
+      "中核5と指定12、実FileStore／実CHR／C02"
+    ],
+    "newFormalBaselineCount": 16,
+    "historicalWbsBaseline": 17,
+    "windowNet": -1,
+    "actualNewTestCases": 1,
+    "requiredEarlierCases": 170,
+    "selectedMavenTests": 171,
+    "protocolMavenSuites": 39,
+    "rawCoverage": {
+      "LINE": {
+        "covered": 3639,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1432,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 162,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 1080,
+        "missed": 0
+      },
+      "INSTRUCTION": {
+        "covered": 20363,
+        "missed": 0
+      }
+    },
+    "newlyReopenedIds": [
+      "WBS-P002-01"
+    ],
+    "testedSource": "62b239d4dad561da007e15a290f8a271a165dda9",
+    "bug": [
+      "BUG-3479"
+    ],
+    "ykt": [
+      "YKT-2775"
+    ],
+    "reportedOnlyLocalRaw": true
+  }
+}

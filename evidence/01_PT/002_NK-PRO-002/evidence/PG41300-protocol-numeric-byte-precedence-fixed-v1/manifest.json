@@ -1,0 +1,86 @@
+{
+  "source": "62b239d4dad561da007e15a290f8a271a165dda9",
+  "run": "PG41300-protocol-numeric-byte-precedence-fixed-v1",
+  "mode": "after",
+  "unitExit": 0,
+  "testCounts": {
+    "tests": 8,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "notRun": 0,
+  "testId": "PT-PRO-002-N03",
+  "testMethods": [
+    "numericDecodeValidatesEveryByteBeforeAccumulatingTheValue()",
+    "booleanAndReservedFieldsRejectUnknownBytes()",
+    "malformedAndOverflowFailuresRetainDiagnosticCauseWithoutEchoingInput()",
+    "textDecodeIsStrictCanonicalAndOptionalAware()",
+    "textEncodeNormalizesUtf8AndPadsWithAsciiSpace()",
+    "numericCodecChecksDigitsRangeAndOverflow()",
+    "numericErrorFillerDoesNotBecomeBusinessZero()",
+    "numericSemanticCeilingIsIndependentOfWireAndLongCapacity()"
+  ],
+  "normalizedDiagnostic": null,
+  "inputSHA256": {
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java": "8018f622988cf80a9c1138ad8619d91a4b32d07d75a55ec8f37730217386a23a",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodecRules.java": "130a643497d24521b3920f90b2f300aca636077f19633f24f50ed5841d93469c",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldEncodingException.java": "60f7a35b38a0a90dfc7caf0746de64668d4dd31c3d14f7ec81b6eb7bd671f669",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PermanentProtocolException.java": "9193af24f93fcd0d45e536abbacbe4adf46029619de6d6f63e889b9af44ea2d3",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java": "2e0467343a256255013da116d1d594284a16366f9bb3befc7fa72f48dd8d44dc"
+  },
+  "outputXmlSha256": "3fdbbb40bf5db9b6744a5f9c9938bd17d443765da12a15d38db881197f4b1c33",
+  "steps": {
+    "compile": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41300-protocol-numeric-byte-precedence-fixed-v1/classes",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41300-protocol-numeric-byte-precedence-fixed-v1/input/FieldCodec.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41300-protocol-numeric-byte-precedence-fixed-v1/input/FieldCodecRules.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41300-protocol-numeric-byte-precedence-fixed-v1/input/FieldCodecTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41300-protocol-numeric-byte-precedence-fixed-v1/input/FieldEncodingException.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41300-protocol-numeric-byte-precedence-fixed-v1/input/PermanentProtocolException.java"
+      ],
+      "exitCode": 0,
+      "beganAtUTC": "2026-11-20T22:50:01.697318+00:00",
+      "terminalAtUTC": "2026-11-20T22:50:02.414780+00:00",
+      "stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "junit": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41300-protocol-numeric-byte-precedence-fixed-v1/classes:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "org.junit.platform.console.ConsoleLauncher",
+        "execute",
+        "--disable-banner",
+        "--disable-ansi-colors",
+        "--fail-if-no-tests",
+        "--select-class",
+        "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41300-protocol-numeric-byte-precedence-fixed-v1/reports"
+      ],
+      "exitCode": 0,
+      "beganAtUTC": "2026-11-20T22:50:02.414997+00:00",
+      "terminalAtUTC": "2026-11-20T22:50:03.048575+00:00",
+      "stdout": "38d04dd6ef753c667d975e2ba4184a77aa2f4c86522277736a885bc2ec53e68f",
+      "stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "java": "25.0.4",
+  "junit": "1.13.4",
+  "actualBackendActions": 0,
+  "whole451": false,
+  "terminalAtUTC": "2026-11-20T22:50:03.049164+00:00",
+  "formalNewAcceptance": 0
+}
