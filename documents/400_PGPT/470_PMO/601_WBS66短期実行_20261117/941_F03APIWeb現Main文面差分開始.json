@@ -1,0 +1,87 @@
+{
+  "eventId": "PGPT-20261008-6461",
+  "groupId": "PGPT-WBS66-F03-API-WEB-SOURCE-STYLE-DELTA-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T02:27:08.311000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 59,
+      "remainingPercent": 41,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-API-WEB-SOURCE-STYLE-DELTA-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F03-API-WEB-SOURCE-STYLE-DELTA-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "source": "fc6253286d487cc1236609008a3893a45c904c4d",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40550-f03-api-web-open-main-style-delta-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.22,
+      "base": 0.7,
+      "high": 1.8
+    },
+    "groupCapPp": 2.2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/940_F03BatchCheckstyle200と継続点.json",
+        "sha256": "cd66f834ccc120283f200f042489dd0715796d81d1b1d61542b4d740f0baab10"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38442-f03-current-six-main-source-lint-v1/manifest.json",
+        "sha256": "b1f7a1b02e9bf473fa94f09a55ca8db16319cc732e4c15ee77001db6d45d75b5"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40548-f03-batch-checkstyle-exact-byte-inventory-v1/manifest.json",
+        "sha256": "a9bb110be284ddd11d8775c6e01149667344f45de3ba30b399d8c334858cc41a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39134-ssc466-buffer-diagnostic-static-v1/manifest.json",
+        "sha256": "0d3966afbe2993e01498bb6cf2942cfd7b9a193fdd295bb9a9ba312d755ce4f1"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39154-ssc467-guarded-jms-diagnostic-static-v1/manifest.json",
+        "sha256": "503a027953852dfa21b0dc6fd241d2d108887aad3ed8b86c10d85dce51e3d4cb"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39292-p01810-inbox-terminal-snapshot-static-v1/manifest.json",
+        "sha256": "f2b32d794db5eb6fe38a374391d5652217add505c9a12e717f9f458376593853"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39674-bug3300-weblog-outbox-static-v1/manifest.json",
+        "sha256": "7ed1461232457e29c3d0047f2d931240bbe3a1a1df34bbdd348744034076b164"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39590-bug3292-api-outbox-static-v1/manifest.json",
+        "sha256": "12bfb37964cb4866e37f9e67cd1644537d8a02f8986ff14113e7ffc0858523d2"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39560-bug3290-web-outbox-static-v1/manifest.json",
+        "sha256": "ef9509216c846ab7d75310eee9b7e0a9d77746f3209ff797a18c9c44b56ff138"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "F03/2-2のAPI/Webのsource-only Checkstyle/formatter。旧六styleから両合計545中の18変更が可検査。四HOLD型はGit metadata同一性のみ。旧成功が同source hashで参照できる場合は再起動しない。",
+    "endCondition": "固定version・既元入力hash・XMLを照合し、残不足に限るcompact静的実行のsource/終了値を記録。六module型付きと451は未成立保持。",
+    "workScope": "API/Web公開Main差分のみのsource lint。保留四型source/classfileの開閉・生成/ロード、コンパイル、稼働サービス・実DB等なし。"
+  }
+}
