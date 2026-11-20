@@ -1,0 +1,163 @@
+{
+  "eventId": "PGPT-20261008-6915",
+  "groupId": "f03-api-metric-exchange-owner",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T15:37:50.956000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 73,
+      "remainingPercent": 27,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "f03-api-metric-exchange-owner",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "f03-api-metric-exchange-owner",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2",
+      "WBS-F03/criterion/quality"
+    ],
+    "source": "01eba9ef20d65d187fa744dd357599136c187b8c",
+    "productionCoreMain": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40958-f03-api-metric-exchange-owner-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.42,
+      "base": 1.25,
+      "high": 2.7
+    },
+    "groupCapPp": 3.25,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1397_G08二解放PT追跡継続点.json",
+        "sha256": "aee874b3fee2396effaec006344591c99c8a35a17fc0a4a3880f9c17fd697db3"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40942-p01809-api-memory-handler23-v2/raw-manifest.json",
+        "sha256": "51b915110d7ec1e993daa6a35fd16838fdb597975337b93cd32a31c42d2b2c51"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40944-p01809-api-handler-close-precedence-v1/manifest.json",
+        "sha256": "f06293095b5c28a42fabdebae58b88c52b4e406a1db60446c1b3d13635cdee34"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/1817_MetricHTTP_単体テスト仕様.md",
+        "sha256": "1a896edf5e6a99ca86422ddbdf90e573f3600794e2621c87f9ccb74556372f4f"
+      },
+      {
+        "path": "documents/400_PGPT/450_品質/451_Build・静的解析・coverage方針.md",
+        "sha256": "7980a204c02574b235d588e3a05ae8fb7b26ecb18313f4f000918c9135da6f4c"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "元APIMHTTP23/24と生B6/8。非null確立済みの暗黙TWR null分岐を、所有と失敗伝播の明示契約へ移す。",
+    "endCondition": "PG単一handle。新APIMHTTP025の同一例外解放、元24の変更後回帰を同候補・同単一exec。生L/M/C/B/I、公開ABI、通常静的局所を記録。",
+    "workScope": "固定23Mainと既メモリExchange/JUnit。実HTTP、network、DB、QA056、Root、Web未操作。製品F03の限界は残す。",
+    "quotaAfter": {
+      "usedPercent": 73,
+      "remainingPercent": 27,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "c2f3cf3552721517b5778614d75c38ac1feb4bf5ab4defc65ec99cff98c2dd09",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T15:37:50.956000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 73,
+          "remainingPercent": 27,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T15:37:10.067085+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 73,
+      "remainingPercent": 27,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6914",
+    "attempt": 1,
+    "attemptResult": "NEW_CURRENT_HANDLER_RAW_COVERAGE_CLOSED",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 24,
+    "newProductTests": 1,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40958-f03-api-metric-exchange-owner-v2/manifest.json",
+        "sha256": "9027d6db9a8facbfdeaa35fff5128645e5803d81c547c4751ee1996c1e5ee686"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40958-f03-api-metric-exchange-owner-v2/unfiltered.tsv",
+        "sha256": "2a2d70a1f81683bb4c7938a72f6578c6c7ea9b148612ceaa8e984c785aed2b5e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40958-f03-api-metric-exchange-owner-v2/coverage.xml",
+        "sha256": "836382756deb8fb208578ff6be98830a20b441218a91ae2e30dd1ba0373f832c"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5518_f03_api_metric_exchange_owner_pt.py",
+        "sha256": "f8d7b76cfa719f93908003b6ec1d2d91b9a9f7803b59f8076a3c5ec3bed9ee4d"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "局所変更型SpotBugs／PMD、YKT2748残ApiManagementServer.respond、正式F03六module、実経路、全451"
+    ],
+    "firstProductAttemptPassed": 25,
+    "firstProductAttemptDenominator": 25,
+    "newTestsSucceeded": 1,
+    "prepFailureCount": 1,
+    "fullProductModulesValidated": 0,
+    "candidateSource": "62142212de26387dd718026a1c839fbb1dc6b2a9",
+    "beforeCandidate": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+    "testIds": [
+      "APIMHTTP001～024",
+      "APIMHTTP025"
+    ],
+    "changedType": "ApiMetricHttpHandler",
+    "rawCounterMissing": 0,
+    "bug": [
+      "BUG-3430",
+      "BUG-3431"
+    ],
+    "ykt": [
+      "YKT-2748"
+    ]
+  }
+}
