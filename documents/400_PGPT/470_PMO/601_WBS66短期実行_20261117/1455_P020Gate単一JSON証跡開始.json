@@ -1,0 +1,68 @@
+{
+  "eventId": "PGPT-20261008-6971",
+  "groupId": "P02001-characterization-single-json-document",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T16:46:03.664000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 75,
+      "remainingPercent": 25,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "P02001-characterization-single-json-document",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "P02001-characterization-single-json-document",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P020-01.03"
+    ],
+    "managementWorkIds": [
+      "WBS-P020-01.03/criterion/deliverable",
+      "WBS-P020-01.03/criterion/quality"
+    ],
+    "source": "86c226d10807022b4c91625a2095f9159824e04d",
+    "productionCoreMain": "2b16a8ed20778fe5896099cb4798cfd1ff96b176",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40996-p020-gate-single-json-doc-red-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.25,
+      "base": 0.8,
+      "high": 2
+    },
+    "groupCapPp": 3,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1454_F03WebPool有限モード継続点.json",
+        "sha256": "e60b7e1a43c5ab0bf2575aeb876d7a8fef4f38eecaa7a5b731ec9d9e4f196be0"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40658-p020-a02-redirect-green-v1/manifest.json",
+        "sha256": "1196c69cc6ba69fe734991fe9abd742a46a24afe2af327b245755a4780d3c64d"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40658-p020-a02-redirect-green-v1/begin.json",
+        "sha256": "09060f8b73131cf1b7af6a1ccabfc1405639cdf265da5f6aed05fd4824d461a8"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40708-p020-current-211-independent-v1/manifest.json",
+        "sha256": "994c74a3d9cb58f5c053746fb06bb7ab1cce08d150aa740a3f16adf9d9bd5e22"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "元WBS-P020-01.03/2、SS355、G01/G04 malformed入力。既PG40658の隔離された合成snapshot、SDK、全210選択を固定。真正Current原本とは分離。",
+    "endCondition": "一JSON文書のみを要求。独立合成fixtureで末尾空白成功、追加root拒否。元比較工具の必要210と新1、同工具sourceの実証。実FileStore同source再資格と実CHRは別条件。",
+    "workScope": "既許可の合成GateSyntheticRunPortTest／比較器通常閉包。実Current/NK、baseline原本、DB/Browser/配備は実行しない。"
+  }
+}
