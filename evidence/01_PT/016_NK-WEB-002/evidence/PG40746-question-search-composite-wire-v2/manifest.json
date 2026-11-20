@@ -1,0 +1,145 @@
+{
+  "run": "PG40746-question-search-composite-wire-v2",
+  "branch": "dev-foundation",
+  "snapshot": "ae02f5e5dce5ea5af6c533715c5db84a586948e2",
+  "sourceCore": "517a23cddc9f3883550942f6fa90a4256ef39b73",
+  "startedAtUTC": "2026-11-20T07:55:09.922777+00:00",
+  "terminalAtUTC": "2026-11-20T07:55:11.864468+00:00",
+  "actualExit": 0,
+  "os": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+  "jdk": "openjdk 25.0.4 2026-07-21",
+  "steps": {
+    "jdk": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "--version"
+      ],
+      "exitCode": 0
+    },
+    "compile": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-g",
+        "-classpath",
+        "/dev/shm/pg40746-rp0_g2q6/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg40744-f02-cleanup-terminal-current-four-jars-v1/schubert-nk-protocol-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "-d",
+        "/dev/shm/pg40746-rp0_g2q6/classes",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/QuestionSearchForm.java",
+        "tools/quality/architecture/QuestionSearchCompositeWireContractTest.java"
+      ],
+      "exitCode": 0
+    },
+    "checkstyle": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "-o",
+        "/dev/shm/pg40746-rp0_g2q6/checkstyle.xml",
+        "tools/quality/architecture/QuestionSearchCompositeWireContractTest.java"
+      ],
+      "exitCode": 0
+    },
+    "test": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--disable-ansi-colors",
+        "--class-path",
+        "/dev/shm/pg40746-rp0_g2q6/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg40744-f02-cleanup-terminal-current-four-jars-v1/schubert-nk-protocol-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "--select-class",
+        "dev.codex.schubert.nk.web.form.QuestionSearchCompositeWireContractTest",
+        "--reports-dir",
+        "/dev/shm/pg40746-rp0_g2q6/results",
+        "--fail-if-no-tests"
+      ],
+      "exitCode": 0
+    }
+  },
+  "cases": [
+    {
+      "method": "qsformWire001BothNormalizedMaximaKeepAdjacentFieldsAndPadding()",
+      "testId": "QSFORM-WIRE-001",
+      "outcome": "pass"
+    },
+    {
+      "method": "qsformWire002EachOverflowWithTheOtherFieldAtItsMaximumStopsAtBinding()",
+      "testId": "QSFORM-WIRE-002",
+      "outcome": "pass"
+    }
+  ],
+  "expectedTests": 2,
+  "passed": 2,
+  "notRun": 0,
+  "checkstyleFindings": 0,
+  "inputHashes": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/016_NK-WEB-002/input/5428_question_search_composite_wire_pt.py",
+      "sha256": "5e7fbb9417056bc648ada42f5a930f9ba0e8003f8ba1b38227abf9277c23497f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/QuestionSearchForm.java",
+      "sha256": "1308c621d4fb8673cae5440a7691ba1a17bf20b13f53251ab23dfb220f4351b4"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/architecture/QuestionSearchCompositeWireContractTest.java",
+      "sha256": "bc4b5bde507cd9929e7a989a54342ed9eebf980f032d5de875ed53e592b5897e"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG37950-search-three-current38-independent-v1/manifest.json",
+      "sha256": "eac4731267158fe36cdee3c41b48e97738a771fe5ff06123fb1372907654e326"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG37940-search-three-current38-closure-v1/manifest.json",
+      "sha256": "3f578d0200ff07c01af3bd4b4ac41ee3052fa03f5a3b5095d3ab7263f1c50b88"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40744-f02-cleanup-terminal-current-four-jars-v1/manifest.json",
+      "sha256": "b09a2e11492f508e5b1a503877f3efc9b5ac72412e7a9b8a68960e62d56dc2a0"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+      "sha256": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "sha256": "c324471f8b7933a3cb401eafbc35a7055443779b438a3ab928bda3867a1b8ab1"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+      "sha256": "2136da000c36cd6ea5e714ecf8ea7fb4e41f29c75849b6b7e62531373b91a3b1"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+      "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+      "sha256": "754e218ab1fcabb1e1c5f8530e9d3aa37636806c22987bb279dd907a6ee749b2"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40744-f02-cleanup-terminal-current-four-jars-v1/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+      "sha256": "64ef39fd602ee631d081d7c8b54897255bba7c18bccc2379c4f07674943ac636"
+    }
+  ],
+  "protocolClassesByteIdentical": 176,
+  "coverage": null,
+  "whole451": false,
+  "newFormalAcceptance": 0
+}
