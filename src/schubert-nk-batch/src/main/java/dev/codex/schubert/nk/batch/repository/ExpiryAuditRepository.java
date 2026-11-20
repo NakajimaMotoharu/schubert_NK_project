@@ -297,27 +297,37 @@ public final class ExpiryAuditRepository {
           rowFailure = failure;
           throw failure;
         } finally {
-          if (rows != null)
-            try {
-              rows.close();
-            } catch (SQLException | RuntimeException | Error secondary) {
-              if (JdbcResourceFailures.replace(rowFailure, secondary)) throw secondary;
-            }
+          closeReadRows(rows, rowFailure);
         }
       } catch (SQLException | RuntimeException | Error failure) {
         statementFailure = failure;
         throw failure;
       } finally {
-        if (statement != null)
-          try {
-            statement.close();
-          } catch (SQLException | RuntimeException | Error secondary) {
-            if (JdbcResourceFailures.replace(statementFailure, secondary)) throw secondary;
-          }
+        closeReadStatement(statement, statementFailure);
       }
     } catch (SQLException failure) {
       JdbcFailureGraph.preserveFatal(failure);
       throw new BatchRepositoryException();
+    }
+  }
+
+  private static void closeReadRows(@Nullable ResultSet rows, @Nullable Throwable primary)
+      throws SQLException {
+    if (rows == null) return;
+    try {
+      rows.close();
+    } catch (SQLException | RuntimeException | Error secondary) {
+      if (JdbcResourceFailures.replace(primary, secondary)) throw secondary;
+    }
+  }
+
+  private static void closeReadStatement(
+      @Nullable PreparedStatement statement, @Nullable Throwable primary) throws SQLException {
+    if (statement == null) return;
+    try {
+      statement.close();
+    } catch (SQLException | RuntimeException | Error secondary) {
+      if (JdbcResourceFailures.replace(primary, secondary)) throw secondary;
     }
   }
 
