@@ -10,8 +10,10 @@ public record LoginAccount(
     Objects.requireNonNull(identity, "identity");
     Objects.requireNonNull(passwordHash, "passwordHash");
     Objects.requireNonNull(attempts, "attempts");
-    int length = passwordHash.getBytes(StandardCharsets.UTF_8).length;
-    if (length < 1 || length > 255 || attempts.kind() != LoginAttemptKind.USER) {
+    if (passwordHash.isEmpty()
+        || !StandardCharsets.UTF_8.newEncoder().canEncode(passwordHash)
+        || passwordHash.getBytes(StandardCharsets.UTF_8).length > 255
+        || attempts.kind() != LoginAttemptKind.USER) {
       throw new IllegalArgumentException("login account storage invariant is invalid");
     }
   }

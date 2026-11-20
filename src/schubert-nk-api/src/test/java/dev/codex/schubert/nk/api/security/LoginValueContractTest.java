@@ -17,7 +17,7 @@ import java.util.Optional;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
-/** NK-AUT-001/AUT001; UI226234242; SS314331332352; PT-LOGIN-VALUE001..004. */
+/** NK-AUT-001/AUT001; UI226234242; SS314331332352; PT-LOGIN-VALUE001..005. */
 final class LoginValueContractTest {
   private static final Instant AT = Instant.parse("2026-09-07T00:00:00Z");
   private static final Instant END = Instant.parse("2026-09-07T00:15:00Z");
@@ -108,7 +108,8 @@ final class LoginValueContractTest {
                 LoginAttemptKind.USER, 5, Optional.of(AT.plusSeconds(1)), Optional.empty()),
             new LoginAttemptState(LoginAttemptKind.USER, 5, Optional.of(AT), Optional.of(END))));
     assertEquals(
-        "LoginAttemptState[kind=USER, failedCount=5, windowStartedAt=Optional[2026-09-07T00:00:00Z], lockedUntil=Optional.empty]",
+        "LoginAttemptState[kind=USER, failedCount=5,"
+            + " windowStartedAt=Optional[2026-09-07T00:00:00Z], lockedUntil=Optional.empty]",
         state.toString());
     assertEquals(
         List.of("USER", "IP"), Arrays.stream(LoginAttemptKind.values()).map(Enum::name).toList());
@@ -197,6 +198,26 @@ final class LoginValueContractTest {
     assertEquals(LOWERCASE_NAME, display.key());
     assertEquals(LOWERCASE_NAME, new LoginUsername(LOWERCASE_NAME).key());
     assertEquals("LoginUsername[REDACTED]", display.toString());
+  }
+
+  @Test
+  void value005AccountStorageRequiresUtf8ScalarsAndPreservesExactBoundaryText() {
+    var user = LoginAttemptState.empty(LoginAttemptKind.USER);
+    // 125 two-byte scalars, one four-byte scalar, and one ASCII byte.
+    String maximum = "é".repeat(125) + "\uD83D\uDE00x";
+    for (String invalid : List.of("\uD800", "x\uDC00", "\uDC00\uD800", maximum + "x")) {
+      var failure =
+          assertThrows(
+              IllegalArgumentException.class, () -> new LoginAccount(ACTOR, true, invalid, user));
+      assertEquals("login account storage invariant is invalid", failure.getMessage());
+    }
+    for (String valid : List.of("x", maximum)) {
+      var account = new LoginAccount(ACTOR, true, valid, user);
+      assertEquals(valid, account.passwordHash());
+      assertSame(ACTOR, account.identity());
+      assertSame(user, account.attempts());
+      assertEquals("LoginAccount[REDACTED]", account.toString());
+    }
   }
 
   private static IssuedContext issued(long userId, Instant at) {
