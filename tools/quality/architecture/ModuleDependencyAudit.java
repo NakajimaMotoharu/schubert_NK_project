@@ -109,6 +109,8 @@ public final class ModuleDependencyAudit {
           String target = access.getTargetOwner().getName();
           if (controller && filesystem(target))
             violations.get("CONTROLLER_BOUNDARY").add(origin + "\t" + target);
+          if (module.equals("protocol") && protocolFilesystem(target))
+            violations.get("FRAMEWORK_FENCES").add(origin + "\t" + target);
           if (apiRepository && target.startsWith(INTERNAL + "api.application."))
             violations.get("REPOSITORY_DIRECTION").add(origin + "\t" + target);
         }
@@ -167,6 +169,15 @@ public final class ModuleDependencyAudit {
 
   private static boolean filesystem(String target) {
     return target.startsWith("java.nio.file.") || FILE_IO_TYPES.contains(target);
+  }
+
+  private static boolean protocolFilesystem(String target) {
+    return FILE_IO_TYPES.contains(target)
+        || target.equals("java.nio.file.Files")
+        || target.equals("java.nio.file.FileSystems")
+        || target.equals("java.nio.file.FileSystem")
+        || target.equals("java.nio.file.FileStore")
+        || target.equals("java.nio.file.spi.FileSystemProvider");
   }
 
   private static boolean forbiddenFramework(String module, String target) {
