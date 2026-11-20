@@ -49,8 +49,8 @@ final class JdbcFailureGraphOrderTest {
     // PT-OPS-JDBCGRAPH008. Both SQL edges are instrumented to fail immediately on a revisit.
     var root = new CountingSql();
     var peer = new CountingSql();
-    root.linkTo(peer);
-    peer.linkTo(root);
+    root.setNextException(peer);
+    peer.setNextException(root);
     root.initCause(peer);
     peer.addSuppressed(root);
 
@@ -73,17 +73,12 @@ final class JdbcFailureGraphOrderTest {
 
   private static final class CountingSql extends SQLException {
     @Serial private static final long serialVersionUID = 1L;
-    private @Nullable SQLException peer;
     private int visits;
-
-    void linkTo(SQLException other) {
-      peer = other;
-    }
 
     @Override
     public @Nullable SQLException getNextException() {
       if (++visits != 1) throw new AssertionError("SQL instance revisited");
-      return peer;
+      return super.getNextException();
     }
   }
 }
