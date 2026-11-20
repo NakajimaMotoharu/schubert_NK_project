@@ -1,0 +1,588 @@
+{
+  "actualExit": 0,
+  "core": "559f5b5945e82374e0843dcfae11a8d07faef1ea",
+  "source": "293b28ce3696a6deb5218e483926a01d2ef0933c",
+  "group": "PGPT-20261008-7094",
+  "observed": {
+    "tests": 12,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0
+  },
+  "testsCompared": [
+    [
+      "dev.codex.schubert.nk.batch.repository.ObservationValueContractTest",
+      "observation001InspectionComponentsNullContractAndFixedRedaction()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.repository.ObservationValueContractTest",
+      "observation002RunReferenceLiteralSixteenRowsAndAllRecordComponents()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.repository.ObservationValueContractTest",
+      "observation003CleanupCountsIndependentLongBoundaryTriplesAndValueContract()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.repository.RunReferenceRepositoryPureJdbcTest",
+      "combinedReadAndCloseSqlFailuresKeepFirstFatalAndReleaseBothResources()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.repository.RunReferenceRepositoryPureJdbcTest",
+      "everySqlFailurePositionClosesOwnedResources()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.repository.RunReferenceRepositoryPureJdbcTest",
+      "fatalProviderGraphIsNotDiscarded()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.repository.RunReferenceRepositoryPureJdbcTest",
+      "independentBooleanProjections()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.repository.RunReferenceRepositoryPureJdbcTest",
+      "independentConnectionsCanRunConcurrently()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.repository.RunReferenceRepositoryPureJdbcTest",
+      "literalSqlAndUtcBindings()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.repository.RunReferenceRepositoryPureJdbcTest",
+      "missingProjectionAndCardinality()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.repository.RunReferenceRepositoryPureJdbcTest",
+      "nullTransactionAndInterruptContracts()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.repository.RunReferenceRepositoryPureJdbcTest",
+      "uncheckedAndCloseFailurePrecedence()"
+    ]
+  ],
+  "newDefinitions": 0,
+  "physicalQualified": {
+    "dev/codex/schubert/nk/batch/repository/RunReferenceRepository.class": "dc394e1d15ba729bbecd4f895c264b3adb042233f8ac7d603cab68d6e91682bb",
+    "dev/codex/schubert/nk/batch/repository/RunReferences.class": "9cd7197824647e7ad066678a66a54bfdf196f0251027bebeb765b6babd8d8fe2",
+    "dev/codex/schubert/nk/batch/repository/BatchRun.class": "5cb0c42832ea17425dbf60da6025f2c4783d687e665b18f6cd8e88abc399c909",
+    "dev/codex/schubert/nk/batch/repository/InspectionSummary.class": "19c6fbf30f92ee694c9ada985f1309851ffaa157474b4b1483e8d337edd3bd03",
+    "dev/codex/schubert/nk/batch/repository/CleanupCounts.class": "09355389bf26d39779e3184b7dd995978314ae00b833e468fbd5078408265af0"
+  },
+  "scopedRaw": {
+    "dev/codex/schubert/nk/batch/repository/RunReferenceRepository": {
+      "INSTRUCTION": [
+        0,
+        230
+      ],
+      "BRANCH": [
+        0,
+        24
+      ],
+      "LINE": [
+        0,
+        59
+      ],
+      "COMPLEXITY": [
+        0,
+        18
+      ],
+      "METHOD": [
+        0,
+        6
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/repository/RunReferences": {
+      "INSTRUCTION": [
+        0,
+        62
+      ],
+      "BRANCH": [
+        0,
+        14
+      ],
+      "LINE": [
+        0,
+        7
+      ],
+      "COMPLEXITY": [
+        0,
+        16
+      ],
+      "METHOD": [
+        0,
+        9
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    }
+  },
+  "auxiliaryMeasurements": {
+    "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph": {
+      "INSTRUCTION": [
+        1,
+        14
+      ],
+      "BRANCH": [
+        1,
+        1
+      ],
+      "LINE": [
+        0,
+        3
+      ],
+      "COMPLEXITY": [
+        1,
+        2
+      ],
+      "METHOD": [
+        0,
+        2
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/repository/BatchRepositoryException": {
+      "INSTRUCTION": [
+        0,
+        4
+      ],
+      "BRANCH": [
+        0,
+        0
+      ],
+      "LINE": [
+        0,
+        2
+      ],
+      "COMPLEXITY": [
+        0,
+        1
+      ],
+      "METHOD": [
+        0,
+        1
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/repository/BatchRun": {
+      "INSTRUCTION": [
+        7,
+        45
+      ],
+      "BRANCH": [
+        3,
+        3
+      ],
+      "LINE": [
+        2,
+        8
+      ],
+      "COMPLEXITY": [
+        4,
+        5
+      ],
+      "METHOD": [
+        1,
+        5
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/repository/CleanupCounts": {
+      "INSTRUCTION": [
+        0,
+        58
+      ],
+      "BRANCH": [
+        0,
+        10
+      ],
+      "LINE": [
+        0,
+        5
+      ],
+      "COMPLEXITY": [
+        0,
+        12
+      ],
+      "METHOD": [
+        0,
+        7
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/repository/InspectionSummary": {
+      "INSTRUCTION": [
+        0,
+        38
+      ],
+      "BRANCH": [
+        0,
+        0
+      ],
+      "LINE": [
+        0,
+        6
+      ],
+      "COMPLEXITY": [
+        0,
+        7
+      ],
+      "METHOD": [
+        0,
+        7
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures": {
+      "INSTRUCTION": [
+        0,
+        25
+      ],
+      "BRANCH": [
+        0,
+        8
+      ],
+      "LINE": [
+        0,
+        6
+      ],
+      "COMPLEXITY": [
+        0,
+        5
+      ],
+      "METHOD": [
+        0,
+        1
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/storage/StorageIoException": {
+      "INSTRUCTION": [
+        29,
+        64
+      ],
+      "BRANCH": [
+        3,
+        9
+      ],
+      "LINE": [
+        7,
+        16
+      ],
+      "COMPLEXITY": [
+        6,
+        5
+      ],
+      "METHOD": [
+        4,
+        1
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason": {
+      "INSTRUCTION": [
+        50,
+        0
+      ],
+      "BRANCH": [
+        0,
+        0
+      ],
+      "LINE": [
+        4,
+        0
+      ],
+      "COMPLEXITY": [
+        5,
+        0
+      ],
+      "METHOD": [
+        5,
+        0
+      ],
+      "CLASS": [
+        1,
+        0
+      ]
+    }
+  },
+  "inputFiles": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.java",
+      "sha256": "134bcdaecf9f02adc74d5cb728782c41f19497b0c0c37ee2cd4a70b0155179b6"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java",
+      "sha256": "c440d3e16da86b7814cf8fbd6247e48c1ab4cd6de2da3a114a38c308ae3c7ce4"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java",
+      "sha256": "5f4f8273a29dc2b89d6cf8fbc566b067480c0c7338f1444d5b14a9a878b1debd"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "sha256": "389d41ce3928ac25a5001a08fc5a4562ba44df84144721b2f3a8f36f16747edb"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferences.java",
+      "sha256": "dacc345b826e86682036df2e94f8e5300cb75435f4cdcd1de6ece4165eac5884"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.java",
+      "sha256": "305e82607cfc8acf9656547c5eee663cc9edee55c0381da96d6860b5a98d0d75"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java",
+      "sha256": "d59870fcf8d4f7bf9ff4e0abc2e052efddd9a08e9e93efa39d1f15a97f7063cf"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryPureJdbcTest.java",
+      "sha256": "9985c4ea628dc9ac8178f680882383bf15cb4a74798d1c70b29c01b62dbd40eb"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummary.java",
+      "sha256": "0af03ae228a8efec00535de709a528dfc9692cb2a51c4c2a4a0e0fb79cde12aa"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupCounts.java",
+      "sha256": "9a7504e2b266c3de22ce10dfc8b15dadb0ce04f3a5f05bdd86d151c32d341f19"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ObservationValueContractTest.java",
+      "sha256": "31eb71072448315e43c992fb3ecb73f90cd6c0c5a9947da9d0f6db16f10d552d"
+    }
+  ],
+  "physicalFiles": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41150-p00403-dao-result-value-same-session-v1/classes/dev/codex/schubert/nk/storage/StorageIoException$Reason.class",
+      "sha256": "a113bd839666ee3a4038dd3703af0cfb772282278cc6fbfe1e3cccf98286ffec"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41150-p00403-dao-result-value-same-session-v1/classes/dev/codex/schubert/nk/storage/StorageIoException.class",
+      "sha256": "85f86d702a139f126afdd72ca8e221583db824f159351ecd9f07b15fcc569c88"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41150-p00403-dao-result-value-same-session-v1/classes/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class",
+      "sha256": "cc8265242a1cd41cc7c77b8e12185cbc387fb583d70e1d1171ba467cb0f3d552"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41150-p00403-dao-result-value-same-session-v1/classes/dev/codex/schubert/nk/batch/repository/InspectionSummary.class",
+      "sha256": "19c6fbf30f92ee694c9ada985f1309851ffaa157474b4b1483e8d337edd3bd03"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41150-p00403-dao-result-value-same-session-v1/classes/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.class",
+      "sha256": "dc394e1d15ba729bbecd4f895c264b3adb042233f8ac7d603cab68d6e91682bb"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41150-p00403-dao-result-value-same-session-v1/classes/dev/codex/schubert/nk/batch/repository/CleanupCounts.class",
+      "sha256": "09355389bf26d39779e3184b7dd995978314ae00b833e468fbd5078408265af0"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41150-p00403-dao-result-value-same-session-v1/classes/dev/codex/schubert/nk/batch/repository/BatchRun.class",
+      "sha256": "5cb0c42832ea17425dbf60da6025f2c4783d687e665b18f6cd8e88abc399c909"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41150-p00403-dao-result-value-same-session-v1/classes/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.class",
+      "sha256": "391b1aac7be2dd58cf9c3dee11cdd12941417fa7d029513475dfffbe4a3d2cb1"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41150-p00403-dao-result-value-same-session-v1/classes/dev/codex/schubert/nk/batch/repository/RunReferences.class",
+      "sha256": "9cd7197824647e7ad066678a66a54bfdf196f0251027bebeb765b6babd8d8fe2"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41150-p00403-dao-result-value-same-session-v1/classes/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.class",
+      "sha256": "f181015412f1f293e91c0eea24a3ac33127d5ef5015f3dc9fb73ac732e0cc009"
+    }
+  ],
+  "xml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41150-p00403-dao-result-value-same-session-v1/unit/TEST-junit-jupiter.xml",
+    "sha256": "5a7596e37ef1e6e1da6b638c306548adb472894ee4bc2ac874ce22afc17ece21"
+  },
+  "exec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41150-p00403-dao-result-value-same-session-v1/joint.exec",
+    "sha256": "6d9d24a3c69f2b1a07751059fd234b8e4bfafb2322b0ad1c8c66fb62a42c486e"
+  },
+  "session": "PG41150-RRF-DAO-VALUE-JOINT",
+  "raw": {
+    "path": "evidence/01_PT/004_NK-DAT-001/evidence/PG41150-p00403-dao-result-value-same-session-v1/unfiltered.tsv",
+    "sha256": "921f6ba9e969c12284057a4136714d208c4d30a8af1d10bb1b5c4e2672f59c73"
+  },
+  "originals": [
+    {
+      "path": "evidence/01_PT/004_NK-DAT-001/evidence/PG41040-p00403-reference-dao-current-nine-v1/manifest.json",
+      "sha256": "ed5b56ff313e36bf9d0126e3ca5d487c9d7443b46c5493141a8e85314fa850a3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35610-observation-value4-unit-v1/manifest.json",
+      "sha256": "8a17be0b0b3b9002fe2a36cdc34a353ecaa1b2ff41d4ac4d7896f8297e6ec1b6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41074-f02-current-alert-batch-maven-v1/manifest.json",
+      "sha256": "2373767cfeaf06ab0138b4ff584901bcded516b4f12067daeee3184df3ca16cb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41136-p01808-original-name-static-v1/manifest.json",
+      "sha256": "f60f42d3bd26224938ed0db4d3afa89a6b4e932ded5a73f5f697ddc7e360a9f8"
+    }
+  ],
+  "steps": {
+    "compile": {
+      "argv": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-implicit:none",
+        "-sourcepath",
+        "",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41150-p00403-dao-result-value-same-session-v1/classes",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferences.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryPureJdbcTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummary.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupCounts.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ObservationValueContractTest.java"
+      ],
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41150-p00403-dao-result-value-same-session-v1/compile.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41150-p00403-dao-result-value-same-session-v1/compile.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "start": "2026-11-20T19:26:07.834648+00:00",
+      "terminalAtUTC": "2026-11-20T19:26:08.717679+00:00"
+    },
+    "unit": {
+      "argv": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/PG41150-p00403-dao-result-value-same-session-v1/joint.exec,append=false,sessionid=PG41150-RRF-DAO-VALUE-JOINT",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-ansi-colors",
+        "--fail-if-no-tests",
+        "--class-path",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41150-p00403-dao-result-value-same-session-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "--select-class",
+        "dev.codex.schubert.nk.batch.repository.RunReferenceRepositoryPureJdbcTest",
+        "--config=junit.jupiter.execution.parallel.enabled=false",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41150-p00403-dao-result-value-same-session-v1/unit",
+        "--select-class",
+        "dev.codex.schubert.nk.batch.repository.ObservationValueContractTest"
+      ],
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41150-p00403-dao-result-value-same-session-v1/unit.stdout",
+        "sha256": "a33508dd6b2459ce16ab1944e2aec88d7527807c5889bf6ced1a866387fbca6d"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41150-p00403-dao-result-value-same-session-v1/unit.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "start": "2026-11-20T19:26:08.719854+00:00",
+      "terminalAtUTC": "2026-11-20T19:26:09.900262+00:00"
+    },
+    "raw-compile": {
+      "argv": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41150-p00403-dao-result-value-same-session-v1/rawtool",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/jacoco/UnfilteredCodeMeasurement.java"
+      ],
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41150-p00403-dao-result-value-same-session-v1/raw-compile.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41150-p00403-dao-result-value-same-session-v1/raw-compile.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "start": "2026-11-20T19:26:09.925650+00:00",
+      "terminalAtUTC": "2026-11-20T19:26:10.511617+00:00"
+    },
+    "raw": {
+      "argv": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41150-p00403-dao-result-value-same-session-v1/rawtool:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+        "--strict-original-exec",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41150-p00403-dao-result-value-same-session-v1/joint.exec",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41150-p00403-dao-result-value-same-session-v1/classes/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41150-p00403-dao-result-value-same-session-v1/classes/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41150-p00403-dao-result-value-same-session-v1/classes/dev/codex/schubert/nk/batch/repository/BatchRun.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41150-p00403-dao-result-value-same-session-v1/classes/dev/codex/schubert/nk/batch/repository/CleanupCounts.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41150-p00403-dao-result-value-same-session-v1/classes/dev/codex/schubert/nk/batch/repository/InspectionSummary.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41150-p00403-dao-result-value-same-session-v1/classes/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41150-p00403-dao-result-value-same-session-v1/classes/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41150-p00403-dao-result-value-same-session-v1/classes/dev/codex/schubert/nk/batch/repository/RunReferences.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41150-p00403-dao-result-value-same-session-v1/classes/dev/codex/schubert/nk/storage/StorageIoException.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41150-p00403-dao-result-value-same-session-v1/classes/dev/codex/schubert/nk/storage/StorageIoException$Reason.class"
+      ],
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41150-p00403-dao-result-value-same-session-v1/raw.stdout",
+        "sha256": "921f6ba9e969c12284057a4136714d208c4d30a8af1d10bb1b5c4e2672f59c73"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41150-p00403-dao-result-value-same-session-v1/raw.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "start": "2026-11-20T19:26:10.511715+00:00",
+      "terminalAtUTC": "2026-11-20T19:26:10.592079+00:00"
+    }
+  },
+  "oldStreamsMerged": 0,
+  "actualDbRootNativeActions": 0,
+  "formalDelta": 0,
+  "whole451": false,
+  "terminalAtUTC": "2026-11-20T19:26:10.592687+00:00"
+}

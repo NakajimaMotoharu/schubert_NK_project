@@ -1,0 +1,71 @@
+{
+  "eventId": "PGPT-20261008-7094",
+  "groupId": "PGPT-WBS66-P00403-DAO-RESULT-VALUE-SAME-SESSION-20261121",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T19:25:12.329000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 79,
+      "remainingPercent": 21,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P00403-DAO-RESULT-VALUE-SAME-SESSION-20261121",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-P00403-DAO-RESULT-VALUE-SAME-SESSION-20261121",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P004-03"
+    ],
+    "managementWorkIds": [
+      "WBS-P004-03/2"
+    ],
+    "source": "293b28ce3696a6deb5218e483926a01d2ef0933c",
+    "productionCoreMain": "559f5b5945e82374e0843dcfae11a8d07faef1ea",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG41150-p00403-dao-result-value-same-session-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.28,
+      "base": 0.72,
+      "high": 1.45
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1578_F02現Batch許可物理の依存方向継続点.json",
+        "sha256": "d4847489355b6908247c86bd1d3b89b09b31991c2533e4935f762399ce4dc99a"
+      },
+      {
+        "path": "evidence/01_PT/004_NK-DAT-001/evidence/PG41040-p00403-reference-dao-current-nine-v1/manifest.json",
+        "sha256": "ed5b56ff313e36bf9d0126e3ca5d487c9d7443b46c5493141a8e85314fa850a3"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35610-observation-value4-unit-v1/manifest.json",
+        "sha256": "8a17be0b0b3b9002fe2a36cdc34a353ecaa1b2ff41d4ac4d7896f8297e6ec1b6"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41074-f02-current-alert-batch-maven-v1/manifest.json",
+        "sha256": "2373767cfeaf06ab0138b4ff584901bcded516b4f12067daeee3184df3ca16cb"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41136-p01808-original-name-static-v1/manifest.json",
+        "sha256": "f60f42d3bd26224938ed0db4d3afa89a6b4e932ded5a73f5f697ddc7e360a9f8"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "SS331 §3.12／SS332・343。現DAOの9通常は単一runで対象生全、出力RunReferencesのequals/hashが生未到達2。独立16入力の3値suiteは別source・run。",
+    "endCondition": "現在本体と出力型の物理と同source/同execの12既存正常PTで固有未到達を解消。実DB・他ownerは別。",
+    "workScope": "合成Connection proxy・値だけ。原本／DB／Root／native／held fixture無し。"
+  }
+}
