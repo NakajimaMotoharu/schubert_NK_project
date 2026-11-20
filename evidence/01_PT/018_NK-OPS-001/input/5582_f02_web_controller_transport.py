@@ -73,7 +73,7 @@ def main(after):
     prior_found = SUPPORT["published_findings"](last.with_name("audit.stdout.txt"))
     assert previous["matched"] + previous["priorControls"] == 90
     assert len(prior_found) == 57
-    out = H["OPS"] / ("PG41094-f02-web-transport-layer-after-v1" if after else start["run"])
+    out = H["OPS"] / ("PG41098-f02-web-transport-layer-after-v3" if after else start["run"])
     out.mkdir()
     java = H["JAVA"]
     cp = os.pathsep.join(str(H[key]) for key in ("ARCH","SLF"))
@@ -86,8 +86,12 @@ def main(after):
         code.write_bytes(data)
         inputs, newly_expected = source_inputs(fixture)
         if after:
+            inputs += [C["write_fixture"](fixture, P+owner, body)
+                       for owner, body, _ in BASE["CASES"] if owner != "protocol.PathValue"]
             inputs += BASE["prior_sources"](fixture)
-            inputs += [C["write_fixture"](fixture, P+owner, body) for owner,body,flag in BASE["CASES"]]
+            inputs.append(C["write_fixture"](fixture, P+"protocol.PathDescriptorField",
+                                              "public java.nio.file.Path value;"))
+            assert len(inputs) == len(set(inputs))
         else:
             inputs += [C["write_fixture"](fixture, P+m+".Anchor", C["MARKER"]) for m in H["MODULES"]]
         for key, argv in (
@@ -98,7 +102,9 @@ def main(after):
             assert steps[key]["actualExit"] == 0
         owners, physical = BASE["fixture_owners"](root/"binary")
         if after:
-            assert all(physical[row["className"]] == row["sha256"] for row in previous["physical"])
+            changed = [row["className"] for row in previous["physical"]
+                       if physical[row["className"]] != row["sha256"]]
+            assert not changed, changed
         argv = []
         for name, types in sorted(owners.items()):
             jar = root / (name+".jar")
@@ -119,6 +125,11 @@ def main(after):
     receipt = out/"manifest.json"
     H["dump"](receipt, dict(actualExit=0, toolSource=source, productionCore=start["productionCoreMain"],
                             cases=cases, oldControls=90 if after else 0,
+                            correctedPathFixture=(dict(testId="PT-F02-PATH-IO-007",
+                                className=P+"protocol.PathDescriptorField",
+                                expectedFindings=0, actualFindings=sum(
+                                    finding[1] == P+"protocol.PathDescriptorField" for finding in findings))
+                                if after else None),
                             matched=sum(c["expected"]==c["observed"] for c in cases),
                             physical=[dict(className=n,sha256=h) for n,h in physical.items()],
                             inputToolSha256=H["sha"](data), previousResult=pin(last),
