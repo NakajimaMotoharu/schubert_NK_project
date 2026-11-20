@@ -1,0 +1,75 @@
+{
+  "eventId": "PGPT-20261008-6816",
+  "groupId": "F03-current-main-test-style-lineage",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T13:41:14.197000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 70,
+      "remainingPercent": 30,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "F03-current-main-test-style-lineage",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "F03-current-main-test-style-lineage",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-1"
+    ],
+    "source": "fd7407c8713012befb6f228bae6d311363646db1",
+    "productionCoreMain": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40888-f03-current-style-lineage-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.4,
+      "high": 0.75
+    },
+    "groupCapPp": 1.1,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1299_F02現Batch標準SDK組立継続点.json",
+        "sha256": "b210a4495ac91d05f39765fee5084106cb8eb46f14d74caf84e0361a13ac858c"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40818-f03-g08-current-lineage-v1/manifest.json",
+        "sha256": "385e1c31e5095fc64325afede924ea9a30260e4af57176c81a14ced940aa934d"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40836-p00402-inspection-single-sql-after-v1/manifest.json",
+        "sha256": "f2802c62f9d179ffbc10bf39d5e392381375d64f7c261bfec16ec40837f2953d"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40874-batch-standard-gc-partial-close-v1-after/manifest.json",
+        "sha256": "38a871d3db549245ab693df9adf3f24a58c8d4e392d6896b2e7b02e7e0c5fc9c"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40878-api-web-standard-gc-partial-close-v1-after-api/manifest.json",
+        "sha256": "ade0bc84d4630858c8b7e52d0625e9a388a26271c9fa6c95c6eaa89da17fcadf"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40878-api-web-standard-gc-partial-close-v1-after-web/manifest.json",
+        "sha256": "3ba813ddf78d5129f025a5b151040d7e6e7729eb432f0bd73005f3496ee5f5f1"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "PG40818の全Main入力とTest固定tree、現core差分、後続の同byte独立書式終了を照合。保留32の中身は読まない。",
+    "endCondition": "Main差分4とTest差分9を元証拠へ接続。既scopeと今回変化の分母、保留点数、全451未成立を明記。",
+    "workScope": "F03 styleのsource／Test追跡のみ。旧解析、試験、実環境は再実行しない。"
+  }
+}
