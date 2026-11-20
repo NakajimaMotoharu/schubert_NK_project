@@ -1,0 +1,67 @@
+{
+  "eventId": "PGPT-20261008-7203",
+  "groupId": "WBS66-F02-LOGGING-FILE-CONSTRUCTOR",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T22:28:42.598000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 83,
+      "remainingPercent": 17,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66-F02-LOGGING-FILE-CONSTRUCTOR",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "WBS66-F02-LOGGING-FILE-CONSTRUCTOR",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a"
+    ],
+    "source": "2031a9f683669e3f097dab9021254c0f5a7ddd88",
+    "productionCoreMain": "a8913bc836f81632613b34243f84b7b15eb3e054",
+    "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "run": "PG41286-f02-jdk-file-handler-red-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.11,
+      "base": 0.37,
+      "high": 0.8
+    },
+    "groupCapPp": 1.1,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1687_G08現証拠・F02通常経路へ.json",
+        "sha256": "109c2f19f98a77d1756891412cbca60cf7c9dc0b290c227d593fcef2efe5510d"
+      },
+      {
+        "path": "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md",
+        "sha256": "72427a8609a9c4753ff459cbfa92e3ad27669544c59d53eb9191b97b911c74d2"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41222-f02-archive-owner-independent-v1/manifest.json",
+        "sha256": "de1809ae72bd23503e206db5626078c5fb0c9cbadb043dd7629ac1cb67d1c8b9"
+      },
+      {
+        "path": "tools/quality/architecture/ModuleDependencyAudit.java",
+        "sha256": "46ff5d17a479e8635de8a6758b9960ffa99b4e7c6800ff9785ce21c620b06997"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "SS311 SYS-005のProtocol／Controller直ファイルを禁止。JDK25 javax型の差ではなく既java.util.logging FileHandlerの明示constructor。既合成archive/pathと実JARより試験前入力を固定。",
+    "endCondition": "両境界で既FileHandler constructorだけ検出、非ファイルStreamHandler等と許可所有の非警告、既分岐再資格、JDK APIと型別実製品該当性。六製品と451は別。",
+    "workScope": "コンパイルしたクラスの静的検査。fixtureを実行せず、FileHandler、サービス、ファイル出力、実DB、既HOLDは不操作。"
+  }
+}

@@ -1,0 +1,188 @@
+{
+  "run": "PG41286-f02-jdk-file-handler-red-v1",
+  "source": "2031a9f683669e3f097dab9021254c0f5a7ddd88",
+  "productionCore": "a8913bc836f81632613b34243f84b7b15eb3e054",
+  "auditorSha256": "46ff5d17a479e8635de8a6758b9960ffa99b4e7c6800ff9785ce21c620b06997",
+  "findings": 0,
+  "fixtures": [
+    {
+      "testId": "PT-F02-LOGFILE001",
+      "origin": "dev.codex.schubert.nk.web.synthetic.DefaultLogController",
+      "target": "java.util.logging.FileHandler",
+      "rule": "CONTROLLER_BOUNDARY",
+      "expected": true,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-LOGFILE002",
+      "origin": "dev.codex.schubert.nk.web.synthetic.NamedLogController",
+      "target": "java.util.logging.FileHandler",
+      "rule": "CONTROLLER_BOUNDARY",
+      "expected": true,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-LOGFILE003",
+      "origin": "dev.codex.schubert.nk.protocol.DefaultLogSink",
+      "target": "java.util.logging.FileHandler",
+      "rule": "FRAMEWORK_FENCES",
+      "expected": true,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-LOGFILE004",
+      "origin": "dev.codex.schubert.nk.protocol.RollingLogSink",
+      "target": "java.util.logging.FileHandler",
+      "rule": "FRAMEWORK_FENCES",
+      "expected": true,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-LOGFILE005",
+      "origin": "dev.codex.schubert.nk.web.synthetic.StreamLogController",
+      "target": "java.util.logging.StreamHandler",
+      "rule": "CONTROLLER_BOUNDARY",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-LOGFILE006",
+      "origin": "dev.codex.schubert.nk.protocol.MemoryLogSink",
+      "target": "java.util.logging.MemoryHandler",
+      "rule": "FRAMEWORK_FENCES",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-LOGFILE007",
+      "origin": "dev.codex.schubert.nk.web.synthetic.OwnedLogAdapter",
+      "target": "java.util.logging.FileHandler",
+      "rule": "CONTROLLER_BOUNDARY",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-LOGFILE008",
+      "origin": "dev.codex.schubert.nk.batch.OwnedLogAdapter",
+      "target": "java.util.logging.FileHandler",
+      "rule": "FRAMEWORK_FENCES",
+      "expected": false,
+      "observed": false
+    }
+  ],
+  "targetedMisses": 4,
+  "requalifiedEarlierDecisions": 0,
+  "previousExpectedFindings": 0,
+  "physical": 14,
+  "fixtureInitializations": 0,
+  "fileOpens": 0,
+  "actualProductTests": 0,
+  "bytecodePostRecoveredFromExisting": true,
+  "directJdkOpens": 5,
+  "delegatedJdkOpen": 1,
+  "formalDelta": 0,
+  "wholeF02": false,
+  "whole451": false,
+  "stages": {
+    "compile-auditor": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41286-f02-jdk-file-handler-red-v1/compile-auditor.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41286-f02-jdk-file-handler-red-v1/compile-auditor.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "-d",
+        "/dev/shm/pgpt-file-handler-sxkn_3wa/tool",
+        "/dev/shm/pgpt-file-handler-sxkn_3wa/ModuleDependencyAudit.java"
+      ]
+    },
+    "compile-fixtures": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41286-f02-jdk-file-handler-red-v1/compile-fixtures.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41286-f02-jdk-file-handler-red-v1/compile-fixtures.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-d",
+        "/dev/shm/pgpt-file-handler-sxkn_3wa/classes",
+        "/dev/shm/pgpt-file-handler-sxkn_3wa/dev/codex/schubert/nk/web/synthetic/DefaultLogController.java",
+        "/dev/shm/pgpt-file-handler-sxkn_3wa/dev/codex/schubert/nk/web/synthetic/NamedLogController.java",
+        "/dev/shm/pgpt-file-handler-sxkn_3wa/dev/codex/schubert/nk/protocol/DefaultLogSink.java",
+        "/dev/shm/pgpt-file-handler-sxkn_3wa/dev/codex/schubert/nk/protocol/RollingLogSink.java",
+        "/dev/shm/pgpt-file-handler-sxkn_3wa/dev/codex/schubert/nk/web/synthetic/StreamLogController.java",
+        "/dev/shm/pgpt-file-handler-sxkn_3wa/dev/codex/schubert/nk/protocol/MemoryLogSink.java",
+        "/dev/shm/pgpt-file-handler-sxkn_3wa/dev/codex/schubert/nk/web/synthetic/OwnedLogAdapter.java",
+        "/dev/shm/pgpt-file-handler-sxkn_3wa/dev/codex/schubert/nk/batch/OwnedLogAdapter.java",
+        "/dev/shm/pgpt-file-handler-sxkn_3wa/dev/codex/schubert/nk/protocol/Anchor.java",
+        "/dev/shm/pgpt-file-handler-sxkn_3wa/dev/codex/schubert/nk/storage/Anchor.java",
+        "/dev/shm/pgpt-file-handler-sxkn_3wa/dev/codex/schubert/nk/bootstrap/Anchor.java",
+        "/dev/shm/pgpt-file-handler-sxkn_3wa/dev/codex/schubert/nk/api/Anchor.java",
+        "/dev/shm/pgpt-file-handler-sxkn_3wa/dev/codex/schubert/nk/web/Anchor.java",
+        "/dev/shm/pgpt-file-handler-sxkn_3wa/dev/codex/schubert/nk/batch/Anchor.java"
+      ]
+    },
+    "audit": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41286-f02-jdk-file-handler-red-v1/audit.stdout.txt",
+        "sha256": "0cd3f45e12bff851883635618934200c1dc2c3137ce1a0298b1cf2866ac7ba08"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41286-f02-jdk-file-handler-red-v1/audit.stderr.txt",
+        "sha256": "2c58b87a0350a39bb1c3b5f4891defeeb9a785e84aa11a466dc9ddb21253bf58"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/dev/shm/pgpt-file-handler-sxkn_3wa/tool:/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "ModuleDependencyAudit",
+        "api=/dev/shm/pgpt-file-handler-sxkn_3wa/api.jar",
+        "batch=/dev/shm/pgpt-file-handler-sxkn_3wa/batch.jar",
+        "bootstrap=/dev/shm/pgpt-file-handler-sxkn_3wa/bootstrap.jar",
+        "protocol=/dev/shm/pgpt-file-handler-sxkn_3wa/protocol.jar",
+        "storage=/dev/shm/pgpt-file-handler-sxkn_3wa/storage.jar",
+        "web=/dev/shm/pgpt-file-handler-sxkn_3wa/web.jar"
+      ]
+    },
+    "jdk": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41286-f02-jdk-file-handler-red-v1/jdk.stdout.txt",
+        "sha256": "3415e341c63d6b770eff7d4ea4c21ffc1b2c6c112838484bb748afa70ee15323"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41286-f02-jdk-file-handler-red-v1/jdk.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-p",
+        "-c",
+        "java.util.logging.FileHandler"
+      ]
+    }
+  },
+  "terminalAtUTC": "2026-11-20T22:30:40.837312+00:00"
+}
