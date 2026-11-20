@@ -1,0 +1,64 @@
+{
+  "eventId": "PGPT-20261008-6932",
+  "groupId": "f02-enforcer-convergence-negative-control",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T15:58:53.895000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 74,
+      "remainingPercent": 26,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "f02-enforcer-convergence-negative-control",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "f02-enforcer-convergence-negative-control",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a",
+      "WBS-F02/criterion/quality"
+    ],
+    "source": "63b9327b7504ca19da9fc3d08243b4436ef59c09",
+    "productionCoreMain": "8ae29687743f2b9851bae59a0fb9ff23b5fb2176",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40970-f02-enforcer-convergence-negative-control-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.12,
+      "base": 0.32,
+      "high": 0.66
+    },
+    "groupCapPp": 0.9,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1415_P01810認証値UTF8境界継続点.json",
+        "sha256": "dff5a282f37a0e609563f316d834e3724829e8b6239f04bd0dbecdb165b79a8f"
+      },
+      {
+        "path": "pom.xml",
+        "sha256": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40672-f02-current-six-reactor-independent-v1/manifest.json",
+        "sha256": "257c42bbe02c064e0627069010900860c41fc9d93aa853deb0b12c521fff7c7b"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "F02 SYS002/005の同バージョン合流と異版への拒否。元validateは正例、異版の実Enforcer対照は未計測。",
+    "endCondition": "PT-F02-MAVEN-002。Root父POM継承の同版0と別版1を同fixture構造で実行。失敗理由の両pathと版を独立期待で確認。",
+    "workScope": "JDK25/Maven3.9.12 offline validateのみ。隔離POM、既公開依存座標、不用な製品classfileの読取・実行なし。"
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "source": "8ae29687743f2b9851bae59a0fb9ff23b5fb2176",
+  "run": "PG40970-f02-enforcer-convergence-negative-control-v1",
+  "startEvent": "PGPT-20261008-6932",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-20T15:59:27.598614+00:00",
+  "testId": "PT-F02-MAVEN-002",
+  "testSpec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/5525_F02依存収束の正負単体仕様.md",
+    "sha256": "47765fcc4d603bf22151527ebe233c0a873bac62ced3c6c57840653945e1d795"
+  },
+  "rootPom": {
+    "path": "pom.xml",
+    "sha256": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38"
+  },
+  "graphPoms": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/commons/commons-compress/1.28.0/commons-compress-1.28.0.pom",
+      "sha256": "033f4c78d632da88d0eb8ead974fc14a264392cebf12ab6c68d6cea7adf0c64a"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/commons-codec/commons-codec/1.19.0/commons-codec-1.19.0.pom",
+      "sha256": "e0f3269fa23de0c83130c5659f5f9514cc5422c0bcdf45f2eae004a78b9fca34"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/commons-codec/commons-codec/1.22.1/commons-codec-1.22.1.pom",
+      "sha256": "4cfc5aa20112d131c6949f80bb1e8adce39ffea9a5a935b4c9a37b7c9aab1c91"
+    }
+  ],
+  "tooling": {
+    "jdk": "25.0.4",
+    "maven": "3.9.12"
+  },
+  "cases": [
+    {
+      "fixture": "aligned",
+      "directCodecVersion": "1.19.0",
+      "expectedExit": 0,
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-B",
+        "-ntp",
+        "-o",
+        "-N",
+        "-f",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40970-f02-enforcer-convergence-negative-control-v1/aligned/pom.xml",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "validate"
+      ],
+      "terminalAtUTC": "2026-11-20T15:59:26.422916+00:00",
+      "startedAtUTC": "2026-11-20T15:59:24.994755+00:00",
+      "model": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40970-f02-enforcer-convergence-negative-control-v1/aligned/pom.xml",
+        "sha256": "4f8b3d08e7ec44b1965a6a3950ac6a9a515160a0f202eb7176cd49164dbfde9e"
+      },
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40970-f02-enforcer-convergence-negative-control-v1/aligned/maven.stdout",
+        "sha256": "5657c28ee3f63a0f9f5715327ad3f8aea20b47e0575f019db9bbe9514377cda3"
+      },
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "javaMavenVersionRulesPassed": true,
+      "exactConvergenceOracle": true,
+      "passState": true
+    },
+    {
+      "fixture": "conflicting",
+      "directCodecVersion": "1.22.1",
+      "expectedExit": 1,
+      "actualExit": 1,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-B",
+        "-ntp",
+        "-o",
+        "-N",
+        "-f",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40970-f02-enforcer-convergence-negative-control-v1/conflicting/pom.xml",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "validate"
+      ],
+      "terminalAtUTC": "2026-11-20T15:59:27.598329+00:00",
+      "startedAtUTC": "2026-11-20T15:59:26.423147+00:00",
+      "model": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40970-f02-enforcer-convergence-negative-control-v1/conflicting/pom.xml",
+        "sha256": "5d262161c353c126e902f9aab3e4f5df5fb4019d1b0ef5d0a8723ba4e71e888e"
+      },
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40970-f02-enforcer-convergence-negative-control-v1/conflicting/maven.stdout",
+        "sha256": "b2dfad95db8def7631bfe49dfe564fd22a4511a3d1e636f93d6c3d86f89ba246"
+      },
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "javaMavenVersionRulesPassed": true,
+      "exactConvergenceOracle": true,
+      "passState": true
+    }
+  ],
+  "productTests": 0,
+  "productClassesReadOrCompiled": 0,
+  "offline": true,
+  "outerArtifactOperations": 0,
+  "previouslySuccessfulValidateRepeated": false,
+  "wholeF02": false,
+  "whole451": false,
+  "formalDelta": 0
+}
