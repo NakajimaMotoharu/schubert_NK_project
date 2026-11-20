@@ -1,0 +1,327 @@
+{
+  "actualExit": 0,
+  "source": "2cc96ab800b8753b0f0eafac8e008bd5b69d9a59",
+  "canonicalDesign": "6dcd9fb65a3dad2011abeac1babc75e52394785d",
+  "inputEvidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40450-migration-utc42-proxy-87-v1/manifest.json",
+      "sha256": "290d4bc4a82f525b67e730aa6edc2ec9f1a636d8e15a3c19afdab77e3476d982"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40452-migration-utc42-proxy-87-typed-v1/manifest.json",
+      "sha256": "9a3f3990a94b619e060ede633eb3ae09dd0ab1aa1d75d07e4a7bd245282d6686"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40454-migration-utc42-static-independent-v1/manifest.json",
+      "sha256": "01b5acb60a6e7fab875e6b3b936c4a21ebb911d650b8abc7b5a488bfb7148c3a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40452-migration-utc42-proxy-87-typed-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "1d34095ac77e61c291ac0d270a00ca90e3a3b897a0adeb1cf7fca82fd7d8bc2c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40452-migration-utc42-proxy-87-typed-v1/coverage.xml",
+      "sha256": "173d81796d5f12d803bab6fd2e37713d835ab6a5e298ec185de252d940293266"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40452-migration-utc42-proxy-87-typed-v1/closure-result.json",
+      "sha256": "01674f8ed04deeb0c9ec958edc771bc9d2e45dab3aec0e870880aa8073d32b42"
+    }
+  ],
+  "firstAttempt": {
+    "pass": 51,
+    "error": 7,
+    "failure": 29
+  },
+  "verifiedAttempt": {
+    "pass": 87
+  },
+  "individualSuiteCounts": {
+    "MigrationMasterContentVerifierTest": 29,
+    "MigrationMasterTargetPublisherTest": 38,
+    "MigrationGamesVerifierTest": 20
+  },
+  "failed": 0,
+  "error": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "standardCoverage": {
+    "MigrationGamesVerifier": {
+      "INSTRUCTION": [
+        0,
+        213
+      ],
+      "BRANCH": [
+        0,
+        30
+      ],
+      "LINE": [
+        0,
+        66
+      ],
+      "COMPLEXITY": [
+        0,
+        25
+      ],
+      "METHOD": [
+        0,
+        10
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "MigrationMasterContentVerifier": {
+      "INSTRUCTION": [
+        0,
+        381
+      ],
+      "BRANCH": [
+        0,
+        48
+      ],
+      "LINE": [
+        0,
+        94
+      ],
+      "COMPLEXITY": [
+        0,
+        47
+      ],
+      "METHOD": [
+        0,
+        23
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    }
+  },
+  "rawCoverage": {
+    "MigrationGamesVerifier": {
+      "INSTRUCTION": [
+        0,
+        227
+      ],
+      "BRANCH": [
+        0,
+        30
+      ],
+      "LINE": [
+        0,
+        68
+      ],
+      "COMPLEXITY": [
+        0,
+        25
+      ],
+      "METHOD": [
+        0,
+        10
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "MigrationMasterContentVerifier": {
+      "INSTRUCTION": [
+        0,
+        395
+      ],
+      "BRANCH": [
+        0,
+        48
+      ],
+      "LINE": [
+        0,
+        96
+      ],
+      "COMPLEXITY": [
+        0,
+        47
+      ],
+      "METHOD": [
+        0,
+        23
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    }
+  },
+  "pmdExit": 4,
+  "pmdScopeRetainsAllFindings": true,
+  "pmdIndependentDispositions": [
+    {
+      "file": "MigrationGamesVerifier.java",
+      "method": "verify",
+      "rule": "AvoidCatchingGenericException",
+      "rawMessage": "Avoid catching RuntimeException in try-catch block",
+      "localDisposition": "NOT_APPLICABLE",
+      "rationale": "Retains original failure identity and the close sequence required by SS343; this catch only rethrows the primary or attaches secondary to it."
+    },
+    {
+      "file": "MigrationGamesVerifier.java",
+      "method": "verify",
+      "rule": "AvoidCatchingGenericException",
+      "rawMessage": "Avoid catching Error in try-catch block",
+      "localDisposition": "NOT_APPLICABLE",
+      "rationale": "Retains original failure identity and the close sequence required by SS343; this catch only rethrows the primary or attaches secondary to it."
+    },
+    {
+      "file": "MigrationGamesVerifier.java",
+      "method": "rows",
+      "rule": "AvoidCatchingGenericException",
+      "rawMessage": "Avoid catching RuntimeException in try-catch block",
+      "localDisposition": "NOT_APPLICABLE",
+      "rationale": "Retains original failure identity and the close sequence required by SS343; this catch only rethrows the primary or attaches secondary to it."
+    },
+    {
+      "file": "MigrationGamesVerifier.java",
+      "method": "rows",
+      "rule": "AvoidCatchingGenericException",
+      "rawMessage": "Avoid catching Error in try-catch block",
+      "localDisposition": "NOT_APPLICABLE",
+      "rationale": "Retains original failure identity and the close sequence required by SS343; this catch only rethrows the primary or attaches secondary to it."
+    },
+    {
+      "file": "MigrationGamesVerifier.java",
+      "method": "closeStatement",
+      "rule": "AvoidCatchingGenericException",
+      "rawMessage": "Avoid catching RuntimeException in try-catch block",
+      "localDisposition": "NOT_APPLICABLE",
+      "rationale": "Retains original failure identity and the close sequence required by SS343; this catch only rethrows the primary or attaches secondary to it."
+    },
+    {
+      "file": "MigrationGamesVerifier.java",
+      "method": "closeStatement",
+      "rule": "AvoidCatchingGenericException",
+      "rawMessage": "Avoid catching Error in try-catch block",
+      "localDisposition": "NOT_APPLICABLE",
+      "rationale": "Retains original failure identity and the close sequence required by SS343; this catch only rethrows the primary or attaches secondary to it."
+    },
+    {
+      "file": "MigrationGamesVerifier.java",
+      "method": "closeStatement",
+      "rule": "CompareObjectsWithEquals",
+      "rawMessage": "Use equals() to compare object references.",
+      "localDisposition": "NOT_APPLICABLE",
+      "rationale": "Reference identity is required to avoid self-suppression. Distinct equal exceptions remain distinct."
+    },
+    {
+      "file": "MigrationGamesVerifier.java",
+      "method": "closeResult",
+      "rule": "AvoidCatchingGenericException",
+      "rawMessage": "Avoid catching RuntimeException in try-catch block",
+      "localDisposition": "NOT_APPLICABLE",
+      "rationale": "Retains original failure identity and the close sequence required by SS343; this catch only rethrows the primary or attaches secondary to it."
+    },
+    {
+      "file": "MigrationGamesVerifier.java",
+      "method": "closeResult",
+      "rule": "AvoidCatchingGenericException",
+      "rawMessage": "Avoid catching Error in try-catch block",
+      "localDisposition": "NOT_APPLICABLE",
+      "rationale": "Retains original failure identity and the close sequence required by SS343; this catch only rethrows the primary or attaches secondary to it."
+    },
+    {
+      "file": "MigrationGamesVerifier.java",
+      "method": "closeResult",
+      "rule": "CompareObjectsWithEquals",
+      "rawMessage": "Use equals() to compare object references.",
+      "localDisposition": "NOT_APPLICABLE",
+      "rationale": "Reference identity is required to avoid self-suppression. Distinct equal exceptions remain distinct."
+    },
+    {
+      "file": "MigrationMasterContentVerifier.java",
+      "method": "verify",
+      "rule": "AvoidCatchingGenericException",
+      "rawMessage": "Avoid catching RuntimeException in try-catch block",
+      "localDisposition": "NOT_APPLICABLE",
+      "rationale": "Retains original failure identity and the close sequence required by SS343; this catch only rethrows the primary or attaches secondary to it."
+    },
+    {
+      "file": "MigrationMasterContentVerifier.java",
+      "method": "verify",
+      "rule": "AvoidCatchingGenericException",
+      "rawMessage": "Avoid catching Error in try-catch block",
+      "localDisposition": "NOT_APPLICABLE",
+      "rationale": "Retains original failure identity and the close sequence required by SS343; this catch only rethrows the primary or attaches secondary to it."
+    },
+    {
+      "file": "MigrationMasterContentVerifier.java",
+      "method": "verifyRows",
+      "rule": "AvoidCatchingGenericException",
+      "rawMessage": "Avoid catching RuntimeException in try-catch block",
+      "localDisposition": "NOT_APPLICABLE",
+      "rationale": "Retains original failure identity and the close sequence required by SS343; this catch only rethrows the primary or attaches secondary to it."
+    },
+    {
+      "file": "MigrationMasterContentVerifier.java",
+      "method": "verifyRows",
+      "rule": "AvoidCatchingGenericException",
+      "rawMessage": "Avoid catching Error in try-catch block",
+      "localDisposition": "NOT_APPLICABLE",
+      "rationale": "Retains original failure identity and the close sequence required by SS343; this catch only rethrows the primary or attaches secondary to it."
+    },
+    {
+      "file": "MigrationMasterContentVerifier.java",
+      "method": "closeStatement",
+      "rule": "AvoidCatchingGenericException",
+      "rawMessage": "Avoid catching RuntimeException in try-catch block",
+      "localDisposition": "NOT_APPLICABLE",
+      "rationale": "Retains original failure identity and the close sequence required by SS343; this catch only rethrows the primary or attaches secondary to it."
+    },
+    {
+      "file": "MigrationMasterContentVerifier.java",
+      "method": "closeStatement",
+      "rule": "AvoidCatchingGenericException",
+      "rawMessage": "Avoid catching Error in try-catch block",
+      "localDisposition": "NOT_APPLICABLE",
+      "rationale": "Retains original failure identity and the close sequence required by SS343; this catch only rethrows the primary or attaches secondary to it."
+    },
+    {
+      "file": "MigrationMasterContentVerifier.java",
+      "method": "closeStatement",
+      "rule": "CompareObjectsWithEquals",
+      "rawMessage": "Use equals() to compare object references.",
+      "localDisposition": "NOT_APPLICABLE",
+      "rationale": "Reference identity is required to avoid self-suppression. Distinct equal exceptions remain distinct."
+    },
+    {
+      "file": "MigrationMasterContentVerifier.java",
+      "method": "closeResult",
+      "rule": "AvoidCatchingGenericException",
+      "rawMessage": "Avoid catching RuntimeException in try-catch block",
+      "localDisposition": "NOT_APPLICABLE",
+      "rationale": "Retains original failure identity and the close sequence required by SS343; this catch only rethrows the primary or attaches secondary to it."
+    },
+    {
+      "file": "MigrationMasterContentVerifier.java",
+      "method": "closeResult",
+      "rule": "AvoidCatchingGenericException",
+      "rawMessage": "Avoid catching Error in try-catch block",
+      "localDisposition": "NOT_APPLICABLE",
+      "rationale": "Retains original failure identity and the close sequence required by SS343; this catch only rethrows the primary or attaches secondary to it."
+    },
+    {
+      "file": "MigrationMasterContentVerifier.java",
+      "method": "closeResult",
+      "rule": "CompareObjectsWithEquals",
+      "rawMessage": "Use equals() to compare object references.",
+      "localDisposition": "NOT_APPLICABLE",
+      "rationale": "Reference identity is required to avoid self-suppression. Distinct equal exceptions remain distinct."
+    }
+  ],
+  "newTimestampFindings": 0,
+  "legacyProductionCalls": 0,
+  "staticNoSuppressionUsed": true,
+  "actualPostgresqlVerified": false,
+  "full451": false,
+  "formalDelta": 0,
+  "terminalAtUTC": "2026-11-20T00:56:14.431495+00:00"
+}

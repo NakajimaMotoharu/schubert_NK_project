@@ -1,5 +1,7 @@
 # 移行六表の全COPY列型付き照合・独立仕様
 
+2026-11-20追補。SSC-473によるJDBC 4.2の型引数と時刻oracleは [151](151_移行照合のJDBC42時刻取得仕様.md) を現行仕様とする。本書の旧getter記述は当時の歴史証跡とする。
+
 NK-MIG-001、RD MIG003005006/MIG-DAT005/FUN004/DAT004/TST、UI223242254、SS311331/V002/343。MigrationMasterContentVerifierはcallerが既に認証・排他・owner/TXを確立しINSERTした同Connectionと不変MigrationMasterCopyDatasetを借用し、六表の全65 COPY列を固定SELECTで一行ずつ型付き照合する。既count/reference/identity/ANALYZE、宣言hash/differenceに対する不足部品であり、実DB/全catalog/index/role・generated body_search・全移行・原本Current/公開/Rootnative/global451/ITST資格は代行しない。実DB/driver/COPY等HOLDを解除せず、通常PTは明示JDK Proxyだけ。
 
 verify(Nullable Connection,Nullable MigrationMasterCopyDataset)は両nullを副作用前固定IAE、autoCommit=true/null Statementを固定SQLExceptionとする。caller-owned migration write TXでのpost読取を許すためreadOnly=trueは要求せず、Connectionのclose/commit/rollback/setRole/setReadOnly/setAutoCommit/再試行0。新nonnullStatementを一回所有しqueryTimeout30秒/fetchSize1000。新ResultSetを各query一回だけ所有し、六表speakers/script_files/script_entries/audio_files/media_assets/entry_audio_linksを固定順に読む。

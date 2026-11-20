@@ -5,6 +5,7 @@ import gzip
 import json
 import os
 from pathlib import Path
+import re
 import runpy
 from tempfile import TemporaryDirectory
 from xml.etree import ElementTree
@@ -20,7 +21,15 @@ TESTS = (*[name + "Test" for name in MAIN], "MigrationMasterTargetPublisherTest"
 MODULE = Path("src/schubert-nk-bootstrap/src")
 SOURCE = "2cc96ab800b8753b0f0eafac8e008bd5b69d9a59"
 DESIGN = "6dcd9fb65a3dad2011abeac1babc75e52394785d"
-RUN = "PG40450-migration-utc42-proxy-87-v1"
+RUN = "PG40452-migration-utc42-proxy-87-typed-v1"
+SQL_CLOSURE = {
+    "AssetStagingTables": ("SqlMutation", "SqlQuery"),
+    "MigrationMasterColumnVerifier": ("SqlQuery",),
+    "MigrationMasterConstraintVerifier": ("SqlQuery",),
+    "MigrationMasterContentVerifier": ("SqlQuery",),
+    "MigrationMasterFinalizer": ("SqlMutation", "SqlPrepare", "SqlQuery"),
+    "MigrationMasterReferenceVerifier": ("SqlQuery",),
+}
 
 
 def read(path):
@@ -52,15 +61,26 @@ def verify_xml(root, expected):
     return Counter(observed.values())
 
 
+def pack_text(out, receipt):
+    for channel in ("stdout", "stderr"):
+        item = receipt[channel]
+        old = Path(item["path"])
+        new = old.with_suffix(".log.gz")
+        new.write_bytes(gzip.compress(old.read_bytes(), mtime=0))
+        receipt[channel] = {**H["pin"](new), "expandedSha256": item["sha256"]}
+        old.unlink()
+    (out / "unit-exit.json").write_text(json.dumps(receipt, indent=2) + "\n")
+
+
 def main():
     pin, git, execute, sha = (H[key] for key in ("pin", "git", "execute", "sha"))
     start = read(next(PLAN.glob("869_*")))
     change = start["values"]
     source_main = change["productionCoreMain"]
     refs = change["oracleReferences"]
-    assert git("rev-parse", "HEAD").decode().strip() == SOURCE
+    assert not git("diff", "--name-only", SOURCE, "HEAD", "--", "src")
     assert git("rev-parse", "origin/main").decode().strip() == DESIGN
-    assert all(pin(Path(ref["path"])) == ref for ref in refs[:5] if ref is not refs[2])
+    assert all(pin(Path(refs[i]["path"])) == refs[i] for i in (0, 1, 3, 4))
     assert "getObject(5, OffsetDateTime.class)" in git("show", f"{DESIGN}:{refs[2]['path']}").decode()
     assert "getTimestamp" not in git("show", f"{DESIGN}:{refs[2]['path']}").decode()
     primary = read(refs[5]["path"])
@@ -74,8 +94,17 @@ def main():
     assert pin(bootstrap_path) == bootstrap
     old_classes = history["physicalClassHashes"]
     assert len(old_classes) == 73 and all(p.startswith(SCOPE) for p in old_classes)
+    companions = {SCOPE + f"{owner}${name}.class" for owner, names in SQL_CLOSURE.items() for name in names}
+    assert len(companions) == 9 and not (companions & old_classes.keys())
+    for owner, nested in SQL_CLOSURE.items():
+        path = MODULE / "main" / "java" / SCOPE / (owner + ".java")
+        code = git("show", f"{SOURCE}:{path}").decode()
+        for name in nested:
+            assert re.search(r"private interface " + name + r"\s*\{", code), (str(path), name)
     targets = {SCOPE + name + ".class" for name in MAIN}
     assert targets <= set(old_classes)
+    recompiled = targets | {SCOPE + "MigrationMasterContentVerifier$SqlQuery.class"}
+    full_scope = old_classes.keys() | companions
     previous = read(next(OPS.glob("PG40128-*/begin.json")))
     assert pin(JAVA) == previous["jdk"]
     pins = {Path(ref["path"]): ref["sha256"] for ref in previous["tools"].values()
@@ -111,12 +140,12 @@ def main():
         main_paths, main_pins = source_files("main", MAIN, root)
         test_paths, test_pins = source_files("test", TESTS, root)
         with ZipFile(bootstrap_path) as archive:
-            for item, old_hash in sorted(old_classes.items()):
+            for item in sorted(full_scope):
                 data = archive.read(item)
                 value = sha(data)
-                if value != old_hash:
+                if item in old_classes and value != old_classes[item]:
                     prior_changes[item] = value
-                if item not in targets:
+                if item not in recompiled:
                     path = classes / item
                     path.parent.mkdir(exist_ok=True, parents=True)
                     path.write_bytes(data)
@@ -131,6 +160,8 @@ def main():
         cp = str(classes) + os.pathsep + model
         sequence = dict(
             main=[*compiler, "-cp", cp, "-d", classes, *main_paths],
+            closure=[JAVA.with_name("jdeps"), "-verbose:class", "-filter:none", "--ignore-missing-deps",
+                     "--class-path", model, classes],
             tests=[*compiler, "-cp", cp + os.pathsep + str(junit), "-d", tests, *test_paths],
             unit=[JAVA, "-Duser.timezone=Pacific/Honolulu", f"-Xlog:class+init=info:file={trace}",
                   f"-javaagent:{agent}=destfile={metrics.resolve()},sessionid={RUN},append=false",
@@ -141,8 +172,18 @@ def main():
             standard=[JAVA, "-jar", cli, "report", metrics.resolve(), "--classfiles", classes,
                       "--xml", (out / "coverage.xml").resolve()],
         )
+        known = {name.removesuffix(".class").replace("/", ".") for name in full_scope}
         for stage, command in sequence.items():
-            stages[stage], _ = execute(out, stage, command, root)
+            stages[stage], stdout = execute(out, stage, command, root)
+            if stage == "closure":
+                typed = [line.split()[2] for line in stdout.splitlines()
+                         if line.startswith(" ") and " -> " in line and line.split()[2].startswith("dev.codex.")]
+                missing = set(typed) - known
+                H["dump"](out / "closure-result.json", dict(productTypedTargets=len(set(typed)), missing=sorted(missing)))
+                assert stages[stage]["actualExit"] == 0 and not missing and set(typed) >= {
+                    name.removesuffix(".class").replace("/", ".") for name in companions}
+            if stage == "unit":
+                pack_text(out, stages[stage])
             if stages[stage]["actualExit"] != 0:
                 break
         physical = {p.relative_to(classes).as_posix(): pin(p)["sha256"] for p in sorted(classes.rglob("*.class"))}
@@ -155,18 +196,19 @@ def main():
         if (report / "TEST-junit-jupiter.xml").is_file():
             counts = verify_xml(report, expected)
         if (out / "coverage.xml").is_file():
-            assert set(physical) == set(old_classes)
+            assert set(physical) == full_scope
             assert all(physical[name] != old_classes[name] for name in targets)
             raw = read(next(OPS.glob("PG40422-*/manifest.json")))["stages"]["raw"]["command"]
             stages["raw"], _ = execute(out, "raw", [*raw[:5], metrics.resolve(),
                 *(classes / name for name in sorted(targets))], root)
-    checked = (len(stages) == 5 and all(r["actualExit"] == 0 for r in stages.values())
+    checked = (len(stages) == 6 and all(r["actualExit"] == 0 for r in stages.values())
                and counts == {"pass": 87})
     terminal = dict(actualExit=0 if checked else 1, source=SOURCE, productionCore=SOURCE,
                     retainedBaselineCore=source_main, canonicalDesign=DESIGN, admission=history_pins["prepare"],
                     previousCurrentJar=bootstrap, inputPins={**main_pins, **test_pins},
                     expected=87, outcome=counts, stages=stages, runtimeTimezone="Pacific/Honolulu",
-                    changedSinceHistory=prior_changes, exactCurrentPhysical=physical, affectedClasses=sorted(targets),
+                    changedSinceHistory=prior_changes, privateSqlCompanions=sorted(companions),
+                    exactCurrentPhysical=physical, affectedClasses=sorted(targets),
                     scriptsAndConfigs={"runner": pin(Path(__file__).relative_to(Path.cwd()))},
                     tools={str(p): value for p, value in pins.items()}, actualDbSessions=0, actualBackendActions=0,
                     whole451Accepted=False, formalDelta=0, terminalAtUTC=H["timestamp"]())

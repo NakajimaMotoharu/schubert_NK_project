@@ -1,5 +1,7 @@
 # 固定games二行の照合を既target prepareへ接続・独立仕様
 
+2026-11-20追補。SSC-473によるJDBC 4.2の型引数と時刻oracleは [151](151_移行照合のJDBC42時刻取得仕様.md) を現行仕様とする。本書の旧getter記述は当時の歴史証跡とする。
+
 NK-MIG-001/RD MIG003005006/MIG-DAT005/DAT006/TST、UI242254、SS311331343/V004。既MigrationMasterTargetPublisher.prepareは六table属性/75制約を照合するが、固定games初期二行のcode/title/order/created_atがV004と一致する検査を未実装。orphanが0でもid1/2の誤code/titleは識別できないためMigrationGamesVerifierを追加し、既prepareのColumn→Constraint後・最初のCTAS前へ同Connectionで一回接続する。新業務仕様ではなく既V004静的初期値の内部検証補足、RD/UI/DDL/grant/QA変更0。実DB/Current原本/Root/native等HOLDを解除しない。
 
 verify(Nullable Connection)はnullを固定IAE、autoCommit=true/null新Statement/nullResultを固定SQLException。caller所有write TXを許すためisReadOnly=trueを要求せず、Connection close/commit/rollback/set*0。新Statement一つ/queryTimeout30/fetch1000、固定SQL SELECT id,code,title,display_order,created_at FROM schubert.games ORDER BY id を一回。V004原文を独立正本とする二行(1,NUKITASHI1,NUKITASHI,1,2026-09-01T00:00:00Z)、(2,NUKITASHI2,NUKITASHI2,2,同時刻)の全五値/順/件数に完全一致要求。id/getInt直後wasNull、code-title/getString nullable、order/getInt直後wasNull、created_at/getTimestamp nullableはnonnull時だけtoInstant().toStringへ、全五正準値を固定expected Listとequals照合する。NULLを0/空/nowへ補完しない。欠落/余剰/順交換/別値/trim-case-NFC差/異時刻/precision差は固定SQLException、余剰行はfieldread前に拒否。games INSERT/UPDATE/修復/再試行/SQL生成/役割変更0。

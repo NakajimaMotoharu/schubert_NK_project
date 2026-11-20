@@ -1,0 +1,23 @@
+{
+  "actualExit": 0,
+  "stdout": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40454-migration-utc42-static-independent-v1/spotbugs.stdout.txt",
+    "sha256": "c3228436225611cbe2fcedab89371048bfb4ac517dbfd1e466cbe5e2f91071e0"
+  },
+  "stderr": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40454-migration-utc42-static-independent-v1/spotbugs.stderr.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "command": [
+    "/usr/bin/env",
+    "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4",
+    "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+    "-o",
+    "--no-transfer-progress",
+    "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+    "-Dmaven.test.skip=true",
+    "-f",
+    "/dev/shm/pgpt-ssc473-static-0hoqtah_/pom.xml",
+    "com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check"
+  ]
+}
