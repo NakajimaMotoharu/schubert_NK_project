@@ -152,13 +152,26 @@ public final class ArtifactComparator {
                 .toFile());
     JsonNode observations = JSON.readTree(observationsFile.toFile());
     List<String> failures = new ArrayList<>();
+    // SS355 fixes the versions and array shapes for compare-nk as well as the gate report.
+    require(
+        CorrelatedLogEvidenceValidator.versionOne(catalog.path("version")),
+        "CATALOG_VERSION",
+        failures);
+    require(
+        CorrelatedLogEvidenceValidator.versionOne(allowlist.path("version")),
+        "DIF_VERSION",
+        failures);
+    JsonNode cases = catalog.path("cases");
+    JsonNode differences = allowlist.path("differences");
+    require(cases.isArray(), "CATALOG_CASES_NOT_ARRAY", failures);
+    require(differences.isArray(), "DIF_NOT_ARRAY", failures);
     // QA-051/SS355 §8.1: legacy DIF claims alone cannot establish correlated CHR-L01 evidence.
     failures.addAll(
         CorrelatedLogEvidenceValidator.validateCompleteL01(
             observations.path("correlatedLogEvidence")));
 
     Set<String> expectedCases = new LinkedHashSet<>();
-    for (JsonNode item : catalog.path("cases")) {
+    for (JsonNode item : cases) {
       String id = item.path("id").asText();
       require(expectedCases.add(id), "CATALOG_DUPLICATE:" + id, failures);
       require("RUN".equals(item.path("nk").asText()), "CATALOG_NK:" + id, failures);
@@ -238,7 +251,7 @@ public final class ArtifactComparator {
         failures);
 
     Map<String, JsonNode> rules = new LinkedHashMap<>();
-    for (JsonNode rule : allowlist.path("differences")) {
+    for (JsonNode rule : differences) {
       String id = rule.path("id").asText();
       require(rules.putIfAbsent(id, rule) == null, "DIF_DUPLICATE:" + id, failures);
     }
