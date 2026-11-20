@@ -2287,6 +2287,8 @@ usernameは画面の新規Userと同じNFC/trim/64byte・ASCII `[A-Za-z0-9._-]+`
 
 SSC095/PG312: 上記release配置は実Unitが参照する固定正本名へ統一、libをmanifestではwildcard扱いせず全具体fileをsize/SHA付きで列挙し未登録jar/symlink/欠落を拒否する。protocol/storage/bootstrapの複数配置は同版・同hash、jar内同梱SQLは外置きSQLと同byteを要求。既存RELEASE-MANIFEST.jsonにはmigration期待六列も含め、固定Flyway13.4/createSchemas=true profileのSCHEMA行(rank0/versionNULL/typeSCHEMA/script`"schubert_meta"`/checksumNULL/successtrue)とversioned SQLの全rank/version/type/script/checksum/successを明示する。期待値はrelease SQLから固定Flyway版で生成し運用DBの実測を採用しない。共用固定query `select installed_rank,version,type,script,checksum,success from schubert_meta.startup_schema_history() order by installed_rank` を借用connectionで実行し全行全列を照合、失敗/NULL/余剰/欠落/不一致はreadiness false。権限は331の限定投影だけ、migration credential/superuser fallback無し。この六列照合は固定versioned-SQL起動profileでありFlyway validate全機能の代用合格とは呼ばない。root承認digest/immutable release→全BOM→期待schema→親DB backupbeginの最終順を要求する。
 
+SSC474（BUG-3376/YKT-2721、SS331 §3.3）：借用Connectionの固定六列照合では開始時、結果行末尾、取得済みResultSetとPreparedStatementの解放後に、現在スレッドの割込状態を確認する。途中の検査と、行→文を一回ずつ解放する順を維持する。割込ありでは履歴を返さず、既固定SQLSTATE 08001でreadiness false。割込フラグを消費せず、借用Connectionを変更・終了しない。既close例外・複合失敗の優先順位を維持し、解放から例外が生じた場合はその経路を通す。通常PTはResultSet／PreparedStatementの代理closeで各々フラグが設定された場合を独立に確認する。
+
 - Migration実行は`schubert_migration`が`nk_owner`へ限定SET ROLEするoneshot。API/Web起動時にmigrate/repair/cleanしない。
 - History tableは`schubert_meta.flyway_schema_history`、`validateOnMigrate=true`、`outOfOrder=false`、
   `baselineOnMigrate=false`、`cleanDisabled=true`。Migration checksum変更をrepairで隠さない。

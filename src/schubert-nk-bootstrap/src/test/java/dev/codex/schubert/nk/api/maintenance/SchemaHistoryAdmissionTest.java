@@ -361,6 +361,29 @@ final class SchemaHistoryAdmissionTest {
   }
 
   @Test
+  void opsSchema012InterruptWhileClosingRowsRejectsObservedHistory() {
+    requireInterruptedCloseToFail(true);
+  }
+
+  @Test
+  void opsSchema013InterruptWhileClosingStatementRejectsObservedHistory() {
+    requireInterruptedCloseToFail(false);
+  }
+
+  private static void requireInterruptedCloseToFail(boolean interruptRows) {
+    var probe = new Probe();
+    probe.interruptClosingRows = interruptRows;
+    probe.interruptClosingStatement = !interruptRows;
+    try {
+      failed(() -> new SchemaHistoryAdmission(RELEASE).inspect(probe.connection()));
+      assertTrue(Thread.currentThread().isInterrupted());
+      assertArrayEquals(new int[] {1, 1, 0}, probe.closed);
+    } finally {
+      Thread.interrupted();
+    }
+  }
+
+  @Test
   void opsSchema008IndependentConcurrentOwners() throws Exception {
     var admission = new SchemaHistoryAdmission(RELEASE);
     var executor = Executors.newVirtualThreadPerTaskExecutor();
@@ -447,6 +470,8 @@ final class SchemaHistoryAdmissionTest {
     boolean nullStatement;
     boolean nullRows;
     boolean interruptAtEnd;
+    boolean interruptClosingRows;
+    boolean interruptClosingStatement;
     int index = -1;
     int timeout;
     String sql;
@@ -468,6 +493,7 @@ final class SchemaHistoryAdmissionTest {
                 if (name.equals("close")) {
                   closed[0]++;
                   throwIf(FIXTURE_ROWCLOSE_4440E762);
+                  if (interruptClosingRows) Thread.currentThread().interrupt();
                   return null;
                 }
                 throwIf(name);
@@ -490,6 +516,7 @@ final class SchemaHistoryAdmissionTest {
                 if (name.equals("close")) {
                   closed[1]++;
                   throwIf(FIXTURE_STATEMENTCLOSE_D5A13A63);
+                  if (interruptClosingStatement) Thread.currentThread().interrupt();
                   return null;
                 }
                 throwIf(name);
