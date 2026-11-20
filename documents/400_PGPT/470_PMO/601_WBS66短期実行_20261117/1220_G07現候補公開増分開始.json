@@ -1,0 +1,63 @@
+{
+  "eventId": "PGPT-20261008-6737",
+  "groupId": "WBS66_G07_CURRENT_PUBLIC_INCREMENT",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T11:48:33.096000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 68,
+      "remainingPercent": 32,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66_G07_CURRENT_PUBLIC_INCREMENT",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "WBS66_G07_CURRENT_PUBLIC_INCREMENT",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-G07"
+    ],
+    "managementWorkIds": [
+      "WBS-G07/secret-scan"
+    ],
+    "source": "5da761c8639bc93dc0e57059bb155fbd4df5bce2",
+    "productionCoreMain": "da20ad7753279ae4e8017593866502d3341ec0e5",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40824-g07-current-public-increment-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.35,
+      "high": 0.8
+    },
+    "groupCapPp": 10,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1219_C07現警報欠測描画の次工程.json",
+        "sha256": "b230129a333d6ffdb7d23bccb4adaf40caa0bc090e5a6463230f6acf36813fa3"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40806-g07-c07-public-delta-v1/manifest.json",
+        "sha256": "1028693ffafd9001036a22d954cb077293207237dc29071efd03fbf761487c6d"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40818-f03-g08-current-lineage-v1/manifest.json",
+        "sha256": "385e1c31e5095fc64325afede924ea9a30260e4af57176c81a14ced940aa934d"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "前G07の既scan終端から今の公開済みcommitのみ。保護外の追加証拠を対象にする。",
+    "endCondition": "当公開patchのSHA、対象/除外数、redacted scanner終了を保存。",
+    "workScope": "製品試験/実環境/外部収集操作なし。"
+  }
+}
