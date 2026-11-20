@@ -1,0 +1,185 @@
+{
+  "eventId": "PGPT-20261008-6360",
+  "groupId": "PGPT-WBS66-P01810-CREQ007-FINITE-FIXTURE-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T00:07:02.573000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 56,
+      "remainingPercent": 44,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P01810-CREQ007-FINITE-FIXTURE-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-P01810-CREQ007-FINITE-FIXTURE-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P018-10.03"
+    ],
+    "managementWorkIds": [
+      "WBS-P018-10.03/2",
+      "WBS-P017-07.02"
+    ],
+    "source": "c440098bd91717c6b27a1edf46deed96f055e0a6",
+    "productionCoreMain": "cb1411d94a1d97aedafe1af60400aaec0ae8c8e8",
+    "canonicalDesignSource": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "run": "PG40408-p01810-creq-worker-bound-seven-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.2,
+      "base": 0.56,
+      "high": 1.1
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/838_F02Controller入れ子境界と継続点.json",
+        "sha256": "7eb5a1e0f2966211cf5816cc1a90f97247c9119efeb678c14175dda627c24386"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40380-f02-current-four-jars-public-checkpoint-v1/manifest.json",
+        "sha256": "50ab463424ef12a32e3aa6f38ec38d3175876f33826e412e4371943a3a9116e2"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40382-f02-public-checkpoint-jars-independent-v1/manifest.json",
+        "sha256": "353ba7026a16916c98594134394879bc690a1001680e6f0f42c759aacb273f97"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16010-cleanup-expiry-whole16-pt-v1/manifest.json",
+        "sha256": "217a6736ce12ad649e1ef5cab6ce64e2bc3c44d80accd4a0c4a300968b8de9ab"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16014-cleanup-expiry-independent-v1/manifest.json",
+        "sha256": "b52fc6846fb64234481f9ff86f608cfe979aa3c7f791ea56569efd5fcb19156a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/3068_CleanupExpiry公開codec原whole十六_仕様.md",
+        "sha256": "ce0f4a0239d702f992040fbdcf96bf89c8e84e4e441e03a4d98ab77c29bad9e1"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/3069_CleanupExpiry公開codec原whole十六_結果.md",
+        "sha256": "8f90e91af906f4d8a20896acb02adff81eeea18c84ca8ce8bde7cefb56b32bea"
+      },
+      {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/CleanupWorkerRequestTest.java",
+        "sha256": "fd76996c84c1a75a7eb68ac5fb24e758e58c5fcfb69a1679cb0aa46efc6e5493"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "Current PT-OPS-CREQ007 runs two pure memory parsers. Both Future#get and ExecutorService.close have no finite local bound, unlike the independently enforced harness deadline.",
+    "endCondition": "Put explicit finite waits and teardown on only the admissible original seven-case scope; preserve every input and meaningful assertion and obtain exact target CRC/coverage in current bytecode.",
+    "workScope": "Only existing ordinary Java memory vectors; no operation issuing authority, actual request file, DB, JMS, native, service, network or process launch from the fixture.",
+    "quotaAfter": {
+      "usedPercent": 56,
+      "remainingPercent": 44,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "390c164cf6eb78d816cf24f45cf502b8539d6004271396768956bc25c090082b",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T00:07:02.573000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 56,
+          "remainingPercent": 44,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T00:05:59.964844+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 56,
+      "remainingPercent": 44,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6359",
+    "attempt": 1,
+    "attemptResult": "SEVEN_CURRENT_CLEANUP_CODEC_TESTS_FIRST_PASS_WITH_BOUNDED_TEARDOWN",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 7,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40408-p01810-creq-worker-bound-seven-v1/manifest.json",
+        "sha256": "6bf8471897165986b833a5c1d9824a6c5a297433998c4c5f65cf66020494b451"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40410-p01810-creq-worker-bound-independent-v1/manifest.json",
+        "sha256": "eff868257726b29edb629968a747ebe3c0cd6216a1d18a185bb7add1d58af7cb"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40412-p01810-creq-worker-bound-unfiltered-v1/manifest.json",
+        "sha256": "55a178ede3ca9449f01f7ef801bf7e13f1efd567fbc4056a3582171bc2328774"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "P018-10 all negative cases and actual sinks; P017-07 actual Expiry and dependencies.",
+      "F02/F03, product full 451 and same-source actual environment remain pending."
+    ],
+    "firstValidationPassed": 7,
+    "firstValidationDenominator": 7,
+    "retries": 0,
+    "scopeIsProductTestFixtureOnly": true,
+    "executedExistingProductCases": 7,
+    "noAdditionalTestDefinitions": true,
+    "rawOuterCounters": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 257
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 36
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 40
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 30
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 12
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "unitSource": "96245c184a6bde0b49921d642ce1613ff637eb52"
+  }
+}
