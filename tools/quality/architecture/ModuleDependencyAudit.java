@@ -108,6 +108,8 @@ public final class ModuleDependencyAudit {
           if (forbiddenFramework(module, target)) violations.get("FRAMEWORK_FENCES").add(pair);
           if (controller && (jdbc(target) || jms(target) || "storage".equals(targetModule)))
             violations.get("CONTROLLER_BOUNDARY").add(pair);
+          if (apiRepository && target.startsWith(INTERNAL + "api.application."))
+            violations.get("REPOSITORY_DIRECTION").add(pair);
         }
         for (var access : type.getCodeUnitAccessesFromSelf()) {
           calls++;
@@ -116,8 +118,6 @@ public final class ModuleDependencyAudit {
             violations.get("CONTROLLER_BOUNDARY").add(origin + "\t" + target);
           if (module.equals("protocol") && protocolFilesystem(target))
             violations.get("FRAMEWORK_FENCES").add(origin + "\t" + target);
-          if (apiRepository && target.startsWith(INTERNAL + "api.application."))
-            violations.get("REPOSITORY_DIRECTION").add(origin + "\t" + target);
         }
       }
       System.out.println("ARCHUNIT\t1.4.2\t" + owners.size() + "\t" + actual.size());
