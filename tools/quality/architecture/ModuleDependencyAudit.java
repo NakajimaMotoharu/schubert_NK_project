@@ -91,10 +91,7 @@ public final class ModuleDependencyAudit {
             (module.equals("api") || module.equals("web"))
                 && (origin.startsWith(INTERNAL + module + ".application.")
                     || origin.startsWith(INTERNAL + module + ".domain."));
-        boolean apiRepository =
-            module.equals("api")
-                && (origin.startsWith(INTERNAL + "api.persistence.")
-                    || origin.startsWith(INTERNAL + "api.monitoring.persistence."));
+        boolean apiRepository = module.equals("api") && isApiRepository(type);
         for (var dependency : type.getDirectDependenciesFromSelf()) {
           dependencies++;
           String target = component(dependency.getTargetClass().getName());
@@ -156,6 +153,28 @@ public final class ModuleDependencyAudit {
       if (enclosing.getSimpleName().contains("Controller")
           || enclosing.isAnnotatedWith("org.springframework.stereotype.Controller")
           || enclosing.isAnnotatedWith("org.springframework.web.bind.annotation.RestController")) {
+        return true;
+      }
+      var parent = enclosing.getEnclosingClass();
+      if (parent.isEmpty()) {
+        return false;
+      }
+      enclosing = parent.orElseThrow();
+    }
+    throw new IllegalArgumentException("cyclic enclosing class");
+  }
+
+  private static boolean isApiRepository(JavaClass type) {
+    String name = type.getName();
+    if (name.startsWith(INTERNAL + "api.persistence.")
+        || name.startsWith(INTERNAL + "api.monitoring.persistence.")) {
+      return true;
+    }
+    Set<JavaClass> visited = new HashSet<>();
+    JavaClass enclosing = type;
+    while (visited.add(enclosing)) {
+      if (enclosing.getSimpleName().endsWith("Repository")
+          || enclosing.isAnnotatedWith("org.springframework.stereotype.Repository")) {
         return true;
       }
       var parent = enclosing.getEnclosingClass();
