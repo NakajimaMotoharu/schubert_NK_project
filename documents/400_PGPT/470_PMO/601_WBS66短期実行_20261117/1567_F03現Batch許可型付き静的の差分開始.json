@@ -1,0 +1,71 @@
+{
+  "eventId": "PGPT-20261008-7082",
+  "groupId": "PGPT-WBS66-F03-CURRENT-BATCH-ADMITTED-TYPED-DELTA-20261121",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T19:14:58.829000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 79,
+      "remainingPercent": 21,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-CURRENT-BATCH-ADMITTED-TYPED-DELTA-20261121",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F03-CURRENT-BATCH-ADMITTED-TYPED-DELTA-20261121",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "source": "e76e8539dd257e4b824afd9dbe769d2fee12bb03",
+    "productionCoreMain": "559f5b5945e82374e0843dcfae11a8d07faef1ea",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG41140-f03-current-batch-admitted-typed-delta-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.3,
+      "base": 0.68,
+      "high": 1.25
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1566_G07依存と読取二工具の公開差分継続点.json",
+        "sha256": "ee98cf2375f1afd6f1eba52e5d5c6e1223b9edc2f1cd08160e8bfeb477b3bc8e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40482-f03-batch-current-admitted-java25-closure-v1/manifest.json",
+        "sha256": "a2a5e2dd87f9990dc5de4b4e4501eebd10772363c7ee47d5bfda350cd1a24e1e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40484-f03-batch-current-closed-typed-independent-v1/manifest.json",
+        "sha256": "cff33ec745b38d2b89febc1131f1923e31237dc3799c13b2f5a0c53d80ad7b7c"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41074-f02-current-alert-batch-maven-v1/manifest.json",
+        "sha256": "2373767cfeaf06ab0138b4ff584901bcded516b4f12067daeee3184df3ca16cb"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41072-f03-alert-owner-state-independent-v1/manifest.json",
+        "sha256": "ec299fcb068605c3cb58b629e7f945ff862dc09fad8956cbcb1cbb0c80b2d058"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "F03/2-2。元277許可classでSpotBugs0。現BatchとBootstrapで既Main差あり。現在の同byteかつ依存境界不変の範囲と現別証票を切り分ける。",
+    "endCondition": "元ClassStatsと当Maven元memberを必要分だけ照合し、変更・逆依存影響・未接触・現別証票・必要な次を明記。",
+    "workScope": "旧届出済みclassと現在同source class/メタデータのみ。保留・新しいowner・実行無し。"
+  }
+}
