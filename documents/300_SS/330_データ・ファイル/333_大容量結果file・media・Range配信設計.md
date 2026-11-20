@@ -249,7 +249,7 @@ Descriptorの表示/download file nameはNFC、1～256 UTF-8 byte、CR/LF/NUL/qu
 - Headerはcase-insensitiveの`bytes=`だけ。他unit、空spec、数値以外、負数、overflowは416。
 - Commaがある場合は現行互換のため最初のspecだけをtrimして採用し、2件目以降を解析しない。
 - `start-end`、`start-`、`-suffixLength`を受ける。`end < start`、suffix 0、start>=file size、file size<=0は416。
-- DecimalはASCIIの十進数字で入力し、始点・終点・suffix長の各値を符号付きlongの非負範囲（0～9,223,372,036,854,775,807）で検査する。上限を超える入力は範囲の切り詰め前に416とする。範囲演算のoverflowも`Math.addExact/subtractExact`で検出して416とする（SSC-475）。
+- DecimalはASCIIの十進数字で入力し、始点・終点・suffix長の各値を符号付きlongの非負範囲（0～9,223,372,036,854,775,807）で検査する。上限を超える入力は範囲の切り詰め前に416とする。範囲演算のoverflowも`Math.addExact/subtractExact`で検出して416とする（SSC-476）。
 
 ### 10.2 範囲計算
 
