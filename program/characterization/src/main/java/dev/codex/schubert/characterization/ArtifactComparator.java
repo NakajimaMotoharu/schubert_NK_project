@@ -50,6 +50,9 @@ public final class ArtifactComparator {
   private static final String SESSION_DIFFERENCE = "DIF-016";
   private static final String SESSION_CASE = "CHR-A02";
   private static final String SESSION_ACTIVITY = "sessionActiveOldestToNewest";
+  private static final String SESSION_DESTINATIONS = "sessionRedirectsOldestToNewest";
+  private static final String MENU_DESTINATION = "/";
+  private static final String SESSION_EXPIRED_DESTINATION = "/login?session-expired";
   private static final String LOGIN_TITLE = "CHR-A01:/title";
   private static final String CURRENT_BRAND = "schubert";
   private static final String NK_BRAND = "schubert NK";
@@ -104,12 +107,13 @@ public final class ArtifactComparator {
           SESSION_DIFFERENCE,
           Map.of(
               "CHR-A02:/observedActiveSessionCount",
-                  List.of(IntNode.valueOf(3), MAX_ACTIVE_SESSIONS),
-              "CHR-A02:/oldestSessionInvalidated", List.of(BooleanNode.FALSE, BooleanNode.TRUE),
+              List.of(IntNode.valueOf(3), MAX_ACTIVE_SESSIONS),
+              "CHR-A02:/oldestSessionInvalidated",
+              List.of(BooleanNode.FALSE, BooleanNode.TRUE),
               "CHR-A02:/sessionActiveOldestToNewest/0",
-                  List.of(BooleanNode.TRUE, BooleanNode.FALSE),
-              "CHR-A02:/sessionRedirectsOldestToNewest/0",
-                  textPair("/", "/login?session-expired")));
+              List.of(BooleanNode.TRUE, BooleanNode.FALSE),
+              "CHR-A02:/" + SESSION_DESTINATIONS + "/0",
+              textPair(MENU_DESTINATION, SESSION_EXPIRED_DESTINATION)));
   private static final ObjectMapper JSON = new ObjectMapper();
   private static final JsonNode CURRENT_MULTIPLE_VOICE = multipleVoiceProjection(2);
   private static final JsonNode NK_MULTIPLE_VOICE = multipleVoiceProjection(1);
@@ -187,6 +191,14 @@ public final class ArtifactComparator {
             MAX_ACTIVE_SESSIONS.equals(nk.path(CONFIGURED_SESSIONS)), "NK_SESSION_LIMIT", failures);
         require(sessionActivityMatches(current, true), "CURRENT_SESSION_ACTIVITY", failures);
         require(sessionActivityMatches(nk, false), "NK_SESSION_ACTIVITY", failures);
+        require(
+            sessionDestinationsMatch(current, MENU_DESTINATION),
+            "CURRENT_SESSION_DESTINATIONS",
+            failures);
+        require(
+            sessionDestinationsMatch(nk, SESSION_EXPIRED_DESTINATION),
+            "NK_SESSION_DESTINATIONS",
+            failures);
       }
       if (GAME_CHANGE_CASE.equals(caseId)) {
         require(
@@ -562,6 +574,15 @@ public final class ArtifactComparator {
         .add(true)
         .add(true)
         .equals(artifact.path(SESSION_ACTIVITY));
+  }
+
+  private static boolean sessionDestinationsMatch(JsonNode artifact, String oldestDestination) {
+    return JsonNodeFactory.instance
+        .arrayNode()
+        .add(oldestDestination)
+        .add(MENU_DESTINATION)
+        .add(MENU_DESTINATION)
+        .equals(artifact.path(SESSION_DESTINATIONS));
   }
 
   private static boolean require(boolean condition, String failure, List<String> failures) {
