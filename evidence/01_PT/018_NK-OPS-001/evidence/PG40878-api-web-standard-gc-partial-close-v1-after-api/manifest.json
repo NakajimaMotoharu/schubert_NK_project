@@ -1,0 +1,330 @@
+{
+  "actualExit": 0,
+  "expectedOutcomeMet": true,
+  "phase": "after",
+  "role": "api",
+  "source": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+  "baseSource": "55add7630760e956c20e534dca8f6c90d93707b7",
+  "startEvent": "PGPT-20261008-6803",
+  "startedAtUTC": "2026-11-20T13:31:12.857177+00:00",
+  "terminalAtUTC": "2026-11-20T13:31:17.478426+00:00",
+  "productionInputs": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSource.java",
+      "sha256": "beee4a67142a4e441d0ac56250368ebeeb45288974a607abc5fd49d24821d199"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetrics.java",
+      "sha256": "d43ac2b841fe471bfb4985d719e4a48a493a94bf11355b40b83b00ee0a2fec1f"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiJvmMetrics.java",
+      "sha256": "3dcd35d8abdf8941f82d7d13b15072003d70598b64135928c0cf3efa156cd4bb"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiSystemMetrics.java",
+      "sha256": "869f450b660a3e711f2fe8246f32239fcef9a9ae8c30a07999063553374a7cf6"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistration.java",
+      "sha256": "392d9c500076bb4898a859ee03f63990ca73b923508a2fc8a79f4454c8252e3b"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/package-info.java",
+      "sha256": "8dd0a4c1cf6eca2f906c5d9aee5afc0f40c990ccfa35925ecc8b5edfb2194193"
+    }
+  ],
+  "runtimeDependencies": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/prometheus-sdk-1.17.1-client-1.7.0-new-v1/micrometer-registry-prometheus-1.17.1.jar",
+      "sha256": "ac24d43f123e103828a23a86f092a8709d87d309ad3212e798305654e951a8ce"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/prometheus-sdk-1.17.1-client-1.7.0-new-v1/prometheus-metrics-config-1.7.0.jar",
+      "sha256": "bc9455f938df76ec4add13fe31903a5bb583c605679a16a779d6a6c2b21218f2"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/prometheus-sdk-1.17.1-client-1.7.0-new-v1/prometheus-metrics-core-1.7.0.jar",
+      "sha256": "f9e5f1c8a20073347c88941d43e8c64ae6810afe0a61cbfe9c2f4efffe72808b"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/prometheus-sdk-1.17.1-client-1.7.0-new-v1/prometheus-metrics-exposition-formats-1.7.0.jar",
+      "sha256": "7352ca8b50e861eca3567ceb332e9590a06742a9d177cff54e52c8cff4c4fb90"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/prometheus-sdk-1.17.1-client-1.7.0-new-v1/prometheus-metrics-exposition-textformats-1.7.0.jar",
+      "sha256": "7e49065895a35181c57f2c3c6d07b7b3f9b5754cd6422e0a7bd793f20a29c28a"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/prometheus-sdk-1.17.1-client-1.7.0-new-v1/prometheus-metrics-model-1.7.0.jar",
+      "sha256": "e6d94538f8735c4161c36a660298f3a0fa8e4b281ceaf209723aaf9e212d292d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/prometheus-sdk-1.17.1-client-1.7.0-new-v1/prometheus-metrics-tracer-common-1.7.0.jar",
+      "sha256": "b7e8699032f0f1501556eeafd20fcfdd89b355f5d22b6d8361d723d467d88ed4"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-commons/1.17.1/micrometer-commons-1.17.1.jar",
+      "sha256": "f2cee6ef046e72eec8128474c7f58c6217173b45ae373c30de0289f2a56ab0fd"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar",
+      "sha256": "9ca47dfa831409b40253c8dc98c17b9d3e050ebbde4d1543c5521dca2b95ad56"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-observation/1.17.1/micrometer-observation-1.17.1.jar",
+      "sha256": "eb34f0cd84a879393ae5c21160fc06385ccdc74f36a4d1e31b199f59acfdaf71"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/hdrhistogram/HdrHistogram/2.2.2/HdrHistogram-2.2.2.jar",
+      "sha256": "22d1d4316c4ec13a68b559e98c8256d69071593731da96136640f864fa14fad8"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+      "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    }
+  ],
+  "targetClassSha256": "aaf9117b4194f9d853b936641917fc434d11f5653c81e16cebe79e64309305be",
+  "testInput": {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSourceTest.java",
+    "sha256": "934964c27915e135d629bc03e6628cfc6e800a4c53d590f365be8a0cc8c11df9"
+  },
+  "specification": {
+    "path": "evidence/01_PT/018_NK-OPS-001/5468_APIWeb標準SDK段階解放の単体仕様.md",
+    "sha256": "8052e35d6149de612800dfc5cf670503fb0a4dd61789d14662eea4afd38500dc"
+  },
+  "steps": {
+    "format": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSource.java",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSourceTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "checkstyle": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "tools/quality/static/checkstyle.xml",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSource.java",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSourceTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "2ee89ca49ecae1bb5b3de5ffcc8a964e605f1b1c6fbe072073a1ea4feaa4e230",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "javac": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/prometheus-sdk-1.17.1-client-1.7.0-new-v1/micrometer-registry-prometheus-1.17.1.jar:/home/mini/codex/project1/work/toolchain/prometheus-sdk-1.17.1-client-1.7.0-new-v1/prometheus-metrics-config-1.7.0.jar:/home/mini/codex/project1/work/toolchain/prometheus-sdk-1.17.1-client-1.7.0-new-v1/prometheus-metrics-core-1.7.0.jar:/home/mini/codex/project1/work/toolchain/prometheus-sdk-1.17.1-client-1.7.0-new-v1/prometheus-metrics-exposition-formats-1.7.0.jar:/home/mini/codex/project1/work/toolchain/prometheus-sdk-1.17.1-client-1.7.0-new-v1/prometheus-metrics-exposition-textformats-1.7.0.jar:/home/mini/codex/project1/work/toolchain/prometheus-sdk-1.17.1-client-1.7.0-new-v1/prometheus-metrics-model-1.7.0.jar:/home/mini/codex/project1/work/toolchain/prometheus-sdk-1.17.1-client-1.7.0-new-v1/prometheus-metrics-tracer-common-1.7.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-commons/1.17.1/micrometer-commons-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-observation/1.17.1/micrometer-observation-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/hdrhistogram/HdrHistogram/2.2.2/HdrHistogram-2.2.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "-d",
+        "/dev/shm/pg40876-ijwodv13/classes",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSource.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetrics.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiJvmMetrics.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiSystemMetrics.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistration.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/package-info.java",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSourceTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "unit": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/dev/shm/pg40876-ijwodv13/exec,sessionid=PG40878-API-HOST,append=false,includes=dev.codex.schubert.nk.api.monitoring.ApiStandardMetricSource",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--disable-ansi-colors",
+        "--class-path",
+        "/dev/shm/pg40876-ijwodv13/classes:/home/mini/codex/project1/work/toolchain/prometheus-sdk-1.17.1-client-1.7.0-new-v1/micrometer-registry-prometheus-1.17.1.jar:/home/mini/codex/project1/work/toolchain/prometheus-sdk-1.17.1-client-1.7.0-new-v1/prometheus-metrics-config-1.7.0.jar:/home/mini/codex/project1/work/toolchain/prometheus-sdk-1.17.1-client-1.7.0-new-v1/prometheus-metrics-core-1.7.0.jar:/home/mini/codex/project1/work/toolchain/prometheus-sdk-1.17.1-client-1.7.0-new-v1/prometheus-metrics-exposition-formats-1.7.0.jar:/home/mini/codex/project1/work/toolchain/prometheus-sdk-1.17.1-client-1.7.0-new-v1/prometheus-metrics-exposition-textformats-1.7.0.jar:/home/mini/codex/project1/work/toolchain/prometheus-sdk-1.17.1-client-1.7.0-new-v1/prometheus-metrics-model-1.7.0.jar:/home/mini/codex/project1/work/toolchain/prometheus-sdk-1.17.1-client-1.7.0-new-v1/prometheus-metrics-tracer-common-1.7.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-commons/1.17.1/micrometer-commons-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-observation/1.17.1/micrometer-observation-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/hdrhistogram/HdrHistogram/2.2.2/HdrHistogram-2.2.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "--reports-dir",
+        "/dev/shm/pg40876-ijwodv13/reports",
+        "--fail-if-no-tests",
+        "--select-class",
+        "dev.codex.schubert.nk.api.monitoring.ApiStandardMetricSourceTest"
+      ],
+      "exit": 0,
+      "stdoutSha256": "c2eb24c09d7512ad6b22ff71525fb0ffb90b5b7407e387841b081cae53de8f37",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coverage": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/dev/shm/pg40876-ijwodv13/exec",
+        "--classfiles",
+        "/dev/shm/pg40876-ijwodv13/classes/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSource.class",
+        "--xml",
+        "evidence/01_PT/018_NK-OPS-001/evidence/PG40878-api-web-standard-gc-partial-close-v1-after-api/coverage.xml"
+      ],
+      "exit": 0,
+      "stdoutSha256": "4c1c9b9ba932eeb80705f60e6f078d66b498d9ee4d035dd775d3feb88b0ae341",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "selectedCases": [
+    {
+      "testId": "APIHOST015",
+      "method": "apihost015SingleBindAndIdempotentClose",
+      "outcome": "passed",
+      "actualDuplicateGcClose": false
+    },
+    {
+      "testId": "APIHOST010",
+      "method": "apihost010PartialRegistryBeforeGcRemainsOwnedAfterFailure",
+      "outcome": "passed",
+      "actualDuplicateGcClose": false
+    },
+    {
+      "testId": "APIHOST009",
+      "method": "apihost009ClosedCandidateIsRejectedAndRetainedUntilCallerClose",
+      "outcome": "passed",
+      "actualDuplicateGcClose": false
+    },
+    {
+      "testId": "APIHOST002",
+      "method": "apihost002DefaultUsesOfficialStandardTextAndFixedApiTag",
+      "outcome": "passed",
+      "actualDuplicateGcClose": false
+    },
+    {
+      "testId": "APIHOST006",
+      "method": "apihost006FactoryRuntimeIdentityAndNoAutomaticRetry",
+      "outcome": "passed",
+      "actualDuplicateGcClose": false
+    },
+    {
+      "testId": "APIHOST001",
+      "method": "apihost001StandardIsEntirelyLazyIncludingAfterClose",
+      "outcome": "passed",
+      "actualDuplicateGcClose": false
+    },
+    {
+      "testId": "APIHOST017",
+      "method": "apihost017RegistryFailureRetriesOnlyItsUnreleasedHandle",
+      "outcome": "passed",
+      "actualDuplicateGcClose": false
+    },
+    {
+      "testId": "APIHOST008",
+      "method": "apihost008NullFactoryResultIsNotSuccess",
+      "outcome": "passed",
+      "actualDuplicateGcClose": false
+    },
+    {
+      "testId": "APIHOST013",
+      "method": "apihost013FailedRegistryCloseIsNotConfirmedAndCanBeExplicitlyRetried",
+      "outcome": "passed",
+      "actualDuplicateGcClose": false
+    },
+    {
+      "testId": "APIHOST014",
+      "method": "apihost014NullGcCallbackFailsWithoutImplicitRegistryClose",
+      "outcome": "passed",
+      "actualDuplicateGcClose": false
+    },
+    {
+      "testId": "APIHOST011",
+      "method": "apihost011GcRetainedBeforeFatalAndClosedInReverseOrder",
+      "outcome": "passed",
+      "actualDuplicateGcClose": false
+    },
+    {
+      "testId": "APIHOST004",
+      "method": "apihost004NullAndUnknownModesFailBeforeAcquisition",
+      "outcome": "passed",
+      "actualDuplicateGcClose": false
+    },
+    {
+      "testId": "APIHOST012",
+      "method": "apihost012FailedGcCloseKeepsRegistryAndExplicitRetryOwnership",
+      "outcome": "passed",
+      "actualDuplicateGcClose": false
+    },
+    {
+      "testId": "APIHOST003",
+      "method": "apihost003UnboundScrapeNeverAcquires",
+      "outcome": "passed",
+      "actualDuplicateGcClose": false
+    },
+    {
+      "testId": "APIHOST016",
+      "method": "apihost016CloseWaitsForOwnedScrapeAndThenRejectsNewScrapes",
+      "outcome": "passed",
+      "actualDuplicateGcClose": false
+    },
+    {
+      "testId": "APIHOST007",
+      "method": "apihost007FactoryErrorIdentityIsNotNormalized",
+      "outcome": "passed",
+      "actualDuplicateGcClose": false
+    },
+    {
+      "testId": "APIHOST005",
+      "method": "apihost005ConstructorEstablishesNonNullPorts",
+      "outcome": "passed",
+      "actualDuplicateGcClose": false
+    }
+  ],
+  "junitXmlSha256": "6e2f47af7f50d6225bb3f9b333408751cd687b9c355b2394dfc51516fc9a684e",
+  "coverage": {
+    "xml": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40878-api-web-standard-gc-partial-close-v1-after-api/coverage.xml",
+      "sha256": "a091a9188cd381413d45a4c76bfb648c6d84033d5107de07a5c9a6880e2f9276"
+    },
+    "execSha256": "040f3aa277f6fc644cac81d85426326dade8e98ad3dc9bc1f4ed2893085b3dcd",
+    "counters": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 194
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 19
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 45
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 19
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 9
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "externalServiceRuns": 0,
+  "full451": false,
+  "formalDelta": 0
+}
