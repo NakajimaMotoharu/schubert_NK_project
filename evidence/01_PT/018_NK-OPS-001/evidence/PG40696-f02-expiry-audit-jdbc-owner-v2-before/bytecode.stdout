@@ -1,0 +1,1392 @@
+Compiled from "ExpiryAuditRepository.java"
+public final class dev.codex.schubert.nk.batch.repository.ExpiryAuditRepository {
+  private static final java.lang.String LITERAL_SUCCESS;
+
+  private static final java.lang.String HANDLE;
+
+  private final java.sql.Connection connection;
+
+  private final dev.codex.schubert.nk.batch.repository.RunReferenceRepository references;
+
+  public dev.codex.schubert.nk.batch.repository.ExpiryAuditRepository(java.sql.Connection);
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: aload_1
+         6: ldc           #7                  // String borrowed parent connection
+         8: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        11: checkcast     #15                 // class java/sql/Connection
+        14: putfield      #17                 // Field connection:Ljava/sql/Connection;
+        17: aload_0
+        18: new           #23                 // class dev/codex/schubert/nk/batch/repository/RunReferenceRepository
+        21: dup
+        22: aload_1
+        23: invokespecial #25                 // Method dev/codex/schubert/nk/batch/repository/RunReferenceRepository."<init>":(Ljava/sql/Connection;)V
+        26: putfield      #28                 // Field references:Ldev/codex/schubert/nk/batch/repository/RunReferenceRepository;
+        29: return
+
+  public java.util.Optional<dev.codex.schubert.nk.batch.repository.ExpiryAuditRepository$Prior> successful(dev.codex.schubert.nk.batch.repository.BatchRun, java.time.Instant, dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame$Guard) throws java.io.IOException;
+    Code:
+         0: aload_1
+         1: invokestatic  #32                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+         4: pop
+         5: aload_0
+         6: aload_1
+         7: aload_2
+         8: aload_3
+         9: aload_1
+        10: invokedynamic #35,  0             // InvokeDynamic #0:resolve:(Ldev/codex/schubert/nk/batch/repository/BatchRun;)Ldev/codex/schubert/nk/batch/repository/SuccessRunLookup;
+        15: invokevirtual #39                 // Method successful:(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ljava/time/Instant;Ldev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Guard;Ldev/codex/schubert/nk/batch/repository/SuccessRunLookup;)Ljava/util/Optional;
+        18: areturn
+
+  public java.util.Optional<dev.codex.schubert.nk.batch.repository.ExpiryAuditRepository$Prior> successful(dev.codex.schubert.nk.batch.repository.BatchRun, java.time.Instant, dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame$Guard, dev.codex.schubert.nk.batch.repository.SuccessRunLookup) throws java.io.IOException;
+    Code:
+         0: aload_1
+         1: invokestatic  #32                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+         4: pop
+         5: aload_2
+         6: invokestatic  #32                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+         9: pop
+        10: aload_3
+        11: invokestatic  #32                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+        14: pop
+        15: aload         4
+        17: invokestatic  #32                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+        20: pop
+        21: aload_1
+        22: aload_2
+        23: invokestatic  #43                 // Method dev/codex/schubert/nk/batch/repository/BatchStepAttempt.time:(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ljava/time/Instant;)V
+        26: aload_3
+        27: invokeinterface #49,  1           // InterfaceMethod dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Guard.check:()V
+        32: aload_0
+        33: aload_1
+        34: invokevirtual #54                 // Method guarded:(Ldev/codex/schubert/nk/batch/repository/BatchRun;)V
+        37: aload_0
+        38: invokedynamic #58,  0             // InvokeDynamic #1:open:(Ldev/codex/schubert/nk/batch/repository/ExpiryAuditRepository;)Ldev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$JdbcAcquire;
+        43: invokedynamic #62,  0             // InvokeDynamic #2:close:()Ldev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$JdbcRelease;
+        48: aload_0
+        49: aload_3
+        50: aload_1
+        51: aload         4
+        53: aload_2
+        54: invokedynamic #66,  0             // InvokeDynamic #3:read:(Ldev/codex/schubert/nk/batch/repository/ExpiryAuditRepository;Ldev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Guard;Ldev/codex/schubert/nk/batch/repository/BatchRun;Ldev/codex/schubert/nk/batch/repository/SuccessRunLookup;Ljava/time/Instant;)Ldev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$JdbcRead;
+        59: invokestatic  #70                 // Method usingJdbc:(Ldev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$JdbcAcquire;Ldev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$JdbcRelease;Ldev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$JdbcRead;)Ljava/util/Optional;
+        62: areturn
+        63: astore        5
+        65: aload         5
+        67: invokestatic  #76                 // Method dev/codex/schubert/nk/storage/StorageIoException.preserveFatal:(Ljava/lang/Throwable;)V
+        70: new           #82                 // class dev/codex/schubert/nk/batch/repository/BatchRepositoryException
+        73: dup
+        74: invokespecial #84                 // Method dev/codex/schubert/nk/batch/repository/BatchRepositoryException."<init>":()V
+        77: athrow
+      Exception table:
+         from    to  target type
+            37    62    63   Class java/sql/SQLException
+
+  public dev.codex.schubert.nk.batch.repository.ExpiryAuditRepository$Stage stage(dev.codex.schubert.nk.batch.repository.BatchStepAttempt, long, long, long);
+    Code:
+         0: aload_1
+         1: invokestatic  #85                 // Method validAttempt:(Ldev/codex/schubert/nk/batch/repository/BatchStepAttempt;)V
+         4: new           #89                 // class dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Stage
+         7: dup
+         8: aload_1
+         9: invokevirtual #91                 // Method dev/codex/schubert/nk/batch/repository/BatchStepAttempt.run:()Ldev/codex/schubert/nk/batch/repository/BatchRun;
+        12: invokevirtual #95                 // Method dev/codex/schubert/nk/batch/repository/BatchRun.cutoff:()Ljava/time/Instant;
+        15: ldc2_w        #101                // long 7l
+        18: getstatic     #103                // Field java/time/temporal/ChronoUnit.DAYS:Ljava/time/temporal/ChronoUnit;
+        21: invokevirtual #109                // Method java/time/Instant.minus:(JLjava/time/temporal/TemporalUnit;)Ljava/time/Instant;
+        24: lload_2
+        25: lload         4
+        27: lload         6
+        29: invokespecial #115                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Stage."<init>":(Ljava/time/Instant;JJJ)V
+        32: astore        8
+        34: aload_0
+        35: aload_1
+        36: invokevirtual #91                 // Method dev/codex/schubert/nk/batch/repository/BatchStepAttempt.run:()Ldev/codex/schubert/nk/batch/repository/BatchRun;
+        39: invokevirtual #54                 // Method guarded:(Ldev/codex/schubert/nk/batch/repository/BatchRun;)V
+        42: aload_0
+        43: getfield      #17                 // Field connection:Ljava/sql/Connection;
+        46: ldc           #118                // String update schubert.batch_runs set expiry_cutoff_at=?,expiry_before_count=?,target_count=?,byte_count=? where id=? and run_id=? and business_date=? and step=\'CLEAN_EXPIRY\' and attempt=? and started_at=? and status=\'RUNNING\' and ended_at is null and expiry_cutoff_at is null and expiry_before_count is null and expiry_after_count is null and target_count=0 and success_count=0 and failure_count=0 and byte_count=0
+        48: invokeinterface #120,  2          // InterfaceMethod java/sql/Connection.prepareStatement:(Ljava/lang/String;)Ljava/sql/PreparedStatement;
+        53: invokestatic  #124                // Method required:(Ljava/lang/Object;)Ljava/lang/Object;
+        56: checkcast     #127                // class java/sql/PreparedStatement
+        59: astore        9
+        61: aload         9
+        63: iconst_5
+        64: invokeinterface #129,  2          // InterfaceMethod java/sql/PreparedStatement.setQueryTimeout:(I)V
+        69: aload         9
+        71: iconst_1
+        72: aload         8
+        74: invokevirtual #133                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Stage.cutoff:()Ljava/time/Instant;
+        77: getstatic     #134                // Field java/time/ZoneOffset.UTC:Ljava/time/ZoneOffset;
+        80: invokevirtual #140                // Method java/time/Instant.atOffset:(Ljava/time/ZoneOffset;)Ljava/time/OffsetDateTime;
+        83: invokeinterface #144,  3          // InterfaceMethod java/sql/PreparedStatement.setObject:(ILjava/lang/Object;)V
+        88: aload         9
+        90: iconst_2
+        91: aload         8
+        93: invokevirtual #148                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Stage.before:()J
+        96: invokeinterface #152,  4          // InterfaceMethod java/sql/PreparedStatement.setLong:(IJ)V
+       101: aload         9
+       103: iconst_3
+       104: aload         8
+       106: invokevirtual #156                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Stage.target:()J
+       109: invokeinterface #152,  4          // InterfaceMethod java/sql/PreparedStatement.setLong:(IJ)V
+       114: aload         9
+       116: iconst_4
+       117: aload         8
+       119: invokevirtual #159                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Stage.estimatedBytes:()J
+       122: invokeinterface #152,  4          // InterfaceMethod java/sql/PreparedStatement.setLong:(IJ)V
+       127: aload         9
+       129: iconst_5
+       130: aload_1
+       131: invokestatic  #162                // Method bindHandle:(Ljava/sql/PreparedStatement;ILdev/codex/schubert/nk/batch/repository/BatchStepAttempt;)V
+       134: aload         9
+       136: invokeinterface #166,  1          // InterfaceMethod java/sql/PreparedStatement.executeUpdate:()I
+       141: istore        10
+       143: iload         10
+       145: ifne          169
+       148: aload_0
+       149: aload_1
+       150: invokevirtual #170                // Method read:(Ldev/codex/schubert/nk/batch/repository/BatchStepAttempt;)Ljava/util/Optional;
+       153: aload         8
+       155: invokestatic  #173                // Method matchesStage:(Ljava/util/Optional;Ldev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Stage;)Z
+       158: ifne          169
+       161: new           #82                 // class dev/codex/schubert/nk/batch/repository/BatchRepositoryException
+       164: dup
+       165: invokespecial #84                 // Method dev/codex/schubert/nk/batch/repository/BatchRepositoryException."<init>":()V
+       168: athrow
+       169: aload         9
+       171: ifnull        213
+       174: aload         9
+       176: invokeinterface #177,  1          // InterfaceMethod java/sql/PreparedStatement.close:()V
+       181: goto          213
+       184: astore        10
+       186: aload         9
+       188: ifnull        210
+       191: aload         9
+       193: invokeinterface #177,  1          // InterfaceMethod java/sql/PreparedStatement.close:()V
+       198: goto          210
+       201: astore        11
+       203: aload         10
+       205: aload         11
+       207: invokevirtual #181                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       210: aload         10
+       212: athrow
+       213: goto          231
+       216: astore        9
+       218: aload         9
+       220: invokestatic  #76                 // Method dev/codex/schubert/nk/storage/StorageIoException.preserveFatal:(Ljava/lang/Throwable;)V
+       223: new           #82                 // class dev/codex/schubert/nk/batch/repository/BatchRepositoryException
+       226: dup
+       227: invokespecial #84                 // Method dev/codex/schubert/nk/batch/repository/BatchRepositoryException."<init>":()V
+       230: athrow
+       231: aload_0
+       232: aload_1
+       233: invokevirtual #91                 // Method dev/codex/schubert/nk/batch/repository/BatchStepAttempt.run:()Ldev/codex/schubert/nk/batch/repository/BatchRun;
+       236: invokevirtual #54                 // Method guarded:(Ldev/codex/schubert/nk/batch/repository/BatchRun;)V
+       239: aload         8
+       241: areturn
+      Exception table:
+         from    to  target type
+            61   169   184   Class java/lang/Throwable
+           191   198   201   Class java/lang/Throwable
+            42   213   216   Class java/sql/SQLException
+            42   213   216   Class java/lang/RuntimeException
+
+  public void finish(dev.codex.schubert.nk.batch.repository.BatchStepAttempt, dev.codex.schubert.nk.batch.repository.ExpiryAuditRepository$Stage, java.time.Instant, java.lang.Long, dev.codex.schubert.nk.batch.repository.BatchStepResult);
+    Code:
+         0: aload_1
+         1: invokestatic  #85                 // Method validAttempt:(Ldev/codex/schubert/nk/batch/repository/BatchStepAttempt;)V
+         4: aload_2
+         5: ldc           #186                // String durably committed stage
+         7: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        10: pop
+        11: aload_3
+        12: ldc           #188                // String terminal time
+        14: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        17: pop
+        18: aload         5
+        20: ldc           #190                // String terminal result
+        22: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        25: pop
+        26: aload_1
+        27: invokevirtual #91                 // Method dev/codex/schubert/nk/batch/repository/BatchStepAttempt.run:()Ldev/codex/schubert/nk/batch/repository/BatchRun;
+        30: aload_3
+        31: invokestatic  #43                 // Method dev/codex/schubert/nk/batch/repository/BatchStepAttempt.time:(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ljava/time/Instant;)V
+        34: aload_3
+        35: aload_1
+        36: invokevirtual #192                // Method dev/codex/schubert/nk/batch/repository/BatchStepAttempt.startedAt:()Ljava/time/Instant;
+        39: invokevirtual #195                // Method java/time/Instant.isBefore:(Ljava/time/Instant;)Z
+        42: ifne          205
+        45: aload_2
+        46: invokevirtual #133                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Stage.cutoff:()Ljava/time/Instant;
+        49: aload_1
+        50: invokevirtual #91                 // Method dev/codex/schubert/nk/batch/repository/BatchStepAttempt.run:()Ldev/codex/schubert/nk/batch/repository/BatchRun;
+        53: invokevirtual #95                 // Method dev/codex/schubert/nk/batch/repository/BatchRun.cutoff:()Ljava/time/Instant;
+        56: ldc2_w        #101                // long 7l
+        59: getstatic     #103                // Field java/time/temporal/ChronoUnit.DAYS:Ljava/time/temporal/ChronoUnit;
+        62: invokevirtual #109                // Method java/time/Instant.minus:(JLjava/time/temporal/TemporalUnit;)Ljava/time/Instant;
+        65: invokevirtual #199                // Method java/time/Instant.equals:(Ljava/lang/Object;)Z
+        68: ifeq          205
+        71: aload         5
+        73: invokevirtual #203                // Method dev/codex/schubert/nk/batch/repository/BatchStepResult.status:()Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Status;
+        76: getstatic     #209                // Field dev/codex/schubert/nk/batch/repository/BatchStepResult$Status.SKIPPED:Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Status;
+        79: if_acmpeq     205
+        82: aload         5
+        84: invokevirtual #215                // Method dev/codex/schubert/nk/batch/repository/BatchStepResult.target:()J
+        87: aload_2
+        88: invokevirtual #156                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Stage.target:()J
+        91: lcmp
+        92: ifne          205
+        95: aload         5
+        97: invokevirtual #216                // Method dev/codex/schubert/nk/batch/repository/BatchStepResult.bytes:()J
+       100: aload_2
+       101: invokevirtual #159                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Stage.estimatedBytes:()J
+       104: lcmp
+       105: ifne          205
+       108: aload         4
+       110: ifnonnull     134
+       113: aload         5
+       115: invokevirtual #203                // Method dev/codex/schubert/nk/batch/repository/BatchStepResult.status:()Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Status;
+       118: getstatic     #219                // Field dev/codex/schubert/nk/batch/repository/BatchStepResult$Status.SUCCESS:Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Status;
+       121: if_acmpeq     205
+       124: aload         5
+       126: invokevirtual #222                // Method dev/codex/schubert/nk/batch/repository/BatchStepResult.success:()J
+       129: lconst_0
+       130: lcmp
+       131: ifne          205
+       134: aload         4
+       136: ifnull        215
+       139: aload         4
+       141: invokevirtual #225                // Method java/lang/Long.longValue:()J
+       144: lconst_0
+       145: lcmp
+       146: iflt          205
+       149: aload         4
+       151: invokevirtual #225                // Method java/lang/Long.longValue:()J
+       154: aload_2
+       155: invokevirtual #148                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Stage.before:()J
+       158: lcmp
+       159: ifgt          205
+       162: aload         5
+       164: invokevirtual #222                // Method dev/codex/schubert/nk/batch/repository/BatchStepResult.success:()J
+       167: aload_2
+       168: invokevirtual #148                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Stage.before:()J
+       171: aload         4
+       173: invokevirtual #225                // Method java/lang/Long.longValue:()J
+       176: lsub
+       177: lcmp
+       178: ifne          205
+       181: aload         5
+       183: invokevirtual #203                // Method dev/codex/schubert/nk/batch/repository/BatchStepResult.status:()Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Status;
+       186: getstatic     #219                // Field dev/codex/schubert/nk/batch/repository/BatchStepResult$Status.SUCCESS:Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Status;
+       189: if_acmpne     215
+       192: aload         5
+       194: invokevirtual #222                // Method dev/codex/schubert/nk/batch/repository/BatchStepResult.success:()J
+       197: aload_2
+       198: invokevirtual #156                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Stage.target:()J
+       201: lcmp
+       202: ifeq          215
+       205: new           #230                // class java/lang/IllegalArgumentException
+       208: dup
+       209: ldc           #232                // String invalid Expiry terminal
+       211: invokespecial #234                // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+       214: athrow
+       215: aload_0
+       216: aload_1
+       217: invokevirtual #91                 // Method dev/codex/schubert/nk/batch/repository/BatchStepAttempt.run:()Ldev/codex/schubert/nk/batch/repository/BatchRun;
+       220: invokevirtual #54                 // Method guarded:(Ldev/codex/schubert/nk/batch/repository/BatchRun;)V
+       223: aload_0
+       224: getfield      #17                 // Field connection:Ljava/sql/Connection;
+       227: ldc           #237                // String update schubert.batch_runs set ended_at=?,status=?,success_count=?,failure_count=?,error_code=?,error_summary=?,expiry_after_count=? where id=? and run_id=? and business_date=? and step=\'CLEAN_EXPIRY\' and attempt=? and started_at=? and status=\'RUNNING\' and ended_at is null and expiry_cutoff_at=? and expiry_before_count=? and target_count=? and byte_count=? and expiry_after_count is null
+       229: invokeinterface #120,  2          // InterfaceMethod java/sql/Connection.prepareStatement:(Ljava/lang/String;)Ljava/sql/PreparedStatement;
+       234: invokestatic  #124                // Method required:(Ljava/lang/Object;)Ljava/lang/Object;
+       237: checkcast     #127                // class java/sql/PreparedStatement
+       240: astore        6
+       242: aload         6
+       244: iconst_5
+       245: invokeinterface #129,  2          // InterfaceMethod java/sql/PreparedStatement.setQueryTimeout:(I)V
+       250: aload         6
+       252: iconst_1
+       253: aload_3
+       254: getstatic     #134                // Field java/time/ZoneOffset.UTC:Ljava/time/ZoneOffset;
+       257: invokevirtual #140                // Method java/time/Instant.atOffset:(Ljava/time/ZoneOffset;)Ljava/time/OffsetDateTime;
+       260: invokeinterface #144,  3          // InterfaceMethod java/sql/PreparedStatement.setObject:(ILjava/lang/Object;)V
+       265: aload         6
+       267: iconst_2
+       268: aload         5
+       270: invokevirtual #203                // Method dev/codex/schubert/nk/batch/repository/BatchStepResult.status:()Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Status;
+       273: invokevirtual #239                // Method dev/codex/schubert/nk/batch/repository/BatchStepResult$Status.name:()Ljava/lang/String;
+       276: invokeinterface #243,  3          // InterfaceMethod java/sql/PreparedStatement.setString:(ILjava/lang/String;)V
+       281: aload         6
+       283: iconst_3
+       284: aload         5
+       286: invokevirtual #222                // Method dev/codex/schubert/nk/batch/repository/BatchStepResult.success:()J
+       289: invokeinterface #152,  4          // InterfaceMethod java/sql/PreparedStatement.setLong:(IJ)V
+       294: aload         6
+       296: iconst_4
+       297: aload         5
+       299: invokevirtual #247                // Method dev/codex/schubert/nk/batch/repository/BatchStepResult.failure:()J
+       302: invokeinterface #152,  4          // InterfaceMethod java/sql/PreparedStatement.setLong:(IJ)V
+       307: aload         6
+       309: iconst_5
+       310: aload         5
+       312: invokevirtual #250                // Method dev/codex/schubert/nk/batch/repository/BatchStepResult.reason:()Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Reason;
+       315: invokevirtual #254                // Method dev/codex/schubert/nk/batch/repository/BatchStepResult$Reason.code:()Ljava/lang/String;
+       318: invokeinterface #243,  3          // InterfaceMethod java/sql/PreparedStatement.setString:(ILjava/lang/String;)V
+       323: aload         6
+       325: bipush        6
+       327: aload         5
+       329: invokevirtual #250                // Method dev/codex/schubert/nk/batch/repository/BatchStepResult.reason:()Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Reason;
+       332: invokevirtual #259                // Method dev/codex/schubert/nk/batch/repository/BatchStepResult$Reason.summary:()Ljava/lang/String;
+       335: invokeinterface #243,  3          // InterfaceMethod java/sql/PreparedStatement.setString:(ILjava/lang/String;)V
+       340: aload         6
+       342: bipush        7
+       344: aload         4
+       346: invokeinterface #144,  3          // InterfaceMethod java/sql/PreparedStatement.setObject:(ILjava/lang/Object;)V
+       351: aload         6
+       353: bipush        8
+       355: aload_1
+       356: invokestatic  #162                // Method bindHandle:(Ljava/sql/PreparedStatement;ILdev/codex/schubert/nk/batch/repository/BatchStepAttempt;)V
+       359: aload         6
+       361: bipush        13
+       363: aload_2
+       364: invokevirtual #133                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Stage.cutoff:()Ljava/time/Instant;
+       367: getstatic     #134                // Field java/time/ZoneOffset.UTC:Ljava/time/ZoneOffset;
+       370: invokevirtual #140                // Method java/time/Instant.atOffset:(Ljava/time/ZoneOffset;)Ljava/time/OffsetDateTime;
+       373: invokeinterface #144,  3          // InterfaceMethod java/sql/PreparedStatement.setObject:(ILjava/lang/Object;)V
+       378: aload         6
+       380: bipush        14
+       382: aload_2
+       383: invokevirtual #148                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Stage.before:()J
+       386: invokeinterface #152,  4          // InterfaceMethod java/sql/PreparedStatement.setLong:(IJ)V
+       391: aload         6
+       393: bipush        15
+       395: aload_2
+       396: invokevirtual #156                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Stage.target:()J
+       399: invokeinterface #152,  4          // InterfaceMethod java/sql/PreparedStatement.setLong:(IJ)V
+       404: aload         6
+       406: bipush        16
+       408: aload_2
+       409: invokevirtual #159                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Stage.estimatedBytes:()J
+       412: invokeinterface #152,  4          // InterfaceMethod java/sql/PreparedStatement.setLong:(IJ)V
+       417: aload         6
+       419: invokeinterface #166,  1          // InterfaceMethod java/sql/PreparedStatement.executeUpdate:()I
+       424: istore        7
+       426: iload         7
+       428: ifne          456
+       431: aload_0
+       432: aload_1
+       433: invokevirtual #170                // Method read:(Ldev/codex/schubert/nk/batch/repository/BatchStepAttempt;)Ljava/util/Optional;
+       436: aload_2
+       437: aload_3
+       438: aload         4
+       440: aload         5
+       442: invokestatic  #262                // Method matchesTerminal:(Ljava/util/Optional;Ldev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Stage;Ljava/time/Instant;Ljava/lang/Long;Ldev/codex/schubert/nk/batch/repository/BatchStepResult;)Z
+       445: ifne          456
+       448: new           #82                 // class dev/codex/schubert/nk/batch/repository/BatchRepositoryException
+       451: dup
+       452: invokespecial #84                 // Method dev/codex/schubert/nk/batch/repository/BatchRepositoryException."<init>":()V
+       455: athrow
+       456: aload         6
+       458: ifnull        500
+       461: aload         6
+       463: invokeinterface #177,  1          // InterfaceMethod java/sql/PreparedStatement.close:()V
+       468: goto          500
+       471: astore        7
+       473: aload         6
+       475: ifnull        497
+       478: aload         6
+       480: invokeinterface #177,  1          // InterfaceMethod java/sql/PreparedStatement.close:()V
+       485: goto          497
+       488: astore        8
+       490: aload         7
+       492: aload         8
+       494: invokevirtual #181                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       497: aload         7
+       499: athrow
+       500: goto          518
+       503: astore        6
+       505: aload         6
+       507: invokestatic  #76                 // Method dev/codex/schubert/nk/storage/StorageIoException.preserveFatal:(Ljava/lang/Throwable;)V
+       510: new           #82                 // class dev/codex/schubert/nk/batch/repository/BatchRepositoryException
+       513: dup
+       514: invokespecial #84                 // Method dev/codex/schubert/nk/batch/repository/BatchRepositoryException."<init>":()V
+       517: athrow
+       518: aload_0
+       519: aload_1
+       520: invokevirtual #91                 // Method dev/codex/schubert/nk/batch/repository/BatchStepAttempt.run:()Ldev/codex/schubert/nk/batch/repository/BatchRun;
+       523: invokevirtual #54                 // Method guarded:(Ldev/codex/schubert/nk/batch/repository/BatchRun;)V
+       526: return
+      Exception table:
+         from    to  target type
+           242   456   471   Class java/lang/Throwable
+           478   485   488   Class java/lang/Throwable
+           223   500   503   Class java/sql/SQLException
+           223   500   503   Class java/lang/RuntimeException
+
+  public java.util.Optional<dev.codex.schubert.nk.batch.repository.ExpiryAuditRepository$Snapshot> read(dev.codex.schubert.nk.batch.repository.BatchStepAttempt);
+    Code:
+         0: aload_1
+         1: invokestatic  #85                 // Method validAttempt:(Ldev/codex/schubert/nk/batch/repository/BatchStepAttempt;)V
+         4: aload_0
+         5: aload_1
+         6: invokevirtual #91                 // Method dev/codex/schubert/nk/batch/repository/BatchStepAttempt.run:()Ldev/codex/schubert/nk/batch/repository/BatchRun;
+         9: invokevirtual #54                 // Method guarded:(Ldev/codex/schubert/nk/batch/repository/BatchRun;)V
+        12: aload_0
+        13: getfield      #17                 // Field connection:Ljava/sql/Connection;
+        16: ldc_w         #266                // String select status,expiry_cutoff_at,expiry_before_count,expiry_after_count,target_count,success_count,failure_count,byte_count,ended_at,error_code,error_summary from schubert.batch_runs where id=? and run_id=? and business_date=? and step=\'CLEAN_EXPIRY\' and attempt=? and started_at=?
+        19: invokeinterface #120,  2          // InterfaceMethod java/sql/Connection.prepareStatement:(Ljava/lang/String;)Ljava/sql/PreparedStatement;
+        24: astore_2
+        25: aconst_null
+        26: astore_3
+        27: aload_2
+        28: invokestatic  #268                // Method presentRead:(Ljava/lang/Object;)Ljava/lang/Object;
+        31: checkcast     #127                // class java/sql/PreparedStatement
+        34: astore        4
+        36: aload         4
+        38: iconst_5
+        39: invokeinterface #129,  2          // InterfaceMethod java/sql/PreparedStatement.setQueryTimeout:(I)V
+        44: aload         4
+        46: iconst_1
+        47: aload_1
+        48: invokestatic  #162                // Method bindHandle:(Ljava/sql/PreparedStatement;ILdev/codex/schubert/nk/batch/repository/BatchStepAttempt;)V
+        51: aload         4
+        53: invokeinterface #271,  1          // InterfaceMethod java/sql/PreparedStatement.executeQuery:()Ljava/sql/ResultSet;
+        58: astore        5
+        60: aconst_null
+        61: astore        6
+        63: aload         5
+        65: invokestatic  #268                // Method presentRead:(Ljava/lang/Object;)Ljava/lang/Object;
+        68: checkcast     #275                // class java/sql/ResultSet
+        71: astore        7
+        73: aload         7
+        75: invokeinterface #277,  1          // InterfaceMethod java/sql/ResultSet.next:()Z
+        80: ifne          156
+        83: aload_0
+        84: aload_1
+        85: invokevirtual #91                 // Method dev/codex/schubert/nk/batch/repository/BatchStepAttempt.run:()Ldev/codex/schubert/nk/batch/repository/BatchRun;
+        88: invokevirtual #54                 // Method guarded:(Ldev/codex/schubert/nk/batch/repository/BatchRun;)V
+        91: invokestatic  #281                // Method java/util/Optional.empty:()Ljava/util/Optional;
+        94: astore        8
+        96: aload         5
+        98: ifnull        126
+       101: aload         5
+       103: invokeinterface #287,  1          // InterfaceMethod java/sql/ResultSet.close:()V
+       108: goto          126
+       111: astore        9
+       113: aload         6
+       115: aload         9
+       117: invokestatic  #290                // InterfaceMethod dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.replace:(Ljava/lang/Throwable;Ljava/lang/Throwable;)Z
+       120: ifeq          126
+       123: aload         9
+       125: athrow
+       126: aload_2
+       127: ifnull        153
+       130: aload_2
+       131: invokeinterface #177,  1          // InterfaceMethod java/sql/PreparedStatement.close:()V
+       136: goto          153
+       139: astore        9
+       141: aload_3
+       142: aload         9
+       144: invokestatic  #290                // InterfaceMethod dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.replace:(Ljava/lang/Throwable;Ljava/lang/Throwable;)Z
+       147: ifeq          153
+       150: aload         9
+       152: athrow
+       153: aload         8
+       155: areturn
+       156: aload         7
+       158: ldc_w         #296                // String expiry_cutoff_at
+       161: ldc_w         #298                // class java/time/OffsetDateTime
+       164: invokeinterface #300,  3          // InterfaceMethod java/sql/ResultSet.getObject:(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;
+       169: checkcast     #298                // class java/time/OffsetDateTime
+       172: astore        8
+       174: aload         7
+       176: ldc_w         #304                // String ended_at
+       179: ldc_w         #298                // class java/time/OffsetDateTime
+       182: invokeinterface #300,  3          // InterfaceMethod java/sql/ResultSet.getObject:(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;
+       187: checkcast     #298                // class java/time/OffsetDateTime
+       190: astore        9
+       192: new           #306                // class dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot
+       195: dup
+       196: aload         7
+       198: ldc_w         #308                // String status
+       201: invokeinterface #309,  2          // InterfaceMethod java/sql/ResultSet.getString:(Ljava/lang/String;)Ljava/lang/String;
+       206: invokestatic  #268                // Method presentRead:(Ljava/lang/Object;)Ljava/lang/Object;
+       209: checkcast     #313                // class java/lang/String
+       212: aload         8
+       214: ifnonnull     221
+       217: aconst_null
+       218: goto          226
+       221: aload         8
+       223: invokevirtual #315                // Method java/time/OffsetDateTime.toInstant:()Ljava/time/Instant;
+       226: aload         7
+       228: ldc_w         #318                // String expiry_before_count
+       231: ldc           #226                // class java/lang/Long
+       233: invokeinterface #300,  3          // InterfaceMethod java/sql/ResultSet.getObject:(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;
+       238: checkcast     #226                // class java/lang/Long
+       241: aload         7
+       243: ldc_w         #320                // String expiry_after_count
+       246: ldc           #226                // class java/lang/Long
+       248: invokeinterface #300,  3          // InterfaceMethod java/sql/ResultSet.getObject:(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;
+       253: checkcast     #226                // class java/lang/Long
+       256: aload         7
+       258: ldc_w         #322                // String target_count
+       261: ldc           #226                // class java/lang/Long
+       263: invokeinterface #300,  3          // InterfaceMethod java/sql/ResultSet.getObject:(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;
+       268: checkcast     #226                // class java/lang/Long
+       271: invokestatic  #268                // Method presentRead:(Ljava/lang/Object;)Ljava/lang/Object;
+       274: checkcast     #226                // class java/lang/Long
+       277: invokevirtual #225                // Method java/lang/Long.longValue:()J
+       280: aload         7
+       282: ldc_w         #324                // String success_count
+       285: ldc           #226                // class java/lang/Long
+       287: invokeinterface #300,  3          // InterfaceMethod java/sql/ResultSet.getObject:(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;
+       292: checkcast     #226                // class java/lang/Long
+       295: invokestatic  #268                // Method presentRead:(Ljava/lang/Object;)Ljava/lang/Object;
+       298: checkcast     #226                // class java/lang/Long
+       301: invokevirtual #225                // Method java/lang/Long.longValue:()J
+       304: aload         7
+       306: ldc_w         #326                // String failure_count
+       309: ldc           #226                // class java/lang/Long
+       311: invokeinterface #300,  3          // InterfaceMethod java/sql/ResultSet.getObject:(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;
+       316: checkcast     #226                // class java/lang/Long
+       319: invokestatic  #268                // Method presentRead:(Ljava/lang/Object;)Ljava/lang/Object;
+       322: checkcast     #226                // class java/lang/Long
+       325: invokevirtual #225                // Method java/lang/Long.longValue:()J
+       328: aload         7
+       330: ldc_w         #328                // String byte_count
+       333: ldc           #226                // class java/lang/Long
+       335: invokeinterface #300,  3          // InterfaceMethod java/sql/ResultSet.getObject:(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;
+       340: checkcast     #226                // class java/lang/Long
+       343: invokestatic  #268                // Method presentRead:(Ljava/lang/Object;)Ljava/lang/Object;
+       346: checkcast     #226                // class java/lang/Long
+       349: invokevirtual #225                // Method java/lang/Long.longValue:()J
+       352: aload         9
+       354: ifnonnull     361
+       357: aconst_null
+       358: goto          366
+       361: aload         9
+       363: invokevirtual #315                // Method java/time/OffsetDateTime.toInstant:()Ljava/time/Instant;
+       366: aload         7
+       368: ldc_w         #330                // String error_code
+       371: invokeinterface #309,  2          // InterfaceMethod java/sql/ResultSet.getString:(Ljava/lang/String;)Ljava/lang/String;
+       376: aload         7
+       378: ldc_w         #332                // String error_summary
+       381: invokeinterface #309,  2          // InterfaceMethod java/sql/ResultSet.getString:(Ljava/lang/String;)Ljava/lang/String;
+       386: invokespecial #334                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot."<init>":(Ljava/lang/String;Ljava/time/Instant;Ljava/lang/Long;Ljava/lang/Long;JJJJLjava/time/Instant;Ljava/lang/String;Ljava/lang/String;)V
+       389: astore        10
+       391: aload_1
+       392: aload         10
+       394: invokestatic  #337                // Method validSnapshot:(Ldev/codex/schubert/nk/batch/repository/BatchStepAttempt;Ldev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot;)Z
+       397: ifne          411
+       400: new           #341                // class java/sql/SQLDataException
+       403: dup
+       404: ldc_w         #343                // String Expiry projection invalid
+       407: invokespecial #345                // Method java/sql/SQLDataException."<init>":(Ljava/lang/String;)V
+       410: athrow
+       411: aload_0
+       412: aload_1
+       413: invokevirtual #91                 // Method dev/codex/schubert/nk/batch/repository/BatchStepAttempt.run:()Ldev/codex/schubert/nk/batch/repository/BatchRun;
+       416: invokevirtual #54                 // Method guarded:(Ldev/codex/schubert/nk/batch/repository/BatchRun;)V
+       419: aload         10
+       421: invokestatic  #346                // Method java/util/Optional.of:(Ljava/lang/Object;)Ljava/util/Optional;
+       424: astore        11
+       426: aload         5
+       428: ifnull        456
+       431: aload         5
+       433: invokeinterface #287,  1          // InterfaceMethod java/sql/ResultSet.close:()V
+       438: goto          456
+       441: astore        12
+       443: aload         6
+       445: aload         12
+       447: invokestatic  #290                // InterfaceMethod dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.replace:(Ljava/lang/Throwable;Ljava/lang/Throwable;)Z
+       450: ifeq          456
+       453: aload         12
+       455: athrow
+       456: aload_2
+       457: ifnull        483
+       460: aload_2
+       461: invokeinterface #177,  1          // InterfaceMethod java/sql/PreparedStatement.close:()V
+       466: goto          483
+       469: astore        12
+       471: aload_3
+       472: aload         12
+       474: invokestatic  #290                // InterfaceMethod dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.replace:(Ljava/lang/Throwable;Ljava/lang/Throwable;)Z
+       477: ifeq          483
+       480: aload         12
+       482: athrow
+       483: aload         11
+       485: areturn
+       486: astore        7
+       488: aload         7
+       490: astore        6
+       492: aload         7
+       494: athrow
+       495: astore        13
+       497: aload         5
+       499: ifnull        527
+       502: aload         5
+       504: invokeinterface #287,  1          // InterfaceMethod java/sql/ResultSet.close:()V
+       509: goto          527
+       512: astore        14
+       514: aload         6
+       516: aload         14
+       518: invokestatic  #290                // InterfaceMethod dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.replace:(Ljava/lang/Throwable;Ljava/lang/Throwable;)Z
+       521: ifeq          527
+       524: aload         14
+       526: athrow
+       527: aload         13
+       529: athrow
+       530: astore        4
+       532: aload         4
+       534: astore_3
+       535: aload         4
+       537: athrow
+       538: astore        15
+       540: aload_2
+       541: ifnull        567
+       544: aload_2
+       545: invokeinterface #177,  1          // InterfaceMethod java/sql/PreparedStatement.close:()V
+       550: goto          567
+       553: astore        16
+       555: aload_3
+       556: aload         16
+       558: invokestatic  #290                // InterfaceMethod dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.replace:(Ljava/lang/Throwable;Ljava/lang/Throwable;)Z
+       561: ifeq          567
+       564: aload         16
+       566: athrow
+       567: aload         15
+       569: athrow
+       570: astore_2
+       571: aload_2
+       572: invokestatic  #76                 // Method dev/codex/schubert/nk/storage/StorageIoException.preserveFatal:(Ljava/lang/Throwable;)V
+       575: new           #82                 // class dev/codex/schubert/nk/batch/repository/BatchRepositoryException
+       578: dup
+       579: invokespecial #84                 // Method dev/codex/schubert/nk/batch/repository/BatchRepositoryException."<init>":()V
+       582: athrow
+      Exception table:
+         from    to  target type
+           101   108   111   Class java/sql/SQLException
+           101   108   111   Class java/lang/RuntimeException
+           101   108   111   Class java/lang/Error
+           130   136   139   Class java/sql/SQLException
+           130   136   139   Class java/lang/RuntimeException
+           130   136   139   Class java/lang/Error
+           431   438   441   Class java/sql/SQLException
+           431   438   441   Class java/lang/RuntimeException
+           431   438   441   Class java/lang/Error
+           460   466   469   Class java/sql/SQLException
+           460   466   469   Class java/lang/RuntimeException
+           460   466   469   Class java/lang/Error
+            63    96   486   Class java/sql/SQLException
+            63    96   486   Class java/lang/RuntimeException
+            63    96   486   Class java/lang/Error
+           156   426   486   Class java/sql/SQLException
+           156   426   486   Class java/lang/RuntimeException
+           156   426   486   Class java/lang/Error
+            63    96   495   any
+           156   426   495   any
+           502   509   512   Class java/sql/SQLException
+           502   509   512   Class java/lang/RuntimeException
+           502   509   512   Class java/lang/Error
+           486   497   495   any
+            27   126   530   Class java/sql/SQLException
+            27   126   530   Class java/lang/RuntimeException
+            27   126   530   Class java/lang/Error
+           156   456   530   Class java/sql/SQLException
+           156   456   530   Class java/lang/RuntimeException
+           156   456   530   Class java/lang/Error
+           486   530   530   Class java/sql/SQLException
+           486   530   530   Class java/lang/RuntimeException
+           486   530   530   Class java/lang/Error
+            27   126   538   any
+           156   456   538   any
+           544   550   553   Class java/sql/SQLException
+           544   550   553   Class java/lang/RuntimeException
+           544   550   553   Class java/lang/Error
+           486   540   538   any
+            12   153   570   Class java/sql/SQLException
+           156   483   570   Class java/sql/SQLException
+           486   570   570   Class java/sql/SQLException
+
+  private static <T> T presentRead(T) throws java.sql.SQLDataException;
+    Code:
+         0: aload_0
+         1: ifnonnull     15
+         4: new           #341                // class java/sql/SQLDataException
+         7: dup
+         8: ldc_w         #350                // String Expiry projection missing
+        11: invokespecial #345                // Method java/sql/SQLDataException."<init>":(Ljava/lang/String;)V
+        14: athrow
+        15: aload_0
+        16: areturn
+
+  static boolean validSnapshot(dev.codex.schubert.nk.batch.repository.BatchStepAttempt, dev.codex.schubert.nk.batch.repository.ExpiryAuditRepository$Snapshot);
+    Code:
+         0: aload_1
+         1: invokevirtual #352                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.status:()Ljava/lang/String;
+         4: ldc_w         #354                // String RUNNING
+         7: invokevirtual #356                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        10: istore_2
+        11: aload_1
+        12: invokevirtual #357                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.cutoff:()Ljava/time/Instant;
+        15: astore_3
+        16: aload_1
+        17: invokevirtual #358                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.before:()Ljava/lang/Long;
+        20: astore        4
+        22: iload_2
+        23: ifne          67
+        26: aload_1
+        27: invokevirtual #352                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.status:()Ljava/lang/String;
+        30: ldc_w         #361                // String SUCCESS
+        33: invokevirtual #356                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        36: ifne          67
+        39: aload_1
+        40: invokevirtual #352                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.status:()Ljava/lang/String;
+        43: ldc_w         #362                // String WARNING
+        46: invokevirtual #356                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        49: ifne          67
+        52: aload_1
+        53: invokevirtual #352                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.status:()Ljava/lang/String;
+        56: ldc_w         #364                // String FAILED
+        59: invokevirtual #356                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        62: ifne          67
+        65: iconst_0
+        66: ireturn
+        67: iload_2
+        68: aload_1
+        69: invokevirtual #366                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.ended:()Ljava/time/Instant;
+        72: ifnonnull     79
+        75: iconst_1
+        76: goto          80
+        79: iconst_0
+        80: if_icmpne     141
+        83: aload_1
+        84: invokevirtual #369                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.target:()J
+        87: lconst_0
+        88: lcmp
+        89: iflt          141
+        92: aload_1
+        93: invokevirtual #370                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.success:()J
+        96: lconst_0
+        97: lcmp
+        98: iflt          141
+       101: aload_1
+       102: invokevirtual #371                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.failure:()J
+       105: lconst_0
+       106: lcmp
+       107: iflt          141
+       110: aload_1
+       111: invokevirtual #372                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.estimatedBytes:()J
+       114: lconst_0
+       115: lcmp
+       116: iflt          141
+       119: aload_3
+       120: ifnonnull     127
+       123: iconst_1
+       124: goto          128
+       127: iconst_0
+       128: aload         4
+       130: ifnonnull     137
+       133: iconst_1
+       134: goto          138
+       137: iconst_0
+       138: if_icmpeq     143
+       141: iconst_0
+       142: ireturn
+       143: aload_3
+       144: ifnonnull     173
+       147: aload_1
+       148: invokevirtual #373                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.after:()Ljava/lang/Long;
+       151: ifnonnull     171
+       154: aload_1
+       155: invokevirtual #352                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.status:()Ljava/lang/String;
+       158: ldc_w         #361                // String SUCCESS
+       161: invokevirtual #356                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       164: ifne          171
+       167: iconst_1
+       168: goto          172
+       171: iconst_0
+       172: ireturn
+       173: aload         4
+       175: invokestatic  #124                // Method required:(Ljava/lang/Object;)Ljava/lang/Object;
+       178: checkcast     #226                // class java/lang/Long
+       181: invokevirtual #225                // Method java/lang/Long.longValue:()J
+       184: lstore        5
+       186: aload_3
+       187: aload_0
+       188: invokevirtual #91                 // Method dev/codex/schubert/nk/batch/repository/BatchStepAttempt.run:()Ldev/codex/schubert/nk/batch/repository/BatchRun;
+       191: invokevirtual #95                 // Method dev/codex/schubert/nk/batch/repository/BatchRun.cutoff:()Ljava/time/Instant;
+       194: ldc2_w        #101                // long 7l
+       197: getstatic     #103                // Field java/time/temporal/ChronoUnit.DAYS:Ljava/time/temporal/ChronoUnit;
+       200: invokevirtual #109                // Method java/time/Instant.minus:(JLjava/time/temporal/TemporalUnit;)Ljava/time/Instant;
+       203: invokevirtual #199                // Method java/time/Instant.equals:(Ljava/lang/Object;)Z
+       206: ifeq          226
+       209: lload         5
+       211: lconst_0
+       212: lcmp
+       213: iflt          226
+       216: aload_1
+       217: invokevirtual #369                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.target:()J
+       220: lload         5
+       222: lcmp
+       223: ifle          228
+       226: iconst_0
+       227: ireturn
+       228: aload_1
+       229: invokevirtual #373                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.after:()Ljava/lang/Long;
+       232: ifnonnull     263
+       235: aload_1
+       236: invokevirtual #352                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.status:()Ljava/lang/String;
+       239: ldc_w         #361                // String SUCCESS
+       242: invokevirtual #356                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       245: ifne          261
+       248: aload_1
+       249: invokevirtual #370                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.success:()J
+       252: lconst_0
+       253: lcmp
+       254: ifne          261
+       257: iconst_1
+       258: goto          262
+       261: iconst_0
+       262: ireturn
+       263: aload_1
+       264: invokevirtual #373                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.after:()Ljava/lang/Long;
+       267: invokestatic  #124                // Method required:(Ljava/lang/Object;)Ljava/lang/Object;
+       270: checkcast     #226                // class java/lang/Long
+       273: invokevirtual #225                // Method java/lang/Long.longValue:()J
+       276: lstore        7
+       278: lload         7
+       280: lconst_0
+       281: lcmp
+       282: iflt          344
+       285: lload         7
+       287: lload         5
+       289: lcmp
+       290: ifgt          344
+       293: lload         5
+       295: lload         7
+       297: lsub
+       298: aload_1
+       299: invokevirtual #370                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.success:()J
+       302: lcmp
+       303: ifne          344
+       306: aload_1
+       307: invokevirtual #352                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.status:()Ljava/lang/String;
+       310: ldc_w         #361                // String SUCCESS
+       313: invokevirtual #356                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       316: ifeq          340
+       319: aload_1
+       320: invokevirtual #370                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.success:()J
+       323: aload_1
+       324: invokevirtual #369                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.target:()J
+       327: lcmp
+       328: ifne          344
+       331: aload_1
+       332: invokevirtual #371                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.failure:()J
+       335: lconst_0
+       336: lcmp
+       337: ifne          344
+       340: iconst_1
+       341: goto          345
+       344: iconst_0
+       345: ireturn
+
+  static boolean matchesStage(java.util.Optional<dev.codex.schubert.nk.batch.repository.ExpiryAuditRepository$Snapshot>, dev.codex.schubert.nk.batch.repository.ExpiryAuditRepository$Stage);
+    Code:
+         0: aload_0
+         1: invokevirtual #376                // Method java/util/Optional.isPresent:()Z
+         4: ifeq          152
+         7: aload_0
+         8: invokevirtual #379                // Method java/util/Optional.get:()Ljava/lang/Object;
+        11: checkcast     #306                // class dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot
+        14: invokevirtual #352                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.status:()Ljava/lang/String;
+        17: ldc_w         #354                // String RUNNING
+        20: invokevirtual #356                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        23: ifeq          152
+        26: aload_0
+        27: invokevirtual #379                // Method java/util/Optional.get:()Ljava/lang/Object;
+        30: checkcast     #306                // class dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot
+        33: invokevirtual #373                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.after:()Ljava/lang/Long;
+        36: ifnonnull     152
+        39: aload_0
+        40: invokevirtual #379                // Method java/util/Optional.get:()Ljava/lang/Object;
+        43: checkcast     #306                // class dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot
+        46: invokevirtual #357                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.cutoff:()Ljava/time/Instant;
+        49: aload_1
+        50: invokevirtual #133                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Stage.cutoff:()Ljava/time/Instant;
+        53: invokestatic  #383                // Method java/util/Objects.equals:(Ljava/lang/Object;Ljava/lang/Object;)Z
+        56: ifeq          152
+        59: aload_0
+        60: invokevirtual #379                // Method java/util/Optional.get:()Ljava/lang/Object;
+        63: checkcast     #306                // class dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot
+        66: invokevirtual #358                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.before:()Ljava/lang/Long;
+        69: aload_1
+        70: invokevirtual #148                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Stage.before:()J
+        73: invokestatic  #386                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+        76: invokestatic  #383                // Method java/util/Objects.equals:(Ljava/lang/Object;Ljava/lang/Object;)Z
+        79: ifeq          152
+        82: aload_0
+        83: invokevirtual #379                // Method java/util/Optional.get:()Ljava/lang/Object;
+        86: checkcast     #306                // class dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot
+        89: invokevirtual #369                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.target:()J
+        92: aload_1
+        93: invokevirtual #156                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Stage.target:()J
+        96: lcmp
+        97: ifne          152
+       100: aload_0
+       101: invokevirtual #379                // Method java/util/Optional.get:()Ljava/lang/Object;
+       104: checkcast     #306                // class dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot
+       107: invokevirtual #370                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.success:()J
+       110: lconst_0
+       111: lcmp
+       112: ifne          152
+       115: aload_0
+       116: invokevirtual #379                // Method java/util/Optional.get:()Ljava/lang/Object;
+       119: checkcast     #306                // class dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot
+       122: invokevirtual #371                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.failure:()J
+       125: lconst_0
+       126: lcmp
+       127: ifne          152
+       130: aload_0
+       131: invokevirtual #379                // Method java/util/Optional.get:()Ljava/lang/Object;
+       134: checkcast     #306                // class dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot
+       137: invokevirtual #372                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.estimatedBytes:()J
+       140: aload_1
+       141: invokevirtual #159                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Stage.estimatedBytes:()J
+       144: lcmp
+       145: ifne          152
+       148: iconst_1
+       149: goto          153
+       152: iconst_0
+       153: ireturn
+
+  static boolean matchesTerminal(java.util.Optional<dev.codex.schubert.nk.batch.repository.ExpiryAuditRepository$Snapshot>, dev.codex.schubert.nk.batch.repository.ExpiryAuditRepository$Stage, java.time.Instant, java.lang.Long, dev.codex.schubert.nk.batch.repository.BatchStepResult);
+    Code:
+         0: aload_0
+         1: invokevirtual #376                // Method java/util/Optional.isPresent:()Z
+         4: ifeq          236
+         7: aload_0
+         8: invokevirtual #379                // Method java/util/Optional.get:()Ljava/lang/Object;
+        11: checkcast     #306                // class dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot
+        14: invokevirtual #357                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.cutoff:()Ljava/time/Instant;
+        17: aload_1
+        18: invokevirtual #133                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Stage.cutoff:()Ljava/time/Instant;
+        21: invokestatic  #383                // Method java/util/Objects.equals:(Ljava/lang/Object;Ljava/lang/Object;)Z
+        24: ifeq          236
+        27: aload_0
+        28: invokevirtual #379                // Method java/util/Optional.get:()Ljava/lang/Object;
+        31: checkcast     #306                // class dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot
+        34: invokevirtual #358                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.before:()Ljava/lang/Long;
+        37: aload_1
+        38: invokevirtual #148                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Stage.before:()J
+        41: invokestatic  #386                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+        44: invokestatic  #383                // Method java/util/Objects.equals:(Ljava/lang/Object;Ljava/lang/Object;)Z
+        47: ifeq          236
+        50: aload_0
+        51: invokevirtual #379                // Method java/util/Optional.get:()Ljava/lang/Object;
+        54: checkcast     #306                // class dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot
+        57: invokevirtual #373                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.after:()Ljava/lang/Long;
+        60: aload_3
+        61: invokestatic  #383                // Method java/util/Objects.equals:(Ljava/lang/Object;Ljava/lang/Object;)Z
+        64: ifeq          236
+        67: aload_0
+        68: invokevirtual #379                // Method java/util/Optional.get:()Ljava/lang/Object;
+        71: checkcast     #306                // class dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot
+        74: invokevirtual #369                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.target:()J
+        77: aload         4
+        79: invokevirtual #215                // Method dev/codex/schubert/nk/batch/repository/BatchStepResult.target:()J
+        82: lcmp
+        83: ifne          236
+        86: aload_0
+        87: invokevirtual #379                // Method java/util/Optional.get:()Ljava/lang/Object;
+        90: checkcast     #306                // class dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot
+        93: invokevirtual #370                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.success:()J
+        96: aload         4
+        98: invokevirtual #222                // Method dev/codex/schubert/nk/batch/repository/BatchStepResult.success:()J
+       101: lcmp
+       102: ifne          236
+       105: aload_0
+       106: invokevirtual #379                // Method java/util/Optional.get:()Ljava/lang/Object;
+       109: checkcast     #306                // class dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot
+       112: invokevirtual #371                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.failure:()J
+       115: aload         4
+       117: invokevirtual #247                // Method dev/codex/schubert/nk/batch/repository/BatchStepResult.failure:()J
+       120: lcmp
+       121: ifne          236
+       124: aload_0
+       125: invokevirtual #379                // Method java/util/Optional.get:()Ljava/lang/Object;
+       128: checkcast     #306                // class dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot
+       131: invokevirtual #372                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.estimatedBytes:()J
+       134: aload         4
+       136: invokevirtual #216                // Method dev/codex/schubert/nk/batch/repository/BatchStepResult.bytes:()J
+       139: lcmp
+       140: ifne          236
+       143: aload_0
+       144: invokevirtual #379                // Method java/util/Optional.get:()Ljava/lang/Object;
+       147: checkcast     #306                // class dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot
+       150: invokevirtual #352                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.status:()Ljava/lang/String;
+       153: aload         4
+       155: invokevirtual #203                // Method dev/codex/schubert/nk/batch/repository/BatchStepResult.status:()Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Status;
+       158: invokevirtual #239                // Method dev/codex/schubert/nk/batch/repository/BatchStepResult$Status.name:()Ljava/lang/String;
+       161: invokevirtual #356                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       164: ifeq          236
+       167: aload_0
+       168: invokevirtual #379                // Method java/util/Optional.get:()Ljava/lang/Object;
+       171: checkcast     #306                // class dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot
+       174: invokevirtual #366                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.ended:()Ljava/time/Instant;
+       177: aload_2
+       178: invokestatic  #383                // Method java/util/Objects.equals:(Ljava/lang/Object;Ljava/lang/Object;)Z
+       181: ifeq          236
+       184: aload_0
+       185: invokevirtual #379                // Method java/util/Optional.get:()Ljava/lang/Object;
+       188: checkcast     #306                // class dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot
+       191: invokevirtual #390                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.errorCode:()Ljava/lang/String;
+       194: aload         4
+       196: invokevirtual #250                // Method dev/codex/schubert/nk/batch/repository/BatchStepResult.reason:()Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Reason;
+       199: invokevirtual #254                // Method dev/codex/schubert/nk/batch/repository/BatchStepResult$Reason.code:()Ljava/lang/String;
+       202: invokestatic  #383                // Method java/util/Objects.equals:(Ljava/lang/Object;Ljava/lang/Object;)Z
+       205: ifeq          236
+       208: aload_0
+       209: invokevirtual #379                // Method java/util/Optional.get:()Ljava/lang/Object;
+       212: checkcast     #306                // class dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot
+       215: invokevirtual #393                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.errorSummary:()Ljava/lang/String;
+       218: aload         4
+       220: invokevirtual #250                // Method dev/codex/schubert/nk/batch/repository/BatchStepResult.reason:()Ldev/codex/schubert/nk/batch/repository/BatchStepResult$Reason;
+       223: invokevirtual #259                // Method dev/codex/schubert/nk/batch/repository/BatchStepResult$Reason.summary:()Ljava/lang/String;
+       226: invokestatic  #383                // Method java/util/Objects.equals:(Ljava/lang/Object;Ljava/lang/Object;)Z
+       229: ifeq          236
+       232: iconst_1
+       233: goto          237
+       236: iconst_0
+       237: ireturn
+
+  private static void bindHandle(java.sql.PreparedStatement, int, dev.codex.schubert.nk.batch.repository.BatchStepAttempt) throws java.sql.SQLException;
+    Code:
+         0: aload_0
+         1: iload_1
+         2: aload_2
+         3: invokevirtual #396                // Method dev/codex/schubert/nk/batch/repository/BatchStepAttempt.id:()J
+         6: invokeinterface #152,  4          // InterfaceMethod java/sql/PreparedStatement.setLong:(IJ)V
+        11: aload_0
+        12: iload_1
+        13: iconst_1
+        14: iadd
+        15: aload_2
+        16: invokevirtual #91                 // Method dev/codex/schubert/nk/batch/repository/BatchStepAttempt.run:()Ldev/codex/schubert/nk/batch/repository/BatchRun;
+        19: invokevirtual #399                // Method dev/codex/schubert/nk/batch/repository/BatchRun.id:()Ljava/util/UUID;
+        22: invokeinterface #144,  3          // InterfaceMethod java/sql/PreparedStatement.setObject:(ILjava/lang/Object;)V
+        27: aload_0
+        28: iload_1
+        29: iconst_2
+        30: iadd
+        31: aload_2
+        32: invokevirtual #402                // Method dev/codex/schubert/nk/batch/repository/BatchStepAttempt.businessDate:()Ljava/time/LocalDate;
+        35: invokeinterface #144,  3          // InterfaceMethod java/sql/PreparedStatement.setObject:(ILjava/lang/Object;)V
+        40: aload_0
+        41: iload_1
+        42: iconst_3
+        43: iadd
+        44: aload_2
+        45: invokevirtual #406                // Method dev/codex/schubert/nk/batch/repository/BatchStepAttempt.attempt:()I
+        48: invokeinterface #409,  3          // InterfaceMethod java/sql/PreparedStatement.setInt:(II)V
+        53: aload_0
+        54: iload_1
+        55: iconst_4
+        56: iadd
+        57: aload_2
+        58: invokevirtual #192                // Method dev/codex/schubert/nk/batch/repository/BatchStepAttempt.startedAt:()Ljava/time/Instant;
+        61: getstatic     #134                // Field java/time/ZoneOffset.UTC:Ljava/time/ZoneOffset;
+        64: invokevirtual #140                // Method java/time/Instant.atOffset:(Ljava/time/ZoneOffset;)Ljava/time/OffsetDateTime;
+        67: invokeinterface #144,  3          // InterfaceMethod java/sql/PreparedStatement.setObject:(ILjava/lang/Object;)V
+        72: return
+
+  private static void validAttempt(dev.codex.schubert.nk.batch.repository.BatchStepAttempt);
+    Code:
+         0: aload_0
+         1: ldc_w         #413                // String Expiry attempt
+         4: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         7: pop
+         8: aload_0
+         9: invokevirtual #415                // Method dev/codex/schubert/nk/batch/repository/BatchStepAttempt.step:()Ldev/codex/schubert/nk/batch/repository/BatchStep;
+        12: getstatic     #419                // Field dev/codex/schubert/nk/batch/repository/BatchStep.CLEAN_EXPIRY:Ldev/codex/schubert/nk/batch/repository/BatchStep;
+        15: if_acmpne     25
+        18: aload_0
+        19: invokevirtual #425                // Method dev/codex/schubert/nk/batch/repository/BatchStepAttempt.skipped:()Z
+        22: ifeq          36
+        25: new           #230                // class java/lang/IllegalArgumentException
+        28: dup
+        29: ldc_w         #428                // String invalid Expiry attempt
+        32: invokespecial #234                // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        35: athrow
+        36: return
+
+  private void guarded(dev.codex.schubert.nk.batch.repository.BatchRun);
+    Code:
+         0: aload_0
+         1: getfield      #28                 // Field references:Ldev/codex/schubert/nk/batch/repository/RunReferenceRepository;
+         4: aload_1
+         5: invokevirtual #430                // Method dev/codex/schubert/nk/batch/repository/RunReferenceRepository.read:(Ldev/codex/schubert/nk/batch/repository/BatchRun;)Ldev/codex/schubert/nk/batch/repository/RunReferences;
+         8: invokevirtual #433                // Method dev/codex/schubert/nk/batch/repository/RunReferences.identityConsistent:()Z
+        11: ifne          22
+        14: new           #82                 // class dev/codex/schubert/nk/batch/repository/BatchRepositoryException
+        17: dup
+        18: invokespecial #84                 // Method dev/codex/schubert/nk/batch/repository/BatchRepositoryException."<init>":()V
+        21: athrow
+        22: return
+
+  static <T> T required(T);
+    Code:
+         0: aload_0
+         1: ifnonnull     12
+         4: new           #82                 // class dev/codex/schubert/nk/batch/repository/BatchRepositoryException
+         7: dup
+         8: invokespecial #84                 // Method dev/codex/schubert/nk/batch/repository/BatchRepositoryException."<init>":()V
+        11: athrow
+        12: aload_0
+        13: areturn
+
+  static void verifySuccessfulAudit(dev.codex.schubert.nk.batch.repository.ExpiryAuditRepository$Snapshot, java.time.Instant);
+    Code:
+         0: aload_0
+         1: ldc_w         #438                // String retained audit
+         4: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         7: pop
+         8: aload_1
+         9: ldc_w         #440                // String observation time
+        12: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        15: pop
+        16: aload_0
+        17: invokevirtual #366                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.ended:()Ljava/time/Instant;
+        20: astore_2
+        21: ldc_w         #361                // String SUCCESS
+        24: aload_0
+        25: invokevirtual #352                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.status:()Ljava/lang/String;
+        28: invokevirtual #356                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        31: ifeq          60
+        34: aload_2
+        35: ifnull        60
+        38: aload_2
+        39: aload_1
+        40: invokevirtual #442                // Method java/time/Instant.isAfter:(Ljava/time/Instant;)Z
+        43: ifne          60
+        46: aload_0
+        47: invokevirtual #390                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.errorCode:()Ljava/lang/String;
+        50: ifnonnull     60
+        53: aload_0
+        54: invokevirtual #393                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.errorSummary:()Ljava/lang/String;
+        57: ifnull        68
+        60: new           #82                 // class dev/codex/schubert/nk/batch/repository/BatchRepositoryException
+        63: dup
+        64: invokespecial #84                 // Method dev/codex/schubert/nk/batch/repository/BatchRepositoryException."<init>":()V
+        67: athrow
+        68: return
+
+  static <T> java.util.Optional<dev.codex.schubert.nk.batch.repository.ExpiryAuditRepository$Prior> usingJdbc(dev.codex.schubert.nk.batch.repository.ExpiryAuditRepository$JdbcAcquire<T>, dev.codex.schubert.nk.batch.repository.ExpiryAuditRepository$JdbcRelease<T>, dev.codex.schubert.nk.batch.repository.ExpiryAuditRepository$JdbcRead<T>) throws java.sql.SQLException, java.io.IOException;
+    Code:
+         0: aload_0
+         1: ldc_w         #445                // String owned JDBC acquisition
+         4: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         7: pop
+         8: aload_1
+         9: ldc_w         #447                // String owned JDBC close
+        12: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        15: pop
+        16: aload_2
+        17: ldc_w         #449                // String owned JDBC body
+        20: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        23: pop
+        24: aload_0
+        25: invokeinterface #451,  1          // InterfaceMethod dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$JdbcAcquire.open:()Ljava/lang/Object;
+        30: invokestatic  #124                // Method required:(Ljava/lang/Object;)Ljava/lang/Object;
+        33: astore_3
+        34: aload_2
+        35: aload_3
+        36: invokeinterface #455,  2          // InterfaceMethod dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$JdbcRead.read:(Ljava/lang/Object;)Ljava/util/Optional;
+        41: astore        4
+        43: goto          70
+        46: astore        5
+        48: aload_1
+        49: aload_3
+        50: invokeinterface #459,  2          // InterfaceMethod dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$JdbcRelease.close:(Ljava/lang/Object;)V
+        55: goto          67
+        58: astore        6
+        60: aload         5
+        62: aload         6
+        64: invokevirtual #181                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+        67: aload         5
+        69: athrow
+        70: aload_1
+        71: aload_3
+        72: invokeinterface #459,  2          // InterfaceMethod dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$JdbcRelease.close:(Ljava/lang/Object;)V
+        77: aload         4
+        79: areturn
+      Exception table:
+         from    to  target type
+            34    43    46   Class java/lang/Throwable
+            48    55    58   Class java/lang/Throwable
+
+  private java.util.Optional lambda$successful$2(dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame$Guard, dev.codex.schubert.nk.batch.repository.BatchRun, dev.codex.schubert.nk.batch.repository.SuccessRunLookup, java.time.Instant, java.sql.PreparedStatement) throws java.sql.SQLException, java.io.IOException;
+    Code:
+         0: aload         5
+         2: aload_1
+         3: invokeinterface #464,  1          // InterfaceMethod dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Guard.queryTimeoutSeconds:()I
+         8: invokeinterface #129,  2          // InterfaceMethod java/sql/PreparedStatement.setQueryTimeout:(I)V
+        13: aload_2
+        14: invokevirtual #95                 // Method dev/codex/schubert/nk/batch/repository/BatchRun.cutoff:()Ljava/time/Instant;
+        17: ldc_w         #467                // String Asia/Tokyo
+        20: invokestatic  #469                // Method java/time/ZoneId.of:(Ljava/lang/String;)Ljava/time/ZoneId;
+        23: invokevirtual #474                // Method java/time/Instant.atZone:(Ljava/time/ZoneId;)Ljava/time/ZonedDateTime;
+        26: invokevirtual #478                // Method java/time/ZonedDateTime.toLocalDate:()Ljava/time/LocalDate;
+        29: astore        6
+        31: aload         5
+        33: iconst_1
+        34: aload         6
+        36: invokeinterface #144,  3          // InterfaceMethod java/sql/PreparedStatement.setObject:(ILjava/lang/Object;)V
+        41: aload         5
+        43: dup
+        44: invokestatic  #32                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+        47: pop
+        48: invokedynamic #483,  0            // InvokeDynamic #4:open:(Ljava/sql/PreparedStatement;)Ldev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$JdbcAcquire;
+        53: invokedynamic #486,  0            // InvokeDynamic #5:close:()Ldev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$JdbcRelease;
+        58: aload_0
+        59: aload_1
+        60: aload_3
+        61: aload         4
+        63: aload         6
+        65: aload_2
+        66: invokedynamic #487,  0            // InvokeDynamic #6:read:(Ldev/codex/schubert/nk/batch/repository/ExpiryAuditRepository;Ldev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Guard;Ldev/codex/schubert/nk/batch/repository/SuccessRunLookup;Ljava/time/Instant;Ljava/time/LocalDate;Ldev/codex/schubert/nk/batch/repository/BatchRun;)Ldev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$JdbcRead;
+        71: invokestatic  #70                 // Method usingJdbc:(Ldev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$JdbcAcquire;Ldev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$JdbcRelease;Ldev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$JdbcRead;)Ljava/util/Optional;
+        74: areturn
+
+  private java.util.Optional lambda$successful$3(dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame$Guard, dev.codex.schubert.nk.batch.repository.SuccessRunLookup, java.time.Instant, java.time.LocalDate, dev.codex.schubert.nk.batch.repository.BatchRun, java.sql.ResultSet) throws java.sql.SQLException, java.io.IOException;
+    Code:
+         0: aload         6
+         2: invokeinterface #277,  1          // InterfaceMethod java/sql/ResultSet.next:()Z
+         7: ifne          20
+        10: aload_1
+        11: invokeinterface #49,  1           // InterfaceMethod dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Guard.check:()V
+        16: invokestatic  #281                // Method java/util/Optional.empty:()Ljava/util/Optional;
+        19: areturn
+        20: aload         6
+        22: ldc_w         #490                // String run_id
+        25: ldc_w         #492                // class java/util/UUID
+        28: invokeinterface #300,  3          // InterfaceMethod java/sql/ResultSet.getObject:(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;
+        33: checkcast     #492                // class java/util/UUID
+        36: invokestatic  #124                // Method required:(Ljava/lang/Object;)Ljava/lang/Object;
+        39: checkcast     #492                // class java/util/UUID
+        42: astore        7
+        44: aload_2
+        45: aload         7
+        47: aload_3
+        48: invokeinterface #494,  3          // InterfaceMethod dev/codex/schubert/nk/batch/repository/SuccessRunLookup.resolve:(Ljava/util/UUID;Ljava/time/Instant;)Ldev/codex/schubert/nk/batch/repository/BatchRun;
+        53: invokestatic  #32                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+        56: checkcast     #96                 // class dev/codex/schubert/nk/batch/repository/BatchRun
+        59: astore        8
+        61: aload         7
+        63: aload         8
+        65: invokevirtual #399                // Method dev/codex/schubert/nk/batch/repository/BatchRun.id:()Ljava/util/UUID;
+        68: invokevirtual #499                // Method java/util/UUID.equals:(Ljava/lang/Object;)Z
+        71: ifeq          99
+        74: aload         4
+        76: aload         8
+        78: invokevirtual #95                 // Method dev/codex/schubert/nk/batch/repository/BatchRun.cutoff:()Ljava/time/Instant;
+        81: ldc_w         #467                // String Asia/Tokyo
+        84: invokestatic  #469                // Method java/time/ZoneId.of:(Ljava/lang/String;)Ljava/time/ZoneId;
+        87: invokevirtual #474                // Method java/time/Instant.atZone:(Ljava/time/ZoneId;)Ljava/time/ZonedDateTime;
+        90: invokevirtual #478                // Method java/time/ZonedDateTime.toLocalDate:()Ljava/time/LocalDate;
+        93: invokevirtual #500                // Method java/time/LocalDate.equals:(Ljava/lang/Object;)Z
+        96: ifne          107
+        99: new           #82                 // class dev/codex/schubert/nk/batch/repository/BatchRepositoryException
+       102: dup
+       103: invokespecial #84                 // Method dev/codex/schubert/nk/batch/repository/BatchRepositoryException."<init>":()V
+       106: athrow
+       107: aload_0
+       108: aload         8
+       110: invokevirtual #54                 // Method guarded:(Ldev/codex/schubert/nk/batch/repository/BatchRun;)V
+       113: new           #44                 // class dev/codex/schubert/nk/batch/repository/BatchStepAttempt
+       116: dup
+       117: aload         6
+       119: ldc_w         #503                // String id
+       122: ldc           #226                // class java/lang/Long
+       124: invokeinterface #300,  3          // InterfaceMethod java/sql/ResultSet.getObject:(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;
+       129: checkcast     #226                // class java/lang/Long
+       132: invokestatic  #124                // Method required:(Ljava/lang/Object;)Ljava/lang/Object;
+       135: checkcast     #226                // class java/lang/Long
+       138: invokevirtual #225                // Method java/lang/Long.longValue:()J
+       141: aload         8
+       143: getstatic     #419                // Field dev/codex/schubert/nk/batch/repository/BatchStep.CLEAN_EXPIRY:Ldev/codex/schubert/nk/batch/repository/BatchStep;
+       146: aload         6
+       148: ldc_w         #504                // String attempt
+       151: ldc_w         #505                // class java/lang/Integer
+       154: invokeinterface #300,  3          // InterfaceMethod java/sql/ResultSet.getObject:(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;
+       159: checkcast     #505                // class java/lang/Integer
+       162: invokestatic  #124                // Method required:(Ljava/lang/Object;)Ljava/lang/Object;
+       165: checkcast     #505                // class java/lang/Integer
+       168: invokevirtual #507                // Method java/lang/Integer.intValue:()I
+       171: aload         6
+       173: ldc_w         #510                // String started_at
+       176: ldc_w         #298                // class java/time/OffsetDateTime
+       179: invokeinterface #300,  3          // InterfaceMethod java/sql/ResultSet.getObject:(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;
+       184: checkcast     #298                // class java/time/OffsetDateTime
+       187: invokestatic  #124                // Method required:(Ljava/lang/Object;)Ljava/lang/Object;
+       190: checkcast     #298                // class java/time/OffsetDateTime
+       193: invokevirtual #315                // Method java/time/OffsetDateTime.toInstant:()Ljava/time/Instant;
+       196: iconst_0
+       197: invokespecial #512                // Method dev/codex/schubert/nk/batch/repository/BatchStepAttempt."<init>":(JLdev/codex/schubert/nk/batch/repository/BatchRun;Ldev/codex/schubert/nk/batch/repository/BatchStep;ILjava/time/Instant;Z)V
+       200: astore        9
+       202: aload         6
+       204: invokeinterface #277,  1          // InterfaceMethod java/sql/ResultSet.next:()Z
+       209: ifeq          220
+       212: new           #82                 // class dev/codex/schubert/nk/batch/repository/BatchRepositoryException
+       215: dup
+       216: invokespecial #84                 // Method dev/codex/schubert/nk/batch/repository/BatchRepositoryException."<init>":()V
+       219: athrow
+       220: aload_0
+       221: aload         9
+       223: invokevirtual #170                // Method read:(Ldev/codex/schubert/nk/batch/repository/BatchStepAttempt;)Ljava/util/Optional;
+       226: invokedynamic #515,  0            // InvokeDynamic #7:get:()Ljava/util/function/Supplier;
+       231: invokevirtual #518                // Method java/util/Optional.orElseThrow:(Ljava/util/function/Supplier;)Ljava/lang/Object;
+       234: checkcast     #306                // class dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot
+       237: astore        10
+       239: aload         10
+       241: aload_3
+       242: invokestatic  #522                // Method verifySuccessfulAudit:(Ldev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot;Ljava/time/Instant;)V
+       245: aload_1
+       246: invokeinterface #49,  1           // InterfaceMethod dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Guard.check:()V
+       251: aload_0
+       252: aload         5
+       254: invokevirtual #54                 // Method guarded:(Ldev/codex/schubert/nk/batch/repository/BatchRun;)V
+       257: new           #526                // class dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Prior
+       260: dup
+       261: aload         9
+       263: aload         10
+       265: invokespecial #528                // Method dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Prior."<init>":(Ldev/codex/schubert/nk/batch/repository/BatchStepAttempt;Ldev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot;)V
+       268: invokestatic  #346                // Method java/util/Optional.of:(Ljava/lang/Object;)Ljava/util/Optional;
+       271: areturn
+
+  private java.sql.PreparedStatement lambda$successful$1() throws java.sql.SQLException;
+    Code:
+         0: aload_0
+         1: getfield      #17                 // Field connection:Ljava/sql/Connection;
+         4: ldc_w         #531                // String select id,run_id,attempt,started_at from schubert.batch_runs where business_date=? and step=\'CLEAN_EXPIRY\' and status=\'SUCCESS\' order by attempt desc limit 2
+         7: invokeinterface #120,  2          // InterfaceMethod java/sql/Connection.prepareStatement:(Ljava/lang/String;)Ljava/sql/PreparedStatement;
+        12: areturn
+
+  private static dev.codex.schubert.nk.batch.repository.BatchRun lambda$successful$0(dev.codex.schubert.nk.batch.repository.BatchRun, java.util.UUID, java.time.Instant) throws java.io.IOException;
+    Code:
+         0: aload_1
+         1: aload_0
+         2: invokevirtual #399                // Method dev/codex/schubert/nk/batch/repository/BatchRun.id:()Ljava/util/UUID;
+         5: invokevirtual #499                // Method java/util/UUID.equals:(Ljava/lang/Object;)Z
+         8: ifne          22
+        11: new           #533                // class java/io/IOException
+        14: dup
+        15: ldc_w         #535                // String Expiry original unavailable
+        18: invokespecial #537                // Method java/io/IOException."<init>":(Ljava/lang/String;)V
+        21: athrow
+        22: aload_0
+        23: areturn
+}

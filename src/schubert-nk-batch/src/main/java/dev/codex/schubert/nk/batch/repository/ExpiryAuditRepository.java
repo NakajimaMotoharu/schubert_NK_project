@@ -1,6 +1,6 @@
 package dev.codex.schubert.nk.batch.repository;
 
-import dev.codex.schubert.nk.storage.StorageIoException;
+import dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -154,7 +154,7 @@ public final class ExpiryAuditRepository {
                 });
           });
     } catch (SQLException known) {
-      StorageIoException.preserveFatal(known);
+      JdbcFailureGraph.preserveFatal(known);
       throw new BatchRepositoryException();
     }
   }
@@ -184,7 +184,7 @@ public final class ExpiryAuditRepository {
       // id is the table PK, so a real UPDATE can affect only zero or one row.
       if (changed == 0 && !matchesStage(read(attempt), stage)) throw new BatchRepositoryException();
     } catch (SQLException | RuntimeException failure) {
-      StorageIoException.preserveFatal(failure);
+      JdbcFailureGraph.preserveFatal(failure);
       throw new BatchRepositoryException();
     }
     guarded(attempt.run());
@@ -244,7 +244,7 @@ public final class ExpiryAuditRepository {
       if (changed == 0 && !matchesTerminal(read(attempt), stage, ended, actualAfter, result))
         throw new BatchRepositoryException();
     } catch (SQLException | RuntimeException failure) {
-      StorageIoException.preserveFatal(failure);
+      JdbcFailureGraph.preserveFatal(failure);
       throw new BatchRepositoryException();
     }
     guarded(attempt.run());
@@ -316,7 +316,7 @@ public final class ExpiryAuditRepository {
           }
       }
     } catch (SQLException failure) {
-      StorageIoException.preserveFatal(failure);
+      JdbcFailureGraph.preserveFatal(failure);
       throw new BatchRepositoryException();
     }
   }

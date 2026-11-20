@@ -1,0 +1,82 @@
+{
+  "mode": "before",
+  "groupStart": "PGPT-20261008-6574",
+  "baselineCore": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+  "checkoutHead": "dae7bb55f0629442aa0f64fe15c662c9d9bfb116",
+  "actualExit": 1,
+  "unit": {},
+  "stages": {
+    "compile": {
+      "actualExit": 1,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-g",
+        "-cp",
+        "/dev/shm/pgpt-expiry-before-tzdzzigs/deps:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "-d",
+        "/dev/shm/pgpt-expiry-before-tzdzzigs/main",
+        "/dev/shm/pgpt-expiry-before-tzdzzigs/ExpiryAuditRepository.java"
+      ],
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40694-f02-expiry-audit-jdbc-owner-v1-before/compile.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40694-f02-expiry-audit-jdbc-owner-v1-before/compile.stderr",
+        "sha256": "9770c7b3d5f89fec08105db5b8f625772153a9c90f2323a5783b3fd870fdebc9"
+      }
+    },
+    "abi": {
+      "actualExit": 1,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-classpath",
+        "/dev/shm/pgpt-expiry-before-tzdzzigs/main",
+        "-public",
+        "dev.codex.schubert.nk.batch.repository.ExpiryAuditRepository"
+      ],
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40694-f02-expiry-audit-jdbc-owner-v1-before/abi.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40694-f02-expiry-audit-jdbc-owner-v1-before/abi.stderr",
+        "sha256": "3d3be9cffcce05e70180379a659ff277a5bdd18a47218c0df543307ffe94a6a2"
+      }
+    }
+  },
+  "main": {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+    "sha256": "25c64d75bc37274c1cc27cbca5ddf64af35983a43605c323456f007bfdfdacda"
+  },
+  "test": {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditJdbcFailureGraphTest.java",
+    "sha256": "6ee8351e1b83811ecff7975ddaa3c9b042245979bc018e5a8f7a1a782877e917"
+  },
+  "physical": {},
+  "pinnedAllowedDependencies": {
+    "dev/codex/schubert/nk/batch/repository/BatchRepositoryException.class": "391b1aac7be2dd58cf9c3dee11cdd12941417fa7d029513475dfffbe4a3d2cb1",
+    "dev/codex/schubert/nk/batch/repository/BatchRun.class": "5cb0c42832ea17425dbf60da6025f2c4783d687e665b18f6cd8e88abc399c909",
+    "dev/codex/schubert/nk/batch/repository/BatchStep.class": "06e90b35ca09ac687bfd480caac794fa7be6a47dff9db3d397e682f75f010b1c",
+    "dev/codex/schubert/nk/batch/repository/BatchStepAttempt.class": "d61f86c115e29d12da29964711253fcd3e8fc64b8cb2d263efd87702295ae547",
+    "dev/codex/schubert/nk/batch/repository/BatchStepResult.class": "d30ca3fc460ebcceb4daee963ab618f582adb9dfdd916e9daeb51f3207a77417",
+    "dev/codex/schubert/nk/batch/repository/BatchStepResult$Status.class": "08893a338b6e7ffab7272cd1789215001855261ec7ac0a4dafa92f41af5a3a27",
+    "dev/codex/schubert/nk/batch/repository/BatchStepResult$Reason.class": "5006eeb26f8c82ba35e7830649019b41125edae1d8e396cdd411fee2f82830a7",
+    "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.class": "f181015412f1f293e91c0eea24a3ac33127d5ef5015f3dc9fb73ac732e0cc009",
+    "dev/codex/schubert/nk/batch/repository/RunReferenceRepository.class": "dc394e1d15ba729bbecd4f895c264b3adb042233f8ac7d603cab68d6e91682bb",
+    "dev/codex/schubert/nk/batch/repository/RunReferences.class": "9cd7197824647e7ad066678a66a54bfdf196f0251027bebeb765b6babd8d8fe2",
+    "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class": "cc8265242a1cd41cc7c77b8e12185cbc387fb583d70e1d1171ba467cb0f3d552",
+    "dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Guard.class": "53f2b39f586ec6ee172b0e3009d46638a60ca8f1ce8ad442f497affa6cbd869b",
+    "dev/codex/schubert/nk/storage/StorageIoException.class": "85f86d702a139f126afdd72ca8e221583db824f159351ecd9f07b15fcc569c88",
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason.class": "a113bd839666ee3a4038dd3703af0cfb772282278cc6fbfe1e3cccf98286ffec"
+  },
+  "session": "PG40694-EXPIRY-JDBC-BEFORE",
+  "actualExternalActions": 0,
+  "all451": false,
+  "terminalAtUTC": "2026-11-20T06:02:47.163223+00:00"
+}

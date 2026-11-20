@@ -1,0 +1,68 @@
+{
+  "eventId": "PGPT-20261008-6574",
+  "groupId": "wbs66-f02-ssc461-expiry-audit-jdbc-owner",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T06:00:40.351000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 63,
+      "remainingPercent": 37,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "wbs66-f02-ssc461-expiry-audit-jdbc-owner",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "wbs66-f02-ssc461-expiry-audit-jdbc-owner",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a",
+      "WBS-F02-b"
+    ],
+    "source": "dae7bb55f0629442aa0f64fe15c662c9d9bfb116",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40694-f02-expiry-audit-jdbc-owner-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.6,
+      "base": 1.5,
+      "high": 2.5
+    },
+    "groupCapPp": 4,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1054_F03Outbox二型と継続点.json",
+        "sha256": "179ce1a3d86717d99540232b9ff698a404493ee2be262d229586932121fcdae1"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40438-f02-ssc461-exact-current-callers-v1/manifest.json",
+        "sha256": "e79cbfbcdc9c2ebe645b74f86875db19d7a35252d5c8961600075eb38bfd6ea5"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40498-schema-history-packaged-proof-recovered-v1/manifest.json",
+        "sha256": "bba0cb1781e36039e9014b8a7f27e4ab2354ef78283181a704bae5dba9fd9b0f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40692-f03-outbox-static-independent-v1/manifest.json",
+        "sha256": "37037bbc2a513992feaa8d151329bd8777afdd7a9b141484d4578484e24ecfcd"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "Approved SSC461 existing JdbcFailureGraph; inspect the four remaining ExpiryAuditRepository JDBC diagnostic sites. Run only in-memory Java interface-proxy tests with an offline compile.",
+    "endCondition": "Transfer 4 caller sites to framework-owned adapter, test exact fatal identity and nonfatal fixed diagnosis on each entry, prove no live DB, no transaction/SQL/ABI change. Keep legacy Storage edge open.",
+    "workScope": "WBS-F02/SYS-005; BL-BAT PT-BAT-284..287; SSC461 BUG3233 YKT2680. No actual deletion, broker, DB, service, Root/permit, or held class."
+  }
+}

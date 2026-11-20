@@ -1,0 +1,156 @@
+{
+  "actualExit": 0,
+  "beforeSource": {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+    "sha256": "25c64d75bc37274c1cc27cbca5ddf64af35983a43605c323456f007bfdfdacda"
+  },
+  "candidateSource": {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+    "sha256": "a7342deaf0a4047e6a8c257385ef7d1e3d4581f7cd2a5e71153e5e42b6b64618"
+  },
+  "test": {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditJdbcFailureGraphTest.java",
+    "sha256": "6ee8351e1b83811ecff7975ddaa3c9b042245979bc018e5a8f7a1a782877e917"
+  },
+  "baselineCore": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+  "oldCallEdges": 4,
+  "movedCallEdges": 4,
+  "otherMainChanges": 0,
+  "casesBefore": 8,
+  "casesAfter": 8,
+  "newSelectedProductionTests": 8,
+  "abiEqual": true,
+  "liveOwnedJobs": 0,
+  "counters": {
+    "LINE": {
+      "covered": 63,
+      "missed": 196
+    },
+    "METHOD": {
+      "covered": 14,
+      "missed": 35
+    },
+    "CLASS": {
+      "covered": 2,
+      "missed": 2
+    },
+    "BRANCH": {
+      "covered": 19,
+      "missed": 193
+    },
+    "INSTRUCTION": {
+      "covered": 265,
+      "missed": 1164
+    }
+  },
+  "oldExecMerged": false,
+  "commandReceipts": {
+    "format": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditJdbcFailureGraphTest.java"
+      ],
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40698-f02-expiry-audit-jdbc-independent-v1/format.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40698-f02-expiry-audit-jdbc-independent-v1/format.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "checkstyle": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "-o",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40698-f02-expiry-audit-jdbc-independent-v1/checkstyle.xml",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditJdbcFailureGraphTest.java"
+      ],
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40698-f02-expiry-audit-jdbc-independent-v1/checkstyle.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40698-f02-expiry-audit-jdbc-independent-v1/checkstyle.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "caseIdentities": [
+    "emitsOnlyTheFixedNonfatalDiagnostic",
+    "preservesTheFirstFatalFromTheSqlNextChain"
+  ],
+  "evidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40696-f02-expiry-audit-jdbc-owner-v2-before/manifest.json",
+      "sha256": "8bda16601922f14de0a7ee445a41c840cb7c03dcbb20925820124a390a2a3716"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40696-f02-expiry-audit-jdbc-owner-v2-after/manifest.json",
+      "sha256": "16153697ac2a9c051cb133354bd2982c6b21e53d85848273c6a0799d21c63dfc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40696-f02-expiry-audit-jdbc-owner-v2-before/junit.xml",
+      "sha256": "cb46a75bccfd3d07d28594fb2eaab52bb6346404eb405b38f5bbb4216dccf49b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40696-f02-expiry-audit-jdbc-owner-v2-before/jacoco.exec",
+      "sha256": "b523a7a6662b28a1366b575cffd71514d71e01e9a2e81de8891cf5c4fbe09dda"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40696-f02-expiry-audit-jdbc-owner-v2-before/unfiltered.stdout",
+      "sha256": "aa69dd91f8b7c260dc3482793a365ca0fcd1e5416900c8fc1cd08ba72d153b7c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40696-f02-expiry-audit-jdbc-owner-v2-after/junit.xml",
+      "sha256": "c4f9bcf2bd2b72723a491ecea31c63682e696232a5367be2105e8eaafbf41429"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40696-f02-expiry-audit-jdbc-owner-v2-after/jacoco.exec",
+      "sha256": "7c0d7bb395a3a41b35a993eac1481bc0d968eb647efe489c748a73c1466de3a4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40696-f02-expiry-audit-jdbc-owner-v2-after/unfiltered.stdout",
+      "sha256": "6685db947f78fabb70627400fe18e8731df5aab653080a7d89717e9aba949aa9"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40698-f02-expiry-audit-jdbc-independent-v1/checkstyle.xml",
+      "sha256": "6fbfc31c03ec83890e2a57444b8ca9fe759cd9d7191879443b6bea929fcb7acc"
+    }
+  ],
+  "whole451": false,
+  "formalDelta": 0,
+  "relatedLedgers": [
+    "SSC-461",
+    "BUG-3233",
+    "YKT-2680",
+    "BUG-3402",
+    "BUG-3403"
+  ],
+  "independentPostAttempts": [
+    {
+      "actualExit": 1,
+      "stage": "LEGACY_XML_PARAMETER_DISPLAY_NAME"
+    },
+    {
+      "actualExit": 0,
+      "stage": "XML_INDEX_AND_CONSOLE_DISPLAY"
+    }
+  ],
+  "terminalAtUTC": "2026-11-20T06:05:28.619052+00:00"
+}
