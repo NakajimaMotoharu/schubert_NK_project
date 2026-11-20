@@ -1,0 +1,183 @@
+{
+  "actualExit": 0,
+  "mode": "after",
+  "source": "c4023b763fe502eae9004809eb80e41561a284a7",
+  "productionCore": "cb1411d94a1d97aedafe1af60400aaec0ae8c8e8",
+  "checks": [
+    {
+      "testId": "PT-F02-APPSTORAGE-001",
+      "origin": "dev.codex.schubert.nk.api.application.UseCase",
+      "target": "dev.codex.schubert.nk.storage.FileReference",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "testId": "PT-F02-APPSTORAGE-002",
+      "origin": "dev.codex.schubert.nk.api.domain.Value",
+      "target": "dev.codex.schubert.nk.storage.FileReference",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "testId": "PT-F02-APPSTORAGE-003",
+      "origin": "dev.codex.schubert.nk.web.application.Facade",
+      "target": "dev.codex.schubert.nk.storage.FileReference",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "testId": "PT-F02-APPSTORAGE-004",
+      "origin": "dev.codex.schubert.nk.web.domain.View",
+      "target": "dev.codex.schubert.nk.storage.FileReference",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "testId": "PT-F02-APPSTORAGE-005",
+      "origin": "dev.codex.schubert.nk.api.storage.Adapter",
+      "target": "dev.codex.schubert.nk.storage.FileReference",
+      "expected": false,
+      "actual": false
+    },
+    {
+      "testId": "PT-F02-APPSTORAGE-006",
+      "origin": "dev.codex.schubert.nk.web.storage.Adapter",
+      "target": "dev.codex.schubert.nk.storage.FileReference",
+      "expected": false,
+      "actual": false
+    },
+    {
+      "testId": "PT-F02-APPSTORAGE-007",
+      "origin": "dev.codex.schubert.nk.batch.file.Adapter",
+      "target": "dev.codex.schubert.nk.storage.FileReference",
+      "expected": false,
+      "actual": false
+    },
+    {
+      "testId": "PT-F02-APPSTORAGE-008",
+      "origin": "dev.codex.schubert.nk.api.application.Service",
+      "target": "dev.codex.schubert.nk.api.storage.Adapter",
+      "expected": false,
+      "actual": false
+    },
+    {
+      "testId": "PT-F02-APPSTORAGE-009",
+      "origin": "dev.codex.schubert.nk.web.application.Presenter",
+      "target": "dev.codex.schubert.nk.web.storage.Adapter",
+      "expected": false,
+      "actual": false
+    }
+  ],
+  "correct": 9,
+  "fixturePhysicalHashes": {
+    "dev/codex/schubert/nk/protocol/AuditMarker.class": "60f00de35b457a37312b9d71e3a1f4b6012af33decdae0931e22424a27a1ef71",
+    "dev/codex/schubert/nk/storage/AuditMarker.class": "f41d7fedb5dbb0b7c7a480a0d6300e332987255dbfacecec066ff36c759e09e0",
+    "dev/codex/schubert/nk/storage/FileReference.class": "e0c58bce39d5ab1d2fea2f48b4ecb10b07ae7537d4eb3c0cb30f440ae4b05dda",
+    "dev/codex/schubert/nk/bootstrap/AuditMarker.class": "cc33bc02c18a4d7df2a0660140c7d6c74668469953039f0d2eb8e47d1c3beb51",
+    "dev/codex/schubert/nk/api/AuditMarker.class": "0c05131487a6cf86001d0ed69277e93ade05a287ecd74bfb8121141037b442ff",
+    "dev/codex/schubert/nk/api/application/UseCase.class": "4b9e3c7a9f5c742de2fca1889e5fe867cf5e1a1f0a8deca6fc51c055725e2581",
+    "dev/codex/schubert/nk/api/domain/Value.class": "13b0ded115936ca8a41f26eca307a97d35e0a1da62f600c8e53003373096bd38",
+    "dev/codex/schubert/nk/api/storage/Adapter.class": "722b777ab387165f2eae2fdf3ec810ba0bba4b1eae9749e6d5a8bd5111c50d15",
+    "dev/codex/schubert/nk/api/application/Service.class": "35a9653cec42b5aee5d81b13b9cf824b712a3745fe537ff7b5bb047b19649d45",
+    "dev/codex/schubert/nk/web/AuditMarker.class": "8711bac00e023aa45af51ec81a8a4ed16424e0c3c584d55416116e4fbc6f446a",
+    "dev/codex/schubert/nk/web/application/Facade.class": "83d86884c2f168f5a2dd5b1f49ebb6d770bca9bb6dd43d5cdaaa4b665c156da1",
+    "dev/codex/schubert/nk/web/domain/View.class": "1058cba391379b88cb9739b0504240dc64a510f5012d71e15bfdcab742ba4bed",
+    "dev/codex/schubert/nk/web/storage/Adapter.class": "1d5fa8988ae8d653457bad60a83617602f794ca2dc022c070ea8070085d2380a",
+    "dev/codex/schubert/nk/web/application/Presenter.class": "8bbcb08680d5db33a9252010e56f6580b24c51efea012c2bf5b31af9612b9125",
+    "dev/codex/schubert/nk/batch/AuditMarker.class": "c2ad5268ba50d20bc90e4b30e38a2380502635e74a95bd954595640c96a58b69",
+    "dev/codex/schubert/nk/batch/file/Adapter.class": "56d75686b626242dbe3e767b9bd401993a0ee834ef82202420ac96dd701d6e39"
+  },
+  "exactReadPhysicals": 16,
+  "toolSha256": "0277e6ec0a8e01abd7773c730912d839e7944e58a419e8064320f580f2b58baf",
+  "receipts": {
+    "compile-tool": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40434-f02-application-domain-storage-after-v1/compile-tool.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40434-f02-application-domain-storage-after-v1/compile-tool.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "-d",
+        "/dev/shm/pgpt-arch-business-file-edge-tkcux7k2/tool",
+        "/dev/shm/pgpt-arch-business-file-edge-tkcux7k2/ModuleDependencyAudit.java"
+      ]
+    },
+    "compile-fixture": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40434-f02-application-domain-storage-after-v1/compile-fixture.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40434-f02-application-domain-storage-after-v1/compile-fixture.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-d",
+        "/dev/shm/pgpt-arch-business-file-edge-tkcux7k2/classes",
+        "/dev/shm/pgpt-arch-business-file-edge-tkcux7k2/fixture/dev/codex/schubert/nk/protocol/AuditMarker.java",
+        "/dev/shm/pgpt-arch-business-file-edge-tkcux7k2/fixture/dev/codex/schubert/nk/storage/AuditMarker.java",
+        "/dev/shm/pgpt-arch-business-file-edge-tkcux7k2/fixture/dev/codex/schubert/nk/storage/FileReference.java",
+        "/dev/shm/pgpt-arch-business-file-edge-tkcux7k2/fixture/dev/codex/schubert/nk/bootstrap/AuditMarker.java",
+        "/dev/shm/pgpt-arch-business-file-edge-tkcux7k2/fixture/dev/codex/schubert/nk/api/AuditMarker.java",
+        "/dev/shm/pgpt-arch-business-file-edge-tkcux7k2/fixture/dev/codex/schubert/nk/api/application/UseCase.java",
+        "/dev/shm/pgpt-arch-business-file-edge-tkcux7k2/fixture/dev/codex/schubert/nk/api/domain/Value.java",
+        "/dev/shm/pgpt-arch-business-file-edge-tkcux7k2/fixture/dev/codex/schubert/nk/api/storage/Adapter.java",
+        "/dev/shm/pgpt-arch-business-file-edge-tkcux7k2/fixture/dev/codex/schubert/nk/api/application/Service.java",
+        "/dev/shm/pgpt-arch-business-file-edge-tkcux7k2/fixture/dev/codex/schubert/nk/web/AuditMarker.java",
+        "/dev/shm/pgpt-arch-business-file-edge-tkcux7k2/fixture/dev/codex/schubert/nk/web/application/Facade.java",
+        "/dev/shm/pgpt-arch-business-file-edge-tkcux7k2/fixture/dev/codex/schubert/nk/web/domain/View.java",
+        "/dev/shm/pgpt-arch-business-file-edge-tkcux7k2/fixture/dev/codex/schubert/nk/web/storage/Adapter.java",
+        "/dev/shm/pgpt-arch-business-file-edge-tkcux7k2/fixture/dev/codex/schubert/nk/web/application/Presenter.java",
+        "/dev/shm/pgpt-arch-business-file-edge-tkcux7k2/fixture/dev/codex/schubert/nk/batch/AuditMarker.java",
+        "/dev/shm/pgpt-arch-business-file-edge-tkcux7k2/fixture/dev/codex/schubert/nk/batch/file/Adapter.java"
+      ]
+    },
+    "audit": {
+      "actualExit": 1,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40434-f02-application-domain-storage-after-v1/audit.stdout.txt",
+        "sha256": "133a86371babbf1a76b57372d9805a18ea6fa05ee3d339140efbef50a9392408"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40434-f02-application-domain-storage-after-v1/audit.stderr.txt",
+        "sha256": "2c58b87a0350a39bb1c3b5f4891defeeb9a785e84aa11a466dc9ddb21253bf58"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/dev/shm/pgpt-arch-business-file-edge-tkcux7k2/tool:/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "ModuleDependencyAudit",
+        "protocol=/dev/shm/pgpt-arch-business-file-edge-tkcux7k2/protocol.jar",
+        "storage=/dev/shm/pgpt-arch-business-file-edge-tkcux7k2/storage.jar",
+        "bootstrap=/dev/shm/pgpt-arch-business-file-edge-tkcux7k2/bootstrap.jar",
+        "api=/dev/shm/pgpt-arch-business-file-edge-tkcux7k2/api.jar",
+        "web=/dev/shm/pgpt-arch-business-file-edge-tkcux7k2/web.jar",
+        "batch=/dev/shm/pgpt-arch-business-file-edge-tkcux7k2/batch.jar"
+      ]
+    }
+  },
+  "productTests": 0,
+  "actualProductClasses": 0,
+  "fixtureInitializations": 0,
+  "wholeF02Accepted": false,
+  "terminalAtUTC": "2026-11-20T00:27:01.316569+00:00"
+}
