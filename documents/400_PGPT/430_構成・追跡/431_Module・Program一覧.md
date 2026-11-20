@@ -989,3 +989,5 @@ PT-CHR-VERIFY-TYPE001、SS355 §4／UI264、WBS-P020-01.01/2・F03/2-2。固定�
 ### 元exec同名異CRC
 
 PT-OPS-EXEC-CRC-004、WBS-P018-08.03/2、SS354／451。厳密readerのname一意性と異なる元streamの独立読取り。 [仕様・証跡](../../../evidence/01_PT/018_NK-OPS-001/5596_P01808元exec同名異CRC仕様・結果.md)。
+
+PT-OPS-EXEC-CRC-005、WBS-P018-08.03/2、SS354／451。元execの正規符号化、独立期待値、保存元読取。 [仕様・証跡](../../../evidence/01_PT/018_NK-OPS-001/5603_P01808元exec正規符号化仕様・結果.md)。

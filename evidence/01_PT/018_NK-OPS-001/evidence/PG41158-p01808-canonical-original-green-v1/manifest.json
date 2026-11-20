@@ -1,0 +1,136 @@
+{
+  "run": "PG41158-p01808-canonical-original-green-v1",
+  "actualExit": 0,
+  "toolSource": "2a0fd6537944c6da6ea81d6e6fd4db3efa75e5f9",
+  "toolSourceSha256": "acfb221d8853ceac834f862a19717a3242d67bbb8c7508ff1a00fd5db060ef15",
+  "fixturesOnly": true,
+  "oracle": {
+    "path": "tools/quality/jacoco_readonly_exec_subset.py",
+    "sha256": "fd3fa6b3d4c7a40d888125ce4e32b390749f7fedd493234279c63a1c41ce8f8e"
+  },
+  "compiledFixtureSha256": "447fca965a8291311909a7cf9703a99ae0d96fa94f2863b3e4198b026c05d436",
+  "compileExit": 0,
+  "compiler": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+    "--release",
+    "25",
+    "-Xlint:all",
+    "-Werror",
+    "-proc:none",
+    "-cp",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+    "-d",
+    "/dev/shm/pgpt-canonical-exec-fixture-fh6ppgid/classes",
+    "/dev/shm/pgpt-canonical-exec-fixture-fh6ppgid/UnfilteredCodeMeasurement.java",
+    "/dev/shm/pgpt-canonical-exec-fixture-fh6ppgid/One.java"
+  ],
+  "cases": [
+    {
+      "case": "canonical",
+      "sha256": "ed45c267766aa5bcf35bb0ed51a0359f3c5189361495e85403d9533133fffbea",
+      "independentAccepts": true,
+      "expectedExit": 0,
+      "actualExit": 0,
+      "emittedClassRows": 1,
+      "legacyExit": null,
+      "stdoutSha256": "b030d166cc688e25d0b419a2545c746d5cc57433f578e825e6c95de0a5c08a47",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/dev/shm/pgpt-canonical-exec-fixture-fh6ppgid/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+        "--strict-original-exec",
+        "/dev/shm/pgpt-canonical-exec-fixture-fh6ppgid/canonical.exec",
+        "/dev/shm/pgpt-canonical-exec-fixture-fh6ppgid/classes/originalfixture/One.class"
+      ]
+    },
+    {
+      "case": "canonical-session-only",
+      "sha256": "9dbf5121752e74f6225b651451cf861f84be897b41e3cb160f9ad7be551dbcbb",
+      "independentAccepts": true,
+      "expectedExit": 0,
+      "actualExit": 0,
+      "emittedClassRows": 1,
+      "legacyExit": null,
+      "stdoutSha256": "918b29f315d1af1e491128f4dd8a4c5b443a2836ea72351ef67206c33e17b0f5",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/dev/shm/pgpt-canonical-exec-fixture-fh6ppgid/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+        "--strict-original-exec",
+        "/dev/shm/pgpt-canonical-exec-fixture-fh6ppgid/canonical-session-only.exec",
+        "/dev/shm/pgpt-canonical-exec-fixture-fh6ppgid/classes/originalfixture/One.class"
+      ]
+    },
+    {
+      "case": "overlong-probe-count",
+      "sha256": "d4464e43022e74e09b5ec71547218695889fd11084d02f118d69a096ebe6e134",
+      "independentAccepts": false,
+      "expectedExit": 1,
+      "actualExit": 1,
+      "emittedClassRows": 0,
+      "legacyExit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "0863c01cd0ece780e485f245562320356f4e626fec8f6aec213588d5d41cfb1d",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/dev/shm/pgpt-canonical-exec-fixture-fh6ppgid/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+        "--strict-original-exec",
+        "/dev/shm/pgpt-canonical-exec-fixture-fh6ppgid/overlong-probe-count.exec",
+        "/dev/shm/pgpt-canonical-exec-fixture-fh6ppgid/classes/originalfixture/One.class"
+      ]
+    },
+    {
+      "case": "nonzero-probe-padding",
+      "sha256": "b50e8c5bd23ecb45eeda5782c2e36743b49565c96cbc1dd28fd89d952c78bf26",
+      "independentAccepts": false,
+      "expectedExit": 1,
+      "actualExit": 1,
+      "emittedClassRows": 0,
+      "legacyExit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "0863c01cd0ece780e485f245562320356f4e626fec8f6aec213588d5d41cfb1d",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/dev/shm/pgpt-canonical-exec-fixture-fh6ppgid/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+        "--strict-original-exec",
+        "/dev/shm/pgpt-canonical-exec-fixture-fh6ppgid/nonzero-probe-padding.exec",
+        "/dev/shm/pgpt-canonical-exec-fixture-fh6ppgid/classes/originalfixture/One.class"
+      ]
+    },
+    {
+      "case": "literal-nul-in-session-label",
+      "sha256": "d34189c197bc275d46979221f20e2c041e95c16d9c64a84fbaaf67cf197db10a",
+      "independentAccepts": false,
+      "expectedExit": 1,
+      "actualExit": 1,
+      "emittedClassRows": 0,
+      "legacyExit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "0863c01cd0ece780e485f245562320356f4e626fec8f6aec213588d5d41cfb1d",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/dev/shm/pgpt-canonical-exec-fixture-fh6ppgid/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+        "--strict-original-exec",
+        "/dev/shm/pgpt-canonical-exec-fixture-fh6ppgid/literal-nul-in-session-label.exec",
+        "/dev/shm/pgpt-canonical-exec-fixture-fh6ppgid/classes/originalfixture/One.class"
+      ]
+    }
+  ],
+  "unexpected": 0,
+  "productTests": 0,
+  "nativeProcesses": 0,
+  "countedCoverage": null,
+  "formalDelta": 0,
+  "terminalAtUTC": "2026-11-20T19:36:38.723836+00:00",
+  "testId": "PT-OPS-EXEC-CRC-005"
+}
