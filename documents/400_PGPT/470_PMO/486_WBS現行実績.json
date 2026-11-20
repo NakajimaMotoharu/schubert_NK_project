@@ -9085,7 +9085,7 @@
   },
   "beforeSsc261InventorySha256": "443af5012e6a3d2a9088bb38d4a28ae3f7ff7645e6e4689fde2bea543fe19b9b",
   "beforeStrictReferenceCandidateInventorySha256": "44976d5ce11f24a89ea7db68c4d5ce1674f9a72032b6a96e453adc461a850968",
-  "inventorySha256": "8fad53a545ae70fa99942d570481b80d3d1a5ab9a00ec9a954d0906d99ef048b",
+  "inventorySha256": "ac7236a17fe0438f2a6f6db19967f7ad900eccc9a4683e680150cd70e52936e7",
   "expiryCandidateObservation": {
     "source": "1ec19782a1afe22d1de75b05f4cd12b8a8a8a172",
     "run": "PG713/714+PG715/717/719+PG722/725/728/729/730+PG737/738/739",
@@ -47295,5 +47295,48 @@
       "actualInboxDbAndExactAuthHeld": true,
       "physicalCurrentRunRequalified": false
     }
+  },
+  "currentInspectionSummaryFailurePG40852": {
+    "currentCore": "cdb649a5f054bc2ceed72ef57e55605f14a590d1",
+    "unitSource": "5f6fb7eb810c35d488d9e27d4f60e7a22c9909d2",
+    "affectedMain": {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "sha256": "5253148aa625da42d74b54ce7b7ca45639cd4392cc2a8e742315531fb8f65c24"
+    },
+    "fixture": {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryPortTest.java",
+      "sha256": "ca88a77ac3dad9b71acb0823fb5c210ec5c35a229fd037f8c5f1aff2f3082c4d"
+    },
+    "formalOwner": "WBS-P004-02",
+    "costOwner": "WBS-P004-02",
+    "testIds": [
+      "INSPPORT011",
+      "INSPPORT012"
+    ],
+    "localProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40842-p00402-inspection-sql-cycle-raw-v1/manifest.json",
+      "sha256": "b6cfcde4f75ee961bb25039283d662f914c31d7c240f6f38d0305b33f04e8231"
+    },
+    "abi": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40844-f02-inspection-repository-exact-abi-v1/manifest.json",
+      "sha256": "bce2ad96c1a5b095503075c9fd41794a81318cc9620b2998ce25c07a2c6cf138"
+    },
+    "typed": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40838-f03-inspection-summary-typed-v1/manifest.json",
+      "sha256": "90afa7c14c66be40bf8c55d2193d56955a1e3f19b1f934ee8819649e1a484ed6"
+    },
+    "priorProductTestIds": 19,
+    "newTestIdsAdded": 2,
+    "globalSourceTestsCombined": false,
+    "formalDelta": 0,
+    "related": [
+      "BUG-3416",
+      "YKT-2359",
+      "WBS-P004-02",
+      "WBS-P004-05",
+      "WBS-F03"
+    ],
+    "realDatabaseEvidence": false,
+    "whole451": false
   }
 }

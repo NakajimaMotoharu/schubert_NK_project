@@ -1,0 +1,72 @@
+{
+  "eventId": "PGPT-20261008-6776",
+  "groupId": "WBS66_CURRENT_INSPECTION_TRACE_AND_PUBLIC_SCAN",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T12:31:12.248000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 69,
+      "remainingPercent": 31,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66_CURRENT_INSPECTION_TRACE_AND_PUBLIC_SCAN",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "WBS66_CURRENT_INSPECTION_TRACE_AND_PUBLIC_SCAN",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-G08"
+    ],
+    "managementWorkIds": [
+      "WBS-G07/secret-scan",
+      "WBS-P004-02/2"
+    ],
+    "source": "c6eaf65030c2733930dc29a4c92ae4f324c636aa",
+    "productionCoreMain": "cdb649a5f054bc2ceed72ef57e55605f14a590d1",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40852-current-inspection-trace-public-increment-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.2,
+      "base": 0.6,
+      "high": 1.2
+    },
+    "groupCapPp": 10,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1258_短期12現候補の判定不足と継続点.json",
+        "sha256": "33ce78a20b9310d437097320dc4b00303608953264d8c79a76c41bc0914f0fd0"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40824-g07-current-public-increment-v1/manifest.json",
+        "sha256": "8e0e047ae4f92c459dc31aa34c337153f7ed7054a47747deba54640a6ba72221"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40842-p00402-inspection-sql-cycle-raw-v1/manifest.json",
+        "sha256": "b6cfcde4f75ee961bb25039283d662f914c31d7c240f6f38d0305b33f04e8231"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40844-f02-inspection-repository-exact-abi-v1/manifest.json",
+        "sha256": "bce2ad96c1a5b095503075c9fd41794a81318cc9620b2998ce25c07a2c6cf138"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40850-wbs66-short-12-criteria-prerequisites-v1/manifest.json",
+        "sha256": "b03d85e298020e37b6755a38eac097d316ec441516d274897f1f07d9d9a44317"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "新cdb CoreとINSPPORT011/012の485/486結合が未反映。公開増分はPG40824以後の一意範囲だけ。",
+    "endCondition": "新試験の独立trace、公開差分scan、元735?成果と正式値を保持し現一覧を照合。",
+    "workScope": "公開diffと所有台帳のみ。実試験ほかの既成功や保留は再演せず、秘密を出力しない。"
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "eventId": "PGPT-20261008-6778",
+  "wbsLeafIds": [
+    "WBS-G08"
+  ],
+  "managementWorkIds": [
+    "WBS-G07/secret-scan",
+    "WBS-P004-02/2"
+  ],
+  "workCategory": "CONTRACT_AUDIT",
+  "source": "c6eaf65030c2733930dc29a4c92ae4f324c636aa",
+  "productionCoreMain": "cdb649a5f054bc2ceed72ef57e55605f14a590d1",
+  "previousCheckpoint": "1258",
+  "groupEvents": [
+    "PGPT-20261008-6777"
+  ],
+  "acceptedOriginal": 17,
+  "total": 190,
+  "coreAccepted": 0,
+  "coreTotal": 5,
+  "officialPtTests": 1964,
+  "officialPtScopes": 53,
+  "newFormalAcceptance": 0,
+  "effortRate": null,
+  "actualAllocatedPp": null,
+  "newProductTests": 0,
+  "recordedOwnedJobsInFlight": 0,
+  "ownedBackendJobsStartedHere": 0,
+  "modelObserved": "gpt-6.2-sol",
+  "reasoningObserved": null,
+  "speedObserved": null,
+  "outcomeEvidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40852-current-inspection-trace-public-increment-v1/manifest.json",
+      "sha256": "52481db47af38b113b1ace0f2efdaf671ebd0c4db74fa6d2ffa2e652a3104374"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/input/5458_inspection_trace_public_increment.py",
+      "sha256": "e4f1e3aa58e87449fbc0ba85b762c217efd776b6b7e3c5073b7ccd4d88399146"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/485_WBS網羅性・受入対応.json",
+      "sha256": "ac7236a17fe0438f2a6f6db19967f7ad900eccc9a4683e680150cd70e52936e7"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/486_WBS現行実績.json",
+      "sha256": "5ae021c03629674489618e68869e5b4bb7191bbfde15efffa9e3bac6026f28df"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40850-wbs66-short-12-criteria-prerequisites-v1/manifest.json",
+      "sha256": "b03d85e298020e37b6755a38eac097d316ec441516d274897f1f07d9d9a44317"
+    }
+  ],
+  "fullQuotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T12:32:51.860000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 69,
+      "remainingPercent": 31,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "quotaAfter": {
+    "usedPercent": 69,
+    "remainingPercent": 31,
+    "resetsAt": 1795445752,
+    "windowDurationMins": 10080
+  },
+  "sharedDeltaPp": 0,
+  "completedOriginalRowPricePp": 0,
+  "remainingCriteria": [
+    "F02 API/Web, SSC461 and runtime",
+    "F03 full typed and runtime dependencies, raw and 451",
+    "Short 12 actual receipts"
+  ],
+  "nextEvidence": "QA056/057の範囲照合又は承認済み現環境のsource/run/owner/terminal取得後、PG40850の該当行から進める。",
+  "wbsBinding": {
+    "bindingValid": true,
+    "inventorySha256": "ac7236a17fe0438f2a6f6db19967f7ad900eccc9a4683e680150cd70e52936e7",
+    "productTestsExecuted": 0
+  },
+  "knownOwnedLocalInFlight": 0,
+  "protectedUntrackedCount": 1537,
+  "protectedStashCount": 7,
+  "protectedBaselineTree": "cd377044e4ca058ea219ca6a2fec82159559c72c",
+  "newTestsAcrossSeparateCandidateScopes": 21,
+  "scopeSpecificQualifiedCounts": [
+    2,
+    189,
+    13
+  ],
+  "groupStartErratum": "開始時の数値の脱字に意味はない。保持対象は既証跡と正式値。原開始recordの全値を保全。",
+  "guardState": {
+    "reason": "REMAINING_SHORT_TERM_EXECUTION_DEPENDS_ON_HELD_SCOPE_OR_ACTUAL_EVIDENCE",
+    "weeklyLimitExhausted": false,
+    "normalGroupCompletionAlone": false,
+    "pmReplyRequired": false,
+    "immediateScopeCandidates": "F02/F03 current admitted artifacts and independent P004-02 diagnostics have been qualified within their available local scopes.",
+    "materialDependencyReceipts": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40850-wbs66-short-12-criteria-prerequisites-v1/manifest.json",
+      "sha256": "b03d85e298020e37b6755a38eac097d316ec441516d274897f1f07d9d9a44317"
+    },
+    "existingQa": [
+      "QA-056",
+      "QA-057",
+      "QA-060",
+      "QA-051 final"
+    ],
+    "existingRealNeeds": [
+      "authorized source-bound API/Web and whole quality",
+      "database or original-artifact ownership and postconditions",
+      "native/Unit/Browser and terminal receipts"
+    ],
+    "capacityCheck": "local root free approx 1.5 GiB; /dev/shm approx 7.4 GiB; pressure affects large jobs",
+    "nextCheck": [
+      "get_usage_limits",
+      "git status --short -uno",
+      "git rev-parse HEAD origin/dev-foundation",
+      "fresh task scope and ownership evidence"
+    ]
+  },
+  "sharedDisplayChangeFromFirstComparableGroupPp": null,
+  "dedicatedTokenSpend": null
+}
