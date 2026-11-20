@@ -1,0 +1,59 @@
+{
+  "eventId": "PGPT-20261008-7052",
+  "groupId": "g07-alert-outbox-strict-exec-published",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T18:30:03.214000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 77,
+      "remainingPercent": 23,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "g07-alert-outbox-strict-exec-published",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "g07-alert-outbox-strict-exec-published",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-G07"
+    ],
+    "managementWorkIds": [
+      "A1-36.01"
+    ],
+    "source": "a463845a4141cbda38409edebf2e499cb486badb",
+    "productionCoreMain": "559f5b5945e82374e0843dcfae11a8d07faef1ea",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG41090-g07-alert-outbox-and-strict-exec-delta-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.05,
+      "base": 0.15,
+      "high": 0.3
+    },
+    "groupCapPp": 0.45,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1536_P01808厳密工具の通常exec継続点.json",
+        "sha256": "5052643a3ddc9c562da3af94cd6dec012608801870d030fd166305709ce22c31"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41060-g07-web-and-raw-counter-published-v1/manifest.json",
+        "sha256": "a9a90b231038eac98d80cedfd2d092a57b7db0ed1e1c360698a0e489646cfdc5"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "前公開cursor以降のstage済/push済み差分だけ。",
+    "endCondition": "公開差分とCurrent baselineを一回確認、検出と終点を保存。",
+    "workScope": "Path、警報、Outbox、観測値及び元exec工具の公開Git patch。"
+  }
+}
