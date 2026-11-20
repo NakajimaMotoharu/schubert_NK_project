@@ -1,0 +1,34 @@
+test_empty_class_name_is_invalid_even_with_a_known_target (jacoco_readonly_exec_subset_scope_test.ClassSelectionScopeTest.test_empty_class_name_is_invalid_even_with_a_known_target) ... 
+  test_empty_class_name_is_invalid_even_with_a_known_target (jacoco_readonly_exec_subset_scope_test.ClassSelectionScopeTest.test_empty_class_name_is_invalid_even_with_a_known_target) (targets={''}) ... FAIL
+  test_empty_class_name_is_invalid_even_with_a_known_target (jacoco_readonly_exec_subset_scope_test.ClassSelectionScopeTest.test_empty_class_name_is_invalid_even_with_a_known_target) (targets={'', 'X'}) ... FAIL
+
+======================================================================
+FAIL: test_empty_class_name_is_invalid_even_with_a_known_target (jacoco_readonly_exec_subset_scope_test.ClassSelectionScopeTest.test_empty_class_name_is_invalid_even_with_a_known_target) (targets={''})
+----------------------------------------------------------------------
+ValueError: one session and all exact target records required
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/jacoco_readonly_exec_subset_scope_test.py", line 18, in test_empty_class_name_is_invalid_even_with_a_known_target
+    with self.assertRaisesRegex(ValueError, 'nonempty ASCII target names'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "nonempty ASCII target names" does not match "one session and all exact target records required"
+
+======================================================================
+FAIL: test_empty_class_name_is_invalid_even_with_a_known_target (jacoco_readonly_exec_subset_scope_test.ClassSelectionScopeTest.test_empty_class_name_is_invalid_even_with_a_known_target) (targets={'', 'X'})
+----------------------------------------------------------------------
+ValueError: one session and all exact target records required
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/jacoco_readonly_exec_subset_scope_test.py", line 18, in test_empty_class_name_is_invalid_even_with_a_known_target
+    with self.assertRaisesRegex(ValueError, 'nonempty ASCII target names'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "nonempty ASCII target names" does not match "one session and all exact target records required"
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+FAILED (failures=2)

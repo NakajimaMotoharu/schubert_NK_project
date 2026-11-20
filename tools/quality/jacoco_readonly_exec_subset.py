@@ -26,7 +26,11 @@ def validate_modified_utf(encoded):
 
 
 def decode(raw,wanted):
-    if type(raw) is not bytes or not isinstance(wanted,set) or any(type(n) is not str or not n.isascii() for n in wanted):
+    if (
+        type(raw) is not bytes
+        or not isinstance(wanted, set)
+        or any(type(name) is not str or not name or not name.isascii() for name in wanted)
+    ):
         raise ValueError('immutable bytes and explicit ASCII target names')
     offset = 0
 

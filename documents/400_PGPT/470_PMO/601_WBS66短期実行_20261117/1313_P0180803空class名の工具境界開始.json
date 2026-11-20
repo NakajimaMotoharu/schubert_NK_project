@@ -1,0 +1,61 @@
+{
+  "eventId": "PGPT-20261008-6829",
+  "groupId": "P0180803-explicit-nonempty-class-selection",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T13:54:08.527000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 71,
+      "remainingPercent": 29,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "P0180803-explicit-nonempty-class-selection",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "P0180803-explicit-nonempty-class-selection",
+    "workAttributionKind": "ADDITIONAL_FINDING",
+    "wbsLeafIds": [
+      "WBS-P018-08.03"
+    ],
+    "managementWorkIds": [],
+    "source": "911a897c3ee28cfea6d34f570596aeb567ef0e59",
+    "productionCoreMain": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40896-offline-class-selector-empty-name-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.14,
+      "base": 0.4,
+      "high": 0.9
+    },
+    "groupCapPp": 1.25,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1312_P0181003監査writer候補継続点.json",
+        "sha256": "59cc50ff657843dd0b22cafee5500a561d554d934bf0b0106a5278ca3066641b"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40264-p01808-offline-class-selection-scope-v1/manifest.json",
+        "sha256": "8f0c5300e03dad1d151eed294988c2cf66ab9b7d10580cd56a2e60a6a7a31685"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40260-p01808-exec-modified-utf-independent-v1/manifest.json",
+        "sha256": "a9c9c03612f6a0972f58742a0c8e91264b164d98bafab157ca08b369c2ee9e60"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "既PG40264のoffline固定データ型。空の対象集合はsession照合用、空文字列を含む集合は不正入力。実exec fileなし。",
+    "endCondition": "既固定データで空名の入口拒否を独立検証し、session-onlyと正常な明示名の判定を維持。影響する工具のみ。",
+    "workScope": "合成型の工具品質。実native／Root／session取得・読み出し、VM、製品PT、全体coverage加算なし。"
+  }
+}

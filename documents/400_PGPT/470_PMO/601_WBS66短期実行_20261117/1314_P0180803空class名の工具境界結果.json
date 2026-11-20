@@ -1,0 +1,151 @@
+{
+  "eventId": "PGPT-20261008-6830",
+  "groupId": "P0180803-explicit-nonempty-class-selection",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T13:55:43.379000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 71,
+      "remainingPercent": 29,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "P0180803-explicit-nonempty-class-selection",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "P0180803-explicit-nonempty-class-selection",
+    "workAttributionKind": "ADDITIONAL_FINDING",
+    "wbsLeafIds": [
+      "WBS-P018-08.03"
+    ],
+    "managementWorkIds": [],
+    "source": "911a897c3ee28cfea6d34f570596aeb567ef0e59",
+    "productionCoreMain": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40896-offline-class-selector-empty-name-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.14,
+      "base": 0.4,
+      "high": 0.9
+    },
+    "groupCapPp": 1.25,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1312_P0181003監査writer候補継続点.json",
+        "sha256": "59cc50ff657843dd0b22cafee5500a561d554d934bf0b0106a5278ca3066641b"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40264-p01808-offline-class-selection-scope-v1/manifest.json",
+        "sha256": "8f0c5300e03dad1d151eed294988c2cf66ab9b7d10580cd56a2e60a6a7a31685"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40260-p01808-exec-modified-utf-independent-v1/manifest.json",
+        "sha256": "a9c9c03612f6a0972f58742a0c8e91264b164d98bafab157ca08b369c2ee9e60"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "既PG40264のoffline固定データ型。空の対象集合はsession照合用、空文字列を含む集合は不正入力。実exec fileなし。",
+    "endCondition": "既固定データで空名の入口拒否を独立検証し、session-onlyと正常な明示名の判定を維持。影響する工具のみ。",
+    "workScope": "合成型の工具品質。実native／Root／session取得・読み出し、VM、製品PT、全体coverage加算なし。",
+    "quotaAfter": {
+      "usedPercent": 71,
+      "remainingPercent": 29,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "1289bc7f0f18ccded9bc57b6a714fce993d5c97e8d9dc49158757f2f67cf788e",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T13:55:43.379000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 71,
+          "remainingPercent": 29,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T13:55:17.058428+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 71,
+      "remainingPercent": 29,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6829",
+    "attempt": 1,
+    "attemptResult": "OFFLINE_TOOL_COMPATIBILITY_RESTORED",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40900-offline-class-selector-legacy-message-v1/manifest.json",
+        "sha256": "1bd2456e73920189f21d64d617d1bfadff9d012e45d434361be9e98e6d117361"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40898-offline-class-selector-empty-name-v1-after/manifest.json",
+        "sha256": "f9104e4eec8b0766b76be01434b3d01eb728cb4d0a18c561d664054ee8613752"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40896-offline-class-selector-empty-name-v1-before/manifest.json",
+        "sha256": "f553a265ea35448bf2e7bcda22128e1c83cf17393a7fd0d3e69f979693379a73"
+      },
+      {
+        "path": "tools/quality/jacoco_readonly_exec_subset.py",
+        "sha256": "fd3fa6b3d4c7a40d888125ce4e32b390749f7fedd493234279c63a1c41ce8f8e"
+      },
+      {
+        "path": "tools/quality/jacoco_readonly_exec_subset_scope_test.py",
+        "sha256": "2d4ea6df80cb1b893d53607d73b96daae8f7f9519d3d57205f0ea0bf544cd7f7"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5477_offline_empty_class_selector_pt.py",
+        "sha256": "7d3efc449b274cb9ccc1eaf9ed2d3b4aebfed3d6aaf103a0e9ade671b3629393"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "P018-08実native／CRC・session・owner・終端",
+      "同source全451"
+    ],
+    "toolPtPassed": 32,
+    "newToolTest": 1,
+    "failedCompatibilityAttempt": 1,
+    "actualProductTests": 0,
+    "bugs": [
+      "BUG-3420",
+      "BUG-3421"
+    ],
+    "expansion": "YKT-2714",
+    "toolCase": "PT-NATIVE-META-SELECT005"
+  }
+}

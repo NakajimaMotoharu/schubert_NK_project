@@ -12,6 +12,12 @@ EXPECTED_SESSION = {'labelBytesHex': '52554e', 'startMillis': 1, 'endMillis': 2}
 
 
 class ClassSelectionScopeTest(unittest.TestCase):
+    def test_empty_class_name_is_invalid_even_with_a_known_target(self):
+        for invalid in ({''}, {'X', ''}):
+            with self.subTest(targets=invalid):
+                with self.assertRaisesRegex(ValueError, 'explicit ASCII target names'):
+                    decode(SESSION_STREAM + CLASS_X, invalid)
+
     def test_empty_target_set_accepts_session_structure_without_class_evidence(self):
         self.assertEqual(
             {'classes': {}, 'sessions': [EXPECTED_SESSION], 'totalClassRecords': 0},

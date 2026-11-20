@@ -1,0 +1,50 @@
+test_full_probe_byte_and_partial_probe_byte (jacoco_readonly_exec_subset_encoding_test.CanonicalEncodingTest.test_full_probe_byte_and_partial_probe_byte) ... ok
+test_pinned_counts_at_zero_and_near_single_byte_limit (jacoco_readonly_exec_subset_encoding_test.CanonicalEncodingTest.test_pinned_counts_at_zero_and_near_single_byte_limit) ... ok
+test_rejects_bad_padding_in_a_nonselected_record (jacoco_readonly_exec_subset_encoding_test.CanonicalEncodingTest.test_rejects_bad_padding_in_a_nonselected_record) ... ok
+test_rejects_nonminimal_three (jacoco_readonly_exec_subset_encoding_test.CanonicalEncodingTest.test_rejects_nonminimal_three) ... ok
+test_rejects_nonminimal_zero (jacoco_readonly_exec_subset_encoding_test.CanonicalEncodingTest.test_rejects_nonminimal_zero) ... ok
+test_rejects_target_padding_above_last_probe (jacoco_readonly_exec_subset_encoding_test.CanonicalEncodingTest.test_rejects_target_padding_above_last_probe) ... ok
+test_nonselected_name_rejects_impossible_writer_bytes (jacoco_readonly_exec_subset_modified_utf_test.ModifiedUtfFieldTest.test_nonselected_name_rejects_impossible_writer_bytes) ... ok
+test_session_field_rejects_impossible_writer_bytes (jacoco_readonly_exec_subset_modified_utf_test.ModifiedUtfFieldTest.test_session_field_rejects_impossible_writer_bytes) ... ok
+test_writer_code_units_remain_raw (jacoco_readonly_exec_subset_modified_utf_test.ModifiedUtfFieldTest.test_writer_code_units_remain_raw) ... ok
+test_writer_zero_length_field_keeps_exact_target (jacoco_readonly_exec_subset_modified_utf_test.ModifiedUtfFieldTest.test_writer_zero_length_field_keeps_exact_target) ... ok
+test_absent_target_is_not_a_zero_probe_report (jacoco_readonly_exec_subset_presence_test.RecordPresenceTest.test_absent_target_is_not_a_zero_probe_report) ... ok
+test_compact_count_outside_java_int_does_not_read_probe_data (jacoco_readonly_exec_subset_presence_test.RecordPresenceTest.test_compact_count_outside_java_int_does_not_read_probe_data) ... ok
+test_missing_session_does_not_qualify_a_present_class (jacoco_readonly_exec_subset_presence_test.RecordPresenceTest.test_missing_session_does_not_qualify_a_present_class) ... ok
+test_mutable_input_is_outside_readonly_contract (jacoco_readonly_exec_subset_presence_test.RecordPresenceTest.test_mutable_input_is_outside_readonly_contract) ... ok
+test_target_name_with_conflicting_crc_stays_unqualified (jacoco_readonly_exec_subset_presence_test.RecordPresenceTest.test_target_name_with_conflicting_crc_stays_unqualified) ... ok
+test_two_names_for_one_crc_stay_unqualified (jacoco_readonly_exec_subset_presence_test.RecordPresenceTest.test_two_names_for_one_crc_stay_unqualified) ... ok
+test_unicode_names_are_outside_explicit_ascii_subset (jacoco_readonly_exec_subset_presence_test.RecordPresenceTest.test_unicode_names_are_outside_explicit_ascii_subset) ... FAIL
+test_unsigned_crc_and_probe_bits_keep_exact_identity (jacoco_readonly_exec_subset_presence_test.RecordPresenceTest.test_unsigned_crc_and_probe_bits_keep_exact_identity) ... ok
+test_empty_class_name_is_invalid_even_with_a_known_target (jacoco_readonly_exec_subset_scope_test.ClassSelectionScopeTest.test_empty_class_name_is_invalid_even_with_a_known_target) ... ok
+test_empty_target_set_accepts_session_structure_without_class_evidence (jacoco_readonly_exec_subset_scope_test.ClassSelectionScopeTest.test_empty_target_set_accepts_session_structure_without_class_evidence) ... ok
+test_empty_target_set_keeps_only_count_when_class_data_exists (jacoco_readonly_exec_subset_scope_test.ClassSelectionScopeTest.test_empty_target_set_keeps_only_count_when_class_data_exists) ... ok
+test_missing_second_target_rejects_partial_match_despite_shared_prefix (jacoco_readonly_exec_subset_scope_test.ClassSelectionScopeTest.test_missing_second_target_rejects_partial_match_despite_shared_prefix) ... ok
+test_multiple_targets_each_keep_their_own_crc_and_probes (jacoco_readonly_exec_subset_scope_test.ClassSelectionScopeTest.test_multiple_targets_each_keep_their_own_crc_and_probes) ... ok
+test_epoch_can_be_a_zero_length_session (jacoco_readonly_exec_subset_test.SessionTimeTest.test_epoch_can_be_a_zero_length_session) ... ok
+test_epoch_to_latest_java_long (jacoco_readonly_exec_subset_test.SessionTimeTest.test_epoch_to_latest_java_long) ... ok
+test_latest_java_long_can_be_both_timestamps (jacoco_readonly_exec_subset_test.SessionTimeTest.test_latest_java_long_can_be_both_timestamps) ... ok
+test_negative_end_cannot_be_greater_than_latest_java_long (jacoco_readonly_exec_subset_test.SessionTimeTest.test_negative_end_cannot_be_greater_than_latest_java_long) ... ok
+test_negative_end_is_rejected (jacoco_readonly_exec_subset_test.SessionTimeTest.test_negative_end_is_rejected) ... ok
+test_negative_start_is_rejected (jacoco_readonly_exec_subset_test.SessionTimeTest.test_negative_start_is_rejected) ... ok
+test_original_decoder_vectors (jacoco_readonly_exec_subset_test.SessionTimeTest.test_original_decoder_vectors) ... ok
+test_two_minimum_java_longs_are_rejected (jacoco_readonly_exec_subset_test.SessionTimeTest.test_two_minimum_java_longs_are_rejected) ... ok
+test_two_negative_ones_are_rejected (jacoco_readonly_exec_subset_test.SessionTimeTest.test_two_negative_ones_are_rejected) ... ok
+
+======================================================================
+FAIL: test_unicode_names_are_outside_explicit_ascii_subset (jacoco_readonly_exec_subset_presence_test.RecordPresenceTest.test_unicode_names_are_outside_explicit_ascii_subset)
+----------------------------------------------------------------------
+ValueError: immutable bytes and explicit nonempty ASCII target names
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/jacoco_readonly_exec_subset_presence_test.py", line 60, in test_unicode_names_are_outside_explicit_ascii_subset
+    with self.assertRaisesRegex(ValueError, 'explicit ASCII target names'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "explicit ASCII target names" does not match "immutable bytes and explicit nonempty ASCII target names"
+
+----------------------------------------------------------------------
+Ran 32 tests in 0.002s
+
+FAILED (failures=1)
