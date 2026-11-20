@@ -1,0 +1,68 @@
+{
+  "eventId": "PGPT-20261008-7046",
+  "groupId": "PGPT-WBS66-P01808-STRICT-ORIGINAL-EXEC-20261121",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T18:24:58.881000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 77,
+      "remainingPercent": 23,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P01808-STRICT-ORIGINAL-EXEC-20261121",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-P01808-STRICT-ORIGINAL-EXEC-20261121",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P018-08.03"
+    ],
+    "managementWorkIds": [
+      "WBS-P018-08.03/2",
+      "WBS-F03/2-2"
+    ],
+    "source": "08e8a8a3ceafbb70d652e5ea3657fe50e60c1ebb",
+    "productionCoreMain": "559f5b5945e82374e0843dcfae11a8d07faef1ea",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG41082-p01808-original-exec-merge-before-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.3,
+      "base": 0.8,
+      "high": 1.8
+    },
+    "groupCapPp": 3,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1530_F03観測値のMapと診断継続点.json",
+        "sha256": "9858962cc8572192d99b484b64570a40b59ae177d0f4817f4ec87d64179f6742"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41056-p01808-raw-duplicate-class-final-v1/manifest.json",
+        "sha256": "a1eb4f73b97e64cdc6350cb9d7e3b55ea85c7b57c797f57d4873c71c3c48dc0a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40260-p01808-exec-modified-utf-independent-v1/manifest.json",
+        "sha256": "a9c9c03612f6a0972f58742a0c8e91264b164d98bafab157ca08b369c2ee9e60"
+      },
+      {
+        "path": "tools/quality/jacoco/UnfilteredCodeMeasurement.java",
+        "sha256": "054298b222db049f7908603da5f756a027c4637c75dcdad5ae8b6069063e5f5f"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "現Java raw工具のExecFileLoaderはclass recordを合成する。P018-08の単一元stream検査に専用条件が必要。",
+    "endCondition": "header一つ、session一つ、同class ID重複なしをsynthetic original modeで検証し、独立decoderと旧参考モードを比較。",
+    "workScope": "自己所有合成classと作成済みbyte vectorのみ。native agent接続、実stream回収、実環境なし。"
+  }
+}
