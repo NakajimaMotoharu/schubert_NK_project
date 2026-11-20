@@ -1,0 +1,71 @@
+{
+  "eventId": "PGPT-20261008-6595",
+  "groupId": "wbs66-f03-expiry-current-26-proxy-cohort",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T06:26:11.236000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 64,
+      "remainingPercent": 36,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "wbs66-f03-expiry-current-26-proxy-cohort",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "wbs66-f03-expiry-current-26-proxy-cohort",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "source": "8edbaa83948f97911a5ac06946fc73a0055cd784",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40716-f03-expiry-current-26-proxy-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.3,
+      "base": 0.65,
+      "high": 1.5
+    },
+    "groupCapPp": 3,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1076_F03ExpiryAudit現物理と継続点.json",
+        "sha256": "8ecb9562acad3b8c76244784dde393623c737c76804b291ce0960918d98cadc1"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40704-f02-current-four-expiry-jars-v1/manifest.json",
+        "sha256": "c58df3b46be9501d68256a6b8578efa8c0f7021f66f0e477d58de8c907b62da1"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40714-f03-expiry-typed-static-independent-v1/manifest.json",
+        "sha256": "98f7eb0b712008f956ca94ab1b04bcb7d7b34a07db96cf33c0ee84f491dde03e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40698-f02-expiry-audit-jdbc-independent-v1/manifest.json",
+        "sha256": "6e009299dbba22fa572d8ea7c9822f77c2d7fd0f79f33d3a3e84a5a730b899e6"
+      },
+      {
+        "path": "evidence/01_PT/017_NK-BAT-001/697_Expiry監査SQL・状態契約単体仕様.md",
+        "sha256": "aa479aede238f3ef09822276f513cbb8b9dcd753f307cb7f933c0c4d8a3609da"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "Requalify affected ExpiryAudit behavior after the production adapter change. Exact packaged 7 physical and four named test classes; other test classes require actual fixture DB and are outside this scope. 8 paths previously tested and 18 independently selected target behavior in same current exec.",
+    "endCondition": "One new JVM, 26 cases marked separately as requalified. Fresh Jacoco stream, raw seven types and exact specification citations. No test retry to claim success; report actual deficits.",
+    "workScope": "Independent JDK proxies and pure predicate/record values only. No actual worker, broker, DB, Root, filesystem or privileges."
+  }
+}

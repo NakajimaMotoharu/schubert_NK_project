@@ -1,0 +1,101 @@
+{
+  "eventId": "PGPT-20261008-6597",
+  "wbsLeafIds": [
+    "WBS-F03"
+  ],
+  "managementWorkIds": [
+    "WBS-F03/2-2"
+  ],
+  "workCategory": "SELECTED_TEST",
+  "source": "8edbaa83948f97911a5ac06946fc73a0055cd784",
+  "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+  "previousCheckpoint": "PGPT-20261008-6594",
+  "groupEvents": [
+    "PGPT-20261008-6596"
+  ],
+  "acceptedOriginal": 17,
+  "total": 190,
+  "coreAccepted": 0,
+  "coreTotal": 5,
+  "officialPtTests": 1964,
+  "officialPtScopes": 53,
+  "newFormalAcceptance": 0,
+  "effortRate": null,
+  "actualAllocatedPp": null,
+  "newProductTests": 0,
+  "recordedOwnedJobsInFlight": 0,
+  "ownedBackendJobsStartedHere": 0,
+  "modelObserved": "gpt-6.2-sol",
+  "reasoningObserved": null,
+  "speedObserved": null,
+  "outcomeEvidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40716-f03-expiry-current-26-proxy-v1/manifest.json",
+      "sha256": "1b669c71451e3be448c120e8a0a6ab60142384bed33383a3d4db4a1c1dbf3a41"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40718-f03-expiry-current-26-proxy-v2/manifest.json",
+      "sha256": "000c190460b77d851e83e1eaf02ce8fcf91ccb2b0f51be9b3c98702fbd264ffa"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40720-f03-expiry-current-26-proxy-v3/manifest.json",
+      "sha256": "57002f5cc7f12267868be74a783a463c3c71a5f30b3c0ee82cf0d6c0b77b99ae"
+    }
+  ],
+  "fullQuotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T06:29:34.886000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 64,
+      "remainingPercent": 36,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "quotaAfter": {
+    "usedPercent": 64,
+    "remainingPercent": 36,
+    "resetsAt": 1795445752,
+    "windowDurationMins": 10080
+  },
+  "sharedDeltaPp": 0,
+  "completedOriginalRowPricePp": 0,
+  "remainingCriteria": [
+    "ExpiryAudit raw misses LINE2 METHOD4 BRANCH14 INSTRUCTION25",
+    "whole six modules and candidate 451",
+    "QA-056/057 and runtime scopes"
+  ],
+  "nextEvidence": "現scopeの未到達L2/M4/B14について、実branchとcompilerが生成したbranchの源を同execとbytecodeから独立判定する。優先残の許可済み製造・単体へ継続。",
+  "candidateProductionSource": "82de9065ca8216542cd4e12ddd61003d9bb07ab2",
+  "coverage": {
+    "LINE": {
+      "covered": 257,
+      "missed": 2
+    },
+    "METHOD": {
+      "covered": 45,
+      "missed": 4
+    },
+    "CLASS": {
+      "covered": 4,
+      "missed": 0
+    },
+    "BRANCH": {
+      "covered": 198,
+      "missed": 14
+    },
+    "INSTRUCTION": {
+      "covered": 1404,
+      "missed": 25
+    }
+  },
+  "scopedPtSucceeded": 26,
+  "wholeRawFour100": false,
+  "bugs": [
+    "BUG-3405",
+    "BUG-3406",
+    "YKT-2730"
+  ]
+}
