@@ -1,0 +1,170 @@
+{
+  "eventId": "PGPT-20261008-6654",
+  "groupId": "wbs66-g1307-scope-corrective-hold",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T08:35:42.734000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 66,
+      "remainingPercent": 34,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "wbs66-g1307-scope-corrective-hold",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "wbs66-g1307-scope-corrective-hold",
+    "workAttributionKind": "REWORK",
+    "wbsLeafIds": [
+      "WBS-G13.07"
+    ],
+    "managementWorkIds": [
+      "WBS-G13.07/1",
+      "WBS-F02-a",
+      "WBS-F03/2-2"
+    ],
+    "source": "3b996c44871ebf04dd2873d5006ad274557de523",
+    "productionCoreMain": "517a23cddc9f3883550942f6fa90a4256ef39b73",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40768-static-admission-correction-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.2,
+      "base": 0.65,
+      "high": 1.3
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1134_F02現四の依存解決個別結果と継続点.json",
+        "sha256": "a4cf6345936ba507f03c514cb2c9a90bfe03a819bd9c857716287835e6113d2b"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40482-f03-batch-current-admitted-java25-closure-v1/manifest.json",
+        "sha256": "a2a5e2dd87f9990dc5de4b4e4501eebd10772363c7ee47d5bfda350cd1a24e1e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40750-f02-current-four-artifact-dependency-v1/manifest.json",
+        "sha256": "01c3d88eea68514b4a8821f92e013aef3093d8375ae136e9e17ee513ff1f6e64"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40754-f03-current-batch-pmd-lineage-v1/manifest.json",
+        "sha256": "9dfe9b982c55ab163ddfddb4b47b20fa413f00ad60af55236f8c6b1b9f950c80"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40758-g08-current-web-f02-f03-receipts-v1/manifest.json",
+        "sha256": "d20237f6fc3de3ff069e201a5e1f6d8abbe95fee50dcb24e66c204019ad5f1f6"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40766-f02-current-four-external-providers-v1/manifest.json",
+        "sha256": "8cececb3c988689635ff6a46495ae15a279979b40816d1deebb1812dfd33af8e"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "PG40750 invoked jdeps on unfiltered JARs. Already produced public names overlap the previously excluded Batch 53 and dependent 316. No runtime or platform rejection occurred, but admission cannot be claimed.",
+    "endCondition": "Record mismatch before correction, supersede use of PG40750 and dependent assertions by append-only receipt/ledger/handoff. Preserve original evidence. Do not replay, probe or filter/restart rejected or uncertain operations.",
+    "workScope": "Read previously stored public metadata only to record overlap counts. No JAR class-byte reads, no tools invoking analysis, no remote processes or protected operations.",
+    "quotaAfter": {
+      "usedPercent": 66,
+      "remainingPercent": 34,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "f568c0e10b2b5115ac17579150d623cbc31ab8d4ee7cb45ebe9782188abed037",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T08:35:42.734000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 66,
+          "remainingPercent": 34,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T08:35:27.384641+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 66,
+      "remainingPercent": 34,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6653",
+    "attempt": 1,
+    "attemptResult": "HOLD_POST_OVERBROAD_SCOPE_BOUNDARY_CORRECTION",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40768-static-admission-correction-v1/manifest.json",
+        "sha256": "2bf75ce4913f909df9e67a6a557d790e0ebb86f202246c1b4c8843c30f4d1f62"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40768-static-admission-correction-v1/scope-overlap.json",
+        "sha256": "3cda6578ad2ecf9abf41155baf3a16f1f0a5e5d88612ec9ffeed2fc12b212697"
+      },
+      {
+        "path": "documents/400_PGPT/470_PMO/485_WBS網羅性・受入対応.json",
+        "sha256": "5ddf10a2be20fa3dcb13ce618f996c87f0370e92e21dec4c6499129dc66dc0cc"
+      },
+      {
+        "path": "documents/400_PGPT/470_PMO/486_WBS現行実績.json",
+        "sha256": "b2e769134878347d0322ed02332ac1d73c658d67c48415017f9a492c7bea30a5"
+      },
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/760_11月25日四担当の引渡し現行差分.md",
+        "sha256": "2928e6bc96a9a8076f377adc3d8bc7386b5637277af38cfe3bd3700805a5911e"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "F02 full dependency evidence held after scope mismatch, no replay",
+      "F02 API/Web physical and operational / all451 missing",
+      "F03 six physical static gates / QA-056/057",
+      "QA-060 date-only"
+    ],
+    "explicitHoldTypesIncludedPreviously": 53,
+    "transitiveHoldTypesIncludedPreviously": 316,
+    "priorWholeDependencyReceiptsWithdrawn": 2,
+    "actualStaticOperationsThisGroup": 0,
+    "acceptedIndividualSubconditions": [],
+    "bugId": "BUG-3412",
+    "horizontalReview": "YKT-2735",
+    "explicitWithdrawal": "PG40750 and PG40766, PG40754 reverse graph subset, PG40758 derived segments. No previously accepted formal item affected.",
+    "staticScopeCorrectiveCommit": "ce36142cb6",
+    "platformDenialObserved": false,
+    "independentBatchAllowlistInputsValidated": [
+      "PG40736",
+      "PG40748",
+      "PG40764"
+    ]
+  }
+}
