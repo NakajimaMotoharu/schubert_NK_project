@@ -27,6 +27,7 @@ TARGETS = (
     "rejectsUnrecognizedComparisonDefinitionVersions",
     "rejectsNonArrayComparisonDefinitions",
 )
+CONSTRUCTOR_TEST = "staticToolFactoriesRejectReflectiveConstructionAndRestoreAccess"
 
 
 def utc():
@@ -48,7 +49,7 @@ def dump(path, record):
 
 
 def main(run, mode):
-    assert mode in ("red", "green")
+    assert mode in ("red", "green", "qualified")
     head = git("rev-parse", "HEAD").decode().strip()
     work = WORK / run
     work.mkdir(mode=0o700)
@@ -58,6 +59,8 @@ def main(run, mode):
     [*sources, _] = git("ls-files", "-z", "--", str(MODULE / "src/main/java")).decode().split("\0")
     fixtures = [FIXTURES / name for name in ("catalog.json", "dif-allowlist.json")]
     java_sources = [*map(Path, sources), TEST, *HELPERS]
+    if mode == "qualified":
+        java_sources.append(TEST.with_name("CharacterizationIoScopeTest.java"))
     inputs = [*java_sources, *fixtures]
     for path in inputs:
         saved = snapshot / path
@@ -99,8 +102,10 @@ def main(run, mode):
     runtime_path = os.pathsep.join([str(classes), *map(str, jars)])
     full_class = PACKAGE + ".ArtifactComparatorTest"
     (work / "tmp").mkdir()
-    selection = (["--select-class", full_class] if mode == "green" else
+    selection = (["--select-class", full_class] if mode != "red" else
                  [item for name in TARGETS for item in ("--select-method", full_class + "#" + name)])
+    if mode == "qualified":
+        selection += ["--select-method", PACKAGE + ".CharacterizationIoScopeTest#" + CONSTRUCTOR_TEST]
     exit_code = execute("junit", [jdk / "java", f"-Dchr.unitProjectRoot={snapshot}",
                                   f"-Djava.io.tmpdir={work / 'tmp'}",
                                   f"-javaagent:{agent}=destfile={work / 'jacoco.exec'}",
@@ -127,8 +132,11 @@ def main(run, mode):
         prior = [item for item in json.loads(PRIOR_ROSTER.read_bytes())
                  if item["classname"] == full_class]
         assert len(prior) == 72 and all(item["outcome"] == "pass" for item in prior)
-        assert exit_code == 0 and counts == dict(tests=74, failures=0, errors=0, skipped=0)
-        assert proven_targets == {item["name"].removesuffix("()") for item in prior} | set(TARGETS)
+        expected = {item["name"].removesuffix("()") for item in prior} | set(TARGETS)
+        if mode == "qualified":
+            expected.add(CONSTRUCTOR_TEST)
+        assert exit_code == 0 and counts == dict(tests=len(expected), failures=0, errors=0, skipped=0)
+        assert proven_targets == expected
         assert all(not row["issues"] for row in rows)
     assert git("rev-parse", "HEAD").decode().strip() == head
     dest = EVIDENCE / run

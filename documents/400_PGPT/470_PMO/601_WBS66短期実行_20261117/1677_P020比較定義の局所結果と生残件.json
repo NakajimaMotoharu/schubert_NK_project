@@ -1,0 +1,188 @@
+{
+  "eventId": "PGPT-20261008-7192",
+  "groupId": "WBS66-P020-COMPARE-DEFINITIONS",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T22:14:42.383000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 83,
+      "remainingPercent": 17,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66-P020-COMPARE-DEFINITIONS",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "WBS66-P020-COMPARE-DEFINITIONS",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P020-01.02"
+    ],
+    "managementWorkIds": [
+      "WBS-P020-01.02/2"
+    ],
+    "source": "56854ff871bb2099f745338b996b34c4263fb7f0",
+    "productionCoreMain": "a8913bc836f81632613b34243f84b7b15eb3e054",
+    "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "run": "PG41268-context",
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.488,
+      "high": 0.85
+    },
+    "groupCapPp": 1.0,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1675_Media現五型局所品質完了・次工程.json",
+        "sha256": "d449522d70116dcee4756af9e324f9f86f6ac1cb0db070cfc2c857e9474d60cc"
+      },
+      {
+        "path": "documents/300_SS/350_運用・品質/355_Characterization Test実行準備・PG開始gate.md",
+        "sha256": "aff2aafe8f952de073e6dd2e7f5840152539f348f9816c6fa31e84ced93bef45"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41128-p020-typed-inventory-filestore-independent-v1/manifest.json",
+        "sha256": "91c8b79ecb5ca4ff5f9d04a142df06cdf712ff8953121dfefe37c94c1c7b0268"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "SS355版固定、GateContractValidator既存診断、自己所有比較専用fixture。開始記録の管理行/2はWBS66管理IDに分離し、イベントIDは484の葉に対応。",
+    "endCondition": "固定した否定oracle二件と影響する同一comparator群。実CHR、451、元項目受入は別の終了依存。",
+    "workScope": "定義versionと配列形状の二軸。Current/実NK、外部環境、原本を操作しない。",
+    "quotaAfter": {
+      "usedPercent": 83,
+      "remainingPercent": 17,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "b976ae2f57e01129055204dac7ad26c45eccfcdae723c5c39f9f2672f1823f06",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T22:14:42.383000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 83,
+          "remainingPercent": 17,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T22:14:27.058987+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 82,
+      "remainingPercent": 18,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-7191",
+    "attempt": 1,
+    "attemptResult": "TWO_DEFECTS_REPRODUCED_AND_REPAIRED_LOCAL_RAW_PARTIAL",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 1,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/020_NK-CHR-001/061_比較定義の版と配列の実行結果.md",
+        "sha256": "3429dec2f24c2506bc06aed47828b5270e574fd261dde6277ef3431c0926de11"
+      },
+      {
+        "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG41268-p020-comparison-definitions-red-v2/manifest.json",
+        "sha256": "372855d79449622f348f49669c2459b25cedf1d4bcc699f49528fa0d84c31fab"
+      },
+      {
+        "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG41270-p020-comparison-definitions-green-v1/manifest.json",
+        "sha256": "516f3bac8f0935a06323d3156239684f01e8f04a2604b53a20155c90da3799f9"
+      },
+      {
+        "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG41272-p020-comparison-definitions-independent-v1/manifest.json",
+        "sha256": "0361b8b38eccb98434dec2b3db180a896e71b293e6e4a31d7552cd4d11c06795"
+      },
+      {
+        "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG41274-p020-comparison-definitions-qualified-v1/manifest.json",
+        "sha256": "d172dd91d31822778f89020043bfcce21a69390a10dafe2ad8d937fb692c2f68"
+      },
+      {
+        "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG41276-p020-comparison-definitions-qualified-raw-v1/manifest.json",
+        "sha256": "cc34f2fbdd517fc145683fb22d9522711bc977c4553efa8536927c977c67cec9"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "比較工具全21suiteと通常Maven包装の現source一致",
+      "戻り値record公開三メソッドを含む単一無除外exec",
+      "実Current/NK、451、終了依存および元項目・正式受入"
+    ],
+    "newHarnessTests": 2,
+    "staticAnalyzedProductClasses": 2,
+    "requiredSelectionSize": 75,
+    "preflightFailures": 1,
+    "redCount": 2,
+    "redFailure": 2,
+    "greenCount": 74,
+    "qualifiedCount": 75,
+    "retryReasons": [
+      "二fixture参照がjavac入力漏れ、実行未開始",
+      "独立生readerで事前仮定を訂正。生成record三method残。"
+    ],
+    "testedSource": "1d464e30a8cef885abbe72e4bf117dd97f256378",
+    "bug": [
+      "BUG-3477"
+    ],
+    "ykt": [
+      "YKT-2773"
+    ],
+    "previousLocalRecord": 1675,
+    "firstValidRuntimeResult": "EXPECTED_RED_2_OF_2",
+    "comparisonCoverage": {
+      "line": [
+        365,
+        365
+      ],
+      "method": [
+        47,
+        50
+      ],
+      "branch": [
+        176,
+        176
+      ],
+      "classes": [
+        2,
+        2
+      ],
+      "instruction": [
+        1869,
+        1879
+      ]
+    },
+    "oldJobReruns": 0
+  }
+}
