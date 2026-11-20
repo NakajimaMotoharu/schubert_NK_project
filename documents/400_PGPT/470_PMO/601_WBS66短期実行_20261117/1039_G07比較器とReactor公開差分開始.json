@@ -1,0 +1,67 @@
+{
+  "eventId": "PGPT-20261008-6558",
+  "groupId": "PGPT-WBS66-G07-REACTOR-A02-PUBLIC-DELTA-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T04:37:02.693000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 63,
+      "remainingPercent": 37,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-G07-REACTOR-A02-PUBLIC-DELTA-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-G07-REACTOR-A02-PUBLIC-DELTA-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-G07"
+    ],
+    "managementWorkIds": [
+      "WBS-G07"
+    ],
+    "source": "06326ddf5af9881b134159c35e97f278fb70f804",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40676-g07-reactor-a02-public-delta-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.25,
+      "base": 0.55,
+      "high": 1.25
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1038_F02現六ReactorValidate継続点.json",
+        "sha256": "7f4e591b5940f656972e821ff98995fad3a1eb87808dfb01e7a5e286479ecbc3"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40654-g07-current-compiler-evidence-delta-independent-v1/manifest.json",
+        "sha256": "a4b06fdef30558906ecc7828aedb4ba554422ef4d68031575d1f58e624122a45"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40674-f02-current-main-inventory-publication-v1/manifest.json",
+        "sha256": "d60ea64020973f7cd11d8b4082736f229bf059da5914d91f32962cb48aae7e51"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40662-p020-a02-redirect-independent-v1/manifest.json",
+        "sha256": "b23ed3c1f843a121e12466e16774f2c6c95d36a35a192d60ac6eebf302ee9b3e"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "G07・公開Git差分。前カーソル3281e57067以降の比較器・新リアクタの全公開変化だけ。",
+    "endCondition": "Git差分とgzipの検出を確認。発生時は対応するGit sourceからdigestを実証、JaCoCo二物理は所有合成execの同一sourceを照合。新cursorを保存。",
+    "workScope": "公開証跡のみ。実CHR/認証、非公開archiveや秘密情報の探索、製品PTやnetwork運用の反復なし。"
+  }
+}
