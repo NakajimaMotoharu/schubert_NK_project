@@ -1,0 +1,134 @@
+{
+  "eventId": "PGPT-20261008-6471",
+  "groupId": "PGPT-WBS66-P020-DIF007-PROTECTED-TEMPLATE-MATRIX-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T02:39:52.344000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 60,
+      "remainingPercent": 40,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P020-DIF007-PROTECTED-TEMPLATE-MATRIX-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-P020-DIF007-PROTECTED-TEMPLATE-MATRIX-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P020-01.02"
+    ],
+    "managementWorkIds": [
+      "WBS-P020-01.02/2"
+    ],
+    "source": "9e19c99f8f2b9dbfa0408a06ed8e8b202731d0ce",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40562-p020-dif007-nk-topbar-static-template-matrix-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.2,
+      "base": 0.65,
+      "high": 1.55
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/949_G07文面品質後の公開差分継続点.json",
+        "sha256": "1e06202158e56918a933a2f77246a8744c4629b33926485423a0eb40950e74f2"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40284-p020-dif007-observation-admission-v1/manifest.json",
+        "sha256": "edc4033aee264189bda870a32c5b940d17929033c58090d2c38a15c94c385a63"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40560-g07-style-delta-sha-signals-independent-v1/manifest.json",
+        "sha256": "f47ebadd8136099667740ae489deea5b1ede82764fd1a9eb360e951fe936d7e1"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "BUG-3356のNKソース側の独立条件。WBS66 P020-01.02/2、UI221の22保護画面＋認証時error、UI222のtopbar、DIF007。現Currentの既正本は変更しない。",
+    "endCondition": "全画面templateの共通fragment参照と固定username/role/logoutの限定証拠を取得。必要な実DOM・補助投影と当比較受入は不足として分ける。",
+    "workScope": "公開のThymeleafテンプレートを構文解析する限定source PTのみ。Browser、実認証、JVM、DB、システム、鍵、保留型へのアクセスなし。",
+    "quotaAfter": {
+      "usedPercent": 60,
+      "remainingPercent": 40,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "b511dc2701dddd64560e89765db5d1a0984eb5eb29264e5fbf427d0dd438274e",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T02:39:52.344000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 60,
+          "remainingPercent": 40,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T02:39:27.221152+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 60,
+      "remainingPercent": 40,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6470",
+    "attempt": 1,
+    "attemptResult": "NK_DIF007_22_PROTECTED_TEMPLATE_WIRINGS_AND_TWO_ERROR_BRANCHES_CHECKED",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG40564-p020-dif007-nk-topbar-static-independent-v1/manifest.json",
+        "sha256": "38216c7c6cd196f7c00db98a6f8eceb2138503eeaba705a33d13cebe368304d3"
+      },
+      {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG40562-p020-dif007-nk-topbar-static-template-matrix-v1/manifest.json",
+        "sha256": "3c896095a0927b2675041bc856e4884351b2536336eeb7f78c19ce0f3a61837b"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "BUG-3356 comparator未修正、実Browser、本物HTTPと検収、全451。"
+    ],
+    "firstValidationPassed": 1,
+    "firstValidationDenominator": 1,
+    "retries": 0,
+    "independentlyMappedScreens": 22,
+    "newSourceStaticTestDefinitions": 1,
+    "actualBrowserRuns": 0,
+    "templateScope22": 22,
+    "immutableBaselinePreserved": true
+  }
+}

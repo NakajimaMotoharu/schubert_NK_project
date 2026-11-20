@@ -1,0 +1,160 @@
+{
+  "actualExit": 0,
+  "source": "9e19c99f8f2b9dbfa0408a06ed8e8b202731d0ce",
+  "productionCore": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+  "testId": "PT-CHR-U02-DIF007-TPL-001",
+  "testEvidence": {
+    "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG40562-p020-dif007-nk-topbar-static-template-matrix-v1/manifest.json",
+    "sha256": "3c896095a0927b2675041bc856e4884351b2536336eeb7f78c19ce0f3a61837b"
+  },
+  "ui221": {
+    "path": "documents/200_UI/220_画面・認証/221_画面一覧・画面遷移設計.md",
+    "byteSha256": "a1006b4c192491905897c20d27c60ef4300c31462abb08414e70bb92e8cb4acd"
+  },
+  "checkedProtectedRouteTemplates": [
+    {
+      "screenId": "SCR-002",
+      "approvedRoute": "GET `/`",
+      "template": "src/schubert-nk-web/src/main/resources/templates/menu.html",
+      "boundToSharedIdentity": true
+    },
+    {
+      "screenId": "SCR-003",
+      "approvedRoute": "GET `/search`",
+      "template": "src/schubert-nk-web/src/main/resources/templates/search.html",
+      "boundToSharedIdentity": true
+    },
+    {
+      "screenId": "SCR-004",
+      "approvedRoute": "GET `/scenarios`",
+      "template": "src/schubert-nk-web/src/main/resources/templates/scenarios.html",
+      "boundToSharedIdentity": true
+    },
+    {
+      "screenId": "SCR-005",
+      "approvedRoute": "GET `/scenarios/{game}`",
+      "template": "src/schubert-nk-web/src/main/resources/templates/scenario-routes.html",
+      "boundToSharedIdentity": true
+    },
+    {
+      "screenId": "SCR-006",
+      "approvedRoute": "GET `/scenarios/{game}/{prefix}`",
+      "template": "src/schubert-nk-web/src/main/resources/templates/scenario-files.html",
+      "boundToSharedIdentity": true
+    },
+    {
+      "screenId": "SCR-007",
+      "approvedRoute": "GET `/scenarios/{id}`",
+      "template": "src/schubert-nk-web/src/main/resources/templates/scenario.html",
+      "boundToSharedIdentity": true
+    },
+    {
+      "screenId": "SCR-008",
+      "approvedRoute": "GET `/animation`",
+      "template": "src/schubert-nk-web/src/main/resources/templates/animation.html",
+      "boundToSharedIdentity": true
+    },
+    {
+      "screenId": "SCR-009",
+      "approvedRoute": "GET `/animation/main`, `/animation/ova`",
+      "template": "src/schubert-nk-web/src/main/resources/templates/animation-list.html",
+      "boundToSharedIdentity": true
+    },
+    {
+      "screenId": "SCR-010",
+      "approvedRoute": "GET `/animation/opening`, `/animation/videos/{id}`",
+      "template": "src/schubert-nk-web/src/main/resources/templates/animation-watch.html",
+      "boundToSharedIdentity": true
+    },
+    {
+      "screenId": "SCR-011",
+      "approvedRoute": "GET `/music`",
+      "template": "src/schubert-nk-web/src/main/resources/templates/music.html",
+      "boundToSharedIdentity": true
+    },
+    {
+      "screenId": "SCR-012",
+      "approvedRoute": "GET `/music/{category}`",
+      "template": "src/schubert-nk-web/src/main/resources/templates/music-sections.html",
+      "boundToSharedIdentity": true
+    },
+    {
+      "screenId": "SCR-013",
+      "approvedRoute": "GET `/music/{category}/{section}`",
+      "template": "src/schubert-nk-web/src/main/resources/templates/music-list.html",
+      "boundToSharedIdentity": true
+    },
+    {
+      "screenId": "SCR-014",
+      "approvedRoute": "GET `/logs`",
+      "template": "src/schubert-nk-web/src/main/resources/templates/logs.html",
+      "boundToSharedIdentity": true
+    },
+    {
+      "screenId": "SCR-015",
+      "approvedRoute": "GET `/admin/users`",
+      "template": "src/schubert-nk-web/src/main/resources/templates/admin/user-list.html",
+      "boundToSharedIdentity": true
+    },
+    {
+      "screenId": "SCR-016",
+      "approvedRoute": "GET/POST `/admin/users/new`",
+      "template": "src/schubert-nk-web/src/main/resources/templates/admin/user-new.html",
+      "boundToSharedIdentity": true
+    },
+    {
+      "screenId": "SCR-017",
+      "approvedRoute": "GET/POST `/admin/users/{id}`",
+      "template": "src/schubert-nk-web/src/main/resources/templates/admin/user-detail.html",
+      "boundToSharedIdentity": true
+    },
+    {
+      "screenId": "SCR-018",
+      "approvedRoute": "GET/POST `/questions/new`",
+      "template": "src/schubert-nk-web/src/main/resources/templates/questions/new.html",
+      "boundToSharedIdentity": true
+    },
+    {
+      "screenId": "SCR-019",
+      "approvedRoute": "GET `/questions/accepted/{receiptId}`",
+      "template": "src/schubert-nk-web/src/main/resources/templates/questions/accepted.html",
+      "boundToSharedIdentity": true
+    },
+    {
+      "screenId": "SCR-020",
+      "approvedRoute": "GET `/notifications`",
+      "template": "src/schubert-nk-web/src/main/resources/templates/notifications/list.html",
+      "boundToSharedIdentity": true
+    },
+    {
+      "screenId": "SCR-021",
+      "approvedRoute": "GET/POST `/notifications/{id}`",
+      "template": "src/schubert-nk-web/src/main/resources/templates/notifications/detail.html",
+      "boundToSharedIdentity": true
+    },
+    {
+      "screenId": "SCR-022",
+      "approvedRoute": "GET `/questions`",
+      "template": "src/schubert-nk-web/src/main/resources/templates/questions/list.html",
+      "boundToSharedIdentity": true
+    },
+    {
+      "screenId": "SCR-023",
+      "approvedRoute": "GET/POST `/questions/{id}`",
+      "template": "src/schubert-nk-web/src/main/resources/templates/questions/detail.html",
+      "boundToSharedIdentity": true
+    }
+  ],
+  "exceptionBranches": [
+    "authenticated error",
+    "anonymous error",
+    "public login"
+  ],
+  "sourceOnly": true,
+  "unchangedCurrent": true,
+  "additionalBrowserEvidenceNeeded": true,
+  "comparatorBug3356Closed": false,
+  "wholeDif007": false,
+  "formalDelta": 0,
+  "terminalAtUTC": "2026-11-20T02:39:27.221152+00:00"
+}
