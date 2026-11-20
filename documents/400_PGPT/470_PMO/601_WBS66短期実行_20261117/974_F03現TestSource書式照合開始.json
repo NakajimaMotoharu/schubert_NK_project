@@ -1,0 +1,71 @@
+{
+  "eventId": "PGPT-20261008-6494",
+  "groupId": "PGPT-WBS66-F03-CURRENT-ELIGIBLE-TEST-CHECKSTYLE-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T03:04:47.152000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 60,
+      "remainingPercent": 40,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-CURRENT-ELIGIBLE-TEST-CHECKSTYLE-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F03-CURRENT-ELIGIBLE-TEST-CHECKSTYLE-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "source": "d3f2e51ee5d0044cd819e62addfbfccb9715d9ba",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40592-f03-eligible-test-source-quality-join-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.3,
+      "base": 0.65,
+      "high": 1.4
+    },
+    "groupCapPp": 1.9,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/973_11月25日現引渡し継続点.json",
+        "sha256": "28d83f019f80992aa24e61806ade6744d8e9a0fb312226794ca5ba2e238194d2"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39310-f03-current-source-lint-join-v3/manifest.json",
+        "sha256": "dbaa8869cb19a769ca8caae9957f3f74299856cac642eb8d532aac78a4380f9a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38504-f03-current-test-source-delta-v1/manifest.json",
+        "sha256": "0a33f850576813ff014ada3969c20506fe8ec964ab49d4ab81a321bc33792b0c"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40500-schema-history-close-static-and-junit-independent-v1/manifest.json",
+        "sha256": "caea692bdfb3615385369c6cff24553e4697b543d027c1ed92147ae7132184fe"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40556-f03-six-main-style-independent-v1/manifest.json",
+        "sha256": "0e12bf94b5a4573f9219b19211a2cc1b6258483dc72c1e868fefdb9aafa36354"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "旧PG39310の現候補との差分をGit blobで確定。保護32はpathメタデータ照合のみ。",
+    "endCondition": "同一候補の未取得チェックをTest source単位で特定し、保存済みと新規Checkstyleを独立照合。",
+    "workScope": "既許可のTest source textのみ。compile、テスト実行、classfile、runtime・環境操作は無し。"
+  }
+}

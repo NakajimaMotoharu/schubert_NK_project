@@ -1,0 +1,140 @@
+{
+  "eventId": "PGPT-20261008-6495",
+  "groupId": "PGPT-WBS66-F03-CURRENT-ELIGIBLE-TEST-CHECKSTYLE-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T03:06:42.929000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 60,
+      "remainingPercent": 40,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-CURRENT-ELIGIBLE-TEST-CHECKSTYLE-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F03-CURRENT-ELIGIBLE-TEST-CHECKSTYLE-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "source": "d3f2e51ee5d0044cd819e62addfbfccb9715d9ba",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40592-f03-eligible-test-source-quality-join-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.3,
+      "base": 0.65,
+      "high": 1.4
+    },
+    "groupCapPp": 1.9,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/973_11月25日現引渡し継続点.json",
+        "sha256": "28d83f019f80992aa24e61806ade6744d8e9a0fb312226794ca5ba2e238194d2"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39310-f03-current-source-lint-join-v3/manifest.json",
+        "sha256": "dbaa8869cb19a769ca8caae9957f3f74299856cac642eb8d532aac78a4380f9a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38504-f03-current-test-source-delta-v1/manifest.json",
+        "sha256": "0a33f850576813ff014ada3969c20506fe8ec964ab49d4ab81a321bc33792b0c"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40500-schema-history-close-static-and-junit-independent-v1/manifest.json",
+        "sha256": "caea692bdfb3615385369c6cff24553e4697b543d027c1ed92147ae7132184fe"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40556-f03-six-main-style-independent-v1/manifest.json",
+        "sha256": "0e12bf94b5a4573f9219b19211a2cc1b6258483dc72c1e868fefdb9aafa36354"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "旧PG39310の現候補との差分をGit blobで確定。保護32はpathメタデータ照合のみ。",
+    "endCondition": "同一候補の未取得チェックをTest source単位で特定し、保存済みと新規Checkstyleを独立照合。",
+    "workScope": "既許可のTest source textのみ。compile、テスト実行、classfile、runtime・環境操作は無し。",
+    "quotaAfter": {
+      "usedPercent": 60,
+      "remainingPercent": 40,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "ed59a6aa625a26db1cd31e70dd58136e80e1420aaff36a7d2998964a4daecaac",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T03:06:42.929000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 60,
+          "remainingPercent": 40,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T03:06:19.240315+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 60,
+      "remainingPercent": 40,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6494",
+    "attempt": 1,
+    "attemptResult": "現Test許可1,110のCheckstyle独立確認",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40594-f03-eligible-test-checkstyle-independent-v1/manifest.json",
+        "sha256": "2785529ad5c46bb36181ab3c65c941c9ae7d8e3fd95f6050b2a874689d13d51e"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "保護32の現source検査",
+      "F03六製品全型付き・451"
+    ],
+    "currentTestSourceCount": 1142,
+    "confirmedCheckstyleSources": 1110,
+    "newCheckstyleInputs": 17,
+    "priorExactOrUnchanged": 1093,
+    "heldSourceCount": 32,
+    "heldSourceContentsRead": 0,
+    "rawCheckstyleFindings": 0,
+    "compilerExecutions": 0,
+    "independentPathNormalizationRecovery": true
+  }
+}

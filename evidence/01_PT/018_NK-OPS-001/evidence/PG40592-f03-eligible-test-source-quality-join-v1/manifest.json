@@ -1,0 +1,94 @@
+{
+  "actualExit": 0,
+  "currentSource": "d3f2e51ee5d0044cd819e62addfbfccb9715d9ba",
+  "productionCore": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+  "allTestSourceCount": 1142,
+  "confirmedCheckstyleSourceCount": 1110,
+  "unchanged": 1070,
+  "eligibleDelta": 40,
+  "priorExact": 23,
+  "freshInputs": 17,
+  "freshClean": 17,
+  "protectedMetadataOnly": 32,
+  "unresolvedOrdinary": [],
+  "modules": {
+    "schubert-nk-api": 335,
+    "schubert-nk-web": 295,
+    "schubert-nk-batch": 284,
+    "schubert-nk-bootstrap": 121,
+    "schubert-nk-protocol": 40,
+    "schubert-nk-storage": 35
+  },
+  "toolInputs": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "sha256": "c324471f8b7933a3cb401eafbc35a7055443779b438a3ab928bda3867a1b8ab1"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+      "sha256": "754e218ab1fcabb1e1c5f8530e9d3aa37636806c22987bb279dd907a6ee749b2"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+      "sha256": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+      "sha256": "25b400f003089d23cc5320cdaf1a16cabee19b8aa3434d0ff021b3d9f42154b4"
+    }
+  ],
+  "sourceEvidence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40592-f03-eligible-test-source-quality-join-v1/eligible-delta.json",
+    "sha256": "785c0c339b2405cc12b914e51892a0930b082b55bf142f064d590a6c44d94ad4"
+  },
+  "currentExecution": {
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-Xmx768m",
+      "-jar",
+      "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+      "-c",
+      "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+      "-f",
+      "xml",
+      "-o",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG40592-f03-eligible-test-source-quality-join-v1/checkstyle.xml",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/logging/RequestLogDetailsTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/backup/BackupVersionsIdentityTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisStartupEvidenceValueTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisStartupObservationTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/BrokerJournalValueContractTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/CleanupWorkerRequestTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolverTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/NonSecretYamlUtf8LimitTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmissionPortTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSourcePortTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationGamesVerifierTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterContentVerifierTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterTargetPublisherTest.java",
+      "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/LogSearchWireUnicodeTest.java",
+      "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/QuestionNotificationWireTest.java",
+      "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/UserCommandWireUnicodeTest.java",
+      "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/UserListReplyWireTest.java"
+    ],
+    "actualExit": 0,
+    "stdout": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40592-f03-eligible-test-source-quality-join-v1/checkstyle.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40592-f03-eligible-test-source-quality-join-v1/checkstyle.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "terminalAtUTC": "2026-11-20T03:05:29.318650+00:00",
+    "xml": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40592-f03-eligible-test-source-quality-join-v1/checkstyle.xml",
+      "sha256": "fce8d40b66eae6f58c3e84ac3db46c378383dd589f32367dfbdf8b609bb01a1a"
+    }
+  },
+  "actualCompilerProcesses": 0,
+  "productTests": 0,
+  "wholeF03Accepted": false,
+  "whole451Accepted": false,
+  "terminalAtUTC": "2026-11-20T03:05:29.320271+00:00"
+}
