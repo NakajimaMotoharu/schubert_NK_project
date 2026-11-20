@@ -1,0 +1,104 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-20T04:47:55.162729+00:00",
+  "productionCore": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+  "source": "0545607033d79eb42e62e563c4beb83a6fb6ab7e",
+  "originalCatalog": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37452-p01810-independent-case-catalog-v1/eight-concrete-independent-contracts.json",
+    "sha256": "0a7cc74d825d4a63d110ace66528c226b74c6967f2f452934b44aebdc27b0259"
+  },
+  "boundariesReviewed": 8,
+  "exactComponentLineage": 2,
+  "exactScalarMethods": 1,
+  "rows": [
+    {
+      "boundaryId": "WEB-SECURITY-LOCAL",
+      "status": "EXACT_SOURCE_INPUT_LINEAGE",
+      "checkedSourceInputs": 9,
+      "retainedCases": 6,
+      "historicalReceipt": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25982-security-audit-original-whole6-v1/manifest.json",
+        "sha256": "a405ec87297987d27697c73836f39d200ed54c8d8b1141c0e70ce5fc3e58ba3c"
+      },
+      "remaining": "Actual sink, runtime scope and 451 are separate."
+    },
+    {
+      "boundaryId": "WEB-MEDIA-LOCAL",
+      "status": "EXACT_SOURCE_INPUT_LINEAGE",
+      "checkedSourceInputs": 20,
+      "checkedRules": 2,
+      "retainedCases": 9,
+      "historicalReceipt": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39190-media-audit-current-nine-post-v1/manifest.json",
+        "sha256": "76834fa6688a5cccc3d5fed1e49e38595ab657408cd4efb582bcf08eefe2bcaa"
+      },
+      "remaining": "Actual sink and HTTP environment remain distinct."
+    },
+    {
+      "boundaryId": "WEB-ROUTE-METADATA",
+      "status": "REFERENCE_WITH_DIFF",
+      "historicalReceipt": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27612-trace-menu24-independent-v1/manifest.json",
+        "sha256": "8b70732c00567b8b4dbdfdbfe307098db330f8cc74218f4012f19f78f92dbe87"
+      },
+      "targetMainAndOriginalTestExact": true,
+      "dependencyDelta": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/ContentDetailController.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/NotificationController.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/QuestionController.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/UserAdminController.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/ProtocolValidator.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/ContentDisposition.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/LargeResultRecordCodec.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldDefinition.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/TypedFieldValues.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/IdValue.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/PathSyntax.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/time/JstWireTimestamp.java"
+      ]
+    },
+    {
+      "boundaryId": "API-DETAILS-ALLOWLIST",
+      "status": "ONE_SCALAR_METHOD_WITH_MAIN_TEST_LINEAGE",
+      "retainedCases": 1,
+      "historicalReceipt": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40218-p01809-request-details-scalar-independent-v1/manifest.json",
+        "sha256": "2fd49d305fbb3f1efa0ad042089f7378edc914404f116fe789c767a33da634ce"
+      },
+      "remaining": "Current whole parser suite and actual producer/consumer independent results."
+    },
+    {
+      "boundaryId": "WEB-REQUEST-LOCAL",
+      "status": "DEPENDENCY_REMAINS",
+      "remaining": "HOLD: imports WebStartupException; actual producer whole Test has DB/JCE fixture, no execution under this inventory"
+    },
+    {
+      "boundaryId": "API-LOG-INGEST",
+      "status": "DEPENDENCY_REMAINS",
+      "remaining": "Actual DB/transaction dependent, preserve HOLD; source-only audit not replacement PT"
+    },
+    {
+      "boundaryId": "WEB-FATAL-BOUNDARY",
+      "status": "DEPENDENCY_REMAINS",
+      "remaining": "HOLD inherited WebStartupException/producer graph; do not extract rejected/unknown operation"
+    },
+    {
+      "boundaryId": "BATCH-VALUE-DIAGNOSTIC",
+      "status": "DEPENDENCY_REMAINS",
+      "remaining": "Four public-value source methods exist; actual Root/DB/Broker observation remains held; reuse proven historical exact bytes only"
+    }
+  ],
+  "newProductTestExecutions": 0,
+  "oldCoverageCombined": false,
+  "oldReceiptRelabelled": false,
+  "heldClassfilesRead": 0,
+  "actualSinksStarted": 0,
+  "whole451": false,
+  "formalDelta": 0
+}
