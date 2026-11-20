@@ -376,6 +376,37 @@ class ArtifactComparatorTest {
     }
   }
 
+  /** PT-CHR-DEF081: an ordinary Current case cannot become NK-only. */
+  @Test
+  void rejectsCurrentRunCaseReportedAsNkOnly() throws Exception {
+    verifyCurrentDispositionRejected(FIXTURE_CHR_A01, "NK_ONLY", "ordinary-current-case");
+  }
+
+  /** PT-CHR-DEF082: CHR-N01 is the sole case with no Current execution. */
+  @Test
+  void rejectsNkOnlyCaseReportedAsCurrentRun() throws Exception {
+    verifyCurrentDispositionRejected(FIXTURE_CHR_N01, "RUN", "nk-only-current-case");
+  }
+
+  private void verifyCurrentDispositionRejected(String caseId, String disposition, String fixtureId)
+      throws Exception {
+    Fixture fixture = fixture(fixtureId);
+    mutate(
+        fixture.project().resolve(FIXTURE_CATALOG_PATH),
+        catalog -> {
+          for (JsonNode row : catalog.path("cases")) {
+            if (caseId.equals(row.path("id").asText())) {
+              ((ObjectNode) row).put(FIXTURE_CURRENT, disposition);
+            }
+          }
+        });
+    ArtifactComparator.ComparisonResult result =
+        ArtifactComparator.compare(
+            fixture.project(), fixture.current(), fixture.nk(), fixture.observations());
+    assertFalse(result.passed());
+    assertEquals(List.of("CATALOG_CURRENT:" + caseId), result.failures());
+  }
+
   @Test
   void rejectsRepeatedCaseDefinitionEvenWhenTwentyFourCasesStillCompare() throws Exception {
     Fixture fixture = fixture("duplicate-case-definition");
