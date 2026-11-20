@@ -6,6 +6,7 @@ import json
 import os
 from pathlib import Path
 import subprocess
+import sys
 from xml.etree import ElementTree as ET
 from zipfile import ZipFile
 
@@ -22,7 +23,7 @@ def utc():
     return datetime.now(timezone.utc).isoformat()
 
 
-def main():
+def main(recover):
     ctx_path = next(Path("documents/400_PGPT/470_PMO").glob("601_*/1494_*.json"))
     g = read(ctx_path)
     v = g["values"]
@@ -52,7 +53,10 @@ def main():
     javac = release.parent / "bin/javac"
     env = {"LANG": "C.UTF-8", "TZ": "Asia/Tokyo", "PATH": os.defpath}
     archive = Path("../pgpt-runs/PG379").resolve() / v["run"]
-    archive.mkdir(mode=0o700)
+    if recover:
+        assert archive.is_dir() and not (archive / "unfiltered.json").exists()
+    else:
+        archive.mkdir(mode=0o700)
     files = archive / "classes"
     xml_dir = archive / "unit"
     stream = archive / "unit.exec"
@@ -60,6 +64,13 @@ def main():
 
     def run(label, args):
         argv = list(map(str, args))
+        if recover and label in ("compile", "unit", "execinfo"):
+            saved = read(archive / f"{label}.json")
+            assert saved["exitCode"] == 0 and saved["command"] == argv
+            for output in ("stdout", "stderr"):
+                assert saved[output] == pin(Path(saved[output]["path"]))
+            outputs.append(saved)
+            return Path(saved["stdout"]["path"]).read_bytes()
         start = utc()
         result = subprocess.run(argv, env=env, capture_output=True, timeout=45, check=False)
         stdout, stderr = [archive / f"{label}.{ext}" for ext in ("stdout", "stderr")]
@@ -95,7 +106,7 @@ def main():
     assert totals == dict(tests=9, failures=0, errors=0, skipped=0)
     assert Counter((x.attrib["classname"], x.attrib["name"]) for x in suite.iter("testcase")) == expected
     streams = run("execinfo", [java, "-jar", cli, "execinfo", stream]).decode().splitlines()
-    assert sum(line.startswith("Session " + session + ":") for line in streams) == 1
+    assert sum(line.startswith(f'Session "{session}":') for line in streams) == 1
     physical = sorted(p for p in files.rglob("*.class")
                       if not p.stem.startswith("RunReferenceRepositoryPureJdbcTest"))
     assert len(physical) == old["scopePhysical"] == 9
@@ -122,11 +133,12 @@ def main():
                 exactMeasuredDao=pin(target), packageEntry=target_name+".class", roster=sorted(expected),
                 session=session, xml=pin(xml), exec=pin(stream), raw=pin(public), counts=totals,
                 physical=[pin(p) for p in physical], measured=parsed, target=own, steps=outputs,
-                inheritedStaticEvidence=old["static"], firstRunSuccess=True, proofOnlyRepeat=False,
+                inheritedStaticEvidence=old["static"], firstRunSuccess=True, proofOnlyRepeat=False, recoveredOriginalTerminal=recover,
                 realDbOrNativeOrLifecycleActions=0, newDefinitions=0, whole451=False, formalDelta=0)
     (out / "manifest.json").write_text(json.dumps(post, ensure_ascii=False, indent=2) + "\n")
     print(totals, own["counters"])
 
 
 if __name__ == "__main__":
-    main()
+    assert sys.argv[1:] in ([], ["--recover"])
+    main(sys.argv[1:] == ["--recover"])
