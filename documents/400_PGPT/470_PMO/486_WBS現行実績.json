@@ -9547,7 +9547,7 @@
   },
   "beforeSsc261InventorySha256": "443af5012e6a3d2a9088bb38d4a28ae3f7ff7645e6e4689fde2bea543fe19b9b",
   "beforeStrictReferenceCandidateInventorySha256": "44976d5ce11f24a89ea7db68c4d5ce1674f9a72032b6a96e453adc461a850968",
-  "inventorySha256": "46e2bd38eb920c9a9ab7f84ad96f23367d80f6ad29a7d0d6d77864aa356a977b",
+  "inventorySha256": "a3b5a9fd75e733522fbc4ea31a2acd41654b889c1405989e890d7f21474d9d6b",
   "expiryCandidateObservation": {
     "source": "1ec19782a1afe22d1de75b05f4cd12b8a8a8a172",
     "run": "PG713/714+PG715/717/719+PG722/725/728/729/730+PG737/738/739",
@@ -49077,5 +49077,41 @@
         "currentEffect": "LOCAL_QUALIFICATION_ONLY"
       }
     ]
+  },
+  "currentComparatorDefinitionIdCorrectionPG41332": {
+    "productionCore": "62b239d4dad561da007e15a290f8a271a165dda9",
+    "wbsLeaf": "WBS-P020-01.02",
+    "managementWorkId": "WBS-P020-01.02/2",
+    "originalWorkRow": 816,
+    "verification": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41332-p020-comparator-test-id-correction-v1/manifest.json",
+      "sha256": "5f8da8d5b4f59d3b2d58830cf9d087b2197b216ffa2f11a1b904acbc01377616"
+    },
+    "currentSpecification": {
+      "path": "evidence/01_PT/020_NK-CHR-001/063_比較定義の版・配列の現行TestIDと証跡対応.md",
+      "sha256": "6a9fb038d7724ed04e0dbd4b0015d95b2c0d62a9677587c0e0561fdadcfe5bca"
+    },
+    "authoritativeTestIds": {
+      "PT-CHR-DEF077": {
+        "className": "GateContractValidatorNegativeTest",
+        "testMethod": "rejectsOtherValidMetadataValuesForTheLegacyPathContract"
+      },
+      "PT-CHR-DEF078": {
+        "className": "ArtifactComparatorTest",
+        "testMethod": "rejectsALegacyPathDifferenceWhenTheLoadedRuleClaimsItIsPermitted"
+      },
+      "PT-CHR-DEF079": {
+        "className": "ArtifactComparatorTest",
+        "testMethod": "rejectsUnrecognizedComparisonDefinitionVersions"
+      },
+      "PT-CHR-DEF080": {
+        "className": "ArtifactComparatorTest",
+        "testMethod": "rejectsNonArrayComparisonDefinitions"
+      }
+    },
+    "supersedesOnlyIncorrectDef077078PointersIn": "currentMediaAndComparatorPG41284",
+    "newProductTests": 0,
+    "acceptedOriginalDelta": 0,
+    "complete451": false
   }
 }
