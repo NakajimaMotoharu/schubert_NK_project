@@ -999,3 +999,5 @@ PT-WEB-SCR012-COUNT-001、WBS-P016-12/2-照合、SS313 §2・UI235 §8。区分�
 PT-WEB-SCR011-COUNT-001、WBS-P016-11/2-照合、SS313 §2・UI235 §7。カテゴリ件数の過少申告。 [局所仕様](../../../evidence/01_PT/016_NK-WEB-002/4940_SCR011カテゴリ件数不足側の単体仕様.md)。
 
 PT-WEB-SCR009-COUNT-001、WBS-P016-09/2-照合、SS313 §2・UI235 §5。Animation一覧の件数過大申告。 [局所仕様](../../../evidence/01_PT/016_NK-WEB-002/4942_SCR009Animation件数過大側の単体仕様.md)。
+
+PT-WEB-SCR013-COUNT-001、WBS-P016-13/2、SS313 §2・UI235 §9。曲一覧の件数過大申告。 [局所仕様](../../../evidence/01_PT/016_NK-WEB-002/4944_SCR013曲一覧件数過大側の単体仕様.md)。

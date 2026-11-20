@@ -1,0 +1,129 @@
+{
+  "eventId": "PGPT-20261008-7132",
+  "groupId": "WBS66-P01613-SCR013-DECLARED-COUNT-OVERCLAIM",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T20:29:32.166000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 80,
+      "remainingPercent": 20,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66-P01613-SCR013-DECLARED-COUNT-OVERCLAIM",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "WBS66-P01613-SCR013-DECLARED-COUNT-OVERCLAIM",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P016-13"
+    ],
+    "managementWorkIds": [
+      "WBS-P016-13/2"
+    ],
+    "source": "a6144f810911231b774abf201805bd75891c71f0",
+    "productionCoreMain": "559f5b5945e82374e0843dcfae11a8d07faef1ea",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG41188-scr013-music-track-overclaimed-count-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.12,
+      "base": 0.39,
+      "high": 0.9
+    },
+    "groupCapPp": 1.1,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1615_G07三画面公開差分と次工程.json",
+        "sha256": "8922cc2753597f6987526d0430fdb20b24a0e3621b2796198a1e1f403fbd3a15"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27774-music-track-public6-normal-v1/manifest.json",
+        "sha256": "685fe5e0d4452019eb7315489df3029c33ab1b077d0ca9d0ac5ea102fc6b614e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27780-music-track-public6-v1/manifest.json",
+        "sha256": "67ba3d27f62b8c8cdf58a155ee76f4f7d5bf248ac97a7d4e2bec9ee11b99b0a1"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27782-music-track-public6-independent-v1/manifest.json",
+        "sha256": "c5edcd82c068dd7eb505b2460afcfea07427ede1921a3256cf0fb3ece5901a14"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "UI235 §9.2/9.3、SS313 SCR013、WBS行494。既source byte同一、PUBLIC003は宣言0→実1のみ。反対側局所純値を追加。/2正式受入依存を維持",
+    "endCondition": "宣言1実0の固定一個体、元selected fixtureと物理一致、現一run CRC/XML終了証拠",
+    "workScope": "PT-WEB-SCR013-COUNT-001; isolated projection only, no pair/file/HTTP/Browser or prior run repetition",
+    "quotaAfter": {
+      "usedPercent": 80,
+      "remainingPercent": 20,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "9c714859c29adb6992cf8e2e9ee872555b7a717156d74890567a8f14b52adaa4",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T20:29:32.166000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 80,
+          "remainingPercent": 20,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T20:29:13.230329+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 80,
+      "remainingPercent": 20,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-7131",
+    "attempt": 1,
+    "attemptResult": "PRODUCT_VALUE_BOUNDARY_PASSED_IDENTICAL_PROJECTION",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 1,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41188-scr013-music-track-overclaimed-count-v1/manifest.json",
+        "sha256": "5c098d68a5d6f514372d59211c2b7a1390687a11f92095fe281b5ba6ab7eec1a"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": "SCR013のP015-02、実HTTP・配信、同source全451と終了依存。",
+    "firstActualProductCases": 1,
+    "firstActualProductPass": 1,
+    "testId": "PT-WEB-SCR013-COUNT-001",
+    "expectedProjectionByteMatch": true,
+    "actualOrdinaryBackendActivations": 0
+  }
+}

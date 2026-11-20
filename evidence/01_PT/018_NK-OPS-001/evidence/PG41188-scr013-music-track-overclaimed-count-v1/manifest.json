@@ -1,0 +1,225 @@
+{
+  "actualExit": 0,
+  "productionCore": "559f5b5945e82374e0843dcfae11a8d07faef1ea",
+  "terminalAtUTC": "2026-11-20T20:29:13.230329+00:00",
+  "os": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+  "run": "PG41188-scr013-music-track-overclaimed-count-v1",
+  "testId": "PT-WEB-SCR013-COUNT-001",
+  "testSource": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/MusicTrackCountBoundaryTest.java",
+    "sha256": "43df2b568a56d132a52e2aad0fe26570cf6ca90a36e1c9a0c91d7ec947cec62c"
+  },
+  "qualifiedTrackPhysical": {
+    "dev/codex/schubert/nk/web/view/MusicTrackViewModel.class": "eb691aec47706f58f7a3f2002e15240abe7bbf3263afd92c3d9377fdd8b2dab3"
+  },
+  "originalEvidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27774-music-track-public6-normal-v1/manifest.json",
+      "sha256": "685fe5e0d4452019eb7315489df3029c33ab1b077d0ca9d0ac5ea102fc6b614e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27780-music-track-public6-v1/manifest.json",
+      "sha256": "67ba3d27f62b8c8cdf58a155ee76f4f7d5bf248ac97a7d4e2bec9ee11b99b0a1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27782-music-track-public6-independent-v1/manifest.json",
+      "sha256": "c5edcd82c068dd7eb505b2460afcfea07427ede1921a3256cf0fb3ece5901a14"
+    }
+  ],
+  "sourceInputs": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/MusicTrackViewModel.java": "8bb4bc900c773b4e172c723827a8e558c83133fe882df9d11adf0237cecabf8e",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/TopBarViewModel.java": "16afe37089d96cb31e7849e5bf5e289196588c6f4b8e1d4732fd402887e24a09",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionPrincipal.java": "29af626632ac4c2727f9d0963c3967cb0be7eda57daf762a482268c467dc9232",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/MusicTrackPublicContractTest.java": "7f6f1695150d479ecc49886d6517cc69a07168b76183f78bc1499a70c0b6d628",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/AuthenticationContext.java": "aaa18a4c954a425c943e8c30ea1752b665b249e86d8f1767e9e37f4aa61a6b66",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/MusicTrackRecord.java": "c3e4d5a5e4de04642a361826684fa1f902681bbf455c754ad8fafb8c76ba262e",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/MusicTrackResponseData.java": "69270c63ce61efded7400fdea0494290e60d6e3e20927612a5ad4a676e984f81",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/DisplayPath.java": "e26f1483749b0426f67df22df854e513f61ecb08569d5616ccd5569ded441d02",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/PairRole.java": "b881ac09eba717b335039d9deb660ceaf1c7d40de7692ae583647f9efb94c454",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/UserRole.java": "b68402e5705ca2ac5093a1b98a44de5a9f45ed69cb9b231658b4903c51e0bf69"
+  },
+  "exactProjectionBinaryMatches": true,
+  "stages": {
+    "format": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/MusicTrackCountBoundaryTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "checkstyle": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/MusicTrackCountBoundaryTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "40d8498dc1e7b4e0047036c1ba415ec5641d65b4e9f0caf913f62e47d0cf78dd",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compile": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/dev/shm/pgpt-scr013-count-edkfi7dn:/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG37688-web-enum-current-protocol176-v1/current-protocol176.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/pg37962-log-view-safe-dependencies-v1/qualified-web-safe18.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-web/7.0.9/spring-web-7.0.9.jar",
+        "-d",
+        "/dev/shm/pgpt-scr013-count-edkfi7dn",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/MusicTrackCountBoundaryTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "junit": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Dfile.encoding=UTF-8",
+        "-Duser.timezone=Asia/Tokyo",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/PG41188-scr013-music-track-overclaimed-count-v1/unit.exec,append=false,sessionid=PG41188-scr013-music-track-overclaimed-count-v1",
+        "-cp",
+        "/dev/shm/pgpt-scr013-count-edkfi7dn:/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG37688-web-enum-current-protocol176-v1/current-protocol176.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/pg37962-log-view-safe-dependencies-v1/qualified-web-safe18.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-web/7.0.9/spring-web-7.0.9.jar",
+        "org.junit.platform.console.ConsoleLauncher",
+        "execute",
+        "--disable-banner",
+        "--details=summary",
+        "--fail-if-no-tests",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41188-scr013-music-track-overclaimed-count-v1/xml",
+        "--select-class",
+        "dev.codex.schubert.nk.web.view.MusicTrackCountBoundaryTest"
+      ],
+      "exit": 0,
+      "stdoutSha256": "f61e56062a1cc979c96c87b00ca730d4a25f405591c8d457299304308de3567c",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "tests": 1,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "localOriginals": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41188-scr013-music-track-overclaimed-count-v1/terminal.json",
+      "sha256": "a8c319f3a4cc49588ecc29c183d57aa6e8bea6353deeb6891d83bdfaf8d7ba6f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41188-scr013-music-track-overclaimed-count-v1/unit.exec",
+      "sha256": "cffbf320eb8bc92f6f8e536fd7e36f6c19c9785fdb2041b915bfad7ad4256ed5"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41188-scr013-music-track-overclaimed-count-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "e5577a8af0912e0996f3ad5bcad3d300a7e05e898afdc71bb641462239f90da2"
+    }
+  ],
+  "projectionExec": {
+    "crc64": "d86332e468875b9",
+    "probeCount": 75,
+    "hitProbeIds": [
+      0,
+      1,
+      3,
+      4,
+      54,
+      55,
+      56,
+      57
+    ],
+    "missedProbeIds": [
+      2,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74
+    ]
+  },
+  "input": {
+    "declaredCount": 1,
+    "actualRows": 0
+  },
+  "expected": "IllegalArgumentException",
+  "actual": "IllegalArgumentException",
+  "oldProductReplayed": 0,
+  "oldAndNewExecCombined": false,
+  "actualBackendOperations": 0,
+  "formalDelta": 0,
+  "whole451": false
+}
