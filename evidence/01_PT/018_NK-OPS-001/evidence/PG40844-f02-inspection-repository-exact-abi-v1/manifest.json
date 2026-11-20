@@ -1,0 +1,287 @@
+{
+  "actualExit": 0,
+  "core": "cdb649a5f054bc2ceed72ef57e55605f14a590d1",
+  "previousCore": "da20ad7753279ae4e8017593866502d3341ec0e5",
+  "unit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40842-p00402-inspection-sql-cycle-raw-v1/manifest.json",
+    "sha256": "b6cfcde4f75ee961bb25039283d662f914c31d7c240f6f38d0305b33f04e8231"
+  },
+  "changedSource": {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+    "sha256": "5253148aa625da42d74b54ce7b7ca45639cd4392cc2a8e742315531fb8f65c24"
+  },
+  "currentClass": {
+    "path": "../pgpt-runs/PG379/PG40842-p00402-inspection-sql-cycle-raw-v1/matched-classes/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.class",
+    "sha256": "0c44a12880351913a9518c4a8a89ae7e1754cd66cf0b1c138505c374e92902dc"
+  },
+  "priorClassSha256": "f56ddc1dd6e10313e386967c83755fc73626f3fb9417cd55ba5c9ba665453fc9",
+  "crc64": "5d524ee1e3c908e8",
+  "identicalPublicDescriptor": true,
+  "publicApi": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40844-f02-inspection-repository-exact-abi-v1/inspection-public-api.txt",
+    "sha256": "bf6c1101c14f1b1c00a0f007f5eb394034960cad7434406bc4b9239ab264461a"
+  },
+  "directConstantPoolAdditions": {
+    "Class": [
+      "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph"
+    ],
+    "Methodref": [],
+    "InterfaceMethodref": [
+      "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.preserveFatal:(Ljava/lang/Throwable;)V"
+    ],
+    "Fieldref": [],
+    "String": []
+  },
+  "constantStringDelta": 0,
+  "classpathModule": "schubert-nk-bootstrap",
+  "steps": {
+    "readBaseline InspectionSummaryRepository.java": {
+      "command": [
+        "git",
+        "show",
+        "da20ad7753279ae4e8017593866502d3341ec0e5:src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java"
+      ],
+      "exitCode": 0,
+      "stdoutSha256": "fe6aacb6e84e4edcaee4bd8033b36e235f0575180f35e9060908a4c0eda34822",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "readCandidate InspectionSummaryRepository.java": {
+      "command": [
+        "git",
+        "show",
+        "cdb649a5f054bc2ceed72ef57e55605f14a590d1:src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java"
+      ],
+      "exitCode": 0,
+      "stdoutSha256": "5253148aa625da42d74b54ce7b7ca45639cd4392cc2a8e742315531fb8f65c24",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "readBaseline InspectionSummary.java": {
+      "command": [
+        "git",
+        "show",
+        "da20ad7753279ae4e8017593866502d3341ec0e5:src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummary.java"
+      ],
+      "exitCode": 0,
+      "stdoutSha256": "0af03ae228a8efec00535de709a528dfc9692cb2a51c4c2a4a0e0fb79cde12aa",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "readCandidate InspectionSummary.java": {
+      "command": [
+        "git",
+        "show",
+        "cdb649a5f054bc2ceed72ef57e55605f14a590d1:src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummary.java"
+      ],
+      "exitCode": 0,
+      "stdoutSha256": "0af03ae228a8efec00535de709a528dfc9692cb2a51c4c2a4a0e0fb79cde12aa",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "readBaseline BatchRun.java": {
+      "command": [
+        "git",
+        "show",
+        "da20ad7753279ae4e8017593866502d3341ec0e5:src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java"
+      ],
+      "exitCode": 0,
+      "stdoutSha256": "c440d3e16da86b7814cf8fbd6247e48c1ab4cd6de2da3a114a38c308ae3c7ce4",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "readCandidate BatchRun.java": {
+      "command": [
+        "git",
+        "show",
+        "cdb649a5f054bc2ceed72ef57e55605f14a590d1:src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java"
+      ],
+      "exitCode": 0,
+      "stdoutSha256": "c440d3e16da86b7814cf8fbd6247e48c1ab4cd6de2da3a114a38c308ae3c7ce4",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "readBaseline CleanupCounts.java": {
+      "command": [
+        "git",
+        "show",
+        "da20ad7753279ae4e8017593866502d3341ec0e5:src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupCounts.java"
+      ],
+      "exitCode": 0,
+      "stdoutSha256": "9a7504e2b266c3de22ce10dfc8b15dadb0ce04f3a5f05bdd86d151c32d341f19",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "readCandidate CleanupCounts.java": {
+      "command": [
+        "git",
+        "show",
+        "cdb649a5f054bc2ceed72ef57e55605f14a590d1:src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupCounts.java"
+      ],
+      "exitCode": 0,
+      "stdoutSha256": "9a7504e2b266c3de22ce10dfc8b15dadb0ce04f3a5f05bdd86d151c32d341f19",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "readBaseline BatchRepositoryException.java": {
+      "command": [
+        "git",
+        "show",
+        "da20ad7753279ae4e8017593866502d3341ec0e5:src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.java"
+      ],
+      "exitCode": 0,
+      "stdoutSha256": "134bcdaecf9f02adc74d5cb728782c41f19497b0c0c37ee2cd4a70b0155179b6",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "readCandidate BatchRepositoryException.java": {
+      "command": [
+        "git",
+        "show",
+        "cdb649a5f054bc2ceed72ef57e55605f14a590d1:src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.java"
+      ],
+      "exitCode": 0,
+      "stdoutSha256": "134bcdaecf9f02adc74d5cb728782c41f19497b0c0c37ee2cd4a70b0155179b6",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "readBaseline JdbcResourceFailures.java": {
+      "command": [
+        "git",
+        "show",
+        "da20ad7753279ae4e8017593866502d3341ec0e5:src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java"
+      ],
+      "exitCode": 0,
+      "stdoutSha256": "5f4f8273a29dc2b89d6cf8fbc566b067480c0c7338f1444d5b14a9a878b1debd",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "readCandidate JdbcResourceFailures.java": {
+      "command": [
+        "git",
+        "show",
+        "cdb649a5f054bc2ceed72ef57e55605f14a590d1:src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java"
+      ],
+      "exitCode": 0,
+      "stdoutSha256": "5f4f8273a29dc2b89d6cf8fbc566b067480c0c7338f1444d5b14a9a878b1debd",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "readBaseline JdbcFailureGraph.java": {
+      "command": [
+        "git",
+        "show",
+        "da20ad7753279ae4e8017593866502d3341ec0e5:src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.java"
+      ],
+      "exitCode": 0,
+      "stdoutSha256": "305e82607cfc8acf9656547c5eee663cc9edee55c0381da96d6860b5a98d0d75",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "readCandidate JdbcFailureGraph.java": {
+      "command": [
+        "git",
+        "show",
+        "cdb649a5f054bc2ceed72ef57e55605f14a590d1:src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.java"
+      ],
+      "exitCode": 0,
+      "stdoutSha256": "305e82607cfc8acf9656547c5eee663cc9edee55c0381da96d6860b5a98d0d75",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "readBaseline StorageIoException.java": {
+      "command": [
+        "git",
+        "show",
+        "da20ad7753279ae4e8017593866502d3341ec0e5:src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java"
+      ],
+      "exitCode": 0,
+      "stdoutSha256": "d59870fcf8d4f7bf9ff4e0abc2e052efddd9a08e9e93efa39d1f15a97f7063cf",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "readCandidate StorageIoException.java": {
+      "command": [
+        "git",
+        "show",
+        "cdb649a5f054bc2ceed72ef57e55605f14a590d1:src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java"
+      ],
+      "exitCode": 0,
+      "stdoutSha256": "d59870fcf8d4f7bf9ff4e0abc2e052efddd9a08e9e93efa39d1f15a97f7063cf",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compileBaseline": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "-d",
+        "/dev/shm/pg40844-9xfm6nyq/baseline-classes",
+        "/dev/shm/pg40844-9xfm6nyq/InspectionSummaryRepository.java",
+        "/dev/shm/pg40844-9xfm6nyq/InspectionSummary.java",
+        "/dev/shm/pg40844-9xfm6nyq/BatchRun.java",
+        "/dev/shm/pg40844-9xfm6nyq/CleanupCounts.java",
+        "/dev/shm/pg40844-9xfm6nyq/BatchRepositoryException.java",
+        "/dev/shm/pg40844-9xfm6nyq/JdbcResourceFailures.java",
+        "/dev/shm/pg40844-9xfm6nyq/JdbcFailureGraph.java",
+        "/dev/shm/pg40844-9xfm6nyq/StorageIoException.java"
+      ],
+      "exitCode": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "classIdentity": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "classinfo",
+        "../pgpt-runs/PG379/PG40842-p00402-inspection-sql-cycle-raw-v1/matched-classes/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.class"
+      ],
+      "exitCode": 0,
+      "stdoutSha256": "30eca86f6730ae8004df6855e8885619c0544793f50c319fa09c8d1ba359b3ef",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "priorDescriptor": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-public",
+        "-s",
+        "-constants",
+        "/dev/shm/pg40844-9xfm6nyq/baseline-classes/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.class"
+      ],
+      "exitCode": 0,
+      "stdoutSha256": "bf6c1101c14f1b1c00a0f007f5eb394034960cad7434406bc4b9239ab264461a",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "candidateDescriptor": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-public",
+        "-s",
+        "-constants",
+        "../pgpt-runs/PG379/PG40842-p00402-inspection-sql-cycle-raw-v1/matched-classes/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.class"
+      ],
+      "exitCode": 0,
+      "stdoutSha256": "bf6c1101c14f1b1c00a0f007f5eb394034960cad7434406bc4b9239ab264461a",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "priorConstantPool": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-v",
+        "/dev/shm/pg40844-9xfm6nyq/baseline-classes/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.class"
+      ],
+      "exitCode": 0,
+      "stdoutSha256": "223793b4580e5932de40009de792fc8a9d5055a4e245dd5351896670b0ff51f8",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "candidateConstantPool": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-v",
+        "../pgpt-runs/PG379/PG40842-p00402-inspection-sql-cycle-raw-v1/matched-classes/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.class"
+      ],
+      "exitCode": 0,
+      "stdoutSha256": "ab2d18e724c3bbe10349cacc2b35adc37e2bca412749a2aad818b3120baa48bc",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "unitReplays": 0,
+  "jarAnalyzerInvocations": 0,
+  "actualBackendOperations": 0,
+  "formalDelta": 0,
+  "whole451": false,
+  "terminalAtUTC": "2026-11-20T12:18:40.085323+00:00"
+}

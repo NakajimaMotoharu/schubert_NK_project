@@ -1,0 +1,145 @@
+{
+  "eventId": "PGPT-20261008-6765",
+  "groupId": "WBS66_F02_INSPECTION_EXACT_ABI",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T12:18:56.805000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 69,
+      "remainingPercent": 31,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66_F02_INSPECTION_EXACT_ABI",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "WBS66_F02_INSPECTION_EXACT_ABI",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a",
+      "WBS-P004-02/2",
+      "WBS-P004-05/2"
+    ],
+    "source": "367f18aa0f2745e3a84a626f5f83bfb0de77b48d",
+    "productionCoreMain": "cdb649a5f054bc2ceed72ef57e55605f14a590d1",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40844-f02-inspection-repository-exact-abi-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.4,
+      "high": 0.85
+    },
+    "groupCapPp": 10,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1246_P00402検査サマリー局所完了と継続点.json",
+        "sha256": "3196e303c88ef334f624940b966cf0660d04cb66670193b70d1de39d57180eca"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40842-p00402-inspection-sql-cycle-raw-v1/manifest.json",
+        "sha256": "b6cfcde4f75ee961bb25039283d662f914c31d7c240f6f38d0305b33f04e8231"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40836-p00402-inspection-single-sql-after-v1/manifest.json",
+        "sha256": "f2802c62f9d179ffbc10bf39d5e392381375d64f7c261bfec16ec40837f2953d"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40840-f02-inspection-corrected-batch-package-v1/manifest.json",
+        "sha256": "04b2c3c8fe15caa5f2558fc306660d5f111f71f187d5d2b6791eadbdc53cbaba"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "最外SQL分類のみの新1sourceと、測定済みexact classあり。既外部descriptor、SQL、許可Bootstrapへの発信だけを確認。",
+    "endCondition": "局所旧新のJVM公開descriptor同一、追加物理直接参照を特定。shared receiptへ繋ぐ。",
+    "workScope": "自己JDKの許可済み八sourceと受入済みlocal classだけ。製品JAR全読取・実DB・旧JUnit再演0。",
+    "quotaAfter": {
+      "usedPercent": 69,
+      "remainingPercent": 31,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "27577fba6da7945c336cdb6ad7b95ec59d7359863ecb246b71166ac7cd5ed4b8",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T12:18:56.805000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 69,
+          "remainingPercent": 31,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T12:18:40.085323+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 69,
+      "remainingPercent": 31,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6764",
+    "attempt": 1,
+    "attemptResult": "PASS_EXACT_TARGET_ABI_AND_DECLARED_EDGE",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40844-f02-inspection-repository-exact-abi-v1/manifest.json",
+        "sha256": "bce2ad96c1a5b095503075c9fd41794a81318cc9620b2998ce25c07a2c6cf138"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5456_inspection_repository_exact_abi.py",
+        "sha256": "215d80213df007737a1bddf502cdc032ee7c32aac6da151fe9bdc21b5b9713c7"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40844-f02-inspection-repository-exact-abi-v1/inspection-public-api.txt",
+        "sha256": "bf6c1101c14f1b1c00a0f007f5eb394034960cad7434406bc4b9239ab264461a"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "F02 all six source and type boundary, static hold",
+      "P004-02 actual database postcondition",
+      "Whole451"
+    ],
+    "changedPhysical": 1,
+    "crc": "5d524ee1e3c908e8",
+    "publicDescriptorsChanged": 0,
+    "directNewModuleReferences": 1,
+    "actualDbOperations": 0,
+    "unitReplays": 0,
+    "jarAnalyzerInvocations": 0
+  }
+}
