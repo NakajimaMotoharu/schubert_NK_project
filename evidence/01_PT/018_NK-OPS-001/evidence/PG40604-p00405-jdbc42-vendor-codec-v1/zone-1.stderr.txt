@@ -1,0 +1,12 @@
+Exception in thread "main" java.lang.AssertionError: unexpected connection method getTypeInfo
+	at org.postgresql.jdbc.PgTemporalRowContract.lambda$main$1(PgTemporalRowContract.java:43)
+	at jdk.proxy1/jdk.proxy1.$Proxy1.getTypeInfo(Unknown Source)
+	at org.postgresql.jdbc.PgResultSet.initSqlType(PgResultSet.java:3358)
+	at org.postgresql.jdbc.PgResultSet.getSQLType(PgResultSet.java:3349)
+	at org.postgresql.jdbc.PgResultSet.getObject(PgResultSet.java:3898)
+	at org.postgresql.jdbc.PgTemporalRowContract.assertValue(PgTemporalRowContract.java:76)
+	at org.postgresql.jdbc.PgTemporalRowContract.main(PgTemporalRowContract.java:56)
+	Suppressed: java.lang.ClassCastException: class jdk.proxy1.$Proxy2 cannot be cast to class org.postgresql.jdbc.PgStatement (jdk.proxy1.$Proxy2 is in module jdk.proxy1 of loader 'app'; org.postgresql.jdbc.PgStatement is in unnamed module of loader 'app')
+		at org.postgresql.jdbc.PgResultSet.close(PgResultSet.java:2361)
+		at org.postgresql.jdbc.PgTemporalRowContract.assertValue(PgTemporalRowContract.java:69)
+		... 1 more
