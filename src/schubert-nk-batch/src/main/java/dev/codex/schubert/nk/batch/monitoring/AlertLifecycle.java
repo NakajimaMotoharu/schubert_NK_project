@@ -105,12 +105,20 @@ public final class AlertLifecycle {
   private static final String INVALID_ELAPSED = "invalid alert elapsed time";
   private static final Duration WARNING_RECOVERY = Duration.ofMinutes(5);
   private static final Duration CRITICAL_RECOVERY = Duration.ofMinutes(10);
-  private final Object lock = new Object();
+  private final State state = new State();
   private final Condition conditionKey;
   private final Service serviceKey;
-  private Optional<Event> active = Optional.empty();
-  private Optional<Duration> recoveringSince = Optional.empty();
-  private Optional<Duration> lastElapsed = Optional.empty();
+
+  // Updates and snapshots synchronize on the same private owner of the lifecycle state.
+  private static final class State {
+    private Optional<Event> active = Optional.empty();
+    private Optional<Duration> recoveringSince = Optional.empty();
+    private Optional<Duration> lastElapsed = Optional.empty();
+
+    private synchronized Optional<Event> snapshot() {
+      return active;
+    }
+  }
 
   public AlertLifecycle(Condition condition, Service service) {
     conditionKey = Objects.requireNonNull(condition, "alert condition");
@@ -128,29 +136,31 @@ public final class AlertLifecycle {
     Objects.requireNonNull(at, "observation time");
     Objects.requireNonNull(elapsed, "monotonic elapsed");
     if (elapsed.isNegative()) throw new IllegalArgumentException(INVALID_ELAPSED);
-    synchronized (lock) {
-      if (lastElapsed.isPresent() && elapsed.compareTo(lastElapsed.orElseThrow()) < 0)
+    synchronized (state) {
+      if (state.lastElapsed.isPresent() && elapsed.compareTo(state.lastElapsed.orElseThrow()) < 0)
         throw new IllegalArgumentException(INVALID_ELAPSED);
-      lastElapsed = Optional.of(elapsed);
+      state.lastElapsed = Optional.of(elapsed);
       if (observed == Severity.NORMAL) return normal(clearance, elapsed);
-      recoveringSince = Optional.empty();
-      Instant first = active.map(Event::firstSeen).orElse(at);
-      BigInteger count = active.map(Event::count).orElse(BigInteger.ZERO).add(BigInteger.ONE);
+      state.recoveringSince = Optional.empty();
+      Instant first = state.active.map(Event::firstSeen).orElse(at);
+      BigInteger count = state.active.map(Event::count).orElse(BigInteger.ZERO).add(BigInteger.ONE);
       Severity level = observed;
-      if (active.isPresent() && active.orElseThrow().severity() == Severity.CRITICAL)
+      if (state.active.isPresent() && state.active.orElseThrow().severity() == Severity.CRITICAL)
         level = Severity.CRITICAL;
-      active = Optional.of(new Event(conditionKey, serviceKey, level, first, at, count, true));
-      return active;
+      state.active =
+          Optional.of(new Event(conditionKey, serviceKey, level, first, at, count, true));
+      return state.active;
     }
   }
 
   private Optional<Event> normal(CauseClearance clearance, Duration elapsed) {
-    if (active.isEmpty()) return Optional.empty();
+    if (state.active.isEmpty()) return Optional.empty();
     // SS351 §12: routine normal samples/cause flags cannot retire investigation-required alerts.
-    if (conditionKey == Condition.DLQ || conditionKey == Condition.INTEGRITY_CONFIG) return active;
-    Duration since = recoveringSince.orElse(elapsed);
-    recoveringSince = Optional.of(since);
-    Event event = active.orElseThrow();
+    if (conditionKey == Condition.DLQ || conditionKey == Condition.INTEGRITY_CONFIG)
+      return state.active;
+    Duration since = state.recoveringSince.orElse(elapsed);
+    state.recoveringSince = Optional.of(since);
+    Event event = state.active.orElseThrow();
     Duration recovery =
         event.severity() == Severity.CRITICAL ? CRITICAL_RECOVERY : WARNING_RECOVERY;
     boolean enough = elapsed.minus(since).compareTo(recovery) >= 0;
@@ -165,11 +175,11 @@ public final class AlertLifecycle {
               event.lastSeen(),
               event.count(),
               false);
-      active = Optional.empty();
-      recoveringSince = Optional.empty();
+      state.active = Optional.empty();
+      state.recoveringSince = Optional.empty();
       return Optional.of(closed);
     }
-    return active;
+    return state.active;
   }
 
   /** Missing samples/gaps preserve the open event but never bridge a normal recovery period. */
@@ -187,18 +197,16 @@ public final class AlertLifecycle {
   private Optional<Event> interruptRecovery(Duration elapsed) {
     Objects.requireNonNull(elapsed, "monotonic elapsed");
     if (elapsed.isNegative()) throw new IllegalArgumentException(INVALID_ELAPSED);
-    synchronized (lock) {
-      if (lastElapsed.isPresent() && elapsed.compareTo(lastElapsed.orElseThrow()) < 0)
+    synchronized (state) {
+      if (state.lastElapsed.isPresent() && elapsed.compareTo(state.lastElapsed.orElseThrow()) < 0)
         throw new IllegalArgumentException(INVALID_ELAPSED);
-      lastElapsed = Optional.of(elapsed);
-      recoveringSince = Optional.empty();
-      return active;
+      state.lastElapsed = Optional.of(elapsed);
+      state.recoveringSince = Optional.empty();
+      return state.active;
     }
   }
 
   public Optional<Event> snapshot() {
-    synchronized (lock) {
-      return active;
-    }
+    return state.snapshot();
   }
 }

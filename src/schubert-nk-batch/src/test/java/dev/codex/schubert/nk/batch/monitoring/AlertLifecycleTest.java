@@ -213,8 +213,15 @@ class AlertLifecycleTest {
     var executor = Executors.newFixedThreadPool(4);
     try {
       var tasks = new ArrayList<Callable<BigInteger>>();
-      for (int index = 0; index < 64; index++)
-        tasks.add(() -> signal(owner, Severity.WARNING, Duration.ofSeconds(1)).count());
+      for (int index = 0; index < 64; index++) {
+        tasks.add(
+            () -> {
+              BigInteger observed = signal(owner, Severity.WARNING, Duration.ofSeconds(1)).count();
+              BigInteger snapshot = owner.snapshot().orElseThrow().count();
+              assertTrue(snapshot.compareTo(observed) >= 0);
+              return observed;
+            });
+      }
       var counts = new HashSet<BigInteger>();
       synchronized (owner) {
         for (var future : executor.invokeAll(tasks, 10, TimeUnit.SECONDS)) counts.add(future.get());
