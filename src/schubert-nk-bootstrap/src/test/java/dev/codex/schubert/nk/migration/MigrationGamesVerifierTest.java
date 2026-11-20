@@ -399,8 +399,10 @@ final class MigrationGamesVerifierTest {
 
   private static Fixture normal() {
     var f = new Fixture();
-    f.data.add(new Object[] {1, "NUKITASHI1", "NUKITASHI", 1, OffsetDateTime.parse(STAMP)});
-    f.data.add(new Object[] {2, "NUKITASHI2", "NUKITASHI2", 2, OffsetDateTime.parse(STAMP)});
+    f.data.add(
+        new Object[] {1, "NUKITASHI1", "NUKITASHI", 1, OffsetDateTime.parse(STAMP)});
+    f.data.add(
+        new Object[] {2, "NUKITASHI2", "NUKITASHI2", 2, OffsetDateTime.parse(STAMP)});
     return f;
   }
 
