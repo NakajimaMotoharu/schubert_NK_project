@@ -52,6 +52,11 @@ def check(cmd):
     return stage, result
 
 
+def successful_case(testcase):
+    """A successful raw console testcase can contain plain diagnostic output only."""
+    return all(child.tag in {'system-out', 'system-err'} and not len(child) for child in testcase)
+
+
 def main(level):
     suffix, screen, start_record, normal_reference, run = LEVELS[level]
     owner = f'dev.codex.schubert.nk.web.view.Music{suffix}CountBoundaryTest'
@@ -136,8 +141,7 @@ def main(level):
         tests = suite.findall('testcase')
         assert len(tests)==1 and tests[0].attrib['classname']==owner
         assert tests[0].attrib['name']==f'rejectsDeclaredZeroWhenOne{suffix}RecordIsPresent()'
-        nonpass = {'failure','error','skipped','flakyFailure','flakyError','rerunFailure','rerunError'}
-        assert not any(child.tag in nonpass for child in tests[0])
+        assert successful_case(tests[0])
         assert [suite.get(k) for k in ('tests','failures','errors','skipped')]==['1','0','0','0']
         new_exec = exec_file.read_bytes()
         measurement = runpy.run_path('tools/quality/jacoco_readonly_exec_subset.py')['decode'](new_exec,{target_class})
