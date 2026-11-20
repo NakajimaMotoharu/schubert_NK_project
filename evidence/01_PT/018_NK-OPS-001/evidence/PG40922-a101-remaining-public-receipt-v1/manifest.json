@@ -1,0 +1,122 @@
+{
+  "actualExit": 0,
+  "startEvent": "PGPT-20261008-6859",
+  "terminalAtUTC": "2026-11-20T14:32:03.974400+00:00",
+  "source": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+  "plan": {
+    "path": "/home/mini/codex/project1/work/PMO/hourly-monitor/wbs66-20261116/58_直近20pp不足時の対象と予算判断を実行用の検収表へ渡す/WBS.tsv",
+    "sha256": "31f8be31c8b3a1c3bbc87d049f682d1523c285b83ec6471d91840f825ded3794"
+  },
+  "retainedReceipts": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29354-p00404-all24-public-original-contract-v1/manifest.json",
+      "sha256": "cccabf496d4a68c31147cce18ec40b994ad2ee07c34d9f3f8923bcfc532833a3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29360-p00404-owner-test-safety-index-v1/manifest.json",
+      "sha256": "0f93299b205d61450cd6d5694fabdbabb352f63acc622edb17e6fa193ea121d7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29402-inspector-six-main-source-check-v1/manifest.json",
+      "sha256": "3f7e50837e30e17fd4b07fbb389c7d23fe8cdee04c9163ad1082fbb2ebe3d9e2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29404-inspector-six-main-source-review-v1/manifest.json",
+      "sha256": "69d52f37f5503d5ccb7d4d07403cf2e899260937bfbc8f9c4fe06a2199002697"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26332-inbox-summary-contract-preparation-v1/manifest.json",
+      "sha256": "c00f8ada72b6037ee86cfab582dbe951e80acdcda6d57c43287fc8766fb052a8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37362-p00402-current-criteria-audit-v1/manifest.json",
+      "sha256": "d85d897300b2d86d95578b2ba98504a0684a70329ee485ed48e537d3e7c28803"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40920-a101-inspector-public-receipt-v1/manifest.json",
+      "sha256": "70a8932388ff9c8ebd489f50bfae2478fd68d4d0d9a09e222f1f2b03341be0df"
+    }
+  ],
+  "selected": [
+    {
+      "wbsWorkId": "A1-01.01",
+      "owner": "WBS-P004-04",
+      "originalPricePp": 1.65,
+      "production": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/AuthenticationInboxInspector.java",
+        "sha256": "d684f42dfbf75f8c8567ed673140dc08819fec334c7379066587c84f39fe8eb7"
+      },
+      "acceptedProductTests": 0,
+      "originalPriceCompletedPp": 0,
+      "oracleId": "P00404-ORACLE02",
+      "originalTestIds": [
+        "DB-INBOX009..016"
+      ],
+      "matchingOldMain": true,
+      "fixture": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/AuthenticationInboxInspectorTest.java",
+        "sha256": "f6f7fecb41d569f5fd3ac15d9419cf8f8977c65ffbc53f57146d432c67999378"
+      },
+      "definitionsMetadataOnly": 8,
+      "testBeforeAllObserved": true,
+      "remaining": "Same-source full Test qualification, authorized DB/Inspector evidence and independent postconditions"
+    },
+    {
+      "wbsWorkId": "A1-01.02",
+      "owner": "WBS-P004-02",
+      "originalPricePp": 1.65,
+      "production": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InboxCleanup.java",
+        "sha256": "014f436f55e803092cb9645697da9b7f09402c32cecb70802ae0a86afd176de0"
+      },
+      "acceptedProductTests": 0,
+      "originalPriceCompletedPp": 0,
+      "originalContract": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26332-inbox-summary-contract-preparation-v1/manifest.json",
+        "sha256": "c00f8ada72b6037ee86cfab582dbe951e80acdcda6d57c43287fc8766fb052a8"
+      },
+      "priorCondition": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37362-p00402-current-criteria-audit-v1/manifest.json",
+        "sha256": "d85d897300b2d86d95578b2ba98504a0684a70329ee485ed48e537d3e7c28803"
+      },
+      "matchingOldMain": true,
+      "admittedTestIds": [],
+      "remaining": "QA056 held TemporaryInfrastructureException class dependency, actual SQL/DB/Inbox owner verification; no alternate execution"
+    },
+    {
+      "wbsWorkId": "A1-01.03",
+      "owner": "WBS-P004-04",
+      "originalPricePp": 1.95,
+      "production": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InboxResponseInspector.java",
+        "sha256": "81a81a306c1edd98f5ec7ec8cd24d7570645b79036fa9072d5c87b282c811f06"
+      },
+      "acceptedProductTests": 0,
+      "originalPriceCompletedPp": 0,
+      "oracleId": "P00404-ORACLE03",
+      "originalTestIds": [
+        "DB-INBOX001..008"
+      ],
+      "matchingOldMain": false,
+      "fixture": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InboxResponseInspectorTest.java",
+        "sha256": "12a016d6647c6645303187c6e16b7b18ce2211cbb099ca43db1a6fe54d3fe81d"
+      },
+      "definitionsMetadataOnly": 8,
+      "testBeforeAllObserved": false,
+      "remaining": "Same-source full Test qualification, authorized DB/Inspector evidence and independent postconditions"
+    }
+  ],
+  "lineageMappedAcrossTwoRuns": [
+    "A1-01.01",
+    "A1-01.02",
+    "A1-01.03",
+    "A1-01.04",
+    "A1-01.05"
+  ],
+  "runtimeQualifiedRows": 0,
+  "currentRuntimeActions": 0,
+  "productTestsExecuted": 0,
+  "originalRowPriceCompletedPp": 0,
+  "formalDelta": 0
+}

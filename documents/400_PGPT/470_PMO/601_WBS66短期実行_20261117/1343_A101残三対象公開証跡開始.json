@@ -1,0 +1,86 @@
+{
+  "eventId": "PGPT-20261008-6859",
+  "groupId": "a101-remaining-three-public-inputs",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T14:31:24.687000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 72,
+      "remainingPercent": 28,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "a101-remaining-three-public-inputs",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "a101-remaining-three-public-inputs",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P004-02",
+      "WBS-P004-04"
+    ],
+    "managementWorkIds": [
+      "A1-01.01",
+      "A1-01.02",
+      "A1-01.03"
+    ],
+    "source": "28952c8418e14002647c0df6a34b43c2608dc5a1",
+    "productionCoreMain": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40922-a101-remaining-public-receipt-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.12,
+      "base": 0.32,
+      "high": 0.65
+    },
+    "groupCapPp": 0.8,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1342_A101検査二対象公開証跡継続点.json",
+        "sha256": "ce41cbd4eb6cf8d895cd043f96b6f0a1dca6626cf2d3a8fbd04a5eb6efbb8526"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29354-p00404-all24-public-original-contract-v1/manifest.json",
+        "sha256": "cccabf496d4a68c31147cce18ec40b994ad2ee07c34d9f3f8923bcfc532833a3"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29360-p00404-owner-test-safety-index-v1/manifest.json",
+        "sha256": "0f93299b205d61450cd6d5694fabdbabb352f63acc622edb17e6fa193ea121d7"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29402-inspector-six-main-source-check-v1/manifest.json",
+        "sha256": "3f7e50837e30e17fd4b07fbb389c7d23fe8cdee04c9163ad1082fbb2ebe3d9e2"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29404-inspector-six-main-source-review-v1/manifest.json",
+        "sha256": "69d52f37f5503d5ccb7d4d07403cf2e899260937bfbc8f9c4fe06a2199002697"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26332-inbox-summary-contract-preparation-v1/manifest.json",
+        "sha256": "c00f8ada72b6037ee86cfab582dbe951e80acdcda6d57c43287fc8766fb052a8"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37362-p00402-current-criteria-audit-v1/manifest.json",
+        "sha256": "d85d897300b2d86d95578b2ba98504a0684a70329ee485ed48e537d3e7c28803"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40920-a101-inspector-public-receipt-v1/manifest.json",
+        "sha256": "70a8932388ff9c8ebd489f50bfae2478fd68d4d0d9a09e222f1f2b03341be0df"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "WBS66先行A1の残3Path。元契約、GPG公開証跡、P004-02のInboxCleanup既準備の記録が確定済み。",
+    "endCondition": "三元行を現source・主担当・TestID/独立期待・未成立条件に照合し、先行二行の継続点と結ぶ。重複再利用と費用加算0。",
+    "workScope": "公開source hash・既manifestの読取のみ。QA056、実権限、実DB、業務操作、試験起動は含めない。"
+  }
+}
