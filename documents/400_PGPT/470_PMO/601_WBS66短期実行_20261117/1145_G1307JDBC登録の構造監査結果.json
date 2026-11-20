@@ -1,0 +1,153 @@
+{
+  "eventId": "PGPT-20261008-6663",
+  "groupId": "wbs66-g1307-current-structure-after-binding-repair",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T08:46:11.379000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 66,
+      "remainingPercent": 34,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "wbs66-g1307-current-structure-after-binding-repair",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "wbs66-g1307-current-structure-after-binding-repair",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-G13.07"
+    ],
+    "managementWorkIds": [
+      "WBS-G13.07/1"
+    ],
+    "source": "df11cb29b5bf2b4d49f918c2b04208324ae17676",
+    "productionCoreMain": "517a23cddc9f3883550942f6fa90a4256ef39b73",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40774-g1307-pinned-structure-and-candidate-paths-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.5,
+      "high": 1.1
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1143_日付横展開範囲と保留の継続点.json",
+        "sha256": "79467907cdf835a1da636254fdd8d1c569f9375bf20ee870ac5a2f4d3cb2bfb5"
+      },
+      {
+        "path": "documents/400_PGPT/470_PMO/481_PGPT詳細WBS.json",
+        "sha256": "5cc6e11307a2c4f6a9717dfcc0b5cf5a99cc7ada7449fd231edef9fa2b196e71"
+      },
+      {
+        "path": "documents/400_PGPT/470_PMO/485_WBS網羅性・受入対応.json",
+        "sha256": "5ddf10a2be20fa3dcb13ce618f996c87f0370e92e21dec4c6499129dc66dc0cc"
+      },
+      {
+        "path": "documents/400_PGPT/470_PMO/486_WBS現行実績.json",
+        "sha256": "b2e769134878347d0322ed02332ac1d73c658d67c48415017f9a492c7bea30a5"
+      },
+      {
+        "path": "tools/quality/wbs_progress_audit.py",
+        "sha256": "9311700dfa2210cf5eacac0a58dbeabb8178015f185ceff99e3f6718edcc1092"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "BUG3411 fixed the exact current 485/486 digest yet high-level structural gate has not been checked on that corrected current public pair.",
+    "endCondition": "Run existing static-only structure gate, keep historical proof source distinct, compare fixed path set against current candidate and publish missing/added names or byte-free zero difference. No whole-WBS inference.",
+    "workScope": "Pure tracked repository path names and existing metadata only, no source/hide/do-not-run flags changed, no binary experiment, no application or held operations.",
+    "quotaAfter": {
+      "usedPercent": 66,
+      "remainingPercent": 34,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "404390f417d6687a86708aebb9ea7f6424d97247b38fcf8deb6980f5be9a1e5e",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T08:46:11.379000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 66,
+          "remainingPercent": 34,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T08:45:40.862189+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 66,
+      "remainingPercent": 34,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6662",
+    "attempt": 2,
+    "attemptResult": "G1307_PINNED_STRUCTURE_RESTORED_REGISTRATION_AND_OPEN_CANDIDATE_DELTA",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40774-g1307-pinned-structure-and-candidate-paths-v1/manifest.json",
+        "sha256": "211e51fe5f7e8a0d060e186751ab47c74c9a028a5c45050b6c49d418d05f7b12"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40776-g1307-jdbc-preparation-registry-fixed-v1/manifest.json",
+        "sha256": "5daa5e4042582ea743035d9a005c143588be633328e54d902df152d176fc6457"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40776-g1307-jdbc-preparation-registry-fixed-v1/preparation-registry-binding.json",
+        "sha256": "e7c8bf541519270b1592b280ec1ec81f9bd388d40779fd796108e54fadcd3c88"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "Ten current candidate paths absent from preparatory registry",
+      "Whole G13 and 451",
+      "F02/F03 operational or typed full and QA056/057/060"
+    ],
+    "formerRegistryRowsPreserved": 1123,
+    "correctedRegistrationCount": 1,
+    "currentRegistryRows": 1124,
+    "currentCandidatePaths": 1132,
+    "knownRegistryShortfall": 10,
+    "acceptedIndividualSubconditions": [
+      "Pinned source structure now verifies and the one new JDBC adapter has a bounded preparation receipt"
+    ],
+    "initialAuditExit": 1,
+    "finalAuditExit": 0,
+    "fixCommit": "ab141fc39f6ad43185438213dbd744e04b64f4a2",
+    "bugId": "BUG-3413",
+    "horizontalReview": "YKT-2736"
+  }
+}
