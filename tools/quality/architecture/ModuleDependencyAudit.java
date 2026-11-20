@@ -148,7 +148,9 @@ public final class ModuleDependencyAudit {
                   || WEB_TRANSPORT_TYPES.contains(topLevelType(target))
                   || "storage".equals(targetModule)))
             violations.get("CONTROLLER_BOUNDARY").add(pair);
-          if (apiRepository && target.startsWith(INTERNAL + "api.application."))
+          if (apiRepository
+              && (target.startsWith(INTERNAL + "api.application.")
+                  || target.startsWith(INTERNAL + "api.messaging.inbound.")))
             violations.get("REPOSITORY_DIRECTION").add(pair);
         }
         for (var access : type.getCodeUnitAccessesFromSelf()) {
