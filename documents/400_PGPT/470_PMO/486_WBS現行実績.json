@@ -9085,7 +9085,7 @@
   },
   "beforeSsc261InventorySha256": "443af5012e6a3d2a9088bb38d4a28ae3f7ff7645e6e4689fde2bea543fe19b9b",
   "beforeStrictReferenceCandidateInventorySha256": "44976d5ce11f24a89ea7db68c4d5ce1674f9a72032b6a96e453adc461a850968",
-  "inventorySha256": "16073b518c62b085c908b36ea017a3b2474a0b2be95edeb13f95800af3506e4c",
+  "inventorySha256": "9d906d08062106a1c4fe120a51b07f4540a2451504022ac76d5ec8c6263cffe4",
   "expiryCandidateObservation": {
     "source": "1ec19782a1afe22d1de75b05f4cd12b8a8a8a172",
     "run": "PG713/714+PG715/717/719+PG722/725/728/729/730+PG737/738/739",
@@ -47720,5 +47720,54 @@
     "whole451": false,
     "formalDelta": 0,
     "addedPricePp": 0
+  },
+  "currentReferenceDaoCombinedFailureTracePG40918": {
+    "testId": "RRF-PURE-009",
+    "traceOwner": "WBS-G08",
+    "owner": "WBS-P004-03",
+    "costOwner": "WBS-P004-03",
+    "production": {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "sha256": "389d41ce3928ac25a5001a08fc5a4562ba44df84144721b2f3a8f36f16747edb"
+    },
+    "source": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+    "requirementIds": [
+      "DAT-009",
+      "OPS-009"
+    ],
+    "design": [
+      "UI251",
+      "SS331 §3.12",
+      "SS332 SSC063/448/461"
+    ],
+    "fixture": {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryPureJdbcTest.java",
+      "sha256": "9985c4ea628dc9ac8178f680882383bf15cb4a74798d1c70b29c01b62dbd40eb"
+    },
+    "independentOracle": {
+      "path": "evidence/01_PT/004_NK-DAT-001/455_P00403参照DAO三経路例外順位仕様.md",
+      "sha256": "3ff9b930f451c1427c0fc82650b748cc45d3a517b4f018d4555a50ac567a2ec6"
+    },
+    "unit": {
+      "path": "evidence/01_PT/004_NK-DAT-001/evidence/PG40914-p00403-run-reference-combined-close-v1/manifest.json",
+      "sha256": "c89f23be14bf928e68927b0e4638aed4db8ab975a35949393792dc72bcb7522d"
+    },
+    "style": {
+      "path": "evidence/01_PT/004_NK-DAT-001/evidence/PG40916-f03-run-reference-test-style-v1/manifest.json",
+      "sha256": "795f26a51862805f98397ea4eb17fd82bfa56096359899ca17575fdcdde3258d"
+    },
+    "historicalEight": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40270-p00403-run-reference-physical-lineage-v1/manifest.json",
+      "sha256": "f54169aae04cfd7af607bfc1f11da82fdd5133477e8e0032d71b8466e37f4125"
+    },
+    "newRuns": 0,
+    "historicalTestsCombined": 0,
+    "originalRowPriceCountedPp": 0,
+    "unresolved": [
+      "P004-03 actual DAO DB role and committed postconditions",
+      "actual original ownership and retirement",
+      "current source whole 451"
+    ],
+    "formalDelta": 0
   }
 }

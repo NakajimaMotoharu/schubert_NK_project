@@ -1,5 +1,9 @@
 # Module・Program一覧
 
+## NK-DAT-001 参照DAOの三経路例外順位
+
+WBS-P004-03のRunReferenceRepository.read、closeRow、closeStatementを新しいRRF-PURE-009へ対応付けた。DAT-009／OPS-009、UI251、SS331 §3.12／SS332 SSC063・448・461。PG40914で本体と両方の解放が同時に失敗する三入力の元Error、逆順解放、借用Connection非変更を観測し、PG40916で同一Testの書式を確認。実DB・原本・全451と正式判定は継続。 [PT実行結果](../../../evidence/01_PT/004_NK-DAT-001/456_P00403参照DAO三経路例外順位結果.md)
+
 ## NK-OPS-001 標準監視SDKの局所証跡
 
 WBS-G13.07のPG40910は、WBS-P018-09のAPIHOST017、BATCHHOST017、WEBHOST017を現候補の同一単体実行PG40904と無フィルター測定PG40906へ対応付けた。測定対象は三クラスで、PG40882の型付き静的証跡との同一バイト、PG40886のBatch実装クラスとの同一バイトも確認済み。消費側のPG40892とPG40902は別実行として保持する。個別条件と残る正式判定を[PT証跡](../../../evidence/01_PT/018_NK-OPS-001/5470_標準監視SDK三所有者の現候補統合証跡.md)に記録した。
