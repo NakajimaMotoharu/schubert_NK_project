@@ -1,0 +1,988 @@
+[
+  {
+    "layout": "LGNREQ01",
+    "uiLine": 21,
+    "designLine": 38,
+    "dataBytes": 384,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 640,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "LoginRequestData",
+    "designHandler": "`LoginHandler` -> `AuthenticationService.authenticate`",
+    "designDbDescription": "`app_users`, `login_ip_attempts`, `auth_sessions`; username text、IP inet",
+    "explicitlyNamedTables": [
+      "schubert.app_users",
+      "schubert.auth_sessions",
+      "schubert.login_ip_attempts"
+    ]
+  },
+  {
+    "layout": "LGNRSP01",
+    "uiLine": 22,
+    "designLine": 39,
+    "dataBytes": 432,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 688,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "LoginResponseData",
+    "designHandler": "`LoginResponseFactory`",
+    "designDbDescription": "auth session raw復号結果、user role",
+    "explicitlyNamedTables": []
+  },
+  {
+    "layout": "LOGREQ01",
+    "uiLine": 23,
+    "designLine": 40,
+    "dataBytes": 0,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 256,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "LogoutRequestData",
+    "designHandler": "`LogoutHandler` -> `AuthSessionService.revoke`",
+    "designDbDescription": "`auth_sessions.context_hash`",
+    "explicitlyNamedTables": [
+      "schubert.auth_sessions"
+    ]
+  },
+  {
+    "layout": "LOGRSP01",
+    "uiLine": 24,
+    "designLine": 41,
+    "dataBytes": 24,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 280,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "LogoutResponseData",
+    "designHandler": "`LogoutResponseFactory`",
+    "designDbDescription": "`revoked_at timestamptz`",
+    "explicitlyNamedTables": []
+  },
+  {
+    "layout": "GAMREQ01",
+    "uiLine": 25,
+    "designLine": 42,
+    "dataBytes": 0,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 256,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "GameListRequestData",
+    "designHandler": "`GameListHandler`",
+    "designDbDescription": "—",
+    "explicitlyNamedTables": []
+  },
+  {
+    "layout": "GAMRSP01",
+    "uiLine": 26,
+    "designLine": 43,
+    "dataBytes": 9,
+    "recordBytes": 272,
+    "maximumRecords": 10,
+    "maximumWireBytes": 2985,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "GameListResponseData",
+    "designHandler": "`ScenarioQueryService.findGames`",
+    "designDbDescription": "`games`: smallint/text/display_order",
+    "explicitlyNamedTables": [
+      "schubert.games"
+    ]
+  },
+  {
+    "layout": "SPKREQ01",
+    "uiLine": 27,
+    "designLine": 44,
+    "dataBytes": 12,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 268,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "SpeakerListRequestData",
+    "designHandler": "`SpeakerListHandler`",
+    "designDbDescription": "`games.code`",
+    "explicitlyNamedTables": [
+      "schubert.games"
+    ]
+  },
+  {
+    "layout": "SPKRSP01",
+    "uiLine": 28,
+    "designLine": 45,
+    "dataBytes": 9,
+    "recordBytes": 152,
+    "maximumRecords": 500,
+    "maximumWireBytes": 76265,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "SpeakerListResponseData",
+    "designHandler": "`ScenarioQueryService.findSpeakers`",
+    "designDbDescription": "`speakers.id/name`、COUNT entry",
+    "explicitlyNamedTables": [
+      "schubert.speakers"
+    ]
+  },
+  {
+    "layout": "SRCREQ01",
+    "uiLine": 29,
+    "designLine": 46,
+    "dataBytes": 672,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 928,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "ScenarioSearchRequestData",
+    "designHandler": "`ScenarioSearchHandler`",
+    "designDbDescription": "Query parameterへmap",
+    "explicitlyNamedTables": []
+  },
+  {
+    "layout": "SRCRSP01",
+    "uiLine": 30,
+    "designLine": 47,
+    "dataBytes": 48,
+    "recordBytes": 5584,
+    "maximumRecords": 100,
+    "maximumWireBytes": 558704,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "PagedResponseData",
+    "designHandler": "`ScenarioQueryService.search`",
+    "designDbDescription": "`script_entries/files/games/speakers/audio`; bigint/text/boolean",
+    "explicitlyNamedTables": [
+      "schubert.games",
+      "schubert.script_entries",
+      "schubert.speakers"
+    ]
+  },
+  {
+    "layout": "RTEREQ01",
+    "uiLine": 31,
+    "designLine": 48,
+    "dataBytes": 12,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 268,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "RouteListRequestData",
+    "designHandler": "`RouteListHandler`",
+    "designDbDescription": "`games.code`",
+    "explicitlyNamedTables": [
+      "schubert.games"
+    ]
+  },
+  {
+    "layout": "RTERSP01",
+    "uiLine": 32,
+    "designLine": 49,
+    "dataBytes": 9,
+    "recordBytes": 72,
+    "maximumRecords": 50,
+    "maximumWireBytes": 3865,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "RouteListResponseData",
+    "designHandler": "`ScenarioQueryService.findRoutes`",
+    "designDbDescription": "section prefix算出、COUNT files",
+    "explicitlyNamedTables": []
+  },
+  {
+    "layout": "SCFREQ01",
+    "uiLine": 33,
+    "designLine": 50,
+    "dataBytes": 14,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 270,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "ScenarioFileListRequestData",
+    "designHandler": "`ScenarioFileListHandler`",
+    "designDbDescription": "game/prefix query",
+    "explicitlyNamedTables": []
+  },
+  {
+    "layout": "SCFRSP01",
+    "uiLine": 34,
+    "designLine": 51,
+    "dataBytes": 88,
+    "recordBytes": 800,
+    "maximumRecords": 500,
+    "maximumWireBytes": 400344,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "ScenarioFileListResponseData",
+    "designHandler": "`ScenarioQueryService.findFiles`",
+    "designDbDescription": "`script_files`、entry COUNT",
+    "explicitlyNamedTables": [
+      "schubert.script_files"
+    ]
+  },
+  {
+    "layout": "SCNREQ01",
+    "uiLine": 35,
+    "designLine": 52,
+    "dataBytes": 12,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 268,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "ScenarioDetailRequestData",
+    "designHandler": "`ScenarioDetailHandler`",
+    "designDbDescription": "`script_files.id`",
+    "explicitlyNamedTables": [
+      "schubert.script_files"
+    ]
+  },
+  {
+    "layout": "SCNRSP01",
+    "uiLine": 36,
+    "designLine": 53,
+    "dataBytes": 1728,
+    "recordBytes": 4800,
+    "maximumRecords": 200,
+    "maximumWireBytes": 961984,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "ScenarioDetailResponseData",
+    "designHandler": "`ScenarioQueryService.findScenario`、`LargeResultWriter`",
+    "designDbDescription": "entries/audio links、transfer file descriptor",
+    "explicitlyNamedTables": []
+  },
+  {
+    "layout": "AUDREQ01",
+    "uiLine": 44,
+    "designLine": 59,
+    "dataBytes": 16,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 272,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "AudioDescriptorRequestData",
+    "designHandler": "`AudioDescriptorHandler`",
+    "designDbDescription": "`audio_files.id`",
+    "explicitlyNamedTables": [
+      "schubert.audio_files"
+    ]
+  },
+  {
+    "layout": "AUDRSP01",
+    "uiLine": 45,
+    "designLine": 60,
+    "dataBytes": 1024,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 1280,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "MediaDescriptorData",
+    "designHandler": "`MediaQueryService.describeAudio`",
+    "designDbDescription": "audio path/name/size/hash/container",
+    "explicitlyNamedTables": []
+  },
+  {
+    "layout": "ANMREQ01",
+    "uiLine": 46,
+    "designLine": 61,
+    "dataBytes": 0,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 256,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "AnimationMenuRequestData",
+    "designHandler": "`AnimationMenuHandler`",
+    "designDbDescription": "—",
+    "explicitlyNamedTables": []
+  },
+  {
+    "layout": "ANMRSP01",
+    "uiLine": 47,
+    "designLine": 62,
+    "dataBytes": 16,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 272,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "AnimationMenuResponseData",
+    "designHandler": "`MediaQueryService.animationCounts`",
+    "designDbDescription": "`media_assets` aggregate",
+    "explicitlyNamedTables": [
+      "schubert.media_assets"
+    ]
+  },
+  {
+    "layout": "ANLREQ01",
+    "uiLine": 48,
+    "designLine": 63,
+    "dataBytes": 16,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 272,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "AnimationListRequestData",
+    "designHandler": "`AnimationListHandler`",
+    "designDbDescription": "media category",
+    "explicitlyNamedTables": []
+  },
+  {
+    "layout": "ANLRSP01",
+    "uiLine": 49,
+    "designLine": 64,
+    "dataBytes": 8,
+    "recordBytes": 928,
+    "maximumRecords": 50,
+    "maximumWireBytes": 46664,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "AnimationListResponseData",
+    "designHandler": "`MediaQueryService.findAnimation`",
+    "designDbDescription": "`media_assets`: logical_id/text/size/parent/order",
+    "explicitlyNamedTables": [
+      "schubert.media_assets"
+    ]
+  },
+  {
+    "layout": "VIDREQ01",
+    "uiLine": 50,
+    "designLine": 65,
+    "dataBytes": 64,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 320,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "VideoDescriptorRequestData",
+    "designHandler": "`VideoDescriptorHandler`",
+    "designDbDescription": "logical_id",
+    "explicitlyNamedTables": []
+  },
+  {
+    "layout": "VIDRSP01",
+    "uiLine": 51,
+    "designLine": 66,
+    "dataBytes": 1808,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 2064,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "VideoDescriptorResponseData",
+    "designHandler": "`MediaQueryService.describeVideo`",
+    "designDbDescription": "`media_assets`＋file metadata",
+    "explicitlyNamedTables": [
+      "schubert.media_assets"
+    ]
+  },
+  {
+    "layout": "MCTREQ01",
+    "uiLine": 52,
+    "designLine": 67,
+    "dataBytes": 0,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 256,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "MusicCategoryRequestData",
+    "designHandler": "`MusicCategoryHandler`",
+    "designDbDescription": "—",
+    "explicitlyNamedTables": []
+  },
+  {
+    "layout": "MCTRSP01",
+    "uiLine": 53,
+    "designLine": 68,
+    "dataBytes": 8,
+    "recordBytes": 72,
+    "maximumRecords": 20,
+    "maximumWireBytes": 1704,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "MusicCategoryResponseData",
+    "designHandler": "`MediaQueryService.findMusicCategories`",
+    "designDbDescription": "media_assets aggregate",
+    "explicitlyNamedTables": [
+      "schubert.media_assets"
+    ]
+  },
+  {
+    "layout": "MCSREQ01",
+    "uiLine": 54,
+    "designLine": 69,
+    "dataBytes": 64,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 320,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "MusicSectionRequestData",
+    "designHandler": "`MusicSectionHandler`",
+    "designDbDescription": "category text",
+    "explicitlyNamedTables": []
+  },
+  {
+    "layout": "MCSRSP01",
+    "uiLine": 55,
+    "designLine": 70,
+    "dataBytes": 8,
+    "recordBytes": 136,
+    "maximumRecords": 100,
+    "maximumWireBytes": 13864,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "MusicSectionResponseData",
+    "designHandler": "`MediaQueryService.findMusicSections`",
+    "designDbDescription": "category/section aggregate",
+    "explicitlyNamedTables": []
+  },
+  {
+    "layout": "MTRREQ01",
+    "uiLine": 56,
+    "designLine": 71,
+    "dataBytes": 192,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 448,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "MusicTrackRequestData",
+    "designHandler": "`MusicTrackHandler`",
+    "designDbDescription": "category/section text",
+    "explicitlyNamedTables": []
+  },
+  {
+    "layout": "MTRRSP01",
+    "uiLine": 57,
+    "designLine": 72,
+    "dataBytes": 16,
+    "recordBytes": 1312,
+    "maximumRecords": 200,
+    "maximumWireBytes": 262672,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "MusicTrackResponseData",
+    "designHandler": "`MediaQueryService.findMusicTracks`",
+    "designDbDescription": "`media_assets`: pair_key/role/order",
+    "explicitlyNamedTables": [
+      "schubert.media_assets"
+    ]
+  },
+  {
+    "layout": "MEDREQ01",
+    "uiLine": 58,
+    "designLine": 73,
+    "dataBytes": 72,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 328,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "MusicDescriptorRequestData",
+    "designHandler": "`MusicDescriptorHandler`",
+    "designDbDescription": "logical_id/disposition",
+    "explicitlyNamedTables": []
+  },
+  {
+    "layout": "MEDRSP01",
+    "uiLine": 59,
+    "designLine": 74,
+    "dataBytes": 1024,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 1280,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "MediaDescriptorData",
+    "designHandler": "`MediaQueryService.describeMusic`",
+    "designDbDescription": "media_assets metadata",
+    "explicitlyNamedTables": [
+      "schubert.media_assets"
+    ]
+  },
+  {
+    "layout": "LGSREQ01",
+    "uiLine": 60,
+    "designLine": 75,
+    "dataBytes": 656,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 912,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "LogSearchRequestData",
+    "designHandler": "`LogSearchHandler`",
+    "designDbDescription": "app_logs query",
+    "explicitlyNamedTables": [
+      "schubert.app_logs"
+    ]
+  },
+  {
+    "layout": "LGSRSP01",
+    "uiLine": 61,
+    "designLine": 76,
+    "dataBytes": 48,
+    "recordBytes": 2088,
+    "maximumRecords": 100,
+    "maximumWireBytes": 209104,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "PagedResponseData",
+    "designHandler": "`LogQueryService.search`",
+    "designDbDescription": "`app_logs`: bigint/timestamptz/jsonb/inet text projection",
+    "explicitlyNamedTables": [
+      "schubert.app_logs"
+    ]
+  },
+  {
+    "layout": "USRREQ01",
+    "uiLine": 67,
+    "designLine": 82,
+    "dataBytes": 96,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 352,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "UserSearchRequestData",
+    "designHandler": "`UserSearchHandler`",
+    "designDbDescription": "app_users filters",
+    "explicitlyNamedTables": [
+      "schubert.app_users"
+    ]
+  },
+  {
+    "layout": "USRRSP01",
+    "uiLine": 68,
+    "designLine": 83,
+    "dataBytes": 48,
+    "recordBytes": 168,
+    "maximumRecords": 50,
+    "maximumWireBytes": 8704,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "PagedResponseData",
+    "designHandler": "`UserQueryService.search`",
+    "designDbDescription": "app_users＋active session count",
+    "explicitlyNamedTables": [
+      "schubert.app_users"
+    ]
+  },
+  {
+    "layout": "UCRREQ01",
+    "uiLine": 69,
+    "designLine": 84,
+    "dataBytes": 372,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 628,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "UserCreateRequestData",
+    "designHandler": "`UserCreateHandler`",
+    "designDbDescription": "app_users INSERT、request_inbox",
+    "explicitlyNamedTables": [
+      "schubert.app_users",
+      "schubert.request_inbox"
+    ]
+  },
+  {
+    "layout": "UCRRSP01",
+    "uiLine": 70,
+    "designLine": 85,
+    "dataBytes": 24,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 280,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "UserMutationResponseData",
+    "designHandler": "`UserCommandService.create`",
+    "designDbDescription": "user id/version",
+    "explicitlyNamedTables": []
+  },
+  {
+    "layout": "UDTREQ01",
+    "uiLine": 71,
+    "designLine": 86,
+    "dataBytes": 12,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 268,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "UserDetailRequestData",
+    "designHandler": "`UserDetailHandler`",
+    "designDbDescription": "app_users.id",
+    "explicitlyNamedTables": [
+      "schubert.app_users"
+    ]
+  },
+  {
+    "layout": "UDTRSP01",
+    "uiLine": 72,
+    "designLine": 87,
+    "dataBytes": 320,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 576,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "UserDetailResponseData",
+    "designHandler": "`UserQueryService.detail`",
+    "designDbDescription": "app_users、auth_sessions count、actor join",
+    "explicitlyNamedTables": [
+      "schubert.app_users",
+      "schubert.auth_sessions"
+    ]
+  },
+  {
+    "layout": "USTREQ01",
+    "uiLine": 73,
+    "designLine": 88,
+    "dataBytes": 60,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 316,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "UserStatusRequestData",
+    "designHandler": "`UserStatusHandler`",
+    "designDbDescription": "app_users UPDATE、session revoke、inbox",
+    "explicitlyNamedTables": [
+      "schubert.app_users"
+    ]
+  },
+  {
+    "layout": "USTRSP01",
+    "uiLine": 74,
+    "designLine": 89,
+    "dataBytes": 24,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 280,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "UserMutationResponseData",
+    "designHandler": "`UserCommandService.changeStatus`",
+    "designDbDescription": "user id/version",
+    "explicitlyNamedTables": []
+  },
+  {
+    "layout": "URLREQ01",
+    "uiLine": 75,
+    "designLine": 90,
+    "dataBytes": 68,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 324,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "UserRoleRequestData",
+    "designHandler": "`UserRoleHandler`",
+    "designDbDescription": "app_users role UPDATE/revoke",
+    "explicitlyNamedTables": [
+      "schubert.app_users"
+    ]
+  },
+  {
+    "layout": "URLRSP01",
+    "uiLine": 76,
+    "designLine": 91,
+    "dataBytes": 24,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 280,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "UserMutationResponseData",
+    "designHandler": "`UserCommandService.changeRole`",
+    "designDbDescription": "user id/version",
+    "explicitlyNamedTables": []
+  },
+  {
+    "layout": "UPWREQ01",
+    "uiLine": 77,
+    "designLine": 92,
+    "dataBytes": 324,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 580,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "PasswordResetRequestData",
+    "designHandler": "`PasswordResetHandler`",
+    "designDbDescription": "password_hash UPDATE、session revoke、inbox HMAC",
+    "explicitlyNamedTables": []
+  },
+  {
+    "layout": "UPWRSP01",
+    "uiLine": 78,
+    "designLine": 93,
+    "dataBytes": 24,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 280,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "UserMutationResponseData",
+    "designHandler": "`UserCommandService.resetPassword`",
+    "designDbDescription": "user id/version",
+    "explicitlyNamedTables": []
+  },
+  {
+    "layout": "ULKREQ01",
+    "uiLine": 79,
+    "designLine": 94,
+    "dataBytes": 60,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 316,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "UserUnlockRequestData",
+    "designHandler": "`UserUnlockHandler`",
+    "designDbDescription": "app_users/login counter UPDATE",
+    "explicitlyNamedTables": [
+      "schubert.app_users"
+    ]
+  },
+  {
+    "layout": "ULKRSP01",
+    "uiLine": 80,
+    "designLine": 95,
+    "dataBytes": 24,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 280,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "UserMutationResponseData",
+    "designHandler": "`UserCommandService.unlock`",
+    "designDbDescription": "user id/version",
+    "explicitlyNamedTables": []
+  },
+  {
+    "layout": "QSBREQ01",
+    "uiLine": 86,
+    "designLine": 101,
+    "dataBytes": 4144,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 4400,
+    "interaction": "ASYNC_ACCEPTANCE",
+    "javaType": "QuestionSubmitRequestData",
+    "designHandler": "`QuestionSubmitHandler`",
+    "designDbDescription": "questions/jobs/notifications/outbox/inbox INSERT",
+    "explicitlyNamedTables": [
+      "schubert.notifications",
+      "schubert.questions"
+    ]
+  },
+  {
+    "layout": "QSBRSP01",
+    "uiLine": 87,
+    "designLine": 102,
+    "dataBytes": 64,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 320,
+    "interaction": "ASYNC_ACCEPTANCE",
+    "javaType": "QuestionSubmitResponseData",
+    "designHandler": "`QuestionCommandService.submit`",
+    "designDbDescription": "receipt char26、question id、submitted_at",
+    "explicitlyNamedTables": []
+  },
+  {
+    "layout": "NTSREQ01",
+    "uiLine": 88,
+    "designLine": 103,
+    "dataBytes": 64,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 320,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "NotificationSearchRequestData",
+    "designHandler": "`NotificationSearchHandler`",
+    "designDbDescription": "notifications owner query",
+    "explicitlyNamedTables": [
+      "schubert.notifications"
+    ]
+  },
+  {
+    "layout": "NTSRSP01",
+    "uiLine": 89,
+    "designLine": 104,
+    "dataBytes": 48,
+    "recordBytes": 624,
+    "maximumRecords": 50,
+    "maximumWireBytes": 31504,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "PagedResponseData",
+    "designHandler": "`NotificationQueryService.search`",
+    "designDbDescription": "notifications/questions",
+    "explicitlyNamedTables": [
+      "schubert.notifications",
+      "schubert.questions"
+    ]
+  },
+  {
+    "layout": "NTDREQ01",
+    "uiLine": 90,
+    "designLine": 105,
+    "dataBytes": 12,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 268,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "NotificationDetailRequestData",
+    "designHandler": "`NotificationDetailHandler`",
+    "designDbDescription": "notification id",
+    "explicitlyNamedTables": []
+  },
+  {
+    "layout": "NTDRSP01",
+    "uiLine": 91,
+    "designLine": 106,
+    "dataBytes": 8896,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 9152,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "NotificationDetailResponseData",
+    "designHandler": "`NotificationQueryService.detail`",
+    "designDbDescription": "notifications/jobs/questions/answers",
+    "explicitlyNamedTables": [
+      "schubert.answers",
+      "schubert.notifications",
+      "schubert.questions"
+    ]
+  },
+  {
+    "layout": "NTCREQ01",
+    "uiLine": 92,
+    "designLine": 107,
+    "dataBytes": 48,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 304,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "NotificationCancelRequestData",
+    "designHandler": "`NotificationCancelHandler`",
+    "designDbDescription": "jobs/notifications UPDATE、inbox",
+    "explicitlyNamedTables": [
+      "schubert.notifications"
+    ]
+  },
+  {
+    "layout": "NTCRSP01",
+    "uiLine": 93,
+    "designLine": 108,
+    "dataBytes": 32,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 288,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "NotificationCancelResponseData",
+    "designHandler": "`QuestionCommandService.cancel`",
+    "designDbDescription": "state/cancelled_at",
+    "explicitlyNamedTables": []
+  },
+  {
+    "layout": "QSSREQ01",
+    "uiLine": 94,
+    "designLine": 109,
+    "dataBytes": 384,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 640,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "QuestionSearchRequestData",
+    "designHandler": "`QuestionSearchHandler`",
+    "designDbDescription": "questions/answers owner query",
+    "explicitlyNamedTables": [
+      "schubert.answers",
+      "schubert.questions"
+    ]
+  },
+  {
+    "layout": "QSSRSP01",
+    "uiLine": 95,
+    "designLine": 110,
+    "dataBytes": 48,
+    "recordBytes": 672,
+    "maximumRecords": 50,
+    "maximumWireBytes": 33904,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "PagedResponseData",
+    "designHandler": "`QuestionQueryService.search`",
+    "designDbDescription": "questions/users/answers/jobs",
+    "explicitlyNamedTables": [
+      "schubert.answers",
+      "schubert.questions"
+    ]
+  },
+  {
+    "layout": "QSDREQ01",
+    "uiLine": 96,
+    "designLine": 111,
+    "dataBytes": 12,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 268,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "QuestionDetailRequestData",
+    "designHandler": "`QuestionDetailHandler`",
+    "designDbDescription": "question id",
+    "explicitlyNamedTables": []
+  },
+  {
+    "layout": "QSDRSP01",
+    "uiLine": 97,
+    "designLine": 112,
+    "dataBytes": 8352,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 8608,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "QuestionDetailResponseData",
+    "designHandler": "`QuestionQueryService.detail`",
+    "designDbDescription": "questions/users/answers/jobs",
+    "explicitlyNamedTables": [
+      "schubert.answers",
+      "schubert.questions"
+    ]
+  },
+  {
+    "layout": "QDLREQ01",
+    "uiLine": 98,
+    "designLine": 113,
+    "dataBytes": 48,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 304,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "QuestionDeleteRequestData",
+    "designHandler": "`QuestionDeleteHandler`",
+    "designDbDescription": "questions/answers UPDATE、inbox",
+    "explicitlyNamedTables": [
+      "schubert.answers",
+      "schubert.questions"
+    ]
+  },
+  {
+    "layout": "QDLRSP01",
+    "uiLine": 99,
+    "designLine": 114,
+    "dataBytes": 24,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 280,
+    "interaction": "SYNCHRONOUS",
+    "javaType": "QuestionDeleteResponseData",
+    "designHandler": "`QuestionCommandService.logicalDelete`",
+    "designDbDescription": "deleted_at timestamptz",
+    "explicitlyNamedTables": []
+  },
+  {
+    "layout": "QWKREQ01",
+    "uiLine": 105,
+    "designLine": 120,
+    "dataBytes": 64,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 320,
+    "interaction": "INTERNAL",
+    "javaType": "QuestionWorkData",
+    "designHandler": "`QuestionWorkListener` -> `QuestionWorkerService`",
+    "designDbDescription": "questions/jobs/notifications/answers",
+    "explicitlyNamedTables": [
+      "schubert.answers",
+      "schubert.notifications",
+      "schubert.questions"
+    ]
+  },
+  {
+    "layout": "WLGEVT01",
+    "uiLine": 106,
+    "designLine": 121,
+    "dataBytes": 2080,
+    "recordBytes": 0,
+    "maximumRecords": 0,
+    "maximumWireBytes": 2336,
+    "interaction": "INTERNAL",
+    "javaType": "WebLogEventData",
+    "designHandler": "`WebLogListener` -> `WebLogIngestService`",
+    "designDbDescription": "`app_logs.source_message_id` UK INSERT",
+    "explicitlyNamedTables": [
+      "schubert.app_logs"
+    ]
+  }
+]
