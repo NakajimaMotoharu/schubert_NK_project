@@ -1,0 +1,139 @@
+{
+  "eventId": "PGPT-20261008-6863",
+  "groupId": "a303-a304-pool-scoped-proof-applicability",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T14:34:54.220000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 72,
+      "remainingPercent": 28,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "a303-a304-pool-scoped-proof-applicability",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "a303-a304-pool-scoped-proof-applicability",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P004-05",
+      "WBS-P018-06"
+    ],
+    "managementWorkIds": [
+      "A3-03",
+      "A3-04"
+    ],
+    "source": "0ffcdf91e5498d3d4d383f89c8529b7d69d7175a",
+    "productionCoreMain": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40924-a303-a304-pool-receipt-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.12,
+      "base": 0.3,
+      "high": 0.65
+    },
+    "groupCapPp": 0.8,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1345_A101残三対象公開証跡継続点.json",
+        "sha256": "3d84b6ee31b4c7ff725acc7763f684ef6a355b74d7c4c5e87aa6f7d862f24b61"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG23312-pool-ownership-independent-v1/manifest.json",
+        "sha256": "f013524b4a965847a4a6e7a8513fae2746f99829f567907d60755aeb20b50aae"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG24102-pool-webmetric-ten-method-review-v1/manifest.json",
+        "sha256": "dbb227600dfdb745d02c52a6b3ffc3e961149a6ecdc41e2cd0f08330a9cff978"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40912-f02-sdk-binary-boundary-v1/manifest.json",
+        "sha256": "cd9cde2248915da437c592acd4bd382342566fbb3a9d43188d156bc154d58019"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "A3-03/04は元記録・原価格0。PG23312の独立二caseとPG24102のTestID対応を保持。現候補Pool/fixtureと依存宣言の同一性だけ確認。",
+    "endCondition": "明示依存の版とsource/fixtureを照合し、元適用範囲と現real/6module不足を別記。現製品JAR・DB・新試験の証拠へ算入しない。",
+    "workScope": "既公開manifestとGitの宣言・source hash比較のみ。アプリ開始、実接続、分析対象のJAR読取り、元試験再演は含めない。",
+    "quotaAfter": {
+      "usedPercent": 72,
+      "remainingPercent": 28,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "a2f2f68c7417402264d34a0220338a6b4e7972f55c8d0b206414063595d83d39",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T14:34:54.220000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 72,
+          "remainingPercent": 28,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T14:34:28.730361+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 72,
+      "remainingPercent": 28,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6862",
+    "attempt": 1,
+    "attemptResult": "HISTORICAL_APPLICABILITY_VERIFIED",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40924-a303-a304-pool-receipt-v1/manifest.json",
+        "sha256": "ce9694761fe8530f26a084e64b07d311d1e946b5f706936a087f2713824c632b"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5490_a303_a304_pool_receipt.py",
+        "sha256": "0e16142d189b9a90361fbed9098cd4abd9269ca8dd7eef0be082cc4c1dc0f9d1"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "P004-05 real pool/role/tx and JdbcSyncRequestProcessor",
+      "P018-06 actual Web readiness",
+      "F02/F03 and 451"
+    ],
+    "originalMemoryPoolReceipts": 2,
+    "currentBinaryComparisons": 0,
+    "actualProductTestRuns": 0,
+    "actualAnalyzerRuns": 0,
+    "actualExternalActions": 0
+  }
+}
