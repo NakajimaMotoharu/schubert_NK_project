@@ -1,0 +1,65 @@
+{
+  "eventId": "PGPT-20261008-6659",
+  "groupId": "wbs66-jst-search-date-horizontal-public-source-trace",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T08:40:14.446000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 66,
+      "remainingPercent": 34,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "wbs66-jst-search-date-horizontal-public-source-trace",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "wbs66-jst-search-date-horizontal-public-source-trace",
+    "workAttributionKind": "ADDITIONAL_FINDING",
+    "wbsLeafIds": [
+      "WBS-P016-20",
+      "WBS-P016-22"
+    ],
+    "managementWorkIds": [
+      "WBS-P016-20/2-照合",
+      "WBS-P016-22/2-照合"
+    ],
+    "source": "c6b5073a979991b780cd051c78e146381a7d3e3c",
+    "productionCoreMain": "517a23cddc9f3883550942f6fa90a4256ef39b73",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40772-jst-search-ykt-source-lineage-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.45,
+      "high": 0.9
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1140_G07限定範囲と残短期criteria.json",
+        "sha256": "ac384d6efd0f550c2c269a487d3fbf49dec0ff54392b646046946c93dde26e1e"
+      },
+      {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG40752-search-civil-date-wire-v1/manifest.json",
+        "sha256": "c8c3700c2cad587c7f6170e7d6449f65f922fb9cd84c414af68e6bfe7d7553fc"
+      },
+      {
+        "path": "documents/900_OTHER/910_台帳/916_横展開管理台帳.md",
+        "sha256": "e653641ff5d1670c235fb6a25ff869c6228261a7a0dcdf646bd4a4e0e4c25e55"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "BUG3410 scope questions are pending. Its change cone can be identified from already allowed human-facing date formats plus normal search date forwarding.",
+    "endCondition": "Separate fixed-offset contract that is expressly written (Log) from search form date and returned display dates. Fix none before QA. Record specific tests pending only.",
+    "workScope": "Local read-only public source/design; no application initiation or live input paths, no held actual binary, authority, database or browser."
+  }
+}

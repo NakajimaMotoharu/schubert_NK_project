@@ -1,0 +1,140 @@
+{
+  "eventId": "PGPT-20261008-6660",
+  "groupId": "wbs66-jst-search-date-horizontal-public-source-trace",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T08:41:34.394000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 66,
+      "remainingPercent": 34,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "wbs66-jst-search-date-horizontal-public-source-trace",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "wbs66-jst-search-date-horizontal-public-source-trace",
+    "workAttributionKind": "ADDITIONAL_FINDING",
+    "wbsLeafIds": [
+      "WBS-P016-20",
+      "WBS-P016-22"
+    ],
+    "managementWorkIds": [
+      "WBS-P016-20/2-照合",
+      "WBS-P016-22/2-照合"
+    ],
+    "source": "c6b5073a979991b780cd051c78e146381a7d3e3c",
+    "productionCoreMain": "517a23cddc9f3883550942f6fa90a4256ef39b73",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40772-jst-search-ykt-source-lineage-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.45,
+      "high": 0.9
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1140_G07限定範囲と残短期criteria.json",
+        "sha256": "ac384d6efd0f550c2c269a487d3fbf49dec0ff54392b646046946c93dde26e1e"
+      },
+      {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG40752-search-civil-date-wire-v1/manifest.json",
+        "sha256": "c8c3700c2cad587c7f6170e7d6449f65f922fb9cd84c414af68e6bfe7d7553fc"
+      },
+      {
+        "path": "documents/900_OTHER/910_台帳/916_横展開管理台帳.md",
+        "sha256": "e653641ff5d1670c235fb6a25ff869c6228261a7a0dcdf646bd4a4e0e4c25e55"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "BUG3410 scope questions are pending. Its change cone can be identified from already allowed human-facing date formats plus normal search date forwarding.",
+    "endCondition": "Separate fixed-offset contract that is expressly written (Log) from search form date and returned display dates. Fix none before QA. Record specific tests pending only.",
+    "workScope": "Local read-only public source/design; no application initiation or live input paths, no held actual binary, authority, database or browser.",
+    "quotaAfter": {
+      "usedPercent": 66,
+      "remainingPercent": 34,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "2ad39a7a95ef856212a23614603ffc48c81de8c61b67f909176ac7753e576fb7",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T08:41:34.394000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 66,
+          "remainingPercent": 34,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T08:41:15.095145+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 66,
+      "remainingPercent": 34,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6659",
+    "attempt": 1,
+    "attemptResult": "CIVIL_DATE_DEFECT_CROSS_LAYER_SOURCE_TRACE_OPEN_QA",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG40772-jst-search-ykt-source-lineage-v1/manifest.json",
+        "sha256": "1607b98f50c39094c96ae9463bf4b54dd3a86762ce99a5d0ee633d68cd61f22a"
+      },
+      {
+        "path": "evidence/01_PT/016_NK-WEB-002/4739_通知質問のJST日付不一致と横展開.md",
+        "sha256": "79be8244a5ad9b987ad19cc91c5191ecf255e7da9ddb755af09bb67f42ea4674"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "QA-060 business date rule, UI/SS updates afterward",
+      "YKT2733 existing fixed-offset result render model applicability, actual tests after answer",
+      "F02/F03 full six and runtime, authorization, formal451"
+    ],
+    "sourceProofs": 11,
+    "designProofs": 5,
+    "newProductTestsInvoked": 0,
+    "acceptedIndividualSubconditions": [
+      "Existing date forwarding and fixed-log design exception traced and scoped"
+    ],
+    "bugId": "BUG-3410",
+    "horizontalReview": "YKT-2733",
+    "actualDbBrowserOrAuthActions": 0,
+    "originalOracleChanged": false
+  }
+}
