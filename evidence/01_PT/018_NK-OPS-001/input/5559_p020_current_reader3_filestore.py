@@ -168,7 +168,7 @@ def prepare(scope):
     print("prepared", len(hashes), len(payload), 214)
 
 
-def execute(scope):
+def execute(scope, *, session=SESSION, expected_tests=214):
     work = Path("../pgpt-runs/PG379").resolve() / scope["run"]
     out = OPS / scope["run"]
     start = read(out / "begin.json")
@@ -259,7 +259,7 @@ def execute(scope):
         assert sent and receipt is not None
         assert terminal["boot"] == receipt["boot"] and terminal["ownerUid"] == receipt["uid"]
         assert terminal["workspace"] == previous["WORK"] + "/" + scope["run"]
-        assert terminal["session"] == SESSION
+        assert terminal["session"] == session
         terminal["bootReceiptSha256"] = safe_boot(terminal.pop("boot"))
         for name, item in terminal.pop("payloads").items():
             assert name in {"cases.json", "combined.exec", "coverage.xml"}
@@ -270,7 +270,7 @@ def execute(scope):
             retained[name] = pin(work / name)
     if closed:
         assert set(retained) == {"cases.json", "combined.exec", "coverage.xml"}
-        assert terminal["totals"] == dict(tests=214, failures=0, errors=0, skipped=0)
+        assert terminal["totals"] == dict(tests=expected_tests, failures=0, errors=0, skipped=0)
     write(out / "manifest.json", dict(actualExit=0 if closed else 1, state=state, source=start["toolSource"],
                                       run=scope["run"], core=start["productionCore"], authPrompts=prompt,
                                       sshExit=task.exitstatus, terminal=terminal, capsuleTransferred=sent,
