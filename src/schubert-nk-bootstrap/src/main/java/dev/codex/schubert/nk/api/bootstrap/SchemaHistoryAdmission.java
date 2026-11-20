@@ -17,7 +17,7 @@ import org.jspecify.annotations.Nullable;
  * Assembly must bind expected rows to the independently approved, fully verified release BOM and
  * admit the fixed role/DB connection first. Borrowed connection is never configured/closed here.
  * NK-OPS-001/NK-DAT-001/DAT009/SYS002/UI212/253/SS3313.3/3439.1/SSC095/PG312;
- * PT-OPS-SCHEMA001..008. No migration credentials or table SELECT fallback.
+ * PT-OPS-SCHEMA001..013. No migration credentials or table SELECT fallback.
  */
 @NullMarked
 public final class SchemaHistoryAdmission {
@@ -124,6 +124,7 @@ public final class SchemaHistoryAdmission {
       } finally {
         closeStatement(statement, primary);
       }
+      require(!Thread.currentThread().isInterrupted());
       return List.copyOf(observed);
     } catch (SQLException known) {
       JdbcFailureGraph.preserveFatal(known);
