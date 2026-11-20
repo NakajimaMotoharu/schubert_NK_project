@@ -25,8 +25,12 @@ public final class MonitoringPolicyEngine {
       Duration above80,
       Duration above90,
       ObservationContext context) {
-    return record(
-        Condition.FILESYSTEM, service, thresholds.filesystem(percent, above80, above90), context);
+    return registry.observeWindowed(
+        Condition.FILESYSTEM,
+        service,
+        thresholds.filesystem(percent, above80, above90),
+        AlertThresholds.filesystemAboveWarning(percent),
+        context);
   }
 
   public Optional<Event> transfer(
@@ -73,10 +77,11 @@ public final class MonitoringPolicyEngine {
       long pending,
       long timeouts,
       ObservationContext context) {
-    return record(
+    return registry.observeWindowed(
         Condition.DB_POOL,
         service,
         thresholds.dbPool(percent, above80, pending, timeouts),
+        AlertThresholds.dbPoolAboveWarning(percent),
         context);
   }
 
@@ -86,8 +91,12 @@ public final class MonitoringPolicyEngine {
       Duration above75,
       boolean outOfMemory,
       ObservationContext context) {
-    return record(
-        Condition.JVM_HEAP, service, thresholds.jvmHeap(percent, above75, outOfMemory), context);
+    return registry.observeWindowed(
+        Condition.JVM_HEAP,
+        service,
+        thresholds.jvmHeap(percent, above75, outOfMemory),
+        AlertThresholds.heapAboveWarning(percent),
+        context);
   }
 
   public Optional<Event> syncP95(
@@ -96,8 +105,12 @@ public final class MonitoringPolicyEngine {
       Duration above2,
       Duration above2Point5,
       ObservationContext context) {
-    return record(
-        Condition.SYNC_P95, service, thresholds.syncP95(seconds, above2, above2Point5), context);
+    return registry.observeWindowed(
+        Condition.SYNC_P95,
+        service,
+        thresholds.syncP95(seconds, above2, above2Point5),
+        AlertThresholds.syncLatencyAboveWarning(seconds),
+        context);
   }
 
   public Optional<Event> backup(

@@ -50,11 +50,11 @@ public final class TimedDbPoolMonitor {
         throw new IllegalArgumentException("invalid monitoring sequence");
       lastElapsed = Optional.of(elapsed);
       if (!consecutive || percent.isEmpty()) lifecycle.interruptContinuity(elapsed);
+      boolean aboveWarning =
+          percent.isPresent() && AlertThresholds.dbPoolAboveWarning(percent.orElseThrow());
       var above80 =
           warning.observe(
-              percent.isEmpty()
-                  ? State.UNKNOWN
-                  : percent.orElseThrow() >= 80 ? State.VIOLATING : State.NORMAL,
+              percent.isEmpty() ? State.UNKNOWN : aboveWarning ? State.VIOLATING : State.NORMAL,
               elapsed,
               consecutive);
       if (percent.isEmpty() && immediate != Severity.CRITICAL)
@@ -64,8 +64,7 @@ public final class TimedDbPoolMonitor {
               ? Severity.CRITICAL
               : thresholds.dbPool(percent.orElseThrow(), above80.orElseThrow(), pending, timeouts);
       return new Evaluation(
-          percent.isPresent(),
-          lifecycle.observe(level, context.clearance(), context.at(), elapsed));
+          percent.isPresent(), lifecycle.observeWindowed(level, aboveWarning, context));
     }
   }
 

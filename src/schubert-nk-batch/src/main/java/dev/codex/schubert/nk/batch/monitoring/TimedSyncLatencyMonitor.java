@@ -44,11 +44,11 @@ public final class TimedSyncLatencyMonitor {
         throw new IllegalArgumentException("invalid monitoring sequence");
       lastElapsed = Optional.of(elapsed);
       if (!consecutive || seconds.isEmpty()) lifecycle.interruptContinuity(elapsed);
+      boolean aboveWarning =
+          seconds.isPresent() && AlertThresholds.syncLatencyAboveWarning(seconds.orElseThrow());
       var above2 =
           warning.observe(
-              seconds.isEmpty()
-                  ? State.UNKNOWN
-                  : seconds.orElseThrow() > 2.0 ? State.VIOLATING : State.NORMAL,
+              seconds.isEmpty() ? State.UNKNOWN : aboveWarning ? State.VIOLATING : State.NORMAL,
               elapsed,
               consecutive);
       var above2Point5 =
@@ -62,8 +62,7 @@ public final class TimedSyncLatencyMonitor {
       Severity level =
           thresholds.syncP95(
               seconds.orElseThrow(), above2.orElseThrow(), above2Point5.orElseThrow());
-      return new Evaluation(
-          true, lifecycle.observe(level, context.clearance(), context.at(), elapsed));
+      return new Evaluation(true, lifecycle.observeWindowed(level, aboveWarning, context));
     }
   }
 

@@ -47,11 +47,11 @@ public final class TimedJvmHeapMonitor {
         throw new IllegalArgumentException("invalid monitoring sequence");
       lastElapsed = Optional.of(elapsed);
       if (!consecutive || percent.isEmpty()) lifecycle.interruptContinuity(elapsed);
+      boolean aboveWarning =
+          percent.isPresent() && AlertThresholds.heapAboveWarning(percent.orElseThrow());
       var above75 =
           warning.observe(
-              percent.isEmpty()
-                  ? State.UNKNOWN
-                  : percent.orElseThrow() >= 75 ? State.VIOLATING : State.NORMAL,
+              percent.isEmpty() ? State.UNKNOWN : aboveWarning ? State.VIOLATING : State.NORMAL,
               elapsed,
               consecutive);
       if (percent.isEmpty() && !outOfMemoryReported)
@@ -61,8 +61,7 @@ public final class TimedJvmHeapMonitor {
               ? Severity.CRITICAL
               : thresholds.jvmHeap(percent.orElseThrow(), above75.orElseThrow(), false);
       return new Evaluation(
-          percent.isPresent(),
-          lifecycle.observe(level, context.clearance(), context.at(), elapsed));
+          percent.isPresent(), lifecycle.observeWindowed(level, aboveWarning, context));
     }
   }
 

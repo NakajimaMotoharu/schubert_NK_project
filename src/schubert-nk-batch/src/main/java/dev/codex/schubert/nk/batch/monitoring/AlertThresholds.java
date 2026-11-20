@@ -22,7 +22,7 @@ public final class AlertThresholds {
     durations(above80, above90);
     return level(
         percent >= 90 && atLeast(above90, ONE_MINUTE),
-        percent >= 80 && atLeast(above80, FIVE_MINUTES));
+        filesystemAboveWarning(percent) && atLeast(above80, FIVE_MINUTES));
   }
 
   public Severity transfer(long bytes, long files) {
@@ -67,13 +67,16 @@ public final class AlertThresholds {
     duration(above80);
     nonnegative(pending);
     nonnegative(timeouts);
-    return level(pending >= 1 || timeouts >= 1, percent >= 80 && atLeast(above80, FIVE_MINUTES));
+    return level(
+        pending >= 1 || timeouts >= 1,
+        dbPoolAboveWarning(percent) && atLeast(above80, FIVE_MINUTES));
   }
 
   public Severity jvmHeap(double percent, Duration above75, boolean outOfMemory) {
     percentage(percent);
     duration(above75);
-    return level(percent >= 90 || outOfMemory, percent >= 75 && atLeast(above75, TEN_MINUTES));
+    return level(
+        percent >= 90 || outOfMemory, heapAboveWarning(percent) && atLeast(above75, TEN_MINUTES));
   }
 
   public Severity syncP95(double seconds, Duration above2, Duration above2Point5) {
@@ -81,7 +84,23 @@ public final class AlertThresholds {
     durations(above2, above2Point5);
     return level(
         seconds > 2.5 && atLeast(above2Point5, FIVE_MINUTES),
-        seconds > 2.0 && atLeast(above2, FIVE_MINUTES));
+        syncLatencyAboveWarning(seconds) && atLeast(above2, FIVE_MINUTES));
+  }
+
+  static boolean filesystemAboveWarning(double percent) {
+    return percent >= 80;
+  }
+
+  static boolean dbPoolAboveWarning(double percent) {
+    return percent >= 80;
+  }
+
+  static boolean heapAboveWarning(double percent) {
+    return percent >= 75;
+  }
+
+  static boolean syncLatencyAboveWarning(double seconds) {
+    return seconds > 2.0;
   }
 
   public Severity backup(

@@ -22,7 +22,8 @@ MAIN_NAMES = (
 )
 NEW_SUITE = "TimedAlertPendingRecoveryTest"
 PRIOR_SUITES = (
-    "AlertLifecycleTest", "AlertRegistryTest", "MonitoringPolicyEngineTest", "TimedDbPoolMonitorTest",
+    "AlertLifecycleTest", "AlertRegistryTest", "AlertThresholdsTest",
+    "MonitoringPolicyEngineTest", "TimedDbPoolMonitorTest",
     "TimedFilesystemMonitorTest", "TimedJvmHeapMonitorTest", "TimedSyncLatencyMonitorTest",
 )
 CASES = dict(zip((

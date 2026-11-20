@@ -47,6 +47,16 @@ public final class AlertRegistry {
     state(condition, service).interruptContinuity(elapsed);
   }
 
+  Optional<Event> observeWindowed(
+      Condition condition,
+      Service service,
+      Severity severity,
+      boolean aboveWarning,
+      ObservationContext context) {
+    Objects.requireNonNull(context, "observation context");
+    return state(condition, service).observeWindowed(severity, aboveWarning, context);
+  }
+
   private AlertLifecycle state(Condition condition, Service service) {
     Objects.requireNonNull(condition, "alert condition");
     Objects.requireNonNull(service, "alert service");

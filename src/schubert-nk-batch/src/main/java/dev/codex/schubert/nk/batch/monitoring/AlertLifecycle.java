@@ -174,6 +174,17 @@ public final class AlertLifecycle {
 
   /** Missing samples/gaps preserve the open event but never bridge a normal recovery period. */
   public void interruptContinuity(Duration elapsed) {
+    interruptRecovery(elapsed);
+  }
+
+  /** An exceeded threshold awaiting its trigger window cannot establish normal recovery. */
+  Optional<Event> observeWindowed(Severity severity, boolean aboveWarning, ObservationContext at) {
+    Objects.requireNonNull(at, "observation context");
+    if (severity == Severity.NORMAL && aboveWarning) return interruptRecovery(at.elapsed());
+    return observe(severity, at.clearance(), at.at(), at.elapsed());
+  }
+
+  private Optional<Event> interruptRecovery(Duration elapsed) {
     Objects.requireNonNull(elapsed, "monotonic elapsed");
     if (elapsed.isNegative()) throw new IllegalArgumentException(INVALID_ELAPSED);
     synchronized (lock) {
@@ -181,6 +192,7 @@ public final class AlertLifecycle {
         throw new IllegalArgumentException(INVALID_ELAPSED);
       lastElapsed = Optional.of(elapsed);
       recoveringSince = Optional.empty();
+      return active;
     }
   }
 

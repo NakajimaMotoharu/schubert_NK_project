@@ -51,9 +51,10 @@ public final class TimedFilesystemMonitor {
       }
       if (!consecutive) lifecycle.interruptContinuity(elapsed);
       double value = percent.orElseThrow();
+      boolean aboveWarning = AlertThresholds.filesystemAboveWarning(value);
       Duration above80 =
           warning
-              .observe(value >= 80 ? State.VIOLATING : State.NORMAL, elapsed, consecutive)
+              .observe(aboveWarning ? State.VIOLATING : State.NORMAL, elapsed, consecutive)
               .orElseThrow();
       Duration above90 =
           critical
@@ -61,11 +62,8 @@ public final class TimedFilesystemMonitor {
               .orElseThrow();
       return new Evaluation(
           true,
-          lifecycle.observe(
-              thresholds.filesystem(value, above80, above90),
-              context.clearance(),
-              context.at(),
-              elapsed));
+          lifecycle.observeWindowed(
+              thresholds.filesystem(value, above80, above90), aboveWarning, context));
     }
   }
 
