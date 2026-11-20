@@ -1,0 +1,69 @@
+{
+  "eventId": "PGPT-20261008-6761",
+  "groupId": "WBS66_P00402_INSPECTION_EXACT_RAW",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T12:14:44.844000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 69,
+      "remainingPercent": 31,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66_P00402_INSPECTION_EXACT_RAW",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "WBS66_P00402_INSPECTION_EXACT_RAW",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P004-02"
+    ],
+    "managementWorkIds": [
+      "WBS-P004-02/2",
+      "WBS-P004-05/2",
+      "WBS-F03/2-1"
+    ],
+    "source": "eb69b564793e436f2dc661ac1d6e002b30ceff89",
+    "productionCoreMain": "cdb649a5f054bc2ceed72ef57e55605f14a590d1",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40842-p00402-inspection-sql-cycle-raw-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.35,
+      "base": 0.8,
+      "high": 1.6
+    },
+    "groupCapPp": 10,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1243_F02検査サマリー新Batchと継続点.json",
+        "sha256": "44ef91dffe95e562f389ebefa088ddc931819b79241a2ad9c7540d3d92fe36a7"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40836-p00402-inspection-single-sql-after-v1/manifest.json",
+        "sha256": "f2802c62f9d179ffbc10bf39d5e392381375d64f7c261bfec16ec40837f2953d"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40838-f03-inspection-summary-typed-v1/manifest.json",
+        "sha256": "90afa7c14c66be40bf8c55d2193d56955a1e3f19b1f934ee8819649e1a484ed6"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40840-f02-inspection-corrected-batch-package-v1/manifest.json",
+        "sha256": "04b2c3c8fe15caa5f2558fc306660d5f111f71f187d5d2b6791eadbdc53cbaba"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "BUG3416で新たに通る単独SQLの非fatal混合循環を個別確認。旧二SQLの専用testでは新最外catch未確認。",
+    "endCondition": "新INSPPORT012と既12を一exec、単独循環の固定診断・原因遮蔽・借用所有と独立raw CRC/四指標を取得。",
+    "workScope": "通常のJDKメモリproxyだけ。全scopeの既済12は現rawに必要な分母で単純な確認再演ではない。実DB・外部操作0。"
+  }
+}

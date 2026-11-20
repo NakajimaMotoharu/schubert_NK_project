@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
-/** INSPPORT001..011: borrowed inspection data only, no actual database or child owner. */
+/** INSPPORT001..012: borrowed inspection data only, no actual database or child owner. */
 final class InspectionSummaryPortTest {
   private static final String TEXT_AUTO = "auto";
   private static final String TEXT_COMPLETE = "complete";
@@ -273,6 +273,32 @@ final class InspectionSummaryPortTest {
       }
     }
     assertAll(cases);
+  }
+
+  @Test
+  void singleNonfatalSqlCycleRemainsAClosedDiagnosticAfterRelease() {
+    var fixture = new Fixture();
+    var sql = new SQLException("public known SQL diagnostic");
+    var ordinary = new IllegalStateException("public nonfatal bridge");
+    var tail = new SQLException("public SQL next", sql);
+    sql.initCause(ordinary);
+    ordinary.initCause(sql);
+    ordinary.addSuppressed(tail);
+    sql.setNextException(tail);
+    fixture.faults.put(TEXT_COMPLETE, sql);
+
+    catalog(fixture::read);
+
+    assertSame(ordinary, sql.getCause());
+    assertSame(sql, ordinary.getCause());
+    assertSame(tail, sql.getNextException());
+    assertSame(tail, ordinary.getSuppressed()[0]);
+    assertEquals(1, fixture.closedRows);
+    assertEquals(1, fixture.closedStatements);
+    assertEquals(
+        List.of(TEXT_ROWCLOSE, TEXT_STATEMENTCLOSE),
+        fixture.visited.subList(fixture.visited.size() - 2, fixture.visited.size()));
+    fixture.assertClosed();
   }
 
   @Test
