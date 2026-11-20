@@ -1,0 +1,77 @@
+{
+  "eventId": "PGPT-20261008-6413",
+  "groupId": "PGPT-WBS66-SCHEMA-HISTORY-BORROWED-TERMINAL-INTERRUPT-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T01:28:22.495000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 58,
+      "remainingPercent": 42,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-SCHEMA-HISTORY-BORROWED-TERMINAL-INTERRUPT-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-SCHEMA-HISTORY-BORROWED-TERMINAL-INTERRUPT-20261120",
+    "workAttributionKind": "ADDITIONAL_DISCOVERY",
+    "wbsLeafIds": [
+      "WBS-P019-01.02"
+    ],
+    "managementWorkIds": [
+      "WBS-P019-01.02/2",
+      "WBS-F03/2-2",
+      "WBS-P004-05/2"
+    ],
+    "source": "24978015a487ab7782936b9101f65ff0e4cde331",
+    "productionCoreMain": "2cc96ab800b8753b0f0eafac8e008bd5b69d9a59",
+    "canonicalDesignSource": "6dcd9fb65a3dad2011abeac1babc75e52394785d",
+    "run": "PG40490-port-schema-history-close-interrupt-source-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.35,
+      "base": 1.05,
+      "high": 2.4
+    },
+    "groupCapPp": 3.0,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/892_F03現三製品静的分類継続点.json",
+        "sha256": "602e81d29f260d4ca9e9795c5a2fdbd5364d863557cbbf3694788221ca8c099f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40488-f03-current-282-static-independent-v1/manifest.json",
+        "sha256": "0d9478bc49663a9f02026ab58bcf06a41aef86044b47cf971ce1b78269b31be1"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38670-f03-schema-owner-raw-independent-v3/manifest.json",
+        "sha256": "7f55734dd7bc0adcaf0cb5506c2f543da117d9a75aeb1d4e58b0ab2ec56ec643"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40458-f02-utc42-current-four-jars-v1/manifest.json",
+        "sha256": "2c62141ae1d59953e9d1d44e91c927d7a3b05213c659256df0f237bdf336d188"
+      },
+      {
+        "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+        "sha256": "3d289e22646c265bedc87d6985010b63de56df508ceb1d92f3c5f096789f34fd"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/4592_BUG3234SchemaHistory所有とRowの補充仕様.md",
+        "sha256": "124b3e92c95d6d3b00cea8cb9390f6804f35f09fc6b50072ab2e92056cce08a2"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "現Core2cc96ab800・SS343§9.1・4592及びPG38670元11を照合。本体はquery末尾とclose前の中断を拒否する一方、成功したrows/statement closeでflagが設定された後の受入が未照合。既承認JDK Proxyに限る。",
+    "endCondition": "先行BUG/必要SSC、旧実クラスの独立代理試験、固定08001/interrupt/borrowed各closeと正常値を維持する最小修正、同一候補の必要原11＋追加・raw/静的。実DBなし。",
+    "workScope": "既承認schema履歴の論理Proxyと現物理のみ。Flyway実処理、DB接続、authority、Root、HOLDなし。"
+  }
+}
