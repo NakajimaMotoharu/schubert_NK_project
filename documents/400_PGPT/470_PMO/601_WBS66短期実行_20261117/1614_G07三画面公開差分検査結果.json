@@ -1,0 +1,127 @@
+{
+  "eventId": "PGPT-20261008-7129",
+  "groupId": "WBS66-G07-PUB-VIEW-TESTS-EXACT-FALSE-POSITIVE",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T20:27:30.574000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 80,
+      "remainingPercent": 20,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66-G07-PUB-VIEW-TESTS-EXACT-FALSE-POSITIVE",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "WBS66-G07-PUB-VIEW-TESTS-EXACT-FALSE-POSITIVE",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-G07"
+    ],
+    "managementWorkIds": [
+      "WBS-G07"
+    ],
+    "source": "6a6ff5d509ae98d5cbe686fd005aa820322a6c97",
+    "productionCoreMain": "559f5b5945e82374e0843dcfae11a8d07faef1ea",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG41186-g07-public-view-tests-scan-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.1,
+      "base": 0.25,
+      "high": 0.65
+    },
+    "groupCapPp": 0.9,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1612_F03三画面新Testと次工程.json",
+        "sha256": "afe5d074db68b8298794bbbdd5bd84812aebd4495f65cbeed4826e0b4f4a9134"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41172-g07-new-published-quality-tool-delta-v1/manifest.json",
+        "sha256": "c0cfd4ef300810952359e407ba2b8c45028fc03b2dea562ffcec72ece9668314"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41182-scr009-animation-overclaimed-count-v1/published-scan-classification.json",
+        "sha256": "bf5158df0ab21783aaad5e235ae3bbb1a4a1552b9a20f3f5e618ce17a05d971e"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "PG41172現cursorと公開候補のsource/hash一致。追加公開テキストのみ、起点保全",
+    "endCondition": "Gitleaks whole patchと各ファイルの独立照合。候補があれば実commit objectで説明。未分類時は合格扱いなし",
+    "workScope": "Bounded public commits, no binary/untracked/private paths, scratch /dev/shm only",
+    "quotaAfter": {
+      "usedPercent": 80,
+      "remainingPercent": 20,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "53e5b1b9ec245fec5ba0b21035183364c97d9179f5b4734d6fbd2924828b3a22",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T20:27:30.574000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 80,
+          "remainingPercent": 20,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T20:27:14.880649+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 80,
+      "remainingPercent": 20,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-7128",
+    "attempt": 1,
+    "attemptResult": "PUBLIC_PATCH_INTERVAL_CHECKED",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41186-g07-public-view-tests-scan-v1/manifest.json",
+        "sha256": "1b6efed83ca48ad716cb1695c30044ca6d6ffefe2dce0442fad638cbe9a5d85a"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": "全G07・全451は未成立。現区間のみ。",
+    "scannerWholeAttempts": 1,
+    "perPathChecks": 51,
+    "domainPreflightMetadataFailure": 1,
+    "publishedCommits": 9,
+    "filesScanned": 51,
+    "confirmedSecrets": 0,
+    "protectedReads": 0
+  }
+}
