@@ -1,0 +1,135 @@
+{
+  "actualExit": 0,
+  "source": "559f5b5945e82374e0843dcfae11a8d07faef1ea",
+  "run": "PG41074-f02-current-alert-batch-maven-v1",
+  "terminalAtUTC": "2026-11-20T18:15:45.154121+00:00",
+  "expectedSourceArchiveSha256": "62c6999e042251ef81db5c397424032aa03e0f97412265d2045262f536bfb83d",
+  "previousArtifact": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40988-f02-current-mode-batch-package-v1/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "e79eaf6fff2c8ee117b3c7fa5fea91cfa06c22bfde1226c4dc56969c076c5552"
+  },
+  "batchArtifact": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41074-f02-current-alert-batch-maven-v1/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "276c45bf138b351cb0a0a6bc46dc61881fabb1b17b2b09347b4feea4cfea76a6"
+  },
+  "changedMain": [
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java"
+  ],
+  "selectedMavenModules": [
+    "storage",
+    "bootstrap",
+    "batch"
+  ],
+  "metadataOnlyModules": [
+    "src/schubert-nk-api/pom.xml",
+    "src/schubert-nk-web/pom.xml",
+    "program/characterization/pom.xml",
+    "src/schubert-nk-protocol/pom.xml"
+  ],
+  "steps": {
+    "compile": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-pl",
+        "src/schubert-nk-batch",
+        "-am",
+        "compile"
+      ],
+      "exit": 0,
+      "terminalAtUTC": "2026-11-20T18:15:43.244688+00:00",
+      "stdoutSha256": "b7f476beacb921a30beccf6441eb9ff861052f12a8a6e3a3cfb3ea8c3e4896da",
+      "stderrSha256": "05ed4976f99856c1417eead6c52058f5565d748a00ae7939fa02188545fafda4"
+    },
+    "jar": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-pl",
+        "src/schubert-nk-batch",
+        "org.apache.maven.plugins:maven-jar-plugin:3.4.1:jar"
+      ],
+      "exit": 0,
+      "terminalAtUTC": "2026-11-20T18:15:45.130001+00:00",
+      "stdoutSha256": "a4b15616db1ea61f1f6ef6de4ca17af44e38465481d62b0c143ebcdb6a5d5a0e",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "originalClassNames": 646,
+  "currentClassNames": 647,
+  "qualifiedAlertPhysical": [
+    {
+      "classPath": "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance.class",
+      "sha256": "9b38a3b425429d131cdc8704285df173c55ad4c05e5c860dd4a815b60c5b23b9",
+      "execCrc64": "93760117468cdc3d"
+    },
+    {
+      "classPath": "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition.class",
+      "sha256": "49b34f2b7a8daa57055566a0b422f3a80370b51f2a50355690404f16c07e731b",
+      "execCrc64": "d0e5072de1f5df7a"
+    },
+    {
+      "classPath": "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event.class",
+      "sha256": "5d3a5f35f93162b0294e2dc423ec12f650d18fce7ea13d6dd1893445ddcfbcf7",
+      "execCrc64": "37ffe40c0ab54467"
+    },
+    {
+      "classPath": "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service.class",
+      "sha256": "f363d58c5d7172041618f095846a5c28b8079e63c430c99b0067a2858f469bb5",
+      "execCrc64": "6e749e6167cd5860"
+    },
+    {
+      "classPath": "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity.class",
+      "sha256": "4a90d8e671376316fe3af1709ae3ed7f91e4ab0cee8a8d8a2bcec405ade38ca6",
+      "execCrc64": "c764319c1a2dc358"
+    },
+    {
+      "classPath": "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State.class",
+      "sha256": "1d140156f6787265537ad923d4c2bb2da3b43cb0373353ef1034cf8aaaafd246",
+      "execCrc64": "2664124be6f8456d"
+    },
+    {
+      "classPath": "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.class",
+      "sha256": "22207ad4d75fcb65bd63f4161cf65f2ab2c60d94ae66268fe9357364e8c47a91",
+      "execCrc64": "6cefa40ead0ccf67"
+    }
+  ],
+  "unrelatedClassEntryBytesReadForMeasurement": 0,
+  "savedUnchangedLibraryReferences": {
+    "protocol": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40802-f02-current-four-package-v1/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+      "fileBytes": 299374,
+      "sha256": "9b9de96fb1043946dde9dcd9d2e53091a582e33679f6557bfaf08200d26bbeb4"
+    },
+    "storage": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40802-f02-current-four-package-v1/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+      "fileBytes": 111799,
+      "sha256": "e5be03a72a9cca548f68fc1ca7ee84ced8980dbea72162f58772215227be3ec0"
+    },
+    "bootstrap": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40802-f02-current-four-package-v1/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+      "fileBytes": 428819,
+      "sha256": "3de920f0fc7df4909b362fd25856b5b91e2517fa404cbe5756725544472887f7"
+    }
+  },
+  "unitOriginal": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41070-f03-alert-owner-state-final-v1/manifest.json",
+    "sha256": "ef7ffcdc03a960dc3a2f2d5246029fa244fcfd18e920092a3f804a31f7e24095"
+  },
+  "independent": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41072-f03-alert-owner-state-independent-v1/manifest.json",
+    "sha256": "ec299fcb068605c3cb58b629e7f945ff862dc09fad8956cbcb1cbb0c80b2d058"
+  },
+  "executedProductTests": 0,
+  "executedBackendOperations": 0,
+  "wholeSixBuild": false,
+  "wholeF02": false,
+  "whole451": false,
+  "formalDelta": 0
+}

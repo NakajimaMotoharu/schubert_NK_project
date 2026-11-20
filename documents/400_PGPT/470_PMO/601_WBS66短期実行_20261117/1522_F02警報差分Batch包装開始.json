@@ -1,0 +1,67 @@
+{
+  "eventId": "PGPT-20261008-7037",
+  "groupId": "PGPT-WBS66-F02-CURRENT-ALERT-BATCH-MAVEN-20261121",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T18:14:31.258000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 77,
+      "remainingPercent": 23,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F02-CURRENT-ALERT-BATCH-MAVEN-20261121",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "PGPT-WBS66-F02-CURRENT-ALERT-BATCH-MAVEN-20261121",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a"
+    ],
+    "source": "03d27de413d31eeb28d70119d3c5c3f18e5c7454",
+    "productionCoreMain": "559f5b5945e82374e0843dcfae11a8d07faef1ea",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG41074-f02-current-alert-batch-maven-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.2,
+      "base": 0.65,
+      "high": 1.4
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1521_F03警報状態の同一monitor継続点.json",
+        "sha256": "5aea208edba6bf133506d94e145a15015d87d201768c70e27dad8c1aa3b72409"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40988-f02-current-mode-batch-package-v1/manifest.json",
+        "sha256": "d927658c1f6f0f89b769dbe554e9a3759c28b6716985b4d021729d5ba9f7bda0"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41070-f03-alert-owner-state-final-v1/manifest.json",
+        "sha256": "ef7ffcdc03a960dc3a2f2d5246029fa244fcfd18e920092a3f804a31f7e24095"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41072-f03-alert-owner-state-independent-v1/manifest.json",
+        "sha256": "ec299fcb068605c3cb58b629e7f945ff862dc09fad8956cbcb1cbb0c80b2d058"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "現CoreのAlert一Mainだけに差。以前の同組立のstorage/bootstrap/Batch compileとBatch jar専用の既許可経路。",
+    "endCondition": "正規Batchの包装、許可された警報七物理の同source生exec CRC、既三JAR入力不変を確認。",
+    "workScope": "既許可のローカルcompileとartifact。JARの静的分析はせず、保留classのbyteを集計用に読まない。"
+  }
+}
