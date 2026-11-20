@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.nio.channels.SeekableByteChannel;
 import java.nio.charset.StandardCharsets;
@@ -247,20 +248,30 @@ class GateCliTest {
               JSON.getNodeFactory().numberNode(correctCount.doubleValue()),
               JSON.getNodeFactory().booleanNode(true),
               JSON.getNodeFactory().nullNode(),
-              JSON.getNodeFactory().numberNode(new java.math.BigInteger("9223372036854775809")))) {
-        releaseRejectedInventory(
+              JSON.getNodeFactory()
+                  .numberNode(
+                      BigInteger.ONE
+                          .shiftLeft(64)
+                          .add(BigInteger.valueOf(correctCount.longValue()))))) {
+        assertRejectedInventory(
             project, current, inventory, expected.deepCopy().set(field, invalid), field);
       }
     }
-    releaseRejectedInventory(
+    assertRejectedInventory(
         project,
         current,
         inventory,
         expected.deepCopy().put("sourceAggregateSha256", 4),
         "sourceAggregateSha256");
+    assertRejectedInventory(
+        project,
+        current,
+        inventory,
+        expected.deepCopy().put("documentAggregateSha256", "0".repeat(64)),
+        "documentAggregateSha256");
   }
 
-  private void releaseRejectedInventory(
+  private void assertRejectedInventory(
       Path project, Path current, Path inventory, JsonNode value, String field) throws Exception {
     writeJson(inventory, value);
     Path output = Files.createTempFile(temporaryDirectory, "typed-rejection-", ".json");

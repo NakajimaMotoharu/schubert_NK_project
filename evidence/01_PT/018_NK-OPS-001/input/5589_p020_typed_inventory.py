@@ -69,7 +69,7 @@ def main(red):
                    "--", ":(glob)src/**/src/main/**")
     baseline = git("rev-parse", f"{head}:{MODULE}/baseline/current").decode().strip()
     assert baseline == old["unchangedCurrentTree"]
-    run = values["run"] if red else "PG41118-p020-source-count-green-v1"
+    run = values["run"] if red else sys.argv[2]
     work, old_work = WORK/run, WORK/old["run"]
     work.mkdir(mode=0o700)
     snap = work/"snapshot"
