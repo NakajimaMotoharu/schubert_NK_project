@@ -1,0 +1,222 @@
+{
+  "eventId": "PGPT-20261008-6726",
+  "groupId": "WBS66_C07_CURRENT_TRANSFER_REQUAL",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T11:39:06.643000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 68,
+      "remainingPercent": 32,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66_C07_CURRENT_TRANSFER_REQUAL",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "WBS66_C07_CURRENT_TRANSFER_REQUAL",
+    "workAttributionKind": "SOURCE_REQUALIFICATION",
+    "wbsLeafIds": [
+      "WBS-P018-09"
+    ],
+    "managementWorkIds": [
+      "WBS-P018-09/2",
+      "WBS-C07"
+    ],
+    "source": "2a5869bbb51c9f4f4225e04e86994a9d74434a55",
+    "productionCoreMain": "da20ad7753279ae4e8017593866502d3341ec0e5",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40816-c07-transfer-new-source-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.2,
+      "base": 0.45,
+      "high": 1
+    },
+    "groupCapPp": 10,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1207_C07供給FSheap結果と継続点.json",
+        "sha256": "2e1fd27eddc30a97e32536120d0901d3d016383ec4c2d849cdefb454b9235e7b"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/1619_Transfer警報Metric結線_単体テスト仕様書.md",
+        "sha256": "f1b2297d44706458488b94c2cc67f86328157da41f2e04ec600eae67290ffbc7"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/1620_Transfer警報Metric結線_実行結果.md",
+        "sha256": "c986cba7194eed1b3b6869ab30d693654b55ac2f41d3a7643c0acb384b8cdd93"
+      },
+      {
+        "path": "tools/quality/pg7106_micrometer_http_host.py",
+        "sha256": "4beb8e26cb655d4ba6c35e33225409a3c0edb14a28201b6ce1f29094007f7b8f"
+      },
+      {
+        "path": "tools/quality/pg7286_transfer_health_host.py",
+        "sha256": "7dd1fc06c5b03e1101658c61a90aef2940e5c5fe64db16db04b180c8babcf583"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "共有AlertLifecycle/AlertThresholds変更後。元PG7286のTransfer 8件と既承認の四依存を確認。現候補の当suite未実行。",
+    "endCondition": "当sourceで元Transfer 8件の真正終端と固定入力、実測選択counter、外部所有未観測を保存。",
+    "workScope": "転送固定値とMockClock・自己所有SDKのみ。実collector、外部exporter、DB、実VM、停止・権限操作0。",
+    "quotaAfter": {
+      "usedPercent": 68,
+      "remainingPercent": 32,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "5e51d36e3980b6e1e90492b80f057d4886447cf65ea60d621e2fe5faa200c09f",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T11:39:06.643000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 68,
+          "remainingPercent": 32,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T11:38:59.290129+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 68,
+      "remainingPercent": 32,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6725",
+    "attempt": 1,
+    "attemptResult": "PASS_SELECTED_AFTER_EVIDENCE_RETRY",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 8,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40816-c07-transfer-new-source-v1/manifest.json",
+        "sha256": "46583e0d98a25f373328d9b17f2faea18783a74a0ad11dd4c03d82d0339b4d0a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40816-c07-transfer-new-source-v2/manifest.json",
+        "sha256": "61bed9bb03ef8fcc526812bd8ed90d4ce9331b8f182f6dbfd05ca88708b09154"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40816-c07-transfer-new-source-v2/coverage.xml",
+        "sha256": "0ceff60931d1ada355e7736dca9caddf90d221d1428b1292e912d8b1f94548ce"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5443_c07_transfer_current.py",
+        "sha256": "cb54fa0ad2a484d5e73e6768de6dfd7c6c6b5fec9e4282126723ebfd0282bebc"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "C07 actual sampling and collector ownership",
+      "Same-source product coverage and 451",
+      "Whole F03"
+    ],
+    "executed": 8,
+    "passed": 8,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "notRun": 0,
+    "firstAttemptQualifiedCases": 0,
+    "selectedCoverage": {
+      "INSTRUCTION": {
+        "covered": 1523,
+        "missed": 769
+      },
+      "BRANCH": {
+        "covered": 72,
+        "missed": 137
+      },
+      "LINE": {
+        "covered": 262,
+        "missed": 135
+      },
+      "COMPLEXITY": {
+        "covered": 91,
+        "missed": 110
+      },
+      "METHOD": {
+        "covered": 60,
+        "missed": 36
+      },
+      "CLASS": {
+        "covered": 18,
+        "missed": 3
+      }
+    },
+    "primaryCounters": {
+      "TransferMetricRecorder.java": {
+        "BRANCH": {
+          "covered": 14,
+          "missed": 2
+        },
+        "LINE": {
+          "covered": 50,
+          "missed": 1
+        },
+        "METHOD": {
+          "covered": 18,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 4,
+          "missed": 0
+        }
+      },
+      "TransferHealthMonitor.java": {
+        "BRANCH": {
+          "covered": 6,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 27,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 7,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 2,
+          "missed": 0
+        }
+      }
+    },
+    "verifiedRequalification": 8,
+    "toolCollectionFailures": 1,
+    "groupMetadataPreparationFailures": 1,
+    "sourceChangedDuringGroup": false,
+    "operations": 0,
+    "externalExporterInvocations": 0
+  }
+}

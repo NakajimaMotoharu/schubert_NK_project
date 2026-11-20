@@ -1,0 +1,339 @@
+{
+  "run": "PG40816-c07-transfer-new-source-v2",
+  "initialAttempt": "PG40816-c07-transfer-new-source-v1",
+  "startEvent": "PGPT-20261008-6725",
+  "source": "2a5869bbb51c9f4f4225e04e86994a9d74434a55",
+  "core": "da20ad7753279ae4e8017593866502d3341ec0e5",
+  "actualExit": 0,
+  "startedAtUTC": "2026-11-20T11:38:55.170535+00:00",
+  "terminalAtUTC": "2026-11-20T11:38:59.290129+00:00",
+  "os": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+  "jdk": "25.0.4",
+  "tools": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar",
+      "sha256": "fb5b0036a0899ea97edfa0fc2c7985b55f3f7c5695028163e5e60d4f3cf6075d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+      "sha256": "d2b74b20b415163c1f53261e7c5ef4445b788327094208ff821e0c2baf9bc8f1"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+      "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+      "sha256": "25b400f003089d23cc5320cdaf1a16cabee19b8aa3434d0ff021b3d9f42154b4"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+      "sha256": "754e218ab1fcabb1e1c5f8530e9d3aa37636806c22987bb279dd907a6ee749b2"
+    },
+    {
+      "path": "tools/quality/static/checkstyle.xml",
+      "sha256": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+    },
+    {
+      "path": "tools/quality/pg7106_micrometer_http_host.py",
+      "sha256": "4beb8e26cb655d4ba6c35e33225409a3c0edb14a28201b6ce1f29094007f7b8f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar",
+      "sha256": "9ca47dfa831409b40253c8dc98c17b9d3e050ebbde4d1543c5521dca2b95ad56"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-commons/1.17.1/micrometer-commons-1.17.1.jar",
+      "sha256": "f2cee6ef046e72eec8128474c7f58c6217173b45ae373c30de0289f2a56ab0fd"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-observation/1.17.1/micrometer-observation-1.17.1.jar",
+      "sha256": "eb34f0cd84a879393ae5c21160fc06385ccdc74f36a4d1e31b199f59acfdaf71"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/hdrhistogram/HdrHistogram/2.2.2/HdrHistogram-2.2.2.jar",
+      "sha256": "22d1d4316c4ec13a68b559e98c8256d69071593731da96136640f864fa14fad8"
+    }
+  ],
+  "sources": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java",
+      "sha256": "ad79f4efc8b3cb9927251473f6325ac18e4b316fe2e6205e4af0f52fb6962a21"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholds.java",
+      "sha256": "b0fd95f08991fa72ba262f023c0b64029ed2e9f1678dfd99cebeb14c26ed7aac"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TransferHealthMonitor.java",
+      "sha256": "3c247ca6424505d64b17c346023cc6f776d44c37dc675392c74f21f63b886746"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorder.java",
+      "sha256": "69ed366f5ae4f60315bacff13e904285f860c4e58953e0827a4396bdb14b2c29"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MetricContract.java",
+      "sha256": "056bb329bb251189434c73b8914141be9974b50686f7df227b8ef935e4bc93f8"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy.java",
+      "sha256": "9eb653ff3b80236306ed03e7621b3d6dc6d4d86764760ba625aa7f203118da73"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClock.java",
+      "sha256": "0cb35d7ad440546bb2d182c2c339849b57e1cd1dca6b0d981080cbec24a5c946"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPoller.java",
+      "sha256": "d62e74e15d87f8532047167cb5e051f43f00992ae4284cbccc3a3eb12015c271"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ObservationContext.java",
+      "sha256": "5685db8a219acb224d463f9372c403ad9dfe36ac1d0c6a0fad308d377454cb26"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/package-info.java",
+      "sha256": "009823dd0566a5c0e2a7f06af4b540c122629bec50003bc1585d5303c488d924"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TransferHealthMonitorTest.java",
+      "sha256": "d4f68416b894667499df8e19ac1ef455d20bc577512f7615d91e28c880b632be"
+    }
+  ],
+  "compileClassNames": [
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance.class",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition.class",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event.class",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service.class",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity.class",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.class",
+    "dev/codex/schubert/nk/batch/monitoring/AlertThresholds.class",
+    "dev/codex/schubert/nk/batch/monitoring/MetricContract$Kind.class",
+    "dev/codex/schubert/nk/batch/monitoring/MetricContract.class",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy$DetailService.class",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy$RetentionConfiguration.class",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy.class",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClock.class",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringPoller.class",
+    "dev/codex/schubert/nk/batch/monitoring/ObservationContext.class",
+    "dev/codex/schubert/nk/batch/monitoring/TransferHealthMonitor$Evaluation.class",
+    "dev/codex/schubert/nk/batch/monitoring/TransferHealthMonitor.class",
+    "dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorder$Counts.class",
+    "dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorder$Suffix.class",
+    "dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorder$Usage.class",
+    "dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorder.class",
+    "dev/codex/schubert/nk/batch/monitoring/package-info.class"
+  ],
+  "steps": {
+    "format": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TransferHealthMonitorTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "checkstyle": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "-o",
+        "/dev/shm/pg40816-ya5k_fax/checkstyle.xml",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TransferHealthMonitorTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "mainCompile": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-commons/1.17.1/micrometer-commons-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-observation/1.17.1/micrometer-observation-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/hdrhistogram/HdrHistogram/2.2.2/HdrHistogram-2.2.2.jar",
+        "-d",
+        "/dev/shm/pg40816-ya5k_fax/product",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholds.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TransferHealthMonitor.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorder.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MetricContract.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClock.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPoller.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ObservationContext.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/package-info.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "testCompile": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/dev/shm/pg40816-ya5k_fax/product:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-commons/1.17.1/micrometer-commons-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-observation/1.17.1/micrometer-observation-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/hdrhistogram/HdrHistogram/2.2.2/HdrHistogram-2.2.2.jar",
+        "-d",
+        "/dev/shm/pg40816-ya5k_fax/fixture",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TransferHealthMonitorTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "test": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/dev/shm/pg40816-ya5k_fax/selected.exec,append=false,sessionid=PG40816-v2",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--disable-ansi-colors",
+        "--class-path",
+        "/dev/shm/pg40816-ya5k_fax/product:/dev/shm/pg40816-ya5k_fax/fixture:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-commons/1.17.1/micrometer-commons-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-observation/1.17.1/micrometer-observation-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/hdrhistogram/HdrHistogram/2.2.2/HdrHistogram-2.2.2.jar",
+        "--select-class",
+        "dev.codex.schubert.nk.batch.monitoring.TransferHealthMonitorTest",
+        "--reports-dir",
+        "/dev/shm/pg40816-ya5k_fax/test",
+        "--fail-if-no-tests"
+      ],
+      "exit": 0,
+      "stdoutSha256": "94fad3779dcea1d13a86752f3a3982d1a20fc189546803be8d49d22aa41d70fb",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "xmlSha256": "51791d74b7e504938ecebb9fcbb759708547e447b9be57919115b61bd56977dc"
+    },
+    "selectedCoverage": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/dev/shm/pg40816-ya5k_fax/selected.exec",
+        "--classfiles",
+        "/dev/shm/pg40816-ya5k_fax/product",
+        "--xml",
+        "/dev/shm/pg40816-ya5k_fax/coverage.xml"
+      ],
+      "exit": 0,
+      "stdoutSha256": "ffe0a9810a5d4c692581c2d8d1b1bad19f1ea2bc9cb8a16e47cac9385ea14f5c",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "xmlSha256": "0ceff60931d1ada355e7736dca9caddf90d221d1428b1292e912d8b1f94548ce"
+    }
+  },
+  "cases": [
+    {
+      "testId": "TransferHealthMonitorTest.transferConn008ConcurrentOneOwnerHasExactCountAndImmutableOldSnapshot()",
+      "method": "transferConn008ConcurrentOneOwnerHasExactCountAndImmutableOldSnapshot()",
+      "owner": "TransferHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "TransferHealthMonitorTest.transferConn002WarningBytesAndFilesHaveIndependentExactBoundaries()",
+      "method": "transferConn002WarningBytesAndFilesHaveIndependentExactBoundaries()",
+      "owner": "TransferHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "TransferHealthMonitorTest.transferConn005ExplicitGapRestartsCriticalRecoveryWithoutIncrement()",
+      "method": "transferConn005ExplicitGapRestartsCriticalRecoveryWithoutIncrement()",
+      "owner": "TransferHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "TransferHealthMonitorTest.transferConn003CriticalPromotesSameEventAndRemainsStickyAtWarningValues()",
+      "method": "transferConn003CriticalPromotesSameEventAndRemainsStickyAtWarningValues()",
+      "owner": "TransferHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "TransferHealthMonitorTest.transferConn004UnknownClearsGaugesWithoutNormalizingOrClosingEvent()",
+      "method": "transferConn004UnknownClearsGaugesWithoutNormalizingOrClosingEvent()",
+      "owner": "TransferHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "TransferHealthMonitorTest.transferConn006StandardStillMaintainsWarningCriticalAndCauseRecovery()",
+      "method": "transferConn006StandardStillMaintainsWarningCriticalAndCauseRecovery()",
+      "owner": "TransferHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "TransferHealthMonitorTest.transferConn007InvalidInputsAndProviderFailuresPreserveOwnerAndCurrentValues()",
+      "method": "transferConn007InvalidInputsAndProviderFailuresPreserveOwnerAndCurrentValues()",
+      "owner": "TransferHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "TransferHealthMonitorTest.transferConn001DebugUsesExactCountsMetricsAndSameImmutableInput()",
+      "method": "transferConn001DebugUsesExactCountsMetricsAndSameImmutableInput()",
+      "owner": "TransferHealthMonitorTest",
+      "outcome": "passed"
+    }
+  ],
+  "expectation": "TRANSFERCONN001..008, supplied usage/context, owned SimpleMeterRegistry and MockClock; no collectors or exporters.",
+  "passed": 8,
+  "notRun": 0,
+  "coverage": {
+    "INSTRUCTION": {
+      "covered": 1523,
+      "missed": 769
+    },
+    "BRANCH": {
+      "covered": 72,
+      "missed": 137
+    },
+    "LINE": {
+      "covered": 262,
+      "missed": 135
+    },
+    "COMPLEXITY": {
+      "covered": 91,
+      "missed": 110
+    },
+    "METHOD": {
+      "covered": 60,
+      "missed": 36
+    },
+    "CLASS": {
+      "covered": 18,
+      "missed": 3
+    }
+  },
+  "rawProductCoverage": null,
+  "coverageMethod": "JaCoCo default, nine exact Main types plus package metadata, single selected run.",
+  "sameSourceCasesReplayed": 0,
+  "oldSourceTestsRequired": 8,
+  "oldSourceTestsRequalified": 8,
+  "runtimeInfrastructureActions": 0,
+  "formalDelta": 0,
+  "wholeC07": false,
+  "whole451": false
+}
