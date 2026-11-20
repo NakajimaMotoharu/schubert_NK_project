@@ -40,7 +40,8 @@ def main():
     assert pin(unresolved_path)==independent["unresolved"]
     pending=read(unresolved_path)
     selected=[row for row in pending if "/migration/" in row["path"]]
-    assert len(selected)==142
+    first=next(OPS.glob("PG40505-*/manifest.json"))
+    assert len(selected)==read(first)["actualInventory"]==132
     sources={row["path"]:git("show",f"{core}:{row['path']}") for row in selected}
     assert all(val==git("show",f"{current['productionCore']}:{path}") for path,val in sources.items())
     prior=[]
@@ -51,7 +52,6 @@ def main():
         prior.append((baseline["inputHashes"],counts,anchors,ref,a_ref))
     observed=Counter(rows)
     verified,retained=[],[]
-    keys=set()
     for source_row in selected:
         occurrence=source_row["occurrence"]
         path=source_row["path"]
@@ -72,10 +72,10 @@ def main():
             retained.append(source_row)
             continue
         evidence,ref,a_ref=available[0]
-        keys.add(key)
         verified.append(dict(**source_row,fullSameFileSha256=sha(sources[path]),rawCount=observed[key],
                              reason=evidence["reason"],static=ref,priorAssessment=a_ref))
-    assert len(verified)+len(retained)==142 and len({row["occurrence"] for row in verified})==len(verified)
+    assert len(verified)+len(retained)==len(selected)
+    assert len({row["occurrence"] for row in verified})==len(verified)
     wanted={r["occurrence"] for r in verified}
     remainder=[r for r in pending if r["occurrence"] not in wanted]
     out=OPS/w["run"]
@@ -83,7 +83,8 @@ def main():
     dump(out/"classified.json",verified)
     dump(out/"remaining.json",remainder)
     d=dict(actualExit=0,source=w["source"],productionCore=core,originalActualPmdSource=current["productionCore"],
-           all142MigrationCandidatesExamined=True,oldUnknown=181,newlyLinked=len(verified),
+           migrationCandidatesExamined=len(selected),preparationCountCorrection=pin(first),
+           oldUnknown=181,newlyLinked=len(verified),
            unclassifiedRemainForOriginalReport=len(remainder),migrationRemain=len(retained),
            typedSourceFilesExamined=len(sources),coveredPaths=sorted({r["path"] for r in verified}),
            findingsByOriginalEvidence=dict(Counter(r["static"]["path"] for r in verified)),

@@ -1,0 +1,158 @@
+{
+  "eventId": "PGPT-20261008-6420",
+  "groupId": "PGPT-WBS66-F03-MIGRATION-RAW-EXACT-APPLICABILITY-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T01:46:15.458000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 58,
+      "remainingPercent": 42,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-MIGRATION-RAW-EXACT-APPLICABILITY-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F03-MIGRATION-RAW-EXACT-APPLICABILITY-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "source": "c8f33e6df086bba914742d49a193c3216c9cf53c",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40506-f03-migration-pmd-dispositions-current-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.16,
+      "base": 0.42,
+      "high": 0.85
+    },
+    "groupCapPp": 1.15,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/898_F03現Schema三製品と継続点.json",
+        "sha256": "d5f969390935c7b12149cfa61c312e82526008bf85d68287334175138d60bac6"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40488-f03-current-282-static-independent-v1/manifest.json",
+        "sha256": "0d9478bc49663a9f02026ab58bcf06a41aef86044b47cf971ce1b78269b31be1"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40486-f03-current-three-main-pmd-checkstyle-v1/manifest.json",
+        "sha256": "2ec428e78149261ee2472ba49365614e28c445dd26be5d243d507e1099c62fe2"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36948-ssc450-six-main-quality-join-v1/manifest.json",
+        "sha256": "cc946f5bc3dc54e777ef466f7fc3eb42c01243aad4c4b3ff0c980a216f38ca4a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36938-ssc450-all162-static-v1/manifest.json",
+        "sha256": "d324c14bd66168bc6a871baf0bda7559fedb60ba8658ffdabd0cbf9ecceb1fd6"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33676-copyverify1050-static-v1/manifest.json",
+        "sha256": "47dc22600d239f1a03ecdd730492c52f323f60df36e5aa850e16027f1166d0c7"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/4524_ssc450_all162_static_admission.json",
+        "sha256": "032ee4ff62080ff8d029f22c005c61215f2f8d7fd79dda70fb5cb5a25ce5823f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/3394_copyverify1050_static_admission.json",
+        "sha256": "2af314709a12b6c96af859cab3ee3368afc2cd0937f8f3585285410e3bcf9c8f"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "現PMD狭scope 181未分類のうち移行group142。既元の各site判定と完全fileのSHA、規則、メッセージ、アンカーを照合可能。Schema変更だけの現Coreで移行fileは同byte。",
+    "endCondition": "当142候補のうち根拠が一意一致した分を現在の出現番号に付与。残値と差理由を具体化し、PMD終了4、未調査scope、451を維持。PG/PTの再演・二重費用なし。",
+    "workScope": "当公開PMD/確定sourceの静的適用性だけ。実DB、実移行、秘密、protected scopeは無し。",
+    "quotaAfter": {
+      "usedPercent": 58,
+      "remainingPercent": 42,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "80e516afefc84e3942069b0275005b622b6344f1967fe5f01095ad194de6b10c",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T01:46:15.458000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 58,
+          "remainingPercent": 42,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T01:46:08.651776+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 58,
+      "remainingPercent": 42,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6419",
+    "attempt": 1,
+    "attemptResult": "CURRENT_MIGRATION_132_EXACT_STATIC_DISPOSITIONS",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40505-f03-migration-pmd-count-entry-precheck-v1/manifest.json",
+        "sha256": "766790161e171a8ab08e0351037c1e600fb3286f186acf6188339471eb991924"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40506-f03-migration-pmd-dispositions-current-v1/manifest.json",
+        "sha256": "96bb1f46ca4fa92f9df590e2c3566b7479940649d0525ae2f786e99955fd74b4"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40508-f03-migration-pmd-increment-independent-v1/manifest.json",
+        "sha256": "56bedb510837ffd27fa8985256dd276bd7002beaac36617deea42760ebc69c95"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "当原PMD報告49未分類、新現候補は変更Schema局所別、全六・全451"
+    ],
+    "firstCountPreparationFailures": 1,
+    "actualStaticReruns": 0,
+    "inspectionOccurrences": 132,
+    "dispositionAdded": 132,
+    "rawOriginal": 281,
+    "currentRawSourceStillPrior": true,
+    "allRetainedWithoutSuppression": true,
+    "unresolvedFromFixedOriginalReport": 49
+  }
+}
