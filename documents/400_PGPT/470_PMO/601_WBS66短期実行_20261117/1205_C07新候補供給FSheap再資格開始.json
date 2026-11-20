@@ -1,0 +1,64 @@
+{
+  "eventId": "PGPT-20261008-6722",
+  "groupId": "PGPT-WBS66-C07-FILESYSTEM-HEAP-WRAPPER-NEW-SOURCE-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T11:33:55.542000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 68,
+      "remainingPercent": 32,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-C07-FILESYSTEM-HEAP-WRAPPER-NEW-SOURCE-20261120",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "PGPT-WBS66-C07-FILESYSTEM-HEAP-WRAPPER-NEW-SOURCE-20261120",
+    "workAttributionKind": "SOURCE_REQUALIFICATION",
+    "wbsLeafIds": [
+      "WBS-P018-09"
+    ],
+    "managementWorkIds": [
+      "WBS-P018-09/2",
+      "WBS-C07"
+    ],
+    "source": "10d73e8e8247b1589fa0d4550287749250a3e254",
+    "productionCoreMain": "da20ad7753279ae4e8017593866502d3341ec0e5",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40814-c07-supplied-observation-new-source-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.4,
+      "high": 0.9
+    },
+    "groupCapPp": 1.35,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1204_C07即時四監視局所全到達と継続点.json",
+        "sha256": "b26697249a5a0aeeede0d222ca83c9eddfadcdabf2d2790f1820fd05ccf6dfb9"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40812-c07-immediate-alert-new-source-v1/manifest.json",
+        "sha256": "0e2220ca2d38b5a853b556e162fd0c3bc601c6faf034d4ebbd0e5358b62af71d"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40798-timed-alert-pending-recovery-v2/manifest.json",
+        "sha256": "75a60a041819ef5129da4fd6f8d527ac354d4e1ce3acf32062b3fcd88cd5f8af"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "時系列のFilesystem/Heapを新候補で変更。既存wrapperが供給fixtureを使う3suite26は現候補未取得。",
+    "endCondition": "現在26の真正終端・同一exec・対象毎counterと固定dummy入力を記録。",
+    "workScope": "純JDK供給型/時系列helperと自己fixtureのみ。実FileStore・実MXBean・監視起動・DB・全JARは対象外。"
+  }
+}

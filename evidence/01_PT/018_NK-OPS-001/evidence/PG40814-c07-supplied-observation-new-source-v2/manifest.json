@@ -1,0 +1,470 @@
+{
+  "run": "PG40814-c07-supplied-observation-new-source-v2",
+  "startEvent": "PGPT-20261008-6722",
+  "source": "10d73e8e8247b1589fa0d4550287749250a3e254",
+  "core": "da20ad7753279ae4e8017593866502d3341ec0e5",
+  "actualExit": 0,
+  "startedAtUTC": "2026-11-20T11:34:46.161175+00:00",
+  "terminalAtUTC": "2026-11-20T11:34:50.861765+00:00",
+  "os": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+  "jdk": "25.0.4",
+  "tools": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar",
+      "sha256": "fb5b0036a0899ea97edfa0fc2c7985b55f3f7c5695028163e5e60d4f3cf6075d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+      "sha256": "d2b74b20b415163c1f53261e7c5ef4445b788327094208ff821e0c2baf9bc8f1"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+      "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+      "sha256": "25b400f003089d23cc5320cdaf1a16cabee19b8aa3434d0ff021b3d9f42154b4"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+      "sha256": "754e218ab1fcabb1e1c5f8530e9d3aa37636806c22987bb279dd907a6ee749b2"
+    },
+    {
+      "path": "tools/quality/static/checkstyle.xml",
+      "sha256": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+    }
+  ],
+  "sources": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java",
+      "sha256": "ad79f4efc8b3cb9927251473f6325ac18e4b316fe2e6205e4af0f52fb6962a21"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholds.java",
+      "sha256": "b0fd95f08991fa72ba262f023c0b64029ed2e9f1678dfd99cebeb14c26ed7aac"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/FilesystemHealthObservation.java",
+      "sha256": "d490ac5e7946eaf67c1da504cb05a7e8e16ccd0aae0282f69f070e302574cb7d"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/FilesystemHealthMonitor.java",
+      "sha256": "743174197f0e519877ef7580ca7dedffbe4235d47385425162def9b778b926a6"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/JvmHeapHealthObservation.java",
+      "sha256": "607283fa1451eb126c74d98ab5e41cbb36c66913a7fe40f06a9d14bbbcdcf119"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/JvmHeapHealthMonitor.java",
+      "sha256": "078e0bb6b18fc1c3e4d29771adaeec0c43688827357d65610091ebd36223810a"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/HealthUsageRatio.java",
+      "sha256": "99972961fe20b5b4ce765ff650b8176e73e85395ef5d1e8b08f077f4debf2749"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow.java",
+      "sha256": "89b651524b151fc772903dfd4a29bfa8bc41eb6984c9ca646d555363bba614ca"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.java",
+      "sha256": "5e8a474737f4fbdc71e672a44fa268c48a62d167e0d80e7a86323f902e173e73"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.java",
+      "sha256": "5588e1ab7234b3799d1c6e1a02fc2a78ee75e447734d2b5b29760dc721ea7990"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClock.java",
+      "sha256": "0cb35d7ad440546bb2d182c2c339849b57e1cd1dca6b0d981080cbec24a5c946"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPoller.java",
+      "sha256": "d62e74e15d87f8532047167cb5e051f43f00992ae4284cbccc3a3eb12015c271"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ObservationContext.java",
+      "sha256": "5685db8a219acb224d463f9372c403ad9dfe36ac1d0c6a0fad308d377454cb26"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/package-info.java",
+      "sha256": "009823dd0566a5c0e2a7f06af4b540c122629bec50003bc1585d5303c488d924"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/FilesystemHealthObservationTest.java",
+      "sha256": "a71002b88a7bfd3f19173ac7c95f78766ab5774d3fa20cc5c2163a2f162e08e8"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClockTest.java",
+      "sha256": "c9aabd0fa6dabb9a5c64cf27739a8e41927815e94b15c97946025e01d4186544"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/JvmHeapHealthMonitorTest.java",
+      "sha256": "19a77f9de9f00ede6e32694ebb7bcdba06d22f0c7d63deeca53245f828586e6f"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/JvmHeapHealthObservationTest.java",
+      "sha256": "d4d707c358be0170cf1699c5111fe27eb036b475d21e0e1a1d25508d9902bec7"
+    }
+  ],
+  "compileClassNames": [
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance.class",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition.class",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event.class",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service.class",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity.class",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.class",
+    "dev/codex/schubert/nk/batch/monitoring/AlertThresholds.class",
+    "dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow$State.class",
+    "dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow.class",
+    "dev/codex/schubert/nk/batch/monitoring/FilesystemHealthMonitor.class",
+    "dev/codex/schubert/nk/batch/monitoring/FilesystemHealthObservation.class",
+    "dev/codex/schubert/nk/batch/monitoring/HealthUsageRatio.class",
+    "dev/codex/schubert/nk/batch/monitoring/JvmHeapHealthMonitor.class",
+    "dev/codex/schubert/nk/batch/monitoring/JvmHeapHealthObservation.class",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClock.class",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringPoller.class",
+    "dev/codex/schubert/nk/batch/monitoring/ObservationContext.class",
+    "dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor$Evaluation.class",
+    "dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.class",
+    "dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor$Evaluation.class",
+    "dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.class",
+    "dev/codex/schubert/nk/batch/monitoring/package-info.class"
+  ],
+  "steps": {
+    "format": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/FilesystemHealthObservationTest.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClockTest.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/JvmHeapHealthMonitorTest.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/JvmHeapHealthObservationTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "checkstyle": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "-o",
+        "/dev/shm/pg40814-q9ioseci/checkstyle.xml",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/FilesystemHealthObservationTest.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClockTest.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/JvmHeapHealthMonitorTest.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/JvmHeapHealthObservationTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "mainCompile": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "-d",
+        "/dev/shm/pg40814-q9ioseci/product",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholds.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/FilesystemHealthObservation.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/FilesystemHealthMonitor.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/JvmHeapHealthObservation.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/JvmHeapHealthMonitor.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/HealthUsageRatio.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClock.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPoller.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ObservationContext.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/package-info.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "testCompile": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/dev/shm/pg40814-q9ioseci/product:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "-d",
+        "/dev/shm/pg40814-q9ioseci/fixture",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/FilesystemHealthObservationTest.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClockTest.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/JvmHeapHealthMonitorTest.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/JvmHeapHealthObservationTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "test": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/dev/shm/pg40814-q9ioseci/selected.exec,append=false,sessionid=PG40814",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--disable-ansi-colors",
+        "--class-path",
+        "/dev/shm/pg40814-q9ioseci/product:/dev/shm/pg40814-q9ioseci/fixture:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "--select-class",
+        "dev.codex.schubert.nk.batch.monitoring.FilesystemHealthObservationTest",
+        "--select-class",
+        "dev.codex.schubert.nk.batch.monitoring.MonitoringObservationClockTest",
+        "--select-class",
+        "dev.codex.schubert.nk.batch.monitoring.JvmHeapHealthMonitorTest",
+        "--reports-dir",
+        "/dev/shm/pg40814-q9ioseci/test",
+        "--fail-if-no-tests"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e88571738ac61fff9808acb142c4c3d9a4ae804fefdcd1f545866e5d8f4d0988",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "xmlSha256": "7ce11feaa97304f9db7c3983d2092d2def68053e606536d24bb6c35a01ff2d1c"
+    },
+    "selectedCoverage": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/dev/shm/pg40814-q9ioseci/selected.exec",
+        "--classfiles",
+        "/dev/shm/pg40814-q9ioseci/product",
+        "--xml",
+        "/dev/shm/pg40814-q9ioseci/coverage.xml"
+      ],
+      "exit": 0,
+      "stdoutSha256": "a4fd9fe94b5f397fd829bc4c42a5bd116212c291722f11377c8d8969c8037329",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "xmlSha256": "23ecc93f99315ff4390b3b1b9c81fa59d15d47fb4e0f65a707c3299aa966aa52"
+    }
+  },
+  "cases": [
+    {
+      "testId": "FilesystemHealthObservationTest.fsInput010NullBackwardsGapAndConcurrentPollHaveOneSerializedOwner()",
+      "method": "fsInput010NullBackwardsGapAndConcurrentPollHaveOneSerializedOwner()",
+      "owner": "FilesystemHealthObservationTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "MonitoringObservationClockTest.obsClock005SourceFailuresRemainUnformattedAndDoNotCommitFailedContexts()",
+      "method": "obsClock005SourceFailuresRemainUnformattedAndDoNotCommitFailedContexts()",
+      "owner": "MonitoringObservationClockTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "FilesystemHealthObservationTest.fsInput005MaximumAndSingleByteTotalsDoNotOverflow()",
+      "method": "fsInput005MaximumAndSingleByteTotalsDoNotOverflow()",
+      "owner": "FilesystemHealthObservationTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "JvmHeapHealthMonitorTest.heapConn008ConcurrentInputsHaveExactReadsAndImmutableCountSnapshots()",
+      "method": "heapConn008ConcurrentInputsHaveExactReadsAndImmutableCountSnapshots()",
+      "owner": "JvmHeapHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "JvmHeapHealthMonitorTest.heapConn007SeparateOwnersDoNotShareBeansOrAlertState()",
+      "method": "heapConn007SeparateOwnersDoNotShareBeansOrAlertState()",
+      "owner": "JvmHeapHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "JvmHeapHealthMonitorTest.heapConn004ClockFailureOrNullNeverReadsBeanAndCrossApiRecoveryHasGap()",
+      "method": "heapConn004ClockFailureOrNullNeverReadsBeanAndCrossApiRecoveryHasGap()",
+      "owner": "JvmHeapHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "MonitoringObservationClockTest.obsClock003EpochMaximumAndOverflowHaveExplicitDifferentOutcomes()",
+      "method": "obsClock003EpochMaximumAndOverflowHaveExplicitDifferentOutcomes()",
+      "owner": "MonitoringObservationClockTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "JvmHeapHealthMonitorTest.heapConn005ExplicitOomReportWithUnknownUsageIsCriticalNotInventedZero()",
+      "method": "heapConn005ExplicitOomReportWithUnknownUsageIsCriticalNotInventedZero()",
+      "owner": "JvmHeapHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "JvmHeapHealthMonitorTest.heapConn006NullAndBackwardsBoundariesHaveNoProviderOrStateMutation()",
+      "method": "heapConn006NullAndBackwardsBoundariesHaveNoProviderOrStateMutation()",
+      "owner": "JvmHeapHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "JvmHeapHealthMonitorTest.heapConn001BeanClockAndKernelNeedExactlyTenWarningMinutes()",
+      "method": "heapConn001BeanClockAndKernelNeedExactlyTenWarningMinutes()",
+      "owner": "JvmHeapHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "MonitoringObservationClockTest.obsClock006NullContractsDoNotTouchProvidersAndSnapshotsStayImmutable()",
+      "method": "obsClock006NullContractsDoNotTouchProvidersAndSnapshotsStayImmutable()",
+      "owner": "MonitoringObservationClockTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "FilesystemHealthObservationTest.fsInput009MissingIoAndInvalidStatsBreakRecoveryRatherThanClosingAlert()",
+      "method": "fsInput009MissingIoAndInvalidStatsBreakRecoveryRatherThanClosingAlert()",
+      "owner": "FilesystemHealthObservationTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "MonitoringObservationClockTest.obsClock001IndependentNanosAndActualUtcAreNotRebasedOrClamped()",
+      "method": "obsClock001IndependentNanosAndActualUtcAreNotRebasedOrClamped()",
+      "owner": "MonitoringObservationClockTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "JvmHeapHealthMonitorTest.heapConn002UnknownMaximumBreaksCriticalNormalRecovery()",
+      "method": "heapConn002UnknownMaximumBreaksCriticalNormalRecovery()",
+      "owner": "JvmHeapHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "MonitoringObservationClockTest.obsClock007ConcurrentContextsHaveUniqueMonotonicSnapshots()",
+      "method": "obsClock007ConcurrentContextsHaveUniqueMonotonicSnapshots()",
+      "owner": "MonitoringObservationClockTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "FilesystemHealthObservationTest.fsInput002InvalidValuesAreUnknownWithoutClampingOrStickyFailure()",
+      "method": "fsInput002InvalidValuesAreUnknownWithoutClampingOrStickyFailure()",
+      "owner": "FilesystemHealthObservationTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "MonitoringObservationClockTest.obsClock008HealthConnectionBreaksClockAndUncheckedInputGapsAcrossBothApis()",
+      "method": "obsClock008HealthConnectionBreaksClockAndUncheckedInputGapsAcrossBothApis()",
+      "owner": "MonitoringObservationClockTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "FilesystemHealthObservationTest.fsInput001FixedIndependentByteTableReadsExactlyTwoValues()",
+      "method": "fsInput001FixedIndependentByteTableReadsExactlyTwoValues()",
+      "owner": "FilesystemHealthObservationTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "MonitoringObservationClockTest.obsClock004BackwardsTickDoesNotReadUtcCommitOrResetTheEpoch()",
+      "method": "obsClock004BackwardsTickDoesNotReadUtcCommitOrResetTheEpoch()",
+      "owner": "MonitoringObservationClockTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "FilesystemHealthObservationTest.fsInput006OneByteBeforeIntegerThresholdNeverRoundsUpAcrossIt()",
+      "method": "fsInput006OneByteBeforeIntegerThresholdNeverRoundsUpAcrossIt()",
+      "owner": "FilesystemHealthObservationTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "FilesystemHealthObservationTest.fsInput004UncheckedAndFatalRemainTheSameFailureNotNormalData()",
+      "method": "fsInput004UncheckedAndFatalRemainTheSameFailureNotNormalData()",
+      "owner": "FilesystemHealthObservationTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "MonitoringObservationClockTest.obsClock002SignedOriginAndRegularLongWrapHaveFiveNanos()",
+      "method": "obsClock002SignedOriginAndRegularLongWrapHaveFiveNanos()",
+      "owner": "MonitoringObservationClockTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "FilesystemHealthObservationTest.fsInput008ActualObservationPortDrivesWarningAndCriticalBoundaries()",
+      "method": "fsInput008ActualObservationPortDrivesWarningAndCriticalBoundaries()",
+      "owner": "FilesystemHealthObservationTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "FilesystemHealthObservationTest.fsInput007NullAndConcurrentIndependentReadsDoNotAcquireOwnership()",
+      "method": "fsInput007NullAndConcurrentIndependentReadsDoNotAcquireOwnership()",
+      "owner": "FilesystemHealthObservationTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "FilesystemHealthObservationTest.fsInput003CheckedIoFailureIsUnknownAndNeverFormattedOrRetried()",
+      "method": "fsInput003CheckedIoFailureIsUnknownAndNeverFormattedOrRetried()",
+      "owner": "FilesystemHealthObservationTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "JvmHeapHealthMonitorTest.heapConn003GetterFailureIsNotRetriedOrConvertedAndBreaksRecovery()",
+      "method": "heapConn003GetterFailureIsNotRetriedOrConvertedAndBreaksRecovery()",
+      "owner": "JvmHeapHealthMonitorTest",
+      "outcome": "passed"
+    }
+  ],
+  "expectation": "Original fixed filesystem and heap doubles, absent/invalid readings and monotonic time; actual FileStore and MXBean were not accessed.",
+  "passed": 26,
+  "notRun": 0,
+  "coverage": {
+    "INSTRUCTION": {
+      "covered": 1581,
+      "missed": 350
+    },
+    "BRANCH": {
+      "covered": 131,
+      "missed": 97
+    },
+    "LINE": {
+      "covered": 327,
+      "missed": 47
+    },
+    "COMPLEXITY": {
+      "covered": 123,
+      "missed": 74
+    },
+    "METHOD": {
+      "covered": 69,
+      "missed": 14
+    },
+    "CLASS": {
+      "covered": 21,
+      "missed": 0
+    }
+  },
+  "rawProductCoverage": null,
+  "coverageMethod": "JaCoCo default, thirteen exact Main types plus package metadata, single selected run.",
+  "sameSourceCasesReplayed": 0,
+  "oldSourceTestsRequalified": 26,
+  "runtimeInfrastructureActions": 0,
+  "formalDelta": 0,
+  "wholeC07": false,
+  "whole451": false
+}

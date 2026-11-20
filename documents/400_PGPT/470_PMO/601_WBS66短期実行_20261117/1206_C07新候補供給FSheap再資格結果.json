@@ -1,0 +1,243 @@
+{
+  "eventId": "PGPT-20261008-6723",
+  "groupId": "PGPT-WBS66-C07-FILESYSTEM-HEAP-WRAPPER-NEW-SOURCE-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T11:35:25.331000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 68,
+      "remainingPercent": 32,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-C07-FILESYSTEM-HEAP-WRAPPER-NEW-SOURCE-20261120",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "PGPT-WBS66-C07-FILESYSTEM-HEAP-WRAPPER-NEW-SOURCE-20261120",
+    "workAttributionKind": "SOURCE_REQUALIFICATION",
+    "wbsLeafIds": [
+      "WBS-P018-09"
+    ],
+    "managementWorkIds": [
+      "WBS-P018-09/2",
+      "WBS-C07"
+    ],
+    "source": "10d73e8e8247b1589fa0d4550287749250a3e254",
+    "productionCoreMain": "da20ad7753279ae4e8017593866502d3341ec0e5",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40814-c07-supplied-observation-new-source-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.4,
+      "high": 0.9
+    },
+    "groupCapPp": 1.35,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1204_C07即時四監視局所全到達と継続点.json",
+        "sha256": "b26697249a5a0aeeede0d222ca83c9eddfadcdabf2d2790f1820fd05ccf6dfb9"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40812-c07-immediate-alert-new-source-v1/manifest.json",
+        "sha256": "0e2220ca2d38b5a853b556e162fd0c3bc601c6faf034d4ebbd0e5358b62af71d"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40798-timed-alert-pending-recovery-v2/manifest.json",
+        "sha256": "75a60a041819ef5129da4fd6f8d527ac354d4e1ce3acf32062b3fcd88cd5f8af"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "時系列のFilesystem/Heapを新候補で変更。既存wrapperが供給fixtureを使う3suite26は現候補未取得。",
+    "endCondition": "現在26の真正終端・同一exec・対象毎counterと固定dummy入力を記録。",
+    "workScope": "純JDK供給型/時系列helperと自己fixtureのみ。実FileStore・実MXBean・監視起動・DB・全JARは対象外。",
+    "quotaAfter": {
+      "usedPercent": 68,
+      "remainingPercent": 32,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "a5acdbbee1111a02ba354c908350c5f2c77d9d5f9295b60513219f93cbd525a4",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T11:35:25.331000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 68,
+          "remainingPercent": 32,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T11:34:50.861765+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 68,
+      "remainingPercent": 32,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6722",
+    "attempt": 1,
+    "attemptResult": "明示供給FS/heap/時刻3suite26成功。5ソースで測定対象全到達。B0は非該当。",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 26,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40814-c07-supplied-observation-new-source-v1/manifest.json",
+        "sha256": "d580ad7608a2c288ba3ad70cc1e19b97bc19cab31cd50b1e8311a298bdadcfc8"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40814-c07-supplied-observation-new-source-v2/manifest.json",
+        "sha256": "451121432474bc403feafd57784e1841f3fd9612d2e03007284fce12bff97a82"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40814-c07-supplied-observation-new-source-v2/coverage.xml",
+        "sha256": "23ecc93f99315ff4390b3b1b9c81fa59d15d47fb4e0f65a707c3299aa966aa52"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "共通helperのrawと全451",
+      "C07実効",
+      "全六F02/F03"
+    ],
+    "newSourceCasesPassed": 26,
+    "testPreparationFailures": 1,
+    "groupMetadataPreparationFailures": 1,
+    "firstCandidateExecutionPassed": 26,
+    "targetDefaultCoverage": {
+      "JvmHeapHealthMonitor.java": {
+        "LINE": [
+          10,
+          0
+        ],
+        "METHOD": [
+          6,
+          0
+        ],
+        "CLASS": [
+          1,
+          0
+        ]
+      },
+      "JvmHeapHealthObservation.java": {
+        "LINE": [
+          8,
+          0
+        ],
+        "METHOD": [
+          3,
+          0
+        ],
+        "CLASS": [
+          1,
+          0
+        ]
+      },
+      "MonitoringObservationClock.java": {
+        "BRANCH": [
+          4,
+          0
+        ],
+        "LINE": [
+          18,
+          0
+        ],
+        "METHOD": [
+          2,
+          0
+        ],
+        "CLASS": [
+          1,
+          0
+        ]
+      },
+      "FilesystemHealthMonitor.java": {
+        "LINE": [
+          10,
+          0
+        ],
+        "METHOD": [
+          6,
+          0
+        ],
+        "CLASS": [
+          1,
+          0
+        ]
+      },
+      "FilesystemHealthObservation.java": {
+        "BRANCH": [
+          6,
+          0
+        ],
+        "LINE": [
+          11,
+          0
+        ],
+        "METHOD": [
+          2,
+          0
+        ],
+        "CLASS": [
+          1,
+          0
+        ]
+      }
+    },
+    "fullSelectedCoverage": {
+      "INSTRUCTION": {
+        "covered": 1581,
+        "missed": 350
+      },
+      "BRANCH": {
+        "covered": 131,
+        "missed": 97
+      },
+      "LINE": {
+        "covered": 327,
+        "missed": 47
+      },
+      "COMPLEXITY": {
+        "covered": 123,
+        "missed": 74
+      },
+      "METHOD": {
+        "covered": 69,
+        "missed": 14
+      },
+      "CLASS": {
+        "covered": 21,
+        "missed": 0
+      }
+    }
+  }
+}
