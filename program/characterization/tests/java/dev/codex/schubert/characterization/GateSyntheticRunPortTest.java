@@ -17,7 +17,7 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-/** PT-CHR-SYN001..006 / UI264 SS355. Own synthetic files only, never real CHR qualification. */
+/** PT-CHR-SYN001..007 / UI264 SS355. Own synthetic files only, never real CHR qualification. */
 final class GateSyntheticRunPortTest {
   private static final ObjectMapper JSON = new ObjectMapper();
   private static final Path OWN_INPUT = Path.of(System.getProperty("chr.unitProjectRoot"));
@@ -84,6 +84,18 @@ final class GateSyntheticRunPortTest {
     Files.copy(
         OWN_INPUT.resolve(CONTRACT), root.resolve(CONTRACT), StandardCopyOption.REPLACE_EXISTING);
     assertTrue(validate(root).failures().contains("run2_INVENTORY_STATUS"));
+  }
+
+  @Test
+  void requiredEvidenceContainsExactlyOneJsonDocument() throws Exception {
+    Path root = fixture("single-document");
+    Path file = root.resolve(CONTRACT);
+    String document = Files.readString(file);
+    Files.writeString(file, document + "\n \t\n");
+    assertTrue(validate(root).passed());
+
+    Files.writeString(file, document + "\n{}\n");
+    assertThrows(IOException.class, () -> validate(root));
   }
 
   @Test
