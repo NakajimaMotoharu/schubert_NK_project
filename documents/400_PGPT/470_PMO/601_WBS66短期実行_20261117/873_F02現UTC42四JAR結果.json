@@ -1,0 +1,146 @@
+{
+  "eventId": "PGPT-20261008-6393",
+  "groupId": "PGPT-WBS66-F02-UTC42-FOUR-JARS-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T01:01:59.850000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 57,
+      "remainingPercent": 43,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F02-UTC42-FOUR-JARS-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F02-UTC42-FOUR-JARS-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a",
+      "WBS-F02-b"
+    ],
+    "source": "31c314974ffac166ab59ecf645fa9abffa39a70b",
+    "productionCoreMain": "2cc96ab800b8753b0f0eafac8e008bd5b69d9a59",
+    "canonicalDesignSource": "6dcd9fb65a3dad2011abeac1babc75e52394785d",
+    "run": "PG40458-f02-utc42-current-four-jars-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.22,
+      "base": 0.7,
+      "high": 1.4
+    },
+    "groupCapPp": 1.8,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/871_F03移行UTC42是正後継続点.json",
+        "sha256": "ef007b8670f4f7c3e8f28b392e26fa496f3d123918b95a758b00b04f6479046f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40380-f02-current-four-jars-public-checkpoint-v1/manifest.json",
+        "sha256": "50ab463424ef12a32e3aa6f38ec38d3175876f33826e412e4371943a3a9116e2"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40374-f02-ssc461-public-checkpoint-v1/compiled-classes.json",
+        "sha256": "2ead0a11b7173dd6368dd6dd5909e78aee4370a10621941305049c24a2a39e90"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40456-migration-utc42-product-and-tool-proof-v1/manifest.json",
+        "sha256": "39b35eaafb1011fb3f8b4ab9003730f174838fe498bce5962eae497c2b1d3180"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39862-service-db-state-lock-four-main-v1/manifest.json",
+        "sha256": "9433dae6e53e1d97a1b942175e930c315c118da9dea870cdffb0b26072e6a035"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "確定source候補2cc96ab800、PG40380では前Core四JAR 1102物理。SSC473によりBootstrapの2 Mainのみ変更、旧四JARの当Core適用は未認証。PG40456の87は再実行不要。旧承認四moduleとRoot Maven/SS311/SS342を固定。API/Web Mainは取得・生成しない。",
+    "endCondition": "四moduleの許可済みMain sourceだけを同候補のMaven既定で再構成。二物理とJDBC型辺の差を独立確認し、物理同一の三moduleも当Core receiptに含める。旧Storage既知違反・API/Web・全13要求・451未済を記録。",
+    "workScope": "四moduleのMain/compile/packageと型辺のみ。試験・配備・サーバ・DB／protected scopeなし。",
+    "quotaAfter": {
+      "usedPercent": 57,
+      "remainingPercent": 43,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "e1911c4027d9ae18c7c1483fe3be4fc2c3b7358b9038f9d13ab52dcfa59fbcb2",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T01:01:59.850000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 57,
+          "remainingPercent": 43,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T01:01:54.031738+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 57,
+      "remainingPercent": 43,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6392",
+    "attempt": 1,
+    "attemptResult": "CURRENT_CORE_FOUR_MAVEN_JARS_TWO_EXACT_BYTE_DELTAS",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40458-f02-utc42-current-four-jars-v1/manifest.json",
+        "sha256": "2c62141ae1d59953e9d1d44e91c927d7a3b05213c659256df0f237bdf336d188"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40460-f02-utc42-physical-and-test-alignment-v1/manifest.json",
+        "sha256": "09acc06d5080221e14c0835555b7d7e24272be6a2b04e0835d28d5b3b517c909"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "API/Web実JAR、F02固有13全条件、旧Storage JDBC辺、実runtime、全451"
+    ],
+    "firstValidationPassed": 4,
+    "firstValidationDenominator": 4,
+    "retries": 0,
+    "builtJars": 4,
+    "compiledMainFiles": 482,
+    "validatedPhysical": 1102,
+    "unchangedPhysical": 1100,
+    "changedPhysical": 2,
+    "targetPriorSyntheticByteQualified": false,
+    "programRegressionReexecution": 0,
+    "actualOwnerRuntimeOperation": 0
+  }
+}

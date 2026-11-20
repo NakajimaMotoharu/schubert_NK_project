@@ -1,0 +1,106 @@
+{
+  "actualExit": 0,
+  "source": "31c314974ffac166ab59ecf645fa9abffa39a70b",
+  "productionCore": "2cc96ab800b8753b0f0eafac8e008bd5b69d9a59",
+  "newPackageReceipt": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40458-f02-utc42-current-four-jars-v1/manifest.json",
+    "sha256": "2c62141ae1d59953e9d1d44e91c927d7a3b05213c659256df0f237bdf336d188"
+  },
+  "immediatelyPriorPackageReceipt": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40380-f02-current-four-jars-public-checkpoint-v1/manifest.json",
+    "sha256": "50ab463424ef12a32e3aa6f38ec38d3175876f33826e412e4371943a3a9116e2"
+  },
+  "qualifiedLocalArtifacts": {
+    "protocol": {
+      "artifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40458-f02-utc42-current-four-jars-v1/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+        "sha256": "4cf21dbbf603246ab8c0474e2744c1204ce9ed0f890859ee002d0b5aebb3f087"
+      },
+      "physical": 176,
+      "changed": []
+    },
+    "storage": {
+      "artifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40458-f02-utc42-current-four-jars-v1/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+        "sha256": "184086238f5ba6a083a02056cfebff0701700be5eccf3864d8311100d566d05d"
+      },
+      "physical": 79,
+      "changed": []
+    },
+    "bootstrap": {
+      "artifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40458-f02-utc42-current-four-jars-v1/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+        "sha256": "765cf135e12c9077ad3b058601f72f05eed0b10772a393395a4b71ec70bf76d9"
+      },
+      "physical": 201,
+      "changed": [
+        "dev/codex/schubert/nk/migration/MigrationGamesVerifier.class",
+        "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier.class"
+      ]
+    },
+    "batch": {
+      "artifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40458-f02-utc42-current-four-jars-v1/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+        "sha256": "78b87248d8ea4b2196eee682a00d706d0487a633b5daf2e0f04f434d1ece6cd6"
+      },
+      "physical": 646,
+      "changed": []
+    }
+  },
+  "totalPhysical": 1102,
+  "previousPhysicalMatched": 1100,
+  "typedChanges": {
+    "dev.codex.schubert.nk.migration.MigrationGamesVerifier": {
+      "added": [
+        "java.lang.Class",
+        "java.time.OffsetDateTime"
+      ],
+      "removed": [
+        "java.sql.Timestamp"
+      ],
+      "unchangedDependencies": 15
+    },
+    "dev.codex.schubert.nk.migration.MigrationMasterContentVerifier": {
+      "added": [
+        "java.lang.Class",
+        "java.time.OffsetDateTime"
+      ],
+      "removed": [
+        "java.sql.Timestamp"
+      ],
+      "unchangedDependencies": 43
+    }
+  },
+  "sameCorePrior87Receipt": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40452-migration-utc42-proxy-87-typed-v1/manifest.json",
+    "sha256": "9a3f3990a94b619e060ede633eb3ae09dd0ab1aa1d75d07e4a7bd245282d6686"
+  },
+  "candidateCoverageNotTransferred": true,
+  "requalificationRequired": {
+    "dev/codex/schubert/nk/migration/MigrationGamesVerifier.class": {
+      "mavenPackaged": "f4d916aa12edcd5274dffb0d91bcdb65ebd7a568b554e116d58b38d0620c561d",
+      "javacFixtureRun": "919ed2024e79e73838b08ac799c37a82e1bbb0079b9232d2032208d80ec87a9c",
+      "exactTransfer": false
+    },
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier.class": {
+      "mavenPackaged": "0b28b54ead31ca5d3b954a6378211be3862b9084dbd43a96ae331b8ae235b105",
+      "javacFixtureRun": "b2a26cc83092d763c9b0a9aef8fdfd2aea594e1f3c4b35ea3b3bdc5d8034ba24",
+      "exactTransfer": false
+    }
+  },
+  "stillOpenStorageTypedViolation": [
+    {
+      "origin": "dev.codex.schubert.nk.storage.StorageIoException",
+      "target": "java.sql.SQLException",
+      "artifact": "java.sql"
+    }
+  ],
+  "oldStorageReceipt": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40252-f02-storage-jdbc-saved-edges-v1/manifest.json",
+    "sha256": "c07b262505a082fee7f5c75a0ec5be73d136114ea6c413e2e86f70b51d3cef79"
+  },
+  "newProductTests": 0,
+  "allSixAccepted": false,
+  "whole451Accepted": false,
+  "terminalAtUTC": "2026-11-20T01:01:54.031738+00:00"
+}

@@ -1,0 +1,221 @@
+{
+  "actualExit": 0,
+  "sourceCore": "2cc96ab800b8753b0f0eafac8e008bd5b69d9a59",
+  "gitHead": "31c314974ffac166ab59ecf645fa9abffa39a70b",
+  "baselineCore": "cb1411d94a1d97aedafe1af60400aaec0ae8c8e8",
+  "started": "PGPT-20261008-6392",
+  "sourceCounts": {
+    "protocol": 169,
+    "storage": 25,
+    "bootstrap": 88,
+    "batch": 200
+  },
+  "statuses": {
+    "compile": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-pl",
+        "src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-batch",
+        "-am",
+        "compile"
+      ],
+      "beginUTC": "2026-11-20T01:00:32.408956+00:00",
+      "terminalAtUTC": "2026-11-20T01:01:01.591811+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40458-f02-utc42-current-four-jars-v1/compile.stdout.log.gz",
+        "sha256": "08dc41c8cd4445186a7618c3c314577f3816e4b247de8ee87e30651cc6328f93"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40458-f02-utc42-current-four-jars-v1/compile.stderr.log.gz",
+        "sha256": "7097fbfb15f55c833e6de8e49ccc4ae96e0a90c2af25ebe49e5a16ff0b5e14ae"
+      }
+    },
+    "jar": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-pl",
+        "src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-batch",
+        "org.apache.maven.plugins:maven-jar-plugin:3.4.1:jar"
+      ],
+      "beginUTC": "2026-11-20T01:01:01.591833+00:00",
+      "terminalAtUTC": "2026-11-20T01:01:03.474941+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40458-f02-utc42-current-four-jars-v1/jar.stdout.log.gz",
+        "sha256": "bc22769e6e77e132df82613279cac2e1137e12fdc686e5b6dcde2fe6b35dfcf0"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40458-f02-utc42-current-four-jars-v1/jar.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "typed-before": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/jdeps",
+        "-verbose:class",
+        "-filter:none",
+        "--ignore-missing-deps",
+        "/dev/shm/pgpt-f02-utc42-four-a1iixxxa/prior/dev/codex/schubert/nk/migration/MigrationGamesVerifier.class",
+        "/dev/shm/pgpt-f02-utc42-four-a1iixxxa/prior/dev/codex/schubert/nk/migration/MigrationMasterContentVerifier.class"
+      ],
+      "beginUTC": "2026-11-20T01:01:03.583501+00:00",
+      "terminalAtUTC": "2026-11-20T01:01:03.826879+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40458-f02-utc42-current-four-jars-v1/typed-before.stdout.log.gz",
+        "sha256": "04cccc7789264e10a6fefb9df1779887029b31b0f22c0d7b03574f0c540fb51f"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40458-f02-utc42-current-four-jars-v1/typed-before.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "typed-after": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/jdeps",
+        "-verbose:class",
+        "-filter:none",
+        "--ignore-missing-deps",
+        "/dev/shm/pgpt-f02-utc42-four-a1iixxxa/src/schubert-nk-bootstrap/target/classes/dev/codex/schubert/nk/migration/MigrationGamesVerifier.class",
+        "/dev/shm/pgpt-f02-utc42-four-a1iixxxa/src/schubert-nk-bootstrap/target/classes/dev/codex/schubert/nk/migration/MigrationMasterContentVerifier.class"
+      ],
+      "beginUTC": "2026-11-20T01:01:03.826911+00:00",
+      "terminalAtUTC": "2026-11-20T01:01:04.090470+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40458-f02-utc42-current-four-jars-v1/typed-after.stdout.log.gz",
+        "sha256": "9f65042c27cbf3de17a0bcc8b4879cd5403a4c2ea202811245c8afcdc60c6a97"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40458-f02-utc42-current-four-jars-v1/typed-after.stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    }
+  },
+  "oldJarManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40380-f02-current-four-jars-public-checkpoint-v1/manifest.json",
+    "sha256": "50ab463424ef12a32e3aa6f38ec38d3175876f33826e412e4371943a3a9116e2"
+  },
+  "oldPhysicalManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40374-f02-ssc461-public-checkpoint-v1/compiled-classes.json",
+    "sha256": "2ead0a11b7173dd6368dd6dd5909e78aee4370a10621941305049c24a2a39e90"
+  },
+  "packagedJars": {
+    "protocol": {
+      "artifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40458-f02-utc42-current-four-jars-v1/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+        "sha256": "4cf21dbbf603246ab8c0474e2744c1204ce9ed0f890859ee002d0b5aebb3f087"
+      },
+      "coordinates": {
+        "artifactId": "schubert-nk-protocol",
+        "groupId": "dev.codex.schubert",
+        "version": "0.1.0-SNAPSHOT"
+      },
+      "classes": 176,
+      "nonClassEntries": 3,
+      "crcOK": true,
+      "classMajor": 69,
+      "allClassHashesMatch": true
+    },
+    "storage": {
+      "artifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40458-f02-utc42-current-four-jars-v1/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+        "sha256": "184086238f5ba6a083a02056cfebff0701700be5eccf3864d8311100d566d05d"
+      },
+      "coordinates": {
+        "artifactId": "schubert-nk-storage",
+        "groupId": "dev.codex.schubert",
+        "version": "0.1.0-SNAPSHOT"
+      },
+      "classes": 79,
+      "nonClassEntries": 3,
+      "crcOK": true,
+      "classMajor": 69,
+      "allClassHashesMatch": true
+    },
+    "bootstrap": {
+      "artifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40458-f02-utc42-current-four-jars-v1/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+        "sha256": "765cf135e12c9077ad3b058601f72f05eed0b10772a393395a4b71ec70bf76d9"
+      },
+      "coordinates": {
+        "artifactId": "schubert-nk-bootstrap",
+        "groupId": "dev.codex.schubert",
+        "version": "0.1.0-SNAPSHOT"
+      },
+      "classes": 201,
+      "nonClassEntries": 3,
+      "crcOK": true,
+      "classMajor": 69,
+      "allClassHashesMatch": true
+    },
+    "batch": {
+      "artifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40458-f02-utc42-current-four-jars-v1/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+        "sha256": "78b87248d8ea4b2196eee682a00d706d0487a633b5daf2e0f04f434d1ece6cd6"
+      },
+      "coordinates": {
+        "artifactId": "schubert-nk-batch",
+        "groupId": "dev.codex.schubert",
+        "version": "0.1.0-SNAPSHOT"
+      },
+      "classes": 646,
+      "nonClassEntries": 3,
+      "crcOK": true,
+      "classMajor": 69,
+      "allClassHashesMatch": true
+    }
+  },
+  "changedPhysical": {
+    "protocol": [],
+    "storage": [],
+    "bootstrap": [
+      "dev/codex/schubert/nk/migration/MigrationGamesVerifier.class",
+      "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier.class"
+    ],
+    "batch": []
+  },
+  "exactTypedChanges": {
+    "dev.codex.schubert.nk.migration.MigrationGamesVerifier": {
+      "added": [
+        "java.lang.Class",
+        "java.time.OffsetDateTime"
+      ],
+      "removed": [
+        "java.sql.Timestamp"
+      ],
+      "unchangedDependencies": 15
+    },
+    "dev.codex.schubert.nk.migration.MigrationMasterContentVerifier": {
+      "added": [
+        "java.lang.Class",
+        "java.time.OffsetDateTime"
+      ],
+      "removed": [
+        "java.sql.Timestamp"
+      ],
+      "unchangedDependencies": 43
+    }
+  },
+  "classHashCounts": {
+    "protocol": 176,
+    "storage": 79,
+    "bootstrap": 201,
+    "batch": 646
+  },
+  "productTests": 0,
+  "noApiOrWebMain": true,
+  "backendActions": 0,
+  "wholeF02Accepted": false,
+  "whole451Accepted": false,
+  "terminalAtUTC": "2026-11-20T01:01:04.106233+00:00"
+}
