@@ -1,0 +1,80 @@
+{
+  "eventId": "PGPT-20261008-6368",
+  "groupId": "PGPT-WBS66-P01802-CURRENT-BOM-INVENTORY-REQUAL-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T00:17:09.472000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 56,
+      "remainingPercent": 44,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P01802-CURRENT-BOM-INVENTORY-REQUAL-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-P01802-CURRENT-BOM-INVENTORY-REQUAL-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P018-02"
+    ],
+    "managementWorkIds": [
+      "候補再資格-23.01",
+      "WBS-P018-02/2"
+    ],
+    "source": "49c81eaef3e438387e9bcb998c37e309a6ad77e8",
+    "productionCoreMain": "cb1411d94a1d97aedafe1af60400aaec0ae8c8e8",
+    "canonicalDesignSource": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "run": "PG40422-p01802-current-inventory18-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.22,
+      "base": 0.65,
+      "high": 1.3
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/847_P01802現公開BOM三範囲と継続点.json",
+        "sha256": "469bef49a04a42b7bad61e1e466f16b14ab20c73c4b31d1b2a0127af209d0d17"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40420-p01802-current-release-three-port-scopes-v1/manifest.json",
+        "sha256": "dcd733fd8c570c209cde161933ed1d91129ca43768570d7e32e7931fd532317e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40382-f02-public-checkpoint-jars-independent-v1/manifest.json",
+        "sha256": "353ba7026a16916c98594134394879bc690a1001680e6f0f42c759aacb273f97"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40374-f02-ssc461-public-checkpoint-v1/compiled-classes.json",
+        "sha256": "2ead0a11b7173dd6368dd6dd5909e78aee4370a10621941305049c24a2a39e90"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37438-inventory-whole18-unit-v1/manifest.json",
+        "sha256": "2dd326a0734bfe6027440adf15e62cafee0ad4e4f423458311d03b33fb3e6ae0"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37432-inventory-test-static-v1/manifest.json",
+        "sha256": "46229db3057a454cc198bb016028c50a3522178f7e6c7fbb17d1d86d69342db1"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37440-inventory18-independent-v1/manifest.json",
+        "sha256": "755b8fe312771c0b4f79a2fd015813b723b2cb69d47161b83758382db8e7821f"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "PG40420 shows two changed shared SchemaHistory physicals. Original two whole suites use only public JSON, byte arrays and value constructors; the current JDBC changed methods are not invoked.",
+    "endCondition": "Requalify the 18 existing cases once with exact current owner/two shared classes, independent XML/CRC and unfiltered counters. Retain shared methods not exercised, retain held signer/runtime.",
+    "workScope": "Previously admitted ordinary public fixture only (Gson in-memory, finite Java workers); no DB connection or SQL call, Tool access, signing, permit, Root, native or actual deployment."
+  }
+}
