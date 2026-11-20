@@ -1,0 +1,45 @@
+{
+  "source": "af6db98d62e83ed4dd19d623034373365027dce3",
+  "searchCommand": [
+    "git",
+    "grep",
+    "-l",
+    "-E",
+    "case \"(DEBUG|STANDARD)\"",
+    "af6db98d62e83ed4dd19d623034373365027dce3",
+    "--",
+    "src"
+  ],
+  "sourceCandidates": [
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiCustomMetricPayload.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistration.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiJvmMetrics.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContext.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxObservationPump.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxObservationSource.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSource.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetrics.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiSystemMetrics.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/AsyncJobMetricRecorder.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorder.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/InboxReplayMetricRecorder.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/MqMessageMetricRecorder.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/MqPressureMetricRecorder.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/MqProcessingDurationMetricRecorder.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/MqRedeliveryMetricRecorder.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OperationMismatchMetricRecorder.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OutboxAgeMetricRecorder.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OutboxRowsMetricRecorder.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/HttpMetricContract.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricRecorder.java"
+  ],
+  "confirmedCandidateDefects": 0,
+  "concludedHere": "MonitoringModePolicy.parse",
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40986-f03-mode-policy-explicit-comparison-v2/manifest.json",
+    "sha256": "12165f5e40f95221a019cfe91fc82e2d3bfab6391416c51184a9e53f69f6163d"
+  },
+  "nextCriterion": "各候補について同物理の生未到達を確認。既生100は閉じ、実領域・HOLDは保持。source検索だけでcloseしない。"
+}

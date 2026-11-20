@@ -925,3 +925,7 @@ NK-AUT-001、P007-01、F03。LoginAttemptRepository.lockForAttempt／PT-AUT-ATTE
 ### LoginAccount格納値のUTF-8境界（PG40976）
 
 NK-AUT-001、FUN-001、UI226、SS314/331、LoginAccount constructor、PT-LOGIN-VALUE005、BUG-3436／YKT-2749。WBS-P007-01/2の局所根拠。[仕様](../../../evidence/01_PT/018_NK-OPS-001/5531_P00701格納値UTF8境界仕様.md) [証跡](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40976-p00701-login-account-utf8-storage-v1/manifest.json)。
+
+### MonitoringModePolicy.parse のSS351監視二値（PG40986）
+
+NK-OPS-001、MON010～013、UI252 §5、SS351 §8、PT-OPS-MONMODE001～007／RETCONF／GENB／MONPIPE、WBS-F03/2-2、BUG-3438／3439・YKT-2751／2752。[仕様](../../../evidence/01_PT/018_NK-OPS-001/5537_F03監視mode有限二値再資格仕様.md) [証跡](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40986-f03-mode-policy-explicit-comparison-v2/manifest.json)。

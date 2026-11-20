@@ -43,7 +43,8 @@ def main():
     assert all(pin(Path(row["path"])) == row for row in refs)
     before, engine, original = [json.loads(Path(ref["path"]).read_bytes()) for ref in refs[1:4]]
     assert before["actualExit"] == engine["actualExit"] == original["actualExit"] == 0
-    source = subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
+    source = "af6db98d62e83ed4dd19d623034373365027dce3"
+    assert not subprocess.check_output(["git", "diff", "--name-only", source, "HEAD", "--", "src", "pom.xml"])
     project = Path("src/schubert-nk-batch/src")
     prefix = project / "main/java" / BASE
     target = prefix / "monitoring/MonitoringModePolicy.java"
@@ -59,14 +60,20 @@ def main():
 
     tc = Path("../toolchain").resolve()
     jdk = tc / "jdk-25.0.4"
-    java, javac, javap = (jdk / "bin" / tool for tool in ("java", "javac", "javap"))
+    java, javac = (jdk / "bin" / tool for tool in ("java", "javac"))
     junit = tc / "junit-platform-console-standalone-1.13.4.jar"
     agent = tc / "m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar"
     deps = original["begin"]["dependencyHashes"]
     jspecify, = [Path(p) for p in deps if p.endswith("jspecify-1.0.1.jar")]
-    micrometer, = [Path(p) for p in deps if p.endswith("micrometer-core-1.17.1.jar")]
-    assert all(pin(p)["sha256"] == deps[str(p)] for p in (jspecify, micrometer))
-    work = Path("../pgpt-runs/PG379").resolve() / v["run"]
+    sdk = [Path(path) for path in sorted(deps) if path.endswith((
+        "micrometer-core-1.17.1.jar", "micrometer-commons-1.17.1.jar",
+        "micrometer-observation-1.17.1.jar"))]
+    assert len(sdk) == 3 and all(pin(p)["sha256"] == deps[str(p)] for p in (jspecify, *sdk))
+    sdk_cp = ":".join(map(str, sdk))
+    work_root = Path("../pgpt-runs/PG379").resolve()
+    original_work = work_root / v["run"]
+    run_name = v["run"].removesuffix("-v1") + "-v2"
+    work = work_root / run_name
     work.mkdir(mode=0o700)
     env = {"JAVA_HOME": str(jdk), "PATH": f"{jdk}/bin:{os.defpath}", "LANG": "C.UTF-8", "TZ": "Asia/Tokyo"}
     steps = []
@@ -86,59 +93,53 @@ def main():
             raise SystemExit(result.returncode)
         return result.stdout
 
-    run("format", [java, "-jar", tc / "google-java-format-1.36.1-all-deps.jar",
-                   "--dry-run", "--set-exit-if-changed", target])
-    style = run("checkstyle", [java, "-jar", tc / "static-gates-20261015/checkstyle-14.3.0-all.jar",
-                               "-c", "tools/quality/static/checkstyle.xml", "-f", "xml", target])
-    assert not ET.fromstring(style).findall("file/error")
-    (work / "pom.xml").write_bytes(Path("pom.xml").read_bytes())
-    scope = work / "scope"
-    scope.mkdir()
-    (scope / "pom.xml").write_text(
-        '<project xmlns="http://maven.apache.org/POM/4.0.0"><modelVersion>4.0.0</modelVersion>'
-        '<parent><groupId>dev.codex.schubert</groupId><artifactId>schubert-nk</artifactId>'
-        '<version>0.1.0-SNAPSHOT</version><relativePath>../pom.xml</relativePath></parent>'
-        '<artifactId>mode-policy-value-scope</artifactId><dependencies>'
-        '<dependency><groupId>org.jspecify</groupId><artifactId>jspecify</artifactId></dependency>'
-        '</dependencies></project>\n'
-    )
-    for p in (target, package):
-        dest = scope / "src/main/java" / p.relative_to(project / "main/java")
-        dest.parent.mkdir(exist_ok=True, parents=True)
-        dest.write_bytes(p.read_bytes())
-    maven = tc / "m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn"
-    log = run("typed", [maven, "-o", "-N", "-B", "-ntp", "-X", "-f", scope / "pom.xml",
-                         f"-Dmaven.repo.local={tc}/m2/repository", "compile"])
-    assert all(word in log for word in (b"-Xep:NullAway:ERROR", b"-Werror", b"Compiling 2 source files"))
-    assert b"[NullAway]" not in log
-    typed = scope / "target/classes"
+    typed = original_work / "scope/target/classes"
     mode_prefix = BASE + "/monitoring/MonitoringModePolicy"
     mode_paths = [typed / (mode_prefix + suffix + ".class")
                   for suffix in ("", "$DetailService", "$RetentionConfiguration")]
-    expected_physical = {p.relative_to(typed) for p in mode_paths} | {
-        Path(BASE + "/monitoring/package-info.class")}
-    assert {p.relative_to(typed) for p in typed.rglob("*.class")} == expected_physical
-    for previous, current in zip(before["physical"], mode_paths, strict=True):
-        assert pin(Path(previous["path"])) == previous
-        assert run("before-public-" + current.stem, [javap, "-public", "-s", previous["path"]]) == run(
-            "current-public-" + current.stem, [javap, "-public", "-s", current])
-    bytecode = run("current-mode-bytecode", [javap, "-c", "-p", mode_paths[0]])
+    assert {p.relative_to(typed) for p in typed.rglob("*.class")} == (
+        {p.relative_to(typed) for p in mode_paths} | {Path(BASE + "/monitoring/package-info.class")})
+    assert (original_work / "pom.xml").read_bytes() == Path("pom.xml").read_bytes()
+    for p in (target, package):
+        snapshot = original_work / "scope/src/main/java" / p.relative_to(project / "main/java")
+        assert snapshot.read_bytes() == p.read_bytes()
+    retained = []
+    for path in sorted(original_work.glob("*-terminal.json")):
+        receipt = json.loads(path.read_bytes())
+        for key in ("stdout", "stderr"):
+            assert pin(Path(receipt[key]["path"])) == receipt[key]
+        if receipt["step"] == "helper-compile":
+            assert receipt["exitCode"] == 1
+            diagnostic = Path(receipt["stderr"]["path"]).read_text()
+            assert "io.micrometer.common.lang.internal.Contract not found" in diagnostic
+            assert "warnings found and -Werror specified" in diagnostic
+        else:
+            assert receipt["exitCode"] == 0
+        retained.append(dict(receipt=pin(path), step=receipt["step"], exitCode=receipt["exitCode"]))
+    assert not (original_work / "unit-terminal.json").exists()
+    log = (original_work / "typed.stdout").read_bytes()
+    assert all(flag in log for flag in (b"-Xep:NullAway:ERROR", b"-Werror", b"Compiling 2 source files"))
+    assert b"[NullAway]" not in log
+    assert not ET.parse(original_work / "checkstyle.stdout").getroot().findall("file/error")
+    for path in mode_paths:
+        assert (original_work / ("before-public-" + path.stem + ".stdout")).read_bytes() == (
+            original_work / ("current-public-" + path.stem + ".stdout")).read_bytes()
+    bytecode = (original_work / "current-mode-bytecode.stdout").read_bytes()
     parse_body = bytecode.split(b" parse(java.lang.String)", 1)[1].split(b"  public boolean", 1)[0]
     assert b"lookupswitch" not in parse_body and b"tableswitch" not in parse_body
     assert parse_body.count(b"java/lang/String.equals") == 2
-
     strict = [javac, "--release", "25", "-g", "-Xlint:all", "-Werror", "-proc:none",
               "-implicit:none", "-sourcepath", ""]
     helpers, tests = work / "helpers", work / "tests"
-    run("helper-compile", [*strict, "-cp", f"{typed}:{jspecify}:{micrometer}",
+    run("helper-compile", [*strict, "-cp", f"{typed}:{jspecify}:{sdk_cp}",
                            "-d", helpers, *support])
-    run("test-compile", [*strict, "-cp", f"{typed}:{helpers}:{jspecify}:{micrometer}:{junit}",
+    run("test-compile", [*strict, "-cp", f"{typed}:{helpers}:{jspecify}:{sdk_cp}:{junit}",
                          "-d", tests, *fixtures])
     reports, stream = work / "reports", work / "unit.exec"
     session = "PG40986-EXPLICIT-MODE-COMPARISON"
     run("unit", [java, f"-javaagent:{agent}=destfile={stream},sessionid={session},append=false",
                  "-jar", junit, "execute", "--fail-if-no-tests", "--disable-ansi-colors",
-                 "--class-path", f"{typed}:{helpers}:{tests}:{jspecify}:{micrometer}",
+                 "--class-path", f"{typed}:{helpers}:{tests}:{jspecify}:{sdk_cp}",
                  "--reports-dir", reports,
                  *(arg for name in SUITES for arg in ("--select-class", PACKAGE + name))])
     jxml = reports / "TEST-junit-jupiter.xml"
@@ -153,7 +154,7 @@ def main():
     assert actual == expected
 
     op = Path("evidence/01_PT/018_NK-OPS-001/evidence")
-    out = op / v["run"]
+    out = op / run_name
     out.mkdir()
     command = before["rawCommand"][:4]
     observed_targets = [*mode_paths, helpers / (BASE + "/monitoring/ObservationContext.class")]
@@ -187,16 +188,16 @@ def main():
     complete = all(counter["missed"] == 0 for row in rows.values() for counter in row["counters"].values())
     passed = complete and not sb_count and not sb_errors and not pmd_errors
     json_file(out / "manifest.json", dict(
-        source=source, beforeSource=v["productionCoreMain"], run=v["run"], startEvent=start["eventId"],
+        source=source, beforeSource=v["productionCoreMain"], run=run_name, startEvent=start["eventId"],
         actualExit=0 if passed else 1, terminalAtUTC=utc(), os="Linux", java="25.0.4", maven="3.9.12",
         testCounts=counts, exactCases=sorted(actual), newTestDefinitions=0, affectedPriorRequalifications=32,
-        sourceInputs=[pin(p) for p in paths], dependencyInputs=[pin(jspecify), pin(micrometer)],
+        sourceInputs=[pin(p) for p in paths], dependencyInputs=[pin(jspecify), *(pin(path) for path in sdk)],
         javapDirectEqualsCalls=2, previousRaw=refs[1], unchangedPublicAbi=True, actualPhysical=[pin(p) for p in observed_targets],
         rawOutput=pin(out / "unfiltered.tsv"), raw=rows, fullRawForMeasuredClasses=complete,
         originalCoverageCombined=False, junitXml=pin(jxml), execData=pin(stream), session=session,
         nullAwayFindings=0, spotbugs=dict(report=pin(sb), findings=sb_count, errors=sb_errors),
         pmd=dict(report=pin(pmd), errors=pmd_errors, findings=pmd_rules, requiresDisposition=bool(pmd_rules)),
-        steps=steps, fullBatchPackageUpdated=False, realOperations=0, wholeF03=False, whole451=False, formalDelta=0,
+        steps=steps, retainedSuccessfulPreparation=retained, priorFixtureFailure="BUG-3439", fullBatchPackageUpdated=False, realOperations=0, wholeF03=False, whole451=False, formalDelta=0,
     ))
     print(counts, complete, sb_count, sb_errors, pmd_rules)
     raise SystemExit(0 if passed else 1)
