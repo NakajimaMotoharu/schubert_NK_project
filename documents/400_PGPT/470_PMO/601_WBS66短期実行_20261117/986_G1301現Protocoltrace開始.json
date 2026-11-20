@@ -1,0 +1,79 @@
+{
+  "eventId": "PGPT-20261008-6506",
+  "groupId": "PGPT-WBS66-G13-PROTOCOL-EXACT-CURRENT-WIRE-TRACE-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T03:25:39.601000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 61,
+      "remainingPercent": 39,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-G13-PROTOCOL-EXACT-CURRENT-WIRE-TRACE-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-G13-PROTOCOL-EXACT-CURRENT-WIRE-TRACE-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-G13.01"
+    ],
+    "managementWorkIds": [
+      "WBS-G13.01"
+    ],
+    "source": "0aa254a57a79ff5d096229aed6db170ae9cbab6e",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40610-g1301-current-wire-layout-execution-trace-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.45,
+      "high": 1.0
+    },
+    "groupCapPp": 1.6,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/985_P00405JDBC42実Driver時刻境界継続点.json",
+        "sha256": "34de63f864cb21d625c29342b0e9e89d02e4f27f6b0ae62ca9d42708ec0a4dcd"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36800-current-protocol-source-layout-trace-v1/manifest.json",
+        "sha256": "f4b9e699b0cd5ede9d3cde1cc95adce0409f0c32ca4870b27e390ff83713dc77"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36808-g1301-current-source-qualification-v1/manifest.json",
+        "sha256": "26b9766c250020eb14a24395ca961388e79401feb743486b25c8b58114acdb5d"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40300-f03-current-protocol-typed-static-binding-v1/manifest.json",
+        "sha256": "c0c1d8a197ed9b5b5de75fee6bbdd94cb73c1ab94cfc1d581d3e799cb1e7843e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40602-f03-current-protocol-maven-independent-v1/manifest.json",
+        "sha256": "94b3c550c89f0903370ef0f2544e011cf74341ae309c3eff880843e3942cc6f7"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40236-protocol-qss-nts-fixed-wire-independent-v1/manifest.json",
+        "sha256": "c75c45c64b56f5010ee8b8d340577866c4f0e42425ebe827f597c51a2ecefe7e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40244-protocol-user-list-fixed-wire-independent-v1/manifest.json",
+        "sha256": "de7f9a9b81c2bd10e6df6f4e6b82be39ee9075a148f8ea5a680f8c8c4708732d"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "既静的G13.01子の旧Main165/定義64は再実施扱いにしない。現Main169の差分11、固定4試験sourceと全170の当実行を結合。",
+    "endCondition": "旧64と各固定TSVの不変、当wire/TestIDの明示、差分11のowner/current class、現raw・正式依存を独立証明。",
+    "workScope": "公開Gitと新旧すでに適格な結果。新PT・実環境操作なし。追加の受入や旧費再加算なし。"
+  }
+}

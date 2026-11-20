@@ -1,0 +1,203 @@
+{
+  "existingScope": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36808-g1301-current-source-qualification-v1/manifest.json",
+    "sha256": "26b9766c250020eb14a24395ca961388e79401feb743486b25c8b58114acdb5d"
+  },
+  "fixedFixtures": {
+    "fields-ui234-236.tsv": "a430ddf02fa6cc28b0f0075b96aa97eff829876b7f3bd9412bd0db7c3637bd4b",
+    "layouts-ui233.tsv": "c4f290595f5cabf19c11877e2dea95627b4d42490116431bac3bfde58950d711",
+    "named-accessors-independent.tsv": "27b9a458374f5b9edda50d78fae42ee76dabf15d8d1ecd9c94e56dbab63162d5",
+    "named-types-ss323.tsv": "9529fce86672b27a435665331648110521be6f59c5fe3fe5ca516df5234c7a76",
+    "payload-golden-ui234-236.tsv": "49bb76ec610216042f8e53ed548f4d5e52707a8bbf930a9fc6c93300dfa24839"
+  },
+  "canonicalWireDesign": {
+    "documents/200_UI/230_インターフェース/233_固定長電文インターフェース一覧.md": "d3ef40fd6d075ae27a88d4484032b9d727f43a8f053f1c36253465cbb0c641bb",
+    "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md": "9c64f99f058d676723353e8bd99eb6d070bdb062d98ee7f4a0fc4e4ae942f6d3"
+  },
+  "changedMain": {
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java": {
+      "sha256": "bbff720fbbcdd7264e625d8d92c1530cc1fdd7e7dbd8454e7c9b947dafc67279",
+      "canonicalOwner": "WBS-P002-01",
+      "ownerPath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java",
+      "designSections": [
+        "322"
+      ],
+      "currentClassCrc": {
+        "dev/codex/schubert/nk/protocol/codec/FieldCodec": "15b3485e13391edf"
+      }
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodecRules.java": {
+      "sha256": "130a643497d24521b3920f90b2f300aca636077f19633f24f50ed5841d93469c",
+      "canonicalOwner": "WBS-P002-01",
+      "ownerPath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java",
+      "designSections": [
+        "322"
+      ],
+      "currentClassCrc": {
+        "dev/codex/schubert/nk/protocol/codec/FieldCodecRules": "50b25332651accbd"
+      }
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java": {
+      "sha256": "41521248b2ad34c0d21fe00f75d9b7982fb023d9e9ae29ad6f87650b3bd559e9",
+      "canonicalOwner": "WBS-P002-02",
+      "ownerPath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java",
+      "designSections": [
+        "322"
+      ],
+      "currentClassCrc": {
+        "dev/codex/schubert/nk/protocol/codec/PayloadCodec": "381aa5671d0bd46c"
+      }
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/ContentDisposition.java": {
+      "sha256": "df7fa20e05f2cfcfea5f8404798f61dee40717f89fcc3fecd607f976ccc1d01b",
+      "canonicalOwner": "WBS-P003-02",
+      "ownerPath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/ContentDisposition.java",
+      "designSections": [
+        "333"
+      ],
+      "currentClassCrc": {
+        "dev/codex/schubert/nk/protocol/file/ContentDisposition": "8c543c27b17a0eb4"
+      }
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/LargeResultDigest.java": {
+      "sha256": "ba671ee67129de6f37a2f755fe1ccdedcd17b51cc6fe30d075c8e7da5654bf65",
+      "canonicalOwner": "WBS-P003-01",
+      "ownerPath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/LargeResultRecordCodec.java",
+      "designSections": [
+        "333"
+      ],
+      "currentClassCrc": {
+        "dev/codex/schubert/nk/protocol/file/LargeResultDigest": "85ffb83f6ca273d5"
+      }
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/LargeResultRecordCodec.java": {
+      "sha256": "5d50eaf4da45152c788ab687ab784f7329da8561c071d7b2559e98952bae649d",
+      "canonicalOwner": "WBS-P003-01",
+      "ownerPath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/LargeResultRecordCodec.java",
+      "designSections": [
+        "333"
+      ],
+      "currentClassCrc": {
+        "dev/codex/schubert/nk/protocol/file/LargeResultRecordCodec": "a01784411cb2662a"
+      }
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator.java": {
+      "sha256": "a1399fa882f0bc6074bc9fbc08671ed75b87ad9545b1e5f04b3553703af9ced1",
+      "canonicalOwner": "WBS-P003-02",
+      "ownerPath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator.java",
+      "designSections": [
+        "333"
+      ],
+      "currentClassCrc": {
+        "dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator": "45ae7db7d5bfda66"
+      }
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/MediaDescriptorValidatorRules.java": {
+      "sha256": "6fb21dc3b4da046040e0d4ce9c9cb275c21c38e7d19559e47048f2be2ebdba21",
+      "canonicalOwner": "WBS-P003-02",
+      "ownerPath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator.java",
+      "designSections": [
+        "333"
+      ],
+      "currentClassCrc": {
+        "dev/codex/schubert/nk/protocol/file/MediaDescriptorValidatorRules": "e03d742e91b28d4a"
+      }
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java": {
+      "sha256": "2285971a065af1f6b264c361659cab8fc75b2ee142005746e42c7462493224c0",
+      "canonicalOwner": "WBS-P001-02",
+      "ownerPath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java",
+      "designSections": [
+        "323"
+      ],
+      "currentClassCrc": {
+        "dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog": "44ba848e7f811c48",
+        "dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog$MutableFields": "e07ea46c9908b5b9"
+      }
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.java": {
+      "sha256": "8570121e1e0461a0db760ef0bd4cb5ee40f36d3b77dde144d568cf4c3b23e8ef",
+      "canonicalOwner": "WBS-P002-02",
+      "ownerPath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.java",
+      "designSections": [
+        "322"
+      ],
+      "currentClassCrc": {
+        "dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator": "6cdfe20cf9320f49"
+      }
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidatorRules.java": {
+      "sha256": "6d30b0e099b8c8b21bd75c56266d9eb4717a4908d252aba9ec6b6aa2aa7acf4b",
+      "canonicalOwner": "WBS-P002-02",
+      "ownerPath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.java",
+      "designSections": [
+        "322"
+      ],
+      "currentClassCrc": {
+        "dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidatorRules": "9033ebd0ca1dfd0e"
+      }
+    }
+  },
+  "currentWireCases": {
+    "LogSearchWireUnicodeTest": {
+      "source": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/LogSearchWireUnicodeTest.java",
+        "sha256": "5626c3e82e5b2101451be4fe18d094e72002d2fd29fc6b2d869eae04e85ab63d"
+      },
+      "layouts": {
+        "LGSREQ01": "G13P-LAYOUT-LGSREQ01"
+      },
+      "cases": [
+        "rejectsMalformedAndNonNfcInputAtEachFreeTextPosition",
+        "retainsNfcAndSupplementaryCharactersWithoutConflatingAbsentFields"
+      ]
+    },
+    "QuestionNotificationWireTest": {
+      "source": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/QuestionNotificationWireTest.java",
+        "sha256": "c18f627926909c59a64376a928cf34db7e0858b14b7d6c2a83e2adb07de8cea3"
+      },
+      "layouts": {
+        "NTSREQ01": "G13P-LAYOUT-NTSREQ01",
+        "QSSREQ01": "G13P-LAYOUT-QSSREQ01"
+      },
+      "cases": [
+        "nts001DecodesEveryDefinedTypeAndTheExactUtcDateBoundary",
+        "nts002RejectsUnknownTypeInvalidDateReversalAndOneMillisecondOver",
+        "qss001DecodesExactKeywordUsernameAndBlankFields",
+        "qss002RejectsMalformedAndNonNfcAtBothTextOffsets"
+      ]
+    },
+    "UserCommandWireUnicodeTest": {
+      "source": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/UserCommandWireUnicodeTest.java",
+        "sha256": "9af3cf147246791fbb80698e56c53de318c8a4da290493d0f63ccb20c8215d41"
+      },
+      "layouts": {
+        "UCRREQ01": "G13P-LAYOUT-UCRREQ01",
+        "UPWREQ01": "G13P-LAYOUT-UPWREQ01"
+      },
+      "cases": [
+        "bothFieldsRejectEncodedSurrogateAndTruncationAtTheirOwnBoundary",
+        "bothFieldsRejectNoncanonicalButWellFormedUtf8",
+        "createAccepts128TwoByteCodePointsWithoutConsumingRoleOrEnabled",
+        "resetAccepts64FourByteCodePointsWithoutConsumingVersion"
+      ]
+    },
+    "UserListReplyWireTest": {
+      "source": {
+        "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/UserListReplyWireTest.java",
+        "sha256": "7cb08c55af6c3ac3f9fa0c7095689956cd25c2ddd6e7ade169d775fe2f154fa8"
+      },
+      "layouts": {
+        "USRRSP01": "G13P-LAYOUT-USRRSP01"
+      },
+      "cases": [
+        "usr001DecodesNfcAndPreservesTheNextFieldAtThe64ByteLimit",
+        "usr002RejectsTheAllSpaceMandatoryField",
+        "usr003RejectsSurrogateEncodingAndTruncationAtTheFieldEnd",
+        "usr004RejectsValidUtf8ThatIsNotNfc"
+      ]
+    }
+  }
+}
