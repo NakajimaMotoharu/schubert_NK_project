@@ -1,0 +1,138 @@
+{
+  "eventId": "PGPT-20261008-6845",
+  "groupId": "f02-sdk-three-physical-public-dependency",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T14:17:18.542000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 71,
+      "remainingPercent": 29,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "f02-sdk-three-physical-public-dependency",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "f02-sdk-three-physical-public-dependency",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a"
+    ],
+    "source": "dbf8a29d3b78e5301b8b4fafb75d41f0f0bd0841",
+    "productionCoreMain": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40912-f02-sdk-binary-boundary-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.1,
+      "base": 0.28,
+      "high": 0.6
+    },
+    "groupCapPp": 1.0,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1327_G1307標準SDK現局所同run証拠継続点.json",
+        "sha256": "cd1c52530b0ba145dee379533489e20383933e5075a21b4a32c2a6bfc49a2856"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40906-f03-standard-sdk-owners-saved-unfiltered-v1/manifest.json",
+        "sha256": "2c3ee2d2da74c6620363af4ef2da92e6ee55d48b4808972be670b0cdee33bc40"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40886-f02-batch-standard-sdk-package-v1/manifest.json",
+        "sha256": "ff73401dfe64ef19304476dac3ed24752ee32262034428f8b1196fd4424dc0b6"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40910-g1307-standard-sdk-current-scope-v1/manifest.json",
+        "sha256": "8685510544b4890f6860f5e84c9d21ed920f4dda5fcc8b4b047ad436f1fe7908"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "PG40906で対象三classの当source・SHAが確定。PG40886のBatchのみMaven正規artifactと一致。設計311/342/351、旧公開契約を独立期待値にする。",
+    "endCondition": "同三物理の公開ABIとSDK・同moduleの直接型依存を固定し、exit・範囲・元13要求の部分との関係を記録。全六・実runtimeの不足を区別する。",
+    "workScope": "指名三classだけにJDK javap/jdepsを適用。他JAR・QA056・外部環境・製品再実行は作業範囲外。",
+    "quotaAfter": {
+      "usedPercent": 71,
+      "remainingPercent": 29,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "65a794699cca7a8d00735e12adcd16d298cdf4cdb24ce48642cfe3b3d793620c",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T14:17:18.542000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 71,
+          "remainingPercent": 29,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T14:17:13.493790+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 71,
+      "remainingPercent": 29,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6844",
+    "attempt": 3,
+    "attemptResult": "SCOPED_BINARY_BOUNDARY_VERIFIED",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40912-f02-sdk-binary-boundary-v1/manifest.json",
+        "sha256": "cd9cde2248915da437c592acd4bd382342566fbb3a9d43188d156bc154d58019"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5484_f02_standard_sdk_binary_boundary.py",
+        "sha256": "a82e5acfda2422b4398fe25a442e8de638345b9fba0033e9fc8c730596e3e78e"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "全六現build・依存境界・runtime",
+      "F02のSYS13要求・署名・451",
+      "F03全六品質"
+    ],
+    "compiledPhysicalCount": 3,
+    "verifiedPublicSurfaceCount": 3,
+    "toolFailureAttempts": 2,
+    "actualProductTestRuns": 0,
+    "actualMavenRuns": 0,
+    "actualExternalActions": 0
+  }
+}

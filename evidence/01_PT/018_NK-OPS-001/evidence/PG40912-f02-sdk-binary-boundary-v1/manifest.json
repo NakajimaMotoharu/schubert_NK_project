@@ -1,0 +1,224 @@
+{
+  "actualExit": 0,
+  "source": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+  "wbs": "WBS-F02-a",
+  "startEvent": "PGPT-20261008-6844",
+  "startDocument": {
+    "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1328_F02標準SDK三物理依存開始.json",
+    "sha256": "cd095e6bf22b8e0f72e76ed455f6bdbadc2b476654f701502f2c6a8bd2e10cf0"
+  },
+  "terminalAtUTC": "2026-11-20T14:17:13.493790+00:00",
+  "relatesTo": [
+    "SYS-002",
+    "SYS-007",
+    "SS311",
+    "SS342",
+    "SS351"
+  ],
+  "toolchain": {
+    "path": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/release",
+    "sha256": "fc1b6c466fbf603872858a3a18c1afe444d68d97c560237dcfde52cfa25f10a1"
+  },
+  "qualifiedInput": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40906-f03-standard-sdk-owners-saved-unfiltered-v1/manifest.json",
+    "sha256": "2c3ee2d2da74c6620363af4ef2da92e6ee55d48b4808972be670b0cdee33bc40"
+  },
+  "unitOrMavenReruns": 0,
+  "projectOrSdkJarsAnalyzed": 0,
+  "testAdded": 0,
+  "formalDelta": 0,
+  "wholeBuild": false,
+  "runtimeVerified": false,
+  "selected": [
+    {
+      "module": "api",
+      "input": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40904-f03-standard-sdk-owners-current-51-raw-v1/ApiStandardMetricSource.class",
+        "sha256": "aaf9117b4194f9d853b936641917fc434d11f5653c81e16cebe79e64309305be"
+      },
+      "classFileMajor": 69,
+      "publicAbi": {
+        "command": [
+          "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+          "-public",
+          "-s",
+          "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40904-f03-standard-sdk-owners-current-51-raw-v1/ApiStandardMetricSource.class"
+        ],
+        "exitCode": 0,
+        "stdout": "Compiled from \"ApiStandardMetricSource.java\"\npublic final class dev.codex.schubert.nk.api.monitoring.ApiStandardMetricSource implements java.lang.AutoCloseable {\n  public dev.codex.schubert.nk.api.monitoring.ApiStandardMetricSource();\n    descriptor: ()V\n\n  public void bind(java.lang.String);\n    descriptor: (Ljava/lang/String;)V\n\n  public java.lang.String scrape(java.lang.String);\n    descriptor: (Ljava/lang/String;)Ljava/lang/String;\n\n  public void close();\n    descriptor: ()V\n}\n"
+      },
+      "classDependencies": {
+        "command": [
+          "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/jdeps",
+          "--no-recursive",
+          "-verbose:class",
+          "-filter:none",
+          "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40904-f03-standard-sdk-owners-current-51-raw-v1/ApiStandardMetricSource.class"
+        ],
+        "exitCode": 0,
+        "stdout": "ApiStandardMetricSource.class -> java.base\nApiStandardMetricSource.class -> not found\n   dev.codex.schubert.nk.api.monitoring.ApiStandardMetricSource -> dev.codex.schubert.nk.api.monitoring.ApiStandardMetrics not found\n   dev.codex.schubert.nk.api.monitoring.ApiStandardMetricSource -> io.micrometer.core.instrument.MeterRegistry        not found\n   dev.codex.schubert.nk.api.monitoring.ApiStandardMetricSource -> io.micrometer.core.instrument.binder.jvm.JvmGcMetrics not found\n   dev.codex.schubert.nk.api.monitoring.ApiStandardMetricSource -> io.micrometer.prometheusmetrics.PrometheusConfig   not found\n   dev.codex.schubert.nk.api.monitoring.ApiStandardMetricSource -> io.micrometer.prometheusmetrics.PrometheusMeterRegistry not found\n   dev.codex.schubert.nk.api.monitoring.ApiStandardMetricSource -> java.lang.AutoCloseable                            java.base\n   dev.codex.schubert.nk.api.monitoring.ApiStandardMetricSource -> java.lang.IllegalArgumentException                 java.base\n   dev.codex.schubert.nk.api.monitoring.ApiStandardMetricSource -> java.lang.IllegalStateException                    java.base\n   dev.codex.schubert.nk.api.monitoring.ApiStandardMetricSource -> java.lang.Object                                   java.base\n   dev.codex.schubert.nk.api.monitoring.ApiStandardMetricSource -> java.lang.String                                   java.base\n   dev.codex.schubert.nk.api.monitoring.ApiStandardMetricSource -> java.lang.Throwable                                java.base\n   dev.codex.schubert.nk.api.monitoring.ApiStandardMetricSource -> java.lang.invoke.CallSite                          java.base\n   dev.codex.schubert.nk.api.monitoring.ApiStandardMetricSource -> java.lang.invoke.LambdaMetafactory                 java.base\n   dev.codex.schubert.nk.api.monitoring.ApiStandardMetricSource -> java.lang.invoke.MethodHandle                      java.base\n   dev.codex.schubert.nk.api.monitoring.ApiStandardMetricSource -> java.lang.invoke.MethodHandles                     java.base\n   dev.codex.schubert.nk.api.monitoring.ApiStandardMetricSource -> java.lang.invoke.MethodHandles$Lookup              java.base\n   dev.codex.schubert.nk.api.monitoring.ApiStandardMetricSource -> java.lang.invoke.MethodType                        java.base\n   dev.codex.schubert.nk.api.monitoring.ApiStandardMetricSource -> java.util.Objects                                  java.base\n   dev.codex.schubert.nk.api.monitoring.ApiStandardMetricSource -> java.util.Optional                                 java.base\n   dev.codex.schubert.nk.api.monitoring.ApiStandardMetricSource -> java.util.concurrent.locks.ReentrantLock           java.base\n   dev.codex.schubert.nk.api.monitoring.ApiStandardMetricSource -> java.util.function.BiConsumer                      java.base\n   dev.codex.schubert.nk.api.monitoring.ApiStandardMetricSource -> java.util.function.Consumer                        java.base\n   dev.codex.schubert.nk.api.monitoring.ApiStandardMetricSource -> java.util.function.Predicate                       java.base\n   dev.codex.schubert.nk.api.monitoring.ApiStandardMetricSource -> java.util.function.Supplier                        java.base\n"
+      },
+      "jdk": [
+        "java.lang.AutoCloseable",
+        "java.lang.IllegalArgumentException",
+        "java.lang.IllegalStateException",
+        "java.lang.Object",
+        "java.lang.String",
+        "java.lang.Throwable",
+        "java.lang.invoke.CallSite",
+        "java.lang.invoke.LambdaMetafactory",
+        "java.lang.invoke.MethodHandle",
+        "java.lang.invoke.MethodHandles",
+        "java.lang.invoke.MethodHandles$Lookup",
+        "java.lang.invoke.MethodType",
+        "java.util.Objects",
+        "java.util.Optional",
+        "java.util.concurrent.locks.ReentrantLock",
+        "java.util.function.BiConsumer",
+        "java.util.function.Consumer",
+        "java.util.function.Predicate",
+        "java.util.function.Supplier"
+      ],
+      "sameModule": [
+        "dev.codex.schubert.nk.api.monitoring.ApiStandardMetrics"
+      ],
+      "directSdk": [
+        "io.micrometer.core.instrument.MeterRegistry",
+        "io.micrometer.core.instrument.binder.jvm.JvmGcMetrics",
+        "io.micrometer.prometheusmetrics.PrometheusConfig",
+        "io.micrometer.prometheusmetrics.PrometheusMeterRegistry"
+      ]
+    },
+    {
+      "module": "batch",
+      "input": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40904-f03-standard-sdk-owners-current-51-raw-v1/BatchStandardMetricSource.class",
+        "sha256": "806ec1988d799a9a0f97f214faa08609ccf9921053f0b779d65a2d57023ea052"
+      },
+      "classFileMajor": 69,
+      "publicAbi": {
+        "command": [
+          "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+          "-public",
+          "-s",
+          "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40904-f03-standard-sdk-owners-current-51-raw-v1/BatchStandardMetricSource.class"
+        ],
+        "exitCode": 0,
+        "stdout": "Compiled from \"BatchStandardMetricSource.java\"\npublic final class dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSource implements java.lang.AutoCloseable {\n  public dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSource();\n    descriptor: ()V\n\n  public void bind(java.lang.String);\n    descriptor: (Ljava/lang/String;)V\n\n  public java.lang.String scrape(java.lang.String);\n    descriptor: (Ljava/lang/String;)Ljava/lang/String;\n\n  public void close();\n    descriptor: ()V\n}\n"
+      },
+      "classDependencies": {
+        "command": [
+          "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/jdeps",
+          "--no-recursive",
+          "-verbose:class",
+          "-filter:none",
+          "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40904-f03-standard-sdk-owners-current-51-raw-v1/BatchStandardMetricSource.class"
+        ],
+        "exitCode": 0,
+        "stdout": "BatchStandardMetricSource.class -> java.base\nBatchStandardMetricSource.class -> not found\n   dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSource -> dev.codex.schubert.nk.batch.monitoring.BatchStandardMetrics not found\n   dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSource -> dev.codex.schubert.nk.batch.monitoring.MonitoringModePolicy not found\n   dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSource -> io.micrometer.core.instrument.MeterRegistry        not found\n   dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSource -> io.micrometer.core.instrument.binder.jvm.JvmGcMetrics not found\n   dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSource -> io.micrometer.prometheusmetrics.PrometheusConfig   not found\n   dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSource -> io.micrometer.prometheusmetrics.PrometheusMeterRegistry not found\n   dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSource -> java.lang.AutoCloseable                            java.base\n   dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSource -> java.lang.IllegalStateException                    java.base\n   dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSource -> java.lang.Object                                   java.base\n   dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSource -> java.lang.String                                   java.base\n   dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSource -> java.lang.Throwable                                java.base\n   dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSource -> java.lang.invoke.CallSite                          java.base\n   dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSource -> java.lang.invoke.LambdaMetafactory                 java.base\n   dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSource -> java.lang.invoke.MethodHandle                      java.base\n   dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSource -> java.lang.invoke.MethodHandles                     java.base\n   dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSource -> java.lang.invoke.MethodHandles$Lookup              java.base\n   dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSource -> java.lang.invoke.MethodType                        java.base\n   dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSource -> java.util.Objects                                  java.base\n   dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSource -> java.util.Optional                                 java.base\n   dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSource -> java.util.concurrent.locks.ReentrantLock           java.base\n   dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSource -> java.util.function.BiConsumer                      java.base\n   dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSource -> java.util.function.Consumer                        java.base\n   dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSource -> java.util.function.Predicate                       java.base\n   dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSource -> java.util.function.Supplier                        java.base\n"
+      },
+      "jdk": [
+        "java.lang.AutoCloseable",
+        "java.lang.IllegalStateException",
+        "java.lang.Object",
+        "java.lang.String",
+        "java.lang.Throwable",
+        "java.lang.invoke.CallSite",
+        "java.lang.invoke.LambdaMetafactory",
+        "java.lang.invoke.MethodHandle",
+        "java.lang.invoke.MethodHandles",
+        "java.lang.invoke.MethodHandles$Lookup",
+        "java.lang.invoke.MethodType",
+        "java.util.Objects",
+        "java.util.Optional",
+        "java.util.concurrent.locks.ReentrantLock",
+        "java.util.function.BiConsumer",
+        "java.util.function.Consumer",
+        "java.util.function.Predicate",
+        "java.util.function.Supplier"
+      ],
+      "sameModule": [
+        "dev.codex.schubert.nk.batch.monitoring.BatchStandardMetrics",
+        "dev.codex.schubert.nk.batch.monitoring.MonitoringModePolicy"
+      ],
+      "directSdk": [
+        "io.micrometer.core.instrument.MeterRegistry",
+        "io.micrometer.core.instrument.binder.jvm.JvmGcMetrics",
+        "io.micrometer.prometheusmetrics.PrometheusConfig",
+        "io.micrometer.prometheusmetrics.PrometheusMeterRegistry"
+      ]
+    },
+    {
+      "module": "web",
+      "input": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40904-f03-standard-sdk-owners-current-51-raw-v1/WebStandardMetricSource.class",
+        "sha256": "9130e9acf4fc3cc919f3f0185c66fa0dedfb166aa20057d8f7b6ca07c7a212f3"
+      },
+      "classFileMajor": 69,
+      "publicAbi": {
+        "command": [
+          "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+          "-public",
+          "-s",
+          "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40904-f03-standard-sdk-owners-current-51-raw-v1/WebStandardMetricSource.class"
+        ],
+        "exitCode": 0,
+        "stdout": "Compiled from \"WebStandardMetricSource.java\"\npublic final class dev.codex.schubert.nk.web.monitoring.WebStandardMetricSource implements java.lang.AutoCloseable {\n  public dev.codex.schubert.nk.web.monitoring.WebStandardMetricSource();\n    descriptor: ()V\n\n  public void bind(java.lang.String);\n    descriptor: (Ljava/lang/String;)V\n\n  public java.lang.String scrape(java.lang.String);\n    descriptor: (Ljava/lang/String;)Ljava/lang/String;\n\n  public void close();\n    descriptor: ()V\n}\n"
+      },
+      "classDependencies": {
+        "command": [
+          "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/jdeps",
+          "--no-recursive",
+          "-verbose:class",
+          "-filter:none",
+          "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40904-f03-standard-sdk-owners-current-51-raw-v1/WebStandardMetricSource.class"
+        ],
+        "exitCode": 0,
+        "stdout": "WebStandardMetricSource.class -> java.base\nWebStandardMetricSource.class -> not found\n   dev.codex.schubert.nk.web.monitoring.WebStandardMetricSource -> dev.codex.schubert.nk.web.monitoring.HttpMetricContract not found\n   dev.codex.schubert.nk.web.monitoring.WebStandardMetricSource -> dev.codex.schubert.nk.web.monitoring.WebStandardMetrics not found\n   dev.codex.schubert.nk.web.monitoring.WebStandardMetricSource -> io.micrometer.core.instrument.MeterRegistry        not found\n   dev.codex.schubert.nk.web.monitoring.WebStandardMetricSource -> io.micrometer.core.instrument.binder.jvm.JvmGcMetrics not found\n   dev.codex.schubert.nk.web.monitoring.WebStandardMetricSource -> io.micrometer.prometheusmetrics.PrometheusConfig   not found\n   dev.codex.schubert.nk.web.monitoring.WebStandardMetricSource -> io.micrometer.prometheusmetrics.PrometheusMeterRegistry not found\n   dev.codex.schubert.nk.web.monitoring.WebStandardMetricSource -> java.lang.AutoCloseable                            java.base\n   dev.codex.schubert.nk.web.monitoring.WebStandardMetricSource -> java.lang.IllegalStateException                    java.base\n   dev.codex.schubert.nk.web.monitoring.WebStandardMetricSource -> java.lang.Object                                   java.base\n   dev.codex.schubert.nk.web.monitoring.WebStandardMetricSource -> java.lang.String                                   java.base\n   dev.codex.schubert.nk.web.monitoring.WebStandardMetricSource -> java.lang.Throwable                                java.base\n   dev.codex.schubert.nk.web.monitoring.WebStandardMetricSource -> java.lang.invoke.CallSite                          java.base\n   dev.codex.schubert.nk.web.monitoring.WebStandardMetricSource -> java.lang.invoke.LambdaMetafactory                 java.base\n   dev.codex.schubert.nk.web.monitoring.WebStandardMetricSource -> java.lang.invoke.MethodHandle                      java.base\n   dev.codex.schubert.nk.web.monitoring.WebStandardMetricSource -> java.lang.invoke.MethodHandles                     java.base\n   dev.codex.schubert.nk.web.monitoring.WebStandardMetricSource -> java.lang.invoke.MethodHandles$Lookup              java.base\n   dev.codex.schubert.nk.web.monitoring.WebStandardMetricSource -> java.lang.invoke.MethodType                        java.base\n   dev.codex.schubert.nk.web.monitoring.WebStandardMetricSource -> java.util.Objects                                  java.base\n   dev.codex.schubert.nk.web.monitoring.WebStandardMetricSource -> java.util.Optional                                 java.base\n   dev.codex.schubert.nk.web.monitoring.WebStandardMetricSource -> java.util.concurrent.locks.ReentrantLock           java.base\n   dev.codex.schubert.nk.web.monitoring.WebStandardMetricSource -> java.util.function.BiConsumer                      java.base\n   dev.codex.schubert.nk.web.monitoring.WebStandardMetricSource -> java.util.function.Consumer                        java.base\n   dev.codex.schubert.nk.web.monitoring.WebStandardMetricSource -> java.util.function.Predicate                       java.base\n   dev.codex.schubert.nk.web.monitoring.WebStandardMetricSource -> java.util.function.Supplier                        java.base\n"
+      },
+      "jdk": [
+        "java.lang.AutoCloseable",
+        "java.lang.IllegalStateException",
+        "java.lang.Object",
+        "java.lang.String",
+        "java.lang.Throwable",
+        "java.lang.invoke.CallSite",
+        "java.lang.invoke.LambdaMetafactory",
+        "java.lang.invoke.MethodHandle",
+        "java.lang.invoke.MethodHandles",
+        "java.lang.invoke.MethodHandles$Lookup",
+        "java.lang.invoke.MethodType",
+        "java.util.Objects",
+        "java.util.Optional",
+        "java.util.concurrent.locks.ReentrantLock",
+        "java.util.function.BiConsumer",
+        "java.util.function.Consumer",
+        "java.util.function.Predicate",
+        "java.util.function.Supplier"
+      ],
+      "sameModule": [
+        "dev.codex.schubert.nk.web.monitoring.HttpMetricContract",
+        "dev.codex.schubert.nk.web.monitoring.WebStandardMetrics"
+      ],
+      "directSdk": [
+        "io.micrometer.core.instrument.MeterRegistry",
+        "io.micrometer.core.instrument.binder.jvm.JvmGcMetrics",
+        "io.micrometer.prometheusmetrics.PrometheusConfig",
+        "io.micrometer.prometheusmetrics.PrometheusMeterRegistry"
+      ]
+    }
+  ],
+  "priorToolAttempts": [
+    {
+      "exitCode": 1,
+      "phase": "API expected direct SDK dependencies"
+    },
+    {
+      "exitCode": 1,
+      "phase": "Batch expected same-module dependencies"
+    }
+  ],
+  "bug": "BUG-3423",
+  "horizontalReview": "YKT-2743",
+  "productChanged": false
+}
