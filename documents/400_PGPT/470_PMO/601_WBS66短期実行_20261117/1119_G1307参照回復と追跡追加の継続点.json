@@ -1,0 +1,85 @@
+{
+  "eventId": "PGPT-20261008-6637",
+  "wbsLeafIds": [
+    "WBS-G13.07"
+  ],
+  "managementWorkIds": [
+    "WBS-G13.07/1"
+  ],
+  "workCategory": "CONTRACT_AUDIT",
+  "source": "bc9e157b931955943d25f148f705d89b16dd9745",
+  "productionCoreMain": "517a23cddc9f3883550942f6fa90a4256ef39b73",
+  "previousCheckpoint": "PGPT-20261008-6634",
+  "groupEvents": [
+    "PGPT-20261008-6636"
+  ],
+  "acceptedOriginal": 17,
+  "total": 190,
+  "coreAccepted": 0,
+  "coreTotal": 5,
+  "officialPtTests": 1964,
+  "officialPtScopes": 53,
+  "newFormalAcceptance": 0,
+  "effortRate": null,
+  "actualAllocatedPp": null,
+  "newProductTests": 0,
+  "recordedOwnedJobsInFlight": 0,
+  "ownedBackendJobsStartedHere": 0,
+  "modelObserved": "gpt-6.2-sol",
+  "reasoningObserved": null,
+  "speedObserved": null,
+  "outcomeEvidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40756-g1307-wbs-links-v1/before.json",
+      "sha256": "6978dd3370dacd08aab0433abd4583c3a3c20c3eb1e1325fb52a2bf21ebd80e9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40756-g1307-wbs-links-v1/manifest.json",
+      "sha256": "d68fd3ed0332c1afa65d6f652ccda498d4311be8df56fbac1193a8c75167ef8d"
+    },
+    {
+      "path": "tools/quality/wbs_index_binding.py",
+      "sha256": "4886ed37df765245329e8a50a6f38696205017e90c4a85cca409b21f7d5acd2b"
+    },
+    {
+      "path": "tools/quality/tests/test_wbs_index_binding.py",
+      "sha256": "a08794af170dd6b582f9e431c731e9e54d71f0c71ffd752087c41c59101bed38"
+    }
+  ],
+  "fullQuotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T08:19:36.357000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 65,
+      "remainingPercent": 35,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "quotaAfter": {
+    "usedPercent": 65,
+    "remainingPercent": 35,
+    "resetsAt": 1795445753,
+    "windowDurationMins": 10080
+  },
+  "sharedDeltaPp": null,
+  "completedOriginalRowPricePp": 0,
+  "remainingCriteria": [
+    "Only the two-file reference repaired; whole G13.07 and all short target acceptance remain pending",
+    "QA-060 date only and QA056/057 held",
+    "F02/F03 full451 and runtime"
+  ],
+  "nextEvidence": "Add the recent form wire candidate/observations and applicable F02/F03 receipts in a hash-bound update. Deliver short-target handoff without restarting tests.",
+  "acceptedIndividualSubconditions": [
+    "Exact current 485 hash binding restored at 486",
+    "Git-index regression guard blocks a partial stage"
+  ],
+  "bugId": "BUG-3411",
+  "horizontalReview": "YKT-2734",
+  "fixCommit": "087247035f897afa8cef3855f0809f68c3da41df",
+  "originalGuardBefore": 1,
+  "guardsAfter": 2,
+  "toolOnly": true
+}
