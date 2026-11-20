@@ -1,0 +1,92 @@
+{
+  "eventId": "PGPT-20261008-6386",
+  "groupId": "PGPT-WBS66-F02-COMBINED-THREE-ARCH-BOUNDARIES-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T00:39:31.938000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 57,
+      "remainingPercent": 43,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F02-COMBINED-THREE-ARCH-BOUNDARIES-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F02-COMBINED-THREE-ARCH-BOUNDARIES-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a",
+      "WBS-F02-b"
+    ],
+    "source": "34d141961a77f74f459f382ec20221081a693039",
+    "productionCoreMain": "cb1411d94a1d97aedafe1af60400aaec0ae8c8e8",
+    "canonicalDesignSource": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "run": "PG40444-f02-combined-three-static-boundaries-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.2,
+      "base": 0.55,
+      "high": 1.1
+    },
+    "groupCapPp": 1.4,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/865_P01807公開Caddy設定現三継続点.json",
+        "sha256": "ecb067c3fc7e43732a4e2dc80b341b0c06164596a705eae9f966e982d37f7f7b"
+      },
+      {
+        "path": "tools/quality/architecture/ModuleDependencyAudit.java",
+        "sha256": "0277e6ec0a8e01abd7773c730912d839e7944e58a419e8064320f580f2b58baf"
+      },
+      {
+        "path": "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md",
+        "sha256": "72427a8609a9c4753ff459cbfa92e3ad27669544c59d53eb9191b97b911c74d2"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40404-f02-controller-nested-qualified-v1/manifest.json",
+        "sha256": "9801281fb00477f50eb9fd36b876490dd60e181a01c3f613d4b994c7eabebc9a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40416-f02-protocol-file-after-v1/manifest.json",
+        "sha256": "82c7fcf1e8c2ad0862adf2ac031d4aed4c826ca56352641a054ce1e70ae17e3a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40434-f02-application-domain-storage-after-v1/manifest.json",
+        "sha256": "2ecf395c2a4faec9d4e967ceeb2fa921b6adfa271bceff9697a9225f138317d0"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5267_f02_controller_archunit_canaries.py",
+        "sha256": "14a33f8a95a96b8925aae6443ec70285450021bba379bace0298021c02ec428b"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5347_f02_nested_controller_canaries.py",
+        "sha256": "72ff36af867862a5ced1f0f747426de542dc8c3826d34966f2d8a92a21acd1f3"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5351_f02_protocol_file_canaries.py",
+        "sha256": "7bcf8ece702b2a4bbcd7bd10d46a40e0160b958087d7ad9c1e8e029848efd612"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5358_f02_application_domain_storage_canaries.py",
+        "sha256": "69e186825b2937dfede4b5f1477dbcc9dde3595d9e0fd717248c3090d35fa068"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "保存済み三条件群は異なる検査器commitに結び付き、現行 tool の同時検証が未実施。SS311、PG40404/40416/40434 の固定型・期待値、正確な現tool・枠が開始依存。合成classのみ。",
+    "endCondition": "旧18+8+9の全35 Test IDを同一実行で照合。旧66物理の各hash、ゼロ製品入力、全ruleの相互誤検出、audit予期exit、fixture未初期化を保存。F02全体／451合格への加算なし。",
+    "workScope": "既承認合成Java35条件のみ。実製品JAR、既済製品試験、VM/DB、protected classesを扱わない。"
+  }
+}

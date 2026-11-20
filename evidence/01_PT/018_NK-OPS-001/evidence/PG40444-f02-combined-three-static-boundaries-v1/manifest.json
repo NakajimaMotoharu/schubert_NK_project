@@ -1,0 +1,598 @@
+{
+  "actualExit": 0,
+  "toolSource": "34d141961a77f74f459f382ec20221081a693039",
+  "productionCore": "cb1411d94a1d97aedafe1af60400aaec0ae8c8e8",
+  "toolSha256": "0277e6ec0a8e01abd7773c730912d839e7944e58a419e8064320f580f2b58baf",
+  "tools": {
+    "/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar": "6d8adf69a3f109ebe1b395764feb07f919e9e0e2ab5e2ea141d2e6251ba7d17f",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar": "44508fd1576500688c790b190acdd16fec4f8c79a3e0b900afd70503cf055f55"
+  },
+  "oracleReferences": [
+    {
+      "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/865_P01807公開Caddy設定現三継続点.json",
+      "sha256": "ecb067c3fc7e43732a4e2dc80b341b0c06164596a705eae9f966e982d37f7f7b"
+    },
+    {
+      "path": "tools/quality/architecture/ModuleDependencyAudit.java",
+      "sha256": "0277e6ec0a8e01abd7773c730912d839e7944e58a419e8064320f580f2b58baf"
+    },
+    {
+      "path": "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md",
+      "sha256": "72427a8609a9c4753ff459cbfa92e3ad27669544c59d53eb9191b97b911c74d2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40404-f02-controller-nested-qualified-v1/manifest.json",
+      "sha256": "9801281fb00477f50eb9fd36b876490dd60e181a01c3f613d4b994c7eabebc9a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40416-f02-protocol-file-after-v1/manifest.json",
+      "sha256": "82c7fcf1e8c2ad0862adf2ac031d4aed4c826ca56352641a054ce1e70ae17e3a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40434-f02-application-domain-storage-after-v1/manifest.json",
+      "sha256": "2ecf395c2a4faec9d4e967ceeb2fa921b6adfa271bceff9697a9225f138317d0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/input/5267_f02_controller_archunit_canaries.py",
+      "sha256": "14a33f8a95a96b8925aae6443ec70285450021bba379bace0298021c02ec428b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/input/5347_f02_nested_controller_canaries.py",
+      "sha256": "72ff36af867862a5ced1f0f747426de542dc8c3826d34966f2d8a92a21acd1f3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/input/5351_f02_protocol_file_canaries.py",
+      "sha256": "7bcf8ece702b2a4bbcd7bd10d46a40e0160b958087d7ad9c1e8e029848efd612"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/input/5358_f02_application_domain_storage_canaries.py",
+      "sha256": "69e186825b2937dfede4b5f1477dbcc9dde3595d9e0fd717248c3090d35fa068"
+    }
+  ],
+  "statuses": {
+    "compile-tool": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40444-f02-combined-three-static-boundaries-v1/compile-tool.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40444-f02-combined-three-static-boundaries-v1/compile-tool.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "-d",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/tool",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/ModuleDependencyAudit.java"
+      ]
+    },
+    "compile-fixture": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40444-f02-combined-three-static-boundaries-v1/compile-fixture.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40444-f02-combined-three-static-boundaries-v1/compile-fixture.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-d",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/fixture",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/api/AuditMarker.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/api/KnownValue.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/api/Marker.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/api/application/Service.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/api/application/UseCase.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/api/domain/Value.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/api/storage/Adapter.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/batch/AuditMarker.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/batch/FilePort.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/batch/KnownValue.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/batch/Marker.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/batch/file/Adapter.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/bootstrap/AuditMarker.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/bootstrap/KnownValue.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/bootstrap/Marker.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/protocol/AuditMarker.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/protocol/BorrowedByteStream.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/protocol/FileChannelCall.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/protocol/FileStream.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/protocol/FilesRead.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/protocol/KnownValue.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/protocol/Marker.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/protocol/PathValue.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/protocol/ProviderCall.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/storage/AuditMarker.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/storage/FileReference.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/storage/KnownValue.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/storage/LowLevelFile.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/storage/Marker.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/web/AuditMarker.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/web/KnownValue.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/web/Marker.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/web/application/Facade.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/web/application/Presenter.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/web/canary/AnnotatedEndpoint.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/web/canary/AppController.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/web/canary/BusinessFacade.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/web/canary/DisplayEndpoint.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/web/canary/FacadeController.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/web/canary/FileChannelController.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/web/canary/HttpController.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/web/canary/JakartaController.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/web/canary/JavaxController.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/web/canary/JdbcController.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/web/canary/JsonHandler.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/web/canary/LegacyFileController.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/web/canary/NamedHandler.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/web/canary/NioFilesController.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/web/canary/ReportController.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/web/canary/SafeFacade.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/web/canary/SpringJmsController.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/web/canary/StorageController.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/web/domain/View.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/dev/codex/schubert/nk/web/storage/Adapter.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/jakarta/jms/Message.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/javax/jms/Message.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/org/springframework/jms/core/JmsTemplate.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/org/springframework/stereotype/Controller.java",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/input/org/springframework/web/bind/annotation/RestController.java"
+      ]
+    },
+    "audit": {
+      "actualExit": 1,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40444-f02-combined-three-static-boundaries-v1/audit.stdout.txt",
+        "sha256": "93e7ac31140fb9daa11b06da1077eb506ccc7e97c494c8fa1a5f4ba992b1d311"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40444-f02-combined-three-static-boundaries-v1/audit.stderr.txt",
+        "sha256": "2c58b87a0350a39bb1c3b5f4891defeeb9a785e84aa11a466dc9ddb21253bf58"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/dev/shm/pgpt-f02-combined-static-vc4rco7p/tool:/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "ModuleDependencyAudit",
+        "protocol=/dev/shm/pgpt-f02-combined-static-vc4rco7p/protocol.jar",
+        "storage=/dev/shm/pgpt-f02-combined-static-vc4rco7p/storage.jar",
+        "bootstrap=/dev/shm/pgpt-f02-combined-static-vc4rco7p/bootstrap.jar",
+        "api=/dev/shm/pgpt-f02-combined-static-vc4rco7p/api.jar",
+        "web=/dev/shm/pgpt-f02-combined-static-vc4rco7p/web.jar",
+        "batch=/dev/shm/pgpt-f02-combined-static-vc4rco7p/batch.jar"
+      ]
+    }
+  },
+  "exactInputPhysical": {
+    "dev.codex.schubert.nk.api.AuditMarker": "0c05131487a6cf86001d0ed69277e93ade05a287ecd74bfb8121141037b442ff",
+    "dev.codex.schubert.nk.api.KnownValue": "3f7ea1c432596aed1b415cfc9ea19d8363986e892c93f884b92c5d1db251ea81",
+    "dev.codex.schubert.nk.api.Marker": "7668cc69a88d212a0c1ce18373ba7eeb5a0cd540b9084490d6225c54f9eb41f9",
+    "dev.codex.schubert.nk.api.application.Service": "35a9653cec42b5aee5d81b13b9cf824b712a3745fe537ff7b5bb047b19649d45",
+    "dev.codex.schubert.nk.api.application.UseCase": "4b9e3c7a9f5c742de2fca1889e5fe867cf5e1a1f0a8deca6fc51c055725e2581",
+    "dev.codex.schubert.nk.api.domain.Value": "13b0ded115936ca8a41f26eca307a97d35e0a1da62f600c8e53003373096bd38",
+    "dev.codex.schubert.nk.api.storage.Adapter": "722b777ab387165f2eae2fdf3ec810ba0bba4b1eae9749e6d5a8bd5111c50d15",
+    "dev.codex.schubert.nk.batch.AuditMarker": "c2ad5268ba50d20bc90e4b30e38a2380502635e74a95bd954595640c96a58b69",
+    "dev.codex.schubert.nk.batch.FilePort": "d5f00e50cda7e6af1e9817345c3ae8955d7e3329b0d932aa1f7500d82e0597af",
+    "dev.codex.schubert.nk.batch.KnownValue": "25cf6c9506fa13f5cb8c2dfebee9fe291c5ab51b07e02950c1340c9013f46705",
+    "dev.codex.schubert.nk.batch.Marker": "820a4940dc9ceef4d15f65eca01b4c546988dcc18b9a32e2bce268f7b2978e22",
+    "dev.codex.schubert.nk.batch.file.Adapter": "56d75686b626242dbe3e767b9bd401993a0ee834ef82202420ac96dd701d6e39",
+    "dev.codex.schubert.nk.bootstrap.AuditMarker": "cc33bc02c18a4d7df2a0660140c7d6c74668469953039f0d2eb8e47d1c3beb51",
+    "dev.codex.schubert.nk.bootstrap.KnownValue": "0dd4c5647fc6468eceda1f135611cb7253e7e314ee0f7990229402cfe8c7b3fd",
+    "dev.codex.schubert.nk.bootstrap.Marker": "3fb6edf4ae133ef101894ff7e0e60a3ae126ab6df37dad027a83147c94a367d3",
+    "dev.codex.schubert.nk.protocol.AuditMarker": "60f00de35b457a37312b9d71e3a1f4b6012af33decdae0931e22424a27a1ef71",
+    "dev.codex.schubert.nk.protocol.BorrowedByteStream": "cff2cddd3c571b921db510bafe3b5291617e2694284429aeff06e0fbe3cb7b45",
+    "dev.codex.schubert.nk.protocol.FileChannelCall": "7dd1fc028c0ef025247137a6ed694f65be5b66bd246e9c2db11445180fe681c9",
+    "dev.codex.schubert.nk.protocol.FileStream": "d33283a62caf60c60ca9dbf0848260942d6b7bef0c721b30be893c27e25d389c",
+    "dev.codex.schubert.nk.protocol.FilesRead": "eaa9843b094947d20f1901c842466460155b8ab2a01434110118f6d111137b7c",
+    "dev.codex.schubert.nk.protocol.KnownValue": "e899ee9215ea456bf885d74c8b8d0ef9ca6f6f2a50923dfa98cc5f46473732e0",
+    "dev.codex.schubert.nk.protocol.Marker": "799ea69aa1f9e2bbe880d7a73b67a27a63669cc4963dddee817f5541de2ac66d",
+    "dev.codex.schubert.nk.protocol.PathValue": "a3be3f90de1b379a712a049f7e4e02be2699838cbe28f0697f4c04b2d785d17c",
+    "dev.codex.schubert.nk.protocol.ProviderCall": "6f149a26d84ecce15c29d40c19dff4792048c0360811b90b002b5c99b98e5f9b",
+    "dev.codex.schubert.nk.storage.AuditMarker": "f41d7fedb5dbb0b7c7a480a0d6300e332987255dbfacecec066ff36c759e09e0",
+    "dev.codex.schubert.nk.storage.FileReference": "e0c58bce39d5ab1d2fea2f48b4ecb10b07ae7537d4eb3c0cb30f440ae4b05dda",
+    "dev.codex.schubert.nk.storage.KnownValue": "e233934fb2a298d2ebe1a060b06ac14ff2ef742baf53901bc4aa7533ac29f149",
+    "dev.codex.schubert.nk.storage.LowLevelFile": "525ca2f4513969530b41f82b71298954bfb97d03fdf708f39867649d11c2a743",
+    "dev.codex.schubert.nk.storage.Marker": "2bd75c26846458273cc83ea5df9ca9de0e4d303eab5eac12ba604f16a4967c36",
+    "dev.codex.schubert.nk.web.AuditMarker": "8711bac00e023aa45af51ec81a8a4ed16424e0c3c584d55416116e4fbc6f446a",
+    "dev.codex.schubert.nk.web.KnownValue": "53b888ceb3f31e1038187e0a739d19e7712ff8cef7c5c54699fca96ab5d5cf3c",
+    "dev.codex.schubert.nk.web.Marker": "bb30e9f97402afad95c1fdb4390e7b79fd6621cbb3152a463831735af20fcaa2",
+    "dev.codex.schubert.nk.web.application.Facade": "83d86884c2f168f5a2dd5b1f49ebb6d770bca9bb6dd43d5cdaaa4b665c156da1",
+    "dev.codex.schubert.nk.web.application.Presenter": "8bbcb08680d5db33a9252010e56f6580b24c51efea012c2bf5b31af9612b9125",
+    "dev.codex.schubert.nk.web.canary.AnnotatedEndpoint": "2cc7868d94f731b670c7f00b7780154b7b5cedc2583e247b041cd17de75cb4a6",
+    "dev.codex.schubert.nk.web.canary.AppController$Presenter": "1d1be113aef63a21e8db443d791b1c966ab92a05109d0c754d0500611a0a8d59",
+    "dev.codex.schubert.nk.web.canary.AppController": "800e387729d3679e402f981f3411e112591e6fe26a2a7af435a84bed47a81e66",
+    "dev.codex.schubert.nk.web.canary.BusinessFacade$Adapter": "2d65784a7d6a0569aa1e6412b8a9c139e7d7a0a33f0049ea2ecc8bca4ac63139",
+    "dev.codex.schubert.nk.web.canary.BusinessFacade": "456e8ccf7fcec0e47a2242a44278d1ea22d1f63a00a2f83713005fac9dfabe17",
+    "dev.codex.schubert.nk.web.canary.DisplayEndpoint$Dispatcher": "fef198514c0d3a2d21d18ddaabeb3e57d280692a1e4ae9c200e549af2418e771",
+    "dev.codex.schubert.nk.web.canary.DisplayEndpoint": "8c8399e0063a2d7cd7e686200cb302099123e94a97156c7332f8b7d4946b4fc1",
+    "dev.codex.schubert.nk.web.canary.FacadeController": "5a6e962f6b2d3cbc1370d1904c76b9196fc985f4cc51b8e058d80e116fb376f1",
+    "dev.codex.schubert.nk.web.canary.FileChannelController": "b1028b6799ad479e4e5b19ad466fec9cdf3d1f6a33c55aabbd34d135dd16152c",
+    "dev.codex.schubert.nk.web.canary.HttpController": "22547c184688c4b47b681f0d2543c76f47fcc29eb6bb49eedc6a67ef99b6348c",
+    "dev.codex.schubert.nk.web.canary.JakartaController": "6eb92bb363e7d57cf3633388764a30d7863659fb8888887305dd7a5fbd26edc6",
+    "dev.codex.schubert.nk.web.canary.JavaxController": "181d66af95c685d1b599eb89565fb6723351e46cdbe17d3fb0b0f0bfbd88beda",
+    "dev.codex.schubert.nk.web.canary.JdbcController": "0c0d3a887d7d00455e87c099882757f8d49df87879eb55b50840745377fbac27",
+    "dev.codex.schubert.nk.web.canary.JsonHandler$1": "eb53afcbfefd0763e262c805b03ff5154c97e0b1f5e5dbc13bb80770e7531f4d",
+    "dev.codex.schubert.nk.web.canary.JsonHandler": "a8a890469855c2f377ee529ec65eba17652791bed46568f2f0a2de7ea6cae344",
+    "dev.codex.schubert.nk.web.canary.LegacyFileController": "7419a4bbc97f30ba7467957589651f393729f99f548ce5bedc4415337227140f",
+    "dev.codex.schubert.nk.web.canary.NamedHandler": "41c131e9e141f4e71c48facc4c55534e73c4b7103e25ab63a8aba3c00cfa18a3",
+    "dev.codex.schubert.nk.web.canary.NioFilesController": "c0210ae778ef8b38f8f8651a62a6ce098372e9818a0bee9932b636d8b9cc62e1",
+    "dev.codex.schubert.nk.web.canary.ReportController$Holder$Deep": "1d6818c23a20b392fecb0ed25a151f22036b7849a222d187533fdbfe7e714a5d",
+    "dev.codex.schubert.nk.web.canary.ReportController$Holder": "31259ba5c0865bced2c721a576fa26510e400f6bba8d2fc9334bccfd6c66b733",
+    "dev.codex.schubert.nk.web.canary.ReportController$Loader": "fddce29c14ee633d73af3aa96859c217006d8c0b8c884dbec75364d1fe1d66fb",
+    "dev.codex.schubert.nk.web.canary.ReportController": "f7eafea880f799ba00c4e16560bdee457e525120e641a0385d67dc3a41c9c3f0",
+    "dev.codex.schubert.nk.web.canary.SafeFacade": "394079a213bbb9c2571541a91288d30da066a9e60649177dc83f67b452a46cc0",
+    "dev.codex.schubert.nk.web.canary.SpringJmsController": "1d278d62f7123465c1f64e75ffd4fa69406eb57217eded7a2290fd5b002b9b2d",
+    "dev.codex.schubert.nk.web.canary.StorageController": "a9757f3909cdd81abdda6f4675b4723ad661d4cd8da46fb6f3c3e189fd946f9f",
+    "dev.codex.schubert.nk.web.domain.View": "1058cba391379b88cb9739b0504240dc64a510f5012d71e15bfdcab742ba4bed",
+    "dev.codex.schubert.nk.web.storage.Adapter": "1d5fa8988ae8d653457bad60a83617602f794ca2dc022c070ea8070085d2380a",
+    "jakarta.jms.Message": "e97558907fe03004c9134e018f2e3bca6846b2d53779d14d4b6c1eb3cb609220",
+    "javax.jms.Message": "9cd9c8960352ca6a759638dc2b2125d293b90cf3196d953ff1d9691fa963396f",
+    "org.springframework.jms.core.JmsTemplate": "758628cccdc03eb50a51d08f1ff2bd82dfb9a65dd260fbe562cfa108c01ac34c",
+    "org.springframework.stereotype.Controller": "55f954c50acd3b0bab7c4fea95cb857c72c3a3593b167eea6412902e9910bbec",
+    "org.springframework.web.bind.annotation.RestController": "945ca2c7a076ad2b0280ed7364ebadddb4adc55537861f6b73efaad95256efce"
+  },
+  "rules": {
+    "CONTROLLER_BOUNDARY": 14,
+    "FRAMEWORK_FENCES": 4,
+    "INTERNAL_OWNER": 0,
+    "MODULE_EDGES": 4,
+    "REPOSITORY_DIRECTION": 0
+  },
+  "cases": [
+    {
+      "testId": "PT-F02-ARCH-001",
+      "rule": "CONTROLLER_BOUNDARY",
+      "origin": "dev.codex.schubert.nk.web.canary.FacadeController",
+      "expected": [],
+      "actual": []
+    },
+    {
+      "testId": "PT-F02-ARCH-002",
+      "rule": "CONTROLLER_BOUNDARY",
+      "origin": "dev.codex.schubert.nk.web.canary.HttpController",
+      "expected": [],
+      "actual": []
+    },
+    {
+      "testId": "PT-F02-ARCH-003",
+      "rule": "CONTROLLER_BOUNDARY",
+      "origin": "dev.codex.schubert.nk.web.canary.JdbcController",
+      "expected": [
+        "java.sql.Connection"
+      ],
+      "actual": [
+        "java.sql.Connection"
+      ]
+    },
+    {
+      "testId": "PT-F02-ARCH-004",
+      "rule": "CONTROLLER_BOUNDARY",
+      "origin": "dev.codex.schubert.nk.web.canary.StorageController",
+      "expected": [
+        "dev.codex.schubert.nk.storage.KnownValue"
+      ],
+      "actual": [
+        "dev.codex.schubert.nk.storage.KnownValue"
+      ]
+    },
+    {
+      "testId": "PT-F02-ARCH-005",
+      "rule": "CONTROLLER_BOUNDARY",
+      "origin": "dev.codex.schubert.nk.web.canary.SpringJmsController",
+      "expected": [
+        "org.springframework.jms.core.JmsTemplate"
+      ],
+      "actual": [
+        "org.springframework.jms.core.JmsTemplate"
+      ]
+    },
+    {
+      "testId": "PT-F02-ARCH-006",
+      "rule": "CONTROLLER_BOUNDARY",
+      "origin": "dev.codex.schubert.nk.web.canary.JakartaController",
+      "expected": [
+        "jakarta.jms.Message"
+      ],
+      "actual": [
+        "jakarta.jms.Message"
+      ]
+    },
+    {
+      "testId": "PT-F02-ARCH-007",
+      "rule": "CONTROLLER_BOUNDARY",
+      "origin": "dev.codex.schubert.nk.web.canary.JavaxController",
+      "expected": [
+        "javax.jms.Message"
+      ],
+      "actual": [
+        "javax.jms.Message"
+      ]
+    },
+    {
+      "testId": "PT-F02-ARCH-008",
+      "rule": "CONTROLLER_BOUNDARY",
+      "origin": "dev.codex.schubert.nk.web.canary.NioFilesController",
+      "expected": [
+        "java.nio.file.Files"
+      ],
+      "actual": [
+        "java.nio.file.Files"
+      ]
+    },
+    {
+      "testId": "PT-F02-ARCH-009",
+      "rule": "CONTROLLER_BOUNDARY",
+      "origin": "dev.codex.schubert.nk.web.canary.FileChannelController",
+      "expected": [
+        "java.nio.channels.FileChannel"
+      ],
+      "actual": [
+        "java.nio.channels.FileChannel"
+      ]
+    },
+    {
+      "testId": "PT-F02-ARCH-010",
+      "rule": "CONTROLLER_BOUNDARY",
+      "origin": "dev.codex.schubert.nk.web.canary.LegacyFileController",
+      "expected": [
+        "java.io.File"
+      ],
+      "actual": [
+        "java.io.File"
+      ]
+    },
+    {
+      "testId": "PT-F02-ARCH-011",
+      "rule": "CONTROLLER_BOUNDARY",
+      "origin": "dev.codex.schubert.nk.web.canary.AnnotatedEndpoint",
+      "expected": [
+        "java.nio.file.Path"
+      ],
+      "actual": [
+        "java.nio.file.Path"
+      ]
+    },
+    {
+      "testId": "PT-F02-ARCH-012",
+      "rule": "CONTROLLER_BOUNDARY",
+      "origin": "dev.codex.schubert.nk.web.canary.NamedHandler",
+      "expected": [
+        "javax.jms.Message"
+      ],
+      "actual": [
+        "javax.jms.Message"
+      ]
+    },
+    {
+      "testId": "PT-F02-NEST-001",
+      "rule": "CONTROLLER_BOUNDARY",
+      "origin": "dev.codex.schubert.nk.web.canary.ReportController$Loader",
+      "expected": [
+        "java.sql.Connection"
+      ],
+      "actual": [
+        "java.sql.Connection"
+      ]
+    },
+    {
+      "testId": "PT-F02-NEST-002",
+      "rule": "CONTROLLER_BOUNDARY",
+      "origin": "dev.codex.schubert.nk.web.canary.ReportController$Holder$Deep",
+      "expected": [
+        "java.nio.channels.FileChannel"
+      ],
+      "actual": [
+        "java.nio.channels.FileChannel"
+      ]
+    },
+    {
+      "testId": "PT-F02-NEST-003",
+      "rule": "CONTROLLER_BOUNDARY",
+      "origin": "dev.codex.schubert.nk.web.canary.DisplayEndpoint$Dispatcher",
+      "expected": [
+        "jakarta.jms.Message"
+      ],
+      "actual": [
+        "jakarta.jms.Message"
+      ]
+    },
+    {
+      "testId": "PT-F02-NEST-004",
+      "rule": "CONTROLLER_BOUNDARY",
+      "origin": "dev.codex.schubert.nk.web.canary.JsonHandler$1",
+      "expected": [
+        "java.nio.file.Files"
+      ],
+      "actual": [
+        "java.nio.file.Files"
+      ]
+    },
+    {
+      "testId": "PT-F02-NEST-005",
+      "rule": "CONTROLLER_BOUNDARY",
+      "origin": "dev.codex.schubert.nk.web.canary.AppController$Presenter",
+      "expected": [],
+      "actual": []
+    },
+    {
+      "testId": "PT-F02-NEST-006",
+      "rule": "CONTROLLER_BOUNDARY",
+      "origin": "dev.codex.schubert.nk.web.canary.BusinessFacade$Adapter",
+      "expected": [],
+      "actual": []
+    },
+    {
+      "testId": "PT-F02-PROFILE-001",
+      "rule": "FRAMEWORK_FENCES",
+      "origin": "dev.codex.schubert.nk.protocol.FilesRead",
+      "expected": [
+        "java.nio.file.Files"
+      ],
+      "actual": [
+        "java.nio.file.Files"
+      ]
+    },
+    {
+      "testId": "PT-F02-PROFILE-002",
+      "rule": "FRAMEWORK_FENCES",
+      "origin": "dev.codex.schubert.nk.protocol.FileStream",
+      "expected": [
+        "java.io.FileInputStream"
+      ],
+      "actual": [
+        "java.io.FileInputStream"
+      ]
+    },
+    {
+      "testId": "PT-F02-PROFILE-003",
+      "rule": "FRAMEWORK_FENCES",
+      "origin": "dev.codex.schubert.nk.protocol.FileChannelCall",
+      "expected": [
+        "java.nio.channels.FileChannel"
+      ],
+      "actual": [
+        "java.nio.channels.FileChannel"
+      ]
+    },
+    {
+      "testId": "PT-F02-PROFILE-004",
+      "rule": "FRAMEWORK_FENCES",
+      "origin": "dev.codex.schubert.nk.protocol.ProviderCall",
+      "expected": [
+        "java.nio.file.spi.FileSystemProvider"
+      ],
+      "actual": [
+        "java.nio.file.spi.FileSystemProvider"
+      ]
+    },
+    {
+      "testId": "PT-F02-PROFILE-005",
+      "rule": "FRAMEWORK_FENCES",
+      "origin": "dev.codex.schubert.nk.protocol.PathValue",
+      "expected": [],
+      "actual": []
+    },
+    {
+      "testId": "PT-F02-PROFILE-006",
+      "rule": "FRAMEWORK_FENCES",
+      "origin": "dev.codex.schubert.nk.protocol.BorrowedByteStream",
+      "expected": [],
+      "actual": []
+    },
+    {
+      "testId": "PT-F02-PROFILE-007",
+      "rule": "FRAMEWORK_FENCES",
+      "origin": "dev.codex.schubert.nk.storage.LowLevelFile",
+      "expected": [],
+      "actual": []
+    },
+    {
+      "testId": "PT-F02-PROFILE-008",
+      "rule": "FRAMEWORK_FENCES",
+      "origin": "dev.codex.schubert.nk.batch.FilePort",
+      "expected": [],
+      "actual": []
+    },
+    {
+      "testId": "PT-F02-APPSTORAGE-001",
+      "rule": "MODULE_EDGES",
+      "origin": "dev.codex.schubert.nk.api.application.UseCase",
+      "expected": [
+        "dev.codex.schubert.nk.storage.FileReference"
+      ],
+      "actual": [
+        "dev.codex.schubert.nk.storage.FileReference"
+      ]
+    },
+    {
+      "testId": "PT-F02-APPSTORAGE-002",
+      "rule": "MODULE_EDGES",
+      "origin": "dev.codex.schubert.nk.api.domain.Value",
+      "expected": [
+        "dev.codex.schubert.nk.storage.FileReference"
+      ],
+      "actual": [
+        "dev.codex.schubert.nk.storage.FileReference"
+      ]
+    },
+    {
+      "testId": "PT-F02-APPSTORAGE-003",
+      "rule": "MODULE_EDGES",
+      "origin": "dev.codex.schubert.nk.web.application.Facade",
+      "expected": [
+        "dev.codex.schubert.nk.storage.FileReference"
+      ],
+      "actual": [
+        "dev.codex.schubert.nk.storage.FileReference"
+      ]
+    },
+    {
+      "testId": "PT-F02-APPSTORAGE-004",
+      "rule": "MODULE_EDGES",
+      "origin": "dev.codex.schubert.nk.web.domain.View",
+      "expected": [
+        "dev.codex.schubert.nk.storage.FileReference"
+      ],
+      "actual": [
+        "dev.codex.schubert.nk.storage.FileReference"
+      ]
+    },
+    {
+      "testId": "PT-F02-APPSTORAGE-005",
+      "rule": "MODULE_EDGES",
+      "origin": "dev.codex.schubert.nk.api.storage.Adapter",
+      "expected": [],
+      "actual": []
+    },
+    {
+      "testId": "PT-F02-APPSTORAGE-006",
+      "rule": "MODULE_EDGES",
+      "origin": "dev.codex.schubert.nk.web.storage.Adapter",
+      "expected": [],
+      "actual": []
+    },
+    {
+      "testId": "PT-F02-APPSTORAGE-007",
+      "rule": "MODULE_EDGES",
+      "origin": "dev.codex.schubert.nk.batch.file.Adapter",
+      "expected": [],
+      "actual": []
+    },
+    {
+      "testId": "PT-F02-APPSTORAGE-008",
+      "rule": "MODULE_EDGES",
+      "origin": "dev.codex.schubert.nk.api.application.Service",
+      "expected": [],
+      "actual": []
+    },
+    {
+      "testId": "PT-F02-APPSTORAGE-009",
+      "rule": "MODULE_EDGES",
+      "origin": "dev.codex.schubert.nk.web.application.Presenter",
+      "expected": [],
+      "actual": []
+    }
+  ],
+  "syntheticMatched": 35,
+  "actualProductionJarInputs": 0,
+  "productTestsRun": 0,
+  "fixtureInitializersRun": 0,
+  "wholeF02Accepted": false,
+  "whole451Accepted": false,
+  "terminalAtUTC": "2026-11-20T00:41:50.846406+00:00"
+}
