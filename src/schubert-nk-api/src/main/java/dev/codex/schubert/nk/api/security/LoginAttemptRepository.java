@@ -23,6 +23,8 @@ import org.jspecify.annotations.Nullable;
  * AUT-001; UI226 §4; SS312 §4/314 §5/331 §4/332 §5; PT-AUT-003-D01..05.
  */
 public final class LoginAttemptRepository {
+  private static final String ACTIVE_STATUS = "ACTIVE";
+  private static final String DISABLED_STATUS = "DISABLED";
   private static final int EXPECTED_AFFECTED_ROWS = 1;
 
   private static final String USER =
@@ -70,13 +72,13 @@ public final class LoginAttemptRepository {
               if (row.next()) {
                 String persistedRole = requireValue(row.getString("role"));
                 Role role;
-                if ("USER".equals(persistedRole)) role = Role.USER;
-                else if ("ADMIN".equals(persistedRole)) role = Role.ADMIN;
+                if (Role.USER.name().equals(persistedRole)) role = Role.USER;
+                else if (Role.ADMIN.name().equals(persistedRole)) role = Role.ADMIN;
                 else throw new SQLException("invalid persisted role", "22000");
                 String persistedStatus = requireValue(row.getString("status"));
                 boolean active;
-                if ("ACTIVE".equals(persistedStatus)) active = true;
-                else if ("DISABLED".equals(persistedStatus)) active = false;
+                if (ACTIVE_STATUS.equals(persistedStatus)) active = true;
+                else if (DISABLED_STATUS.equals(persistedStatus)) active = false;
                 else throw new SQLException("invalid persisted status", "22000");
                 account =
                     Optional.of(
