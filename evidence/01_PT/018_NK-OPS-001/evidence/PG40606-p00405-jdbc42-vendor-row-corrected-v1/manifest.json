@@ -1,0 +1,147 @@
+{
+  "actualExit": 0,
+  "productionCore": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+  "fixtureSource": "6069b2d490f1d75e1c1497dd922bee0e3586d34a",
+  "initialAttempts": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40604-p00405-jdbc42-vendor-codec-v1/manifest.json",
+    "sha256": "51cca067c1b8a022e4b526ece31fa03e516f62ac0d7a42b221725321804d3c55"
+  },
+  "stages": {
+    "compile": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/postgresql/postgresql/42.7.13/postgresql-42.7.13.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/checkerframework/checker-qual/3.55.1/checker-qual-3.55.1.jar",
+        "-d",
+        "/dev/shm/pgpt-jdbc42-row-gyh1_89h",
+        "/dev/shm/pgpt-jdbc42-row-gyh1_89h/PgTemporalRowContract.java"
+      ],
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40606-p00405-jdbc42-vendor-row-corrected-v1/compile.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40606-p00405-jdbc42-vendor-row-corrected-v1/compile.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "startedAtUTC": "2026-11-20T03:20:52.093173+00:00",
+      "terminalAtUTC": "2026-11-20T03:20:52.697928+00:00"
+    },
+    "UTC": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Duser.timezone=UTC",
+        "-cp",
+        "/dev/shm/pgpt-jdbc42-row-gyh1_89h:/home/mini/codex/project1/work/toolchain/m2/repository/org/postgresql/postgresql/42.7.13/postgresql-42.7.13.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/checkerframework/checker-qual/3.55.1/checker-qual-3.55.1.jar",
+        "org.postgresql.jdbc.PgTemporalRowContract",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/019_NK-MIG-001/input/154_PgTemporalRowVectors.tsv",
+        "UTC"
+      ],
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40606-p00405-jdbc42-vendor-row-corrected-v1/zone-1.stdout.txt",
+        "sha256": "662efc207d3235b34238cae78fb37f36bbcccd5cac43b8cfdd065671d00ced56"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40606-p00405-jdbc42-vendor-row-corrected-v1/zone-1.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "startedAtUTC": "2026-11-20T03:20:52.698015+00:00",
+      "terminalAtUTC": "2026-11-20T03:20:52.847670+00:00",
+      "checksMatched": 18,
+      "checksExpected": 18,
+      "noDiagnostic": true
+    },
+    "Asia/Tokyo": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Duser.timezone=Asia/Tokyo",
+        "-cp",
+        "/dev/shm/pgpt-jdbc42-row-gyh1_89h:/home/mini/codex/project1/work/toolchain/m2/repository/org/postgresql/postgresql/42.7.13/postgresql-42.7.13.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/checkerframework/checker-qual/3.55.1/checker-qual-3.55.1.jar",
+        "org.postgresql.jdbc.PgTemporalRowContract",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/019_NK-MIG-001/input/154_PgTemporalRowVectors.tsv",
+        "Asia/Tokyo"
+      ],
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40606-p00405-jdbc42-vendor-row-corrected-v1/zone-2.stdout.txt",
+        "sha256": "662efc207d3235b34238cae78fb37f36bbcccd5cac43b8cfdd065671d00ced56"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40606-p00405-jdbc42-vendor-row-corrected-v1/zone-2.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "startedAtUTC": "2026-11-20T03:20:52.847865+00:00",
+      "terminalAtUTC": "2026-11-20T03:20:52.987686+00:00",
+      "checksMatched": 18,
+      "checksExpected": 18,
+      "noDiagnostic": true
+    },
+    "America/New_York": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Duser.timezone=America/New_York",
+        "-cp",
+        "/dev/shm/pgpt-jdbc42-row-gyh1_89h:/home/mini/codex/project1/work/toolchain/m2/repository/org/postgresql/postgresql/42.7.13/postgresql-42.7.13.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/checkerframework/checker-qual/3.55.1/checker-qual-3.55.1.jar",
+        "org.postgresql.jdbc.PgTemporalRowContract",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/019_NK-MIG-001/input/154_PgTemporalRowVectors.tsv",
+        "America/New_York"
+      ],
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40606-p00405-jdbc42-vendor-row-corrected-v1/zone-3.stdout.txt",
+        "sha256": "662efc207d3235b34238cae78fb37f36bbcccd5cac43b8cfdd065671d00ced56"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40606-p00405-jdbc42-vendor-row-corrected-v1/zone-3.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "startedAtUTC": "2026-11-20T03:20:52.987849+00:00",
+      "terminalAtUTC": "2026-11-20T03:20:53.126106+00:00",
+      "checksMatched": 18,
+      "checksExpected": 18,
+      "noDiagnostic": true
+    }
+  },
+  "inputs": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/019_NK-MIG-001/input/153_PgTemporalRowContract.java",
+      "sha256": "b5d1299cbf1826269e6075ceadc70d693f18f6ba4d47b5d3459175afcd646c6b"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/019_NK-MIG-001/input/154_PgTemporalRowVectors.tsv",
+      "sha256": "6b203307fcbb156cc0f2f3e10f9687bf7421176cb552b1c6787b4e977f07dccc"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/postgresql/postgresql/42.7.13/postgresql-42.7.13.jar",
+      "sha256": "6e0e4cc2d8cae902084f8a2b18728b073a6fd9d1f87c9d8bff8f298c18185b93"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/checkerframework/checker-qual/3.55.1/checker-qual-3.55.1.jar",
+      "sha256": "857658c8bdcbff794949a8d9922f88d63ee3751c203c7cd7d21ea97f9e745288"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/postgresql/postgresql/42.7.13/postgresql-42.7.13.pom",
+      "sha256": "3957417ecaee342521b61310fdc21bd37fcb8bba3f7547ece9b78fd03cd53f26"
+    }
+  ],
+  "matches": 54,
+  "expected": 54,
+  "zones": [
+    "UTC",
+    "Asia/Tokyo",
+    "America/New_York"
+  ],
+  "oldProductRunsRepeated": 0,
+  "jdbcClass": "org.postgresql.jdbc.PgResultSet",
+  "realDbConnections": 0,
+  "actualServerSessionZones": 0,
+  "wholeP00405Accepted": false,
+  "whole451Accepted": false,
+  "terminalAtUTC": "2026-11-20T03:20:53.129858+00:00"
+}

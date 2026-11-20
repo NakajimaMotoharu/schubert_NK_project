@@ -1,0 +1,67 @@
+{
+  "eventId": "PGPT-20261008-6503",
+  "groupId": "PGPT-WBS66-P00405-VENDOR-JDBC42-UTC-PARSER-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T03:18:17.640000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 61,
+      "remainingPercent": 39,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P00405-VENDOR-JDBC42-UTC-PARSER-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-P00405-VENDOR-JDBC42-UTC-PARSER-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P004-05"
+    ],
+    "managementWorkIds": [
+      "WBS-P004-05/2"
+    ],
+    "source": "36bef1fdd25b9a5b0afdebd5dddb420cb59ac714",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40604-p00405-jdbc42-vendor-codec-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.3,
+      "base": 0.8,
+      "high": 1.7
+    },
+    "groupCapPp": 2.6,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/982_F03現Protocol全単体継続点.json",
+        "sha256": "05b2ba369b52b62608e3942be689c2f7f1b3bc25a9ca4b4e85ea5fb8f8f602f6"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40456-migration-utc42-product-and-tool-proof-v1/manifest.json",
+        "sha256": "39b35eaafb1011fb3f8b4ab9003730f174838fe498bce5962eae497c2b1d3180"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40580-p00405-current-owner-criterion-receipts-v1/manifest.json",
+        "sha256": "cc629b1ef330defb598b93503b0e4d62808bc6c8d84c3aad8b2dcd98f6892487"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40602-f03-current-protocol-maven-independent-v1/manifest.json",
+        "sha256": "94b3c550c89f0903370ef0f2544e011cf74341ae309c3eff880843e3942cc6f7"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "SS332のJDBC42 UTC・歴史暦。既87は独立行proxyであり、実42.7.13の文字/二進decodeをまだ測定していない。",
+    "endCondition": "現POMで選ばれるdriverをpin。offset付き文字と固定binary payloadの独立goldenをUTC、JST、New Yorkで合わせ、実DBの未成立を保持。",
+    "workScope": "既設SDK固定JARの時刻型専用・合成payload。接続、資格、通信、native、DB実機や失敗cohortは扱わない。"
+  }
+}
