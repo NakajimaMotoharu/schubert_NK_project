@@ -1,0 +1,144 @@
+{
+  "eventId": "PGPT-20261008-6477",
+  "groupId": "PGPT-WBS66-F02-VENDOR-JDBC-JMS-DIRECT-EDGE-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T02:49:06.446000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 60,
+      "remainingPercent": 40,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F02-VENDOR-JDBC-JMS-DIRECT-EDGE-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F02-VENDOR-JDBC-JMS-DIRECT-EDGE-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a"
+    ],
+    "source": "bce56c820f015ce90ac3afd824d787260269582f",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40572-f02-vendor-jdbc-jms-before-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.3,
+      "base": 0.9,
+      "high": 1.8
+    },
+    "groupCapPp": 2.2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/955_F02APIRepository境界と継続点.json",
+        "sha256": "f8b96ec466c33000a8f249d4f5516ddff5b3d9e865928ea5868df672d78b3029"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40570-f02-api-repository-direction-independent-v1/manifest.json",
+        "sha256": "575e6d568345cd39d3c4cd7499f9833dc7911a11cda70c49327b1a0712860624"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40446-f02-combined-static-proof-v1/manifest.json",
+        "sha256": "2b0742bd1cc20be99774fce595c7f5d75563aaa85c601b3bdfd33a3c2c288cd9"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40546-f02-schema-typed-edge-independent-v1/manifest.json",
+        "sha256": "212d6b51f9b232d49bfc9ac7f2d6ba68a745d29de0d992a002541673b78f9484"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "SS311 §2/3/5.2で禁止されるJDBC/JMSの直参照に、既工具が使用中のPostgreSQL/Artemis vendor型を見分けない。F02-aの兄弟条件で実API/Webなし。",
+    "endCondition": "合成のProtocol/Storage/Controllerは禁止・Bootstrap PostgreSQLとBatch管理、Web adapterは許容。新ケースの修正前後と現工具への既45回帰、正本と独立した報告。",
+    "workScope": "工具と第三者型のcompile-only stubs、合成製品classのみ。実DB/Artemis、稼働環境・本物API/Web classfileなし。",
+    "quotaAfter": {
+      "usedPercent": 60,
+      "remainingPercent": 40,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "fead0328c69c9c11ee975d068f80686cbedfc9a370de4a0d6ea30e77a8a19cfd",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T02:49:06.446000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 60,
+          "remainingPercent": 40,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T02:48:35.821661+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 60,
+      "remainingPercent": 40,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6476",
+    "attempt": 1,
+    "attemptResult": "VENDOR_JDBC_JMS_FENCES_TEN_NEW_MATCHED_PLUS_FORTY_FIVE",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40576-f02-vendor-jdbc-jms-independent-v1/manifest.json",
+        "sha256": "cbfaa049a9b7cff2e6aa1e7b42e4bd054ac7e21cbdeaef7df79d2bdc292bdf74"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40572-f02-vendor-jdbc-jms-before-v1/manifest.json",
+        "sha256": "f053d41dd8578e65ceb44bdd0844421a0fb19e010b5403a32f0566e107b13d8f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40574-f02-vendor-jdbc-jms-after-v1/manifest.json",
+        "sha256": "3cee0b2a644a128d45168578dd50ebd3f75ade0c44899590732bf752031ec02b"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "API/Webの全製品artifact・QA056、Storage JDBC禁止辺、正式451。"
+    ],
+    "firstValidationPassed": 4,
+    "firstValidationDenominator": 10,
+    "retries": 1,
+    "existingRegression": 45,
+    "currentMatched10": 10,
+    "totalSynthetic55": 55,
+    "actualSyntheticClasses88": 88,
+    "expectedAuditFindings34": 34,
+    "toolSource": "c3caf3e8cfbed542c776c4291b2bfbf3483479b0",
+    "openedRealBackend": 0
+  }
+}

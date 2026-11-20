@@ -1,0 +1,67 @@
+{
+  "eventId": "PGPT-20261008-6476",
+  "groupId": "PGPT-WBS66-F02-VENDOR-JDBC-JMS-DIRECT-EDGE-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T02:46:34.053000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 60,
+      "remainingPercent": 40,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F02-VENDOR-JDBC-JMS-DIRECT-EDGE-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F02-VENDOR-JDBC-JMS-DIRECT-EDGE-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a"
+    ],
+    "source": "bce56c820f015ce90ac3afd824d787260269582f",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40572-f02-vendor-jdbc-jms-before-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.3,
+      "base": 0.9,
+      "high": 1.8
+    },
+    "groupCapPp": 2.2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/955_F02APIRepository境界と継続点.json",
+        "sha256": "f8b96ec466c33000a8f249d4f5516ddff5b3d9e865928ea5868df672d78b3029"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40570-f02-api-repository-direction-independent-v1/manifest.json",
+        "sha256": "575e6d568345cd39d3c4cd7499f9833dc7911a11cda70c49327b1a0712860624"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40446-f02-combined-static-proof-v1/manifest.json",
+        "sha256": "2b0742bd1cc20be99774fce595c7f5d75563aaa85c601b3bdfd33a3c2c288cd9"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40546-f02-schema-typed-edge-independent-v1/manifest.json",
+        "sha256": "212d6b51f9b232d49bfc9ac7f2d6ba68a745d29de0d992a002541673b78f9484"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "SS311 §2/3/5.2で禁止されるJDBC/JMSの直参照に、既工具が使用中のPostgreSQL/Artemis vendor型を見分けない。F02-aの兄弟条件で実API/Webなし。",
+    "endCondition": "合成のProtocol/Storage/Controllerは禁止・Bootstrap PostgreSQLとBatch管理、Web adapterは許容。新ケースの修正前後と現工具への既45回帰、正本と独立した報告。",
+    "workScope": "工具と第三者型のcompile-only stubs、合成製品classのみ。実DB/Artemis、稼働環境・本物API/Web classfileなし。"
+  }
+}
