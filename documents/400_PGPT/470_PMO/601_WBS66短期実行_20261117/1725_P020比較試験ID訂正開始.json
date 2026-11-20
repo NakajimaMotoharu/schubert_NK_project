@@ -1,0 +1,67 @@
+{
+  "eventId": "PGPT-20261008-7240",
+  "groupId": "WBS66-P020-G08-COMPARATOR-TEST-ID-RECONCILIATION",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T23:40:09.044000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 85,
+      "remainingPercent": 15,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66-P020-G08-COMPARATOR-TEST-ID-RECONCILIATION",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "WBS66-P020-G08-COMPARATOR-TEST-ID-RECONCILIATION",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P020-01.02"
+    ],
+    "managementWorkIds": [
+      "WBS-P020-01.02/2"
+    ],
+    "source": "172892f2d780af08a1f20a1a25a57adfbeaf97a1",
+    "productionCoreMain": "62b239d4dad561da007e15a290f8a271a165dda9",
+    "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "run": "PG41332-p020-comparator-test-id-correction-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.35,
+      "high": 0.9
+    },
+    "groupCapPp": 1,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1724_F03四moduleとWeb部分から継続.json",
+        "sha256": "31de50a353b671d544f42bdd4ac07ae70a3c827817202e259c9e8f12dc352bfe"
+      },
+      {
+        "path": "evidence/01_PT/020_NK-CHR-001/060_比較定義の版と配列の単体仕様.md",
+        "sha256": "f94d9d17363d0db9b6ba23da5c727244ed0f49447583ae83d9e4a059184bf1ef"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40132-p020-path-contract-independent-v1/manifest.json",
+        "sha256": "af18f4c6b12643581fa71f0faa1cd25dcc6cb30b862df6575584145afc862cf5"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41284-g08-media-compare-current-v1/manifest.json",
+        "sha256": "63111f052d19adc380ca7efba67f3aa3bd4cf9346163db47d18416f246d5fba0"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "P020-01.02 original work row 816 and independent G08 trace; prior claim reused two existing IDs.",
+    "endCondition": "Preserve old sources and run receipts; assign two unused Test IDs, independently match both exact original XML methods and catalog roles, and bind corrected trace without acceptance change.",
+    "workScope": "Local evidence and Git only. No new Test/PT/CHR or external operations."
+  }
+}
