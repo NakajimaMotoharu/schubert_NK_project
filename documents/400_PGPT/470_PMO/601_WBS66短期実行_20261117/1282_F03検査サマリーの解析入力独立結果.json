@@ -1,0 +1,143 @@
+{
+  "eventId": "PGPT-20261008-6798",
+  "groupId": "F03-inspection-analyzer-original-input-proof",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T13:24:14.930000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 70,
+      "remainingPercent": 30,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "F03-inspection-analyzer-original-input-proof",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "F03-inspection-analyzer-original-input-proof",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "source": "d59a59977d6ccbdc00217a08204d9491995650b6",
+    "productionCoreMain": "cdb649a5f054bc2ceed72ef57e55605f14a590d1",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40870-f03-inspection-analyzer-original-input-proof-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.1,
+      "base": 0.3,
+      "high": 0.7
+    },
+    "groupCapPp": 1.0,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1280_P01707削除読取のSQL次辺継続点.json",
+        "sha256": "8aeb992913b324304258797db182a52a5398925480376da142b57eb81b90d22d"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40838-f03-inspection-summary-typed-v1/manifest.json",
+        "sha256": "90afa7c14c66be40bf8c55d2193d56955a1e3f19b1f934ee8819649e1a484ed6"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40838-f03-inspection-summary-typed-v1/spotbugs.xml",
+        "sha256": "c5e35ec02a84bee05da4c52bb0f12d023df4cfee94813d10d7d7af95e7e5a252"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40838-f03-inspection-summary-typed-v1/pmd.xml",
+        "sha256": "f4b2acb212228a723bf901d60c9dca1b2eeefff43231af1ae6d33cba0d1f336b"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "PG40838の公開コマンド、source8・型9、独立XMLが揃う。YKT-2735の実入力範囲と読取許可を原結果から確認する。",
+    "endCondition": "9型と対象dirをSB Project/ClassStats、補助一とPMD補助二をcommand/公開report、8Mainを現Core hashへ対応。既判定との不足を区切る。",
+    "workScope": "F03/2-2局所証跡への独立読取。解析job／JAR読取／保留物・実起動なし。正式451は別。",
+    "quotaAfter": {
+      "usedPercent": 70,
+      "remainingPercent": 30,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "2e1f3ec43f1529001c03e6ff830ae48c286ec9d6449620e13263abf2851b70ce",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T13:24:14.930000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 70,
+          "remainingPercent": 30,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T13:24:09.526642+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 70,
+      "remainingPercent": 30,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6797",
+    "attempt": 1,
+    "attemptResult": "CURRENT_SCOPED_INPUTS_RECONCILED",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40870-f03-inspection-analyzer-original-input-proof-v1/manifest.json",
+        "sha256": "4504269ee71c4dce3f5639ee424b65a851016b9544ab350fa86552ffe4c62d3e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40838-f03-inspection-summary-typed-v1/manifest.json",
+        "sha256": "90afa7c14c66be40bf8c55d2193d56955a1e3f19b1f934ee8819649e1a484ed6"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5465_f03_inspection_analyzer_receipt_post.py",
+        "sha256": "61e781bf4fb151124f2bd617441a91a161b947ac3cf0fb1120569a1b121c04e4"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "F03 API/Web・保留Batch・Root11と現候補全六",
+      "旧全体JAR解析の保留とYKT-2735の残り",
+      "同source全451"
+    ],
+    "spotbugsNine": 9,
+    "pmdEightMain": 8,
+    "pmdRawUnchanged": 10,
+    "staticReplayCount": 0,
+    "relatedYkt": "YKT-2735",
+    "criteria": "WBS-F03/2-2: scoped analyzer input corroboration",
+    "appliedScopeOnly": true
+  }
+}
