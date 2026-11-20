@@ -1,0 +1,115 @@
+{
+  "run": "PG41282-p020-current-216-raw-independent-v1",
+  "testedSource": "90163af57cf674f0e10e68fd963460462742107d",
+  "packageSource": "26cb251b9a30901f1c15fa6f0e193ae39005226d",
+  "productionCore": "a8913bc836f81632613b34243f84b7b15eb3e054",
+  "unit": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG41280-p020-current-216-local-v1/manifest.json",
+    "sha256": "7589dd10dffed45d46217ce529b03aa30322eb12b0535eb2e30dfd1e0e221f5f"
+  },
+  "terminalAtUTC": "2026-11-20T22:22:34.409969+00:00",
+  "testCounts": {
+    "tests": 216,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "suites": 20,
+  "notRunOutsideSelectedScope": 1,
+  "rawCounters": {
+    "LINE": {
+      "covered": 1650,
+      "missed": 2
+    },
+    "METHOD": {
+      "covered": 249,
+      "missed": 1
+    },
+    "CLASS": {
+      "covered": 12,
+      "missed": 0
+    },
+    "BRANCH": {
+      "covered": 1008,
+      "missed": 1
+    },
+    "INSTRUCTION": {
+      "covered": 8708,
+      "missed": 12
+    }
+  },
+  "rawAll": false,
+  "crcVerified": 12,
+  "physicallyVerified": 17,
+  "naturalNoCodeTypes": [
+    "dev/codex/schubert/characterization/CharacterizationIoScope$Open",
+    "dev/codex/schubert/characterization/CharacterizationIoScope$Release",
+    "dev/codex/schubert/characterization/CharacterizationIoScope$Work",
+    "dev/codex/schubert/characterization/GateCli$JsonOutput",
+    "dev/codex/schubert/characterization/GateCli$UsableSpace"
+  ],
+  "sessionCount": 1,
+  "reader": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/jacoco_readonly_exec_subset.py",
+    "sha256": "74698c741cc02423fe35f2ed8ecc234845f71b242dc86c7a1a5b31c7f5de5f59"
+  },
+  "tool": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/jacoco/UnfilteredCodeMeasurement.java",
+    "sha256": "acfb221d8853ceac834f862a19717a3242d67bbb8c7508ff1a00fd5db060ef15"
+  },
+  "steps": [
+    {
+      "argv": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "-d",
+        "/dev/shm/chr-216-raw-yajbwel6",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/jacoco/UnfilteredCodeMeasurement.java"
+      ],
+      "exitCode": 0
+    },
+    {
+      "argv": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/dev/shm/chr-216-raw-yajbwel6:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+        "--strict-original-exec",
+        "--line-deficits",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41280-p020-current-216-local-v1/unit.exec",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41280-p020-current-216-local-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/ArtifactComparator.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41280-p020-current-216-local-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/ArtifactComparator$ComparisonResult.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41280-p020-current-216-local-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41280-p020-current-216-local-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope$Open.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41280-p020-current-216-local-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope$Release.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41280-p020-current-216-local-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope$Work.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41280-p020-current-216-local-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41280-p020-current-216-local-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41280-p020-current-216-local-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$BaselineNumbers.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41280-p020-current-216-local-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$FileJsonOutput.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41280-p020-current-216-local-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$JsonOutput.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41280-p020-current-216-local-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$TreeStats.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41280-p020-current-216-local-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$UsableSpace.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41280-p020-current-216-local-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateContractValidator.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41280-p020-current-216-local-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateContractValidator$ValidationResult.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41280-p020-current-216-local-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/TargetAdapter.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41280-p020-current-216-local-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/TargetAdapter$Target.class"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "rawOutput": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG41282-p020-current-216-raw-independent-v1/unfiltered.tsv",
+    "sha256": "a2cf76ec5eb3d95b850bafda46403f7553c1b0fb93847071e610c20a92050be3"
+  },
+  "exclusions": 0,
+  "oldExecMerged": false,
+  "actualFileStore": false,
+  "actualChr": false,
+  "whole451": false,
+  "formalDelta": 0
+}
