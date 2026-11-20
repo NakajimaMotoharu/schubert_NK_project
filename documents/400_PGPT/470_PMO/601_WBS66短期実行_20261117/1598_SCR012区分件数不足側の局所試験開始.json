@@ -1,0 +1,67 @@
+{
+  "eventId": "PGPT-20261008-7113",
+  "groupId": "WBS66-P01612-SCR012-DECLARED-COUNT-UNDERCLAIM",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T20:08:46.231000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 80,
+      "remainingPercent": 20,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66-P01612-SCR012-DECLARED-COUNT-UNDERCLAIM",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "WBS66-P01612-SCR012-DECLARED-COUNT-UNDERCLAIM",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P016-12"
+    ],
+    "managementWorkIds": [
+      "WBS-P016-12/2-照合"
+    ],
+    "source": "b1e9d6eeac0cd60cb3e999c9c7b7c50c4e662f8f",
+    "productionCoreMain": "559f5b5945e82374e0843dcfae11a8d07faef1ea",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG41174-scr012-section-count-underclaim-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.1,
+      "base": 0.3,
+      "high": 0.8
+    },
+    "groupCapPp": 1.0,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1597_WBS66短期受入依存と再開点.json",
+        "sha256": "df835c3e68b5e6e9c96df6369b7066d587164d9cb0022565034b91619cb3501d"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38004-hierarchy-detail-music-current32-independent-v1/manifest.json",
+        "sha256": "4c486e556c9fbb91b65411ab6c990e8e4ba7d72b625ab888016967d4154c7cb5"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37996-hierarchy-detail-music-current32-prepare-v1/manifest.json",
+        "sha256": "06d78511333c213e70e974ea0dde610dfbd26ab22b2515aa11343f50d5910208"
+      },
+      {
+        "path": "evidence/01_PT/015_NK-WEB-001/020_NK-WEB-001_Music階層表示単体テスト仕様書.md",
+        "sha256": "f1f8d7bf336d5323ddf6294e33999d3444a5e6cb6462873051f2f0b1bdd90c7f"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "SS313 SCR012・UI235 §8。旧WEB247/248と現対象・依存source byte照合済み。空recordsに宣言1のみ試験済み、宣言0対1行の反対側が未成立。元/1局所参照、P015-02正式判定は保留",
+    "endCondition": "既存の正負を再実行せず、新規純値Test ID一件の真正終了、独立期待と現二物理、scopeを確認",
+    "workScope": "PT-WEB-SCR012-COUNT-001; java reflection-free value projection only; /dev/shm under 32 MiB, public receipt under 128 KiB, root free about 315 MiB"
+  }
+}
