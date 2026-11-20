@@ -1,0 +1,230 @@
+{
+  "actualExit": 1,
+  "toolSource": "25d1d27f72b5233c51b85f6c12bebb4763ce487a",
+  "productionCore": "24da3b252f65f0ea56736cb791cd13165bf62c24",
+  "toolSourceSha256": "dd07b04ccb756fd9a67badae62c6ad69747de369bf90542f0a280c6bbd83caac",
+  "sourceSpec": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/5571_f02_protocol_path_io.py",
+    "sha256": "28e40f5a505ad34197d6ad9d71e0a85363d85f3ce0f0912b98248282bab44f76"
+  },
+  "priorControls": 0,
+  "priorReceipt": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40632-f02-protocol-serialization-after-v1/manifest.json",
+    "sha256": "4da779d17a29de8ca81fd7249e8e77ed8d5bb7ff4b2c4c2b0c76b8cf2b33cc79"
+  },
+  "fixtures": [
+    {
+      "testId": "PT-F02-PATH-IO-001",
+      "origin": "dev.codex.schubert.nk.protocol.RealPathRead",
+      "target": "java.nio.file.Path",
+      "expected": true,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-PATH-IO-002",
+      "origin": "dev.codex.schubert.nk.protocol.WatchEvents",
+      "target": "java.nio.file.Path",
+      "expected": true,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-PATH-IO-003",
+      "origin": "dev.codex.schubert.nk.protocol.WatchModifiers",
+      "target": "java.nio.file.Path",
+      "expected": true,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-PATH-IO-004",
+      "origin": "dev.codex.schubert.nk.protocol.RealPathReference",
+      "target": "java.nio.file.Path",
+      "expected": true,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-PATH-IO-005",
+      "origin": "dev.codex.schubert.nk.protocol.NormalizePath",
+      "target": "java.nio.file.Path",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-PATH-IO-006",
+      "origin": "dev.codex.schubert.nk.protocol.ResolvePath",
+      "target": "java.nio.file.Path",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-PATH-IO-007",
+      "origin": "dev.codex.schubert.nk.protocol.PathValue",
+      "target": "java.nio.file.Path",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-PATH-IO-008",
+      "origin": "dev.codex.schubert.nk.storage.AllowedPhysicalPath",
+      "target": "java.nio.file.Path",
+      "expected": false,
+      "observed": false
+    }
+  ],
+  "matched": 4,
+  "physical": [
+    {
+      "className": "dev.codex.schubert.nk.api.Anchor",
+      "sha256": "b691280932ab1ea13b256104687d5923f9e70e226c2fb31a2a49c11764c2269b"
+    },
+    {
+      "className": "dev.codex.schubert.nk.batch.Anchor",
+      "sha256": "4dc370530233176eabdbadd79edf2966fd0a7e4afd3671b7a3114034c44eb9e3"
+    },
+    {
+      "className": "dev.codex.schubert.nk.bootstrap.Anchor",
+      "sha256": "b7b4a06bb2e29b67f59b46320e8aee9074b1b5c32aa126ee928c13387e40199a"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.Anchor",
+      "sha256": "af4c73c5e3cc60c38921bc6c9c810249e7a5f7d1f349f377ea0a4213c698df7c"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.NormalizePath",
+      "sha256": "ef1534e433efe718f1d333970c10e78bed2ec71ac317f339f6a2e5b684fc21e2"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.PathValue",
+      "sha256": "3475d1534e90ff16bf2e8b04ba5edd621416f8037c0bfbec929acc328462a3b8"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.RealPathRead",
+      "sha256": "fcc0e3f1921ecbad49a1aa5b14c97ecc04336d0323fee19b142aa1c93ba97ea3"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.RealPathReference$Inspect",
+      "sha256": "a686390bd178dad577f24ff0cce2df4ac58c5455ad1315340d48da49189937ab"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.RealPathReference",
+      "sha256": "7d10845f45bf8efaec33750e025942d1dc2d00b14fcfa9e5d677e9028519ffc1"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.ResolvePath",
+      "sha256": "e30dc243091463b86233e8ecea8ecc7419a79f3d184d9c233aa321a046cd86be"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.WatchEvents",
+      "sha256": "cf23f1658d043ea27034f404382a528d04b441d77c1f4ec3daa1e9505b05b5cc"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.WatchModifiers",
+      "sha256": "97686bf8b14f5456061db46d40fc14ce89fa86a9c02d370bd54da6e69a09e36a"
+    },
+    {
+      "className": "dev.codex.schubert.nk.storage.AllowedPhysicalPath",
+      "sha256": "1fa5d39b871177f6c2512f40dae0cbfdb82acf12216417cd0a15880677b006d5"
+    },
+    {
+      "className": "dev.codex.schubert.nk.storage.Anchor",
+      "sha256": "3523fc5db14a0ccfea29f242e1ce59ff87542a25965a1d3274eb29de27f78042"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.Anchor",
+      "sha256": "7a580ceef9ee6289fcfbef966085c3763ab5d6a6bfd5048cf1c6ddad770f3a15"
+    }
+  ],
+  "findings": 0,
+  "steps": {
+    "compile-tool": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41062-f02-protocol-path-io-before-v1/compile-tool.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41062-f02-protocol-path-io-before-v1/compile-tool.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "-d",
+        "/dev/shm/pgpt-protocol-path-io-bxj0vgv_/tool",
+        "/dev/shm/pgpt-protocol-path-io-bxj0vgv_/ModuleDependencyAudit.java"
+      ]
+    },
+    "compile-fixture": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41062-f02-protocol-path-io-before-v1/compile-fixture.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41062-f02-protocol-path-io-before-v1/compile-fixture.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-d",
+        "/dev/shm/pgpt-protocol-path-io-bxj0vgv_/binary",
+        "/dev/shm/pgpt-protocol-path-io-bxj0vgv_/fixtures/dev/codex/schubert/nk/protocol/RealPathRead.java",
+        "/dev/shm/pgpt-protocol-path-io-bxj0vgv_/fixtures/dev/codex/schubert/nk/protocol/WatchEvents.java",
+        "/dev/shm/pgpt-protocol-path-io-bxj0vgv_/fixtures/dev/codex/schubert/nk/protocol/WatchModifiers.java",
+        "/dev/shm/pgpt-protocol-path-io-bxj0vgv_/fixtures/dev/codex/schubert/nk/protocol/RealPathReference.java",
+        "/dev/shm/pgpt-protocol-path-io-bxj0vgv_/fixtures/dev/codex/schubert/nk/protocol/NormalizePath.java",
+        "/dev/shm/pgpt-protocol-path-io-bxj0vgv_/fixtures/dev/codex/schubert/nk/protocol/ResolvePath.java",
+        "/dev/shm/pgpt-protocol-path-io-bxj0vgv_/fixtures/dev/codex/schubert/nk/protocol/PathValue.java",
+        "/dev/shm/pgpt-protocol-path-io-bxj0vgv_/fixtures/dev/codex/schubert/nk/storage/AllowedPhysicalPath.java",
+        "/dev/shm/pgpt-protocol-path-io-bxj0vgv_/fixtures/dev/codex/schubert/nk/protocol/Anchor.java",
+        "/dev/shm/pgpt-protocol-path-io-bxj0vgv_/fixtures/dev/codex/schubert/nk/storage/Anchor.java",
+        "/dev/shm/pgpt-protocol-path-io-bxj0vgv_/fixtures/dev/codex/schubert/nk/bootstrap/Anchor.java",
+        "/dev/shm/pgpt-protocol-path-io-bxj0vgv_/fixtures/dev/codex/schubert/nk/api/Anchor.java",
+        "/dev/shm/pgpt-protocol-path-io-bxj0vgv_/fixtures/dev/codex/schubert/nk/web/Anchor.java",
+        "/dev/shm/pgpt-protocol-path-io-bxj0vgv_/fixtures/dev/codex/schubert/nk/batch/Anchor.java"
+      ]
+    },
+    "audit": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41062-f02-protocol-path-io-before-v1/audit.stdout.txt",
+        "sha256": "bc0e5c70de919249031b138c65033c41908146bc5fa2f0ba11411c0e6f3b60af"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41062-f02-protocol-path-io-before-v1/audit.stderr.txt",
+        "sha256": "2c58b87a0350a39bb1c3b5f4891defeeb9a785e84aa11a466dc9ddb21253bf58"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/dev/shm/pgpt-protocol-path-io-bxj0vgv_/tool:/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "ModuleDependencyAudit",
+        "api=/dev/shm/pgpt-protocol-path-io-bxj0vgv_/api.jar",
+        "batch=/dev/shm/pgpt-protocol-path-io-bxj0vgv_/batch.jar",
+        "bootstrap=/dev/shm/pgpt-protocol-path-io-bxj0vgv_/bootstrap.jar",
+        "protocol=/dev/shm/pgpt-protocol-path-io-bxj0vgv_/protocol.jar",
+        "storage=/dev/shm/pgpt-protocol-path-io-bxj0vgv_/storage.jar",
+        "web=/dev/shm/pgpt-protocol-path-io-bxj0vgv_/web.jar"
+      ]
+    }
+  },
+  "productTests": 0,
+  "productJars": 0,
+  "fixtureMethodsInvoked": 0,
+  "filesystemOperationsInvoked": 0,
+  "wholeF02Accepted": false,
+  "whole451Accepted": false,
+  "terminalAtUTC": "2026-11-20T17:59:49.423507+00:00",
+  "rawManifestSha256": "7c73bff8622239daffd012e0b6f5652909add8a86d65db34c39a6419a08fe873",
+  "publicationTransform": "synthetic class hash map represented as an ordered name/hash array"
+}
