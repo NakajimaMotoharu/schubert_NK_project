@@ -1,0 +1,106 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-20T21:28:26.532439+00:00",
+  "source": "89db66084c419bdc76053e1d044f37e0d5c33c0b",
+  "core": "6c2e8b027818c8dac0ed0f895edb85658e9c4ff1",
+  "tool": {
+    "path": "tools/quality/jacoco_readonly_exec_subset.py",
+    "sha256": "74698c741cc02423fe35f2ed8ecc234845f71b242dc86c7a1a5b31c7f5de5f59"
+  },
+  "baseline": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41236-p01808-independent-global-names-baseline-v1/manifest.json",
+    "sha256": "cc0e06eaae53f9342ebce6bb95d12abb1651d5a31a903ef2fcc0295f0385752c"
+  },
+  "corrected": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41238-p01808-independent-global-names-fixed-v1/manifest.json",
+    "sha256": "5d6d2037914ba521a94d35154df55cd40f63245af77aeb4f5bc33e004f6ea0e0"
+  },
+  "oldStrictJavaAndGenuineInputs": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41160-p01808-canonical-original-genuine-v1/manifest.json",
+    "sha256": "436ac13f1d38463e32ee8bf00392d3f8f56cbe9692dc03c44c27ba1f41ca1618"
+  },
+  "exactGenuinePasses": [
+    {
+      "original": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41080-f03-observation-context-value-v1/unit.exec",
+        "sha256": "302ceaf7969d8539d56a4d3d8c8d8a7bec3ce8fc1386a9eb897086756e956e19"
+      },
+      "selected": [],
+      "exactCountersAndSessionsMatch": true,
+      "classRecords": 494
+    },
+    {
+      "original": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41126-p020-typed-inventory-filestore-v1/combined.exec",
+        "sha256": "35cc74aa465298ad452c007a1dd824bebdfa7970f071d5f484e6971dd444ebc3"
+      },
+      "selected": [],
+      "exactCountersAndSessionsMatch": true,
+      "classRecords": 916
+    },
+    {
+      "original": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41204-range-unit-ascii-affected-v1/unit.exec",
+        "sha256": "2733b5d43297f235879d4f172d3fcfe3d1dcb5656f1b0cb27de984d4137506cb"
+      },
+      "selected": [
+        "dev/codex/schubert/nk/web/media/HttpByteRangeParser"
+      ],
+      "exactCountersAndSessionsMatch": true,
+      "classRecords": 485
+    }
+  ],
+  "explicitScope": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41240-p01808-independent-global-names-post-v1/tracked-reference-scope.txt",
+    "sha256": "c25d28a676234ff5a0b4358c8ced9f456329544944fafcdf154ee0be081a012b"
+  },
+  "referenceCommand": [
+    "git",
+    "grep",
+    "-l",
+    "-F",
+    "jacoco_readonly_exec_subset",
+    "89db66084c419bdc76053e1d044f37e0d5c33c0b",
+    "--",
+    "tools/**/*.py",
+    "evidence/01_PT/018_NK-OPS-001/input/*.py"
+  ],
+  "referencingPythonInputs": 162,
+  "oldReadonlyToolTests": 32,
+  "toolJUnitOrProductOperations": 0,
+  "actualProcessOrArchiveStateChanges": 0,
+  "commands": [
+    {
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/quality",
+        "-p",
+        "jacoco_readonly_exec_subset*_test.py"
+      ],
+      "exit": 0,
+      "summary": "Ran 32 tests in 0.002s",
+      "stderrSha256": "c8915683650f2fa4dee526b38a5b0820e4a36b801288e67dfe93e7d4f42ce707"
+    },
+    {
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "pyflakes",
+        "tools/quality/jacoco_readonly_exec_subset.py",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/5634_p01808_complete_names_independent.py",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/5633_p01808_original_complete_binary_names.py"
+      ],
+      "exit": 0,
+      "findings": 0
+    }
+  ],
+  "whole451": false,
+  "independentOriginalStreamOnly": true,
+  "formalDelta": 0
+}

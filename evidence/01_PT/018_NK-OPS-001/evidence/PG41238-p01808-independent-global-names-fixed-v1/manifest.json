@@ -1,0 +1,105 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-20T21:27:42.582562+00:00",
+  "source": "89db66084c419bdc76053e1d044f37e0d5c33c0b",
+  "productionCore": "6c2e8b027818c8dac0ed0f895edb85658e9c4ff1",
+  "exactDecoderSha256": "74698c741cc02423fe35f2ed8ecc234845f71b242dc86c7a1a5b31c7f5de5f59",
+  "priorDecoderSha256": "fd3fa6b3d4c7a40d888125ce4e32b390749f7fedd493234279c63a1c41ce8f8e",
+  "group": {
+    "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1655_P01808独立元exec全binary名着手.json",
+    "sha256": "c0aa8b20398f7110a72717d8eeb857d46e82c55f6e67c3d118d1e2192e346e75"
+  },
+  "declaredVectors": 8,
+  "priorSelftest": 12,
+  "observations": [
+    {
+      "testId": "PT-OPS-EXEC-NAMES-001",
+      "label": "canonical-selected",
+      "expected": "accept",
+      "actual": "accept",
+      "sha256": "b9884d095cc5c705dd9ebf28c063b05d3ee9e9cb8f4ea432a589ebe54f311971",
+      "selected": [
+        "fixture/Target"
+      ],
+      "actualRecords": 2
+    },
+    {
+      "testId": "PT-OPS-EXEC-NAMES-002",
+      "label": "same-name-selected",
+      "expected": "duplicate-name",
+      "actual": "duplicate-name",
+      "sha256": "213c654123696e7083756150fb7280868209bf3b02b8080cccf5ccdc58909d84",
+      "selected": [
+        "fixture/Target"
+      ],
+      "actualRecords": null
+    },
+    {
+      "testId": "PT-OPS-EXEC-NAMES-003",
+      "label": "duplicate-id-different-name",
+      "expected": "duplicate-id",
+      "actual": "duplicate-id",
+      "sha256": "c8679eac81d0d848bdd4aa12413a80ec5410cbb7bb3cd533e1fac90ba0c37553",
+      "selected": [
+        "fixture/Target"
+      ],
+      "actualRecords": null
+    },
+    {
+      "testId": "PT-OPS-EXEC-NAMES-004",
+      "label": "unselected-same-name",
+      "expected": "duplicate-name",
+      "actual": "duplicate-name",
+      "sha256": "7533efd869468f65f92b6be70f0df977529671c2152f32e1156fbeebb6ccd96c",
+      "selected": [
+        "fixture/Target"
+      ],
+      "actualRecords": null
+    },
+    {
+      "testId": "PT-OPS-EXEC-NAMES-005",
+      "label": "unselected-same-name-reverse-order",
+      "expected": "duplicate-name",
+      "actual": "duplicate-name",
+      "sha256": "b478822eb6eee78223ecce3605a87bd8bdde337b36e720d52462e9630298311d",
+      "selected": [
+        "fixture/Target"
+      ],
+      "actualRecords": null
+    },
+    {
+      "testId": "PT-OPS-EXEC-NAMES-006",
+      "label": "empty-selection-still-enforces-unique-names",
+      "expected": "duplicate-name",
+      "actual": "duplicate-name",
+      "sha256": "ddaa53f6ce2dea0ce6950e39b4a5df633a9c171bf2047cdc7aa810194950e17c",
+      "selected": [],
+      "actualRecords": null
+    },
+    {
+      "testId": "PT-OPS-EXEC-NAMES-007",
+      "label": "case-sensitive-different-names",
+      "expected": "accept",
+      "actual": "accept",
+      "sha256": "0d42b812731df0e07cad81d1e7c12ba6481b8f1f380aad999af28bf31e455192",
+      "selected": [
+        "fixture/Target"
+      ],
+      "actualRecords": 3
+    },
+    {
+      "testId": "PT-OPS-EXEC-NAMES-008",
+      "label": "canonical-no-production-classes",
+      "expected": "accept",
+      "actual": "accept",
+      "sha256": "3813a3444867c76e9ecf61be4c78fba5944f3064285a9143d4a9ec443b388fb0",
+      "selected": [],
+      "actualRecords": 0
+    }
+  ],
+  "unexpectedAccepts": 0,
+  "intendedBaseReproduced": false,
+  "actualProductOrExternalOperations": 0,
+  "whole451": false,
+  "formalDelta": 0
+}
