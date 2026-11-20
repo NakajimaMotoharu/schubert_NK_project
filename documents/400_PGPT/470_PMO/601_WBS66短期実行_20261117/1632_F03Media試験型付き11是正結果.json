@@ -1,0 +1,140 @@
+{
+  "eventId": "PGPT-20261008-7147",
+  "groupId": "WBS66-F03-MEDIA-PORT-TEST-OWNERSHIP-FIX",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T20:47:21.587000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 81,
+      "remainingPercent": 19,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66-F03-MEDIA-PORT-TEST-OWNERSHIP-FIX",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "WBS66-F03-MEDIA-PORT-TEST-OWNERSHIP-FIX",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "source": "d7011fec2cc14753a2d528ab1be9f98b26e2d63c",
+    "productionCoreMain": "559f5b5945e82374e0843dcfae11a8d07faef1ea",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG41200-f03-media-port-fixture-typed-green-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.19,
+      "base": 0.55,
+      "high": 1.1
+    },
+    "groupCapPp": 1.5,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1630_F03Media試験指摘保全と是正点.json",
+        "sha256": "001fa9b95a9827bf99701f8d3047a9c26da124f4ec0050ce87565139dd4b1647"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41198-f03-seven-local-tests-typed-v1/manifest.json",
+        "sha256": "e8393e100f86175c29e20d18b05a1d78a866ee39d767d3c71ff34d98857b4f07"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41196-media-committed-write-error-v1/manifest.json",
+        "sha256": "cd87aa3e26e6daa57b7a7c2ca20f6195917776e92f1206b0e6d98839dfd0f086"
+      },
+      {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaRangePortTest.java",
+        "sha256": "0106e297dad587f18b513efc5e38742d71b79ac6b50a1b92ccd0f8cbe7b3628d"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "BUG3468/69とYKT2770修正前公開。MediaRangePortTest一sourceだけ。現Test六の実依存関係合計同じ",
+    "endCondition": "SpotBugs raw11解消・六Test13型、変更10製品試験と1fixture反証、真正終了＋独立後条件・旧五試験再演0",
+    "workScope": "F03 7 new ordinary test evidence retained, authorized memory-only Media port fixture correction. Production source and real environments excluded. Local compiled 64MiB max.",
+    "quotaAfter": {
+      "usedPercent": 81,
+      "remainingPercent": 19,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "ceaf22c4f413dfb7aa236d7a48d349f04f316468c78162960b47263475363de0",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T20:47:21.587000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 81,
+          "remainingPercent": 19,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T20:47:06.398801+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 81,
+      "remainingPercent": 19,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-7146",
+    "attempt": 1,
+    "attemptResult": "SCOPED_FINDINGS_FIXED_AND_CHANGED_PRODUCT_COHORT_REQUALIFIED",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 10,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41200-f03-media-port-fixture-typed-green-v1/manifest.json",
+        "sha256": "0dd72d694ad86e2ef977088fedce26682e099f369970557d58b42f5d038cd281"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41200-f03-media-port-fixture-typed-green-v1/unit.json",
+        "sha256": "d5bcc124ae2a6daa97c6dd0a97e1a807163d39ed44455ef285a8357c57e59b1e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41200-f03-media-port-fixture-typed-green-v1/spotbugs.xml",
+        "sha256": "b0a6aaf111f811fe44df0619d9c27bb86e3f2d780afc354f4c5c77e0f7397aa6"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": "全F03六製品、QA056/Root11、全451。現Test13物理と局所10の限定閉鎖。",
+    "priorFindings": 11,
+    "currentFindings": 0,
+    "mediaPTRequalified": 10,
+    "negativeFixtureChecks": 1,
+    "testTypedPhysical": 13,
+    "typedAuxMainPhysical": 21,
+    "toolFixtureProofCount": 1,
+    "productionMainEdits": 0
+  }
+}
