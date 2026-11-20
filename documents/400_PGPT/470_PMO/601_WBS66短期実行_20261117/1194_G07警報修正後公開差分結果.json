@@ -1,0 +1,125 @@
+{
+  "eventId": "PGPT-20261008-6711",
+  "groupId": "PGPT-WBS66-G07-MONITORING-FIX-PUBLIC-DELTA-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T11:26:55.412000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 68,
+      "remainingPercent": 32,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-G07-MONITORING-FIX-PUBLIC-DELTA-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-G07-MONITORING-FIX-PUBLIC-DELTA-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-G07"
+    ],
+    "managementWorkIds": [
+      "WBS-G07",
+      "WBS-C07"
+    ],
+    "source": "d8bdee4cce058368df3f18bd20310f98f0af2559",
+    "productionCoreMain": "da20ad7753279ae4e8017593866502d3341ec0e5",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40806-g07-c07-public-delta-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.1,
+      "base": 0.24,
+      "high": 0.5
+    },
+    "groupCapPp": 0.9,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1192_C07critical局所結果と継続点.json",
+        "sha256": "0f1122f69b1e977f165ad2c0614381603f33b50be4ce594c126f664be9903d55"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40790-g07-public-git-delta-v1/manifest.json",
+        "sha256": "f3ca2c7d19136a53a1f49dad6e966270d1ea10642c321c810c608c815783108f"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "PG40790以降の公開真差分。変更監視八Main・新Test四ファイルは全てGit上の既公開テキスト。",
+    "endCondition": "再実行済みの区間を除きsource/path/hash・秘密結果・次cursorを保存。",
+    "workScope": "当公開Git text差のみ。未追跡・非公開・binary・全JAR・外部操作なし。",
+    "quotaAfter": {
+      "usedPercent": 68,
+      "remainingPercent": 32,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "597c2ceb0d1c8cb1bada4ed72148af5f7fb8ebd12de7e26c1824f98eec58d067",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T11:26:55.412000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 68,
+          "remainingPercent": 32,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T11:26:02.666823+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 68,
+      "remainingPercent": 32,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6710",
+    "attempt": 1,
+    "attemptResult": "公開増分11commitと63path、秘密検出0を固定。",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40806-g07-c07-public-delta-v1/manifest.json",
+        "sha256": "1028693ffafd9001036a22d954cb077293207237dc29071efd03fbf761487c6d"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "G07未検査範囲および全451",
+      "重点の実runtime・保留可否",
+      "正式C07"
+    ],
+    "publicCommitCount": 11,
+    "publicPaths": 63,
+    "publicCursorEnd": "d8bdee4cce058368df3f18bd20310f98f0af2559",
+    "falseOrUnclassifiedFindings": 0
+  }
+}
