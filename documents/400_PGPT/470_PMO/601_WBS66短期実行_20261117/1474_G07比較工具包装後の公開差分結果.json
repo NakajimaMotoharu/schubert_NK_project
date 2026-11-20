@@ -1,0 +1,132 @@
+{
+  "eventId": "PGPT-20261008-6990",
+  "groupId": "G07-published-after-comparison-artifact",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T17:08:02.162000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 75,
+      "remainingPercent": 25,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "G07-published-after-comparison-artifact",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "G07-published-after-comparison-artifact",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-G07"
+    ],
+    "managementWorkIds": [
+      "WBS-G07/criterion/quality"
+    ],
+    "source": "a2ff7c372f1f53aa750d65a346edce1140c222fb",
+    "productionCoreMain": "2b16a8ed20778fe5896099cb4798cfd1ff96b176",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG41020-g07-reader-and-package-delta-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.1,
+      "base": 0.3,
+      "high": 0.7
+    },
+    "groupCapPp": 1.1,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1472_F02比較工具現214包装継続点.json",
+        "sha256": "c0d9444ff1333caa293fcc801f7719aa64e94d7431e0ae1012ab7c11172814d8"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40980-g07-public-after-production-compiler-control-v1/manifest.json",
+        "sha256": "6ea292f77b56045fce4a897d7acb9c4cdf4ac84944eba0759fd4ea340871ccc6"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5481_g07_current_public_patch_only.py",
+        "sha256": "d1bcb460dd6f4c788e529282a79377a3df07bce2853885eb04b1f3b319f8b477"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "前公開cursor以降のみ。比較toolのpublic Java Main/Testを明示追加、Current baseline/実記録/私有保全物は除外。",
+    "endCondition": "全公開textのgitleaks終了、保護baseline treeの同値、次cursor。binaryや失敗は結果を分離。",
+    "workScope": "既公開Git pathだけ。秘密を表示せず検査、作業tree未追跡は対象外。",
+    "quotaAfter": {
+      "usedPercent": 75,
+      "remainingPercent": 25,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "55ce202333bc1bf1a748cbd965a97add51ce991e7bd90a42cf993eac3d6edd14",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T17:08:02.162000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 75,
+          "remainingPercent": 25,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T17:07:16.985032+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 75,
+      "remainingPercent": 25,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6989",
+    "attempt": 1,
+    "attemptResult": "LOCAL_SCOPED_PASS",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41020-g07-reader-and-package-delta-v1/manifest.json",
+        "sha256": "73d4275fee92cb0610692f22d8a0120f6a35c406c843a6ed851e91692186addd"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5554_g07_published_comparison_increment.py",
+        "sha256": "46cc067a9b530c7ea9e68c9145dbc0e3156d2cdf16b534d7ea6e8726df58e361"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "全repo secret scanと451",
+      "中核の実経路",
+      "保留owner"
+    ],
+    "scannedCommits": 29,
+    "scannedUniquePaths": 140,
+    "nextPublicScanCursor": "a2ff7c372f1f53aa750d65a346edce1140c222fb",
+    "detected": 0
+  }
+}
