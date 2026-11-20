@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.batch.repository;
 
+import dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -77,6 +78,7 @@ public final class InspectionSummaryRepository {
       require(!Thread.currentThread().isInterrupted());
       return result;
     } catch (SQLException failure) {
+      JdbcFailureGraph.preserveFatal(failure);
       // Owned resources have closed; no provider diagnostics/cause/suppressed escape.
       throw new BatchRepositoryException();
     }
