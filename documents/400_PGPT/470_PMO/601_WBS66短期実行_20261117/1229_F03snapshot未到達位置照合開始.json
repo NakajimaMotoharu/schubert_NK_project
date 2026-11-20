@@ -1,0 +1,64 @@
+{
+  "eventId": "PGPT-20261008-6746",
+  "groupId": "WBS66_F03_ALERT_SNAPSHOT_RAW_LOCATION",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T11:58:10.907000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 68,
+      "remainingPercent": 32,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66_F03_ALERT_SNAPSHOT_RAW_LOCATION",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "WBS66_F03_ALERT_SNAPSHOT_RAW_LOCATION",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-1",
+      "WBS-P018-09/2"
+    ],
+    "source": "15d11e3eb26f6bc50bd5e7386c6f1ba30260a70f",
+    "productionCoreMain": "da20ad7753279ae4e8017593866502d3341ec0e5",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40830-f03-alert-snapshot-unfiltered-location-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.35,
+      "high": 0.8
+    },
+    "groupCapPp": 10,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1228_F03現警報寿命と継続点.json",
+        "sha256": "6151dba88c3c7cbc637b0c5d3b725534ff611a52bfb6d50362d877d53b72a092"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40828-f03-alert-lifecycle-single-coverage-v1/manifest.json",
+        "sha256": "8fc16d8edd9e0805d2b7ffd716cb8656fd166bfcb96717fc7b5c6a777e1c8dc7"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/4743_警報待機観測境界と四指標限定仕様.md",
+        "sha256": "e89e64368d6c188c703f7c4d23d88db57e1195d3e8e4f64614627ebed677bf2a"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "PG40828はAlertLifecycleのraw snapshotだけ1行5命令が未到達。現物理CRCとJava monitor bytecodeを独立照合。",
+    "endCondition": "公開診断に含まれる実測未達と生成部分の対応、対象source・次の判定を記録。自動除外/合格化0。",
+    "workScope": "自己所有classのみを再compileしてjavap。元JUnit・実監視・元exec・JAR全体・保護classfileの読取0。"
+  }
+}

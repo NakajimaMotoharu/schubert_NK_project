@@ -1,0 +1,28 @@
+  public java.util.Optional<dev.codex.schubert.nk.batch.monitoring.AlertLifecycle$Event> snapshot();
+    Code:
+         0: aload_0
+         1: getfield      #7                  // Field lock:Ljava/lang/Object;
+         4: dup
+         5: astore_1
+         6: monitorenter
+         7: aload_0
+         8: getfield      #19                 // Field active:Ljava/util/Optional;
+        11: aload_1
+        12: monitorexit
+        13: areturn
+        14: astore_2
+        15: aload_1
+        16: monitorexit
+        17: aload_2
+        18: athrow
+      Exception table:
+         from    to  target type
+             7    13    14   any
+            14    17    14   any
+      LineNumberTable:
+        line 200: 0
+        line 201: 7
+        line 202: 14
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      19     0  this   Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle;
