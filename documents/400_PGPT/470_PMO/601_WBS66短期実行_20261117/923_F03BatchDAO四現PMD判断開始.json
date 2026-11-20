@@ -1,0 +1,79 @@
+{
+  "eventId": "PGPT-20261008-6443",
+  "groupId": "PGPT-WBS66-F03-FOUR-DAO-RAW-DISPOSITIONS-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T02:10:04.560000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 59,
+      "remainingPercent": 41,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-FOUR-DAO-RAW-DISPOSITIONS-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F03-FOUR-DAO-RAW-DISPOSITIONS-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "source": "f793bef3565fc63644338c9eb4f67591601651e6",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40532-f03-four-batch-dao-required-boundaries-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.2,
+      "base": 0.65,
+      "high": 1.5
+    },
+    "groupCapPp": 1.8,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/922_F03Batch現PMD未判定177と継続点.json",
+        "sha256": "f9450328b8bfa5e3f94d3f22cc07bac70f767216ff7167404335e3ded8bef278"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40528-f03-batch-raw-exact-historical-lookups-v1/manifest.json",
+        "sha256": "f482a7aeca548564c9fe1b5166d61647f4e688192e47e2a766deb733661bcd90"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40524-f03-batch-closed-current-pmd-v1/manifest.json",
+        "sha256": "46d81a6a33cfbaea0d0100fe423f24614f1b94e76e310879165664a3033e5ffe"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38688-f02-run-reference-jdbc-owner-independent-v1/manifest.json",
+        "sha256": "78f34f3d56273bc732a7fe579f017bb6dbaac39f7d728bf19bd0a0077c7aac1e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39802-cleanup-fixed-statement-raw-v1/manifest.json",
+        "sha256": "82634ac778832da63f5f19e3283835057499816054656900356a09416aec6575"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38756-f02-backup-pair-jdbc-owner-independent-v1/manifest.json",
+        "sha256": "6eef723f66a03e442111fdcb31ef91c9ec695b8aaa4ff426a1c5e7456f684932"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38948-p00405-step-cleanup-raw-independent-v1/manifest.json",
+        "sha256": "0b7ceca574e6333bcda34317a6714053bbfa1cedd5c7f0a1bae79e438e90db63"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "現e7のPG40524残177のDAO4で44出現。SS332の借用/所有、JDBC fatalとclose順位、同sourceの元通常局所証拠を開始依存とする。",
+    "endCondition": "元44を行と所有判断ごとに独立照合し、F03/2-2とP004-03・05に一回分の共通static根拠を返す。実DB又は451は未受入維持。",
+    "workScope": "Classfileの新規生成・実DB・nativeなし、許可済み静的ソース及び過去の独立PTのみ。"
+  }
+}

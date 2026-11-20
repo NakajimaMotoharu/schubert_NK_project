@@ -1,0 +1,750 @@
+[
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
+    "line": 133,
+    "column": 13,
+    "rule": "CloseResource",
+    "method": "inspect",
+    "message": "Ensure that resources like this PreparedStatement object are closed after use",
+    "occurrence": 232,
+    "sourceSha256": "39848dad36f65f8de855c60b52ece8ca9d1e89088a91071870070c30430faf0f",
+    "decision": "NOT_APPLICABLE_EXPLICIT_ACQUIRED_RESOURCE_FINALLY",
+    "reason": "The DAO closes its acquired nonnull Statement or ResultSet exactly once in a typed helper, including failure or early exit. The borrowed Connection stays with its caller.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38756-f02-backup-pair-jdbc-owner-independent-v1/manifest.json",
+      "sha256": "6eef723f66a03e442111fdcb31ef91c9ec695b8aaa4ff426a1c5e7456f684932"
+    },
+    "proofTestCount": 10
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
+    "line": 140,
+    "column": 15,
+    "rule": "CloseResource",
+    "method": "inspect",
+    "message": "Ensure that resources like this ResultSet object are closed after use",
+    "occurrence": 233,
+    "sourceSha256": "39848dad36f65f8de855c60b52ece8ca9d1e89088a91071870070c30430faf0f",
+    "decision": "NOT_APPLICABLE_EXPLICIT_ACQUIRED_RESOURCE_FINALLY",
+    "reason": "The DAO closes its acquired nonnull Statement or ResultSet exactly once in a typed helper, including failure or early exit. The borrowed Connection stays with its caller.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38756-f02-backup-pair-jdbc-owner-independent-v1/manifest.json",
+      "sha256": "6eef723f66a03e442111fdcb31ef91c9ec695b8aaa4ff426a1c5e7456f684932"
+    },
+    "proofTestCount": 10
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
+    "line": 153,
+    "column": 33,
+    "rule": "AvoidCatchingGenericException",
+    "method": "inspect",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 234,
+    "sourceSha256": "39848dad36f65f8de855c60b52ece8ca9d1e89088a91071870070c30430faf0f",
+    "decision": "NOT_APPLICABLE_REQUIRED_PRIMARY_IDENTITY",
+    "reason": "The direct catch only saves and rethrows the original primary so its owned JDBC resource finally can enforce SS332 close ordering.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38756-f02-backup-pair-jdbc-owner-independent-v1/manifest.json",
+      "sha256": "6eef723f66a03e442111fdcb31ef91c9ec695b8aaa4ff426a1c5e7456f684932"
+    },
+    "proofTestCount": 10
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
+    "line": 153,
+    "column": 52,
+    "rule": "AvoidCatchingGenericException",
+    "method": "inspect",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 235,
+    "sourceSha256": "39848dad36f65f8de855c60b52ece8ca9d1e89088a91071870070c30430faf0f",
+    "decision": "NOT_APPLICABLE_REQUIRED_PRIMARY_IDENTITY",
+    "reason": "The direct catch only saves and rethrows the original primary so its owned JDBC resource finally can enforce SS332 close ordering.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38756-f02-backup-pair-jdbc-owner-independent-v1/manifest.json",
+      "sha256": "6eef723f66a03e442111fdcb31ef91c9ec695b8aaa4ff426a1c5e7456f684932"
+    },
+    "proofTestCount": 10
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
+    "line": 159,
+    "column": 31,
+    "rule": "AvoidCatchingGenericException",
+    "method": "inspect",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 236,
+    "sourceSha256": "39848dad36f65f8de855c60b52ece8ca9d1e89088a91071870070c30430faf0f",
+    "decision": "NOT_APPLICABLE_REQUIRED_PRIMARY_IDENTITY",
+    "reason": "The direct catch only saves and rethrows the original primary so its owned JDBC resource finally can enforce SS332 close ordering.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38756-f02-backup-pair-jdbc-owner-independent-v1/manifest.json",
+      "sha256": "6eef723f66a03e442111fdcb31ef91c9ec695b8aaa4ff426a1c5e7456f684932"
+    },
+    "proofTestCount": 10
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
+    "line": 159,
+    "column": 50,
+    "rule": "AvoidCatchingGenericException",
+    "method": "inspect",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 237,
+    "sourceSha256": "39848dad36f65f8de855c60b52ece8ca9d1e89088a91071870070c30430faf0f",
+    "decision": "NOT_APPLICABLE_REQUIRED_PRIMARY_IDENTITY",
+    "reason": "The direct catch only saves and rethrows the original primary so its owned JDBC resource finally can enforce SS332 close ordering.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38756-f02-backup-pair-jdbc-owner-independent-v1/manifest.json",
+      "sha256": "6eef723f66a03e442111fdcb31ef91c9ec695b8aaa4ff426a1c5e7456f684932"
+    },
+    "proofTestCount": 10
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
+    "line": 189,
+    "column": 29,
+    "rule": "AvoidCatchingGenericException",
+    "method": "closeRows",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 238,
+    "sourceSha256": "39848dad36f65f8de855c60b52ece8ca9d1e89088a91071870070c30430faf0f",
+    "decision": "NOT_APPLICABLE_REQUIRED_CLOSE_FAILURE_PRIORITY",
+    "reason": "The shared close-priority contract compares acquired-resource cleanup failure with the existing primary, preserving original strict ordering and unchecked identity.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38756-f02-backup-pair-jdbc-owner-independent-v1/manifest.json",
+      "sha256": "6eef723f66a03e442111fdcb31ef91c9ec695b8aaa4ff426a1c5e7456f684932"
+    },
+    "proofTestCount": 10
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
+    "line": 189,
+    "column": 48,
+    "rule": "AvoidCatchingGenericException",
+    "method": "closeRows",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 239,
+    "sourceSha256": "39848dad36f65f8de855c60b52ece8ca9d1e89088a91071870070c30430faf0f",
+    "decision": "NOT_APPLICABLE_REQUIRED_CLOSE_FAILURE_PRIORITY",
+    "reason": "The shared close-priority contract compares acquired-resource cleanup failure with the existing primary, preserving original strict ordering and unchecked identity.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38756-f02-backup-pair-jdbc-owner-independent-v1/manifest.json",
+      "sha256": "6eef723f66a03e442111fdcb31ef91c9ec695b8aaa4ff426a1c5e7456f684932"
+    },
+    "proofTestCount": 10
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
+    "line": 200,
+    "column": 29,
+    "rule": "AvoidCatchingGenericException",
+    "method": "closeStatement",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 240,
+    "sourceSha256": "39848dad36f65f8de855c60b52ece8ca9d1e89088a91071870070c30430faf0f",
+    "decision": "NOT_APPLICABLE_REQUIRED_CLOSE_FAILURE_PRIORITY",
+    "reason": "The shared close-priority contract compares acquired-resource cleanup failure with the existing primary, preserving original strict ordering and unchecked identity.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38756-f02-backup-pair-jdbc-owner-independent-v1/manifest.json",
+      "sha256": "6eef723f66a03e442111fdcb31ef91c9ec695b8aaa4ff426a1c5e7456f684932"
+    },
+    "proofTestCount": 10
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
+    "line": 200,
+    "column": 48,
+    "rule": "AvoidCatchingGenericException",
+    "method": "closeStatement",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 241,
+    "sourceSha256": "39848dad36f65f8de855c60b52ece8ca9d1e89088a91071870070c30430faf0f",
+    "decision": "NOT_APPLICABLE_REQUIRED_CLOSE_FAILURE_PRIORITY",
+    "reason": "The shared close-priority contract compares acquired-resource cleanup failure with the existing primary, preserving original strict ordering and unchecked identity.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38756-f02-backup-pair-jdbc-owner-independent-v1/manifest.json",
+      "sha256": "6eef723f66a03e442111fdcb31ef91c9ec695b8aaa4ff426a1c5e7456f684932"
+    },
+    "proofTestCount": 10
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+    "line": 98,
+    "column": 33,
+    "rule": "AvoidCatchingGenericException",
+    "method": "execute",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 290,
+    "sourceSha256": "021f37f96635be99f99306c2fec1dd5ae2d68a6d43f51210de9e079ac6306d50",
+    "decision": "NOT_APPLICABLE_REQUIRED_PRIMARY_IDENTITY",
+    "reason": "The direct catch only saves and rethrows the original primary so its owned JDBC resource finally can enforce SS332 close ordering.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39802-cleanup-fixed-statement-raw-v1/manifest.json",
+      "sha256": "82634ac778832da63f5f19e3283835057499816054656900356a09416aec6575"
+    },
+    "proofTestCount": 18
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+    "line": 98,
+    "column": 52,
+    "rule": "AvoidCatchingGenericException",
+    "method": "execute",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 291,
+    "sourceSha256": "021f37f96635be99f99306c2fec1dd5ae2d68a6d43f51210de9e079ac6306d50",
+    "decision": "NOT_APPLICABLE_REQUIRED_PRIMARY_IDENTITY",
+    "reason": "The direct catch only saves and rethrows the original primary so its owned JDBC resource finally can enforce SS332 close ordering.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39802-cleanup-fixed-statement-raw-v1/manifest.json",
+      "sha256": "82634ac778832da63f5f19e3283835057499816054656900356a09416aec6575"
+    },
+    "proofTestCount": 18
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+    "line": 104,
+    "column": 31,
+    "rule": "AvoidCatchingGenericException",
+    "method": "execute",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 292,
+    "sourceSha256": "021f37f96635be99f99306c2fec1dd5ae2d68a6d43f51210de9e079ac6306d50",
+    "decision": "NOT_APPLICABLE_REQUIRED_PRIMARY_IDENTITY",
+    "reason": "The direct catch only saves and rethrows the original primary so its owned JDBC resource finally can enforce SS332 close ordering.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39802-cleanup-fixed-statement-raw-v1/manifest.json",
+      "sha256": "82634ac778832da63f5f19e3283835057499816054656900356a09416aec6575"
+    },
+    "proofTestCount": 18
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+    "line": 104,
+    "column": 50,
+    "rule": "AvoidCatchingGenericException",
+    "method": "execute",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 293,
+    "sourceSha256": "021f37f96635be99f99306c2fec1dd5ae2d68a6d43f51210de9e079ac6306d50",
+    "decision": "NOT_APPLICABLE_REQUIRED_PRIMARY_IDENTITY",
+    "reason": "The direct catch only saves and rethrows the original primary so its owned JDBC resource finally can enforce SS332 close ordering.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39802-cleanup-fixed-statement-raw-v1/manifest.json",
+      "sha256": "82634ac778832da63f5f19e3283835057499816054656900356a09416aec6575"
+    },
+    "proofTestCount": 18
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+    "line": 137,
+    "column": 33,
+    "rule": "AvoidCatchingGenericException",
+    "method": "readLogProgress",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 294,
+    "sourceSha256": "021f37f96635be99f99306c2fec1dd5ae2d68a6d43f51210de9e079ac6306d50",
+    "decision": "NOT_APPLICABLE_REQUIRED_PRIMARY_IDENTITY",
+    "reason": "The direct catch only saves and rethrows the original primary so its owned JDBC resource finally can enforce SS332 close ordering.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39802-cleanup-fixed-statement-raw-v1/manifest.json",
+      "sha256": "82634ac778832da63f5f19e3283835057499816054656900356a09416aec6575"
+    },
+    "proofTestCount": 18
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+    "line": 137,
+    "column": 52,
+    "rule": "AvoidCatchingGenericException",
+    "method": "readLogProgress",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 295,
+    "sourceSha256": "021f37f96635be99f99306c2fec1dd5ae2d68a6d43f51210de9e079ac6306d50",
+    "decision": "NOT_APPLICABLE_REQUIRED_PRIMARY_IDENTITY",
+    "reason": "The direct catch only saves and rethrows the original primary so its owned JDBC resource finally can enforce SS332 close ordering.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39802-cleanup-fixed-statement-raw-v1/manifest.json",
+      "sha256": "82634ac778832da63f5f19e3283835057499816054656900356a09416aec6575"
+    },
+    "proofTestCount": 18
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+    "line": 143,
+    "column": 31,
+    "rule": "AvoidCatchingGenericException",
+    "method": "readLogProgress",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 296,
+    "sourceSha256": "021f37f96635be99f99306c2fec1dd5ae2d68a6d43f51210de9e079ac6306d50",
+    "decision": "NOT_APPLICABLE_REQUIRED_PRIMARY_IDENTITY",
+    "reason": "The direct catch only saves and rethrows the original primary so its owned JDBC resource finally can enforce SS332 close ordering.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39802-cleanup-fixed-statement-raw-v1/manifest.json",
+      "sha256": "82634ac778832da63f5f19e3283835057499816054656900356a09416aec6575"
+    },
+    "proofTestCount": 18
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+    "line": 143,
+    "column": 50,
+    "rule": "AvoidCatchingGenericException",
+    "method": "readLogProgress",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 297,
+    "sourceSha256": "021f37f96635be99f99306c2fec1dd5ae2d68a6d43f51210de9e079ac6306d50",
+    "decision": "NOT_APPLICABLE_REQUIRED_PRIMARY_IDENTITY",
+    "reason": "The direct catch only saves and rethrows the original primary so its owned JDBC resource finally can enforce SS332 close ordering.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39802-cleanup-fixed-statement-raw-v1/manifest.json",
+      "sha256": "82634ac778832da63f5f19e3283835057499816054656900356a09416aec6575"
+    },
+    "proofTestCount": 18
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+    "line": 164,
+    "column": 29,
+    "rule": "AvoidCatchingGenericException",
+    "method": "closeRow",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 298,
+    "sourceSha256": "021f37f96635be99f99306c2fec1dd5ae2d68a6d43f51210de9e079ac6306d50",
+    "decision": "NOT_APPLICABLE_REQUIRED_CLOSE_FAILURE_PRIORITY",
+    "reason": "The shared close-priority contract compares acquired-resource cleanup failure with the existing primary, preserving original strict ordering and unchecked identity.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39802-cleanup-fixed-statement-raw-v1/manifest.json",
+      "sha256": "82634ac778832da63f5f19e3283835057499816054656900356a09416aec6575"
+    },
+    "proofTestCount": 18
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+    "line": 164,
+    "column": 48,
+    "rule": "AvoidCatchingGenericException",
+    "method": "closeRow",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 299,
+    "sourceSha256": "021f37f96635be99f99306c2fec1dd5ae2d68a6d43f51210de9e079ac6306d50",
+    "decision": "NOT_APPLICABLE_REQUIRED_CLOSE_FAILURE_PRIORITY",
+    "reason": "The shared close-priority contract compares acquired-resource cleanup failure with the existing primary, preserving original strict ordering and unchecked identity.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39802-cleanup-fixed-statement-raw-v1/manifest.json",
+      "sha256": "82634ac778832da63f5f19e3283835057499816054656900356a09416aec6575"
+    },
+    "proofTestCount": 18
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+    "line": 173,
+    "column": 29,
+    "rule": "AvoidCatchingGenericException",
+    "method": "closeStatement",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 300,
+    "sourceSha256": "021f37f96635be99f99306c2fec1dd5ae2d68a6d43f51210de9e079ac6306d50",
+    "decision": "NOT_APPLICABLE_REQUIRED_CLOSE_FAILURE_PRIORITY",
+    "reason": "The shared close-priority contract compares acquired-resource cleanup failure with the existing primary, preserving original strict ordering and unchecked identity.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39802-cleanup-fixed-statement-raw-v1/manifest.json",
+      "sha256": "82634ac778832da63f5f19e3283835057499816054656900356a09416aec6575"
+    },
+    "proofTestCount": 18
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+    "line": 173,
+    "column": 48,
+    "rule": "AvoidCatchingGenericException",
+    "method": "closeStatement",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 301,
+    "sourceSha256": "021f37f96635be99f99306c2fec1dd5ae2d68a6d43f51210de9e079ac6306d50",
+    "decision": "NOT_APPLICABLE_REQUIRED_CLOSE_FAILURE_PRIORITY",
+    "reason": "The shared close-priority contract compares acquired-resource cleanup failure with the existing primary, preserving original strict ordering and unchecked identity.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39802-cleanup-fixed-statement-raw-v1/manifest.json",
+      "sha256": "82634ac778832da63f5f19e3283835057499816054656900356a09416aec6575"
+    },
+    "proofTestCount": 18
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java",
+    "line": 42,
+    "column": 13,
+    "rule": "CloseResource",
+    "method": "execute",
+    "message": "Ensure that resources like this PreparedStatement object are closed after use",
+    "occurrence": 302,
+    "sourceSha256": "674adb1842cb28a6ac911b249d0d78e74bc500fb3e229efd42c1ddcb8d2da27c",
+    "decision": "NOT_APPLICABLE_EXPLICIT_ACQUIRED_RESOURCE_FINALLY",
+    "reason": "The DAO closes its acquired nonnull Statement or ResultSet exactly once in a typed helper, including failure or early exit. The borrowed Connection stays with its caller.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38948-p00405-step-cleanup-raw-independent-v1/manifest.json",
+      "sha256": "0b7ceca574e6333bcda34317a6714053bbfa1cedd5c7f0a1bae79e438e90db63"
+    },
+    "proofTestCount": 11
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java",
+    "line": 54,
+    "column": 15,
+    "rule": "CloseResource",
+    "method": "execute",
+    "message": "Ensure that resources like this ResultSet object are closed after use",
+    "occurrence": 303,
+    "sourceSha256": "674adb1842cb28a6ac911b249d0d78e74bc500fb3e229efd42c1ddcb8d2da27c",
+    "decision": "NOT_APPLICABLE_EXPLICIT_ACQUIRED_RESOURCE_FINALLY",
+    "reason": "The DAO closes its acquired nonnull Statement or ResultSet exactly once in a typed helper, including failure or early exit. The borrowed Connection stays with its caller.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38948-p00405-step-cleanup-raw-independent-v1/manifest.json",
+      "sha256": "0b7ceca574e6333bcda34317a6714053bbfa1cedd5c7f0a1bae79e438e90db63"
+    },
+    "proofTestCount": 11
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java",
+    "line": 76,
+    "column": 33,
+    "rule": "AvoidCatchingGenericException",
+    "method": "execute",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 304,
+    "sourceSha256": "674adb1842cb28a6ac911b249d0d78e74bc500fb3e229efd42c1ddcb8d2da27c",
+    "decision": "NOT_APPLICABLE_REQUIRED_PRIMARY_IDENTITY",
+    "reason": "The direct catch only saves and rethrows the original primary so its owned JDBC resource finally can enforce SS332 close ordering.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38948-p00405-step-cleanup-raw-independent-v1/manifest.json",
+      "sha256": "0b7ceca574e6333bcda34317a6714053bbfa1cedd5c7f0a1bae79e438e90db63"
+    },
+    "proofTestCount": 11
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java",
+    "line": 76,
+    "column": 52,
+    "rule": "AvoidCatchingGenericException",
+    "method": "execute",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 305,
+    "sourceSha256": "674adb1842cb28a6ac911b249d0d78e74bc500fb3e229efd42c1ddcb8d2da27c",
+    "decision": "NOT_APPLICABLE_REQUIRED_PRIMARY_IDENTITY",
+    "reason": "The direct catch only saves and rethrows the original primary so its owned JDBC resource finally can enforce SS332 close ordering.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38948-p00405-step-cleanup-raw-independent-v1/manifest.json",
+      "sha256": "0b7ceca574e6333bcda34317a6714053bbfa1cedd5c7f0a1bae79e438e90db63"
+    },
+    "proofTestCount": 11
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java",
+    "line": 82,
+    "column": 31,
+    "rule": "AvoidCatchingGenericException",
+    "method": "execute",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 306,
+    "sourceSha256": "674adb1842cb28a6ac911b249d0d78e74bc500fb3e229efd42c1ddcb8d2da27c",
+    "decision": "NOT_APPLICABLE_REQUIRED_PRIMARY_IDENTITY",
+    "reason": "The direct catch only saves and rethrows the original primary so its owned JDBC resource finally can enforce SS332 close ordering.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38948-p00405-step-cleanup-raw-independent-v1/manifest.json",
+      "sha256": "0b7ceca574e6333bcda34317a6714053bbfa1cedd5c7f0a1bae79e438e90db63"
+    },
+    "proofTestCount": 11
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java",
+    "line": 82,
+    "column": 50,
+    "rule": "AvoidCatchingGenericException",
+    "method": "execute",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 307,
+    "sourceSha256": "674adb1842cb28a6ac911b249d0d78e74bc500fb3e229efd42c1ddcb8d2da27c",
+    "decision": "NOT_APPLICABLE_REQUIRED_PRIMARY_IDENTITY",
+    "reason": "The direct catch only saves and rethrows the original primary so its owned JDBC resource finally can enforce SS332 close ordering.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38948-p00405-step-cleanup-raw-independent-v1/manifest.json",
+      "sha256": "0b7ceca574e6333bcda34317a6714053bbfa1cedd5c7f0a1bae79e438e90db63"
+    },
+    "proofTestCount": 11
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java",
+    "line": 101,
+    "column": 29,
+    "rule": "AvoidCatchingGenericException",
+    "method": "closeRows",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 308,
+    "sourceSha256": "674adb1842cb28a6ac911b249d0d78e74bc500fb3e229efd42c1ddcb8d2da27c",
+    "decision": "NOT_APPLICABLE_REQUIRED_CLOSE_FAILURE_PRIORITY",
+    "reason": "The shared close-priority contract compares acquired-resource cleanup failure with the existing primary, preserving original strict ordering and unchecked identity.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38948-p00405-step-cleanup-raw-independent-v1/manifest.json",
+      "sha256": "0b7ceca574e6333bcda34317a6714053bbfa1cedd5c7f0a1bae79e438e90db63"
+    },
+    "proofTestCount": 11
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java",
+    "line": 101,
+    "column": 48,
+    "rule": "AvoidCatchingGenericException",
+    "method": "closeRows",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 309,
+    "sourceSha256": "674adb1842cb28a6ac911b249d0d78e74bc500fb3e229efd42c1ddcb8d2da27c",
+    "decision": "NOT_APPLICABLE_REQUIRED_CLOSE_FAILURE_PRIORITY",
+    "reason": "The shared close-priority contract compares acquired-resource cleanup failure with the existing primary, preserving original strict ordering and unchecked identity.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38948-p00405-step-cleanup-raw-independent-v1/manifest.json",
+      "sha256": "0b7ceca574e6333bcda34317a6714053bbfa1cedd5c7f0a1bae79e438e90db63"
+    },
+    "proofTestCount": 11
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java",
+    "line": 112,
+    "column": 29,
+    "rule": "AvoidCatchingGenericException",
+    "method": "closeStatement",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 310,
+    "sourceSha256": "674adb1842cb28a6ac911b249d0d78e74bc500fb3e229efd42c1ddcb8d2da27c",
+    "decision": "NOT_APPLICABLE_REQUIRED_CLOSE_FAILURE_PRIORITY",
+    "reason": "The shared close-priority contract compares acquired-resource cleanup failure with the existing primary, preserving original strict ordering and unchecked identity.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38948-p00405-step-cleanup-raw-independent-v1/manifest.json",
+      "sha256": "0b7ceca574e6333bcda34317a6714053bbfa1cedd5c7f0a1bae79e438e90db63"
+    },
+    "proofTestCount": 11
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java",
+    "line": 112,
+    "column": 48,
+    "rule": "AvoidCatchingGenericException",
+    "method": "closeStatement",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 311,
+    "sourceSha256": "674adb1842cb28a6ac911b249d0d78e74bc500fb3e229efd42c1ddcb8d2da27c",
+    "decision": "NOT_APPLICABLE_REQUIRED_CLOSE_FAILURE_PRIORITY",
+    "reason": "The shared close-priority contract compares acquired-resource cleanup failure with the existing primary, preserving original strict ordering and unchecked identity.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38948-p00405-step-cleanup-raw-independent-v1/manifest.json",
+      "sha256": "0b7ceca574e6333bcda34317a6714053bbfa1cedd5c7f0a1bae79e438e90db63"
+    },
+    "proofTestCount": 11
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+    "line": 31,
+    "column": 16,
+    "rule": "DoNotUseThreads",
+    "method": "read",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 386,
+    "sourceSha256": "389d41ce3928ac25a5001a08fc5a4562ba44df84144721b2f3a8f36f16747edb",
+    "decision": "NOT_APPLICABLE_OBSERVES_EXISTING_INTERRUPT_STATUS",
+    "reason": "The existing caller thread only observes its interrupt bit before borrowing the JDBC work or before returning after resource close. No thread is created.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38688-f02-run-reference-jdbc-owner-independent-v1/manifest.json",
+      "sha256": "78f34f3d56273bc732a7fe579f017bb6dbaac39f7d728bf19bd0a0077c7aac1e"
+    },
+    "proofTestCount": 8
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+    "line": 42,
+    "column": 13,
+    "rule": "CloseResource",
+    "method": "read",
+    "message": "Ensure that resources like this PreparedStatement object are closed after use",
+    "occurrence": 387,
+    "sourceSha256": "389d41ce3928ac25a5001a08fc5a4562ba44df84144721b2f3a8f36f16747edb",
+    "decision": "NOT_APPLICABLE_EXPLICIT_ACQUIRED_RESOURCE_FINALLY",
+    "reason": "The DAO closes its acquired nonnull Statement or ResultSet exactly once in a typed helper, including failure or early exit. The borrowed Connection stays with its caller.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38688-f02-run-reference-jdbc-owner-independent-v1/manifest.json",
+      "sha256": "78f34f3d56273bc732a7fe579f017bb6dbaac39f7d728bf19bd0a0077c7aac1e"
+    },
+    "proofTestCount": 8
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+    "line": 49,
+    "column": 15,
+    "rule": "CloseResource",
+    "method": "read",
+    "message": "Ensure that resources like this ResultSet object are closed after use",
+    "occurrence": 388,
+    "sourceSha256": "389d41ce3928ac25a5001a08fc5a4562ba44df84144721b2f3a8f36f16747edb",
+    "decision": "NOT_APPLICABLE_EXPLICIT_ACQUIRED_RESOURCE_FINALLY",
+    "reason": "The DAO closes its acquired nonnull Statement or ResultSet exactly once in a typed helper, including failure or early exit. The borrowed Connection stays with its caller.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38688-f02-run-reference-jdbc-owner-independent-v1/manifest.json",
+      "sha256": "78f34f3d56273bc732a7fe579f017bb6dbaac39f7d728bf19bd0a0077c7aac1e"
+    },
+    "proofTestCount": 8
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+    "line": 61,
+    "column": 33,
+    "rule": "AvoidCatchingGenericException",
+    "method": "read",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 389,
+    "sourceSha256": "389d41ce3928ac25a5001a08fc5a4562ba44df84144721b2f3a8f36f16747edb",
+    "decision": "NOT_APPLICABLE_REQUIRED_PRIMARY_IDENTITY",
+    "reason": "The direct catch only saves and rethrows the original primary so its owned JDBC resource finally can enforce SS332 close ordering.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38688-f02-run-reference-jdbc-owner-independent-v1/manifest.json",
+      "sha256": "78f34f3d56273bc732a7fe579f017bb6dbaac39f7d728bf19bd0a0077c7aac1e"
+    },
+    "proofTestCount": 8
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+    "line": 61,
+    "column": 52,
+    "rule": "AvoidCatchingGenericException",
+    "method": "read",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 390,
+    "sourceSha256": "389d41ce3928ac25a5001a08fc5a4562ba44df84144721b2f3a8f36f16747edb",
+    "decision": "NOT_APPLICABLE_REQUIRED_PRIMARY_IDENTITY",
+    "reason": "The direct catch only saves and rethrows the original primary so its owned JDBC resource finally can enforce SS332 close ordering.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38688-f02-run-reference-jdbc-owner-independent-v1/manifest.json",
+      "sha256": "78f34f3d56273bc732a7fe579f017bb6dbaac39f7d728bf19bd0a0077c7aac1e"
+    },
+    "proofTestCount": 8
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+    "line": 67,
+    "column": 31,
+    "rule": "AvoidCatchingGenericException",
+    "method": "read",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 391,
+    "sourceSha256": "389d41ce3928ac25a5001a08fc5a4562ba44df84144721b2f3a8f36f16747edb",
+    "decision": "NOT_APPLICABLE_REQUIRED_PRIMARY_IDENTITY",
+    "reason": "The direct catch only saves and rethrows the original primary so its owned JDBC resource finally can enforce SS332 close ordering.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38688-f02-run-reference-jdbc-owner-independent-v1/manifest.json",
+      "sha256": "78f34f3d56273bc732a7fe579f017bb6dbaac39f7d728bf19bd0a0077c7aac1e"
+    },
+    "proofTestCount": 8
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+    "line": 67,
+    "column": 50,
+    "rule": "AvoidCatchingGenericException",
+    "method": "read",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 392,
+    "sourceSha256": "389d41ce3928ac25a5001a08fc5a4562ba44df84144721b2f3a8f36f16747edb",
+    "decision": "NOT_APPLICABLE_REQUIRED_PRIMARY_IDENTITY",
+    "reason": "The direct catch only saves and rethrows the original primary so its owned JDBC resource finally can enforce SS332 close ordering.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38688-f02-run-reference-jdbc-owner-independent-v1/manifest.json",
+      "sha256": "78f34f3d56273bc732a7fe579f017bb6dbaac39f7d728bf19bd0a0077c7aac1e"
+    },
+    "proofTestCount": 8
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+    "line": 73,
+    "column": 16,
+    "rule": "DoNotUseThreads",
+    "method": "read",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 393,
+    "sourceSha256": "389d41ce3928ac25a5001a08fc5a4562ba44df84144721b2f3a8f36f16747edb",
+    "decision": "NOT_APPLICABLE_OBSERVES_EXISTING_INTERRUPT_STATUS",
+    "reason": "The existing caller thread only observes its interrupt bit before borrowing the JDBC work or before returning after resource close. No thread is created.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38688-f02-run-reference-jdbc-owner-independent-v1/manifest.json",
+      "sha256": "78f34f3d56273bc732a7fe579f017bb6dbaac39f7d728bf19bd0a0077c7aac1e"
+    },
+    "proofTestCount": 8
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+    "line": 88,
+    "column": 31,
+    "rule": "AvoidCatchingGenericException",
+    "method": "closeRow",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 394,
+    "sourceSha256": "389d41ce3928ac25a5001a08fc5a4562ba44df84144721b2f3a8f36f16747edb",
+    "decision": "NOT_APPLICABLE_REQUIRED_CLOSE_FAILURE_PRIORITY",
+    "reason": "The shared close-priority contract compares acquired-resource cleanup failure with the existing primary, preserving original strict ordering and unchecked identity.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38688-f02-run-reference-jdbc-owner-independent-v1/manifest.json",
+      "sha256": "78f34f3d56273bc732a7fe579f017bb6dbaac39f7d728bf19bd0a0077c7aac1e"
+    },
+    "proofTestCount": 8
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+    "line": 88,
+    "column": 50,
+    "rule": "AvoidCatchingGenericException",
+    "method": "closeRow",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 395,
+    "sourceSha256": "389d41ce3928ac25a5001a08fc5a4562ba44df84144721b2f3a8f36f16747edb",
+    "decision": "NOT_APPLICABLE_REQUIRED_CLOSE_FAILURE_PRIORITY",
+    "reason": "The shared close-priority contract compares acquired-resource cleanup failure with the existing primary, preserving original strict ordering and unchecked identity.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38688-f02-run-reference-jdbc-owner-independent-v1/manifest.json",
+      "sha256": "78f34f3d56273bc732a7fe579f017bb6dbaac39f7d728bf19bd0a0077c7aac1e"
+    },
+    "proofTestCount": 8
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+    "line": 98,
+    "column": 31,
+    "rule": "AvoidCatchingGenericException",
+    "method": "closeStatement",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 396,
+    "sourceSha256": "389d41ce3928ac25a5001a08fc5a4562ba44df84144721b2f3a8f36f16747edb",
+    "decision": "NOT_APPLICABLE_REQUIRED_CLOSE_FAILURE_PRIORITY",
+    "reason": "The shared close-priority contract compares acquired-resource cleanup failure with the existing primary, preserving original strict ordering and unchecked identity.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38688-f02-run-reference-jdbc-owner-independent-v1/manifest.json",
+      "sha256": "78f34f3d56273bc732a7fe579f017bb6dbaac39f7d728bf19bd0a0077c7aac1e"
+    },
+    "proofTestCount": 8
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+    "line": 98,
+    "column": 50,
+    "rule": "AvoidCatchingGenericException",
+    "method": "closeStatement",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 397,
+    "sourceSha256": "389d41ce3928ac25a5001a08fc5a4562ba44df84144721b2f3a8f36f16747edb",
+    "decision": "NOT_APPLICABLE_REQUIRED_CLOSE_FAILURE_PRIORITY",
+    "reason": "The shared close-priority contract compares acquired-resource cleanup failure with the existing primary, preserving original strict ordering and unchecked identity.",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38688-f02-run-reference-jdbc-owner-independent-v1/manifest.json",
+      "sha256": "78f34f3d56273bc732a7fe579f017bb6dbaac39f7d728bf19bd0a0077c7aac1e"
+    },
+    "proofTestCount": 8
+  }
+]
