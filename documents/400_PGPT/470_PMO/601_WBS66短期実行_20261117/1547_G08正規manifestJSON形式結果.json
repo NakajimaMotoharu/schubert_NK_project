@@ -1,0 +1,140 @@
+{
+  "eventId": "PGPT-20261008-7062",
+  "groupId": "PGPT-WBS66-G08-FORMAL-SCOPE-MANIFEST-JSON-20261121",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T18:42:39.455000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 78,
+      "remainingPercent": 22,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-G08-FORMAL-SCOPE-MANIFEST-JSON-20261121",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-G08-FORMAL-SCOPE-MANIFEST-JSON-20261121",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-G08"
+    ],
+    "managementWorkIds": [
+      "WBS-G08",
+      "WBS-F03/2-3"
+    ],
+    "source": "07778e94527c96a9bdaf5049a36de47d92defaad",
+    "productionCoreMain": "559f5b5945e82374e0843dcfae11a8d07faef1ea",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG41104-g08-formal-manifest-before-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.3,
+      "base": 0.75,
+      "high": 1.45
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1545_F03六現書式差分照合継続点.json",
+        "sha256": "58fdd98401e17df525f9ed132b6f30f0f5b4c94f0768e59bd906313916c79e2d"
+      },
+      {
+        "path": "tools/quality/018_collect_verified_evidence_set.py",
+        "sha256": "e5c20b9286e010068ff197fa93f962bfe0fb7a132480beb19b47db879ec0ae17"
+      },
+      {
+        "path": "tools/quality/019_test_evidence_set.py",
+        "sha256": "71e94fcef80773abc1990428025223b8bececf8ad85cd122a645be4ad23b428a"
+      },
+      {
+        "path": "documents/400_PGPT/450_品質/451_Build・静的解析・coverage方針.md",
+        "sha256": "7980a204c02574b235d588e3a05ae8fb7b26ecb18313f4f000918c9135da6f4c"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "正式証跡validatorが重複JSONキーとfloat/bool exitCodeを受理し得る。終了コードの定義とハッシュは独立。",
+    "endCondition": "正常JSONと五つの負対照を固定。固定53scopeの既工具suiteを同一candidateで成功。",
+    "workScope": "一時領域の合成manifestと、既工具自己試験。実projectの収集・実行・配備・DBなし。",
+    "quotaAfter": {
+      "usedPercent": 78,
+      "remainingPercent": 22,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "c10cee16de84032c31c8b13861e0c8ffa78dc9e6e507747e859ccaa89fbb7864",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T18:42:39.455000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 78,
+          "remainingPercent": 22,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T18:42:32.090272+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 78,
+      "remainingPercent": 22,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-7061",
+    "attempt": 1,
+    "attemptResult": "PASS_G08_FORMAL_COLLECTOR_TOOL_ONLY",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/5569_G08正式manifestの形式検証仕様・結果.md",
+        "sha256": "93b3a365acad3c8e13f46a7e8d61496e9903ba0588366ced082927997cecaceb"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41104-g08-formal-manifest-before-v1/manifest.json",
+        "sha256": "1e7d9338f8e63ea582069d4a8496ae68a9c17748d40b0f4a60024cd36ed0ce45"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41106-g08-formal-manifest-after-v1/manifest.json",
+        "sha256": "65987ae48b7d641ee6ee04f60f71f6692eba4b4535398f6c5310bcceadb51de2"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": "全451、実収集、六製品・個別QAは継続。",
+    "toolSuccess": 106,
+    "toolFailures": 0,
+    "originalNegativeChecksFailed": 5,
+    "exactNegativeChecksSucceeded": 5,
+    "requiredScopeCount": 53,
+    "toolSource": "349aad0ec2ad0a9f9ce25a4bcd3d47cf1928daac",
+    "rootAndScopeSameReader": true
+  }
+}
