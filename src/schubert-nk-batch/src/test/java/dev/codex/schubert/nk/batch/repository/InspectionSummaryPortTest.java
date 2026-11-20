@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.batch.repository;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertSame;
@@ -24,7 +25,7 @@ import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
-/** INSPPORT001..010: borrowed inspection data only, no actual database or child owner. */
+/** INSPPORT001..011: borrowed inspection data only, no actual database or child owner. */
 final class InspectionSummaryPortTest {
   private static final String TEXT_AUTO = "auto";
   private static final String TEXT_COMPLETE = "complete";
@@ -230,6 +231,48 @@ final class InspectionSummaryPortTest {
           List.of(TEXT_ROWCLOSE, TEXT_STATEMENTCLOSE), fixture.visited.subList(end - 2, end));
       fixture.assertClosed();
     }
+  }
+
+  @Test
+  void singleSqlFailurePreservesNestedErrorAfterOwnedResourcesClose() {
+    var cases = new ArrayList<Executable>();
+    for (var point :
+        List.of("prepare", "query", TEXT_COMPLETE, TEXT_ROWCLOSE, TEXT_STATEMENTCLOSE)) {
+      for (var edge : List.of("cause", "suppressed", "next")) {
+        cases.add(
+            () -> {
+              var fixture = new Fixture();
+              var fatal = new AssertionError("public inspection boundary sentinel");
+              var failure = new SQLException("public inspection boundary diagnostic");
+              switch (edge) {
+                case "cause" -> failure.initCause(fatal);
+                case "suppressed" -> failure.addSuppressed(fatal);
+                case "next" -> failure.setNextException(new SQLException("public SQL next", fatal));
+                default -> throw new AssertionError("unknown fixture edge");
+              }
+              fixture.faults.put(point, failure);
+              assertSame(
+                  fatal, assertThrows(AssertionError.class, fixture::read), point + " " + edge);
+              assertEquals(0, fatal.getSuppressed().length);
+              fixture.assertClosed();
+              int statements = point.equals("prepare") ? 0 : 1;
+              int rows = point.equals("prepare") || point.equals("query") ? 0 : 1;
+              assertEquals(statements, fixture.closedStatements);
+              assertEquals(rows, fixture.closedRows);
+              List<String> closeEvents =
+                  fixture.visited.stream()
+                      .filter(
+                          event -> event.equals(TEXT_ROWCLOSE) || event.equals(TEXT_STATEMENTCLOSE))
+                      .toList();
+              assertEquals(
+                  rows == 1
+                      ? List.of(TEXT_ROWCLOSE, TEXT_STATEMENTCLOSE)
+                      : statements == 1 ? List.of(TEXT_STATEMENTCLOSE) : List.of(),
+                  closeEvents);
+            });
+      }
+    }
+    assertAll(cases);
   }
 
   @Test

@@ -1,0 +1,73 @@
+{
+  "eventId": "PGPT-20261008-6752",
+  "groupId": "WBS66_P00402_SINGLE_SQL_FATAL_INSPECTION",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T12:05:28.999000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 69,
+      "remainingPercent": 31,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66_P00402_SINGLE_SQL_FATAL_INSPECTION",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "WBS66_P00402_SINGLE_SQL_FATAL_INSPECTION",
+    "workAttributionKind": "REWORK",
+    "wbsLeafIds": [
+      "WBS-P004-02"
+    ],
+    "managementWorkIds": [
+      "WBS-P004-02/2",
+      "WBS-P004-05/2",
+      "WBS-F02-a"
+    ],
+    "source": "b189cca7b8fbecdba6acee04314f55a8a8e9038d",
+    "productionCoreMain": "da20ad7753279ae4e8017593866502d3341ec0e5",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40834-p00402-inspection-single-sql-before-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.75,
+      "base": 1.6,
+      "high": 3.5
+    },
+    "groupCapPp": 10,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1234_G08警報監査と次の作業.json",
+        "sha256": "3aad7219557a4515d5f3df4e66a58bb5134d45f76f1bcbe9397c7ad74505c82e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40394-p00402-p00405-current-inspection-port-bind-v1/manifest.json",
+        "sha256": "a6f0350d0b52831d511a1a3ead8ed38607c5a92a626ad2cf7d9bfa68a560788e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28664-runref10-post-v1/manifest.json",
+        "sha256": "6d113bae71c846e2eeac604fd21d859e34773f9e67d40c1fbfe942d75b8ce1d6"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/4634_P00405検査集計SQL例外所有単体仕様.md",
+        "sha256": "5bd05a876c62c9584095f492c8855fe7d0897c20d1039743aea4e90056f91ccb"
+      },
+      {
+        "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+        "sha256": "16938183a5538d9fb4cce67f1a8b1bd72d75432a7bf2915fa47663aac56a13f0"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "BUG2775の横展開。InspectionSummaryRepositoryの最外SQL変換が単独の重大Errorを消し、二SQLの共通helperは維持する。",
+    "endCondition": "起票先行、未修正新INSPPORT011の期待不一致、既SSC461 adapter使用、現候補Port全件と有限所有後条件、規約・静的と新旧sourceを記録。",
+    "workScope": "JDK借用インタフェースproxyだけ。実DB・復旧・権限・Root・外部出力0。YKT2359の新対象1。追加実績は元価格と分離。"
+  }
+}
