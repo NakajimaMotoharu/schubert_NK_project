@@ -1,0 +1,67 @@
+{
+  "actualExit": 0,
+  "source": "6ff5fb45657fc9792dd48f86e4caa5514dd48eee",
+  "productionCore": "cb1411d94a1d97aedafe1af60400aaec0ae8c8e8",
+  "canonicalDesign": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+  "anchors": [
+    "cb1411d94a1d97aedafe1af60400aaec0ae8c8e8:src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationGamesVerifier.java:79:    @Nullable Timestamp stamp = result.getTimestamp(5);",
+    "cb1411d94a1d97aedafe1af60400aaec0ae8c8e8:src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterContentVerifier.java:159:      @Nullable Timestamp actual = result.getTimestamp(column);"
+  ],
+  "timestampWithTimeZoneTables": [
+    "games",
+    "speakers",
+    "script_files",
+    "script_entries",
+    "audio_files",
+    "media_assets",
+    "entry_audio_links"
+  ],
+  "designConflictSections": [
+    "SS332 SSC056",
+    "SS343 SSC403",
+    "SS343 SSC378"
+  ],
+  "bug": "BUG-3370",
+  "horizontal": "YKT-2719",
+  "designChange": "SSC-473",
+  "productRuns": 0,
+  "evidence": [
+    {
+      "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/868_F02三境界同時回帰継続点.json",
+      "sha256": "c28df33b307f00029fb4b8883b29e5ba7dd77589335068fe3b6c93849baad8cc"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "sha256": "16938183a5538d9fb4cce67f1a8b1bd72d75432a7bf2915fa47663aac56a13f0"
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "sha256": "ac1968b36bdc90e5892bb9239eff49868b4bf977945724e02abe2876db6c7399"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V002__account_session_and_master_tables.sql",
+      "sha256": "23f82d08f89bf6abfb75cbf41d126b174fcef5cf77563755fc316b31fb817e8e"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V004__indexes_and_initial_data.sql",
+      "sha256": "fdf634ace2beef2d57e28ad65c2ed488eab493cb2b0d8b1d421eab8397b8079e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40380-f02-current-four-jars-public-checkpoint-v1/manifest.json",
+      "sha256": "50ab463424ef12a32e3aa6f38ec38d3175876f33826e412e4371943a3a9116e2"
+    },
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/080_移行六表全COPY列の型付き照合・独立二十八仕様.md",
+      "sha256": "478dad9853730ae2db4a0bc952b98aa25aea7e5479a52de55d241d76e21e4b38"
+    },
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/126_games固定二行とtarget接続・独立二十二仕様.md",
+      "sha256": "2c9dd8c48d966417114be392e0a63755e7aadb38850bdbdceacb241fab0a3696"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/input/3394_copyverify1050_static_admission.json",
+      "sha256": "2af314709a12b6c96af859cab3ee3368afc2cd0937f8f3585285410e3bcf9c8f"
+    }
+  ],
+  "terminalAtUTC": "2026-11-20T00:46:04.869268+00:00"
+}
