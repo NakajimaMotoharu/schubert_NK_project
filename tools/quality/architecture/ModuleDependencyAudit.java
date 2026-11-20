@@ -21,6 +21,7 @@ import java.util.jar.JarFile;
  */
 public final class ModuleDependencyAudit {
   private static final String INTERNAL = "dev.codex.schubert.nk.";
+  private static final String WEB_REPLY_CLIENT = INTERNAL + "web.messaging.JmsRequestReplyClient";
   private static final Set<String> MODULES =
       Set.of("protocol", "storage", "bootstrap", "api", "web", "batch");
   private static final Set<String> FILE_IO_TYPES =
@@ -106,7 +107,12 @@ public final class ModuleDependencyAudit {
           if (target.startsWith(INTERNAL) && targetModule == null)
             violations.get("INTERNAL_OWNER").add(pair);
           if (forbiddenFramework(module, target)) violations.get("FRAMEWORK_FENCES").add(pair);
-          if (controller && (jdbc(target) || jms(target) || "storage".equals(targetModule)))
+          if (controller
+              && (jdbc(target)
+                  || jms(target)
+                  || target.equals(WEB_REPLY_CLIENT)
+                  || target.startsWith(WEB_REPLY_CLIENT + "$")
+                  || "storage".equals(targetModule)))
             violations.get("CONTROLLER_BOUNDARY").add(pair);
           if (apiRepository && target.startsWith(INTERNAL + "api.application."))
             violations.get("REPOSITORY_DIRECTION").add(pair);
