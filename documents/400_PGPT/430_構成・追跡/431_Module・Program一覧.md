@@ -981,3 +981,7 @@ WBS-G08、F03/2-3、SS354、451、PT-QA-TRACE-004、BUG-3461／YKT-2763。[現�
 ### F02 API repositoryの上位依存
 
 PT-F02-REPO-INBOUND-001～007、SS311 §3／PG-D516、WBS-F02-a。静的工具＋現source名寄せ。実API JARは別。 [仕様・証跡](../../../evidence/01_PT/018_NK-OPS-001/5588_F02Repository受信層依存仕様・結果.md)。
+
+### CHR正本目録の型境界
+
+PT-CHR-VERIFY-TYPE001、SS355 §4／UI264、WBS-P020-01.01/2・F03/2-2。固定四整数と二SHAの型検査。 [仕様・証跡](../../../evidence/01_PT/020_NK-CHR-001/059_正本目録件数の型境界仕様・結果.md)。
