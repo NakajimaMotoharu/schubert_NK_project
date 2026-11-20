@@ -1,0 +1,86 @@
+{
+  "eventId": "PGPT-20261008-7205",
+  "wbsLeafIds": [
+    "WBS-F02"
+  ],
+  "managementWorkIds": [
+    "WBS-F02-a"
+  ],
+  "workCategory": "CONTRACT_AUDIT",
+  "source": "2031a9f683669e3f097dab9021254c0f5a7ddd88",
+  "productionCoreMain": "a8913bc836f81632613b34243f84b7b15eb3e054",
+  "previousCheckpoint": "1687",
+  "groupEvents": [
+    "PGPT-20261008-7204"
+  ],
+  "acceptedOriginal": 17,
+  "total": 190,
+  "coreAccepted": 0,
+  "coreTotal": 5,
+  "officialPtTests": 1964,
+  "officialPtScopes": 53,
+  "newFormalAcceptance": 0,
+  "effortRate": null,
+  "actualAllocatedPp": null,
+  "newProductTests": 0,
+  "recordedOwnedJobsInFlight": 0,
+  "ownedBackendJobsStartedHere": 0,
+  "modelObserved": "gpt-6.2-sol",
+  "reasoningObserved": null,
+  "speedObserved": null,
+  "outcomeEvidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/5650_F02ファイルログhandlerの実行結果.md",
+      "sha256": "7ef46075a5022cd6bc8e04a0ddb189bcd13fa40d066065ee6b6bd8ba99745107"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41286-f02-jdk-file-handler-red-v1/manifest.json",
+      "sha256": "43966441c6ab35e90cef52f47b57c45b48fcddf39c55cab86f9e8163813e5813"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41288-f02-jdk-file-handler-fixed-v1/manifest.json",
+      "sha256": "53cbd0226fda55a00551ab093ffb4b2d1887976b41cb2617dfb7d4d4e2ce7cef"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41290-f02-current-protocol-file-handler-v1/manifest.json",
+      "sha256": "eb01e7002a78e70cc553f02d605392d25fe3d56e8d70efadeea5f249a490eef1"
+    }
+  ],
+  "fullQuotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T22:32:50.792000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 83,
+      "remainingPercent": 17,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "quotaAfter": {
+    "usedPercent": 83,
+    "remainingPercent": 17,
+    "resetsAt": 1795445752,
+    "windowDurationMins": 10080
+  },
+  "sharedDeltaPp": null,
+  "completedOriginalRowPricePp": 0,
+  "remainingCriteria": [
+    "六製品、API/Web/QA056、旧Storage JDBC辺、13 runtime要求、451、および終了依存",
+    "実FileStore、実CHR、C02は独立の保留継続"
+  ],
+  "nextEvidence": "中核P004-03/05又はP018-08の不足を、既最新の直接受入証拠とHOLDに照らして一経路だけ選ぶ。旧Storage入口は全callerの整合前に削除しない。",
+  "testedSource": "1c5e4f1675346de4835ffb1aa9d8721b2ee87837",
+  "bug": [
+    "BUG-3478"
+  ],
+  "ykt": [
+    "YKT-2774"
+  ],
+  "sourceScreeningFiles": [
+    169,
+    13
+  ],
+  "detectorRecoveryReason": "six JDK constructors consist of five direct opens and one delegated open, existing stdout reread only"
+}

@@ -1,0 +1,157 @@
+{
+  "eventId": "PGPT-20261008-7204",
+  "groupId": "WBS66-F02-LOGGING-FILE-CONSTRUCTOR",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T22:32:50.792000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 83,
+      "remainingPercent": 17,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66-F02-LOGGING-FILE-CONSTRUCTOR",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "WBS66-F02-LOGGING-FILE-CONSTRUCTOR",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a"
+    ],
+    "source": "2031a9f683669e3f097dab9021254c0f5a7ddd88",
+    "productionCoreMain": "a8913bc836f81632613b34243f84b7b15eb3e054",
+    "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "run": "PG41286-f02-jdk-file-handler-red-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.11,
+      "base": 0.37,
+      "high": 0.8
+    },
+    "groupCapPp": 1.1,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1687_G08現証拠・F02通常経路へ.json",
+        "sha256": "109c2f19f98a77d1756891412cbca60cf7c9dc0b290c227d593fcef2efe5510d"
+      },
+      {
+        "path": "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md",
+        "sha256": "72427a8609a9c4753ff459cbfa92e3ad27669544c59d53eb9191b97b911c74d2"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41222-f02-archive-owner-independent-v1/manifest.json",
+        "sha256": "de1809ae72bd23503e206db5626078c5fb0c9cbadb043dd7629ac1cb67d1c8b9"
+      },
+      {
+        "path": "tools/quality/architecture/ModuleDependencyAudit.java",
+        "sha256": "46ff5d17a479e8635de8a6758b9960ffa99b4e7c6800ff9785ce21c620b06997"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "SS311 SYS-005のProtocol／Controller直ファイルを禁止。JDK25 javax型の差ではなく既java.util.logging FileHandlerの明示constructor。既合成archive/pathと実JARより試験前入力を固定。",
+    "endCondition": "両境界で既FileHandler constructorだけ検出、非ファイルStreamHandler等と許可所有の非警告、既分岐再資格、JDK APIと型別実製品該当性。六製品と451は別。",
+    "workScope": "コンパイルしたクラスの静的検査。fixtureを実行せず、FileHandler、サービス、ファイル出力、実DB、既HOLDは不操作。",
+    "quotaAfter": {
+      "usedPercent": 83,
+      "remainingPercent": 17,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "f550944f4c3db1116e18d30b38da2c92adac104605d2765776fbe6cb4fd92d33",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T22:32:50.792000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 83,
+          "remainingPercent": 17,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T22:32:29.506083+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 83,
+      "remainingPercent": 17,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-7203",
+    "attempt": 1,
+    "attemptResult": "STATIC_43_DECISIONS_PROTOCOL_REAL_JAR_NO_NEW_FINDINGS",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/5650_F02ファイルログhandlerの実行結果.md",
+        "sha256": "7ef46075a5022cd6bc8e04a0ddb189bcd13fa40d066065ee6b6bd8ba99745107"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41286-f02-jdk-file-handler-red-v1/manifest.json",
+        "sha256": "43966441c6ab35e90cef52f47b57c45b48fcddf39c55cab86f9e8163813e5813"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41288-f02-jdk-file-handler-fixed-v1/manifest.json",
+        "sha256": "53cbd0226fda55a00551ab093ffb4b2d1887976b41cb2617dfb7d4d4e2ce7cef"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41290-f02-current-protocol-file-handler-v1/manifest.json",
+        "sha256": "eb01e7002a78e70cc553f02d605392d25fe3d56e8d70efadeea5f249a490eef1"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "六製品、API/Web/QA056、旧Storage JDBC辺、13 runtime要求、451、および終了依存",
+      "実FileStore、実CHR、C02は独立の保留継続"
+    ],
+    "newDependencyDecisions": 8,
+    "requalifiedEarlierDecisions": 35,
+    "validatedNewExpectedFindings": 4,
+    "firstObservedMisses": 4,
+    "realProtocolClasses": 176,
+    "toolkitReplays": 0,
+    "testedSource": "1c5e4f1675346de4835ffb1aa9d8721b2ee87837",
+    "bug": [
+      "BUG-3478"
+    ],
+    "ykt": [
+      "YKT-2774"
+    ],
+    "sourceScreeningFiles": [
+      169,
+      13
+    ],
+    "detectorRecoveryReason": "six JDK constructors consist of five direct opens and one delegated open, existing stdout reread only"
+  }
+}

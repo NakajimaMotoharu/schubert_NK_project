@@ -1,0 +1,36 @@
+ARCHUNIT	1.4.2	50	50
+MODULE	api	1
+MODULE	batch	2
+MODULE	bootstrap	1
+MODULE	protocol	18
+MODULE	storage	3
+MODULE	web	25
+RULE	CONTROLLER_BOUNDARY	13
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.synthetic.DefaultLogController	java.util.logging.FileHandler
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.synthetic.DirectFileController	java.io.File
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.synthetic.FormatterFileController	java.util.Formatter
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.synthetic.FormatterNameController	java.util.Formatter
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.synthetic.JarFileController	java.util.jar.JarFile
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.synthetic.NamedLogController	java.util.logging.FileHandler
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.synthetic.ScannerFileController	java.util.Scanner
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.synthetic.ScannerPathController	java.util.Scanner
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.synthetic.StreamFileController	java.io.PrintStream
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.synthetic.StreamNameController	java.io.PrintStream
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.synthetic.WriterFileController	java.io.PrintWriter
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.synthetic.WriterNameController	java.io.PrintWriter
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.synthetic.ZipNameController	java.util.zip.ZipFile
+RULE	FRAMEWORK_FENCES	10
+FINDING	FRAMEWORK_FENCES	dev.codex.schubert.nk.protocol.DefaultLogSink	java.util.logging.FileHandler
+FINDING	FRAMEWORK_FENCES	dev.codex.schubert.nk.protocol.JarNameReader	java.util.jar.JarFile
+FINDING	FRAMEWORK_FENCES	dev.codex.schubert.nk.protocol.NamedWriter	java.io.PrintWriter
+FINDING	FRAMEWORK_FENCES	dev.codex.schubert.nk.protocol.RealPathRead	java.nio.file.Path
+FINDING	FRAMEWORK_FENCES	dev.codex.schubert.nk.protocol.RealPathReference	java.nio.file.Path
+FINDING	FRAMEWORK_FENCES	dev.codex.schubert.nk.protocol.RollingLogSink	java.util.logging.FileHandler
+FINDING	FRAMEWORK_FENCES	dev.codex.schubert.nk.protocol.ScanningPath	java.util.Scanner
+FINDING	FRAMEWORK_FENCES	dev.codex.schubert.nk.protocol.WatchEvents	java.nio.file.Path
+FINDING	FRAMEWORK_FENCES	dev.codex.schubert.nk.protocol.WatchModifiers	java.nio.file.Path
+FINDING	FRAMEWORK_FENCES	dev.codex.schubert.nk.protocol.ZipFileReader	java.util.zip.ZipFile
+RULE	INTERNAL_OWNER	0
+RULE	MODULE_EDGES	0
+RULE	REPOSITORY_DIRECTION	0
+INSPECTED	283	98
