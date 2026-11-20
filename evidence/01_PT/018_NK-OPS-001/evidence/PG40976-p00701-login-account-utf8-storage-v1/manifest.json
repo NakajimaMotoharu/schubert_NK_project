@@ -1,0 +1,554 @@
+{
+  "source": "5372bf018acf0efa6dfe451467bf18b2e3fc0780",
+  "beforeSource": "ec21bc4dc2e267f107d65a53337bbaf2f07a38a7",
+  "startEvent": "PGPT-20261008-6941",
+  "run": "PG40976-p00701-login-account-utf8-storage-v1",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-20T16:14:28.635665+00:00",
+  "java": "25.0.4",
+  "maven": "3.9.12",
+  "os": "Linux",
+  "testId": "PT-LOGIN-VALUE005",
+  "inputs": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAccount.java",
+      "sha256": "cf77e202f571c7f93a0adae58064b79134ad51f0cc0cb17bfeb599491196b599"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticatedActor.java",
+      "sha256": "c3e1cada9993b4180e513eb2ba314e55862cf9f1bb5157dd7105e1f8425fe29c"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAttemptKind.java",
+      "sha256": "493c8b03e7791a044be87f4fadeb1c7c7c95588aba1174cb38baa0b5a3b56f7b"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAttemptState.java",
+      "sha256": "393f52726e83c3ea52fe34c7385c0da413d49306a476894255602fe82880c352"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/package-info.java",
+      "sha256": "7219a69f7f8d33d3c9923fc9870f8703472a9a945a7ceb4580f08e529c4a6f95"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/domain/Role.java",
+      "sha256": "e60e607a3f09e860ad7c28c62555672ebdca3e8590d98fcffa45f82b5c2f5fe8"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/domain/package-info.java",
+      "sha256": "a91727bb730f8cc691a3d9e256efb2c942e33ed5254d3cf3d3c03e6b486ad453"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LockedLoginAttempt.java",
+      "sha256": "71655d2fa7fa5fe730d9d1ca20e7f713e669760f32af4437fed064873066e7a4"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAuditReason.java",
+      "sha256": "4710a12a0c95eb7dfa45dd67d53a69b8a08dd25b70d94d7ddf172da9a9e308f6"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginResult.java",
+      "sha256": "d5efa4df9df7e10fd959c1f515e624fee369b0ce290583ffdb84f459c904f832"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginUsername.java",
+      "sha256": "970b0b15993f72f0881cdf64b00839cb1fdf4f601a6c4b0827e2adc0bb4e0359"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/IssuedContext.java",
+      "sha256": "e63b4f5bc96fef9df4b42ca1bff2de29098ab1139d96d49d4aedb1dbbc991ec1"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthContextIdentity.java",
+      "sha256": "b9dbed4233756c481cdb747d96f6de8843e9d910a4c18f51c30454d16130d7dd"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginValueContractTest.java",
+      "sha256": "615a06f003681b5e8942f83302cf578721197552673ee8d4b959c97310c0bcf3"
+    }
+  ],
+  "rootPom": {
+    "path": "pom.xml",
+    "sha256": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38"
+  },
+  "schemaPOM": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/scope/pom.xml",
+    "sha256": "59fa919cd33201f3183a5b5ad90f78f87074d381e2f08b3b03296ddd110d5659"
+  },
+  "fixtureSpec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/5531_P00701格納値UTF8境界仕様.md",
+    "sha256": "67ed9238d993a0745ad5e48f93cdab0e7becb826a5b92408cd200da24d0dd167"
+  },
+  "previousCases": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG34420-login-value4-unit-v1/manifest.json",
+    "sha256": "088edb306b6973ed46d02f6778eab17c54298e1e3e23c017028b466cdd9dd3e2"
+  },
+  "testCounts": {
+    "tests": 5,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "exactMethods": [
+    "value001AccountAndLockedSnapshotPreserveEveryComponentAndStorageInvariant",
+    "value002StateAndClosedAuditThresholdVocabulariesHaveExplicitValueContracts",
+    "value003DisjointLoginResultsEnforceOwnerRetryCodeAndExactValueSemantics",
+    "value004NormalizedDisplayIsTheValueWhileComparisonKeyIsIndependent",
+    "value005AccountStorageRequiresUtf8ScalarsAndPreservesExactBoundaryText"
+  ],
+  "steps": [
+    {
+      "step": "format",
+      "exitCode": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAccount.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticatedActor.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAttemptKind.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAttemptState.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/package-info.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/domain/Role.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/domain/package-info.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LockedLoginAttempt.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAuditReason.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginResult.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginUsername.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/IssuedContext.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthContextIdentity.java",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginValueContractTest.java"
+      ],
+      "startedAtUTC": "2026-11-20T16:14:16.424787+00:00",
+      "terminalAtUTC": "2026-11-20T16:14:17.095413+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/format.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/format.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "step": "checkstyle",
+      "exitCode": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAccount.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticatedActor.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAttemptKind.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAttemptState.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/package-info.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/domain/Role.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/domain/package-info.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LockedLoginAttempt.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAuditReason.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginResult.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginUsername.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/IssuedContext.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthContextIdentity.java",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginValueContractTest.java"
+      ],
+      "startedAtUTC": "2026-11-20T16:14:17.095643+00:00",
+      "terminalAtUTC": "2026-11-20T16:14:17.836321+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/checkstyle.stdout",
+        "sha256": "495a1851d63cece585722fdc1fd2a0c6b25f316595245a40205f6bc619556683"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/checkstyle.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "step": "typed",
+      "exitCode": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "-N",
+        "-B",
+        "-ntp",
+        "-X",
+        "-f",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/scope/pom.xml",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "compile"
+      ],
+      "startedAtUTC": "2026-11-20T16:14:17.839945+00:00",
+      "terminalAtUTC": "2026-11-20T16:14:21.187248+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/typed.stdout",
+        "sha256": "26e7cd2acdc29825ab2a41a70f11653eba2523c36cc6bb76a1e6a44185bfa9b7"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/typed.stderr",
+        "sha256": "05ed4976f99856c1417eead6c52058f5565d748a00ae7939fa02188545fafda4"
+      }
+    },
+    {
+      "step": "before-compile",
+      "exitCode": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-proc:none",
+        "-sourcepath",
+        "",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/scope/target/classes",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/old-classes",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/before/LoginAccount.java"
+      ],
+      "startedAtUTC": "2026-11-20T16:14:21.192123+00:00",
+      "terminalAtUTC": "2026-11-20T16:14:21.649874+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/before-compile.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/before-compile.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "step": "before-abi",
+      "exitCode": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-public",
+        "-s",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/old-classes/dev/codex/schubert/nk/api/security/LoginAccount.class"
+      ],
+      "startedAtUTC": "2026-11-20T16:14:21.650238+00:00",
+      "terminalAtUTC": "2026-11-20T16:14:21.790932+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/before-abi.stdout",
+        "sha256": "9a23af0467e6c83c9e7399374eb1f55cc726a3e32a847536a7636e80a6ddae80"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/before-abi.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "step": "candidate-abi",
+      "exitCode": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-public",
+        "-s",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/scope/target/classes/dev/codex/schubert/nk/api/security/LoginAccount.class"
+      ],
+      "startedAtUTC": "2026-11-20T16:14:21.791035+00:00",
+      "terminalAtUTC": "2026-11-20T16:14:21.975168+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/candidate-abi.stdout",
+        "sha256": "9a23af0467e6c83c9e7399374eb1f55cc726a3e32a847536a7636e80a6ddae80"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/candidate-abi.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "step": "compile-test",
+      "exitCode": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-implicit:none",
+        "-sourcepath",
+        "",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/scope/target/classes:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/PG40802-f02-current-four-package-v1/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/tests",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LockedLoginAttempt.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAuditReason.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginResult.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginUsername.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/IssuedContext.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthContextIdentity.java",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginValueContractTest.java"
+      ],
+      "startedAtUTC": "2026-11-20T16:14:21.975378+00:00",
+      "terminalAtUTC": "2026-11-20T16:14:22.811434+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/compile-test.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/compile-test.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "step": "unit",
+      "exitCode": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/unit.exec,sessionid=PG40976-LOGIN-STORAGE-FIVE,append=false",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-ansi-colors",
+        "--fail-if-no-tests",
+        "--class-path",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/scope/target/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/tests:/home/mini/codex/project1/work/pgpt-runs/PG379/PG40802-f02-current-four-package-v1/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+        "--select-class",
+        "dev.codex.schubert.nk.api.security.LoginValueContractTest",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/reports"
+      ],
+      "startedAtUTC": "2026-11-20T16:14:22.811580+00:00",
+      "terminalAtUTC": "2026-11-20T16:14:24.012328+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/unit.stdout",
+        "sha256": "fbb39585dded58727f0a3a34a1736fb5e2b249828d9e88c591c777b2a8ba0e38"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/unit.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "step": "raw-compile",
+      "exitCode": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/measure",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/UnfilteredCodeMeasurement.java"
+      ],
+      "startedAtUTC": "2026-11-20T16:14:24.029044+00:00",
+      "terminalAtUTC": "2026-11-20T16:14:24.588168+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/raw-compile.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/raw-compile.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "step": "raw",
+      "exitCode": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/measure:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/unit.exec",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/scope/target/classes/dev/codex/schubert/nk/api/security/LoginAccount.class"
+      ],
+      "startedAtUTC": "2026-11-20T16:14:24.588678+00:00",
+      "terminalAtUTC": "2026-11-20T16:14:24.666265+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/raw.stdout",
+        "sha256": "bc25e8e3f9c9a62f30bc5fac3b5a2ce57b2af598079d2b0e951d849bfe3e08a7"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/raw.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "step": "spotbugs",
+      "exitCode": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Xmx1g",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/com/github/spotbugs/spotbugs/4.10.4/spotbugs-4.10.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-analysis/9.10.1/asm-analysis-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-util/9.10.1/asm-util-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/bcel/bcel/6.12.0/bcel-6.12.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/github/stephenc/jcip/jcip-annotations/1.0-1/jcip-annotations-1.0-1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/dom4j/dom4j/2.2.0/dom4j-2.2.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/commons/commons-lang3/3.20.0/commons-lang3-3.20.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/commons/commons-text/1.15.0/commons-text-1.15.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/github/spotbugs/spotbugs-annotations/4.10.4/spotbugs-annotations-4.10.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/jaxen/jaxen/2.0.6/jaxen-2.0.6.jar:/home/mini/codex/project1/work/toolchain/m2/repository/net/sf/saxon/Saxon-HE/12.10/Saxon-HE-12.10.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/logging/log4j/log4j-api/2.26.1/log4j-api-2.26.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.26.1/log4j-to-slf4j-2.26.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-simple/2.0.18/slf4j-simple-2.0.18.jar:/home/mini/codex/project1/work/toolchain/m2/repository/commons-io/commons-io/2.22.0/commons-io-2.22.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/xmlresolver/xmlresolver/5.3.3/xmlresolver-5.3.3.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/xmlresolver/xmlresolver/5.3.3/xmlresolver-5.3.3-data.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+        "edu.umd.cs.findbugs.FindBugs2",
+        "-effort:max",
+        "-low",
+        "-xml:withMessages",
+        "-exitcode",
+        "-auxclasspath",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/scope/target/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "-output",
+        "evidence/01_PT/018_NK-OPS-001/evidence/PG40976-p00701-login-account-utf8-storage-v1/spotbugs.xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/scope/target/classes/dev/codex/schubert/nk/api/security/LoginAccount.class"
+      ],
+      "startedAtUTC": "2026-11-20T16:14:24.669223+00:00",
+      "terminalAtUTC": "2026-11-20T16:14:26.841595+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/spotbugs.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/spotbugs.stderr",
+        "sha256": "83febadc46f214e89709b832aae077e8a743258c2778ad97727d55ed33462071"
+      }
+    },
+    {
+      "step": "pmd",
+      "exitCode": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/record-fix-v1/pmd-record-1298.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/Saxon-HE-12.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/antlr4-runtime-4.13.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/apex-ls_2.13-6.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/apex-parser-5.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/better-files_2.13-3.9.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/checker-qual-3.55.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/common2_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/common_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/commons-lang3-3.20.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/directory-watcher-0.18.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/directory-watcher-better-files_2.13-0.18.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/error_prone_annotations-2.48.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/failureaccess-1.0.3.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/geny_2.13-0.6.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/groovy-5.1.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/gson-2.14.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/gson-extras-3.3.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/guava-33.7.1-jre.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/io_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/j2objc-annotations-3.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/java-diff-utils-4.16.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jline-native-3.29.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jline-terminal-3.29.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jna-5.12.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jsoup-1.23.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jsr250-api-1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jul-to-slf4j-1.7.36.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-build-tools-api-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-compiler-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-daemon-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-script-runtime-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-common-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-compiler-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-compiler-impl-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-jvm-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-stdlib-2.2.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-stdlib-jdk7-2.2.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-stdlib-jdk8-2.2.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-type-mapper-analyzer-0.7.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-type-mapper-model-0.7.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlinx-coroutines-core-jvm-1.8.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlinx-serialization-core-jvm-1.11.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlinx-serialization-json-jvm-1.11.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/mainargs_2.13-0.5.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/nice-xml-messages-3.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/outline-parser_2.13-2.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/parsers_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pcollections-4.0.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/picocli-4.7.7.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-ant-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-apex-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-cli-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-coco-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-core-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-cpp-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-cs-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-css-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-dart-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-designer-7.19.3.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-fortran-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-gherkin-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-go-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-groovy-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-html-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-java-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-javascript-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-jsp-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-julia-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-kotlin-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-lua-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-matlab-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-modelica-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-objectivec-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-perl-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-php-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-plsql-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-python-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-ruby-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-rust-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-scala_2.13-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-swift-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-tsql-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-velocity-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-visualforce-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-xml-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/portable-scala-reflect_2.13-1.1.3.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/progressbar-0.10.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/rhino-1.7.15.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-collection-compat_2.13-2.8.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-json-rpc-upickle-json-serializer_2.13-1.1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-json-rpc_2.13-1.1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-library-2.13.18.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-parallel-collections_2.13-1.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-reflect-2.13.18.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-xml_2.13-1.3.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scalajs-stubs_2.13-1.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/slf4j-api-1.7.36.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/slf4j-simple-1.7.36.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/sobject-types-67.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/sourcecode_2.13-0.4.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/standard-types-67.0.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/summit-ast-3.1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/trees2_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/trees_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/ujson_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upack_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upickle-core_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upickle-implicits_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upickle_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/vf-parser-2.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/xmlresolver-5.3.3-data.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/xmlresolver-5.3.3.jar",
+        "net.sourceforge.pmd.cli.PmdCli",
+        "check",
+        "--dir",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAccount.java",
+        "--rulesets",
+        "tools/quality/static/pmd.xml",
+        "--use-version",
+        "java-25",
+        "--aux-classpath",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/scope/target/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/jdk-25.0.4/lib/jrt-fs.jar",
+        "--no-cache",
+        "--format",
+        "xml",
+        "--report-file",
+        "evidence/01_PT/018_NK-OPS-001/evidence/PG40976-p00701-login-account-utf8-storage-v1/pmd.xml"
+      ],
+      "startedAtUTC": "2026-11-20T16:14:26.841729+00:00",
+      "terminalAtUTC": "2026-11-20T16:14:28.635105+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/pmd.stdout",
+        "sha256": "1792b04caa226185d75c50313183fb9f5fcf9218e26db3137697adca03af6e57"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/pmd.stderr",
+        "sha256": "1862d7faee8bc4d1469a03164fe1f58a50eafab72b4a0ff282c8d67bf7823e00"
+      }
+    }
+  ],
+  "nullAwayFindings": 0,
+  "observed": {
+    "dev/codex/schubert/nk/api/security/LoginAccount": {
+      "crc64": "a05cb6f3e4a789ed",
+      "counters": [
+        {
+          "kind": "INSTRUCTION",
+          "missed": 0,
+          "covered": 71
+        },
+        {
+          "kind": "BRANCH",
+          "missed": 0,
+          "covered": 8
+        },
+        {
+          "kind": "LINE",
+          "missed": 0,
+          "covered": 12
+        },
+        {
+          "kind": "COMPLEXITY",
+          "missed": 0,
+          "covered": 12
+        },
+        {
+          "kind": "METHOD",
+          "missed": 0,
+          "covered": 8
+        },
+        {
+          "kind": "CLASS",
+          "missed": 0,
+          "covered": 1
+        }
+      ]
+    }
+  },
+  "physical": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/scope/target/classes/dev/codex/schubert/nk/api/domain/Role.class",
+      "sha256": "d08b1ce036737e90c55127210b11c6ac492d14be64a61249d265c3ae34b86257"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/scope/target/classes/dev/codex/schubert/nk/api/domain/package-info.class",
+      "sha256": "75b9e3976baa08cd35f5e138662e6dd659e1d1d1c0efe97cd5386b2aee39ec11"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/scope/target/classes/dev/codex/schubert/nk/api/security/AuthenticatedActor.class",
+      "sha256": "a8401606583b5d32f5087ab12662b474374edcefa5c3b606fcbffafa9911860b"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/scope/target/classes/dev/codex/schubert/nk/api/security/LoginAccount.class",
+      "sha256": "34eae13f4f844dff1cadd9ff4a322e83d8c3f3d8c94aa366e9b0deb3a854f2a4"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/scope/target/classes/dev/codex/schubert/nk/api/security/LoginAttemptKind.class",
+      "sha256": "aceb4284db52163e29ebbfd7e3c626613a8fd5417a292af57893bdb9ebed1054"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/scope/target/classes/dev/codex/schubert/nk/api/security/LoginAttemptState.class",
+      "sha256": "e70c59cf352a1d1335ed25e97a0aa9e856c75a5c5e2ab4255e849ada16014d69"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/scope/target/classes/dev/codex/schubert/nk/api/security/package-info.class",
+      "sha256": "7acfe02db974f1eb7fbe258501c4e304b73c72650a4e422af58e27000c3b2a1b"
+    }
+  ],
+  "junitXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/reports/TEST-junit-jupiter.xml",
+    "sha256": "4a541cdfcbd4b69b8a734ca2b955b4cb54435c15f919859ccaa69bbbca4adfa1"
+  },
+  "session": "PG40976-LOGIN-STORAGE-FIVE",
+  "execData": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40976-p00701-login-account-utf8-storage-v1/unit.exec",
+    "sha256": "e9a22506063f04182c4e8c50c223fc8438f010732b69d398df41427c745e4884"
+  },
+  "table": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40976-p00701-login-account-utf8-storage-v1/unfiltered.tsv",
+    "sha256": "bc25e8e3f9c9a62f30bc5fac3b5a2ce57b2af598079d2b0e951d849bfe3e08a7"
+  },
+  "newTests": 1,
+  "requiredRegressions": 4,
+  "unchangedPublicAbi": true,
+  "protocolCompileAndTestOnly": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40802-f02-current-four-package-v1/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+    "fileBytes": 299374,
+    "sha256": "9b9de96fb1043946dde9dcd9d2e53091a582e33679f6557bfaf08200d26bbeb4"
+  },
+  "spotBugs": {
+    "findings": 0,
+    "errors": 0,
+    "report": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40976-p00701-login-account-utf8-storage-v1/spotbugs.xml",
+      "sha256": "04d6e3dae5eda709da49f69b1b1a0ef1f36e83d6e65ebc4e315ed5e9d5b9f776"
+    }
+  },
+  "pmd": {
+    "findings": 0,
+    "errors": 0,
+    "report": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40976-p00701-login-account-utf8-storage-v1/pmd.xml",
+      "sha256": "6a8fc88b6d11b28874ef3846bd1d9eb12e14bf671a1d6c4842d0b932e556f72c"
+    }
+  },
+  "actualExternalOperations": 0,
+  "wholeF03": false,
+  "whole451": false,
+  "formalDelta": 0
+}

@@ -921,3 +921,7 @@ NK-AUT-001／P018-10.03／CATALOG-026／AuthenticatedActor constructor／PT-AUT-
 ## 2026-11-21 ログイン比較キーと固定状態投影
 
 NK-AUT-001、P007-01、F03。LoginAttemptRepository.lockForAttempt／PT-AUT-ATTEMPTPORT001～011／UI226、SS314、331、332、451。当候補 `ec21bc4dc2e267f107d65a53337bbaf2f07a38a7` の11件と生L137/M8/C1/B34/I571未到達0・公開ABI一致。実DBを保留。 [試験](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40974-f03-borrowed-closed-role-status-branches-v2/manifest.json) [静的判定](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40974-f03-borrowed-closed-role-status-branches-v2/dispositions.json)
+
+### LoginAccount格納値のUTF-8境界（PG40976）
+
+NK-AUT-001、FUN-001、UI226、SS314/331、LoginAccount constructor、PT-LOGIN-VALUE005、BUG-3436／YKT-2749。WBS-P007-01/2の局所根拠。[仕様](../../../evidence/01_PT/018_NK-OPS-001/5531_P00701格納値UTF8境界仕様.md) [証跡](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40976-p00701-login-account-utf8-storage-v1/manifest.json)。
