@@ -1,0 +1,77 @@
+{
+  "eventId": "PGPT-20261008-6416",
+  "groupId": "PGPT-WBS66-F03-CURRENT-SCHEMA-PACKAGED-THREE-FINAL-CHECKS-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T01:39:39.574000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 58,
+      "remainingPercent": 42,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-CURRENT-SCHEMA-PACKAGED-THREE-FINAL-CHECKS-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F03-CURRENT-SCHEMA-PACKAGED-THREE-FINAL-CHECKS-20261120",
+    "workAttributionKind": "SOURCE_REQUALIFICATION",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2",
+      "WBS-P019-01.02/2",
+      "WBS-P004-05/2"
+    ],
+    "source": "8d1f30b1af5c59f5dfc8153c1aa42e872cfd7ed9",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40502-f03-current-schema-three-whole-static-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.17,
+      "base": 0.55,
+      "high": 1.15
+    },
+    "groupCapPp": 1.5,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/895_SchemaHistory借用終了割込継続点.json",
+        "sha256": "5eaa5266645e13644a93f131d50044e15ae12d9ad91658b4fd1de9c18deb70f7"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40498-schema-history-packaged-proof-recovered-v1/manifest.json",
+        "sha256": "bba0cb1781e36039e9014b8a7f27e4ab2354ef78283181a704bae5dba9fd9b0f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40500-schema-history-close-static-and-junit-independent-v1/manifest.json",
+        "sha256": "caea692bdfb3615385369c6cff24553e4697b543d027c1ed92147ae7132184fe"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40478-f03-current-three-whole-static-independent-v1/manifest.json",
+        "sha256": "371ae63eff541ac5bc7bc517fba825769420e8a66f0d705a301b49ea38cb9f4c"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40474-f03-current-three-full-typed-adjusted-v1/manifest.json",
+        "sha256": "45597daf623f424a3819224daddb5b3e1126ea018f3c98f66620679c8cf02a80"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40486-f03-current-three-main-pmd-checkstyle-v1/manifest.json",
+        "sha256": "2ec428e78149261ee2472ba49365614e28c445dd26be5d243d507e1099c62fe2"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "現候補e7bfd5e1f2のMaven4と旧候補の三module full456。1物理のみSchemaHistory変更をPG40498で確認。旧単型包装SpotBugsの子状態欠落は別。現3実scopeで終了codeと独立XMLを一度取得。",
+    "endCondition": "当候補同物理456／三moduleを既承認静的ルールで正規実行し、SpotBugs真正終了と全ClassStats・BUG/Missing/Error、未成立範囲を記録。SchemaHistory13の既試験を再演せず当ABI・traceへ紐づける。",
+    "workScope": "三artifactのSpotBugs、公開触点traceのみ。保留Batch/Root/API/Web type・実操作なし。"
+  }
+}

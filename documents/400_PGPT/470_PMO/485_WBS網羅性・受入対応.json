@@ -1,4 +1,55 @@
 {
+  "currentSSC474SchemaHistoryPG40504": {
+    "source": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "owner": "WBS-P019-01.02",
+    "shared": [
+      "WBS-F03",
+      "WBS-P004-05"
+    ],
+    "paymentDuplicatedPp": 0,
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40504-f03-current-schema-static-and-trace-independent-v1/manifest.json",
+      "sha256": "a869823bf73199e08045d142f79da97dfd84c964c56b21ebda5f9d3e3d72f33d"
+    },
+    "localTrace": {
+      "mainPath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "method": "inspect",
+      "line": 127,
+      "delegatedMethod": "verify",
+      "testPath": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/SchemaHistoryAdmissionTest.java",
+      "methods": [
+        "opsSchema012InterruptWhileClosingRowsRejectsObservedHistory",
+        "opsSchema013InterruptWhileClosingStatementRejectsObservedHistory"
+      ],
+      "TestIds": [
+        "PT-OPS-SCHEMA012",
+        "PT-OPS-SCHEMA013"
+      ],
+      "ptSpec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/4592_BUG3234SchemaHistory所有とRowの補充仕様.md",
+        "sha256": "8f6654dc5701120d378a40a41285b25ac154c07ad2db9222f9883da1fd5c101d"
+      },
+      "existingRequalification": 11,
+      "independentUnit": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40500-schema-history-close-static-and-junit-independent-v1/manifest.json",
+        "sha256": "caea692bdfb3615385369c6cff24553e4697b543d027c1ed92147ae7132184fe"
+      },
+      "design": [
+        "SS331 §3.3",
+        "SS343 §9.1",
+        "SSC-474"
+      ],
+      "requirements": [
+        "DAT-009",
+        "SYS-002"
+      ],
+      "ui": [
+        "UI212",
+        "UI253"
+      ]
+    },
+    "formalAdded": 0
+  },
   "currentSSC473MavenUtcDeliveryPG40470": {
     "productionCore": "2cc96ab800b8753b0f0eafac8e008bd5b69d9a59",
     "owner": "WBS-P019-03.01",

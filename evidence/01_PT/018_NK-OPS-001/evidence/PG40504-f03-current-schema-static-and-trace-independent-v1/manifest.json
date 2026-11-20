@@ -1,0 +1,61 @@
+{
+  "actualExit": 0,
+  "source": "8d1f30b1af5c59f5dfc8153c1aa42e872cfd7ed9",
+  "productionCore": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+  "canonicalDesign": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+  "currentThreeArtifactSpotBugs": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40502-f03-current-schema-three-whole-static-v1/manifest.json",
+    "sha256": "7843a2b81e14ca73fc53029ba0168671193cbe221d0a2751a73596c4fc1d9465"
+  },
+  "currentPhysical456": true,
+  "wholeStaticModules": 3,
+  "currentTagResults": [
+    0,
+    0,
+    0
+  ],
+  "confirmedTrace": {
+    "mainPath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+    "method": "inspect",
+    "line": 127,
+    "delegatedMethod": "verify",
+    "testPath": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/SchemaHistoryAdmissionTest.java",
+    "methods": [
+      "opsSchema012InterruptWhileClosingRowsRejectsObservedHistory",
+      "opsSchema013InterruptWhileClosingStatementRejectsObservedHistory"
+    ],
+    "TestIds": [
+      "PT-OPS-SCHEMA012",
+      "PT-OPS-SCHEMA013"
+    ],
+    "ptSpec": {
+      "path": "evidence/01_PT/018_NK-OPS-001/4592_BUG3234SchemaHistory所有とRowの補充仕様.md",
+      "sha256": "8f6654dc5701120d378a40a41285b25ac154c07ad2db9222f9883da1fd5c101d"
+    },
+    "existingRequalification": 11,
+    "independentUnit": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40500-schema-history-close-static-and-junit-independent-v1/manifest.json",
+      "sha256": "caea692bdfb3615385369c6cff24553e4697b543d027c1ed92147ae7132184fe"
+    },
+    "design": [
+      "SS331 §3.3",
+      "SS343 §9.1",
+      "SSC-474"
+    ],
+    "requirements": [
+      "DAT-009",
+      "SYS-002"
+    ],
+    "ui": [
+      "UI212",
+      "UI253"
+    ]
+  },
+  "rebuiltOldChildNumericStatus": false,
+  "priorChildStateRetainedUnknown": true,
+  "wholeF03Accepted": false,
+  "whole451Accepted": false,
+  "noNewTestsHere": 0,
+  "formalDelta": 0,
+  "terminalAtUTC": "2026-11-20T01:41:34.411796+00:00"
+}
