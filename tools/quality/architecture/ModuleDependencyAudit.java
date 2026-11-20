@@ -144,8 +144,10 @@ public final class ModuleDependencyAudit {
           String target = access.getTargetOwner().getName();
           if (controller && filesystem(target))
             violations.get("CONTROLLER_BOUNDARY").add(origin + "\t" + target);
-          if (module.equals("protocol") && protocolFilesystem(target))
+          if (module.equals("protocol")
+              && protocolFilesystem(target, access.getTarget().getName())) {
             violations.get("FRAMEWORK_FENCES").add(origin + "\t" + target);
+          }
         }
       }
       System.out.println("ARCHUNIT\t1.4.2\t" + owners.size() + "\t" + actual.size());
@@ -229,8 +231,10 @@ public final class ModuleDependencyAudit {
     return target.startsWith("java.nio.file.") || FILE_IO_TYPES.contains(target);
   }
 
-  private static boolean protocolFilesystem(String target) {
-    return FILE_IO_TYPES.contains(target)
+  private static boolean protocolFilesystem(String target, String method) {
+    return (target.equals("java.nio.file.Path")
+            && (method.equals("toRealPath") || method.equals("register")))
+        || FILE_IO_TYPES.contains(target)
         || target.equals("java.nio.file.Files")
         || target.equals("java.nio.file.FileSystems")
         || target.equals("java.nio.file.FileSystem")
