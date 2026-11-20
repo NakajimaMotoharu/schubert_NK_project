@@ -1,0 +1,195 @@
+{
+  "actualExit": 1,
+  "toolSource": "ee553faeb8152846dbb90f6416ac85c5f428a15c",
+  "productionCore": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+  "fixtures": [
+    {
+      "testId": "PT-F02-OBJECT-SERIAL-001",
+      "origin": "dev.codex.schubert.nk.protocol.SerialPort1",
+      "target": "java.io.Serializable",
+      "expected": true,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-OBJECT-SERIAL-002",
+      "origin": "dev.codex.schubert.nk.protocol.SerialPort2",
+      "target": "java.io.Externalizable",
+      "expected": true,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-OBJECT-SERIAL-003",
+      "origin": "dev.codex.schubert.nk.protocol.SerialPort3",
+      "target": "java.io.ObjectInputStream",
+      "expected": true,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-OBJECT-SERIAL-004",
+      "origin": "dev.codex.schubert.nk.protocol.SerialPort4",
+      "target": "java.io.ObjectOutputStream",
+      "expected": true,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-OBJECT-SERIAL-005",
+      "origin": "dev.codex.schubert.nk.protocol.SerialPort5",
+      "target": "java.io.ObjectStreamClass",
+      "expected": true,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-OBJECT-SERIAL-006",
+      "origin": "dev.codex.schubert.nk.protocol.SerialPort6",
+      "target": "java.io.ObjectInputFilter",
+      "expected": true,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-OBJECT-SERIAL-007",
+      "origin": "dev.codex.schubert.nk.protocol.SerialPort7",
+      "target": "java.io.NotSerializableException",
+      "expected": true,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-OBJECT-SERIAL-008",
+      "origin": "dev.codex.schubert.nk.protocol.SerialPort8",
+      "target": "java.io.IOException",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-OBJECT-SERIAL-009",
+      "origin": "dev.codex.schubert.nk.protocol.SerialPort9",
+      "target": "java.io.DataInputStream",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-OBJECT-SERIAL-010",
+      "origin": "dev.codex.schubert.nk.api.FileHelper",
+      "target": "java.io.ObjectOutputStream",
+      "expected": false,
+      "observed": false
+    }
+  ],
+  "matched": 3,
+  "priorBoundaries": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40626-f02-controller-reply-edge-after-v1/manifest.json",
+    "sha256": "9ef744c0812c6c4afe62cf8bed2cfa869d4be87d58b986d89fba405f2a4011b4"
+  },
+  "priorControls": 0,
+  "findings": 0,
+  "receipts": {
+    "compile-tool": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40630-f02-protocol-serialization-before-v1/compile-tool.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40630-f02-protocol-serialization-before-v1/compile-tool.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "-d",
+        "/dev/shm/pgpt-protocol-serial-p0agh9gh/tool",
+        "/dev/shm/pgpt-protocol-serial-p0agh9gh/ModuleDependencyAudit.java"
+      ]
+    },
+    "compile-fixture": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40630-f02-protocol-serialization-before-v1/compile-fixture.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40630-f02-protocol-serialization-before-v1/compile-fixture.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-d",
+        "/dev/shm/pgpt-protocol-serial-p0agh9gh/binary",
+        "/dev/shm/pgpt-protocol-serial-p0agh9gh/src/dev/codex/schubert/nk/protocol/SerialPort1.java",
+        "/dev/shm/pgpt-protocol-serial-p0agh9gh/src/dev/codex/schubert/nk/protocol/SerialPort2.java",
+        "/dev/shm/pgpt-protocol-serial-p0agh9gh/src/dev/codex/schubert/nk/protocol/SerialPort3.java",
+        "/dev/shm/pgpt-protocol-serial-p0agh9gh/src/dev/codex/schubert/nk/protocol/SerialPort4.java",
+        "/dev/shm/pgpt-protocol-serial-p0agh9gh/src/dev/codex/schubert/nk/protocol/SerialPort5.java",
+        "/dev/shm/pgpt-protocol-serial-p0agh9gh/src/dev/codex/schubert/nk/protocol/SerialPort6.java",
+        "/dev/shm/pgpt-protocol-serial-p0agh9gh/src/dev/codex/schubert/nk/protocol/SerialPort7.java",
+        "/dev/shm/pgpt-protocol-serial-p0agh9gh/src/dev/codex/schubert/nk/protocol/SerialPort8.java",
+        "/dev/shm/pgpt-protocol-serial-p0agh9gh/src/dev/codex/schubert/nk/protocol/SerialPort9.java",
+        "/dev/shm/pgpt-protocol-serial-p0agh9gh/src/dev/codex/schubert/nk/api/FileHelper.java",
+        "/dev/shm/pgpt-protocol-serial-p0agh9gh/src/dev/codex/schubert/nk/protocol/Anchor.java",
+        "/dev/shm/pgpt-protocol-serial-p0agh9gh/src/dev/codex/schubert/nk/storage/Anchor.java",
+        "/dev/shm/pgpt-protocol-serial-p0agh9gh/src/dev/codex/schubert/nk/bootstrap/Anchor.java",
+        "/dev/shm/pgpt-protocol-serial-p0agh9gh/src/dev/codex/schubert/nk/api/Anchor.java",
+        "/dev/shm/pgpt-protocol-serial-p0agh9gh/src/dev/codex/schubert/nk/web/Anchor.java",
+        "/dev/shm/pgpt-protocol-serial-p0agh9gh/src/dev/codex/schubert/nk/batch/Anchor.java"
+      ]
+    },
+    "audit": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40630-f02-protocol-serialization-before-v1/audit.stdout.txt",
+        "sha256": "9f8daa7848293f2e511024d29f7ad46c9f6b7874396a86025ff946dcadc10157"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40630-f02-protocol-serialization-before-v1/audit.stderr.txt",
+        "sha256": "2c58b87a0350a39bb1c3b5f4891defeeb9a785e84aa11a466dc9ddb21253bf58"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/dev/shm/pgpt-protocol-serial-p0agh9gh/tool:/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "ModuleDependencyAudit",
+        "api=/dev/shm/pgpt-protocol-serial-p0agh9gh/api.jar",
+        "batch=/dev/shm/pgpt-protocol-serial-p0agh9gh/batch.jar",
+        "bootstrap=/dev/shm/pgpt-protocol-serial-p0agh9gh/bootstrap.jar",
+        "protocol=/dev/shm/pgpt-protocol-serial-p0agh9gh/protocol.jar",
+        "storage=/dev/shm/pgpt-protocol-serial-p0agh9gh/storage.jar",
+        "web=/dev/shm/pgpt-protocol-serial-p0agh9gh/web.jar"
+      ]
+    }
+  },
+  "inputPhysical": {
+    "dev.codex.schubert.nk.api.Anchor": "b691280932ab1ea13b256104687d5923f9e70e226c2fb31a2a49c11764c2269b",
+    "dev.codex.schubert.nk.api.FileHelper": "b4539e8e27d69e4dc681ab24725033d685adc491ad6d2655229a6891f68b2f00",
+    "dev.codex.schubert.nk.batch.Anchor": "4dc370530233176eabdbadd79edf2966fd0a7e4afd3671b7a3114034c44eb9e3",
+    "dev.codex.schubert.nk.bootstrap.Anchor": "b7b4a06bb2e29b67f59b46320e8aee9074b1b5c32aa126ee928c13387e40199a",
+    "dev.codex.schubert.nk.protocol.Anchor": "af4c73c5e3cc60c38921bc6c9c810249e7a5f7d1f349f377ea0a4213c698df7c",
+    "dev.codex.schubert.nk.protocol.SerialPort1": "c679114671139c7906baecc6255e53f976a9716f99a9c478bd9a00b079953257",
+    "dev.codex.schubert.nk.protocol.SerialPort2": "eaf0f20f221c4ff772a3aff2415eec262790c56949cea2d3ec42ede6ef67c5b5",
+    "dev.codex.schubert.nk.protocol.SerialPort3": "e916eb6cf7665d517b5584b4afe68b0cddcdd56ec713e0c72bcbf62d8ffa899a",
+    "dev.codex.schubert.nk.protocol.SerialPort4": "3e0a67e415179223284be19b46bdcfd7b4cb14fc1b94dde0fabd6a917a0426f4",
+    "dev.codex.schubert.nk.protocol.SerialPort5": "b96c348e2cb563d67c6b3ea7634d9da9ff3d24b3a72467e007b1519306519075",
+    "dev.codex.schubert.nk.protocol.SerialPort6": "06cf7f487cb1a86d7e1925db6bc97bdc9696f2456cdfff419afaa01907bfcbe2",
+    "dev.codex.schubert.nk.protocol.SerialPort7": "1abac621bc8b1b9f0fbb778a491dd9c55ae895820754e1e348039f0682e24846",
+    "dev.codex.schubert.nk.protocol.SerialPort8": "4cbf7d80cd1547bd4d2684a506597cc4c6528369bf758dd1324d2756438032c1",
+    "dev.codex.schubert.nk.protocol.SerialPort9": "67019b94fff6b16513e4c9e6ae0a09624770f905d748dee22d948e4ddb499789",
+    "dev.codex.schubert.nk.storage.Anchor": "3523fc5db14a0ccfea29f242e1ce59ff87542a25965a1d3274eb29de27f78042",
+    "dev.codex.schubert.nk.web.Anchor": "7a580ceef9ee6289fcfbef966085c3763ab5d6a6bfd5048cf1c6ddad770f3a15"
+  },
+  "toolSourceSha": "8eaffe71550590b91edaf426f8469fc7fd579cae3554896944e56ca2d3475e55",
+  "actualProductJars": 0,
+  "productTests": 0,
+  "realSerializationExecutions": 0,
+  "wholeF02Accepted": false,
+  "whole451Accepted": false,
+  "terminalAtUTC": "2026-11-20T03:52:04.520024+00:00"
+}
