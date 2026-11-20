@@ -96,6 +96,9 @@ final class GateSyntheticRunPortTest {
 
     Files.writeString(file, document + "\n{}\n");
     assertThrows(IOException.class, () -> validate(root));
+
+    Files.writeString(file, document.replaceFirst("\\{", "{\"version\":null,"));
+    assertThrows(IOException.class, () -> validate(root));
   }
 
   @Test

@@ -515,6 +515,9 @@ class ArtifactComparatorTest {
 
     Files.writeString(path, document + "\n{}\n");
     assertThrows(IOException.class, () -> compare(fixture));
+
+    Files.writeString(path, document.replaceFirst("\\{", "{\"version\":null,"));
+    assertThrows(IOException.class, () -> compare(fixture));
   }
 
   @Test

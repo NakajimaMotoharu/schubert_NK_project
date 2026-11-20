@@ -204,6 +204,10 @@ class GateCliTest {
     Path rejected = temporaryDirectory.resolve("no-inventory-report.json");
     assertThrows(IOException.class, () -> GateCli.verifySource(project, current, rejected));
     assertFalse(Files.exists(rejected));
+
+    Files.writeString(inventory, contents.replaceFirst("\\{", "{\"sourceFileCount\":0,"));
+    assertThrows(IOException.class, () -> GateCli.verifySource(project, current, rejected));
+    assertFalse(Files.exists(rejected));
   }
 
   @Test
