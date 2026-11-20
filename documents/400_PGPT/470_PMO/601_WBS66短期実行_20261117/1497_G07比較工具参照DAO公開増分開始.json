@@ -1,0 +1,59 @@
+{
+  "eventId": "PGPT-20261008-7013",
+  "groupId": "WBS66-G07-STRICT-READER-DAO-PUBLISHED-DELTA",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T17:30:47.880000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 76,
+      "remainingPercent": 24,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66-G07-STRICT-READER-DAO-PUBLISHED-DELTA",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "WBS66-G07-STRICT-READER-DAO-PUBLISHED-DELTA",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-G07"
+    ],
+    "managementWorkIds": [
+      "G07"
+    ],
+    "source": "bc56782c2c517eb204652c52a4af1cd12951a5fc",
+    "productionCoreMain": "2b16a8ed20778fe5896099cb4798cfd1ff96b176",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG41042-g07-reader3-and-dao-published-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.1,
+      "base": 0.25,
+      "high": 0.5
+    },
+    "groupCapPp": 1.0,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1496_P00403参照DAO九件同一実行継続点.json",
+        "sha256": "fda43d2548be899e7b54eed5f1688361bab3176b2703f2d7dbf70ef5d9b718a5"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41020-g07-reader-and-package-delta-v1/manifest.json",
+        "sha256": "73d4275fee92cb0610692f22d8a0120f6a35c406c843a6ed851e91692186addd"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "前G07カーソル、公開頭、既証票",
+    "endCondition": "公開増分のみを全べて走査、真正0・redact・baseline tree不変",
+    "workScope": "公開Gitの差分のみ。stash、未追跡、システム、原データなし"
+  }
+}
