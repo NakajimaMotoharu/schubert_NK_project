@@ -1,0 +1,57 @@
+{
+  "eventId": "PGPT-20261008-6871",
+  "groupId": "g07-established-public-patch-cursor",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T14:42:48.581000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 72,
+      "remainingPercent": 28,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "g07-established-public-patch-cursor",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "g07-established-public-patch-cursor",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-G07"
+    ],
+    "managementWorkIds": [],
+    "source": "9fbd416ffd10538caeaa179ba21145465eebcc16",
+    "productionCoreMain": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40930-g07-current-public-patch-interval-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.07,
+      "base": 0.18,
+      "high": 0.42
+    },
+    "groupCapPp": 0.65,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1354_A13336エラー経路既存証拠継続点.json",
+        "sha256": "6d99862b60a619fdaa4ebd9ece3bc0b87013e3793f023862cef1c26ceff9c372"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40908-g07-current-remote-patch-interval-v1/manifest.json",
+        "sha256": "79b0186269e7ab781e67053cc330acabcd3aea3d28b277471666e4c46193466a"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "公開差分範囲はPG40908でスキャン済み終点から現origin一致HEADまで。以前の区間を再スキャンしない。",
+    "endCondition": "既定Gitleaksと赤塗り出力で差分だけ検査、commits/path/終端/保護Current baseline不変を保存。",
+    "workScope": "公開Gitテキスト差分のみ。protected/private/非追跡ファイルの内容、全repo、実処理は対象外。"
+  }
+}
