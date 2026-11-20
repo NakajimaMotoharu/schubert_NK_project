@@ -1,0 +1,313 @@
+{
+  "run": "PG41328-f03-current-six-source-style-lineage-v1",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-20T23:33:57.511326+00:00",
+  "productionCore": "62b239d4dad561da007e15a290f8a271a165dda9",
+  "testTree": "9e40393d7307b8ba3264f0522b83663b6c18a5b4",
+  "original": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41184-f03-static-three-view-test-delta-v1/manifest.json",
+    "sha256": "795ea2e35503773cb3ac00a8b5ddb1a839709f60d99ae598b34c1e53e607c4d6"
+  },
+  "stylePolicies": [
+    {
+      "path": "pom.xml",
+      "sha256": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38"
+    },
+    {
+      "path": "tools/quality/static/checkstyle.xml",
+      "sha256": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+    }
+  ],
+  "changedMain": 3,
+  "changedTests": 10,
+  "newTestFiles": 6,
+  "modifiedTestFiles": 4,
+  "unchangedMain": 1024,
+  "unchangedTestFiles": 1150,
+  "mainFilesByModule": {
+    "schubert-nk-api": 283,
+    "schubert-nk-batch": 200,
+    "schubert-nk-bootstrap": 88,
+    "schubert-nk-protocol": 169,
+    "schubert-nk-storage": 25,
+    "schubert-nk-web": 262
+  },
+  "mainFiles": 1027,
+  "checkstyleConfirmedMainFiles": 1027,
+  "testFiles": 1160,
+  "checkstyleConfirmedTestFiles": 1128,
+  "heldTestFiles": 32,
+  "verifiedChanges": {
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraphOrderTest.java": {
+      "sha256": "09fe8fdec485fc5db5cf34f82f02d818be66dd37f19a651d1b4ff2af13239922",
+      "format": {
+        "receipt": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41230-f03-jdbc-graph-fixture-expression-fixed-v1/manifest.json",
+          "sha256": "3bfbde1125b667e770997c1c74dc33fc2d14db17c764dea6f77e32d56b248b28"
+        },
+        "source": "45c9a784678095cbbb41ca1fd6013baa548b79bf",
+        "exactInputHashIndependentlyGiven": true
+      },
+      "checkstyle": {
+        "receipt": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41230-f03-jdbc-graph-fixture-expression-fixed-v1/manifest.json",
+          "sha256": "3bfbde1125b667e770997c1c74dc33fc2d14db17c764dea6f77e32d56b248b28"
+        },
+        "source": "45c9a784678095cbbb41ca1fd6013baa548b79bf",
+        "exactInputHashIndependentlyGiven": true
+      },
+      "scope": "Test"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java": {
+      "sha256": "8018f622988cf80a9c1138ad8619d91a4b32d07d75a55ec8f37730217386a23a",
+      "format": {
+        "receipt": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41302-protocol-numeric-full-maven-v1/terminal.json",
+          "sha256": "13ab66e2058302aae3678a3f4b05d1b6b272c2066b142754dc7298b1a3644aa4"
+        },
+        "source": "62b239d4dad561da007e15a290f8a271a165dda9",
+        "exactFrozenMavenSource": true,
+        "scope": "Spotless java-format-contract at validate"
+      },
+      "checkstyle": {
+        "receipt": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41306-protocol-numeric-current-quality-v1/manifest.json",
+          "sha256": "3f1dc10633e045551809614f2ca60bb11d673fad05b095f1ba09c0a84909d525"
+        },
+        "source": "62b239d4dad561da007e15a290f8a271a165dda9",
+        "exactInputHashIndependentlyGiven": true
+      },
+      "scope": "Main"
+    },
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java": {
+      "sha256": "2e0467343a256255013da116d1d594284a16366f9bb3befc7fa72f48dd8d44dc",
+      "format": {
+        "receipt": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41302-protocol-numeric-full-maven-v1/terminal.json",
+          "sha256": "13ab66e2058302aae3678a3f4b05d1b6b272c2066b142754dc7298b1a3644aa4"
+        },
+        "source": "62b239d4dad561da007e15a290f8a271a165dda9",
+        "exactFrozenMavenSource": true,
+        "scope": "Spotless java-format-contract at validate"
+      },
+      "checkstyle": {
+        "receipt": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41306-protocol-numeric-current-quality-v1/manifest.json",
+          "sha256": "3f1dc10633e045551809614f2ca60bb11d673fad05b095f1ba09c0a84909d525"
+        },
+        "source": "62b239d4dad561da007e15a290f8a271a165dda9",
+        "exactInputHashIndependentlyGiven": true
+      },
+      "scope": "Test"
+    },
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageFailureGraphTest.java": {
+      "sha256": "dab2956991bf738f0de0b6628eb3a166ad5eda749d314b82c44004ce0b6bc1fa",
+      "format": {
+        "receipt": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41296-f03-storage-generic-edge-typed-v1/manifest.json",
+          "sha256": "04642ce85599e1c08e1a3e9a7e64aca9544b4028b7e9ae489724d3e0699152ad"
+        },
+        "source": "73257d02769aae531c5af42ebd06226aabf1b712",
+        "exactInputHashIndependentlyGiven": true
+      },
+      "checkstyle": {
+        "receipt": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41296-f03-storage-generic-edge-typed-v1/manifest.json",
+          "sha256": "04642ce85599e1c08e1a3e9a7e64aca9544b4028b7e9ae489724d3e0699152ad"
+        },
+        "source": "73257d02769aae531c5af42ebd06226aabf1b712",
+        "exactInputHashIndependentlyGiven": true
+      },
+      "scope": "Test"
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/HttpByteRangeParser.java": {
+      "sha256": "03f48ae2174399c97ec18e3f72451cc1efc698304226bb38c7eeb958a187891f",
+      "format": {
+        "receipt": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41204-range-unit-ascii-affected-v1/manifest.json",
+          "sha256": "c879718e0132f37d326ac917d29378479347d11bc58ba49b9050a28c703f3d10"
+        },
+        "source": "6c2e8b027818c8dac0ed0f895edb85658e9c4ff1",
+        "exactInputHashIndependentlyGiven": true
+      },
+      "checkstyle": {
+        "receipt": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41204-range-unit-ascii-affected-v1/manifest.json",
+          "sha256": "c879718e0132f37d326ac917d29378479347d11bc58ba49b9050a28c703f3d10"
+        },
+        "source": "6c2e8b027818c8dac0ed0f895edb85658e9c4ff1",
+        "exactInputHashIndependentlyGiven": true
+      },
+      "scope": "Main"
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/MediaRangeService.java": {
+      "sha256": "0a3e8d580e8155d808dca5e9d87ac70d51cd36a3b931c33233fe62a6ef2eca28",
+      "format": {
+        "receipt": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41260-media-current-five-types-corrected-v1/manifest.json",
+          "sha256": "26a4aa4ab0adf7826d73691d8dde64a53d77ba8565568ae2c525d51735841775"
+        },
+        "source": "a8913bc836f81632613b34243f84b7b15eb3e054",
+        "exactInputHashIndependentlyGiven": true
+      },
+      "checkstyle": {
+        "receipt": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41260-media-current-five-types-corrected-v1/manifest.json",
+          "sha256": "26a4aa4ab0adf7826d73691d8dde64a53d77ba8565568ae2c525d51735841775"
+        },
+        "source": "a8913bc836f81632613b34243f84b7b15eb3e054",
+        "exactInputHashIndependentlyGiven": true
+      },
+      "scope": "Main"
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/ExceptionValueContractTest.java": {
+      "sha256": "d8ad731d391721a40d77a17c1e1b13ecd7f0bb0dad740ada0ab9f92e741da810",
+      "format": {
+        "receipt": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41260-media-current-five-types-corrected-v1/manifest.json",
+          "sha256": "26a4aa4ab0adf7826d73691d8dde64a53d77ba8565568ae2c525d51735841775"
+        },
+        "source": "a8913bc836f81632613b34243f84b7b15eb3e054",
+        "exactInputHashIndependentlyGiven": true
+      },
+      "checkstyle": {
+        "receipt": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41260-media-current-five-types-corrected-v1/manifest.json",
+          "sha256": "26a4aa4ab0adf7826d73691d8dde64a53d77ba8565568ae2c525d51735841775"
+        },
+        "source": "a8913bc836f81632613b34243f84b7b15eb3e054",
+        "exactInputHashIndependentlyGiven": true
+      },
+      "scope": "Test"
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeDecimalLimitTest.java": {
+      "sha256": "2d625f105586e1acb1d197ab1a1ae23a92d9ca3cd399dd4cae56068bfac3d84b",
+      "format": {
+        "receipt": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41248-media-range-decimal-corrected-catalog-v1/manifest.json",
+          "sha256": "c4f8298602f254f6fd81272990dbb8b06aa0b63673f773b5986cd86cd521e297"
+        },
+        "source": null,
+        "exactInputHashIndependentlyGiven": true
+      },
+      "checkstyle": {
+        "receipt": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41248-media-range-decimal-corrected-catalog-v1/manifest.json",
+          "sha256": "c4f8298602f254f6fd81272990dbb8b06aa0b63673f773b5986cd86cd521e297"
+        },
+        "source": null,
+        "exactInputHashIndependentlyGiven": true
+      },
+      "scope": "Test"
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeLongBoundaryTest.java": {
+      "sha256": "5e5d9c536d63eefbb3e11a2df87fda97edad4845a5ee14b068e67291af590124",
+      "format": {
+        "receipt": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41190-range-long-cap-neighbors-v1/manifest.json",
+          "sha256": "8c182db6c47e37efd11197ba18b064de2c4370e7ee334c1c9a7e90915472fa39"
+        },
+        "source": null,
+        "exactInputHashIndependentlyGiven": true
+      },
+      "checkstyle": {
+        "receipt": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41190-range-long-cap-neighbors-v1/manifest.json",
+          "sha256": "8c182db6c47e37efd11197ba18b064de2c4370e7ee334c1c9a7e90915472fa39"
+        },
+        "source": null,
+        "exactInputHashIndependentlyGiven": true
+      },
+      "scope": "Test"
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeUnitTokenTest.java": {
+      "sha256": "4b30772d7b8add28b81255de052d229b76c3fe6e61a05414b009ffedb16de516",
+      "format": {
+        "receipt": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41204-range-unit-ascii-affected-v1/manifest.json",
+          "sha256": "c879718e0132f37d326ac917d29378479347d11bc58ba49b9050a28c703f3d10"
+        },
+        "source": "6c2e8b027818c8dac0ed0f895edb85658e9c4ff1",
+        "exactInputHashIndependentlyGiven": true
+      },
+      "checkstyle": {
+        "receipt": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41204-range-unit-ascii-affected-v1/manifest.json",
+          "sha256": "c879718e0132f37d326ac917d29378479347d11bc58ba49b9050a28c703f3d10"
+        },
+        "source": "6c2e8b027818c8dac0ed0f895edb85658e9c4ff1",
+        "exactInputHashIndependentlyGiven": true
+      },
+      "scope": "Test"
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaRangePortTest.java": {
+      "sha256": "817b9474f10e064ef810459cbeb0920b9f6bd22955b68bd04941672f0cff23c2",
+      "format": {
+        "receipt": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41250-media-current-range-response-port-v1/manifest.json",
+          "sha256": "4157fa87b942a680279fb1195873ebe34f7353a80c92cf53a6a880c13927f6d7"
+        },
+        "source": null,
+        "exactInputHashIndependentlyGiven": true
+      },
+      "checkstyle": {
+        "receipt": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41250-media-current-range-response-port-v1/manifest.json",
+          "sha256": "4157fa87b942a680279fb1195873ebe34f7353a80c92cf53a6a880c13927f6d7"
+        },
+        "source": null,
+        "exactInputHashIndependentlyGiven": true
+      },
+      "scope": "Test"
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/MusicTrackCountBoundaryTest.java": {
+      "sha256": "43df2b568a56d132a52e2aad0fe26570cf6ca90a36e1c9a0c91d7ec947cec62c",
+      "format": {
+        "receipt": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41188-scr013-music-track-overclaimed-count-v1/manifest.json",
+          "sha256": "5c098d68a5d6f514372d59211c2b7a1390687a11f92095fe281b5ba6ab7eec1a"
+        },
+        "source": null,
+        "exactInputHashIndependentlyGiven": true
+      },
+      "checkstyle": {
+        "receipt": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41188-scr013-music-track-overclaimed-count-v1/manifest.json",
+          "sha256": "5c098d68a5d6f514372d59211c2b7a1390687a11f92095fe281b5ba6ab7eec1a"
+        },
+        "source": null,
+        "exactInputHashIndependentlyGiven": true
+      },
+      "scope": "Test"
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/UserListLastPageCountTest.java": {
+      "sha256": "f52aff18fe3cbf6c92002cc4618be68e5c76227b71d0658189f75be74eba311e",
+      "format": {
+        "receipt": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41226-scr015-last-page-over-supplied-v1/manifest.json",
+          "sha256": "a2fbe37c8c5b0180a46cc2f74ec3da0f4ab7a446652c2a2506528ee8e1f42b67"
+        },
+        "source": null,
+        "exactInputHashIndependentlyGiven": true
+      },
+      "checkstyle": {
+        "receipt": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41226-scr015-last-page-over-supplied-v1/manifest.json",
+          "sha256": "a2fbe37c8c5b0180a46cc2f74ec3da0f4ab7a446652c2a2506528ee8e1f42b67"
+        },
+        "source": null,
+        "exactInputHashIndependentlyGiven": true
+      },
+      "scope": "Test"
+    }
+  },
+  "knownInheritedToolFinding": "PG41296 SpotBugs status on unchanged constructor assertion is separate from format and Checkstyle successful terminals.",
+  "freshStyleCommands": 0,
+  "styleCommandReruns": 0,
+  "productPtRuns": 0,
+  "heldSourceBodiesOpened": 0,
+  "heldClassesOpened": 0,
+  "wholeF03": false,
+  "whole451": false,
+  "formalDelta": 0
+}
