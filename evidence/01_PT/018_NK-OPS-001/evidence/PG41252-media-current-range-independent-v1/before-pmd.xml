@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-11-21T06:46:09.416">
+<file name="/dev/shm/pgpt-range-service-post-jf2x81ai/prior/MediaRangePortTest.java">
+<violation beginline="268" endline="268" begincolumn="40" endcolumn="45" rule="AvoidSynchronizedAtMethodLevel" ruleset="Multithreading" package="dev.codex.schubert.nk.web.media" class="MediaRangePortTest" method="write" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedatmethodlevel" priority="3">
+Use block level locking rather than method level synchronization
+</violation>
+<violation beginline="351" endline="351" begincolumn="17" endcolumn="23" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.media" class="MediaRangePortTest" method="twoConcurrentRequestsObserveOnePermitWithoutSharingResponseState" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="357" endline="357" begincolumn="9" endcolumn="16" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.web.media" class="MediaRangePortTest" method="twoConcurrentRequestsObserveOnePermitWithoutSharingResponseState" variable="workers" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ExecutorService object are closed after use
+</violation>
+<violation beginline="357" endline="357" begincolumn="19" endcolumn="50" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.media" class="MediaRangePortTest" method="twoConcurrentRequestsObserveOnePermitWithoutSharingResponseState" variable="workers" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="361" endline="370" begincolumn="11" endcolumn="17" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.media" class="MediaRangePortTest" method="twoConcurrentRequestsObserveOnePermitWithoutSharingResponseState" variable="pending" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="375" endline="385" begincolumn="13" endcolumn="42" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.media" class="MediaRangePortTest" method="twoConcurrentRequestsObserveOnePermitWithoutSharingResponseState" variable="rejected" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="397" endline="397" begincolumn="7" endcolumn="28" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.media" class="MediaRangePortTest" method="twoConcurrentRequestsObserveOnePermitWithoutSharingResponseState" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="398" endline="398" begincolumn="18" endcolumn="64" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.media" class="MediaRangePortTest" method="twoConcurrentRequestsObserveOnePermitWithoutSharingResponseState" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="487" endline="502" begincolumn="25" endcolumn="43" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.web.media" class="MediaRangePortTest" method="verify" variable="headers" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+</file>
+</pmd>

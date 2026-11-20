@@ -31,7 +31,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.junit.jupiter.api.Test;
 import org.opentest4j.AssertionFailedError;
 
-/** PT-MED-PORT001..010. Memory-only response/byte-channel ports; no path, native or HTTP client. */
+/** PT-MED-PORT001..011. Memory-only response/byte-channel ports; no path, native or HTTP client. */
 final class MediaRangePortTest {
   private static final int SIZE = 2_097_155;
   private static final String LOGICAL_ID = "7";
@@ -72,6 +72,24 @@ final class MediaRangePortTest {
       assertTrue(source.largestRead <= 65_536);
       assertEquals(vector.length(), source.bytesRead);
     }
+  }
+
+  @Test
+  void invalidUnitAndOverLimitEndDoNotRequestOrReadABody() throws MediaDeliveryException {
+    // PT-MED-PORT011 / SS333 §10.1 / SSC-476. The admitted channel supplies only the length.
+    var source = new Probe();
+    var service = new MediaRangeService(source, 1);
+    var media = descriptor(ContentDisposition.INLINE);
+    for (String header : List.of("byte\u017F=0-0", "bytes=0-9223372036854775808")) {
+      var reply = new Reply();
+      call(service, media, Optional.of(header), false, reply);
+      verify(reply, 416, 0, 0, "bytes */" + SIZE, false, false);
+      assertEquals(0, reply.bodyCalls);
+      assertEquals(0, source.bytesRead);
+      assertEquals(source.opens, source.closes);
+    }
+    assertEquals(2, source.opens);
+    assertEquals(2, source.closes);
   }
 
   @Test

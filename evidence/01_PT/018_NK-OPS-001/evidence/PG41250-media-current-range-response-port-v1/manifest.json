@@ -1,0 +1,350 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-20T21:45:24.030709+00:00",
+  "source": "6c2e8b027818c8dac0ed0f895edb85658e9c4ff1",
+  "testId": "PT-MED-PORT011",
+  "testInput": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaRangePortTest.java",
+    "sha256": "817b9474f10e064ef810459cbeb0920b9f6bd22955b68bd04941672f0cff23c2"
+  },
+  "stages": {
+    "format": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "../toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaRangePortTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "checkstyle": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "../toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaRangePortTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "8dfbc8acc93b57545819c2cfeb0cfe89296c6f36808af8bc1164d2f26e50599e",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compileMain": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG37688-web-enum-current-protocol176-v1/current-protocol176.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "-d",
+        "/dev/shm/pgpt-range-service-current-7ob1v7sv/main",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/HttpByteRangeParser.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/MediaRangeService.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/MediaBodyStreamer.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/MediaDeliveryException.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/ContentDispositionFactory.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compileTest": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/dev/shm/pgpt-range-service-current-7ob1v7sv/main:/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG37688-web-enum-current-protocol176-v1/current-protocol176.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "-d",
+        "/dev/shm/pgpt-range-service-current-7ob1v7sv/test",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaRangePortTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "spotbugs": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Xmx1g",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/com/github/spotbugs/spotbugs/4.10.4/spotbugs-4.10.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-analysis/9.10.1/asm-analysis-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-util/9.10.1/asm-util-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/bcel/bcel/6.12.0/bcel-6.12.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/github/stephenc/jcip/jcip-annotations/1.0-1/jcip-annotations-1.0-1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/dom4j/dom4j/2.2.0/dom4j-2.2.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/commons/commons-lang3/3.20.0/commons-lang3-3.20.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/commons/commons-text/1.15.0/commons-text-1.15.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/github/spotbugs/spotbugs-annotations/4.10.4/spotbugs-annotations-4.10.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/jaxen/jaxen/2.0.6/jaxen-2.0.6.jar:/home/mini/codex/project1/work/toolchain/m2/repository/net/sf/saxon/Saxon-HE/12.10/Saxon-HE-12.10.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/logging/log4j/log4j-api/2.26.1/log4j-api-2.26.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.26.1/log4j-to-slf4j-2.26.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-simple/2.0.18/slf4j-simple-2.0.18.jar:/home/mini/codex/project1/work/toolchain/m2/repository/commons-io/commons-io/2.22.0/commons-io-2.22.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/xmlresolver/xmlresolver/5.3.3/xmlresolver-5.3.3.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/xmlresolver/xmlresolver/5.3.3/xmlresolver-5.3.3-data.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+        "edu.umd.cs.findbugs.FindBugs2",
+        "-effort:max",
+        "-low",
+        "-xml:withMessages",
+        "-exitcode",
+        "-auxclasspath",
+        "/dev/shm/pgpt-range-service-current-7ob1v7sv/main:/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG37688-web-enum-current-protocol176-v1/current-protocol176.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "-output",
+        "/dev/shm/pgpt-range-service-current-7ob1v7sv/spotbugs.xml",
+        "/dev/shm/pgpt-range-service-current-7ob1v7sv/test/dev/codex/schubert/nk/web/media/MediaRangePortTest$1$1.class",
+        "/dev/shm/pgpt-range-service-current-7ob1v7sv/test/dev/codex/schubert/nk/web/media/MediaRangePortTest$1.class",
+        "/dev/shm/pgpt-range-service-current-7ob1v7sv/test/dev/codex/schubert/nk/web/media/MediaRangePortTest$MemoryChannel.class",
+        "/dev/shm/pgpt-range-service-current-7ob1v7sv/test/dev/codex/schubert/nk/web/media/MediaRangePortTest$Probe.class",
+        "/dev/shm/pgpt-range-service-current-7ob1v7sv/test/dev/codex/schubert/nk/web/media/MediaRangePortTest$Reply$1.class",
+        "/dev/shm/pgpt-range-service-current-7ob1v7sv/test/dev/codex/schubert/nk/web/media/MediaRangePortTest$Reply.class",
+        "/dev/shm/pgpt-range-service-current-7ob1v7sv/test/dev/codex/schubert/nk/web/media/MediaRangePortTest$Vector.class",
+        "/dev/shm/pgpt-range-service-current-7ob1v7sv/test/dev/codex/schubert/nk/web/media/MediaRangePortTest.class"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "83febadc46f214e89709b832aae077e8a743258c2778ad97727d55ed33462071"
+    },
+    "junit": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Dfile.encoding=UTF-8",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/PG41250-media-current-range-response-port-v1/unit.exec,append=false,sessionid=PG41250-media-current-range-response-port-v1",
+        "-cp",
+        "/dev/shm/pgpt-range-service-current-7ob1v7sv/test:/dev/shm/pgpt-range-service-current-7ob1v7sv/main:/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG37688-web-enum-current-protocol176-v1/current-protocol176.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "org.junit.platform.console.ConsoleLauncher",
+        "execute",
+        "--disable-banner",
+        "--details=summary",
+        "--fail-if-no-tests",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41250-media-current-range-response-port-v1/xml",
+        "--select-class",
+        "dev.codex.schubert.nk.web.media.MediaRangePortTest"
+      ],
+      "exit": 0,
+      "stdoutSha256": "897e55554dfd9cf58e2632768c40ea88f62a519a26aa20782b0906931a9d6ce2",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "originalArtifacts": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41250-media-current-range-response-port-v1/terminal.json",
+      "sha256": "ca0bffdb7826e3d3be7d6fedc6622b189c99bef06725b0d93ddd8175b88db001"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41250-media-current-range-response-port-v1/unit.exec",
+      "sha256": "44ec1aae6f0a2bec82395963a0ba6b9fbefa5a8569e3c108453cb941fc8a7adc"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41250-media-current-range-response-port-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "b42f967da15313514df9e32adbe9c5b64f2028317d6ef582fc1ae9b9d0a83072"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41250-media-current-range-response-port-v1/spotbugs.xml",
+      "sha256": "028ecf1a12b2237a67892121a77c7674285f0862522f57603d57637f40d28ce3"
+    }
+  ],
+  "coverageClassFiles": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41250-media-current-range-response-port-v1/physical/ContentDispositionFactory.class",
+      "sha256": "bb3dc0e1262bb3ad2c77adcbd46fffeddf8d2dee38c0d57dbd518babe581884f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41250-media-current-range-response-port-v1/physical/HttpByteRangeParser$Full.class",
+      "sha256": "07a096b771e062b939083c71daf97ee3e07c146fb7c36dfbc77fa85854932e7d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41250-media-current-range-response-port-v1/physical/HttpByteRangeParser$Partial.class",
+      "sha256": "9c4e54f7715a0b18ef5db819dc6aca51d7ec6b5293bc05c68b658645e7f87d08"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41250-media-current-range-response-port-v1/physical/HttpByteRangeParser$Selection.class",
+      "sha256": "44bbe8f708ab5b50ffb0c0bc64776e7e31361eb7ba88efb22873d40fb0f23bbe"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41250-media-current-range-response-port-v1/physical/HttpByteRangeParser$Unsatisfiable.class",
+      "sha256": "b342e7e1ebca20fc5d87b29ac3a43274473efd6a8c076119e4bde044637cea39"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41250-media-current-range-response-port-v1/physical/HttpByteRangeParser.class",
+      "sha256": "94a6f9e676b8ec4d60adbcd95f3e823991a32b0550975d347b946a78c30f57d6"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41250-media-current-range-response-port-v1/physical/MediaBodyStreamer.class",
+      "sha256": "8c87a17d9dcfc34027cffc994346ffd4a2c7dd8eedf2192dd0c7c428ec1d9473"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41250-media-current-range-response-port-v1/physical/MediaDeliveryException$Reason.class",
+      "sha256": "a77c84c20ae2a8d208cf1bb9fd4620a727f88e37db2d4638b7de092fbabebd2a"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41250-media-current-range-response-port-v1/physical/MediaDeliveryException.class",
+      "sha256": "f4e8761a5abbc5e70b490589521f0f7bd98b52ec717194461ba3807298b43937"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41250-media-current-range-response-port-v1/physical/MediaRangeService$FileSource.class",
+      "sha256": "bed817501847367e143d838b97bcac5a6d5f829689630bb04ff07488a50e600b"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41250-media-current-range-response-port-v1/physical/MediaRangeService$ReadOperation.class",
+      "sha256": "e67eee1f672bc26fc565e221b6e6b3e2fbe5dcb1f6f438529bd422934a65ec31"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41250-media-current-range-response-port-v1/physical/MediaRangeService$Response.class",
+      "sha256": "5c0027f150f9ccb146ac263a20fa0904de848228daf664f5eebe8a2a5bf717db"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41250-media-current-range-response-port-v1/physical/MediaRangeService.class",
+      "sha256": "f26b78af15d7ab9dbe89b62c6dc0556cda398ca8f8268a94ab5fd77b1fa43bef"
+    }
+  ],
+  "inputSources": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/HttpByteRangeParser.java",
+      "sha256": "03f48ae2174399c97ec18e3f72451cc1efc698304226bb38c7eeb958a187891f"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/MediaRangeService.java",
+      "sha256": "6add8f1a1e8470b3f8aedc86e273138c7446de07ab16a772587df00f2c59e69a"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/MediaBodyStreamer.java",
+      "sha256": "dccf3918d3891a520cf7a01537c774a5450dd450e28bf77b922ea1134b6ad163"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/MediaDeliveryException.java",
+      "sha256": "1b67c19a97f0cd35f193bc38ad1e155a4691f54ce6ad0c58d9bb37728cc77585"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/ContentDispositionFactory.java",
+      "sha256": "87aa576aafd6cb17a6778ce25d60bbbeb7df444fc089e749a68a70232215fc4e"
+    }
+  ],
+  "actualProductTests": 11,
+  "newProductCases": 1,
+  "requiredOlderCases": 10,
+  "fixtureCanaries": 1,
+  "failed": 0,
+  "skipped": 0,
+  "errors": 0,
+  "notRun": 0,
+  "originalProbeRecords": {
+    "dev/codex/schubert/nk/web/media/MediaRangeService": {
+      "crc64": "dff20dc20c4d35a4",
+      "probeCount": 57,
+      "hitProbeIds": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56
+      ],
+      "missedProbeIds": [
+        40
+      ]
+    },
+    "dev/codex/schubert/nk/web/media/HttpByteRangeParser": {
+      "crc64": "99ed5f7f9415a96e",
+      "probeCount": 37,
+      "hitProbeIds": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        14,
+        17,
+        18,
+        19,
+        20,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        30,
+        31,
+        32,
+        33,
+        35,
+        36
+      ],
+      "missedProbeIds": [
+        0,
+        1,
+        2,
+        13,
+        15,
+        16,
+        21,
+        29,
+        34
+      ]
+    }
+  },
+  "channelMetadataOpens": 2,
+  "bodyRequestsInNewCase": 0,
+  "fileBytesReadInNewCase": 0,
+  "physicalFileOrHttpOps": 0,
+  "formalDelta": 0
+}

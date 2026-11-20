@@ -1,0 +1,75 @@
+{
+  "eventId": "PGPT-20261008-7179",
+  "groupId": "P00904-CurrentRangeAndMediaResponsePort",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T21:43:39.337000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 82,
+      "remainingPercent": 18,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "P00904-CurrentRangeAndMediaResponsePort",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "P00904-CurrentRangeAndMediaResponsePort",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P009-04"
+    ],
+    "managementWorkIds": [
+      "WBS-P009-04/2"
+    ],
+    "source": "59e256a7c9c13eb3a3050f1fd255cdf2ce6c1d93",
+    "productionCoreMain": "6c2e8b027818c8dac0ed0f895edb85658e9c4ff1",
+    "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "run": "PG41250",
+    "estimateAtGroupStartPp": {
+      "low": 0.2,
+      "base": 0.65,
+      "high": 1.3
+    },
+    "groupCapPp": 1.5,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1663_Range符号付き上限完了・次工程.json",
+        "sha256": "cd2423884543eb6ec752a2887c8501cf4b215510fada2494d5702d3aa548bec3"
+      },
+      {
+        "path": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+        "sha256": "ef2296f8b6c731e751d0f4d7ea6222facca256a959260cf85d4b89f452c4a141"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41200-f03-media-port-fixture-typed-green-v1/manifest.json",
+        "sha256": "0dd72d694ad86e2ef977088fedce26682e099f369970557d58b42f5d038cd281"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41204-range-unit-ascii-affected-v1/manifest.json",
+        "sha256": "c879718e0132f37d326ac917d29378479347d11bc58ba49b9050a28c703f3d10"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41248-media-range-decimal-corrected-catalog-v1/manifest.json",
+        "sha256": "c4f8298602f254f6fd81272990dbb8b06aa0b63673f773b5986cd86cd521e297"
+      },
+      {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaRangePortTest.java",
+        "sha256": "214c275021fc8c8381a5415aa4d50537ea4efcbc81854fba8551f1be88d7904d"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "SS333 §10の現parsing byte変更の影響。PG41200のMedia配信portは旧parser、PG41204現parserの局所再資格。実環境と別の同メモリportに過大終点とASCII外単位の416証拠が不足。",
+    "endCondition": "新PT-MED-PORT011で416／Content-Range／Content-Length0／本文要求・取得0／長さ確定の借用channelは一回終了。変更parser影響の同Test旧10＋fixture1を再資格し同sourceのCRCと結果を照合。",
+    "workScope": "既承認メモリportの五Main等だけ。実HTTP/VM/DB/認証／原本fileアクセスなし。既Channelのsizeとcloseのみ擬似。"
+  }
+}
