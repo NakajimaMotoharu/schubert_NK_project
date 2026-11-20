@@ -1,0 +1,64 @@
+{
+  "eventId": "PGPT-20261008-6704",
+  "groupId": "PGPT-WBS66-F02-TIMED-ALERT-CURRENT-PACKAGE-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T11:20:51.521000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 67,
+      "remainingPercent": 33,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F02-TIMED-ALERT-CURRENT-PACKAGE-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F02-TIMED-ALERT-CURRENT-PACKAGE-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a",
+      "WBS-C07"
+    ],
+    "source": "92c6bac7a7dafc267fb11a00cfe2d9904bea7a22",
+    "productionCoreMain": "da20ad7753279ae4e8017593866502d3341ec0e5",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40802-f02-current-four-package-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.2,
+      "base": 0.55,
+      "high": 1.15
+    },
+    "groupCapPp": 1.8,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1186_F03警報修正の品質継続点.json",
+        "sha256": "55162fb8f8b792410949a6e1c0c85320ec6ec733b660431d87c840b4486aa996"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40744-f02-cleanup-terminal-current-four-jars-v1/manifest.json",
+        "sha256": "b09a2e11492f508e5b1a503877f3efc9b5ac72412e7a9b8a68960e62d56dc2a0"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40800-f03-timed-alert-static-v1/manifest.json",
+        "sha256": "65a9b48a1c6ffcbc388ad994f6cba6a01022e03e70892e2972b00adc2f5c062c"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "変更8MainはBatchのみ。PG40744で通常承認済みの四module Maven compile/JAR組立。QA-056のAPI/Web Mainと全JAR解析を含まない。",
+    "endCondition": "新候補の通常build・真終了・四出力のdigestを取得。依存静的解析や製品動的試験は既済を再演しない。",
+    "workScope": "rootと子POMのみのmeta、四moduleのmain入力、生成JARの全artifact hash。収録classの追加解析/配備/外部実行なし。"
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "actualExit": 0,
+  "source": "da20ad7753279ae4e8017593866502d3341ec0e5",
+  "priorCore": "517a23cddc9f3883550942f6fa90a4256ef39b73",
+  "startEvent": "PGPT-20261008-6704",
+  "startedAtUTC": "2026-11-20T11:21:27.952265+00:00",
+  "terminalAtUTC": "2026-11-20T11:21:58.331930+00:00",
+  "sourceArchiveSha256": "596b78f9598d891c00c02c765766b34e567fca1b61657cb7c16941f44d78716b",
+  "changedMain": [
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertRegistry.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholds.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor.java"
+  ],
+  "selectedMavenModules": [
+    "protocol",
+    "storage",
+    "bootstrap",
+    "batch"
+  ],
+  "metadataOnlyModules": [
+    "src/schubert-nk-api/pom.xml",
+    "src/schubert-nk-web/pom.xml",
+    "program/characterization/pom.xml"
+  ],
+  "steps": {
+    "compile": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-pl",
+        "src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-batch",
+        "-am",
+        "compile"
+      ],
+      "beginUTC": "2026-11-20T11:21:27.982763+00:00",
+      "endUTC": "2026-11-20T11:21:56.431351+00:00",
+      "exit": 0,
+      "reactorSummary": [
+        "[INFO] schubert-nk ........................................ SUCCESS [  0.486 s]",
+        "[INFO] Schubert NK Protocol ............................... SUCCESS [  6.271 s]",
+        "[INFO] Schubert NK Storage ................................ SUCCESS [  3.008 s]",
+        "[INFO] Schubert NK Shared Bootstrap ....................... SUCCESS [  6.442 s]",
+        "[INFO] Schubert NK Batch .................................. SUCCESS [ 11.292 s]"
+      ],
+      "stdoutSha256": "4136385db9cfec167aeb94074dd71c027b34ac7fea257621d5b76389c39695af",
+      "stderrSha256": "05ed4976f99856c1417eead6c52058f5565d748a00ae7939fa02188545fafda4"
+    },
+    "jar": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-pl",
+        "src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-batch",
+        "org.apache.maven.plugins:maven-jar-plugin:3.4.1:jar"
+      ],
+      "beginUTC": "2026-11-20T11:21:56.431394+00:00",
+      "endUTC": "2026-11-20T11:21:58.319789+00:00",
+      "exit": 0,
+      "reactorSummary": [
+        "[INFO] Schubert NK Protocol ............................... SUCCESS [  0.381 s]",
+        "[INFO] Schubert NK Storage ................................ SUCCESS [  0.028 s]",
+        "[INFO] Schubert NK Shared Bootstrap ....................... SUCCESS [  0.121 s]",
+        "[INFO] Schubert NK Batch .................................. SUCCESS [  0.344 s]"
+      ],
+      "stdoutSha256": "532d9754fb6748ca041aac17391e0358e0c0487be68a38eca5b99e4f1d1036a9",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "packaged": {
+    "protocol": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40802-f02-current-four-package-v1/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+      "fileBytes": 299374,
+      "sha256": "9b9de96fb1043946dde9dcd9d2e53091a582e33679f6557bfaf08200d26bbeb4"
+    },
+    "storage": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40802-f02-current-four-package-v1/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+      "fileBytes": 111799,
+      "sha256": "e5be03a72a9cca548f68fc1ca7ee84ced8980dbea72162f58772215227be3ec0"
+    },
+    "bootstrap": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40802-f02-current-four-package-v1/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+      "fileBytes": 428819,
+      "sha256": "3de920f0fc7df4909b362fd25856b5b91e2517fa404cbe5756725544472887f7"
+    },
+    "batch": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40802-f02-current-four-package-v1/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+      "fileBytes": 1263734,
+      "sha256": "3ac8777d7171f2e9267c9231d0cc89cc4603aadd777a36448d25a1b1ae1e239a"
+    }
+  },
+  "productTestsStarted": 0,
+  "whole451": false,
+  "wholeSixBuild": false,
+  "jarStaticInvocations": 0,
+  "heldClassfilesProvidedToAnalyzers": 0,
+  "externalOperations": 0,
+  "formalDelta": 0
+}
