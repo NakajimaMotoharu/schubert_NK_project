@@ -1,5 +1,9 @@
 # Module・Program一覧
 
+## NK-OPS-001 観測欠落を受けた警報回復
+
+WBS-P018-09のMonitoringPolicyEngine.observationMissingとAlertRegistry.interruptContinuityをPT-OPS-MONPIPE-008に対応付けた。対象キーの回復起点だけを更新し、同条件の別サービスと同サービスの別条件は各期限で回復した。A1-38.01のHttpMetricValveはHTTPTERM001～008のソース根拠を保持し、動的PTは保留。 [単体仕様](../../../evidence/01_PT/018_NK-OPS-001/5498_警報回復における観測欠落のキー分離仕様.md)
+
 ## NK-DAT-001 参照DAOの三経路例外順位
 
 WBS-P004-03のRunReferenceRepository.read、closeRow、closeStatementを新しいRRF-PURE-009へ対応付けた。DAT-009／OPS-009、UI251、SS331 §3.12／SS332 SSC063・448・461。PG40914で本体と両方の解放が同時に失敗する三入力の元Error、逆順解放、借用Connection非変更を観測し、PG40916で同一Testの書式を確認。実DB・原本・全451と正式判定は継続。 [PT実行結果](../../../evidence/01_PT/004_NK-DAT-001/456_P00403参照DAO三経路例外順位結果.md)

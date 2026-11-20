@@ -9085,7 +9085,7 @@
   },
   "beforeSsc261InventorySha256": "443af5012e6a3d2a9088bb38d4a28ae3f7ff7645e6e4689fde2bea543fe19b9b",
   "beforeStrictReferenceCandidateInventorySha256": "44976d5ce11f24a89ea7db68c4d5ce1674f9a72032b6a96e453adc461a850968",
-  "inventorySha256": "9d906d08062106a1c4fe120a51b07f4540a2451504022ac76d5ec8c6263cffe4",
+  "inventorySha256": "e5e47559d4c6e486d909a67a0d12b15679631b11c114fdcf77061837412fdbda",
   "expiryCandidateObservation": {
     "source": "1ec19782a1afe22d1de75b05f4cd12b8a8a8a172",
     "run": "PG713/714+PG715/717/719+PG722/725/728/729/730+PG737/738/739",
@@ -47768,6 +47768,62 @@
       "actual original ownership and retirement",
       "current source whole 451"
     ],
+    "formalDelta": 0
+  },
+  "monitorMissingObservationKeyIsolationPG40940": {
+    "owner": "WBS-P018-09",
+    "source": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+    "testId": "PT-OPS-MONPIPE-008",
+    "fixture": {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngineTest.java",
+      "sha256": "20fd64bbd917876f63de65b96c9b1ce9812228809a095ad24cb99763a2d90009"
+    },
+    "methods": [
+      "MonitoringPolicyEngine.observationMissing",
+      "AlertRegistry.interruptContinuity"
+    ],
+    "productInputs": [
+      {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertRegistry.java",
+        "sha256": "24fc6ea876fa229d117024732ad12adbad089ef72083060f55883c40017567ea"
+      },
+      {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine.java",
+        "sha256": "8ce6319ce1cc66796725d2d2d773abb10e4d181cf8d24276de2d7c171f987978"
+      }
+    ],
+    "design": [
+      "RD171",
+      "UI252",
+      "SS351 §7"
+    ],
+    "independentSpec": {
+      "path": "evidence/01_PT/018_NK-OPS-001/5498_警報回復における観測欠落のキー分離仕様.md",
+      "sha256": "469e56aafb9634c3eb45775cfe3249c9214a74d72816d2c00df9316cc9b3632a"
+    },
+    "unit": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40938-p01809-recovery-per-key-v1/manifest.json",
+      "sha256": "1bb109849a4e69c6a2b873e1eea6534df2ecfaa0ec0b8ae5b1f33b7d4da7b811"
+    },
+    "separateValveHold": {
+      "main": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/HttpMetricValve.java",
+        "sha256": "f7dd88544d4d690d19a519488904e058a4ee8c2d8b7595c75b0494b872204a75"
+      },
+      "fixture": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricValveTest.java",
+        "sha256": "712c5e5d260869311a4cebc1c248d2343d7db23cd08080ba0c1c8c685ae3277c"
+      },
+      "sourceOnlyProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25476-web-http-terminal-source-independent-v1/manifest.json",
+        "sha256": "9a0b510cf52a06473343d00f3f075429406d44f6fdd4c7aeaf7c5d92e12ae33b"
+      },
+      "workId": "A1-38.01",
+      "testIds": "HTTPTERM001..008",
+      "notRun": 8
+    },
+    "runCount": 0,
+    "addedPricePp": 0,
     "formalDelta": 0
   }
 }
