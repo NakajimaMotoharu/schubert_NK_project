@@ -1,0 +1,136 @@
+{
+  "eventId": "PGPT-20261008-7123",
+  "groupId": "WBS66-P01609-SCR009-DECLARED-COUNT-OVERCLAIM",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T20:21:55.084000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 80,
+      "remainingPercent": 20,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66-P01609-SCR009-DECLARED-COUNT-OVERCLAIM",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "WBS66-P01609-SCR009-DECLARED-COUNT-OVERCLAIM",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P016-09"
+    ],
+    "managementWorkIds": [
+      "WBS-P016-09/2-照合"
+    ],
+    "source": "ed709459deae11fa5f14037ac82e50dd7e65f4e5",
+    "productionCoreMain": "559f5b5945e82374e0843dcfae11a8d07faef1ea",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG41182-scr009-animation-overclaimed-count-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.12,
+      "base": 0.3,
+      "high": 0.9
+    },
+    "groupCapPp": 1.1,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1606_G08YKT2769横展開完了と次工程.json",
+        "sha256": "b6d7f5323a5781f1bb982d6c3162c13ee3aace7e48ff8c32bd09c92dd7b27e7c"
+      },
+      {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG24472-search-animation-view-preflight-v1/manifest.json",
+        "sha256": "4990c02558f1fda2d10843f08d6a4de34df1cc26508b8819882c21075d46de66"
+      },
+      {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG24476-search-animation-view-bounded-sixteen-independent-v1/manifest.json",
+        "sha256": "f8b78eff11977bfb750a956092d49430da16731052b4ff85ba4395020cfc7c91"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27704-animation-browse-four-contract-v1/manifest.json",
+        "sha256": "64af3e58bffeb792835a129040b5c512c75aebf6cf29a68bce3617f9533916b7"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "WBS483、UI235 §5.2–5.3、SS313 SCR009。元WEB232は宣言0・実非0のみ。逆向きの宣言1・実0は独立。現Mainと依存元source hash一致",
+    "endCondition": "承認済み純値一件の終了0・XML・指定クラスCRC。既試験累計は参照のみ",
+    "workScope": "PT-WEB-SCR009-COUNT-001; direct JVM no deployment, HTTP, authentic session, DB or environment IO in product code. scratch tmpfs <32MiB; evidence <128KiB",
+    "quotaAfter": {
+      "usedPercent": 80,
+      "remainingPercent": 20,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "2c1392e0253d8330c114d3481aca406a1a0721acf1413881ca3a5314d673c6da",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T20:21:55.084000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 80,
+          "remainingPercent": 20,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T20:21:45.390770+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 80,
+      "remainingPercent": 20,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-7122",
+    "attempt": 1,
+    "attemptResult": "PRODUCT_VALUE_BOUNDARY_PASSED_CURRENT_BYTECODE",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 1,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41182-scr009-animation-overclaimed-count-v1/manifest.json",
+        "sha256": "57e351a6669d7acc3a095165571cae11bc1555e14ea5f4e9c177078140275054"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5611_scr009_animation_count_overclaim.py",
+        "sha256": "3499f5ba8b3cc8fced9264630fe15f3ab100023b6754f47bc9650b5971ce7b6f"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": "SCR009のP015-02、実HTTP、同source全451。旧CRC三物理は全て異なり旧scopeを当runへ合算しない。",
+    "bootstrapPreflightExit": 1,
+    "bootstrapPreflightCause": "Local compiler insisted the classpath scratch must exist before javac; fixed before any product JVM",
+    "firstActualProductCases": 1,
+    "firstActualProductPass": 1,
+    "testId": "PT-WEB-SCR009-COUNT-001",
+    "freshProjectionPhysical": 3,
+    "matchedOldCrc": 0,
+    "actualOrdinaryBackendActivations": 0
+  }
+}

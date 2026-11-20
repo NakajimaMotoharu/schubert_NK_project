@@ -997,3 +997,5 @@ PT-F02-WEB-FILE-CTOR-001～015、WBS-F02-a、SS311 §5.2／PG-D516。Controller�
 PT-WEB-SCR012-COUNT-001、WBS-P016-12/2-照合、SS313 §2・UI235 §8。区分件数の反対方向不一致。 [局所仕様](../../../evidence/01_PT/016_NK-WEB-002/4938_SCR012区分件数不足側の単体仕様.md)。
 
 PT-WEB-SCR011-COUNT-001、WBS-P016-11/2-照合、SS313 §2・UI235 §7。カテゴリ件数の過少申告。 [局所仕様](../../../evidence/01_PT/016_NK-WEB-002/4940_SCR011カテゴリ件数不足側の単体仕様.md)。
+
+PT-WEB-SCR009-COUNT-001、WBS-P016-09/2-照合、SS313 §2・UI235 §5。Animation一覧の件数過大申告。 [局所仕様](../../../evidence/01_PT/016_NK-WEB-002/4942_SCR009Animation件数過大側の単体仕様.md)。

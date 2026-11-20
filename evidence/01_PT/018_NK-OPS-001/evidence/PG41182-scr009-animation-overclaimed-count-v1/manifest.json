@@ -1,0 +1,269 @@
+{
+  "actualExit": 0,
+  "productionCore": "559f5b5945e82374e0843dcfae11a8d07faef1ea",
+  "testId": "PT-WEB-SCR009-COUNT-001",
+  "terminalAtUTC": "2026-11-20T20:21:45.390770+00:00",
+  "os": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+  "run": "PG41182-scr009-animation-overclaimed-count-v1",
+  "newTests": 1,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "stages": {
+    "format": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationListCountBoundaryTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "style": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationListCountBoundaryTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e78f7a651077c8cfef14f9da6e47bbf782bdedccc844f1f62a5c56f9dd4a965f",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compile": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/dev/shm/pgpt-scr009-count-t4o_kr9r/classes:/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG37688-web-enum-current-protocol176-v1/current-protocol176.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/pg37962-log-view-safe-dependencies-v1/qualified-web-safe18.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-web/7.0.9/spring-web-7.0.9.jar",
+        "-d",
+        "/dev/shm/pgpt-scr009-count-t4o_kr9r/classes",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/AnimationListViewModel.java",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationListCountBoundaryTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "crc": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "classinfo",
+        "/dev/shm/pgpt-scr009-count-t4o_kr9r/classes/dev/codex/schubert/nk/web/view/AnimationListViewModel.class",
+        "/dev/shm/pgpt-scr009-count-t4o_kr9r/classes/dev/codex/schubert/nk/web/view/AnimationListViewModel$Row.class",
+        "/dev/shm/pgpt-scr009-count-t4o_kr9r/classes/dev/codex/schubert/nk/web/view/AnimationListViewModel$Video.class"
+      ],
+      "exit": 0,
+      "stdoutSha256": "81b5bb8ba20b638d35ce431d7220371942ce251d19a6f28b32722f557989eeec",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "junit": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Dfile.encoding=UTF-8",
+        "-Duser.timezone=Asia/Tokyo",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/PG41182-scr009-animation-overclaimed-count-v1/unit.exec,append=false,sessionid=PG41182-scr009-animation-overclaimed-count-v1",
+        "-cp",
+        "/dev/shm/pgpt-scr009-count-t4o_kr9r/classes:/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG37688-web-enum-current-protocol176-v1/current-protocol176.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/pg37962-log-view-safe-dependencies-v1/qualified-web-safe18.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-web/7.0.9/spring-web-7.0.9.jar",
+        "org.junit.platform.console.ConsoleLauncher",
+        "execute",
+        "--disable-banner",
+        "--details=summary",
+        "--fail-if-no-tests",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41182-scr009-animation-overclaimed-count-v1/xml",
+        "--select-class",
+        "dev.codex.schubert.nk.web.view.AnimationListCountBoundaryTest"
+      ],
+      "exit": 0,
+      "stdoutSha256": "737178394e171b16e054419fc2c826571f14e368db8e19cb5336a11bb0490e41",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "testSource": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationListCountBoundaryTest.java",
+    "sha256": "f179628406a4baf3de1d29ab5dd1df2c475818ca05371670f10ee723c67ec4ad"
+  },
+  "existingTestReceipt": {
+    "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG24476-search-animation-view-bounded-sixteen-independent-v1/manifest.json",
+    "sha256": "f8b78eff11977bfb750a956092d49430da16731052b4ff85ba4395020cfc7c91"
+  },
+  "retainedOldCases": 16,
+  "replayedOldTests": 0,
+  "sourceInputs": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/AnimationListViewModel.java",
+      "sha256": "1e32880757caeddfa8eda52634a8b52dbd3aca2471eb0e04118f97b976063e4d"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/TopBarViewModel.java",
+      "sha256": "16afe37089d96cb31e7849e5bf5e289196588c6f4b8e1d4732fd402887e24a09"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionPrincipal.java",
+      "sha256": "29af626632ac4c2727f9d0963c3967cb0be7eda57daf762a482268c467dc9232"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/AuthenticationContext.java",
+      "sha256": "aaa18a4c954a425c943e8c30ea1752b665b249e86d8f1767e9e37f4aa61a6b66"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/UserRole.java",
+      "sha256": "b68402e5705ca2ac5093a1b98a44de5a9f45ed69cb9b231658b4903c51e0bf69"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/AnimationListCategory.java",
+      "sha256": "0e7c5503c97d12aa835735ff8b968c6d5126f9f1a9867540af60432a8c41ba32"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/AnimationCategory.java",
+      "sha256": "a2adaa30dca9965fdccf883af5fe78686d3b4350b1a600195b9f61e049c982cd"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/AnimationRecord.java",
+      "sha256": "76be7cbc0ad448d5db04b6f887107c07c730c8787de4a19ded78ac959b279796"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/AnimationListResponseData.java",
+      "sha256": "9ea09d9d4566e2c23b8ecfb0f68845f2e598217250c7305c1959f4cb29735192"
+    }
+  ],
+  "admittedDeps": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37996-hierarchy-detail-music-current32-prepare-v1/manifest.json",
+    "sha256": "06d78511333c213e70e974ea0dde610dfbd26ab22b2515aa11343f50d5910208"
+  },
+  "currentPhysicalSha256": {
+    "dev/codex/schubert/nk/web/view/AnimationListViewModel.class": "fdcf59ff0f011788a2e720a6e3109438da2a50247505b3c84262c987073cce74",
+    "dev/codex/schubert/nk/web/view/AnimationListViewModel$Row.class": "29addd1a854fd3e0b8bcc3563188d25824893e024daba06430acae9c4c21b211",
+    "dev/codex/schubert/nk/web/view/AnimationListViewModel$Video.class": "c7d2134deebd97c8de6d5e75c515e9df8da6e3d261d59f2298c2babe57553855"
+  },
+  "currentClassCrc": {
+    "dev/codex/schubert/nk/web/view/AnimationListViewModel": "dc488761038f7c05",
+    "dev/codex/schubert/nk/web/view/AnimationListViewModel$Row": "789d4c4f281a7ef9",
+    "dev/codex/schubert/nk/web/view/AnimationListViewModel$Video": "90b43abd9fac9bc1"
+  },
+  "matchesOldCrc": {
+    "dev/codex/schubert/nk/web/view/AnimationListViewModel": false,
+    "dev/codex/schubert/nk/web/view/AnimationListViewModel$Row": false,
+    "dev/codex/schubert/nk/web/view/AnimationListViewModel$Video": false
+  },
+  "currentExecClass": {
+    "crc64": "dc488761038f7c05",
+    "probeCount": 68,
+    "hitProbeIds": [
+      11,
+      12,
+      13,
+      14,
+      16,
+      17
+    ],
+    "missedProbeIds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      15,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67
+    ]
+  },
+  "oldAndNewExecCombined": false,
+  "localOriginals": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41182-scr009-animation-overclaimed-count-v1/terminal.json",
+      "sha256": "6661bdfbc21399106030e42f30aa173c2c1a8443c43314401aa1fceeecec1652"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41182-scr009-animation-overclaimed-count-v1/unit.exec",
+      "sha256": "0af772f9e8af15407ae375da550f3e0077cec25c9971cbe94634eb448e619d07"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41182-scr009-animation-overclaimed-count-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "9a525951bc19412c2dfb73ebd7e131ab5af04297bd0fc93194a3917e94515c3e"
+    }
+  ],
+  "observedCase": {
+    "classname": "dev.codex.schubert.nk.web.view.AnimationListCountBoundaryTest",
+    "name": "rejectsDeclaredOneWhenTheAnimationRecordsAreEmpty()"
+  },
+  "input": {
+    "declaredCount": 1,
+    "actualRows": 0
+  },
+  "expected": "IllegalArgumentException",
+  "actual": "IllegalArgumentException",
+  "wholeScopeCoverage": false,
+  "whole451": false,
+  "formalDelta": 0
+}
