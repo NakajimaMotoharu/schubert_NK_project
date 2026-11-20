@@ -1,0 +1,64 @@
+{
+  "eventId": "PGPT-20261008-6719",
+  "groupId": "PGPT-WBS66-C07-IMMEDIATE-ALERT-NEW-SOURCE-REGRESSION-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T11:31:54.478000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 68,
+      "remainingPercent": 32,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-C07-IMMEDIATE-ALERT-NEW-SOURCE-REGRESSION-20261120",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "PGPT-WBS66-C07-IMMEDIATE-ALERT-NEW-SOURCE-REGRESSION-20261120",
+    "workAttributionKind": "SOURCE_REQUALIFICATION",
+    "wbsLeafIds": [
+      "WBS-P018-09"
+    ],
+    "managementWorkIds": [
+      "WBS-P018-09/2",
+      "WBS-C07"
+    ],
+    "source": "b1efd1436c4abaf5d979b499888ad89662d70acc",
+    "productionCoreMain": "da20ad7753279ae4e8017593866502d3341ec0e5",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40812-c07-immediate-alert-new-source-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.16,
+      "base": 0.45,
+      "high": 0.95
+    },
+    "groupCapPp": 1.5,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1201_C07backlog局所全到達と継続点.json",
+        "sha256": "5294904b1667536f21ee5a243bec568b06469c4ab3636b7f8639c4a0b0469264"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40810-c07-backlog-new-source-regression-v1/manifest.json",
+        "sha256": "923ee9bf51b28227b4924f53c7eb5282667f4947a489bda43e5372fcc535c53c"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40800-f03-timed-alert-static-v1/manifest.json",
+        "sha256": "65a9b48a1c6ffcbc388ad994f6cba6a01022e03e70892e2972b00adc2f5c062c"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "BUG-3415で復旧中断の共通メソッドを変更。時系列/共通・滞留三は候補で確認済、残る即時Backup/Restart/Integrity/DLQ純観測は未実行。",
+    "endCondition": "候補da20ad77で既四suite32の真正結果、固定中断契約、source別counterを保存する。",
+    "workScope": "純観測四型とJDK-only helper・既四通常Testだけ。旧成功済みsourceの再演0、実確認・broker・JAR分析なし。"
+  }
+}

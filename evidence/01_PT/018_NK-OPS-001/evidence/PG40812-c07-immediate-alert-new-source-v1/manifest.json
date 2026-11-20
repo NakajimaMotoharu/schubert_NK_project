@@ -1,0 +1,487 @@
+{
+  "run": "PG40812-c07-immediate-alert-new-source-v1",
+  "startEvent": "PGPT-20261008-6719",
+  "source": "b1efd1436c4abaf5d979b499888ad89662d70acc",
+  "core": "da20ad7753279ae4e8017593866502d3341ec0e5",
+  "actualExit": 0,
+  "startedAtUTC": "2026-11-20T11:32:14.071220+00:00",
+  "terminalAtUTC": "2026-11-20T11:32:18.586388+00:00",
+  "os": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+  "jdk": "25.0.4",
+  "tools": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar",
+      "sha256": "fb5b0036a0899ea97edfa0fc2c7985b55f3f7c5695028163e5e60d4f3cf6075d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+      "sha256": "d2b74b20b415163c1f53261e7c5ef4445b788327094208ff821e0c2baf9bc8f1"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+      "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+      "sha256": "25b400f003089d23cc5320cdaf1a16cabee19b8aa3434d0ff021b3d9f42154b4"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+      "sha256": "754e218ab1fcabb1e1c5f8530e9d3aa37636806c22987bb279dd907a6ee749b2"
+    },
+    {
+      "path": "tools/quality/static/checkstyle.xml",
+      "sha256": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+    }
+  ],
+  "sources": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java",
+      "sha256": "ad79f4efc8b3cb9927251473f6325ac18e4b316fe2e6205e4af0f52fb6962a21"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholds.java",
+      "sha256": "b0fd95f08991fa72ba262f023c0b64029ed2e9f1678dfd99cebeb14c26ed7aac"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BackupHealthMonitor.java",
+      "sha256": "6a6ccf4756364c7b18aa6c3b6aad95b6458a986ade1debc52e50065c2453e4fd"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/RestartHealthMonitor.java",
+      "sha256": "112fa27e786799f6650a2be23e81398a1ab83590b0925e89bbaf752031e1d9a8"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/IntegrityHealthMonitor.java",
+      "sha256": "d13bb97566a1c16b57e1ff6c89269dcd82d68337deefe2d16975441611c59680"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/DlqHealthMonitor.java",
+      "sha256": "7a7cf67fa4933164397ed40e4fe9ef058d41c61d747429c0fe4859bd389fb3aa"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClock.java",
+      "sha256": "0cb35d7ad440546bb2d182c2c339849b57e1cd1dca6b0d981080cbec24a5c946"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPoller.java",
+      "sha256": "d62e74e15d87f8532047167cb5e051f43f00992ae4284cbccc3a3eb12015c271"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ObservationContext.java",
+      "sha256": "5685db8a219acb224d463f9372c403ad9dfe36ac1d0c6a0fad308d377454cb26"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/package-info.java",
+      "sha256": "009823dd0566a5c0e2a7f06af4b540c122629bec50003bc1585d5303c488d924"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/BackupHealthMonitorTest.java",
+      "sha256": "de51008518c99ed136f5f73c38378ddfded4cff118d965c1d2cad44395050c3c"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/RestartHealthMonitorTest.java",
+      "sha256": "0944cf9e5c9be4a5e22c3adea792f35fdfe53c7af77827138d0c17ab6e46e0ae"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/IntegrityHealthMonitorTest.java",
+      "sha256": "3ff7dc0dad30e7dc1ba6b7e640fad3c6cb1ebc640e3320f0899feb0b144b3810"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/DlqHealthMonitorTest.java",
+      "sha256": "4a0ab80de9f2b87320a295f5f054e0e0abbb06e241e8f7c1d76200dd7321eaab"
+    }
+  ],
+  "compileClassNames": [
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance.class",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition.class",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event.class",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service.class",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity.class",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.class",
+    "dev/codex/schubert/nk/batch/monitoring/AlertThresholds.class",
+    "dev/codex/schubert/nk/batch/monitoring/BackupHealthMonitor$Completion.class",
+    "dev/codex/schubert/nk/batch/monitoring/BackupHealthMonitor$Evaluation.class",
+    "dev/codex/schubert/nk/batch/monitoring/BackupHealthMonitor.class",
+    "dev/codex/schubert/nk/batch/monitoring/DlqHealthMonitor$Evaluation.class",
+    "dev/codex/schubert/nk/batch/monitoring/DlqHealthMonitor$Observation.class",
+    "dev/codex/schubert/nk/batch/monitoring/DlqHealthMonitor.class",
+    "dev/codex/schubert/nk/batch/monitoring/IntegrityHealthMonitor$Evaluation.class",
+    "dev/codex/schubert/nk/batch/monitoring/IntegrityHealthMonitor.class",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClock.class",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringPoller.class",
+    "dev/codex/schubert/nk/batch/monitoring/ObservationContext.class",
+    "dev/codex/schubert/nk/batch/monitoring/RestartHealthMonitor$Evaluation.class",
+    "dev/codex/schubert/nk/batch/monitoring/RestartHealthMonitor.class",
+    "dev/codex/schubert/nk/batch/monitoring/package-info.class"
+  ],
+  "steps": {
+    "format": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/BackupHealthMonitorTest.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/RestartHealthMonitorTest.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/IntegrityHealthMonitorTest.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/DlqHealthMonitorTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "checkstyle": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "-o",
+        "/dev/shm/pg40812-ufai49uy/checkstyle.xml",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/BackupHealthMonitorTest.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/RestartHealthMonitorTest.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/IntegrityHealthMonitorTest.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/DlqHealthMonitorTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "mainCompile": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "-d",
+        "/dev/shm/pg40812-ufai49uy/product",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholds.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BackupHealthMonitor.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/RestartHealthMonitor.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/IntegrityHealthMonitor.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/DlqHealthMonitor.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClock.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPoller.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ObservationContext.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/package-info.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "testCompile": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/dev/shm/pg40812-ufai49uy/product:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "-d",
+        "/dev/shm/pg40812-ufai49uy/fixture",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/BackupHealthMonitorTest.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/RestartHealthMonitorTest.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/IntegrityHealthMonitorTest.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/DlqHealthMonitorTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "test": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/dev/shm/pg40812-ufai49uy/selected.exec,append=false,sessionid=PG40812",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--disable-ansi-colors",
+        "--class-path",
+        "/dev/shm/pg40812-ufai49uy/product:/dev/shm/pg40812-ufai49uy/fixture:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "--select-class",
+        "dev.codex.schubert.nk.batch.monitoring.BackupHealthMonitorTest",
+        "--select-class",
+        "dev.codex.schubert.nk.batch.monitoring.RestartHealthMonitorTest",
+        "--select-class",
+        "dev.codex.schubert.nk.batch.monitoring.IntegrityHealthMonitorTest",
+        "--select-class",
+        "dev.codex.schubert.nk.batch.monitoring.DlqHealthMonitorTest",
+        "--reports-dir",
+        "/dev/shm/pg40812-ufai49uy/test",
+        "--fail-if-no-tests"
+      ],
+      "exit": 0,
+      "stdoutSha256": "3bec71cba5cf020122e8719fad58328a9df3554e217bc935e252fa6a7f63e13d",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "xmlSha256": "2b8647a6a4307730c9a49aca4c9654b3d81557a4bb9874acd4273535c3ebfba4"
+    },
+    "selectedCoverage": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/dev/shm/pg40812-ufai49uy/selected.exec",
+        "--classfiles",
+        "/dev/shm/pg40812-ufai49uy/product",
+        "--xml",
+        "/dev/shm/pg40812-ufai49uy/coverage.xml"
+      ],
+      "exit": 0,
+      "stdoutSha256": "bce1eda673b91a505c4ff254095a63037743e5e5ebd352407bd8c52e868f7826",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "xmlSha256": "c4359a78c1a301138921c5691323c2732a85d89a4896b080a9a9af8917661ae4"
+    }
+  },
+  "cases": [
+    {
+      "testId": "BackupHealthMonitorTest.backupMon005GapInvalidAndNullObservationsCannotFakeRecovery()",
+      "method": "backupMon005GapInvalidAndNullObservationsCannotFakeRecovery()",
+      "owner": "BackupHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "DlqHealthMonitorTest.dlqMon006ConcurrentSameOwnerAndSeparateOwnerKeepExactCounts()",
+      "method": "dlqMon006ConcurrentSameOwnerAndSeparateOwnerKeepExactCounts()",
+      "owner": "DlqHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "DlqHealthMonitorTest.dlqMon002CoherentEntryMatrixUsesIndependentSeverityAndAllServiceKeys()",
+      "method": "dlqMon002CoherentEntryMatrixUsesIndependentSeverityAndAllServiceKeys()",
+      "owner": "DlqHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "IntegrityHealthMonitorTest.integrityMon005NullNegativeAndReversedTimeRejectWithoutMutatingEvent()",
+      "method": "integrityMon005NullNegativeAndReversedTimeRejectWithoutMutatingEvent()",
+      "owner": "IntegrityHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "IntegrityHealthMonitorTest.integrityMon001KnownZeroAndMissingDoNotInventOrConflateEvents()",
+      "method": "integrityMon001KnownZeroAndMissingDoNotInventOrConflateEvents()",
+      "owner": "IntegrityHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "IntegrityHealthMonitorTest.integrityMon003NormalEvenConfirmedAndMaximumElapsedCannotAutoClose()",
+      "method": "integrityMon003NormalEvenConfirmedAndMaximumElapsedCannotAutoClose()",
+      "owner": "IntegrityHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "DlqHealthMonitorTest.dlqMon004UnknownGapAndEscalationPreserveExactHistoricalEvents()",
+      "method": "dlqMon004UnknownGapAndEscalationPreserveExactHistoricalEvents()",
+      "owner": "DlqHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "DlqHealthMonitorTest.dlqMon008EvaluationGeneratedContractsUseIndependentBooleanAndIdentityOracles()",
+      "method": "dlqMon008EvaluationGeneratedContractsUseIndependentBooleanAndIdentityOracles()",
+      "owner": "DlqHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "DlqHealthMonitorTest.dlqMon001KnownEmptyAndUnknownRemainDistinctWithoutInventingEvents()",
+      "method": "dlqMon001KnownEmptyAndUnknownRemainDistinctWithoutInventingEvents()",
+      "owner": "DlqHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "RestartHealthMonitorTest.restartMon007EveryClosedServicePreservesCountAndIndependentFlagIdentity()",
+      "method": "restartMon007EveryClosedServicePreservesCountAndIndependentFlagIdentity()",
+      "owner": "RestartHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "IntegrityHealthMonitorTest.integrityMon008GeneratedEvaluationUsesIndependentBooleanAndIdentityOracles()",
+      "method": "integrityMon008GeneratedEvaluationUsesIndependentBooleanAndIdentityOracles()",
+      "owner": "IntegrityHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "RestartHealthMonitorTest.restartMon005GapNullNegativeAndReversedTimeCannotFakeRecovery()",
+      "method": "restartMon005GapNullNegativeAndReversedTimeCannotFakeRecovery()",
+      "owner": "RestartHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "IntegrityHealthMonitorTest.integrityMon007ConcurrentCallersKeepExactCountAndIndependentOwner()",
+      "method": "integrityMon007ConcurrentCallersKeepExactCountAndIndependentOwner()",
+      "owner": "IntegrityHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "RestartHealthMonitorTest.restartMon003MissingOrPartialNormalCannotBridgeFiveMinuteRecovery()",
+      "method": "restartMon003MissingOrPartialNormalCannotBridgeFiveMinuteRecovery()",
+      "owner": "RestartHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "IntegrityHealthMonitorTest.integrityMon002OneOrMaximumFailureIsCriticalWithFixedIdentity()",
+      "method": "integrityMon002OneOrMaximumFailureIsCriticalWithFixedIdentity()",
+      "owner": "IntegrityHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "BackupHealthMonitorTest.backupMon004CriticalNeedsTenMinutesAndConfirmedCauseDespiteLowerWarning()",
+      "method": "backupMon004CriticalNeedsTenMinutesAndConfirmedCauseDespiteLowerWarning()",
+      "owner": "BackupHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "RestartHealthMonitorTest.restartMon008GeneratedEvaluationContractsUseIndependentBooleanAndIdentityOracles()",
+      "method": "restartMon008GeneratedEvaluationContractsUseIndependentBooleanAndIdentityOracles()",
+      "owner": "RestartHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "BackupHealthMonitorTest.backupMon008EvaluationGeneratedContractUsesIndependentIdentityAndBooleanOracles()",
+      "method": "backupMon008EvaluationGeneratedContractUsesIndependentIdentityAndBooleanOracles()",
+      "owner": "BackupHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "DlqHealthMonitorTest.dlqMon005NullNegativeIncoherentAndReversedInputsCannotMutateEvent()",
+      "method": "dlqMon005NullNegativeIncoherentAndReversedInputsCannotMutateEvent()",
+      "owner": "DlqHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "BackupHealthMonitorTest.backupMon006ConcurrentSameOwnerKeepsExactCountAndOtherOwnerIndependent()",
+      "method": "backupMon006ConcurrentSameOwnerKeepsExactCountAndOtherOwnerIndependent()",
+      "owner": "BackupHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "DlqHealthMonitorTest.dlqMon007ObservationGeneratedContractsUseIndependentLongAndBooleanOracles()",
+      "method": "dlqMon007ObservationGeneratedContractsUseIndependentLongAndBooleanOracles()",
+      "owner": "DlqHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "BackupHealthMonitorTest.backupMon003PartialOrMissingCannotBridgeWarningRecovery()",
+      "method": "backupMon003PartialOrMissingCannotBridgeWarningRecovery()",
+      "owner": "BackupHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "DlqHealthMonitorTest.dlqMon003NormalEvenConfirmedCannotAutoCloseWarningOrCritical()",
+      "method": "dlqMon003NormalEvenConfirmedCannotAutoCloseWarningOrCritical()",
+      "owner": "DlqHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "RestartHealthMonitorTest.restartMon002CountAndRateLimitUseIndependentFixedGoldenMatrix()",
+      "method": "restartMon002CountAndRateLimitUseIndependentFixedGoldenMatrix()",
+      "owner": "RestartHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "IntegrityHealthMonitorTest.integrityMon004UnknownAndExplicitGapKeepOldEventAndNewViolationHistory()",
+      "method": "integrityMon004UnknownAndExplicitGapKeepOldEventAndNewViolationHistory()",
+      "owner": "IntegrityHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "RestartHealthMonitorTest.restartMon001KnownNormalUnknownAndPartialFlagsRemainDistinct()",
+      "method": "restartMon001KnownNormalUnknownAndPartialFlagsRemainDistinct()",
+      "owner": "RestartHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "RestartHealthMonitorTest.restartMon006ConcurrentSameOwnerAndDifferentOwnerKeepExactEvents()",
+      "method": "restartMon006ConcurrentSameOwnerAndDifferentOwnerKeepExactEvents()",
+      "owner": "RestartHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "BackupHealthMonitorTest.backupMon002FixedSeverityAndPartialAbnormalEvidenceAreIndependent()",
+      "method": "backupMon002FixedSeverityAndPartialAbnormalEvidenceAreIndependent()",
+      "owner": "BackupHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "BackupHealthMonitorTest.backupMon007CompletionGeneratedContractUsesIndependentBooleanHashAndText()",
+      "method": "backupMon007CompletionGeneratedContractUsesIndependentBooleanHashAndText()",
+      "owner": "BackupHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "RestartHealthMonitorTest.restartMon004RateLimitCriticalNeedsTenMinutesAndCauseConfirmation()",
+      "method": "restartMon004RateLimitCriticalNeedsTenMinutesAndCauseConfirmation()",
+      "owner": "RestartHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "BackupHealthMonitorTest.backupMon001KnownNormalMissingAndPartialStayDistinctWithoutInventedEvents()",
+      "method": "backupMon001KnownNormalMissingAndPartialStayDistinctWithoutInventedEvents()",
+      "owner": "BackupHealthMonitorTest",
+      "outcome": "passed"
+    },
+    {
+      "testId": "IntegrityHealthMonitorTest.integrityMon006EveryClosedServiceUsesItsOwnImmutableLogicalKey()",
+      "method": "integrityMon006EveryClosedServiceUsesItsOwnImmutableLogicalKey()",
+      "owner": "IntegrityHealthMonitorTest",
+      "outcome": "passed"
+    }
+  ],
+  "expectation": "Fixed count, absence and timestamp expectations in the original four pure monitoring suites; same candidate source, no real inputs.",
+  "passed": 32,
+  "notRun": 0,
+  "coverage": {
+    "INSTRUCTION": {
+      "covered": 1179,
+      "missed": 508
+    },
+    "BRANCH": {
+      "covered": 110,
+      "missed": 96
+    },
+    "LINE": {
+      "covered": 220,
+      "missed": 94
+    },
+    "COMPLEXITY": {
+      "covered": 105,
+      "missed": 72
+    },
+    "METHOD": {
+      "covered": 53,
+      "missed": 21
+    },
+    "CLASS": {
+      "covered": 19,
+      "missed": 1
+    }
+  },
+  "rawProductCoverage": null,
+  "coverageMethod": "JaCoCo default, nine exact Main types plus package metadata, single selected run.",
+  "sameSourceCasesReplayed": 0,
+  "oldSourceTestsRequalified": 32,
+  "runtimeInfrastructureActions": 0,
+  "formalDelta": 0,
+  "wholeC07": false,
+  "whole451": false
+}
