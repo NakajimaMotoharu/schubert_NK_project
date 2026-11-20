@@ -35,7 +35,20 @@ def main():
                for name in command[command.index("-cp")+1].split(":"))
     assert ["-effort:max", "-low", "-xml:withMessages", "-exitcode"] == command[
         command.index("-effort:max"):command.index("-exitcode")+1]
-    out = (OPS / work["run"]).resolve()
+    intermediate_ref = post["immediatelyPriorPackageReceipt"]
+    intermediate_path = Path(intermediate_ref["path"])
+    assert pin(intermediate_path) == intermediate_ref
+    intermediate = read(intermediate_path)
+    assert intermediate["sourceCore"] == build["baselineCore"]
+    prior_ref = intermediate["originalPackagedJars"]
+    assert pin(Path(prior_ref["path"])) == prior_ref
+    assert read(prior_ref["path"])["sourceCore"] == old["productionCore"]
+    prior_delta = {entry for module, rows in intermediate["changedClassesFromOldJars"].items()
+                   if module in MODULES for entry in rows}
+    assert prior_delta == {"dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint$PublicAgent.class"}
+    attempt = read(OPS / work["run"] / "manifest.json")
+    assert attempt["actualExit"] == 1 and not attempt["spotbugsStarted"]
+    out = (OPS / "PG40474-f03-current-three-full-typed-adjusted-v1").resolve()
     out.mkdir()
     target_xml = out / "spotbugs.xml"
     candidate = {}
@@ -67,7 +80,7 @@ def main():
                         collection.writestr(entry, content)
                 detail[module] = dict(classes=extent, jar=ref,
                                       classMapSha256=digest(json.dumps(local, sort_keys=True).encode()))
-        assert len(candidate) == 456 and set(physically_changed) == set(post["requalificationRequired"])
+        assert len(candidate) == 456 and set(physically_changed) == prior_delta | set(post["requalificationRequired"])
         expected = [*command[:command.index("-auxclasspathFromFile")+1],
                     aux_path, "-output", target_xml, targets]
         execution = UPPER["run"](out, "spotbugs", expected, temporary,
@@ -88,6 +101,7 @@ def main():
                   missingClassStats=sorted(set(candidate)-observed),
                   unexpectedClassStats=sorted(observed-set(candidate)),
                   physicalChangedInScope=sorted(physically_changed), missing=missing, errors=errors, findings=findings,
+                  referenceIntermediateBuild=intermediate_ref, historicalBroadFailurePreserved=True,
                   physicalExaminedExpected=456, injectedPhysical=0, heldBatchPhysicalRead=0,
                   actualProductTests=0, productionEntrypointExecution=0,
                   terminal=execution, staticReport=pin(target_xml) if target_xml.exists() else None,

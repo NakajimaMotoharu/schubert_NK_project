@@ -1,0 +1,861 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<BugCollection version="4.10.4" sequence="0" timestamp="1795137357455" analysisTimestamp="1795137358219" release="">
+  <Project projectName="">
+    <Jar>/dev/shm/pgpt-f03-three-module-whole-4amubpcb/current-three-modules.jar</Jar>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/com/github/spotbugs/spotbugs-annotations/4.10.4/spotbugs-annotations-4.10.4.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/com/zaxxer/HikariCP/7.1.0/HikariCP-7.1.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-registry-prometheus/1.17.1/micrometer-registry-prometheus-1.17.1.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/prometheus/prometheus-metrics-model/1.7.0/prometheus-metrics-model-1.7.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/postgresql/postgresql/42.7.13/postgresql-42.7.13.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/snakeyaml/snakeyaml-engine/3.1.1/snakeyaml-engine-3.1.1.jar</AuxClasspathEntry>
+  </Project>
+  <Errors errors="0" missingClasses="0"></Errors>
+  <FindBugsSummary timestamp="Fri, 20 Nov 2026 10:15:57 +0900" total_classes="456" referenced_classes="703" total_bugs="0" total_size="16781" num_packages="21" java_version="25.0.4" vm_version="25.0.4+7-1-26.04-Ubuntu" cpu_seconds="42.35" clock_seconds="9.37" peak_mbytes="371.20" alloc_mbytes="2048.00" gc_seconds="0.18">
+    <FileStats path="dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig.java" bugCount="0" size="136"/>
+    <FileStats path="dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.java" bugCount="0" size="17"/>
+    <FileStats path="dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.java" bugCount="0" size="6"/>
+    <FileStats path="dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java" bugCount="0" size="120"/>
+    <FileStats path="dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java" bugCount="0" size="71"/>
+    <FileStats path="dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java" bugCount="0" size="108"/>
+    <FileStats path="dev/codex/schubert/nk/api/file/AesCredentialFile.java" bugCount="0" size="26"/>
+    <FileStats path="dev/codex/schubert/nk/api/file/InspectorCredentialException.java" bugCount="0" size="5"/>
+    <FileStats path="dev/codex/schubert/nk/api/file/InspectorCredentialLoader.java" bugCount="0" size="202"/>
+    <FileStats path="dev/codex/schubert/nk/api/file/ServiceCredentialException.java" bugCount="0" size="5"/>
+    <FileStats path="dev/codex/schubert/nk/api/file/ServiceCredentialReader.java" bugCount="0" size="36"/>
+    <FileStats path="dev/codex/schubert/nk/api/file/ServiceCredentialSet.java" bugCount="0" size="65"/>
+    <FileStats path="dev/codex/schubert/nk/api/file/ServiceProcessResources.java" bugCount="0" size="169"/>
+    <FileStats path="dev/codex/schubert/nk/api/maintenance/InspectorAesCredential.java" bugCount="0" size="64"/>
+    <FileStats path="dev/codex/schubert/nk/api/maintenance/InspectorCredentialAccess.java" bugCount="0" size="45"/>
+    <FileStats path="dev/codex/schubert/nk/api/maintenance/InspectorDbCredential.java" bugCount="0" size="52"/>
+    <FileStats path="dev/codex/schubert/nk/bootstrap/ChildStartupContext.java" bugCount="0" size="460"/>
+    <FileStats path="dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint.java" bugCount="0" size="156"/>
+    <FileStats path="dev/codex/schubert/nk/bootstrap/FixedNativeCoverageProfile.java" bugCount="0" size="103"/>
+    <FileStats path="dev/codex/schubert/nk/bootstrap/FixedNativeCoverageStopHold.java" bugCount="0" size="90"/>
+    <FileStats path="dev/codex/schubert/nk/bootstrap/FixedNativeCoverageTerminal.java" bugCount="0" size="41"/>
+    <FileStats path="dev/codex/schubert/nk/bootstrap/FixedServiceExecArguments.java" bugCount="0" size="42"/>
+    <FileStats path="dev/codex/schubert/nk/bootstrap/FixedServiceIdentity.java" bugCount="0" size="161"/>
+    <FileStats path="dev/codex/schubert/nk/bootstrap/LinuxSystemdSession.java" bugCount="0" size="350"/>
+    <FileStats path="dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame.java" bugCount="0" size="165"/>
+    <FileStats path="dev/codex/schubert/nk/bootstrap/NativeCoveragePrivateFile.java" bugCount="0" size="301"/>
+    <FileStats path="dev/codex/schubert/nk/bootstrap/ReleaseApproval.java" bugCount="0" size="36"/>
+    <FileStats path="dev/codex/schubert/nk/bootstrap/ReleaseInventory.java" bugCount="0" size="306"/>
+    <FileStats path="dev/codex/schubert/nk/bootstrap/ReleasePayloadVerification.java" bugCount="0" size="309"/>
+    <FileStats path="dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier.java" bugCount="0" size="51"/>
+    <FileStats path="dev/codex/schubert/nk/bootstrap/ServiceStartupAdmission.java" bugCount="0" size="173"/>
+    <FileStats path="dev/codex/schubert/nk/bootstrap/StartupProofFrame.java" bugCount="0" size="112"/>
+    <FileStats path="dev/codex/schubert/nk/bootstrap/StartupReleaseManifest.java" bugCount="0" size="299"/>
+    <FileStats path="dev/codex/schubert/nk/bootstrap/SystemManagerObservation.java" bugCount="0" size="149"/>
+    <FileStats path="dev/codex/schubert/nk/migration/AssetMigrationManifest.java" bugCount="0" size="160"/>
+    <FileStats path="dev/codex/schubert/nk/migration/AssetStagingTables.java" bugCount="0" size="124"/>
+    <FileStats path="dev/codex/schubert/nk/migration/AudioCopyDataset.java" bugCount="0" size="98"/>
+    <FileStats path="dev/codex/schubert/nk/migration/AudioFileCopyRow.java" bugCount="0" size="83"/>
+    <FileStats path="dev/codex/schubert/nk/migration/AudioMigrationMap.java" bugCount="0" size="155"/>
+    <FileStats path="dev/codex/schubert/nk/migration/CurrentAudioLinkMapper.java" bugCount="0" size="143"/>
+    <FileStats path="dev/codex/schubert/nk/migration/CurrentAudioLinkProjectionReader.java" bugCount="0" size="73"/>
+    <FileStats path="dev/codex/schubert/nk/migration/CurrentAudioProjectionReader.java" bugCount="0" size="101"/>
+    <FileStats path="dev/codex/schubert/nk/migration/CurrentMigrationAssembler.java" bugCount="0" size="46"/>
+    <FileStats path="dev/codex/schubert/nk/migration/CurrentMigrationMappingManifest.java" bugCount="0" size="49"/>
+    <FileStats path="dev/codex/schubert/nk/migration/CurrentMigrationMappingVerifier.java" bugCount="0" size="150"/>
+    <FileStats path="dev/codex/schubert/nk/migration/CurrentMigrationProjection.java" bugCount="0" size="50"/>
+    <FileStats path="dev/codex/schubert/nk/migration/CurrentMigrationTransfer.java" bugCount="0" size="41"/>
+    <FileStats path="dev/codex/schubert/nk/migration/CurrentScenarioEntryMapper.java" bugCount="0" size="77"/>
+    <FileStats path="dev/codex/schubert/nk/migration/CurrentScenarioEntryProjectionReader.java" bugCount="0" size="92"/>
+    <FileStats path="dev/codex/schubert/nk/migration/CurrentScenarioFileMapper.java" bugCount="0" size="101"/>
+    <FileStats path="dev/codex/schubert/nk/migration/CurrentScenarioFileProjectionReader.java" bugCount="0" size="84"/>
+    <FileStats path="dev/codex/schubert/nk/migration/CurrentSpeakerProjectionReader.java" bugCount="0" size="80"/>
+    <FileStats path="dev/codex/schubert/nk/migration/MediaAssetCopyBatch.java" bugCount="0" size="61"/>
+    <FileStats path="dev/codex/schubert/nk/migration/MediaAssetCopyRow.java" bugCount="0" size="127"/>
+    <FileStats path="dev/codex/schubert/nk/migration/MigrationCopyDataset.java" bugCount="0" size="40"/>
+    <FileStats path="dev/codex/schubert/nk/migration/MigrationCopyPort.java" bugCount="0" size="2"/>
+    <FileStats path="dev/codex/schubert/nk/migration/MigrationGamesVerifier.java" bugCount="0" size="84"/>
+    <FileStats path="dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier.java" bugCount="0" size="112"/>
+    <FileStats path="dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifier.java" bugCount="0" size="103"/>
+    <FileStats path="dev/codex/schubert/nk/migration/MigrationMasterContentVerifier.java" bugCount="0" size="131"/>
+    <FileStats path="dev/codex/schubert/nk/migration/MigrationMasterCopyCoordinator.java" bugCount="0" size="35"/>
+    <FileStats path="dev/codex/schubert/nk/migration/MigrationMasterCopyDataset.java" bugCount="0" size="36"/>
+    <FileStats path="dev/codex/schubert/nk/migration/MigrationMasterCopyFingerprint.java" bugCount="0" size="84"/>
+    <FileStats path="dev/codex/schubert/nk/migration/MigrationMasterCopyManifest.java" bugCount="0" size="53"/>
+    <FileStats path="dev/codex/schubert/nk/migration/MigrationMasterCopyVerifier.java" bugCount="0" size="16"/>
+    <FileStats path="dev/codex/schubert/nk/migration/MigrationMasterFinalizer.java" bugCount="0" size="148"/>
+    <FileStats path="dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier.java" bugCount="0" size="135"/>
+    <FileStats path="dev/codex/schubert/nk/migration/MigrationMasterTargetPublisher.java" bugCount="0" size="33"/>
+    <FileStats path="dev/codex/schubert/nk/migration/MusicLogicalId.java" bugCount="0" size="21"/>
+    <FileStats path="dev/codex/schubert/nk/migration/MusicMigrationCatalogue.java" bugCount="0" size="93"/>
+    <FileStats path="dev/codex/schubert/nk/migration/MusicMigrationPairing.java" bugCount="0" size="137"/>
+    <FileStats path="dev/codex/schubert/nk/migration/PostgresCopyTextEncoder.java" bugCount="0" size="51"/>
+    <FileStats path="dev/codex/schubert/nk/migration/PostgresCopyTextWriter.java" bugCount="0" size="23"/>
+    <FileStats path="dev/codex/schubert/nk/migration/PostgresMigrationCopyPort.java" bugCount="0" size="61"/>
+    <FileStats path="dev/codex/schubert/nk/migration/ScenarioCopyDataset.java" bugCount="0" size="46"/>
+    <FileStats path="dev/codex/schubert/nk/migration/ScenarioEntryCopyBatch.java" bugCount="0" size="43"/>
+    <FileStats path="dev/codex/schubert/nk/migration/ScenarioEntryCopyRow.java" bugCount="0" size="74"/>
+    <FileStats path="dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap.java" bugCount="0" size="77"/>
+    <FileStats path="dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap.java" bugCount="0" size="125"/>
+    <FileStats path="dev/codex/schubert/nk/migration/ScenarioFileCopyBatch.java" bugCount="0" size="99"/>
+    <FileStats path="dev/codex/schubert/nk/migration/ScenarioFileMigrationMap.java" bugCount="0" size="105"/>
+    <FileStats path="dev/codex/schubert/nk/migration/ScenarioStagingTables.java" bugCount="0" size="90"/>
+    <FileStats path="dev/codex/schubert/nk/migration/SpeakerCopyBatch.java" bugCount="0" size="56"/>
+    <FileStats path="dev/codex/schubert/nk/migration/SpeakerCopyRow.java" bugCount="0" size="63"/>
+    <FileStats path="dev/codex/schubert/nk/migration/SpeakerMigrationMap.java" bugCount="0" size="104"/>
+    <FileStats path="dev/codex/schubert/nk/migration/SpeakerStagingTable.java" bugCount="0" size="81"/>
+    <FileStats path="dev/codex/schubert/nk/migration/VideoMigrationCatalogue.java" bugCount="0" size="88"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/codec/ExpectedRoute.java" bugCount="0" size="30"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/codec/FieldCodec.java" bugCount="0" size="135"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/codec/FieldCodecRules.java" bugCount="0" size="6"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/codec/FieldEncodingException.java" bugCount="0" size="8"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/codec/FixedWidthDecoder.java" bugCount="0" size="34"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/codec/FixedWidthEncoder.java" bugCount="0" size="33"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/codec/HeaderCodec.java" bugCount="0" size="87"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/codec/MessageEncodingException.java" bugCount="0" size="8"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/codec/PayloadCodec.java" bugCount="0" size="205"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/codec/PermanentProtocolException.java" bugCount="0" size="8"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/codec/ProtocolValidator.java" bugCount="0" size="26"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/codec/TransportBodyType.java" bugCount="0" size="16"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/codec/TransportMetadata.java" bugCount="0" size="45"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/codec/package-info.java" bugCount="0" size="1"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/file/ContentDisposition.java" bugCount="0" size="26"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/file/LargeResultContent.java" bugCount="0" size="21"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/file/LargeResultDescriptor.java" bugCount="0" size="62"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/file/LargeResultDigest.java" bugCount="0" size="5"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/file/LargeResultIoException.java" bugCount="0" size="5"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/file/LargeResultRecordCodec.java" bugCount="0" size="58"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/file/MediaDescriptor.java" bugCount="0" size="40"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator.java" bugCount="0" size="76"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/file/MediaDescriptorValidatorRules.java" bugCount="0" size="7"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/file/MediaType.java" bugCount="0" size="14"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/file/package-info.java" bugCount="0" size="1"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/header/AuthenticationContext.java" bugCount="0" size="23"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/header/CommonHeader.java" bugCount="0" size="115"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/header/InteractionKind.java" bugCount="0" size="30"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/header/MessageKind.java" bugCount="0" size="30"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/header/ResultCode.java" bugCount="0" size="50"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/header/package-info.java" bugCount="0" size="1"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/FieldArea.java" bugCount="0" size="14"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/FieldDefinition.java" bugCount="0" size="58"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/FieldValue.java" bugCount="0" size="39"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/FieldValueSet.java" bugCount="0" size="30"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/FixedPayload.java" bugCount="0" size="38"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/LayoutDefinition.java" bugCount="0" size="70"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java" bugCount="0" size="171"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/LayoutFields.java" bugCount="0" size="33"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/LayoutId.java" bugCount="0" size="21"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/LayoutPayload.java" bugCount="0" size="6"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/LayoutRegistry.java" bugCount="0" size="130"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/LayoutValidationException.java" bugCount="0" size="8"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/Padding.java" bugCount="0" size="14"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/PayloadData.java" bugCount="0" size="2"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/PayloadRecord.java" bugCount="0" size="2"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.java" bugCount="0" size="370"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidatorRules.java" bugCount="0" size="30"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog.java" bugCount="0" size="201"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/PayloadValues.java" bugCount="0" size="18"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/Presence.java" bugCount="0" size="16"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/TypedFieldValues.java" bugCount="0" size="241"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/TypedPayloadValues.java" bugCount="0" size="18"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/UnsupportedLayoutException.java" bugCount="0" size="5"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/WireMessage.java" bugCount="0" size="18"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/WireType.java" bugCount="0" size="14"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/admin/PasswordResetRequestData.java" bugCount="0" size="34"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/admin/UserCreateRequestData.java" bugCount="0" size="38"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/admin/UserDetailRequestData.java" bugCount="0" size="16"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/admin/UserDetailResponseData.java" bugCount="0" size="79"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/admin/UserMutationResponseData.java" bugCount="0" size="24"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/admin/UserRecord.java" bugCount="0" size="59"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/admin/UserRoleRequestData.java" bugCount="0" size="34"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/admin/UserSearchRequestData.java" bugCount="0" size="39"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/admin/UserStatusRequestData.java" bugCount="0" size="33"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/admin/UserUnlockRequestData.java" bugCount="0" size="29"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/auth/LoginRequestData.java" bugCount="0" size="29"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/auth/LoginResponseData.java" bugCount="0" size="55"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/auth/LogoutRequestData.java" bugCount="0" size="12"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/auth/LogoutResponseData.java" bugCount="0" size="17"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/common/PagedResponseData.java" bugCount="0" size="44"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/log/LogRecord.java" bugCount="0" size="89"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/log/LogSearchRequestData.java" bugCount="0" size="59"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/log/WebLogEventData.java" bugCount="0" size="87"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/media/AnimationListRequestData.java" bugCount="0" size="18"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/media/AnimationListResponseData.java" bugCount="0" size="17"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/media/AnimationMenuRequestData.java" bugCount="0" size="12"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/media/AnimationMenuResponseData.java" bugCount="0" size="33"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/media/AnimationRecord.java" bugCount="0" size="49"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/media/AudioDescriptorRequestData.java" bugCount="0" size="24"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/media/MediaDescriptorData.java" bugCount="0" size="49"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/media/MusicCategoryRecord.java" bugCount="0" size="24"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/media/MusicCategoryRequestData.java" bugCount="0" size="12"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/media/MusicCategoryResponseData.java" bugCount="0" size="17"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/media/MusicDescriptorRequestData.java" bugCount="0" size="24"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/media/MusicSectionRecord.java" bugCount="0" size="24"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/media/MusicSectionRequestData.java" bugCount="0" size="16"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/media/MusicSectionResponseData.java" bugCount="0" size="17"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/media/MusicTrackRecord.java" bugCount="0" size="59"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/media/MusicTrackRequestData.java" bugCount="0" size="24"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/media/MusicTrackResponseData.java" bugCount="0" size="17"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/media/VideoDescriptorRequestData.java" bugCount="0" size="16"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/media/VideoDescriptorResponseData.java" bugCount="0" size="64"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/package-info.java" bugCount="0" size="1"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/question/NotificationCancelRequestData.java" bugCount="0" size="24"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/question/NotificationCancelResponseData.java" bugCount="0" size="24"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/question/NotificationDetailRequestData.java" bugCount="0" size="18"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/question/NotificationDetailResponseData.java" bugCount="0" size="88"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/question/NotificationRecord.java" bugCount="0" size="53"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/question/NotificationSearchRequestData.java" bugCount="0" size="39"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/question/QuestionDeleteRequestData.java" bugCount="0" size="24"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/question/QuestionDeleteResponseData.java" bugCount="0" size="16"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/question/QuestionDetailRequestData.java" bugCount="0" size="18"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/question/QuestionDetailResponseData.java" bugCount="0" size="54"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/question/QuestionSearchRequestData.java" bugCount="0" size="49"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/question/QuestionSubmitRequestData.java" bugCount="0" size="24"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/question/QuestionSubmitResponseData.java" bugCount="0" size="29"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/question/QuestionSummaryRecord.java" bugCount="0" size="49"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/question/QuestionWorkData.java" bugCount="0" size="29"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/scenario/GameListRequestData.java" bugCount="0" size="12"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/scenario/GameListResponseData.java" bugCount="0" size="17"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/scenario/GameRecord.java" bugCount="0" size="29"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/scenario/RouteListRequestData.java" bugCount="0" size="18"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/scenario/RouteListResponseData.java" bugCount="0" size="17"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/scenario/RouteRecord.java" bugCount="0" size="29"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/scenario/ScenarioDetailRequestData.java" bugCount="0" size="18"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/scenario/ScenarioDetailResponseData.java" bugCount="0" size="90"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/scenario/ScenarioEntryRecord.java" bugCount="0" size="60"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/scenario/ScenarioFileListRequestData.java" bugCount="0" size="24"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/scenario/ScenarioFileListResponseData.java" bugCount="0" size="34"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/scenario/ScenarioFileRecord.java" bugCount="0" size="34"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/scenario/ScenarioSearchRecord.java" bugCount="0" size="74"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/scenario/ScenarioSearchRequestData.java" bugCount="0" size="54"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/scenario/SpeakerListRequestData.java" bugCount="0" size="18"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/scenario/SpeakerListResponseData.java" bugCount="0" size="17"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/scenario/SpeakerRecord.java" bugCount="0" size="29"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/semantic/AnimationCategory.java" bugCount="0" size="20"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/semantic/AnimationListCategory.java" bugCount="0" size="18"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/semantic/AnswerState.java" bugCount="0" size="20"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/semantic/AsyncJobId.java" bugCount="0" size="11"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/semantic/AudioId.java" bugCount="0" size="11"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/semantic/ContentDisposition.java" bugCount="0" size="18"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/semantic/DeliveryMode.java" bugCount="0" size="18"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/semantic/DisplayPath.java" bugCount="0" size="26"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/semantic/ElapsedMilliseconds.java" bugCount="0" size="23"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/semantic/EntryId.java" bugCount="0" size="11"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/semantic/EntryType.java" bugCount="0" size="18"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/semantic/GameCode.java" bugCount="0" size="18"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/semantic/HttpStatusCode.java" bugCount="0" size="22"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/semantic/IdValue.java" bugCount="0" size="6"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/semantic/LogId.java" bugCount="0" size="11"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/semantic/LogLevel.java" bugCount="0" size="20"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/semantic/LogType.java" bugCount="0" size="26"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/semantic/MediaMimeType.java" bugCount="0" size="26"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/semantic/NotificationErrorCode.java" bugCount="0" size="24"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/semantic/NotificationId.java" bugCount="0" size="11"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.java" bugCount="0" size="24"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/semantic/NotificationType.java" bugCount="0" size="20"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/semantic/PairRole.java" bugCount="0" size="20"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/semantic/PathSyntax.java" bugCount="0" size="11"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/semantic/ProtocolId.java" bugCount="0" size="2"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/semantic/QuestionId.java" bugCount="0" size="11"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/semantic/RelativePath.java" bugCount="0" size="37"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/semantic/ScriptFileId.java" bugCount="0" size="11"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/semantic/Sha256Hex.java" bugCount="0" size="22"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/semantic/SpeakerId.java" bugCount="0" size="11"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/semantic/UserId.java" bugCount="0" size="11"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/semantic/UserRole.java" bugCount="0" size="18"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/semantic/UserState.java" bugCount="0" size="20"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/semantic/VideoCategory.java" bugCount="0" size="22"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/semantic/VoiceCondition.java" bugCount="0" size="18"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/semantic/WireEnum.java" bugCount="0" size="2"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/layout/semantic/package-info.java" bugCount="0" size="1"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/time/JstWireTimestamp.java" bugCount="0" size="35"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/time/package-info.java" bugCount="0" size="1"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/transport/BrokerTopology.java" bugCount="0" size="50"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationException.java" bugCount="0" size="9"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/transport/UnconfirmedJmsRollbackException.java" bugCount="0" size="8"/>
+    <FileStats path="dev/codex/schubert/nk/protocol/transport/package-info.java" bugCount="0" size="1"/>
+    <FileStats path="dev/codex/schubert/nk/storage/DirectoryCalls.java" bugCount="0" size="16"/>
+    <FileStats path="dev/codex/schubert/nk/storage/ExistingFileAccess.java" bugCount="0" size="62"/>
+    <FileStats path="dev/codex/schubert/nk/storage/InodeSecurityCalls.java" bugCount="0" size="4"/>
+    <FileStats path="dev/codex/schubert/nk/storage/LinuxDirectoryCalls.java" bugCount="0" size="159"/>
+    <FileStats path="dev/codex/schubert/nk/storage/LinuxExecDescriptors.java" bugCount="0" size="56"/>
+    <FileStats path="dev/codex/schubert/nk/storage/LinuxFileLock.java" bugCount="0" size="148"/>
+    <FileStats path="dev/codex/schubert/nk/storage/LinuxFilesystemClassifier.java" bugCount="0" size="52"/>
+    <FileStats path="dev/codex/schubert/nk/storage/LinuxHostDirectoryCalls.java" bugCount="0" size="62"/>
+    <FileStats path="dev/codex/schubert/nk/storage/LinuxInodeSecurity.java" bugCount="0" size="104"/>
+    <FileStats path="dev/codex/schubert/nk/storage/LinuxMonotonicClock.java" bugCount="0" size="42"/>
+    <FileStats path="dev/codex/schubert/nk/storage/LinuxProcessExec.java" bugCount="0" size="65"/>
+    <FileStats path="dev/codex/schubert/nk/storage/LinuxSealedProof.java" bugCount="0" size="138"/>
+    <FileStats path="dev/codex/schubert/nk/storage/LinuxStartupAdmission.java" bugCount="0" size="178"/>
+    <FileStats path="dev/codex/schubert/nk/storage/NonSecretConfigSource.java" bugCount="0" size="2"/>
+    <FileStats path="dev/codex/schubert/nk/storage/OwnedTransferDirectory.java" bugCount="0" size="302"/>
+    <FileStats path="dev/codex/schubert/nk/storage/ResourceScope.java" bugCount="0" size="66"/>
+    <FileStats path="dev/codex/schubert/nk/storage/ServiceConfigFiles.java" bugCount="0" size="150"/>
+    <FileStats path="dev/codex/schubert/nk/storage/ServiceCredentialId.java" bugCount="0" size="67"/>
+    <FileStats path="dev/codex/schubert/nk/storage/ServiceCredentialLocation.java" bugCount="0" size="33"/>
+    <FileStats path="dev/codex/schubert/nk/storage/StorageAttributeGuard.java" bugCount="0" size="56"/>
+    <FileStats path="dev/codex/schubert/nk/storage/StorageIdentity.java" bugCount="0" size="20"/>
+    <FileStats path="dev/codex/schubert/nk/storage/StorageIoException.java" bugCount="0" size="45"/>
+    <FileStats path="dev/codex/schubert/nk/storage/StorageRootInspection.java" bugCount="0" size="92"/>
+    <FileStats path="dev/codex/schubert/nk/storage/StorageRootLayout.java" bugCount="0" size="31"/>
+    <FileStats path="dev/codex/schubert/nk/storage/package-info.java" bugCount="0" size="1"/>
+    <FileStats path="dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfig.java" bugCount="0" size="153"/>
+    <PackageStats package="dev.codex.schubert.nk.api.bootstrap" total_bugs="0" total_types="9" total_size="458">
+      <ClassStats class="dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfig" sourceFile="ApiNonSecretConfig.java" interface="false" size="136" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.api.bootstrap.JdbcAdmissionFailures" sourceFile="JdbcAdmissionFailures.java" interface="false" size="17" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph" sourceFile="JdbcFailureGraph.java" interface="true" size="6" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.api.bootstrap.SchemaHistoryAdmission" sourceFile="SchemaHistoryAdmission.java" interface="false" size="87" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.api.bootstrap.SchemaHistoryAdmission$Row" sourceFile="SchemaHistoryAdmission.java" interface="false" size="33" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmission" sourceFile="ServiceDatabaseAdmission.java" interface="false" size="71" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSource" sourceFile="ServiceDatabaseSource.java" interface="false" size="104" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSource$Connector" sourceFile="ServiceDatabaseSource.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSource$StateAction" sourceFile="ServiceDatabaseSource.java" interface="true" size="2" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="dev.codex.schubert.nk.api.file" total_bugs="0" total_types="15" total_size="508">
+      <ClassStats class="dev.codex.schubert.nk.api.file.AesCredentialFile" sourceFile="AesCredentialFile.java" interface="false" size="26" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.api.file.InspectorCredentialException" sourceFile="InspectorCredentialException.java" interface="false" size="5" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.api.file.InspectorCredentialLoader" sourceFile="InspectorCredentialLoader.java" interface="false" size="158" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.api.file.InspectorCredentialLoader$Io" sourceFile="InspectorCredentialLoader.java" interface="true" size="3" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.api.file.InspectorCredentialLoader$Metadata" sourceFile="InspectorCredentialLoader.java" interface="false" size="24" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.api.file.InspectorCredentialLoader$NioIo" sourceFile="InspectorCredentialLoader.java" interface="false" size="7" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.api.file.InspectorCredentialLoader$Snapshot" sourceFile="InspectorCredentialLoader.java" interface="false" size="10" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.api.file.ServiceCredentialException" sourceFile="ServiceCredentialException.java" interface="false" size="5" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.api.file.ServiceCredentialReader" sourceFile="ServiceCredentialReader.java" interface="false" size="36" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.api.file.ServiceCredentialSet" sourceFile="ServiceCredentialSet.java" interface="false" size="65" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.api.file.ServiceProcessResources" sourceFile="ServiceProcessResources.java" interface="false" size="146" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.api.file.ServiceProcessResources$Inputs" sourceFile="ServiceProcessResources.java" interface="false" size="17" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.api.file.ServiceProcessResources$Operation" sourceFile="ServiceProcessResources.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.api.file.ServiceProcessResources$PoolFactory" sourceFile="ServiceProcessResources.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.api.file.ServiceProcessResources$SourceFactory" sourceFile="ServiceProcessResources.java" interface="true" size="2" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="dev.codex.schubert.nk.api.maintenance" total_bugs="0" total_types="3" total_size="161">
+      <ClassStats class="dev.codex.schubert.nk.api.maintenance.InspectorAesCredential" sourceFile="InspectorAesCredential.java" interface="false" size="64" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.api.maintenance.InspectorCredentialAccess" sourceFile="InspectorCredentialAccess.java" interface="false" size="45" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.api.maintenance.InspectorDbCredential" sourceFile="InspectorDbCredential.java" interface="false" size="52" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="dev.codex.schubert.nk.bootstrap" total_bugs="0" total_types="90" total_size="3304">
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.ChildStartupContext" sourceFile="ChildStartupContext.java" interface="false" size="319" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.ChildStartupContext$Inputs" sourceFile="ChildStartupContext.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.ChildStartupContext$InspectorIdentity" sourceFile="ChildStartupContext.java" interface="false" size="18" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.ChildStartupContext$Io" sourceFile="ChildStartupContext.java" interface="true" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.ChildStartupContext$MaintenanceParent" sourceFile="ChildStartupContext.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.ChildStartupContext$NativeIo" sourceFile="ChildStartupContext.java" interface="false" size="45" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.ChildStartupContext$Observed" sourceFile="ChildStartupContext.java" interface="false" size="30" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpoint" sourceFile="FixedNativeCoverageCheckpoint.java" interface="false" size="71" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpoint$Agent" sourceFile="FixedNativeCoverageCheckpoint.java" interface="true" size="4" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpoint$Export" sourceFile="FixedNativeCoverageCheckpoint.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpoint$Point" sourceFile="FixedNativeCoverageCheckpoint.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpoint$PublicAgent" sourceFile="FixedNativeCoverageCheckpoint.java" interface="false" size="59" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpoint$PublicAgent$Classes" sourceFile="FixedNativeCoverageCheckpoint.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpoint$PublicAgent$Invocation" sourceFile="FixedNativeCoverageCheckpoint.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpoint$PublicAgent$Sources" sourceFile="FixedNativeCoverageCheckpoint.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.FixedNativeCoverageProfile" sourceFile="FixedNativeCoverageProfile.java" interface="false" size="79" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.FixedNativeCoverageProfile$Phase" sourceFile="FixedNativeCoverageProfile.java" interface="false" size="12" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.FixedNativeCoverageProfile$TerminalRole" sourceFile="FixedNativeCoverageProfile.java" interface="false" size="12" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.FixedNativeCoverageStopHold" sourceFile="FixedNativeCoverageStopHold.java" interface="false" size="65" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.FixedNativeCoverageStopHold$1" sourceFile="FixedNativeCoverageStopHold.java" interface="false" size="8" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.FixedNativeCoverageStopHold$Calls" sourceFile="FixedNativeCoverageStopHold.java" interface="true" size="3" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.FixedNativeCoverageStopHold$Removal" sourceFile="FixedNativeCoverageStopHold.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.FixedNativeCoverageTerminal" sourceFile="FixedNativeCoverageTerminal.java" interface="false" size="39" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.FixedNativeCoverageTerminal$Factory" sourceFile="FixedNativeCoverageTerminal.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.FixedServiceExecArguments" sourceFile="FixedServiceExecArguments.java" interface="false" size="38" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.FixedServiceExecArguments$1" sourceFile="FixedServiceExecArguments.java" interface="false" size="4" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.FixedServiceIdentity" sourceFile="FixedServiceIdentity.java" interface="false" size="87" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.FixedServiceIdentity$NativeQuery" sourceFile="FixedServiceIdentity.java" interface="false" size="39" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.FixedServiceIdentity$Query" sourceFile="FixedServiceIdentity.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.FixedServiceIdentity$Start" sourceFile="FixedServiceIdentity.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.FixedServiceIdentity$Value" sourceFile="FixedServiceIdentity.java" interface="false" size="31" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.LinuxSystemdSession" sourceFile="LinuxSystemdSession.java" interface="false" size="251" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.LinuxSystemdSession$Calls" sourceFile="LinuxSystemdSession.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.LinuxSystemdSession$Factory" sourceFile="LinuxSystemdSession.java" interface="false" size="10" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.LinuxSystemdSession$Native" sourceFile="LinuxSystemdSession.java" interface="false" size="85" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.LinuxSystemdSession$Octets" sourceFile="LinuxSystemdSession.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame" sourceFile="MaintenanceOwnerFrame.java" interface="false" size="134" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame$Clock" sourceFile="MaintenanceOwnerFrame.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame$Guard" sourceFile="MaintenanceOwnerFrame.java" interface="true" size="9" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame$Parent" sourceFile="MaintenanceOwnerFrame.java" interface="false" size="18" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame$ParentProbe" sourceFile="MaintenanceOwnerFrame.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.NativeCoveragePrivateFile" sourceFile="NativeCoveragePrivateFile.java" interface="false" size="230" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.NativeCoveragePrivateFile$FileCalls" sourceFile="NativeCoveragePrivateFile.java" interface="true" size="3" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.NativeCoveragePrivateFile$FileState" sourceFile="NativeCoveragePrivateFile.java" interface="false" size="10" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.NativeCoveragePrivateFile$Identity" sourceFile="NativeCoveragePrivateFile.java" interface="false" size="18" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.NativeCoveragePrivateFile$Io" sourceFile="NativeCoveragePrivateFile.java" interface="true" size="10" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.NativeCoveragePrivateFile$NativeFileCalls" sourceFile="NativeCoveragePrivateFile.java" interface="false" size="7" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.NativeCoveragePrivateFile$NativeIo" sourceFile="NativeCoveragePrivateFile.java" interface="false" size="21" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.NativeCoveragePrivateFile$ReadOnlyObservation" sourceFile="NativeCoveragePrivateFile.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.ReleaseApproval" sourceFile="ReleaseApproval.java" interface="false" size="36" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.ReleaseInventory" sourceFile="ReleaseInventory.java" interface="false" size="264" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.ReleaseInventory$Artifact" sourceFile="ReleaseInventory.java" interface="false" size="17" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.ReleaseInventory$Dependency" sourceFile="ReleaseInventory.java" interface="false" size="25" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.ReleasePayloadVerification" sourceFile="ReleasePayloadVerification.java" interface="false" size="289" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.ReleasePayloadVerification$FileValue" sourceFile="ReleasePayloadVerification.java" interface="false" size="10" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.ReleasePayloadVerification$JarValue" sourceFile="ReleasePayloadVerification.java" interface="false" size="10" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.ReleaseSignatureVerifier" sourceFile="ReleaseSignatureVerifier.java" interface="false" size="40" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.ReleaseSignatureVerifier$Crypto" sourceFile="ReleaseSignatureVerifier.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.ReleaseSignatureVerifier$NativeCrypto" sourceFile="ReleaseSignatureVerifier.java" interface="false" size="9" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.ServiceStartupAdmission" sourceFile="ServiceStartupAdmission.java" interface="false" size="65" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.ServiceStartupAdmission$Admitted" sourceFile="ServiceStartupAdmission.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.ServiceStartupAdmission$ConfigSource" sourceFile="ServiceStartupAdmission.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.ServiceStartupAdmission$Configuration" sourceFile="ServiceStartupAdmission.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.ServiceStartupAdmission$ConfiguredOperation" sourceFile="ServiceStartupAdmission.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.ServiceStartupAdmission$DescriptorGate" sourceFile="ServiceStartupAdmission.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.ServiceStartupAdmission$Information" sourceFile="ServiceStartupAdmission.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.ServiceStartupAdmission$NativeGate" sourceFile="ServiceStartupAdmission.java" interface="false" size="10" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.ServiceStartupAdmission$NativeObservation" sourceFile="ServiceStartupAdmission.java" interface="false" size="13" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.ServiceStartupAdmission$Observation" sourceFile="ServiceStartupAdmission.java" interface="true" size="6" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.ServiceStartupAdmission$Operation" sourceFile="ServiceStartupAdmission.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.ServiceStartupAdmission$Ready" sourceFile="ServiceStartupAdmission.java" interface="true" size="4" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.ServiceStartupAdmission$ReadyOnce" sourceFile="ServiceStartupAdmission.java" interface="false" size="49" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.StartupProofFrame" sourceFile="StartupProofFrame.java" interface="false" size="90" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.StartupProofFrame$Bounds" sourceFile="StartupProofFrame.java" interface="false" size="10" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.StartupProofFrame$Field" sourceFile="StartupProofFrame.java" interface="false" size="12" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.StartupReleaseManifest" sourceFile="StartupReleaseManifest.java" interface="false" size="207" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.StartupReleaseManifest$ApplicationOperation" sourceFile="StartupReleaseManifest.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.StartupReleaseManifest$Contents" sourceFile="StartupReleaseManifest.java" interface="false" size="37" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.StartupReleaseManifest$Io" sourceFile="StartupReleaseManifest.java" interface="true" size="8" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.StartupReleaseManifest$ManifestValue" sourceFile="StartupReleaseManifest.java" interface="false" size="10" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.StartupReleaseManifest$NioIo" sourceFile="StartupReleaseManifest.java" interface="false" size="9" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.StartupReleaseManifest$ReleaseOperation" sourceFile="StartupReleaseManifest.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.StartupReleaseManifest$Snapshot" sourceFile="StartupReleaseManifest.java" interface="false" size="24" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.SystemManagerObservation" sourceFile="SystemManagerObservation.java" interface="false" size="61" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.SystemManagerObservation$Budget" sourceFile="SystemManagerObservation.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.SystemManagerObservation$Factory" sourceFile="SystemManagerObservation.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.SystemManagerObservation$Owner" sourceFile="SystemManagerObservation.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.SystemManagerObservation$Property" sourceFile="SystemManagerObservation.java" interface="false" size="32" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.SystemManagerObservation$Service" sourceFile="SystemManagerObservation.java" interface="false" size="30" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.bootstrap.SystemManagerObservation$Session" sourceFile="SystemManagerObservation.java" interface="true" size="6" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="dev.codex.schubert.nk.migration" total_bugs="0" total_types="83" total_size="4344">
+      <ClassStats class="dev.codex.schubert.nk.migration.AssetMigrationManifest" sourceFile="AssetMigrationManifest.java" interface="false" size="80" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.AssetMigrationManifest$Comparison" sourceFile="AssetMigrationManifest.java" interface="false" size="24" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.AssetMigrationManifest$Entry" sourceFile="AssetMigrationManifest.java" interface="false" size="23" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.AssetMigrationManifest$Kind" sourceFile="AssetMigrationManifest.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.AssetMigrationManifest$Observation" sourceFile="AssetMigrationManifest.java" interface="false" size="17" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.AssetStagingTables" sourceFile="AssetStagingTables.java" interface="false" size="108" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.AssetStagingTables$SqlMutation" sourceFile="AssetStagingTables.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.AssetStagingTables$SqlQuery" sourceFile="AssetStagingTables.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.AssetStagingTables$Table" sourceFile="AssetStagingTables.java" interface="false" size="12" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.AudioCopyDataset" sourceFile="AudioCopyDataset.java" interface="false" size="98" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.AudioFileCopyRow" sourceFile="AudioFileCopyRow.java" interface="false" size="83" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.AudioMigrationMap" sourceFile="AudioMigrationMap.java" interface="false" size="138" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.AudioMigrationMap$AudioMapping" sourceFile="AudioMigrationMap.java" interface="false" size="17" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.CurrentAudioLinkMapper" sourceFile="CurrentAudioLinkMapper.java" interface="false" size="119" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.CurrentAudioLinkMapper$LinkOrder" sourceFile="CurrentAudioLinkMapper.java" interface="false" size="24" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.CurrentAudioLinkProjectionReader" sourceFile="CurrentAudioLinkProjectionReader.java" interface="false" size="73" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.CurrentAudioProjectionReader" sourceFile="CurrentAudioProjectionReader.java" interface="false" size="101" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.CurrentMigrationAssembler" sourceFile="CurrentMigrationAssembler.java" interface="false" size="46" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.CurrentMigrationMappingManifest" sourceFile="CurrentMigrationMappingManifest.java" interface="false" size="49" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.CurrentMigrationMappingVerifier" sourceFile="CurrentMigrationMappingVerifier.java" interface="false" size="150" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.CurrentMigrationProjection" sourceFile="CurrentMigrationProjection.java" interface="false" size="24" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.CurrentMigrationProjection$SourceSnapshot" sourceFile="CurrentMigrationProjection.java" interface="false" size="26" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.CurrentMigrationTransfer" sourceFile="CurrentMigrationTransfer.java" interface="false" size="22" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.CurrentMigrationTransfer$SourceCounts" sourceFile="CurrentMigrationTransfer.java" interface="false" size="19" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.CurrentScenarioEntryMapper" sourceFile="CurrentScenarioEntryMapper.java" interface="false" size="77" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.CurrentScenarioEntryProjectionReader" sourceFile="CurrentScenarioEntryProjectionReader.java" interface="false" size="92" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.CurrentScenarioFileMapper" sourceFile="CurrentScenarioFileMapper.java" interface="false" size="101" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.CurrentScenarioFileProjectionReader" sourceFile="CurrentScenarioFileProjectionReader.java" interface="false" size="84" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.CurrentSpeakerProjectionReader" sourceFile="CurrentSpeakerProjectionReader.java" interface="false" size="80" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.MediaAssetCopyBatch" sourceFile="MediaAssetCopyBatch.java" interface="false" size="61" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.MediaAssetCopyRow" sourceFile="MediaAssetCopyRow.java" interface="false" size="127" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.MigrationCopyDataset" sourceFile="MigrationCopyDataset.java" interface="false" size="40" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.MigrationCopyPort" sourceFile="MigrationCopyPort.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.MigrationGamesVerifier" sourceFile="MigrationGamesVerifier.java" interface="false" size="84" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.MigrationMasterColumnVerifier" sourceFile="MigrationMasterColumnVerifier.java" interface="false" size="110" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.MigrationMasterColumnVerifier$SqlQuery" sourceFile="MigrationMasterColumnVerifier.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.MigrationMasterConstraintVerifier" sourceFile="MigrationMasterConstraintVerifier.java" interface="false" size="101" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.MigrationMasterConstraintVerifier$SqlQuery" sourceFile="MigrationMasterConstraintVerifier.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.MigrationMasterContentVerifier" sourceFile="MigrationMasterContentVerifier.java" interface="false" size="129" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.MigrationMasterContentVerifier$SqlQuery" sourceFile="MigrationMasterContentVerifier.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.MigrationMasterCopyCoordinator" sourceFile="MigrationMasterCopyCoordinator.java" interface="false" size="35" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.MigrationMasterCopyDataset" sourceFile="MigrationMasterCopyDataset.java" interface="false" size="36" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.MigrationMasterCopyFingerprint" sourceFile="MigrationMasterCopyFingerprint.java" interface="false" size="49" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.MigrationMasterCopyFingerprint$DigestSink" sourceFile="MigrationMasterCopyFingerprint.java" interface="false" size="13" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.MigrationMasterCopyFingerprint$TableFingerprint" sourceFile="MigrationMasterCopyFingerprint.java" interface="false" size="22" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.MigrationMasterCopyManifest" sourceFile="MigrationMasterCopyManifest.java" interface="false" size="53" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.MigrationMasterCopyVerifier" sourceFile="MigrationMasterCopyVerifier.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.MigrationMasterFinalizer" sourceFile="MigrationMasterFinalizer.java" interface="false" size="142" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.MigrationMasterFinalizer$SqlMutation" sourceFile="MigrationMasterFinalizer.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.MigrationMasterFinalizer$SqlPrepare" sourceFile="MigrationMasterFinalizer.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.MigrationMasterFinalizer$SqlQuery" sourceFile="MigrationMasterFinalizer.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifier" sourceFile="MigrationMasterReferenceVerifier.java" interface="false" size="133" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifier$SqlQuery" sourceFile="MigrationMasterReferenceVerifier.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.MigrationMasterTargetPublisher" sourceFile="MigrationMasterTargetPublisher.java" interface="false" size="33" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.MusicLogicalId" sourceFile="MusicLogicalId.java" interface="false" size="21" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.MusicMigrationCatalogue" sourceFile="MusicMigrationCatalogue.java" interface="false" size="93" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.MusicMigrationPairing" sourceFile="MusicMigrationPairing.java" interface="false" size="101" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.MusicMigrationPairing$Pair" sourceFile="MusicMigrationPairing.java" interface="false" size="22" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.MusicMigrationPairing$Result" sourceFile="MusicMigrationPairing.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.PostgresCopyTextEncoder" sourceFile="PostgresCopyTextEncoder.java" interface="false" size="51" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.PostgresCopyTextWriter" sourceFile="PostgresCopyTextWriter.java" interface="false" size="23" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.PostgresMigrationCopyPort" sourceFile="PostgresMigrationCopyPort.java" interface="false" size="61" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.ScenarioCopyDataset" sourceFile="ScenarioCopyDataset.java" interface="false" size="46" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.ScenarioEntryCopyBatch" sourceFile="ScenarioEntryCopyBatch.java" interface="false" size="43" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.ScenarioEntryCopyRow" sourceFile="ScenarioEntryCopyRow.java" interface="false" size="74" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.ScenarioEntryMigrationMap" sourceFile="ScenarioEntryMigrationMap.java" interface="false" size="46" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.ScenarioEntryMigrationMap$IdPair" sourceFile="ScenarioEntryMigrationMap.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.ScenarioEntryMigrationMap$MappedEntry" sourceFile="ScenarioEntryMigrationMap.java" interface="false" size="17" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.ScenarioEntryPlacementMap" sourceFile="ScenarioEntryPlacementMap.java" interface="false" size="80" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.ScenarioEntryPlacementMap$PlacedEntry" sourceFile="ScenarioEntryPlacementMap.java" interface="false" size="26" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.ScenarioEntryPlacementMap$Placement" sourceFile="ScenarioEntryPlacementMap.java" interface="false" size="19" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.ScenarioFileCopyBatch" sourceFile="ScenarioFileCopyBatch.java" interface="false" size="99" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.ScenarioFileMigrationMap" sourceFile="ScenarioFileMigrationMap.java" interface="false" size="68" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.ScenarioFileMigrationMap$FilePair" sourceFile="ScenarioFileMigrationMap.java" interface="false" size="17" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.ScenarioFileMigrationMap$MappedFile" sourceFile="ScenarioFileMigrationMap.java" interface="false" size="20" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.ScenarioStagingTables" sourceFile="ScenarioStagingTables.java" interface="false" size="90" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.SpeakerCopyBatch" sourceFile="SpeakerCopyBatch.java" interface="false" size="56" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.SpeakerCopyRow" sourceFile="SpeakerCopyRow.java" interface="false" size="63" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.SpeakerMigrationMap" sourceFile="SpeakerMigrationMap.java" interface="false" size="87" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.SpeakerMigrationMap$SpeakerMapping" sourceFile="SpeakerMigrationMap.java" interface="false" size="17" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.SpeakerStagingTable" sourceFile="SpeakerStagingTable.java" interface="false" size="81" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.VideoMigrationCatalogue" sourceFile="VideoMigrationCatalogue.java" interface="false" size="58" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.migration.VideoMigrationCatalogue$Video" sourceFile="VideoMigrationCatalogue.java" interface="false" size="30" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="dev.codex.schubert.nk.protocol.codec" total_bugs="0" total_types="14" total_size="642">
+      <ClassStats class="dev.codex.schubert.nk.protocol.codec.ExpectedRoute" sourceFile="ExpectedRoute.java" interface="false" size="30" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.codec.FieldCodec" sourceFile="FieldCodec.java" interface="true" size="135" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.codec.FieldCodecRules" sourceFile="FieldCodecRules.java" interface="true" size="6" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.codec.FieldEncodingException" sourceFile="FieldEncodingException.java" interface="false" size="8" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.codec.FixedWidthDecoder" sourceFile="FixedWidthDecoder.java" interface="false" size="34" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.codec.FixedWidthEncoder" sourceFile="FixedWidthEncoder.java" interface="false" size="33" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.codec.HeaderCodec" sourceFile="HeaderCodec.java" interface="false" size="87" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.codec.MessageEncodingException" sourceFile="MessageEncodingException.java" interface="false" size="8" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.codec.PayloadCodec" sourceFile="PayloadCodec.java" interface="false" size="205" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.codec.PermanentProtocolException" sourceFile="PermanentProtocolException.java" interface="false" size="8" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.codec.ProtocolValidator" sourceFile="ProtocolValidator.java" interface="true" size="26" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.codec.TransportBodyType" sourceFile="TransportBodyType.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.codec.TransportMetadata" sourceFile="TransportMetadata.java" interface="false" size="45" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.codec.package-info" sourceFile="package-info.java" interface="true" size="1" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="dev.codex.schubert.nk.protocol.file" total_bugs="0" total_types="11" total_size="315">
+      <ClassStats class="dev.codex.schubert.nk.protocol.file.ContentDisposition" sourceFile="ContentDisposition.java" interface="false" size="26" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.file.LargeResultContent" sourceFile="LargeResultContent.java" interface="false" size="21" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.file.LargeResultDescriptor" sourceFile="LargeResultDescriptor.java" interface="false" size="62" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.file.LargeResultDigest" sourceFile="LargeResultDigest.java" interface="true" size="5" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.file.LargeResultIoException" sourceFile="LargeResultIoException.java" interface="false" size="5" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.file.LargeResultRecordCodec" sourceFile="LargeResultRecordCodec.java" interface="true" size="58" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.file.MediaDescriptor" sourceFile="MediaDescriptor.java" interface="false" size="40" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.file.MediaDescriptorValidator" sourceFile="MediaDescriptorValidator.java" interface="true" size="76" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorRules" sourceFile="MediaDescriptorValidatorRules.java" interface="true" size="7" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.file.MediaType" sourceFile="MediaType.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.file.package-info" sourceFile="package-info.java" interface="true" size="1" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="dev.codex.schubert.nk.protocol.header" total_bugs="0" total_types="6" total_size="249">
+      <ClassStats class="dev.codex.schubert.nk.protocol.header.AuthenticationContext" sourceFile="AuthenticationContext.java" interface="false" size="23" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.header.CommonHeader" sourceFile="CommonHeader.java" interface="false" size="115" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.header.InteractionKind" sourceFile="InteractionKind.java" interface="false" size="30" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.header.MessageKind" sourceFile="MessageKind.java" interface="false" size="30" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.header.ResultCode" sourceFile="ResultCode.java" interface="false" size="50" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.header.package-info" sourceFile="package-info.java" interface="true" size="1" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="dev.codex.schubert.nk.protocol.layout" total_bugs="0" total_types="33" total_size="1568">
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.FieldArea" sourceFile="FieldArea.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.FieldDefinition" sourceFile="FieldDefinition.java" interface="false" size="58" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.FieldValue" sourceFile="FieldValue.java" interface="true" size="1" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.FieldValue$Flag" sourceFile="FieldValue.java" interface="false" size="8" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.FieldValue$Numeric" sourceFile="FieldValue.java" interface="false" size="8" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.FieldValue$Text" sourceFile="FieldValue.java" interface="false" size="12" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.FieldValue$Unset" sourceFile="FieldValue.java" interface="false" size="10" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.FieldValueSet" sourceFile="FieldValueSet.java" interface="false" size="30" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.FixedPayload" sourceFile="FixedPayload.java" interface="false" size="38" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.LayoutDefinition" sourceFile="LayoutDefinition.java" interface="false" size="70" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalog" sourceFile="LayoutFieldCatalog.java" interface="false" size="164" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalog$MutableFields" sourceFile="LayoutFieldCatalog.java" interface="false" size="7" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.LayoutFields" sourceFile="LayoutFields.java" interface="false" size="33" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.LayoutId" sourceFile="LayoutId.java" interface="false" size="21" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.LayoutPayload" sourceFile="LayoutPayload.java" interface="true" size="6" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.LayoutRegistry" sourceFile="LayoutRegistry.java" interface="false" size="130" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.LayoutValidationException" sourceFile="LayoutValidationException.java" interface="false" size="8" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.Padding" sourceFile="Padding.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.PayloadData" sourceFile="PayloadData.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.PayloadRecord" sourceFile="PayloadRecord.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidator" sourceFile="PayloadSemanticValidator.java" interface="true" size="370" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorRules" sourceFile="PayloadSemanticValidatorRules.java" interface="true" size="30" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog" sourceFile="PayloadTypeCatalog.java" interface="false" size="173" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog$Mapping" sourceFile="PayloadTypeCatalog.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog$RecordMapping" sourceFile="PayloadTypeCatalog.java" interface="false" size="12" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.PayloadValues" sourceFile="PayloadValues.java" interface="false" size="18" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.Presence" sourceFile="Presence.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.TypedFieldValues" sourceFile="TypedFieldValues.java" interface="false" size="241" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.TypedPayloadValues" sourceFile="TypedPayloadValues.java" interface="false" size="18" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.UnsupportedLayoutException" sourceFile="UnsupportedLayoutException.java" interface="false" size="5" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.WireMessage" sourceFile="WireMessage.java" interface="false" size="18" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.WireType" sourceFile="WireType.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.package-info" sourceFile="package-info.java" interface="true" size="1" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="dev.codex.schubert.nk.protocol.layout.admin" total_bugs="0" total_types="10" total_size="385">
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.admin.PasswordResetRequestData" sourceFile="PasswordResetRequestData.java" interface="false" size="34" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.admin.UserCreateRequestData" sourceFile="UserCreateRequestData.java" interface="false" size="38" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.admin.UserDetailRequestData" sourceFile="UserDetailRequestData.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.admin.UserDetailResponseData" sourceFile="UserDetailResponseData.java" interface="false" size="79" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.admin.UserMutationResponseData" sourceFile="UserMutationResponseData.java" interface="false" size="24" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.admin.UserRecord" sourceFile="UserRecord.java" interface="false" size="59" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.admin.UserRoleRequestData" sourceFile="UserRoleRequestData.java" interface="false" size="34" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.admin.UserSearchRequestData" sourceFile="UserSearchRequestData.java" interface="false" size="39" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.admin.UserStatusRequestData" sourceFile="UserStatusRequestData.java" interface="false" size="33" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.admin.UserUnlockRequestData" sourceFile="UserUnlockRequestData.java" interface="false" size="29" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="dev.codex.schubert.nk.protocol.layout.auth" total_bugs="0" total_types="4" total_size="113">
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.auth.LoginRequestData" sourceFile="LoginRequestData.java" interface="false" size="29" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.auth.LoginResponseData" sourceFile="LoginResponseData.java" interface="false" size="55" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.auth.LogoutRequestData" sourceFile="LogoutRequestData.java" interface="false" size="12" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.auth.LogoutResponseData" sourceFile="LogoutResponseData.java" interface="false" size="17" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="dev.codex.schubert.nk.protocol.layout.common" total_bugs="0" total_types="1" total_size="44">
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.common.PagedResponseData" sourceFile="PagedResponseData.java" interface="false" size="44" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="dev.codex.schubert.nk.protocol.layout.log" total_bugs="0" total_types="3" total_size="235">
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.log.LogRecord" sourceFile="LogRecord.java" interface="false" size="89" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.log.LogSearchRequestData" sourceFile="LogSearchRequestData.java" interface="false" size="59" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.log.WebLogEventData" sourceFile="WebLogEventData.java" interface="false" size="87" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="dev.codex.schubert.nk.protocol.layout.media" total_bugs="0" total_types="19" total_size="516">
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.media.AnimationListRequestData" sourceFile="AnimationListRequestData.java" interface="false" size="18" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.media.AnimationListResponseData" sourceFile="AnimationListResponseData.java" interface="false" size="17" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.media.AnimationMenuRequestData" sourceFile="AnimationMenuRequestData.java" interface="false" size="12" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.media.AnimationMenuResponseData" sourceFile="AnimationMenuResponseData.java" interface="false" size="33" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.media.AnimationRecord" sourceFile="AnimationRecord.java" interface="false" size="49" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.media.AudioDescriptorRequestData" sourceFile="AudioDescriptorRequestData.java" interface="false" size="24" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.media.MediaDescriptorData" sourceFile="MediaDescriptorData.java" interface="false" size="49" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.media.MusicCategoryRecord" sourceFile="MusicCategoryRecord.java" interface="false" size="24" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.media.MusicCategoryRequestData" sourceFile="MusicCategoryRequestData.java" interface="false" size="12" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.media.MusicCategoryResponseData" sourceFile="MusicCategoryResponseData.java" interface="false" size="17" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.media.MusicDescriptorRequestData" sourceFile="MusicDescriptorRequestData.java" interface="false" size="24" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.media.MusicSectionRecord" sourceFile="MusicSectionRecord.java" interface="false" size="24" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.media.MusicSectionRequestData" sourceFile="MusicSectionRequestData.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.media.MusicSectionResponseData" sourceFile="MusicSectionResponseData.java" interface="false" size="17" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.media.MusicTrackRecord" sourceFile="MusicTrackRecord.java" interface="false" size="59" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.media.MusicTrackRequestData" sourceFile="MusicTrackRequestData.java" interface="false" size="24" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.media.MusicTrackResponseData" sourceFile="MusicTrackResponseData.java" interface="false" size="17" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.media.VideoDescriptorRequestData" sourceFile="VideoDescriptorRequestData.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.media.VideoDescriptorResponseData" sourceFile="VideoDescriptorResponseData.java" interface="false" size="64" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="dev.codex.schubert.nk.protocol.layout.question" total_bugs="0" total_types="15" total_size="538">
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.question.NotificationCancelRequestData" sourceFile="NotificationCancelRequestData.java" interface="false" size="24" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.question.NotificationCancelResponseData" sourceFile="NotificationCancelResponseData.java" interface="false" size="24" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.question.NotificationDetailRequestData" sourceFile="NotificationDetailRequestData.java" interface="false" size="18" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.question.NotificationDetailResponseData" sourceFile="NotificationDetailResponseData.java" interface="false" size="88" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.question.NotificationRecord" sourceFile="NotificationRecord.java" interface="false" size="53" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.question.NotificationSearchRequestData" sourceFile="NotificationSearchRequestData.java" interface="false" size="39" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.question.QuestionDeleteRequestData" sourceFile="QuestionDeleteRequestData.java" interface="false" size="24" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.question.QuestionDeleteResponseData" sourceFile="QuestionDeleteResponseData.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.question.QuestionDetailRequestData" sourceFile="QuestionDetailRequestData.java" interface="false" size="18" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.question.QuestionDetailResponseData" sourceFile="QuestionDetailResponseData.java" interface="false" size="54" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.question.QuestionSearchRequestData" sourceFile="QuestionSearchRequestData.java" interface="false" size="49" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.question.QuestionSubmitRequestData" sourceFile="QuestionSubmitRequestData.java" interface="false" size="24" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.question.QuestionSubmitResponseData" sourceFile="QuestionSubmitResponseData.java" interface="false" size="29" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.question.QuestionSummaryRecord" sourceFile="QuestionSummaryRecord.java" interface="false" size="49" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.question.QuestionWorkData" sourceFile="QuestionWorkData.java" interface="false" size="29" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="dev.codex.schubert.nk.protocol.layout.scenario" total_bugs="0" total_types="17" total_size="574">
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.scenario.GameListRequestData" sourceFile="GameListRequestData.java" interface="false" size="12" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.scenario.GameListResponseData" sourceFile="GameListResponseData.java" interface="false" size="17" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.scenario.GameRecord" sourceFile="GameRecord.java" interface="false" size="29" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.scenario.RouteListRequestData" sourceFile="RouteListRequestData.java" interface="false" size="18" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.scenario.RouteListResponseData" sourceFile="RouteListResponseData.java" interface="false" size="17" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.scenario.RouteRecord" sourceFile="RouteRecord.java" interface="false" size="29" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.scenario.ScenarioDetailRequestData" sourceFile="ScenarioDetailRequestData.java" interface="false" size="18" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.scenario.ScenarioDetailResponseData" sourceFile="ScenarioDetailResponseData.java" interface="false" size="90" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.scenario.ScenarioEntryRecord" sourceFile="ScenarioEntryRecord.java" interface="false" size="60" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.scenario.ScenarioFileListRequestData" sourceFile="ScenarioFileListRequestData.java" interface="false" size="24" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.scenario.ScenarioFileListResponseData" sourceFile="ScenarioFileListResponseData.java" interface="false" size="34" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.scenario.ScenarioFileRecord" sourceFile="ScenarioFileRecord.java" interface="false" size="34" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.scenario.ScenarioSearchRecord" sourceFile="ScenarioSearchRecord.java" interface="false" size="74" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.scenario.ScenarioSearchRequestData" sourceFile="ScenarioSearchRequestData.java" interface="false" size="54" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.scenario.SpeakerListRequestData" sourceFile="SpeakerListRequestData.java" interface="false" size="18" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.scenario.SpeakerListResponseData" sourceFile="SpeakerListResponseData.java" interface="false" size="17" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.scenario.SpeakerRecord" sourceFile="SpeakerRecord.java" interface="false" size="29" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="dev.codex.schubert.nk.protocol.layout.semantic" total_bugs="0" total_types="37" total_size="619">
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.semantic.AnimationCategory" sourceFile="AnimationCategory.java" interface="false" size="20" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.semantic.AnimationListCategory" sourceFile="AnimationListCategory.java" interface="false" size="18" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.semantic.AnswerState" sourceFile="AnswerState.java" interface="false" size="20" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.semantic.AsyncJobId" sourceFile="AsyncJobId.java" interface="false" size="11" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.semantic.AudioId" sourceFile="AudioId.java" interface="false" size="11" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.semantic.ContentDisposition" sourceFile="ContentDisposition.java" interface="false" size="18" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.semantic.DeliveryMode" sourceFile="DeliveryMode.java" interface="false" size="18" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.semantic.DisplayPath" sourceFile="DisplayPath.java" interface="false" size="26" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.semantic.ElapsedMilliseconds" sourceFile="ElapsedMilliseconds.java" interface="false" size="23" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.semantic.EntryId" sourceFile="EntryId.java" interface="false" size="11" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.semantic.EntryType" sourceFile="EntryType.java" interface="false" size="18" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.semantic.GameCode" sourceFile="GameCode.java" interface="false" size="18" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.semantic.HttpStatusCode" sourceFile="HttpStatusCode.java" interface="false" size="22" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.semantic.IdValue" sourceFile="IdValue.java" interface="true" size="6" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.semantic.LogId" sourceFile="LogId.java" interface="false" size="11" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.semantic.LogLevel" sourceFile="LogLevel.java" interface="false" size="20" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.semantic.LogType" sourceFile="LogType.java" interface="false" size="26" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.semantic.MediaMimeType" sourceFile="MediaMimeType.java" interface="false" size="26" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.semantic.NotificationErrorCode" sourceFile="NotificationErrorCode.java" interface="false" size="24" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.semantic.NotificationId" sourceFile="NotificationId.java" interface="false" size="11" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.semantic.NotificationState" sourceFile="NotificationState.java" interface="false" size="24" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.semantic.NotificationType" sourceFile="NotificationType.java" interface="false" size="20" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.semantic.PairRole" sourceFile="PairRole.java" interface="false" size="20" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.semantic.PathSyntax" sourceFile="PathSyntax.java" interface="true" size="11" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.semantic.ProtocolId" sourceFile="ProtocolId.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.semantic.QuestionId" sourceFile="QuestionId.java" interface="false" size="11" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.semantic.RelativePath" sourceFile="RelativePath.java" interface="false" size="37" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.semantic.ScriptFileId" sourceFile="ScriptFileId.java" interface="false" size="11" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.semantic.Sha256Hex" sourceFile="Sha256Hex.java" interface="false" size="22" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.semantic.SpeakerId" sourceFile="SpeakerId.java" interface="false" size="11" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.semantic.UserId" sourceFile="UserId.java" interface="false" size="11" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.semantic.UserRole" sourceFile="UserRole.java" interface="false" size="18" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.semantic.UserState" sourceFile="UserState.java" interface="false" size="20" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.semantic.VideoCategory" sourceFile="VideoCategory.java" interface="false" size="22" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.semantic.VoiceCondition" sourceFile="VoiceCondition.java" interface="false" size="18" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.semantic.WireEnum" sourceFile="WireEnum.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.layout.semantic.package-info" sourceFile="package-info.java" interface="true" size="1" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="dev.codex.schubert.nk.protocol.time" total_bugs="0" total_types="2" total_size="36">
+      <ClassStats class="dev.codex.schubert.nk.protocol.time.JstWireTimestamp" sourceFile="JstWireTimestamp.java" interface="false" size="35" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.time.package-info" sourceFile="package-info.java" interface="true" size="1" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="dev.codex.schubert.nk.protocol.transport" total_bugs="0" total_types="4" total_size="68">
+      <ClassStats class="dev.codex.schubert.nk.protocol.transport.BrokerTopology" sourceFile="BrokerTopology.java" interface="false" size="50" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationException" sourceFile="FailedJmsIsolationException.java" interface="false" size="9" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackException" sourceFile="UnconfirmedJmsRollbackException.java" interface="false" size="8" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.protocol.transport.package-info" sourceFile="package-info.java" interface="true" size="1" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="dev.codex.schubert.nk.storage" total_bugs="0" total_types="79" total_size="1951">
+      <ClassStats class="dev.codex.schubert.nk.storage.DirectoryCalls" sourceFile="DirectoryCalls.java" interface="true" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.ExistingFileAccess" sourceFile="ExistingFileAccess.java" interface="false" size="50" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.ExistingFileAccess$Io" sourceFile="ExistingFileAccess.java" interface="true" size="3" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.ExistingFileAccess$NioIo" sourceFile="ExistingFileAccess.java" interface="false" size="7" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.ExistingFileAccess$ReadOperation" sourceFile="ExistingFileAccess.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.InodeSecurityCalls" sourceFile="InodeSecurityCalls.java" interface="true" size="4" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxDirectoryCalls" sourceFile="LinuxDirectoryCalls.java" interface="false" size="149" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxDirectoryCalls$FdCall" sourceFile="LinuxDirectoryCalls.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxDirectoryCalls$MkdirCall" sourceFile="LinuxDirectoryCalls.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxDirectoryCalls$OpenCall" sourceFile="LinuxDirectoryCalls.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxDirectoryCalls$RenameCall" sourceFile="LinuxDirectoryCalls.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxDirectoryCalls$UnlinkCall" sourceFile="LinuxDirectoryCalls.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxExecDescriptors" sourceFile="LinuxExecDescriptors.java" interface="false" size="52" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxExecDescriptors$FcntlCall" sourceFile="LinuxExecDescriptors.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxExecDescriptors$Operation" sourceFile="LinuxExecDescriptors.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxFileLock" sourceFile="LinuxFileLock.java" interface="false" size="123" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxFileLock$CloseCall" sourceFile="LinuxFileLock.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxFileLock$LockCall" sourceFile="LinuxFileLock.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxFileLock$OpenCall" sourceFile="LinuxFileLock.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxFileLock$Operation" sourceFile="LinuxFileLock.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxFileLock$OwnedDescriptor" sourceFile="LinuxFileLock.java" interface="false" size="15" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxFileLock$StartupOperation" sourceFile="LinuxFileLock.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxFilesystemClassifier" sourceFile="LinuxFilesystemClassifier.java" interface="false" size="50" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxFilesystemClassifier$StatfsCall" sourceFile="LinuxFilesystemClassifier.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxHostDirectoryCalls" sourceFile="LinuxHostDirectoryCalls.java" interface="false" size="60" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxHostDirectoryCalls$OpenCall" sourceFile="LinuxHostDirectoryCalls.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxInodeSecurity" sourceFile="LinuxInodeSecurity.java" interface="false" size="98" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxInodeSecurity$GetXattrCall" sourceFile="LinuxInodeSecurity.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxInodeSecurity$StatvfsCall" sourceFile="LinuxInodeSecurity.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxInodeSecurity$UidCall" sourceFile="LinuxInodeSecurity.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxMonotonicClock" sourceFile="LinuxMonotonicClock.java" interface="false" size="40" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxMonotonicClock$ReadCall" sourceFile="LinuxMonotonicClock.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxProcessExec" sourceFile="LinuxProcessExec.java" interface="false" size="63" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxProcessExec$ExecCall" sourceFile="LinuxProcessExec.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxSealedProof" sourceFile="LinuxSealedProof.java" interface="false" size="112" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxSealedProof$CloseCall" sourceFile="LinuxSealedProof.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxSealedProof$CreateCall" sourceFile="LinuxSealedProof.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxSealedProof$Descriptor" sourceFile="LinuxSealedProof.java" interface="false" size="12" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxSealedProof$FcntlCall" sourceFile="LinuxSealedProof.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxSealedProof$ModeCall" sourceFile="LinuxSealedProof.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxSealedProof$Operation" sourceFile="LinuxSealedProof.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxSealedProof$ReadCall" sourceFile="LinuxSealedProof.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxSealedProof$WriteCall" sourceFile="LinuxSealedProof.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxStartupAdmission" sourceFile="LinuxStartupAdmission.java" interface="false" size="78" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxStartupAdmission$Attributes" sourceFile="LinuxStartupAdmission.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxStartupAdmission$FdOwner" sourceFile="LinuxStartupAdmission.java" interface="false" size="13" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxStartupAdmission$FdOwners" sourceFile="LinuxStartupAdmission.java" interface="false" size="22" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxStartupAdmission$Identity" sourceFile="LinuxStartupAdmission.java" interface="false" size="12" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxStartupAdmission$Io" sourceFile="LinuxStartupAdmission.java" interface="true" size="5" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxStartupAdmission$Lease" sourceFile="LinuxStartupAdmission.java" interface="false" size="13" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxStartupAdmission$NativeIo" sourceFile="LinuxStartupAdmission.java" interface="false" size="19" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.LinuxStartupAdmission$Operation" sourceFile="LinuxStartupAdmission.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.NonSecretConfigSource" sourceFile="NonSecretConfigSource.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.OwnedTransferDirectory" sourceFile="OwnedTransferDirectory.java" interface="false" size="287" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.OwnedTransferDirectory$EntryHandle" sourceFile="OwnedTransferDirectory.java" interface="false" size="11" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.OwnedTransferDirectory$EntryOpen" sourceFile="OwnedTransferDirectory.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.OwnedTransferDirectory$FileOperation" sourceFile="OwnedTransferDirectory.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.ResourceScope" sourceFile="ResourceScope.java" interface="true" size="58" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.ResourceScope$Acquire" sourceFile="ResourceScope.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.ResourceScope$Action" sourceFile="ResourceScope.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.ResourceScope$OwnedAction" sourceFile="ResourceScope.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.ResourceScope$Release" sourceFile="ResourceScope.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.ServiceConfigFiles" sourceFile="ServiceConfigFiles.java" interface="false" size="92" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.ServiceConfigFiles$Contents" sourceFile="ServiceConfigFiles.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.ServiceConfigFiles$Io" sourceFile="ServiceConfigFiles.java" interface="true" size="3" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.ServiceConfigFiles$NioIo" sourceFile="ServiceConfigFiles.java" interface="false" size="7" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.ServiceConfigFiles$Service" sourceFile="ServiceConfigFiles.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.ServiceConfigFiles$Snapshot" sourceFile="ServiceConfigFiles.java" interface="false" size="18" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.ServiceCredentialId" sourceFile="ServiceCredentialId.java" interface="false" size="55" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.ServiceCredentialId$Kind" sourceFile="ServiceCredentialId.java" interface="false" size="12" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.ServiceCredentialLocation" sourceFile="ServiceCredentialLocation.java" interface="false" size="33" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.StorageAttributeGuard" sourceFile="StorageAttributeGuard.java" interface="false" size="56" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.StorageIdentity" sourceFile="StorageIdentity.java" interface="false" size="20" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.StorageIoException" sourceFile="StorageIoException.java" interface="false" size="31" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.StorageIoException$Reason" sourceFile="StorageIoException.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.StorageRootInspection" sourceFile="StorageRootInspection.java" interface="false" size="82" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.StorageRootInspection$Inode" sourceFile="StorageRootInspection.java" interface="false" size="10" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.StorageRootLayout" sourceFile="StorageRootLayout.java" interface="false" size="31" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.storage.package-info" sourceFile="package-info.java" interface="true" size="1" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="dev.codex.schubert.nk.web.bootstrap" total_bugs="0" total_types="1" total_size="153">
+      <ClassStats class="dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfig" sourceFile="WebNonSecretConfig.java" interface="false" size="153" bugs="0"/>
+    </PackageStats>
+    <FindBugsProfile>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassInfoAnalysisEngine" totalMilliseconds="537" invocations="2058" avgMicrosecondsPerInvocation="261" maxMicrosecondsPerInvocation="14392" standardDeviationMicrosecondsPerInvocation="684"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.IsNullValueDataflowFactory" totalMilliseconds="403" invocations="3301" avgMicrosecondsPerInvocation="122" maxMicrosecondsPerInvocation="10922" standardDeviationMicrosecondsPerInvocation="398"/>
+      <ClassProfile name="edu.umd.cs.findbugs.ba.npe.NullDerefAndRedundantComparisonFinder" totalMilliseconds="396" invocations="3300" avgMicrosecondsPerInvocation="120" maxMicrosecondsPerInvocation="10871" standardDeviationMicrosecondsPerInvocation="314"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.TypeDataflowFactory" totalMilliseconds="385" invocations="3553" avgMicrosecondsPerInvocation="108" maxMicrosecondsPerInvocation="5885" standardDeviationMicrosecondsPerInvocation="291"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.UnconditionalValueDerefDataflowFactory" totalMilliseconds="360" invocations="3301" avgMicrosecondsPerInvocation="109" maxMicrosecondsPerInvocation="11252" standardDeviationMicrosecondsPerInvocation="393"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.ValueNumberDataflowFactory" totalMilliseconds="347" invocations="3559" avgMicrosecondsPerInvocation="97" maxMicrosecondsPerInvocation="6351" standardDeviationMicrosecondsPerInvocation="286"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FieldItemSummary" totalMilliseconds="268" invocations="703" avgMicrosecondsPerInvocation="381" maxMicrosecondsPerInvocation="9062" standardDeviationMicrosecondsPerInvocation="882"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.CFGFactory" totalMilliseconds="265" invocations="3569" avgMicrosecondsPerInvocation="74" maxMicrosecondsPerInvocation="5441" standardDeviationMicrosecondsPerInvocation="150"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindNoSideEffectMethods" totalMilliseconds="242" invocations="703" avgMicrosecondsPerInvocation="344" maxMicrosecondsPerInvocation="9339" standardDeviationMicrosecondsPerInvocation="718"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindRefComparison$SpecialTypeAnalysis" totalMilliseconds="227" invocations="2095" avgMicrosecondsPerInvocation="108" maxMicrosecondsPerInvocation="3884" standardDeviationMicrosecondsPerInvocation="230"/>
+      <ClassProfile name="edu.umd.cs.findbugs.OpcodeStack$JumpInfoFactory" totalMilliseconds="206" invocations="4114" avgMicrosecondsPerInvocation="50" maxMicrosecondsPerInvocation="2664" standardDeviationMicrosecondsPerInvocation="124"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindImproperSynchronization" totalMilliseconds="145" invocations="456" avgMicrosecondsPerInvocation="318" maxMicrosecondsPerInvocation="5037" standardDeviationMicrosecondsPerInvocation="383"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.ConstantDataflowFactory" totalMilliseconds="112" invocations="3301" avgMicrosecondsPerInvocation="34" maxMicrosecondsPerInvocation="7486" standardDeviationMicrosecondsPerInvocation="154"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.JavaClassAnalysisEngine" totalMilliseconds="111" invocations="810" avgMicrosecondsPerInvocation="138" maxMicrosecondsPerInvocation="15073" standardDeviationMicrosecondsPerInvocation="555"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.MethodGenFactory" totalMilliseconds="107" invocations="3569" avgMicrosecondsPerInvocation="30" maxMicrosecondsPerInvocation="16906" standardDeviationMicrosecondsPerInvocation="285"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.NoteDirectlyRelevantTypeQualifiers" totalMilliseconds="107" invocations="703" avgMicrosecondsPerInvocation="152" maxMicrosecondsPerInvocation="2962" standardDeviationMicrosecondsPerInvocation="315"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.ResourceInMultipleThreadsDetector" totalMilliseconds="105" invocations="456" avgMicrosecondsPerInvocation="231" maxMicrosecondsPerInvocation="5232" standardDeviationMicrosecondsPerInvocation="426"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassDataAnalysisEngine" totalMilliseconds="104" invocations="2066" avgMicrosecondsPerInvocation="50" maxMicrosecondsPerInvocation="12254" standardDeviationMicrosecondsPerInvocation="278"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindReturnRef" totalMilliseconds="102" invocations="456" avgMicrosecondsPerInvocation="224" maxMicrosecondsPerInvocation="5388" standardDeviationMicrosecondsPerInvocation="341"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.UnreadFields" totalMilliseconds="86" invocations="456" avgMicrosecondsPerInvocation="189" maxMicrosecondsPerInvocation="1364" standardDeviationMicrosecondsPerInvocation="197"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.LoadOfKnownNullValue" totalMilliseconds="84" invocations="456" avgMicrosecondsPerInvocation="184" maxMicrosecondsPerInvocation="8547" standardDeviationMicrosecondsPerInvocation="467"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FunctionsThatMightBeMistakenForProcedures" totalMilliseconds="83" invocations="703" avgMicrosecondsPerInvocation="118" maxMicrosecondsPerInvocation="4303" standardDeviationMicrosecondsPerInvocation="354"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindRefComparison" totalMilliseconds="79" invocations="456" avgMicrosecondsPerInvocation="173" maxMicrosecondsPerInvocation="4006" standardDeviationMicrosecondsPerInvocation="375"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.CalledMethods" totalMilliseconds="78" invocations="703" avgMicrosecondsPerInvocation="111" maxMicrosecondsPerInvocation="2473" standardDeviationMicrosecondsPerInvocation="230"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindOpenStream" totalMilliseconds="76" invocations="456" avgMicrosecondsPerInvocation="168" maxMicrosecondsPerInvocation="9414" standardDeviationMicrosecondsPerInvocation="617"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.BuildObligationPolicyDatabase" totalMilliseconds="72" invocations="703" avgMicrosecondsPerInvocation="102" maxMicrosecondsPerInvocation="2523" standardDeviationMicrosecondsPerInvocation="190"/>
+      <ClassProfile name="edu.umd.cs.findbugs.ba.npe.TypeQualifierNullnessAnnotationDatabase" totalMilliseconds="71" invocations="56694" avgMicrosecondsPerInvocation="1" maxMicrosecondsPerInvocation="613" standardDeviationMicrosecondsPerInvocation="6"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.BuildStringPassthruGraph" totalMilliseconds="68" invocations="703" avgMicrosecondsPerInvocation="96" maxMicrosecondsPerInvocation="12929" standardDeviationMicrosecondsPerInvocation="518"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindUncalledPrivateMethods" totalMilliseconds="67" invocations="456" avgMicrosecondsPerInvocation="147" maxMicrosecondsPerInvocation="1760" standardDeviationMicrosecondsPerInvocation="124"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.SharedVariableAtomicityDetector" totalMilliseconds="66" invocations="456" avgMicrosecondsPerInvocation="146" maxMicrosecondsPerInvocation="15610" standardDeviationMicrosecondsPerInvocation="879"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindNullDeref" totalMilliseconds="61" invocations="456" avgMicrosecondsPerInvocation="135" maxMicrosecondsPerInvocation="14885" standardDeviationMicrosecondsPerInvocation="701"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.DumbMethods" totalMilliseconds="60" invocations="456" avgMicrosecondsPerInvocation="133" maxMicrosecondsPerInvocation="1823" standardDeviationMicrosecondsPerInvocation="180"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.LiveLocalStoreDataflowFactory" totalMilliseconds="60" invocations="2941" avgMicrosecondsPerInvocation="20" maxMicrosecondsPerInvocation="1907" standardDeviationMicrosecondsPerInvocation="57"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.OverridingEqualsNotSymmetrical" totalMilliseconds="59" invocations="703" avgMicrosecondsPerInvocation="84" maxMicrosecondsPerInvocation="5000" standardDeviationMicrosecondsPerInvocation="237"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindDeadLocalStores" totalMilliseconds="57" invocations="456" avgMicrosecondsPerInvocation="126" maxMicrosecondsPerInvocation="2918" standardDeviationMicrosecondsPerInvocation="261"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.MethodReturnCheck" totalMilliseconds="57" invocations="456" avgMicrosecondsPerInvocation="125" maxMicrosecondsPerInvocation="2052" standardDeviationMicrosecondsPerInvocation="183"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.ValueRangeAnalysisFactory" totalMilliseconds="57" invocations="3441" avgMicrosecondsPerInvocation="16" maxMicrosecondsPerInvocation="4803" standardDeviationMicrosecondsPerInvocation="125"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindNullDeref$CheckCallSitesAndReturnInstructions" totalMilliseconds="55" invocations="3300" avgMicrosecondsPerInvocation="16" maxMicrosecondsPerInvocation="1516" standardDeviationMicrosecondsPerInvocation="41"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindInconsistentSync2" totalMilliseconds="54" invocations="456" avgMicrosecondsPerInvocation="119" maxMicrosecondsPerInvocation="2356" standardDeviationMicrosecondsPerInvocation="168"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.ReflectiveClasses" totalMilliseconds="53" invocations="703" avgMicrosecondsPerInvocation="75" maxMicrosecondsPerInvocation="2165" standardDeviationMicrosecondsPerInvocation="183"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindPublicAttributes" totalMilliseconds="52" invocations="456" avgMicrosecondsPerInvocation="116" maxMicrosecondsPerInvocation="8669" standardDeviationMicrosecondsPerInvocation="426"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindUselessObjects" totalMilliseconds="52" invocations="456" avgMicrosecondsPerInvocation="114" maxMicrosecondsPerInvocation="2775" standardDeviationMicrosecondsPerInvocation="190"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.BuildAccessMethodsDatabase" totalMilliseconds="52" invocations="703" avgMicrosecondsPerInvocation="74" maxMicrosecondsPerInvocation="1991" standardDeviationMicrosecondsPerInvocation="166"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindPuzzlers" totalMilliseconds="50" invocations="456" avgMicrosecondsPerInvocation="111" maxMicrosecondsPerInvocation="8423" standardDeviationMicrosecondsPerInvocation="411"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindHEmismatch" totalMilliseconds="50" invocations="456" avgMicrosecondsPerInvocation="109" maxMicrosecondsPerInvocation="2104" standardDeviationMicrosecondsPerInvocation="149"/>
+      <ClassProfile name="edu.umd.cs.findbugs.ba.obl.ObligationAnalysis" totalMilliseconds="49" invocations="449" avgMicrosecondsPerInvocation="109" maxMicrosecondsPerInvocation="2480" standardDeviationMicrosecondsPerInvocation="219"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.RuntimeExceptionCapture" totalMilliseconds="48" invocations="456" avgMicrosecondsPerInvocation="106" maxMicrosecondsPerInvocation="5526" standardDeviationMicrosecondsPerInvocation="292"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.EqualsOperandShouldHaveClassCompatibleWithThis" totalMilliseconds="48" invocations="703" avgMicrosecondsPerInvocation="68" maxMicrosecondsPerInvocation="12592" standardDeviationMicrosecondsPerInvocation="484"/>
+      <ClassProfile name="edu.umd.cs.findbugs.util.TopologicalSort" totalMilliseconds="47" invocations="1912" avgMicrosecondsPerInvocation="25" maxMicrosecondsPerInvocation="1677" standardDeviationMicrosecondsPerInvocation="56"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindBadCast2" totalMilliseconds="47" invocations="456" avgMicrosecondsPerInvocation="104" maxMicrosecondsPerInvocation="1186" standardDeviationMicrosecondsPerInvocation="165"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.MultipleInstantiationsOfSingletons" totalMilliseconds="47" invocations="456" avgMicrosecondsPerInvocation="103" maxMicrosecondsPerInvocation="2126" standardDeviationMicrosecondsPerInvocation="155"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.CheckRelaxingNullnessAnnotation" totalMilliseconds="47" invocations="456" avgMicrosecondsPerInvocation="103" maxMicrosecondsPerInvocation="6109" standardDeviationMicrosecondsPerInvocation="293"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.IncompatMask" totalMilliseconds="42" invocations="456" avgMicrosecondsPerInvocation="92" maxMicrosecondsPerInvocation="4463" standardDeviationMicrosecondsPerInvocation="238"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.SwitchFallthrough" totalMilliseconds="40" invocations="456" avgMicrosecondsPerInvocation="89" maxMicrosecondsPerInvocation="2577" standardDeviationMicrosecondsPerInvocation="162"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.ConstructorThrow" totalMilliseconds="39" invocations="456" avgMicrosecondsPerInvocation="86" maxMicrosecondsPerInvocation="3023" standardDeviationMicrosecondsPerInvocation="214"/>
+    </FindBugsProfile>
+  </FindBugsSummary>
+  <ClassFeatures></ClassFeatures>
+  <History></History>
+</BugCollection>
