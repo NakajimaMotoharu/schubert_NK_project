@@ -1,0 +1,95 @@
+{
+  "eventId": "PGPT-20261008-6464",
+  "groupId": "PGPT-WBS66-F03-ALL-MAIN-SOURCE-ONLY-STYLE-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T02:29:21.645000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 59,
+      "remainingPercent": 41,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-ALL-MAIN-SOURCE-ONLY-STYLE-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F03-ALL-MAIN-SOURCE-ONLY-STYLE-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "source": "cabd1f63fade60b0251d52ea6fe89bd93d37461e",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40554-f03-six-main-source-style-lineage-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.25,
+      "base": 0.75,
+      "high": 1.6
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/943_F03APIWeb現Main文面継続点.json",
+        "sha256": "0ee239fbdeea4082f7188d7272054488cd66b2175dc6d8ce4b4fc1a7ed49f769"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40552-f03-api-web-source-style-independent-v1/manifest.json",
+        "sha256": "c04eb159b285f9cec1014050426866462bf5adb1d47e5a2b182e2e6f4d11fb4f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40522-f03-batch-main-format-independent-v1/manifest.json",
+        "sha256": "8c65264457a8a22723c99b201cc2dee7cb386729fc2b8535a7e3ce18fbc52460"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40548-f03-batch-checkstyle-exact-byte-inventory-v1/manifest.json",
+        "sha256": "a9bb110be284ddd11d8775c6e01149667344f45de3ba30b399d8c334858cc41a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38442-f03-current-six-main-source-lint-v1/manifest.json",
+        "sha256": "b1f7a1b02e9bf473fa94f09a55ca8db16319cc732e4c15ee77001db6d45d75b5"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40486-f03-current-three-main-pmd-checkstyle-v1/manifest.json",
+        "sha256": "2ec428e78149261ee2472ba49365614e28c445dd26be5d243d507e1099c62fe2"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40500-schema-history-close-static-and-junit-independent-v1/manifest.json",
+        "sha256": "caea692bdfb3615385369c6cff24553e4697b543d027c1ed92147ae7132184fe"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40314-f02-ssc461-offline-release-verifier-v1/manifest.json",
+        "sha256": "dea9cc8e632ebb8bddc3624f2d4aff6e7dd41b4b474bc1ae9b9e35cfae75f833"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40374-f02-ssc461-public-checkpoint-v1/manifest.json",
+        "sha256": "ebc3bba672bbc869356d9cb5e90acdf2751d02aceb7a65253d23e3dd85207e9b"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39814-f03-storage-bootstrap-static-independent-v1/manifest.json",
+        "sha256": "e3139ccf79da928f0f9ca472549a79f7935753eacfedd5aef1e60f7587cf9539"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40454-migration-utc42-static-independent-v1/manifest.json",
+        "sha256": "01b5acb60a6e7fab875e6b3b936c4a21ebb911d650b8abc7b5a488bfb7148c3a"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "F03/2-2 source-onlyフォーマット・Checkstyleの六製品。合計1027 Main、現候補と元の同一性を正本Gitと両工具の元成功に照合。元三製品のCheckstyleとSchema差分を参照し実行を反復しない。",
+    "endCondition": "Protocol/Storage/Bootstrapの現282 Mainと既API/Web、Batchを同一Coreで接続し、未確認formatterのみ許可sourceで取得。全六型品質と正式451は対象外として記録。",
+    "workScope": "Source-onlyの公開lintとmanifestのみ。実native、実DB、署名、protected型などの動作・生成は行わない。"
+  }
+}
