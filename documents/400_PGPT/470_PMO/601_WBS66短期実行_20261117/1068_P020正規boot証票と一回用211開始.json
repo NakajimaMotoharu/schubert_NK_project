@@ -1,0 +1,75 @@
+{
+  "eventId": "PGPT-20261008-6586",
+  "groupId": "wbs66-p020-boot-canonical-exact-211",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T06:16:48.725000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 64,
+      "remainingPercent": 36,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "wbs66-p020-boot-canonical-exact-211",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "wbs66-p020-boot-canonical-exact-211",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P020-01.01"
+    ],
+    "managementWorkIds": [
+      "WBS-P020-01.01/2-b"
+    ],
+    "source": "8bf0604d3bb17f55b024ffa93ae4bb31bc538684",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40706-p020-current-211-approved-filestore-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.6,
+      "base": 1.5,
+      "high": 3.5
+    },
+    "groupCapPp": 5,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1067_F02現四JARと次の再開点.json",
+        "sha256": "27bd1e4ecc421da2f8e3b5deadfedad859b1b5f35b3e81f8a26d77e0a0c934dd"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40664-p020-current-211-filestore-input-v1/manifest.json",
+        "sha256": "64c2a53963e46e75daa12c99d85a2ba9637cd900a78d7a2a095e8751cc27463d"
+      },
+      {
+        "path": "../PMO/hourly-monitor/qa059-haruka-readonly-20261120.json",
+        "sha256": "1873f57d6d25c582b61510293db3297850e13c0d692f0db298ddaa24152746ec"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40686-p020-current-211-real-filestore-v1/manifest.json",
+        "sha256": "99dcd498436be952f3ad64209a138257e7c508e2263a80af356c1fbb4c2fb64d"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40396-p020-single-session-filestore-target-v1/manifest.json",
+        "sha256": "d9a4aea80b7b75a04e2325d6811394c6b15415fafd95711c9c147b6e5a2b3dd3"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40662-p020-a02-redirect-independent-v1/manifest.json",
+        "sha256": "b23ed3c1f843a121e12466e16774f2c6c95d36a35a192d60ac6eebf302ee9b3e"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "Public archived PG40396 raw boot representation matches QA059 digest strictly with LF. BUG3404 is a local equality representation fault, no platform refusal and no old run/capsule started. Use the same authorized pinned ordinary connection and current boot/uid/space/job/JDK checks before transfer.",
+    "endCondition": "Fresh one-shot, exact prepared 211 including authorized real FileStore synthetic case, existing proof kept. Independent same tool source/session/case set and raw coverage; do not equate with actual NK acceptance.",
+    "workScope": "Pure offline Characterization tool and its owned FileStore fixture only; real DB/Root/native/VM/SSH config/approval untouched."
+  }
+}
