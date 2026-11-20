@@ -109,7 +109,15 @@ def main(recover):
     assert sum(line.startswith(f'Session "{session}":') for line in streams) == 1
     physical = sorted(p for p in files.rglob("*.class")
                       if not p.stem.startswith("RunReferenceRepositoryPureJdbcTest"))
-    assert len(physical) == old["scopePhysical"] == 9
+    historic_raw = Path(old["raw"]["path"])
+    assert pin(historic_raw) == old["raw"]
+    historic = {r[1]: r for r in (line.split("\t") for line in historic_raw.read_text().splitlines())
+                if r[0] == "CLASS"}
+    live_names = {str(p.relative_to(files)).removesuffix(".class") for p in physical}
+    metadata, = historic.keys() - live_names
+    assert metadata == "dev/codex/schubert/nk/storage/package-info"
+    assert historic[metadata][4] == "0" and all(key.endswith(":0:0") for key in historic[metadata][6:])
+    assert len(historic) == old["scopePhysical"] and live_names == historic.keys() - {metadata}
     raw = run("unfiltered", [*old["rawCommand"][:4], stream, *physical])
     parsed = {}
     for line in raw.decode().splitlines():
@@ -132,7 +140,8 @@ def main(recover):
                 sourceInputs=paths, originalReceipts=refs[1:], exactMavenArtifact=package_entry,
                 exactMeasuredDao=pin(target), packageEntry=target_name+".class", roster=sorted(expected),
                 session=session, xml=pin(xml), exec=pin(stream), raw=pin(public), counts=totals,
-                physical=[pin(p) for p in physical], measured=parsed, target=own, steps=outputs,
+                physical=[pin(p) for p in physical], priorNaturalNoCodeMetadata=metadata,
+                measured=parsed, target=own, steps=outputs,
                 inheritedStaticEvidence=old["static"], firstRunSuccess=True, proofOnlyRepeat=False, recoveredOriginalTerminal=recover,
                 realDbOrNativeOrLifecycleActions=0, newDefinitions=0, whole451=False, formalDelta=0)
     (out / "manifest.json").write_text(json.dumps(post, ensure_ascii=False, indent=2) + "\n")
