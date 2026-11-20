@@ -1,0 +1,126 @@
+{
+  "source": "da20ad7753279ae4e8017593866502d3341ec0e5",
+  "original": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40800-f03-timed-alert-static-v1/manifest.json",
+    "sha256": "65a9b48a1c6ffcbc388ad994f6cba6a01022e03e70892e2972b00adc2f5c062c"
+  },
+  "spotbugsClassStats": 25,
+  "packageInfoMetadata": 1,
+  "rawPMD": 13,
+  "applicable": 0,
+  "unclassified": 0,
+  "sourceSuppressionsAdded": 0,
+  "firstReviewExit": 1,
+  "firstReviewCause": "The independent comparison omitted package-info. The original SpotBugs report includes the owned metadata class.",
+  "analyzerRepeats": 0,
+  "evidence": [
+    {
+      "source": "AlertLifecycle.java",
+      "line": "131",
+      "rule": "AvoidSynchronizedStatement",
+      "message": "Use ReentrantLock rather than synchronization",
+      "disposition": "NON_APPLICABLE",
+      "reason": "The private monitor serializes the same key state. Clearing time and returning the immutable current event occurs under that lock. No callback or external operation is acquired."
+    },
+    {
+      "source": "AlertLifecycle.java",
+      "line": "190",
+      "rule": "AvoidSynchronizedStatement",
+      "message": "Use ReentrantLock rather than synchronization",
+      "disposition": "NON_APPLICABLE",
+      "reason": "The private monitor serializes the same key state. Clearing time and returning the immutable current event occurs under that lock. No callback or external operation is acquired."
+    },
+    {
+      "source": "AlertLifecycle.java",
+      "line": "200",
+      "rule": "AvoidSynchronizedStatement",
+      "message": "Use ReentrantLock rather than synchronization",
+      "disposition": "NON_APPLICABLE",
+      "reason": "The private monitor serializes the same key state. Clearing time and returning the immutable current event occurs under that lock. No callback or external operation is acquired."
+    },
+    {
+      "source": "ContinuousConditionWindow.java",
+      "line": "27",
+      "rule": "AvoidSynchronizedStatement",
+      "message": "Use ReentrantLock rather than synchronization",
+      "disposition": "NON_APPLICABLE",
+      "reason": "The private monitor keeps previous sample and violation start consistent in one transition. No callback or external operation is acquired."
+    },
+    {
+      "source": "ContinuousConditionWindow.java",
+      "line": "32",
+      "rule": "NullAssignment",
+      "message": "Assigning an Object to null is a code smell.  Consider refactoring.",
+      "disposition": "NON_APPLICABLE",
+      "reason": "The nullable start is explicit state. NORMAL and UNKNOWN clear it under the lock; retaining it would bridge separate violations."
+    },
+    {
+      "source": "TimedDbPoolMonitor.java",
+      "line": "48",
+      "rule": "AvoidSynchronizedStatement",
+      "message": "Use ReentrantLock rather than synchronization",
+      "disposition": "NON_APPLICABLE",
+      "reason": "The private owner lock serializes the monotonic check, warning window and lifecycle. Called helpers never call back into this owner."
+    },
+    {
+      "source": "TimedDbPoolMonitor.java",
+      "line": "72",
+      "rule": "AvoidSynchronizedStatement",
+      "message": "Use ReentrantLock rather than synchronization",
+      "disposition": "NON_APPLICABLE",
+      "reason": "The private owner lock serializes the monotonic check, warning window and lifecycle. Called helpers never call back into this owner."
+    },
+    {
+      "source": "TimedFilesystemMonitor.java",
+      "line": "42",
+      "rule": "AvoidSynchronizedStatement",
+      "message": "Use ReentrantLock rather than synchronization",
+      "disposition": "NON_APPLICABLE",
+      "reason": "The private owner lock serializes the monotonic check, both duration windows and lifecycle. Called helpers never call back into this owner."
+    },
+    {
+      "source": "TimedFilesystemMonitor.java",
+      "line": "71",
+      "rule": "AvoidSynchronizedStatement",
+      "message": "Use ReentrantLock rather than synchronization",
+      "disposition": "NON_APPLICABLE",
+      "reason": "The private owner lock serializes the monotonic check, both duration windows and lifecycle. Called helpers never call back into this owner."
+    },
+    {
+      "source": "TimedJvmHeapMonitor.java",
+      "line": "45",
+      "rule": "AvoidSynchronizedStatement",
+      "message": "Use ReentrantLock rather than synchronization",
+      "disposition": "NON_APPLICABLE",
+      "reason": "The private owner lock serializes the monotonic check, warning window and lifecycle. Called helpers never call back into this owner."
+    },
+    {
+      "source": "TimedJvmHeapMonitor.java",
+      "line": "69",
+      "rule": "AvoidSynchronizedStatement",
+      "message": "Use ReentrantLock rather than synchronization",
+      "disposition": "NON_APPLICABLE",
+      "reason": "The private owner lock serializes the monotonic check, warning window and lifecycle. Called helpers never call back into this owner."
+    },
+    {
+      "source": "TimedSyncLatencyMonitor.java",
+      "line": "42",
+      "rule": "AvoidSynchronizedStatement",
+      "message": "Use ReentrantLock rather than synchronization",
+      "disposition": "NON_APPLICABLE",
+      "reason": "The private owner lock serializes the monotonic check, both duration windows and lifecycle. Called helpers never call back into this owner."
+    },
+    {
+      "source": "TimedSyncLatencyMonitor.java",
+      "line": "70",
+      "rule": "AvoidSynchronizedStatement",
+      "message": "Use ReentrantLock rather than synchronization",
+      "disposition": "NON_APPLICABLE",
+      "reason": "The private owner lock serializes the monotonic check, both duration windows and lifecycle. Called helpers never call back into this owner."
+    }
+  ],
+  "independentCheckExit": 0,
+  "formalDelta": 0,
+  "whole451": false,
+  "terminalAtUTC": "2026-11-20T11:19:26.598310+00:00"
+}

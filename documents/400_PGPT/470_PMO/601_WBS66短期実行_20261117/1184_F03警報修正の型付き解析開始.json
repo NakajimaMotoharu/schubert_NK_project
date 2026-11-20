@@ -1,0 +1,68 @@
+{
+  "eventId": "PGPT-20261008-6701",
+  "groupId": "PGPT-WBS66-F03-TIMED-ALERT-CHANGED-STATIC-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T11:17:31.859000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 67,
+      "remainingPercent": 33,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-TIMED-ALERT-CHANGED-STATIC-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F03-TIMED-ALERT-CHANGED-STATIC-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2",
+      "WBS-C07"
+    ],
+    "source": "caa0d11b1091023494fae593f40531878fd003d2",
+    "productionCoreMain": "da20ad7753279ae4e8017593866502d3341ec0e5",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40800-f03-timed-alert-static-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.25,
+      "base": 0.65,
+      "high": 1.3
+    },
+    "groupCapPp": 2.2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1183_C07局所是正と451未成立条件.json",
+        "sha256": "37576cc1e85ba3558700c85fb7946c3f7516e4499e8fd1867f17745fd4cfa086"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40798-timed-alert-pending-recovery-v2/manifest.json",
+        "sha256": "75a60a041819ef5129da4fd6f8d527ac354d4e1ce3acf32062b3fcd88cd5f8af"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40736-f03-expiry-final-ownership-typed-v1/manifest.json",
+        "sha256": "2f1a697d9363804aaf2907dcda04982e8d420ae1cf988c2f364dfaa39ed53207"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40764-f03-batch-two-nulls-inherited-v1/manifest.json",
+        "sha256": "9e5eee3f39682b1541e42f3fcaf9fcaf8170926d1fbe89af923c60d4d1f6e756"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "候補da20ad77のBUG-3415修正8Main。旧実証78は当てて再演せず、未実施の型付き検査だけを対象化。",
+    "endCondition": "PG40798の13固定sourceとその物理censusでNullAway/WerrorとSpotBugs、PMDの個別終了を保存する。",
+    "workScope": "13の事前許可済み純粋Java入力＋自身の出力物理とJSpecify/JDK。六製品JAR・保留型・外部実行なし。"
+  }
+}
