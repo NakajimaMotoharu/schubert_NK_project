@@ -1,0 +1,68 @@
+{
+  "eventId": "PGPT-20261008-6758",
+  "groupId": "WBS66_F02_REBUILD_CHANGED_BATCH",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T12:11:43.846000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 69,
+      "remainingPercent": 31,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66_F02_REBUILD_CHANGED_BATCH",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "WBS66_F02_REBUILD_CHANGED_BATCH",
+    "workAttributionKind": "SOURCE_REQUALIFICATION",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a",
+      "WBS-P004-02/2"
+    ],
+    "source": "bb335e9866501e4dbd04950b06307955ecd87c84",
+    "productionCoreMain": "cdb649a5f054bc2ceed72ef57e55605f14a590d1",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40840-f02-inspection-corrected-batch-package-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.25,
+      "base": 0.6,
+      "high": 1.2
+    },
+    "groupCapPp": 10,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1240_F03検査サマリー型付き後の継続点.json",
+        "sha256": "27c04bb2569ee9bf62b3c5af6c55961d5eb95db2501af924fd162e936930cf28"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40802-f02-current-four-package-v1/manifest.json",
+        "sha256": "b00a0ae678c6a2d7cc23fb9106222b79cf0e655140298546d3b71c1d95e8a4b3"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40836-p00402-inspection-single-sql-after-v1/manifest.json",
+        "sha256": "f2802c62f9d179ffbc10bf39d5e392381375d64f7c261bfec16ec40837f2953d"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40838-f03-inspection-summary-typed-v1/manifest.json",
+        "sha256": "90afa7c14c66be40bf8c55d2193d56955a1e3f19b1f934ee8819649e1a484ed6"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "PG40802は以前の四JAR。cdb649はBatchだけ変更1、同sourceの旧BuildではないためBatchを個別の正規reactorで組立。",
+    "endCondition": "三依存sourceのcompile終端と現Batch JAR hash、他三JARの元source入力差0、API/Webと実runtime保留を記録。",
+    "workScope": "許可済みMaven compile + Batchのjar組立だけ。既JARを静的工具へ渡さず、Test/実DB/外部操作0。"
+  }
+}
