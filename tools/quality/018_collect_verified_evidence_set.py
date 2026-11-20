@@ -72,12 +72,33 @@ def local_file(root, relative):
     return path
 
 
+def load_success_manifest(path):
+    def unique_object(pairs):
+        values = dict(pairs)
+        if len(values) != len(pairs):
+            raise ValueError("duplicate evidence manifest field")
+        return values
+
+    def invalid_constant(_):
+        raise ValueError("invalid evidence manifest numeric constant")
+
+    manifest = json.loads(
+        path.read_text(encoding="utf-8"),
+        object_pairs_hook=unique_object,
+        parse_constant=invalid_constant,
+    )
+    if (not isinstance(manifest, dict)
+            or type(manifest.get("exitCode")) is not int
+            or manifest["exitCode"] != 0):
+        raise ValueError("mixed or failed evidence run/source/branch")
+    return manifest
+
+
 def validate_scope(root, scope, run, commit, branch):
     directory = root / scope
     manifest_path = directory / "manifest.json"
-    manifest = json.loads(manifest_path.read_text())
-    if (manifest["runId"], manifest["targetCommit"], manifest["branch"], manifest["exitCode"]) != (
-            run, commit, branch, 0):
+    manifest = load_success_manifest(manifest_path)
+    if (manifest["runId"], manifest["targetCommit"], manifest["branch"]) != (run, commit, branch):
         raise ValueError("mixed or failed evidence run/source/branch")
     entries = manifest["files"]
     paths = [entry["path"] for entry in entries]
@@ -153,8 +174,8 @@ def main():
     if args.validate_only:
         # A persisted manifest can validate an old run after /tmp is cleared. It is not
         # evidence of a new execution, and every mandatory scope is checked below.
-        manifest = json.loads((repo / "evidence/01_PT" / ROOT_MANIFEST).read_text())
-        if manifest["runId"] != args.run_id or manifest["exitCode"] != 0:
+        manifest = load_success_manifest(repo / "evidence/01_PT" / ROOT_MANIFEST)
+        if manifest["runId"] != args.run_id:
             raise ValueError("invalid persisted reactor run")
         commit = manifest["targetCommit"]
         if temporary_commit.is_file() and temporary_commit.read_text().strip() != commit:
