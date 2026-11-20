@@ -937,3 +937,7 @@ NK-OPS-001、MON010～013、UI252、SS351 §8、WEBPOOLMET001～008、WBS-F03/2-
 ### CHR工具の証跡読取（PG40998）
 
 NK-CHR-001、UI264、SS355 G01／G04、PT-CHR-SYN007、BUG-3441／YKT-2753。WBS-P020-01.03/2、[仕様](../../../evidence/01_PT/018_NK-OPS-001/5544_P020Gate単一JSON証跡仕様.md) [証跡](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40998-p020-gate-single-json-doc-green-v1/manifest.json)。
+
+### CHR比較とソース照合の入力終端（PG41010）
+
+NK-CHR-001、UI264、SS355 G01／G04／G05、WBS-P020-01.03/2、ArtifactComparator／GateCli、PT-CHR-COMPARE-FRAME001／PT-CHR-VERIFY-FRAME001、BUG-3442／3443、YKT-2753。[仕様](../../../evidence/01_PT/018_NK-OPS-001/5549_P020比較工具単一JSON横展開仕様.md) [証跡](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41010-p020-reader-framing-green-v1/manifest.json)。

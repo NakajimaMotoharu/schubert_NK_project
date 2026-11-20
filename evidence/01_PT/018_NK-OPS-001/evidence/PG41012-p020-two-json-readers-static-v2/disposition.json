@@ -1,0 +1,115 @@
+{
+  "source": "ece4b36e4e77c2817b766ed874ae9d7b978d2648",
+  "original": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41012-p020-two-json-readers-static-v2/manifest.json",
+    "sha256": "81551e8f188a90adcebf6dfc2900e7c1d16c422a7b929915299256ba54c0fabf"
+  },
+  "pmdActualExits": [
+    4,
+    4
+  ],
+  "rawItems": [
+    {
+      "file": "ArtifactComparator.java",
+      "rule": "UseConcurrentHashMap",
+      "line": 171,
+      "sourceLine": "Map<String, JsonNode> currentByCase = new TreeMap<>();",
+      "method": "compare",
+      "applicability": "not applicable",
+      "reason": "呼出内の局所有順map。生成後のputと結果消費は同じ同期呼出内で行い、別threadへの共有可変mapではない。"
+    },
+    {
+      "file": "ArtifactComparator.java",
+      "rule": "UseConcurrentHashMap",
+      "line": 172,
+      "sourceLine": "Map<String, JsonNode> nkByCase = new TreeMap<>();",
+      "method": "compare",
+      "applicability": "not applicable",
+      "reason": "呼出内の局所有順map。生成後のputと結果消費は同じ同期呼出内で行い、別threadへの共有可変mapではない。"
+    },
+    {
+      "file": "ArtifactComparator.java",
+      "rule": "UseConcurrentHashMap",
+      "line": 238,
+      "sourceLine": "Map<String, JsonNode> rules = new LinkedHashMap<>();",
+      "method": "compare",
+      "applicability": "not applicable",
+      "reason": "呼出内の局所有順map。生成後のputと結果消費は同じ同期呼出内で行い、別threadへの共有可変mapではない。"
+    },
+    {
+      "file": "ArtifactComparator.java",
+      "rule": "UseConcurrentHashMap",
+      "line": 490,
+      "sourceLine": "Map<String, Path> files = new TreeMap<>();",
+      "method": "artifactFiles",
+      "applicability": "not applicable",
+      "reason": "呼出内の局所有順map。生成後のputと結果消費は同じ同期呼出内で行い、別threadへの共有可変mapではない。"
+    },
+    {
+      "file": "GateCli.java",
+      "rule": "UseConcurrentHashMap",
+      "line": 166,
+      "sourceLine": "Map<String, Object> actual = new LinkedHashMap<>();",
+      "method": "verifySource",
+      "applicability": "not applicable",
+      "reason": "呼出内の局所有順map。生成後のputと結果消費は同じ同期呼出内で行い、別threadへの共有可変mapではない。"
+    },
+    {
+      "file": "GateCli.java",
+      "rule": "UseConcurrentHashMap",
+      "line": 262,
+      "sourceLine": "Map<String, Object> result = new LinkedHashMap<>();",
+      "method": "preflight",
+      "applicability": "not applicable",
+      "reason": "呼出内の局所有順map。生成後のputと結果消費は同じ同期呼出内で行い、別threadへの共有可変mapではない。"
+    },
+    {
+      "file": "GateCli.java",
+      "rule": "UseConcurrentHashMap",
+      "line": 313,
+      "sourceLine": "Map<String, Object> result = new LinkedHashMap<>();",
+      "method": "compareCurrent",
+      "applicability": "not applicable",
+      "reason": "呼出内の局所有順map。生成後のputと結果消費は同じ同期呼出内で行い、別threadへの共有可変mapではない。"
+    },
+    {
+      "file": "GateCli.java",
+      "rule": "UseConcurrentHashMap",
+      "line": 384,
+      "sourceLine": "Map<String, Object> result = new LinkedHashMap<>();",
+      "method": "report",
+      "applicability": "not applicable",
+      "reason": "呼出内の局所有順map。生成後のputと結果消費は同じ同期呼出内で行い、別threadへの共有可変mapではない。"
+    },
+    {
+      "file": "GateCli.java",
+      "rule": "UseConcurrentHashMap",
+      "line": 555,
+      "sourceLine": "Map<String, Object> manifest = new LinkedHashMap<>();",
+      "method": "promoteCurrent",
+      "applicability": "not applicable",
+      "reason": "呼出内の局所有順map。生成後のputと結果消費は同じ同期呼出内で行い、別threadへの共有可変mapではない。"
+    },
+    {
+      "file": "GateCli.java",
+      "rule": "UseConcurrentHashMap",
+      "line": 626,
+      "sourceLine": "Map<String, String> result = new TreeMap<>();",
+      "method": "prefixed",
+      "applicability": "not applicable",
+      "reason": "呼出内の局所有順map。生成後のputと結果消費は同じ同期呼出内で行い、別threadへの共有可変mapではない。"
+    },
+    {
+      "file": "GateCli.java",
+      "rule": "UseConcurrentHashMap",
+      "line": 632,
+      "sourceLine": "Map<String, String> result = new TreeMap<>();",
+      "method": "fileHashes",
+      "applicability": "not applicable",
+      "reason": "呼出内の局所有順map。生成後のputと結果消費は同じ同期呼出内で行い、別threadへの共有可変mapではない。"
+    }
+  ],
+  "applicable": 0,
+  "unclassified": 0,
+  "suppressions": 0
+}

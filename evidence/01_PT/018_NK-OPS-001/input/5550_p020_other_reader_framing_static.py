@@ -45,13 +45,19 @@ def main():
     for artifact in sdk:
         assert pin(artifact) == before["tools"][artifact.name]
 
+    annotations = Path(before["tools"]["jspecify-1.0.1.jar"]["path"])
+    assert pin(annotations) == before["tools"][annotations.name]
+
     toolchain = Path("../toolchain").resolve()
     java = toolchain / "jdk-25.0.4/bin/java"
     prior = json.loads(next(evidence.glob("PG40880*/manifest.json")).read_bytes())
     sbc = prior["steps"]["spotbugs"]["command"][3]
     pc = prior["steps"]["pmd"]["command"][2]
-    aux = ":".join(map(str, (classes, *sdk)))
-    out = evidence / "PG41012-p020-two-json-readers-static-v1"
+    aux = ":".join(map(str, (classes, *sdk, annotations)))
+    previous_report = evidence / "PG41012-p020-two-json-readers-static-v1"
+    assert set(e.text for e in ET.parse(previous_report / "spotbugs.xml").findall(".//MissingClass")) == {
+        "org.jspecify.annotations.NullMarked", "org.jspecify.annotations.Nullable"}
+    out = evidence / "PG41012-p020-two-json-readers-static-v2"
     out.mkdir()
     spotbugs, style = [out / (name + ".xml") for name in ("spotbugs", "checkstyle")]
     pmd_reports = [out / (name + "-pmd.xml") for name in names]
@@ -61,14 +67,18 @@ def main():
         command = list(map(str, argv))
         started = datetime.now(timezone.utc).isoformat()
         process = subprocess.run(command, capture_output=True, check=False, timeout=90)
-        steps.append(dict(name=name, command=command, exitCode=process.returncode, startedAtUTC=started,
-                          terminalAtUTC=datetime.now(timezone.utc).isoformat(),
-                          stdoutSha256=sha256(process.stdout).hexdigest(), stderrSha256=sha256(process.stderr).hexdigest()))
+        terminal = dict(name=name, command=command, exitCode=process.returncode, startedAtUTC=started,
+                        terminalAtUTC=datetime.now(timezone.utc).isoformat(),
+                        stdoutSha256=sha256(process.stdout).hexdigest(), stderrSha256=sha256(process.stderr).hexdigest())
+        steps.append(terminal)
+        (out / (name + "-terminal.json")).write_text(json.dumps(terminal, indent=2) + "\n")
         assert process.returncode in allowed
         return process.stdout
 
-    style.write_bytes(run("checkstyle", [java, "-jar", toolchain / "static-gates-20261015/checkstyle-14.3.0-all.jar",
-                                        "-c", "tools/quality/static/checkstyle.xml", "-f", "xml", *targets, *fixtures]))
+    prior_style = previous_report / "checkstyle.xml"
+    prior_names = {item.attrib["name"] for item in ET.parse(prior_style).findall("file")}
+    assert prior_names == set(map(str, (*targets, *fixtures)))
+    style.write_bytes(prior_style.read_bytes())
     run("spotbugs", [java, "-Xmx1g", "-cp", sbc, "edu.umd.cs.findbugs.FindBugs2",
                      "-effort:max", "-low", "-xml:withMessages", "-exitcode",
                      "-auxclasspath", aux, "-output", spotbugs, *analyzable], allowed=(0, 1))
@@ -95,7 +105,8 @@ def main():
     passed = not any((s_findings, s_errors, errors, style_count))
     summary = dict(input=pin(green_path), source=source, actualExit=0 if passed else 1,
                    terminalAtUTC=datetime.now(timezone.utc).isoformat(), steps=steps,
-                   measuredPhysical=[pin(p) for p in analyzable], approvedJackson=[pin(p) for p in sdk],
+                   measuredPhysical=[pin(p) for p in analyzable], approvedJackson=[pin(p) for p in sdk], annotatedAuxInput=pin(annotations),
+                   originalCheckstyle=pin(prior_style), originalFailure=pin(previous_report/"spotbugs.xml"),
                    spotBugsFindings=s_findings, spotBugsErrors=s_errors, pmdFindings=warnings, pmdErrors=errors,
                    checkstyleFindings=style_count, reports=[pin(p) for p in (spotbugs, *pmd_reports, style)],
                    productTestsRerun=0, productTypesRead=0, realChr=False)
