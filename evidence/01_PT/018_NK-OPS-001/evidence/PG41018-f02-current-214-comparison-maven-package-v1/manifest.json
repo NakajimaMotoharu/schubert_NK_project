@@ -1,0 +1,205 @@
+{
+  "actualExit": 0,
+  "mavenExit": 0,
+  "source": "53805f2eb5f03dd164d2e05cfa508c6aad834724",
+  "toolSource": "ece4b36e4e77c2817b766ed874ae9d7b978d2648",
+  "productionCore": "2b16a8ed20778fe5896099cb4798cfd1ff96b176",
+  "startEvent": "PGPT-20261008-6986",
+  "run": "PG41018-f02-current-214-comparison-maven-package-v1",
+  "startedAtUTC": "2026-11-20T17:05:42.598181+00:00",
+  "terminalAtUTC": "2026-11-20T17:05:47.969452+00:00",
+  "command": [
+    "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+    "-B",
+    "-ntp",
+    "-o",
+    "-f",
+    "pom.xml",
+    "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+    "-pl",
+    "program/characterization",
+    "-am",
+    "-Dmaven.test.skip=true",
+    "package"
+  ],
+  "java": "25.0.4",
+  "maven": "3.9.12",
+  "productPomCount": 6,
+  "productSourcesProvided": 0,
+  "inputs": [
+    {
+      "path": "pom.xml",
+      "sha256": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38"
+    },
+    {
+      "path": "program/characterization/pom.xml",
+      "sha256": "e945f851958317aa2a80c4f1b06bcb310d789f69abd12ce38785c6bfb55d491b"
+    },
+    {
+      "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+      "sha256": "f0d1890901fef78310bf9e1f43395cce4066a248cbff7a07c16033bb4df1df27"
+    },
+    {
+      "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/CharacterizationIoScope.java",
+      "sha256": "da07865268475f3be05f53844367ebfce849a9b8ed5c01e9a6669a0ad72b80d6"
+    },
+    {
+      "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.java",
+      "sha256": "5dd057ba194844cf3b25cd23bed425690bfc6be04308a552d67aaa0710d05457"
+    },
+    {
+      "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+      "sha256": "40473600694bad2519f2fe29f3087b07ef609a3162736f3c42b9e2c48b9b1ad8"
+    },
+    {
+      "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+      "sha256": "423648e2a26f34ce3e19b4b7f3d3b5895ed230ac0dcba871df116796b7b4c418"
+    },
+    {
+      "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/TargetAdapter.java",
+      "sha256": "c73d16ee3183dc7315fe8b03ea1af83a4972f1061616f218884308b4e8cc9003"
+    },
+    {
+      "path": "src/schubert-nk-api/pom.xml",
+      "sha256": "2aff7af3d90feaee1f6c09f7ad300627ed911e8372504fcfd383391429a58114"
+    },
+    {
+      "path": "src/schubert-nk-batch/pom.xml",
+      "sha256": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/pom.xml",
+      "sha256": "174e3974a5fe17a226c8c43a0cd49ae70d395cb4f236168da07cd7482a67908c"
+    },
+    {
+      "path": "src/schubert-nk-protocol/pom.xml",
+      "sha256": "f76b730fa1cb1b34a88182ca5b685ca14fb71361c037f9418f0895d2a3022d7d"
+    },
+    {
+      "path": "src/schubert-nk-storage/pom.xml",
+      "sha256": "d4ed59631b9ebf965db518fbe4b7894c2beb71ee3f7c1e9cdbf7b4241c8179c7"
+    },
+    {
+      "path": "src/schubert-nk-web/pom.xml",
+      "sha256": "9b6c47c3ab3ba0d105f41f081de10b2234af4653fdc371a8eacdf9cabb78761b"
+    }
+  ],
+  "buildLogs": {
+    "stdout": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41018-f02-current-214-comparison-maven-package-v1/stdout.txt",
+      "sha256": "f27d9fd94c8bc21d6e431af816bfb6193a915459e0d8a4adc3bf0bec560aa464"
+    },
+    "stderr": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41018-f02-current-214-comparison-maven-package-v1/stderr.txt",
+      "sha256": "05ed4976f99856c1417eead6c52058f5565d748a00ae7939fa02188545fafda4"
+    }
+  },
+  "testedInputs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41010-p020-reader-framing-green-v1/manifest.json",
+      "sha256": "e5c2f2e555a65f955ab82644e3f05eb501a57ef813b283c9e3d3d163fd95caf4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41016-p020-current-214-independent-v1/manifest.json",
+      "sha256": "7fc81778611260da7b6a5936d17ef0e7282708ec9151480d215e98458a2adfbb"
+    }
+  ],
+  "artifact": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41018-f02-current-214-comparison-maven-package-v1/schubert-characterization-0.1.0-SNAPSHOT.jar",
+    "sha256": "fa10924a57dfcf712d5a8510e4866f463e9d1ac4e887957fb904d7b1f30f5143"
+  },
+  "classComparisons": {
+    "dev/codex/schubert/characterization/ArtifactComparator$ComparisonResult.class": {
+      "major": 69,
+      "sha256": "105f55b04a3ce3b32d8943a3ee51c51cfeddfaefe35996594cb0c91c1615844d",
+      "matchesMeasuredClass": true
+    },
+    "dev/codex/schubert/characterization/ArtifactComparator.class": {
+      "major": 69,
+      "sha256": "7005ab8719e1b60c8969371677303856f381e3ec8e00ec7342e02053bdf8e3b8",
+      "matchesMeasuredClass": true
+    },
+    "dev/codex/schubert/characterization/CharacterizationIoScope$Open.class": {
+      "major": 69,
+      "sha256": "f2393025ee9c5ef01c62d4b231e864409394562fbd2b4202906202d49ef9e27e",
+      "matchesMeasuredClass": true
+    },
+    "dev/codex/schubert/characterization/CharacterizationIoScope$Release.class": {
+      "major": 69,
+      "sha256": "95ecedd79ce4de9045b81712251dfa379ee68c991e6947d70112f7a429c546cc",
+      "matchesMeasuredClass": true
+    },
+    "dev/codex/schubert/characterization/CharacterizationIoScope$Work.class": {
+      "major": 69,
+      "sha256": "fb34fa7cd207d0b356cf01e34ef6d886caec2cfdc062f3df6c7c720a21e3795a",
+      "matchesMeasuredClass": true
+    },
+    "dev/codex/schubert/characterization/CharacterizationIoScope.class": {
+      "major": 69,
+      "sha256": "f76c2ce062349d736a5ba3bbc6174e64bc413826c1d28e6ab8efc9bbfba4d3ad",
+      "matchesMeasuredClass": true
+    },
+    "dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.class": {
+      "major": 69,
+      "sha256": "91fbc7022ef4b213c12b7c259c1aac9013afe76da4d5026667d3fc3b44b3a6df",
+      "matchesMeasuredClass": true
+    },
+    "dev/codex/schubert/characterization/GateCli$BaselineNumbers.class": {
+      "major": 69,
+      "sha256": "a46de24d1d541ce061d9b82149cc16bc082b1b85aca1794ca438d7130d29f22d",
+      "matchesMeasuredClass": true
+    },
+    "dev/codex/schubert/characterization/GateCli$FileJsonOutput.class": {
+      "major": 69,
+      "sha256": "4fca38756761cc3e333d573da0aea7d4f79b5ddac42aa095631515d4cf0b8bf4",
+      "matchesMeasuredClass": true
+    },
+    "dev/codex/schubert/characterization/GateCli$JsonOutput.class": {
+      "major": 69,
+      "sha256": "8d7047d7bf57b8d93b832edfdfbcaa023022e1c03b8e9221a955277c49427c1f",
+      "matchesMeasuredClass": true
+    },
+    "dev/codex/schubert/characterization/GateCli$TreeStats.class": {
+      "major": 69,
+      "sha256": "771bd47e370ddb553e651282db31e1d9a3cb97c7c04d8e8aa9895534b9b957eb",
+      "matchesMeasuredClass": true
+    },
+    "dev/codex/schubert/characterization/GateCli$UsableSpace.class": {
+      "major": 69,
+      "sha256": "d5ba88d5f1f47cd3e9f233632fd1687cc7be6a64c8090a768b73741b4948a42c",
+      "matchesMeasuredClass": true
+    },
+    "dev/codex/schubert/characterization/GateCli.class": {
+      "major": 69,
+      "sha256": "73d5a11b446b1dcec3a414810666e709cf49ba4e0d59c6ebc999d75cb81948db",
+      "matchesMeasuredClass": true
+    },
+    "dev/codex/schubert/characterization/GateContractValidator$ValidationResult.class": {
+      "major": 69,
+      "sha256": "e77db6daa90180d6ffde792b3c6fdb7bb4a8ad3098f28463b367af1f912d4a93",
+      "matchesMeasuredClass": true
+    },
+    "dev/codex/schubert/characterization/GateContractValidator.class": {
+      "major": 69,
+      "sha256": "29b8b6d26b7c2405225e560de251b96b6fcefaf659fcaef875979d98d14dafe8",
+      "matchesMeasuredClass": true
+    },
+    "dev/codex/schubert/characterization/TargetAdapter$Target.class": {
+      "major": 69,
+      "sha256": "bbdfbbdc098fffcb83102bef3eb8e1d84af8860217330d104cc11114fbc00c53",
+      "matchesMeasuredClass": true
+    },
+    "dev/codex/schubert/characterization/TargetAdapter.class": {
+      "major": 69,
+      "sha256": "a31b5fb44c9933b6660936e6cbffb59ff9b0021636b7aae42393b3c957e3852b",
+      "matchesMeasuredClass": true
+    }
+  },
+  "productTestsStarted": 0,
+  "toolTestsStarted": 0,
+  "chrStarted": 0,
+  "baselineFileContentsRead": 0,
+  "wholeF02": false,
+  "whole451": false,
+  "formalDelta": 0
+}
