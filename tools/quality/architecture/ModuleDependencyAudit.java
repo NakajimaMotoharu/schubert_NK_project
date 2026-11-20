@@ -22,6 +22,28 @@ import java.util.jar.JarFile;
 public final class ModuleDependencyAudit {
   private static final String INTERNAL = "dev.codex.schubert.nk.";
   private static final String WEB_REPLY_CLIENT = INTERNAL + "web.messaging.JmsRequestReplyClient";
+  private static final Set<String> OBJECT_SERIALIZATION_TYPES =
+      Set.of(
+          "java.io.Externalizable",
+          "java.io.InvalidClassException",
+          "java.io.InvalidObjectException",
+          "java.io.NotActiveException",
+          "java.io.NotSerializableException",
+          "java.io.ObjectInput",
+          "java.io.ObjectInputFilter",
+          "java.io.ObjectInputStream",
+          "java.io.ObjectInputValidation",
+          "java.io.ObjectOutput",
+          "java.io.ObjectOutputStream",
+          "java.io.ObjectStreamClass",
+          "java.io.ObjectStreamConstants",
+          "java.io.ObjectStreamException",
+          "java.io.ObjectStreamField",
+          "java.io.OptionalDataException",
+          "java.io.Serial",
+          "java.io.Serializable",
+          "java.io.StreamCorruptedException",
+          "java.io.WriteAbortedException");
   private static final Set<String> MODULES =
       Set.of("protocol", "storage", "bootstrap", "api", "web", "batch");
   private static final Set<String> FILE_IO_TYPES =
@@ -216,7 +238,14 @@ public final class ModuleDependencyAudit {
         || target.equals("java.nio.file.spi.FileSystemProvider");
   }
 
+  private static boolean javaSerialization(String target) {
+    int enclosingTypeEnd = target.indexOf('$');
+    return OBJECT_SERIALIZATION_TYPES.contains(
+        enclosingTypeEnd < 0 ? target : target.substring(0, enclosingTypeEnd));
+  }
+
   private static boolean forbiddenFramework(String module, String target) {
+    if (module.equals("protocol") && javaSerialization(target)) return true;
     boolean spring = target.startsWith("org.springframework.");
     boolean mvc = target.startsWith("org.springframework.web.servlet.")
         || target.startsWith("org.springframework.web.bind.annotation.")
