@@ -1,0 +1,147 @@
+{
+  "eventId": "PGPT-20261008-6553",
+  "groupId": "PGPT-WBS66-F02-REAL-JAVA-TWO-BOUNDARIES-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T04:30:45.460000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 62,
+      "remainingPercent": 38,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F02-REAL-JAVA-TWO-BOUNDARIES-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F02-REAL-JAVA-TWO-BOUNDARIES-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a"
+    ],
+    "source": "3691db91e0b6033aa02bd0385332555b2cdf0edf",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40666-f02-java-release-boundaries-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.25,
+      "base": 0.6,
+      "high": 1.1
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1032_P020実FileStore新候補入力継続点.json",
+        "sha256": "00de32d987d65fe95b47d818c5aa65273f077fb0d846724ef211a542645dab82"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40644-f02-maven-lower-bound-independent-v1/manifest.json",
+        "sha256": "ca115d8966105da96020cdd74aa04ed5b068ff07242108b237abf9d09681df31"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40650-f02-current-six-model-handoff-v1/manifest.json",
+        "sha256": "b9cc9218bf02dc991927db35f965af65ee365fb81717b5bc78c0f0a8fb9f6e7d"
+      },
+      {
+        "path": "pom.xml",
+        "sha256": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "SS311 §2、F02/criterion/contract。Maven正規3.9.12、現Root POMのJava [25,26)。PG40642/40644の同JDK25成功部分は再演しない。",
+    "endCondition": "直前24、排他的上限26を真正配布Temurin runtimeで実証。Rootのみoffline validateでRequireJavaVersionを識別し、compile禁止は前後条件で確認。",
+    "workScope": "合成toolchain検査のみ。実サービス、製品再compile、環境HOLD、QA056に依存しない。",
+    "quotaAfter": {
+      "usedPercent": 62,
+      "remainingPercent": 38,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "12928654a6e6c666f3a390fd0036427aef18a514631239a6c1a1d745024e500d",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T04:30:45.460000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 62,
+          "remainingPercent": 38,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T04:30:32.442655+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 62,
+      "remainingPercent": 38,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6552",
+    "attempt": 1,
+    "attemptResult": "Java境界2件を実行し期待の終了1。JDK25の成功は元結果を照合して再利用。",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40666-f02-java-release-boundaries-v1/terminal.json",
+        "sha256": "27ed47fc38755c343fc4669d3a035e2f2bd0e461482219097d10266ca3a1f0cb"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40668-f02-java-release-boundaries-independent-v1/manifest.json",
+        "sha256": "f1e6a0540207eef465a51dad625f6a724bae464be00924528e72818f3e6778d4"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/4710_F02実Java上下限の単体仕様と結果.md",
+        "sha256": "ed7f22687671ed56bf0e261d5ee8ec22f348f98e18b41c178cd6a19014c138e1"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "六JAR・Storage JDBC残一辺・QA056・当候補451/実runtime",
+      "Java/Mavenの版数証拠を軸に他の状態へ流用しない"
+    ],
+    "executedToolCases": 2,
+    "firstAttemptMatched": 2,
+    "priorProductSuccessReused": 1,
+    "testIds": [
+      "PT-F02-JAVA-001",
+      "PT-F02-JAVA-002"
+    ],
+    "javaConstraint": "[25,26)",
+    "rejectionExits": [
+      1,
+      1
+    ]
+  }
+}
