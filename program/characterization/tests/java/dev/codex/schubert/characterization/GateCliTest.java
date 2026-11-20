@@ -211,6 +211,68 @@ class GateCliTest {
   }
 
   @Test
+  void sourceInventoryRejectsWrongJsonTypesEvenWhenTheCountTextMatches() throws Exception {
+    Path project = temporaryDirectory.resolve("typed-inventory-project");
+    Path current = temporaryDirectory.resolve("typed-inventory-current");
+    Path java = write(current.resolve("program/app/src/A.java"), "class A {}\n");
+    Path sql = write(current.resolve("program/database/schema.sql"), "schema\n");
+    Path load = write(current.resolve("program/database/load_scenario_data.sql"), "load\n");
+    Path generator =
+        write(current.resolve("program/database/generate_scenario_sql.py"), "generate\n");
+    Path document = write(current.resolve("documents/001.md"), "# document\n");
+    write(current.resolve("data/master/a.bin"), "abc");
+    Path inventory =
+        project.resolve("program/characterization/tests/resources/fixtures/expected.json");
+    ObjectNode expected =
+        JSON.createObjectNode()
+            .put("sourceFileCount", 4)
+            .put(
+                "sourceAggregateSha256",
+                aggregateBySpecification(current, List.of(java, sql, load, generator)))
+            .put("documentFileCount", 1)
+            .put("documentAggregateSha256", aggregateBySpecification(current, List.of(document)))
+            .put("masterFileCount", 1)
+            .put("masterBytes", 3);
+    writeJson(inventory, expected);
+    Path correct = temporaryDirectory.resolve("typed-source-pass.json");
+    GateCli.verifySource(project, current, correct);
+    assertEquals(ORACLE_PASS, JSON.readTree(correct.toFile()).path(ORACLE_STATUS).textValue());
+
+    for (String field :
+        List.of("sourceFileCount", "documentFileCount", "masterFileCount", "masterBytes")) {
+      JsonNode correctCount = expected.path(field);
+      for (JsonNode invalid :
+          List.of(
+              JSON.getNodeFactory().textNode(correctCount.asText()),
+              JSON.getNodeFactory().numberNode(correctCount.doubleValue()),
+              JSON.getNodeFactory().booleanNode(true),
+              JSON.getNodeFactory().nullNode(),
+              JSON.getNodeFactory().numberNode(new java.math.BigInteger("9223372036854775809")))) {
+        releaseRejectedInventory(
+            project, current, inventory, expected.deepCopy().set(field, invalid), field);
+      }
+    }
+    releaseRejectedInventory(
+        project,
+        current,
+        inventory,
+        expected.deepCopy().put("sourceAggregateSha256", 4),
+        "sourceAggregateSha256");
+  }
+
+  private void releaseRejectedInventory(
+      Path project, Path current, Path inventory, JsonNode value, String field) throws Exception {
+    writeJson(inventory, value);
+    Path output = Files.createTempFile(temporaryDirectory, "typed-rejection-", ".json");
+    assertThrows(IllegalStateException.class, () -> GateCli.verifySource(project, current, output));
+    JsonNode report = JSON.readTree(output.toFile());
+    assertEquals(ORACLE_FAIL, report.path(ORACLE_STATUS).textValue());
+    assertTrue(
+        strings(report.path(ORACLE_FAILURES)).stream()
+            .anyMatch(failure -> failure.startsWith(field + " expected=")));
+  }
+
+  @Test
   void preflightValidatesFilesPermissionsStorageNetworkAndPorts() throws Exception {
     Path runtime = temporaryDirectory.resolve("runtime-at-threshold");
     PreflightFixture valid = preflightFixture("valid", runtime);
