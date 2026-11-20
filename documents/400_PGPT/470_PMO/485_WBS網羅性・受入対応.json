@@ -1,4 +1,109 @@
 {
+  "currentSSC473MavenUtcDeliveryPG40470": {
+    "productionCore": "2cc96ab800b8753b0f0eafac8e008bd5b69d9a59",
+    "owner": "WBS-P019-03.01",
+    "relatedOwners": [
+      "WBS-P004-05",
+      "WBS-F03"
+    ],
+    "distinctSharedPricePp": 0,
+    "scope": [
+      {
+        "mainSource": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationGamesVerifier.java",
+        "line": 79,
+        "method": "row",
+        "detailedDesign": [
+          "SS332 SSC056",
+          "SS343 SSC473"
+        ],
+        "requirements": [
+          "MIG-DAT-005",
+          "MIG-DAT-006",
+          "MIG-003",
+          "MIG-005",
+          "MIG-006"
+        ],
+        "uis": [
+          "UI242",
+          "UI254"
+        ],
+        "testSource": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationGamesVerifierTest.java",
+        "junitMethods": [
+          "games008CreatedAtIsTheExactV004Instant",
+          "games009EveryPhaseAndGetterOccurrenceKeepsOriginalFault"
+        ],
+        "testIds": [
+          "PT-MIG-GAMES008",
+          "PT-MIG-GAMES009",
+          "PT-MIG-TARGET033",
+          "PT-MIG-TARGET034"
+        ],
+        "ptSpec": {
+          "path": "evidence/01_PT/019_NK-MIG-001/151_移行照合のJDBC42時刻取得仕様.md",
+          "sha256": "db5149533867a63c817eb1d467bbb397a63fe8ac3c19c24d1da4c31bb4faf4e4"
+        },
+        "result": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40464-migration-utc42-maven-exact-independent-v1/manifest.json",
+          "sha256": "2c7529cf1847c7a3d15352a53c47955d49ea99e6073788e10b820c6f351c5b20"
+        },
+        "productionCore": "2cc96ab800b8753b0f0eafac8e008bd5b69d9a59",
+        "actualDbOperations": 0
+      },
+      {
+        "mainSource": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterContentVerifier.java",
+        "line": 159,
+        "method": "value",
+        "detailedDesign": [
+          "SS332 SSC056",
+          "SS343 SSC473"
+        ],
+        "requirements": [
+          "MIG-DAT-005",
+          "MIG-DAT-006",
+          "MIG-003",
+          "MIG-005",
+          "MIG-006"
+        ],
+        "uis": [
+          "UI242",
+          "UI254"
+        ],
+        "testSource": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterContentVerifierTest.java",
+        "junitMethods": [
+          "content016TargetN12AndTimestampMicrosecondYearExtremes",
+          "content017TypedTimestamptzUsesInstantAndCanonicalUtc",
+          "content019EveryGetterWasNullAndNextOccurrenceKeepsResourcePostconditions"
+        ],
+        "testIds": [
+          "PT-MIG-CONTENT016",
+          "PT-MIG-CONTENT017",
+          "PT-MIG-CONTENT019",
+          "PT-MIG-TARGET017〜024"
+        ],
+        "ptSpec": {
+          "path": "evidence/01_PT/019_NK-MIG-001/151_移行照合のJDBC42時刻取得仕様.md",
+          "sha256": "db5149533867a63c817eb1d467bbb397a63fe8ac3c19c24d1da4c31bb4faf4e4"
+        },
+        "result": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40464-migration-utc42-maven-exact-independent-v1/manifest.json",
+          "sha256": "2c7529cf1847c7a3d15352a53c47955d49ea99e6073788e10b820c6f351c5b20"
+        },
+        "productionCore": "2cc96ab800b8753b0f0eafac8e008bd5b69d9a59",
+        "actualDbOperations": 0
+      }
+    ],
+    "unitCurrentEvidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40464-migration-utc42-maven-exact-independent-v1/manifest.json",
+      "sha256": "2c7529cf1847c7a3d15352a53c47955d49ea99e6073788e10b820c6f351c5b20"
+    },
+    "handoffMachineEvidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40470-g1301-current-maven-and-owner-status-v1/manifest.json",
+      "sha256": "c578fd02eff8861e84bf4d3d6c194ed76e23e4efc784e90dd5694f61454d8309"
+    },
+    "wholeActualPostgresql": false,
+    "whole451": false,
+    "formalDelta": 0
+  },
   "currentP01802FiveOwnerRangesPG40430": {
     "wbsLeaf": "WBS-P018-02",
     "reportedRow": "WBS-P018-02/2",

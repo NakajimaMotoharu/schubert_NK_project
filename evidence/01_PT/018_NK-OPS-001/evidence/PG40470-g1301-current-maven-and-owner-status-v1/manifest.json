@@ -1,0 +1,157 @@
+{
+  "actualExit": 0,
+  "startEvent": "PGPT-20261008-6401",
+  "head": "722d3af3100910f2b1ce07eab29c38fd85529976",
+  "productionCore": "2cc96ab800b8753b0f0eafac8e008bd5b69d9a59",
+  "canonicalDesign": "6dcd9fb65a3dad2011abeac1babc75e52394785d",
+  "priorEvidence": [
+    {
+      "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/880_G07現Maven証跡公開と継続点.json",
+      "sha256": "3bc142014ba4b0625fe311aefd7be1be9bade05cf1480eb2899b23b0ce674af7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40460-f02-utc42-physical-and-test-alignment-v1/manifest.json",
+      "sha256": "09acc06d5080221e14c0835555b7d7e24272be6a2b04e0835d28d5b3b517c909"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40464-migration-utc42-maven-exact-independent-v1/manifest.json",
+      "sha256": "2c7529cf1847c7a3d15352a53c47955d49ea99e6073788e10b820c6f351c5b20"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40454-migration-utc42-static-independent-v1/manifest.json",
+      "sha256": "01b5acb60a6e7fab875e6b3b936c4a21ebb911d650b8abc7b5a488bfb7148c3a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40184-c02-api-web-timeout-existing-proof-join-v1/manifest.json",
+      "sha256": "6c862cc57c118845d63b6314c5dbef2a8d403956edf10e79447e77a85771dcc7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40398-p020-single-session-filestore-independent-v1/manifest.json",
+      "sha256": "a0ae64abd7a6b63bfcefed5f497b7acc8d83c615d6c73f48ec1321e5b0e000dd"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36628-ssc447-current152-quality-return-v1/manifest.json",
+      "sha256": "eccacdc78f0ea40993950ee5a0b6b25a4981c9e54fa3a01db59bf316a9128597"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40446-f02-combined-static-proof-v1/manifest.json",
+      "sha256": "2b0742bd1cc20be99774fce595c7f5d75563aaa85c601b3bdfd33a3c2c288cd9"
+    }
+  ],
+  "criteria": {
+    "F02": "Four current same-Core Maven JARs, 1102 physical, 35/35 synthetic boundaries; six actual/13/runtime/451 open.",
+    "F03": "SSC-473 exact Maven 87, two target raw all, static targeted; six real modules, Root holds/PMD disposition and 451 open.",
+    "C02": "14 documented unit artifacts and current-static 4 timeout values; effective time/Invocation/Caddy/Inspector/native remain open.",
+    "F04": "209 current comparison-tool tests including actual ordinary haruka FileStore once; ownership was observed at that run; actual service/DB/native separation and receipt remain open."
+  },
+  "ssc447": {
+    "core": "e4794ddf45487268883334d0f8773d89bd47dcba",
+    "toolSource": "0601086e6ae95ba09c4fc137cff45ffa7a9ba239",
+    "tests": 152,
+    "success": 152,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "notRun": 0,
+    "rawMissed": {
+      "INSTRUCTION": 85,
+      "BRANCH": 58,
+      "LINE": 4,
+      "COMPLEXITY": 62,
+      "METHOD": 4,
+      "CLASS": 0
+    }
+  },
+  "migMethods": [
+    {
+      "mainSource": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationGamesVerifier.java",
+      "line": 79,
+      "method": "row",
+      "detailedDesign": [
+        "SS332 SSC056",
+        "SS343 SSC473"
+      ],
+      "requirements": [
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "uis": [
+        "UI242",
+        "UI254"
+      ],
+      "testSource": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationGamesVerifierTest.java",
+      "junitMethods": [
+        "games008CreatedAtIsTheExactV004Instant",
+        "games009EveryPhaseAndGetterOccurrenceKeepsOriginalFault"
+      ],
+      "testIds": [
+        "PT-MIG-GAMES008",
+        "PT-MIG-GAMES009",
+        "PT-MIG-TARGET033",
+        "PT-MIG-TARGET034"
+      ],
+      "ptSpec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/151_移行照合のJDBC42時刻取得仕様.md",
+        "sha256": "db5149533867a63c817eb1d467bbb397a63fe8ac3c19c24d1da4c31bb4faf4e4"
+      },
+      "result": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40464-migration-utc42-maven-exact-independent-v1/manifest.json",
+        "sha256": "2c7529cf1847c7a3d15352a53c47955d49ea99e6073788e10b820c6f351c5b20"
+      },
+      "productionCore": "2cc96ab800b8753b0f0eafac8e008bd5b69d9a59",
+      "actualDbOperations": 0
+    },
+    {
+      "mainSource": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterContentVerifier.java",
+      "line": 159,
+      "method": "value",
+      "detailedDesign": [
+        "SS332 SSC056",
+        "SS343 SSC473"
+      ],
+      "requirements": [
+        "MIG-DAT-005",
+        "MIG-DAT-006",
+        "MIG-003",
+        "MIG-005",
+        "MIG-006"
+      ],
+      "uis": [
+        "UI242",
+        "UI254"
+      ],
+      "testSource": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterContentVerifierTest.java",
+      "junitMethods": [
+        "content016TargetN12AndTimestampMicrosecondYearExtremes",
+        "content017TypedTimestamptzUsesInstantAndCanonicalUtc",
+        "content019EveryGetterWasNullAndNextOccurrenceKeepsResourcePostconditions"
+      ],
+      "testIds": [
+        "PT-MIG-CONTENT016",
+        "PT-MIG-CONTENT017",
+        "PT-MIG-CONTENT019",
+        "PT-MIG-TARGET017〜024"
+      ],
+      "ptSpec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/151_移行照合のJDBC42時刻取得仕様.md",
+        "sha256": "db5149533867a63c817eb1d467bbb397a63fe8ac3c19c24d1da4c31bb4faf4e4"
+      },
+      "result": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40464-migration-utc42-maven-exact-independent-v1/manifest.json",
+        "sha256": "2c7529cf1847c7a3d15352a53c47955d49ea99e6073788e10b820c6f351c5b20"
+      },
+      "productionCore": "2cc96ab800b8753b0f0eafac8e008bd5b69d9a59",
+      "actualDbOperations": 0
+    }
+  ],
+  "distributedInRemoteRepositoryExpected": true,
+  "individualReceiptConfirmed": false,
+  "individualOwnerEndCriteriaClosed": 0,
+  "formalDelta": 0,
+  "productsRerun": 0,
+  "realEnvironmentReopened": 0,
+  "terminalAtUTC": "2026-11-20T01:11:22.379279+00:00"
+}
