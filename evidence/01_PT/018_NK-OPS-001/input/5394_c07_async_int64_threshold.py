@@ -17,6 +17,7 @@ PLAN, OPS, ROOT, JAVA, AGENT, JUNIT, TOOLS = (common[k] for k in ("PLAN", "OPS",
 PKG = "dev.codex.schubert.nk.batch.monitoring"
 CLASS = PKG.replace(".", "/") + "/AlertThresholds.class"
 SEVERITY = PKG.replace(".", "/") + "/AlertLifecycle$Severity.class"
+ENCLOSING = PKG.replace(".", "/") + "/AlertLifecycle.class"
 FIXTURE = Path("src/schubert-nk-batch/src/test/java") / PKG.replace(".", "/") / "AlertThresholdsTest.java"
 ID = "PT-OPS-THRESH-015"
 
@@ -53,17 +54,19 @@ def main():
     for row in expected:
         literal = f"{row['usedBytes']:,}".replace(",", "_").encode()
         assert literal+b"L, capacity" in fixture
-    out = (OPS / start["run"]).resolve()
+    first = OPS / start["run"] / "initial-compile.json"
+    assert read(first)["actualExit"] == 1
+    out = (OPS / "PG40638-c07-async-queue-int64-qualified-v1").resolve()
     out.mkdir()
-    local = ROOT.parent / "pgpt-runs/PG379/pg40636-c07-async-int64-retained-v1"
+    local = ROOT.parent / "pgpt-runs/PG379/pg40638-c07-async-int64-retained-v1"
     local.mkdir(mode=0o700)
-    session = "PG40636-C07-ASYNC-INT64"
+    session = "PG40638-C07-ASYNC-INT64"
     receipts = {}
     with TemporaryDirectory(dir="/dev/shm", prefix="pgpt-c07-threshold-") as name:
         root = Path(name)
         main_classes = root / "classes"
         with ZipFile(artifact) as jar:
-            for n in (CLASS, SEVERITY):
+            for n in (CLASS, SEVERITY, ENCLOSING):
                 path = main_classes / n
                 path.parent.mkdir(parents=True, exist_ok=True)
                 path.write_bytes(jar.read(n))
@@ -100,7 +103,8 @@ def main():
                        failed=0, errors=0, skipped=0, notRun=0, cases=cases, inputFour=expected,
                        allCovered=True, individualRaw=counts, currentJvmCrc=classes[0][2], exactSha=did,
                        fixtureSha=hashlib.sha256(fixture).hexdigest(), currentBatchJar=pin(artifact),
-                       originalEvidence=pin(refs[1]), session=session, exec=pin(exec_path), xml=pin(xml),
+                       originalEvidence=pin(refs[1]), firstFixtureFailure=pin(first),
+                       session=session, exec=pin(exec_path), xml=pin(xml),
                        receipts=receipts, noExternalRuntime=0, oldExecMerge=False, wholeC07Accepted=False,
                        whole451Accepted=False, terminalAtUTC=datetime.now(timezone.utc).isoformat()))
     print(pin(result), counts)
