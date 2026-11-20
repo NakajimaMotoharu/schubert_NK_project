@@ -1,0 +1,71 @@
+{
+  "eventId": "PGPT-20261008-6500",
+  "groupId": "PGPT-WBS66-F03-CURRENT-PROTOCOL-EXACT-UNIT-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T03:11:34.674000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 60,
+      "remainingPercent": 40,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-CURRENT-PROTOCOL-EXACT-UNIT-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F03-CURRENT-PROTOCOL-EXACT-UNIT-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "source": "9e0881914d850775e388088a1ebe507195a1922a",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40600-f03-current-protocol-maven-run-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.55,
+      "base": 1.25,
+      "high": 2.8
+    },
+    "groupCapPp": 4,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/979_G07検査差分継続点.json",
+        "sha256": "f0c9aff09b891b79b25af21618dc39b7bc3981b700a3e9f15e34159b40b21fa6"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37666-ssc452-grammar-unfiltered-v1/manifest.json",
+        "sha256": "e5d74eb8b2a8a7476808f932b764e5534ec6057258166de5f58ae09742f0e39f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40300-f03-current-protocol-typed-static-binding-v1/manifest.json",
+        "sha256": "c0c1d8a197ed9b5b5de75fee6bbdd94cb73c1ab94cfc1d581d3e799cb1e7843e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40498-schema-history-packaged-proof-recovered-v1/manifest.json",
+        "sha256": "bba0cb1781e36039e9014b8a7f27e4ab2354ef78283181a704bae5dba9fd9b0f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40594-f03-eligible-test-checkstyle-independent-v1/manifest.json",
+        "sha256": "2785529ad5c46bb36181ab3c65c941c9ae7d8e3fd95f6050b2a874689d13d51e"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "元Protocol PG37652/37666全156成功後に当候補で追加のTest四sourceをGitで確認。PG40300は旧全割当と新選択を合算せず、全体測定を保留。",
+    "endCondition": "Protocol単独の現在全PT、真正terminal、独立XML／実物176／raw同run四指標を作成。失敗とゲート不成立を区別。",
+    "workScope": "exact tracked Protocol tree only。Maven offline cache、JDK25。本物外部サービス・保留型・DB/native/VM/権限は含めない。既成功同一run再演なし。"
+  }
+}
