@@ -1,0 +1,141 @@
+{
+  "eventId": "PGPT-20261008-6399",
+  "groupId": "PGPT-WBS66-G07-ACTUAL-MAVEN-PUBLIC-SAFETY-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T01:08:39.877000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 57,
+      "remainingPercent": 43,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-G07-ACTUAL-MAVEN-PUBLIC-SAFETY-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-G07-ACTUAL-MAVEN-PUBLIC-SAFETY-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-G07"
+    ],
+    "managementWorkIds": [
+      "WBS-G07",
+      "WBS-F03/2-2"
+    ],
+    "source": "c517c9b07b5d45554ab931d44a38cda3f3f60b46",
+    "productionCoreMain": "2cc96ab800b8753b0f0eafac8e008bd5b69d9a59",
+    "canonicalDesignSource": "6dcd9fb65a3dad2011abeac1babc75e52394785d",
+    "run": "PG40466-g07-current-maven-public-delta-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.16,
+      "base": 0.4,
+      "high": 0.9
+    },
+    "groupCapPp": 1.15,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/877_F03移行Maven実物理PT継続点.json",
+        "sha256": "456c58f291ab2bae000d2224338aceb9515a0ff38c9cc2328b76dca212d0d400"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40428-g07-capacity-and-bom-delta-independent-v1/manifest.json",
+        "sha256": "1d74977d078647afe1e900641e2c8123ec1dc15577706c536ccd1c4af3d5dceb"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40464-migration-utc42-maven-exact-independent-v1/manifest.json",
+        "sha256": "2c7529cf1847c7a3d15352a53c47955d49ea99e6073788e10b820c6f351c5b20"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40446-f02-combined-static-proof-v1/manifest.json",
+        "sha256": "2b0742bd1cc20be99774fce595c7f5d75563aaa85c601b3bdfd33a3c2c288cd9"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "前カーソルPG40428と現remote取得HEAD、直近SSC473/依存検査と公開結果。Ｇ07の公開限定scanに必要な固定tool hashとgit intervalを照合。",
+    "endCondition": "固定増分のtext/公開gzipと非text物理metadataを分離。実signalを原種と範囲ごとに判定し、安全な公開証跡と次cursorを保存。過去source全部やprivate artifactを再scanしない。",
+    "workScope": "public committed text・gzip、binary metadataだけ。secret値、実DB、actual runtime、privateファイル、製品試験は扱わない。",
+    "quotaAfter": {
+      "usedPercent": 57,
+      "remainingPercent": 43,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "991ae2a115c988292de326047dac093fa50402199cdc0dad79d9f933153778db",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T01:08:39.877000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 57,
+          "remainingPercent": 43,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T01:08:25.588497+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 57,
+      "remainingPercent": 43,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6398",
+    "attempt": 1,
+    "attemptResult": "PUBLIC_HISTORY_INCREMENT_NO_SECRET_AFTER_CHECKSUM_DISPOSITION",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40466-g07-current-maven-public-delta-v1/manifest.json",
+        "sha256": "da079f50ed6f84e95141a4f5d64f08e3e75c95c532466b2eaabce3f68fc3759d"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40468-g07-public-utc42-history-verified-v1/manifest.json",
+        "sha256": "627733cc38e324f23c8976df8a2859ea74743bb7c5c760cd842ee791800247f6"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "公開範囲の将来差分、binaryはメタデータだけ、全451/G07終了依存"
+    ],
+    "firstDetectorSignals": 8,
+    "verifiedChecksumOnlySignals": 8,
+    "remainingSecretSignals": 0,
+    "retries": 0,
+    "historyCommits": 21,
+    "textPaths": 173,
+    "gzipVersions": 21,
+    "binaryMetadataOnly": 4,
+    "dedicatedPpUnallocated": true,
+    "newPublicCursor": "c517c9b07b5d45554ab931d44a38cda3f3f60b46"
+  }
+}
