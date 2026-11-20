@@ -1,0 +1,145 @@
+{
+  "eventId": "PGPT-20261008-6975",
+  "groupId": "F04-fresh-haruka-owned-resource-for-new-tool",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T16:52:54.142000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 75,
+      "remainingPercent": 25,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "F04-fresh-haruka-owned-resource-for-new-tool",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "F04-fresh-haruka-owned-resource-for-new-tool",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F04"
+    ],
+    "managementWorkIds": [
+      "WBS-F04/criterion/contract"
+    ],
+    "source": "6e766599f7137d8b7349cbb4b780c4b48f5277ef",
+    "productionCoreMain": "2b16a8ed20778fe5896099cb4798cfd1ff96b176",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG41002-f04-haruka-current-resource-check-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.08,
+      "base": 0.3,
+      "high": 0.8
+    },
+    "groupCapPp": 1.2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1457_P020Gate単一JSON証跡継続点.json",
+        "sha256": "3d94638a9a64147de348f3ad4dbca519ce80a433b82234454c1a466f94ae5ccd"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40998-p020-gate-single-json-doc-green-v1/manifest.json",
+        "sha256": "0ccb11218962ebb43f7dbe159ea6d0ba1726ce7aef2807afaeee26e174980fe5"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40706-p020-current-211-approved-filestore-v1/manifest.json",
+        "sha256": "19820a37f33df2d488f3661a874ff03d70f3c4b0c496e65e97f60d5b917aa47d"
+      },
+      {
+        "path": "../PMO/hourly-monitor/qa059-haruka-readonly-20261120.json",
+        "sha256": "1873f57d6d25c582b61510293db3297850e13c0d692f0db298ddaa24152746ec"
+      },
+      {
+        "path": "../PMO/hourly-monitor/haruka_known_hosts",
+        "sha256": "3506c5b517f50693c3da073aa330568a61fc39c37e4f50b916dcef23838596bb"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5311_p020_prompted_haruka_one_shot.py",
+        "sha256": "3e60ee8859ee43a04bf676b44e0ad2ea3a16aa9d94121dd8439319da706468a5"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "F04既承認haruka普通認証と新比較工具source 3f9fd515の不足L2/M1/B1。既boot・PIDを現在値にしない。",
+    "endCondition": "一回の指定read-only SSHで現在boot hash、所有、可用容量、既tool、同workspaceの競合と新run名不存在を照合。安全条件不成立は転送・起動なし。",
+    "workScope": "既許可のharuka/mini、既pin、read-only。aru、VM、root、サービス/DB、鍵や認証情報の出力、転送・job起動なし。",
+    "quotaAfter": {
+      "usedPercent": 75,
+      "remainingPercent": 25,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "5a397a3a83d582a8a3107f599c108f37f727a183216d33597ca19b5d47215208",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T16:52:54.142000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 75,
+          "remainingPercent": 25,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T16:52:20.407455+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 75,
+      "remainingPercent": 25,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6974",
+    "attempt": 1,
+    "attemptResult": "CURRENT_READ_ONLY_HOST_ADMISSION",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41002-f04-haruka-current-resource-check-v1/manifest.json",
+        "sha256": "71b5b5fb99025b6381bdb69bafa47ef95639a2044379d317aba9431f7aec2c4e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5546_f04_current_haruka_readonly.py",
+        "sha256": "f74b29793ad787a5e24cca57054f868897608d1a8337fd4b749be565177e8fe0"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "F04現操作の真正終端と独立post",
+      "P020現工具全212同一exec",
+      "実CHRと全451"
+    ],
+    "freeBytes": 224243400704,
+    "remoteTestsStarted": 0,
+    "firstVerificationSuccess": 1,
+    "firstVerificationDenominator": 1,
+    "retryCount": 0
+  }
+}
