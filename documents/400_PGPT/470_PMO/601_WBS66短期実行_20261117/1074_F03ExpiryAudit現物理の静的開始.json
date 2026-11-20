@@ -1,0 +1,75 @@
+{
+  "eventId": "PGPT-20261008-6592",
+  "groupId": "wbs66-f03-expiry-current-artifact-static",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T06:22:50.540000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 64,
+      "remainingPercent": 36,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "wbs66-f03-expiry-current-artifact-static",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "wbs66-f03-expiry-current-artifact-static",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "source": "d5c53ffb9513dd93a94e54bab13751fb56e040fd",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40712-f03-expiry-current-batch-static-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.25,
+      "base": 0.7,
+      "high": 1.8
+    },
+    "groupCapPp": 3,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1073_P020個別判定・継続点.json",
+        "sha256": "03a13bb6e9390419e6085df30794cff881c8b5a8f5eaccc4e7d8cf7e83551f8e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40704-f02-current-four-expiry-jars-v1/manifest.json",
+        "sha256": "c58df3b46be9501d68256a6b8578efa8c0f7021f66f0e477d58de8c907b62da1"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40698-f02-expiry-audit-jdbc-independent-v1/manifest.json",
+        "sha256": "6e009299dbba22fa572d8ea7c9822f77c2d7fd0f79f33d3a3e84a5a730b899e6"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40524-f03-batch-closed-current-pmd-v1/manifest.json",
+        "sha256": "46d81a6a33cfbaea0d0100fe423f24614f1b94e76e310879165664a3033e5ffe"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40532-f03-four-batch-dao-required-boundaries-v1/manifest.json",
+        "sha256": "d9a5852701e4c1817afd94bfab881a2b126565dcc6ba67422a104cbd8d2cdb8b"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40502-f03-current-schema-three-whole-static-v1/manifest.json",
+        "sha256": "7843a2b81e14ca73fc53029ba0168671193cbe221d0a2751a73596c4fc1d9465"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "Current physical class identical to selected PT; static verify this changed family, rebind original PMD findings by exact source/rule/method multiset. Archived allowed dependencies only.",
+    "endCondition": "Actual SpotBugs outcome, complete 7 ClassStats, no errors/missing or preserve failure. PMD raw findings and exact comparisons to old classifications. No change to quality rules or whole gate.",
+    "workScope": "No real Jdbc/Expiry/backend/Root execution, no held source extraction, no existing product tests replayed."
+  }
+}
