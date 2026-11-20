@@ -1,0 +1,220 @@
+{
+  "eventId": "PGPT-20261008-6567",
+  "previousCheckpoint": "PGPT-20261008-6566",
+  "branch": "dev-foundation",
+  "headBeforeCheckpoint": "6026866514a1f7d62138b170c3b98dfa2cc1c4fd",
+  "remoteBranchBeforeCheckpoint": "6026866514a1f7d62138b170c3b98dfa2cc1c4fd",
+  "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+  "comparisonSource": "b35a4a07b0bd79459b397e524835f3e88b5f0600",
+  "trackedChangesBeforeCheckpoint": 0,
+  "retainedUntrackedFiles": 1537,
+  "retainedStashes": 7,
+  "currentBaselineTree": "cd377044e4ca058ea219ca6a2fec82159559c72c",
+  "recordedLocalJavaToolProcessCount": 0,
+  "recordedOwnedJobsInFlight": 0,
+  "remoteStateProbed": false,
+  "externalState": "WAITING_FOR_REQUIRED_ADMISSION_OR_OWNER_RESULTS",
+  "fullPgptAccepted": false,
+  "acceptedOriginal": 17,
+  "totalOriginal": 190,
+  "remainingOriginal": 173,
+  "formalDelta": 0,
+  "effortCompletion": null,
+  "coreAccepted": 0,
+  "coreTarget": 5,
+  "shortAccepted": 0,
+  "shortTarget": 12,
+  "shortPlannedPricePp": 143.371,
+  "officialPtTests": 1964,
+  "officialPtScopes": 53,
+  "resultGroups": 15,
+  "groupStartBaseEstimateTotalPp": "10.12",
+  "originalRowPriceDeltaPp": 0,
+  "ownActualPp": null,
+  "initialShared": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T03:39:26.351000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 61,
+      "remainingPercent": 39,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "lastComparableWindowObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T04:48:06.515000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 63,
+      "remainingPercent": 37,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "comparableUsedDisplayDeltaPp": 2,
+  "freshQuota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T04:49:10.513000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 63,
+      "remainingPercent": 37,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "latestWholeIntervalDeltaPp": null,
+  "localAuthObservation": {
+    "agentExit": 1,
+    "activeIdentities": 0,
+    "defaultIdentityFiles": 0,
+    "credentialBodyReads": 0,
+    "sshAttempts": 0
+  },
+  "waitingQa": [
+    "QA-056",
+    "QA-057",
+    "QA-059"
+  ],
+  "requirements": {
+    "F02": "QA-056の対象4型について有効な実施判断又は正規同source証拠。六製品JARのtyped dependency、Storageの旧JDBC入口、13要求と実runtime。",
+    "F03": "QA-056の型付き全体、QA-057とRootの個別前提、Batch未解析物理と元所有判定、451。現6+root validateは取得済み。",
+    "P004-03": "未確認二所有型、現在の原本・DB参照・退役後条件の正規証拠。",
+    "P004-05": "未確認API二所有型、同候補の実DB UTC・transaction、権限・資源後条件。",
+    "P018-08": "同候補の真正native stream、CRC、開始/停止の所有、独立post。",
+    "P020-01": "QA-059の既存通常認証又は担当からの真正証拠。211試験の同exec、実Current/NK、後続G01〜G06。",
+    "C02/F04": "現bootとownerを確認した実効Unit値と同Invocationの真正終端、実環境の分離条件。",
+    "その他短期": "P018-02/P019-02の当release署名・配備後条件、P018-07の保持ownerとCaddy、P004-02の実DB条件、P018-10の全入口・実sink。"
+  },
+  "scopedEvidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40628-f02-controller-reply-edge-independent-v1/manifest.json",
+      "sha256": "c788c5f9e88707952b3f568970944a9d7178986aac93d6941d7aed7962cebcb7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40634-f02-protocol-serialization-independent-v1/manifest.json",
+      "sha256": "3ef1a3001daa1afe4ea92e4721ba5f8c04fada5f24b761869ee2943faa45a5bf"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40640-c07-async-queue-int64-independent-v1/manifest.json",
+      "sha256": "c14697ae4dfa11c4d8cbde7ad9f07a296aafaadda6c364cd9475e7375e1da639"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40644-f02-maven-lower-bound-independent-v1/manifest.json",
+      "sha256": "ca115d8966105da96020cdd74aa04ed5b068ff07242108b237abf9d09681df31"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40648-f03-real-compiler-controls-independent-v1/manifest.json",
+      "sha256": "a241b704a1df37a23b6dc6bc8815feae934d85427f3fe247d3ea610b2f24b843"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40650-f02-current-six-model-handoff-v1/manifest.json",
+      "sha256": "b9cc9218bf02dc991927db35f965af65ee365fb81717b5bc78c0f0a8fb9f6e7d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40654-g07-current-compiler-evidence-delta-independent-v1/manifest.json",
+      "sha256": "a4b06fdef30558906ecc7828aedb4ba554422ef4d68031575d1f58e624122a45"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40662-p020-a02-redirect-independent-v1/manifest.json",
+      "sha256": "b23ed3c1f843a121e12466e16774f2c6c95d36a35a192d60ac6eebf302ee9b3e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40664-p020-current-211-filestore-input-v1/manifest.json",
+      "sha256": "64c2a53963e46e75daa12c99d85a2ba9637cd900a78d7a2a095e8751cc27463d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40668-f02-java-release-boundaries-independent-v1/manifest.json",
+      "sha256": "f1e6a0540207eef465a51dad625f6a724bae464be00924528e72818f3e6778d4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40672-f02-current-six-reactor-independent-v1/manifest.json",
+      "sha256": "257c42bbe02c064e0627069010900860c41fc9d93aa853deb0b12c521fff7c7b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40678-g07-reactor-a02-public-independent-v1/manifest.json",
+      "sha256": "a66f7de95178af69cd887de3492166caaa9dee672d56cefc4ef0f78dd560008c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40684-p01810-current-audit-lineage-v1/manifest.json",
+      "sha256": "e64b3070f5a5cbd0437a0e3c0a4871daba5f67e2d2c836d3c5a93043a1530311"
+    },
+    {
+      "path": "evidence/01_PT/004_NK-DAT-001/evidence/PG40680-p004-ddl-64-layout-lineage-v1/manifest.json",
+      "sha256": "0dd18224c32ca6655378357a61e49393cbdaa11ca52016e217d6d924e1976ec4"
+    }
+  ],
+  "groupResults": [
+    {
+      "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1004_F03公開設定二件再照合結果.json",
+      "sha256": "aba7144ac844f0232927826d04cef0c0d0da8e2b58a3dc57a7ec9c095a50ffb4"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1007_F02画面Controller通信境界結果.json",
+      "sha256": "13e89e0b51c8d8f71abb540c4c8c637fe52eaabf255de40381d5c10f7d93f07e"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1010_F02Protocol依存禁止照合結果.json",
+      "sha256": "b087fd31e58506694ba94dc90abc22452e258fa35af1a9a558b42f69c2c4537a"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1013_C07キュー大分母境界単体結果.json",
+      "sha256": "d44fa629763ffd752da32b45d01c2b909375e642cc2f70ed9c1c5df6a0d4004b"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1016_F02実Maven版数境界結果.json",
+      "sha256": "780bb5c44bc32ccf84f76c71f80faa2f06e14d314d9e5eb96931e3ec23924d70"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1019_F03実コンパイラ警告境界結果.json",
+      "sha256": "f7b3eb9f7023f6dfee366d95ad0b6c755c2670c80d2ea6e61147cce5cb824140"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1022_F02現六モデル引渡し結果.json",
+      "sha256": "cbb3cd012a609edd2a316f6304950f7f6f06f14aa7d4d271a0d5d192308b4404"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1025_G07コンパイラ証跡差分結果.json",
+      "sha256": "16c56556e0c3c81217dec1177d54221840659c824040a6c22fae556f3951eb5a"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1028_P020三件遷移先の比較結果.json",
+      "sha256": "db3456c596b6fcbe2417bf8b855687013a55eb7b0d39143f0bfd37818e30bb2c"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1031_P020実FileStore新候補入力結果.json",
+      "sha256": "6885bbdbc4094cc4b5f84921509d23858b3345a54a2cc43fe6b92e19670dcf69"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1034_F02実Java上下限結果.json",
+      "sha256": "17f193dc3ad7b94425c34f8ae85ddd60694cf95ee7475f6841956e2af330dbd5"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1037_F02現六ReactorValidate結果.json",
+      "sha256": "0a4d92f40298df261cc7ca303d5ad9e4c57ab6d15eccd404c90056a382d4bb7e"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1040_G07比較器とReactor公開差分結果.json",
+      "sha256": "9a6297f2e0ec6cd8b1585860a97b13851f3721315552409ce716d4ba32c6fd3e"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1043_P004DDL六十四電文対応結果.json",
+      "sha256": "71d59d481349737f16b2446f60a84b27fd070196b79f859db09157ce7982e84b"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1046_P01810公開監査Vector現適用結果.json",
+      "sha256": "110de6bf7a22a97257c4b649fd58677975a9fe5bdbae5c77da291699251d722f"
+    }
+  ],
+  "resume": [
+    "get_usage_limitsでfresh確認、Git HEAD/remoteと保全した1537未追跡・stash七を確認。",
+    "QA-056/057/059の回答と現実環境のowner証拠を確認。拒否操作・保留の判断範囲を維持。",
+    "harukaの通常入場が成立した場合はPG40664のprivate handoff 211を照合し、新しい一回用run・同現在bootのFileStore・終了証票を取得。旧runの実行やマージをしない。",
+    "許可範囲に新しい独立PT又は当候補証拠が成立したら、個別criteriaと451に照合して通常作業を続ける。"
+  ]
+}
