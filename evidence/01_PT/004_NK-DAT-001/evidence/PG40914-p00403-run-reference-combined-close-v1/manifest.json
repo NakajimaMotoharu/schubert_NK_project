@@ -1,0 +1,191 @@
+{
+  "actualExit": 0,
+  "source": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+  "startEvent": "PGPT-20261008-6847",
+  "startedAtUTC": "2026-11-20T14:23:17.728444+00:00",
+  "terminalAtUTC": "2026-11-20T14:23:19.935946+00:00",
+  "testId": "RRF-PURE-009",
+  "independentOracle": {
+    "path": "evidence/01_PT/004_NK-DAT-001/455_P00403参照DAO三経路例外順位仕様.md",
+    "sha256": "3ff9b930f451c1427c0fc82650b748cc45d3a517b4f018d4555a50ac567a2ec6"
+  },
+  "fixture": {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryPureJdbcTest.java",
+    "sha256": "9985c4ea628dc9ac8178f680882383bf15cb4a74798d1c70b29c01b62dbd40eb"
+  },
+  "sourceClosure": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.java",
+      "sha256": "134bcdaecf9f02adc74d5cb728782c41f19497b0c0c37ee2cd4a70b0155179b6"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java",
+      "sha256": "c440d3e16da86b7814cf8fbd6247e48c1ab4cd6de2da3a114a38c308ae3c7ce4"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java",
+      "sha256": "5f4f8273a29dc2b89d6cf8fbc566b067480c0c7338f1444d5b14a9a878b1debd"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "sha256": "389d41ce3928ac25a5001a08fc5a4562ba44df84144721b2f3a8f36f16747edb"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferences.java",
+      "sha256": "dacc345b826e86682036df2e94f8e5300cb75435f4cdcd1de6ece4165eac5884"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.java",
+      "sha256": "305e82607cfc8acf9656547c5eee663cc9edee55c0381da96d6860b5a98d0d75"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java",
+      "sha256": "d59870fcf8d4f7bf9ff4e0abc2e052efddd9a08e9e93efa39d1f15a97f7063cf"
+    }
+  ],
+  "tools": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/release",
+      "sha256": "fc1b6c466fbf603872858a3a18c1afe444d68d97c560237dcfde52cfa25f10a1"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+      "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar",
+      "sha256": "fb5b0036a0899ea97edfa0fc2c7985b55f3f7c5695028163e5e60d4f3cf6075d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+      "sha256": "d2b74b20b415163c1f53261e7c5ef4445b788327094208ff821e0c2baf9bc8f1"
+    }
+  ],
+  "stages": [
+    {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-implicit:none",
+        "-sourcepath",
+        "",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "-d",
+        "/dev/shm/pg40914-rrf-54zn8buy/classes",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferences.java",
+        "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.java",
+        "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryPureJdbcTest.java"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/dev/shm/pg40914-rrf-54zn8buy/rrf.exec,append=false,sessionid=PG40914-RRF-PURE-009",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-ansi-colors",
+        "--fail-if-no-tests",
+        "--class-path",
+        "/dev/shm/pg40914-rrf-54zn8buy/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "--select-method",
+        "dev.codex.schubert.nk.batch.repository.RunReferenceRepositoryPureJdbcTest#combinedReadAndCloseSqlFailuresKeepFirstFatalAndReleaseBothResources",
+        "--reports-dir",
+        "/dev/shm/pg40914-rrf-54zn8buy/unit"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/dev/shm/pg40914-rrf-54zn8buy/rrf.exec",
+        "--classfiles",
+        "/dev/shm/pg40914-rrf-54zn8buy/classes/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.class",
+        "--xml",
+        "evidence/01_PT/004_NK-DAT-001/evidence/PG40914-p00403-run-reference-combined-close-v1/coverage.xml"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "observedJUnit": {
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "observedCases": [
+    {
+      "className": "dev.codex.schubert.nk.batch.repository.RunReferenceRepositoryPureJdbcTest",
+      "method": "combinedReadAndCloseSqlFailuresKeepFirstFatalAndReleaseBothResources()"
+    }
+  ],
+  "originalPrivateJUnitXmlSha256": "9041b390ea493e6a3393febc280fd173cb7ad95a5cf7d284a1a271f36362eb90",
+  "distinctInputVariants": 3,
+  "rawCoverageMeasured": false,
+  "scopedDefaultCoverage": {
+    "xml": {
+      "path": "evidence/01_PT/004_NK-DAT-001/evidence/PG40914-p00403-run-reference-combined-close-v1/coverage.xml",
+      "sha256": "6a43c94b68f23fda463cf79fa0c5ce32fd84928357d5e9c41fae7d36e81d2ce7"
+    },
+    "execSha256": "0c604c8e847391ecb0fa82277ec0ec0940ceef6dd0b3e50e13a3f04da9dd2f3b",
+    "targetClass": {
+      "path": "/dev/shm/pg40914-rrf-54zn8buy/classes/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.class",
+      "sha256": "dc394e1d15ba729bbecd4f895c264b3adb042233f8ac7d603cab68d6e91682bb"
+    },
+    "counters": [
+      {
+        "type": "INSTRUCTION",
+        "missed": "89",
+        "covered": "127"
+      },
+      {
+        "type": "BRANCH",
+        "missed": "14",
+        "covered": "10"
+      },
+      {
+        "type": "LINE",
+        "missed": "17",
+        "covered": "40"
+      },
+      {
+        "type": "COMPLEXITY",
+        "missed": "12",
+        "covered": "6"
+      },
+      {
+        "type": "METHOD",
+        "missed": "0",
+        "covered": "6"
+      },
+      {
+        "type": "CLASS",
+        "missed": "0",
+        "covered": "1"
+      }
+    ]
+  },
+  "priorProductSuccessReexecuted": 0,
+  "realDbOrNativeActions": 0,
+  "whole451": false,
+  "formalDelta": 0
+}

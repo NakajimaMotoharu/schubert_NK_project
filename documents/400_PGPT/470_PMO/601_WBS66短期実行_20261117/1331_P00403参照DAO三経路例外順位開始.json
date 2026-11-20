@@ -1,0 +1,67 @@
+{
+  "eventId": "PGPT-20261008-6847",
+  "groupId": "p00403-runref-three-owned-sql-sources",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T14:21:45.625000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 71,
+      "remainingPercent": 29,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "p00403-runref-three-owned-sql-sources",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "p00403-runref-three-owned-sql-sources",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P004-03"
+    ],
+    "managementWorkIds": [
+      "WBS-P004-03/2"
+    ],
+    "source": "ba74fcddac2bb8454cece1829397e8cbe2c4d5bc",
+    "productionCoreMain": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40914-p00403-run-reference-combined-close-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.16,
+      "base": 0.48,
+      "high": 0.95
+    },
+    "groupCapPp": 1.25,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1330_F02標準SDK三物理依存継続点.json",
+        "sha256": "96f84751abb63f5db80ca16235d09c580b01a69d1c51554dba1cb63bc8570a79"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40270-p00403-run-reference-physical-lineage-v1/manifest.json",
+        "sha256": "f54169aae04cfd7af607bfc1f11da82fdd5133477e8e0032d71b8466e37f4125"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38688-f02-run-reference-jdbc-owner-independent-v1/manifest.json",
+        "sha256": "78f34f3d56273bc732a7fe579f017bb6dbaac39f7d728bf19bd0a0077c7aac1e"
+      },
+      {
+        "path": "evidence/01_PT/004_NK-DAT-001/447_WBS66参照DAO純JDBC単体仕様.md",
+        "sha256": "bbff30ba4b39920569871b7aff72b4ff0e23b1bbc7473c8e52b82ed6b4458c0c"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "元RRF-PURE001–008は成功済み。SSC063/448/461の直接close・元Errorと既知SQL固定診断。借用合成JDBCのみ。",
+    "endCondition": "新RRF-PURE-009のみ。本文と二closeを同時失敗させ、3つの優先順位、元Errorのidentity、row→statement一回とborrowed接続非変更を独立確認。",
+    "workScope": "既存の合成Testと指名閉包だけ。当候補Mainは不変。原DB/原本/native/署名/全451や旧8試験の再演なし。"
+  }
+}

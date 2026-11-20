@@ -24,7 +24,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
-/** NK-DAT-001; DAT009/OPS009/UI251/SS332; RRF-PURE-001..008; no database or native calls. */
+/** NK-DAT-001; DAT009/OPS009/UI251/SS332; RRF-PURE-001..009; no database or native calls. */
 final class RunReferenceRepositoryPureJdbcTest {
   private static final String STATEMENT_CLOSE = "statement.close";
   private static final String ROW_GET_OBJECT = "row.getObject";
@@ -212,6 +212,41 @@ final class RunReferenceRepositoryPureJdbcTest {
       if (edge == 2) sql.setNextException(new SQLException("next", fatal));
       fixture.fail(ROW_NEXT, 1, sql);
       assertSame(fatal, assertThrows(AssertionError.class, () -> fixture.read(RUN)));
+      fixture.closed();
+    }
+  }
+
+  @Test
+  void combinedReadAndCloseSqlFailuresKeepFirstFatalAndReleaseBothResources() {
+    var bodyFatal = new AssertionError("read");
+    var rowFatal = new LinkageError("row close");
+    var statementFatal = new AssertionError("statement close");
+    record Expected(boolean fatalInRead, boolean fatalInRow, Error first, int redactedSuppressed) {}
+    var scenarios =
+        List.of(
+            new Expected(true, true, bodyFatal, 1),
+            new Expected(false, true, rowFatal, 1),
+            new Expected(false, false, statementFatal, 0));
+    for (Expected scenario : scenarios) {
+      var fixture = new Fixture();
+      var read = new SQLException("read provider");
+      if (scenario.fatalInRead()) read.initCause(bodyFatal);
+      var rowClose = new SQLException("row provider");
+      if (scenario.fatalInRow()) rowClose.addSuppressed(rowFatal);
+      var statementClose = new SQLException("statement provider");
+      statementClose.setNextException(new SQLException("statement next", statementFatal));
+      fixture.fail(ROW_GET_OBJECT, 2, read);
+      fixture.fail(ROW_CLOSE, 1, rowClose);
+      fixture.fail(STATEMENT_CLOSE, 1, statementClose);
+
+      Error actual = assertThrows(Error.class, () -> fixture.read(RUN));
+      assertSame(scenario.first(), actual);
+      assertNull(actual.getCause());
+      assertEquals(scenario.redactedSuppressed(), actual.getSuppressed().length);
+      for (Throwable suppressed : actual.getSuppressed()) assertRedacted(suppressed);
+      assertEquals(
+          List.of(ROW_GET_OBJECT, ROW_CLOSE, STATEMENT_CLOSE),
+          fixture.events.subList(fixture.events.size() - 3, fixture.events.size()));
       fixture.closed();
     }
   }
