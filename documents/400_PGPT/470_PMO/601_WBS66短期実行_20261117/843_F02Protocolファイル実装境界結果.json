@@ -1,0 +1,158 @@
+{
+  "eventId": "PGPT-20261008-6363",
+  "groupId": "PGPT-WBS66-F02-PROTOCOL-FILESYSTEM-BOUNDARY-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T00:11:32.975000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 56,
+      "remainingPercent": 44,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F02-PROTOCOL-FILESYSTEM-BOUNDARY-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F02-PROTOCOL-FILESYSTEM-BOUNDARY-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-b"
+    ],
+    "source": "36df2e03f615b6c04f74bc87bfa63e75b705a107",
+    "productionCoreMain": "cb1411d94a1d97aedafe1af60400aaec0ae8c8e8",
+    "canonicalDesignSource": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "run": "PG40414-f02-protocol-file-before-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.25,
+      "base": 0.75,
+      "high": 1.45
+    },
+    "groupCapPp": 2.25,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/841_P01810公開Cleanup試験owner期限と継続点.json",
+        "sha256": "b2c6fe9d235851cd2141d5594484c0664bb2064d683ffb70086d56cac8b29ee3"
+      },
+      {
+        "path": "tools/quality/architecture/ModuleDependencyAudit.java",
+        "sha256": "3039f67a76fa8cf3c24ad1cb5594a4b30c234ed0b6084a022c66e960e60e36b2"
+      },
+      {
+        "path": "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md",
+        "sha256": "72427a8609a9c4753ff459cbfa92e3ad27669544c59d53eb9191b97b911c74d2"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40380-f02-current-four-jars-public-checkpoint-v1/manifest.json",
+        "sha256": "50ab463424ef12a32e3aa6f38ec38d3175876f33826e412e4371943a3a9116e2"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40382-f02-public-checkpoint-jars-independent-v1/manifest.json",
+        "sha256": "353ba7026a16916c98594134394879bc690a1001680e6f0f42c759aacb273f97"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40406-f02-controller-nested-independent-v1/manifest.json",
+        "sha256": "c533b3787df9e6221324eb6e185a235fc9819722042cd2321ba98fa77e6dcae5"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "SS311 3 explicitly keeps filesystem implementation in the file/storage layer. Protocol has no current direct file-specific call; existing ModuleDependencyAudit applies the file helper only to controllers.",
+    "endCondition": "Verify presence or absence of a real enforcement gap against synthetic callsites and current qualified Protocol JAR. If observed, retain precise allowed value/stream cases and update the gate.",
+    "workScope": "Bytecode static check only; fixtures not initialized or run. No real filesystem operation by fixture, no real API/Web JAR input or held class.",
+    "quotaAfter": {
+      "usedPercent": 56,
+      "remainingPercent": 44,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "e4f96225afdd27b6863bd28f138242440b4e555514e7d7b2226e7b42f455d13d",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T00:11:32.975000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 56,
+          "remainingPercent": 44,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T00:11:09.454840+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 56,
+      "remainingPercent": 44,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6362",
+    "attempt": 1,
+    "attemptResult": "PROTOCOL_FILESYSTEM_FOUR_STATIC_FALSE_NEGATIVES_CORRECTED_WITH_CURRENT_TYPED_PROOF",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40414-f02-protocol-file-before-v1/manifest.json",
+        "sha256": "ca5261dc16cf4eeaae8d91b9b675c35b22b6c05474ac7d050089e763ad7cc5b3"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40416-f02-protocol-file-after-v1/manifest.json",
+        "sha256": "82c7fcf1e8c2ad0862adf2ac031d4aed4c826ca56352641a054ce1e70ae17e3a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40418-f02-protocol-file-independent-v1/manifest.json",
+        "sha256": "5ae0d3bb791032419efb80a6f3500b7b60cc83e8486c4ce3e6fb857ff0b9b681"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40418-f02-protocol-file-independent-v1/secret-scan-disposition.json",
+        "sha256": "92355fdbd299a76b62cbcb08da11f8ec1176a1a418d887744de52e490ea1ae9c"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "Current Protocol 176 verified. Blocked Storage legacy JDBC and API/Web exact all-six, runtime and 451 remain.",
+      "Actual DB/native and core formal gates not accepted."
+    ],
+    "firstValidationPassed": 4,
+    "firstValidationDenominator": 8,
+    "retries": 1,
+    "scopeIsArchitectureToolNotProductTests": true,
+    "finalStaticChecks": 8,
+    "newStaticCanaries": 8,
+    "currentProtocolBinaryCount": 176,
+    "archivedTypeEdgesMatched": 2609,
+    "syntheticForbiddenFound": 4,
+    "allowedHeldUnaffected": 4,
+    "secretFindings": 0
+  }
+}
