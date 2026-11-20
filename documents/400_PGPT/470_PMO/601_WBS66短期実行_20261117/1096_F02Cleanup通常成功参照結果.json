@@ -1,0 +1,169 @@
+{
+  "eventId": "PGPT-20261008-6614",
+  "groupId": "wbs66-f02-cleanup-ordinary-success-reference-adapter",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T06:48:44.878000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 64,
+      "remainingPercent": 36,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "wbs66-f02-cleanup-ordinary-success-reference-adapter",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "wbs66-f02-cleanup-ordinary-success-reference-adapter",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a"
+    ],
+    "source": "e9c1c71f6202f8761cc2bb0ab1d918369b307075",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40740-f02-cleanup-ordinary-success-reference-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.4,
+      "base": 1.0,
+      "high": 2.4
+    },
+    "groupCapPp": 4,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1094_F03ExpiryAudit局所品質と継続点.json",
+        "sha256": "0896f55ef84d2cf2d2be8c19a9fff2952056a0b7cc64e5b11aacc971e589be4e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40734-f02-expiry-final-ownership-four-jars-v1/manifest.json",
+        "sha256": "851c768a0af7f19f592e5464bff08753f8d66612358230347c0eb4f06f2a89f2"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40738-f03-expiry-final-ownership-independent-v1/manifest.json",
+        "sha256": "43c78b23b9a2c4c905ac0d6687c05c82d9bbcde0f7a0a192f3a21bfb8e39cff1"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40702-f02-ssc461-current-roster-delta-v1/manifest.json",
+        "sha256": "9a5ff725f4c56eb0598e5b7f4ced99cc7e42eb850fffd9ab4e7227700e3a34ac"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "The approved SSC461 legacy calls include CleanupTerminalRepository.references overload. It only resolves normal successful references, with all data and JDBC ports in Java memory. Hold readRejected/readBackupUnavailable and actual acquisition/retirement.",
+    "endCondition": "Exact one adapter call moved, 2 independent ordinary tests on both package states, bound SQL and public ABI equal, own borrow unchanged; use public rationale and scoped coverage.",
+    "workScope": "Regular success-reference SQL path with fake Connection only. No failure-cohort reads/recovery, real DB, key, scheduler or service.",
+    "quotaAfter": {
+      "usedPercent": 64,
+      "remainingPercent": 36,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "9ce85c28a64e5f972710a949bb27f05bae2674313b5f11954d41bbd1262347da",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T06:48:44.878000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 64,
+          "remainingPercent": 36,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T06:48:01.341007+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 64,
+      "remainingPercent": 36,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6613",
+    "attempt": 1,
+    "attemptResult": "PASS_LOCAL_SUCCESS_REFERENCE_ONLY",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 2,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40742-f02-cleanup-success-reference-independent-v1/manifest.json",
+        "sha256": "a43c8b36a3ada63abdffc4c151e2c71b157df2e14f5114b55110838837e1f927"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40740-f02-cleanup-ordinary-success-reference-v1-after/manifest.json",
+        "sha256": "9db6870960e1a4fbad5abf950418fcb9747a6c9cd62896e1c11b8189d0ea8e3a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40740-f02-cleanup-ordinary-success-reference-v1-before/manifest.json",
+        "sha256": "d3b238edba5e23851effe666696651ca970f1eb8d917353466a32333e310f839"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "legacy Storage edge and remaining upper 51 (checked against later roster)",
+      "actual six product and project 451",
+      "other CleanupTerminal operations remain scope held",
+      "QA-056/057 and operational endpoints"
+    ],
+    "firstVerificationPass": 1,
+    "firstVerificationDenominator": 1,
+    "scopeBeforeCases": 2,
+    "scopeAfterCases": 2,
+    "movedCallSites": 1,
+    "candidateProductionSource": "517a23cddc9f3883550942f6fa90a4256ef39b73",
+    "priorFourJarsSource": "0e3c521c59cf379f3a948d6ce9fd6e7b08b3b6d6",
+    "newSelectedTests": 2,
+    "coverage": {
+      "LINE": {
+        "covered": 59,
+        "missed": 329
+      },
+      "METHOD": {
+        "covered": 14,
+        "missed": 55
+      },
+      "CLASS": {
+        "covered": 3,
+        "missed": 3
+      },
+      "BRANCH": {
+        "covered": 21,
+        "missed": 211
+      },
+      "INSTRUCTION": {
+        "covered": 269,
+        "missed": 1606
+      }
+    },
+    "publicAbiSame": true,
+    "scopeLimitedToOrdinarySuccessfulReferences": true
+  }
+}
