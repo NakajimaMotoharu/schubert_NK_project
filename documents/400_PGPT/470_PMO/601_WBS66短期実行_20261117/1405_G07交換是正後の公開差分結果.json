@@ -1,0 +1,127 @@
+{
+  "eventId": "PGPT-20261008-6921",
+  "groupId": "g07-current-public-delta-after-handler",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T15:42:51.989000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 73,
+      "remainingPercent": 27,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "g07-current-public-delta-after-handler",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "g07-current-public-delta-after-handler",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-G07"
+    ],
+    "managementWorkIds": [],
+    "source": "accd0bae36c32c5a60e7e5da2ca6c37dff0f9421",
+    "productionCoreMain": "62142212de26387dd718026a1c839fbb1dc6b2a9",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40962-g07-current-public-delta-after-handler-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.05,
+      "base": 0.16,
+      "high": 0.35
+    },
+    "groupCapPp": 0.55,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1403_F03現API交換一型静的継続点.json",
+        "sha256": "75c05206e0bfdadd218b9b03ef13cb0b38ad6038077045fad31a31dc58c90372"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40930-g07-current-public-patch-interval-v1/manifest.json",
+        "sha256": "16af69017c98ca46c7a46902409b593caf9c259536ba16512b421842e1cbfe06"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5481_g07_current_public_patch_only.py",
+        "sha256": "d1bcb460dd6f4c788e529282a79377a3df07bce2853885eb04b1f3b319f8b477"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "PG40930次cursor以後の公開済み区間だけ。現HEADとtracking一致。",
+    "endCondition": "公開テキストの増分秘密scanとbaseline tree保全。未追跡／原本／旧区間を含めない。",
+    "workScope": "公開Git patchのみ。既PTと既scanは未再演。",
+    "quotaAfter": {
+      "usedPercent": 73,
+      "remainingPercent": 27,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "279385a1dd2dbfb577195640de7ef932b8e8decb6a9bb5b9695d6bc5e338ab4a",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T15:42:51.989000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 73,
+          "remainingPercent": 27,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T15:42:23.390194+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 73,
+      "remainingPercent": 27,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6920",
+    "attempt": 1,
+    "attemptResult": "PUBLIC_INCREMENT_SCANNED",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40962-g07-current-public-delta-after-handler-v1/manifest.json",
+        "sha256": "324c998f179cedd7bd73fb6b1b98521babf8db230ca3ddb3a0f5e3cb53412950"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "G07全公開範囲・全451",
+      "P018-08現source native及び認証済みownerと真正終端"
+    ],
+    "scannedCommits": 18,
+    "scannedPaths": 119,
+    "detectedSecrets": 0,
+    "scanBase": "9fbd416ffd10538caeaa179ba21145465eebcc16",
+    "scanHead": "accd0bae36c32c5a60e7e5da2ca6c37dff0f9421",
+    "baselineTree": "cd377044e4ca058ea219ca6a2fec82159559c72c"
+  }
+}
