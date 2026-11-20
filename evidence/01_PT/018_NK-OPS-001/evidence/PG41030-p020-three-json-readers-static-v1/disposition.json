@@ -1,0 +1,147 @@
+{
+  "source": "2a2d1922a38780c3ef95df0dc7c057f916a870ca",
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41030-p020-three-json-readers-static-v1/manifest.json",
+    "sha256": "ec2ec437856f5e7dde37e7203cde05c49810549a1699468d03964864972525f9"
+  },
+  "prior": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41012-p020-two-json-readers-static-v2/disposition.json",
+      "sha256": "4a9d9b33a56cef50e7122080246dc53384bca82824f4e582ff3212d7be38a7cb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41000-p020-single-json-reader-static-v1/disposition.json",
+      "sha256": "30579369e399805fc6e0c0c770ac3d13a4cb0a66d3fcaedf3f3cc758511923e1"
+    }
+  ],
+  "raw": [
+    {
+      "file": "ArtifactComparator.java",
+      "rule": "UseConcurrentHashMap",
+      "line": 173,
+      "sourceLine": "Map<String, JsonNode> currentByCase = new TreeMap<>();",
+      "previousLine": 171,
+      "method": "compare",
+      "applicable": false,
+      "reason": "Unchanged ordered map local to this method. The only change in this Java file is the JSON reader option."
+    },
+    {
+      "file": "ArtifactComparator.java",
+      "rule": "UseConcurrentHashMap",
+      "line": 174,
+      "sourceLine": "Map<String, JsonNode> nkByCase = new TreeMap<>();",
+      "previousLine": 172,
+      "method": "compare",
+      "applicable": false,
+      "reason": "Unchanged ordered map local to this method. The only change in this Java file is the JSON reader option."
+    },
+    {
+      "file": "ArtifactComparator.java",
+      "rule": "UseConcurrentHashMap",
+      "line": 240,
+      "sourceLine": "Map<String, JsonNode> rules = new LinkedHashMap<>();",
+      "previousLine": 238,
+      "method": "compare",
+      "applicable": false,
+      "reason": "Unchanged ordered map local to this method. The only change in this Java file is the JSON reader option."
+    },
+    {
+      "file": "ArtifactComparator.java",
+      "rule": "UseConcurrentHashMap",
+      "line": 492,
+      "sourceLine": "Map<String, Path> files = new TreeMap<>();",
+      "previousLine": 490,
+      "method": "artifactFiles",
+      "applicable": false,
+      "reason": "Unchanged ordered map local to this method. The only change in this Java file is the JSON reader option."
+    },
+    {
+      "file": "GateCli.java",
+      "rule": "UseConcurrentHashMap",
+      "line": 167,
+      "sourceLine": "Map<String, Object> actual = new LinkedHashMap<>();",
+      "previousLine": 166,
+      "method": "verifySource",
+      "applicable": false,
+      "reason": "Unchanged ordered map local to this method. The only change in this Java file is the JSON reader option."
+    },
+    {
+      "file": "GateCli.java",
+      "rule": "UseConcurrentHashMap",
+      "line": 263,
+      "sourceLine": "Map<String, Object> result = new LinkedHashMap<>();",
+      "previousLine": 262,
+      "method": "preflight",
+      "applicable": false,
+      "reason": "Unchanged ordered map local to this method. The only change in this Java file is the JSON reader option."
+    },
+    {
+      "file": "GateCli.java",
+      "rule": "UseConcurrentHashMap",
+      "line": 314,
+      "sourceLine": "Map<String, Object> result = new LinkedHashMap<>();",
+      "previousLine": 313,
+      "method": "compareCurrent",
+      "applicable": false,
+      "reason": "Unchanged ordered map local to this method. The only change in this Java file is the JSON reader option."
+    },
+    {
+      "file": "GateCli.java",
+      "rule": "UseConcurrentHashMap",
+      "line": 385,
+      "sourceLine": "Map<String, Object> result = new LinkedHashMap<>();",
+      "previousLine": 384,
+      "method": "report",
+      "applicable": false,
+      "reason": "Unchanged ordered map local to this method. The only change in this Java file is the JSON reader option."
+    },
+    {
+      "file": "GateCli.java",
+      "rule": "UseConcurrentHashMap",
+      "line": 556,
+      "sourceLine": "Map<String, Object> manifest = new LinkedHashMap<>();",
+      "previousLine": 555,
+      "method": "promoteCurrent",
+      "applicable": false,
+      "reason": "Unchanged ordered map local to this method. The only change in this Java file is the JSON reader option."
+    },
+    {
+      "file": "GateCli.java",
+      "rule": "UseConcurrentHashMap",
+      "line": 627,
+      "sourceLine": "Map<String, String> result = new TreeMap<>();",
+      "previousLine": 626,
+      "method": "prefixed",
+      "applicable": false,
+      "reason": "Unchanged ordered map local to this method. The only change in this Java file is the JSON reader option."
+    },
+    {
+      "file": "GateCli.java",
+      "rule": "UseConcurrentHashMap",
+      "line": 633,
+      "sourceLine": "Map<String, String> result = new TreeMap<>();",
+      "previousLine": 632,
+      "method": "fileHashes",
+      "applicable": false,
+      "reason": "Unchanged ordered map local to this method. The only change in this Java file is the JSON reader option."
+    },
+    {
+      "file": "GateContractValidator.java",
+      "rule": "UseConcurrentHashMap",
+      "line": 132,
+      "sourceLine": "Map<String, Object> metrics = new LinkedHashMap<>();",
+      "previousLine": 130,
+      "method": "validate",
+      "applicable": false,
+      "reason": "Unchanged ordered map local to this method. The only change in this Java file is the JSON reader option."
+    }
+  ],
+  "actualPmdExit": [
+    4,
+    4,
+    4
+  ],
+  "applicable": 0,
+  "unclassified": 0,
+  "suppressionChanges": 0
+}

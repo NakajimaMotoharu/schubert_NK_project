@@ -945,3 +945,7 @@ NK-CHR-001、UI264、SS355 G01／G04／G05、WBS-P020-01.03/2、ArtifactComparat
 ### F03コンパイラ非推奨対照の正式Test ID
 
 WBS-F03/2-2、SS354、451、PT-F03-COMPILER-004、BUG-3445／YKT-2754。PG40978の非推奨対照は当004へ対応。001は元NullAway正常の識別子。[正本補足](../../../evidence/01_PT/018_NK-OPS-001/5555_F03製品コンパイラTestID訂正.md) [訂正](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41022-f03-compiler-control-trace-correction-v1/manifest.json)。
+
+### P020比較JSON項目名一意性
+
+NK-CHR-001、UI264、SS355 G01/G04/G05、PT-CHR-SYN007／PT-CHR-COMPARE-FRAME001／PT-CHR-VERIFY-FRAME001、BUG-3446／YKT-2755。既定義3件へ観点を追加。 [仕様](../../../evidence/01_PT/018_NK-OPS-001/5556_P020比較JSON項目名一意性仕様.md) [結果](../../../evidence/01_PT/018_NK-OPS-001/5557_P020比較JSON項目名一意性結果.md)。
