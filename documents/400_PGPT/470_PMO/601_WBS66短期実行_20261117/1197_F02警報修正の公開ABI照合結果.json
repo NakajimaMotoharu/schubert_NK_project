@@ -1,0 +1,134 @@
+{
+  "eventId": "PGPT-20261008-6714",
+  "groupId": "PGPT-WBS66-F02-TIMED-ALERT-PUBLIC-ABI-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T11:29:03.206000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 68,
+      "remainingPercent": 32,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F02-TIMED-ALERT-PUBLIC-ABI-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F02-TIMED-ALERT-PUBLIC-ABI-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a",
+      "WBS-C07"
+    ],
+    "source": "ce03dd2ecf506a6afce441f7d8af3a554c75c26e",
+    "productionCoreMain": "da20ad7753279ae4e8017593866502d3341ec0e5",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40808-f02-timed-alert-public-abi-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.35,
+      "high": 0.8
+    },
+    "groupCapPp": 1.2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1195_G07と現候補の継続点.json",
+        "sha256": "2d0b76553210a89b7d81785229ad4dbf094d89f6679ba1c28e577b97b0dc1ba3"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40798-timed-alert-pending-recovery-before-v1/manifest.json",
+        "sha256": "a650a3ecf3dc938bea257b653bbe3c610567d2cd075d8bc78ac8ebcd88e51d36"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40800-f03-timed-alert-static-v1/manifest.json",
+        "sha256": "65a9b48a1c6ffcbc388ad994f6cba6a01022e03e70892e2972b00adc2f5c062c"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40802-f02-current-four-package-v1/manifest.json",
+        "sha256": "b00a0ae678c6a2d7cc23fb9106222b79cf0e655140298546d3b71c1d95e8a4b3"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "C07の変更8Mainを同sourceの13固定入力として許可済み。前後の公開JVM署名は未照合。",
+    "endCondition": "旧517a23cd・候補da20ad77の実生成25物理について、class集合、公表署名とdescriptorの独立差分を取得。",
+    "workScope": "前後の同13Javaとその生成物だけ。全製品JAR、保留classfile、実環境・PTの再演なし。",
+    "quotaAfter": {
+      "usedPercent": 68,
+      "remainingPercent": 32,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "119f08c2460e98778cb655518d7790bd1d81e8ef7ca80f8cdb7d3bf293b59dea",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T11:29:03.206000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 68,
+          "remainingPercent": 32,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T11:28:30.130313+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 68,
+      "remainingPercent": 32,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6713",
+    "attempt": 1,
+    "attemptResult": "同一閉包25物理で公開JVM descriptor差0、byte差は変更八class。",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40808-f02-timed-alert-public-abi-v1/manifest.json",
+        "sha256": "fb4f2c1a91f87db43bfbf3abdb062fa03071cf0e462e2cf511ca3214f2cb9a9e"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "F02のAPI/Webと全六",
+      "451、Root11、raw全指標",
+      "C07実監視"
+    ],
+    "abiCompileCount": 2,
+    "successfulProductCasesReexecuted": 0,
+    "publicSignatures": 25,
+    "publicDifferences": 0,
+    "classByteChanges": 8
+  }
+}
