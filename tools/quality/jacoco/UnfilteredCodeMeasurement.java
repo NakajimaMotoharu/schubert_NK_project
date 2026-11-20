@@ -6,7 +6,9 @@
  */
 package org.jacoco.core.internal.analysis;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
@@ -17,7 +19,10 @@ import org.jacoco.core.analysis.ICounter;
 import org.jacoco.core.analysis.ICoverageNode;
 import org.jacoco.core.analysis.IMethodCoverage;
 import org.jacoco.core.data.ExecutionData;
+import org.jacoco.core.data.ExecutionDataReader;
 import org.jacoco.core.data.ExecutionDataStore;
+import org.jacoco.core.data.ExecutionDataWriter;
+import org.jacoco.core.data.SessionInfo;
 import org.jacoco.core.internal.data.CRC64;
 import org.jacoco.core.internal.flow.ClassProbesAdapter;
 import org.jacoco.core.internal.flow.ClassProbesVisitor;
@@ -35,13 +40,13 @@ public final class UnfilteredCodeMeasurement {
   private UnfilteredCodeMeasurement() {}
 
   public static void main(String[] args) throws IOException {
-    boolean lineDeficits = args.length > 0 && args[0].equals("--line-deficits");
-    int execIndex = lineDeficits ? 1 : 0;
+    boolean originalExec = args.length > 0 && args[0].equals("--strict-original-exec");
+    int optionCount = originalExec ? 1 : 0;
+    boolean lineDeficits = args.length > optionCount && args[optionCount].equals("--line-deficits");
+    int execIndex = optionCount + (lineDeficits ? 1 : 0);
     if (args.length < execIndex + 2)
       throw new IllegalArgumentException("exec and explicit class files required");
-    var loader = new ExecFileLoader();
-    loader.load(Path.of(args[execIndex]).toFile());
-    ExecutionDataStore data = loader.getExecutionDataStore();
+    ExecutionDataStore data = executionData(Path.of(args[execIndex]), originalExec);
     Set<String> measuredNames = new HashSet<>();
     for (int index = execIndex + 1; index < args.length; index++) {
       byte[] bytes = Files.readAllBytes(Path.of(args[index]));
@@ -82,6 +87,63 @@ public final class UnfilteredCodeMeasurement {
                 + counters(method));
         if (lineDeficits) printLineDeficits(coverage.getName(), method);
       }
+    }
+  }
+
+  private static ExecutionDataStore executionData(Path file, boolean original) throws IOException {
+    if (!original) {
+      var loader = new ExecFileLoader();
+      loader.load(file.toFile());
+      return loader.getExecutionDataStore();
+    }
+    try (var input = new BufferedInputStream(Files.newInputStream(file))) {
+      return new OriginalExecutionReader(input).load();
+    }
+  }
+
+  /** Validate an original stream before emitting any coverage rows. */
+  private static final class OriginalExecutionReader extends ExecutionDataReader {
+    private static final String REQUIRED_SESSION = "single ordered execution session required";
+
+    private final ExecutionDataStore records = new ExecutionDataStore();
+    private boolean headerSeen;
+    private boolean sessionSeen;
+
+    private OriginalExecutionReader(InputStream input) {
+      super(input);
+      setSessionInfoVisitor(this::visitSession);
+      setExecutionDataVisitor(this::visitExecution);
+    }
+
+    private ExecutionDataStore load() throws IOException {
+      read(); // The JaCoCo file reader consumes all ordinary blocks up to EOF.
+      if (!sessionSeen) throw new IOException(REQUIRED_SESSION);
+      return records;
+    }
+
+    @Override
+    protected boolean readBlock(byte kind) throws IOException {
+      if (kind == ExecutionDataWriter.BLOCK_HEADER) {
+        if (headerSeen) throw new IOException("duplicate execution header");
+        headerSeen = true;
+      }
+      return super.readBlock(kind);
+    }
+
+    private void visitSession(SessionInfo session) {
+      if (sessionSeen
+          || session.getStartTimeStamp() < 0
+          || session.getDumpTimeStamp() < session.getStartTimeStamp()) {
+        throw new IllegalArgumentException(REQUIRED_SESSION);
+      }
+      sessionSeen = true;
+    }
+
+    private void visitExecution(ExecutionData record) {
+      if (records.get(record.getId()) != null) {
+        throw new IllegalArgumentException("duplicate execution class ID");
+      }
+      records.put(record);
     }
   }
 
