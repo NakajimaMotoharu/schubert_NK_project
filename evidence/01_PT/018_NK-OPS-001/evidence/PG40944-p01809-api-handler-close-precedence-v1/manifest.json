@@ -1,0 +1,194 @@
+{
+  "actualExit": 0,
+  "source": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+  "startEvent": "PGPT-20261008-6893",
+  "terminalAtUTC": "2026-11-20T15:15:00.494093+00:00",
+  "testId": "APIMHTTP024",
+  "fixture": {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricHttpHandlerTest.java",
+    "sha256": "9130687e7903418eef6fe511829726942c86e4843e2f2c46797974c778a2d45b"
+  },
+  "independentSpec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/5508_API監視応答の所有解放仕様.md",
+    "sha256": "39cd1984b0c8b88660049c0248c69742cdaa1b9671dfa63c58732fa56edbd126"
+  },
+  "previousRun": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40942-p01809-api-memory-handler23-v2/manifest.json",
+    "sha256": "feba116ad7becb50983d7b23bc4e7634ad2b206c6f911230a44ce7de79ffb634"
+  },
+  "stages": [
+    {
+      "stage": "format",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricHttpHandlerTest.java"
+      ],
+      "exitCode": 0
+    },
+    {
+      "stage": "checkstyle",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricHttpHandlerTest.java"
+      ],
+      "exitCode": 0
+    },
+    {
+      "stage": "compile",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "-implicit:none",
+        "-sourcepath",
+        "",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-commons/1.17.1/micrometer-commons-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-observation/1.17.1/micrometer-observation-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-registry-prometheus/1.17.1/micrometer-registry-prometheus-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/prometheus/prometheus-metrics-config/1.7.0/prometheus-metrics-config-1.7.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/prometheus/prometheus-metrics-core/1.7.0/prometheus-metrics-core-1.7.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/prometheus/prometheus-metrics-exposition-formats/1.7.0/prometheus-metrics-exposition-formats-1.7.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/prometheus/prometheus-metrics-exposition-textformats/1.7.0/prometheus-metrics-exposition-textformats-1.7.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/prometheus/prometheus-metrics-model/1.7.0/prometheus-metrics-model-1.7.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/prometheus/prometheus-metrics-tracer-common/1.7.0/prometheus-metrics-tracer-common-1.7.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/hdrhistogram/HdrHistogram/2.2.2/HdrHistogram-2.2.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/zaxxer/HikariCP/7.1.0/HikariCP-7.1.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/PG40802-f02-current-four-package-v1/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+        "-d",
+        "/dev/shm/pg40944-e9ig_a2s/classes",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiCustomMetricPayload.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistration.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiJvmMetrics.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiMetricCatalog.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContext.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiMetricScrape.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSource.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetrics.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiSystemMetrics.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ExactDurationSupport.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/package-info.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiMetricHttpHandler.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiServiceMetricBinding.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiDbPoolMetricBinding.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricObservation.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OutboxRowsMetricRecorder.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OutboxAgeMetricRecorder.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricCollector.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/persistence/OutboxObservationRepository.java",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricHttpHandlerTest.java",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricObservationTest.java"
+      ],
+      "exitCode": 0
+    },
+    {
+      "stage": "unit",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Djava.io.tmpdir=/dev/shm/pg40944-e9ig_a2s",
+        "-Dprometheus.config=/dev/shm/pg40944-e9ig_a2s/empty-prometheus.properties",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/dev/shm/pg40944-e9ig_a2s/unit.exec,sessionid=PG40944-API-HANDLER-CLOSE-024,append=false",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-ansi-colors",
+        "--fail-if-no-tests",
+        "--class-path",
+        "/dev/shm/pg40944-e9ig_a2s/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-commons/1.17.1/micrometer-commons-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-observation/1.17.1/micrometer-observation-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-registry-prometheus/1.17.1/micrometer-registry-prometheus-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/prometheus/prometheus-metrics-config/1.7.0/prometheus-metrics-config-1.7.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/prometheus/prometheus-metrics-core/1.7.0/prometheus-metrics-core-1.7.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/prometheus/prometheus-metrics-exposition-formats/1.7.0/prometheus-metrics-exposition-formats-1.7.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/prometheus/prometheus-metrics-exposition-textformats/1.7.0/prometheus-metrics-exposition-textformats-1.7.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/prometheus/prometheus-metrics-model/1.7.0/prometheus-metrics-model-1.7.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/prometheus/prometheus-metrics-tracer-common/1.7.0/prometheus-metrics-tracer-common-1.7.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/hdrhistogram/HdrHistogram/2.2.2/HdrHistogram-2.2.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/zaxxer/HikariCP/7.1.0/HikariCP-7.1.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/PG40802-f02-current-four-package-v1/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+        "--select-method",
+        "dev.codex.schubert.nk.api.monitoring.ApiMetricHttpHandlerTest#apimhttp024OwnedCloseFailureKeepsThePrimaryWriteOutcome",
+        "--reports-dir",
+        "/dev/shm/pg40944-e9ig_a2s/reports"
+      ],
+      "exitCode": 0
+    },
+    {
+      "stage": "compile_raw",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "-d",
+        "/dev/shm/pg40944-e9ig_a2s",
+        "/dev/shm/pg40944-e9ig_a2s/UnfilteredCodeMeasurement.java"
+      ],
+      "exitCode": 0
+    },
+    {
+      "stage": "raw",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/dev/shm/pg40944-e9ig_a2s:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+        "/dev/shm/pg40944-e9ig_a2s/unit.exec",
+        "/dev/shm/pg40944-e9ig_a2s/classes/dev/codex/schubert/nk/api/monitoring/ApiMetricHttpHandler.class"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "counts": {
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "rawCounters": [
+    {
+      "kind": "INSTRUCTION",
+      "missed": 19,
+      "covered": 86
+    },
+    {
+      "kind": "BRANCH",
+      "missed": 5,
+      "covered": 3
+    },
+    {
+      "kind": "LINE",
+      "missed": 6,
+      "covered": 20
+    },
+    {
+      "kind": "COMPLEXITY",
+      "missed": 4,
+      "covered": 3
+    },
+    {
+      "kind": "METHOD",
+      "missed": 0,
+      "covered": 3
+    },
+    {
+      "kind": "CLASS",
+      "missed": 0,
+      "covered": 1
+    }
+  ],
+  "runPins": {
+    "execSha256": "73fa4b52d440b3eee31fd4121dc702263657776e251a23d69dee2e185f470b2f",
+    "classSha256": "5462ceb1181927983a674b5041c7efde8279259376243ebf6db3c9b56ff66885",
+    "crc64": "6c1adb9544dfd646",
+    "session": "PG40944-API-HANDLER-CLOSE-024",
+    "junitSha256": "5aaa7902edbde56e0c31019d75e8f12fbc6bc6e21f0c47603b3e82b49781239a",
+    "table": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40944-p01809-api-handler-close-precedence-v1/unfiltered.tsv",
+      "sha256": "1d0d832092f445128a901b36ed11ea81ea063bd8c3ded0b6327fa06d35dfd097"
+    }
+  },
+  "existingTestsRerun": 0,
+  "actualExternalActions": 0,
+  "whole451": false,
+  "formalDelta": 0
+}

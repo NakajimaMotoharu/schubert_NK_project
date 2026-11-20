@@ -1,0 +1,65 @@
+{
+  "eventId": "PGPT-20261008-6893",
+  "groupId": "p01809-api-memory-handler-owned-close",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T15:13:52.368000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 73,
+      "remainingPercent": 27,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "p01809-api-memory-handler-owned-close",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "p01809-api-memory-handler-owned-close",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P018-09"
+    ],
+    "managementWorkIds": [],
+    "source": "8a37a1815c22826afd6c2ca6365a14760c2c46f4",
+    "productionCoreMain": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40944-p01809-api-handler-close-precedence-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.36,
+      "high": 0.7
+    },
+    "groupCapPp": 0.9,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1376_P01809APIメモリmetric応答再資格継続点.json",
+        "sha256": "48de6e2f14449218d2be20c8b4685833230ad21696a321b30272fa7d185ce48a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40942-p01809-api-memory-handler23-v2/manifest.json",
+        "sha256": "feba116ad7becb50983d7b23bc4e7634ad2b206c6f911230a44ce7de79ffb634"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40942-p01809-api-memory-handler23-v2/raw-manifest.json",
+        "sha256": "51b915110d7ec1e993daa6a35fd16838fdb597975337b93cd32a31c42d2b2c51"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/1817_MetricHTTP_単体テスト仕様.md",
+        "sha256": "1a896edf5e6a99ca86422ddbdf90e573f3600794e2621c87f9ccb74556372f4f"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "PG40942で元23成立。handleにclose failureを注入する原caseはない。SS監視境界の所有とJava TWRの元失敗優先に従う。",
+    "endCondition": "新APIMHTTP024で正常本文後のclose失敗、本文とcloseの複合失敗に元例外・抑制・一回解放・既本文の可否を確認。",
+    "workScope": "元メモリexchangeに明示故障値のみ追加。製品なし、他23の試験再演、HTTP通信、他HOLDの変更なし。"
+  }
+}

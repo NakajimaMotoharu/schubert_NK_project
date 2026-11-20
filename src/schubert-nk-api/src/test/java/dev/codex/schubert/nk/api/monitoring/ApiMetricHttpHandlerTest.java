@@ -23,7 +23,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BooleanSupplier;
 import org.junit.jupiter.api.Test;
 
-/** 1817 APIMHTTP001..016: memory exchanges only, independent literal/byte oracle. */
+/** APIMHTTP001..024: memory exchanges only, independent literal/byte oracles. */
 final class ApiMetricHttpHandlerTest {
   private static final String GET_METHOD = "GET";
   private static final String READY_TRUE_SUFFIX = "1\n";
@@ -695,6 +695,7 @@ final class ApiMetricHttpHandlerTest {
     private final ByteArrayOutputStream output = new ByteArrayOutputStream();
     private IOException headerFailure;
     private IOException bodyFailure;
+    private RuntimeException closeFailure;
     private boolean closed;
     private int closeCalls;
     private int status;
@@ -735,6 +736,7 @@ final class ApiMetricHttpHandlerTest {
     public void close() {
       closed = true;
       closeCalls++;
+      if (closeFailure != null) throw closeFailure;
     }
 
     @Override
@@ -831,6 +833,35 @@ final class ApiMetricHttpHandlerTest {
       assertEquals(1, exchange.closeCalls);
     } finally {
       if (!exchange.closed) exchange.close();
+    }
+  }
+
+  @Test
+  void apimhttp024OwnedCloseFailureKeepsThePrimaryWriteOutcome() {
+    try (var context = standard()) {
+      var handler = new ApiMetricHttpHandler(context, () -> true);
+      var afterWrite = new Exchange(GET_METHOD, PATH);
+      var closeOnly = new IllegalStateException("fixture close after write");
+      afterWrite.closeFailure = closeOnly;
+      assertSame(
+          closeOnly, assertThrows(IllegalStateException.class, () -> handler.handle(afterWrite)));
+      response(afterWrite, 200, READY + READY_TRUE_SUFFIX, METRIC);
+
+      var afterFailure = new Exchange(GET_METHOD, PATH);
+      var write = new IOException("fixture write");
+      var cleanup = new IllegalStateException("fixture cleanup after failure");
+      afterFailure.bodyFailure = write;
+      afterFailure.closeFailure = cleanup;
+      var actual = assertThrows(IOException.class, () -> handler.handle(afterFailure));
+      assertSame(write, actual);
+      assertEquals(1, actual.getSuppressed().length);
+      assertSame(cleanup, actual.getSuppressed()[0]);
+      assertEquals(200, afterFailure.status);
+      assertEquals(1, afterFailure.headerCalls);
+      assertEquals(0, afterFailure.output.size());
+      assertTrue(afterFailure.closed);
+      assertEquals(1, afterFailure.closeCalls);
+      assertEquals(READY + READY_TRUE_SUFFIX, context.render(true));
     }
   }
 }

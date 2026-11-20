@@ -1,0 +1,81 @@
+{
+  "eventId": "PGPT-20261008-6895",
+  "wbsLeafIds": [
+    "WBS-P018-09"
+  ],
+  "managementWorkIds": [],
+  "workCategory": "SELECTED_TEST",
+  "source": "8a37a1815c22826afd6c2ca6365a14760c2c46f4",
+  "productionCoreMain": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+  "previousCheckpoint": "PGPT-20261008-6892",
+  "groupEvents": [
+    "PGPT-20261008-6894"
+  ],
+  "acceptedOriginal": 17,
+  "total": 190,
+  "coreAccepted": 0,
+  "coreTotal": 5,
+  "officialPtTests": 1964,
+  "officialPtScopes": 53,
+  "newFormalAcceptance": 0,
+  "effortRate": null,
+  "actualAllocatedPp": null,
+  "newProductTests": 1,
+  "recordedOwnedJobsInFlight": 0,
+  "ownedBackendJobsStartedHere": 0,
+  "modelObserved": null,
+  "reasoningObserved": null,
+  "speedObserved": null,
+  "outcomeEvidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40944-p01809-api-handler-close-precedence-v1/manifest.json",
+      "sha256": "f06293095b5c28a42fabdebae58b88c52b4e406a1db60446c1b3d13635cdee34"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40944-p01809-api-handler-close-precedence-v1/unfiltered.tsv",
+      "sha256": "1d0d832092f445128a901b36ed11ea81ea063bd8c3ded0b6327fa06d35dfd097"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricHttpHandlerTest.java",
+      "sha256": "9130687e7903418eef6fe511829726942c86e4843e2f2c46797974c778a2d45b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/5508_API監視応答の所有解放仕様.md",
+      "sha256": "39cd1984b0c8b88660049c0248c69742cdaa1b9671dfa63c58732fa56edbd126"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/input/5510_api_metric_close_failure_pt.py",
+      "sha256": "cd7af192af4d7d636752d826c4dba3d48f4bba542e1f317e13a0e27199deb528"
+    }
+  ],
+  "fullQuotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T15:15:39.021000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 73,
+      "remainingPercent": 27,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "quotaAfter": {
+    "usedPercent": 73,
+    "remainingPercent": 27,
+    "resetsAt": 1795445752,
+    "windowDurationMins": 10080
+  },
+  "sharedDeltaPp": 0,
+  "completedOriginalRowPricePp": 0,
+  "remainingCriteria": [
+    "P018-09 actual HTTP and monitor",
+    "A1-38.01 Valve and QA056",
+    "handler whole-run raw; no coverage merge",
+    "F03 whole 451"
+  ],
+  "nextEvidence": "F03の現23Mainは普通javacのみ。元のroot compiler/NullAwayで型付き検証できる独立範囲として先行入力照合。",
+  "testId": "APIMHTTP024",
+  "actualExternalActions": 0,
+  "prior23Rerun": 0
+}

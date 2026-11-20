@@ -1,0 +1,148 @@
+{
+  "eventId": "PGPT-20261008-6894",
+  "groupId": "p01809-api-memory-handler-owned-close",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T15:15:39.021000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 73,
+      "remainingPercent": 27,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "p01809-api-memory-handler-owned-close",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "p01809-api-memory-handler-owned-close",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P018-09"
+    ],
+    "managementWorkIds": [],
+    "source": "8a37a1815c22826afd6c2ca6365a14760c2c46f4",
+    "productionCoreMain": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40944-p01809-api-handler-close-precedence-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.36,
+      "high": 0.7
+    },
+    "groupCapPp": 0.9,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1376_P01809APIメモリmetric応答再資格継続点.json",
+        "sha256": "48de6e2f14449218d2be20c8b4685833230ad21696a321b30272fa7d185ce48a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40942-p01809-api-memory-handler23-v2/manifest.json",
+        "sha256": "feba116ad7becb50983d7b23bc4e7634ad2b206c6f911230a44ce7de79ffb634"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40942-p01809-api-memory-handler23-v2/raw-manifest.json",
+        "sha256": "51b915110d7ec1e993daa6a35fd16838fdb597975337b93cd32a31c42d2b2c51"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/1817_MetricHTTP_単体テスト仕様.md",
+        "sha256": "1a896edf5e6a99ca86422ddbdf90e573f3600794e2621c87f9ccb74556372f4f"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "PG40942で元23成立。handleにclose failureを注入する原caseはない。SS監視境界の所有とJava TWRの元失敗優先に従う。",
+    "endCondition": "新APIMHTTP024で正常本文後のclose失敗、本文とcloseの複合失敗に元例外・抑制・一回解放・既本文の可否を確認。",
+    "workScope": "元メモリexchangeに明示故障値のみ追加。製品なし、他23の試験再演、HTTP通信、他HOLDの変更なし。",
+    "quotaAfter": {
+      "usedPercent": 73,
+      "remainingPercent": 27,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "4af80d6e9af737aa98039868b74a314cc6bb62f7080f8f4d8145462f71b1c6e7",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T15:15:39.021000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 73,
+          "remainingPercent": 27,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T15:15:00.494093+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 73,
+      "remainingPercent": 27,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6893",
+    "attempt": 1,
+    "attemptResult": "API_CLOSE_PRECEDENCE_NEW_UNIT_PASS",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 1,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40944-p01809-api-handler-close-precedence-v1/manifest.json",
+        "sha256": "f06293095b5c28a42fabdebae58b88c52b4e406a1db60446c1b3d13635cdee34"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40944-p01809-api-handler-close-precedence-v1/unfiltered.tsv",
+        "sha256": "1d0d832092f445128a901b36ed11ea81ea063bd8c3ded0b6327fa06d35dfd097"
+      },
+      {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricHttpHandlerTest.java",
+        "sha256": "9130687e7903418eef6fe511829726942c86e4843e2f2c46797974c778a2d45b"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/5508_API監視応答の所有解放仕様.md",
+        "sha256": "39cd1984b0c8b88660049c0248c69742cdaa1b9671dfa63c58732fa56edbd126"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5510_api_metric_close_failure_pt.py",
+        "sha256": "cd7af192af4d7d636752d826c4dba3d48f4bba542e1f317e13a0e27199deb528"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "P018-09 actual HTTP and monitor",
+      "A1-38.01 Valve and QA056",
+      "handler whole-run raw; no coverage merge",
+      "F03 whole 451"
+    ],
+    "newCase": 1,
+    "preparationFailures": 0,
+    "testId": "APIMHTTP024",
+    "actualExternalActions": 0,
+    "prior23Rerun": 0
+  }
+}
