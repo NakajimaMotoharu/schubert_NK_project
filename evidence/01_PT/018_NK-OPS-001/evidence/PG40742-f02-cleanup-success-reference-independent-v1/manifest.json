@@ -1,0 +1,96 @@
+{
+  "actualExit": 0,
+  "beforeProduct": "0e3c521c59cf379f3a948d6ce9fd6e7b08b3b6d6",
+  "candidateMain": {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "sha256": "3e1780790085d15cf589f9a5c5984550cdae9230c836dc779c51a018cd85d2a2"
+  },
+  "test": {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalReferencesJdbcGraphTest.java",
+    "sha256": "9af2d7770cfeef3a00bd75c49267f259660aebf8d1fc821bcebb9d759e6bf246"
+  },
+  "scopedAfterTests": 2,
+  "beforeReferenceCases": 2,
+  "usualSuccessOnly": true,
+  "legacyCallsInOtherMethodsUnchanged": 2,
+  "exactCallMove": 1,
+  "publicAbiEqual": true,
+  "unchangedSqlLiterals": true,
+  "existingBranchCredentialPathsTouched": 0,
+  "localCounters": {
+    "LINE": {
+      "covered": 59,
+      "missed": 329
+    },
+    "METHOD": {
+      "covered": 14,
+      "missed": 55
+    },
+    "CLASS": {
+      "covered": 3,
+      "missed": 3
+    },
+    "BRANCH": {
+      "covered": 21,
+      "missed": 211
+    },
+    "INSTRUCTION": {
+      "covered": 269,
+      "missed": 1606
+    }
+  },
+  "physicalCount": 6,
+  "standaloneStatic": {
+    "format": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalReferencesJdbcGraphTest.java"
+      ]
+    },
+    "checkstyle": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "-o",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40742-f02-cleanup-success-reference-independent-v1/checkstyle.xml",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalReferencesJdbcGraphTest.java"
+      ]
+    }
+  },
+  "related": [
+    "SSC-461",
+    "BUG-3233",
+    "YKT-2680"
+  ],
+  "sourceProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40740-f02-cleanup-ordinary-success-reference-v1-before/manifest.json",
+      "sha256": "d3b238edba5e23851effe666696651ca970f1eb8d917353466a32333e310f839"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40740-f02-cleanup-ordinary-success-reference-v1-after/manifest.json",
+      "sha256": "9db6870960e1a4fbad5abf950418fcb9747a6c9cd62896e1c11b8189d0ea8e3a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40742-f02-cleanup-success-reference-independent-v1/checkstyle.xml",
+      "sha256": "d204f50e16c421dd59e1efc17ee13b391e42dfd51208909e63b4c36285139a4a"
+    }
+  ],
+  "formalDelta": 0,
+  "whole451": false,
+  "terminalAtUTC": "2026-11-20T06:48:01.341007+00:00"
+}

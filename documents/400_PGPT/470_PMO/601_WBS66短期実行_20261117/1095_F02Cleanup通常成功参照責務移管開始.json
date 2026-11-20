@@ -1,0 +1,67 @@
+{
+  "eventId": "PGPT-20261008-6613",
+  "groupId": "wbs66-f02-cleanup-ordinary-success-reference-adapter",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T06:45:42.198000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 64,
+      "remainingPercent": 36,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "wbs66-f02-cleanup-ordinary-success-reference-adapter",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "wbs66-f02-cleanup-ordinary-success-reference-adapter",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a"
+    ],
+    "source": "e9c1c71f6202f8761cc2bb0ab1d918369b307075",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40740-f02-cleanup-ordinary-success-reference-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.4,
+      "base": 1.0,
+      "high": 2.4
+    },
+    "groupCapPp": 4,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1094_F03ExpiryAudit局所品質と継続点.json",
+        "sha256": "0896f55ef84d2cf2d2be8c19a9fff2952056a0b7cc64e5b11aacc971e589be4e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40734-f02-expiry-final-ownership-four-jars-v1/manifest.json",
+        "sha256": "851c768a0af7f19f592e5464bff08753f8d66612358230347c0eb4f06f2a89f2"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40738-f03-expiry-final-ownership-independent-v1/manifest.json",
+        "sha256": "43c78b23b9a2c4c905ac0d6687c05c82d9bbcde0f7a0a192f3a21bfb8e39cff1"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40702-f02-ssc461-current-roster-delta-v1/manifest.json",
+        "sha256": "9a5ff725f4c56eb0598e5b7f4ced99cc7e42eb850fffd9ab4e7227700e3a34ac"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "The approved SSC461 legacy calls include CleanupTerminalRepository.references overload. It only resolves normal successful references, with all data and JDBC ports in Java memory. Hold readRejected/readBackupUnavailable and actual acquisition/retirement.",
+    "endCondition": "Exact one adapter call moved, 2 independent ordinary tests on both package states, bound SQL and public ABI equal, own borrow unchanged; use public rationale and scoped coverage.",
+    "workScope": "Regular success-reference SQL path with fake Connection only. No failure-cohort reads/recovery, real DB, key, scheduler or service."
+  }
+}

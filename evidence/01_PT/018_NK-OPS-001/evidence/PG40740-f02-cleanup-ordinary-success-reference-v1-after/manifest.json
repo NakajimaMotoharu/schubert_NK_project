@@ -1,0 +1,171 @@
+{
+  "actualExit": 0,
+  "state": "after",
+  "source": "e9c1c71f6202f8761cc2bb0ab1d918369b307075",
+  "preChangeProduction": "0e3c521c59cf379f3a948d6ce9fd6e7b08b3b6d6",
+  "main": {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "sha256": "3e1780790085d15cf589f9a5c5984550cdae9230c836dc779c51a018cd85d2a2"
+  },
+  "test": {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalReferencesJdbcGraphTest.java",
+    "sha256": "9af2d7770cfeef3a00bd75c49267f259660aebf8d1fc821bcebb9d759e6bf246"
+  },
+  "physical": {
+    "dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.class": "200e23c6fa5fd6e1aff5afc61780f5883b1d8f5b2521163f98f7479f24ca581c",
+    "dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository$Projection.class": "22ecc77c19041c95338b0aed303ea0e3e29534315cebe5f2cf2b6983c3f8af5c",
+    "dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository$RejectedSnapshot.class": "f67bfc551b345e6698f2b10b1889125c45963a1ee5c5d82351f895b43c0e2564",
+    "dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository$RejectedEntry.class": "13b74bd62a27d2e60077c30feecf721dfb7ac22b9f29ce988d655f867b27b7f8",
+    "dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository$Snapshot.class": "820d3f0d9b45d95b47a407575e1dc8d44c9cee16b91e7b98e681ab1364a8a468",
+    "dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository$Entry.class": "2e11a77e71576586b44d0febfbdaefa384141c638c8973aef6b83e83a3019aaf"
+  },
+  "dependencies": {
+    "dev/codex/schubert/nk/batch/repository/BatchRepositoryException.class": "391b1aac7be2dd58cf9c3dee11cdd12941417fa7d029513475dfffbe4a3d2cb1",
+    "dev/codex/schubert/nk/batch/repository/BatchRun.class": "5cb0c42832ea17425dbf60da6025f2c4783d687e665b18f6cd8e88abc399c909",
+    "dev/codex/schubert/nk/batch/repository/BatchStep.class": "06e90b35ca09ac687bfd480caac794fa7be6a47dff9db3d397e682f75f010b1c",
+    "dev/codex/schubert/nk/batch/repository/BatchStepAttempt.class": "d61f86c115e29d12da29964711253fcd3e8fc64b8cb2d263efd87702295ae547",
+    "dev/codex/schubert/nk/batch/repository/BatchStepResult.class": "d30ca3fc460ebcceb4daee963ab618f582adb9dfdd916e9daeb51f3207a77417",
+    "dev/codex/schubert/nk/batch/repository/BatchStepResult$Status.class": "08893a338b6e7ffab7272cd1789215001855261ec7ac0a4dafa92f41af5a3a27",
+    "dev/codex/schubert/nk/batch/repository/BatchStepResult$Reason.class": "5006eeb26f8c82ba35e7830649019b41125edae1d8e396cdd411fee2f82830a7",
+    "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.class": "f181015412f1f293e91c0eea24a3ac33127d5ef5015f3dc9fb73ac732e0cc009",
+    "dev/codex/schubert/nk/batch/repository/RunReferenceRepository.class": "dc394e1d15ba729bbecd4f895c264b3adb042233f8ac7d603cab68d6e91682bb",
+    "dev/codex/schubert/nk/batch/repository/RunReferences.class": "9cd7197824647e7ad066678a66a54bfdf196f0251027bebeb765b6babd8d8fe2",
+    "dev/codex/schubert/nk/batch/repository/SuccessRunLookup.class": "ba6a3cd7a9d176ed849112546d0ad7bf3aebc9d22a4527c0bfd834247adfc525",
+    "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class": "cc8265242a1cd41cc7c77b8e12185cbc387fb583d70e1d1171ba467cb0f3d552",
+    "dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Guard.class": "53f2b39f586ec6ee172b0e3009d46638a60ca8f1ce8ad442f497affa6cbd869b",
+    "dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame.class": "cf12980ffcb4982da0b9cd5425730825a5cd8762bfdcdc581aa3cf6ab18b46ea",
+    "dev/codex/schubert/nk/storage/StorageIoException.class": "85f86d702a139f126afdd72ca8e221583db824f159351ecd9f07b15fcc569c88",
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason.class": "a113bd839666ee3a4038dd3703af0cfb772282278cc6fbfe1e3cccf98286ffec"
+  },
+  "stages": {
+    "mainCompile": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-g",
+        "-cp",
+        "/dev/shm/pgpt-cterm-success-after-y3b4cal1/deps:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "-d",
+        "/dev/shm/pgpt-cterm-success-after-y3b4cal1/main",
+        "/dev/shm/pgpt-cterm-success-after-y3b4cal1/CleanupTerminalRepository.java"
+      ],
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40740-f02-cleanup-ordinary-success-reference-v1-after/mainCompile.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40740-f02-cleanup-ordinary-success-reference-v1-after/mainCompile.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "testCompile": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-g",
+        "-cp",
+        "/dev/shm/pgpt-cterm-success-after-y3b4cal1/main:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/dev/shm/pgpt-cterm-success-after-y3b4cal1/deps:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "-d",
+        "/dev/shm/pgpt-cterm-success-after-y3b4cal1/tests",
+        "/dev/shm/pgpt-cterm-success-after-y3b4cal1/CleanupTerminalReferencesJdbcGraphTest.java"
+      ],
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40740-f02-cleanup-ordinary-success-reference-v1-after/testCompile.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40740-f02-cleanup-ordinary-success-reference-v1-after/testCompile.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "unit": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40740-f02-cleanup-ordinary-success-reference-v1-after/jacoco.exec,sessionid=PG40740-CTERM-SUCCESS-AFTER,append=false,includes=dev.codex.schubert.nk.batch.repository.CleanupTerminalRepository*",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--disable-ansi-colors",
+        "--fail-if-no-tests",
+        "--class-path",
+        "/dev/shm/pgpt-cterm-success-after-y3b4cal1/tests:/dev/shm/pgpt-cterm-success-after-y3b4cal1/main:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/dev/shm/pgpt-cterm-success-after-y3b4cal1/deps:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "--reports-dir",
+        "/dev/shm/pgpt-cterm-success-after-y3b4cal1/reports",
+        "--select-class",
+        "dev.codex.schubert.nk.batch.repository.CleanupTerminalReferencesJdbcGraphTest"
+      ],
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40740-f02-cleanup-ordinary-success-reference-v1-after/unit.stdout",
+        "sha256": "e97fdddbacc8e0840a69b9c72010328824a50ffa3c17736ec24513f3e0278c21"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40740-f02-cleanup-ordinary-success-reference-v1-after/unit.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "abi": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-classpath",
+        "/dev/shm/pgpt-cterm-success-after-y3b4cal1/main",
+        "-public",
+        "dev.codex.schubert.nk.batch.repository.CleanupTerminalRepository"
+      ],
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40740-f02-cleanup-ordinary-success-reference-v1-after/abi.stdout",
+        "sha256": "9f53f93c467210cfd77ab1284baa4b646cab9cb85414464ee8636c418d44915c"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40740-f02-cleanup-ordinary-success-reference-v1-after/abi.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "unfiltered": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31432-generated-code-supplemental-tool-v1/toolclasses:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40740-f02-cleanup-ordinary-success-reference-v1-after/jacoco.exec",
+        "/dev/shm/pgpt-cterm-success-after-y3b4cal1/main/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository$Entry.class",
+        "/dev/shm/pgpt-cterm-success-after-y3b4cal1/main/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository$Projection.class",
+        "/dev/shm/pgpt-cterm-success-after-y3b4cal1/main/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository$RejectedEntry.class",
+        "/dev/shm/pgpt-cterm-success-after-y3b4cal1/main/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository$RejectedSnapshot.class",
+        "/dev/shm/pgpt-cterm-success-after-y3b4cal1/main/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository$Snapshot.class",
+        "/dev/shm/pgpt-cterm-success-after-y3b4cal1/main/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.class"
+      ],
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40740-f02-cleanup-ordinary-success-reference-v1-after/unfiltered.stdout",
+        "sha256": "b16758ced75f5c19f7895c1f03dda3a1e5fb8d4b272770b90811a2f9e0d8510c"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40740-f02-cleanup-ordinary-success-reference-v1-after/unfiltered.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "testCases": {
+    "ordinaryProviderErrorIsCataloguedAndTheBorrowedConnectionStaysOpen()": "pass",
+    "successfulReferenceQueryPreservesTheOriginalFatalCause()": "pass"
+  },
+  "inMemoryOnly": true,
+  "liveDb": false,
+  "failureCohortOperation": 0,
+  "whole451": false,
+  "formalDelta": 0,
+  "terminalAtUTC": "2026-11-20T06:47:27.783326+00:00"
+}

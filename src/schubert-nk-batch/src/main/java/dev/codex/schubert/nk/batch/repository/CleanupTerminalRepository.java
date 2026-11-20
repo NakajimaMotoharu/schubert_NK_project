@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.batch.repository;
 
+import dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph;
 import dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame;
 import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.IOException;
@@ -354,7 +355,7 @@ public final class CleanupTerminalRepository {
       check(run);
       return List.copyOf(references);
     } catch (SQLException known) {
-      StorageIoException.preserveFatal(known);
+      JdbcFailureGraph.preserveFatal(known);
       throw new BatchRepositoryException();
     }
   }
