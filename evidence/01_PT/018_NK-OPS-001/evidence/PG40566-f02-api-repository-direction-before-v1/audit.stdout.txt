@@ -1,0 +1,16 @@
+ARCHUNIT	1.4.2	18	18
+MODULE	api	12
+MODULE	batch	1
+MODULE	bootstrap	1
+MODULE	protocol	1
+MODULE	storage	1
+MODULE	web	2
+RULE	CONTROLLER_BOUNDARY	0
+RULE	FRAMEWORK_FENCES	0
+RULE	INTERNAL_OWNER	0
+RULE	MODULE_EDGES	1
+FINDING	MODULE_EDGES	dev.codex.schubert.nk.api.support.AnnotatedListPort	org.springframework.stereotype.Repository
+RULE	REPOSITORY_DIRECTION	2
+FINDING	REPOSITORY_DIRECTION	dev.codex.schubert.nk.api.monitoring.persistence.LiveCountPort	dev.codex.schubert.nk.api.application.audit.AuditService
+FINDING	REPOSITORY_DIRECTION	dev.codex.schubert.nk.api.persistence.SqlPort	dev.codex.schubert.nk.api.application.audit.AuditService
+INSPECTED	53	33
