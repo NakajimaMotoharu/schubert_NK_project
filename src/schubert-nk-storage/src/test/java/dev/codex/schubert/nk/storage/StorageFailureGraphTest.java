@@ -8,6 +8,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.IdentityHashMap;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
 
@@ -102,5 +105,61 @@ final class StorageFailureGraphTest {
                 }));
     assertNull(failure.getCause());
     assertEquals(0, failure.getSuppressed().length);
+  }
+
+  @Test
+  void injectedGraphVisitsEachNonFatalObjectOnceInBreadthFirstEdgeOrder() {
+    var cause = new IOException("public cause");
+    var firstSuppressed = new IOException("public first suppressed");
+    var secondSuppressed = new IOException("public second suppressed");
+    var extra = new IOException("public extra");
+    var root = new IOException("public root", cause);
+    root.addSuppressed(firstSuppressed);
+    root.addSuppressed(secondSuppressed);
+    var edges = new IdentityHashMap<Throwable, Throwable>();
+    edges.put(root, extra);
+    edges.put(cause, extra);
+    edges.put(firstSuppressed, root);
+    edges.put(extra, cause);
+    var visited = new ArrayList<Throwable>();
+
+    StorageIoException.preserveFatal(
+        root,
+        candidate -> {
+          visited.add(candidate);
+          return edges.get(candidate);
+        });
+
+    assertEquals(List.of(root, cause, firstSuppressed, secondSuppressed, extra), visited);
+    assertSame(cause, root.getCause());
+    assertEquals(List.of(firstSuppressed, secondSuppressed), List.of(root.getSuppressed()));
+    assertNull(extra.getCause());
+    assertEquals(0, extra.getSuppressed().length);
+  }
+
+  @Test
+  void injectedGraphStopsBeforeFatalOrLaterNodesCanInvokeTheEdge() {
+    var fatal = new LinkageError("public first fatal");
+    var root = new IOException("public root", fatal);
+    var deferred = new IOException("public later suppressed");
+    root.addSuppressed(deferred);
+    var alternative = new AssertionError("public later extra fatal");
+    var visited = new ArrayList<Throwable>();
+
+    var observed =
+        assertThrows(
+            LinkageError.class,
+            () ->
+                StorageIoException.preserveFatal(
+                    root,
+                    candidate -> {
+                      visited.add(candidate);
+                      return alternative;
+                    }));
+
+    assertSame(fatal, observed);
+    assertEquals(List.of(root), visited);
+    assertSame(fatal, root.getCause());
+    assertSame(deferred, root.getSuppressed()[0]);
   }
 }
