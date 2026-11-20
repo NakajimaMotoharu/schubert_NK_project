@@ -1,0 +1,139 @@
+{
+  "actualExit": 0,
+  "startEvent": "PGPT-20261008-6731",
+  "core": "da20ad7753279ae4e8017593866502d3341ec0e5",
+  "canonicalSS311": {
+    "path": "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md",
+    "revision": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "sha256": "422cc9febdcb165af7ceba1c58a53c39831d0458f9c8858095fcfe099b70680f"
+  },
+  "poms": [
+    {
+      "path": "pom.xml",
+      "sha256": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38"
+    },
+    {
+      "path": "src/schubert-nk-protocol/pom.xml",
+      "sha256": "f76b730fa1cb1b34a88182ca5b685ca14fb71361c037f9418f0895d2a3022d7d"
+    },
+    {
+      "path": "src/schubert-nk-storage/pom.xml",
+      "sha256": "d4ed59631b9ebf965db518fbe4b7894c2beb71ee3f7c1e9cdbf7b4241c8179c7"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/pom.xml",
+      "sha256": "174e3974a5fe17a226c8c43a0cd49ae70d395cb4f236168da07cd7482a67908c"
+    },
+    {
+      "path": "src/schubert-nk-batch/pom.xml",
+      "sha256": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495"
+    },
+    {
+      "path": "src/schubert-nk-api/pom.xml",
+      "sha256": "2aff7af3d90feaee1f6c09f7ad300627ed911e8372504fcfd383391429a58114"
+    },
+    {
+      "path": "src/schubert-nk-web/pom.xml",
+      "sha256": "9b6c47c3ab3ba0d105f41f081de10b2234af4653fdc371a8eacdf9cabb78761b"
+    }
+  ],
+  "declarations": {
+    "protocol": {
+      "compile": [],
+      "test": []
+    },
+    "storage": {
+      "compile": [],
+      "test": []
+    },
+    "bootstrap": {
+      "compile": [
+        "storage"
+      ],
+      "test": []
+    },
+    "batch": {
+      "compile": [
+        "bootstrap",
+        "storage"
+      ],
+      "test": [
+        [
+          "bootstrap",
+          "test-jar"
+        ]
+      ]
+    },
+    "api": {
+      "compile": [
+        "bootstrap",
+        "protocol",
+        "storage"
+      ],
+      "test": [
+        [
+          "bootstrap",
+          "test-jar"
+        ]
+      ]
+    },
+    "web": {
+      "compile": [
+        "bootstrap",
+        "protocol",
+        "storage"
+      ],
+      "test": [
+        [
+          "api",
+          "jar"
+        ],
+        [
+          "bootstrap",
+          "test-jar"
+        ]
+      ]
+    }
+  },
+  "characterizationReactorProject": "program/characterization",
+  "currentFourPackage": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40802-f02-current-four-package-v1/manifest.json",
+    "sha256": "b00a0ae678c6a2d7cc23fb9106222b79cf0e655140298546d3b71c1d95e8a4b3"
+  },
+  "currentPackagedModules": [
+    "batch",
+    "bootstrap",
+    "protocol",
+    "storage"
+  ],
+  "awaitingCurrentBuild": [
+    "api",
+    "web"
+  ],
+  "businessWebToApiCompileEdges": 0,
+  "webToApiTestOnly": true,
+  "legacyStorageJdbcSource": {
+    "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java",
+    "sha256": "d59870fcf8d4f7bf9ff4e0abc2e052efddd9a08e9e93efa39d1f15a97f7063cf"
+  },
+  "ssc461Reference": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40702-f02-ssc461-current-roster-delta-v1/manifest.json",
+    "sha256": "9a5ff725f4c56eb0598e5b7f4ced99cc7e42eb850fffd9ab4e7227700e3a34ac"
+  },
+  "historicalPhysicalFinding": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38580-f02-three-physical-library-boundaries-v1/manifest.json",
+    "sha256": "da44983bc855891dcb04a7ee6425627b9fc311c00b793dee1b7909ede05dd61a"
+  },
+  "replayedBuilds": 0,
+  "jarsOpened": 0,
+  "actualTypeBoundaryRuns": 0,
+  "wholeSixBuild": false,
+  "completeModuleBoundary": false,
+  "whole451": false,
+  "formalDelta": 0,
+  "terminalAtUTC": "2026-11-20T11:44:53.077132+00:00",
+  "runner": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/5445_f02_current_pom_boundary.py",
+    "sha256": "abf1becf62c0292a79f4ca92f95ae8dc76a66403c9555a09ef0e4fc5e95e77aa"
+  }
+}
