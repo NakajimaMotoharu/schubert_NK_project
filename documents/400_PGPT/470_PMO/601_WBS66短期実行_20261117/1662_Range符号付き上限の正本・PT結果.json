@@ -1,0 +1,153 @@
+{
+  "eventId": "PGPT-20261008-7177",
+  "groupId": "P00904-SignedRangeDesignPrecision",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T21:42:07.879000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 82,
+      "remainingPercent": 18,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "P00904-SignedRangeDesignPrecision",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "P00904-SignedRangeDesignPrecision",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P009-04"
+    ],
+    "managementWorkIds": [
+      "WBS-P009-04/2"
+    ],
+    "source": "74b9207f8549317e754ee2645676b7c19cb4cfe6",
+    "productionCoreMain": "6c2e8b027818c8dac0ed0f895edb85658e9c4ff1",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG41246",
+    "estimateAtGroupStartPp": {
+      "low": 0.3,
+      "base": 0.8,
+      "high": 1.5
+    },
+    "groupCapPp": 2.0,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1660_G07当Range・JDBC公開差分完了・次工程.json",
+        "sha256": "c64ccda19fd98e9d98dda6b88e47be30515595e610cf01bf8962086f1156d0c4"
+      },
+      {
+        "path": "documents/100_RD/120_機能要件/121_機能要件定義.md",
+        "sha256": "0b38b8f5755ff0b98e3202f23604ab0f481f4595321f1a9b82349ca85363f018"
+      },
+      {
+        "path": "documents/200_UI/220_画面・認証/223_現行機能画面設計.md",
+        "sha256": "db8c325e5d79f27a41ac5c92c815590d2434320ffcecd8dffd80953aa7c2aa1d"
+      },
+      {
+        "path": "documents/200_UI/260_引継ぎ・監査/264_現行互換性Characterization Test仕様.md",
+        "sha256": "0b0973e6e1e94858e840bc1b85df1daff35e3a0fe9f28ea12331823c2cbcf781"
+      },
+      {
+        "path": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+        "sha256": "20a5caaddf102186787680b06199821bebcf5522f65feebd41635d90ae228f12"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41204-range-unit-ascii-affected-v1/manifest.json",
+        "sha256": "c879718e0132f37d326ac917d29378479347d11bc58ba49b9050a28c703f3d10"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "FUN-006／UI223・237／DIF-012の現行互換とSS333 §10.1の数値表現を比較。CurrentのSpring Boot 3.3.5／Framework 6.1.14でsigned long decimal上限を静的確認。現PTはstart／suffix超過を拒否。",
+    "endCondition": "第2数値としてLong.MAX_VALUEとその直後の両入力を、製品既挙動と算術独立値で検証。新SSCを起票し、承認済み上位と製品挙動を保持した設計のみorigin/main反映。",
+    "workScope": "現行公開アプリsource/POMと公式sourceの読取、現NKの純parser JUnitだけ。HTTP稼働・実media/VM/DB/本物sessionや現行baseline変更なし。",
+    "quotaAfter": {
+      "usedPercent": 82,
+      "remainingPercent": 18,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "fbf28c665e8fe078d6f1d559576af37b7bc4c218bfc57b3b1668e31dbbe8f3be",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T21:42:07.879000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 82,
+          "remainingPercent": 18,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T21:41:38.016142+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 82,
+      "remainingPercent": 18,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-7176",
+    "attempt": 1,
+    "attemptResult": "同Mainの上限終点と次値を1PTで確認。番号重複を発見しPR443でRange SSC476へ訂正、既QA060/SSC475を保持。確定番号同Testを一回再資格。",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 1,
+    "newProductTests": 1,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41246-media-range-bounded-decimal-end-v1/manifest.json",
+        "sha256": "ebd498ab88efcfb7a6822f206531ce088d8cd6b5c869703bfcae84cb42a551b7"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41248-media-range-decimal-corrected-catalog-v1/manifest.json",
+        "sha256": "c4f8298602f254f6fd81272990dbb8b06aa0b63673f773b5986cd86cd521e297"
+      },
+      {
+        "path": "evidence/01_PT/009_NK-MED-001/4098_Range十進数上限の単体仕様・実行結果.md",
+        "sha256": "cc0178757ffe6a68221f5b4a0f7a4aae253f9ebad7302632f5b6144c0d91e2c2"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "実HTTP／CHR・WBS-P009-04全条件・451"
+    ],
+    "newDefinedCases": 1,
+    "requalificationCases": 1,
+    "numberCorrectionRework": 1,
+    "actualHttpOperations": 0,
+    "canonicalDesignAfter": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "rangeDesignIssue": "SSC-476",
+    "priorReservedIssue": "SSC-475",
+    "currentPr": 443,
+    "historicalPr": 442,
+    "branchSyncPreserved": true,
+    "productMainChanged": false
+  }
+}

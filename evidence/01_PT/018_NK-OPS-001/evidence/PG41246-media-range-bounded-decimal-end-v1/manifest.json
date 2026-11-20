@@ -1,0 +1,182 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-20T21:37:10.151601+00:00",
+  "productionCore": "6c2e8b027818c8dac0ed0f895edb85658e9c4ff1",
+  "run": "PG41246-media-range-bounded-decimal-end-v1",
+  "ssc": "SSC-475",
+  "testId": "PT-MED-RANGE-BOUND-001",
+  "cases": 1,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "source": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeDecimalLimitTest.java",
+    "sha256": "28ab80cddc342e834df6dcd64e16ad741775c9e25889f5dbfe9996fcafdd7b5d"
+  },
+  "stages": {
+    "format": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "../toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeDecimalLimitTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "checkstyle": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "../toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeDecimalLimitTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "df474c4ebc0d4939aec7bba737b5418ad9df6844e409f01b988b50d6398aab33",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compile": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "-d",
+        "/dev/shm/pgpt-range-decimal-limit-v3r5cqk0/classes",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/HttpByteRangeParser.java",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeDecimalLimitTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "junit": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Dfile.encoding=UTF-8",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/PG41246-media-range-bounded-decimal-end-v1/unit.exec,append=false,sessionid=PG41246-media-range-bounded-decimal-end-v1",
+        "-cp",
+        "/dev/shm/pgpt-range-decimal-limit-v3r5cqk0/classes:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "org.junit.platform.console.ConsoleLauncher",
+        "execute",
+        "--disable-banner",
+        "--details=summary",
+        "--fail-if-no-tests",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41246-media-range-bounded-decimal-end-v1/xml",
+        "--select-class",
+        "dev.codex.schubert.nk.web.media.HttpByteRangeDecimalLimitTest"
+      ],
+      "exit": 0,
+      "stdoutSha256": "762bcdcd33f9cf76ebbe2dd945149b2eb1047257467039e9c0a64aab78324732",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "prior": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41204-range-unit-ascii-affected-v1/manifest.json",
+    "sha256": "c879718e0132f37d326ac917d29378479347d11bc58ba49b9050a28c703f3d10"
+  },
+  "productionPhysicalSameAsEarlier": 5,
+  "originalProbeBinding": {
+    "dev/codex/schubert/nk/web/media/HttpByteRangeDecimalLimitTest": {
+      "crc64": "1a12c85fa6336922",
+      "probeCount": 9,
+      "hitProbeIds": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "missedProbeIds": []
+    },
+    "dev/codex/schubert/nk/web/media/HttpByteRangeParser": {
+      "crc64": "99ed5f7f9415a96e",
+      "probeCount": 37,
+      "hitProbeIds": [
+        4,
+        5,
+        7,
+        8,
+        9,
+        11,
+        12,
+        14,
+        17,
+        18,
+        23,
+        25,
+        26,
+        28,
+        31,
+        32,
+        33,
+        35,
+        36
+      ],
+      "missedProbeIds": [
+        0,
+        1,
+        2,
+        3,
+        6,
+        10,
+        13,
+        15,
+        16,
+        19,
+        20,
+        21,
+        22,
+        24,
+        27,
+        29,
+        30,
+        34
+      ]
+    }
+  },
+  "oracle": {
+    "maximum": 9223372036854775807,
+    "next": 9223372036854775808,
+    "total": 3,
+    "begin": 0,
+    "end": 2,
+    "inclusiveLength": 3
+  },
+  "originals": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41246-media-range-bounded-decimal-end-v1/unit.exec",
+      "sha256": "8c621c155eb4446b774cca4c206f39f3b03cbe476b5b6ef32caf802729a78cc1"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41246-media-range-bounded-decimal-end-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "86f91faa68ffcab3420f96b99b2a9e525aa0bc86eda20ce47d80bf03478f21ed"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41246-media-range-bounded-decimal-end-v1/terminal.json",
+      "sha256": "6868086995e7674956f73ad7274b8a962a59d6187356087940700d2f248227c0"
+    }
+  ],
+  "oldProductTestsRepeated": 0,
+  "actualMediaOperations": 0,
+  "whole451": false,
+  "formalDelta": 0
+}
