@@ -1,0 +1,86 @@
+{
+  "eventId": "PGPT-20261008-6763",
+  "wbsLeafIds": [
+    "WBS-P004-02"
+  ],
+  "managementWorkIds": [
+    "WBS-P004-02/2",
+    "WBS-P004-05/2",
+    "WBS-F03/2-1"
+  ],
+  "workCategory": "SELECTED_TEST",
+  "source": "eb69b564793e436f2dc661ac1d6e002b30ceff89",
+  "productionCoreMain": "cdb649a5f054bc2ceed72ef57e55605f14a590d1",
+  "previousCheckpoint": "1243",
+  "groupEvents": [
+    "PGPT-20261008-6762"
+  ],
+  "acceptedOriginal": 17,
+  "total": 190,
+  "coreAccepted": 0,
+  "coreTotal": 5,
+  "officialPtTests": 1964,
+  "officialPtScopes": 53,
+  "newFormalAcceptance": 0,
+  "effortRate": null,
+  "actualAllocatedPp": null,
+  "newProductTests": 1,
+  "recordedOwnedJobsInFlight": 0,
+  "ownedBackendJobsStartedHere": 0,
+  "modelObserved": "gpt-6.2-sol",
+  "reasoningObserved": null,
+  "speedObserved": null,
+  "outcomeEvidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40842-p00402-inspection-sql-cycle-raw-v1/manifest.json",
+      "sha256": "b6cfcde4f75ee961bb25039283d662f914c31d7c240f6f38d0305b33f04e8231"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40842-p00402-inspection-sql-cycle-raw-v1/unfiltered.tsv",
+      "sha256": "6f5ee638f1c97e21dd52cc30c02ed2b1c7518848def7f63324fc7f913a368cf5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40842-p00402-inspection-sql-cycle-raw-v1/coverage.xml",
+      "sha256": "0eb5047ec1e3bf9f34d6d47838cf2c16ad1321e2f3b540f20d38b356c4349b1a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/input/5455_inspection_summary_single_sql_raw.py",
+      "sha256": "d8357e1066b003256fc773b336a491c4c8de53cbc05a6e797b7f568694f5ce45"
+    },
+    {
+      "path": "evidence/01_PT/004_NK-DAT-001/454_P00402検査サマリー単独非fatal循環とraw単体仕様.md",
+      "sha256": "9bbd1f2afa10296a08de9d64437aaf89d022b925923486391c445900295d361a"
+    }
+  ],
+  "fullQuotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T12:16:25.583000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 69,
+      "remainingPercent": 31,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "quotaAfter": {
+    "usedPercent": 69,
+    "remainingPercent": 31,
+    "resetsAt": 1795445752,
+    "windowDurationMins": 10080
+  },
+  "sharedDeltaPp": null,
+  "completedOriginalRowPricePp": 0,
+  "remainingCriteria": [
+    "P004-02 actual Inbox protection and DB postconditions",
+    "P004-05 actual database roles and transactions",
+    "Same-source 451",
+    "YKT2359 overall"
+  ],
+  "nextEvidence": "BUG3416局所をP004-02/P004-05/F03の証跡へ返却。P004の実DB/Inboxや全451に依存しない別の通常条件へ継続。",
+  "qualificationScope": "InspectionSummaryRepository only",
+  "localBugClosed": "BUG-3416",
+  "actualDbOperations": 0,
+  "oldExecMerged": false
+}
