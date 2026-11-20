@@ -1,0 +1,79 @@
+{
+  "eventId": "PGPT-20261008-7085",
+  "groupId": "PGPT-WBS66-F03-BATCH-CURRENT-DIFF-TYPED-CLOSURE-20261121",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T19:17:14.276000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 79,
+      "remainingPercent": 21,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-BATCH-CURRENT-DIFF-TYPED-CLOSURE-20261121",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F03-BATCH-CURRENT-DIFF-TYPED-CLOSURE-20261121",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "source": "dce89eba0300cc6166586783ebb9bac2862e5bd7",
+    "productionCoreMain": "559f5b5945e82374e0843dcfae11a8d07faef1ea",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG41142-f03-batch-current-typed-delta-static-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.4,
+      "base": 0.9,
+      "high": 1.8
+    },
+    "groupCapPp": 3,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1569_F03現Batch許可型付き静的の差分継続点.json",
+        "sha256": "9cf1b5d42f77943b90ed87a161e7ce2913468a11a6fb043469910466a6e61dd7"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41140-f03-current-batch-admitted-typed-delta-v1/manifest.json",
+        "sha256": "f2156ae3c6cc696047e4db759781dd8278f4504abb4cee458c1c171e26dab2d5"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40482-f03-batch-current-admitted-java25-closure-v1/manifest.json",
+        "sha256": "a2a5e2dd87f9990dc5de4b4e4501eebd10772363c7ee47d5bfda350cd1a24e1e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40484-f03-batch-current-closed-typed-independent-v1/manifest.json",
+        "sha256": "cff33ec745b38d2b89febc1131f1923e31237dc3799c13b2f5a0c53d80ad7b7c"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41074-f02-current-alert-batch-maven-v1/manifest.json",
+        "sha256": "2373767cfeaf06ab0138b4ff584901bcded516b4f12067daeee3184df3ca16cb"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41070-f03-alert-owner-state-final-v1/manifest.json",
+        "sha256": "ef7ffcdc03a960dc3a2f2d5246029fa244fcfd18e920092a3f804a31f7e24095"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41072-f03-alert-owner-state-independent-v1/manifest.json",
+        "sha256": "ec299fcb068605c3cb58b629e7f945ff862dc09fad8956cbcb1cbb0c80b2d058"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "F03/2-2。既同物理199と現差分78。旧許可277に当警報Stateの既承認物理だけ追加。現旧三peerの同名許可入力とSDKを同定。",
+    "endCondition": "閉包外辺は実解析から除き根拠を保持。現既警報七証票を再利用し、影響対象だけでSpotBugs・解析数・終端・差分を採取。",
+    "workScope": "byte限定jdeps/SpotBugs。旧保留369・QA056の4型のclassを投入せず、製品JVM/Root等操作無し。"
+  }
+}
