@@ -84,4 +84,23 @@ final class StorageFailureGraphTest {
     assertEquals(1, third.getSuppressed().length);
     assertDoesNotThrow(() -> StorageIoException.preserveFatal(new IOException("public plain")));
   }
+
+  @Test
+  void injectedGraphRejectsNullInputsBeforeCallingTheEdge() {
+    var failure = new IOException("public wrapper");
+    var missingEdge =
+        assertThrows(
+            NullPointerException.class, () -> StorageIoException.preserveFatal(failure, null));
+    assertEquals("additional graph edge", missingEdge.getMessage());
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            StorageIoException.preserveFatal(
+                null,
+                candidate -> {
+                  throw new AssertionError("edge called for a missing failure");
+                }));
+    assertNull(failure.getCause());
+    assertEquals(0, failure.getSuppressed().length);
+  }
 }
