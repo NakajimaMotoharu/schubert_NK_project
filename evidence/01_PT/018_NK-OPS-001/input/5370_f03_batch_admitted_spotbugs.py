@@ -84,7 +84,9 @@ def main():
     assert all(pin(Path(path))["sha256"] == known_tools[path] for path in cmd[cmd.index("-cp")+1].split(":"))
     java = Path(cmd[0])
     env = {"PATH": "/usr/bin:/bin", "LANG": "C.UTF-8"}
-    out = (OPS/values["run"]).resolve()
+    prior_setup = OPS / values["run"] / "manifest.json"
+    assert not read(prior_setup)["spotbugsStarted"]
+    out = (OPS/"PG40482-f03-batch-current-admitted-java25-closure-v1").resolve()
     out.mkdir()
     spot_report = out / "spotbugs.xml"
     with TemporaryDirectory(dir="/dev/shm", prefix="pgpt-f03-closed-typed-batch-") as folder:
@@ -95,7 +97,8 @@ def main():
         archive_classes(peers, auxiliary)
         sdk_path = ":".join([str(peers), *tool_files])
         typed_receipt = UPPER["run"](out, "jdeps", [
-            java.with_name("jdeps"), "--ignore-missing-deps", "-verbose:class", "-filter:none",
+            java.with_name("jdeps"), "--multi-release", "25", "--ignore-missing-deps",
+            "-verbose:class", "-filter:none",
             "--class-path", sdk_path, all_batch,
         ], scratch, env)
         assert typed_receipt["actualExit"] == 0
@@ -133,7 +136,8 @@ def main():
                     {name:sha(body) for name,body in selected.items()},sort_keys=True).encode()),
                 missingFromClassStats=sorted(closed-observed), unexpectedClassStats=sorted(observed-closed),
                 rawFindings=findings, rawMissing=missing, analyzerErrors=errors,
-                evidence=dict(graph=pin(closure), rawXml=pin(spot_report) if spot_report.is_file() else None),
+                evidence=dict(graph=pin(closure), setup=pin(prior_setup),
+                              rawXml=pin(spot_report) if spot_report.is_file() else None),
                 priorBroadSpotBugsRerun=False, protectedClassBytesRead=0, actualProductTests=0,
                 realBackendActions=0, wholeBatchModuleAccepted=False, wholeF03Accepted=False, whole451Accepted=False,
                 stages=dict(typed=typed_receipt, spotbugs=execution), terminalAtUTC=COMMON["timestamp"]())
