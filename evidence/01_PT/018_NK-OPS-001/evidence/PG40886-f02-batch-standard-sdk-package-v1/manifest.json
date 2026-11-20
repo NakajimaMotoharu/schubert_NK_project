@@ -1,0 +1,104 @@
+{
+  "actualExit": 0,
+  "source": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+  "priorCore": "cdb649a5f054bc2ceed72ef57e55605f14a590d1",
+  "startEvent": "PGPT-20261008-6813",
+  "startedAtUTC": "2026-11-20T13:39:38.349292+00:00",
+  "terminalAtUTC": "2026-11-20T13:40:03.625264+00:00",
+  "sourceArchiveSha256": "1ad8b42ecb9f726a7a22b65a374bf100f396380c60af1138a093e30548919b76",
+  "changedMain": [
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BatchStandardMetricSource.java"
+  ],
+  "selectedMavenModules": [
+    "storage",
+    "bootstrap",
+    "batch"
+  ],
+  "metadataOnlyModules": [
+    "src/schubert-nk-api/pom.xml",
+    "src/schubert-nk-web/pom.xml",
+    "program/characterization/pom.xml",
+    "src/schubert-nk-protocol/pom.xml"
+  ],
+  "steps": {
+    "compile": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-pl",
+        "src/schubert-nk-batch",
+        "-am",
+        "compile"
+      ],
+      "beginUTC": "2026-11-20T13:39:38.374296+00:00",
+      "endUTC": "2026-11-20T13:40:01.708877+00:00",
+      "exit": 0,
+      "reactorSummary": [
+        "[INFO] schubert-nk ........................................ SUCCESS [  0.495 s]",
+        "[INFO] Schubert NK Storage ................................ SUCCESS [  4.286 s]",
+        "[INFO] Schubert NK Shared Bootstrap ....................... SUCCESS [  6.502 s]",
+        "[INFO] Schubert NK Batch .................................. SUCCESS [ 11.088 s]"
+      ],
+      "stdoutSha256": "570de6a7cb018df2c2d6b887a8af4a42fd339119cbeb52b0d1532aae33deb39f",
+      "stderrSha256": "05ed4976f99856c1417eead6c52058f5565d748a00ae7939fa02188545fafda4"
+    },
+    "jar": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-pl",
+        "src/schubert-nk-batch",
+        "org.apache.maven.plugins:maven-jar-plugin:3.4.1:jar"
+      ],
+      "beginUTC": "2026-11-20T13:40:01.708923+00:00",
+      "endUTC": "2026-11-20T13:40:03.615567+00:00",
+      "exit": 0,
+      "reactorSummary": [],
+      "stdoutSha256": "52d7efcdca061214cf8794c53bbc2436275c3ec967c2a9b67243ed9fa268da36",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "packaged": {
+    "batch": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40886-f02-batch-standard-sdk-package-v1/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+      "fileBytes": 1263794,
+      "sha256": "82d2a790431044454d5cd0839fd39c5c91793109260237c30b5e1e97890e0bdb"
+    }
+  },
+  "productTestsStarted": 0,
+  "whole451": false,
+  "priorSourceUnchangedLibraryReferences": {
+    "protocol": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40802-f02-current-four-package-v1/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+      "fileBytes": 299374,
+      "sha256": "9b9de96fb1043946dde9dcd9d2e53091a582e33679f6557bfaf08200d26bbeb4"
+    },
+    "storage": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40802-f02-current-four-package-v1/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+      "fileBytes": 111799,
+      "sha256": "e5be03a72a9cca548f68fc1ca7ee84ced8980dbea72162f58772215227be3ec0"
+    },
+    "bootstrap": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40802-f02-current-four-package-v1/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+      "fileBytes": 428819,
+      "sha256": "3de920f0fc7df4909b362fd25856b5b91e2517fa404cbe5756725544472887f7"
+    }
+  },
+  "approvedSingleClassComparison": {
+    "classPath": "dev/codex/schubert/nk/batch/monitoring/BatchStandardMetricSource.class",
+    "sha256": "806ec1988d799a9a0f97f214faa08609ccf9921053f0b779d65a2d57023ea052",
+    "matchesIndependentTypedAndScopedPt": true
+  },
+  "priorSourceUnchangedLibrariesPackagedAgain": 0,
+  "wholeSixBuild": false,
+  "jarStaticInvocations": 0,
+  "heldClassfilesProvidedToAnalyzers": 0,
+  "externalOperations": 0,
+  "formalDelta": 0
+}

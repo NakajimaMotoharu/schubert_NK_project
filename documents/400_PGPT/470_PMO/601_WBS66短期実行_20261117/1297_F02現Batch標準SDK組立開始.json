@@ -1,0 +1,67 @@
+{
+  "eventId": "PGPT-20261008-6813",
+  "groupId": "F02-current-batch-standard-sdk-package",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T13:39:19.772000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 70,
+      "remainingPercent": 30,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "F02-current-batch-standard-sdk-package",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "F02-current-batch-standard-sdk-package",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a"
+    ],
+    "source": "28a6649d112674c2220b71cce54b0fd0f869f0ea",
+    "productionCoreMain": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40886-f02-batch-standard-sdk-package-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.35,
+      "base": 0.9,
+      "high": 2.2
+    },
+    "groupCapPp": 2.7,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1296_G08監視SDK三ownerと削除query継続点.json",
+        "sha256": "4ca6ac327e9c752d21475a0291f674c756b852e99b98ac23205b80468fafbc23"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40840-f02-inspection-corrected-batch-package-v1/manifest.json",
+        "sha256": "04b2c3c8fe15caa5f2558fc306660d5f111f71f187d5d2b6791eadbdc53cbaba"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40882-f03-standard-sdk-fixed-receipt-v1/manifest.json",
+        "sha256": "6adca0588a3675b4c853b14a61a75873c9ec0bab1aa67186d16db09523792427"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40880-f03-standard-sdk-owners-typed-v1/public-manifest.json",
+        "sha256": "e1e47bf2c233acd231bce906fcae22643f6c7d9f6c36b128521d85f5cf942da8"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "PG40840で既実施のMaven Batch-only package。API/WebはPOMだけ。現候補の許可閉包はBatch Main一差。",
+    "endCondition": "現Batch artifact一つ、前回Storage/Bootstrap/Protocolの入力同一と参照、変更対象一classの当型付き・PT physical byte等値。",
+    "workScope": "F02-a Batch正規artifactと一物理照合だけ。全JAR静的、API/Web全build、実起動・F02/F03全体・451は別。"
+  }
+}
