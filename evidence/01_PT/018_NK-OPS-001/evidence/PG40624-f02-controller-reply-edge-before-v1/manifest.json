@@ -1,0 +1,174 @@
+{
+  "actualExit": 1,
+  "source": "73f38d2d8aa48dda0c1c49c1a9271a6c71914b54",
+  "productionCore": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+  "oldControls": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40586-f02-repository-declaration-after-v1/manifest.json",
+    "sha256": "55920996fd0a748f1544f20657716467f9c099cc60e801b7b3aef8a904546d6b"
+  },
+  "toolSha256": "1ed84f4858c328d834fc2d4580e2e5c777f7135cab432c598cb4fe3187b1b066",
+  "cases": [
+    {
+      "testId": "PT-F02-WEB-REPLY-001",
+      "origin": "dev.codex.schubert.nk.web.ui.DirectController",
+      "target": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClient",
+      "expected": true,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-WEB-REPLY-002",
+      "origin": "dev.codex.schubert.nk.web.ui.FieldController",
+      "target": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClient",
+      "expected": true,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-WEB-REPLY-003",
+      "origin": "dev.codex.schubert.nk.web.ui.NestedController$Inner",
+      "target": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClient$Port",
+      "expected": true,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-WEB-REPLY-004",
+      "origin": "dev.codex.schubert.nk.web.ui.SignatureController",
+      "target": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClient",
+      "expected": true,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-WEB-REPLY-005",
+      "origin": "dev.codex.schubert.nk.web.ui.OrderController",
+      "target": "dev.codex.schubert.nk.web.application.ReplyFacade",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-WEB-REPLY-006",
+      "origin": "dev.codex.schubert.nk.web.application.ReplyFacade",
+      "target": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClient",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-WEB-REPLY-007",
+      "origin": "dev.codex.schubert.nk.web.ui.IndependentController",
+      "target": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientSupport",
+      "expected": false,
+      "observed": false
+    }
+  ],
+  "matched": 3,
+  "originalControlsVerified": 0,
+  "inputPhysical": {
+    "dev.codex.schubert.nk.api.Anchor": "b691280932ab1ea13b256104687d5923f9e70e226c2fb31a2a49c11764c2269b",
+    "dev.codex.schubert.nk.batch.Anchor": "4dc370530233176eabdbadd79edf2966fd0a7e4afd3671b7a3114034c44eb9e3",
+    "dev.codex.schubert.nk.bootstrap.Anchor": "b7b4a06bb2e29b67f59b46320e8aee9074b1b5c32aa126ee928c13387e40199a",
+    "dev.codex.schubert.nk.protocol.Anchor": "af4c73c5e3cc60c38921bc6c9c810249e7a5f7d1f349f377ea0a4213c698df7c",
+    "dev.codex.schubert.nk.storage.Anchor": "3523fc5db14a0ccfea29f242e1ce59ff87542a25965a1d3274eb29de27f78042",
+    "dev.codex.schubert.nk.web.Anchor": "7a580ceef9ee6289fcfbef966085c3763ab5d6a6bfd5048cf1c6ddad770f3a15",
+    "dev.codex.schubert.nk.web.application.ReplyFacade": "acd629ce5a21c286281e73971c040a79e69ca51b0172c4665d7bbdcd308d8254",
+    "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClient$Port": "70f310252ff6185a5fadc771c492cea95c9a5658cf50b6fea5fbec3dd45b8d89",
+    "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClient": "c6561d010dede55c80ad912af3d6882f7c99207ade24ab2b0b365f9c9a724fcd",
+    "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientSupport": "544b38aaf78c4eb3f269443f3cfbc8557d50f6197800e9e978ef3b4f9cddcf08",
+    "dev.codex.schubert.nk.web.ui.DirectController": "7ac1bff7ce33e5d8cb02ceec0288cbc9ad16f3a9f5f3984d2f04932ea5b49bf9",
+    "dev.codex.schubert.nk.web.ui.FieldController": "f0550c0bb395bc1900b1242bb8a5582725113e1d05007e90da3794325429e953",
+    "dev.codex.schubert.nk.web.ui.IndependentController": "6210a322c004bde8d4cbb27efa1e8909a7b3e1d8905c919a5415010be22d5000",
+    "dev.codex.schubert.nk.web.ui.NestedController$Inner": "07ed0749af49ef0c1dde8d6097534eeac884ed4c9ab4ad211a2d3ccdf8afc731",
+    "dev.codex.schubert.nk.web.ui.NestedController": "a920882cf4161d7894af8118ecc81fe9bbfa38294370a4dfd17a7f4a2f8cdbd9",
+    "dev.codex.schubert.nk.web.ui.OrderController": "4f3e96c97f74e8db826667f0761b228bad7cb6487a4025e09e90ca79e4f71aa9",
+    "dev.codex.schubert.nk.web.ui.SignatureController": "1c7b9129ade91e093d8c528c725898d5236f8fbd05686c9538a76ff93a1134ac"
+  },
+  "receipts": {
+    "compile-tool": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40624-f02-controller-reply-edge-before-v1/compile-tool.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40624-f02-controller-reply-edge-before-v1/compile-tool.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "-d",
+        "/dev/shm/pgpt-web-boundary-ugb7fq32/tool",
+        "/dev/shm/pgpt-web-boundary-ugb7fq32/ModuleDependencyAudit.java"
+      ]
+    },
+    "compile-fixture": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40624-f02-controller-reply-edge-before-v1/compile-fixture.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40624-f02-controller-reply-edge-before-v1/compile-fixture.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-d",
+        "/dev/shm/pgpt-web-boundary-ugb7fq32/compiled",
+        "/dev/shm/pgpt-web-boundary-ugb7fq32/fixture/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClient.java",
+        "/dev/shm/pgpt-web-boundary-ugb7fq32/fixture/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClientSupport.java",
+        "/dev/shm/pgpt-web-boundary-ugb7fq32/fixture/dev/codex/schubert/nk/web/ui/DirectController.java",
+        "/dev/shm/pgpt-web-boundary-ugb7fq32/fixture/dev/codex/schubert/nk/web/ui/FieldController.java",
+        "/dev/shm/pgpt-web-boundary-ugb7fq32/fixture/dev/codex/schubert/nk/web/ui/NestedController.java",
+        "/dev/shm/pgpt-web-boundary-ugb7fq32/fixture/dev/codex/schubert/nk/web/ui/SignatureController.java",
+        "/dev/shm/pgpt-web-boundary-ugb7fq32/fixture/dev/codex/schubert/nk/web/ui/OrderController.java",
+        "/dev/shm/pgpt-web-boundary-ugb7fq32/fixture/dev/codex/schubert/nk/web/application/ReplyFacade.java",
+        "/dev/shm/pgpt-web-boundary-ugb7fq32/fixture/dev/codex/schubert/nk/web/ui/IndependentController.java",
+        "/dev/shm/pgpt-web-boundary-ugb7fq32/fixture/dev/codex/schubert/nk/protocol/Anchor.java",
+        "/dev/shm/pgpt-web-boundary-ugb7fq32/fixture/dev/codex/schubert/nk/storage/Anchor.java",
+        "/dev/shm/pgpt-web-boundary-ugb7fq32/fixture/dev/codex/schubert/nk/bootstrap/Anchor.java",
+        "/dev/shm/pgpt-web-boundary-ugb7fq32/fixture/dev/codex/schubert/nk/api/Anchor.java",
+        "/dev/shm/pgpt-web-boundary-ugb7fq32/fixture/dev/codex/schubert/nk/web/Anchor.java",
+        "/dev/shm/pgpt-web-boundary-ugb7fq32/fixture/dev/codex/schubert/nk/batch/Anchor.java"
+      ]
+    },
+    "audit": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40624-f02-controller-reply-edge-before-v1/audit.stdout.txt",
+        "sha256": "b8f6885a65c84ad35be13b528fc905e84107055caa645efe79d78dc554ded1eb"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40624-f02-controller-reply-edge-before-v1/audit.stderr.txt",
+        "sha256": "2c58b87a0350a39bb1c3b5f4891defeeb9a785e84aa11a466dc9ddb21253bf58"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/dev/shm/pgpt-web-boundary-ugb7fq32/tool:/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "ModuleDependencyAudit",
+        "api=/dev/shm/pgpt-web-boundary-ugb7fq32/api.jar",
+        "batch=/dev/shm/pgpt-web-boundary-ugb7fq32/batch.jar",
+        "bootstrap=/dev/shm/pgpt-web-boundary-ugb7fq32/bootstrap.jar",
+        "protocol=/dev/shm/pgpt-web-boundary-ugb7fq32/protocol.jar",
+        "storage=/dev/shm/pgpt-web-boundary-ugb7fq32/storage.jar",
+        "web=/dev/shm/pgpt-web-boundary-ugb7fq32/web.jar"
+      ]
+    }
+  },
+  "findings": 0,
+  "underlyingAuditExit": 0,
+  "productTests": 0,
+  "productJars": 0,
+  "wholeF02Accepted": false,
+  "whole451Accepted": false,
+  "terminalAtUTC": "2026-11-20T03:48:23.053746+00:00"
+}

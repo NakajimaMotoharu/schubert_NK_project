@@ -1,0 +1,67 @@
+{
+  "eventId": "PGPT-20261008-6525",
+  "groupId": "PGPT-WBS66-F02-WEB-CONTROLLER-REQUEST-REPLY-EDGE-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T03:47:37.342000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 61,
+      "remainingPercent": 39,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F02-WEB-CONTROLLER-REQUEST-REPLY-EDGE-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F02-WEB-CONTROLLER-REQUEST-REPLY-EDGE-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a"
+    ],
+    "source": "73f38d2d8aa48dda0c1c49c1a9271a6c71914b54",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40624-f02-controller-reply-edge-before-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.25,
+      "base": 0.65,
+      "high": 1.2
+    },
+    "groupCapPp": 1.8,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1005_F03公開設定二件再照合継続点.json",
+        "sha256": "76101631135290edee693d72ad2e7de0d0aaf0f0b67f4edbd2997b75232b7994"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40588-f02-repository-declaration-independent-v1/manifest.json",
+        "sha256": "e1a9cf5c9c19c3fb3fc42fdd7cd3633fe6435fcda79d5297fc7d4e3d2c45d768"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40586-f02-repository-declaration-after-v1/manifest.json",
+        "sha256": "55920996fd0a748f1544f20657716467f9c099cc60e801b7b3aef8a904546d6b"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40578-f02-real-protocol-storage-vendor-edge-audit-v1/manifest.json",
+        "sha256": "b9566774ad9ea8efd7a3d97a4ed1664688296a425178a68fd613f991a9a12aee"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "SS311 §5.2でControllerとWeb内部JmsRequestReplyClientの依存方向が明示。現監査は標準JDBC/JMS、Storageのみを型判定。",
+    "endCondition": "許可済み合成fixtureで誤受理/許可の対照と、必要なら局所修正、旧65対照を確認。",
+    "workScope": "手書き合成型と監査工具のみ。製品JAR・通信・保留scopeは使わない。"
+  }
+}
