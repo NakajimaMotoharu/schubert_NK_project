@@ -1,0 +1,67 @@
+{
+  "eventId": "PGPT-20261008-6650",
+  "groupId": "wbs66-f02-current-external-provider-origins",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T08:30:22.708000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 66,
+      "remainingPercent": 34,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "wbs66-f02-current-external-provider-origins",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "wbs66-f02-current-external-provider-origins",
+    "workAttributionKind": "SOURCE_REQUALIFICATION",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a"
+    ],
+    "source": "02fc6a81dc688ade82322a8923a9783e96076d31",
+    "productionCoreMain": "517a23cddc9f3883550942f6fa90a4256ef39b73",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40766-f02-current-four-external-providers-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.2,
+      "base": 0.5,
+      "high": 1.0
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1131_F03二変更の静的個別閉鎖と継続点.json",
+        "sha256": "7e1eb7960568e19742f1d7f58997dff091e06387455cc2e3b0a34aae45af2f20"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40750-f02-current-four-artifact-dependency-v1/manifest.json",
+        "sha256": "01c3d88eea68514b4a8821f92e013aef3093d8375ae136e9e17ee513ff1f6e64"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39622-f02-four-module-external-origins-delta-v1/manifest.json",
+        "sha256": "3154c4a69db949a14f725ea516fb22c08c41df33e173928b94567637ea293593"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40650-f02-current-six-model-handoff-v1/manifest.json",
+        "sha256": "b9cc9218bf02dc991927db35f965af65ee365fb81717b5bc78c0f0a8fb9f6e7d"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "PG40750 current four has 385 external out-of-classpath references. Prior 53 types provided by 10 public Maven jars were qualified for an older core. Identify exact pair equality and provider uniqueness on current pins.",
+    "endCondition": "Exact reference pair set, unchanged declared POM dependencies, candidate referenced JAVA types bound to safe Maven artifacts and provider membership with no unconfirmed or ambiguous origin.",
+    "workScope": "Saved jdeps output and read-only already pinned public Maven repository SDK metadata. No product classes beyond loaded text metadata, no loading third-party JVM code, no runtime or test starts."
+  }
+}
