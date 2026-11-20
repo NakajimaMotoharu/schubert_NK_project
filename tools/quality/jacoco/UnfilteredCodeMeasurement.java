@@ -143,6 +143,9 @@ public final class UnfilteredCodeMeasurement {
       if (records.get(record.getId()) != null) {
         throw new IllegalArgumentException("duplicate execution class ID");
       }
+      if (records.contains(record.getName())) {
+        throw new IllegalArgumentException("duplicate execution class name");
+      }
       records.put(record);
     }
   }
