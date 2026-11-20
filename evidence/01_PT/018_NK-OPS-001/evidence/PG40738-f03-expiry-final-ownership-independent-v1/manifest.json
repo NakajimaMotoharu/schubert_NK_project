@@ -1,0 +1,223 @@
+{
+  "actualExit": 0,
+  "candidateProductionSource": "0e3c521c59cf379f3a948d6ce9fd6e7b08b3b6d6",
+  "shape": "local ExpiryAudit 7 physical, 4 with bytecode",
+  "packageAndThirtyExecSameBytes": true,
+  "raw": {
+    "LINE": {
+      "covered": 284,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 52,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 4,
+      "missed": 0
+    },
+    "BRANCH": {
+      "covered": 190,
+      "missed": 0
+    },
+    "INSTRUCTION": {
+      "covered": 1416,
+      "missed": 0
+    }
+  },
+  "selectedActualTests": 30,
+  "zeroSpotFindingsErrorsMissing": true,
+  "pmdRawExit": 4,
+  "pmdRaw": 17,
+  "classifiedNonApplicable": 17,
+  "unclassified": 0,
+  "applicable": 0,
+  "suppressionsAdded": 0,
+  "staticDispositions": [
+    {
+      "rule": "AvoidCatchingGenericException",
+      "method": "stage",
+      "line": 190,
+      "column": 16,
+      "decision": "NOT_APPLICABLE_UNCHANGED_REQUIRED_TYPED_CONTRACT",
+      "reason": "SS332 record the primary for one close, then preserve the existing exception mapping",
+      "tests": "EXPPORT-J003/J010"
+    },
+    {
+      "rule": "AvoidCatchingGenericException",
+      "method": "stage",
+      "line": 196,
+      "column": 29,
+      "decision": "NOT_APPLICABLE_UNCHANGED_REQUIRED_TYPED_CONTRACT",
+      "reason": "SS332 record the primary for one close, then preserve the existing exception mapping",
+      "tests": "EXPPORT-J003/J010"
+    },
+    {
+      "rule": "AvoidCatchingGenericException",
+      "method": "finish",
+      "line": 259,
+      "column": 16,
+      "decision": "NOT_APPLICABLE_UNCHANGED_REQUIRED_TYPED_CONTRACT",
+      "reason": "SS332 record the primary for one close, then preserve the existing exception mapping",
+      "tests": "EXPPORT-J004/J010"
+    },
+    {
+      "rule": "AvoidCatchingGenericException",
+      "method": "finish",
+      "line": 265,
+      "column": 29,
+      "decision": "NOT_APPLICABLE_UNCHANGED_REQUIRED_TYPED_CONTRACT",
+      "reason": "SS332 record the primary for one close, then preserve the existing exception mapping",
+      "tests": "EXPPORT-J004/J010"
+    },
+    {
+      "rule": "AvoidCatchingGenericException",
+      "method": "closeUpdateStatement",
+      "line": 281,
+      "column": 14,
+      "decision": "NOT_APPLICABLE_UNCHANGED_REQUIRED_TYPED_CONTRACT",
+      "reason": "SS332 preserve primary identity and Java TWR suppressed-exception order",
+      "tests": "EXPPORT-J010"
+    },
+    {
+      "rule": "CloseResource",
+      "method": "read",
+      "line": 298,
+      "column": 13,
+      "decision": "NOT_APPLICABLE_UNCHANGED_REQUIRED_TYPED_CONTRACT",
+      "reason": "Nonnull alias denotes the same acquired object closed once in finally",
+      "tests": "EXPPORT-J001/J002"
+    },
+    {
+      "rule": "CloseResource",
+      "method": "read",
+      "line": 304,
+      "column": 15,
+      "decision": "NOT_APPLICABLE_UNCHANGED_REQUIRED_TYPED_CONTRACT",
+      "reason": "Nonnull alias denotes the same acquired object closed once in finally",
+      "tests": "EXPPORT-J001/J002"
+    },
+    {
+      "rule": "AvoidCatchingGenericException",
+      "method": "read",
+      "line": 329,
+      "column": 33,
+      "decision": "NOT_APPLICABLE_UNCHANGED_REQUIRED_TYPED_CONTRACT",
+      "reason": "SSC310 primary tracking and phase-specific unknown/SQL propagation",
+      "tests": "EXPPORT-J001/J002"
+    },
+    {
+      "rule": "AvoidCatchingGenericException",
+      "method": "read",
+      "line": 329,
+      "column": 52,
+      "decision": "NOT_APPLICABLE_UNCHANGED_REQUIRED_TYPED_CONTRACT",
+      "reason": "SSC310 primary tracking and phase-specific unknown/SQL propagation",
+      "tests": "EXPPORT-J001/J002"
+    },
+    {
+      "rule": "AvoidCatchingGenericException",
+      "method": "read",
+      "line": 335,
+      "column": 31,
+      "decision": "NOT_APPLICABLE_UNCHANGED_REQUIRED_TYPED_CONTRACT",
+      "reason": "SSC310 primary tracking and phase-specific unknown/SQL propagation",
+      "tests": "EXPPORT-J001/J002"
+    },
+    {
+      "rule": "AvoidCatchingGenericException",
+      "method": "read",
+      "line": 335,
+      "column": 50,
+      "decision": "NOT_APPLICABLE_UNCHANGED_REQUIRED_TYPED_CONTRACT",
+      "reason": "SSC310 primary tracking and phase-specific unknown/SQL propagation",
+      "tests": "EXPPORT-J001/J002"
+    },
+    {
+      "rule": "AvoidCatchingGenericException",
+      "method": "closeReadRows",
+      "line": 352,
+      "column": 29,
+      "decision": "NOT_APPLICABLE_UNCHANGED_REQUIRED_TYPED_CONTRACT",
+      "reason": "SSC310 close the acquired result set once and preserve the defined priority",
+      "tests": "EXPPORT-J002"
+    },
+    {
+      "rule": "AvoidCatchingGenericException",
+      "method": "closeReadRows",
+      "line": 352,
+      "column": 48,
+      "decision": "NOT_APPLICABLE_UNCHANGED_REQUIRED_TYPED_CONTRACT",
+      "reason": "SSC310 close the acquired result set once and preserve the defined priority",
+      "tests": "EXPPORT-J002"
+    },
+    {
+      "rule": "AvoidCatchingGenericException",
+      "method": "closeReadStatement",
+      "line": 362,
+      "column": 29,
+      "decision": "NOT_APPLICABLE_UNCHANGED_REQUIRED_TYPED_CONTRACT",
+      "reason": "SSC310 close the acquired statement after the result set and preserve priority",
+      "tests": "EXPPORT-J002"
+    },
+    {
+      "rule": "AvoidCatchingGenericException",
+      "method": "closeReadStatement",
+      "line": 362,
+      "column": 48,
+      "decision": "NOT_APPLICABLE_UNCHANGED_REQUIRED_TYPED_CONTRACT",
+      "reason": "SSC310 close the acquired statement after the result set and preserve priority",
+      "tests": "EXPPORT-J002"
+    },
+    {
+      "rule": "AvoidCatchingGenericException",
+      "method": "usingJdbc",
+      "line": 496,
+      "column": 14,
+      "decision": "NOT_APPLICABLE_UNCHANGED_REQUIRED_TYPED_CONTRACT",
+      "reason": "SSC304 preserve Java TWR sequencing in the existing helper",
+      "tests": "EXPPORT-P008"
+    },
+    {
+      "rule": "AvoidCatchingGenericException",
+      "method": "usingJdbc",
+      "line": 499,
+      "column": 16,
+      "decision": "NOT_APPLICABLE_UNCHANGED_REQUIRED_TYPED_CONTRACT",
+      "reason": "SSC304 preserve Java TWR sequencing in the existing helper",
+      "tests": "EXPPORT-P008"
+    }
+  ],
+  "noActualRuntimeOrDb": true,
+  "firstPostFailure": "BUG-3409 acquisition versus nonnull alias diagnostic location",
+  "sourceEvidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40736-f03-expiry-final-ownership-typed-v1/manifest.json",
+      "sha256": "2f1a697d9363804aaf2907dcda04982e8d420ae1cf988c2f364dfaa39ed53207"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40732-f03-expiry-ownership-independent-v1/manifest.json",
+      "sha256": "c5b1f768a9cd52828fb8321f74a2de13287ec3b3e62dfdf1e52690f7fd2b2796"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40730-f03-expiry-update-ownership-v1/manifest.json",
+      "sha256": "0f86bd44fadf2879f544990327aeab1ff55719b24f49c7fbdb8c8e8bcf6e6345"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+      "sha256": "001a0e2d7f22fe28fe746b96a13b58d83a4ce1c68f177330b59bc0bd74986a12"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40736-f03-expiry-final-ownership-typed-v1/pmd.xml",
+      "sha256": "e21db02021b86aaa9a5454c4b433f1ceafcabf70c4f5e5ce7ca952096359941e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40736-f03-expiry-final-ownership-typed-v1/spotbugs.xml",
+      "sha256": "b13dd9d8eec3088094092145f96ad18583de0e975cbc00a681d4dd9c24608323"
+    }
+  ],
+  "whole451": false,
+  "wholeF03": false,
+  "formalDelta": 0,
+  "terminalAtUTC": "2026-11-20T06:43:33.583681+00:00"
+}

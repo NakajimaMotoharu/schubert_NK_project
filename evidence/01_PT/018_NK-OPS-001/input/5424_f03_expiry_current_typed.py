@@ -6,6 +6,7 @@ import json
 import os
 from pathlib import Path
 import runpy
+import sys
 from tempfile import TemporaryDirectory
 from xml.etree import ElementTree as ET
 from zipfile import ZipFile
@@ -33,16 +34,17 @@ def pmd_sites(path, name):
                    for report in file.findall("p:violation", ns))
 
 
-def main():
-    start = read(next(PLAN.glob("1074_F03*")))
+def main(final_ownership):
+    start = read(next(PLAN.glob("1092_F03*" if final_ownership else "1074_F03*")))
     v = start["values"]
     assert all(pin(row["path"]) == row for row in v["oracleReferences"])
     packaged, unit, baseline_pmd, decisions, spot = (read(ref["path"]) for ref in v["oracleReferences"][1:])
     core = packaged["candidateProductionSource"]
     assert packaged["verify"]["focusedPhysicalByteEqual"] and unit["actualExit"] == 0
     assert not git("diff", "--name-only", core, v["source"], "--", "pom.xml", "src")
-    assert pin(TARGET) == unit["candidateSource"]
-    prior_tests = read(next(OPS.glob("PG40696-*-after/manifest.json")))
+    assert pin(TARGET) == unit["candidateMain" if final_ownership else "candidateSource"]
+    selected_glob = "PG40730-*/manifest.json" if final_ownership else "PG40696-*-after/manifest.json"
+    prior_tests = read(next(OPS.glob(selected_glob)))
     expected = prior_tests["physical"]
     javasource = git("show", f"{core}:{TARGET}")
     assert javasource == TARGET.read_bytes()
@@ -63,7 +65,8 @@ def main():
                 assert pin(staged)["sha256"] == expected[member]
                 allowed.writestr(member, data)
         dependencies = CONTRACT["make_classpath"](packaged["privateJars"], work / "allowed-deps")
-        assert dependencies == prior_tests["pinnedAllowedDependencies"]
+        prior_deps = read(next(OPS.glob("PG40696-*-after/manifest.json")))["pinnedAllowedDependencies"]
+        assert dependencies == prior_deps
         aux = work / "aux-list.txt"
         aux.write_text(f"{work / 'allowed-deps'}\n{JSPECIFY}\n")
         spot_args = spot["terminal"]["command"]
@@ -87,8 +90,9 @@ def main():
     expected_binary = {Path(name).with_suffix("").as_posix().replace("/", ".") for name in expected}
     reports = {key: len(list(view.iter(key))) for key in ("BugInstance", "Error", "MissingClass")}
     spot_complete = set(classes) == expected_binary and len(classes) == len(expected)
+    pmd_produced = stages["pmd"]["actualExit"] == (4 if new_raw else 0)
     actual_success = (stages["spotbugs"]["actualExit"] == 0 and not any(reports.values())
-                      and spot_complete and stages["pmd"]["actualExit"] == 4 and old_raw == new_raw)
+                      and spot_complete and pmd_produced and (final_ownership or old_raw == new_raw))
     result = dict(
         actualExit=0 if actual_success else 1, source=v["source"], candidateProductionCore=core,
         startEvent=start["eventId"], classCensus=sorted(classes), expectedPhysical=len(expected),
@@ -96,6 +100,7 @@ def main():
         rawPmdCurrent=new_raw.total(), rawPmdExactMultiset=old_raw == new_raw,
         newPmdDelta=[dict(site=key, count=count) for key, count in (new_raw - old_raw).items()],
         oldPmdMissing=[dict(site=key, count=count) for key, count in (old_raw - new_raw).items()],
+        candidatePmdItemsAwaitIndependentReview=final_ownership,
         preservedBatchClassification=decisions["assignedHere"], classpaths=dependencies,
         staticReports=[pin(sb), pin(pmd)], stages=stages, productTests=0, heldOperationsExecuted=0,
         wholeF03=False, whole451=False, formalDelta=0, terminalAtUTC=datetime.now(timezone.utc).isoformat(),
@@ -108,4 +113,5 @@ def main():
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    assert sys.argv[1:] in ([], ["final-ownership"])
+    raise SystemExit(main(bool(sys.argv[1:])))
