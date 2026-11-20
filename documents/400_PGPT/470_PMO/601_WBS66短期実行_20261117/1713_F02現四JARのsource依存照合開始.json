@@ -1,0 +1,76 @@
+{
+  "eventId": "PGPT-20261008-7228",
+  "groupId": "WBS66-F02-CURRENT-FOUR-PACKAGE-LINEAGE",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T23:22:33.320000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 84,
+      "remainingPercent": 16,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66-F02-CURRENT-FOUR-PACKAGE-LINEAGE",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "WBS66-F02-CURRENT-FOUR-PACKAGE-LINEAGE",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a",
+      "WBS-F02-b"
+    ],
+    "source": "bf37a3ead24c8967967531a695db59be1dc0d599",
+    "productionCoreMain": "62b239d4dad561da007e15a290f8a271a165dda9",
+    "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "run": "PG41322-f02-exact-four-package-lineage-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.1,
+      "base": 0.25,
+      "high": 0.65
+    },
+    "groupCapPp": 1,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1712_F03Bootstrap51分類・次現四JAR.json",
+        "sha256": "ae05331a79886fe1ac58e08510870d4dcdce861c0948aa7f829577b0efa62999"
+      },
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1523_F02警報差分Batch包装結果.json",
+        "sha256": "f84734116c0f88fd9a17f36d627e7d1d967aac5442ec3a8cc8d0e3ee9b7b318e"
+      },
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1577_F02現Batch許可物理の依存方向結果.json",
+        "sha256": "548319e44ea2f5d5b17eb45fd6444a45057def8279bb4f61dc7ed220f3511247"
+      },
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1699_Protocol現171・生四指標・型付き結果.json",
+        "sha256": "dd435ce4b138b7e2df02ea7f2cd8eadde11ada074ad0512d89369a32c30ba2df"
+      },
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1705_F03Storage25全物理の現静的証拠.json",
+        "sha256": "05ca9be354aec79580af8e60511f30fb7f804afcd60c3b99b71746f6c240c15e"
+      },
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1708_F03Bootstrap13物理・PMD47判定.json",
+        "sha256": "326ba07235473e1d756c51c674295614a9756903aeac209b580f01a45d13268f"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "WBS66 rows 582–583 and criteria contract/scope/reuse/quality; current Core candidate and four preserved independent package receipts.",
+    "endCondition": "Prove each live artifact against hash and exact source inputs. Where a changed upstream artifact was actually consumed, record the unmet edge and preserve the original proof.",
+    "workScope": "Host-only package metadata and Git blob comparison; no builds, target jobs, held class analysis or old PT replay."
+  }
+}
