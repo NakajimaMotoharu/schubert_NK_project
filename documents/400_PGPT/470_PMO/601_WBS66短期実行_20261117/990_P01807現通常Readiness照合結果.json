@@ -1,0 +1,136 @@
+{
+  "eventId": "PGPT-20261008-6510",
+  "groupId": "PGPT-WBS66-P01807-ORDINARY-READINESS-EXACT-CLASS-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T03:29:14.778000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 61,
+      "remainingPercent": 39,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P01807-ORDINARY-READINESS-EXACT-CLASS-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-P01807-ORDINARY-READINESS-EXACT-CLASS-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P018-07"
+    ],
+    "managementWorkIds": [
+      "WBS-P018-07/2"
+    ],
+    "source": "0c2fec7f8e023dac045e2c0e11d2dc5129cf0fbc",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40612-p01807-ordinary-readiness-lineage-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.45,
+      "high": 0.95
+    },
+    "groupCapPp": 1.5,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/988_G1301現Protocoltrace継続点.json",
+        "sha256": "6e603772de52c2564ecb7627dd4bb2fee4f62e273a46a8280550f8a61dced77f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37140-caddy20-independent-post-v1/manifest.json",
+        "sha256": "00d8b1216593c1d38b3e5306f5100e0af250520b94b9a857099ac8f4336a7101"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37196-service12-independent-post-v1/manifest.json",
+        "sha256": "0010a9b3d39e1dd9ca72fc59ca0948379f3663a5be2e9aabd4e14110f6dcaddc"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40442-p01807-caddy-public-typed-scope-limits-v1/manifest.json",
+        "sha256": "3fe90c83124f8934efe600a70eec9d01b364dac57c0f7d6bb1bdfd7167a6a6fb"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40498-schema-history-packaged-proof-recovered-v1/manifest.json",
+        "sha256": "bba0cb1781e36039e9014b8a7f27e4ab2354ef78283181a704bae5dba9fd9b0f"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "元Caddy20とService12は別sourceで成功済み。現候補との同一性を許可済み正CRCの製品型だけに限定。",
+    "endCondition": "現Batch/Storage JARと元個別SHA・CRC、元Testのsourceを結合し、閉包全体と実TLS等の未確認を明示。",
+    "workScope": "許可明示7型。Root・native・実認証型のclassfile読取や試験・サービスは行わない。",
+    "quotaAfter": {
+      "usedPercent": 61,
+      "remainingPercent": 39,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "c5fd14af7a306545c99cd13bb1487758bb4632f2a709ebf15288ff2d9ce7d603",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T03:29:14.778000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 61,
+          "remainingPercent": 39,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T03:28:24.983293+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 61,
+      "remainingPercent": 39,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6509",
+    "attempt": 1,
+    "attemptResult": "本物7型中5同一。Storage二差を当Caddyへ転用保留",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40612-p01807-ordinary-readiness-lineage-v1/manifest.json",
+        "sha256": "644b5b68811547c2b71a0bad43c432b94e51acdcc04399ed3a50b41c19a0180c"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "Storage二差の現普通PT",
+      "実Caddy TLSと真正親budget、root/native・全451"
+    ],
+    "actualRetainedJarTypes": 7,
+    "currentByteExact": 5,
+    "currentDifferent": 2,
+    "historicalCaddy20AndService12NotMerged": true,
+    "heldClassfileReads": 0
+  }
+}
