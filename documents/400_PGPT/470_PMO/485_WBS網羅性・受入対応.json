@@ -1,4 +1,61 @@
 {
+  "currentG1307StaticAdmissionCorrectionPG40768": {
+    "productionCore": "517a23cddc9f3883550942f6fa90a4256ef39b73",
+    "bug": "BUG-3412",
+    "horizontalReview": "YKT-2735",
+    "finding": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40768-static-admission-correction-v1/scope-overlap.json",
+      "sha256": "3cda6578ad2ecf9abf41155baf3a16f1f0a5e5d88612ec9ffeed2fc12b212697"
+    },
+    "inventory": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40482-f03-batch-current-admitted-java25-closure-v1/admitted-closure.json",
+      "sha256": "bfa80cf6425af93a7a2779abaf81f04ab8a307040baf6180b8397fb9cd02c0c0"
+    },
+    "superseded": {
+      "PG40750": "HOLD_DO_NOT_USE_FOR_QUALIFICATION",
+      "PG40766": "HOLD_DERIVED_FROM_PG40750",
+      "PG40754": "HOLD_REVERSE_DEPENDENCY_ASSERTION_ONLY_KEEP_INDEPENDENT_HASH_COUNTS",
+      "PG40758": "HOLD_F02_JDEPS_AND_F03_REVERSE_DEPENDENCY_SECTIONS_ONLY"
+    },
+    "independentTypedInputs": {
+      "40736": {
+        "receipt": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40736-f03-expiry-final-ownership-typed-v1/manifest.json",
+          "sha256": "2f1a697d9363804aaf2907dcda04982e8d420ae1cf988c2f364dfaa39ed53207"
+        },
+        "actualBatchClassesUsed": 18,
+        "heldMatches": 0
+      },
+      "40748": {
+        "receipt": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40748-f03-cleanup-terminal-current-typed-v1/manifest.json",
+          "sha256": "31119851e87b8fadca786f92986caddfbcf40ef81093a21409025aaf9efda8e9"
+        },
+        "actualBatchClassesUsed": 17,
+        "heldMatches": 0
+      },
+      "40764": {
+        "receipt": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40764-f03-batch-two-nulls-inherited-v1/manifest.json",
+          "sha256": "9e5eee3f39682b1541e42f3fcaf9fcaf8170926d1fbe89af923c60d4d1f6e756"
+        },
+        "actualBatchClassesUsed": 24,
+        "heldMatches": 0
+      }
+    },
+    "independentResults": [
+      "PG40744 four Maven build/package and physically scoped evidence",
+      "PG40746 two form results",
+      "PG40748 two current direct typed tools",
+      "PG40752 exact calendar diagnostic still subject to QA",
+      "PG40760 24 exact historical static disposition joins",
+      "PG40762 source-only formatter/Checkstyle qualification",
+      "PG40764 explicit NullAway two"
+    ],
+    "formalDelta": 0,
+    "toolAndProductOperationsDuringCorrection": 0,
+    "platformDenied": false
+  },
   "currentG08FormWireAndQualityPG40758": {
     "productionCore": "517a23cddc9f3883550942f6fa90a4256ef39b73",
     "searchQuestions": {

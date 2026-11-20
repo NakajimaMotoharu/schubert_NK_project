@@ -6,3 +6,4 @@
 - 実装が未受入ならmain起点の隔離worktree/branchで設計関連ファイルだけを反映する。未受入のコード・配備設定・工具・証跡をまとめてmainへmergeしない。実施worktreeの既存変更・stash・processは保全する。
 - source commit、main反映commit、対象文書、残る未確定事項を記録する。mainの並行更新はfetchして照合し、force push・保護規則迂回はしない。push/merge/remote確認が未完なら反映済みと報告しない。
 - 485または486を変更する手動commitでは、485の全バイトのSHA-256を486の `inventorySha256` に反映し、必要なファイルをstageしてから `python3 -B tools/quality/wbs_index_binding.py` を実行する。stage済みの二文書が一致したことを確認してからcommitする。
+- JARを静的解析に渡す前に、今回のコマンドが読む対象と補助入力を、既存の許可範囲・保留範囲と照合する。ビルド済みJARの収録範囲だけで静的解析の許可を判断しない。範囲が未確定の実行は保留し、許可済みの独立作業を継続する。
