@@ -1,0 +1,1502 @@
+[
+  {
+    "occurrence": 28,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/InspectorCredentialLoader.java",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "line": "70",
+    "column": "32",
+    "method": "load",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "8ed9f8bb81adb2e7bfb48e94f4e981ca0fd0da526fea0b4f92e72f6490025219",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Four fixed credential parsing/IO boundaries distinguish parser Runtime wrappers from known IOException solely for fatal-graph preservation before fixed InspectorCredentialException and buffer erasure. This is source-only redaction policy; no credential/key input or actual file/native load is executed."
+  },
+  {
+    "occurrence": 29,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/InspectorCredentialLoader.java",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "line": "86",
+    "column": "32",
+    "method": "loadDatabasePassword",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "8ed9f8bb81adb2e7bfb48e94f4e981ca0fd0da526fea0b4f92e72f6490025219",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Four fixed credential parsing/IO boundaries distinguish parser Runtime wrappers from known IOException solely for fatal-graph preservation before fixed InspectorCredentialException and buffer erasure. This is source-only redaction policy; no credential/key input or actual file/native load is executed."
+  },
+  {
+    "occurrence": 30,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/InspectorCredentialLoader.java",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "line": "144",
+    "column": "32",
+    "method": "readBackupMaterial",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "8ed9f8bb81adb2e7bfb48e94f4e981ca0fd0da526fea0b4f92e72f6490025219",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Four fixed credential parsing/IO boundaries distinguish parser Runtime wrappers from known IOException solely for fatal-graph preservation before fixed InspectorCredentialException and buffer erasure. This is source-only redaction policy; no credential/key input or actual file/native load is executed."
+  },
+  {
+    "occurrence": 31,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/InspectorCredentialLoader.java",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "line": "164",
+    "column": "32",
+    "method": "readService",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "8ed9f8bb81adb2e7bfb48e94f4e981ca0fd0da526fea0b4f92e72f6490025219",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Four fixed credential parsing/IO boundaries distinguish parser Runtime wrappers from known IOException solely for fatal-graph preservation before fixed InspectorCredentialException and buffer erasure. This is source-only redaction policy; no credential/key input or actual file/native load is executed."
+  },
+  {
+    "occurrence": 32,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/ServiceCredentialSet.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "53",
+    "column": "43",
+    "method": "load",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "e7d2f7b92faebadf6133baeb407d6352d6362cee087b89a8f2959515322e3aca",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Partial credential-set assembly failure clears the already-owned password/key buffers before rethrowing the original credential/runtime/fatal failure. Catch is needed for every allocation/provider category after partial ownership; no credential input is read/executed by this source review."
+  },
+  {
+    "occurrence": 33,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/ServiceCredentialSet.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "53",
+    "column": "62",
+    "method": "load",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "e7d2f7b92faebadf6133baeb407d6352d6362cee087b89a8f2959515322e3aca",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Partial credential-set assembly failure clears the already-owned password/key buffers before rethrowing the original credential/runtime/fatal failure. Catch is needed for every allocation/provider category after partial ownership; no credential input is read/executed by this source review."
+  },
+  {
+    "occurrence": 34,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/ServiceProcessResources.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "205",
+    "column": "30",
+    "method": "ownedRelease",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "71c271ca7886d079b70d1d5e870317bd9dcfb13d5d0ab297399d8508a400abb4",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Unconfirmed release calls the already-admitted retaining callback and cannot become normal release; subsequent throw preserves non-success if it returns. A separate observation tick may contain observation failure and try fallback, while the outer fixed infinite retention loop cannot unwind. Diagnostic/tick return is not owner release."
+  },
+  {
+    "occurrence": 35,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/ServiceProcessResources.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "205",
+    "column": "49",
+    "method": "ownedRelease",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "71c271ca7886d079b70d1d5e870317bd9dcfb13d5d0ab297399d8508a400abb4",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Unconfirmed release calls the already-admitted retaining callback and cannot become normal release; subsequent throw preserves non-success if it returns. A separate observation tick may contain observation failure and try fallback, while the outer fixed infinite retention loop cannot unwind. Diagnostic/tick return is not owner release."
+  },
+  {
+    "occurrence": 39,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/ServiceProcessResources.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "251",
+    "column": "14",
+    "method": "observeUnknownInterval",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "71c271ca7886d079b70d1d5e870317bd9dcfb13d5d0ab297399d8508a400abb4",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Unconfirmed release calls the already-admitted retaining callback and cannot become normal release; subsequent throw preserves non-success if it returns. A separate observation tick may contain observation failure and try fallback, while the outer fixed infinite retention loop cannot unwind. Diagnostic/tick return is not owner release."
+  },
+  {
+    "occurrence": 40,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/ServiceProcessResources.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "251",
+    "column": "33",
+    "method": "observeUnknownInterval",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "71c271ca7886d079b70d1d5e870317bd9dcfb13d5d0ab297399d8508a400abb4",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Unconfirmed release calls the already-admitted retaining callback and cannot become normal release; subsequent throw preserves non-success if it returns. A separate observation tick may contain observation failure and try fallback, while the outer fixed infinite retention loop cannot unwind. Diagnostic/tick return is not owner release."
+  },
+  {
+    "occurrence": 44,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/ServiceProcessResources.java",
+    "rule": "DoNotUseThreads",
+    "line": "263",
+    "column": "5",
+    "method": "waitUnknownInterval",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "71c271ca7886d079b70d1d5e870317bd9dcfb13d5d0ab297399d8508a400abb4",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Pinned PMD7.28 rule forbids application-managed threading under J2EE managed server/EJB migration. This canonical standalone bootstrap/batch Java25 jar/oneshot executes under explicitly owned OS process, not a J2EE server/EJB. Interrupt/identity/worker primitive is governed by original SS311/341/342/343/354 and functional owner tests, not container-managed threading."
+  },
+  {
+    "occurrence": 45,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/ServiceProcessResources.java",
+    "rule": "DoNotUseThreads",
+    "line": "268",
+    "column": "7",
+    "method": "waitUnknownInterval",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "71c271ca7886d079b70d1d5e870317bd9dcfb13d5d0ab297399d8508a400abb4",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Pinned PMD7.28 rule forbids application-managed threading under J2EE managed server/EJB migration. This canonical standalone bootstrap/batch Java25 jar/oneshot executes under explicitly owned OS process, not a J2EE server/EJB. Interrupt/identity/worker primitive is governed by original SS311/341/342/343/354 and functional owner tests, not container-managed threading."
+  },
+  {
+    "occurrence": 46,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/ServiceProcessResources.java",
+    "rule": "DoNotUseThreads",
+    "line": "275",
+    "column": "7",
+    "method": "observeUnconfirmed",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "71c271ca7886d079b70d1d5e870317bd9dcfb13d5d0ab297399d8508a400abb4",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Pinned PMD7.28 rule forbids application-managed threading under J2EE managed server/EJB migration. This canonical standalone bootstrap/batch Java25 jar/oneshot executes under explicitly owned OS process, not a J2EE server/EJB. Interrupt/identity/worker primitive is governed by original SS311/341/342/343/354 and functional owner tests, not container-managed threading."
+  },
+  {
+    "occurrence": 48,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorAesCredential.java",
+    "rule": "NullAssignment",
+    "line": "56",
+    "column": "17",
+    "method": "consume",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "653122ba99e00ebd2b29eb2d1d406f79e370d1f577b4cc212a411535439c7bf8",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "nullable decoded local is cleared only after ownership transfer into credential; finally erases only still-owned buffer, preserving moved key; no raw credential input is accessed by this review"
+  },
+  {
+    "occurrence": 49,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ChildStartupContext.java",
+    "rule": "DoNotUseThreads",
+    "line": "190",
+    "column": "16",
+    "method": "verifyInspector",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "1064a82f50f9614a5469277543e584d687408e8d2bc07d9dc97558e07563d0fb",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Pinned PMD7.28 rule forbids application-managed threading under J2EE managed server/EJB migration. This canonical standalone bootstrap/batch Java25 jar/oneshot executes under explicitly owned OS process, not a J2EE server/EJB. Interrupt/identity/worker primitive is governed by original SS311/341/342/343/354 and functional owner tests, not container-managed threading."
+  },
+  {
+    "occurrence": 50,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ChildStartupContext.java",
+    "rule": "DoNotUseThreads",
+    "line": "233",
+    "column": "48",
+    "method": "verifyInspector",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "1064a82f50f9614a5469277543e584d687408e8d2bc07d9dc97558e07563d0fb",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Pinned PMD7.28 rule forbids application-managed threading under J2EE managed server/EJB migration. This canonical standalone bootstrap/batch Java25 jar/oneshot executes under explicitly owned OS process, not a J2EE server/EJB. Interrupt/identity/worker primitive is governed by original SS311/341/342/343/354 and functional owner tests, not container-managed threading."
+  },
+  {
+    "occurrence": 51,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ChildStartupContext.java",
+    "rule": "DoNotUseThreads",
+    "line": "277",
+    "column": "16",
+    "method": "verifyDaemon",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "1064a82f50f9614a5469277543e584d687408e8d2bc07d9dc97558e07563d0fb",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Pinned PMD7.28 rule forbids application-managed threading under J2EE managed server/EJB migration. This canonical standalone bootstrap/batch Java25 jar/oneshot executes under explicitly owned OS process, not a J2EE server/EJB. Interrupt/identity/worker primitive is governed by original SS311/341/342/343/354 and functional owner tests, not container-managed threading."
+  },
+  {
+    "occurrence": 52,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ChildStartupContext.java",
+    "rule": "DoNotUseThreads",
+    "line": "329",
+    "column": "48",
+    "method": "verifyDaemon",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "1064a82f50f9614a5469277543e584d687408e8d2bc07d9dc97558e07563d0fb",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Pinned PMD7.28 rule forbids application-managed threading under J2EE managed server/EJB migration. This canonical standalone bootstrap/batch Java25 jar/oneshot executes under explicitly owned OS process, not a J2EE server/EJB. Interrupt/identity/worker primitive is governed by original SS311/341/342/343/354 and functional owner tests, not container-managed threading."
+  },
+  {
+    "occurrence": 53,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ChildStartupContext.java",
+    "rule": "DoNotUseThreads",
+    "line": "351",
+    "column": "16",
+    "method": "verifyMaintenanceParent",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "1064a82f50f9614a5469277543e584d687408e8d2bc07d9dc97558e07563d0fb",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Pinned PMD7.28 rule forbids application-managed threading under J2EE managed server/EJB migration. This canonical standalone bootstrap/batch Java25 jar/oneshot executes under explicitly owned OS process, not a J2EE server/EJB. Interrupt/identity/worker primitive is governed by original SS311/341/342/343/354 and functional owner tests, not container-managed threading."
+  },
+  {
+    "occurrence": 54,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ChildStartupContext.java",
+    "rule": "DoNotUseThreads",
+    "line": "390",
+    "column": "16",
+    "method": "verifyMaintenanceParent",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "1064a82f50f9614a5469277543e584d687408e8d2bc07d9dc97558e07563d0fb",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Pinned PMD7.28 rule forbids application-managed threading under J2EE managed server/EJB migration. This canonical standalone bootstrap/batch Java25 jar/oneshot executes under explicitly owned OS process, not a J2EE server/EJB. Interrupt/identity/worker primitive is governed by original SS311/341/342/343/354 and functional owner tests, not container-managed threading."
+  },
+  {
+    "occurrence": 56,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageStopHold.java",
+    "rule": "DoNotUseThreads",
+    "line": "22",
+    "column": "14",
+    "method": "add",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "f8cfb9a9565c3ce4d2c9582bb595046a715d1b55506435afa53b944c6623b9ce",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Pinned PMD7.28 rule forbids application-managed threading under J2EE managed server/EJB migration. This canonical standalone bootstrap/batch Java25 jar/oneshot executes under explicitly owned OS process, not a J2EE server/EJB. Interrupt/identity/worker primitive is governed by original SS311/341/342/343/354 and functional owner tests, not container-managed threading."
+  },
+  {
+    "occurrence": 57,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageStopHold.java",
+    "rule": "DoNotUseThreads",
+    "line": "24",
+    "column": "30",
+    "method": "remove",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "f8cfb9a9565c3ce4d2c9582bb595046a715d1b55506435afa53b944c6623b9ce",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Pinned PMD7.28 rule forbids application-managed threading under J2EE managed server/EJB migration. This canonical standalone bootstrap/batch Java25 jar/oneshot executes under explicitly owned OS process, not a J2EE server/EJB. Interrupt/identity/worker primitive is governed by original SS311/341/342/343/354 and functional owner tests, not container-managed threading."
+  },
+  {
+    "occurrence": 58,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageStopHold.java",
+    "rule": "DoNotUseThreads",
+    "line": "31",
+    "column": "32",
+    "method": "",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "f8cfb9a9565c3ce4d2c9582bb595046a715d1b55506435afa53b944c6623b9ce",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Pinned PMD7.28 rule forbids application-managed threading under J2EE managed server/EJB migration. This canonical standalone bootstrap/batch Java25 jar/oneshot executes under explicitly owned OS process, not a J2EE server/EJB. Interrupt/identity/worker primitive is governed by original SS311/341/342/343/354 and functional owner tests, not container-managed threading."
+  },
+  {
+    "occurrence": 59,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageStopHold.java",
+    "rule": "DoNotUseThreads",
+    "line": "32",
+    "column": "35",
+    "method": "",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "f8cfb9a9565c3ce4d2c9582bb595046a715d1b55506435afa53b944c6623b9ce",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Pinned PMD7.28 rule forbids application-managed threading under J2EE managed server/EJB migration. This canonical standalone bootstrap/batch Java25 jar/oneshot executes under explicitly owned OS process, not a J2EE server/EJB. Interrupt/identity/worker primitive is governed by original SS311/341/342/343/354 and functional owner tests, not container-managed threading."
+  },
+  {
+    "occurrence": 60,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageStopHold.java",
+    "rule": "DoNotUseThreads",
+    "line": "46",
+    "column": "31",
+    "method": "add",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "f8cfb9a9565c3ce4d2c9582bb595046a715d1b55506435afa53b944c6623b9ce",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Pinned PMD7.28 rule forbids application-managed threading under J2EE managed server/EJB migration. This canonical standalone bootstrap/batch Java25 jar/oneshot executes under explicitly owned OS process, not a J2EE server/EJB. Interrupt/identity/worker primitive is governed by original SS311/341/342/343/354 and functional owner tests, not container-managed threading."
+  },
+  {
+    "occurrence": 61,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageStopHold.java",
+    "rule": "DoNotUseThreads",
+    "line": "51",
+    "column": "37",
+    "method": "remove",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "f8cfb9a9565c3ce4d2c9582bb595046a715d1b55506435afa53b944c6623b9ce",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Pinned PMD7.28 rule forbids application-managed threading under J2EE managed server/EJB migration. This canonical standalone bootstrap/batch Java25 jar/oneshot executes under explicitly owned OS process, not a J2EE server/EJB. Interrupt/identity/worker primitive is governed by original SS311/341/342/343/354 and functional owner tests, not container-managed threading."
+  },
+  {
+    "occurrence": 62,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageStopHold.java",
+    "rule": "DoNotUseThreads",
+    "line": "59",
+    "column": "41",
+    "method": "removeNative",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "f8cfb9a9565c3ce4d2c9582bb595046a715d1b55506435afa53b944c6623b9ce",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Pinned PMD7.28 rule forbids application-managed threading under J2EE managed server/EJB migration. This canonical standalone bootstrap/batch Java25 jar/oneshot executes under explicitly owned OS process, not a J2EE server/EJB. Interrupt/identity/worker primitive is governed by original SS311/341/342/343/354 and functional owner tests, not container-managed threading."
+  },
+  {
+    "occurrence": 63,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageStopHold.java",
+    "rule": "DoNotUseThreads",
+    "line": "76",
+    "column": "35",
+    "method": "verifyOwner",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "f8cfb9a9565c3ce4d2c9582bb595046a715d1b55506435afa53b944c6623b9ce",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Pinned PMD7.28 rule forbids application-managed threading under J2EE managed server/EJB migration. This canonical standalone bootstrap/batch Java25 jar/oneshot executes under explicitly owned OS process, not a J2EE server/EJB. Interrupt/identity/worker primitive is governed by original SS311/341/342/343/354 and functional owner tests, not container-managed threading."
+  },
+  {
+    "occurrence": 64,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageStopHold.java",
+    "rule": "CompareObjectsWithEquals",
+    "line": "76",
+    "column": "35",
+    "method": "verifyOwner",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "f8cfb9a9565c3ce4d2c9582bb595046a715d1b55506435afa53b944c6623b9ce",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Thread.currentThread() != owner: refuse foreign capture actor, not object content equality"
+  },
+  {
+    "occurrence": 65,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageStopHold.java",
+    "rule": "DoNotUseThreads",
+    "line": "95",
+    "column": "9",
+    "method": "shutdown",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "f8cfb9a9565c3ce4d2c9582bb595046a715d1b55506435afa53b944c6623b9ce",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Pinned PMD7.28 rule forbids application-managed threading under J2EE managed server/EJB migration. This canonical standalone bootstrap/batch Java25 jar/oneshot executes under explicitly owned OS process, not a J2EE server/EJB. Interrupt/identity/worker primitive is governed by original SS311/341/342/343/354 and functional owner tests, not container-managed threading."
+  },
+  {
+    "occurrence": 66,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageStopHold.java",
+    "rule": "CompareObjectsWithEquals",
+    "line": "95",
+    "column": "9",
+    "method": "shutdown",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "f8cfb9a9565c3ce4d2c9582bb595046a715d1b55506435afa53b944c6623b9ce",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Thread.currentThread() == owner: do not wait for own thread; lifetime actor identity"
+  },
+  {
+    "occurrence": 67,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageStopHold.java",
+    "rule": "DoNotUseThreads",
+    "line": "105",
+    "column": "22",
+    "method": "shutdown",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "f8cfb9a9565c3ce4d2c9582bb595046a715d1b55506435afa53b944c6623b9ce",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Pinned PMD7.28 rule forbids application-managed threading under J2EE managed server/EJB migration. This canonical standalone bootstrap/batch Java25 jar/oneshot executes under explicitly owned OS process, not a J2EE server/EJB. Interrupt/identity/worker primitive is governed by original SS311/341/342/343/354 and functional owner tests, not container-managed threading."
+  },
+  {
+    "occurrence": 68,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageTerminal.java",
+    "rule": "DoNotUseThreads",
+    "line": "19",
+    "column": "32",
+    "method": "",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "38e22ded1b51714c4718a08834199ed6a9653d7d2039c6d8be6fa74081df10ff",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Pinned PMD7.28 rule forbids application-managed threading under J2EE managed server/EJB migration. This canonical standalone bootstrap/batch Java25 jar/oneshot executes under explicitly owned OS process, not a J2EE server/EJB. Interrupt/identity/worker primitive is governed by original SS311/341/342/343/354 and functional owner tests, not container-managed threading."
+  },
+  {
+    "occurrence": 69,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageTerminal.java",
+    "rule": "DoNotUseThreads",
+    "line": "38",
+    "column": "43",
+    "method": "terminal",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "38e22ded1b51714c4718a08834199ed6a9653d7d2039c6d8be6fa74081df10ff",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Pinned PMD7.28 rule forbids application-managed threading under J2EE managed server/EJB migration. This canonical standalone bootstrap/batch Java25 jar/oneshot executes under explicitly owned OS process, not a J2EE server/EJB. Interrupt/identity/worker primitive is governed by original SS311/341/342/343/354 and functional owner tests, not container-managed threading."
+  },
+  {
+    "occurrence": 70,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageTerminal.java",
+    "rule": "CompareObjectsWithEquals",
+    "line": "38",
+    "column": "43",
+    "method": "terminal",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "38e22ded1b51714c4718a08834199ed6a9653d7d2039c6d8be6fa74081df10ff",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Thread.currentThread() == owner: terminal collection only by exact constructor actor"
+  },
+  {
+    "occurrence": 71,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageTerminal.java",
+    "rule": "DoNotUseThreads",
+    "line": "52",
+    "column": "43",
+    "method": "closing",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "38e22ded1b51714c4718a08834199ed6a9653d7d2039c6d8be6fa74081df10ff",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Pinned PMD7.28 rule forbids application-managed threading under J2EE managed server/EJB migration. This canonical standalone bootstrap/batch Java25 jar/oneshot executes under explicitly owned OS process, not a J2EE server/EJB. Interrupt/identity/worker primitive is governed by original SS311/341/342/343/354 and functional owner tests, not container-managed threading."
+  },
+  {
+    "occurrence": 72,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageTerminal.java",
+    "rule": "CompareObjectsWithEquals",
+    "line": "52",
+    "column": "43",
+    "method": "closing",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "38e22ded1b51714c4718a08834199ed6a9653d7d2039c6d8be6fa74081df10ff",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Thread.currentThread() == owner: closing collection same actor and sequence"
+  },
+  {
+    "occurrence": 73,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedServiceIdentity.java",
+    "rule": "DoNotUseThreads",
+    "line": "239",
+    "column": "39",
+    "method": "read",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "2c09eebf305c537bf18c00ae38774ada72269b94529c2c6f749e55cc953cfaab",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Pinned PMD7.28 rule forbids application-managed threading under J2EE managed server/EJB migration. This canonical standalone bootstrap/batch Java25 jar/oneshot executes under explicitly owned OS process, not a J2EE server/EJB. Interrupt/identity/worker primitive is governed by original SS311/341/342/343/354 and functional owner tests, not container-managed threading."
+  },
+  {
+    "occurrence": 74,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/LinuxSystemdSession.java",
+    "rule": "DoNotUseThreads",
+    "line": "57",
+    "column": "31",
+    "method": "",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "d459337184c187b8d37a97989b8b9791d6a41fe549b8361d1c22055ee37a9607",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Pinned PMD7.28 rule forbids application-managed threading under J2EE managed server/EJB migration. This canonical standalone bootstrap/batch Java25 jar/oneshot executes under explicitly owned OS process, not a J2EE server/EJB. Interrupt/identity/worker primitive is governed by original SS311/341/342/343/354 and functional owner tests, not container-managed threading."
+  },
+  {
+    "occurrence": 75,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/LinuxSystemdSession.java",
+    "rule": "DoNotUseThreads",
+    "line": "84",
+    "column": "50",
+    "method": "check",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "d459337184c187b8d37a97989b8b9791d6a41fe549b8361d1c22055ee37a9607",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Pinned PMD7.28 rule forbids application-managed threading under J2EE managed server/EJB migration. This canonical standalone bootstrap/batch Java25 jar/oneshot executes under explicitly owned OS process, not a J2EE server/EJB. Interrupt/identity/worker primitive is governed by original SS311/341/342/343/354 and functional owner tests, not container-managed threading."
+  },
+  {
+    "occurrence": 86,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/LinuxSystemdSession.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "528",
+    "column": "16",
+    "method": "invoke",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "d459337184c187b8d37a97989b8b9791d6a41fe549b8361d1c22055ee37a9607",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "The MethodHandle/FFM invocation boundary declares Throwable. Preceding RuntimeException|Error catch rethrows unchecked/fatal unchanged; this later Throwable catch catalogs only remaining checked invocation uncertainty. Session callers poison/retain their native ownership on uncertainty; no actual library/manager/native call is made here."
+  },
+  {
+    "occurrence": 87,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame.java",
+    "rule": "DoNotUseThreads",
+    "line": "137",
+    "column": "11",
+    "method": "parentsGuard",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "48645538321f59775ceca14b6c4ee201db6cbad142e7ca7551e35145f886f4e7",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Pinned PMD7.28 rule forbids application-managed threading under J2EE managed server/EJB migration. This canonical standalone bootstrap/batch Java25 jar/oneshot executes under explicitly owned OS process, not a J2EE server/EJB. Interrupt/identity/worker primitive is governed by original SS311/341/342/343/354 and functional owner tests, not container-managed threading."
+  },
+  {
+    "occurrence": 88,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame.java",
+    "rule": "DoNotUseThreads",
+    "line": "143",
+    "column": "11",
+    "method": "parentsGuard",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "48645538321f59775ceca14b6c4ee201db6cbad142e7ca7551e35145f886f4e7",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Pinned PMD7.28 rule forbids application-managed threading under J2EE managed server/EJB migration. This canonical standalone bootstrap/batch Java25 jar/oneshot executes under explicitly owned OS process, not a J2EE server/EJB. Interrupt/identity/worker primitive is governed by original SS311/341/342/343/354 and functional owner tests, not container-managed threading."
+  },
+  {
+    "occurrence": 89,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseInventory.java",
+    "rule": "UnusedReturnValue",
+    "line": "144",
+    "column": "9",
+    "method": "parse",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40424-p01802-current-inventory18-independent-v1/manifest.json",
+      "sha256": "5aaa5d70dddf929f6522d7c2c43c959eb3565b649fbfa248cb378d3ee8b1f946"
+    },
+    "sourceSha256": "96e67eff343695afdbdff4fddb77c2d1cbef0f1e3f7f0f96bfe508ef397c7b0c",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Pinned strict JSON reader checks trailing content before acceptance. Its return value is immaterial to validation"
+  },
+  {
+    "occurrence": 90,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleasePayloadVerification.java",
+    "rule": "UseConcurrentHashMap",
+    "line": "49",
+    "column": "39",
+    "method": "",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "01dfe01fe186a9fe8e65098bb2a020cb8f4855e9033043c89696998262dec348",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "jars instance index belongs to fresh one-shot verification object, constructor called only twice in StartupReleaseManifest verify paths, object never published"
+  },
+  {
+    "occurrence": 91,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleasePayloadVerification.java",
+    "rule": "UseConcurrentHashMap",
+    "line": "50",
+    "column": "38",
+    "method": "",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "01dfe01fe186a9fe8e65098bb2a020cb8f4855e9033043c89696998262dec348",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "checksums instance index belongs to same fresh unshared verification object; Contents returns immutable projection, no verifier escape"
+  },
+  {
+    "occurrence": 92,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleasePayloadVerification.java",
+    "rule": "DoNotUseThreads",
+    "line": "222",
+    "column": "14",
+    "method": "checked",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "01dfe01fe186a9fe8e65098bb2a020cb8f4855e9033043c89696998262dec348",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Pinned PMD7.28 rule forbids application-managed threading under J2EE managed server/EJB migration. This canonical standalone bootstrap/batch Java25 jar/oneshot executes under explicitly owned OS process, not a J2EE server/EJB. Interrupt/identity/worker primitive is governed by original SS311/341/342/343/354 and functional owner tests, not container-managed threading."
+  },
+  {
+    "occurrence": 93,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleasePayloadVerification.java",
+    "rule": "DoNotUseThreads",
+    "line": "268",
+    "column": "22",
+    "method": "read",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "01dfe01fe186a9fe8e65098bb2a020cb8f4855e9033043c89696998262dec348",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Pinned PMD7.28 rule forbids application-managed threading under J2EE managed server/EJB migration. This canonical standalone bootstrap/batch Java25 jar/oneshot executes under explicitly owned OS process, not a J2EE server/EJB. Interrupt/identity/worker primitive is governed by original SS311/341/342/343/354 and functional owner tests, not container-managed threading."
+  },
+  {
+    "occurrence": 94,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleasePayloadVerification.java",
+    "rule": "UseConcurrentHashMap",
+    "line": "297",
+    "column": "31",
+    "method": "archive",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "01dfe01fe186a9fe8e65098bb2a020cb8f4855e9033043c89696998262dec348",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "archive callback local sql index; synchronous zip-entry read, no cross-thread map mutations"
+  },
+  {
+    "occurrence": 97,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/SystemManagerObservation.java",
+    "rule": "DoNotUseThreads",
+    "line": "107",
+    "column": "19",
+    "method": "SystemManagerObservation",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "6affd57005221db2b1d112da3449f8c26085edf21ed132d8abfc9fdb3a5afacb",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Pinned PMD7.28 rule forbids application-managed threading under J2EE managed server/EJB migration. This canonical standalone bootstrap/batch Java25 jar/oneshot executes under explicitly owned OS process, not a J2EE server/EJB. Interrupt/identity/worker primitive is governed by original SS311/341/342/343/354 and functional owner tests, not container-managed threading."
+  },
+  {
+    "occurrence": 98,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/SystemManagerObservation.java",
+    "rule": "DoNotUseThreads",
+    "line": "118",
+    "column": "24",
+    "method": "read",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "6affd57005221db2b1d112da3449f8c26085edf21ed132d8abfc9fdb3a5afacb",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Pinned PMD7.28 rule forbids application-managed threading under J2EE managed server/EJB migration. This canonical standalone bootstrap/batch Java25 jar/oneshot executes under explicitly owned OS process, not a J2EE server/EJB. Interrupt/identity/worker primitive is governed by original SS311/341/342/343/354 and functional owner tests, not container-managed threading."
+  },
+  {
+    "occurrence": 99,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/SystemManagerObservation.java",
+    "rule": "DoNotUseThreads",
+    "line": "120",
+    "column": "12",
+    "method": "read",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "6affd57005221db2b1d112da3449f8c26085edf21ed132d8abfc9fdb3a5afacb",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Pinned PMD7.28 rule forbids application-managed threading under J2EE managed server/EJB migration. This canonical standalone bootstrap/batch Java25 jar/oneshot executes under explicitly owned OS process, not a J2EE server/EJB. Interrupt/identity/worker primitive is governed by original SS311/341/342/343/354 and functional owner tests, not container-managed threading."
+  },
+  {
+    "occurrence": 100,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/SystemManagerObservation.java",
+    "rule": "NullAssignment",
+    "line": "166",
+    "column": "58",
+    "method": "read",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "6affd57005221db2b1d112da3449f8c26085edf21ed132d8abfc9fdb3a5afacb",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "nullable pending session reset only after closed() true; stopped lifetime reference cannot be reused; read checks/opening guards are explicit"
+  },
+  {
+    "occurrence": 101,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/SystemManagerObservation.java",
+    "rule": "DoNotUseThreads",
+    "line": "173",
+    "column": "44",
+    "method": "remaining",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "6affd57005221db2b1d112da3449f8c26085edf21ed132d8abfc9fdb3a5afacb",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Pinned PMD7.28 rule forbids application-managed threading under J2EE managed server/EJB migration. This canonical standalone bootstrap/batch Java25 jar/oneshot executes under explicitly owned OS process, not a J2EE server/EJB. Interrupt/identity/worker primitive is governed by original SS311/341/342/343/354 and functional owner tests, not container-managed threading."
+  },
+  {
+    "occurrence": 165,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationGamesVerifier.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "39",
+    "column": "29",
+    "method": "verify",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40456-migration-utc42-product-and-tool-proof-v1/manifest.json",
+      "sha256": "39b35eaafb1011fb3f8b4ab9003730f174838fe498bce5962eae497c2b1d3180"
+    },
+    "sourceSha256": "628f1bc4de515e37fccabe4943a105a9d200f7bcaa587f8e455ae9c6dc58110b",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Preserves contractually ordered ownership release and Throwable identity"
+  },
+  {
+    "occurrence": 166,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationGamesVerifier.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "39",
+    "column": "48",
+    "method": "verify",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40456-migration-utc42-product-and-tool-proof-v1/manifest.json",
+      "sha256": "39b35eaafb1011fb3f8b4ab9003730f174838fe498bce5962eae497c2b1d3180"
+    },
+    "sourceSha256": "628f1bc4de515e37fccabe4943a105a9d200f7bcaa587f8e455ae9c6dc58110b",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Preserves contractually ordered ownership release and Throwable identity"
+  },
+  {
+    "occurrence": 167,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationGamesVerifier.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "64",
+    "column": "29",
+    "method": "rows",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40456-migration-utc42-product-and-tool-proof-v1/manifest.json",
+      "sha256": "39b35eaafb1011fb3f8b4ab9003730f174838fe498bce5962eae497c2b1d3180"
+    },
+    "sourceSha256": "628f1bc4de515e37fccabe4943a105a9d200f7bcaa587f8e455ae9c6dc58110b",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Preserves contractually ordered ownership release and Throwable identity"
+  },
+  {
+    "occurrence": 168,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationGamesVerifier.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "64",
+    "column": "48",
+    "method": "rows",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40456-migration-utc42-product-and-tool-proof-v1/manifest.json",
+      "sha256": "39b35eaafb1011fb3f8b4ab9003730f174838fe498bce5962eae497c2b1d3180"
+    },
+    "sourceSha256": "628f1bc4de515e37fccabe4943a105a9d200f7bcaa587f8e455ae9c6dc58110b",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Preserves contractually ordered ownership release and Throwable identity"
+  },
+  {
+    "occurrence": 169,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationGamesVerifier.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "97",
+    "column": "29",
+    "method": "closeStatement",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40456-migration-utc42-product-and-tool-proof-v1/manifest.json",
+      "sha256": "39b35eaafb1011fb3f8b4ab9003730f174838fe498bce5962eae497c2b1d3180"
+    },
+    "sourceSha256": "628f1bc4de515e37fccabe4943a105a9d200f7bcaa587f8e455ae9c6dc58110b",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Preserves contractually ordered ownership release and Throwable identity"
+  },
+  {
+    "occurrence": 170,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationGamesVerifier.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "97",
+    "column": "48",
+    "method": "closeStatement",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40456-migration-utc42-product-and-tool-proof-v1/manifest.json",
+      "sha256": "39b35eaafb1011fb3f8b4ab9003730f174838fe498bce5962eae497c2b1d3180"
+    },
+    "sourceSha256": "628f1bc4de515e37fccabe4943a105a9d200f7bcaa587f8e455ae9c6dc58110b",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Preserves contractually ordered ownership release and Throwable identity"
+  },
+  {
+    "occurrence": 171,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationGamesVerifier.java",
+    "rule": "CompareObjectsWithEquals",
+    "line": "98",
+    "column": "11",
+    "method": "closeStatement",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40456-migration-utc42-product-and-tool-proof-v1/manifest.json",
+      "sha256": "39b35eaafb1011fb3f8b4ab9003730f174838fe498bce5962eae497c2b1d3180"
+    },
+    "sourceSha256": "628f1bc4de515e37fccabe4943a105a9d200f7bcaa587f8e455ae9c6dc58110b",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Preserves contractually ordered ownership release and Throwable identity"
+  },
+  {
+    "occurrence": 172,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationGamesVerifier.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "110",
+    "column": "29",
+    "method": "closeResult",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40456-migration-utc42-product-and-tool-proof-v1/manifest.json",
+      "sha256": "39b35eaafb1011fb3f8b4ab9003730f174838fe498bce5962eae497c2b1d3180"
+    },
+    "sourceSha256": "628f1bc4de515e37fccabe4943a105a9d200f7bcaa587f8e455ae9c6dc58110b",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Preserves contractually ordered ownership release and Throwable identity"
+  },
+  {
+    "occurrence": 173,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationGamesVerifier.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "110",
+    "column": "48",
+    "method": "closeResult",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40456-migration-utc42-product-and-tool-proof-v1/manifest.json",
+      "sha256": "39b35eaafb1011fb3f8b4ab9003730f174838fe498bce5962eae497c2b1d3180"
+    },
+    "sourceSha256": "628f1bc4de515e37fccabe4943a105a9d200f7bcaa587f8e455ae9c6dc58110b",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Preserves contractually ordered ownership release and Throwable identity"
+  },
+  {
+    "occurrence": 174,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationGamesVerifier.java",
+    "rule": "CompareObjectsWithEquals",
+    "line": "111",
+    "column": "11",
+    "method": "closeResult",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40456-migration-utc42-product-and-tool-proof-v1/manifest.json",
+      "sha256": "39b35eaafb1011fb3f8b4ab9003730f174838fe498bce5962eae497c2b1d3180"
+    },
+    "sourceSha256": "628f1bc4de515e37fccabe4943a105a9d200f7bcaa587f8e455ae9c6dc58110b",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Preserves contractually ordered ownership release and Throwable identity"
+  },
+  {
+    "occurrence": 195,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterContentVerifier.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "79",
+    "column": "29",
+    "method": "verify",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40456-migration-utc42-product-and-tool-proof-v1/manifest.json",
+      "sha256": "39b35eaafb1011fb3f8b4ab9003730f174838fe498bce5962eae497c2b1d3180"
+    },
+    "sourceSha256": "a62381dbe686910a463127525fb508d13e2da7279ba3f54f38f2ca290afaa1d2",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Preserves contractually ordered ownership release and Throwable identity"
+  },
+  {
+    "occurrence": 196,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterContentVerifier.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "79",
+    "column": "48",
+    "method": "verify",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40456-migration-utc42-product-and-tool-proof-v1/manifest.json",
+      "sha256": "39b35eaafb1011fb3f8b4ab9003730f174838fe498bce5962eae497c2b1d3180"
+    },
+    "sourceSha256": "a62381dbe686910a463127525fb508d13e2da7279ba3f54f38f2ca290afaa1d2",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Preserves contractually ordered ownership release and Throwable identity"
+  },
+  {
+    "occurrence": 197,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterContentVerifier.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "136",
+    "column": "29",
+    "method": "verifyRows",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40456-migration-utc42-product-and-tool-proof-v1/manifest.json",
+      "sha256": "39b35eaafb1011fb3f8b4ab9003730f174838fe498bce5962eae497c2b1d3180"
+    },
+    "sourceSha256": "a62381dbe686910a463127525fb508d13e2da7279ba3f54f38f2ca290afaa1d2",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Preserves contractually ordered ownership release and Throwable identity"
+  },
+  {
+    "occurrence": 198,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterContentVerifier.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "136",
+    "column": "48",
+    "method": "verifyRows",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40456-migration-utc42-product-and-tool-proof-v1/manifest.json",
+      "sha256": "39b35eaafb1011fb3f8b4ab9003730f174838fe498bce5962eae497c2b1d3180"
+    },
+    "sourceSha256": "a62381dbe686910a463127525fb508d13e2da7279ba3f54f38f2ca290afaa1d2",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Preserves contractually ordered ownership release and Throwable identity"
+  },
+  {
+    "occurrence": 199,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterContentVerifier.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "173",
+    "column": "29",
+    "method": "closeStatement",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40456-migration-utc42-product-and-tool-proof-v1/manifest.json",
+      "sha256": "39b35eaafb1011fb3f8b4ab9003730f174838fe498bce5962eae497c2b1d3180"
+    },
+    "sourceSha256": "a62381dbe686910a463127525fb508d13e2da7279ba3f54f38f2ca290afaa1d2",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Preserves contractually ordered ownership release and Throwable identity"
+  },
+  {
+    "occurrence": 200,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterContentVerifier.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "173",
+    "column": "48",
+    "method": "closeStatement",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40456-migration-utc42-product-and-tool-proof-v1/manifest.json",
+      "sha256": "39b35eaafb1011fb3f8b4ab9003730f174838fe498bce5962eae497c2b1d3180"
+    },
+    "sourceSha256": "a62381dbe686910a463127525fb508d13e2da7279ba3f54f38f2ca290afaa1d2",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Preserves contractually ordered ownership release and Throwable identity"
+  },
+  {
+    "occurrence": 201,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterContentVerifier.java",
+    "rule": "CompareObjectsWithEquals",
+    "line": "174",
+    "column": "11",
+    "method": "closeStatement",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40456-migration-utc42-product-and-tool-proof-v1/manifest.json",
+      "sha256": "39b35eaafb1011fb3f8b4ab9003730f174838fe498bce5962eae497c2b1d3180"
+    },
+    "sourceSha256": "a62381dbe686910a463127525fb508d13e2da7279ba3f54f38f2ca290afaa1d2",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Preserves contractually ordered ownership release and Throwable identity"
+  },
+  {
+    "occurrence": 202,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterContentVerifier.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "186",
+    "column": "29",
+    "method": "closeResult",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40456-migration-utc42-product-and-tool-proof-v1/manifest.json",
+      "sha256": "39b35eaafb1011fb3f8b4ab9003730f174838fe498bce5962eae497c2b1d3180"
+    },
+    "sourceSha256": "a62381dbe686910a463127525fb508d13e2da7279ba3f54f38f2ca290afaa1d2",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Preserves contractually ordered ownership release and Throwable identity"
+  },
+  {
+    "occurrence": 203,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterContentVerifier.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "186",
+    "column": "48",
+    "method": "closeResult",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40456-migration-utc42-product-and-tool-proof-v1/manifest.json",
+      "sha256": "39b35eaafb1011fb3f8b4ab9003730f174838fe498bce5962eae497c2b1d3180"
+    },
+    "sourceSha256": "a62381dbe686910a463127525fb508d13e2da7279ba3f54f38f2ca290afaa1d2",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Preserves contractually ordered ownership release and Throwable identity"
+  },
+  {
+    "occurrence": 204,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterContentVerifier.java",
+    "rule": "CompareObjectsWithEquals",
+    "line": "187",
+    "column": "11",
+    "method": "closeResult",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40456-migration-utc42-product-and-tool-proof-v1/manifest.json",
+      "sha256": "39b35eaafb1011fb3f8b4ab9003730f174838fe498bce5962eae497c2b1d3180"
+    },
+    "sourceSha256": "a62381dbe686910a463127525fb508d13e2da7279ba3f54f38f2ca290afaa1d2",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Preserves contractually ordered ownership release and Throwable identity"
+  },
+  {
+    "occurrence": 228,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresMigrationCopyPort.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "64",
+    "column": "29",
+    "method": "copy",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "de4abd8135de77d6d59dd7424a5980e894a17b67e853bdcf9125157b0fbd93a8",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Owned COPY body failure attempts cancelOwned then rethrows original; cleanup appends only a distinct secondary (explicit cleanup != primary identity guard). Borrowed transaction/Connection authority is not closed or committed here. Original SQL/runtime/Error remains non-success with prescribed compound behavior."
+  },
+  {
+    "occurrence": 229,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresMigrationCopyPort.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "64",
+    "column": "48",
+    "method": "copy",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "de4abd8135de77d6d59dd7424a5980e894a17b67e853bdcf9125157b0fbd93a8",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Owned COPY body failure attempts cancelOwned then rethrows original; cleanup appends only a distinct secondary (explicit cleanup != primary identity guard). Borrowed transaction/Connection authority is not closed or committed here. Original SQL/runtime/Error remains non-success with prescribed compound behavior."
+  },
+  {
+    "occurrence": 230,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresMigrationCopyPort.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "88",
+    "column": "29",
+    "method": "cancelOwned",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "de4abd8135de77d6d59dd7424a5980e894a17b67e853bdcf9125157b0fbd93a8",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Owned COPY body failure attempts cancelOwned then rethrows original; cleanup appends only a distinct secondary (explicit cleanup != primary identity guard). Borrowed transaction/Connection authority is not closed or committed here. Original SQL/runtime/Error remains non-success with prescribed compound behavior."
+  },
+  {
+    "occurrence": 231,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresMigrationCopyPort.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "88",
+    "column": "48",
+    "method": "cancelOwned",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "de4abd8135de77d6d59dd7424a5980e894a17b67e853bdcf9125157b0fbd93a8",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Owned COPY body failure attempts cancelOwned then rethrows original; cleanup appends only a distinct secondary (explicit cleanup != primary identity guard). Borrowed transaction/Connection authority is not closed or committed here. Original SQL/runtime/Error remains non-success with prescribed compound behavior."
+  },
+  {
+    "occurrence": 232,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresMigrationCopyPort.java",
+    "rule": "CompareObjectsWithEquals",
+    "line": "89",
+    "column": "11",
+    "method": "cancelOwned",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    "sourceSha256": "de4abd8135de77d6d59dd7424a5980e894a17b67e853bdcf9125157b0fbd93a8",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "cleanup != primary: Throwable identity guard prevents illegal self-suppression; equals may be overridden and does not establish self"
+  },
+  {
+    "occurrence": 261,
+    "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java",
+    "rule": "UseConcurrentHashMap",
+    "line": "170",
+    "column": "29",
+    "method": "decodeArea",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38300-f03-current-protocol-full-pmd-v1/raw-findings.json",
+      "sha256": "2ce9bf47c6f9747e401f0baa8b074884828700ec67474e1ce27315c82e4fae60"
+    },
+    "sourceSha256": "41521248b2ad34c0d21fe00f75d9b7982fb023d9e9ae29ad6f87650b3bd559e9",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Ordered map is local"
+  },
+  {
+    "occurrence": 262,
+    "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationException.java",
+    "rule": "CompareObjectsWithEquals",
+    "line": "22",
+    "column": "9",
+    "method": "FailedJmsIsolationException",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38300-f03-current-protocol-full-pmd-v1/raw-findings.json",
+      "sha256": "2ce9bf47c6f9747e401f0baa8b074884828700ec67474e1ce27315c82e4fae60"
+    },
+    "sourceSha256": "8b22ea28c7a14624bb86b6a8b80661460d446418b61b76c42cdbba7f7f74dfbb",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Throwable identity avoids self-suppression"
+  },
+  {
+    "occurrence": 263,
+    "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/UnconfirmedJmsRollbackException.java",
+    "rule": "CompareObjectsWithEquals",
+    "line": "18",
+    "column": "9",
+    "method": "UnconfirmedJmsRollbackException",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38300-f03-current-protocol-full-pmd-v1/raw-findings.json",
+      "sha256": "2ce9bf47c6f9747e401f0baa8b074884828700ec67474e1ce27315c82e4fae60"
+    },
+    "sourceSha256": "4ca8f9a3d350557e66b026eb96753c6cac7fe14c3204fc302af86f0dd2795938",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "Throwable identity avoids self-suppression"
+  },
+  {
+    "occurrence": 264,
+    "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "81",
+    "column": "30",
+    "method": "acquire",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36824-storage-main-independent-v1/pmd18-site-dispositions.json",
+      "sha256": "b22c5045d344da506f514411e94206e88d3716fc5489cf86122488c49f01b168"
+    },
+    "sourceSha256": "99a598b5e08bf426c72b85775b4ed21ae7b4544d9f631b3a3b87254abd543850",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "SS333 SSC063/308 requires this owned-body IO/Runtime/Error boundary solely to release exactly once before preserving the specified unknown primary identity; no exception is swallowed or reported successful."
+  },
+  {
+    "occurrence": 265,
+    "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "81",
+    "column": "49",
+    "method": "acquire",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36824-storage-main-independent-v1/pmd18-site-dispositions.json",
+      "sha256": "b22c5045d344da506f514411e94206e88d3716fc5489cf86122488c49f01b168"
+    },
+    "sourceSha256": "99a598b5e08bf426c72b85775b4ed21ae7b4544d9f631b3a3b87254abd543850",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "SS333 SSC063/308 requires this owned-body IO/Runtime/Error boundary solely to release exactly once before preserving the specified unknown primary identity; no exception is swallowed or reported successful."
+  },
+  {
+    "occurrence": 266,
+    "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "85",
+    "column": "34",
+    "method": "acquire",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36824-storage-main-independent-v1/pmd18-site-dispositions.json",
+      "sha256": "b22c5045d344da506f514411e94206e88d3716fc5489cf86122488c49f01b168"
+    },
+    "sourceSha256": "99a598b5e08bf426c72b85775b4ed21ae7b4544d9f631b3a3b87254abd543850",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "SS333 compound-close contract requires all three declared failure families after the one owned release attempt. This is typed priority/sanitized secondary assembly, not generic business exception normalization."
+  },
+  {
+    "occurrence": 267,
+    "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "85",
+    "column": "53",
+    "method": "acquire",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36824-storage-main-independent-v1/pmd18-site-dispositions.json",
+      "sha256": "b22c5045d344da506f514411e94206e88d3716fc5489cf86122488c49f01b168"
+    },
+    "sourceSha256": "99a598b5e08bf426c72b85775b4ed21ae7b4544d9f631b3a3b87254abd543850",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "SS333 compound-close contract requires all three declared failure families after the one owned release attempt. This is typed priority/sanitized secondary assembly, not generic business exception normalization."
+  },
+  {
+    "occurrence": 268,
+    "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "line": "86",
+    "column": "36",
+    "method": "acquire",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36824-storage-main-independent-v1/pmd18-site-dispositions.json",
+      "sha256": "b22c5045d344da506f514411e94206e88d3716fc5489cf86122488c49f01b168"
+    },
+    "sourceSha256": "99a598b5e08bf426c72b85775b4ed21ae7b4544d9f631b3a3b87254abd543850",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "SS333 explicitly distinguishes primary IOException plus unknown secondary from unknown-primary priority after the same single release. instanceof implements the independent golden matrix without duplicating or retrying the owned cleanup."
+  },
+  {
+    "occurrence": 269,
+    "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "line": "86",
+    "column": "36",
+    "method": "acquire",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36824-storage-main-independent-v1/pmd18-site-dispositions.json",
+      "sha256": "b22c5045d344da506f514411e94206e88d3716fc5489cf86122488c49f01b168"
+    },
+    "sourceSha256": "99a598b5e08bf426c72b85775b4ed21ae7b4544d9f631b3a3b87254abd543850",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "SS333 explicitly distinguishes primary IOException plus unknown secondary from unknown-primary priority after the same single release. instanceof implements the independent golden matrix without duplicating or retrying the owned cleanup."
+  },
+  {
+    "occurrence": 270,
+    "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "line": "86",
+    "column": "74",
+    "method": "acquire",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36824-storage-main-independent-v1/pmd18-site-dispositions.json",
+      "sha256": "b22c5045d344da506f514411e94206e88d3716fc5489cf86122488c49f01b168"
+    },
+    "sourceSha256": "99a598b5e08bf426c72b85775b4ed21ae7b4544d9f631b3a3b87254abd543850",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "SS333 explicitly distinguishes primary IOException plus unknown secondary from unknown-primary priority after the same single release. instanceof implements the independent golden matrix without duplicating or retrying the owned cleanup."
+  },
+  {
+    "occurrence": 271,
+    "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "line": "86",
+    "column": "74",
+    "method": "acquire",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36824-storage-main-independent-v1/pmd18-site-dispositions.json",
+      "sha256": "b22c5045d344da506f514411e94206e88d3716fc5489cf86122488c49f01b168"
+    },
+    "sourceSha256": "99a598b5e08bf426c72b85775b4ed21ae7b4544d9f631b3a3b87254abd543850",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "SS333 explicitly distinguishes primary IOException plus unknown secondary from unknown-primary priority after the same single release. instanceof implements the independent golden matrix without duplicating or retrying the owned cleanup."
+  },
+  {
+    "occurrence": 272,
+    "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "line": "97",
+    "column": "30",
+    "method": "acquire",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36824-storage-main-independent-v1/pmd18-site-dispositions.json",
+      "sha256": "b22c5045d344da506f514411e94206e88d3716fc5489cf86122488c49f01b168"
+    },
+    "sourceSha256": "99a598b5e08bf426c72b85775b4ed21ae7b4544d9f631b3a3b87254abd543850",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "SS333 requires preserving an existing StorageIoException reason only with no suppressed failure, otherwise fixed UNAVAILABLE after release. Type inspection is the specified closed error catalog, not an omitted subtype-specific business handler."
+  },
+  {
+    "occurrence": 273,
+    "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "111",
+    "column": "30",
+    "method": "use",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36824-storage-main-independent-v1/pmd18-site-dispositions.json",
+      "sha256": "b22c5045d344da506f514411e94206e88d3716fc5489cf86122488c49f01b168"
+    },
+    "sourceSha256": "99a598b5e08bf426c72b85775b4ed21ae7b4544d9f631b3a3b87254abd543850",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "SS333 SSC063/308 requires this owned-body IO/Runtime/Error boundary solely to release exactly once before preserving the specified unknown primary identity; no exception is swallowed or reported successful."
+  },
+  {
+    "occurrence": 274,
+    "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "111",
+    "column": "49",
+    "method": "use",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36824-storage-main-independent-v1/pmd18-site-dispositions.json",
+      "sha256": "b22c5045d344da506f514411e94206e88d3716fc5489cf86122488c49f01b168"
+    },
+    "sourceSha256": "99a598b5e08bf426c72b85775b4ed21ae7b4544d9f631b3a3b87254abd543850",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "SS333 SSC063/308 requires this owned-body IO/Runtime/Error boundary solely to release exactly once before preserving the specified unknown primary identity; no exception is swallowed or reported successful."
+  },
+  {
+    "occurrence": 275,
+    "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "114",
+    "column": "32",
+    "method": "use",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36824-storage-main-independent-v1/pmd18-site-dispositions.json",
+      "sha256": "b22c5045d344da506f514411e94206e88d3716fc5489cf86122488c49f01b168"
+    },
+    "sourceSha256": "99a598b5e08bf426c72b85775b4ed21ae7b4544d9f631b3a3b87254abd543850",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "SS333 compound-close contract requires all three declared failure families after the one owned release attempt. This is typed priority/sanitized secondary assembly, not generic business exception normalization."
+  },
+  {
+    "occurrence": 276,
+    "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+    "rule": "AvoidCatchingGenericException",
+    "line": "114",
+    "column": "51",
+    "method": "use",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36824-storage-main-independent-v1/pmd18-site-dispositions.json",
+      "sha256": "b22c5045d344da506f514411e94206e88d3716fc5489cf86122488c49f01b168"
+    },
+    "sourceSha256": "99a598b5e08bf426c72b85775b4ed21ae7b4544d9f631b3a3b87254abd543850",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "SS333 compound-close contract requires all three declared failure families after the one owned release attempt. This is typed priority/sanitized secondary assembly, not generic business exception normalization."
+  },
+  {
+    "occurrence": 277,
+    "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "line": "115",
+    "column": "34",
+    "method": "use",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36824-storage-main-independent-v1/pmd18-site-dispositions.json",
+      "sha256": "b22c5045d344da506f514411e94206e88d3716fc5489cf86122488c49f01b168"
+    },
+    "sourceSha256": "99a598b5e08bf426c72b85775b4ed21ae7b4544d9f631b3a3b87254abd543850",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "SS333 explicitly distinguishes primary IOException plus unknown secondary from unknown-primary priority after the same single release. instanceof implements the independent golden matrix without duplicating or retrying the owned cleanup."
+  },
+  {
+    "occurrence": 278,
+    "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "line": "115",
+    "column": "34",
+    "method": "use",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36824-storage-main-independent-v1/pmd18-site-dispositions.json",
+      "sha256": "b22c5045d344da506f514411e94206e88d3716fc5489cf86122488c49f01b168"
+    },
+    "sourceSha256": "99a598b5e08bf426c72b85775b4ed21ae7b4544d9f631b3a3b87254abd543850",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "SS333 explicitly distinguishes primary IOException plus unknown secondary from unknown-primary priority after the same single release. instanceof implements the independent golden matrix without duplicating or retrying the owned cleanup."
+  },
+  {
+    "occurrence": 279,
+    "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "line": "115",
+    "column": "72",
+    "method": "use",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36824-storage-main-independent-v1/pmd18-site-dispositions.json",
+      "sha256": "b22c5045d344da506f514411e94206e88d3716fc5489cf86122488c49f01b168"
+    },
+    "sourceSha256": "99a598b5e08bf426c72b85775b4ed21ae7b4544d9f631b3a3b87254abd543850",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "SS333 explicitly distinguishes primary IOException plus unknown secondary from unknown-primary priority after the same single release. instanceof implements the independent golden matrix without duplicating or retrying the owned cleanup."
+  },
+  {
+    "occurrence": 280,
+    "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "line": "115",
+    "column": "72",
+    "method": "use",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36824-storage-main-independent-v1/pmd18-site-dispositions.json",
+      "sha256": "b22c5045d344da506f514411e94206e88d3716fc5489cf86122488c49f01b168"
+    },
+    "sourceSha256": "99a598b5e08bf426c72b85775b4ed21ae7b4544d9f631b3a3b87254abd543850",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "SS333 explicitly distinguishes primary IOException plus unknown secondary from unknown-primary priority after the same single release. instanceof implements the independent golden matrix without duplicating or retrying the owned cleanup."
+  },
+  {
+    "occurrence": 281,
+    "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "line": "125",
+    "column": "30",
+    "method": "use",
+    "basis": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36824-storage-main-independent-v1/pmd18-site-dispositions.json",
+      "sha256": "b22c5045d344da506f514411e94206e88d3716fc5489cf86122488c49f01b168"
+    },
+    "sourceSha256": "99a598b5e08bf426c72b85775b4ed21ae7b4544d9f631b3a3b87254abd543850",
+    "status": "NOT_APPLICABLE_PER_SITE",
+    "reason": "SS333 requires preserving an existing StorageIoException reason only with no suppressed failure, otherwise fixed UNAVAILABLE after release. Type inspection is the specified closed error catalog, not an omitted subtype-specific business handler."
+  }
+]

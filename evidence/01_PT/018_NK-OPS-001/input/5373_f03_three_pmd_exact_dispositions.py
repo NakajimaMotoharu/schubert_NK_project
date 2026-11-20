@@ -35,7 +35,9 @@ def main():
     assert len(cs.findall("file"))==282 and not list(cs.iter("error"))
     assert not any(row.tag.endswith(("error","configerror")) for row in pmd)
     raw=[xml_site(node.get("name"),row) for node in pmd if node.tag.endswith("file") for row in node]
-    assert len(raw)==len(set(raw))==281
+    assert len(raw)==281 and len(set(raw))==277
+    original_failure=next(OPS.glob("PG40487-*/manifest.json"))
+    assert read(original_failure)["identicalRepeatedRawLocations"]==4
     source_hashes={path:sha(git("show",f"{core}:{path}")) for path in {row[0] for row in raw}}
     basis={name:next(OPS.glob(f"PG{num}-*/{fname}")) for name,num,fname in (
         ("retained",37092,"all-current-dispositions.json"),("protocol",38300,"raw-findings.json"),
@@ -51,28 +53,31 @@ def main():
         static_site(row):sha(git("show",f"{old_protocol['source']}:{row['path']}"))
         for row in read(basis["protocol"])
     }
-    storage={static_site(row["raw"]):row for row in read(basis["storage"])}
+    old_storage=read(basis["storage"])
+    storage={static_site(row["raw"]):row for row in old_storage}
+    storage_counts=Counter(static_site(row["raw"]) for row in old_storage)
+    assert all(n==Counter(raw)[key] for key,n in storage_counts.items())
     jdbc=read(basis["jdbc"])
     assert jdbc["source"]==core
     expected_jdbc=Counter((r["file"],r["rule"],r["method"],r["rawMessage"])
                           for r in jdbc["pmdIndependentDispositions"])
     release=read(basis["release"])
-    for site in raw:
+    for occurrence,site in enumerate(raw,1):
         path, rule, _, _, method, text=site
         old=retained.get((*site[:5],source_hashes[path]))
         key=(Path(path).name,rule,method,text)
         if old:
-            dispositions[site]=("retained",old["reason"])
+            dispositions[occurrence]=("retained",old["reason"])
         elif site in protocol and protocol[site]==source_hashes[path]:
             note="Ordered map is local" if rule=="UseConcurrentHashMap" else "Throwable identity avoids self-suppression"
             assert rule in ("UseConcurrentHashMap","CompareObjectsWithEquals")
-            dispositions[site]=("protocol",note)
+            dispositions[occurrence]=("protocol",note)
         elif site in storage and storage[site]["sourceSha256"]==source_hashes[path]:
             assert storage[site]["disposition"]=="NOT_APPLICABLE"
-            dispositions[site]=("storage",storage[site]["reason"])
+            dispositions[occurrence]=("storage",storage[site]["reason"])
         elif expected_jdbc.get(key,0)>0:
             expected_jdbc[key]-=1
-            dispositions[site]=("jdbc","Preserves contractually ordered ownership release and Throwable identity")
+            dispositions[occurrence]=("jdbc","Preserves contractually ordered ownership release and Throwable identity")
         elif key[:3]==("ReleaseInventory.java","UnusedReturnValue","parse"):
             body=git("show",f"{core}:{path}").decode()
             assert "reader.setStrictness(Strictness.STRICT)" in body and "reader.peek();" in body
@@ -80,21 +85,23 @@ def main():
             test=path.replace("/main/","/test/").replace("ReleaseInventory.java","ReleaseInventoryTest.java")
             contents=git("show",f"{release['source']}:{test}").decode()
             assert 'refused(golden() + " {}");' in contents
-            dispositions[site]=("release","Pinned strict JSON reader checks trailing content before acceptance. Its return value is immaterial to validation")
+            dispositions[occurrence]=("release","Pinned strict JSON reader checks trailing content before acceptance. Its return value is immaterial to validation")
     summary=Counter(tag for tag,_ in dispositions.values())
     assert summary=={"retained":58,"protocol":3,"storage":18,"jdbc":20,"release":1}
     assert all(n==0 for n in expected_jdbc.values())
     out=OPS/"PG40488-f03-current-282-static-independent-v1"
     out.mkdir()
-    unresolved=[dict(path=k[0],rule=k[1],line=k[2],column=k[3],method=k[4]) for k in raw if k not in dispositions]
+    unresolved=[dict(occurrence=i,path=k[0],rule=k[1],line=k[2],column=k[3],method=k[4])
+                for i,k in enumerate(raw,1) if i not in dispositions]
     assert len(unresolved)==181
     dump(out/"unresolved181.json",unresolved)
-    rows=[dict(path=s[0],rule=s[1],line=s[2],column=s[3],method=s[4],basis=pin(basis[tag]),
+    rows=[dict(occurrence=i,path=s[0],rule=s[1],line=s[2],column=s[3],method=s[4],basis=pin(basis[tag]),
                sourceSha256=source_hashes[s[0]],status="NOT_APPLICABLE_PER_SITE",reason=reason)
-          for s,(tag,reason) in dispositions.items()]
+          for i,s in enumerate(raw,1) if i in dispositions for tag,reason in (dispositions[i],)]
     dump(out/"classified100.json",rows)
     d=dict(actualExit=0, source=report["source"],productionCore=core,analysis=pin(here),
            pmdExitPreserved=4,currentRaw=281,classifiedNonApplicable=100,stillUnclassified=181,
+           failedPrecheck=pin(original_failure),distinctRawLocationKeys=277,
            classificationOrigins=summary,checkstyleCurrentSources=282,checkstyleFindings=0,
            classified=pin(out/"classified100.json"),unresolved=pin(out/"unresolved181.json"),
            noSuppressionsOrScopeCertification=True,actualProductTests=0,wholeF03Accepted=False,
