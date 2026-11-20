@@ -1,0 +1,238 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-20T20:39:40.592525+00:00",
+  "run": "PG41196-media-committed-write-error-v1",
+  "productionCore": "559f5b5945e82374e0843dcfae11a8d07faef1ea",
+  "testId": "PT-MED-PORT010",
+  "testSource": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaRangePortTest.java",
+    "sha256": "0106e297dad587f18b513efc5e38742d71b79ac6b50a1b92ccd0f8cbe7b3628d"
+  },
+  "priorTestSourceByteExactApartFromNewCase": true,
+  "originalCaseReceipt": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27000-media-current186-v1/manifest.json",
+    "sha256": "888d032ba01eb73ab47871343531ab91369145442ca4d3d145bb3c7550d3624b"
+  },
+  "newTests": 1,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "oldTestsExecutedHere": 0,
+  "sourceInputs": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/MediaRangeService.java",
+      "sha256": "6add8f1a1e8470b3f8aedc86e273138c7446de07ab16a772587df00f2c59e69a"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/HttpByteRangeParser.java",
+      "sha256": "6a4033dfedc2148642b1bf5a83eb69719f36d0bc38813c495cf211e520595e88"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/MediaBodyStreamer.java",
+      "sha256": "dccf3918d3891a520cf7a01537c774a5450dd450e28bf77b922ea1134b6ad163"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/MediaDeliveryException.java",
+      "sha256": "1b67c19a97f0cd35f193bc38ad1e155a4691f54ce6ad0c58d9bb37728cc77585"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/ContentDispositionFactory.java",
+      "sha256": "87aa576aafd6cb17a6778ce25d60bbbeb7df444fc089e749a68a70232215fc4e"
+    }
+  ],
+  "physical": {
+    "ContentDispositionFactory.class": "5d7d0af980c4e250c370e44fc295b24d5eb85e6d653d9f91363b9d06bb316cae",
+    "MediaBodyStreamer.class": "c5b9712f745b9b35b34b52efe5a62ad6f48a38920f806cac6973c4617ff7dc39",
+    "HttpByteRangeParser.class": "c5192aac6be81add9fb43a1c43aba92c4f0c83ee4525557b7fa0b11d96b97c72",
+    "HttpByteRangeParser$Unsatisfiable.class": "77b54edaf661cb1002809bbc53bc325c6c1b21839cf969e5a071a7f5aa82e8de",
+    "HttpByteRangeParser$Partial.class": "1ab4ebb2d0a5e8aab23e2bf1abd205a333f1b7a6064f4931813df968e18ec541",
+    "HttpByteRangeParser$Full.class": "5541bfc3116d2d5c17af2e3306124a9cae2c28cfee1bdf3d93717a645ef199ac",
+    "HttpByteRangeParser$Selection.class": "44bbe8f708ab5b50ffb0c0bc64776e7e31361eb7ba88efb22873d40fb0f23bbe",
+    "MediaDeliveryException.class": "58f42b902f13810fce4a71fff60ef51545fb661e2b34810c0ca1aa6212014353",
+    "MediaDeliveryException$Reason.class": "56f53ef92ce04033e1404b3b6adf25c0993431f38e66cffd6bd7543cdc92fa4a",
+    "MediaRangeService.class": "fb461940bf007bf98eefd27a105b77bd7bcf3e0ce683478f30cd9579b43d8346",
+    "MediaRangeService$Response.class": "5c0027f150f9ccb146ac263a20fa0904de848228daf664f5eebe8a2a5bf717db",
+    "MediaRangeService$FileSource.class": "bed817501847367e143d838b97bcac5a6d5f829689630bb04ff07488a50e600b",
+    "MediaRangeService$ReadOperation.class": "e67eee1f672bc26fc565e221b6e6b3e2fbe5dcb1f6f438529bd422934a65ec31"
+  },
+  "currentProbe": {
+    "crc64": "e28af134ae32040d",
+    "probeCount": 57,
+    "hitProbeIds": [
+      1,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      13,
+      15,
+      18,
+      20,
+      23,
+      24,
+      26,
+      27,
+      29,
+      30,
+      31,
+      32,
+      33,
+      35,
+      36,
+      37,
+      38,
+      39,
+      43,
+      44,
+      45,
+      46,
+      47,
+      50,
+      51,
+      54,
+      55,
+      56
+    ],
+    "missedProbeIds": [
+      0,
+      2,
+      3,
+      4,
+      12,
+      14,
+      16,
+      17,
+      19,
+      21,
+      22,
+      25,
+      28,
+      34,
+      40,
+      41,
+      42,
+      48,
+      49,
+      52,
+      53
+    ]
+  },
+  "stages": {
+    "format": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaRangePortTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "checkstyle": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaRangePortTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "8dfbc8acc93b57545819c2cfeb0cfe89296c6f36808af8bc1164d2f26e50599e",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compile": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/dev/shm/pgpt-media-error-3_l_ym8b/classes:/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG37688-web-enum-current-protocol176-v1/current-protocol176.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "-d",
+        "/dev/shm/pgpt-media-error-3_l_ym8b/classes",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/MediaRangeService.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/HttpByteRangeParser.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/MediaBodyStreamer.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/MediaDeliveryException.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/ContentDispositionFactory.java",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaRangePortTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "crc": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "classinfo",
+        "/dev/shm/pgpt-media-error-3_l_ym8b/classes/dev/codex/schubert/nk/web/media/MediaRangeService.class"
+      ],
+      "exit": 0,
+      "stdoutSha256": "f0967d6535c11e08af417b93eb8653dcf56ef8846a3f5ab9252ffbce0c84ae30",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "junit": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Dfile.encoding=UTF-8",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/PG41196-media-committed-write-error-v1/unit.exec,append=false,sessionid=PG41196-media-committed-write-error-v1",
+        "-cp",
+        "/dev/shm/pgpt-media-error-3_l_ym8b/classes:/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG37688-web-enum-current-protocol176-v1/current-protocol176.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "org.junit.platform.console.ConsoleLauncher",
+        "execute",
+        "--disable-banner",
+        "--details=summary",
+        "--fail-if-no-tests",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41196-media-committed-write-error-v1/xml",
+        "--select-method",
+        "dev.codex.schubert.nk.web.media.MediaRangePortTest#writeErrorAfterBeginClosesSourceWithoutRetryingAndReleasesThePermit"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e71a7ede5eb01b75d6d1c3cd58196257357680dab6ac5a81aeaa482e3c96ff7f",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "localOriginals": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41196-media-committed-write-error-v1/terminal.json",
+      "sha256": "9e5967c19e1a6d3d6d4893e4ce89a9631c6dabafad6c6c825a9409e8a78aad81"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41196-media-committed-write-error-v1/unit.exec",
+      "sha256": "ceca6d56489ac1b26ed7973488e7c36ef4795161422169e3c12d272bca581117"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41196-media-committed-write-error-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "6dc030f27f267934a1167235d0a2f6d85b54ed747ca88306f773dd505915fecb"
+    }
+  ],
+  "verifiedEffects": {
+    "initialSameError": true,
+    "initialBegins": 1,
+    "initialOpens": 1,
+    "initialCloses": 1,
+    "initialWriteAttempts": 1,
+    "initialOutputCloses": 0,
+    "nextStatus": 206,
+    "nextByteCount": 3,
+    "nextCloses": 2
+  },
+  "realFileAuthHttpOrDbActions": 0,
+  "whole451": false,
+  "formalDelta": 0
+}

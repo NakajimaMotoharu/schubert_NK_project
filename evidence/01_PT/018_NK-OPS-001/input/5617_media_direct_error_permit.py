@@ -8,6 +8,7 @@ import re
 import runpy
 import shutil
 import subprocess
+import sys
 from tempfile import TemporaryDirectory
 from xml.etree import ElementTree as ET
 
@@ -17,15 +18,28 @@ BIN, OPS, WEB = (H[n] for n in ('BIN','OPS','WEB'))
 pin, read, sha, check, successful_case = (H[k] for k in ('pin','read','sha','check','successful_case'))
 PKG = 'dev/codex/schubert/nk/web/media'
 CASE_OWNER = PKG.replace('/','.')+'.MediaRangePortTest'
-CASE = 'directErrorBeforeResponseEscapesUnchangedAndReleasesThePermit'
 TEST = WEB/'test/java'/PKG/'MediaRangePortTest.java'
 FILES = ('MediaRangeService','HttpByteRangeParser','MediaBodyStreamer','MediaDeliveryException',
          'ContentDispositionFactory')
-RUN = 'PG41194-media-range-error-releases-permit-v1'
+CASES = {
+    'before': (
+        '1622', 'directErrorBeforeResponseEscapesUnchangedAndReleasesThePermit',
+        'PG41194-media-range-error-releases-permit-v1','008','009',
+        dict(initialSameError=True,initialBegins=0,initialOpens=0,initialCloses=0,
+             nextStatus=206,nextByteCount=3,nextCloses=1),
+    ),
+    'write': (
+        '1625','writeErrorAfterBeginClosesSourceWithoutRetryingAndReleasesThePermit',
+        'PG41196-media-committed-write-error-v1','009','010',
+        dict(initialSameError=True,initialBegins=1,initialOpens=1,initialCloses=1,
+             initialWriteAttempts=1,initialOutputCloses=0,nextStatus=206,nextByteCount=3,nextCloses=2),
+    ),
+}
 
 
-def main():
-    start, = Path('documents/400_PGPT/470_PMO').glob('601_*/1622_*.json')
+def main(scope_name):
+    start_id, case_name, run_name, prior_suffix, suffix, verified_effects = CASES[scope_name]
+    start, = Path('documents/400_PGPT/470_PMO').glob(f'601_*/{start_id}_*.json')
     context = read(start)['values']
     assert all(pin(Path(ref['path']))==ref for ref in context['oracleReferences'])
     assert shutil.disk_usage('/dev/shm').free>=32*1024**2 and shutil.disk_usage('.').free>=64*1024**2
@@ -35,10 +49,13 @@ def main():
         assert source==path.read_bytes()
     old_test = subprocess.check_output(['git','show',f'{context["source"]}:{TEST}'],timeout=15).decode()
     now = TEST.read_text()
-    insert = re.search(r'\n  @Test\n  void '+CASE+r'\(\) throws Exception \{.*?\n  }\n',now,re.S)
+    insert = re.search(r'\n  @Test\n  void '+case_name+r'\(\) throws Exception \{.*?\n  }\n',now,re.S)
     assert insert and now[:insert.start()]+now[insert.end():] != now
-    inverted = (now[:insert.start()]+now[insert.end():]).replace('PT-MED-PORT001..009','PT-MED-PORT001..008')
+    inverted = (now[:insert.start()]+now[insert.end():]).replace(f'PT-MED-PORT001..{suffix}',f'PT-MED-PORT001..{prior_suffix}')
     assert inverted==old_test
+    if scope_name == 'write':
+        previous, = OPS.glob('PG41194-*/manifest.json')
+        assert sha(old_test.encode())==read(previous)['testSource']['sha256']
     prior, = OPS.glob('PG27000-*/manifest.json')
     original = read(prior)
     previous_cases = [x for x in original['cases'] if x['classname']==CASE_OWNER]
@@ -75,36 +92,35 @@ def main():
         stages['crc'], classinfo = check([BIN/'java','-jar',cli,'classinfo',main])
         assert classinfo.returncode==0
         compiled_crc, = re.findall(rb'class 0x([0-9a-f]+) ',classinfo.stdout)
-        durable = (Path('../pgpt-runs/PG379')/RUN).resolve()
+        durable = (Path('../pgpt-runs/PG379')/run_name).resolve()
         durable.mkdir()
         exec_path, xml_dir = durable/'unit.exec',durable/'xml'
         stages['junit'], executed = check([BIN/'java','-Dfile.encoding=UTF-8',
-            f'-javaagent:{agent}=destfile={exec_path},append=false,sessionid={RUN}','-cp',cp,
+            f'-javaagent:{agent}=destfile={exec_path},append=false,sessionid={run_name}','-cp',cp,
             'org.junit.platform.console.ConsoleLauncher','execute','--disable-banner','--details=summary',
-            '--fail-if-no-tests','--reports-dir',xml_dir,'--select-method',CASE_OWNER+'#'+CASE])
+            '--fail-if-no-tests','--reports-dir',xml_dir,'--select-method',CASE_OWNER+'#'+case_name])
         terminal = durable/'terminal.json'
         terminal.write_text(json.dumps(stages['junit'],indent=2)+'\n')
         assert executed.returncode==0,(executed.stdout,executed.stderr)
         report = xml_dir/'TEST-junit-jupiter.xml'
         suite = ET.parse(report).getroot()
         [testcase] = suite.findall('testcase')
-        assert testcase.get('classname')==CASE_OWNER and testcase.get('name')==CASE+'()'
+        assert testcase.get('classname')==CASE_OWNER and testcase.get('name')==case_name+'()'
         assert successful_case(testcase)
         assert [suite.get(k) for k in ('tests','failures','errors','skipped')]==['1','0','0','0']
         class_name = PKG+'/MediaRangeService'
         covered = runpy.run_path('tools/quality/jacoco_readonly_exec_subset.py')['decode'](
             exec_path.read_bytes(),{class_name})['classes'][class_name]
         assert int(covered['crc64'],16)==int(compiled_crc,16) and covered['hitProbeIds']
-    out = OPS/RUN
+    out = OPS/run_name
     out.mkdir()
-    content = dict(actualExit=0,terminalAtUTC=datetime.now(timezone.utc).isoformat(),run=RUN,
-                   productionCore=context['productionCoreMain'],testId='PT-MED-PORT009',testSource=pin(TEST),
-                   previousEightByteExactApartFromNewCase=True,originalCaseReceipt=pin(prior),newTests=1,
+    content = dict(actualExit=0,terminalAtUTC=datetime.now(timezone.utc).isoformat(),run=run_name,
+                   productionCore=context['productionCoreMain'],testId=f'PT-MED-PORT{suffix}',testSource=pin(TEST),
+                   priorTestSourceByteExactApartFromNewCase=True,originalCaseReceipt=pin(prior),newTests=1,
                    failures=0,errors=0,skipped=0,notRun=0,oldTestsExecutedHere=0,
                    sourceInputs=list(map(pin,current_sources)),physical=physical,currentProbe=covered,
                    stages=stages,localOriginals=list(map(pin,[terminal,exec_path,report])),
-                   verifiedEffects={'initialSameError':True,'initialBegins':0,'initialOpens':0,
-                     'initialCloses':0,'nextStatus':206,'nextByteCount':3,'nextCloses':1},
+                   verifiedEffects=verified_effects,
                    realFileAuthHttpOrDbActions=0,whole451=False,formalDelta=0)
     manifest = out/'manifest.json'
     with manifest.open('x') as stream:
@@ -114,4 +130,4 @@ def main():
 
 
 if __name__=='__main__':
-    main()
+    main(sys.argv[1] if len(sys.argv)==2 else 'before')

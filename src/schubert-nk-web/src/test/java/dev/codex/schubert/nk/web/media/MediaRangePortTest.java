@@ -28,7 +28,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import org.junit.jupiter.api.Test;
 
-/** PT-MED-PORT001..009. Memory-only response/byte-channel ports; no path, native or HTTP client. */
+/** PT-MED-PORT001..010. Memory-only response/byte-channel ports; no path, native or HTTP client. */
 final class MediaRangePortTest {
   private static final int SIZE = 2_097_155;
   private static final String LOGICAL_ID = "7";
@@ -235,6 +235,70 @@ final class MediaRangePortTest {
     assertEquals(2, attempts.get());
     assertEquals(1, source.opens);
     assertEquals(1, source.closes);
+  }
+
+  @Test
+  void writeErrorAfterBeginClosesSourceWithoutRetryingAndReleasesThePermit() throws Exception {
+    var fatal = new AssertionError("synthetic fatal write failure");
+    var source = new Probe();
+    var service = new MediaRangeService(source, 1);
+    var descriptor = descriptor(ContentDisposition.INLINE);
+    var failed = new Reply();
+    var writes = new AtomicInteger();
+    var bodyCalls = new AtomicInteger();
+    var outputCloses = new AtomicInteger();
+    var response =
+        new MediaRangeService.Response() {
+          @Override
+          public void begin(int status, Map<String, String> headers) throws IOException {
+            failed.begin(status, headers);
+          }
+
+          @Override
+          public OutputStream body() {
+            bodyCalls.incrementAndGet();
+            return new ByteArrayOutputStream() {
+              @Override
+              public synchronized void write(byte[] value, int offset, int length) {
+                writes.incrementAndGet();
+                throw fatal;
+              }
+
+              @Override
+              public void close() {
+                outputCloses.incrementAndGet();
+              }
+            };
+          }
+        };
+
+    assertSame(
+        fatal,
+        assertThrows(
+            AssertionError.class,
+            () ->
+                service.deliver(
+                    MediaType.MUSIC,
+                    LOGICAL_ID,
+                    ContentDisposition.INLINE,
+                    Optional.of(RANGE),
+                    false,
+                    descriptor,
+                    response)));
+    assertEquals(1, failed.begins);
+    assertEquals(206, failed.status);
+    assertEquals(THREE_BYTE_RANGE, failed.headers.get(CONTENT_RANGE));
+    assertEquals(1, bodyCalls.get());
+    assertEquals(1, writes.get());
+    assertEquals(0, outputCloses.get());
+    assertEquals(1, source.opens);
+    assertEquals(1, source.closes);
+
+    var recovered = new Reply();
+    call(service, descriptor, Optional.of(RANGE), false, recovered);
+    verify(recovered, 206, 2, 3, THREE_BYTE_RANGE, false, false);
+    assertEquals(2, source.opens);
+    assertEquals(2, source.closes);
   }
 
   @Test

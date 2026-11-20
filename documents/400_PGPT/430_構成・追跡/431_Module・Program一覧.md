@@ -1005,3 +1005,5 @@ PT-WEB-SCR013-COUNT-001、WBS-P016-13/2、SS313 §2・UI235 §9。曲一覧の�
 PT-MED-RANGE-LONG-001、WBS-P009-04/2、SS333 §10.1–10.2。符号付き上限のRange演算。 [局所仕様](../../../evidence/01_PT/009_NK-MED-001/4090_Range長整数上限の隣接境界仕様・結果.md)。
 
 PT-MED-PORT009、WBS-P009-04/2、SS333 §11・UI237。配信portの直接Errorと次の枠解放。 [仕様](../../../evidence/01_PT/009_NK-MED-001/4091_Media配信直接Error時の枠解放単体仕様.md)。
+
+PT-MED-PORT010、WBS-P009-04/2、SS333 §11・UI237。応答開始後の書込みErrorと借用資源。 [仕様](../../../evidence/01_PT/009_NK-MED-001/4093_Media配信開始後の直接Error単体仕様.md)。

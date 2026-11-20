@@ -1,0 +1,140 @@
+{
+  "eventId": "PGPT-20261008-7141",
+  "groupId": "WBS66-P00904-MEDIA-COMMITTED-WRITE-ERROR",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T20:40:50.625000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 80,
+      "remainingPercent": 20,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66-P00904-MEDIA-COMMITTED-WRITE-ERROR",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "WBS66-P00904-MEDIA-COMMITTED-WRITE-ERROR",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P009-04"
+    ],
+    "managementWorkIds": [
+      "WBS-P009-04/2"
+    ],
+    "source": "2cb6396fae328112d8002bd533c4498e92f1c2fe",
+    "productionCoreMain": "559f5b5945e82374e0843dcfae11a8d07faef1ea",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG41196-media-committed-write-error-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.13,
+      "base": 0.39,
+      "high": 0.95
+    },
+    "groupCapPp": 1.2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1624_Media配信Error枠解放と次工程.json",
+        "sha256": "460f3c10c0752f488b93a13fb6417558d31c951c9ccc77b65f9e17c153808e85"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41194-media-range-error-releases-permit-v1/manifest.json",
+        "sha256": "292f02e25d5a0554c7d129d9ef1558c85aee20575f442869e034822a1d52c5ce"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27002-media186-independent-v1/manifest.json",
+        "sha256": "2b166351a6ab0b5f5e64273dc4aaf3d1c24caca092ad8b2a17866bc998c188fe"
+      },
+      {
+        "path": "evidence/01_PT/009_NK-MED-001/008_NK-MED-001_配信port単体仕様.md",
+        "sha256": "df753180cefa25ab72ee1567f5be12a3d220726f37b66a07f0944738d41c977a"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "SS333 §11。既PORT009はresponse前、PORT005は生IOの固定化。今回はbegin後のmemory outputによる直接Error、closeと再試行なし",
+    "endCondition": "開始1、同一Error、write1、close1、次206。新Testだけを複製なしに測る",
+    "workScope": "PT-MED-PORT010, same admitted local memory ports; no native, actual HTTP, service or DB",
+    "quotaAfter": {
+      "usedPercent": 80,
+      "remainingPercent": 20,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "d270a674107b4b02004cf268506b26efcb795503f784342e1306fe4c5c2b2cbf",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T20:40:50.625000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 80,
+          "remainingPercent": 20,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T20:39:40.592525+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 80,
+      "remainingPercent": 20,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-7140",
+    "attempt": 1,
+    "attemptResult": "MEMORY_PORT_POST_BEGIN_FATAL_AND_RELEASE_PASSED",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 1,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41196-media-committed-write-error-v1/manifest.json",
+        "sha256": "cd87aa3e26e6daa57b7a7c2ca20f6195917776e92f1206b0e6d98839dfd0f086"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": "P009-04真正HTTP/配信、全451。PORT009と同計測へ合算しない。",
+    "firstProductCase": 1,
+    "firstProductCasePassed": 1,
+    "staticStages": 2,
+    "testId": "PT-MED-PORT010",
+    "productMediaActions": 0,
+    "recordedEffects": {
+      "initialSameError": true,
+      "initialBegins": 1,
+      "initialOpens": 1,
+      "initialCloses": 1,
+      "initialWriteAttempts": 1,
+      "initialOutputCloses": 0,
+      "nextStatus": 206,
+      "nextByteCount": 3,
+      "nextCloses": 2
+    }
+  }
+}
