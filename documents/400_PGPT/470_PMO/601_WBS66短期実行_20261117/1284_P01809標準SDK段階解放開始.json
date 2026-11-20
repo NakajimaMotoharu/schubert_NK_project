@@ -1,0 +1,65 @@
+{
+  "eventId": "PGPT-20261008-6800",
+  "groupId": "P01809-batch-standard-gc-close-once",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T13:26:19.427000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 70,
+      "remainingPercent": 30,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "P01809-batch-standard-gc-close-once",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "P01809-batch-standard-gc-close-once",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P018-09"
+    ],
+    "managementWorkIds": [],
+    "source": "08f2054ac82cd8cabc4a57c12162736edfa1cf31",
+    "productionCoreMain": "cdb649a5f054bc2ceed72ef57e55605f14a590d1",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40872-batch-standard-gc-partial-close-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.45,
+      "base": 1.0,
+      "high": 2.4
+    },
+    "groupCapPp": 3.0,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1283_F03検査サマリーの解析入力継続点.json",
+        "sha256": "8abdb8220593461448710e6761af28080588cc87d96260bdd68938be8350cd87"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25262-batch-standard-whole73-independent-v1/manifest.json",
+        "sha256": "6f1cf6ad912fbc987356e2cef7f6426ab90b80b8c04d99e6cb3d1f2497462177"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG8170-prometheus-sdk-prepare-v1/manifest.json",
+        "sha256": "371004a7bcadce5d398059e765ef8f3dc876a7ea004fced60ba8ceb05fad123a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/1810_WebBatchStandardMetricSource_単体テスト仕様.md",
+        "sha256": "d8240e706b616a3a1072f808038313d68cc4ed9b253f35eedbff6883f01fec9d"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "既BatchStandardMetricSourceTestと固定Micrometer SDKを用いる。標準SDK内部閉包、外部endpointなし。API/Web横展開は当Batch証拠とは別。",
+    "endCondition": "BATCHHOST017でGC解放成功後のregistry close失敗・明示再closeの順序を修正前後比較し、修正後は同ownerの既16も検証。元例外、scrape拒否、冪等を確認。",
+    "workScope": "P018-09監視SDK Batchの一所有経路、C07は参照費用加算なし。実運用監視・サービス・VM・451は別。"
+  }
+}

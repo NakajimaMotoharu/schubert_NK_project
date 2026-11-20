@@ -306,6 +306,31 @@ class BatchStandardMetricSourceTest {
   }
 
   @Test
+  void batchhost017RegistryFailureRetriesOnlyItsUnreleasedHandle() {
+    var order = new ArrayList<String>();
+    var source = new ProbeRegistry(order);
+    var gc = new ProbeGc(order);
+    var failure = new IllegalStateException("registry close fixture");
+    var owner =
+        new BatchStandardMetricSource(() -> source, (value, ack) -> assertTrue(ack.test(gc)));
+    try {
+      owner.bind(DEBUG_MODE);
+      source.failure = Optional.of(failure);
+      assertSame(failure, assertThrows(IllegalStateException.class, owner::close));
+      assertThrows(IllegalStateException.class, () -> owner.scrape(DEBUG_MODE));
+      assertEquals(List.of("gc", "registry"), order);
+      source.failure = Optional.empty();
+      owner.close();
+      owner.close();
+      assertTrue(source.isClosed());
+      assertEquals(List.of("gc", "registry", "registry"), order);
+    } finally {
+      source.failure = Optional.empty();
+      owner.close();
+    }
+  }
+
+  @Test
   void batchhost014NullGcCallbackFailsWithoutImplicitRegistryClose() {
     var source = new ProbeRegistry(new ArrayList<>());
     var owner = new BatchStandardMetricSource(() -> source, (value, ack) -> ack.test(null));
