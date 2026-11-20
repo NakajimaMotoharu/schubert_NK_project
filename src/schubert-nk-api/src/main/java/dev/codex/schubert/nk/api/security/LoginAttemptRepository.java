@@ -51,8 +51,9 @@ public final class LoginAttemptRepository {
     Objects.requireNonNull(usernameKey, "usernameKey");
     Objects.requireNonNull(client, "client");
     Objects.requireNonNull(now, "now");
-    int bytes = usernameKey.getBytes(StandardCharsets.UTF_8).length;
-    if (bytes < 1 || bytes > 96)
+    if (usernameKey.isEmpty()
+        || !StandardCharsets.UTF_8.newEncoder().canEncode(usernameKey)
+        || usernameKey.getBytes(StandardCharsets.UTF_8).length > 96)
       throw new IllegalArgumentException("username key length is invalid");
     try {
       requireTransaction(connection);

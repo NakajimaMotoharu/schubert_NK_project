@@ -28,7 +28,7 @@ import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
-/** PT-AUT-ATTEMPTPORT001..010. Pure borrowed JDBC interfaces, no DB/authentication/credential. */
+/** PT-AUT-ATTEMPTPORT001..011. Pure borrowed JDBC interfaces, no DB/authentication/credential. */
 final class LoginAttemptPortTest {
   private static final String USER_SQL =
       "select"
@@ -167,6 +167,23 @@ final class LoginAttemptPortTest {
           });
       assertTrue(automatic.statements.isEmpty());
     }
+  }
+
+  @Test
+  void attemptPort011UnencodableKeysFailBeforeTheBorrowedPortIsTouched() throws Exception {
+    for (String name : List.of("\uD800", "\uDC00", "\uDC00\uD800", "x\uD800y")) {
+      var fixture = new Fixture();
+      var failure = assertThrows(IllegalArgumentException.class, () -> lock(fixture, name, NOW));
+      assertEquals("username key length is invalid", failure.getMessage());
+      assertTrue(fixture.events.isEmpty());
+      assertTrue(fixture.statements.isEmpty());
+    }
+
+    String valid = "é".repeat(46) + "😀";
+    var fixture = new Fixture();
+    lock(fixture, valid, NOW);
+    assertEquals(valid, fixture.statements.getFirst().bindings.get(1));
+    fixture.assertClosed(3, 2);
   }
 
   @Test
