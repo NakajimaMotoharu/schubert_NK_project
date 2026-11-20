@@ -1,0 +1,242 @@
+{
+  "run": "PG41212-f02-ssc461-jdbc-order-independent-v1",
+  "actualExit": 1,
+  "source": "6c2e8b027818c8dac0ed0f895edb85658e9c4ff1",
+  "terminalAtUTC": "2026-11-20T21:05:44.193531+00:00",
+  "testsExecuted": 0,
+  "prior": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41210-f02-ssc461-jdbc-order-identity-v1/manifest.json",
+    "sha256": "4d537b5af684d6474353fcbc5a3e65f6d07b9374f37ef6c16d16a10697f01681"
+  },
+  "original": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41210-f02-ssc461-jdbc-order-identity-v1/unit.exec",
+    "sha256": "aac3a2595a3f20d537796c8e17345594003d56b436a4e906143c13a34137df71"
+  },
+  "xml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41210-f02-ssc461-jdbc-order-identity-v1/jupiter.xml",
+    "sha256": "3f82a47dd474a77835182a56ca19c95682c810f4bb28957e237d79c08e7eab99"
+  },
+  "admittedPhysical": 5,
+  "measurementTool": {
+    "path": "tools/quality/jacoco/UnfilteredCodeMeasurement.java",
+    "sha256": "acfb221d8853ceac834f862a19717a3242d67bbb8c7508ff1a00fd5db060ef15"
+  },
+  "measurementDeps": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+      "sha256": "ade1e0fdb4cd80d8537b57c6edb70a1360c47fdc518c20c65314517479bc4d0d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar",
+      "sha256": "ed825d10ab1399c8c0cb669e688cf0c8c82629b4c8399b58352b68e92ca10fcb"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar",
+      "sha256": "6d0abefb7cbf972ea16edb37ec14835372505063a45f976ab7ea889ed9497895"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+      "sha256": "3dfb0d5b6a106cd40b5b250e39935fbf2f927f4477546a5369a3ac609cf0506b"
+    }
+  ],
+  "methodScope": [
+    {
+      "owner": "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph",
+      "name": "preserveFatal",
+      "descriptor": "(Ljava/lang/Throwable;)V",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 4
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 2
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "owner": "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph",
+      "name": "lambda$preserveFatal$0",
+      "descriptor": "(Ljava/lang/Throwable;)Ljava/lang/Throwable;",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 11
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 2
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 2
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "owner": "dev/codex/schubert/nk/storage/StorageIoException",
+      "name": "preserveFatal",
+      "descriptor": "(Ljava/lang/Throwable;Ljava/util/function/Function;)V",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 65
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 10
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 16
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 6
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    }
+  ],
+  "entireClassCounters": [
+    "CLASS\tdev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph\t0b299811c9b7ad33\ttrue\t4\t1537\tINSTRUCTION:0:15\tBRANCH:0:2\tLINE:0:3\tCOMPLEXITY:0:3\tMETHOD:0:2\tCLASS:0:1",
+    "CLASS\tdev/codex/schubert/nk/storage/StorageIoException$Reason\ta64b044af8a34f92\tfalse\t8\t16433\tINSTRUCTION:50:0\tBRANCH:0:0\tLINE:4:0\tCOMPLEXITY:5:0\tMETHOD:5:0\tCLASS:1:0",
+    "CLASS\tdev/codex/schubert/nk/storage/StorageIoException\t1271c02831786cbb\ttrue\t25\t49\tINSTRUCTION:28:65\tBRANCH:2:10\tLINE:7:16\tCOMPLEXITY:5:6\tMETHOD:4:1\tCLASS:0:1"
+  ],
+  "findings": [
+    {
+      "rule": "EI_EXPOSE_REP",
+      "owner": "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraphOrderTest$CountingSql"
+    }
+  ],
+  "errors": 0,
+  "missing": 0,
+  "output": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41212-f02-ssc461-jdbc-order-independent-v1/coverage.tsv",
+      "sha256": "1544032c3286c44d8c317a13b05662820b05ca8e70ed58273ea06d92fe47ba55"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41212-f02-ssc461-jdbc-order-independent-v1/spotbugs.xml",
+      "sha256": "3039964f48d2f0f52cb5e7fe7d89b41a13a9a255f8e0c1f84adf018c597d699b"
+    }
+  ],
+  "stages": {
+    "compileMeasure": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "-d",
+        "/dev/shm/pgpt-jdbc-order-proof-n4vh_61c",
+        "tools/quality/jacoco/UnfilteredCodeMeasurement.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "unfiltered": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/dev/shm/pgpt-jdbc-order-proof-n4vh_61c:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+        "--strict-original-exec",
+        "evidence/01_PT/018_NK-OPS-001/evidence/PG41210-f02-ssc461-jdbc-order-identity-v1/unit.exec",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41210-f02-ssc461-jdbc-order-identity-v1/sealed/JdbcFailureGraph.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41210-f02-ssc461-jdbc-order-identity-v1/sealed/StorageIoException$Reason.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41210-f02-ssc461-jdbc-order-identity-v1/sealed/StorageIoException.class"
+      ],
+      "exit": 0,
+      "stdoutSha256": "1544032c3286c44d8c317a13b05662820b05ca8e70ed58273ea06d92fe47ba55",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "testTypeCompile": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/dev/shm/pgpt-jdbc-order-proof-n4vh_61c:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "-d",
+        "/dev/shm/pgpt-jdbc-order-proof-n4vh_61c",
+        "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraphOrderTest.java"
+      ],
+      "exit": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "spotbugs": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Xmx1g",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/com/github/spotbugs/spotbugs/4.10.4/spotbugs-4.10.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-analysis/9.10.1/asm-analysis-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-util/9.10.1/asm-util-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/bcel/bcel/6.12.0/bcel-6.12.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/github/stephenc/jcip/jcip-annotations/1.0-1/jcip-annotations-1.0-1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/dom4j/dom4j/2.2.0/dom4j-2.2.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/commons/commons-lang3/3.20.0/commons-lang3-3.20.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/commons/commons-text/1.15.0/commons-text-1.15.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/github/spotbugs/spotbugs-annotations/4.10.4/spotbugs-annotations-4.10.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/jaxen/jaxen/2.0.6/jaxen-2.0.6.jar:/home/mini/codex/project1/work/toolchain/m2/repository/net/sf/saxon/Saxon-HE/12.10/Saxon-HE-12.10.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/logging/log4j/log4j-api/2.26.1/log4j-api-2.26.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.26.1/log4j-to-slf4j-2.26.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-simple/2.0.18/slf4j-simple-2.0.18.jar:/home/mini/codex/project1/work/toolchain/m2/repository/commons-io/commons-io/2.22.0/commons-io-2.22.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/xmlresolver/xmlresolver/5.3.3/xmlresolver-5.3.3.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/xmlresolver/xmlresolver/5.3.3/xmlresolver-5.3.3-data.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+        "edu.umd.cs.findbugs.FindBugs2",
+        "-effort:max",
+        "-low",
+        "-xml:withMessages",
+        "-exitcode",
+        "-auxclasspath",
+        "/dev/shm/pgpt-jdbc-order-proof-n4vh_61c:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "-output",
+        "evidence/01_PT/018_NK-OPS-001/evidence/PG41212-f02-ssc461-jdbc-order-independent-v1/spotbugs.xml",
+        "/dev/shm/pgpt-jdbc-order-proof-n4vh_61c/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class",
+        "/dev/shm/pgpt-jdbc-order-proof-n4vh_61c/dev/codex/schubert/nk/storage/StorageIoException.class",
+        "/dev/shm/pgpt-jdbc-order-proof-n4vh_61c/dev/codex/schubert/nk/storage/StorageIoException$Reason.class",
+        "/dev/shm/pgpt-jdbc-order-proof-n4vh_61c/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraphOrderTest.class",
+        "/dev/shm/pgpt-jdbc-order-proof-n4vh_61c/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraphOrderTest$CountingSql.class"
+      ],
+      "exit": 1,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "83febadc46f214e89709b832aae077e8a743258c2778ad97727d55ed33462071"
+    }
+  },
+  "manualExclusions": 0,
+  "wholeF02": false,
+  "whole451": false,
+  "formalDelta": 0
+}

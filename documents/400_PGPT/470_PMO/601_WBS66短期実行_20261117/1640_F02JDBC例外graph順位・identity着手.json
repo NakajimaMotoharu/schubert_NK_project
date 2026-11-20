@@ -1,0 +1,68 @@
+{
+  "eventId": "PGPT-20261008-7155",
+  "groupId": "F02-SSC461-JdbcGraphTieAndIdentity",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T21:02:36.525000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 81,
+      "remainingPercent": 19,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "F02-SSC461-JdbcGraphTieAndIdentity",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "F02-SSC461-JdbcGraphTieAndIdentity",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a",
+      "WBS-P004-05/2"
+    ],
+    "source": "bbd5d7869e1474b7f2ba6959921389a695f974d0",
+    "productionCoreMain": "6c2e8b027818c8dac0ed0f895edb85658e9c4ff1",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG41210",
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.45,
+      "high": 0.9
+    },
+    "groupCapPp": 1.0,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1639_F03現Range局所静的完了・次工程.json",
+        "sha256": "7d75ab3e2d912d865abd9cf58226b2f7492b29c0bff8688bd512b40f896ae2c6"
+      },
+      {
+        "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+        "sha256": "16938183a5538d9fb4cce67f1a8b1bd72d75432a7bf2915fa47663aac56a13f0"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38600-f02-sql-graph-adapter-first-ownership-v1/manifest.json",
+        "sha256": "96228eea5480500522997a9fed861a04950a2c44acedec5071453cc91bcaa923"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40698-f02-expiry-audit-jdbc-independent-v1/manifest.json",
+        "sha256": "6e009299dbba22fa572d8ea7c9822f77c2d7fd0f79f33d3a3e84a5a730b899e6"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "WBS66原作業F02-a（物理行582、SYS-005）。正本SS332 SSC-461のcause→suppressed→SQL next・identity一回。新合成入力は既存PT-OPS-JDBCGRAPH001..005とExpiry4接続の結果を変更しない。",
+    "endCondition": "変更しない二Mainと新三caseのsource/byte、字面で独立に指定した順位・一度訪問、終了0のXML/exec、開始依存を照合し固有条件へ返す。",
+    "workScope": "ThrowableだけのJVM局所検証。Root11、実JDBC接続、DB、root、VM、FileOperation、caller移管、署名, nativeなし。費用の主名義F02一回。"
+  }
+}
