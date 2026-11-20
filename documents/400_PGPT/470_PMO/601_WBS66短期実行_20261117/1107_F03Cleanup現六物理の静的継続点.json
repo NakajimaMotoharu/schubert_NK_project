@@ -1,0 +1,86 @@
+{
+  "eventId": "PGPT-20261008-6625",
+  "wbsLeafIds": [
+    "WBS-F03"
+  ],
+  "managementWorkIds": [
+    "WBS-F03/2-2"
+  ],
+  "workCategory": "CONTRACT_AUDIT",
+  "source": "c79e9ac2819728898fd7e2c82d6f57ba621c678d",
+  "productionCoreMain": "517a23cddc9f3883550942f6fa90a4256ef39b73",
+  "previousCheckpoint": "PGPT-20261008-6622",
+  "groupEvents": [
+    "PGPT-20261008-6624"
+  ],
+  "acceptedOriginal": 17,
+  "total": 190,
+  "coreAccepted": 0,
+  "coreTotal": 5,
+  "officialPtTests": 1964,
+  "officialPtScopes": 53,
+  "newFormalAcceptance": 0,
+  "effortRate": null,
+  "actualAllocatedPp": null,
+  "newProductTests": 0,
+  "recordedOwnedJobsInFlight": 0,
+  "ownedBackendJobsStartedHere": 0,
+  "modelObserved": "gpt-6.2-sol",
+  "reasoningObserved": null,
+  "speedObserved": null,
+  "outcomeEvidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/5428_F03Cleanup現六物理の型付き静的・判定.md",
+      "sha256": "77f736c6a67bd3fba981faa318c4cf863f04bebae5234131684dea063f2960f1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40748-f03-cleanup-terminal-current-typed-v1/manifest.json",
+      "sha256": "31119851e87b8fadca786f92986caddfbcf40ef81093a21409025aaf9efda8e9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40748-f03-cleanup-terminal-current-typed-v1/pmd.xml",
+      "sha256": "8ed126b70c7735aeb42874295187f1ef6bf51d7dd5f2332f250e32e2b9803b2a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40748-f03-cleanup-terminal-current-typed-v1/spotbugs.xml",
+      "sha256": "be11be60244cfd873b0628f31909e613d443ab67671f9161336abb8e8d241bb7"
+    }
+  ],
+  "fullQuotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T08:00:38.874000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 65,
+      "remainingPercent": 35,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "quotaAfter": {
+    "usedPercent": 65,
+    "remainingPercent": 35,
+    "resetsAt": 1795445753,
+    "windowDurationMins": 10080
+  },
+  "sharedDeltaPp": null,
+  "completedOriginalRowPricePp": 0,
+  "remainingCriteria": [
+    "F03 remaining CleanupTerminalRepository read/readRejected applicability 24",
+    "F03 all six product modules with Root11/QA056/QA057 as held",
+    "F02 API/Web and legacy dependency closure, runtime receipts, full 451"
+  ],
+  "nextEvidence": "Select a source-bound independent F02/F03 or short-target subcondition. Keep unclassified read/readRejected and prior QA holds. No success rerun.",
+  "acceptedIndividualSubconditions": [
+    "Typed SpotBugs on six current exact changed Batch binaries, all present with zero findings/errors/missing",
+    "Original-rule PMD exact same-site 48 and individually reviewed two ordinary methods with 24 non-applicable"
+  ],
+  "staticOriginalToolExitCodes": {
+    "spotbugs": 0,
+    "pmd": 4
+  },
+  "sameSourceHashForExistingFocusedFixtures": true,
+  "firstToolingIssue": "An unsupported group category was rejected before an event or any static tool was started; recorded under existing CONTRACT_AUDIT before execution.",
+  "productScopeRunId": "PG40748-f03-cleanup-terminal-current-typed-v1"
+}
