@@ -1,0 +1,90 @@
+{
+  "actualExit": 0,
+  "source": "c30d0c6b88c680817d40fe68d89b93fb0044d403",
+  "productionCore": "517a23cddc9f3883550942f6fa90a4256ef39b73",
+  "startEvent": "PGPT-20261008-6682",
+  "relatedBug": "BUG-3412",
+  "relatedLateral": "YKT-2735",
+  "wbs": "WBS-G13.07",
+  "purpose": "Input metadata must match independently pinned scope for both input roles.",
+  "inputScope": "Fixed metadata in unittest; no product file, JAR or class inputs.",
+  "independentOracle": "Literal case-specific exit, reason, or exact accepted cardinality in the fixture.",
+  "command": "PYTHONPATH=tools/quality python3 -B tools/quality/tests/test_static_input_scope.py -v",
+  "environment": {
+    "python": "3.14.4",
+    "platform": "Linux",
+    "architecture": "x86_64"
+  },
+  "testSources": [
+    {
+      "path": "tools/quality/static_input_scope.py",
+      "sha256": "c73ac32bd5f9567aae3f5f6e51a0dcc551aa7271159ee11fa3e2c98fc9a4b640"
+    },
+    {
+      "path": "tools/quality/tests/test_static_input_scope.py",
+      "sha256": "20d40a16605256c8d7086ce12989c6d1625416eb39370b14f99993b1d745fea3"
+    }
+  ],
+  "results": [
+    {
+      "testId": "test_class_identity_shadowed_by_auxiliary_is_rejected",
+      "actual": "PASS"
+    },
+    {
+      "testId": "test_cli_rejects_an_inventory_with_a_different_digest",
+      "actual": "PASS"
+    },
+    {
+      "testId": "test_closed_target_with_held_transitive_auxiliary",
+      "actual": "PASS"
+    },
+    {
+      "testId": "test_conflicting_metadata_is_rejected",
+      "actual": "PASS"
+    },
+    {
+      "testId": "test_duplicate_json_field_is_rejected_even_with_exact_digest",
+      "actual": "PASS"
+    },
+    {
+      "testId": "test_empty_inventory_entry_is_rejected",
+      "actual": "PASS"
+    },
+    {
+      "testId": "test_entire_target_package_includes_held_member",
+      "actual": "PASS"
+    },
+    {
+      "testId": "test_exact_metadata_covers_both_roles",
+      "actual": "PASS"
+    },
+    {
+      "testId": "test_old_scope_is_rejected_even_when_member_names_match",
+      "actual": "PASS"
+    },
+    {
+      "testId": "test_unassessed_member_is_rejected",
+      "actual": "PASS"
+    },
+    {
+      "testId": "test_uncatalogued_auxiliary_is_rejected",
+      "actual": "PASS"
+    }
+  ],
+  "tests": 11,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "retries": 0,
+  "actualJarsOpened": 0,
+  "actualAnalyzersInvoked": 0,
+  "productPt": 0,
+  "productCoverage": null,
+  "operatingActions": 0,
+  "formalDelta": 0,
+  "wholeF02": false,
+  "wholeF03": false,
+  "whole451": false,
+  "terminalObservationUTC": "2026-11-20T10:09:28.524395+00:00"
+}

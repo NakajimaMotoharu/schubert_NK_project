@@ -1,0 +1,134 @@
+{
+  "eventId": "PGPT-20261008-6683",
+  "groupId": "PGPT-WBS66-G1307-STATIC-INPUT-SCOPE-PREFLIGHT-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T10:09:53.216000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 67,
+      "remainingPercent": 33,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-G1307-STATIC-INPUT-SCOPE-PREFLIGHT-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-G1307-STATIC-INPUT-SCOPE-PREFLIGHT-20261120",
+    "workAttributionKind": "REWORK",
+    "wbsLeafIds": [
+      "WBS-G13.07"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a",
+      "WBS-F03/2-2"
+    ],
+    "source": "0577d029d446c68c2323043d80397f1b73174d1e",
+    "productionCoreMain": "517a23cddc9f3883550942f6fa90a4256ef39b73",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40788-g1307-static-input-scope-fixture-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.25,
+      "base": 0.65,
+      "high": 1.4
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1163_四担当の現候補資料と未成立条件.json",
+        "sha256": "266d5310a6bd285d29156042a33d7cfa8b3ad2362598b4066b071eda88674209"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40768-static-admission-correction-v1/manifest.json",
+        "sha256": "2bf75ce4913f909df9e67a6a557d790e0ebb86f202246c1b4c8843c30f4d1f62"
+      },
+      {
+        "path": "AGENTS.md",
+        "sha256": "f3a76d18d7ea6bdac28d47e8ab73eb1079d730726d26ab0b8be66888e3b1efaa"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "BUG3412/YKT2735で解析指示と既許可範囲の比較が必要と記録済み。実artifactは管理範囲外。",
+    "endCondition": "非実行のメタデータ検証を作り、独立期待の合成scopeで主入力・補助・保留・不明・出所不一致を確認する。",
+    "workScope": "管理レシートと合成データのみ。製品の実JAR・class・分析器・実環境へのアクセスなし。",
+    "quotaAfter": {
+      "usedPercent": 67,
+      "remainingPercent": 33,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "6b2562bff8e23a7ab58faed4698c0b44274e9f3236831c54d944e3b82de3ab60",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T10:09:53.216000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 67,
+          "remainingPercent": 33,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T10:09:28.524395+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 67,
+      "remainingPercent": 33,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6682",
+    "attempt": 1,
+    "attemptResult": "対象・補助の独立メタデータ照合の合成fixture 11件成功。保留実解析は未実施。",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40788-g1307-static-input-scope-fixture-v1/manifest.json",
+        "sha256": "8ca91d326545e617fdbb85327349ae58101a9d09cb18566c1bd2532244acf5eb"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "既存F02／F03の型付き全六",
+      "QA-056／057など該当HOLD",
+      "351ではなく正式451",
+      "BUG-3412／YKT-2735の実コマンド経路と収録一覧の照合"
+    ],
+    "toolTests": 11,
+    "toolTestFailures": 0,
+    "coveredProductTests": 0,
+    "firstAttemptTests": 11,
+    "firstAttemptPasses": 11,
+    "toolCommit": "c30d0c6b88c680817d40fe68d89b93fb0044d403",
+    "productJarsOpened": 0,
+    "productAnalyzerRuns": 0
+  }
+}
