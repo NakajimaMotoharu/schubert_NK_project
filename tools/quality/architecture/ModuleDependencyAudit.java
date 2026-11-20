@@ -21,7 +21,20 @@ import java.util.jar.JarFile;
  */
 public final class ModuleDependencyAudit {
   private static final String INTERNAL = "dev.codex.schubert.nk.";
-  private static final String WEB_REPLY_CLIENT = INTERNAL + "web.messaging.JmsRequestReplyClient";
+  private static final String WEB_MESSAGING = INTERNAL + "web.messaging.";
+  private static final Set<String> WEB_TRANSPORT_TYPES =
+      Set.of(
+          WEB_MESSAGING + "JmsRequestReplyClient",
+          WEB_MESSAGING + "JmsRequestSender",
+          WEB_MESSAGING + "ArtemisRequestSender",
+          WEB_MESSAGING + "ReplyCorrelationRegistry",
+          WEB_MESSAGING + "JmsContextFactory",
+          WEB_MESSAGING + "WebBrokerContexts",
+          WEB_MESSAGING + "ArtemisReplyConsumer",
+          WEB_MESSAGING + "ArtemisReplyConsumers",
+          WEB_MESSAGING + "JmsReplyDecoder",
+          WEB_MESSAGING + "ArtemisReplyDlqSender",
+          WEB_MESSAGING + "PendingReply");
   private static final Set<String> OBJECT_SERIALIZATION_TYPES =
       Set.of(
           "java.io.Externalizable",
@@ -132,8 +145,7 @@ public final class ModuleDependencyAudit {
           if (controller
               && (jdbc(target)
                   || jms(target)
-                  || target.equals(WEB_REPLY_CLIENT)
-                  || target.startsWith(WEB_REPLY_CLIENT + "$")
+                  || WEB_TRANSPORT_TYPES.contains(topLevelType(target))
                   || "storage".equals(targetModule)))
             violations.get("CONTROLLER_BOUNDARY").add(pair);
           if (apiRepository && target.startsWith(INTERNAL + "api.application."))
@@ -242,10 +254,13 @@ public final class ModuleDependencyAudit {
         || target.equals("java.nio.file.spi.FileSystemProvider");
   }
 
+  private static String topLevelType(String name) {
+    int nestedSeparator = name.indexOf('$');
+    return nestedSeparator < 0 ? name : name.substring(0, nestedSeparator);
+  }
+
   private static boolean javaSerialization(String target) {
-    int enclosingTypeEnd = target.indexOf('$');
-    return OBJECT_SERIALIZATION_TYPES.contains(
-        enclosingTypeEnd < 0 ? target : target.substring(0, enclosingTypeEnd));
+    return OBJECT_SERIALIZATION_TYPES.contains(topLevelType(target));
   }
 
   private static boolean forbiddenFramework(String module, String target) {
