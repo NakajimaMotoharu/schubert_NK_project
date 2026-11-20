@@ -174,6 +174,10 @@ public final class ArtifactComparator {
     for (JsonNode item : cases) {
       String id = item.path("id").asText();
       require(expectedCases.add(id), "CATALOG_DUPLICATE:" + id, failures);
+      require(
+          GateContractValidator.matchesCurrentDisposition(id, item.path("current")),
+          "CATALOG_CURRENT:" + id,
+          failures);
       require("RUN".equals(item.path("nk").asText()), "CATALOG_NK:" + id, failures);
     }
     require(expectedCases.size() == 24, "CATALOG_CASE_COUNT", failures);

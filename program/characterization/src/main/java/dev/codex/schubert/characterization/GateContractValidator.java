@@ -254,14 +254,18 @@ final class GateContractValidator {
       require(id.matches("CHR-[A-Z][0-9]{2}"), "CATALOG_ID:" + id, failures);
       require(
           expectedGroup(id).equals(item.path("group").asText()), "CATALOG_GROUP:" + id, failures);
-      String expectedCurrent = "CHR-N01".equals(id) ? "NK_ONLY" : "RUN";
       require(
-          expectedCurrent.equals(item.path(FIELD_CURRENT).asText()),
+          matchesCurrentDisposition(id, item.path(FIELD_CURRENT)),
           "CATALOG_CURRENT:" + id,
           failures);
       require("RUN".equals(item.path("nk").asText()), "CATALOG_NK:" + id, failures);
     }
     require(expectedOrder.equals(actualOrder), "CATALOG_ORDER", failures);
+  }
+
+  static boolean matchesCurrentDisposition(String caseId, JsonNode disposition) {
+    String expected = "CHR-N01".equals(caseId) ? "NK_ONLY" : "RUN";
+    return expected.equals(disposition.asText());
   }
 
   private static String expectedGroup(String id) {
