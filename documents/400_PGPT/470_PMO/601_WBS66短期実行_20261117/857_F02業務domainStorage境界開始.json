@@ -1,0 +1,71 @@
+{
+  "eventId": "PGPT-20261008-6377",
+  "groupId": "PGPT-WBS66-F02-APPLICATION-DOMAIN-STORAGE-FENCE-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T00:25:48.279000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 57,
+      "remainingPercent": 43,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F02-APPLICATION-DOMAIN-STORAGE-FENCE-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F02-APPLICATION-DOMAIN-STORAGE-FENCE-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-b"
+    ],
+    "source": "e0fc119924b72a16aabf30d79d7a2c431d0db88a",
+    "productionCoreMain": "cb1411d94a1d97aedafe1af60400aaec0ae8c8e8",
+    "canonicalDesignSource": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "run": "PG40432-f02-application-domain-storage-before-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.24,
+      "base": 0.68,
+      "high": 1.35
+    },
+    "groupCapPp": 2.1,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/856_P01802五所有範囲と継続点.json",
+        "sha256": "8fec4c3a4cd1653f22314115c8d1846674e804a3985b7167d2d2c22a0cfd2be9"
+      },
+      {
+        "path": "tools/quality/architecture/ModuleDependencyAudit.java",
+        "sha256": "9fe46f17bb18ad004be052dcf2c321f9f7e9cafd09e5ba14397e220afe51a983"
+      },
+      {
+        "path": "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md",
+        "sha256": "72427a8609a9c4753ff459cbfa92e3ad27669544c59d53eb9191b97b911c74d2"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40418-f02-protocol-file-independent-v1/manifest.json",
+        "sha256": "5ae0d3bb791032419efb80a6f3500b7b60cc83e8486c4ce3e6fb857ff0b9b681"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40406-f02-controller-nested-independent-v1/manifest.json",
+        "sha256": "c533b3787df9e6221324eb6e185a235fc9819722042cd2321ba98fa77e6dcae5"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "The approved SS311 section3 forbids direct storage references in application/domain packages, while the current gate treats API/Web to Storage by Maven module generally.",
+    "endCondition": "Check the four package-level negative and five allowed/unchanged use examples. Correct only a demonstrated type ownership gap and retain all six packaging and runtime holds.",
+    "workScope": "Only handwritten synthetic classfile static checks and current approved repo source inspection. No product class loading, QA056 types, or actual service configuration."
+  }
+}
