@@ -1,0 +1,212 @@
+{
+  "source": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+  "terminalAtUTC": "2026-11-20T15:24:18.212898+00:00",
+  "actualExit": 0,
+  "rawManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40948-f03-api-monitoring30-static-v1/manifest.json",
+    "sha256": "8fa4f237939e9d69c7ba6281702038930839ffc308e035728e71429ac00b63fd"
+  },
+  "pmdReport": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40948-f03-api-monitoring30-static-v1/pmd.xml",
+    "sha256": "95b047575b6a96a83bd375c52f850893a7ad75c67500c34288af98a70f9a395d"
+  },
+  "rawFindingCount": 11,
+  "reviewedFindingCount": 11,
+  "unreviewedInThisReport": 0,
+  "findings": [
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricCollector.java",
+        "sha256": "e62f5a2eda99539f59e540ca4d54e9d70d99d7c4c25b0d30e75a98801a295515"
+      },
+      "line": 27,
+      "column": 5,
+      "rule": "AvoidSynchronizedStatement",
+      "method": "collect",
+      "classification": "SPECIFIC_LOCK_REQUIRED",
+      "disposition": "NO_CHANGE_SUPPORTED_FOR_THIS_SITE",
+      "contract": "pool",
+      "oracleTestIds": "POOLCONN006～008",
+      "reason": "同一ownerのgetter列から公開までをprivate final lockで直列化する。短い取得と公開を一つの区間に保つためのロック。tryLock、公平性、明示的ロック待機解除の契約はこの経路にはない。"
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricCollector.java",
+        "sha256": "e62f5a2eda99539f59e540ca4d54e9d70d99d7c4c25b0d30e75a98801a295515"
+      },
+      "line": 34,
+      "column": 16,
+      "rule": "AvoidCatchingGenericException",
+      "method": "collect",
+      "classification": "RETHROW_AFTER_REQUIRED_STATE_UPDATE",
+      "disposition": "NO_CHANGE_SUPPORTED_FOR_THIS_SITE",
+      "contract": "pool",
+      "oracleTestIds": "POOLCONN003",
+      "reason": "getterの任意のRuntimeExceptionで直前の詳細値を欠測化し、同一例外を投げる。欠測処理は観測値への単一atomic set。"
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricCollector.java",
+        "sha256": "e62f5a2eda99539f59e540ca4d54e9d70d99d7c4c25b0d30e75a98801a295515"
+      },
+      "line": 34,
+      "column": 35,
+      "rule": "AvoidCatchingGenericException",
+      "method": "collect",
+      "classification": "RETHROW_AFTER_REQUIRED_STATE_UPDATE",
+      "disposition": "NO_CHANGE_SUPPORTED_FOR_THIS_SITE",
+      "contract": "pool",
+      "oracleTestIds": "POOLCONN003",
+      "reason": "getterのErrorにも同じ欠測契約があり、同一Errorを投げる。成功扱いと例外変換はない。"
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry.java",
+        "sha256": "20f47112dcc5776b4f18c190adbcd782c03355815adce2e380d23cf6d9551108"
+      },
+      "line": 83,
+      "column": 7,
+      "rule": "AvoidSynchronizedStatement",
+      "method": "record",
+      "classification": "SPECIFIC_LOCK_REQUIRED",
+      "disposition": "NO_CHANGE_SUPPORTED_FOR_THIS_SITE",
+      "contract": "duration",
+      "oracleTestIds": "EXDUR004/009",
+      "reason": "各sampleのcount、sum、max、有限5bucketをprivate final lockでまとめて更新する。区間中の外部callbackなし。"
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry.java",
+        "sha256": "20f47112dcc5776b4f18c190adbcd782c03355815adce2e380d23cf6d9551108"
+      },
+      "line": 108,
+      "column": 7,
+      "rule": "AvoidSynchronizedStatement",
+      "method": "takeSnapshot",
+      "classification": "SPECIFIC_LOCK_REQUIRED",
+      "disposition": "NO_CHANGE_SUPPORTED_FOR_THIS_SITE",
+      "contract": "duration",
+      "oracleTestIds": "EXDUR004/009",
+      "reason": "recordと同一lockで各counterの整合したsnapshotを採取し、新規bucket配列を返す。区間中の外部callbackなし。"
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/persistence/OutboxObservationRepository.java",
+        "sha256": "b7ada6e63e1582885f067c5f166e94e790c8c1aee9d95c1ed61eb62d0d624657"
+      },
+      "line": 47,
+      "column": 33,
+      "rule": "CloseResource",
+      "method": "read",
+      "classification": "TYPED_FINALLY_CLOSE_CONFIRMED",
+      "disposition": "NO_CHANGE_SUPPORTED_FOR_THIS_SITE",
+      "contract": "outbox",
+      "oracleTestIds": "OUTBOXDB007/008/011",
+      "reason": "取得済み文は外側finallyからcloseStatementへ各一回渡る。取得不能時は文を閉じず、借用Connectionも閉じない。"
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/persistence/OutboxObservationRepository.java",
+        "sha256": "b7ada6e63e1582885f067c5f166e94e790c8c1aee9d95c1ed61eb62d0d624657"
+      },
+      "line": 52,
+      "column": 27,
+      "rule": "CloseResource",
+      "method": "read",
+      "classification": "TYPED_FINALLY_CLOSE_CONFIRMED",
+      "disposition": "NO_CHANGE_SUPPORTED_FOR_THIS_SITE",
+      "contract": "outbox",
+      "oracleTestIds": "OUTBOXDB007/008/011",
+      "reason": "取得済み行は内側finallyからcloseRowsへ各一回渡り、文より先に閉じる。行欠落時も外側finallyで文を閉じる。"
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/persistence/OutboxObservationRepository.java",
+        "sha256": "b7ada6e63e1582885f067c5f166e94e790c8c1aee9d95c1ed61eb62d0d624657"
+      },
+      "line": 67,
+      "column": 16,
+      "rule": "AvoidCatchingGenericException",
+      "method": "read",
+      "classification": "TWR_PRIMARY_AND_SUPPRESSION_CONTRACT",
+      "disposition": "NO_CHANGE_SUPPORTED_FOR_THIS_SITE",
+      "contract": "outbox",
+      "oracleTestIds": "OUTBOXDB008/011",
+      "reason": "行操作の任意の一次Throwableを原形のまま行の解放へ渡し、同一の失敗を投げる。"
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/persistence/OutboxObservationRepository.java",
+        "sha256": "b7ada6e63e1582885f067c5f166e94e790c8c1aee9d95c1ed61eb62d0d624657"
+      },
+      "line": 73,
+      "column": 14,
+      "rule": "AvoidCatchingGenericException",
+      "method": "read",
+      "classification": "TWR_PRIMARY_AND_SUPPRESSION_CONTRACT",
+      "disposition": "NO_CHANGE_SUPPORTED_FOR_THIS_SITE",
+      "contract": "outbox",
+      "oracleTestIds": "OUTBOXDB008/011",
+      "reason": "行解放の失敗も含む任意の外側一次Throwableを文の解放へ渡して投げ直す。"
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/persistence/OutboxObservationRepository.java",
+        "sha256": "b7ada6e63e1582885f067c5f166e94e790c8c1aee9d95c1ed61eb62d0d624657"
+      },
+      "line": 94,
+      "column": 14,
+      "rule": "AvoidCatchingGenericException",
+      "method": "closeRows",
+      "classification": "TWR_PRIMARY_AND_SUPPRESSION_CONTRACT",
+      "disposition": "NO_CHANGE_SUPPORTED_FOR_THIS_SITE",
+      "contract": "outbox",
+      "oracleTestIds": "OUTBOXDB008/011",
+      "reason": "行解放のThrowableは一次なしならそのまま伝播、一次があればaddSuppressed。自己抑制はJDK動作を維持する。"
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/persistence/OutboxObservationRepository.java",
+        "sha256": "b7ada6e63e1582885f067c5f166e94e790c8c1aee9d95c1ed61eb62d0d624657"
+      },
+      "line": 104,
+      "column": 14,
+      "rule": "AvoidCatchingGenericException",
+      "method": "closeStatement",
+      "classification": "TWR_PRIMARY_AND_SUPPRESSION_CONTRACT",
+      "disposition": "NO_CHANGE_SUPPORTED_FOR_THIS_SITE",
+      "contract": "outbox",
+      "oracleTestIds": "OUTBOXDB008/011",
+      "reason": "文解放のThrowableも同じ優先規則を使う。行の解放が先なので二次例外の順序が保持される。"
+    }
+  ],
+  "contracts": {
+    "pool": {
+      "path": "evidence/01_PT/018_NK-OPS-001/1639_APIPool観測結線_単体テスト仕様書.md",
+      "sha256": "5e258b5ffa47e50f3c78c0387fa4229e416c39fe46a6b126016efa8b0ae6e138"
+    },
+    "duration": {
+      "path": "evidence/01_PT/018_NK-OPS-001/1723_Duration極小MAX混在_追加品質単体テスト仕様書.md",
+      "sha256": "ad673aa92cd2615ccf5cc365bd97645b79a01aeaadc5095db0108a4e4ad20bd0"
+    },
+    "outbox": {
+      "source": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "sha256": "4c09a2f66d9cb4def976c24d2952953aa5a287a0d545548dc4feda4968ff5bef",
+      "section": "SSC-470"
+    },
+    "outboxExisting": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39606-p00405-api-outbox-typed-close-independent-v1/manifest.json",
+      "sha256": "1e3b26551a7f121e31b6afedfe7a562a557e02d6f2fd59dd1ce9bfbb71348424"
+    }
+  },
+  "pmdOriginalExit": 4,
+  "spotBugsOriginalExit": null,
+  "productTestRuns": 0,
+  "analyzerRuns": 0,
+  "productFilesChanged": 0,
+  "suppressions": 0,
+  "formalDelta": 0,
+  "wholeF03": false,
+  "whole451": false
+}

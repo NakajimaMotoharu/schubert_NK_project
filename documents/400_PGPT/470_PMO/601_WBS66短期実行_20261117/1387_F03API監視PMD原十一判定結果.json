@@ -1,0 +1,128 @@
+{
+  "eventId": "PGPT-20261008-6903",
+  "groupId": "f03-api-monitoring-pmd-applicability",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T15:24:35.988000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 73,
+      "remainingPercent": 27,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "f03-api-monitoring-pmd-applicability",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "f03-api-monitoring-pmd-applicability",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "source": "3db538a9715baf3f26413adb6981b0fa8d954049",
+    "productionCoreMain": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40950-f03-api-monitoring-pmd-applicability-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.1,
+      "base": 0.28,
+      "high": 0.6
+    },
+    "groupCapPp": 0.8,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1385_F03API監視三十固定静的継続点.json",
+        "sha256": "24101f236bb8d43bb60f09dfaeefe4a7b51ed071d8883f1beca60d1416b8a6c5"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40948-f03-api-monitoring30-static-v1/manifest.json",
+        "sha256": "8fa4f237939e9d69c7ba6281702038930839ffc308e035728e71429ac00b63fd"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40948-f03-api-monitoring30-static-v1/pmd.xml",
+        "sha256": "95b047575b6a96a83bd375c52f850893a7ad75c67500c34288af98a70f9a395d"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "PG40948のPMD原11個を現sourceと認証済み判定資料へ結合",
+    "endCondition": "個別11件の適用性・根拠を保存。六module合格と原SpotBugs終了は保留",
+    "workScope": "公開PMD証跡と許可済み三型・正本の照合。実行再演なし",
+    "quotaAfter": {
+      "usedPercent": 73,
+      "remainingPercent": 27,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "83803103c05740e19d9408427d31087623b10f7c184db619caaa94735960d5fa",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T15:24:35.988000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 73,
+          "remainingPercent": 27,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T15:24:18.212898+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 73,
+      "remainingPercent": 27,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6902",
+    "attempt": 1,
+    "attemptResult": "SCOPED_ELEVEN_DISPOSITIONS_RECORDED",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40950-f03-api-monitoring-pmd-applicability-v1/manifest.json",
+        "sha256": "2d37f71696f5e4c1270bc0a0672702504f0941800686b5f54df494c00a76766a"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "元SpotBugs実終了不明",
+      "F03当候補の六moduleにおける全指摘の適用性・必要是正・全451終端"
+    ],
+    "reviewedRawFindings": 11,
+    "unreviewedInThisReport": 0,
+    "suppressionsAdded": 0,
+    "originalPmdExit": 4,
+    "originalSpotBugsExit": null
+  }
+}
