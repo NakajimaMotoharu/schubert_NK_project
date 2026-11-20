@@ -1,0 +1,139 @@
+{
+  "eventId": "PGPT-20261008-7107",
+  "groupId": "WBS66-F02-WEB-CONTROLLER-FILE-CONSTRUCTORS",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T19:45:14.483000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 79,
+      "remainingPercent": 21,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66-F02-WEB-CONTROLLER-FILE-CONSTRUCTORS",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "WBS66-F02-WEB-CONTROLLER-FILE-CONSTRUCTORS",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a"
+    ],
+    "source": "aa68b72fe750d5430226451acc9fa4a92c4562dc",
+    "productionCoreMain": "559f5b5945e82374e0843dcfae11a8d07faef1ea",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG41166-f02-controller-file-ctor-red-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.25,
+      "base": 0.65,
+      "high": 1.45
+    },
+    "groupCapPp": 2.25,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1590_短期12現Coreの不足証拠と継続点.json",
+        "sha256": "7f579907c1b099c3aec618dbe6929b7bf557ec90e5ae3c063023df478e66054f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41100-f02-web-transport-source-independent-v1/manifest.json",
+        "sha256": "327c9cd7191af064e8fdac94fe6a79a69f0bca6c814644b7e97913e9ab0fb4e1"
+      },
+      {
+        "path": "tools/quality/architecture/ModuleDependencyAudit.java",
+        "sha256": "359abf8cb208f5ee8dfce5025119c1fd3a80c4cf5c0dbb7b65a8e050b19df306"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "SS311 §5.2 現FS検査の実装。Java25標準APIの既知実体と手書きsynthetic inputを利用",
+    "endCondition": "ファイル名/File/Pathを開くconstructorは違反、既streamや文字列内容を扱う対照は0。標準artifact・保留型・ファイルアクセスは実行しない",
+    "workScope": "F02・PG-D516・SS311 §5.2 / PT-F02-WEB-FILE-CTOR; static bytecode only",
+    "quotaAfter": {
+      "usedPercent": 79,
+      "remainingPercent": 21,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "ffec6dba44a614255c4c6cc48177807df0e46c76399f37eebf0ab0989d2e6cd4",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T19:45:14.483000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 79,
+          "remainingPercent": 21,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T19:45:10.349973+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 79,
+      "remainingPercent": 21,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-7106",
+    "attempt": 1,
+    "attemptResult": "LOCAL_ARCHITECTURE_RULE_FIXED_AND_INDEPENDENTLY_CONFIRMED",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41166-f02-controller-file-ctor-red-v1/manifest.json",
+        "sha256": "074fd41bde6f33ba7162d0e2870b6b3019b6046a3e6184ef797fa0ae59235b4b"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41168-f02-controller-file-ctor-green-v1/manifest.json",
+        "sha256": "5bcbb95f16c9ebc608bbff9249e82c8fcd109d85fafd8c70f4f6f43f770d09d8"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41170-f02-controller-file-ctor-independent-v1/manifest.json",
+        "sha256": "9c668aaa9709fe884c0c11286886163abe95c2d17f73380ac5dfd6fbd9fa61eb"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": "QA056、当API/Web実JAR・全六、Storage旧辺・実runtime・451。",
+    "toolCandidateFirstActual": {
+      "cases": 15,
+      "matched": 15
+    },
+    "candidatePreparationRejectedBeforeCompile": 1,
+    "retryCause": "old tool source pin compared to changed file instead of frozen git blob",
+    "qualifiedToolSource": "bdc210908d66ab26054f7aa9d8e064dc3192dcd6",
+    "syntheticCases": 15,
+    "readOnlyExistingControllerSources": 13,
+    "filesystemOpOpened": 0,
+    "protectedReads": 0
+  }
+}

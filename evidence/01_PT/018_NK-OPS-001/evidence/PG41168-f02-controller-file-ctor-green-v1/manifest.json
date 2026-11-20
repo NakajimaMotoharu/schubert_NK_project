@@ -1,0 +1,211 @@
+{
+  "actualExit": 0,
+  "toolSource": "bdc210908d66ab26054f7aa9d8e064dc3192dcd6",
+  "productionCore": "559f5b5945e82374e0843dcfae11a8d07faef1ea",
+  "toolSourceSha256": "c8f3928a8b11662ac6dedb41a64ceed3a3780a8613aa623166baabec79f40a61",
+  "cases": [
+    {
+      "testId": "PT-F02-WEB-FILE-CTOR-001",
+      "origin": "dev.codex.schubert.nk.web.synthetic.WriterNameController",
+      "target": "java.io.PrintWriter",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "testId": "PT-F02-WEB-FILE-CTOR-002",
+      "origin": "dev.codex.schubert.nk.web.synthetic.StreamNameController",
+      "target": "java.io.PrintStream",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "testId": "PT-F02-WEB-FILE-CTOR-003",
+      "origin": "dev.codex.schubert.nk.web.synthetic.FormatterNameController",
+      "target": "java.util.Formatter",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "testId": "PT-F02-WEB-FILE-CTOR-004",
+      "origin": "dev.codex.schubert.nk.web.synthetic.WriterFileController",
+      "target": "java.io.PrintWriter",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "testId": "PT-F02-WEB-FILE-CTOR-005",
+      "origin": "dev.codex.schubert.nk.web.synthetic.StreamFileController",
+      "target": "java.io.PrintStream",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "testId": "PT-F02-WEB-FILE-CTOR-006",
+      "origin": "dev.codex.schubert.nk.web.synthetic.FormatterFileController",
+      "target": "java.util.Formatter",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "testId": "PT-F02-WEB-FILE-CTOR-007",
+      "origin": "dev.codex.schubert.nk.web.synthetic.ScannerFileController",
+      "target": "java.util.Scanner",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "testId": "PT-F02-WEB-FILE-CTOR-008",
+      "origin": "dev.codex.schubert.nk.web.synthetic.ScannerPathController",
+      "target": "java.util.Scanner",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "testId": "PT-F02-WEB-FILE-CTOR-009",
+      "origin": "dev.codex.schubert.nk.web.synthetic.WriterStreamController",
+      "target": "java.io.PrintWriter",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-WEB-FILE-CTOR-010",
+      "origin": "dev.codex.schubert.nk.web.synthetic.PrintStreamController",
+      "target": "java.io.PrintStream",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-WEB-FILE-CTOR-011",
+      "origin": "dev.codex.schubert.nk.web.synthetic.FormatterBufferController",
+      "target": "java.util.Formatter",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-WEB-FILE-CTOR-012",
+      "origin": "dev.codex.schubert.nk.web.synthetic.ScannerContentController",
+      "target": "java.util.Scanner",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-WEB-FILE-CTOR-013",
+      "origin": "dev.codex.schubert.nk.web.synthetic.ScannerStreamController",
+      "target": "java.util.Scanner",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-WEB-FILE-CTOR-014",
+      "origin": "dev.codex.schubert.nk.web.synthetic.DirectFileController",
+      "target": "java.io.File",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "testId": "PT-F02-WEB-FILE-CTOR-015",
+      "origin": "dev.codex.schubert.nk.web.synthetic.FileAdapter",
+      "target": "java.io.PrintWriter",
+      "expected": false,
+      "observed": false
+    }
+  ],
+  "missingBeforeOrAfter": 0,
+  "inspectedFixtureClasses": 21,
+  "fileSystemFixtureExecuted": 0,
+  "steps": {
+    "compile-tool": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41168-f02-controller-file-ctor-green-v1/compile-tool.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41168-f02-controller-file-ctor-green-v1/compile-tool.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "-d",
+        "/dev/shm/pgpt-controller-ctor-2nsg0wla/tool",
+        "/dev/shm/pgpt-controller-ctor-2nsg0wla/ModuleDependencyAudit.java"
+      ]
+    },
+    "compile-fixture": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41168-f02-controller-file-ctor-green-v1/compile-fixture.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41168-f02-controller-file-ctor-green-v1/compile-fixture.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-d",
+        "/dev/shm/pgpt-controller-ctor-2nsg0wla/binary",
+        "/dev/shm/pgpt-controller-ctor-2nsg0wla/dev/codex/schubert/nk/protocol/Anchor.java",
+        "/dev/shm/pgpt-controller-ctor-2nsg0wla/dev/codex/schubert/nk/storage/Anchor.java",
+        "/dev/shm/pgpt-controller-ctor-2nsg0wla/dev/codex/schubert/nk/bootstrap/Anchor.java",
+        "/dev/shm/pgpt-controller-ctor-2nsg0wla/dev/codex/schubert/nk/api/Anchor.java",
+        "/dev/shm/pgpt-controller-ctor-2nsg0wla/dev/codex/schubert/nk/web/Anchor.java",
+        "/dev/shm/pgpt-controller-ctor-2nsg0wla/dev/codex/schubert/nk/batch/Anchor.java",
+        "/dev/shm/pgpt-controller-ctor-2nsg0wla/dev/codex/schubert/nk/web/synthetic/WriterNameController.java",
+        "/dev/shm/pgpt-controller-ctor-2nsg0wla/dev/codex/schubert/nk/web/synthetic/StreamNameController.java",
+        "/dev/shm/pgpt-controller-ctor-2nsg0wla/dev/codex/schubert/nk/web/synthetic/FormatterNameController.java",
+        "/dev/shm/pgpt-controller-ctor-2nsg0wla/dev/codex/schubert/nk/web/synthetic/WriterFileController.java",
+        "/dev/shm/pgpt-controller-ctor-2nsg0wla/dev/codex/schubert/nk/web/synthetic/StreamFileController.java",
+        "/dev/shm/pgpt-controller-ctor-2nsg0wla/dev/codex/schubert/nk/web/synthetic/FormatterFileController.java",
+        "/dev/shm/pgpt-controller-ctor-2nsg0wla/dev/codex/schubert/nk/web/synthetic/ScannerFileController.java",
+        "/dev/shm/pgpt-controller-ctor-2nsg0wla/dev/codex/schubert/nk/web/synthetic/ScannerPathController.java",
+        "/dev/shm/pgpt-controller-ctor-2nsg0wla/dev/codex/schubert/nk/web/synthetic/WriterStreamController.java",
+        "/dev/shm/pgpt-controller-ctor-2nsg0wla/dev/codex/schubert/nk/web/synthetic/PrintStreamController.java",
+        "/dev/shm/pgpt-controller-ctor-2nsg0wla/dev/codex/schubert/nk/web/synthetic/FormatterBufferController.java",
+        "/dev/shm/pgpt-controller-ctor-2nsg0wla/dev/codex/schubert/nk/web/synthetic/ScannerContentController.java",
+        "/dev/shm/pgpt-controller-ctor-2nsg0wla/dev/codex/schubert/nk/web/synthetic/ScannerStreamController.java",
+        "/dev/shm/pgpt-controller-ctor-2nsg0wla/dev/codex/schubert/nk/web/synthetic/DirectFileController.java",
+        "/dev/shm/pgpt-controller-ctor-2nsg0wla/dev/codex/schubert/nk/web/synthetic/FileAdapter.java"
+      ]
+    },
+    "audit": {
+      "actualExit": 1,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41168-f02-controller-file-ctor-green-v1/audit.stdout.txt",
+        "sha256": "ce59393aeadca7f88d37a88a722b7d2c315cbcb0eef1112bcfaedf74462df2ee"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41168-f02-controller-file-ctor-green-v1/audit.stderr.txt",
+        "sha256": "2c58b87a0350a39bb1c3b5f4891defeeb9a785e84aa11a466dc9ddb21253bf58"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/dev/shm/pgpt-controller-ctor-2nsg0wla/tool:/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "ModuleDependencyAudit",
+        "api=/dev/shm/pgpt-controller-ctor-2nsg0wla/api.jar",
+        "batch=/dev/shm/pgpt-controller-ctor-2nsg0wla/batch.jar",
+        "bootstrap=/dev/shm/pgpt-controller-ctor-2nsg0wla/bootstrap.jar",
+        "protocol=/dev/shm/pgpt-controller-ctor-2nsg0wla/protocol.jar",
+        "storage=/dev/shm/pgpt-controller-ctor-2nsg0wla/storage.jar",
+        "web=/dev/shm/pgpt-controller-ctor-2nsg0wla/web.jar"
+      ]
+    }
+  },
+  "productOperations": 0,
+  "formalDelta": 0,
+  "whole451": false,
+  "terminalAtUTC": "2026-11-20T19:44:31.429680+00:00"
+}

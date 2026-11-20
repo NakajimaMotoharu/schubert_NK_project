@@ -34,10 +34,11 @@ def main(after):
     pin, git, execute = (H[k] for k in ("pin", "git", "execute"))
     start_path, = H["PLAN"].glob("1591_*.json")
     context = R["read"](start_path)["values"]
-    assert all(pin(Path(row["path"])) == row for row in context["oracleReferences"])
+    assert all(pin(Path(row["path"])) == row for row in context["oracleReferences"][:-1])
     assert all(pin(path)["sha256"] == want for path, want in H["PINS"].items())
     source = git("rev-parse", "HEAD").decode().strip() if after else context["source"]
     meter = H["TOOL"]
+    assert H["sha"](git("show", f"{context['source']}:{meter}")) == context["oracleReferences"][-1]["sha256"]
     data = git("show", f"{source}:{meter}")
     assert (H["sha"](data) != context["oracleReferences"][-1]["sha256"]) is after
     assert not git("diff", "--name-only", context["source"], source, "--", "src")
