@@ -34,7 +34,7 @@ def utc():
 
 
 def main(phase):
-    assert phase in ("red", "green")
+    assert phase in ("red", "green", "narrowed")
     red = phase == "red"
     start = read(next(Path("documents/400_PGPT/470_PMO").glob("601_*/1510_*")))
     context = start["values"]
@@ -58,7 +58,12 @@ def main(phase):
     assert [pin(p) for p in deps] == old_crc["dependencies"] and len(deps) == 4
     java, javac = [Path(old_crc[tool]["path"]) for tool in ("java", "javac")]
     assert pin(java)==old_crc["java"] and pin(javac)==old_crc["javac"]
-    run = (context["run"] if red else "PG41052-p01808-raw-duplicate-class-green-v1")
+    if red:
+        run = context["run"]
+    elif phase == "green":
+        run = "PG41052-p01808-raw-duplicate-class-green-v1"
+    else:
+        run = "PG41056-p01808-raw-duplicate-class-final-v1"
     private = Path("../pgpt-runs/PG379").resolve() / run
     private.mkdir(mode=0o700)
     decoder_file = private / decode_path.name
