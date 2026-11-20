@@ -28,7 +28,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import org.junit.jupiter.api.Test;
 
-/** PT-MED-PORT001..008. Memory-only response/byte-channel ports; no path, native or HTTP client. */
+/** PT-MED-PORT001..009. Memory-only response/byte-channel ports; no path, native or HTTP client. */
 final class MediaRangePortTest {
   private static final int SIZE = 2_097_155;
   private static final String LOGICAL_ID = "7";
@@ -202,6 +202,38 @@ final class MediaRangePortTest {
                     new Reply())));
     call(service, descriptor(ContentDisposition.INLINE), Optional.empty(), true, new Reply());
     assertEquals(2, attempts.get());
+    assertEquals(1, source.closes);
+  }
+
+  @Test
+  void directErrorBeforeResponseEscapesUnchangedAndReleasesThePermit() throws Exception {
+    var fatal = new AssertionError("synthetic fatal port failure");
+    var source = new Probe();
+    var attempts = new AtomicInteger();
+    var service =
+        new MediaRangeService(
+            (descriptor, operation) -> {
+              if (attempts.getAndIncrement() == 0) throw fatal;
+              source.read(descriptor, operation);
+            },
+            1);
+    var descriptor = descriptor(ContentDisposition.INLINE);
+    var failed = new Reply();
+
+    assertSame(
+        fatal,
+        assertThrows(
+            AssertionError.class,
+            () -> call(service, descriptor, Optional.of(RANGE), false, failed)));
+    assertEquals(0, failed.begins);
+    assertEquals(0, source.opens);
+    assertEquals(0, source.closes);
+
+    var recovered = new Reply();
+    call(service, descriptor, Optional.of(RANGE), false, recovered);
+    verify(recovered, 206, 2, 3, THREE_BYTE_RANGE, false, false);
+    assertEquals(2, attempts.get());
+    assertEquals(1, source.opens);
     assertEquals(1, source.closes);
   }
 

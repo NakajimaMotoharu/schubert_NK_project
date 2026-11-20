@@ -1,0 +1,67 @@
+{
+  "eventId": "PGPT-20261008-7137",
+  "groupId": "WBS66-P00904-MEDIA-PERMIT-DIRECT-ERROR",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T20:35:29.186000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 80,
+      "remainingPercent": 20,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66-P00904-MEDIA-PERMIT-DIRECT-ERROR",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "WBS66-P00904-MEDIA-PERMIT-DIRECT-ERROR",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P009-04"
+    ],
+    "managementWorkIds": [
+      "WBS-P009-04/2"
+    ],
+    "source": "24ccc0e10d7aa997ecea40ac8693aa22364d37c9",
+    "productionCoreMain": "559f5b5945e82374e0843dcfae11a8d07faef1ea",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG41194-media-range-error-releases-permit-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.12,
+      "base": 0.39,
+      "high": 0.95
+    },
+    "groupCapPp": 1.2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1621_Range長整数境界と次工程.json",
+        "sha256": "643f7a859d069d8f49c8ee1563d0b2dc3958615ec214d3d105109dbc2374f3df"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27002-media186-independent-v1/manifest.json",
+        "sha256": "2b166351a6ab0b5f5e64273dc4aaf3d1c24caca092ad8b2a17866bc998c188fe"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41190-range-long-cap-neighbors-v1/manifest.json",
+        "sha256": "8c182db6c47e37efd11197ba18b064de2c4370e7ee334c1c9a7e90915472fa39"
+      },
+      {
+        "path": "evidence/01_PT/009_NK-MED-001/008_NK-MED-001_配信port単体仕様.md",
+        "sha256": "df753180cefa25ab72ee1567f5be12a3d220726f37b66a07f0944738d41c977a"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "SS333 §11全終端でpermit解放。元八のchecked/Runtime成功証票を参照。source portの直接Errorと解放後同instance正常を追加",
+    "endCondition": "Error元object、追加response0、次の1枠成功、claimed scoped JUnit + raw exec/CRC",
+    "workScope": "PT-MED-PORT009; existing local memory-only Probe, no HTTP, real file, auth, DB, or old case repeat"
+  }
+}
