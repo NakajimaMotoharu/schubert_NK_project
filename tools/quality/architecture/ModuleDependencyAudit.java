@@ -1,6 +1,7 @@
 import com.tngtech.archunit.ArchConfiguration;
 import com.tngtech.archunit.core.domain.JavaClass;
 import com.tngtech.archunit.core.domain.JavaClasses;
+import com.tngtech.archunit.core.domain.JavaCodeUnitAccess;
 import com.tngtech.archunit.core.importer.ClassFileImporter;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -64,6 +65,8 @@ public final class ModuleDependencyAudit {
           "java.io.File", "java.io.FileInputStream", "java.io.FileOutputStream",
           "java.io.FileReader", "java.io.FileWriter", "java.io.RandomAccessFile",
           "java.nio.channels.FileChannel", "java.nio.channels.AsynchronousFileChannel");
+  private static final Set<String> FILE_OPENING_WRITERS =
+      Set.of("java.io.PrintWriter", "java.io.PrintStream", "java.util.Formatter");
   private static final Map<String, Set<String>> ALLOWED =
       Map.of(
           "protocol", Set.of(),
@@ -156,7 +159,7 @@ public final class ModuleDependencyAudit {
         for (var access : type.getCodeUnitAccessesFromSelf()) {
           calls++;
           String target = access.getTargetOwner().getName();
-          if (controller && filesystem(target))
+          if (controller && (filesystem(target) || opensFileInConstructor(access)))
             violations.get("CONTROLLER_BOUNDARY").add(origin + "\t" + target);
           if (module.equals("protocol")
               && protocolFilesystem(target, access.getTarget().getName())) {
@@ -243,6 +246,20 @@ public final class ModuleDependencyAudit {
 
   private static boolean filesystem(String target) {
     return target.startsWith("java.nio.file.") || FILE_IO_TYPES.contains(target);
+  }
+
+  private static boolean opensFileInConstructor(JavaCodeUnitAccess<?> access) {
+    var constructor = access.getTarget();
+    if (!constructor.getName().equals("<init>") || constructor.getRawParameterTypes().isEmpty()) {
+      return false;
+    }
+    String owner = access.getTargetOwner().getName();
+    String firstType = constructor.getRawParameterTypes().getFirst().getName();
+    if (FILE_OPENING_WRITERS.contains(owner)) {
+      return firstType.equals("java.lang.String") || firstType.equals("java.io.File");
+    }
+    return owner.equals("java.util.Scanner")
+        && (firstType.equals("java.io.File") || firstType.equals("java.nio.file.Path"));
   }
 
   private static boolean protocolFilesystem(String target, String method) {
