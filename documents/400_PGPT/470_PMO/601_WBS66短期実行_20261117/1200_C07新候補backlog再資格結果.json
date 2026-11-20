@@ -1,0 +1,222 @@
+{
+  "eventId": "PGPT-20261008-6717",
+  "groupId": "PGPT-WBS66-C07-BACKLOG-CURRENT-MONITORING-REGRESSION-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T11:31:25.494000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 68,
+      "remainingPercent": 32,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-C07-BACKLOG-CURRENT-MONITORING-REGRESSION-20261120",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "PGPT-WBS66-C07-BACKLOG-CURRENT-MONITORING-REGRESSION-20261120",
+    "workAttributionKind": "SOURCE_REQUALIFICATION",
+    "wbsLeafIds": [
+      "WBS-P018-09"
+    ],
+    "managementWorkIds": [
+      "WBS-P018-09/2",
+      "WBS-C07"
+    ],
+    "source": "b79ad0105fcfffa3591b04eae7c928e668b1129d",
+    "productionCoreMain": "da20ad7753279ae4e8017593866502d3341ec0e5",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40810-c07-backlog-new-source-regression-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.2,
+      "base": 0.55,
+      "high": 1.15
+    },
+    "groupCapPp": 1.8,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1198_F02警報修正ABIと独立継続点.json",
+        "sha256": "24f81041a69185ca2bcb338576c7a72193b0290be1e0f538bb82d23cf94cc139"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40796-async-byte-recovery-composition-v1/manifest.json",
+        "sha256": "6bbcccde806917b331a1966c1aabc4b2fef98a492551921e220d57ac1b1025cf"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40808-f02-timed-alert-public-abi-v1/manifest.json",
+        "sha256": "fb4f2c1a91f87db43bfbf3abdb062fa03071cf0e462e2cf511ca3214f2cb9a9e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/3935_供給backlog原二十五_有限owner仕様.md",
+        "sha256": "9d21a9c93074e0c02de6a79b532eb6daaf6a56cfc0bd41b9b050df3b0b80a0aa"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "da20ad77で変更したAlertLifecycleとAlertThresholdsをqueue三型が共有。旧517a23cdのJava bytes/executionを新候補に合算しない。",
+    "endCondition": "原backlog三Testと追加Async二件を新候補一回で検証し、同一JaCoCo・物理明細と失敗内訳を固定。",
+    "workScope": "8純粋Main型とpackage metadata、既局所純fixture 4だけ。外部queue/DB/Unit、全BatchJAR、同source既成功78の再演0。",
+    "quotaAfter": {
+      "usedPercent": 68,
+      "remainingPercent": 32,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "8055a2b6d5a186267c40165fb16c7a991b78523088f3a762438af6adee0825c8",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T11:31:25.494000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 68,
+          "remainingPercent": 32,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T11:30:43.536588+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 68,
+      "remainingPercent": 32,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6716",
+    "attempt": 1,
+    "attemptResult": "新候補でbacklog三型の27件成功。当3対象JavaのJaCoCo既定四指標全到達。",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 27,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40810-c07-backlog-new-source-regression-v1/manifest.json",
+        "sha256": "923ee9bf51b28227b4924f53c7eb5282667f4947a489bda43e5372fcc535c53c"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40810-c07-backlog-new-source-regression-v1/coverage.xml",
+        "sha256": "2e5436dc6a8cc25e2257581555b6a14900429ab455e78e8103fc7ae251b24039"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/4740_非同期キュー片側観測と復旧単体仕様.md",
+        "sha256": "cb008e7b1626216b6d518f8fd7064d3a83c519022f4267bf1ae7600a106b6590"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "rawと全451",
+      "実観測・sink・保持",
+      "F02/F03全六"
+    ],
+    "newSourceCasesPassed": 27,
+    "firstCandidateExecutionPassed": 27,
+    "targetDefaultCoverage": {
+      "ExpiryBacklogMonitor.java": {
+        "BRANCH": [
+          6,
+          0
+        ],
+        "LINE": [
+          17,
+          0
+        ],
+        "METHOD": [
+          5,
+          0
+        ],
+        "CLASS": [
+          2,
+          0
+        ]
+      },
+      "AsyncQueueMonitor.java": {
+        "BRANCH": [
+          16,
+          0
+        ],
+        "LINE": [
+          24,
+          0
+        ],
+        "METHOD": [
+          6,
+          0
+        ],
+        "CLASS": [
+          3,
+          0
+        ]
+      },
+      "WebLogBacklogMonitor.java": {
+        "BRANCH": [
+          12,
+          0
+        ],
+        "LINE": [
+          18,
+          0
+        ],
+        "METHOD": [
+          5,
+          0
+        ],
+        "CLASS": [
+          2,
+          0
+        ]
+      }
+    },
+    "fullSelectedCoverage": {
+      "INSTRUCTION": {
+        "covered": 1090,
+        "missed": 469
+      },
+      "BRANCH": {
+        "covered": 101,
+        "missed": 95
+      },
+      "LINE": {
+        "covered": 210,
+        "missed": 83
+      },
+      "COMPLEXITY": {
+        "covered": 94,
+        "missed": 72
+      },
+      "METHOD": {
+        "covered": 48,
+        "missed": 20
+      },
+      "CLASS": {
+        "covered": 16,
+        "missed": 1
+      }
+    },
+    "productSource": "da20ad7753279ae4e8017593866502d3341ec0e5"
+  }
+}

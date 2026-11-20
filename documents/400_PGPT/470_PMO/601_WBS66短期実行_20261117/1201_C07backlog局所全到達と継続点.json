@@ -1,0 +1,156 @@
+{
+  "eventId": "PGPT-20261008-6718",
+  "wbsLeafIds": [
+    "WBS-P018-09"
+  ],
+  "managementWorkIds": [
+    "WBS-P018-09/2",
+    "WBS-C07"
+  ],
+  "workCategory": "SELECTED_TEST",
+  "source": "b79ad0105fcfffa3591b04eae7c928e668b1129d",
+  "productionCoreMain": "da20ad7753279ae4e8017593866502d3341ec0e5",
+  "previousCheckpoint": "PGPT-20261008-6715",
+  "groupEvents": [
+    "PGPT-20261008-6717"
+  ],
+  "acceptedOriginal": 17,
+  "total": 190,
+  "coreAccepted": 0,
+  "coreTotal": 5,
+  "officialPtTests": 1964,
+  "officialPtScopes": 53,
+  "newFormalAcceptance": 0,
+  "effortRate": null,
+  "actualAllocatedPp": null,
+  "newProductTests": 0,
+  "recordedOwnedJobsInFlight": 0,
+  "ownedBackendJobsStartedHere": 0,
+  "modelObserved": "gpt-6.2-sol",
+  "reasoningObserved": null,
+  "speedObserved": null,
+  "outcomeEvidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40810-c07-backlog-new-source-regression-v1/manifest.json",
+      "sha256": "923ee9bf51b28227b4924f53c7eb5282667f4947a489bda43e5372fcc535c53c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40810-c07-backlog-new-source-regression-v1/coverage.xml",
+      "sha256": "2e5436dc6a8cc25e2257581555b6a14900429ab455e78e8103fc7ae251b24039"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4740_非同期キュー片側観測と復旧単体仕様.md",
+      "sha256": "cb008e7b1626216b6d518f8fd7064d3a83c519022f4267bf1ae7600a106b6590"
+    }
+  ],
+  "fullQuotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T11:31:25.494000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 68,
+      "remainingPercent": 32,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "quotaAfter": {
+    "usedPercent": 68,
+    "remainingPercent": 32,
+    "resetsAt": 1795445753,
+    "windowDurationMins": 10080
+  },
+  "sharedDeltaPp": null,
+  "completedOriginalRowPricePp": 0,
+  "remainingCriteria": [
+    "rawと全451",
+    "実観測・sink・保持",
+    "F02/F03全六"
+  ],
+  "nextEvidence": "同sourceの全451、実監視owner/sink、F02/F03全体。次の独立作業の着手条件を確認。",
+  "firstCandidateExecutionPassed": 27,
+  "targetDefaultCoverage": {
+    "ExpiryBacklogMonitor.java": {
+      "BRANCH": [
+        6,
+        0
+      ],
+      "LINE": [
+        17,
+        0
+      ],
+      "METHOD": [
+        5,
+        0
+      ],
+      "CLASS": [
+        2,
+        0
+      ]
+    },
+    "AsyncQueueMonitor.java": {
+      "BRANCH": [
+        16,
+        0
+      ],
+      "LINE": [
+        24,
+        0
+      ],
+      "METHOD": [
+        6,
+        0
+      ],
+      "CLASS": [
+        3,
+        0
+      ]
+    },
+    "WebLogBacklogMonitor.java": {
+      "BRANCH": [
+        12,
+        0
+      ],
+      "LINE": [
+        18,
+        0
+      ],
+      "METHOD": [
+        5,
+        0
+      ],
+      "CLASS": [
+        2,
+        0
+      ]
+    }
+  },
+  "fullSelectedCoverage": {
+    "INSTRUCTION": {
+      "covered": 1090,
+      "missed": 469
+    },
+    "BRANCH": {
+      "covered": 101,
+      "missed": 95
+    },
+    "LINE": {
+      "covered": 210,
+      "missed": 83
+    },
+    "COMPLEXITY": {
+      "covered": 94,
+      "missed": 72
+    },
+    "METHOD": {
+      "covered": 48,
+      "missed": 20
+    },
+    "CLASS": {
+      "covered": 16,
+      "missed": 1
+    }
+  },
+  "productSource": "da20ad7753279ae4e8017593866502d3341ec0e5"
+}
