@@ -93,7 +93,9 @@ public final class ApiStandardMetricSource implements AutoCloseable {
       if (closed) return;
       bound = false;
       ownedGc.ifPresent(JvmGcMetrics::close);
+      ownedGc = Optional.empty();
       ownedRegistry.ifPresent(PrometheusMeterRegistry::close);
+      ownedRegistry = Optional.empty();
       closed = true;
     } finally {
       lock.unlock();
