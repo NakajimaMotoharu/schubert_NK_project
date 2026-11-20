@@ -9547,7 +9547,7 @@
   },
   "beforeSsc261InventorySha256": "443af5012e6a3d2a9088bb38d4a28ae3f7ff7645e6e4689fde2bea543fe19b9b",
   "beforeStrictReferenceCandidateInventorySha256": "44976d5ce11f24a89ea7db68c4d5ce1674f9a72032b6a96e453adc461a850968",
-  "inventorySha256": "2cec5499891cd82deb3cf92b9016c59534354278cbb57da7299b08ef4eedfbb8",
+  "inventorySha256": "96de9606c75ddbaafec53643625f2d8e07ec6dfd9eb27a26e55b662c6a6291f8",
   "expiryCandidateObservation": {
     "source": "1ec19782a1afe22d1de75b05f4cd12b8a8a8a172",
     "run": "PG713/714+PG715/717/719+PG722/725/728/729/730+PG737/738/739",
@@ -48649,5 +48649,98 @@
       "sha256": "c290c4b02873974249b3973508eb2cd02a22575d2f07fd40d06f16d94b6faa59"
     },
     "formalDelta": 0
+  },
+  "currentArchiveDependencyAuditPG41222": {
+    "workIds": [
+      "WBS-F02-a"
+    ],
+    "design": [
+      "SS311 §3/§5.2",
+      "SSC028",
+      "PG-D516"
+    ],
+    "specification": {
+      "path": "evidence/01_PT/018_NK-OPS-001/5628_F02直接Archive依存境界仕様・結果.md",
+      "sha256": "6b9a4cafbb0246cf6a4924dc05e3cdcd7528ce3f2feb0495eb949cb4e08a8094"
+    },
+    "result": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41222-f02-archive-owner-independent-v1/manifest.json",
+      "sha256": "de1809ae72bd23503e206db5626078c5fb0c9cbadb043dd7629ac1cb67d1c8b9"
+    },
+    "testIds": [
+      "PT-F02-ARCHIVE-001",
+      "PT-F02-ARCHIVE-002",
+      "PT-F02-ARCHIVE-003",
+      "PT-F02-ARCHIVE-004",
+      "PT-F02-ARCHIVE-005",
+      "PT-F02-ARCHIVE-006",
+      "PT-F02-ARCHIVE-007",
+      "PT-F02-ARCHIVE-008",
+      "PT-F02-ARCHIVE-009",
+      "PT-F02-ARCHIVE-010",
+      "PT-F02-ARCHIVE-011",
+      "PT-F02-ARCHIVE-012"
+    ],
+    "formalDelta": 0,
+    "controlledCases": 12,
+    "requiredPriorToolCanaryReruns": 23,
+    "productTests": 0
+  },
+  "currentJdbcFailureGraphOrderPG41216": {
+    "workIds": [
+      "WBS-F02-a",
+      "WBS-P004-05/2"
+    ],
+    "design": [
+      "SS311/332 SSC-461",
+      "SS354"
+    ],
+    "specification": {
+      "path": "evidence/01_PT/018_NK-OPS-001/5624_F02_SSC461_SQL例外順位・循環単体仕様.md",
+      "sha256": "7a39f79a6e0c92e185caa21d2a2b82f86dedfdf12d41febb5c2e96220ace2885"
+    },
+    "result": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41216-f02-ssc461-jdbc-order-fixed-independent-v1/manifest.json",
+      "sha256": "246eb282b8b7982bde24092fd45bb1d9600ee2a24cd18a5a6c45183b74a8ca51"
+    },
+    "testIds": [
+      "PT-OPS-JDBCGRAPH006",
+      "PT-OPS-JDBCGRAPH007",
+      "PT-OPS-JDBCGRAPH008"
+    ],
+    "formalDelta": 0,
+    "primaryWorkId": "WBS-F02-a",
+    "productTests": 3,
+    "wholeComponentCoverage": false
+  },
+  "currentRangeUnitTokenPG41206": {
+    "workIds": [
+      "WBS-P009-04/2",
+      "WBS-F03/2-2"
+    ],
+    "design": [
+      "SS333 §10.1",
+      "SS352/354"
+    ],
+    "specification": {
+      "path": "evidence/01_PT/009_NK-MED-001/4096_Range単位ASCII境界の単体テスト仕様.md",
+      "sha256": "937a3bdead18976fd13c255dc3e77a3abf2fa6298c8389d85c9d6f3efb30c943"
+    },
+    "result": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41206-range-unit-ascii-independent-v1/manifest.json",
+      "sha256": "28cffcf61b6a98dfbf31a6fb09cd5c50adaf13374d61ffbf534cafa88479e04d"
+    },
+    "testIds": [
+      "PT-MED-RANGE-UNIT-001",
+      "PT-MED-RANGE-UNIT-002"
+    ],
+    "formalDelta": 0,
+    "primaryWorkId": "WBS-P009-04/2",
+    "productTests": 2,
+    "affectedRequalificationCases": 6,
+    "staticEvidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41208-f03-range-current-nullaway-pmd-v1/manifest.json",
+      "sha256": "22271c7c5cf188512d3578c57d814b0d9dd2022efad151c4da5806ccd2e9fbd3"
+    }
   }
 }

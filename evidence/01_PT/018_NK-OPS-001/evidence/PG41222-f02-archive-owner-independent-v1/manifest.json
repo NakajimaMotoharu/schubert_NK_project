@@ -1,0 +1,87 @@
+{
+  "actualExit": 0,
+  "source": "6cf10b2ce3ba3450386da69d60a55a84b4094ee2",
+  "productionCore": "6c2e8b027818c8dac0ed0f895edb85658e9c4ff1",
+  "terminalAtUTC": "2026-11-20T21:12:05.661265+00:00",
+  "inputs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41218-f02-archive-owner-baseline-v1/manifest.json",
+      "sha256": "542fb9d21dfef60411486a09e49817d952c730250b77b6205eb4218eaf42728a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41220-f02-archive-owner-fixed-v1/manifest.json",
+      "sha256": "f89f22f99f0b3dda0122f616d45d08739bd227f3c91a850d1f79a7ebffb6c9b8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41100-f02-web-transport-source-independent-v1/manifest.json",
+      "sha256": "327c9cd7191af064e8fdac94fe6a79a69f0bca6c814644b7e97913e9ab0fb4e1"
+    }
+  ],
+  "signatures": [
+    {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-public",
+        "java.util.zip.ZipFile"
+      ],
+      "actualExit": 0,
+      "constructorCount": 6,
+      "firstParameterTypes": [
+        "java.io.File",
+        "java.lang.String"
+      ],
+      "stdoutSha256": "44707899db232383bb7abdc6ee3aeba7f718faed83382dffb5c874d8c43ef3bd"
+    },
+    {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-public",
+        "java.util.jar.JarFile"
+      ],
+      "actualExit": 0,
+      "constructorCount": 6,
+      "firstParameterTypes": [
+        "java.io.File",
+        "java.lang.String"
+      ],
+      "stdoutSha256": "a2816d9af975a1d9af60733a5c3961fad37ad54b6d9a1d526445e870749c98f5"
+    },
+    {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-public",
+        "java.util.zip.ZipInputStream"
+      ],
+      "actualExit": 0,
+      "constructorCount": 2,
+      "firstParameterTypes": [
+        "java.io.InputStream"
+      ],
+      "stdoutSha256": "472e1d71c79c2ec766a0a24c7f07054d4a42f968eee87162e80b3bdfbd15676e"
+    },
+    {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-public",
+        "java.util.jar.JarInputStream"
+      ],
+      "actualExit": 0,
+      "constructorCount": 2,
+      "firstParameterTypes": [
+        "java.io.InputStream"
+      ],
+      "stdoutSha256": "2b6a0931d6ea125b439e74a2c977abcc3b9a94df9996a1b4e6618cae7d5c6ebb"
+    }
+  ],
+  "newCanaries": 12,
+  "inheritedCases": 23,
+  "findingsActual": 19,
+  "protocolSourceCount": 169,
+  "controllerSourceCount": 13,
+  "productSourceMentions": [],
+  "productJarsRead": 0,
+  "actualArchiveOpens": 0,
+  "productCasesExecuted": 0,
+  "formalDelta": 0,
+  "wholeF02": false
+}
