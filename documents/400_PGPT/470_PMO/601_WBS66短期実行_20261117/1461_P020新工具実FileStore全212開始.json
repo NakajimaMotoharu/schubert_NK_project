@@ -1,0 +1,83 @@
+{
+  "eventId": "PGPT-20261008-6977",
+  "groupId": "P020-current-212-with-owned-filestore",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T16:53:22.249000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 75,
+      "remainingPercent": 25,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "P020-current-212-with-owned-filestore",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "P020-current-212-with-owned-filestore",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P020-01.03"
+    ],
+    "managementWorkIds": [
+      "WBS-P020-01.03/criterion/quality"
+    ],
+    "source": "2ec9353a97d481f4b77d44cde23ef9a7b38cae14",
+    "productionCoreMain": "2b16a8ed20778fe5896099cb4798cfd1ff96b176",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG41004-p020-current-212-owned-filestore-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.25,
+      "base": 0.75,
+      "high": 1.8
+    },
+    "groupCapPp": 2.8,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1460_F04現haruka通常所有照合継続点.json",
+        "sha256": "13291040fa17633446807b153ab2b62ebc2b34dc65a38a9086870508e1d2d7a7"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40998-p020-gate-single-json-doc-green-v1/manifest.json",
+        "sha256": "0ccb11218962ebb43f7dbe159ea6d0ba1726ce7aef2807afaeee26e174980fe5"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41002-f04-haruka-current-resource-check-v1/manifest.json",
+        "sha256": "71b5b5fb99025b6381bdb69bafa47ef95639a2044379d317aba9431f7aec2c4e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40706-p020-current-211-approved-filestore-v1/begin.json",
+        "sha256": "c2c17d78a75c1c62972df4d86a6dea24061cf05e9ea4e12dad94bd3cab99fc37"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40708-p020-current-211-independent-v1/manifest.json",
+        "sha256": "994c74a3d9cb58f5c053746fb06bb7ab1cce08d150aa740a3f16adf9d9bd5e22"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40658-p020-a02-redirect-green-v1/begin.json",
+        "sha256": "09060f8b73131cf1b7af6a1ccabfc1405639cdf265da5f6aed05fd4824d461a8"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5342_haruka_single_filestore_runner.py",
+        "sha256": "d2f6a6a7798e720e0d2c82f00b0048895a07a53e500c5463d502f499d205d6e1"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5343_p020_single_filestore_host.py",
+        "sha256": "513f3e286eea0efaa2e394e1f5e09489b3a6a2b29314ffdfa4ea58c83ec08860"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "WBS-P020-01.03/2、F04関連。新工具3f9fd515のオフライン211と実FileStore不足、PG41002でfresh所有、同boot、作業空き確認。過去211の単なる再演ではない。",
+    "endCondition": "同一新工具の211＋既実FileStore1、21 suite、真正0、F/E/S/notrun0、新CRC/sessionの無フィルター四counter。新規専有作業領域、一度送信。",
+    "workScope": "既承認harukaの固定ホスト、同boot/owner/site容量再検査を送信前に実施。合成比較ツールのみ。実製品、Current/NK、Browser、Root/VM/DB/配置なし。"
+  }
+}
