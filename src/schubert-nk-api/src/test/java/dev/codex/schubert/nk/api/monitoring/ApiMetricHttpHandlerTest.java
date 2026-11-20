@@ -864,4 +864,25 @@ final class ApiMetricHttpHandlerTest {
       assertEquals(READY + READY_TRUE_SUFFIX, context.render(true));
     }
   }
+
+  @Test
+  void apimhttp025SameFailureOnReadinessAndCloseKeepsJdkSelfSuppression() {
+    try (var context = standard()) {
+      var failure = new IllegalStateException("owned exchange fixture failure");
+      var handler =
+          new ApiMetricHttpHandler(
+              context,
+              () -> {
+                throw failure;
+              });
+      var exchange = new Exchange(GET_METHOD, PATH);
+      exchange.closeFailure = failure;
+
+      var result = assertThrows(IllegalArgumentException.class, () -> handler.handle(exchange));
+      assertSame(failure, result.getCause());
+      assertEquals(0, failure.getSuppressed().length);
+      unpublished(exchange);
+      assertEquals(READY + READY_TRUE_SUFFIX, context.render(true));
+    }
+  }
 }

@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.function.BooleanSupplier;
+import org.jspecify.annotations.Nullable;
 
 /**
  * NK-OPS-001/RD171/UI252/SS342351/1817/PG-D618: borrowed metric HTTP boundary. No socket,
@@ -29,8 +30,24 @@ public final class ApiMetricHttpHandler implements HttpHandler {
   @Override
   public void handle(HttpExchange exchange) throws IOException {
     Objects.requireNonNull(exchange, "metric exchange");
-    try (exchange) {
+    @Nullable Throwable primary = null;
+    try {
       write(exchange);
+    } catch (Throwable failure) {
+      primary = failure;
+      throw failure;
+    } finally {
+      closeOwnedExchange(exchange, primary);
+    }
+  }
+
+  private static void closeOwnedExchange(HttpExchange exchange, @Nullable Throwable primary) {
+    // The accepted exchange is owned here. Keep JDK primary and self-suppression semantics.
+    try {
+      exchange.close();
+    } catch (Throwable cleanup) {
+      if (primary == null) throw cleanup;
+      primary.addSuppressed(cleanup);
     }
   }
 
