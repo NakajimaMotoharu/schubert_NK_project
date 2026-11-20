@@ -1,0 +1,141 @@
+{
+  "eventId": "PGPT-20261008-6827",
+  "groupId": "P0181003-audit-writer-failure-inventory",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T13:52:38.528000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 71,
+      "remainingPercent": 29,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "P0181003-audit-writer-failure-inventory",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "P0181003-audit-writer-failure-inventory",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P018-10.03"
+    ],
+    "managementWorkIds": [],
+    "source": "810a52bdb2fc9a9effaf74ecc4035d0d54701d6a",
+    "productionCoreMain": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40894-audit-writer-statement-inventory-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.2,
+      "base": 0.45,
+      "high": 0.9
+    },
+    "groupCapPp": 1.2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1309_P01809監視コンテキスト証跡の公開確認.json",
+        "sha256": "cdac60375c45a69660d4ca07c84d860c0a36e1a531d0bd69d46b7ff0badddc19"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40860-log-search-audit-null-v1-before/manifest.json",
+        "sha256": "bbfef44e5551cc112bbf444811c639e659ab19fab6238040490bcdb8d000e313"
+      },
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1274_P0181003監査writer保留点.json",
+        "sha256": "01f8b15a466e39fe9dc868fb1093b9a7586c43c13bd5d9d11c81da2d392bf690"
+      },
+      {
+        "path": "evidence/01_PT/010_NK-ADM-001/087_QA054ログ検索成功監査writer単体仕様.md",
+        "sha256": "2874066c59c76387829ac1d9033cc7fd56263464a2eb69e56741657ac12898cb"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "BUG-3417/YKT-2739の製品source上の関連候補を確認。準備失敗は保存し、QA056に触れる旧job・PTは再試行しない。",
+    "endCondition": "全書込writerのprepare入力、直接取得とRequiredColumn有無を棚卸し。現LogQuery用の修正候補を提案としてfreeze、SQL・wire・借用契約不変をソース対照。",
+    "workScope": "ホストsource PGレビューのみ。解析プロファイルに保留型を追加せず、候補を現製品へ適用せず、製品PT未実行。",
+    "quotaAfter": {
+      "usedPercent": 71,
+      "remainingPercent": 29,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "e9b1a06937fd502e95248ca63e1f0d1ac119169f95605000a28740ee66fea585",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T13:52:38.528000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 71,
+          "remainingPercent": 29,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T13:52:15.896475+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 71,
+      "remainingPercent": 29,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6826",
+    "attempt": 1,
+    "attemptResult": "SOURCE_ONLY_PROPOSAL_AND_AFFECTED_SIBLINGS",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40894-audit-writer-statement-inventory-v1/manifest.json",
+        "sha256": "1ebd7c115075dbb1f8f0d270f6ec4be396b4c42920239a27fedfe2d938c23a7e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5475_audit_writer_statement_inventory.py",
+        "sha256": "d489023a63ab4c404e50e778d1ac5ce1750d50302d11e3acf1706107662c254b"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5476_log_query_audit_writer_fix_proposed.patch",
+        "sha256": "7667f26e8467ea4770e74717df36fa40445f7ddabae28f6a8e73a4c3b7955300"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "LogQueryの当候補適用・修正前後PTと六候補の判定",
+      "QA056の実施範囲・短期正式と451"
+    ],
+    "acquisitionsInspected": 9,
+    "guarded": 2,
+    "unguarded": 7,
+    "compiledProductInputs": 0,
+    "checkstyleOnProposal": 0,
+    "bug": "BUG-3417",
+    "expansion": "YKT-2739",
+    "productionPatchApplied": false
+  }
+}

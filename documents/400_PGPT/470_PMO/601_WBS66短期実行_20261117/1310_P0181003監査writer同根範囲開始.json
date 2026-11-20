@@ -1,0 +1,65 @@
+{
+  "eventId": "PGPT-20261008-6826",
+  "groupId": "P0181003-audit-writer-failure-inventory",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T13:51:16.353000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 71,
+      "remainingPercent": 29,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "P0181003-audit-writer-failure-inventory",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "P0181003-audit-writer-failure-inventory",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P018-10.03"
+    ],
+    "managementWorkIds": [],
+    "source": "810a52bdb2fc9a9effaf74ecc4035d0d54701d6a",
+    "productionCoreMain": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40894-audit-writer-statement-inventory-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.2,
+      "base": 0.45,
+      "high": 0.9
+    },
+    "groupCapPp": 1.2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1309_P01809監視コンテキスト証跡の公開確認.json",
+        "sha256": "cdac60375c45a69660d4ca07c84d860c0a36e1a531d0bd69d46b7ff0badddc19"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40860-log-search-audit-null-v1-before/manifest.json",
+        "sha256": "bbfef44e5551cc112bbf444811c639e659ab19fab6238040490bcdb8d000e313"
+      },
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1274_P0181003監査writer保留点.json",
+        "sha256": "01f8b15a466e39fe9dc868fb1093b9a7586c43c13bd5d9d11c81da2d392bf690"
+      },
+      {
+        "path": "evidence/01_PT/010_NK-ADM-001/087_QA054ログ検索成功監査writer単体仕様.md",
+        "sha256": "2874066c59c76387829ac1d9033cc7fd56263464a2eb69e56741657ac12898cb"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "BUG-3417/YKT-2739の製品source上の関連候補を確認。準備失敗は保存し、QA056に触れる旧job・PTは再試行しない。",
+    "endCondition": "全書込writerのprepare入力、直接取得とRequiredColumn有無を棚卸し。現LogQuery用の修正候補を提案としてfreeze、SQL・wire・借用契約不変をソース対照。",
+    "workScope": "ホストsource PGレビューのみ。解析プロファイルに保留型を追加せず、候補を現製品へ適用せず、製品PT未実行。"
+  }
+}

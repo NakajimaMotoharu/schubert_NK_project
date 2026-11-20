@@ -1,0 +1,103 @@
+{
+  "actualExit": 0,
+  "source": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+  "startEvent": "PGPT-20261008-6826",
+  "terminalAtUTC": "2026-11-20T13:52:15.896475+00:00",
+  "findings": [
+    {
+      "file": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryAuditWriter.java",
+        "sha256": "cf74fa263488cf9ae7c3199724630c735dd4b35c26b7fb20152883979773d1f5"
+      },
+      "resourceContract": "UNGUARDED",
+      "acquisitionLine": 75,
+      "dynamicRun": false
+    },
+    {
+      "file": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationAuditWriter.java",
+        "sha256": "9b36eb173f1c64adb26515f0f6b84f19d454e704f893a3bef2e6661188e57b0c"
+      },
+      "resourceContract": "UNGUARDED",
+      "acquisitionLine": 54,
+      "dynamicRun": false
+    },
+    {
+      "file": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryAuditWriter.java",
+        "sha256": "f07e45a7a349f594ec6bd0276e98604e2aab91476bc26299a6c50ccff7a48620"
+      },
+      "resourceContract": "UNGUARDED",
+      "acquisitionLine": 62,
+      "dynamicRun": false
+    },
+    {
+      "file": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioAuditWriter.java",
+        "sha256": "d01fdad23e83591779d549b39f9dd7fea697965d1e1cb11a8dc239c3c72fdaca"
+      },
+      "resourceContract": "UNGUARDED",
+      "acquisitionLine": 60,
+      "dynamicRun": false
+    },
+    {
+      "file": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserAuditWriter.java",
+        "sha256": "f0458e7874c4c5884e4f4dc79a0aedb803d730ab95469b43c610f3618d2eb474"
+      },
+      "resourceContract": "UNGUARDED",
+      "acquisitionLine": 75,
+      "dynamicRun": false
+    },
+    {
+      "file": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryAuditWriter.java",
+        "sha256": "026ea309fb97c59d525ac8c668f324ce2275cea0dd8c59e26acbfd37f0492b7f"
+      },
+      "resourceContract": "UNGUARDED",
+      "acquisitionLine": 58,
+      "dynamicRun": false
+    },
+    {
+      "file": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserRequestAuditWriter.java",
+        "sha256": "68568dfbd26fa58a01460ecee9911073b6e66cf2fdea88a69f6776c7892d65d1"
+      },
+      "resourceContract": "UNGUARDED",
+      "acquisitionLine": 71,
+      "dynamicRun": false
+    },
+    {
+      "file": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAuditWriter.java",
+        "sha256": "9a5a2059297418f3dc1d6091ff27beb85ee5e1f3a68a46dd9a6fec2b63a42f8d"
+      },
+      "resourceContract": "REQUIRED_COLUMN",
+      "acquisitionLine": 52,
+      "dynamicRun": false
+    },
+    {
+      "file": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/SessionAuditWriter.java",
+        "sha256": "d4cc9148da42e97b6712a12217edc2aecc2fadaccc84c8edf54bad100364d514"
+      },
+      "resourceContract": "REQUIRED_COLUMN",
+      "acquisitionLine": 43,
+      "dynamicRun": false
+    }
+  ],
+  "proposedPatch": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5476_log_query_audit_writer_fix_proposed.patch",
+    "sha256": "7667f26e8467ea4770e74717df36fa40445f7ddabae28f6a8e73a4c3b7955300"
+  },
+  "exactStatementTextUnchanged": true,
+  "checkstyleProposedSourceExit": 0,
+  "productionPatchApplied": false,
+  "compileOrProductTestsStarted": 0,
+  "heldTypesOpened": 0,
+  "qa056StillOnHold": true,
+  "bug": "BUG-3417",
+  "expansion": "YKT-2739",
+  "whole451": false,
+  "formalDelta": 0
+}

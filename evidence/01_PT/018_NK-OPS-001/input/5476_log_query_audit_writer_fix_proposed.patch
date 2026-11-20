@@ -1,0 +1,14 @@
+--- a/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryAuditWriter.java
++++ b/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryAuditWriter.java
+@@ -3,0 +4,2 @@
++
++import static dev.codex.schubert.nk.api.database.RequiredColumn.requireValue;
+@@ -75,2 +77,3 @@
+-        connection.prepareStatement(
+-            """
++        requireValue(
++            connection.prepareStatement(
++                """
+@@ -80 +83 @@
+-            """)) {
++            """))) {
