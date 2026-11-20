@@ -1,0 +1,140 @@
+{
+  "eventId": "PGPT-20261008-7232",
+  "groupId": "WBS66-G07-CANONICAL-COVERAGE-UTF-METADATA",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T23:29:49.572000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 85,
+      "remainingPercent": 15,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66-G07-CANONICAL-COVERAGE-UTF-METADATA",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "WBS66-G07-CANONICAL-COVERAGE-UTF-METADATA",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-G07"
+    ],
+    "managementWorkIds": [
+      "WBS-G07/2"
+    ],
+    "source": "8d0348c919597003f0920575075c1e436ee92537",
+    "productionCoreMain": "62b239d4dad561da007e15a290f8a271a165dda9",
+    "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "run": "PG41324-g07-public-exec-utf-regression-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.35,
+      "high": 0.9
+    },
+    "groupCapPp": 1,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1715_F02現四JAR確認・次短期条件.json",
+        "sha256": "1005769b5a7b6406a1bd66a392c7d1571b845eac95ac8c4f936377ffa361eb48"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/3021_G07公開exec十件_形式境界限定仕様.md",
+        "sha256": "1c40ce0415526bab9c13492ff77eba6854b460218113f95ec6bf3d21bf09265f"
+      },
+      {
+        "path": "tools/quality/public_jacoco_exec_format_v1.py",
+        "sha256": "3852ec2b30f22b4f38bcfb046d7d4a29f751fafdd792ce07d8ce8fc08fc44cec"
+      },
+      {
+        "path": "tools/quality/jacoco_readonly_exec_subset.py",
+        "sha256": "74698c741cc02423fe35f2ed8ecc234845f71b242dc86c7a1a5b31c7f5de5f59"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "G07 aggregation oracle is the original pinned writer encoding; P018-08 strict independent reader already validates these code units.",
+    "endCondition": "Show falsely admitted malformed unit on aggregate reader before change, align with existing validating routine, and independently prove aggregate counters and canonical boundary vectors.",
+    "workScope": "Self-owned, in-memory public binary metadata vectors. No real native, product execution, original history rescan or held operation.",
+    "quotaAfter": {
+      "usedPercent": 85,
+      "remainingPercent": 15,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "ae4ede773fb9c8aa03ef8fea7a0862dee703578d6e97dd743fa343a5f5d61626",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T23:29:49.572000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 85,
+          "remainingPercent": 15,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T23:29:44.999047+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 85,
+      "remainingPercent": 15,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-7231",
+    "attempt": 1,
+    "attemptResult": "G07_PARSER_TOOL_SCOPE_ONLY_3_NEW_4_DEPENDENT",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41324-g07-public-exec-utf-regression-v1/manifest.json",
+        "sha256": "0716c6ead06d477d18ea719280f2b3a9648bf31222c6521f7b0a2afdc3e28a53"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41326-g07-public-exec-utf-independent-v1/manifest.json",
+        "sha256": "2c95da6f8a094666631f84a5f08fd098f7decb4f0137851cf476645e7dd1dee9"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "Current whole G07 secret inventory and unresolved old provenance",
+      "Full native/source same run and certification 451 remain open"
+    ],
+    "newToolTests": 3,
+    "requalifiedToolTests": 4,
+    "firstVerificationPass": false,
+    "firstVerificationDenominator": 3,
+    "malformedBeforeIncorrectlyAccepted": 8,
+    "malformedAfterRejected": 12,
+    "retryCount": 1,
+    "retryReason": "Required test of corrected tool after expected regression detection; no already-qualified product rerun.",
+    "testedSource": "62b239d4dad561da007e15a290f8a271a165dda9"
+  }
+}

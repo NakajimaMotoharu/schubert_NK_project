@@ -1,6 +1,8 @@
 """WBS-G07/3021: declared JaCoCo execution format only. No value-bearing strings are returned."""
 import struct
 
+from jacoco_readonly_exec_subset import validate_modified_utf
+
 COMMON=('bytes','headers','sessions','classes','probes','hits','sessionUnits','classUnits','asciiSessions','asciiClasses','orderedSessions')
 
 def parse(raw):
@@ -15,7 +17,9 @@ def parse(raw):
     def number(fmt):
         return struct.unpack(fmt,take(struct.calcsize(fmt)))[0]
     def utf_units():
-        encoded=take(number('>H'));units=[];index=0
+        encoded=take(number('>H'))
+        validate_modified_utf(encoded)
+        units=[];index=0
         while index<len(encoded):
             first=encoded[index];index+=1
             if first<=0x7f:units.append(first)

@@ -1,0 +1,63 @@
+{
+  "run": "PG41326-g07-public-exec-utf-independent-v1",
+  "actualExit": 0,
+  "reviewHead": "816e620d44d3af1d2004aac05eb8e576e5aa9f19",
+  "terminalAtUTC": "2026-11-20T23:29:44.999047+00:00",
+  "command": [
+    "-B",
+    "-m",
+    "unittest",
+    "-v",
+    "tools/quality/public_jacoco_exec_format_utf_test.py",
+    "tools/quality/jacoco_readonly_exec_subset_modified_utf_test.py"
+  ],
+  "environment": {
+    "PYTHONPATH": "tools/quality",
+    "python": "3.14.4",
+    "os": "Linux",
+    "arch": "x86_64"
+  },
+  "exactLocalInputs": [
+    {
+      "path": "tools/quality/public_jacoco_exec_format_v1.py",
+      "sha256": "d8b62dc5d0b06bd223ddfa54ad2dd996ff84b4eb3598f8bb1e841926d301f280"
+    },
+    {
+      "path": "tools/quality/public_jacoco_exec_format_utf_test.py",
+      "sha256": "fe083a209224e76daaef0654bc7adee7cbd661eb10af7568de9c9f0d726c454c"
+    },
+    {
+      "path": "tools/quality/jacoco_readonly_exec_subset.py",
+      "sha256": "74698c741cc02423fe35f2ed8ecc234845f71b242dc86c7a1a5b31c7f5de5f59"
+    },
+    {
+      "path": "tools/quality/jacoco_readonly_exec_subset_modified_utf_test.py",
+      "sha256": "6e7287887a0563df30bbeac8fd04ddf8ea7cc11d038370c443ad2fa3b72caf45"
+    }
+  ],
+  "redEvidence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41324-g07-public-exec-utf-regression-v1/manifest.json",
+    "sha256": "0716c6ead06d477d18ea719280f2b3a9648bf31222c6521f7b0a2afdc3e28a53"
+  },
+  "newToolTests": 3,
+  "previousToolTestsRequalified": 4,
+  "positiveCanonicalPair": 1,
+  "originalAggregatePositive": 5,
+  "originalAggregateNegative": 14,
+  "originalApiTypeNegative": 4,
+  "malformedCasesRejected": 12,
+  "utfValidationAppliesToBothFields": true,
+  "originalJavaFormatReferenceChanged": false,
+  "referenceRole": "Historical permissive declared-format read; not a proof of writer canonicality.",
+  "strictOriginalJavaBehavior": "OriginalExecutionReader re-encodes the complete stream and compares exact original bytes under strict mode; unchanged.",
+  "productTests": 0,
+  "nativeTests": 0,
+  "rawSessionOrClassValuesWritten": 0,
+  "publicOldArchivesReread": 0,
+  "coverageCounterDelta": 0,
+  "wholeG07": false,
+  "whole451": false,
+  "formalDelta": 0,
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "57a03004309823e3429680038ff1d7a21f833acd9db13eeec068ebfb09fef21a"
+}
