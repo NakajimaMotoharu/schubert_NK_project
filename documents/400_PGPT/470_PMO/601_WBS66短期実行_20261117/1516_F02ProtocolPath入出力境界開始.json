@@ -1,0 +1,63 @@
+{
+  "eventId": "PGPT-20261008-7031",
+  "groupId": "PGPT-WBS66-F02-PROTOCOL-PATH-IO-20261121",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T17:58:45.806000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 77,
+      "remainingPercent": 23,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F02-PROTOCOL-PATH-IO-20261121",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F02-PROTOCOL-PATH-IO-20261121",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a"
+    ],
+    "source": "25d1d27f72b5233c51b85f6c12bebb4763ce487a",
+    "productionCoreMain": "24da3b252f65f0ea56736cb791cd13165bf62c24",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG41062-f02-protocol-path-io-before-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.3,
+      "base": 0.7,
+      "high": 1.5
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1515_G07公開差分継続点.json",
+        "sha256": "68974703f74bedd4a62ca5eada0f21dc59d3bbe9c20087b558328cec97ccc9a7"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40632-f02-protocol-serialization-after-v1/manifest.json",
+        "sha256": "4da779d17a29de8ca81fd7249e8e77ed8d5bb7ff4b2c4c2b0c76b8cf2b33cc79"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40634-f02-protocol-serialization-independent-v1/manifest.json",
+        "sha256": "3ef1a3001daa1afe4ea92e4721ba5f8c04fada5f24b761869ee2943faa45a5bf"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "SS311 §2～4と既BUG-3364。Path値を許容する一方、実ファイル照合とWatchService登録の直接呼出しが既工具の対象外。",
+    "endCondition": "合成の禁止／許容と既82反例を固定し、旧未検出と現工具の正確な差・対象JAR読取許可を照合。",
+    "workScope": "自己所有合成classによる工具だけ。PathアクセスやWatchServiceを実行しない。"
+  }
+}
