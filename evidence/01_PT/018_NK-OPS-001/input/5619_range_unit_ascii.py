@@ -70,10 +70,16 @@ def main(mode):
     local = (Path("../pgpt-runs/PG379") / run).resolve()
     with TemporaryDirectory(dir="/dev/shm", prefix="pgpt-range-unit-") as scratch:
         classes = Path(scratch) / "classes"
+        test_classes = Path(scratch) / "test-classes"
         classes.mkdir()
-        results["compile"], built = check([BIN/"javac", "-g", "--release", "25", "-Xlint:all",
-                                            "-Werror", "-proc:none", "-cp", console, "-d",
-                                            classes, MAIN, *tests])
+        test_classes.mkdir()
+        compiler = [BIN/"javac", "-g", "--release", "25", "-Xlint:all", "-Werror", "-proc:none"]
+        results["compileMain"], built = check([*compiler, "-d", classes, MAIN])
+        assert built.returncode == 0, built.stderr
+        test_dependencies = os.pathsep.join(map(str, (classes, console)))
+        results["compileTest"], built = check(
+            [*compiler, "-cp", test_dependencies, "-d", test_classes, *tests]
+        )
         assert built.returncode == 0, built.stderr
         physical = sorted((classes / DIR).glob(MAIN_NAME + "*.class"))
         assert len(physical) == 5
@@ -86,7 +92,7 @@ def main(mode):
         selectors = [argument for name in names for argument in ("--select-class", PACKAGE + "." + name)]
         results["junit"], executed = check([BIN/"java", "-Dfile.encoding=UTF-8",
             f"-javaagent:{agent}=destfile={track},append=false,sessionid={run}",
-            "-cp", os.pathsep.join(map(str, (classes, console))),
+            "-cp", os.pathsep.join(map(str, (test_classes, classes, console))),
             "org.junit.platform.console.ConsoleLauncher", "execute", "--disable-banner", "--details=summary",
             "--fail-if-no-tests", "--reports-dir", reports, *selectors])
         terminal = local / "terminal.json"
