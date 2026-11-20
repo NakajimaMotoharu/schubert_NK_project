@@ -110,6 +110,21 @@ class FieldCodecTest {
         () -> FieldCodec.decodeNumericOrErrorFiller(new byte[0], 0, 1, true));
   }
 
+  @Test // PT-PRO-002-N03; SS322 §6.2
+  void numericDecodeValidatesEveryByteBeforeAccumulatingTheValue() {
+    for (byte suffix : new byte[] {'+', (byte) 0xff}) {
+      byte[] wire = "92233720368547758080".getBytes(StandardCharsets.US_ASCII);
+      wire[wire.length - 1] = suffix;
+      var failure =
+          assertThrows(
+              PermanentProtocolException.class,
+              () -> FieldCodec.decodeNumeric(wire, 0, Long.MAX_VALUE));
+      assertEquals("numeric field contains a non-digit byte", failure.getMessage());
+      assertNull(failure.getCause());
+      assertEquals(suffix, wire[wire.length - 1]);
+    }
+  }
+
   @Test
   void booleanAndReservedFieldsRejectUnknownBytes() {
     assertArrayEquals(new byte[] {'0'}, FieldCodec.encodeBoolean(Boolean.FALSE, false));
