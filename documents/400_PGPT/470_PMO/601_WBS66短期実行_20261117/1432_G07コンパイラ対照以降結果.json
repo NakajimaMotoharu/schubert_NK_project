@@ -1,0 +1,128 @@
+{
+  "eventId": "PGPT-20261008-6948",
+  "groupId": "G07-after-production-compiler-control",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T16:22:48.462000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 74,
+      "remainingPercent": 26,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "G07-after-production-compiler-control",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "G07-after-production-compiler-control",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-G07"
+    ],
+    "managementWorkIds": [
+      "WBS-G07/criterion/quality"
+    ],
+    "source": "160e5f85356e6c892c8e5bbabb18cfa441450408",
+    "productionCoreMain": "5372bf018acf0efa6dfe451467bf18b2e3fc0780",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40980-g07-public-after-production-compiler-control-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.1,
+      "base": 0.2,
+      "high": 0.5
+    },
+    "groupCapPp": 0.8,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1430_F03製品compileWerror対照継続点.json",
+        "sha256": "442b83292a215726081e04ded82d7d813e87d64a7f8de184f0d86c52bf1c131a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40962-g07-current-public-delta-after-handler-v1/manifest.json",
+        "sha256": "324c998f179cedd7bd73fb6b1b98521babf8db230ca3ddb3a0f5e3cb53412950"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5481_g07_current_public_patch_only.py",
+        "sha256": "d1bcb460dd6f4c788e529282a79377a3df07bce2853885eb04b1f3b319f8b477"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "WBS-G07の新規公開text区間。前cursorから同期済みHEAD。前G07の範囲を再走しない。",
+    "endCondition": "cursor/commit/path規則、全対象差分のgitleaks真正終了、公開baseline tree不変。",
+    "workScope": "既公開textに限定、私有・未追跡・baseline内容・運用scopeは対象外。",
+    "quotaAfter": {
+      "usedPercent": 74,
+      "remainingPercent": 26,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "d49fe4255d82f95d09ba8e1cbe510fee8fa592e25c9d52cc8bf18deb9320cd22",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T16:22:48.462000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 74,
+          "remainingPercent": 26,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T16:22:24.821699+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 74,
+      "remainingPercent": 26,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6947",
+    "attempt": 1,
+    "attemptResult": "LOCAL_SCOPED_PASS",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40980-g07-public-after-production-compiler-control-v1/manifest.json",
+        "sha256": "6ea292f77b56045fce4a897d7acb9c4cdf4ac84944eba0759fd4ea340871ccc6"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "現source全451",
+      "短期5件の必要な実経路・当source全条件",
+      "旧HOLD"
+    ],
+    "scannedCommits": 15,
+    "scannedUniquePaths": 85,
+    "nextPublicScanCursor": "160e5f85356e6c892c8e5bbabb18cfa441450408",
+    "detected": 0
+  }
+}
