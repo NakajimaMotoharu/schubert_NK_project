@@ -1,0 +1,83 @@
+{
+  "eventId": "PGPT-20261008-6446",
+  "groupId": "PGPT-WBS66-F03-BATCH-RETAINED-LEASE-AND-MONITOR-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T02:13:06.723000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 59,
+      "remainingPercent": 41,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-BATCH-RETAINED-LEASE-AND-MONITOR-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F03-BATCH-RETAINED-LEASE-AND-MONITOR-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "source": "e9676b7689cff144516b1728e4952569ea9ef53e",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40534-f03-batch-retained-lease-and-monitor-raw-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.5,
+      "high": 1.25
+    },
+    "groupCapPp": 1.5,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/925_F03BatchDAO四と継続点.json",
+        "sha256": "7bf437bd148d59dbc899ee61adc90039f442d08f556da8e12565745a42be3a7b"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40532-f03-four-batch-dao-required-boundaries-v1/manifest.json",
+        "sha256": "d9a5852701e4c1817afd94bfab881a2b126565dcc6ba67422a104cbd8d2cdb8b"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40524-f03-batch-closed-current-pmd-v1/manifest.json",
+        "sha256": "46d81a6a33cfbaea0d0100fe423f24614f1b94e76e310879165664a3033e5ffe"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38977-f02-backup-commit-owner-independent-v1/manifest.json",
+        "sha256": "042fb16b654ce1dee15f38c2df4f467bc07b8e0498dad101b44d89d8b287f51c"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38899-f03-log-lease-independent-v1/manifest.json",
+        "sha256": "5b3282d3716b3e498d2c24400e4b57cee950a648f9b017068fbc0d5a5c7c91bc"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38948-p00405-step-cleanup-raw-independent-v1/manifest.json",
+        "sha256": "0b7ceca574e6333bcda34317a6714053bbfa1cedd5c7f0a1bae79e438e90db63"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37254-monitor-lock113-criteria-return-v2/manifest.json",
+        "sha256": "12e03903d1f1bbb1ff5b2f8c99c2f40b35ea3d04e6bf48429a2bf66591f29132"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39762-f03-process-resource-scope-raw-v1/manifest.json",
+        "sha256": "24d1768e63a1f9f834d6d9972e5b57d667b042a97429b0436e518faafba9c704"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "当候補の残133。通常BatchのBackup／削除／監視／借用releaseの五型、元同source rawと品質判定を照合可能。原Siteが個別に判断済みでない場合は不足として保持。",
+    "endCondition": "元座標、raw生メッセージ、多重度、同source・独立根拠の一致を一度検査し、再利用できる出現と未判定を分ける。",
+    "workScope": "公開証拠と通常許可static情報のみ。Root起動・失敗cohort・intent/permit・本物worker/DB/native・元PT再起動は扱わない。"
+  }
+}

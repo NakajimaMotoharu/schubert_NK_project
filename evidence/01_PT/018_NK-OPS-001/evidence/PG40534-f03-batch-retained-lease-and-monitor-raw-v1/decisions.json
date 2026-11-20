@@ -1,0 +1,1902 @@
+[
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+    "line": 35,
+    "column": 31,
+    "rule": "AvoidCatchingGenericException",
+    "method": "complete",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 1,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Approved transaction recovery retains unknown identity, finishes ownership cleanup and rejects with the fixed diagnostic when both failures are known.",
+    "sourceSha256": "a8d2d6afaff8bafbed6d9f34cdcec0cff6e716bb36d9af8b58892afebad2f9cc",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38969-ssc461-backup-commit-static-v2/pmd.xml",
+      "sha256": "4ae13e437abe31517a803bed22a5a6cc92c32918ed7af7b4f12a6b6fd53d4afc"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38977-f02-backup-commit-owner-independent-v1/manifest.json",
+      "sha256": "042fb16b654ce1dee15f38c2df4f467bc07b8e0498dad101b44d89d8b287f51c"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+    "line": 35,
+    "column": 50,
+    "rule": "AvoidCatchingGenericException",
+    "method": "complete",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 2,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Approved transaction recovery retains unknown identity, finishes ownership cleanup and rejects with the fixed diagnostic when both failures are known.",
+    "sourceSha256": "a8d2d6afaff8bafbed6d9f34cdcec0cff6e716bb36d9af8b58892afebad2f9cc",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38969-ssc461-backup-commit-static-v2/pmd.xml",
+      "sha256": "4ae13e437abe31517a803bed22a5a6cc92c32918ed7af7b4f12a6b6fd53d4afc"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38977-f02-backup-commit-owner-independent-v1/manifest.json",
+      "sha256": "042fb16b654ce1dee15f38c2df4f467bc07b8e0498dad101b44d89d8b287f51c"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+    "line": 39,
+    "column": 33,
+    "rule": "AvoidCatchingGenericException",
+    "method": "complete",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 3,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Approved transaction recovery retains unknown identity, finishes ownership cleanup and rejects with the fixed diagnostic when both failures are known.",
+    "sourceSha256": "a8d2d6afaff8bafbed6d9f34cdcec0cff6e716bb36d9af8b58892afebad2f9cc",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38969-ssc461-backup-commit-static-v2/pmd.xml",
+      "sha256": "4ae13e437abe31517a803bed22a5a6cc92c32918ed7af7b4f12a6b6fd53d4afc"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38977-f02-backup-commit-owner-independent-v1/manifest.json",
+      "sha256": "042fb16b654ce1dee15f38c2df4f467bc07b8e0498dad101b44d89d8b287f51c"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+    "line": 39,
+    "column": 52,
+    "rule": "AvoidCatchingGenericException",
+    "method": "complete",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 4,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Approved transaction recovery retains unknown identity, finishes ownership cleanup and rejects with the fixed diagnostic when both failures are known.",
+    "sourceSha256": "a8d2d6afaff8bafbed6d9f34cdcec0cff6e716bb36d9af8b58892afebad2f9cc",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38969-ssc461-backup-commit-static-v2/pmd.xml",
+      "sha256": "4ae13e437abe31517a803bed22a5a6cc92c32918ed7af7b4f12a6b6fd53d4afc"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38977-f02-backup-commit-owner-independent-v1/manifest.json",
+      "sha256": "042fb16b654ce1dee15f38c2df4f467bc07b8e0498dad101b44d89d8b287f51c"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+    "line": 40,
+    "column": 34,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "complete",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for Error.",
+    "occurrence": 5,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Approved rollback compares both original and cleanup failure types before preserving priority and redacting diagnostics. Independent catch clauses cannot decide this by the caught type alone.",
+    "sourceSha256": "a8d2d6afaff8bafbed6d9f34cdcec0cff6e716bb36d9af8b58892afebad2f9cc",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38969-ssc461-backup-commit-static-v2/pmd.xml",
+      "sha256": "4ae13e437abe31517a803bed22a5a6cc92c32918ed7af7b4f12a6b6fd53d4afc"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38977-f02-backup-commit-owner-independent-v1/manifest.json",
+      "sha256": "042fb16b654ce1dee15f38c2df4f467bc07b8e0498dad101b44d89d8b287f51c"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+    "line": 40,
+    "column": 34,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "complete",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for Error.",
+    "occurrence": 6,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Approved rollback compares both original and cleanup failure types before preserving priority and redacting diagnostics. Independent catch clauses cannot decide this by the caught type alone.",
+    "sourceSha256": "a8d2d6afaff8bafbed6d9f34cdcec0cff6e716bb36d9af8b58892afebad2f9cc",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38969-ssc461-backup-commit-static-v2/pmd.xml",
+      "sha256": "4ae13e437abe31517a803bed22a5a6cc92c32918ed7af7b4f12a6b6fd53d4afc"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38977-f02-backup-commit-owner-independent-v1/manifest.json",
+      "sha256": "042fb16b654ce1dee15f38c2df4f467bc07b8e0498dad101b44d89d8b287f51c"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+    "line": 41,
+    "column": 38,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "complete",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for RuntimeException.",
+    "occurrence": 7,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Approved rollback compares both original and cleanup failure types before preserving priority and redacting diagnostics. Independent catch clauses cannot decide this by the caught type alone.",
+    "sourceSha256": "a8d2d6afaff8bafbed6d9f34cdcec0cff6e716bb36d9af8b58892afebad2f9cc",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38969-ssc461-backup-commit-static-v2/pmd.xml",
+      "sha256": "4ae13e437abe31517a803bed22a5a6cc92c32918ed7af7b4f12a6b6fd53d4afc"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38977-f02-backup-commit-owner-independent-v1/manifest.json",
+      "sha256": "042fb16b654ce1dee15f38c2df4f467bc07b8e0498dad101b44d89d8b287f51c"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+    "line": 41,
+    "column": 38,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "complete",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for RuntimeException.",
+    "occurrence": 8,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Approved rollback compares both original and cleanup failure types before preserving priority and redacting diagnostics. Independent catch clauses cannot decide this by the caught type alone.",
+    "sourceSha256": "a8d2d6afaff8bafbed6d9f34cdcec0cff6e716bb36d9af8b58892afebad2f9cc",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38969-ssc461-backup-commit-static-v2/pmd.xml",
+      "sha256": "4ae13e437abe31517a803bed22a5a6cc92c32918ed7af7b4f12a6b6fd53d4afc"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38977-f02-backup-commit-owner-independent-v1/manifest.json",
+      "sha256": "042fb16b654ce1dee15f38c2df4f467bc07b8e0498dad101b44d89d8b287f51c"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+    "line": 42,
+    "column": 43,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "complete",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for BatchRepositoryException.",
+    "occurrence": 9,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Approved rollback compares both original and cleanup failure types before preserving priority and redacting diagnostics. Independent catch clauses cannot decide this by the caught type alone.",
+    "sourceSha256": "a8d2d6afaff8bafbed6d9f34cdcec0cff6e716bb36d9af8b58892afebad2f9cc",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38969-ssc461-backup-commit-static-v2/pmd.xml",
+      "sha256": "4ae13e437abe31517a803bed22a5a6cc92c32918ed7af7b4f12a6b6fd53d4afc"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38977-f02-backup-commit-owner-independent-v1/manifest.json",
+      "sha256": "042fb16b654ce1dee15f38c2df4f467bc07b8e0498dad101b44d89d8b287f51c"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+    "line": 42,
+    "column": 43,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "complete",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for BatchRepositoryException.",
+    "occurrence": 10,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Approved rollback compares both original and cleanup failure types before preserving priority and redacting diagnostics. Independent catch clauses cannot decide this by the caught type alone.",
+    "sourceSha256": "a8d2d6afaff8bafbed6d9f34cdcec0cff6e716bb36d9af8b58892afebad2f9cc",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38969-ssc461-backup-commit-static-v2/pmd.xml",
+      "sha256": "4ae13e437abe31517a803bed22a5a6cc92c32918ed7af7b4f12a6b6fd53d4afc"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38977-f02-backup-commit-owner-independent-v1/manifest.json",
+      "sha256": "042fb16b654ce1dee15f38c2df4f467bc07b8e0498dad101b44d89d8b287f51c"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+    "line": 46,
+    "column": 41,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "complete",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for Error.",
+    "occurrence": 11,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Approved rollback compares both original and cleanup failure types before preserving priority and redacting diagnostics. Independent catch clauses cannot decide this by the caught type alone.",
+    "sourceSha256": "a8d2d6afaff8bafbed6d9f34cdcec0cff6e716bb36d9af8b58892afebad2f9cc",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38969-ssc461-backup-commit-static-v2/pmd.xml",
+      "sha256": "4ae13e437abe31517a803bed22a5a6cc92c32918ed7af7b4f12a6b6fd53d4afc"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38977-f02-backup-commit-owner-independent-v1/manifest.json",
+      "sha256": "042fb16b654ce1dee15f38c2df4f467bc07b8e0498dad101b44d89d8b287f51c"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+    "line": 46,
+    "column": 41,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "complete",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for Error.",
+    "occurrence": 12,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Approved rollback compares both original and cleanup failure types before preserving priority and redacting diagnostics. Independent catch clauses cannot decide this by the caught type alone.",
+    "sourceSha256": "a8d2d6afaff8bafbed6d9f34cdcec0cff6e716bb36d9af8b58892afebad2f9cc",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38969-ssc461-backup-commit-static-v2/pmd.xml",
+      "sha256": "4ae13e437abe31517a803bed22a5a6cc92c32918ed7af7b4f12a6b6fd53d4afc"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38977-f02-backup-commit-owner-independent-v1/manifest.json",
+      "sha256": "042fb16b654ce1dee15f38c2df4f467bc07b8e0498dad101b44d89d8b287f51c"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+    "line": 47,
+    "column": 41,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "complete",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for RuntimeException.",
+    "occurrence": 13,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Approved rollback compares both original and cleanup failure types before preserving priority and redacting diagnostics. Independent catch clauses cannot decide this by the caught type alone.",
+    "sourceSha256": "a8d2d6afaff8bafbed6d9f34cdcec0cff6e716bb36d9af8b58892afebad2f9cc",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38969-ssc461-backup-commit-static-v2/pmd.xml",
+      "sha256": "4ae13e437abe31517a803bed22a5a6cc92c32918ed7af7b4f12a6b6fd53d4afc"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38977-f02-backup-commit-owner-independent-v1/manifest.json",
+      "sha256": "042fb16b654ce1dee15f38c2df4f467bc07b8e0498dad101b44d89d8b287f51c"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+    "line": 47,
+    "column": 41,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "complete",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for RuntimeException.",
+    "occurrence": 14,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Approved rollback compares both original and cleanup failure types before preserving priority and redacting diagnostics. Independent catch clauses cannot decide this by the caught type alone.",
+    "sourceSha256": "a8d2d6afaff8bafbed6d9f34cdcec0cff6e716bb36d9af8b58892afebad2f9cc",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38969-ssc461-backup-commit-static-v2/pmd.xml",
+      "sha256": "4ae13e437abe31517a803bed22a5a6cc92c32918ed7af7b4f12a6b6fd53d4afc"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38977-f02-backup-commit-owner-independent-v1/manifest.json",
+      "sha256": "042fb16b654ce1dee15f38c2df4f467bc07b8e0498dad101b44d89d8b287f51c"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+    "line": 48,
+    "column": 46,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "complete",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for BatchRepositoryException.",
+    "occurrence": 15,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Approved rollback compares both original and cleanup failure types before preserving priority and redacting diagnostics. Independent catch clauses cannot decide this by the caught type alone.",
+    "sourceSha256": "a8d2d6afaff8bafbed6d9f34cdcec0cff6e716bb36d9af8b58892afebad2f9cc",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38969-ssc461-backup-commit-static-v2/pmd.xml",
+      "sha256": "4ae13e437abe31517a803bed22a5a6cc92c32918ed7af7b4f12a6b6fd53d4afc"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38977-f02-backup-commit-owner-independent-v1/manifest.json",
+      "sha256": "042fb16b654ce1dee15f38c2df4f467bc07b8e0498dad101b44d89d8b287f51c"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+    "line": 48,
+    "column": 46,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "complete",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for BatchRepositoryException.",
+    "occurrence": 16,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Approved rollback compares both original and cleanup failure types before preserving priority and redacting diagnostics. Independent catch clauses cannot decide this by the caught type alone.",
+    "sourceSha256": "a8d2d6afaff8bafbed6d9f34cdcec0cff6e716bb36d9af8b58892afebad2f9cc",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38969-ssc461-backup-commit-static-v2/pmd.xml",
+      "sha256": "4ae13e437abe31517a803bed22a5a6cc92c32918ed7af7b4f12a6b6fd53d4afc"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38977-f02-backup-commit-owner-independent-v1/manifest.json",
+      "sha256": "042fb16b654ce1dee15f38c2df4f467bc07b8e0498dad101b44d89d8b287f51c"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+    "line": 65,
+    "column": 9,
+    "rule": "DoNotUseThreads",
+    "method": "interrupted",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 17,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Reads or restores the existing owner interrupt status under the original finite operation contract; creates no thread.",
+    "sourceSha256": "a8d2d6afaff8bafbed6d9f34cdcec0cff6e716bb36d9af8b58892afebad2f9cc",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38969-ssc461-backup-commit-static-v2/pmd.xml",
+      "sha256": "4ae13e437abe31517a803bed22a5a6cc92c32918ed7af7b4f12a6b6fd53d4afc"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38977-f02-backup-commit-owner-independent-v1/manifest.json",
+      "sha256": "042fb16b654ce1dee15f38c2df4f467bc07b8e0498dad101b44d89d8b287f51c"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+    "line": 89,
+    "column": 9,
+    "rule": "DoNotUseThreads",
+    "method": "check",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 25,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Reads or restores the existing owner interrupt status under the original finite operation contract; creates no thread.",
+    "sourceSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38884-bug3245-log-lease-static-v1/pmd.xml",
+      "sha256": "204ecf38e1a706eefca0ab4c711c2e3f35984d9aa328ec20c584724e67e37ee1"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38899-f03-log-lease-independent-v1/manifest.json",
+      "sha256": "5b3282d3716b3e498d2c24400e4b57cee950a648f9b017068fbc0d5a5c7c91bc"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+    "line": 93,
+    "column": 9,
+    "rule": "DoNotUseThreads",
+    "method": "check",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 26,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Reads or restores the existing owner interrupt status under the original finite operation contract; creates no thread.",
+    "sourceSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38884-bug3245-log-lease-static-v1/pmd.xml",
+      "sha256": "204ecf38e1a706eefca0ab4c711c2e3f35984d9aa328ec20c584724e67e37ee1"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38899-f03-log-lease-independent-v1/manifest.json",
+      "sha256": "5b3282d3716b3e498d2c24400e4b57cee950a648f9b017068fbc0d5a5c7c91bc"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+    "line": 125,
+    "column": 29,
+    "rule": "AvoidCatchingGenericException",
+    "method": "owned",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 27,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Owned lease/JDBC error path preserves exact primary and applies approved typed priority during release, with no success from the catch.",
+    "sourceSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38884-bug3245-log-lease-static-v1/pmd.xml",
+      "sha256": "204ecf38e1a706eefca0ab4c711c2e3f35984d9aa328ec20c584724e67e37ee1"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38899-f03-log-lease-independent-v1/manifest.json",
+      "sha256": "5b3282d3716b3e498d2c24400e4b57cee950a648f9b017068fbc0d5a5c7c91bc"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+    "line": 125,
+    "column": 48,
+    "rule": "AvoidCatchingGenericException",
+    "method": "owned",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 28,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Owned lease/JDBC error path preserves exact primary and applies approved typed priority during release, with no success from the catch.",
+    "sourceSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38884-bug3245-log-lease-static-v1/pmd.xml",
+      "sha256": "204ecf38e1a706eefca0ab4c711c2e3f35984d9aa328ec20c584724e67e37ee1"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38899-f03-log-lease-independent-v1/manifest.json",
+      "sha256": "5b3282d3716b3e498d2c24400e4b57cee950a648f9b017068fbc0d5a5c7c91bc"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+    "line": 128,
+    "column": 31,
+    "rule": "AvoidCatchingGenericException",
+    "method": "owned",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 29,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Owned lease/JDBC error path preserves exact primary and applies approved typed priority during release, with no success from the catch.",
+    "sourceSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38884-bug3245-log-lease-static-v1/pmd.xml",
+      "sha256": "204ecf38e1a706eefca0ab4c711c2e3f35984d9aa328ec20c584724e67e37ee1"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38899-f03-log-lease-independent-v1/manifest.json",
+      "sha256": "5b3282d3716b3e498d2c24400e4b57cee950a648f9b017068fbc0d5a5c7c91bc"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+    "line": 128,
+    "column": 50,
+    "rule": "AvoidCatchingGenericException",
+    "method": "owned",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 30,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Owned lease/JDBC error path preserves exact primary and applies approved typed priority during release, with no success from the catch.",
+    "sourceSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38884-bug3245-log-lease-static-v1/pmd.xml",
+      "sha256": "204ecf38e1a706eefca0ab4c711c2e3f35984d9aa328ec20c584724e67e37ee1"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38899-f03-log-lease-independent-v1/manifest.json",
+      "sha256": "5b3282d3716b3e498d2c24400e4b57cee950a648f9b017068fbc0d5a5c7c91bc"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+    "line": 187,
+    "column": 29,
+    "rule": "AvoidCatchingGenericException",
+    "method": "transaction",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 31,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Approved transaction recovery retains unknown identity, finishes ownership cleanup and rejects with the fixed diagnostic when both failures are known.",
+    "sourceSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38884-bug3245-log-lease-static-v1/pmd.xml",
+      "sha256": "204ecf38e1a706eefca0ab4c711c2e3f35984d9aa328ec20c584724e67e37ee1"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38899-f03-log-lease-independent-v1/manifest.json",
+      "sha256": "5b3282d3716b3e498d2c24400e4b57cee950a648f9b017068fbc0d5a5c7c91bc"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+    "line": 187,
+    "column": 48,
+    "rule": "AvoidCatchingGenericException",
+    "method": "transaction",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 32,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Approved transaction recovery retains unknown identity, finishes ownership cleanup and rejects with the fixed diagnostic when both failures are known.",
+    "sourceSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38884-bug3245-log-lease-static-v1/pmd.xml",
+      "sha256": "204ecf38e1a706eefca0ab4c711c2e3f35984d9aa328ec20c584724e67e37ee1"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38899-f03-log-lease-independent-v1/manifest.json",
+      "sha256": "5b3282d3716b3e498d2c24400e4b57cee950a648f9b017068fbc0d5a5c7c91bc"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+    "line": 192,
+    "column": 31,
+    "rule": "AvoidCatchingGenericException",
+    "method": "transaction",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 33,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Approved transaction recovery retains unknown identity, finishes ownership cleanup and rejects with the fixed diagnostic when both failures are known.",
+    "sourceSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38884-bug3245-log-lease-static-v1/pmd.xml",
+      "sha256": "204ecf38e1a706eefca0ab4c711c2e3f35984d9aa328ec20c584724e67e37ee1"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38899-f03-log-lease-independent-v1/manifest.json",
+      "sha256": "5b3282d3716b3e498d2c24400e4b57cee950a648f9b017068fbc0d5a5c7c91bc"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+    "line": 192,
+    "column": 50,
+    "rule": "AvoidCatchingGenericException",
+    "method": "transaction",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 34,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Approved transaction recovery retains unknown identity, finishes ownership cleanup and rejects with the fixed diagnostic when both failures are known.",
+    "sourceSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38884-bug3245-log-lease-static-v1/pmd.xml",
+      "sha256": "204ecf38e1a706eefca0ab4c711c2e3f35984d9aa328ec20c584724e67e37ee1"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38899-f03-log-lease-independent-v1/manifest.json",
+      "sha256": "5b3282d3716b3e498d2c24400e4b57cee950a648f9b017068fbc0d5a5c7c91bc"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+    "line": 231,
+    "column": 33,
+    "rule": "AvoidCatchingGenericException",
+    "method": "acquire",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 35,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Owned lease/JDBC error path preserves exact primary and applies approved typed priority during release, with no success from the catch.",
+    "sourceSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38884-bug3245-log-lease-static-v1/pmd.xml",
+      "sha256": "204ecf38e1a706eefca0ab4c711c2e3f35984d9aa328ec20c584724e67e37ee1"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38899-f03-log-lease-independent-v1/manifest.json",
+      "sha256": "5b3282d3716b3e498d2c24400e4b57cee950a648f9b017068fbc0d5a5c7c91bc"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+    "line": 231,
+    "column": 52,
+    "rule": "AvoidCatchingGenericException",
+    "method": "acquire",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 36,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Owned lease/JDBC error path preserves exact primary and applies approved typed priority during release, with no success from the catch.",
+    "sourceSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38884-bug3245-log-lease-static-v1/pmd.xml",
+      "sha256": "204ecf38e1a706eefca0ab4c711c2e3f35984d9aa328ec20c584724e67e37ee1"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38899-f03-log-lease-independent-v1/manifest.json",
+      "sha256": "5b3282d3716b3e498d2c24400e4b57cee950a648f9b017068fbc0d5a5c7c91bc"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+    "line": 237,
+    "column": 31,
+    "rule": "AvoidCatchingGenericException",
+    "method": "acquire",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 37,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Owned lease/JDBC error path preserves exact primary and applies approved typed priority during release, with no success from the catch.",
+    "sourceSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38884-bug3245-log-lease-static-v1/pmd.xml",
+      "sha256": "204ecf38e1a706eefca0ab4c711c2e3f35984d9aa328ec20c584724e67e37ee1"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38899-f03-log-lease-independent-v1/manifest.json",
+      "sha256": "5b3282d3716b3e498d2c24400e4b57cee950a648f9b017068fbc0d5a5c7c91bc"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+    "line": 237,
+    "column": 50,
+    "rule": "AvoidCatchingGenericException",
+    "method": "acquire",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 38,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Owned lease/JDBC error path preserves exact primary and applies approved typed priority during release, with no success from the catch.",
+    "sourceSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38884-bug3245-log-lease-static-v1/pmd.xml",
+      "sha256": "204ecf38e1a706eefca0ab4c711c2e3f35984d9aa328ec20c584724e67e37ee1"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38899-f03-log-lease-independent-v1/manifest.json",
+      "sha256": "5b3282d3716b3e498d2c24400e4b57cee950a648f9b017068fbc0d5a5c7c91bc"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+    "line": 249,
+    "column": 31,
+    "rule": "AvoidCatchingGenericException",
+    "method": "closeRow",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 39,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Owned lease/JDBC error path preserves exact primary and applies approved typed priority during release, with no success from the catch.",
+    "sourceSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38884-bug3245-log-lease-static-v1/pmd.xml",
+      "sha256": "204ecf38e1a706eefca0ab4c711c2e3f35984d9aa328ec20c584724e67e37ee1"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38899-f03-log-lease-independent-v1/manifest.json",
+      "sha256": "5b3282d3716b3e498d2c24400e4b57cee950a648f9b017068fbc0d5a5c7c91bc"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+    "line": 249,
+    "column": 50,
+    "rule": "AvoidCatchingGenericException",
+    "method": "closeRow",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 40,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Owned lease/JDBC error path preserves exact primary and applies approved typed priority during release, with no success from the catch.",
+    "sourceSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38884-bug3245-log-lease-static-v1/pmd.xml",
+      "sha256": "204ecf38e1a706eefca0ab4c711c2e3f35984d9aa328ec20c584724e67e37ee1"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38899-f03-log-lease-independent-v1/manifest.json",
+      "sha256": "5b3282d3716b3e498d2c24400e4b57cee950a648f9b017068fbc0d5a5c7c91bc"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+    "line": 258,
+    "column": 31,
+    "rule": "AvoidCatchingGenericException",
+    "method": "closeStatement",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 41,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Owned lease/JDBC error path preserves exact primary and applies approved typed priority during release, with no success from the catch.",
+    "sourceSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38884-bug3245-log-lease-static-v1/pmd.xml",
+      "sha256": "204ecf38e1a706eefca0ab4c711c2e3f35984d9aa328ec20c584724e67e37ee1"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38899-f03-log-lease-independent-v1/manifest.json",
+      "sha256": "5b3282d3716b3e498d2c24400e4b57cee950a648f9b017068fbc0d5a5c7c91bc"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+    "line": 258,
+    "column": 50,
+    "rule": "AvoidCatchingGenericException",
+    "method": "closeStatement",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 42,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Owned lease/JDBC error path preserves exact primary and applies approved typed priority during release, with no success from the catch.",
+    "sourceSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38884-bug3245-log-lease-static-v1/pmd.xml",
+      "sha256": "204ecf38e1a706eefca0ab4c711c2e3f35984d9aa328ec20c584724e67e37ee1"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38899-f03-log-lease-independent-v1/manifest.json",
+      "sha256": "5b3282d3716b3e498d2c24400e4b57cee950a648f9b017068fbc0d5a5c7c91bc"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+    "line": 279,
+    "column": 35,
+    "rule": "AvoidCatchingGenericException",
+    "method": "close",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 43,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Owned lease/JDBC error path preserves exact primary and applies approved typed priority during release, with no success from the catch.",
+    "sourceSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38884-bug3245-log-lease-static-v1/pmd.xml",
+      "sha256": "204ecf38e1a706eefca0ab4c711c2e3f35984d9aa328ec20c584724e67e37ee1"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38899-f03-log-lease-independent-v1/manifest.json",
+      "sha256": "5b3282d3716b3e498d2c24400e4b57cee950a648f9b017068fbc0d5a5c7c91bc"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+    "line": 279,
+    "column": 54,
+    "rule": "AvoidCatchingGenericException",
+    "method": "close",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 44,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Owned lease/JDBC error path preserves exact primary and applies approved typed priority during release, with no success from the catch.",
+    "sourceSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38884-bug3245-log-lease-static-v1/pmd.xml",
+      "sha256": "204ecf38e1a706eefca0ab4c711c2e3f35984d9aa328ec20c584724e67e37ee1"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38899-f03-log-lease-independent-v1/manifest.json",
+      "sha256": "5b3282d3716b3e498d2c24400e4b57cee950a648f9b017068fbc0d5a5c7c91bc"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+    "line": 285,
+    "column": 33,
+    "rule": "AvoidCatchingGenericException",
+    "method": "close",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 45,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Owned lease/JDBC error path preserves exact primary and applies approved typed priority during release, with no success from the catch.",
+    "sourceSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38884-bug3245-log-lease-static-v1/pmd.xml",
+      "sha256": "204ecf38e1a706eefca0ab4c711c2e3f35984d9aa328ec20c584724e67e37ee1"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38899-f03-log-lease-independent-v1/manifest.json",
+      "sha256": "5b3282d3716b3e498d2c24400e4b57cee950a648f9b017068fbc0d5a5c7c91bc"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+    "line": 285,
+    "column": 52,
+    "rule": "AvoidCatchingGenericException",
+    "method": "close",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 46,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Owned lease/JDBC error path preserves exact primary and applies approved typed priority during release, with no success from the catch.",
+    "sourceSha256": "2908f234e68c0bf71ceda9a7d171f66788e5f3cdc6a00147911ba1d8572fcc6b",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38884-bug3245-log-lease-static-v1/pmd.xml",
+      "sha256": "204ecf38e1a706eefca0ab4c711c2e3f35984d9aa328ec20c584724e67e37ee1"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38899-f03-log-lease-independent-v1/manifest.json",
+      "sha256": "5b3282d3716b3e498d2c24400e4b57cee950a648f9b017068fbc0d5a5c7c91bc"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "line": 103,
+    "column": 29,
+    "rule": "AvoidCatchingGenericException",
+    "method": "transaction",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 49,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Approved transaction recovery retains unknown identity, finishes ownership cleanup and rejects with the fixed diagnostic when both failures are known.",
+    "sourceSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38936-bug3248-step-cleanup-static-v1/pmd.xml",
+      "sha256": "e4c02f5595fd2cac4f0a5690001d3af9655c71909524a69c9d32701abb2d54e6"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38948-p00405-step-cleanup-raw-independent-v1/manifest.json",
+      "sha256": "0b7ceca574e6333bcda34317a6714053bbfa1cedd5c7f0a1bae79e438e90db63"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "line": 103,
+    "column": 48,
+    "rule": "AvoidCatchingGenericException",
+    "method": "transaction",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 50,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Approved transaction recovery retains unknown identity, finishes ownership cleanup and rejects with the fixed diagnostic when both failures are known.",
+    "sourceSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38936-bug3248-step-cleanup-static-v1/pmd.xml",
+      "sha256": "e4c02f5595fd2cac4f0a5690001d3af9655c71909524a69c9d32701abb2d54e6"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38948-p00405-step-cleanup-raw-independent-v1/manifest.json",
+      "sha256": "0b7ceca574e6333bcda34317a6714053bbfa1cedd5c7f0a1bae79e438e90db63"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "line": 108,
+    "column": 31,
+    "rule": "AvoidCatchingGenericException",
+    "method": "transaction",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 51,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Approved transaction recovery retains unknown identity, finishes ownership cleanup and rejects with the fixed diagnostic when both failures are known.",
+    "sourceSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38936-bug3248-step-cleanup-static-v1/pmd.xml",
+      "sha256": "e4c02f5595fd2cac4f0a5690001d3af9655c71909524a69c9d32701abb2d54e6"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38948-p00405-step-cleanup-raw-independent-v1/manifest.json",
+      "sha256": "0b7ceca574e6333bcda34317a6714053bbfa1cedd5c7f0a1bae79e438e90db63"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "line": 108,
+    "column": 50,
+    "rule": "AvoidCatchingGenericException",
+    "method": "transaction",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 52,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Approved transaction recovery retains unknown identity, finishes ownership cleanup and rejects with the fixed diagnostic when both failures are known.",
+    "sourceSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38936-bug3248-step-cleanup-static-v1/pmd.xml",
+      "sha256": "e4c02f5595fd2cac4f0a5690001d3af9655c71909524a69c9d32701abb2d54e6"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38948-p00405-step-cleanup-raw-independent-v1/manifest.json",
+      "sha256": "0b7ceca574e6333bcda34317a6714053bbfa1cedd5c7f0a1bae79e438e90db63"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "line": 110,
+    "column": 32,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "transaction",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for Error.",
+    "occurrence": 53,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Approved rollback compares both original and cleanup failure types before preserving priority and redacting diagnostics. Independent catch clauses cannot decide this by the caught type alone.",
+    "sourceSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38936-bug3248-step-cleanup-static-v1/pmd.xml",
+      "sha256": "e4c02f5595fd2cac4f0a5690001d3af9655c71909524a69c9d32701abb2d54e6"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38948-p00405-step-cleanup-raw-independent-v1/manifest.json",
+      "sha256": "0b7ceca574e6333bcda34317a6714053bbfa1cedd5c7f0a1bae79e438e90db63"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "line": 110,
+    "column": 32,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "transaction",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for Error.",
+    "occurrence": 54,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Approved rollback compares both original and cleanup failure types before preserving priority and redacting diagnostics. Independent catch clauses cannot decide this by the caught type alone.",
+    "sourceSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38936-bug3248-step-cleanup-static-v1/pmd.xml",
+      "sha256": "e4c02f5595fd2cac4f0a5690001d3af9655c71909524a69c9d32701abb2d54e6"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38948-p00405-step-cleanup-raw-independent-v1/manifest.json",
+      "sha256": "0b7ceca574e6333bcda34317a6714053bbfa1cedd5c7f0a1bae79e438e90db63"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "line": 111,
+    "column": 36,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "transaction",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for RuntimeException.",
+    "occurrence": 55,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Approved rollback compares both original and cleanup failure types before preserving priority and redacting diagnostics. Independent catch clauses cannot decide this by the caught type alone.",
+    "sourceSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38936-bug3248-step-cleanup-static-v1/pmd.xml",
+      "sha256": "e4c02f5595fd2cac4f0a5690001d3af9655c71909524a69c9d32701abb2d54e6"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38948-p00405-step-cleanup-raw-independent-v1/manifest.json",
+      "sha256": "0b7ceca574e6333bcda34317a6714053bbfa1cedd5c7f0a1bae79e438e90db63"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "line": 111,
+    "column": 36,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "transaction",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for RuntimeException.",
+    "occurrence": 56,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Approved rollback compares both original and cleanup failure types before preserving priority and redacting diagnostics. Independent catch clauses cannot decide this by the caught type alone.",
+    "sourceSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38936-bug3248-step-cleanup-static-v1/pmd.xml",
+      "sha256": "e4c02f5595fd2cac4f0a5690001d3af9655c71909524a69c9d32701abb2d54e6"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38948-p00405-step-cleanup-raw-independent-v1/manifest.json",
+      "sha256": "0b7ceca574e6333bcda34317a6714053bbfa1cedd5c7f0a1bae79e438e90db63"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "line": 112,
+    "column": 41,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "transaction",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for BatchRepositoryException.",
+    "occurrence": 57,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Approved rollback compares both original and cleanup failure types before preserving priority and redacting diagnostics. Independent catch clauses cannot decide this by the caught type alone.",
+    "sourceSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38936-bug3248-step-cleanup-static-v1/pmd.xml",
+      "sha256": "e4c02f5595fd2cac4f0a5690001d3af9655c71909524a69c9d32701abb2d54e6"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38948-p00405-step-cleanup-raw-independent-v1/manifest.json",
+      "sha256": "0b7ceca574e6333bcda34317a6714053bbfa1cedd5c7f0a1bae79e438e90db63"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "line": 112,
+    "column": 41,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "transaction",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for BatchRepositoryException.",
+    "occurrence": 58,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Approved rollback compares both original and cleanup failure types before preserving priority and redacting diagnostics. Independent catch clauses cannot decide this by the caught type alone.",
+    "sourceSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38936-bug3248-step-cleanup-static-v1/pmd.xml",
+      "sha256": "e4c02f5595fd2cac4f0a5690001d3af9655c71909524a69c9d32701abb2d54e6"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38948-p00405-step-cleanup-raw-independent-v1/manifest.json",
+      "sha256": "0b7ceca574e6333bcda34317a6714053bbfa1cedd5c7f0a1bae79e438e90db63"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "line": 113,
+    "column": 41,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "transaction",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for CleanupStoppedException.",
+    "occurrence": 59,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Approved rollback compares both original and cleanup failure types before preserving priority and redacting diagnostics. Independent catch clauses cannot decide this by the caught type alone.",
+    "sourceSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38936-bug3248-step-cleanup-static-v1/pmd.xml",
+      "sha256": "e4c02f5595fd2cac4f0a5690001d3af9655c71909524a69c9d32701abb2d54e6"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38948-p00405-step-cleanup-raw-independent-v1/manifest.json",
+      "sha256": "0b7ceca574e6333bcda34317a6714053bbfa1cedd5c7f0a1bae79e438e90db63"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "line": 113,
+    "column": 41,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "transaction",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for CleanupStoppedException.",
+    "occurrence": 60,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Approved rollback compares both original and cleanup failure types before preserving priority and redacting diagnostics. Independent catch clauses cannot decide this by the caught type alone.",
+    "sourceSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38936-bug3248-step-cleanup-static-v1/pmd.xml",
+      "sha256": "e4c02f5595fd2cac4f0a5690001d3af9655c71909524a69c9d32701abb2d54e6"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38948-p00405-step-cleanup-raw-independent-v1/manifest.json",
+      "sha256": "0b7ceca574e6333bcda34317a6714053bbfa1cedd5c7f0a1bae79e438e90db63"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "line": 117,
+    "column": 39,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "transaction",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for Error.",
+    "occurrence": 61,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Approved rollback compares both original and cleanup failure types before preserving priority and redacting diagnostics. Independent catch clauses cannot decide this by the caught type alone.",
+    "sourceSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38936-bug3248-step-cleanup-static-v1/pmd.xml",
+      "sha256": "e4c02f5595fd2cac4f0a5690001d3af9655c71909524a69c9d32701abb2d54e6"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38948-p00405-step-cleanup-raw-independent-v1/manifest.json",
+      "sha256": "0b7ceca574e6333bcda34317a6714053bbfa1cedd5c7f0a1bae79e438e90db63"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "line": 117,
+    "column": 39,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "transaction",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for Error.",
+    "occurrence": 62,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Approved rollback compares both original and cleanup failure types before preserving priority and redacting diagnostics. Independent catch clauses cannot decide this by the caught type alone.",
+    "sourceSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38936-bug3248-step-cleanup-static-v1/pmd.xml",
+      "sha256": "e4c02f5595fd2cac4f0a5690001d3af9655c71909524a69c9d32701abb2d54e6"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38948-p00405-step-cleanup-raw-independent-v1/manifest.json",
+      "sha256": "0b7ceca574e6333bcda34317a6714053bbfa1cedd5c7f0a1bae79e438e90db63"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "line": 118,
+    "column": 39,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "transaction",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for RuntimeException.",
+    "occurrence": 63,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Approved rollback compares both original and cleanup failure types before preserving priority and redacting diagnostics. Independent catch clauses cannot decide this by the caught type alone.",
+    "sourceSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38936-bug3248-step-cleanup-static-v1/pmd.xml",
+      "sha256": "e4c02f5595fd2cac4f0a5690001d3af9655c71909524a69c9d32701abb2d54e6"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38948-p00405-step-cleanup-raw-independent-v1/manifest.json",
+      "sha256": "0b7ceca574e6333bcda34317a6714053bbfa1cedd5c7f0a1bae79e438e90db63"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "line": 118,
+    "column": 39,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "transaction",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for RuntimeException.",
+    "occurrence": 64,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Approved rollback compares both original and cleanup failure types before preserving priority and redacting diagnostics. Independent catch clauses cannot decide this by the caught type alone.",
+    "sourceSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38936-bug3248-step-cleanup-static-v1/pmd.xml",
+      "sha256": "e4c02f5595fd2cac4f0a5690001d3af9655c71909524a69c9d32701abb2d54e6"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38948-p00405-step-cleanup-raw-independent-v1/manifest.json",
+      "sha256": "0b7ceca574e6333bcda34317a6714053bbfa1cedd5c7f0a1bae79e438e90db63"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "line": 119,
+    "column": 44,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "transaction",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for BatchRepositoryException.",
+    "occurrence": 65,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Approved rollback compares both original and cleanup failure types before preserving priority and redacting diagnostics. Independent catch clauses cannot decide this by the caught type alone.",
+    "sourceSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38936-bug3248-step-cleanup-static-v1/pmd.xml",
+      "sha256": "e4c02f5595fd2cac4f0a5690001d3af9655c71909524a69c9d32701abb2d54e6"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38948-p00405-step-cleanup-raw-independent-v1/manifest.json",
+      "sha256": "0b7ceca574e6333bcda34317a6714053bbfa1cedd5c7f0a1bae79e438e90db63"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "line": 119,
+    "column": 44,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "transaction",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for BatchRepositoryException.",
+    "occurrence": 66,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Approved rollback compares both original and cleanup failure types before preserving priority and redacting diagnostics. Independent catch clauses cannot decide this by the caught type alone.",
+    "sourceSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38936-bug3248-step-cleanup-static-v1/pmd.xml",
+      "sha256": "e4c02f5595fd2cac4f0a5690001d3af9655c71909524a69c9d32701abb2d54e6"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38948-p00405-step-cleanup-raw-independent-v1/manifest.json",
+      "sha256": "0b7ceca574e6333bcda34317a6714053bbfa1cedd5c7f0a1bae79e438e90db63"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "line": 120,
+    "column": 44,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "transaction",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for CleanupStoppedException.",
+    "occurrence": 67,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Approved rollback compares both original and cleanup failure types before preserving priority and redacting diagnostics. Independent catch clauses cannot decide this by the caught type alone.",
+    "sourceSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38936-bug3248-step-cleanup-static-v1/pmd.xml",
+      "sha256": "e4c02f5595fd2cac4f0a5690001d3af9655c71909524a69c9d32701abb2d54e6"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38948-p00405-step-cleanup-raw-independent-v1/manifest.json",
+      "sha256": "0b7ceca574e6333bcda34317a6714053bbfa1cedd5c7f0a1bae79e438e90db63"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "line": 120,
+    "column": 44,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "transaction",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for CleanupStoppedException.",
+    "occurrence": 68,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Approved rollback compares both original and cleanup failure types before preserving priority and redacting diagnostics. Independent catch clauses cannot decide this by the caught type alone.",
+    "sourceSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38936-bug3248-step-cleanup-static-v1/pmd.xml",
+      "sha256": "e4c02f5595fd2cac4f0a5690001d3af9655c71909524a69c9d32701abb2d54e6"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38948-p00405-step-cleanup-raw-independent-v1/manifest.json",
+      "sha256": "0b7ceca574e6333bcda34317a6714053bbfa1cedd5c7f0a1bae79e438e90db63"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "line": 133,
+    "column": 9,
+    "rule": "DoNotUseThreads",
+    "method": "check",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 69,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Reads or restores the existing owner interrupt status under the original finite operation contract; creates no thread.",
+    "sourceSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38936-bug3248-step-cleanup-static-v1/pmd.xml",
+      "sha256": "e4c02f5595fd2cac4f0a5690001d3af9655c71909524a69c9d32701abb2d54e6"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38948-p00405-step-cleanup-raw-independent-v1/manifest.json",
+      "sha256": "0b7ceca574e6333bcda34317a6714053bbfa1cedd5c7f0a1bae79e438e90db63"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "line": 137,
+    "column": 9,
+    "rule": "DoNotUseThreads",
+    "method": "check",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 70,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Reads or restores the existing owner interrupt status under the original finite operation contract; creates no thread.",
+    "sourceSha256": "350fa9b74db64df1309b34247539e0a0d844de457cef055621b9cf659c2b28c2",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38936-bug3248-step-cleanup-static-v1/pmd.xml",
+      "sha256": "e4c02f5595fd2cac4f0a5690001d3af9655c71909524a69c9d32701abb2d54e6"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38948-p00405-step-cleanup-raw-independent-v1/manifest.json",
+      "sha256": "0b7ceca574e6333bcda34317a6714053bbfa1cedd5c7f0a1bae79e438e90db63"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPoller.java",
+    "line": 48,
+    "column": 16,
+    "rule": "AvoidCatchingGenericException",
+    "method": "observeNow",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 121,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Poll observation/clock gap is retained and the original unchecked failure is rethrown. Approved consecutive-observation policy applies.",
+    "sourceSha256": "d62e74e15d87f8532047167cb5e051f43f00992ae4284cbccc3a3eb12015c271",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37254-monitor-lock113-criteria-return-v2/manifest.json",
+      "sha256": "12e03903d1f1bbb1ff5b2f8c99c2f40b35ea3d04e6bf48429a2bf66591f29132"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37254-monitor-lock113-criteria-return-v2/manifest.json",
+      "sha256": "12e03903d1f1bbb1ff5b2f8c99c2f40b35ea3d04e6bf48429a2bf66591f29132"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPoller.java",
+    "line": 48,
+    "column": 35,
+    "rule": "AvoidCatchingGenericException",
+    "method": "observeNow",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 122,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Poll observation/clock gap is retained and the original unchecked failure is rethrown. Approved consecutive-observation policy applies.",
+    "sourceSha256": "d62e74e15d87f8532047167cb5e051f43f00992ae4284cbccc3a3eb12015c271",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37254-monitor-lock113-criteria-return-v2/manifest.json",
+      "sha256": "12e03903d1f1bbb1ff5b2f8c99c2f40b35ea3d04e6bf48429a2bf66591f29132"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37254-monitor-lock113-criteria-return-v2/manifest.json",
+      "sha256": "12e03903d1f1bbb1ff5b2f8c99c2f40b35ea3d04e6bf48429a2bf66591f29132"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPoller.java",
+    "line": 72,
+    "column": 14,
+    "rule": "AvoidCatchingGenericException",
+    "method": "observeLocked",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 123,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Poll observation/clock gap is retained and the original unchecked failure is rethrown. Approved consecutive-observation policy applies.",
+    "sourceSha256": "d62e74e15d87f8532047167cb5e051f43f00992ae4284cbccc3a3eb12015c271",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37254-monitor-lock113-criteria-return-v2/manifest.json",
+      "sha256": "12e03903d1f1bbb1ff5b2f8c99c2f40b35ea3d04e6bf48429a2bf66591f29132"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37254-monitor-lock113-criteria-return-v2/manifest.json",
+      "sha256": "12e03903d1f1bbb1ff5b2f8c99c2f40b35ea3d04e6bf48429a2bf66591f29132"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPoller.java",
+    "line": 72,
+    "column": 33,
+    "rule": "AvoidCatchingGenericException",
+    "method": "observeLocked",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 124,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Poll observation/clock gap is retained and the original unchecked failure is rethrown. Approved consecutive-observation policy applies.",
+    "sourceSha256": "d62e74e15d87f8532047167cb5e051f43f00992ae4284cbccc3a3eb12015c271",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37254-monitor-lock113-criteria-return-v2/manifest.json",
+      "sha256": "12e03903d1f1bbb1ff5b2f8c99c2f40b35ea3d04e6bf48429a2bf66591f29132"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37254-monitor-lock113-criteria-return-v2/manifest.json",
+      "sha256": "12e03903d1f1bbb1ff5b2f8c99c2f40b35ea3d04e6bf48429a2bf66591f29132"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "line": 46,
+    "column": 51,
+    "rule": "AvoidCatchingGenericException",
+    "method": "acquire",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 199,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "SSC063/BUG195. The acquired resource releases once; cleanup precedence depends on both primary and cleanup failure category. Preserve cancellation and fixed secondary diagnostics.",
+    "sourceSha256": "2dcbb6a8d2f2e1e7bbb1705ffe182a8493ca0407101a9ad261460fb2d95604c9",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39754-process-resource-scope-static-v1/pmd.xml",
+      "sha256": "b9aa37de2da27e36bb21b8cf6ede05ae281eaaa089afe64affc01423c1f33b93"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39762-f03-process-resource-scope-raw-v1/manifest.json",
+      "sha256": "24d1768e63a1f9f834d6d9972e5b57d667b042a97429b0436e518faafba9c704"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "line": 46,
+    "column": 70,
+    "rule": "AvoidCatchingGenericException",
+    "method": "acquire",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 200,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "SSC063/BUG195. The acquired resource releases once; cleanup precedence depends on both primary and cleanup failure category. Preserve cancellation and fixed secondary diagnostics.",
+    "sourceSha256": "2dcbb6a8d2f2e1e7bbb1705ffe182a8493ca0407101a9ad261460fb2d95604c9",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39754-process-resource-scope-static-v1/pmd.xml",
+      "sha256": "b9aa37de2da27e36bb21b8cf6ede05ae281eaaa089afe64affc01423c1f33b93"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39762-f03-process-resource-scope-raw-v1/manifest.json",
+      "sha256": "24d1768e63a1f9f834d6d9972e5b57d667b042a97429b0436e518faafba9c704"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "line": 50,
+    "column": 18,
+    "rule": "AvoidCatchingGenericException",
+    "method": "acquire",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 201,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "SSC063/BUG195. The acquired resource releases once; cleanup precedence depends on both primary and cleanup failure category. Preserve cancellation and fixed secondary diagnostics.",
+    "sourceSha256": "2dcbb6a8d2f2e1e7bbb1705ffe182a8493ca0407101a9ad261460fb2d95604c9",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39754-process-resource-scope-static-v1/pmd.xml",
+      "sha256": "b9aa37de2da27e36bb21b8cf6ede05ae281eaaa089afe64affc01423c1f33b93"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39762-f03-process-resource-scope-raw-v1/manifest.json",
+      "sha256": "24d1768e63a1f9f834d6d9972e5b57d667b042a97429b0436e518faafba9c704"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "line": 50,
+    "column": 37,
+    "rule": "AvoidCatchingGenericException",
+    "method": "acquire",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 202,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "SSC063/BUG195. The acquired resource releases once; cleanup precedence depends on both primary and cleanup failure category. Preserve cancellation and fixed secondary diagnostics.",
+    "sourceSha256": "2dcbb6a8d2f2e1e7bbb1705ffe182a8493ca0407101a9ad261460fb2d95604c9",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39754-process-resource-scope-static-v1/pmd.xml",
+      "sha256": "b9aa37de2da27e36bb21b8cf6ede05ae281eaaa089afe64affc01423c1f33b93"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39762-f03-process-resource-scope-raw-v1/manifest.json",
+      "sha256": "24d1768e63a1f9f834d6d9972e5b57d667b042a97429b0436e518faafba9c704"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "line": 51,
+    "column": 35,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "acquire",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for IOException.",
+    "occurrence": 203,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "SSC063/BUG195. The acquired resource releases once; cleanup precedence depends on both primary and cleanup failure category. Preserve cancellation and fixed secondary diagnostics.",
+    "sourceSha256": "2dcbb6a8d2f2e1e7bbb1705ffe182a8493ca0407101a9ad261460fb2d95604c9",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39754-process-resource-scope-static-v1/pmd.xml",
+      "sha256": "b9aa37de2da27e36bb21b8cf6ede05ae281eaaa089afe64affc01423c1f33b93"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39762-f03-process-resource-scope-raw-v1/manifest.json",
+      "sha256": "24d1768e63a1f9f834d6d9972e5b57d667b042a97429b0436e518faafba9c704"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "line": 51,
+    "column": 35,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "acquire",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for IOException.",
+    "occurrence": 204,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "SSC063/BUG195. The acquired resource releases once; cleanup precedence depends on both primary and cleanup failure category. Preserve cancellation and fixed secondary diagnostics.",
+    "sourceSha256": "2dcbb6a8d2f2e1e7bbb1705ffe182a8493ca0407101a9ad261460fb2d95604c9",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39754-process-resource-scope-static-v1/pmd.xml",
+      "sha256": "b9aa37de2da27e36bb21b8cf6ede05ae281eaaa089afe64affc01423c1f33b93"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39762-f03-process-resource-scope-raw-v1/manifest.json",
+      "sha256": "24d1768e63a1f9f834d6d9972e5b57d667b042a97429b0436e518faafba9c704"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "line": 52,
+    "column": 41,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "acquire",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for InterruptedException.",
+    "occurrence": 205,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "SSC063/BUG195. The acquired resource releases once; cleanup precedence depends on both primary and cleanup failure category. Preserve cancellation and fixed secondary diagnostics.",
+    "sourceSha256": "2dcbb6a8d2f2e1e7bbb1705ffe182a8493ca0407101a9ad261460fb2d95604c9",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39754-process-resource-scope-static-v1/pmd.xml",
+      "sha256": "b9aa37de2da27e36bb21b8cf6ede05ae281eaaa089afe64affc01423c1f33b93"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39762-f03-process-resource-scope-raw-v1/manifest.json",
+      "sha256": "24d1768e63a1f9f834d6d9972e5b57d667b042a97429b0436e518faafba9c704"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "line": 52,
+    "column": 41,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "acquire",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for InterruptedException.",
+    "occurrence": 206,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "SSC063/BUG195. The acquired resource releases once; cleanup precedence depends on both primary and cleanup failure category. Preserve cancellation and fixed secondary diagnostics.",
+    "sourceSha256": "2dcbb6a8d2f2e1e7bbb1705ffe182a8493ca0407101a9ad261460fb2d95604c9",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39754-process-resource-scope-static-v1/pmd.xml",
+      "sha256": "b9aa37de2da27e36bb21b8cf6ede05ae281eaaa089afe64affc01423c1f33b93"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39762-f03-process-resource-scope-raw-v1/manifest.json",
+      "sha256": "24d1768e63a1f9f834d6d9972e5b57d667b042a97429b0436e518faafba9c704"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "line": 53,
+    "column": 41,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "acquire",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for StopGateException.",
+    "occurrence": 207,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "SSC063/BUG195. The acquired resource releases once; cleanup precedence depends on both primary and cleanup failure category. Preserve cancellation and fixed secondary diagnostics.",
+    "sourceSha256": "2dcbb6a8d2f2e1e7bbb1705ffe182a8493ca0407101a9ad261460fb2d95604c9",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39754-process-resource-scope-static-v1/pmd.xml",
+      "sha256": "b9aa37de2da27e36bb21b8cf6ede05ae281eaaa089afe64affc01423c1f33b93"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39762-f03-process-resource-scope-raw-v1/manifest.json",
+      "sha256": "24d1768e63a1f9f834d6d9972e5b57d667b042a97429b0436e518faafba9c704"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "line": 53,
+    "column": 41,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "acquire",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for StopGateException.",
+    "occurrence": 208,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "SSC063/BUG195. The acquired resource releases once; cleanup precedence depends on both primary and cleanup failure category. Preserve cancellation and fixed secondary diagnostics.",
+    "sourceSha256": "2dcbb6a8d2f2e1e7bbb1705ffe182a8493ca0407101a9ad261460fb2d95604c9",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39754-process-resource-scope-static-v1/pmd.xml",
+      "sha256": "b9aa37de2da27e36bb21b8cf6ede05ae281eaaa089afe64affc01423c1f33b93"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39762-f03-process-resource-scope-raw-v1/manifest.json",
+      "sha256": "24d1768e63a1f9f834d6d9972e5b57d667b042a97429b0436e518faafba9c704"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "line": 54,
+    "column": 39,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "acquire",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for StopGateException.",
+    "occurrence": 209,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "SSC063/BUG195. The acquired resource releases once; cleanup precedence depends on both primary and cleanup failure category. Preserve cancellation and fixed secondary diagnostics.",
+    "sourceSha256": "2dcbb6a8d2f2e1e7bbb1705ffe182a8493ca0407101a9ad261460fb2d95604c9",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39754-process-resource-scope-static-v1/pmd.xml",
+      "sha256": "b9aa37de2da27e36bb21b8cf6ede05ae281eaaa089afe64affc01423c1f33b93"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39762-f03-process-resource-scope-raw-v1/manifest.json",
+      "sha256": "24d1768e63a1f9f834d6d9972e5b57d667b042a97429b0436e518faafba9c704"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "line": 54,
+    "column": 39,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "acquire",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for StopGateException.",
+    "occurrence": 210,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "SSC063/BUG195. The acquired resource releases once; cleanup precedence depends on both primary and cleanup failure category. Preserve cancellation and fixed secondary diagnostics.",
+    "sourceSha256": "2dcbb6a8d2f2e1e7bbb1705ffe182a8493ca0407101a9ad261460fb2d95604c9",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39754-process-resource-scope-static-v1/pmd.xml",
+      "sha256": "b9aa37de2da27e36bb21b8cf6ede05ae281eaaa089afe64affc01423c1f33b93"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39762-f03-process-resource-scope-raw-v1/manifest.json",
+      "sha256": "24d1768e63a1f9f834d6d9972e5b57d667b042a97429b0436e518faafba9c704"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "line": 55,
+    "column": 36,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "acquire",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for InterruptedException.",
+    "occurrence": 211,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "SSC063/BUG195. The acquired resource releases once; cleanup precedence depends on both primary and cleanup failure category. Preserve cancellation and fixed secondary diagnostics.",
+    "sourceSha256": "2dcbb6a8d2f2e1e7bbb1705ffe182a8493ca0407101a9ad261460fb2d95604c9",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39754-process-resource-scope-static-v1/pmd.xml",
+      "sha256": "b9aa37de2da27e36bb21b8cf6ede05ae281eaaa089afe64affc01423c1f33b93"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39762-f03-process-resource-scope-raw-v1/manifest.json",
+      "sha256": "24d1768e63a1f9f834d6d9972e5b57d667b042a97429b0436e518faafba9c704"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "line": 55,
+    "column": 36,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "acquire",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for InterruptedException.",
+    "occurrence": 212,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "SSC063/BUG195. The acquired resource releases once; cleanup precedence depends on both primary and cleanup failure category. Preserve cancellation and fixed secondary diagnostics.",
+    "sourceSha256": "2dcbb6a8d2f2e1e7bbb1705ffe182a8493ca0407101a9ad261460fb2d95604c9",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39754-process-resource-scope-static-v1/pmd.xml",
+      "sha256": "b9aa37de2da27e36bb21b8cf6ede05ae281eaaa089afe64affc01423c1f33b93"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39762-f03-process-resource-scope-raw-v1/manifest.json",
+      "sha256": "24d1768e63a1f9f834d6d9972e5b57d667b042a97429b0436e518faafba9c704"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "line": 55,
+    "column": 58,
+    "rule": "DoNotUseThreads",
+    "method": "acquire",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 213,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Reads or restores the existing owner interrupt status under the original finite operation contract; creates no thread.",
+    "sourceSha256": "2dcbb6a8d2f2e1e7bbb1705ffe182a8493ca0407101a9ad261460fb2d95604c9",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39754-process-resource-scope-static-v1/pmd.xml",
+      "sha256": "b9aa37de2da27e36bb21b8cf6ede05ae281eaaa089afe64affc01423c1f33b93"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39762-f03-process-resource-scope-raw-v1/manifest.json",
+      "sha256": "24d1768e63a1f9f834d6d9972e5b57d667b042a97429b0436e518faafba9c704"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "line": 70,
+    "column": 51,
+    "rule": "AvoidCatchingGenericException",
+    "method": "use",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 214,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "SSC063/BUG195. The acquired resource releases once; cleanup precedence depends on both primary and cleanup failure category. Preserve cancellation and fixed secondary diagnostics.",
+    "sourceSha256": "2dcbb6a8d2f2e1e7bbb1705ffe182a8493ca0407101a9ad261460fb2d95604c9",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39754-process-resource-scope-static-v1/pmd.xml",
+      "sha256": "b9aa37de2da27e36bb21b8cf6ede05ae281eaaa089afe64affc01423c1f33b93"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39762-f03-process-resource-scope-raw-v1/manifest.json",
+      "sha256": "24d1768e63a1f9f834d6d9972e5b57d667b042a97429b0436e518faafba9c704"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "line": 70,
+    "column": 70,
+    "rule": "AvoidCatchingGenericException",
+    "method": "use",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 215,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "SSC063/BUG195. The acquired resource releases once; cleanup precedence depends on both primary and cleanup failure category. Preserve cancellation and fixed secondary diagnostics.",
+    "sourceSha256": "2dcbb6a8d2f2e1e7bbb1705ffe182a8493ca0407101a9ad261460fb2d95604c9",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39754-process-resource-scope-static-v1/pmd.xml",
+      "sha256": "b9aa37de2da27e36bb21b8cf6ede05ae281eaaa089afe64affc01423c1f33b93"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39762-f03-process-resource-scope-raw-v1/manifest.json",
+      "sha256": "24d1768e63a1f9f834d6d9972e5b57d667b042a97429b0436e518faafba9c704"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "line": 73,
+    "column": 16,
+    "rule": "AvoidCatchingGenericException",
+    "method": "use",
+    "message": "Avoid catching RuntimeException in try-catch block",
+    "occurrence": 216,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "SSC063/BUG195. The acquired resource releases once; cleanup precedence depends on both primary and cleanup failure category. Preserve cancellation and fixed secondary diagnostics.",
+    "sourceSha256": "2dcbb6a8d2f2e1e7bbb1705ffe182a8493ca0407101a9ad261460fb2d95604c9",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39754-process-resource-scope-static-v1/pmd.xml",
+      "sha256": "b9aa37de2da27e36bb21b8cf6ede05ae281eaaa089afe64affc01423c1f33b93"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39762-f03-process-resource-scope-raw-v1/manifest.json",
+      "sha256": "24d1768e63a1f9f834d6d9972e5b57d667b042a97429b0436e518faafba9c704"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "line": 73,
+    "column": 35,
+    "rule": "AvoidCatchingGenericException",
+    "method": "use",
+    "message": "Avoid catching Error in try-catch block",
+    "occurrence": 217,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "SSC063/BUG195. The acquired resource releases once; cleanup precedence depends on both primary and cleanup failure category. Preserve cancellation and fixed secondary diagnostics.",
+    "sourceSha256": "2dcbb6a8d2f2e1e7bbb1705ffe182a8493ca0407101a9ad261460fb2d95604c9",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39754-process-resource-scope-static-v1/pmd.xml",
+      "sha256": "b9aa37de2da27e36bb21b8cf6ede05ae281eaaa089afe64affc01423c1f33b93"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39762-f03-process-resource-scope-raw-v1/manifest.json",
+      "sha256": "24d1768e63a1f9f834d6d9972e5b57d667b042a97429b0436e518faafba9c704"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "line": 74,
+    "column": 33,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "use",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for IOException.",
+    "occurrence": 218,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "SSC063/BUG195. The acquired resource releases once; cleanup precedence depends on both primary and cleanup failure category. Preserve cancellation and fixed secondary diagnostics.",
+    "sourceSha256": "2dcbb6a8d2f2e1e7bbb1705ffe182a8493ca0407101a9ad261460fb2d95604c9",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39754-process-resource-scope-static-v1/pmd.xml",
+      "sha256": "b9aa37de2da27e36bb21b8cf6ede05ae281eaaa089afe64affc01423c1f33b93"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39762-f03-process-resource-scope-raw-v1/manifest.json",
+      "sha256": "24d1768e63a1f9f834d6d9972e5b57d667b042a97429b0436e518faafba9c704"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "line": 74,
+    "column": 33,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "use",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for IOException.",
+    "occurrence": 219,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "SSC063/BUG195. The acquired resource releases once; cleanup precedence depends on both primary and cleanup failure category. Preserve cancellation and fixed secondary diagnostics.",
+    "sourceSha256": "2dcbb6a8d2f2e1e7bbb1705ffe182a8493ca0407101a9ad261460fb2d95604c9",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39754-process-resource-scope-static-v1/pmd.xml",
+      "sha256": "b9aa37de2da27e36bb21b8cf6ede05ae281eaaa089afe64affc01423c1f33b93"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39762-f03-process-resource-scope-raw-v1/manifest.json",
+      "sha256": "24d1768e63a1f9f834d6d9972e5b57d667b042a97429b0436e518faafba9c704"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "line": 75,
+    "column": 39,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "use",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for InterruptedException.",
+    "occurrence": 220,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "SSC063/BUG195. The acquired resource releases once; cleanup precedence depends on both primary and cleanup failure category. Preserve cancellation and fixed secondary diagnostics.",
+    "sourceSha256": "2dcbb6a8d2f2e1e7bbb1705ffe182a8493ca0407101a9ad261460fb2d95604c9",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39754-process-resource-scope-static-v1/pmd.xml",
+      "sha256": "b9aa37de2da27e36bb21b8cf6ede05ae281eaaa089afe64affc01423c1f33b93"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39762-f03-process-resource-scope-raw-v1/manifest.json",
+      "sha256": "24d1768e63a1f9f834d6d9972e5b57d667b042a97429b0436e518faafba9c704"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "line": 75,
+    "column": 39,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "use",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for InterruptedException.",
+    "occurrence": 221,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "SSC063/BUG195. The acquired resource releases once; cleanup precedence depends on both primary and cleanup failure category. Preserve cancellation and fixed secondary diagnostics.",
+    "sourceSha256": "2dcbb6a8d2f2e1e7bbb1705ffe182a8493ca0407101a9ad261460fb2d95604c9",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39754-process-resource-scope-static-v1/pmd.xml",
+      "sha256": "b9aa37de2da27e36bb21b8cf6ede05ae281eaaa089afe64affc01423c1f33b93"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39762-f03-process-resource-scope-raw-v1/manifest.json",
+      "sha256": "24d1768e63a1f9f834d6d9972e5b57d667b042a97429b0436e518faafba9c704"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "line": 76,
+    "column": 39,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "use",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for StopGateException.",
+    "occurrence": 222,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "SSC063/BUG195. The acquired resource releases once; cleanup precedence depends on both primary and cleanup failure category. Preserve cancellation and fixed secondary diagnostics.",
+    "sourceSha256": "2dcbb6a8d2f2e1e7bbb1705ffe182a8493ca0407101a9ad261460fb2d95604c9",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39754-process-resource-scope-static-v1/pmd.xml",
+      "sha256": "b9aa37de2da27e36bb21b8cf6ede05ae281eaaa089afe64affc01423c1f33b93"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39762-f03-process-resource-scope-raw-v1/manifest.json",
+      "sha256": "24d1768e63a1f9f834d6d9972e5b57d667b042a97429b0436e518faafba9c704"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "line": 76,
+    "column": 39,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "use",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for StopGateException.",
+    "occurrence": 223,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "SSC063/BUG195. The acquired resource releases once; cleanup precedence depends on both primary and cleanup failure category. Preserve cancellation and fixed secondary diagnostics.",
+    "sourceSha256": "2dcbb6a8d2f2e1e7bbb1705ffe182a8493ca0407101a9ad261460fb2d95604c9",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39754-process-resource-scope-static-v1/pmd.xml",
+      "sha256": "b9aa37de2da27e36bb21b8cf6ede05ae281eaaa089afe64affc01423c1f33b93"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39762-f03-process-resource-scope-raw-v1/manifest.json",
+      "sha256": "24d1768e63a1f9f834d6d9972e5b57d667b042a97429b0436e518faafba9c704"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "line": 77,
+    "column": 37,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "use",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for StopGateException.",
+    "occurrence": 224,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "SSC063/BUG195. The acquired resource releases once; cleanup precedence depends on both primary and cleanup failure category. Preserve cancellation and fixed secondary diagnostics.",
+    "sourceSha256": "2dcbb6a8d2f2e1e7bbb1705ffe182a8493ca0407101a9ad261460fb2d95604c9",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39754-process-resource-scope-static-v1/pmd.xml",
+      "sha256": "b9aa37de2da27e36bb21b8cf6ede05ae281eaaa089afe64affc01423c1f33b93"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39762-f03-process-resource-scope-raw-v1/manifest.json",
+      "sha256": "24d1768e63a1f9f834d6d9972e5b57d667b042a97429b0436e518faafba9c704"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "line": 77,
+    "column": 37,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "use",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for StopGateException.",
+    "occurrence": 225,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "SSC063/BUG195. The acquired resource releases once; cleanup precedence depends on both primary and cleanup failure category. Preserve cancellation and fixed secondary diagnostics.",
+    "sourceSha256": "2dcbb6a8d2f2e1e7bbb1705ffe182a8493ca0407101a9ad261460fb2d95604c9",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39754-process-resource-scope-static-v1/pmd.xml",
+      "sha256": "b9aa37de2da27e36bb21b8cf6ede05ae281eaaa089afe64affc01423c1f33b93"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39762-f03-process-resource-scope-raw-v1/manifest.json",
+      "sha256": "24d1768e63a1f9f834d6d9972e5b57d667b042a97429b0436e518faafba9c704"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "line": 79,
+    "column": 34,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "use",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for InterruptedException.",
+    "occurrence": 226,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "SSC063/BUG195. The acquired resource releases once; cleanup precedence depends on both primary and cleanup failure category. Preserve cancellation and fixed secondary diagnostics.",
+    "sourceSha256": "2dcbb6a8d2f2e1e7bbb1705ffe182a8493ca0407101a9ad261460fb2d95604c9",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39754-process-resource-scope-static-v1/pmd.xml",
+      "sha256": "b9aa37de2da27e36bb21b8cf6ede05ae281eaaa089afe64affc01423c1f33b93"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39762-f03-process-resource-scope-raw-v1/manifest.json",
+      "sha256": "24d1768e63a1f9f834d6d9972e5b57d667b042a97429b0436e518faafba9c704"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "line": 79,
+    "column": 34,
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "method": "use",
+    "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for InterruptedException.",
+    "occurrence": 227,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "SSC063/BUG195. The acquired resource releases once; cleanup precedence depends on both primary and cleanup failure category. Preserve cancellation and fixed secondary diagnostics.",
+    "sourceSha256": "2dcbb6a8d2f2e1e7bbb1705ffe182a8493ca0407101a9ad261460fb2d95604c9",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39754-process-resource-scope-static-v1/pmd.xml",
+      "sha256": "b9aa37de2da27e36bb21b8cf6ede05ae281eaaa089afe64affc01423c1f33b93"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39762-f03-process-resource-scope-raw-v1/manifest.json",
+      "sha256": "24d1768e63a1f9f834d6d9972e5b57d667b042a97429b0436e518faafba9c704"
+    }
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "line": 79,
+    "column": 56,
+    "rule": "DoNotUseThreads",
+    "method": "use",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "occurrence": 228,
+    "decision": "NOT_APPLICABLE_RETAINED_APPROVED_BOUNDARY",
+    "reason": "Reads or restores the existing owner interrupt status under the original finite operation contract; creates no thread.",
+    "sourceSha256": "2dcbb6a8d2f2e1e7bbb1705ffe182a8493ca0407101a9ad261460fb2d95604c9",
+    "priorRaw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39754-process-resource-scope-static-v1/pmd.xml",
+      "sha256": "b9aa37de2da27e36bb21b8cf6ede05ae281eaaa089afe64affc01423c1f33b93"
+    },
+    "priorIndependentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39762-f03-process-resource-scope-raw-v1/manifest.json",
+      "sha256": "24d1768e63a1f9f834d6d9972e5b57d667b042a97429b0436e518faafba9c704"
+    }
+  }
+]
