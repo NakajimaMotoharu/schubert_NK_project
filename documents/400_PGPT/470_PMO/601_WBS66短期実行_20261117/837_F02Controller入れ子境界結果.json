@@ -1,0 +1,154 @@
+{
+  "eventId": "PGPT-20261008-6357",
+  "groupId": "PGPT-WBS66-F02-CONTROLLER-NESTED-BOUNDARY-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T00:01:07.267000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 56,
+      "remainingPercent": 44,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F02-CONTROLLER-NESTED-BOUNDARY-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F02-CONTROLLER-NESTED-BOUNDARY-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-b",
+      "WBS-F02/2"
+    ],
+    "source": "fc6828738440fba76bed47f7b2e3cbed391a670d",
+    "productionCoreMain": "cb1411d94a1d97aedafe1af60400aaec0ae8c8e8",
+    "canonicalDesignSource": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "run": "PG40402-f02-controller-nested-baseline-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.25,
+      "base": 0.78,
+      "high": 1.55
+    },
+    "groupCapPp": 2.5,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/835_P020同一exec個別条件と継続点.json",
+        "sha256": "2d29df39be984328988e8be2dce16d96eef865395a8e31e9aa5c02db2bc6b1c9"
+      },
+      {
+        "path": "tools/quality/architecture/ModuleDependencyAudit.java",
+        "sha256": "81cfa2ddcc5d02528259efadf6c31931a1a6fb7e87a704b990aba038a3549bf0"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5267_f02_controller_archunit_canaries.py",
+        "sha256": "14a33f8a95a96b8925aae6443ec70285450021bba379bace0298021c02ec428b"
+      },
+      {
+        "path": "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md",
+        "sha256": "72427a8609a9c4753ff459cbfa92e3ad27669544c59d53eb9191b97b911c74d2"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "SS311 5.2 prohibits direct JDBC/JMS/filesystem calls from Controllers. Existing ArchUnit recognizes only the inspected type name or annotation.",
+    "endCondition": "Exercise named, deeply nested, annotated and anonymous members with independent typed expectations and retain direct/facade allowances. Apply a minimal correction only for an observed gap.",
+    "workScope": "Static classfile-only analysis on original 12 and six new synthetic fixtures; no application classfiles or fixture initialization, service, network, DB or filesystem action by fixtures.",
+    "quotaAfter": {
+      "usedPercent": 56,
+      "remainingPercent": 44,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "909de0779faa0cafb8778f724d6d0429acbb57afcd62ba1ec678c25c95cd1c71",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T00:01:07.267000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 56,
+          "remainingPercent": 44,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T00:00:24.674844+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 56,
+      "remainingPercent": 44,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6356",
+    "attempt": 1,
+    "attemptResult": "FOUR_NESTED_STATIC_FENCE_FALSE_NEGATIVES_CORRECTED_WITH_18_CASES",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40402-f02-controller-nested-baseline-v1/manifest.json",
+        "sha256": "e05958f2c43377ed67736897cfc28745e99bdb70c994a5d67b582b18411747f2"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40404-f02-controller-nested-qualified-v1/manifest.json",
+        "sha256": "9801281fb00477f50eb9fd36b876490dd60e181a01c3f613d4b994c7eabebc9a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40405-f02-nested-independent-initial-count-v1/manifest.json",
+        "sha256": "7ea726989047f5be7fc17ea1b192083acb92bbb55475ac7c0d38238c3c6c214e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40406-f02-controller-nested-independent-v1/manifest.json",
+        "sha256": "c533b3787df9e6221324eb6e185a235fc9819722042cd2321ba98fa77e6dcae5"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "F02 current physical API/Web and all six architecture gates have not run.",
+      "Selected guard evidence is not product coverage; F03 and 451 dependencies remain."
+    ],
+    "firstValidationPassed": 14,
+    "firstValidationDenominator": 18,
+    "retries": 1,
+    "scopeIsToolCanariesNotProductTests": true,
+    "finalStaticCaseAssertions": 18,
+    "oldDirectStaticCases": 12,
+    "newStaticCanaries": 6,
+    "staticsAddedFourExpectedFindings": 4,
+    "original36FixtureClassfilesIdentical": true,
+    "correctedPostArithmeticRetriedOnce": true,
+    "toolDefects": [
+      "BUG-3361",
+      "BUG-3362"
+    ]
+  }
+}
