@@ -1,0 +1,63 @@
+{
+  "eventId": "PGPT-20261008-6467",
+  "groupId": "PGPT-WBS66-G07-STYLE-PUBLIC-HISTORY-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T02:33:11.455000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 59,
+      "remainingPercent": 41,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-G07-STYLE-PUBLIC-HISTORY-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-G07-STYLE-PUBLIC-HISTORY-20261120",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-G07"
+    ],
+    "managementWorkIds": [
+      "WBS-G07"
+    ],
+    "source": "51d307a9d7044207d48b544f9a97238235ef0e37",
+    "productionCoreMain": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40558-g07-public-history-after-style-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.12,
+      "base": 0.3,
+      "high": 0.85
+    },
+    "groupCapPp": 1.1,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/946_F03六製品文面品質と継続点.json",
+        "sha256": "2fefd34ce846632a77e06658158ee91fa20b09b4dbcf0b0f50006999bb7e3281"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40518-g07-public-history-increment-v1/manifest.json",
+        "sha256": "51b19984547842483ecd437c62a262065f912b9be71da432a85606fec18652da"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40556-f03-six-main-style-independent-v1/manifest.json",
+        "sha256": "0e12bf94b5a4573f9219b19211a2cc1b6258483dc72c1e868fefdb9aafa36354"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "公開秘密検査の未検査差分17commitのみ、元cursorを再演しない。開始依存PG40518、固定公式scanner SHA。",
+    "endCondition": "最新public text・gzipを所定上限で検査、secretと証拠hashを分離し実コードを記録。未知はcursor未更新。",
+    "workScope": "Git既commitの公開差分をread-only。私有rawログ・未追跡・secretファイルへアクセスなし。"
+  }
+}
