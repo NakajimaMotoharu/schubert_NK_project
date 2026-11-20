@@ -1,0 +1,549 @@
+{
+  "source": "2b16a8ed20778fe5896099cb4798cfd1ff96b176",
+  "beforeSource": "af6db98d62e83ed4dd19d623034373365027dce3",
+  "startEvent": "PGPT-20261008-6968",
+  "run": "PG40994-f03-web-pool-explicit-mode-v1",
+  "terminalAtUTC": "2026-11-20T16:42:37.571420+00:00",
+  "actualExit": 0,
+  "os": "Linux",
+  "java": "25.0.4",
+  "maven": "3.9.12",
+  "testCounts": {
+    "tests": 8,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "methods": [
+    "webPoolMetric001DebugHasExactlyFourCanonicalUnknownSeries",
+    "webPoolMetric002LiteralCountsAndIndependentGaugeValuesRemainExact",
+    "webPoolMetric003MissingAndTrueZeroAreDistinctAndRecoverable",
+    "webPoolMetric004StandardNeverRegistersOrRetainsAndStillRejectsNull",
+    "webPoolMetric005NegativeMissingUnknownAndMaximumBoundariesDoNotWrap",
+    "webPoolMetric006ParallelUpdatesKeepWholeImmutableSnapshots",
+    "webPoolMetric007PartialProviderFailurePreservesIdentityAndBorrowedLifetime",
+    "webPoolMetric008OwnersAndRepeatedObservationsCannotGrowLabelCardinality"
+  ],
+  "affectedPriorRegressions": 8,
+  "newTestDefinitions": 0,
+  "sourceInputs": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder.java",
+      "sha256": "ab404d162153fac50ce66667f87ab2bcad0c83339b48d8c4700eff9d815a6b03"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/package-info.java",
+      "sha256": "d59b108c0d1da342135c1536f8151986cb87cc8b58a919acb9e095c9be295b9d"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorderTest.java",
+      "sha256": "209593de6d081ca7bd8c405557a115cdfa12e16cfc1b56ddee99f7915d737f61"
+    }
+  ],
+  "currentAbiUnchanged": true,
+  "dependencies": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-commons/1.17.1/micrometer-commons-1.17.1.jar",
+      "sha256": "f2cee6ef046e72eec8128474c7f58c6217173b45ae373c30de0289f2a56ab0fd"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar",
+      "sha256": "9ca47dfa831409b40253c8dc98c17b9d3e050ebbde4d1543c5521dca2b95ad56"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-observation/1.17.1/micrometer-observation-1.17.1.jar",
+      "sha256": "eb34f0cd84a879393ae5c21160fc06385ccdc74f36a4d1e31b199f59acfdaf71"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+      "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    }
+  ],
+  "nullAwayFindings": 0,
+  "physical": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/scope/target/classes/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder.class",
+      "sha256": "e981ce38bee829a734ff43e058296360802f845884be366080c94a61f72e2418"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/scope/target/classes/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder$Counts.class",
+      "sha256": "08bdc4bb9936469f62ae641bc6110dd685015c6027d89eab524529ef44e52ff3"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/scope/target/classes/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder$State.class",
+      "sha256": "b29aa6a4fe33b1358769f6416940f16ff7ea9c338c261a1386b62971910e12de"
+    }
+  ],
+  "raw": {
+    "dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder": {
+      "crc64": "6c21ac97d47fd409",
+      "counts": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 145
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 14
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 26
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 15
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 8
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder$Counts": {
+      "crc64": "a5d60413b34bf2c9",
+      "counts": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 83
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 14
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 10
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 16
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 9
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder$State": {
+      "crc64": "8013827b7743a951",
+      "counts": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 70
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 9
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 6
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 6
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    }
+  },
+  "outerRawComplete": true,
+  "xml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/reports/TEST-junit-jupiter.xml",
+    "sha256": "dfbd15f4de90979d4a144f136f9f3b9b1a25da1971e93f1c9a990ef7b411fa14"
+  },
+  "unitExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/unit.exec",
+    "sha256": "3d6ede328efca3c9b2c2dcdf3dad57e8cc08552586aa0f96de73fb0c75a241df"
+  },
+  "session": "PG40994-WEB-POOL-MODE-EIGHT",
+  "priorRaw": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40992-f03-web-pool-retained-raw-v1/manifest.json",
+    "sha256": "e2789d43b75e8550264df6e73e141f2c47c37d6b47f0cd3aac3215af45a2dd24"
+  },
+  "rawOutput": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40994-f03-web-pool-explicit-mode-v1/unfiltered.tsv",
+    "sha256": "deee12b330f6fdbb29558d1bb52948755504d199d5219ab4a872accbde349b81"
+  },
+  "spotbugs": {
+    "report": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40994-f03-web-pool-explicit-mode-v1/spotbugs.xml",
+      "sha256": "111962edd41f65e64315963c0a24e64ab42a9a780dd266486bb71e37aa4fac8f"
+    },
+    "findings": 0,
+    "errors": 0
+  },
+  "pmd": {
+    "report": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40994-f03-web-pool-explicit-mode-v1/pmd.xml",
+      "sha256": "d0a90f184e5bdd703442ca515e35e9cc2cc80d76e8805aae25847227549c32a3"
+    },
+    "findings": [],
+    "errors": 0
+  },
+  "steps": [
+    {
+      "step": "format",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder.java"
+      ],
+      "exitCode": 0,
+      "startedAtUTC": "2026-11-20T16:42:26.597400+00:00",
+      "terminalAtUTC": "2026-11-20T16:42:26.958479+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/format.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/format.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "step": "checkstyle",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder.java"
+      ],
+      "exitCode": 0,
+      "startedAtUTC": "2026-11-20T16:42:26.958674+00:00",
+      "terminalAtUTC": "2026-11-20T16:42:27.422799+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/checkstyle.stdout",
+        "sha256": "3b192108158fbdcd86528f0ce7fc4cb7a0790371195fd944cf03b7fc3804c63a"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/checkstyle.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "step": "typed",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "-N",
+        "-B",
+        "-ntp",
+        "-X",
+        "-f",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/scope/pom.xml",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "compile"
+      ],
+      "exitCode": 0,
+      "startedAtUTC": "2026-11-20T16:42:27.426161+00:00",
+      "terminalAtUTC": "2026-11-20T16:42:30.712882+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/typed.stdout",
+        "sha256": "8a5f2ddf1ec6aae99885692755314d5a71f5e7b7ce80cf6c63dd719fd207b570"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/typed.stderr",
+        "sha256": "05ed4976f99856c1417eead6c52058f5565d748a00ae7939fa02188545fafda4"
+      }
+    },
+    {
+      "step": "before-WebDbPoolMetricRecorder",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-public",
+        "-s",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15062-web-pool-context-fifty-six-post-v1/component/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder.class"
+      ],
+      "exitCode": 0,
+      "startedAtUTC": "2026-11-20T16:42:30.713762+00:00",
+      "terminalAtUTC": "2026-11-20T16:42:30.844963+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/before-WebDbPoolMetricRecorder.stdout",
+        "sha256": "7d8bf655847c12ae4ff93ab1f789c82064b861e4e0423e9d15670a5c522ec7ca"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/before-WebDbPoolMetricRecorder.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "step": "after-WebDbPoolMetricRecorder",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-public",
+        "-s",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/scope/target/classes/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder.class"
+      ],
+      "exitCode": 0,
+      "startedAtUTC": "2026-11-20T16:42:30.845165+00:00",
+      "terminalAtUTC": "2026-11-20T16:42:30.979599+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/after-WebDbPoolMetricRecorder.stdout",
+        "sha256": "7d8bf655847c12ae4ff93ab1f789c82064b861e4e0423e9d15670a5c522ec7ca"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/after-WebDbPoolMetricRecorder.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "step": "before-WebDbPoolMetricRecorder$Counts",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-public",
+        "-s",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15062-web-pool-context-fifty-six-post-v1/component/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder$Counts.class"
+      ],
+      "exitCode": 0,
+      "startedAtUTC": "2026-11-20T16:42:30.979798+00:00",
+      "terminalAtUTC": "2026-11-20T16:42:31.119012+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/before-WebDbPoolMetricRecorder$Counts.stdout",
+        "sha256": "4319f1a09a408714c737da5cc6c2b443e1b2bff95dc3f8e805b70a69e8b805d0"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/before-WebDbPoolMetricRecorder$Counts.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "step": "after-WebDbPoolMetricRecorder$Counts",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-public",
+        "-s",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/scope/target/classes/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder$Counts.class"
+      ],
+      "exitCode": 0,
+      "startedAtUTC": "2026-11-20T16:42:31.119217+00:00",
+      "terminalAtUTC": "2026-11-20T16:42:31.252371+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/after-WebDbPoolMetricRecorder$Counts.stdout",
+        "sha256": "4319f1a09a408714c737da5cc6c2b443e1b2bff95dc3f8e805b70a69e8b805d0"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/after-WebDbPoolMetricRecorder$Counts.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "step": "before-WebDbPoolMetricRecorder$State",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-public",
+        "-s",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15062-web-pool-context-fifty-six-post-v1/component/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder$State.class"
+      ],
+      "exitCode": 0,
+      "startedAtUTC": "2026-11-20T16:42:31.252600+00:00",
+      "terminalAtUTC": "2026-11-20T16:42:31.399657+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/before-WebDbPoolMetricRecorder$State.stdout",
+        "sha256": "8cc5aaf57ac831c1cb2c46b6eb922127e68dd197a393b699e47ea97b38470756"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/before-WebDbPoolMetricRecorder$State.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "step": "after-WebDbPoolMetricRecorder$State",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-public",
+        "-s",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/scope/target/classes/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder$State.class"
+      ],
+      "exitCode": 0,
+      "startedAtUTC": "2026-11-20T16:42:31.399825+00:00",
+      "terminalAtUTC": "2026-11-20T16:42:31.548558+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/after-WebDbPoolMetricRecorder$State.stdout",
+        "sha256": "8cc5aaf57ac831c1cb2c46b6eb922127e68dd197a393b699e47ea97b38470756"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/after-WebDbPoolMetricRecorder$State.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "step": "compile-test",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-implicit:none",
+        "-sourcepath",
+        "",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/scope/target/classes:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-commons/1.17.1/micrometer-commons-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-observation/1.17.1/micrometer-observation-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/tests",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorderTest.java"
+      ],
+      "exitCode": 0,
+      "startedAtUTC": "2026-11-20T16:42:31.548775+00:00",
+      "terminalAtUTC": "2026-11-20T16:42:32.282554+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/compile-test.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/compile-test.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "step": "unit",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/unit.exec,sessionid=PG40994-WEB-POOL-MODE-EIGHT,append=false",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--fail-if-no-tests",
+        "--disable-ansi-colors",
+        "--class-path",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/scope/target/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/tests:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-commons/1.17.1/micrometer-commons-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-observation/1.17.1/micrometer-observation-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/reports",
+        "--select-class",
+        "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricRecorderTest"
+      ],
+      "exitCode": 0,
+      "startedAtUTC": "2026-11-20T16:42:32.282800+00:00",
+      "terminalAtUTC": "2026-11-20T16:42:33.461418+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/unit.stdout",
+        "sha256": "a2f0b019e88f3b8b9e1f5a4953685fe89ca7f61ae8b6b59f1ee99311a94b504c"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/unit.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "step": "raw",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40966-f03-current-monitor-policy-engine-unit-scope-v1/analyzer:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/unit.exec",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/scope/target/classes/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/scope/target/classes/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder$Counts.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/scope/target/classes/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder$State.class"
+      ],
+      "exitCode": 0,
+      "startedAtUTC": "2026-11-20T16:42:33.461811+00:00",
+      "terminalAtUTC": "2026-11-20T16:42:33.536364+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/raw.stdout",
+        "sha256": "deee12b330f6fdbb29558d1bb52948755504d199d5219ab4a872accbde349b81"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/raw.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "step": "spotbugs",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Xmx1g",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/com/github/spotbugs/spotbugs/4.10.4/spotbugs-4.10.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-analysis/9.10.1/asm-analysis-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-util/9.10.1/asm-util-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/bcel/bcel/6.12.0/bcel-6.12.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/github/stephenc/jcip/jcip-annotations/1.0-1/jcip-annotations-1.0-1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/dom4j/dom4j/2.2.0/dom4j-2.2.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/commons/commons-lang3/3.20.0/commons-lang3-3.20.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/commons/commons-text/1.15.0/commons-text-1.15.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/github/spotbugs/spotbugs-annotations/4.10.4/spotbugs-annotations-4.10.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/jaxen/jaxen/2.0.6/jaxen-2.0.6.jar:/home/mini/codex/project1/work/toolchain/m2/repository/net/sf/saxon/Saxon-HE/12.10/Saxon-HE-12.10.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/logging/log4j/log4j-api/2.26.1/log4j-api-2.26.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.26.1/log4j-to-slf4j-2.26.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-simple/2.0.18/slf4j-simple-2.0.18.jar:/home/mini/codex/project1/work/toolchain/m2/repository/commons-io/commons-io/2.22.0/commons-io-2.22.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/xmlresolver/xmlresolver/5.3.3/xmlresolver-5.3.3.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/xmlresolver/xmlresolver/5.3.3/xmlresolver-5.3.3-data.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+        "edu.umd.cs.findbugs.FindBugs2",
+        "-effort:max",
+        "-low",
+        "-xml:withMessages",
+        "-exitcode",
+        "-auxclasspath",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/scope/target/classes:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-commons/1.17.1/micrometer-commons-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-observation/1.17.1/micrometer-observation-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "-output",
+        "evidence/01_PT/018_NK-OPS-001/evidence/PG40994-f03-web-pool-explicit-mode-v1/spotbugs.xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/scope/target/classes/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/scope/target/classes/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder$Counts.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/scope/target/classes/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder$State.class"
+      ],
+      "exitCode": 0,
+      "startedAtUTC": "2026-11-20T16:42:33.542109+00:00",
+      "terminalAtUTC": "2026-11-20T16:42:35.740302+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/spotbugs.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/spotbugs.stderr",
+        "sha256": "83febadc46f214e89709b832aae077e8a743258c2778ad97727d55ed33462071"
+      }
+    },
+    {
+      "step": "pmd",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/record-fix-v1/pmd-record-1298.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/Saxon-HE-12.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/antlr4-runtime-4.13.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/apex-ls_2.13-6.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/apex-parser-5.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/better-files_2.13-3.9.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/checker-qual-3.55.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/common2_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/common_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/commons-lang3-3.20.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/directory-watcher-0.18.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/directory-watcher-better-files_2.13-0.18.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/error_prone_annotations-2.48.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/failureaccess-1.0.3.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/geny_2.13-0.6.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/groovy-5.1.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/gson-2.14.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/gson-extras-3.3.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/guava-33.7.1-jre.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/io_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/j2objc-annotations-3.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/java-diff-utils-4.16.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jline-native-3.29.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jline-terminal-3.29.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jna-5.12.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jsoup-1.23.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jsr250-api-1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jul-to-slf4j-1.7.36.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-build-tools-api-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-compiler-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-daemon-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-script-runtime-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-common-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-compiler-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-compiler-impl-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-jvm-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-stdlib-2.2.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-stdlib-jdk7-2.2.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-stdlib-jdk8-2.2.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-type-mapper-analyzer-0.7.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-type-mapper-model-0.7.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlinx-coroutines-core-jvm-1.8.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlinx-serialization-core-jvm-1.11.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlinx-serialization-json-jvm-1.11.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/mainargs_2.13-0.5.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/nice-xml-messages-3.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/outline-parser_2.13-2.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/parsers_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pcollections-4.0.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/picocli-4.7.7.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-ant-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-apex-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-cli-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-coco-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-core-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-cpp-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-cs-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-css-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-dart-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-designer-7.19.3.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-fortran-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-gherkin-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-go-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-groovy-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-html-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-java-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-javascript-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-jsp-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-julia-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-kotlin-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-lua-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-matlab-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-modelica-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-objectivec-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-perl-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-php-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-plsql-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-python-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-ruby-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-rust-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-scala_2.13-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-swift-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-tsql-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-velocity-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-visualforce-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-xml-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/portable-scala-reflect_2.13-1.1.3.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/progressbar-0.10.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/rhino-1.7.15.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-collection-compat_2.13-2.8.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-json-rpc-upickle-json-serializer_2.13-1.1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-json-rpc_2.13-1.1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-library-2.13.18.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-parallel-collections_2.13-1.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-reflect-2.13.18.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-xml_2.13-1.3.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scalajs-stubs_2.13-1.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/slf4j-api-1.7.36.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/slf4j-simple-1.7.36.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/sobject-types-67.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/sourcecode_2.13-0.4.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/standard-types-67.0.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/summit-ast-3.1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/trees2_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/trees_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/ujson_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upack_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upickle-core_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upickle-implicits_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upickle_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/vf-parser-2.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/xmlresolver-5.3.3-data.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/xmlresolver-5.3.3.jar",
+        "net.sourceforge.pmd.cli.PmdCli",
+        "check",
+        "--dir",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder.java",
+        "--rulesets",
+        "tools/quality/static/pmd.xml",
+        "--use-version",
+        "java-25",
+        "--aux-classpath",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/scope/target/classes:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-commons/1.17.1/micrometer-commons-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-observation/1.17.1/micrometer-observation-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/jdk-25.0.4/lib/jrt-fs.jar",
+        "--no-cache",
+        "--format",
+        "xml",
+        "--report-file",
+        "evidence/01_PT/018_NK-OPS-001/evidence/PG40994-f03-web-pool-explicit-mode-v1/pmd.xml"
+      ],
+      "exitCode": 0,
+      "startedAtUTC": "2026-11-20T16:42:35.740453+00:00",
+      "terminalAtUTC": "2026-11-20T16:42:37.570775+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/pmd.stdout",
+        "sha256": "1792b04caa226185d75c50313183fb9f5fcf9218e26db3137697adca03af6e57"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/pmd.stderr",
+        "sha256": "1862d7faee8bc4d1469a03164fe1f58a50eafab72b4a0ff282c8d67bf7823e00"
+      }
+    }
+  ],
+  "liveEnvironmentOperations": 0,
+  "combinedHistoricalEvidence": false,
+  "wholeF03": false,
+  "whole451": false,
+  "formalDelta": 0
+}

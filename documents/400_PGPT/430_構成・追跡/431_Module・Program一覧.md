@@ -929,3 +929,7 @@ NK-AUT-001、FUN-001、UI226、SS314/331、LoginAccount constructor、PT-LOGIN-V
 ### MonitoringModePolicy.parse のSS351監視二値（PG40986）
 
 NK-OPS-001、MON010～013、UI252 §5、SS351 §8、PT-OPS-MONMODE001～007／RETCONF／GENB／MONPIPE、WBS-F03/2-2、BUG-3438／3439・YKT-2751／2752。[仕様](../../../evidence/01_PT/018_NK-OPS-001/5537_F03監視mode有限二値再資格仕様.md) [証跡](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40986-f03-mode-policy-explicit-comparison-v2/manifest.json)。
+
+### WebDbPoolMetricRecorderの二値モード（PG40994）
+
+NK-OPS-001、MON010～013、UI252、SS351 §8、WEBPOOLMET001～008、WBS-F03/2-2、BUG-3440／YKT-2751。[仕様](../../../evidence/01_PT/018_NK-OPS-001/5542_F03WebPoolモード再資格仕様.md) [証跡](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40994-f03-web-pool-explicit-mode-v1/manifest.json)。
