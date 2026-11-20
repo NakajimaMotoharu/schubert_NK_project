@@ -1,0 +1,73 @@
+{
+  "eventId": "PGPT-20261008-6832",
+  "groupId": "P01809-batch-metric-text-consumer-requalification",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T14:00:15.433000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 71,
+      "remainingPercent": 29,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "P01809-batch-metric-text-consumer-requalification",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "P01809-batch-metric-text-consumer-requalification",
+    "workAttributionKind": "SOURCE_REQUALIFICATION",
+    "wbsLeafIds": [
+      "WBS-P018-09"
+    ],
+    "managementWorkIds": [],
+    "source": "dba164629c0a8fc887d76872a500f22d36e5849b",
+    "productionCoreMain": "9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40902-batch-metric-text-current-37-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.2,
+      "base": 0.5,
+      "high": 1.25
+    },
+    "groupCapPp": 1.7,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1315_P0180803空class名の工具継続点.json",
+        "sha256": "5abaa5bb34f44d5b99c9011fa9b99dcc34f5c87fc99c0661823dd799f786520e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25224-batch-text-current-console-preflight-v1/manifest.json",
+        "sha256": "61a8920c900734b7449fa7a4356d9907b8e87359bebf32d4e80448578766bcd8"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25238-batch-text-exact-helper-supplement-v1/manifest.json",
+        "sha256": "b4a62238fa26412db7b3c500fc3111fbaa071f9139443e92984892f85e395bc2"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25226-batch-text-original-whole37-v1/manifest.json",
+        "sha256": "7306be94e6f149d7ff75af7130c8ec64e835c7d22cc626d58996b68ceb6c8393"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40886-f02-batch-standard-sdk-package-v1/manifest.json",
+        "sha256": "ff73401dfe64ef19304476dac3ed24752ee32262034428f8b1196fd4424dc0b6"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40874-batch-standard-gc-partial-close-v1-after/manifest.json",
+        "sha256": "38a871d3db549245ab693df9adf3f24a58c8d4e392d6896b2e7b02e7e0c5fc9c"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "PG25224/38の既許可12 Java。現同closure差はBatchStandardMetricSource一型。全Batch JARを付けず固定SDKを使用。",
+    "endCondition": "現Coreで元37を一度、正常、close、標準/詳細、借用と固定出力を元case独立期待で回帰し、変更依存と対象coverageを保持。",
+    "workScope": "必要再資格のみ。実外部監視、既origin 成功の単純再確認、保留型、全451の昇格なし。"
+  }
+}
