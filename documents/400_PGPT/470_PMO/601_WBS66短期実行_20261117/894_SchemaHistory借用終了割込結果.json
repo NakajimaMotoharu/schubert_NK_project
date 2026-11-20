@@ -1,0 +1,190 @@
+{
+  "eventId": "PGPT-20261008-6414",
+  "groupId": "PGPT-WBS66-SCHEMA-HISTORY-BORROWED-TERMINAL-INTERRUPT-20261120",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T01:38:22.507000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 58,
+      "remainingPercent": 42,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-SCHEMA-HISTORY-BORROWED-TERMINAL-INTERRUPT-20261120",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-SCHEMA-HISTORY-BORROWED-TERMINAL-INTERRUPT-20261120",
+    "workAttributionKind": "ADDITIONAL_DISCOVERY",
+    "wbsLeafIds": [
+      "WBS-P019-01.02"
+    ],
+    "managementWorkIds": [
+      "WBS-P019-01.02/2",
+      "WBS-F03/2-2",
+      "WBS-P004-05/2"
+    ],
+    "source": "24978015a487ab7782936b9101f65ff0e4cde331",
+    "productionCoreMain": "2cc96ab800b8753b0f0eafac8e008bd5b69d9a59",
+    "canonicalDesignSource": "6dcd9fb65a3dad2011abeac1babc75e52394785d",
+    "run": "PG40490-port-schema-history-close-interrupt-source-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.35,
+      "base": 1.05,
+      "high": 2.4
+    },
+    "groupCapPp": 3.0,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/892_F03現三製品静的分類継続点.json",
+        "sha256": "602e81d29f260d4ca9e9795c5a2fdbd5364d863557cbbf3694788221ca8c099f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40488-f03-current-282-static-independent-v1/manifest.json",
+        "sha256": "0d9478bc49663a9f02026ab58bcf06a41aef86044b47cf971ce1b78269b31be1"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38670-f03-schema-owner-raw-independent-v3/manifest.json",
+        "sha256": "7f55734dd7bc0adcaf0cb5506c2f543da117d9a75aeb1d4e58b0ab2ec56ec643"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40458-f02-utc42-current-four-jars-v1/manifest.json",
+        "sha256": "2c62141ae1d59953e9d1d44e91c927d7a3b05213c659256df0f237bdf336d188"
+      },
+      {
+        "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+        "sha256": "3d289e22646c265bedc87d6985010b63de56df508ceb1d92f3c5f096789f34fd"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/4592_BUG3234SchemaHistory所有とRowの補充仕様.md",
+        "sha256": "124b3e92c95d6d3b00cea8cb9390f6804f35f09fc6b50072ab2e92056cce08a2"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "現Core2cc96ab800・SS343§9.1・4592及びPG38670元11を照合。本体はquery末尾とclose前の中断を拒否する一方、成功したrows/statement closeでflagが設定された後の受入が未照合。既承認JDK Proxyに限る。",
+    "endCondition": "先行BUG/必要SSC、旧実クラスの独立代理試験、固定08001/interrupt/borrowed各closeと正常値を維持する最小修正、同一候補の必要原11＋追加・raw/静的。実DBなし。",
+    "workScope": "既承認schema履歴の論理Proxyと現物理のみ。Flyway実処理、DB接続、authority、Root、HOLDなし。",
+    "quotaAfter": {
+      "usedPercent": 58,
+      "remainingPercent": 42,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "16bfc8c055fa4d178708334768bfc7247ab198238410a7262862cba2e71ae0fe",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T01:38:22.507000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 58,
+          "remainingPercent": 42,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T01:38:02.817305+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 58,
+      "remainingPercent": 42,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6413",
+    "attempt": 1,
+    "attemptResult": "SCHEMA_HISTORY_FINAL_INTERRUPT_REJECTED_ON_EXACT_MAVEN_BYTE",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 11,
+    "newProductTests": 2,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40490-port-schema-history-close-interrupt-source-v1/manifest.json",
+        "sha256": "cd7b8df2dac55181b61572c1aa26996dabd6c24c8a380be687f938173d59fbd3"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40491-schema-history-SDK-order-precheck-v1/manifest.json",
+        "sha256": "c21d27c76858f516c31700ddb1c2c2e68b687c69fb56b208c87f6e0880f57ee3"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40492-schema-history-two-close-interrupt-red-v1/manifest.json",
+        "sha256": "3c75b89cb8ad882d40a4c9fefd8827eb4590fe765d0f5f6108edc5b91c055d1f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40494-schema-history-close-interrupt-green13-v1/manifest.json",
+        "sha256": "bb132117f3fa7cab8f99971d433c56e30c138e8f1c5b7c5db597fe2d886903a2"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40495-schema-packaging-plugin-pin-precheck-v1/manifest.json",
+        "sha256": "77c6d2cd57fb22a6fe205e11de31918518f8020e129f0c997ccf3ee06f111658"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40496-schema-history-current-four-packaged-v1/wrapper-failure.json",
+        "sha256": "5e8ac0f7042e17301f7a4d1c0f613ef297f0b47fecaf845a7ddb228e50755a44"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40498-schema-history-packaged-proof-recovered-v1/manifest.json",
+        "sha256": "bba0cb1781e36039e9014b8a7f27e4ab2354ef78283181a704bae5dba9fd9b0f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40500-schema-history-close-static-and-junit-independent-v1/manifest.json",
+        "sha256": "caea692bdfb3615385369c6cff24553e4697b543d027c1ed92147ae7132184fe"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "実PostgreSQL、複合startup・全F02/F03、全451、PG40496 SpotBugs子終了未保存"
+    ],
+    "firstValidationPassed": 0,
+    "firstValidationDenominator": 2,
+    "retries": 0,
+    "verifiedCandidateSource": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "verifiedCandidateCore": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+    "confirmedCanonicalMain": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "expectedDefectReproductions": 2,
+    "postRepairSuccessful": 13,
+    "currentUnitFesn": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "matchedPackagedFixturePhysical": 7,
+    "changedMainClasses": 1,
+    "frozenMavenPhysical": 1102,
+    "oldPackagingWrapperExit": 1,
+    "oldSpotBugsNumericExitUnconfirmed": true,
+    "targetedRawMissedLineMethodClassBranch": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "pmdAdditionalOnePerSiteNonApplicable": true
+  }
+}

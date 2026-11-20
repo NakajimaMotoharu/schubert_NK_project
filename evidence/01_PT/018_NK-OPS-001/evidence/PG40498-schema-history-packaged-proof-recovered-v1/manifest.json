@@ -1,0 +1,97 @@
+{
+  "actualExit": 0,
+  "source": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+  "productionCore": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+  "canonicalDesign": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+  "originalWrapper": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40496-schema-history-current-four-packaged-v1/wrapper-failure.json",
+    "sha256": "5e8ac0f7042e17301f7a4d1c0f613ef297f0b47fecaf845a7ddb228e50755a44"
+  },
+  "recoveredCompileTerminal": {
+    "compile": {
+      "log": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40496-schema-history-current-four-packaged-v1/compile.stdout.log.gz",
+        "sha256": "52a8a68b64c6cbf29f8cd8e2ebd16559b2455bb06927f2077dc31c80c592c531"
+      },
+      "buildSuccessMessage": true,
+      "statusZeroImpliedByOriginalChildSuccessBranch": true
+    },
+    "package": {
+      "log": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40496-schema-history-current-four-packaged-v1/package.stdout.log.gz",
+        "sha256": "b9e179ef4d139227700bfd670093bda59e8c2d2ad07491596ba6852169fee71e"
+      },
+      "buildSuccessMessage": true,
+      "statusZeroImpliedByOriginalChildSuccessBranch": true
+    }
+  },
+  "packagedBuild": {
+    "protocol": {
+      "artifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40496-schema-history-current-four-packaged-v1/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+        "sha256": "60ca8fba60bf9aaf77564f2d5cb7259c1e558479daa9c9329c7603c75fec71a0"
+      },
+      "classes": 176,
+      "different": [],
+      "nonTargetComparison": "ZIP entry CRC and length, original hash comparison reached before wrapper failure"
+    },
+    "storage": {
+      "artifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40496-schema-history-current-four-packaged-v1/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+        "sha256": "7ab08b5ee4150e757716b1138debdd9c5626d2a72d55a9f2e55b40f9012b6c94"
+      },
+      "classes": 79,
+      "different": [],
+      "nonTargetComparison": "ZIP entry CRC and length, original hash comparison reached before wrapper failure"
+    },
+    "bootstrap": {
+      "artifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40496-schema-history-current-four-packaged-v1/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+        "sha256": "9c9e129eaea8321b0a409e44a0f06b4ab99fb67acc969e842d59b9f235530140"
+      },
+      "classes": 201,
+      "different": [
+        "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.class"
+      ],
+      "nonTargetComparison": "ZIP entry CRC and length, original hash comparison reached before wrapper failure"
+    },
+    "batch": {
+      "artifact": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40496-schema-history-current-four-packaged-v1/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+        "sha256": "646de7077cc769d33b6953737457173ecf3d3a05cffb039550fcc1690622ac85"
+      },
+      "classes": 646,
+      "different": [],
+      "nonTargetComparison": "ZIP entry CRC and length, original hash comparison reached before wrapper failure"
+    }
+  },
+  "exactPhysicalScope": {
+    "dev/codex/schubert/nk/storage/StorageIoException.class": "85f86d702a139f126afdd72ca8e221583db824f159351ecd9f07b15fcc569c88",
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason.class": "a113bd839666ee3a4038dd3703af0cfb772282278cc6fbfe1e3cccf98286ffec",
+    "dev/codex/schubert/nk/storage/package-info.class": "b9c4509338ea3545a2ee90fee9391cc4b356ef7f60309562a752596d05c81583",
+    "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission$Row.class": "daf77974a51a03171b27048a9eaf12367a60527ca8f6638aebe8b0fbaf1b5a1a",
+    "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class": "cc8265242a1cd41cc7c77b8e12185cbc387fb583d70e1d1171ba467cb0f3d552",
+    "dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.class": "45e370200c04a1cb4e32ba1b458548f80c3351131543ccc52e0443788c7e3264",
+    "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.class": "3a924af5e147928b10e8b6d2024c0dc514acaf3be042c08fe8e89311668810b0"
+  },
+  "physicalMatchesCoverageAtUnit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40494-schema-history-close-interrupt-green13-v1/manifest.json",
+    "sha256": "bb132117f3fa7cab8f99971d433c56e30c138e8f1c5b7c5db597fe2d886903a2"
+  },
+  "publicAbiEqual": true,
+  "publicAbiOutputSha256": "b5ab33288de8555aec08db933e7f77d3e764ecb40f18e8f071b0ff422b676690",
+  "javapChildExitAfterRecovery": null,
+  "spotbugsXml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40496-schema-history-current-four-packaged-v1/spotbugs.xml",
+    "sha256": "1304ce5638fe92160c49ab93c1bf3a4b6da8a523bec58ace65b9bdd887d1196e"
+  },
+  "spotbugsClass": "dev.codex.schubert.nk.api.bootstrap.SchemaHistoryAdmission",
+  "spotbugsXmlFindings": 0,
+  "spotbugsXmlErrors": 0,
+  "spotbugsXmlMissing": 0,
+  "spotbugsChildExitAfterRecovery": null,
+  "reranAnyChild": false,
+  "wholeF03Accepted": false,
+  "whole451Accepted": false,
+  "terminalAtUTC": "2026-11-20T01:37:16.913536+00:00"
+}

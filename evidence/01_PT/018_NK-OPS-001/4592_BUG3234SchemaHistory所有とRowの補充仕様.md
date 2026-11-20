@@ -7,3 +7,5 @@ SS331/332/343、UI243、PT-OPS-SCHEMA001..011、451、SSC461。query／rowsのno
 ## SSC-474 借用資源の解放後の中断
 
 BUG-3376／YKT-2721、SS343 §9.1、RD DAT-009/SYS-002、UI212/253。PT-OPS-SCHEMA012は借用JDK ProxyのResultSet.close、013はPreparedStatement.closeが正常に戻る際、呼出しスレッドの割込フラグだけを設定する。固定の正しい六列fixtureを返す。開始時と末尾nextでは割込なし。希釈せず両例でSQLSTATE 08001・固定診断、行→文各1 close、借用Connectionにclose/設定なし、割込flag保持を期待する。既007と例外優先・並行・全入力の原試験も修正候補で保持する。実DB・接続・配備を扱わない。
+
+2026-11-20 実行追補。候補 e7bfd5e1f2ec4b4e16ecf32601bed052b5330461、設計 63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a。PG40492で新2件は旧classに対し実失敗2で再現。PG40494で同fixtureに原11を併せ13成功、F/E/skip/未実行0。PG40498は現Mavenの同物理7件を照合。対象生L93/M18/C2/B72/I428未到達0。evidence/01_PT/018_NK-OPS-001/evidence/PG40500-schema-history-close-static-and-junit-independent-v1/manifest.json SHA-256 caea692bdfb3615385369c6cff24553e4697b543d027c1ed92147ae7132184fe。実DB・全451・包装時SpotBugs子数値は未検証。

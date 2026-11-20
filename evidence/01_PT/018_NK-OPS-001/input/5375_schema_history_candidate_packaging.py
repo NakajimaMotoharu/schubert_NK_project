@@ -54,14 +54,19 @@ def main():
     output_jars=Path.cwd().parent/"pgpt-runs"/"PG379"/run.lower()
     stages,delta,artifacts={},{},{}
     equivalent=False
+
+    def save(label, result):
+        stages[label] = result
+        dump(out / (label + "-terminal.json"), result)
+
     with TemporaryDirectory(dir="/dev/shm",prefix="pgpt-schema-four-artifacts-") as loc:
         root=Path(loc)
         with tarfile.open(fileobj=io.BytesIO(git("archive",core,*tree))) as t:
             t.extractall(root,filter="data")
-        stages["compile"]=UPPER["run"](out,"compile",maven,root,env)
+        save("compile",UPPER["run"](out,"compile",maven,root,env))
         if stages["compile"]["actualExit"]==0:
-            stages["package"]=UPPER["run"](out,"package",[
-                *maven[:-2],"org.apache.maven.plugins:maven-jar-plugin:3.4.1:jar"],root,env)
+            save("package",UPPER["run"](out,"package",[
+                *maven[:-2],"org.apache.maven.plugins:maven-jar-plugin:3.4.1:jar"],root,env))
         if "package" in stages and stages["package"]["actualExit"]==0:
             output_jars.mkdir(mode=0o700)
             diff_target=set()
@@ -94,10 +99,10 @@ def main():
             aux=out/"spotbugs-aux.txt"
             aux.write_text("\n".join([artifacts[n]["artifact"]["path"] for n in ("storage","bootstrap")]+models)+"\n")
             sb=out/"spotbugs.xml"
-            stages["spotbugs"]=UPPER["run"](out,"spotbugs",[
-                *tool[:tool.index("-auxclasspathFromFile")+1],aux,"-output",sb,file],root,env)
+            save("spotbugs",UPPER["run"](out,"spotbugs",[
+                *tool[:tool.index("-auxclasspathFromFile")+1],aux,"-output",sb,file],root,env))
             for label,p in (("abi-before",old),("abi-after",file)):
-                stages[label]=UPPER["run"](out,label,[java.with_name("javap"),"-public","-s",p],root,env)
+                save(label,UPPER["run"](out,label,[java.with_name("javap"),"-public","-s",p],root,env))
     abi=(stages.get("abi-before",{}).get("stdout",{}).get("sha256")
          ==stages.get("abi-after",{}).get("stdout",{}).get("sha256"))
     if artifacts and sb.is_file():
@@ -108,7 +113,9 @@ def main():
         errors=len(result.findall(".//Error"))
     else:
         ast,bugs,missing,errors=[],None,None,None
-    okay=len(stages)==5 and all(x["actualExit"]==0 for x in stages.values()) and abi and +        ast==["dev.codex.schubert.nk.api.bootstrap.SchemaHistoryAdmission"] and [bugs,missing,errors]==[0,0,0]
+    okay = (len(stages) == 5 and all(x["actualExit"] == 0 for x in stages.values()) and abi
+            and ast == ["dev.codex.schubert.nk.api.bootstrap.SchemaHistoryAdmission"]
+            and [bugs, missing, errors] == [0, 0, 0])
     d=dict(actualExit=0 if okay else 1, productionCore=core, source=core, canonicalDesign=green["canonicalDesign"],
            stages=stages,baseFour=pin(Path(w["oracleReferences"][3]["path"])),packagedBuild=artifacts,
            mavenPlugin=maven_plugin,
