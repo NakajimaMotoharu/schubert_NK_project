@@ -1,0 +1,19 @@
+{
+  "source": "3f9fd515747e00268a03f82939c1497cbdbdeed8",
+  "actualPmdExit": 4,
+  "raw": [
+    {
+      "rule": "UseConcurrentHashMap",
+      "line": 130,
+      "sourceLine": "Map<String, Object> metrics = new LinkedHashMap<>();"
+    }
+  ],
+  "applicable": 0,
+  "unclassified": 0,
+  "cause": "gateMetricsのメソッド内の単一呼出ごとの変数。内部でだけputし、呼出元へはMap.copyOfした結果を返す。共有可変状態／並行の更新はない。",
+  "suppressionChanges": 0,
+  "staticReport": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41000-p020-single-json-reader-static-v1/manifest.json",
+    "sha256": "184b52619b48db37c5d8d5140e3eb0005890fd180d28cf0ff5448547fc940290"
+  }
+}

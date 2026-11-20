@@ -1,0 +1,172 @@
+{
+  "eventId": "PGPT-20261008-6972",
+  "groupId": "P02001-characterization-single-json-document",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-20T16:50:58.098000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 75,
+      "remainingPercent": 25,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "P02001-characterization-single-json-document",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "P02001-characterization-single-json-document",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P020-01.03"
+    ],
+    "managementWorkIds": [
+      "WBS-P020-01.03/criterion/deliverable",
+      "WBS-P020-01.03/criterion/quality"
+    ],
+    "source": "86c226d10807022b4c91625a2095f9159824e04d",
+    "productionCoreMain": "2b16a8ed20778fe5896099cb4798cfd1ff96b176",
+    "canonicalDesignSource": "63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a",
+    "run": "PG40996-p020-gate-single-json-doc-red-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.25,
+      "base": 0.8,
+      "high": 2
+    },
+    "groupCapPp": 3,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1454_F03WebPool有限モード継続点.json",
+        "sha256": "e60b7e1a43c5ab0bf2575aeb876d7a8fef4f38eecaa7a5b731ec9d9e4f196be0"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40658-p020-a02-redirect-green-v1/manifest.json",
+        "sha256": "1196c69cc6ba69fe734991fe9abd742a46a24afe2af327b245755a4780d3c64d"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40658-p020-a02-redirect-green-v1/begin.json",
+        "sha256": "09060f8b73131cf1b7af6a1ccabfc1405639cdf265da5f6aed05fd4824d461a8"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40708-p020-current-211-independent-v1/manifest.json",
+        "sha256": "994c74a3d9cb58f5c053746fb06bb7ab1cce08d150aa740a3f16adf9d9bd5e22"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "元WBS-P020-01.03/2、SS355、G01/G04 malformed入力。既PG40658の隔離された合成snapshot、SDK、全210選択を固定。真正Current原本とは分離。",
+    "endCondition": "一JSON文書のみを要求。独立合成fixtureで末尾空白成功、追加root拒否。元比較工具の必要210と新1、同工具sourceの実証。実FileStore同source再資格と実CHRは別条件。",
+    "workScope": "既許可の合成GateSyntheticRunPortTest／比較器通常閉包。実Current/NK、baseline原本、DB/Browser/配備は実行しない。",
+    "quotaAfter": {
+      "usedPercent": 75,
+      "remainingPercent": 25,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "d2c7331ff8060fc972e08c498bedc80af1d5c1e4eb1974a4244fd3de5daf0403",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-20T16:50:58.098000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 75,
+          "remainingPercent": 25,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-20T16:49:44.498796+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 75,
+      "remainingPercent": 25,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-6971",
+    "attempt": 1,
+    "attemptResult": "OFFLINE_TOOL_CASES_AND_CHANGED_READER_PASS",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 210,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40996-p020-gate-single-json-doc-red-v1/manifest.json",
+        "sha256": "ed2222c8d81a58d9adc97aa464254a07d08837a766a4543cbaad1a611e486a20"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40998-p020-gate-single-json-doc-green-v1/manifest.json",
+        "sha256": "0ccb11218962ebb43f7dbe159ea6d0ba1726ce7aef2807afaeee26e174980fe5"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41000-p020-single-json-reader-static-v1/manifest.json",
+        "sha256": "184b52619b48db37c5d8d5140e3eb0005890fd180d28cf0ff5448547fc940290"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41000-p020-single-json-reader-static-v1/disposition.json",
+        "sha256": "30579369e399805fc6e0c0c770ac3d13a4cb0a66d3fcaedf3f3cc758511923e1"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5544_p020_single_json_document_pt.py",
+        "sha256": "2457f23b86246272f5e153f70a4a1aeea3627cb9299dd7ea3dac8f65237e8ed6"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5545_p020_single_json_static.py",
+        "sha256": "bc596a58ddbf43f1eaa1b46f3d7ec6a343b2a97289a884467d1cba1916e95246"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/5544_P020Gate単一JSON証跡仕様.md",
+        "sha256": "5c9afc051a1252a6cc31e530078028e10da7c957102ef73444961db0d7a29720"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/5545_P020Gate単一JSON証跡結果.md",
+        "sha256": "184bce0ac90800c044159fbbb6d484908407e6c7b9b44f86680e9c359008f0bb"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "YKT-2753の他読取口",
+      "全工具生のL2/M1/B1/I12",
+      "実CHRと451"
+    ],
+    "newToolTests": 1,
+    "affectedToolTests": 210,
+    "toolSuccess": 211,
+    "toolDeliberatePreFixFailure": 1,
+    "toolCoverageMissing": [
+      2,
+      1,
+      0,
+      1,
+      12
+    ],
+    "toolSource": "3f9fd515747e00268a03f82939c1497cbdbdeed8",
+    "firstVerificationSuccess": 211,
+    "firstVerificationDenominator": 211,
+    "retryCount": 0
+  }
+}

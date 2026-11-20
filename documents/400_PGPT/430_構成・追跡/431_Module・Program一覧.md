@@ -933,3 +933,7 @@ NK-OPS-001、MON010～013、UI252 §5、SS351 §8、PT-OPS-MONMODE001～007／RE
 ### WebDbPoolMetricRecorderの二値モード（PG40994）
 
 NK-OPS-001、MON010～013、UI252、SS351 §8、WEBPOOLMET001～008、WBS-F03/2-2、BUG-3440／YKT-2751。[仕様](../../../evidence/01_PT/018_NK-OPS-001/5542_F03WebPoolモード再資格仕様.md) [証跡](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40994-f03-web-pool-explicit-mode-v1/manifest.json)。
+
+### CHR工具の証跡読取（PG40998）
+
+NK-CHR-001、UI264、SS355 G01／G04、PT-CHR-SYN007、BUG-3441／YKT-2753。WBS-P020-01.03/2、[仕様](../../../evidence/01_PT/018_NK-OPS-001/5544_P020Gate単一JSON証跡仕様.md) [証跡](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40998-p020-gate-single-json-doc-green-v1/manifest.json)。
