@@ -1,0 +1,49 @@
+{
+  "actualExit": 0,
+  "productionCore": "e7bfd5e1f2ec4b4e16ecf32601bed052b5330461",
+  "toolSource": "0a3b1c8627724e356b8ef81fecf71fc9472773cb",
+  "before": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40624-f02-controller-reply-edge-before-v1/manifest.json",
+    "sha256": "d1e867866c9071ed9d953aba90e08ba4381fb5a1325e35c5276ad13db92f1485"
+  },
+  "after": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40626-f02-controller-reply-edge-after-v1/manifest.json",
+    "sha256": "9ef744c0812c6c4afe62cf8bed2cfa869d4be87d58b986d89fba405f2a4011b4"
+  },
+  "priorControls": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40586-f02-repository-declaration-after-v1/manifest.json",
+    "sha256": "55920996fd0a748f1544f20657716467f9c099cc60e801b7b3aef8a904546d6b"
+  },
+  "oldMatches": 3,
+  "newMatches": 7,
+  "regressionPass": 65,
+  "actualSyntheticPhysical": 112,
+  "newBoundaryFindings": [
+    [
+      "CONTROLLER_BOUNDARY",
+      "dev.codex.schubert.nk.web.ui.DirectController",
+      "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClient"
+    ],
+    [
+      "CONTROLLER_BOUNDARY",
+      "dev.codex.schubert.nk.web.ui.FieldController",
+      "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClient"
+    ],
+    [
+      "CONTROLLER_BOUNDARY",
+      "dev.codex.schubert.nk.web.ui.NestedController$Inner",
+      "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClient$Port"
+    ],
+    [
+      "CONTROLLER_BOUNDARY",
+      "dev.codex.schubert.nk.web.ui.SignatureController",
+      "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClient"
+    ]
+  ],
+  "rawIntentional": 46,
+  "productTests": 0,
+  "productJars": 0,
+  "wholeF02Accepted": false,
+  "whole451Accepted": false,
+  "terminalAtUTC": "2026-11-20T03:49:43.031579+00:00"
+}
