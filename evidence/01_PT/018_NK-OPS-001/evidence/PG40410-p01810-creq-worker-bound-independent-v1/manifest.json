@@ -1,0 +1,124 @@
+{
+  "actualExit": 0,
+  "source": "96245c184a6bde0b49921d642ce1613ff637eb52",
+  "productionCore": "cb1411d94a1d97aedafe1af60400aaec0ae8c8e8",
+  "existingCasesSorted": [
+    "creq001IndependentCanonicalByteVectorAndConsumedZeroing()",
+    "creq002ConstructorNullNilDistinctCutoffAndDigestContract()",
+    "creq003LengthAsciiControlAndNullInput()",
+    "creq004FramingUnknownMissingDuplicateOrderAndSuffixRefused()",
+    "creq005NoncanonicalAndSemanticallyInvalidValuesRefused()",
+    "creq006RedactedDiagnosticNeverContainsCorrelationValues()",
+    "creq007ConcurrentIndependentBuffersAndParserLevelReplay()"
+  ],
+  "tests": 7,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRunInSelectedScope": 0,
+  "newProductDefinitions": 0,
+  "productSourceChanged": false,
+  "positiveOuterCrc": "94e5f8d07b4d9344",
+  "outerStandardXmlCounters": {
+    "INSTRUCTION": {
+      "covered": 229,
+      "missed": 0
+    },
+    "BRANCH": {
+      "covered": 36,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 38,
+      "missed": 0
+    },
+    "COMPLEXITY": {
+      "covered": 24,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 6,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 1,
+      "missed": 0
+    }
+  },
+  "freshSingleSession": "PG40408-CREQ-SEVEN-ORDINARY",
+  "pmdRaw": 6,
+  "pmdApplicable": 0,
+  "pmdUnclassified": 0,
+  "perSite": [
+    {
+      "line": 171,
+      "variable": "workers",
+      "rule": "CloseResource",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Explicit shutdownNow and bounded awaitTermination verify the owned executor's terminal state."
+    },
+    {
+      "line": 171,
+      "variable": "workers",
+      "rule": "DoNotUseThreads",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The test owns exactly two virtual memory tasks outside any application container."
+    },
+    {
+      "line": 173,
+      "variable": "a",
+      "rule": "DoNotUseThreads",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The test owns exactly two virtual memory tasks outside any application container."
+    },
+    {
+      "line": 174,
+      "variable": "b",
+      "rule": "DoNotUseThreads",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The test owns exactly two virtual memory tasks outside any application container."
+    },
+    {
+      "line": 179,
+      "variable": null,
+      "rule": "DoNotUseThreads",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The test owns exactly two virtual memory tasks outside any application container."
+    },
+    {
+      "line": 180,
+      "variable": null,
+      "rule": "DoNotUseThreads",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The test owns exactly two virtual memory tasks outside any application container."
+    }
+  ],
+  "noHeldOrExternalInitialization": true,
+  "broaderExpiryTestsUsedAsNew": false,
+  "wholeP01810Accepted": false,
+  "whole451Accepted": false,
+  "formalDelta": 0,
+  "evidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40408-p01810-creq-worker-bound-seven-v1/manifest.json",
+      "sha256": "6bf8471897165986b833a5c1d9824a6c5a297433998c4c5f65cf66020494b451"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40408-p01810-creq-worker-bound-seven-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "b5d53f374a27fc5a47215f0160b37fab19f47e4e74e6d943a0b7573e3763f442"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40408-p01810-creq-worker-bound-seven-v1/coverage.xml",
+      "sha256": "9a25978a49aaf014aa515d6d3e13c4ff44ff1a2f2ebb81d1d4dccd405d17dc90"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40408-p01810-creq-worker-bound-seven-v1/jacoco.exec",
+      "sha256": "9ebfafaf6706002fd1c6ab6e0bd84d1d650537aded6852de61f69af2c4d864bc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40408-p01810-creq-worker-bound-seven-v1/pmd.xml",
+      "sha256": "099530cf8cf44326296d620ec04d26fa1b0bccdcae8d36a445a5f67d4456f2cb"
+    }
+  ],
+  "terminalAtUTC": "2026-11-20T00:05:35.746498+00:00"
+}
