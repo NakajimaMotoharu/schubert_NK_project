@@ -2,6 +2,8 @@ package dev.codex.schubert.nk.batch.monitoring;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -15,6 +17,7 @@ import java.math.BigInteger;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -97,8 +100,26 @@ class MonitoringPolicyEngineTest {
     assertEquals(CauseClearance.UNCONFIRMED, context.clearance());
     assertEquals(TIME, context.at());
     assertEquals(Duration.ofSeconds(1), context.elapsed());
-    assertEquals(
-        new ObservationContext(CauseClearance.UNCONFIRMED, TIME, Duration.ofSeconds(1)), context);
+    var equivalent =
+        new ObservationContext(CauseClearance.UNCONFIRMED, TIME, Duration.ofSeconds(1));
+    assertEquals(equivalent, context);
+    var eventsByObservation = new HashMap<ObservationContext, String>();
+    eventsByObservation.put(context, "first alert");
+    assertEquals("first alert", eventsByObservation.get(equivalent));
+    for (var different :
+        List.of(
+            new ObservationContext(CauseClearance.CONFIRMED, TIME, Duration.ofSeconds(1)),
+            new ObservationContext(
+                CauseClearance.UNCONFIRMED, TIME.plusSeconds(1), Duration.ofSeconds(1)),
+            new ObservationContext(CauseClearance.UNCONFIRMED, TIME, Duration.ofSeconds(2)))) {
+      assertNotEquals(context, different);
+      assertNull(eventsByObservation.get(different));
+    }
+    assertNotEquals(context, TIME);
+    String diagnostic = context.toString();
+    assertTrue(diagnostic.contains("clearance=UNCONFIRMED"));
+    assertTrue(diagnostic.contains("at=2026-10-23T00:00:00Z"));
+    assertTrue(diagnostic.contains("elapsed=PT1S"));
     assertThrows(NullPointerException.class, () -> new ObservationContext(null, TIME, ZERO));
     assertThrows(
         NullPointerException.class,
