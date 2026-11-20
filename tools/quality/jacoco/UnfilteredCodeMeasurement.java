@@ -9,7 +9,9 @@ package org.jacoco.core.internal.analysis;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import org.jacoco.core.analysis.ICounter;
 import org.jacoco.core.analysis.ICoverageNode;
 import org.jacoco.core.analysis.IMethodCoverage;
@@ -25,7 +27,8 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.tree.MethodNode;
 
 /**
- * F03/451; TOOL-CODEMEASURE001..012. Outputs original counters without applying analysis filters.
+ * F03/451; TOOL-CODEMEASURE001..012 / PT-OPS-EXEC-CRC-002. Outputs original counters without
+ * applying analysis filters.
  */
 public final class UnfilteredCodeMeasurement {
   private UnfilteredCodeMeasurement() {}
@@ -38,16 +41,19 @@ public final class UnfilteredCodeMeasurement {
     var loader = new ExecFileLoader();
     loader.load(Path.of(args[execIndex]).toFile());
     ExecutionDataStore data = loader.getExecutionDataStore();
+    Set<String> measuredNames = new HashSet<>();
     for (int index = execIndex + 1; index < args.length; index++) {
       byte[] bytes = Files.readAllBytes(Path.of(args[index]));
       var reader = new ClassReader(bytes);
+      String name = reader.getClassName();
+      if (!measuredNames.add(name)) throw new IllegalArgumentException("duplicate class input");
       long id = CRC64.classId(bytes);
       ExecutionData observed = data.get(id);
-      if (observed == null && data.contains(reader.getClassName()))
+      if (observed == null && data.contains(name))
         throw new IllegalStateException("execution/class CRC mismatch");
-      if (observed != null && !observed.getName().equals(reader.getClassName()))
+      if (observed != null && !observed.getName().equals(name))
         throw new IllegalStateException("execution/class name mismatch");
-      var analysis = new Measurement(reader.getClassName(), id, observed);
+      var analysis = new Measurement(name, id, observed);
       reader.accept(new ClassProbesAdapter(analysis, false), 0);
       var coverage = analysis.coverage;
       System.out.println(

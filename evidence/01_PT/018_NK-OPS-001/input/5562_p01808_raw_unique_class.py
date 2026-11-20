@@ -51,8 +51,9 @@ def main(phase):
     assert pin(Path(old_crc["verifier"]["path"])) == old_crc["verifier"]
     calc = old_fixture["crc64_java25"]
     decode_path = Path(old_readonly["tool"]["path"])
-    assert pin(decode_path) == old_readonly["tool"]
-    decode = runpy.run_path(str(decode_path))["decode"]
+    frozen_decoder = subprocess.check_output(
+        ["git", "show", f"{old_readonly['source']}:{decode_path}"])
+    assert digest(frozen_decoder) == old_readonly["tool"]["sha256"]
     deps = [Path(r["path"]) for r in old_crc["dependencies"]]
     assert [pin(p) for p in deps] == old_crc["dependencies"] and len(deps) == 4
     java, javac = [Path(old_crc[tool]["path"]) for tool in ("java", "javac")]
@@ -60,6 +61,9 @@ def main(phase):
     run = (context["run"] if red else "PG41052-p01808-raw-duplicate-class-green-v1")
     private = Path("../pgpt-runs/PG379").resolve() / run
     private.mkdir(mode=0o700)
+    decoder_file = private / decode_path.name
+    decoder_file.write_bytes(frozen_decoder)
+    decode = runpy.run_path(str(decoder_file))["decode"]
     deps_cp = ":".join(map(str, deps))
     steps = []
 
@@ -131,7 +135,7 @@ def main(phase):
     out.mkdir()
     receipt = dict(actualExit=0,phase=phase,source=source,productionCore=context["productionCoreMain"],
         run=run,startEvent=start["eventId"],terminalAtUTC=utc(),testId="PT-OPS-EXEC-CRC-002",
-        inputTool=pin(METER),standaloneSyntheticFixtures=True,cases=outcomes,steps=steps,
+        inputTool=pin(METER),independentDecoder=pin(decoder_file),standaloneSyntheticFixtures=True,cases=outcomes,steps=steps,
         reproducedDefects=sum(x["expectedExit"]!=x["actualExit"] for x in outcomes),
         callerUnionAllowed=False,productPt=0,realNative=0,coverage=None,formalDelta=0)
     (out / "manifest.json").write_text(json.dumps(receipt,indent=2)+"\n")
