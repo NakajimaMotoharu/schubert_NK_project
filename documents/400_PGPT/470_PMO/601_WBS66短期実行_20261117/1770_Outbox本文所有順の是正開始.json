@@ -1,0 +1,72 @@
+{
+  "eventId": "PGPT-20261008-7285",
+  "groupId": "WBS66-P01810-OUTBOX-COPY-AFTER-VALIDATION",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-21T00:42:08.858000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 86,
+      "remainingPercent": 14,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66-P01810-OUTBOX-COPY-AFTER-VALIDATION",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "WBS66-P01810-OUTBOX-COPY-AFTER-VALIDATION",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P018-10.03"
+    ],
+    "managementWorkIds": [
+      "WBS-P018-10.03/2",
+      "WBS-P004-05/2"
+    ],
+    "source": "ba2757f64806c17120296b83447dc53260572949",
+    "productionCoreMain": "007b96d8be7c10e265b5a12d01231013ae9e0acd",
+    "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "run": "PG41398",
+    "estimateAtGroupStartPp": {
+      "low": 0.25,
+      "base": 0.75,
+      "high": 1.6
+    },
+    "groupCapPp": 3,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1769_P00201要求現行追跡再開点.json",
+        "sha256": "3f1f3587e542f059fdf6a10e5e9b894d814dba8e1de3a8735b81dc52ecefb773"
+      },
+      {
+        "path": "documents/400_PGPT/470_PMO/481_PGPT詳細WBS.json",
+        "sha256": "4227e20a23b10ab8eecd2b69550dd7f58c79bf43a2f77b4c7c98ec943e83a2d9"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38278-outbox-retained-value-prepare-v1/manifest.json",
+        "sha256": "b579cb1bae7d3ccd6bc1fe63dc655995c73e4e5f82af1cb0f29abc54b0aae67a"
+      },
+      {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry.java",
+        "sha256": "0c2baec34188b2781764560e36bbb0629fdb0d55504f6f79b50d0149a94f458c"
+      },
+      {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest.java",
+        "sha256": "841e7bb6bdbd5fb9a9d7d08f3588f3abbf0d112cbd4c2c4d92f5610c2d3aa9bd"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "SS324/351 and prior scope PG38278. OutboxEntry and OutboxRequest each copy borrowed wire bytes before remaining validation.",
+    "endCondition": "Bind pre-fix and post-fix constructor bytecode order. Eight original ordinary tests plus two current independent tests, same input scope, static findings and exact raw coverage. Retain untested operational sinks.",
+    "workScope": "Bug and lateral scope recorded first. No held binaries/routes, real payloads/keys, OOM, database, broker, or operations. Attribution primary P018-10.03; P004-05 references shared evidence only."
+  }
+}

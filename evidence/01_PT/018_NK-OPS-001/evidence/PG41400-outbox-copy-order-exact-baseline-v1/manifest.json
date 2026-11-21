@@ -1,0 +1,111 @@
+{
+  "run": "PG41400-outbox-copy-order-exact-baseline-v1",
+  "actualExit": 0,
+  "source": "ba2757f64806c17120296b83447dc53260572949",
+  "terminalAtUTC": "2026-11-21T00:44:09.957573+00:00",
+  "expectedOrder": "profile before clone",
+  "observedEarlyClone": 2,
+  "postLeakBytesMeasured": false,
+  "compileCommand": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+    "--release",
+    "25",
+    "-g",
+    "-Xlint:all",
+    "-Werror",
+    "-proc:none",
+    "-implicit:none",
+    "-cp",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+    "-d",
+    "/dev/shm/pgpt-outbox-order-baseline-_15ov_6n",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxIntegrityException.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxSendException.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/package-info.java"
+  ],
+  "currentInputs": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata.java",
+      "sha256": "ef0be1f11629947394710ce2f537567c19401737e2329a3d54719471ea5b7f53"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry.java",
+      "sha256": "0c2baec34188b2781764560e36bbb0629fdb0d55504f6f79b50d0149a94f458c"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest.java",
+      "sha256": "841e7bb6bdbd5fb9a9d7d08f3588f3abbf0d112cbd4c2c4d92f5610c2d3aa9bd"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination.java",
+      "sha256": "8ab0216109c17c6d5cf96039b6ac968dd2cb6fc401c2f93b0f92cc08c3ed8e80"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport.java",
+      "sha256": "c9ba13a64c580fea33b744134a5534d44142233f72a28c40d5cc0442e2fc472f"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxIntegrityException.java",
+      "sha256": "56a5f3af8ccf296acef3aa0991920755756862223d6ea1c111e248448d63941a"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxSendException.java",
+      "sha256": "b2dac8539f303d4b2677bf78369f1bc9c77ad5c37c863633b968f187adb8a210"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/package-info.java",
+      "sha256": "b2173a4f8d686f429b7252e180d479896d8e09f326033d14fac7b9b83cfc0ce5"
+    }
+  ],
+  "firstPreflight": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41398-outbox-copy-order-red-v1/preflight.json",
+    "sha256": "45bd30526dd49d6403989c8e8a6c1b5ab7dbcd6958ef1183b2f54746d4e903fe"
+  },
+  "classes": [
+    {
+      "originalClass": {
+        "path": "/dev/shm/pgpt-outbox-order-baseline-_15ov_6n/dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest.class",
+        "sha256": "f852ee162f40586e6bdb229f2165f0371ead193100bc9fc520875614e001da8a"
+      },
+      "cloneOffset": 72,
+      "profileOffset": 149,
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-p",
+        "-c",
+        "/dev/shm/pgpt-outbox-order-baseline-_15ov_6n/dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest.class"
+      ],
+      "constructor": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41400-outbox-copy-order-exact-baseline-v1/OutboxRequest.constructor.txt",
+        "sha256": "d3500ad599206b725fea2e32cccf43a607815fdfe430eb6f4a387f37e66e05c6"
+      }
+    },
+    {
+      "originalClass": {
+        "path": "/dev/shm/pgpt-outbox-order-baseline-_15ov_6n/dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry.class",
+        "sha256": "a2a7c25b521fb1f3e641b08ddd1f80ed84d889d6802e242cb1cbd00cb86d6e12"
+      },
+      "cloneOffset": 125,
+      "profileOffset": 231,
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-p",
+        "-c",
+        "/dev/shm/pgpt-outbox-order-baseline-_15ov_6n/dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry.class"
+      ],
+      "constructor": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41400-outbox-copy-order-exact-baseline-v1/OutboxEntry.constructor.txt",
+        "sha256": "c9f15455d9a450a02e354dbe2ae0a18704804e6267a87fdc22c2f073b9205543"
+      }
+    }
+  ],
+  "realRuntimeOperations": 0,
+  "priorTestsRerun": 0
+}
