@@ -1,0 +1,88 @@
+{
+  "run": "PG41392-f02-listener-owner-independent-v1",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-21T00:35:55.662218+00:00",
+  "source": "07bdd251da194e45a65e7c9a79e931e28e43db95",
+  "core": "007b96d8be7c10e265b5a12d01231013ae9e0acd",
+  "red": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41388-f02-listener-owner-red-v1/manifest.json",
+    "sha256": "274778ae516453b3c5b173fc6ce0ed05e2b241d81b6e73069344c623eefa5000"
+  },
+  "green": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41390-f02-listener-owner-green-v1/manifest.json",
+    "sha256": "bb782a7aba82f7fbe75bf30ee6990b1b762abe7df564f175f07ff3d34c028395"
+  },
+  "previousRaw": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41380-f02-image-xml-file-green-v1/audit.stdout.txt",
+    "sha256": "7d9d2280eee48ed0e8a4d325d74a763d8571888fc645fa7040211f12e9da07ab"
+  },
+  "syntheticCases": 10,
+  "oldSyntheticCases": 53,
+  "priorFindingsPreserved": 29,
+  "newCorrectFindings": 6,
+  "rawReportSchemaCount": 5,
+  "exactCurrentSourceLexicalReview": [
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkListener.java",
+        "sha256": "a037c6586a68f6aa48424e2b9cc020aa37e2f357014299379b1ba01bdbed0cbc"
+      },
+      "targetSearchMatches": {
+        "sql": 0,
+        "fileOrStorage": 0
+      },
+      "jmsEntrySignatureWritten": true
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/SyncRequestListener.java",
+        "sha256": "c2915b65b2313f4586a6bcba6f8e7b67d11667f6de40bb6b9d54f369a98a5ece"
+      },
+      "targetSearchMatches": {
+        "sql": 0,
+        "fileOrStorage": 0
+      },
+      "jmsEntrySignatureWritten": true
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/TransactedEventListener.java",
+        "sha256": "0194df119dfda86475466c13a25cc2dc79af63d423b72e2a55101022d5b53177"
+      },
+      "targetSearchMatches": {
+        "sql": 0,
+        "fileOrStorage": 0
+      },
+      "jmsEntrySignatureWritten": true
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/WebLogListener.java",
+        "sha256": "7ed75f6a4a7a81a96ae5c95e9c6bba192d7f6fe2aa8437622cf5052ebea67df5"
+      },
+      "targetSearchMatches": {
+        "sql": 0,
+        "fileOrStorage": 0
+      },
+      "jmsEntrySignatureWritten": true
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumer.java",
+        "sha256": "93599988b634badfe849f38f66abc4125ab5cc25e404c32fbda688f0060e101c"
+      },
+      "targetSearchMatches": {
+        "sql": 0,
+        "fileOrStorage": 0
+      },
+      "jmsEntrySignatureWritten": true
+    }
+  ],
+  "currentProductBytecodeAnalyzed": 0,
+  "heldTypesOpened": 0,
+  "actualProductTestRuns": 0,
+  "runtimeOperations": 0,
+  "wholeF02": false,
+  "whole451": false,
+  "formalDelta": 0
+}

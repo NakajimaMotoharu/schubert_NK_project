@@ -1,0 +1,232 @@
+{
+  "run": "PG41390-f02-listener-owner-green-v1",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-21T00:35:17.671102+00:00",
+  "source": "07bdd251da194e45a65e7c9a79e931e28e43db95",
+  "core": "007b96d8be7c10e265b5a12d01231013ae9e0acd",
+  "toolSha256": "41c8efa68f7f22333f04f4e94ae182255551230b2686e8ccc4b570afe2e4c24b",
+  "cases": [
+    {
+      "testId": "PT-F02-LISTENER001",
+      "origin": "dev.codex.schubert.nk.api.messaging.inbound.DirectSqlListener",
+      "target": "java.sql.Connection",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "testId": "PT-F02-LISTENER002",
+      "origin": "dev.codex.schubert.nk.api.messaging.inbound.DirectFileListener",
+      "target": "java.nio.file.Files",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "testId": "PT-F02-LISTENER003",
+      "origin": "dev.codex.schubert.nk.api.messaging.inbound.NestedSqlListener$Handler",
+      "target": "java.sql.Connection",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "testId": "PT-F02-LISTENER004",
+      "origin": "dev.codex.schubert.nk.web.synthetic.OrdinaryReplyReceiver",
+      "target": "java.sql.Connection",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "testId": "PT-F02-LISTENER005",
+      "origin": "dev.codex.schubert.nk.api.synthetic.MessageEntry",
+      "target": "java.nio.file.Path",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "testId": "PT-F02-LISTENER006",
+      "origin": "dev.codex.schubert.nk.web.synthetic.StorageReplyReceiver",
+      "target": "dev.codex.schubert.nk.storage.ListenerFixtureValue",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "testId": "PT-F02-LISTENER007",
+      "origin": "dev.codex.schubert.nk.api.messaging.inbound.BorrowedJmsListener",
+      "target": "jakarta.jms.JMSContext",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-LISTENER008",
+      "origin": "dev.codex.schubert.nk.api.synthetic.RealDataAdapter",
+      "target": "java.sql.Connection",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-LISTENER009",
+      "origin": "dev.codex.schubert.nk.web.synthetic.RealFileAdapter",
+      "target": "java.nio.file.Files",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-LISTENER010",
+      "origin": "dev.codex.schubert.nk.api.synthetic.NonJmsReceiver",
+      "target": "java.sql.Connection",
+      "expected": false,
+      "observed": false
+    }
+  ],
+  "priorSyntheticStaticCases": 53,
+  "priorExpectedFindings": 29,
+  "physical": 72,
+  "missingExpected": 0,
+  "actualProductTestRuns": 0,
+  "actualRuntimeCalls": 0,
+  "heldTypesOpened": 0,
+  "formalDelta": 0,
+  "wholeF02": false,
+  "whole451": false,
+  "steps": {
+    "compile-tool": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41390-f02-listener-owner-green-v1/compile-tool.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41390-f02-listener-owner-green-v1/compile-tool.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "-d",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/audit",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/ModuleDependencyAudit.java"
+      ]
+    },
+    "compile-synthetic": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41390-f02-listener-owner-green-v1/compile-synthetic.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41390-f02-listener-owner-green-v1/compile-synthetic.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-d",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/classes",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/api/messaging/inbound/DirectSqlListener.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/api/messaging/inbound/DirectFileListener.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/api/messaging/inbound/NestedSqlListener.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/web/synthetic/OrdinaryReplyReceiver.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/api/synthetic/MessageEntry.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/web/synthetic/StorageReplyReceiver.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/api/messaging/inbound/BorrowedJmsListener.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/api/synthetic/RealDataAdapter.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/web/synthetic/RealFileAdapter.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/api/synthetic/NonJmsReceiver.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/storage/ListenerFixtureValue.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/web/synthetic/DefaultLogController.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/web/synthetic/NamedLogController.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/protocol/DefaultLogSink.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/protocol/RollingLogSink.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/web/synthetic/StreamLogController.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/protocol/MemoryLogSink.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/web/synthetic/OwnedLogAdapter.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/batch/OwnedLogAdapter.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/web/synthetic/ZipNameController.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/web/synthetic/JarFileController.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/web/synthetic/ZipStreamController.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/web/synthetic/JarStreamController.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/web/synthetic/ArchiveFileAdapter.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/protocol/ZipFileReader.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/protocol/JarNameReader.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/protocol/ScanningPath.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/protocol/NamedWriter.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/protocol/WriterBuffer.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/protocol/ZipBorrowedStream.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/storage/ArchiveFileAdapter.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/web/synthetic/WriterNameController.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/web/synthetic/StreamNameController.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/web/synthetic/FormatterNameController.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/web/synthetic/WriterFileController.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/web/synthetic/StreamFileController.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/web/synthetic/FormatterFileController.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/web/synthetic/ScannerFileController.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/web/synthetic/ScannerPathController.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/web/synthetic/WriterStreamController.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/web/synthetic/PrintStreamController.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/web/synthetic/FormatterBufferController.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/web/synthetic/ScannerContentController.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/web/synthetic/ScannerStreamController.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/web/synthetic/DirectFileController.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/web/synthetic/FileAdapter.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/protocol/RealPathRead.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/protocol/WatchEvents.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/protocol/WatchModifiers.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/protocol/RealPathReference.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/protocol/NormalizePath.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/protocol/ResolvePath.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/protocol/PathValue.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/storage/AllowedPhysicalPath.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/web/synthetic/ImageFileController.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/web/synthetic/ImageWriteController.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/web/synthetic/XmlFileController.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/protocol/ImageFileSource.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/protocol/ImageFileSink.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/protocol/XmlFileSource.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/web/synthetic/ImageBorrowedController.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/protocol/XmlBorrowedStream.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/web/synthetic/ImageOwnerAdapter.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/batch/XmlOwnerAdapter.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/protocol/Anchor.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/storage/Anchor.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/bootstrap/Anchor.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/api/Anchor.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/web/Anchor.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/dev/codex/schubert/nk/batch/Anchor.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/jakarta/jms/Message.java",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/jakarta/jms/JMSContext.java"
+      ]
+    },
+    "audit": {
+      "actualExit": 1,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41390-f02-listener-owner-green-v1/audit.stdout.txt",
+        "sha256": "12af3a6862f6bda0577e56a715226e7ee1183a23d4313a7ad036e25348262334"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41390-f02-listener-owner-green-v1/audit.stderr.txt",
+        "sha256": "2c58b87a0350a39bb1c3b5f4891defeeb9a785e84aa11a466dc9ddb21253bf58"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/dev/shm/pgpt-listener-fence-meqmne9_/audit:/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "ModuleDependencyAudit",
+        "protocol=/dev/shm/pgpt-listener-fence-meqmne9_/protocol.jar",
+        "storage=/dev/shm/pgpt-listener-fence-meqmne9_/storage.jar",
+        "bootstrap=/dev/shm/pgpt-listener-fence-meqmne9_/bootstrap.jar",
+        "api=/dev/shm/pgpt-listener-fence-meqmne9_/api.jar",
+        "web=/dev/shm/pgpt-listener-fence-meqmne9_/web.jar",
+        "batch=/dev/shm/pgpt-listener-fence-meqmne9_/batch.jar"
+      ]
+    }
+  }
+}
