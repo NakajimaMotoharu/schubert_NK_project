@@ -1,0 +1,43 @@
+{
+  "actualExit": 0,
+  "run": "PG41472-scr001-login-fixed-visual-evidence-v1",
+  "terminalAtUTC": "2026-11-21T02:41:06.583991+00:00",
+  "source": "11193d3da11ee7037f960a03d379ce44deed9267",
+  "productionCore": "2611e1acbd57955d591d52e5348999ea293e068d",
+  "currentTemplate": {
+    "path": "src/schubert-nk-web/src/main/resources/templates/login.html",
+    "sha256": "ba814efffec4be98d17338cacd63927d50aa552958188ba3fb7db0b77171443a"
+  },
+  "approvedDesign": {
+    "path": "documents/200_UI/220_画面・認証/226_認証・認可・セッション設計.md",
+    "sha256": "d7eb13b99b60ebba451c429f67f7a32cb5618999645b428ebd5a447c90413528",
+    "source": "ee27a308b6b7da7bd9744000ee490a8f91956ead"
+  },
+  "selectedOriginalDomCases": [
+    "allegedRemainingSecondsAndCredentialsNeverBecomeDynamicDisplay",
+    "approvedLockedMessageDependsOnFlagPresenceNotItsValues",
+    "formLabelsInputMetadataAndStaticAssetsAreExplicit",
+    "independentErrorLockedLogoutFlagsKeepCurrentOrderAndFixedText",
+    "initialPageKeepsApprovedBrandAndNoMessages"
+  ],
+  "fixedTitle": "schubert NK - ログイン",
+  "fixedLockMessage": "ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。",
+  "runtimeHeaderIsSeparate": true,
+  "realRetryAfterObserved": false,
+  "newExecution": 0,
+  "formalDelta": 0,
+  "exactPreviousProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38270-chr-a01-public-oracle-handoff-v1/manifest.json",
+      "sha256": "1fcf4b1466331da98f452b7fddb24d5b3df663d94175407d57214149aa4811a9"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG24416-login-user-dom-independent-v1/manifest.json",
+      "sha256": "e4a6de90f35c72ae6fb6d239666096ff6142bedf9e512053896df797162a699c"
+    }
+  ],
+  "remaining": [
+    "Real auth and correct HTTP Retry-After for the current owner.",
+    "Real browser/CHR and formally approved current scope 451."
+  ]
+}

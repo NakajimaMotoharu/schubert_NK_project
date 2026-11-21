@@ -1,0 +1,125 @@
+{
+  "eventId": "PGPT-20261008-7380",
+  "groupId": "W66-SCR001-LOGIN-PUBLIC-DISPLAY",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-21T02:41:12.121000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 89,
+      "remainingPercent": 11,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "W66-SCR001-LOGIN-PUBLIC-DISPLAY",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "W66-SCR001-LOGIN-PUBLIC-DISPLAY",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P016-01"
+    ],
+    "managementWorkIds": [
+      "WBS-P016-01/2"
+    ],
+    "source": "11193d3da11ee7037f960a03d379ce44deed9267",
+    "productionCoreMain": "2611e1acbd57955d591d52e5348999ea293e068d",
+    "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "run": "PG41472",
+    "estimateAtGroupStartPp": {
+      "low": 0.04,
+      "base": 0.13,
+      "high": 0.28
+    },
+    "groupCapPp": 0.55,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1863_P01602メニューrole純表示再開点.json",
+        "sha256": "4f5b35e4318983183e3038d1063e2b755d4191f95fcbd0126bacb5b883dc97f9"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38270-chr-a01-public-oracle-handoff-v1/manifest.json",
+        "sha256": "1fcf4b1466331da98f452b7fddb24d5b3df663d94175407d57214149aa4811a9"
+      },
+      {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG24416-login-user-dom-independent-v1/manifest.json",
+        "sha256": "e4a6de90f35c72ae6fb6d239666096ff6142bedf9e512053896df797162a699c"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "第58版459。既/1とQA045/QA055。合成表示の源と正本のみ。ログイン実行は別。",
+    "endCondition": "現loginテンプレート・元DOMとController純fixture、QA045タイトル・QA055固定文、HTTP Retry-After未観測を明記。",
+    "workScope": "既公開成果と現Gitのみ。認証、実HTTP、browser、実token、外部なし。",
+    "quotaAfter": {
+      "usedPercent": 89,
+      "remainingPercent": 11,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "3e41c88a3b80149ee0d3555fe9c3c2ae8ec704e28febcb046df771553ed956c6",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-21T02:41:12.121000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 89,
+          "remainingPercent": 11,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-21T02:41:06.583991+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 89,
+      "remainingPercent": 11,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-7379",
+    "attempt": 1,
+    "attemptResult": "SCR001_APPROVED_FIXED_TITLE_AND_MESSAGE_MATCH_EXISTING_DOM_INPUT",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41472-scr001-login-fixed-visual-evidence-v1/manifest.json",
+        "sha256": "5ee3e4630160bfaf5301dc62ec77bd98b0958502ec993a44882ccd176bcd8e4a"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "現実認証/HTTPのRetry-After、Browser・CHR、451"
+    ],
+    "originalDomCases": 5,
+    "exactTargetTemplates": 1,
+    "runManifest": "evidence/01_PT/018_NK-OPS-001/evidence/PG41472-scr001-login-fixed-visual-evidence-v1/manifest.json"
+  }
+}
