@@ -1,0 +1,78 @@
+{
+  "run": "PG41756",
+  "source": "5917e0d93b29f22dddb99f1b0b216410630f97a7",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "actualExit": 1,
+  "terminalAtUTC": "2026-11-21T23:55:23.836656+00:00",
+  "typedPlan": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41756-mapping-manifest-fixture-static-fixed-v1/begin.json",
+    "sha256": "a1d53c69b65c63bfdc993bf74ebf0504e5a0902eeb4700edf4c18563387ed1b3"
+  },
+  "inputClosureAndFormattingRecovered": true,
+  "equivalentBeforeAndAfterFormat": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41756-mapping-manifest-fixture-static-fixed-v1/equivalent.json",
+    "sha256": "86f83bf22be7a0ad14e28c53fe6e52aad86c800c45a5e774e21c9eee0b4186bc"
+  },
+  "stages": {
+    "compile": 0,
+    "format": 0,
+    "checkstyle": 0,
+    "spotbugs": 1,
+    "pmd": 4
+  },
+  "rawChecks": {
+    "pmd": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41756-mapping-manifest-fixture-static-fixed-v1/pmd.xml",
+      "sha256": "7a796766066eeffb7d774cafc84281c61caece956faa885a9c341807168a77c9"
+    },
+    "spotbugs": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41756-mapping-manifest-fixture-static-fixed-v1/spotbugs.xml",
+      "sha256": "53c88424440d83fe4642ae75bc4664fce973b8bb84d73f5c89c2bb72fbd98ba6"
+    }
+  },
+  "pmdPriorFiniteOwnership": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33288-mapverify976-preflight-v5/manifest.json",
+    "sha256": "df5fbcafa9e52f25e124a7ccdff12ffea987128443a99aa7b9d9b84bdd841452"
+  },
+  "pmdRaw": [
+    {
+      "rule": "CloseResource",
+      "line": "207"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": "207"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": "212"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": "223"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": "224"
+    }
+  ],
+  "spotbugsBroadSignatures": [
+    "mapman001FourExactFramesCountsLengthsAndHashes",
+    "mapman002EveryMissingMappingFailsWithoutImplicitEmpty",
+    "mapman003EmptyPartsKeepAllFourIndependentHeaders",
+    "mapman004ByteSnapshotsAndCountsCannotMutateRetainedState",
+    "mapman005EntryTargetFileMustExistInItsDeclaredGame",
+    "mapman006CanonicalSortAndIndependentTableIdSpaces",
+    "mapman007SharedImmutableManifestHasFiniteIndependentReaders",
+    "mapman008SignedLongAndSparseN12BoundariesFreshSnapshotAndRedaction",
+    "mapman009SerializedReadbackUsesRetainedDeclaredDigest",
+    "mapman010OtherValidManifestNullAndCorruptBytesCannotBorrowExpectedHash"
+  ],
+  "bugs": [
+    "BUG-3502",
+    "BUG-3503",
+    "BUG-3504"
+  ],
+  "newTests": 0,
+  "formalAcceptanceId": null
+}
