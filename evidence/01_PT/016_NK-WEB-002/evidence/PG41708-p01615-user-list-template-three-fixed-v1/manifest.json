@@ -1,0 +1,82 @@
+{
+  "run": "PG41708",
+  "wbs": "WBS-P016-15/2",
+  "source": "793b23c6ea45f11e89feba0060cc1e24325f69af",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-21T20:37:55.935281+00:00",
+  "spec": {
+    "path": "evidence/01_PT/016_NK-WEB-002/4151_P01615User一覧原三artifact契約対応.md",
+    "sha256": "221492724e04caed13271bfd343f7eac96da3c3548f4eb8b9e92eb9a7b657dec"
+  },
+  "test": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/UserListTemplateResourcePortTest.java",
+    "sha256": "7917c893d2ed6b7a1f538b49dde3c6e8a6d24d3a941ebf204ee751e7aa0afc57"
+  },
+  "resources": [
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/admin/user-list.html",
+      "sha256": "75ff8f6521d9e48c852264d839e17f9d2224f17ad2d486b37750cdae612e7655"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/fragments/layout.html",
+      "sha256": "a48bda151f893e28858afb26d1c636a564b8bd0cb3c3a16bc63bbb97f0e414bd"
+    }
+  ],
+  "runtimePlan": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41708-p01615-user-list-template-three-fixed-v1/begin.json",
+    "sha256": "c8749cf89b819671e4f74c818b82716ad216987c06fa2c2059bb8e39a8b98b71"
+  },
+  "actualStages": {
+    "format": 0,
+    "checkstyle": 0,
+    "compile": 0,
+    "spotbugs": 0,
+    "pmd": 0,
+    "unit": 0
+  },
+  "actualXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41708-p01615-user-list-template-three-fixed-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "0743c15fa4653b1e39bbd06b82db5304d84739a40d8ff72f3e5ee320d82d3864"
+  },
+  "staticXml": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41708-p01615-user-list-template-three-fixed-v1/pmd.xml",
+      "sha256": "f50a3aaa7a52d18e79458aa1d2825353113aff40f47658f0c4bbb3c87b4ea581"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41708-p01615-user-list-template-three-fixed-v1/spotbugs.xml",
+      "sha256": "d6b1bdde7929db939475167e7dec112e07b96209e70a20dd14789143f5901382"
+    }
+  ],
+  "loadedOwnedTestClasses": [
+    "dev.codex.schubert.nk.web.view.UserListTemplateResourcePortTest"
+  ],
+  "testGeneratedHiddenLambdaCount": 1,
+  "initialMetadataAssertion": "Initial class list check counted a generated hidden test lambda as a second fixture. Corrected verification of the same artifacts, no test replay.",
+  "newDefinitions": 3,
+  "actualCoveredJava": null,
+  "realOperations": 0,
+  "caseResults": {
+    "PT-WEB-SCR015-RSRC-001": {
+      "method": "rendersFixedColumnsSearchInputsAndBothPageLinks",
+      "status": "PASS"
+    },
+    "PT-WEB-SCR015-RSRC-002": {
+      "method": "rendersZeroCountWithoutRowsOrNavigation",
+      "status": "PASS"
+    },
+    "PT-WEB-SCR015-RSRC-003": {
+      "method": "rendersInvalidInputAndErrorWithoutInventingSearchResults",
+      "status": "PASS"
+    }
+  },
+  "scope": "Current rendered HTML with three independently fixed synthetic paths",
+  "held": [
+    "Real ADMIN authorization and HTTP interaction; real DB and CHR",
+    "Six product quality 451 complete"
+  ],
+  "bug": "BUG-3499",
+  "originalFailedRun": "PG41706",
+  "formalAcceptanceId": null
+}

@@ -1,5 +1,14 @@
 # Module・Program一覧
 
+## NK-WEB-002 利用者一覧・共通エラーの資源PT
+
+| 画面 | 設計・WBS | Test ID | 現資源の局所結果 |
+|---|---|---|---|
+| SCR015 利用者一覧 | FUN-009／AUT-002、UI225／236、SS313／332、P016-15/2 | PT-WEB-SCR015-RSRC-001、PT-WEB-SCR015-RSRC-002、PT-WEB-SCR015-RSRC-003 | [PG41708](../../../evidence/01_PT/016_NK-WEB-002/evidence/PG41708-p01615-user-list-template-three-fixed-v1/manifest.json) 3/3 |
+| SCR090 共通エラー | UI221／222、SS313 SCR-090、P016-24/2 | PT-WEB-SCR090-RSRC-001、PT-WEB-SCR090-RSRC-002 | [PG41704](../../../evidence/01_PT/016_NK-WEB-002/evidence/PG41704-p01624-error-template-two-v1/manifest.json) 2/2 |
+
+試験では独立した表示入力で製品HTMLと共通layoutをレンダーした。実HTTP・権限・所有・実DB・実CHR・六製品451には別の終了証拠が必要。
+
 ## NK-WEB-002 Scenario階層3画面の資源PT
 
 SCR004／005／006の実HTMLと共通layoutを、Controllerから独立したメモリfixtureで確認。FUN-004、UI223/234、SS313、WBS-P016-04／05／06。試験はWebモジュールの通常test sourceに配置し、WBSと個別の実行sourceは局所manifestへ対応。
