@@ -1,5 +1,9 @@
 # Module・Program一覧
 
+## NK-MIG-001 合成manifestの件数、SHA、読戻し拒否
+
+WBS-P019-03.02/03、SS343 SSC408/409。PT-MIG-MAPMAN001の独立4frame、PT-MIG-MAPMAN009とPT-MIG-MAPMAN010の保持SHA・破損／別manifest／欠落を現候補の20物理と照合。書式・checked例外宣言の是正はfixtureのみ。既実行bodyと結果を維持し、実master・実COPY・DB・451は局所証拠から外挿しない。 [証拠](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41758-p0190303-mapping-byte-fixture-typed-final-v1/manifest.json)
+
 ## NK-DAT-001 JDBC二資源closeの抑制順序
 
 WBS-P004-05/2。SS332 SSC424/425のJdbcResourceCleanup.closeRows・closeStatementを、PT-JDBC-CLEANUP008へ対応。既存の主例外参照、各close1回、既存→行→文の抑制例外参照を一つの独立fixtureで確認した。元001～007の実施結果と単一新規実行の生測定をそれぞれ保持。実DBやtransactionは別の終了依存。 [仕様](../../../evidence/01_PT/004_NK-DAT-001/4712_JDBC二資源closeと抑制順序の単体仕様.md) [実行・対応表](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41748-jdbc-cleanup-one-exec-and-gate-v1/manifest.json)
