@@ -1,0 +1,123 @@
+{
+  "run": "PG41532",
+  "source": "83f92baac4c1e47ec964304bb986a59a66c980a2",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": {
+    "新版ID": "WBS-G07/qa054-current-delta",
+    "第58版ID": "WBS-G07",
+    "費用主担当項目": "G07",
+    "改訂残pp": "0.4",
+    "作業・成果物": "全source/doc/test/evidence秘密情報scan0",
+    "終了条件": "Analyze only currently committed history after PG41496 cursor and classify redacted candidates.",
+    "先行ID・着手条件": "Prior proven PG41496, latest QA054 commit/evidence. Whole G07 dependencies unchanged.",
+    "basis": {
+      "path": "documents/400_PGPT/470_PMO/481_PGPT詳細WBS.json",
+      "sha256": "4227e20a23b10ab8eecd2b69550dd7f58c79bf43a2f77b4c7c98ec943e83a2d9"
+    }
+  },
+  "base": "731716635cf2ad812ea9c175077838d792d84705",
+  "nextHistoryCursor": "83f92baac4c1e47ec964304bb986a59a66c980a2",
+  "tool": {
+    "path": "../toolchain/gitleaks-8.30.1-linux-x64/gitleaks",
+    "sha256": "88f91962aa2f93ac6ab281d553b9e125f5197bbbce38f9f2437f7299c32e5509"
+  },
+  "toolCommand": "gitleaks git --no-banner --redact=100 --log-opts=base..head --report-format=json",
+  "commitsScanned": 9,
+  "rawReportSha256": "87d1f88f57b2be0cab8d2036b1b8b43521eaa0bd557baba4a53a3f28092a1e21",
+  "detectorExit": 1,
+  "detectorMatches": 14,
+  "classifications": [
+    {
+      "rule": "generic-api-key",
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41504-f03-music-current-nullaway-subset-v1/manifest.json",
+      "line": 220,
+      "classification": "Pinned SDK byte digest"
+    },
+    {
+      "rule": "generic-api-key",
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41504-f03-music-current-nullaway-subset-v1/manifest.json",
+      "line": 232,
+      "classification": "Pinned SDK byte digest"
+    },
+    {
+      "rule": "sourcegraph-access-token",
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41496-g07-nov22-public-history-increment-v1/manifest.json",
+      "line": 3,
+      "classification": "Git commit"
+    },
+    {
+      "rule": "sourcegraph-access-token",
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41496-g07-nov22-public-history-increment-v1/manifest.json",
+      "line": 4,
+      "classification": "Git commit"
+    },
+    {
+      "rule": "sourcegraph-access-token",
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41496-g07-nov22-public-history-increment-v1/manifest.json",
+      "line": 5,
+      "classification": "Git commit"
+    },
+    {
+      "rule": "sourcegraph-access-token",
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41496-g07-nov22-public-history-increment-v1/manifest.json",
+      "line": 15,
+      "classification": "Git commit"
+    },
+    {
+      "rule": "sourcegraph-access-token",
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41496-g07-nov22-public-history-increment-v1/manifest.json",
+      "line": 24,
+      "classification": "Git commit"
+    },
+    {
+      "rule": "sourcegraph-access-token",
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41496-g07-nov22-public-history-increment-v1/manifest.json",
+      "line": 33,
+      "classification": "Git commit"
+    },
+    {
+      "rule": "sourcegraph-access-token",
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41496-g07-nov22-public-history-increment-v1/manifest.json",
+      "line": 42,
+      "classification": "Git commit"
+    },
+    {
+      "rule": "sourcegraph-access-token",
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41496-g07-nov22-public-history-increment-v1/manifest.json",
+      "line": 51,
+      "classification": "Git commit"
+    },
+    {
+      "rule": "sourcegraph-access-token",
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41496-g07-nov22-public-history-increment-v1/manifest.json",
+      "line": 60,
+      "classification": "Git commit"
+    },
+    {
+      "rule": "sourcegraph-access-token",
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41496-g07-nov22-public-history-increment-v1/manifest.json",
+      "line": 69,
+      "classification": "Git commit"
+    },
+    {
+      "rule": "sourcegraph-access-token",
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41496-g07-nov22-public-history-increment-v1/manifest.json",
+      "line": 82,
+      "classification": "Git tree"
+    },
+    {
+      "rule": "sourcegraph-access-token",
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41496-g07-nov22-public-history-increment-v1/manifest.json",
+      "line": 87,
+      "classification": "Git commit"
+    }
+  ],
+  "confirmedSecrets": 0,
+  "unclassified": 0,
+  "protectedBaselineTree": "cd377044e4ca058ea219ca6a2fec82159559c72c",
+  "wholeG07": false,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-21T16:34:50.582142+00:00"
+}

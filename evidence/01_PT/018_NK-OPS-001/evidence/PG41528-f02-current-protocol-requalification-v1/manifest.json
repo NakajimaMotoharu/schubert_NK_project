@@ -1,0 +1,92 @@
+{
+  "run": "PG41528",
+  "source": "83f92baac4c1e47ec964304bb986a59a66c980a2",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": {
+    "新版ID": "WBS-F02-b-a-new-protocol",
+    "第58版ID": "WBS-F02-b",
+    "費用主担当項目": "F02",
+    "計画窓": "第1窓",
+    "予定期間・週末": "11/24–11/30",
+    "作業・成果物": "QA-056四型の判断・現候補を受領し、API/Webの実JARとStorage境界の証跡を揃える",
+    "先行ID・着手条件": "WBS-F02-a",
+    "担当": "ビルド・アーキテクチャ担当",
+    "旧短期残pp": "0.25",
+    "改訂残pp": "0.3",
+    "終了条件": "Current Protocol package and preserved three exact module inputs; public class requirements identified.",
+    "元項目の正式受入に必要な証拠": "QA-056四型の適用判断。API・Webの正規ビルド、Storage JDBC責務、同候補のruntimeと451証跡。",
+    "参照する元項目": "F02、P004-03、P004-05、P018-08、P018-10、P018-02、P019-02、P004-02、P020-01、P018-07",
+    "lineNumber": 2,
+    "開始見積内訳": "Requalification after BUG3494; no new original completion charge"
+  },
+  "evidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41526-protocol-qa054-canonical-rules-v1/manifest.json",
+      "sha256": "8a89feee4bfa2d6b08d3514ff44ab15eaa871f409d8cf152790570e363b21edb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41478-wbs66-f02-exact-candidate-intake-v1/manifest.json",
+      "sha256": "aec01ede4d9ca2d48d5ab342a19c1baaee526239c3a08dc8cf88cd0899f10e16"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41322-f02-exact-four-package-lineage-v1/manifest.json",
+      "sha256": "e94bd4f6446ff7f4fd7415aa66338c272d829f17c2d093fb71abd3d7ad426357"
+    }
+  ],
+  "currentProtocol": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41526-protocol-qa054-canonical-rules-v1/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+    "sha256": "aedd35881ba99acb407cdcdc99b2bb0648863b891ec42d6e717a8d8a3867083f"
+  },
+  "previousProtocol": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41306-protocol-numeric-retained-v1/localJar.jar",
+    "sha256": "5a7006ba3e160216e8e406de786a6f10040ea5d9203da503978ae68d833fd8c3"
+  },
+  "changedClass": "dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.class",
+  "equalDeclaredJvmDescriptors": true,
+  "identicalDeclaredDependencyEdges": 125,
+  "actualDescriptorSha256": "7b5c49bf9e630590aa36d2d5089554c890cab48b5c50e734084ba842c2014f7f",
+  "exactOtherPackages": {
+    "storage": {
+      "source": "da20ad7753279ae4e8017593866502d3341ec0e5",
+      "selectedArchive": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40802-f02-current-four-package-v1/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+        "fileBytes": 111799,
+        "sha256": "e5be03a72a9cca548f68fc1ca7ee84ced8980dbea72162f58772215227be3ec0"
+      },
+      "physical": 79,
+      "exactCurrentBuildInputs": true
+    },
+    "bootstrap": {
+      "source": "da20ad7753279ae4e8017593866502d3341ec0e5",
+      "selectedArchive": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40802-f02-current-four-package-v1/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+        "fileBytes": 428819,
+        "sha256": "3de920f0fc7df4909b362fd25856b5b91e2517fa404cbe5756725544472887f7"
+      },
+      "physical": 201,
+      "exactCurrentBuildInputs": true
+    },
+    "batch": {
+      "source": "559f5b5945e82374e0843dcfae11a8d07faef1ea",
+      "selectedArchive": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41074-f02-current-alert-batch-maven-v1/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+        "sha256": "276c45bf138b351cb0a0a6bc46dc61881fabb1b17b2b09347b4feea4cfea76a6"
+      },
+      "physical": 647,
+      "exactCurrentBuildInputs": true
+    }
+  },
+  "verifiedPackages": 4,
+  "requiredPackages": 6,
+  "contractHolds": [
+    "QA056 existing four types",
+    "API and Web authorized normal packages",
+    "Storage Jdbc and runtime/451"
+  ],
+  "auditCorrection": "First two metadata checks corrected extra fileBytes field handling and javap token parsing, without invoking more product tests.",
+  "newPackagingOrTests": 0,
+  "formalAcceptanceId": null,
+  "whole451": false,
+  "terminalAtUTC": "2026-11-21T16:32:24.070744+00:00",
+  "exitCode": 0
+}

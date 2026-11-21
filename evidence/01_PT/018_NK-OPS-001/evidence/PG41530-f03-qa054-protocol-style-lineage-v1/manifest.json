@@ -1,0 +1,92 @@
+{
+  "run": "PG41530",
+  "source": "83f92baac4c1e47ec964304bb986a59a66c980a2",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": {
+    "新版ID": "WBS-F03/2-2-b-QA054-Protocol-delta",
+    "第58版ID": "WBS-F03/2-2",
+    "費用主担当項目": "F03",
+    "計画窓": "第1窓",
+    "予定期間・週末": "11/24–11/30",
+    "作業・成果物": "許可済みの型付き品質検査を差分実行。失敗・未検査・適用外と実際の終端を記録",
+    "先行ID・着手条件": "WBS-F03/2-2-a",
+    "担当": "品質担当",
+    "旧短期残pp": "1.8",
+    "改訂残pp": "0.35",
+    "終了条件": "Update exact current style and held denominators; reconcile new Protocol with earlier Web compiled scope without transferring unverified coverage.",
+    "元項目の正式受入に必要な証拠": "保留32テスト、Root11・QA-056の適用と全6製品の型付き検査。比較工具の結果を独立表示。",
+    "参照する元項目": "F03、P004-03、P004-05、P018-08、P018-10、P018-02、P019-02、P004-02、P018-07",
+    "lineNumber": 5,
+    "開始見積内訳": "Source requalification after BUG3494, no duplicate row price"
+  },
+  "oldCore": "2611e1acbd57955d591d52e5348999ea293e068d",
+  "exactNewMain": [
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java"
+  ],
+  "oldTestOnlyDeltaAlreadyQualified": [
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxModelTest.java"
+  ],
+  "actualPriorStyleTestSource": "12d0fc7180ed0732e536e122afab27af7ce94d6a",
+  "measuredStyle": {
+    "mainFormatAndCheckstyle": 1027,
+    "testCheckstyle": 1128,
+    "testSourcesTotal": 1160,
+    "heldTestSources": 32,
+    "heldComposition": {
+      "NAMED_TEST_SOURCE": 30,
+      "SUPPORT_FIXTURE_SOURCE": 2
+    }
+  },
+  "currentProtocolCaseCount": 171,
+  "currentStrictRaw": {
+    "LINE": {
+      "missed": 0,
+      "covered": 3639
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 1432
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 162
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 1080
+    },
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 20363
+    }
+  },
+  "oldWebScopedProofsKeptSeparate": true,
+  "wholeSixTypeQuality": false,
+  "formalAcceptanceId": null,
+  "whole451": false,
+  "newTests": 0,
+  "references": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41526-protocol-qa054-canonical-rules-v1/manifest.json",
+      "sha256": "8a89feee4bfa2d6b08d3514ff44ab15eaa871f409d8cf152790570e363b21edb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41480-wbs66-f03-joint-test-applicability-v1/manifest.json",
+      "sha256": "a4c4036ec38d791d51977ed72fd51e5c7117fa252aa5c4eefe8e721cda8e1181"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41522-f03-held-source-role-refinement-v1/manifest.json",
+      "sha256": "726ce86fc50107f6c13fd007532ce2655eb32f1db68920dd2fc71e95a84520cc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41528-f02-current-protocol-requalification-v1/manifest.json",
+      "sha256": "5a87b04c07670b8ec42345f87c37e01c9ac285c5a7d3652cae77db44d7b93bc0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41526-protocol-qa054-canonical-rules-v1/layout-current-static.json",
+      "sha256": "79c9d82aa9e86690f26ccb0a063a83debe1b7a7fd9b85cfa3eae5865b0c276e6"
+    }
+  ],
+  "terminalAtUTC": "2026-11-21T16:33:29.137673+00:00",
+  "exitCode": 0
+}

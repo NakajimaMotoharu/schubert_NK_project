@@ -1,0 +1,259 @@
+{
+  "run": "PG41536",
+  "source": "83f92baac4c1e47ec964304bb986a59a66c980a2",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-G08/QA054-trace-delta",
+  "formalAcceptanceId": null,
+  "originalProgram": "NK-PRO-001",
+  "originalWbs": [
+    "P001-02",
+    "P006-03"
+  ],
+  "approvedIds": [
+    "MQ-017",
+    "QA-054",
+    "UIC-011",
+    "SSC-336"
+  ],
+  "bug": "BUG-3494",
+  "ykt": "YKT-2787",
+  "canonicalDesign": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+  "canonicalPins": [
+    {
+      "path": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+      "sha256": "ef3526f0be56007b81318e442b064db936a696db6a52a4fc8ffbc45b87acff6f"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "sha256": "9c64f99f058d676723353e8bd99eb6d070bdb062d98ee7f4a0fc4e4ae942f6d3"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+      "sha256": "860f584a2f032e9b06112907f8ec138a12d0b69b94546f7e17ad7dfb9b65414c"
+    },
+    {
+      "path": "documents/900_OTHER/910_台帳/911_確認事項一覧.md",
+      "sha256": "953a1aac48fd97ba5ecc65b2a3735864004abcff112faaaf03f6770173850bcc"
+    },
+    {
+      "path": "documents/900_OTHER/910_台帳/913_基本設計修正管理台帳.md",
+      "sha256": "e85b74564f804d775841dd144906c566852be0594032cf0ddf2add21f9759979"
+    },
+    {
+      "path": "documents/900_OTHER/910_台帳/914_詳細設計修正管理台帳.md",
+      "sha256": "269c14768e04949d867144e641ac9a10cc88e8afeb1cd7a09e020900605f69e7"
+    }
+  ],
+  "changed": [
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java",
+      "lines": [
+        392,
+        394
+      ],
+      "sha256": "8bf60bfcab1a3329953571d871d33fbf514e22f9da26a0700448e2000d5d1833"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/resources/protocol/fields-ui234-236.tsv",
+      "lines": [
+        381,
+        383
+      ],
+      "sha256": "30e2c52a92603e3b80bed0bab50271319507f0a66fd93a404e36baa4c12b35a2"
+    }
+  ],
+  "unchangedWire": {
+    "layouts": 64,
+    "fieldRows": 389,
+    "rulesChanged": 2,
+    "fieldShapeChanges": 0
+  },
+  "independentFixtureCheck": {
+    "case": "LayoutFieldCatalogTest#catalogMatchesIndependentUi234To236Fixture",
+    "ids": [
+      "PT-PRO-001-F02",
+      "PT-PRO-001-L03"
+    ]
+  },
+  "cases": [
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest",
+      "method": "catalogMatchesIndependentUi234To236Fixture",
+      "outcome": "PASS"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest",
+      "method": "layoutFieldsRejectWrongAreaGapLengthAndNull",
+      "outcome": "PASS"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest",
+      "method": "parserRejectsMalformedUnknownAndDuplicateRows",
+      "outcome": "PASS"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "method": "anonymousRequestKeepsOptionalAuditMetadataAbsentOnTheWire",
+      "outcome": "PASS"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "method": "crossedAndUnknownActionsAreNeverNormalizedToSuccess",
+      "outcome": "PASS"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "method": "everyCanonicalConstructorReferenceRejectsNull",
+      "outcome": "PASS"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "method": "everyOtherCategoryIsRejectedByNamedBoundary",
+      "outcome": "PASS"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "method": "existingHttpMetadataAndReservedRulesRemainEnforced",
+      "outcome": "PASS"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "method": "explicitRequestActionKeepsItsOwnClosedPair",
+      "outcome": "PASS"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "method": "independentConcurrentCallersDoNotMixCategories",
+      "outcome": "PASS"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "method": "legacyRequestMatchesIndependentOriginalBytes",
+      "outcome": "PASS"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "method": "menuActionMatchesIndependentOffsetsAndRoundTrips",
+      "outcome": "PASS"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "method": "missingBlankUnknownAndWrongCaseCategoryFail",
+      "outcome": "PASS"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "method": "nfcAndExactUtf8ByteBoundaryHaveIndependentExpectedBytes",
+      "outcome": "PASS"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "method": "omittedActionIsAllowedForRequestOnly",
+      "outcome": "PASS"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "method": "recordFieldsAreCompleteImmutableAndRedacted",
+      "outcome": "PASS"
+    }
+  ],
+  "actualTestRun": {
+    "run": "PG41526-protocol-qa054-canonical-rules-v1",
+    "source": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+    "argv": [
+      "/home/mini/.m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+      "-B",
+      "-o",
+      "-ntp",
+      "-Dstyle.color=never",
+      "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+      "-f",
+      "/dev/shm/pgpt-qa054-protocol-current-1d1jysnq/src/schubert-nk-protocol/pom.xml",
+      "verify"
+    ],
+    "beginSHA256": "8236ac878a2b4aaced061cf80bcf411b5e298a4b1b800dff392c42ac3df738d0",
+    "java": "25.0.4",
+    "maven": "3.9.12",
+    "startedAtUTC": "2026-11-21T16:26:55.485567+00:00",
+    "endedAtUTC": "2026-11-21T16:28:45.382436+00:00",
+    "terminal": {
+      "exitCode": 0,
+      "tests": 171,
+      "suites": 39,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "notRun": 0
+    },
+    "physicalClasses": 176,
+    "codeBearingClasses": 162,
+    "raw": {
+      "LINE": {
+        "missed": 0,
+        "covered": 3639
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 1432
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 162
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 1080
+      },
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 20363
+      }
+    }
+  },
+  "static": {
+    "checkstyleFindings": 0,
+    "pmdRaw": 0,
+    "pmdProcessingErrors": 0,
+    "spotbugsAndSpotlessZero": true
+  },
+  "evidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41524-current-protocol-canonical-ending-criteria-v1/manifest.json",
+      "sha256": "d5c13debead0ea422289a1ece8b31552eb2e55cfd28cc65565d015461abef405"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41526-protocol-qa054-canonical-rules-v1/manifest.json",
+      "sha256": "8a89feee4bfa2d6b08d3514ff44ab15eaa871f409d8cf152790570e363b21edb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41526-protocol-qa054-canonical-rules-v1/case-names.json",
+      "sha256": "ae44c06ebd1906c6805621f57b261770b4033b942abc15db9884c1fe3e258798"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41526-protocol-qa054-canonical-rules-v1/unfiltered.tsv",
+      "sha256": "d3730aebd1cab8a6f8a756fda8a11579308fbd1f8aee305228d4f94e655a1253"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41526-protocol-qa054-canonical-rules-v1/layout-current-static.json",
+      "sha256": "79c9d82aa9e86690f26ccb0a063a83debe1b7a7fd9b85cfa3eae5865b0c276e6"
+    },
+    {
+      "path": "evidence/01_PT/001_NK-PRO-001/1203_WLGEVT01承認規則文の単体確認.md",
+      "sha256": "a6e755b916e34731d0dd4ff4ec1860b34cd2d8e8918e3227349a77970f552f61"
+    }
+  ],
+  "productionBehaviorChange": false,
+  "additionalJobsLaunched": 0,
+  "whole451": false,
+  "remaining": [
+    "JMS/DB及びCHR実経路",
+    "F02/F03全六製品",
+    "同一source/runの正式451",
+    "元WBS終了依存"
+  ],
+  "executionResult": {
+    "path": "evidence/01_PT/001_NK-PRO-001/1204_WLGEVT01承認規則文の実行結果.md",
+    "sha256": "699344a29a92eb634c9fbbd5d86b9668d37ced5df3cebafe91979449635786eb"
+  },
+  "terminalAtUTC": "2026-11-21T16:40:37.075872+00:00"
+}
