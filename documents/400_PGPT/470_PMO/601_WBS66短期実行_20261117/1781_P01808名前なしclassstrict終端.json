@@ -1,0 +1,157 @@
+{
+  "eventId": "PGPT-20261008-7296",
+  "groupId": "WBS66-P01808-STRICT-EXEC-NAME-REQUIRED",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-21T01:01:22.426000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 87,
+      "remainingPercent": 13,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66-P01808-STRICT-EXEC-NAME-REQUIRED",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "WBS66-P01808-STRICT-EXEC-NAME-REQUIRED",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P018-08.03"
+    ],
+    "managementWorkIds": [
+      "WBS-P018-08.03/2"
+    ],
+    "source": "f2a9a5d0d4c295e87f53ccae3500176d65cd6cb4",
+    "productionCoreMain": "2611e1acbd57955d591d52e5348999ea293e068d",
+    "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "run": "PG41418-strict-exec-empty-class-green-v2",
+    "estimateAtGroupStartPp": {
+      "low": 0.18,
+      "base": 0.5,
+      "high": 1.1
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1779_P00405普通借用JDBC再開点.json",
+        "sha256": "b40c63eba4e6a820c37a6b776d1a9d39be8c6c6c670d4a12865239d899d0724e"
+      },
+      {
+        "path": "tools/quality/jacoco/UnfilteredCodeMeasurement.java",
+        "sha256": "acfb221d8853ceac834f862a19717a3242d67bbb8c7508ff1a00fd5db060ef15"
+      },
+      {
+        "path": "tools/quality/jacoco_readonly_exec_subset.py",
+        "sha256": "74698c741cc02423fe35f2ed8ecc234845f71b242dc86c7a1a5b31c7f5de5f59"
+      },
+      {
+        "path": "tools/quality/jacoco_readonly_exec_subset_scope_test.py",
+        "sha256": "2d4ea6df80cb1b893d53607d73b96daae8f7f9519d3d57205f0ea0bf544cd7f7"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41412-p00405-outbox-jdbc-independent-v1/manifest.json",
+        "sha256": "7be3e6e842498cd1ecf3d6ec9664056c54067877657239c9465c69ce1e17664f"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "SS354 and P018-08.03 source/CRC identities. Deny impossible empty class-record name, including an unselected record alongside a valid target. Empty selector data without class record remains supported.",
+    "endCondition": "Record old acceptance with synthetic literal byte stream in both readers. Reject empty binary name before coverage output. Run synthetic checks and exact prior ordinary unit exec read-only smoke without rerunning Product.",
+    "workScope": "Static coverage utility and synthetic files only. No Native/Root run, no product inputs besides existing approved Outbox current evidence, no held class access.",
+    "quotaAfter": {
+      "usedPercent": 87,
+      "remainingPercent": 13,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "d81ef500c51dd91fd4abe3fe9fa1ecbbde983c20954ed287eece32589da85097",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-21T01:01:22.426000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 87,
+          "remainingPercent": 13,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-21T01:01:03.962428+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 87,
+      "remainingPercent": 13,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-7295",
+    "attempt": 1,
+    "attemptResult": "strictは空名instanceを拒否、既定のwriter互換を保持。新工具定義1、Python36/36、元12、Java正・負・legacy及び既現exec読取。",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41414-strict-exec-empty-class-red-v1/manifest.json",
+        "sha256": "7d9985b2d4976adab65aed7eb0356f7702303795ffd5030b9dd2eaabfc38115b"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41416-strict-exec-empty-class-green-v1/failure.json",
+        "sha256": "46f7d3515cac049b3700f6e9496041431e339c452d824f0c3343d5df355144d0"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41418-strict-exec-empty-class-green-v2/manifest.json",
+        "sha256": "bf7a28b50b0fa49a3564d25a11e786386b7a8f956a76a7ba510d585f175fc682"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/5671_strict実行記録class名の実行結果.md",
+        "sha256": "e7c9c9bfaff03d14a0f07e88629b2f3801bd66f6312dff5322f21f682d542b30"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "新source native原本・現owner",
+      "同一source/runtimeの451・終了依存"
+    ],
+    "newToolTests": 1,
+    "pythonUnitCases": 36,
+    "selftestCases": 12,
+    "javaFixtureCases": 3,
+    "initialCompatibilityError": 1,
+    "testedSource": "4581ed4d1f8b7d4bdb358c5a185a6ece6b006381",
+    "bugs": [
+      "BUG-3491",
+      "BUG-3492"
+    ],
+    "lateral": [
+      "YKT-2784",
+      "YKT-2785"
+    ]
+  }
+}

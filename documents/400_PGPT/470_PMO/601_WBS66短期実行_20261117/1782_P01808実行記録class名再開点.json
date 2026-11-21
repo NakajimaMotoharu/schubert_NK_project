@@ -1,0 +1,84 @@
+{
+  "eventId": "PGPT-20261008-7297",
+  "wbsLeafIds": [
+    "WBS-P018-08.03"
+  ],
+  "managementWorkIds": [
+    "WBS-P018-08.03/2"
+  ],
+  "workCategory": "CONTRACT_AUDIT",
+  "source": "f2a9a5d0d4c295e87f53ccae3500176d65cd6cb4",
+  "productionCoreMain": "2611e1acbd57955d591d52e5348999ea293e068d",
+  "previousCheckpoint": "PGPT-20261008-7294",
+  "groupEvents": [
+    "PGPT-20261008-7296"
+  ],
+  "acceptedOriginal": 16,
+  "total": 190,
+  "coreAccepted": 0,
+  "coreTotal": 5,
+  "officialPtTests": 1964,
+  "officialPtScopes": 53,
+  "newFormalAcceptance": 0,
+  "effortRate": null,
+  "actualAllocatedPp": null,
+  "newProductTests": 0,
+  "recordedOwnedJobsInFlight": 0,
+  "ownedBackendJobsStartedHere": 0,
+  "modelObserved": "gpt-6.2-sol",
+  "reasoningObserved": null,
+  "speedObserved": null,
+  "outcomeEvidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41414-strict-exec-empty-class-red-v1/manifest.json",
+      "sha256": "7d9985b2d4976adab65aed7eb0356f7702303795ffd5030b9dd2eaabfc38115b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41416-strict-exec-empty-class-green-v1/failure.json",
+      "sha256": "46f7d3515cac049b3700f6e9496041431e339c452d824f0c3343d5df355144d0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41418-strict-exec-empty-class-green-v2/manifest.json",
+      "sha256": "bf7a28b50b0fa49a3564d25a11e786386b7a8f956a76a7ba510d585f175fc682"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/5671_strict実行記録class名の実行結果.md",
+      "sha256": "e7c9c9bfaff03d14a0f07e88629b2f3801bd66f6312dff5322f21f682d542b30"
+    }
+  ],
+  "fullQuotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-21T01:01:22.426000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 87,
+      "remainingPercent": 13,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "quotaAfter": {
+    "usedPercent": 87,
+    "remainingPercent": 13,
+    "resetsAt": 1795445752,
+    "windowDurationMins": 10080
+  },
+  "sharedDeltaPp": 0,
+  "completedOriginalRowPricePp": 0,
+  "remainingCriteria": [
+    "新source native原本・現owner",
+    "同一source/runtimeの451・終了依存"
+  ],
+  "nextEvidence": "P018-08本体は正規nativeと同source owner/CRC/receiptに依存。工具の局所確認を保持し、他の許可済み重点の未閉鎖条件へ進む。",
+  "testedSource": "4581ed4d1f8b7d4bdb358c5a185a6ece6b006381",
+  "run": "PG41418-strict-exec-empty-class-green-v2",
+  "bugs": [
+    "BUG-3491",
+    "BUG-3492"
+  ],
+  "lateral": [
+    "YKT-2784",
+    "YKT-2785"
+  ]
+}
