@@ -1,0 +1,67 @@
+{
+  "eventId": "PGPT-20261008-7302",
+  "groupId": "WBS66-G07-NEW-PUBLIC-HISTORY-OUTBOX-AND-STRICT",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-21T01:05:06.762000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 87,
+      "remainingPercent": 13,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66-G07-NEW-PUBLIC-HISTORY-OUTBOX-AND-STRICT",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "WBS66-G07-NEW-PUBLIC-HISTORY-OUTBOX-AND-STRICT",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-G07"
+    ],
+    "managementWorkIds": [
+      "WBS-G07"
+    ],
+    "source": "5a63c99e9038abb6518b90d3fc8307ae071f8d38",
+    "productionCoreMain": "2611e1acbd57955d591d52e5348999ea293e068d",
+    "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "run": "PG41422",
+    "estimateAtGroupStartPp": {
+      "low": 0.12,
+      "base": 0.36,
+      "high": 1.0
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1786_G08現証拠追跡再開点.json",
+        "sha256": "41e6a979484af601eac36d0ab2fbd9d41c100eaaaf3acfe6bf6a34749145b899"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41376-g07-current-key-owner-tranche-v1/manifest.json",
+        "sha256": "b2f7fc0b1d824c3bd40653fdc056e1ea71936b1be8e90343f2da97da721ba5c7"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41420-g08-current-outbox-and-gate-trace-v1/manifest.json",
+        "sha256": "4585e0841fe9ce8f5418c985ce96606d9d25cd79e188b04e89759f9443d3077a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41406-outbox-copy-independent-v1/exec-inventory-publication.json",
+        "sha256": "0a643cca228d49493dd789d36fd3f340d672301945114b0f9c317cb6308c97f7"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "Latest G07 cursor 1a6940c79f90.., with new Outbox source and tools, no changed raw private artifact or unapproved archive. Binary candidate is the approved synthetic execinfo compressed transcript.",
+    "endCondition": "Single Gitleaks history run in the new exact interval, restore the compressed public transcript in memory and check with its digest, classify findings against independently known Git/history and artifact pins. Report unresolved as such.",
+    "workScope": "Named public Git history and synthetic transcript, no files outside approved paths except exact referenced nonsecret evidence artifacts for hash confirmation. No product tests or remote operation."
+  }
+}

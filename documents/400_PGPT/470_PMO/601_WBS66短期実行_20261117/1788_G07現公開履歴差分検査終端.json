@@ -1,0 +1,133 @@
+{
+  "eventId": "PGPT-20261008-7303",
+  "groupId": "WBS66-G07-NEW-PUBLIC-HISTORY-OUTBOX-AND-STRICT",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-21T01:06:33.522000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 87,
+      "remainingPercent": 13,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66-G07-NEW-PUBLIC-HISTORY-OUTBOX-AND-STRICT",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "WBS66-G07-NEW-PUBLIC-HISTORY-OUTBOX-AND-STRICT",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-G07"
+    ],
+    "managementWorkIds": [
+      "WBS-G07"
+    ],
+    "source": "5a63c99e9038abb6518b90d3fc8307ae071f8d38",
+    "productionCoreMain": "2611e1acbd57955d591d52e5348999ea293e068d",
+    "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "run": "PG41422-g07-outbox-post-public-history-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.12,
+      "base": 0.36,
+      "high": 1.0
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1786_G08現証拠追跡再開点.json",
+        "sha256": "41e6a979484af601eac36d0ab2fbd9d41c100eaaaf3acfe6bf6a34749145b899"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41376-g07-current-key-owner-tranche-v1/manifest.json",
+        "sha256": "b2f7fc0b1d824c3bd40653fdc056e1ea71936b1be8e90343f2da97da721ba5c7"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41420-g08-current-outbox-and-gate-trace-v1/manifest.json",
+        "sha256": "4585e0841fe9ce8f5418c985ce96606d9d25cd79e188b04e89759f9443d3077a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41406-outbox-copy-independent-v1/exec-inventory-publication.json",
+        "sha256": "0a643cca228d49493dd789d36fd3f340d672301945114b0f9c317cb6308c97f7"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "Latest G07 cursor 1a6940c79f90.., with new Outbox source and tools, no changed raw private artifact or unapproved archive. Binary candidate is the approved synthetic execinfo compressed transcript.",
+    "endCondition": "Single Gitleaks history run in the new exact interval, restore the compressed public transcript in memory and check with its digest, classify findings against independently known Git/history and artifact pins. Report unresolved as such.",
+    "workScope": "Named public Git history and synthetic transcript, no files outside approved paths except exact referenced nonsecret evidence artifacts for hash confirmation. No product tests or remote operation.",
+    "quotaAfter": {
+      "usedPercent": 87,
+      "remainingPercent": 13,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "b9118059f050e3546d1a43b6b7e33dc6069fddba7f7fdc56a9211324d16bd3d7",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-21T01:06:33.522000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 87,
+          "remainingPercent": 13,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-21T01:06:22.481445+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 87,
+      "remainingPercent": 13,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-7302",
+    "attempt": 1,
+    "attemptResult": "24commit／201pathの新規履歴。原scanner検出3はGit commit2/tree1照合。合成execinfoのgzip内容照合とscan0。秘密・未分類0。",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41422-g07-outbox-post-public-history-v1/manifest.json",
+        "sha256": "5511921584175af8ae569a8dceced674f6a4ee3016657328c61a35d45d3b5861"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "G07全体と451未受入",
+      "実経路は別"
+    ],
+    "commitsScanned": 24,
+    "pathsScanned": 201,
+    "rawFindings": 3,
+    "unknownFindings": 0,
+    "testedSource": "5a63c99e9038abb6518b90d3fc8307ae071f8d38",
+    "nextG07HistoryBase": "5a63c99e9038abb6518b90d3fc8307ae071f8d38"
+  }
+}
