@@ -80,6 +80,8 @@ def decode(raw,wanted):
             sessions.append(dict(labelBytesHex=label.hex(),startMillis=start,endMillis=end))
         elif tag == 0x11:
             identity,name = number(8),utf_bytes()
+            if not name:
+                raise ValueError('nonempty original class name required')
             if identity in identities:
                 raise ValueError('no duplicate class record union')
             identities.add(identity)

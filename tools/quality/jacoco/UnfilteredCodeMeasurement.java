@@ -166,6 +166,9 @@ public final class UnfilteredCodeMeasurement {
     }
 
     private void visitExecution(ExecutionData record) {
+      if (record.getName().isEmpty()) {
+        throw new IllegalArgumentException("nonempty original class name required");
+      }
       if (records.get(record.getId()) != null) {
         throw new IllegalArgumentException("duplicate execution class ID");
       }
