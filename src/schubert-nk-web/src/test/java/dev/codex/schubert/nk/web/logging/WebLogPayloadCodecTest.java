@@ -373,6 +373,30 @@ final class WebLogPayloadCodecTest {
     assertArrayEquals(sequence(32, 32), previous);
   }
 
+  /** PT-WEB-WEBLOG-OWN003: separate owned keys survive subsequent caller mutation. */
+  @Test
+  void preservesBothOwnedKeyVersionsAfterCallerChangesInputs() throws Exception {
+    byte[] current = sequence(32, 0);
+    byte[] previous = sequence(32, 32);
+    byte[] plaintext = goldenWire();
+    byte[] expectedCurrent =
+        independentEnvelope("v2", current, independentAad(IDENTITY, "v2"), plaintext);
+    EncryptedWebLogPayload expectedPrevious = independentPayload("v1", previous, plaintext);
+    WebLogPayloadCodec codec = fixedCodec("v2", current, "v1", previous);
+    try {
+      Arrays.fill(current, (byte) 3);
+      Arrays.fill(previous, (byte) 7);
+      assertArrayEquals(expectedCurrent, codec.encrypt(IDENTITY, plaintext).ciphertext());
+      assertArrayEquals(plaintext, codec.decrypt(IDENTITY, expectedPrevious));
+      codec.close();
+      assertThrows(IllegalStateException.class, () -> codec.decrypt(IDENTITY, expectedPrevious));
+      assertEquals(3, current[0]);
+      assertEquals(7, previous[0]);
+    } finally {
+      codec.close();
+    }
+  }
+
   @Test
   void unavailableCipherProviderHasBoundedFailureAndNoRawProviderCause() throws Exception {
     EncryptedWebLogPayload payload = independentPayload("v2", CURRENT, goldenWire());

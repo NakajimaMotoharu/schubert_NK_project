@@ -26,6 +26,7 @@ MAIN_FILES = ("WebLogPayloadCodec.java", "WebLogPayloadIdentity.java", "WebLogPa
 TEST_CLASS = PACKAGE + ".WebLogPayloadCodecTest"
 TEST_FILE = MODULE / "src/test/java" / REL / "WebLogPayloadCodecTest.java"
 METHOD = "invalidConfigurationPreservesFailureOrderAndBorrowedKeys"
+SECOND_METHOD = "preservesBothOwnedKeyVersionsAfterCallerChangesInputs"
 EXPECTED = ("bug036CallerMonitorCannotBlockEncryptionDecryptionOrClose",
             "canonicalAadAndFullEnvelopeMatchIndependentVectorAndCopiesAreDefensive",
             "currentWritesPreviousReadsAndUnknownKeyDenyClosed",
@@ -102,10 +103,14 @@ def decisive_instructions(bytecode, baseline):
 
 def main():
     mode = sys.argv[1]
-    assert mode in ("baseline", "qualified")
+    assert mode in ("baseline", "qualified", "single")
     baseline = mode == "baseline"
-    run = ("PG41348-p01810-web-log-constructor-ownership-v1" if baseline
-           else "PG41350-p01810-web-log-constructor-qualified-v1")
+    single = mode == "single"
+    run = {
+        "baseline": "PG41348-p01810-web-log-constructor-ownership-v1",
+        "qualified": "PG41350-p01810-web-log-constructor-qualified-v1",
+        "single": "PG41354-p01810-web-log-single-ownership-v1",
+    }[mode]
     work = WORK / run
     work.mkdir(mode=0o700)
     source = git("rev-parse", "HEAD").decode().strip()
@@ -183,18 +188,33 @@ def main():
     javap = execute("javap", [jdk / "javap", "-c", "-p", "-s", classifier])
     bytecode = javap.read_text()
     construct = inspect(bytecode)
-    proof = decisive_instructions(instructions(construct), baseline)
+    code = instructions(construct)
+    if single:
+        copies = select(code, "java/lang/System.arraycopy:")
+        allocated = [i for i, (op, _) in code.items() if op == "newarray"]
+        random, = select(code, "String random")
+        random_field, = select(code, "Field random:")
+        validation = select(code, "Method requireKey:")
+        duplicate, = select(code, "String web log key versions must be distinct")
+        assert len(validation) == len(copies) == 2 and len(allocated) == 1
+        assert max(validation) < duplicate < random < random_field < allocated[0] < min(copies)
+        assert "Exception table:" not in "\n".join(construct) and not select(code, "clone:")
+        proof = dict(keyValidationCalls=validation, finalValidation=random_field,
+                     ownedKeyAllocations=allocated, boundedArrayCopyCalls=copies)
+    else:
+        proof = decisive_instructions(code, baseline)
     if baseline:
         assert re.search(r"private static byte\[\] requireKey.*?clone:", bytecode, re.DOTALL)
         proof["firstKeyCopyAcquiredBeforeLaterValidationAndNoConstructorHandler"] = "Exception table:" not in "\n".join(construct)
         assert proof["firstKeyCopyAcquiredBeforeLaterValidationAndNoConstructorHandler"]
     else:
-        table = re.findall(r"^\s*(\d+)\s+(\d+)\s+(\d+)\s+Class java/lang/Error$", "\n".join(construct), re.MULTILINE)
-        (first, after, entry), = [tuple(map(int, fields)) for fields in table]
-        one, two = proof["clonedOnlyAfterAllValidation"]
-        assert one < first <= two < after < entry <= proof["errorHandlerErasure"]
-        proof["constructorErrorRange"] = [first, after, entry]
-        assert any(line.rstrip().endswith("athrow") for line in construct)
+        if not single:
+            table = re.findall(r"^\s*(\d+)\s+(\d+)\s+(\d+)\s+Class java/lang/Error$", "\n".join(construct), re.MULTILINE)
+            (first, after, entry), = [tuple(map(int, fields)) for fields in table]
+            one, two = proof["clonedOnlyAfterAllValidation"]
+            assert one < first <= two < after < entry <= proof["errorHandlerErasure"]
+            proof["constructorErrorRange"] = [first, after, entry]
+            assert any(line.rstrip().endswith("athrow") for line in construct)
         junit = TC / "junit-platform-console-standalone-1.13.4.jar"
         anno = repo / "org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar"
         agent = repo / "org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar"
@@ -209,11 +229,12 @@ def main():
                          "--select-class", TEST_CLASS, "--fail-if-no-tests", "--reports-dir", work / "reports"])
         raw = work / "reports/TEST-junit-jupiter.xml"
         outcome = ET.parse(raw).getroot()
-        expected = Counter(name + "()" for name in EXPECTED)
+        selected = (*EXPECTED, SECOND_METHOD) if single else EXPECTED
+        expected = Counter(name + "()" for name in selected)
         assert Counter(row.get("name") for row in outcome.findall("testcase")) == expected
         assert all(int(outcome.get(attr)) == 0 for attr in ("failures", "errors", "skipped"))
         assert int(outcome.get("tests")) == len(expected)
-        proof.update(xml=pin(raw), exec=pin(work / "unit.exec"), productTests=11,
+        proof.update(xml=pin(raw), exec=pin(work / "unit.exec"), productTests=len(expected),
                      noFailuresErrorsOrSkips=True, constructorTest=METHOD)
     dest = EVIDENCE / run
     dest.mkdir()
