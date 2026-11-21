@@ -1,0 +1,72 @@
+{
+  "run": "PG41722",
+  "source": "c0dde86e58c5cd78716a13e0de15c2f0bcbfa36a",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-P017-02.01/2",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-21T21:44:18.699558+00:00",
+  "regularArtifact": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41074-f02-current-alert-batch-maven-v1/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "276c45bf138b351cb0a0a6bc46dc61881fabb1b17b2b09347b4feea4cfea76a6"
+  },
+  "currentProductionPhysical": {
+    "dev/codex/schubert/nk/batch/repository/BatchRun.class": "5cb0c42832ea17425dbf60da6025f2c4783d687e665b18f6cd8e88abc399c909",
+    "dev/codex/schubert/nk/batch/repository/MaintenanceActivation.class": "4a62469824f074982351f4f7016fff4e38fcb3825a5af54c77ae86babe9e05ae"
+  },
+  "fixture": {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchRunValueBoundaryTest.java",
+    "sha256": "9285d0ce208cf45f55f4d2c5a740e59573ef1b984d99c2ef6e41dd311462382a"
+  },
+  "fixturePhysicalIdentical": "dc48f2ecf29e570c24a9da4079fcc91f3dccfccc597cd80eb2b51a9c25aafa77",
+  "sdk": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "ranNoTest": true,
+  "priorActual": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28220-batch-run-activation2-unit-v1/manifest.json",
+    "sha256": "0721585277b96efcf08abd7714252b04e7b7b283f513ed2b3360c976cd396120"
+  },
+  "originalXml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28222-batch-run-activation2-post-v1/original-TEST-junit-jupiter.xml",
+    "sha256": "2245baf594fc090dd0a511903bf1dcdaa7f449276b61921eb22a59946ea86cc6"
+  },
+  "currentTypeRefs": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41722-p01702-fixed-run-value-v1/type-dependencies.txt",
+    "sha256": "5e2f8fe1bbb2deba4a9775c39283e2bf74dd5c10cee0e45b1fbea0237ab36852"
+  },
+  "sourceLocalContract": [
+    {
+      "id": "PT-BAT-RUNVALUE001",
+      "result": "EXACT_REUSABLE",
+      "detail": "Fixed UTC bounds, microsecond precision, defensive missing arguments, and fixed diagnostic."
+    },
+    {
+      "id": "PT-BAT-STEPVALUE001",
+      "result": "PREVIOUSLY_COUNTED_REFERENCE",
+      "detail": {
+        "caseId": "PT-BAT-STEPVALUE001",
+        "testMethod": "stepvalue001AttemptAllComponentsBoundsNullsAndCivilDatesAreIndependent",
+        "independentExpected": "独立fixtureで日時とattempt、ID境界を確認",
+        "spec": {
+          "path": "evidence/01_PT/018_NK-OPS-001/4363_step別削除観測純値・通常十仕様.md",
+          "sha256": "208699e14429a0841433e06a89b1e92f3b4db4a35d29249b7e5abce6f6a016ca"
+        },
+        "receipt": "PG35100 via PG41716"
+      }
+    }
+  ],
+  "companionSeparateValueCase": "PT-BAT-RUNVALUE002 compiled and compared as real historical whole-fixture input only; scope of this row does not confer actual activation.",
+  "acceptanceChecks": [
+    "WBS-P017-02:contract",
+    "WBS-P017-02:scope",
+    "WBS-P017-02:quality"
+  ],
+  "parentStatus": "NOT_ACCEPTED",
+  "pending": [
+    "Owned original durable state and database timing",
+    "New/resume input identity and no duplicate activity, established with real owned evidence if approved",
+    "Full same-source 451 and other own criteria"
+  ],
+  "formalAcceptanceId": null
+}

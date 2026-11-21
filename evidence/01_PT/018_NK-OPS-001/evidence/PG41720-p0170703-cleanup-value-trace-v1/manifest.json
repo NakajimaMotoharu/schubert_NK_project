@@ -1,0 +1,227 @@
+{
+  "run": "PG41720",
+  "wbs": "WBS-P017-07.03/2",
+  "traceParent": "WBS-P017-07",
+  "source": "c0dde86e58c5cd78716a13e0de15c2f0bcbfa36a",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-21T21:43:19.471645+00:00",
+  "planningSource": {
+    "path": "documents/400_PGPT/470_PMO/481_PGPT詳細WBS.json",
+    "sha256": "4227e20a23b10ab8eecd2b69550dd7f58c79bf43a2f77b4c7c98ec943e83a2d9"
+  },
+  "approvedDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+  "approvedDesignPins": {
+    "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md": "4c09a2f66d9cb4def976c24d2952953aa5a287a0d545548dc4feda4968ff5bef"
+  },
+  "parentContractIds": [
+    "NTF-006",
+    "NTF-007",
+    "NTF-011",
+    "QST-009"
+  ],
+  "parentEndDependencies": [
+    "WBS-P004-01",
+    "WBS-P004-03"
+  ],
+  "caseTrace": [
+    {
+      "caseId": "PT-BAT-CLEANVALUE001",
+      "testMethod": "countsAcceptExactBoundsAndRejectEachInconsistentComponent",
+      "independentExpected": "同一型の境界、非負・Long最大・計数不整合を区別",
+      "spec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1978_Batch値型16_途中結果・追加4仕様.md",
+        "sha256": "a589722fd3f4e9708b1f882fc23d9b50cda8f0391f0e3690e168c164f2e435cc"
+      },
+      "receipt": "PG28330 via PG41716"
+    },
+    {
+      "caseId": "PT-BAT-CLEANVALUE002",
+      "testMethod": "cleanupMetadataMatchesIndependentDdlNamesAndChunkLimits",
+      "independentExpected": "固定9種の名前・関数名・最大件数を照合",
+      "spec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1978_Batch値型16_途中結果・追加4仕様.md",
+        "sha256": "a589722fd3f4e9708b1f882fc23d9b50cda8f0391f0e3690e168c164f2e435cc"
+      },
+      "receipt": "PG41716 own run"
+    },
+    {
+      "caseId": "PT-BAT-CLEANVALUE003",
+      "testMethod": "summaryUsesFixedDeltasAndCumulativeWarning",
+      "independentExpected": "差分 (7,4,3)、累積skipが残る再開WARNING",
+      "spec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1981_LogCleanup値契約_独立単体テスト仕様書.md",
+        "sha256": "128251a50a47ceeb3a9402f77a6efe3bd93c3d5ac47cf7c9f28be9f6ea4e0241"
+      },
+      "receipt": "PG28330 via PG41716"
+    },
+    {
+      "caseId": "PT-BAT-CLEANVALUE004",
+      "testMethod": "summaryRejectsEachInvalidComponent",
+      "independentExpected": "null・別run・未完了・各累積逆行の独立入力を拒否",
+      "spec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1981_LogCleanup値契約_独立単体テスト仕様書.md",
+        "sha256": "128251a50a47ceeb3a9402f77a6efe3bd93c3d5ac47cf7c9f28be9f6ea4e0241"
+      },
+      "receipt": "PG28330 via PG41716"
+    },
+    {
+      "caseId": "PT-BAT-CLEANVALUE005",
+      "testMethod": "progressRetainsValuesAndRejectsNulls",
+      "independentExpected": "run／counts／完了値を保持、欠落を拒否",
+      "spec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1981_LogCleanup値契約_独立単体テスト仕様書.md",
+        "sha256": "128251a50a47ceeb3a9402f77a6efe3bd93c3d5ac47cf7c9f28be9f6ea4e0241"
+      },
+      "receipt": "PG28330 via PG41716"
+    },
+    {
+      "caseId": "PT-BAT-CLEANVALUE006",
+      "testMethod": "chunkRequiresZeroCountsForEveryRejectedReason",
+      "independentExpected": "拒否理由と申告計数ゼロの組を保持",
+      "spec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1981_LogCleanup値契約_独立単体テスト仕様書.md",
+        "sha256": "128251a50a47ceeb3a9402f77a6efe3bd93c3d5ac47cf7c9f28be9f6ea4e0241"
+      },
+      "receipt": "PG28330 via PG41716"
+    },
+    {
+      "caseId": "BAT154",
+      "testMethod": "kindStepMapping",
+      "independentExpected": "固定九kind→step table。LOGS/skip/mismatchはV020用mappingで拒否、他明示kind受理",
+      "spec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1977_Batch純粋値型16_単体テスト仕様書.md",
+        "sha256": "22335cdccc7f426d9fdaf34004c32f7c6dfc164a677ae363f0573d38e1fcda0e"
+      },
+      "receipt": "PG35100 via PG41716"
+    },
+    {
+      "caseId": "BAT155",
+      "testMethod": "successfulChunkContracts",
+      "independentExpected": "明示delta2/total5→before3、complete条件/empty/mismatched rejection、固定literal recordで比較",
+      "spec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1977_Batch純粋値型16_単体テスト仕様書.md",
+        "sha256": "22335cdccc7f426d9fdaf34004c32f7c6dfc164a677ae363f0573d38e1fcda0e"
+      },
+      "receipt": "PG35100 via PG41716"
+    },
+    {
+      "caseId": "BAT156",
+      "testMethod": "rejectionAndDeferredContracts",
+      "independentExpected": "四reason順、LOCK_BUSY/BACKUP_GATEは未知total/zero/nonEND、FKはQUESTION/total保持のみ。未知enum/不正組合せ拒否",
+      "spec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1977_Batch純粋値型16_単体テスト仕様書.md",
+        "sha256": "22335cdccc7f426d9fdaf34004c32f7c6dfc164a677ae363f0573d38e1fcda0e"
+      },
+      "receipt": "PG35100 via PG41716"
+    },
+    {
+      "caseId": "BAT157",
+      "testMethod": "summaryCountsAndCompletion",
+      "independentExpected": "before3/after5→call2、deferredはQUESTIONだけ、complete=!deferred、zero delta受理",
+      "spec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1977_Batch純粋値型16_単体テスト仕様書.md",
+        "sha256": "22335cdccc7f426d9fdaf34004c32f7c6dfc164a677ae363f0573d38e1fcda0e"
+      },
+      "receipt": "PG35100 via PG41716"
+    },
+    {
+      "caseId": "BAT158",
+      "testMethod": "counterOverflowAndBounds",
+      "independentExpected": "Long.MAX_VALUEのdelta/cumulative/zero差分。累積逆行・skipped混入・負/削除超過拒否、除外や周回合計を用いない",
+      "spec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1977_Batch純粋値型16_単体テスト仕様書.md",
+        "sha256": "22335cdccc7f426d9fdaf34004c32f7c6dfc164a677ae363f0573d38e1fcda0e"
+      },
+      "receipt": "PG35100 via PG41716"
+    },
+    {
+      "caseId": "BAT159",
+      "testMethod": "nullAndRedaction",
+      "independentExpected": "mapping・counts・Optional・reason・summary before/afterのnull拒否、二fixed redacted文字列",
+      "spec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1977_Batch純粋値型16_単体テスト仕様書.md",
+        "sha256": "22335cdccc7f426d9fdaf34004c32f7c6dfc164a677ae363f0573d38e1fcda0e"
+      },
+      "receipt": "PG35100 via PG41716"
+    },
+    {
+      "caseId": "BAT160",
+      "testMethod": "immutableValues",
+      "independentExpected": "固定zero/known total/complete/reasonが一致する独立recordとhash、flag/reason差は非同値",
+      "spec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1977_Batch純粋値型16_単体テスト仕様書.md",
+        "sha256": "22335cdccc7f426d9fdaf34004c32f7c6dfc164a677ae363f0573d38e1fcda0e"
+      },
+      "receipt": "PG35100 via PG41716"
+    },
+    {
+      "caseId": "BAT161",
+      "testMethod": "concurrentValues",
+      "independentExpected": "自己64taskのdelta0～63、total100→before100-i、completeはi=0だけ",
+      "spec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1977_Batch純粋値型16_単体テスト仕様書.md",
+        "sha256": "22335cdccc7f426d9fdaf34004c32f7c6dfc164a677ae363f0573d38e1fcda0e"
+      },
+      "receipt": "PG35100 via PG41716"
+    },
+    {
+      "caseId": "PT-BAT-STEPVALUE001",
+      "testMethod": "stepvalue001AttemptAllComponentsBoundsNullsAndCivilDatesAreIndependent",
+      "independentExpected": "独立fixtureで日時とattempt、ID境界を確認",
+      "spec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/4363_step別削除観測純値・通常十仕様.md",
+        "sha256": "208699e14429a0841433e06a89b1e92f3b4db4a35d29249b7e5abce6f6a016ca"
+      },
+      "receipt": "PG35100 via PG41716"
+    },
+    {
+      "caseId": "PT-BAT-STEPVALUE002",
+      "testMethod": "stepvalue002ChunkAndSummaryRetainAllValidComponentsAndClosedReasonFactories",
+      "independentExpected": "Summary全成分、factoryと値の同値／不等値",
+      "spec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/4363_step別削除観測純値・通常十仕様.md",
+        "sha256": "208699e14429a0841433e06a89b1e92f3b4db4a35d29249b7e5abce6f6a016ca"
+      },
+      "receipt": "PG35100 via PG41716"
+    }
+  ],
+  "ddlNameOracle": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28325-cleanup-fixed-ddl-name-oracle-v1/manifest.json",
+    "sha256": "c1a0ca67fb9f95f839cc27d899f4ca24562874a01e62bbd93fc0213d93e7daf7"
+  },
+  "ddlSourceHashesExact": {
+    "src/schubert-nk-api/src/main/resources/db/migration/V005__gin_functions_views_and_grants.sql": "daf64a15c753cea106b593e6da944db08f7b13c94d3f2aa4ec6626fcd8b56ff9",
+    "src/schubert-nk-api/src/main/resources/db/migration/V011__batch_outbox_only_cleanup.sql": "18e92bfc225f39c7a0ecaf9bdbeef329e5a47c0af3283d12f858deb4aec09928",
+    "src/schubert-nk-api/src/main/resources/db/migration/V012__durable_inbox_inspection_progress.sql": "21e4c781a4b4c1a18240d8e47fae5bc2d11593d7b4ad05590ed10a67ebcb9411",
+    "src/schubert-nk-api/src/main/resources/db/migration/V014__durable_log_cleanup_progress.sql": "d2ba884de86c59c5815559aaf17a83b7a0546fcc7f9f48649dd744d127270229",
+    "src/schubert-nk-api/src/main/resources/db/migration/V026__web_receipt_references.sql": "a24ce25ccc80cde118f39734ef40fd3da9ab2ab61a368119aeae64f98b86fedb"
+  },
+  "caseEvidence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41716-cleanup-values-diff-v1/manifest.json",
+    "sha256": "9245126bea8ccda92d36516f8a55f402c42304e212d42e5f6783430066eefcde"
+  },
+  "separateTerminalEvidence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41714-batch-terminal-evidence-current-v1/manifest.json",
+    "sha256": "13bb2b6a1f1e5b0f0536f73054776d5f5c21b6e287430fa4ecaf7517d864c887"
+  },
+  "separateTypedEvidence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41718-f03-current-batch-scope-receipt-v1/manifest.json",
+    "sha256": "9f0c50db98e8f985dfec248d922b3f662e77097af63834dba7fbb48d10d7e33c"
+  },
+  "statusByParentCheck": {
+    "WBS-P017-07:contract": "PARTIAL",
+    "WBS-P017-07:scope": "PARTIAL",
+    "WBS-P017-07:quality": "PARTIAL"
+  },
+  "totalOwnedArtifacts": 20,
+  "noCurrentProofFor": [
+    "Owned database execution and state transition of the actual cleanup context",
+    "Current FK/retention/no-double-deletion observations with approved real ownership",
+    "Scope completeness and same-source whole 451",
+    "Formal dependency WBS-P004-01 and WBS-P004-03"
+  ],
+  "newCaseExecutions": 0,
+  "addedCostToParentForSharedLocalPT": 0,
+  "formalAcceptanceId": null
+}

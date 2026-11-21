@@ -1,0 +1,1934 @@
+{
+  "run": "PG41718",
+  "source": "c0dde86e58c5cd78716a13e0de15c2f0bcbfa36a",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-F03/2-2-b",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-21T21:41:21.418345+00:00",
+  "archive": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41074-f02-current-alert-batch-maven-v1/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "276c45bf138b351cb0a0a6bc46dc61881fabb1b17b2b09347b4feea4cfea76a6"
+  },
+  "builtAtSource": "559f5b5945e82374e0843dcfae11a8d07faef1ea",
+  "fullyExactProductionRelPaths": [
+    "pom.xml",
+    ".mvn",
+    "src/schubert-nk-batch/pom.xml",
+    "src/schubert-nk-batch/src/main",
+    "src/schubert-nk-bootstrap/pom.xml",
+    "src/schubert-nk-bootstrap/src/main",
+    "src/schubert-nk-storage/pom.xml",
+    "src/schubert-nk-storage/src/main"
+  ],
+  "protocolOriginallyOnToolClasspath": true,
+  "currentProtocolAbsentFromUsedTypeEdges": true,
+  "savedTypeEdgeLog": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41142-f03-batch-current-typed-delta-static-v1/jdeps.stdout",
+    "sha256": "dd0a1431981b22cf4c60bf36d6a67c4723667e79855dfd49ee26f7ad3b523f0e"
+  },
+  "changedJavaOwnersNotReferenced": [
+    "dev.codex.schubert.nk.api.messaging.outbound.OutboxEntry",
+    "dev.codex.schubert.nk.api.messaging.outbound.OutboxRequest",
+    "dev.codex.schubert.nk.api.security.AuthContextCodec",
+    "dev.codex.schubert.nk.protocol.codec.FieldCodec",
+    "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalog",
+    "dev.codex.schubert.nk.web.logging.WebLogPayloadCodec",
+    "dev.codex.schubert.nk.web.media.HttpByteRangeParser",
+    "dev.codex.schubert.nk.web.media.MediaRangeService",
+    "dev.codex.schubert.nk.web.revocation.RevocationPayloadCodec",
+    "dev.codex.schubert.nk.web.session.SessionPayloadCodec"
+  ],
+  "authorizedAuxArchivePins": {
+    "protocol": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40802-f02-current-four-package-v1/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+      "fileBytes": 299374,
+      "sha256": "9b9de96fb1043946dde9dcd9d2e53091a582e33679f6557bfaf08200d26bbeb4"
+    },
+    "storage": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40802-f02-current-four-package-v1/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+      "fileBytes": 111799,
+      "sha256": "e5be03a72a9cca548f68fc1ca7ee84ced8980dbea72162f58772215227be3ec0"
+    },
+    "bootstrap": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40802-f02-current-four-package-v1/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+      "fileBytes": 428819,
+      "sha256": "3de920f0fc7df4909b362fd25856b5b91e2517fa404cbe5756725544472887f7"
+    }
+  },
+  "externalToolDependencyPins": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/com/github/spotbugs/spotbugs-annotations/4.10.4/spotbugs-annotations-4.10.4.jar",
+      "sha256": "28fa4befaddce5d7b79b07c68e7c12fa27c5d9282c4229528717971606661ea3"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+      "sha256": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar",
+      "sha256": "2cbd119bf1961c28788310963dc80ba65f58cdeec1dd139c8bdb1240faa2c36f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/com/zaxxer/HikariCP/7.1.0/HikariCP-7.1.0.jar",
+      "sha256": "2be45c641b841e81df87292e181f2c203500c5f0e9a1676f135927387f3cf40b"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar",
+      "sha256": "9ca47dfa831409b40253c8dc98c17b9d3e050ebbde4d1543c5521dca2b95ad56"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-registry-prometheus/1.17.1/micrometer-registry-prometheus-1.17.1.jar",
+      "sha256": "ac24d43f123e103828a23a86f092a8709d87d309ad3212e798305654e951a8ce"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/io/prometheus/prometheus-metrics-model/1.7.0/prometheus-metrics-model-1.7.0.jar",
+      "sha256": "e6d94538f8735c4161c36a660298f3a0fa8e4b281ceaf209723aaf9e212d292d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar",
+      "sha256": "02b43c47403dd0ef6dcd4573d0744bc6bae935edae016eb19f2d4ebb5eb33722"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar",
+      "sha256": "111cbc7a359b5597085b5328ab74c2f81dd40e7211d07bd12e6ffa83d9de99d9"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+      "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/postgresql/postgresql/42.7.13/postgresql-42.7.13.jar",
+      "sha256": "6e0e4cc2d8cae902084f8a2b18728b073a6fd9d1f87c9d8bff8f298c18185b93"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/snakeyaml/snakeyaml-engine/3.1.1/snakeyaml-engine-3.1.1.jar",
+      "sha256": "59d73655cf077f154137e2d6f6f92c041a954c0b1c534c63800047a0d70a6947"
+    }
+  ],
+  "staticPolicyExact": true,
+  "previousIndependentProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41144-f03-current-batch-typed-independent-v1/manifest.json",
+    "sha256": "6afaa6ac9fa66b58490c563979f2e33a778276c143ac38a7c8854dfc7e87b39a"
+  },
+  "priorReceipts": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41142-f03-batch-current-typed-delta-static-v1/manifest.json",
+      "sha256": "d810a10f6343e5a30a6273637f7a68d4657f4b2d012358c0690c7ef1d4d6b3fc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41140-f03-current-batch-admitted-typed-delta-v1/manifest.json",
+      "sha256": "f2156ae3c6cc696047e4db759781dd8278f4504abb4cee458c1c171e26dab2d5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41074-f02-current-alert-batch-maven-v1/manifest.json",
+      "sha256": "2373767cfeaf06ab0138b4ff584901bcded516b4f12067daeee3184df3ca16cb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40482-f03-batch-current-admitted-java25-closure-v1/manifest.json",
+      "sha256": "a2a5e2dd87f9990dc5de4b4e4501eebd10772363c7ee47d5bfda350cd1a24e1e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41070-f03-alert-owner-state-final-v1/manifest.json",
+      "sha256": "ef7ffcdc03a960dc3a2f2d5246029fa244fcfd18e920092a3f804a31f7e24095"
+    }
+  ],
+  "priorRawZeroReports": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40482-f03-batch-current-admitted-java25-closure-v1/spotbugs.xml",
+      "sha256": "874cb9a84cc369d8979b063be2b7b17818435f60899368ecb77709d9df99b742"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41142-f03-batch-current-typed-delta-static-v1/spotbugs.xml",
+      "sha256": "8306440e33a3b670287e2dbf78607fcda0f86ec23e410d1c73e1d913d9be1a6f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41070-f03-alert-owner-state-final-v1/spotbugs.xml",
+      "sha256": "d5368808bdec3e8d32e795fa3e501982c2d58a81be18a8c5dad00b49e5b80ad9"
+    }
+  ],
+  "currentExactTypedPhysical": 278,
+  "qualifiedTargets": [
+    {
+      "className": "dev/codex/schubert/nk/batch/backup/BackupCommitService.class",
+      "sha256": "0617df8ae283495ba2942b4df133048639e435f0a4b1b5ba1f91c0fc23cd557e",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/backup/BackupFileDigest.class",
+      "sha256": "a1ec5379964ee9a19476438c6bf90aa8c511ac49a90a2210435361fb2fc95494",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/backup/BackupManifest.class",
+      "sha256": "2bd9b8c79b4ce859c4356197a171e705550b2185cb4068bf3ba3b45cc6d02af1",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/backup/BackupProfile.class",
+      "sha256": "96b8c9305804f434844f7147b2f598671b44062536e69f86dec52a3b04489a33",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/backup/BackupVersions.class",
+      "sha256": "fb610109423526e8bff897cf647626204fb0a6219db5efe0d08fa0c79228bb01",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/cleanup/CleanupStopReason.class",
+      "sha256": "352d136137331ff266a3559e821f3e8596071181bbeb51e376f9bdda5d1f81c2",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/cleanup/CleanupStoppedException.class",
+      "sha256": "0437487626b92a0fb77837681619b78d5c03136fbb08831e0749ef989aa87d08",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/cleanup/InspectionAttempt.class",
+      "sha256": "9ec15a5c75fbe7cc22b96dcc3d8c9683e4f7d0c5b1c74d0317886c2de639148e",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/cleanup/InspectorLockHandoff$Failure.class",
+      "sha256": "35ea44d72793a116ed4189f9d0971f0ccf742f3d63b6aa928cef61f9398fa39a",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/cleanup/InspectorLockHandoff$Operation.class",
+      "sha256": "248fbc55bf80d155d2faf374cf859a5cfb039fd7ff52048d0049a7b47d45808d",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/cleanup/InspectorLockHandoff.class",
+      "sha256": "a891f817fc454137890a7d26e1329a1de4c3efe56fb28f76ea367e2fa385a518",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/cleanup/LogCleanupService$ChunkProgress.class",
+      "sha256": "803f2ca4d5e5b545b23befe07a5f1597afa6a590fe66e8ed14fb3d1b6c0e586d",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SessionLease.class",
+      "sha256": "6df154ca68d2d5ed3678714bde2d36c407c8819c3496e230204ba4beb05972c8",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SqlAction.class",
+      "sha256": "686628de5254a52d66d38a6e738bb874e52f6a587f38737461a15e22b1fe8c11",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SqlRelease.class",
+      "sha256": "40f1b902338a10166a9b2f0c414f018b48c72d508aa4658fbe574ebcb9085ce9",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/cleanup/LogCleanupService.class",
+      "sha256": "71e6b4a6e5831f27d0441a6f0e618cb532753ab0b987ce5358ff68c9e0c78549",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/cleanup/LogCleanupSummary.class",
+      "sha256": "496696ca2425509b1f8a0b356a39dd72b10dd1197b495c9a7eec9e9fb0a004ee",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/cleanup/MaintenanceMutationGuard.class",
+      "sha256": "5a92d7db11591c9bedfad0b2da052dab0246d1d57761c023df803bb9dc0b6859",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/cleanup/StepCleanupService.class",
+      "sha256": "1e6850ba8cfcc433dd396602e10c804cee800e0a6d75ebbb360e0d11a4f3050a",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/cleanup/StepCleanupSummary.class",
+      "sha256": "06678074f89b2858df7895a905fe49fe009ba7425b164b279e6520a0607fcaf7",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/BackupArtifactVerifier$BundleSnapshot.class",
+      "sha256": "2845fe9fb7406c18e0d524439839bb6b073f61fd67d779468eb13cf3b8e756d6",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/BackupArtifactVerifier$Digests.class",
+      "sha256": "f8c5e26504e7ed77b32eeaadae5f059d7efa9dd48f3713254d82441f17dea750",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/BackupArtifactVerifier$FileClaim.class",
+      "sha256": "816d55b569d0e92435501a6a1d2ba5e6290c07565a7710d6dc9d2c4dda702c0a",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/BackupArtifactVerifier$Force.class",
+      "sha256": "18e2e74244a580ce7890634cfc99258e9a863e9894d18c908b73eebf6903423f",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/BackupArtifactVerifier$Io.class",
+      "sha256": "a6e3cd9bebe11c185ffabeeaddd94069d003962f98ca6c0182e4ae63ad5ace3f",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/BackupArtifactVerifier$NioIo.class",
+      "sha256": "219ad8ca896454efea1e4c4907e15b052afea90e7e830b6455d2d0e67ad21c04",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/BackupArtifactVerifier$PendingDigests.class",
+      "sha256": "f5bf3b561712068a756cc8c8504d36fc49c757379b6bfe5ce2bc8cc2ce8083a5",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/BackupArtifactVerifier.class",
+      "sha256": "71257199dd3160199fb445d028dc5dcde89daeaf5607d38d170063ac09b1c92d",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/BackupDatabaseCopy$Dump.class",
+      "sha256": "31bd2e2712ac844aede80b75b835111a26286e42513a86b30fb5cc0a413ec6ad",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/BackupDatabaseCopy.class",
+      "sha256": "f00f84517a0c6b2906f5bd98d361f1f84972d7014196c20469c36147ad19228f",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/BackupManifestCodec.class",
+      "sha256": "c977b29ab8138367ad3fc4672d33265127c625b707d7d7f93b8af991ed32962f",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/BackupManifestPublisher.class",
+      "sha256": "60f972025f3d01cbe1d464f6ede1704ba011e729cb41406f19d39962e4c19894",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/BackupWorkerRequestFiles$ResumeProof.class",
+      "sha256": "1861146ab0bd3d49f175945d9f7cb29147c4b5d890a1f3f79d5379623dc952b6",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/BackupWorkerRequestFiles.class",
+      "sha256": "ba9397c58767c620c653df3b4c1e9f70337fe22e1c4b029d05afe59693cc67d0",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/DurableRecordFiles.class",
+      "sha256": "5b7efbc1f30cc010eed35098ece9e3e1c65d496c93c6741b328a30e6794a9c11",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Metadata.class",
+      "sha256": "3aff11212f58d046addf7200bae8a933d66a06b5605d7d9208a864661d7795a5",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot.class",
+      "sha256": "021594101a2513ed854fbd6bd328584dd415d4c390b846acdeb0aa00fd8fd87b",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Source.class",
+      "sha256": "6eac51c687c3f26434fab657166e47cb63fbb3af7bd280d822c1772439b9b5e2",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy.class",
+      "sha256": "b54efd17fc45ab0f06406c5010ecf9f1d2c028dc4a9f733f7369b2a2c86d698e",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/InspectorEnvironmentFiles$GroupLookup.class",
+      "sha256": "69e815df7c5f66b1c10470d2d2d63545b6566db62579d2e748647c47328e1978",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/InspectorEnvironmentFiles$Operation.class",
+      "sha256": "306e3b2a57d4bdfa19451bc7a9965dcb961b3d2b7eea1942a8bbe2ab9d2120f2",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/InspectorEnvironmentFiles$OwnedOperation.class",
+      "sha256": "ae746f548a856b80fa56decc46cf25d7cd34887fa131315d611ba3aa9773219a",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/InspectorEnvironmentFiles$Retirement.class",
+      "sha256": "c23196d5f3c944a735b88e2f45e9a2a38f1c3856c15ff70a2810cc76a112779c",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/InspectorEnvironmentFiles$Roots.class",
+      "sha256": "3f3ea427ccd252fa7d992dea1c1437c273dc8fc0d994384f7ce72879afb04d3f",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/InspectorEnvironmentFiles.class",
+      "sha256": "a826cb91eb76ba2b2a2b14a3728b0c3c6ca577fa14a86ca8d2804d5fa9b6ecc5",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/InspectorEnvironmentPublisher$Io.class",
+      "sha256": "03a4edabaace3c5f83b2b7fda2b84a1addf7b273f34172fa005d3046866ce110",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/InspectorEnvironmentPublisher$NioIo.class",
+      "sha256": "b7b09b69e2bea87e3ad10477c1d0f093d6014fb887d2c1d137f0fb0efa4dfcf1",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/InspectorEnvironmentPublisher$NioWriter.class",
+      "sha256": "8e73061e84f25dc018d75ff9c17ce7dffefe9443ddd9d8af4c8996a955b59362",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/InspectorEnvironmentPublisher$Writer.class",
+      "sha256": "6631f75e28c1bd23e9b68effa41575f62b0f626910e0d8fe4c0c779bf56ff921",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/InspectorEnvironmentPublisher.class",
+      "sha256": "b867476250c3a0ebec5fbf8a9b367137f140aba2219a87b2520239c21d694f2d",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/InspectorEnvironmentReader$Io.class",
+      "sha256": "fbca249cf2a46fb06d03be99b0a376918cdd9e8530fa154e8c1a84dd8d102831",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/InspectorEnvironmentReader$NioIo.class",
+      "sha256": "7c0e228e0a01a2ce5ac41ff03a30bb0faab9f2509c928d7d6bc304064ee65a78",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/InspectorEnvironmentReader.class",
+      "sha256": "2207cd79c8177e0e49e169790f9308080c6c6323c3330af532002e15827673d2",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/MaintenanceFileLock$Identity.class",
+      "sha256": "4d4a22c79ec6c27f9c69cb7e1f54679d6b92fcb9947ff4d4fe03606e6f1446e3",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/MaintenanceFileLock$Io.class",
+      "sha256": "a23a636c0894a384bf38b2f442eae65ae54cc3a0cd5ad9e7d5ade943cf030e87",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/MaintenanceFileLock$Metadata.class",
+      "sha256": "22203f4e5ca66f354ff8fd8e95ff23755afbc21abf69d9047fdb459e38ee6659",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/MaintenanceFileLock$NioIo.class",
+      "sha256": "c9fb567576c814be821ca37954dfc15b82417659f72b79b0f11316afa75a84c8",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/MaintenanceFileLock$Snapshot.class",
+      "sha256": "a71288650ce53d714456f7389063ad6fd30868f396780168cfb31de2053c20c4",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/MaintenanceFileLock$ViewOperation.class",
+      "sha256": "a8d342ddc2ecee0d2c48e96000f181f73da57ebf155d0c5b0276c7667822860b",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/MaintenanceFileLock.class",
+      "sha256": "44c896631fbaf578c9606835a9d3e542458d54b685cf2c34a06e8c16b10a851e",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/MaintenanceRecords.class",
+      "sha256": "548c5a0a2dbd9baf991a79e63472184142a4d26b621a122a05a403903ed02bb8",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/StartupAdmissionFile$Admission.class",
+      "sha256": "1584d1b3441d09c60ae11df2c1cf45270eb27589dded45d6fd155e6191bbe22e",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/StartupAdmissionFile$AdmittedOperation.class",
+      "sha256": "8771741f213b87adb0c873194d2f6a294f8e6a4816c18d4a25dcc90bf0c604f8",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/StartupAdmissionFile$Identity.class",
+      "sha256": "9aecc80445b07457ae902d6ad6d27f91610640b78ffb88f33ed1beeb6cd06f24",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/StartupAdmissionFile$Io.class",
+      "sha256": "5a31095a38568bd9156472eeeea1459b14905d8fbae233de7b9c8471515b818a",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/StartupAdmissionFile$NioIo.class",
+      "sha256": "822e04f875689dba4a8c33821d28827253844d002debc206f2c86154701900ba",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/StartupAdmissionFile$Snapshot.class",
+      "sha256": "ac1e2bae47470409b6fea3e9593b4924fd468ded899ab9b55060b097332c426c",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/StartupAdmissionFile$ViewOperation.class",
+      "sha256": "c5688cf3ccf7f5ac9a0a2cbc082f899010c609a65f93485610ff9d5fc14196a8",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/StartupAdmissionFile$ViewOwner.class",
+      "sha256": "e769318366e20ef5bc8207fc89600d1cb6b5b50dfdd83a2ffa5633570cd3c269",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/StartupAdmissionFile.class",
+      "sha256": "7985fd566b623bd1d2b48c650b4ebbc3ff67321a900b2e96cbfa12750b8bb9e1",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/StartupLaunchRecord$DigestFactory.class",
+      "sha256": "53f2f5393652374b568ab7e067528f3d91a71555c819446dff1a15dd0534278c",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/StartupLaunchRecord.class",
+      "sha256": "593ac211ee08d5c9e3a218464b1bb1c7e45fbe2e35c78340ed727273879b22b5",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/StartupPermitFiles$Io.class",
+      "sha256": "a1206afd6240c4dec38e003b7e1bf5ca791b0ef8678a7a953614ab70d1f5d28d",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/StartupPermitFiles$IssuePhase.class",
+      "sha256": "2941887d486589acff12d5cfef5fd148a60df7d2384fd22f60157cce39860c3f",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/StartupPermitFiles$IssueProof.class",
+      "sha256": "5f1d6f2e0c73e374f935ce170b108e382da9f7b9e4b2d8c01b501e77c7163ebe",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/StartupPermitFiles$NioIo.class",
+      "sha256": "56e247181c3e41aa34a446dd9f2f2bf3e75cbd39af06134f8f89263c1c22530a",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/StartupPermitFiles$Parts.class",
+      "sha256": "76df940c9e7f7a473aef2c312b2ea424ab7acdfea3226932b004719513123ec1",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/StartupPermitFiles$Revoked.class",
+      "sha256": "97cc63deedda342ca134c4d6eae6d8ae1fa13ff7bcd0e3467168a81cd028eb90",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/StartupPermitFiles.class",
+      "sha256": "f77a47a7abfa529e5dabdd9d0c07558a956978253185b1d6cb045875e993e540",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/StartupPermitRecords$DigestFactory.class",
+      "sha256": "df3f0c5dcd51c5b6f3e49ca5aeedd2f02316c60db48ca2e2a64676b2c4e0758e",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/StartupPermitRecords$Epoch.class",
+      "sha256": "21005a80c1ea70a864765494277d972b02f931a3b76b6a14decdb95a23f997ee",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/StartupPermitRecords$Permit.class",
+      "sha256": "e2749fc30a8ba699fc89a57b1d56d2e7031524d50a1955ad064f51c8af62f421",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/StartupPermitRecords$State.class",
+      "sha256": "b6d6b92fb6746368670a8f45c05c5f26b89d407c3615cfc05f3d96da98e621d9",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/StartupPermitRecords.class",
+      "sha256": "1c711ad98268041eda2a0b46a641d7d157b0c71dca7b5f88ef8e39e83c5ef53d",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/TransferCleanup$Counts.class",
+      "sha256": "7f2dd231b95f44e9b3f7f234f39b9981f7a6f2252babb56617a5a087b6d06d9c",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/TransferCleanup$Guard.class",
+      "sha256": "1d29d76e804477a949f93a504c9d0419d9e1e62f70ffe21c199d2952dcc774b6",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/TransferCleanup$Io.class",
+      "sha256": "eefbb1941e7f70bb2e9787ce3b0e8df3ef8a436d0c23d401a300a9deff68f718",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/TransferCleanup$NioIo.class",
+      "sha256": "07b83da046f7109c82e6d53f10711bd7732411547c63de3dcf5b164dbd03066b",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/TransferCleanup$Outcome.class",
+      "sha256": "85524678a1d7b7d7ac753955631045fbd432220cee679fcb47a584448bf9b3cc",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/TransferCleanup.class",
+      "sha256": "7413e318f723d6357a8537ff901497a49039753e0cd8389bc3b03ccc65b560ed",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance.class",
+      "sha256": "9b38a3b425429d131cdc8704285df173c55ad4c05e5c860dd4a815b60c5b23b9",
+      "measuredBy": "PG41070"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition.class",
+      "sha256": "49b34f2b7a8daa57055566a0b422f3a80370b51f2a50355690404f16c07e731b",
+      "measuredBy": "PG41070"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event.class",
+      "sha256": "5d3a5f35f93162b0294e2dc423ec12f650d18fce7ea13d6dd1893445ddcfbcf7",
+      "measuredBy": "PG41070"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service.class",
+      "sha256": "f363d58c5d7172041618f095846a5c28b8079e63c430c99b0067a2858f469bb5",
+      "measuredBy": "PG41070"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity.class",
+      "sha256": "4a90d8e671376316fe3af1709ae3ed7f91e4ab0cee8a8d8a2bcec405ade38ca6",
+      "measuredBy": "PG41070"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State.class",
+      "sha256": "1d140156f6787265537ad923d4c2bb2da3b43cb0373353ef1034cf8aaaafd246",
+      "measuredBy": "PG41070"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.class",
+      "sha256": "22207ad4d75fcb65bd63f4161cf65f2ab2c60d94ae66268fe9357364e8c47a91",
+      "measuredBy": "PG41070"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/AlertRegistry.class",
+      "sha256": "c5afca254eee0e556e3e04ade3eb141e8a821864a693580df2b00bfaeea83674",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/AlertThresholds.class",
+      "sha256": "920342ff7ee7befb1e892e83e41e0ee2c1b363d4e47d115f10dc5a48ca298a77",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/AsyncQueueMonitor$ByteUsage.class",
+      "sha256": "cb30ddcdeb9a2b8a1e651f9e452f34e6a8d09f7a21d28aaf96591239463f9fc8",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/AsyncQueueMonitor$Evaluation.class",
+      "sha256": "6db71205155fa9787fafcecc901f985b4f3618afc75358026a3e9548864852c3",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/AsyncQueueMonitor.class",
+      "sha256": "cc02a1f97e9d6071eb6b0b2db6f422640eafbeb4143127e3e0dbca39c4e45307",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/BackupHealthMonitor$Completion.class",
+      "sha256": "a67f3c08e8c0fa13ba9dcaef59add7207326dd81ae39bc895d6100b5891b7c3a",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/BackupHealthMonitor$Evaluation.class",
+      "sha256": "6713848beda114c369990df71f9010102d7264d2e29f94d2d6397654c5d6804b",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/BackupHealthMonitor.class",
+      "sha256": "ba6d6eb9ccbd846cab675c3c3cece348ba00eb268dffd9109ae6d6dc309ead34",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/BatchGcMetricRegistration.class",
+      "sha256": "ca1da1e2b22d70ad4a648a573f098c51b43a6643ec6194a4ee768c433913777d",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/BatchJvmMetrics.class",
+      "sha256": "fb01b1e2f2222967ca09f4bc300d80116225d070d4f217c9096abdd82f887fe8",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/BatchMetricContract$Status.class",
+      "sha256": "04eea81c82f2f3ebe325fb98b562bd6b3f534d7c10ab757790836c802dfbeed9",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/BatchMetricContract$Step.class",
+      "sha256": "577169daf95bbd68e6bd847af9ec446bae7fd4731557f1bd7b304ddb83bccf97",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/BatchMetricContract.class",
+      "sha256": "6bedbe3fa4e9bb08b73fd91afde4586f56c077752d9440df830a5387e8760044",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/BatchMetricLabelPolicy.class",
+      "sha256": "7ff31e8a57d2c55a6e83369abbe795c23d5eeadcd563622b6c5d0a0280993ef4",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/BatchMetricRecorder.class",
+      "sha256": "d201ac6a8b2aa22ffde9fb98b4d0e5c5fec823677078c1866825ef01519cafd2",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/BatchMetricText.class",
+      "sha256": "e05d2cca6893c2ea2e463e2e5238e1f29db1b971832c5a97f0437f2b61de0c0a",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/BatchStandardMetricSource.class",
+      "sha256": "806ec1988d799a9a0f97f214faa08609ccf9921053f0b779d65a2d57023ea052",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/BatchStandardMetrics.class",
+      "sha256": "1b1ce4b2992e3db33ecbd76d1b90e871008a6a339785ea9bbb48461dc30a3906",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/BatchSystemMetrics.class",
+      "sha256": "7cf54d1089fe975663f1e8f329d8586afdb12c80c8b2809a487362a9f59aaf6a",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow$State.class",
+      "sha256": "414d1fcfc1ac0eacfb2f301b62a152e96411dc4971d86f38b113f414efb318c8",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow.class",
+      "sha256": "96863ad92123629c637304bb9d122efc8822d1b61798213ac8e59617fc98bab8",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/DlqHealthMonitor$Evaluation.class",
+      "sha256": "33b958d25e1d01ebc0d23094f6fa17a3e007f1929da77cb0df29f85cd040342d",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/DlqHealthMonitor$Observation.class",
+      "sha256": "0ecdb1ffeb207cadd40d7bbf4c57c3ff6cea30a376df3729ee715f0a277a00e7",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/DlqHealthMonitor.class",
+      "sha256": "56e81b4b26386ef9e00740f5eeb430bbcc82ba99aede80fc9abd09a9a4565870",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/ExpiryBacklogMonitor$Evaluation.class",
+      "sha256": "5ef5d98709842d33780fba6e82e412c7d7468209480c4354f60cd4adc340e864",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/ExpiryBacklogMonitor.class",
+      "sha256": "32613d1ffd47b12059809bceb4c66f20376638c7ba564af97bff7794c9c33c99",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/FilesystemHealthMonitor.class",
+      "sha256": "4b5f52e679e8ab59441f3dcc783677f8ded48cc11a1779d92cb9f14d13687f52",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/FilesystemHealthObservation.class",
+      "sha256": "ca314ebd93bda5f4b3db6b8d9652dec54b9976a75a0fcc9ed7fdef670a73d3c8",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/HealthUsageRatio.class",
+      "sha256": "15c78c469d3c863d097183bacbbffeb05b2ebcf9f3d7b6744cd12f9c87d78e12",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/IntegrityFailureMetricRecorder$Area.class",
+      "sha256": "1f3742c0fbb19eb11f0c383be9642fe2d33af0a2f83ec12b2124dbe35984ae5d",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/IntegrityFailureMetricRecorder.class",
+      "sha256": "766c9428ee115516db9542650f4ef8402c805bfb3d258f4463ed34bc13a98b36",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/IntegrityHealthMonitor$Evaluation.class",
+      "sha256": "4cd38baabcdac53783d9ef4316d990e2ab778dcab133b477ce21ac827c3baa54",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/IntegrityHealthMonitor.class",
+      "sha256": "f1518d3e9ca2f22c5fb48c126cb28f5ee436c1014b9ce9d18925c0c6ed9648bb",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/JvmHeapHealthMonitor.class",
+      "sha256": "a33e0bbdb9bd97fef9b5229e4c6f49a899bf94daab9f341e520ef556f1ca412c",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/JvmHeapHealthObservation.class",
+      "sha256": "c57e6f824c701922ab3c2c4c6d5bc52a7e98de9ad2936e9a6aa0cf8611b06fd5",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/MetricContract$Kind.class",
+      "sha256": "3437405816efa5b8685e06f6af4f27f647085a92c16ef44d38bbca651761ffdc",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/MetricContract.class",
+      "sha256": "452824388b2830e531c85f63e6b8d2c41e05d1b441c882eeeb4439045ac54688",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy$DetailService.class",
+      "sha256": "53bce391602d55efcd738c5ad704d71c5aba4ef5fbb73f034baecd529418c3c0",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy$RetentionConfiguration.class",
+      "sha256": "f52c50c1883813b4f160e56086484749d53c001776981eb10a2568198815f89c",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy.class",
+      "sha256": "fefef8ba8ca8aabf3767af91e4e9b44637be8c7469bd61afe430685abf5c3312",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClock.class",
+      "sha256": "3e4ccfbd83e8bf28cde448b8ac493008416e915553f1c26610619fb2e2e95b1a",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine.class",
+      "sha256": "a3b1fbb10a66f67330d01cdb9676ca98de849ee834a591e8c64e1ae62bf9f2b9",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/MonitoringPoller.class",
+      "sha256": "417e264c4f703f02968f7d619978e9d8aba9a65ce5e64f7e950ed8eb42ae3024",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/MonitoringStatusText.class",
+      "sha256": "86cc2c9090684658f6f066d89e9eda832a4c1bd41c154f54d2e5e59420948a48",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/ObservationContext.class",
+      "sha256": "b3ff5e32cbbc02848950edf814043343fb53c25eda1968aa1e8ae4dafed23644",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/ProcessRestartMetricRecorder$Reason.class",
+      "sha256": "de173f30a08a53f31e87ce07747eefb4c8c2cfc5f7bf72707f0f4e602b6589c3",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/ProcessRestartMetricRecorder.class",
+      "sha256": "62045fa6714ae03ef01c3da350f4d1ff0070dd71a35f9e3fb8b9ce52c7b06acb",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/RestartHealthMonitor$Evaluation.class",
+      "sha256": "c5fa3ece61c14c7f8ca763abf2396023c777d2393afb6b7577b90aa3324b61ac",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/RestartHealthMonitor.class",
+      "sha256": "3283ff32ba8bc0b61735ee0ebace776699e0092bd88ff0483f6037b1dccb3918",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor$Evaluation.class",
+      "sha256": "4520f34677461a9938ef53df0005cef519fcd935275bd3760972c9634e2bca12",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor.class",
+      "sha256": "0f18aa9ad5e074a9a1cfeada37aed02086fada5bb5df6ec11cbccc27c5b90c2c",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor$Evaluation.class",
+      "sha256": "1b38b075d743689baed82583394134b4734758880cbe2ce1c895272cf4e7cce2",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.class",
+      "sha256": "233dc72748d99e918d39f9e5889dd4c91de32013291d9b927a8aaa7249daa3e6",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor$Evaluation.class",
+      "sha256": "4c680520112c542ebbcbc5c37c1abbd0a61ea9ddaf629713d2602b8d961523d3",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.class",
+      "sha256": "f27aa32e0bd34bdf29708c97bdb42a657be14324e6238189591497ed9900ae91",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor$Evaluation.class",
+      "sha256": "0bd17c89de01ff0ec69a948aa9e8cc90f0e7682876bb718851451d5a057dc973",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor.class",
+      "sha256": "2c8fb5fe3474b882627f4f85163ba9fbc74fea2197d3dd4cf13af9b2e30e1815",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/TransferHealthMonitor$Evaluation.class",
+      "sha256": "4f7ad9c97774b3667fe7e096108071de561c540c008b74f7e004ef879696fd22",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/TransferHealthMonitor.class",
+      "sha256": "930fb2d0f0b625fed4bb48fc9aabeea2dfb1f6aaf70d302e4290f27a64a30bae",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorder$Counts.class",
+      "sha256": "423ee9fb32f0c0ef09ab95dd504694861c56ddd84cf71253cd6eaa31db1d0f2a",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorder$Suffix.class",
+      "sha256": "f0d311b18e46b9340b57c284991829715b2d5144fd4acaac02d863ce495ba355",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorder$Usage.class",
+      "sha256": "f0540acde88393a3f6642adb10e4a56fe8f85731d6b88063c8fbd9d00e2343cc",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorder.class",
+      "sha256": "31acf6df095f2e777e7b8cc5f27f0c096407b474eb14a7e41a25ad543f4936c2",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/WebLogBacklogMonitor$Evaluation.class",
+      "sha256": "a5bf5f8fdb47e223bb0ba9670c958fa2992bf45393eba51b2b9c006444eb9d92",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/WebLogBacklogMonitor.class",
+      "sha256": "38acfa453bc6fb6ab025392bb3c003034fe963e698c1a546bf8c8e2ee5e3edfd",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/package-info.class",
+      "sha256": "be87566494520630402b9cc7c20713ac5fccac9b97505cbe551abc6c24843077",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/mq/ArtemisAcceptorReadinessClient$Reader.class",
+      "sha256": "0fcdbcecd86ecc607eb8fda840b5239d751f63cd739393a02110db9f2b893808",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/mq/ArtemisAcceptorReadinessClient.class",
+      "sha256": "00c32585ebd263e17f094d56f9e3a2ae7a59d2437e0d41b4e5329dbba7000bc2",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient$Capacity.class",
+      "sha256": "5618e995249724c12bdd434a43ecaa4d7f1a2ebfa1f5f322a28f249d2dd4f56e",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient$Reader.class",
+      "sha256": "88260528f64947ac26d8bd1c442ccfc822e18d3862e9363be23a54da79ca38f6",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient.class",
+      "sha256": "97257cd5bcad63584d806684e9070890be8c2e6cd131d7d4dcb0c92093761856",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/mq/ArtemisExpiryPurgeClient$ManagementOperations.class",
+      "sha256": "915b60d1e83c42b0cae779091f91492e6bfad59bdf38fc5466e5198e96792e25",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/mq/ArtemisExpiryPurgeClient$Observation.class",
+      "sha256": "abcc22943aee4dff832fa539f58944fa0bff8ea6c820af384ed2bd5c7eafc9d0",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/mq/ArtemisExpiryPurgeClient$Operations.class",
+      "sha256": "32399adc4c3c1920e9d5da945de592b8051452e8665575d4c5eca52d776347f6",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/mq/ArtemisExpiryPurgeClient$Result.class",
+      "sha256": "efef4b952e6d5bf4d406f74604e69a95f3e00c93d5ed9ed28c522e2b063008d3",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/mq/ArtemisExpiryPurgeClient.class",
+      "sha256": "d0ab45eafbec8e97f11ee72295020cd4df3b39ab5925bb4e6ce067b966821d17",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/mq/ArtemisExpiryPurgeException.class",
+      "sha256": "380437bcb27e8713cf2294afdda5d4e15263afc12d4c75ef9a0415fbdf80eaa2",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient$Exchange.class",
+      "sha256": "6642abae5859766a6a26cec5ff43d676d01b6c94b4c95684c7afcea574832bbd",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient$MessageWriter.class",
+      "sha256": "e628da6fd8b466ce8a456b02de82b5b3ddec4df3ca578f1771c44225c383844e",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient$OperationEncoder.class",
+      "sha256": "a34c63abc010c0f653993e0380105a50d415790e9bb29fd69804ca490fefc77e",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient$OwnedOperation.class",
+      "sha256": "e12b91bf2034a3b0eb7fe3dfc38bdbb0a7b37f9b9a09df676c130bcad500338e",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient$Reader.class",
+      "sha256": "edff644f0272d806f69a25ecadc1395635ad144d65d5aefb7f420edd5f4e3e8b",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.class",
+      "sha256": "460c2ec75f80ec0bcdce6030c6a325f0783d684bdda2887a28993a3cbbc395de",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessException.class",
+      "sha256": "8627598a76bc181dfd29e277017201126c34ea74b44d7fdb3f696bc5dfde488d",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/mq/ArtemisQueuePressureClient$Limits.class",
+      "sha256": "fb6e0937900c9ed26c8a7c0468aa5da5a9c8af210bc43cc1057b96048e53312a",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/mq/ArtemisQueuePressureClient$Pressure.class",
+      "sha256": "bc3f280e53376f940e152c9432d8af509bbccfb3b031a694255669ed4856156f",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/mq/ArtemisQueuePressureClient$Reader.class",
+      "sha256": "7aa5164ccb681bb3c1f367df803c59ae52edf8cd54866dd71a3a4c352eeeeb7c",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/mq/ArtemisQueuePressureClient$Value.class",
+      "sha256": "4ae7521075bf46ab9848fdb2deb7e3aa751ab998a1a406a0c1bfd09f69babfe2",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/mq/ArtemisQueuePressureClient.class",
+      "sha256": "5cb48867f74f3049721234f8f5e01c31044a1a72af0a5439eb0e06cf686a04af",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/mq/ArtemisReadinessClient.class",
+      "sha256": "c85da27b944d6657a75a841483ba38ba653f6015be5c597aeb129864e6b2eea1",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/mq/ArtemisReadinessException.class",
+      "sha256": "48b00301ad4b12343fef7ee43df9339977e3101437c8531418c20107054e43a3",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient$Reader.class",
+      "sha256": "882d2ff6c57e36efb8faf7aefb16c8950aa68f3e1165c8ce6569b3b82140d3c4",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient.class",
+      "sha256": "402302b2905330e2a638df22328757d90b19fb57cd7b04390c8bf555386e76ac",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/mq/ArtemisStartupObservation$Evidence.class",
+      "sha256": "b5550b056bfdcc6c3472e3fc9b4c413c1ec1fcb2f9724ea08d52af447890f23f",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/mq/ArtemisStartupObservation.class",
+      "sha256": "2d7614909c8cf0be136c735b31e8ccffb8b23d63ad741acb3d17fcee563783e2",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/platform/ApplicationStopGate$StateSource.class",
+      "sha256": "101c2c3dfa03fa19f972ef80562a8b01d314d30e10ad6db33964b82da6790f54",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/platform/ApplicationStopGate.class",
+      "sha256": "2a80212de4cd6ef59781dce8c428cbd5d6c6a4debe7789a4befc9673bc15371d",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/platform/ApplicationUnit.class",
+      "sha256": "3f2f17a98650fac9a84d440b2e5f6476b79a6e67a8a84d117b0ddc1e5cc565ee",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/platform/BackupArchiveProcess$NativeStart$Pending.class",
+      "sha256": "10b2fa913fbddcda1efdd8c8f5de94007fb86ec64cdfa35387b7bb41b62efcbb",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/platform/BackupArchiveProcess$NativeStart$PendingHold.class",
+      "sha256": "cc583b32ed6d94e942940aaf884e3fa00ac51ece4f11c18f4cd954f1db42bbbc",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/platform/BackupArchiveProcess$NativeStart$Pipeline.class",
+      "sha256": "a80d0d1ca845e3af3f252b9b1f02cdbb3f64a935ec072592200f641bb3607d4f",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/platform/BackupArchiveProcess$NativeStart.class",
+      "sha256": "24956cb2d9a5c87b054fcc7e96d77b6bf01e32edebc9fc00bd802531e34ca28f",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/platform/BackupArchiveProcess$Start.class",
+      "sha256": "f02fac2dbda7d27b132a1e798e2c5789efdaac86898c86b6f9eeffaa0ad65f08",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/platform/BackupArchiveProcess$StdIoOwner.class",
+      "sha256": "733ce7b23358a20b75ed5dafa1a91e3b1d2c35588da46723cd9590b6d6c206f0",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/platform/BackupArchiveProcess$TerminalPlan.class",
+      "sha256": "ee4c7576daeed9b370346c7ea06ab71ce71bb971b59588116b4e2dcffc9339fc",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/platform/BackupArchiveProcess$Work.class",
+      "sha256": "ae87e85538ed0ea684c502a93f6f5ebf3406ac8577eda4ef7d670727bb7f1431",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/platform/BackupArchiveProcess.class",
+      "sha256": "4f187b9e292a21a165d1005bf0ae5bafbb02b4c58a8515e81bd00d2f773f961b",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/platform/BackupWorkerRequest$Verification.class",
+      "sha256": "6d243658f47be93b35761dcafc7e3576e06fe76c6d86958eb273a8d467e2a82f",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/platform/BackupWorkerRequest.class",
+      "sha256": "89ec0ed541c480766d4a8fec30417ef6620b7814b6778d8258aa23790ff59d5a",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver$NativeProcess.class",
+      "sha256": "bf0471c50b13f0ebace124237bce0e3f0c1546fc7d4d6847d62f6306e9adb0f2",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver$Start.class",
+      "sha256": "0915dbd0a03c613a052da93796bedfb0bda4bcc830177abb57e548d78e707ca9",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.class",
+      "sha256": "32ff24b184e9ffecf43d7644e7e0b058ab5046385e5f93526990d777c81b8c8a",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/platform/FixedUnitCgroupNamespace$Context.class",
+      "sha256": "3db6643dc7f0b501012f5007f93a2280d46079688359221fa192a725422bc1fb",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/platform/FixedUnitCgroupNamespace$Identity.class",
+      "sha256": "69f45563a9fc51ceca096c56973dee7b0fb667cd9fd8daa00f326f3f4ddfc3c4",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/platform/FixedUnitCgroupNamespace$Io.class",
+      "sha256": "021e7c9c8ef02fff5decf6f736446da0f9c015dbdf879da72f9ed4f200727068",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/platform/FixedUnitCgroupNamespace$Owner.class",
+      "sha256": "354205b7309a8a92701525e58191a11ef5baec3cdeb1c53989c8cc6cbe4fcbbb",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/platform/FixedUnitCgroupNamespace$Snapshot.class",
+      "sha256": "455b65f6203596fd0b2baa342d419945b3e1a7b5dae9e26294ccf8030a7b3c8e",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/platform/FixedUnitCgroupNamespace.class",
+      "sha256": "f56f02f43392fed0e05d1ebae7fda90d22b4ac4605713209e9bfaecf7407df5c",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/platform/InspectorRunEnvironment.class",
+      "sha256": "9944ba155d19917a4d3530bb20161ab90d5c27c5ee54dc56e56e694d784d3f7b",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/platform/InspectorStaticEnvironment.class",
+      "sha256": "19be739e4fb6bcd46a3a9e490fb180c4dd68d727ff0d2f5bb5fbaafcf9a3bc9d",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/platform/MaintenanceStopSnapshot.class",
+      "sha256": "24215a68cad48c13b84d6a7180eda4ae6b2aebee3e126c96cb4f31938ddbe969",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/platform/MaintenanceUnit.class",
+      "sha256": "650b3540616c612413d26e8f3be0c1ced71271b861fb06a1f7e00d1908176453",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/platform/MorningParentBudget$Clock.class",
+      "sha256": "e74252ef43f9c93a12541e4815fb571847b1fa93a76017f8819ffa421e1ef9db",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/platform/MorningParentBudget.class",
+      "sha256": "dbd96262b775acfbf452fa7d6dff368821f1fc8e0cbb87afcef0fa573da4622b",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/platform/ProcessResourceScope$OwnedQuery.class",
+      "sha256": "286c99d6f12932ef9275f827241820d6744f60dc8b353f323bb67ce9ee36a275",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/platform/ProcessResourceScope$QueryWork.class",
+      "sha256": "0a24bbc33e15cc060bacb2ba1d6ebd4982e2d15015972a0eb4d3b9489dd25c1f",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/platform/ProcessResourceScope.class",
+      "sha256": "71b77902d02e6e16594508d4913bbd2bb2ac2dc4873a3a2fd77a360ec2897611",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/platform/StopGateException.class",
+      "sha256": "c17fa221e36f0a1d5750d2ee57701cb61ca09960f871aba434d79b1bb2ab6318",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/platform/StopGateFailure.class",
+      "sha256": "8a52a783cb7f59c6d51fa3f58ff10a0a24e2bdc194a0de8f4c5605512bba57a5",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/platform/SystemctlStateSource$NativeProcess.class",
+      "sha256": "54fd61eb294eb7b9af09a23816dd93374d24eb7cc985243c7dc9795251d7d8a7",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/platform/SystemctlStateSource$Start.class",
+      "sha256": "67488d446a5ff78e62ef1eb3f980127b7c92c0e9a228e1d90bca09bc0d5c38b7",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/platform/SystemctlStateSource$StdIo.class",
+      "sha256": "770aaed94a3aa93d37ed5f8acc803e9022c0a8b8303b388c0a00277d0f5cb87f",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/platform/SystemctlStateSource.class",
+      "sha256": "c08ab7df640318f4edac000b9fb5484b4354232ae973bb073fdd57c1947eacbd",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/platform/UnitStateParser.class",
+      "sha256": "363c72a5943d3dae19beb82bbc6ba6d68e64779061f57f152dc7069d5ac81ac6",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/BackupFailureSnapshot.class",
+      "sha256": "979fb29398cf3c463b84055e5f7c45c57b8c402fc90c09fd87376d3b3b3ae334",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/BackupStepRepository$Terminal.class",
+      "sha256": "cca7bd3bd491b637229a389685b22c5f697bdf410fff073a3b1c876c3e09e1fe",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/BackupStepRepository.class",
+      "sha256": "9056b3e7a2f02d5450f9fd98b6900f45b99c76513eff9dc10799a3d4ffc1dc10",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/BatchRepositoryException.class",
+      "sha256": "391b1aac7be2dd58cf9c3dee11cdd12941417fa7d029513475dfffbe4a3d2cb1",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/BatchRun.class",
+      "sha256": "5cb0c42832ea17425dbf60da6025f2c4783d687e665b18f6cd8e88abc399c909",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/BatchRunRepository$History.class",
+      "sha256": "2172a69e3d1bdff745f95f92c9e90b899ac2d770c0718ed43d0cd77bbd95763b",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/BatchRunRepository.class",
+      "sha256": "7d699ca5b8356f1e9c15b8feb6f290d5c8fc55df72ea57c2426890c16a670b80",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/BatchStep.class",
+      "sha256": "06e90b35ca09ac687bfd480caac794fa7be6a47dff9db3d397e682f75f010b1c",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/BatchStepAttempt.class",
+      "sha256": "d61f86c115e29d12da29964711253fcd3e8fc64b8cb2d263efd87702295ae547",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/BatchStepResult$Reason.class",
+      "sha256": "5006eeb26f8c82ba35e7830649019b41125edae1d8e396cdd411fee2f82830a7",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/BatchStepResult$Status.class",
+      "sha256": "08893a338b6e7ffab7272cd1789215001855261ec7ac0a4dafa92f41af5a3a27",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/BatchStepResult.class",
+      "sha256": "d30ca3fc460ebcceb4daee963ab618f582adb9dfdd916e9daeb51f3207a77417",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/CleanupChunk.class",
+      "sha256": "470f2248050af33a7688e5f4a926f0b1a24763c1ecd0c4d10357c0f1ad9b0645",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/CleanupCounts.class",
+      "sha256": "09355389bf26d39779e3184b7dd995978314ae00b833e468fbd5078408265af0",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/CleanupKind.class",
+      "sha256": "f7e6207a992c3f5236caeec30a26601e08743614230e2a1bcdcb7959a83e8556",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/CleanupReason.class",
+      "sha256": "2d662a78aa8d04b9672f41444e168627aa6facd6cf7f0c1eef5abd66160f0550",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/CleanupRepository$StatementFactory.class",
+      "sha256": "5175193ec974893aacb025bd793bb2b411046950585320e8124886af320ff6c2",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/CleanupRepository.class",
+      "sha256": "d5702335f6dc9c1fa71d894ebfeda39445e2b6ea834ade51de5e67008a480659",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/CleanupStepChunk$Reason.class",
+      "sha256": "456ba589cfa90409cf84ef51075c46cd837aa2b32eff02f28fd43f80bf726bba",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/CleanupStepChunk.class",
+      "sha256": "4584b0b2ae603a5542c5f2282d9df81dd95e161710c1e8bdeac5c70044e1b6d3",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/CleanupStepRepository.class",
+      "sha256": "f1ffaa7a3fd3f40a2f1b4cc9e61a2120597e087827832424eee98c2506cb365c",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository$Entry.class",
+      "sha256": "2e11a77e71576586b44d0febfbdaefa384141c638c8973aef6b83e83a3019aaf",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository$Projection.class",
+      "sha256": "22ecc77c19041c95338b0aed303ea0e3e29534315cebe5f2cf2b6983c3f8af5c",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository$RejectedEntry.class",
+      "sha256": "13b74bd62a27d2e60077c30feecf721dfb7ac22b9f29ce988d655f867b27b7f8",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository$RejectedSnapshot.class",
+      "sha256": "f67bfc551b345e6698f2b10b1889125c45963a1ee5c5d82351f895b43c0e2564",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository$Snapshot.class",
+      "sha256": "820d3f0d9b45d95b47a407575e1dc8d44c9cee16b91e7b98e681ab1364a8a468",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.class",
+      "sha256": "200e23c6fa5fd6e1aff5afc61780f5883b1d8f5b2521163f98f7479f24ca581c",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$JdbcAcquire.class",
+      "sha256": "1e9bd6959698e28f0213098be7c8909bd5573786e6eedb88fa85b85c153c3a8e",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$JdbcRead.class",
+      "sha256": "9fedde7f8fd2ceda99d2604384b72209ae3005228b7bc423f9488a19fdc69c51",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$JdbcRelease.class",
+      "sha256": "c298098ef1fb8aa9aeb21680df29bc093ee0bebb4156678779fcf51796f7fd9e",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Prior.class",
+      "sha256": "48f91fc8d3240de710b61c1fc2988d97bf09c33f26f7e67401f0c29f427e67c4",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.class",
+      "sha256": "2394756c3a558df38394db0e03b2bb27c031812e13ed361c7b126d63a611aa97",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Stage.class",
+      "sha256": "977ec26b8b12d01f5a252ddf54892712b222b9d8a1469b9e9ce0223b3851b28f",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.class",
+      "sha256": "534463dfae829916b8a201751f40e2409ddf678763d8a6d843545caba36d1a93",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/InspectionSummary.class",
+      "sha256": "19c6fbf30f92ee694c9ada985f1309851ffaa157474b4b1483e8d337edd3bd03",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.class",
+      "sha256": "0c44a12880351913a9518c4a8a89ae7e1754cd66cf0b1c138505c374e92902dc",
+      "measuredBy": "PG41142"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.class",
+      "sha256": "f181015412f1f293e91c0eea24a3ac33127d5ef5015f3dc9fb73ac732e0cc009",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/LogCleanupProgress.class",
+      "sha256": "ef8401701e2d1d0466b7e59db0304b9c2977fadf91c15e591d93340cb8ecddc2",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceActivation.class",
+      "sha256": "4a62469824f074982351f4f7016fff4e38fcb3825a5af54c77ae86babe9e05ae",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome.class",
+      "sha256": "a5e9c7c1005bb63c72d4d950f6f628fcb0831f3dcd0881c3be002736189b8c13",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion.class",
+      "sha256": "876b2a03fc51c860acf7efe94b6287e9e5c87218d42e24bee995b0aee69444ba",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceRetirement.class",
+      "sha256": "8fdc817a2c446af11b241f97fd5146d8ca9c706e9c4fa1d612496624c09da269",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceRunState.class",
+      "sha256": "f6725e7a0f3f2a0b7221dfc9461b9cda79157431260922f8744edcea67f04659",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MorningSqlFailures.class",
+      "sha256": "b6a48094215f1b1ceafa5e9d696c8a1b5b7f49f19915b6a357fca5625364a0a0",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/RunReferenceRepository.class",
+      "sha256": "dc394e1d15ba729bbecd4f895c264b3adb042233f8ac7d603cab68d6e91682bb",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/RunReferences.class",
+      "sha256": "9cd7197824647e7ad066678a66a54bfdf196f0251027bebeb765b6babd8d8fe2",
+      "measuredBy": "PG40482→PG41140"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/SuccessRunLookup.class",
+      "sha256": "ba6a3cd7a9d176ed849112546d0ad7bf3aebc9d22a4527c0bfd834247adfc525",
+      "measuredBy": "PG40482→PG41140"
+    }
+  ],
+  "candidateDeltaRequiringRepeatWithin278": 0,
+  "olderBaselineDeltaAlreadyProved": 79,
+  "currentTotalBatchPhysical": 647,
+  "unmeasuredPhysical": 369,
+  "explicitHoldPhysicalNames": [
+    "dev/codex/schubert/nk/batch/file/RootBatchCredentialReader$Io.class",
+    "dev/codex/schubert/nk/batch/file/RootBatchCredentialReader$NativeIo.class",
+    "dev/codex/schubert/nk/batch/file/RootBatchCredentialReader.class",
+    "dev/codex/schubert/nk/batch/file/RootCurrentPermitPreflight$Observed.class",
+    "dev/codex/schubert/nk/batch/file/RootCurrentPermitPreflight.class",
+    "dev/codex/schubert/nk/batch/file/RootFailedStartRecovery$Evidence.class",
+    "dev/codex/schubert/nk/batch/file/RootFailedStartRecovery$PairEvidence.class",
+    "dev/codex/schubert/nk/batch/file/RootFailedStartRecovery$PairProof.class",
+    "dev/codex/schubert/nk/batch/file/RootFailedStartRecovery$Proof.class",
+    "dev/codex/schubert/nk/batch/file/RootFailedStartRecovery.class",
+    "dev/codex/schubert/nk/batch/file/RootReleaseApprovalReader$Gate.class",
+    "dev/codex/schubert/nk/batch/file/RootReleaseApprovalReader$Io.class",
+    "dev/codex/schubert/nk/batch/file/RootReleaseApprovalReader$NativeIo.class",
+    "dev/codex/schubert/nk/batch/file/RootReleaseApprovalReader$Operation.class",
+    "dev/codex/schubert/nk/batch/file/RootReleaseApprovalReader.class",
+    "dev/codex/schubert/nk/batch/file/RootServiceAdmissionScope$Exclusive.class",
+    "dev/codex/schubert/nk/batch/file/RootServiceAdmissionScope$Gate.class",
+    "dev/codex/schubert/nk/batch/file/RootServiceAdmissionScope$Work.class",
+    "dev/codex/schubert/nk/batch/file/RootServiceAdmissionScope.class",
+    "dev/codex/schubert/nk/batch/file/RootServiceCredentialSource$1.class",
+    "dev/codex/schubert/nk/batch/file/RootServiceCredentialSource$Work.class",
+    "dev/codex/schubert/nk/batch/file/RootServiceCredentialSource.class",
+    "dev/codex/schubert/nk/batch/file/RootServiceExecutableAdmission$Capability.class",
+    "dev/codex/schubert/nk/batch/file/RootServiceExecutableAdmission$DigestFactory.class",
+    "dev/codex/schubert/nk/batch/file/RootServiceExecutableAdmission$RootDescriptor.class",
+    "dev/codex/schubert/nk/batch/file/RootServiceExecutableAdmission$Work.class",
+    "dev/codex/schubert/nk/batch/file/RootServiceExecutableAdmission.class",
+    "dev/codex/schubert/nk/batch/file/RootServiceFacts$Facts.class",
+    "dev/codex/schubert/nk/batch/file/RootServiceFacts.class",
+    "dev/codex/schubert/nk/batch/file/RootServiceLauncher$1.class",
+    "dev/codex/schubert/nk/batch/file/RootServiceLauncher$Admission.class",
+    "dev/codex/schubert/nk/batch/file/RootServiceLauncher$Measurement.class",
+    "dev/codex/schubert/nk/batch/file/RootServiceLauncher$NativeAdmission.class",
+    "dev/codex/schubert/nk/batch/file/RootServiceLauncher.class",
+    "dev/codex/schubert/nk/batch/file/RootStartupPending$1.class",
+    "dev/codex/schubert/nk/batch/file/RootStartupPending$LaunchRead.class",
+    "dev/codex/schubert/nk/batch/file/RootStartupPending$WaitIo.class",
+    "dev/codex/schubert/nk/batch/file/RootStartupPending.class",
+    "dev/codex/schubert/nk/batch/platform/RootReleaseAdmission$DatabaseInspection.class",
+    "dev/codex/schubert/nk/batch/platform/RootReleaseAdmission$EffectiveConfigurations.class",
+    "dev/codex/schubert/nk/batch/platform/RootReleaseAdmission$Loader.class",
+    "dev/codex/schubert/nk/batch/platform/RootReleaseAdmission$NativeOsIo.class",
+    "dev/codex/schubert/nk/batch/platform/RootReleaseAdmission$OsIo.class",
+    "dev/codex/schubert/nk/batch/platform/RootReleaseAdmission$Platform.class",
+    "dev/codex/schubert/nk/batch/platform/RootReleaseAdmission.class",
+    "dev/codex/schubert/nk/batch/platform/RootStartupContext$Io.class",
+    "dev/codex/schubert/nk/batch/platform/RootStartupContext$NativeIo$LinkRead.class",
+    "dev/codex/schubert/nk/batch/platform/RootStartupContext$NativeIo$UnitQuery.class",
+    "dev/codex/schubert/nk/batch/platform/RootStartupContext$NativeIo.class",
+    "dev/codex/schubert/nk/batch/platform/RootStartupContext$Service.class",
+    "dev/codex/schubert/nk/batch/platform/RootStartupContext$Snapshot.class",
+    "dev/codex/schubert/nk/batch/platform/RootStartupContext$Verification.class",
+    "dev/codex/schubert/nk/batch/platform/RootStartupContext.class"
+  ],
+  "transitiveHoldPhysicalNames": [
+    "dev/codex/schubert/nk/batch/file/BackupBundleCompletion.class",
+    "dev/codex/schubert/nk/batch/file/BackupBundlePublisher$Io.class",
+    "dev/codex/schubert/nk/batch/file/BackupBundlePublisher$NioIo.class",
+    "dev/codex/schubert/nk/batch/file/BackupBundlePublisher.class",
+    "dev/codex/schubert/nk/batch/file/BackupDatabaseWorker$NativePorts.class",
+    "dev/codex/schubert/nk/batch/file/BackupDatabaseWorker$Ports.class",
+    "dev/codex/schubert/nk/batch/file/BackupDatabaseWorker.class",
+    "dev/codex/schubert/nk/batch/file/BackupManifestReader$Digests.class",
+    "dev/codex/schubert/nk/batch/file/BackupManifestReader$Io.class",
+    "dev/codex/schubert/nk/batch/file/BackupManifestReader$NioIo.class",
+    "dev/codex/schubert/nk/batch/file/BackupManifestReader.class",
+    "dev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Gate.class",
+    "dev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Intent.class",
+    "dev/codex/schubert/nk/batch/file/BackupStartIntentFiles.class",
+    "dev/codex/schubert/nk/batch/file/CaddyPublicConfiguration.class",
+    "dev/codex/schubert/nk/batch/file/CleanupBackupAdmission.class",
+    "dev/codex/schubert/nk/batch/file/CleanupExpiryExecution$1.class",
+    "dev/codex/schubert/nk/batch/file/CleanupExpiryExecution$ExpiryWork.class",
+    "dev/codex/schubert/nk/batch/file/CleanupExpiryExecution.class",
+    "dev/codex/schubert/nk/batch/file/CleanupMaintenanceWork$AfterInspection.class",
+    "dev/codex/schubert/nk/batch/file/CleanupMaintenanceWork$Inbox.class",
+    "dev/codex/schubert/nk/batch/file/CleanupMaintenanceWork$Transfer.class",
+    "dev/codex/schubert/nk/batch/file/CleanupMaintenanceWork.class",
+    "dev/codex/schubert/nk/batch/file/CleanupNativeExecution.class",
+    "dev/codex/schubert/nk/batch/file/CleanupNativePreflight$StopObservation.class",
+    "dev/codex/schubert/nk/batch/file/CleanupNativePreflight.class",
+    "dev/codex/schubert/nk/batch/file/CleanupPreflight$Database.class",
+    "dev/codex/schubert/nk/batch/file/CleanupPreflight$Gate.class",
+    "dev/codex/schubert/nk/batch/file/CleanupPreflight$Original.class",
+    "dev/codex/schubert/nk/batch/file/CleanupPreflight$Request.class",
+    "dev/codex/schubert/nk/batch/file/CleanupPreflight.class",
+    "dev/codex/schubert/nk/batch/file/CleanupProcessMain$ExpiryWork.class",
+    "dev/codex/schubert/nk/batch/file/CleanupProcessMain$Preflight.class",
+    "dev/codex/schubert/nk/batch/file/CleanupProcessMain.class",
+    "dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFiles$OwnerSource.class",
+    "dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFiles$StartupName.class",
+    "dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFiles$StartupSource.class",
+    "dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFiles.class",
+    "dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$CapturedFile.class",
+    "dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Decoder.class",
+    "dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Digests.class",
+    "dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Graph.class",
+    "dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Inventory.class",
+    "dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Io.class",
+    "dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Mutation.class",
+    "dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$NioIo.class",
+    "dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Operation.class",
+    "dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$RetirementResult.class",
+    "dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Session.class",
+    "dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$StartupOriginal.class",
+    "dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Work.class",
+    "dev/codex/schubert/nk/batch/file/MaintenanceRunFiles.class",
+    "dev/codex/schubert/nk/batch/file/MorningBackupArtifacts$Work.class",
+    "dev/codex/schubert/nk/batch/file/MorningBackupArtifacts$Writer.class",
+    "dev/codex/schubert/nk/batch/file/MorningBackupArtifacts.class",
+    "dev/codex/schubert/nk/batch/file/MorningBackupCompletion.class",
+    "dev/codex/schubert/nk/batch/file/MorningBackupPreparation$Continuation.class",
+    "dev/codex/schubert/nk/batch/file/MorningBackupPreparation$Publisher.class",
+    "dev/codex/schubert/nk/batch/file/MorningBackupPreparation.class",
+    "dev/codex/schubert/nk/batch/file/MorningBackupRequestPublication$1.class",
+    "dev/codex/schubert/nk/batch/file/MorningBackupRequestPublication$Gate.class",
+    "dev/codex/schubert/nk/batch/file/MorningBackupRequestPublication$Open.class",
+    "dev/codex/schubert/nk/batch/file/MorningBackupRequestPublication$Owner.class",
+    "dev/codex/schubert/nk/batch/file/MorningBackupRequestPublication.class",
+    "dev/codex/schubert/nk/batch/file/MorningBackupRetention$Mode.class",
+    "dev/codex/schubert/nk/batch/file/MorningBackupRetention$Result.class",
+    "dev/codex/schubert/nk/batch/file/MorningBackupRetention$Work.class",
+    "dev/codex/schubert/nk/batch/file/MorningBackupRetention.class",
+    "dev/codex/schubert/nk/batch/file/MorningBackupReuse$Continuation.class",
+    "dev/codex/schubert/nk/batch/file/MorningBackupReuse.class",
+    "dev/codex/schubert/nk/batch/file/MorningBackupStage$1.class",
+    "dev/codex/schubert/nk/batch/file/MorningBackupStage$EpochScope.class",
+    "dev/codex/schubert/nk/batch/file/MorningBackupStage$OwnedEpochWork.class",
+    "dev/codex/schubert/nk/batch/file/MorningBackupStage$OwnedWork.class",
+    "dev/codex/schubert/nk/batch/file/MorningBackupStage$Scope.class",
+    "dev/codex/schubert/nk/batch/file/MorningBackupStage$VerifiedEpochWork.class",
+    "dev/codex/schubert/nk/batch/file/MorningBackupStage$VerifiedResultScope.class",
+    "dev/codex/schubert/nk/batch/file/MorningBackupStage.class",
+    "dev/codex/schubert/nk/batch/file/MorningBrokerExecution$Completion.class",
+    "dev/codex/schubert/nk/batch/file/MorningBrokerExecution$ExpectedCurrent.class",
+    "dev/codex/schubert/nk/batch/file/MorningBrokerExecution$Observations.class",
+    "dev/codex/schubert/nk/batch/file/MorningBrokerExecution.class",
+    "dev/codex/schubert/nk/batch/file/MorningCleanupExecution$Completion.class",
+    "dev/codex/schubert/nk/batch/file/MorningCleanupExecution.class",
+    "dev/codex/schubert/nk/batch/file/MorningCompletionChecks.class",
+    "dev/codex/schubert/nk/batch/file/MorningCompletionEvidence$Read.class",
+    "dev/codex/schubert/nk/batch/file/MorningCompletionEvidence.class",
+    "dev/codex/schubert/nk/batch/file/MorningControlScope$1.class",
+    "dev/codex/schubert/nk/batch/file/MorningControlScope$2.class",
+    "dev/codex/schubert/nk/batch/file/MorningControlScope$3.class",
+    "dev/codex/schubert/nk/batch/file/MorningControlScope$4.class",
+    "dev/codex/schubert/nk/batch/file/MorningControlScope$5.class",
+    "dev/codex/schubert/nk/batch/file/MorningControlScope$AfterPublication.class",
+    "dev/codex/schubert/nk/batch/file/MorningControlScope$EpochInvalidation.class",
+    "dev/codex/schubert/nk/batch/file/MorningControlScope$Exclusive.class",
+    "dev/codex/schubert/nk/batch/file/MorningControlScope$Gate.class",
+    "dev/codex/schubert/nk/batch/file/MorningControlScope$IntentClear.class",
+    "dev/codex/schubert/nk/batch/file/MorningControlScope$Invalidation.class",
+    "dev/codex/schubert/nk/batch/file/MorningControlScope$Original.class",
+    "dev/codex/schubert/nk/batch/file/MorningControlScope$OwnedEpochWork.class",
+    "dev/codex/schubert/nk/batch/file/MorningControlScope$OwnedOriginal.class",
+    "dev/codex/schubert/nk/batch/file/MorningControlScope$StartupExclusive.class",
+    "dev/codex/schubert/nk/batch/file/MorningControlScope$StopPass.class",
+    "dev/codex/schubert/nk/batch/file/MorningControlScope$Terminals.class",
+    "dev/codex/schubert/nk/batch/file/MorningControlScope$VerifiedEpochWork.class",
+    "dev/codex/schubert/nk/batch/file/MorningControlScope.class",
+    "dev/codex/schubert/nk/batch/file/MorningCurrentInvalidation$1.class",
+    "dev/codex/schubert/nk/batch/file/MorningCurrentInvalidation$Gate.class",
+    "dev/codex/schubert/nk/batch/file/MorningCurrentInvalidation$Store.class",
+    "dev/codex/schubert/nk/batch/file/MorningCurrentInvalidation.class",
+    "dev/codex/schubert/nk/batch/file/MorningExpiryExecution.class",
+    "dev/codex/schubert/nk/batch/file/MorningGateEvidence.class",
+    "dev/codex/schubert/nk/batch/file/MorningNewRunAdmission$1.class",
+    "dev/codex/schubert/nk/batch/file/MorningNewRunAdmission$2$1.class",
+    "dev/codex/schubert/nk/batch/file/MorningNewRunAdmission$2.class",
+    "dev/codex/schubert/nk/batch/file/MorningNewRunAdmission$3.class",
+    "dev/codex/schubert/nk/batch/file/MorningNewRunAdmission$Continuation.class",
+    "dev/codex/schubert/nk/batch/file/MorningNewRunAdmission$Database.class",
+    "dev/codex/schubert/nk/batch/file/MorningNewRunAdmission$DatabaseWork.class",
+    "dev/codex/schubert/nk/batch/file/MorningNewRunAdmission$FileWork.class",
+    "dev/codex/schubert/nk/batch/file/MorningNewRunAdmission$Files.class",
+    "dev/codex/schubert/nk/batch/file/MorningNewRunAdmission$Gate.class",
+    "dev/codex/schubert/nk/batch/file/MorningNewRunAdmission$OriginalFiles.class",
+    "dev/codex/schubert/nk/batch/file/MorningNewRunAdmission$OriginalProof.class",
+    "dev/codex/schubert/nk/batch/file/MorningNewRunAdmission$Originals.class",
+    "dev/codex/schubert/nk/batch/file/MorningNewRunAdmission$OwnedContinuation.class",
+    "dev/codex/schubert/nk/batch/file/MorningNewRunAdmission$VerifiedContinuation.class",
+    "dev/codex/schubert/nk/batch/file/MorningNewRunAdmission.class",
+    "dev/codex/schubert/nk/batch/file/MorningPermitPublication$1.class",
+    "dev/codex/schubert/nk/batch/file/MorningPermitPublication$2.class",
+    "dev/codex/schubert/nk/batch/file/MorningPermitPublication$Gate.class",
+    "dev/codex/schubert/nk/batch/file/MorningPermitPublication$Intents.class",
+    "dev/codex/schubert/nk/batch/file/MorningPermitPublication$OpenIntent.class",
+    "dev/codex/schubert/nk/batch/file/MorningPermitPublication$OpenStore.class",
+    "dev/codex/schubert/nk/batch/file/MorningPermitPublication$Retain.class",
+    "dev/codex/schubert/nk/batch/file/MorningPermitPublication$Store.class",
+    "dev/codex/schubert/nk/batch/file/MorningPermitPublication.class",
+    "dev/codex/schubert/nk/batch/file/MorningPrestartEvidence.class",
+    "dev/codex/schubert/nk/batch/file/MorningProcessMain$1.class",
+    "dev/codex/schubert/nk/batch/file/MorningProcessMain$Admission.class",
+    "dev/codex/schubert/nk/batch/file/MorningProcessMain$Archive.class",
+    "dev/codex/schubert/nk/batch/file/MorningProcessMain$CompletedAdmission.class",
+    "dev/codex/schubert/nk/batch/file/MorningProcessMain$ResumeAdmission.class",
+    "dev/codex/schubert/nk/batch/file/MorningProcessMain$VerifiedArchive.class",
+    "dev/codex/schubert/nk/batch/file/MorningProcessMain.class",
+    "dev/codex/schubert/nk/batch/file/MorningResumeAdmission$1.class",
+    "dev/codex/schubert/nk/batch/file/MorningResumeAdmission$2$1.class",
+    "dev/codex/schubert/nk/batch/file/MorningResumeAdmission$2.class",
+    "dev/codex/schubert/nk/batch/file/MorningResumeAdmission$Database.class",
+    "dev/codex/schubert/nk/batch/file/MorningResumeAdmission$DatabaseWork.class",
+    "dev/codex/schubert/nk/batch/file/MorningResumeAdmission$FileWork.class",
+    "dev/codex/schubert/nk/batch/file/MorningResumeAdmission$Files.class",
+    "dev/codex/schubert/nk/batch/file/MorningResumeAdmission$Gate.class",
+    "dev/codex/schubert/nk/batch/file/MorningResumeAdmission$Originals.class",
+    "dev/codex/schubert/nk/batch/file/MorningResumeAdmission.class",
+    "dev/codex/schubert/nk/batch/file/MorningRootScope$Exclusive.class",
+    "dev/codex/schubert/nk/batch/file/MorningRootScope$Gate.class",
+    "dev/codex/schubert/nk/batch/file/MorningRootScope$Policy.class",
+    "dev/codex/schubert/nk/batch/file/MorningRootScope.class",
+    "dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$ApiRetained.class",
+    "dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Completion.class",
+    "dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionPhase.class",
+    "dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionProgress.class",
+    "dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionRetirement.class",
+    "dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Launch.class",
+    "dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Started.class",
+    "dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Stop.class",
+    "dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.class",
+    "dev/codex/schubert/nk/batch/file/MorningStartupRoots$Entry.class",
+    "dev/codex/schubert/nk/batch/file/MorningStartupRoots$Gate.class",
+    "dev/codex/schubert/nk/batch/file/MorningStartupRoots$Observation.class",
+    "dev/codex/schubert/nk/batch/file/MorningStartupRoots$Profile.class",
+    "dev/codex/schubert/nk/batch/file/MorningStartupRoots$Profiles.class",
+    "dev/codex/schubert/nk/batch/file/MorningStartupRoots.class",
+    "dev/codex/schubert/nk/batch/file/StartupLaunchFiles$1.class",
+    "dev/codex/schubert/nk/batch/file/StartupLaunchFiles.class",
+    "dev/codex/schubert/nk/batch/platform/BackupUnitReceiptGate$Baseline.class",
+    "dev/codex/schubert/nk/batch/platform/BackupUnitReceiptGate$Context.class",
+    "dev/codex/schubert/nk/batch/platform/BackupUnitReceiptGate$Probe.class",
+    "dev/codex/schubert/nk/batch/platform/BackupUnitReceiptGate$Terminal.class",
+    "dev/codex/schubert/nk/batch/platform/BackupUnitReceiptGate$TerminalReceipt.class",
+    "dev/codex/schubert/nk/batch/platform/BackupUnitReceiptGate.class",
+    "dev/codex/schubert/nk/batch/platform/BackupUnitStartClient$1.class",
+    "dev/codex/schubert/nk/batch/platform/BackupUnitStartClient$2.class",
+    "dev/codex/schubert/nk/batch/platform/BackupUnitStartClient$Attempt.class",
+    "dev/codex/schubert/nk/batch/platform/BackupUnitStartClient$Context.class",
+    "dev/codex/schubert/nk/batch/platform/BackupUnitStartClient$Intent.class",
+    "dev/codex/schubert/nk/batch/platform/BackupUnitStartClient$MarkerLease.class",
+    "dev/codex/schubert/nk/batch/platform/BackupUnitStartClient$Policy.class",
+    "dev/codex/schubert/nk/batch/platform/BackupUnitStartClient$RetirementGate.class",
+    "dev/codex/schubert/nk/batch/platform/BackupUnitStartClient$Start.class",
+    "dev/codex/schubert/nk/batch/platform/BackupUnitStartClient$Status.class",
+    "dev/codex/schubert/nk/batch/platform/BackupUnitStartClient$Target.class",
+    "dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.class",
+    "dev/codex/schubert/nk/batch/platform/BackupUnitTermination$Context.class",
+    "dev/codex/schubert/nk/batch/platform/BackupUnitTermination$Io.class",
+    "dev/codex/schubert/nk/batch/platform/BackupUnitTermination$NativeObservations.class",
+    "dev/codex/schubert/nk/batch/platform/BackupUnitTermination$NioIo.class",
+    "dev/codex/schubert/nk/batch/platform/BackupUnitTermination$Observations.class",
+    "dev/codex/schubert/nk/batch/platform/BackupUnitTermination.class",
+    "dev/codex/schubert/nk/batch/platform/BrokerJournalEvidence$Anchor.class",
+    "dev/codex/schubert/nk/batch/platform/BrokerJournalEvidence$Summary.class",
+    "dev/codex/schubert/nk/batch/platform/BrokerJournalEvidence.class",
+    "dev/codex/schubert/nk/batch/platform/CleanupFailedBackupRequest$Row.class",
+    "dev/codex/schubert/nk/batch/platform/CleanupFailedBackupRequest.class",
+    "dev/codex/schubert/nk/batch/platform/CleanupProfile.class",
+    "dev/codex/schubert/nk/batch/platform/CleanupWorkerRequest$Expiry$PriorExpiry.class",
+    "dev/codex/schubert/nk/batch/platform/CleanupWorkerRequest$Expiry.class",
+    "dev/codex/schubert/nk/batch/platform/CleanupWorkerRequest.class",
+    "dev/codex/schubert/nk/batch/platform/InspectorUnitProbe$NativeReader$Start.class",
+    "dev/codex/schubert/nk/batch/platform/InspectorUnitProbe$NativeReader.class",
+    "dev/codex/schubert/nk/batch/platform/InspectorUnitProbe$QueryProcess.class",
+    "dev/codex/schubert/nk/batch/platform/InspectorUnitProbe$Reader.class",
+    "dev/codex/schubert/nk/batch/platform/InspectorUnitProbe$SafeStream.class",
+    "dev/codex/schubert/nk/batch/platform/InspectorUnitProbe.class",
+    "dev/codex/schubert/nk/batch/platform/InspectorUnitSnapshot$Target.class",
+    "dev/codex/schubert/nk/batch/platform/InspectorUnitSnapshot.class",
+    "dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopClient$Attempt.class",
+    "dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopClient$Context.class",
+    "dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopClient$NativeStart.class",
+    "dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopClient$Policy.class",
+    "dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopClient$Start.class",
+    "dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopClient$Status.class",
+    "dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopClient.class",
+    "dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopPolicy$NativeSource.class",
+    "dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopPolicy$Source.class",
+    "dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopPolicy.class",
+    "dev/codex/schubert/nk/batch/platform/MaintenanceUnitTermination$KernelDirectory.class",
+    "dev/codex/schubert/nk/batch/platform/MaintenanceUnitTermination$NativeObservations.class",
+    "dev/codex/schubert/nk/batch/platform/MaintenanceUnitTermination$Observation.class",
+    "dev/codex/schubert/nk/batch/platform/MaintenanceUnitTermination$Observations.class",
+    "dev/codex/schubert/nk/batch/platform/MaintenanceUnitTermination.class",
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$1.class",
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$2.class",
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$3.class",
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$BackupCompletion.class",
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$BackupResult.class",
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Completion.class",
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Gate.class",
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Handoff.class",
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$ObservedCompletion.class",
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$ObservedWork.class",
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Outcome.class",
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$ParentProof.class",
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Receipt.class",
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Retain.class",
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Start.class",
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$StartAttempt.class",
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Started.class",
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Stop.class",
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$StopAttempt.class",
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Terminal.class",
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Unresolved.class",
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Wait.class",
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle.class",
+    "dev/codex/schubert/nk/batch/platform/MorningBrokerUnitCycle$1.class",
+    "dev/codex/schubert/nk/batch/platform/MorningBrokerUnitCycle$Baseline.class",
+    "dev/codex/schubert/nk/batch/platform/MorningBrokerUnitCycle$Live.class",
+    "dev/codex/schubert/nk/batch/platform/MorningBrokerUnitCycle$Observation.class",
+    "dev/codex/schubert/nk/batch/platform/MorningBrokerUnitCycle$ParentProof.class",
+    "dev/codex/schubert/nk/batch/platform/MorningBrokerUnitCycle$Projection.class",
+    "dev/codex/schubert/nk/batch/platform/MorningBrokerUnitCycle$Readiness.class",
+    "dev/codex/schubert/nk/batch/platform/MorningBrokerUnitCycle$Retain.class",
+    "dev/codex/schubert/nk/batch/platform/MorningBrokerUnitCycle$Start.class",
+    "dev/codex/schubert/nk/batch/platform/MorningBrokerUnitCycle.class",
+    "dev/codex/schubert/nk/batch/platform/MorningCaddyReadiness$Guard.class",
+    "dev/codex/schubert/nk/batch/platform/MorningCaddyReadiness$Io.class",
+    "dev/codex/schubert/nk/batch/platform/MorningCaddyReadiness$NativeIo.class",
+    "dev/codex/schubert/nk/batch/platform/MorningCaddyReadiness.class",
+    "dev/codex/schubert/nk/batch/platform/MorningPreviousBroker$Closed.class",
+    "dev/codex/schubert/nk/batch/platform/MorningPreviousBroker$Evidence.class",
+    "dev/codex/schubert/nk/batch/platform/MorningPreviousBroker$NoPrior.class",
+    "dev/codex/schubert/nk/batch/platform/MorningPreviousBroker$Query.class",
+    "dev/codex/schubert/nk/batch/platform/MorningPreviousBroker.class",
+    "dev/codex/schubert/nk/batch/platform/MorningServiceReadiness$1.class",
+    "dev/codex/schubert/nk/batch/platform/MorningServiceReadiness$Guard.class",
+    "dev/codex/schubert/nk/batch/platform/MorningServiceReadiness$Io.class",
+    "dev/codex/schubert/nk/batch/platform/MorningServiceReadiness$NativeIo.class",
+    "dev/codex/schubert/nk/batch/platform/MorningServiceReadiness$Response.class",
+    "dev/codex/schubert/nk/batch/platform/MorningServiceReadiness.class",
+    "dev/codex/schubert/nk/batch/platform/MorningStopPass$1$1.class",
+    "dev/codex/schubert/nk/batch/platform/MorningStopPass$1.class",
+    "dev/codex/schubert/nk/batch/platform/MorningStopPass$2.class",
+    "dev/codex/schubert/nk/batch/platform/MorningStopPass$Attempt.class",
+    "dev/codex/schubert/nk/batch/platform/MorningStopPass$Gate.class",
+    "dev/codex/schubert/nk/batch/platform/MorningStopPass$Stop.class",
+    "dev/codex/schubert/nk/batch/platform/MorningStopPass$Terminals.class",
+    "dev/codex/schubert/nk/batch/platform/MorningStopPass.class",
+    "dev/codex/schubert/nk/batch/platform/MorningUnitTerminals$DetailedObservation.class",
+    "dev/codex/schubert/nk/batch/platform/MorningUnitTerminals$Observation.class",
+    "dev/codex/schubert/nk/batch/platform/MorningUnitTerminals$Snapshot.class",
+    "dev/codex/schubert/nk/batch/platform/MorningUnitTerminals.class",
+    "dev/codex/schubert/nk/batch/repository/CleanupDatabaseSession$CleanupSchema.class",
+    "dev/codex/schubert/nk/batch/repository/CleanupDatabaseSession$Connect.class",
+    "dev/codex/schubert/nk/batch/repository/CleanupDatabaseSession$Gate.class",
+    "dev/codex/schubert/nk/batch/repository/CleanupDatabaseSession$Operation.class",
+    "dev/codex/schubert/nk/batch/repository/CleanupDatabaseSession$Rows.class",
+    "dev/codex/schubert/nk/batch/repository/CleanupDatabaseSession$Schema.class",
+    "dev/codex/schubert/nk/batch/repository/CleanupDatabaseSession.class",
+    "dev/codex/schubert/nk/batch/repository/MorningDatabaseSession$1.class",
+    "dev/codex/schubert/nk/batch/repository/MorningDatabaseSession$Access.class",
+    "dev/codex/schubert/nk/batch/repository/MorningDatabaseSession$BackupBegins.class",
+    "dev/codex/schubert/nk/batch/repository/MorningDatabaseSession$BackupObservation.class",
+    "dev/codex/schubert/nk/batch/repository/MorningDatabaseSession$Bind.class",
+    "dev/codex/schubert/nk/batch/repository/MorningDatabaseSession$CleanupHandoff.class",
+    "dev/codex/schubert/nk/batch/repository/MorningDatabaseSession$Connect.class",
+    "dev/codex/schubert/nk/batch/repository/MorningDatabaseSession$DatabaseObservation.class",
+    "dev/codex/schubert/nk/batch/repository/MorningDatabaseSession$ExpiryBegins.class",
+    "dev/codex/schubert/nk/batch/repository/MorningDatabaseSession$ExpiryObservation.class",
+    "dev/codex/schubert/nk/batch/repository/MorningDatabaseSession$Gate.class",
+    "dev/codex/schubert/nk/batch/repository/MorningDatabaseSession$Operation.class",
+    "dev/codex/schubert/nk/batch/repository/MorningDatabaseSession$RoleObservation.class",
+    "dev/codex/schubert/nk/batch/repository/MorningDatabaseSession$Rows.class",
+    "dev/codex/schubert/nk/batch/repository/MorningDatabaseSession$Schema.class",
+    "dev/codex/schubert/nk/batch/repository/MorningDatabaseSession$Session.class",
+    "dev/codex/schubert/nk/batch/repository/MorningDatabaseSession.class"
+  ],
+  "heldClassBodiesOpened": 0,
+  "heldTestsRemaining": 26,
+  "root11Status": "Held; overlap with held test sources has no independent measurement.",
+  "terminalPureValue": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41714-batch-terminal-evidence-current-v1/manifest.json",
+    "sha256": "13bb2b6a1f1e5b0f0536f73054776d5f5c21b6e287430fa4ecaf7517d864c887"
+  },
+  "cleanupValue": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41716-cleanup-values-diff-v1/manifest.json",
+    "sha256": "9245126bea8ccda92d36516f8a55f402c42304e212d42e5f6783430066eefcde"
+  },
+  "anythingRerunInTypedClosure": 0,
+  "whole451": false,
+  "initialMetadataCorrection": "Original type-analyzer peer archive set includes Protocol. The saved graph confirms that none of its classes is reached by Batch typed edges; retained the original auxiliary pin and the change comparison.",
+  "formalAcceptanceId": null
+}
