@@ -1,0 +1,247 @@
+{
+  "run": "PG41578",
+  "wbs": "WBS-P005-01",
+  "source": "622ccd46a8467e24b26f8c425750ec20352fbcd4",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "designSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+  "canonicalPins": [
+    {
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "sha256": "a48d9744e6138fd0ce9e99fd9b9e1ed4c3e6fa18aea2448bcdfb1acadf89b156"
+    },
+    {
+      "path": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+      "sha256": "d3acc47cd61bf9b7fe1c56160ef43a912b1a4558343068e709bc3e204ce741a1"
+    }
+  ],
+  "requirementLines": {
+    "MQ-001": {
+      "path": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+      "line": 7
+    },
+    "MQ-002": {
+      "path": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+      "line": 8
+    },
+    "MQ-003": {
+      "path": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+      "line": 9
+    },
+    "MQ-004": {
+      "path": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+      "line": 10
+    },
+    "MQ-005": {
+      "path": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+      "line": 11
+    }
+  },
+  "values": [
+    {
+      "address": "nk.sync.request",
+      "queue": "nk.sync.request.q",
+      "routing": "ANYCAST",
+      "maxBodyBytes": 1000000,
+      "ttlMillis": 5000,
+      "designLine": 120
+    },
+    {
+      "address": "nk.sync.reply.web",
+      "queue": "nk.sync.reply.web.q",
+      "routing": "ANYCAST",
+      "maxBodyBytes": 1000000,
+      "ttlMillis": 10000,
+      "designLine": 121
+    },
+    {
+      "address": "nk.async.work",
+      "queue": "nk.async.work.q",
+      "routing": "ANYCAST",
+      "maxBodyBytes": 1000,
+      "ttlMillis": 0,
+      "designLine": 122
+    },
+    {
+      "address": "nk.web.log",
+      "queue": "nk.web.log.q",
+      "routing": "ANYCAST",
+      "maxBodyBytes": 10000,
+      "ttlMillis": 0,
+      "designLine": 123
+    },
+    {
+      "address": "nk.dead.letter",
+      "queue": "nk.dead.letter.q",
+      "routing": "ANYCAST",
+      "maxBodyBytes": 1000000,
+      "ttlMillis": 0,
+      "designLine": 124
+    },
+    {
+      "address": "nk.expiry",
+      "queue": "nk.expiry.q",
+      "routing": "ANYCAST",
+      "maxBodyBytes": 1000000,
+      "ttlMillis": 0,
+      "designLine": 125
+    }
+  ],
+  "currentConfig": {
+    "path": "src/deployment/artemis/etc/broker.xml",
+    "sha256": "161cbc5fc57ae38e4d75f45e8c752a781732aa3bf6c93c6d7ce8eb1cdaae1820",
+    "historicC04Source": "7fffab57a567914956b66452e5e54388642efdec",
+    "exactByteToHistoricC04": true,
+    "actualBrokerProbe": false
+  },
+  "ending": [
+    {
+      "id": "WBS-P002-03",
+      "previousAcceptedSource": "7fffab57a567914956b66452e5e54388642efdec",
+      "currentSignedDecision": null,
+      "productionInputExact": false
+    },
+    {
+      "id": "WBS-C04",
+      "previousAcceptedSource": "7fffab57a567914956b66452e5e54388642efdec",
+      "currentSignedDecision": null,
+      "productionInputExact": true
+    }
+  ],
+  "scope": {
+    "main": {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/BrokerTopology.java",
+      "sha256": "57e7967fe6b44f7e37eb510bd0d2c0a877e5257c73e7d688c0fdab59379f46c5"
+    },
+    "test": {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/transport/BrokerTopologyTest.java",
+      "sha256": "96e98d5d674681c90c863b7150c9fcfdb17c69e89d63f9462569daa004ab2630"
+    },
+    "classSHA256": "ffb26a6e704e399d6a190eff1d3a7ac6608b07ce6bf8eb33087894227724f675",
+    "crc": "7413a7ffdc75d549",
+    "currentOrdinaryCases": [
+      {
+        "className": "dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest",
+        "method": "nullUnknownAndNearMatchAddressesAreDenied",
+        "outcome": "PASS"
+      },
+      {
+        "className": "dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest",
+        "method": "sixDestinationsMatchTheIndependentPhysicalAndLimitOracle",
+        "outcome": "PASS"
+      }
+    ],
+    "raw": {
+      "INSTRUCTION": [
+        0,
+        173
+      ],
+      "BRANCH": [
+        0,
+        6
+      ],
+      "LINE": [
+        0,
+        25
+      ],
+      "COMPLEXITY": [
+        0,
+        15
+      ],
+      "METHOD": [
+        0,
+        12
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "rawMethods": [
+      [
+        "values",
+        "()[Ldev/codex/schubert/nk/protocol/transport/BrokerTopology;"
+      ],
+      [
+        "valueOf",
+        "(Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/transport/BrokerTopology;"
+      ],
+      [
+        "<init>",
+        "(Ljava/lang/String;ILjava/lang/String;IJ)V"
+      ],
+      [
+        "address",
+        "()Ljava/lang/String;"
+      ],
+      [
+        "queue",
+        "()Ljava/lang/String;"
+      ],
+      [
+        "fullyQualifiedQueue",
+        "()Ljava/lang/String;"
+      ],
+      [
+        "maximumBodyLength",
+        "()I"
+      ],
+      [
+        "timeToLiveMillis",
+        "()J"
+      ],
+      [
+        "expirationRequired",
+        "()Z"
+      ],
+      [
+        "requireAddress",
+        "(Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/transport/BrokerTopology;"
+      ],
+      [
+        "$values",
+        "()[Ldev/codex/schubert/nk/protocol/transport/BrokerTopology;"
+      ],
+      [
+        "<clinit>",
+        "()V"
+      ]
+    ]
+  },
+  "firstAuditFailure": {
+    "exit": 1,
+    "reason": "Historic totals M9/I137 did not match the new original unfiltered class M12/I173. Both original reports preserved."
+  },
+  "localEvidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41526-protocol-qa054-canonical-rules-v1/manifest.json",
+      "sha256": "8a89feee4bfa2d6b08d3514ff44ab15eaa871f409d8cf152790570e363b21edb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41526-protocol-qa054-canonical-rules-v1/unfiltered.tsv",
+      "sha256": "d3730aebd1cab8a6f8a756fda8a11579308fbd1f8aee305228d4f94e655a1253"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41526-protocol-qa054-canonical-rules-v1/case-names.json",
+      "sha256": "ae44c06ebd1906c6805621f57b261770b4033b942abc15db9884c1fe3e258798"
+    },
+    {
+      "path": "evidence/01_PT/005_NK-MSG-001/045_P00501明示Brokercatalog契約・独立期待値対応.md",
+      "sha256": "6ec706a6115df5f77d3dce5c0d97c0b3b3fa7b819a2dc26f037586efe15f4271"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29520-p00501-broker-catalog-original-contract-v1/manifest.json",
+      "sha256": "8b7cf9e3335a51e6cec01eaa8fc3b4858f26310d6362ae8e144b05069b3e8929"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/481_PGPT詳細WBS.json",
+      "sha256": "4227e20a23b10ab8eecd2b69550dd7f58c79bf43a2f77b4c7c98ec943e83a2d9"
+    }
+  ],
+  "separateWbsEndingAcceptance": true,
+  "newTestRuns": 0,
+  "actualBrokerOperations": 0,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "exitCode": 0,
+  "terminalAtUTC": "2026-11-21T17:12:54.562748+00:00"
+}
