@@ -1,0 +1,154 @@
+{
+  "eventId": "PGPT-20261008-7262",
+  "groupId": "WBS66-P01810-API-CONTEXT-SINGLE-OWNED-KEY",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-21T00:13:14.193000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 86,
+      "remainingPercent": 14,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66-P01810-API-CONTEXT-SINGLE-OWNED-KEY",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "WBS66-P01810-API-CONTEXT-SINGLE-OWNED-KEY",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P018-10.03"
+    ],
+    "managementWorkIds": [
+      "WBS-P018-10.03/2"
+    ],
+    "source": "a4188f73590e510b15c302d2e1678750a7c652d7",
+    "productionCoreMain": "57f67128bff9abc0b51e9ff79b3ebb6fa52d1a12",
+    "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "run": "PG41370-p01810-auth-context-ownership-baseline-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.4,
+      "base": 1.0,
+      "high": 2.4
+    },
+    "groupCapPp": 4,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1745_P0181003Session鍵完了とAPI残.json",
+        "sha256": "55aec7e908e4b1393f4e89fddd067facb3e7bcedd13abed46f70837f7f7d0351"
+      },
+      {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthContextCodec.java",
+        "sha256": "add11713a8ec87737f7c0c5064f104abba459e709f99c4273e4c02a3e67c65ab"
+      },
+      {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG41368-p01810-session-ownership-independent-v1/manifest.json",
+        "sha256": "58a1cc70deb9595ef9950f74806126f31a734f91bc2753578fb27dc335e57157"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41306-protocol-numeric-current-quality-v1/manifest.json",
+        "sha256": "3f1dc10633e045551809614f2ca60bb11d673fad05b095f1ba09c0a84909d525"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "YKT2779 fourth permitted owner. AuthContextCodec owns 32-byte keys for one purpose; kept in separate copied map values plus a final allocating Map.copyOf, exposing a partial allocation gap. No dependent denied types in the explicit security codec closure.",
+    "endCondition": "Replace post-validation multiple ownership allocations with one bounded allocation. Preserve exact current/previous AAD/envelope, provider-failure behavior, closed results, internal factory, and qualify all prior 11 on same source.",
+    "workScope": "Local isolated pure synthetic crypto fixture, exact Protocol package and scoped five Main inputs. No real context/keys, DB, runtime app, held code/binary, process profile or external operation.",
+    "quotaAfter": {
+      "usedPercent": 86,
+      "remainingPercent": 14,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "1ab4e3adb4306fdd586b1a1d7d6c5cb18a85eacf9dabaad3d86fb2b9de682226",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-21T00:13:14.193000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 86,
+          "remainingPercent": 14,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-21T00:13:00.122392+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 86,
+      "remainingPercent": 14,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-7261",
+    "attempt": 1,
+    "attemptResult": "P01810_API_CONTEXT_LOCAL_AND_FOUR_YKT_SCOPES_WITH_TWO_HELD",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 11,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG41370-p01810-auth-context-ownership-baseline-v1/manifest.json",
+        "sha256": "bb0b2a93cd6a5685c450625519d47424001836fc1be4e949319dfc8137c20060"
+      },
+      {
+        "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG41372-p01810-auth-context-ownership-qualified-v1/manifest.json",
+        "sha256": "05076f50cb00d5d28938c34c33e24189144636be3857c80f40839c599d1b2008"
+      },
+      {
+        "path": "evidence/01_PT/006_NK-MSG-002/evidence/PG41356-p01810-web-log-single-ownership-independent-v1/manifest.json",
+        "sha256": "a2a86e1cfaefd65102c1bac1390c7a7084821c13730c653e5f994f0fc9805d75"
+      },
+      {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG41362-p01810-revoke-ownership-independent-v1/manifest.json",
+        "sha256": "940e512fc4e2e9aae9c30ab3bf4685e6d84f8b9e47096dd5d30f96ed2e468004"
+      },
+      {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG41368-p01810-session-ownership-independent-v1/manifest.json",
+        "sha256": "58a1cc70deb9595ef9950f74806126f31a734f91bc2753578fb27dc335e57157"
+      },
+      {
+        "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG41374-p01810-auth-context-ownership-independent-v1/manifest.json",
+        "sha256": "377a5ff92b8ae03f9a424997d13346c155bed1cad361638d70f1987837b923ec"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "YKT2779 classfiles of FingerprintKeyRing and ResponseSnapshotCodec remain held under QA056",
+      "Actual sinks and DB/TLS/real operations for P018-10 short target; whole451"
+    ],
+    "selectedCases": 11,
+    "constructorCoveredBranches": 14,
+    "constructorMissedLines": 0,
+    "typedFindings": 0,
+    "firstLocalPtPass": true,
+    "firstLocalPtDenominator": 11,
+    "testedSource": "007b96d8be7c10e265b5a12d01231013ae9e0acd"
+  }
+}
