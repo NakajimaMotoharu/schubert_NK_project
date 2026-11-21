@@ -1,0 +1,171 @@
+{
+  "actualExit": 0,
+  "run": "PG41440-f03-ssc447-and-current-protocol-cases-v1",
+  "terminalAtUTC": "2026-11-21T01:49:18.962671+00:00",
+  "core": "2611e1acbd57955d591d52e5348999ea293e068d",
+  "ssc447OriginalProductSource": "e4794ddf45487268883334d0f8773d89bd47dcba",
+  "separateCurrentProtocolRun": "PG41304-protocol-numeric-physical-independent-v1",
+  "currentProtocolRunSource": "62b239d4dad561da007e15a290f8a271a165dda9",
+  "currentInputDiff": 0,
+  "originalSSC447Results": 152,
+  "currentProtocolResults": 171,
+  "matchedNameAndSuite": 152,
+  "originalAbsentByExactName": [],
+  "currentOnlyByExactName": [
+    [
+      "dev.codex.schubert.nk.protocol.ProtocolNamespaceContractTest",
+      "fieldCodecHasOnlyTheEightDesignedStaticOperations"
+    ],
+    [
+      "dev.codex.schubert.nk.protocol.ProtocolNamespaceContractTest",
+      "largeResultCodecHasOnlyWriteAndDecodeOperations"
+    ],
+    [
+      "dev.codex.schubert.nk.protocol.ProtocolNamespaceContractTest",
+      "mediaValidatorExposesNoGrammarCacheOrInstanceOperation"
+    ],
+    [
+      "dev.codex.schubert.nk.protocol.ProtocolNamespaceContractTest",
+      "semanticValidatorRetainsBothDesignedEntryPointsOnly"
+    ],
+    [
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "numericDecodeValidatesEveryByteBeforeAccumulatingTheValue"
+    ],
+    [
+      "dev.codex.schubert.nk.protocol.codec.LogSearchWireUnicodeTest",
+      "rejectsMalformedAndNonNfcInputAtEachFreeTextPosition"
+    ],
+    [
+      "dev.codex.schubert.nk.protocol.codec.LogSearchWireUnicodeTest",
+      "retainsNfcAndSupplementaryCharactersWithoutConflatingAbsentFields"
+    ],
+    [
+      "dev.codex.schubert.nk.protocol.codec.QuestionNotificationWireTest",
+      "nts001DecodesEveryDefinedTypeAndTheExactUtcDateBoundary"
+    ],
+    [
+      "dev.codex.schubert.nk.protocol.codec.QuestionNotificationWireTest",
+      "nts002RejectsUnknownTypeInvalidDateReversalAndOneMillisecondOver"
+    ],
+    [
+      "dev.codex.schubert.nk.protocol.codec.QuestionNotificationWireTest",
+      "qss001DecodesExactKeywordUsernameAndBlankFields"
+    ],
+    [
+      "dev.codex.schubert.nk.protocol.codec.QuestionNotificationWireTest",
+      "qss002RejectsMalformedAndNonNfcAtBothTextOffsets"
+    ],
+    [
+      "dev.codex.schubert.nk.protocol.codec.UserCommandWireUnicodeTest",
+      "bothFieldsRejectEncodedSurrogateAndTruncationAtTheirOwnBoundary"
+    ],
+    [
+      "dev.codex.schubert.nk.protocol.codec.UserCommandWireUnicodeTest",
+      "bothFieldsRejectNoncanonicalButWellFormedUtf8"
+    ],
+    [
+      "dev.codex.schubert.nk.protocol.codec.UserCommandWireUnicodeTest",
+      "createAccepts128TwoByteCodePointsWithoutConsumingRoleOrEnabled"
+    ],
+    [
+      "dev.codex.schubert.nk.protocol.codec.UserCommandWireUnicodeTest",
+      "resetAccepts64FourByteCodePointsWithoutConsumingVersion"
+    ],
+    [
+      "dev.codex.schubert.nk.protocol.codec.UserListReplyWireTest",
+      "usr001DecodesNfcAndPreservesTheNextFieldAtThe64ByteLimit"
+    ],
+    [
+      "dev.codex.schubert.nk.protocol.codec.UserListReplyWireTest",
+      "usr002RejectsTheAllSpaceMandatoryField"
+    ],
+    [
+      "dev.codex.schubert.nk.protocol.codec.UserListReplyWireTest",
+      "usr003RejectsSurrogateEncodingAndTruncationAtTheFieldEnd"
+    ],
+    [
+      "dev.codex.schubert.nk.protocol.codec.UserListReplyWireTest",
+      "usr004RejectsValidUtf8ThatIsNotNfc"
+    ]
+  ],
+  "matchedBySuite": {
+    "dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest": 3,
+    "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest": 3,
+    "dev.codex.schubert.nk.protocol.codec.FieldCodecTest": 7,
+    "dev.codex.schubert.nk.protocol.codec.MessageCodecTest": 7,
+    "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest": 8,
+    "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest": 3,
+    "dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest": 3,
+    "dev.codex.schubert.nk.protocol.codec.WireMetadataValueContractTest": 3,
+    "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest": 7,
+    "dev.codex.schubert.nk.protocol.file.MediaDescriptorUnicodeBoundaryTest": 4,
+    "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest": 7,
+    "dev.codex.schubert.nk.protocol.header.HeaderModelTest": 7,
+    "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest": 3,
+    "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest": 4,
+    "dev.codex.schubert.nk.protocol.layout.PayloadPaginationBoundaryTest": 3,
+    "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest": 8,
+    "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogStateContractTest": 1,
+    "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest": 6,
+    "dev.codex.schubert.nk.protocol.layout.ProtocolAggregateValueContractTest": 4,
+    "dev.codex.schubert.nk.protocol.layout.ProtocolMetadataValueContractTest": 4,
+    "dev.codex.schubert.nk.protocol.layout.SemanticDirectBoundaryTest": 3,
+    "dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest": 4,
+    "dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest": 4,
+    "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest": 13,
+    "dev.codex.schubert.nk.protocol.layout.semantic.EnumWireCompatibilityTest": 2,
+    "dev.codex.schubert.nk.protocol.layout.semantic.N12IdentifierValueContractTest": 3,
+    "dev.codex.schubert.nk.protocol.layout.semantic.PathLexicalValueContractTest": 3,
+    "dev.codex.schubert.nk.protocol.layout.semantic.PathUnicodeBoundaryTest": 2,
+    "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest": 5,
+    "dev.codex.schubert.nk.protocol.layout.semantic.WireEnumCatalogValueContractTest": 4,
+    "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest": 4,
+    "dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest": 2,
+    "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest": 4,
+    "dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest": 4
+  },
+  "physicalClasses": 176,
+  "currentProtocolRawMisses": {
+    "LINE": 0,
+    "METHOD": 0,
+    "CLASS": 0,
+    "BRANCH": 0,
+    "INSTRUCTION": 0
+  },
+  "versionsAreSeparateRuns": true,
+  "sharedFixtureEffectsAuthorizedElsewhere": false,
+  "oldDeficitsRetained": true,
+  "executionsStarted": 0,
+  "currentProductTestsAdded": 0,
+  "roleReceiptsAcknowledged": null,
+  "wholeSixF03": false,
+  "whole451": false,
+  "formalDelta": 0,
+  "witnesses": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36620-ssc447-cache-owners-unit-v1/manifest.json",
+      "sha256": "f9cd070ba7c4abe9d3fe4c783a00c7a5cae09cfd98a5c5ab4c87e8aebfcfe976"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41304-protocol-numeric-physical-independent-v1/manifest.json",
+      "sha256": "77a3d80a48df4a2dab8036c5a3019a6cb58bf01f46a47731d2933b37b44dd90c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41304-protocol-numeric-physical-independent-v1/cases.json",
+      "sha256": "ae44c06ebd1906c6805621f57b261770b4033b942abc15db9884c1fe3e258798"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41304-protocol-numeric-physical-independent-v1/unfiltered.tsv",
+      "sha256": "8d89c594833f9cf0216a805b1fd07e1454ab926af2f3e32e35f5429977aa939e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40590-short-handoff-exact-current-evidence-v1/manifest.json",
+      "sha256": "ed3abca5282176ed247756073141e74fafb0c48759abf4b73f63ab3687ee52de"
+    }
+  ],
+  "script": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5678_f03_ssc447_case_handoff.py",
+    "sha256": "e98454ac263f0aa2c4ba2a1da759916ae266c79770d9dcd41839efe8b154bb95"
+  }
+}
