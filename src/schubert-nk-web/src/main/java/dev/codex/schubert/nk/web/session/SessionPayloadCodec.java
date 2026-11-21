@@ -25,9 +25,8 @@ public final class SessionPayloadCodec implements AutoCloseable {
   private final java.util.concurrent.locks.ReentrantLock stateLock =
       new java.util.concurrent.locks.ReentrantLock();
   private final String currentVersion;
-  private final byte[] currentKey;
   private final @Nullable String previousVersion;
-  private final byte @Nullable [] previousKey;
+  private final byte[] ownedKeys;
   private final SecureRandom random;
   private final SessionAttributeCodec json = new SessionAttributeCodec();
   private boolean closed;
@@ -56,9 +55,12 @@ public final class SessionPayloadCodec implements AutoCloseable {
     if (currentVersion.equals(previousVersion))
       throw new IllegalArgumentException("session key versions must be distinct");
     this.random = Objects.requireNonNull(random, "random");
-    this.currentKey = currentKey.clone();
     this.previousVersion = previousVersion;
-    this.previousKey = previousKey == null ? null : previousKey.clone();
+    this.ownedKeys = new byte[previousKey == null ? AES_KEY_BYTES : 2 * AES_KEY_BYTES];
+    System.arraycopy(currentKey, 0, ownedKeys, 0, AES_KEY_BYTES);
+    if (previousKey != null) {
+      System.arraycopy(previousKey, 0, ownedKeys, AES_KEY_BYTES, AES_KEY_BYTES);
+    }
   }
 
   /** Nonnull arguments. Writes current key with a new nonce; all owned transient arrays erased. */
@@ -79,7 +81,7 @@ public final class SessionPayloadCodec implements AutoCloseable {
         Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
         cipher.init(
             Cipher.ENCRYPT_MODE,
-            new SecretKeySpec(currentKey, "AES"),
+            new SecretKeySpec(ownedKeys, 0, AES_KEY_BYTES, "AES"),
             new GCMParameterSpec(128, nonce));
         cipher.updateAAD(aad);
         encrypted = cipher.doFinal(plaintext);
@@ -133,12 +135,14 @@ public final class SessionPayloadCodec implements AutoCloseable {
         String version = new String(stored, 8, keyLength, StandardCharsets.US_ASCII);
         if (!version.matches("[A-Za-z0-9][A-Za-z0-9._-]{0,15}")
             || !payload.keyVersion().equals(version)) throw invalid();
-        byte[] key = selectKey(version);
+        int keyOffset = selectKeyOffset(version);
         nonce = Arrays.copyOfRange(stored, nonceOffset, cipherOffset);
         aad = identity.aad(version);
         Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
         cipher.init(
-            Cipher.DECRYPT_MODE, new SecretKeySpec(key, "AES"), new GCMParameterSpec(128, nonce));
+            Cipher.DECRYPT_MODE,
+            new SecretKeySpec(ownedKeys, keyOffset, AES_KEY_BYTES, "AES"),
+            new GCMParameterSpec(128, nonce));
         cipher.updateAAD(aad);
         plaintext = cipher.doFinal(stored, cipherOffset, stored.length - cipherOffset);
         return json.decode(plaintext);
@@ -156,10 +160,9 @@ public final class SessionPayloadCodec implements AutoCloseable {
     }
   }
 
-  private byte[] selectKey(String version) {
-    if (currentVersion.equals(version)) return currentKey;
-    if (previousVersion != null && previousVersion.equals(version))
-      return Objects.requireNonNull(previousKey, "paired previous key");
+  private int selectKeyOffset(String version) {
+    if (currentVersion.equals(version)) return 0;
+    if (previousVersion != null && previousVersion.equals(version)) return AES_KEY_BYTES;
     throw new SessionPayloadException(SessionPayloadException.Reason.KEY_UNAVAILABLE);
   }
 
@@ -182,8 +185,7 @@ public final class SessionPayloadCodec implements AutoCloseable {
   public void close() {
     stateLock.lock();
     try {
-      Arrays.fill(currentKey, (byte) 0);
-      if (previousKey != null) Arrays.fill(previousKey, (byte) 0);
+      Arrays.fill(ownedKeys, (byte) 0);
       closed = true;
     } finally {
       stateLock.unlock();
