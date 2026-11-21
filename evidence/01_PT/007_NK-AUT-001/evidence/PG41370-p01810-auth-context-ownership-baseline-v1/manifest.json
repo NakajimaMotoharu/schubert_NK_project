@@ -1,0 +1,95 @@
+{
+  "run": "PG41370-p01810-auth-context-ownership-baseline-v1",
+  "actualExit": 0,
+  "source": "00849c7af686aaa125955760475bd202f8ae35af",
+  "terminalAtUTC": "2026-11-21T00:12:10.320755+00:00",
+  "inputs": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthContextCodec.java",
+      "sha256": "add11713a8ec87737f7c0c5064f104abba459e709f99c4273e4c02a3e67c65ab"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthContextIdentity.java",
+      "sha256": "b9dbed4233756c481cdb747d96f6de8843e9d910a4c18f51c30454d16130d7dd"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/EncryptedAuthContext.java",
+      "sha256": "3d8291bb1c35119e37a89e69b6895a73369d124be29ec73d7567b023834c0a83"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthContextCryptoException.java",
+      "sha256": "a54b29289de7d08e01d6cbc814e9a815ae2162de559e02eebdb6e677a850066f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/package-info.java",
+      "sha256": "7219a69f7f8d33d3c9923fc9870f8703472a9a945a7ceb4580f08e529c4a6f95"
+    }
+  ],
+  "compilerPolicy": "a062ec2cf62ddc0e140d41bed89be7814071f798feac2dd0bcdc297a2d2d00cb",
+  "derivedPom": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41370-p01810-auth-context-ownership-baseline-v1/pom.xml",
+    "sha256": "2efb162259c49b8570bb8f659aa6e628f6ffac04de08861af087ad21d52e21f4"
+  },
+  "protocolJar": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41306-protocol-numeric-retained-v1/localJar.jar",
+    "sha256": "5a7006ba3e160216e8e406de786a6f10040ea5d9203da503978ae68d833fd8c3"
+  },
+  "classfile": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41370-p01810-auth-context-ownership-baseline-v1/target/classes/dev/codex/schubert/nk/api/security/AuthContextCodec.class",
+    "sha256": "c2862909b1638e04419ac016d78a25301479f215a2265cf5b1de421f5568fcc1"
+  },
+  "result": {
+    "priorClones": [
+      140,
+      169
+    ],
+    "oneAllocation": [],
+    "boundedCopies": []
+  },
+  "steps": {
+    "compile": {
+      "argv": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-f",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41370-p01810-auth-context-ownership-baseline-v1/pom.xml",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-Dmaven.test.skip=true",
+        "compile"
+      ],
+      "exit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41370-p01810-auth-context-ownership-baseline-v1/compile.out",
+        "sha256": "5a5e6f3499764bcd57c163fd225c80a5de250923f8e5b08aaaf391b1ea295609"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41370-p01810-auth-context-ownership-baseline-v1/compile.err",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "javap": {
+      "argv": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-p",
+        "-s",
+        "-c",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41370-p01810-auth-context-ownership-baseline-v1/target/classes/dev/codex/schubert/nk/api/security/AuthContextCodec.class"
+      ],
+      "exit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41370-p01810-auth-context-ownership-baseline-v1/javap.out",
+        "sha256": "c986f3cfe3cdcdfbdfea42640041a72a25476dd6ce86763729bd340e6872b382"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41370-p01810-auth-context-ownership-baseline-v1/javap.err",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "actualOutOfMemoryTest": false,
+  "actualBackendOperations": 0,
+  "whole451": false,
+  "formalDelta": 0
+}

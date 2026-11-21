@@ -6,8 +6,6 @@ import java.nio.charset.StandardCharsets;
 import java.security.GeneralSecurityException;
 import java.security.SecureRandom;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -28,7 +26,8 @@ public final class AuthContextCodec implements AutoCloseable {
   private final java.util.concurrent.locks.ReentrantLock stateLock =
       new java.util.concurrent.locks.ReentrantLock();
   private final String currentVersion;
-  private final Map<String, byte[]> keys;
+  private final @Nullable String previousVersion;
+  private final byte[] ownedKeys;
   private final SecureRandom random;
   private final EnvelopeFactory envelopes;
   private boolean closed;
@@ -79,13 +78,13 @@ public final class AuthContextCodec implements AutoCloseable {
     this.currentVersion = currentVersion;
     this.random = random;
     this.envelopes = Objects.requireNonNull(envelopes, "context envelope factory");
-    Map<String, byte[]> copies = new HashMap<>();
-    copies.put(currentVersion, currentKey.clone());
-    if (previousVersion != null) {
-      copies.put(
-          previousVersion, Objects.requireNonNull(previousKey, "paired previous key").clone());
+    this.previousVersion = previousVersion;
+    this.ownedKeys =
+        new byte[previousKey == null ? AUTH_CONTEXT_KEY_BYTES : 2 * AUTH_CONTEXT_KEY_BYTES];
+    System.arraycopy(currentKey, 0, ownedKeys, 0, AUTH_CONTEXT_KEY_BYTES);
+    if (previousKey != null) {
+      System.arraycopy(previousKey, 0, ownedKeys, AUTH_CONTEXT_KEY_BYTES, AUTH_CONTEXT_KEY_BYTES);
     }
-    keys = Map.copyOf(copies);
   }
 
   public EncryptedAuthContext encrypt(AuthContextIdentity identity, AuthenticationContext raw) {
@@ -102,12 +101,7 @@ public final class AuthContextCodec implements AutoCloseable {
         nonce = new byte[12];
         random.nextBytes(nonce);
         byte[] encrypted =
-            crypt(
-                Cipher.ENCRYPT_MODE,
-                key(currentVersion),
-                nonce,
-                identity.aad(currentVersion),
-                plaintext);
+            crypt(Cipher.ENCRYPT_MODE, 0, nonce, identity.aad(currentVersion), plaintext);
         try {
           byte[] id = currentVersion.getBytes(StandardCharsets.US_ASCII);
           byte[] stored =
@@ -162,14 +156,14 @@ public final class AuthContextCodec implements AutoCloseable {
         if (!storedContext.keyVersion().equals(version)) {
           throw new AuthContextCryptoException(AuthContextCryptoException.Reason.INVALID);
         }
-        byte[] selected = key(version);
+        int selectedOffset = selectKeyOffset(version);
         byte[] nonce = new byte[0];
         byte[] encrypted = new byte[0];
         try {
           nonce = Arrays.copyOfRange(stored, 8 + idLength, 20 + idLength);
           encrypted = Arrays.copyOfRange(stored, 20 + idLength, stored.length);
           byte[] plaintext =
-              crypt(Cipher.DECRYPT_MODE, selected, nonce, identity.aad(version), encrypted);
+              crypt(Cipher.DECRYPT_MODE, selectedOffset, nonce, identity.aad(version), encrypted);
           try {
             return AuthenticationContext.of(new String(plaintext, StandardCharsets.US_ASCII));
           } finally {
@@ -191,17 +185,19 @@ public final class AuthContextCodec implements AutoCloseable {
     }
   }
 
-  private byte[] key(String version) {
-    byte[] key = keys.get(version);
-    if (key == null)
-      throw new AuthContextCryptoException(AuthContextCryptoException.Reason.KEY_UNAVAILABLE);
-    return key;
+  private int selectKeyOffset(String version) {
+    if (currentVersion.equals(version)) return 0;
+    if (version.equals(previousVersion)) return AUTH_CONTEXT_KEY_BYTES;
+    throw new AuthContextCryptoException(AuthContextCryptoException.Reason.KEY_UNAVAILABLE);
   }
 
-  private static byte[] crypt(int mode, byte[] key, byte[] nonce, byte[] aad, byte[] data)
+  private byte[] crypt(int mode, int keyOffset, byte[] nonce, byte[] aad, byte[] data)
       throws GeneralSecurityException {
     Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
-    cipher.init(mode, new SecretKeySpec(key, "AES"), new GCMParameterSpec(128, nonce));
+    cipher.init(
+        mode,
+        new SecretKeySpec(ownedKeys, keyOffset, AUTH_CONTEXT_KEY_BYTES, "AES"),
+        new GCMParameterSpec(128, nonce));
     cipher.updateAAD(aad);
     return cipher.doFinal(data);
   }
@@ -227,7 +223,7 @@ public final class AuthContextCodec implements AutoCloseable {
   public void close() {
     stateLock.lock();
     try {
-      for (byte[] key : keys.values()) Arrays.fill(key, (byte) 0);
+      Arrays.fill(ownedKeys, (byte) 0);
       closed = true;
     } finally {
       stateLock.unlock();
