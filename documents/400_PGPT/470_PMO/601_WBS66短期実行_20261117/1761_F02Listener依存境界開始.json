@@ -1,0 +1,67 @@
+{
+  "eventId": "PGPT-20261008-7276",
+  "groupId": "WBS66-F02-LISTENER-OWNER-BOUNDARY",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-21T00:33:21.563000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 86,
+      "remainingPercent": 14,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66-F02-LISTENER-OWNER-BOUNDARY",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "WBS66-F02-LISTENER-OWNER-BOUNDARY",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-b"
+    ],
+    "source": "3355dbab4941f0858b3b383e69c12f48cde90e4b",
+    "productionCoreMain": "007b96d8be7c10e265b5a12d01231013ae9e0acd",
+    "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "run": "PG41388-f02-listener-owner-red-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.22,
+      "base": 0.55,
+      "high": 1.3
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1760_F03四担当引渡しと再開点.json",
+        "sha256": "a1b32fad6f322ddc2189ae890bec382dcaa4198879cebec6fc8142c87102ca10"
+      },
+      {
+        "path": "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md",
+        "sha256": "72427a8609a9c4753ff459cbfa92e3ad27669544c59d53eb9191b97b911c74d2"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41382-f02-current-protocol-image-xml-file-v1/manifest.json",
+        "sha256": "8633f3c20aab3695608b44c3d5d2d57ea484cd8eede06f05f931501769419b12"
+      },
+      {
+        "path": "tools/quality/architecture/ModuleDependencyAudit.java",
+        "sha256": "1a5144c685c0636f186f724a84419aa8e96b6113aef0ba578667027efcc7993c"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "SS311 §3 and §10 listener responsibility. Current static auditor checks web Controllers and Protocol filesystem, but has no Listener-specific SQL/file owner check.",
+    "endCondition": "Confirm pre-fix gaps then check recognized Listener direct JDBC/file calls, explicit non-listener and borrowed/JMS controls, earlier fixture requalification, and current boundary inventory evidence.",
+    "workScope": "Static tool scope only. No Product-runtime entrypoint, real DB/Filesystem operation, held target class, or F02 formal acceptance."
+  }
+}

@@ -1,0 +1,179 @@
+{
+  "run": "PG41388-f02-listener-owner-red-v1",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-21T00:34:35.288714+00:00",
+  "source": "3355dbab4941f0858b3b383e69c12f48cde90e4b",
+  "core": "007b96d8be7c10e265b5a12d01231013ae9e0acd",
+  "toolSha256": "1a5144c685c0636f186f724a84419aa8e96b6113aef0ba578667027efcc7993c",
+  "cases": [
+    {
+      "testId": "PT-F02-LISTENER001",
+      "origin": "dev.codex.schubert.nk.api.messaging.inbound.DirectSqlListener",
+      "target": "java.sql.Connection",
+      "expected": true,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-LISTENER002",
+      "origin": "dev.codex.schubert.nk.api.messaging.inbound.DirectFileListener",
+      "target": "java.nio.file.Files",
+      "expected": true,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-LISTENER003",
+      "origin": "dev.codex.schubert.nk.api.messaging.inbound.NestedSqlListener$Handler",
+      "target": "java.sql.Connection",
+      "expected": true,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-LISTENER004",
+      "origin": "dev.codex.schubert.nk.web.synthetic.OrdinaryReplyReceiver",
+      "target": "java.sql.Connection",
+      "expected": true,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-LISTENER005",
+      "origin": "dev.codex.schubert.nk.api.synthetic.MessageEntry",
+      "target": "java.nio.file.Path",
+      "expected": true,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-LISTENER006",
+      "origin": "dev.codex.schubert.nk.web.synthetic.StorageReplyReceiver",
+      "target": "dev.codex.schubert.nk.storage.ListenerFixtureValue",
+      "expected": true,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-LISTENER007",
+      "origin": "dev.codex.schubert.nk.api.messaging.inbound.BorrowedJmsListener",
+      "target": "jakarta.jms.JMSContext",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-LISTENER008",
+      "origin": "dev.codex.schubert.nk.api.synthetic.RealDataAdapter",
+      "target": "java.sql.Connection",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-LISTENER009",
+      "origin": "dev.codex.schubert.nk.web.synthetic.RealFileAdapter",
+      "target": "java.nio.file.Files",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-LISTENER010",
+      "origin": "dev.codex.schubert.nk.api.synthetic.NonJmsReceiver",
+      "target": "java.sql.Connection",
+      "expected": false,
+      "observed": false
+    }
+  ],
+  "priorSyntheticStaticCases": 0,
+  "priorExpectedFindings": 0,
+  "physical": 18,
+  "missingExpected": 6,
+  "actualProductTestRuns": 0,
+  "actualRuntimeCalls": 0,
+  "heldTypesOpened": 0,
+  "formalDelta": 0,
+  "wholeF02": false,
+  "whole451": false,
+  "steps": {
+    "compile-tool": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41388-f02-listener-owner-red-v1/compile-tool.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41388-f02-listener-owner-red-v1/compile-tool.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "-d",
+        "/dev/shm/pgpt-listener-fence-ibc3414v/audit",
+        "/dev/shm/pgpt-listener-fence-ibc3414v/ModuleDependencyAudit.java"
+      ]
+    },
+    "compile-synthetic": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41388-f02-listener-owner-red-v1/compile-synthetic.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41388-f02-listener-owner-red-v1/compile-synthetic.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-d",
+        "/dev/shm/pgpt-listener-fence-ibc3414v/classes",
+        "/dev/shm/pgpt-listener-fence-ibc3414v/dev/codex/schubert/nk/api/messaging/inbound/DirectSqlListener.java",
+        "/dev/shm/pgpt-listener-fence-ibc3414v/dev/codex/schubert/nk/api/messaging/inbound/DirectFileListener.java",
+        "/dev/shm/pgpt-listener-fence-ibc3414v/dev/codex/schubert/nk/api/messaging/inbound/NestedSqlListener.java",
+        "/dev/shm/pgpt-listener-fence-ibc3414v/dev/codex/schubert/nk/web/synthetic/OrdinaryReplyReceiver.java",
+        "/dev/shm/pgpt-listener-fence-ibc3414v/dev/codex/schubert/nk/api/synthetic/MessageEntry.java",
+        "/dev/shm/pgpt-listener-fence-ibc3414v/dev/codex/schubert/nk/web/synthetic/StorageReplyReceiver.java",
+        "/dev/shm/pgpt-listener-fence-ibc3414v/dev/codex/schubert/nk/api/messaging/inbound/BorrowedJmsListener.java",
+        "/dev/shm/pgpt-listener-fence-ibc3414v/dev/codex/schubert/nk/api/synthetic/RealDataAdapter.java",
+        "/dev/shm/pgpt-listener-fence-ibc3414v/dev/codex/schubert/nk/web/synthetic/RealFileAdapter.java",
+        "/dev/shm/pgpt-listener-fence-ibc3414v/dev/codex/schubert/nk/api/synthetic/NonJmsReceiver.java",
+        "/dev/shm/pgpt-listener-fence-ibc3414v/dev/codex/schubert/nk/storage/ListenerFixtureValue.java",
+        "/dev/shm/pgpt-listener-fence-ibc3414v/dev/codex/schubert/nk/protocol/Anchor.java",
+        "/dev/shm/pgpt-listener-fence-ibc3414v/dev/codex/schubert/nk/storage/Anchor.java",
+        "/dev/shm/pgpt-listener-fence-ibc3414v/dev/codex/schubert/nk/bootstrap/Anchor.java",
+        "/dev/shm/pgpt-listener-fence-ibc3414v/dev/codex/schubert/nk/api/Anchor.java",
+        "/dev/shm/pgpt-listener-fence-ibc3414v/dev/codex/schubert/nk/web/Anchor.java",
+        "/dev/shm/pgpt-listener-fence-ibc3414v/dev/codex/schubert/nk/batch/Anchor.java",
+        "/dev/shm/pgpt-listener-fence-ibc3414v/jakarta/jms/Message.java",
+        "/dev/shm/pgpt-listener-fence-ibc3414v/jakarta/jms/JMSContext.java"
+      ]
+    },
+    "audit": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41388-f02-listener-owner-red-v1/audit.stdout.txt",
+        "sha256": "7b517ad6b0aed335b41928a39069ca181d4742469bbf3318620a6c9dbccbc682"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41388-f02-listener-owner-red-v1/audit.stderr.txt",
+        "sha256": "2c58b87a0350a39bb1c3b5f4891defeeb9a785e84aa11a466dc9ddb21253bf58"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/dev/shm/pgpt-listener-fence-ibc3414v/audit:/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "ModuleDependencyAudit",
+        "protocol=/dev/shm/pgpt-listener-fence-ibc3414v/protocol.jar",
+        "storage=/dev/shm/pgpt-listener-fence-ibc3414v/storage.jar",
+        "bootstrap=/dev/shm/pgpt-listener-fence-ibc3414v/bootstrap.jar",
+        "api=/dev/shm/pgpt-listener-fence-ibc3414v/api.jar",
+        "web=/dev/shm/pgpt-listener-fence-ibc3414v/web.jar",
+        "batch=/dev/shm/pgpt-listener-fence-ibc3414v/batch.jar"
+      ]
+    }
+  }
+}
