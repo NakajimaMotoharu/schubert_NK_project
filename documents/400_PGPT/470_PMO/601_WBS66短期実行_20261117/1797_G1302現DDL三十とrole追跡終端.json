@@ -1,0 +1,140 @@
+{
+  "eventId": "PGPT-20261008-7312",
+  "groupId": "WBS66-G1302-CURRENT-DDL-TRACE-32",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-21T01:19:35.601000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 88,
+      "remainingPercent": 12,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66-G1302-CURRENT-DDL-TRACE-32",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "WBS66-G1302-CURRENT-DDL-TRACE-32",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-G13.02"
+    ],
+    "managementWorkIds": [
+      "WBS-G13.02"
+    ],
+    "source": "a824fae75f5cdf623dd2d65dfc8efd01241eee9a",
+    "productionCoreMain": "2611e1acbd57955d591d52e5348999ea293e068d",
+    "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "run": "PG41428-g1302-current-ddl-role-trace-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.12,
+      "base": 0.4,
+      "high": 0.85
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1795_P00803通常Storage再開点.json",
+        "sha256": "716e9d6169c27f8b0820374edf072b19d82e4bbfed2e9bbf82ae4266fee9e96f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26124-g1302-storage-persistence-trace-v1/manifest.json",
+        "sha256": "c29f23d0fc2de4a0939b1ce3f6ba14a808457ef012adacb591c1a9e8854531ce"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29714-nullable-check-source-static-join-v1/manifest.json",
+        "sha256": "86dd88c1180ce85d765d36250a9c1d363c149915dd387bd600aeabd74a07a730"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32654-current-ddl-programtrace-review-v1/manifest.json",
+        "sha256": "2f4081031900a2999278d63bba769c40f0bb670b3a7d577e4050c0c81ff8cefd"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41426-current-storage-directory-defaults-v1/manifest.json",
+        "sha256": "d74cb18700d22eb12b93b0e84c4bc133e0ed6d836d6d56195e05f27be72154c8"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "Original G13.02 before V029/V030 had 28 migrations and one role resource. Current files add two migrations and a cutback template. Current storage names and main input differ; exact ordinary owners only.",
+    "endCondition": "All thirty production modes plus role provisioning and V030 cutback are traceable to immutable owners/requirements and explicit existing evidence. Record what still requires real DB and authorized role context. Validate current actual filenames vs independent test source.",
+    "workScope": "Public source/DDL and historical proofs only. Do not execute against DB, issue role commands, compile held test classes, or duplicate P004-01 V030 cost.",
+    "quotaAfter": {
+      "usedPercent": 88,
+      "remainingPercent": 12,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "4cb4bd6e808e24fe72eff2f131d04bdb3c5b18f987542495d4bf18b2926b9b91",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-21T01:19:35.601000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 88,
+          "remainingPercent": 12,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-21T01:19:29.180243+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 88,
+      "remainingPercent": 12,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-7311",
+    "attempt": 1,
+    "attemptResult": "旧29同byte、現30 migration・role・切戻しの32を元項目へ追跡。独立版・ファイル名と全照合。実DB・PT・正式0。",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 0,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41428-g1302-current-ddl-role-trace-v1/manifest.json",
+        "sha256": "bddc5e59c422afe2125eafb719bd78d567e4b8e958c566c9e38fc257c26d2615"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/5673_G1302_SQL三十二成果の現行追跡.md",
+        "sha256": "22118310d3c9ef6a88edd110f9042843ca9ab09d3e932ae4d382da071bd3fc0a"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "実DBと承認済みV030の適用・切戻し",
+      "G13.02全DAO・451"
+    ],
+    "legacyExactSql": 29,
+    "currentTrackedSqlArtifacts": 32,
+    "currentIndependentMigrationNames": 31,
+    "testedSource": "a824fae75f5cdf623dd2d65dfc8efd01241eee9a",
+    "qualifiedProductionCore": "2611e1acbd57955d591d52e5348999ea293e068d"
+  }
+}
