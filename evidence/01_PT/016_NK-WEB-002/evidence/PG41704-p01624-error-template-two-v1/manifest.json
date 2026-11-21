@@ -1,0 +1,80 @@
+{
+  "run": "PG41704",
+  "wbs": "WBS-P016-24/2",
+  "source": "bf202638d0ddd8b092995a9b692d49a90e0f7171",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-21T20:34:14.045270+00:00",
+  "os": {
+    "system": "Linux",
+    "release": "7.0.0-43-generic",
+    "arch": "x86_64"
+  },
+  "jdk": "openjdk 25.0.4 2026-07-21",
+  "testSource": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ErrorTemplateResourcePortTest.java",
+    "sha256": "86ac47987d023ad7bd454b88aabc91e2fa671fbd6e49f28233fa7c533e335386"
+  },
+  "spec": {
+    "path": "evidence/01_PT/016_NK-WEB-002/4175_P01624共通エラー原四artifact契約対応.md",
+    "sha256": "24fd725e57977b9ebfb500e78f6a7e3d1583b0b8e430d95b7dc240c2ee834569"
+  },
+  "authorizedResources": [
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/error/error.html",
+      "sha256": "6fe51e31810e4481a1999e27fa136970945877a2ad12221411e617b1d10634d0"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/fragments/layout.html",
+      "sha256": "a48bda151f893e28858afb26d1c636a564b8bd0cb3c3a16bc63bbb97f0e414bd"
+    }
+  ],
+  "inputManifest": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41704-p01624-error-template-two-v1/begin.json",
+    "sha256": "458b8facee06330da2f253f4f69cc89facd8f61f76cdd2075d3bf223c4096443"
+  },
+  "junitXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41704-p01624-error-template-two-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "3bdd35bc78f6ff182165bcc0747c29133e875ec66d87eed6f7e8f1aa515d69e7"
+  },
+  "caseResults": {
+    "PT-WEB-SCR090-RSRC-001": {
+      "method": "displaysOnlyAnonymousNavigationAndFixedErrorText",
+      "status": "PASS"
+    },
+    "PT-WEB-SCR090-RSRC-002": {
+      "method": "displaysEscapedIdentityAndLogoutForEitherDisplayRole",
+      "status": "PASS"
+    }
+  },
+  "testOnlyClassLoads": [
+    "dev.codex.schubert.nk.web.view.ErrorTemplateResourcePortTest"
+  ],
+  "stages": {
+    "format": 0,
+    "checkstyle": 0,
+    "compile": 0,
+    "spotbugs": 0,
+    "pmd": 0,
+    "unit": 0
+  },
+  "staticResults": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41704-p01624-error-template-two-v1/spotbugs.xml",
+      "sha256": "3a538ccf2e3c46a792b54934d612d0b7b00814000567ec0ec5b8491048d77ca8"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41704-p01624-error-template-two-v1/pmd.xml",
+      "sha256": "ba6d2b7dce0d61a071a97885b498810baf5d2f515c97c30f123a7aabadcb7423"
+    }
+  ],
+  "newDefinitions": 2,
+  "actualTargetJavaCoverage": null,
+  "formalAcceptanceId": null,
+  "realNetworkDbOrAuthenticationOperations": 0,
+  "residualCriteria": [
+    "HTTP routing and status/projection",
+    "Current authenticated display snapshot creation, actual CSRF integration",
+    "Same-source whole 451 and actual NK CHR"
+  ]
+}
