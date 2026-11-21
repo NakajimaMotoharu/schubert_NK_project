@@ -1,0 +1,206 @@
+{
+  "actualExit": 0,
+  "run": "PG41450-scr007-scenario-detail-projection-evidence-v1",
+  "terminalAtUTC": "2026-11-21T02:19:19.352625+00:00",
+  "currentCore": "2611e1acbd57955d591d52e5348999ea293e068d",
+  "designSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+  "originalUnitSource": "41584e0360a259e672493d63fc7f171a853772b0",
+  "originalCore": "fda03f9f80e13cc81b96ff0da52a43bc83828413",
+  "originalUnitCases": 32,
+  "localDetailCases": 12,
+  "sourceDigests": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/ScenarioDetailViewModel.java": "1930fa8d05d6a5af4620bf044dd870185809a81e4c52f61534a3473e88ebc55e",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/TopBarViewModel.java": "16afe37089d96cb31e7849e5bf5e289196588c6f4b8e1d4732fd402887e24a09",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionPrincipal.java": "29af626632ac4c2727f9d0963c3967cb0be7eda57daf762a482268c467dc9232",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioDetailViewModelTest.java": "2f36c481df8f9461b53f77e344342450392f3de05df7359cfcf7923910cb6820",
+    "src/schubert-nk-web/src/main/resources/templates/scenario.html": "b9709c596a3f98653d854f637ae48e742704b80537460c6f3acc5d6bd342a245",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-web/pom.xml": "9b6c47c3ab3ba0d105f41f081de10b2234af4653fdc371a8eacdf9cabb78761b",
+    "src/schubert-nk-protocol/pom.xml": "f76b730fa1cb1b34a88182ca5b685ca14fb71361c037f9418f0895d2a3022d7d"
+  },
+  "canonicalDocuments": {
+    "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md": "2b4e1ebb15b348b1f25d1502130d6a4a3607893868d7ea5e57d231ec7f3e58ef",
+    "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md": "8f9abda07bc93262c264eae723c74245165bf0806b273b0d007e9fa46f37fa46"
+  },
+  "protocolArtifact": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41306-protocol-numeric-retained-v1/localJar.jar",
+    "sha256": "5a7006ba3e160216e8e406de786a6f10040ea5d9203da503978ae68d833fd8c3"
+  },
+  "exactProtocolPhysical": {
+    "dev/codex/schubert/nk/protocol/layout/scenario/ScenarioDetailResponseData.class": "3818ea0d87c147669b343e374aca18bd3b1fa12c5451ab8f928c0ddf71a3d20e",
+    "dev/codex/schubert/nk/protocol/layout/scenario/ScenarioEntryRecord.class": "b2e10b99c78f7248d30a0a7982fc9563bee308734ee6abc6a427a32d4886a1ef",
+    "dev/codex/schubert/nk/protocol/layout/PayloadData.class": "0c654933dd8e64834f13a8c1f4b51b3c97de8f73e29469c2d3e811f1ff97a8ac",
+    "dev/codex/schubert/nk/protocol/layout/PayloadRecord.class": "b765c519a12149eec186ef06b71f6660ef222f20850ffeed94a7a3712ad5aafa",
+    "dev/codex/schubert/nk/protocol/layout/TypedFieldValues.class": "785ca4329892a953775cd737b79ed9bab47b892ce25f9c10ec193697bcfc8da7",
+    "dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.class": "96595bac9df97df6c451e59ac003a9d43cbf58ff0ec0d03b9f182670fdc7bc6b",
+    "dev/codex/schubert/nk/protocol/layout/semantic/DeliveryMode.class": "91b14847181ef0f46ee98010928c3fe900caec9b052a302e8217681dbba0a9e7",
+    "dev/codex/schubert/nk/protocol/layout/semantic/EntryType.class": "14f496b26b56aba406d858b82a648d7d68f3cd3889957ade9ea4a05730db2ca3",
+    "dev/codex/schubert/nk/protocol/layout/semantic/ScriptFileId.class": "cb294126ebe67140fcbf87f65e754aad3798a3ea37be0b4bf7dbed693481b239",
+    "dev/codex/schubert/nk/protocol/layout/semantic/DisplayPath.class": "c1361f505abe0bf74d7a00e57ed0a789e1cfcfb991a559bbed516698549461f9",
+    "dev/codex/schubert/nk/protocol/layout/semantic/GameCode.class": "faacd2afde55d78a71208fe40de03e8f2b46d06d1996935a064da78daad5bee1",
+    "dev/codex/schubert/nk/protocol/layout/semantic/UserRole.class": "97544c0f619535bd68981e891048ac289edda544f03dddbab9110c70aaa69bae",
+    "dev/codex/schubert/nk/protocol/header/AuthenticationContext.class": "6fbe0a9f9e9bc939e5545015608690b5af86b8368cf42e07771999ebd9e95793"
+  },
+  "existingCaseOracle": {
+    "web194HeaderAndNavigation()": "role、前後optional表示と両端の固定href",
+    "web195GroupingAndAudio()": "本文行順とentry-anchor並び、音声list・hrefの固定値",
+    "web196EmptyAndBounds()": "本文の空、上限、上限超え",
+    "web197NullContracts()": "境界null拒否",
+    "web198NavigationPairs()": "隣接場面のIDとtitle欠落の組合せ",
+    "web199SequenceRejection()": "本文などの並び異常拒否",
+    "web200EntryMetadataConsistency()": "行・音声メタデータ整合の負例",
+    "web201ImmutableSnapshot()": "構築後の元入力変更から独立",
+    "web202ClosedBeanContract()": "表示用の閉property",
+    "web203SyntheticHtmlEscaping()": "純合成HTMLのescape結果",
+    "web204ConcurrentProjection()": "有限並行の入力と表示結果の分離",
+    "web205RedactedDiagnostics()": "閉じた一般診断"
+  },
+  "originalModelRawCounters": {
+    "dev/codex/schubert/nk/web/view/ScenarioDetailViewModel": {
+      "INSTRUCTION": [
+        0,
+        239
+      ],
+      "BRANCH": [
+        0,
+        26
+      ],
+      "LINE": [
+        0,
+        53
+      ],
+      "COMPLEXITY": [
+        0,
+        26
+      ],
+      "METHOD": [
+        0,
+        13
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/web/view/ScenarioDetailViewModel$Audio": {
+      "INSTRUCTION": [
+        0,
+        31
+      ],
+      "BRANCH": [
+        0,
+        0
+      ],
+      "LINE": [
+        0,
+        11
+      ],
+      "COMPLEXITY": [
+        0,
+        7
+      ],
+      "METHOD": [
+        0,
+        7
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/web/view/ScenarioDetailViewModel$Entry": {
+      "INSTRUCTION": [
+        0,
+        104
+      ],
+      "BRANCH": [
+        0,
+        4
+      ],
+      "LINE": [
+        0,
+        28
+      ],
+      "COMPLEXITY": [
+        0,
+        13
+      ],
+      "METHOD": [
+        0,
+        11
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/web/view/ScenarioDetailViewModel$Navigation": {
+      "INSTRUCTION": [
+        0,
+        21
+      ],
+      "BRANCH": [
+        0,
+        0
+      ],
+      "LINE": [
+        0,
+        8
+      ],
+      "COMPLEXITY": [
+        0,
+        5
+      ],
+      "METHOD": [
+        0,
+        5
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    }
+  },
+  "originalRuntimeEvidence": [
+    {
+      "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/156_階層・詳細・Music現三十二結果.json",
+      "sha256": "036ebe58b47197dc041c6b5e3963a711bb3481412b52d5684e632b05f6378b91"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38002-hierarchy-detail-music-current32-unit-v1/manifest.json",
+      "sha256": "104a99eced78392ccc1b182137ea0e5e4cb4a78599aaa118c330ef4905f1ee86"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38004-hierarchy-detail-music-current32-independent-v1/manifest.json",
+      "sha256": "4c486e556c9fbb91b65411ab6c990e8e4ba7d72b625ab888016967d4154c7cb5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38004-hierarchy-detail-music-current32-independent-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "468b9576f13d5bf65397e91b43f2242f6946666a521528238a188548d7151863"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38004-hierarchy-detail-music-current32-independent-v1/unfiltered.stdout",
+      "sha256": "a333a93e38d2a2907fbe1f5495b00291a36d919cc75354be9214d29a43616ac5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41322-f02-exact-four-package-lineage-v1/manifest.json",
+      "sha256": "e94bd4f6446ff7f4fd7415aa66338c272d829f17c2d093fb71abd3d7ad426357"
+    }
+  ],
+  "currentWebRepackaged": false,
+  "newTests": 0,
+  "replayedTests": 0,
+  "previousCurrentCoverageMerged": false,
+  "newFormalAcceptance": 0,
+  "whole451": false,
+  "originalConditionalPriceActivated": false,
+  "withheld": [
+    "Current HTTP/controller, authenticated real delivery INLINE/FILE and 0102 termination",
+    "Current Browser and actual NK CHR",
+    "Full source and ending P015-02/451 proof"
+  ],
+  "script": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5683_scr007_scenario_detail_projection_evidence.py",
+    "sha256": "c3584807c1c2cf9355ca83829b19d055dd07b77710909174cc5b4c8f73569b35"
+  }
+}
