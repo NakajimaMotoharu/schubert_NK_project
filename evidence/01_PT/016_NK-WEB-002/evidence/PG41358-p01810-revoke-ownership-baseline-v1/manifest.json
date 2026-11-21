@@ -1,0 +1,103 @@
+{
+  "run": "PG41358-p01810-revoke-ownership-baseline-v1",
+  "actualExit": 0,
+  "source": "d468ed5a2e1d0a6431888ce9ab319c39d3a4e2c8",
+  "terminalAtUTC": "2026-11-21T00:05:32.764088+00:00",
+  "inputs": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationPayloadCodec.java",
+      "sha256": "e202d2e0221dc2a2b341130515262db5dec0eb525e605abdbb5914010b0e396b"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationPayloadIdentity.java",
+      "sha256": "e4e1611f0cf10d61f4caf359175c95d6b273e86288c1d71fe9dc7d53f7dbba82"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/EncryptedRevocationPayload.java",
+      "sha256": "cef3f699c0f4b9eb8d562ed2c131c8c23e389808d0e8fd08bc33144b0aa55d94"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationPayloadException.java",
+      "sha256": "b348ae32f6c4294a3e708b590fe46499386a0f1b516f7171d45574edc050ecf0"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/package-info.java",
+      "sha256": "785d98841334b52c27cf6c3a1625a06bf0a8a7c61776214c0ad9375a09c18549"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionStoreException.java",
+      "sha256": "93717ee948f88bd799a14cdad397c0d92e584711c32f571df8592be379033ed1"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/InvalidSessionRowException.java",
+      "sha256": "e3c592ebb82effd50447c356629695def2af5f05e90137de57fe908d4310a853"
+    }
+  ],
+  "compilerPolicy": "a062ec2cf62ddc0e140d41bed89be7814071f798feac2dd0bcdc297a2d2d00cb",
+  "derivedPom": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41358-p01810-revoke-ownership-baseline-v1/pom.xml",
+    "sha256": "2efb162259c49b8570bb8f659aa6e628f6ffac04de08861af087ad21d52e21f4"
+  },
+  "protocolJar": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41306-protocol-numeric-retained-v1/localJar.jar",
+    "sha256": "5a7006ba3e160216e8e406de786a6f10040ea5d9203da503978ae68d833fd8c3"
+  },
+  "classfile": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41358-p01810-revoke-ownership-baseline-v1/target/classes/dev/codex/schubert/nk/web/revocation/RevocationPayloadCodec.class",
+    "sha256": "108e90d45a99d38c4301a9162411dc0700cf9d4fd19e458558e7b2e69a87c4c6"
+  },
+  "result": {
+    "priorClones": [
+      112,
+      138
+    ],
+    "oneAllocation": [],
+    "boundedCopies": []
+  },
+  "steps": {
+    "compile": {
+      "argv": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-f",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41358-p01810-revoke-ownership-baseline-v1/pom.xml",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-Dmaven.test.skip=true",
+        "compile"
+      ],
+      "exit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41358-p01810-revoke-ownership-baseline-v1/compile.out",
+        "sha256": "db9e66e283b99efa909465087aec39b621ec65e275eff8cacb1282f2f8836a98"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41358-p01810-revoke-ownership-baseline-v1/compile.err",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "javap": {
+      "argv": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-p",
+        "-s",
+        "-c",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41358-p01810-revoke-ownership-baseline-v1/target/classes/dev/codex/schubert/nk/web/revocation/RevocationPayloadCodec.class"
+      ],
+      "exit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41358-p01810-revoke-ownership-baseline-v1/javap.out",
+        "sha256": "850e110b86cafefef3d610b885d5b6c216484613325274b725369d18da82310f"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41358-p01810-revoke-ownership-baseline-v1/javap.err",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "actualOutOfMemoryTest": false,
+  "actualBackendOperations": 0,
+  "whole451": false,
+  "formalDelta": 0
+}
