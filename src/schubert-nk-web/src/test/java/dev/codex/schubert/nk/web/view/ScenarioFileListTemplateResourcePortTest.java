@@ -20,6 +20,7 @@ import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 
 /** SCR006, FUN-004, UI223/234 and SS313. PT-WEB-SCR006-RSRC-001 through 003. */
 final class ScenarioFileListTemplateResourcePortTest {
+  private static final String GAME_CODE = "NUKITASHI1";
   private static final String HREF = "href";
   private static final String FILE_CARDS = ".scenario-list a.scenario-link";
 
@@ -49,7 +50,7 @@ final class ScenarioFileListTemplateResourcePortTest {
     var page =
         Map.of(
             "title", "05: ルート",
-            "game", "NUKITASHI1",
+            "game", GAME_CODE,
             "upHref", "/scenarios/NUKITASHI1",
             "topBar", topBar,
             "files", files);
@@ -64,7 +65,7 @@ final class ScenarioFileListTemplateResourcePortTest {
 
     assertEquals("NUKITASHI1 05: ルート", document.title());
     assertEquals("05: ルート", document.select("h1").text());
-    assertEquals("NUKITASHI1", document.select(".subtitle").text());
+    assertEquals(GAME_CODE, document.select(".subtitle").text());
     assertEquals("schubert NK", document.select(".brand").text());
     assertEquals("reader", document.select(".login-user").text());
     assertEquals("USER", document.select(".login-role").text());
@@ -88,10 +89,10 @@ final class ScenarioFileListTemplateResourcePortTest {
     assertEquals(List.of("/scenarios/91", "/scenarios/17"), cards.eachAttr(HREF));
     assertEquals(List.of("前章 <注> & 声", "後章"), cards.select(".scenario-title").eachText());
     assertEquals(
-        List.of("NUKITASHI1", "script/<chapter>&.txt", "12 entries"),
+        List.of(GAME_CODE, "script/<chapter>&.txt", "12 entries"),
         cards.get(0).select(".scenario-meta > span").eachText());
     assertEquals(
-        List.of("NUKITASHI1", "script/end.txt", "3 entries"),
+        List.of(GAME_CODE, "script/end.txt", "3 entries"),
         cards.get(1).select(".scenario-meta > span").eachText());
     assertTrue(cards.select(".scenario-title > *, .scenario-meta > span > *").isEmpty());
   }
