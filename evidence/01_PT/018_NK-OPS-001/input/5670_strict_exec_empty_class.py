@@ -32,7 +32,7 @@ def main(green):
     base=json.loads(started.read_bytes())['values']['source']
     diff=subprocess.check_output(['git','diff','--name-only',base,source,'--',JAVA,DECODER],text=True).splitlines()
     assert set(diff)==({str(JAVA.relative_to(ROOT)),str(DECODER.relative_to(ROOT))} if green else set())
-    name='PG41416-strict-exec-empty-class-green-v1' if green else 'PG41414-strict-exec-empty-class-red-v1'
+    name='PG41418-strict-exec-empty-class-green-v2' if green else 'PG41414-strict-exec-empty-class-red-v1'
     out=OPS/name
     out.mkdir()
     steps={}
@@ -81,6 +81,8 @@ def main(green):
         result,err=run('java-empty',[*java,invalid,fixture],1 if green else 0)
         assert (not result and 'nonempty original class name required' in err) if green else result.startswith('CLASS\tfixture/Plain\t')
         if green:
+            fallback,_=run('java-writer-compat',[*java[:-1],invalid,fixture],0)
+            assert fallback.startswith('CLASS\tfixture/Plain\t')
             real=json.loads(prior_changed_product_run.read_bytes())
             assert real['driverClasspathEntries']==real['actualDbOps']==real['heldClassesOpened']==0
             current=Path(real['originalExec']['path'])
@@ -91,6 +93,10 @@ def main(green):
             assert len(expected)==1
             proof,_=run('original-jdbc-readonly',[*java,current,*expected],0)
             assert proof.startswith('CLASS\tdev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository\t')
+            run('original-python-readonly',[sys.executable,'-B','-c',
+                'from pathlib import Path; import sys; from jacoco_readonly_exec_subset import decode; '
+                'assert len(decode(Path(sys.argv[1]).read_bytes(),{sys.argv[2]},strict_class_names=True)["classes"])==1',
+                current,'dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository'],0)
             read_only_classes=len(expected)
     report=dict(run=name,actualExit=0,terminalAtUTC=datetime.now(timezone.utc).isoformat(),source=source,
         inputFixtureSha256=sha256(HEADER+SESSION+VALID_NAME+EMPTY_NAME).hexdigest(),beforeSource=base,

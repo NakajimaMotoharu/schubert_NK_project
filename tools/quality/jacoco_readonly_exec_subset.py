@@ -25,7 +25,8 @@ def validate_modified_utf(encoded):
         raise ValueError('invalid modified UTF field')
 
 
-def decode(raw,wanted):
+def decode(raw,wanted, *, strict_class_names=False):
+    """Decode writer-format data, with optional nonempty identities for qualification."""
     if (
         type(raw) is not bytes
         or not isinstance(wanted, set)
@@ -80,7 +81,7 @@ def decode(raw,wanted):
             sessions.append(dict(labelBytesHex=label.hex(),startMillis=start,endMillis=end))
         elif tag == 0x11:
             identity,name = number(8),utf_bytes()
-            if not name:
+            if strict_class_names and not name:
                 raise ValueError('nonempty original class name required')
             if identity in identities:
                 raise ValueError('no duplicate class record union')

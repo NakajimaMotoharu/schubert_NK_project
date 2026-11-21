@@ -35,7 +35,7 @@ class ClassSelectionScopeTest(unittest.TestCase):
         for targets in (set(), {'X'}):
             with self.subTest(targets=targets):
                 with self.assertRaisesRegex(ValueError, 'nonempty original class name required'):
-                    decode(SESSION_STREAM + CLASS_X + empty_class_name, targets)
+                    decode(SESSION_STREAM + CLASS_X + empty_class_name, targets, strict_class_names=True)
 
     def test_multiple_targets_each_keep_their_own_crc_and_probes(self):
         result = decode(SESSION_STREAM + CLASS_XY + CLASS_XYZ + CLASS_X, {'X', 'XY'})
