@@ -1,0 +1,198 @@
+{
+  "actualExit": 0,
+  "run": "PG41444-scr005-006-order-prefix-limit-evidence-v1",
+  "terminalAtUTC": "2026-11-21T02:13:05.773775+00:00",
+  "currentCore": "2611e1acbd57955d591d52e5348999ea293e068d",
+  "designSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+  "originalUnitSource": "41584e0360a259e672493d63fc7f171a853772b0",
+  "originalCore": "fda03f9f80e13cc81b96ff0da52a43bc83828413",
+  "originalUnitCases": 32,
+  "localHierarchyCases": 12,
+  "sourceDigests": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/RouteListViewModel.java": "e2b1116b9e88e2496e7d5978d9e6963f6e40316347f1d19c8a44341b4a38daed",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/ScenarioFileListViewModel.java": "90cf19702c1ba8878ff6406d8dc32eeddff04f8bda1e8ffea226d21826dd6c9e",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/TopBarViewModel.java": "16afe37089d96cb31e7849e5bf5e289196588c6f4b8e1d4732fd402887e24a09",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionPrincipal.java": "29af626632ac4c2727f9d0963c3967cb0be7eda57daf762a482268c467dc9232",
+    "src/schubert-nk-web/src/main/resources/templates/scenario-routes.html": "e0a641d27ce6f637fd4dfbb5f14b0c0cbce46ab874fdf15d566126b289fe6c88",
+    "src/schubert-nk-web/src/main/resources/templates/scenario-files.html": "d76bebbaacd86eca98f38b25eb918aacead98d44ea05f7c4bd5a619cfb71fa8f",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioHierarchyViewModelTest.java": "90988ece7c893f667a33a1dba475bbf188b85a30ccbd5cf137c0f128ecc87293",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-web/pom.xml": "9b6c47c3ab3ba0d105f41f081de10b2234af4653fdc371a8eacdf9cabb78761b",
+    "src/schubert-nk-protocol/pom.xml": "f76b730fa1cb1b34a88182ca5b685ca14fb71361c037f9418f0895d2a3022d7d"
+  },
+  "canonicalDocuments": {
+    "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md": "2b4e1ebb15b348b1f25d1502130d6a4a3607893868d7ea5e57d231ec7f3e58ef",
+    "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md": "8f9abda07bc93262c264eae723c74245165bf0806b273b0d007e9fa46f37fa46"
+  },
+  "protocolArtifact": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41306-protocol-numeric-retained-v1/localJar.jar",
+    "sha256": "5a7006ba3e160216e8e406de786a6f10040ea5d9203da503978ae68d833fd8c3"
+  },
+  "exactProtocolPhysical": {
+    "dev/codex/schubert/nk/protocol/layout/scenario/RouteRecord.class": "4c69d66bac3394cd9ef55c55d1477c6e2788a37e3ad19da2cc7088b0431fcbf5",
+    "dev/codex/schubert/nk/protocol/layout/scenario/ScenarioFileRecord.class": "162945f25ecfb0d470381c92d57662e93af92c694440bd4cbfc5f653950cf800",
+    "dev/codex/schubert/nk/protocol/layout/semantic/ScriptFileId.class": "cb294126ebe67140fcbf87f65e754aad3798a3ea37be0b4bf7dbed693481b239",
+    "dev/codex/schubert/nk/protocol/layout/semantic/DisplayPath.class": "c1361f505abe0bf74d7a00e57ed0a789e1cfcfb991a559bbed516698549461f9",
+    "dev/codex/schubert/nk/protocol/layout/PayloadRecord.class": "b765c519a12149eec186ef06b71f6660ef222f20850ffeed94a7a3712ad5aafa",
+    "dev/codex/schubert/nk/protocol/layout/TypedFieldValues.class": "785ca4329892a953775cd737b79ed9bab47b892ce25f9c10ec193697bcfc8da7",
+    "dev/codex/schubert/nk/protocol/layout/semantic/GameCode.class": "faacd2afde55d78a71208fe40de03e8f2b46d06d1996935a064da78daad5bee1",
+    "dev/codex/schubert/nk/protocol/layout/semantic/UserRole.class": "97544c0f619535bd68981e891048ac289edda544f03dddbab9110c70aaa69bae",
+    "dev/codex/schubert/nk/protocol/header/AuthenticationContext.class": "6fbe0a9f9e9bc939e5545015608690b5af86b8368cf42e07771999ebd9e95793"
+  },
+  "existingCaseOracle": {
+    "web183RouteDisplay()": "ルート00/01/99、親hrefと件数を固定literalで照合",
+    "web184FileDisplay()": "入力タイトル、表示パス、上限IDのリンクと件数",
+    "web186PrefixBoundaries()": "prefix 00..99と上下異常、固定メッセージ",
+    "web187SnapshotOwnership()": "呼出元のリスト修正と表示結果の不変性",
+    "web191ListSizeBoundaries()": "純値の空、50/51および500/501。HTTP状態は別",
+    "web192PreserveSourceOrder()": "ルート・ファイルの入力逆順と既存表示名の保持"
+  },
+  "originalModelRawCounters": {
+    "dev/codex/schubert/nk/web/view/RouteListViewModel": {
+      "INSTRUCTION": [
+        0,
+        67
+      ],
+      "BRANCH": [
+        0,
+        2
+      ],
+      "LINE": [
+        0,
+        16
+      ],
+      "COMPLEXITY": [
+        0,
+        9
+      ],
+      "METHOD": [
+        0,
+        8
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/web/view/RouteListViewModel$Card": {
+      "INSTRUCTION": [
+        0,
+        50
+      ],
+      "BRANCH": [
+        0,
+        0
+      ],
+      "LINE": [
+        0,
+        12
+      ],
+      "COMPLEXITY": [
+        0,
+        7
+      ],
+      "METHOD": [
+        0,
+        7
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/web/view/ScenarioFileListViewModel": {
+      "INSTRUCTION": [
+        0,
+        104
+      ],
+      "BRANCH": [
+        0,
+        6
+      ],
+      "LINE": [
+        0,
+        23
+      ],
+      "COMPLEXITY": [
+        0,
+        13
+      ],
+      "METHOD": [
+        0,
+        10
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/web/view/ScenarioFileListViewModel$Card": {
+      "INSTRUCTION": [
+        0,
+        43
+      ],
+      "BRANCH": [
+        0,
+        0
+      ],
+      "LINE": [
+        0,
+        13
+      ],
+      "COMPLEXITY": [
+        0,
+        7
+      ],
+      "METHOD": [
+        0,
+        7
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    }
+  },
+  "originalRuntimeEvidence": [
+    {
+      "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/156_階層・詳細・Music現三十二結果.json",
+      "sha256": "036ebe58b47197dc041c6b5e3963a711bb3481412b52d5684e632b05f6378b91"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38002-hierarchy-detail-music-current32-unit-v1/manifest.json",
+      "sha256": "104a99eced78392ccc1b182137ea0e5e4cb4a78599aaa118c330ef4905f1ee86"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38004-hierarchy-detail-music-current32-independent-v1/manifest.json",
+      "sha256": "4c486e556c9fbb91b65411ab6c990e8e4ba7d72b625ab888016967d4154c7cb5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38004-hierarchy-detail-music-current32-independent-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "468b9576f13d5bf65397e91b43f2242f6946666a521528238a188548d7151863"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38004-hierarchy-detail-music-current32-independent-v1/unfiltered.stdout",
+      "sha256": "a333a93e38d2a2907fbe1f5495b00291a36d919cc75354be9214d29a43616ac5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41322-f02-exact-four-package-lineage-v1/manifest.json",
+      "sha256": "e94bd4f6446ff7f4fd7415aa66338c272d829f17c2d093fb71abd3d7ad426357"
+    }
+  ],
+  "currentWebRepackaged": false,
+  "newTests": 0,
+  "replayedTests": 0,
+  "previousCurrentCoverageMerged": false,
+  "newFormalAcceptance": 0,
+  "whole451": false,
+  "originalConditionalPriceActivated": false,
+  "withheld": [
+    "Current SCR005/006 404 for empty records and 0102 termination",
+    "Current Browser and actual NK CHR",
+    "Full source and ending P015-02/451 proof"
+  ],
+  "script": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5680_scr005_006_order_prefix_limit_evidence.py",
+    "sha256": "18008d455fcbdfa70484bb18dd9d0b116b73a5c65b2fef0f6885ac392c93967d"
+  }
+}
