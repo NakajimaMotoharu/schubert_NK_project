@@ -12,9 +12,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
@@ -84,7 +86,7 @@ final class CurrentMigrationMappingManifestTest {
       "1e856526747d19fa4761cccfc05dff7dc276e04dc2eb4a7ee5ef2cc1eacb0868";
 
   @Test
-  void mapman001FourExactFramesCountsLengthsAndHashes() throws Exception {
+  void mapman001FourExactFramesCountsLengthsAndHashes() throws NoSuchAlgorithmException {
     var result = inputs(false, false, false).manifest();
     assertArrayEquals(NORMAL.getBytes(StandardCharsets.US_ASCII), result.canonicalBytes());
     assertEquals(NORMAL_HASH, result.sha256());
@@ -93,7 +95,7 @@ final class CurrentMigrationMappingManifestTest {
   }
 
   @Test
-  void mapman002EveryMissingMappingFailsWithoutImplicitEmpty() throws Exception {
+  void mapman002EveryMissingMappingFailsWithoutImplicitEmpty() throws NoSuchAlgorithmException {
     var f = inputs(false, false, false);
     assertEquals(
         DIAGNOSTIC,
@@ -124,7 +126,7 @@ final class CurrentMigrationMappingManifestTest {
   }
 
   @Test
-  void mapman003EmptyPartsKeepAllFourIndependentHeaders() throws Exception {
+  void mapman003EmptyPartsKeepAllFourIndependentHeaders() throws NoSuchAlgorithmException {
     var files = new ScenarioFileMigrationMap(List.of());
     var entries =
         new ScenarioEntryPlacementMap(files, new ScenarioEntryMigrationMap(List.of()), List.of());
@@ -141,7 +143,7 @@ final class CurrentMigrationMappingManifestTest {
   }
 
   @Test
-  void mapman004ByteSnapshotsAndCountsCannotMutateRetainedState() throws Exception {
+  void mapman004ByteSnapshotsAndCountsCannotMutateRetainedState() throws NoSuchAlgorithmException {
     var result = inputs(false, false, false).manifest();
     byte[] exposed = result.canonicalBytes();
     exposed[0] = 0;
@@ -164,7 +166,7 @@ final class CurrentMigrationMappingManifestTest {
   }
 
   @Test
-  void mapman005EntryTargetFileMustExistInItsDeclaredGame() throws Exception {
+  void mapman005EntryTargetFileMustExistInItsDeclaredGame() throws NoSuchAlgorithmException {
     var f = inputs(false, false, false);
     var missing =
         new ScenarioFileMigrationMap(
@@ -192,7 +194,7 @@ final class CurrentMigrationMappingManifestTest {
   }
 
   @Test
-  void mapman006CanonicalSortAndIndependentTableIdSpaces() throws Exception {
+  void mapman006CanonicalSortAndIndependentTableIdSpaces() throws NoSuchAlgorithmException {
     var shuffled = inputs(true, false, false).manifest();
     assertArrayEquals(NORMAL.getBytes(StandardCharsets.US_ASCII), shuffled.canonicalBytes());
     var overlapping = inputs(false, false, true).manifest();
@@ -202,7 +204,8 @@ final class CurrentMigrationMappingManifestTest {
   }
 
   @Test
-  void mapman007SharedImmutableManifestHasFiniteIndependentReaders() throws Exception {
+  void mapman007SharedImmutableManifestHasFiniteIndependentReaders()
+      throws NoSuchAlgorithmException, InterruptedException, ExecutionException, TimeoutException {
     var result = inputs(false, false, false).manifest();
     var executor = Executors.newFixedThreadPool(WORKERS);
     try {
@@ -227,7 +230,8 @@ final class CurrentMigrationMappingManifestTest {
   }
 
   @Test
-  void mapman008SignedLongAndSparseN12BoundariesFreshSnapshotAndRedaction() throws Exception {
+  void mapman008SignedLongAndSparseN12BoundariesFreshSnapshotAndRedaction()
+      throws NoSuchAlgorithmException {
     var one = inputs(false, true, false).manifest();
     var two = inputs(true, true, false).manifest();
     assertArrayEquals(BOUNDARY.getBytes(StandardCharsets.US_ASCII), one.canonicalBytes());
@@ -242,7 +246,7 @@ final class CurrentMigrationMappingManifestTest {
   }
 
   @Test
-  void mapman009SerializedReadbackUsesRetainedDeclaredDigest() throws Exception {
+  void mapman009SerializedReadbackUsesRetainedDeclaredDigest() throws NoSuchAlgorithmException {
     var declared = inputs(false, false, false).manifest();
     declared.verifySerialized(NORMAL.getBytes(StandardCharsets.US_ASCII));
     assertEquals(NORMAL_HASH, declared.sha256());
@@ -250,7 +254,8 @@ final class CurrentMigrationMappingManifestTest {
   }
 
   @Test
-  void mapman010OtherValidManifestNullAndCorruptBytesCannotBorrowExpectedHash() throws Exception {
+  void mapman010OtherValidManifestNullAndCorruptBytesCannotBorrowExpectedHash()
+      throws NoSuchAlgorithmException {
     var declared = inputs(false, false, false).manifest();
     assertThrows(IllegalArgumentException.class, () -> declared.verifySerialized(null));
     assertThrows(
