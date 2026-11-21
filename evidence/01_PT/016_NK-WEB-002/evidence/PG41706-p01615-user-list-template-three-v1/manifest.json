@@ -1,0 +1,34 @@
+{
+  "run": "PG41706",
+  "wbs": "WBS-P016-15/2",
+  "source": "a99ebc8b4b91be3acc399bd1c5e4cf32712a2b2e",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "terminalAtUTC": "2026-11-21T20:36:39.466738+00:00",
+  "actualExit": 1,
+  "actualStages": {
+    "format": 0,
+    "checkstyle": 0,
+    "compile": 0,
+    "pmd": 0,
+    "spotbugs": 0,
+    "unit": 1
+  },
+  "originalRun": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41706-p01615-user-list-template-three-v1/begin.json",
+    "sha256": "094927ed12738e7d0accf93ed72733d1e2fbacdba9c10aa2c4d3901035574efc"
+  },
+  "actualXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41706-p01615-user-list-template-three-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "d7a35054a99532631fba16ab2eb531ad6675fe83f6ad32c838348587c6736037"
+  },
+  "results": {
+    "passed": 2,
+    "failed": 1,
+    "errors": 0,
+    "skipped": 0
+  },
+  "bug": "BUG-3499",
+  "cause": "Fixture expanded from two rows to 50 when checking a middle page, but the full-row assertion still expected the two trailing names only.",
+  "businessBehaviorChange": false,
+  "formalAcceptanceId": null
+}
