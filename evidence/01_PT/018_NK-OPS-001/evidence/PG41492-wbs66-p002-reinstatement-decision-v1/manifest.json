@@ -1,0 +1,87 @@
+{
+  "run": "PG41492",
+  "source": "731716635cf2ad812ea9c175077838d792d84705",
+  "productionCore": "2611e1acbd57955d591d52e5348999ea293e068d",
+  "wbs": {
+    "新版ID": "P002再判定-b",
+    "第58版ID": "WBS-P002-01/2（再確認）",
+    "費用主担当項目": "P002-01",
+    "計画窓": "第2窓",
+    "予定期間・週末": "12/1–12/6 18時",
+    "作業・成果物": "残る全451・終了依存を確認し、再受入又は不足条件を判定票に記録",
+    "先行ID・着手条件": "P002再判定-a、該当する現品質証跡",
+    "担当": "Protocol・品質担当",
+    "旧短期残pp": "0",
+    "改訂残pp": "0.5",
+    "終了条件": "残る全451・終了依存を確認し、再受入又は不足条件を判定票に記録",
+    "元項目の正式受入に必要な証拠": "正式な再受入時に全体へ1件復帰。指定12件の新規受入への加算は0。",
+    "参照する元項目": "P002-01",
+    "lineNumber": 67
+  },
+  "criterionDecisions": [
+    {
+      "id": "WBS-P002-01:contract",
+      "status": "PARTIAL",
+      "basis": "Local independent MSG001..011 mappings and N03 known; runtime-dependent postconditions open."
+    },
+    {
+      "id": "WBS-P002-01:scope",
+      "status": "PARTIAL",
+      "basis": "Exact 43 owned source scope recorded; required shared/runtime path qualifications incomplete."
+    },
+    {
+      "id": "WBS-P002-01:quality",
+      "status": "PARTIAL",
+      "basis": "Single Protocol171 raw counters covered; current full gate, CHR and independent end-of-run dependency receipts missing."
+    }
+  ],
+  "endingDependencies": [
+    {
+      "id": "WBS-P001-01",
+      "historicalState": "ACCEPTED",
+      "historicalSource": "7fffab57a567914956b66452e5e54388642efdec",
+      "exactCurrentProtocolSubset": true,
+      "formalEndingSameSource": false
+    },
+    {
+      "id": "WBS-P001-02",
+      "historicalState": "ACCEPTED",
+      "historicalSource": "7fffab57a567914956b66452e5e54388642efdec",
+      "exactCurrentProtocolSubset": true,
+      "formalEndingSameSource": false
+    }
+  ],
+  "formalAcceptanceId": null,
+  "formalReinstatement": 0,
+  "whole451": false,
+  "verdict": "RECHECK_REQUIRED_NOT_REINSTATED",
+  "requiredHandoff": [
+    "current authorized JVM/JMS and impact CHR proof",
+    "same-source 451 and end dependencies"
+  ],
+  "latestSameSourceProof": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41490-wbs66-p002-recheck-current-byte-proof-v1/manifest.json",
+      "sha256": "2469e0ee74d75eaf0bbb73dc597bcc8fb8de244cd95e92fa797d2776d01ffe36"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41394-protocol-three-scope-current-recheck-v1/manifest.json",
+      "sha256": "46ff116b1228cd953e91bd7ba431f566fd363542e5d200912200462d9c4cc801"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41396-protocol-msg11-exact-trace-v1/manifest.json",
+      "sha256": "ca45374bd7b4fa07549331df144ad01ed8be0709f1c724906ba7d3cb726f7acd"
+    },
+    {
+      "path": "documents/400_PGPT/450_品質/451_Build・静的解析・coverage方針.md",
+      "sha256": "7980a204c02574b235d588e3a05ae8fb7b26ecb18313f4f000918c9135da6f4c"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/481_PGPT詳細WBS.json",
+      "sha256": "4227e20a23b10ab8eecd2b69550dd7f58c79bf43a2f77b4c7c98ec943e83a2d9"
+    }
+  ],
+  "authority": "Preparation only; 12/2 F02/F03 formal or insufficient outcome deadline, 12/6 18 JST forecast/comparison forecast remains scheduled",
+  "terminalAtUTC": "2026-11-21T15:47:05.681063+00:00",
+  "exitCode": 0
+}

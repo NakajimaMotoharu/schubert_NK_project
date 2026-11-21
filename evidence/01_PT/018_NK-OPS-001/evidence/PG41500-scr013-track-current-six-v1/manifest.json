@@ -1,0 +1,289 @@
+{
+  "run": "PG41500-scr013-track-current-six-v1",
+  "source": "731716635cf2ad812ea9c175077838d792d84705",
+  "productionCore": "2611e1acbd57955d591d52e5348999ea293e068d",
+  "exitCode": 0,
+  "tested": 6,
+  "priorProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27782-music-track-public6-independent-v1/manifest.json",
+    "sha256": "c5edcd82c068dd7eb505b2460afcfea07427ede1921a3256cf0fb3ece5901a14"
+  },
+  "actualCases": [
+    [
+      "public001OrdinaryOrderUriAndMetadata()",
+      "dev.codex.schubert.nk.web.view.MusicTrackPublicContractTest",
+      "pass"
+    ],
+    [
+      "public002StoredPairOrderAndMainTitlePrecedence()",
+      "dev.codex.schubert.nk.web.view.MusicTrackPublicContractTest",
+      "pass"
+    ],
+    [
+      "public003CountAffinityIdentityLengthAndOrderBounds()",
+      "dev.codex.schubert.nk.web.view.MusicTrackPublicContractTest",
+      "pass"
+    ],
+    [
+      "public004MissingPairDuplicateRoleAndLinkSegments()",
+      "dev.codex.schubert.nk.web.view.MusicTrackPublicContractTest",
+      "pass"
+    ],
+    [
+      "public005NullOwnershipAndClosedMap()",
+      "dev.codex.schubert.nk.web.view.MusicTrackPublicContractTest",
+      "pass"
+    ],
+    [
+      "public006FiniteConcurrentProjectionsRemainIndependent()",
+      "dev.codex.schubert.nk.web.view.MusicTrackPublicContractTest",
+      "pass"
+    ]
+  ],
+  "skipped": 0,
+  "notRun": 0,
+  "failures": 0,
+  "errors": 0,
+  "newDefinitions": 0,
+  "sameFixtureAndIndependentLiteralOracle": true,
+  "singleExec": true,
+  "scopePhysical": 3,
+  "rawCounters": {
+    "dev/codex/schubert/nk/web/view/MusicTrackViewModel": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 286
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 32
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 66
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 23
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 7
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/web/view/TopBarViewModel": {
+      "INSTRUCTION": {
+        "missed": 7,
+        "covered": 23
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 0
+      },
+      "LINE": {
+        "missed": 3,
+        "covered": 6
+      },
+      "COMPLEXITY": {
+        "missed": 3,
+        "covered": 3
+      },
+      "METHOD": {
+        "missed": 3,
+        "covered": 3
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/web/session/SessionPrincipal": {
+      "INSTRUCTION": {
+        "missed": 23,
+        "covered": 64
+      },
+      "BRANCH": {
+        "missed": 5,
+        "covered": 5
+      },
+      "LINE": {
+        "missed": 3,
+        "covered": 13
+      },
+      "COMPLEXITY": {
+        "missed": 11,
+        "covered": 3
+      },
+      "METHOD": {
+        "missed": 6,
+        "covered": 3
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "ownedTargetFull": true,
+  "verifiedSourceInputs": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/MusicTrackViewModel.java",
+      "sha256": "8bb4bc900c773b4e172c723827a8e558c83133fe882df9d11adf0237cecabf8e"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/TopBarViewModel.java",
+      "sha256": "16afe37089d96cb31e7849e5bf5e289196588c6f4b8e1d4732fd402887e24a09"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionPrincipal.java",
+      "sha256": "29af626632ac4c2727f9d0963c3967cb0be7eda57daf762a482268c467dc9232"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/MusicTrackPublicContractTest.java",
+      "sha256": "7f6f1695150d479ecc49886d6517cc69a07168b76183f78bc1499a70c0b6d628"
+    }
+  ],
+  "currentProtocol": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41306-protocol-numeric-retained-v1/localJar.jar",
+    "sha256": "5a7006ba3e160216e8e406de786a6f10040ea5d9203da503978ae68d833fd8c3"
+  },
+  "terminalReceipts": [
+    {
+      "step": "compile",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-encoding",
+        "UTF-8",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-implicit:none",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41306-protocol-numeric-retained-v1/localJar.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-web/7.0.9/spring-web-7.0.9.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar",
+        "-d",
+        "/dev/shm/pgpt-scr013-mrhr6khp/classes",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/MusicTrackViewModel.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/TopBarViewModel.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionPrincipal.java",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/MusicTrackPublicContractTest.java"
+      ],
+      "beganAtUTC": "2026-11-21T15:54:14.596015+00:00",
+      "terminalAtUTC": "2026-11-21T15:54:15.611370+00:00",
+      "exit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41500-scr013-track-current-six-v1/compile.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41500-scr013-track-current-six-v1/compile.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "step": "analyzer-compile",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "-d",
+        "/dev/shm/pgpt-scr013-mrhr6khp/analyzer-classes",
+        "tools/quality/jacoco/UnfilteredCodeMeasurement.java"
+      ],
+      "beganAtUTC": "2026-11-21T15:54:15.611536+00:00",
+      "terminalAtUTC": "2026-11-21T15:54:16.274469+00:00",
+      "exit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41500-scr013-track-current-six-v1/analyzer-compile.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41500-scr013-track-current-six-v1/analyzer-compile.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "step": "junit",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Duser.timezone=Asia/Tokyo",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/PG41500-scr013-track-current-six-v1/unit.exec,append=false,sessionid=PG41500-scr013-track-current-six-v1",
+        "-cp",
+        "/dev/shm/pgpt-scr013-mrhr6khp/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/PG41306-protocol-numeric-retained-v1/localJar.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-web/7.0.9/spring-web-7.0.9.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar",
+        "org.junit.platform.console.ConsoleLauncher",
+        "execute",
+        "--disable-banner",
+        "--disable-ansi-colors",
+        "--details",
+        "summary",
+        "--fail-if-no-tests",
+        "--include-engine",
+        "junit-jupiter",
+        "--select-class",
+        "dev.codex.schubert.nk.web.view.MusicTrackPublicContractTest",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41500-scr013-track-current-six-v1/xml"
+      ],
+      "beganAtUTC": "2026-11-21T15:54:16.274619+00:00",
+      "terminalAtUTC": "2026-11-21T15:54:17.535404+00:00",
+      "exit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41500-scr013-track-current-six-v1/junit.stdout",
+        "sha256": "c9a96b2069de89462019c709168ae56269ee481e36008d3d0eca61e444106e09"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41500-scr013-track-current-six-v1/junit.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "step": "raw",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/dev/shm/pgpt-scr013-mrhr6khp/analyzer-classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+        "--strict-original-exec",
+        "--line-deficits",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41500-scr013-track-current-six-v1/unit.exec",
+        "/dev/shm/pgpt-scr013-mrhr6khp/classes/dev/codex/schubert/nk/web/view/MusicTrackViewModel.class",
+        "/dev/shm/pgpt-scr013-mrhr6khp/classes/dev/codex/schubert/nk/web/view/TopBarViewModel.class",
+        "/dev/shm/pgpt-scr013-mrhr6khp/classes/dev/codex/schubert/nk/web/session/SessionPrincipal.class"
+      ],
+      "beganAtUTC": "2026-11-21T15:54:17.535852+00:00",
+      "terminalAtUTC": "2026-11-21T15:54:17.648686+00:00",
+      "exit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41500-scr013-track-current-six-v1/raw.stdout",
+        "sha256": "738a9cbf093151b72dc986505a37a9cad69920b80d9378edf997a849f347c5d1"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41500-scr013-track-current-six-v1/raw.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "actualExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41500-scr013-track-current-six-v1/unit.exec",
+    "sha256": "8c33b252896baad54324b99c7bfd93dc9172be2be5e794f45728c7e0244de3e1"
+  },
+  "actualXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41500-scr013-track-current-six-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "2bced38b22e905f611bc6dd24fa1c6794351ee7fe87dfa50bb7d76f1ffb06eaa"
+  },
+  "rawTSV": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41500-scr013-track-current-six-v1/unfiltered.tsv",
+    "sha256": "738a9cbf093151b72dc986505a37a9cad69920b80d9378edf997a849f347c5d1"
+  },
+  "knownHeldOperations": 0,
+  "whole451": false,
+  "newFormalAcceptance": 0,
+  "terminalAtUTC": "2026-11-21T15:54:17.652432+00:00"
+}

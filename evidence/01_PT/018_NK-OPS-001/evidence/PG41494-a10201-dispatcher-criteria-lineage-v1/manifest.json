@@ -1,0 +1,79 @@
+{
+  "run": "PG41494",
+  "source": "731716635cf2ad812ea9c175077838d792d84705",
+  "productionCore": "2611e1acbd57955d591d52e5348999ea293e068d",
+  "wbs": {
+    "新版ID": "A1-02.01",
+    "第58版ID": "A1-02.01",
+    "費用主担当項目": "P004-05",
+    "計画窓": "第2窓",
+    "予定期間・週末": "12/1–12/6 18時",
+    "作業・成果物": "旧未登録群の証跡照合・必要な通常PT api（ApiSyncRequestDispatcher.java）",
+    "先行ID・着手条件": "対象・所有・許可を確認",
+    "担当": "API・DB担当",
+    "旧短期残pp": "1.65",
+    "改訂残pp": "1.65",
+    "終了条件": "対象ごとの再利用根拠、必要な修正/通常PTの結果、又は未完と必要条件を記録。費用消化だけで閉鎖しない。",
+    "元項目の正式受入に必要な証拠": "残るAPI先行4行、実ApiJdbcPoolとJdbcSyncRequestProcessorのcommit・rollback、UTC、実DB後条件。",
+    "参照する元項目": "P004-05",
+    "lineNumber": 16
+  },
+  "testIds": "PT-JMS-DISPATCH-026-A..F",
+  "oldCases": [
+    "parallelDispatchDoesNotShareSelection",
+    "delegateUnknownAndFatalIdentityArePreserved",
+    "validResponseOrInternalRouteCannotBeConsumedAsRequest",
+    "everyLiteralRequestReachesExactlyItsOwnProcessorAndMapCopyIsImmutable",
+    "eachMissingUnexpectedAndWrongRouteFailsBeforeRegistration",
+    "nullBoundaryAndDelegateNullRejectWithoutSuccess"
+  ],
+  "oldCount": 6,
+  "originalSource": "11c1feb1c0b51543f98c28e3f54213274648f06f",
+  "originalRun": "PG463-caddy-fence-full",
+  "originalEvidence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG463-caddy-fence-full/manifest.json",
+    "sha256": "70b496fa79fefc8c6322ae53bd0428b292b6e40afd0827e51245a72cc71b4a7e"
+  },
+  "originalXml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG463-caddy-fence-full/junit/api/TEST-dev.codex.schubert.nk.api.dispatch.ApiSyncRequestDispatcherTest.xml",
+    "sha256": "6987d0b6461db5138288ec8fcc6148d35d1ff7673f9d4854d90ab5497095b57e"
+  },
+  "sourceMatches": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiSyncRequestDispatcher.java",
+      "historicalBlob": "5a9ce6047efb644e49a658c0971380a72e378e58",
+      "currentBlob": "5a9ce6047efb644e49a658c0971380a72e378e58",
+      "sameBlob": true
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/dispatch/ApiSyncRequestDispatcherTest.java",
+      "historicalBlob": "4d13b654db31f2a4de6a30c62fdf65da01983a0b",
+      "currentBlob": "14529226f489d2c1c6a292402f33dd63c1165cc6",
+      "sameBlob": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/error/TemporaryInfrastructureException.java",
+      "historicalBlob": "38f9f5e4143221c93f5499cb9f3256b22a5ce862",
+      "currentBlob": "d93894c3cb6a666865ff1817e4610eecacf1780f",
+      "sameBlob": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/SyncRequestProcessor.java",
+      "historicalBlob": "345858e2ceb447814892f1c2d04a7a663138a4e3",
+      "currentBlob": "345858e2ceb447814892f1c2d04a7a663138a4e3",
+      "sameBlob": true
+    }
+  ],
+  "admittedReview": "Source-only static inspection; exact historical six marker tests",
+  "blockers": [
+    "QA056 TemporaryInfrastructureException exact class",
+    "current typed six input owner evidence",
+    "applicable P004-05 real DbPool/JDBC/transaction postconditions and end dependencies"
+  ],
+  "disposition": "HISTORICAL_MARKER_ORACLE_BOUND_CURRENT_TEST_HOLD",
+  "formalAcceptanceId": null,
+  "newTests": 0,
+  "whole451": false,
+  "terminalAtUTC": "2026-11-21T15:47:52.817363+00:00",
+  "exitCode": 0
+}

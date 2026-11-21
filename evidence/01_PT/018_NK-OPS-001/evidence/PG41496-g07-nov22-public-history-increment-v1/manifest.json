@@ -1,0 +1,95 @@
+{
+  "run": "PG41496",
+  "productionCore": "2611e1acbd57955d591d52e5348999ea293e068d",
+  "baseExclusive": "3271b00b8a53d9b8d75d46a394866931befed19f",
+  "headInclusive": "731716635cf2ad812ea9c175077838d792d84705",
+  "commits": 25,
+  "changedPaths": 129,
+  "detectorExit": 1,
+  "detectorMatches": 7,
+  "redactedReportSha256": "d92823397bf410380dbed357d3641da36e7bd7fbdfe331bbfbd8db90134bfccf",
+  "classified": [
+    {
+      "rule": "sourcegraph-access-token",
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41434-g07-after-bootstrap-v1/manifest.json",
+      "commit": "f9dff3d59296a01280fdb770029ffb839178daea",
+      "line": 5,
+      "classification": [
+        "repository commit"
+      ]
+    },
+    {
+      "rule": "sourcegraph-access-token",
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41434-g07-after-bootstrap-v1/manifest.json",
+      "commit": "f9dff3d59296a01280fdb770029ffb839178daea",
+      "line": 6,
+      "classification": [
+        "repository commit"
+      ]
+    },
+    {
+      "rule": "sourcegraph-access-token",
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41434-g07-after-bootstrap-v1/manifest.json",
+      "commit": "f9dff3d59296a01280fdb770029ffb839178daea",
+      "line": 9,
+      "classification": [
+        "repository tree"
+      ]
+    },
+    {
+      "rule": "sourcegraph-access-token",
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41434-g07-after-bootstrap-v1/manifest.json",
+      "commit": "f9dff3d59296a01280fdb770029ffb839178daea",
+      "line": 22,
+      "classification": [
+        "repository commit"
+      ]
+    },
+    {
+      "rule": "sourcegraph-access-token",
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41434-g07-after-bootstrap-v1/manifest.json",
+      "commit": "f9dff3d59296a01280fdb770029ffb839178daea",
+      "line": 29,
+      "classification": [
+        "repository commit"
+      ]
+    },
+    {
+      "rule": "sourcegraph-access-token",
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41434-g07-after-bootstrap-v1/manifest.json",
+      "commit": "f9dff3d59296a01280fdb770029ffb839178daea",
+      "line": 36,
+      "classification": [
+        "repository commit"
+      ]
+    },
+    {
+      "rule": "generic-api-key",
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41464-scr016-018-pure-form-inputs-v1/manifest.json",
+      "commit": "7ee8c35ed92c54d7441d0a86fd60e7768bf02b1f",
+      "line": 57,
+      "classification": "SHA256 of committed PasswordResetForm.java; read-only recomputation exactly matched the single line value",
+      "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/PasswordResetForm.java"
+    }
+  ],
+  "unresolved": [],
+  "actualExit": 0,
+  "confirmedSecrets": 0,
+  "tool": {
+    "path": "../toolchain/gitleaks-8.30.1-linux-x64/gitleaks",
+    "sha256": "88f91962aa2f93ac6ab281d553b9e125f5197bbbce38f9f2437f7299c32e5509"
+  },
+  "baselineTreeExact": "cd377044e4ca058ea219ca6a2fec82159559c72c",
+  "newProductTests": 0,
+  "formalAcceptanceId": null,
+  "whole451": false,
+  "wholeG07": false,
+  "nextHistoryCursor": "731716635cf2ad812ea9c175077838d792d84705",
+  "priorCursor": {
+    "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1808_G07現公開六commit再開点.json",
+    "sha256": "27ea0c3a02593f14280f75817e5efd3adb9362bb6ed280f55853c0b610c2b22a"
+  },
+  "terminalAtUTC": "2026-11-21T15:48:57.911977+00:00",
+  "firstClassifierUnresolved": 1,
+  "independentClassification": "One known source SHA was recomputed by path; detector ran only once"
+}

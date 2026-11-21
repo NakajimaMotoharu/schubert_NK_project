@@ -1,0 +1,140 @@
+{
+  "run": "PG41498",
+  "source": "731716635cf2ad812ea9c175077838d792d84705",
+  "productionCore": "2611e1acbd57955d591d52e5348999ea293e068d",
+  "wbs": {
+    "新版ID": "WBS-P016-11/12/13-PURE",
+    "第58版ID": "WBS-P016-11,-12,-13",
+    "費用主担当項目": "P016-11,12,13",
+    "改訂残pp": "0.5",
+    "作業・成果物": "Current pure Music catalogue, section, track display and independent bounds/order. Existing proof must match exact typed artifacts.",
+    "終了条件": "Bind 3 template inputs and view models to selected raw and complete current closure, or specify true mismatch and eligible dynamic.",
+    "先行ID・着手条件": "Ordinary isolated pure view and resources only; HTTP/CHR/DB outside current selection.",
+    "basis": {
+      "path": "documents/400_PGPT/470_PMO/481_PGPT詳細WBS.json",
+      "sha256": "4227e20a23b10ab8eecd2b69550dd7f58c79bf43a2f77b4c7c98ec943e83a2d9"
+    }
+  },
+  "hierarchyPure": {
+    "caseIds": [
+      "dev.codex.schubert.nk.web.view.MusicHierarchyViewModelTest.web246CategorySnapshot()",
+      "dev.codex.schubert.nk.web.view.MusicHierarchyViewModelTest.web247SectionSnapshot()",
+      "dev.codex.schubert.nk.web.view.MusicHierarchyViewModelTest.web248SizeAndCountBounds()",
+      "dev.codex.schubert.nk.web.view.MusicHierarchyViewModelTest.web249DuplicateAndSegment()",
+      "dev.codex.schubert.nk.web.view.MusicHierarchyViewModelTest.web250NullAndOwnership()",
+      "dev.codex.schubert.nk.web.view.MusicHierarchyViewModelTest.web251ClosedBeansAndRedaction()",
+      "dev.codex.schubert.nk.web.view.MusicHierarchyViewModelTest.web252SyntheticHtmlEscaping()",
+      "dev.codex.schubert.nk.web.view.MusicHierarchyViewModelTest.web253ConcurrentProjection()"
+    ],
+    "exactInputCount": 174,
+    "changedInputs": [
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java"
+    ],
+    "changedMethodReason": "FieldCodec.decodeNumeric protocol bytes are not parsed by constructed typed music inputs",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38004-hierarchy-detail-music-current32-independent-v1/manifest.json",
+      "sha256": "4c486e556c9fbb91b65411ab6c990e8e4ba7d72b625ab888016967d4154c7cb5"
+    }
+  },
+  "separateBoundaryEvidence": [
+    {
+      "testId": "PT-WEB-SCR012-COUNT-001",
+      "exactSourceInputs": 8,
+      "original": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41176-scr012-section-count-underclaim-fresh-proof-v1/manifest.json",
+        "sha256": "87ff5a5f0feae0d02d9dd853d74e187151f713bb354f6c7463d59b363342e2a4"
+      }
+    },
+    {
+      "testId": "PT-WEB-SCR011-COUNT-001",
+      "exactSourceInputs": 8,
+      "original": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41178-scr011-category-count-underclaim-v1/manifest.json",
+        "sha256": "da5ebd207640695ca871e8d31d8a4d089c1d9bfdf4d81ddf05cfdcab7214bec8"
+      }
+    },
+    {
+      "testId": "PT-WEB-SCR013-COUNT-001",
+      "exactSourceInputs": 10,
+      "original": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41188-scr013-music-track-overclaimed-count-v1/manifest.json",
+        "sha256": "5c098d68a5d6f514372d59211c2b7a1390687a11f92095fe281b5ba6ab7eec1a"
+      }
+    }
+  ],
+  "threeResources": [
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/music.html",
+      "sha256": "fbbf5a79417693cff98acdc75eef97fd30561362ce95fff4ad2d8b703d68743f"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/music-sections.html",
+      "sha256": "62b31b622da8c27fbfe8c238ea9a4579d12d22247bd2390b5dbfbbc88650d2e4"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/music-list.html",
+      "sha256": "59264dd712a377d0fe7da5b30e4277b2cea5d4ba4d450b7db1cbc765b3fcfc6d"
+    }
+  ],
+  "trackListDom": {
+    "proof": {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG20492-music-list-template-eight-v1/manifest.json",
+      "sha256": "f92ca3cf81b46365e69eccdbfc1831cc553b097351fcb73adb02d27dc0c748a5"
+    },
+    "cases": 8
+  },
+  "olderWholeCoverageProofsNotReused": [
+    {
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27750-music-whole14-independent-v1/manifest.json",
+        "sha256": "850e9d1fc23ea2c559b238bb04c0a86a8d500c474326c17aabec645ecc2368ad"
+      },
+      "changedProtocolMain": [
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/ProtocolValidator.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/ContentDisposition.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/LargeResultRecordCodec.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldDefinition.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/TypedFieldValues.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/IdValue.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/PathSyntax.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/time/JstWireTimestamp.java"
+      ],
+      "fullOldProofApplied": false
+    },
+    {
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27782-music-track-public6-independent-v1/manifest.json",
+        "sha256": "c5edcd82c068dd7eb505b2460afcfea07427ede1921a3256cf0fb3ece5901a14"
+      },
+      "changedProtocolMain": [
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/ProtocolValidator.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/ContentDisposition.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/LargeResultRecordCodec.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldDefinition.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/TypedFieldValues.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/IdValue.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/PathSyntax.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/time/JstWireTimestamp.java"
+      ],
+      "fullOldProofApplied": false
+    }
+  ],
+  "formalAcceptanceId": null,
+  "newExecutionCount": 0,
+  "whole451": false,
+  "nextEvidence": "Run intact six pure MusicTrackPublicContractTest on current Protocol artifact and current Web display sources, then independent current raw coverage; do not replay already matching count case or original hierarchy eight.",
+  "terminalAtUTC": "2026-11-21T15:52:29.438006+00:00",
+  "exitCode": 0
+}

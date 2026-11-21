@@ -1,0 +1,96 @@
+{
+  "run": "PG41490",
+  "source": "731716635cf2ad812ea9c175077838d792d84705",
+  "productionCore": "2611e1acbd57955d591d52e5348999ea293e068d",
+  "wbs": {
+    "新版ID": "P002再判定-a",
+    "第58版ID": "WBS-P002-01/2（再確認）",
+    "費用主担当項目": "P002-01",
+    "計画窓": "第2窓",
+    "予定期間・週末": "12/1–12/6 18時",
+    "作業・成果物": "現Protocolの数値全byte検査順、修正後の独立試験と要求を同候補に結ぶ",
+    "先行ID・着手条件": "PG41300と現候補の一致",
+    "担当": "Protocol・品質担当",
+    "旧短期残pp": "0",
+    "改訂残pp": "0.3",
+    "終了条件": "現Protocolの数値全byte検査順、修正後の独立試験と要求を同候補に結ぶ",
+    "元項目の正式受入に必要な証拠": "正式な再受入時に全体へ1件復帰。指定12件の新規受入への加算は0。",
+    "参照する元項目": "P002-01",
+    "lineNumber": 66
+  },
+  "requirement": "MSG-004 / SS322 6.2 / exact independent full-byte precedence",
+  "testId": "PT-PRO-002-N03",
+  "expectation": "For a non-digit anywhere, check every input byte before arithmetic; report non-digit with no arithmetic cause and preserve input.",
+  "exactInputs": [
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java",
+      "sha256": "8018f622988cf80a9c1138ad8619d91a4b32d07d75a55ec8f37730217386a23a"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodecRules.java",
+      "sha256": "130a643497d24521b3920f90b2f300aca636077f19633f24f50ed5841d93469c"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldEncodingException.java",
+      "sha256": "60f7a35b38a0a90dfc7caf0746de64668d4dd31c3d14f7ec81b6eb7bd671f669"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PermanentProtocolException.java",
+      "sha256": "9193af24f93fcd0d45e536abbacbe4adf46029619de6d6f63e889b9af44ea2d3"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java",
+      "sha256": "2e0467343a256255013da116d1d594284a16366f9bb3befc7fa72f48dd8d44dc"
+    }
+  ],
+  "priorTerminal": 0,
+  "priorXmlCases": 8,
+  "xmlSha256": "3fdbbb40bf5db9b6744a5f9c9938bd17d443765da12a15d38db881197f4b1c33",
+  "preservedDistinctRuns": [
+    "PG41300 selected 8",
+    "PG41304 Protocol171"
+  ],
+  "protocolWithQualityPolicyByteExact": true,
+  "actualNewTests": 0,
+  "formalAcceptanceId": null,
+  "addedOriginalPointClosure": 0,
+  "currentLocalCriterion": "QUALIFIED_ON_IDENTICAL_INPUTS",
+  "remaining": [
+    "P001-01/P001-02 current terminal admission",
+    "impact CHR",
+    "actual JMS postconditions",
+    "451"
+  ],
+  "evidence": [
+    {
+      "path": "evidence/01_PT/002_NK-PRO-002/evidence/PG41300-protocol-numeric-byte-precedence-fixed-v1/manifest.json",
+      "sha256": "1be4b0348d648972df1c545c689bcfcbb3d1f07f3fe6f5053f751f1b852d6f70"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41440-f03-ssc447-and-current-protocol-cases-v1/manifest.json",
+      "sha256": "0a7d7bbfe58a2f48f2ec4114689676df9ac66f0f606bfcc6d075941c2b9f0773"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41394-protocol-three-scope-current-recheck-v1/manifest.json",
+      "sha256": "46ff116b1228cd953e91bd7ba431f566fd363542e5d200912200462d9c4cc801"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41396-protocol-msg11-exact-trace-v1/manifest.json",
+      "sha256": "ca45374bd7b4fa07549331df144ad01ed8be0709f1c724906ba7d3cb726f7acd"
+    },
+    {
+      "path": "evidence/01_PT/002_NK-PRO-002/105_FieldCodec数値全byte検査順の単体仕様.md",
+      "sha256": "951aa2e5c2b27d695a01b44b594b7d683ffe585cc7207733f67786be9d105498"
+    },
+    {
+      "path": "evidence/01_PT/002_NK-PRO-002/106_FieldCodec全byte検査順の実行結果.md",
+      "sha256": "146e02c92d49270d4b67dc31def56d084a1c509014a20cc9492edec4e70acf55"
+    },
+    {
+      "path": "evidence/01_PT/002_NK-PRO-002/107_P00201三範囲の同source再受入根拠.md",
+      "sha256": "32d3d2dcb18e5117e8dc84e6defb1a54347264f268fbf1f99abc0ee630c2aa88"
+    }
+  ],
+  "terminalAtUTC": "2026-11-21T15:46:22.103825+00:00",
+  "exitCode": 0
+}
