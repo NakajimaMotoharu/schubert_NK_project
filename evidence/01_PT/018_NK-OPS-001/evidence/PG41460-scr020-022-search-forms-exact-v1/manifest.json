@@ -1,0 +1,149 @@
+{
+  "actualExit": 0,
+  "run": "PG41460-scr020-022-search-forms-exact-v1",
+  "terminalAtUTC": "2026-11-21T02:31:27.173562+00:00",
+  "source": "a861beffdecb429054df142bc5d3ac47d59c6718",
+  "core": "2611e1acbd57955d591d52e5348999ea293e068d",
+  "exactFormAndFixtureInputs": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/NotificationSearchForm.java": "2ef67ea5d4b3829d5c48b8e2c6734473d3cdca1e09f24b7ff8c2859053297cfa",
+    "tools/quality/architecture/NotificationSearchInputContractTest.java": "aeeeb6679a6b7e805ff69028482a29d2b4d50550d8af5a120457acfe1365583b",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/QuestionSearchForm.java": "1308c621d4fb8673cae5440a7691ba1a17bf20b13f53251ab23dfb220f4351b4",
+    "tools/quality/architecture/QuestionSearchInputContractTest.java": "bc37b13a818ef8f4ef9a1dd56a73c0437d1ca442c902ae7fc951b660a653e910"
+  },
+  "exactAdmittedProtocolPhysical": {
+    "dev/codex/schubert/nk/protocol/layout/question/NotificationSearchRequestData.class": "01034c0f11a4e3faaed1b5430413197a6da07b1602680e9e9d5a24e54220b64a",
+    "dev/codex/schubert/nk/protocol/layout/question/QuestionSearchRequestData.class": "cdd69dbe163542bd22709fde502bcc63248771f80f051eb7c6b23658d222b828",
+    "dev/codex/schubert/nk/protocol/layout/semantic/NotificationType.class": "7439e5b2bed3e25aeb95b6d21cce8699f9fd03f69edf5d4c9eb819d6ffc81ab4",
+    "dev/codex/schubert/nk/protocol/layout/semantic/UserRole.class": "97544c0f619535bd68981e891048ac289edda544f03dddbab9110c70aaa69bae",
+    "dev/codex/schubert/nk/protocol/layout/semantic/AnswerState.class": "d38db2b703803d97abf5fa73bec732dcbbddc5dea687412aa344773373c1ae33"
+  },
+  "oneChangedSupport": {
+    "dev/codex/schubert/nk/protocol/layout/TypedFieldValues.class": {
+      "historicalSha256": "03ef140e4e7a7586a3a2e8f8c4003fecfee64b11b6efedc8be1da3006d3989aa",
+      "currentSha256": "785ca4329892a953775cd737b79ed9bab47b892ce25f9c10ec193697bcfc8da7"
+    }
+  },
+  "currentDirectProtocolProof": {
+    "dev/codex/schubert/nk/protocol/layout/TypedFieldValues": "7771c25d3faa76fc",
+    "dev/codex/schubert/nk/protocol/layout/question/NotificationSearchRequestData": "4b97d84529d70720",
+    "dev/codex/schubert/nk/protocol/layout/question/QuestionSearchRequestData": "b66014023c3a17bb"
+  },
+  "calledMethodSha": "14a1ea17668ba050f8a36055070e3612c342fc746fec6fd171d26be40df6ec3d",
+  "originalCases": {
+    "NotificationSearch": [
+      "ntform001DefaultsHaveNoOwnerOrDates()",
+      "ntform002OnlyThreeNotificationTypesBecomeEnums()",
+      "ntform003PageClampAndUpperBoundaryHaveLiteralResults()",
+      "ntform004InvalidAndOverflowPagesRemainFailures()",
+      "ntform005IndependentJstUtcPairsAndMissingSides()",
+      "ntform006SameDayAnd366DayMinusMillisecondAreAllowedNotTheNextDay()",
+      "ntform007StrictDatesRejectInvalidYearFormatAndCalendar()",
+      "ntform008UnknownOwnerAndNonSingleParametersAreNeverIgnored()",
+      "ntform009ControlAndSurrogateChecksPrecedeTrimWhileSpacesRemainOptional()",
+      "ntform010NullMapKeyListAndElementNeverCreateAForm()",
+      "ntform011SnapshotsAndIssueMapsAreImmutableCopies()",
+      "ntform012ConversionFailureAndDiagnosticRemainValueFree()"
+    ],
+    "QuestionSearch": [
+      "qsform001EmptyInputsHaveClosedRoleSpecificDefaults()",
+      "qsform002UserCannotSupplyEvenEmptyUsernameButAdminCanFilter()",
+      "qsform003NfcAndIndependentByteWidthsRespectBothLimits()",
+      "qsform004StatesMapOnlyTheThreeFixedEnums()",
+      "qsform005ValidPageValuesHaveIndependentLiteralResults()",
+      "qsform006InvalidAndOverflowPagesCannotConvert()",
+      "qsform007JstDatesUseFixedUtcGoldensWithMissingSides()",
+      "qsform008InclusiveEndOfDayDefinesThe366DayAndReverseBounds()",
+      "qsform009StrictDatesRejectYearZeroFormatAndImpossibleDays()",
+      "qsform010UnknownAndNonSingleParametersKeepExplicitFailures()",
+      "qsform011ControlAndSurrogateValidationIsBeforeNormalization()",
+      "qsform012NullBoundariesDoNotCreatePartialForms()",
+      "qsform013CopiesAndRoleSnapshotsCannotBeMutatedByCallers()",
+      "qsform014InvalidConversionAndDiagnosticsDoNotRetainInput()"
+    ]
+  },
+  "originalCounters": {
+    "dev/codex/schubert/nk/web/form/QuestionSearchForm": {
+      "INSTRUCTION": {
+        "covered": 458,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 60,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 82,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 43,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 13,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/web/form/NotificationSearchForm": {
+      "INSTRUCTION": {
+        "covered": 360,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 44,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 68,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 34,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 12,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    }
+  },
+  "initialIdentityReadExit": 1,
+  "initialReadCause": "The full TypedFieldValues class changed its owned optional ID parser, so retain separate current Protocol evidence.",
+  "proofReferences": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27956-nq-search26-v1/manifest.json",
+      "sha256": "eb16bc46bf5fb3d577278f3c052d7ae98cbcf2b4e2d53eb5282e4ea75882f422"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27958-nq-search26-independent-v1/manifest.json",
+      "sha256": "264750fb036a23edd58414976c0ac6b9c70128ff6c0c786856b77a71600eb7ea"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41322-f02-exact-four-package-lineage-v1/manifest.json",
+      "sha256": "e94bd4f6446ff7f4fd7415aa66338c272d829f17c2d093fb71abd3d7ad426357"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41304-protocol-numeric-physical-independent-v1/manifest.json",
+      "sha256": "77a3d80a48df4a2dab8036c5a3019a6cb58bf01f46a47731d2933b37b44dd90c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41304-protocol-numeric-physical-independent-v1/unfiltered.tsv",
+      "sha256": "8d89c594833f9cf0216a805b1fd07e1454ab926af2f3e32e35f5429977aa939e"
+    }
+  ],
+  "existingTestsReused": 26,
+  "testsStarted": 0,
+  "formalDelta": 0,
+  "remaining": [
+    "Four notification/question view runtime holds and real HTTP/owner/DB.",
+    "Keep old Form run and current Protocol run separate. No synthesized combined coverage."
+  ]
+}
