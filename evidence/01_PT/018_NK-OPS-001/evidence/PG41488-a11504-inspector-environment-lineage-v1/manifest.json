@@ -1,0 +1,67 @@
+{
+  "run": "PG41488",
+  "source": "8ed655bbbc29988a89d5716bdf46b72e410b6d90",
+  "productionCore": "2611e1acbd57955d591d52e5348999ea293e068d",
+  "wbs": {
+    "新版ID": "A1-15.04",
+    "第58版ID": "A1-15.04",
+    "費用主担当項目": "P004-03",
+    "計画窓": "第2窓",
+    "予定期間・週末": "12/1–12/6 18時",
+    "作業・成果物": "旧未登録群の証跡照合・必要な通常PT api、batch（InspectorEnvironmentFiles.java）",
+    "先行ID・着手条件": "対象・所有・許可を確認",
+    "担当": "DB・資源管理担当",
+    "旧短期残pp": "1.65",
+    "改訂残pp": "1.65",
+    "終了条件": "対象ごとの再利用根拠、必要な修正/通常PTの結果、又は未完と必要条件を記録。費用消化だけで閉鎖しない。",
+    "元項目の正式受入に必要な証拠": "残るMaintenanceRunFilesと退役時の所有、実FileStore・DBの原本保持、F02・F03の受入。",
+    "参照する元項目": "P004-03",
+    "lineNumber": 11
+  },
+  "priorQualifiedRun": "PT-WEB-20260925-24",
+  "priorSource": "858713c0bf310ae8bf62078b0a1cedbce4e968db",
+  "priorEvidence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/manifest.json",
+    "sha256": "475f18122f0a5834c32b48c6f1fdf5dbf6f222baeb2a6841c8964a6c6ad4d40a"
+  },
+  "priorXml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/results.xml",
+    "sha256": "ffe786e26ef767d260a403c4eb977696823d3c988fb760590fe3c027b32ad496"
+  },
+  "sourceIdentities": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/InspectorEnvironmentFiles.java",
+      "originalBlob": "06cfefafa1f2389b57c0e880358a7983bd2344d2",
+      "candidateBlob": "9cd7e9d41f1922a7a3fe55333351b1af1b5f1002",
+      "sameBlob": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/InspectorEnvironmentFilesTest.java",
+      "originalBlob": "fb5ddf1ff7fc914afdf228123d0795bf01fedf46",
+      "candidateBlob": "4a0dd6b4369b054e32aaa092ed074ab6936c7c3e",
+      "sameBlob": false
+    }
+  ],
+  "historicalNamedCases": {
+    "PT-OPS-NS-001": "prepareCallbackRetire",
+    "PT-OPS-NS-002": "callbackFailureRetention",
+    "PT-OPS-NS-003": "namespaceAndStaticIdentity",
+    "PT-OPS-NS-004": "permissionsAndAccounts",
+    "PT-OPS-NS-005": "allOpenCloseFailures",
+    "PT-OPS-NS-006": "lateFailureAndInterruption",
+    "PT-OPS-NS-007": "concurrentScopes",
+    "PT-OPS-NS-008": "constructorAndFactory"
+  },
+  "historicalIndividualPassed": 8,
+  "existingIndependentOracle": {
+    "path": "evidence/01_PT/017_NK-BAT-001/050_NK-BAT-001_namespace資源解放横展開PT.md",
+    "sha256": "caeff99c2053b219cc469eaa1e045b45f15f6f39ee5f4426a9bc6797ed8e984a"
+  },
+  "hold": "Current fixture uses native namespace and inode checks; exact authorized native runtime/owner required. No fixture split, replacement or actual resource operation.",
+  "newTestsExecuted": 0,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "disposition": "HISTORICAL_EIGHT_EXACT_CASES_VERIFIED_CURRENT_NATIVE_TEST_PENDING",
+  "terminalAtUTC": "2026-11-21T15:45:03.023313+00:00",
+  "exitCode": 0
+}

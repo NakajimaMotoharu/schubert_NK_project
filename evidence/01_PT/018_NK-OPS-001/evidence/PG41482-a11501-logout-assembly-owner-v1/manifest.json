@@ -1,0 +1,113 @@
+{
+  "run": "PG41482",
+  "source": "8ed655bbbc29988a89d5716bdf46b72e410b6d90",
+  "productionCore": "2611e1acbd57955d591d52e5348999ea293e068d",
+  "wbs": {
+    "新版ID": "A1-15.01",
+    "第58版ID": "A1-15.01",
+    "費用主担当項目": "P004-03",
+    "計画窓": "第1窓",
+    "予定期間・週末": "11/24–11/30",
+    "作業・成果物": "旧未登録群の証跡照合・必要な通常PT api、batch（LogoutApplicationAssembly.java）",
+    "先行ID・着手条件": "対象・所有・許可を確認",
+    "担当": "DB・資源管理担当",
+    "旧短期残pp": "1.65",
+    "改訂残pp": "1.65",
+    "終了条件": "対象ごとの再利用根拠、必要な修正/通常PTの結果、又は未完と必要条件を記録。費用消化だけで閉鎖しない。",
+    "元項目の正式受入に必要な証拠": "残るMaintenanceRunFilesと退役時の所有、実FileStore・DBの原本保持、F02・F03の受入。",
+    "参照する元項目": "P004-03",
+    "lineNumber": 8
+  },
+  "referencedOwner": {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LogoutApplicationAssembly.java",
+    "earlierBlob": "d85cdd01290cda6e2a9e0456279c36af2dfec828",
+    "currentBlob": "d85cdd01290cda6e2a9e0456279c36af2dfec828",
+    "sameBlob": true
+  },
+  "ordinaryMethod": "LogoutApplicationAssembly.create",
+  "referencedTestIds": [
+    "PT-AUT-LOGOUT-ASSEMBLY-001",
+    "PT-AUT-LOGOUT-ASSEMBLY-002",
+    "PT-AUT-LOGOUT-ASSEMBLY-003"
+  ],
+  "verifiedOldCases": [
+    "assemblyUsesRealRevocationInboxReplayWithoutTakingKeyOwnership",
+    "nullAndWireBoundariesAreRejected"
+  ],
+  "originalRun": "PG449-retained-logout-full",
+  "originalRunSource": "8e12121583ca5bf136f628093d26a67c5cfa516a",
+  "originalRunXml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG449-retained-logout-full/junit/api/TEST-dev.codex.schubert.nk.api.security.LogoutInboxServiceTest.xml",
+    "sha256": "5ee1859eb1ef333ac3dcc5df7fd3216095cdf4a0f66ff09278d7aa4c0b5b45c1"
+  },
+  "originalRunManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG449-retained-logout-full/manifest.json",
+    "sha256": "eb4bc56d3d8a2408105c9de7818d312124ccf7648ac37d013c1320b95510aace"
+  },
+  "currentInputs": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LogoutApplicationAssembly.java",
+      "earlierBlob": "d85cdd01290cda6e2a9e0456279c36af2dfec828",
+      "currentBlob": "d85cdd01290cda6e2a9e0456279c36af2dfec828",
+      "sameBlob": true
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LogoutInboxServiceTest.java",
+      "earlierBlob": "8cba68847a0e658c8f5a56a5b1bd10626b62e2e0",
+      "currentBlob": "a31f66e18425e4af98189013965e446a9f37f543",
+      "sameBlob": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LogoutInboxService.java",
+      "earlierBlob": "c450f29ca27720187e13e35107bd61447e6ea199",
+      "currentBlob": "4d386edd142478e51eb8b4f48622a6f9149c4156",
+      "sameBlob": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LogoutReplayService.java",
+      "earlierBlob": "b8b9f0a876e6f2adc263220fa5b6cda98c8b772f",
+      "currentBlob": "bbd69e2dee5dd7d7a99ec86555e95539aeeaa4c1",
+      "sameBlob": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/JdbcInboxCoordinator.java",
+      "earlierBlob": "e169a9f298de68a47f396b3ec18a8c3dd1163c5a",
+      "currentBlob": "5fefb0a3328c0a0588d753f2627206f1309a252b",
+      "sameBlob": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/FingerprintKeyRing.java",
+      "earlierBlob": "9dda582cd5339b3367b86cf6ae41de2652ec881f",
+      "currentBlob": "ec61f779da88d407518da4fb7ba2f3611318f790",
+      "sameBlob": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/ResponseSnapshotCodec.java",
+      "earlierBlob": "28f2b5d605a6bef47f0e22e9ad42f04362bc9a03",
+      "currentBlob": "b7d8f59acfa31600f56a986136eec2e4618a575e",
+      "sameBlob": false
+    }
+  ],
+  "directHeldDependencies": [
+    "FingerprintKeyRing",
+    "ResponseSnapshotCodec"
+  ],
+  "independentExpectations": [
+    "literal UI234 logout result",
+    "bounded null-input rejection",
+    "same transaction participants and key ownership"
+  ],
+  "qualifyingCurrentDynamic": 0,
+  "newProductTests": 0,
+  "fileBodyReadsRestrictedToAllowedAssembly": true,
+  "formalAcceptanceId": null,
+  "auditCorrection": "Selected PG449 receipt lacked assembly TestIDs; matched the preserved full PG449 manifest and its own XML instead.",
+  "disposition": "OWNER_SOURCE_EXACT_HISTORICAL_TERMINAL_QUALIFIED_FOR_REFERENCE_CURRENT_QA056_HOLD",
+  "openCriteria": [
+    "authorized exact QA056 transitive dependency closure",
+    "same candidate typed and ordinary receipt",
+    "parent P004-03 actual owner, DB/FileStore and F02/F03 terminal dependencies"
+  ],
+  "terminalAtUTC": "2026-11-21T15:42:11.602306+00:00",
+  "exitCode": 0
+}

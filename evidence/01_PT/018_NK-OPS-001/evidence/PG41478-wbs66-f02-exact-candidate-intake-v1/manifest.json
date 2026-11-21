@@ -1,0 +1,334 @@
+{
+  "run": "PG41478",
+  "source": "8ed655bbbc29988a89d5716bdf46b72e410b6d90",
+  "productionCore": "2611e1acbd57955d591d52e5348999ea293e068d",
+  "canonicalDesign": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+  "wbs": {
+    "新版ID": "WBS-F02-b-a",
+    "第58版ID": "WBS-F02-b",
+    "費用主担当項目": "F02",
+    "計画窓": "第1窓",
+    "予定期間・週末": "11/24–11/30",
+    "作業・成果物": "QA-056四型の判断・現候補を受領し、API/Webの実JARとStorage境界の証跡を揃える",
+    "先行ID・着手条件": "WBS-F02-a",
+    "担当": "ビルド・アーキテクチャ担当",
+    "旧短期残pp": "0.25",
+    "改訂残pp": "0.5",
+    "終了条件": "QA-056四型の判断・現候補を受領し、API/Webの実JARとStorage境界の証跡を揃える",
+    "元項目の正式受入に必要な証拠": "QA-056四型の適用判断。API・Webの正規ビルド、Storage JDBC責務、同候補のruntimeと451証跡。",
+    "参照する元項目": "F02、P004-03、P004-05、P018-08、P018-10、P018-02、P019-02、P004-02、P020-01、P018-07",
+    "lineNumber": 2
+  },
+  "qa056": {
+    "canonicalLedger": "documents/900_OTHER/910_台帳/911_確認事項一覧.md",
+    "decision": "UNANSWERED",
+    "fourTypes": [
+      "TemporaryInfrastructureException",
+      "FingerprintKeyRing",
+      "ResponseSnapshotCodec",
+      "WebStartupException"
+    ],
+    "metadataOnly": true,
+    "approver": "User approval for scope; build/architecture handoff accepts technical evidence",
+    "impacted": [
+      "WBS-F02-b-b",
+      "WBS-F03/2-2-a",
+      "WBS-F03/2-2-b"
+    ]
+  },
+  "packageLineage": {
+    "protocol": {
+      "status": "EXACT_COMMITTED_BUILD_INPUTS",
+      "source": "62b239d4dad561da007e15a290f8a271a165dda9",
+      "sameInputs": true,
+      "inputInventorySha256": "c7ed2dc0d24897a63711404e6c0ac229fe3b920bc71f91fc8acbd65125b14d72",
+      "archiveSha256": "5a7006ba3e160216e8e406de786a6f10040ea5d9203da503978ae68d833fd8c3",
+      "localArchive": "SHA256_MATCH",
+      "physicalFromOriginal": 176
+    },
+    "storage": {
+      "status": "EXACT_COMMITTED_BUILD_INPUTS",
+      "source": "da20ad7753279ae4e8017593866502d3341ec0e5",
+      "sameInputs": true,
+      "inputInventorySha256": "3fe62e0e88542f8c799eb6427b8041aa24dde30ffd2471d839818ceb453a1e17",
+      "archiveSha256": "e5be03a72a9cca548f68fc1ca7ee84ced8980dbea72162f58772215227be3ec0",
+      "localArchive": "SHA256_MATCH",
+      "physicalFromOriginal": 79
+    },
+    "bootstrap": {
+      "status": "EXACT_COMMITTED_BUILD_INPUTS",
+      "source": "da20ad7753279ae4e8017593866502d3341ec0e5",
+      "sameInputs": true,
+      "inputInventorySha256": "9cd9116b077b594991d4fb83d1e239e9503389bfde0c5e1126e8617d2810d9e1",
+      "archiveSha256": "3de920f0fc7df4909b362fd25856b5b91e2517fa404cbe5756725544472887f7",
+      "localArchive": "SHA256_MATCH",
+      "physicalFromOriginal": 201
+    },
+    "batch": {
+      "status": "EXACT_COMMITTED_BUILD_INPUTS",
+      "source": "559f5b5945e82374e0843dcfae11a8d07faef1ea",
+      "sameInputs": true,
+      "inputInventorySha256": "271a05a2dda287ec4f80484041608fbf5f51d4acd393e538c8862685c0dcc485",
+      "archiveSha256": "276c45bf138b351cb0a0a6bc46dc61881fabb1b17b2b09347b4feea4cfea76a6",
+      "localArchive": "SHA256_MATCH",
+      "physicalFromOriginal": 647
+    }
+  },
+  "apiWebFullPackage": {
+    "api": "UNAVAILABLE_CURRENT_AUTHORIZED",
+    "web": "UNAVAILABLE_CURRENT_AUTHORIZED"
+  },
+  "dependencyDeclaration": {
+    "protocol": {
+      "pom": "src/schubert-nk-protocol/pom.xml",
+      "sha256": "f76b730fa1cb1b34a88182ca5b685ca14fb71361c037f9418f0895d2a3022d7d",
+      "internal": []
+    },
+    "storage": {
+      "pom": "src/schubert-nk-storage/pom.xml",
+      "sha256": "d4ed59631b9ebf965db518fbe4b7894c2beb71ee3f7c1e9cdbf7b4241c8179c7",
+      "internal": []
+    },
+    "bootstrap": {
+      "pom": "src/schubert-nk-bootstrap/pom.xml",
+      "sha256": "174e3974a5fe17a226c8c43a0cd49ae70d395cb4f236168da07cd7482a67908c",
+      "internal": [
+        {
+          "artifact": "schubert-nk-storage",
+          "scope": "compile"
+        }
+      ]
+    },
+    "batch": {
+      "pom": "src/schubert-nk-batch/pom.xml",
+      "sha256": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495",
+      "internal": [
+        {
+          "artifact": "schubert-nk-bootstrap",
+          "scope": "compile"
+        },
+        {
+          "artifact": "schubert-nk-bootstrap",
+          "scope": "test"
+        },
+        {
+          "artifact": "schubert-nk-storage",
+          "scope": "compile"
+        }
+      ]
+    },
+    "api": {
+      "pom": "src/schubert-nk-api/pom.xml",
+      "sha256": "2aff7af3d90feaee1f6c09f7ad300627ed911e8372504fcfd383391429a58114",
+      "internal": [
+        {
+          "artifact": "schubert-nk-bootstrap",
+          "scope": "compile"
+        },
+        {
+          "artifact": "schubert-nk-bootstrap",
+          "scope": "test"
+        },
+        {
+          "artifact": "schubert-nk-storage",
+          "scope": "compile"
+        },
+        {
+          "artifact": "schubert-nk-protocol",
+          "scope": "compile"
+        }
+      ]
+    },
+    "web": {
+      "pom": "src/schubert-nk-web/pom.xml",
+      "sha256": "9b6c47c3ab3ba0d105f41f081de10b2234af4653fdc371a8eacdf9cabb78761b",
+      "internal": [
+        {
+          "artifact": "schubert-nk-bootstrap",
+          "scope": "compile"
+        },
+        {
+          "artifact": "schubert-nk-bootstrap",
+          "scope": "test"
+        },
+        {
+          "artifact": "schubert-nk-storage",
+          "scope": "compile"
+        },
+        {
+          "artifact": "schubert-nk-protocol",
+          "scope": "compile"
+        },
+        {
+          "artifact": "schubert-nk-api",
+          "scope": "test"
+        }
+      ]
+    }
+  },
+  "storageBoundary": {
+    "observed": {
+      "origin": "dev.codex.schubert.nk.storage.StorageIoException",
+      "target": "java.sql.SQLException",
+      "artifact": "java.sql"
+    },
+    "source": {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java",
+      "sha256": "d59870fcf8d4f7bf9ff4e0abc2e052efddd9a08e9e93efa39d1f15a97f7063cf"
+    },
+    "vendorDriverDirectFinding": 0,
+    "liveConnectionChecks": "NOT_RUN",
+    "sourceStillExact": true,
+    "openTypedJdbcEdges": 1
+  },
+  "canonicalRequirementSource": "documents/100_RD/110_総則・方針/111_システム化方針.md",
+  "criteria": [
+    {
+      "id": "SYS-001",
+      "canonicalLine": 12,
+      "expected": "次期システムの名称をschubert NKとする。",
+      "originalRemaining": "G10/CHR-A01",
+      "observed": "Approved text/title linked by PG41472",
+      "open": "Current real CHR-A01",
+      "accepted": false
+    },
+    {
+      "id": "SYS-002",
+      "canonicalLine": 13,
+      "expected": "Java 25 LTSを使用する。Ubuntu標準パッケージ`openjdk-25-jdk`で動作可能な構成とする。",
+      "originalRemaining": "N01/N02/runtime HOLD",
+      "observed": "Four actual Java 25 Maven packages; six POM dependencies inspected",
+      "open": "API and Web standard packages; final platform verification",
+      "accepted": false
+    },
+    {
+      "id": "SYS-003",
+      "canonicalLine": 14,
+      "expected": "OSはUbuntu Server 26.04 LTSとする。",
+      "originalRemaining": "N01/N02/VM HOLD",
+      "observed": "Published original design and historical PostgreSQL evidence",
+      "open": "Current production PostgreSQL/driver and real DB postconditions",
+      "accepted": false
+    },
+    {
+      "id": "SYS-004",
+      "canonicalLine": 15,
+      "expected": "DBMSはPostgreSQL 18系を使用し、構築時点の最新minor releaseを採用する。",
+      "originalRemaining": "N03/DB HOLD",
+      "observed": "Approved six-module definitions available",
+      "open": "Current complete component and runtime verification",
+      "accepted": false
+    },
+    {
+      "id": "SYS-005",
+      "canonicalLine": 16,
+      "expected": "Web層とサーバ側アプリケーション層の通信は、すべてApache ActiveMQ Artemisを介する。",
+      "originalRemaining": "P005/P006/N04 dynamic HOLD",
+      "observed": "Current Maven POM compile/test split; four package inputs pinned",
+      "open": "Authorized two packages and actual full typed graph",
+      "accepted": false
+    },
+    {
+      "id": "SYS-006",
+      "canonicalLine": 17,
+      "expected": "ブラウザ向け画面デザインは極力維持する。MQ導入等に伴う必要不可欠な変更は許容する。",
+      "originalRemaining": "G10/CHR-A01",
+      "observed": "Canonical requirement preserved; original implementation evidence linked",
+      "open": "Current JMS and component connectivity proof",
+      "accepted": false
+    },
+    {
+      "id": "SYS-007",
+      "canonicalLine": 18,
+      "expected": "Web層より後段の内部処理方式は、利用者から見た挙動を極端に変えない範囲で変更できる。安定性を優先する。",
+      "originalRemaining": "G10/CHR-L01/QA051 final HOLD",
+      "observed": "Canonical requirement preserved; original implementation evidence linked",
+      "open": "Current queue binding and actual JMS trace",
+      "accepted": false
+    },
+    {
+      "id": "SYS-008",
+      "canonicalLine": 19,
+      "expected": "本番環境はオンプレミス、単一拠点、インターネット接続ありとする。",
+      "originalRemaining": "C01/C02/N01..N05",
+      "observed": "Canonical requirement preserved; original implementation evidence linked",
+      "open": "Current browser and comparison evidence",
+      "accepted": false
+    },
+    {
+      "id": "SYS-009",
+      "canonicalLine": 20,
+      "expected": "コンテナおよびKubernetesは初期前提としない。必要性が確認された場合に再評価する。",
+      "originalRemaining": "C02/N01 deployment evidence still separate",
+      "observed": "Canonical requirement preserved; original implementation evidence linked",
+      "open": "Current host topology and 451 terminal",
+      "accepted": false
+    },
+    {
+      "id": "SYS-010",
+      "canonicalLine": 21,
+      "expected": "大容量マスタ素材を含む業務データはローカルストレージに保持し、外部ストレージサービスを利用しない。",
+      "originalRemaining": "P003/P019/N03 local-original HOLD",
+      "observed": "Canonical requirement preserved; original implementation evidence linked",
+      "open": "Current named configuration/runtime proof",
+      "accepted": false
+    },
+    {
+      "id": "SYS-012",
+      "canonicalLine": 23,
+      "expected": "初期公開方式はdomainを使用せず、到達確認済みのglobal IP addressと現行外部port `55160/tcp`を使用する。本番サーバ側のport開放は完了済みとする。",
+      "originalRemaining": "C01/C02/N05 HOLD",
+      "observed": "Canonical requirement preserved; original implementation evidence linked",
+      "open": "Current external port and safe owner proof",
+      "accepted": false
+    },
+    {
+      "id": "SYS-013",
+      "canonicalLine": 24,
+      "expected": "初期TLS方式は現行相当のCaddy内部証明書を許容し、client側の証明書警告を許容する。通信暗号化は維持する。",
+      "originalRemaining": "C01/N05 HOLD",
+      "observed": "Canonical requirement preserved; original implementation evidence linked",
+      "open": "Current Caddy/TLS proof",
+      "accepted": false
+    },
+    {
+      "id": "SYS-014",
+      "canonicalLine": 25,
+      "expected": "Domainまたは公的に信頼されるIP address証明書を将来採用する場合に、業務アプリを改修せず入口設定と証明書を交換できる構成とする。",
+      "originalRemaining": "C01/N05/IT-ST handoff",
+      "observed": "Existing entrance-transition handoff 1155 and exact requirement",
+      "open": "Current receipt and approved runtime exchange proof",
+      "accepted": false
+    }
+  ],
+  "productionTestsExecuted": 0,
+  "packageJobs": 0,
+  "runtimeInvocations": 0,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "decision": "PARTIAL_HOLD_PENDING_QA056_AND_STD_PACKAGES",
+  "existingEvidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41322-f02-exact-four-package-lineage-v1/manifest.json",
+      "sha256": "e94bd4f6446ff7f4fd7415aa66338c272d829f17c2d093fb71abd3d7ad426357"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26048-f02-individual-decision-v1/manifest.json",
+      "sha256": "618b06246e70390043ff78666c2475bcde96fc5a7710415651fe7b2c1d2b0cdf"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/760_11月25日四担当の引渡し現行差分.md",
+      "sha256": "95f9e212c80289235750da1ef4f85f31256670c654b7f4d8e61dfd790ea0ae6d"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1818_短期目標の現受渡しと依存停止点.json",
+      "sha256": "ba03e20e79f77cb5eb582ed2fad76b341764053651e7afc89eb34b20b230d7e7"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1155_F02SYS014入口交換のIT引渡し条件.md",
+      "sha256": "ddf7d180caafe917eb338cc349128710f66ec0c2dcd4383a91f8417a2d413932"
+    }
+  ],
+  "terminalAtUTC": "2026-11-21T15:38:14.959813+00:00",
+  "exitCode": 0
+}

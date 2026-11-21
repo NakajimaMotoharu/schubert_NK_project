@@ -1,0 +1,103 @@
+{
+  "eventId": "PGPT-20261008-7398",
+  "workCategory": "CONTRACT_AUDIT",
+  "source": "8ed655bbbc29988a89d5716bdf46b72e410b6d90",
+  "productionCoreMain": "2611e1acbd57955d591d52e5348999ea293e068d",
+  "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+  "managementWorkIds": [
+    "A1-15.02"
+  ],
+  "planRow": {
+    "新版ID": "A1-15.02",
+    "第58版ID": "A1-15.02",
+    "費用主担当項目": "P004-03",
+    "計画窓": "第1窓",
+    "予定期間・週末": "11/24–11/30",
+    "作業・成果物": "旧未登録群の証跡照合・必要な通常PT api、batch（InspectorLockHandoff.java）",
+    "先行ID・着手条件": "対象・所有・許可を確認",
+    "担当": "DB・資源管理担当",
+    "旧短期残pp": "1.65",
+    "改訂残pp": "1.65",
+    "終了条件": "対象ごとの再利用根拠、必要な修正/通常PTの結果、又は未完と必要条件を記録。費用消化だけで閉鎖しない。",
+    "元項目の正式受入に必要な証拠": "残るMaintenanceRunFilesと退役時の所有、実FileStore・DBの原本保持、F02・F03の受入。",
+    "参照する元項目": "P004-03",
+    "lineNumber": 9
+  },
+  "run": "PG41484",
+  "startEvent": "PGPT-20261008-7397",
+  "outcome": "Nine original cases verified. Owner source exact, current test and fixture blobs differ; no current selected or database run.",
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41484-a11502-inspector-handoff-trace-v1/manifest.json",
+    "sha256": "162adfd9243d1af61504a8cf2daeb00b9911053578f53c42ac8b9979865e9a4f"
+  },
+  "nextEvidence": "A1-15.03: examine the complete ordinary DurableRecordFilesTest and independently owned temporary-file scope. Existing evidence first; new test only if needed and admitted.",
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-21T15:43:20.756000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 0,
+      "remainingPercent": 100,
+      "resetsAt": 1795879772,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "modelRequested": "gpt-6.2-sol",
+  "modelObserved": "gpt-6.2-sol",
+  "reasoningRequested": "high",
+  "reasoningObserved": null,
+  "speedRequested": "standard",
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 0,
+    "remainingPercent": 100,
+    "resetsAt": 1795879772,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "7bdf2ea7c1dd51c822019300a58e748f2f34679bba498dd5106ea46d653ff37f",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-21T15:43:20.756000+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 0,
+        "remainingPercent": 100,
+        "resetsAt": 1795879772,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": 0,
+  "sameQuotaWindow": true,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-21T15:43:09.485457+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": false,
+  "quotaBefore": {
+    "usedPercent": 0,
+    "remainingPercent": 100,
+    "resetsAt": 1795879772,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null
+}

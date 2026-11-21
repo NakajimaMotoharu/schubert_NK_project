@@ -1,0 +1,347 @@
+{
+  "run": "PG41480",
+  "source": "8ed655bbbc29988a89d5716bdf46b72e410b6d90",
+  "productionCore": "2611e1acbd57955d591d52e5348999ea293e068d",
+  "wbs": {
+    "新版ID": "WBS-F03/2-2-a",
+    "第58版ID": "WBS-F03/2-2",
+    "費用主担当項目": "F03",
+    "計画窓": "第1窓",
+    "予定期間・週末": "11/24–11/30",
+    "作業・成果物": "既存4製品の証跡を再利用しAPI/Webと保留32テストの適用範囲を固定",
+    "先行ID・着手条件": "WBS-F03/1、WBS-F03/2-1",
+    "担当": "品質担当",
+    "旧短期残pp": "0.6",
+    "改訂残pp": "1.2",
+    "終了条件": "既存4製品の証跡を再利用しAPI/Webと保留32テストの適用範囲を固定",
+    "元項目の正式受入に必要な証拠": "保留32テスト、Root11・QA-056の適用と全6製品の型付き検査。比較工具の結果を独立表示。",
+    "参照する元項目": "F03、P004-03、P004-05、P018-08、P018-10、P018-02、P019-02、P004-02、P018-07",
+    "lineNumber": 4
+  },
+  "allSourceStyle": {
+    "mainTotal": 1027,
+    "mainExactStyle": 1027,
+    "testTotal": 1160,
+    "testExactCheckstyle": 1128,
+    "formatDeltaVerified": 4
+  },
+  "heldByModule": {
+    "schubert-nk-api": 4,
+    "schubert-nk-batch": 26,
+    "schubert-nk-storage": 2
+  },
+  "heldRows": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/FingerprintKeyRingTest.java",
+      "blob": "21e2903b6fb684d0c50692387232ad06b1d0bb1c",
+      "module": "schubert-nk-api",
+      "sameHistoricalBlob": false,
+      "status": "HOLD_NOT_INSPECTED_NOT_RUN",
+      "condition": "QA056 exact type dependent Test; only inventory verified"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/ResponseSnapshotCodecTest.java",
+      "blob": "40f5dbddb980ed0e8821fa7a2e955f5ea3e0fc06",
+      "module": "schubert-nk-api",
+      "sameHistoricalBlob": false,
+      "status": "HOLD_NOT_INSPECTED_NOT_RUN",
+      "condition": "QA056 exact type dependent Test; only inventory verified"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/ResultBoundResponseSnapshotCodecTest.java",
+      "blob": "a45add064636e9de44db55de9976430c634d7ef2",
+      "module": "schubert-nk-api",
+      "sameHistoricalBlob": true,
+      "status": "HOLD_NOT_INSPECTED_NOT_RUN",
+      "condition": "Retained protected whole test. Individual authorization for typed inspection or execution not granted."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferRootInspectionTest.java",
+      "blob": "12b646abc9320573e4be814ff2613d8e749cbb1d",
+      "module": "schubert-nk-api",
+      "sameHistoricalBlob": true,
+      "status": "HOLD_NOT_INSPECTED_NOT_RUN",
+      "condition": "Retained protected whole test. Individual authorization for typed inspection or execution not granted."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningRootScopeTest.java",
+      "blob": "b65f0f2125e3d8bf469755ed3016be7726b882fc",
+      "module": "schubert-nk-batch",
+      "sameHistoricalBlob": true,
+      "status": "HOLD_NOT_INSPECTED_NOT_RUN",
+      "condition": "Retained protected whole test. Individual authorization for typed inspection or execution not granted."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningStartupRootsTest.java",
+      "blob": "2849452ab32726f408529ae6a6344105f7d95f4c",
+      "module": "schubert-nk-batch",
+      "sameHistoricalBlob": true,
+      "status": "HOLD_NOT_INSPECTED_NOT_RUN",
+      "condition": "Retained protected whole test. Individual authorization for typed inspection or execution not granted."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/RootBatchCredentialReaderTest.java",
+      "blob": "9aa0e5223e275685efcf230bde499700793362ce",
+      "module": "schubert-nk-batch",
+      "sameHistoricalBlob": true,
+      "status": "HOLD_NOT_INSPECTED_NOT_RUN",
+      "condition": "Retained protected whole test. Individual authorization for typed inspection or execution not granted."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/RootCurrentPermitPreflightTest.java",
+      "blob": "a7210f45c51b948db582fc45462dfb1fe7651838",
+      "module": "schubert-nk-batch",
+      "sameHistoricalBlob": true,
+      "status": "HOLD_NOT_INSPECTED_NOT_RUN",
+      "condition": "Retained protected whole test. Individual authorization for typed inspection or execution not granted."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/RootElfDigestPortTest.java",
+      "blob": "be98529108cb89a7e9387e955fbc5694e0a3ff2a",
+      "module": "schubert-nk-batch",
+      "sameHistoricalBlob": true,
+      "status": "HOLD_NOT_INSPECTED_NOT_RUN",
+      "condition": "Retained protected whole test. Individual authorization for typed inspection or execution not granted."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/RootEntryRejectionTest.java",
+      "blob": "10857cecc53020f95e7f809028c13105f3cd23bc",
+      "module": "schubert-nk-batch",
+      "sameHistoricalBlob": true,
+      "status": "HOLD_NOT_INSPECTED_NOT_RUN",
+      "condition": "Retained protected whole test. Individual authorization for typed inspection or execution not granted."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/RootFailedStartPairRecoveryTest.java",
+      "blob": "cb0cbbf130df18c583d73abdd47c8f08dc098d96",
+      "module": "schubert-nk-batch",
+      "sameHistoricalBlob": true,
+      "status": "HOLD_NOT_INSPECTED_NOT_RUN",
+      "condition": "Retained protected whole test. Individual authorization for typed inspection or execution not granted."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/RootFailedStartRecoveryTest.java",
+      "blob": "f8588614ab2feacee06dd4cfdbb3b9ff4c3406b2",
+      "module": "schubert-nk-batch",
+      "sameHistoricalBlob": true,
+      "status": "HOLD_NOT_INSPECTED_NOT_RUN",
+      "condition": "Retained protected whole test. Individual authorization for typed inspection or execution not granted."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/RootPendingWaitTest.java",
+      "blob": "6092c892afaf532274a4c2e6078b87c942231ff6",
+      "module": "schubert-nk-batch",
+      "sameHistoricalBlob": true,
+      "status": "HOLD_NOT_INSPECTED_NOT_RUN",
+      "condition": "Retained protected whole test. Individual authorization for typed inspection or execution not granted."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/RootRecoveryNativeAuthorityTest.java",
+      "blob": "e8e01ccd30f1a8e63c324e62a1a6e34a54b6dc2c",
+      "module": "schubert-nk-batch",
+      "sameHistoricalBlob": true,
+      "status": "HOLD_NOT_INSPECTED_NOT_RUN",
+      "condition": "Retained protected whole test. Individual authorization for typed inspection or execution not granted."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/RootReleaseApprovalReaderTest.java",
+      "blob": "7af62de8ba71df5fff04ef3b443294474383cff7",
+      "module": "schubert-nk-batch",
+      "sameHistoricalBlob": true,
+      "status": "HOLD_NOT_INSPECTED_NOT_RUN",
+      "condition": "Retained protected whole test. Individual authorization for typed inspection or execution not granted."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/RootServiceAdmissionScopeTest.java",
+      "blob": "35647fde63e1c2f97abb2e857effc72d9eba13c9",
+      "module": "schubert-nk-batch",
+      "sameHistoricalBlob": true,
+      "status": "HOLD_NOT_INSPECTED_NOT_RUN",
+      "condition": "Retained protected whole test. Individual authorization for typed inspection or execution not granted."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/RootServiceCredentialSourceTest.java",
+      "blob": "ce8e872e28f9fcada5904c709a1c605c945e5b87",
+      "module": "schubert-nk-batch",
+      "sameHistoricalBlob": true,
+      "status": "HOLD_NOT_INSPECTED_NOT_RUN",
+      "condition": "Retained protected whole test. Individual authorization for typed inspection or execution not granted."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/RootServiceEnvironmentTest.java",
+      "blob": "d4452fe7a6d84cede1998ccb5382ad8faa490165",
+      "module": "schubert-nk-batch",
+      "sameHistoricalBlob": true,
+      "status": "HOLD_NOT_INSPECTED_NOT_RUN",
+      "condition": "Retained protected whole test. Individual authorization for typed inspection or execution not granted."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/RootServiceExecutableAdmissionTest.java",
+      "blob": "79dd3a1b78044d9b5aaaf577810df8a2a9efefd8",
+      "module": "schubert-nk-batch",
+      "sameHistoricalBlob": true,
+      "status": "HOLD_NOT_INSPECTED_NOT_RUN",
+      "condition": "Retained protected whole test. Individual authorization for typed inspection or execution not granted."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/RootServiceLauncherTest.java",
+      "blob": "6cc9ea7e740cf4947e5ff6826390e29055886ac0",
+      "module": "schubert-nk-batch",
+      "sameHistoricalBlob": true,
+      "status": "HOLD_NOT_INSPECTED_NOT_RUN",
+      "condition": "Retained protected whole test. Individual authorization for typed inspection or execution not granted."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/RootServiceProofTest.java",
+      "blob": "625347a7f8edc7e78ecd3a5c6a838c324e66792b",
+      "module": "schubert-nk-batch",
+      "sameHistoricalBlob": true,
+      "status": "HOLD_NOT_INSPECTED_NOT_RUN",
+      "condition": "Retained protected whole test. Individual authorization for typed inspection or execution not granted."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/RootStartupPendingTest.java",
+      "blob": "229e2c62bf687cfd31b37d4299625ddcd0edd9f0",
+      "module": "schubert-nk-batch",
+      "sameHistoricalBlob": true,
+      "status": "HOLD_NOT_INSPECTED_NOT_RUN",
+      "condition": "Retained protected whole test. Individual authorization for typed inspection or execution not granted."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/RootContextNoIoFixture.java",
+      "blob": "cf9ad10a3a1aa262b10bffbac19be5727da025c7",
+      "module": "schubert-nk-batch",
+      "sameHistoricalBlob": true,
+      "status": "HOLD_NOT_INSPECTED_NOT_RUN",
+      "condition": "Retained protected whole test. Individual authorization for typed inspection or execution not granted."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/RootGenerationCounterexampleTest.java",
+      "blob": "8180c41a875a647f205439f39adc6fd84f7b52b6",
+      "module": "schubert-nk-batch",
+      "sameHistoricalBlob": true,
+      "status": "HOLD_NOT_INSPECTED_NOT_RUN",
+      "condition": "Retained protected whole test. Individual authorization for typed inspection or execution not granted."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/RootGenerationTruthTableTest.java",
+      "blob": "97e9436b9d612827e1eed3c4e9d3648266cbdbf2",
+      "module": "schubert-nk-batch",
+      "sameHistoricalBlob": true,
+      "status": "HOLD_NOT_INSPECTED_NOT_RUN",
+      "condition": "Retained protected whole test. Individual authorization for typed inspection or execution not granted."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/RootReleaseAdmissionTest.java",
+      "blob": "e36f2052f3162de128fd6a1128c1b8057b0f24a9",
+      "module": "schubert-nk-batch",
+      "sameHistoricalBlob": true,
+      "status": "HOLD_NOT_INSPECTED_NOT_RUN",
+      "condition": "Retained protected whole test. Individual authorization for typed inspection or execution not granted."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/RootServiceUnitTest.java",
+      "blob": "fd8e83ca0d3313c09fddc5247211b650ea8d984c",
+      "module": "schubert-nk-batch",
+      "sameHistoricalBlob": true,
+      "status": "HOLD_NOT_INSPECTED_NOT_RUN",
+      "condition": "Retained protected whole test. Individual authorization for typed inspection or execution not granted."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/RootStartupContextTest.java",
+      "blob": "b03f698b1fb49921570c365186a3d3a1d84d88f7",
+      "module": "schubert-nk-batch",
+      "sameHistoricalBlob": true,
+      "status": "HOLD_NOT_INSPECTED_NOT_RUN",
+      "condition": "Retained protected whole test. Individual authorization for typed inspection or execution not granted."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/UnsupportedRootIdentityTest.java",
+      "blob": "10ffb229d4c846453305b3adedb08162845a6030",
+      "module": "schubert-nk-batch",
+      "sameHistoricalBlob": true,
+      "status": "HOLD_NOT_INSPECTED_NOT_RUN",
+      "condition": "Retained protected whole test. Individual authorization for typed inspection or execution not granted."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/bootstrap/RootEntryCheckpointFixture.java",
+      "blob": "326fabbac404a42278c9d5edf833f132e4e81411",
+      "module": "schubert-nk-batch",
+      "sameHistoricalBlob": true,
+      "status": "HOLD_NOT_INSPECTED_NOT_RUN",
+      "condition": "Retained protected whole test. Individual authorization for typed inspection or execution not granted."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageRootInspectionTest.java",
+      "blob": "fa4c1d887b702759c91a46eaf25469c978f60da0",
+      "module": "schubert-nk-storage",
+      "sameHistoricalBlob": true,
+      "status": "HOLD_NOT_INSPECTED_NOT_RUN",
+      "condition": "Retained protected whole test. Individual authorization for typed inspection or execution not granted."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageRootLayoutTest.java",
+      "blob": "db0e2db401eee8186ba9e8bfedef8205faec1b76",
+      "module": "schubert-nk-storage",
+      "sameHistoricalBlob": true,
+      "status": "HOLD_NOT_INSPECTED_NOT_RUN",
+      "condition": "Retained protected whole test. Individual authorization for typed inspection or execution not granted."
+    }
+  ],
+  "heldChangedSinceOriginalInventory": [
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/FingerprintKeyRingTest.java",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/ResponseSnapshotCodecTest.java"
+  ],
+  "heldBodyReads": 0,
+  "heldExecution": 0,
+  "heldClassReads": 0,
+  "typed": {
+    "fourApprovedCompilerReceipt": {
+      "protocol": 169,
+      "storage": 25,
+      "bootstrap": 88,
+      "batch": 200
+    },
+    "apiFull": "NOT_RUN",
+    "webFull": "NOT_RUN",
+    "currentStyleAdmitted": true,
+    "disposition": "QA056 exact four Main; Root11 and any transitive protected Test are separate HOLDs"
+  },
+  "nextEligibleDifference": {
+    "paths": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxModelTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxRetainedValueContractTest.java"
+    ],
+    "status": "STATUS_ALREADY_VERIFIED_NO_RERUN",
+    "requiredFresh": "Independently admitted typed delta with fixed targets and allowed aux inputs, before analyzer execution"
+  },
+  "verificationPaths": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41478-wbs66-f02-exact-candidate-intake-v1/manifest.json",
+      "sha256": "aec01ede4d9ca2d48d5ab342a19c1baaee526239c3a08dc8cf88cd0899f10e16"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41408-f03-current-outbox-four-inputs-v1/manifest.json",
+      "sha256": "32a6d8fedc8833dabd8d6499dd42cafdc5e7fc95b165dfab518990341cd5f048"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41330-f03-current-nullaway-lineage-v1/manifest.json",
+      "sha256": "db6e854905e425a3d7f01f64b468440e78cf789278ada39486ecbeffcaf33dac"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41440-f03-ssc447-and-current-protocol-cases-v1/manifest.json",
+      "sha256": "0a7d7bbfe58a2f48f2ec4114689676df9ac66f0f606bfcc6d075941c2b9f0773"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38504-f03-current-test-source-delta-v1/manifest.json",
+      "sha256": "0a33f850576813ff014ada3969c20506fe8ec964ab49d4ab81a321bc33792b0c"
+    }
+  ],
+  "scopeDisposition": "CANDIDATE_INVENTORY_FIXED_GLOBAL_TYPED_GATE_OPEN",
+  "formalAcceptanceId": null,
+  "whole451": false,
+  "terminalAtUTC": "2026-11-21T15:40:22.866078+00:00",
+  "exitCode": 0
+}

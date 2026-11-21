@@ -1,0 +1,93 @@
+{
+  "run": "PG41484",
+  "source": "8ed655bbbc29988a89d5716bdf46b72e410b6d90",
+  "productionCore": "2611e1acbd57955d591d52e5348999ea293e068d",
+  "wbs": {
+    "新版ID": "A1-15.02",
+    "第58版ID": "A1-15.02",
+    "費用主担当項目": "P004-03",
+    "計画窓": "第1窓",
+    "予定期間・週末": "11/24–11/30",
+    "作業・成果物": "旧未登録群の証跡照合・必要な通常PT api、batch（InspectorLockHandoff.java）",
+    "先行ID・着手条件": "対象・所有・許可を確認",
+    "担当": "DB・資源管理担当",
+    "旧短期残pp": "1.65",
+    "改訂残pp": "1.65",
+    "終了条件": "対象ごとの再利用根拠、必要な修正/通常PTの結果、又は未完と必要条件を記録。費用消化だけで閉鎖しない。",
+    "元項目の正式受入に必要な証拠": "残るMaintenanceRunFilesと退役時の所有、実FileStore・DBの原本保持、F02・F03の受入。",
+    "参照する元項目": "P004-03",
+    "lineNumber": 9
+  },
+  "originalRun": "PT-WEB-20260925-24",
+  "originalSource": "858713c0bf310ae8bf62078b0a1cedbce4e968db",
+  "originalManifest": {
+    "path": "evidence/01_PT/017_NK-BAT-001/evidence/manifest.json",
+    "sha256": "da0df5f9b49533c21e8cb3ecb70fbea765b16299731c2e190ce9c4d09b85c9c2"
+  },
+  "xml": {
+    "path": "evidence/01_PT/017_NK-BAT-001/evidence/output/results.xml",
+    "sha256": "8f7adebc24020dbebad0898413934ed93d46dd56994c4c184190ee9ffd4206f0"
+  },
+  "caseCountHistorical": 9,
+  "caseMap": {
+    "PT-BAT-030": "actualTransactionHandoff",
+    "PT-BAT-031": "preconditionsAndReentrantLock",
+    "PT-BAT-032": "callbackFailuresAndNull",
+    "PT-BAT-033": "reacquisitionConflict",
+    "PT-BAT-034": "jdbcFailureMatrix",
+    "PT-BAT-035": "invalidResultMatrix",
+    "PT-BAT-036": "stateChangesAndInterrupts",
+    "PT-BAT-037": "concurrentGapCompetition",
+    "PT-BAT-282": "callbackIdentitySurvivesReacquisitionSqlFailure"
+  },
+  "caseHistoricalPassed": true,
+  "candidateExactInputs": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/InspectorLockHandoff.java",
+      "beforeBlob": "fb121f95d2c41b9f5bdc7e7c2168f4d527f36e1a",
+      "currentBlob": "fb121f95d2c41b9f5bdc7e7c2168f4d527f36e1a",
+      "sameBlob": true
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/InspectorLockHandoffTest.java",
+      "beforeBlob": "d214a5aa13f60f3761867f060550ca01bca83ef8",
+      "currentBlob": "0021ab0f3279a56059b1b7c3b86e20d3bf5f668d",
+      "sameBlob": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchDatabaseFixture.java",
+      "beforeBlob": "625bde7b99cb7a1a41bc06bd32fd7f5638313868",
+      "currentBlob": "3f0dd1b469d7c9a09405dd6211228b929fdfba36",
+      "sameBlob": false
+    }
+  ],
+  "currentRelatedJar": {
+    "status": "EXACT_COMMITTED_BUILD_INPUTS",
+    "source": "559f5b5945e82374e0843dcfae11a8d07faef1ea",
+    "sameInputs": true,
+    "inputInventorySha256": "271a05a2dda287ec4f80484041608fbf5f51d4acd393e538c8862685c0dcc485",
+    "archiveSha256": "276c45bf138b351cb0a0a6bc46dc61881fabb1b17b2b09347b4feea4cfea76a6",
+    "localArchive": "SHA256_MATCH",
+    "physicalFromOriginal": 647
+  },
+  "wholeCurrentFixtureStartsDatabase": true,
+  "runtimeUnlaunched": "Ownership and authorization for current dedicated PG fixture and approved inputs are not established",
+  "independentSpec": {
+    "path": "evidence/01_PT/017_NK-BAT-001/005_NK-BAT-001_Inspectorロック引渡し単体テスト仕様書.md",
+    "sha256": "4bb03140c17a9fc5c08a0d81dc4a977e94d2dbe5b2e05729b3035913253f3be5"
+  },
+  "previousP00403Evidence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40582-p00403-current-three-allowed-owner-artifacts-v1/manifest.json",
+    "sha256": "fb7b307ed88bab7e237ba81a5bdb72392306d977f0f4a7007d56b063d6a73179"
+  },
+  "newPt": 0,
+  "formalAcceptanceId": null,
+  "endingDependencies": [
+    "authorized current database/lock identity and fixture",
+    "full matching current XML",
+    "F02/F03 and retained originals"
+  ],
+  "disposition": "PRIOR_NINE_CASES_VERIFIED_CURRENT_DB_FIXTURE_HOLD",
+  "terminalAtUTC": "2026-11-21T15:43:09.485457+00:00",
+  "exitCode": 0
+}
