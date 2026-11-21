@@ -13,7 +13,8 @@ final class SchemaHistoryRowValueTest {
     var row = new Row(1, "001", "SQL", "V001__fixture.sql", 19, true);
     assertTrue(row.success());
     assertEquals(
-        "Row[installedRank=1, version=001, type=SQL, script=V001__fixture.sql, checksum=19, success=true]",
+        "Row[installedRank=1, version=001, type=SQL, script=V001__fixture.sql, checksum=19,"
+            + " success=true]",
         row.toString());
     // Independent JDK25 record fold of literal public component hashes in declaration order.
     assertEquals(583197644, row.hashCode());
