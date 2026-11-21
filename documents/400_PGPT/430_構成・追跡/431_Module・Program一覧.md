@@ -1,5 +1,9 @@
 # Module・Program一覧
 
+## NK-DAT-001 JDBC二資源closeの抑制順序
+
+WBS-P004-05/2。SS332 SSC424/425のJdbcResourceCleanup.closeRows・closeStatementを、PT-JDBC-CLEANUP008へ対応。既存の主例外参照、各close1回、既存→行→文の抑制例外参照を一つの独立fixtureで確認した。元001～007の実施結果と単一新規実行の生測定をそれぞれ保持。実DBやtransactionは別の終了依存。 [仕様](../../../evidence/01_PT/004_NK-DAT-001/4712_JDBC二資源closeと抑制順序の単体仕様.md) [実行・対応表](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41748-jdbc-cleanup-one-exec-and-gate-v1/manifest.json)
+
 ## NK-WEB-002 利用者一覧・共通エラーの資源PT
 
 | 画面 | 設計・WBS | Test ID | 現資源の局所結果 |

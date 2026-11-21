@@ -1,0 +1,91 @@
+{
+  "run": "PG41750",
+  "wbs": "WBS-P004-05/2",
+  "source": "3b06a89de499edb4bfcf2484ffdc0eeb2c792449",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-21T23:47:57.680397+00:00",
+  "priorScopedAbi": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38040-two-namespace-whole4-independent-v1/manifest.json",
+    "sha256": "eb09ec2023c7e56d333520c5262988a72e6e1cf2d89631a870efa8448d011d2f"
+  },
+  "historicalPureXml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38040-two-namespace-whole4-independent-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "f2e7399d47050718ae9bd4cd2824906fa75df6a9d7ddd9fd047d0a70d23c0ea7"
+  },
+  "recordedRequirement": "PT-QUALITY-002",
+  "expected": "value identity for String, Instant and byte[]; SQL NULL returns SQLDataException 22004 with fixed redacted diagnostic and empty cause",
+  "currentExactSource": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/RequiredColumn.java",
+      "sha256": "8cd379b0c607eaba8b1642c77bcbdcfb7cc613c1bc1f7c1c2976a4d0283bc7d2"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/RequiredColumnTest.java",
+      "sha256": "27d0c6689cca24bba7735330ab00b8211a89475a3bc23dae04b77f9ee11f118a"
+    }
+  ],
+  "jars": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "physical": {
+    "dev/codex/schubert/nk/api/database/RequiredColumn.class": "419998b0126541856fba9c5989cbd3df66e1ad7f6798c46463ee141a3ceff2ef",
+    "dev/codex/schubert/nk/api/database/RequiredColumnTest.class": "443769092ce5d058a4ac90d71a9f8a3ff5c45a4d1c3aa023afa89d442bb4a319"
+  },
+  "cmds": [
+    [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+      "--release",
+      "25",
+      "-g",
+      "-proc:none",
+      "-implicit:none",
+      "-encoding",
+      "UTF-8",
+      "-Xlint:all",
+      "-Werror",
+      "-cp",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "-d",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41750-required-column-public-values-v1/main",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/RequiredColumn.java"
+    ],
+    [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+      "--release",
+      "25",
+      "-g",
+      "-proc:none",
+      "-implicit:none",
+      "-encoding",
+      "UTF-8",
+      "-Xlint:all",
+      "-Werror",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41750-required-column-public-values-v1/main:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "-d",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41750-required-column-public-values-v1/test",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/RequiredColumnTest.java"
+    ]
+  ],
+  "localTypeEdges": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41750-required-column-public-values-v1/jdeps.txt",
+    "sha256": "ded2b480d3af1175186d05d6e41a0ec77250d478ccf869cdab3e57d78f336ad5"
+  },
+  "usedDependencies": [
+    "JDK java.base and java.sql",
+    "jspecify",
+    "JUnit Platform"
+  ],
+  "currentExactHistoricalCaseReuse": 1,
+  "productTestsReplayed": 0,
+  "reflectionCaseExcludedFromCurrentCredit": true,
+  "otherProductTestsNotClaimed": true,
+  "relatedPriorCriterion": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40580-p00405-current-owner-criterion-receipts-v1/manifest.json",
+    "sha256": "cc629b1ef330defb598b93503b0e4d62808bc6c8d84c3aad8b2dcd98f6892487"
+  },
+  "initialMetadataCorrection": "Original run references the normalized preparation; followed its pinned original preparation for source and compiled fixture hashes before compilation.",
+  "formalAcceptanceId": null
+}

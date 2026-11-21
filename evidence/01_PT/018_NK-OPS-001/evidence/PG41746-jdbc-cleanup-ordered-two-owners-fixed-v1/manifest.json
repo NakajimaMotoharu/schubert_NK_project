@@ -1,0 +1,74 @@
+{
+  "run": "PG41746",
+  "source": "3b06a89de499edb4bfcf2484ffdc0eeb2c792449",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-P004-05/2",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-21T23:45:02.772860+00:00",
+  "start": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41746-jdbc-cleanup-ordered-two-owners-fixed-v1/begin.json",
+    "sha256": "e414a93e091b95e7bf69dea319dacbaa4efbaddc019680967f87b048d9031bb5"
+  },
+  "executionStages": {
+    "compile": 0,
+    "format": 0,
+    "checkstyle": 0,
+    "pmd": 0,
+    "spotbugs": 0,
+    "unit": 0
+  },
+  "realBackendOperations": 0,
+  "productClassLoads": [
+    "dev.codex.schubert.nk.api.database.JdbcResourceCleanup"
+  ],
+  "ownedTestLambdaCount": 2,
+  "targetPhysical": {
+    "dev/codex/schubert/nk/api/database/JdbcResourceCleanup$SqlClose.class": "9fcd74ced464e6a3cea357a3f05b41a6fdb0dc61c270e304e7d218ecc515087e",
+    "dev/codex/schubert/nk/api/database/JdbcResourceCleanup.class": "d47d9894aedcbc07debbe71de9feca20e3452a7dedb5da5e4f7b470efd530586"
+  },
+  "independentTestId": "PT-JDBC-CLEANUP008",
+  "independentExpectations": {
+    "primary": "same input reference",
+    "ownerInvocations": [
+      "rows",
+      "statement"
+    ],
+    "suppressedAppend": [
+      "pre-existing reference",
+      "row-close reference",
+      "statement-close reference"
+    ]
+  },
+  "fixture": {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/JdbcResourceCleanupOrderTest.java",
+    "sha256": "65eb6947a987e0d912344cda4c5d993e66e271ec4d21fc49e1a52a47028fa548"
+  },
+  "targetProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41742-p00405-jdbc-cleanup-current-seven-v1/manifest.json",
+    "sha256": "b066c17dad191f4f9c9a7f247864fa0d8f68bb0be8acdc8262e7b50fe1bfeafc"
+  },
+  "coverage": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41746-jdbc-cleanup-ordered-two-owners-fixed-v1/unit.exec",
+    "sha256": "aa437aeec1226ca2491c59f0c669b575f0114fc36f652db040661ca29dffea83"
+  },
+  "xml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41746-jdbc-cleanup-ordered-two-owners-fixed-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "c4a01f457967cd5a2b622c0f62e758effb66a5ca4530563c4d8b4471b8d24c45"
+  },
+  "rawScopedCoveragePending": true,
+  "spotbugs": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41746-jdbc-cleanup-ordered-two-owners-fixed-v1/spotbugs.xml",
+    "sha256": "9749ac32e31bbfdd9532384f88c3a5de7486a0df7274317c716d77f610060b1d"
+  },
+  "pmd": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41746-jdbc-cleanup-ordered-two-owners-fixed-v1/pmd.xml",
+    "sha256": "e27bc4ad6e5cfd4d9a9c7af3bca84b64ec78d2c3ea8bfa2957015d5747fc281b"
+  },
+  "originalSevenNotRerun": true,
+  "bug": "BUG-3501",
+  "beforeFix": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41744-jdbc-cleanup-ordered-two-owners-v1/initial-static-result.json",
+    "sha256": "d39bfdede5f99a3761b99bacf0523b30d7e1acef7d38bf3ed48f46afd31acd98"
+  },
+  "formalAcceptanceId": null
+}
