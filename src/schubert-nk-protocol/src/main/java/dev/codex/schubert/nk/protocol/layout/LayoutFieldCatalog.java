@@ -389,9 +389,9 @@ public final class LayoutFieldCatalog {
         QWKREQ01\tDATA\tAsync job ID\t39\t12\tN\tM\tJob ID
         QWKREQ01\tDATA\tReserved\t51\t14\tX\tF\t全space
         WLGEVT01\tDATA\t発生日時\t1\t17\tN\tM\tHTTP response確定時のJST
-        WLGEVT01\tDATA\tLog type\t18\t16\tX\tM\tREQUEST/ACTION。QA054限定組合せ
+        WLGEVT01\tDATA\tLog type\t18\t16\tX\tM\t`REQUEST`または限定`ACTION`。組合せは下記QA-054規則
         WLGEVT01\tDATA\tLevel\t34\t8\tX\tM\tINFO/WARN/ERROR
-        WLGEVT01\tDATA\tAction\t42\t64\tX\tO\tBounded action code
+        WLGEVT01\tDATA\tAction\t42\t64\tX\tO\tREQUESTは`HTTP_REQUEST_COMPLETED`（省略時API補完）、ACTIONは`MENU_VIEWED`必須
         WLGEVT01\tDATA\tMessage\t106\t512\tX\tM\t本文・secretを含まない定型要約
         WLGEVT01\tDATA\tHTTP request ID\t618\t36\tX\tM\tUUID
         WLGEVT01\tDATA\tHTTP method\t654\t8\tX\tM\tGET/POST等
