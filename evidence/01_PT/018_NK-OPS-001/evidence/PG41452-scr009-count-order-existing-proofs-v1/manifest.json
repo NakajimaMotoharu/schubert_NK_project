@@ -1,0 +1,82 @@
+{
+  "actualExit": 0,
+  "run": "PG41452-scr009-count-order-existing-proofs-v1",
+  "terminalAtUTC": "2026-11-21T02:21:40.166763+00:00",
+  "source": "b120a8778288adb44fb004e5cfc951fd45a204e9",
+  "productionCore": "2611e1acbd57955d591d52e5348999ea293e068d",
+  "relatedOldCases": [
+    "web231MainGrouping()",
+    "web232OvaAndBounds()",
+    "web233RejectInconsistentGroups()"
+  ],
+  "currentInputs": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/AnimationListViewModel.java": "1e32880757caeddfa8eda52634a8b52dbd3aca2471eb0e04118f97b976063e4d",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/TopBarViewModel.java": "16afe37089d96cb31e7849e5bf5e289196588c6f4b8e1d4732fd402887e24a09",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionPrincipal.java": "29af626632ac4c2727f9d0963c3967cb0be7eda57daf762a482268c467dc9232",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/AuthenticationContext.java": "aaa18a4c954a425c943e8c30ea1752b665b249e86d8f1767e9e37f4aa61a6b66",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/UserRole.java": "b68402e5705ca2ac5093a1b98a44de5a9f45ed69cb9b231658b4903c51e0bf69",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/AnimationListCategory.java": "0e7c5503c97d12aa835735ff8b968c6d5126f9f1a9867540af60432a8c41ba32",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/AnimationCategory.java": "a2adaa30dca9965fdccf883af5fe78686d3b4350b1a600195b9f61e049c982cd",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/AnimationRecord.java": "76be7cbc0ad448d5db04b6f887107c07c730c8787de4a19ded78ac959b279796",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/AnimationListResponseData.java": "9ea09d9d4566e2c23b8ecfb0f68845f2e598217250c7305c1959f4cb29735192",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationListCountBoundaryTest.java": "f179628406a4baf3de1d29ab5dd1df2c475818ca05371670f10ee723c67ec4ad",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationViewModelTest.java": "145dec791e5649a99f094083ac9012927381c9915026bce38528f16bac175992"
+  },
+  "overclaimTestId": "PT-WEB-SCR009-COUNT-001",
+  "overclaimCase": {
+    "classname": "dev.codex.schubert.nk.web.view.AnimationListCountBoundaryTest",
+    "name": "rejectsDeclaredOneWhenTheAnimationRecordsAreEmpty()"
+  },
+  "differentPhysical": [
+    "dev/codex/schubert/nk/web/view/AnimationListViewModel",
+    "dev/codex/schubert/nk/web/view/AnimationListViewModel$Row",
+    "dev/codex/schubert/nk/web/view/AnimationListViewModel$Video"
+  ],
+  "oldRaw": {
+    "INSTRUCTION": {
+      "covered": 341,
+      "missed": 0
+    },
+    "BRANCH": {
+      "covered": 48,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 72,
+      "missed": 0
+    },
+    "COMPLEXITY": {
+      "covered": 44,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 20,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 3,
+      "missed": 0
+    }
+  },
+  "firstReadExit": 1,
+  "firstReadCause": "A comparison of old vs current physical identities did not satisfy equality; the receipt records three real CRC differences.",
+  "oldRawPromoted": false,
+  "replayedTests": 0,
+  "formalDelta": 0,
+  "newPhysicalOrdinaryNeeded": true,
+  "evidence": {
+    "PG24476": {
+      "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG24476-search-animation-view-bounded-sixteen-independent-v1/manifest.json",
+      "sha256": "f8b78eff11977bfb750a956092d49430da16731052b4ff85ba4395020cfc7c91"
+    },
+    "PG41182": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41182-scr009-animation-overclaimed-count-v1/manifest.json",
+      "sha256": "57e351a6669d7acc3a095165571cae11bc1555e14ea5f4e9c177078140275054"
+    },
+    "PG41446": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41446-scr008-menu-counts-links-v1/manifest.json",
+      "sha256": "e630d4a8dddace3d81cac3eb24223c6d724f8f360c948c901dca44d7ae3b68c6"
+    }
+  },
+  "next": "Run the not-yet-requalified original eight AnimationViewModel tests on the current approved closure once. Reuse the already qualified overdeclared-count witness without adding it to the new run."
+}
