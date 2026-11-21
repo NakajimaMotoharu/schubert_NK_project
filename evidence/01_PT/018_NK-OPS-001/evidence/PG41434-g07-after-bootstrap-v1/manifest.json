@@ -1,0 +1,49 @@
+{
+  "run": "PG41434-g07-after-bootstrap-v1",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-21T01:36:53.010023+00:00",
+  "baseExclusive": "5a63c99e9038abb6518b90d3fc8307ae071f8d38",
+  "headInclusive": "3271b00b8a53d9b8d75d46a394866931befed19f",
+  "commits": 6,
+  "changedPaths": 44,
+  "currentBaselineTree": "cd377044e4ca058ea219ca6a2fec82159559c72c",
+  "newBinaryPaths": 0,
+  "tool": "Gitleaks 8.30.1",
+  "command": "gitleaks git --no-banner --redact=100 --log-opts=base..head --report-format=json --report-path=isolated-path .",
+  "detectorActualExit": 1,
+  "originalRedactedReport": {
+    "path": "../pgpt-runs/PG379/PG41434-g07-after-bootstrap/raw-redacted.json",
+    "sha256": "36fb052e6b5773525ef8745f43a5557137aa8387b56f91c852409749be796da4"
+  },
+  "detectorMatches": 3,
+  "classified": [
+    {
+      "rule": "sourcegraph-access-token",
+      "commit": "ebf8426155dd1d5e5c8313aefa5caf3b0765aebd",
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41422-g07-outbox-post-public-history-v1/manifest.json",
+      "line": 5,
+      "classification": "commit"
+    },
+    {
+      "rule": "sourcegraph-access-token",
+      "commit": "ebf8426155dd1d5e5c8313aefa5caf3b0765aebd",
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41422-g07-outbox-post-public-history-v1/manifest.json",
+      "line": 6,
+      "classification": "commit"
+    },
+    {
+      "rule": "sourcegraph-access-token",
+      "commit": "ebf8426155dd1d5e5c8313aefa5caf3b0765aebd",
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41422-g07-outbox-post-public-history-v1/manifest.json",
+      "line": 42,
+      "classification": "tree"
+    }
+  ],
+  "unresolved": 0,
+  "confirmedSecrets": 0,
+  "wholeG07": false,
+  "whole451": false,
+  "productTests": 0,
+  "formalDelta": 0,
+  "detectorRulesChanged": false
+}
