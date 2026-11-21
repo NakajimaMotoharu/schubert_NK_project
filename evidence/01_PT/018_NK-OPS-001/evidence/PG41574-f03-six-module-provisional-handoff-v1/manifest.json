@@ -1,0 +1,222 @@
+{
+  "run": "PG41574",
+  "wbs": [
+    "WBS-F02-b-a",
+    "WBS-F03/2-3-a"
+  ],
+  "source": "134be991fe164064dc39d7f8bad52bcd1cbeae6b",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "canonicalDesign": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+  "moduleRows": [
+    {
+      "module": "api",
+      "main": 283,
+      "heldTestSource": 4,
+      "newProtocolFull": false,
+      "evidenceCurrentWebTypedSubset": null,
+      "historicalCompiler": null,
+      "remaining": "QA-056 exact four-type joint admission and regular API JAR, six-module full static gate, shared PostgreSQL fixture",
+      "currentWholeModuleAcceptanceId": null
+    },
+    {
+      "module": "batch",
+      "main": 200,
+      "heldTestSource": 26,
+      "newProtocolFull": false,
+      "evidenceCurrentWebTypedSubset": null,
+      "historicalCompiler": {
+        "archiveProof": {
+          "source": "559f5b5945e82374e0843dcfae11a8d07faef1ea",
+          "selectedArchive": {
+            "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41074-f02-current-alert-batch-maven-v1/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+            "sha256": "276c45bf138b351cb0a0a6bc46dc61881fabb1b17b2b09347b4feea4cfea76a6"
+          },
+          "physical": 647,
+          "exactCurrentBuildInputs": true
+        },
+        "historicalCompiler": "559f5b5945e82374e0843dcfae11a8d07faef1ea",
+        "perModuleMain": 200,
+        "sourceAndBuildInputDelta": 0,
+        "oldScopeKeptHistorical": true
+      },
+      "remaining": "Root11 scope applicability, held 26 test sources, remaining typed rules and real candidate behaviors",
+      "currentWholeModuleAcceptanceId": null
+    },
+    {
+      "module": "bootstrap",
+      "main": 88,
+      "heldTestSource": 0,
+      "newProtocolFull": false,
+      "evidenceCurrentWebTypedSubset": null,
+      "historicalCompiler": {
+        "archiveProof": {
+          "source": "da20ad7753279ae4e8017593866502d3341ec0e5",
+          "selectedArchive": {
+            "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40802-f02-current-four-package-v1/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+            "fileBytes": 428819,
+            "sha256": "3de920f0fc7df4909b362fd25856b5b91e2517fa404cbe5756725544472887f7"
+          },
+          "physical": 201,
+          "exactCurrentBuildInputs": true
+        },
+        "historicalCompiler": "559f5b5945e82374e0843dcfae11a8d07faef1ea",
+        "perModuleMain": 88,
+        "sourceAndBuildInputDelta": 0,
+        "oldScopeKeptHistorical": true
+      },
+      "remaining": "Root11 boundaries and 451; historical type compile receipt has identical current inputs",
+      "currentWholeModuleAcceptanceId": null
+    },
+    {
+      "module": "protocol",
+      "main": 169,
+      "heldTestSource": 0,
+      "newProtocolFull": true,
+      "evidenceCurrentWebTypedSubset": null,
+      "historicalCompiler": null,
+      "remaining": "Whole six/451 and applicable real JMS/CHR; local strict compiler, PMD per-site review and local PT bound",
+      "currentWholeModuleAcceptanceId": null
+    },
+    {
+      "module": "storage",
+      "main": 25,
+      "heldTestSource": 2,
+      "newProtocolFull": false,
+      "evidenceCurrentWebTypedSubset": null,
+      "historicalCompiler": {
+        "archiveProof": {
+          "source": "da20ad7753279ae4e8017593866502d3341ec0e5",
+          "selectedArchive": {
+            "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40802-f02-current-four-package-v1/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+            "fileBytes": 111799,
+            "sha256": "e5be03a72a9cca548f68fc1ca7ee84ced8980dbea72162f58772215227be3ec0"
+          },
+          "physical": 79,
+          "exactCurrentBuildInputs": true
+        },
+        "historicalCompiler": "559f5b5945e82374e0843dcfae11a8d07faef1ea",
+        "perModuleMain": 25,
+        "sourceAndBuildInputDelta": 0,
+        "oldScopeKeptHistorical": true
+      },
+      "remaining": "StorageIoException JDBC exception ownership plus held two test sources",
+      "currentWholeModuleAcceptanceId": null
+    },
+    {
+      "module": "web",
+      "main": 262,
+      "heldTestSource": 0,
+      "newProtocolFull": false,
+      "evidenceCurrentWebTypedSubset": 29,
+      "historicalCompiler": null,
+      "remaining": "QA-056 four-type joint admission, regular Web JAR, full typed scope, real HTTP/CHR",
+      "currentWholeModuleAcceptanceId": null
+    }
+  ],
+  "style": {
+    "mainFormatAndCheckstyle": 1027,
+    "testCheckstyle": 1128,
+    "testSourcesTotal": 1160,
+    "heldTestSources": 32,
+    "heldComposition": {
+      "NAMED_TEST_SOURCE": 30,
+      "SUPPORT_FIXTURE_SOURCE": 2
+    }
+  },
+  "detachedRoot11Count": 11,
+  "rootAnd32OverlapUnknown": true,
+  "candidateRequirements": {
+    "F02": {
+      "packagingVerified": 4,
+      "packagingRequired": 6,
+      "qaDecision": "QA-056_PENDING",
+      "storageJdbc": "SSC-461_LEGACY_EDGE_OPEN",
+      "requiredSYS": 13
+    },
+    "F03": {
+      "fullSixOwnedStatic": false,
+      "neededRawDisposition": "Only local Protocol and bounded Web closed",
+      "heldOrigins": 32
+    },
+    "C02": {
+      "freshOwnedSystemdObservationNeeded": true
+    },
+    "F04": {
+      "freshOwnerAdmissionNeeded": true,
+      "lastAdmission": "CURRENT_ADMISSION_NOT_ESTABLISHED_NO_TRANSFER"
+    }
+  },
+  "evidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41528-f02-current-protocol-requalification-v1/manifest.json",
+      "sha256": "5a87b04c07670b8ec42345f87c37e01c9ac285c5a7d3652cae77db44d7b93bc0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41530-f03-qa054-protocol-style-lineage-v1/manifest.json",
+      "sha256": "88ddb6b3d95f855109e78bd938cf2ab05a1b826b539a6269e5c637f5afdd9cb5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41534-qa056-current-four-types-intake-v1/manifest.json",
+      "sha256": "178a43efbc536931c82a097a603ff09ced71831c61dee59725f760391854b572"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41540-f03-current-core-protocol-full-pmd-v1/manifest.json",
+      "sha256": "a0bc8a69d9ecffcf5f20c034fa5004838f7078cdc3f8c12b39fcd923680e5c5f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41330-f03-current-nullaway-lineage-v1/manifest.json",
+      "sha256": "db6e854905e425a3d7f01f64b468440e78cf789278ada39486ecbeffcaf33dac"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41480-wbs66-f03-joint-test-applicability-v1/manifest.json",
+      "sha256": "a4c4036ec38d791d51977ed72fd51e5c7117fa252aa5c4eefe8e721cda8e1181"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41522-f03-held-source-role-refinement-v1/manifest.json",
+      "sha256": "726ce86fc50107f6c13fd007532ce2655eb32f1db68920dd2fc71e95a84520cc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41560-f03-user-mutation-field-findings-post-v1/manifest.json",
+      "sha256": "bfb8330f30b1c6e7ec614703a2a3890e95f586b133eaecbacc6f45aec281c5f3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41278-p020-current-217-owner-v1/manifest.json",
+      "sha256": "8ecec970ad5e5190346d755f47871105f6828cc80e1d62553971e8fcb21fe898"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41554-a102-inbox-inspector-actual-admission-v1/manifest.json",
+      "sha256": "f026bf82bece5497f5556bd5c4fa285ef131165b89e908c0a37931328bc7f5b2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41566-p002-current-three-scope-fixed-run-v1/manifest.json",
+      "sha256": "0beaf2497e5043e38c5615f5f17fe9f5545a2c5813c346828b1bbfe307f591aa"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41542-f03-scenario-display-current-nullaway-v1/manifest.json",
+      "sha256": "3853168e99e36da83cf099a9464458ae525d7d19c62c6da7d756d3a221cf26a6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41556-f03-log-user-receipt-display-v1/manifest.json",
+      "sha256": "66912c95c93400a9281fec559ed81ea899a76b627f19265ba3e3cdad8886b679"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41558-f03-user-mutation-readers-v1/manifest.json",
+      "sha256": "ab6748f883563d36e0ab2261f23a88f86b5df565f10f47837a6506293813f2c3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41570-f03-question-notification-forms-v1/manifest.json",
+      "sha256": "c8139756213194f755e107ea38f6ac821c98aad35f436cbe4585ebf0c06dd1ec"
+    }
+  ],
+  "datedDecisionsJST": {
+    "requiredHandoff": "2026-11-25T23:29:00+09:00",
+    "F02andF03": "2026-12-02T23:29:00+09:00",
+    "cutoff": "2026-12-06T18:00:00+09:00"
+  },
+  "assignedRecipientsReceipt": null,
+  "actualSubmittedAsFormalDecision": false,
+  "formalAcceptanceId": null,
+  "whole451": false,
+  "exitCode": 0,
+  "terminalAtUTC": "2026-11-21T17:09:01.952814+00:00"
+}
