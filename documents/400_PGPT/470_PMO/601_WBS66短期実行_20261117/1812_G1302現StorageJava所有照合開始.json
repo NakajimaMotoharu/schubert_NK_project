@@ -1,0 +1,75 @@
+{
+  "eventId": "PGPT-20261008-7327",
+  "groupId": "W66-G1302-STORAGE-JAVA-ARTIFACT",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-21T01:43:07.304000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 88,
+      "remainingPercent": 12,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "W66-G1302-STORAGE-JAVA-ARTIFACT",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "W66-G1302-STORAGE-JAVA-ARTIFACT",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-G13.02"
+    ],
+    "managementWorkIds": [
+      "WBS-G13.02"
+    ],
+    "source": "753fda7ab63dccfdf47d62417d7ee14c8fe7ea3a",
+    "productionCoreMain": "2611e1acbd57955d591d52e5348999ea293e068d",
+    "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "run": "PG41438",
+    "estimateAtGroupStartPp": {
+      "low": 0.1,
+      "base": 0.25,
+      "high": 0.6
+    },
+    "groupCapPp": 0.8,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1811_P00405接続元二型の再開点.json",
+        "sha256": "a5e879707e22964e813e0d76d7cd3a9a0d31650ea7f3af4855c1041c17f6d631"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26124-g1302-storage-persistence-trace-v1/manifest.json",
+        "sha256": "c29f23d0fc2de4a0939b1ce3f6ba14a808457ef012adacb591c1a9e8854531ce"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41322-f02-exact-four-package-lineage-v1/manifest.json",
+        "sha256": "e94bd4f6446ff7f4fd7415aa66338c272d829f17c2d093fb71abd3d7ad426357"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41428-g1302-current-ddl-role-trace-v1/manifest.json",
+        "sha256": "bddc5e59c422afe2125eafb719bd78d567e4b8e958c566c9e38fc257c26d2615"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41426-current-storage-directory-defaults-v1/manifest.json",
+        "sha256": "d74cb18700d22eb12b93b0e84c4bc133e0ed6d836d6d56195e05f27be72154c8"
+      },
+      {
+        "path": "documents/400_PGPT/470_PMO/485_WBS網羅性・受入対応.json",
+        "sha256": "c759e7c88603c85b05066740e270e41065195b94a7fdde24c08e29950ba4b61b"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "第58版原853。現DDL・roleはPG41428。残るStorage主Javaを485、現包装、SS331/332/361へ結合し、SSC461の下位呼出を主成果から切り離す。",
+    "endCondition": "Storage全Javaと物理にowner/SSを一意に割当て、残るJDBC旧一辺と下位呼出をsource上で指定。実DBや実fileの未受入を保存。",
+    "workScope": "公開Git source・公開manifest・承認済JAR中央ディレクトリのみ。製品実行やclass展開なし。"
+  }
+}

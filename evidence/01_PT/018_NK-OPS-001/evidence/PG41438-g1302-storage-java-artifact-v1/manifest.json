@@ -1,0 +1,558 @@
+{
+  "actualExit": 0,
+  "run": "PG41438-g1302-storage-java-artifact-v1",
+  "terminalAtUTC": "2026-11-21T01:44:05.658530+00:00",
+  "core": "2611e1acbd57955d591d52e5348999ea293e068d",
+  "archiveSource": "da20ad7753279ae4e8017593866502d3341ec0e5",
+  "canonicalDesign": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+  "design": {
+    "311": {
+      "path": "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md",
+      "sha256": "422cc9febdcb165af7ceba1c58a53c39831d0458f9c8858095fcfe099b70680f"
+    },
+    "331": {
+      "path": "documents/300_SS/330_データ・ファイル/331_DB物理・DDL・index・権限設計.md",
+      "sha256": "f57d908ade963d03a7f1dd12dc93e0bd89fefa27223c674c3d363014913c64de"
+    },
+    "332": {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "sha256": "4c09a2f66d9cb4def976c24d2952953aa5a287a0d545548dc4feda4968ff5bef"
+    },
+    "361": {
+      "path": "documents/300_SS/360_引継ぎ・監査/361_RD・UI・SSトレーサビリティ.md",
+      "sha256": "e4462e29b2a958c5742fb4e8fe93baafcb43beedb04d2c8d026c9258c0660611"
+    }
+  },
+  "archive": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40802-f02-current-four-package-v1/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+    "fileBytes": 111799,
+    "sha256": "e5be03a72a9cca548f68fc1ca7ee84ced8980dbea72162f58772215227be3ec0"
+  },
+  "references": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26124-g1302-storage-persistence-trace-v1/manifest.json",
+      "sha256": "c29f23d0fc2de4a0939b1ce3f6ba14a808457ef012adacb591c1a9e8854531ce"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41322-f02-exact-four-package-lineage-v1/manifest.json",
+      "sha256": "e94bd4f6446ff7f4fd7415aa66338c272d829f17c2d093fb71abd3d7ad426357"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41428-g1302-current-ddl-role-trace-v1/manifest.json",
+      "sha256": "bddc5e59c422afe2125eafb719bd78d567e4b8e958c566c9e38fc257c26d2615"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41426-current-storage-directory-defaults-v1/manifest.json",
+      "sha256": "d74cb18700d22eb12b93b0e84c4bc133e0ed6d836d6d56195e05f27be72154c8"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/485_WBS網羅性・受入対応.json",
+      "sha256": "c759e7c88603c85b05066740e270e41065195b94a7fdde24c08e29950ba4b61b"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/481_PGPT詳細WBS.json",
+      "sha256": "4227e20a23b10ab8eecd2b69550dd7f58c79bf43a2f77b4c7c98ec943e83a2d9"
+    }
+  ],
+  "historicalStorageArtifacts": 25,
+  "currentSource": 25,
+  "currentPhysical": 79,
+  "ownerCounts": {
+    "WBS-P003-04": 7,
+    "WBS-P003-05": 6,
+    "WBS-P003-06": 5,
+    "WBS-P018-03": 1,
+    "WBS-P003-08": 2,
+    "WBS-P003-07": 4
+  },
+  "rows": [
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/DirectoryCalls.java",
+      "sha256": "4449a5a316c2e9e4da3e3bbd2068707974557fe032cd0708dcbe7306532cdaaf",
+      "physical": [
+        "dev/codex/schubert/nk/storage/DirectoryCalls.class"
+      ],
+      "owner": "WBS-P003-04",
+      "costOwner": "WBS-P003-04",
+      "rd": "MQ-035/039～041、FIL-001～009",
+      "ui": "232、237",
+      "ss": [
+        "333"
+      ],
+      "specDirectory": "evidence/01_PT/003_NK-PRO-003",
+      "individualContractAndRun": null
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ExistingFileAccess.java",
+      "sha256": "5e3bfa74453c1f250adefbad4c97ea3670933b3ddcd01c12bea63ead58d388a0",
+      "physical": [
+        "dev/codex/schubert/nk/storage/ExistingFileAccess$Io.class",
+        "dev/codex/schubert/nk/storage/ExistingFileAccess$NioIo.class",
+        "dev/codex/schubert/nk/storage/ExistingFileAccess$ReadOperation.class",
+        "dev/codex/schubert/nk/storage/ExistingFileAccess.class"
+      ],
+      "owner": "WBS-P003-04",
+      "costOwner": "WBS-P003-04",
+      "rd": "MQ-035/039～041、FIL-001～009",
+      "ui": "232、237",
+      "ss": [
+        "333"
+      ],
+      "specDirectory": "evidence/01_PT/003_NK-PRO-003",
+      "individualContractAndRun": null
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/InodeSecurityCalls.java",
+      "sha256": "c29504c77d98c9b287cdc1b2e6cd4ffc5e5869af43634da0a8459cef94d46f06",
+      "physical": [
+        "dev/codex/schubert/nk/storage/InodeSecurityCalls.class"
+      ],
+      "owner": "WBS-P003-05",
+      "costOwner": "WBS-P003-05",
+      "rd": "MQ-035/039～041、FIL-001～009",
+      "ui": "232、237",
+      "ss": [
+        "333"
+      ],
+      "specDirectory": "evidence/01_PT/003_NK-PRO-003",
+      "individualContractAndRun": null
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxDirectoryCalls.java",
+      "sha256": "dfe405024fad5aff573c227802572dc65b3e7bfb7f915af59847d6dc0c69b5df",
+      "physical": [
+        "dev/codex/schubert/nk/storage/LinuxDirectoryCalls$FdCall.class",
+        "dev/codex/schubert/nk/storage/LinuxDirectoryCalls$MkdirCall.class",
+        "dev/codex/schubert/nk/storage/LinuxDirectoryCalls$OpenCall.class",
+        "dev/codex/schubert/nk/storage/LinuxDirectoryCalls$RenameCall.class",
+        "dev/codex/schubert/nk/storage/LinuxDirectoryCalls$UnlinkCall.class",
+        "dev/codex/schubert/nk/storage/LinuxDirectoryCalls.class"
+      ],
+      "owner": "WBS-P003-04",
+      "costOwner": "WBS-P003-04",
+      "rd": "MQ-035/039～041、FIL-001～009",
+      "ui": "232、237",
+      "ss": [
+        "333"
+      ],
+      "specDirectory": "evidence/01_PT/003_NK-PRO-003",
+      "individualContractAndRun": null
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxExecDescriptors.java",
+      "sha256": "353029ce353dde7628d64c7b9fb20e541f2387f1912391838d8835b571f7e8e6",
+      "physical": [
+        "dev/codex/schubert/nk/storage/LinuxExecDescriptors$FcntlCall.class",
+        "dev/codex/schubert/nk/storage/LinuxExecDescriptors$Operation.class",
+        "dev/codex/schubert/nk/storage/LinuxExecDescriptors.class"
+      ],
+      "owner": "WBS-P003-06",
+      "costOwner": "WBS-P003-06",
+      "rd": "MQ-035/039～041、FIL-001～009",
+      "ui": "232、237",
+      "ss": [
+        "333"
+      ],
+      "specDirectory": "evidence/01_PT/003_NK-PRO-003",
+      "individualContractAndRun": null
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxFileLock.java",
+      "sha256": "0d89d9a2cd78560731882bff49d38a1d48515a4739b25e04cbca0fcd0655d3ed",
+      "physical": [
+        "dev/codex/schubert/nk/storage/LinuxFileLock$CloseCall.class",
+        "dev/codex/schubert/nk/storage/LinuxFileLock$LockCall.class",
+        "dev/codex/schubert/nk/storage/LinuxFileLock$OpenCall.class",
+        "dev/codex/schubert/nk/storage/LinuxFileLock$Operation.class",
+        "dev/codex/schubert/nk/storage/LinuxFileLock$OwnedDescriptor.class",
+        "dev/codex/schubert/nk/storage/LinuxFileLock$StartupOperation.class",
+        "dev/codex/schubert/nk/storage/LinuxFileLock.class"
+      ],
+      "owner": "WBS-P003-06",
+      "costOwner": "WBS-P003-06",
+      "rd": "MQ-035/039～041、FIL-001～009",
+      "ui": "232、237",
+      "ss": [
+        "333"
+      ],
+      "specDirectory": "evidence/01_PT/003_NK-PRO-003",
+      "individualContractAndRun": null
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxFilesystemClassifier.java",
+      "sha256": "b9f8d3425dd94e3481e7f88c1b4c25070a4410b37c07fdfc9c7b92aec436fd94",
+      "physical": [
+        "dev/codex/schubert/nk/storage/LinuxFilesystemClassifier$StatfsCall.class",
+        "dev/codex/schubert/nk/storage/LinuxFilesystemClassifier.class"
+      ],
+      "owner": "WBS-P018-03",
+      "costOwner": "WBS-P018-03",
+      "rd": "SYS/ENV/PER/AVL/OPS/MON",
+      "ui": "211～212、231、243、251～253",
+      "ss": [
+        "342"
+      ],
+      "specDirectory": "evidence/01_PT/018_NK-OPS-001",
+      "individualContractAndRun": null
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxHostDirectoryCalls.java",
+      "sha256": "7e7854e40a04437d262a102518e9e41a2dedc8ff06f9919b758b8dbda8cd3178",
+      "physical": [
+        "dev/codex/schubert/nk/storage/LinuxHostDirectoryCalls$OpenCall.class",
+        "dev/codex/schubert/nk/storage/LinuxHostDirectoryCalls.class"
+      ],
+      "owner": "WBS-P003-04",
+      "costOwner": "WBS-P003-04",
+      "rd": "MQ-035/039～041、FIL-001～009",
+      "ui": "232、237",
+      "ss": [
+        "333"
+      ],
+      "specDirectory": "evidence/01_PT/003_NK-PRO-003",
+      "individualContractAndRun": null
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxInodeSecurity.java",
+      "sha256": "717fc4f3c2afd1019cbc0912b56f7288a8cfdedfa87e747df2d396000da21057",
+      "physical": [
+        "dev/codex/schubert/nk/storage/LinuxInodeSecurity$GetXattrCall.class",
+        "dev/codex/schubert/nk/storage/LinuxInodeSecurity$StatvfsCall.class",
+        "dev/codex/schubert/nk/storage/LinuxInodeSecurity$UidCall.class",
+        "dev/codex/schubert/nk/storage/LinuxInodeSecurity.class"
+      ],
+      "owner": "WBS-P003-05",
+      "costOwner": "WBS-P003-05",
+      "rd": "MQ-035/039～041、FIL-001～009",
+      "ui": "232、237",
+      "ss": [
+        "333"
+      ],
+      "specDirectory": "evidence/01_PT/003_NK-PRO-003",
+      "individualContractAndRun": null
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxMonotonicClock.java",
+      "sha256": "0bbc59214a3793b3a964bb32fd2369f4216f633fa6bd7d13fc8625fb5fb1465f",
+      "physical": [
+        "dev/codex/schubert/nk/storage/LinuxMonotonicClock$ReadCall.class",
+        "dev/codex/schubert/nk/storage/LinuxMonotonicClock.class"
+      ],
+      "owner": "WBS-P003-08",
+      "costOwner": "WBS-P003-08",
+      "rd": "MQ-035/039～041、FIL-001～009",
+      "ui": "232、237",
+      "ss": [
+        "333"
+      ],
+      "specDirectory": "evidence/01_PT/003_NK-PRO-003",
+      "individualContractAndRun": null
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxProcessExec.java",
+      "sha256": "73b35bb21ae6d801563680541c5b3984faa23f33434f8ca8cfca078abd71f3a0",
+      "physical": [
+        "dev/codex/schubert/nk/storage/LinuxProcessExec$ExecCall.class",
+        "dev/codex/schubert/nk/storage/LinuxProcessExec.class"
+      ],
+      "owner": "WBS-P003-06",
+      "costOwner": "WBS-P003-06",
+      "rd": "MQ-035/039～041、FIL-001～009",
+      "ui": "232、237",
+      "ss": [
+        "333"
+      ],
+      "specDirectory": "evidence/01_PT/003_NK-PRO-003",
+      "individualContractAndRun": null
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxSealedProof.java",
+      "sha256": "009b87f24bdcb9c2c592992d150f869afa51a3844c04fb4ba378dbe68e4f251b",
+      "physical": [
+        "dev/codex/schubert/nk/storage/LinuxSealedProof$CloseCall.class",
+        "dev/codex/schubert/nk/storage/LinuxSealedProof$CreateCall.class",
+        "dev/codex/schubert/nk/storage/LinuxSealedProof$Descriptor.class",
+        "dev/codex/schubert/nk/storage/LinuxSealedProof$FcntlCall.class",
+        "dev/codex/schubert/nk/storage/LinuxSealedProof$ModeCall.class",
+        "dev/codex/schubert/nk/storage/LinuxSealedProof$Operation.class",
+        "dev/codex/schubert/nk/storage/LinuxSealedProof$ReadCall.class",
+        "dev/codex/schubert/nk/storage/LinuxSealedProof$WriteCall.class",
+        "dev/codex/schubert/nk/storage/LinuxSealedProof.class"
+      ],
+      "owner": "WBS-P003-06",
+      "costOwner": "WBS-P003-06",
+      "rd": "MQ-035/039～041、FIL-001～009",
+      "ui": "232、237",
+      "ss": [
+        "333"
+      ],
+      "specDirectory": "evidence/01_PT/003_NK-PRO-003",
+      "individualContractAndRun": null
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxStartupAdmission.java",
+      "sha256": "bec3eda194f903fff992c1b6301ee128a878e35b883d19beb2b3b17b71871a6b",
+      "physical": [
+        "dev/codex/schubert/nk/storage/LinuxStartupAdmission$Attributes.class",
+        "dev/codex/schubert/nk/storage/LinuxStartupAdmission$FdOwner.class",
+        "dev/codex/schubert/nk/storage/LinuxStartupAdmission$FdOwners.class",
+        "dev/codex/schubert/nk/storage/LinuxStartupAdmission$Identity.class",
+        "dev/codex/schubert/nk/storage/LinuxStartupAdmission$Io.class",
+        "dev/codex/schubert/nk/storage/LinuxStartupAdmission$Lease.class",
+        "dev/codex/schubert/nk/storage/LinuxStartupAdmission$NativeIo.class",
+        "dev/codex/schubert/nk/storage/LinuxStartupAdmission$Operation.class",
+        "dev/codex/schubert/nk/storage/LinuxStartupAdmission.class"
+      ],
+      "owner": "WBS-P003-06",
+      "costOwner": "WBS-P003-06",
+      "rd": "MQ-035/039～041、FIL-001～009",
+      "ui": "232、237",
+      "ss": [
+        "333"
+      ],
+      "specDirectory": "evidence/01_PT/003_NK-PRO-003",
+      "individualContractAndRun": null
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/NonSecretConfigSource.java",
+      "sha256": "319e6cc5885f7aded8b475e874265261480b0fafb966ea62bb5290f02282345b",
+      "physical": [
+        "dev/codex/schubert/nk/storage/NonSecretConfigSource.class"
+      ],
+      "owner": "WBS-P003-07",
+      "costOwner": "WBS-P003-07",
+      "rd": "MQ-035/039～041、FIL-001～009",
+      "ui": "232、237",
+      "ss": [
+        "333"
+      ],
+      "specDirectory": "evidence/01_PT/003_NK-PRO-003",
+      "individualContractAndRun": null
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/OwnedTransferDirectory.java",
+      "sha256": "73583455f354f5ae42f573b8d13c9b98b708b59b133b9aa8c1cf2514a885344e",
+      "physical": [
+        "dev/codex/schubert/nk/storage/OwnedTransferDirectory$EntryHandle.class",
+        "dev/codex/schubert/nk/storage/OwnedTransferDirectory$EntryOpen.class",
+        "dev/codex/schubert/nk/storage/OwnedTransferDirectory$FileOperation.class",
+        "dev/codex/schubert/nk/storage/OwnedTransferDirectory.class"
+      ],
+      "owner": "WBS-P003-04",
+      "costOwner": "WBS-P003-04",
+      "rd": "MQ-035/039～041、FIL-001～009",
+      "ui": "232、237",
+      "ss": [
+        "333"
+      ],
+      "specDirectory": "evidence/01_PT/003_NK-PRO-003",
+      "individualContractAndRun": null
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "sha256": "99a598b5e08bf426c72b85775b4ed21ae7b4544d9f631b3a3b87254abd543850",
+      "physical": [
+        "dev/codex/schubert/nk/storage/ResourceScope$Acquire.class",
+        "dev/codex/schubert/nk/storage/ResourceScope$Action.class",
+        "dev/codex/schubert/nk/storage/ResourceScope$OwnedAction.class",
+        "dev/codex/schubert/nk/storage/ResourceScope$Release.class",
+        "dev/codex/schubert/nk/storage/ResourceScope.class"
+      ],
+      "owner": "WBS-P003-08",
+      "costOwner": "WBS-P003-08",
+      "rd": "MQ-035/039～041、FIL-001～009",
+      "ui": "232、237",
+      "ss": [
+        "333"
+      ],
+      "specDirectory": "evidence/01_PT/003_NK-PRO-003",
+      "individualContractAndRun": null
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceConfigFiles.java",
+      "sha256": "11b33bed1889750459c6e27c65a7cacd69c51c79f78cd85da252093c504912d6",
+      "physical": [
+        "dev/codex/schubert/nk/storage/ServiceConfigFiles$Contents.class",
+        "dev/codex/schubert/nk/storage/ServiceConfigFiles$Io.class",
+        "dev/codex/schubert/nk/storage/ServiceConfigFiles$NioIo.class",
+        "dev/codex/schubert/nk/storage/ServiceConfigFiles$Service.class",
+        "dev/codex/schubert/nk/storage/ServiceConfigFiles$Snapshot.class",
+        "dev/codex/schubert/nk/storage/ServiceConfigFiles.class"
+      ],
+      "owner": "WBS-P003-07",
+      "costOwner": "WBS-P003-07",
+      "rd": "MQ-035/039～041、FIL-001～009",
+      "ui": "232、237",
+      "ss": [
+        "333"
+      ],
+      "specDirectory": "evidence/01_PT/003_NK-PRO-003",
+      "individualContractAndRun": null
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceCredentialId.java",
+      "sha256": "3d387695776875913e476596f5f3e6b9761acd56b277d4fc4acf9c1a76d11740",
+      "physical": [
+        "dev/codex/schubert/nk/storage/ServiceCredentialId$Kind.class",
+        "dev/codex/schubert/nk/storage/ServiceCredentialId.class"
+      ],
+      "owner": "WBS-P003-07",
+      "costOwner": "WBS-P003-07",
+      "rd": "MQ-035/039～041、FIL-001～009",
+      "ui": "232、237",
+      "ss": [
+        "333"
+      ],
+      "specDirectory": "evidence/01_PT/003_NK-PRO-003",
+      "individualContractAndRun": null
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceCredentialLocation.java",
+      "sha256": "76c542380895c6064f666717dcfa9d601d209b1ded6c82b44b2428f7af1e5bc3",
+      "physical": [
+        "dev/codex/schubert/nk/storage/ServiceCredentialLocation.class"
+      ],
+      "owner": "WBS-P003-07",
+      "costOwner": "WBS-P003-07",
+      "rd": "MQ-035/039～041、FIL-001～009",
+      "ui": "232、237",
+      "ss": [
+        "333"
+      ],
+      "specDirectory": "evidence/01_PT/003_NK-PRO-003",
+      "individualContractAndRun": null
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageAttributeGuard.java",
+      "sha256": "d4752c82283b4ab0fc11b5ba738b32b5ce43045bab4576bc210fe4c4d50c635b",
+      "physical": [
+        "dev/codex/schubert/nk/storage/StorageAttributeGuard.class"
+      ],
+      "owner": "WBS-P003-05",
+      "costOwner": "WBS-P003-05",
+      "rd": "MQ-035/039～041、FIL-001～009",
+      "ui": "232、237",
+      "ss": [
+        "333"
+      ],
+      "specDirectory": "evidence/01_PT/003_NK-PRO-003",
+      "individualContractAndRun": null
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIdentity.java",
+      "sha256": "e19734a40b13885ac0d62b3abb117a788d9a7e0839d002d5f655d162cce3cd74",
+      "physical": [
+        "dev/codex/schubert/nk/storage/StorageIdentity.class"
+      ],
+      "owner": "WBS-P003-05",
+      "costOwner": "WBS-P003-05",
+      "rd": "MQ-035/039～041、FIL-001～009",
+      "ui": "232、237",
+      "ss": [
+        "333"
+      ],
+      "specDirectory": "evidence/01_PT/003_NK-PRO-003",
+      "individualContractAndRun": null
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java",
+      "sha256": "d59870fcf8d4f7bf9ff4e0abc2e052efddd9a08e9e93efa39d1f15a97f7063cf",
+      "physical": [
+        "dev/codex/schubert/nk/storage/StorageIoException$Reason.class",
+        "dev/codex/schubert/nk/storage/StorageIoException.class"
+      ],
+      "owner": "WBS-P003-04",
+      "costOwner": "WBS-P003-04",
+      "rd": "MQ-035/039～041、FIL-001～009",
+      "ui": "232、237",
+      "ss": [
+        "333"
+      ],
+      "specDirectory": "evidence/01_PT/003_NK-PRO-003",
+      "individualContractAndRun": null
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageRootInspection.java",
+      "sha256": "92d522c3789d511cd908cf184856840b3b366b071545fe857bc6ddf8826df4ba",
+      "physical": [
+        "dev/codex/schubert/nk/storage/StorageRootInspection$Inode.class",
+        "dev/codex/schubert/nk/storage/StorageRootInspection.class"
+      ],
+      "owner": "WBS-P003-05",
+      "costOwner": "WBS-P003-05",
+      "rd": "MQ-035/039～041、FIL-001～009",
+      "ui": "232、237",
+      "ss": [
+        "333"
+      ],
+      "specDirectory": "evidence/01_PT/003_NK-PRO-003",
+      "individualContractAndRun": null
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageRootLayout.java",
+      "sha256": "4aebd6b8a4af029ed7040a530bd30e9bd51de04da9fb3a2091726b518a1c6c08",
+      "physical": [
+        "dev/codex/schubert/nk/storage/StorageRootLayout.class"
+      ],
+      "owner": "WBS-P003-05",
+      "costOwner": "WBS-P003-05",
+      "rd": "MQ-035/039～041、FIL-001～009",
+      "ui": "232、237",
+      "ss": [
+        "333"
+      ],
+      "specDirectory": "evidence/01_PT/003_NK-PRO-003",
+      "individualContractAndRun": null
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/package-info.java",
+      "sha256": "64e8bb6e4ebe10b606244200eec59e677465215d210c686aefd9da22c9a7bf6e",
+      "physical": [
+        "dev/codex/schubert/nk/storage/package-info.class"
+      ],
+      "owner": "WBS-P003-04",
+      "costOwner": "WBS-P003-04",
+      "rd": "MQ-035/039～041、FIL-001～009",
+      "ui": "232、237",
+      "ss": [
+        "333"
+      ],
+      "specDirectory": "evidence/01_PT/003_NK-PRO-003",
+      "individualContractAndRun": null
+    }
+  ],
+  "oldJavaSqlSourceSites": [
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java",
+      "line": 34
+    }
+  ],
+  "threeLegacyLowerCallerSourceSites": [
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/OwnedTransferDirectory.java",
+      "line": 343
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/OwnedTransferDirectory.java",
+      "line": 346
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/OwnedTransferDirectory.java",
+      "line": 349
+    }
+  ],
+  "preliminaryMetadataReadExit": 1,
+  "preliminaryReadCause": "Git quoted Japanese paths without NUL delimiters.",
+  "rootCauseOrSemanticsFixed": false,
+  "classBodyReads": 0,
+  "productTests": 0,
+  "realDatabaseOrFdActions": 0,
+  "formalDelta": 0,
+  "wholeF02": false,
+  "wholeG1302": false,
+  "whole451": false,
+  "script": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5677_g1302_current_storage_java.py",
+    "sha256": "330ac6268485b63f999cc24151bfd3ab63d6cafec60ea293df908b4296079d1b"
+  }
+}
