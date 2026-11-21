@@ -160,11 +160,11 @@ public final class ModuleDependencyAudit {
         for (var access : type.getCodeUnitAccessesFromSelf()) {
           calls++;
           String target = access.getTargetOwner().getName();
-          if (controller && (filesystem(target) || opensFileInConstructor(access)))
+          if (controller && (filesystem(target) || opensOwnedFile(access)))
             violations.get("CONTROLLER_BOUNDARY").add(origin + "\t" + target);
           if (module.equals("protocol")
               && (protocolFilesystem(target, access.getTarget().getName())
-                  || opensFileInConstructor(access))) {
+                  || opensOwnedFile(access))) {
             violations.get("FRAMEWORK_FENCES").add(origin + "\t" + target);
           }
         }
@@ -248,6 +248,18 @@ public final class ModuleDependencyAudit {
 
   private static boolean filesystem(String target) {
     return target.startsWith("java.nio.file.") || FILE_IO_TYPES.contains(target);
+  }
+
+  private static boolean opensOwnedFile(JavaCodeUnitAccess<?> access) {
+    if (opensFileInConstructor(access)) return true;
+    var target = access.getTarget();
+    String owner = access.getTargetOwner().getName();
+    String name = target.getName();
+    boolean knownFileOverload =
+        (owner.equals("javax.imageio.ImageIO") && (name.equals("read") || name.equals("write")))
+            || (owner.equals("javax.xml.parsers.DocumentBuilder") && name.equals("parse"));
+    return knownFileOverload
+        && target.getRawParameterTypes().stream().anyMatch(type -> type.getName().equals("java.io.File"));
   }
 
   private static boolean opensFileInConstructor(JavaCodeUnitAccess<?> access) {
