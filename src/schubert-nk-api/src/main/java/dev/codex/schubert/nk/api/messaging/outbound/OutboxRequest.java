@@ -53,7 +53,7 @@ public final class OutboxRequest {
     this.retainedDestination = Objects.requireNonNull(destination, "destination");
     this.retainedLayoutId = OutboxEntry.requireLayoutId(layoutId);
     this.retainedLayoutVersion = OutboxEntry.requireLayoutVersion(layoutVersion);
-    this.retainedBody = Objects.requireNonNull(body, "body").clone();
+    Objects.requireNonNull(body, "body");
     if (body.length == 0) {
       throw new IllegalArgumentException("outbox body must not be empty");
     }
@@ -65,8 +65,9 @@ public final class OutboxRequest {
             this.retainedDestination,
             this.retainedLayoutId,
             this.retainedLayoutVersion,
-            this.retainedBody.length,
+            body.length,
             dlqMetadata);
+    this.retainedBody = body.clone();
   }
 
   public UUID messageId() {

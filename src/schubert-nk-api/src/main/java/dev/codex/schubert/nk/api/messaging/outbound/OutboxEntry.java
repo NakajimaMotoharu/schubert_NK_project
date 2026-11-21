@@ -78,7 +78,7 @@ public final class OutboxEntry {
     this.retainedDestination = Objects.requireNonNull(destination, "destination");
     this.retainedLayoutId = requireLayoutId(layoutId);
     this.retainedLayoutVersion = requireLayoutVersion(layoutVersion);
-    this.retainedBody = Objects.requireNonNull(body, "body").clone();
+    Objects.requireNonNull(body, "body");
     if (body.length == 0) {
       throw new IllegalArgumentException("outbox body must not be empty");
     }
@@ -93,8 +93,9 @@ public final class OutboxEntry {
             this.retainedDestination,
             this.retainedLayoutId,
             this.retainedLayoutVersion,
-            this.retainedBody.length,
+            body.length,
             dlqMetadata);
+    this.retainedBody = body.clone();
   }
 
   public long id() {
