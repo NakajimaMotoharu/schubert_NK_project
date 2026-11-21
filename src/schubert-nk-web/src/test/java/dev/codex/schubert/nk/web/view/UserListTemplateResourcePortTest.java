@@ -133,8 +133,10 @@ final class UserListTemplateResourcePortTest {
     assertEquals(
         List.of("Username", "Role", "状態", "Lock終了日時", "最終Login日時", "作成日時", "更新日時", "詳細"),
         document.select("thead th").eachText());
-    assertEquals(
-        List.of("reader", USERNAME_VALUE), document.select(".user-row .username").eachText());
+    var names = document.select(".user-row .username").eachText();
+    assertEquals(50, names.size());
+    assertEquals("fixture-51", names.getFirst());
+    assertEquals(List.of("reader", USERNAME_VALUE), names.subList(48, 50));
     assertTrue(document.select(".user-row .username > *").isEmpty());
     var detailLinks = document.select(".user-row a.detail").eachAttr(HREF);
     assertEquals(50, detailLinks.size());
