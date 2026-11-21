@@ -1,0 +1,157 @@
+{
+  "actualExit": 0,
+  "run": "PG41446-scr008-menu-counts-links-v1",
+  "terminalAtUTC": "2026-11-21T02:16:10.726849+00:00",
+  "core": "2611e1acbd57955d591d52e5348999ea293e068d",
+  "originalModelSource": "192a154e721f97f92d534c774349737ccbd44497",
+  "originalDomSource": "9a4a32f2a1ef0e64cbe3a41f8ec88a6235fde8bd",
+  "inputHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/AnimationMenuViewModel.java": "70b3771e48a510872f1e724b613ab36db563ee89cbfad7cfeaa1b5eb80b99475",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationViewModelTest.java": "145dec791e5649a99f094083ac9012927381c9915026bce38528f16bac175992",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationBrowseTemplateResourcePortTest.java": "6daf068fbc64fcf43bbb434f3ca4f4a6f765b1ca50c647f0d0f5a2ba02a70147",
+    "src/schubert-nk-web/src/main/resources/templates/animation.html": "008fe35863ee9c48b82c674df78572573313b29c321686259a64e8191cbe5b4d",
+    "src/schubert-nk-web/src/main/resources/templates/fragments/layout.html": "a48bda151f893e28858afb26d1c636a564b8bd0cb3c3a16bc63bbb97f0e414bd",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionPrincipal.java": "29af626632ac4c2727f9d0963c3967cb0be7eda57daf762a482268c467dc9232",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/TopBarViewModel.java": "16afe37089d96cb31e7849e5bf5e289196588c6f4b8e1d4732fd402887e24a09",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/AnimationMenuResponseData.java": "3fdb04f41e7f22281747e06c959338db7d8df0548038f05286f55a362b032d2c",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/TypedFieldValues.java": "33f49285e7a00c15bc5c0b5874d82cfe4fc7eb2d4ec60ea3e0a81170a11cbd11",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadData.java": "416ad3f4e119c5c7b637510f8f035793390ad7f8d0dd0b7ba7da7411b60bfb0d",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/AuthenticationContext.java": "aaa18a4c954a425c943e8c30ea1752b665b249e86d8f1767e9e37f4aa61a6b66",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/UserRole.java": "b68402e5705ca2ac5093a1b98a44de5a9f45ed69cb9b231658b4903c51e0bf69"
+  },
+  "design": {
+    "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md": "ef3526f0be56007b81318e442b064db936a696db6a52a4fc8ffbc45b87acff6f",
+    "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md": "2b4e1ebb15b348b1f25d1502130d6a4a3607893868d7ea5e57d231ec7f3e58ef"
+  },
+  "priorCases": {
+    "web230AnimationMenuCounts()": "999 boundary, 0, mismatched total, optional opening and role display",
+    "menuKeepsThreeApprovedCardsCountsAndRoleDisplay": "fixed three links and counts",
+    "zeroCountDisplayDoesNotInventNumericCatalogCounts": "zero display policy"
+  },
+  "originalModelRaw": {
+    "INSTRUCTION": {
+      "covered": 74,
+      "missed": 0
+    },
+    "BRANCH": {
+      "covered": 4,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 19,
+      "missed": 0
+    },
+    "COMPLEXITY": {
+      "covered": 10,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 8,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 1,
+      "missed": 0
+    }
+  },
+  "artifacts": [
+    {
+      "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG24476-search-animation-view-bounded-sixteen-independent-v1/manifest.json",
+      "sha256": "f8b78eff11977bfb750a956092d49430da16731052b4ff85ba4395020cfc7c91"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG24452-six-resource-dom-independent-v1/manifest.json",
+      "sha256": "8252688c6079afe59f95b623b884f9cd252747f2eafd958c56020d2df8075606"
+    },
+    {
+      "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG24476-search-animation-view-bounded-sixteen-independent-v1/original-manifest.json",
+      "sha256": "0a2193fde4dacc747ee1d8f014a1230119b02d1ad8b7d42628fd9c4837367342"
+    },
+    {
+      "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG24476-search-animation-view-bounded-sixteen-independent-v1/compile-manifest.json",
+      "sha256": "326ed80c831894865ca571c919e8a3eef2c9f07825b917a0387eb91a75fbebbe"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41304-protocol-numeric-physical-independent-v1/manifest.json",
+      "sha256": "77a3d80a48df4a2dab8036c5a3019a6cb58bf01f46a47731d2933b37b44dd90c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41304-protocol-numeric-physical-independent-v1/unfiltered.tsv",
+      "sha256": "8d89c594833f9cf0216a805b1fd07e1454ab926af2f3e32e35f5429977aa939e"
+    }
+  ],
+  "delta": {
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/TypedFieldValues.java": {
+      "previousSha256": "1f109d93cb6e8e802ab1a9c0484cfe48689253a34f1322111dfbce58bd0a8cde",
+      "currentSha256": "33f49285e7a00c15bc5c0b5874d82cfe4fc7eb2d4ec60ea3e0a81170a11cbd11",
+      "unchangedUnsignedRangeMethodSha256": "14a1ea17668ba050f8a36055070e3612c342fc746fec6fd171d26be40df6ec3d"
+    }
+  },
+  "currentDirectProtocolRaw": {
+    "dev/codex/schubert/nk/protocol/layout/TypedFieldValues": {
+      "INSTRUCTION": [
+        0,
+        803
+      ],
+      "BRANCH": [
+        0,
+        30
+      ],
+      "LINE": [
+        0,
+        150
+      ],
+      "COMPLEXITY": [
+        0,
+        102
+      ],
+      "METHOD": [
+        0,
+        87
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/protocol/layout/media/AnimationMenuResponseData": {
+      "INSTRUCTION": [
+        0,
+        109
+      ],
+      "BRANCH": [
+        0,
+        0
+      ],
+      "LINE": [
+        0,
+        18
+      ],
+      "COMPLEXITY": [
+        0,
+        10
+      ],
+      "METHOD": [
+        0,
+        10
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    }
+  },
+  "localFooting": "Old Web projection and DOM evidence with exact inputs. Current separate Protocol carrier/helper evidence. No merged coverage or current Web run.",
+  "firstReadExit": 1,
+  "firstReadReason": "TypedFieldValues became instance-owner-backed. The next read isolates the current proven carrier and exact unchanged called method.",
+  "actualHttp": false,
+  "actualBrowser": false,
+  "whole451": false,
+  "formalDelta": 0,
+  "replayedTests": 0,
+  "originalConditionalPriceActivated": false,
+  "script": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5681_scr008_menu_counts_links_evidence.py",
+    "sha256": "52fc775600ef5ebec227d898b3272f210aa938b2da20646c6e10c6cff4fa6018"
+  }
+}
