@@ -44,9 +44,29 @@ def write(path, data):
 
 def main():
     mode = sys.argv[1]
+    owner = sys.argv[2] if len(sys.argv) == 3 else "revocation"
     assert mode in ("baseline", "changes")
+    assert owner in ("revocation", "session")
     baseline = mode == "baseline"
-    run = "PG41358-p01810-revoke-ownership-baseline-v1" if baseline else "PG41360-p01810-revoke-ownership-qualified-v1"
+    session = owner == "session"
+    if session:
+        run = "PG41364-p01810-session-ownership-baseline-v1" if baseline else "PG41366-p01810-session-ownership-qualified-v1"
+        names = ("SessionPayloadCodec", "SessionPayloadIdentity", "EncryptedSessionPayload",
+                 "SessionPayloadException", "SessionAttributeCodec", "SessionAttributeException",
+                 "SessionPrincipal", "SessionAttributes", "SessionOperationToken", "package-info")
+        test_names = ("SessionPayloadCodecTest", "SessionAttributeCodecTest")
+        selections = {"dev.codex.schubert.nk.web.session.SessionPayloadCodecTest": 9}
+        target_name = "SessionPayloadCodec"
+        extras = (MAIN / "security/SavedRequestTarget.java", MAIN / "security/package-info.java")
+        public_root = ROOT / "evidence/01_PT/015_NK-WEB-001/evidence"
+    else:
+        run = "PG41358-p01810-revoke-ownership-baseline-v1" if baseline else "PG41360-p01810-revoke-ownership-qualified-v1"
+        names = NAMES
+        test_names = TESTS
+        selections = {NOTE + TESTS[0]: 8, NOTE + TESTS[1]: 5}
+        target_name = "RevocationPayloadCodec"
+        extras = ()
+        public_root = SPEC
     previous = ROOT / "evidence/01_PT/006_NK-MSG-002/evidence/PG41354-p01810-web-log-single-ownership-v1/manifest.json"
     reference = read(previous)
     work = WORK / run
@@ -67,12 +87,21 @@ def main():
         sources.append(pin(path))
         return target
 
-    for rel in [*[MAIN / "revocation" / (name + ".java") for name in NAMES],
+    for rel in [*[MAIN / owner / (name + ".java") for name in names], *extras,
                 MAIN / "session/SessionStoreException.java", MAIN / "session/InvalidSessionRowException.java"]:
         freeze("main", rel, work / "src/main/java" / rel)
     expected_pom = Path(reference["pom"]["path"])
     pom = work / "pom.xml"
     pom.write_bytes(expected_pom.read_bytes())
+    if session:
+        ns = "http://maven.apache.org/POM/4.0.0"
+        ET.register_namespace("", ns)
+        graph = ET.parse(pom)
+        dependencies = graph.find("{" + ns + "}dependencies")
+        gson = ET.SubElement(dependencies, "{" + ns + "}dependency")
+        for key, value in (("groupId", "com.google.code.gson"), ("artifactId", "gson"), ("version", "2.14.0")):
+            ET.SubElement(gson, "{" + ns + "}" + key).text = value
+        graph.write(pom, encoding="utf-8", xml_declaration=True)
     archive = Path(reference["protocolPackage"]["path"])
     repository = TOOLS / "m2/repository"
     java = TOOLS / "jdk-25.0.4/bin"
@@ -96,9 +125,10 @@ def main():
     assert "-o" in compile_cmd
     run_cmd("compile", compile_cmd)
     output = work / "target/classes"
-    target = output / MAIN / "revocation/RevocationPayloadCodec.class"
+    target = output / MAIN / owner / (target_name + ".class")
     binary = run_cmd("javap", [java / "javap", "-p", "-s", "-c", target])
-    start = binary.read_text().index("  " + NOTE + "RevocationPayloadCodec(java.lang.String, byte[], java.lang.String, byte[], java.security.SecureRandom);")
+    namespace = ".".join(MAIN.parts) + "." + owner + "."
+    start = binary.read_text().index("  " + namespace + target_name + "(java.lang.String, byte[], java.lang.String, byte[], java.security.SecureRandom);")
     code = binary.read_text()[start:].split("\n  public", 1)[0]
     copy = re.findall(r"^\s*(\d+):[^\n]+clone:", code, re.MULTILINE)
     allocation = re.findall(r"^\s*(\d+):\s+newarray\s+byte", code, re.MULTILINE)
@@ -113,13 +143,14 @@ def main():
                   boundedCopies=list(map(int, bounded)))
     if not baseline:
         files = []
-        for name in TESTS:
-            rel = MAIN / "revocation" / (name + ".java")
+        for name in test_names:
+            rel = MAIN / owner / (name + ".java")
             files.append(freeze("test", rel, work / "tests-source" / rel))
         junit = TOOLS / "junit-platform-console-standalone-1.13.4.jar"
         anno = repository / "org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar"
         agent = repository / "org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar"
-        cp = os.pathsep.join(map(str, (output, archive, anno, junit)))
+        jars = (repository / "com/google/code/gson/gson/2.14.0/gson-2.14.0.jar",) if session else ()
+        cp = os.pathsep.join(map(str, (output, archive, anno, junit, *jars)))
         tclasses = work / "test-classes"
         tclasses.mkdir()
         run_cmd("compile-tests", [java / "javac", "--release", "25", "-Xlint:all", "-Werror",
@@ -127,16 +158,16 @@ def main():
         run_cmd("junit", [java / "java", f"-javaagent:{agent}=destfile={work / 'unit.exec'},sessionid={run}",
                     "-cp", str(tclasses) + os.pathsep + cp, "org.junit.platform.console.ConsoleLauncher",
                     "execute", "--disable-ansi-colors", "--fail-if-no-tests",
-                    *[item for cls in TESTS for item in ("--select-class", NOTE + cls)], "--reports-dir", work / "reports"])
+                    *[item for cls in selections for item in ("--select-class", cls)], "--reports-dir", work / "reports"])
         tests = work / "reports/TEST-junit-jupiter.xml"
         root = ET.parse(tests).getroot()
         cases = root.findall("testcase")
-        assert Counter(x.get("classname") for x in cases) == {NOTE + TESTS[0]: 8, NOTE + TESTS[1]: 5}
+        assert Counter(x.get("classname") for x in cases) == selections
         assert all(not any(c.tag in ("failure", "error", "skipped") for c in x) for x in cases)
         assert {key: int(root.attrib[key]) for key in ("tests", "failures", "errors", "skipped")} == {
-            "tests": 13, "failures": 0, "errors": 0, "skipped": 0}
-        result.update(tests=13, rawXml=pin(tests), rawExec=pin(work / "unit.exec"), scopeTests=TESTS)
-    dest = SPEC / run
+            "tests": sum(selections.values()), "failures": 0, "errors": 0, "skipped": 0}
+        result.update(tests=sum(selections.values()), rawXml=pin(tests), rawExec=pin(work / "unit.exec"), scopeTests=selections)
+    dest = public_root / run
     dest.mkdir(parents=True)
     write(dest / "manifest.json", dict(
         run=run, actualExit=0, source=source, terminalAtUTC=utc(), inputs=sources,
