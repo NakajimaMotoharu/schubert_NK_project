@@ -1,0 +1,117 @@
+{
+  "actualExit": 0,
+  "run": "PG41448-scr010-watch-pure-display-evidence-v1",
+  "terminalAtUTC": "2026-11-21T02:17:48.114595+00:00",
+  "currentCore": "2611e1acbd57955d591d52e5348999ea293e068d",
+  "designSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+  "originalUnitSource": "94ea056d77cfdca1f037090afb9af08974733574",
+  "originalCore": "2d38efd344b548896e1161ff7d93f05135e832f5",
+  "originalUnitCases": 4,
+  "sourceDigests": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/AnimationWatchViewModel.java": "5db4747052b55cf94048945ff4565c5b0960359ea4adfc56008829aac3e3903b",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/TopBarViewModel.java": "16afe37089d96cb31e7849e5bf5e289196588c6f4b8e1d4732fd402887e24a09",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionPrincipal.java": "29af626632ac4c2727f9d0963c3967cb0be7eda57daf762a482268c467dc9232",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationWatchPublicContractTest.java": "79744ca355bc5724215af56ea12ab3d714980d9ed82d83475fa1ac1cc58530aa",
+    "src/schubert-nk-web/src/main/resources/templates/animation-watch.html": "50cef0d1cd535d0c374205e63df51ba4308675541eb0fcc523168c0e34fc0b6c",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-web/pom.xml": "9b6c47c3ab3ba0d105f41f081de10b2234af4653fdc371a8eacdf9cabb78761b",
+    "src/schubert-nk-protocol/pom.xml": "f76b730fa1cb1b34a88182ca5b685ca14fb71361c037f9418f0895d2a3022d7d"
+  },
+  "canonicalDocuments": {
+    "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md": "2b4e1ebb15b348b1f25d1502130d6a4a3607893868d7ea5e57d231ec7f3e58ef",
+    "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md": "ef3526f0be56007b81318e442b064db936a696db6a52a4fc8ffbc45b87acff6f"
+  },
+  "protocolArtifact": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41306-protocol-numeric-retained-v1/localJar.jar",
+    "sha256": "5a7006ba3e160216e8e406de786a6f10040ea5d9203da503978ae68d833fd8c3"
+  },
+  "exactProtocolPhysical": {
+    "dev/codex/schubert/nk/protocol/layout/media/VideoDescriptorResponseData.class": "49fb9af637b5a175619fb05682836939b473b90a3b84a17cc0d3f62863cf9e84",
+    "dev/codex/schubert/nk/protocol/layout/PayloadData.class": "0c654933dd8e64834f13a8c1f4b51b3c97de8f73e29469c2d3e811f1ff97a8ac",
+    "dev/codex/schubert/nk/protocol/layout/TypedFieldValues.class": "785ca4329892a953775cd737b79ed9bab47b892ce25f9c10ec193697bcfc8da7",
+    "dev/codex/schubert/nk/protocol/layout/semantic/VideoCategory.class": "ae394e8e080543a294f7f56e95c783a4e9fb29642b39fd882876ea00bdd0f4c8",
+    "dev/codex/schubert/nk/protocol/layout/semantic/DisplayPath.class": "c1361f505abe0bf74d7a00e57ed0a789e1cfcfb991a559bbed516698549461f9",
+    "dev/codex/schubert/nk/protocol/layout/semantic/RelativePath.class": "da1772091206d066d709a6a5aa66baab2566c672a2ed7c1608529a8256838978",
+    "dev/codex/schubert/nk/protocol/layout/semantic/Sha256Hex.class": "74921cebab07338895647faff7cc557280b11f3886541ba9dc401043132195e9",
+    "dev/codex/schubert/nk/protocol/layout/semantic/MediaMimeType.class": "0759eabfc968de7cec14c7618e1dbd4bafd46863263b95fc77c861853ad781b0",
+    "dev/codex/schubert/nk/protocol/layout/semantic/ContentDisposition.class": "26fa36ae49d5b21bdd6beec33433410dd0a317cc312373674b87ee91a9c2549c",
+    "dev/codex/schubert/nk/protocol/layout/semantic/UserRole.class": "97544c0f619535bd68981e891048ac289edda544f03dddbab9110c70aaa69bae",
+    "dev/codex/schubert/nk/protocol/header/AuthenticationContext.class": "6fbe0a9f9e9bc939e5545015608690b5af86b8368cf42e07771999ebd9e95793"
+  },
+  "existingCaseOracle": {
+    "public001AllCategoryNavigationAndRoles()": "4カテゴリ・2役割に独立の戻り先リテラル",
+    "public002IndependentUtf8LogicalIdVector()": "UTF-8の固定期待リンク",
+    "public003NullAndInvalidLogicalIdBoundaries()": "null境界と空ID・dot/dotdotを純値で拒否",
+    "public004ImmutableClosedDisplayMap()": "表示用7キー、不変、表示外値を公開しない"
+  },
+  "originalModelRawCounters": {
+    "dev/codex/schubert/nk/web/view/AnimationWatchViewModel": {
+      "INSTRUCTION": [
+        0,
+        101
+      ],
+      "BRANCH": [
+        0,
+        6
+      ],
+      "LINE": [
+        0,
+        25
+      ],
+      "COMPLEXITY": [
+        0,
+        8
+      ],
+      "METHOD": [
+        0,
+        5
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    }
+  },
+  "originalRuntimeEvidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38116-animation-watch-immutable4-criteria-return-v1/manifest.json",
+      "sha256": "f9b703ba9a88a2f5effbff138871a775834d11c70030db84f18fc0f5451b9da4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38114-animation-watch-immutable4-independent-v1/unit-manifest.json",
+      "sha256": "dae80356b44703eefdca13048e98c52ffb94d68ecf1882a90b32b92161caab5e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38114-animation-watch-immutable4-independent-v1/manifest.json",
+      "sha256": "94654a36037889f98b9d479163c36fb6cf663c4eb771ceab07642837865eb0cb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38114-animation-watch-immutable4-independent-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "e02967ab7908d8ee37533ce9d3f9a120ec3a09ad97a245a70e37aad243e309de"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38114-animation-watch-immutable4-independent-v1/unfiltered.stdout",
+      "sha256": "fee86f3b8a1bf683780eadc75345479a966fb6e2a210ab2671a2ff3fa579bf1c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41322-f02-exact-four-package-lineage-v1/manifest.json",
+      "sha256": "e94bd4f6446ff7f4fd7415aa66338c272d829f17c2d093fb71abd3d7ad426357"
+    }
+  ],
+  "currentWebRepackaged": false,
+  "newTests": 0,
+  "replayedTests": 0,
+  "previousCurrentCoverageMerged": false,
+  "newFormalAcceptance": 0,
+  "whole451": false,
+  "originalConditionalPriceActivated": false,
+  "withheld": [
+    "Current Anime HTTP/access, media streaming and opening selection",
+    "Current Browser and actual NK CHR",
+    "Full source and ending P015-02/451 proof"
+  ],
+  "script": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5682_scr010_watch_pure_display_evidence.py",
+    "sha256": "e00fb10788995f6307bdc3a3b0ca17546686f2f40352374213520cd7c8c4635f"
+  }
+}
