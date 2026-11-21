@@ -1,0 +1,53 @@
+{
+  "actualExit": 0,
+  "run": "PG41458-scr090-closed-error-display-v1",
+  "terminalAtUTC": "2026-11-21T02:29:06.951541+00:00",
+  "source": "6519c9ad9e20ecc728bf8fd6464972600dc44622",
+  "core": "2611e1acbd57955d591d52e5348999ea293e068d",
+  "currentSourceEquivalentToLocalResult": "24da3b252f65f0ea56736cb791cd13165bf62c24",
+  "original22Preserved": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28022-common-error22-v1/manifest.json",
+    "sha256": "7a22ea98a362d772055b38cb4e6e0bcb4ddbda954a74ed5b74ff4976f15213e2"
+  },
+  "currentOriginal23Proof": {
+    "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG41046-p01624-web-mapper-closed-class-v1/manifest.json",
+    "sha256": "459b69862a3948e717df8f62ce83bce78416468d37c2846b2e18629fa5b0f1fe"
+  },
+  "raw": {
+    "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG41046-p01624-web-mapper-closed-class-v1/unfiltered.tsv",
+    "sha256": "fd32aa04ee0c989b5e933e570295f04541d001d6863c0378920d8a2b604379ea"
+  },
+  "scopedInputs": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/ErrorViewModel.java": "6f0861b6b343749426dac94b3e6234ca01d47978b0582976874a96cb6ef62b27",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/TopBarViewModel.java": "16afe37089d96cb31e7849e5bf5e289196588c6f4b8e1d4732fd402887e24a09",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/error/ProblemViewFactory.java": "d3ebd2358380c5a80078f0660bb9b178bb5e339ffdc4dfe52122ff8ba0336b4e",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/error/WebResultMapper.java": "9618aa56862faf36f1328f7c0004c757bef8a2e299488a0b2ceb7fd98ee75a5e",
+    "tools/quality/architecture/ErrorValueContractTest.java": "11d2ad00b9dc679a3fc8fd35ccaf4de32259eff742aa0d26d5ca471759cfd712",
+    "src/schubert-nk-web/src/main/resources/templates/error/error.html": "6fe51e31810e4481a1999e27fa136970945877a2ad12221411e617b1d10634d0"
+  },
+  "errorsProjectionCases": [
+    "errorValue001AllTwelveResultCodesHaveIndependentHttpClassification()",
+    "errorValue005EveryClosedDisplayHasOnlyPublicRequestIdAndApprovedMessagePurpose()",
+    "errorValue003FactoryUsesNineFixedStatusesAndMissingStatusMeans404()",
+    "errorValue006RequiredValuesRejectNullAndOptionalDisplaySnapshotIsRetained()",
+    "errorValue002ClassificationRejectsMissingResultCode()",
+    "errorValue007PublicStatusCatalogIsClosedAndEachNameRetainsItsHttpStatus()",
+    "errorValue004ForeignAndUnknownStatusRemain503WithoutNumericStringConversion()"
+  ],
+  "templateFields": [
+    "status",
+    "message",
+    "requestId"
+  ],
+  "noUnescapedExpression": true,
+  "currentDisplayClassesSameRunCount": 4,
+  "mapperProvesLatestTable": true,
+  "newExecution": 0,
+  "formalDelta": 0,
+  "firstMetadataReadExit": 1,
+  "firstMetadataReadReason": "Initial check expected the earlier six value cases. The current result includes a seventh status-catalog case.",
+  "remaining": [
+    "Current HTTP security chain and actual session/DB authorization",
+    "Actual NK CHR and 451 ending dependencies"
+  ]
+}
