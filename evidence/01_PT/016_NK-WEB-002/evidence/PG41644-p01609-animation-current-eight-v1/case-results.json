@@ -1,0 +1,65 @@
+{
+  "source": "186de2d95d17de70db705ebf6044db652bbdbf31",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "run": "PG41644",
+  "spec": {
+    "path": "evidence/01_PT/016_NK-WEB-002/4137_P0160809Animationメニュー一覧個別契約対応.md",
+    "sha256": "1080f3914bccaad3d66092b0a7cb2b9919230fa51dadcbed33745f9e2c112b22"
+  },
+  "tests": [
+    {
+      "id": "PT-WEB-230",
+      "method": "web230AnimationMenuCounts",
+      "seconds": "0.004",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-WEB-231",
+      "method": "web231MainGrouping",
+      "seconds": "0.003",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-WEB-232",
+      "method": "web232OvaAndBounds",
+      "seconds": "0.011",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-WEB-233",
+      "method": "web233RejectInconsistentGroups",
+      "seconds": "0.007",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-WEB-234",
+      "method": "web234NullAndOwnership",
+      "seconds": "0.003",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-WEB-235",
+      "method": "web235ClosedBeansAndRedaction",
+      "seconds": "0.025",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-WEB-236",
+      "method": "web236SyntheticHtmlEscaping",
+      "seconds": "0.276",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-WEB-237",
+      "method": "web237ConcurrentProjection",
+      "seconds": "0.072",
+      "result": "PASS"
+    }
+  ],
+  "independentExpectations": [
+    "literal menu counts and all rows ordered",
+    "main and other grouping boundaries",
+    "null, mismatched types and immutable display",
+    "synthetic HTML escapes and bounded parallel projection"
+  ]
+}

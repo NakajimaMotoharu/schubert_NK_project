@@ -1,0 +1,65 @@
+{
+  "source": "186de2d95d17de70db705ebf6044db652bbdbf31",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "run": "PG41646",
+  "spec": {
+    "path": "evidence/01_PT/016_NK-WEB-002/4193_質問form現whole八件_単体テスト仕様書.md",
+    "sha256": "ff454e7a08941d310986a321b6ad43bac7480624e57aaac08224480b338011c2"
+  },
+  "tests": [
+    {
+      "id": "PT-QST-FORM001",
+      "method": "qstForm001IndependentGoldenAndNoQuestionTrimming",
+      "seconds": "0.002",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-QST-FORM002",
+      "method": "qstForm002ByteBoundariesAfterNfcWithoutTruncation",
+      "seconds": "0.012",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-QST-FORM003",
+      "method": "qstForm003ControlsUnicodeAndTrailingSpaceAreNotTrimmed",
+      "seconds": "0.002",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-QST-FORM004",
+      "method": "qstForm004CanonicalUuidSyntaxWithoutIssuingAuthorization",
+      "seconds": "0.002",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-QST-FORM005",
+      "method": "qstForm005ClosedBindingMissingDuplicateAndNullContracts",
+      "seconds": "0.002",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-QST-FORM006",
+      "method": "qstForm006ImmutableSnapshotsAndRedaction",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-QST-FORM007",
+      "method": "qstForm007TerminalClosePreservesOtherOwners",
+      "seconds": "0.024",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-QST-FORM008",
+      "method": "qstForm008ConcurrentIndependentBodiesAndTokens",
+      "seconds": "0.116",
+      "result": "PASS"
+    }
+  ],
+  "independentExpectations": [
+    "independent 4144-byte golden vector",
+    "NFC byte boundaries without truncation",
+    "closed input fields and required syntax",
+    "owned fixture cleanup, null and concurrent isolation"
+  ]
+}

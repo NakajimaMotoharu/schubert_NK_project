@@ -1,0 +1,65 @@
+{
+  "source": "186de2d95d17de70db705ebf6044db652bbdbf31",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "run": "PG41640",
+  "spec": {
+    "path": "evidence/01_PT/016_NK-WEB-002/120_通知詳細表示pure単体テスト仕様書.md",
+    "sha256": "b26c4eea9b55cc5355b0534cbaebf80fdea5ed766727d49e7f88a192e77f6b75"
+  },
+  "tests": [
+    {
+      "id": "PT-WEB-NDETAIL001",
+      "method": "completedHasExactFields",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-WEB-NDETAIL002",
+      "method": "allStatesHaveLiteralLabelsAndTimes",
+      "seconds": "0.002",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-WEB-NDETAIL003",
+      "method": "deletedQuestionsRetireAnswerAndLink",
+      "seconds": "0.003",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-WEB-NDETAIL004",
+      "method": "completedMayHaveEmptyAnswer",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-WEB-NDETAIL005",
+      "method": "targetNullAndSemanticMismatchReject",
+      "seconds": "0.003",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-WEB-NDETAIL006",
+      "method": "immutableRedactedProjection",
+      "seconds": "0.072",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-WEB-NDETAIL007",
+      "method": "unicodeAndMarkupStayText",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-WEB-NDETAIL008",
+      "method": "parallelProjectionKeepsActorsSeparate",
+      "seconds": "0.006",
+      "result": "PASS"
+    }
+  ],
+  "independentExpectations": [
+    "literal display fields and five state labels",
+    "JST timestamp positives and hidden values",
+    "deleted and no-answer linked output",
+    "null, value invariants and concurrent isolation"
+  ]
+}

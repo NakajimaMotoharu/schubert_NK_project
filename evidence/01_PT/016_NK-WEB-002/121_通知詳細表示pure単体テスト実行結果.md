@@ -13,3 +13,8 @@
 ## 費用観測追記訂正（BUG2322/YKT2067、event3985）
 
 上記共有差0は実行前10:26の観測を群末にも参照した歴史値で、完全な群末実測ではない。PG20208真正終端10:36:39後のfresh APIでused29/残71、開始観測28から実共有差1ppを共通end_fieldsで検証した。元3984を残し3985で差額1だけordinary累計23/all30へ補正。専有費・N/Tnull、8PT/coverage/受入数は不変。PG20219の5群横確認とPG20218 metadata8checkを参照。
+
+
+## 2026-11-22 当候補の通常PT追加
+
+PG41640は現Core `1e4e9e64`、既PT-WEB-NDETAIL001～008の単一runで8/8、F/E/S/未実行各0。使用4物理のCRCを独立照合。対象本体の標準L51/M7/C1/B13は未達0。生は同L/M/CとB13/14、I256/262。残はline35の生成MatchException既定分岐と命令。支援クラスの未計測も保持。生と標準の差を報告し、正式の全coverage、実HTTP・取消、owner/DB、451を保留。[実行](evidence/PG41640-p01621-notification-detail-current-eight-v1/manifest.json)・[独立計測](evidence/PG41640-p01621-notification-detail-current-eight-v1/independent.json)。

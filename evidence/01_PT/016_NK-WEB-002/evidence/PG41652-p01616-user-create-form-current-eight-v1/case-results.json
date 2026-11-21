@@ -1,0 +1,65 @@
+{
+  "source": "186de2d95d17de70db705ebf6044db652bbdbf31",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "run": "PG41652",
+  "spec": {
+    "path": "evidence/01_PT/016_NK-WEB-002/4195_三form単一buffer所有・全三十三仕様.md",
+    "sha256": "fbc769d6b1e9418fef6d4a8991883b6f9629ae853b60e8eed734ef31ba6f2f61"
+  },
+  "tests": [
+    {
+      "id": "PT-USER-CREATE001",
+      "method": "create001IndependentWireAndClosedRoleEnabledValues",
+      "seconds": "0.133",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-USER-CREATE002",
+      "method": "create002NfcCodePointAndByteBoundariesWithoutPasswordTrimming",
+      "seconds": "0.005",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-USER-CREATE003",
+      "method": "create003RequiredClosedBindingAndNullContracts",
+      "seconds": "0.008",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-USER-CREATE004",
+      "method": "create004UsernamePasswordAndUnicodeRejections",
+      "seconds": "0.007",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-USER-CREATE005",
+      "method": "create005ConfirmationEnumFlagAndCanonicalToken",
+      "seconds": "0.003",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-USER-CREATE006",
+      "method": "create006ImmutableProjectionAndSecretLifetime",
+      "seconds": "0.004",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-USER-CREATE007",
+      "method": "create007OneHundredConcurrentIndependentRequests",
+      "seconds": "0.012",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-USER-CREATE008",
+      "method": "create008InvalidSecretsRemainAbsentAndClosedInvalidCannotSend",
+      "seconds": "0.002",
+      "result": "PASS"
+    }
+  ],
+  "independentExpectations": [
+    "independent create wire and owned bytes",
+    "username and form data NFC and byte limits",
+    "closed field controls and immutable projection",
+    "null and concurrent ownership isolation"
+  ]
+}

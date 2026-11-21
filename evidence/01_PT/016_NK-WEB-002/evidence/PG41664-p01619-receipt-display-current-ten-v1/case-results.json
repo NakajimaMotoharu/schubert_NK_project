@@ -1,0 +1,77 @@
+{
+  "source": "186de2d95d17de70db705ebf6044db652bbdbf31",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "run": "PG41664",
+  "spec": {
+    "path": "evidence/01_PT/016_NK-WEB-002/4163_P0161819質問入力表示原十八単体仕様.md",
+    "sha256": "ed251a83b1f6f6c1023ce232ea63ab65271752a8cebdfa19290ff87fc3bc52ab"
+  },
+  "tests": [
+    {
+      "id": "REQUEST-DISPLAY001",
+      "method": "requestDisplay001ReceiptRetainsOnlyPublicLocatorValuesAtBothIdLimits",
+      "seconds": "0.021",
+      "result": "PASS"
+    },
+    {
+      "id": "REQUEST-DISPLAY002",
+      "method": "requestDisplay002ReceiptRejectsAllSyntaxNullIdAndSubmillisecondBoundaries",
+      "seconds": "0.002",
+      "result": "PASS"
+    },
+    {
+      "id": "REQUEST-DISPLAY003",
+      "method": "requestDisplay003QuestionNewFormUsesOnlyCorrectPurposeAndPublicSnapshot",
+      "seconds": "0.003",
+      "result": "PASS"
+    },
+    {
+      "id": "REQUEST-DISPLAY004",
+      "method": "requestDisplay004QuestionRedisplayKeepsSameTokenRequestOnlyBodyAndIssueCopy",
+      "seconds": "0.002",
+      "result": "PASS"
+    },
+    {
+      "id": "REQUEST-DISPLAY005",
+      "method": "requestDisplay005AcceptanceDisplaysJstAndAtMostTwoHundredUnicodeCodePoints",
+      "seconds": "0.024",
+      "result": "PASS"
+    },
+    {
+      "id": "REQUEST-DISPLAY006",
+      "method": "requestDisplay006AcceptanceRejectsEachIndependentLocatorAndUsernameMismatch",
+      "seconds": "0.004",
+      "result": "PASS"
+    },
+    {
+      "id": "REQUEST-DISPLAY007",
+      "method": "requestDisplay007AcceptanceRejectsNullAbsentBodyAndInvalidWireSemantic",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "id": "REQUEST-DISPLAY008",
+      "method": "requestDisplay008UserNewFormHasApprovedDefaultsNoPasswordAndImmutableFields",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "id": "REQUEST-DISPLAY009",
+      "method": "requestDisplay009UserRedisplayPreservesPublicFieldsAndConflictIssueOnly",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "id": "REQUEST-DISPLAY010",
+      "method": "requestDisplay010UserDisplayRejectsNullWithoutAuthenticationOrApiActions",
+      "seconds": "0.015",
+      "result": "PASS"
+    }
+  ],
+  "independentExpectations": [
+    "literal receipt reference field and timestamp constraints",
+    "independent preview and JST expectation",
+    "unchanged synthetic value and body isolation",
+    "null and semantic mismatch, closed public outputs"
+  ]
+}

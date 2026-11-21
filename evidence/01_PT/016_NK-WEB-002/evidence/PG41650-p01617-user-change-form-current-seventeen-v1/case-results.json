@@ -1,0 +1,119 @@
+{
+  "source": "186de2d95d17de70db705ebf6044db652bbdbf31",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "run": "PG41650",
+  "spec": {
+    "path": "evidence/01_PT/016_NK-WEB-002/4195_三form単一buffer所有・全三十三仕様.md",
+    "sha256": "fbc769d6b1e9418fef6d4a8991883b6f9629ae853b60e8eed734ef31ba6f2f61"
+  },
+  "tests": [
+    {
+      "id": "PT-USER-CHANGE-INTERFACE001",
+      "method": "change017SealedInterfacePreservesWireAndLifetime",
+      "seconds": "0.003",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-USER-CHANGE001",
+      "method": "change001StatusGolden",
+      "seconds": "0.003",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-USER-CHANGE002",
+      "method": "change002RoleGolden",
+      "seconds": "0.003",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-USER-CHANGE003",
+      "method": "change003UnlockGolden",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-USER-CHANGE004",
+      "method": "change004PasswordGoldenAndNoSecretProjection",
+      "seconds": "0.002",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-USER-CHANGE005",
+      "method": "change005OperationAndUnknownFieldRejection",
+      "seconds": "0.004",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-USER-CHANGE006",
+      "method": "change006PathAndHiddenIdentifier",
+      "seconds": "0.006",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-USER-CHANGE007",
+      "method": "change007VersionSyntax",
+      "seconds": "0.002",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-USER-CHANGE008",
+      "method": "change008ConfirmAndTokenSyntax",
+      "seconds": "0.14",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-USER-CHANGE009",
+      "method": "change009ClosedRoleAndBoolean",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-USER-CHANGE010",
+      "method": "change010PasswordNfcCodepointByteBoundaries",
+      "seconds": "0.004",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-USER-CHANGE011",
+      "method": "change011PasswordInvalidAndTrustedUsername",
+      "seconds": "0.003",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-USER-CHANGE012",
+      "method": "change012NullMissingAndDuplicates",
+      "seconds": "0.007",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-USER-CHANGE013",
+      "method": "change013ImmutableSnapshotAndRedaction",
+      "seconds": "0.002",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-USER-CHANGE014",
+      "method": "change014TerminalCloseAndSeparateDto",
+      "seconds": "0.005",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-USER-CHANGE015",
+      "method": "change015OneHundredIndependentParallelOperations",
+      "seconds": "0.007",
+      "result": "PASS"
+    },
+    {
+      "id": "PT-USER-CHANGE016",
+      "method": "change016InputCannotGrantApiAuthority",
+      "seconds": "0.002",
+      "result": "PASS"
+    }
+  ],
+  "independentExpectations": [
+    "independent wire for status, role, unlock and reset",
+    "closed field, identifier and version intake",
+    "NFC and retained owner boundary",
+    "null, owned memory cleanup, invalid transport inputs and concurrency"
+  ]
+}

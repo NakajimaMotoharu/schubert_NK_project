@@ -15,3 +15,8 @@ NK-WEB-002。対象source/hash、承認設計commit/hash、独立期待値/TestI
 P01625原四費用leaf.01inventory/.02独立DOMfixture/.03JScoverage/.04CSS-HTMLsecrettraceの全五source418行と元Node全四TestをUI222223224225SS313352へ対応。正規625原八rowの開始総1/2.4/4.8を保持し四/1準備だけ.348/.84/1.68消化、架空parent/1を作らず/2と原190未受入。旧PG14778/80/82/84の公開manifest-chain/XML5wrapper/Node30-全4resourceLFB100・JS/Test/Node24.19本体hash一致を照合、製品試験再演0/新coverage0/JavaCP実体のread-hash0。旧wrapperコピーHTMLのquestions/new一差はmenuhref修正199d→a716（/menuからUI承認/）を検出し現JavaWrapper成功へ転用0。JS30は旧resource限定証拠のみ、CSS900実browser/CHR/全451-G07/trace閉鎖は未受入。
 
 実行: `python3 -B evidence/01_PT/018_NK-OPS-001/input/1941b_original_subdivided_artifact_contract_stage.py audit evidence/01_PT/018_NK-OPS-001/input/1965b_four_js_css_subdivided_config.json ; python3 -B evidence/01_PT/018_NK-OPS-001/input/1967b_four_js_node_only_proof_metadata.py` metadata終了0。新規製品PT/coverageなし。原/1の準備だけ、原/2・451・元190未受入。独立期待値は公開設計の固定境界・順序・後条件に基づき、production methodで生成しない。正式1964PT/53scope・工数null。
+
+
+## 2026-11-22 四scriptと変更HTMLの現候補
+
+PG41666/41676で、四script・四独立fixture・Node V24.19.0の実体一致を確認。旧30子とL/F/Bを資源入力に紐付ける。質問入力HTMLのメニューhref差はNode fixtureから独立し、元Javaの外部script接続試験一件は差分対象。PG41668で明示7templateに対して単体一件合格。現実Browser・CSS表示差、451は未受入。

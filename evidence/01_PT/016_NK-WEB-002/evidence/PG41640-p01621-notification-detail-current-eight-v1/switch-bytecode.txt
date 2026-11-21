@@ -1,0 +1,15 @@
+        23: tableswitch   { // 1 to 5
+                       1: 66
+                       2: 71
+                       3: 76
+                       4: 81
+                       5: 86
+                 default: 56
+            }
+        56: new           #37                 // class java/lang/MatchException
+        59: dup
+        60: aconst_null
+        61: aconst_null
+        62: invokespecial #39                 // Method java/lang/MatchException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+        65: athrow
+        66: ldc           #42                 // String 受付中
