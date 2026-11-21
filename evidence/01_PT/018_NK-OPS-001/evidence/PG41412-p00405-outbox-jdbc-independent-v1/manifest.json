@@ -1,0 +1,402 @@
+{
+  "run": "PG41412-p00405-outbox-jdbc-independent-v1",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-21T00:56:45.616560+00:00",
+  "source": "de7a3b5e226fd26eaf6ce42cd4e5921020e92580",
+  "core": "2611e1acbd57955d591d52e5348999ea293e068d",
+  "unit": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG41410-p00405-current-outbox-value-jdbc-v1/manifest.json",
+    "sha256": "51acd79c5cb68cd800d2a3000c1cdaf2202a76fa98726b0cc58fbd31fe365999"
+  },
+  "scopeOwnersPrior": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG40580-p00405-current-owner-criterion-receipts-v1/manifest.json",
+    "sha256": "cc629b1ef330defb598b93503b0e4d62808bc6c8d84c3aad8b2dcd98f6892487"
+  },
+  "physicalClasses": 10,
+  "executedPositiveCrc": 8,
+  "originalExecMerged": false,
+  "tests": 12,
+  "passed": 12,
+  "failure": 0,
+  "notRun": 0,
+  "rawRepository": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 699
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 40
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 178
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 33
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 13
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "classes": {
+    "dev/codex/schubert/nk/api/database/RequiredColumn": {
+      "INSTRUCTION": {
+        "missed": 7,
+        "covered": 10
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 2
+      },
+      "LINE": {
+        "missed": 2,
+        "covered": 3
+      },
+      "COMPLEXITY": {
+        "missed": 1,
+        "covered": 2
+      },
+      "METHOD": {
+        "missed": 1,
+        "covered": 1
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/database/package-info": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 0
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 0
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 0
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 0
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 0
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 0
+      }
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 699
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 40
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 178
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 33
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 13
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination": {
+      "INSTRUCTION": {
+        "missed": 10,
+        "covered": 65
+      },
+      "BRANCH": {
+        "missed": 1,
+        "covered": 1
+      },
+      "LINE": {
+        "missed": 1,
+        "covered": 12
+      },
+      "COMPLEXITY": {
+        "missed": 2,
+        "covered": 8
+      },
+      "METHOD": {
+        "missed": 1,
+        "covered": 8
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata": {
+      "INSTRUCTION": {
+        "missed": 32,
+        "covered": 141
+      },
+      "BRANCH": {
+        "missed": 14,
+        "covered": 20
+      },
+      "LINE": {
+        "missed": 6,
+        "covered": 25
+      },
+      "COMPLEXITY": {
+        "missed": 16,
+        "covered": 13
+      },
+      "METHOD": {
+        "missed": 2,
+        "covered": 10
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry": {
+      "INSTRUCTION": {
+        "missed": 17,
+        "covered": 201
+      },
+      "BRANCH": {
+        "missed": 3,
+        "covered": 15
+      },
+      "LINE": {
+        "missed": 6,
+        "covered": 46
+      },
+      "COMPLEXITY": {
+        "missed": 9,
+        "covered": 19
+      },
+      "METHOD": {
+        "missed": 6,
+        "covered": 13
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxIntegrityException": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 9
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 0
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 4
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 2
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest": {
+      "INSTRUCTION": {
+        "missed": 7,
+        "covered": 108
+      },
+      "BRANCH": {
+        "missed": 1,
+        "covered": 1
+      },
+      "LINE": {
+        "missed": 2,
+        "covered": 26
+      },
+      "COMPLEXITY": {
+        "missed": 2,
+        "covered": 11
+      },
+      "METHOD": {
+        "missed": 1,
+        "covered": 11
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule": {
+      "INSTRUCTION": {
+        "missed": 14,
+        "covered": 75
+      },
+      "BRANCH": {
+        "missed": 2,
+        "covered": 11
+      },
+      "LINE": {
+        "missed": 1,
+        "covered": 14
+      },
+      "COMPLEXITY": {
+        "missed": 4,
+        "covered": 11
+      },
+      "METHOD": {
+        "missed": 2,
+        "covered": 5
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/package-info": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 0
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 0
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 0
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 0
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 0
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 0
+      }
+    }
+  },
+  "previousRawRepository": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 699
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 40
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 178
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 33
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 13
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "separateReferenceScopeSource": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG41406-outbox-copy-independent-v1/manifest.json",
+    "sha256": "3fc26d3d1dc25f78447530249dc2076ffe0d4bab6f668f7ed20596e25881b44c"
+  },
+  "unchangedOriginalComponentOwners": 2,
+  "totalOriginalComponentOwners": 4,
+  "actualDbAcceptance": false,
+  "whole451": false,
+  "wholeP00405": false,
+  "formalDelta": 0,
+  "steps": {
+    "compile-raw": {
+      "argv": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41412-p00405-outbox-jdbc-independent-v1/analyzer",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/jacoco/UnfilteredCodeMeasurement.java"
+      ],
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG41412-p00405-outbox-jdbc-independent-v1/compile-raw.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG41412-p00405-outbox-jdbc-independent-v1/compile-raw.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "raw": {
+      "argv": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41412-p00405-outbox-jdbc-independent-v1/analyzer:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+        "--strict-original-exec",
+        "--line-deficits",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41410-p00405-current-outbox-value-jdbc-v1/unit.exec",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41410-p00405-current-outbox-value-jdbc-v1/target/classes/dev/codex/schubert/nk/api/database/RequiredColumn.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41410-p00405-current-outbox-value-jdbc-v1/target/classes/dev/codex/schubert/nk/api/database/package-info.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41410-p00405-current-outbox-value-jdbc-v1/target/classes/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41410-p00405-current-outbox-value-jdbc-v1/target/classes/dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41410-p00405-current-outbox-value-jdbc-v1/target/classes/dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41410-p00405-current-outbox-value-jdbc-v1/target/classes/dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41410-p00405-current-outbox-value-jdbc-v1/target/classes/dev/codex/schubert/nk/api/messaging/outbound/OutboxIntegrityException.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41410-p00405-current-outbox-value-jdbc-v1/target/classes/dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41410-p00405-current-outbox-value-jdbc-v1/target/classes/dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41410-p00405-current-outbox-value-jdbc-v1/target/classes/dev/codex/schubert/nk/api/messaging/outbound/package-info.class"
+      ],
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG41412-p00405-outbox-jdbc-independent-v1/raw.stdout.txt",
+        "sha256": "42296b2244552236b3023538ae204e00ee0ac70904a0db60cc3b710e709a2b21"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG41412-p00405-outbox-jdbc-independent-v1/raw.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "eventId": "PGPT-20261008-7291",
+  "groupId": "WBS66-P00405-OUTBOX-REPO-CURRENT-VALUES",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-21T00:53:49.131000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 87,
+      "remainingPercent": 13,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66-P00405-OUTBOX-REPO-CURRENT-VALUES",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "WBS66-P00405-OUTBOX-REPO-CURRENT-VALUES",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P004-05"
+    ],
+    "managementWorkIds": [
+      "WBS-P004-05/2",
+      "候補再資格-04.01"
+    ],
+    "source": "de7a3b5e226fd26eaf6ce42cd4e5921020e92580",
+    "productionCoreMain": "2611e1acbd57955d591d52e5348999ea293e068d",
+    "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "run": "PG41410",
+    "estimateAtGroupStartPp": {
+      "low": 0.27,
+      "base": 0.7,
+      "high": 1.6
+    },
+    "groupCapPp": 3,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1775_F03現Outbox書式再開点.json",
+        "sha256": "9d7c4fc40a2e4bf3ce16a4cf5e4842f8088ef49f41711ce8fa9ac847d3e96989"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39656-p00405-business-outbox-resource-independent-v1/manifest.json",
+        "sha256": "284573282c4f427c0a0c16072b3019af4485d264b952667ab44d470fd8d82aee"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41406-outbox-copy-independent-v1/manifest.json",
+        "sha256": "3fc26d3d1dc25f78447530249dc2076ffe0d4bab6f668f7ed20596e25881b44c"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/5193_ssc471_business_outbox_profile.json",
+        "sha256": "d7aa90b1a7290bfc7d50ee1f86e54cd26d2d8abcd3d2d5c1005d0ffaf8e1710e"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "SSC471 carries exact 10 Main/12 normal own memory JDBC originals. Existing artifact used the two Outbox values before current validation/copy correction; all other Main/Test/POM inputs unchanged.",
+    "endCondition": "Run original 12 once against the exact current 10-Main closure, preserve original independent SQL/UTC/ownership oracle and single exec, check current JDBC class raw. Continue existing own pure 2/4 and note remaining F02/F03, QA and real PostgreSQL.",
+    "workScope": "Necessary support-change requalification (12 original, not new definitions; no extra original row price). Only admitted in-process JDBC proxies; no actual JDBC driver/service/VM or held Main."
+  }
+}
