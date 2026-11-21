@@ -1,0 +1,71 @@
+{
+  "eventId": "PGPT-20261008-7314",
+  "groupId": "WBS66-G1307-CURRENT-NEW-TEST-IDS",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-21T01:21:27.922000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 88,
+      "remainingPercent": 12,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66-G1307-CURRENT-NEW-TEST-IDS",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "WBS66-G1307-CURRENT-NEW-TEST-IDS",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-G13.07"
+    ],
+    "managementWorkIds": [
+      "WBS-G13.07/2"
+    ],
+    "source": "bfdb4b37457c8076c830aac114be610259c45348",
+    "productionCoreMain": "2611e1acbd57955d591d52e5348999ea293e068d",
+    "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "run": "PG41430",
+    "estimateAtGroupStartPp": {
+      "low": 0.18,
+      "base": 0.55,
+      "high": 1.15
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1798_G1302現SQL追跡と次工程.json",
+        "sha256": "11ffd886dc2719fb23368f2a78b6623785b9a23cb424bc006710bd7d1218cc95"
+      },
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1598_SCR012区分件数不足側の局所試験開始.json",
+        "sha256": "2b3cd225b68690cf3a227971ff8b1d508ce025d32b9ffc9d43a2c6be7b714f41"
+      },
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1792_WBS短期十二項と利用枠再開点.json",
+        "sha256": "118b9a1a8ea0ec90a1f861f2b5e48776f188dcf8a053987fa3fe0914c06dd4b2"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41420-g08-current-outbox-and-gate-trace-v1/manifest.json",
+        "sha256": "4585e0841fe9ce8f5418c985ce96606d9d25cd79e188b04e89759f9443d3077a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41332-p020-comparator-test-id-correction-v1/manifest.json",
+        "sha256": "5f8da8d5b4f59d3b2d58830cf9d087b2197b216ffa2f11a1b904acbc01377616"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "G13.07/2 requires source/method/TestID trace. Current window group totals record 23 new product cases; Git additionally has one fixture-only JUnit declaration and four comparator tool tests.",
+    "endCondition": "Unambiguously reconcile every newly added test declaration with its correct ID, source and original qualified run, with fixture-only and Characterization tools separated.",
+    "workScope": "Public known changed source and evidence only; exact targeted diff after hold-aware name check. No Product run reexecution, coverage union, added formal progress, or held tooling."
+  }
+}
