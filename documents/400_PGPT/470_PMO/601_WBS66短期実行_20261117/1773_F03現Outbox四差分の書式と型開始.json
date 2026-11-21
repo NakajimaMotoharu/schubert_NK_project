@@ -1,0 +1,67 @@
+{
+  "eventId": "PGPT-20261008-7288",
+  "groupId": "WBS66-F03-CURRENT-OUTBOX-FOUR-INPUTS",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-21T00:51:50.864000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 87,
+      "remainingPercent": 13,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66-F03-CURRENT-OUTBOX-FOUR-INPUTS",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "WBS66-F03-CURRENT-OUTBOX-FOUR-INPUTS",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "source": "12d0fc7180ed0732e536e122afab27af7ce94d6a",
+    "productionCoreMain": "2611e1acbd57955d591d52e5348999ea293e068d",
+    "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "run": "PG41408",
+    "estimateAtGroupStartPp": {
+      "low": 0.1,
+      "base": 0.25,
+      "high": 0.6
+    },
+    "groupCapPp": 1,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1772_Outbox現Core再開点.json",
+        "sha256": "9667940cf97425baf4a9c1cc719c6a0f55538a41e6ca89b39396ad77ed12f86b"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41384-f03-current-api-web-source-style-v1/manifest.json",
+        "sha256": "1e4b23086f1f3e0936322a2e18f5fcb712fb53b4b7b54c6688d42408bbd92653"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41404-outbox-copy-and-approved-fixture-v1/manifest.json",
+        "sha256": "6d12c9cfe85032811d42a8114ab892ae7b160afba6685a78fdbee277fdc52737"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41406-outbox-copy-independent-v1/manifest.json",
+        "sha256": "3fc26d3d1dc25f78447530249dc2076ffe0d4bab6f668f7ed20596e25881b44c"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "Latest source change affects only two permitted Outbox Main and two Test files. Their original strict build/static/formatter/XML and same-scope validation are already saved.",
+    "endCondition": "Bind four exact source/hash pairs to tests and quality reports and distinguish current F03 source-only totals from the blocked all-six typed gate.",
+    "workScope": "No repeated quality tools, JUnit or backend activity. Read preserved source-only and qualified scope evidence."
+  }
+}
