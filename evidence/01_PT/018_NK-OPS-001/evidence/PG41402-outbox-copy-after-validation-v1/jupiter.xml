@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="JUnit Jupiter" tests="10" skipped="0" failures="2" errors="0" time="0.102" hostname="npc1" timestamp="2026-11-21T09:46:22">
+<properties><property name="file.encoding" value="UTF-8" /><property name="java.version" value="25.0.4" /><property name="os.arch" value="amd64" /><property name="os.name" value="Linux" /><property name="user.timezone" value="Asia/Tokyo" /></properties><testcase name="entryRejectsLeaseBeforeProfileAndRetainsBorrowedBytesOnFailure()" classname="dev.codex.schubert.nk.api.messaging.outbound.OutboxRetainedValueContractTest" time="0.001">
+</testcase>
+<testcase name="exactDestinationSpecificProfileOwnsBodyAndRequiresOriginalDifferentFromDispatch()" classname="dev.codex.schubert.nk.api.messaging.outbound.OutboxDlqMetadataTest" time="0.023">
+</testcase>
+<testcase name="borrowedBytesAndEmptyMetadataNeverAppearInRetainedDiagnostics()" classname="dev.codex.schubert.nk.api.messaging.outbound.OutboxRetainedValueContractTest" time="0">
+</testcase>
+<testcase name="entryRejectsEveryInvalidBoundaryAndNull()" classname="dev.codex.schubert.nk.api.messaging.outbound.OutboxModelTest" time="0.003">
+</testcase>
+<testcase name="requestRejectsEmptyBodyBeforeProfileAndRetainsBorrowedBytesOnFailure()" classname="dev.codex.schubert.nk.api.messaging.outbound.OutboxRetainedValueContractTest" time="0.001">
+</testcase>
+<testcase name="boundsActualCountAndUtcMicrosecondsAreImmutableAndRedacted()" classname="dev.codex.schubert.nk.api.messaging.outbound.OutboxDlqMetadataTest" time="0.004">
+</testcase>
+<testcase name="reportAndIntegrityExceptionsCoverEveryInvariant()" classname="dev.codex.schubert.nk.api.messaging.outbound.OutboxModelTest" time="0.003">
+</testcase>
+<testcase name="destinationClosedCatalogUsesIndependentAddressesAndEnumNames()" classname="dev.codex.schubert.nk.api.messaging.outbound.OutboxRetainedValueContractTest" time="0.002">
+</testcase>
+<testcase name="requestOwnsBodyExposesEveryFieldAndRejectsEveryInvalidValue()" classname="dev.codex.schubert.nk.api.messaging.outbound.OutboxModelTest" time="0.001">
+<failure message="expected: &lt;true&gt; but was: &lt;false&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;true&gt; but was: &lt;false&gt;
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:31)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:183)
+	at dev.codex.schubert.nk.api.messaging.outbound.OutboxModelTest.requestOwnsBodyExposesEveryFieldAndRejectsEveryInvalidValue(OutboxModelTest.java:113)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+</failure>
+</testcase>
+<testcase name="entryOwnsBodyExposesEveryFieldAndRedactsText()" classname="dev.codex.schubert.nk.api.messaging.outbound.OutboxModelTest" time="0.007">
+<failure message="expected: &lt;true&gt; but was: &lt;false&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;true&gt; but was: &lt;false&gt;
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:31)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:183)
+	at dev.codex.schubert.nk.api.messaging.outbound.OutboxModelTest.entryOwnsBodyExposesEveryFieldAndRedactsText(OutboxModelTest.java:41)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+</failure>
+</testcase>
+</testsuite>

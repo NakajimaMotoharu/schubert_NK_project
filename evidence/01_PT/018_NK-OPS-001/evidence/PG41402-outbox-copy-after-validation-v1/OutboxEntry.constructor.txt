@@ -1,0 +1,113 @@
+  public dev.codex.schubert.nk.api.messaging.outbound.OutboxEntry(long, java.util.UUID, java.util.UUID, dev.codex.schubert.nk.api.messaging.outbound.OutboxDestination, java.lang.String, java.lang.String, byte[], int, java.time.Instant, java.time.Instant, java.lang.String, java.time.Instant, java.util.Optional<dev.codex.schubert.nk.api.messaging.outbound.OutboxDlqMetadata>);
+    Code:
+         0: aload_0
+         1: invokespecial #13                 // Method java/lang/Object."<init>":()V
+         4: lload_1
+         5: lconst_1
+         6: lcmp
+         7: iflt          18
+        10: lload_1
+        11: ldc2_w        #18                 // long 999999999999l
+        14: lcmp
+        15: ifle          28
+        18: new           #20                 // class java/lang/IllegalArgumentException
+        21: dup
+        22: ldc           #22                 // String outbox id is outside N12
+        24: invokespecial #24                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        27: athrow
+        28: iload         9
+        30: iflt          40
+        33: iload         9
+        35: bipush        100
+        37: if_icmple     50
+        40: new           #20                 // class java/lang/IllegalArgumentException
+        43: dup
+        44: ldc           #27                 // String attemptCount must be between 0 and 100
+        46: invokespecial #24                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        49: athrow
+        50: aload_0
+        51: lload_1
+        52: putfield      #29                 // Field retainedId:J
+        55: aload_0
+        56: aload_3
+        57: ldc           #33                 // String messageId
+        59: invokestatic  #35                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        62: checkcast     #41                 // class java/util/UUID
+        65: putfield      #43                 // Field retainedMessageId:Ljava/util/UUID;
+        68: aload_0
+        69: aload         4
+        71: ldc           #47                 // String correlationId
+        73: invokestatic  #35                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        76: checkcast     #41                 // class java/util/UUID
+        79: putfield      #49                 // Field retainedCorrelationId:Ljava/util/UUID;
+        82: aload_0
+        83: aload         5
+        85: ldc           #52                 // String destination
+        87: invokestatic  #35                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        90: checkcast     #54                 // class dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination
+        93: putfield      #56                 // Field retainedDestination:Ldev/codex/schubert/nk/api/messaging/outbound/OutboxDestination;
+        96: aload_0
+        97: aload         6
+        99: invokestatic  #60                 // Method requireLayoutId:(Ljava/lang/String;)Ljava/lang/String;
+       102: putfield      #64                 // Field retainedLayoutId:Ljava/lang/String;
+       105: aload_0
+       106: aload         7
+       108: invokestatic  #68                 // Method requireLayoutVersion:(Ljava/lang/String;)Ljava/lang/String;
+       111: putfield      #71                 // Field retainedLayoutVersion:Ljava/lang/String;
+       114: aload         8
+       116: ldc           #74                 // String body
+       118: invokestatic  #35                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+       121: pop
+       122: aload         8
+       124: arraylength
+       125: ifne          138
+       128: new           #20                 // class java/lang/IllegalArgumentException
+       131: dup
+       132: ldc           #76                 // String outbox body must not be empty
+       134: invokespecial #24                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+       137: athrow
+       138: aload_0
+       139: iload         9
+       141: putfield      #78                 // Field retainedAttemptCount:I
+       144: aload_0
+       145: aload         10
+       147: ldc           #82                 // String nextAttemptAt
+       149: invokestatic  #35                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+       152: checkcast     #84                 // class java/time/Instant
+       155: putfield      #86                 // Field retainedNextAttemptAt:Ljava/time/Instant;
+       158: aload_0
+       159: aload         11
+       161: ldc           #90                 // String createdAt
+       163: invokestatic  #35                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+       166: checkcast     #84                 // class java/time/Instant
+       169: putfield      #92                 // Field retainedCreatedAt:Ljava/time/Instant;
+       172: aload_0
+       173: aload         12
+       175: invokestatic  #95                 // Method requireLeaseOwner:(Ljava/lang/String;)Ljava/lang/String;
+       178: putfield      #98                 // Field retainedLeaseOwner:Ljava/lang/String;
+       181: aload_0
+       182: aload         13
+       184: ldc           #101                // String leaseUntil
+       186: invokestatic  #35                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+       189: checkcast     #84                 // class java/time/Instant
+       192: putfield      #103                // Field retainedLeaseUntil:Ljava/time/Instant;
+       195: aload_0
+       196: aload_0
+       197: getfield      #43                 // Field retainedMessageId:Ljava/util/UUID;
+       200: aload_0
+       201: getfield      #56                 // Field retainedDestination:Ldev/codex/schubert/nk/api/messaging/outbound/OutboxDestination;
+       204: aload_0
+       205: getfield      #64                 // Field retainedLayoutId:Ljava/lang/String;
+       208: aload_0
+       209: getfield      #71                 // Field retainedLayoutVersion:Ljava/lang/String;
+       212: aload         8
+       214: arraylength
+       215: aload         14
+       217: invokestatic  #106                // Method dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata.requireProfile:(Ljava/util/UUID;Ldev/codex/schubert/nk/api/messaging/outbound/OutboxDestination;Ljava/lang/String;Ljava/lang/String;ILjava/util/Optional;)Ljava/util/Optional;
+       220: putfield      #112                // Field retainedDlqMetadata:Ljava/util/Optional;
+       223: aload_0
+       224: aload         8
+       226: invokevirtual #116                // Method "[B".clone:()Ljava/lang/Object;
+       229: checkcast     #117                // class "[B"
+       232: putfield      #122                // Field retainedBody:[B
+       235: return

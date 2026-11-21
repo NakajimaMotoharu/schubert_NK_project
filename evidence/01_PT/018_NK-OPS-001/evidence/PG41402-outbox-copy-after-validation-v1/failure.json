@@ -1,0 +1,39 @@
+{
+  "run": "PG41402-outbox-copy-after-validation-v1",
+  "actualExit": 1,
+  "terminalAtUTC": "2026-11-21T00:47:26.096261+00:00",
+  "source": "2611e1acbd57955d591d52e5348999ea293e068d",
+  "ordinaryTerminal": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41402-outbox-copy-after-validation-v1/ordinary-exit.json",
+    "sha256": "1e3d3c17161de3098e7cc311c047bcd9565405d1f588a810c2136b50bdae2aaf"
+  },
+  "tests": 10,
+  "passed": 8,
+  "failures": 2,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "failing": [
+    "entryOwnsBodyExposesEveryFieldAndRedactsText()",
+    "requestOwnsBodyExposesEveryFieldAndRejectsEveryInvalidValue()"
+  ],
+  "unitEvidence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41402-outbox-copy-after-validation-v1/jupiter.xml",
+    "sha256": "38c1818ec34e66f53eac881766cd69be30b6f76bf7d5a7ac71fd098a6a85af39"
+  },
+  "xmlRedaction": {
+    "sha256": "38c1818ec34e66f53eac881766cd69be30b6f76bf7d5a7ac71fd098a6a85af39",
+    "originalUnitXmlSha256": "6f93c306c37e6c2b0669ffe1c604a9ef2714cd794635585da1ee4976eb21b08f"
+  },
+  "failedArtifact": {
+    "path": "../pgpt-runs/PG379/PG41402-outbox-copy-after-validation-v1/unit.exec",
+    "sha256": "7e27db837977eb7e92cf8e319a895de15ab161adf5f9e5bbecae097af8815657"
+  },
+  "originApproved": "SSC-464 / SS324 and SS351",
+  "fixedBodyOrderTestsFailed": false,
+  "compilerRanOnce": true,
+  "neverAggregateThisExec": true,
+  "pmdNotRun": true,
+  "spotbugsNotRun": true,
+  "formalDelta": 0
+}
