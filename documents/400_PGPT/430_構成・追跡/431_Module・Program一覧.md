@@ -1,5 +1,17 @@
 # Module・Program一覧
 
+## NK-WEB-002 Scenario階層3画面の資源PT
+
+SCR004／005／006の実HTMLと共通layoutを、Controllerから独立したメモリfixtureで確認。FUN-004、UI223/234、SS313、WBS-P016-04／05／06。試験はWebモジュールの通常test sourceに配置し、WBSと個別の実行sourceは局所manifestへ対応。
+
+| 画面 | Test ID | 局所結果 |
+|---|---|---|
+| SCR004 Game一覧 | PT-WEB-SCR004-RSRC-001～002 | PG41694 2/2 |
+| SCR005 Route一覧 | PT-WEB-SCR005-RSRC-001～002 | PG41692 2/2 |
+| SCR006 File一覧 | PT-WEB-SCR006-RSRC-001～003 | PG41688 3/3。元静的指摘はBUG-3498で履歴保持 |
+
+[独立照合と実行証跡](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41696-g08-scenario-navigation-local-pt-proof-v1/manifest.json)。実HTTP・owner・DB/JMS・実CHR・六製品451は各条件の証跡が必要。
+
 ## NK-OPS-001 観測欠落を受けた警報回復
 
 WBS-P018-09のMonitoringPolicyEngine.observationMissingとAlertRegistry.interruptContinuityをPT-OPS-MONPIPE-008に対応付けた。対象キーの回復起点だけを更新し、同条件の別サービスと同サービスの別条件は各期限で回復した。A1-38.01のHttpMetricValveはHTTPTERM001～008のソース根拠を保持し、動的PTは保留。 [単体仕様](../../../evidence/01_PT/018_NK-OPS-001/5498_警報回復における観測欠落のキー分離仕様.md)
