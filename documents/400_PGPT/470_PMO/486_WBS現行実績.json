@@ -9547,7 +9547,7 @@
   },
   "beforeSsc261InventorySha256": "443af5012e6a3d2a9088bb38d4a28ae3f7ff7645e6e4689fde2bea543fe19b9b",
   "beforeStrictReferenceCandidateInventorySha256": "44976d5ce11f24a89ea7db68c4d5ce1674f9a72032b6a96e453adc461a850968",
-  "inventorySha256": "d1da25a4b3c4a203215071859de39018392f6eb167f42748baa17a641b2ab0d5",
+  "inventorySha256": "c759e7c88603c85b05066740e270e41065195b94a7fdde24c08e29950ba4b61b",
   "expiryCandidateObservation": {
     "source": "1ec19782a1afe22d1de75b05f4cd12b8a8a8a172",
     "run": "PG713/714+PG715/717/719+PG722/725/728/729/730+PG737/738/739",
@@ -49195,5 +49195,100 @@
     "runCounterUnion": false,
     "acceptedOriginalDelta": 0,
     "whole451": false
+  },
+  "currentOutboxValuesJdbcAndGateRefsPG41420": {
+    "core": "2611e1acbd57955d591d52e5348999ea293e068d",
+    "trackingWork": "WBS-G08",
+    "technicalOnly": true,
+    "formalDelta": 0,
+    "completedOriginalRowPricePp": 0,
+    "runCounterUnion": false,
+    "originalOwnershipUnchanged": true,
+    "products": [
+      {
+        "source": {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry.java",
+          "sha256": "97e9737bf3afd955019405f713355de62da50dfba9f96a9e7d549ce9568cf5aa"
+        },
+        "physical": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41402-outbox-copy-after-validation-v1/target/classes/dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry.class",
+          "sha256": "adbf88229a5f9ee9450d663b40d1c14d8cb2fdb7ab284d1e033ea2efb0007350"
+        },
+        "artifactOwner": "WBS-P006-02",
+        "testId": "PT-OUTBOX-COPY002"
+      },
+      {
+        "source": {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest.java",
+          "sha256": "d0ba9bbf396af4cba3b912a87a37f9cc3162130cb5c8423c39ddc1f9c92e9f02"
+        },
+        "physical": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41402-outbox-copy-after-validation-v1/target/classes/dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest.class",
+          "sha256": "974d34dc68a2ff9b13a9b32a8fda4e72e09640440c4ac64577e0538b148c91b7"
+        },
+        "artifactOwner": "WBS-P006-02",
+        "testId": "PT-OUTBOX-COPY001"
+      }
+    ],
+    "referenced": [
+      {
+        "related": [
+          "WBS-P018-10.03",
+          "WBS-P006-02"
+        ],
+        "proof": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41406-outbox-copy-independent-v1/manifest.json",
+          "sha256": "3fc26d3d1dc25f78447530249dc2076ffe0d4bab6f668f7ed20596e25881b44c"
+        },
+        "actualCases": 10,
+        "newTestIds": [
+          "PT-OUTBOX-COPY001",
+          "PT-OUTBOX-COPY002"
+        ]
+      },
+      {
+        "related": [
+          "WBS-P004-05"
+        ],
+        "proof": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41412-p00405-outbox-jdbc-independent-v1/manifest.json",
+          "sha256": "7be3e6e842498cd1ecf3d6ec9664056c54067877657239c9465c69ce1e17664f"
+        },
+        "existingCasesRequalified": 12,
+        "actualDb": false
+      },
+      {
+        "related": [
+          "WBS-F03"
+        ],
+        "proof": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41408-f03-current-outbox-four-inputs-v1/manifest.json",
+          "sha256": "32a6d8fedc8833dabd8d6499dd42cafdc5e7fc95b165dfab518990341cd5f048"
+        },
+        "confirmedSourceFilesOnly": "Main 1027/1027, Test 1128/1160"
+      },
+      {
+        "related": [
+          "WBS-F02"
+        ],
+        "proof": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41392-f02-listener-owner-independent-v1/manifest.json",
+          "sha256": "1784590c6883356c24ca6f690bd4ee3afd5e80eb4d66249df9ed8a75a2692001"
+        },
+        "syntheticOnly": true,
+        "currentFiveSourceInputsNowUnchanged": true
+      },
+      {
+        "related": [
+          "WBS-P018-08.03"
+        ],
+        "proof": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41418-strict-exec-empty-class-green-v2/manifest.json",
+          "sha256": "bf7a28b50b0fa49a3564d25a11e786386b7a8f956a76a7ba510d585f175fc682"
+        },
+        "toolCompatibilityQualified": true,
+        "actualNative": false
+      }
+    ]
   }
 }

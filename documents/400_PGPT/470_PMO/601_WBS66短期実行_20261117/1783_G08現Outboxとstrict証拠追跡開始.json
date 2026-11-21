@@ -1,0 +1,71 @@
+{
+  "eventId": "PGPT-20261008-7298",
+  "groupId": "WBS66-G08-LOCAL-OUTBOX-AND-CURRENT-GATE-TRACE",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-21T01:02:13.524000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 87,
+      "remainingPercent": 13,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66-G08-LOCAL-OUTBOX-AND-CURRENT-GATE-TRACE",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "WBS66-G08-LOCAL-OUTBOX-AND-CURRENT-GATE-TRACE",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-G08"
+    ],
+    "managementWorkIds": [
+      "G13.07"
+    ],
+    "source": "de7ef70393ecf095aaa8a9188adcef1373ed3e3a",
+    "productionCoreMain": "2611e1acbd57955d591d52e5348999ea293e068d",
+    "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "run": "PG41420",
+    "estimateAtGroupStartPp": {
+      "low": 0.08,
+      "base": 0.25,
+      "high": 0.65
+    },
+    "groupCapPp": 1,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1782_P01808実行記録class名再開点.json",
+        "sha256": "4438730896148e2a602cfa8bb12609349b63f6d1406304a295002d3f75813529"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41406-outbox-copy-independent-v1/manifest.json",
+        "sha256": "3fc26d3d1dc25f78447530249dc2076ffe0d4bab6f668f7ed20596e25881b44c"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41408-f03-current-outbox-four-inputs-v1/manifest.json",
+        "sha256": "32a6d8fedc8833dabd8d6499dd42cafdc5e7fc95b165dfab518990341cd5f048"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41412-p00405-outbox-jdbc-independent-v1/manifest.json",
+        "sha256": "7be3e6e842498cd1ecf3d6ec9664056c54067877657239c9465c69ce1e17664f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41418-strict-exec-empty-class-green-v2/manifest.json",
+        "sha256": "bf7a28b50b0fa49a3564d25a11e786386b7a8f956a76a7ba510d585f175fc682"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "Current owned Outbox body boundary, borrowed JDBC and two tooling receipts end with preserved PG manifests. Registered owner scope references require the matching current 485/486 trace.",
+    "endCondition": "Bind both local current Outbox Test IDs, original JDBC 12, exact F03 delta and strict tool result to their receipt hashes; all old statuses, costs and scope entries remain identical.",
+    "workScope": "Trace only. No product tests/tool replays, no scope transfer, no completion costs or formal additions."
+  }
+}
