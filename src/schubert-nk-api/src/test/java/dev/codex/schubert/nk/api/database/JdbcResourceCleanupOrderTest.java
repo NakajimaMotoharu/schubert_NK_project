@@ -22,8 +22,6 @@ final class JdbcResourceCleanupOrderTest {
     var statementFailure = new AssertionError("statement close failure");
     primary.addSuppressed(existing);
     var closeOrder = new ArrayList<String>();
-    var rows = failingClose(ResultSet.class, closeOrder, "rows", rowFailure);
-    var statement = failingClose(Statement.class, closeOrder, "statement", statementFailure);
 
     var observed =
         assertThrows(
@@ -32,8 +30,11 @@ final class JdbcResourceCleanupOrderTest {
               try {
                 throw primary;
               } finally {
-                JdbcResourceCleanup.closeRows(primary, rows);
-                JdbcResourceCleanup.closeStatement(primary, statement);
+                JdbcResourceCleanup.closeRows(
+                    primary, failingClose(ResultSet.class, closeOrder, "rows", rowFailure));
+                JdbcResourceCleanup.closeStatement(
+                    primary,
+                    failingClose(Statement.class, closeOrder, "statement", statementFailure));
               }
             });
 
@@ -50,7 +51,7 @@ final class JdbcResourceCleanupOrderTest {
       Class<T> type, List<String> closeOrder, String name, Throwable failure) {
     return type.cast(
         Proxy.newProxyInstance(
-            type.getClassLoader(),
+            Thread.currentThread().getContextClassLoader(),
             new Class<?>[] {type},
             (proxy, method, args) -> {
               assertEquals("close", method.getName());
