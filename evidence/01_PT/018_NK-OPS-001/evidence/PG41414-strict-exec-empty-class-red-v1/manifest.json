@@ -1,0 +1,129 @@
+{
+  "run": "PG41414-strict-exec-empty-class-red-v1",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-21T00:59:13.468645+00:00",
+  "source": "f2a9a5d0d4c295e87f53ccae3500176d65cd6cb4",
+  "inputFixtureSha256": "81b4c08d7c02e968e47e9bdbaa844b9c0648dbb0781d1db36d2c5b4ef8686e9d",
+  "beforeSource": "f2a9a5d0d4c295e87f53ccae3500176d65cd6cb4",
+  "javacStrict": 0,
+  "scope": "strict original exec record with empty name",
+  "baselineAcceptedBoth": true,
+  "javaEmptyNameActualExit": 0,
+  "pythonNegativeVectors": 2,
+  "javaNegativeVectors": 1,
+  "toolTestDefinitions": 1,
+  "knownOrdinaryExistingOriginalReads": 0,
+  "priorCurrentUnit": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG41410-p00405-current-outbox-value-jdbc-v1/manifest.json",
+    "sha256": "51acd79c5cb68cd800d2a3000c1cdaf2202a76fa98726b0cc58fbd31fe365999"
+  },
+  "runtimeNativeOperations": 0,
+  "productTestsExecuted": 0,
+  "formalDelta": 0,
+  "steps": {
+    "python": {
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "jacoco_readonly_exec_subset_scope_test.ClassSelectionScopeTest.test_empty_record_name_is_invalid_even_when_not_selected"
+      ],
+      "actualExit": 1,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG41414-strict-exec-empty-class-red-v1/python.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG41414-strict-exec-empty-class-red-v1/python.stderr.txt",
+        "sha256": "e133db6e9c9a5d273aab4d330533125c538d44a3b864e99eccb5205d8ea93edb"
+      }
+    },
+    "compile-fixture": {
+      "argv": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-d",
+        "/dev/shm/pgpt-empty-class-record-o96rwehf/classes",
+        "/dev/shm/pgpt-empty-class-record-o96rwehf/Plain.java"
+      ],
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG41414-strict-exec-empty-class-red-v1/compile-fixture.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG41414-strict-exec-empty-class-red-v1/compile-fixture.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "compile-reader": {
+      "argv": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "-d",
+        "/dev/shm/pgpt-empty-class-record-o96rwehf/tool",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/jacoco/UnfilteredCodeMeasurement.java"
+      ],
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG41414-strict-exec-empty-class-red-v1/compile-reader.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG41414-strict-exec-empty-class-red-v1/compile-reader.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "java-valid": {
+      "argv": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/dev/shm/pgpt-empty-class-record-o96rwehf/tool:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+        "--strict-original-exec",
+        "/dev/shm/pgpt-empty-class-record-o96rwehf/valid.exec",
+        "/dev/shm/pgpt-empty-class-record-o96rwehf/classes/fixture/Plain.class"
+      ],
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG41414-strict-exec-empty-class-red-v1/java-valid.stdout.txt",
+        "sha256": "f0af5c21e76a1cd8cad97aa4d438adee8981a162911c9f75b36fd7377fbeb4dd"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG41414-strict-exec-empty-class-red-v1/java-valid.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "java-empty": {
+      "argv": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/dev/shm/pgpt-empty-class-record-o96rwehf/tool:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+        "--strict-original-exec",
+        "/dev/shm/pgpt-empty-class-record-o96rwehf/invalid.exec",
+        "/dev/shm/pgpt-empty-class-record-o96rwehf/classes/fixture/Plain.class"
+      ],
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG41414-strict-exec-empty-class-red-v1/java-empty.stdout.txt",
+        "sha256": "f0af5c21e76a1cd8cad97aa4d438adee8981a162911c9f75b36fd7377fbeb4dd"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG41414-strict-exec-empty-class-red-v1/java-empty.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  }
+}

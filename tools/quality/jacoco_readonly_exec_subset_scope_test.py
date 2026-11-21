@@ -30,6 +30,13 @@ class ClassSelectionScopeTest(unittest.TestCase):
             decode(SESSION_STREAM + CLASS_X, set()),
         )
 
+    def test_empty_record_name_is_invalid_even_when_not_selected(self):
+        empty_class_name = bytes.fromhex('11 0000000000000004 0000 01 01')
+        for targets in (set(), {'X'}):
+            with self.subTest(targets=targets):
+                with self.assertRaisesRegex(ValueError, 'nonempty original class name required'):
+                    decode(SESSION_STREAM + CLASS_X + empty_class_name, targets)
+
     def test_multiple_targets_each_keep_their_own_crc_and_probes(self):
         result = decode(SESSION_STREAM + CLASS_XY + CLASS_XYZ + CLASS_X, {'X', 'XY'})
         self.assertEqual(
