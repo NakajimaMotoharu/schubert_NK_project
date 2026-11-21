@@ -1,0 +1,102 @@
+{
+  "run": "PG41630",
+  "wbs": "WBS-P020-01.02/2",
+  "source": "c619c47e576b8a7f5989cfc609f565f17b731c48",
+  "productionCore": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "actualExit": 0,
+  "originalQualifier": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG41346-p020-current-218-independent-v1/manifest.json",
+    "sha256": "d2191089b0953b97f34e139d3d62a5bde47387bdb3e0ff14dde155198bb41a15"
+  },
+  "originalProducer": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG41344-p020-current-218-local-v1/manifest.json",
+    "sha256": "5f9119617ebed6632218f46bd81c2b858f6c8fa3064a827edd1fb9b470d9148c"
+  },
+  "jpSpec": {
+    "path": "evidence/01_PT/020_NK-CHR-001/001_NK-CHR-001_単体テスト仕様書.md",
+    "sha256": "905cf1f3bc3658b8165e83f8bd0f522c0af5e4d14e069a9d14101cdefda0e642"
+  },
+  "dif015": {
+    "path": "evidence/01_PT/020_NK-CHR-001/011_NK-CHR-001_比較scan二是正・通常工具試験仕様.md",
+    "sha256": "10d83fdd4d8f5243c1985dad52ffc5993142d1ccbce1f5e86dc32c44cbac3e2b"
+  },
+  "currentCharacterizationInputsGitExact": true,
+  "baselineGitTree": "cd377044e4ca058ea219ca6a2fec82159559c72c",
+  "beforeAndCurrentBaselineSame": true,
+  "scopedComparisonResults": {
+    "DIF mask exact allowlist": {
+      "testClass": "ArtifactComparatorTest",
+      "method": "acceptsTwentyFourPassCasesAndExactlySixteenApprovedDifferences()",
+      "oldXmlResult": "PASS"
+    },
+    "unregistered drift": {
+      "testClass": "ArtifactComparatorTest",
+      "method": "reportsCatalogArtifactStatusSetSymlinkAndUnregisteredDrift()",
+      "oldXmlResult": "PASS"
+    },
+    "bad diff scope and observations": {
+      "testClass": "ArtifactComparatorTest",
+      "method": "rejectsUnknownOutOfScopeBroadWrongOverlappingAndUnusedObservations()",
+      "oldXmlResult": "PASS"
+    },
+    "claimed unregistered drift": {
+      "testClass": "ArtifactComparatorTest",
+      "method": "contractChangeAndInvalidClaimCannotHideUnregisteredDrift()",
+      "oldXmlResult": "PASS"
+    },
+    "DIF-015 route remains current": {
+      "testClass": "ArtifactComparatorTest",
+      "method": "rejectsALegacyPathDifferenceWhenTheLoadedRuleClaimsItIsPermitted()",
+      "oldXmlResult": "PASS"
+    },
+    "missing or incomplete cases": {
+      "testClass": "GateContractValidatorNegativeTest",
+      "method": "rejectsMissingFailedAndIncompleteRunArtifacts()",
+      "oldXmlResult": "PASS"
+    }
+  },
+  "originalXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41344-p020-current-218-local-v1/reports/TEST-junit-jupiter.xml",
+    "sha256": "8f6b635830262186ba682cf3b682f56d8b732f1a557452d62cebae4c95ef4dd4"
+  },
+  "localToolRawSee": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/020_NK-CHR-001/evidence/PG41346-p020-current-218-independent-v1/unfiltered.tsv",
+    "sha256": "83362bf09fd622d893a5ff3380d12aaab0f5e74b858928d1f813ef5e69bec7bb"
+  },
+  "realFileStorePreflightDeficits": [
+    [
+      "main",
+      "([Ljava/lang/String;)V",
+      "95",
+      "INSTRUCTION:0:52"
+    ],
+    [
+      "main",
+      "([Ljava/lang/String;)V",
+      "101",
+      "INSTRUCTION:7:0"
+    ],
+    [
+      "preflight",
+      "(Ljava/nio/file/Path;Ljava/nio/file/Path;)V",
+      "211",
+      "INSTRUCTION:4:0"
+    ],
+    [
+      "preflight",
+      "(Ljava/nio/file/Path;Ljava/nio/file/Path;)V",
+      "212",
+      "INSTRUCTION:1:0"
+    ]
+  ],
+  "originalLocalCases": 218,
+  "toolOrChrRunThisGroup": 0,
+  "remaining": [
+    "WBS-P020-01.01 current actual FileStore",
+    "current approved Current/NK browser and present ownership",
+    "actual CHR and six-product 451",
+    "parent exit dependencies"
+  ],
+  "formalAcceptanceId": null,
+  "terminalAtUTC": "2026-11-21T18:55:36.372625+00:00"
+}

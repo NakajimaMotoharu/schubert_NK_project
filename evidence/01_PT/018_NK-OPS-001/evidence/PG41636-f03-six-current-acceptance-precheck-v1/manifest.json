@@ -1,0 +1,118 @@
+{
+  "run": "PG41636",
+  "source": "c619c47e576b8a7f5989cfc609f565f17b731c48",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "actualExit": 0,
+  "wbs": "WBS-F03/2-3-a",
+  "qualityPolicy": {
+    "path": "documents/400_PGPT/450_品質/451_Build・静的解析・coverage方針.md",
+    "sha256": "7980a204c02574b235d588e3a05ae8fb7b26ecb18313f4f000918c9135da6f4c"
+  },
+  "qaLedger": {
+    "path": "documents/900_OTHER/910_台帳/911_確認事項一覧.md",
+    "sha256": "d0b3fd7b4247db035544f4ee2c20ab1d0002a706060b21f9636b77dbaac2380a"
+  },
+  "scope": {
+    "api": {
+      "productMain": 283,
+      "heldEvidenceCases": 4,
+      "ownLatestEvidence": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41632-f03-pure-api-value-types-v1/api-value-oracle-comparison.json",
+        "sha256": "f3359d0861e098942bee9750a90bfc15a52298d838861c416c411c174a889a8e"
+      },
+      "pendingCondition": "QA-056 exact four-type joint admission and regular API JAR, six-module full static gate, shared PostgreSQL fixture",
+      "currentFormalGate": null
+    },
+    "batch": {
+      "productMain": 200,
+      "heldEvidenceCases": 26,
+      "ownLatestEvidence": null,
+      "pendingCondition": "Root11 scope applicability, held 26 test sources, remaining typed rules and real candidate behaviors",
+      "currentFormalGate": null
+    },
+    "bootstrap": {
+      "productMain": 88,
+      "heldEvidenceCases": 0,
+      "ownLatestEvidence": null,
+      "pendingCondition": "Root11 boundaries and 451; historical type compile receipt has identical current inputs",
+      "currentFormalGate": null
+    },
+    "protocol": {
+      "productMain": 169,
+      "heldEvidenceCases": 0,
+      "ownLatestEvidence": null,
+      "pendingCondition": "Whole six/451 and applicable real JMS/CHR; local strict compiler, PMD per-site review and local PT bound",
+      "currentFormalGate": null
+    },
+    "storage": {
+      "productMain": 25,
+      "heldEvidenceCases": 2,
+      "ownLatestEvidence": null,
+      "pendingCondition": "StorageIoException JDBC exception ownership plus held two test sources",
+      "currentFormalGate": null
+    },
+    "web": {
+      "productMain": 262,
+      "heldEvidenceCases": 0,
+      "ownLatestEvidence": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41620-f03-original-pure-web-test-link-v1/six-product-disposition.json",
+        "sha256": "d19a2324f1072b50421b7c6740913806519fef9bf00a33a5f8335e89f3e745f4"
+      },
+      "pendingCondition": "QA-056 four-type joint admission, regular Web JAR, full typed scope, real HTTP/CHR",
+      "currentFormalGate": null
+    }
+  },
+  "primaryShortTermEndDependencies": {
+    "WBS-F02": {
+      "condition": "QA-056 four applicability decisions with exact current regular API and Web JARs, storage JDBC boundary, 13 SYS criteria",
+      "owner": "利用者・アプリ・品質担当"
+    },
+    "WBS-F03": {
+      "condition": "complete same-source six-product type/quality results, dedicated 32 and Root11 disposition and 451",
+      "owner": "品質担当、QA-056は利用者"
+    },
+    "P004-03": {
+      "condition": "current sample ownership of retained originals and retirement resources, original DB/FileStore postcondition plus F02/F03",
+      "owner": "DB・環境・資源管理担当"
+    },
+    "P004-05": {
+      "condition": "actual JDBC outcomes and original auth/applicability, independent current PostgreSQL transactions, current F02/F03",
+      "owner": "API・DB担当"
+    },
+    "P018-08": {
+      "condition": "native stream and normal, exceptional, stopped terminal for current source and authenticated owner",
+      "owner": "native試験担当"
+    },
+    "P020-01": {
+      "condition": "actual FileStore gate, fresh Current/NK environment observation and remaining CHR",
+      "owner": "環境・比較担当"
+    }
+  },
+  "unitVoter": [
+    "WBS-F03/2-2-b PARTIAL",
+    "some required held operations retain individual HOLD",
+    "same-source full 451 not available"
+  ],
+  "qualifiedApiLocalMain": 5,
+  "qualifiedWebLocalHandoffMain": 44,
+  "formalClosingAuthorityConfirmed": false,
+  "receivedByResponsibleOwner": null,
+  "previousPublication": {
+    "commit": "c619c47e576b8a7f5989cfc609f565f17b731c48",
+    "tree": "eba9a3b1a90468d03e5ab205bac1ce31522b8c68",
+    "scan": {
+      "path": "../pgpt-runs/PG379/PG41628-web-dao-stage/admission.json",
+      "sha256": "b39ab5828bce59aa92e634c6c2d2a7f3571dfda158d1876de98a7705c791624c"
+    },
+    "falsePositiveDigests": 9,
+    "verifiedSecretCount": 0,
+    "unclassified": 0,
+    "protectedBaseline": "cd377044e4ca058ea219ca6a2fec82159559c72c"
+  },
+  "outstandingRootCaseCount": 11,
+  "rootAnd32OverlapUnknown": true,
+  "remainingIndependentPreparationOnly": true,
+  "currentExecutableTestsNew": 0,
+  "formalAcceptanceId": null,
+  "terminalAtUTC": "2026-11-21T19:01:08.114392+00:00"
+}

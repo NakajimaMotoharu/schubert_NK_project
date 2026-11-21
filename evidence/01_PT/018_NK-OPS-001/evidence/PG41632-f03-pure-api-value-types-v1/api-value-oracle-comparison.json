@@ -1,0 +1,67 @@
+{
+  "run": "PG41632",
+  "source": "c619c47e576b8a7f5989cfc609f565f17b731c48",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "actualExit": 0,
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41632-f03-pure-api-value-types-v1/manifest.json",
+    "sha256": "59095491a1c89b1cfa336adff97fbbd28015887ebdcc563a5c4e2b8fa1a74c47"
+  },
+  "productsMain": 5,
+  "annotationMain": 3,
+  "currentPhysical": 8,
+  "exactAuxiliaryCount": 2,
+  "originalValueProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35362-api-command-outbox11-post-v1/manifest.json",
+    "sha256": "5c1750ed5143cde0feb11d0809b94584a97f12a2bbeef183d266f6ead481a7d5"
+  },
+  "originalUnit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35360-api-command-outbox11-unit-v1/manifest.json",
+    "sha256": "55903d7aa0daaa4a2775b1b35364310624dbbb918f5a712af5bb579a92071f8e"
+  },
+  "historicalExactSourceInputs": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionCommandMetadata.java": "c62cea835ecc09e2e811cdf704d2e8c562b207f802a50c8f1789868fff3cfc1c",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/AnswerResult.java": "bfa7c5a2827d5c97579a030df72997f928f5817b6d68ea9b0d918d88aef3fae6",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionValueContractTest.java": "a9d4c3a9ced433c3c460df2da9f8cda2c7f69a700e88548d64270b87d37559db",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionCommandMetadataContractTest.java": "35defc94dd7470149d6e4c741ee00cc9196d5ad6731dd5290aecbcd61f9ce71c"
+  },
+  "typePhysical": {
+    "dev/codex/schubert/nk/api/application/question/AnswerResult.class": {
+      "old": "e2a819a1a9d98c05ec22e60963884d9d3b56598768d69c8cde6df0caaed80427",
+      "current": "e2a819a1a9d98c05ec22e60963884d9d3b56598768d69c8cde6df0caaed80427",
+      "exact": true
+    },
+    "dev/codex/schubert/nk/api/application/question/QuestionCommandMetadata.class": {
+      "old": "30112eb88301f4acc1c504526b33bfb11f65cc3008320ad2ca21e14c9f458bfc",
+      "current": "30112eb88301f4acc1c504526b33bfb11f65cc3008320ad2ca21e14c9f458bfc",
+      "exact": true
+    }
+  },
+  "independentHistoryOfSource": [
+    {
+      "classname": "dev.codex.schubert.nk.api.application.question.QuestionValueContractTest",
+      "method": "value003ProviderAnswerRetainsExactBodyAndTimeWithClosedRenderingAndNonnullComponents()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.application.question.QuestionValueContractTest",
+      "method": "value001UtcYearAndMicrosecondGoldenBoundsPreserveTraceAndTruncateBeforeRangeCheck()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.application.question.QuestionCommandMetadataContractTest",
+      "method": "renderingIsConstantForDistinctTraceValuesAndCannotExposeIdentityOrTime()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.application.question.QuestionCommandMetadataContractTest",
+      "method": "everyMissingTraceFieldRejectsAtConstructionWithoutNullNormalization()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.application.question.QuestionValueContractTest",
+      "method": "value002EveryTraceComponentDefinesValueIdentityAfterCanonicalMicrosecondTruncation()"
+    }
+  ],
+  "noOriginalTestsReplayed": true,
+  "newDynamicCoverage": null,
+  "wholeApiBuild": false,
+  "formalAcceptanceId": null,
+  "terminalAtUTC": "2026-11-21T18:58:52.627104+00:00"
+}
