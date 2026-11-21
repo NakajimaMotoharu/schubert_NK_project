@@ -11,3 +11,16 @@ NK-WEB-002。対象source/hash、承認設計commit/hash、独立期待値/TestI
 SCR006 FileVM/scenario-files.html全文とUI223234SS313321対応、prefix0..99/-1-100拒否/500record上限・501拒否/nonnull・immutable/元file順保持/表示titleはAPI解決済chapter-section-filename/表示pathはFS resolverへ渡さずnumericID固定hrefを明記。全件cards/no page/entrycount・escapedheader/back/search/sharedactions、controllerSCF0件404・正規game-prefixroute・単一verified要求・0102即終端は別共有HTTP責務。旧PG24370全64/24452resourceDOM全入力hash一致を原sourceで参照・再実行0/共通費重複0。原/1だけ完了、actual認証/IF/DB/HTTP/CHR/451の/2終了未受入、Code変更/障害追加0。
 
 実行: `python3 -B evidence/01_PT/018_NK-OPS-001/input/1744_file_screen_contract_audit.py` metadata終了0。新規製品PT/coverageなし。原/1の準備だけ、原/2・451・元190未受入。独立期待値は公開設計の固定境界・順序・後条件に基づき、production methodで生成しない。正式1964PT/53scope・工数null。
+
+
+## 現行File一覧テンプレートの独立資源PT
+
+PG41642の階層モデル試験は固定値・合成HTMLの検査。PG24452の資源一覧に `scenario-files.html` は含まれない。UI223/234、SS313、FUN-004の契約を固定期待値として、現テンプレートと共通layoutを `ScenarioFileListTemplateResourcePortTest` のメモリfixtureで描画する。
+
+| Test ID | method | 入力と独立期待値 |
+|---|---|---|
+| PT-WEB-SCR006-RSRC-001 | displaysRouteHeadingAndApprovedNavigation | game=NUKITASHI1、title=05: ルート。ページtitleと見出し、ゲーム・ルート・検索リンク、共通表示名とPOSTログアウトのhrefを固定値で比較 |
+| PT-WEB-SCR006-RSRC-002 | retainsOrderAndOnlyUsesTheGivenNumericLinks | 元順序91→17を保持。山括弧やアンパサンドを含む表示名・表示pathを文字列として保持し、子要素へ変換しない。リンクは /scenarios/91、/scenarios/17。entries表記を確認 |
+| PT-WEB-SCR006-RSRC-003 | rendersBothEmptyAndFiveHundredRowsWithoutPagination | 空fixtureのカード0、500件fixtureの全カードと両端リンク。追加のページ送りを表示しない |
+
+空fixtureはHTML資源だけを観測する。実ルートの404、入力null、上限超過、API順序とHTTP・ownerの条件は既存のモデル／Controller仕様で追跡する。実行source、JDK、SDK、資源hashと結果はPG41686へ記録する。

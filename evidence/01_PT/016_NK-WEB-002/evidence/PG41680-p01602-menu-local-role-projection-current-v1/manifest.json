@@ -1,0 +1,51 @@
+{
+  "run": "PG41680",
+  "wbs": "WBS-P016-02/2",
+  "source": "a3af81a43c69fe2855023bb3f343d9c21f25bd10",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "actualExit": 0,
+  "currentIndependentExpectedRoles": {
+    "USER": 7,
+    "ADMIN": 9
+  },
+  "oldOracleForPureProjectionCases": [
+    "menuProjection001FixedCatalogMatchesCurrentLegacyValuesAndApprovedMenuPurpose",
+    "menuProjection002UserHasExactlySevenImmutableCardsAndOnlyDisplayTopBar",
+    "menuProjection003AdminAddsOnlyTheTwoApprovedCardsInOrder"
+  ],
+  "priorScopedProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41470-scr002-role-menu-projection-v1/manifest.json",
+    "sha256": "7d21a72779425801f9f92b594b75f0d982a4a802c9829f6f1a437f8a6dedb027"
+  },
+  "originalLocalCases": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG18110-menu-projection-six-pt-v1/manifest.json",
+    "sha256": "583af92a0abdd4662e31b9ee272a2b7b541946f49abcca5515e82b31848a8482"
+  },
+  "physicalRelativeToOriginal": {
+    "dev/codex/schubert/nk/web/controller/MenuController.class": {
+      "original": "4d72cbbcfabf9fea0e8b2c2e86bc33e41e98ac21057e7b68ced648e9039b8840",
+      "current": "3e6f9450faaeda66912a153195cc4708e36d6177098a68db3fdabc14557855d7",
+      "exact": false
+    },
+    "dev/codex/schubert/nk/web/view/MenuViewModel.class": {
+      "original": "1fbebe07132446f940bc6a2f5ff51a3116a6e64aceeb82ae9351e33f04e5b0d1",
+      "current": "1fbebe07132446f940bc6a2f5ff51a3116a6e64aceeb82ae9351e33f04e5b0d1",
+      "exact": true
+    },
+    "dev/codex/schubert/nk/web/view/MenuCard.class": {
+      "original": "3a2e400e3e8461801e5eb57cc863518ed10baa0d6284fbcc76c0162ab891c064",
+      "current": "3a2e400e3e8461801e5eb57cc863518ed10baa0d6284fbcc76c0162ab891c064",
+      "exact": true
+    }
+  },
+  "oldMixedSixNotReexecuted": true,
+  "exactSourceCurrentFixture": {
+    "path": "tools/quality/architecture/MenuProjectionContractTest.java",
+    "sha256": "2db272432000f15b19883bd999415755f5bea57a14e046962c34cbda6e760a78"
+  },
+  "actualLocalRuntimeCredit": 0,
+  "controllerRetainedHold": "Current MenuController includes approved QA054 tracing, requiring separate runtime/role/audit evidence",
+  "formalAcceptanceId": null,
+  "nextIndependent": "WBS-P016-07/2 ScenarioDetailViewModel sole local display",
+  "terminalAtUTC": "2026-11-21T20:10:39.582885+00:00"
+}
