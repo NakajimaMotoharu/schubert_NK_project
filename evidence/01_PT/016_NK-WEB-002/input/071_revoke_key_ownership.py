@@ -46,10 +46,25 @@ def main():
     mode = sys.argv[1]
     owner = sys.argv[2] if len(sys.argv) == 3 else "revocation"
     assert mode in ("baseline", "changes")
-    assert owner in ("revocation", "session")
+    assert owner in ("revocation", "session", "security")
     baseline = mode == "baseline"
     session = owner == "session"
-    if session:
+    auth = owner == "security"
+    module_root = ROOT / "src/schubert-nk-api" if auth else SOURCE
+    package_root = Path("dev/codex/schubert/nk/api") if auth else MAIN
+    common = () if auth else (MAIN / "session/SessionStoreException.java",
+                              MAIN / "session/InvalidSessionRowException.java")
+    if auth:
+        run = ("PG41370-p01810-auth-context-ownership-baseline-v1" if baseline
+               else "PG41372-p01810-auth-context-ownership-qualified-v1")
+        names = ("AuthContextCodec", "AuthContextIdentity", "EncryptedAuthContext",
+                 "AuthContextCryptoException", "package-info")
+        test_names = ("AuthContextCodecTest",)
+        selections = {"dev.codex.schubert.nk.api.security.AuthContextCodecTest": 11}
+        target_name = "AuthContextCodec"
+        extras = ()
+        public_root = ROOT / "evidence/01_PT/007_NK-AUT-001/evidence"
+    elif session:
         run = "PG41364-p01810-session-ownership-baseline-v1" if baseline else "PG41366-p01810-session-ownership-qualified-v1"
         names = ("SessionPayloadCodec", "SessionPayloadIdentity", "EncryptedSessionPayload",
                  "SessionPayloadException", "SessionAttributeCodec", "SessionAttributeException",
@@ -79,7 +94,7 @@ def main():
     sources = []
 
     def freeze(kind, rel, target):
-        path = SOURCE / f"src/{kind}/java" / rel
+        path = module_root / f"src/{kind}/java" / rel
         data = subprocess.check_output(["git", "show", f"{source}:{path.relative_to(ROOT)}"], cwd=ROOT)
         assert path.read_bytes() == data
         target.parent.mkdir(parents=True, exist_ok=True)
@@ -87,8 +102,7 @@ def main():
         sources.append(pin(path))
         return target
 
-    for rel in [*[MAIN / owner / (name + ".java") for name in names], *extras,
-                MAIN / "session/SessionStoreException.java", MAIN / "session/InvalidSessionRowException.java"]:
+    for rel in [*[package_root / owner / (name + ".java") for name in names], *extras, *common]:
         freeze("main", rel, work / "src/main/java" / rel)
     expected_pom = Path(reference["pom"]["path"])
     pom = work / "pom.xml"
@@ -125,10 +139,13 @@ def main():
     assert "-o" in compile_cmd
     run_cmd("compile", compile_cmd)
     output = work / "target/classes"
-    target = output / MAIN / owner / (target_name + ".class")
+    target = output / package_root / owner / (target_name + ".class")
     binary = run_cmd("javap", [java / "javap", "-p", "-s", "-c", target])
-    namespace = ".".join(MAIN.parts) + "." + owner + "."
-    start = binary.read_text().index("  " + namespace + target_name + "(java.lang.String, byte[], java.lang.String, byte[], java.security.SecureRandom);")
+    namespace = ".".join(package_root.parts) + "." + owner + "."
+    ctor_args = "java.lang.String, byte[], java.lang.String, byte[], java.security.SecureRandom"
+    if auth:
+        ctor_args += ", dev.codex.schubert.nk.api.security.AuthContextCodec$EnvelopeFactory"
+    start = binary.read_text().index("  " + namespace + target_name + "(" + ctor_args + ");")
     code = binary.read_text()[start:].split("\n  public", 1)[0]
     copy = re.findall(r"^\s*(\d+):[^\n]+clone:", code, re.MULTILINE)
     allocation = re.findall(r"^\s*(\d+):\s+newarray\s+byte", code, re.MULTILINE)
@@ -136,6 +153,8 @@ def main():
     assert "Exception table:" not in code
     if baseline:
         assert len(copy) == 2 and not allocation and not bounded
+        if auth:
+            assert "java/util/Map.copyOf" in code
     else:
         assert len(allocation) == 1 and len(bounded) == 2 and not copy
         assert int(allocation[0]) < min(map(int, bounded))
@@ -144,7 +163,7 @@ def main():
     if not baseline:
         files = []
         for name in test_names:
-            rel = MAIN / owner / (name + ".java")
+            rel = package_root / owner / (name + ".java")
             files.append(freeze("test", rel, work / "tests-source" / rel))
         junit = TOOLS / "junit-platform-console-standalone-1.13.4.jar"
         anno = repository / "org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar"
