@@ -127,6 +127,7 @@ public final class ModuleDependencyAudit {
         String origin = type.getName();
         String module = owners.get(origin);
         boolean controller = module.equals("web") && isController(type);
+        boolean listener = (module.equals("api") || module.equals("web")) && isListener(type);
         boolean applicationOrDomain =
             (module.equals("api") || module.equals("web"))
                 && (origin.startsWith(INTERNAL + module + ".application.")
@@ -146,6 +147,9 @@ public final class ModuleDependencyAudit {
           if (target.startsWith(INTERNAL) && targetModule == null)
             violations.get("INTERNAL_OWNER").add(pair);
           if (forbiddenFramework(module, target)) violations.get("FRAMEWORK_FENCES").add(pair);
+          if (listener && (jdbc(target) || "storage".equals(targetModule))) {
+            violations.get("FRAMEWORK_FENCES").add(pair);
+          }
           if (controller
               && (jdbc(target)
                   || jms(target)
@@ -162,6 +166,9 @@ public final class ModuleDependencyAudit {
           String target = access.getTargetOwner().getName();
           if (controller && (filesystem(target) || opensOwnedFile(access)))
             violations.get("CONTROLLER_BOUNDARY").add(origin + "\t" + target);
+          if (listener && (filesystem(target) || opensOwnedFile(access))) {
+            violations.get("FRAMEWORK_FENCES").add(origin + "\t" + target);
+          }
           if (module.equals("protocol")
               && (protocolFilesystem(target, access.getTarget().getName())
                   || opensOwnedFile(access))) {
@@ -234,6 +241,38 @@ public final class ModuleDependencyAudit {
       enclosing = parent.orElseThrow();
     }
     throw new IllegalArgumentException("cyclic enclosing class");
+  }
+
+  private static boolean isListener(JavaClass type) {
+    Set<JavaClass> visited = new HashSet<>();
+    JavaClass enclosing = type;
+    while (visited.add(enclosing)) {
+      if ((enclosing.getPackageName().equals(INTERNAL + "api.messaging.inbound")
+              && enclosing.getSimpleName().endsWith("Listener"))
+          || enclosing.getMethods().stream().anyMatch(method -> isMessageEntry(
+              method.getName(), method.getRawParameterTypes()))) {
+        return true;
+      }
+      var parent = enclosing.getEnclosingClass();
+      if (parent.isEmpty()) return false;
+      enclosing = parent.orElseThrow();
+    }
+    throw new IllegalArgumentException("cyclic enclosing class");
+  }
+
+  private static boolean isMessageEntry(String name, List<JavaClass> parameters) {
+    if (!name.equals("onMessage")) return false;
+    for (String prefix : List.of("jakarta.jms.", "javax.jms.")) {
+      if (parameters.size() == 1 && parameters.getFirst().getName().equals(prefix + "Message")) {
+        return true;
+      }
+      if (parameters.size() == 2
+          && parameters.getFirst().getName().equals(prefix + "JMSContext")
+          && parameters.getLast().getName().equals(prefix + "Message")) {
+        return true;
+      }
+    }
+    return false;
   }
 
   private static boolean jms(String target) {
