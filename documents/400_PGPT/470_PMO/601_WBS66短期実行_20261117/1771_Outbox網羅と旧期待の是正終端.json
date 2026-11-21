@@ -1,0 +1,167 @@
+{
+  "eventId": "PGPT-20261008-7286",
+  "groupId": "WBS66-P01810-OUTBOX-COPY-AFTER-VALIDATION",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-21T00:50:25.517000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 87,
+      "remainingPercent": 13,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "WBS66-P01810-OUTBOX-COPY-AFTER-VALIDATION",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "WBS66-P01810-OUTBOX-COPY-AFTER-VALIDATION",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P018-10.03"
+    ],
+    "managementWorkIds": [
+      "WBS-P018-10.03/2",
+      "WBS-P004-05/2"
+    ],
+    "source": "ba2757f64806c17120296b83447dc53260572949",
+    "productionCoreMain": "007b96d8be7c10e265b5a12d01231013ae9e0acd",
+    "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "run": "PG41406-outbox-copy-independent-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.25,
+      "base": 0.75,
+      "high": 1.6
+    },
+    "groupCapPp": 3,
+    "completedOriginalRowPricePp": 0,
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/1769_P00201要求現行追跡再開点.json",
+        "sha256": "3f1f3587e542f059fdf6a10e5e9b894d814dba8e1de3a8735b81dc52ecefb773"
+      },
+      {
+        "path": "documents/400_PGPT/470_PMO/481_PGPT詳細WBS.json",
+        "sha256": "4227e20a23b10ab8eecd2b69550dd7f58c79bf43a2f77b4c7c98ec943e83a2d9"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38278-outbox-retained-value-prepare-v1/manifest.json",
+        "sha256": "b579cb1bae7d3ccd6bc1fe63dc655995c73e4e5f82af1cb0f29abc54b0aae67a"
+      },
+      {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry.java",
+        "sha256": "0c2baec34188b2781764560e36bbb0629fdb0d55504f6f79b50d0149a94f458c"
+      },
+      {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest.java",
+        "sha256": "841e7bb6bdbd5fb9a9d7d08f3588f3abbf0d112cbd4c2c4d92f5610c2d3aa9bd"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "startBasis": "SS324/351 and prior scope PG38278. OutboxEntry and OutboxRequest each copy borrowed wire bytes before remaining validation.",
+    "endCondition": "Bind pre-fix and post-fix constructor bytecode order. Eight original ordinary tests plus two current independent tests, same input scope, static findings and exact raw coverage. Retain untested operational sinks.",
+    "workScope": "Bug and lateral scope recorded first. No held binaries/routes, real payloads/keys, OOM, database, broker, or operations. Attribution primary P018-10.03; P004-05 references shared evidence only.",
+    "quotaAfter": {
+      "usedPercent": 87,
+      "remainingPercent": 13,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "cf774efa4bef198ef5dc1e3e05737f59ebcb0008d4e8b87929d110da18a4cfe5",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-21T00:50:25.517000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 87,
+          "remainingPercent": 13,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 1,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-21T00:50:18.780825+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 86,
+      "remainingPercent": 14,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-7285",
+    "attempt": 1,
+    "attemptResult": "現試験10/10、生対象二型四指標100%、当静的指摘0。初回10中旧期待二件失敗を保存。製品再buildなし。",
+    "priorSuccessReruns": 0,
+    "requiredRequalifications": 0,
+    "newProductTests": 2,
+    "formalDelta": 0,
+    "whole451Accepted": false,
+    "actualPaths": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41402-outbox-copy-after-validation-v1/failure.json",
+        "sha256": "8e4a836a8f33f33b5269f492eb0f15b75c7dabe1ca8bc29d61be3e9a29f19d58"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41404-outbox-copy-and-approved-fixture-v1/manifest.json",
+        "sha256": "6d12c9cfe85032811d42a8114ab892ae7b160afba6685a78fdbee277fdc52737"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41406-outbox-copy-independent-v1/manifest.json",
+        "sha256": "3fc26d3d1dc25f78447530249dc2076ffe0d4bab6f668f7ed20596e25881b44c"
+      },
+      {
+        "path": "evidence/01_PT/006_NK-MSG-002/4585_Outbox本文検証順と二旧期待の実行結果.md",
+        "sha256": "a69501b14534f439f863a72c9256b76e5ad2f13097d5daf0f73701b378349ca7"
+      }
+    ],
+    "plannedCompletionPricePp": 0,
+    "requiredCriteriaStillOpen": [
+      "実JMS/DB、実sink、六module全Static/451",
+      "QA-056で保留の特定型と依存",
+      "P018-10.03/P004-05親の終了依存"
+    ],
+    "firstAttemptPassed": 8,
+    "firstAttemptTotal": 10,
+    "failedFixtureOracle": 2,
+    "oldTestsRequalified": 8,
+    "successfulUniqueCases": 10,
+    "actualProductMainCompiles": 1,
+    "testedSource": "6cd4741404ae0358fdc3bf02bdef47c1f8132943",
+    "qualifiedProductionCore": "2611e1acbd57955d591d52e5348999ea293e068d",
+    "bugs": [
+      "BUG-3489",
+      "BUG-3490"
+    ],
+    "lateral": [
+      "YKT-2782",
+      "YKT-2783"
+    ],
+    "workCostBreakdown": {
+      "newlyDiscoveredImplementation": null,
+      "fixtureRework": null,
+      "readOnlyRevalidation": null,
+      "originalCompletionPricePp": 0
+    }
+  }
+}

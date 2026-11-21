@@ -1,0 +1,93 @@
+{
+  "eventId": "PGPT-20261008-7287",
+  "wbsLeafIds": [
+    "WBS-P018-10.03"
+  ],
+  "managementWorkIds": [
+    "WBS-P018-10.03/2",
+    "WBS-P004-05/2"
+  ],
+  "workCategory": "CONTRACT_AUDIT",
+  "source": "ba2757f64806c17120296b83447dc53260572949",
+  "productionCoreMain": "2611e1acbd57955d591d52e5348999ea293e068d",
+  "previousCheckpoint": "PGPT-20261008-7284",
+  "groupEvents": [
+    "PGPT-20261008-7286"
+  ],
+  "acceptedOriginal": 16,
+  "total": 190,
+  "coreAccepted": 0,
+  "coreTotal": 5,
+  "officialPtTests": 1964,
+  "officialPtScopes": 53,
+  "newFormalAcceptance": 0,
+  "effortRate": null,
+  "actualAllocatedPp": null,
+  "newProductTests": 2,
+  "recordedOwnedJobsInFlight": 0,
+  "ownedBackendJobsStartedHere": 0,
+  "modelObserved": "gpt-6.2-sol",
+  "reasoningObserved": null,
+  "speedObserved": null,
+  "outcomeEvidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41402-outbox-copy-after-validation-v1/failure.json",
+      "sha256": "8e4a836a8f33f33b5269f492eb0f15b75c7dabe1ca8bc29d61be3e9a29f19d58"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41404-outbox-copy-and-approved-fixture-v1/manifest.json",
+      "sha256": "6d12c9cfe85032811d42a8114ab892ae7b160afba6685a78fdbee277fdc52737"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41406-outbox-copy-independent-v1/manifest.json",
+      "sha256": "3fc26d3d1dc25f78447530249dc2076ffe0d4bab6f668f7ed20596e25881b44c"
+    },
+    {
+      "path": "evidence/01_PT/006_NK-MSG-002/4585_Outbox本文検証順と二旧期待の実行結果.md",
+      "sha256": "a69501b14534f439f863a72c9256b76e5ad2f13097d5daf0f73701b378349ca7"
+    }
+  ],
+  "fullQuotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-21T00:50:25.517000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 87,
+      "remainingPercent": 13,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "quotaAfter": {
+    "usedPercent": 87,
+    "remainingPercent": 13,
+    "resetsAt": 1795445752,
+    "windowDurationMins": 10080
+  },
+  "sharedDeltaPp": 1,
+  "completedOriginalRowPricePp": 0,
+  "remainingCriteria": [
+    "実JMS/DB、実sink、六module全Static/451",
+    "QA-056で保留の特定型と依存",
+    "P018-10.03/P004-05親の終了依存"
+  ],
+  "nextEvidence": "現Core 2611e1acbdのOutbox二型の書式・型付きの局所結果をF03へ接続し、重点F02/03・P004-05の利用許可内の残条件へ。実運用と同候補451は保留。",
+  "testedSource": "6cd4741404ae0358fdc3bf02bdef47c1f8132943",
+  "qualifiedProductionCore": "2611e1acbd57955d591d52e5348999ea293e068d",
+  "run": "PG41406-outbox-copy-independent-v1",
+  "bugs": [
+    "BUG-3489",
+    "BUG-3490"
+  ],
+  "lateral": [
+    "YKT-2782",
+    "YKT-2783"
+  ],
+  "workCostBreakdown": {
+    "newlyDiscoveredImplementation": null,
+    "fixtureRework": null,
+    "readOnlyRevalidation": null,
+    "originalCompletionPricePp": 0
+  }
+}
