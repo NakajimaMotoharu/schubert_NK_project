@@ -1,5 +1,13 @@
 # Animationメニュー・一覧表示単体テスト仕様書
 
+## 2026-11-21 当候補の既存8件再資格
+
+SCR008/009、UI223/235、SS313/323、PT-WEB230～237。既存の固定入力、表示順、件数0/50/51と不整合、親子関係、ロール、HTML escape、有限並行、戻り値と秘匿の独立期待をそのまま実行した。元PG24476とは物理が相違するため現PG41454で一回実行。新しい試験定義は0。
+
+現Core `2611e1acbd`／Test `2c13de0628`。JDK25、現Protocol JARと固定SDK、Webの表示4 Main・元1 Testだけ。実行 `python3 -B evidence/01_PT/018_NK-OPS-001/input/5684_scr009_current_original_eight.py`。8/8成功・失敗/エラー/skip/未実行0。一つの元execに対してSCR009の3物理は生72行・20method・3class・48branch・341命令、SCR008の1物理は19行・8method・1class・4branch・74命令で未達各0。共用二型の未達は別欄に保持。過大件数のPG41182とは3物理が同一で、元テスト再演やexec合算はしていない。実HTTP・本番画面組立・認証・実CHRと全451は未受入。
+
+- 実施結果・独立結果: evidence/01_PT/018_NK-OPS-001/evidence/PG41454-scr009-current-original-eight-v1/independent.json SHA-256 `d50def5f84d766a6845d413ff8be953c199bffe9f028cb371223b55a2bd51c3a`
+
 NK-WEB-001/SCR008/009、AnimationMenuViewModel/AnimationListViewModel・nested Video/Row。FUN006/AUT/TST、UI223§6/235§4～5/264、SS313/323/352、PG204。正式21で8PT合格、実行詳細は017とmanifest参照。AnimationViewModelTestの以下8methodを一意対応。
 
 | Test ID | method | 入力・操作・fixture | 独立期待値・根拠 |
