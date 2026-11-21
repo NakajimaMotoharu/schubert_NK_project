@@ -1,0 +1,109 @@
+{
+  "run": "PG41612",
+  "source": "1794e95dcd11e14ab093ad05068ee6c9198bb400",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41612-f03-question-list-detail-typed-v1/manifest.json",
+    "sha256": "62ccdd2a796cb77de0527433db1e0706ad3e31771cccc56e7df83c1573ac9f0f"
+  },
+  "previousProof": {
+    "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG24500-question-notification-bounded-fortysix-independent-v1/manifest.json",
+    "sha256": "70923ee600fb761b462d9cbaeae76eb0222e30270047fb721c7093b0b4021a50"
+  },
+  "previousPreflight": {
+    "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG24500-question-notification-bounded-fortysix-independent-v1/preflight-manifest.json",
+    "sha256": "baedaefa66df01dacfb24dbd8a76f290d978e5c0f58e59bfdca433c0203f87c4"
+  },
+  "historicalSourceReview": {
+    "PG27996": {
+      "manifest": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27996-question-list-three-contract-v1/manifest.json",
+        "sha256": "ecd6ffc0d3536e65a27134a24424abd4b878484131a099363c3145923ac686e3"
+      },
+      "exactInputs": {
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/QuestionSearchForm.java": "1308c621d4fb8673cae5440a7691ba1a17bf20b13f53251ab23dfb220f4351b4",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/QuestionListViewModel.java": "eef4e7d0a88a56f5209e5ece2ceec9cb5abd57dc292cd8b380816419b583f497",
+        "src/schubert-nk-web/src/main/resources/templates/questions/list.html": "d164e7957f53807c40d46d3247c1354202607f905eedd82f7971cd2a1d483af2"
+      }
+    },
+    "PG28000": {
+      "manifest": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28000-question-detail-three-contract-v1/manifest.json",
+        "sha256": "be0c138404824e27f78d207b550b42ecbf8baf0c2a3898aa048ef4a59320ebcc"
+      },
+      "exactInputs": {
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/QuestionDeleteForm.java": "0655e04b7cd37e9d9e3570db7386b92547e4c38cafc3501615a680233faab7d0",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/QuestionDetailViewModel.java": "6a10ebbadbc52df317de2fec18b68aab3275d832b5f73e0c4edfe24935b1903c",
+        "src/schubert-nk-web/src/main/resources/templates/questions/detail.html": "106063b219b894417619b35cd8a120cffc4f4aa21432f59bfcf6b54f7595e9f2"
+      }
+    }
+  },
+  "projectedHistoryOnly": {
+    "QuestionList": {
+      "fixture": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/QuestionListProjectionPortTest.java",
+      "sha256": "c0242ae7c2cb9592a5f56da86712721b513ff086d669c7023f85ca212e31e592",
+      "expectationScope": [
+        "ページ境界・表示順・USER／ADMIN列とリンク",
+        "既存の独立期待値とactor分離"
+      ],
+      "originalCases": [
+        "userPagingLinksAndClamp()",
+        "nullBoundariesReject()",
+        "duplicateIdsReject()",
+        "rowCountMismatchRejects()",
+        "outputSnapshotIsImmutable()",
+        "invalidFormsStayUnpaginated()",
+        "parallelViewsKeepActorsSeparate()",
+        "orderRulesAreIndependent()",
+        "wrongEffectivePageRejects()",
+        "emptyReturnsPlainView()",
+        "ownerScopeAndSummaryLimitReject()",
+        "roleMismatchRejectsBothDirections()",
+        "allStatesHaveIndependentRows()",
+        "unicodeBoundaryAndAdminCrossOwnerAreValid()",
+        "adminAndUserFilteredLinksAreLiteral()",
+        "inconsistentAnswerTimestampRejects()"
+      ]
+    },
+    "QuestionDetail": {
+      "fixture": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/QuestionDetailProjectionPortTest.java",
+      "sha256": "e74ec27aee2d0cefd0d32575c4e8108ceb1c81e5250228934cb5e8b07f501d34",
+      "expectationScope": [
+        "対象・回答表示・空回答・状態・owner列",
+        "null・不整合の拒否とactor分離"
+      ],
+      "originalCases": [
+        "targetOwnerAndBodyReject()",
+        "nullBoundaryRejects()",
+        "summaryUsesOneHundredCodePoints()",
+        "adminMayViewAnotherOwner()",
+        "answeredProjectionHasExactFields()",
+        "immutableRedactedProjection()",
+        "parallelProjectionDoesNotLeakOwners()",
+        "unansweredAndErrorHaveNoAnswer()"
+      ]
+    }
+  },
+  "questionPhysical": {
+    "QuestionDetailViewModel$1.class": {
+      "history": "2d9a35187017618e039cc2217c890a6e377f058b6270594ee9fff2c8a8d928c7",
+      "current": "2d9a35187017618e039cc2217c890a6e377f058b6270594ee9fff2c8a8d928c7",
+      "exact": true
+    },
+    "QuestionDetailViewModel.class": {
+      "history": "ecf6d43fc2225147cb6926a8b5b559f0593b88be47f5617935adb2ea1b679554",
+      "current": "da6a593dda9cf116879a1750d022009145a1f93cf64e6cca1f0d2dea84d3129e",
+      "exact": false
+    },
+    "QuestionListViewModel.class": {
+      "history": "39b4c987c2a9e1100b977aefaf4ec81322715de7432aba4392a82ae4f490672d",
+      "current": "0eeb3a6f72f31acdcde7054112c67d56005d258efa9e6e23785b49c52cb40a5b",
+      "exact": false
+    }
+  },
+  "oldOrdinaryReplayed": 0,
+  "currentOrdinary": 0,
+  "heldDynamic": true,
+  "formalAcceptanceId": null,
+  "terminalAtUTC": "2026-11-21T18:39:57.605195+00:00"
+}

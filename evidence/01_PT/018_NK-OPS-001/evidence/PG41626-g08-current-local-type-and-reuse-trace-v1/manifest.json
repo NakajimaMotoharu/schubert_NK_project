@@ -1,0 +1,255 @@
+{
+  "run": "PG41626",
+  "source": "1794e95dcd11e14ab093ad05068ee6c9198bb400",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-G08",
+  "actualExit": 0,
+  "specs354": {
+    "path": "documents/300_SS/350_運用・品質/354_PT・IT試験観点詳細設計.md",
+    "sha256": "2707b6b3b53b87abc803626737dbdc1366eae695fdfda8ddb0c93e35ea11b2b7"
+  },
+  "tracedCurrentManifests": {
+    "PG41608": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41608-f03-notification-list-detail-typed-v1/manifest.json",
+      "sha256": "40d3252ca76787c5096e353b451f8eec62a45ce9bc5abb128d6374d2722f98ef"
+    },
+    "PG41610": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41610-f03-notification-template-proof-v1/manifest.json",
+      "sha256": "fa2d593606ef73015f39160759007fb2c3e7100e0685d8aa7042a896b9ea0ec5"
+    },
+    "PG41612": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41612-f03-question-list-detail-typed-v1/manifest.json",
+      "sha256": "62ccdd2a796cb77de0527433db1e0706ad3e31771cccc56e7df83c1573ac9f0f"
+    },
+    "PG41614": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41614-f03-game-route-display-typed-v1/manifest.json",
+      "sha256": "3706be7f1ac6eae3ca09b7bbd27a1338928c7f88c32e1713d3d93bf21825b1ef"
+    },
+    "PG41616": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41616-f03-admin-forms-typed-v1/manifest.json",
+      "sha256": "3e85fea4459a652381cd3d58541d9936f7da269eb5be6661be736a6009e7577a"
+    },
+    "PG41618": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41618-f03-remaining-display-typed-v1/manifest.json",
+      "sha256": "c9881c200fbdc9b56c5ba789548f86233dd67a49b2f08752d7a27fca744cd98f"
+    },
+    "PG41620": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41620-f03-original-pure-web-test-link-v1/manifest.json",
+      "sha256": "7eda23f02889a150b665a71d597076ffd3f30813778a29b2b701c3cc74aeba56"
+    },
+    "PG41622": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41622-p00403-maintenance-test-requalification-v1/manifest.json",
+      "sha256": "9ee00ee4f9d964e92afd7809a000274a748474d6a0d9ff4fad30d4f9aad17252"
+    },
+    "PG41624": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41624-p00403-run-reference-requalification-v1/manifest.json",
+      "sha256": "368723734a60b905894a4f4767b1d03c73158ff71f774e1e39f02b74aa7776ba"
+    }
+  },
+  "projectionTestIdToMethods": {
+    "WBS-P016-20": {
+      "program": "NK-WEB-002",
+      "spec": {
+        "path": "evidence/01_PT/016_NK-WEB-002/122_通知一覧pure表示単体仕様.md",
+        "sha256": "bdc99a64241aea3d7b745ba829340576b4fdca036f31cb44b0437e77cefb242d"
+      },
+      "evidence": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41608-f03-notification-list-detail-typed-v1/design-oracle-comparison.json",
+        "sha256": "40a3383222bfb9a9982def8057ac933371cddb2d96ed2681314c30714ca57bbf"
+      },
+      "matchedTestMethods": {
+        "PT-WEB-NLIST002": "allStatesProduceApprovedLabels",
+        "PT-WEB-NLIST012": "copiedInputDoesNotChangeRows",
+        "PT-WEB-NLIST007": "duplicateIdsReject",
+        "PT-WEB-NLIST001": "emptyReturnsPlainView",
+        "PT-WEB-NLIST008": "inconsistentStateAndDeletedSummaryReject",
+        "PT-WEB-NLIST004": "invalidFormsStayUnpaginated",
+        "PT-WEB-NLIST010": "nullBoundariesReject",
+        "PT-WEB-NLIST009": "orderRulesAreIndependent",
+        "PT-WEB-NLIST011": "outputCollectionsAreImmutable",
+        "PT-WEB-NLIST003": "pagingLinksKeepFiltersAndClamp",
+        "PT-WEB-NLIST014": "parallelViewsKeepActorsSeparate",
+        "PT-WEB-NLIST006": "rowCountMismatchRejects",
+        "PT-WEB-NLIST013": "unicodeSummaryBoundaryAndDeletedLiteral",
+        "PT-WEB-NLIST005": "wrongEffectivePageRejects"
+      },
+      "resultType": "CURRENT_STATIC_WITH_ORIGINAL_ORACLE_REFERENCE",
+      "source": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/NotificationListViewModel.java",
+      "exactSHA256": "0d9826eecee7a3e0e63e779dac32949bced1748bff8d927b58e10c23160b5ed7"
+    },
+    "WBS-P016-21": {
+      "program": "NK-WEB-002",
+      "spec": {
+        "path": "evidence/01_PT/016_NK-WEB-002/120_通知詳細表示pure単体テスト仕様書.md",
+        "sha256": "b26c4eea9b55cc5355b0534cbaebf80fdea5ed766727d49e7f88a192e77f6b75"
+      },
+      "evidence": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41608-f03-notification-list-detail-typed-v1/design-oracle-comparison.json",
+        "sha256": "40a3383222bfb9a9982def8057ac933371cddb2d96ed2681314c30714ca57bbf"
+      },
+      "matchedTestMethods": {
+        "PT-WEB-NDETAIL002": "allStatesHaveLiteralLabelsAndTimes",
+        "PT-WEB-NDETAIL001": "completedHasExactFields",
+        "PT-WEB-NDETAIL004": "completedMayHaveEmptyAnswer",
+        "PT-WEB-NDETAIL003": "deletedQuestionsRetireAnswerAndLink",
+        "PT-WEB-NDETAIL006": "immutableRedactedProjection",
+        "PT-WEB-NDETAIL008": "parallelProjectionKeepsActorsSeparate",
+        "PT-WEB-NDETAIL005": "targetNullAndSemanticMismatchReject",
+        "PT-WEB-NDETAIL007": "unicodeAndMarkupStayText"
+      },
+      "resultType": "CURRENT_STATIC_WITH_ORIGINAL_ORACLE_REFERENCE",
+      "source": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/NotificationDetailViewModel.java",
+      "exactSHA256": "4221d0482e8b5f84224a2ec7d91cba648046d5e23bcef3112c5bf6f48353a7cd"
+    },
+    "WBS-P016-22": {
+      "program": "NK-WEB-002",
+      "spec": {
+        "path": "evidence/01_PT/016_NK-WEB-002/124_質問一覧pure表示単体仕様.md",
+        "sha256": "fea721537eda4896af57247360c593b70308e9482303e8c22153c19fb97a0647"
+      },
+      "evidence": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41612-f03-question-list-detail-typed-v1/design-oracle-comparison.json",
+        "sha256": "ce7b1594d38839f22c3d4b1121d00cde7edab97372293af8723a42cc284e72e8"
+      },
+      "matchedTestMethods": {
+        "PT-WEB-QLIST003": "userPagingLinksAndClamp",
+        "PT-WEB-QLIST013": "nullBoundariesReject",
+        "PT-WEB-QLIST009": "duplicateIdsReject",
+        "PT-WEB-QLIST008": "rowCountMismatchRejects",
+        "PT-WEB-QLIST014": "outputSnapshotIsImmutable",
+        "PT-WEB-QLIST005": "invalidFormsStayUnpaginated",
+        "PT-WEB-QLIST016": "parallelViewsKeepActorsSeparate",
+        "PT-WEB-QLIST012": "orderRulesAreIndependent",
+        "PT-WEB-QLIST007": "wrongEffectivePageRejects",
+        "PT-WEB-QLIST001": "emptyReturnsPlainView",
+        "PT-WEB-QLIST010": "ownerScopeAndSummaryLimitReject",
+        "PT-WEB-QLIST006": "roleMismatchRejectsBothDirections",
+        "PT-WEB-QLIST002": "allStatesHaveIndependentRows",
+        "PT-WEB-QLIST015": "unicodeBoundaryAndAdminCrossOwnerAreValid",
+        "PT-WEB-QLIST004": "adminAndUserFilteredLinksAreLiteral",
+        "PT-WEB-QLIST011": "inconsistentAnswerTimestampRejects"
+      },
+      "resultType": "CURRENT_STATIC_WITH_ORIGINAL_ORACLE_REFERENCE",
+      "source": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/QuestionListViewModel.java",
+      "exactSHA256": "eef4e7d0a88a56f5209e5ece2ceec9cb5abd57dc292cd8b380816419b583f497"
+    },
+    "WBS-P016-23": {
+      "program": "NK-WEB-002",
+      "spec": {
+        "path": "evidence/01_PT/016_NK-WEB-002/118_質問詳細表示pure単体テスト仕様書.md",
+        "sha256": "711f62cbdbdedd6948874ffd64427269d525ffdb4741bca7caf27b94cfc2040e"
+      },
+      "evidence": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41612-f03-question-list-detail-typed-v1/design-oracle-comparison.json",
+        "sha256": "ce7b1594d38839f22c3d4b1121d00cde7edab97372293af8723a42cc284e72e8"
+      },
+      "matchedTestMethods": {
+        "PT-WEB-QDETAIL005": "targetOwnerAndBodyReject",
+        "PT-WEB-QDETAIL006": "nullBoundaryRejects",
+        "PT-WEB-QDETAIL004": "summaryUsesOneHundredCodePoints",
+        "PT-WEB-QDETAIL003": "adminMayViewAnotherOwner",
+        "PT-WEB-QDETAIL001": "answeredProjectionHasExactFields",
+        "PT-WEB-QDETAIL007": "immutableRedactedProjection",
+        "PT-WEB-QDETAIL008": "parallelProjectionDoesNotLeakOwners",
+        "PT-WEB-QDETAIL002": "unansweredAndErrorHaveNoAnswer"
+      },
+      "resultType": "CURRENT_STATIC_WITH_ORIGINAL_ORACLE_REFERENCE",
+      "source": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/QuestionDetailViewModel.java",
+      "exactSHA256": "6a10ebbadbc52df317de2fec18b68aab3275d832b5f73e0c4edfe24935b1903c"
+    }
+  },
+  "exactFixtureAndResultLinks": {
+    "PG41610": [
+      {
+        "path": "evidence/01_PT/016_NK-WEB-002/126_質問通知一覧template資源単体仕様.md",
+        "sha256": "c6e66f8cc35c348a711c12c38bdd5ff2c18032aed10fc84349b8f38d5c7f0f93"
+      },
+      {
+        "path": "evidence/01_PT/016_NK-WEB-002/128_質問通知明細template資源単体仕様.md",
+        "sha256": "f24e7b30baa813607b51d5d0b9fb7adb574e7cc0c0d8381e61a974e4584003d5"
+      }
+    ],
+    "PG41614": [
+      {
+        "path": "evidence/01_PT/016_NK-WEB-002/001_NK-WEB-002_Scenario階層画面単体テスト仕様書.md",
+        "sha256": "fa674acf0e1412027e48fbfd24e2d5a9726f6ce630a6531a537e61083ce321c9"
+      },
+      {
+        "path": "evidence/01_PT/016_NK-WEB-002/4201_階層・詳細・Music現三十二_資格参照.md",
+        "sha256": "123b85e4ca52a348b444c562754195a314173999ae20432e906c1ae645aeee1f"
+      }
+    ],
+    "PG41616": [
+      {
+        "path": "evidence/01_PT/016_NK-WEB-002/4155_P016151617原User三二件通常単体仕様.md",
+        "sha256": "9293da4243cce482a45fcbe797a8595147236fa682f1f4c20f79e01bddb4fc53"
+      },
+      {
+        "path": "evidence/01_PT/016_NK-WEB-002/112_残四form二十七fixture同値化PGPT仕様.md",
+        "sha256": "edccfae1eb65d856f39cc93fabc80dfe56dd3bd32acf80a28da41387bde1cd64"
+      }
+    ],
+    "PG41618": [
+      {
+        "path": "evidence/01_PT/016_NK-WEB-002/134_質問入力受付menu戻り先・資源単体仕様.md",
+        "sha256": "d75aeb97e589c69c389c43948d755b32937e6a6d0e500b87375c5ef94d01c9ed"
+      },
+      {
+        "path": "evidence/01_PT/016_NK-WEB-002/001_NK-WEB-002_Scenario階層画面単体テスト仕様書.md",
+        "sha256": "fa674acf0e1412027e48fbfd24e2d5a9726f6ce630a6531a537e61083ce321c9"
+      }
+    ],
+    "PG41622": [
+      {
+        "path": "evidence/01_PT/004_NK-DAT-001/450_P00403純record_codec追加四PT仕様.md",
+        "sha256": "3b49f72a1d94e3472bb17841204df7b4971f0d2d1a87cdd95465881e5b512278"
+      },
+      {
+        "path": "evidence/01_PT/004_NK-DAT-001/451_P00403純record_codec全二十実行結果.md",
+        "sha256": "9f46aafa3f2d6aaba7de1050cf626e3a1d383e2680ee008c95cee5c96d9bdb87"
+      }
+    ],
+    "PG41624": [
+      {
+        "path": "evidence/01_PT/004_NK-DAT-001/447_WBS66参照DAO純JDBC単体仕様.md",
+        "sha256": "bbff30ba4b39920569871b7aff72b4ff0e23b1bbc7473c8e52b82ed6b4458c0c"
+      },
+      {
+        "path": "evidence/01_PT/004_NK-DAT-001/455_P00403参照DAO三経路例外順位仕様.md",
+        "sha256": "3ff9b930f451c1427c0fc82650b748cc45d3a517b4f018d4555a50ac567a2ec6"
+      },
+      {
+        "path": "evidence/01_PT/004_NK-DAT-001/459_P00403現参照DAO九件の同一実行結果.md",
+        "sha256": "4e780b6fb1bda139b9ffa7671d0d83e4a5fae0885b97ed165145e45ed194aa52"
+      }
+    ]
+  },
+  "shortDaoTestIds": [
+    "RRF-PURE-001",
+    "RRF-PURE-002",
+    "RRF-PURE-003",
+    "RRF-PURE-004",
+    "RRF-PURE-005",
+    "RRF-PURE-006",
+    "RRF-PURE-007",
+    "RRF-PURE-008",
+    "RRF-PURE-009"
+  ],
+  "pairedCodecAndDaoWbs": [
+    "候補再資格-31.01",
+    "候補再資格-03.01"
+  ],
+  "formalPending": [
+    "fixed scopes current same run",
+    "F02/F03",
+    "QA056",
+    "real environment P004-03",
+    "authenticated required recipient receipt"
+  ],
+  "currentNewTests": 0,
+  "priorWebUnique66And24NoRecount": true,
+  "old19RuntimeResultsCombinedWithCurrent": false,
+  "allScopesSameRun": false,
+  "formalAcceptanceId": null,
+  "terminalAtUTC": "2026-11-21T18:52:04.125719+00:00"
+}
