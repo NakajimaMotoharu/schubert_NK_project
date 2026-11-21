@@ -1,0 +1,268 @@
+{
+  "run": "PG41396-protocol-msg11-exact-trace-v1",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-21T00:41:15.610374+00:00",
+  "source": "7fe372217225b5962805a5482a4861a4af3a3498",
+  "physicalScope": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41394-protocol-three-scope-current-recheck-v1/manifest.json",
+    "sha256": "46ff116b1228cd953e91bd7ba431f566fd363542e5d200912200462d9c4cc801"
+  },
+  "productionCore": "007b96d8be7c10e265b5a12d01231013ae9e0acd",
+  "qualifiedProtocolSource": "62b239d4dad561da007e15a290f8a271a165dda9",
+  "canonicalDesign": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+  "design": [
+    {
+      "path": "documents/100_RD/130_インターフェース要件/132_共通固定長電文方式要件.md",
+      "sha256": "62adc306da4a1c59bc17e935eb0452efd54bb9705770186c9edaff2c53518047"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/322_固定長電文codec実装設計.md",
+      "sha256": "4050c672abea8bc7ca1c70bc47783185914206cdc6d126d55fe274971fab5d4a"
+    }
+  ],
+  "retainedCases": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41304-protocol-numeric-physical-independent-v1/cases.json",
+    "sha256": "ae44c06ebd1906c6805621f57b261770b4033b942abc15db9884c1fe3e258798"
+  },
+  "historicalTrace": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26250-header-layout-field-current-criteria-v1/requirement-oracle-matrix.json",
+    "sha256": "57f82f79e3d1fc8745902fff64d96ebbbe0a7d2aaba0c5fb814654672495bad1"
+  },
+  "rows": [
+    {
+      "requirementId": "MSG-001",
+      "requirement": "bodyはJMS `BytesMessage`に格納し、全業務項目をUTF-8の文字列表現で送受信する。",
+      "testEvidence": [
+        {
+          "case": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#textDecodeIsStrictCanonicalAndOptionalAware",
+          "testId": "PT-PRO-CURRENT-MSG-001",
+          "expectedBasis": "Strict UTF8 body field rejects malformed bytes; JMS BytesMessage metadata validator covered as pure value port; actual broker/adapter belongs P005/N and not accepted here.",
+          "fixture": {
+            "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java",
+            "sha256": "2e0467343a256255013da116d1d594284a16366f9bb3befc7fa72f48dd8d44dc"
+          },
+          "actual": "PASS_ORIGINAL"
+        }
+      ],
+      "confirmed": "CURRENT_HOST_COMPONENT_ONLY",
+      "residual": "実JMS送受信・adapter／実CHR"
+    },
+    {
+      "requirementId": "MSG-002",
+      "requirement": "項目長は文字数ではなくUTF-8 encode後のbyte数とする。",
+      "testEvidence": [
+        {
+          "case": "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest#nfcGolden001HangulJamoFitsComposedByteWidth",
+          "testId": "PT-PRO-CURRENT-MSG-002",
+          "expectedBasis": "Literal Hangul UTF8/composed byte width/max vs below width.",
+          "fixture": {
+            "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecNfcGoldenTest.java",
+            "sha256": "f94593eb1b57c9ce6c65dfac75dec1061439471fb2a66ff8877f5fc1c93dfceb"
+          },
+          "actual": "PASS_ORIGINAL"
+        }
+      ],
+      "confirmed": "CURRENT_HOST_COMPONENT_ONLY",
+      "residual": "当候補の終了依存、実CHRと451の該当全品質"
+    },
+    {
+      "requirementId": "MSG-003",
+      "requirement": "文字項目は値の右側をASCII spaceで充填する。",
+      "testEvidence": [
+        {
+          "case": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#textEncodeNormalizesUtf8AndPadsWithAsciiSpace",
+          "testId": "PT-PRO-CURRENT-MSG-003",
+          "expectedBasis": "Right ASCII0x20 padding, required/optional null and blank, trailing value-space reject.",
+          "fixture": {
+            "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java",
+            "sha256": "2e0467343a256255013da116d1d594284a16366f9bb3befc7fa72f48dd8d44dc"
+          },
+          "actual": "PASS_ORIGINAL"
+        }
+      ],
+      "confirmed": "CURRENT_HOST_COMPONENT_ONLY",
+      "residual": "当候補の終了依存、実CHRと451の該当全品質"
+    },
+    {
+      "requirementId": "MSG-004",
+      "requirement": "数値項目は原則必須とし、値の左側をASCII `0`で充填する。符号、小数点およびscaleが必要な項目はinterface項目仕様で個別に定義する。",
+      "testEvidence": [
+        {
+          "case": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#numericCodecChecksDigitsRangeAndOverflow",
+          "testId": "PT-PRO-CURRENT-MSG-004",
+          "expectedBasis": "Literal zero/one/max zero-padded ASCII; semantic bounds, wire width and signedlong overflow failures.",
+          "fixture": {
+            "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java",
+            "sha256": "2e0467343a256255013da116d1d594284a16366f9bb3befc7fa72f48dd8d44dc"
+          },
+          "actual": "PASS_ORIGINAL"
+        },
+        {
+          "case": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#numericDecodeValidatesEveryByteBeforeAccumulatingTheValue",
+          "testId": "PT-PRO-002-N03",
+          "expectedBasis": "ASCII grammar precedence on fixed signed-long overflow body with 0x2b and 0xff; fixed error and blank cause.",
+          "fixture": {
+            "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java",
+            "sha256": "2e0467343a256255013da116d1d594284a16366f9bb3befc7fa72f48dd8d44dc"
+          },
+          "actual": "PASS_ORIGINAL"
+        }
+      ],
+      "confirmed": "CURRENT_HOST_COMPONENT_ONLY",
+      "residual": "当候補の終了依存、実CHRと451の該当全品質"
+    },
+    {
+      "requirementId": "MSG-005",
+      "requirement": "非必須で数値を扱う項目は文字項目として定義し、値を左寄せして右側をASCII spaceで充填する。例えば6 byteの値123は`123   `とし、全byte spaceを未設定として扱う。",
+      "testEvidence": [
+        {
+          "case": "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest#xNumericWrappersAndGeneratedNumericRangesRejectNonCanonicalValues",
+          "testId": "PT-PRO-CURRENT-MSG-005",
+          "expectedBasis": "Typed X numeric wrappers, space optional and noncanonical rejects; actual payload X9 elapsed literal in QA054.",
+          "fixture": {
+            "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/ProtocolSemanticTypeTest.java",
+            "sha256": "dd40230045fec910c3ab2d1cada147a56859a8ff1d3081c70891551b061ba5aa"
+          },
+          "actual": "PASS_ORIGINAL"
+        }
+      ],
+      "confirmed": "CURRENT_HOST_COMPONENT_ONLY",
+      "residual": "当候補の終了依存、実CHRと451の該当全品質"
+    },
+    {
+      "requirementId": "MSG-006",
+      "requirement": "BooleanはASCII文字`0`または`1`の1 byteで表現する。",
+      "testEvidence": [
+        {
+          "case": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#booleanAndReservedFieldsRejectUnknownBytes",
+          "testId": "PT-PRO-CURRENT-MSG-006",
+          "expectedBasis": "Literal0/1 and optionalspace; requiredspace/2/wronglength/null fail.",
+          "fixture": {
+            "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java",
+            "sha256": "2e0467343a256255013da116d1d594284a16366f9bb3befc7fa72f48dd8d44dc"
+          },
+          "actual": "PASS_ORIGINAL"
+        }
+      ],
+      "confirmed": "CURRENT_HOST_COMPONENT_ONLY",
+      "residual": "当候補の終了依存、実CHRと451の該当全品質"
+    },
+    {
+      "requirementId": "MSG-007",
+      "requirement": "規定byte数超過時は共通変換部品が変換例外を発生させ、切捨て、UTF-8途中切断および送信を行わない。",
+      "testEvidence": [
+        {
+          "case": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#numericSemanticCeilingIsIndependentOfWireAndLongCapacity",
+          "testId": "PT-PRO-CURRENT-MSG-007",
+          "expectedBasis": "Max-1/max/+1 semantic boundaries independent literal19digits; overflow has no partial success/input mutation.",
+          "fixture": {
+            "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java",
+            "sha256": "2e0467343a256255013da116d1d594284a16366f9bb3befc7fa72f48dd8d44dc"
+          },
+          "actual": "PASS_ORIGINAL"
+        },
+        {
+          "case": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#textEncodeNormalizesUtf8AndPadsWithAsciiSpace",
+          "testId": "PT-PRO-CURRENT-MSG-003",
+          "expectedBasis": "Four-byte scalar plus ASCII x cannot fit in four bytes; FieldEncodingException without truncation.",
+          "fixture": {
+            "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java",
+            "sha256": "2e0467343a256255013da116d1d594284a16366f9bb3befc7fa72f48dd8d44dc"
+          },
+          "actual": "PASS_ORIGINAL"
+        }
+      ],
+      "confirmed": "CURRENT_HOST_COMPONENT_ONLY",
+      "residual": "実送信側で非送信・DB不変更が成立する同候補経路"
+    },
+    {
+      "requirementId": "MSG-008",
+      "requirement": "CR、TABおよびNULは原則禁止する。業務項目内の改行は初期電文で使用しない。将来使用する場合はLFだけを許容する。",
+      "testEvidence": [
+        {
+          "case": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#textEncodeNormalizesUtf8AndPadsWithAsciiSpace",
+          "testId": "PT-PRO-CURRENT-MSG-008",
+          "expectedBasis": "CR/LF/TAB/NUL encode reject and decode counterpart; malformed Unicode no silent truncation.",
+          "fixture": {
+            "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java",
+            "sha256": "2e0467343a256255013da116d1d594284a16366f9bb3befc7fa72f48dd8d44dc"
+          },
+          "actual": "PASS_ORIGINAL"
+        }
+      ],
+      "confirmed": "CURRENT_HOST_COMPONENT_ONLY",
+      "residual": "当候補の終了依存、実CHRと451の該当全品質"
+    },
+    {
+      "requirementId": "MSG-009",
+      "requirement": "文書、設定および生成fileの改行codeはLFを標準とする。",
+      "testEvidence": [
+        {
+          "case": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#textDecodeIsStrictCanonicalAndOptionalAware",
+          "testId": "PT-PRO-CURRENT-MSG-009",
+          "expectedBasis": "Field LF rejection plus current owned69 production source LF-only. Whole docs/settings/generated-output LF under G/F remains separate and unaccepted here.",
+          "fixture": {
+            "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java",
+            "sha256": "2e0467343a256255013da116d1d594284a16366f9bb3befc7fa72f48dd8d44dc"
+          },
+          "actual": "PASS_ORIGINAL"
+        }
+      ],
+      "confirmed": "CURRENT_HOST_COMPONENT_ONLY",
+      "residual": "全製品・設定・文書・生成物のLF一括確認"
+    },
+    {
+      "requirementId": "MSG-010",
+      "requirement": "電文化する文字列をUnicode NFCで正規化する。NFC正規化はbyte長判定より前に行う。",
+      "testEvidence": [
+        {
+          "case": "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest#nfcGolden003CanonicalCombiningOrderIsRequiredWithoutComposition",
+          "testId": "PT-PRO-CURRENT-MSG-010",
+          "expectedBasis": "Independent UTF8 hex for NFD→NFC encode; noncanonical receive reject, input bytes unchanged.",
+          "fixture": {
+            "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecNfcGoldenTest.java",
+            "sha256": "f94593eb1b57c9ce6c65dfac75dec1061439471fb2a66ff8877f5fc1c93dfceb"
+          },
+          "actual": "PASS_ORIGINAL"
+        }
+      ],
+      "confirmed": "CURRENT_HOST_COMPONENT_ONLY",
+      "residual": "当候補の終了依存、実CHRと451の該当全品質"
+    },
+    {
+      "requirementId": "MSG-011",
+      "requirement": "電文日時は日本標準時（Asia/Tokyo）の`yyyyMMddHHmmssSSS`形式で表現する。",
+      "testEvidence": [
+        {
+          "case": "dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest#semanticHelpersDecodeAndEncodeEverySupportedShape",
+          "testId": "PT-PRO-CURRENT-MSG-011",
+          "expectedBasis": "Instant→JST literal17digits, invalid time/leap/zone cases in original Jst codec cases; runtimeclock not involved.",
+          "fixture": {
+            "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/SemanticFieldValueTest.java",
+            "sha256": "b399e53307dabab625ac8cd2449b8edf87c8873e47265cdbea806d907c86354f"
+          },
+          "actual": "PASS_ORIGINAL"
+        },
+        {
+          "case": "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest#formatsAndParsesStrictJstMilliseconds",
+          "testId": null,
+          "expectedBasis": "Exact independent JST millisecond text and UTC inverse on the original method.",
+          "fixture": {
+            "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/time/JstWireTimestampTest.java",
+            "sha256": "588bc19f5035c5b1d9e80979fc5376274a7ebace6df91d8f68fa1eec1e6f8c61"
+          },
+          "actual": "PASS_ORIGINAL"
+        }
+      ],
+      "confirmed": "CURRENT_HOST_COMPONENT_ONLY",
+      "residual": "実時計・外部経路の時点規定、QA060固有の履歴時刻は別契約"
+    }
+  ],
+  "requirementsVerified": 11,
+  "extraCurrentTraceReferences": 3,
+  "testExecutions": 0,
+  "externalActions": 0,
+  "formalDelta": 0,
+  "restored": 0,
+  "whole451": false
+}
