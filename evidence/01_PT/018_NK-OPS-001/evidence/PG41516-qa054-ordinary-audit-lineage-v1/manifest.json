@@ -1,0 +1,83 @@
+{
+  "run": "PG41516",
+  "source": "d78f604b0dc7aaff402f732d8c3ef1afda1f4652",
+  "core": "2611e1acbd57955d591d52e5348999ea293e068d",
+  "wbs": {
+    "新版ID": "WBS-P006-03-WBS-P009-04-AUDIT-LOCAL",
+    "第58版ID": "WBS-P006-03/2,WBS-P009-04/2",
+    "費用主担当項目": "P006-03,P009-04",
+    "改訂残pp": "0.55",
+    "作業・成果物": "Exact current audit projection inputs and separate previously qualified synthetic security and media fixtures.",
+    "終了条件": "Bind original XML, scope and SHA to approved expectations. Leave actual audit storage/MQ/auth states open.",
+    "先行ID・着手条件": "460 QA054 follow-on text, existing closed-scope receipts only, no live environment test.",
+    "basis": {
+      "path": "documents/400_PGPT/470_PMO/481_PGPT詳細WBS.json",
+      "sha256": "4227e20a23b10ab8eecd2b69550dd7f58c79bf43a2f77b4c7c98ec943e83a2d9"
+    }
+  },
+  "sourceScopes": [
+    {
+      "owner": "WebSecurityAudit",
+      "source": "9f4ac22bc466d64babe62828b78e35b2414f6e82",
+      "retainedProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25982-security-audit-original-whole6-v1/manifest.json",
+        "sha256": "a405ec87297987d27697c73836f39d200ed54c8d8b1141c0e70ce5fc3e58ba3c"
+      },
+      "independentPost": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25984-security-audit-whole6-independent-v1/manifest.json",
+        "sha256": "998da6529d4a5ad4e003fcc19f63ee9bcb436d4888fa1700d814aa86d70dcb27"
+      },
+      "originalCaseNames": [
+        "web095AllSecurityEventsUseClosedIndependentJson()",
+        "web096InvalidEventMetadataNeverReachesLogger()",
+        "web097UnicodeAndSecretCanariesRemainOutsideAudit()",
+        "web098ClockAndLoggerFaultsNeverBecomeSuccessfulAudit()",
+        "web099RepeatedEventsHaveNoMutableJsonOrPrincipalRetention()",
+        "web100ConcurrentAuditEventsStayIndependent()"
+      ],
+      "verifiedCount": 6,
+      "exactSrcInputCount": 8,
+      "outputXml": null
+    },
+    {
+      "owner": "WebMediaAudit",
+      "source": "d277f20dfd6b8449785bbe2edda3c0f3a0d4d275",
+      "retainedProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39190-media-audit-current-nine-post-v1/manifest.json",
+        "sha256": "76834fa6688a5cccc3d5fed1e49e38595ab657408cd4efb582bcf08eefe2bcaa"
+      },
+      "independentPost": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39190-media-audit-current-nine-post-v1/manifest.json",
+        "sha256": "76834fa6688a5cccc3d5fed1e49e38595ab657408cd4efb582bcf08eefe2bcaa"
+      },
+      "originalCaseNames": [
+        "media001ClosedStatusFailureMediaCatalogMatchesIndependentJson()",
+        "media002StatusAndByteBoundariesRejectWithoutLogging()",
+        "media003ConstructorVersionsAndAllNullsEstablishBoundaryContract()",
+        "media004EveryRecordNullAndMissingClockIsRejected()",
+        "media005ClockFailuresAndTimezoneNeverBecomeSuccessfulEvents()",
+        "media006LoggerRuntimeAndErrorPropagateWithoutRetryOrNormalizing()",
+        "media007UnicodeRedactionAndRepeatedImmutableJsonRemainIndependent()",
+        "media008OwnConcurrentCallsHaveNoMutableEventRetention()",
+        "raw001ClosedFailureNamesOrdinalsAndDefensiveArrayAreIndependent()"
+      ],
+      "verifiedCount": 9,
+      "exactSrcInputCount": 19,
+      "outputXml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39190-media-audit-current-nine-post-v1/original-TEST-junit-jupiter.xml",
+        "sha256": "043961bbfc64f3ad069acbb1710215abbb538283688b2ca7e956fc59bf567664"
+      }
+    }
+  ],
+  "currentNewTests": 0,
+  "olderExecsMerged": false,
+  "formalAcceptanceId": null,
+  "ordinaryReadOnlyResults": "Current src input hashes matched. The first audit counted all 22 Media keys instead of the 19 src keys; the inventory-only check was corrected.",
+  "remaining": [
+    "WebRequestLogProducer fixture starts a DB, current authorized actual scope required",
+    "QA054 real MENU_VIEWED and LOG_SEARCHED persistence and once/retry semantics",
+    "actual media/Range/authentication and 451 still open"
+  ],
+  "terminalAtUTC": "2026-11-21T16:13:44.393434+00:00",
+  "exitCode": 0
+}

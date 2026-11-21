@@ -1,0 +1,83 @@
+{
+  "run": "PG41510",
+  "source": "d78f604b0dc7aaff402f732d8c3ef1afda1f4652",
+  "productionCore": "2611e1acbd57955d591d52e5348999ea293e068d",
+  "wbs": {
+    "新版ID": "A1-02.02",
+    "第58版ID": "A1-02.02",
+    "費用主担当項目": "P004-05",
+    "計画窓": "繰越",
+    "予定期間・週末": "2026-12-20までの計画週",
+    "作業・成果物": "旧未登録群の証跡照合・必要な通常PT api（JdbcSyncRequestProcessor.java）",
+    "先行ID・着手条件": "対象・所有・許可を確認",
+    "担当": "API・DB担当",
+    "旧短期残pp": "1.65",
+    "改訂残pp": "1.65",
+    "終了条件": "対象ごとの再利用根拠、必要な修正/通常PTの結果、又は未完と必要条件を記録。費用消化だけで閉鎖しない。",
+    "元項目の正式受入に必要な証拠": "残るAPI先行4行、実ApiJdbcPoolとJdbcSyncRequestProcessorのcommit・rollback、UTC、実DB後条件。",
+    "参照する元項目": "P004-05",
+    "lineNumber": 17
+  },
+  "priorScope": "31 tests / 12 suites, original SSC329/SSC330 prior source only",
+  "independentPrograms": [
+    "PT-AUT-TX-001..004",
+    "PT-TX-BOUNDARY329001..002",
+    "PT-TX-GRAPH329001..008",
+    "PT-TX-ATTACH330001..003"
+  ],
+  "currentArtifactAndFixtureMetadata": {
+    "JdbcSyncRequestProcessor": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/JdbcSyncRequestProcessor.java",
+      "previous": "fea6d72d0c2c62d3a253bd64b274f467979732d3",
+      "current": "fea6d72d0c2c62d3a253bd64b274f467979732d3",
+      "unchanged": true
+    },
+    "TemporaryInfrastructureException": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/error/TemporaryInfrastructureException.java",
+      "previous": "d93894c3cb6a666865ff1817e4610eecacf1780f",
+      "current": "d93894c3cb6a666865ff1817e4610eecacf1780f",
+      "unchanged": true
+    },
+    "JdbcRollbackAttachment330Test": {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/dispatch/JdbcRollbackAttachment330Test.java",
+      "previous": "14e4beb3004273fd84a90bced36c03c49d728753",
+      "current": "634fa962ecdfea0939804bffb3f1ccd2c8ba09ea",
+      "unchanged": false
+    },
+    "JdbcTransactionBoundary329Test": {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/dispatch/JdbcTransactionBoundary329Test.java",
+      "previous": "26c2bd967aebb3ad190752a4ede58f3afd8f326b",
+      "current": "f901be7d4009d122aa361ca4c03615027339897d",
+      "unchanged": false
+    },
+    "JdbcTransactionFatal329Test": {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/dispatch/JdbcTransactionFatal329Test.java",
+      "previous": "b316d1def9e6a416b8499de2435ffd6894d0cf51",
+      "current": "bdc7266f62ab34cbc2338235605c96244d84dde7",
+      "unchanged": false
+    }
+  },
+  "previous": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG6574-jdbc-attachment-qualification-v1/manifest.json",
+    "sha256": "f8fb1042d4bd310987153659d7b1e51ca95a8d6337ae3df7d0e9c830efa8c5d0"
+  },
+  "sourceOnlyContracts": [
+    "owned close, rollback attempted once before propagating failure",
+    "normal response only after commit",
+    "business/protocol rejection distinct from unknown close/commit",
+    "one fixed secondary and fatal identity"
+  ],
+  "blocker": [
+    "QA056 exact TemporaryInfrastructureException applies despite no I/O in ordinary fixtures",
+    "three fixture byte changes against historical 31; same-current typed run needed after authorization",
+    "actual PostgreSQL UTC/SQL effects and F02/F03 end dependencies remain"
+  ],
+  "noHeldClassReads": true,
+  "actualBackendActions": 0,
+  "ordinaryTestsExecuted": 0,
+  "disposition": "TRANSACTION_ORACLE_INTAKE_COMPLETE_CURRENT_QA056_AND_DB_HOLD",
+  "formalAcceptanceId": null,
+  "whole451": false,
+  "terminalAtUTC": "2026-11-21T16:08:00.162308+00:00",
+  "exitCode": 0
+}
