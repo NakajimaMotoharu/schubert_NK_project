@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.Instant;
 import java.util.UUID;
@@ -38,7 +37,7 @@ final class OutboxModelTest {
     assertEquals(NOW.minusSeconds(1), entry.createdAt());
     assertEquals("worker-a", entry.leaseOwner());
     assertEquals(NOW.plusSeconds(10), entry.leaseUntil());
-    assertTrue(entry.toString().contains("body=<redacted>"));
+    assertEquals("OutboxEntry[<redacted>]", entry.toString());
     assertFalse(entry.toString().contains("[1, 2, 3]"));
   }
 
@@ -110,7 +109,7 @@ final class OutboxModelTest {
     assertArrayEquals(bytes(), request.body());
     assertEquals(NOW, request.nextAttemptAt());
     assertEquals(NOW.minusSeconds(1), request.createdAt());
-    assertTrue(request.toString().contains("body=<redacted>"));
+    assertEquals("OutboxRequest[<redacted>]", request.toString());
 
     assertThrows(
         NullPointerException.class,
