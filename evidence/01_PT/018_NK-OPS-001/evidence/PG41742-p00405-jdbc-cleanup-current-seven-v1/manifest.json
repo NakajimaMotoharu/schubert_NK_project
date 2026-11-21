@@ -1,0 +1,179 @@
+{
+  "run": "PG41742",
+  "wbs": "WBS-P004-05/2",
+  "source": "2a6e32d23693983d22becff65098de2e3d25a667",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-21T23:42:10.093655+00:00",
+  "priorInputReceipt": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38298-p00405-jdbc-ownership-current-receipt-v1/manifest.json",
+    "sha256": "de69c92577c16d1277c46f7323e92b170949729fbf8796ab27e0f86373bb5fc2"
+  },
+  "originalSuites": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG34042-ssc425-session26-independent-v1/sanitized-TEST-junit-jupiter.xml",
+    "sha256": "42fa8df5a130a94a5baf70088771bc4a500f140b434ec17672faa86d283db05f"
+  },
+  "priorRaw": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG34044-ssc425-session26-unfiltered-same-exec-v1/manifest.json",
+    "sha256": "5d566ae55227dbf165ae1ab0d8a6c65b8fa476e7cd954d32660545146292662f"
+  },
+  "sourcePins": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/JdbcResourceCleanup.java",
+      "sha256": "614b497aa86335988521334eb519c689aa1a056318d93e345e6faf8bd0137a5a"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/JdbcResourceCleanupTest.java",
+      "sha256": "4b217bc193580f03e3a9b2106aca425996a59a71bac1457b3e9ae7eb4cef06c9"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/package-info.java",
+      "sha256": "9f28051696b527a1dee26618b554c0bf6f9d47cdc7324dcba733cb896156e04e"
+    }
+  ],
+  "fixtureClassHashes": {
+    "dev/codex/schubert/nk/api/database/JdbcResourceCleanupTest$OwnerClose.class": "50fa083fd9b64d2c270330d92a5b62323e94e728d129a569684b45f95b85ffe2",
+    "dev/codex/schubert/nk/api/database/JdbcResourceCleanupTest.class": "5bccd752c90dd68d24a82fdb668c5f1b4e2ba161b0bf1ef39af5b28b41fa9e4e"
+  },
+  "productionPhysicalHashes": {
+    "dev/codex/schubert/nk/api/database/JdbcResourceCleanup$SqlClose.class": "9fcd74ced464e6a3cea357a3f05b41a6fdb0dc61c270e304e7d218ecc515087e",
+    "dev/codex/schubert/nk/api/database/JdbcResourceCleanup.class": "d47d9894aedcbc07debbe71de9feca20e3452a7dedb5da5e4f7b470efd530586"
+  },
+  "toolArgs": [
+    [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+      "--release",
+      "25",
+      "-g",
+      "-proc:none",
+      "-implicit:none",
+      "-encoding",
+      "UTF-8",
+      "-Xlint:all",
+      "-Werror",
+      "-cp",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+      "-d",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41742-jdbc-cleanup-current-seven-v1/prod",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/JdbcResourceCleanup.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/package-info.java"
+    ],
+    [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+      "--release",
+      "25",
+      "-g",
+      "-proc:none",
+      "-implicit:none",
+      "-encoding",
+      "UTF-8",
+      "-Xlint:all",
+      "-Werror",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41742-jdbc-cleanup-current-seven-v1/prod:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+      "-d",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41742-jdbc-cleanup-current-seven-v1/fixtures",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/JdbcResourceCleanupTest.java"
+    ]
+  ],
+  "dependencyArgs": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/jdeps",
+    "--multi-release",
+    "25",
+    "-verbose:class",
+    "-filter:none",
+    "--class-path",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41742-jdbc-cleanup-current-seven-v1/prod",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41742-jdbc-cleanup-current-seven-v1/fixtures"
+  ],
+  "tools": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7"
+  },
+  "typedDirectDependencies": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41742-jdbc-cleanup-current-seven-v1/jdeps.txt",
+    "sha256": "ec93800717581b0b77b2547e6a7385d7301d0a686aaf7aa61aa5d76fb8a1b9d1"
+  },
+  "exactReuse": [
+    {
+      "testId": "PT-JDBC-CLEANUP001",
+      "method": "cleanup001NullActionFailsAtTheExplicitCallBoundary",
+      "expectation": "Null action raises NullPointerException at the helper boundary"
+    },
+    {
+      "testId": "PT-JDBC-CLEANUP002",
+      "method": "cleanup002SuccessfulCloseRunsOnceAndLeavesThePrimaryGraphUnchanged",
+      "expectation": "Successful action called exactly once; incoming primary retains an empty suppressed list"
+    },
+    {
+      "testId": "PT-JDBC-CLEANUP003",
+      "method": "cleanup003FailedCloseWithoutPrimaryPropagatesTheSameSqlRuntimeOrError",
+      "expectation": "Each SQL/runtime/Error failure remains the same object without primary and close was called once"
+    },
+    {
+      "testId": "PT-JDBC-CLEANUP004",
+      "method": "cleanup004FailedCloseRetainsTheExactPrimaryAndSuppressedIdentity",
+      "expectation": "A distinct secondary is the sole suppressed reference on the original primary; action called once"
+    },
+    {
+      "testId": "PT-JDBC-CLEANUP005",
+      "method": "cleanup005AliasedFailurePreservesTheJdkSelfSuppressionCause",
+      "expectation": "Self-suppression keeps JDK IllegalArgumentException with the exact original cause and zero appended values"
+    },
+    {
+      "testId": "PT-JDBC-CLEANUP006",
+      "method": "cleanup006TypedStatementOwnerPreservesAllFailureGraphsAndClosesOnce",
+      "expectation": "Typed Statement proxy sees just its close once per case; null/primary/alias/branch cases retain identity"
+    },
+    {
+      "testId": "PT-JDBC-CLEANUP007",
+      "method": "cleanup007TypedRowOwnerPreservesAllFailureGraphsAndClosesOnce",
+      "expectation": "Typed ResultSet proxy sees just its close once per case; null/primary/alias/branch cases retain identity"
+    }
+  ],
+  "helperOriginalRawCounters": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 48
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 6
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 21
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 6
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 3
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "earlierStaticApplicability": {
+    "receipt": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37066-f03-jdbc-close46-applicability-v1/manifest.json",
+      "sha256": "9273b8dc11029fb35556bb2b4a1cb4f2050d6f21d1c5e678a3092bee55057496"
+    },
+    "cases46Only": true,
+    "includesThisHelper": false,
+    "remainingUnmatched": 247
+  },
+  "spec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/4301_SSC425_型付きJDBC終了所有補足仕様.md",
+    "sha256": "551ea780b22e10d827f534dd09fdab89df64a69af4a1b50f9eafebbd5a966177"
+  },
+  "ordinaryTestReplayCount": 0,
+  "missingDirectOrderedTwoSecondariesCase": true,
+  "currentDatabaseOrOtherLiveScopeTested": false,
+  "formalAcceptanceId": null
+}
