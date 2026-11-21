@@ -1,0 +1,99 @@
+{
+  "run": "PG41508-f03-music-current-typed-pmd-v1",
+  "source": "e5a70bf6090ffb35b6062981d1bf404ccf7940c1",
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41508-f03-music-current-typed-pmd-v1/manifest.json",
+    "sha256": "fc749f000888dfe0d8aec3ae542ae08f740d0c0187702fcb0565b4498bbdefbf"
+  },
+  "exactSource": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java",
+      "sha256": "5fec6396eb39b7a598a9b0addfc9ce2da64a85052cdf55912fbb0a270c1d145a"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/HttpRequestLoggingValve.java",
+      "sha256": "19af893a76f867e565339218b60043d667f745d494df1085916036f6c3f0a66f"
+    }
+  ],
+  "rules": {
+    "path": "tools/quality/static/pmd.xml",
+    "sha256": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de"
+  },
+  "existingOwnerTestScope": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37772-web-trace-current24-independent-v1/manifest.json",
+    "sha256": "f6029050e306d91496f8d50b38b61d28bab9fe7b98ecd2831f36eaa5b67e91ca"
+  },
+  "observedFindings": 7,
+  "processingErrors": 0,
+  "applicable": 0,
+  "unclassified": 0,
+  "newSuppressions": 0,
+  "noWholeGatePromotion": true,
+  "decisions": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java",
+      "rule": "AvoidUsingVolatile",
+      "begin": 64,
+      "end": 64,
+      "priority": 2,
+      "disposition": "NOT_APPLICABLE_TO_VERIFIED_OWNER_CONTRACT",
+      "basis": "Single-slot publication of an immutable snapshot; the reader performs a simple volatile read and the setter a simple write, with no read-modify-write contract."
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java",
+      "rule": "CloseResource",
+      "begin": 137,
+      "end": 137,
+      "priority": 3,
+      "disposition": "NOT_APPLICABLE_TO_VERIFIED_OWNER_CONTRACT",
+      "basis": "Borrowed dispatch scope read. The owning valve closes the scope in its existing finally; closing the lookup here would end the outer dispatch early."
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java",
+      "rule": "DoNotUseThreads",
+      "begin": 188,
+      "end": 188,
+      "priority": 3,
+      "disposition": "NOT_APPLICABLE_TO_VERIFIED_OWNER_CONTRACT",
+      "basis": "Stores identity of the already-running dispatch thread. No new thread, control or scheduler is created."
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java",
+      "rule": "DoNotUseThreads",
+      "begin": 194,
+      "end": 194,
+      "priority": 3,
+      "disposition": "NOT_APPLICABLE_TO_VERIFIED_OWNER_CONTRACT",
+      "basis": "Observes the existing dispatch owner. No launch, blocking or configuration of a thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java",
+      "rule": "CompareObjectsWithEquals",
+      "begin": 202,
+      "end": 202,
+      "priority": 3,
+      "disposition": "NOT_APPLICABLE_TO_VERIFIED_OWNER_CONTRACT",
+      "basis": "Identity of the exact owning thread is the contract; value comparison would not express alternate owner rejection."
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java",
+      "rule": "DoNotUseThreads",
+      "begin": 202,
+      "end": 202,
+      "priority": 3,
+      "disposition": "NOT_APPLICABLE_TO_VERIFIED_OWNER_CONTRACT",
+      "basis": "Compares against the current dispatch owner before close; no thread management."
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java",
+      "rule": "CompareObjectsWithEquals",
+      "begin": 205,
+      "end": 205,
+      "priority": 3,
+      "disposition": "NOT_APPLICABLE_TO_VERIFIED_OWNER_CONTRACT",
+      "basis": "Identity of the innermost same-thread scope is the rule. Equality of projected values would not prove stack ownership."
+    }
+  ],
+  "terminalAtUTC": "2026-11-21T16:03:02.846179+00:00",
+  "exitCode": 0
+}
