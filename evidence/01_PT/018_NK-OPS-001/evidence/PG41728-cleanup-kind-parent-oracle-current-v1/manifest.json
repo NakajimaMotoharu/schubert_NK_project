@@ -1,0 +1,178 @@
+{
+  "run": "PG41728",
+  "source": "9bda71d271af7215dfe07a1cc9674f10e28b651c",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-P017-07.03/2",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-21T22:38:33.492097+00:00",
+  "canonicalDesign": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+  "designReferences": {
+    "331": {
+      "path": "documents/300_SS/330_データ・ファイル/331_DB物理・DDL・index・権限設計.md",
+      "sha256": "f57d908ade963d03a7f1dd12dc93e0bd89fefa27223c674c3d363014913c64de",
+      "line": 529
+    },
+    "332": {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "sha256": "4c09a2f66d9cb4def976c24d2952953aa5a287a0d545548dc4feda4968ff5bef",
+      "line": 453
+    },
+    "341": {
+      "path": "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md",
+      "sha256": "857b4062d624ab8b99a2bfc72524f380c655c930db9388755968981e7c76d6c5",
+      "line": 537
+    }
+  },
+  "expectedParentSteps": {
+    "NOTIFICATIONS": "CLEAN_NOTIFICATION",
+    "QUESTIONS": "CLEAN_QUESTION",
+    "SESSIONS": "CLEAN_SESSION",
+    "OUTBOX": "CLEAN_INBOX_OUTBOX",
+    "LOGS": "CLEAN_LOG",
+    "WEB_RECEIPTS": "CLEAN_BATCH_RUN",
+    "BATCH_RUNS": "CLEAN_BATCH_RUN",
+    "INBOX_PROGRESS": "CLEAN_BATCH_RUN",
+    "LOG_PROGRESS": "CLEAN_BATCH_RUN"
+  },
+  "currentRegularJar": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41074-f02-current-alert-batch-maven-v1/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "276c45bf138b351cb0a0a6bc46dc61881fabb1b17b2b09347b4feea4cfea76a6"
+  },
+  "kindSha256": "f7e6207a992c3f5236caeec30a26601e08743614230e2a1bcdcb7959a83e8556",
+  "currentKindSource": {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupKind.java",
+    "sha256": "3b44cff07b6f6b57ebad36a1adb2f6e48934d7eaae0c35ea3283af06a7ccb03f"
+  },
+  "classCrc": "42a5bd6c1cc33cad",
+  "classFileEvidence": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41728-cleanup-kind-parent-v1/javap.txt",
+    "sha256": "fd135065e2979d623d785e64cc643b09d6160080c147489e5e53d6693755e8d8"
+  },
+  "originalCurrentMetadataRun": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41726-cleanup-metadata-coverage-v1/manifest.json",
+    "sha256": "df3bf29a2dc73d9f1fae118ae4715e793470a83bb959128b0c620e940a2a1985"
+  },
+  "unmutatedOriginalMisses": {
+    "valueOf": "10",
+    "step": "44"
+  },
+  "otherSingleExecProvesFullScopedClass": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35104-step-observation10-unfiltered-same-exec-v1/manifest.json",
+    "sha256": "99b143c46acb547378920d2bb9fb91453be7582a4ce115ebb05e600e43c80d12"
+  },
+  "oldCaseProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35102-step-observation10-independent-v1/manifest.json",
+    "sha256": "f1188aa2f7edb668f9b654797f7f5fc30d295e3687d8dcf2d99dcd9f3e6cba45"
+  },
+  "historicalEnumOracle": {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/EnumValueCatalogCompatibilityTest.java",
+    "sha256": "14222dbfc80a510098b3dc85497688f6a863e79a3b1d5722aa4fe2a40bde23a5"
+  },
+  "historicEnumJunitXml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG16478-batch-enum-catalog-original-two-post-v1/TEST-dev.codex.schubert.nk.batch.repository.EnumValueCatalogCompatibilityTest.xml",
+    "sha256": "e2f4b77026f0dd9a078137ea723d98fe273570c6319ed2821a4542a3b9f9a333"
+  },
+  "historicOtherCatalogChecksNotClaimedAsCurrent": true,
+  "qualifiedExactPureTestId": "BAT154 (existing PG35100/02 case; already counted in 2101)",
+  "candidateCompileTimeMethod": "valueOf compiled enum method, delegates to java.lang.Enum.valueOf",
+  "businessMethod": "step reads the SS-defined parentStep field",
+  "actualExactPastCounters": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 159
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 0
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 18
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 8
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 8
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "methodSpecificCoverage": [
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/CleanupKind",
+      "name": "valueOf",
+      "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/batch/repository/CleanupKind;",
+      "access": 9,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 5
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/CleanupKind",
+      "name": "step",
+      "descriptor": "()Ldev/codex/schubert/nk/batch/repository/BatchStep;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    }
+  ],
+  "coverageExecMerged": false,
+  "additionalTestExecutions": 0,
+  "formalAcceptanceId": null,
+  "residual": [
+    "Real FK/retention and database-owned commit outcomes",
+    "Full scope 451 and ending dependencies WBS-P004-01 and WBS-P004-03"
+  ]
+}

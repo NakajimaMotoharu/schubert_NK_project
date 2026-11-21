@@ -1,0 +1,80 @@
+{
+  "run": "PG41732",
+  "source": "9bda71d271af7215dfe07a1cc9674f10e28b651c",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "A1-15.03",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-21T22:42:18.842525+00:00",
+  "priorLineage": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41486-a11503-durable-record-native-lineage-v1/manifest.json",
+    "sha256": "24d0c656b6c519a2da511851d67ea3af954fe0dc9922920eb9db24b4f620959a"
+  },
+  "priorSourceReferences": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/pg5192-durable-worker-scopes-green-v1-metadata-v2/manifest.json",
+      "sha256": "7e1a53ece151abbb32a4f0f5cb522ef1e3e857d0e0ed106215dbbe0f3154331d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38304-p00403-a115-retained-file-evidence-v1/manifest.json",
+      "sha256": "fd26de3ac5b5b77a8500893cab82b7f7300a5f09398eca058b6f972f13390637"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39700-p00403-five-artifacts-current-lineage-v1/manifest.json",
+      "sha256": "3330f615bf9ba231d66eb5a2e89689a990aec2f6753ca7a4f99d1d252a21c7ab"
+    }
+  ],
+  "sameCurrentInputs": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/DurableRecordFiles.java",
+      "currentSha256": "411726e5d96ccda9e8fa83c6861e8f1d5957aba39118e5aca8ffc6b3f962cbc5",
+      "exactPG38304Input": true,
+      "exactOriginalNativeFixtureInput": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/DurableRecordFilesTest.java",
+      "currentSha256": "8e3324f27c7fbe7d16beed9e10d180c92238a8e9d98b1f6b7f3d2314f54a57bd",
+      "exactPG38304Input": true,
+      "exactOriginalNativeFixtureInput": false
+    }
+  ],
+  "persistentOwnerHold": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41154-p00403-current-three-owner-evidence-v1/manifest.json",
+    "sha256": "3248cb634c33e4a89f396734e4cbd6bb4a5d94eba244bbee7a5b9d21c730a5d4"
+  },
+  "staticScopeVerified": {
+    "className": "dev/codex/schubert/nk/batch/file/DurableRecordFiles.class",
+    "sha256": "5b7efbc1f30cc010eed35098ece9e3e1c65d496c93c6741b328a30e6794a9c11",
+    "measuredBy": "PG40482→PG41140"
+  },
+  "staticProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41718-f03-current-batch-scope-receipt-v1/manifest.json",
+    "sha256": "9f0c50db98e8f985dfec248d922b3f662e77097af63834dba7fbb48d10d7e33c"
+  },
+  "sameHeldNativeRuntimeNotCoveredByStatic": true,
+  "initialAuditCorrection": "Typed evidence already covers DurableRecordFiles.class. The separately held owner row governs the native runtime, not the recognized static class.",
+  "wholeNativeFixtureCount": 12,
+  "testIdRange": "PT-BAT-046..057",
+  "historicalRunnerExit": 1,
+  "historicalPostExit": 0,
+  "currentOrReusableSuccessfulInvocations": 0,
+  "applicability": "Test-created temporary directory still delegates to LinuxDirectoryCalls. Other direct companion callers also construct that fixture class. No separately admitted pure temporary-file result found for this program after the prior cited baseline.",
+  "originNativeMethodSourcePins": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/DurableRecordFilesTest.java",
+      "sha256": "8e3324f27c7fbe7d16beed9e10d180c92238a8e9d98b1f6b7f3d2314f54a57bd"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MaintenanceRetirementRecordsTest.java",
+      "sha256": "f3aafc9ea0ef24317484f51e3d609045aa23178d52b77880df6a282df7bf6d7e"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MaintenanceRunFilesTest.java",
+      "sha256": "b8bad141acc659bb30120e99493322ac6d71620ce5339417aa3dc84a3bad1844"
+    }
+  ],
+  "actualNativeOrFileOperations": 0,
+  "testClassByteReads": 0,
+  "executedProductTests": 0,
+  "formalAcceptanceId": null,
+  "remaining": "Same-source owned runtime and genuine independent terminal result, then P004-03 owning DB/FileStore requirements and F02/F03."
+}
