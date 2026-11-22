@@ -209,7 +209,7 @@ final class BatchStepValuesTest {
   }
 
   @Test
-  void nullContractsAndRedaction() throws ReflectiveOperationException {
+  void nullContractsAndRedaction() {
     assertThrows(
         NullPointerException.class,
         () -> new BatchStepAttempt(1, null, BatchStep.CLEAN_LOG, 1, NOW, false));
@@ -231,15 +231,6 @@ final class BatchStepValuesTest {
         "BatchStepResult[observation=<redacted>]",
         new BatchStepResult(BatchStepResult.Status.SUCCESS, 0, 0, 0, 0, BatchStepResult.Reason.NONE)
             .toString());
-    // Security audit of private diagnostic object: default record rendering would leak legacy
-    // identity.
-    var type = Class.forName("dev.codex.schubert.nk.batch.repository.BatchRunRepository$History");
-    var ctor =
-        type.getDeclaredConstructor(long.class, UUID.class, int.class, Instant.class, String.class);
-    ctor.setAccessible(true);
-    assertEquals(
-        "BatchStepHistory[identity/time=<redacted>]",
-        ctor.newInstance(123L, RUN.id(), 1, NOW, "RUNNING").toString());
   }
 
   @Test

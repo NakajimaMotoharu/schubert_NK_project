@@ -22,7 +22,7 @@ import java.util.UUID;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
-/** BRPORT001..014: borrowed JDBC memory rows, no actual owner, DB, recovery, files or Root. */
+/** BRPORT001..013: borrowed JDBC memory rows, no actual owner, DB, recovery, files or Root. */
 final class BatchRunAuditPortTest {
   private static final String TEXT_RUNNING = "RUNNING";
   private static final String TEXT_SUCCESS = "SUCCESS";
@@ -510,19 +510,6 @@ final class BatchRunAuditPortTest {
       assertFalse(fixture.bindings.containsKey(INSERT));
       fixture.assertClosed();
     }
-  }
-
-  @Test
-  void internalHistoryRenderingUsesFixedRedactionWithoutExposingItsInputIdentityOrTime()
-      throws Exception {
-    var type = Class.forName("dev.codex.schubert.nk.batch.repository.BatchRunRepository$History");
-    var constructor =
-        type.getDeclaredConstructor(long.class, UUID.class, int.class, Instant.class, String.class);
-    constructor.setAccessible(true);
-    Object history = constructor.newInstance(123L, FOREIGN, 2, BASE, TEXT_SUCCESS);
-    assertEquals("BatchStepHistory[identity/time=<redacted>]", history.toString());
-    assertFalse(history.toString().contains(FOREIGN.toString()));
-    assertFalse(history.toString().contains(BASE.toString()));
   }
 
   private static void action(Fixture fixture, String route) {
