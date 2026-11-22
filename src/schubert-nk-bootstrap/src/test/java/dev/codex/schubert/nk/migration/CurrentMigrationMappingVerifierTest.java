@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -15,6 +16,7 @@ import java.util.HashMap;
 import java.util.HexFormat;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
@@ -38,23 +40,88 @@ final class CurrentMigrationMappingVerifierTest {
   private static final Map<String, Integer> TWO =
       Map.of(PART_FILES, 2, PART_ENTRIES, 2, PART_SPEAKERS, 2, PART_AUDIO, 2);
   private static final String NORMAL =
-      "NKMIGMAPPING1\nFILES\t2\t37\t9c5820c79b521c94a56a2b07bf070756a1e7fe84f64b090740e1338483ee867a\nNKMIGFILEORDER1\n1\t-5\t101\t1\n2\t5\t401\t1\nENTRIES\t2\t56\t412afc944908b31f37ee180a3c3043262ebed7643c2d240f8b23e683ca6657cf\nNKMIGENTRYPLACEMENT1\n-10\t201\t1\t1\t101\t0\n20\t901\t2\t2\t401\t0\nSPEAKERS\t2\t58\tf07376a3f3c4c9c13d3b20eab12b5626091eeee779babebb68d74d8e1fcf6dc6\ngame_id\tcurrent_speaker_id\ttarget_speaker_id\n1\t-3\t1\n2\t4\t6\nAUDIO\t2\t56\t80b919a39739429d9c905d3a1730aba0faa88a340155c2bb0a50889b41720cb3\ngame_id\tcurrent_audio_id\ttarget_audio_id\n1\t-5\t21\n2\t8\t32\n";
+      "NKMIGMAPPING1\n"
+          + "FILES\t2\t37\t9c5820c79b521c94a56a2b07bf070756a1e7fe84f64b090740e1338483ee867a\n"
+          + "NKMIGFILEORDER1\n"
+          + "1\t-5\t101\t1\n"
+          + "2\t5\t401\t1\n"
+          + "ENTRIES\t2\t56\t412afc944908b31f37ee180a3c3043262ebed7643c2d240f8b23e683ca6657cf\n"
+          + "NKMIGENTRYPLACEMENT1\n"
+          + "-10\t201\t1\t1\t101\t0\n"
+          + "20\t901\t2\t2\t401\t0\n"
+          + "SPEAKERS\t2\t58\tf07376a3f3c4c9c13d3b20eab12b5626091eeee779babebb68d74d8e1fcf6dc6\n"
+          + "game_id\tcurrent_speaker_id\ttarget_speaker_id\n"
+          + "1\t-3\t1\n"
+          + "2\t4\t6\n"
+          + "AUDIO\t2\t56\t80b919a39739429d9c905d3a1730aba0faa88a340155c2bb0a50889b41720cb3\n"
+          + "game_id\tcurrent_audio_id\ttarget_audio_id\n"
+          + "1\t-5\t21\n"
+          + "2\t8\t32\n";
   private static final String NORMAL_HASH =
       "33a5b664c4abaa54e4f2d403e70a3f2545aa6395a06ebcc7196f404749985ca4";
   private static final String EMPTY =
-      "NKMIGMAPPING1\nFILES\t0\t16\tfee61b49e4c39e9062c2c6e845fefe03ca5160ce7b8881791b8338085d7e473a\nNKMIGFILEORDER1\nENTRIES\t0\t21\t5946c60b76d7bd7a3efa92a5bcc5d773d9e558a3b6260baea98e9e104ede6f30\nNKMIGENTRYPLACEMENT1\nSPEAKERS\t0\t45\t6ba2aea78407a77e5467625c22e68382bd06a746d097af921057a0f89a3acc13\ngame_id\tcurrent_speaker_id\ttarget_speaker_id\nAUDIO\t0\t41\t6a09be7493407eb5d1d18db65c2de8d7898eef78648b626ab8d0c81005cdede5\ngame_id\tcurrent_audio_id\ttarget_audio_id\n";
+      "NKMIGMAPPING1\n"
+          + "FILES\t0\t16\tfee61b49e4c39e9062c2c6e845fefe03ca5160ce7b8881791b8338085d7e473a\n"
+          + "NKMIGFILEORDER1\n"
+          + "ENTRIES\t0\t21\t5946c60b76d7bd7a3efa92a5bcc5d773d9e558a3b6260baea98e9e104ede6f30\n"
+          + "NKMIGENTRYPLACEMENT1\n"
+          + "SPEAKERS\t0\t45\t6ba2aea78407a77e5467625c22e68382bd06a746d097af921057a0f89a3acc13\n"
+          + "game_id\tcurrent_speaker_id\ttarget_speaker_id\n"
+          + "AUDIO\t0\t41\t6a09be7493407eb5d1d18db65c2de8d7898eef78648b626ab8d0c81005cdede5\n"
+          + "game_id\tcurrent_audio_id\ttarget_audio_id\n";
   private static final String EMPTY_HASH =
       "83b87552a2f59f743b0c28ad12ed8bbb5e0f38c4a3794c68a29f35a3974284e9";
   private static final String ONE_FILE =
-      "NKMIGMAPPING1\nFILES\t1\t25\t4f704e2edf473a1a5c2cc3cb29a168f3acac78f61fc276ce87c9f9c5b1c8db6f\nNKMIGFILEORDER1\n1\t9\t90\t1\nENTRIES\t0\t21\t5946c60b76d7bd7a3efa92a5bcc5d773d9e558a3b6260baea98e9e104ede6f30\nNKMIGENTRYPLACEMENT1\nSPEAKERS\t0\t45\t6ba2aea78407a77e5467625c22e68382bd06a746d097af921057a0f89a3acc13\ngame_id\tcurrent_speaker_id\ttarget_speaker_id\nAUDIO\t0\t41\t6a09be7493407eb5d1d18db65c2de8d7898eef78648b626ab8d0c81005cdede5\ngame_id\tcurrent_audio_id\ttarget_audio_id\n";
+      "NKMIGMAPPING1\n"
+          + "FILES\t1\t25\t4f704e2edf473a1a5c2cc3cb29a168f3acac78f61fc276ce87c9f9c5b1c8db6f\n"
+          + "NKMIGFILEORDER1\n"
+          + "1\t9\t90\t1\n"
+          + "ENTRIES\t0\t21\t5946c60b76d7bd7a3efa92a5bcc5d773d9e558a3b6260baea98e9e104ede6f30\n"
+          + "NKMIGENTRYPLACEMENT1\n"
+          + "SPEAKERS\t0\t45\t6ba2aea78407a77e5467625c22e68382bd06a746d097af921057a0f89a3acc13\n"
+          + "game_id\tcurrent_speaker_id\ttarget_speaker_id\n"
+          + "AUDIO\t0\t41\t6a09be7493407eb5d1d18db65c2de8d7898eef78648b626ab8d0c81005cdede5\n"
+          + "game_id\tcurrent_audio_id\ttarget_audio_id\n";
   private static final String ONE_FILE_HASH =
       "ac411723896848964fb14c8fac3945bc758ffa1bdc1ffc83ac9a872775df07f5";
   private static final String BOUNDARY =
-      "NKMIGMAPPING1\nFILES\t2\t80\t88acd97c20f6df8d75afce084077141f0e712d07ecc23433e17c110ddba60aa9\nNKMIGFILEORDER1\n1\t-9223372036854775808\t1\t1\n2\t9223372036854775807\t999999999999\t1\nENTRIES\t2\t104\t9fd7e5409bb4fbe3b2f0fae72677416a00dfd435ab8b5af8497105fe4a745364\nNKMIGENTRYPLACEMENT1\n-9223372036854775808\t2\t1\t1\t1\t0\n9223372036854775807\t999999999998\t2\t2\t999999999999\t0\nSPEAKERS\t2\t105\tedb26e744dfe8422bf5e0227298e221f8ac22ca834ca4a84e9b25e1a48357c7f\ngame_id\tcurrent_speaker_id\ttarget_speaker_id\n1\t-9223372036854775808\t3\n2\t9223372036854775807\t999999999997\nAUDIO\t2\t101\tb57f5526485b2caa8e18a6d45578cfc2ad1214726ef1284a7935da83145ae37c\ngame_id\tcurrent_audio_id\ttarget_audio_id\n1\t-9223372036854775808\t4\n2\t9223372036854775807\t999999999996\n";
+      "NKMIGMAPPING1\n"
+          + "FILES\t2\t80\t88acd97c20f6df8d75afce084077141f0e712d07ecc23433e17c110ddba60aa9\n"
+          + "NKMIGFILEORDER1\n"
+          + "1\t-9223372036854775808\t1\t1\n"
+          + "2\t9223372036854775807\t999999999999\t1\n"
+          + "ENTRIES\t2\t104\t9fd7e5409bb4fbe3b2f0fae72677416a00dfd435ab8b5af8497105fe4a745364\n"
+          + "NKMIGENTRYPLACEMENT1\n"
+          + "-9223372036854775808\t2\t1\t1\t1\t0\n"
+          + "9223372036854775807\t999999999998\t2\t2\t999999999999\t0\n"
+          + "SPEAKERS\t2\t105\tedb26e744dfe8422bf5e0227298e221f8ac22ca834ca4a84e9b25e1a48357c7f\n"
+          + "game_id\tcurrent_speaker_id\ttarget_speaker_id\n"
+          + "1\t-9223372036854775808\t3\n"
+          + "2\t9223372036854775807\t999999999997\n"
+          + "AUDIO\t2\t101\tb57f5526485b2caa8e18a6d45578cfc2ad1214726ef1284a7935da83145ae37c\n"
+          + "game_id\tcurrent_audio_id\ttarget_audio_id\n"
+          + "1\t-9223372036854775808\t4\n"
+          + "2\t9223372036854775807\t999999999996\n";
   private static final String BOUNDARY_HASH =
       "d2d9bfab039646d27abd0afb8694553fbd4df6eedfff93dd92e82e19acf8b0e5";
   private static final String OVERLAP =
-      "NKMIGMAPPING1\nFILES\t2\t37\t9c5820c79b521c94a56a2b07bf070756a1e7fe84f64b090740e1338483ee867a\nNKMIGFILEORDER1\n1\t-5\t101\t1\n2\t5\t401\t1\nENTRIES\t2\t56\t412afc944908b31f37ee180a3c3043262ebed7643c2d240f8b23e683ca6657cf\nNKMIGENTRYPLACEMENT1\n-10\t201\t1\t1\t101\t0\n20\t901\t2\t2\t401\t0\nSPEAKERS\t2\t62\t934746dd24a1e6367a1dae234c329f84312825da86d8586743954cbcd277f96f\ngame_id\tcurrent_speaker_id\ttarget_speaker_id\n1\t-3\t101\n2\t4\t401\nAUDIO\t2\t58\t4e877fc321c01cb7c528dc76f55199881138951b6dd806fb2b13ef30ca3be6e3\ngame_id\tcurrent_audio_id\ttarget_audio_id\n1\t-5\t101\n2\t8\t401\n";
+      "NKMIGMAPPING1\n"
+          + "FILES\t2\t37\t9c5820c79b521c94a56a2b07bf070756a1e7fe84f64b090740e1338483ee867a\n"
+          + "NKMIGFILEORDER1\n"
+          + "1\t-5\t101\t1\n"
+          + "2\t5\t401\t1\n"
+          + "ENTRIES\t2\t56\t412afc944908b31f37ee180a3c3043262ebed7643c2d240f8b23e683ca6657cf\n"
+          + "NKMIGENTRYPLACEMENT1\n"
+          + "-10\t201\t1\t1\t101\t0\n"
+          + "20\t901\t2\t2\t401\t0\n"
+          + "SPEAKERS\t2\t62\t934746dd24a1e6367a1dae234c329f84312825da86d8586743954cbcd277f96f\n"
+          + "game_id\tcurrent_speaker_id\ttarget_speaker_id\n"
+          + "1\t-3\t101\n"
+          + "2\t4\t401\n"
+          + "AUDIO\t2\t58\t4e877fc321c01cb7c528dc76f55199881138951b6dd806fb2b13ef30ca3be6e3\n"
+          + "game_id\tcurrent_audio_id\ttarget_audio_id\n"
+          + "1\t-5\t101\n"
+          + "2\t8\t401\n";
   private static final String OVERLAP_HASH =
       "1e856526747d19fa4761cccfc05dff7dc276e04dc2eb4a7ee5ef2cc1eacb0868";
   private static final List<String> PARTS =
@@ -65,7 +132,7 @@ final class CurrentMigrationMappingVerifierTest {
           "game_id\tcurrent_audio_id\ttarget_audio_id\n1\t-5\t21\n2\t8\t32\n");
 
   @Test
-  void mapverify001FiveIndependentGoldenArtifactsAndCounts() throws Exception {
+  void mapverify001FiveIndependentGoldenArtifactsAndCounts() throws NoSuchAlgorithmException {
     var verifier = new CurrentMigrationMappingVerifier();
     assertEquals(TWO, verifier.verify(bytes(NORMAL), NORMAL_HASH));
     assertEquals(TWO, verifier.verify(bytes(BOUNDARY), BOUNDARY_HASH));
@@ -80,7 +147,7 @@ final class CurrentMigrationMappingVerifierTest {
   }
 
   @Test
-  void mapverify002MissingAndMalformedExpectedHashNeverNormalize() throws Exception {
+  void mapverify002MissingAndMalformedExpectedHashNeverNormalize() {
     var verifier = new CurrentMigrationMappingVerifier();
     reject(verifier, null, NORMAL_HASH);
     reject(verifier, bytes(NORMAL), null);
@@ -91,7 +158,7 @@ final class CurrentMigrationMappingVerifierTest {
   }
 
   @Test
-  void mapverify003WholeDigestMismatchAndInputAreUnchanged() throws Exception {
+  void mapverify003WholeDigestMismatchAndInputAreUnchanged() throws NoSuchAlgorithmException {
     byte[] changed = bytes(NORMAL);
     changed[changed.length - 1] = 0;
     reject(new CurrentMigrationMappingVerifier(), changed, NORMAL_HASH);
@@ -103,7 +170,8 @@ final class CurrentMigrationMappingVerifierTest {
   }
 
   @Test
-  void mapverify004MagicAndEveryShortPrefixFailEvenWithMatchingDigest() throws Exception {
+  void mapverify004MagicAndEveryShortPrefixFailEvenWithMatchingDigest()
+      throws NoSuchAlgorithmException {
     for (int length = 0; length <= bytes(MAGIC).length; length++)
       reject(Arrays.copyOf(bytes(NORMAL), length));
     byte[] wrong = bytes(NORMAL);
@@ -112,7 +180,8 @@ final class CurrentMigrationMappingVerifierTest {
   }
 
   @Test
-  void mapverify005KindOrderUnknownDuplicateMissingAndTrailingBytes() throws Exception {
+  void mapverify005KindOrderUnknownDuplicateMissingAndTrailingBytes()
+      throws NoSuchAlgorithmException {
     for (int part = 0; part < KINDS.size(); part++)
       for (String kind : List.of("", "unknown", "files", KINDS.get((part + 1) % KINDS.size()))) {
         var wire = new Wire();
@@ -129,7 +198,7 @@ final class CurrentMigrationMappingVerifierTest {
   }
 
   @Test
-  void mapverify006HeaderArityAsciiControlLengthAndNewline() throws Exception {
+  void mapverify006HeaderArityAsciiControlLengthAndNewline() throws NoSuchAlgorithmException {
     for (String header :
         List.of(
             PART_FILES,
@@ -152,7 +221,7 @@ final class CurrentMigrationMappingVerifierTest {
   }
 
   @Test
-  void mapverify007CountAndLengthCanonicalDecimalAndOverflow() throws Exception {
+  void mapverify007CountAndLengthCanonicalDecimalAndOverflow() throws NoSuchAlgorithmException {
     for (int field : List.of(1, 2))
       for (String value :
           List.of(
@@ -183,7 +252,7 @@ final class CurrentMigrationMappingVerifierTest {
   }
 
   @Test
-  void mapverify008AllPartDigestFieldsAndPayloadBounds() throws Exception {
+  void mapverify008AllPartDigestFieldsAndPayloadBounds() throws NoSuchAlgorithmException {
     for (int part = 0; part < KINDS.size(); part++) {
       for (String hash :
           List.of(
@@ -199,7 +268,7 @@ final class CurrentMigrationMappingVerifierTest {
   }
 
   @Test
-  void mapverify009ChildHeadersRowsColumnsLineLimitsAndControl() throws Exception {
+  void mapverify009ChildHeadersRowsColumnsLineLimitsAndControl() throws NoSuchAlgorithmException {
     for (int part = 0; part < KINDS.size(); part++) {
       String childHeader = PARTS.get(part).split("\n", -1)[0];
       for (String body :
@@ -234,7 +303,7 @@ final class CurrentMigrationMappingVerifierTest {
   }
 
   @Test
-  void mapverify010SignedLongLexicalAndUnsignedBounds() throws Exception {
+  void mapverify010SignedLongLexicalAndUnsignedBounds() throws NoSuchAlgorithmException {
     for (String value :
         List.of(
             "",
@@ -263,7 +332,8 @@ final class CurrentMigrationMappingVerifierTest {
   }
 
   @Test
-  void mapverify011FileGamePkTargetOrderAndDerivedDisplayAreCanonical() throws Exception {
+  void mapverify011FileGamePkTargetOrderAndDerivedDisplayAreCanonical()
+      throws NoSuchAlgorithmException {
     for (String game : List.of("0", "3")) {
       var wire = new Wire();
       wire.cell(0, 0, 0, game);
@@ -293,7 +363,8 @@ final class CurrentMigrationMappingVerifierTest {
   }
 
   @Test
-  void mapverify012EntryFileGamePkOrderIndexAndIndependentTargets() throws Exception {
+  void mapverify012EntryFileGamePkOrderIndexAndIndependentTargets()
+      throws NoSuchAlgorithmException {
     var wire = new Wire();
     wire.cell(1, 0, 4, "999");
     reject(wire.encode());
@@ -323,7 +394,7 @@ final class CurrentMigrationMappingVerifierTest {
   }
 
   @Test
-  void mapverify013SpeakerPkGameTargetAndCurrentCanonicalOrder() throws Exception {
+  void mapverify013SpeakerPkGameTargetAndCurrentCanonicalOrder() throws NoSuchAlgorithmException {
     for (String game : List.of("0", "3")) {
       var wire = new Wire();
       wire.cell(2, 0, 0, game);
@@ -350,7 +421,7 @@ final class CurrentMigrationMappingVerifierTest {
   }
 
   @Test
-  void mapverify014AudioGameN12AndStrictCurrentAndTargetOrder() throws Exception {
+  void mapverify014AudioGameN12AndStrictCurrentAndTargetOrder() throws NoSuchAlgorithmException {
     for (String game : List.of("0", "3")) {
       var wire = new Wire();
       wire.cell(3, 0, 0, game);
@@ -379,7 +450,8 @@ final class CurrentMigrationMappingVerifierTest {
   }
 
   @Test
-  void mapverify015ImmutableCountsRedactionAndFreshFailureIsolation() throws Exception {
+  void mapverify015ImmutableCountsRedactionAndFreshFailureIsolation()
+      throws NoSuchAlgorithmException {
     var verifier = new CurrentMigrationMappingVerifier();
     byte[] source = bytes(NORMAL);
     byte[] before = source.clone();
@@ -394,7 +466,8 @@ final class CurrentMigrationMappingVerifierTest {
   }
 
   @Test
-  void mapverify016SharedVerifierHasFiniteIndependentSnapshots() throws Exception {
+  void mapverify016SharedVerifierHasFiniteIndependentSnapshots()
+      throws InterruptedException, ExecutionException {
     var verifier = new CurrentMigrationMappingVerifier();
     var executor = Executors.newFixedThreadPool(WORKERS);
     try {
@@ -420,11 +493,11 @@ final class CurrentMigrationMappingVerifierTest {
     return text.getBytes(StandardCharsets.UTF_8);
   }
 
-  private static String hash(byte[] data) throws Exception {
+  private static String hash(byte[] data) throws NoSuchAlgorithmException {
     return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(data));
   }
 
-  private static void reject(byte[] data) throws Exception {
+  private static void reject(byte[] data) throws NoSuchAlgorithmException {
     reject(new CurrentMigrationMappingVerifier(), data, hash(data));
   }
 
@@ -438,7 +511,7 @@ final class CurrentMigrationMappingVerifierTest {
     assertArrayEquals(before, data);
   }
 
-  private static void valid(Wire wire) throws Exception {
+  private static void valid(Wire wire) throws NoSuchAlgorithmException {
     byte[] data = wire.encode();
     assertEquals(TWO, new CurrentMigrationMappingVerifier().verify(data, hash(data)));
   }
@@ -448,7 +521,7 @@ final class CurrentMigrationMappingVerifierTest {
     private final Map<Integer, String> overrides = new HashMap<>();
     private String suffix = "";
 
-    private String header(int index) throws Exception {
+    private String header(int index) throws NoSuchAlgorithmException {
       String body = parts.get(index);
       byte[] data = bytes(body);
       String base =
@@ -462,7 +535,7 @@ final class CurrentMigrationMappingVerifierTest {
       return overrides.getOrDefault(index, base);
     }
 
-    private void field(int index, int field, String value) throws Exception {
+    private void field(int index, int field, String value) throws NoSuchAlgorithmException {
       String[] fields = header(index).split("\t", -1);
       fields[field] = value;
       overrides.put(index, String.join("\t", fields));
@@ -483,7 +556,7 @@ final class CurrentMigrationMappingVerifierTest {
       parts.set(part, lines[0] + "\n" + String.join("\n", rows) + "\n");
     }
 
-    private byte[] encode() throws Exception {
+    private byte[] encode() throws NoSuchAlgorithmException {
       var text = new StringBuilder(MAGIC);
       for (int index = 0; index < KINDS.size(); index++)
         text.append(header(index)).append('\n').append(parts.get(index));

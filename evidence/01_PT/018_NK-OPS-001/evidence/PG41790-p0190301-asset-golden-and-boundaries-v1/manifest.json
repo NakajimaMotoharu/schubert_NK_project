@@ -1,0 +1,144 @@
+{
+  "run": "PG41790",
+  "source": "886c5f355cd2de100a68e0eb1ae9f7783bae675c",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-P019-03.01/2",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T00:58:59.519649+00:00",
+  "exactFixtureProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41788-p0190301-asset-claim-contract-v1/manifest.json",
+    "sha256": "450cf1362b8e68322095abd0133a1657d22c3684c9f919daf5e1a63d41d8d026"
+  },
+  "originalXML": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33292-mapverify976-post-v5/original-TEST-junit-jupiter.xml",
+    "sha256": "a55172a64a07208df0457588e90e237cb456f5a36ee780adb89da50596333079"
+  },
+  "design": [
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "sha256": "3874975e619ba279814df4d6f79fd161098756cad882e00d580651fb2d7387cb",
+      "line": 921,
+      "quoteCore": "296e2a52af315462c992c1abf4e1c0fa8b3f4f47a828d9508d7ae59199f793b7"
+    }
+  ],
+  "conditions": [
+    {
+      "testId": "PT-MIG-ASSET001",
+      "junitMethod": "asset001CanonicalGolden()",
+      "originalResult": "PASS",
+      "oracle": {
+        "canonicalBytes": 211,
+        "canonicalSha": "2f7624f76e3982174b1202b3d8fa6df0bfbbe5fc18b994c95ccfb847cb16dea2",
+        "fixedEntryOrder": [
+          "SCENARIO",
+          "AUDIO"
+        ],
+        "numFiles": 2,
+        "numBytes": 3
+      }
+    },
+    {
+      "testId": "PT-MIG-ASSET002",
+      "junitMethod": "asset002ValidPathsAndKinds()",
+      "originalResult": "PASS",
+      "oracle": {
+        "kinds": [
+          "SCENARIO",
+          "AUDIO",
+          "VIDEO",
+          "MUSIC"
+        ],
+        "paths": [
+          "simple",
+          "NFC",
+          "unicode scalar edges",
+          "colon and space"
+        ],
+        "combinations": 16,
+        "emptyManifestSHA": "b03d5634424ff1f7ee28b5a9ec278346b6cb6aede3d8f13d02647289fe9768c4",
+        "maxLength": 9223372036854775807
+      }
+    },
+    {
+      "testId": "PT-MIG-ASSET003",
+      "junitMethod": "asset003InvalidPaths()",
+      "originalResult": "PASS",
+      "oracle": {
+        "invalidVectors": 20,
+        "atThreeBoundaries": [
+          "current relative path",
+          "target relative path",
+          "observed target relative path"
+        ],
+        "failedAsExpectedCalls": 60,
+        "desc": "empty, rooted, separator/backslash, dot, non-NFC, surrogate, ISO C0/C1"
+      }
+    },
+    {
+      "testId": "PT-MIG-ASSET004",
+      "junitMethod": "asset004NullContracts()",
+      "originalResult": "PASS",
+      "oracle": {
+        "nullInputs": 10,
+        "existingFailFastNullPolicy": "explicit NullPointerException on constructor/fixture public invalid arguments",
+        "normalSuccessForInvalid": false
+      }
+    },
+    {
+      "testId": "PT-MIG-ASSET005",
+      "junitMethod": "asset005InvalidSizesAndHashes()",
+      "originalResult": "PASS",
+      "oracle": {
+        "invalidHashStrings": 5,
+        "negativeLengths": 2,
+        "fixedLowerHexPositive": "0000000000000000000000000000000000000000000000000000000000000000"
+      }
+    },
+    {
+      "testId": "PT-MIG-ASSET006",
+      "junitMethod": "asset006DuplicatePaths()",
+      "originalResult": "PASS",
+      "oracle": {
+        "covered": [
+          "duplicate current",
+          "duplicate target",
+          "duplicate observed target",
+          "input remains unchanged on duplicate"
+        ]
+      }
+    },
+    {
+      "testId": "PT-MIG-ASSET007",
+      "junitMethod": "asset007CheckedAggregateOverflow()",
+      "originalResult": "PASS",
+      "oracle": {
+        "signedLongMax": 9223372036854775807,
+        "declaredOverflow": 9223372036854775808,
+        "observedOverflow": 9223372036854775808,
+        "exactMaxAccepted": true
+      }
+    },
+    {
+      "testId": "PT-MIG-ASSET008",
+      "junitMethod": "asset008ImmutableOwnership()",
+      "originalResult": "PASS",
+      "oracle": {
+        "immutableList": true,
+        "callerMutationPreservedTwo": true,
+        "returnedBytesMutableWithoutAliasing": true,
+        "canonicalShaAfterMutation": "2f7624f76e3982174b1202b3d8fa6df0bfbbe5fc18b994c95ccfb847cb16dea2"
+      }
+    }
+  ],
+  "coverageNew": null,
+  "currentExactPriorCasesThisGroup": 8,
+  "totalOriginalDeclaredAssetCases": 12,
+  "replayed": 0,
+  "formalAcceptanceId": null,
+  "remaining": [
+    "actual source inventory and file SHA/inode",
+    "SSC417 24 approved SDK/COPY",
+    "Current original and DB parity",
+    "451 and review"
+  ]
+}

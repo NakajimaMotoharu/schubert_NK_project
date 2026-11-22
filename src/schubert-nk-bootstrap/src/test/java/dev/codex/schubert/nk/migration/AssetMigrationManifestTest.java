@@ -16,6 +16,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
@@ -299,7 +300,8 @@ final class AssetMigrationManifestTest {
   }
 
   @Test
-  void assetGenerated003EntryHashUsesIndependentPolynomialAndJvmIdentity() throws Exception {
+  void assetGenerated003EntryHashUsesIndependentPolynomialAndJvmIdentity()
+      throws InterruptedException, ExecutionException {
     for (var kind : List.of(Kind.SCENARIO, Kind.AUDIO, Kind.VIDEO, Kind.MUSIC)) {
       int expected =
           (int)
@@ -388,10 +390,12 @@ final class AssetMigrationManifestTest {
   @Test
   void assetGenerated008ComparisonTextContainsOnlyTheDeclaredAggregateCounts() {
     assertEquals(
-        "Comparison[missingFiles=1, unexpectedFiles=2, sizeMismatches=3, hashMismatches=4, observedFiles=5, observedBytes=6]",
+        "Comparison[missingFiles=1, unexpectedFiles=2, sizeMismatches=3, hashMismatches=4,"
+            + " observedFiles=5, observedBytes=6]",
         new Comparison(1, 2, 3, 4, 5, 6).toString());
     assertEquals(
-        "Comparison[missingFiles=0, unexpectedFiles=0, sizeMismatches=0, hashMismatches=0, observedFiles=0, observedBytes=0]",
+        "Comparison[missingFiles=0, unexpectedFiles=0, sizeMismatches=0, hashMismatches=0,"
+            + " observedFiles=0, observedBytes=0]",
         new Comparison(0, 0, 0, 0, 0, 0).toString());
   }
 }
