@@ -13,7 +13,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 from pgpt_evidence_checksums import write_scope_checksums
-from pgpt_reactor_junit import MODULE_DIRECTORIES, verify_reactor_junit
+from pgpt_reactor_junit import MODULE_DIRECTORIES, compiled_class_paths, verify_reactor_junit
 from pgpt_evidence_destination import evidence_output_root
 
 
@@ -71,21 +71,6 @@ def validate_module_coverage(report):
     if root != totals:
         raise ValueError("module JaCoCo counters disagree with package totals")
     return root
-
-
-def compiled_class_names(directory):
-    if not directory.is_dir() or directory.absolute() != directory.resolve():
-        raise ValueError("missing or redirected compiled Main directory")
-    names = set()
-    for path in directory.rglob("*"):
-        if path.is_symlink():
-            raise ValueError("redirected compiled Main input")
-        if path.is_file() and path.suffix == ".class":
-            name = path.relative_to(directory).with_suffix("").as_posix().replace("/", ".")
-            if name in names:
-                raise ValueError("duplicate compiled Main class name")
-            names.add(name)
-    return names
 
 
 def validate_module_spotbugs(report, expected_classes):
@@ -189,7 +174,8 @@ def main():
         static = "not configured for characterization runner"
         if module != "characterization":
             spot = ET.parse(target / "spotbugsXml.xml").getroot()
-            static = validate_module_spotbugs(spot, compiled_class_names(target / "classes"))
+            physical = compiled_class_paths(target / "classes")
+            static = validate_module_spotbugs(spot, set(physical))
         modules[module] = {"tests": count, "coverage": counters, "spotbugs": static}
     if not methods:
         raise SystemExit("missing Scenario tests")

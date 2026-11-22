@@ -134,7 +134,7 @@ class EvidenceSetTest(unittest.TestCase):
             package.mkdir(parents=True)
             for name in ("Root.class", "Root$Inner.class", "local.properties"):
                 (package / name).write_bytes(b"synthetic bytes")
-            actual = scenario.compiled_class_names(classes)
+            actual = set(scenario.compiled_class_paths(classes))
             self.assertEqual({"fixture.Root", "fixture.Root$Inner"}, actual)
             result = scenario.validate_module_spotbugs(self._fixture_spotbugs(), actual)
             self.assertEqual(2, result["analysedClasses"])

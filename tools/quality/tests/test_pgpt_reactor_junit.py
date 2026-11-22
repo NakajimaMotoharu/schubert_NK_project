@@ -1,4 +1,4 @@
-"""Fixed synthetic reactor receipts for PT-OPS-G09-JUNIT001..010."""
+"""Fixed synthetic receipts for PT-OPS-G09-JUNIT001..010 and PT-OPS-G08-RAW001..004."""
 
 import hashlib
 import json
@@ -45,11 +45,22 @@ class ReactorJunitTest(unittest.TestCase):
         ):
             self.marker(suffix).write_text(value + "\n")
         self.paths = []
+        self.quality = []
         for module in MODULES:
             path = self.repo / module / "target/surefire-reports/TEST-fixture.Unit.xml"
             path.parent.mkdir(parents=True)
             path.write_bytes(REPORT)
             self.paths.append(path)
+            target = path.parent.parent
+            relatives = ["jacoco.exec", "site/jacoco/jacoco.xml", "site/jacoco/jacoco.csv",
+                         "classes/fixture/Unit.class"]
+            if module != "program/characterization":
+                relatives.append("spotbugsXml.xml")
+            for relative in relatives:
+                raw = target / relative
+                raw.parent.mkdir(parents=True, exist_ok=True)
+                raw.write_bytes(("synthetic " + module + "/" + relative).encode())
+                self.quality.append(raw)
 
     def marker(self, suffix):
         return self.runs / (RUN + suffix)
@@ -151,6 +162,60 @@ class ReactorJunitTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "commit does not match"):
             verify_reactor_junit(self.repo, RUN, "b" * 40, self.runs)
         self.marker(".log").write_text("different synthetic log\n")
+        with self.assertRaisesRegex(ValueError, "differs"):
+            self.verify()
+
+    def test_quality_hashes_include_every_declared_report_and_real_class_path(self):
+        self.success()
+        decoded = json.loads(self.verify())
+        self.assertEqual("pgpt-reactor-junit-v2", decoded["schema"])
+        expected = {
+            path.relative_to(self.repo).as_posix(): hashlib.sha256(path.read_bytes()).hexdigest()
+            for path in self.quality
+        }
+        self.assertEqual(34, len(expected))
+        self.assertEqual(expected, decoded["qualityArtifacts"])
+        self.assertNotIn("program/characterization/target/spotbugsXml.xml", expected)
+
+    def test_later_jacoco_static_or_class_replacement_cannot_share_the_original_receipt(self):
+        self.success()
+        names = {"jacoco.exec", "jacoco.xml", "jacoco.csv", "spotbugsXml.xml", "Unit.class"}
+        checked = set()
+        for original in self.quality:
+            if original.name not in names - checked:
+                continue
+            with self.subTest(name=original.name):
+                retained = original.read_bytes()
+                original.write_bytes(b"replacement with the same path")
+                with self.assertRaisesRegex(ValueError, "differs"):
+                    self.verify()
+                original.write_bytes(retained)
+                checked.add(original.name)
+        self.assertEqual(names, checked)
+
+    def test_missing_empty_aliased_quality_and_missing_main_fail_before_success(self):
+        compiled = next(p for p in self.quality if p.name == "Unit.class")
+        raw_coverage = next(p for p in self.quality if p.name == "jacoco.exec")
+        content = compiled.read_bytes()
+        compiled.unlink()
+        with self.assertRaisesRegex(ValueError, "missing compiled Main"):
+            self.capture()
+        compiled.write_bytes(content)
+        raw_coverage.write_bytes(b"")
+        with self.assertRaisesRegex(ValueError, "missing, empty or redirected"):
+            self.capture()
+        raw_coverage.unlink()
+        raw_coverage.symlink_to(self.paths[0])
+        with self.assertRaisesRegex(ValueError, "missing, empty or redirected"):
+            self.capture()
+
+    def test_original_junit_only_receipt_cannot_be_used_for_a_new_candidate(self):
+        self.success()
+        receipt = self.marker(".junit.json")
+        old = json.loads(receipt.read_bytes())
+        old["schema"] = "pgpt-reactor-junit-v1"
+        del old["qualityArtifacts"]
+        receipt.write_text(json.dumps(old, sort_keys=True, indent=2) + "\n")
         with self.assertRaisesRegex(ValueError, "differs"):
             self.verify()
 

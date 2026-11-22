@@ -1,4 +1,4 @@
-"""Bind the reactor's original JUnit bytes to its successful terminal record."""
+"""Bind the original reactor quality artifacts to its successful terminal record."""
 
 import argparse
 import hashlib
@@ -57,6 +57,37 @@ def _report(content):
     return {"sha256": _digest(content), "tests": len(cases)}
 
 
+def compiled_class_paths(directory):
+    if not directory.is_dir() or directory.absolute() != directory.resolve():
+        raise ValueError("missing or redirected compiled Main directory")
+    classes = {}
+    for path in directory.rglob("*"):
+        if path.is_symlink():
+            raise ValueError("redirected compiled Main input")
+        if path.is_file() and path.suffix == ".class":
+            name = path.relative_to(directory).with_suffix("").as_posix().replace("/", ".")
+            if name in classes:
+                raise ValueError("duplicate compiled Main class name")
+            classes[name] = path
+    return classes
+
+
+def quality_artifact_hashes(target, module):
+    coverage = ("jacoco.exec", "site/jacoco/jacoco.xml", "site/jacoco/jacoco.csv")
+    reports = [target / path for path in coverage]
+    if module != "characterization":
+        reports.append(target / "spotbugsXml.xml")
+    classes = compiled_class_paths(target / "classes")
+    if not classes:
+        raise ValueError("missing compiled Main classes for " + module)
+    hashes = {}
+    for path in [*reports, *classes.values()]:
+        if not path.is_file() or path.absolute() != path.resolve() or path.stat().st_size == 0:
+            raise ValueError("missing, empty or redirected reactor quality artifact for " + module)
+        hashes[path.relative_to(target).as_posix()] = _file_digest(path)
+    return hashes
+
+
 def _snapshot(repo, run, commit, directory):
     if not re.fullmatch(r"[0-9a-f]{40}", commit):
         raise ValueError("invalid reactor commit")
@@ -64,9 +95,11 @@ def _snapshot(repo, run, commit, directory):
     if commit != observed:
         raise ValueError("reactor commit does not match")
     reports = {}
+    quality = {}
     repo = repo.resolve()
     for module, path in MODULE_DIRECTORIES:
-        folder = repo / path / "target/surefire-reports"
+        target = repo / path / "target"
+        folder = target / "surefire-reports"
         files = sorted(folder.glob("TEST-*.xml"))
         if not files:
             raise ValueError("missing original reactor JUnit reports for " + module)
@@ -74,14 +107,17 @@ def _snapshot(repo, run, commit, directory):
             if not file.is_file() or file != file.resolve():
                 raise ValueError("reactor report must be a local regular file")
             reports[file.relative_to(repo).as_posix()] = _report(file.read_bytes())
+        for relative, sha256 in quality_artifact_hashes(target, module).items():
+            quality[(target.relative_to(repo) / relative).as_posix()] = sha256
     return {
-        "schema": "pgpt-reactor-junit-v1",
+        "schema": "pgpt-reactor-junit-v2",
         "runId": run,
         "targetCommit": commit,
         "startedAt": _run_path(directory, run, ".started").read_text().strip(),
         "completedAt": _run_path(directory, run, ".completed").read_text().strip(),
         "buildLogSha256": _file_digest(_run_path(directory, run, ".log")),
         "reports": reports,
+        "qualityArtifacts": quality,
     }
 
 
@@ -105,7 +141,7 @@ def verify_reactor_junit(repo, run, commit, directory=Path("/tmp")):
     manifest = _run_path(directory, run, ".junit.json")
     content = manifest.read_bytes()
     if _serialize(_snapshot(repo, run, commit, directory)) != content:
-        raise ValueError("reactor JUnit differs from the successful terminal record")
+        raise ValueError("reactor quality input differs from the successful terminal record")
     return content
 
 
