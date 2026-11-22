@@ -11,9 +11,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
@@ -306,7 +308,12 @@ final class CurrentScenarioFileMapperTest {
   @Test
   void fileMap018IndependentFixedCopyBytesPreserveGameRelativeDisplay() {
     String expected =
-        "900\t1\t1\tassets/g1/a.txt\t文章/T/a.txt\ta.txt\t A \tChapter\tba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad\t3\t2026-01-02T03:04:05Z\n700\t2\t1\tassets/g2/a.txt\t文章/T/a.txt\ta.txt\t\\N\t\\N\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\t0\t2026-01-02T03:04:05Z\n";
+        "900\t1\t1\tassets/g1/a.txt\t文章/T/a.txt\ta.txt\t A \tChapter"
+            + "\tba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad\t3"
+            + "\t2026-01-02T03:04:05Z\n"
+            + "700\t2\t1\tassets/g2/a.txt\t文章/T/a.txt\ta.txt\t\\N\t\\N"
+            + "\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\t0"
+            + "\t2026-01-02T03:04:05Z\n";
     assertEquals(
         expected,
         new String(
@@ -383,7 +390,8 @@ final class CurrentScenarioFileMapperTest {
   }
 
   @Test
-  void fileMap024FiniteParallelCallsConsumeOnlyPrivateClaimMaps() throws Exception {
+  void fileMap024FiniteParallelCallsConsumeOnlyPrivateClaimMaps()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var m = mapper();
     var executor = Executors.newFixedThreadPool(WORKERS);
     try {
