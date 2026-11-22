@@ -14,9 +14,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
@@ -49,7 +51,7 @@ final class AudioCopyDatasetTest {
   private static final long MAX_N12 = 999999999999L;
 
   @Test
-  void independentAudioAndLinkGoldenHaveExactSeparateStreams() throws Exception {
+  void independentAudioAndLinkGoldenHaveExactSeparateStreams() throws IOException {
     var dataset = normal();
     var audio = new MemorySink();
     var links = new MemorySink();
@@ -62,7 +64,7 @@ final class AudioCopyDatasetTest {
   }
 
   @Test
-  void emptyAudioOnlyAndEntryOnlyDeclareNoImaginaryLinks() throws Exception {
+  void emptyAudioOnlyAndEntryOnlyDeclareNoImaginaryLinks() throws IOException {
     for (var dataset :
         List.of(
             new AudioCopyDataset(emptyEntries(), List.of(), List.of()),
@@ -250,7 +252,7 @@ final class AudioCopyDatasetTest {
   }
 
   @Test
-  void bothOutputBoundariesRejectNullWriterOrSinkAndNeverCloseOrFlush() throws Exception {
+  void bothOutputBoundariesRejectNullWriterOrSinkAndNeverCloseOrFlush() throws IOException {
     var dataset = normal();
     assertEquals(
         DIAGNOSTIC,
@@ -272,14 +274,19 @@ final class AudioCopyDatasetTest {
   }
 
   @Test
-  void bothOriginalIoFailuresAreRetainedWithoutClosingOrMutatingDataset() throws Exception {
+  void bothOriginalIoFailuresAreRetainedWithoutClosingOrMutatingDataset() throws IOException {
     var dataset = normal();
     var original = new IOException("synthetic IO");
     var sink = new FailingSink(original);
-    assertSame(original, assertThrows(IOException.class, () -> dataset.writeAudio(writer(), sink)));
-    assertSame(original, assertThrows(IOException.class, () -> dataset.writeLinks(writer(), sink)));
-    assertFalse(sink.closed);
-    assertFalse(sink.flushed);
+    try (sink) {
+      assertSame(
+          original, assertThrows(IOException.class, () -> dataset.writeAudio(writer(), sink)));
+      assertSame(
+          original, assertThrows(IOException.class, () -> dataset.writeLinks(writer(), sink)));
+      assertEquals(0, sink.closes);
+      assertFalse(sink.flushed);
+    }
+    assertEquals(1, sink.closes);
     var retry = new MemorySink();
     dataset.writeLinks(writer(), retry);
     assertArrayEquals(LINK_GOLDEN.getBytes(StandardCharsets.UTF_8), retry.toByteArray());
@@ -324,7 +331,8 @@ final class AudioCopyDatasetTest {
   }
 
   @Test
-  void finiteWorkersObserveIndependentGoldenStreamsFromTheImmutableDataset() throws Exception {
+  void finiteWorkersObserveIndependentGoldenStreamsFromTheImmutableDataset()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var dataset = normal();
     var executor = Executors.newFixedThreadPool(WORKERS);
     try {
@@ -351,7 +359,7 @@ final class AudioCopyDatasetTest {
   }
 
   @Test
-  void fixedRedactionAndIndependentSuccessDoNotRetainRejectedValues() throws Exception {
+  void fixedRedactionAndIndependentSuccessDoNotRetainRejectedValues() throws IOException {
     rejectLinkField(3, "private invalid type");
     var dataset = normal();
     assertEquals("AudioCopyDataset[REDACTED]", dataset.toString());
@@ -468,7 +476,7 @@ final class AudioCopyDatasetTest {
 
   private static final class FailingSink extends OutputStream {
     private final IOException failure;
-    private boolean closed;
+    private int closes;
     private boolean flushed;
 
     private FailingSink(IOException failure) {
@@ -482,7 +490,7 @@ final class AudioCopyDatasetTest {
 
     @Override
     public void close() {
-      closed = true;
+      closes++;
     }
 
     @Override
