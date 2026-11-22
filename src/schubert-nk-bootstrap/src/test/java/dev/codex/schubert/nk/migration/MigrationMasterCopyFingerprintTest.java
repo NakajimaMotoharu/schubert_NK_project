@@ -183,7 +183,7 @@ final class MigrationMasterCopyFingerprintTest {
   }
 
   @Test
-  void finger002AllEmptyFixedSha256AndZeroRowsBytes() throws Exception {
+  void finger002AllEmptyFixedSha256AndZeroRowsBytes() throws IOException, NoSuchAlgorithmException {
     assertEquals(
         EMPTY_METADATA, metadata(new MigrationMasterCopyFingerprint().fingerprint(emptyMaster())));
   }
@@ -539,7 +539,7 @@ final class MigrationMasterCopyFingerprintTest {
             stamp));
   }
 
-  private static MediaAssetCopyBatch media(String stamp) throws Exception {
+  private static MediaAssetCopyBatch media(String stamp) {
     var manifest =
         new AssetMigrationManifest(
             List.of(

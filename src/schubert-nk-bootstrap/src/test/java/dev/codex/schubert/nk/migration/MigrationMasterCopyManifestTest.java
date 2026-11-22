@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.charset.StandardCharsets;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -31,17 +32,50 @@ final class MigrationMasterCopyManifestTest {
   private static final int WAIT_SECONDS = 5;
   private static final int TERMINATION_SECONDS = 10;
   private static final String NORMAL_VECTOR =
-      "NKMIGCOPY1\nMAPPING\ta9dd686885362b4e2455c9ada4770fcbafd983819fee70ca02a0177323bd0500\nspeakers\t1\t46\t7075f6a72b05c4cff3830220732aa044852d3c871eb3c016c550015c2aa501ac\nscript_files\t1\t141\t57621009e943ae8a6da658cc58070e0442f5af23a9300ef631e6a6fe4302e101\nscript_entries\t1\t63\tae22539e017a3b2884b3cd62b362ad1738ce54a5d2459693d8c670c9c0eafe95\naudio_files\t1\t136\t5916f31fc39b26175b3383fc5944e9972fb532fa30e76ac8f70e0de18070cbe3\nmedia_assets\t1\t169\t8d47e701d4300e31892e1ee4516660581c632689da66c0cad440be50954b30fe\nentry_audio_links\t1\t39\tcaed946009561acc38580f847b47b139f453a88356b204b73391bcb5cc4f9eef\n";
+      "NKMIGCOPY1\n"
+          + "MAPPING\ta9dd686885362b4e2455c9ada4770fcbafd983819fee70ca02a0177323bd0500\n"
+          + "speakers\t1\t46\t7075f6a72b05c4cff3830220732aa044852d3c871eb3c016c550015c2aa501ac\n"
+          + "script_files\t1\t141"
+          + "\t57621009e943ae8a6da658cc58070e0442f5af23a9300ef631e6a6fe4302e101\n"
+          + "script_entries\t1\t63"
+          + "\tae22539e017a3b2884b3cd62b362ad1738ce54a5d2459693d8c670c9c0eafe95\n"
+          + "audio_files\t1\t136"
+          + "\t5916f31fc39b26175b3383fc5944e9972fb532fa30e76ac8f70e0de18070cbe3\n"
+          + "media_assets\t1\t169"
+          + "\t8d47e701d4300e31892e1ee4516660581c632689da66c0cad440be50954b30fe\n"
+          + "entry_audio_links\t1\t39"
+          + "\tcaed946009561acc38580f847b47b139f453a88356b204b73391bcb5cc4f9eef\n";
   private static final String NORMAL_HASH =
       "744f7e0bd0a7dd16ab4454db3c0852c244101d25b22692de2cf167adb5dbdc90";
   private static final String EMPTY_VECTOR =
-      "NKMIGCOPY1\nMAPPING\t83b87552a2f59f743b0c28ad12ed8bbb5e0f38c4a3794c68a29f35a3974284e9\nspeakers\t0\t0\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nscript_files\t0\t0\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nscript_entries\t0\t0\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\naudio_files\t0\t0\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nmedia_assets\t0\t0\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nentry_audio_links\t0\t0\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\n";
+      "NKMIGCOPY1\n"
+          + "MAPPING\t83b87552a2f59f743b0c28ad12ed8bbb5e0f38c4a3794c68a29f35a3974284e9\n"
+          + "speakers\t0\t0\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\n"
+          + "script_files\t0\t0\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\n"
+          + "script_entries\t0\t0"
+          + "\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\n"
+          + "audio_files\t0\t0\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\n"
+          + "media_assets\t0\t0\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\n"
+          + "entry_audio_links\t0\t0"
+          + "\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\n";
   private static final String EMPTY_HASH =
       "4444698baa3c905644477124201c2c291637b7c8441ed296c30acb231b1dcd90";
   private static final String NORMAL_MAPPING_HASH =
       "a9dd686885362b4e2455c9ada4770fcbafd983819fee70ca02a0177323bd0500";
   private static final String DIFFERENT =
-      "NKMIGCOPY1\nMAPPING\t72b30638441593e9069a088afaca956ce235dfb5c8a2edd795732eaa41f3ea44\nspeakers\t1\t46\t7075f6a72b05c4cff3830220732aa044852d3c871eb3c016c550015c2aa501ac\nscript_files\t1\t141\t57621009e943ae8a6da658cc58070e0442f5af23a9300ef631e6a6fe4302e101\nscript_entries\t1\t63\tae22539e017a3b2884b3cd62b362ad1738ce54a5d2459693d8c670c9c0eafe95\naudio_files\t1\t136\t5916f31fc39b26175b3383fc5944e9972fb532fa30e76ac8f70e0de18070cbe3\nmedia_assets\t1\t169\t8d47e701d4300e31892e1ee4516660581c632689da66c0cad440be50954b30fe\nentry_audio_links\t1\t39\tcaed946009561acc38580f847b47b139f453a88356b204b73391bcb5cc4f9eef\n";
+      "NKMIGCOPY1\n"
+          + "MAPPING\t72b30638441593e9069a088afaca956ce235dfb5c8a2edd795732eaa41f3ea44\n"
+          + "speakers\t1\t46\t7075f6a72b05c4cff3830220732aa044852d3c871eb3c016c550015c2aa501ac\n"
+          + "script_files\t1\t141"
+          + "\t57621009e943ae8a6da658cc58070e0442f5af23a9300ef631e6a6fe4302e101\n"
+          + "script_entries\t1\t63"
+          + "\tae22539e017a3b2884b3cd62b362ad1738ce54a5d2459693d8c670c9c0eafe95\n"
+          + "audio_files\t1\t136"
+          + "\t5916f31fc39b26175b3383fc5944e9972fb532fa30e76ac8f70e0de18070cbe3\n"
+          + "media_assets\t1\t169"
+          + "\t8d47e701d4300e31892e1ee4516660581c632689da66c0cad440be50954b30fe\n"
+          + "entry_audio_links\t1\t39"
+          + "\tcaed946009561acc38580f847b47b139f453a88356b204b73391bcb5cc4f9eef\n";
   private static final String DIFFERENT_HASH =
       "e377044a13ed472d31cb6b1518f7004b8661a7330102b82d8e929a903d8d5cde";
 
@@ -195,7 +229,8 @@ final class MigrationMasterCopyManifestTest {
     assertNull(failure.getCause());
   }
 
-  static CurrentMigrationMappingManifest mappings(int extra, long currentSpeaker) throws Exception {
+  static CurrentMigrationMappingManifest mappings(int extra, long currentSpeaker)
+      throws NoSuchAlgorithmException {
     var files = new ArrayList<ScenarioFileMigrationMap.FilePair>();
     files.add(new ScenarioFileMigrationMap.FilePair(1, 10, 700));
     if (extra == FILES_PART) files.add(new ScenarioFileMigrationMap.FilePair(2, 11, 701));
@@ -230,7 +265,7 @@ final class MigrationMasterCopyManifestTest {
         new AudioMigrationMap(audio, new AssetMigrationManifest(assets), "g1", "g2"));
   }
 
-  static CurrentMigrationMappingManifest emptyMappings() throws Exception {
+  static CurrentMigrationMappingManifest emptyMappings() throws NoSuchAlgorithmException {
     var files = new ScenarioFileMigrationMap(List.of());
     return new CurrentMigrationMappingManifest(
         files,
@@ -239,7 +274,7 @@ final class MigrationMasterCopyManifestTest {
         new AudioMigrationMap(List.of(), new AssetMigrationManifest(List.of()), "g1", "g2"));
   }
 
-  static MigrationMasterCopyDataset empty() throws Exception {
+  static MigrationMasterCopyDataset empty() {
     var files = new ScenarioFileMigrationMap(List.of());
     var scenario =
         new ScenarioCopyDataset(
