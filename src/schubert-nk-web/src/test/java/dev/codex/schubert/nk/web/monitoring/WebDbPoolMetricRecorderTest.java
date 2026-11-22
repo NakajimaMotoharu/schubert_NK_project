@@ -35,16 +35,16 @@ class WebDbPoolMetricRecorderTest {
   private static final String DEBUG_MODE = "DEBUG";
 
   private static final class Registry extends SimpleMeterRegistry implements AutoCloseable {
+    private static final int FAILURE_REGISTRATION_NUMBER = 2;
+
     final AtomicInteger registrations = new AtomicInteger();
     final AtomicInteger closes = new AtomicInteger();
-    Optional<Throwable> failure = Optional.empty();
+    Optional<Runnable> secondRegistrationFailure = Optional.empty();
 
     @Override
     protected <T> Gauge newGauge(Meter.Id id, T object, ToDoubleFunction<T> value) {
-      if (registrations.incrementAndGet() == 2 && failure.isPresent()) {
-        var problem = failure.orElseThrow();
-        if (problem instanceof Error fatal) throw fatal;
-        throw (RuntimeException) problem;
+      if (registrations.incrementAndGet() == FAILURE_REGISTRATION_NUMBER) {
+        secondRegistrationFailure.ifPresent(Runnable::run);
       }
       return super.newGauge(id, object, value);
     }
@@ -253,26 +253,36 @@ class WebDbPoolMetricRecorderTest {
 
   @Test
   void webPoolMetric007PartialProviderFailurePreservesIdentityAndBorrowedLifetime() {
-    for (var failure :
-        List.<Throwable>of(
-            new IllegalStateException("owned provider fixture"),
-            new AssertionError("owned provider fixture"))) {
-      var registry = new Registry();
-      try {
-        registry.failure = Optional.of(failure);
-        assertSame(
-            failure,
-            assertThrows(
-                failure.getClass(), () -> new WebDbPoolMetricRecorder(registry, DEBUG_MODE)));
-        assertEquals(2, registry.registrations.get());
-        assertEquals(1, registry.getMeters().size());
-        assertEquals(0, registry.closes.get());
-        assertEquals("WEB", registry.getMeters().getFirst().getId().getTag(SERVICE_LABEL));
-      } finally {
-        registry.close();
-      }
-      assertEquals(1, registry.closes.get());
+    var runtime = new IllegalStateException("owned provider fixture");
+    var fatal = new AssertionError("owned provider fixture");
+    assertPartialProviderFailure(
+        runtime,
+        () -> {
+          throw runtime;
+        });
+    assertPartialProviderFailure(
+        fatal,
+        () -> {
+          throw fatal;
+        });
+  }
+
+  private static void assertPartialProviderFailure(Throwable failure, Runnable signal) {
+    var registry = new Registry();
+    try {
+      registry.secondRegistrationFailure = Optional.of(signal);
+      assertSame(
+          failure,
+          assertThrows(
+              failure.getClass(), () -> new WebDbPoolMetricRecorder(registry, DEBUG_MODE)));
+      assertEquals(2, registry.registrations.get());
+      assertEquals(1, registry.getMeters().size());
+      assertEquals(0, registry.closes.get());
+      assertEquals("WEB", registry.getMeters().getFirst().getId().getTag(SERVICE_LABEL));
+    } finally {
+      registry.close();
     }
+    assertEquals(1, registry.closes.get());
   }
 
   @Test
