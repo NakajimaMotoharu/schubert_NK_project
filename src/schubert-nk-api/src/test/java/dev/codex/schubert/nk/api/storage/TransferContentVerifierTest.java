@@ -17,6 +17,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.HexFormat;
 import org.junit.jupiter.api.Test;
@@ -27,7 +28,8 @@ class TransferContentVerifierTest {
   @TempDir Path root;
 
   @Test
-  void w06ActualOne201And10000RecordFilesMatchIndependentLengthAndHash() throws Exception {
+  void w06ActualOne201And10000RecordFilesMatchIndependentLengthAndHash()
+      throws IOException, NoSuchAlgorithmException {
     for (int count : new int[] {1, 201, 10000}) {
       byte[] golden = golden();
       MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -50,7 +52,8 @@ class TransferContentVerifierTest {
   }
 
   @Test
-  void w06ThreeByteReadsStayBoundedAndEveryDigestByteDifferenceIsRejected() throws Exception {
+  void w06ThreeByteReadsStayBoundedAndEveryDigestByteDifferenceIsRejected()
+      throws StorageIoException, NoSuchAlgorithmException {
     byte[] golden = golden();
     var expected = expected(golden);
     try (var input = new ChunkedInput(golden, 0)) {
@@ -73,7 +76,8 @@ class TransferContentVerifierTest {
   }
 
   @Test
-  void w06NullEarlyEofZeroExtraBytesIoClosedAndAmbiguousEofFailWithoutClosing() throws Exception {
+  void w06NullEarlyEofZeroExtraBytesIoClosedAndAmbiguousEofFailWithoutClosing()
+      throws NoSuchAlgorithmException {
     byte[] golden = golden();
     var expected = expected(golden);
     assertThrows(NullPointerException.class, () -> TransferContentVerifier.verify(null, expected));
@@ -114,7 +118,8 @@ class TransferContentVerifierTest {
 
   /** PT-SCN-008-W06-FATAL; SS333 §6.2 / SSC-478. */
   @Test
-  void w06ReadFailurePreservesTheFirstWrappedErrorAndKeepsTheChannelBorrowed() throws Exception {
+  void w06ReadFailurePreservesTheFirstWrappedErrorAndKeepsTheChannelBorrowed()
+      throws NoSuchAlgorithmException {
     var expected = expected(golden());
     var cause = new AssertionError("fixture cause");
     var suppressed = new LinkageError("fixture suppressed");
@@ -171,7 +176,7 @@ class TransferContentVerifierTest {
     }
   }
 
-  private static LargeResultContent expected(byte[] bytes) throws Exception {
+  private static LargeResultContent expected(byte[] bytes) throws NoSuchAlgorithmException {
     return new LargeResultContent(
         1, 4800, HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(bytes)));
   }
