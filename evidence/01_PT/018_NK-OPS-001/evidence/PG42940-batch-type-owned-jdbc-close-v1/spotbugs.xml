@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<BugCollection version="4.10.4" sequence="0" timestamp="1795374855198" analysisTimestamp="1795374857795" release="">
+  <Project projectName="">
+    <Jar>/home/mini/codex/project1/work/pgpt-runs/PG379/PG42940-batch-type-owned-jdbc-close-v1/typed/target/classes</Jar>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/pgpt-runs/PG379/PG42940-batch-type-owned-jdbc-close-v1/allowed-support.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar</AuxClasspathEntry>
+  </Project>
+  <BugInstance type="RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE" priority="2" rank="18" abbrev="RCN" category="STYLE" instanceHash="858095af7eaddee8df60601b5e2e4881" instanceOccurrenceNum="0" instanceOccurrenceMax="0" cweid="476">
+    <ShortMessage>Redundant nullcheck of value known to be non-null</ShortMessage>
+    <LongMessage>Redundant nullcheck of query, which is known to be non-null in dev.codex.schubert.nk.batch.repository.BatchRunRepository.abandon(BatchRunRepository$History, Instant)</LongMessage>
+    <Class classname="dev.codex.schubert.nk.batch.repository.BatchRunRepository" primary="true" classAnnotationNames="org.jspecify.annotations.NullMarked">
+      <SourceLine classname="dev.codex.schubert.nk.batch.repository.BatchRunRepository" start="40" end="467" sourcefile="BatchRunRepository.java" sourcepath="dev/codex/schubert/nk/batch/repository/BatchRunRepository.java">
+        <Message>At BatchRunRepository.java:[lines 40-467]</Message>
+      </SourceLine>
+      <Message>In class dev.codex.schubert.nk.batch.repository.BatchRunRepository</Message>
+    </Class>
+    <Method classname="dev.codex.schubert.nk.batch.repository.BatchRunRepository" name="abandon" signature="(Ldev/codex/schubert/nk/batch/repository/BatchRunRepository$History;Ljava/time/Instant;)V" isStatic="false" primary="true">
+      <SourceLine classname="dev.codex.schubert.nk.batch.repository.BatchRunRepository" start="291" end="312" startBytecode="0" endBytecode="419" sourcefile="BatchRunRepository.java" sourcepath="dev/codex/schubert/nk/batch/repository/BatchRunRepository.java"/>
+      <Message>In method dev.codex.schubert.nk.batch.repository.BatchRunRepository.abandon(BatchRunRepository$History, Instant)</Message>
+    </Method>
+    <LocalVariable name="query" register="3" pc="13" role="LOCAL_VARIABLE_VALUE_OF">
+      <Message>Value loaded from query</Message>
+    </LocalVariable>
+    <Method classname="java.sql.Connection" name="prepareStatement" signature="(Ljava/lang/String;)Ljava/sql/PreparedStatement;" isStatic="false" role="METHOD_RETURN_VALUE_OF">
+      <SourceLine classname="java.sql.Connection" sourcefile="Connection.java" sourcepath="java/sql/Connection.java"/>
+      <Message>Return value of java.sql.Connection.prepareStatement(String) of type java.sql.PreparedStatement</Message>
+    </Method>
+    <SourceLine classname="dev.codex.schubert.nk.batch.repository.BatchRunRepository" primary="true" start="295" end="295" startBytecode="14" endBytecode="14" sourcefile="BatchRunRepository.java" sourcepath="dev/codex/schubert/nk/batch/repository/BatchRunRepository.java" role="SOURCE_REDUNDANT_NULL_CHECK">
+      <Message>Redundant null check at BatchRunRepository.java:[line 295]</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE" priority="2" rank="18" abbrev="RCN" category="STYLE" instanceHash="793ada1ee3770bd48985a51cb6819044" instanceOccurrenceNum="0" instanceOccurrenceMax="0" cweid="476">
+    <ShortMessage>Redundant nullcheck of value known to be non-null</ShortMessage>
+    <LongMessage>Redundant nullcheck of query, which is known to be non-null in dev.codex.schubert.nk.batch.repository.BatchRunRepository.finish(BatchStepAttempt, Instant, BatchStepResult)</LongMessage>
+    <Class classname="dev.codex.schubert.nk.batch.repository.BatchRunRepository" primary="true" classAnnotationNames="org.jspecify.annotations.NullMarked">
+      <SourceLine classname="dev.codex.schubert.nk.batch.repository.BatchRunRepository" start="40" end="467" sourcefile="BatchRunRepository.java" sourcepath="dev/codex/schubert/nk/batch/repository/BatchRunRepository.java">
+        <Message>At BatchRunRepository.java:[lines 40-467]</Message>
+      </SourceLine>
+      <Message>In class dev.codex.schubert.nk.batch.repository.BatchRunRepository</Message>
+    </Class>
+    <Method classname="dev.codex.schubert.nk.batch.repository.BatchRunRepository" name="finish" signature="(Ldev/codex/schubert/nk/batch/repository/BatchStepAttempt;Ljava/time/Instant;Ldev/codex/schubert/nk/batch/repository/BatchStepResult;)V" isStatic="false" primary="true">
+      <SourceLine classname="dev.codex.schubert.nk.batch.repository.BatchRunRepository" start="126" end="160" startBytecode="0" endBytecode="626" sourcefile="BatchRunRepository.java" sourcepath="dev/codex/schubert/nk/batch/repository/BatchRunRepository.java"/>
+      <Message>In method dev.codex.schubert.nk.batch.repository.BatchRunRepository.finish(BatchStepAttempt, Instant, BatchStepResult)</Message>
+    </Method>
+    <LocalVariable name="query" register="5" pc="78" role="LOCAL_VARIABLE_VALUE_OF">
+      <Message>Value loaded from query</Message>
+    </LocalVariable>
+    <Method classname="java.sql.Connection" name="prepareStatement" signature="(Ljava/lang/String;)Ljava/sql/PreparedStatement;" isStatic="false" role="METHOD_RETURN_VALUE_OF">
+      <SourceLine classname="java.sql.Connection" sourcefile="Connection.java" sourcepath="java/sql/Connection.java"/>
+      <Message>Return value of java.sql.Connection.prepareStatement(String) of type java.sql.PreparedStatement</Message>
+    </Method>
+    <SourceLine classname="dev.codex.schubert.nk.batch.repository.BatchRunRepository" primary="true" start="141" end="141" startBytecode="80" endBytecode="80" sourcefile="BatchRunRepository.java" sourcepath="dev/codex/schubert/nk/batch/repository/BatchRunRepository.java" role="SOURCE_REDUNDANT_NULL_CHECK">
+      <Message>Redundant null check at BatchRunRepository.java:[line 141]</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE" priority="2" rank="18" abbrev="RCN" category="STYLE" instanceHash="957f30d1646aba550389719c35b7390d" instanceOccurrenceNum="0" instanceOccurrenceMax="0" cweid="476">
+    <ShortMessage>Redundant nullcheck of value known to be non-null</ShortMessage>
+    <LongMessage>Redundant nullcheck of query, which is known to be non-null in dev.codex.schubert.nk.batch.repository.BatchRunRepository.history(BatchRun, BatchStep, LocalDate, Instant)</LongMessage>
+    <Class classname="dev.codex.schubert.nk.batch.repository.BatchRunRepository" primary="true" classAnnotationNames="org.jspecify.annotations.NullMarked">
+      <SourceLine classname="dev.codex.schubert.nk.batch.repository.BatchRunRepository" start="40" end="467" sourcefile="BatchRunRepository.java" sourcepath="dev/codex/schubert/nk/batch/repository/BatchRunRepository.java">
+        <Message>At BatchRunRepository.java:[lines 40-467]</Message>
+      </SourceLine>
+      <Message>In class dev.codex.schubert.nk.batch.repository.BatchRunRepository</Message>
+    </Class>
+    <Method classname="dev.codex.schubert.nk.batch.repository.BatchRunRepository" name="history" signature="(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ldev/codex/schubert/nk/batch/repository/BatchStep;Ljava/time/LocalDate;Ljava/time/Instant;)Ljava/util/List;" isStatic="false" primary="true">
+      <SourceLine classname="dev.codex.schubert.nk.batch.repository.BatchRunRepository" start="227" end="287" startBytecode="0" endBytecode="1787" sourcefile="BatchRunRepository.java" sourcepath="dev/codex/schubert/nk/batch/repository/BatchRunRepository.java"/>
+      <Message>In method dev.codex.schubert.nk.batch.repository.BatchRunRepository.history(BatchRun, BatchStep, LocalDate, Instant)</Message>
+    </Method>
+    <LocalVariable name="query" register="8" pc="35" role="LOCAL_VARIABLE_VALUE_OF">
+      <Message>Value loaded from query</Message>
+    </LocalVariable>
+    <Method classname="java.sql.Connection" name="prepareStatement" signature="(Ljava/lang/String;)Ljava/sql/PreparedStatement;" isStatic="false" role="METHOD_RETURN_VALUE_OF">
+      <SourceLine classname="java.sql.Connection" sourcefile="Connection.java" sourcepath="java/sql/Connection.java"/>
+      <Message>Return value of java.sql.Connection.prepareStatement(String) of type java.sql.PreparedStatement</Message>
+    </Method>
+    <SourceLine classname="dev.codex.schubert.nk.batch.repository.BatchRunRepository" primary="true" start="231" end="231" startBytecode="37" endBytecode="37" sourcefile="BatchRunRepository.java" sourcepath="dev/codex/schubert/nk/batch/repository/BatchRunRepository.java" role="SOURCE_REDUNDANT_NULL_CHECK">
+      <Message>Redundant null check at BatchRunRepository.java:[line 231]</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE" priority="2" rank="18" abbrev="RCN" category="STYLE" instanceHash="17a3d2fa2bea1782cd1909d2f79190fa" instanceOccurrenceNum="0" instanceOccurrenceMax="0" cweid="476">
+    <ShortMessage>Redundant nullcheck of value known to be non-null</ShortMessage>
+    <LongMessage>Redundant nullcheck of row, which is known to be non-null in dev.codex.schubert.nk.batch.repository.BatchRunRepository.history(BatchRun, BatchStep, LocalDate, Instant)</LongMessage>
+    <Class classname="dev.codex.schubert.nk.batch.repository.BatchRunRepository" primary="true" classAnnotationNames="org.jspecify.annotations.NullMarked">
+      <SourceLine classname="dev.codex.schubert.nk.batch.repository.BatchRunRepository" start="40" end="467" sourcefile="BatchRunRepository.java" sourcepath="dev/codex/schubert/nk/batch/repository/BatchRunRepository.java">
+        <Message>At BatchRunRepository.java:[lines 40-467]</Message>
+      </SourceLine>
+      <Message>In class dev.codex.schubert.nk.batch.repository.BatchRunRepository</Message>
+    </Class>
+    <Method classname="dev.codex.schubert.nk.batch.repository.BatchRunRepository" name="history" signature="(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ldev/codex/schubert/nk/batch/repository/BatchStep;Ljava/time/LocalDate;Ljava/time/Instant;)Ljava/util/List;" isStatic="false" primary="true">
+      <SourceLine classname="dev.codex.schubert.nk.batch.repository.BatchRunRepository" start="227" end="287" startBytecode="0" endBytecode="1787" sourcefile="BatchRunRepository.java" sourcepath="dev/codex/schubert/nk/batch/repository/BatchRunRepository.java"/>
+      <Message>In method dev.codex.schubert.nk.batch.repository.BatchRunRepository.history(BatchRun, BatchStep, LocalDate, Instant)</Message>
+    </Method>
+    <LocalVariable name="row" register="10" pc="85" role="LOCAL_VARIABLE_VALUE_OF">
+      <Message>Value loaded from row</Message>
+    </LocalVariable>
+    <Method classname="java.sql.PreparedStatement" name="executeQuery" signature="()Ljava/sql/ResultSet;" isStatic="false" role="METHOD_RETURN_VALUE_OF">
+      <SourceLine classname="java.sql.PreparedStatement" sourcefile="PreparedStatement.java" sourcepath="java/sql/PreparedStatement.java"/>
+      <Message>Return value of java.sql.PreparedStatement.executeQuery() of type java.sql.ResultSet</Message>
+    </Method>
+    <SourceLine classname="dev.codex.schubert.nk.batch.repository.BatchRunRepository" primary="true" start="238" end="238" startBytecode="87" endBytecode="87" sourcefile="BatchRunRepository.java" sourcepath="dev/codex/schubert/nk/batch/repository/BatchRunRepository.java" role="SOURCE_REDUNDANT_NULL_CHECK">
+      <Message>Redundant null check at BatchRunRepository.java:[line 238]</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE" priority="2" rank="18" abbrev="RCN" category="STYLE" instanceHash="b26607ec59c9d246a6d1231064ee607d" instanceOccurrenceNum="0" instanceOccurrenceMax="0" cweid="476">
+    <ShortMessage>Redundant nullcheck of value known to be non-null</ShortMessage>
+    <LongMessage>Redundant nullcheck of query, which is known to be non-null in dev.codex.schubert.nk.batch.repository.BatchRunRepository.insert(BatchRun, BatchStep, LocalDate, int, Instant, boolean, BatchStepResult$Reason)</LongMessage>
+    <Class classname="dev.codex.schubert.nk.batch.repository.BatchRunRepository" primary="true" classAnnotationNames="org.jspecify.annotations.NullMarked">
+      <SourceLine classname="dev.codex.schubert.nk.batch.repository.BatchRunRepository" start="40" end="467" sourcefile="BatchRunRepository.java" sourcepath="dev/codex/schubert/nk/batch/repository/BatchRunRepository.java">
+        <Message>At BatchRunRepository.java:[lines 40-467]</Message>
+      </SourceLine>
+      <Message>In class dev.codex.schubert.nk.batch.repository.BatchRunRepository</Message>
+    </Class>
+    <Method classname="dev.codex.schubert.nk.batch.repository.BatchRunRepository" name="insert" signature="(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ldev/codex/schubert/nk/batch/repository/BatchStep;Ljava/time/LocalDate;ILjava/time/Instant;ZLdev/codex/schubert/nk/batch/repository/BatchStepResult$Reason;)Ldev/codex/schubert/nk/batch/repository/BatchStepAttempt;" isStatic="false" primary="true">
+      <SourceLine classname="dev.codex.schubert.nk.batch.repository.BatchRunRepository" start="324" end="366" startBytecode="0" endBytecode="1282" sourcefile="BatchRunRepository.java" sourcepath="dev/codex/schubert/nk/batch/repository/BatchRunRepository.java"/>
+      <Message>In method dev.codex.schubert.nk.batch.repository.BatchRunRepository.insert(BatchRun, BatchStep, LocalDate, int, Instant, boolean, BatchStepResult$Reason)</Message>
+    </Method>
+    <LocalVariable name="query" register="9" pc="14" role="LOCAL_VARIABLE_VALUE_OF">
+      <Message>Value loaded from query</Message>
+    </LocalVariable>
+    <Method classname="java.sql.Connection" name="prepareStatement" signature="(Ljava/lang/String;)Ljava/sql/PreparedStatement;" isStatic="false" role="METHOD_RETURN_VALUE_OF">
+      <SourceLine classname="java.sql.Connection" sourcefile="Connection.java" sourcepath="java/sql/Connection.java"/>
+      <Message>Return value of java.sql.Connection.prepareStatement(String) of type java.sql.PreparedStatement</Message>
+    </Method>
+    <SourceLine classname="dev.codex.schubert.nk.batch.repository.BatchRunRepository" primary="true" start="329" end="329" startBytecode="16" endBytecode="16" sourcefile="BatchRunRepository.java" sourcepath="dev/codex/schubert/nk/batch/repository/BatchRunRepository.java" role="SOURCE_REDUNDANT_NULL_CHECK">
+      <Message>Redundant null check at BatchRunRepository.java:[line 329]</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE" priority="2" rank="18" abbrev="RCN" category="STYLE" instanceHash="2d04b57a7309be7989771128e1166c54" instanceOccurrenceNum="0" instanceOccurrenceMax="0" cweid="476">
+    <ShortMessage>Redundant nullcheck of value known to be non-null</ShortMessage>
+    <LongMessage>Redundant nullcheck of row, which is known to be non-null in dev.codex.schubert.nk.batch.repository.BatchRunRepository.insert(BatchRun, BatchStep, LocalDate, int, Instant, boolean, BatchStepResult$Reason)</LongMessage>
+    <Class classname="dev.codex.schubert.nk.batch.repository.BatchRunRepository" primary="true" classAnnotationNames="org.jspecify.annotations.NullMarked">
+      <SourceLine classname="dev.codex.schubert.nk.batch.repository.BatchRunRepository" start="40" end="467" sourcefile="BatchRunRepository.java" sourcepath="dev/codex/schubert/nk/batch/repository/BatchRunRepository.java">
+        <Message>At BatchRunRepository.java:[lines 40-467]</Message>
+      </SourceLine>
+      <Message>In class dev.codex.schubert.nk.batch.repository.BatchRunRepository</Message>
+    </Class>
+    <Method classname="dev.codex.schubert.nk.batch.repository.BatchRunRepository" name="insert" signature="(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ldev/codex/schubert/nk/batch/repository/BatchStep;Ljava/time/LocalDate;ILjava/time/Instant;ZLdev/codex/schubert/nk/batch/repository/BatchStepResult$Reason;)Ldev/codex/schubert/nk/batch/repository/BatchStepAttempt;" isStatic="false" primary="true">
+      <SourceLine classname="dev.codex.schubert.nk.batch.repository.BatchRunRepository" start="324" end="366" startBytecode="0" endBytecode="1282" sourcefile="BatchRunRepository.java" sourcepath="dev/codex/schubert/nk/batch/repository/BatchRunRepository.java"/>
+      <Message>In method dev.codex.schubert.nk.batch.repository.BatchRunRepository.insert(BatchRun, BatchStep, LocalDate, int, Instant, boolean, BatchStepResult$Reason)</Message>
+    </Method>
+    <LocalVariable name="row" register="11" pc="179" role="LOCAL_VARIABLE_VALUE_OF">
+      <Message>Value loaded from row</Message>
+    </LocalVariable>
+    <Method classname="java.sql.PreparedStatement" name="executeQuery" signature="()Ljava/sql/ResultSet;" isStatic="false" role="METHOD_RETURN_VALUE_OF">
+      <SourceLine classname="java.sql.PreparedStatement" sourcefile="PreparedStatement.java" sourcepath="java/sql/PreparedStatement.java"/>
+      <Message>Return value of java.sql.PreparedStatement.executeQuery() of type java.sql.ResultSet</Message>
+    </Method>
+    <SourceLine classname="dev.codex.schubert.nk.batch.repository.BatchRunRepository" primary="true" start="343" end="343" startBytecode="181" endBytecode="181" sourcefile="BatchRunRepository.java" sourcepath="dev/codex/schubert/nk/batch/repository/BatchRunRepository.java" role="SOURCE_REDUNDANT_NULL_CHECK">
+      <Message>Redundant null check at BatchRunRepository.java:[line 343]</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE" priority="2" rank="18" abbrev="RCN" category="STYLE" instanceHash="3c569e6d508da6791fe2fa63790d5278" instanceOccurrenceNum="0" instanceOccurrenceMax="0" cweid="476">
+    <ShortMessage>Redundant nullcheck of value known to be non-null</ShortMessage>
+    <LongMessage>Redundant nullcheck of query, which is known to be non-null in dev.codex.schubert.nk.batch.repository.BatchRunRepository.replayed(BatchStepAttempt, Instant, BatchStepResult)</LongMessage>
+    <Class classname="dev.codex.schubert.nk.batch.repository.BatchRunRepository" primary="true" classAnnotationNames="org.jspecify.annotations.NullMarked">
+      <SourceLine classname="dev.codex.schubert.nk.batch.repository.BatchRunRepository" start="40" end="467" sourcefile="BatchRunRepository.java" sourcepath="dev/codex/schubert/nk/batch/repository/BatchRunRepository.java">
+        <Message>At BatchRunRepository.java:[lines 40-467]</Message>
+      </SourceLine>
+      <Message>In class dev.codex.schubert.nk.batch.repository.BatchRunRepository</Message>
+    </Class>
+    <Method classname="dev.codex.schubert.nk.batch.repository.BatchRunRepository" name="replayed" signature="(Ldev/codex/schubert/nk/batch/repository/BatchStepAttempt;Ljava/time/Instant;Ldev/codex/schubert/nk/batch/repository/BatchStepResult;)Z" isStatic="false" primary="true">
+      <SourceLine classname="dev.codex.schubert.nk.batch.repository.BatchRunRepository" start="372" end="405" startBytecode="0" endBytecode="757" sourcefile="BatchRunRepository.java" sourcepath="dev/codex/schubert/nk/batch/repository/BatchRunRepository.java"/>
+      <Message>In method dev.codex.schubert.nk.batch.repository.BatchRunRepository.replayed(BatchStepAttempt, Instant, BatchStepResult)</Message>
+    </Method>
+    <LocalVariable name="query" register="5" pc="14" role="LOCAL_VARIABLE_VALUE_OF">
+      <Message>Value loaded from query</Message>
+    </LocalVariable>
+    <Method classname="java.sql.Connection" name="prepareStatement" signature="(Ljava/lang/String;)Ljava/sql/PreparedStatement;" isStatic="false" role="METHOD_RETURN_VALUE_OF">
+      <SourceLine classname="java.sql.Connection" sourcefile="Connection.java" sourcepath="java/sql/Connection.java"/>
+      <Message>Return value of java.sql.Connection.prepareStatement(String) of type java.sql.PreparedStatement</Message>
+    </Method>
+    <SourceLine classname="dev.codex.schubert.nk.batch.repository.BatchRunRepository" primary="true" start="380" end="380" startBytecode="16" endBytecode="16" sourcefile="BatchRunRepository.java" sourcepath="dev/codex/schubert/nk/batch/repository/BatchRunRepository.java" role="SOURCE_REDUNDANT_NULL_CHECK">
+      <Message>Redundant null check at BatchRunRepository.java:[line 380]</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE" priority="2" rank="18" abbrev="RCN" category="STYLE" instanceHash="7c465002c4321311e0791f7896d40097" instanceOccurrenceNum="0" instanceOccurrenceMax="0" cweid="476">
+    <ShortMessage>Redundant nullcheck of value known to be non-null</ShortMessage>
+    <LongMessage>Redundant nullcheck of row, which is known to be non-null in dev.codex.schubert.nk.batch.repository.BatchRunRepository.replayed(BatchStepAttempt, Instant, BatchStepResult)</LongMessage>
+    <Class classname="dev.codex.schubert.nk.batch.repository.BatchRunRepository" primary="true" classAnnotationNames="org.jspecify.annotations.NullMarked">
+      <SourceLine classname="dev.codex.schubert.nk.batch.repository.BatchRunRepository" start="40" end="467" sourcefile="BatchRunRepository.java" sourcepath="dev/codex/schubert/nk/batch/repository/BatchRunRepository.java">
+        <Message>At BatchRunRepository.java:[lines 40-467]</Message>
+      </SourceLine>
+      <Message>In class dev.codex.schubert.nk.batch.repository.BatchRunRepository</Message>
+    </Class>
+    <Method classname="dev.codex.schubert.nk.batch.repository.BatchRunRepository" name="replayed" signature="(Ldev/codex/schubert/nk/batch/repository/BatchStepAttempt;Ljava/time/Instant;Ldev/codex/schubert/nk/batch/repository/BatchStepResult;)Z" isStatic="false" primary="true">
+      <SourceLine classname="dev.codex.schubert.nk.batch.repository.BatchRunRepository" start="372" end="405" startBytecode="0" endBytecode="757" sourcefile="BatchRunRepository.java" sourcepath="dev/codex/schubert/nk/batch/repository/BatchRunRepository.java"/>
+      <Message>In method dev.codex.schubert.nk.batch.repository.BatchRunRepository.replayed(BatchStepAttempt, Instant, BatchStepResult)</Message>
+    </Method>
+    <LocalVariable name="row" register="7" pc="58" role="LOCAL_VARIABLE_VALUE_OF">
+      <Message>Value loaded from row</Message>
+    </LocalVariable>
+    <Method classname="java.sql.PreparedStatement" name="executeQuery" signature="()Ljava/sql/ResultSet;" isStatic="false" role="METHOD_RETURN_VALUE_OF">
+      <SourceLine classname="java.sql.PreparedStatement" sourcefile="PreparedStatement.java" sourcepath="java/sql/PreparedStatement.java"/>
+      <Message>Return value of java.sql.PreparedStatement.executeQuery() of type java.sql.ResultSet</Message>
+    </Method>
+    <SourceLine classname="dev.codex.schubert.nk.batch.repository.BatchRunRepository" primary="true" start="387" end="387" startBytecode="60" endBytecode="60" sourcefile="BatchRunRepository.java" sourcepath="dev/codex/schubert/nk/batch/repository/BatchRunRepository.java" role="SOURCE_REDUNDANT_NULL_CHECK">
+      <Message>Redundant null check at BatchRunRepository.java:[line 387]</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugCategory category="STYLE">
+    <Description>Dodgy code</Description>
+  </BugCategory>
+  <BugPattern type="RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE" abbrev="RCN" category="STYLE">
+    <ShortDescription>Redundant nullcheck of value known to be non-null</ShortDescription>
+    <Details><![CDATA[
+
+<p> This method contains a redundant check of a known non-null value against
+the constant null.</p>
+
+    ]]></Details>
+  </BugPattern>
+  <BugCode abbrev="RCN" cweid="476">
+    <Description>Redundant comparison to null</Description>
+  </BugCode>
+  <Errors errors="0" missingClasses="0"></Errors>
+  <FindBugsSummary timestamp="Mon, 23 Nov 2026 04:14:15 +0900" total_classes="2" referenced_classes="62" total_bugs="8" total_size="321" num_packages="1" java_version="25.0.4" vm_version="25.0.4+7-1-26.04-Ubuntu" cpu_seconds="10.51" clock_seconds="2.32" peak_mbytes="191.14" alloc_mbytes="1024.00" gc_seconds="0.02" priority_2="8">
+    <FileStats path="dev/codex/schubert/nk/batch/repository/BatchRunRepository.java" bugCount="8" size="321" bugHash="accc6cc166c0d5b1560f746e74f6c009"/>
+    <PackageStats package="dev.codex.schubert.nk.batch.repository" total_bugs="8" total_types="2" total_size="321" priority_2="8">
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.BatchRunRepository" sourceFile="BatchRunRepository.java" interface="false" size="304" bugs="8" priority_2="8"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.BatchRunRepository$History" sourceFile="BatchRunRepository.java" interface="false" size="17" bugs="0"/>
+    </PackageStats>
+    <FindBugsProfile>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassInfoAnalysisEngine" totalMilliseconds="361" invocations="681" avgMicrosecondsPerInvocation="530" maxMicrosecondsPerInvocation="9595" standardDeviationMicrosecondsPerInvocation="931"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FieldItemSummary" totalMilliseconds="111" invocations="62" avgMicrosecondsPerInvocation="1805" maxMicrosecondsPerInvocation="11291" standardDeviationMicrosecondsPerInvocation="2669"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.TypeDataflowFactory" totalMilliseconds="97" invocations="51" avgMicrosecondsPerInvocation="1920" maxMicrosecondsPerInvocation="16241" standardDeviationMicrosecondsPerInvocation="3299"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.ValueNumberDataflowFactory" totalMilliseconds="96" invocations="51" avgMicrosecondsPerInvocation="1884" maxMicrosecondsPerInvocation="26113" standardDeviationMicrosecondsPerInvocation="4218"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindNoSideEffectMethods" totalMilliseconds="86" invocations="62" avgMicrosecondsPerInvocation="1393" maxMicrosecondsPerInvocation="7796" standardDeviationMicrosecondsPerInvocation="1763"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassDataAnalysisEngine" totalMilliseconds="73" invocations="687" avgMicrosecondsPerInvocation="107" maxMicrosecondsPerInvocation="13418" standardDeviationMicrosecondsPerInvocation="516"/>
+      <ClassProfile name="edu.umd.cs.findbugs.ba.npe.NullDerefAndRedundantComparisonFinder" totalMilliseconds="71" invocations="34" avgMicrosecondsPerInvocation="2111" maxMicrosecondsPerInvocation="22767" standardDeviationMicrosecondsPerInvocation="4491"/>
+      <ClassProfile name="edu.umd.cs.findbugs.OpcodeStack$JumpInfoFactory" totalMilliseconds="66" invocations="172" avgMicrosecondsPerInvocation="389" maxMicrosecondsPerInvocation="3866" standardDeviationMicrosecondsPerInvocation="599"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.IsNullValueDataflowFactory" totalMilliseconds="65" invocations="34" avgMicrosecondsPerInvocation="1923" maxMicrosecondsPerInvocation="26987" standardDeviationMicrosecondsPerInvocation="4796"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.UnconditionalValueDerefDataflowFactory" totalMilliseconds="50" invocations="34" avgMicrosecondsPerInvocation="1496" maxMicrosecondsPerInvocation="16973" standardDeviationMicrosecondsPerInvocation="3087"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.NoteDirectlyRelevantTypeQualifiers" totalMilliseconds="48" invocations="62" avgMicrosecondsPerInvocation="787" maxMicrosecondsPerInvocation="15183" standardDeviationMicrosecondsPerInvocation="1993"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.JavaClassAnalysisEngine" totalMilliseconds="46" invocations="106" avgMicrosecondsPerInvocation="438" maxMicrosecondsPerInvocation="12432" standardDeviationMicrosecondsPerInvocation="1277"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.CFGFactory" totalMilliseconds="42" invocations="40" avgMicrosecondsPerInvocation="1071" maxMicrosecondsPerInvocation="9820" standardDeviationMicrosecondsPerInvocation="1797"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.MethodGenFactory" totalMilliseconds="42" invocations="40" avgMicrosecondsPerInvocation="1051" maxMicrosecondsPerInvocation="25708" standardDeviationMicrosecondsPerInvocation="4026"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FunctionsThatMightBeMistakenForProcedures" totalMilliseconds="38" invocations="62" avgMicrosecondsPerInvocation="618" maxMicrosecondsPerInvocation="3947" standardDeviationMicrosecondsPerInvocation="903"/>
+      <ClassProfile name="edu.umd.cs.findbugs.util.TopologicalSort" totalMilliseconds="33" invocations="634" avgMicrosecondsPerInvocation="53" maxMicrosecondsPerInvocation="1505" standardDeviationMicrosecondsPerInvocation="94"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.OverridingEqualsNotSymmetrical" totalMilliseconds="27" invocations="62" avgMicrosecondsPerInvocation="450" maxMicrosecondsPerInvocation="10429" standardDeviationMicrosecondsPerInvocation="1323"/>
+      <ClassProfile name="edu.umd.cs.findbugs.ba.obl.ObligationAnalysis" totalMilliseconds="24" invocations="25" avgMicrosecondsPerInvocation="966" maxMicrosecondsPerInvocation="10865" standardDeviationMicrosecondsPerInvocation="2094"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.ValueRangeAnalysisFactory" totalMilliseconds="24" invocations="34" avgMicrosecondsPerInvocation="709" maxMicrosecondsPerInvocation="13477" standardDeviationMicrosecondsPerInvocation="2453"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindOpenStream" totalMilliseconds="24" invocations="2" avgMicrosecondsPerInvocation="12052" maxMicrosecondsPerInvocation="24061" standardDeviationMicrosecondsPerInvocation="12009"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.BuildObligationPolicyDatabase" totalMilliseconds="23" invocations="62" avgMicrosecondsPerInvocation="386" maxMicrosecondsPerInvocation="1917" standardDeviationMicrosecondsPerInvocation="435"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindRefComparison$SpecialTypeAnalysis" totalMilliseconds="21" invocations="26" avgMicrosecondsPerInvocation="839" maxMicrosecondsPerInvocation="8981" standardDeviationMicrosecondsPerInvocation="1849"/>
+    </FindBugsProfile>
+  </FindBugsSummary>
+  <ClassFeatures></ClassFeatures>
+  <History></History>
+</BugCollection>
