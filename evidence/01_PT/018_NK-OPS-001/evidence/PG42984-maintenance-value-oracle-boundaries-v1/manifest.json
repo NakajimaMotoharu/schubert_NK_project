@@ -1,0 +1,63 @@
+{
+  "run": "PG42984",
+  "source": "dbdd79f2fa415e91ff29bf9bafecd4984d11eb40",
+  "basedOn": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42982-maintenance-closed-catalog-v1/manifest.json",
+    "sha256": "5520d1a147683ffe265ff0f503bb9c5dfa52652dfd3efaf540e2768c63d501d6"
+  },
+  "canonicalDesign": "ca41c03c0c6efff9a3a35b47b480491810bee6f9",
+  "design": [
+    {
+      "path": "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md",
+      "sha256": "857b4062d624ab8b99a2bfc72524f380c655c930db9388755968981e7c76d6c5"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+      "sha256": "860f584a2f032e9b06112907f8ec138a12d0b69b94546f7e17ad7dfb9b65414c"
+    }
+  ],
+  "designSections": [
+    "SS341 4.1/4.2",
+    "SS351 3 / diagnostics catalog"
+  ],
+  "checkedRecordNamesAndFields": {
+    "Marker": [
+      "runId",
+      "bootId",
+      "markedAt"
+    ],
+    "StopReceipt": [
+      "runId",
+      "stage",
+      "result",
+      "elapsed"
+    ],
+    "SafetyChecks": [
+      "packageManagerLock",
+      "packageConsistency",
+      "filesystem",
+      "bootPartition",
+      "kernelAndInitramfs"
+    ],
+    "UpdateReceipt": [
+      "runId",
+      "startedAt",
+      "result",
+      "safetyChecks"
+    ]
+  },
+  "localMeaningfulContract": {
+    "methods": [
+      "equals",
+      "hashCode"
+    ],
+    "scope": "compare independent equal constructions and vary every field, including identity, cutoff and safety observation"
+  },
+  "diagnosticBinding": "No generic render is a declared public receipt format. The current CLI prints only a Decision. Keep generated toString raw deficits and any change of diagnostic contract separate.",
+  "leftoverPrivateConstructors": 3,
+  "noPrivateCalls": true,
+  "noActualOperations": true,
+  "ptAddedHere": 0,
+  "formalAcceptanceId": null,
+  "terminalAtUTC": "2026-11-22T20:07:06.654915+00:00"
+}
