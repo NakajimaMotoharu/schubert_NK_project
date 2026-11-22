@@ -21,8 +21,10 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.function.BooleanSupplier;
 import java.util.function.Supplier;
 import org.junit.jupiter.api.Test;
@@ -153,7 +155,7 @@ class UserMutationFormTest {
         .copyData();
   }
 
-  private static void invalid(String op, String field, String value) throws Exception {
+  private static void invalid(String op, String field, String value) {
     var p = input(op, 1);
     p.put(field, List.of(value));
     try (var f = bind(op, 1, SYNTHETIC_TARGET_USERNAME, p)) {
@@ -165,7 +167,7 @@ class UserMutationFormTest {
     }
   }
 
-  private static void boundaries(String op, String value) throws Exception {
+  private static void boundaries(String op, String value) {
     for (long id : new long[] {1, 999999999999L})
       for (long version : new long[] {0, 999999999}) {
         var p = input(op, id);
@@ -182,24 +184,24 @@ class UserMutationFormTest {
   }
 
   @Test
-  void change001StatusGolden() throws Exception {
+  void change001StatusGolden() {
     boundaries(STATUS_OPERATION, TRUE_TEXT);
     boundaries(STATUS_OPERATION, "false");
   }
 
   @Test
-  void change002RoleGolden() throws Exception {
+  void change002RoleGolden() {
     boundaries(ROLE_OPERATION, USER_ROLE_TEXT);
     boundaries(ROLE_OPERATION, "ADMIN");
   }
 
   @Test
-  void change003UnlockGolden() throws Exception {
+  void change003UnlockGolden() {
     boundaries(UNLOCK_OPERATION, "");
   }
 
   @Test
-  void change004PasswordGoldenAndNoSecretProjection() throws Exception {
+  void change004PasswordGoldenAndNoSecretProjection() {
     boundaries(PASSWORD_OPERATION, PASSWORD);
     try (var f =
         bind(PASSWORD_OPERATION, 1, SYNTHETIC_TARGET_USERNAME, input(PASSWORD_OPERATION, 1))) {
@@ -209,7 +211,7 @@ class UserMutationFormTest {
   }
 
   @Test
-  void change005OperationAndUnknownFieldRejection() throws Exception {
+  void change005OperationAndUnknownFieldRejection() {
     for (String op : OPERATIONS) {
       for (String value : List.of("", "status", "UNKNOWN", " " + op, op + " "))
         invalid(op, "operation", value);
@@ -241,7 +243,7 @@ class UserMutationFormTest {
   }
 
   @Test
-  void change006PathAndHiddenIdentifier() throws Exception {
+  void change006PathAndHiddenIdentifier() {
     for (String op : OPERATIONS) {
       for (long id : new long[] {0, -1, 1000000000000L, Long.MAX_VALUE})
         assertThrows(
@@ -260,14 +262,14 @@ class UserMutationFormTest {
   }
 
   @Test
-  void change007VersionSyntax() throws Exception {
+  void change007VersionSyntax() {
     for (String op : OPERATIONS)
       for (String version : List.of("", "-1", "+1", "1000000000", "１", "1e1", "1 ", "9".repeat(30)))
         invalid(op, EXPECTED_VERSION_FIELD, version);
   }
 
   @Test
-  void change008ConfirmAndTokenSyntax() throws Exception {
+  void change008ConfirmAndTokenSyntax() {
     for (String op : OPERATIONS) {
       for (String confirm : List.of("", "false", "on", "TRUE", "true "))
         invalid(op, "confirm", confirm);
@@ -299,7 +301,7 @@ class UserMutationFormTest {
   }
 
   @Test
-  void change009ClosedRoleAndBoolean() throws Exception {
+  void change009ClosedRoleAndBoolean() {
     for (String flag : List.of("", "TRUE", "1", "0", "false "))
       invalid(STATUS_OPERATION, ENABLED_FIELD, flag);
     for (String role : List.of("", "user", "OTHER", "ADMIN "))
@@ -307,7 +309,7 @@ class UserMutationFormTest {
   }
 
   @Test
-  void change010PasswordNfcCodepointByteBoundaries() throws Exception {
+  void change010PasswordNfcCodepointByteBoundaries() {
     for (String value :
         List.of(
             "p".repeat(12),
@@ -331,7 +333,7 @@ class UserMutationFormTest {
   }
 
   @Test
-  void change011PasswordInvalidAndTrustedUsername() throws Exception {
+  void change011PasswordInvalidAndTrustedUsername() {
     for (String value :
         List.of(
             "",
@@ -371,7 +373,7 @@ class UserMutationFormTest {
   }
 
   @Test
-  void change012NullMissingAndDuplicates() throws Exception {
+  void change012NullMissingAndDuplicates() {
     for (String op : OPERATIONS) {
       assertThrows(NullPointerException.class, () -> bind(op, 1, SYNTHETIC_TARGET_USERNAME, null));
       var nullableKey = input(op, 1);
@@ -418,7 +420,7 @@ class UserMutationFormTest {
   }
 
   @Test
-  void change013ImmutableSnapshotAndRedaction() throws Exception {
+  void change013ImmutableSnapshotAndRedaction() {
     for (String op : OPERATIONS) {
       var p = input(op, 1);
       var id = new ArrayList<>(List.of("1"));
@@ -441,7 +443,7 @@ class UserMutationFormTest {
   }
 
   @Test
-  void change014TerminalCloseAndSeparateDto() throws Exception {
+  void change014TerminalCloseAndSeparateDto() {
     for (String op : OPERATIONS) {
       var p = input(op, 1);
       var f = bind(op, 1, SYNTHETIC_TARGET_USERNAME, p);
@@ -485,7 +487,8 @@ class UserMutationFormTest {
   }
 
   @Test
-  void change015OneHundredIndependentParallelOperations() throws Exception {
+  void change015OneHundredIndependentParallelOperations()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var executor = Executors.newFixedThreadPool(8);
     try {
       var tasks = new ArrayList<Callable<Void>>();
@@ -522,7 +525,7 @@ class UserMutationFormTest {
   }
 
   @Test
-  void change016InputCannotGrantApiAuthority() throws Exception {
+  void change016InputCannotGrantApiAuthority() {
     // Existing UserCommand/Mutation SQL suites assert self/last ADMIN/version/revocation outcomes.
     // Here the form is only a typed wire boundary, never an authentication/authorization provider.
     for (String op : OPERATIONS) {
