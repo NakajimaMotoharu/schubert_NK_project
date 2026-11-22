@@ -1,0 +1,110 @@
+{
+  "eventId": "PGPT-20261008-8808",
+  "workCategory": "CONTRACT_AUDIT",
+  "source": "2d7cdcda0eed3bb18d8333c05dc582d7a41760c5",
+  "productionCoreMain": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "canonicalDesignSource": "7745de1fb04c8b9e2cfccc11103d7b3c57b090d7",
+  "managementWorkIds": [
+    "WBS-P018-09/2"
+  ],
+  "planRow": {
+    "ID": "WBS-P018-09/2",
+    "元行": "WBS-P018-09/2",
+    "費目": "B",
+    "主担当": "WBS-P018-09",
+    "状態": "計画",
+    "作業": "Log/ACTION/REQUEST・metric/error catalog／同source証拠による受入判定",
+    "残pp": "0.65",
+    "着手": "設計351・当該source・作業所有・既存成果を照合。必要な局所成果を費目Aで一度だけ作成し、受入候補のTestIDと独立期待値を確定。着手依存、当該A成果、終了依存と未解決条件を確認",
+    "終了証拠": "Log/ACTION/REQUEST・metric/error catalog：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。 固有要求：FUN-008,MON-001,MON-002,MON-003,MON-004,MON-005,MON-006,MON-007,MON-008,MON-009,MON-010,MON-011,MON-012,MON-013",
+    "補正根拠": "登録済み後段単価。追加製造はA、実経路はD、比較はE",
+    "契約HOLD": "",
+    "対象": "",
+    "範囲": "FUN-008、MON-001、MON-002、MON-003、MON-004、MON-005、MON-006、MON-007",
+    "保存証跡": "個別criteria＋同sourceのTestID・独立期待値・実結果・451適用結果",
+    "順次": "False",
+    "配賦窓": "3",
+    "楽観pp": "0.26",
+    "慎重pp": "1.3",
+    "要求設計の版差": "PT基準仕様 NK-OPS-001",
+    "lineNumber": 563,
+    "改訂残pp": "0.65"
+  },
+  "run": "PG43086-exact-duration-fixture-current-scope-v1",
+  "startEvent": "PGPT-20261008-8807",
+  "outcome": "Ten original exact-registry cases identified from the prior run. Current allowed fixture typed analysis confirms one overbroad checked declaration and four bounded-worker PMD findings; no repeat product execution.",
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43086-exact-duration-fixture-current-scope-v1/manifest.json",
+    "sha256": "e3782a2f8b95f3de764bcfecf1657a52a881555ac3eccb5adc3f1245a29f6301"
+  },
+  "nextEvidence": "Register and fix the scoped future exception declaration; ordinary current exact fixture ten, no larger nineteen or service.",
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T22:45:16+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 53,
+      "remainingPercent": 47,
+      "resetsAt": 1795879772,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "modelRequested": "gpt-6.2-sol",
+  "modelObserved": null,
+  "reasoningRequested": "high",
+  "reasoningObserved": null,
+  "speedRequested": "standard",
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 53,
+    "remainingPercent": 47,
+    "resetsAt": 1795879772,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "29cec02a0760c8c0ef77a3b71e62bf94bb74c9a2c0eb3d70002bc5122d394ce2",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-22T22:45:16+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 53,
+        "remainingPercent": 47,
+        "resetsAt": 1795879772,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": null,
+  "sameQuotaWindow": false,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-22T22:44:27.197514+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": true,
+  "quotaBefore": {
+    "usedPercent": 53,
+    "remainingPercent": 47,
+    "resetsAt": 1795879771,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null
+}
