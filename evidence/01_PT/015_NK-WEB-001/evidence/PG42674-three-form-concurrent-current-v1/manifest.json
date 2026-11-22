@@ -1,0 +1,52 @@
+{
+  "run": "PG42674",
+  "source": "3babc74f9afb04e0021c38dae9b77f2a4e311456",
+  "javaCore": "f8532c27c2666570fe450f285c5a5436aacd8e7e",
+  "pomSource": "3d35cff39183e1e5a7b72cbb76603b7d4c530f04",
+  "branch": "dev-foundation",
+  "os": "Linux 7.0.0-43-generic",
+  "jdk": "25.0.4",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-22T13:15:57.408426+00:00",
+  "actualExit": 0,
+  "tests": {
+    "passed": 3,
+    "fail": 0,
+    "skip": 0,
+    "errors": 0,
+    "caseIds": {
+      "web285ConcurrentBinding": "PT-WEB-285",
+      "web221ConcurrentValidation": "PT-WEB-221",
+      "create007OneHundredConcurrentIndependentRequests": "PT-USER-CREATE007"
+    }
+  },
+  "compilePhaseOnly": 0,
+  "original": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42672-f03-three-form-fixtures-original-v1/manifest.json",
+    "sha256": "ed40aafedbaf2ed625f97b0369c38540867abdb10d0cd12a7a1ff10e50b6e74d"
+  },
+  "ownRun": {
+    "path": "../pgpt-runs/PG379/PG42674-three-form-fixture-concurrent-current-v1/run.json",
+    "sha256": "0169950a87cd909de540ef4baa1142cc83bb6edd10af3bccc980763eed502080"
+  },
+  "scopeRaw": {
+    "path": "../pgpt-runs/PG379/PG42674-three-form-fixture-concurrent-current-v1/rawCoverage.stdout",
+    "sha256": "d526903d5dcd363c492a3ead35c799f2f24c04c37de9218dcf87856e1486f80d"
+  },
+  "static": {
+    "spotbugs": 0,
+    "checkstyle": 0,
+    "pmdRaw": {
+      "CloseResource": 3,
+      "DoNotUseThreads": 12
+    },
+    "pmdReason": "Each worker fixture is JUnit owned. Future.get and executor termination have literal finite timeouts."
+  },
+  "sensitiveInfrastructureInvoked": 0,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "issues": [
+    "BUG-3598",
+    "YKT-2831"
+  ]
+}
