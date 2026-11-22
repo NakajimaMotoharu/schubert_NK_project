@@ -66,8 +66,6 @@ public final class TimedJvmHeapMonitor {
   }
 
   public Optional<Event> snapshot() {
-    synchronized (lock) {
-      return lifecycle.snapshot();
-    }
+    return lifecycle.snapshot();
   }
 }
