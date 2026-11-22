@@ -1,0 +1,104 @@
+{
+  "run": "PG42040",
+  "source": "1558d15b076906f73400cca919083547b61612f7",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-P016-09/2",
+  "testId": "PT-WEB-SCR009-COUNT-001",
+  "terminalAtUTC": "2026-11-22T03:46:11.367069+00:00",
+  "actualExit": 0,
+  "JUnit": {
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "notRun": 0,
+    "case": "rejectsDeclaredOneWhenTheAnimationRecordsAreEmpty()"
+  },
+  "expected": "exact IllegalArgumentException for data total 1 and zero records",
+  "actual": "matched independent assertion",
+  "sources": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42038-p01609-animation-current-proof-v1/manifest.json",
+    "sha256": "f71f922e9c490d0146ad0154c5b6aad953e28e4ebff3e4de128371cc228b6eee"
+  },
+  "currentExistingEight": {
+    "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG41644-p01609-animation-current-eight-v1/independent.json",
+    "sha256": "ba342870d1c706141973f832a021761c51f98b1b6699402f730d5aadba8b8f99"
+  },
+  "commands": [
+    [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-Dfile.encoding=UTF-8",
+      "-Duser.timezone=Asia/Tokyo",
+      "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/PG42040-p01609-animation-current-selected-v1/original.exec,append=false,sessionid=PG42040-p01609-animation-current-selected-v1",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42038-p01609-animation-current-proof-v1/main:/home/mini/codex/project1/work/pgpt-runs/PG379/PG41526-protocol-qa054-canonical-rules-v1/schubert-nk-protocol-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/pg37962-log-view-safe-dependencies-v1/qualified-web-safe18.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-web/7.0.9/spring-web-7.0.9.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/PG42038-p01609-animation-current-proof-v1/test",
+      "org.junit.platform.console.ConsoleLauncher",
+      "execute",
+      "--disable-banner",
+      "--disable-ansi-colors",
+      "--details=summary",
+      "--fail-if-no-tests",
+      "--reports-dir",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42040-p01609-animation-current-selected-v1/xml",
+      "--select-class",
+      "dev.codex.schubert.nk.web.view.AnimationListCountBoundaryTest"
+    ],
+    [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-jar",
+      "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+      "execinfo",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42040-p01609-animation-current-selected-v1/original.exec"
+    ],
+    [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-jar",
+      "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+      "classinfo",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42038-p01609-animation-current-proof-v1/main/dev/codex/schubert/nk/web/view/AnimationListViewModel.class"
+    ]
+  ],
+  "inputHashes": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "sha256": "c324471f8b7933a3cb401eafbc35a7055443779b438a3ab928bda3867a1b8ab1"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar",
+      "sha256": "fb5b0036a0899ea97edfa0fc2c7985b55f3f7c5695028163e5e60d4f3cf6075d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+      "sha256": "d2b74b20b415163c1f53261e7c5ef4445b788327094208ff821e0c2baf9bc8f1"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationListCountBoundaryTest.java",
+      "sha256": "f179628406a4baf3de1d29ab5dd1df2c475818ca05371670f10ee723c67ec4ad"
+    }
+  ],
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42040-p01609-animation-current-selected-v1/terminal.json",
+    "sha256": "1951321a6e1049f351352c68ab2e976c1756a947e3c962a0121d93869cb03999"
+  },
+  "stages": {
+    "unit": 0,
+    "execinfoExit": 0,
+    "classinfoExit": 0
+  },
+  "originalXML": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42040-p01609-animation-current-selected-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "ccf877d747277e4305437c8adaf0875923da85374287c72042ec1e2d87cef4c5"
+  },
+  "originalExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42040-p01609-animation-current-selected-v1/original.exec",
+    "sha256": "89a236fa56a2f86ae3aa76e19f9cba3f915107fddef3f1b093f5567893c3ed72"
+  },
+  "currentDebugCrc": "883a6790e9efd733",
+  "earlierSuccessfulEightRepeated": 0,
+  "realApplicationOrBackendActions": 0,
+  "noCoverageUnion": true,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "selectedProbeHits": 6,
+  "selectedProbeTotal": 68
+}
