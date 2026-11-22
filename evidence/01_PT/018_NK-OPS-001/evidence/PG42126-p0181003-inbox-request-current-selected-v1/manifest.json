@@ -1,0 +1,79 @@
+{
+  "run": "PG42126",
+  "source": "b44ac3b62fe85d5d36ba114fc56198417258ec18",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-P018-10.03/2",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T04:41:27.668090+00:00",
+  "dependencyPacket": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42124-p0181003-inbox-request-current-v1/manifest.json",
+    "sha256": "079bc1497f9772451d58ca92d443bd02cff881921686cd3209bed4378837ad06"
+  },
+  "command": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+    "-Dfile.encoding=UTF-8",
+    "-Duser.timezone=Asia/Tokyo",
+    "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/PG42126-p0181003-inbox-request-current-selected-v1/init.log",
+    "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/PG42126-p0181003-inbox-request-current-selected-v1/original.exec,append=false,sessionid=PG42126-p0181003-inbox-request-current-selected-v1",
+    "-cp",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42124-p0181003-inbox-request-current-v1/main:/home/mini/codex/project1/work/pgpt-runs/PG379/PG42124-p0181003-inbox-request-current-v1/test:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+    "org.junit.platform.console.ConsoleLauncher",
+    "execute",
+    "--disable-banner",
+    "--disable-ansi-colors",
+    "--fail-if-no-tests",
+    "--details=summary",
+    "--select-method",
+    "dev.codex.schubert.nk.api.idempotency.InboxRequestValueContractTest#requestValue002OrderedValueComponentsAndFixedRedactionRetainBorrowedCanonical",
+    "--reports-dir",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42126-p0181003-inbox-request-current-selected-v1/xml"
+  ],
+  "originalTerminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42126-p0181003-inbox-request-current-selected-v1/terminal.json",
+    "sha256": "32f4211a2147f2d09eb380f18f7dcb306824d81acf30f951dfb825f7cd884dd9"
+  },
+  "xml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42126-p0181003-inbox-request-current-selected-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "0eea0185225a34a52b5cc80a8786e0d802c992995c6c1947c1d8e235763e4ef1"
+  },
+  "exec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42126-p0181003-inbox-request-current-selected-v1/original.exec",
+    "sha256": "589ddad04004cb674a36c8a32573e878c96bec1de5c5672bd29a9e7d4ef55547"
+  },
+  "partialCurrentPositiveCrc": {
+    "dev/codex/schubert/nk/api/idempotency/CanonicalRequest": {
+      "crc": "fff9a4524094539f",
+      "hits": 21,
+      "total": 33
+    },
+    "dev/codex/schubert/nk/api/idempotency/InboxRequestValueContractTest": {
+      "crc": "e2989efacf011ac3",
+      "hits": 50,
+      "total": 198
+    },
+    "dev/codex/schubert/nk/api/idempotency/InboxRequest": {
+      "crc": "afc5a75668b2bad9",
+      "hits": 26,
+      "total": 39
+    }
+  },
+  "initializedTypes": [
+    "dev/codex/schubert/nk/api/idempotency/CanonicalRequest",
+    "dev/codex/schubert/nk/api/idempotency/InboxRequest",
+    "dev/codex/schubert/nk/api/idempotency/InboxRequestValueContractTest"
+  ],
+  "compilerOnlyCanonicalFieldNotInitialized": true,
+  "syntheticLambdaCount": 2,
+  "initialPostCheckIncorrectlyExpectedAllCompiledClasses": true,
+  "originalTestRerun": false,
+  "testId": "PT-IDEM-REQUESTVALUE002",
+  "tests": 1,
+  "passed": 1,
+  "errors": 0,
+  "skipped": 0,
+  "notRunSelected": 0,
+  "actualAuthSessionMQDBOrSecretActions": 0,
+  "previousTestsNotReplayed": 20,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
