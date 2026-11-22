@@ -1,0 +1,71 @@
+{
+  "run": "PG43008-g07-new-public-tracked-delta-v1",
+  "source": "28cccff6b3fe539688a2df8753730dd2389e8f6f",
+  "wbs": "WBS-G07",
+  "terminalAtUTC": "2026-11-22T20:44:58.898653+00:00",
+  "startedAtUTC": "2026-11-22T20:44:56.656481+00:00",
+  "previousCursor": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42972-g07-current-public-delta-v1/manifest.json",
+    "sha256": "ae8cfb6daba671b63b188aa2998e02f54b10901ba516b9366c67bca7eb8f50b8"
+  },
+  "firstExclusive": "8ab834ffd4c5bfba6a3fcaf9cc878ade364fa7f6",
+  "scope": "Incremental tracked public Git changes only; no raw private evidence, credential path, Current data or private stash material read",
+  "scannedTrackedCommits": 27,
+  "scannedDeltaPaths": 98,
+  "tool": {
+    "path": "/home/mini/codex/project1/work/toolchain/gitleaks-8.30.1-linux-x64/gitleaks",
+    "sha256": "88f91962aa2f93ac6ab281d553b9e125f5197bbbce38f9f2437f7299c32e5509"
+  },
+  "command": [
+    "/home/mini/codex/project1/work/toolchain/gitleaks-8.30.1-linux-x64/gitleaks",
+    "git",
+    "--redact=100",
+    "--no-banner",
+    "--log-opts=8ab834ffd4c5bfba6a3fcaf9cc878ade364fa7f6..28cccff6b3fe539688a2df8753730dd2389e8f6f",
+    "--report-format",
+    "json",
+    "--report-path",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43008-g07-new-public-tracked-delta-v1/scan-result.json",
+    "."
+  ],
+  "actualExit": 1,
+  "preexistingStagedProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42996-operation-token-current-json-v1/staged-scan-adjudication.json",
+    "sha256": "eb192b2dc066f8490d47b6dd0848b4ffb421fc30ec8938b4fdc43549040e6803"
+  },
+  "result": {
+    "rawFindings": 2,
+    "confirmedSecrets": 0,
+    "unclassified": 0,
+    "classified": [
+      {
+        "file": "evidence/01_PT/018_NK-OPS-001/evidence/PG42996-operation-token-current-json-v1/manifest.json",
+        "line": 69,
+        "rule": "generic-api-key",
+        "classification": "TRACKED_JAVA_SOURCE_CHECKSUM",
+        "protectedValueOutput": 0
+      },
+      {
+        "file": "evidence/01_PT/018_NK-OPS-001/evidence/PG42996-operation-token-current-json-v1/manifest.json",
+        "line": 77,
+        "rule": "generic-api-key",
+        "classification": "TRACKED_JAVA_SOURCE_CHECKSUM",
+        "protectedValueOutput": 0
+      }
+    ]
+  },
+  "stdout": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43008-g07-new-public-tracked-delta-v1/stdout.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stderr": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43008-g07-new-public-tracked-delta-v1/stderr.txt",
+    "sha256": "a31cd51f85987867c1c48e09cd1edaa435959c28ad6b8f6a02f82578a2d91017"
+  },
+  "currentBaselineTree": "cd377044e4ca058ea219ca6a2fec82159559c72c",
+  "stashCount": 7,
+  "productionRuns": 0,
+  "wholeG07": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
