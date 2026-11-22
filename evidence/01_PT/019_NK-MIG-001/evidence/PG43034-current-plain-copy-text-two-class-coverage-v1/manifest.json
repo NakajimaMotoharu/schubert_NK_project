@@ -1,0 +1,147 @@
+{
+  "run": "PG43034-current-plain-copy-text-two-class-coverage-v1",
+  "wbs": "WBS-P019-03.02/2",
+  "source": "23207dd64d2f4dec24ca946f106d2854a88c4757",
+  "productionCore": "7698011f52d6cc5f94c76413b6ab36971783b9c9",
+  "terminalAtUTC": "2026-11-22T21:20:48.522015+00:00",
+  "actualExit": 0,
+  "testIds": [
+    "PT-MIG-COPY001..012",
+    "PT-MIG-STREAM001..012"
+  ],
+  "fixtureSpec": [
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/017_COPYtext製造・独立十二byte仕様.md",
+      "sha256": "3c0b4be326f0f4dea66f29ee6ddd33fbd806097a87e0d93d3f863f8fc91ca5f1"
+    },
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/027_COPY行streamとdataset接続・独立十五仕様.md",
+      "sha256": "fee6d8807a24272be618c553d356c062c0a853ec2ab8cda37f153bcec4effef3"
+    }
+  ],
+  "originalReferenceCorrected": {
+    "previousProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42460-f03-copy-text-encoding-stream-current-v1/manifest.json",
+      "sha256": "2d49aa3b2f3716d5e3534e18a9601165a95576d78e06df1f1b542611f3a5fd50"
+    },
+    "beginLabelCorrection": "pinnedOriginalScope in raw begin points to the Writer fixture, while prior comparison receipt is PG42460; no runtime command or byte input was affected."
+  },
+  "scopedStaticProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42462-f03-copy-encoding-typed-current-receipt-v1/manifest.json",
+    "sha256": "42dfeef365bc0e0d4f4f9ba22a65cf26259df7d9c35dc1be2aa56069b94315e2"
+  },
+  "inputRecord": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43034-current-plain-copy-text-two-class-coverage-v1/begin.json",
+    "sha256": "1977d5afc94f18efbcfb9769b99763feb18a0f45b31c4d12416076d2cdd1ccae"
+  },
+  "executionSourceJar": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+    "sha256": "4a3de8b3dfe415c5171f42478f06e63b21f982be13cbd232131daf35dbd498d5"
+  },
+  "sameRunOrdinary": {
+    "tests": 24,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "newDefinitions": 0
+  },
+  "scopedFourCounters": {
+    "LINE": 61,
+    "METHOD": 10,
+    "CLASS": 2,
+    "BRANCH": 49
+  },
+  "rawClasses": {
+    "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder": {
+      "crc": "df9bfcb3651c3c28",
+      "capacity": 45,
+      "counters": {
+        "INSTRUCTION": [
+          0,
+          200
+        ],
+        "BRANCH": [
+          0,
+          33
+        ],
+        "LINE": [
+          0,
+          44
+        ],
+        "COMPLEXITY": [
+          0,
+          26
+        ],
+        "METHOD": [
+          0,
+          6
+        ],
+        "CLASS": [
+          0,
+          1
+        ]
+      }
+    },
+    "dev/codex/schubert/nk/migration/PostgresCopyTextWriter": {
+      "crc": "bcaffef1341e07c6",
+      "capacity": 19,
+      "counters": {
+        "INSTRUCTION": [
+          0,
+          69
+        ],
+        "BRANCH": [
+          0,
+          16
+        ],
+        "LINE": [
+          0,
+          17
+        ],
+        "COMPLEXITY": [
+          0,
+          12
+        ],
+        "METHOD": [
+          0,
+          4
+        ],
+        "CLASS": [
+          0,
+          1
+        ]
+      }
+    }
+  },
+  "originalJUnit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43034-current-plain-copy-text-two-class-coverage-v1/reports/TEST-junit-jupiter.xml",
+    "sha256": "9fd9c1148f028ef5c3acb36c3bab0a8cc26ebee8046c60580ebfd1074cee5604"
+  },
+  "originalExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43034-current-plain-copy-text-two-class-coverage-v1/unit.exec",
+    "sha256": "af2b83d55c48d3741e1880ef664d306579dde5e9e55936b9cc84939c8b19672e"
+  },
+  "singleExecSession": [
+    {
+      "labelBytesHex": "504734333033342d636f70792d746578742d63757272656e74",
+      "startMillis": 1795382420728,
+      "endMillis": 1795382421797
+    }
+  ],
+  "published": [
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG43034-current-plain-copy-text-two-class-coverage-v1/coverage-unfiltered.tsv",
+      "sha256": "c94a5ba6fd9b107ebe4fa884a8b013999e1ecbd9f7292b978b8d5bc8a4598a38"
+    },
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG43034-current-plain-copy-text-two-class-coverage-v1/sanitized-junit.xml",
+      "sha256": "713a3dc731496bb76744d6dc066dcaa08680dd1dfd53a71aca32ac05417d33e0"
+    }
+  ],
+  "actualSdkCopyOrJdbc": 0,
+  "distinctHeldSdkCasesUnexecuted": 24,
+  "actualMaterialInputs": 0,
+  "methodSourceGeneralGate": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
