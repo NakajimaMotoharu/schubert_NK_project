@@ -57,6 +57,8 @@ SCOPES += ("005_NK-MSG-001/evidence/sync-consumers",
            "006_NK-MSG-002/004_JmsResourceCompounds/evidence",
            "006_NK-MSG-002/005_LogReplayVertical/evidence")
 ROOT_MANIFEST = "008_NK-SCN-001/evidence/manifest.json"
+SCOPE_METADATA = {"manifest.json", "checksums.sha256"}
+PROVISIONAL_RUN_DIRECTORY = re.compile(r"PG[1-9][0-9]*-[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*")
 
 
 def digest(path):
@@ -94,16 +96,40 @@ def load_success_manifest(path):
     return manifest
 
 
+def scope_payloads(directory):
+    """List owned payloads, keeping reserved sibling namespaces out of the formal scope."""
+    pending = list(directory.iterdir())
+    actual = set()
+    while pending:
+        path = pending.pop()
+        relative = path.relative_to(directory)
+        if path.is_symlink():
+            raise ValueError("symbolic link in the formal evidence scope")
+        if path.is_dir():
+            if len(relative.parts) == 1 and (
+                path.name == "provisional" or PROVISIONAL_RUN_DIRECTORY.fullmatch(path.name)
+            ):
+                continue
+            pending.extend(path.iterdir())
+        elif path.is_file():
+            if str(relative) not in SCOPE_METADATA:
+                actual.add(str(relative))
+        else:
+            raise ValueError("non-regular formal evidence entry")
+    return actual
+
+
 def validate_scope(root, scope, run, commit, branch):
     directory = root / scope
+    if directory.resolve() != root.resolve() / scope:
+        raise ValueError("invalid formal evidence scope directory")
+    actual = scope_payloads(directory)
     manifest_path = directory / "manifest.json"
     manifest = load_success_manifest(manifest_path)
     if (manifest["runId"], manifest["targetCommit"], manifest["branch"]) != (run, commit, branch):
         raise ValueError("mixed or failed evidence run/source/branch")
     entries = manifest["files"]
     paths = [entry["path"] for entry in entries]
-    actual = {str(p.relative_to(directory)) for p in directory.rglob("*") if p.is_file()
-              and p.name not in ("manifest.json", "checksums.sha256")}
     if len(paths) != len(set(paths)) or set(paths) != actual:
         raise ValueError("incomplete or duplicate evidence file inventory")
     for entry in entries:

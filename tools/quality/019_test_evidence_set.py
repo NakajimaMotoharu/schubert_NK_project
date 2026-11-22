@@ -3004,6 +3004,43 @@ class EvidenceSetTest(unittest.TestCase):
                     with self.assertRaises(ValueError):
                         gate.validate_scope(root, scope, "PT-WEB-TEST", "a" * 40, "dev-foundation")
 
+    def test_provisional_siblings_remain_outside_the_formal_inventory(self):
+        with tempfile.TemporaryDirectory(prefix="nk-formal-inventory-") as temporary:
+            root = Path(temporary)
+            scope = "009_NK-MED-001/evidence"
+            self.write_scope(root, scope)
+            directory = root / scope
+
+            def validate():
+                return gate.validate_scope(root, scope, "PT-WEB-TEST", "a" * 40, "dev-foundation")
+
+            for name in ("PG42740-study-v1", "PG18788-OLD-RANGE-V1", "provisional"):
+                supplemental = directory / name
+                supplemental.mkdir()
+                (supplemental / "manifest.json").write_text('{"run":"separate"}')
+                (supplemental / "results.xml").write_text("different results")
+            self.assertEqual(scope, validate()["scope"])
+
+            for candidate in ("PG42740.json", "PG0-empty", "logs/PG42740-nested/results.xml",
+                              "logs/manifest.json"):
+                unlisted = directory / candidate
+                unlisted.parent.mkdir(parents=True, exist_ok=True)
+                unlisted.write_text("unlisted")
+                with self.assertRaisesRegex(ValueError, "file inventory"):
+                    validate()
+                unlisted.unlink()
+            (directory / "PG42741-linked-v1").symlink_to(directory / "provisional")
+            with self.assertRaisesRegex(ValueError, "symbolic link"):
+                validate()
+            (directory / "PG42741-linked-v1").unlink()
+
+            supplemental_file = "PG42740-study-v1/results.xml"
+            item = {"path": supplemental_file,
+                    "sha256": hashlib.sha256((directory / supplemental_file).read_bytes()).hexdigest()}
+            self.write_scope(root, scope, {"files": [item]})
+            with self.assertRaisesRegex(ValueError, "file inventory"):
+                validate()
+
     def test_collection_stops_at_each_failure(self):
         for failed_at in range(53):
             calls = []
