@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -13,8 +14,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -124,7 +127,7 @@ final class QuestionReceiptIdTest {
 
   @Test
   @DisplayName("PT-QST-RID007 private atomic generator state across64 callers")
-  void concurrentCalls() throws Exception {
+  void concurrentCalls() throws InterruptedException, ExecutionException, TimeoutException {
     AtomicInteger calls = new AtomicInteger();
     var generator =
         new QuestionReceiptIdGenerator(
@@ -165,7 +168,7 @@ final class QuestionReceiptIdTest {
 
   @Test
   @DisplayName("PT-QST-RID008 value semantics and public-only evidence")
-  void equalityAndPublicEvidence() throws Exception {
+  void equalityAndPublicEvidence() throws IOException {
     var first = new QuestionReceiptId(FORWARD);
     var equal = new QuestionReceiptId(FORWARD);
     assertEquals(first, equal);
@@ -178,25 +181,30 @@ final class QuestionReceiptIdTest {
     Files.createDirectories(directory);
     Files.writeString(
         directory.resolve("PT-QST-RID008.txt"),
-        "forward=0123456789ABCDEFGHJKMNPQRS\nreverse=ZYXWVTSRQPNMKJHGFEDCBA9876\nlength=26\nalphabetSize=32\nrandomDrawsPerId=26\nownerOrTimeInput=false\n");
+        "forward=0123456789ABCDEFGHJKMNPQRS\n"
+            + "reverse=ZYXWVTSRQPNMKJHGFEDCBA9876\n"
+            + "length=26\n"
+            + "alphabetSize=32\n"
+            + "randomDrawsPerId=26\n"
+            + "ownerOrTimeInput=false\n");
   }
 
   @Test
   @DisplayName("PT-QST-RID009 provider failure releases private state to another worker")
-  void providerFailureReleasesPrivateStateToAnotherWorker() throws Exception {
+  void providerFailureReleasesPrivateStateToAnotherWorker()
+      throws InterruptedException, ExecutionException, TimeoutException {
     for (boolean fatal : List.of(false, true)) {
-      Throwable failure =
-          fatal
-              ? new AssertionError("public provider fixture")
-              : new IllegalStateException("public provider fixture");
+      var fatalFailure = new AssertionError("public provider fixture");
+      var runtimeFailure = new IllegalStateException("public provider fixture");
+      Throwable failure = fatal ? fatalFailure : runtimeFailure;
       var calls = new AtomicInteger();
       var generator =
           new QuestionReceiptIdGenerator(
               bound -> {
                 assertEquals(32, bound);
                 if (calls.getAndIncrement() == 0) {
-                  if (failure instanceof Error error) throw error;
-                  throw (RuntimeException) failure;
+                  if (fatal) throw fatalFailure;
+                  throw runtimeFailure;
                 }
                 return 0;
               });

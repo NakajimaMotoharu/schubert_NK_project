@@ -25,9 +25,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.junit.jupiter.api.Test;
 
 /** QST001/ASY001/UI236/SS312323324/PT-QST-PORT001..008, no HMAC/keys/DB/acceptance. */
@@ -177,6 +179,7 @@ final class QuestionSubmitRequestPortTest {
         char[] copy = request.copyQuestion();
         Arrays.fill(copy, 'X');
         byte[] field = first.fields().getFirst().value();
+        if (field == null) throw new AssertionError("required question field is missing");
         Arrays.fill(field, (byte) 'X');
         assertArrayEquals(BODY.toCharArray(), request.copyQuestion());
         canonical(first, "1", BODY);
@@ -236,7 +239,8 @@ final class QuestionSubmitRequestPortTest {
   }
 
   @Test
-  void parallelCopiesAndControlledCloseKeepIndependentOwnership() throws Exception {
+  void parallelCopiesAndControlledCloseKeepIndependentOwnership()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var request = decoded(BODY);
     var workers = Executors.newFixedThreadPool(2);
     try {

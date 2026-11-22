@@ -4,9 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +20,8 @@ final class QuestionReceiptRecoveryTest {
   private static final String LAST_VECTOR = "ZZZZZZZZZZZZZZZZZZZZZZZZZZ";
 
   @Test
-  void everyFailedDrawReleasesTheGeneratorForAnotherThread() throws Exception {
+  void everyFailedDrawReleasesTheGeneratorForAnotherThread()
+      throws InterruptedException, ExecutionException, TimeoutException {
     for (int position = 0; position < 26; position++) {
       int failureAt = position;
       AtomicInteger draws = new AtomicInteger();
@@ -40,7 +43,8 @@ final class QuestionReceiptRecoveryTest {
   }
 
   @Test
-  void invalidIndicesDoNotPoisonTheNextCandidate() throws Exception {
+  void invalidIndicesDoNotPoisonTheNextCandidate()
+      throws InterruptedException, ExecutionException, TimeoutException {
     for (int invalid : new int[] {-1, 32, Integer.MIN_VALUE, Integer.MAX_VALUE}) {
       AtomicInteger draws = new AtomicInteger();
       QuestionReceiptIdGenerator generator =
@@ -59,7 +63,8 @@ final class QuestionReceiptRecoveryTest {
   }
 
   @Test
-  void discardedPartialAlphabetDoesNotPrefixTheNextCandidate() throws Exception {
+  void discardedPartialAlphabetDoesNotPrefixTheNextCandidate()
+      throws InterruptedException, ExecutionException, TimeoutException {
     AtomicInteger draws = new AtomicInteger();
     IllegalStateException failure = new IllegalStateException("public fixture");
     QuestionReceiptIdGenerator generator =
@@ -79,7 +84,8 @@ final class QuestionReceiptRecoveryTest {
   }
 
   @Test
-  void lastDrawErrorKeepsIdentityAndStillUnlocks() throws Exception {
+  void lastDrawErrorKeepsIdentityAndStillUnlocks()
+      throws InterruptedException, ExecutionException, TimeoutException {
     AtomicInteger draws = new AtomicInteger();
     AssertionError failure = new AssertionError("public fixture");
     QuestionReceiptIdGenerator generator =
@@ -99,7 +105,7 @@ final class QuestionReceiptRecoveryTest {
   }
 
   private static QuestionReceiptId fromAnotherThread(QuestionReceiptIdGenerator generator)
-      throws Exception {
+      throws InterruptedException, ExecutionException, TimeoutException {
     ExecutorService worker = Executors.newSingleThreadExecutor();
     try {
       return worker.submit(generator::generate).get(5, TimeUnit.SECONDS);
