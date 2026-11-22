@@ -13,9 +13,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.junit.jupiter.api.Test;
 
 /** SSC344; PT-MIG-FILEORDER001..012; literal oracles in NK-MIG-001 specification 013. */
@@ -185,7 +187,8 @@ final class ScenarioFileMigrationMapTest {
   }
 
   @Test
-  void file012ConcurrentReturnsRemainIndependentlyOwned() throws Exception {
+  void file012ConcurrentReturnsRemainIndependentlyOwned()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var map = sample();
     var executor = Executors.newFixedThreadPool(8);
     var futures = new ArrayList<Future<?>>();
