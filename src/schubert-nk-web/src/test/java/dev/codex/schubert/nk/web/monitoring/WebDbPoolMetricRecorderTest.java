@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.ToDoubleFunction;
 import java.util.stream.Collectors;
@@ -218,7 +220,8 @@ class WebDbPoolMetricRecorderTest {
   }
 
   @Test
-  void webPoolMetric006ParallelUpdatesKeepWholeImmutableSnapshots() throws Exception {
+  void webPoolMetric006ParallelUpdatesKeepWholeImmutableSnapshots()
+      throws InterruptedException, ExecutionException, TimeoutException {
     try (var registry = new Registry()) {
       var pool = Executors.newFixedThreadPool(8);
       try {

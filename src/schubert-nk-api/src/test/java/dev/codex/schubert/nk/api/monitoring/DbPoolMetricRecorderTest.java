@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -194,7 +195,8 @@ class DbPoolMetricRecorderTest {
   }
 
   @Test
-  void poolMetric006ParallelUpdatesKeepWholeImmutableSnapshots() throws Exception {
+  void poolMetric006ParallelUpdatesKeepWholeImmutableSnapshots()
+      throws InterruptedException, ExecutionException {
     try (var registry = new Registry()) {
       var pool = Executors.newFixedThreadPool(8);
       try {
