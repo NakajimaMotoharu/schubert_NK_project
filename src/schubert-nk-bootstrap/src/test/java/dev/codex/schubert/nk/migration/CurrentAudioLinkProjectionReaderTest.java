@@ -528,7 +528,7 @@ final class CurrentAudioLinkProjectionReaderTest {
         if (failurePhaseHits == failureOccurrence && failure != null) {
           switch (failure) {
             case SQLException sql -> throw sql;
-            case RuntimeException runtime -> throw runtime;
+            case IllegalStateException runtime -> throw runtime;
             case Error fatal -> throw fatal;
             default -> throw new AssertionError("unsupported fixture failure", failure);
           }
