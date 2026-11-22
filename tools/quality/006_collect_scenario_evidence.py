@@ -73,6 +73,52 @@ def validate_module_coverage(report):
     return root
 
 
+def compiled_class_names(directory):
+    if not directory.is_dir() or directory.absolute() != directory.resolve():
+        raise ValueError("missing or redirected compiled Main directory")
+    names = set()
+    for path in directory.rglob("*"):
+        if path.is_symlink():
+            raise ValueError("redirected compiled Main input")
+        if path.is_file() and path.suffix == ".class":
+            name = path.relative_to(directory).with_suffix("").as_posix().replace("/", ".")
+            if name in names:
+                raise ValueError("duplicate compiled Main class name")
+            names.add(name)
+    return names
+
+
+def validate_module_spotbugs(report, expected_classes):
+    errors = report.findall("Errors")
+    summaries = report.findall("FindBugsSummary")
+    if (
+        report.tag != "BugCollection"
+        or report.findall(".//BugInstance")
+        or not expected_classes
+        or len(errors) != 1
+        or errors[0].get("errors") != "0"
+        or errors[0].get("missingClasses") != "0"
+        or len(errors[0]) != 0
+        or len(summaries) != 1
+    ):
+        raise ValueError("nonpassing or incomplete module SpotBugs report")
+    summary = summaries[0]
+    classes = [entry.get("class") for entry in summary.findall("PackageStats/ClassStats")]
+    if (
+        summary.get("total_classes") != str(len(expected_classes))
+        or len(classes) != len(expected_classes)
+        or set(classes) != expected_classes
+    ):
+        raise ValueError("module SpotBugs analysed classes differ from compiled Main")
+    return {
+        "tool": "SpotBugs 4.10.4.0",
+        "violations": 0,
+        "errors": 0,
+        "missingClasses": 0,
+        "analysedClasses": len(classes),
+    }
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("run_id")
@@ -143,10 +189,7 @@ def main():
         static = "not configured for characterization runner"
         if module != "characterization":
             spot = ET.parse(target / "spotbugsXml.xml").getroot()
-            errors = spot.find("Errors")
-            if spot.findall("BugInstance") or errors is None or int(errors.get("errors", "0")):
-                raise SystemExit("static analysis not clean")
-            static = {"tool": "SpotBugs 4.10.4.0", "violations": 0, "errors": 0}
+            static = validate_module_spotbugs(spot, compiled_class_names(target / "classes"))
         modules[module] = {"tests": count, "coverage": counters, "spotbugs": static}
     if not methods:
         raise SystemExit("missing Scenario tests")

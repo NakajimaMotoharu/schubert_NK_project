@@ -111,6 +111,71 @@ class EvidenceSetTest(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     scenario.validate_module_coverage(report)
 
+    @staticmethod
+    def _fixture_spotbugs():
+        return ET.fromstring(
+            """
+            <BugCollection>
+              <Errors errors="0" missingClasses="0"/>
+              <FindBugsSummary total_classes="2">
+                <PackageStats package="fixture">
+                  <ClassStats class="fixture.Root"/>
+                  <ClassStats class="fixture.Root$Inner"/>
+                </PackageStats>
+              </FindBugsSummary>
+            </BugCollection>
+            """
+        )
+
+    def test_spotbugs_uses_real_compiled_class_names(self):
+        with tempfile.TemporaryDirectory(prefix="nk-spotbugs-classes-") as scratch:
+            classes = Path(scratch) / "classes"
+            package = classes / "fixture"
+            package.mkdir(parents=True)
+            for name in ("Root.class", "Root$Inner.class", "local.properties"):
+                (package / name).write_bytes(b"synthetic bytes")
+            actual = scenario.compiled_class_names(classes)
+            self.assertEqual({"fixture.Root", "fixture.Root$Inner"}, actual)
+            result = scenario.validate_module_spotbugs(self._fixture_spotbugs(), actual)
+            self.assertEqual(2, result["analysedClasses"])
+            self.assertEqual(0, result["missingClasses"])
+
+    def test_spotbugs_rejects_missing_error_counter_and_any_nonclean_report(self):
+        for defect in ("missingClasses", "errors", "missing-attribute", "missing-entry", "bug", "summary"):
+            with self.subTest(defect=defect):
+                report = self._fixture_spotbugs()
+                errors = report.find("Errors")
+                if defect in ("missingClasses", "errors"):
+                    errors.set(defect, "1")
+                elif defect == "missing-attribute":
+                    del errors.attrib["missingClasses"]
+                elif defect == "missing-entry":
+                    ET.SubElement(errors, "MissingClass").text = "fixture.Dependency"
+                elif defect == "bug":
+                    ET.SubElement(report, "BugInstance")
+                else:
+                    report.remove(report.find("FindBugsSummary"))
+                with self.assertRaisesRegex(ValueError, "nonpassing or incomplete"):
+                    scenario.validate_module_spotbugs(report, {"fixture.Root", "fixture.Root$Inner"})
+
+    def test_spotbugs_requires_exact_class_stats_even_when_counts_agree(self):
+        for defect in ("missing", "unexpected", "duplicate", "total"):
+            with self.subTest(defect=defect):
+                report = self._fixture_spotbugs()
+                summary = report.find("FindBugsSummary")
+                package = summary.find("PackageStats")
+                row = package.findall("ClassStats")[1]
+                if defect == "missing":
+                    package.remove(row)
+                elif defect == "unexpected":
+                    row.set("class", "fixture.Other")
+                elif defect == "duplicate":
+                    row.set("class", "fixture.Root")
+                else:
+                    summary.set("total_classes", "1")
+                with self.assertRaisesRegex(ValueError, "analysed classes differ"):
+                    scenario.validate_module_spotbugs(report, {"fixture.Root", "fixture.Root$Inner"})
+
     def test_web_log_jdbc_resource_suite_canaries(self):
         expected = ("PT-IDEM-012-R02", "PT-IDEM-012-R03", "PT-IDEM-012-R04",
                     "PT-IDEM-012-R05")
