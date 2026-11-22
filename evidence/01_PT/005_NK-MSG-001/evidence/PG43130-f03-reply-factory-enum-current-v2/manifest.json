@@ -1,0 +1,267 @@
+{
+  "run": "PG43130-f03-reply-factory-enum-current-v2",
+  "source": "3c540d344ae4ca2c48c255777d0cc4cdd7f31631",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T23:52:46.040896+00:00",
+  "startedAtUTC": "2026-11-22T23:52:36.594643+00:00",
+  "wbs": "WBS-F03/2-2-b",
+  "related": [
+    "BUG-3671",
+    "BUG-3672",
+    "BUG-3673",
+    "YKT-2887"
+  ],
+  "requirement": [
+    "SS321",
+    "MSG-001",
+    "MSG-007",
+    "451"
+  ],
+  "independentEnum": {
+    "junit": "PT-JMS-ENV009",
+    "expected": [
+      "INSTANCE"
+    ],
+    "arrayReferencesDistinct": true,
+    "unknownRejected": "IllegalArgumentException"
+  },
+  "samePhysicalFactoryAsInitial": true,
+  "caseRoster": [
+    [
+      "dev.codex.schubert.nk.api.messaging.outbound.JmsReplyEnvelopeContractTest",
+      "envelope001LiteralSyncAndApprovedAsyncRepliesKeepBodyAndExactProperties()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.messaging.outbound.JmsReplyEnvelopeContractTest",
+      "envelope002NullMalformedRequestOversizeAndLengthMismatchNeverAcquireMessage()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.messaging.outbound.JmsReplyEnvelopeContractTest",
+      "envelope003ProviderFailuresKeepIdentityAndNeverRetryOrContinue()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.messaging.outbound.JmsReplyEnvelopeContractTest",
+      "envelope004NullProviderResultFailsBeforeAnyMessageOperation()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.messaging.outbound.JmsReplyEnvelopeContractTest",
+      "envelope005LogoutSuccessKeepsLiteralBodyAndProperties()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.messaging.outbound.JmsReplyEnvelopeContractTest",
+      "envelope006EmptyAndReservedHeaderNeverAcquireMessage()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.messaging.outbound.JmsReplyEnvelopeContractTest",
+      "envelope007InternalEventNeverAcquiresMessage()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.messaging.outbound.JmsReplyEnvelopeContractTest",
+      "envelope008ShortBodyAndExactCapMismatchNeverAcquireMessage()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.messaging.outbound.JmsReplyEnvelopeContractTest",
+      "envelope009FactorySingletonEnumeratesAndRejectsUnknownName()"
+    ]
+  ],
+  "fixture": {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/JmsReplyEnvelopeContractTest.java",
+    "sha256": "bc5afc5553a4e86f4605c9e9a74734b04eef6ad4cc8598d7bc4cff33d7cee3a6"
+  },
+  "production": {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory.java",
+    "sha256": "90c2401c0755b6ef1bb7e15c3847d268d9401a30d7ea9a4409f7516d7c500957"
+  },
+  "protocol": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42762-protocol-real-local-ci-entry-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+    "sha256": "79210c39ae0ceee549878c1c25b22961a44cc4a379d90c8b1708b1c1b5c7efb5"
+  },
+  "qualifiedStages": {
+    "format": {
+      "actualExit": 0,
+      "atUTC": "2026-11-22T23:52:37.145503+00:00"
+    },
+    "main": {
+      "actualExit": 0,
+      "atUTC": "2026-11-22T23:52:37.682773+00:00"
+    },
+    "fixture": {
+      "actualExit": 0,
+      "atUTC": "2026-11-22T23:52:38.394281+00:00"
+    },
+    "junit": {
+      "actualExit": 0,
+      "atUTC": "2026-11-22T23:52:39.582457+00:00"
+    },
+    "rawCompile": {
+      "actualExit": 0,
+      "atUTC": "2026-11-22T23:52:40.196781+00:00"
+    },
+    "unfiltered": {
+      "actualExit": 0,
+      "atUTC": "2026-11-22T23:52:40.296061+00:00"
+    },
+    "style": {
+      "actualExit": 0,
+      "atUTC": "2026-11-22T23:52:41.021424+00:00"
+    },
+    "pmd": {
+      "actualExit": 4,
+      "atUTC": "2026-11-22T23:52:43.362942+00:00"
+    },
+    "spotbugs": {
+      "actualExit": 1,
+      "atUTC": "2026-11-22T23:52:46.039779+00:00"
+    }
+  },
+  "counter": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 90
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 6
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 16
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 9
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 6
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "mergedOldExec": false,
+  "excludedClassesOrMethods": 0,
+  "attempts": [
+    {
+      "version": "v1",
+      "ordinary": 9,
+      "failed": 0,
+      "rawPmd": [
+        {
+          "rule": "NullAssignment",
+          "line": 198
+        },
+        {
+          "rule": "UseConcurrentHashMap",
+          "line": 263
+        },
+        {
+          "rule": "UseProperClassLoader",
+          "line": 273
+        },
+        {
+          "rule": "UseProperClassLoader",
+          "line": 296
+        }
+      ],
+      "source": "2839fb06d9d65f37929913d868646a65ba25dea4",
+      "terminal": {
+        "path": "../pgpt-runs/PG379/PG43130-f03-reply-factory-enum-current-v1/terminal.json",
+        "sha256": "b49d7c89258a8f115bae9b9e3a0f4de5a18d79f79094e6cde73180df68e18645"
+      }
+    },
+    {
+      "version": "v2",
+      "ordinary": 9,
+      "failed": 0,
+      "rawPmd": [
+        {
+          "rule": "UseConcurrentHashMap",
+          "line": 265
+        },
+        {
+          "rule": "UseProperClassLoader",
+          "line": 275
+        },
+        {
+          "rule": "UseProperClassLoader",
+          "line": 298
+        }
+      ],
+      "source": "3c540d344ae4ca2c48c255777d0cc4cdd7f31631",
+      "terminal": {
+        "path": "../pgpt-runs/PG379/PG43130-f03-reply-factory-enum-current-v2/terminal.json",
+        "sha256": "84842a73fdb558d9284bc659c42ac0fb727a95b8c5366e19ef37dff89e911610"
+      }
+    }
+  ],
+  "static": {
+    "spotbugs": [
+      {
+        "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+        "line": 71,
+        "intent": "original intentional null boundary on synthetic local input"
+      },
+      {
+        "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+        "line": 74,
+        "intent": "original intentional null boundary on synthetic local input"
+      }
+    ],
+    "checkstyle": 0,
+    "rawPmd": [
+      {
+        "rule": "UseConcurrentHashMap",
+        "line": 265
+      },
+      {
+        "rule": "UseProperClassLoader",
+        "line": 275
+      },
+      {
+        "rule": "UseProperClassLoader",
+        "line": 298
+      }
+    ],
+    "suppressions": 0,
+    "typedNullAwayNotExecuted": true
+  },
+  "reference": {
+    "path": "evidence/01_PT/005_NK-MSG-001/evidence/PG43128-p002-reply-envelope-current-qualification-v1/manifest.json",
+    "sha256": "541291d1327a41ed90a83e4d5dfdbd65c74357daf843c206fb89849f5168630b"
+  },
+  "public": [
+    {
+      "path": "evidence/01_PT/005_NK-MSG-001/evidence/PG43130-f03-reply-factory-enum-current-v2/sanitized-junit.xml",
+      "sha256": "af907275049fccb21d8abda595926fc8d451c0594b406a49d479fc26c72f51f5"
+    },
+    {
+      "path": "evidence/01_PT/005_NK-MSG-001/evidence/PG43130-f03-reply-factory-enum-current-v2/coverage-unfiltered.tsv",
+      "sha256": "b0e2256f23ce472b9ee9e8eec6fb3ec8fa657cc58a3992df522012f1a43aed69"
+    }
+  ],
+  "genuineOriginal": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43130-f03-reply-factory-enum-current-v2/xml/TEST-junit-jupiter.xml",
+      "sha256": "2f15a05a4d15f9691257d97ec9b2194a040445527675fb6250cc8ea8b67e5d17"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43130-f03-reply-factory-enum-current-v2/unit.exec",
+      "sha256": "2c1a165620c8aa679832f4764591a1c47fa7e7223ef7588de430dcb0f807a8f8"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43130-f03-reply-factory-enum-current-v2/target/classes/dev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory.class",
+      "sha256": "6e70fd6fc5a9699baba079e661819ab30f20090e76e8949145f755f9e38133e4"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43130-f03-reply-factory-enum-current-v2/begin.json",
+      "sha256": "732aa533c7cda77a9fbe6b9303e35494530b96c2f42cfadc99cfffdfac3f03ea"
+    }
+  ],
+  "actualBrokerOrService": 0,
+  "newTestDefinitions": 1,
+  "formalAcceptanceId": null,
+  "whole451": false
+}
