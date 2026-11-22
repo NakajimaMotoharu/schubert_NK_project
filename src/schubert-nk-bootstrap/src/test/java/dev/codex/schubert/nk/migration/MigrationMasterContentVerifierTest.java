@@ -154,7 +154,8 @@ final class MigrationMasterContentVerifierTest {
   }
 
   @Test
-  void content007AcquisitionTimeoutAndFetchFailuresPreserveOriginal() throws Exception {
+  void content007AcquisitionTimeoutAndFetchFailuresPreserveOriginal()
+      throws NoSuchAlgorithmException {
     for (int index = 0; index < 4; index++) faultAt(index);
   }
 
@@ -296,14 +297,15 @@ final class MigrationMasterContentVerifierTest {
   }
 
   @Test
-  void content018EachQueryFailsWithoutAcquiringItsResult() throws Exception {
+  void content018EachQueryFailsWithoutAcquiringItsResult() throws NoSuchAlgorithmException {
     var calls = expectedCalls(literals(TIME, null));
     for (int index = 0; index < calls.size(); index++)
       if (calls.get(index).endsWith(SUFFIX_QUERY)) faultAt(index);
   }
 
   @Test
-  void content019EveryGetterWasNullAndNextOccurrenceKeepsResourcePostconditions() throws Exception {
+  void content019EveryGetterWasNullAndNextOccurrenceKeepsResourcePostconditions()
+      throws NoSuchAlgorithmException {
     var calls = expectedCalls(literals(TIME, null));
     for (int index = 0; index < calls.size(); index++) {
       String call = calls.get(index);

@@ -14,9 +14,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
@@ -83,7 +85,8 @@ final class MigrationMasterReferenceVerifierTest {
           "SELECT count(*) FROM (SELECT 1 FROM schubert.entry_audio_links GROUP BY entry_id,audio_file_id,link_type HAVING count(*)>1 OR (entry_id IS NULL OR audio_file_id IS NULL OR link_type IS NULL) UNION ALL SELECT 1 FROM schubert.entry_audio_links WHERE entry_id IS NOT NULL AND link_type IS NOT NULL AND display_order IS NOT NULL GROUP BY entry_id,link_type,display_order HAVING count(*)>1) violations");
 
   @Test
-  void reference001ExactSixCountsNineForeignKeysAndOrderQuery() throws Exception {
+  void reference001ExactSixCountsNineForeignKeysAndOrderQuery()
+      throws SQLException, NoSuchAlgorithmException {
     var f = new Fixture();
     verify(f, normal());
     assertEquals(QUERY_SQL, f.sql);
@@ -103,7 +106,7 @@ final class MigrationMasterReferenceVerifierTest {
   }
 
   @Test
-  void reference003BothNullArgumentsFailBeforeConnectionCalls() throws Exception {
+  void reference003BothNullArgumentsFailBeforeConnectionCalls() throws NoSuchAlgorithmException {
     var f = new Fixture();
     var conn = f.connection();
     var declared = normal();
@@ -142,7 +145,8 @@ final class MigrationMasterReferenceVerifierTest {
   }
 
   @Test
-  void reference005AutoAndCreateFailuresPreserveEveryOriginalType() throws Exception {
+  void reference005AutoAndCreateFailuresPreserveEveryOriginalType()
+      throws NoSuchAlgorithmException {
     failuresAt(CALL_AUTO, 0, 1);
     failuresAt(CALL_CREATE, 0, 1);
   }
@@ -158,7 +162,7 @@ final class MigrationMasterReferenceVerifierTest {
   }
 
   @Test
-  void reference007TimeoutFailureClosesOwnedStatement() throws Exception {
+  void reference007TimeoutFailureClosesOwnedStatement() throws NoSuchAlgorithmException {
     failuresAt(CALL_TIMEOUT, 0, 1);
   }
 
@@ -179,18 +183,18 @@ final class MigrationMasterReferenceVerifierTest {
   }
 
   @Test
-  void reference009EveryQueryFailureStopsAtTheOriginalFailure() throws Exception {
+  void reference009EveryQueryFailureStopsAtTheOriginalFailure() throws NoSuchAlgorithmException {
     failuresAt(CALL_QUERY, 0, QUERIES);
   }
 
   @Test
-  void reference010EveryScalarReadPhasePreservesOriginalFailure() throws Exception {
+  void reference010EveryScalarReadPhasePreservesOriginalFailure() throws NoSuchAlgorithmException {
     for (var call : List.of(CALL_NEXT1, CALL_GET_LONG, CALL_WAS_NULL, CALL_NEXT2))
       failuresAt(call, 0, QUERIES);
   }
 
   @Test
-  void reference011EveryResultCloseFailureCannotBeSuccess() throws Exception {
+  void reference011EveryResultCloseFailureCannotBeSuccess() throws NoSuchAlgorithmException {
     failuresAt(CALL_RESULT_CLOSE, 0, QUERIES);
   }
 
@@ -223,7 +227,7 @@ final class MigrationMasterReferenceVerifierTest {
   }
 
   @Test
-  void reference013StatementCloseFailureIsNotNormalCompletion() throws Exception {
+  void reference013StatementCloseFailureIsNotNormalCompletion() throws NoSuchAlgorithmException {
     failuresAt(CALL_OUTER_CLOSE, 0, 1);
   }
 
@@ -257,7 +261,8 @@ final class MigrationMasterReferenceVerifierTest {
   }
 
   @Test
-  void reference016OnlyReadOnlyBorrowedCallsAndExactResourcesExist() throws Exception {
+  void reference016OnlyReadOnlyBorrowedCallsAndExactResourcesExist()
+      throws SQLException, NoSuchAlgorithmException {
     var f = new Fixture();
     verify(f, normal());
     assertEquals(1, f.autoReads);
@@ -281,7 +286,8 @@ final class MigrationMasterReferenceVerifierTest {
   }
 
   @Test
-  void reference018IndependentFreshSuccessAfterFailedPriorQuery() throws Exception {
+  void reference018IndependentFreshSuccessAfterFailedPriorQuery()
+      throws SQLException, NoSuchAlgorithmException {
     var failed = new Fixture();
     failed.shape = Shape.EXTRA;
     failed.faultQuery = 0;
@@ -293,7 +299,8 @@ final class MigrationMasterReferenceVerifierTest {
   }
 
   @Test
-  void reference019EachCountUsesItsOwnDeclaredTableWithoutInventingRows() throws Exception {
+  void reference019EachCountUsesItsOwnDeclaredTableWithoutInventingRows()
+      throws SQLException, NoSuchAlgorithmException {
     var source = normal();
     var content = source.content();
     var speakerRows = new ArrayList<>(source.speakers().rows());
@@ -341,7 +348,8 @@ final class MigrationMasterReferenceVerifierTest {
   }
 
   @Test
-  void reference020FiniteWorkersHaveIndependentSqlResultsAndTerminate() throws Exception {
+  void reference020FiniteWorkersHaveIndependentSqlResultsAndTerminate()
+      throws InterruptedException, ExecutionException, TimeoutException, NoSuchAlgorithmException {
     var declared = normal();
     var executor = Executors.newFixedThreadPool(WORKERS);
     try {
@@ -418,7 +426,8 @@ final class MigrationMasterReferenceVerifierTest {
         new AssertionError("synthetic error"));
   }
 
-  private static void failuresAt(String call, int first, int count) throws Exception {
+  private static void failuresAt(String call, int first, int count)
+      throws NoSuchAlgorithmException {
     var declared = normal();
     for (int slot = first; slot < first + count; slot++)
       for (Throwable failure : failures()) {
@@ -592,7 +601,7 @@ final class MigrationMasterReferenceVerifierTest {
     }
   }
 
-  private static MigrationMasterCopyDataset normal() throws Exception {
+  private static MigrationMasterCopyDataset normal() throws NoSuchAlgorithmException {
     return new MigrationMasterCopyDataset(speakers(STAMP), content(STAMP));
   }
 

@@ -16,9 +16,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
@@ -87,7 +89,8 @@ final class MigrationMasterFinalizerTest {
           "ANALYZE schubert.entry_audio_links");
 
   @Test
-  void final001ExactPreflightBoundSetvalAnalyzeOrderAndOwnership() throws Exception {
+  void final001ExactPreflightBoundSetvalAnalyzeOrderAndOwnership()
+      throws SQLException, NoSuchAlgorithmException {
     var f = new Fixture();
     finish(f, normal());
     var expected = new ArrayList<String>();
@@ -116,7 +119,7 @@ final class MigrationMasterFinalizerTest {
   }
 
   @Test
-  void final003NullArgumentsBeforeConnectionCalls() throws Exception {
+  void final003NullArgumentsBeforeConnectionCalls() throws NoSuchAlgorithmException {
     var declared = normal();
     var f = new Fixture();
     var conn = f.connection();
@@ -154,7 +157,7 @@ final class MigrationMasterFinalizerTest {
   }
 
   @Test
-  void final005AutoCreateOriginalFailuresAndNullVendor() throws Exception {
+  void final005AutoCreateOriginalFailuresAndNullVendor() throws NoSuchAlgorithmException {
     failuresAt(CALL_AUTO, 0, 1);
     failuresAt(CALL_CREATE, 0, 1);
     var f = new Fixture();
@@ -164,7 +167,7 @@ final class MigrationMasterFinalizerTest {
   }
 
   @Test
-  void final006OuterTimeoutPreservesFailureAndCloses() throws Exception {
+  void final006OuterTimeoutPreservesFailureAndCloses() throws NoSuchAlgorithmException {
     failuresAt(CALL_OUTER_TIMEOUT, 0, 1);
   }
 
@@ -174,18 +177,18 @@ final class MigrationMasterFinalizerTest {
   }
 
   @Test
-  void final008EveryPreflightQueryFailureIsOriginal() throws Exception {
+  void final008EveryPreflightQueryFailureIsOriginal() throws NoSuchAlgorithmException {
     failuresAt(CALL_QUERY, 0, IDENTITIES);
   }
 
   @Test
-  void final009EveryReadPhaseOriginalFailure() throws Exception {
+  void final009EveryReadPhaseOriginalFailure() throws NoSuchAlgorithmException {
     for (var phase : List.of(CALL_NEXT1, CALL_GET_LONG, CALL_WAS_NULL, CALL_NEXT2))
       failuresAt(phase, 0, IDENTITIES);
   }
 
   @Test
-  void final010PreflightResultCloseIsNotSuccess() throws Exception {
+  void final010PreflightResultCloseIsNotSuccess() throws NoSuchAlgorithmException {
     failuresAt(CALL_RESULT_CLOSE, 0, IDENTITIES);
   }
 
@@ -231,7 +234,8 @@ final class MigrationMasterFinalizerTest {
   }
 
   @Test
-  void final013EachPrepareNullOrOriginalFailureStopsFollowingCalls() throws Exception {
+  void final013EachPrepareNullOrOriginalFailureStopsFollowingCalls()
+      throws NoSuchAlgorithmException {
     failuresAt(CALL_PREPARE, 0, IDENTITIES);
     for (int slot = 0; slot < IDENTITIES; slot++) {
       var f = new Fixture();
@@ -244,17 +248,17 @@ final class MigrationMasterFinalizerTest {
   }
 
   @Test
-  void final014EachLongBindingFailure() throws Exception {
+  void final014EachLongBindingFailure() throws NoSuchAlgorithmException {
     failuresAt(CALL_SET_LONG, 0, IDENTITIES);
   }
 
   @Test
-  void final015EachBooleanBindingFailure() throws Exception {
+  void final015EachBooleanBindingFailure() throws NoSuchAlgorithmException {
     failuresAt(CALL_SET_BOOLEAN, 0, IDENTITIES);
   }
 
   @Test
-  void final016EachPreparedTimeoutFailure() throws Exception {
+  void final016EachPreparedTimeoutFailure() throws NoSuchAlgorithmException {
     failuresAt(CALL_PREPARED_TIMEOUT, 0, IDENTITIES);
   }
 
@@ -264,18 +268,18 @@ final class MigrationMasterFinalizerTest {
   }
 
   @Test
-  void final018EveryPreparedQueryFailure() throws Exception {
+  void final018EveryPreparedQueryFailure() throws NoSuchAlgorithmException {
     failuresAt(CALL_PREPARED_QUERY, 0, IDENTITIES);
   }
 
   @Test
-  void final019EveryPreparedResultReadPhaseFailure() throws Exception {
+  void final019EveryPreparedResultReadPhaseFailure() throws NoSuchAlgorithmException {
     for (var phase : List.of(CALL_NEXT1, CALL_GET_LONG, CALL_WAS_NULL, CALL_NEXT2))
       failuresAt(phase, IDENTITIES, IDENTITIES);
   }
 
   @Test
-  void final020EveryPreparedResultCloseFailure() throws Exception {
+  void final020EveryPreparedResultCloseFailure() throws NoSuchAlgorithmException {
     failuresAt(CALL_RESULT_CLOSE, IDENTITIES, IDENTITIES);
   }
 
@@ -303,17 +307,17 @@ final class MigrationMasterFinalizerTest {
   }
 
   @Test
-  void final022EachPreparedCloseFailureIsPropagated() throws Exception {
+  void final022EachPreparedCloseFailureIsPropagated() throws NoSuchAlgorithmException {
     failuresAt(CALL_PREPARED_CLOSE, 0, IDENTITIES);
   }
 
   @Test
-  void final023OuterCloseFailureCannotBeSuccess() throws Exception {
+  void final023OuterCloseFailureCannotBeSuccess() throws NoSuchAlgorithmException {
     failuresAt(CALL_OUTER_CLOSE, 0, 1);
   }
 
   @Test
-  void final024EachAnalyzeWrongCountWarningAndOriginalFailures() throws Exception {
+  void final024EachAnalyzeWrongCountWarningAndOriginalFailures() throws NoSuchAlgorithmException {
     failuresAt(CALL_ANALYZE, 0, TABLES);
     failuresAt(CALL_WARNINGS, 0, TABLES);
     for (int slot = 0; slot < TABLES; slot++) {
@@ -333,7 +337,8 @@ final class MigrationMasterFinalizerTest {
   }
 
   @Test
-  void final025FreshSuccessAfterRejectedFixtureDoesNotReuseOwner() throws Exception {
+  void final025FreshSuccessAfterRejectedFixtureDoesNotReuseOwner()
+      throws SQLException, NoSuchAlgorithmException {
     var rejected = new Fixture();
     rejected.faultQuery = 0;
     rejected.shape = Shape.WRONG;
@@ -345,7 +350,8 @@ final class MigrationMasterFinalizerTest {
   }
 
   @Test
-  void final026MaximumN12IsRetainedWithoutAddingOneOrReorderingRows() throws Exception {
+  void final026MaximumN12IsRetainedWithoutAddingOneOrReorderingRows()
+      throws SQLException, NoSuchAlgorithmException {
     var source = normal();
     var input = new ArrayList<SpeakerCopyRow>();
     input.add(
@@ -372,7 +378,8 @@ final class MigrationMasterFinalizerTest {
   }
 
   @Test
-  void final028FiniteReadersOwnIndependentProxiesAndTerminate() throws Exception {
+  void final028FiniteReadersOwnIndependentProxiesAndTerminate()
+      throws InterruptedException, ExecutionException, TimeoutException, NoSuchAlgorithmException {
     var declared = normal();
     var executor = Executors.newFixedThreadPool(WORKERS);
     try {
@@ -415,7 +422,8 @@ final class MigrationMasterFinalizerTest {
   }
 
   @Test
-  void final030BothDeferredPhasesPreservePrimaryAndOuterCleanupIdentity() throws Exception {
+  void final030BothDeferredPhasesPreservePrimaryAndOuterCleanupIdentity()
+      throws NoSuchAlgorithmException {
     failuresAt(CALL_CONSTRAINT, 0, 1);
     failuresAt(CALL_CONSTRAINT_WARNINGS, 0, 1);
     var declared = normal();
@@ -455,7 +463,8 @@ final class MigrationMasterFinalizerTest {
         new AssertionError("synthetic error"));
   }
 
-  private static void failuresAt(String call, int first, int count) throws Exception {
+  private static void failuresAt(String call, int first, int count)
+      throws NoSuchAlgorithmException {
     var declared = normal();
     for (int slot = first; slot < first + count; slot++)
       for (Throwable failure : failures()) {
@@ -712,7 +721,7 @@ final class MigrationMasterFinalizerTest {
     }
   }
 
-  private static MigrationMasterCopyDataset normal() throws Exception {
+  private static MigrationMasterCopyDataset normal() throws NoSuchAlgorithmException {
     return new MigrationMasterCopyDataset(speakers(STAMP), content(STAMP));
   }
 
