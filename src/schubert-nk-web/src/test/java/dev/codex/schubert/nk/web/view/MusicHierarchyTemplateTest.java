@@ -14,6 +14,7 @@ import dev.codex.schubert.nk.protocol.layout.media.MusicSectionResponseData;
 import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
 import dev.codex.schubert.nk.web.config.WebMvcConfiguration;
 import dev.codex.schubert.nk.web.session.SessionPrincipal;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -293,7 +294,7 @@ class MusicHierarchyTemplateTest {
 
   @Test
   void music071ConcurrentRendering()
-      throws InterruptedException, ExecutionException, TimeoutException {
+      throws InterruptedException, ExecutionException, TimeoutException, IOException {
     try (var c = context()) {
       var pool = Executors.newFixedThreadPool(8);
       try {
