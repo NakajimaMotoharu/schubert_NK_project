@@ -26,7 +26,7 @@ def validate_modified_utf(encoded):
 
 
 def decode(raw,wanted, *, strict_class_names=False):
-    """Decode writer-format data, with optional nonempty identities for qualification."""
+    """Decode one writer-format session preceding classes, with optional nonempty identities."""
     if (
         type(raw) is not bytes
         or not isinstance(wanted, set)
@@ -78,6 +78,8 @@ def decode(raw,wanted, *, strict_class_names=False):
             end = int.from_bytes(take(8), 'big', signed=True)
             if sessions or not 0 <= start <= end:
                 raise ValueError('one ordered original session only')
+            if records:
+                raise ValueError('execution class before original session')
             sessions.append(dict(labelBytesHex=label.hex(),startMillis=start,endMillis=end))
         elif tag == 0x11:
             identity,name = number(8),utf_bytes()

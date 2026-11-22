@@ -161,6 +161,9 @@ public final class UnfilteredCodeMeasurement {
           || session.getDumpTimeStamp() < session.getStartTimeStamp()) {
         throw new IllegalArgumentException(REQUIRED_SESSION);
       }
+      if (!records.getContents().isEmpty()) {
+        throw new IllegalArgumentException("execution class before original session");
+      }
       sessionSeen = true;
       canonical.visitSessionInfo(session);
     }
