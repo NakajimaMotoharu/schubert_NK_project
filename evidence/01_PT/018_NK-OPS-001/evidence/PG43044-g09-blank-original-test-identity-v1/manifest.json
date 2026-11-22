@@ -1,0 +1,148 @@
+{
+  "run": "PG43044-g09-blank-original-test-identity-v1",
+  "source": "5cb5b61952049824a1e8fd474c157b31f3374cf2",
+  "productCore": "7698011f52d6cc5f94c76413b6ab36971783b9c9",
+  "exactProductWithTestsTree": "11f19468019e4fd2cc0d72b39c295cd4703b1e32",
+  "wbs": [
+    "WBS-G09",
+    "WBS-G08"
+  ],
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T21:32:37Z",
+  "startedAtUTC": "2026-11-22T21:32:35Z",
+  "command": [
+    "python3",
+    "-B",
+    "-m",
+    "unittest",
+    "-v",
+    "test_check_batch_candidate_roster",
+    "test_pgpt_reactor_junit",
+    "019_test_evidence_set"
+  ],
+  "pythonPath": "tools/quality:tools/quality/tests",
+  "environment": {
+    "python": "Python 3.14.4",
+    "platform": "Linux x86_64"
+  },
+  "sourceInputs": [
+    {
+      "path": "tools/quality/pgpt_reactor_junit.py",
+      "sha256": "35d34d123a4a25d882504e79bc55f67115ad42042953a25573fd7e860b6231d4"
+    },
+    {
+      "path": "tools/quality/006_collect_scenario_evidence.py",
+      "sha256": "7b64174e6f2b205033415ac565f1f02fd90fad7ba7a96af01ab2326640ad911e"
+    },
+    {
+      "path": "tools/quality/018_collect_verified_evidence_set.py",
+      "sha256": "1f3fbd4b31e748ef73918b0c57a82c06f67a8b22b04b81b9bbf3fdc6cf916f02"
+    },
+    {
+      "path": "tools/quality/019_test_evidence_set.py",
+      "sha256": "c50828270e5e59ab42872378da85979e8e906a6a5ddc9fab5cb330869fa6bed1"
+    },
+    {
+      "path": "tools/quality/030_run_pgpt_verify.sh",
+      "sha256": "233d97af3bef1cfd0dcc12a0fb384abcc722806ceeb56c12060932fb36badac5"
+    },
+    {
+      "path": "tools/quality/tests/test_pgpt_reactor_junit.py",
+      "sha256": "68d7736f5d79f397a13224f9209a2f4d59ef0c26e6264ab847000e80547e5434"
+    },
+    {
+      "path": "tools/quality/tests/test_check_batch_candidate_roster.py",
+      "sha256": "6874bf28c0c8051e4a2bc0247af72f42bae8729bd5d2b879b08f033170d2cf0a"
+    }
+  ],
+  "evidenceTerminal": [
+    {
+      "path": "../pgpt-runs/PG379/PG43044-g09-blank-original-test-identity-v1/red-source.txt",
+      "sha256": "cee9625c97228b9011e01a81abd0634e5b828676af18cca2a2ac0a56f2821d9d"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43044-g09-blank-original-test-identity-v1/red-inputs.sha256",
+      "sha256": "1ddd36d4f9a0b5604ba69d2f47e727b2daf2bdb2551bb1fc723095bc4a70a13a"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43044-g09-blank-original-test-identity-v1/red.stderr",
+      "sha256": "bff4d005a1cdc0e85cc5afd168b7bafd5ba0c860420f41ffc41b940172a35b1e"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43044-g09-blank-original-test-identity-v1/red.exit",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43044-g09-blank-original-test-identity-v1/source.txt",
+      "sha256": "8139653ee4b8b038ff942f7bac329fa781332fa9eb0864dd9f8870b45aa12e07"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43044-g09-blank-original-test-identity-v1/product-tree.txt",
+      "sha256": "0134470c9400288ec5bbb0e3283dee131365c724c7a8375f587ea673ab857f94"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43044-g09-blank-original-test-identity-v1/python.stderr",
+      "sha256": "b5f1b18846753c9b23e9e40eb2576783600b38931eaa19605e3a35be0c34bd14"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43044-g09-blank-original-test-identity-v1/exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43044-g09-blank-original-test-identity-v1/start-at.txt",
+      "sha256": "54df725986e01a72e854334ebabf4743362fdc38f34fade6e227fc566bb65e8a"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43044-g09-blank-original-test-identity-v1/end-at.txt",
+      "sha256": "d2fb92fa60c6a287303d7f3855e031a1fd06f0390ecd27d6b00065d8c72beb5d"
+    }
+  ],
+  "independent": {
+    "testIds": [
+      "PT-OPS-G09-JUNIT016",
+      "PT-OPS-G09-JUNIT017"
+    ],
+    "malformedShapes": 9,
+    "priorMissingRejections": 5,
+    "newRejectedShapes": 9,
+    "validDisplayNamePreserved": true,
+    "validOriginalDigestConfirmed": true
+  },
+  "counts": {
+    "toolPassed": 153,
+    "toolFailed": 0,
+    "toolErrors": 0,
+    "toolSkipped": 0,
+    "productExecuted": 0
+  },
+  "sourceChanges": [
+    "tools/quality/pgpt_reactor_junit.py",
+    "tools/quality/tests/test_pgpt_reactor_junit.py"
+  ],
+  "receiptSchemaChanged": false,
+  "historic": {
+    "manifest": {
+      "path": "evidence/01_PT/008_NK-SCN-001/evidence/manifest.json",
+      "sha256": "59a5aa8831ea208c92fd12674bfb018c88ff57490ac975235de12efbb0f54df7"
+    },
+    "source": "858713c0bf310ae8bf62078b0a1cedbce4e968db",
+    "run": "PT-WEB-20260925-24",
+    "moduleCounts": {
+      "characterization": 41,
+      "protocol": 80,
+      "storage": 101,
+      "api": 788,
+      "web": 550,
+      "batch": 404
+    },
+    "tests": 1964,
+    "scopes": 53,
+    "selectedPTAdded": 0
+  },
+  "related": [
+    "BUG-3656",
+    "YKT-2874"
+  ],
+  "whole451": false,
+  "formalAcceptanceId": null
+}
