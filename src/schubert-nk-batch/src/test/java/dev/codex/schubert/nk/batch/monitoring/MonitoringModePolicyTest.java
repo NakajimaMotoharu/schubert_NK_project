@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
@@ -144,7 +145,8 @@ class MonitoringModePolicyTest {
   }
 
   @Test
-  void monMode007ConcurrentCallersCannotChangePolicy() throws Exception {
+  void monMode007ConcurrentCallersCannotChangePolicy()
+      throws InterruptedException, ExecutionException {
     var executor = Executors.newFixedThreadPool(4);
     try {
       var tasks = new ArrayList<Callable<String>>();

@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
@@ -160,7 +161,7 @@ class MonitoringRetentionConfigurationTest {
 
   @Test
   void retConf007ParallelModeVerificationCannotMutateOrShareOtherModesConfiguration()
-      throws Exception {
+      throws InterruptedException, ExecutionException {
     var tasks = new ArrayList<Callable<String>>();
     var debug = new RetentionConfiguration(15, 5_000_000_000L);
     var standard = new RetentionConfiguration(0, 0);
