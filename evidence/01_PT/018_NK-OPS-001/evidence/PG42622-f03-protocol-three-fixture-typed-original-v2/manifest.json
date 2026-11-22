@@ -1,0 +1,96 @@
+{
+  "run": "PG42622",
+  "source": "46aa4d00c2cee778d441541c99ebdba277df481f",
+  "javaCore": "f8532c27c2666570fe450f285c5a5436aacd8e7e",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-22T12:07:41.849443+00:00",
+  "actualExit": 1,
+  "sourceInputs": [
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/LayoutMetadataTest.java",
+      "sha256": "e3ea04e5b8a49be88eb3e0adcd2f5b5bc5a20f6793ba9e3be632545fe282b436"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalogTest.java",
+      "sha256": "ad2df79ad437b878561567c4364f458336669c1c0394c0c5e602b529bae483ef"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/EnumWireCompatibilityTest.java",
+      "sha256": "e62586bd50012c93080f1772c5c2cb670837b8542d6fc6a6cf1c0e9527a58213"
+    }
+  ],
+  "typedBasis": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42622-protocol-fixture-static-v1/begin.json",
+    "sha256": "68e61be1bb05524b64047a63926e7abc392fa648982c7b306edba668eb97c953"
+  },
+  "compileTerminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42622-protocol-fixture-static-v1/compile.terminal.json",
+    "sha256": "b9a1800175f9e69a3022cf39d3ce62480493b68f1fa9d7fe1a9a98601d02e949"
+  },
+  "firstInvalidToolPath": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42622-protocol-fixture-static-v1/spotbugs.terminal.json",
+    "sha256": "9a2f30c65fc0da84f9b5ebacde19f3561fcee9de6d0ed105c737e7f5033f5491"
+  },
+  "fixedOnlySpotbugsPath": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42622-protocol-fixture-static-path-v2/spotbugs.begin.json",
+    "sha256": "b4993515328786b17307bbe23a7427ad662160bf82944f26736e8023d8e5aca8"
+  },
+  "toolTerminals": {
+    "spotbugs": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42622-protocol-fixture-static-path-v2/spotbugs.terminal.json",
+      "sha256": "19e50f7fc2071d6d74cccbf86c2a48b032cdf488a6b16b074b2e6710da9d4871"
+    },
+    "pmd": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42622-protocol-fixture-static-v1/pmd.terminal.json",
+      "sha256": "109eb329ce83e3338447dab6bc8af1eb691ccdd0d8ce1b4dc2c6bd7a79bb1bb4"
+    },
+    "checkstyle": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42622-protocol-fixture-static-v1/checkstyle.terminal.json",
+      "sha256": "c49f02281970adbb7a286e2a7a9736dc53afbe1f20b05a855cacf0d6c16faf2c"
+    }
+  },
+  "rawReports": {
+    "spotbugs": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42622-protocol-fixture-static-path-v2/reports/spotbugs.xml",
+      "sha256": "ae558b65edd93acf70e9dc15393aa2fd6912fc1f4522865422f3c6d39b3d8348"
+    },
+    "pmd": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42622-protocol-fixture-static-v1/reports/pmd.xml",
+      "sha256": "f67c95c1892df5c69e43b4b6e3a522dc3ed0f578f2b7f8aa68a82f4d87312b05"
+    },
+    "checkstyle": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42622-protocol-fixture-static-v1/reports/checkstyle.xml",
+      "sha256": "f35a204fc6811994a911a23c91b031f8f4fc60ba7b2575fb5ac7462fecc9a75f"
+    }
+  },
+  "spotbugs": [
+    {
+      "rule": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest",
+      "method": "fixture"
+    },
+    {
+      "rule": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest",
+      "method": "parserRejectsMalformedUnknownAndDuplicateRows"
+    },
+    {
+      "rule": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest",
+      "method": "registryMatchesIndependentUi233Catalog"
+    },
+    {
+      "rule": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.protocol.layout.semantic.EnumWireCompatibilityTest",
+      "method": "enum001SerializedAnswerStateMatchesIndependentProtocolVector"
+    }
+  ],
+  "pmd": [],
+  "staticErrors": {
+    "spotbugs": 0,
+    "pmd": 0,
+    "checkstyle": 0
+  },
+  "actualPT": 0,
+  "formalAcceptanceId": null
+}
