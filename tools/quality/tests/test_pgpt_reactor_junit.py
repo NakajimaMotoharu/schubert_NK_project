@@ -204,6 +204,45 @@ class ReactorJunitTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "differs"):
             self.verify()
 
+    def test_junit013_terminal_requires_two_timestamps_with_real_dates_and_offsets(self):
+        for marker in (".started", ".completed"):
+            path = self.marker(marker)
+            original = path.read_bytes()
+            try:
+                for value in (
+                    "",
+                    "2026-11-23",
+                    "2026-11-23T00:00:00",
+                    "2026-11-31T00:00:00Z",
+                    "2026-11-23T00:00:00+00:75",
+                ):
+                    with self.subTest(marker=marker, value=value):
+                        path.write_text(value + "\n")
+                        with self.assertRaisesRegex(ValueError, "invalid reactor timestamp"):
+                            self.capture()
+                        self.assertFalse(self.marker(".junit.json").exists())
+                    self.marker(".junit.json").unlink(missing_ok=True)
+            finally:
+                path.write_bytes(original)
+
+    def test_junit014_terminal_orders_instants_even_when_local_hours_increase(self):
+        self.marker(".started").write_text("2026-11-23T00:00:00Z\n")
+        self.marker(".completed").write_text("2026-11-23T08:59:59+09:00\n")
+        with self.assertRaisesRegex(ValueError, "completion precedes start"):
+            self.capture()
+        self.assertFalse(self.marker(".junit.json").exists())
+
+    def test_junit015_same_instant_preserves_original_offset_and_cannot_become_earlier(self):
+        start, end = "2026-11-23T09:00:00+09:00", "2026-11-23T00:00:00Z"
+        self.marker(".started").write_text(start + "\n")
+        self.marker(".completed").write_text(end + "\n")
+        self.success()
+        receipt = json.loads(self.verify())
+        self.assertEqual((start, end), (receipt["startedAt"], receipt["completedAt"]))
+        self.marker(".completed").write_text("2026-11-22T23:59:59Z\n")
+        with self.assertRaisesRegex(ValueError, "completion precedes start"):
+            self.verify()
+
     def test_quality_hashes_include_every_declared_report_and_real_class_path(self):
         self.success()
         decoded = json.loads(self.verify())

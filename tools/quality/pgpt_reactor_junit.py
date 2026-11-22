@@ -1,6 +1,7 @@
 """Bind the original reactor quality artifacts to its successful terminal record."""
 
 import argparse
+from datetime import datetime
 import hashlib
 import json
 from pathlib import Path
@@ -17,6 +18,10 @@ MODULE_DIRECTORIES = (
     ("api", "src/schubert-nk-api"),
     ("web", "src/schubert-nk-web"),
     ("batch", "src/schubert-nk-batch"),
+)
+TERMINAL_TIMESTAMP = re.compile(
+    r"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}"
+    r"(?:\.[0-9]{1,6})?(?:Z|[+-](?:[01][0-9]|2[0-3]):[0-5][0-9])"
 )
 
 
@@ -93,6 +98,15 @@ def quality_artifact_hashes(target, module):
     return hashes
 
 
+def _terminal_instant(value):
+    if not TERMINAL_TIMESTAMP.fullmatch(value):
+        raise ValueError("invalid reactor timestamp")
+    try:
+        return datetime.fromisoformat(value)
+    except ValueError as exc:
+        raise ValueError("invalid reactor timestamp") from exc
+
+
 def _snapshot(repo, run, commit, directory):
     if not re.fullmatch(r"[0-9a-f]{40}", commit):
         raise ValueError("invalid reactor commit")
@@ -103,6 +117,10 @@ def _snapshot(repo, run, commit, directory):
                                      text=True).strip()
     if not branch or branch != _run_path(directory, run, ".branch").read_text().strip():
         raise ValueError("reactor branch does not match")
+    started = _run_path(directory, run, ".started").read_text().strip()
+    completed = _run_path(directory, run, ".completed").read_text().strip()
+    if _terminal_instant(started) > _terminal_instant(completed):
+        raise ValueError("reactor completion precedes start")
     reports = {}
     quality = {}
     repo = repo.resolve()
@@ -124,8 +142,8 @@ def _snapshot(repo, run, commit, directory):
         "runId": run,
         "targetCommit": commit,
         "branch": branch,
-        "startedAt": _run_path(directory, run, ".started").read_text().strip(),
-        "completedAt": _run_path(directory, run, ".completed").read_text().strip(),
+        "startedAt": started,
+        "completedAt": completed,
         "buildLogSha256": _file_digest(_run_path(directory, run, ".log")),
         "reports": reports,
         "qualityArtifacts": quality,

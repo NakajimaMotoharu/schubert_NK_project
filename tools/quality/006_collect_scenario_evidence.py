@@ -121,6 +121,7 @@ def main():
                     "program/characterization", "tools/quality"], cwd=repo, check=True,
                    stdout=subprocess.DEVNULL)
     report_receipt = verify_reactor_junit(repo, run, commit)
+    terminal = json.loads(report_receipt)
     raw = (Path("/tmp") / (run + ".log")).read_bytes()
     if b"BUILD SUCCESS" not in raw or b"[ERROR]" in raw:
         raise SystemExit("build log is not successful")
@@ -226,8 +227,8 @@ def main():
         raise SystemExit("missing required Scenario lifecycle Test ID/method evidence")
     manifest = {
         "runId": run, "programId": "NK-SCN-001", "targetCommit": commit,
-        "branch": json.loads(report_receipt)["branch"],
-        "startedAt": read(".started"), "completedAt": read(".completed"), "exitCode": 0,
+        "branch": terminal["branch"],
+        "startedAt": terminal["startedAt"], "completedAt": terminal["completedAt"], "exitCode": 0,
         "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -Dnk.pt.node=/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node --no-transfer-progress clean verify",
         "environment": {"os": platform.platform(), "jdk": "25.0.4", "maven": "3.9.12",
                         "postgresql": "18.6", "artemis": "2.56.0", "node": "24.19.0",
