@@ -49,6 +49,10 @@ final class GateContractValidator {
           "CHR-S04", "CHR-S05", "CHR-S06", "CHR-S07", "CHR-S08", "CHR-M01", "CHR-M02", "CHR-M03",
           "CHR-M04", "CHR-M05", "CHR-M06", "CHR-M07", "CHR-L01", "CHR-E01", "CHR-N01", "CHR-O01");
   private static final Set<String> APPROVED_CASE_IDS = Set.copyOf(APPROVED_CASE_ORDER);
+  private static final Set<String> APPROVED_DIFFERENCE_IDS =
+      Set.of(
+          "DIF-001", "DIF-002", "DIF-003", "DIF-004", "DIF-005", "DIF-006", "DIF-007", "DIF-008",
+          "DIF-009", "DIF-010", "DIF-011", "DIF-012", "DIF-013", "DIF-014", "DIF-015", "DIF-016");
 
   private static final ObjectMapper JSON =
       new ObjectMapper()
@@ -208,9 +212,11 @@ final class GateContractValidator {
     require(cases.size() == 24, "CONTRACT_CASE_COUNT", failures);
     require(new HashSet<>(cases).size() == cases.size(), "CONTRACT_CASE_DUPLICATE", failures);
     require(APPROVED_CASE_ORDER.equals(cases), "CONTRACT_CASE_ORDER", failures);
+    List<String> differenceIds = strings(contract.path("differenceIds"));
+    require(differenceIds.size() == 16, "CONTRACT_DIFFERENCE_COUNT", failures);
     require(
-        strings(contract.path("differenceIds")).size() == 16,
-        "CONTRACT_DIFFERENCE_COUNT",
+        matchesApprovedDifferenceIds(new HashSet<>(differenceIds)),
+        "CONTRACT_DIFFERENCE_IDS",
         failures);
     require(
         contract.path(FIELD_BASELINECOMMIT).asText().matches("[0-9a-f]{7,40}"),
@@ -274,6 +280,10 @@ final class GateContractValidator {
 
   static boolean matchesApprovedCaseIds(Set<String> caseIds) {
     return APPROVED_CASE_IDS.equals(caseIds);
+  }
+
+  static boolean matchesApprovedDifferenceIds(Set<String> differenceIds) {
+    return APPROVED_DIFFERENCE_IDS.equals(differenceIds);
   }
 
   static boolean matchesCurrentDisposition(String caseId, JsonNode disposition) {

@@ -166,6 +166,27 @@ final class GateDefinitionDocumentsTest {
     assertEquals(List.of(), validate(fixture()));
   }
 
+  /** PT-CHR-DEF087: size 16 does not permit an unapproved ID. */
+  @Test
+  void contractRejectsAnUnapprovedDifferenceIdAtTheSameSize() throws IOException {
+    assertContractDifferenceRejected("DIF-099");
+  }
+
+  /** PT-CHR-DEF088: a repeated ID cannot replace another approved difference. */
+  @Test
+  void contractRejectsADuplicateDifferenceIdAtTheSameSize() throws IOException {
+    assertContractDifferenceRejected("DIF-001");
+  }
+
+  private static void assertContractDifferenceRejected(String replacement) throws IOException {
+    List<JsonNode> input = fixture();
+    ArrayNode ids = object(input, CONTRACT).withArray("differenceIds");
+    assertEquals(16, ids.size());
+    assertEquals("DIF-016", ids.get(15).asText());
+    ids.set(15, JSON.getNodeFactory().textNode(replacement));
+    assertContains(input, "CONTRACT_DIFFERENCE_IDS");
+  }
+
   @Test
   void schemaDraftShapeAndItemConstraintsCannotBeWeakened() throws Exception {
     List<JsonNode> input = fixture();

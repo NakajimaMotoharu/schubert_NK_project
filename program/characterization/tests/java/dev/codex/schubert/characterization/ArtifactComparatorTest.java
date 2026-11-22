@@ -445,6 +445,28 @@ class ArtifactComparatorTest {
     assertContains(result.failures(), "CATALOG_CASE_IDS");
   }
 
+  /** PT-CHR-DEF086: the approval applies to the fixed DIF identifiers. */
+  @Test
+  void rejectsAnUnapprovedDifferenceAtTheSameAllowlistSize() throws Exception {
+    Fixture fixture = fixture("difference-id-outside-approved-roster");
+    mutate(
+        fixture.project().resolve(FIXTURE_DIFF_ALLOWLIST_PATH),
+        definitions -> {
+          ArrayNode entries = definitions.withArray(FIXTURE_DIFFERENCES_ARRAY);
+          assertEquals(16, entries.size());
+          ObjectNode replaced = (ObjectNode) entries.get(1);
+          assertEquals("DIF-002", replaced.path("id").asText());
+          replaced.put("id", "DIF-099");
+        });
+
+    ArtifactComparator.ComparisonResult result =
+        ArtifactComparator.compare(
+            fixture.project(), fixture.current(), fixture.nk(), fixture.observations());
+
+    assertFalse(result.passed());
+    assertContains(result.failures(), "DIF_RULE_IDS");
+  }
+
   @Test
   void rejectsRepeatedDifferenceDefinitionEvenWhenSixteenRulesStillMatch() throws Exception {
     Fixture fixture = fixture("duplicate-difference-definition");

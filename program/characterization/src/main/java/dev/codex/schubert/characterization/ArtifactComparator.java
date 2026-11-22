@@ -264,7 +264,12 @@ public final class ArtifactComparator {
       String id = rule.path("id").asText();
       require(rules.putIfAbsent(id, rule) == null, "DIF_DUPLICATE:" + id, failures);
     }
-    require(rules.size() == 16, "DIF_RULE_COUNT", failures);
+    if (require(rules.size() == 16, "DIF_RULE_COUNT", failures)) {
+      require(
+          GateContractValidator.matchesApprovedDifferenceIds(rules.keySet()),
+          "DIF_RULE_IDS",
+          failures);
+    }
     boolean approvedPathContract =
         require(
             GateContractValidator.isApprovedLegacyPathContract(
