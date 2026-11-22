@@ -15,6 +15,7 @@ import dev.codex.schubert.nk.protocol.layout.semantic.LogType;
 import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
 import dev.codex.schubert.nk.web.form.LogSearchForm;
 import dev.codex.schubert.nk.web.session.SessionPrincipal;
+import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -24,9 +25,11 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.stream.IntStream;
 import org.jsoup.Jsoup;
 import org.junit.jupiter.api.Test;
@@ -310,7 +313,7 @@ class LogSearchViewModelTest {
         UnsupportedOperationException.class, () -> v.getResults().orElseThrow().getRows().clear());
   }
 
-  private static Set<String> properties(Class<?> type) throws Exception {
+  private static Set<String> properties(Class<?> type) throws IntrospectionException {
     var result = new TreeSet<String>();
     for (var descriptor : Introspector.getBeanInfo(type, Object.class).getPropertyDescriptors()) {
       assertNull(descriptor.getWriteMethod());
@@ -320,7 +323,7 @@ class LogSearchViewModelTest {
   }
 
   @Test
-  void web292ClosedBeanAndEscaping() throws Exception {
+  void web292ClosedBeanAndEscaping() throws IntrospectionException {
     assertEquals(
         Set.of("topBar", "filters", "errors", "results", "previousHref", "nextHref"),
         properties(LogSearchViewModel.class));
@@ -352,7 +355,7 @@ class LogSearchViewModelTest {
   }
 
   @Test
-  void web293ConcurrentViews() throws Exception {
+  void web293ConcurrentViews() throws InterruptedException, ExecutionException, TimeoutException {
     var shared = List.of(row(2, "shared"), row(1, "second"));
     var pool = Executors.newFixedThreadPool(8);
     try {
