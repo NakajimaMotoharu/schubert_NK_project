@@ -1,0 +1,11 @@
+# NK-OPS-001 / AVL-001 / OPS-003 / UI251 §2 / SS341 §2 / SS343 schedule
+[Unit]
+Description=Schubert NK daily scheduled maintenance
+
+[Timer]
+OnCalendar=*-*-* 05:00:00 Asia/Tokyo
+Persistent=false
+Unit=schubert-nk-maintenance.service
+
+[Install]
+WantedBy=timers.target
