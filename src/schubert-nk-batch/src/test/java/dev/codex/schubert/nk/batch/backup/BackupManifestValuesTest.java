@@ -3,10 +3,10 @@ package dev.codex.schubert.nk.batch.backup;
 import static dev.codex.schubert.nk.batch.backup.BackupManifestFixture.END;
 import static dev.codex.schubert.nk.batch.backup.BackupManifestFixture.RUN;
 import static dev.codex.schubert.nk.batch.backup.BackupManifestFixture.START;
-import static dev.codex.schubert.nk.batch.backup.BackupManifestFixture.TOKENS;
 import static dev.codex.schubert.nk.batch.backup.BackupManifestFixture.ZERO;
 import static dev.codex.schubert.nk.batch.backup.BackupManifestFixture.manifest;
 import static dev.codex.schubert.nk.batch.backup.BackupManifestFixture.step;
+import static dev.codex.schubert.nk.batch.backup.BackupManifestFixture.versionTokens;
 import static dev.codex.schubert.nk.batch.backup.BackupManifestFixture.versions;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -23,8 +23,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeoutException;
 import org.junit.jupiter.api.Test;
 
 /** BAK/BKO/UI251/SS341 6.4/343 5.3; SSC058/PG165; BAT178..185 in method order. */
@@ -243,7 +245,8 @@ final class BackupManifestValuesTest {
     assertEquals(a, b);
     assertEquals(a.hashCode(), b.hashCode());
     assertNotEquals(a, manifest(3, END.plusSeconds(1)));
-    assertEquals(List.of(TOKENS), tokens(a.versions()));
+    assertThrows(UnsupportedOperationException.class, () -> versionTokens().set(0, "changed"));
+    assertEquals(versionTokens(), tokens(a.versions()));
     assertSame(a.databaseStep().run(), a.run());
     assertNotSame(a.dump(), b.dump());
     assertEquals(a.dump(), b.dump());
@@ -253,7 +256,7 @@ final class BackupManifestValuesTest {
   }
 
   @Test
-  void concurrentValueUse() throws Exception {
+  void concurrentValueUse() throws InterruptedException, ExecutionException, TimeoutException {
     var value = manifest();
     var pool = Executors.newFixedThreadPool(8);
     try {

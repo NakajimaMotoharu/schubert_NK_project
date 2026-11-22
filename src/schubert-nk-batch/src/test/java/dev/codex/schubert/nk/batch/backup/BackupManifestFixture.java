@@ -4,12 +4,13 @@ import dev.codex.schubert.nk.batch.repository.BatchRun;
 import dev.codex.schubert.nk.batch.repository.BatchStep;
 import dev.codex.schubert.nk.batch.repository.BatchStepAttempt;
 import java.time.Instant;
+import java.util.List;
 import java.util.UUID;
 
 /** Public literal fixtures independent of the manifest codec; PG165/BAT178..193. */
 public final class BackupManifestFixture {
   public static final String ZERO = "0".repeat(64);
-  public static final String[] TOKENS = {
+  private static final String[] TOKENS = {
     "nk-pt", "0.1.0-SNAPSHOT", "020", "Ubuntu-26.04.1", "25.0.4", "18.6", "2.56.0", "1.2.1"
   };
   public static final BatchRun RUN =
@@ -20,6 +21,10 @@ public final class BackupManifestFixture {
   public static final Instant END = Instant.parse("2026-09-12T15:00:03.654321Z");
 
   private BackupManifestFixture() {}
+
+  public static List<String> versionTokens() {
+    return List.of(TOKENS);
+  }
 
   public static BackupVersions versions(String... tokens) {
     return new BackupVersions(

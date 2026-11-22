@@ -1,7 +1,7 @@
 package dev.codex.schubert.nk.batch.file;
 
-import static dev.codex.schubert.nk.batch.backup.BackupManifestFixture.TOKENS;
 import static dev.codex.schubert.nk.batch.backup.BackupManifestFixture.manifest;
+import static dev.codex.schubert.nk.batch.backup.BackupManifestFixture.versionTokens;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
@@ -67,10 +67,11 @@ final class BackupManifestCodecTest {
             .replace("a".repeat(64), "e".repeat(64))
             .replace("b".repeat(64), "f".repeat(64))
             .replace("c".repeat(64), "1".repeat(64));
-    for (int i = 0; i < TOKENS.length; i++)
+    var expectedVersions = versionTokens();
+    for (int i = 0; i < expectedVersions.size(); i++)
       input =
           input.replace(
-              "\"" + TOKENS[i] + "\"",
+              "\"" + expectedVersions.get(i) + "\"",
               "\"" + (i == 2 ? "999" : String.valueOf((char) ('A' + i)).repeat(128)) + "\"");
     byte[] expected = ascii(input);
     var actual = BackupManifestCodec.decode(expected);
