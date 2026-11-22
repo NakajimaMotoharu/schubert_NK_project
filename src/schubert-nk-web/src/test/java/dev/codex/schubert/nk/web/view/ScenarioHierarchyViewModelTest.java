@@ -15,7 +15,9 @@ import dev.codex.schubert.nk.protocol.layout.semantic.GameCode;
 import dev.codex.schubert.nk.protocol.layout.semantic.ScriptFileId;
 import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
 import dev.codex.schubert.nk.web.session.SessionPrincipal;
+import java.beans.IntrospectionException;
 import java.beans.Introspector;
+import java.lang.reflect.InvocationTargetException;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,9 +26,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jsoup.Jsoup;
 import org.junit.jupiter.api.Test;
 import org.thymeleaf.context.Context;
@@ -232,7 +236,8 @@ class ScenarioHierarchyViewModelTest {
   }
 
   @Test
-  void web188ClosedBeanContract() throws Exception {
+  void web188ClosedBeanContract()
+      throws IntrospectionException, IllegalAccessException, InvocationTargetException {
     var p = actor(UserRole.USER);
     var g = GameCode.NUKITASHI_1;
     closed(GameListViewModel.from(p, games()));
@@ -277,7 +282,8 @@ class ScenarioHierarchyViewModelTest {
   }
 
   @Test
-  void web190ConcurrentProjection() throws Exception {
+  void web190ConcurrentProjection()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var executor = Executors.newFixedThreadPool(8);
     try {
       var tasks = new ArrayList<Future<?>>();
@@ -390,7 +396,8 @@ class ScenarioHierarchyViewModelTest {
     assertEquals(0, failure.getSuppressed().length);
   }
 
-  private static void closed(Object value) throws Exception {
+  private static void closed(Object value)
+      throws IntrospectionException, IllegalAccessException, InvocationTargetException {
     if (value instanceof String || value instanceof Integer || value instanceof Long) return;
     if (value instanceof List<?> list) {
       for (Object child : list) closed(child);

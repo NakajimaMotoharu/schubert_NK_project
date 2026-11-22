@@ -15,7 +15,9 @@ import dev.codex.schubert.nk.protocol.layout.semantic.AnimationListCategory;
 import dev.codex.schubert.nk.protocol.layout.semantic.DisplayPath;
 import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
 import dev.codex.schubert.nk.web.session.SessionPrincipal;
+import java.beans.IntrospectionException;
 import java.beans.Introspector;
+import java.lang.reflect.InvocationTargetException;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,9 +26,11 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jsoup.Jsoup;
 import org.junit.jupiter.api.Test;
 import org.thymeleaf.context.Context;
@@ -261,7 +265,8 @@ class AnimationViewModelTest {
   }
 
   @Test
-  void web235ClosedBeansAndRedaction() throws Exception {
+  void web235ClosedBeansAndRedaction()
+      throws IntrospectionException, IllegalAccessException, InvocationTargetException {
     var m = list(AnimationListCategory.MAIN, main());
     closed(m);
     closed(
@@ -325,7 +330,8 @@ class AnimationViewModelTest {
   }
 
   @Test
-  void web237ConcurrentProjection() throws Exception {
+  void web237ConcurrentProjection()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var executor = Executors.newFixedThreadPool(8);
     try {
       var tasks = new ArrayList<Future<?>>();
@@ -365,7 +371,8 @@ class AnimationViewModelTest {
     }
   }
 
-  private static void closed(Object value) throws Exception {
+  private static void closed(Object value)
+      throws IntrospectionException, IllegalAccessException, InvocationTargetException {
     if (value instanceof String
         || value instanceof Integer
         || value instanceof Long
