@@ -1,0 +1,316 @@
+{
+  "run": "PG42888",
+  "earlierPreflight": {
+    "v1": "ObservationContext missing from reviewed JVM metadata closure",
+    "ordinaryCasesStarted": 0
+  },
+  "source": "900833203a7151e457b9a7d6fb8b7392accde678",
+  "core": "e8368d22c4da2ec841f008df793594d3be9066af",
+  "wbs": "WBS-C07",
+  "startedAtUTC": "2026-11-22T17:52:33.465784+00:00",
+  "terminalAtUTC": "2026-11-22T17:52:38.221582+00:00",
+  "actualExit": 0,
+  "previousReceipts": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40638-c07-async-queue-int64-qualified-v1/manifest.json",
+      "sha256": "3dc22b37508e5793e69871ddc741aa97976daf11c8e2d24cc57ff0b7e969d3fc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40798-timed-alert-pending-recovery-v2/manifest.json",
+      "sha256": "75a60a041819ef5129da4fd6f8d527ac354d4e1ce3acf32062b3fcd88cd5f8af"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42598-f03-monitoring-fixtures-selected-twelve-retest-v1/manifest.json",
+      "sha256": "caedc10867051ff375ee7cc7fb9533247524b1b2b2b6db7fd133e7bcc929d024"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42664-f02-post-jackson-four-regular-artifacts-v1/manifest.json",
+      "sha256": "c690802d2133f1764689af06a54cf4c4ce11ed0b012d7aaf8f3e1a94573c5808"
+    }
+  ],
+  "currentJar": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42660-jackson-candidate-batch-build-v1/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "e1419328a6ae7b934ccdda6d9329585a58df5aa0212cb2ea34a1972fd157f1fb"
+  },
+  "alreadyQualifiedPhysical": {
+    "dev/codex/schubert/nk/batch/monitoring/HealthUsageRatio.class": "15c78c469d3c863d097183bacbbffeb05b2ebcf9f3d7b6744cd12f9c87d78e12",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity.class": "4a90d8e671376316fe3af1709ae3ed7f91e4ab0cee8a8d8a2bcec405ade38ca6",
+    "dev/codex/schubert/nk/batch/monitoring/AlertThresholds.class": "920342ff7ee7befb1e892e83e41e0ee2c1b363d4e47d115f10dc5a48ca298a77",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event.class": "5d3a5f35f93162b0294e2dc423ec12f650d18fce7ea13d6dd1893445ddcfbcf7",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.class": "22207ad4d75fcb65bd63f4161cf65f2ab2c60d94ae66268fe9357364e8c47a91",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition.class": "49b34f2b7a8daa57055566a0b422f3a80370b51f2a50355690404f16c07e731b",
+    "dev/codex/schubert/nk/batch/monitoring/ObservationContext.class": "b3ff5e32cbbc02848950edf814043343fb53c25eda1968aa1e8ae4dafed23644",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State.class": "1d140156f6787265537ad923d4c2bb2da3b43cb0373353ef1034cf8aaaafd246",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service.class": "f363d58c5d7172041618f095846a5c28b8079e63c430c99b0067a2858f469bb5",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance.class": "9b38a3b425429d131cdc8704285df173c55ad4c05e5c860dd4a815b60c5b23b9"
+  },
+  "testSource": {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholdsTest.java",
+    "sha256": "a145d01d84b29b9af0abac650898b64e434297c4463071ca71ac3e54f25c4a7e"
+  },
+  "originalFixedSuiteNames": [
+    "threshold001FilesystemPercentAndDwellBoundaries",
+    "threshold002TransferBytesFilesAndOrBoundaries",
+    "threshold003AsyncCountRatioAndNoOverflow",
+    "threshold004WebLogCountAndOldestAge",
+    "threshold005DlqNonemptyInvestigationAndGrowth",
+    "threshold006ExpiryCountBoundaries",
+    "threshold007PoolUtilizationPendingAndTimeout",
+    "threshold008HeapPercentDwellAndOutOfMemory",
+    "threshold009StrictP95AndFiveMinuteDwell",
+    "threshold010BackupScheduleSuccessAndConsecutiveFailures",
+    "threshold011RestartWindowBoundaries",
+    "threshold012IntegrityNeverWarnsOrAutomaticallyRepairs",
+    "threshold013InvalidInputsNeverBecomeNormal",
+    "threshold014ConcurrentStatelessEvaluations",
+    "threshold015AsyncByteRatiosDistinguishAdjacentValuesAtLongCapacity"
+  ],
+  "counts": {
+    "tests": 15,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0
+  },
+  "exactVettedSourceMain": {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholds.java",
+    "sha256": "b0fd95f08991fa72ba262f023c0b64029ed2e9f1678dfd99cebeb14c26ed7aac"
+  },
+  "priorChangedWholeExplicitFixtureByteAvailable": false,
+  "currentScopeCriterion": "entire precise main class branch/line source",
+  "singleExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42888-c07-alert-thresholds-current-v2/unit.exec",
+    "sha256": "ced87267875e26e267a1e58b629c8d523957027a59c413d8bfd33b7fb2bb3500"
+  },
+  "coverageXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42888-c07-alert-thresholds-current-v2/coverage.xml",
+    "sha256": "d8e806046f4a77f2f0d1a82c36b7d0cd47602ec287c6411ba77cefba70d5fecb"
+  },
+  "coverageCounters": {
+    "INSTRUCTION": {
+      "covered": 438,
+      "missed": 0
+    },
+    "BRANCH": {
+      "covered": 110,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 72,
+      "missed": 0
+    },
+    "COMPLEXITY": {
+      "covered": 80,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 25,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 1,
+      "missed": 0
+    }
+  },
+  "independentLongInputs": [
+    {
+      "testId": "PT-OPS-THRESH-015",
+      "percentage": 70,
+      "queuedMessages": 0,
+      "usedBytes": 6456360425798343064,
+      "expected": "NORMAL"
+    },
+    {
+      "testId": "PT-OPS-THRESH-015",
+      "percentage": 70,
+      "queuedMessages": 0,
+      "usedBytes": 6456360425798343065,
+      "expected": "WARNING"
+    },
+    {
+      "testId": "PT-OPS-THRESH-015",
+      "percentage": 90,
+      "queuedMessages": 0,
+      "usedBytes": 8301034833169298226,
+      "expected": "WARNING"
+    },
+    {
+      "testId": "PT-OPS-THRESH-015",
+      "percentage": 90,
+      "queuedMessages": 0,
+      "usedBytes": 8301034833169298227,
+      "expected": "CRITICAL"
+    }
+  ],
+  "junitXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42888-c07-alert-thresholds-current-v2/reports/TEST-junit-jupiter.xml",
+    "sha256": "6dd9b21c1d0c2358142aecf2a761551ec5161c320b9e7f55d075d2c9b11c5ffe"
+  },
+  "stages": {
+    "compile": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-g",
+        "-proc:none",
+        "-implicit:none",
+        "-classpath",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42888-c07-alert-thresholds-current-v2/main:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42888-c07-alert-thresholds-current-v2/test",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42888-c07-alert-thresholds-current-v2/AlertThresholdsTest.java"
+      ],
+      "actualExit": 0,
+      "startedAt": "2026-11-22T17:52:33.483142+00:00",
+      "terminalAt": "2026-11-22T17:52:34.285956+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42888-c07-alert-thresholds-current-v2/compile.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42888-c07-alert-thresholds-current-v2/compile.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "junit": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Duser.timezone=Asia/Tokyo",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/PG42888-c07-alert-thresholds-current-v2/unit.exec,sessionid=PG42888-current,append=false",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42888-c07-alert-thresholds-current-v2/test:/home/mini/codex/project1/work/pgpt-runs/PG379/PG42888-c07-alert-thresholds-current-v2/main:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "org.junit.platform.console.ConsoleLauncher",
+        "execute",
+        "--disable-ansi-colors",
+        "--fail-if-no-tests",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42888-c07-alert-thresholds-current-v2/reports",
+        "--select-class",
+        "dev.codex.schubert.nk.batch.monitoring.AlertThresholdsTest"
+      ],
+      "actualExit": 0,
+      "startedAt": "2026-11-22T17:52:36.732284+00:00",
+      "terminalAt": "2026-11-22T17:52:37.876661+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42888-c07-alert-thresholds-current-v2/junit.stdout",
+        "sha256": "68e7df35a2bc1a7b845cc2c1a1997c4dcf5d6793fcbffb7f3b4e767031d8d07b"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42888-c07-alert-thresholds-current-v2/junit.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "coverage": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42888-c07-alert-thresholds-current-v2/unit.exec",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42888-c07-alert-thresholds-current-v2/main/dev/codex/schubert/nk/batch/monitoring/AlertThresholds.class",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42888-c07-alert-thresholds-current-v2/coverage.xml"
+      ],
+      "actualExit": 0,
+      "startedAt": "2026-11-22T17:52:37.876966+00:00",
+      "terminalAt": "2026-11-22T17:52:38.003069+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42888-c07-alert-thresholds-current-v2/coverage.stdout",
+        "sha256": "2a7936efea42202c730caeb8f7a711e5afac71fdeae92289f874b2a018b5a702"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42888-c07-alert-thresholds-current-v2/coverage.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "classinfo": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "classinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42888-c07-alert-thresholds-current-v2/main/dev/codex/schubert/nk/batch/monitoring/AlertThresholds.class"
+      ],
+      "actualExit": 0,
+      "startedAt": "2026-11-22T17:52:38.003243+00:00",
+      "terminalAt": "2026-11-22T17:52:38.109526+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42888-c07-alert-thresholds-current-v2/classinfo.stdout",
+        "sha256": "c41db6e697ede841fe816e6af0c3bdeed1befbff7b28b2d0140ea08a778ace9a"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42888-c07-alert-thresholds-current-v2/classinfo.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "execinfo": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "execinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42888-c07-alert-thresholds-current-v2/unit.exec"
+      ],
+      "actualExit": 0,
+      "startedAt": "2026-11-22T17:52:38.109587+00:00",
+      "terminalAt": "2026-11-22T17:52:38.221074+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42888-c07-alert-thresholds-current-v2/execinfo.stdout",
+        "sha256": "243755d65918afd906faca51b8cbee687108d895e7fe902c3ae4f1f71c271e92"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42888-c07-alert-thresholds-current-v2/execinfo.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "actualExternalOps": 0,
+  "wholeC07": false,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "rawTerminal": {
+    "path": "../pgpt-runs/PG379/PG42888-c07-alert-thresholds-current-v2/terminal.json",
+    "sha256": "2cd5498478e14d4e5e5383c74d8b9889da268cbe933156824e8f8f11a308ddd2"
+  },
+  "publishedJUnit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42888-c07-alert-thresholds-current-v2/junit/TEST-junit-jupiter.xml",
+    "sha256": "5a48cb71c62b73e21af52b8b71f2485a0bfab72e53c83913f25ed83c5f25c9e0",
+    "originalUnitXmlSha256": "6dd9b21c1d0c2358142aecf2a761551ec5161c320b9e7f55d075d2c9b11c5ffe"
+  },
+  "publishedCoverage": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42888-c07-alert-thresholds-current-v2/coverage/classinfo.txt",
+      "sha256": "c41db6e697ede841fe816e6af0c3bdeed1befbff7b28b2d0140ea08a778ace9a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42888-c07-alert-thresholds-current-v2/coverage/coverage.xml",
+      "sha256": "d8e806046f4a77f2f0d1a82c36b7d0cd47602ec287c6411ba77cefba70d5fecb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42888-c07-alert-thresholds-current-v2/coverage/jacoco.exec",
+      "sha256": "ced87267875e26e267a1e58b629c8d523957027a59c413d8bfd33b7fb2bb3500"
+    }
+  ],
+  "codeCrc": "c7e8ebe7687f7b0f",
+  "probeCount": 162,
+  "testIds": [
+    "PT-OPS-THRESH-001",
+    "PT-OPS-THRESH-002",
+    "PT-OPS-THRESH-003",
+    "PT-OPS-THRESH-004",
+    "PT-OPS-THRESH-005",
+    "PT-OPS-THRESH-006",
+    "PT-OPS-THRESH-007",
+    "PT-OPS-THRESH-008",
+    "PT-OPS-THRESH-009",
+    "PT-OPS-THRESH-010",
+    "PT-OPS-THRESH-011",
+    "PT-OPS-THRESH-012",
+    "PT-OPS-THRESH-013",
+    "PT-OPS-THRESH-014",
+    "PT-OPS-THRESH-015"
+  ]
+}
