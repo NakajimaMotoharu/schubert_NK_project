@@ -16,6 +16,7 @@ import dev.codex.schubert.nk.protocol.layout.semantic.DisplayPath;
 import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
 import dev.codex.schubert.nk.web.config.WebMvcConfiguration;
 import dev.codex.schubert.nk.web.session.SessionPrincipal;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -25,9 +26,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.jupiter.api.Test;
@@ -385,7 +388,8 @@ class AnimationTemplateTest {
   }
 
   @Test
-  void animation053ConcurrentRendering() throws Exception {
+  void animation053ConcurrentRendering()
+      throws InterruptedException, ExecutionException, TimeoutException, IOException {
     try (var c = context()) {
       var executor = Executors.newFixedThreadPool(8);
       try {
