@@ -1,0 +1,64 @@
+{
+  "run": "PG42118",
+  "source": "3b25987fe4226c9464ce6d8b2b236541a545772d",
+  "toolsSource": "3ab80b846e27308aab029821581b113ecaf78fc9",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-P020-01.03/2",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T04:35:33.166536+00:00",
+  "originalSameTools": [
+    {
+      "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG41344-p020-current-218-local-v1/manifest.json",
+      "sha256": "5f9119617ebed6632218f46bd81c2b858f6c8fa3064a827edd1fb9b470d9148c"
+    },
+    {
+      "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG41346-p020-current-218-independent-v1/manifest.json",
+      "sha256": "d2191089b0953b97f34e139d3d62a5bde47387bdb3e0ff14dde155198bb41a15"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41344-p020-current-218-local-v1/reports/TEST-junit-jupiter.xml",
+      "sha256": "8f6b635830262186ba682cf3b682f56d8b732f1a557452d62cebae4c95ef4dd4"
+    }
+  ],
+  "snapshotInputs": [
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateOutputFailureContractTest.java",
+      "sha256": "d7e8b55e261aa185237fc68544030baec7b559a42560dea128c7b313d22180ef"
+    },
+    {
+      "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+      "sha256": "86522adf1d130eca810e9e26ddda249b14706e1498256cae482be09c8796b157"
+    }
+  ],
+  "namedToolPhysical": {
+    "dev/codex/schubert/characterization/GateCli.class": "fb055d3db3e72e307b6624f31e204c517e11c80c4c1a625537d9519f72b91ff3",
+    "dev/codex/schubert/characterization/GateCli$JsonOutput.class": "8d7047d7bf57b8d93b832edfdfbcaa023022e1c03b8e9221a955277c49427c1f"
+  },
+  "package": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41344-p020-current-218-local-v1/snapshot/program/characterization/target/schubert-characterization-0.1.0-SNAPSHOT.jar",
+    "sha256": "3b00e3da151d8f0e6b4f5402270e0f47fe54f5590205e3c7745ccf213f0acc8c"
+  },
+  "independentSpec": {
+    "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateOutputFailureContractTest.java",
+    "sha256": "d7e8b55e261aa185237fc68544030baec7b559a42560dea128c7b313d22180ef"
+  },
+  "qualifiedExistingOutputCases": [
+    "cleanupFailureHasExistingFinallyPrecedenceAndClaimIsStillReleased",
+    "failureAtEachOutputPhaseDeletesTemporaryAndReleasesClaim",
+    "nestedSameOutputIsRejectedWithoutReleasingOuterClaim",
+    "nullPortIsRejectedBeforeAnyOutputClaim"
+  ],
+  "sourceDeclaredTrace": "PT-CHR-RAW008..014 as documented fixture group",
+  "actualCurrentTestScope": "source & physical equivalence, prior local 218 exec",
+  "fixedEdgeSemantics": [
+    "existing output failure cleans temporary and releases claim",
+    "cleanup failure precedence and nested claim identity",
+    "null test port validation before claim"
+  ],
+  "baselineReadOrModified": false,
+  "actualProductOrChrOrFileStoreStarted": 0,
+  "newTests": 0,
+  "coverageAggregateAdded": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
