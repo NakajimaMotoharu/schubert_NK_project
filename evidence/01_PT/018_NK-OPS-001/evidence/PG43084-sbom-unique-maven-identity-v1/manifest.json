@@ -1,0 +1,199 @@
+{
+  "run": "PG43084-sbom-unique-maven-identity-v1",
+  "source": "2d7cdcda0eed3bb18d8333c05dc582d7a41760c5",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T22:38:17.362046+00:00",
+  "testTerminalAtUTC": "2026-11-22T22:36:49.804891+00:00",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-P018-02/2",
+  "requirement": "SCM-005",
+  "design": "RD171／SS352 §13",
+  "bug": "BUG-3664",
+  "horizontalReview": "YKT-2881",
+  "newToolTestIds": [
+    "PT-OPS-SBOM-026",
+    "PT-OPS-SBOM-027",
+    "PT-OPS-OSV-011"
+  ],
+  "toolTestsSuccess": 21,
+  "productTestsNewlyExecuted": 0,
+  "oldMissedSyntheticAssertions": 3,
+  "oldActualExit": 1,
+  "allNewNormalTestsPassed": true,
+  "fixedDistinctClassifierCount": 2,
+  "osvSubprocessCallsForRejectedInput": 0,
+  "externalOrActualScannerCalls": 0,
+  "command": [
+    "python3",
+    "-B",
+    "-m",
+    "unittest",
+    "-v",
+    "test_verify_maven_sbom",
+    "test_verify_maven_advisories"
+  ],
+  "pythonPath": "tools/quality:tools/quality/tests",
+  "python": "3.14.4",
+  "toolInputs": [
+    {
+      "path": "tools/quality/verify_maven_sbom.py",
+      "sha256": "39f17c171c3d94efde974ea1892eb545e529586e225999021ba1258a8894d8d9"
+    },
+    {
+      "path": "tools/quality/verify_maven_advisories.py",
+      "sha256": "be0dbf2ebcf110da7003f5795d8f9ba1ec321881e200cd0c0efec71adf490ea6"
+    },
+    {
+      "path": "tools/quality/tests/test_verify_maven_sbom.py",
+      "sha256": "461c10d9ce528de26c0b630453a459ba3b17b1c4b2b8a23c8292bc29b3db1ad2"
+    },
+    {
+      "path": "tools/quality/tests/test_verify_maven_advisories.py",
+      "sha256": "2d26510402eab21309ee662f7d1d3ccb42587d70384db0819f75a8a58effa3ea"
+    }
+  ],
+  "rawReceipts": [
+    {
+      "path": "../pgpt-runs/PG379/PG43084-sbom-unique-maven-identity-v1/red-source.txt",
+      "sha256": "c388d5a7fd9b908e4a409768f9518d26ed41782f3dbb627b35eda9b75bdc4a95"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43084-sbom-unique-maven-identity-v1/red-inputs.sha256",
+      "sha256": "aab2c01a9251c68c0e324fa2cdfc589dfc6d4351da36e8a9e0e3a10748fcdc7d"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43084-sbom-unique-maven-identity-v1/red.stderr",
+      "sha256": "a0df6756ce8175862910fe2171d875a1109b7d7ae8b47235a4b32eca9d06d6a6"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43084-sbom-unique-maven-identity-v1/red.exit",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43084-sbom-unique-maven-identity-v1/source.txt",
+      "sha256": "bb91af214124b52da48e6f4cd2cae384dff562c483904551cc73626d8f0e091d"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43084-sbom-unique-maven-identity-v1/startedAtUTC.txt",
+      "sha256": "5ec28139435e8e1fb28851d6f8fe0607fcff8efa223388ea2a1aeb3928f47647"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43084-sbom-unique-maven-identity-v1/exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43084-sbom-unique-maven-identity-v1/stderr",
+      "sha256": "244e6d51a0fd6ffeb2f720276ea8d198de165ffcec23ffd5cdbe7ad6df4cf5de"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43084-sbom-unique-maven-identity-v1/endedAtUTC.txt",
+      "sha256": "a105483474b9f1acc69f3dc94249b9937a9041edd4207c709ce21fc227f1b236"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43084-sbom-unique-maven-identity-v1/retained-six-models-metadata.json",
+      "sha256": "624ae283b2b2da9bfac58621985478f7f5e42e9e236f13087a7297e46b81a8aa"
+    }
+  ],
+  "retainedOriginalModelMetadata": {
+    "modelCount": 6,
+    "source": "2d7cdcda0eed3bb18d8333c05dc582d7a41760c5",
+    "uniqueExternalCoordinates": 69,
+    "results": {
+      "api": {
+        "input": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42658-jackson-model-and-sbom-v1/inputs/api.cdx.json",
+          "sha256": "c3ce6b257c7cc0f7e794957a4ffefab253483b550afdfacaaca8d5490f47bb15"
+        },
+        "metadataOnly": true,
+        "uniqueCoordinates": 51,
+        "componentEntries": 50,
+        "duplicateCoordinates": 0
+      },
+      "batch": {
+        "input": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42658-jackson-model-and-sbom-v1/inputs/batch.cdx.json",
+          "sha256": "7e6d372741a49c4d56ec05f3ea590c21e9be2e9676d2887acc0b90a84b38d9bf"
+        },
+        "metadataOnly": true,
+        "uniqueCoordinates": 55,
+        "componentEntries": 54,
+        "duplicateCoordinates": 0
+      },
+      "bootstrap": {
+        "input": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42658-jackson-model-and-sbom-v1/inputs/bootstrap.cdx.json",
+          "sha256": "eda3cfb295b13536676a336cb02a8e435c78afea8d96319a67dff8793d139e02"
+        },
+        "metadataOnly": true,
+        "uniqueCoordinates": 12,
+        "componentEntries": 11,
+        "duplicateCoordinates": 0
+      },
+      "protocol": {
+        "input": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42658-jackson-model-and-sbom-v1/inputs/protocol.cdx.json",
+          "sha256": "8c62b7f9dd0b7f079238f82aeb4ace7302d16720d9b7860ed9db93de4241bdf3"
+        },
+        "metadataOnly": true,
+        "uniqueCoordinates": 2,
+        "componentEntries": 1,
+        "duplicateCoordinates": 0
+      },
+      "storage": {
+        "input": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42658-jackson-model-and-sbom-v1/inputs/storage.cdx.json",
+          "sha256": "fd913b405154e549b0903b0249316f5c10a97358ed1dcfb08ddbb6dd672402ae"
+        },
+        "metadataOnly": true,
+        "uniqueCoordinates": 2,
+        "componentEntries": 1,
+        "duplicateCoordinates": 0
+      },
+      "web": {
+        "input": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42658-jackson-model-and-sbom-v1/inputs/web.cdx.json",
+          "sha256": "97aaa66128a52410e6c1cb6d1125c3a021d2e0bc87c809b24bc514308e340d4a"
+        },
+        "metadataOnly": true,
+        "uniqueCoordinates": 67,
+        "componentEntries": 66,
+        "duplicateCoordinates": 0
+      }
+    },
+    "ordinaryBinaryReverificationResult": "MAVEN_CACHE_JAR_SHA256_MISMATCH_NOT_A_PASS",
+    "observedMismatch": "pkg:maven/dev.codex.schubert/schubert-nk-bootstrap@0.1.0-SNAPSHOT?type=jar",
+    "archiveReplayCount": 0,
+    "osvInvocations": 0,
+    "releaseAndDistributionActions": 0
+  },
+  "cacheBindingFailure": "The initial attempt selected the shared toolchain cache and failed on the Bootstrap snapshot digest. Rebound to the exact repository declared in the original successful read-only receipt; all archived inputs/output matched. No archived run was regenerated.",
+  "qa061": "Answered; product distribution conditions and approver undecided.",
+  "formalAcceptanceId": null,
+  "whole451": false,
+  "releaseSigned": false,
+  "distributionApproved": false,
+  "originalRepositoryRecheck": {
+    "proof": {
+      "path": "../pgpt-runs/PG379/PG43084-sbom-unique-maven-identity-v1/retained-original-repository.json",
+      "sha256": "906d29d04488c3682ac35d32e4817a4a0ec8c511439ac0b3ece9c6f64a24ac06"
+    },
+    "result": "SIX_ARCHIVED_MODEL_AND_BINARIES_MATCH_ORIGINAL_VERIFIER_OUTPUT_ON_ORIGINAL_REPOSITORY",
+    "archiveModelArtifactsVerifiedPerModule": {
+      "protocol": 1,
+      "storage": 1,
+      "bootstrap": 11,
+      "api": 50,
+      "web": 66,
+      "batch": 54
+    },
+    "graphRowsPerModule": {
+      "protocol": 2,
+      "storage": 2,
+      "bootstrap": 12,
+      "api": 51,
+      "web": 67,
+      "batch": 55
+    },
+    "newCurrentReleaseQualification": false
+  }
+}
