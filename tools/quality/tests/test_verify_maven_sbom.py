@@ -1,4 +1,4 @@
-"""Independent three-byte artifact fixtures for PT-OPS-SBOM-014..020 and 025."""
+"""Independent three-byte artifact fixtures for PT-OPS-SBOM-014..020 and 025..027."""
 
 import copy
 import json
@@ -86,6 +86,43 @@ class VerifyMavenSbomTest(unittest.TestCase):
         self.artifact.with_name("model-2.0-variant.jar").write_bytes(b"abc")
         self.artifact.write_bytes(b"other bytes")
         self.assertEqual(1, verify_model_bom(data, self.repository)["verifiedJarHashes"])
+
+    def test_sbom026_rejects_equivalent_maven_coordinates_under_distinct_references(self):
+        for root_alias in (False, True):
+            with self.subTest(root_alias=root_alias):
+                data = self.fixture()
+                if root_alias:
+                    original = data["metadata"]["component"]
+                    alias = ROOT.replace("type=jar", "type=j%61r")
+                    jar = self.repository / "local/example/nk/1/nk-1.jar"
+                    jar.parent.mkdir(parents=True)
+                    jar.write_bytes(b"abc")
+                else:
+                    original = data["components"][0]
+                    original.update({"bom-ref": CLASSIFIED, "purl": CLASSIFIED})
+                    data["dependencies"][0]["dependsOn"] = [CLASSIFIED]
+                    data["dependencies"][1]["ref"] = CLASSIFIED
+                    alias = "pkg:maven/org.example/model@2.0?type=jar&classifier=variant"
+                    self.artifact.with_name("model-2.0-variant.jar").write_bytes(b"abc")
+                data["components"].append({
+                    **original, "bom-ref": alias, "purl": alias,
+                    "hashes": [{"alg": "SHA-256", "content": ABC_SHA256}],
+                })
+                data["dependencies"][0]["dependsOn"].append(alias)
+                data["dependencies"].append({"ref": alias, "dependsOn": []})
+                with self.assertRaisesRegex(ValueError, "duplicate Maven JAR identity"):
+                    verify_model_bom(data, self.repository)
+
+    def test_sbom027_counts_different_classifiers_as_distinct(self):
+        data = self.fixture()
+        chosen = {**data["components"][0], "bom-ref": CLASSIFIED, "purl": CLASSIFIED}
+        self.artifact.with_name("model-2.0-variant.jar").write_bytes(b"abc")
+        data["components"].append(chosen)
+        data["dependencies"][0]["dependsOn"].append(CLASSIFIED)
+        data["dependencies"].append({"ref": CLASSIFIED, "dependsOn": []})
+        measured = verify_model_bom(data, self.repository)
+        self.assertEqual(2, measured["verifiedJarHashes"])
+        self.assertEqual(3, measured["dependencyRows"])
 
     def test_absent_license_is_reported_and_invalid_entries_fail(self):
         data = self.fixture()

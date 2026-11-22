@@ -1,4 +1,4 @@
-"""Fixed Maven input and scanner response fixtures for PT-OPS-OSV-001..010."""
+"""Fixed Maven input and scanner response fixtures for PT-OPS-OSV-001..011."""
 
 import json
 import subprocess
@@ -169,6 +169,22 @@ class VerifyMavenAdvisoriesTest(unittest.TestCase):
         self.document["metadata"]["component"]["name"] = "different-artifact"
         self.bom.write_text(json.dumps(self.document), encoding="utf-8")
         with self.assertRaisesRegex(ValueError, "does not match the Maven JAR"):
+            self.scan()
+        run.assert_not_called()
+
+    @patch("verify_maven_advisories.subprocess.run")
+    def test_011_repeated_maven_identity_stops_before_the_scanner(self, run):
+        alias = DEPENDENCY.replace("type=jar", "type=j%61r")
+        self.document["components"].append({
+            **self.document["components"][0], "purl": alias, "bom-ref": alias,
+        })
+        self.document["dependencies"][0]["dependsOn"].append(alias)
+        self.document["dependencies"].append({"ref": alias, "dependsOn": []})
+        self.bom.write_text(json.dumps(self.document), encoding="utf-8")
+        run.side_effect = self.response(packages=[
+            self.package, {"package": {"ecosystem": "Maven", "purl": alias}},
+        ])
+        with self.assertRaisesRegex(ValueError, "duplicate Maven JAR identity"):
             self.scan()
         run.assert_not_called()
 

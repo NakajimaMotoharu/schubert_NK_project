@@ -48,8 +48,8 @@ def maven_jar_coordinates(component):
     return group, name, version, classifier
 
 
-def maven_jar(component, repository):
-    group, name, version, classifier = maven_jar_coordinates(component)
+def maven_jar(coordinates, repository):
+    group, name, version, classifier = coordinates
     filename = f"{name}-{version}" + (f"-{classifier}" if classifier else "") + ".jar"
     artifact = repository.joinpath(*group.split("."), name, version, filename).resolve(strict=True)
     if not artifact.is_relative_to(repository) or not artifact.is_file():
@@ -99,7 +99,7 @@ def verify_model_bom(document, repository):
     if document["bomFormat"] != "CycloneDX" or document["specVersion"] != "1.6":
         raise ValueError("expected CycloneDX 1.6")
     root_component = document["metadata"]["component"]
-    maven_jar_coordinates(root_component)
+    seen_coordinates = {maven_jar_coordinates(root_component)}
     root = root_component["bom-ref"]
     components = document["components"]
     dependencies = document["dependencies"]
@@ -112,7 +112,11 @@ def verify_model_bom(document, repository):
         ref = component["bom-ref"]
         if ref in known:
             raise ValueError("duplicate BOM reference")
-        artifact = maven_jar(component, repository)
+        coordinates = maven_jar_coordinates(component)
+        if coordinates in seen_coordinates:
+            raise ValueError(f"duplicate Maven JAR identity for {ref}")
+        seen_coordinates.add(coordinates)
+        artifact = maven_jar(coordinates, repository)
         known.add(ref)
         declared = [item["content"] for item in component["hashes"] if item["alg"] == "SHA-256"]
         if len(declared) != 1 or not isinstance(declared[0], str) or not SHA256.fullmatch(declared[0]):
