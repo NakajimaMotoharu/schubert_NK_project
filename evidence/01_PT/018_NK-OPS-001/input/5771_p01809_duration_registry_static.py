@@ -70,7 +70,7 @@ def main(folder, run_tests):
     main = [base / "main/java" / PACKAGE / f"{name}.java" for name in MAIN_NAMES]
     test = base / "test/java" / PACKAGE / f"{TEST}.java"
     assert all(git("show", f"{CORE}:{path}") == path.read_bytes() for path in main)
-    assert f"{head}:{test}" and git("show", f"{head}:{test}") == test.read_bytes()
+    assert git("show", f"{head}:{test}") == test.read_bytes()
     for path in main:
         if str(path) in old["inputHashes"]:
             assert pin(path)["sha256"] == old["inputHashes"][str(path)]
@@ -102,7 +102,7 @@ def main(folder, run_tests):
     for key in ("style", "pmd", "spotbugs"):
         prior = load(old_static / "begin.json")["commands"][key]
         if key == "style":
-            stages[key] = [*prior[:6], str(test)]
+            stages[key] = [*prior[:-2], str(test)]
         else:
             position = prior.index("--aux-classpath" if key == "pmd" else "-auxclasspath") + 1
             stages[key] = [str(arg).replace(str(old_static), str(folder)) for arg in prior]
@@ -122,6 +122,15 @@ def main(folder, run_tests):
             "-cp", os.pathsep.join([str(tests), fixture_cp]), "org.junit.platform.console.ConsoleLauncher",
             "execute", "--disable-ansi-colors", "--fail-if-no-tests", "--reports-dir", str(folder / "xml"),
             "--select-class", PACKAGE.replace("/", ".") + "." + TEST,
+        ]
+        (folder / "meter").mkdir()
+        earlier = LOCALS / "PG43080-scenario-stream-finite-current-v1"
+        coverage = load(earlier / "begin.json")["commands"]
+        stages["rawCompile"] = [arg.replace(str(earlier), str(folder)) for arg in coverage["rawCompile"]]
+        stages["unfiltered"] = [
+            *(arg.replace(str(earlier), str(folder)) for arg in coverage["unfiltered"][:-1]),
+            str(mains / PACKAGE / "ExactDurationMeterRegistry.class"),
+            str(mains / PACKAGE / "ExactDurationMeterRegistry$ExactSummary.class"),
         ]
     start = dict(source=head, productCore=CORE, startedAtUTC=at(), main=[pin(p) for p in main],
                  test=pin(test), protocol=pin(protocol), vendor=dependencies, stages=stages,

@@ -22,8 +22,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.ToDoubleFunction;
 import org.junit.jupiter.api.Test;
@@ -290,7 +292,8 @@ class ExactDurationMeterRegistryTest {
   }
 
   @Test
-  void exDur009ConcurrentUpdatesAndSnapshotsHaveConsistentIndependentIdentity() throws Exception {
+  void exDur009ConcurrentUpdatesAndSnapshotsHaveConsistentIndependentIdentity()
+      throws InterruptedException, ExecutionException, TimeoutException {
     try (var registry = registry()) {
       var executor = Executors.newFixedThreadPool(5);
       try {
