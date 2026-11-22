@@ -13,9 +13,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
@@ -134,7 +136,7 @@ final class MigrationMasterConstraintVerifierTest {
               "6\tuq_entry_audio_links_entry_type_order\tu\t1,4,5\ttrue\t-\t-"));
 
   @Test
-  void constraint001SixQueriesSeventyFiveConstraintsAndExactResources() throws Exception {
+  void constraint001SixQueriesSeventyFiveConstraintsAndExactResources() throws SQLException {
     var f = new Fixture();
     verify(f);
     assertEquals(SQL, f.sql);
@@ -261,7 +263,7 @@ final class MigrationMasterConstraintVerifierTest {
   }
 
   @Test
-  void constraint011SqlNullBooleanCannotMasqueradeAsFalse() throws Exception {
+  void constraint011SqlNullBooleanCannotMasqueradeAsFalse() throws SQLException {
     for (int table = 0; table < TABLES; table++) {
       for (int row = 0; row < DATA.get(table).size(); row++) {
         var f = new Fixture();
@@ -335,7 +337,7 @@ final class MigrationMasterConstraintVerifierTest {
   }
 
   @Test
-  void constraint016EveryJdbcEventSqlRuntimeAndErrorKeepsOwnership() throws Exception {
+  void constraint016EveryJdbcEventSqlRuntimeAndErrorKeepsOwnership() {
     var calls = expectedCalls();
     for (int index = 0; index < calls.size(); index++) {
       for (Throwable primary : failures()) {
@@ -361,7 +363,7 @@ final class MigrationMasterConstraintVerifierTest {
   }
 
   @Test
-  void constraint017EveryResultCloseFailureStopsLaterQueries() throws Exception {
+  void constraint017EveryResultCloseFailureStopsLaterQueries() {
     for (int table = 0; table < TABLES; table++) {
       for (Throwable primary : failures()) {
         var f = new Fixture();
@@ -375,7 +377,7 @@ final class MigrationMasterConstraintVerifierTest {
   }
 
   @Test
-  void constraint018StatementCloseFailureCannotBecomeSuccess() throws Exception {
+  void constraint018StatementCloseFailureCannotBecomeSuccess() {
     for (Throwable primary : failures()) {
       var f = new Fixture();
       f.statementFailure = primary;
@@ -386,7 +388,7 @@ final class MigrationMasterConstraintVerifierTest {
   }
 
   @Test
-  void constraint019AllFaultKindsPreserveResultThenStatementSuppression() throws Exception {
+  void constraint019AllFaultKindsPreserveResultThenStatementSuppression() {
     for (int p = 0; p < 3; p++) {
       for (int rc = 0; rc < 3; rc++) {
         for (int sc = 0; sc < 3; sc++) {
@@ -405,7 +407,7 @@ final class MigrationMasterConstraintVerifierTest {
   }
 
   @Test
-  void constraint020SamePrimaryAndEqualValuedDistinctCleanupIdentities() throws Exception {
+  void constraint020SamePrimaryAndEqualValuedDistinctCleanupIdentities() {
     for (boolean closeOrigin : List.of(true, false)) {
       for (Throwable primary : failures()) {
         var f = closeOrigin ? new Fixture() : readFailure(primary);
@@ -426,7 +428,7 @@ final class MigrationMasterConstraintVerifierTest {
   }
 
   @Test
-  void constraint021RedactionFreshSuccessAndBorrowedConnectionContract() throws Exception {
+  void constraint021RedactionFreshSuccessAndBorrowedConnectionContract() throws SQLException {
     var verifier = new MigrationMasterConstraintVerifier();
     var bad = new Fixture();
     bad.nullStatement = true;
@@ -442,7 +444,8 @@ final class MigrationMasterConstraintVerifierTest {
   }
 
   @Test
-  void constraint022FiniteSharedVerifierHasOnlyPerCallOwnedResources() throws Exception {
+  void constraint022FiniteSharedVerifierHasOnlyPerCallOwnedResources()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var verifier = new MigrationMasterConstraintVerifier();
     var executor = Executors.newFixedThreadPool(WORKERS);
     try {
