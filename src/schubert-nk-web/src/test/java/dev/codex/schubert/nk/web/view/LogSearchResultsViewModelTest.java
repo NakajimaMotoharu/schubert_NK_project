@@ -15,6 +15,7 @@ import dev.codex.schubert.nk.protocol.layout.semantic.LogLevel;
 import dev.codex.schubert.nk.protocol.layout.semantic.LogType;
 import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
 import dev.codex.schubert.nk.web.session.SessionPrincipal;
+import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.lang.reflect.Modifier;
 import java.time.Instant;
@@ -25,9 +26,11 @@ import java.util.Locale;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jsoup.Jsoup;
 import org.junit.jupiter.api.Test;
 import org.thymeleaf.context.Context;
@@ -246,7 +249,7 @@ class LogSearchResultsViewModelTest {
   }
 
   @Test
-  void web267ClosedBeansAndRedaction() throws Exception {
+  void web267ClosedBeansAndRedaction() throws IntrospectionException {
     var p = model(record(1, TIME, 1023, "sensitive-display"));
     assertEquals("LogSearchResultsViewModel[REDACTED]", p.toString());
     assertEquals("LogDisplayRow[REDACTED]", p.getRows().getFirst().toString());
@@ -327,7 +330,8 @@ class LogSearchResultsViewModelTest {
   }
 
   @Test
-  void web269ConcurrentProjection() throws Exception {
+  void web269ConcurrentProjection()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var input = List.of(record(1, TIME, 1023, "shared"));
     var pool = Executors.newFixedThreadPool(8);
     try {
@@ -356,7 +360,7 @@ class LogSearchResultsViewModelTest {
     assertEquals(1, input.size());
   }
 
-  private static Set<String> properties(Class<?> type) throws Exception {
+  private static Set<String> properties(Class<?> type) throws IntrospectionException {
     var result = new HashSet<String>();
     for (var property : Introspector.getBeanInfo(type, Object.class).getPropertyDescriptors())
       result.add(property.getName());
