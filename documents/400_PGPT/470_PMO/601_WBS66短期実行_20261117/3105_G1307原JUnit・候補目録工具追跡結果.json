@@ -1,0 +1,122 @@
+{
+  "eventId": "PGPT-20261008-8550",
+  "workCategory": "CONTRACT_AUDIT",
+  "source": "393dd1653a01e8014238a27cf1af7b7ccf6ca305",
+  "productionCoreMain": "e8368d22c4da2ec841f008df793594d3be9066af",
+  "canonicalDesignSource": "ca41c03c0c6efff9a3a35b47b480491810bee6f9",
+  "managementWorkIds": [
+    "WBS-G13.07/2"
+  ],
+  "planRow": {
+    "ID": "WBS-G13.07/2",
+    "元行": "WBS-G13.07/2",
+    "費目": "F",
+    "主担当": "WBS-G13.07",
+    "状態": "計画",
+    "作業": "G13 最終候補での多対多join・差分再照合",
+    "残pp": "1.5",
+    "着手": "Aの残作業と6領域の差分が確定。最終候補の要求・source・TestIDの対応を再確認",
+    "終了証拠": "RD/UI/SS・20Program・CHR24・設定全体の多対多join/二重割当照合の対象別完了記録を確認。契約別の版差照合先で示した現在候補と、個別採用した設計・期待値を明示",
+    "補正根拠": "予測777の元行残。個別費用実測がない部分は前回単価を継承",
+    "契約HOLD": "H-G13.07",
+    "対象": "",
+    "範囲": "SYS-011、SCP-001、SCP-002、SCP-003、SCP-006",
+    "保存証跡": "該当criteriaごとの判定・未解決一覧・照合元manifest・判定者",
+    "順次": "False",
+    "配賦窓": "12",
+    "楽観pp": "0.6",
+    "慎重pp": "3.0",
+    "要求設計の版差": "PT基準仕様 NK-OPS-001",
+    "lineNumber": 859,
+    "改訂残pp": "1.5"
+  },
+  "run": "PG42806",
+  "startEvent": "PGPT-20261008-8549",
+  "outcome": {
+    "actualTests": 0,
+    "technicalPaths": 45,
+    "updatedPaths": 3,
+    "addedPaths": 6,
+    "formalAcceptanceId": null,
+    "technicalCondition": "Six newly linked tool paths and three updated pins, complete 45 targeted tool artifacts. Existing WBS fair price and formal fields unchanged."
+  },
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42806-g1307-current-junit-roster-ci-tool-trace-v1/manifest.json",
+    "sha256": "cc74bfed598b37f2aaaf2a7086e03e77605dfd9dbc8a883127e2e7029b2ae8e1"
+  },
+  "nextEvidence": {
+    "run": "PG42808",
+    "wbs": "WBS-G07",
+    "target": "tracked incremental current public source/test/evidence secret check",
+    "action": "Continue from PG42756 tracked cursor; verify zero new tracked secret items and untouched Current baseline."
+  },
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T16:13:46+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 41,
+      "remainingPercent": 59,
+      "resetsAt": 1795879772,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "modelRequested": "gpt-6.2-sol",
+  "modelObserved": null,
+  "reasoningRequested": "high",
+  "reasoningObserved": null,
+  "speedRequested": "standard",
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 41,
+    "remainingPercent": 59,
+    "resetsAt": 1795879772,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "c1b45f85a099f7a806863f1bebf737723b97d2a4352e160eb11eea01e25457d2",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-22T16:13:46+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 41,
+        "remainingPercent": 59,
+        "resetsAt": 1795879772,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": 0,
+  "sameQuotaWindow": true,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-22T16:13:24.119677+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": false,
+  "quotaBefore": {
+    "usedPercent": 41,
+    "remainingPercent": 59,
+    "resetsAt": 1795879772,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null
+}

@@ -1,0 +1,122 @@
+{
+  "eventId": "PGPT-20261008-8548",
+  "workCategory": "CONTRACT_AUDIT",
+  "source": "2391fd07f07fffe99d61bc2d1a76098bc4db6118",
+  "productionCoreMain": "e8368d22c4da2ec841f008df793594d3be9066af",
+  "canonicalDesignSource": "ca41c03c0c6efff9a3a35b47b480491810bee6f9",
+  "managementWorkIds": [
+    "WBS-G09"
+  ],
+  "planRow": {
+    "ID": "WBS-G09",
+    "元行": "WBS-G09",
+    "費目": "F",
+    "主担当": "WBS-G09",
+    "状態": "計画",
+    "作業": "全PT完走・F/E/S/flaky/not-run0・再現性",
+    "残pp": "2.0",
+    "着手": "設計354・当該source・作業所有・既存成果を照合。元契約の着手依存と個別HOLDを確認",
+    "終了証拠": "451の正式全module clean verify完走、全PT F/E/S/flaky/disabled/not-run0と再現性、対象run/command/exit/byte/hash固定。",
+    "補正根拠": "予測777の元行残。個別費用実測がない部分は前回単価を継承",
+    "契約HOLD": "H-G09",
+    "対象": "",
+    "範囲": "TST-101",
+    "保存証跡": "該当criteriaごとの判定・未解決一覧・照合元manifest・判定者",
+    "順次": "False",
+    "配賦窓": "24",
+    "楽観pp": "0.75",
+    "慎重pp": "4.0",
+    "要求設計の版差": "PT基準仕様 NK-OPS-001、SS 354",
+    "lineNumber": 688,
+    "改訂残pp": "2.0"
+  },
+  "run": "PG42802",
+  "startEvent": "PGPT-20261008-8547",
+  "outcome": {
+    "actualProductTests": 0,
+    "supportToolUnit": 10,
+    "existingCollectorUnit": 113,
+    "historicalReadonlyScopes": 53,
+    "formalAcceptanceId": null,
+    "technicalCondition": "Formal new reactor receipt binds original JUnit inventory to source/run/terminal, and detects later replacement/invalid response; old 53 read remains valid."
+  },
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42804-reactor-junit-terminal-tool-v1/manifest.json",
+    "sha256": "887ed62874861172b811ee320589c7429462c3d63aea76d9543fd5afc7c80101"
+  },
+  "nextEvidence": {
+    "run": "PG42806",
+    "wbs": "WBS-G13.07/2",
+    "target": "current raw JUnit and candidate roster technical tool bindings",
+    "action": "Verify preexisting 39 trace list, add proved source and per-case independent bindings for new tooling without changing formal counts or prices."
+  },
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T16:12:37+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 41,
+      "remainingPercent": 59,
+      "resetsAt": 1795879772,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "modelRequested": "gpt-6.2-sol",
+  "modelObserved": null,
+  "reasoningRequested": "high",
+  "reasoningObserved": null,
+  "speedRequested": "standard",
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 41,
+    "remainingPercent": 59,
+    "resetsAt": 1795879772,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "ca5833d0a1459ec6e03003972e054cc1c9c8333907e638d45dcb24e4f3c5bc8c",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-22T16:12:37+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 41,
+        "remainingPercent": 59,
+        "resetsAt": 1795879772,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": null,
+  "sameQuotaWindow": false,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-22T16:11:02.115327+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": true,
+  "quotaBefore": {
+    "usedPercent": 41,
+    "remainingPercent": 59,
+    "resetsAt": 1795879771,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null
+}
