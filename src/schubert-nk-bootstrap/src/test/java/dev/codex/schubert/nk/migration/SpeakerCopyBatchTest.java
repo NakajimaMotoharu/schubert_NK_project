@@ -14,9 +14,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
@@ -40,7 +42,7 @@ final class SpeakerCopyBatchTest {
   private static final int TERMINATION_SECONDS = 10;
 
   @Test
-  void speakerBatch001TwoLiteralRowsKeepDeclaredOrderAndBorrowedSink() throws Exception {
+  void speakerBatch001TwoLiteralRowsKeepDeclaredOrderAndBorrowedSink() throws IOException {
     var batch = normal();
     var sink = new MemorySink();
     batch.writeTo(writer(), sink);
@@ -53,7 +55,7 @@ final class SpeakerCopyBatchTest {
   }
 
   @Test
-  void speakerBatch002EmptyBatchAndEmptyReferencesStayEmpty() throws Exception {
+  void speakerBatch002EmptyBatchAndEmptyReferencesStayEmpty() throws IOException {
     var batch = new SpeakerCopyBatch(List.of());
     assertTrue(batch.rows().isEmpty());
     assertArrayEquals(new byte[0], batch.copyBytes(encoder()));
@@ -154,30 +156,52 @@ final class SpeakerCopyBatchTest {
   void speakerBatch009PartialIoHasOneFailureAndNoAutomaticReplay() {
     var failure = new IOException("synthetic speaker COPY failure");
     var sink = new FailingSink(failure);
-    assertSame(failure, assertThrows(IOException.class, () -> normal().writeTo(writer(), sink)));
-    assertEquals("70", sink.output.toString(StandardCharsets.UTF_8));
-    assertEquals(1, sink.failures);
-    assertEquals(0, sink.closes);
-    assertEquals(0, sink.flushes);
+    try (sink) {
+      assertSame(failure, assertThrows(IOException.class, () -> normal().writeTo(writer(), sink)));
+      assertEquals("70", sink.output.toString(StandardCharsets.UTF_8));
+      assertEquals(1, sink.failures);
+      assertEquals(0, sink.closes);
+      assertEquals(0, sink.flushes);
+    }
+    assertEquals(1, sink.closes);
   }
 
   @Test
   void speakerBatch010RuntimeAndErrorPropagateIdenticalInstances() {
+    var runtime = new IllegalStateException("synthetic runtime");
+    assertUncheckedBorrowedFailure(runtime, () -> { throw runtime; });
+    var error = new AssertionError("synthetic error");
+    assertUncheckedBorrowedFailure(error, () -> { throw error; });
+  }
+
+  private static void assertUncheckedBorrowedFailure(Throwable failure, Runnable throwOnWrite) {
     var batch = normal();
-    for (Throwable failure :
-        List.of(
-            new IllegalStateException("synthetic runtime"),
-            new AssertionError("synthetic error"))) {
-      var sink =
-          new OutputStream() {
-            @Override
-            public void write(int value) {
-              if (failure instanceof RuntimeException runtime) throw runtime;
-              throw (Error) failure;
-            }
-          };
+    var sink =
+        new ByteArrayOutputStream() {
+          private int closes;
+          private int flushes;
+
+          @Override
+          public synchronized void write(byte[] bytes, int offset, int length) {
+            throwOnWrite.run();
+          }
+
+          @Override
+          public void close() {
+            closes++;
+          }
+
+          @Override
+          public void flush() {
+            flushes++;
+          }
+        };
+    try (sink) {
       assertSame(failure, assertThrows(failure.getClass(), () -> batch.writeTo(writer(), sink)));
+      assertEquals(0, sink.closes);
+      assertEquals(0, sink.flushes);
     }
+    assertEquals(1, sink.closes);
   }
 
   @Test
@@ -236,7 +260,8 @@ final class SpeakerCopyBatchTest {
   }
 
   @Test
-  void speakerBatch016FiniteSharedReadersKeepIndependentCopies() throws Exception {
+  void speakerBatch016FiniteSharedReadersKeepIndependentCopies()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var batch = normal();
     var references = entries(GAME_ONE, FIRST_ID, STAMP);
     var executor = Executors.newFixedThreadPool(WORKERS);
