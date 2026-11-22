@@ -1,0 +1,89 @@
+{
+  "eventId": "PGPT-20261008-8509",
+  "groupId": "nov22-pg42746-formal-certified-archive",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T14:57:27+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 38,
+      "remainingPercent": 62,
+      "resetsAt": 1795879771,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "source": "8c3c9b18cb6f561b576406c06ac300d3b71352a3",
+    "productionCoreMain": "e8368d22c4da2ec841f008df793594d3be9066af",
+    "canonicalDesignSource": "ca41c03c0c6efff9a3a35b47b480491810bee6f9",
+    "run": "PG42746",
+    "workCategory": "CONTRACT_AUDIT",
+    "managementWorkIds": [
+      "WBS-G08"
+    ],
+    "previousCheckpoint": "3063",
+    "planRow": {
+      "ID": "WBS-G08",
+      "元行": "WBS-G08",
+      "費目": "F",
+      "主担当": "WBS-G08",
+      "状態": "計画",
+      "作業": "全scope同source/run・collector/manifest/hash一致",
+      "残pp": "2.0",
+      "着手": "設計354・当該source・作業所有・既存成果を照合。元契約の着手依存と個別HOLDを確認",
+      "終了証拠": "018 collector/017019negative canary正常、固定必須scope全件同source/run/branch/exit・file hash/trace一致、別source補完0。",
+      "補正根拠": "予測777の元行残。個別費用実測がない部分は前回単価を継承",
+      "契約HOLD": "H-G08",
+      "対象": "",
+      "範囲": "SS 354",
+      "保存証跡": "該当criteriaごとの判定・未解決一覧・照合元manifest・判定者",
+      "順次": "False",
+      "配賦窓": "25",
+      "楽観pp": "0.75",
+      "慎重pp": "4.0",
+      "要求設計の版差": "PT基準仕様 NK-OPS-001、SS 354",
+      "lineNumber": 687,
+      "改訂残pp": "2.0"
+    },
+    "currentPlan": [
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/11月22日_PGPT再開実行計画.txt",
+        "sha256": "80b9fdc306f664b9c03901a4bdfb34cf66997879676204cfa969858fd68a4016"
+      },
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/短期実行WBS.tsv",
+        "sha256": "a6efedcd63b4ef3bb1d133d939b0ddd7dc4b0147988ac33d668282a25c999527"
+      }
+    ],
+    "startScope": {
+      "target": "正式公開 244a21965 のPT-WEB-20260925-24保全物",
+      "criteria": "一時領域とgit archiveで元公開時の53scopeを回収し、本物の同一run/source/branchの全内容hash・scopeを検証。現候補からの上書きや再実行0",
+      "excluded": [
+        "正式公開変更",
+        "現候補の再認定",
+        "報告を正式PASSへ加算",
+        "新製品試験"
+      ],
+      "workCategory": "CONTRACT_AUDIT"
+    },
+    "groupCapPp": 1.5,
+    "estimateAtGroupStartPp": {
+      "low": 0,
+      "base": 0.55,
+      "high": 1.5
+    },
+    "completedOriginalRowPricePp": 0,
+    "sourceOwnership": "LOCAL_DEV_FOUNDATION_TRACKED_SNAPSHOT",
+    "knownOwnedRunInProgress": 0,
+    "costRevision": "PMO-remaining-v3-20261010",
+    "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "actualAllocatedPp": null
+  }
+}
