@@ -1126,15 +1126,20 @@ class EvidenceSetTest(unittest.TestCase):
         stub = module("stub_collector", "028_collect_stub_evidence.py")
         cls = "dev.codex.schubert.nk.api.application.question.StubAnswerProviderTest"
         names = ("emptyAnswerAndClock", "nullContracts", "clockFailures", "resultValueAndRedaction",
-                 "concurrentCallsAndEvidence")
-        suite = ET.Element("testsuite", name=cls, tests="5", failures="0", errors="0", skipped="0")
+                 "concurrentCallsAndEvidence", "fixedBusinessFailureValue")
+        suite = ET.Element("testsuite", name=cls, tests="6", failures="0", errors="0", skipped="0")
         for name in names: ET.SubElement(suite, "testcase", classname=cls, name=name)
         self.assertEqual({f"PT-ASY-STB{i:03}": cls + "#" + name for i, name in enumerate(names, 1)}, stub.validate_suite(suite))
-        for field, value in (("name", "unknown"), ("tests", "4"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
+        for field, value in (("name", "unknown"), ("tests", "5"), ("failures", "1"), ("errors", "1"), ("skipped", "1")):
             wrong = copy.deepcopy(suite); wrong.set(field, value)
             with self.assertRaises(ValueError): stub.validate_suite(wrong)
-        for tag in ("failure", "error", "skipped", "flakyFailure", "rerunFailure"):
-            wrong = copy.deepcopy(suite); ET.SubElement(wrong[0], tag)
+        missing_latest = copy.deepcopy(suite)
+        missing_latest.remove(missing_latest[-1])
+        missing_latest.set("tests", "5")
+        with self.assertRaises(ValueError):
+            stub.validate_suite(missing_latest)
+        for tag in ("failure", "error", "skipped", "flakyFailure", "flakyError", "rerunFailure", "rerunError"):
+            wrong = copy.deepcopy(suite); ET.SubElement(wrong[-1], tag)
             with self.assertRaises(ValueError): stub.validate_suite(wrong)
         for attribute, value in (("name", names[1]), ("name", "unknown"), ("classname", "unknown")):
             wrong = copy.deepcopy(suite); wrong[0].set(attribute, value)
@@ -1193,14 +1198,14 @@ class EvidenceSetTest(unittest.TestCase):
         for wrong in ({}, dict(expected, unknown=b""), {"PT-ASY-STB005.txt": b"PASS"}):
             with self.assertRaises(ValueError): stub.validate_traces(wrong)
         report = ET.Element("report")
-        for name in ("AnswerResult", "StubAnswerProvider"):
+        for name in ("AnswerResult", "StubAnswerProvider", "AnswerBusinessException"):
             cls = ET.SubElement(report, "class", name="dev/codex/schubert/nk/api/application/question/" + name)
             for kind in ("LINE", "METHOD", "CLASS"):
                 ET.SubElement(cls, "counter", type=kind, missed="0", covered="1")
         result = stub.validate_coverage(report)
-        self.assertEqual(2, len(result))
+        self.assertEqual(3, len(result))
         self.assertTrue(all(counters["BRANCH"] == {"missed": 0, "covered": 0} for counters in result.values()))
-        for cls_index in (0, 1):
+        for cls_index in range(3):
             wrong = copy.deepcopy(report); ET.SubElement(wrong[cls_index], "counter", type="BRANCH", missed="1", covered="0")
             with self.assertRaises(ValueError): stub.validate_coverage(wrong)
             for counter_index in range(3):

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""PG190: empty-answer provider slice, not a worker completion certificate."""
+"""PG190 / BUG-3600: verified empty-answer provider and fixed failure value."""
 import argparse
 import hashlib
 import json
@@ -9,9 +9,9 @@ import xml.etree.ElementTree as ET
 
 CLASS = "dev.codex.schubert.nk.api.application.question.StubAnswerProviderTest"
 METHODS = ("emptyAnswerAndClock", "nullContracts", "clockFailures", "resultValueAndRedaction",
-           "concurrentCallsAndEvidence")
+           "concurrentCallsAndEvidence", "fixedBusinessFailureValue")
 SUBJECTS = tuple("dev/codex/schubert/nk/api/application/question/" + name
-                 for name in ("AnswerResult", "StubAnswerProvider"))
+                 for name in ("AnswerResult", "StubAnswerProvider", "AnswerBusinessException"))
 TRACE = b"provider=STUB\nanswerLength=0\nclockReadsPerCall=1\nconcurrentCalls=64\nuniqueClockValues=64\nexternalCalls=0\nrawBodySaved=false\n"
 TRACES = {"PT-ASY-STB005.txt": TRACE}
 
@@ -19,9 +19,9 @@ TRACES = {"PT-ASY-STB005.txt": TRACE}
 def validate_suite(suite):
     cases = suite.findall("testcase")
     names = [case.get("name") for case in cases]
-    if (suite.get("name") != CLASS or suite.get("tests") != "5"
+    if (suite.get("name") != CLASS or suite.get("tests") != str(len(METHODS))
             or any(int(suite.get(key, "0")) for key in ("failures", "errors", "skipped"))
-            or len(names) != 5 or len(set(names)) != 5 or set(names) != set(METHODS)
+            or len(names) != len(METHODS) or set(names) != set(METHODS)
             or any(case.get("classname") != CLASS or
                    any(child.tag not in ("system-out", "system-err") for child in case) for case in cases)):
         raise ValueError("missing or nonpassing stub tests")
@@ -40,7 +40,7 @@ def validate_coverage(report):
             counters = {counter.get("type"): {
                 "missed": int(counter.get("missed")), "covered": int(counter.get("covered"))
             } for counter in cls.findall("counter")}
-            # Both executable classes contain no conditional instructions; never ignore missed counters.
+            # The three executable classes contain no conditional instructions.
             counters.setdefault("BRANCH", {"missed": 0, "covered": 0})
             result[cls.get("name")] = counters
     if set(result) != set(SUBJECTS) or any(
@@ -85,7 +85,8 @@ def main():
     (evidence / "logs").mkdir(exist_ok=True)
     for name in ("001_NK-ASY-001_空回答provider単体テスト仕様書.md", "002_NK-ASY-001_空回答provider実行結果.md"):
         (evidence / "logs" / name).write_bytes((program / name).read_bytes())
-    suite = ET.Element("testsuite", name="NK-ASY-001-stub", tests="5", failures="0", errors="0", skipped="0")
+    suite = ET.Element("testsuite", name="NK-ASY-001-stub", tests=str(len(methods)),
+                       failures="0", errors="0", skipped="0")
     for test_id, method in methods.items():
         ET.SubElement(suite, "testcase", id=test_id, classname=CLASS, name=method.split("#")[1], result="PASS")
     ET.ElementTree(suite).write(evidence / "results.xml", encoding="utf-8", xml_declaration=True)
@@ -97,12 +98,14 @@ def main():
     manifest.update({
         "programId": "NK-ASY-001", "scopeResult": "PASS_STUB_PROVIDER_ONLY", "programComplete": False,
         "testIdMethods": methods, "failed": 0, "errors": 0, "skipped": 0, "classCoverage": coverage,
-        "coverageNotes": "Both concrete classes have zero conditional branches (0/0); abstract AnswerProvider has no executable instructions. No coverage exclusion.",
+        "coverageNotes": "The three executable classes have zero conditional branches (0/0). "
+                         "AnswerProvider contains only its abstract method.",
         "staticAnalysis": verified["modules"]["api"]["spotbugs"],
         "fullReactorManifest": "../../008_NK-SCN-001/evidence/manifest.json",
-        "fullReactorManifestSha256": digest(full), "related": ["PG-D-190"],
+        "fullReactorManifestSha256": digest(full), "related": ["PG-D-190", "BUG-3600"],
         "fixture": "Public synthetic question and fixed/atomic test Clock; no real question or secret.",
-        "oracle": "001/STB001..005: empty string and independent literal Instant, null/unknown clock failures, record identity and fixed redaction,64 exact clock values under concurrent calls.",
+        "oracle": "STB001..006: empty string, literal Instant, clock failures, record values, "
+                  "64 concurrent clock observations, and the fixed business failure with no cause or suppression.",
         "limitations": "No worker DB state, JMS acknowledgment, FIFO delivery, external AI, actual NK CHR or IT/ST certificate.",
         "sourceFiles": [{"path": str(path.relative_to(repo)), "sha256": digest(path)} for path in sources]})
     manifest["files"] = [{"path": str(path.relative_to(evidence)), "sha256": digest(path)}
@@ -112,7 +115,8 @@ def main():
     (evidence / "checksums.sha256").write_text("".join(
         digest(path) + "  " + str(path.relative_to(evidence)) + "\n"
         for path in sorted(evidence.rglob("*")) if path.is_file() and path.name != "checksums.sha256"))
-    print(json.dumps({"runId": run, "tests": 5, "scopeResult": manifest["scopeResult"], "programComplete": False}))
+    print(json.dumps({"runId": run, "tests": len(methods), "scopeResult": manifest["scopeResult"],
+                      "programComplete": False}))
 
 
 if __name__ == "__main__":
