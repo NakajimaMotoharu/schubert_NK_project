@@ -10,9 +10,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +25,7 @@ final class ResourceScopeTest {
   private static final String BODY_EVENT = "body";
 
   @Test
-  void successfulOwnership() throws Exception {
+  void successfulOwnership() throws StorageIoException {
     List<String> order = new ArrayList<>();
     int result =
         ResourceScope.use(
@@ -163,7 +165,7 @@ final class ResourceScopeTest {
   }
 
   @Test
-  void nullAndNullableContracts() throws Exception {
+  void nullAndNullableContracts() throws StorageIoException {
     AtomicInteger closed = new AtomicInteger();
     assertThrows(NullPointerException.class, () -> ResourceScope.use(null, () -> 42));
     assertThrows(
@@ -186,7 +188,7 @@ final class ResourceScopeTest {
   }
 
   @Test
-  void nestedScopes() throws Exception {
+  void nestedScopes() throws StorageIoException {
     List<String> order = new ArrayList<>();
     assertEquals(
         42,
@@ -243,7 +245,7 @@ final class ResourceScopeTest {
   }
 
   @Test
-  void concurrentScopes() throws Exception {
+  void concurrentScopes() throws InterruptedException, ExecutionException, TimeoutException {
     AtomicInteger closed = new AtomicInteger();
     var pool = Executors.newVirtualThreadPerTaskExecutor();
     try {

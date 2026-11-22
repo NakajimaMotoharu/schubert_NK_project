@@ -14,8 +14,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
 
@@ -32,7 +34,7 @@ final class FactoryResourceScopeTest {
   private static final String PUBLIC_CLOSE_MARKER = "PUBLIC_CLOSE";
 
   @Test
-  void factory001SuccessAndNullableBodyUseSameResourceOnce() throws Exception {
+  void factory001SuccessAndNullableBodyUseSameResourceOnce() throws IOException {
     for (boolean nullable : List.of(false, true)) {
       var token = new Token();
       var order = new ArrayList<String>();
@@ -277,7 +279,8 @@ final class FactoryResourceScopeTest {
   }
 
   @Test
-  void factory012NestedAndParallelScopesKeepIndependentOwnership() throws Exception {
+  void factory012NestedAndParallelScopesKeepIndependentOwnership()
+      throws IOException, InterruptedException, ExecutionException, TimeoutException {
     var order = new ArrayList<String>();
     var outer = new Token();
     var inner = new Token();
@@ -333,7 +336,8 @@ final class FactoryResourceScopeTest {
   }
 
   @Test
-  void factory013CompleteOwnerTransfersWithoutClosingAndKeepsNarrowType() throws Exception {
+  void factory013CompleteOwnerTransfersWithoutClosingAndKeepsNarrowType()
+      throws StorageIoException {
     var token = new Token();
     var opened = new AtomicInteger();
     var assembled = new AtomicInteger();
@@ -552,7 +556,8 @@ final class FactoryResourceScopeTest {
   }
 
   @Test
-  void factory018ParallelCompleteOwnersNeverShareTransferState() throws Exception {
+  void factory018ParallelCompleteOwnersNeverShareTransferState()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var ready = new CountDownLatch(2);
     var a = new Token();
     var b = new Token();
