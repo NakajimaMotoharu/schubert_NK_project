@@ -1,0 +1,131 @@
+{
+  "run": "PG42086",
+  "source": "1770fac4acc7dc339ff5f9846e30cbefd1a5f597",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-F03/2-2-b",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T04:15:37.960833+00:00",
+  "target": {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentScenarioFileMapperTest.java",
+    "sha256": "209b5e0ed546bf9ebf0376fc037c8e9fa3aac5e298c90fa62f460dc95e1c7195"
+  },
+  "boundedFixtureClosure": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42084-p0190301-scenario-file-proof-v1/manifest.json",
+    "sha256": "6a3e375beeef389898dd36819a48c63fa5f36b9e477788ecb125d6ece43b88db"
+  },
+  "commandReceipt": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42086-f03-scenario-file-mapper-typed-v1/begin.json",
+    "sha256": "ede92a683f514eb956fe97da4a5232285779a12ddf2fe43d1e236928374c8b85"
+  },
+  "tools": {
+    "format": {
+      "actualExit": 1,
+      "start": "2026-11-22T04:15:32.181412+00:00",
+      "end": "2026-11-22T04:15:33.097809+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42086-f03-scenario-file-mapper-typed-v1/format.stdout",
+        "sha256": "7175154ce3b9f732058303122723432e427449bf13d72b6e5f40ec10ad006206"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42086-f03-scenario-file-mapper-typed-v1/format.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "checkstyle": {
+      "actualExit": 0,
+      "start": "2026-11-22T04:15:32.182141+00:00",
+      "end": "2026-11-22T04:15:33.277539+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42086-f03-scenario-file-mapper-typed-v1/checkstyle.stdout",
+        "sha256": "2ee89ca49ecae1bb5b3de5ffcc8a964e605f1b1c6fbe072073a1ea4feaa4e230"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42086-f03-scenario-file-mapper-typed-v1/checkstyle.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "pmd": {
+      "actualExit": 4,
+      "start": "2026-11-22T04:15:33.098211+00:00",
+      "end": "2026-11-22T04:15:37.421590+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42086-f03-scenario-file-mapper-typed-v1/pmd.stdout",
+        "sha256": "4c9ede5079054850100a8e87cb38f429ea21da38e09fea75595f36a75a63750c"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42086-f03-scenario-file-mapper-typed-v1/pmd.stderr",
+        "sha256": "141eb65d74f7997b8eef554fecec67bc550322bbe8156e05a8f2f34e7c0a69e8"
+      }
+    },
+    "spotbugs": {
+      "actualExit": 1,
+      "start": "2026-11-22T04:15:33.277811+00:00",
+      "end": "2026-11-22T04:15:37.955682+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42086-f03-scenario-file-mapper-typed-v1/spotbugs.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42086-f03-scenario-file-mapper-typed-v1/spotbugs.stderr",
+        "sha256": "83febadc46f214e89709b832aae077e8a743258c2778ad97727d55ed33462071"
+      }
+    }
+  },
+  "pmdFindings": [
+    {
+      "rule": "CloseResource",
+      "line": 388,
+      "endLine": 388,
+      "file": "CurrentScenarioFileMapperTest.java"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 388,
+      "endLine": 388,
+      "file": "CurrentScenarioFileMapperTest.java"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 392,
+      "endLine": 392,
+      "file": "CurrentScenarioFileMapperTest.java"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 396,
+      "endLine": 396,
+      "file": "CurrentScenarioFileMapperTest.java"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 397,
+      "endLine": 397,
+      "file": "CurrentScenarioFileMapperTest.java"
+    }
+  ],
+  "pmdErrors": [],
+  "spotbugsFindings": [
+    {
+      "rule": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "method": "fileMap024FiniteParallelCallsConsumeOnlyPrivateClaimMaps"
+    }
+  ],
+  "spotbugsErrors": {
+    "errors": "0",
+    "missingClasses": "0"
+  },
+  "outputReports": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42086-f03-scenario-file-mapper-typed-v1/pmd.xml",
+      "sha256": "2ab8c57b609bdf56854ee25bfd85db7170a3d709b5b7ef8f21f9ec0bc95f0ae3"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42086-f03-scenario-file-mapper-typed-v1/spotbugs.xml",
+      "sha256": "846a69733d1da794c004403467b1df87cd16de4a22ebe6888726e013bbfdfcc4"
+    }
+  ],
+  "applicableUnresolved": 6,
+  "productTestsExecuted": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
