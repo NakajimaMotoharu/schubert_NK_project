@@ -38,7 +38,8 @@ final class JmsReplyEnvelopeContractTest {
           VERSION_PROPERTY);
 
   @Test
-  void envelope001LiteralSyncAndApprovedAsyncRepliesKeepBodyAndExactProperties() throws Exception {
+  void envelope001LiteralSyncAndApprovedAsyncRepliesKeepBodyAndExactProperties()
+      throws JMSException {
     for (boolean async : List.of(false, true)) {
       byte[] input = reply(async);
       byte[] original = input.clone();
@@ -121,7 +122,7 @@ final class JmsReplyEnvelopeContractTest {
 
   /** PT-JMS-ENV005: new LOG success profile; header/payload offsets come from UI232/234. */
   @Test
-  void envelope005LogoutSuccessKeepsLiteralBodyAndProperties() throws Exception {
+  void envelope005LogoutSuccessKeepsLiteralBodyAndProperties() throws JMSException {
     byte[] input = logoutReply();
     byte[] before = input.clone();
     var fixture = new Fixture(null, null, false);
@@ -186,6 +187,18 @@ final class JmsReplyEnvelopeContractTest {
           () -> JmsMessageFactory.INSTANCE.createReply(fixture.context, invalid));
     }
     assertEquals(List.of(), fixture.events);
+  }
+
+  /** PT-JMS-ENV009: the declared reply factory is a single named strategy. */
+  @Test
+  void envelope009FactorySingletonEnumeratesAndRejectsUnknownName() {
+    JmsMessageFactory[] expected = {JmsMessageFactory.INSTANCE};
+    JmsMessageFactory[] first = JmsMessageFactory.values();
+    assertArrayEquals(expected, first);
+    first[0] = null;
+    assertArrayEquals(expected, JmsMessageFactory.values());
+    assertSame(JmsMessageFactory.INSTANCE, JmsMessageFactory.valueOf("INSTANCE"));
+    assertThrows(IllegalArgumentException.class, () -> JmsMessageFactory.valueOf("NOT_A_FACTORY"));
   }
 
   private static byte[] logoutReply() {

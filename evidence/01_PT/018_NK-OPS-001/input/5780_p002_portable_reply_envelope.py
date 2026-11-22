@@ -1,5 +1,6 @@
 """Run the original eight portable reply-envelope cases against the current Protocol JAR."""
 
+import argparse
 from datetime import datetime, timezone
 from hashlib import sha256
 import json
@@ -42,11 +43,13 @@ def git(*args):
     return subprocess.check_output(["git", *args], cwd=ROOT, timeout=25)
 
 
-def main():
-    point, = RECORDS.glob("3405_*")
+def main(enum_contract):
+    point, = RECORDS.glob("3407_*" if enum_contract else "3405_*")
     start = get(point)["values"]
-    core, seed = start["productionCoreMain"], start["source"]
-    assert git("rev-parse", "HEAD").decode().strip() == seed
+    core = start["productionCoreMain"]
+    seed = git("rev-parse", "HEAD").decode().strip()
+    if not enum_contract:
+        assert seed == start["source"]
     original_path, = MSG.glob("PG23074*/manifest.json")
     original = get(original_path)
     assert original["actualExit"] == 0 and original["tests"] == 8
@@ -57,8 +60,14 @@ def main():
     fixture = API / f"test/java/{PKG}/JmsReplyEnvelopeContractTest.java"
     paths = [product, fixture]
     for path in paths:
-        assert pin(path)["sha256"] == original["inputHashes"][str(path)]
-        assert path.read_bytes() == git("show", f"{seed}:{path}") == git("show", f"{core}:{path}")
+        old_body = git("show", f"{core}:{path}")
+        assert sha256(old_body).hexdigest() == original["inputHashes"][str(path)]
+        assert path.read_bytes() == git("show", f"{seed}:{path}")
+        if path == product or not enum_contract:
+            assert path.read_bytes() == old_body
+        else:
+            assert path.read_bytes() != old_body
+            assert git("show", f'{start["source"]}:{path}') == old_body
     current, = OPS.glob("PG43046*/manifest.json")
     protocol = get(current)["currentJar"]
     assert pin(protocol["path"]) == protocol
@@ -132,8 +141,15 @@ def main():
     baseline = ET.parse(known).getroot()
     def cases(root):
         return sorted((case.get("classname"),case.get("name")) for case in root.findall("testcase"))
-    assert suite.get("tests") == "8" and all(suite.get(k) == "0" for k in ("errors", "failures", "skipped"))
-    assert cases(suite) == cases(baseline)
+    expected = cases(baseline)
+    if enum_contract:
+        expected.append((
+            f"{PKG.replace('/', '.')}.JmsReplyEnvelopeContractTest",
+            "envelope009FactorySingletonEnumeratesAndRejectsUnknownName()",
+        ))
+    assert suite.get("tests") == str(len(expected))
+    assert all(suite.get(k) == "0" for k in ("errors", "failures", "skipped"))
+    assert cases(suite) == sorted(expected)
     target = folder/"target/classes"/PKG/"JmsMessageFactory.class"
     assert list((folder/"target/classes").rglob("*.class")) == [target]
     begin_file(folder/"terminal.json", dict(source=seed, productCore=core, actualExit=0, terminalAtUTC=now(),
@@ -144,4 +160,6 @@ def main():
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--enum-contract", action="store_true")
+    raise SystemExit(main(parser.parse_args().enum_contract))
