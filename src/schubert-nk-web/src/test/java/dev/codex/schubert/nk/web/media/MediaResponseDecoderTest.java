@@ -28,8 +28,10 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
@@ -44,7 +46,7 @@ class MediaResponseDecoderTest {
   private static final String HASH = "0123456789abcdef".repeat(4);
 
   @Test
-  void med037ThreeRequestsBindAllApprovedSuccessfulDescriptors() throws Exception {
+  void med037ThreeRequestsBindAllApprovedSuccessfulDescriptors() throws MediaDeliveryException {
     for (String[] format : formats()) {
       MediaType type = MediaType.valueOf(format[0]);
       for (String mode : type == MediaType.VIDEO ? List.of("I") : List.of("I", "A")) {
@@ -89,7 +91,7 @@ class MediaResponseDecoderTest {
   }
 
   @Test
-  void med038ErrorProfilesKeepCodesWithoutFabricatedDescriptors() throws Exception {
+  void med038ErrorProfilesKeepCodesWithoutFabricatedDescriptors() throws MediaDeliveryException {
     Map<String, ResultCode> errors =
         Map.of(
             "0100",
@@ -215,7 +217,8 @@ class MediaResponseDecoderTest {
   }
 
   @Test
-  void med040ConcurrentDecodeOwnsBytesAndIsolatesRequests() throws Exception {
+  void med040ConcurrentDecodeOwnsBytesAndIsolatesRequests()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var executor = Executors.newFixedThreadPool(8);
     try {
       var jobs = new ArrayList<java.util.concurrent.Future<Boolean>>();
@@ -257,7 +260,7 @@ class MediaResponseDecoderTest {
 
   // PT-MED-CONTEXT001..006: independent heap fault vectors; no actual OOM or credentials.
   @Test
-  void context001PositiveAndPortBoundaryPreserveCallerBytes() throws Exception {
+  void context001PositiveAndPortBoundaryPreserveCallerBytes() throws MediaDeliveryException {
     var request = contextRequest();
     byte[] body = contextReply(request);
     byte[] before = body.clone();
@@ -446,9 +449,9 @@ class MediaResponseDecoderTest {
     }
 
     private static void contextRaise(@Nullable Throwable sentinel) {
-      assertNotNull(sentinel);
       if (sentinel instanceof RuntimeException runtime) throw runtime;
-      throw (Error) sentinel;
+      if (sentinel instanceof Error fatal) throw fatal;
+      throw new AssertionError("fixture requires an unchecked failure");
     }
   }
 
