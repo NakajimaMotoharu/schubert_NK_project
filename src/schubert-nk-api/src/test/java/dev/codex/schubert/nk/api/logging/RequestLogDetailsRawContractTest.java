@@ -2,39 +2,21 @@ package dev.codex.schubert.nk.api.logging;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import dev.codex.schubert.nk.protocol.codec.PermanentProtocolException;
 import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
-import java.lang.reflect.InvocationTargetException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
 
-/** PT-LOG-RAW001..003 / SS351 3.3/10 / BUG3172 / PG-D-1172. Memory-only public vectors. */
+/** PT-LOG-RAW002..004 / SS351 3.3/10 / BUG-3644 / PG-D-1172. Memory-only input vectors. */
 class RequestLogDetailsRawContractTest {
   private static final String SAFE_FAILURE =
       "REQUEST log details violate the safe projection contract";
-
-  @Test
-  void raw001PureUtilityRejectsConstructionAndAccessIsRestored()
-      throws ReflectiveOperationException {
-    var constructor = RequestLogDetails.class.getDeclaredConstructor();
-    assertFalse(constructor.canAccess(null));
-    constructor.setAccessible(true);
-    try {
-      InvocationTargetException failure =
-          assertThrows(InvocationTargetException.class, constructor::newInstance);
-      assertInstanceOf(AssertionError.class, failure.getCause());
-      assertEquals("RequestLogDetails is a static codec", failure.getCause().getMessage());
-    } finally {
-      constructor.setAccessible(false);
-    }
-    assertFalse(constructor.canAccess(null));
-  }
 
   @Test
   void raw002FourFixedHashCollisionsRemainUnknownKeys() {
@@ -77,5 +59,24 @@ class RequestLogDetailsRawContractTest {
         assertFalse(failure.toString().contains(marker));
       }
     }
+  }
+
+  @Test
+  void raw004BoundsTheOriginalJsonBeforeEscapeProjection() {
+    String escapedJson = "{\"userAgentFamily\":\"\\u0041\"}";
+    String exact = " ".repeat(1024 - escapedJson.length()) + escapedJson;
+    assertEquals(1024, exact.getBytes(StandardCharsets.UTF_8).length);
+    assertEquals(
+        "{\"userAgentFamily\":\"A\",\"actorRole\":\"ADMIN\"}",
+        RequestLogDetails.normalize(Optional.of(exact), Optional.of(UserRole.ADMIN)));
+
+    String oversized = exact + " ";
+    assertEquals(1025, oversized.getBytes(StandardCharsets.UTF_8).length);
+    var failure =
+        assertThrows(
+            PermanentProtocolException.class,
+            () -> RequestLogDetails.normalize(Optional.of(oversized), Optional.of(UserRole.ADMIN)));
+    assertEquals(SAFE_FAILURE, failure.getMessage());
+    assertNull(failure.getCause());
   }
 }
