@@ -15,6 +15,7 @@
     <error-prone.version>2.50.0</error-prone.version>
     <nullaway.version>0.14.1</nullaway.version>
     <jspecify.version>1.0.1</jspecify.version>
+    <jackson3.version>3.1.8</jackson3.version>
   </properties>
 
   <dependencyManagement>
@@ -22,6 +23,17 @@
       <!-- SSC098/BUG305: cross-role matrix, not only local convergence. -->
       <dependency><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId><version>1.4.0</version></dependency>
       <dependency><groupId>org.jspecify</groupId><artifactId>jspecify</artifactId><version>${jspecify.version}</version></dependency>
+      <!-- SCM-005 / SS352 / BUG-3596: align Flyway's Jackson 3 runtime and test dependencies. -->
+      <dependency>
+        <groupId>tools.jackson.core</groupId>
+        <artifactId>jackson-core</artifactId>
+        <version>${jackson3.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>tools.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>${jackson3.version}</version>
+      </dependency>
       <!-- BUG-018/YKT-015: retain Artemis 2.56.0's already resolved logging API version. -->
       <dependency>
         <groupId>org.slf4j</groupId>
