@@ -11,9 +11,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.junit.jupiter.api.Test;
 
 /** PT-MIG-ORDER001..012: independent literal tuples/bytes, no real DB or Current data. */
@@ -67,7 +69,11 @@ final class ScenarioEntryMigrationMapTest {
     tuple(value.mappings().get(3), Long.MAX_VALUE, 1, 4);
     assertArrayEquals(
         bytes(
-            "NKMIGSCENARIOORDER1\n-9223372036854775808\t999999999999\t1\n-1\t4\t2\n0\t3\t3\n9223372036854775807\t1\t4\n"),
+            "NKMIGSCENARIOORDER1\n"
+                + "-9223372036854775808\t999999999999\t1\n"
+                + "-1\t4\t2\n"
+                + "0\t3\t3\n"
+                + "9223372036854775807\t1\t4\n"),
         value.canonicalBytes());
   }
 
@@ -158,7 +164,8 @@ final class ScenarioEntryMigrationMapTest {
   }
 
   @Test
-  void order012ConcurrentIndependentReturnOwnership() throws Exception {
+  void order012ConcurrentIndependentReturnOwnership()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var value = map();
     var workers = Executors.newFixedThreadPool(8);
     try {
