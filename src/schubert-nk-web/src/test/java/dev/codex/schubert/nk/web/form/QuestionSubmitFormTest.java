@@ -19,9 +19,11 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.junit.jupiter.api.Test;
 
 /** UI224/236 independent 4144-byte oracle; PG-D351/016065/PT-QST-FORM001..008. */
@@ -234,7 +236,8 @@ class QuestionSubmitFormTest {
   }
 
   @Test
-  void qstForm008ConcurrentIndependentBodiesAndTokens() throws Exception {
+  void qstForm008ConcurrentIndependentBodiesAndTokens()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var executor = Executors.newFixedThreadPool(8);
     try {
       var results = new ArrayList<Future<byte[]>>();
