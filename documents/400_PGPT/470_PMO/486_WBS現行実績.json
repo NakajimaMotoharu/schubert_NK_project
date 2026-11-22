@@ -1,4 +1,39 @@
 {
+  "currentBatchMonitorJdbcTracePG42966": {
+    "technicalTraceOwner": "WBS-G13.07/2",
+    "productionCore": "51e8da82333e56515e059e8f32d615cafeacff37",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42966-g1307-batch-and-monitor-trace-v1/manifest.json",
+      "sha256": "0854e3bb19f886d52d4537d65f4dbc0276d92df2575873d9116fd639a71f6a22"
+    },
+    "scope": {
+      "F02": "regular Batch package and remaining six-product boundaries",
+      "F03": "separate local evidence and unresolved total static scope",
+      "P004-05": "JDBC resource ownership",
+      "P017-11": "ExpiryAudit local tests",
+      "C07": "four synthetic concurrent snapshot cases",
+      "G13.07": "owner and scope trace only"
+    },
+    "sourcePaths": [
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.java",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedMonitorSnapshotConcurrencyTest.java"
+    ],
+    "linkedTestIds": [
+      "PT-OPS-MON-SNAP001",
+      "PT-OPS-MON-SNAP002",
+      "PT-OPS-MON-SNAP003",
+      "PT-OPS-MON-SNAP004"
+    ],
+    "localUnit": 45,
+    "retainedLocalJDBC": 64,
+    "formalAcceptanceId": null,
+    "formalDelta": 0,
+    "whole451": false,
+    "effortRate": null
+  },
   "currentC07AndJunitIdentityPG42896": {
     "source": "40263d6ed1c04f9a8b5bdedb0cd504f347bb0951",
     "productionCore": "e8368d22c4da2ec841f008df793594d3be9066af",
@@ -9658,7 +9693,7 @@
   },
   "beforeSsc261InventorySha256": "443af5012e6a3d2a9088bb38d4a28ae3f7ff7645e6e4689fde2bea543fe19b9b",
   "beforeStrictReferenceCandidateInventorySha256": "44976d5ce11f24a89ea7db68c4d5ce1674f9a72032b6a96e453adc461a850968",
-  "inventorySha256": "b04bed03a73080601e0b1f413797636ce100f5c324891e572eb59618d6bcccf4",
+  "inventorySha256": "f7fd2a26750dfd60d4a0ef6359ab4b30510a92f8e04396ccfbae12d615a16285",
   "expiryCandidateObservation": {
     "source": "1ec19782a1afe22d1de75b05f4cd12b8a8a8a172",
     "run": "PG713/714+PG715/717/719+PG722/725/728/729/730+PG737/738/739",

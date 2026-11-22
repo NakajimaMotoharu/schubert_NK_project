@@ -1,0 +1,86 @@
+{
+  "eventId": "PGPT-20261008-8687",
+  "groupId": "nov22-g13-pg42966",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T19:44:15+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 48,
+      "remainingPercent": 52,
+      "resetsAt": 1795879771,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "source": "a437266a49b7f60ba881575834b072fe8add22df",
+    "productionCoreMain": "e8368d22c4da2ec841f008df793594d3be9066af",
+    "canonicalDesignSource": "ca41c03c0c6efff9a3a35b47b480491810bee6f9",
+    "run": "PG42966",
+    "workCategory": "REVIEW",
+    "managementWorkIds": [
+      "WBS-G13.07/2"
+    ],
+    "previousCheckpoint": "3241",
+    "planRow": {
+      "ID": "WBS-G13.07/2",
+      "元行": "WBS-G13.07/2",
+      "費目": "F",
+      "主担当": "WBS-G13.07",
+      "状態": "計画",
+      "作業": "G13 最終候補での多対多join・差分再照合",
+      "残pp": "1.5",
+      "着手": "Aの残作業と6領域の差分が確定。最終候補の要求・source・TestIDの対応を再確認",
+      "終了証拠": "RD/UI/SS・20Program・CHR24・設定全体の多対多join/二重割当照合の対象別完了記録を確認。契約別の版差照合先で示した現在候補と、個別採用した設計・期待値を明示",
+      "補正根拠": "予測777の元行残。個別費用実測がない部分は前回単価を継承",
+      "契約HOLD": "H-G13.07",
+      "対象": "",
+      "範囲": "SYS-011、SCP-001、SCP-002、SCP-003、SCP-006",
+      "保存証跡": "該当criteriaごとの判定・未解決一覧・照合元manifest・判定者",
+      "順次": "False",
+      "配賦窓": "12",
+      "楽観pp": "0.6",
+      "慎重pp": "3.0",
+      "要求設計の版差": "PT基準仕様 NK-OPS-001",
+      "lineNumber": 859,
+      "改訂残pp": "1.5"
+    },
+    "currentPlan": [
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/11月22日_PGPT再開実行計画.txt",
+        "sha256": "80b9fdc306f664b9c03901a4bdfb34cf66997879676204cfa969858fd68a4016"
+      },
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/短期実行WBS.tsv",
+        "sha256": "a6efedcd63b4ef3bb1d133d939b0ddd7dc4b0147988ac33d668282a25c999527"
+      }
+    ],
+    "startScope": {
+      "workCategory": "REVIEW",
+      "target": "現Batch四監視新source・JARと局所JDBC証跡の差分を485/486 pairに対応",
+      "entry": "PG42932トレース、PG42964包装、PG42940/56/58原実行、PG42950/60限界",
+      "exitCriterion": "対象source/独立Case・各元exec・正規物理・責任WBSと未成立を明示、二原票stageSHA一致、正式増0",
+      "excludes": "全製品451、運用環境、QA056、集約原exec、費用付替、新規coverage実行",
+      "successor": "残短期・全体WBSの許可済み手順へ、二重試験なし"
+    },
+    "groupCapPp": 2.8,
+    "estimateAtGroupStartPp": {
+      "low": 0,
+      "base": 0.7,
+      "high": 2.8
+    },
+    "completedOriginalRowPricePp": 0,
+    "sourceOwnership": "LOCAL_DEV_FOUNDATION_TRACKED_SNAPSHOT",
+    "knownOwnedRunInProgress": 0,
+    "costRevision": "PMO-remaining-v3-20261010",
+    "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "actualAllocatedPp": null
+  }
+}

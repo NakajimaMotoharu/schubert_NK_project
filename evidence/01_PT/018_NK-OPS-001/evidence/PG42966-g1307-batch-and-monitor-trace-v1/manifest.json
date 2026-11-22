@@ -1,0 +1,96 @@
+{
+  "run": "PG42966",
+  "source": "51e8da82333e56515e059e8f32d615cafeacff37",
+  "currentGit": "a437266a49b7f60ba881575834b072fe8add22df",
+  "canonicalDesign": "ca41c03c0c6efff9a3a35b47b480491810bee6f9",
+  "currentBaseline": "cd377044e4ca058ea219ca6a2fec82159559c72c",
+  "scope": {
+    "F02": "regular Batch package and remaining six-product boundaries",
+    "F03": "separate local evidence and unresolved total static scope",
+    "P004-05": "JDBC resource ownership",
+    "P017-11": "ExpiryAudit local tests",
+    "C07": "four synthetic concurrent snapshot cases",
+    "G13.07": "owner and scope trace only"
+  },
+  "priorTrace": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42932-g1307-local-quality-and-coverage-reader-trace-v1/manifest.json",
+    "sha256": "6b196d3c03cd2f6ba6d70ccf679f6233eebbb601a7b3c4f38467bdc700f3e81c"
+  },
+  "olderF03": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42960-batch-three-cohort-current-f03-v1/manifest.json",
+    "sha256": "e5dd0e1f9f3fe66233c3ce2d0dcb61291ba8fe9350c169479ed96824a98ed377"
+  },
+  "regularBatch": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42964-c07-snapshot-single-monitor-v1/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "b3cab184f0980c9164f39b883a0d5a7667db64ea0805e7e21ff3b44e6771cfa9"
+  },
+  "newSourceTrace": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor.java",
+      "sha256": "298f2f0606634a77ba1a95f6f12479249229bcbe671a08f3a0c154510391728b"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.java",
+      "sha256": "95b886a2f181d819a143edb7fa8c7dcc5503127e965ced432b6f4ced876c2d79"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.java",
+      "sha256": "8e47b08bdba1ed7d44722ed8d1714838f486b8d656584b55ec2af8852db2f160"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor.java",
+      "sha256": "657015dd025b60ada2bdb2e5fe08b483c92896f10ae6cfcca9aae0af5cfd32ad"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedMonitorSnapshotConcurrencyTest.java",
+      "sha256": "10adc166e30eff4ba501560f7f075b049a5d69ba5eb3b0e569a430890b32ca95"
+    }
+  ],
+  "c07Latest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42964-c07-snapshot-single-monitor-v1/manifest.json",
+    "sha256": "fe0942930c7a2ed746877552adfa1638b5786a7c7dab260e2add0f1bf6a9a340"
+  },
+  "exactRetainedLocalJdbc": {
+    "PG42940": {
+      "receipt": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42940-batch-type-owned-jdbc-close-v1/manifest.json",
+        "sha256": "e159fa3b50530a90f9cca04d6dc6134052c03f2383537bfdb4e5919aaec23dd9"
+      },
+      "allowedInputPhysical": 16,
+      "tests": 23
+    },
+    "PG42956": {
+      "receipt": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42956-cleanup-step-current-regular-maven-v1/manifest.json",
+        "sha256": "e853ce2bafd3b282181e4a4aa3742352ff7d710681ff776146248c9fde9583f3"
+      },
+      "allowedInputPhysical": 15,
+      "tests": 10
+    },
+    "PG42958": {
+      "receipt": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42958-expiry-audit-current-regular-maven-v1/manifest.json",
+        "sha256": "2dbc7d341290db82c16dddb8e01c502d1adcb21fd6eddbac66f30a89361d8cf8"
+      },
+      "allowedInputPhysical": 23,
+      "tests": 31
+    }
+  },
+  "currentC07Unit": 45,
+  "retainedHistoricalExactJdbcCases": 64,
+  "priorExecCombined": false,
+  "newJUnitRuns": 0,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "firstCopyAudits": [
+    {
+      "exit": 1,
+      "cause": "untyped original hash belonged to the Bootstrap archive"
+    },
+    {
+      "exit": 1,
+      "cause": "expected scalar count came from the receipt counters object"
+    }
+  ],
+  "terminalAtUTC": "2026-11-22T19:46:08.174076+00:00"
+}
