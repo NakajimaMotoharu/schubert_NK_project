@@ -120,7 +120,10 @@ class ReactorJunitTest(unittest.TestCase):
     def test_unexpected_extra_passing_suite_after_terminal_is_rejected(self):
         self.success()
         extra = self.paths[0].with_name("TEST-fixture.Second.xml")
-        extra.write_bytes(REPORT)
+        extra.write_bytes(
+            REPORT.replace(b'<testsuite name="fixture.Unit"', b'<testsuite name="fixture.Second"')
+            .replace(b'name="emptyList()"', b'name="singleValue()"')
+        )
         with self.assertRaisesRegex(ValueError, "differs"):
             self.verify()
 
@@ -166,7 +169,9 @@ class ReactorJunitTest(unittest.TestCase):
 
     def test_duplicate_case_across_reports_in_one_module_is_rejected(self):
         duplicate = self.paths[1].with_name("TEST-fixture.SuiteAlias.xml")
-        duplicate.write_bytes(REPORT.replace(b'name="fixture.Unit"', b'name="fixture.SuiteAlias"'))
+        duplicate.write_bytes(
+            REPORT.replace(b'<testsuite name="fixture.Unit"', b'<testsuite name="fixture.SuiteAlias"')
+        )
         with self.assertRaisesRegex(ValueError, "duplicate reactor JUnit case"):
             self.capture()
         self.assertFalse(self.marker(".junit.json").exists())
