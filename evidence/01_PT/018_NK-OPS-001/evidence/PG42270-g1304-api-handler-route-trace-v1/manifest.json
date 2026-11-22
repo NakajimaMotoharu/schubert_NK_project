@@ -1,0 +1,345 @@
+{
+  "run": "PG42270",
+  "source": "9a21555a8c00fdc4fa9ec2de41cd75732876123e",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-G13.04",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T06:27:01.231506+00:00",
+  "design": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md",
+      "commit": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+      "sha256": "422cc9febdcb165af7ceba1c58a53c39831d0458f9c8858095fcfe099b70680f"
+    },
+    {
+      "path": "documents/300_SS/310_アプリケーション/312_処理sequence・method・例外・transaction設計.md",
+      "commit": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+      "sha256": "f789dede5de4ad4eba9c67aea260504fb8a4493c528391e2b40b1350ddce6d47"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "commit": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+      "sha256": "9c64f99f058d676723353e8bd99eb6d070bdb062d98ee7f4a0fc4e4ae942f6d3"
+    }
+  ],
+  "productionFiles": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/ApiApplicationPreparation.java",
+      "commit": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+      "sha256": "0574334962482029ca32faa87d6eff10df522bb8d5412c4ad216524372fad134"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiSyncRequestDispatcher.java",
+      "commit": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+      "sha256": "761c6990fe0045f4ed681062460ea511ff83f6a6adb3e8eeeaf2d0a95bb68997"
+    }
+  ],
+  "literalLayoutFixture": {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/ApiApplicationPreparationTest.java",
+    "sha256": "f1ee7d5e4e7583d1366e56c869894ceb19f9648c9a670a13a25018b908fcf618",
+    "method": "prep001RealProbeFullScanAndAll31GraphAreBorrowedNotProcessReady",
+    "currentExecution": "NOT_RUN_EXISTING_HOLD"
+  },
+  "historicalDispatchScope": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41494-a10201-dispatcher-criteria-lineage-v1/manifest.json",
+      "sha256": "fd62da37dac4b80b31ac71a78adf50cc4b05fe4827093c651a31c4a2b21251f9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42068-a10201-dispatcher-current-readonly-v1/manifest.json",
+      "sha256": "34fd24fe7e699a9230373e542b0d0134359eca2bb2fd96f376519d1e2090f80d"
+    }
+  ],
+  "byRequestLayout": {
+    "LGNREQ01": {
+      "designLine": 38,
+      "protocolData": "LoginRequestData",
+      "designedHandler": "LoginHandler",
+      "registrationLine": 293,
+      "actualBinding": "new JdbcSyncRequestProcessor(pool, login::execute, clock))",
+      "actualLayoutRegistration": true,
+      "designedImplementationAnchorFound": false
+    },
+    "LOGREQ01": {
+      "designLine": 40,
+      "protocolData": "LogoutRequestData",
+      "designedHandler": "LogoutHandler",
+      "registrationLine": 294,
+      "actualBinding": "new JdbcSyncRequestProcessor(pool, logout::execute, clock))",
+      "actualLayoutRegistration": true,
+      "designedImplementationAnchorFound": false
+    },
+    "GAMREQ01": {
+      "designLine": 42,
+      "protocolData": "GameListRequestData",
+      "designedHandler": "GameListHandler",
+      "registrationLine": 295,
+      "actualBinding": "scenario",
+      "actualLayoutRegistration": true,
+      "designedImplementationAnchorFound": false
+    },
+    "SPKREQ01": {
+      "designLine": 44,
+      "protocolData": "SpeakerListRequestData",
+      "designedHandler": "SpeakerListHandler",
+      "registrationLine": 295,
+      "actualBinding": "scenario",
+      "actualLayoutRegistration": true,
+      "designedImplementationAnchorFound": false
+    },
+    "SRCREQ01": {
+      "designLine": 46,
+      "protocolData": "ScenarioSearchRequestData",
+      "designedHandler": "ScenarioSearchHandler",
+      "registrationLine": 295,
+      "actualBinding": "scenario",
+      "actualLayoutRegistration": true,
+      "designedImplementationAnchorFound": false
+    },
+    "RTEREQ01": {
+      "designLine": 48,
+      "protocolData": "RouteListRequestData",
+      "designedHandler": "RouteListHandler",
+      "registrationLine": 295,
+      "actualBinding": "scenario",
+      "actualLayoutRegistration": true,
+      "designedImplementationAnchorFound": false
+    },
+    "SCFREQ01": {
+      "designLine": 50,
+      "protocolData": "ScenarioFileListRequestData",
+      "designedHandler": "ScenarioFileListHandler",
+      "registrationLine": 295,
+      "actualBinding": "scenario",
+      "actualLayoutRegistration": true,
+      "designedImplementationAnchorFound": false
+    },
+    "SCNREQ01": {
+      "designLine": 52,
+      "protocolData": "ScenarioDetailRequestData",
+      "designedHandler": "ScenarioDetailHandler",
+      "registrationLine": 295,
+      "actualBinding": "scenario",
+      "actualLayoutRegistration": true,
+      "designedImplementationAnchorFound": false
+    },
+    "AUDREQ01": {
+      "designLine": 59,
+      "protocolData": "AudioDescriptorRequestData",
+      "designedHandler": "AudioDescriptorHandler",
+      "registrationLine": 302,
+      "actualBinding": "media",
+      "actualLayoutRegistration": true,
+      "designedImplementationAnchorFound": false
+    },
+    "ANMREQ01": {
+      "designLine": 61,
+      "protocolData": "AnimationMenuRequestData",
+      "designedHandler": "AnimationMenuHandler",
+      "registrationLine": 302,
+      "actualBinding": "media",
+      "actualLayoutRegistration": true,
+      "designedImplementationAnchorFound": false
+    },
+    "ANLREQ01": {
+      "designLine": 63,
+      "protocolData": "AnimationListRequestData",
+      "designedHandler": "AnimationListHandler",
+      "registrationLine": 302,
+      "actualBinding": "media",
+      "actualLayoutRegistration": true,
+      "designedImplementationAnchorFound": false
+    },
+    "VIDREQ01": {
+      "designLine": 65,
+      "protocolData": "VideoDescriptorRequestData",
+      "designedHandler": "VideoDescriptorHandler",
+      "registrationLine": 302,
+      "actualBinding": "media",
+      "actualLayoutRegistration": true,
+      "designedImplementationAnchorFound": false
+    },
+    "MCTREQ01": {
+      "designLine": 67,
+      "protocolData": "MusicCategoryRequestData",
+      "designedHandler": "MusicCategoryHandler",
+      "registrationLine": 302,
+      "actualBinding": "media",
+      "actualLayoutRegistration": true,
+      "designedImplementationAnchorFound": false
+    },
+    "MCSREQ01": {
+      "designLine": 69,
+      "protocolData": "MusicSectionRequestData",
+      "designedHandler": "MusicSectionHandler",
+      "registrationLine": 302,
+      "actualBinding": "media",
+      "actualLayoutRegistration": true,
+      "designedImplementationAnchorFound": false
+    },
+    "MTRREQ01": {
+      "designLine": 71,
+      "protocolData": "MusicTrackRequestData",
+      "designedHandler": "MusicTrackHandler",
+      "registrationLine": 302,
+      "actualBinding": "media",
+      "actualLayoutRegistration": true,
+      "designedImplementationAnchorFound": false
+    },
+    "MEDREQ01": {
+      "designLine": 73,
+      "protocolData": "MusicDescriptorRequestData",
+      "designedHandler": "MusicDescriptorHandler",
+      "registrationLine": 302,
+      "actualBinding": "media",
+      "actualLayoutRegistration": true,
+      "designedImplementationAnchorFound": false
+    },
+    "LGSREQ01": {
+      "designLine": 75,
+      "protocolData": "LogSearchRequestData",
+      "designedHandler": "LogSearchHandler",
+      "registrationLine": 298,
+      "actualBinding": "log",
+      "actualLayoutRegistration": true,
+      "designedImplementationAnchorFound": false
+    },
+    "USRREQ01": {
+      "designLine": 82,
+      "protocolData": "UserSearchRequestData",
+      "designedHandler": "UserSearchHandler",
+      "registrationLine": 314,
+      "actualBinding": "userQueries",
+      "actualLayoutRegistration": true,
+      "designedImplementationAnchorFound": false
+    },
+    "UCRREQ01": {
+      "designLine": 84,
+      "protocolData": "UserCreateRequestData",
+      "designedHandler": "UserCreateHandler",
+      "registrationLine": 317,
+      "actualBinding": "userMutations",
+      "actualLayoutRegistration": true,
+      "designedImplementationAnchorFound": false
+    },
+    "UDTREQ01": {
+      "designLine": 86,
+      "protocolData": "UserDetailRequestData",
+      "designedHandler": "UserDetailHandler",
+      "registrationLine": 314,
+      "actualBinding": "userQueries",
+      "actualLayoutRegistration": true,
+      "designedImplementationAnchorFound": false
+    },
+    "USTREQ01": {
+      "designLine": 88,
+      "protocolData": "UserStatusRequestData",
+      "designedHandler": "UserStatusHandler",
+      "registrationLine": 317,
+      "actualBinding": "userMutations",
+      "actualLayoutRegistration": true,
+      "designedImplementationAnchorFound": false
+    },
+    "URLREQ01": {
+      "designLine": 90,
+      "protocolData": "UserRoleRequestData",
+      "designedHandler": "UserRoleHandler",
+      "registrationLine": 317,
+      "actualBinding": "userMutations",
+      "actualLayoutRegistration": true,
+      "designedImplementationAnchorFound": false
+    },
+    "UPWREQ01": {
+      "designLine": 92,
+      "protocolData": "PasswordResetRequestData",
+      "designedHandler": "PasswordResetHandler",
+      "registrationLine": 317,
+      "actualBinding": "userMutations",
+      "actualLayoutRegistration": true,
+      "designedImplementationAnchorFound": false
+    },
+    "ULKREQ01": {
+      "designLine": 94,
+      "protocolData": "UserUnlockRequestData",
+      "designedHandler": "UserUnlockHandler",
+      "registrationLine": 317,
+      "actualBinding": "userMutations",
+      "actualLayoutRegistration": true,
+      "designedImplementationAnchorFound": false
+    },
+    "QSBREQ01": {
+      "designLine": 101,
+      "protocolData": "QuestionSubmitRequestData",
+      "designedHandler": "QuestionSubmitHandler",
+      "registrationLine": 337,
+      "actualBinding": "new QuestionSubmissionService",
+      "actualLayoutRegistration": true,
+      "designedImplementationAnchorFound": false
+    },
+    "NTSREQ01": {
+      "designLine": 103,
+      "protocolData": "NotificationSearchRequestData",
+      "designedHandler": "NotificationSearchHandler",
+      "registrationLine": 330,
+      "actualBinding": "questionQueries",
+      "actualLayoutRegistration": true,
+      "designedImplementationAnchorFound": false
+    },
+    "NTDREQ01": {
+      "designLine": 105,
+      "protocolData": "NotificationDetailRequestData",
+      "designedHandler": "NotificationDetailHandler",
+      "registrationLine": 330,
+      "actualBinding": "questionQueries",
+      "actualLayoutRegistration": true,
+      "designedImplementationAnchorFound": false
+    },
+    "NTCREQ01": {
+      "designLine": 107,
+      "protocolData": "NotificationCancelRequestData",
+      "designedHandler": "NotificationCancelHandler",
+      "registrationLine": 335,
+      "actualBinding": "questionMutations",
+      "actualLayoutRegistration": true,
+      "designedImplementationAnchorFound": false
+    },
+    "QSSREQ01": {
+      "designLine": 109,
+      "protocolData": "QuestionSearchRequestData",
+      "designedHandler": "QuestionSearchHandler",
+      "registrationLine": 330,
+      "actualBinding": "questionQueries",
+      "actualLayoutRegistration": true,
+      "designedImplementationAnchorFound": false
+    },
+    "QSDREQ01": {
+      "designLine": 111,
+      "protocolData": "QuestionDetailRequestData",
+      "designedHandler": "QuestionDetailHandler",
+      "registrationLine": 330,
+      "actualBinding": "questionQueries",
+      "actualLayoutRegistration": true,
+      "designedImplementationAnchorFound": false
+    },
+    "QDLREQ01": {
+      "designLine": 113,
+      "protocolData": "QuestionDeleteRequestData",
+      "designedHandler": "QuestionDeleteHandler",
+      "registrationLine": 335,
+      "actualBinding": "questionMutations",
+      "actualLayoutRegistration": true,
+      "designedImplementationAnchorFound": false
+    }
+  },
+  "independentLiteralKeySet": 31,
+  "newBehaviorProven": 0,
+  "handlerPackageAnchor": 0,
+  "otherInternalEventsNotInSyncInventory": [
+    "QWKREQ01",
+    "WLGEVT01"
+  ],
+  "status": "DESIGN_CLASS_CONTRACT_AND_IMPLEMENTATION_MAPPING_OPEN",
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "remaining": "Resolve SS311/312/323 typed Handler contract against implementation without changing request/reply semantics. Joint QA056 applicability, signed six-artifact evidence, real ordinary routes and transactions are independent still unmet."
+}
