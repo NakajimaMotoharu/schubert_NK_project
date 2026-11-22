@@ -131,15 +131,15 @@ public final class BatchRunRepository {
     try {
       guarded(attempt.run());
       int changed;
-      var statement =
+      var query =
           connection.prepareStatement(
               "update schubert.batch_runs set ended_at=?,status=?,target_count=?,success_count=?,"
                   + "failure_count=?,byte_count=?,error_code=?,error_summary=? where "
                   + HANDLE
                   + " and status='RUNNING' and ended_at is null");
+      if (query == null) throw missingProjection();
       @Nullable Throwable statementFailure = null;
       try {
-        var query = present(statement);
         query.setQueryTimeout(5);
         bindResult(query, endedAt, result);
         bindHandle(query, 9, attempt);
@@ -148,12 +148,10 @@ public final class BatchRunRepository {
         statementFailure = failure;
         throw failure;
       } finally {
-        if (statement != null) {
-          try {
-            statement.close();
-          } catch (SQLException | RuntimeException | Error failure) {
-            if (JdbcResourceFailures.replace(statementFailure, failure)) throw failure;
-          }
+        try {
+          query.close();
+        } catch (SQLException | RuntimeException | Error failure) {
+          if (JdbcResourceFailures.replace(statementFailure, failure)) throw failure;
         }
       }
       require(changed == 0 || changed == 1);
@@ -232,17 +230,17 @@ public final class BatchRunRepository {
     List<History> result = new ArrayList<>();
     Set<Long> ids = new HashSet<>();
     int previous = 0;
-    var statement = connection.prepareStatement(RETAINED_HISTORY);
+    var query = connection.prepareStatement(RETAINED_HISTORY);
+    if (query == null) throw missingProjection();
     @Nullable Throwable statementFailure = null;
     try {
-      var query = present(statement);
       query.setQueryTimeout(5);
       query.setObject(1, day);
       query.setString(2, step.name());
-      var rows = query.executeQuery();
+      var row = query.executeQuery();
+      if (row == null) throw missingProjection();
       @Nullable Throwable rowFailure = null;
       try {
-        var row = present(rows);
         while (row.next()) {
           require(result.size() < 99);
           long id = present(row.getObject("id", Long.class));
@@ -281,37 +279,33 @@ public final class BatchRunRepository {
         rowFailure = failure;
         throw failure;
       } finally {
-        if (rows != null) {
-          try {
-            rows.close();
-          } catch (SQLException | RuntimeException | Error failure) {
-            if (JdbcResourceFailures.replace(rowFailure, failure)) throw failure;
-          }
+        try {
+          row.close();
+        } catch (SQLException | RuntimeException | Error failure) {
+          if (JdbcResourceFailures.replace(rowFailure, failure)) throw failure;
         }
       }
     } catch (SQLException | RuntimeException | Error failure) {
       statementFailure = failure;
       throw failure;
     } finally {
-      if (statement != null) {
-        try {
-          statement.close();
-        } catch (SQLException | RuntimeException | Error failure) {
-          if (JdbcResourceFailures.replace(statementFailure, failure)) throw failure;
-        }
+      try {
+        query.close();
+      } catch (SQLException | RuntimeException | Error failure) {
+        if (JdbcResourceFailures.replace(statementFailure, failure)) throw failure;
       }
     }
     return List.copyOf(result);
   }
 
   private void abandon(History row, Instant now) throws SQLException {
-    var statement =
+    var query =
         connection.prepareStatement(
             "update schubert.batch_runs set status='FAILED',ended_at=?,error_code=?,error_summary=?"
                 + " where id=? and run_id=? and started_at=? and status='RUNNING' and ended_at is null");
+    if (query == null) throw missingProjection();
     @Nullable Throwable statementFailure = null;
     try {
-      var query = present(statement);
       query.setQueryTimeout(5);
       query.setObject(1, now.atOffset(ZoneOffset.UTC));
       query.setString(2, BatchStepResult.Reason.ABANDONED.code());
@@ -324,12 +318,10 @@ public final class BatchRunRepository {
       statementFailure = failure;
       throw failure;
     } finally {
-      if (statement != null) {
-        try {
-          statement.close();
-        } catch (SQLException | RuntimeException | Error failure) {
-          if (JdbcResourceFailures.replace(statementFailure, failure)) throw failure;
-        }
+      try {
+        query.close();
+      } catch (SQLException | RuntimeException | Error failure) {
+        if (JdbcResourceFailures.replace(statementFailure, failure)) throw failure;
       }
     }
   }
@@ -344,14 +336,14 @@ public final class BatchRunRepository {
       BatchStepResult.Reason reason)
       throws SQLException {
     BatchStepAttempt result;
-    var statement =
+    var query =
         connection.prepareStatement(
             "insert into schubert.batch_runs(run_id,business_date,step,attempt,started_at,ended_at,"
                 + "status,target_count,success_count,failure_count,byte_count,error_code,error_summary)"
                 + " values(?,?,?,?,?,?,?,0,0,0,0,?,?) returning id");
+    if (query == null) throw missingProjection();
     @Nullable Throwable statementFailure = null;
     try {
-      var query = present(statement);
       query.setQueryTimeout(5);
       query.setObject(1, run.id());
       query.setObject(2, day);
@@ -362,10 +354,10 @@ public final class BatchRunRepository {
       query.setString(7, skipped ? "SKIPPED" : LITERAL_RUNNING);
       query.setString(8, reason.code());
       query.setString(9, reason.summary());
-      var rows = query.executeQuery();
+      var row = query.executeQuery();
+      if (row == null) throw missingProjection();
       @Nullable Throwable rowFailure = null;
       try {
-        var row = present(rows);
         require(row.next());
         long id = present(row.getObject("id", Long.class));
         try {
@@ -378,24 +370,20 @@ public final class BatchRunRepository {
         rowFailure = failure;
         throw failure;
       } finally {
-        if (rows != null) {
-          try {
-            rows.close();
-          } catch (SQLException | RuntimeException | Error failure) {
-            if (JdbcResourceFailures.replace(rowFailure, failure)) throw failure;
-          }
+        try {
+          row.close();
+        } catch (SQLException | RuntimeException | Error failure) {
+          if (JdbcResourceFailures.replace(rowFailure, failure)) throw failure;
         }
       }
     } catch (SQLException | RuntimeException | Error failure) {
       statementFailure = failure;
       throw failure;
     } finally {
-      if (statement != null) {
-        try {
-          statement.close();
-        } catch (SQLException | RuntimeException | Error failure) {
-          if (JdbcResourceFailures.replace(statementFailure, failure)) throw failure;
-        }
+      try {
+        query.close();
+      } catch (SQLException | RuntimeException | Error failure) {
+        if (JdbcResourceFailures.replace(statementFailure, failure)) throw failure;
       }
     }
     return result;
@@ -404,7 +392,7 @@ public final class BatchRunRepository {
   private boolean replayed(BatchStepAttempt attempt, Instant ended, BatchStepResult result)
       throws SQLException {
     boolean matches;
-    var statement =
+    var query =
         connection.prepareStatement(
             "select exists(select 1 from schubert.batch_runs where ended_at=? and status=?"
                 + " and target_count=? and success_count=? and failure_count=? and byte_count=?"
@@ -412,16 +400,16 @@ public final class BatchRunRepository {
                 + " and "
                 + HANDLE
                 + ") as matches");
+    if (query == null) throw missingProjection();
     @Nullable Throwable statementFailure = null;
     try {
-      var query = present(statement);
       query.setQueryTimeout(5);
       bindResult(query, ended, result);
       bindHandle(query, 9, attempt);
-      var rows = query.executeQuery();
+      var row = query.executeQuery();
+      if (row == null) throw missingProjection();
       @Nullable Throwable rowFailure = null;
       try {
-        var row = present(rows);
         require(row.next());
         matches = present(row.getObject("matches", Boolean.class));
         require(!row.next());
@@ -429,24 +417,20 @@ public final class BatchRunRepository {
         rowFailure = failure;
         throw failure;
       } finally {
-        if (rows != null) {
-          try {
-            rows.close();
-          } catch (SQLException | RuntimeException | Error failure) {
-            if (JdbcResourceFailures.replace(rowFailure, failure)) throw failure;
-          }
+        try {
+          row.close();
+        } catch (SQLException | RuntimeException | Error failure) {
+          if (JdbcResourceFailures.replace(rowFailure, failure)) throw failure;
         }
       }
     } catch (SQLException | RuntimeException | Error failure) {
       statementFailure = failure;
       throw failure;
     } finally {
-      if (statement != null) {
-        try {
-          statement.close();
-        } catch (SQLException | RuntimeException | Error failure) {
-          if (JdbcResourceFailures.replace(statementFailure, failure)) throw failure;
-        }
+      try {
+        query.close();
+      } catch (SQLException | RuntimeException | Error failure) {
+        if (JdbcResourceFailures.replace(statementFailure, failure)) throw failure;
       }
     }
     return matches;
@@ -489,8 +473,12 @@ public final class BatchRunRepository {
   }
 
   private static <T> T present(@Nullable T value) throws SQLDataException {
-    if (value == null) throw new SQLDataException("batch step projection missing");
+    if (value == null) throw missingProjection();
     return value;
+  }
+
+  private static SQLDataException missingProjection() {
+    return new SQLDataException("batch step projection missing");
   }
 
   private record History(long id, UUID runId, int attempt, Instant started, String status) {

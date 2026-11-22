@@ -507,6 +507,46 @@ final class BatchRunAuditPortTest {
     }
   }
 
+  /** BRPORT016: an acquisition returning null never transfers ownership. */
+  @Test
+  void missingJdbcAcquisitionsCloseOnlyPreviouslyAcquiredResources() {
+    for (String route : List.of(HISTORY, INSERT, ABANDON, FINISH, REPLAY)) {
+      Fixture fixture = new Fixture();
+      fixture.missing = route + ":statement";
+
+      catalog(() -> action(fixture, route), route);
+
+      assertEquals(
+          List.of(route + ":prepare"),
+          fixture.visitedFaultPoints.stream()
+              .filter(point -> point.startsWith(route + ":"))
+              .toList(),
+          route);
+      assertEquals(1, fixture.referenceCalls, route);
+      fixture.assertClosed();
+    }
+    for (String route : List.of(HISTORY, INSERT, REPLAY)) {
+      Fixture fixture = new Fixture();
+      fixture.missing = route + ":row";
+      String query = route + ":query";
+      String statementClose = route + ":statementClose";
+      String rowClose = route + ":rowClose";
+
+      catalog(() -> action(fixture, route), route);
+
+      assertEquals(
+          List.of(query, statementClose),
+          fixture.visitedFaultPoints.stream()
+              .filter(
+                  point ->
+                      point.equals(query) || point.equals(statementClose) || point.equals(rowClose))
+              .toList(),
+          route);
+      assertEquals(1, fixture.referenceCalls, route);
+      fixture.assertClosed();
+    }
+  }
+
   @Test
   void nullAcquisitionsAndLostParentIdentityNeverAuthorizeSuccessOrFallback() {
     for (String route : List.of(HISTORY, INSERT, ABANDON, FINISH, REPLAY)) {
