@@ -1,0 +1,378 @@
+{
+  "run": "PG42956",
+  "source": "44e32a2211d35b950f75c8095ac6736d467a918a",
+  "selectedFixture": {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupStepPortTest.java",
+    "sha256": "ab71b15ffb3e283849585f7f7393ca684bfb009b0beaf8707bc35e45f57eb58c",
+    "currentSha256": "ab71b15ffb3e283849585f7f7393ca684bfb009b0beaf8707bc35e45f57eb58c",
+    "same": true
+  },
+  "pinnedOriginalReceipts": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42954-batch-cleanup-expiry-jdbc-cross-check-v1/manifest.json",
+      "sha256": "0b7be932c29979e7246506abbfd62ebb1c631d0b5c1e9a8b7d6f5b2973591480"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42950-f02-current-batch-and-six-module-boundaries-v1/manifest.json",
+      "sha256": "17ed657324215ec1de543446def29ca16f7f2c490909c797e1d70395ca5e1a89"
+    }
+  ],
+  "selectedPhysical": {
+    "dev/codex/schubert/nk/batch/repository/CleanupStepRepository.class": {
+      "module": "batch",
+      "sha256": "f1ffaa7a3fd3f40a2f1b4cc9e61a2120597e087827832424eee98c2506cb365c"
+    },
+    "dev/codex/schubert/nk/batch/repository/CleanupStepChunk.class": {
+      "module": "batch",
+      "sha256": "4584b0b2ae603a5542c5f2282d9df81dd95e161710c1e8bdeac5c70044e1b6d3"
+    },
+    "dev/codex/schubert/nk/batch/repository/CleanupStepChunk$Reason.class": {
+      "module": "batch",
+      "sha256": "456ba589cfa90409cf84ef51075c46cd837aa2b32eff02f28fd43f80bf726bba"
+    },
+    "dev/codex/schubert/nk/batch/repository/CleanupKind.class": {
+      "module": "batch",
+      "sha256": "f7e6207a992c3f5236caeec30a26601e08743614230e2a1bcdcb7959a83e8556"
+    },
+    "dev/codex/schubert/nk/batch/repository/CleanupCounts.class": {
+      "module": "batch",
+      "sha256": "09355389bf26d39779e3184b7dd995978314ae00b833e468fbd5078408265af0"
+    },
+    "dev/codex/schubert/nk/batch/repository/BatchRun.class": {
+      "module": "batch",
+      "sha256": "5cb0c42832ea17425dbf60da6025f2c4783d687e665b18f6cd8e88abc399c909"
+    },
+    "dev/codex/schubert/nk/batch/repository/BatchStep.class": {
+      "module": "batch",
+      "sha256": "06e90b35ca09ac687bfd480caac794fa7be6a47dff9db3d397e682f75f010b1c"
+    },
+    "dev/codex/schubert/nk/batch/repository/BatchStepAttempt.class": {
+      "module": "batch",
+      "sha256": "d61f86c115e29d12da29964711253fcd3e8fc64b8cb2d263efd87702295ae547"
+    },
+    "dev/codex/schubert/nk/batch/repository/BatchRepositoryException.class": {
+      "module": "batch",
+      "sha256": "391b1aac7be2dd58cf9c3dee11cdd12941417fa7d029513475dfffbe4a3d2cb1"
+    },
+    "dev/codex/schubert/nk/batch/repository/RunReferenceRepository.class": {
+      "module": "batch",
+      "sha256": "dc394e1d15ba729bbecd4f895c264b3adb042233f8ac7d603cab68d6e91682bb"
+    },
+    "dev/codex/schubert/nk/batch/repository/RunReferences.class": {
+      "module": "batch",
+      "sha256": "9cd7197824647e7ad066678a66a54bfdf196f0251027bebeb765b6babd8d8fe2"
+    },
+    "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.class": {
+      "module": "batch",
+      "sha256": "f181015412f1f293e91c0eea24a3ac33127d5ef5015f3dc9fb73ac732e0cc009"
+    },
+    "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class": {
+      "module": "bootstrap",
+      "sha256": "cc8265242a1cd41cc7c77b8e12185cbc387fb583d70e1d1171ba467cb0f3d552"
+    },
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason.class": {
+      "module": "storage",
+      "sha256": "a113bd839666ee3a4038dd3703af0cfb772282278cc6fbfe1e3cccf98286ffec"
+    },
+    "dev/codex/schubert/nk/storage/StorageIoException.class": {
+      "module": "storage",
+      "sha256": "85f86d702a139f126afdd72ca8e221583db824f159351ecd9f07b15fcc569c88"
+    }
+  },
+  "toolArtifacts": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+      "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+      "sha256": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar",
+      "sha256": "fb5b0036a0899ea97edfa0fc2c7985b55f3f7c5695028163e5e60d4f3cf6075d"
+    }
+  ],
+  "commands": {
+    "fixtureCompile": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+      "--release",
+      "25",
+      "-g",
+      "-Xlint:all",
+      "-Werror",
+      "-proc:none",
+      "-implicit:none",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42956-cleanup-step-current-regular-maven-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+      "-d",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42956-cleanup-step-current-regular-maven-v1/fixture",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42956-cleanup-step-current-regular-maven-v1/CleanupStepPortTest.java"
+    ],
+    "junit": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-Duser.timezone=Asia/Tokyo",
+      "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/PG42956-cleanup-step-current-regular-maven-v1/unit.exec,append=false,sessionid=PG42956-candidate",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42956-cleanup-step-current-regular-maven-v1/fixture:/home/mini/codex/project1/work/pgpt-runs/PG379/PG42956-cleanup-step-current-regular-maven-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+      "org.junit.platform.console.ConsoleLauncher",
+      "execute",
+      "--disable-ansi-colors",
+      "--fail-if-no-tests",
+      "--reports-dir",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42956-cleanup-step-current-regular-maven-v1/reports",
+      "--select-class",
+      "dev.codex.schubert.nk.batch.repository.CleanupStepPortTest"
+    ],
+    "rawCoverage": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42940-batch-type-owned-jdbc-close-v1/raw:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+      "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+      "--strict-original-exec",
+      "--line-deficits",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42956-cleanup-step-current-regular-maven-v1/unit.exec",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42956-cleanup-step-current-regular-maven-v1/classes/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.class"
+    ]
+  },
+  "startedAtUTC": "2026-11-22T19:31:19.282123+00:00",
+  "stages": {
+    "fixtureCompile": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-implicit:none",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42956-cleanup-step-current-regular-maven-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42956-cleanup-step-current-regular-maven-v1/fixture",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42956-cleanup-step-current-regular-maven-v1/CleanupStepPortTest.java"
+      ],
+      "startedAtUTC": "2026-11-22T19:31:19.282233+00:00",
+      "terminalAtUTC": "2026-11-22T19:31:20.148206+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42956-cleanup-step-current-regular-maven-v1/fixtureCompile.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42956-cleanup-step-current-regular-maven-v1/fixtureCompile.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "junit": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Duser.timezone=Asia/Tokyo",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/PG42956-cleanup-step-current-regular-maven-v1/unit.exec,append=false,sessionid=PG42956-candidate",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42956-cleanup-step-current-regular-maven-v1/fixture:/home/mini/codex/project1/work/pgpt-runs/PG379/PG42956-cleanup-step-current-regular-maven-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+        "org.junit.platform.console.ConsoleLauncher",
+        "execute",
+        "--disable-ansi-colors",
+        "--fail-if-no-tests",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42956-cleanup-step-current-regular-maven-v1/reports",
+        "--select-class",
+        "dev.codex.schubert.nk.batch.repository.CleanupStepPortTest"
+      ],
+      "startedAtUTC": "2026-11-22T19:31:20.148474+00:00",
+      "terminalAtUTC": "2026-11-22T19:31:21.567183+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42956-cleanup-step-current-regular-maven-v1/junit.stdout",
+        "sha256": "c08aa14f616c2e4e652f6f1b51bc01c5fcd00c1869d9f37a2c29c4ea9d666e15"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42956-cleanup-step-current-regular-maven-v1/junit.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "rawCoverage": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42940-batch-type-owned-jdbc-close-v1/raw:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+        "--strict-original-exec",
+        "--line-deficits",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42956-cleanup-step-current-regular-maven-v1/unit.exec",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42956-cleanup-step-current-regular-maven-v1/classes/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.class"
+      ],
+      "startedAtUTC": "2026-11-22T19:31:21.567448+00:00",
+      "terminalAtUTC": "2026-11-22T19:31:21.681898+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42956-cleanup-step-current-regular-maven-v1/rawCoverage.stdout",
+        "sha256": "ddd595cf0c30e48f3fa71c6ee6ff342b1703789445fcbe2cf748f0967cab7d79"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42956-cleanup-step-current-regular-maven-v1/rawCoverage.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "actualExit": 0,
+  "complete": true,
+  "cases": 10,
+  "failure": 0,
+  "error": 0,
+  "skipped": 0,
+  "testNames": [
+    "literalOkEmptyBusyBackupGateAndQuestionConflictKeepKnownTotalsDistinctFromUnknown()",
+    "exactLimitsOneAndThousandAcceptOnlyTheirBoundedCountsAndNeverCommitTheBorrowedConnection()",
+    "everyNullMappingAndLimitViolationRejectsBeforeAcquisitionAndRowsCannotBeMissingOrDuplicate()",
+    "literalSevenColumnSqlAndTypedBindingsKeepAllEightApprovedMappingsBorrowed()",
+    "eachRequiredNullAndCounterOrPairedTotalViolationRejectsTheProjection()",
+    "bodyAndEachClosingFailureUseIndependentPriorityAndSafeSecondaryWithoutSkippingClose()",
+    "singleSqlFailureRetainsNestedErrorAndReleasesOnlyAcquiredResources()",
+    "unknownReasonsWrongCompletionAndIncompatibleKindCannotBecomeSuccessfulCounts()",
+    "parentIdentityBeforeAndAfterAndInvalidBorrowedTransactionNeverReturnAResult()",
+    "allProviderPointsReallyReachedKeepUnknownIdentityAndCatalogOnlySql()"
+  ],
+  "xml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42956-cleanup-step-current-regular-maven-v1/reports/TEST-junit-jupiter.xml",
+    "sha256": "10141cf81d9f0377d13b838fd7f34029c3d47398855adf4447535ea68321744c"
+  },
+  "exec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42956-cleanup-step-current-regular-maven-v1/unit.exec",
+    "sha256": "499b3e260aed663b587219fdad92b9653d5b49bbfe02efcde52bb20ef50e537d"
+  },
+  "crc": {
+    "crc64": "71ffc9533da5a3c7",
+    "probeCount": 78,
+    "hitProbeIds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77
+    ],
+    "missedProbeIds": []
+  },
+  "rawCountersMissedCovered": {
+    "INSTRUCTION": [
+      0,
+      325
+    ],
+    "BRANCH": [
+      0,
+      28
+    ],
+    "LINE": [
+      0,
+      75
+    ],
+    "COMPLEXITY": [
+      0,
+      21
+    ],
+    "METHOD": [
+      0,
+      7
+    ],
+    "CLASS": [
+      0,
+      1
+    ]
+  },
+  "externalOperations": 0,
+  "syntheticJdkProxy": true,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "terminalAtUTC": "2026-11-22T19:31:21.685341+00:00",
+  "originalTerminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42956-cleanup-step-current-regular-maven-v1/terminal.json",
+    "sha256": "2c5fc4a536e7ee83fbcdb748cb80e39fdb1a43254a8702654a97b1780001664e"
+  },
+  "publicXml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42956-cleanup-step-current-regular-maven-v1/sanitized-junit.xml",
+    "sha256": "a011e1768dc9fac71592fadbcfee189d0308621d275416cc0a07bd447e302bf9"
+  },
+  "publicRaw": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42956-cleanup-step-current-regular-maven-v1/coverage-unfiltered.tsv",
+    "sha256": "ddd595cf0c30e48f3fa71c6ee6ff342b1703789445fcbe2cf748f0967cab7d79"
+  }
+}

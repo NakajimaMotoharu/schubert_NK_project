@@ -1,0 +1,86 @@
+{
+  "eventId": "PGPT-20261008-8679",
+  "groupId": "nov22-expiry-pg42958",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T19:32:13+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 47,
+      "remainingPercent": 53,
+      "resetsAt": 1795879771,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "source": "d9b67139666537c8678f8eaf8b99b6fc263879ac",
+    "productionCoreMain": "e8368d22c4da2ec841f008df793594d3be9066af",
+    "canonicalDesignSource": "ca41c03c0c6efff9a3a35b47b480491810bee6f9",
+    "run": "PG42958",
+    "workCategory": "SELECTED_TEST",
+    "managementWorkIds": [
+      "WBS-P017-11/2"
+    ],
+    "previousCheckpoint": "3233",
+    "planRow": {
+      "ID": "WBS-P017-11/2",
+      "元行": "WBS-P017-11/2",
+      "費目": "B",
+      "主担当": "WBS-P017-11",
+      "状態": "計画",
+      "作業": "Expiry削除・7日・監査／同source証拠による受入判定",
+      "残pp": "0.488",
+      "着手": "設計341・当該source・作業所有・既存成果を照合。必要な局所成果を費目Aで一度だけ作成し、受入候補のTestIDと独立期待値を確定。着手依存、当該A成果、終了依存と未解決条件を確認",
+      "終了証拠": "Expiry削除・7日・監査：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。",
+      "補正根拠": "登録済み後段単価。追加製造はA、実経路はD、比較はE",
+      "契約HOLD": "",
+      "対象": "",
+      "範囲": "SS 341",
+      "保存証跡": "個別criteria＋同sourceのTestID・独立期待値・実結果・451適用結果",
+      "順次": "False",
+      "配賦窓": "6",
+      "楽観pp": "0.195",
+      "慎重pp": "0.975",
+      "要求設計の版差": "PT基準仕様 NK-BAT-001、SS 341",
+      "lineNumber": 543,
+      "改訂残pp": "0.488"
+    },
+    "currentPlan": [
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/11月22日_PGPT再開実行計画.txt",
+        "sha256": "80b9fdc306f664b9c03901a4bdfb34cf66997879676204cfa969858fd68a4016"
+      },
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/短期実行WBS.tsv",
+        "sha256": "a6efedcd63b4ef3bb1d133d939b0ddd7dc4b0147988ac33d668282a25c999527"
+      }
+    ],
+    "startScope": {
+      "workCategory": "SELECTED_TEST",
+      "target": "現ExpiryAudit既承認の五合成fixture全31と当正規包装の七target、正式source別",
+      "entry": "PG42954/58独立1、PG40730/32通常30、PG42942同正規包装、元閉包の正規hash照合",
+      "exitCriterion": "五fixture同候補31 F/E/S0、四実行物理のraw四指標と独立CRC、未対象/実環境を分離",
+      "excludes": "実削除、実許可発行、実owner/DB、QA056/Root11/保留32、全製品451、正式受入",
+      "successor": "G08/F03の同source局所記録に反映し、G13再追跡と追加の独立通常PG/PT"
+    },
+    "groupCapPp": 3.6,
+    "estimateAtGroupStartPp": {
+      "low": 0,
+      "base": 0.45,
+      "high": 3.6
+    },
+    "completedOriginalRowPricePp": 0,
+    "sourceOwnership": "LOCAL_DEV_FOUNDATION_TRACKED_SNAPSHOT",
+    "knownOwnedRunInProgress": 0,
+    "costRevision": "PMO-remaining-v3-20261010",
+    "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "actualAllocatedPp": null
+  }
+}
