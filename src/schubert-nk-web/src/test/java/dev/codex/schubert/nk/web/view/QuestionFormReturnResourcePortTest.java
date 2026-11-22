@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,9 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.jupiter.api.Test;
@@ -70,7 +73,7 @@ final class QuestionFormReturnResourcePortTest {
   }
 
   private static Document render(String id, String template, Map<String, Object> page)
-      throws Exception {
+      throws IOException {
     var servlet = new MockServletContext();
     var req = new MockHttpServletRequest(servlet);
     req.setMethod("GET");
@@ -109,14 +112,14 @@ final class QuestionFormReturnResourcePortTest {
   }
 
   @Test
-  void newPageMenuHrefUsesApprovedCanonicalPath() throws Exception {
+  void newPageMenuHrefUsesApprovedCanonicalPath() throws IOException {
     var d = render("QRETURN001", VIEW_NEW, inputPage("", USER, "", Map.of()));
     assertEquals("メニュー", d.select("main > a").text());
     assertEquals("/", d.select("main > a").attr(HREF));
   }
 
   @Test
-  void acceptedPageNavigationUsesApprovedTargets() throws Exception {
+  void acceptedPageNavigationUsesApprovedTargets() throws IOException {
     var d = render("QRETURN002", VIEW_ACCEPTED, receiptPage("質問"));
     assertEquals(List.of("通知を確認", "続けて質問", "メニュー"), d.select("main > nav a").eachText());
     assertEquals(
@@ -124,7 +127,7 @@ final class QuestionFormReturnResourcePortTest {
   }
 
   @Test
-  void emptyInputHasExplicitFormAndScriptContract() throws Exception {
+  void emptyInputHasExplicitFormAndScriptContract() throws IOException {
     var d = render("QRETURN003", VIEW_NEW, inputPage("", USER, "", Map.of()));
     assertEquals("質問要求", d.title());
     assertEquals("質問要求", d.select("h1").text());
@@ -140,7 +143,7 @@ final class QuestionFormReturnResourcePortTest {
   }
 
   @Test
-  void noticeValidationAndQuestionTextEscapeWithoutMarkup() throws Exception {
+  void noticeValidationAndQuestionTextEscapeWithoutMarkup() throws IOException {
     String notice = "再操作<&>を確認";
     var d =
         render(
@@ -156,7 +159,7 @@ final class QuestionFormReturnResourcePortTest {
   }
 
   @Test
-  void userAndAdminDisplayValuesStaySeparate() throws Exception {
+  void userAndAdminDisplayValuesStaySeparate() throws IOException {
     int index = 0;
     for (String role : List.of(USER, ADMIN)) {
       var d = render("QRETURN005-" + index, VIEW_NEW, inputPage("質問", role, "", Map.of()));
@@ -169,7 +172,7 @@ final class QuestionFormReturnResourcePortTest {
   }
 
   @Test
-  void acceptedReadonlyDataUsesExplicitReceiptTimeAndEscapedBody() throws Exception {
+  void acceptedReadonlyDataUsesExplicitReceiptTimeAndEscapedBody() throws IOException {
     var d = render("QRETURN006", VIEW_ACCEPTED, receiptPage(ESCAPED_BODY));
     assertEquals("質問受付完了", d.title());
     assertEquals("質問を受け付けました。", d.select(".accepted-message").text());
@@ -180,7 +183,7 @@ final class QuestionFormReturnResourcePortTest {
   }
 
   @Test
-  void fourThousandNinetySixByteBodyIsNotTruncatedByEitherTemplate() throws Exception {
+  void fourThousandNinetySixByteBodyIsNotTruncatedByEitherTemplate() throws IOException {
     String questionText = "a".repeat(4096);
     assertEquals(4096, questionText.getBytes(StandardCharsets.UTF_8).length);
     var input = render("QRETURN007-new", VIEW_NEW, inputPage(questionText, USER, "", Map.of()));
@@ -190,7 +193,8 @@ final class QuestionFormReturnResourcePortTest {
   }
 
   @Test
-  void concurrentInputAndAcceptedPagesKeepValuesSeparate() throws Exception {
+  void concurrentInputAndAcceptedPagesKeepValuesSeparate()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var pool = Executors.newFixedThreadPool(2);
     try {
       var jobs = new ArrayList<Future<String>>();

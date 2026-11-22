@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
@@ -13,9 +14,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.jupiter.api.Test;
@@ -125,7 +128,7 @@ final class SearchTemplateResourcePortTest {
         effective < pages ? Optional.of(PAGE_PREFIX + (effective + 1)) : Optional.empty());
   }
 
-  private static Document render(String id, Map<String, Object> p) throws Exception {
+  private static Document render(String id, Map<String, Object> p) throws IOException {
     var servlet = new MockServletContext();
     var request = new MockHttpServletRequest(servlet);
     request.setMethod("GET");
@@ -159,7 +162,7 @@ final class SearchTemplateResourcePortTest {
   }
 
   @Test
-  void unsearchedPageRetainsSixGetControlsWithoutInventedResults() throws Exception {
+  void unsearchedPageRetainsSixGetControlsWithoutInventedResults() throws IOException {
     var d = render("SDOM001", page());
     assertEquals("schubert NK - 検索", d.title());
     assertEquals("ja", d.select("html").attr("lang"));
@@ -180,7 +183,7 @@ final class SearchTemplateResourcePortTest {
   }
 
   @Test
-  void successfulEmptyPageShowsZeroCountAndNoPagination() throws Exception {
+  void successfulEmptyPageShowsZeroCountAndNoPagination() throws IOException {
     var p = page();
     setResults(p, 0, 1, List.of());
     var d = render("SDOM002", p);
@@ -190,7 +193,7 @@ final class SearchTemplateResourcePortTest {
   }
 
   @Test
-  void bothPaginationCopiesRespectSingleFirstMiddleAndLastBoundaries() throws Exception {
+  void bothPaginationCopiesRespectSingleFirstMiddleAndLastBoundaries() throws IOException {
     int[] totals = {1, 201, 201, 201};
     int[] pages = {1, 1, 2, 3};
     String[] ranges = {"1 - 1 / 1", "1 - 100 / 201", "101 - 200 / 201", "201 - 201 / 201"};
@@ -217,7 +220,7 @@ final class SearchTemplateResourcePortTest {
   }
 
   @Test
-  void allKnownAndUnknownEnumFiltersRedisplayWithExplicitSelection() throws Exception {
+  void allKnownAndUnknownEnumFiltersRedisplayWithExplicitSelection() throws IOException {
     String[] entries = {"", "dialogue", "narration", "<unknown-entry>"};
     String[] voices = {"", "with", "without", "<unknown-voice>"};
     for (int i = 0; i < entries.length; i++) {
@@ -254,7 +257,7 @@ final class SearchTemplateResourcePortTest {
   }
 
   @Test
-  void rowMetadataAndAudioPresenceDoNotCreateEmptyPlayers() throws Exception {
+  void rowMetadataAndAudioPresenceDoNotCreateEmptyPlayers() throws IOException {
     for (int i = 0; i < 2; i++) {
       var p = page();
       var r = new HashMap<>(resultRow("literal", i == 0));
@@ -282,7 +285,7 @@ final class SearchTemplateResourcePortTest {
   }
 
   @Test
-  void errorsInputAndMultilineBodyEscapeWithoutExecutableMarkup() throws Exception {
+  void errorsInputAndMultilineBodyEscapeWithoutExecutableMarkup() throws IOException {
     var p = page();
     var literal = "<script>fixture</script>\nA&B";
     p.put(ERRORS, List.of(Map.of("name", "q", "message", literal)));
@@ -301,7 +304,7 @@ final class SearchTemplateResourcePortTest {
   }
 
   @Test
-  void fullHundredRowPageKeepsEveryStoredPositionAndBoundaryBody() throws Exception {
+  void fullHundredRowPageKeepsEveryStoredPositionAndBoundaryBody() throws IOException {
     var rows = new ArrayList<Map<String, Object>>();
     for (int i = 0; i < 100; i++)
       rows.add(resultRow(i == 0 ? FIRST : i == 99 ? LAST : "row-" + i, false));
@@ -317,7 +320,8 @@ final class SearchTemplateResourcePortTest {
   }
 
   @Test
-  void ownedConcurrentRenderersNeverShareFiltersOrRows() throws Exception {
+  void ownedConcurrentRenderersNeverShareFiltersOrRows()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var executor = Executors.newFixedThreadPool(2);
     try {
       List<Future<?>> futures = new ArrayList<>();

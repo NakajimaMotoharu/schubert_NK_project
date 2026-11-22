@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
@@ -13,9 +14,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.jupiter.api.Test;
@@ -80,7 +83,7 @@ final class MusicListTemplateResourcePortTest {
     return values;
   }
 
-  private static Document render(String id, Map<String, Object> values) throws Exception {
+  private static Document render(String id, Map<String, Object> values) throws IOException {
     var servlet = new MockServletContext();
     var req = new MockHttpServletRequest(servlet);
     req.setMethod("GET");
@@ -117,7 +120,7 @@ final class MusicListTemplateResourcePortTest {
   }
 
   @Test
-  void ordinaryRowsKeepStoredOrderAndLiteralPlaybackMetadata() throws Exception {
+  void ordinaryRowsKeepStoredOrderAndLiteralPlaybackMetadata() throws IOException {
     var d =
         render(
             "MDOM001",
@@ -134,7 +137,7 @@ final class MusicListTemplateResourcePortTest {
   }
 
   @Test
-  void bothEmptyCollectionsProduceNoInventedPlayers() throws Exception {
+  void bothEmptyCollectionsProduceNoInventedPlayers() throws IOException {
     var first = render("MDOM002-a", page(false, List.of(), List.of()));
     var second = render("MDOM002-b", page(true, List.of(), List.of()));
     for (var d : List.of(first, second)) {
@@ -144,7 +147,7 @@ final class MusicListTemplateResourcePortTest {
   }
 
   @Test
-  void everyOptionalPairSideHasExplicitPlayerOrPlaceholder() throws Exception {
+  void everyOptionalPairSideHasExplicitPlayerOrPlaceholder() throws IOException {
     var main = track("main", 1);
     var instrumental = track("inst", 1);
     var pairs =
@@ -164,7 +167,7 @@ final class MusicListTemplateResourcePortTest {
   }
 
   @Test
-  void textEscapesWithoutInjectingMarkupOrAttributes() throws Exception {
+  void textEscapesWithoutInjectingMarkupOrAttributes() throws IOException {
     String value = "曲<script>&\"";
     var t = new HashMap<>(track("plain", 0));
     t.put(TITLE, value);
@@ -176,7 +179,7 @@ final class MusicListTemplateResourcePortTest {
   }
 
   @Test
-  void pageAndTopbarNavigationUseIndependentLiteralValues() throws Exception {
+  void pageAndTopbarNavigationUseIndependentLiteralValues() throws IOException {
     int n = 0;
     for (String role : List.of(USER, ADMIN)) {
       var v = page(false, List.of(), List.of());
@@ -199,7 +202,7 @@ final class MusicListTemplateResourcePortTest {
   }
 
   @Test
-  void binaryMegabyteFormattingUsesZeroAndFractionalBoundaries() throws Exception {
+  void binaryMegabyteFormattingUsesZeroAndFractionalBoundaries() throws IOException {
     var d =
         render(
             "MDOM006",
@@ -214,7 +217,7 @@ final class MusicListTemplateResourcePortTest {
   }
 
   @Test
-  void inactiveCollectionsAreNotEvaluated() throws Exception {
+  void inactiveCollectionsAreNotEvaluated() throws IOException {
     var ordinary = page(false, List.of(track("only", 1)), List.of());
     ordinary.put(PAIRS, null);
     var d = render("MDOM007-a", ordinary);
@@ -231,7 +234,8 @@ final class MusicListTemplateResourcePortTest {
   }
 
   @Test
-  void concurrentEnginesKeepEightPagesAndOutputsSeparate() throws Exception {
+  void concurrentEnginesKeepEightPagesAndOutputsSeparate()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var pool = Executors.newFixedThreadPool(2);
     try {
       var jobs = new ArrayList<Future<String>>();

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
@@ -13,9 +14,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.jupiter.api.Test;
@@ -79,7 +82,7 @@ final class ScenarioDetailTemplateResourcePortTest {
     return p;
   }
 
-  private static Document render(String id, Map<String, Object> p) throws Exception {
+  private static Document render(String id, Map<String, Object> p) throws IOException {
     var servlet = new MockServletContext();
     var req = new MockHttpServletRequest(servlet);
     req.setMethod("GET");
@@ -115,7 +118,7 @@ final class ScenarioDetailTemplateResourcePortTest {
   }
 
   @Test
-  void metadataAndNavigationUseExplicitApprovedDisplayValues() throws Exception {
+  void metadataAndNavigationUseExplicitApprovedDisplayValues() throws IOException {
     var d = render("SCENE001", page(List.of(entry(9, true, "speaker", "text", List.of()))));
     assertEquals(CHAPTER, d.title());
     assertEquals(CHAPTER, d.select("h1").text());
@@ -130,7 +133,7 @@ final class ScenarioDetailTemplateResourcePortTest {
   }
 
   @Test
-  void emptyEntryCollectionHasNoInventedBodyOrAudio() throws Exception {
+  void emptyEntryCollectionHasNoInventedBodyOrAudio() throws IOException {
     var d = render("SCENE002", page(List.of()));
     assertEquals(1, d.select(".script-body").size());
     assertTrue(d.select(".script-entry,audio,.audio,.download").isEmpty());
@@ -138,7 +141,7 @@ final class ScenarioDetailTemplateResourcePortTest {
   }
 
   @Test
-  void everyPreviousNextCombinationMatchesBothNavigationCopies() throws Exception {
+  void everyPreviousNextCombinationMatchesBothNavigationCopies() throws IOException {
     int n = 0;
     for (boolean previous : List.of(false, true))
       for (boolean next : List.of(false, true)) {
@@ -171,7 +174,7 @@ final class ScenarioDetailTemplateResourcePortTest {
   }
 
   @Test
-  void dialogueAndSpeakerFlagsRemainIndependentInAllFourCases() throws Exception {
+  void dialogueAndSpeakerFlagsRemainIndependentInAllFourCases() throws IOException {
     int n = 0;
     for (boolean dialogue : List.of(false, true))
       for (boolean speaker : List.of(false, true)) {
@@ -189,7 +192,7 @@ final class ScenarioDetailTemplateResourcePortTest {
   }
 
   @Test
-  void zeroOneAndTwoAudioLinksKeepStoredPlayerAndDownloadOrder() throws Exception {
+  void zeroOneAndTwoAudioLinksKeepStoredPlayerAndDownloadOrder() throws IOException {
     var sounds = List.of(audioRow(71), audioRow(72));
     for (int count : List.of(0, 1, 2)) {
       var d =
@@ -209,7 +212,7 @@ final class ScenarioDetailTemplateResourcePortTest {
   }
 
   @Test
-  void titlesSpeakerAndMultilineBodyEscapeMarkupWithoutTextLoss() throws Exception {
+  void titlesSpeakerAndMultilineBodyEscapeMarkupWithoutTextLoss() throws IOException {
     var literal = "<script>fixture</script>&\n日本語 é";
     var p = page(List.of(entry(9, true, literal, literal, List.of())));
     p.put(TITLE, literal);
@@ -221,7 +224,7 @@ final class ScenarioDetailTemplateResourcePortTest {
   }
 
   @Test
-  void hundredEntriesKeepEveryAnchorPositionAndLongFirstBody() throws Exception {
+  void hundredEntriesKeepEveryAnchorPositionAndLongFirstBody() throws IOException {
     var records = new ArrayList<Map<String, Object>>();
     var longBody = "x".repeat(4096);
     for (int i = 1; i <= 100; i++)
@@ -237,7 +240,8 @@ final class ScenarioDetailTemplateResourcePortTest {
   }
 
   @Test
-  void ownedConcurrentPagesKeepTheirBodiesAndTitlesIsolated() throws Exception {
+  void ownedConcurrentPagesKeepTheirBodiesAndTitlesIsolated()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var executor = Executors.newFixedThreadPool(2);
     try {
       List<Future<?>> futures = new ArrayList<>();

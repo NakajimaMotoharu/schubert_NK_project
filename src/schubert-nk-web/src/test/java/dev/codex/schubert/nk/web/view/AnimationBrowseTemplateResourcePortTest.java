@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
@@ -13,9 +14,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.jupiter.api.Test;
@@ -107,7 +110,7 @@ final class AnimationBrowseTemplateResourcePortTest {
   }
 
   private static Document render(String id, String template, Map<String, Object> p)
-      throws Exception {
+      throws IOException {
     var servlet = new MockServletContext();
     var req = new MockHttpServletRequest(servlet);
     req.setMethod("GET");
@@ -140,7 +143,7 @@ final class AnimationBrowseTemplateResourcePortTest {
   }
 
   @Test
-  void menuKeepsThreeApprovedCardsCountsAndRoleDisplay() throws Exception {
+  void menuKeepsThreeApprovedCardsCountsAndRoleDisplay() throws IOException {
     for (var role : List.of(USER, ADMIN)) {
       var d = render("AB001-" + role, MENU, menuPage(role, 15, 4));
       assertEquals("Animation", d.title());
@@ -157,14 +160,14 @@ final class AnimationBrowseTemplateResourcePortTest {
   }
 
   @Test
-  void zeroCountDisplayDoesNotInventNumericCatalogCounts() throws Exception {
+  void zeroCountDisplayDoesNotInventNumericCatalogCounts() throws IOException {
     var d = render("AB002", MENU, menuPage(USER, 0, 0));
     assertEquals(List.of("0本の映像", "0本の映像", "OP映像を再生する"), d.select(".menu-grid span").eachText());
     assertEquals(3, d.select(".menu-item").size());
   }
 
   @Test
-  void ovaCardsKeepFourStoredPositionsAndExplicitMetadata() throws Exception {
+  void ovaCardsKeepFourStoredPositionsAndExplicitMetadata() throws IOException {
     var clips =
         List.of(
             ovaClip(),
@@ -194,7 +197,7 @@ final class AnimationBrowseTemplateResourcePortTest {
   }
 
   @Test
-  void mainPairPresenceUsesOneLinkOrOneEmptyPlaceholder() throws Exception {
+  void mainPairPresenceUsesOneLinkOrOneEmptyPlaceholder() throws IOException {
     for (boolean subtrack : List.of(false, true)) {
       var p = listPage(MAIN, subtrack ? 2 : 1, List.of(), List.of(pair(subtrack)));
       var d = render("AB004-" + subtrack, LIST, p);
@@ -212,7 +215,7 @@ final class AnimationBrowseTemplateResourcePortTest {
   }
 
   @Test
-  void emptySectionsNeverReadInactiveNullCollectionsOrInventCards() throws Exception {
+  void emptySectionsNeverReadInactiveNullCollectionsOrInventCards() throws IOException {
     for (String section : List.of(MAIN, OVA)) {
       var p = listPage(section, 0, List.of(), List.of());
       p.put(section.equals(MAIN) ? VIDEOS : ROWS, null);
@@ -226,7 +229,7 @@ final class AnimationBrowseTemplateResourcePortTest {
   }
 
   @Test
-  void textMetadataAndTitlesEscapeWithoutExtraMarkupOrChangedHref() throws Exception {
+  void textMetadataAndTitlesEscapeWithoutExtraMarkupOrChangedHref() throws IOException {
     var literal = "<script>fixture</script>&";
     var clip = new HashMap<>(ovaClip());
     clip.put(TITLE, literal);
@@ -243,7 +246,7 @@ final class AnimationBrowseTemplateResourcePortTest {
   }
 
   @Test
-  void byteFormattingKeepsZeroOneAndFractionalMegabyteBoundaries() throws Exception {
+  void byteFormattingKeepsZeroOneAndFractionalMegabyteBoundaries() throws IOException {
     long[] sizes = {0, 1, 1572864};
     String[] labels = {"0.0 MB", "0.0 MB", "1.5 MB"};
     for (int i = 0; i < sizes.length; i++) {
@@ -255,7 +258,8 @@ final class AnimationBrowseTemplateResourcePortTest {
   }
 
   @Test
-  void boundedConcurrentListsKeepBranchTitleAndRowsIsolated() throws Exception {
+  void boundedConcurrentListsKeepBranchTitleAndRowsIsolated()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var executor = Executors.newFixedThreadPool(2);
     try {
       List<Future<?>> futures = new ArrayList<>();

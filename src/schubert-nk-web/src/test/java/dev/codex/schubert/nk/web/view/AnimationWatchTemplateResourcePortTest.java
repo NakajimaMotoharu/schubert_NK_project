@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
@@ -12,9 +13,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.jupiter.api.Test;
@@ -97,7 +100,7 @@ final class AnimationWatchTemplateResourcePortTest {
   }
 
   private static Document render(String id, Map<String, Object> p, String requestUri)
-      throws Exception {
+      throws IOException {
     var servlet = new MockServletContext();
     var req = new MockHttpServletRequest(servlet);
     req.setMethod("GET");
@@ -135,7 +138,7 @@ final class AnimationWatchTemplateResourcePortTest {
   }
 
   @Test
-  void approvedCatalogKindsHaveFixedPlaybackControlsAndBacklinks() throws Exception {
+  void approvedCatalogKindsHaveFixedPlaybackControlsAndBacklinks() throws IOException {
     for (int i = 0; i < CATALOG.size(); i++) {
       var row = CATALOG.get(i);
       var role = i % 2 == 0 ? USER : ADMIN;
@@ -161,7 +164,7 @@ final class AnimationWatchTemplateResourcePortTest {
   }
 
   @Test
-  void displayTextIsEscapedWhilePlayerAndNavigationStayStructural() throws Exception {
+  void displayTextIsEscapedWhilePlayerAndNavigationStayStructural() throws IOException {
     var row = CATALOG.getFirst();
     var p = new HashMap<>(values(row, USER));
     var literal = "<script>fixture</script>&日本語";
@@ -181,7 +184,8 @@ final class AnimationWatchTemplateResourcePortTest {
   }
 
   @Test
-  void boundedConcurrentViewsKeepEachTitleAndStreamSeparate() throws Exception {
+  void boundedConcurrentViewsKeepEachTitleAndStreamSeparate()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var executor = Executors.newFixedThreadPool(2);
     try {
       List<Future<?>> futures = new ArrayList<>();
