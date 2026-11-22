@@ -1,0 +1,129 @@
+{
+  "eventId": "PGPT-20261008-8840",
+  "workCategory": "IMPLEMENTATION",
+  "source": "06d5f566effe7680e2ad32a4d11e658bb28cfa13",
+  "productionCoreMain": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "canonicalDesignSource": "7745de1fb04c8b9e2cfccc11103d7b3c57b090d7",
+  "managementWorkIds": [
+    "WBS-P018-01/2"
+  ],
+  "planRow": {
+    "ID": "WBS-P018-01/2",
+    "元行": "WBS-P018-01/2",
+    "費目": "B",
+    "主担当": "WBS-P018-01",
+    "状態": "計画",
+    "作業": "設定・credential loader・redaction境界／同source証拠による受入判定",
+    "残pp": "0.65",
+    "着手": "設計352・当該source・作業所有・既存成果を照合。必要な局所成果を費目Aで一度だけ作成し、受入候補のTestIDと独立期待値を確定。着手依存、当該A成果、終了依存と未解決条件を確認",
+    "終了証拠": "設定・credential loader・redaction境界：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。",
+    "補正根拠": "登録済み後段単価。追加製造はA、実経路はD、比較はE",
+    "契約HOLD": "",
+    "対象": "",
+    "範囲": "SS 352",
+    "保存証跡": "個別criteria＋同sourceのTestID・独立期待値・実結果・451適用結果",
+    "順次": "False",
+    "配賦窓": "6",
+    "楽観pp": "0.26",
+    "慎重pp": "1.3",
+    "要求設計の版差": "PT基準仕様 NK-OPS-001、SS 352",
+    "lineNumber": 546,
+    "改訂残pp": "0.65"
+  },
+  "run": "PG43118-nonsecret-config-independent-concurrent-oracles-v1",
+  "startEvent": "PGPT-20261008-8839",
+  "outcome": {
+    "tests": 14,
+    "success": 14,
+    "compileFailuresBeforeTest": 2,
+    "coverage": {
+      "LINE": 241,
+      "METHOD": 25,
+      "CLASS": 2,
+      "BRANCH": 150
+    },
+    "rawPmd": 10,
+    "checkstyle": 0,
+    "spotbugs": 0,
+    "bugLocalClosed": true,
+    "typedNullAwayNotRun": true
+  },
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43118-nonsecret-config-independent-concurrent-oracles-v3/manifest.json",
+    "sha256": "1d929834c4b1b0e02528e5f3586f3d1e50c8c66258b0436f58d4513ece035492"
+  },
+  "nextEvidence": {
+    "workId": "WBS-P019-03.03/2",
+    "target": "current import write-plan value validation and immutable order",
+    "method": "compare prior admitted pure value fixture and current input identities before selecting tests; no actual migration/COPY"
+  },
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T23:29:25+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 54,
+      "remainingPercent": 46,
+      "resetsAt": 1795879771,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "modelRequested": "gpt-6.2-sol",
+  "modelObserved": null,
+  "reasoningRequested": "high",
+  "reasoningObserved": null,
+  "speedRequested": "standard",
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 54,
+    "remainingPercent": 46,
+    "resetsAt": 1795879771,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "7d2f60db929d8d4966d6e0c0084df02bd91fd274472b420982dacaa25afd7995",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-22T23:29:25+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 54,
+        "remainingPercent": 46,
+        "resetsAt": 1795879771,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": null,
+  "sameQuotaWindow": false,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-22T23:29:08.476481+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": true,
+  "quotaBefore": {
+    "usedPercent": 54,
+    "remainingPercent": 46,
+    "resetsAt": 1795879772,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null
+}

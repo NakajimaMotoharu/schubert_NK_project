@@ -1,0 +1,385 @@
+{
+  "run": "PG43118-nonsecret-config-independent-concurrent-oracles-v3",
+  "source": "3db357f91c1ca521592bfb83e50426405dc3dc7a",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "actualExit": 0,
+  "startedAtUTC": "2026-11-22T23:28:58.676249+00:00",
+  "terminalAtUTC": "2026-11-22T23:29:08.476481+00:00",
+  "wbs": "WBS-P018-01/2",
+  "design": "SS352",
+  "defect": "BUG-3669",
+  "horizontal": "YKT-2885",
+  "attemptsBeforeSuccessfulRun": [
+    {
+      "version": "v1",
+      "source": "bbcfdbd9ce5450006d58a7473f9040f92d12d486",
+      "stage": "compile",
+      "exit": 1,
+      "ordinaryJUnitStarted": false,
+      "reason": "API CFG002 checked exception declaration absent",
+      "evidence": [
+        {
+          "path": "../pgpt-runs/PG379/PG43118-nonsecret-config-independent-concurrent-oracles-v1/begin.json",
+          "sha256": "1f7aa412bf5242ccac8a61f783a9ac9f17c6eb2408af0a70b2fda8887915dc4e"
+        },
+        {
+          "path": "../pgpt-runs/PG379/PG43118-nonsecret-config-independent-concurrent-oracles-v1/compile.stderr",
+          "sha256": "0c5ba962699d01e558825b03defa0fd99ae3dffb515925bcbdca72b1799314fb"
+        }
+      ]
+    },
+    {
+      "version": "v2",
+      "source": "427f97658b2c043cc99d15de2be3bfcba1a2aa4b",
+      "stage": "compile",
+      "exit": 1,
+      "ordinaryJUnitStarted": false,
+      "reason": "Web CFG002 and CFG007 checked exception declarations absent",
+      "evidence": [
+        {
+          "path": "../pgpt-runs/PG379/PG43118-nonsecret-config-independent-concurrent-oracles-v2/begin.json",
+          "sha256": "686e442b3ddc880702e0878faf692d0f8fbcb4eeb1a98cd8006812f2ebc49a1a"
+        },
+        {
+          "path": "../pgpt-runs/PG379/PG43118-nonsecret-config-independent-concurrent-oracles-v2/compile.stderr",
+          "sha256": "6890dedbca5fc29371730fcab1a2a49d895e1e854ea7ccb55a5469bb3483422c"
+        }
+      ]
+    }
+  ],
+  "stageExits": {
+    "format": {
+      "exit": 0,
+      "at": "2026-11-22T23:28:59.213304+00:00"
+    },
+    "compile": {
+      "exit": 0,
+      "at": "2026-11-22T23:28:59.962937+00:00"
+    },
+    "junit": {
+      "exit": 0,
+      "at": "2026-11-22T23:29:01.228641+00:00"
+    },
+    "rawCompile": {
+      "exit": 0,
+      "at": "2026-11-22T23:29:01.861861+00:00"
+    },
+    "unfiltered": {
+      "exit": 0,
+      "at": "2026-11-22T23:29:01.962030+00:00"
+    },
+    "style": {
+      "exit": 0,
+      "at": "2026-11-22T23:29:02.618583+00:00"
+    },
+    "pmd": {
+      "exit": 4,
+      "at": "2026-11-22T23:29:05.032198+00:00"
+    },
+    "spotbugs": {
+      "exit": 0,
+      "at": "2026-11-22T23:29:08.469810+00:00"
+    }
+  },
+  "input": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfigTest.java",
+      "sha256": "cd3a44be96bff05134bd70bf7d24a196a82d112e201481d854be7f9a26a5c232"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfigTest.java",
+      "sha256": "170901bf76699dc662eed4a4be42897c9d59df689f84ff7c5bf91b176319a409"
+    }
+  ],
+  "productClasses": {
+    "dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig.class": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43118-nonsecret-config-independent-concurrent-oracles-v3/target/classes/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig.class",
+      "sha256": "b3193906a439d650f767fd53aa9172065de506afb725b8f6c84b11498c04bc8e"
+    },
+    "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43118-nonsecret-config-independent-concurrent-oracles-v3/target/classes/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class",
+      "sha256": "cc8265242a1cd41cc7c77b8e12185cbc387fb583d70e1d1171ba467cb0f3d552"
+    },
+    "dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfig.class": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43118-nonsecret-config-independent-concurrent-oracles-v3/target/classes/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfig.class",
+      "sha256": "d4378ed797af2b047ec28613a0cd193a86eb6a35be19349973b33e6ca06db1d7"
+    },
+    "dev/codex/schubert/nk/storage/StorageIoException.class": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43118-nonsecret-config-independent-concurrent-oracles-v3/target/classes/dev/codex/schubert/nk/storage/StorageIoException.class",
+      "sha256": "85f86d702a139f126afdd72ca8e221583db824f159351ecd9f07b15fcc569c88"
+    },
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason.class": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43118-nonsecret-config-independent-concurrent-oracles-v3/target/classes/dev/codex/schubert/nk/storage/StorageIoException$Reason.class",
+      "sha256": "a113bd839666ee3a4038dd3703af0cfb772282278cc6fbfe1e3cccf98286ffec"
+    }
+  },
+  "templateFixtureCopies": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43118-nonsecret-config-independent-concurrent-oracles-v3/fixture-repo/src/deployment/config/common.yml.template",
+      "sha256": "d61acf911e08a15cfdb2700eb81db7bbbb920cb3ccd80f1665652af4b4b7880a"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43118-nonsecret-config-independent-concurrent-oracles-v3/fixture-repo/src/deployment/config/api.yml.template",
+      "sha256": "206f4ed29da0fca31c1bab15015eb5b4db93255846c411f5d1815050d66bf267"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43118-nonsecret-config-independent-concurrent-oracles-v3/fixture-repo/src/deployment/config/web.yml.template",
+      "sha256": "3e9a7ba4ada50e82e450cdd634439c2c122fed051de089010dee07dfd2d25cb7"
+    }
+  ],
+  "classpath": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/snakeyaml/snakeyaml-engine/3.1.1/snakeyaml-engine-3.1.1.jar",
+      "sha256": "59d73655cf077f154137e2d6f6f92c041a954c0b1c534c63800047a0d70a6947"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+      "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+    }
+  ],
+  "independentOracle": {
+    "method": "JDK SHA-256 over per-fixture independent fixed UTF-8 canonical text",
+    "parallelPerFixture": 32,
+    "fixtures": 2,
+    "actualCaseIds": [
+      "PT-OPS-APICFG005",
+      "PT-OPS-WEBCFG005"
+    ]
+  },
+  "results": {
+    "executed": 14,
+    "passed": 14,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "definitionsAdded": 0
+  },
+  "caseRows": [
+    {
+      "className": "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest",
+      "method": "opsApiCfg001IndependentDefaultsAndCanonicalHash"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest",
+      "method": "opsApiCfg002LayeredNonSecretOverridesAndScalarTypes"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest",
+      "method": "opsApiCfg003YamlsRejectDuplicateUnknownSecretAndStructures"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest",
+      "method": "opsApiCfg004AllFixedKeysUrlsAndRootsFailClosed"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest",
+      "method": "opsApiCfg005NullUnknownAndConcurrentDeterminism"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest",
+      "method": "opsApiCfg006ShippedTemplatesMatchApprovedDefaults"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest",
+      "method": "opsApiCfg007IndependentManifestCountAndCanonicalHash"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest",
+      "method": "opsWebCfg001IndependentDefaultsAndCanonicalHash"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest",
+      "method": "opsWebCfg002LayeredRangesAndScalarTypes"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest",
+      "method": "opsWebCfg003RejectMalformedUnknownSecretAndDecodedValues"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest",
+      "method": "opsWebCfg004FixedKeysPortsTimeoutsCountsAndRoots"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest",
+      "method": "opsWebCfg005NullUnknownAndConcurrentDeterminism"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest",
+      "method": "opsWebCfg006ShippedTemplatesMatchApprovedDefaults"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest",
+      "method": "opsWebCfg007ExplicitDbMqSourcesAndNegativeBoundaries"
+    }
+  ],
+  "coverage": {
+    "sameExec": true,
+    "archiveAggregation": false,
+    "exclusions": [],
+    "totals": {
+      "LINE": 241,
+      "METHOD": 25,
+      "CLASS": 2,
+      "BRANCH": 150
+    },
+    "classes": [
+      {
+        "className": "dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig",
+        "crc": "e7957cc681f49cc4",
+        "counters": {
+          "BRANCH": {
+            "missed": 0,
+            "covered": 70
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 114
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 12
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        }
+      },
+      {
+        "className": "dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfig",
+        "crc": "94460c1f19430748",
+        "counters": {
+          "BRANCH": {
+            "missed": 0,
+            "covered": 80
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 127
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 13
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        }
+      }
+    ]
+  },
+  "static": {
+    "checkstyle": 0,
+    "spotbugs": 0,
+    "pmd": [
+      {
+        "fixture": "ApiNonSecretConfigTest.java",
+        "line": 191,
+        "rule": "CloseResource",
+        "localReason": "worker pool released in finally via shutdownNow and finite termination assertion"
+      },
+      {
+        "fixture": "ApiNonSecretConfigTest.java",
+        "line": 191,
+        "rule": "DoNotUseThreads",
+        "localReason": "private bounded four-worker JVM-only fixture with 32 inputs, deadline per future and finite termination"
+      },
+      {
+        "fixture": "ApiNonSecretConfigTest.java",
+        "line": 195,
+        "rule": "DoNotUseThreads",
+        "localReason": "private bounded four-worker JVM-only fixture with 32 inputs, deadline per future and finite termination"
+      },
+      {
+        "fixture": "ApiNonSecretConfigTest.java",
+        "line": 198,
+        "rule": "DoNotUseThreads",
+        "localReason": "private bounded four-worker JVM-only fixture with 32 inputs, deadline per future and finite termination"
+      },
+      {
+        "fixture": "ApiNonSecretConfigTest.java",
+        "line": 199,
+        "rule": "DoNotUseThreads",
+        "localReason": "private bounded four-worker JVM-only fixture with 32 inputs, deadline per future and finite termination"
+      },
+      {
+        "fixture": "WebNonSecretConfigTest.java",
+        "line": 226,
+        "rule": "CloseResource",
+        "localReason": "worker pool released in finally via shutdownNow and finite termination assertion"
+      },
+      {
+        "fixture": "WebNonSecretConfigTest.java",
+        "line": 226,
+        "rule": "DoNotUseThreads",
+        "localReason": "private bounded four-worker JVM-only fixture with 32 inputs, deadline per future and finite termination"
+      },
+      {
+        "fixture": "WebNonSecretConfigTest.java",
+        "line": 230,
+        "rule": "DoNotUseThreads",
+        "localReason": "private bounded four-worker JVM-only fixture with 32 inputs, deadline per future and finite termination"
+      },
+      {
+        "fixture": "WebNonSecretConfigTest.java",
+        "line": 233,
+        "rule": "DoNotUseThreads",
+        "localReason": "private bounded four-worker JVM-only fixture with 32 inputs, deadline per future and finite termination"
+      },
+      {
+        "fixture": "WebNonSecretConfigTest.java",
+        "line": 234,
+        "rule": "DoNotUseThreads",
+        "localReason": "private bounded four-worker JVM-only fixture with 32 inputs, deadline per future and finite termination"
+      }
+    ],
+    "pmdSuppressions": 0,
+    "typedNullAwayExecuted": false
+  },
+  "toolInputAndPrivateStageReceipts": [
+    {
+      "path": "../pgpt-runs/PG379/PG43118-nonsecret-config-independent-concurrent-oracles-v3/begin.json",
+      "sha256": "e371cf925ddd62ae9b8485e89cdfb15c8f02770d340b2c641151dc0d28094d98"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43118-nonsecret-config-independent-concurrent-oracles-v3/terminal.json",
+      "sha256": "706e70d78de341e5ff053a8fa663390c74250484833eff51ed5ed3134fa139a4"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43118-nonsecret-config-independent-concurrent-oracles-v3/pmd.xml",
+      "sha256": "b370ba112233bcbe8823d8265e0e47f579eb4e6701a6ec98159ee543294e22a7"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43118-nonsecret-config-independent-concurrent-oracles-v3/spotbugs.xml",
+      "sha256": "40352a2694bde2a14442ce42591ee4d397c3e87f632fc4919bd5bda27e9a631b"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43118-nonsecret-config-independent-concurrent-oracles-v3/unit.exec",
+      "sha256": "2353812de995616fb25b469155c9ff23f5460ee9b74715baae4c6d4475685976"
+    }
+  ],
+  "publicEvidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43118-nonsecret-config-independent-concurrent-oracles-v3/sanitized-junit.xml",
+      "sha256": "3dac6a338e3aa5253efebff2e7229ff94bbcebd3a6d0f72e03f5881b34d83995"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43118-nonsecret-config-independent-concurrent-oracles-v3/coverage-unfiltered.tsv",
+      "sha256": "d9e40e84b468e41c78dc287606843a285a52b7bb2cffc587c07b5c8e4d708b75"
+    }
+  ],
+  "externalConnections": 0,
+  "externalCredentialsRead": 0,
+  "outstanding": [
+    "P018-01 runtime ownership and credential delivery",
+    "formal six-module 451",
+    "QA-056 and other held operations"
+  ],
+  "formalAcceptanceId": null,
+  "whole451": false
+}
