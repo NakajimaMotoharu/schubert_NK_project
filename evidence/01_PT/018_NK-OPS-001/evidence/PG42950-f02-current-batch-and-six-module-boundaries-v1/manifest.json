@@ -1,0 +1,138 @@
+{
+  "run": "PG42950",
+  "source": "44e32a2211d35b950f75c8095ac6736d467a918a",
+  "lastCrossModuleCandidate": "e8368d22c4da2ec841f008df793594d3be9066af",
+  "mainDelta": [
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java"
+  ],
+  "oldRegular": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42664-f02-post-jackson-four-regular-artifacts-v1/manifest.json",
+    "sha256": "c690802d2133f1764689af06a54cf4c4ce11ed0b012d7aaf8f3e1a94573c5808"
+  },
+  "mavenModel": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42666-f02-maven-enforcer-six-current-model-v1/manifest.json",
+    "sha256": "b564cf804a60ed4a636178376ec3fb17c38a3a98fec6d380e789bf50aa5cc779"
+  },
+  "previousHandoff": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42886-current-six-product-handoff-delta-v1/manifest.json",
+    "sha256": "19fd04a5d9548c69451f773c347ba95ad84feebc29495605ccdd3bffe768898d"
+  },
+  "newBatch": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42942-current-batch-typed-close-build-v1/manifest.json",
+    "sha256": "fc66306a0b8b98b2621260e5eb526c19a20ce9c38c840cc533602642baa4dc4c"
+  },
+  "actualBatchTests": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42940-batch-type-owned-jdbc-close-v1/manifest.json",
+    "sha256": "e159fa3b50530a90f9cca04d6dc6134052c03f2383537bfdb4e5919aaec23dd9"
+  },
+  "rootAndModulePomModelDifferences": 0,
+  "wrapperDifference": {
+    "path": ".mvn/wrapper/maven-wrapper.properties",
+    "addChecksumOnly": true,
+    "outsideDirectMavenCommand": true,
+    "priorChecksumProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42734-p01802-maven-wrapper-distribution-checksum-v1/manifest.json",
+      "sha256": "d8636fa75c3bf219ea6e405b90c26171db98d76dfbe899816046ad77d3f47e94"
+    },
+    "priorExistingCacheProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42736-p01802-maven-wrapper-existing-cache-v1/manifest.json",
+      "sha256": "ccecd69ee384630216bf7466614e61aeae4ab09402383c43a5583e855d4f15bb"
+    }
+  },
+  "auditPrecheck": {
+    "attempts": 2,
+    "initialExit": 1,
+    "reason": "input equality guard included the Maven wrapper checksum pin; no public proof written and no Maven/Java executed",
+    "reconciledByExplicitWrapperDelta": true
+  },
+  "modelEvidenceStatus": "UNCHANGED_POM_MAVEN_MODEL_ONLY",
+  "targets": {
+    "protocol": {
+      "javaMain": 169,
+      "regularCandidate": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42624-current-protocol-maven-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+        "sha256": "2e11940216614fbe48e663fd83400f1fe3cf1cd9fc626214c954aaddb8c0407f"
+      },
+      "regularPhysical": 176,
+      "qualification": "UNCHANGED_MODULE_INPUT_REUSE",
+      "remaining": "whole 451 and actual aggregate on final candidate"
+    },
+    "storage": {
+      "javaMain": 25,
+      "regularCandidate": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+        "sha256": "ec7e4054459901003d0c3c4e0e186560f37cd77e0e6a1f26b9a78c2075186ebe"
+      },
+      "regularPhysical": 79,
+      "qualification": "UNCHANGED_MODULE_INPUT_REUSE",
+      "remaining": "SSC461 JDBC path and qualified external JDBC behavior"
+    },
+    "bootstrap": {
+      "javaMain": 88,
+      "regularCandidate": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+        "sha256": "4a3de8b3dfe415c5171f42478f06e63b21f982be13cbd232131daf35dbd498d5"
+      },
+      "regularPhysical": 201,
+      "qualification": "UNCHANGED_MODULE_INPUT_REUSE",
+      "remaining": "native physical owner and integrated FFM/start scope"
+    },
+    "batch": {
+      "javaMain": 203,
+      "regularCandidate": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42942-current-batch-typed-close-build-v1/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+        "sha256": "270b004e2687fb533030da79423db3cc489cc27d605000778c8a247e12966944"
+      },
+      "regularPhysical": 660,
+      "qualification": "NEW_BATCH_CURRENT_SOURCE",
+      "remaining": "remaining held/unmeasured physical, real service owner, independent whole 451"
+    },
+    "api": {
+      "javaMain": 286,
+      "regularCandidate": null,
+      "regularPhysical": null,
+      "qualification": "MISSING",
+      "remaining": "regular artifact, QA-056 direct and transitive scope, integrated DB/JMS"
+    },
+    "web": {
+      "javaMain": 262,
+      "regularCandidate": null,
+      "regularPhysical": null,
+      "qualification": "MISSING",
+      "remaining": "regular artifact, QA-056 direct and transitive scope, HTTP/browser"
+    }
+  },
+  "regularCount": 4,
+  "regularPhysical": 1116,
+  "targetProductModules": 6,
+  "javaMain": 1033,
+  "originalRequirements": [
+    "SYS-001",
+    "SYS-002",
+    "SYS-003",
+    "SYS-004",
+    "SYS-005",
+    "SYS-006",
+    "SYS-007",
+    "SYS-008",
+    "SYS-009",
+    "SYS-010",
+    "SYS-012",
+    "SYS-013",
+    "SYS-014"
+  ],
+  "liveOwnerHolds": [
+    "QA-056 four types",
+    "F03 32 tests",
+    "Root11",
+    "native",
+    "literal DB and JMS",
+    "owner receipt"
+  ],
+  "wholeF02": false,
+  "whole451": false,
+  "additionalAppTests": 0,
+  "externalOperations": 0,
+  "formalAcceptanceId": null,
+  "terminalAtUTC": "2026-11-22T19:26:33.666399+00:00"
+}
