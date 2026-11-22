@@ -5,11 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.charset.StandardCharsets;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
@@ -46,19 +49,19 @@ final class MusicLogicalIdTest {
       "0564ecbbe255b5a8becc224a22b077fd71ac41592f1ffa5dd4f789e9ec0c4392";
 
   @Test
-  void asciiPrefixAndUtf8MatchTheFixedIndependentSha256Vector() throws Exception {
+  void asciiPrefixAndUtf8MatchTheFixedIndependentSha256Vector() throws NoSuchAlgorithmException {
     assertEquals(EXPECTED_ASCII, new MusicLogicalId().fromDisplayPath(ASCII_PATH));
   }
 
   @Test
-  void japanesePathUsesUtf8AndLowercase64Hex() throws Exception {
+  void japanesePathUsesUtf8AndLowercase64Hex() throws NoSuchAlgorithmException {
     String result = new MusicLogicalId().fromDisplayPath("音楽/曲.flac");
     assertEquals(EXPECTED_JAPANESE, result);
     assertTrue(result.matches("[0-9a-f]{64}"));
   }
 
   @Test
-  void canonicalAndDecomposedFormsUseTheSameFixedNfcVector() throws Exception {
+  void canonicalAndDecomposedFormsUseTheSameFixedNfcVector() throws NoSuchAlgorithmException {
     var ids = new MusicLogicalId();
     assertEquals(EXPECTED_NFC, ids.fromDisplayPath(CANONICAL_E));
     assertEquals(EXPECTED_NFC, ids.fromDisplayPath(DECOMPOSED_E));
@@ -71,7 +74,8 @@ final class MusicLogicalIdTest {
   }
 
   @Test
-  void unpairedSurrogatesFailBeforeEncodingAndPairedScalarHasFixedVector() throws Exception {
+  void unpairedSurrogatesFailBeforeEncodingAndPairedScalarHasFixedVector()
+      throws NoSuchAlgorithmException {
     reject("\ud800");
     reject("\udc00");
     assertEquals(EXPECTED_PAIRED, new MusicLogicalId().fromDisplayPath(SUPPLEMENTARY));
@@ -84,7 +88,7 @@ final class MusicLogicalIdTest {
   }
 
   @Test
-  void asciiOneAnd512BytesHaveFixedVectorsWhile513IsRejected() throws Exception {
+  void asciiOneAnd512BytesHaveFixedVectorsWhile513IsRejected() throws NoSuchAlgorithmException {
     var ids = new MusicLogicalId();
     assertEquals(EXPECTED_ASCII_ONE, ids.fromDisplayPath(ASCII_A));
     assertEquals(EXPECTED_ASCII_MAX, ids.fromDisplayPath(ASCII_A.repeat(512)));
@@ -92,7 +96,7 @@ final class MusicLogicalIdTest {
   }
 
   @Test
-  void byteCeilingAppliesAfterNfcRatherThanToThe768ByteSource() throws Exception {
+  void byteCeilingAppliesAfterNfcRatherThanToThe768ByteSource() throws NoSuchAlgorithmException {
     String source = DECOMPOSED_E.repeat(256);
     assertEquals(768, source.getBytes(StandardCharsets.UTF_8).length);
     assertEquals(512, CANONICAL_E.repeat(256).getBytes(StandardCharsets.UTF_8).length);
@@ -102,7 +106,8 @@ final class MusicLogicalIdTest {
   }
 
   @Test
-  void supplementary128ScalarsAre512Utf8BytesRatherThan256Characters() throws Exception {
+  void supplementary128ScalarsAre512Utf8BytesRatherThan256Characters()
+      throws NoSuchAlgorithmException {
     String maximum = SUPPLEMENTARY.repeat(128);
     assertEquals(512, maximum.getBytes(StandardCharsets.UTF_8).length);
     assertEquals(EXPECTED_SUPPLEMENTARY_MAX, new MusicLogicalId().fromDisplayPath(maximum));
@@ -110,7 +115,8 @@ final class MusicLogicalIdTest {
   }
 
   @Test
-  void caseWhitespaceSeparatorsAndPunctuationAreNotTrimmedOrRewritten() throws Exception {
+  void caseWhitespaceSeparatorsAndPunctuationAreNotTrimmedOrRewritten()
+      throws NoSuchAlgorithmException {
     var ids = new MusicLogicalId();
     var vectors =
         List.of(
@@ -127,7 +133,8 @@ final class MusicLogicalIdTest {
   }
 
   @Test
-  void fixedRedactionAndIndependentSuccessDoNotRetainRejectedMetadata() throws Exception {
+  void fixedRedactionAndIndependentSuccessDoNotRetainRejectedMetadata()
+      throws NoSuchAlgorithmException {
     reject("private\u0000metadata");
     var ids = new MusicLogicalId();
     assertEquals("MusicLogicalId[REDACTED]", ids.toString());
@@ -135,7 +142,8 @@ final class MusicLogicalIdTest {
   }
 
   @Test
-  void finiteWorkersUseFreshDigestsForTheSameStatelessIdentity() throws Exception {
+  void finiteWorkersUseFreshDigestsForTheSameStatelessIdentity()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var ids = new MusicLogicalId();
     var executor = Executors.newFixedThreadPool(WORKERS);
     try {

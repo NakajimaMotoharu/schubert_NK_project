@@ -10,9 +10,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
@@ -160,7 +162,8 @@ final class PostgresCopyTextEncoderTest {
   }
 
   @Test
-  void copy012ConcurrentCallsHaveSeparateOutputOwnership() throws Exception {
+  void copy012ConcurrentCallsHaveSeparateOutputOwnership()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var workers = Executors.newFixedThreadPool(8);
     var futures = new ArrayList<Future<?>>();
     try {
