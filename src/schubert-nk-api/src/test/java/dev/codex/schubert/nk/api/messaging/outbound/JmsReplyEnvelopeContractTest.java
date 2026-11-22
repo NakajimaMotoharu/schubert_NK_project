@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.api.messaging.outbound;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -195,8 +196,9 @@ final class JmsReplyEnvelopeContractTest {
     JmsMessageFactory[] expected = {JmsMessageFactory.INSTANCE};
     JmsMessageFactory[] first = JmsMessageFactory.values();
     assertArrayEquals(expected, first);
-    first[0] = null;
-    assertArrayEquals(expected, JmsMessageFactory.values());
+    JmsMessageFactory[] next = JmsMessageFactory.values();
+    assertNotSame(first, next);
+    assertArrayEquals(expected, next);
     assertSame(JmsMessageFactory.INSTANCE, JmsMessageFactory.valueOf("INSTANCE"));
     assertThrows(IllegalArgumentException.class, () -> JmsMessageFactory.valueOf("NOT_A_FACTORY"));
   }

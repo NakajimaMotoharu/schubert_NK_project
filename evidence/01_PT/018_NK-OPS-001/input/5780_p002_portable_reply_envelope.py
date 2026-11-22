@@ -43,9 +43,12 @@ def git(*args):
     return subprocess.check_output(["git", *args], cwd=ROOT, timeout=25)
 
 
-def main(enum_contract):
+def main(enum_contract_version):
+    enum_contract = enum_contract_version is not None
     point, = RECORDS.glob("3407_*" if enum_contract else "3405_*")
     start = get(point)["values"]
+    if enum_contract_version == "v2":
+        start["run"] = start["run"].removesuffix("-v1") + "-v2"
     core = start["productionCoreMain"]
     seed = git("rev-parse", "HEAD").decode().strip()
     if not enum_contract:
@@ -161,5 +164,5 @@ def main(enum_contract):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--enum-contract", action="store_true")
+    parser.add_argument("--enum-contract", nargs="?", choices=("v1", "v2"), const="v1")
     raise SystemExit(main(parser.parse_args().enum_contract))
