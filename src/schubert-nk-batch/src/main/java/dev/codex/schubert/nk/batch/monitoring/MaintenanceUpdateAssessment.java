@@ -14,9 +14,15 @@ public final class MaintenanceUpdateAssessment {
   private MaintenanceUpdateAssessment() {}
 
   public enum UpdateResult {
-    SUCCESS,
-    WARNING,
-    UNVERIFIED
+    SUCCESS(Decision.CONDITIONS_MET),
+    WARNING(Decision.CONDITIONS_MET_WITH_WARNING),
+    UNVERIFIED(Decision.KEEP_PRIVATE);
+
+    private final Decision afterConfirmedChecks;
+
+    UpdateResult(Decision afterConfirmedChecks) {
+      this.afterConfirmedChecks = afterConfirmedChecks;
+    }
   }
 
   public enum Observation {
@@ -92,11 +98,7 @@ public final class MaintenanceUpdateAssessment {
         || update == null) {
       return Decision.KEEP_PRIVATE;
     }
-    return switch (update) {
-      case SUCCESS -> Decision.CONDITIONS_MET;
-      case WARNING -> Decision.CONDITIONS_MET_WITH_WARNING;
-      case UNVERIFIED -> Decision.KEEP_PRIVATE;
-    };
+    return update.afterConfirmedChecks;
   }
 
   private static Observation present(@Nullable Observation result) {
