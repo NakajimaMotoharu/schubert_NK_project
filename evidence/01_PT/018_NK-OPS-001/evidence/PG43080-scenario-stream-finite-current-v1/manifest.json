@@ -1,0 +1,219 @@
+{
+  "run": "PG43080-scenario-stream-finite-current-v1",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T22:29:58.310141+00:00",
+  "source": "60141d2708b6169f6c0a26bbab10c3f87352cc7e",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-P008-03/2",
+  "design": "SS333 §4～5",
+  "testId": [
+    "PT-SCN-008-W04",
+    "PT-SCN-008-W05"
+  ],
+  "tests": [
+    "w05PartialWritesRemainBoundedAndForceOnlyAfterAll4800Bytes",
+    "w05PreflightRejectsNullCountSequenceAndInvalidLastRecordBeforeAnyIo",
+    "w05ZeroNegativeWriteIoForceClosedAndNonfreshChannelsFailWithoutImplicitClose",
+    "w04One201And10000RecordsMatchEveryGoldenByteAndIndependentDigest",
+    "w04ImmutablePreparedRecordsSupportConcurrentIndependentChannels"
+  ],
+  "counts": {
+    "success": 5,
+    "failure": 0,
+    "error": 0,
+    "skip": 0
+  },
+  "newDefinitions": 0,
+  "checkedInputs": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/ScenarioRecordStream.java",
+      "sha256": "c86d8e01903b09c050187c4da462e82279b86eb638d8a2e1f12ecbc09b80f2ae"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/package-info.java",
+      "sha256": "81360fb14c321eed795fb7fa2d68b5afabca317e44f41ab5b5ef9bf8844c3532"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/ScenarioRecordStreamTest.java",
+      "sha256": "cbc0edea1e3f26aac0a557a16f9edf8e2ebf1d0953bdea1b35aa71ce72e52870"
+    }
+  ],
+  "protocol": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42624-current-protocol-maven-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+    "sha256": "2e11940216614fbe48e663fd83400f1fe3cf1cd9fc626214c954aaddb8c0407f"
+  },
+  "qualifiedStorage": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43080-scenario-stream-finite-current-v1/qualified-storage-exceptions.jar",
+    "sha256": "bbdb367e741b2da7a25fdcca2127a7dac10ae0e2c915a508813392caf33bdc0a"
+  },
+  "storageNames": [
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason.class",
+    "dev/codex/schubert/nk/storage/StorageIoException.class"
+  ],
+  "jdk": "25.0.4",
+  "jacoco": "0.8.15",
+  "junitPlatform": "1.13.4",
+  "command": "python3 -B evidence/01_PT/018_NK-OPS-001/input/5769_p00803_current_record_stream.py",
+  "stages": {
+    "format": 0,
+    "style": 0,
+    "compileNullaway": 0,
+    "fixtures": 0,
+    "junit": 0,
+    "rawCompile": 0,
+    "unfiltered": 0,
+    "pmd": 4,
+    "spotbugs": 1
+  },
+  "mainCrc64": "ecc9432f4815dd45",
+  "coverage": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 145
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 16
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 30
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 14
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 6
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "wholeProductCoverage": false,
+  "pmdFindings": [
+    {
+      "path": "ScenarioRecordStreamTest.java",
+      "line": 64,
+      "rule": "CloseResource"
+    },
+    {
+      "path": "ScenarioRecordStreamTest.java",
+      "line": 64,
+      "rule": "DoNotUseThreads"
+    },
+    {
+      "path": "ScenarioRecordStreamTest.java",
+      "line": 80,
+      "rule": "DoNotUseThreads"
+    },
+    {
+      "path": "ScenarioRecordStreamTest.java",
+      "line": 86,
+      "rule": "DoNotUseThreads"
+    },
+    {
+      "path": "ScenarioRecordStreamTest.java",
+      "line": 87,
+      "rule": "DoNotUseThreads"
+    }
+  ],
+  "spotbugsFindings": [
+    {
+      "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+      "line": 110
+    },
+    {
+      "rule": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "line": 187
+    },
+    {
+      "rule": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "line": 63
+    },
+    {
+      "rule": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "line": 93
+    },
+    {
+      "rule": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "line": 133
+    }
+  ],
+  "typedMainFindings": 0,
+  "ownedTempFinalEntries": 0,
+  "physicalOriginRoster": [
+    "dev.codex.schubert.nk.api.storage.ScenarioRecordStream",
+    "dev.codex.schubert.nk.api.storage.ScenarioRecordStreamTest",
+    "dev.codex.schubert.nk.api.storage.ScenarioRecordStreamTest$FaultChannel",
+    "dev.codex.schubert.nk.protocol.codec.FieldCodec",
+    "dev.codex.schubert.nk.protocol.codec.FieldEncodingException",
+    "dev.codex.schubert.nk.protocol.codec.MessageEncodingException",
+    "dev.codex.schubert.nk.protocol.codec.PayloadCodec",
+    "dev.codex.schubert.nk.protocol.codec.PermanentProtocolException",
+    "dev.codex.schubert.nk.protocol.file.LargeResultContent",
+    "dev.codex.schubert.nk.protocol.header.InteractionKind",
+    "dev.codex.schubert.nk.protocol.header.MessageKind",
+    "dev.codex.schubert.nk.protocol.layout.FieldArea",
+    "dev.codex.schubert.nk.protocol.layout.FieldDefinition",
+    "dev.codex.schubert.nk.protocol.layout.FieldValue",
+    "dev.codex.schubert.nk.protocol.layout.FieldValue$Numeric",
+    "dev.codex.schubert.nk.protocol.layout.FieldValue$Text",
+    "dev.codex.schubert.nk.protocol.layout.FieldValue$Unset",
+    "dev.codex.schubert.nk.protocol.layout.FieldValueSet",
+    "dev.codex.schubert.nk.protocol.layout.LayoutDefinition",
+    "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalog",
+    "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalog$MutableFields",
+    "dev.codex.schubert.nk.protocol.layout.LayoutFields",
+    "dev.codex.schubert.nk.protocol.layout.LayoutId",
+    "dev.codex.schubert.nk.protocol.layout.LayoutRegistry",
+    "dev.codex.schubert.nk.protocol.layout.LayoutValidationException",
+    "dev.codex.schubert.nk.protocol.layout.Padding",
+    "dev.codex.schubert.nk.protocol.layout.PayloadRecord",
+    "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidator",
+    "dev.codex.schubert.nk.protocol.layout.Presence",
+    "dev.codex.schubert.nk.protocol.layout.TypedFieldValues",
+    "dev.codex.schubert.nk.protocol.layout.UnsupportedLayoutException",
+    "dev.codex.schubert.nk.protocol.layout.WireType",
+    "dev.codex.schubert.nk.protocol.layout.scenario.ScenarioEntryRecord",
+    "dev.codex.schubert.nk.protocol.layout.semantic.DisplayPath",
+    "dev.codex.schubert.nk.protocol.layout.semantic.EntryId",
+    "dev.codex.schubert.nk.protocol.layout.semantic.EntryType",
+    "dev.codex.schubert.nk.protocol.layout.semantic.IdValue",
+    "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolId",
+    "dev.codex.schubert.nk.protocol.layout.semantic.WireEnum",
+    "dev.codex.schubert.nk.storage.StorageIoException",
+    "dev.codex.schubert.nk.storage.StorageIoException$Reason"
+  ],
+  "receipts": [
+    {
+      "path": "../pgpt-runs/PG379/PG43080-scenario-stream-finite-current-v1/begin.json",
+      "sha256": "d5abc3cedb8bbb48dd96bcc7f46d31d3060ae2944ad011b6b6c12d03a547445c"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43080-scenario-stream-finite-current-v1/terminal.json",
+      "sha256": "418041ea1aa49d22dd79c89e780dfa88f523626c834033bfa3001ca0ceca6b93"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43080-scenario-stream-finite-current-v1/pmd.xml",
+      "sha256": "2952ec166765db8e2922729eaf6a551f8b74c554e4d0cd36de9c096a07fe47a6"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43080-scenario-stream-finite-current-v1/spotbugs.xml",
+      "sha256": "9552fd1ade216f899cef6d2f6946adf2a89652baa1b771ba206c87e7fd016d8d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43080-scenario-stream-finite-current-v1/coverage-unfiltered.tsv",
+      "sha256": "21e7ef9054462439186abe36ce827ab2b38c5b38373cc434f3ec53114826806f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43080-scenario-stream-finite-current-v1/sanitized-junit.xml",
+      "sha256": "e4afc01c65ed45f52c64eb248d492d1686d02148acb3b94fc0d47843834a7714"
+    }
+  ],
+  "nextGap": "Fixture narrow declarations for 4 SpotBugs checks, intentional negative null preserved and five raw finite-thread PMD issues need classification.",
+  "actualWriterOrNativeOrExternalActions": 0,
+  "formalAcceptanceId": null
+}

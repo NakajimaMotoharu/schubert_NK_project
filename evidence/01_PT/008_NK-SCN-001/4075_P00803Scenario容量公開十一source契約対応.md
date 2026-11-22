@@ -21,3 +21,9 @@ SS333 §13、PG-D-057。メモリ基準128 byte・7件、4800 byteの一予約�
 PG43068、2026-11-23 JST。製品 `87927ea17c`／試験 `ccc0aa4f5d`。元5＋競合1は成功6、対象五物理の分岐24/24。例外時finallyや未測定の生成methodは生結果に保持する。NullAwayとCheckstyleに指摘なし。型付き警告は試験側のPMD26とSpotBugs2の適用性確認へ渡した。実root、実容量、配備と正式451は継続。[PG43068 manifest](../018_NK-OPS-001/evidence/PG43068-transfer-capacity-same-reservation-race-v1/manifest.json)
 
 PG43072、2026-11-23 JST。試験source `264eba95c8`。既予約をassertionやworker失敗時も解放し、取得済みの一つのworker返却予約を同holderから閉じる。旧5＋独立競合1の6成功。SpotBugs0、PMDの生21件を各位置の根拠とともに保持。五対象の分岐24/24、未測定の命令・行・生成methodは継続。[PG43072 manifest](../018_NK-OPS-001/evidence/PG43072-capacity-older-fixture-reservations-v1/manifest.json)
+
+## PT-SCN-008-W04／W05 現候補のレコード生成
+
+同一Core `87927ea17c`・試験snapshot `60141d2708`。旧試験の実行待機を有限化したfixtureをPG43080で再資格。独立期待はSS333 §4～5、UI234のbyte offsetと固定値で作る4800-byte record、別の固定formatとSHA-256、1／201／10000件、16 jobs/8 workers。JDK一時領域内の借用channelだけを使用する。正常部分書込、0/負数、write/force例外、既close、非fresh、null、件数超過、末尾record違反を既存五件で照合。全5成功、同一execの生L30/M6/C1/B16の全数、終了時の一時領域0件。NullAway／Checkstyle指摘0、PMD5・SpotBugs5はfixture側。変更試験の待機とcleanupあり。Writer本体の7件、native、実FileStore、正式451は別途判定。
+
+[PG43078 現候補への適用点](../018_NK-OPS-001/evidence/PG43078-scenario-writer-current-evidence-v1/manifest.json) SHA-256 `70212233f088ff5e9acbdb9c8d3ab941231948f88794e4ffab4b8489948265c5`。 [PG43080 同候補レコードPT](../018_NK-OPS-001/evidence/PG43080-scenario-stream-finite-current-v1/manifest.json) SHA-256 `a46b0265cabb29b0aec28ebd8becb9610fa0c3a0bfcc0bb5df99e4f45a38acbb`。

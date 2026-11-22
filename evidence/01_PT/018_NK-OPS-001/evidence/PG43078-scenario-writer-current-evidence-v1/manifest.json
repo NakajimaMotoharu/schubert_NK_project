@@ -1,0 +1,150 @@
+{
+  "run": "PG43078-scenario-writer-current-evidence-v1",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T22:28:12.241503+00:00",
+  "source": "60141d2708b6169f6c0a26bbab10c3f87352cc7e",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-P008-03/2",
+  "design": "SS333 §4～7, §13",
+  "writerStaticGitIdentities": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/ScenarioFileWriter.java",
+      "oldSource": "e353b1f49a740a426031fdc199f7ce8b26081971",
+      "oldBlob": "bf9fa6f55ea4caa8e6c149084ce126c60861dd9a",
+      "currentBlob": "bf9fa6f55ea4caa8e6c149084ce126c60861dd9a"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/TransferFileIo.java",
+      "oldSource": "e353b1f49a740a426031fdc199f7ce8b26081971",
+      "oldBlob": "53917b0ff2004bd6caa4a2bea3351f9b4771c4b2",
+      "currentBlob": "53917b0ff2004bd6caa4a2bea3351f9b4771c4b2"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/HeldTransferFileIo.java",
+      "oldSource": "e353b1f49a740a426031fdc199f7ce8b26081971",
+      "oldBlob": "5c6336d1c93a5d70e7469a01d4e363c826118a6c",
+      "currentBlob": "5c6336d1c93a5d70e7469a01d4e363c826118a6c"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/TransferCapacity.java",
+      "oldSource": "e353b1f49a740a426031fdc199f7ce8b26081971",
+      "oldBlob": "33e2990f3c477f22c13c36651346d0e5fefef532",
+      "currentBlob": "33e2990f3c477f22c13c36651346d0e5fefef532"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/TransferContentVerifier.java",
+      "oldSource": "e353b1f49a740a426031fdc199f7ce8b26081971",
+      "oldBlob": "5ae25f0a101860026a825499d50226f5848f2ae7",
+      "currentBlob": "83855f29ed9d4755738d6a98ef6e829a9e1a52af"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/ScenarioFileWriterTest.java",
+      "oldSource": "e353b1f49a740a426031fdc199f7ce8b26081971",
+      "oldBlob": "484d2be45dcd64050f1ee082c64fdd394eaf9d0f",
+      "currentBlob": "58fbe14cf45e8866a0bf4a89ab6b03bc30786862"
+    }
+  ],
+  "writerOldCaseCredit": 0,
+  "writerCurrentCaseCredit": 0,
+  "writerCasesRequiringQualifiedScope": [
+    {
+      "testId": "W07",
+      "cases": [
+        "w07ExistingDateIsValidatedNotRepairedAndDateBoundaryUsesJst",
+        "w07GoldenFilesHaveJstDateExactDescriptorAndNewOnlySharedGroupPermissions"
+      ],
+      "criteria": "JST dates, descriptor bytes and existing-owner permissions"
+    },
+    {
+      "testId": "W08",
+      "cases": [
+        "w08NullBoundsAndCapacityRejectBeforeCreatingFiles",
+        "w08PartAndReadyCollisionsRetryThreeTimesWithoutDeletingExistingBytes"
+      ],
+      "criteria": "nonreplacement, reservation and finite collision retries"
+    },
+    {
+      "testId": "W09",
+      "cases": [
+        "w09PrepublicationFailuresCleanOnlyOwnedPartAndReleaseReservation",
+        "w09UnconfirmedCleanupAndPublishedFailuresRetainFullQuotaAndNeverDeleteReady"
+      ],
+      "criteria": "part-only cleanup, reservation risk and ready remains intact"
+    },
+    {
+      "testId": "W10",
+      "cases": [
+        "w10ConcurrentDefaultCsprngPublishersHaveDistinctFilesAndExactSharedAccounting"
+      ],
+      "criteria": "distinct concurrent publication and exact accounting"
+    }
+  ],
+  "streamMainAndFixtureLineage": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/ScenarioRecordStream.java",
+      "oldSource": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+      "oldBlob": "c6a1e602da41981cdf02e4a7adfad3a82b7e2dd7",
+      "currentBlob": "c6a1e602da41981cdf02e4a7adfad3a82b7e2dd7"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/ScenarioRecordStreamTest.java",
+      "oldSource": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+      "oldBlob": "9848e6dba37d15aa358b9b8e4de93c60d2237718",
+      "currentBlob": "45278d08b2b59d0f135beeb73dd446c6df841439"
+    }
+  ],
+  "streamOriginalFiveMethods": [
+    "w04One201And10000RecordsMatchEveryGoldenByteAndIndependentDigest",
+    "w04ImmutablePreparedRecordsSupportConcurrentIndependentChannels",
+    "w05PreflightRejectsNullCountSequenceAndInvalidLastRecordBeforeAnyIo",
+    "w05PartialWritesRemainBoundedAndForceOnlyAfterAll4800Bytes",
+    "w05ZeroNegativeWriteIoForceClosedAndNonfreshChannelsFailWithoutImplicitClose"
+  ],
+  "streamCurrentFixtureRequiresRun": true,
+  "streamCurrentFixtureScope": "Own new synthetic temporary channels only. Separate class with no writer, native, real FileStore or external root calls.",
+  "currentProtocolContentAndDescriptor": [
+    "dev/codex/schubert/nk/protocol/file/LargeResultContent",
+    "dev/codex/schubert/nk/protocol/file/LargeResultDescriptor"
+  ],
+  "currentProtocolCoverage": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42624-f03-protocol-current-ordinary-171-and-unfiltered-v1/class-counters.tsv",
+    "sha256": "5561227dcb6400fec0a69a97e9c38473e9227f60cd9a70deb984061dc6e6109d"
+  },
+  "distinctPriorProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG12688-scenario-writer-host-v1/manifest.json",
+      "sha256": "6c1805f0ee828d482aa89190460811c30514422beec074b2ff604214990caff8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG15890-scenario-record-stream-five-independent-v1/manifest.json",
+      "sha256": "7aee60001f2663b25555ded009bc03b5d8628307009cf1fdf6e2f6c4cac2ea34"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG18522-ordinary-missing-class-packets-v1/manifest.json",
+      "sha256": "678369b0b2881246a4b0900420a7b4965b27282e7c8ffdddb8abb5b0fd4f466d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26854-scenario-transfer-contract-v1/manifest.json",
+      "sha256": "09748712a5554cdb2f1705f5679720b6b22cbcabba8a68bb4c7fb3f5fb24114a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26896-scenario-stream-finite-manufacture-v1/manifest.json",
+      "sha256": "926f7e1e257b53087058d3b2f86dcccc85f25e1cd33a76ac8135ba91c5587c6a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42624-f03-protocol-current-ordinary-171-and-unfiltered-v1/manifest.json",
+      "sha256": "6f0e070551dc9d6e36771fcdd31b2314e01118938949fffcdb487b5d04c4e747"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43062-transfer-verification-fatal-contract-v1/manifest.json",
+      "sha256": "6ca3d0858ba46bb9a43778cfcdaa49af5d90c8ef7cc08ca56da61c719bbaec35"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43072-capacity-older-fixture-reservations-v1/manifest.json",
+      "sha256": "620b325d39fff024fcf2298b86e954a560c90273b614062e85731273ef2c8577"
+    }
+  ],
+  "newProductExecutions": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
