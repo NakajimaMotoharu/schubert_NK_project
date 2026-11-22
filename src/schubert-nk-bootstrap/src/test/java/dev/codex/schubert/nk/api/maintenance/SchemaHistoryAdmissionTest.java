@@ -148,6 +148,34 @@ final class SchemaHistoryAdmissionTest {
   }
 
   @Test
+  void opsSchema014CurrentTailRequiresTheExactVersionScriptAndChecksum() throws SQLException {
+    String previousScript = "V029__strict_nullable_compound_checks.sql";
+    String currentScript = "V030__preserve_current_audio_role.sql";
+    var expected =
+        List.of(
+            SCHEMA_ROW,
+            new Row(1, "029", FIXTURE_SQL_5B7E398D, previousScript, 29, true),
+            new Row(2, "030", FIXTURE_SQL_5B7E398D, currentScript, -30, true));
+    var admission = new SchemaHistoryAdmission(expected);
+    var previous = versionedRow(1, "029", previousScript, 29);
+    var current = versionedRow(2, "030", currentScript, -30);
+    var exact = new Probe(List.of(schema(), previous, current));
+    assertEquals(expected, admission.inspect(exact.connection()));
+    assertArrayEquals(new int[] {1, 1, 0}, exact.closed);
+
+    for (var rows :
+        List.of(
+            List.of(schema(), previous),
+            List.of(schema(), previous, versionedRow(2, "031", "V031__unknown.sql", -30)),
+            List.of(schema(), previous, versionedRow(2, "030", "V030__different.sql", -30)),
+            List.of(schema(), previous, versionedRow(2, "030", currentScript, 30)))) {
+      var mismatch = new Probe(rows);
+      failed(() -> admission.inspect(mismatch.connection()));
+      assertArrayEquals(new int[] {1, 1, 0}, mismatch.closed);
+    }
+  }
+
+  @Test
   void opsSchema003ExpectedRowInvariantBoundaries() {
     assertThrows(NullPointerException.class, () -> new Row(0, null, null, "x", null, true));
     assertThrows(
@@ -444,6 +472,23 @@ final class SchemaHistoryAdmissionTest {
     row.put(FIXTURE_CHECKSUM_CCB2C25E, null);
     row.put(FIXTURE_SUCCESS_68E7A699, true);
     return row;
+  }
+
+  private static Map<String, Object> versionedRow(
+      int rank, String version, String script, int checksum) {
+    return Map.of(
+        FIXTURE_INSTALLED_RANK_C438B369,
+        rank,
+        FIXTURE_VERSION_43CCC4D0,
+        version,
+        "type",
+        FIXTURE_SQL_5B7E398D,
+        FIXTURE_SCRIPT_5BBD8BBB,
+        script,
+        FIXTURE_CHECKSUM_CCB2C25E,
+        checksum,
+        FIXTURE_SUCCESS_68E7A699,
+        true);
   }
 
   private static Map<String, Object> first() {
