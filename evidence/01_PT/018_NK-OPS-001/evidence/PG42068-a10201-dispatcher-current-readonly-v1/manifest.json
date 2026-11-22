@@ -1,0 +1,67 @@
+{
+  "run": "PG42068",
+  "source": "f2ade3c07b89faf23ae972d1ae3ed10ccc3009cb",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": [
+    "A1-02.01",
+    "WBS-P004-05/2"
+  ],
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T04:07:36.316468+00:00",
+  "prior": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41494-a10201-dispatcher-criteria-lineage-v1/manifest.json",
+    "sha256": "fd62da37dac4b80b31ac71a78adf50cc4b05fe4827093c651a31c4a2b21251f9"
+  },
+  "historicalXml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG463-caddy-fence-full/junit/api/TEST-dev.codex.schubert.nk.api.dispatch.ApiSyncRequestDispatcherTest.xml",
+    "sha256": "6987d0b6461db5138288ec8fcc6148d35d1ff7673f9d4854d90ab5497095b57e"
+  },
+  "originalHistoricalTestIds": "PT-JMS-DISPATCH-026-A..F",
+  "originalHistoricalCount": 6,
+  "comparedOnlyAdmittedSourceBlobs": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiSyncRequestDispatcher.java",
+      "older": "5a9ce6047efb644e49a658c0971380a72e378e58",
+      "current": "5a9ce6047efb644e49a658c0971380a72e378e58",
+      "unchanged": true
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/dispatch/ApiSyncRequestDispatcherTest.java",
+      "older": "14529226f489d2c1c6a292402f33dd63c1165cc6",
+      "current": "14529226f489d2c1c6a292402f33dd63c1165cc6",
+      "unchanged": true
+    },
+    {
+      "asset": "TemporaryInfrastructureException.java",
+      "decision": "QA-056 HOLD: no file or bytes consulted"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/SyncRequestProcessor.java",
+      "older": "345858e2ceb447814892f1c2d04a7a663138a4e3",
+      "current": "345858e2ceb447814892f1c2d04a7a663138a4e3",
+      "unchanged": true
+    }
+  ],
+  "protocolCurrent": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41526-protocol-qa054-canonical-rules-v1/manifest.json",
+    "sha256": "8a89feee4bfa2d6b08d3514ff44ab15eaa871f409d8cf152790570e363b21edb"
+  },
+  "protocolNewSources": [
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java"
+  ],
+  "exactCurrentFullCompile": false,
+  "currentNormalTestsExecuted": 0,
+  "formalAcceptanceId": null,
+  "whole451": false,
+  "unmet": [
+    "QA-056 applies to the imported TemporaryInfrastructureException; no held files/binaries were opened",
+    "current exact typed closure under regular API package",
+    "P004-05 official JDBC owner/commit/rollback/UTC/DB ending proof"
+  ],
+  "owners": [
+    "利用者 QA-056",
+    "API・DB担当",
+    "F02/F03 品質担当"
+  ],
+  "originalPriceUnchanged": true
+}

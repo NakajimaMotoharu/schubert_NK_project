@@ -1,0 +1,82 @@
+{
+  "eventId": "PGPT-20261008-7913",
+  "groupId": "20261122-a10201-dispatcher-current-scope-PG42068",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T04:06:45+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 15,
+      "remainingPercent": 85,
+      "resetsAt": 1795879772,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "source": "f2ade3c07b89faf23ae972d1ae3ed10ccc3009cb",
+    "productionCoreMain": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+    "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "run": "PG42068",
+    "workCategory": "CONTRACT_AUDIT",
+    "managementWorkIds": [
+      "A1-02.01"
+    ],
+    "previousCheckpoint": 2434,
+    "planRow": {
+      "新版ID": "A1-02.01",
+      "第58版ID": "A1-02.01",
+      "費用主担当項目": "P004-05",
+      "計画窓": "第2窓",
+      "予定期間・週末": "12/1–12/6 18時",
+      "作業・成果物": "旧未登録群の証跡照合・必要な通常PT api（ApiSyncRequestDispatcher.java）",
+      "先行ID・着手条件": "対象・所有・許可を確認",
+      "担当": "API・DB担当",
+      "旧短期残pp": "1.65",
+      "改訂残pp": "1.65",
+      "終了条件": "対象ごとの再利用根拠、必要な修正/通常PTの結果、又は未完と必要条件を記録。費用消化だけで閉鎖しない。",
+      "元項目の正式受入に必要な証拠": "残るAPI先行4行、実ApiJdbcPoolとJdbcSyncRequestProcessorのcommit・rollback、UTC、実DB後条件。",
+      "参照する元項目": "P004-05",
+      "lineNumber": 16
+    },
+    "currentPlan": [
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/11月22日_PGPT再開実行計画.txt",
+        "sha256": "80b9fdc306f664b9c03901a4bdfb34cf66997879676204cfa969858fd68a4016"
+      },
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/短期実行WBS.tsv",
+        "sha256": "a6efedcd63b4ef3bb1d133d939b0ddd7dc4b0147988ac33d668282a25c999527"
+      }
+    ],
+    "startScope": {
+      "target": [
+        "ApiSyncRequestDispatcher"
+      ],
+      "first": "再開計画2窓のP004-05先行、現対象と旧公開結果、型依存を読取照合",
+      "exit": "対象ごとの同source再利用と未成立の当候補の不足を明記、許可された差分だけ継続",
+      "holds": [
+        "QA-056と該当四型、保留実運用経路、JMS/DB/VM",
+        "静的でも個別HOLDの範囲は追試なし"
+      ]
+    },
+    "groupCapPp": 0.6,
+    "estimateAtGroupStartPp": {
+      "low": 0,
+      "base": 0.25,
+      "high": 0.6
+    },
+    "completedOriginalRowPricePp": 0,
+    "sourceOwnership": "LOCAL_DEV_FOUNDATION_TRACKED_SNAPSHOT",
+    "knownOwnedRunInProgress": 0,
+    "costRevision": "PMO-remaining-v3-20261010",
+    "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "actualAllocatedPp": null
+  }
+}
