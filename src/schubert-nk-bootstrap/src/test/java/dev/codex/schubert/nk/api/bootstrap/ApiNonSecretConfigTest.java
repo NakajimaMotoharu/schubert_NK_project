@@ -87,7 +87,7 @@ final class ApiNonSecretConfigTest {
   }
 
   @Test
-  void opsApiCfg002LayeredNonSecretOverridesAndScalarTypes() {
+  void opsApiCfg002LayeredNonSecretOverridesAndScalarTypes() throws NoSuchAlgorithmException {
     var config =
         ApiNonSecretConfig.parse(
             "nk.monitoring.mode: DEBUG\n",

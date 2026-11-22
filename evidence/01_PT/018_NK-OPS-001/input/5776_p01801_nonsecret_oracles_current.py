@@ -1,5 +1,6 @@
 """Run the original privately scoped 14 tests with independent canonical YAML oracles."""
 
+import argparse
 from datetime import datetime, timezone
 import hashlib
 import json
@@ -13,7 +14,7 @@ from zipfile import ZipFile
 ROOT = Path.cwd()
 STORE = (ROOT.parent / "pgpt-runs/PG379").resolve()
 PUBLISHED = Path("evidence/01_PT/018_NK-OPS-001/evidence")
-RUN_ID = "PG43118-nonsecret-config-independent-concurrent-oracles-v1"
+RUN_PREFIX = "PG43118-nonsecret-config-independent-concurrent-oracles"
 CORE = "87927ea17c1c8dbef528bc0c6882c24b1fe7c871"
 API = "dev/codex/schubert/nk/api/bootstrap"
 WEB = "dev/codex/schubert/nk/web/bootstrap"
@@ -51,8 +52,9 @@ def write(path, value):
         out.write(json.dumps(value, ensure_ascii=False,indent=2)+"\n")
 
 
-def main():
-    folder = STORE / RUN_ID
+def main(version):
+    run_id = f"{RUN_PREFIX}-{version}"
+    folder = STORE / run_id
     folder.mkdir(mode=0o700)
     for name in ("target/classes", "test", "meter", "xml", "fixture-repo/src/deployment/config"):
         (folder/name).mkdir(parents=True)
@@ -106,7 +108,7 @@ def main():
         "junit":[str(sdk/"java"),"-Dfile.encoding=UTF-8","-Duser.timezone=Asia/Tokyo",
                  "-Djunit.jupiter.extensions.autodetection.enabled=false","-Djunit.jupiter.execution.parallel.enabled=false",
                  "-Djunit.jupiter.execution.timeout.default=15 s",f"-Dnk.pt.repository={folder/'fixture-repo'}",
-                 f"{artifact}=destfile={folder/'unit.exec'},append=false,sessionid={RUN_ID}",
+                 f"{artifact}=destfile={folder/'unit.exec'},append=false,sessionid={run_id}",
                  "-cp",os.pathsep.join([str(folder/"test"),cp]),"org.junit.platform.console.ConsoleLauncher",
                  "execute","--disable-ansi-colors","--fail-if-no-tests","--reports-dir",str(folder/"xml")],
     }
@@ -154,5 +156,7 @@ def main():
          coverage=pin(folder/"unfiltered.stdout"),externalIo=0,controlledTemplateFiles=3))
 
 
-if __name__=="__main__":
-    main()
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--version", choices=("v1", "v2"), required=True)
+    main(parser.parse_args().version)
