@@ -1,0 +1,163 @@
+{
+  "run": "PG42452",
+  "source": "07b8d128c90fd8a62302ed3d41140bc6f9cf90db",
+  "javaCore": "b5d5009768a04bb69468beed2471441b2a57ce27",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-22T09:12:46.579167+00:00",
+  "ordinary": {
+    "passed": 20,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "testIds": {
+    "PT-MIG-MASTER001": "master001SixGoldenStreamsParentOrderAndBorrowedOwnership",
+    "PT-MIG-MASTER002": "master002AllEmptyDoesNotInventRowsOrWrites",
+    "PT-MIG-MASTER003": "master003BothConstructorNullBoundaries",
+    "PT-MIG-MASTER004": "master004UnknownSpeakerCannotReachAssembly",
+    "PT-MIG-MASTER005": "master005SpeakerGameMustMatchEntryGame",
+    "PT-MIG-MASTER006": "master006SpeakerAndEntryHaveOneTimestamp",
+    "PT-MIG-MASTER007": "master007NoEntryStillChecksSpeakerAgainstFile",
+    "PT-MIG-MASTER008": "master008NoScenarioStillChecksSpeakerAgainstAudio",
+    "PT-MIG-MASTER009": "master009NoScenarioOrAudioStillChecksSpeakerAgainstMedia",
+    "PT-MIG-MASTER010": "master010EmptySpeakersAllowsNarrationAndRejectsDialogue",
+    "PT-MIG-MASTER011": "master011EveryNullArgumentFailsBeforeFirstByte",
+    "PT-MIG-MASTER012": "master012EachIoFailureKeepsIdentityAndStopsLaterOutputs",
+    "PT-MIG-MASTER013": "master013EachRuntimeFailureKeepsIdentityAndStopsLaterOutputs",
+    "PT-MIG-MASTER014": "master014EachErrorKeepsIdentityAndStopsLaterOutputs",
+    "PT-MIG-MASTER015": "master015EveryPartialPrefixIsRetainedWithoutRetryOrClose",
+    "PT-MIG-MASTER016": "master016ImmutableComponentsRetainOnlySnapshots",
+    "PT-MIG-MASTER017": "master017DiagnosticsRemainFixedAndRedacted",
+    "PT-MIG-MASTER018": "master018FreshSuccessAfterFailureHasIndependentOutputs",
+    "PT-MIG-MASTER019": "master019GameTwoBoundaryIdsMicrosecondsAndDeclaredOrder",
+    "PT-MIG-MASTER020": "master020FiniteReadersUseIndependentMemoryAndTerminate"
+  },
+  "reachedScope": {
+    "product": [
+      "dev/codex/schubert/nk/migration/AssetMigrationManifest",
+      "dev/codex/schubert/nk/migration/AssetMigrationManifest$Entry",
+      "dev/codex/schubert/nk/migration/AssetMigrationManifest$Kind",
+      "dev/codex/schubert/nk/migration/AudioCopyDataset",
+      "dev/codex/schubert/nk/migration/AudioFileCopyRow",
+      "dev/codex/schubert/nk/migration/MediaAssetCopyBatch",
+      "dev/codex/schubert/nk/migration/MediaAssetCopyRow",
+      "dev/codex/schubert/nk/migration/MigrationCopyDataset",
+      "dev/codex/schubert/nk/migration/MigrationMasterCopyDataset",
+      "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder",
+      "dev/codex/schubert/nk/migration/PostgresCopyTextWriter",
+      "dev/codex/schubert/nk/migration/ScenarioCopyDataset",
+      "dev/codex/schubert/nk/migration/ScenarioEntryCopyBatch",
+      "dev/codex/schubert/nk/migration/ScenarioEntryCopyRow",
+      "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap",
+      "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$IdPair",
+      "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$MappedEntry",
+      "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap",
+      "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$PlacedEntry",
+      "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$Placement",
+      "dev/codex/schubert/nk/migration/ScenarioFileCopyBatch",
+      "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap",
+      "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$FilePair",
+      "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$MappedFile",
+      "dev/codex/schubert/nk/migration/SpeakerCopyBatch",
+      "dev/codex/schubert/nk/migration/SpeakerCopyRow"
+    ],
+    "test": [
+      "dev/codex/schubert/nk/migration/MigrationMasterCopyDatasetTest",
+      "dev/codex/schubert/nk/migration/MigrationMasterCopyDatasetTest$MemorySink"
+    ],
+    "allowed39PureProductInputs": true
+  },
+  "scope": {
+    "BRANCH": {
+      "covered": 32,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 26,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 6,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 1,
+      "missed": 0
+    }
+  },
+  "ruleSpec": {
+    "path": "evidence/01_PT/019_NK-MIG-001/064_Speaker含む六表宣言master組立・独立二十仕様.md",
+    "sha256": "2df34d86a7155c01539d7461ac482f8ae9719f24fdbee0498f93310a3772cba8"
+  },
+  "fixtureChangedSharedMethods": [
+    "content",
+    "fault",
+    "master001SixGoldenStreamsParentOrderAndBorrowedOwnership",
+    "master002AllEmptyDoesNotInventRowsOrWrites",
+    "master003BothConstructorNullBoundaries",
+    "master004UnknownSpeakerCannotReachAssembly",
+    "master005SpeakerGameMustMatchEntryGame",
+    "master006SpeakerAndEntryHaveOneTimestamp",
+    "master007NoEntryStillChecksSpeakerAgainstFile",
+    "master008NoScenarioStillChecksSpeakerAgainstAudio",
+    "master009NoScenarioOrAudioStillChecksSpeakerAgainstMedia",
+    "master010EmptySpeakersAllowsNarrationAndRejectsDialogue",
+    "master011EveryNullArgumentFailsBeforeFirstByte",
+    "master012EachIoFailureKeepsIdentityAndStopsLaterOutputs",
+    "master013EachRuntimeFailureKeepsIdentityAndStopsLaterOutputs",
+    "master014EachErrorKeepsIdentityAndStopsLaterOutputs",
+    "master015EveryPartialPrefixIsRetainedWithoutRetryOrClose",
+    "master016ImmutableComponentsRetainOnlySnapshots",
+    "master017DiagnosticsRemainFixedAndRedacted",
+    "master018FreshSuccessAfterFailureHasIndependentOutputs",
+    "master019GameTwoBoundaryIdsMicrosecondsAndDeclaredOrder",
+    "master020FiniteReadersUseIndependentMemoryAndTerminate",
+    "media",
+    "normal",
+    "write"
+  ],
+  "actualSdkCopyOrExternalIO": false,
+  "repeatedSameSource": 0,
+  "newExec": true,
+  "scopedCurrentStaticPending": true,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "evidence": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42452-f03-copy-dataset-current-v1/compile-plan.json",
+      "sha256": "22f6e0fef1b20b28686e8647028ff6dee5651d8d4c71135da4d35e2f0ff41fd1"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42452-f03-copy-dataset-current-v1/fixture-delta.json",
+      "sha256": "644ca02ce25d93861f890b83d500ee391adf0f5c408713973ac342e50894db59"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42452-f03-copy-dataset-current-v1/unit-plan.json",
+      "sha256": "a70ead96682fe91369ae6a5a3bb20c0d824abf1bacd99cec8000c8df1d8e8a2d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42452-f03-copy-dataset-current-v1/unit.terminal.json",
+      "sha256": "1f8dcdd303c52df5186c703f54f4a3cf52d36df3d5c4b18b536d7c46f77ede74"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42452-f03-copy-dataset-current-v1/coverage.terminal.json",
+      "sha256": "52f14f61c39d378e5a5a3146b0c106b80e625a2ee76edd405736eb68e8fceb78"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42452-f03-copy-dataset-current-v1/scope.xml",
+      "sha256": "716ef08e3c28c72670639b2840bd7ceefa1cfea103e3ec607172f9a9a4b025a8"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42452-f03-copy-dataset-current-v1/scope.exec",
+      "sha256": "072739f8d8352915f0a237a1b3b5707ed95213a1c1bb45d898aadc990260d693"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42452-f03-copy-dataset-current-v1/init.log",
+      "sha256": "3506c37ab4a8d7e6e3da035be8aac7199465d41558efc6f3f98584d3a3cb78dd"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42452-f03-copy-dataset-current-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "0ab02054603e64aaefcebf3ce2899f4bbd248a69ed5ba14e4065ab99acf99ee9"
+    }
+  ]
+}

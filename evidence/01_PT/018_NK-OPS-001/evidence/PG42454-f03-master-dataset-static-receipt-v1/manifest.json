@@ -1,0 +1,73 @@
+{
+  "run": "PG42454",
+  "source": "07b8d128c90fd8a62302ed3d41140bc6f9cf90db",
+  "javaCore": "b5d5009768a04bb69468beed2471441b2a57ce27",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-22T09:13:56.891158+00:00",
+  "ordinary": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42452-f03-master-copy-dataset-current-ordinary-v1/manifest.json",
+    "sha256": "55ab70f0d92c4874c5f1d7f5f815678d7f3c5fb140ecd308750419aa9445e6c7"
+  },
+  "raw": {
+    "checkstyle": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42454-f03-master-dataset-static-v1/reports/checkstyle.xml",
+      "sha256": "8cbdbbc6d5864a31b3c8357c2825e80e9c33ffdd138cc225ba320a5a7ca3f123"
+    },
+    "spotbugs": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42454-f03-master-dataset-static-v1/reports/spotbugs.xml",
+      "sha256": "5dca8f2274d23ee648205e644c2b92655fea927258feb79cd091fce71023e068"
+    },
+    "pmd": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42454-f03-master-dataset-static-v1/reports/pmd.xml",
+      "sha256": "a5f78dd387ee6a3e088cb00086c3f3826d52a6de72aaf94c35eca79a00a16ef1"
+    }
+  },
+  "engineExits": {
+    "guard": 0,
+    "checkstyle": 0,
+    "pmd": 4,
+    "spotbugs": 0
+  },
+  "checkedPhysicals": 3,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "pmdRaw": 6,
+  "processingErrors": 0,
+  "knownScopedClassifications": [
+    {
+      "rule": "CloseResource",
+      "line": 313,
+      "rationale": "Fixed fixture-owned worker pool for MASTER020, with bounded finally cleanup verified."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 313,
+      "rationale": "Fixed fixture-owned worker pool for MASTER020, with bounded finally cleanup verified."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 318,
+      "rationale": "Each finite reader builds its own synthetic memory sinks and compares literal independent outputs."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 326,
+      "rationale": "Finally shuts down this fixture-owned pool."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 327,
+      "rationale": "Bounded termination assertion before the fixture returns."
+    },
+    {
+      "rule": "CloseResource",
+      "line": 503,
+      "rationale": "Borrowed in-memory tracker inspected precisely to assert caller did not flush or close; no external handle. A deliberate owned failure fixture closes separately."
+    }
+  ],
+  "untriagedLocal": 0,
+  "repeatedDynamic": 0,
+  "suppressed": 0,
+  "qualifiedWhole451": false,
+  "formalAcceptanceId": null
+}
