@@ -1,0 +1,90 @@
+{
+  "eventId": "PGPT-20261008-8715",
+  "groupId": "PG42994-WBS-P006-02-B-R1",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T20:22:56+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 49,
+      "remainingPercent": 51,
+      "resetsAt": 1795879771,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "source": "22a4079b164160e203b3871bb150d4c32f7c8d41",
+    "productionCoreMain": "e8368d22c4da2ec841f008df793594d3be9066af",
+    "canonicalDesignSource": "ca41c03c0c6efff9a3a35b47b480491810bee6f9",
+    "run": "PG42994-outbox-retry-contract-v1",
+    "workCategory": "CONTRACT_AUDIT",
+    "managementWorkIds": [
+      "WBS-P006-02/2"
+    ],
+    "previousCheckpoint": "PGPT-20261008-8714",
+    "planRow": {
+      "ID": "WBS-P006-02/2",
+      "元行": "WBS-P006-02/2",
+      "費目": "B",
+      "主担当": "WBS-P006-02",
+      "状態": "計画",
+      "作業": "Outbox永続化・配信・再送・DLQ／同source証拠による受入判定",
+      "残pp": "0.423",
+      "着手": "設計324・当該source・作業所有・既存成果を照合。必要な局所成果を費目Aで一度だけ作成し、受入候補のTestIDと独立期待値を確定。着手依存、当該A成果、終了依存と未解決条件を確認",
+      "終了証拠": "Outbox永続化・配信・再送・DLQ：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。 固有要求：FUN-104,MQ-006,MQ-007,MQ-008,MQ-009,MQ-010",
+      "補正根拠": "登録済み後段単価。追加製造はA、実経路はD、比較はE",
+      "契約HOLD": "",
+      "対象": "",
+      "範囲": "FUN-104、MQ-006、MQ-007、MQ-008、MQ-009、MQ-010",
+      "保存証跡": "個別criteria＋同sourceのTestID・独立期待値・実結果・451適用結果",
+      "順次": "False",
+      "配賦窓": "11",
+      "楽観pp": "0.163",
+      "慎重pp": "0.845",
+      "要求設計の版差": "PT基準仕様 NK-MSG-002、SS 324",
+      "lineNumber": 337,
+      "改訂残pp": "0.423"
+    },
+    "currentPlan": [
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/11月22日_PGPT再開実行計画.txt",
+        "sha256": "80b9fdc306f664b9c03901a4bdfb34cf66997879676204cfa969858fd68a4016"
+      },
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/短期実行WBS.tsv",
+        "sha256": "a6efedcd63b4ef3bb1d133d939b0ddd7dc4b0147988ac33d668282a25c999527"
+      }
+    ],
+    "startScope": {
+      "workCategory": "CONTRACT_AUDIT",
+      "candidate": "dbdd79f2fa415e91ff29bf9bafecd4984d11eb40",
+      "testIds": [
+        "PT-OUTBOX-VALUE003",
+        "PT-IDEM-010"
+      ],
+      "acceptanceTarget": "MQ-008: application Outbox retry only; canonical rules, exact same effective local inputs, independently specified offsets, identify remaining real route",
+      "holds": "QA-056 and actual DB/JMS remain held",
+      "nextAuthorized": "Inspect request token value contract with no Web or API startup dependencies",
+      "administrativeAttempt": "Initial start validation rejected an unregistered work category before append; receipt kept, no test or accepted work on that attempt"
+    },
+    "groupCapPp": 0.6,
+    "estimateAtGroupStartPp": {
+      "low": 0,
+      "base": 0.2,
+      "high": 0.6
+    },
+    "completedOriginalRowPricePp": 0,
+    "sourceOwnership": "LOCAL_DEV_FOUNDATION_TRACKED_SNAPSHOT",
+    "knownOwnedRunInProgress": 0,
+    "costRevision": "PMO-remaining-v3-20261010",
+    "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "actualAllocatedPp": null
+  }
+}

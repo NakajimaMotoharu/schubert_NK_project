@@ -1,0 +1,94 @@
+{
+  "run": "PG42994-outbox-retry-contract-v1",
+  "terminalAtUTC": "2026-11-22T20:23:56.115286+00:00",
+  "actualExit": 0,
+  "source": "22a4079b164160e203b3871bb150d4c32f7c8d41",
+  "candidate": "dbdd79f2fa415e91ff29bf9bafecd4984d11eb40",
+  "wbs": "WBS-P006-02/2",
+  "scope": "MQ-008 application Outbox local schedule, canonical SS324 §8.3 and SS332 §7.2; QA-050 SS354 Logout continuation is a separate requirement and left untouched",
+  "canonicalDesign": [
+    {
+      "path": "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md",
+      "source": "ca41c03c0c6efff9a3a35b47b480491810bee6f9",
+      "sha256": "604412aaf1814b888643a2ba67179cd166612e46471362bd719c2779149f0e4f"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "source": "ca41c03c0c6efff9a3a35b47b480491810bee6f9",
+      "sha256": "4c09a2f66d9cb4def976c24d2952953aa5a287a0d545548dc4feda4968ff5bef"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/354_PT・IT試験観点詳細設計.md",
+      "source": "ca41c03c0c6efff9a3a35b47b480491810bee6f9",
+      "sha256": "2707b6b3b53b87abc803626737dbdc1366eae695fdfda8ddb0c93e35ea11b2b7"
+    }
+  ],
+  "readOnlyCallSite": {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository.java",
+    "sha256": "1db71eadabee0bb1ae3de1bc8e04930e97a6d1c68d30f01362c6acaa915c2173"
+  },
+  "exactInputs": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport.java",
+      "sha256": "c9ba13a64c580fea33b744134a5534d44142233f72a28c40d5cc0442e2fc472f"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination.java",
+      "sha256": "8ab0216109c17c6d5cf96039b6ac968dd2cb6fc401c2f93b0f92cc08c3ed8e80"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule.java",
+      "sha256": "f565b0413b5e262907e209f523915e3050beb7062fec3b369d178124c58e8854"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxValueContractTest.java",
+      "sha256": "b194e691797ce0e77608ac357062a8150c064f7ea25a5af0be437edb9396088b"
+    }
+  ],
+  "execution": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41932-f03-api-outbox-three-values-current-v1/manifest.json",
+    "sha256": "aad5c27053e86b8948c56911e40ec919a6b21cdac2a803051f744c2b72ab5782"
+  },
+  "originalXml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35362-api-command-outbox11-post-v1/original-TEST-junit-jupiter.xml",
+    "sha256": "3a4f85d6fbe71dc208b2af191d1be8c46e6d6e9ea0eb3d6693e18f5467d43882"
+  },
+  "originalExec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35363-api-command-outbox11-post-join-v1/jacoco.exec",
+    "sha256": "b9357da58dcbddcbd388157666abd8c693743a3708726d948d0d8a04a026b65d"
+  },
+  "testId": "PT-OUTBOX-VALUE003",
+  "independentExpected": "Hardcoded five delay rows across all 100 attempts and jitter -100/0/100; invalid attempts/jitter, null precondition and Instant.MAX overflow explicitly observed by the old fixture",
+  "qualifiedResult": "PASS",
+  "localRawCounters": {
+    "LINE": {
+      "missed": 0,
+      "covered": 15
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 7
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 13
+    }
+  },
+  "newPtRuns": 0,
+  "staticReport": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41934-f03-api-outbox-three-values-typed-v1/manifest.json",
+    "sha256": "21d8ddb1488d81dcc9574ed75731b5a5797cd72c60c6a8a08b509d3097cfdf6f"
+  },
+  "staticExit": 1,
+  "remaining": [
+    "normal API archive not qualified",
+    "local fixture static diagnostics remain visible",
+    "actual lease/DB/JMS and related end dependencies",
+    "whole 451"
+  ],
+  "formalAcceptanceId": null
+}
