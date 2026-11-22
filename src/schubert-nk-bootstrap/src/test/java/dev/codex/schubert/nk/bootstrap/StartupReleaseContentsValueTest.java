@@ -1,6 +1,7 @@
 package dev.codex.schubert.nk.bootstrap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import dev.codex.schubert.nk.api.bootstrap.SchemaHistoryAdmission;
@@ -15,7 +16,7 @@ import java.util.function.Function;
 import org.junit.jupiter.api.Test;
 
 /**
- * NK-OPS-001/SYS002004/OPS009/UI251/SS342343/3678; PT-OPS-RELEASE-CONTENTS001..008. Public value
+ * NK-OPS-001/SYS002004/OPS009/UI251/SS342343/3678; PT-OPS-RELEASE-CONTENTS001..009. Public value
  * metadata only; never calls an outer release reader or grants startup authority.
  */
 final class StartupReleaseContentsValueTest {
@@ -193,6 +194,61 @@ final class StartupReleaseContentsValueTest {
       for (int index = 0; index < jobs.size(); index++)
         assertEquals("public-" + index, jobs.get(index).get(5, TimeUnit.SECONDS));
     }
+  }
+
+  @Test
+  void contents009PublicSnapshotIdentityIncludesAllSevenComponents() {
+    Map<String, String> build = Map.of(KEY_COMMIT, PUBLIC_VALUE);
+    Map<String, String> platform = Map.of("os", PLATFORM_LINUX);
+    Map<String, String> versions = Map.of("java", "25");
+    Map<String, String> artifacts = Map.of("schubert-nk-batch.jar", DIGEST);
+    var snapshot =
+        new StartupReleaseManifest.Contents(
+            VERSION, DIGEST, List.of(), build, platform, versions, artifacts);
+    var equal =
+        new StartupReleaseManifest.Contents(
+            "PG2802",
+            "0".repeat(64),
+            new ArrayList<>(),
+            new HashMap<>(build),
+            new HashMap<>(platform),
+            new HashMap<>(versions),
+            new HashMap<>(artifacts));
+
+    assertEquals(snapshot, equal);
+    assertEquals(equal, snapshot);
+    assertEquals(100014291, snapshot.hashCode());
+    assertEquals("present", Map.of(snapshot, "present").get(equal));
+    assertNotEquals(snapshot, null);
+    assertNotEquals(snapshot, VERSION);
+
+    var different =
+        List.of(
+            new StartupReleaseManifest.Contents(
+                "PG2803", DIGEST, List.of(), build, platform, versions, artifacts),
+            new StartupReleaseManifest.Contents(
+                VERSION, "1".repeat(64), List.of(), build, platform, versions, artifacts),
+            new StartupReleaseManifest.Contents(
+                VERSION, DIGEST, List.of(SCHEMA), build, platform, versions, artifacts),
+            new StartupReleaseManifest.Contents(
+                VERSION, DIGEST, List.of(), Map.of(), platform, versions, artifacts),
+            new StartupReleaseManifest.Contents(
+                VERSION, DIGEST, List.of(), build, Map.of(), versions, artifacts),
+            new StartupReleaseManifest.Contents(
+                VERSION, DIGEST, List.of(), build, platform, Map.of(), artifacts),
+            new StartupReleaseManifest.Contents(
+                VERSION, DIGEST, List.of(), build, platform, versions, Map.of()));
+    for (var other : different) {
+      assertNotEquals(snapshot, other);
+    }
+    assertEquals(
+        "Contents[version=PG2802, sha256="
+            + "0".repeat(64)
+            + ", migrations=[], build={commit=public}, platform={os=linux}, versions={java=25}, "
+            + "artifactHashes={schubert-nk-batch.jar="
+            + "0".repeat(64)
+            + "}]",
+        snapshot.toString());
   }
 
   private static List<Function<Map<String, String>, StartupReleaseManifest.Contents>>
