@@ -474,6 +474,39 @@ final class BatchRunAuditPortTest {
     }
   }
 
+  /** BRPORT015: the outer close must also honor the SQL versus unknown priority. */
+  @Test
+  void statementCloseReplacesSqlRowFailureAfterTheBorrowedRowsClose() {
+    for (String route : List.of(HISTORY, INSERT, REPLAY)) {
+      for (Throwable closing :
+          List.of(
+              new IllegalStateException("synthetic statement close failure"),
+              new AssertionError("synthetic statement close fault"))) {
+        Fixture fixture = new Fixture();
+        var body = new SQLException("synthetic row failure");
+        String rowClose = route + ":rowClose";
+        String statementClose = route + ":statementClose";
+        fixture.faults.put(route + ":" + TEXT_NEXT, body);
+        fixture.faults.put(statementClose, closing);
+
+        var actual = assertThrows(closing.getClass(), () -> action(fixture, route));
+
+        assertSame(closing, actual, route);
+        assertEquals(null, actual.getCause(), route);
+        assertEquals(0, actual.getSuppressed().length, route);
+        assertEquals(0, body.getSuppressed().length, route);
+        assertEquals(
+            List.of(rowClose, statementClose),
+            fixture.visitedFaultPoints.stream()
+                .filter(point -> point.equals(rowClose) || point.equals(statementClose))
+                .toList(),
+            route);
+        assertEquals(1, fixture.referenceCalls, route);
+        fixture.assertClosed();
+      }
+    }
+  }
+
   @Test
   void nullAcquisitionsAndLostParentIdentityNeverAuthorizeSuccessOrFallback() {
     for (String route : List.of(HISTORY, INSERT, ABANDON, FINISH, REPLAY)) {
