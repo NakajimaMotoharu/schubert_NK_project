@@ -115,7 +115,7 @@ def scope_payloads(directory):
                 continue
             pending.extend(path.iterdir())
         elif path.is_file():
-            if str(relative) not in SCOPE_METADATA:
+            if path.name not in SCOPE_METADATA:
                 actual.add(str(relative))
         else:
             raise ValueError("non-regular formal evidence entry")

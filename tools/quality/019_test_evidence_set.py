@@ -3023,8 +3023,12 @@ class EvidenceSetTest(unittest.TestCase):
                 (supplemental / "results.xml").write_text("different results")
             self.assertEqual(scope, validate()["scope"])
 
+            (directory / "logs").mkdir()
+            for name in ("manifest.json", "checksums.sha256"):
+                (directory / "logs" / name).write_text("separate scope metadata")
+            self.assertEqual(scope, validate()["scope"])
             for candidate in ("PG42740.json", "PG0-empty", "logs/PG42740-nested/results.xml",
-                              "logs/manifest.json"):
+                              "logs/other-manifest.json"):
                 unlisted = directory / candidate
                 unlisted.parent.mkdir(parents=True, exist_ok=True)
                 unlisted.write_text("unlisted")
