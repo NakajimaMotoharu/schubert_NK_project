@@ -1,0 +1,444 @@
+{
+  "run": "PG43072-capacity-older-fixture-reservations-v1",
+  "source": "264eba95c806be90364e88dd036a4f591b16d7da",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": [
+    "WBS-P008-03/2",
+    "WBS-F03/2-2-b"
+  ],
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T22:13:51.336301+00:00",
+  "tests": 6,
+  "newTestDefinitions": 0,
+  "positiveCases": [
+    "c01EveryByteAndFileAlertBoundaryMatchesFixedThresholds",
+    "c02InFlightAdmissionCanReachCriticalButNeverExhaustTheFiveGbDesignBudget",
+    "c02RetainAndReleaseAreExactlyOnceIncludingUndeletedPartialFile",
+    "c03CallerMonitorsCannotBlockReservationMetricsRetainOrClose",
+    "c03CompetingCloseAndRetainDischargeTheSameReservationOnce",
+    "c03OnlyOneOf100SimultaneousReservationsCanCrossEachCriticalBoundary"
+  ],
+  "sourceFixture": {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferCapacityTest.java",
+    "sha256": "bcbcb8cea87b6eb5852c370053bf3ce05cdfbfa13670ed61ea2f49dd9e3d893f"
+  },
+  "exactPinnedPhysical": {
+    "dev/codex/schubert/nk/api/storage/TransferCapacity$Reservation.class": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43072-capacity-older-fixture-reservations-v1/target/classes/dev/codex/schubert/nk/api/storage/TransferCapacity$Reservation.class",
+      "sha256": "94c5ae3d9d24faac1bdc1dd8080375c9edbbdeb88afa567ff10d6152bc492032"
+    },
+    "dev/codex/schubert/nk/api/storage/package-info.class": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43072-capacity-older-fixture-reservations-v1/target/classes/dev/codex/schubert/nk/api/storage/package-info.class",
+      "sha256": "89b0a4ca35e152318e8932bbc1b7cf24cefad2bcc7f717911a7b9854f90b6e24"
+    },
+    "dev/codex/schubert/nk/api/storage/TransferCapacity$Level.class": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43072-capacity-older-fixture-reservations-v1/target/classes/dev/codex/schubert/nk/api/storage/TransferCapacity$Level.class",
+      "sha256": "e4d1a9c67a37905b020da9238aa302f2efe578f402880022d266b6ff6159da2b"
+    },
+    "dev/codex/schubert/nk/api/storage/TransferCapacity$Snapshot.class": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43072-capacity-older-fixture-reservations-v1/target/classes/dev/codex/schubert/nk/api/storage/TransferCapacity$Snapshot.class",
+      "sha256": "2577f6c4c3c9904f9e0ad5573cb785af9e4cea8bd58e2eebd6a19ff6f7907e88"
+    },
+    "dev/codex/schubert/nk/api/storage/TransferCapacity.class": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43072-capacity-older-fixture-reservations-v1/target/classes/dev/codex/schubert/nk/api/storage/TransferCapacity.class",
+      "sha256": "a46d468854b02f711523000b327004efa79578271c78a1ab0a19f81b8389e154"
+    },
+    "dev/codex/schubert/nk/api/error/package-info.class": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43072-capacity-older-fixture-reservations-v1/target/classes/dev/codex/schubert/nk/api/error/package-info.class",
+      "sha256": "84cd2488973f207212923a8df0b0fd970474b088694ba5122fca759e005c908e"
+    },
+    "dev/codex/schubert/nk/api/error/CapacityExceededException.class": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43072-capacity-older-fixture-reservations-v1/target/classes/dev/codex/schubert/nk/api/error/CapacityExceededException.class",
+      "sha256": "b44ce51299f0ab38908da171aaa2faa1cd71b8f410b6c073e600b968be916c05"
+    }
+  },
+  "previous": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43070-capacity-fixture-checked-and-owned-cases-v1/manifest.json",
+    "sha256": "de3ee35efee7b06340322d031d006e6056466311199747b6e79ecee294b54b6d"
+  },
+  "independentOwnershipReview": {
+    "directEarlierReservationsWithFinally": 4,
+    "returnedReservationHolder": 1,
+    "aliasReporterLines": [
+      187,
+      207
+    ],
+    "schedulingAndExpectedCases": "Unchanged numeric/permission-independent checks; partial test execution would still fail and never becomes normal success."
+  },
+  "originals": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43072-capacity-older-fixture-reservations-v1/begin.json",
+      "sha256": "3f73cec591d1f1a8464d0f39d9ffc025da37ae940508f1ed2e7c86700a384f07"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43072-capacity-older-fixture-reservations-v1/terminal.json",
+      "sha256": "f6ce98e42472328aeffcc4326662308f82ef5e088f9f359a5d9e56390c82dd69"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43072-capacity-older-fixture-reservations-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "d006fca79700b38073315bcd511b0be90bdf765068fe4b74261cf7996552a87b"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43072-capacity-older-fixture-reservations-v1/unit.exec",
+      "sha256": "7bfd0999d50a6e3e6037927d0ab324aed45970a552b08ccd84ed6b8d3f3fac04"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43072-capacity-older-fixture-reservations-v1/unfiltered.stdout",
+      "sha256": "4ac06ffe236daacd920de386a098ee96b26f3961566d0e7725c403370d02d260"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43072-capacity-older-fixture-reservations-v1/spotbugs.xml",
+      "sha256": "344c510f1ea50d7c54237319ac79ca3a6b044baaf5e934bb2bdd62cd2817af59"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43072-capacity-older-fixture-reservations-v1/pmd.xml",
+      "sha256": "18c55b551f5d855c62f40d0f5c8b775788bf7fab9f34f419540ada45e4d1d845"
+    }
+  ],
+  "localTypedResults": {
+    "pmdRaw": 21,
+    "classifiedLocalApplicable": 0,
+    "qualityOwnerPending": 21,
+    "spotbugsFindings": 0,
+    "checkstyle": 0
+  },
+  "pmdDispositions": [
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "CloseResource",
+      "line": 138,
+      "sourceLine": "var executor = Executors.newFixedThreadPool(16);",
+      "localApplicable": false,
+      "basis": "Each created executor has finally shutdownNow and a bounded observed await.",
+      "ownerReview": null
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 138,
+      "sourceLine": "var executor = Executors.newFixedThreadPool(16);",
+      "localApplicable": false,
+      "basis": "Finite JUnit worker calls or fixture-only thread ownership, with deadlines and shutdown checks.",
+      "ownerReview": null
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 153,
+      "sourceLine": "for (var future : executor.invokeAll(tasks, 10, TimeUnit.SECONDS)) {",
+      "localApplicable": false,
+      "basis": "Finite JUnit worker calls or fixture-only thread ownership, with deadlines and shutdown checks.",
+      "ownerReview": null
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 162,
+      "sourceLine": "executor.shutdownNow();",
+      "localApplicable": false,
+      "basis": "Finite JUnit worker calls or fixture-only thread ownership, with deadlines and shutdown checks.",
+      "ownerReview": null
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 163,
+      "sourceLine": "assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS), \"capacity executor terminated\");",
+      "localApplicable": false,
+      "basis": "Finite JUnit worker calls or fixture-only thread ownership, with deadlines and shutdown checks.",
+      "ownerReview": null
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "CloseResource",
+      "line": 175,
+      "sourceLine": "var executor = Executors.newVirtualThreadPerTaskExecutor();",
+      "localApplicable": false,
+      "basis": "Each created executor has finally shutdownNow and a bounded observed await.",
+      "ownerReview": null
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 175,
+      "sourceLine": "var executor = Executors.newVirtualThreadPerTaskExecutor();",
+      "localApplicable": false,
+      "basis": "Finite JUnit worker calls or fixture-only thread ownership, with deadlines and shutdown checks.",
+      "ownerReview": null
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "AvoidSynchronizedStatement",
+      "line": 178,
+      "sourceLine": "synchronized (capacity) {",
+      "localApplicable": false,
+      "basis": "Intentional caller monitor used to assert independence of the private production lock.",
+      "ownerReview": null
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 179,
+      "sourceLine": "executor",
+      "localApplicable": false,
+      "basis": "Finite JUnit worker calls or fixture-only thread ownership, with deadlines and shutdown checks.",
+      "ownerReview": null
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "CloseResource",
+      "line": 187,
+      "sourceLine": "var reservation = acquired.get();",
+      "localApplicable": false,
+      "basis": "Both local references alias the single reservation stored before the worker assertion in acquired. After worker shutdown, the outer finally reads the same holder and closes it if acquired.",
+      "ownerReview": null
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "AvoidSynchronizedStatement",
+      "line": 188,
+      "sourceLine": "synchronized (reservation) {",
+      "localApplicable": false,
+      "basis": "Intentional caller monitor used to assert independence of the private production lock.",
+      "ownerReview": null
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 189,
+      "sourceLine": "executor",
+      "localApplicable": false,
+      "basis": "Finite JUnit worker calls or fixture-only thread ownership, with deadlines and shutdown checks.",
+      "ownerReview": null
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 201,
+      "sourceLine": "executor.shutdownNow();",
+      "localApplicable": false,
+      "basis": "Finite JUnit worker calls or fixture-only thread ownership, with deadlines and shutdown checks.",
+      "ownerReview": null
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 204,
+      "sourceLine": "executor.awaitTermination(10, TimeUnit.SECONDS),",
+      "localApplicable": false,
+      "basis": "Finite JUnit worker calls or fixture-only thread ownership, with deadlines and shutdown checks.",
+      "ownerReview": null
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "CloseResource",
+      "line": 207,
+      "sourceLine": "var reservation = acquired.get();",
+      "localApplicable": false,
+      "basis": "Both local references alias the single reservation stored before the worker assertion in acquired. After worker shutdown, the outer finally reads the same holder and closes it if acquired.",
+      "ownerReview": null
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "CloseResource",
+      "line": 219,
+      "sourceLine": "var executor = Executors.newFixedThreadPool(2);",
+      "localApplicable": false,
+      "basis": "Each created executor has finally shutdownNow and a bounded observed await.",
+      "ownerReview": null
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 219,
+      "sourceLine": "var executor = Executors.newFixedThreadPool(2);",
+      "localApplicable": false,
+      "basis": "Finite JUnit worker calls or fixture-only thread ownership, with deadlines and shutdown checks.",
+      "ownerReview": null
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 227,
+      "sourceLine": "executor.submit(",
+      "localApplicable": false,
+      "basis": "Finite JUnit worker calls or fixture-only thread ownership, with deadlines and shutdown checks.",
+      "ownerReview": null
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 238,
+      "sourceLine": "executor.submit(",
+      "localApplicable": false,
+      "basis": "Finite JUnit worker calls or fixture-only thread ownership, with deadlines and shutdown checks.",
+      "ownerReview": null
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 259,
+      "sourceLine": "executor.shutdownNow();",
+      "localApplicable": false,
+      "basis": "Finite JUnit worker calls or fixture-only thread ownership, with deadlines and shutdown checks.",
+      "ownerReview": null
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 261,
+      "sourceLine": "executor.awaitTermination(10, TimeUnit.SECONDS), \"reservation executor terminated\");",
+      "localApplicable": false,
+      "basis": "Finite JUnit worker calls or fixture-only thread ownership, with deadlines and shutdown checks.",
+      "ownerReview": null
+    }
+  ],
+  "rawCounters": {
+    "dev/codex/schubert/nk/api/error/CapacityExceededException": {
+      "INSTRUCTION": [
+        0,
+        6
+      ],
+      "BRANCH": [
+        0,
+        0
+      ],
+      "LINE": [
+        0,
+        3
+      ],
+      "COMPLEXITY": [
+        0,
+        2
+      ],
+      "METHOD": [
+        0,
+        2
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/api/storage/TransferCapacity": {
+      "INSTRUCTION": [
+        6,
+        145
+      ],
+      "BRANCH": [
+        0,
+        20
+      ],
+      "LINE": [
+        1,
+        28
+      ],
+      "COMPLEXITY": [
+        0,
+        13
+      ],
+      "METHOD": [
+        0,
+        3
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/api/storage/TransferCapacity$Level": {
+      "INSTRUCTION": [
+        9,
+        41
+      ],
+      "BRANCH": [
+        0,
+        0
+      ],
+      "LINE": [
+        0,
+        4
+      ],
+      "COMPLEXITY": [
+        2,
+        3
+      ],
+      "METHOD": [
+        2,
+        3
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/api/storage/TransferCapacity$Reservation": {
+      "INSTRUCTION": [
+        7,
+        104
+      ],
+      "BRANCH": [
+        0,
+        4
+      ],
+      "LINE": [
+        0,
+        22
+      ],
+      "COMPLEXITY": [
+        0,
+        5
+      ],
+      "METHOD": [
+        0,
+        3
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/api/storage/TransferCapacity$Snapshot": {
+      "INSTRUCTION": [
+        6,
+        25
+      ],
+      "BRANCH": [
+        0,
+        0
+      ],
+      "LINE": [
+        0,
+        1
+      ],
+      "COMPLEXITY": [
+        2,
+        5
+      ],
+      "METHOD": [
+        2,
+        5
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    }
+  },
+  "session": {
+    "labelBytesHex": "504734333037322d63757272656e74",
+    "startMillis": 1795385585042,
+    "endMillis": 1795385586095
+  },
+  "publicXml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43072-capacity-older-fixture-reservations-v1/sanitized-junit.xml",
+    "sha256": "3d51da5681897bbeb593e244708265f9eaf9344b3b552cdfba76b322cfa7285d"
+  },
+  "actualExternalOperations": 0,
+  "formalAcceptanceId": null,
+  "whole451": false,
+  "related": [
+    "BUG-3661",
+    "YKT-2878"
+  ]
+}
