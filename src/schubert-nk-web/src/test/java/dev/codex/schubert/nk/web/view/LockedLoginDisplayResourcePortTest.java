@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
@@ -11,9 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.jupiter.api.Test;
@@ -39,7 +42,7 @@ final class LockedLoginDisplayResourcePortTest {
   private static final String VALUE = "value";
   private static final String MARKER = "public-unissued-fixture-marker";
 
-  private static Document render(String id, Map<String, String[]> parameters) throws Exception {
+  private static Document render(String id, Map<String, String[]> parameters) throws IOException {
     var servlet = new MockServletContext();
     var req = new MockHttpServletRequest(servlet);
     req.setMethod("GET");
@@ -71,7 +74,7 @@ final class LockedLoginDisplayResourcePortTest {
   }
 
   @Test
-  void approvedLockedMessageDependsOnFlagPresenceNotItsValues() throws Exception {
+  void approvedLockedMessageDependsOnFlagPresenceNotItsValues() throws IOException {
     List<String[]> flags =
         List.of(new String[] {""}, new String[] {"false"}, new String[] {MARKER, "false"});
     for (int index = 0; index < flags.size(); index++) {
@@ -84,7 +87,7 @@ final class LockedLoginDisplayResourcePortTest {
   }
 
   @Test
-  void independentErrorLockedLogoutFlagsKeepCurrentOrderAndFixedText() throws Exception {
+  void independentErrorLockedLogoutFlagsKeepCurrentOrderAndFixedText() throws IOException {
     for (int mask = 0; mask < 4; mask++) {
       var query = new java.util.HashMap<String, String[]>();
       query.put(LOCKED, new String[] {MARKER});
@@ -105,7 +108,7 @@ final class LockedLoginDisplayResourcePortTest {
   }
 
   @Test
-  void allegedRemainingSecondsAndCredentialsNeverBecomeDynamicDisplay() throws Exception {
+  void allegedRemainingSecondsAndCredentialsNeverBecomeDynamicDisplay() throws IOException {
     var seconds = List.of("0", "1", "899", "900", "99999", MARKER + "<img onerror=bad>");
     for (int index = 0; index < seconds.size(); index++) {
       var dom =
@@ -132,7 +135,8 @@ final class LockedLoginDisplayResourcePortTest {
   }
 
   @Test
-  void parallelLockedAndUnlockedRenderingsKeepTheirOwnFlags() throws Exception {
+  void parallelLockedAndUnlockedRenderingsKeepTheirOwnFlags()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var pool = Executors.newFixedThreadPool(2);
     try {
       var jobs = new ArrayList<Future<List<String>>>();
