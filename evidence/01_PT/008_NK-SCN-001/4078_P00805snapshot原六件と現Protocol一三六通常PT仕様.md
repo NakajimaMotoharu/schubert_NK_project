@@ -14,3 +14,5 @@ prepare: `PYTHONPATH=tools/quality python3 -B evidence/01_PT/018_NK-OPS-001/inpu
 ## PT-SCN-SHAPE004 snapshot不変性と等しい値の重複排除
 
 BUG-3667、FUN-004/005、UI234／SS332 §4.2／SS333 §6.1。独立に作った同じtitle/body/連番の二snapshotを使う。元の可変入力をclearしても、先に格納した値は同内容で等値、集合検索は成功、重複挿入はfalse。body差だけとtitle差だけのsnapshotは個別に挿入成功し、集合の期待値は3件。実装methodで期待値を算出しない。現在Protocolを固定し元6＋新1。JDK25／NullAway、同一execの生class/line/method/branch、元null境界negを保持。実FileStore/再生成/CHRは別。
+
+PG43100。試験source `c8ab469879`、製品Core `87927ea17c`。最新Protocol176の同一JAR、元6＋新1成功。対象生L19/M6/C1/B6全数。JDK25・NullAway・PMD・Checkstyle指摘0、元null負例SpotBugs1は保持。再生成owner、実file、正式451は未受入。 [公開manifest](../018_NK-OPS-001/evidence/PG43100-scenario-snapshot-value-semantics-v1/manifest.json) SHA-256 `f81698b2072b46f191688e343b6b157ebd237500c9863d43f4401a5ccdcbb5bb`。

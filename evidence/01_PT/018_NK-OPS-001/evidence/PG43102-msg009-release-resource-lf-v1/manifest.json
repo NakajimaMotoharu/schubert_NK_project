@@ -1,0 +1,691 @@
+{
+  "run": "PG43102-msg009-release-resource-lf-v1",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T23:03:24.858720+00:00",
+  "source": "c8ab469879e3b8594dce3353a67a95db3d4b4b53",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "canonicalDesignSource": "7745de1fb04c8b9e2cfccc11103d7b3c57b090d7",
+  "relatedWork": "P002再判定-b",
+  "requirement": "MSG-009",
+  "designPath": "documents/100_RD/130_インターフェース要件/132_共通固定長電文方式要件.md",
+  "designSha256": "62adc306da4a1c59bc17e935eb0452efd54bb9705770186c9edaff2c53518047",
+  "concreteCriteria": "Current tracked release texts decode strict UTF-8, no CR, NUL, BOM, every nonempty file has terminal LF.",
+  "originalScopedProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43056-msg009-current-managed-text-v1/manifest.json",
+    "sha256": "4bc21c52f39ffc301b7fa980234985a36d27ca267e6e4fbb0d6ee69e458f7b1c"
+  },
+  "originalScopeSource": "fbdb574805714a3e7d91b2b7c9c15ce5eade2356",
+  "scopedSourcesNotCombinedAcrossRevisions": true,
+  "modules": {
+    "protocol": {
+      "buildDescriptors": 1,
+      "mainReleaseResources": 0,
+      "retainedResults": [
+        {
+          "path": "src/schubert-nk-protocol/pom.xml",
+          "gitBlob": "9e1b868711e88e06748011ca7d345fcfb3d212e4",
+          "sha256": "f76b730fa1cb1b34a88182ca5b685ca14fb71361c037f9418f0895d2a3022d7d",
+          "bytes": 4276,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        }
+      ]
+    },
+    "storage": {
+      "buildDescriptors": 1,
+      "mainReleaseResources": 0,
+      "retainedResults": [
+        {
+          "path": "src/schubert-nk-storage/pom.xml",
+          "gitBlob": "b0d15b225c56fdcae318600fb436984e7fb33876",
+          "sha256": "d4ed59631b9ebf965db518fbe4b7894c2beb71ee3f7c1e9cdbf7b4241c8179c7",
+          "bytes": 4309,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        }
+      ]
+    },
+    "bootstrap": {
+      "buildDescriptors": 1,
+      "mainReleaseResources": 0,
+      "retainedResults": [
+        {
+          "path": "src/schubert-nk-bootstrap/pom.xml",
+          "gitBlob": "540cbf7c804ce2574ecb037a7f2e589855156218",
+          "sha256": "174e3974a5fe17a226c8c43a0cd49ae70d395cb4f236168da07cd7482a67908c",
+          "bytes": 6544,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        }
+      ]
+    },
+    "api": {
+      "buildDescriptors": 1,
+      "mainReleaseResources": 31,
+      "retainedResults": [
+        {
+          "path": "src/schubert-nk-api/pom.xml",
+          "gitBlob": "25d97f80825cdcca244cb6953a66906cde7ccc53",
+          "sha256": "2aff7af3d90feaee1f6c09f7ad300627ed911e8372504fcfd383391429a58114",
+          "bytes": 8500,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/resources/db/migration/V001__schemas_and_extension.sql",
+          "gitBlob": "c42941e1916e3332e0f175a50ee29fab22c3e33f",
+          "sha256": "f687a36d1e296d38306997808b0f4440e484e24dd37b3862476fb470e56930da",
+          "bytes": 1114,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/resources/db/migration/V002__account_session_and_master_tables.sql",
+          "gitBlob": "73ee539d1aa709a2c7848643974347f7378899d5",
+          "sha256": "23f82d08f89bf6abfb75cbf41d126b174fcef5cf77563755fc316b31fb817e8e",
+          "bytes": 15262,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/resources/db/migration/V003__business_message_log_and_web_tables.sql",
+          "gitBlob": "3df1dbd97862d38b9c55a2b121e9b7212862450f",
+          "sha256": "85f05cda30be1dd7856fb1eee3b25f42c6513641ab5d30b92410210f5460aa5e",
+          "bytes": 20383,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/resources/db/migration/V004__indexes_and_initial_data.sql",
+          "gitBlob": "ce4a880d277f2f1e76cb1d21a387c40e071f93d7",
+          "sha256": "fdf634ace2beef2d57e28ad65c2ed488eab493cb2b0d8b1d421eab8397b8079e",
+          "bytes": 3793,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/resources/db/migration/V005__gin_functions_views_and_grants.sql",
+          "gitBlob": "582ab536a0a52a55475138346db71b21d8db2f76",
+          "sha256": "daf64a15c753cea106b593e6da944db08f7b13c94d3f2aa4ec6626fcd8b56ff9",
+          "bytes": 16698,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/resources/db/migration/V006__cleanup_null_bounds_and_outbox_retention.sql",
+          "gitBlob": "f2e7845d72c2805529c672d642b25f30a52c9bf6",
+          "sha256": "79623b56b8fe9d27af75df6a5db5cf47f4b93fb7b5ae2b9eb4d19ce6d6624052",
+          "bytes": 12838,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/resources/db/migration/V007__username_comparison_key_expansion.sql",
+          "gitBlob": "2526010bb5198c0c863b3a9436d62124d9e7d954",
+          "sha256": "3b93f98b801c967c78113f3931b89b32aa9dc821d336af6c81076efc26da0401",
+          "bytes": 542,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/resources/db/migration/V008__auth_inbox_inspection_boundary.sql",
+          "gitBlob": "a9c1a0e96cc5c9e5017dc8e3a93d2f3b75bddbe9",
+          "sha256": "a90b338170322bd190335d2cfd382bb36b6f8b1243410345ef35b54dda928412",
+          "bytes": 3306,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/resources/db/migration/V009__conditional_auth_inbox_deletion.sql",
+          "gitBlob": "dfffcb359f2e2f233f6d9fa7847e93a3be40dae3",
+          "sha256": "537c7844709ed116f23fa60c64ae378e79eadad79f2e8003bbfd688f42335312",
+          "bytes": 3566,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/resources/db/migration/V010__full_inbox_scan_and_restricted_deletion.sql",
+          "gitBlob": "677daf4bde3748c6634d19bb62c29bf403e4a7ac",
+          "sha256": "c27a17adba2367ded5dcefe1532f5b42e7e4e35259f32388fe2667049e8644b0",
+          "bytes": 7200,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/resources/db/migration/V011__batch_outbox_only_cleanup.sql",
+          "gitBlob": "2dca6f9e1764a865c35f24097f088f1790d1e1c7",
+          "sha256": "18e92bfc225f39c7a0ecaf9bdbeef329e5a47c0af3283d12f858deb4aec09928",
+          "bytes": 2676,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/resources/db/migration/V012__durable_inbox_inspection_progress.sql",
+          "gitBlob": "9d0d5734c04a80f80196c7a4ee9410ec64a31b4a",
+          "sha256": "21e4c781a4b4c1a18240d8e47fae5bc2d11593d7b4ad05590ed10a67ebcb9411",
+          "bytes": 8517,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/resources/db/migration/V013__cleanup_backup_and_retention_guards.sql",
+          "gitBlob": "8703936ddedde6b7394fb57777def7691e67f144",
+          "sha256": "d56446bcfb7b3fa74ad0939baa3e2c0d263dd8a975cb7e3a9ce06bac2be85a74",
+          "bytes": 9696,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/resources/db/migration/V014__durable_log_cleanup_progress.sql",
+          "gitBlob": "650a647ebd3101e4965b5c7efb2b6058217810a5",
+          "sha256": "d2ba884de86c59c5815559aaf17a83b7a0546fcc7f9f48649dd744d127270229",
+          "bytes": 8986,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/resources/db/migration/V015__question_query_inbox_deletion.sql",
+          "gitBlob": "1aa9f1743606fcf98f863e3433dbc741cc3abbec",
+          "sha256": "1c5544165e1ab8441f6edf3dcc83dbb5ac9e05a6e6bfb9a7086d0d8ea0f6396b",
+          "bytes": 3752,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/resources/db/migration/V016__question_mutation_inbox_references.sql",
+          "gitBlob": "3deea7a0e2c5eaa7376f6689940f62919a116fdc",
+          "sha256": "99a9ae01ff3a6833d22d7c514c67c2229eb459e38bbf3e38da17a6b796f38aa8",
+          "bytes": 8972,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/resources/db/migration/V017__backup_rerun_success_history.sql",
+          "gitBlob": "9c9ec18a5ac54e971792d433277489e2f9183982",
+          "sha256": "c412685a319defa1cb4f91846c02d69dbbc18457da5feb9d66266d2aec3446ce",
+          "bytes": 493,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/resources/db/migration/V018__maintenance_run_references.sql",
+          "gitBlob": "43b0a605829377789c42216a05fc51a8ac4e4ee6",
+          "sha256": "8799bd8dbe60b34e8c7a4e507ad54b2c41979be47973943b5e868d1224f302c9",
+          "bytes": 2421,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/resources/db/migration/V019__parent_inbox_inspection_summary.sql",
+          "gitBlob": "75e82fb1dca66e6b9675b25b1e41b01b0e42a56d",
+          "sha256": "6b03d147fff575c05ac20d8a706e2fd83b5fc7565c55f4df8511ed0c3f07be5a",
+          "bytes": 2057,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/resources/db/migration/V020__atomic_cleanup_step_counts.sql",
+          "gitBlob": "e9f28375f7814844d2bcb77becd02fca43b2cc85",
+          "sha256": "e91ef0d596f08e891a025da7e760761b7836f6e298d1c362f9fd02c05ff99983",
+          "bytes": 11145,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/resources/db/migration/V021__expiry_batch_run_audit.sql",
+          "gitBlob": "07eb12fe23fdcd518b4687ed4aa4a29485333a47",
+          "sha256": "608d028dcaa17713165090db60d7b3af2da9df7edfd493dc7bef4d9e1aa6435e",
+          "bytes": 1759,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/resources/db/migration/V022__staged_expiry_batch_run_audit.sql",
+          "gitBlob": "a386050c9968063c6be930f1f6647c4378ff66e0",
+          "sha256": "56968e34731b766afd7b59523c2734be5fe0d063deda77414670729df9b12735",
+          "bytes": 1700,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/resources/db/migration/V023__startup_schema_history_projection.sql",
+          "gitBlob": "f28e412c010124b713fb6e329ca67a32e6ad4d9e",
+          "sha256": "f604fcbe406c79ab3271482da1d509e7b64aa32bace21bdd766f4ee8ca986492",
+          "bytes": 1078,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/resources/db/migration/V024__notification_received_state.sql",
+          "gitBlob": "823e6fa492fcfdcbb250b473f6d1577d0b05c321",
+          "sha256": "d4f2060b208e2bf181aa0bf28eb5b11a04a0e4b3d9bd81ec5cd9ea0435428c9b",
+          "bytes": 951,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/resources/db/migration/V025__question_dlq_outbox_identity.sql",
+          "gitBlob": "b9394cf6aade722c0c59bfc1060ac8b2809cb2ce",
+          "sha256": "040ffee84a17abbbbcc7f5817a56ec9332826ea06e57deeffc2eac83bd6b7609",
+          "bytes": 3076,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/resources/db/migration/V026__web_receipt_references.sql",
+          "gitBlob": "1c504960d7eb9afc69ba9468b6c485775643d83f",
+          "sha256": "a24ce25ccc80cde118f39734ef40fd3da9ab2ab61a368119aeae64f98b86fedb",
+          "bytes": 15042,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/resources/db/migration/V027__pending_revocation_unknown_expiry.sql",
+          "gitBlob": "460bc68a4c336aa942cca748e4781c5ce553cc11",
+          "sha256": "622c0e17246cb86b417381e4687b3e5e52c8b63c7035515e08304ec76dd28c79",
+          "bytes": 376,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/resources/db/migration/V028__retained_success_progress_seals.sql",
+          "gitBlob": "dc3f66be3aa54fd4764613785f417e7bc356f36f",
+          "sha256": "692d09eb4b639b9aec83cdec942f8511aec43bd3dd51e2dffb623782321a46a9",
+          "bytes": 4074,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/resources/db/migration/V029__strict_nullable_compound_checks.sql",
+          "gitBlob": "8b6bb1af49315a1b1e0f04c1c98a640f20fa7a33",
+          "sha256": "bb3a2be973f5a8ad6a84868f5c1c15bc44de71d37130f9cf7c56b1bb546eb878",
+          "bytes": 2549,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/resources/db/migration/V030__preserve_current_audio_role.sql",
+          "gitBlob": "4a187acd59e5db20898ec6248b7faa2691b2bdb6",
+          "sha256": "ae099baa342734e4944a8c5b184f86c1a762026269a8e0573e8faad6626b92be",
+          "bytes": 541,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/resources/db/provisioning/001_roles.sql",
+          "gitBlob": "f356f9f1165bbbe77be9ec8bcdf613c4c681a0d1",
+          "sha256": "6021aa46d94cbf8edac059b6c14fc36381c0bad7ceca2930b5939ee9ba6b5522",
+          "bytes": 4713,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        }
+      ]
+    },
+    "web": {
+      "buildDescriptors": 1,
+      "mainReleaseResources": 32,
+      "retainedResults": [
+        {
+          "path": "src/schubert-nk-web/pom.xml",
+          "gitBlob": "968f5090625708664487f79d4d9390fb8db58898",
+          "sha256": "9b6c47c3ab3ba0d105f41f081de10b2234af4653fdc371a8eacdf9cabb78761b",
+          "bytes": 10272,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/resources/static/css/schubert.css",
+          "gitBlob": "22b45aecef13d8bd2d19fcd3fd48c1bf449899a8",
+          "sha256": "fbd384882662d4ae16d6b65e3576b5b135a5257241b919862a763f99b08c3456",
+          "bytes": 16678,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/resources/static/js/log-search-validation.js",
+          "gitBlob": "92f3f0394982e435a5b50c89d1fe7f5579616faf",
+          "sha256": "b5cfbc9a689c91d0f14461e3e46dadb88844b5d0c38358d762dd241a5458efad",
+          "bytes": 1613,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/resources/static/js/operation-post-submit.js",
+          "gitBlob": "f2533e41b942ccc82fc9ef6d8703b9243d80e081",
+          "sha256": "771029cb5f80dd32d17af01a5fb8e7fe471a615268de6645d543f57001050429",
+          "bytes": 817,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/resources/static/js/question-input-validation.js",
+          "gitBlob": "0861e709b1dd2c0981a6368c835ecf1805cc036a",
+          "sha256": "742ebf22201034123b5e96fbb82b9fe25d0f8a5f0260651a42c011389a10cafa",
+          "bytes": 1366,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/resources/static/js/search-speaker-submit.js",
+          "gitBlob": "26844a749dd4ccb153186b8d65d2e203936f59a0",
+          "sha256": "dcf25a57a0e304391a0d3c880c263db246e296d6a7af0322283ddb72fa3e48fa",
+          "bytes": 1722,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/admin/user-detail.html",
+          "gitBlob": "9ecb1de51ab404882d1877dbede4b029efb0f29e",
+          "sha256": "c74fe2ced5c6492369f243bf9930e52e88fef40b18492195a1ac01a9b05f8fba",
+          "bytes": 3353,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/admin/user-list.html",
+          "gitBlob": "57cbdca910da3cba4d62c5acd859bdbc25f32492",
+          "sha256": "75ff8f6521d9e48c852264d839e17f9d2224f17ad2d486b37750cdae612e7655",
+          "bytes": 2911,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/admin/user-new.html",
+          "gitBlob": "54fcfc131c127fdc56e54d19b4feda0f90d61663",
+          "sha256": "97fd0f78dbfbe4538ca36e5ddda507ed55d762c040d12b09d544fc568b0dbedd",
+          "bytes": 1930,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/animation-list.html",
+          "gitBlob": "a9caea72dbcc06beec3b406688f7a812bc1856aa",
+          "sha256": "cfec2c00935f2af53ee51eb1726cfc676e1040312a0632d172f7e9ff283ac702",
+          "bytes": 2169,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/animation-watch.html",
+          "gitBlob": "e5f95c97daa4711e9f1ece91bf7044dafa57e5dc",
+          "sha256": "50cef0d1cd535d0c374205e63df51ba4308675541eb0fcc523168c0e34fc0b6c",
+          "bytes": 930,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/animation.html",
+          "gitBlob": "c570d9db4f17cbe22371da0cc4e96623b75ce4e5",
+          "sha256": "008fe35863ee9c48b82c674df78572573313b29c321686259a64e8191cbe5b4d",
+          "bytes": 1253,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/error/error.html",
+          "gitBlob": "b44ca8865236649e9238911b19f1d850465903be",
+          "sha256": "6fe51e31810e4481a1999e27fa136970945877a2ad12221411e617b1d10634d0",
+          "bytes": 1148,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/fragments/layout.html",
+          "gitBlob": "7b390dd9643cbd6309ba0014a640926a06591529",
+          "sha256": "a48bda151f893e28858afb26d1c636a564b8bd0cb3c3a16bc63bbb97f0e414bd",
+          "bytes": 1113,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/fragments/log-pagination.html",
+          "gitBlob": "0fd0af9dd87e71999cb6c191331a15a6c46a7b59",
+          "sha256": "4b3908ed49684bf3acb35457656802e9e2e1a8dac5a84073b2f213413c543ee2",
+          "bytes": 1057,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/fragments/pagination.html",
+          "gitBlob": "6d0f190dcc140f5bf059dfa7a8ff196ff2739c5c",
+          "sha256": "ddf3ccc9a1f88adf5bd61c8c9aa8928022f97c6e8f314c48941aad267bd5cb80",
+          "bytes": 1069,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/login.html",
+          "gitBlob": "1fa3d2ce70adcc63d2187dd45bdf2632b61eac68",
+          "sha256": "ba814efffec4be98d17338cacd63927d50aa552958188ba3fb7db0b77171443a",
+          "bytes": 1614,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/logs.html",
+          "gitBlob": "fce3fc627646c3f6008ef267639c9f0f68b9de88",
+          "sha256": "7bbd176e40d8a9f5b67be8f57cd27d42ccafd5e3bcabc95a56d75c370ce62708",
+          "bytes": 5070,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/menu.html",
+          "gitBlob": "b7aabe35c4e2d0acd50168c50997b9879b331a60",
+          "sha256": "8369f16fb8b330b1a073003fa0b8c74e68e65b6ca579d85ad82f6582b7ad626a",
+          "bytes": 644,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/music-list.html",
+          "gitBlob": "dea29224703d3aa50663742876a31eab27bf43c3",
+          "sha256": "59264dd712a377d0fe7da5b30e4277b2cea5d4ba4d450b7db1cbc765b3fcfc6d",
+          "bytes": 2525,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/music-sections.html",
+          "gitBlob": "8dfc908fce0e4576ff3473d7a3b4701a8a8760a3",
+          "sha256": "62b31b622da8c27fbfe8c238ea9a4579d12d22247bd2390b5dbfbbc88650d2e4",
+          "bytes": 1019,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/music.html",
+          "gitBlob": "7792ec573a3317f0f54d2ceabecca4b797838b4a",
+          "sha256": "fbbf5a79417693cff98acdc75eef97fd30561362ce95fff4ad2d8b703d68743f",
+          "bytes": 1046,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/notifications/detail.html",
+          "gitBlob": "4b8f52f48b70e93167724b253de39ad7f8035902",
+          "sha256": "10e4f709e65f4da0ee7f6afe05c13b3cc21cb3a0ad497a52ba1a2a2408824701",
+          "bytes": 3233,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/notifications/list.html",
+          "gitBlob": "ae445a39d349a210835db3fba6315451f3e4fbf0",
+          "sha256": "cb9ecfb4c5105b537acfd3733136e20b737b3aa31af04262986874e1c34236aa",
+          "bytes": 2833,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/questions/accepted.html",
+          "gitBlob": "7dce15ea62593885d82d3b7b8f0af373ba64a53a",
+          "sha256": "eded646286168f2c25805deb9938ba8b0db31e321881f781356cbf4bda889f53",
+          "bytes": 917,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/questions/detail.html",
+          "gitBlob": "bc7d551277a0a71876c22144985c637e2c50b434",
+          "sha256": "106063b219b894417619b35cd8a120cffc4f4aa21432f59bfcf6b54f7595e9f2",
+          "bytes": 2504,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/questions/list.html",
+          "gitBlob": "b44c2b53e105048bdf1b1b5a07ed4cd693d16964",
+          "sha256": "d164e7957f53807c40d46d3247c1354202607f905eedd82f7971cd2a1d483af2",
+          "bytes": 3403,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/questions/new.html",
+          "gitBlob": "6ff045ace3d43183c3c8e84164f9a803ef302418",
+          "sha256": "a71649b7e8237ad7962e32d92103d87dd92eb84343b77881f3970b3010038643",
+          "bytes": 1339,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/scenario-files.html",
+          "gitBlob": "b87f5761814fdee17f64f56847189fecb390abbc",
+          "sha256": "d76bebbaacd86eca98f38b25eb918aacead98d44ea05f7c4bd5a619cfb71fa8f",
+          "bytes": 1273,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/scenario-routes.html",
+          "gitBlob": "a3dd6b4d969d0269f810780cd1e4b7204f9b2b26",
+          "sha256": "e0a641d27ce6f637fd4dfbb5f14b0c0cbce46ab874fdf15d566126b289fe6c88",
+          "bytes": 1157,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/scenario.html",
+          "gitBlob": "e0ddd3c28bf27b749200c9917979f9af6b52ba94",
+          "sha256": "b9709c596a3f98653d854f637ae48e742704b80537460c6f3acc5d6bd342a245",
+          "bytes": 2582,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/scenarios.html",
+          "gitBlob": "d60a8b885e7d029bd7609f5e17aaf91c135b0cde",
+          "sha256": "c98273df221eb44c64c3c5303acb75b806e1b916c253b67ebd8baec300370234",
+          "bytes": 950,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/search.html",
+          "gitBlob": "65ea573cfddcb08b1d3879424651408c4ddf8404",
+          "sha256": "e3db4ebdc9372eb396d2fe95cf56aced827d400503cca1317b3572e53a69c4a7",
+          "bytes": 5170,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        }
+      ]
+    },
+    "batch": {
+      "buildDescriptors": 1,
+      "mainReleaseResources": 0,
+      "retainedResults": [
+        {
+          "path": "src/schubert-nk-batch/pom.xml",
+          "gitBlob": "e181f798331dbddfe82111108f770e27538b0f04",
+          "sha256": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495",
+          "bytes": 6934,
+          "utf8": true,
+          "onlyLf": true,
+          "endsWithLf": true
+        }
+      ]
+    }
+  },
+  "checkedNow": 69,
+  "resourceEntryCount": 63,
+  "pomEntryCount": 6,
+  "overlapWithEarlierProtocolScope": [
+    "src/schubert-nk-protocol/pom.xml"
+  ],
+  "retainedYamlAndRuntimeOutputUnqualified": true,
+  "filenamesOrHashesOnly": true,
+  "actualExternalOperations": 0,
+  "productTestsNewlyRun": 0,
+  "interpretation": "Source packaging templates and main resources only. Actual generated output, retained Current evidence, broader resumed text inventory and MSG-001/007 components need their own qualifications.",
+  "whole451": false,
+  "formalAcceptanceId": null
+}
