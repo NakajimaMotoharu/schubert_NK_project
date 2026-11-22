@@ -13,9 +13,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
@@ -177,7 +179,8 @@ final class ScenarioEntryCopyBatchTest {
   }
 
   @Test
-  void batch012FiniteOwnedWorkersCompareIndependentGolden() throws Exception {
+  void batch012FiniteOwnedWorkersCompareIndependentGolden()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var batch = new ScenarioEntryCopyBatch(placement(), rows());
     var executor = Executors.newFixedThreadPool(8);
     try {
