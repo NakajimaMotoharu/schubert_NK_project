@@ -12,7 +12,7 @@ import java.util.Objects;
 
 /**
  * Bounded exact-length/hash verification after held-inode attributes; never opens/closes paths.
- * NK-SCN-001; RD FIL-001..009; UI237; SS333 §5..7; PG-D-059; PT-SCN-008-W06.
+ * NK-SCN-001; RD FIL-001..009; UI237; SS333 §5..7/SSC-478; PG-D-059; PT-SCN-008-W06.
  */
 final class TransferContentVerifier {
   private TransferContentVerifier() {
@@ -41,6 +41,7 @@ final class TransferContentVerifier {
         throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
       }
     } catch (IOException failure) {
+      StorageIoException.preserveFatal(failure, ignored -> null);
       throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
     }
     if (!MessageDigest.isEqual(digest.digest(), HexFormat.of().parseHex(expected.sha256()))) {

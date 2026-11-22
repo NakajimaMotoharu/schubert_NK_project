@@ -3,6 +3,7 @@ package dev.codex.schubert.nk.api.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -109,6 +110,65 @@ class TransferContentVerifierTest {
     result[0] = '1';
     result[4799] = '2';
     return result;
+  }
+
+  /** PT-SCN-008-W06-FATAL; SS333 §6.2 / SSC-478. */
+  @Test
+  void w06ReadFailurePreservesTheFirstWrappedErrorAndKeepsTheChannelBorrowed() throws Exception {
+    var expected = expected(golden());
+    var cause = new AssertionError("fixture cause");
+    var suppressed = new LinkageError("fixture suppressed");
+    var both = new IOException("fixture wrapper", cause);
+    both.addSuppressed(suppressed);
+    var suppressedOnly = new IOException("fixture wrapper");
+    suppressedOnly.addSuppressed(suppressed);
+    assertReadError(expected, both, cause);
+    assertReadError(expected, suppressedOnly, suppressed);
+
+    var ordinary = new IOException("fixture wrapper", new IllegalStateException("fixture cause"));
+    ordinary.addSuppressed(new IOException("fixture suppressed"));
+    try (var input = new FailingInput(ordinary)) {
+      reject(() -> TransferContentVerifier.verify(input, expected));
+      assertTrue(input.isOpen());
+      assertEquals(1, input.reads);
+    }
+  }
+
+  private static void assertReadError(
+      LargeResultContent expected, IOException failure, Error expectedError) {
+    try (var input = new FailingInput(failure)) {
+      assertSame(
+          expectedError,
+          assertThrows(Error.class, () -> TransferContentVerifier.verify(input, expected)));
+      assertTrue(input.isOpen());
+      assertEquals(1, input.reads);
+    }
+  }
+
+  private static final class FailingInput implements ReadableByteChannel {
+    private final IOException failure;
+    private boolean open = true;
+    private int reads;
+
+    private FailingInput(IOException failure) {
+      this.failure = failure;
+    }
+
+    @Override
+    public int read(ByteBuffer destination) throws IOException {
+      reads++;
+      throw failure;
+    }
+
+    @Override
+    public boolean isOpen() {
+      return open;
+    }
+
+    @Override
+    public void close() {
+      open = false;
+    }
   }
 
   private static LargeResultContent expected(byte[] bytes) throws Exception {
