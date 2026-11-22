@@ -1,0 +1,835 @@
+{
+  "run": "PG42872",
+  "source": "f1fc629339a1f40553859955907910b6d96dc069",
+  "core": "e8368d22c4da2ec841f008df793594d3be9066af",
+  "wbs": "WBS-P020-01.02/2",
+  "actualExit": 0,
+  "startedAtUTC": "2026-11-22T17:30:52.648837+00:00",
+  "terminalAtUTC": "2026-11-22T17:31:05.844147+00:00",
+  "originalProof": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG41344-p020-current-218-local-v1/manifest.json",
+    "sha256": "5f9119617ebed6632218f46bd81c2b858f6c8fa3064a827edd1fb9b470d9148c"
+  },
+  "baselineTree": "cd377044e4ca058ea219ca6a2fec82159559c72c",
+  "originalCases": 218,
+  "newCases": [
+    [
+      "dev.codex.schubert.characterization.ArtifactComparatorTest",
+      "rejectsAnUnapprovedCaseAtTheSameCatalogSize"
+    ],
+    [
+      "dev.codex.schubert.characterization.GateDefinitionDocumentsTest",
+      "contractRejectsAnUnapprovedIdAtTheSameSize"
+    ],
+    [
+      "dev.codex.schubert.characterization.GateDefinitionDocumentsTest",
+      "contractRejectsReorderedApprovedIds"
+    ]
+  ],
+  "ordinaryCases": 221,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "scopeDeclaredNotRun": 0,
+  "heldRealFileStore": 1,
+  "changedInputs": {
+    "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java": "065f450eac5e4699e192867c03dd36df88867ff89f6a4a65a98c9175684738e3",
+    "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java": "dc60334059885bbba75834560af946eb57a31f3680b67dc74334bde7d2c1fb7b",
+    "program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorTest.java": "90d8b1afafceb6f33e83bfdb9a0e88d22ab1bcc0234f62546e574a595e05e88a",
+    "program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionDocumentsTest.java": "4de22e247f1f567683987a2e00260f9046a541b5fae6c0fbf80f7fefa1be9fb6"
+  },
+  "singleExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/unit.exec",
+    "sha256": "e742b4eae2db952c4c1e7db613e585238e2adff1a2dc3260f1d599e705aa29ad"
+  },
+  "xml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/reports/TEST-junit-jupiter.xml",
+    "sha256": "4af4c40effd4de0630f07e33f6df79023b57dcce79e94859fcd36565345ec062"
+  },
+  "coverageXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/coverage.xml",
+    "sha256": "86158321ff6e71cc18615057762fbaf9618e01a656ecd4f396ef3b7227f8e81b"
+  },
+  "coverageByClass": {
+    "dev/codex/schubert/characterization/ArtifactComparator": {
+      "INSTRUCTION": {
+        "covered": 1811,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 178,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 361,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 125,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 36,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/characterization/GateContractValidator$ValidationResult": {
+      "INSTRUCTION": {
+        "covered": 13,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 2,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 2,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 2,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/characterization/GateCli$TreeStats": {
+      "INSTRUCTION": {
+        "covered": 12,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 1,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 1,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/characterization/CharacterizationIoScope$Open": {},
+    "dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator": {
+      "INSTRUCTION": {
+        "covered": 1203,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 246,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 219,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 149,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 26,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/characterization/GateCli$UsableSpace": {},
+    "dev/codex/schubert/characterization/GateCli$FileJsonOutput": {
+      "INSTRUCTION": {
+        "covered": 31,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 8,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 4,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 4,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/characterization/CharacterizationIoScope$Work": {},
+    "dev/codex/schubert/characterization/GateCli": {
+      "INSTRUCTION": {
+        "covered": 2268,
+        "missed": 12
+      },
+      "BRANCH": {
+        "covered": 210,
+        "missed": 1
+      },
+      "LINE": {
+        "covered": 447,
+        "missed": 2
+      },
+      "COMPLEXITY": {
+        "covered": 177,
+        "missed": 2
+      },
+      "METHOD": {
+        "covered": 70,
+        "missed": 1
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/characterization/CharacterizationIoScope": {
+      "INSTRUCTION": {
+        "covered": 50,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 2,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 16,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 3,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 2,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/characterization/ArtifactComparator$ComparisonResult": {
+      "INSTRUCTION": {
+        "covered": 47,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 7,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 2,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 2,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/characterization/TargetAdapter$Target": {
+      "INSTRUCTION": {
+        "covered": 61,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 7,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 14,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 9,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 5,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/characterization/GateCli$JsonOutput": {},
+    "dev/codex/schubert/characterization/GateContractValidator": {
+      "INSTRUCTION": {
+        "covered": 2763,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 261,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 505,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 193,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 59,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/characterization/GateCli$BaselineNumbers": {
+      "INSTRUCTION": {
+        "covered": 28,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 6,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 4,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 4,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/characterization/TargetAdapter": {
+      "INSTRUCTION": {
+        "covered": 357,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 74,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 70,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 47,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 10,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/characterization/CharacterizationIoScope$Release": {}
+  },
+  "package": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/snapshot/program/characterization/target/schubert-characterization-0.1.0-SNAPSHOT.jar",
+    "sha256": "dc27600a3b34abf35f22f13c46511ee4687473f321cc58e6a71c159d59fd39b1"
+  },
+  "classPhysical": {
+    "dev/codex/schubert/characterization/ArtifactComparator$ComparisonResult.class": "4cc6dbabfd2294295cb741e68a7da98c459565f0aa188cacb5d0ead42e5cd706",
+    "dev/codex/schubert/characterization/ArtifactComparator.class": "c60e47ef05edecd72fa868a8238daeb5831e22f0e6777b04aed2f2ea81468116",
+    "dev/codex/schubert/characterization/CharacterizationIoScope$Open.class": "f2393025ee9c5ef01c62d4b231e864409394562fbd2b4202906202d49ef9e27e",
+    "dev/codex/schubert/characterization/CharacterizationIoScope$Release.class": "95ecedd79ce4de9045b81712251dfa379ee68c991e6947d70112f7a429c546cc",
+    "dev/codex/schubert/characterization/CharacterizationIoScope$Work.class": "fb34fa7cd207d0b356cf01e34ef6d886caec2cfdc062f3df6c7c720a21e3795a",
+    "dev/codex/schubert/characterization/CharacterizationIoScope.class": "f76c2ce062349d736a5ba3bbc6174e64bc413826c1d28e6ab8efc9bbfba4d3ad",
+    "dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.class": "91fbc7022ef4b213c12b7c259c1aac9013afe76da4d5026667d3fc3b44b3a6df",
+    "dev/codex/schubert/characterization/GateCli$BaselineNumbers.class": "f42911db04f894f5fe3fa64377c3514878ff16f75aab081b4554ba1fb2386812",
+    "dev/codex/schubert/characterization/GateCli$FileJsonOutput.class": "667e70369ec0aa172646f8ed8265833a5994ec1fc218c084f0287b401f849c74",
+    "dev/codex/schubert/characterization/GateCli$JsonOutput.class": "8d7047d7bf57b8d93b832edfdfbcaa023022e1c03b8e9221a955277c49427c1f",
+    "dev/codex/schubert/characterization/GateCli$TreeStats.class": "b6ce1e4494583aa2dd04f5938dca4e8489d330208bd214cb36ee0bf45c2c65d1",
+    "dev/codex/schubert/characterization/GateCli$UsableSpace.class": "d5ba88d5f1f47cd3e9f233632fd1687cc7be6a64c8090a768b73741b4948a42c",
+    "dev/codex/schubert/characterization/GateCli.class": "fb055d3db3e72e307b6624f31e204c517e11c80c4c1a625537d9519f72b91ff3",
+    "dev/codex/schubert/characterization/GateContractValidator$ValidationResult.class": "40774c6c38f49617e90b67f62008b3b3356198fe914b7f7ece0ae90ffd9a4464",
+    "dev/codex/schubert/characterization/GateContractValidator.class": "b4f91e92fa16f111e6bcf0070eaa901ad69d73f5c50e4ceeea2201a36d24749a",
+    "dev/codex/schubert/characterization/TargetAdapter$Target.class": "bbdfbbdc098fffcb83102bef3eb8e1d84af8860217330d104cc11114fbc00c53",
+    "dev/codex/schubert/characterization/TargetAdapter.class": "a31b5fb44c9933b6660936e6cbffb59ff9b0021636b7aae42393b3c957e3852b"
+  },
+  "changeType": "Characterization tool, not product Core",
+  "steps": {
+    "package": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-N",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-f",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/snapshot/program/characterization/pom.xml",
+        "-Dmaven.test.skip=true",
+        "package"
+      ],
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/package.stdout",
+        "sha256": "d5595b2bb6b59252a82c495582a0eb7079061196ad9a9e2edcd8b59c554a0888"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/package.stderr",
+        "sha256": "05ed4976f99856c1417eead6c52058f5565d748a00ae7939fa02188545fafda4"
+      },
+      "startedAtUTC": "2026-11-22T17:30:52.737472+00:00",
+      "terminalAtUTC": "2026-11-22T17:30:58.551110+00:00"
+    },
+    "compile-tests": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/snapshot/program/characterization/target/classes:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/microsoft/playwright/playwright/1.55.0/playwright-1.55.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.19.2/jackson-annotations-2.19.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-core/2.19.2/jackson-core-2.19.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-databind/2.19.2/jackson-databind-2.19.2.jar",
+        "-sourcepath",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/snapshot/program/characterization/tests/java",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/tests",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateCliTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateContractTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateContractValidatorNegativeTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/TargetAdapterTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorEmptyInputTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/BaselineNumericMetadataTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/CharacterizationHashTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidatorTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/CorrelatedLogHttpNumberTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/CorrelatedMenuActionContractTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateBaselineMetadataTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionDocumentsTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionNumericTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateEvidenceDocumentsTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateMetricsCountTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateSyntheticRunPortTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/CommonValueContractTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/CharacterizationIoScopeTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateOutputFailureContractTest.java"
+      ],
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/compile-tests.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/compile-tests.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "startedAtUTC": "2026-11-22T17:30:58.551158+00:00",
+      "terminalAtUTC": "2026-11-22T17:31:00.803059+00:00"
+    },
+    "junit": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Xmx1g",
+        "-Djava.awt.headless=true",
+        "-Duser.language=ja",
+        "-Duser.country=JP",
+        "-Duser.timezone=Asia/Tokyo",
+        "-Dchr.unitProjectRoot=/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/snapshot",
+        "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/tmp",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/unit.exec,sessionid=PG42872-canonical-chr-roster-current-v2",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-ansi-colors",
+        "--fail-if-no-tests",
+        "--class-path",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/snapshot/program/characterization/target/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/tests:/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/snapshot/program/characterization/tests/resources:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/microsoft/playwright/playwright/1.55.0/playwright-1.55.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.19.2/jackson-annotations-2.19.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-core/2.19.2/jackson-core-2.19.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-databind/2.19.2/jackson-databind-2.19.2.jar",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/reports",
+        "--config=junit.jupiter.execution.parallel.enabled=false",
+        "--select-class",
+        "dev.codex.schubert.characterization.ArtifactComparatorTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.GateCliTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.GateContractTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.GateContractValidatorNegativeTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.TargetAdapterTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.ArtifactComparatorEmptyInputTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.BaselineNumericMetadataTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.CharacterizationHashTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.CorrelatedLogEvidenceValidatorTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.CorrelatedLogHttpNumberTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.CorrelatedMenuActionContractTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.GateBaselineMetadataTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.GateDefinitionDocumentsTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.GateDefinitionNumericTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.GateEvidenceDocumentsTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.GateMetricsCountTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.GateSyntheticRunPortTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.CommonValueContractTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.CharacterizationIoScopeTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.GateOutputFailureContractTest"
+      ],
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/junit.stdout",
+        "sha256": "fce7727d3b825579ccbcf2a56286956d96aea34b6ca965c071ff0bae2271b37d"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/junit.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "startedAtUTC": "2026-11-22T17:31:00.803109+00:00",
+      "terminalAtUTC": "2026-11-22T17:31:05.378085+00:00"
+    },
+    "coverage": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/unit.exec",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/snapshot/program/characterization/target/classes",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/coverage.xml"
+      ],
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/coverage.stdout",
+        "sha256": "b476b9e9494f989e5f9a5af296df9c6153bd05d19997b4d669f69c4a070e0ee5"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/coverage.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "startedAtUTC": "2026-11-22T17:31:05.382418+00:00",
+      "terminalAtUTC": "2026-11-22T17:31:05.568869+00:00"
+    },
+    "classinfo": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "classinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/snapshot/program/characterization/target/classes"
+      ],
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/classinfo.stdout",
+        "sha256": "e6e1406439d1d402a8f1a29df4f82d306f6769820187f3168563e271ee0115fb"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/classinfo.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "startedAtUTC": "2026-11-22T17:31:05.568889+00:00",
+      "terminalAtUTC": "2026-11-22T17:31:05.716983+00:00"
+    },
+    "execinfo": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "execinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/unit.exec"
+      ],
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/execinfo.stdout",
+        "sha256": "1817920f8fe44eb9e453b5750122c82aaeb7dbf6f9a66dd28ccc023a168f8783"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/execinfo.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "startedAtUTC": "2026-11-22T17:31:05.717002+00:00",
+      "terminalAtUTC": "2026-11-22T17:31:05.840016+00:00"
+    }
+  },
+  "nkActual": 0,
+  "full451": false,
+  "formalAcceptanceId": null,
+  "rawTerminal": {
+    "path": "../pgpt-runs/PG379/PG42872-canonical-chr-roster-current-v2/terminal.json",
+    "sha256": "b6e9c8d931f4efe705bcd33e700a3eb9a0541e955628c4d28a8602ef5a725f28"
+  },
+  "redProbe": {
+    "path": "../pgpt-runs/PG379/PG42872-canonical-chr-roster-before-v1/terminal.json",
+    "sha256": "1d431847e4b3e27d878d862f49bf676792e68484b51956a80af1c41c91625fba"
+  },
+  "setupNoExecution": "v1 original historical count object expected an integer during isolated preflight",
+  "publishedJUnit": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG42872-canonical-chr-roster-current-v2/junit/TEST-junit-jupiter.xml",
+    "sha256": "9e4c06293cd3f9bbcc5024f8e50ad0d8b6fe197c2d2b7c2ee09948508c94aad7",
+    "originalUnitXmlSha256": "4af4c40effd4de0630f07e33f6df79023b57dcce79e94859fcd36565345ec062"
+  },
+  "publishedCoverage": [
+    {
+      "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG42872-canonical-chr-roster-current-v2/coverage/classinfo.txt",
+      "sha256": "e6e1406439d1d402a8f1a29df4f82d306f6769820187f3168563e271ee0115fb"
+    },
+    {
+      "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG42872-canonical-chr-roster-current-v2/coverage/coverage.xml",
+      "sha256": "86158321ff6e71cc18615057762fbaf9618e01a656ecd4f396ef3b7227f8e81b"
+    },
+    {
+      "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG42872-canonical-chr-roster-current-v2/coverage/jacoco.exec",
+      "sha256": "e742b4eae2db952c4c1e7db613e585238e2adff1a2dc3260f1d599e705aa29ad"
+    }
+  ],
+  "wholeLocalToolCounters": {
+    "INSTRUCTION": {
+      "covered": 8644,
+      "missed": 12
+    },
+    "BRANCH": {
+      "covered": 984,
+      "missed": 1
+    },
+    "LINE": {
+      "covered": 1654,
+      "missed": 2
+    },
+    "COMPLEXITY": {
+      "covered": 716,
+      "missed": 2
+    },
+    "METHOD": {
+      "covered": 218,
+      "missed": 1
+    },
+    "CLASS": {
+      "covered": 12,
+      "missed": 0
+    }
+  },
+  "exactCompiledCrc": {
+    "dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator": "15e3f958f82f71d4",
+    "dev/codex/schubert/characterization/GateCli": "26142a7a929f3dde",
+    "dev/codex/schubert/characterization/GateCli$BaselineNumbers": "b43bec90856a8dde",
+    "dev/codex/schubert/characterization/GateCli$UsableSpace": "a94a22d9b22f5e24",
+    "dev/codex/schubert/characterization/CharacterizationIoScope$Open": "41310f9c3951bfd0",
+    "dev/codex/schubert/characterization/GateCli$FileJsonOutput": "600ee4481afbd7c4",
+    "dev/codex/schubert/characterization/TargetAdapter$Target": "cbef2159e8b5849b",
+    "dev/codex/schubert/characterization/ArtifactComparator": "ac884f45fa3d6720",
+    "dev/codex/schubert/characterization/ArtifactComparator$ComparisonResult": "4c22a9685b3ebbfa",
+    "dev/codex/schubert/characterization/CharacterizationIoScope$Work": "3ef7c949b1aac880",
+    "dev/codex/schubert/characterization/GateCli$JsonOutput": "79fb74ea40d84f9e",
+    "dev/codex/schubert/characterization/GateCli$TreeStats": "1f783f3a62e39a9d",
+    "dev/codex/schubert/characterization/GateContractValidator": "3521d4f1c9003cd6",
+    "dev/codex/schubert/characterization/CharacterizationIoScope": "238bdb3523c300a5",
+    "dev/codex/schubert/characterization/TargetAdapter": "91cec019ce2c2d5a",
+    "dev/codex/schubert/characterization/GateContractValidator$ValidationResult": "af03ff0914041cb6",
+    "dev/codex/schubert/characterization/CharacterizationIoScope$Release": "f42617867a72d493"
+  },
+  "observedProbes": {
+    "dev/codex/schubert/characterization/GateCli$BaselineNumbers": {
+      "CRC": "b43bec90856a8dde",
+      "hit": 11,
+      "total": 11
+    },
+    "dev/codex/schubert/characterization/GateCli$TreeStats": {
+      "CRC": "1f783f3a62e39a9d",
+      "hit": 7,
+      "total": 7
+    },
+    "dev/codex/schubert/characterization/GateContractValidator$ValidationResult": {
+      "CRC": "af03ff0914041cb6",
+      "hit": 7,
+      "total": 7
+    },
+    "dev/codex/schubert/characterization/GateCli$FileJsonOutput": {
+      "CRC": "600ee4481afbd7c4",
+      "hit": 5,
+      "total": 5
+    },
+    "dev/codex/schubert/characterization/TargetAdapter": {
+      "CRC": "91cec019ce2c2d5a",
+      "hit": 101,
+      "total": 101
+    },
+    "dev/codex/schubert/characterization/GateCli": {
+      "CRC": "26142a7a929f3dde",
+      "hit": 552,
+      "total": 554
+    },
+    "dev/codex/schubert/characterization/CharacterizationIoScope": {
+      "CRC": "238bdb3523c300a5",
+      "hit": 13,
+      "total": 13
+    },
+    "dev/codex/schubert/characterization/GateContractValidator": {
+      "CRC": "3521d4f1c9003cd6",
+      "hit": 664,
+      "total": 664
+    },
+    "dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator": {
+      "CRC": "15e3f958f82f71d4",
+      "hit": 336,
+      "total": 336
+    },
+    "dev/codex/schubert/characterization/ArtifactComparator$ComparisonResult": {
+      "CRC": "4c22a9685b3ebbfa",
+      "hit": 18,
+      "total": 18
+    },
+    "dev/codex/schubert/characterization/TargetAdapter$Target": {
+      "CRC": "cbef2159e8b5849b",
+      "hit": 21,
+      "total": 21
+    },
+    "dev/codex/schubert/characterization/ArtifactComparator": {
+      "CRC": "ac884f45fa3d6720",
+      "hit": 440,
+      "total": 440
+    }
+  },
+  "fourRelevantClassCounters": {
+    "dev/codex/schubert/characterization/ArtifactComparator": {
+      "INSTRUCTION": {
+        "covered": 1811,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 178,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 361,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 125,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 36,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/characterization/GateContractValidator$ValidationResult": {
+      "INSTRUCTION": {
+        "covered": 13,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 2,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 2,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 2,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/characterization/ArtifactComparator$ComparisonResult": {
+      "INSTRUCTION": {
+        "covered": 47,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 7,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 2,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 2,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/characterization/GateContractValidator": {
+      "INSTRUCTION": {
+        "covered": 2763,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 261,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 505,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 193,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 59,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    }
+  },
+  "testIds": [
+    "PT-CHR-DEF083",
+    "PT-CHR-DEF084",
+    "PT-CHR-DEF085"
+  ],
+  "bugClosed": "BUG-3639",
+  "ykt": "YKT-2858"
+}
