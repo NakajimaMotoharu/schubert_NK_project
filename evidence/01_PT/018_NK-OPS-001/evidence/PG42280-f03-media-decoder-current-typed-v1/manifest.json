@@ -1,0 +1,138 @@
+{
+  "run": "PG42280",
+  "source": "c56982533bd442702c1a04841ddc3c7b9d3ef258",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-F03/2-2-b",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T06:33:10.364637+00:00",
+  "fixture": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaResponseDecoderTest.java",
+    "sha256": "9b7c3e885d35d6b65f014e465648f367036e228c67e821c0ab29ed5df4989845"
+  },
+  "physical": {
+    "dev/codex/schubert/nk/web/media/MediaResponseDecoderTest$1.class": "54165d4d56c7004d5e82557cfe5f0d612abaa1953d2d26eab8d2989d0cb899a3",
+    "dev/codex/schubert/nk/web/media/MediaResponseDecoderTest$ContextProbe.class": "cc3c6686b5890d87a75614a2e825aa344590367f07ed1c71f8dc18ec3ed82e7e",
+    "dev/codex/schubert/nk/web/media/MediaResponseDecoderTest.class": "a627eb39d7c39cf6af3ebb10f09781cf452d26e933b473ee36fa6570b89c79ff"
+  },
+  "sourceOrdinaries": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42276-f03-media-decoder-current-pure-v1/manifest.json",
+      "sha256": "ccc738139a46f72ed23d7e7e5a0cf98b44dce03a6f8a148707aad516d51ff966"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42278-f03-media-decoder-current-pure-v1/manifest.json",
+      "sha256": "14c2d10a5c2bdab89c1dab3311861e9848cdbaca55f992f099fdb01dd400fa6f"
+    }
+  ],
+  "rawSpotBugs": [
+    {
+      "rule": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "method": "context001PositiveAndPortBoundaryPreserveCallerBytes"
+    },
+    {
+      "rule": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "method": "med037ThreeRequestsBindAllApprovedSuccessfulDescriptors"
+    },
+    {
+      "rule": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "method": "med038ErrorProfilesKeepCodesWithoutFabricatedDescriptors"
+    },
+    {
+      "rule": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "method": "med040ConcurrentDecodeOwnsBytesAndIsolatesRequests"
+    },
+    {
+      "rule": "BC_UNCONFIRMED_CAST",
+      "method": "contextRaise"
+    },
+    {
+      "rule": "PZLA_PREFER_ZERO_LENGTH_ARRAYS",
+      "method": "encode"
+    },
+    {
+      "rule": "THROWS_METHOD_THROWS_RUNTIMEEXCEPTION",
+      "method": "contextRaise"
+    }
+  ],
+  "rawPMD": [
+    {
+      "rule": "CloseResource",
+      "line": "219",
+      "method": "med040ConcurrentDecodeOwnsBytesAndIsolatesRequests",
+      "reason": "Finite 100 test submissions, each get bounded 10s, after finally the shutdown is bounded and checked."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": "219",
+      "method": "med040ConcurrentDecodeOwnsBytesAndIsolatesRequests",
+      "reason": "Finite 100 test submissions, each get bounded 10s, after finally the shutdown is bounded and checked."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": "225",
+      "method": "med040ConcurrentDecodeOwnsBytesAndIsolatesRequests",
+      "reason": "Finite 100 test submissions, each get bounded 10s, after finally the shutdown is bounded and checked."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": "252",
+      "method": "med040ConcurrentDecodeOwnsBytesAndIsolatesRequests",
+      "reason": "Finite 100 test submissions, each get bounded 10s, after finally the shutdown is bounded and checked."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": "254",
+      "method": "med040ConcurrentDecodeOwnsBytesAndIsolatesRequests",
+      "reason": "Finite 100 test submissions, each get bounded 10s, after finally the shutdown is bounded and checked."
+    },
+    {
+      "rule": "ReturnEmptyCollectionRatherThanNull",
+      "line": "435",
+      "method": "encode",
+      "reason": "Fault double explicitly simulates absent output at both acquisition points; zero-length inputs have a separately verified test."
+    }
+  ],
+  "clearScope": [
+    "4 generic checked signatures",
+    "1 unconfirmed Error cast in synthetic sentinel fixture"
+  ],
+  "intentionalSpotBugs": {
+    "PZLA_PREFER_ZERO_LENGTH_ARRAYS": "Existing exact absence-negative; returning empty array would change oracle",
+    "THROWS_METHOD_THROWS_RUNTIMEEXCEPTION": "Fault injection retains same incoming unchecked instance; subsequent proof shall confirm intentional fixture scope or eliminate if split without changing oracle."
+  },
+  "stages": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42280-f03-media-decoder-current-typed-v1/format.terminal.json",
+      "sha256": "6aceacbbf46a628b1033ab7d9546cfdf3fe1ea53959366cd64b58a8a24fb2346"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42280-f03-media-decoder-current-typed-v1/checkstyle.terminal.json",
+      "sha256": "b4f8603c39a72322c9922d88cb0c5b94d12b1b541f4c1b805c809783dd630fc6"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42280-f03-media-decoder-current-typed-v1/pmd.terminal.json",
+      "sha256": "7b52183f64198731809ba38ccc7ea74ce0754cc41e99afffe1d51daf05da970e"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42280-f03-media-decoder-current-typed-v1/spotbugs.terminal.json",
+      "sha256": "da7692421aec22ba7151c13985fac98b62b33e280505bb8d31efdfe85cef0e2b"
+    }
+  ],
+  "reports": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42280-f03-media-decoder-current-typed-v1/checkstyle.xml",
+      "sha256": "01c9d5d6f00fe1b1c77e3386adc92a7f7bfbfc253b8c59cc41e008757bac0cec"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42280-f03-media-decoder-current-typed-v1/pmd.xml",
+      "sha256": "a96fbbb5aa80febbb7bc3338f62db184d2571f11fd0a26b4baf7a52262491a47"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42280-f03-media-decoder-current-typed-v1/spotbugs.xml",
+      "sha256": "43fb6a7cf4315b89050d69777f930496d6652095b35372bd42cf7686ccdb5d3f"
+    }
+  ],
+  "testRuns": 0,
+  "formalAcceptanceId": null,
+  "whole451": false
+}
