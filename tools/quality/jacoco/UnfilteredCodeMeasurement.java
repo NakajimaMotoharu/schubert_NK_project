@@ -16,6 +16,7 @@ import java.security.DigestInputStream;
 import java.security.DigestOutputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -53,6 +54,7 @@ public final class UnfilteredCodeMeasurement {
       throw new IllegalArgumentException("exec and explicit class files required");
     ExecutionDataStore data = executionData(Path.of(args[execIndex]), originalExec);
     Set<String> measuredNames = new HashSet<>();
+    var measurements = new ArrayList<Measurement>(args.length - execIndex - 1);
     for (int index = execIndex + 1; index < args.length; index++) {
       byte[] bytes = Files.readAllBytes(Path.of(args[index]));
       var reader = new ClassReader(bytes);
@@ -66,32 +68,37 @@ public final class UnfilteredCodeMeasurement {
         throw new IllegalStateException("execution/class name mismatch");
       var analysis = new Measurement(name, id, observed);
       reader.accept(new ClassProbesAdapter(analysis, false), 0);
-      var coverage = analysis.coverage;
+      measurements.add(analysis);
+    }
+    for (var measurement : measurements) printMeasurement(measurement, lineDeficits);
+  }
+
+  private static void printMeasurement(Measurement analysis, boolean lineDeficits) {
+    var coverage = analysis.coverage;
+    System.out.println(
+        "CLASS\t"
+            + coverage.getName()
+            + "\t"
+            + String.format("%016x", coverage.getId())
+            + "\t"
+            + (analysis.data != null)
+            + "\t"
+            + analysis.totalProbes
+            + "\t"
+            + analysis.classAccess
+            + counters(coverage));
+    for (var method : coverage.getMethods()) {
       System.out.println(
-          "CLASS\t"
+          "METHOD\t"
               + coverage.getName()
               + "\t"
-              + String.format("%016x", id)
+              + method.getName()
               + "\t"
-              + (observed != null)
+              + method.getDesc()
               + "\t"
-              + analysis.totalProbes
-              + "\t"
-              + analysis.classAccess
-              + counters(coverage));
-      for (var method : coverage.getMethods()) {
-        System.out.println(
-            "METHOD\t"
-                + coverage.getName()
-                + "\t"
-                + method.getName()
-                + "\t"
-                + method.getDesc()
-                + "\t"
-                + analysis.access.get(method.getName() + method.getDesc())
-                + counters(method));
-        if (lineDeficits) printLineDeficits(coverage.getName(), method);
-      }
+              + analysis.access.get(method.getName() + method.getDesc())
+              + counters(method));
+      if (lineDeficits) printLineDeficits(coverage.getName(), method);
     }
   }
 

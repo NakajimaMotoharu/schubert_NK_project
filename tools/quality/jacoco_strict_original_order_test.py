@@ -21,6 +21,7 @@ COMPILE_PROOF = (
 )
 JAVA_MAIN = 'org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement'
 NAME = 'orderfixture/One'
+SECOND = 'orderfixture/Two'
 HEADER = bytes.fromhex('01 c0c0 1007')
 SESSION = bytes.fromhex('10 0003 52554e') + struct.pack('>qq', 1000, 1001)
 
@@ -55,22 +56,29 @@ class StrictOriginalOrderTest(unittest.TestCase):
         fixture.write_text(
             'package orderfixture; public interface One { default int value() { return 7; } }\n'
         )
+        other = cls.directory / 'Two.java'
+        other.write_text(
+            'package orderfixture; public interface Two { default int value() { return 9; } }\n'
+        )
         subprocess.run(
             [BIN / 'javac', '--release', '25', '-Xlint:all', '-Werror', '-proc:none',
-             '-cp', classpath, '-d', cls.directory, TOOL, fixture],
+             '-cp', classpath, '-d', cls.directory, TOOL, fixture, other],
             check=True, capture_output=True, timeout=30,
         )
         cls.target = cls.directory / (NAME + '.class')
         cls.crc = class_crc(cls.target.read_bytes())
         cls.entry = class_record(NAME, cls.crc)
+        cls.second = cls.directory / (SECOND + '.class')
+        cls.second_crc = class_crc(cls.second.read_bytes())
         cls.command = [BIN / 'java', '-cp', f'{cls.directory}{os.pathsep}{classpath}', JAVA_MAIN]
 
-    def measure(self, raw, *, strict=True):
+    def measure(self, raw, *targets, strict=True):
         execution = self.directory / (self._testMethodName + '.exec')
         execution.write_bytes(raw)
         flags = ['--strict-original-exec'] if strict else []
         return subprocess.run(
-            [*self.command, *flags, execution, self.target], capture_output=True, timeout=30,
+            [*self.command, *flags, execution, *(targets or (self.target,))],
+            capture_output=True, timeout=30,
         )
 
     def test_session_then_class_keeps_target_identity(self):
@@ -110,6 +118,42 @@ class StrictOriginalOrderTest(unittest.TestCase):
             self.assertEqual(1, result.returncode, result.stdout)
             self.assertIn(b'execution class before original session', result.stderr)
             self.assertEqual(b'', result.stdout)
+
+    def test_crc006_later_class_crc_mismatch_leaves_no_measurement(self):
+        raw = HEADER + SESSION + self.entry + class_record(SECOND, self.second_crc ^ 1)
+        for strict in (True, False):
+            with self.subTest(strict=strict):
+                result = self.measure(raw, self.target, self.second, strict=strict)
+                self.assertEqual(1, result.returncode, result.stderr)
+                self.assertIn(b'execution/class CRC mismatch', result.stderr)
+                self.assertEqual(b'', result.stdout)
+
+    def test_crc007_later_duplicate_target_leaves_no_measurement(self):
+        raw = HEADER + SESSION + self.entry
+        for strict in (True, False):
+            with self.subTest(strict=strict):
+                result = self.measure(raw, self.target, self.target, strict=strict)
+                self.assertEqual(1, result.returncode, result.stderr)
+                self.assertIn(b'duplicate class input', result.stderr)
+                self.assertEqual(b'', result.stdout)
+
+    def test_crc008_complete_output_preserves_requested_order_and_counters(self):
+        raw = HEADER + SESSION + self.entry + class_record(SECOND, self.second_crc)
+        result = self.measure(raw, self.second, self.target)
+        self.assertEqual(0, result.returncode, result.stderr)
+        rows = [tuple(line.split('\t')) for line in result.stdout.decode('ascii').splitlines()]
+        self.assertEqual(
+            [('CLASS', SECOND), ('METHOD', SECOND), ('CLASS', NAME), ('METHOD', NAME)],
+            [row[:2] for row in rows],
+        )
+        for record, crc, method in ((rows[0], self.second_crc, rows[1]), (rows[2], self.crc, rows[3])):
+            self.assertEqual((f'{crc:016x}', 'true', '1'), record[2:5])
+            self.assertEqual(('value', '()I'), method[2:4])
+            self.assertIn('INSTRUCTION:0:2', record)
+            self.assertIn('LINE:0:1', record)
+            self.assertIn('BRANCH:0:0', record)
+            self.assertIn('METHOD:0:1', record)
+            self.assertIn('CLASS:0:1', record)
 
 
 if __name__ == '__main__':
