@@ -20,6 +20,8 @@ public record RequestContext(
     Instant receivedAt,
     int deliveryCount) {
 
+  private static final int MINIMUM_DELIVERY_COUNT = 1;
+
   public RequestContext {
     Objects.requireNonNull(messageId, "message ID");
     Objects.requireNonNull(correlationId, "correlation ID");
@@ -29,7 +31,7 @@ public record RequestContext(
     if (!messageId.equals(correlationId)) {
       throw new IllegalArgumentException("root request identity is inconsistent");
     }
-    if (deliveryCount < 1) {
+    if (deliveryCount < MINIMUM_DELIVERY_COUNT) {
       throw new IllegalArgumentException("delivery count must be positive");
     }
   }
