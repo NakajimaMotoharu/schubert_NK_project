@@ -1,0 +1,73 @@
+{
+  "run": "PG43104-secrets-track-delta-after-43074-v1",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T23:06:09.211943+00:00",
+  "source": "7e19e9da76b8f359b129801132de878780265633",
+  "canonicalDesignSource": "7745de1fb04c8b9e2cfccc11103d7b3c57b090d7",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-G07",
+  "prior": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43074-g07-current-tracked-delta-v1/manifest.json",
+    "sha256": "43487d331bd951e40a13058edda441853667c387aa599b3f38227d493b62ba19"
+  },
+  "tool": {
+    "path": "/home/mini/codex/project1/work/toolchain/gitleaks-8.30.1-linux-x64/gitleaks",
+    "sha256": "88f91962aa2f93ac6ab281d553b9e125f5197bbbce38f9f2437f7299c32e5509"
+  },
+  "branchScopes": [
+    {
+      "branch": "dev-foundation",
+      "source": "7e19e9da76b8f359b129801132de878780265633",
+      "fromExclusive": "e1f25938079fcb9f3c9e81ec804cbd737697b088",
+      "commits": 19,
+      "trackedTouchedPaths": 82,
+      "rawFindings": 0,
+      "exit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/gitleaks-8.30.1-linux-x64/gitleaks",
+        "git",
+        "--redact=100",
+        "--no-banner",
+        "--log-opts=e1f25938079fcb9f3c9e81ec804cbd737697b088..7e19e9da76b8f359b129801132de878780265633",
+        "--report-format",
+        "json",
+        "--report-path",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43104-secrets-track-delta-after-43074-v1/dev-foundation-redacted.json",
+        "."
+      ],
+      "output": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43104-secrets-track-delta-after-43074-v1/dev-foundation-redacted.json",
+        "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+      },
+      "diagnostic": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43104-secrets-track-delta-after-43074-v1/dev-foundation.stderr",
+        "sha256": "954c968519371fc824b9ee607ac9142c39824722997e66c9c2cc1e0e95fd99ac"
+      },
+      "startedAtUTC": "2026-11-22T23:06:08.040600+00:00",
+      "terminalAtUTC": "2026-11-22T23:06:09.110572+00:00"
+    },
+    {
+      "branch": "main",
+      "source": "7745de1fb04c8b9e2cfccc11103d7b3c57b090d7",
+      "fromExclusive": "7745de1fb04c8b9e2cfccc11103d7b3c57b090d7",
+      "commits": 0,
+      "sameAsPrior": true,
+      "scanInvoked": false,
+      "prior": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43074-g07-current-tracked-delta-v1/manifest.json",
+        "sha256": "43487d331bd951e40a13058edda441853667c387aa599b3f38227d493b62ba19"
+      }
+    }
+  ],
+  "baselineTree": "cd377044e4ca058ea219ca6a2fec82159559c72c",
+  "stashCount": 7,
+  "trackedWorktreeClean": true,
+  "openedUntrackedPaths": 0,
+  "newProductTests": 0,
+  "rawFindings": 0,
+  "actualSecrets": 0,
+  "scope": "Public tracked delta only; historical G07 review and full 451 remain separate.",
+  "wholeG07": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

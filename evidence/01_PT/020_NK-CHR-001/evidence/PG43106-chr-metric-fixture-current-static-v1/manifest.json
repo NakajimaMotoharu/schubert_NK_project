@@ -1,0 +1,96 @@
+{
+  "run": "PG43106-chr-metric-fixture-current-static-v1",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T23:08:03.279747+00:00",
+  "source": "7e19e9da76b8f359b129801132de878780265633",
+  "toolMainSource": "17a32407ae0a4ca56430f7bf100657b589d3a914",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-P020-01.03/2",
+  "testIds": "PT-CHR-METRIC001..006",
+  "sourceFixture": {
+    "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateMetricsCountTest.java",
+    "sha256": "99e4bf2733255ac01bf673f9d1363831a534bc7ab4125fbc073430c239044bbe"
+  },
+  "previousTool": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG43030-chr-nk-only-definition-v1/manifest.json",
+    "sha256": "effbff293249e2b5ac62e06bcacdf1c47bfc90f139053fe9d9b1e3bae9375705"
+  },
+  "protocolIndependent": true,
+  "toolArtifact": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43030-chr-nk-only-definition-v1/snapshot/program/characterization/target/schubert-characterization-0.1.0-SNAPSHOT.jar",
+    "sha256": "6e16d61b1aa5a85e94d6bc9f06231e3e1582b67d3a7b7f547d92a2171f43dacf"
+  },
+  "static": {
+    "compile": {
+      "exit": 0,
+      "terminalAtUTC": "2026-11-22T23:07:57.490541+00:00"
+    },
+    "style": {
+      "exit": 0,
+      "terminalAtUTC": "2026-11-22T23:07:58.146588+00:00"
+    },
+    "pmd": {
+      "exit": 4,
+      "terminalAtUTC": "2026-11-22T23:08:00.235243+00:00"
+    },
+    "spotbugs": {
+      "exit": 1,
+      "terminalAtUTC": "2026-11-22T23:08:03.279707+00:00"
+    }
+  },
+  "spotbugs": [
+    {
+      "rule": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "line": 164
+    }
+  ],
+  "pmd": [
+    {
+      "rule": "CloseResource",
+      "line": 150
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 150
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 152
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 153
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 157
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 158
+    }
+  ],
+  "toolTestsNewlyRun": 0,
+  "actualChrTestsRun": 0,
+  "raw": [
+    {
+      "path": "../pgpt-runs/PG379/PG43106-chr-metric-fixture-current-static-v1/begin.json",
+      "sha256": "e59966d9897f550a4933a1c56eb693d7f99bf3e0e9cfb8366848b2433ad0bd81"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43106-chr-metric-fixture-current-static-v1/terminal.json",
+      "sha256": "72de7101af60de97c20b958304229951f57f38b7098905b43d079c6a58818c6c"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43106-chr-metric-fixture-current-static-v1/spotbugs.xml",
+      "sha256": "5ec69e05f42665be50024dfa6c00ff88453bbce7b5ffafd6bef95734427f81f6"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43106-chr-metric-fixture-current-static-v1/pmd.xml",
+      "sha256": "34b4cc9fa20909fd51c5aa67e0a99fa96e558f91ca065b99204f651f848fad9b"
+    }
+  ],
+  "scope": "Pure metrics projection input only. Suite derives its fixture from six canonical declaration resources; fixture requires broad checked handling despite needing three scalar inputs.",
+  "whole451": false,
+  "formalAcceptanceId": null
+}
