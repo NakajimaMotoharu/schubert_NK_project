@@ -1,0 +1,131 @@
+{
+  "run": "PG43018-f02-sax-direct-file-v1",
+  "wbs": "WBS-F02-a",
+  "source": "8237c1443f10cdb5a17ccd441618f929c8c7b0ed",
+  "productSource": "7698011f52d6cc5f94c76413b6ab36971783b9c9",
+  "terminalAtUTC": "2026-11-22T20:59:33.910166+00:00",
+  "actualExit": 0,
+  "oldToolRun": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43018-f02-sax-direct-file-v1/before/manifest.json",
+    "sha256": "706a3c75134ecfdb4673751816dfbd7eae3a2ccf122775b8a48f7abf901af860"
+  },
+  "currentToolRun": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43018-f02-sax-direct-file-v1/after/manifest.json",
+    "sha256": "3774adb027e6d85ebea77cbaf8e30dda063de9d11c4960e908a040ff91cc5702"
+  },
+  "runtimeCandidateScope": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43018-f02-sax-direct-file-v1/current-protocol-v2/scope-proof.json",
+    "sha256": "28a539020d7f7af158e935105f5eceb705b11c4c6eac35bf18d4bb8c16c93a7e"
+  },
+  "fixedInputs": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar",
+      "sha256": "6d8adf69a3f109ebe1b395764feb07f919e9e0e2ab5e2ea141d2e6251ba7d17f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+      "sha256": "44508fd1576500688c790b190acdd16fec4f8c79a3e0b900afd70503cf055f55"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "sha256": "c324471f8b7933a3cb401eafbc35a7055443779b438a3ab928bda3867a1b8ab1"
+    },
+    {
+      "path": "tools/quality/architecture/ModuleDependencyAudit.java",
+      "sha256": "1d9618af69e5850c83c640ce7f12a18b4f2a2adadccfe7747badbae632b0a2aa"
+    }
+  ],
+  "related": [
+    "BUG-3653",
+    "YKT-2871",
+    "PG-D-1200"
+  ],
+  "independentCurrentSeven": [
+    {
+      "testId": "PT-F02-FILECALL011",
+      "fixture": "dev.codex.schubert.nk.web.synthetic.SaxFileController",
+      "argument": "java.io.File",
+      "rule": "CONTROLLER_BOUNDARY",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "testId": "PT-F02-FILECALL012",
+      "fixture": "dev.codex.schubert.nk.api.messaging.inbound.SaxFileListener",
+      "argument": "java.io.File",
+      "rule": "FRAMEWORK_FENCES",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "testId": "PT-F02-FILECALL013",
+      "fixture": "dev.codex.schubert.nk.protocol.SaxFileSource",
+      "argument": "java.io.File",
+      "rule": "FRAMEWORK_FENCES",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "testId": "PT-F02-FILECALL014",
+      "fixture": "dev.codex.schubert.nk.web.synthetic.SaxStreamController",
+      "argument": "java.io.InputStream",
+      "rule": "CONTROLLER_BOUNDARY",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-FILECALL015",
+      "fixture": "dev.codex.schubert.nk.api.messaging.inbound.SaxStreamListener",
+      "argument": "java.io.InputStream",
+      "rule": "FRAMEWORK_FENCES",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-FILECALL016",
+      "fixture": "dev.codex.schubert.nk.protocol.SaxStreamSource",
+      "argument": "java.io.InputStream",
+      "rule": "FRAMEWORK_FENCES",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-FILECALL017",
+      "fixture": "dev.codex.schubert.nk.batch.SaxFileAdapter",
+      "argument": "java.io.File",
+      "rule": "FRAMEWORK_FENCES",
+      "expected": false,
+      "observed": false
+    }
+  ],
+  "allSyntheticAssertions": {
+    "beforeRestrictedMisses": 3,
+    "newCases": 7,
+    "priorCases": 53,
+    "expectedSyntheticFindingsCurrent": 32
+  },
+  "ordinaryProductModuleScopes": [
+    "protocol"
+  ],
+  "actualProtocolPhysical": 176,
+  "syntheticAnchors": 5,
+  "archunitRules": 5,
+  "realProtocolFindings": 0,
+  "syntheticRawAuditExit": 1,
+  "sourceFileAndScript": [
+    {
+      "path": "tools/quality/architecture/ModuleDependencyAudit.java",
+      "sha256": "1d9618af69e5850c83c640ce7f12a18b4f2a2adadccfe7747badbae632b0a2aa"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/input/5767_f02_sax_file_contract.py",
+      "sha256": "cf02778918803c95b7ca7649d06be01a72ff128c25694f1422be2e8d755a8b74"
+    }
+  ],
+  "actualXmlIo": 0,
+  "productionTestRuns": 0,
+  "restModuleBytecodeActions": 0,
+  "wholeF02": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
