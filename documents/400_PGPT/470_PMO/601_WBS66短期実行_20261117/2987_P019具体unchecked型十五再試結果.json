@@ -1,0 +1,122 @@
+{
+  "eventId": "PGPT-20261008-8432",
+  "workCategory": "SELECTED_TEST",
+  "source": "83ca094294d8134ab457dd94cec63391852cdc44",
+  "productionCoreMain": "f8532c27c2666570fe450f285c5a5436aacd8e7e",
+  "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+  "managementWorkIds": [
+    "WBS-P019-03.01/2"
+  ],
+  "planRow": {
+    "ID": "WBS-P019-03.01/2",
+    "元行": "WBS-P019-03.01/2",
+    "費目": "B",
+    "主担当": "WBS-P019-03.01",
+    "状態": "計画",
+    "作業": "初期master照合artifactの契約/既存実装調査／同source証拠による受入判定",
+    "残pp": "0.52",
+    "着手": "設計343・当該source・作業所有・既存成果を照合。必要な局所成果を費目Aで一度だけ作成し、受入候補のTestIDと独立期待値を確定。着手依存、当該A成果、終了依存と未解決条件を確認。P019-03のCOPY/SDKを扱う範囲は当該owner確認後",
+    "終了証拠": "初期master照合artifactの契約/既存実装調査の対象別完了記録を確認。該当するSSC417の24試験は未実行。SDK/driver・独立fixture・同sourceの結果を回収。既存1050件を転記しない",
+    "補正根拠": "登録済み後段単価。追加製造はA、実経路はD、比較はE",
+    "契約HOLD": "",
+    "対象": "P019-03親のSSC417・SDK/24未実行。子への一律配賦をせず対象TestIDの帰属を確認",
+    "範囲": "SCP-005、MIG-DAT-003、MIG-DAT-004、MIG-DAT-005、MIG-DAT-006、MIG-003、MIG-004、MIG-005",
+    "保存証跡": "個別criteria＋同sourceのTestID・独立期待値・実結果・451適用結果",
+    "順次": "False",
+    "配賦窓": "3",
+    "楽観pp": "0.195",
+    "慎重pp": "0.975",
+    "要求設計の版差": "PT基準仕様 NK-MIG-001、SS 343",
+    "lineNumber": 762,
+    "改訂残pp": "0.52"
+  },
+  "run": "PG42654",
+  "startEvent": "PGPT-20261008-8431",
+  "outcome": {
+    "normal15": 15,
+    "spotbugs": 0,
+    "checkstyle": 0,
+    "pmdApplicable": 0,
+    "noScopeUnion": true,
+    "issue": "BUG-3595/YKT-2829"
+  },
+  "proof": {
+    "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG42654-five-projection-fixture-15-current-v1/manifest.json",
+    "sha256": "01c552b2c19a57ebd10cd0f7837dafb2bf6c74ad53667386f6d8f382cfba9440"
+  },
+  "nextEvidence": {
+    "run": "PG42656",
+    "wbs": "WBS-P018-02/2",
+    "target": "SCM005の既知依存リスク",
+    "action": "公式Maven OSV databaseと検証済みscannerを新規tool作業領域へ取得し、固定SBOM六件のオフライン判定"
+  },
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T12:51:50+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 34,
+      "remainingPercent": 66,
+      "resetsAt": 1795879771,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "modelRequested": "gpt-6.2-sol",
+  "modelObserved": null,
+  "reasoningRequested": "high",
+  "reasoningObserved": null,
+  "speedRequested": "standard",
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 34,
+    "remainingPercent": 66,
+    "resetsAt": 1795879771,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "12fe7ec87b06a72db9f8d4b38492316b152e2856b07fdc75c2bf2eea6530aa61",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-22T12:51:50+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 34,
+        "remainingPercent": 66,
+        "resetsAt": 1795879771,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": 0,
+  "sameQuotaWindow": true,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-22T12:50:43.933482+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": false,
+  "quotaBefore": {
+    "usedPercent": 34,
+    "remainingPercent": 66,
+    "resetsAt": 1795879771,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null
+}
