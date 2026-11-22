@@ -1,0 +1,411 @@
+{
+  "run": "PG42156",
+  "source": "e89a38f499a4ba3f96dd40e7ae80ff500a39a96c",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-F03/2-2-b",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T05:12:22.543462+00:00",
+  "prior": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42154-f03-current-pool-fixture-bounded-v1/manifest.json",
+    "sha256": "f83ff998c05ca2cacec358d87eb7f41e1225ba82235cc0f4236d078cb87a9276"
+  },
+  "bug": [
+    "BUG-3559",
+    "BUG-3560",
+    "BUG-3561",
+    "BUG-3562"
+  ],
+  "ykt": "YKT-2802",
+  "actualUnitScope": {
+    "phase": "V1_BEFORE_CONSTANT_NAMING",
+    "runStart": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42156-current-pool-provider-fixture-v1/begin.json",
+      "sha256": "2945274aeb9e9a364c64f58c76ab1a7d50be6e687ab94fab88dc1af044fe4c76"
+    },
+    "terminal": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42156-current-pool-provider-fixture-v1/unit.terminal.json",
+      "sha256": "37d7a922ed15bc914921f9c3b9dcb8ed15db5a3a661acc6de24cbe92ad652206"
+    },
+    "xml": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42156-current-pool-provider-fixture-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "521d07bfae9bebf7fb2caecd552c28c0f577fd00ee20ca1cd5d84a1542bb7e17"
+    },
+    "executed": 16,
+    "passed": 16,
+    "failed": 0,
+    "skipped": 0,
+    "methods": [
+      {
+        "classname": "dev.codex.schubert.nk.api.monitoring.DbPoolMetricRecorderTest",
+        "method": "poolMetric001DebugHasExactlyFourCanonicalUnknownSeries"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.monitoring.DbPoolMetricRecorderTest",
+        "method": "poolMetric004StandardNeverRegistersOrRetainsAndStillRejectsNull"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.monitoring.DbPoolMetricRecorderTest",
+        "method": "poolMetric007PartialProviderFailurePreservesIdentityAndBorrowedLifetime"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricRecorderTest",
+        "method": "webPoolMetric008OwnersAndRepeatedObservationsCannotGrowLabelCardinality"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricRecorderTest",
+        "method": "webPoolMetric007PartialProviderFailurePreservesIdentityAndBorrowedLifetime"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricRecorderTest",
+        "method": "webPoolMetric005NegativeMissingUnknownAndMaximumBoundariesDoNotWrap"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricRecorderTest",
+        "method": "webPoolMetric006ParallelUpdatesKeepWholeImmutableSnapshots"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricRecorderTest",
+        "method": "webPoolMetric001DebugHasExactlyFourCanonicalUnknownSeries"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.monitoring.DbPoolMetricRecorderTest",
+        "method": "poolMetric008OwnersAndRepeatedObservationsCannotGrowLabelCardinality"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.monitoring.DbPoolMetricRecorderTest",
+        "method": "poolMetric006ParallelUpdatesKeepWholeImmutableSnapshots"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricRecorderTest",
+        "method": "webPoolMetric004StandardNeverRegistersOrRetainsAndStillRejectsNull"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.monitoring.DbPoolMetricRecorderTest",
+        "method": "poolMetric003MissingAndTrueZeroAreDistinctAndRecoverable"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricRecorderTest",
+        "method": "webPoolMetric003MissingAndTrueZeroAreDistinctAndRecoverable"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.monitoring.DbPoolMetricRecorderTest",
+        "method": "poolMetric002LiteralCountsAndIndependentGaugeValuesRemainExact"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricRecorderTest",
+        "method": "webPoolMetric002LiteralCountsAndIndependentGaugeValuesRemainExact"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.monitoring.DbPoolMetricRecorderTest",
+        "method": "poolMetric005NegativeMissingUnknownAndMaximumBoundariesDoNotWrap"
+      }
+    ],
+    "exec": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42156-current-pool-provider-fixture-v1/original.exec",
+      "sha256": "a05dedafe89eb0790c00b9c6e0f6d6986b9e175700488797371b516fc3c9be8d"
+    },
+    "mainRecordedCrc": [
+      {
+        "type": "dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder",
+        "crc": "6c21ac97d47fd409",
+        "hit": 33,
+        "probeCount": 33
+      },
+      {
+        "type": "dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder",
+        "crc": "6238e84975bc9945",
+        "hit": 35,
+        "probeCount": 35
+      }
+    ]
+  },
+  "currentScope": {
+    "phase": "V2_CONSTANT_NAMED",
+    "decision": "EXECUTABLE_FIXTURE_CODE_UNCHANGED_BY_INLINED_CONSTANT",
+    "start": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42156-current-pool-provider-fixture-v2/begin.json",
+      "sha256": "ba795ac3c2866ab94abb145a43acfd8196c7fa6b08a2e302645cf700f44cb032"
+    },
+    "compileTerminal": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42156-current-pool-provider-fixture-v2/compile.terminal.json",
+      "sha256": "a1157587c69e16148d0c5e24e43411a1ce8e52119dded8789ba555070d97e587"
+    },
+    "currentCompiledFixture": [
+      {
+        "earlier": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42156-current-pool-provider-fixture-v1/test/dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorderTest$Registry.class",
+          "sha256": "23ecdc6d51ea27917a2efbf283b1e71b28fc78b7c03560e89d104ac7738fe202"
+        },
+        "current": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42156-current-pool-provider-fixture-v2/test/dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorderTest$Registry.class",
+          "sha256": "21d7c6401462cc6c65f37bebe7fc7e8af50ed7e7342305aee8f4f83af8bd09c5"
+        },
+        "actualJvmInstructionsEqual": true
+      },
+      {
+        "earlier": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42156-current-pool-provider-fixture-v1/test/dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorderTest.class",
+          "sha256": "ce8247a92147bbf6fcfa331218e75357e0bcb4ee1cdb9f8febd3635078baa6ac"
+        },
+        "current": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42156-current-pool-provider-fixture-v2/test/dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorderTest.class",
+          "sha256": "20406dd334f4c49128dc769e7da880033eb261e18533dddbe58ec64f50162a6a"
+        },
+        "actualJvmInstructionsEqual": true
+      },
+      {
+        "earlier": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42156-current-pool-provider-fixture-v1/test/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorderTest$Registry.class",
+          "sha256": "c65c5f2d946296c13c28923a09e117c9b647b8ea45dc6b9fcbc68c85825ad22e"
+        },
+        "current": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42156-current-pool-provider-fixture-v2/test/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorderTest$Registry.class",
+          "sha256": "3cf5e62dbacb79f5f12b50dc43c6d17ab98b7582df959c2c24d9f7084b42211a"
+        },
+        "actualJvmInstructionsEqual": true
+      },
+      {
+        "earlier": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42156-current-pool-provider-fixture-v1/test/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorderTest.class",
+          "sha256": "176bf475421187948f24480ba3e196fe1dcac6b7f5b0a0571e33a8e868e24b0a"
+        },
+        "current": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42156-current-pool-provider-fixture-v2/test/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorderTest.class",
+          "sha256": "1e526dde2180972b5051e8178eeb19d510396f30c3a8737552ef8e98be6621e6"
+        },
+        "actualJvmInstructionsEqual": true
+      }
+    ],
+    "unitReexecuted": false
+  },
+  "preservedOracle": [
+    "same IllegalStateException object",
+    "same AssertionError object",
+    "second gauge raises injected failure",
+    "first gauge and borrowed registry ownership held",
+    "fixture-owned close exactly once"
+  ],
+  "preConstantPmdNewSites": [
+    [
+      "DbPoolMetricRecorderTest.java",
+      43
+    ],
+    [
+      "WebDbPoolMetricRecorderTest.java",
+      44
+    ]
+  ],
+  "rawAnalysis": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42156-current-pool-provider-fixture-v1/pmd.xml",
+      "sha256": "9a87b99324aa29a8d2e2c403493d9577d4dbfe700efd59f5005af3dee0ebc221"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42156-current-pool-provider-fixture-v2/pmd.xml",
+      "sha256": "f2511ebe229f06aecbe1124e9bd240b4ff9d50eef17aad895c50300ed8dcf732"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42156-current-pool-provider-fixture-v2/spotbugs.xml",
+      "sha256": "b44435e6815116d9e63849e1c102c6257e06616720694a901f1c578705283fb6"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42156-current-pool-provider-fixture-v2/checkstyle.xml",
+      "sha256": "0b860f5125dac60f0d95ae258b5fba7ae4d3c53de10da48844701fb6a657bb52"
+    }
+  ],
+  "staticReports": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42156-current-pool-provider-fixture-v2/format.terminal.json",
+      "sha256": "cb51b9bca9b992de6a05feef0f1e2b3ad4cc8d686b2b54ae0affadd0bf2c395a"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42156-current-pool-provider-fixture-v2/compile.terminal.json",
+      "sha256": "a1157587c69e16148d0c5e24e43411a1ce8e52119dded8789ba555070d97e587"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42156-current-pool-provider-fixture-v2/checkstyle.terminal.json",
+      "sha256": "448061b12fa318dc115fc9e6e17ff00afa7866e4b689004046201ae3ac5bb33a"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42156-current-pool-provider-fixture-v2/pmd.terminal.json",
+      "sha256": "445e45fb12efd319a70560ed7338809f69342c3df3cee7f6bdfca638aeff11b7"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42156-current-pool-provider-fixture-v2/spotbugs.terminal.json",
+      "sha256": "eca7cf72d80a41be5fbc73724f6a5dd009b7a9a9d64de452f9e1d8756b599536"
+    }
+  ],
+  "pmdRetained": [
+    {
+      "file": "DbPoolMetricRecorderTest.java",
+      "method": "poolMetric006ParallelUpdatesKeepWholeImmutableSnapshots",
+      "line": 201,
+      "rule": "CloseResource",
+      "applicability": "SAME_INDEPENDENT_FIXTURE_AS_PG42154"
+    },
+    {
+      "file": "DbPoolMetricRecorderTest.java",
+      "method": "poolMetric006ParallelUpdatesKeepWholeImmutableSnapshots",
+      "line": 201,
+      "rule": "DoNotUseThreads",
+      "applicability": "SAME_INDEPENDENT_FIXTURE_AS_PG42154"
+    },
+    {
+      "file": "DbPoolMetricRecorderTest.java",
+      "method": "poolMetric006ParallelUpdatesKeepWholeImmutableSnapshots",
+      "line": 214,
+      "rule": "CompareObjectsWithEquals",
+      "applicability": "SAME_INDEPENDENT_FIXTURE_AS_PG42154"
+    },
+    {
+      "file": "DbPoolMetricRecorderTest.java",
+      "method": "poolMetric006ParallelUpdatesKeepWholeImmutableSnapshots",
+      "line": 214,
+      "rule": "CompareObjectsWithEquals",
+      "applicability": "SAME_INDEPENDENT_FIXTURE_AS_PG42154"
+    },
+    {
+      "file": "DbPoolMetricRecorderTest.java",
+      "method": "poolMetric006ParallelUpdatesKeepWholeImmutableSnapshots",
+      "line": 217,
+      "rule": "DoNotUseThreads",
+      "applicability": "SAME_INDEPENDENT_FIXTURE_AS_PG42154"
+    },
+    {
+      "file": "DbPoolMetricRecorderTest.java",
+      "method": "poolMetric006ParallelUpdatesKeepWholeImmutableSnapshots",
+      "line": 222,
+      "rule": "DoNotUseThreads",
+      "applicability": "SAME_INDEPENDENT_FIXTURE_AS_PG42154"
+    },
+    {
+      "file": "DbPoolMetricRecorderTest.java",
+      "method": "poolMetric006ParallelUpdatesKeepWholeImmutableSnapshots",
+      "line": 223,
+      "rule": "DoNotUseThreads",
+      "applicability": "SAME_INDEPENDENT_FIXTURE_AS_PG42154"
+    },
+    {
+      "file": "WebDbPoolMetricRecorderTest.java",
+      "method": "webPoolMetric002LiteralCountsAndIndependentGaugeValuesRemainExact",
+      "line": 119,
+      "rule": "EqualsNull",
+      "applicability": "SAME_INDEPENDENT_FIXTURE_AS_PG42154"
+    },
+    {
+      "file": "WebDbPoolMetricRecorderTest.java",
+      "method": "webPoolMetric006ParallelUpdatesKeepWholeImmutableSnapshots",
+      "line": 226,
+      "rule": "CloseResource",
+      "applicability": "SAME_INDEPENDENT_FIXTURE_AS_PG42154"
+    },
+    {
+      "file": "WebDbPoolMetricRecorderTest.java",
+      "method": "webPoolMetric006ParallelUpdatesKeepWholeImmutableSnapshots",
+      "line": 226,
+      "rule": "DoNotUseThreads",
+      "applicability": "SAME_INDEPENDENT_FIXTURE_AS_PG42154"
+    },
+    {
+      "file": "WebDbPoolMetricRecorderTest.java",
+      "method": "webPoolMetric006ParallelUpdatesKeepWholeImmutableSnapshots",
+      "line": 239,
+      "rule": "CompareObjectsWithEquals",
+      "applicability": "SAME_INDEPENDENT_FIXTURE_AS_PG42154"
+    },
+    {
+      "file": "WebDbPoolMetricRecorderTest.java",
+      "method": "webPoolMetric006ParallelUpdatesKeepWholeImmutableSnapshots",
+      "line": 239,
+      "rule": "CompareObjectsWithEquals",
+      "applicability": "SAME_INDEPENDENT_FIXTURE_AS_PG42154"
+    },
+    {
+      "file": "WebDbPoolMetricRecorderTest.java",
+      "method": "webPoolMetric006ParallelUpdatesKeepWholeImmutableSnapshots",
+      "line": 242,
+      "rule": "DoNotUseThreads",
+      "applicability": "SAME_INDEPENDENT_FIXTURE_AS_PG42154"
+    },
+    {
+      "file": "WebDbPoolMetricRecorderTest.java",
+      "method": "webPoolMetric006ParallelUpdatesKeepWholeImmutableSnapshots",
+      "line": 248,
+      "rule": "DoNotUseThreads",
+      "applicability": "SAME_INDEPENDENT_FIXTURE_AS_PG42154"
+    },
+    {
+      "file": "WebDbPoolMetricRecorderTest.java",
+      "method": "webPoolMetric006ParallelUpdatesKeepWholeImmutableSnapshots",
+      "line": 249,
+      "rule": "DoNotUseThreads",
+      "applicability": "SAME_INDEPENDENT_FIXTURE_AS_PG42154"
+    }
+  ],
+  "spotBugsRetained": [
+    {
+      "type": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+      "method": "lambda$poolMetric004StandardNeverRegistersOrRetainsAndStillRejectsNull$0",
+      "applicability": "EXPLICIT_NULL_NEGATIVE_INPUT"
+    },
+    {
+      "type": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+      "method": "lambda$poolMetric005NegativeMissingUnknownAndMaximumBoundariesDoNotWrap$5",
+      "applicability": "EXPLICIT_NULL_NEGATIVE_INPUT"
+    },
+    {
+      "type": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+      "method": "lambda$poolMetric005NegativeMissingUnknownAndMaximumBoundariesDoNotWrap$8",
+      "applicability": "EXPLICIT_NULL_NEGATIVE_INPUT"
+    },
+    {
+      "type": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "method": "lambda$poolMetric004StandardNeverRegistersOrRetainsAndStillRejectsNull$1",
+      "applicability": "EXPLICIT_NULL_NEGATIVE_INPUT"
+    },
+    {
+      "type": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "method": "lambda$poolMetric004StandardNeverRegistersOrRetainsAndStillRejectsNull$2",
+      "applicability": "EXPLICIT_NULL_NEGATIVE_INPUT"
+    },
+    {
+      "type": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "method": "lambda$poolMetric005NegativeMissingUnknownAndMaximumBoundariesDoNotWrap$6",
+      "applicability": "EXPLICIT_NULL_NEGATIVE_INPUT"
+    },
+    {
+      "type": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+      "method": "lambda$webPoolMetric004StandardNeverRegistersOrRetainsAndStillRejectsNull$0",
+      "applicability": "EXPLICIT_NULL_NEGATIVE_INPUT"
+    },
+    {
+      "type": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+      "method": "lambda$webPoolMetric005NegativeMissingUnknownAndMaximumBoundariesDoNotWrap$5",
+      "applicability": "EXPLICIT_NULL_NEGATIVE_INPUT"
+    },
+    {
+      "type": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+      "method": "lambda$webPoolMetric005NegativeMissingUnknownAndMaximumBoundariesDoNotWrap$8",
+      "applicability": "EXPLICIT_NULL_NEGATIVE_INPUT"
+    },
+    {
+      "type": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "method": "lambda$webPoolMetric004StandardNeverRegistersOrRetainsAndStillRejectsNull$1",
+      "applicability": "EXPLICIT_NULL_NEGATIVE_INPUT"
+    },
+    {
+      "type": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "method": "lambda$webPoolMetric004StandardNeverRegistersOrRetainsAndStillRejectsNull$2",
+      "applicability": "EXPLICIT_NULL_NEGATIVE_INPUT"
+    },
+    {
+      "type": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "method": "lambda$webPoolMetric005NegativeMissingUnknownAndMaximumBoundariesDoNotWrap$6",
+      "applicability": "EXPLICIT_NULL_NEGATIVE_INPUT"
+    }
+  ],
+  "applicableLocalRemaining": 0,
+  "formalCoverageReused": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

@@ -1,0 +1,121 @@
+{
+  "eventId": "PGPT-20261008-7980",
+  "workCategory": "CONTRACT_AUDIT",
+  "source": "a4812b60db1be456a6473e404e51acae1a0f993d",
+  "productionCoreMain": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+  "managementWorkIds": [
+    "WBS-P018-09/2"
+  ],
+  "planRow": {
+    "ID": "WBS-P018-09/2",
+    "元行": "WBS-P018-09/2",
+    "費目": "B",
+    "主担当": "WBS-P018-09",
+    "状態": "計画",
+    "作業": "Log/ACTION/REQUEST・metric/error catalog／同source証拠による受入判定",
+    "残pp": "0.65",
+    "着手": "設計351・当該source・作業所有・既存成果を照合。必要な局所成果を費目Aで一度だけ作成し、受入候補のTestIDと独立期待値を確定。着手依存、当該A成果、終了依存と未解決条件を確認",
+    "終了証拠": "Log/ACTION/REQUEST・metric/error catalog：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。 固有要求：FUN-008,MON-001,MON-002,MON-003,MON-004,MON-005,MON-006,MON-007,MON-008,MON-009,MON-010,MON-011,MON-012,MON-013",
+    "補正根拠": "登録済み後段単価。追加製造はA、実経路はD、比較はE",
+    "契約HOLD": "",
+    "対象": "",
+    "範囲": "FUN-008、MON-001、MON-002、MON-003、MON-004、MON-005、MON-006、MON-007",
+    "保存証跡": "個別criteria＋同sourceのTestID・独立期待値・実結果・451適用結果",
+    "順次": "False",
+    "配賦窓": "3",
+    "楽観pp": "0.26",
+    "慎重pp": "1.3",
+    "要求設計の版差": "PT基準仕様 NK-OPS-001",
+    "lineNumber": 563,
+    "改訂残pp": "0.65"
+  },
+  "run": "PG42150",
+  "startEvent": "PGPT-20261008-7979",
+  "outcome": {
+    "status": "PARTIAL",
+    "sameNamedPreviousCases": 8,
+    "exactPhysicalMain": 3,
+    "exactPhysicalFixture": 2,
+    "localProductJUnitReexecutions": 0,
+    "whole451": false,
+    "formalAcceptanceId": null
+  },
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42150-p01809-web-pool-canonical-values-v1/manifest.json",
+    "sha256": "3587ad4a58fa593db2751494633ed90b9c7c4a1d6e8270da568291180a072352"
+  },
+  "nextEvidence": {
+    "wbs": "WBS-F03/2-2-b",
+    "action": "Establish exact current static on both pool fixtures, focusing on known broad Future contract; only test-backed applicable defects enter ledger and repair."
+  },
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T05:06:40+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 17,
+      "remainingPercent": 83,
+      "resetsAt": 1795879771,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "modelRequested": "gpt-6.2-sol",
+  "modelObserved": null,
+  "reasoningRequested": "high",
+  "reasoningObserved": null,
+  "speedRequested": "standard",
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 17,
+    "remainingPercent": 83,
+    "resetsAt": 1795879771,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "a2993e5fbf4b94fc226dba5b1d1d974e2729f46ef5a162261908c93de1d525ad",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-22T05:06:40+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 17,
+        "remainingPercent": 83,
+        "resetsAt": 1795879771,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": null,
+  "sameQuotaWindow": false,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-22T05:06:24.841097+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": true,
+  "quotaBefore": {
+    "usedPercent": 17,
+    "remainingPercent": 83,
+    "resetsAt": 1795879772,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null
+}

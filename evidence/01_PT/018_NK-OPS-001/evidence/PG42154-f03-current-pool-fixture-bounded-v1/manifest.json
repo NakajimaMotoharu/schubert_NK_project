@@ -1,0 +1,294 @@
+{
+  "run": "PG42154",
+  "source": "4b8fe36984c113573fa7ab13fe7d8bba3e460151",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-F03/2-2-b",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T05:09:29.150048+00:00",
+  "bug": [
+    "BUG-3557",
+    "BUG-3558"
+  ],
+  "ykt": "YKT-2801",
+  "knownIssuesFixed": 2,
+  "prior": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42152-f03-current-pool-fixture-static-v1/manifest.json",
+    "sha256": "35f9a81edb6e80c1e0a0613e0ba770cae35830c853fea959347bc1d50a33ec5d"
+  },
+  "attempt": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42154-current-pool-fixture-bounded-v1/begin.json",
+    "sha256": "678a91a074c72ad4b7756b665348d2757182b88a357674b29590799b5534023b"
+  },
+  "stages": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42154-current-pool-fixture-bounded-v1/format.terminal.json",
+      "sha256": "5a5380f821708df7cca2f4beea2b433cd35a5d45041d5cf1a1053efca1d5ad79"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42154-current-pool-fixture-bounded-v1/compile.terminal.json",
+      "sha256": "31e8446dd7a7b8e974a6f4cc9482a441941b1b6ec5cf046baa27f56577af553e"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42154-current-pool-fixture-bounded-v1/checkstyle.terminal.json",
+      "sha256": "62f3599d515e26039a34689d28234e81812ba3ada2b8c7bbc1150fffb9e59029"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42154-current-pool-fixture-bounded-v1/pmd.terminal.json",
+      "sha256": "b2b8b7c7a23d8cb6c296433c5d7b8a8dd7e17fbbe68d563374973470e552555e"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42154-current-pool-fixture-bounded-v1/spotbugs.terminal.json",
+      "sha256": "1b1275a1d3114e5548c1874c9fdca009cf6de89ee22af21f1592c93344e75ce3"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42154-current-pool-fixture-bounded-v1/unit.terminal.json",
+      "sha256": "24ccba9f24a047e10041c3eb2181ecacdbe4e4686f78551fd2915cf60188674b"
+    }
+  ],
+  "outcomes": [
+    {
+      "classname": "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricRecorderTest",
+      "method": "webPoolMetric006ParallelUpdatesKeepWholeImmutableSnapshots"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.DbPoolMetricRecorderTest",
+      "method": "poolMetric006ParallelUpdatesKeepWholeImmutableSnapshots"
+    }
+  ],
+  "xml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42154-current-pool-fixture-bounded-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "3565a0460163f004755871d6e972c48b64a677120e2b72a20f29776a361b630b"
+  },
+  "selected": 2,
+  "passed": 2,
+  "failed": 0,
+  "skipped": 0,
+  "positiveMainCoverageProbes": [
+    {
+      "type": "dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder",
+      "crc": "6c21ac97d47fd409",
+      "hit": 19,
+      "probeCount": 33
+    },
+    {
+      "type": "dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder",
+      "crc": "6238e84975bc9945",
+      "hit": 18,
+      "probeCount": 35
+    }
+  ],
+  "exec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42154-current-pool-fixture-bounded-v1/original.exec",
+    "sha256": "cb8fa5ee8a52f25dc6bb27d2b549fc6a353a392929a92de534489b63c6473391"
+  },
+  "reports": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42154-current-pool-fixture-bounded-v1/pmd.xml",
+      "sha256": "ffa77d438198213fd9756fb3746da3eb451dae1832818075702db6c2b59c79fc"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42154-current-pool-fixture-bounded-v1/spotbugs.xml",
+      "sha256": "fcc855b0d7c207d1aaefad602ca9bd67004357bce5746cb28c80a147e188cda0"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42154-current-pool-fixture-bounded-v1/checkstyle.xml",
+      "sha256": "0b860f5125dac60f0d95ae258b5fba7ae4d3c53de10da48844701fb6a657bb52"
+    }
+  ],
+  "pmDSitesKept": [
+    {
+      "file": "DbPoolMetricRecorderTest.java",
+      "rule": "CloseResource",
+      "line": 201,
+      "method": "poolMetric006ParallelUpdatesKeepWholeImmutableSnapshots",
+      "rationale": "Executor is owned by the fixture, stopped in finally, and positively checked by finite awaitTermination."
+    },
+    {
+      "file": "DbPoolMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 201,
+      "method": "poolMetric006ParallelUpdatesKeepWholeImmutableSnapshots",
+      "rationale": "Fixed fixture eight workers, bounded invokeAll and finite termination, to demonstrate immutable snapshot state under concurrency."
+    },
+    {
+      "file": "DbPoolMetricRecorderTest.java",
+      "rule": "CompareObjectsWithEquals",
+      "line": 214,
+      "method": "poolMetric006ParallelUpdatesKeepWholeImmutableSnapshots",
+      "rationale": "Independent snapshot oracle requires exact identity to one of two submitted immutable samples."
+    },
+    {
+      "file": "DbPoolMetricRecorderTest.java",
+      "rule": "CompareObjectsWithEquals",
+      "line": 214,
+      "method": "poolMetric006ParallelUpdatesKeepWholeImmutableSnapshots",
+      "rationale": "Independent snapshot oracle requires exact identity to one of two submitted immutable samples."
+    },
+    {
+      "file": "DbPoolMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 217,
+      "method": "poolMetric006ParallelUpdatesKeepWholeImmutableSnapshots",
+      "rationale": "Fixed fixture eight workers, bounded invokeAll and finite termination, to demonstrate immutable snapshot state under concurrency."
+    },
+    {
+      "file": "DbPoolMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 222,
+      "method": "poolMetric006ParallelUpdatesKeepWholeImmutableSnapshots",
+      "rationale": "Fixed fixture eight workers, bounded invokeAll and finite termination, to demonstrate immutable snapshot state under concurrency."
+    },
+    {
+      "file": "DbPoolMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 223,
+      "method": "poolMetric006ParallelUpdatesKeepWholeImmutableSnapshots",
+      "rationale": "Fixed fixture eight workers, bounded invokeAll and finite termination, to demonstrate immutable snapshot state under concurrency."
+    },
+    {
+      "file": "WebDbPoolMetricRecorderTest.java",
+      "rule": "EqualsNull",
+      "line": 119,
+      "method": "webPoolMetric002LiteralCountsAndIndependentGaugeValuesRemainExact",
+      "rationale": "Explicit negative test for the generated fixed Counts value equality contract; null is a controlled test input."
+    },
+    {
+      "file": "WebDbPoolMetricRecorderTest.java",
+      "rule": "CloseResource",
+      "line": 226,
+      "method": "webPoolMetric006ParallelUpdatesKeepWholeImmutableSnapshots",
+      "rationale": "Executor is owned by the fixture, stopped in finally, and positively checked by finite awaitTermination."
+    },
+    {
+      "file": "WebDbPoolMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 226,
+      "method": "webPoolMetric006ParallelUpdatesKeepWholeImmutableSnapshots",
+      "rationale": "Fixed fixture eight workers, bounded invokeAll and finite termination, to demonstrate immutable snapshot state under concurrency."
+    },
+    {
+      "file": "WebDbPoolMetricRecorderTest.java",
+      "rule": "CompareObjectsWithEquals",
+      "line": 239,
+      "method": "webPoolMetric006ParallelUpdatesKeepWholeImmutableSnapshots",
+      "rationale": "Independent snapshot oracle requires exact identity to one of two submitted immutable samples."
+    },
+    {
+      "file": "WebDbPoolMetricRecorderTest.java",
+      "rule": "CompareObjectsWithEquals",
+      "line": 239,
+      "method": "webPoolMetric006ParallelUpdatesKeepWholeImmutableSnapshots",
+      "rationale": "Independent snapshot oracle requires exact identity to one of two submitted immutable samples."
+    },
+    {
+      "file": "WebDbPoolMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 242,
+      "method": "webPoolMetric006ParallelUpdatesKeepWholeImmutableSnapshots",
+      "rationale": "Fixed fixture eight workers, bounded invokeAll and finite termination, to demonstrate immutable snapshot state under concurrency."
+    },
+    {
+      "file": "WebDbPoolMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 248,
+      "method": "webPoolMetric006ParallelUpdatesKeepWholeImmutableSnapshots",
+      "rationale": "Fixed fixture eight workers, bounded invokeAll and finite termination, to demonstrate immutable snapshot state under concurrency."
+    },
+    {
+      "file": "WebDbPoolMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 249,
+      "method": "webPoolMetric006ParallelUpdatesKeepWholeImmutableSnapshots",
+      "rationale": "Fixed fixture eight workers, bounded invokeAll and finite termination, to demonstrate immutable snapshot state under concurrency."
+    }
+  ],
+  "spotBugsIntentionalNullNegativeCases": [
+    {
+      "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+      "classname": "dev.codex.schubert.nk.api.monitoring.DbPoolMetricRecorderTest",
+      "method": "lambda$poolMetric004StandardNeverRegistersOrRetainsAndStillRejectsNull$0"
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+      "classname": "dev.codex.schubert.nk.api.monitoring.DbPoolMetricRecorderTest",
+      "method": "lambda$poolMetric005NegativeMissingUnknownAndMaximumBoundariesDoNotWrap$5"
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+      "classname": "dev.codex.schubert.nk.api.monitoring.DbPoolMetricRecorderTest",
+      "method": "lambda$poolMetric005NegativeMissingUnknownAndMaximumBoundariesDoNotWrap$8"
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "classname": "dev.codex.schubert.nk.api.monitoring.DbPoolMetricRecorderTest",
+      "method": "lambda$poolMetric004StandardNeverRegistersOrRetainsAndStillRejectsNull$1"
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "classname": "dev.codex.schubert.nk.api.monitoring.DbPoolMetricRecorderTest",
+      "method": "lambda$poolMetric004StandardNeverRegistersOrRetainsAndStillRejectsNull$2"
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "classname": "dev.codex.schubert.nk.api.monitoring.DbPoolMetricRecorderTest",
+      "method": "lambda$poolMetric005NegativeMissingUnknownAndMaximumBoundariesDoNotWrap$6"
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+      "classname": "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricRecorderTest",
+      "method": "lambda$webPoolMetric004StandardNeverRegistersOrRetainsAndStillRejectsNull$0"
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+      "classname": "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricRecorderTest",
+      "method": "lambda$webPoolMetric005NegativeMissingUnknownAndMaximumBoundariesDoNotWrap$5"
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+      "classname": "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricRecorderTest",
+      "method": "lambda$webPoolMetric005NegativeMissingUnknownAndMaximumBoundariesDoNotWrap$8"
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "classname": "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricRecorderTest",
+      "method": "lambda$webPoolMetric004StandardNeverRegistersOrRetainsAndStillRejectsNull$1"
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "classname": "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricRecorderTest",
+      "method": "lambda$webPoolMetric004StandardNeverRegistersOrRetainsAndStillRejectsNull$2"
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "classname": "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricRecorderTest",
+      "method": "lambda$webPoolMetric005NegativeMissingUnknownAndMaximumBoundariesDoNotWrap$6"
+    }
+  ],
+  "spotBugsProviderFindingsPending": [
+    {
+      "rule": "BC_UNCONFIRMED_CAST_OF_RETURN_VALUE",
+      "classname": "dev.codex.schubert.nk.api.monitoring.DbPoolMetricRecorderTest$Registry",
+      "method": "newGauge"
+    },
+    {
+      "rule": "THROWS_METHOD_THROWS_RUNTIMEEXCEPTION",
+      "classname": "dev.codex.schubert.nk.api.monitoring.DbPoolMetricRecorderTest$Registry",
+      "method": "newGauge"
+    },
+    {
+      "rule": "BC_UNCONFIRMED_CAST_OF_RETURN_VALUE",
+      "classname": "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricRecorderTest$Registry",
+      "method": "newGauge"
+    },
+    {
+      "rule": "THROWS_METHOD_THROWS_RUNTIMEEXCEPTION",
+      "classname": "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricRecorderTest$Registry",
+      "method": "newGauge"
+    }
+  ],
+  "notCountedPriorCases": 14,
+  "providerChange": false,
+  "rootOrSdkBackedRuntimeActions": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

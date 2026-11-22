@@ -13,3 +13,7 @@ command=11123 checked entry経由11180 plan/11182 inverse→11184 normal→11186
 ## 2026-11-22 現候補のAPIメトリクス検証仕様追補
 
 対象Core 1e4e9e64830b552727043f3cb8b9435b28cba472、試験source cfbdb33c080224f54fbd3876b452b3945ac962b8。APICAT014／SCALAR024はメモリ内の固定16系統・2つの合成メータsource、4worker・各64件・各10秒上限。既存固定ラベル・カウンタ2/3、ゲージ5/7を期待し、終了とsource所有を確認。BUG-3554～3556／YKT-2800。新規選択は2成功・失敗0・除外0。残36個別は既存実行を候補のクラス・依存・JVM命令・固定入力へ照合。全体coverageと451は未判定。証跡 evidence/01_PT/018_NK-OPS-001/evidence/PG42144-f03-api-metrics-bounded-waits-v2/manifest.json SHA256 6fe65874fe6b4d08646d671cd778c036c4916f3073e6cec929fc650c0af0e3a4。
+
+## 2026-11-22 API/Webプールfixture追補
+
+POOLMET001～008／WEBPOOLMET001～008。試験対象は合成カウント・モード・借用providerのみ。各007は二回目の登録に固定のIllegalStateException／AssertionErrorを供給し、供給した同一実体、登録二回、所有リソースclose0、試験が所有するclose1を検証する。API/Web各006は有限待機の具体例外を宣言。v1通常16成功、v2定数名付与後の4 class実命令一致。BUG-3557～3562、YKT-2801/2802。evidence/01_PT/018_NK-OPS-001/evidence/PG42156-f03-current-pool-provider-fixture-v1/manifest.json SHA256 a3f99403d0618da567495596776f348431bf3e42bc17e9e073e6fe667df25f05。

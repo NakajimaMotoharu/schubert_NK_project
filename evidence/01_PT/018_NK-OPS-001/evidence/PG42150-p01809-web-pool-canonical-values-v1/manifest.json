@@ -1,0 +1,240 @@
+{
+  "run": "PG42150",
+  "source": "a4812b60db1be456a6473e404e51acae1a0f993d",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-P018-09/2",
+  "linkedF03": "WBS-F03/2-2-b",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T05:06:24.841097+00:00",
+  "exactInputs": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder.java",
+      "sha256": "ab404d162153fac50ce66667f87ab2bcad0c83339b48d8c4700eff9d815a6b03"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/package-info.java",
+      "sha256": "d59b108c0d1da342135c1536f8151986cb87cc8b58a919acb9e095c9be295b9d"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorderTest.java",
+      "sha256": "209593de6d081ca7bd8c405557a115cdfa12e16cfc1b56ddee99f7915d737f61"
+    }
+  ],
+  "exactNamedDependencies": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-commons/1.17.1/micrometer-commons-1.17.1.jar",
+      "sha256": "f2cee6ef046e72eec8128474c7f58c6217173b45ae373c30de0289f2a56ab0fd"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar",
+      "sha256": "9ca47dfa831409b40253c8dc98c17b9d3e050ebbde4d1543c5521dca2b95ad56"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-observation/1.17.1/micrometer-observation-1.17.1.jar",
+      "sha256": "eb34f0cd84a879393ae5c21160fc06385ccdc74f36a4d1e31b199f59acfdaf71"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+      "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+    }
+  ],
+  "firstTestCompileNoPlatform": {
+    "exit": 1,
+    "receipt": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42150-p01809-web-pool-canonical-values-v1/test.stderr",
+      "sha256": "73763d9d280e6a702a00163d1edc3072f0a9d761b4ce890ec2ddbaace6ad4c84"
+    },
+    "productTests": 0,
+    "initialPostArtifactPathWrong": true,
+    "recovery": "Only named fixture javac, add pinned JUnit; reuse already compiled Main physical."
+  },
+  "usedProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40994-f03-web-pool-explicit-mode-v1/manifest.json",
+    "sha256": "6432dac5a64a76c4b1a1391cd46d78b02c379debc27131efe4431d0e1db05035"
+  },
+  "originalJUnit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40994-f03-web-pool-explicit-mode-v1/reports/TEST-junit-jupiter.xml",
+    "sha256": "dfbd15f4de90979d4a144f136f9f3b9b1a25da1971e93f1c9a990ef7b411fa14"
+  },
+  "currentMain": {
+    "WebDbPoolMetricRecorder.class": {
+      "identical": true,
+      "sha256": "e981ce38bee829a734ff43e058296360802f845884be366080c94a61f72e2418"
+    },
+    "WebDbPoolMetricRecorder$Counts.class": {
+      "identical": true,
+      "sha256": "08bdc4bb9936469f62ae641bc6110dd685015c6027d89eab524529ef44e52ff3"
+    },
+    "WebDbPoolMetricRecorder$State.class": {
+      "identical": true,
+      "sha256": "b29aa6a4fe33b1358769f6416940f16ff7ea9c338c261a1386b62971910e12de"
+    }
+  },
+  "compiledFixtures": {
+    "WebDbPoolMetricRecorderTest$Registry.class": "208c53f7de9a78dc1952a57c1deddf8d7bcee453b7314e5438ab8a7f2540c400",
+    "WebDbPoolMetricRecorderTest.class": "0d2871bda184673cce370c85129212e909efd51949920c2941fb7e52b8824b73"
+  },
+  "selectedRetainedTests": [
+    "webPoolMetric001DebugHasExactlyFourCanonicalUnknownSeries",
+    "webPoolMetric002LiteralCountsAndIndependentGaugeValuesRemainExact",
+    "webPoolMetric003MissingAndTrueZeroAreDistinctAndRecoverable",
+    "webPoolMetric004StandardNeverRegistersOrRetainsAndStillRejectsNull",
+    "webPoolMetric005NegativeMissingUnknownAndMaximumBoundariesDoNotWrap",
+    "webPoolMetric006ParallelUpdatesKeepWholeImmutableSnapshots",
+    "webPoolMetric007PartialProviderFailurePreservesIdentityAndBorrowedLifetime",
+    "webPoolMetric008OwnersAndRepeatedObservationsCannotGrowLabelCardinality"
+  ],
+  "originalRawByNamedClass": {
+    "dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder": {
+      "crc64": "6c21ac97d47fd409",
+      "counts": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 145
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 14
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 26
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 15
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 8
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder$Counts": {
+      "crc64": "a5d60413b34bf2c9",
+      "counts": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 83
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 14
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 10
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 16
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 9
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder$State": {
+      "crc64": "8013827b7743a951",
+      "counts": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 70
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 9
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 6
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 6
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    }
+  },
+  "originalNullAway": 0,
+  "commands": [
+    {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-commons/1.17.1/micrometer-commons-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-observation/1.17.1/micrometer-observation-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/PG42150-p01809-web-pool-canonical-values-v1/main",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42150-p01809-web-pool-canonical-values-v1/main",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/package-info.java"
+      ],
+      "exit": 0,
+      "alreadyCompiledCurrent": true
+    },
+    {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-commons/1.17.1/micrometer-commons-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-observation/1.17.1/micrometer-observation-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/PG42150-p01809-web-pool-canonical-values-v1/main",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42150-p01809-web-pool-canonical-values-v1/test",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorderTest.java"
+      ],
+      "exit": 0,
+      "alreadyCompiledCurrent": true
+    },
+    {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/jdeps",
+        "--multi-release",
+        "25",
+        "-verbose:class",
+        "-filter:none",
+        "-classpath",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-commons/1.17.1/micrometer-commons-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-observation/1.17.1/micrometer-observation-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/PG42150-p01809-web-pool-canonical-values-v1/main",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42150-p01809-web-pool-canonical-values-v1/main",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42150-p01809-web-pool-canonical-values-v1/test"
+      ],
+      "exit": 0,
+      "outputSha256": "870380ce14a489acfb53b4d41717da74fe93faac9bb31fc3113b20cebf58a39b"
+    }
+  ],
+  "ordinaryTestsNew": 0,
+  "newBackendActions": 0,
+  "worldWideQualityGate": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
