@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -62,7 +63,8 @@ class BatchMetricRecorderTest {
       attempts.incrementAndGet();
       Throwable value = failure.orElseThrow();
       if (value instanceof Error fatal) throw fatal;
-      throw (RuntimeException) value;
+      if (value instanceof RuntimeException runtime) throw runtime;
+      throw new AssertionError("unsupported synthetic counter failure type");
     }
 
     @Override
@@ -257,7 +259,8 @@ class BatchMetricRecorderTest {
   }
 
   @Test
-  void batchRec007SixtyFourParallelSuccessesKeepExactCountAndMaximumTime() throws Exception {
+  void batchRec007SixtyFourParallelSuccessesKeepExactCountAndMaximumTime()
+      throws InterruptedException, ExecutionException {
     try (var registry = new OwnedRegistry()) {
       var pool = Executors.newFixedThreadPool(8);
       try {

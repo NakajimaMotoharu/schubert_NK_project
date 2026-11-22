@@ -20,8 +20,10 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
@@ -109,7 +111,8 @@ class IntegrityFailureMetricRecorderTest {
     if (failure.isPresent()) {
       var problem = failure.orElseThrow();
       if (problem instanceof Error error) throw error;
-      throw (RuntimeException) problem;
+      if (problem instanceof RuntimeException runtime) throw runtime;
+      throw new AssertionError("unsupported synthetic counter failure type");
     }
   }
 
@@ -307,7 +310,7 @@ class IntegrityFailureMetricRecorderTest {
 
   @Test
   void integrityMetric007ConcurrentTotalsComeFromPrecomputedInputsAndOwnersStaySeparate()
-      throws Exception {
+      throws InterruptedException, ExecutionException, TimeoutException {
     try (var registry = new Registry();
         var otherRegistry = new Registry()) {
       var executor = Executors.newFixedThreadPool(8);
