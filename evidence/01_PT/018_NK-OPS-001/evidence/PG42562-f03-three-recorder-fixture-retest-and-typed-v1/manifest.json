@@ -1,0 +1,329 @@
+{
+  "run": "PG42562",
+  "source": "045d24efc86d5dedc41138ad3f651aa0eac618eb",
+  "javaCore": "f8532c27c2666570fe450f285c5a5436aacd8e7e",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-22T11:03:11.886916+00:00",
+  "actualExit": 0,
+  "testSpec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/5691_Batch三計測fixture例外型の再試験仕様.md",
+    "sha256": "739c50b124a19255e9d9d89d7cbda74de5165d6783bc883d9bffa4dd06035e07"
+  },
+  "bug": "BUG-3588",
+  "lateral": "YKT-2823",
+  "fixtureSourceInputs": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/BatchMetricRecorderTest.java",
+      "sha256": "08cba847188c1f2b63d04cf918c1c6acf5ae78ec242abbb54cfebeca8ec86437"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/IntegrityFailureMetricRecorderTest.java",
+      "sha256": "d13471260e090684e477c9f88917735e7a18f894f593771fcb701434a221abe7"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/ProcessRestartMetricRecorderTest.java",
+      "sha256": "66282c456d4b5afbc366f0821ecdbf2c043e6081fd6341456ddb426876a0fd2e"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/BatchMetricContractTest.java",
+      "sha256": "f8226e2f192c011942bab5a024bc23d3e0f9cd0210cbb177edf864543bb4bc67"
+    }
+  ],
+  "currentProductSources": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BatchMetricRecorder.java",
+      "sha256": "1fa8f26f772155bd4fb5698bf0dac4375f9382201b43235540070fa975ad5c38"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/IntegrityFailureMetricRecorder.java",
+      "sha256": "5c69cafae687001f301214675d980e600b9c5bb095a0017f1f77508f84fb9fb0"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ProcessRestartMetricRecorder.java",
+      "sha256": "9bcc34883a02ba53a9c1d8fcf4f9f5fad64d4f780fb27c4ae64e3ffc84dc7a2f"
+    }
+  ],
+  "newOrdinaryCases": 0,
+  "requiredOrdinaryRequalification": 9,
+  "passed": 9,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "callerCaseSelection": {
+    "integrityMetric007ConcurrentTotalsComeFromPrecomputedInputsAndOwnersStaySeparate": "dev.codex.schubert.nk.batch.monitoring.IntegrityFailureMetricRecorderTest#integrityMetric007ConcurrentTotalsComeFromPrecomputedInputsAndOwnersStaySeparate",
+    "integrityMetric005PartialFactoryFailureKeepsPrefixAndOriginalProblem": "dev.codex.schubert.nk.batch.monitoring.IntegrityFailureMetricRecorderTest#integrityMetric005PartialFactoryFailureKeepsPrefixAndOriginalProblem",
+    "restartMetric006IncrementFailureNeverRetriesCompensatesOrNormalizesSuccess": "dev.codex.schubert.nk.batch.monitoring.ProcessRestartMetricRecorderTest#restartMetric006IncrementFailureNeverRetriesCompensatesOrNormalizesSuccess",
+    "restartMetric007ConcurrentTotalsComeFromPrecomputedInputsAndOwnersStaySeparate": "dev.codex.schubert.nk.batch.monitoring.ProcessRestartMetricRecorderTest#restartMetric007ConcurrentTotalsComeFromPrecomputedInputsAndOwnersStaySeparate",
+    "restartMetric005PartialFactoryFailureKeepsPrefixAndOriginalProblem": "dev.codex.schubert.nk.batch.monitoring.ProcessRestartMetricRecorderTest#restartMetric005PartialFactoryFailureKeepsPrefixAndOriginalProblem",
+    "batchRec008FailedConstructionAndSeparateOwnersRetainRegistryOwnership": "dev.codex.schubert.nk.batch.monitoring.BatchMetricRecorderTest#batchRec008FailedConstructionAndSeparateOwnersRetainRegistryOwnership",
+    "batchRec007SixtyFourParallelSuccessesKeepExactCountAndMaximumTime": "dev.codex.schubert.nk.batch.monitoring.BatchMetricRecorderTest#batchRec007SixtyFourParallelSuccessesKeepExactCountAndMaximumTime",
+    "batchRec006ProviderFailuresHaveExactIdentityNoRetryAndBorrowedRegistry": "dev.codex.schubert.nk.batch.monitoring.BatchMetricRecorderTest#batchRec006ProviderFailuresHaveExactIdentityNoRetryAndBorrowedRegistry",
+    "integrityMetric006IncrementFailureNeverRetriesCompensatesOrNormalizesSuccess": "dev.codex.schubert.nk.batch.monitoring.IntegrityFailureMetricRecorderTest#integrityMetric006IncrementFailureNeverRetriesCompensatesOrNormalizesSuccess"
+  },
+  "sameExistingSdk": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+      "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar",
+      "sha256": "fb5b0036a0899ea97edfa0fc2c7985b55f3f7c5695028163e5e60d4f3cf6075d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "sha256": "c324471f8b7933a3cb401eafbc35a7055443779b438a3ab928bda3867a1b8ab1"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+      "sha256": "2136da000c36cd6ea5e714ecf8ea7fb4e41f29c75849b6b7e62531373b91a3b1"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar",
+      "sha256": "9ca47dfa831409b40253c8dc98c17b9d3e050ebbde4d1543c5521dca2b95ad56"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-commons/1.17.1/micrometer-commons-1.17.1.jar",
+      "sha256": "f2cee6ef046e72eec8128474c7f58c6217173b45ae373c30de0289f2a56ab0fd"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-observation/1.17.1/micrometer-observation-1.17.1.jar",
+      "sha256": "eb34f0cd84a879393ae5c21160fc06385ccdc74f36a4d1e31b199f59acfdaf71"
+    }
+  ],
+  "detectedFixtureIssuesRemoved": 6,
+  "productionMainUnchanged": true,
+  "pinnedOldFindings": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42560-f03-three-recorders-typed-findings-pre-edit-v1/manifest.json",
+    "sha256": "a77925ac616b47329be8941ff5ea331a6a5470be1d9b50f4ed178f536d7ae1e9"
+  },
+  "spotbugsRawRetained": [
+    {
+      "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+      "owner": "dev.codex.schubert.nk.batch.monitoring.BatchMetricRecorderTest",
+      "method": "lambda$batchRec004StandardHasNoCustomSeriesButStillValidatesInputs$0",
+      "reason": "Deliberate independent invalid-input assertion, including public null contract."
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+      "owner": "dev.codex.schubert.nk.batch.monitoring.BatchMetricRecorderTest",
+      "method": "lambda$batchRec004StandardHasNoCustomSeriesButStillValidatesInputs$1",
+      "reason": "Deliberate independent invalid-input assertion, including public null contract."
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+      "owner": "dev.codex.schubert.nk.batch.monitoring.BatchMetricRecorderTest",
+      "method": "lambda$batchRec004StandardHasNoCustomSeriesButStillValidatesInputs$2",
+      "reason": "Deliberate independent invalid-input assertion, including public null contract."
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "owner": "dev.codex.schubert.nk.batch.monitoring.BatchMetricRecorderTest",
+      "method": "lambda$batchRec005NullUtcRangeAndMicrosecondPrecisionRejectBeforeSideEffects$0",
+      "reason": "Deliberate independent invalid-input assertion, including public null contract."
+    },
+    {
+      "rule": "THROWS_METHOD_THROWS_RUNTIMEEXCEPTION",
+      "owner": "dev.codex.schubert.nk.batch.monitoring.BatchMetricRecorderTest$OwnedRegistry",
+      "method": "inject",
+      "reason": "Same observed provider fault identity is the fixture input. It is passed through after matching RuntimeException."
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+      "owner": "dev.codex.schubert.nk.batch.monitoring.IntegrityFailureMetricRecorderTest",
+      "method": "lambda$integrityMetric004BothModesRejectNullAndStandardKeepsNoDetailedState$0",
+      "reason": "Deliberate independent invalid-input assertion, including public null contract."
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+      "owner": "dev.codex.schubert.nk.batch.monitoring.IntegrityFailureMetricRecorderTest",
+      "method": "lambda$integrityMetric004BothModesRejectNullAndStandardKeepsNoDetailedState$1",
+      "reason": "Deliberate independent invalid-input assertion, including public null contract."
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "owner": "dev.codex.schubert.nk.batch.monitoring.IntegrityFailureMetricRecorderTest",
+      "method": "lambda$integrityMetric003ClosedAreaParserAndGeneratedFactoriesUseTypedLiteralOracles$1",
+      "reason": "Deliberate independent invalid-input assertion, including public null contract."
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "owner": "dev.codex.schubert.nk.batch.monitoring.IntegrityFailureMetricRecorderTest",
+      "method": "lambda$integrityMetric004BothModesRejectNullAndStandardKeepsNoDetailedState$2",
+      "reason": "Deliberate independent invalid-input assertion, including public null contract."
+    },
+    {
+      "rule": "THROWS_METHOD_THROWS_RUNTIMEEXCEPTION",
+      "owner": "dev.codex.schubert.nk.batch.monitoring.IntegrityFailureMetricRecorderTest",
+      "method": "fail",
+      "reason": "Same observed provider fault identity is the fixture input. It is passed through after matching RuntimeException."
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+      "owner": "dev.codex.schubert.nk.batch.monitoring.ProcessRestartMetricRecorderTest",
+      "method": "lambda$restartMetric004BothModesRejectNullAndStandardKeepsNoDetailedState$0",
+      "reason": "Deliberate independent invalid-input assertion, including public null contract."
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+      "owner": "dev.codex.schubert.nk.batch.monitoring.ProcessRestartMetricRecorderTest",
+      "method": "lambda$restartMetric004BothModesRejectNullAndStandardKeepsNoDetailedState$1",
+      "reason": "Deliberate independent invalid-input assertion, including public null contract."
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "owner": "dev.codex.schubert.nk.batch.monitoring.ProcessRestartMetricRecorderTest",
+      "method": "lambda$restartMetric003ClosedReasonParserAndGeneratedFactoriesUseTypedLiteralOracles$1",
+      "reason": "Deliberate independent invalid-input assertion, including public null contract."
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "owner": "dev.codex.schubert.nk.batch.monitoring.ProcessRestartMetricRecorderTest",
+      "method": "lambda$restartMetric004BothModesRejectNullAndStandardKeepsNoDetailedState$2",
+      "reason": "Deliberate independent invalid-input assertion, including public null contract."
+    },
+    {
+      "rule": "THROWS_METHOD_THROWS_RUNTIMEEXCEPTION",
+      "owner": "dev.codex.schubert.nk.batch.monitoring.ProcessRestartMetricRecorderTest",
+      "method": "fail",
+      "reason": "Same observed provider fault identity is the fixture input. It is passed through after matching RuntimeException."
+    }
+  ],
+  "pmdRawRetained": [
+    {
+      "rule": "CloseResource",
+      "file": "BatchMetricRecorderTest.java",
+      "line": 265,
+      "reason": "Owned executor explicitly uses shutdownNow and finite awaitTermination in finally. Registry resource is separately owned."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "BatchMetricRecorderTest.java",
+      "line": 265,
+      "reason": "Owned bounded JUnit workers use fixed task inputs, finite invokeAll and finite finally termination."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "BatchMetricRecorderTest.java",
+      "line": 278,
+      "reason": "Owned bounded JUnit workers use fixed task inputs, finite invokeAll and finite finally termination."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "BatchMetricRecorderTest.java",
+      "line": 283,
+      "reason": "Owned bounded JUnit workers use fixed task inputs, finite invokeAll and finite finally termination."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "BatchMetricRecorderTest.java",
+      "line": 284,
+      "reason": "Owned bounded JUnit workers use fixed task inputs, finite invokeAll and finite finally termination."
+    },
+    {
+      "rule": "CloseResource",
+      "file": "IntegrityFailureMetricRecorderTest.java",
+      "line": 316,
+      "reason": "Owned executor explicitly uses shutdownNow and finite awaitTermination in finally. Registry resource is separately owned."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "IntegrityFailureMetricRecorderTest.java",
+      "line": 316,
+      "reason": "Owned bounded JUnit workers use fixed task inputs, finite invokeAll and finite finally termination."
+    },
+    {
+      "rule": "UseConcurrentHashMap",
+      "file": "IntegrityFailureMetricRecorderTest.java",
+      "line": 319,
+      "reason": "Precomputed expected counts are local to the single parent fixture; worker callbacks do not access that map."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "IntegrityFailureMetricRecorderTest.java",
+      "line": 332,
+      "reason": "Owned bounded JUnit workers use fixed task inputs, finite invokeAll and finite finally termination."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "IntegrityFailureMetricRecorderTest.java",
+      "line": 349,
+      "reason": "Owned bounded JUnit workers use fixed task inputs, finite invokeAll and finite finally termination."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "IntegrityFailureMetricRecorderTest.java",
+      "line": 350,
+      "reason": "Owned bounded JUnit workers use fixed task inputs, finite invokeAll and finite finally termination."
+    },
+    {
+      "rule": "CloseResource",
+      "file": "ProcessRestartMetricRecorderTest.java",
+      "line": 296,
+      "reason": "Owned executor explicitly uses shutdownNow and finite awaitTermination in finally. Registry resource is separately owned."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "ProcessRestartMetricRecorderTest.java",
+      "line": 296,
+      "reason": "Owned bounded JUnit workers use fixed task inputs, finite invokeAll and finite finally termination."
+    },
+    {
+      "rule": "UseConcurrentHashMap",
+      "file": "ProcessRestartMetricRecorderTest.java",
+      "line": 299,
+      "reason": "Precomputed expected counts are local to the single parent fixture; worker callbacks do not access that map."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "ProcessRestartMetricRecorderTest.java",
+      "line": 312,
+      "reason": "Owned bounded JUnit workers use fixed task inputs, finite invokeAll and finite finally termination."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "ProcessRestartMetricRecorderTest.java",
+      "line": 330,
+      "reason": "Owned bounded JUnit workers use fixed task inputs, finite invokeAll and finite finally termination."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "ProcessRestartMetricRecorderTest.java",
+      "line": 331,
+      "reason": "Owned bounded JUnit workers use fixed task inputs, finite invokeAll and finite finally termination."
+    }
+  ],
+  "applicableInScope": 0,
+  "missing": 0,
+  "checkstyle": 0,
+  "currentInput": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42562-batch-three-metric-fixture-types-v1/begin.json",
+    "sha256": "995156353840eb8cfb262e650fe7c7aa95ccc72c2f96a923982e496a2c65a96c"
+  },
+  "currentJunit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42562-batch-three-metric-fixture-types-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "e664183a4316857f8e3265f8ea30896364fd8b31b0e6a7b16d1eddec2daf3e35"
+  },
+  "typedReports": {
+    "spotbugs": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42562-batch-three-metric-fixture-types-v1/reports/spotbugs.xml",
+      "sha256": "aa5abdebd0d58b8ed414c4292ec96d15e8cd5877503a32453ec42be5631dd7f1"
+    },
+    "pmd": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42562-batch-three-metric-fixture-types-v1/reports/pmd.xml",
+      "sha256": "c5d69a4726d75c69f90a488448295386c524753b1c8d13352f8ac983488eaa46"
+    },
+    "checkstyle": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42562-batch-three-metric-fixture-types-v1/reports/checkstyle.xml",
+      "sha256": "9cd9a0c96141aad900f8230d203d3e265f745a7624670a3f84dbb1946fc3433b"
+    }
+  },
+  "olderIndividualExecMerged": false,
+  "coverageAdded": 0,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "fixtureOwnedResourceBoundaryRetained": true
+}

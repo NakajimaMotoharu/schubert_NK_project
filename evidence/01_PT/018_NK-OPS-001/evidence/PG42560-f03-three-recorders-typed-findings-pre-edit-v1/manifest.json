@@ -1,0 +1,271 @@
+{
+  "run": "PG42560",
+  "source": "52531a7872265a2a738656636bf0bbd59ea82cd7",
+  "javaCore": "f8532c27c2666570fe450f285c5a5436aacd8e7e",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-22T11:00:20.345992+00:00",
+  "actualExit": 0,
+  "engineTerminals": {
+    "guard": 0,
+    "checkstyle": 0,
+    "pmd": 4,
+    "spotbugs": 1
+  },
+  "sourceInputs": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BatchMetricRecorder.java",
+      "sha256": "1fa8f26f772155bd4fb5698bf0dac4375f9382201b43235540070fa975ad5c38"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/IntegrityFailureMetricRecorder.java",
+      "sha256": "5c69cafae687001f301214675d980e600b9c5bb095a0017f1f77508f84fb9fb0"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ProcessRestartMetricRecorder.java",
+      "sha256": "9bcc34883a02ba53a9c1d8fcf4f9f5fad64d4f780fb27c4ae64e3ffc84dc7a2f"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/BatchMetricRecorderTest.java",
+      "sha256": "1b0226a691e3f1e8cb6bf9b1265517ef7a6faf558dcb1651f0a2e2e9ef2902aa"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/IntegrityFailureMetricRecorderTest.java",
+      "sha256": "d4f820533449237d2986d522fa71e3c80896dd9dba033066e546b48f66d160c1"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/ProcessRestartMetricRecorderTest.java",
+      "sha256": "8835dbbb6e8b38d6c3c1692c69ac8320620ad60402bc9302945ed5288d9581f0"
+    }
+  ],
+  "rawPmd": [
+    {
+      "rule": "CloseResource",
+      "file": "BatchMetricRecorderTest.java",
+      "line": 262
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "BatchMetricRecorderTest.java",
+      "line": 262
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "BatchMetricRecorderTest.java",
+      "line": 275
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "BatchMetricRecorderTest.java",
+      "line": 280
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "BatchMetricRecorderTest.java",
+      "line": 281
+    },
+    {
+      "rule": "CloseResource",
+      "file": "IntegrityFailureMetricRecorderTest.java",
+      "line": 313
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "IntegrityFailureMetricRecorderTest.java",
+      "line": 313
+    },
+    {
+      "rule": "UseConcurrentHashMap",
+      "file": "IntegrityFailureMetricRecorderTest.java",
+      "line": 316
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "IntegrityFailureMetricRecorderTest.java",
+      "line": 329
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "IntegrityFailureMetricRecorderTest.java",
+      "line": 346
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "IntegrityFailureMetricRecorderTest.java",
+      "line": 347
+    },
+    {
+      "rule": "CloseResource",
+      "file": "ProcessRestartMetricRecorderTest.java",
+      "line": 293
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "ProcessRestartMetricRecorderTest.java",
+      "line": 293
+    },
+    {
+      "rule": "UseConcurrentHashMap",
+      "file": "ProcessRestartMetricRecorderTest.java",
+      "line": 296
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "ProcessRestartMetricRecorderTest.java",
+      "line": 309
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "ProcessRestartMetricRecorderTest.java",
+      "line": 327
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "file": "ProcessRestartMetricRecorderTest.java",
+      "line": 328
+    }
+  ],
+  "rawSpotBugs": [
+    {
+      "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+      "type": "dev.codex.schubert.nk.batch.monitoring.BatchMetricRecorderTest",
+      "method": "lambda$batchRec004StandardHasNoCustomSeriesButStillValidatesInputs$0"
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+      "type": "dev.codex.schubert.nk.batch.monitoring.BatchMetricRecorderTest",
+      "method": "lambda$batchRec004StandardHasNoCustomSeriesButStillValidatesInputs$1"
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+      "type": "dev.codex.schubert.nk.batch.monitoring.BatchMetricRecorderTest",
+      "method": "lambda$batchRec004StandardHasNoCustomSeriesButStillValidatesInputs$2"
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "type": "dev.codex.schubert.nk.batch.monitoring.BatchMetricRecorderTest",
+      "method": "lambda$batchRec005NullUtcRangeAndMicrosecondPrecisionRejectBeforeSideEffects$0"
+    },
+    {
+      "rule": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "type": "dev.codex.schubert.nk.batch.monitoring.BatchMetricRecorderTest",
+      "method": "batchRec007SixtyFourParallelSuccessesKeepExactCountAndMaximumTime"
+    },
+    {
+      "rule": "BC_UNCONFIRMED_CAST_OF_RETURN_VALUE",
+      "type": "dev.codex.schubert.nk.batch.monitoring.BatchMetricRecorderTest$OwnedRegistry",
+      "method": "inject"
+    },
+    {
+      "rule": "THROWS_METHOD_THROWS_RUNTIMEEXCEPTION",
+      "type": "dev.codex.schubert.nk.batch.monitoring.BatchMetricRecorderTest$OwnedRegistry",
+      "method": "inject"
+    },
+    {
+      "rule": "BC_UNCONFIRMED_CAST_OF_RETURN_VALUE",
+      "type": "dev.codex.schubert.nk.batch.monitoring.IntegrityFailureMetricRecorderTest",
+      "method": "fail"
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+      "type": "dev.codex.schubert.nk.batch.monitoring.IntegrityFailureMetricRecorderTest",
+      "method": "lambda$integrityMetric004BothModesRejectNullAndStandardKeepsNoDetailedState$0"
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+      "type": "dev.codex.schubert.nk.batch.monitoring.IntegrityFailureMetricRecorderTest",
+      "method": "lambda$integrityMetric004BothModesRejectNullAndStandardKeepsNoDetailedState$1"
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "type": "dev.codex.schubert.nk.batch.monitoring.IntegrityFailureMetricRecorderTest",
+      "method": "lambda$integrityMetric003ClosedAreaParserAndGeneratedFactoriesUseTypedLiteralOracles$1"
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "type": "dev.codex.schubert.nk.batch.monitoring.IntegrityFailureMetricRecorderTest",
+      "method": "lambda$integrityMetric004BothModesRejectNullAndStandardKeepsNoDetailedState$2"
+    },
+    {
+      "rule": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "type": "dev.codex.schubert.nk.batch.monitoring.IntegrityFailureMetricRecorderTest",
+      "method": "integrityMetric007ConcurrentTotalsComeFromPrecomputedInputsAndOwnersStaySeparate"
+    },
+    {
+      "rule": "THROWS_METHOD_THROWS_RUNTIMEEXCEPTION",
+      "type": "dev.codex.schubert.nk.batch.monitoring.IntegrityFailureMetricRecorderTest",
+      "method": "fail"
+    },
+    {
+      "rule": "BC_UNCONFIRMED_CAST_OF_RETURN_VALUE",
+      "type": "dev.codex.schubert.nk.batch.monitoring.ProcessRestartMetricRecorderTest",
+      "method": "fail"
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+      "type": "dev.codex.schubert.nk.batch.monitoring.ProcessRestartMetricRecorderTest",
+      "method": "lambda$restartMetric004BothModesRejectNullAndStandardKeepsNoDetailedState$0"
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+      "type": "dev.codex.schubert.nk.batch.monitoring.ProcessRestartMetricRecorderTest",
+      "method": "lambda$restartMetric004BothModesRejectNullAndStandardKeepsNoDetailedState$1"
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "type": "dev.codex.schubert.nk.batch.monitoring.ProcessRestartMetricRecorderTest",
+      "method": "lambda$restartMetric003ClosedReasonParserAndGeneratedFactoriesUseTypedLiteralOracles$1"
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "type": "dev.codex.schubert.nk.batch.monitoring.ProcessRestartMetricRecorderTest",
+      "method": "lambda$restartMetric004BothModesRejectNullAndStandardKeepsNoDetailedState$2"
+    },
+    {
+      "rule": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "type": "dev.codex.schubert.nk.batch.monitoring.ProcessRestartMetricRecorderTest",
+      "method": "restartMetric007ConcurrentTotalsComeFromPrecomputedInputsAndOwnersStaySeparate"
+    },
+    {
+      "rule": "THROWS_METHOD_THROWS_RUNTIMEEXCEPTION",
+      "type": "dev.codex.schubert.nk.batch.monitoring.ProcessRestartMetricRecorderTest",
+      "method": "fail"
+    }
+  ],
+  "productionSignals": 0,
+  "fixtureConcreteIssues": [
+    "Three broad checked throws declarations",
+    "Three unconfirmed cast sites in deliberate fault provider helpers"
+  ],
+  "possibleTypedIntent": [
+    "Twelve null failure assertions",
+    "Three original RuntimeException identity fixtures"
+  ],
+  "typedMissingClasses": 0,
+  "previousExecutions": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42554-p01809-restart-metric-scoped-current-results-v1/manifest.json",
+      "sha256": "e9fa5ad2067ea0a048c98f240bef9c7bcf0f6418bd1b079030073bd549e5b3ac"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42558-p01809-batch-integrity-metrics-scoped-current-v1/manifest.json",
+      "sha256": "51c24c93371e21b406cfce2a4168aff6a983c925a1aef992e4635cd0bf2577b3"
+    }
+  ],
+  "xml": {
+    "pmd": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42560-batch-three-metric-fixtures-typed-v1/reports/pmd.xml",
+      "sha256": "97d565845398b7ff4585a37bcac2094785ece52ed7d6a248f229f4fdd032ea8a"
+    },
+    "spotbugs": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42560-batch-three-metric-fixtures-typed-v1/reports/spotbugs.xml",
+      "sha256": "93b1fe5b256fa51db01bd0799a77ee0a12604c447393729feef8aafa2142ef29"
+    },
+    "checkstyle": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42560-batch-three-metric-fixtures-typed-v1/reports/checkstyle.xml",
+      "sha256": "9cd9a0c96141aad900f8230d203d3e265f745a7624670a3f84dbb1946fc3433b"
+    }
+  },
+  "executionReplayed": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

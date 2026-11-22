@@ -1,0 +1,864 @@
+{
+  "run": "PG42572",
+  "source": "045d24efc86d5dedc41138ad3f651aa0eac618eb",
+  "javaCore": "f8532c27c2666570fe450f285c5a5436aacd8e7e",
+  "wbs": "WBS-G13.05",
+  "terminalAtUTC": "2026-11-22T11:12:55.920737+00:00",
+  "actualExit": 0,
+  "designCommit": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+  "designRefs": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+      "sha256": "2b4e1ebb15b348b1f25d1502130d6a4a3607893868d7ea5e57d231ec7f3e58ef"
+    },
+    {
+      "path": "documents/200_UI/220_画面・認証/221_画面一覧・画面遷移設計.md",
+      "sha256": "a1006b4c192491905897c20d27c60ef4300c31462abb08414e70bb92e8cb4acd"
+    }
+  ],
+  "screens": 24,
+  "screenRoutePurposeRows": 33,
+  "templateBearingRows": 24,
+  "implementationChannels": [
+    "Login GET method alias; authenticated POST goes through Spring filter/provider",
+    "Animation split into main/ova and opening/watch",
+    "Admin four operations in required single dispatch, matching SS313 SSC177"
+  ],
+  "routesAndViews": [
+    {
+      "screen": "SCR-001",
+      "rowAt": 97,
+      "routeExpectation": "GET `/login`",
+      "designLogicalEntry": "`LoginController.show(LoginQuery,Model)`",
+      "actualBindings": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/LoginController.java",
+          "method": "login",
+          "line": 12,
+          "sha256": "ef9bbc81c79799528840f70f65f55056d08fd1ea0f9fd1a93d8212b946f4e630",
+          "verb": "GET",
+          "exactPath": "/login"
+        }
+      ],
+      "templates": [
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/login.html",
+          "sha256": "ba814efffec4be98d17338cacd63927d50aa552958188ba3fb7db0b77171443a"
+        }
+      ],
+      "formsAndView": "`LoginForm` / `LoginViewModel`",
+      "fixedIf": "なし",
+      "approvedRoleAndRequirement": "未認証、UI 226、FUN-001",
+      "actualBrowserEvidenceApplied": false
+    },
+    {
+      "screen": "SCR-001",
+      "rowAt": 98,
+      "routeExpectation": "POST `/login`",
+      "designLogicalEntry": "Spring Security `MqAuthenticationProvider`",
+      "actualBindings": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqFormLoginFilterFactory.java",
+          "line": 26,
+          "sha256": "0bc4ec886408b545a0e212345bf7a3ec43e675e4c2d168a0f69dc67843abdb4e",
+          "routedToProvider": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqAuthenticationProvider.java",
+          "providerSha256": "b0d53b2888a852d64b75fc8c900895310fc644cf2a1dc83df5133374418d8f3c",
+          "verb": "POST",
+          "exactPath": "/login"
+        }
+      ],
+      "templates": [],
+      "formsAndView": "`LoginForm`",
+      "fixedIf": "IF-001",
+      "approvedRoleAndRequirement": "未認証、AUT-004、MQ-021",
+      "actualBrowserEvidenceApplied": false
+    },
+    {
+      "screen": "SCR-002",
+      "rowAt": 99,
+      "routeExpectation": "GET `/`",
+      "designLogicalEntry": "`MenuController.show(Principal,Model)`",
+      "actualBindings": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/MenuController.java",
+          "method": "show",
+          "line": 19,
+          "sha256": "f26a85c85d5ee4ed11e548d25a684956d2349a6ed1c43c0e021f6d4745c8acce",
+          "verb": "GET",
+          "exactPath": "/"
+        }
+      ],
+      "templates": [
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/menu.html",
+          "sha256": "8369f16fb8b330b1a073003fa0b8c74e68e65b6ca579d85ad82f6582b7ad626a"
+        }
+      ],
+      "formsAndView": "`MenuViewModel`",
+      "fixedIf": "なし",
+      "approvedRoleAndRequirement": "USER/ADMIN、UI 223、FUN-002",
+      "actualBrowserEvidenceApplied": false
+    },
+    {
+      "screen": "SCR-003",
+      "rowAt": 100,
+      "routeExpectation": "GET `/search`",
+      "designLogicalEntry": "`ScenarioController.search(ScenarioSearchForm,Model)`",
+      "actualBindings": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/ScenarioController.java",
+          "method": "search",
+          "line": 67,
+          "sha256": "f0ad9e4805f46f1ac0dca0d3fee940eda4a060bb540ba16d71748406b40335b2",
+          "verb": "GET",
+          "exactPath": "/search"
+        }
+      ],
+      "templates": [
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/search.html",
+          "sha256": "e3db4ebdc9372eb396d2fe95cf56aced827d400503cca1317b3572e53a69c4a7"
+        }
+      ],
+      "formsAndView": "`ScenarioSearchForm` / `ScenarioSearchViewModel`",
+      "fixedIf": "IF-003～005",
+      "approvedRoleAndRequirement": "USER/ADMIN、FUN-003",
+      "actualBrowserEvidenceApplied": false
+    },
+    {
+      "screen": "SCR-004",
+      "rowAt": 101,
+      "routeExpectation": "GET `/scenarios`",
+      "designLogicalEntry": "`ScenarioController.games(Model)`",
+      "actualBindings": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/ScenarioController.java",
+          "method": "games",
+          "line": 127,
+          "sha256": "f0ad9e4805f46f1ac0dca0d3fee940eda4a060bb540ba16d71748406b40335b2",
+          "verb": "GET",
+          "exactPath": "/scenarios"
+        }
+      ],
+      "templates": [
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/scenarios.html",
+          "sha256": "c98273df221eb44c64c3c5303acb75b806e1b916c253b67ebd8baec300370234"
+        }
+      ],
+      "formsAndView": "`GameListViewModel`",
+      "fixedIf": "IF-003",
+      "approvedRoleAndRequirement": "USER/ADMIN、FUN-004",
+      "actualBrowserEvidenceApplied": false
+    },
+    {
+      "screen": "SCR-005",
+      "rowAt": 102,
+      "routeExpectation": "GET `/scenarios/{game}`",
+      "designLogicalEntry": "`ScenarioController.routes(GameCode,Model)`",
+      "actualBindings": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/ScenarioController.java",
+          "method": "routes",
+          "line": 145,
+          "sha256": "f0ad9e4805f46f1ac0dca0d3fee940eda4a060bb540ba16d71748406b40335b2",
+          "verb": "GET",
+          "exactPath": "/scenarios/{game:NUKITASHI[12]}"
+        }
+      ],
+      "templates": [
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/scenario-routes.html",
+          "sha256": "e0a641d27ce6f637fd4dfbb5f14b0c0cbce46ab874fdf15d566126b289fe6c88"
+        }
+      ],
+      "formsAndView": "`RouteListViewModel`",
+      "fixedIf": "IF-006",
+      "approvedRoleAndRequirement": "USER/ADMIN",
+      "actualBrowserEvidenceApplied": false
+    },
+    {
+      "screen": "SCR-006",
+      "rowAt": 103,
+      "routeExpectation": "GET `/scenarios/{game}/{prefix}`",
+      "designLogicalEntry": "`ScenarioController.files(GameCode,RoutePrefix,Model)`",
+      "actualBindings": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/ScenarioController.java",
+          "method": "files",
+          "line": 173,
+          "sha256": "f0ad9e4805f46f1ac0dca0d3fee940eda4a060bb540ba16d71748406b40335b2",
+          "verb": "GET",
+          "exactPath": "/scenarios/{game:NUKITASHI[12]}/{prefix:[0-9]{2}}"
+        }
+      ],
+      "templates": [
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/scenario-files.html",
+          "sha256": "d76bebbaacd86eca98f38b25eb918aacead98d44ea05f7c4bd5a619cfb71fa8f"
+        }
+      ],
+      "formsAndView": "`ScenarioFileListViewModel`",
+      "fixedIf": "IF-007",
+      "approvedRoleAndRequirement": "USER/ADMIN",
+      "actualBrowserEvidenceApplied": false
+    },
+    {
+      "screen": "SCR-007",
+      "rowAt": 104,
+      "routeExpectation": "GET `/scenarios/{id}`",
+      "designLogicalEntry": "`ContentDetailController.scenario(String,Model)`",
+      "actualBindings": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/ContentDetailController.java",
+          "method": "scenario",
+          "line": 78,
+          "sha256": "0e451bdb4428305a835307256f3bbc8b1a5665680f160441b6b6f951286c0de6",
+          "verb": "GET",
+          "exactPath": "/scenarios/{id:[0-9]{1,12}}"
+        }
+      ],
+      "templates": [
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/scenario.html",
+          "sha256": "b9709c596a3f98653d854f637ae48e742704b80537460c6f3acc5d6bd342a245"
+        }
+      ],
+      "formsAndView": "`ScenarioDetailViewModel`",
+      "fixedIf": "IF-008",
+      "approvedRoleAndRequirement": "USER/ADMIN",
+      "actualBrowserEvidenceApplied": false
+    },
+    {
+      "screen": "SCR-008",
+      "rowAt": 105,
+      "routeExpectation": "GET `/animation`",
+      "designLogicalEntry": "`AnimationController.menu(Model)`",
+      "actualBindings": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/AnimationController.java",
+          "method": "menu",
+          "line": 52,
+          "sha256": "e300e90c29d74117905de30f3e64dc99b5044a6bc5100648cdc1d5c2dc987e12",
+          "verb": "GET",
+          "exactPath": "/animation"
+        }
+      ],
+      "templates": [
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/animation.html",
+          "sha256": "008fe35863ee9c48b82c674df78572573313b29c321686259a64e8191cbe5b4d"
+        }
+      ],
+      "formsAndView": "`AnimationMenuViewModel`",
+      "fixedIf": "IF-010",
+      "approvedRoleAndRequirement": "USER/ADMIN、FUN-006",
+      "actualBrowserEvidenceApplied": false
+    },
+    {
+      "screen": "SCR-009",
+      "rowAt": 106,
+      "routeExpectation": "GET `/animation/main`,`/animation/ova`",
+      "designLogicalEntry": "`AnimationController.list(AnimationCategory,Model)`",
+      "actualBindings": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/AnimationController.java",
+          "method": "main",
+          "line": 73,
+          "sha256": "e300e90c29d74117905de30f3e64dc99b5044a6bc5100648cdc1d5c2dc987e12",
+          "verb": "GET",
+          "exactPath": "/animation/main"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/AnimationController.java",
+          "method": "ova",
+          "line": 80,
+          "sha256": "e300e90c29d74117905de30f3e64dc99b5044a6bc5100648cdc1d5c2dc987e12",
+          "verb": "GET",
+          "exactPath": "/animation/ova"
+        }
+      ],
+      "templates": [
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/animation-list.html",
+          "sha256": "cfec2c00935f2af53ee51eb1726cfc676e1040312a0632d172f7e9ff283ac702"
+        }
+      ],
+      "formsAndView": "`AnimationListViewModel`",
+      "fixedIf": "IF-011",
+      "approvedRoleAndRequirement": "USER/ADMIN",
+      "actualBrowserEvidenceApplied": false
+    },
+    {
+      "screen": "SCR-010",
+      "rowAt": 107,
+      "routeExpectation": "GET `/animation/opening`,`/animation/videos/{id}`",
+      "designLogicalEntry": "`ContentDetailController.opening/watch(String,Model)`",
+      "actualBindings": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/ContentDetailController.java",
+          "method": "opening",
+          "line": 134,
+          "sha256": "0e451bdb4428305a835307256f3bbc8b1a5665680f160441b6b6f951286c0de6",
+          "verb": "GET",
+          "exactPath": "/animation/opening"
+        },
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/ContentDetailController.java",
+          "method": "watch",
+          "line": 141,
+          "sha256": "0e451bdb4428305a835307256f3bbc8b1a5665680f160441b6b6f951286c0de6",
+          "verb": "GET",
+          "exactPath": "/animation/videos/{id}"
+        }
+      ],
+      "templates": [
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/animation-watch.html",
+          "sha256": "50cef0d1cd535d0c374205e63df51ba4308675541eb0fcc523168c0e34fc0b6c"
+        }
+      ],
+      "formsAndView": "`AnimationWatchViewModel`",
+      "fixedIf": "IF-012",
+      "approvedRoleAndRequirement": "USER/ADMIN",
+      "actualBrowserEvidenceApplied": false
+    },
+    {
+      "screen": "SCR-011",
+      "rowAt": 108,
+      "routeExpectation": "GET `/music`",
+      "designLogicalEntry": "`MusicController.categories(Model)`",
+      "actualBindings": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/MusicController.java",
+          "method": "categories",
+          "line": 53,
+          "sha256": "43714d9f59017f118ec095eacedc852b8b850a7282ce5df0847db70405a973f9",
+          "verb": "GET",
+          "exactPath": "/music"
+        }
+      ],
+      "templates": [
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/music.html",
+          "sha256": "fbbf5a79417693cff98acdc75eef97fd30561362ce95fff4ad2d8b703d68743f"
+        }
+      ],
+      "formsAndView": "`MusicCategoryViewModel`",
+      "fixedIf": "IF-013",
+      "approvedRoleAndRequirement": "USER/ADMIN、FUN-007",
+      "actualBrowserEvidenceApplied": false
+    },
+    {
+      "screen": "SCR-012",
+      "rowAt": 109,
+      "routeExpectation": "GET `/music/{category}`",
+      "designLogicalEntry": "`MusicController.sections(String,Model)`",
+      "actualBindings": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/MusicController.java",
+          "method": "sections",
+          "line": 82,
+          "sha256": "43714d9f59017f118ec095eacedc852b8b850a7282ce5df0847db70405a973f9",
+          "verb": "GET",
+          "exactPath": "/music/{category}"
+        }
+      ],
+      "templates": [
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/music-sections.html",
+          "sha256": "62b31b622da8c27fbfe8c238ea9a4579d12d22247bd2390b5dbfbbc88650d2e4"
+        }
+      ],
+      "formsAndView": "`MusicSectionViewModel`",
+      "fixedIf": "IF-014",
+      "approvedRoleAndRequirement": "USER/ADMIN",
+      "actualBrowserEvidenceApplied": false
+    },
+    {
+      "screen": "SCR-013",
+      "rowAt": 110,
+      "routeExpectation": "GET `/music/{category}/{section}`",
+      "designLogicalEntry": "`ContentDetailController.tracks(String,String,Model)`",
+      "actualBindings": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/ContentDetailController.java",
+          "method": "tracks",
+          "line": 172,
+          "sha256": "0e451bdb4428305a835307256f3bbc8b1a5665680f160441b6b6f951286c0de6",
+          "verb": "GET",
+          "exactPath": "/music/{category}/{section}"
+        }
+      ],
+      "templates": [
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/music-list.html",
+          "sha256": "59264dd712a377d0fe7da5b30e4277b2cea5d4ba4d450b7db1cbc765b3fcfc6d"
+        }
+      ],
+      "formsAndView": "`MusicTrackViewModel`",
+      "fixedIf": "IF-015",
+      "approvedRoleAndRequirement": "USER/ADMIN",
+      "actualBrowserEvidenceApplied": false
+    },
+    {
+      "screen": "SCR-014",
+      "rowAt": 111,
+      "routeExpectation": "GET `/logs`",
+      "designLogicalEntry": "`LogController.search(LogSearchForm,Model)`",
+      "actualBindings": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/LogController.java",
+          "method": "search",
+          "line": 52,
+          "sha256": "918e32335e79eb0f7d093e4fdb3c08f093d92ecfcfcaa8d853caf3ee53d41eb7",
+          "verb": "GET",
+          "exactPath": "/logs"
+        }
+      ],
+      "templates": [
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/logs.html",
+          "sha256": "7bbd176e40d8a9f5b67be8f57cd27d42ccafd5e3bcabc95a56d75c370ce62708"
+        }
+      ],
+      "formsAndView": "`LogSearchForm` / `LogSearchViewModel`",
+      "fixedIf": "IF-017",
+      "approvedRoleAndRequirement": "ADMIN、FUN-008/AUT-002",
+      "actualBrowserEvidenceApplied": false
+    },
+    {
+      "screen": "SCR-015",
+      "rowAt": 112,
+      "routeExpectation": "GET `/admin/users`",
+      "designLogicalEntry": "`UserAdminController.list(UserSearchForm,Model)`",
+      "actualBindings": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/UserAdminController.java",
+          "method": "list",
+          "line": 518,
+          "sha256": "88412d5abb9f239a50160da79f03d88ea52f541a4c4d772dc2d2847428d5d727",
+          "verb": "GET",
+          "exactPath": "/admin/users"
+        }
+      ],
+      "templates": [
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/admin/user-list.html",
+          "sha256": "75ff8f6521d9e48c852264d839e17f9d2224f17ad2d486b37750cdae612e7655"
+        }
+      ],
+      "formsAndView": "`UserSearchForm` / `UserListViewModel`",
+      "fixedIf": "IF-018",
+      "approvedRoleAndRequirement": "ADMIN、FUN-009",
+      "actualBrowserEvidenceApplied": false
+    },
+    {
+      "screen": "SCR-016",
+      "rowAt": 113,
+      "routeExpectation": "GET `/admin/users/new`",
+      "designLogicalEntry": "`UserAdminController.newForm(Model)`",
+      "actualBindings": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/UserAdminController.java",
+          "method": "newForm",
+          "line": 105,
+          "sha256": "88412d5abb9f239a50160da79f03d88ea52f541a4c4d772dc2d2847428d5d727",
+          "verb": "GET",
+          "exactPath": "/admin/users/new"
+        }
+      ],
+      "templates": [
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/admin/user-new.html",
+          "sha256": "97fd0f78dbfbe4538ca36e5ddda507ed55d762c040d12b09d544fc568b0dbedd"
+        }
+      ],
+      "formsAndView": "`UserCreateForm`",
+      "fixedIf": "なし",
+      "approvedRoleAndRequirement": "ADMIN",
+      "actualBrowserEvidenceApplied": false
+    },
+    {
+      "screen": "SCR-016",
+      "rowAt": 114,
+      "routeExpectation": "POST `/admin/users/new`",
+      "designLogicalEntry": "`UserAdminController.create(UserCreateForm,BindingResult)`",
+      "actualBindings": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/UserAdminController.java",
+          "method": "create",
+          "line": 126,
+          "sha256": "88412d5abb9f239a50160da79f03d88ea52f541a4c4d772dc2d2847428d5d727",
+          "verb": "POST",
+          "exactPath": "/admin/users/new"
+        }
+      ],
+      "templates": [],
+      "formsAndView": "`UserCreateForm`",
+      "fixedIf": "IF-019",
+      "approvedRoleAndRequirement": "ADMIN、token",
+      "actualBrowserEvidenceApplied": false
+    },
+    {
+      "screen": "SCR-017",
+      "rowAt": 115,
+      "routeExpectation": "GET `/admin/users/{id}`",
+      "designLogicalEntry": "`UserAdminController.detail(long,Model)`",
+      "actualBindings": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/UserAdminController.java",
+          "method": "detail",
+          "line": 309,
+          "sha256": "88412d5abb9f239a50160da79f03d88ea52f541a4c4d772dc2d2847428d5d727",
+          "verb": "GET",
+          "exactPath": "/admin/users/{id:[0-9]{1,12}}"
+        }
+      ],
+      "templates": [
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/admin/user-detail.html",
+          "sha256": "c74fe2ced5c6492369f243bf9930e52e88fef40b18492195a1ac01a9b05f8fba"
+        }
+      ],
+      "formsAndView": "`UserDetailViewModel`＋操作別form",
+      "fixedIf": "IF-020",
+      "approvedRoleAndRequirement": "ADMIN",
+      "actualBrowserEvidenceApplied": false
+    },
+    {
+      "screen": "SCR-017",
+      "rowAt": 116,
+      "routeExpectation": "POST `/admin/users/{id}` + `operation=STATUS`",
+      "designLogicalEntry": "`UserAdminController.changeStatus(...)`",
+      "actualBindings": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/UserAdminController.java",
+          "method": "change",
+          "line": 196,
+          "sha256": "88412d5abb9f239a50160da79f03d88ea52f541a4c4d772dc2d2847428d5d727",
+          "verb": "POST",
+          "exactPath": "/admin/users/{id:[0-9]{1,12}}"
+        }
+      ],
+      "templates": [],
+      "formsAndView": "`UserStatusForm`",
+      "fixedIf": "IF-021",
+      "approvedRoleAndRequirement": "ADMIN、token/version",
+      "actualBrowserEvidenceApplied": false
+    },
+    {
+      "screen": "SCR-017",
+      "rowAt": 117,
+      "routeExpectation": "POST `/admin/users/{id}` + `operation=ROLE`",
+      "designLogicalEntry": "`UserAdminController.changeRole(...)`",
+      "actualBindings": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/UserAdminController.java",
+          "method": "change",
+          "line": 196,
+          "sha256": "88412d5abb9f239a50160da79f03d88ea52f541a4c4d772dc2d2847428d5d727",
+          "verb": "POST",
+          "exactPath": "/admin/users/{id:[0-9]{1,12}}"
+        }
+      ],
+      "templates": [],
+      "formsAndView": "`UserRoleForm`",
+      "fixedIf": "IF-022",
+      "approvedRoleAndRequirement": "ADMIN、token/version",
+      "actualBrowserEvidenceApplied": false
+    },
+    {
+      "screen": "SCR-017",
+      "rowAt": 118,
+      "routeExpectation": "POST `/admin/users/{id}` + `operation=PASSWORD`",
+      "designLogicalEntry": "`UserAdminController.resetPassword(...)`",
+      "actualBindings": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/UserAdminController.java",
+          "method": "change",
+          "line": 196,
+          "sha256": "88412d5abb9f239a50160da79f03d88ea52f541a4c4d772dc2d2847428d5d727",
+          "verb": "POST",
+          "exactPath": "/admin/users/{id:[0-9]{1,12}}"
+        }
+      ],
+      "templates": [],
+      "formsAndView": "`PasswordResetForm`",
+      "fixedIf": "IF-023",
+      "approvedRoleAndRequirement": "ADMIN、token/version",
+      "actualBrowserEvidenceApplied": false
+    },
+    {
+      "screen": "SCR-017",
+      "rowAt": 119,
+      "routeExpectation": "POST `/admin/users/{id}` + `operation=UNLOCK`",
+      "designLogicalEntry": "`UserAdminController.unlock(...)`",
+      "actualBindings": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/UserAdminController.java",
+          "method": "change",
+          "line": 196,
+          "sha256": "88412d5abb9f239a50160da79f03d88ea52f541a4c4d772dc2d2847428d5d727",
+          "verb": "POST",
+          "exactPath": "/admin/users/{id:[0-9]{1,12}}"
+        }
+      ],
+      "templates": [],
+      "formsAndView": "`UserUnlockForm`",
+      "fixedIf": "IF-024",
+      "approvedRoleAndRequirement": "ADMIN、token/version",
+      "actualBrowserEvidenceApplied": false
+    },
+    {
+      "screen": "SCR-018",
+      "rowAt": 120,
+      "routeExpectation": "GET `/questions/new`",
+      "designLogicalEntry": "`QuestionController.newForm(Model)`",
+      "actualBindings": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/QuestionController.java",
+          "method": "newForm",
+          "line": 91,
+          "sha256": "3d3b723dd80f038dea4d74f44830eb760585919c703c0354f8a139b15b126ece",
+          "verb": "GET",
+          "exactPath": "/questions/new"
+        }
+      ],
+      "templates": [
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/questions/new.html",
+          "sha256": "a71649b7e8237ad7962e32d92103d87dd92eb84343b77881f3970b3010038643"
+        }
+      ],
+      "formsAndView": "`QuestionSubmitForm`",
+      "fixedIf": "なし",
+      "approvedRoleAndRequirement": "USER/ADMIN、QST-001",
+      "actualBrowserEvidenceApplied": false
+    },
+    {
+      "screen": "SCR-018",
+      "rowAt": 121,
+      "routeExpectation": "POST `/questions/new`",
+      "designLogicalEntry": "`QuestionController.submit(...)`",
+      "actualBindings": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/QuestionController.java",
+          "method": "submit",
+          "line": 116,
+          "sha256": "3d3b723dd80f038dea4d74f44830eb760585919c703c0354f8a139b15b126ece",
+          "verb": "POST",
+          "exactPath": "/questions/new"
+        }
+      ],
+      "templates": [],
+      "formsAndView": "`QuestionSubmitForm`",
+      "fixedIf": "IF-025",
+      "approvedRoleAndRequirement": "USER/ADMIN、token",
+      "actualBrowserEvidenceApplied": false
+    },
+    {
+      "screen": "SCR-019",
+      "rowAt": 122,
+      "routeExpectation": "GET `/questions/accepted/{receiptId}`",
+      "designLogicalEntry": "`QuestionController.accepted(ReceiptId,Model)`",
+      "actualBindings": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/QuestionController.java",
+          "method": "accepted",
+          "line": 201,
+          "sha256": "3d3b723dd80f038dea4d74f44830eb760585919c703c0354f8a139b15b126ece",
+          "verb": "GET",
+          "exactPath": "/questions/accepted/{receiptId}"
+        }
+      ],
+      "templates": [
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/questions/accepted.html",
+          "sha256": "eded646286168f2c25805deb9938ba8b0db31e321881f781356cbf4bda889f53"
+        }
+      ],
+      "formsAndView": "`QuestionAcceptedViewModel`",
+      "fixedIf": "Web受付参照＋毎GET fresh IF-030照合結果",
+      "approvedRoleAndRequirement": "現在API Owner/受付照合、QST-002、QA048",
+      "actualBrowserEvidenceApplied": false
+    },
+    {
+      "screen": "SCR-020",
+      "rowAt": 123,
+      "routeExpectation": "GET `/notifications`",
+      "designLogicalEntry": "`NotificationController.list(NotificationSearchForm,Model)`",
+      "actualBindings": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/NotificationController.java",
+          "method": "list",
+          "line": 75,
+          "sha256": "6f507bdd12f8a37dbeafdc0f58183ffe1b46ae2113b9d96f7bc01b0fe40aa366",
+          "verb": "GET",
+          "exactPath": "/notifications"
+        }
+      ],
+      "templates": [
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/notifications/list.html",
+          "sha256": "cb9ecfb4c5105b537acfd3733136e20b737b3aa31af04262986874e1c34236aa"
+        }
+      ],
+      "formsAndView": "`NotificationSearchForm` / `NotificationListViewModel`",
+      "fixedIf": "IF-026",
+      "approvedRoleAndRequirement": "本人だけ、NTF-001",
+      "actualBrowserEvidenceApplied": false
+    },
+    {
+      "screen": "SCR-021",
+      "rowAt": 124,
+      "routeExpectation": "GET `/notifications/{id}`",
+      "designLogicalEntry": "`NotificationController.detail(long,Model)`",
+      "actualBindings": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/NotificationController.java",
+          "method": "detail",
+          "line": 132,
+          "sha256": "6f507bdd12f8a37dbeafdc0f58183ffe1b46ae2113b9d96f7bc01b0fe40aa366",
+          "verb": "GET",
+          "exactPath": "/notifications/{id:[0-9]{1,12}}"
+        }
+      ],
+      "templates": [
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/notifications/detail.html",
+          "sha256": "10e4f709e65f4da0ee7f6afe05c13b3cc21cb3a0ad497a52ba1a2a2408824701"
+        }
+      ],
+      "formsAndView": "`NotificationDetailViewModel`＋`CancelForm`",
+      "fixedIf": "IF-027",
+      "approvedRoleAndRequirement": "本人だけ",
+      "actualBrowserEvidenceApplied": false
+    },
+    {
+      "screen": "SCR-021",
+      "rowAt": 125,
+      "routeExpectation": "POST `/notifications/{id}` + `operation=CANCEL`",
+      "designLogicalEntry": "`NotificationController.cancel(...)`",
+      "actualBindings": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/NotificationController.java",
+          "method": "cancel",
+          "line": 236,
+          "sha256": "6f507bdd12f8a37dbeafdc0f58183ffe1b46ae2113b9d96f7bc01b0fe40aa366",
+          "verb": "POST",
+          "exactPath": "/notifications/{id:[0-9]{1,12}}"
+        }
+      ],
+      "templates": [],
+      "formsAndView": "`CancelForm`",
+      "fixedIf": "IF-028",
+      "approvedRoleAndRequirement": "本人、RECEIVED、token",
+      "actualBrowserEvidenceApplied": false
+    },
+    {
+      "screen": "SCR-022",
+      "rowAt": 126,
+      "routeExpectation": "GET `/questions`",
+      "designLogicalEntry": "`QuestionController.list(QuestionSearchForm,Model)`",
+      "actualBindings": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/QuestionController.java",
+          "method": "list",
+          "line": 302,
+          "sha256": "3d3b723dd80f038dea4d74f44830eb760585919c703c0354f8a139b15b126ece",
+          "verb": "GET",
+          "exactPath": "/questions"
+        }
+      ],
+      "templates": [
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/questions/list.html",
+          "sha256": "d164e7957f53807c40d46d3247c1354202607f905eedd82f7971cd2a1d483af2"
+        }
+      ],
+      "formsAndView": "`QuestionSearchForm` / `QuestionListViewModel`",
+      "fixedIf": "IF-029",
+      "approvedRoleAndRequirement": "USER本人/ADMIN全件",
+      "actualBrowserEvidenceApplied": false
+    },
+    {
+      "screen": "SCR-023",
+      "rowAt": 127,
+      "routeExpectation": "GET `/questions/{id}`",
+      "designLogicalEntry": "`QuestionController.detail(long,Model)`",
+      "actualBindings": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/QuestionController.java",
+          "method": "detail",
+          "line": 358,
+          "sha256": "3d3b723dd80f038dea4d74f44830eb760585919c703c0354f8a139b15b126ece",
+          "verb": "GET",
+          "exactPath": "/questions/{id:[0-9]{1,12}}"
+        }
+      ],
+      "templates": [
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/questions/detail.html",
+          "sha256": "106063b219b894417619b35cd8a120cffc4f4aa21432f59bfcf6b54f7595e9f2"
+        }
+      ],
+      "formsAndView": "`QuestionDetailViewModel`＋`QuestionDeleteForm`",
+      "fixedIf": "IF-030",
+      "approvedRoleAndRequirement": "Owner/ADMIN",
+      "actualBrowserEvidenceApplied": false
+    },
+    {
+      "screen": "SCR-023",
+      "rowAt": 128,
+      "routeExpectation": "POST `/questions/{id}` + `operation=DELETE`",
+      "designLogicalEntry": "`QuestionController.delete(...)`",
+      "actualBindings": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/QuestionController.java",
+          "method": "delete",
+          "line": 462,
+          "sha256": "3d3b723dd80f038dea4d74f44830eb760585919c703c0354f8a139b15b126ece",
+          "verb": "POST",
+          "exactPath": "/questions/{id:[0-9]{1,12}}"
+        }
+      ],
+      "templates": [],
+      "formsAndView": "`QuestionDeleteForm`",
+      "fixedIf": "IF-031",
+      "approvedRoleAndRequirement": "Owner/ADMIN、token",
+      "actualBrowserEvidenceApplied": false
+    },
+    {
+      "screen": "SCR-090",
+      "rowAt": 129,
+      "routeExpectation": "GET `/error`",
+      "designLogicalEntry": "`ErrorController.error(HttpServletRequest,Model)`",
+      "actualBindings": [
+        {
+          "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/ErrorController.java",
+          "method": "error",
+          "line": 26,
+          "sha256": "ccc4587c76195542436f708aa6f87ee93b2d32e14d3d81350417c3f4e7b07fd5",
+          "verb": "REQUEST",
+          "exactPath": "/error"
+        }
+      ],
+      "templates": [
+        {
+          "path": "src/schubert-nk-web/src/main/resources/templates/error/error.html",
+          "sha256": "6fe51e31810e4481a1999e27fa136970945877a2ad12221411e617b1d10634d0"
+        }
+      ],
+      "formsAndView": "`ErrorViewModel`",
+      "fixedIf": "なし",
+      "approvedRoleAndRequirement": "全scope、TST-002",
+      "actualBrowserEvidenceApplied": false
+    }
+  ],
+  "rawCookieOrRealAuthorizationUsed": false,
+  "actualRuntimeActions": 0,
+  "allScreenEndpointBehaviorVerified": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

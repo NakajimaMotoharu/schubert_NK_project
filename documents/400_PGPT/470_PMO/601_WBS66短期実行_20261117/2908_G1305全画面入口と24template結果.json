@@ -1,0 +1,127 @@
+{
+  "eventId": "PGPT-20261008-8354",
+  "workCategory": "CONTRACT_AUDIT",
+  "source": "045d24efc86d5dedc41138ad3f651aa0eac618eb",
+  "productionCoreMain": "f8532c27c2666570fe450f285c5a5436aacd8e7e",
+  "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+  "managementWorkIds": [
+    "WBS-G13.05"
+  ],
+  "planRow": {
+    "ID": "WBS-G13.05",
+    "元行": "WBS-G13.05",
+    "費目": "F",
+    "主担当": "WBS-G13.05",
+    "状態": "計画",
+    "作業": "web全画面/form/JS/下位型→要求/WBSの欠落照合",
+    "残pp": "2.5",
+    "着手": "設計361・当該source・作業所有・既存成果を照合。元契約の着手依存と個別HOLDを確認",
+    "終了証拠": "web全画面/form/JS/下位型→要求/WBSの欠落照合の対象別完了記録を確認。契約別の版差照合先で示した現在候補と、個別採用した設計・期待値を明示",
+    "補正根拠": "予測777の元行残。個別費用実測がない部分は前回単価を継承",
+    "契約HOLD": "H-G13.05",
+    "対象": "",
+    "範囲": "SYS-011、SCP-001、SCP-002、SCP-003、SCP-006",
+    "保存証跡": "該当criteriaごとの判定・未解決一覧・照合元manifest・判定者",
+    "順次": "False",
+    "配賦窓": "11",
+    "楽観pp": "1.0",
+    "慎重pp": "5.0",
+    "要求設計の版差": "PT基準仕様 NK-OPS-001",
+    "lineNumber": 856,
+    "改訂残pp": "2.5"
+  },
+  "run": "PG42572",
+  "startEvent": "PGPT-20261008-8353",
+  "outcome": {
+    "currentScreens": 24,
+    "traceRows": 33,
+    "templates": 24,
+    "executedTrials": 0,
+    "staticSourceTrace": true,
+    "criteriaAdvanced": "UI/SS313 route purpose, controller/service ownership, template bytes",
+    "remaining": [
+      "Screen/form/JS/projected-data completion and 451",
+      "Real configured HTTP and UI/CHR",
+      "H-G13.05 owner review"
+    ]
+  },
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42572-g1305-screen-route-and-view-source-matrix-v1/manifest.json",
+    "sha256": "d21780fd19b0e330191cb310c0a56caf59158ac832927009232d911175be6e34"
+  },
+  "nextEvidence": {
+    "run": "PG42574",
+    "wbs": "WBS-P016-09/2",
+    "target": "SCR009 AnimationViewModel fixture for listing, initial page, ordering and optional values",
+    "action": "Compare old test/runtime bytes and current PG42382 candidate qualification; use existing ordinary result for matching IDs."
+  },
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T11:13:00+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 31,
+      "remainingPercent": 69,
+      "resetsAt": 1795879772,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "modelRequested": "gpt-6.2-sol",
+  "modelObserved": null,
+  "reasoningRequested": "high",
+  "reasoningObserved": null,
+  "speedRequested": "standard",
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 31,
+    "remainingPercent": 69,
+    "resetsAt": 1795879772,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "38c5f045015fee398b63f9eb90479b9ad6cce7ad6d7eeeb6fb9c01e5a7952206",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-22T11:13:00+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 31,
+        "remainingPercent": 69,
+        "resetsAt": 1795879772,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": 1,
+  "sameQuotaWindow": true,
+  "groupCapExceeded": true,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-22T11:12:55.920737+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": false,
+  "quotaBefore": {
+    "usedPercent": 30,
+    "remainingPercent": 70,
+    "resetsAt": 1795879772,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null
+}

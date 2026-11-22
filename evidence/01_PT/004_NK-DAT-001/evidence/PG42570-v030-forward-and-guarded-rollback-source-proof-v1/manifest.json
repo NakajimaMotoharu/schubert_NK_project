@@ -1,0 +1,64 @@
+{
+  "run": "PG42570",
+  "source": "f8532c27c2666570fe450f285c5a5436aacd8e7e",
+  "repoHead": "045d24efc86d5dedc41138ad3f651aa0eac618eb",
+  "wbs": "WBS-P004-01.03/2",
+  "terminalAtUTC": "2026-11-22T11:08:46.272619+00:00",
+  "actualExit": 0,
+  "designCommit": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+  "designEvidence": {
+    "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "sha256": "3874975e619ba279814df4d6f79fd161098756cad882e00d580651fb2d7387cb"
+  },
+  "priorStaticTestSpec": {
+    "path": "evidence/01_PT/004_NK-DAT-001/4238_V030音声role互換・DDL単体仕様とHOLD.md",
+    "sha256": "37f04deb7035085cc14af7c8df427272332fd3c7a8ab43e3573f2fffe0d837d7"
+  },
+  "priorProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41428-g1302-current-ddl-role-trace-v1/manifest.json",
+      "sha256": "bddc5e59c422afe2125eafb719bd78d567e4b8e958c566c9e38fc257c26d2615"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42486-p0040102-v029-conditional-shape-current-v1/manifest.json",
+      "sha256": "b3d2569121b0f3990699fa086732ce0b5754310b8f51c180c322a364d0cb40aa"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32606-audio-role818-source-v1/manifest.json",
+      "sha256": "993499f2f343263815708bdd0dc723d246be5fd8b0e713742eb10c29eaede3e1"
+    }
+  ],
+  "priorAppliedMigrationSetCount": 29,
+  "priorAppliedByteExact": 29,
+  "v030": {
+    "path": "src/schubert-nk-api/src/main/resources/db/migration/V030__preserve_current_audio_role.sql",
+    "sha256": "ae099baa342734e4944a8c5b184f86c1a762026269a8e0573e8faad6626b92be"
+  },
+  "cutback": {
+    "path": "src/deployment/migration/030_audio_role_rollback.sql.template",
+    "sha256": "7782bc9255094b81824dafddbafb50023a866fc90648d0bf54e95b4dee04e114"
+  },
+  "fixedConstraint": "ck_audio_files_audio_role_bytes",
+  "sourceOracleChecks": [
+    "one column/constraint forward 1..11",
+    "same legacy baseline 1..8",
+    "lock then byte-length guard and fixed refusal",
+    "cutback after guard only",
+    "write or ACL side-effect SQL statements absent",
+    "source facts after append only"
+  ],
+  "independentWidthExamples": {
+    "movie_audio": 11,
+    "syntheticThreeKanji": 9
+  },
+  "runtimePreconditionPending": [
+    "approved DB and cutback actor",
+    "client on_error_stop and actual guarded transactional rollback",
+    "physical query and ownership audit"
+  ],
+  "sqlRuntimeActions": 0,
+  "runOfProdTests": 0,
+  "coverage": null,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

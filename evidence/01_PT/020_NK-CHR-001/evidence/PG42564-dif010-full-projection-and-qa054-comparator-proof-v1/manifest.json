@@ -1,0 +1,81 @@
+{
+  "run": "PG42564",
+  "source": "045d24efc86d5dedc41138ad3f651aa0eac618eb",
+  "javaCore": "f8532c27c2666570fe450f285c5a5436aacd8e7e",
+  "toolSource": "3ab80b846e27308aab029821581b113ecaf78fc9",
+  "terminalAtUTC": "2026-11-22T11:04:10.200334+00:00",
+  "wbs": "WBS-P020-01.02/2",
+  "actualExit": 0,
+  "toolRule": {
+    "id": "DIF-010",
+    "cases": [
+      "CHR-L01"
+    ],
+    "field": "log.filters",
+    "mode": "difference",
+    "selectorType": "semantic",
+    "selectors": [
+      "log.filters"
+    ],
+    "current": "limited",
+    "nk": "WARN date MQ SYSTEM BATCH"
+  },
+  "ruleInput": {
+    "path": "program/characterization/tests/resources/cases/dif-allowlist.json",
+    "sha256": "43239fe3d3f42c488dcbeb58017fde78830ba3771930a9c97cd65c3c7a7c5cb6"
+  },
+  "designCommit": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+  "designDocuments": {
+    "documents/200_UI/260_引継ぎ・監査/264_現行互換性Characterization Test仕様.md": "0b0973e6e1e94858e840bc1b85df1daff35e3a0fe9f28ea12331823c2cbcf781",
+    "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md": "860f584a2f032e9b06112907f8ec138a12d0b69b94546f7e17ad7dfb9b65414c"
+  },
+  "oldUnitProof": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG41344-p020-current-218-local-v1/manifest.json",
+    "sha256": "5f9119617ebed6632218f46bd81c2b858f6c8fa3064a827edd1fb9b470d9148c"
+  },
+  "oldIndependentProof": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG41346-p020-current-218-independent-v1/manifest.json",
+    "sha256": "d2191089b0953b97f34e139d3d62a5bde47387bdb3e0ff14dde155198bb41a15"
+  },
+  "oldExistingXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41344-p020-current-218-local-v1/reports/TEST-junit-jupiter.xml",
+    "sha256": "8f6b635830262186ba682cf3b682f56d8b732f1a557452d62cebae4c95ef4dd4"
+  },
+  "toolEvidenceByCase": {
+    "rejectsMissingOrUncorrelatedL01ProjectionEvenWhenDifClaimsAreValid": {
+      "type": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+      "oracle": "Full comparator rejects missing envelope and unrelated bound artifacts."
+    },
+    "rejectsLoginOnlyEvidenceAtTheFullL01Gate": {
+      "type": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+      "oracle": "Login-only observation cannot assert all L01 operations."
+    },
+    "preservesAllBeforeRowsAndRejectsEveryMissingDuplicateOrUncorrelatedNewEvent": {
+      "type": "dev.codex.schubert.characterization.CorrelatedLogEvidenceValidatorTest",
+      "oracle": "Existing rows preserved and all specific new events each observed once and correlated."
+    },
+    "requestWitnessesMustBeBothStagesOfTheSameLogicalEventAndSameHttpFields": {
+      "type": "dev.codex.schubert.characterization.CorrelatedLogEvidenceValidatorTest",
+      "oracle": "Both stages must belong to one logical request with matching HTTP fields."
+    },
+    "qa054ActionPairsAreOncePerOperationAndMenuRequiresExactHttpAndWitnesses": {
+      "type": "dev.codex.schubert.characterization.CorrelatedLogEvidenceValidatorTest",
+      "oracle": "MENU_VIEWED and LOG_SEARCHED each once with the exact role-approved helper witnesses."
+    },
+    "operationSetsCannotDriftAndExtraTechnicalRowsRequireTheirOwnIndependentExpectation": {
+      "type": "dev.codex.schubert.characterization.CorrelatedLogEvidenceValidatorTest",
+      "oracle": "Additional technical rows require their own oracle and operation shape."
+    }
+  },
+  "realCurrentAndNKSequencePending": true,
+  "actualCountEffectiveKeeperAwaiting": [
+    "preserved pre-operation rows",
+    "each real operation correlated to a newly committed row",
+    "real login, menu, log search, scenario, wire with correct actor"
+  ],
+  "newToolRuns": 0,
+  "realOps": 0,
+  "protectedCurrentTree": "cd377044e4ca058ea219ca6a2fec82159559c72c",
+  "whole451": false,
+  "formalAcceptanceId": null
+}
