@@ -10,12 +10,15 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
@@ -56,7 +59,8 @@ final class MigrationMasterCopyDatasetTest {
           "900\t500\t1\tvoice\t1\t" + STAMP + "\n");
 
   @Test
-  void master001SixGoldenStreamsParentOrderAndBorrowedOwnership() throws Exception {
+  void master001SixGoldenStreamsParentOrderAndBorrowedOwnership()
+      throws IOException, NoSuchAlgorithmException {
     var sinks = sinks();
     write(normal(), writer(), sinks);
     expected(sinks, GOLDEN);
@@ -65,7 +69,7 @@ final class MigrationMasterCopyDatasetTest {
   }
 
   @Test
-  void master002AllEmptyDoesNotInventRowsOrWrites() throws Exception {
+  void master002AllEmptyDoesNotInventRowsOrWrites() throws IOException {
     var sinks = sinks();
     write(
         new MigrationMasterCopyDataset(new SpeakerCopyBatch(List.of()), emptyContent()),
@@ -77,7 +81,7 @@ final class MigrationMasterCopyDatasetTest {
   }
 
   @Test
-  void master003BothConstructorNullBoundaries() throws Exception {
+  void master003BothConstructorNullBoundaries() throws NoSuchAlgorithmException {
     var speakers = speakers(STAMP);
     var content = content(STAMP);
     assertEquals(
@@ -99,7 +103,7 @@ final class MigrationMasterCopyDatasetTest {
   }
 
   @Test
-  void master004UnknownSpeakerCannotReachAssembly() throws Exception {
+  void master004UnknownSpeakerCannotReachAssembly() {
     var speakers = speakers(STAMP);
     var content =
         new MigrationCopyDataset(
@@ -109,7 +113,7 @@ final class MigrationMasterCopyDatasetTest {
   }
 
   @Test
-  void master005SpeakerGameMustMatchEntryGame() throws Exception {
+  void master005SpeakerGameMustMatchEntryGame() {
     var speakers = speakers(STAMP);
     var content =
         new MigrationCopyDataset(
@@ -119,7 +123,7 @@ final class MigrationMasterCopyDatasetTest {
   }
 
   @Test
-  void master006SpeakerAndEntryHaveOneTimestamp() throws Exception {
+  void master006SpeakerAndEntryHaveOneTimestamp() throws NoSuchAlgorithmException {
     var speakers = speakers(OTHER_STAMP);
     var content = content(STAMP);
     assertThrows(
@@ -127,7 +131,7 @@ final class MigrationMasterCopyDatasetTest {
   }
 
   @Test
-  void master007NoEntryStillChecksSpeakerAgainstFile() throws Exception {
+  void master007NoEntryStillChecksSpeakerAgainstFile() {
     var speakers = speakers(OTHER_STAMP);
     var content =
         new MigrationCopyDataset(
@@ -141,7 +145,7 @@ final class MigrationMasterCopyDatasetTest {
   }
 
   @Test
-  void master008NoScenarioStillChecksSpeakerAgainstAudio() throws Exception {
+  void master008NoScenarioStillChecksSpeakerAgainstAudio() {
     var speakers = speakers(OTHER_STAMP);
     var content =
         new MigrationCopyDataset(emptyScenario(), List.of(audio(STAMP)), List.of(), emptyMedia());
@@ -154,7 +158,7 @@ final class MigrationMasterCopyDatasetTest {
   }
 
   @Test
-  void master009NoScenarioOrAudioStillChecksSpeakerAgainstMedia() throws Exception {
+  void master009NoScenarioOrAudioStillChecksSpeakerAgainstMedia() throws NoSuchAlgorithmException {
     var speakers = speakers(OTHER_STAMP);
     var content = new MigrationCopyDataset(emptyScenario(), List.of(), List.of(), media(STAMP));
     assertEquals(
@@ -166,7 +170,7 @@ final class MigrationMasterCopyDatasetTest {
   }
 
   @Test
-  void master010EmptySpeakersAllowsNarrationAndRejectsDialogue() throws Exception {
+  void master010EmptySpeakersAllowsNarrationAndRejectsDialogue() throws NoSuchAlgorithmException {
     var speakers = new SpeakerCopyBatch(List.of());
     var narration =
         new MigrationCopyDataset(
@@ -179,7 +183,7 @@ final class MigrationMasterCopyDatasetTest {
   }
 
   @Test
-  void master011EveryNullArgumentFailsBeforeFirstByte() throws Exception {
+  void master011EveryNullArgumentFailsBeforeFirstByte() throws NoSuchAlgorithmException {
     var dataset = normal();
     var all = sinks();
     assertEquals(
@@ -200,7 +204,7 @@ final class MigrationMasterCopyDatasetTest {
   }
 
   @Test
-  void master012EachIoFailureKeepsIdentityAndStopsLaterOutputs() throws Exception {
+  void master012EachIoFailureKeepsIdentityAndStopsLaterOutputs() throws NoSuchAlgorithmException {
     for (int position = 0; position < STREAMS; position++) {
       var failure = new IOException("synthetic io");
       fault(position, 0, failure);
@@ -208,7 +212,8 @@ final class MigrationMasterCopyDatasetTest {
   }
 
   @Test
-  void master013EachRuntimeFailureKeepsIdentityAndStopsLaterOutputs() throws Exception {
+  void master013EachRuntimeFailureKeepsIdentityAndStopsLaterOutputs()
+      throws NoSuchAlgorithmException {
     for (int position = 0; position < STREAMS; position++) {
       var failure = new IllegalStateException("synthetic runtime");
       fault(position, 0, failure);
@@ -216,7 +221,7 @@ final class MigrationMasterCopyDatasetTest {
   }
 
   @Test
-  void master014EachErrorKeepsIdentityAndStopsLaterOutputs() throws Exception {
+  void master014EachErrorKeepsIdentityAndStopsLaterOutputs() throws NoSuchAlgorithmException {
     for (int position = 0; position < STREAMS; position++) {
       var failure = new AssertionError("synthetic error");
       fault(position, 0, failure);
@@ -224,7 +229,7 @@ final class MigrationMasterCopyDatasetTest {
   }
 
   @Test
-  void master015EveryPartialPrefixIsRetainedWithoutRetryOrClose() throws Exception {
+  void master015EveryPartialPrefixIsRetainedWithoutRetryOrClose() throws NoSuchAlgorithmException {
     for (int position = 0; position < STREAMS; position++) {
       var failure = new IOException("synthetic partial io");
       fault(position, PREFIX_BYTES, failure);
@@ -232,7 +237,8 @@ final class MigrationMasterCopyDatasetTest {
   }
 
   @Test
-  void master016ImmutableComponentsRetainOnlySnapshots() throws Exception {
+  void master016ImmutableComponentsRetainOnlySnapshots()
+      throws IOException, NoSuchAlgorithmException {
     var input = new ArrayList<SpeakerCopyRow>();
     input.add(
         new SpeakerCopyRow(
@@ -254,7 +260,7 @@ final class MigrationMasterCopyDatasetTest {
   }
 
   @Test
-  void master017DiagnosticsRemainFixedAndRedacted() throws Exception {
+  void master017DiagnosticsRemainFixedAndRedacted() throws NoSuchAlgorithmException {
     assertEquals("MigrationMasterCopyDataset[REDACTED]", normal().toString());
     assertEquals(
         DIAGNOSTIC,
@@ -264,7 +270,8 @@ final class MigrationMasterCopyDatasetTest {
   }
 
   @Test
-  void master018FreshSuccessAfterFailureHasIndependentOutputs() throws Exception {
+  void master018FreshSuccessAfterFailureHasIndependentOutputs()
+      throws IOException, NoSuchAlgorithmException {
     fault(0, PREFIX_BYTES, new IOException("synthetic failed prior"));
     var sinks = sinks();
     write(normal(), writer(), sinks);
@@ -273,7 +280,7 @@ final class MigrationMasterCopyDatasetTest {
   }
 
   @Test
-  void master019GameTwoBoundaryIdsMicrosecondsAndDeclaredOrder() throws Exception {
+  void master019GameTwoBoundaryIdsMicrosecondsAndDeclaredOrder() throws IOException {
     String stamp = "9999-12-31T23:59:59.999999Z";
     var speakers =
         new SpeakerCopyBatch(
@@ -300,7 +307,8 @@ final class MigrationMasterCopyDatasetTest {
   }
 
   @Test
-  void master020FiniteReadersUseIndependentMemoryAndTerminate() throws Exception {
+  void master020FiniteReadersUseIndependentMemoryAndTerminate()
+      throws NoSuchAlgorithmException, InterruptedException, ExecutionException, TimeoutException {
     var dataset = normal();
     var executor = Executors.newFixedThreadPool(WORKERS);
     try {
@@ -320,11 +328,11 @@ final class MigrationMasterCopyDatasetTest {
     }
   }
 
-  private static MigrationMasterCopyDataset normal() throws Exception {
+  private static MigrationMasterCopyDataset normal() throws NoSuchAlgorithmException {
     return new MigrationMasterCopyDataset(speakers(STAMP), content(STAMP));
   }
 
-  private static MigrationCopyDataset content(String stamp) throws Exception {
+  private static MigrationCopyDataset content(String stamp) throws NoSuchAlgorithmException {
     return new MigrationCopyDataset(
         scenario(true, SPEAKER_ID, ONE, stamp),
         List.of(audio(stamp)),
@@ -428,7 +436,7 @@ final class MigrationMasterCopyDatasetTest {
             stamp));
   }
 
-  private static MediaAssetCopyBatch media(String stamp) throws Exception {
+  private static MediaAssetCopyBatch media(String stamp) throws NoSuchAlgorithmException {
     var manifest =
         new AssetMigrationManifest(
             List.of(
@@ -498,23 +506,28 @@ final class MigrationMasterCopyDatasetTest {
     }
   }
 
-  private static void fault(int position, int prefix, Throwable failure) throws Exception {
+  private static void fault(int position, int prefix, Throwable failure)
+      throws NoSuchAlgorithmException {
     var sinks = sinks();
     var order = sinks.getFirst().order;
-    sinks.set(position, new MemorySink(position, order, prefix, failure));
-    var dataset = normal();
-    assertSame(failure, assertThrows(failure.getClass(), () -> write(dataset, writer(), sinks)));
-    for (int index = 0; index < STREAMS; index++) {
-      byte[] expected = GOLDEN.get(index).getBytes(StandardCharsets.UTF_8);
-      assertArrayEquals(
-          index < position
-              ? expected
-              : index == position ? Arrays.copyOf(expected, prefix) : new byte[0],
-          sinks.get(index).output.toByteArray());
-      assertEquals(index == position ? 1 : 0, sinks.get(index).failures);
+    var faulty = new MemorySink(position, order, prefix, failure);
+    try (faulty) {
+      sinks.set(position, faulty);
+      var dataset = normal();
+      assertSame(failure, assertThrows(failure.getClass(), () -> write(dataset, writer(), sinks)));
+      for (int index = 0; index < STREAMS; index++) {
+        byte[] expected = GOLDEN.get(index).getBytes(StandardCharsets.UTF_8);
+        assertArrayEquals(
+            index < position
+                ? expected
+                : index == position ? Arrays.copyOf(expected, prefix) : new byte[0],
+            sinks.get(index).output.toByteArray());
+        assertEquals(index == position ? 1 : 0, sinks.get(index).failures);
+      }
+      assertEquals(java.util.stream.IntStream.rangeClosed(0, position).boxed().toList(), order);
+      untouchedOwnership(sinks);
     }
-    assertEquals(java.util.stream.IntStream.rangeClosed(0, position).boxed().toList(), order);
-    untouchedOwnership(sinks);
+    assertEquals(1, faulty.closes);
   }
 
   private static final class MemorySink extends OutputStream {
@@ -540,8 +553,9 @@ final class MigrationMasterCopyDatasetTest {
       if (output.size() == failAt) {
         failures++;
         if (failure instanceof IOException io) throw io;
-        if (failure instanceof RuntimeException runtime) throw runtime;
-        throw (Error) failure;
+        if (failure instanceof IllegalStateException state) throw state;
+        if (failure instanceof AssertionError error) throw error;
+        throw new AssertionError("unexpected synthetic fault", failure);
       }
       output.write(value);
     }
