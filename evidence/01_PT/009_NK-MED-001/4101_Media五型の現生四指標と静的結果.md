@@ -12,3 +12,7 @@ PG41264のRoot同一設定NullAwayは終了0、当13物理すべて同execのbyt
 - [生coverage](../018_NK-OPS-001/evidence/PG41262-media-current-five-types-corrected-independent-v1/manifest.json) SHA-256 8d20a95c2f4e32f787a4db435ffbe502eda9db22d68eae291f1f1978af574824
 - [元静的結果](../018_NK-OPS-001/evidence/PG41264-media-current-five-types-typed-static-v1/manifest.json)
 - [適用性・ABI](../018_NK-OPS-001/evidence/PG41266-media-current-five-types-static-dispositions-v1/manifest.json) SHA-256 b497d0a39eb1fec82b6d51c619fe0d053e493edddfc24b8842983097a99cc0d7
+
+## 2026-11-23 現適用性の訂正
+
+元28・元rawカウンターを履歴保全。451 §5に反する三private constructor到達を含む。現coverageの合格へ継承しない。新しいclassfile検査と元試験の対応はNK-OPS-001記録5745／YKT-2863。

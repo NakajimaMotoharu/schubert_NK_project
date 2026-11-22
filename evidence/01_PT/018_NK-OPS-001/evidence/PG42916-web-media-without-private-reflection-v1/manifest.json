@@ -1,0 +1,511 @@
+{
+  "run": "PG42916",
+  "wbs": "WBS-F03/2-2-b",
+  "sourceBeforeTestDebinding": "4c6cdbf37f445f334c4a3d1a0be85c80394b442b",
+  "core": "e8368d22c4da2ec841f008df793594d3be9066af",
+  "startedAtUTC": "2026-11-22T18:38:26.400951+00:00",
+  "terminalAtUTC": "2026-11-22T18:38:33.786814+00:00",
+  "actualExit": 0,
+  "scopeCases": [
+    [
+      "ContentDispositionFactoryTest",
+      "literalHeadersEncodeUtf8WithoutRawMetadata"
+    ],
+    [
+      "ExceptionValueContractTest",
+      "exc007MediaStatusAndRetryRemainClosedAndNonNull"
+    ],
+    [
+      "ExceptionValueContractTest",
+      "mediaFailureNamesResolveOnlyToTheDefinedReasons"
+    ],
+    [
+      "HttpByteRangeDecimalLimitTest",
+      "acceptsTheMaximumDecimalEndAndRejectsTheNextInsteadOfClampingIt"
+    ],
+    [
+      "HttpByteRangeLongBoundaryTest",
+      "distinguishesTheLastRepresentableCapFromTheFirstOverflow"
+    ],
+    [
+      "HttpByteRangeParserTest",
+      "invalidGrammarBoundsAndArithmeticNeverSelectBytes"
+    ],
+    [
+      "HttpByteRangeParserTest",
+      "literalRangesPreserveFirstSpecAndOneMebibyteCap"
+    ],
+    [
+      "HttpByteRangeParserTest",
+      "nullAndConstructedSelectionsKeepInvariants"
+    ],
+    [
+      "HttpByteRangeParserTest",
+      "oneHundredConcurrentParsesHaveNoSharedState"
+    ],
+    [
+      "HttpByteRangeUnitTokenTest",
+      "acceptsMixedAsciiCaseAndSelectsTheFirstInterval"
+    ],
+    [
+      "HttpByteRangeUnitTokenTest",
+      "rejectsNonAsciiCaseEquivalentInTheUnit"
+    ],
+    [
+      "MediaBodyStreamerTest",
+      "exactIntervalsUseBoundedWritesAndLeaveResourcesOpen(Path)"
+    ],
+    [
+      "MediaBodyStreamerTest",
+      "nullBoundsAndIoFailuresDoNotClaimCompleteTransfer"
+    ],
+    [
+      "MediaRangePortTest",
+      "configuredBoundariesAndDefaultTwentyRejectTwentyFirstAndRecover"
+    ],
+    [
+      "MediaRangePortTest",
+      "descriptorBindingRejectsEachMismatchBeforeSourceAdmission"
+    ],
+    [
+      "MediaRangePortTest",
+      "directErrorBeforeResponseEscapesUnchangedAndReleasesThePermit"
+    ],
+    [
+      "MediaRangePortTest",
+      "eachCheckedFailureIsRedactedAndReleasesSinglePermit"
+    ],
+    [
+      "MediaRangePortTest",
+      "headNeverRequestsBodyAndAttachmentIgnoresRange"
+    ],
+    [
+      "MediaRangePortTest",
+      "invalidUnitAndOverLimitEndDoNotRequestOrReadABody"
+    ],
+    [
+      "MediaRangePortTest",
+      "literalStatusHeadersAndByteIntervals"
+    ],
+    [
+      "MediaRangePortTest",
+      "nullContractGuardsRejectBeforeAnyPortAndDoNotConsumePermit"
+    ],
+    [
+      "MediaRangePortTest",
+      "replyFixtureRejectsMutableHeadersBeforeTakingItsSnapshot"
+    ],
+    [
+      "MediaRangePortTest",
+      "runtimeFailureEscapesUnchangedAndStillReleasesPermit"
+    ],
+    [
+      "MediaRangePortTest",
+      "twoConcurrentRequestsObserveOnePermitWithoutSharingResponseState"
+    ],
+    [
+      "MediaRangePortTest",
+      "writeErrorAfterBeginClosesSourceWithoutRetryingAndReleasesThePermit"
+    ]
+  ],
+  "counts": {
+    "tests": 25,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "fixtureCanary": 1,
+  "productOrdinary": 24,
+  "removedFixtures": [
+    "ContentDispositionNamespaceContractTest",
+    "HttpByteRangeNamespaceContractTest",
+    "MediaBodyStreamerNamespaceContractTest"
+  ],
+  "testInputs": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeParserTest.java",
+      "sha256": "be41709d419d9ef36785c257575fecfc5a837f911210e58ac6de87ccf3af7378"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeLongBoundaryTest.java",
+      "sha256": "5e5d9c536d63eefbb3e11a2df87fda97edad4845a5ee14b068e67291af590124"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeUnitTokenTest.java",
+      "sha256": "4b30772d7b8add28b81255de052d229b76c3fe6e61a05414b009ffedb16de516"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeDecimalLimitTest.java",
+      "sha256": "2d625f105586e1acb1d197ab1a1ae23a92d9ca3cd399dd4cae56068bfac3d84b"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaRangePortTest.java",
+      "sha256": "817b9474f10e064ef810459cbeb0920b9f6bd22955b68bd04941672f0cff23c2"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaBodyStreamerTest.java",
+      "sha256": "28a2c1f1f66e23da72e4cde4c0090ea73afd5675708b2a1474075895ce82d4aa"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/ContentDispositionFactoryTest.java",
+      "sha256": "63c0af6fe961b11ec05b2bf9db4f730f2768537d8b69b9c7cf1a4e29b6ae025c"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/ExceptionValueContractTest.java",
+      "sha256": "d8ad731d391721a40d77a17c1e1b13ecd7f0bb0dad740ada0ab9f92e741da810"
+    }
+  ],
+  "compileOnlyAllowedLocalProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42898-web-media-five-main-typed-v1/manifest.json",
+    "sha256": "df04307b3289cf307c1a831b7e3006cd4e396f306820b518824e8a498b4dc10d"
+  },
+  "formerFullRun": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41260-media-current-five-types-corrected-v1/manifest.json",
+    "sha256": "26a4aa4ab0adf7826d73691d8dde64a53d77ba8565568ae2c525d51735841775"
+  },
+  "staticConstructorProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42914-private-reflection-inventory-and-web-metadata-v1/manifest.json",
+    "sha256": "e94ee08a54565d405ed67e3d68377b9eda848b24805031c996339351f4f1e690"
+  },
+  "exactPhysical": {
+    "dev/codex/schubert/nk/web/media/ContentDispositionFactory.class": "bb3dc0e1262bb3ad2c77adcbd46fffeddf8d2dee38c0d57dbd518babe581884f",
+    "dev/codex/schubert/nk/web/media/HttpByteRangeParser$Full.class": "07a096b771e062b939083c71daf97ee3e07c146fb7c36dfbc77fa85854932e7d",
+    "dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial.class": "9c4e54f7715a0b18ef5db819dc6aca51d7ec6b5293bc05c68b658645e7f87d08",
+    "dev/codex/schubert/nk/web/media/HttpByteRangeParser$Selection.class": "44bbe8f708ab5b50ffb0c0bc64776e7e31361eb7ba88efb22873d40fb0f23bbe",
+    "dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable.class": "b342e7e1ebca20fc5d87b29ac3a43274473efd6a8c076119e4bde044637cea39",
+    "dev/codex/schubert/nk/web/media/HttpByteRangeParser.class": "94a6f9e676b8ec4d60adbcd95f3e823991a32b0550975d347b946a78c30f57d6",
+    "dev/codex/schubert/nk/web/media/MediaBodyStreamer.class": "8c87a17d9dcfc34027cffc994346ffd4a2c7dd8eedf2192dd0c7c428ec1d9473",
+    "dev/codex/schubert/nk/web/media/MediaDeliveryException$Reason.class": "a77c84c20ae2a8d208cf1bb9fd4620a727f88e37db2d4638b7de092fbabebd2a",
+    "dev/codex/schubert/nk/web/media/MediaDeliveryException.class": "f4e8761a5abbc5e70b490589521f0f7bd98b52ec717194461ba3807298b43937",
+    "dev/codex/schubert/nk/web/media/MediaRangeService$FileSource.class": "bed817501847367e143d838b97bcac5a6d5f829689630bb04ff07488a50e600b",
+    "dev/codex/schubert/nk/web/media/MediaRangeService$ReadOperation.class": "e67eee1f672bc26fc565e221b6e6b3e2fbe5dcb1f6f438529bd422934a65ec31",
+    "dev/codex/schubert/nk/web/media/MediaRangeService$Response.class": "5c0027f150f9ccb146ac263a20fa0904de848228daf664f5eebe8a2a5bf717db",
+    "dev/codex/schubert/nk/web/media/MediaRangeService.class": "7dd5a681f5f464127fa3d995d615d63220d0762460e3077e59e2c30a0d953403"
+  },
+  "protocolBytes": {
+    "dev/codex/schubert/nk/protocol/file/MediaDescriptor.class": "d62f55f9cc23862b2f95bd683b3ad12211a750ded7c07925da661ea8c7caa8a4",
+    "dev/codex/schubert/nk/protocol/file/ContentDisposition.class": "58c65a0f735c3a8347f122a49eedacd2bc4e10be362bc3b8f3d47ff38cc1c446",
+    "dev/codex/schubert/nk/protocol/file/MediaType.class": "15ce86cdab59803ecf830b224ab891aa20be7689bc2831a8a751e103bc2f9694",
+    "dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator.class": "feda029924e725616bf5424d361475759f246719f9ee366c209d559fb25ad20e",
+    "dev/codex/schubert/nk/protocol/file/MediaDescriptorValidatorRules.class": "54dcb42ba67fb19d008db6b35025517523220e560c8753883744ff744de618ad"
+  },
+  "stageResults": {
+    "compile": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-implicit:none",
+        "-classpath",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/exact-web-physical:/home/mini/codex/project1/work/pgpt-runs/PG379/PG42898-web-media-five-main-typed-v1/qualified-protocol-types.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/test",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeParserTest.java",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeLongBoundaryTest.java",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeUnitTokenTest.java",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeDecimalLimitTest.java",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaRangePortTest.java",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaBodyStreamerTest.java",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/ContentDispositionFactoryTest.java",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/ExceptionValueContractTest.java"
+      ],
+      "exit": 0,
+      "start": "2026-11-22T18:38:26.418983+00:00",
+      "terminal": "2026-11-22T18:38:27.483811+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/compile.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/compile.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "junit": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Dfile.encoding=UTF-8",
+        "-Duser.timezone=Asia/Tokyo",
+        "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/owned-temp",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/unit.exec,append=false,sessionid=PG42916-current",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/test:/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/exact-web-physical:/home/mini/codex/project1/work/pgpt-runs/PG379/PG42898-web-media-five-main-typed-v1/qualified-protocol-types.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "org.junit.platform.console.ConsoleLauncher",
+        "execute",
+        "--disable-ansi-colors",
+        "--fail-if-no-tests",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/xml",
+        "--select-class",
+        "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest",
+        "--select-class",
+        "dev.codex.schubert.nk.web.media.HttpByteRangeLongBoundaryTest",
+        "--select-class",
+        "dev.codex.schubert.nk.web.media.HttpByteRangeUnitTokenTest",
+        "--select-class",
+        "dev.codex.schubert.nk.web.media.HttpByteRangeDecimalLimitTest",
+        "--select-class",
+        "dev.codex.schubert.nk.web.media.MediaRangePortTest",
+        "--select-class",
+        "dev.codex.schubert.nk.web.media.MediaBodyStreamerTest",
+        "--select-class",
+        "dev.codex.schubert.nk.web.media.ContentDispositionFactoryTest",
+        "--select-class",
+        "dev.codex.schubert.nk.web.media.ExceptionValueContractTest"
+      ],
+      "exit": 0,
+      "start": "2026-11-22T18:38:31.395645+00:00",
+      "terminal": "2026-11-22T18:38:32.717857+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/junit.stdout",
+        "sha256": "2248a6b0e676db47ae441d935dca16e178cb6a10bf09fcd12221de6824d9401f"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/junit.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "standard": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/unit.exec",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/exact-web-physical/dev/codex/schubert/nk/web/media/ContentDispositionFactory.class",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/exact-web-physical/dev/codex/schubert/nk/web/media/HttpByteRangeParser$Full.class",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/exact-web-physical/dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial.class",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/exact-web-physical/dev/codex/schubert/nk/web/media/HttpByteRangeParser$Selection.class",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/exact-web-physical/dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable.class",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/exact-web-physical/dev/codex/schubert/nk/web/media/HttpByteRangeParser.class",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/exact-web-physical/dev/codex/schubert/nk/web/media/MediaBodyStreamer.class",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/exact-web-physical/dev/codex/schubert/nk/web/media/MediaDeliveryException$Reason.class",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/exact-web-physical/dev/codex/schubert/nk/web/media/MediaDeliveryException.class",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/exact-web-physical/dev/codex/schubert/nk/web/media/MediaRangeService$FileSource.class",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/exact-web-physical/dev/codex/schubert/nk/web/media/MediaRangeService$ReadOperation.class",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/exact-web-physical/dev/codex/schubert/nk/web/media/MediaRangeService$Response.class",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/exact-web-physical/dev/codex/schubert/nk/web/media/MediaRangeService.class",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/coverage.xml"
+      ],
+      "exit": 0,
+      "start": "2026-11-22T18:38:32.718631+00:00",
+      "terminal": "2026-11-22T18:38:32.855571+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/standard.stdout",
+        "sha256": "f52d0a8491e2dd2a86a213077b1d3982dbc8f7c2ff92de23e18f00bb2c862d55"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/standard.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "meter": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/unfiltered",
+        "tools/quality/jacoco/UnfilteredCodeMeasurement.java"
+      ],
+      "exit": 0,
+      "start": "2026-11-22T18:38:32.859611+00:00",
+      "terminal": "2026-11-22T18:38:33.676979+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/meter.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/meter.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "unfiltered": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/unfiltered:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+        "--strict-original-exec",
+        "--line-deficits",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/unit.exec",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/exact-web-physical/dev/codex/schubert/nk/web/media/ContentDispositionFactory.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/exact-web-physical/dev/codex/schubert/nk/web/media/HttpByteRangeParser$Full.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/exact-web-physical/dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/exact-web-physical/dev/codex/schubert/nk/web/media/HttpByteRangeParser$Selection.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/exact-web-physical/dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/exact-web-physical/dev/codex/schubert/nk/web/media/HttpByteRangeParser.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/exact-web-physical/dev/codex/schubert/nk/web/media/MediaBodyStreamer.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/exact-web-physical/dev/codex/schubert/nk/web/media/MediaDeliveryException$Reason.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/exact-web-physical/dev/codex/schubert/nk/web/media/MediaDeliveryException.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/exact-web-physical/dev/codex/schubert/nk/web/media/MediaRangeService$FileSource.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/exact-web-physical/dev/codex/schubert/nk/web/media/MediaRangeService$ReadOperation.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/exact-web-physical/dev/codex/schubert/nk/web/media/MediaRangeService$Response.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/exact-web-physical/dev/codex/schubert/nk/web/media/MediaRangeService.class"
+      ],
+      "exit": 0,
+      "start": "2026-11-22T18:38:33.677101+00:00",
+      "terminal": "2026-11-22T18:38:33.783283+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/unfiltered.stdout",
+        "sha256": "babf635f4499c6dd741554a253f0f5afaa0331eddbb3909751c8999834fc14b3"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/unfiltered.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "unitXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "d93de984c215316ab129946538642fd12146668334cfe8ffcaf8091192662530"
+  },
+  "coverageExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/unit.exec",
+    "sha256": "a0cb3d0f83b17be63eb3afb3984f3cf915edb97eb4be470997bf9a9fd264e904"
+  },
+  "ordinaryCoverage": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/coverage.xml",
+    "sha256": "b5bc3e6b50304cbcd5b7fa8b612cba4375444890dfbbd3af3b27f434e39e6c6d"
+  },
+  "unfilteredTool": {
+    "path": "tools/quality/jacoco/UnfilteredCodeMeasurement.java",
+    "sha256": "c0986f2b5be06e7c74419b86c02a8b3e6da8d7e8d7f241ec0a6c7828f72922a6"
+  },
+  "unfilteredStage": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/unfiltered.stdout",
+    "sha256": "babf635f4499c6dd741554a253f0f5afaa0331eddbb3909751c8999834fc14b3"
+  },
+  "unfilteredCoverage": {
+    "INSTRUCTION": {
+      "missed": 21,
+      "covered": 701
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 74
+    },
+    "LINE": {
+      "missed": 6,
+      "covered": 129
+    },
+    "COMPLEXITY": {
+      "missed": 3,
+      "covered": 73
+    },
+    "METHOD": {
+      "missed": 3,
+      "covered": 36
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 9
+    }
+  },
+  "unfilteredDeficits": [
+    [
+      "dev/codex/schubert/nk/web/media/ContentDispositionFactory",
+      "<init>",
+      "()V",
+      "11",
+      "INSTRUCTION:2:0",
+      "BRANCH:0:0"
+    ],
+    [
+      "dev/codex/schubert/nk/web/media/ContentDispositionFactory",
+      "<init>",
+      "()V",
+      "12",
+      "INSTRUCTION:5:0",
+      "BRANCH:0:0"
+    ],
+    [
+      "dev/codex/schubert/nk/web/media/HttpByteRangeParser",
+      "<init>",
+      "()V",
+      "17",
+      "INSTRUCTION:2:0",
+      "BRANCH:0:0"
+    ],
+    [
+      "dev/codex/schubert/nk/web/media/HttpByteRangeParser",
+      "<init>",
+      "()V",
+      "18",
+      "INSTRUCTION:5:0",
+      "BRANCH:0:0"
+    ],
+    [
+      "dev/codex/schubert/nk/web/media/MediaBodyStreamer",
+      "<init>",
+      "()V",
+      "15",
+      "INSTRUCTION:2:0",
+      "BRANCH:0:0"
+    ],
+    [
+      "dev/codex/schubert/nk/web/media/MediaBodyStreamer",
+      "<init>",
+      "()V",
+      "16",
+      "INSTRUCTION:5:0",
+      "BRANCH:0:0"
+    ]
+  ],
+  "exactCoveredCrcIndependentCount": 9,
+  "tempFinalEntries": 0,
+  "softwareMainEdits": 0,
+  "actualExternalOperations": 0,
+  "priorPrivateReflectionReplayed": 0,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "qualifiedTestCommit": "57505261c834422592a1e11d18b94732baac30d2",
+  "originalTerminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42916-web-media-without-private-reflection-v1/terminal.json",
+    "sha256": "aebf69f06fd92b6d7f63bc5943e9572924c0c201de9cda94eecb36a6ddc96903"
+  },
+  "publishedFiles": {
+    "TEST-junit-jupiter.xml": {
+      "sha256": "9ba481af29ec50d3b5e430d85d8aef803d0087af482f3163cfaba33a11f86d68",
+      "originalUnitXmlSha256": "d93de984c215316ab129946538642fd12146668334cfe8ffcaf8091192662530"
+    },
+    "coverage.xml": {
+      "sha256": "b5bc3e6b50304cbcd5b7fa8b612cba4375444890dfbbd3af3b27f434e39e6c6d",
+      "originalUnitXmlSha256": null
+    },
+    "coverage-unfiltered.tsv": {
+      "sha256": "babf635f4499c6dd741554a253f0f5afaa0331eddbb3909751c8999834fc14b3",
+      "originalUnitXmlSha256": null
+    }
+  },
+  "scopeTestSpecification": {
+    "path": "evidence/01_PT/009_NK-MED-001/4102_Media三namespaceの静的検査と通常試験仕様.md",
+    "sha256": "3c9ed154693211256f7fab16be7a3930070639ff6fd00710e0055a33613b2e7e"
+  },
+  "notRunSelected": 0,
+  "rawWholeScopeQualified": false,
+  "formalIncrements": 0
+}
