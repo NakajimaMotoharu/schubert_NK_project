@@ -69,6 +69,8 @@ Nullability/static analysis、constructor/factory invariant、API/DB/config/coll
 
 2026-09-23以降の新run IDは`tools/quality/030_run_pgpt_verify.sh`（既存`work/pgpt_foundation_verify.sh`は入口）で当日・未使用だけを発行する。018の`--validate-only`は`/tmp/<run>.commit`消失後も保存root manifestのrun/source/branch/exitと全必須scope/hashを照合する。これは`PASS_PERSISTED_EVIDENCE_ONLY`であり旧runを再実行・再認定した表示ではない。新しい正式runの収集は従来どおり実行時commit・同一source/tools・負canaryを要する。
 
+新規正式収集は、030が成功終了を公開する前に原Surefire XMLの七領域、件数、ハッシュ、source・run・時刻・build logのハッシュを固定する。006／018は同receiptと現原XMLを収集の前後で照合し、別run・置換・欠落・余分・非合格を拒否する。既認定領域はその正式保存物を読取照合する。適用と独立確認はPT仕様5721（BUG-3623／YKT-2848）。
+
 ## 7. 完了gate
 
 Build、全PT、4指標coverage、NPE/static、重大BUG 0、全BUG再試験、全YKT完了、未回答QA/RDF/UIC/SSC 0、未承認CHR差分0、secret hit 0、trace漏れ0、clean worktree、必要commit/branch/PR/push済みをすべて満たした場合だけPGPT完了とする。Remote認証やLinux実測など工程外依存は隠さずblockerとして報告し、未達のまま完了扱いしない。

@@ -1,0 +1,356 @@
+{
+  "run": "PG42804",
+  "branch": "dev-foundation",
+  "sourceWorktreeHead": "0b4becb96479b5f3da378293531c68d3a8b883cc",
+  "inputs": [
+    {
+      "path": "tools/quality/pgpt_reactor_junit.py",
+      "sha256": "19b173bddcb754d987692f4cc63256e432e74bb8a4a9c16640e812eef7d3e17c"
+    },
+    {
+      "path": "tools/quality/006_collect_scenario_evidence.py",
+      "sha256": "718fb3a90f5b48b631a10a6762b409981571b02c6419d07f53bee3123d83c2b5"
+    },
+    {
+      "path": "tools/quality/018_collect_verified_evidence_set.py",
+      "sha256": "d0bd4489b9d77f64b80c51555bd4308362d490d277fd269015371a758a891e70"
+    },
+    {
+      "path": "tools/quality/019_test_evidence_set.py",
+      "sha256": "8e4aa95a57664986732b6aaba2e136176f83b9831f8a8797cd4be81302bceb5e"
+    },
+    {
+      "path": "tools/quality/030_run_pgpt_verify.sh",
+      "sha256": "92f33a117a12c38f096c549d0e015fb44624fc60a75c9603878328f25ac83667"
+    },
+    {
+      "path": "tools/quality/tests/test_pgpt_reactor_junit.py",
+      "sha256": "2289a92108eaa197d1f62a2878e44ab333620f8f874ba0fc3b3a57807d3d4dd2"
+    }
+  ],
+  "stages": {
+    "receipt-unit": {
+      "command": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/quality/tests",
+        "-p",
+        "test_pgpt_reactor_junit.py",
+        "-v"
+      ],
+      "startedAtUTC": "2026-11-22T16:10:59.847614+00:00",
+      "terminalAtUTC": "2026-11-22T16:10:59.932365+00:00",
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42804-reactor-junit-terminal-tool-v1/receipt-unit.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42804-reactor-junit-terminal-tool-v1/receipt-unit.stderr",
+        "sha256": "753ea5eaf360ef699e6bdd11e40c5ad0b0309e28a3c216575723357b7aa2491a"
+      }
+    },
+    "formal-tool-regression": {
+      "command": [
+        "python3",
+        "-B",
+        "tools/quality/019_test_evidence_set.py",
+        "-v"
+      ],
+      "startedAtUTC": "2026-11-22T16:10:59.848146+00:00",
+      "terminalAtUTC": "2026-11-22T16:11:01.291851+00:00",
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42804-reactor-junit-terminal-tool-v1/formal-tool-regression.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42804-reactor-junit-terminal-tool-v1/formal-tool-regression.stderr",
+        "sha256": "e4bf29cc4fe1d1d3ef690913cbb236234dd8e123e754d78fd81043b9cf31ac68"
+      }
+    },
+    "shell-syntax": {
+      "command": [
+        "sh",
+        "-n",
+        "tools/quality/030_run_pgpt_verify.sh"
+      ],
+      "startedAtUTC": "2026-11-22T16:10:59.848466+00:00",
+      "terminalAtUTC": "2026-11-22T16:10:59.850440+00:00",
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42804-reactor-junit-terminal-tool-v1/shell-syntax.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42804-reactor-junit-terminal-tool-v1/shell-syntax.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "archive": {
+    "command": [
+      "git",
+      "archive",
+      "--format=tar",
+      "244a21965187c43c60f7f29e743be5d1401d263a",
+      "--",
+      "evidence/01_PT/003_NK-PRO-003",
+      "evidence/01_PT/004_NK-DAT-001",
+      "evidence/01_PT/005_NK-MSG-001",
+      "evidence/01_PT/006_NK-MSG-002",
+      "evidence/01_PT/007_NK-AUT-001",
+      "evidence/01_PT/008_NK-SCN-001",
+      "evidence/01_PT/009_NK-MED-001",
+      "evidence/01_PT/010_NK-ADM-001",
+      "evidence/01_PT/011_NK-QST-001",
+      "evidence/01_PT/012_NK-ASY-001",
+      "evidence/01_PT/015_NK-WEB-001",
+      "evidence/01_PT/016_NK-WEB-002",
+      "evidence/01_PT/017_NK-BAT-001",
+      "evidence/01_PT/018_NK-OPS-001"
+    ],
+    "actualExit": 0,
+    "startedAtUTC": "2026-11-22T16:11:01.297802+00:00",
+    "terminalAtUTC": "2026-11-22T16:11:02.112593+00:00",
+    "scopeCount": 53,
+    "rootManifestSha256": "59a5aa8831ea208c92fd12674bfb018c88ff57490ac975235de12efbb0f54df7",
+    "source": "858713c0bf310ae8bf62078b0a1cedbce4e968db",
+    "run": "PT-WEB-20260925-24",
+    "scopes": [
+      {
+        "scope": "008_NK-SCN-001/evidence",
+        "manifestSha256": "59a5aa8831ea208c92fd12674bfb018c88ff57490ac975235de12efbb0f54df7"
+      },
+      {
+        "scope": "007_NK-AUT-001/evidence",
+        "manifestSha256": "91347917bf10f66dcc03611c44baaff23ee6cefa334bb3b126a586d2ed659e0e"
+      },
+      {
+        "scope": "003_NK-PRO-003/evidence",
+        "manifestSha256": "5827b1699e9b54b6169e683fee09b0cd0d009209c4989ba1859bc6766a4dcf55"
+      },
+      {
+        "scope": "006_NK-MSG-002/evidence",
+        "manifestSha256": "02b0dfafc1708450db3724d3a92942d7be5ae96973cc7f83638c54aa3110e34d"
+      },
+      {
+        "scope": "009_NK-MED-001/evidence",
+        "manifestSha256": "3a55234539d7eb69309bda06e4a9e0424eb82201c7bb5106e6247db605cb61dd"
+      },
+      {
+        "scope": "010_NK-ADM-001/evidence",
+        "manifestSha256": "bdbe0ec06979af3577db53d48906cb9abad6594700fb23310b4e07fafa4f2b95"
+      },
+      {
+        "scope": "015_NK-WEB-001/evidence",
+        "manifestSha256": "bf630163d627e11b8ecd225979d832bb20853a76fef437426d79606b4bcf8e99"
+      },
+      {
+        "scope": "017_NK-BAT-001/evidence",
+        "manifestSha256": "da0df5f9b49533c21e8cb3ecb70fbea765b16299731c2e190ce9c4d09b85c9c2"
+      },
+      {
+        "scope": "011_NK-QST-001/evidence",
+        "manifestSha256": "a57788d4975b4ad134c4715f7e57c26f01db1f4fe819df9d1590ed8faa1ac29c"
+      },
+      {
+        "scope": "012_NK-ASY-001/evidence",
+        "manifestSha256": "7d1864fedd0e1413f1c7884994073de055dd3d0a20b75241b465e1b06ad0cd7b"
+      },
+      {
+        "scope": "016_NK-WEB-002/evidence",
+        "manifestSha256": "65959c1ed478b2840bd9bbcf73c4d4ef65e9087c6006d68c9e2cb1e72f1592c2"
+      },
+      {
+        "scope": "004_NK-DAT-001/evidence/inbox-inspection",
+        "manifestSha256": "13b70e2382605fbb6f0949eeda367accf3099e8a34eb1c5cc6276328663d2202"
+      },
+      {
+        "scope": "004_NK-DAT-001/evidence/authentication-inspection",
+        "manifestSha256": "515b7cd251a19547e4944e2e793174ca0bd544e71387510c50bafb0c3d8b7553"
+      },
+      {
+        "scope": "004_NK-DAT-001/evidence/inspection-sql",
+        "manifestSha256": "828eaa24cc318263837bbbf55b9647a8930214a27d320f0ea5ca39d3ca4dc139"
+      },
+      {
+        "scope": "004_NK-DAT-001/evidence/deletion-sql",
+        "manifestSha256": "4d26fcf3e6850bc0586de1c0876721be84a7969e67d33136ff57a080f95fb4cb"
+      },
+      {
+        "scope": "004_NK-DAT-001/evidence/authentication-cleanup",
+        "manifestSha256": "e8360a2a186c8e31d3012093c6ac2d61ae737912f75bf4675eb36cb890a05bf2"
+      },
+      {
+        "scope": "004_NK-DAT-001/evidence/non-authentication-inspection",
+        "manifestSha256": "eb00e4cbbd01c3267067a91f9cfbd8be02b17172d309d6ff0f4a61ac663dc9b8"
+      },
+      {
+        "scope": "004_NK-DAT-001/evidence/full-inbox-sql",
+        "manifestSha256": "e3693983e7579279d05107d4fd18f0a9298a90abf28f92c25d720441d35b530f"
+      },
+      {
+        "scope": "004_NK-DAT-001/evidence/full-inbox-cleanup",
+        "manifestSha256": "496115e65e77fab0c7c14f1d49f5cc4cc26b23295b431e6c7136751c73bc734d"
+      },
+      {
+        "scope": "004_NK-DAT-001/evidence/outbox-only-cleanup",
+        "manifestSha256": "ec27ed8864e6665f8616a3cda2c3c550567ed8e2bc531a28bf82fc302b37ac2d"
+      },
+      {
+        "scope": "004_NK-DAT-001/evidence/inbox-progress-sql",
+        "manifestSha256": "a967fd019d33f158bc1def7b9a9e491209e5751d4add263466abe9ff5523cf16"
+      },
+      {
+        "scope": "004_NK-DAT-001/evidence/inbox-progress-service",
+        "manifestSha256": "8c14d88380009556ef354b1b86fa0398e14084f52bdcf800a5042707389d2877"
+      },
+      {
+        "scope": "004_NK-DAT-001/evidence/cleanup-safety",
+        "manifestSha256": "251301d6763b453e66ca8fe6156ff49fe28c3b3ca1c2e3ef94a8ff6d591489ac"
+      },
+      {
+        "scope": "004_NK-DAT-001/evidence/inbox-run-executor",
+        "manifestSha256": "839fa35916de7a758226e54edf1568deadf721d6b66285fb899d59aef8139f36"
+      },
+      {
+        "scope": "004_NK-DAT-001/evidence/inbox-aes-credential",
+        "manifestSha256": "e20c25db733b42d2828346e9248d58c7ef016a5fd82461611a46f4717c859802"
+      },
+      {
+        "scope": "004_NK-DAT-001/evidence/credential-access",
+        "manifestSha256": "2223c740aa84dd1519eb6aa520fdc3e2a35f6c4fa37faf9921aa5e6dd8cdaa19"
+      },
+      {
+        "scope": "004_NK-DAT-001/evidence/inode-security",
+        "manifestSha256": "ae2be14bd3d6cde10d770672ae1c58b9324d046c1953c85936cc1e5f8568bc38"
+      },
+      {
+        "scope": "004_NK-DAT-001/evidence/credential-loader",
+        "manifestSha256": "e75dd97cd0038bace99176899529db2334552f8081a8604f5d0e598cdba2b4b4"
+      },
+      {
+        "scope": "004_NK-DAT-001/evidence/inspector-process",
+        "manifestSha256": "23b42bf68035b6c8142fde589bdcdb1b7e217006946a987a209aa91a0f269121"
+      },
+      {
+        "scope": "004_NK-DAT-001/evidence/log-cleanup-progress",
+        "manifestSha256": "e96327e9e34362745ed6b5c9f1e395164e8904a728fe456ea65adf6e926c1555"
+      },
+      {
+        "scope": "004_NK-DAT-001/evidence/question-query",
+        "manifestSha256": "069d381d32689bfc3f231e567dce2ae78a734a43175f5abd73916011a82031b1"
+      },
+      {
+        "scope": "004_NK-DAT-001/evidence/result-binding",
+        "manifestSha256": "23868fc18585cf56f7ea0f18e892663dc76a1f981d7a5a2945c0f90debc3521c"
+      },
+      {
+        "scope": "004_NK-DAT-001/evidence/question-mutation",
+        "manifestSha256": "b1cb17b6870fa35b1813c9a01769be1e3b830ecf8dc24710c6aeefe7064a3a89"
+      },
+      {
+        "scope": "004_NK-DAT-001/evidence/inspector-database",
+        "manifestSha256": "e4abb3fd528e8a9338ad315aebaa2e28017dbcfcda5bb58524e8130ad471ef69"
+      },
+      {
+        "scope": "004_NK-DAT-001/evidence/inspector-application",
+        "manifestSha256": "77f2933626118ec8cd6ac3eaa9ce8f803759f4e839612219fdfa425c4336de7a"
+      },
+      {
+        "scope": "004_NK-DAT-001/evidence/inspector-launch",
+        "manifestSha256": "b4e1341434633ab51f109261da7b1b84c1e70332eb5587d9b86028ce8e765a6d"
+      },
+      {
+        "scope": "018_NK-OPS-001/evidence",
+        "manifestSha256": "475f18122f0a5834c32b48c6f1fdf5dbf6f222baeb2a6841c8964a6c6ad4d40a"
+      },
+      {
+        "scope": "004_NK-DAT-001/evidence/backup-rerun",
+        "manifestSha256": "aa66f02c2ad6970da4ace10597647b073eb5d3763f7c245f49c0682c6f757f77"
+      },
+      {
+        "scope": "004_NK-DAT-001/evidence/run-references",
+        "manifestSha256": "f311ea0ae65a04cebb41c29ba178eae61fe273bf8fb43feee38965cc937c672c"
+      },
+      {
+        "scope": "004_NK-DAT-001/evidence/parent-summary",
+        "manifestSha256": "dbae43847e7cba82649089a92d6bd05a16d42bc62de53a04c13bc61943e110a2"
+      },
+      {
+        "scope": "004_NK-DAT-001/evidence/atomic-cleanup",
+        "manifestSha256": "4c2f8ff19eabf32dcf61d7b84bbc8ff2bb4bfd0347418bfcc8b5b4e563b1e105"
+      },
+      {
+        "scope": "004_NK-DAT-001/evidence/expiry-audit",
+        "manifestSha256": "4430157c617e6c4fa89a1f1bdb4e8cdde1709d5eb4db9b5c64bec39eef2069b3"
+      },
+      {
+        "scope": "005_NK-MSG-001/evidence/sync-consumers",
+        "manifestSha256": "23fb1754bf8b53bc5a15740234bc89d9a107e6ee53f39e35420363285782d804"
+      },
+      {
+        "scope": "005_NK-MSG-001/evidence/web-reply-consumer",
+        "manifestSha256": "f02b3cb1570f28bcd0009047888ef559e6dc39d5a947a8f558f22566fce90baf"
+      },
+      {
+        "scope": "006_NK-MSG-002/003_WebLogReplayWorker/evidence",
+        "manifestSha256": "fadb7cfd60f34ddf1271348589083856dfcd486a48982a4da7d050bffc22c33d"
+      },
+      {
+        "scope": "005_NK-MSG-001/evidence/api-web-log-consumer",
+        "manifestSha256": "f77ce5f42e0a8f54d28bde87f5c6bbd6efdfe0e4bda392651c7a847d5b530468"
+      },
+      {
+        "scope": "005_NK-MSG-001/evidence/api-messaging-parent",
+        "manifestSha256": "3409e36176aa6a295e0149f951394bc0ea9847f682afe95d742b58cd9e06c9b8"
+      },
+      {
+        "scope": "005_NK-MSG-001/evidence/log-path-router",
+        "manifestSha256": "92b960137367733f88f5e451c6f6a90fbbf4ebc59e038f7f8177f1bec31d2de2"
+      },
+      {
+        "scope": "005_NK-MSG-001/evidence/api-log-path-runtime",
+        "manifestSha256": "b2484213369f47604c6bc43dca1945893fcaa11ad437ba7d8d85c52cff70996c"
+      },
+      {
+        "scope": "005_NK-MSG-001/evidence/request-sender-resource",
+        "manifestSha256": "6da2f500de986c752910a6485fae05727c2fc422d721ac47b48293632f76087a"
+      },
+      {
+        "scope": "005_NK-MSG-001/evidence/jms-resource-compounds",
+        "manifestSha256": "80eba826018860e751571b3f3e5432dea756eae2982811f3d77c99448e9d2878"
+      },
+      {
+        "scope": "006_NK-MSG-002/004_JmsResourceCompounds/evidence",
+        "manifestSha256": "e9b8039da52cf1d136b5f2cb43670ec52af88f0ed29a874419c22590942271b9"
+      },
+      {
+        "scope": "006_NK-MSG-002/005_LogReplayVertical/evidence",
+        "manifestSha256": "5ea6207cb3d5db7e10b531bda3a9a62288c492556c075a7d994cc1ecc9aeeb59"
+      }
+    ],
+    "originalTestsReexecuted": 0
+  },
+  "actualExit": 0,
+  "ordinaryProductionTests": 0,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "terminalAtUTC": "2026-11-22T16:11:02.115327+00:00",
+  "source": "37b8abee6931dd3737dde350552d98b08a990349",
+  "pythonVersion": "3.14.4",
+  "receiptToolsPassed": 10,
+  "collectorToolsPassed": 113,
+  "usesOriginalToolsWithoutReplays": true,
+  "rawResultSealOnly": "Surefire XML paths, SHA and counts; coverage and other retained run outputs require separate closure",
+  "futureActiveReactorInvocations": 0,
+  "terminal": {
+    "path": "../pgpt-runs/PG379/PG42804-reactor-junit-terminal-tool-v1/terminal.json",
+    "sha256": "70b7984dd2ce64c9ce69d84174366ed4d639babcc949d8a796b57509365df959"
+  }
+}
