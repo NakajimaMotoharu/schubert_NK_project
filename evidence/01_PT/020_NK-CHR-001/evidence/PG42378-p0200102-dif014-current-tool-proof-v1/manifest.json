@@ -1,0 +1,197 @@
+{
+  "run": "PG42378",
+  "source": "ad7c057eb618b1df19daa1923c5f8e61a9df9047",
+  "actualToolSource": "3ab80b846e27308aab029821581b113ecaf78fc9",
+  "javaCore": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-P020-01.02/2",
+  "terminalAtUTC": "2026-11-22T07:45:42.546140+00:00",
+  "design": {
+    "path": "documents/200_UI/260_引継ぎ・監査/264_現行互換性Characterization Test仕様.md",
+    "commit": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "sha256": "0b0973e6e1e94858e840bc1b85df1daff35e3a0fe9f28ea12331823c2cbcf781"
+  },
+  "matchedOriginalCases": {
+    "PT-CHR-DEF060": "acceptsTheApprovedRestartSessionOutcomeAndInvalidationEvidence",
+    "PT-CHR-DEF061": "requiresTheRestartInvalidationObservationSeparatelyFromOutcome",
+    "PT-CHR-DEF062": "rejectsASelfReportedNewLoginAfterRestart",
+    "PT-CHR-DEF063": "rejectsTextualAndNullInvalidationValuesEvenWhenSelfReported",
+    "PT-CHR-DEF064": "rejectsRestartDifferenceClaimsAgainstAnUnrelatedField"
+  },
+  "comparator": {
+    "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+    "sha256": "52f251e8f130105972cf0be6c4b8a1b37f1fdb198e06208d131763ef3127d6f3"
+  },
+  "proof": [
+    {
+      "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG41344-p020-current-218-local-v1/manifest.json",
+      "sha256": "5f9119617ebed6632218f46bd81c2b858f6c8fa3064a827edd1fb9b470d9148c"
+    },
+    {
+      "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG41346-p020-current-218-independent-v1/manifest.json",
+      "sha256": "d2191089b0953b97f34e139d3d62a5bde47387bdb3e0ff14dde155198bb41a15"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40078-p020-o01-restart-independent-v1/manifest.json",
+      "sha256": "3c7e86e84c49d42e66c5909c274930ad704c5b5476b342091ef0ed859882f697"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41344-p020-current-218-local-v1/reports/TEST-junit-jupiter.xml",
+      "sha256": "8f6b635830262186ba682cf3b682f56d8b732f1a557452d62cebae4c95ef4dd4"
+    }
+  ],
+  "baselinePins": [
+    {
+      "path": "program/characterization/baseline/current/artifacts/CHR-A01.json",
+      "sha256": "df68edfbd59d60fc0d87fcce818401788740153c8b630f790d785f6414001993"
+    },
+    {
+      "path": "program/characterization/baseline/current/artifacts/CHR-A02.json",
+      "sha256": "8af1ba4d2381bebe7ce52f74992e5dabc728841b996779a2f90ded043001ce75"
+    },
+    {
+      "path": "program/characterization/baseline/current/artifacts/CHR-A03.json",
+      "sha256": "71f6b1d5e940a17025ae76d977f35ca442a0647125753b5832eccb8da5a70994"
+    },
+    {
+      "path": "program/characterization/baseline/current/artifacts/CHR-E01.json",
+      "sha256": "d5864a7688d23239062bfb4b95cf94c4b3da1abf746295d66787e6232a3f0fca"
+    },
+    {
+      "path": "program/characterization/baseline/current/artifacts/CHR-L01.json",
+      "sha256": "7c8015cbe754b108447c60be45731ce0c5b5b3a044184febdef2fdf10c4e5134"
+    },
+    {
+      "path": "program/characterization/baseline/current/artifacts/CHR-M01.json",
+      "sha256": "c746b82417532889708d5816c05965bf539f6f9f659ed6fde5b95a5f0e02f895"
+    },
+    {
+      "path": "program/characterization/baseline/current/artifacts/CHR-M02.json",
+      "sha256": "54153f94ec28d227e0de6f48e1201fea203a8393bea4d69f7a5b7c2e02d20e8e"
+    },
+    {
+      "path": "program/characterization/baseline/current/artifacts/CHR-M03.json",
+      "sha256": "6ae6c538ad17e74a17596d26bd909e89089e7025b91d3821b992390aea6984a4"
+    },
+    {
+      "path": "program/characterization/baseline/current/artifacts/CHR-M04.json",
+      "sha256": "289b0b1b8bc0282464eac51bbf5a51ae5bd05486efdfd42509570dc5ba691b8f"
+    },
+    {
+      "path": "program/characterization/baseline/current/artifacts/CHR-M05.json",
+      "sha256": "dd58b7dfd48e3c44f9e44ed44db195cb1109fa140610b3ed6e65a00e56fd6f9c"
+    },
+    {
+      "path": "program/characterization/baseline/current/artifacts/CHR-M06.json",
+      "sha256": "2baaeac37af45dc3d5bfa41e42edc7b9eba9699056435770040586e4e665c91c"
+    },
+    {
+      "path": "program/characterization/baseline/current/artifacts/CHR-M07.json",
+      "sha256": "3114210545501ed9311fd342b59472e7fb450f591597d1b4a811648ae0af2a3b"
+    },
+    {
+      "path": "program/characterization/baseline/current/artifacts/CHR-N01.json",
+      "sha256": "487289b9b10f8865061fc15e37d58debd7e47602afa2bf8704fb27bfb1eed59f"
+    },
+    {
+      "path": "program/characterization/baseline/current/artifacts/CHR-O01.json",
+      "sha256": "76731f9ce334fd6aed892363d680054d2697ace54a138e370528bae107fe42e2"
+    },
+    {
+      "path": "program/characterization/baseline/current/artifacts/CHR-S01.json",
+      "sha256": "4f2f2f73e4a3be69d019f5aa3719272caa5be92097c496149d10a018cfdcb728"
+    },
+    {
+      "path": "program/characterization/baseline/current/artifacts/CHR-S02.json",
+      "sha256": "f24e9682e094f5a3a3983860afa4a7082fd5ac15101a633ad03b93b482641f87"
+    },
+    {
+      "path": "program/characterization/baseline/current/artifacts/CHR-S03.json",
+      "sha256": "eaa4d80f34a9777a2041ba9d08c1a3f84e51837e4d9c6fb5f2dac73fadbd419e"
+    },
+    {
+      "path": "program/characterization/baseline/current/artifacts/CHR-S04.json",
+      "sha256": "da0d34b73adaadde9826210d6eb21aeff8f3ae16c613457adafad04fc1c30fbe"
+    },
+    {
+      "path": "program/characterization/baseline/current/artifacts/CHR-S05.json",
+      "sha256": "bed685ac5e02a3f4da55a2da17d479ad2935041f7be9cb2fb6d8a4a617724def"
+    },
+    {
+      "path": "program/characterization/baseline/current/artifacts/CHR-S06.json",
+      "sha256": "19a69fe122b1cd4f0a816b21807d4a9e63846394d438145be0a6c0f9cf9ca55d"
+    },
+    {
+      "path": "program/characterization/baseline/current/artifacts/CHR-S07.json",
+      "sha256": "17d41fd789ceb5f300cebceca45d9a1e561ba7356b630e35cf11009ef4540772"
+    },
+    {
+      "path": "program/characterization/baseline/current/artifacts/CHR-S08.json",
+      "sha256": "6b0715bc53a37879e31e7f8494caa3638d15af292aa8f71bcfa84127ff540f20"
+    },
+    {
+      "path": "program/characterization/baseline/current/artifacts/CHR-U01.json",
+      "sha256": "5669dda7a9d7aec457023a7287b5508901f02e8e80c20131b281137326e701c7"
+    },
+    {
+      "path": "program/characterization/baseline/current/artifacts/CHR-U02.json",
+      "sha256": "08755d79fb4795a3f5c391b9fb0e880c7c1c142c3417885dea96973af929f4d1"
+    },
+    {
+      "path": "program/characterization/baseline/current/manifest.json",
+      "sha256": "4eb22323a475e15a3fae4ef9ccf3e128f1616591c2271f048bcf6473915ab8f9"
+    },
+    {
+      "path": "program/characterization/baseline/current/screenshots/CHR-U01-desktop.png",
+      "sha256": "3c034d8b00dbcad9bc79a059f07546d22a97c4e077577cfa47598fda66c96b76"
+    },
+    {
+      "path": "program/characterization/baseline/current/screenshots/CHR-U01-mobile.png",
+      "sha256": "17f476d099ff38cb2e2dab40ace855c82b50f01f5385f3df9f3ed40fa2173114"
+    }
+  ],
+  "existingToolRunsReused": 5,
+  "additionalToolOrWorkflowRuns": 0,
+  "expectedOriginal": {
+    "sessionAfterRestart": "redirect-login",
+    "sessionInvalidated": true
+  },
+  "expectedNKComparisonProjection": {
+    "sessionAfterRestart": "authenticated",
+    "sessionInvalidated": false
+  },
+  "realSessionOrSystemActions": 0,
+  "realChr": false,
+  "formalAcceptanceId": null,
+  "whole451": false,
+  "underscopedTool": {
+    "fileStoreOmitted": 1,
+    "remaining": {
+      "dev/codex/schubert/characterization/GateCli": {
+        "INSTRUCTION": [
+          12,
+          2337
+        ],
+        "BRANCH": [
+          1,
+          229
+        ],
+        "LINE": [
+          2,
+          450
+        ],
+        "COMPLEXITY": [
+          2,
+          189
+        ],
+        "METHOD": [
+          1,
+          70
+        ],
+        "CLASS": [
+          0,
+          1
+        ]
+      }
+    }
+  }
+}

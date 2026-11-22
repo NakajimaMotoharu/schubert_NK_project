@@ -1,0 +1,62 @@
+{
+  "run": "PG42376",
+  "source": "ad7c057eb618b1df19daa1923c5f8e61a9df9047",
+  "javaCore": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-P004-01.02/2",
+  "terminalAtUTC": "2026-11-22T07:43:38.990896+00:00",
+  "canonical": {
+    "source": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "path": "documents/300_SS/330_データ・ファイル/331_DB物理・DDL・index・権限設計.md",
+    "sha256": "f57d908ade963d03a7f1dd12dc93e0bd89fefa27223c674c3d363014913c64de"
+  },
+  "actual": {
+    "testId": "PT-DB-005-STATIC-INDEX",
+    "versions": 30,
+    "namedIndexes": [
+      "ix_app_logs_message_trgm",
+      "ix_auth_sessions_user_active",
+      "ix_mq_outbox_dispatch",
+      "ix_mq_outbox_lease",
+      "ix_notifications_owner",
+      "ix_questions_admin_active",
+      "ix_questions_body_trgm",
+      "ix_questions_deleted",
+      "ix_questions_owner_active",
+      "ix_web_receipt_references_question_id",
+      "uq_batch_runs_business_step_success"
+    ],
+    "negativeMutationsRejected": 5
+  },
+  "olderPreparation": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29660-p00401-three-public-ddl-contract-v1/manifest.json",
+    "sha256": "71524aa27c6535563bcdd58dfe3aa2289d2efd543a12ec7dbebaae110d8fb629"
+  },
+  "proof": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42376-selected-ddl-index-contract-v1/begin.json",
+      "sha256": "b3f0036356fb550215d678e228c4a3fff9b742d1c5bb49aae7370740c52eb359"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42376-selected-ddl-index-contract-v1/result.json",
+      "sha256": "f048e625bc4b2cf346f7089bc867480eabc577b1731f3f27ce404dde81afb276"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42376-selected-ddl-index-contract-v1/terminal.json",
+      "sha256": "74292bd92946130667e9638a8d2fb3b5bea90795473ad1d45e9b6c1199ac9fa1"
+    }
+  ],
+  "inputFixture": {
+    "path": "evidence/01_PT/004_NK-DAT-001/input/42376_selected_index_contract.py",
+    "sha256": "2a3e356cdd04b6c21059dc7abde2f4956ef3cc3bd021bf7ed3c20f31450cedfc"
+  },
+  "actualDatabaseActions": 0,
+  "staticPt": 1,
+  "realIndexPlanOrPrivileges": false,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "importantLimits": [
+    "selective declarations only, 11 indexes",
+    "no DB or execution plan observation",
+    "privilege and Check constraint validation remains separate"
+  ]
+}
