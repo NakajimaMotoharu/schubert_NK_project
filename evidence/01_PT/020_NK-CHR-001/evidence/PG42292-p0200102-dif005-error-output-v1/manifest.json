@@ -1,0 +1,83 @@
+{
+  "run": "PG42292",
+  "source": "b261b23ee8177f47363f149c3a17fb77e488f924",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-P020-01.02/2",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T06:40:03.173052+00:00",
+  "design": {
+    "path": "documents/200_UI/260_引継ぎ・監査/264_現行互換性Characterization Test仕様.md",
+    "source": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "sha256": "0b0973e6e1e94858e840bc1b85df1daff35e3a0fe9f28ea12331823c2cbcf781",
+    "row": "| DIF-005 | Spring標準error中心 | 共通styleと再操作案内 | TST-002、SYS-013 | Error文言統一 | CHR-E01 | UI設計決定 |"
+  },
+  "priorToolSnapshot": "3ab80b846e27308aab029821581b113ecaf78fc9",
+  "sameInputs": [
+    {
+      "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+      "sha256": "52f251e8f130105972cf0be6c4b8a1b37f1fdb198e06208d131763ef3127d6f3"
+    },
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorTest.java",
+      "sha256": "fa1eec995233fec725ab232489b41df5d7ddd6d673247ff564da226060d5f8f7"
+    }
+  ],
+  "originalKnownTestManifest": [
+    {
+      "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG41344-p020-current-218-local-v1/manifest.json",
+      "sha256": "5f9119617ebed6632218f46bd81c2b858f6c8fa3064a827edd1fb9b470d9148c"
+    },
+    {
+      "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG41346-p020-current-218-independent-v1/manifest.json",
+      "sha256": "d2191089b0953b97f34e139d3d62a5bde47387bdb3e0ff14dde155198bb41a15"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41344-p020-current-218-local-v1/reports/TEST-junit-jupiter.xml",
+      "sha256": "8f6b635830262186ba682cf3b682f56d8b732f1a557452d62cebae4c95ef4dd4"
+    }
+  ],
+  "literalTemplate": {
+    "path": "src/schubert-nk-web/src/main/resources/templates/error/error.html",
+    "source": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+    "sha256": "6fe51e31810e4481a1999e27fa136970945877a2ad12221411e617b1d10634d0",
+    "staticFields": [
+      "status",
+      "message",
+      "requestId",
+      "Login navigation"
+    ]
+  },
+  "scopeSpecificCurrentTemplateEvidence": {
+    "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG41704-p01624-error-template-two-v1/manifest.json",
+    "sha256": "e2df80a14cf8adf370113e9f43819331b7381a779374ba1b5d75911c301ae959"
+  },
+  "offlineChecks": [
+    {
+      "name": "rejectsMissingNullAndTextualLeakFlags()",
+      "expected": "Missing/null/string flags are rejected."
+    },
+    {
+      "name": "acceptsTheCommonErrorPresentationWithThreeExplicitFalseLeakFlags()",
+      "expected": "DIF-005 common error presentation accepts only explicit false disclosure flags."
+    },
+    {
+      "name": "rejectsAnIdenticalPositiveLeakEvenWithoutAChangedField()",
+      "expected": "Both sides reporting the same positive flag fail even with no diff."
+    },
+    {
+      "name": "rejectsEveryPositiveLeakOnEachSide()",
+      "expected": "Each isolated positive flag is rejected on both Current and NK."
+    },
+    {
+      "name": "rejectsAnErrorStyleClaimThatTriesToCoverAChangedLeakFlag()",
+      "expected": "The style allowance excludes disclosure fields."
+    }
+  ],
+  "actualBrowserOrHttp": 0,
+  "actualCurrentNkComparison": 0,
+  "baselineReadWrite": 0,
+  "newTests": 0,
+  "remaining": "Authorized physical CHR-E01 artifacts and no-disclosure results observed in Current/NK execution on current source; no usable signed final evidence from this scope alone.",
+  "whole451": false,
+  "formalAcceptanceId": null
+}
