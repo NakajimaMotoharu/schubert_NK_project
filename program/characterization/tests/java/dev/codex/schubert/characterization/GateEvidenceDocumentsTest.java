@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
-/** PT-CHR-META001..009. JSON consistency only; these fixtures are never operational evidence. */
+/** PT-CHR-META001..010. JSON consistency only; these fixtures are never operational evidence. */
 final class GateEvidenceDocumentsTest {
   private static final ObjectMapper JSON = new ObjectMapper();
   private static final int COMPARISON = 0;
@@ -257,6 +257,32 @@ final class GateEvidenceDocumentsTest {
       reject(checks, data, "REVIEW_EVIDENCE");
     }
     assertAll(checks);
+  }
+
+  @Test
+  void reviewEvidenceMustBeDistinctNonemptyDocumentReferences() throws IOException {
+    for (JsonNode evidence :
+        List.of(
+            JSON.createArrayNode().add("unit-a").add("unit-b").addNull(),
+            JSON.createArrayNode().add("unit-a").add("unit-b").add(123),
+            JSON.createArrayNode().add("unit-a").add("unit-b").add(""),
+            JSON.createArrayNode().add("unit-a").add("unit-b").add(" \t"),
+            JSON.createArrayNode().add("unit-a").add("unit-a").add("unit-b"),
+            JSON.createArrayNode().add("unit-a").add("unit-b").add(" unit-a "),
+            JSON.createArrayNode().add("unit-a").add("unit-b").add("unit-c").addNull())) {
+      var data = fixture();
+      object(data, REVIEW).set("evidence", evidence);
+      assertEquals(List.of("REVIEW_EVIDENCE"), validate(data));
+    }
+
+    var data = fixture();
+    object(data, REVIEW)
+        .putArray("evidence")
+        .add("unit-a")
+        .add("unit-b")
+        .add("unit-c")
+        .add("unit-d");
+    assertEquals(List.of(), validate(data));
   }
 
   @Test

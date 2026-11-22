@@ -591,7 +591,7 @@ final class GateContractValidator {
   }
 
   /**
-   * Metadata consistency only (SS355 / PT-CHR-META001..009); no collection, permission, source
+   * Metadata consistency only (SS355 / PT-CHR-META001..010); no collection, permission, source
    * ownership, actual approval or physical baseline qualification occurs in this stage.
    */
   static List<String> validateEvidenceDocuments(
@@ -724,10 +724,7 @@ final class GateContractValidator {
             && !review.path("reviewerRole").asText("").isBlank(),
         "REVIEW_ROLE",
         failures);
-    require(
-        review.path(FIELD_EVIDENCE).isArray() && review.path(FIELD_EVIDENCE).size() >= 3,
-        "REVIEW_EVIDENCE",
-        failures);
+    require(distinctReviewEvidence(review.path(FIELD_EVIDENCE)), "REVIEW_EVIDENCE", failures);
     JsonNode checks = review.path("checks");
     for (String name :
         List.of(
@@ -742,6 +739,17 @@ final class GateContractValidator {
           "REVIEW_CHECK:" + name,
           failures);
     }
+  }
+
+  private static boolean distinctReviewEvidence(JsonNode evidence) {
+    if (!evidence.isArray() || evidence.size() < 3) return false;
+    Set<String> references = new HashSet<>();
+    for (JsonNode entry : evidence) {
+      if (!entry.isTextual()) return false;
+      String reference = entry.asText().strip();
+      if (reference.isEmpty() || !references.add(reference)) return false;
+    }
+    return true;
   }
 
   private static boolean matchingCount(JsonNode expected, JsonNode actual) {
