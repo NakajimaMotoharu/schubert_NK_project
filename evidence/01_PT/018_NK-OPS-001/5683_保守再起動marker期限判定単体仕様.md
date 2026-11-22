@@ -18,3 +18,7 @@ WBS-G13.06、C02、BUG-3577／YKT-2812、SS341 §4.2、UI251 §2、AVL-001／OPS
 ## 実行結果
 
 PG42402の是正後source 8c99fbd2112183808d8d973bce7b3a9b3c1cef13、通常8件成功。分岐28、行49、メソッド7、実行クラス3の各100%。reportに含まれるのは実コードで、package-infoは実行codeなし。Java生成record/enum methodのJaCoCo標準処理を維持し、手動除外0。NullAway／Checkstyle0、PMD生1は借用System.out、SpotBugs生3は意図的null入力のoracle。実経路や全Batch／451は未受入。evidence/01_PT/018_NK-OPS-001/evidence/PG42402-g1306-maintenance-reboot-watch-current-v1/manifest.json SHA256 03d4392101a025f5675f9c4d30f815f384ddb828620c68965ac0b74fee18d1fe。
+
+## 通常のJDK起動入口
+
+PT-OPS-MAINT-PREBOOT004-W09、PG42412。PG42408の正規Batch JARから局所三物理だけを照合し、JDK25の通常launcherで固定合成引数を渡した。出力はWAITING、CRITICAL、COMPLETE、INVALID_OBSERVATIONの4通り、余分な出力なし。元toolのclass-init判定失敗1件は別に保存。試験機でサービス等の操作は0。evidence/01_PT/018_NK-OPS-001/evidence/PG42412-g1306-watch-packaged-cli-proof-v1/manifest.json SHA256 9a712c899a20404d845c37ebbe1fee669c2221f8cf6c858823a65506390df990。

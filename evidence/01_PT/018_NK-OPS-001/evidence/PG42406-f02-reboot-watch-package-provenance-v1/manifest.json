@@ -1,0 +1,71 @@
+{
+  "run": "PG42406",
+  "source": "e87190f482f7cdb86928779ff423a53c69f74e7c",
+  "javaCore": "8c99fbd2112183808d8d973bce7b3a9b3c1cef13",
+  "wbs": "WBS-F02-b-a",
+  "terminalAtUTC": "2026-11-22T08:29:37.230011+00:00",
+  "priorPackages": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42314-f02-timer-candidate-four-existing-jars-v1/manifest.json",
+    "sha256": "58ad7ee8c514fcea9cea27560db2e7a4c439b5c1238103f9ae0acf381421422c"
+  },
+  "watchSourceReceipt": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42402-g1306-maintenance-reboot-watch-current-v1/manifest.json",
+    "sha256": "03d4392101a025f5675f9c4d30f815f384ddb828620c68965ac0b74fee18d1fe"
+  },
+  "previousPermittedMavenEnvelope": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41074-f02-current-alert-batch-maven-v1/manifest.json",
+    "sha256": "2373767cfeaf06ab0138b4ff584901bcded516b4f12067daeee3184df3ca16cb"
+  },
+  "currentUnchangedArchiveModules": [
+    "protocol",
+    "storage",
+    "bootstrap"
+  ],
+  "batchOldJarLacksWatch": true,
+  "currentBatchPackageNeeded": true,
+  "registeredBatchPackagingOwnModuleCount": 3,
+  "scopeAdmission": {
+    "samePoms": true,
+    "sameThreeActualModules": [
+      "storage",
+      "bootstrap",
+      "batch"
+    ],
+    "metadataOnly": [
+      "src/schubert-nk-api/pom.xml",
+      "src/schubert-nk-web/pom.xml",
+      "program/characterization/pom.xml",
+      "src/schubert-nk-protocol/pom.xml"
+    ],
+    "checkedMainPaths": 314,
+    "containsHeldNamedSources": false,
+    "willCopyTestSources": false,
+    "runtimeOrPostInstallInvocations": false,
+    "ordinaryBuildCommand": [
+      "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+      "-o",
+      "-B",
+      "-ntp",
+      "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+      "-pl",
+      "src/schubert-nk-batch",
+      "-am",
+      "compile"
+    ],
+    "ordinaryJarCommand": [
+      "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+      "-o",
+      "-B",
+      "-ntp",
+      "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+      "-pl",
+      "src/schubert-nk-batch",
+      "org.apache.maven.plugins:maven-jar-plugin:3.4.1:jar"
+    ]
+  },
+  "possibleNextPackage": "Reuse the previously admitted Maven envelope with only the changed Batch Main. Freeze source and check newly compiled class bytes and physical inventory. Keep API/Web, Root tests and schema/runtime on hold.",
+  "productActions": 0,
+  "wholeF02": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

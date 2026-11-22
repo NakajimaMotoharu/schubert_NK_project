@@ -1,0 +1,48 @@
+{
+  "run": "PG42414",
+  "source": "e87190f482f7cdb86928779ff423a53c69f74e7c",
+  "javaCore": "8c99fbd2112183808d8d973bce7b3a9b3c1cef13",
+  "wbs": "WBS-P004-01.02/2",
+  "terminalAtUTC": "2026-11-22T08:39:23.899308+00:00",
+  "canonical": {
+    "source": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "path": "documents/300_SS/330_データ・ファイル/331_DB物理・DDL・index・権限設計.md",
+    "sha256": "f57d908ade963d03a7f1dd12dc93e0bd89fefa27223c674c3d363014913c64de"
+  },
+  "actual": {
+    "testId": "PT-DB-012-STATIC-ROLE",
+    "migrations": 30,
+    "backupDirectGrants": 10,
+    "opsDirectGrants": 2,
+    "receiptClauses": 3,
+    "rejectedMutations": 5
+  },
+  "python": "3.14.4",
+  "proof": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42414-selected-ddl-grants-v1/begin.json",
+      "sha256": "a3dbf0fe1d2748daa774dbf80a7b0bf11fb502762d92b2be5ab5be5f5caa6de7"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42414-selected-ddl-grants-v1/result.json",
+      "sha256": "688d29779e67701da9b6bc4c445f3502ec48198c63c0dff6e451bab32675383f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42414-selected-ddl-grants-v1/terminal.json",
+      "sha256": "c014358e064d0b25d27522d29ac93c8d9f06db3b111c2fbb78923e0cf4cf271f"
+    }
+  ],
+  "inputFixture": {
+    "path": "evidence/01_PT/004_NK-DAT-001/input/42414_selected_role_contract.py",
+    "sha256": "14d92145f3ffb2398629ce11ff871fc69e0f7e2338946c34400345285075ada0"
+  },
+  "actualDatabaseActions": 0,
+  "staticPt": 1,
+  "realIndexPlanOrPrivileges": false,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "importantLimits": [
+    "selected declarative role grants only",
+    "no DB connection, effective ACL, or role adoption"
+  ]
+}
