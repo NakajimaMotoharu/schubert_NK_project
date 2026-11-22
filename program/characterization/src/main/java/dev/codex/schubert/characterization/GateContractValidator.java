@@ -653,6 +653,8 @@ final class GateContractValidator {
       String label,
       List<String> failures) {
     require(VALUE_PASS.equals(sourceReport.path(FIELD_STATUS).asText()), "SOURCE_STATUS", failures);
+    JsonNode reportedFailures = sourceReport.path("failures");
+    require(reportedFailures.isArray() && reportedFailures.isEmpty(), "SOURCE_FAILURES", failures);
     for (String field :
         List.of(
             "sourceFileCount",

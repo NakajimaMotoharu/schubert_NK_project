@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
-/** PT-CHR-META001..010. JSON consistency only; these fixtures are never operational evidence. */
+/** PT-CHR-META001..011. JSON consistency only; these fixtures are never operational evidence. */
 final class GateEvidenceDocumentsTest {
   private static final ObjectMapper JSON = new ObjectMapper();
   private static final int COMPARISON = 0;
@@ -286,6 +286,20 @@ final class GateEvidenceDocumentsTest {
   }
 
   @Test
+  void sourceVerificationPassRequiresAnExplicitEmptyFailuresArray() throws Exception {
+    assertEquals(List.of(), validate(fixture()));
+    var missing = fixture();
+    object(missing, SOURCE).remove("failures");
+    assertEquals(List.of("SOURCE_FAILURES"), validate(missing));
+
+    for (String entry : List.of("null", "{}", "\"none\"", "[null]", "[\"unit-failure\"]")) {
+      var data = fixture();
+      object(data, SOURCE).set("failures", JSON.readTree(entry));
+      assertEquals(List.of("SOURCE_FAILURES"), validate(data));
+    }
+  }
+
+  @Test
   void statusMarkersAndRepeatInventoryCannotSubstituteDifferentEvidence() throws Exception {
     for (String status : List.of("FAIL", "FAILED", "FLAKY", "SKIP", "SKIPPED", "NOT_RUN")) {
       int[] indices = {COMPARISON, SOURCE, FIRST, SECOND, PREFLIGHT, REVIEW};
@@ -333,7 +347,7 @@ final class GateEvidenceDocumentsTest {
     JsonNode source =
         JSON.readTree(
             """
-            {"status":"PASS","sourceFileCount":59,
+            {"status":"PASS","failures":[],"sourceFileCount":59,
              "sourceAggregateSha256":"c9ce7c85de2d0443b4d7bb4d9a3082b39985c1cbf3121945de1ee4a936b0bd6c",
              "documentFileCount":18,
              "documentAggregateSha256":"1904756ba0e0cbf73f3942ad8481d17d727e3e8f3770dacf8bc64ee06c2acaff",
