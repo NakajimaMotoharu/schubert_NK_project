@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
@@ -12,9 +13,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.jupiter.api.Test;
@@ -62,7 +65,7 @@ final class UserCreateTemplateResourcePortTest {
     return p;
   }
 
-  private static Document render(String id, Map<String, Object> values) throws Exception {
+  private static Document render(String id, Map<String, Object> values) throws IOException {
     var servlet = new MockServletContext();
     var req = new MockHttpServletRequest(servlet);
     req.setMethod("GET");
@@ -113,7 +116,7 @@ final class UserCreateTemplateResourcePortTest {
   }
 
   @Test
-  void initialFormHasApprovedEmptyValuesAndDefaults() throws Exception {
+  void initialFormHasApprovedEmptyValuesAndDefaults() throws IOException {
     var d = render("UDOM001", page());
     assertEquals("User追加", d.title());
     assertEquals("User追加", d.select("h1").text());
@@ -127,7 +130,7 @@ final class UserCreateTemplateResourcePortTest {
   }
 
   @Test
-  void everyRoleAndEnabledCombinationRetainsExactlyOneSelection() throws Exception {
+  void everyRoleAndEnabledCombinationRetainsExactlyOneSelection() throws IOException {
     int n = 0;
     for (String role : List.of(USER, ADMIN))
       for (boolean enabled : List.of(true, false)) {
@@ -146,7 +149,7 @@ final class UserCreateTemplateResourcePortTest {
   }
 
   @Test
-  void emptyUsernameAndOtherIssuesHaveIndependentSummaryAndFieldScope() throws Exception {
+  void emptyUsernameAndOtherIssuesHaveIndependentSummaryAndFieldScope() throws IOException {
     List<Map<String, String>> inputs =
         List.of(Map.of(), Map.of(USERNAME, "name invalid"), Map.of("role", "role invalid"));
     List<List<String>> expected =
@@ -162,7 +165,7 @@ final class UserCreateTemplateResourcePortTest {
   }
 
   @Test
-  void alertFieldAndUsernameEscapeLiteralMarkupWithoutNodes() throws Exception {
+  void alertFieldAndUsernameEscapeLiteralMarkupWithoutNodes() throws IOException {
     var literal = "<script>fixture</script>&\"";
     var p = page();
     p.put(FIELDS, formValues(literal, USER, true));
@@ -177,7 +180,7 @@ final class UserCreateTemplateResourcePortTest {
   }
 
   @Test
-  void usernameDisplayKeepsExactByteBoundaryWithoutClaimingValidation() throws Exception {
+  void usernameDisplayKeepsExactByteBoundaryWithoutClaimingValidation() throws IOException {
     for (int length : List.of(64, 65)) {
       var name = "x".repeat(length);
       var p = page();
@@ -190,7 +193,7 @@ final class UserCreateTemplateResourcePortTest {
   }
 
   @Test
-  void unmappedPasswordPropertiesAreNeverRedisplayed() throws Exception {
+  void unmappedPasswordPropertiesAreNeverRedisplayed() throws IOException {
     var p = page();
     var extra = new HashMap<>(formValues("sample", USER, true));
     extra.put("password", FORBIDDEN_REDISPLAY_MARKER);
@@ -204,7 +207,7 @@ final class UserCreateTemplateResourcePortTest {
   }
 
   @Test
-  void displayOnlyHiddenFieldPostActionAndStaticNavigationMatchContract() throws Exception {
+  void displayOnlyHiddenFieldPostActionAndStaticNavigationMatchContract() throws IOException {
     var d = render("UDOM007", page());
     var f = d.select(FORM);
     assertEquals(1, f.size());
@@ -217,7 +220,8 @@ final class UserCreateTemplateResourcePortTest {
   }
 
   @Test
-  void ownedConcurrentFormsDoNotShareUsernamesOrSelections() throws Exception {
+  void ownedConcurrentFormsDoNotShareUsernamesOrSelections()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var executor = Executors.newFixedThreadPool(2);
     try {
       List<Future<?>> futures = new ArrayList<>();

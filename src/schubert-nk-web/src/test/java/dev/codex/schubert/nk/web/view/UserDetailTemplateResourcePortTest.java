@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
@@ -13,9 +14,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.jupiter.api.Test;
@@ -112,7 +115,7 @@ final class UserDetailTemplateResourcePortTest {
       Map<String, Object> page,
       Optional<List<Map<String, Object>>> forms,
       Optional<String> message)
-      throws Exception {
+      throws IOException {
     var servlet = new MockServletContext();
     var req = new MockHttpServletRequest(servlet);
     req.setMethod("GET");
@@ -153,7 +156,7 @@ final class UserDetailTemplateResourcePortTest {
   }
 
   @Test
-  void missingFormsAndMessageKeepDisplayMetadataWithoutInventedOperations() throws Exception {
+  void missingFormsAndMessageKeepDisplayMetadataWithoutInventedOperations() throws IOException {
     var d = render("UDTL001", model("public-target"), Optional.empty(), Optional.empty());
     assertEquals("User詳細", d.title());
     assertEquals("User詳細", d.select("h1").text());
@@ -192,7 +195,7 @@ final class UserDetailTemplateResourcePortTest {
   }
 
   @Test
-  void emptyFormsCreateNoMutationControlsAndRetainStaticNavigation() throws Exception {
+  void emptyFormsCreateNoMutationControlsAndRetainStaticNavigation() throws IOException {
     var d = render("UDTL002", model(SAMPLE), Optional.of(List.of()), Optional.of(""));
     assertEquals(1, d.select(".user-operations").size());
     assertTrue(d.select(OPERATIONS).isEmpty());
@@ -203,7 +206,7 @@ final class UserDetailTemplateResourcePortTest {
   }
 
   @Test
-  void absentEmptyAndMarkupMessagesHaveExplicitNullAndEscapeBranches() throws Exception {
+  void absentEmptyAndMarkupMessagesHaveExplicitNullAndEscapeBranches() throws IOException {
     List<Optional<String>> messages =
         List.of(Optional.empty(), Optional.of(""), Optional.of("<script>fixture</script>&"));
     List<List<String>> expected =
@@ -216,7 +219,7 @@ final class UserDetailTemplateResourcePortTest {
   }
 
   @Test
-  void allOperationKindsAndRoleEnabledVariantsKeepSeparateControlShapes() throws Exception {
+  void allOperationKindsAndRoleEnabledVariantsKeepSeparateControlShapes() throws IOException {
     int n = 0;
     for (boolean enabled : List.of(true, false))
       for (String role : List.of(USER, ADMIN)) {
@@ -248,7 +251,7 @@ final class UserDetailTemplateResourcePortTest {
   }
 
   @Test
-  void validationAndHiddenIdentityStayScopedToEachSuppliedForm() throws Exception {
+  void validationAndHiddenIdentityStayScopedToEachSuppliedForm() throws IOException {
     List<Map<String, String>> issues = List.of(Map.of(), Map.of("confirm", "確認してください"));
     List<List<String>> expected = List.of(List.of(), List.of("確認してください"));
     for (int i = 0; i < issues.size(); i++) {
@@ -274,7 +277,7 @@ final class UserDetailTemplateResourcePortTest {
   }
 
   @Test
-  void metadataEscapesMarkupAndEmptyDateValuesRemainEmpty() throws Exception {
+  void metadataEscapesMarkupAndEmptyDateValuesRemainEmpty() throws IOException {
     var literal = "<script>fixture</script>&";
     var p = model(literal);
     var d = render("UDTL006-escaped", p, Optional.empty(), Optional.empty());
@@ -294,7 +297,7 @@ final class UserDetailTemplateResourcePortTest {
   }
 
   @Test
-  void passwordControlsNeverRetainUnmappedFieldValues() throws Exception {
+  void passwordControlsNeverRetainUnmappedFieldValues() throws IOException {
     var d =
         render(
             "UDTL007",
@@ -314,7 +317,8 @@ final class UserDetailTemplateResourcePortTest {
   }
 
   @Test
-  void ownedConcurrentDetailPagesKeepTargetNamesAndFormsIsolated() throws Exception {
+  void ownedConcurrentDetailPagesKeepTargetNamesAndFormsIsolated()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var executor = Executors.newFixedThreadPool(2);
     try {
       List<Future<?>> futures = new ArrayList<>();
