@@ -1,0 +1,382 @@
+{
+  "run": "PG43024-characterization-source-report-failures-v2",
+  "source": "67755f633666943dd9c77241f8ab08ddf9933731",
+  "productionCore": "7698011f52d6cc5f94c76413b6ab36971783b9c9",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T21:08:57.370851+00:00",
+  "wbs": "WBS-P020-01.03/2",
+  "testId": "PT-CHR-META011",
+  "newToolDefinitions": 1,
+  "ordinarySyntheticCases": 226,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "supplementalCounterTotal": {
+    "LINE": 521,
+    "METHOD": 68,
+    "CLASS": 2,
+    "BRANCH": 273
+  },
+  "rawClasses": {
+    "dev/codex/schubert/characterization/GateContractValidator": {
+      "crc64": "a21ef0f086dd2731",
+      "capacity": 683,
+      "counts": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 2895
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 273
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 519
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 201
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 61
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/characterization/GateContractValidator$ValidationResult": {
+      "crc64": "a8a3c706a4afbf3b",
+      "capacity": 7,
+      "counts": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 29
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 2
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 7
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 7
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    }
+  },
+  "originalPartialFailure": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v1/junit.end.json",
+    "sha256": "29f3d344228adb8422f72cd702747194334354ebb10c267e7c038859cb2fe38b"
+  },
+  "initialCaseOutcome": {
+    "chosen": 226,
+    "failed": 1,
+    "othersSucceeded": 225,
+    "reportedIndividuallyOnly": true
+  },
+  "beforeMissingSourceDiagnostic": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v1/red-v3/manifest.json",
+    "sha256": "2240ed6b16883430c6ce0b2a344a8bc2f6bd95637c114e5e7714b98b62912244"
+  },
+  "fixedExpectations": {
+    "good": "explicit empty array, exactly no diagnostics",
+    "bad": "exactly one SOURCE_FAILURES for missing, null, object, string, null member or failure member"
+  },
+  "originalCohortJUnit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/reports/TEST-junit-jupiter.xml",
+    "sha256": "63f7404fd511df5d0eaca3081520db06abbfbe1d9222e720931c47de74d3e64c"
+  },
+  "activeJar": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/snapshot/program/characterization/target/schubert-characterization-0.1.0-SNAPSHOT.jar",
+    "sha256": "8635f59f9d8a85dce9b005ccfb75fc66063318232c9a9ca118bc84756f980d5b"
+  },
+  "samePackagePhysical": 17,
+  "changedPhysical": [
+    "dev/codex/schubert/characterization/GateContractValidator$ValidationResult.class",
+    "dev/codex/schubert/characterization/GateContractValidator.class"
+  ],
+  "producedProof": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/terminal.json",
+    "sha256": "d5cf583d639dc943fa42e82f436890ea6f55f8c05d78ab162eeb9edbd659c0a0"
+  },
+  "independentMeasuredSession": [
+    {
+      "labelBytesHex": "504734333032342d736f757263652d7265706f72742d63757272656e742d7632",
+      "startMillis": 1795381697078,
+      "endMillis": 1795381701470
+    }
+  ],
+  "originalExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/unit.exec",
+    "sha256": "42b63dbabe0da75186b71cfe2d695ae23dc58dede032b37c953cab8e582a254c"
+  },
+  "newQualityInput": {
+    "source": "67755f633666943dd9c77241f8ab08ddf9933731",
+    "priorCurrentFixture": {
+      "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG42990-review-references-current-v2/manifest.json",
+      "sha256": "0bea4f68f4f47f49e5461754e0aac4807be1c900dc5a11cd49ba01ea88a345c1"
+    },
+    "currentCore": "7698011f52d6cc5f94c76413b6ab36971783b9c9",
+    "baselineTree": "cd377044e4ca058ea219ca6a2fec82159559c72c",
+    "startedAtUTC": "2026-11-22T21:08:08.709864+00:00",
+    "reusedSanitizedInputs": 264,
+    "copiedBytesDigest": "e3bab54617be4e648967f581b395bdc6c0c55b57c2bd247a3484c6d30068a4d5",
+    "changed": [
+      {
+        "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+        "sha256": "e7355f1c21c8811b14f4c4997df3a890a67254e59d1af94c7ba7082f21c61d0d"
+      },
+      {
+        "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateEvidenceDocumentsTest.java",
+        "sha256": "4996ac72fa7cac47598bfbc7ee9175f455e017aab77a85fea4ef9ae313d2ae7c"
+      }
+    ],
+    "oldLogicalFailure": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v1/red-v3/manifest.json",
+      "sha256": "2240ed6b16883430c6ce0b2a344a8bc2f6bd95637c114e5e7714b98b62912244"
+    },
+    "intermediateFailedCohort": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v1/junit.end.json",
+      "sha256": "29f3d344228adb8422f72cd702747194334354ebb10c267e7c038859cb2fe38b"
+    },
+    "commands": {
+      "package": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-N",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-f",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/snapshot/program/characterization/pom.xml",
+        "-Dmaven.test.skip=true",
+        "package"
+      ],
+      "compile-tests": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/snapshot/program/characterization/target/classes:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/microsoft/playwright/playwright/1.55.0/playwright-1.55.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.19.2/jackson-annotations-2.19.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-core/2.19.2/jackson-core-2.19.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-databind/2.19.2/jackson-databind-2.19.2.jar",
+        "-sourcepath",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/snapshot/program/characterization/tests/java",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/tests",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateCliTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateContractTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateContractValidatorNegativeTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/TargetAdapterTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorEmptyInputTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/BaselineNumericMetadataTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/CharacterizationHashTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidatorTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/CorrelatedLogHttpNumberTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/CorrelatedMenuActionContractTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateBaselineMetadataTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionDocumentsTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionNumericTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateEvidenceDocumentsTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateMetricsCountTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateSyntheticRunPortTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/CommonValueContractTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/CharacterizationIoScopeTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateOutputFailureContractTest.java"
+      ],
+      "junit": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Xmx1g",
+        "-Djava.awt.headless=true",
+        "-Duser.language=ja",
+        "-Duser.country=JP",
+        "-Duser.timezone=Asia/Tokyo",
+        "-Dchr.unitProjectRoot=/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/snapshot",
+        "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/tmp",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/unit.exec,sessionid=PG43024-source-report-current-v2",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-ansi-colors",
+        "--fail-if-no-tests",
+        "--class-path",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/snapshot/program/characterization/target/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/tests:/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/snapshot/program/characterization/tests/resources:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/microsoft/playwright/playwright/1.55.0/playwright-1.55.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.19.2/jackson-annotations-2.19.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-core/2.19.2/jackson-core-2.19.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-databind/2.19.2/jackson-databind-2.19.2.jar",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/reports",
+        "--config=junit.jupiter.execution.parallel.enabled=false",
+        "--select-class",
+        "dev.codex.schubert.characterization.ArtifactComparatorTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.GateCliTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.GateContractTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.GateContractValidatorNegativeTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.TargetAdapterTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.ArtifactComparatorEmptyInputTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.BaselineNumericMetadataTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.CharacterizationHashTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.CorrelatedLogEvidenceValidatorTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.CorrelatedLogHttpNumberTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.CorrelatedMenuActionContractTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.GateBaselineMetadataTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.GateDefinitionDocumentsTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.GateDefinitionNumericTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.GateEvidenceDocumentsTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.GateMetricsCountTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.GateSyntheticRunPortTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.CommonValueContractTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.CharacterizationIoScopeTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.GateOutputFailureContractTest"
+      ],
+      "coverage": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/unit.exec",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/snapshot/program/characterization/target/classes",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/coverage.xml"
+      ],
+      "checkstyle": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "-o",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/checkstyle.xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/snapshot/program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateEvidenceDocumentsTest.java"
+      ],
+      "strictCompile": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/measure",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/jacoco/UnfilteredCodeMeasurement.java"
+      ],
+      "strictRaw": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/measure:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+        "--strict-original-exec",
+        "--line-deficits",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/unit.exec",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/classscope/GateContractValidator.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/classscope/GateContractValidator$ValidationResult.class"
+      ]
+    },
+    "heldFileStore": 1,
+    "realRuntimeOrCurrentOperations": 0
+  },
+  "compiledOrToolStageRecords": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/package.end.json",
+      "sha256": "9958b201f2dbd27695bfc3a7421ee720ec6742468991cb6894a6c8bb819ca828"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/compile-tests.end.json",
+      "sha256": "5545fa24b9d6041a981c7e97e0acabefe0e40ce9fc2d40921761f717f458196f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/junit.end.json",
+      "sha256": "8b4b3e8135db1d30a92decddf4c528a4ef642b25e2cbb171913a0d630913c53c"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/coverage.end.json",
+      "sha256": "7f99a7ab35ac0a98e966fb2cd8df655760b86249c50cd09a2e709027ac3b1a37"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/checkstyle.end.json",
+      "sha256": "a80de93767053d405a47116d1a5a0651e476e07814dfa469777c0e203faf48b9"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/strictCompile.end.json",
+      "sha256": "eb0ebb273c9359969219f1e220b446b2fcf182284d440066e31fbaa8daf9cc9d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43024-characterization-source-report-failures-v2/strictRaw.end.json",
+      "sha256": "db32260f757ac60a58d1679befb7d96f059f4fed6774e8cd318b93bbd5a69301"
+    }
+  ],
+  "canonicalCurrentTree": "cd377044e4ca058ea219ca6a2fec82159559c72c",
+  "legacySourceVerification": {
+    "path": "program/characterization/reports/source-verification.json",
+    "source": "843de94",
+    "sha256": "5984b098f8c06793089eef44d5c5b74991240255e5a6c840284ff67f3aabe40e",
+    "failures": 0
+  },
+  "reported": [
+    {
+      "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG43024-characterization-source-report-failures-v2/checkstyle.xml",
+      "sha256": "38a144c9fd25ebc995ae1d820ad8b82d8f6a53ec4e38db005d24a510cc137a96"
+    },
+    {
+      "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG43024-characterization-source-report-failures-v2/coverage-unfiltered.tsv",
+      "sha256": "189bd6397d76c05238257ff6040fb0c10dee1ab8a45f7b042604c7634b14c216"
+    },
+    {
+      "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG43024-characterization-source-report-failures-v2/coverage.xml",
+      "sha256": "5cbc69cb5c819cd208bb14a43ca74da484379d649dea298830891fafe6fe08a6"
+    },
+    {
+      "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG43024-characterization-source-report-failures-v2/sanitized-junit.xml",
+      "sha256": "8515e686d264c2317951bd880b03f3893a0ac6ccd744d0253584b34a9e64c182"
+    }
+  ],
+  "related": [
+    "BUG-3654",
+    "YKT-2872",
+    "PG-D-1201"
+  ],
+  "checkstyleFindings": 0,
+  "realCurrentOrNkExecutions": 0,
+  "officialGlobalCoverage": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
