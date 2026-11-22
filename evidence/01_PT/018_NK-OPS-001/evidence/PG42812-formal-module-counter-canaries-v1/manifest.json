@@ -1,0 +1,94 @@
+{
+  "run": "PG42812",
+  "sourceWorktreeHead": "ccd220eda90eb039ca4f3036ea6e39de7e0a0a8f",
+  "actualExit": 0,
+  "branch": "dev-foundation",
+  "wbs": "WBS-G01",
+  "startedAtUTC": "2026-11-22T16:16:49.435455+00:00",
+  "terminalAtUTC": "2026-11-22T16:16:50.875644+00:00",
+  "python": "3.14.4",
+  "toolFiles": [
+    {
+      "path": "tools/quality/006_collect_scenario_evidence.py",
+      "sha256": "b5f39612086de3f3103a390fbff645ddeded24d17e3a885f91d45e8a8f12637a"
+    },
+    {
+      "path": "tools/quality/019_test_evidence_set.py",
+      "sha256": "b6d91bdac1d79bdc5229b4d772dd3c1c12d5b561597a96bb47a17f1c542067cb"
+    }
+  ],
+  "unit": {
+    "command": [
+      "python3",
+      "-B",
+      "tools/quality/019_test_evidence_set.py",
+      "-v"
+    ],
+    "exit": 0,
+    "toolsTests": 116,
+    "newToolsTests": 3,
+    "stdout": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42812-formal-module-counter-canaries-v1/unit.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42812-formal-module-counter-canaries-v1/unit.stderr",
+      "sha256": "32fff95081b9374428a8b63c7de798e761b5f949de635f10a85051c0e6143b25"
+    }
+  },
+  "positiveOriginal": {
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42762-p01802-protocol-real-local-ci-v1/manifest.json",
+      "sha256": "93ccc017c908317d4ffe38456bd91027b90355386828ea2e27d621483518c7a5"
+    },
+    "rawXml": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42762-protocol-real-local-ci-entry-v1/snapshot/src/schubert-nk-protocol/target/site/jacoco/jacoco.xml",
+      "sha256": "9a36b54da73edffb5f021c459bf39984809b9d9fda2d4c7efe4bbb20468ece2b"
+    },
+    "reportPackages": 14,
+    "counters": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 17700
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 1080
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 3551
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 1294
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 751
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 162
+      }
+    },
+    "reexecuted": false
+  },
+  "syntheticCounterOmission": {
+    "oldAccepts": true,
+    "newAccepts": false,
+    "diagnostic": "incomplete or nonpassing module JaCoCo report",
+    "rawXmlWrote": false
+  },
+  "newCoverage": null,
+  "ordinaryTests": 0,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "source": "1d497691cd38782d74a6d6b1c185a24d37114206",
+  "terminal": {
+    "path": "../pgpt-runs/PG379/PG42812-formal-module-counter-canaries-v1/terminal.json",
+    "sha256": "25abdf61dbc00ce1d4ae277943b5dcc1a7a6fd8f35fc55385b509905ae4bbd9e"
+  },
+  "bug": "BUG-3624",
+  "ykt": "YKT-2849"
+}
