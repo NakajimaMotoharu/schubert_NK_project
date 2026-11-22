@@ -1,0 +1,1139 @@
+{
+  "run": "PG42850",
+  "source": "fdd600e0540bfd10315925189b50603eb09983ff",
+  "core": "e8368d22c4da2ec841f008df793594d3be9066af",
+  "branch": "dev-foundation",
+  "wbs": "WBS-F03/2-2-b",
+  "actualExit": 0,
+  "startedAtUTC": "2026-11-22T16:57:18.688100+00:00",
+  "terminalAtUTC": "2026-11-22T16:57:30.525621+00:00",
+  "original": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33658-current-transfer1030-post-v2/original-TEST-junit-jupiter.xml",
+    "sha256": "d94d72869cce2dc2967a115976a30bf413c9d454207bfd43bc1804cd75c08839"
+  },
+  "plannedExactCaseNames": [
+    "dev.codex.schubert.nk.migration.AssetStagingTablesTest/allNineExtraScalarRowsAreRejected",
+    "dev.codex.schubert.nk.migration.AssetStagingTablesTest/allNineMissingScalarRowsAreRejected",
+    "dev.codex.schubert.nk.migration.AssetStagingTablesTest/allNineNullResultsAreRejectedWithoutInventedOwnership",
+    "dev.codex.schubert.nk.migration.AssetStagingTablesTest/allNineSqlNullCountsAreRejected",
+    "dev.codex.schubert.nk.migration.AssetStagingTablesTest/allNineWrongCountsAreRejected",
+    "dev.codex.schubert.nk.migration.AssetStagingTablesTest/closeFailuresAndRejectedCallsDoNotPoisonAnIndependentTransaction",
+    "dev.codex.schubert.nk.migration.AssetStagingTablesTest/eachDdlMustReturnExactlyZero",
+    "dev.codex.schubert.nk.migration.AssetStagingTablesTest/eachDdlOriginalFailureStopsTheRemainingPrefix",
+    "dev.codex.schubert.nk.migration.AssetStagingTablesTest/eachLargeInsertRequiresTheExactNonnegativeLongCount",
+    "dev.codex.schubert.nk.migration.AssetStagingTablesTest/emptyCountsAndAudioZeroWithNoLinksRemainValid",
+    "dev.codex.schubert.nk.migration.AssetStagingTablesTest/everyResultCloseAndCombinedFailureRetainsTwrSuppression",
+    "dev.codex.schubert.nk.migration.AssetStagingTablesTest/everyScalarQueryReadWasNullAndNextFailureKeepsTheOriginal",
+    "dev.codex.schubert.nk.migration.AssetStagingTablesTest/finiteWorkersOwnIndependentStatementsAndAllResultsTerminate",
+    "dev.codex.schubert.nk.migration.AssetStagingTablesTest/insertAndRuntimeFailuresCannotRetryOrCommitThePartialPrefix",
+    "dev.codex.schubert.nk.migration.AssetStagingTablesTest/largeUpdateAndCountUseLongWithoutIntegerTruncation",
+    "dev.codex.schubert.nk.migration.AssetStagingTablesTest/prepareAcquisitionExceptionsKeepIdentityWithoutOwnedStatement",
+    "dev.codex.schubert.nk.migration.AssetStagingTablesTest/prepareAutoCommitCannotPublishOrDropStagingEarly",
+    "dev.codex.schubert.nk.migration.AssetStagingTablesTest/prepareCloseOnlyFailureCannotBeSuccessful",
+    "dev.codex.schubert.nk.migration.AssetStagingTablesTest/prepareClosesOnlyItsStatementAndBindsOneTimeout",
+    "dev.codex.schubert.nk.migration.AssetStagingTablesTest/prepareMatchesAllThreeIndependentColumnListsAndExactSql",
+    "dev.codex.schubert.nk.migration.AssetStagingTablesTest/prepareNullConnectionHasFixedInputDiagnostic",
+    "dev.codex.schubert.nk.migration.AssetStagingTablesTest/prepareNullVendorStatementIsAnExplicitSqlFailure",
+    "dev.codex.schubert.nk.migration.AssetStagingTablesTest/prepareOriginalFailureRetainsSuppressedCleanup",
+    "dev.codex.schubert.nk.migration.AssetStagingTablesTest/prepareRuntimeAndErrorStillCloseTheStatement",
+    "dev.codex.schubert.nk.migration.AssetStagingTablesTest/prepareTimeoutFailureStillClosesBeforeAnyDdl",
+    "dev.codex.schubert.nk.migration.AssetStagingTablesTest/scenarioTwoThenAssetThreeShareTheSameBorrowedTransactionInRequiredOrder",
+    "dev.codex.schubert.nk.migration.AssetStagingTablesTest/transferAcquisitionAndTimeoutFailuresKeepOriginalIdentity",
+    "dev.codex.schubert.nk.migration.AssetStagingTablesTest/transferAutoCommitAndNullVendorStatementAreRejected",
+    "dev.codex.schubert.nk.migration.AssetStagingTablesTest/transferBothClosesReturningPrimaryKeepIdentityWithoutSelfSuppression",
+    "dev.codex.schubert.nk.migration.AssetStagingTablesTest/transferInnerAndOuterCleanupKeepBothFailuresOnOriginalPrimary",
+    "dev.codex.schubert.nk.migration.AssetStagingTablesTest/transferMatchesAllTwelveIndependentSqlOperationsAndCounts",
+    "dev.codex.schubert.nk.migration.AssetStagingTablesTest/transferNullNegativeAndImpossibleAudioLinkInputsFailBeforeJdbc",
+    "dev.codex.schubert.nk.migration.AssetStagingTablesTest/transferPrimaryAndOuterCleanupHaveOneIndependentSuppressedInstance",
+    "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest/content001SixFixedQueriesAndEveryPayloadColumnMatch",
+    "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest/content002EmptyAllTablesStillChecksEveryTerminalRow",
+    "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest/content003BothNullBoundariesHaveNoIo",
+    "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest/content004AutoCommitIsRejectedWithoutStatementAcquisition",
+    "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest/content005NullStatementNeverCreatesOwnership",
+    "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest/content006NullResultAtEachTableClosesOnlyPriorResults",
+    "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest/content007AcquisitionTimeoutAndFetchFailuresPreserveOriginal",
+    "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest/content008MissingRowAtEveryTableRejectsWithNoLaterQuery",
+    "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest/content009ExtraRowsIncludingEmptyExpectationAreNeverRead",
+    "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest/content010AllSixtyFiveColumnPositionsDetectIndividualValueChanges",
+    "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest/content011SqlNullIsComparedWithoutInventingZeroFalseOrEmpty",
+    "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest/content012TypedGettersAndImmediateWasNullMatchIndependentEventSequence",
+    "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest/content013NullEmptyLiteralBackslashNAndUtf8NotesStayDistinct",
+    "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest/content014DeclaredCurrentOrderIsNotReplacedByTargetPkOrder",
+    "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest/content015LinksSortByBothNumericIdsThenFixedAsciiType",
+    "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest/content016TargetN12AndTimestampMicrosecondYearExtremes",
+    "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest/content017TypedTimestamptzUsesInstantAndCanonicalUtc",
+    "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest/content018EachQueryFailsWithoutAcquiringItsResult",
+    "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest/content019EveryGetterWasNullAndNextOccurrenceKeepsResourcePostconditions",
+    "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest/content020EachResultCloseFailureIsNotSuccess",
+    "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest/content021StatementCloseFailureIsNotSuccess",
+    "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest/content022AllThreeFaultKindsPreserveInnerThenOuterSuppressedOrder",
+    "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest/content023SamePrimaryNeverCreatesSelfSuppressionIncludingCloseOrigin",
+    "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest/content024EqualValuedDistinctCleanupIsKeptTwice",
+    "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest/content025BorrowedConnectionHasOnlyAutoReadAndStatementAcquisition",
+    "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest/content026FixedRedactionAndFreshSuccessAfterRejection",
+    "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest/content027CallerLiteralRowsAndDeclaredOrderStayUnchanged",
+    "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest/content028FiniteWorkersKeepIndependentBorrowedResources",
+    "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest/content029EmptyDeclaredRowsCannotHideGeneratedSearchMismatchCount",
+    "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest/final001ExactPreflightBoundSetvalAnalyzeOrderAndOwnership",
+    "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest/final002EmptyUsesOneFalseWithoutConsumingNextval",
+    "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest/final003NullArgumentsBeforeConnectionCalls",
+    "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest/final004AutoCommitFailsBeforeStatementCreation",
+    "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest/final005AutoCreateOriginalFailuresAndNullVendor",
+    "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest/final006OuterTimeoutPreservesFailureAndCloses",
+    "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest/final007EveryPreflightResultShapeIsStrict",
+    "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest/final008EveryPreflightQueryFailureIsOriginal",
+    "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest/final009EveryReadPhaseOriginalFailure",
+    "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest/final010PreflightResultCloseIsNotSuccess",
+    "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest/final011ReadPrimaryKeepsResultAndOuterSuppressedOrder",
+    "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest/final012LastMaxMismatchCannotIssueSequenceOrAnalyze",
+    "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest/final013EachPrepareNullOrOriginalFailureStopsFollowingCalls",
+    "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest/final014EachLongBindingFailure",
+    "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest/final015EachBooleanBindingFailure",
+    "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest/final016EachPreparedTimeoutFailure",
+    "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest/final017EverySetvalResultShapeIsStrict",
+    "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest/final018EveryPreparedQueryFailure",
+    "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest/final019EveryPreparedResultReadPhaseFailure",
+    "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest/final020EveryPreparedResultCloseFailure",
+    "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest/final021PreparedResultPrimaryKeepsAllThreeCloseFailuresInOrder",
+    "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest/final022EachPreparedCloseFailureIsPropagated",
+    "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest/final023OuterCloseFailureCannotBeSuccess",
+    "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest/final024EachAnalyzeWrongCountWarningAndOriginalFailures",
+    "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest/final025FreshSuccessAfterRejectedFixtureDoesNotReuseOwner",
+    "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest/final026MaximumN12IsRetainedWithoutAddingOneOrReorderingRows",
+    "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest/final027DiagnosticsFixedAndNoFailureNormalized",
+    "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest/final028FiniteReadersOwnIndependentProxiesAndTerminate",
+    "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest/final029DeferredConstraintMustSucceedBeforeAnyMaxOrSequence",
+    "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest/final030BothDeferredPhasesPreservePrimaryAndOuterCleanupIdentity",
+    "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest/reference001ExactSixCountsNineForeignKeysAndOrderQuery",
+    "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest/reference002EmptyStillChecksAllSixTablesAndAllReferences",
+    "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest/reference003BothNullArgumentsFailBeforeConnectionCalls",
+    "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest/reference004AutoCommitHasNoStatementOrQuery",
+    "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest/reference005AutoAndCreateFailuresPreserveEveryOriginalType",
+    "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest/reference006NullVendorStatementCannotBecomeNpe",
+    "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest/reference007TimeoutFailureClosesOwnedStatement",
+    "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest/reference008EveryScalarRejectsNullMissingSqlNullWrongAndExtra",
+    "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest/reference009EveryQueryFailureStopsAtTheOriginalFailure",
+    "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest/reference010EveryScalarReadPhasePreservesOriginalFailure",
+    "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest/reference011EveryResultCloseFailureCannotBeSuccess",
+    "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest/reference012OriginalPrimaryKeepsInnerOuterCloseOrderAndSelfSuppression",
+    "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest/reference013StatementCloseFailureIsNotNormalCompletion",
+    "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest/reference014EachOrphanOrOrderNonzeroRejectsWithNoLaterQuery",
+    "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest/reference015EachDeclaredCountMismatchRejectsBeforeReferenceChecks",
+    "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest/reference016OnlyReadOnlyBorrowedCallsAndExactResourcesExist",
+    "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest/reference017DiagnosticsAndToStringRemainFixedRedacted",
+    "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest/reference018IndependentFreshSuccessAfterFailedPriorQuery",
+    "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest/reference019EachCountUsesItsOwnDeclaredTableWithoutInventingRows",
+    "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest/reference020FiniteWorkersHaveIndependentSqlResultsAndTerminate",
+    "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest/reference021EmptyDeclaredRowsCannotHideAnyCheckViolationOrUnknownCount",
+    "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest/reference022OuterCloseReturningPrimaryKeepsOnlyDistinctInnerFailure"
+  ],
+  "newCaseNames": [
+    "dev.codex.schubert.nk.migration.AssetStagingTablesTest/transferBothClosesReturningPrimaryKeepIdentityWithoutSelfSuppression",
+    "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest/reference022OuterCloseReturningPrimaryKeepsOnlyDistinctInnerFailure"
+  ],
+  "candidate": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+    "sha256": "4a3de8b3dfe415c5171f42478f06e63b21f982be13cbd232131daf35dbd498d5"
+  },
+  "fixedMainPhysical": {
+    "dev/codex/schubert/nk/migration/AssetStagingTables.class": "87a32b86456bafe55d52bdaa03d6c50996109596ae9083df2eda05601e1a118c",
+    "dev/codex/schubert/nk/migration/ScenarioStagingTables.class": "a92d5ff8b6118fb2e22c4c340199eb9c56c278ac64955905e5dde44d428dd87c",
+    "dev/codex/schubert/nk/migration/AssetMigrationManifest$Entry.class": "c142c95aa8207e4f61ccb38e6e161731d0f3b3f9d7e0b7667bc0c497819a9b8a",
+    "dev/codex/schubert/nk/migration/AssetMigrationManifest$Kind.class": "052609ecd805be4d271934f36f4202ab6018a177f3ab81b0469dc07c0fc39ed1",
+    "dev/codex/schubert/nk/migration/AssetMigrationManifest.class": "ec7d3623be95f92790b89d24cd25cad47c088bfe4a8301d92db71cd504ad6339",
+    "dev/codex/schubert/nk/migration/AudioCopyDataset.class": "d09917c25977312f611df8b7a5234ae3a800633132ac97747260e90cf66111f3",
+    "dev/codex/schubert/nk/migration/AudioFileCopyRow.class": "ea50b38127af77e325c23f0d9810232341fd2eb2e0e4b17f179d4e9bae20500f",
+    "dev/codex/schubert/nk/migration/MediaAssetCopyBatch.class": "edd73340517260eba115de2113124133be11b45db9079caa45484c070b6962e4",
+    "dev/codex/schubert/nk/migration/MediaAssetCopyRow.class": "6c5adc60b233b941b9d509dfdae40bbf8f2b0218a41b25776d31c23a99459555",
+    "dev/codex/schubert/nk/migration/MigrationCopyDataset.class": "cd86b847f1aeb03d1e5affce0ab51edf9fa63b64c7c3227d4642832900ce495f",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier.class": "0b28b54ead31ca5d3b954a6378211be3862b9084dbd43a96ae331b8ae235b105",
+    "dev/codex/schubert/nk/migration/MigrationMasterCopyDataset.class": "f3054c1d75307a205041513d8bfaced40b74d39fbf5670170b689c8ba1c700be",
+    "dev/codex/schubert/nk/migration/ScenarioCopyDataset.class": "11ba4b4b475b205cd69d21c87211d507e1eec4e13c066c2053791194aabb59fa",
+    "dev/codex/schubert/nk/migration/ScenarioEntryCopyBatch.class": "85e1e2dfee1d13b7c45c3e0f4813b9f90ab335e2bbe182f51f89a99a297b2fbf",
+    "dev/codex/schubert/nk/migration/ScenarioEntryCopyRow.class": "369d40e90619f69d4747f9e4d8fa821637153d1a442dd5de80736277ca1f0109",
+    "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$IdPair.class": "53e54e1f27334878352ffd5e0e222f439c01e03653de0e668e2ed7485d4dca28",
+    "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap.class": "ca16026d985c464470c266e887056a88b671c3c455c7eb6a33b5a8d0ab5b62c1",
+    "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$Placement.class": "0e768edb60604b9829a724c52487391ed24c897b0625ae41414da089aea1b054",
+    "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap.class": "cf6890389883a8d6dc7a4033ca35a124a4796b9a4bcd239e586ab5fa5f2dd0f1",
+    "dev/codex/schubert/nk/migration/ScenarioFileCopyBatch.class": "62013aa1df711baa5719c7c8e86f15493b46aa79b50134b0e948e8f81d44a2e3",
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$FilePair.class": "d487add339f71bd42ca456dc838be7a15f2d2569f6f08b38572f8aa30212ea52",
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap.class": "e396c01d1b8c4697dce412f04195006365142d762a7f3d35cea31652850d9258",
+    "dev/codex/schubert/nk/migration/SpeakerCopyBatch.class": "1b54712d173109ac3f84cc6746d4e0256e89d240ec55ad9e9f97c61373548643",
+    "dev/codex/schubert/nk/migration/SpeakerCopyRow.class": "ff7c6bf1584c9882a999bd2687197aa4d877d5a08e667afda002d165f9dc9289",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer.class": "bde2891311415390cba4fab71357385d96943e9a426028abd2e904d4a302eb8a",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier.class": "ef0969f5ad29d40aa6c0b778f358508322e1d7fa2ee51a10813aa63d02673b4f",
+    "dev/codex/schubert/nk/migration/AssetStagingTables$SqlMutation.class": "3fbee73b2238af233b03995b2e64be54f3b78ca20647f32b1b195a1debd5d62d",
+    "dev/codex/schubert/nk/migration/AssetStagingTables$SqlQuery.class": "16b9b773fd4369e1bad9ebc4085d035a721c0ead7e947ba0d989718b56d28d3f",
+    "dev/codex/schubert/nk/migration/AssetStagingTables$Table.class": "0527198a6481a851dc82a6365311e77a3f86ac867c0965c7ff3d16ca66600f45",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$SqlQuery.class": "e24a25588c4be1ceac27cad50e00ae3ced1437e2ab93c714a45a7613edcbaf4e",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlMutation.class": "280a68a08f5952d5c50362be5985e253924c9ad7b78de412a5cb5bc6fdc3ebca",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlPrepare.class": "0f44866ce87b336d058eda313478e0f572137b08f41b79331e399b2489702745",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlQuery.class": "9fe3ff53f7f37497b479dab8cc40c617b262222b12052c9eb3ed06d002b94728",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$SqlQuery.class": "5ba9211f59b868c8289a4e9add576491ec1dfb436d7be5423bb4bb75efc91576",
+    "dev/codex/schubert/nk/migration/AssetMigrationManifest$Comparison.class": "463c12753ee773c6ced01b61d1b44577fd5c8ac930703d0b8492114739893252",
+    "dev/codex/schubert/nk/migration/AssetMigrationManifest$Observation.class": "52976a0c5d5c14c935479d9a22533cd96af48ae7805233d96b1debe89d8efdaa",
+    "dev/codex/schubert/nk/migration/PostgresCopyTextWriter.class": "e498970c4ef48d9af38f4de7f0e292f32188a9da38e153d9d235c4f1c4e697f2",
+    "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder.class": "d92993e0256be418b35ffd962f68d96ad6457020a1c8f547694c068b5e46f83d",
+    "dev/codex/schubert/nk/migration/MusicLogicalId.class": "24079b291b751577369f256ef32a31d9dd86b0e83885a5d79b51d761a04dd59b",
+    "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$PlacedEntry.class": "0decb1b7b350b7d023ec0e6da08587bcfcd24c46ae109c2ad8fcce56fce760b3",
+    "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$MappedEntry.class": "07a4cc7ce7c32e6f16e5df45b85c10401eb5bce9fc8947c3a935dba5b919c9f7",
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$MappedFile.class": "447b030258eb82c86fbad715d2618b51601e7f6a5952786d812d86d04f287b6f"
+  },
+  "changedMainPhysical": {
+    "dev/codex/schubert/nk/migration/AssetStagingTables.class": {
+      "old": "bf9a7988f31712111d9e42652fa79754dffac2a78f02657373c50c5d0e346408",
+      "new": "87a32b86456bafe55d52bdaa03d6c50996109596ae9083df2eda05601e1a118c"
+    },
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier.class": {
+      "old": "92fda203b0da0c92c702b5355c4ce0715b07c4350203524952685440a781e44f",
+      "new": "0b28b54ead31ca5d3b954a6378211be3862b9084dbd43a96ae331b8ae235b105"
+    },
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer.class": {
+      "old": "0637cc75ed7fa0b209b3bc3d62fd4f239e93f224e93c4f32720d03612399206d",
+      "new": "bde2891311415390cba4fab71357385d96943e9a426028abd2e904d4a302eb8a"
+    },
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier.class": {
+      "old": "0975bdffd08b88a1b7cfe7aede4d5d6f4fb057773494093c0b04ade1d623a834",
+      "new": "ef0969f5ad29d40aa6c0b778f358508322e1d7fa2ee51a10813aa63d02673b4f"
+    },
+    "dev/codex/schubert/nk/migration/AssetStagingTables$SqlMutation.class": {
+      "old": null,
+      "new": "3fbee73b2238af233b03995b2e64be54f3b78ca20647f32b1b195a1debd5d62d"
+    },
+    "dev/codex/schubert/nk/migration/AssetStagingTables$SqlQuery.class": {
+      "old": null,
+      "new": "16b9b773fd4369e1bad9ebc4085d035a721c0ead7e947ba0d989718b56d28d3f"
+    },
+    "dev/codex/schubert/nk/migration/AssetStagingTables$Table.class": {
+      "old": "4d8172e42644b6a0913f92972aae692a5b7d98b17275942c3f8105500032657d",
+      "new": "0527198a6481a851dc82a6365311e77a3f86ac867c0965c7ff3d16ca66600f45"
+    },
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$SqlQuery.class": {
+      "old": null,
+      "new": "e24a25588c4be1ceac27cad50e00ae3ced1437e2ab93c714a45a7613edcbaf4e"
+    },
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlMutation.class": {
+      "old": null,
+      "new": "280a68a08f5952d5c50362be5985e253924c9ad7b78de412a5cb5bc6fdc3ebca"
+    },
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlPrepare.class": {
+      "old": null,
+      "new": "0f44866ce87b336d058eda313478e0f572137b08f41b79331e399b2489702745"
+    },
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlQuery.class": {
+      "old": null,
+      "new": "9fe3ff53f7f37497b479dab8cc40c617b262222b12052c9eb3ed06d002b94728"
+    },
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$SqlQuery.class": {
+      "old": null,
+      "new": "5ba9211f59b868c8289a4e9add576491ec1dfb436d7be5423bb4bb75efc91576"
+    }
+  },
+  "currentTestPhysical": {
+    "dev/codex/schubert/nk/migration/AssetStagingTablesTest$Fixture.class": "fddfe1431424f8709016c5185e98ed128d526c87490ebc4c2a1ca6ce6cbdcfcc",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifierTest$Shape.class": "834b0b7772f2b1bc5d1a3bc26c4d8b196867659d97acbcf8e5a1ae413058eec2",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifierTest.class": "5e0b30b29ad9150ea40d01e1d0d3407e396ce512041f6e60ecd132bfbb5fcbc8",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizerTest$Shape.class": "18b34389a21068669736cbc0cee8e0e702dd93207c1f0a0d9a89cd605cfdb7ee",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizerTest$Fixture.class": "14894b0e6f68acb9929b8566809c72078ef8cad33a84797cb2ef90f6463f1963",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifierTest$Fixture.class": "219723de50be92627811589a7983c26d4e7b3e04263e2ded2e79e6a780664eae",
+    "dev/codex/schubert/nk/migration/AssetStagingTablesTest.class": "ffbb91a6a182f6d5e5725eaaa503bbf97115cd3c7fbd8a34bbb2e6d479c136d2",
+    "dev/codex/schubert/nk/migration/AssetStagingTablesTest$Fault.class": "0371c07c5955611dac075992b4c742469827bbbce6ce9e016b6fed0664570b72",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifierTest.class": "d9ec5977825cc76d92681cfc3aa30d5dabbadd7933571b5412103dee5c46571c",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizerTest.class": "af6cb7bdf7a1dba5f7ad4df057c2dadd1ccd72d05aa7909ea8bc176a17c0419b",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifierTest$EqualFailure.class": "43456bc5a0c63e0891869b77bbd7da4fa28421f6499b9e79d733484f491e850b",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifierTest$Fixture.class": "047f7eee51ffe32bb664fa6ab6ef328d514c7bb1e4d8c219cfef9847c80c5828"
+  },
+  "currentInputs": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/inputs/AssetStagingTablesTest.java",
+      "sha256": "cc2b21061e2903f17813d7029cf7a3de4e54b4ee59affcc1f4c9d5570d05ccfc"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/inputs/MigrationMasterContentVerifierTest.java",
+      "sha256": "c7225b0c8577010de8f4971b53e2a056d98580665497219f728d56b8effd7801"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/inputs/MigrationMasterFinalizerTest.java",
+      "sha256": "7d90a8ae01561fae108e42f219c1f748be533d64d92327204f2415d02fec2e48"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/inputs/MigrationMasterReferenceVerifierTest.java",
+      "sha256": "e354a7120c40a3dd106b97293c106ca325b40ce30dc496c4fa6d5ff3c3defdec"
+    }
+  ],
+  "sdk": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7"
+  },
+  "compile": {
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+      "--release",
+      "25",
+      "-g",
+      "-proc:none",
+      "-implicit:none",
+      "-encoding",
+      "UTF-8",
+      "-Xlint:all",
+      "-Werror",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/test:/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/main:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+      "-d",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/test",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/inputs/AssetStagingTablesTest.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/inputs/MigrationMasterContentVerifierTest.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/inputs/MigrationMasterFinalizerTest.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/inputs/MigrationMasterReferenceVerifierTest.java"
+    ],
+    "actualExit": 0,
+    "startedAtUTC": "2026-11-22T16:57:18.710408+00:00",
+    "terminalAtUTC": "2026-11-22T16:57:20.187320+00:00",
+    "stdout": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/compile.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/compile.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "typed": {
+    "spotbugs": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Xmx1g",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/com/github/spotbugs/spotbugs/4.10.4/spotbugs-4.10.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-analysis/9.10.1/asm-analysis-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-util/9.10.1/asm-util-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/bcel/bcel/6.12.0/bcel-6.12.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/github/stephenc/jcip/jcip-annotations/1.0-1/jcip-annotations-1.0-1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/dom4j/dom4j/2.2.0/dom4j-2.2.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/commons/commons-lang3/3.20.0/commons-lang3-3.20.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/commons/commons-text/1.15.0/commons-text-1.15.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/github/spotbugs/spotbugs-annotations/4.10.4/spotbugs-annotations-4.10.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/jaxen/jaxen/2.0.6/jaxen-2.0.6.jar:/home/mini/codex/project1/work/toolchain/m2/repository/net/sf/saxon/Saxon-HE/12.10/Saxon-HE-12.10.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/logging/log4j/log4j-api/2.26.1/log4j-api-2.26.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.26.1/log4j-to-slf4j-2.26.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-simple/2.0.18/slf4j-simple-2.0.18.jar:/home/mini/codex/project1/work/toolchain/m2/repository/commons-io/commons-io/2.22.0/commons-io-2.22.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/xmlresolver/xmlresolver/5.3.3/xmlresolver-5.3.3.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/xmlresolver/xmlresolver/5.3.3/xmlresolver-5.3.3-data.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+        "edu.umd.cs.findbugs.FindBugs2",
+        "-effort:max",
+        "-low",
+        "-xml:withMessages",
+        "-exitcode",
+        "-auxclasspath",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/test:/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/main:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+        "-output",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/spotbugs.xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/test/dev/codex/schubert/nk/migration/AssetStagingTablesTest$Fault.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/test/dev/codex/schubert/nk/migration/AssetStagingTablesTest$Fixture.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/test/dev/codex/schubert/nk/migration/AssetStagingTablesTest.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/test/dev/codex/schubert/nk/migration/MigrationMasterContentVerifierTest$EqualFailure.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/test/dev/codex/schubert/nk/migration/MigrationMasterContentVerifierTest$Fixture.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/test/dev/codex/schubert/nk/migration/MigrationMasterContentVerifierTest.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/test/dev/codex/schubert/nk/migration/MigrationMasterFinalizerTest$Fixture.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/test/dev/codex/schubert/nk/migration/MigrationMasterFinalizerTest$Shape.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/test/dev/codex/schubert/nk/migration/MigrationMasterFinalizerTest.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/test/dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifierTest$Fixture.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/test/dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifierTest$Shape.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/test/dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifierTest.class"
+      ],
+      "actualExit": 1,
+      "startedAtUTC": "2026-11-22T16:57:20.199161+00:00",
+      "terminalAtUTC": "2026-11-22T16:57:28.144620+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/spotbugs.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/spotbugs.stderr",
+        "sha256": "83febadc46f214e89709b832aae077e8a743258c2778ad97727d55ed33462071"
+      }
+    },
+    "pmd": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/record-fix-v1/pmd-record-1298.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/Saxon-HE-12.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/antlr4-runtime-4.13.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/apex-ls_2.13-6.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/apex-parser-5.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/better-files_2.13-3.9.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/checker-qual-3.55.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/common2_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/common_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/commons-lang3-3.20.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/directory-watcher-0.18.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/directory-watcher-better-files_2.13-0.18.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/error_prone_annotations-2.48.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/failureaccess-1.0.3.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/geny_2.13-0.6.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/groovy-5.1.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/gson-2.14.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/gson-extras-3.3.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/guava-33.7.1-jre.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/io_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/j2objc-annotations-3.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/java-diff-utils-4.16.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jline-native-3.29.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jline-terminal-3.29.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jna-5.12.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jsoup-1.23.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jsr250-api-1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jul-to-slf4j-1.7.36.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-build-tools-api-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-compiler-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-daemon-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-script-runtime-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-common-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-compiler-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-compiler-impl-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-jvm-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-stdlib-2.2.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-stdlib-jdk7-2.2.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-stdlib-jdk8-2.2.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-type-mapper-analyzer-0.7.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-type-mapper-model-0.7.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlinx-coroutines-core-jvm-1.8.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlinx-serialization-core-jvm-1.11.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlinx-serialization-json-jvm-1.11.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/mainargs_2.13-0.5.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/nice-xml-messages-3.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/outline-parser_2.13-2.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/parsers_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pcollections-4.0.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/picocli-4.7.7.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-ant-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-apex-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-cli-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-coco-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-core-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-cpp-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-cs-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-css-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-dart-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-designer-7.19.3.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-fortran-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-gherkin-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-go-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-groovy-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-html-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-java-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-javascript-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-jsp-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-julia-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-kotlin-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-lua-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-matlab-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-modelica-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-objectivec-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-perl-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-php-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-plsql-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-python-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-ruby-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-rust-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-scala_2.13-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-swift-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-tsql-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-velocity-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-visualforce-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-xml-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/portable-scala-reflect_2.13-1.1.3.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/progressbar-0.10.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/rhino-1.7.15.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-collection-compat_2.13-2.8.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-json-rpc-upickle-json-serializer_2.13-1.1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-json-rpc_2.13-1.1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-library-2.13.18.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-parallel-collections_2.13-1.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-reflect-2.13.18.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-xml_2.13-1.3.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scalajs-stubs_2.13-1.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/slf4j-api-1.7.36.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/slf4j-simple-1.7.36.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/sobject-types-67.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/sourcecode_2.13-0.4.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/standard-types-67.0.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/summit-ast-3.1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/trees2_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/trees_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/ujson_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upack_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upickle-core_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upickle-implicits_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upickle_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/vf-parser-2.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/xmlresolver-5.3.3-data.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/xmlresolver-5.3.3.jar",
+        "net.sourceforge.pmd.cli.PmdCli",
+        "check",
+        "--file-list",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/sources.txt",
+        "--rulesets",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/pmd.xml",
+        "--use-version",
+        "java-25",
+        "--minimum-priority",
+        "5",
+        "--aux-classpath",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/test:/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/main:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+        "--no-cache",
+        "--format",
+        "xml",
+        "--report-file",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/pmd.xml"
+      ],
+      "actualExit": 4,
+      "startedAtUTC": "2026-11-22T16:57:20.199319+00:00",
+      "terminalAtUTC": "2026-11-22T16:57:25.502687+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/pmd.stdout",
+        "sha256": "a347393bbf52ae6e0dd6a1ae57027390214953c6cd7116b20c954ba4dfa40e08"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/pmd.stderr",
+        "sha256": "45ddc6d5253900f39797822eb42477dcc91d8aa3551f20e231ec75afff6193b7"
+      }
+    },
+    "checkstyle": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "-o",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/checkstyle.xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/inputs/AssetStagingTablesTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/inputs/MigrationMasterContentVerifierTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/inputs/MigrationMasterFinalizerTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/inputs/MigrationMasterReferenceVerifierTest.java"
+      ],
+      "actualExit": 0,
+      "startedAtUTC": "2026-11-22T16:57:20.199661+00:00",
+      "terminalAtUTC": "2026-11-22T16:57:22.506823+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/checkstyle.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/checkstyle.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "spotbugs": [
+    {
+      "rule": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "method": "content007AcquisitionTimeoutAndFetchFailuresPreserveOriginal",
+      "owner": "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest",
+      "lines": [
+        "158"
+      ]
+    },
+    {
+      "rule": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "method": "content018EachQueryFailsWithoutAcquiringItsResult",
+      "owner": "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest",
+      "lines": [
+        "300"
+      ]
+    },
+    {
+      "rule": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "method": "content019EveryGetterWasNullAndNextOccurrenceKeepsResourcePostconditions",
+      "owner": "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest",
+      "lines": [
+        "307"
+      ]
+    },
+    {
+      "rule": "THROWS_METHOD_THROWS_CLAUSE_THROWABLE",
+      "method": "hit",
+      "owner": "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest$Fixture",
+      "lines": [
+        "840"
+      ]
+    },
+    {
+      "rule": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "method": "normal",
+      "owner": "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest",
+      "lines": [
+        "716"
+      ]
+    },
+    {
+      "rule": "THROWS_METHOD_THROWS_CLAUSE_THROWABLE",
+      "method": "hit",
+      "owner": "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest$Fixture",
+      "lines": [
+        "548"
+      ]
+    },
+    {
+      "rule": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "method": "normal",
+      "owner": "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest",
+      "lines": [
+        "596"
+      ]
+    },
+    {
+      "rule": "THROWS_METHOD_THROWS_CLAUSE_THROWABLE",
+      "method": "hit",
+      "owner": "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest$Fixture",
+      "lines": [
+        "499"
+      ]
+    }
+  ],
+  "pmdRaw": [
+    {
+      "file": "AssetStagingTablesTest.java",
+      "rule": "CloseResource",
+      "at": "422"
+    },
+    {
+      "file": "AssetStagingTablesTest.java",
+      "rule": "CloseResource",
+      "at": "478"
+    },
+    {
+      "file": "AssetStagingTablesTest.java",
+      "rule": "DoNotUseThreads",
+      "at": "478"
+    },
+    {
+      "file": "AssetStagingTablesTest.java",
+      "rule": "DoNotUseThreads",
+      "at": "483"
+    },
+    {
+      "file": "AssetStagingTablesTest.java",
+      "rule": "DoNotUseThreads",
+      "at": "493"
+    },
+    {
+      "file": "AssetStagingTablesTest.java",
+      "rule": "DoNotUseThreads",
+      "at": "494"
+    },
+    {
+      "file": "AssetStagingTablesTest.java",
+      "rule": "UseConcurrentHashMap",
+      "at": "552"
+    },
+    {
+      "file": "AssetStagingTablesTest.java",
+      "rule": "UseConcurrentHashMap",
+      "at": "565"
+    },
+    {
+      "file": "AssetStagingTablesTest.java",
+      "rule": "UseProperClassLoader",
+      "at": "724"
+    },
+    {
+      "file": "MigrationMasterContentVerifierTest.java",
+      "rule": "CloseResource",
+      "at": "446"
+    },
+    {
+      "file": "MigrationMasterContentVerifierTest.java",
+      "rule": "DoNotUseThreads",
+      "at": "446"
+    },
+    {
+      "file": "MigrationMasterContentVerifierTest.java",
+      "rule": "DoNotUseThreads",
+      "at": "451"
+    },
+    {
+      "file": "MigrationMasterContentVerifierTest.java",
+      "rule": "DoNotUseThreads",
+      "at": "462"
+    },
+    {
+      "file": "MigrationMasterContentVerifierTest.java",
+      "rule": "DoNotUseThreads",
+      "at": "463"
+    },
+    {
+      "file": "MigrationMasterContentVerifierTest.java",
+      "rule": "UseProperClassLoader",
+      "at": "848"
+    },
+    {
+      "file": "MigrationMasterContentVerifierTest.java",
+      "rule": "UseProperClassLoader",
+      "at": "872"
+    },
+    {
+      "file": "MigrationMasterContentVerifierTest.java",
+      "rule": "UseProperClassLoader",
+      "at": "912"
+    },
+    {
+      "file": "MigrationMasterFinalizerTest.java",
+      "rule": "CloseResource",
+      "at": "122"
+    },
+    {
+      "file": "MigrationMasterFinalizerTest.java",
+      "rule": "CloseResource",
+      "at": "377"
+    },
+    {
+      "file": "MigrationMasterFinalizerTest.java",
+      "rule": "DoNotUseThreads",
+      "at": "377"
+    },
+    {
+      "file": "MigrationMasterFinalizerTest.java",
+      "rule": "DoNotUseThreads",
+      "at": "382"
+    },
+    {
+      "file": "MigrationMasterFinalizerTest.java",
+      "rule": "DoNotUseThreads",
+      "at": "393"
+    },
+    {
+      "file": "MigrationMasterFinalizerTest.java",
+      "rule": "DoNotUseThreads",
+      "at": "394"
+    },
+    {
+      "file": "MigrationMasterFinalizerTest.java",
+      "rule": "CompareObjectsWithEquals",
+      "at": "433"
+    },
+    {
+      "file": "MigrationMasterFinalizerTest.java",
+      "rule": "CompareObjectsWithEquals",
+      "at": "434"
+    },
+    {
+      "file": "MigrationMasterFinalizerTest.java",
+      "rule": "UseProperClassLoader",
+      "at": "557"
+    },
+    {
+      "file": "MigrationMasterFinalizerTest.java",
+      "rule": "UseProperClassLoader",
+      "at": "586"
+    },
+    {
+      "file": "MigrationMasterFinalizerTest.java",
+      "rule": "UseProperClassLoader",
+      "at": "641"
+    },
+    {
+      "file": "MigrationMasterFinalizerTest.java",
+      "rule": "UseProperClassLoader",
+      "at": "680"
+    },
+    {
+      "file": "MigrationMasterReferenceVerifierTest.java",
+      "rule": "CloseResource",
+      "at": "108"
+    },
+    {
+      "file": "MigrationMasterReferenceVerifierTest.java",
+      "rule": "CloseResource",
+      "at": "346"
+    },
+    {
+      "file": "MigrationMasterReferenceVerifierTest.java",
+      "rule": "DoNotUseThreads",
+      "at": "346"
+    },
+    {
+      "file": "MigrationMasterReferenceVerifierTest.java",
+      "rule": "DoNotUseThreads",
+      "at": "351"
+    },
+    {
+      "file": "MigrationMasterReferenceVerifierTest.java",
+      "rule": "DoNotUseThreads",
+      "at": "360"
+    },
+    {
+      "file": "MigrationMasterReferenceVerifierTest.java",
+      "rule": "DoNotUseThreads",
+      "at": "361"
+    },
+    {
+      "file": "MigrationMasterReferenceVerifierTest.java",
+      "rule": "UseProperClassLoader",
+      "at": "508"
+    },
+    {
+      "file": "MigrationMasterReferenceVerifierTest.java",
+      "rule": "UseProperClassLoader",
+      "at": "530"
+    },
+    {
+      "file": "MigrationMasterReferenceVerifierTest.java",
+      "rule": "UseProperClassLoader",
+      "at": "562"
+    }
+  ],
+  "checkstyle": 0,
+  "spotbugsErrors": 0,
+  "typedReports": {
+    "spotbugs": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/spotbugs.xml",
+      "sha256": "38a0b5570ed53903ce49dc1a0d160864b8c7e7732e5b3c42d6d2cbbc902fea62"
+    },
+    "checkstyle": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/checkstyle.xml",
+      "sha256": "0e7ab7e48aee9fa6df4e17e169249da3dea938d2ec22bf92406384a6241ad066"
+    },
+    "pmd": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/pmd.xml",
+      "sha256": "68cf619346c3397dcba869a9d4f2b811e03e11288ee4b4002732e48bd3f77712"
+    }
+  },
+  "actualOrdinary": {
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/jacoco.exec,sessionid=PG42850-ordinary,append=false",
+      "-Duser.timezone=Asia/Tokyo",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/test:/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/main:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+      "org.junit.platform.console.ConsoleLauncher",
+      "execute",
+      "--disable-ansi-colors",
+      "--details=summary",
+      "--reports-dir",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/junit",
+      "--select-class",
+      "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest",
+      "--select-class",
+      "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest",
+      "--select-class",
+      "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest",
+      "--select-class",
+      "dev.codex.schubert.nk.migration.AssetStagingTablesTest"
+    ],
+    "actualExit": 0,
+    "startedAtUTC": "2026-11-22T16:57:28.160517+00:00",
+    "terminalAtUTC": "2026-11-22T16:57:30.108540+00:00",
+    "stdout": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/junit.stdout",
+      "sha256": "1bccda6891462c12d5cc97a628051b6af6a54e64a195fdae60c0e15d4e402bcf"
+    },
+    "stderr": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/junit.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "xml": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/junit/TEST-junit-jupiter.xml",
+      "sha256": "401b04febb9765ccc47f5d2d4cef77f3f8efe39a7953b8065be645cdd3b5d7cc"
+    },
+    "cases": {
+      "tests": 114,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "exactNames": true
+  },
+  "coverage": {
+    "xml": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/coverage.xml",
+      "sha256": "7d422fffd36d28888c92289498b3c9049886aa7abb87a602b19cae8335aa8935"
+    },
+    "exec": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/jacoco.exec",
+      "sha256": "b27f912a3831cd9e368ff84ea630ffe4600c7e6696b8776ae2a6700bc7d91c2a"
+    },
+    "classinfo": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "classinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/main/dev/codex/schubert/nk/migration/AssetStagingTables$SqlMutation.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/main/dev/codex/schubert/nk/migration/AssetStagingTables$SqlQuery.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/main/dev/codex/schubert/nk/migration/AssetStagingTables$Table.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/main/dev/codex/schubert/nk/migration/AssetStagingTables.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/main/dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$SqlQuery.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/main/dev/codex/schubert/nk/migration/MigrationMasterContentVerifier.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/main/dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlMutation.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/main/dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlPrepare.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/main/dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlQuery.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/main/dev/codex/schubert/nk/migration/MigrationMasterFinalizer.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/main/dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$SqlQuery.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/main/dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier.class"
+      ],
+      "actualExit": 0,
+      "startedAtUTC": "2026-11-22T16:57:30.273162+00:00",
+      "terminalAtUTC": "2026-11-22T16:57:30.406181+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/classinfo.stdout",
+        "sha256": "6a8f260a767575809ba1d6f1ae50da5301c9af5b8eba335f197e9379b054f3cb"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/classinfo.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "execinfo": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "execinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/jacoco.exec"
+      ],
+      "actualExit": 0,
+      "startedAtUTC": "2026-11-22T16:57:30.406305+00:00",
+      "terminalAtUTC": "2026-11-22T16:57:30.520810+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/execinfo.stdout",
+        "sha256": "0b21ccd36a4bc3d4a84d6aa7bd5695c8f9a39de3d7846530c64038872bead2b3"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/execinfo.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "report": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/jacoco.exec",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/main/dev/codex/schubert/nk/migration/AssetStagingTables$SqlMutation.class",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/main/dev/codex/schubert/nk/migration/AssetStagingTables$SqlQuery.class",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/main/dev/codex/schubert/nk/migration/AssetStagingTables$Table.class",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/main/dev/codex/schubert/nk/migration/AssetStagingTables.class",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/main/dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$SqlQuery.class",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/main/dev/codex/schubert/nk/migration/MigrationMasterContentVerifier.class",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/main/dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlMutation.class",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/main/dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlPrepare.class",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/main/dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlQuery.class",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/main/dev/codex/schubert/nk/migration/MigrationMasterFinalizer.class",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/main/dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$SqlQuery.class",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/main/dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier.class",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/coverage.xml"
+      ],
+      "actualExit": 0,
+      "startedAtUTC": "2026-11-22T16:57:30.109582+00:00",
+      "terminalAtUTC": "2026-11-22T16:57:30.272951+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/jacoco.stdout",
+        "sha256": "e74ae90b834f5b6ea7f54685e6c82238518ca0d1264c1abd764d90106cf453af"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/jacoco.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "records": {
+      "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlMutation": {},
+      "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$SqlQuery": {},
+      "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$SqlQuery": {},
+      "dev/codex/schubert/nk/migration/AssetStagingTables": {
+        "INSTRUCTION": {
+          "covered": 349,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 50,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 78,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 49,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 24,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "dev/codex/schubert/nk/migration/AssetStagingTables$SqlMutation": {},
+      "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier": {
+        "INSTRUCTION": {
+          "covered": 381,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 48,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 94,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 47,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 23,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlQuery": {},
+      "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlPrepare": {},
+      "dev/codex/schubert/nk/migration/MigrationMasterFinalizer": {
+        "INSTRUCTION": {
+          "covered": 412,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 48,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 104,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 54,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 30,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "dev/codex/schubert/nk/migration/AssetStagingTables$SqlQuery": {},
+      "dev/codex/schubert/nk/migration/AssetStagingTables$Table": {
+        "INSTRUCTION": {
+          "covered": 15,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 6,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 1,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 1,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier": {
+        "INSTRUCTION": {
+          "covered": 415,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 30,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 88,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 54,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 39,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        }
+      }
+    },
+    "coverageIncludedProductTypes": [
+      "dev/codex/schubert/nk/migration/AssetStagingTables$SqlMutation.class",
+      "dev/codex/schubert/nk/migration/AssetStagingTables$SqlQuery.class",
+      "dev/codex/schubert/nk/migration/AssetStagingTables$Table.class",
+      "dev/codex/schubert/nk/migration/AssetStagingTables.class",
+      "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$SqlQuery.class",
+      "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier.class",
+      "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlMutation.class",
+      "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlPrepare.class",
+      "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlQuery.class",
+      "dev/codex/schubert/nk/migration/MigrationMasterFinalizer.class",
+      "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$SqlQuery.class",
+      "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier.class"
+    ],
+    "rawJoinCount": 1
+  },
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "priorPartial": {
+    "path": "../pgpt-runs/PG379/PG42846-four-migration-sql-current-v1/terminal.json",
+    "sha256": "90a82fab6952b4e07e7b4a481beefb76c20aea52cf5b753d1efa44238674b768"
+  },
+  "terminal": {
+    "path": "../pgpt-runs/PG379/PG42850-four-migration-sql-complete-scoped-v1/terminal.json",
+    "sha256": "9ae3e4c4f7b31c58b8208d59af81c044afcf779be2865172ee3f235ea0e90f0d"
+  },
+  "compileProof": {
+    "path": "../pgpt-runs/PG379/PG42848-migration-residual-checked-v1/terminal.json",
+    "sha256": "acee837b105e794e6be99ac6b7dc5f851a4fd04f41fffb751d1b74a97df6704a"
+  },
+  "allMeasuredFour100": true,
+  "aggregate": {
+    "INSTRUCTION": {
+      "covered": 1572,
+      "missed": 0
+    },
+    "BRANCH": {
+      "covered": 176,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 370,
+      "missed": 0
+    },
+    "COMPLEXITY": {
+      "covered": 205,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 117,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 5,
+      "missed": 0
+    }
+  },
+  "oldThreeMissesFullyObserved": [
+    {
+      "source": "AssetStagingTables.java",
+      "line": 169,
+      "lineCounters": {
+        "nr": "169",
+        "mi": "0",
+        "ci": "6",
+        "mb": "0",
+        "cb": "2"
+      }
+    },
+    {
+      "source": "AssetStagingTables.java",
+      "line": 183,
+      "lineCounters": {
+        "nr": "183",
+        "mi": "0",
+        "ci": "6",
+        "mb": "0",
+        "cb": "2"
+      }
+    },
+    {
+      "source": "MigrationMasterReferenceVerifier.java",
+      "line": 160,
+      "lineCounters": {
+        "nr": "160",
+        "mi": "0",
+        "ci": "6",
+        "mb": "0",
+        "cb": "2"
+      }
+    }
+  ],
+  "physicalClassCrc": {
+    "dev/codex/schubert/nk/migration/AssetStagingTables$SqlMutation": "bf7e10314a283a8b",
+    "dev/codex/schubert/nk/migration/AssetStagingTables$SqlQuery": "68dc45b1c893fb54",
+    "dev/codex/schubert/nk/migration/AssetStagingTables$Table": "00c80f74bcca6fb1",
+    "dev/codex/schubert/nk/migration/AssetStagingTables": "33b9ec86c622912d",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$SqlQuery": "d92cdb87dbae5088",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier": "ba93534af106a9a9",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlMutation": "5f5e1b7f780c0f0d",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlPrepare": "9292a1eab49b9590",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlQuery": "8646ca56764dc6bd",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer": "8b7d5dadddf8189a",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$SqlQuery": "dc9cfb2c2c9dbd2d",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier": "fe2fbbeb7447ede3"
+  },
+  "classExecutionProbes": {
+    "dev/codex/schubert/nk/migration/AssetStagingTables": {
+      "crc": "33b9ec86c622912d",
+      "hits": 85,
+      "probes": 85
+    },
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier": {
+      "crc": "fe2fbbeb7447ede3",
+      "hits": 88,
+      "probes": 88
+    },
+    "dev/codex/schubert/nk/migration/AssetStagingTables$Table": {
+      "crc": "00c80f74bcca6fb1",
+      "hits": 1,
+      "probes": 1
+    },
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier": {
+      "crc": "ba93534af106a9a9",
+      "hits": 104,
+      "probes": 104
+    },
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer": {
+      "crc": "8b7d5dadddf8189a",
+      "hits": 111,
+      "probes": 111
+    }
+  },
+  "naturalNoCodeTypes": [
+    "dev/codex/schubert/nk/migration/AssetStagingTables$SqlMutation",
+    "dev/codex/schubert/nk/migration/AssetStagingTables$SqlQuery",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$SqlQuery",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlMutation",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlPrepare",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlQuery",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$SqlQuery"
+  ],
+  "publishedCoverage": [
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG42850-four-migration-sql-complete-scoped-v1/coverage/classinfo.txt",
+      "sha256": "6a8f260a767575809ba1d6f1ae50da5301c9af5b8eba335f197e9379b054f3cb"
+    },
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG42850-four-migration-sql-complete-scoped-v1/coverage/coverage.xml",
+      "sha256": "7d422fffd36d28888c92289498b3c9049886aa7abb87a602b19cae8335aa8935"
+    },
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG42850-four-migration-sql-complete-scoped-v1/coverage/jacoco.exec",
+      "sha256": "b27f912a3831cd9e368ff84ea630ffe4600c7e6696b8776ae2a6700bc7d91c2a"
+    }
+  ],
+  "publishedJUnit": {
+    "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG42850-four-migration-sql-complete-scoped-v1/junit/TEST-junit-jupiter.xml",
+    "sha256": "86f30e79fc2ed8bae32961c59275e03c2b7ea20d3e9c42ae592166575482a873",
+    "originalUnitXmlSha256": "401b04febb9765ccc47f5d2d4cef77f3f8efe39a7953b8065be645cdd3b5d7cc"
+  },
+  "testIdsAdded": [
+    "PT-MIG-ASSETSTAGE031",
+    "PT-MIG-REF022"
+  ],
+  "documentedPriorCandidateIDs": {
+    "PT-MIG-ASSETSTAGE033": "PT-MIG-ASSETSTAGE031",
+    "PT-MIG-REFERENCE022": "PT-MIG-REF022"
+  },
+  "bugClosed": "BUG-3633",
+  "bugOpen": "BUG-3631",
+  "horizontal": "YKT-2854"
+}
