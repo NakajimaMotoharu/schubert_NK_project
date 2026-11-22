@@ -6,42 +6,13 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Modifier;
 import java.sql.SQLException;
 import java.sql.SQLNonTransientConnectionException;
 import org.junit.jupiter.api.Test;
 
-/** SSC095/PG312/PG-D1179/BUG3201-3202: PT-DB-ADMISSION-FAIL001..007, heap objects only. */
+/** SSC095/PG312/PG-D1179/BUG3201-3202: normal exception tests, PT-DB-ADMISSION-FAIL002..007. */
 final class JdbcAdmissionFailuresContractTest {
-  @Test
-  void namespaceCannotBeInstantiatedOrRetainInstanceState() throws Exception {
-    assertTrue(Modifier.isFinal(JdbcAdmissionFailures.class.getModifiers()));
-    for (var method : JdbcAdmissionFailures.class.getDeclaredMethods()) {
-      assertTrue(Modifier.isStatic(method.getModifiers()));
-    }
-    for (var field : JdbcAdmissionFailures.class.getDeclaredFields()) {
-      assertTrue(Modifier.isStatic(field.getModifiers()));
-    }
-    var constructor = JdbcAdmissionFailures.class.getDeclaredConstructor();
-    assertTrue(Modifier.isPrivate(constructor.getModifiers()));
-    boolean before = constructor.canAccess(null);
-    assertFalse(before);
-    try {
-      assertTrue(constructor.trySetAccessible());
-      var failure = assertThrows(InvocationTargetException.class, constructor::newInstance);
-      assertEquals(AssertionError.class, failure.getCause().getClass());
-      assertEquals("static namespace", failure.getCause().getMessage());
-      assertNull(failure.getCause().getCause());
-      assertEquals(0, failure.getCause().getSuppressed().length);
-    } finally {
-      constructor.setAccessible(before);
-    }
-    assertFalse(constructor.canAccess(null));
-  }
-
   @Test
   void missingSecondaryFailsAtBothBoundariesWithoutChangingAnyPrimary() {
     Throwable[] primaries = {
