@@ -1,4 +1,4 @@
-"""Fixed Maven input and scanner response fixtures for PT-OPS-OSV-001..009."""
+"""Fixed Maven input and scanner response fixtures for PT-OPS-OSV-001..010."""
 
 import json
 import subprocess
@@ -31,7 +31,10 @@ class VerifyMavenAdvisoriesTest(unittest.TestCase):
             path.write_bytes(b"abc")
         self.document = {
             "bomFormat": "CycloneDX", "specVersion": "1.6",
-            "metadata": {"component": {"bom-ref": ROOT}},
+            "metadata": {"component": {
+                "group": "local.example", "name": "nk", "version": "1",
+                "bom-ref": ROOT, "purl": ROOT,
+            }},
             "components": [{
                 "group": "org.example", "name": "model", "version": "2.0",
                 "purl": DEPENDENCY, "bom-ref": DEPENDENCY,
@@ -158,6 +161,14 @@ class VerifyMavenAdvisoriesTest(unittest.TestCase):
         self.document["dependencies"] = [{"ref": ROOT, "dependsOn": []}]
         self.bom.write_text(json.dumps(self.document), encoding="utf-8")
         with self.assertRaisesRegex(ValueError, "no Maven JARs"):
+            self.scan()
+        run.assert_not_called()
+
+    @patch("verify_maven_advisories.subprocess.run")
+    def test_010_inconsistent_root_stops_before_the_scanner(self, run):
+        self.document["metadata"]["component"]["name"] = "different-artifact"
+        self.bom.write_text(json.dumps(self.document), encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "does not match the Maven JAR"):
             self.scan()
         run.assert_not_called()
 

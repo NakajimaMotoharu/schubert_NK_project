@@ -1,4 +1,4 @@
-"""Independent three-byte artifact fixtures for PT-OPS-SBOM-014..020."""
+"""Independent three-byte artifact fixtures for PT-OPS-SBOM-014..020 and 025."""
 
 import copy
 import json
@@ -32,7 +32,10 @@ class VerifyMavenSbomTest(unittest.TestCase):
         return {
             "bomFormat": "CycloneDX",
             "specVersion": "1.6",
-            "metadata": {"component": {"bom-ref": ROOT}},
+            "metadata": {"component": {
+                "group": "local.example", "name": "nk", "version": "1",
+                "bom-ref": ROOT, "purl": ROOT,
+            }},
             "components": [{
                 "group": "org.example",
                 "name": "model",
@@ -54,6 +57,24 @@ class VerifyMavenSbomTest(unittest.TestCase):
              "missingLicenseMetadata": []},
             verify_model_bom(self.fixture(), self.repository),
         )
+
+    def test_sbom025_root_coordinates_and_reference_must_agree(self):
+        for fields, diagnostic in (
+            ({"group": None}, "invalid Maven coordinates"),
+            ({"name": "other"}, "does not match"),
+            ({"version": "2"}, "does not match"),
+            ({"purl": DEPENDENCY}, "does not match"),
+            ({"bom-ref": ROOT.replace("type=jar", "type=pom"),
+              "purl": ROOT.replace("type=jar", "type=pom")}, "does not match"),
+            ({"bom-ref": ROOT + "&type=jar", "purl": ROOT + "&type=jar"}, "duplicate JSON field"),
+        ):
+            with self.subTest(fields=fields):
+                case = self.fixture()
+                root = case["metadata"]["component"]
+                root.update(fields)
+                case["dependencies"][0]["ref"] = root["bom-ref"]
+                with self.assertRaisesRegex(ValueError, diagnostic):
+                    verify_model_bom(case, self.repository)
 
     def test_classifier_hash_is_distinct_from_the_default_artifact(self):
         data = self.fixture()

@@ -21,13 +21,15 @@ def unique_fields(pairs):
     return fields
 
 
-def maven_jar(component, repository):
-    group, name, version = (component[key] for key in ("group", "name", "version"))
+def maven_jar_coordinates(component):
+    group, name, version = (component.get(key) for key in ("group", "name", "version"))
     if not all(
         isinstance(value, str) and PART.fullmatch(value) for value in (group, name, version)
     ) or not all(map(PART.fullmatch, group.split("."))):
         raise ValueError("invalid Maven coordinates")
-    ref = component["bom-ref"]
+    ref = component.get("bom-ref")
+    if not isinstance(ref, str):
+        raise ValueError("BOM reference does not match the Maven JAR")
     expected = f"pkg:maven/{group}/{name}@{version}"
     identifier, separator, query = ref.partition("?")
     qualifiers = parse_qsl(query, strict_parsing=True, keep_blank_values=True)
@@ -35,7 +37,7 @@ def maven_jar(component, repository):
     if (
         not separator
         or identifier != expected
-        or ref != component["purl"]
+        or ref != component.get("purl")
         or set(attributes) - {"type", "classifier"}
         or attributes.get("type") != "jar"
     ):
@@ -43,6 +45,11 @@ def maven_jar(component, repository):
     classifier = attributes.get("classifier")
     if classifier is not None and not PART.fullmatch(classifier):
         raise ValueError("invalid Maven classifier")
+    return group, name, version, classifier
+
+
+def maven_jar(component, repository):
+    group, name, version, classifier = maven_jar_coordinates(component)
     filename = f"{name}-{version}" + (f"-{classifier}" if classifier else "") + ".jar"
     artifact = repository.joinpath(*group.split("."), name, version, filename).resolve(strict=True)
     if not artifact.is_relative_to(repository) or not artifact.is_file():
@@ -91,9 +98,9 @@ def verify_graph(dependencies, known, root):
 def verify_model_bom(document, repository):
     if document["bomFormat"] != "CycloneDX" or document["specVersion"] != "1.6":
         raise ValueError("expected CycloneDX 1.6")
-    root = document["metadata"]["component"]["bom-ref"]
-    if not isinstance(root, str) or not root:
-        raise ValueError("BOM root is required")
+    root_component = document["metadata"]["component"]
+    maven_jar_coordinates(root_component)
+    root = root_component["bom-ref"]
     components = document["components"]
     dependencies = document["dependencies"]
     if not isinstance(components, list) or not isinstance(dependencies, list):
