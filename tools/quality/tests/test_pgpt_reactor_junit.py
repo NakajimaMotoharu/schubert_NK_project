@@ -243,6 +243,34 @@ class ReactorJunitTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "completion precedes start"):
             self.verify()
 
+    def test_junit016_suite_and_testcase_identities_cannot_be_blank(self):
+        for field, suite_field in (("name", True), ("classname", False), ("name", False)):
+            for value in (None, "", " \t\r\n"):
+                with self.subTest(field=field, suite=suite_field, value=value):
+                    report = ET.fromstring(REPORT)
+                    element = report if suite_field else report.find("testcase")
+                    if value is None:
+                        del element.attrib[field]
+                    else:
+                        element.set(field, value)
+                    self.paths[1].write_bytes(ET.tostring(report))
+                    try:
+                        with self.assertRaisesRegex(ValueError, "nonpassing reactor JUnit"):
+                            self.capture()
+                        self.assertFalse(self.marker(".junit.json").exists())
+                    finally:
+                        self.marker(".junit.json").unlink(missing_ok=True)
+
+    def test_junit017_usable_display_name_preserves_original_report_bytes(self):
+        report = ET.fromstring(REPORT)
+        report.find("testcase").set("name", " 有効な表示名 [1] ")
+        original = ET.tostring(report, encoding="utf-8")
+        self.paths[1].write_bytes(original)
+        self.success()
+        recorded = json.loads(self.verify())["reports"][self.paths[1].relative_to(self.repo).as_posix()]
+        self.assertEqual({"tests": 1, "sha256": hashlib.sha256(original).hexdigest()}, recorded)
+        self.assertEqual(original, self.paths[1].read_bytes())
+
     def test_quality_hashes_include_every_declared_report_and_real_class_path(self):
         self.success()
         decoded = json.loads(self.verify())

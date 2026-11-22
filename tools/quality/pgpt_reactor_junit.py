@@ -45,6 +45,7 @@ def _report(content, module_cases):
     cases = suite.findall("testcase")
     if (
         suite.tag != "testsuite"
+        or not (suite.get("name") or "").strip()
         or not cases
         or suite.get("tests") != str(len(cases))
         or any(suite.get(field) != "0" for field in ("failures", "errors", "skipped"))
@@ -53,8 +54,8 @@ def _report(content, module_cases):
             for child in suite
         )
         or any(
-            not case.get("classname")
-            or not case.get("name")
+            not (case.get("classname") or "").strip()
+            or not (case.get("name") or "").strip()
             or any(child.tag not in ("system-out", "system-err") for child in case)
             for case in cases
         )
