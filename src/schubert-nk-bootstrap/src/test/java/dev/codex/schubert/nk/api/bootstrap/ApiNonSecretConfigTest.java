@@ -6,13 +6,18 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.HexFormat;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.junit.jupiter.api.Test;
 
 /** PT-OPS-API-CFG-001..006: SS343 literals independent of production map construction. */
@@ -52,7 +57,7 @@ final class ApiNonSecretConfigTest {
   }
 
   @Test
-  void opsApiCfg007IndependentManifestCountAndCanonicalHash() throws Exception {
+  void opsApiCfg007IndependentManifestCountAndCanonicalHash() throws NoSuchAlgorithmException {
     for (String value : List.of("1", "7", "59627")) {
       var actual =
           ApiNonSecretConfig.parse(
@@ -60,12 +65,7 @@ final class ApiNonSecretConfigTest {
       assertEquals(value, actual.value("nk.api.storage.asset-manifest-entries"));
       var expected =
           GOLDEN.replace("asset-manifest-entries=59627", "asset-manifest-entries=" + value);
-      assertEquals(
-          HexFormat.of()
-              .formatHex(
-                  MessageDigest.getInstance("SHA-256")
-                      .digest(expected.getBytes(StandardCharsets.UTF_8))),
-          actual.canonicalSha256());
+      assertEquals(expectedHash(expected), actual.canonicalSha256());
     }
     for (String value :
         List.of(
@@ -75,24 +75,19 @@ final class ApiNonSecretConfigTest {
   }
 
   @Test
-  void opsApiCfg001IndependentDefaultsAndCanonicalHash() throws Exception {
+  void opsApiCfg001IndependentDefaultsAndCanonicalHash() throws NoSuchAlgorithmException {
     var config = ApiNonSecretConfig.parse("", "");
     for (String line : GOLDEN.split("\n")) {
       int equals = line.indexOf('=');
       assertEquals(line.substring(equals + 1), config.value(line.substring(0, equals)));
     }
-    String independentHash =
-        HexFormat.of()
-            .formatHex(
-                MessageDigest.getInstance("SHA-256")
-                    .digest(GOLDEN.getBytes(StandardCharsets.UTF_8)));
-    assertEquals(independentHash, config.canonicalSha256());
+    assertEquals(expectedHash(GOLDEN), config.canonicalSha256());
     assertEquals("ApiNonSecretConfig[REDACTED]", config.toString());
     assertFalse(config.toString().contains("jdbc:"));
   }
 
   @Test
-  void opsApiCfg002LayeredNonSecretOverridesAndScalarTypes() throws Exception {
+  void opsApiCfg002LayeredNonSecretOverridesAndScalarTypes() {
     var config =
         ApiNonSecretConfig.parse(
             "nk.monitoring.mode: DEBUG\n",
@@ -133,7 +128,9 @@ final class ApiNonSecretConfigTest {
     for (String api :
         List.of(
             "nk.db.url: one\nnk.db.url: two\n",
-            "nk.db.url: jdbc:postgresql://127.0.0.1:5432/schubert_nk\n---\nnk.db.password: private\n",
+            "nk.db.url: jdbc:postgresql://127.0.0.1:5432/schubert_nk\n"
+                + "---\n"
+                + "nk.db.password: private\n",
             "nk.monitoring.mode: DEBUG\n",
             "nk.db.password: private\n",
             "nk.db.url: {nested: bad}\n",
@@ -181,7 +178,8 @@ final class ApiNonSecretConfigTest {
   }
 
   @Test
-  void opsApiCfg005NullUnknownAndConcurrentDeterminism() throws Exception {
+  void opsApiCfg005NullUnknownAndConcurrentDeterminism()
+      throws NoSuchAlgorithmException, InterruptedException, ExecutionException, TimeoutException {
     assertThrows(NullPointerException.class, () -> ApiNonSecretConfig.parse(null, ""));
     assertThrows(NullPointerException.class, () -> ApiNonSecretConfig.parse("", null));
     var config = ApiNonSecretConfig.parse("", "");
@@ -189,35 +187,38 @@ final class ApiNonSecretConfigTest {
     assertEquals(
         INVALID,
         assertThrows(IllegalArgumentException.class, () -> config.value("password")).getMessage());
+    String independentExpected = expectedHash(GOLDEN);
     var executor = Executors.newFixedThreadPool(8);
     try {
       var jobs = new java.util.ArrayList<java.util.concurrent.Future<String>>();
       for (int i = 0; i < 32; i++)
         jobs.add(executor.submit(() -> ApiNonSecretConfig.parse("", "").canonicalSha256()));
-      for (var job : jobs)
-        assertEquals(config.canonicalSha256(), job.get(5, java.util.concurrent.TimeUnit.SECONDS));
+      for (var job : jobs) assertEquals(independentExpected, job.get(5, TimeUnit.SECONDS));
     } finally {
       executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, java.util.concurrent.TimeUnit.SECONDS));
+      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertTrue(config.canonicalSha256().matches("[0-9a-f]{64}"));
   }
 
   @Test
-  void opsApiCfg006ShippedTemplatesMatchApprovedDefaults() throws Exception {
+  void opsApiCfg006ShippedTemplatesMatchApprovedDefaults()
+      throws IOException, NoSuchAlgorithmException {
     Path base = Path.of(System.getProperty("nk.pt.repository")).resolve("src/deployment/config");
     var config =
         ApiNonSecretConfig.parse(
             Files.readString(base.resolve("common.yml.template")),
             Files.readString(base.resolve("api.yml.template")));
-    String independentHash =
-        HexFormat.of()
-            .formatHex(
-                MessageDigest.getInstance("SHA-256")
-                    .digest(GOLDEN.getBytes(StandardCharsets.UTF_8)));
-    assertEquals(independentHash, config.canonicalSha256());
+    assertEquals(expectedHash(GOLDEN), config.canonicalSha256());
     assertEquals(
         "schubert_nk",
         config.value("nk.db.url").substring(config.value("nk.db.url").lastIndexOf('/') + 1));
+  }
+
+  private static String expectedHash(String canonicalFixture) throws NoSuchAlgorithmException {
+    return HexFormat.of()
+        .formatHex(
+            MessageDigest.getInstance("SHA-256")
+                .digest(canonicalFixture.getBytes(StandardCharsets.UTF_8)));
   }
 }
