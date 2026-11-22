@@ -1,0 +1,76 @@
+{
+  "run": "PG42720",
+  "branch": "dev-foundation",
+  "wbs": "WBS-G13.04",
+  "source": "2ba92c970554e19bbe1a6ea8b7e059274353af0a",
+  "javaCore": "f8532c27c2666570fe450f285c5a5436aacd8e7e",
+  "terminalAtUTC": "2026-11-22T14:22:39.795346+00:00",
+  "actualExit": 0,
+  "approvedMainBefore": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+  "canonicalMain": "ca41c03c0c6efff9a3a35b47b480491810bee6f9",
+  "designOnlyCommit": "1d4cf71bc9800ffee44adb833e2ea2121c3f7892",
+  "pullRequest": "https://github.com/NakajimaMotoharu/schubert_NK_project/pull/444",
+  "files": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md",
+      "sha256": "8ed58c47adb5fa90afcd1dfa437edeb9c990635126cadd79c7cbc90bf4988808"
+    },
+    {
+      "path": "documents/900_OTHER/910_台帳/914_詳細設計修正管理台帳.md",
+      "sha256": "fb1c44a1c395e8578097badc6a021d1789dd56ac94c6bc79a5da7874c6c1edd6"
+    }
+  ],
+  "designSectionMatchesLocal": true,
+  "earlier31RouteReference": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42546-g1304-api-31-method-level-source-bindings-v1/manifest.json",
+    "sha256": "84288b932fd33d387042021265009a73f43c23e6059550f11d8a89f1758023b5"
+  },
+  "layoutChanges": 0,
+  "scopeRulesPreserved": true,
+  "transportAndTypedHandoffSource": {
+    "SyncRequestListener.java": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/SyncRequestListener.java",
+      "sha256": "c2915b65b2313f4586a6bcba6f8e7b67d11667f6de40bb6b9d54f369a98a5ece"
+    },
+    "SyncRequestProcessor.java": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/SyncRequestProcessor.java",
+      "sha256": "a662046d796e9c6905d4938a129f5ad9273a2ffaffc140678fac5e802fe4656d"
+    },
+    "ApiSyncRequestDispatcher.java": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiSyncRequestDispatcher.java",
+      "sha256": "761c6990fe0045f4ed681062460ea511ff83f6a6adb3e8eeeaf2d0a95bb68997"
+    },
+    "DeliveryMetadata.java": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/DeliveryMetadata.java",
+      "sha256": "6d87d23892dd6f43a52ce58149943070375a8b2288e5cd9569ec0991e557057f"
+    },
+    "AuthenticatedActor.java": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticatedActor.java",
+      "sha256": "c3e1cada9993b4180e513eb2ba314e55862cf9f1bb5157dd7105e1f8425fe29c"
+    },
+    "TransactedEventListener.java": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/TransactedEventListener.java",
+      "sha256": "0194df119dfda86475466c13a25cc2dc79af63d423b72e2a55101022d5b53177"
+    }
+  },
+  "provenance": {
+    "wire": [
+      "messageId",
+      "correlationId"
+    ],
+    "HTTP requestId": "empty on ordinary MQ",
+    "ordinaryActor": "verified actor only",
+    "LGNREQ01Actor": "anonymous Inbox",
+    "LOGREQ01Actor": "dedicated revocation, no business actor",
+    "receivedAt": "same incoming delivery clock",
+    "deliveryCount": "guarded JMSXDeliveryCount"
+  },
+  "currentGap": "SyncRequestProcessor receives WireMessage only. Guarded delivery count is available at listener. Transaction ownership and 31 typed handlers pending.",
+  "compileHeldTypes": 0,
+  "productionJavaChanged": 0,
+  "productTestsExecuted": 0,
+  "formalAcceptanceId": null,
+  "bug": "BUG-3574",
+  "ykt": "YKT-2810",
+  "ssc": "SSC-477"
+}

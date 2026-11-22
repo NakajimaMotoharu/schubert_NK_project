@@ -1,0 +1,289 @@
+{
+  "run": "PG42718",
+  "source": "2ba92c970554e19bbe1a6ea8b7e059274353af0a",
+  "javaCore": "f8532c27c2666570fe450f285c5a5436aacd8e7e",
+  "wbs": [
+    "WBS-F03/2-2-b",
+    "WBS-P016-16",
+    "WBS-P016-17"
+  ],
+  "branch": "dev-foundation",
+  "terminalAtUTC": "2026-11-22T14:17:02.679463+00:00",
+  "actualExit": 0,
+  "specs": [
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/138_User追加画面資源単体仕様.md",
+      "sha256": "f67870d6685c03c61f80a2d8b713abea94191fa2ff4e24addb918f14dddfe584"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/140_User詳細画面資源単体仕様.md",
+      "sha256": "d2114cd1599cb19163508924da8936581bf8ebd8110dfbc82956269371c3c00f"
+    }
+  ],
+  "caseIdentity": {
+    "initialFormHasApprovedEmptyValuesAndDefaults()": "PT-UCREATE-DOM001",
+    "everyRoleAndEnabledCombinationRetainsExactlyOneSelection()": "PT-UCREATE-DOM002",
+    "emptyUsernameAndOtherIssuesHaveIndependentSummaryAndFieldScope()": "PT-UCREATE-DOM003",
+    "alertFieldAndUsernameEscapeLiteralMarkupWithoutNodes()": "PT-UCREATE-DOM004",
+    "usernameDisplayKeepsExactByteBoundaryWithoutClaimingValidation()": "PT-UCREATE-DOM005",
+    "unmappedPasswordPropertiesAreNeverRedisplayed()": "PT-UCREATE-DOM006",
+    "displayOnlyHiddenFieldPostActionAndStaticNavigationMatchContract()": "PT-UCREATE-DOM007",
+    "ownedConcurrentFormsDoNotShareUsernamesOrSelections()": "PT-UCREATE-DOM008",
+    "missingFormsAndMessageKeepDisplayMetadataWithoutInventedOperations()": "PT-UDETAIL-DOM001",
+    "emptyFormsCreateNoMutationControlsAndRetainStaticNavigation()": "PT-UDETAIL-DOM002",
+    "absentEmptyAndMarkupMessagesHaveExplicitNullAndEscapeBranches()": "PT-UDETAIL-DOM003",
+    "allOperationKindsAndRoleEnabledVariantsKeepSeparateControlShapes()": "PT-UDETAIL-DOM004",
+    "validationAndHiddenIdentityStayScopedToEachSuppliedForm()": "PT-UDETAIL-DOM005",
+    "metadataEscapesMarkupAndEmptyDateValuesRemainEmpty()": "PT-UDETAIL-DOM006",
+    "passwordControlsNeverRetainUnmappedFieldValues()": "PT-UDETAIL-DOM007",
+    "ownedConcurrentDetailPagesKeepTargetNamesAndFormsIsolated()": "PT-UDETAIL-DOM008"
+  },
+  "originalReferences": {
+    "PG20642": {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG20642-user-create-resource-eight-v1/manifest.json",
+      "sha256": "4ee0e376dbfa82f5be06597e90184607ebb00380078c621d46531b2bef38322d"
+    },
+    "PG20662": {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG20662-user-detail-resource-eight-v1/manifest.json",
+      "sha256": "b103a6e39b7e4205befba3691fbb9e060ba929b8585a8ba912661634b6e6fb05"
+    }
+  },
+  "before": {
+    "path": "../pgpt-runs/PG379/PG42716-user-admin-template-before-v1/run.json",
+    "sha256": "9e9e7fd9801fbbf8db31e4db38efd997bd66ba7d400263be418139663582efd8"
+  },
+  "after": {
+    "path": "../pgpt-runs/PG379/PG42718-user-admin-template-current-v1/run.json",
+    "sha256": "a55efab26897bf40ecde647cd5310aa2e6e3f235bf92ed9ed1e135f96f1367b3"
+  },
+  "templates": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/resources/templates/admin/user-new.html",
+      "sha256": "97fd0f78dbfbe4538ca36e5ddda507ed55d762c040d12b09d544fc568b0dbedd"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/resources/templates/admin/user-detail.html",
+      "sha256": "c74fe2ced5c6492369f243bf9930e52e88fef40b18492195a1ac01a9b05f8fba"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/resources/templates/fragments/layout.html",
+      "sha256": "a48bda151f893e28858afb26d1c636a564b8bd0cb3c3a16bc63bbb97f0e414bd"
+    }
+  ],
+  "correctScreenIds": [
+    "SCR016",
+    "SCR017"
+  ],
+  "correctsPriorStartNarrative": "PG42716 was labelled SCR018/019 in 3041; authoritative SCR016/017.",
+  "testsPassed": 16,
+  "failed": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "spotbugsBefore": 4,
+  "spotbugsAfter": 0,
+  "checkstyle": 0,
+  "pmdRaw": [
+    "CloseResource",
+    "DoNotUseThreads",
+    "DoNotUseThreads",
+    "DoNotUseThreads",
+    "DoNotUseThreads",
+    "CloseResource",
+    "DoNotUseThreads",
+    "DoNotUseThreads",
+    "DoNotUseThreads",
+    "DoNotUseThreads"
+  ],
+  "pmdDisposition": "Two explicitly owned executors with finite shutdown, eight worker/thread notices retained for policy review",
+  "originalOutputMatch": 43,
+  "currentRedactedHtmlHashes": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDOM001.html",
+      "sha256": "531b2044d1a7c4c075b10dfd8bea7ce14e962d1d7cfa22355292c37b6cdf1a8a"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDOM002-0.html",
+      "sha256": "ee083ffce8b3532edcf6809a3f5966f0dbb2d80846ac03aaddb61e3516ea57cc"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDOM002-1.html",
+      "sha256": "01702eb1e1a889ba8258b502781a0166ac41646c9a547ef54d2437cc5c92efde"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDOM002-2.html",
+      "sha256": "45fed64493df75aea57ca36b610a12dc23a54f92c67a6bd4335b40d580f8597d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDOM002-3.html",
+      "sha256": "e4fe6fad3a82594bf3241e5683bc751bd7b71b2beb784fd9e1eb62653171deb7"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDOM003-0.html",
+      "sha256": "531b2044d1a7c4c075b10dfd8bea7ce14e962d1d7cfa22355292c37b6cdf1a8a"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDOM003-1.html",
+      "sha256": "9b1f92587cb106efcfc5d6be754f65a352942f6c29ed42475862fbbb23c49912"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDOM003-2.html",
+      "sha256": "d53bf76d2c68b3eaac9c47219645f12a9dadbe894ef9a2f79b0639822c618a7f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDOM004.html",
+      "sha256": "a4537198370370dcaef43ffa3f5675b42561b7ae76f275366c7cbd5c51478674"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDOM005-64.html",
+      "sha256": "3ac3f4529c6b7ba1ecd0a497f1ab2a7914d594745d13c418ab222002c1e5237e"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDOM005-65.html",
+      "sha256": "081786e4672ec18584f405fde7b288d81566068f4d17d8148ad4b4b571222ee8"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDOM006.html",
+      "sha256": "ee083ffce8b3532edcf6809a3f5966f0dbb2d80846ac03aaddb61e3516ea57cc"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDOM007.html",
+      "sha256": "531b2044d1a7c4c075b10dfd8bea7ce14e962d1d7cfa22355292c37b6cdf1a8a"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDOM008-0.html",
+      "sha256": "bcc7ffe37232a12e75cb58d7ac44c669c6e620d161392d3c960d8dc6c11ac353"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDOM008-1.html",
+      "sha256": "b8a23e943eaf33a9c52019e142d4206479e37cd5cc37c8e6b9d73f8889d01f9b"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDOM008-2.html",
+      "sha256": "010942d81f6f8fdf816a9c487fca44c8396e72a70c6cdb80babadbfe732870e7"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDOM008-3.html",
+      "sha256": "86ffd66ad42463e87729de3e11c1a5b8c902069a5e7c01c7a57b85687d554e2e"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDOM008-4.html",
+      "sha256": "18c324ac7f4ac050c20c422486074129e565e3200cae5b3072429a4419afadfa"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDOM008-5.html",
+      "sha256": "d55ffcae6433b80cf08a5b478e22965818f06ed07a5756c2e7bd50e90d58adc3"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDOM008-6.html",
+      "sha256": "88b89fbb5d1631d69e0f1cc5989d7fc87464d143f6377bb82a6ae5653994f997"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDOM008-7.html",
+      "sha256": "17755898501953df18c64b4ddece39b3a79357f6be200d75369cd681a94507b6"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDTL001.html",
+      "sha256": "ba68fcd1a6e9b30ebf5fff32357377852d49fe5f5ea63efaa98eb18ac016fb46"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDTL002.html",
+      "sha256": "c0340b96ce23256d097773b79c059cfa86f9065c65c4a33f3302ccfed1a94430"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDTL003-0.html",
+      "sha256": "d2e2ee03baf1ce859f962e4760c6a642567b32b372e6bc340e1c1890ca086db7"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDTL003-1.html",
+      "sha256": "d2e2ee03baf1ce859f962e4760c6a642567b32b372e6bc340e1c1890ca086db7"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDTL003-2.html",
+      "sha256": "f5c410596c8e48cd0c8477f40e6e420963c6de667573bdb70d6d5a605d12161d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDTL004-0.html",
+      "sha256": "3ed170e9ffc656ee4496166206ca3d6a56328160163ad33355b765dc2e40a5ab"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDTL004-1.html",
+      "sha256": "3027aabe5b902f62e907eb202e6d4c7924578ffc28e0e2a10a06e11eea43f8e8"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDTL004-2.html",
+      "sha256": "fcaba98535192eeb1b529f4c78c1322b0349d0850ef4d56a569a1a02362c11ef"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDTL004-3.html",
+      "sha256": "5a379e5c0f6336137964bdd09b6b74f609b2b842c1502899ad3438db197aae1d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDTL005-0.html",
+      "sha256": "e2369e729db7eb887d22ee394a79e25550afb56a4668c319f10f5a4f17ae91ae"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDTL005-1.html",
+      "sha256": "fcd14e83c8b2c3fa9b95709b86db27c0da1261e066dcfe90d196b1e44353193e"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDTL006-empty.html",
+      "sha256": "fa51a87110741689fc0bcfbd32888141029490cc3172ebf5264ccc6767f481f5"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDTL006-escaped.html",
+      "sha256": "ee34c3e8a6c1c5a9d0f4f1c7b7f2550e7ab283b331239906de9b1266cb457b28"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDTL007.html",
+      "sha256": "7776c142e4821c2500981fac57148b668ae2c6d760588aaa3915bf11dbe65b88"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDTL008-0.html",
+      "sha256": "fdc32de20a6525e009672bc7c7722d3c8366fd77766fad73b0be2dc344b5b002"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDTL008-1.html",
+      "sha256": "5514932c6541a0f587d984c0f5996ebba9cf271524d834df646c9c8db1f3b79a"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDTL008-2.html",
+      "sha256": "9456bb0d56aeb799c78c0cc311557c4955a4fad6597ab00a09e0b9ec7a395f1d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDTL008-3.html",
+      "sha256": "57622277899d244fbc6217612914931075772de4a2302675dca54cfc824cf84b"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDTL008-4.html",
+      "sha256": "2c66f056cf4d159a33182abfef1ca33e4f7ddb8b621377aafff75a584d16aec6"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDTL008-5.html",
+      "sha256": "25b4520c5888715fa92188bf925f7526f0a89343e60709b1fee0aed93157c2d7"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDTL008-6.html",
+      "sha256": "9459416910b30dc6c89b4e68c5486c0f9c6af5cb76083e34108192d1f593ef77"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/observed-html/UDTL008-7.html",
+      "sha256": "0d4dedaff34008e3b4d649f76fd5d42e28835c218027ee3fd5f7cdb3cdfc7909"
+    }
+  ],
+  "junitXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42718-user-admin-template-current-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "0e48623dc1e04003e517998587ff3ad26e1c1a6c3cbd66b65f07752736efd485"
+  },
+  "currentMavenTestModel": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42658-jackson-model-and-sbom-v1/after/src/schubert-nk-web/target/pg42658-test.json",
+    "sha256": "b54010a00bdbf3b5d9fb13200da9428c91d31154d5f625cafa618df03abd5085"
+  },
+  "verifiedStaticOutputPathCount": 3,
+  "productJavaClasspath": false,
+  "javaCoverage": null,
+  "realHttpDbOrUserMutation": 0,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "bug": "BUG-3607",
+  "ykt": "YKT-2837"
+}

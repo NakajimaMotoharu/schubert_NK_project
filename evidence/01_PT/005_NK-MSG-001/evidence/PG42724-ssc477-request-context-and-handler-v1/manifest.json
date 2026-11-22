@@ -1,0 +1,170 @@
+{
+  "run": "PG42724",
+  "actualExit": 0,
+  "source": "02ef1afa67e4d6950063aa034421dec478064f8a",
+  "javaCore": "02ef1afa67e4d6950063aa034421dec478064f8a",
+  "priorJavaCore": "f8532c27c2666570fe450f285c5a5436aacd8e7e",
+  "wbs": [
+    "WBS-G13.04",
+    "WBS-P005-02"
+  ],
+  "branch": "dev-foundation",
+  "terminalAtUTC": "2026-11-22T14:28:31.184207+00:00",
+  "approvedMain": "ca41c03c0c6efff9a3a35b47b480491810bee6f9",
+  "spec": {
+    "path": "evidence/01_PT/005_NK-MSG-001/046_SSC477同期Handler型と受信情報の単体仕様書.md",
+    "sha256": "caed63d29a4c2d203abb63087704b1c9edfeb77181f85d1a60cf5b7f5d47e9c1"
+  },
+  "beforeFix": {
+    "path": "../pgpt-runs/PG379/PG42722-dispatch-context-and-handler-v1/terminal.json",
+    "sha256": "606fecac813d8479047825307ba4e87ede68848b24c8bc43ecc379d0185f7c6f"
+  },
+  "current": {
+    "path": "../pgpt-runs/PG379/PG42724-dispatch-context-and-handler-current-v1/terminal.json",
+    "sha256": "416aeb9ac1a60e0deda4897901e24bb9b5eded080ad52c1805ff3b164aac8703"
+  },
+  "originalProofCurrentChanges": [
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/LayoutHandler.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/RequestContext.java"
+  ],
+  "selectedTests": 5,
+  "junitXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42724-dispatch-context-and-handler-current-v1/junit/TEST-junit-jupiter.xml",
+    "sha256": "74e2caf98e14db7b364ef8168b12bff5250a6be9f05a1276e5398703ced521a6"
+  },
+  "exactCases": {
+    "PT-JMS-HCTX001": "keepsActorAndTransportValuesWithoutDisplayingThem()",
+    "PT-JMS-HCTX002": "doesNotInferOptionalValuesFromAValidMessage()",
+    "PT-JMS-HCTX003": "rejectsInvalidInputBeforeConstructingAContext()",
+    "PT-JMS-HCTX004": "retainsBoundaryCountsAndValueEquality()",
+    "PT-JMS-HCTX005": "exposesTheExpectedTypedBoundary()"
+  },
+  "failed": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "nullaway": 0,
+  "pmdProduction": 0,
+  "checkstyle": 0,
+  "spotbugsProduction": 0,
+  "testNegativeReports": [
+    {
+      "owner": "dev.codex.schubert.nk.api.dispatch.RequestContextContractTest",
+      "method": "lambda$rejectsInvalidInputBeforeConstructingAContext$0",
+      "type": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "reason": "assertThrows on an explicitly null field"
+    },
+    {
+      "owner": "dev.codex.schubert.nk.api.dispatch.RequestContextContractTest",
+      "method": "lambda$rejectsInvalidInputBeforeConstructingAContext$1",
+      "type": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "reason": "assertThrows on an explicitly null field"
+    },
+    {
+      "owner": "dev.codex.schubert.nk.api.dispatch.RequestContextContractTest",
+      "method": "lambda$rejectsInvalidInputBeforeConstructingAContext$2",
+      "type": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "reason": "assertThrows on an explicitly null field"
+    },
+    {
+      "owner": "dev.codex.schubert.nk.api.dispatch.RequestContextContractTest",
+      "method": "lambda$rejectsInvalidInputBeforeConstructingAContext$3",
+      "type": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "reason": "assertThrows on an explicitly null field"
+    },
+    {
+      "owner": "dev.codex.schubert.nk.api.dispatch.RequestContextContractTest",
+      "method": "lambda$rejectsInvalidInputBeforeConstructingAContext$4",
+      "type": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "reason": "assertThrows on an explicitly null field"
+    }
+  ],
+  "rawCoverage": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42724-dispatch-context-and-handler-current-v1/unfilteredCoverage.stdout",
+    "sha256": "50363c29836fef1db23490e287da4fc34271c55f467d7a96f5acc09ddc2d3a11"
+  },
+  "singleExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42724-dispatch-context-and-handler-current-v1/ordinary.exec",
+    "sha256": "7a9a2ab714c217714f61594917d512050132beab13f0bf4681e37e8358897ee1"
+  },
+  "scopeClasses": [
+    {
+      "className": "dev/codex/schubert/nk/api/dispatch/LayoutHandler",
+      "crc": "82023132e16bef6b",
+      "hasOriginalExecutionData": false,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/dispatch/RequestContext",
+      "crc": "737ec294b1dc13bd",
+      "hasOriginalExecutionData": true,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 85
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 4
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 13
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 12
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 10
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    }
+  ],
+  "qa056TypesReadOrCompiled": 0,
+  "activeRequestPathsWired": 0,
+  "actualNetworkOrDatabaseOperations": 0,
+  "full451": false,
+  "formalAcceptanceId": null,
+  "bugs": [
+    "BUG-3574",
+    "BUG-3608"
+  ],
+  "resolvedLocally": [
+    "BUG-3608"
+  ],
+  "open": [
+    "BUG-3574",
+    "YKT-2810"
+  ],
+  "ssc": "SSC-477"
+}
