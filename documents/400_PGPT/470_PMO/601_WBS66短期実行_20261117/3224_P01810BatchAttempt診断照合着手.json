@@ -1,0 +1,79 @@
+{
+  "eventId": "PGPT-20261008-8669",
+  "groupId": "nov22-redaction-pg42948",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T19:23:55+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 47,
+      "remainingPercent": 53,
+      "resetsAt": 1795879772,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "source": "74f6826e94c59e800b713b7190dbd6cef5f5ddec",
+    "productionCoreMain": "e8368d22c4da2ec841f008df793594d3be9066af",
+    "canonicalDesignSource": "ca41c03c0c6efff9a3a35b47b480491810bee6f9",
+    "run": "PG42948",
+    "workCategory": "REVIEW",
+    "managementWorkIds": [
+      "WBS-P018-10.02/2"
+    ],
+    "previousCheckpoint": "3223",
+    "planRow": {
+      "新版ID": "WBS-P018-10.02/2",
+      "第58版ID": "WBS-P018-10.02/2",
+      "費用主担当項目": "P018-10",
+      "計画窓": "繰越",
+      "予定期間・週末": "2027-01-03までの計画週",
+      "作業・成果物": "redaction固定vector/独立出力と全入口fixture／同source証拠による受入判定",
+      "先行ID・着手条件": "WBS-P018-10.02/1、WBS-P018-10.02/2-照合、閉/WBS-P018-10.01",
+      "担当": "診断・監査担当",
+      "旧短期残pp": "0.65",
+      "改訂残pp": "0.65",
+      "終了条件": "redaction固定vector/独立出力と全入口fixtureの対象別完了記録を確認",
+      "元項目の正式受入に必要な証拠": "QA-056適用判断後、実caller・sink、3子の契約と451を照合。",
+      "参照する元項目": "P018-10",
+      "lineNumber": 37
+    },
+    "currentPlan": [
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/11月22日_PGPT再開実行計画.txt",
+        "sha256": "80b9fdc306f664b9c03901a4bdfb34cf66997879676204cfa969858fd68a4016"
+      },
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/短期実行WBS.tsv",
+        "sha256": "a6efedcd63b4ef3bb1d133d939b0ddd7dc4b0147988ac33d668282a25c999527"
+      }
+    ],
+    "startScope": {
+      "workCategory": "REVIEW",
+      "target": "BatchStepAttemptの固定redaction・値契約の同候補残条件を照合",
+      "entry": "PG42942 Batch包装、SS331 §8.3所管、既公開の合成値と過去実行",
+      "exitCriterion": "独立したexact redactionと論理値同一性の現物理・execを結ぶか、通常PTを起動する条件を明示",
+      "excludes": "実sink、DB、private、外部接続、QA056、Root、全451",
+      "successor": "現通常証拠がなければ既承認純値fixtureだけ実行。P00403の実FileStoreのHOLDを維持"
+    },
+    "groupCapPp": 2.5,
+    "estimateAtGroupStartPp": {
+      "low": 0,
+      "base": 0.35,
+      "high": 2.5
+    },
+    "completedOriginalRowPricePp": 0,
+    "sourceOwnership": "LOCAL_DEV_FOUNDATION_TRACKED_SNAPSHOT",
+    "knownOwnedRunInProgress": 0,
+    "costRevision": "PMO-remaining-v3-20261010",
+    "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "actualAllocatedPp": null
+  }
+}
