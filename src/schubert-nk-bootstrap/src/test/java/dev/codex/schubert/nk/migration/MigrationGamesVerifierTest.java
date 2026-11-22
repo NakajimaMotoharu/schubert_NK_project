@@ -16,9 +16,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
@@ -51,7 +53,7 @@ final class MigrationGamesVerifierTest {
   private static final int TERMINATION_SECONDS = 10;
 
   @Test
-  void games001FixedV004TwoRowsSqlAndExactTypedProtocol() throws Exception {
+  void games001FixedV004TwoRowsSqlAndExactTypedProtocol() throws SQLException {
     var f = normal();
     new MigrationGamesVerifier().verify(f.connection());
     assertEquals(List.of(SQL), f.sql);
@@ -301,7 +303,7 @@ final class MigrationGamesVerifierTest {
   }
 
   @Test
-  void games014CallerWriteTransactionIsAllowedAndNeverMutated() throws Exception {
+  void games014CallerWriteTransactionIsAllowedAndNeverMutated() throws SQLException {
     var f = normal();
     f.readOnly = false;
     new MigrationGamesVerifier().verify(f.connection());
@@ -310,7 +312,7 @@ final class MigrationGamesVerifierTest {
   }
 
   @Test
-  void games015FailureDoesNotPoisonLaterInvocation() throws Exception {
+  void games015FailureDoesNotPoisonLaterInvocation() throws SQLException {
     var reader = new MigrationGamesVerifier();
     var bad = normal();
     bad.data.get(0)[2] = "wrong";
@@ -344,7 +346,7 @@ final class MigrationGamesVerifierTest {
   }
 
   @Test
-  void games018VerificationDoesNotModifyTheFixture() throws Exception {
+  void games018VerificationDoesNotModifyTheFixture() throws SQLException {
     var f = normal();
     var before = f.data.stream().map(row -> Arrays.asList(row.clone())).toList();
     new MigrationGamesVerifier().verify(f.connection());
@@ -375,7 +377,8 @@ final class MigrationGamesVerifierTest {
   }
 
   @Test
-  void games020FiniteConcurrentCallsUseIndependentOwnedHandles() throws Exception {
+  void games020FiniteConcurrentCallsUseIndependentOwnedHandles()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var reader = new MigrationGamesVerifier();
     var executor = Executors.newFixedThreadPool(WORKERS);
     try {
@@ -399,10 +402,8 @@ final class MigrationGamesVerifierTest {
 
   private static Fixture normal() {
     var f = new Fixture();
-    f.data.add(
-        new Object[] {1, "NUKITASHI1", "NUKITASHI", 1, OffsetDateTime.parse(STAMP)});
-    f.data.add(
-        new Object[] {2, "NUKITASHI2", "NUKITASHI2", 2, OffsetDateTime.parse(STAMP)});
+    f.data.add(new Object[] {1, "NUKITASHI1", "NUKITASHI", 1, OffsetDateTime.parse(STAMP)});
+    f.data.add(new Object[] {2, "NUKITASHI2", "NUKITASHI2", 2, OffsetDateTime.parse(STAMP)});
     return f;
   }
 
@@ -544,7 +545,7 @@ final class MigrationGamesVerifierTest {
                   Object value = data.get(position)[column - 1];
                   lastNull = value == null;
                   return switch (name) {
-                    case "getInt" -> value == null ? 0 : (Integer) value;
+                    case "getInt" -> value == null ? Integer.valueOf(0) : (Integer) value;
                     default -> value;
                   };
                 }
