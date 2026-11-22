@@ -1,0 +1,93 @@
+{
+  "run": "PG42336",
+  "source": "cc18f602b419631627b37e83dd49650e853fdd2e",
+  "javaCore": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-P018-08.03/2",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T07:08:18.368545+00:00",
+  "existingProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39710-p01808-session-long-boundary-v1/manifest.json",
+    "sha256": "1a20dd261bda65d669cf844fad6bd5470256e35e1ac5c21da11249da5a2ca585"
+  },
+  "sameParserAndOracle": [
+    {
+      "path": "tools/quality/coverage_session_schema.py",
+      "sha256": "b2ffb52dd65f092ed73a62f7c8abd1a33e41e91c8b54fa5668b105b9c4f8d456"
+    },
+    {
+      "path": "tools/quality/coverage_session_schema_test.py",
+      "sha256": "9bfbf66c731ecda8837a3c229460a33319414c44ac47ed8d8192be1b4e85331c"
+    }
+  ],
+  "sameToolPython": "3.14.4",
+  "originalABI": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39710-p01808-session-long-boundary-v1/jacoco-session-abi.txt",
+    "sha256": "99b7dc4252cb4e8c8f431e21306dcb770d877e44110a17b5c3d0748a81798dee"
+  },
+  "originalNamedSeven": [
+    "test_008_java_long_zero_and_maximum_are_valid",
+    "test_009_rejects_overflow_in_dump_timestamp",
+    "test_010_rejects_overflow_in_start_timestamp",
+    "test_011_rejects_empty_name_even_when_both_fields_match",
+    "test_012_rejects_nontext_names_even_when_both_fields_match",
+    "test_013_preserves_previous_leading_zero_decimal_values",
+    "test_014_rejects_oversized_numbers_before_integer_conversion"
+  ],
+  "originalSelfcheckVectors": 7,
+  "originalToolRuns": [
+    {
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-c",
+        "from coverage_session_schema import selftest; assert selftest() == 7; print(7)"
+      ],
+      "startedAtUTC": "2026-11-18T14:20:19.645217+00:00",
+      "terminalAtUTC": "2026-11-18T14:20:19.666746+00:00",
+      "actualExit": 0,
+      "files": {
+        "stdout": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39710-p01808-session-long-boundary-v1/original-seven.stdout",
+          "sha256": "10159baf262b43a92d95db59dae1f72c645127301661e0a3ce4e38b295a97c58"
+        },
+        "stderr": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39710-p01808-session-long-boundary-v1/original-seven.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "-v",
+        "coverage_session_schema_test"
+      ],
+      "startedAtUTC": "2026-11-18T14:20:19.591711+00:00",
+      "terminalAtUTC": "2026-11-18T14:20:19.644920+00:00",
+      "actualExit": 0,
+      "files": {
+        "stdout": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39710-p01808-session-long-boundary-v1/additional-seven.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39710-p01808-session-long-boundary-v1/additional-seven.stderr",
+          "sha256": "661e7aa6f499853f097e3e55ac8d9d8206d9892d9a05aa8f1968c218d59a43f4"
+        }
+      }
+    }
+  ],
+  "newPythonTests": 0,
+  "newProductTests": 0,
+  "currentNativeStreamsOpened": 0,
+  "currentActualProductCoverageAdded": 0,
+  "formalAcceptanceId": null,
+  "whole451": false,
+  "remaining": [
+    "Current trusted native instrumentation and actual same-source sessions",
+    "Closure independent of offline parsing and original owner lives"
+  ]
+}
