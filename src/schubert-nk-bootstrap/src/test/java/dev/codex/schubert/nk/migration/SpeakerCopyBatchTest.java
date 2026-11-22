@@ -191,7 +191,7 @@ final class SpeakerCopyBatchTest {
           private int flushes;
 
           @Override
-          public synchronized void write(byte[] bytes, int offset, int length) {
+          public void write(byte[] bytes, int offset, int length) {
             throwOnWrite.run();
           }
 
