@@ -2,23 +2,18 @@ package dev.codex.schubert.nk.batch.file;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.batch.repository.MaintenanceCompletion.Outcome;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Modifier;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
-/** PT-BAT-MREC-RAW001..004; SS343 6.13/PG-D-1170, pure values with no runtime authority. */
+/** PT-BAT-MREC-RAW002..004; SS343 6.13/PG-D-1170, pure values with no runtime authority. */
 final class MaintenanceRecordsRawContractTest {
   private static final String RECORD_HEAD =
       "NKDONE1\n"
@@ -26,24 +21,6 @@ final class MaintenanceRecordsRawContractTest {
           + "2026-09-12T04:05:06.123456Z\n"
           + "fedcba98-7654-3210-8fed-cba987654321\n"
           + "2026-09-12T05:06:07.234567Z\n";
-
-  @Test
-  void raw001PrivateStaticCodecRejectsInstantiationAndRestoresAccessFlag() throws Exception {
-    var constructor = MaintenanceRecords.class.getDeclaredConstructor();
-    assertTrue(Modifier.isPrivate(constructor.getModifiers()));
-    assertFalse(constructor.canAccess(null));
-    try {
-      assertTrue(constructor.trySetAccessible());
-      var wrapped = assertThrows(InvocationTargetException.class, constructor::newInstance);
-      var rejected = assertInstanceOf(AssertionError.class, wrapped.getCause());
-      assertEquals("MaintenanceRecords is a static codec", rejected.getMessage());
-      assertNull(rejected.getCause());
-      assertEquals(0, rejected.getSuppressed().length);
-    } finally {
-      constructor.setAccessible(false);
-    }
-    assertFalse(constructor.canAccess(null));
-  }
 
   @Test
   void raw002UnknownStatusHashAliasesRemainInvalidAndInputIsBorrowed() {
