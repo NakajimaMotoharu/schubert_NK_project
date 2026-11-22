@@ -1,0 +1,75 @@
+{
+  "run": "PG42476",
+  "source": "0f594e6e11c7128cfa807bf4535a405bb5deaee0",
+  "javaCore": "b5d5009768a04bb69468beed2471441b2a57ce27",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-22T09:30:09.837639+00:00",
+  "ordinary": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42474-f03-music-pairing-current-delta-v1/manifest.json",
+    "sha256": "11407096746a47f2297bb10b0f5c48e2adaaa300f222d27defee6effabd36db1"
+  },
+  "checks": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42476-music-pairing-static-v1/begin.json",
+    "sha256": "e09ad25dc7aad5b8f6bd945014afcda299f802d100dbe76b31f232beb7bcc2b5"
+  },
+  "reports": {
+    "checkstyle": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42476-music-pairing-static-v1/reports/checkstyle.xml",
+      "sha256": "89ed30145498e8335edfa9575ed9177ef43d982ce4e2fa6030e1300205e9b27c"
+    },
+    "pmd": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42476-music-pairing-static-v1/reports/pmd.xml",
+      "sha256": "650ebc360a662d10d4c0a7ccba723475d5f32f20a5911f02ad3b52c76eebc923"
+    },
+    "spotbugs": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42476-music-pairing-static-v1/reports/spotbugs.xml",
+      "sha256": "89de19726928f9859ea6fb41941569e309d919745940837c4784440d79c39420"
+    }
+  },
+  "actualExit": {
+    "guard": 0,
+    "checkstyle": 0,
+    "pmd": 4,
+    "spotbugs": 0
+  },
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "pmdRaw": 5,
+  "distinctPmd": [
+    {
+      "test": "PT-MIG-MUSICPAIR026",
+      "rule": "CloseResource",
+      "line": 229,
+      "rationale": "Test-only finite owned worker, cleanup and termination asserted; no production thread resource."
+    },
+    {
+      "test": "PT-MIG-MUSICPAIR026",
+      "rule": "DoNotUseThreads",
+      "line": 229,
+      "rationale": "Test-only finite owned worker, cleanup and termination asserted; no production thread resource."
+    },
+    {
+      "test": "PT-MIG-MUSICPAIR026",
+      "rule": "DoNotUseThreads",
+      "line": 233,
+      "rationale": "Test-only finite owned worker, cleanup and termination asserted; no production thread resource."
+    },
+    {
+      "test": "PT-MIG-MUSICPAIR026",
+      "rule": "DoNotUseThreads",
+      "line": 237,
+      "rationale": "Test-only finite owned worker, cleanup and termination asserted; no production thread resource."
+    },
+    {
+      "test": "PT-MIG-MUSICPAIR026",
+      "rule": "DoNotUseThreads",
+      "line": 238,
+      "rationale": "Test-only finite owned worker, cleanup and termination asserted; no production thread resource."
+    }
+  ],
+  "unclassifiedLocal": 0,
+  "formalAcceptanceId": null,
+  "suppressions": 0,
+  "repeats": 0,
+  "whole451": false
+}

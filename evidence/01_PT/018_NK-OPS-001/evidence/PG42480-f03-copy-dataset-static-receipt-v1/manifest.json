@@ -1,0 +1,123 @@
+{
+  "run": "PG42480",
+  "source": "0f594e6e11c7128cfa807bf4535a405bb5deaee0",
+  "javaCore": "b5d5009768a04bb69468beed2471441b2a57ce27",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-22T09:33:33.004003+00:00",
+  "basis": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42478-f03-scenario-composite-copy-current-unit-v1/manifest.json",
+    "sha256": "cae19ebd63a357055a1343aedf418eee294f7918569d2515e8491f3c03395248"
+  },
+  "inputs": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42480-scenario-five-dataset-static-v1/begin.json",
+    "sha256": "778720ecc982e61ee4aaa90a2c2366578083a30676cc0d5ab1a3f633c339e1e5"
+  },
+  "raw": {
+    "checkstyle": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42480-scenario-five-dataset-static-v1/reports/checkstyle.xml",
+      "sha256": "39a9512a5d3b4ac2ee65e44d5ee587b380111ba24d79ebb91ee4dde3ddaf2979"
+    },
+    "pmd": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42480-scenario-five-dataset-static-v1/reports/pmd.xml",
+      "sha256": "d5b1582cd7b91d9359c83b43604aa0ffde20af707579ce4043d6599bf64d977c"
+    },
+    "spotbugs": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42480-scenario-five-dataset-static-v1/reports/spotbugs.xml",
+      "sha256": "2102f562f931232d7d5b3f1bae41ca2d92848ac3af2e8583c1ab897e0de1daa6"
+    }
+  },
+  "actualExit": {
+    "guard": 0,
+    "checkstyle": 0,
+    "pmd": 4,
+    "spotbugs": 0
+  },
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "pmdRaw": 13,
+  "localClassification": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationCopyDatasetTest.java",
+      "rule": "CloseResource",
+      "line": 65,
+      "reason": "Fixture-only in-memory stream tracks output and borrower behavior; no resource exists outside Java heap."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationCopyDatasetTest.java",
+      "rule": "CloseResource",
+      "line": 232,
+      "reason": "Fixture-only in-memory stream tracks output and borrower behavior; no resource exists outside Java heap."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationCopyDatasetTest.java",
+      "rule": "CloseResource",
+      "line": 302,
+      "reason": "Fixture-only in-memory stream tracks output and borrower behavior; no resource exists outside Java heap."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationCopyDatasetTest.java",
+      "rule": "CloseResource",
+      "line": 349,
+      "reason": "Finite fixture-owned worker scope with bounded finally cleanup and literal independent result checks."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationCopyDatasetTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 349,
+      "reason": "Finite fixture-owned worker scope with bounded finally cleanup and literal independent result checks."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationCopyDatasetTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 354,
+      "reason": "Finite fixture-owned worker scope with bounded finally cleanup and literal independent result checks."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationCopyDatasetTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 362,
+      "reason": "Finite fixture-owned worker scope with bounded finally cleanup and literal independent result checks."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationCopyDatasetTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 363,
+      "reason": "Finite fixture-owned worker scope with bounded finally cleanup and literal independent result checks."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioCopyDatasetTest.java",
+      "rule": "CloseResource",
+      "line": 155,
+      "reason": "Finite fixture-owned worker scope with bounded finally cleanup and literal independent result checks."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioCopyDatasetTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 155,
+      "reason": "Finite fixture-owned worker scope with bounded finally cleanup and literal independent result checks."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioCopyDatasetTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 160,
+      "reason": "Finite fixture-owned worker scope with bounded finally cleanup and literal independent result checks."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioCopyDatasetTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 169,
+      "reason": "Finite fixture-owned worker scope with bounded finally cleanup and literal independent result checks."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioCopyDatasetTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 170,
+      "reason": "Finite fixture-owned worker scope with bounded finally cleanup and literal independent result checks."
+    }
+  ],
+  "localUnclassified": 0,
+  "waivers": 0,
+  "repeat": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
