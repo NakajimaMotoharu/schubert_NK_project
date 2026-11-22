@@ -1,0 +1,42 @@
+{
+  "run": "PG41896",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "source": "2eb3b6ce46aa4d34d2f9cb037bc913b681d00650",
+  "terminalAtUTC": "2026-11-22T02:20:30.191894+00:00",
+  "actualExit": 1,
+  "compile": {
+    "exit": 1,
+    "beganAtUTC": "2026-11-22T02:20:29.333054+00:00",
+    "terminalAtUTC": "2026-11-22T02:20:30.191894+00:00",
+    "stdout": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41896-f03-master-copy-manifest-fixtures-close-v1/compile.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41896-f03-master-copy-manifest-fixtures-close-v1/compile.stderr",
+      "sha256": "ba05d0001bde8defb10f7bf2eca175ca8107bb27344432e14680474ed466f667"
+    }
+  },
+  "command": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+    "--release",
+    "25",
+    "-g",
+    "-proc:none",
+    "-implicit:none",
+    "-encoding",
+    "UTF-8",
+    "-Xlint:all",
+    "-Werror",
+    "-cp",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41894-f03-master-copy-manifest-fixtures-static-v1/pure:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+    "-d",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41896-f03-master-copy-manifest-fixtures-close-v1/test",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterCopyManifestTest.java",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterCopyFingerprintTest.java"
+  ],
+  "dynamicTestCount": 0,
+  "cause": "named exception imports missing in MigrationMasterCopyFingerprintTest",
+  "formallyAccepted": false,
+  "bug": "BUG-3528"
+}

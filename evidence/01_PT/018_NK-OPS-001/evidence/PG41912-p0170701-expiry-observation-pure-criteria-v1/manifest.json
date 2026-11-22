@@ -1,0 +1,166 @@
+{
+  "run": "PG41912",
+  "source": "3c90233f0ad5952b92f9c2e124eecf067d63ef76",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-P017-07.01/2",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T02:32:17.142511+00:00",
+  "currentJar": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41074-f02-current-alert-batch-maven-v1/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "276c45bf138b351cb0a0a6bc46dc61881fabb1b17b2b09347b4feea4cfea76a6"
+  },
+  "checkedRepositoryPhysical": {
+    "dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.class": "534463dfae829916b8a201751f40e2409ddf678763d8a6d843545caba36d1a93",
+    "dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot.class": "2394756c3a558df38394db0e03b2bb27c031812e13ed361c7b126d63a611aa97"
+  },
+  "staticUsedInputs": {
+    "dev/codex/schubert/nk/batch/repository/BatchStep.class": "06e90b35ca09ac687bfd480caac794fa7be6a47dff9db3d397e682f75f010b1c",
+    "dev/codex/schubert/nk/batch/repository/BatchRun.class": "5cb0c42832ea17425dbf60da6025f2c4783d687e665b18f6cd8e88abc399c909",
+    "dev/codex/schubert/nk/batch/repository/BatchStepAttempt.class": "d61f86c115e29d12da29964711253fcd3e8fc64b8cb2d263efd87702295ae547"
+  },
+  "dependencyEvidence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41910-f03-batch-step-values-current-seven-criteria-v1/manifest.json",
+    "sha256": "f657663249e73d3e4b8c08ee9309876bff1ae828799ff29d03f701b18b19e716"
+  },
+  "sourceFiles": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+      "sha256": "001a0e2d7f22fe28fe746b96a13b58d83a4ce1c68f177330b59bc0bd74986a12"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditPredicateContractTest.java",
+      "sha256": "2eeecafc5a1af7a1451937572ea38f3e9c6fec8a0a358101d71850ad2f2c7ddb"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStep.java",
+      "sha256": "f736e4cf0f251df6b0d0579996b0353e6a757b0def2777a4528ee976c8384285"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java",
+      "sha256": "c440d3e16da86b7814cf8fbd6247e48c1ab4cd6de2da3a114a38c308ae3c7ce4"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStepAttempt.java",
+      "sha256": "a37a929c6f7f01ccdd2facf7b6f74a72eea2f8927739b38c0ff998f3ec1015fe"
+    }
+  ],
+  "originalApprovedUnit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40730-f03-expiry-update-ownership-v1/manifest.json",
+    "sha256": "0f86bd44fadf2879f544990327aeab1ff55719b24f49c7fbdb8c8e8bcf6e6345"
+  },
+  "originalCases": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40730-f03-expiry-update-ownership-v1/cases.json",
+    "sha256": "7eeafbe628f7e110767fc3c7dcc33c102d76c17c4720a55524b861f9677ec9e3"
+  },
+  "originalSelectedBatchTotal": 30,
+  "cases": [
+    {
+      "testId": "EXPPORT-P002",
+      "expectation": "日次状態、終端時刻の有無、cutoffとbeforeの欠落結合、after未観測",
+      "method": "statusEndedAndAbsentObservationTriplesFollowIndependentV022Table",
+      "originalRecord": "pass"
+    },
+    {
+      "testId": "EXPPORT-P003",
+      "expectation": "負数、cutoff、known/unknown after、成功count、警告・失敗",
+      "method": "counterCutoffAndKnownOrUnknownAfterBoundariesUseLiteralPostconditions",
+      "originalRecord": "pass"
+    }
+  ],
+  "independentDDL": {
+    "path": "src/schubert-nk-api/src/main/resources/db/migration/V022__staged_expiry_batch_run_audit.sql",
+    "sha256": "56968e34731b766afd7b59523c2734be5fe0d063deda77414670729df9b12735"
+  },
+  "relatedLiteralDDL": [
+    {
+      "expression": "expiry_cutoff_at IS NULL",
+      "lines": [
+        13,
+        16
+      ]
+    },
+    {
+      "expression": "expiry_before_count IS NULL",
+      "lines": [
+        14,
+        17
+      ]
+    },
+    {
+      "expression": "expiry_after_count IS NULL",
+      "lines": [
+        15,
+        18,
+        26
+      ]
+    },
+    {
+      "expression": "status <> 'SUCCESS'",
+      "lines": [
+        19,
+        27,
+        33
+      ]
+    },
+    {
+      "expression": "expiry_before_count >= 0",
+      "lines": [
+        23
+      ]
+    },
+    {
+      "expression": "target_count <= expiry_before_count",
+      "lines": [
+        24
+      ]
+    },
+    {
+      "expression": "success_count = 0",
+      "lines": [
+        28
+      ]
+    },
+    {
+      "expression": "expiry_after_count >= 0",
+      "lines": [
+        31
+      ]
+    },
+    {
+      "expression": "expiry_after_count <= expiry_before_count",
+      "lines": [
+        32
+      ]
+    },
+    {
+      "expression": "expiry_before_count - expiry_after_count = success_count",
+      "lines": [
+        34
+      ]
+    },
+    {
+      "expression": "target_count = success_count",
+      "lines": [
+        35
+      ]
+    },
+    {
+      "expression": "failure_count = 0",
+      "lines": [
+        36
+      ]
+    }
+  ],
+  "independentSpec": {
+    "path": "evidence/01_PT/017_NK-BAT-001/697_Expiry監査SQL・状態契約単体仕様.md",
+    "sha256": "aa479aede238f3ef09822276f513cbb8b9dcd753f307cb7f933c0c4d8a3609da"
+  },
+  "testingNewActions": 0,
+  "actualDb": false,
+  "physicalCountUnknownForEntireRow": true,
+  "formalAcceptanceId": null,
+  "remaining": [
+    "実FK・実数・日次DB事後条件",
+    "同sourceの451と判定担当"
+  ]
+}

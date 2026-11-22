@@ -1,0 +1,440 @@
+{
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-F03/2-2-b",
+  "actualExit": 0,
+  "productScopes": {
+    "api": {
+      "inheritedMainCount": 283,
+      "prior": "QA-056 exact four-type joint admission and regular API JAR, six-module full static gate, shared PostgreSQL fixture",
+      "accepted": false
+    },
+    "batch": {
+      "inheritedMainCount": 200,
+      "prior": "369 classes need approved measurement or individually supported applicability, 26 test sources and Root11 are retained, live operations and full 451 unmet.",
+      "accepted": false,
+      "extraProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41774-p00402-query-contract-delta-v1/manifest.json",
+        "sha256": "7d89078a02208146f79f16a535cca694961b2ab8362aca8ea7b3a23bfb7e8825"
+      },
+      "newLinkedLocalConditions": 6
+    },
+    "bootstrap": {
+      "inheritedMainCount": 88,
+      "prior": "Root11 boundaries and 451; historical type compile receipt has identical current inputs",
+      "accepted": false,
+      "fixtureSources": {
+        "CurrentMigrationMappingVerifierTest": {
+          "staticProof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41794-f03-synthetic-fixture-typed-close-v1/manifest.json",
+            "sha256": "b275df8f138d47b64579c85618b0abee77f7da2917d083e632b75e6c3f3163a8"
+          },
+          "source": {
+            "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentMigrationMappingVerifierTest.java",
+            "sha256": "7cf5a0de3beb02ce1e59426164463478d8b4547e8238ed0672fb00cd0238b51a"
+          }
+        },
+        "AssetMigrationManifestTest": {
+          "staticProof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41794-f03-synthetic-fixture-typed-close-v1/manifest.json",
+            "sha256": "b275df8f138d47b64579c85618b0abee77f7da2917d083e632b75e6c3f3163a8"
+          },
+          "source": {
+            "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AssetMigrationManifestTest.java",
+            "sha256": "993870313282616bdc539ea1de5b8fb0ae535a24f3d8e3ba80cbeadb7beba7fa"
+          }
+        },
+        "ScenarioFileMigrationMapTest": {
+          "staticProof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41804-f03-typed-two-map-throws-close-v1/manifest.json",
+            "sha256": "4077bfa272eab770e67581dd3c1074dd31753b075b59055d65a836904989dda1"
+          },
+          "source": {
+            "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMapTest.java",
+            "sha256": "6f18acea0f6a9f92e24ec0433896970e1cc2c3b5d4b866ff0f2aaec35b891d58"
+          }
+        },
+        "ScenarioEntryPlacementMapTest": {
+          "staticProof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41804-f03-typed-two-map-throws-close-v1/manifest.json",
+            "sha256": "4077bfa272eab770e67581dd3c1074dd31753b075b59055d65a836904989dda1"
+          },
+          "source": {
+            "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryPlacementMapTest.java",
+            "sha256": "7a2abe09434bb1c3c111d359eb3c14c67cca2366c1f6b99d35fef424f274ace0"
+          }
+        },
+        "ScenarioEntryMigrationMapTest": {
+          "staticProof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41810-f03-speaker-entrymap-typed-close-v1/manifest.json",
+            "sha256": "47468062af3091d06a27673a99311c94b47c2a189c93bdbdb5fcecd126377a47"
+          },
+          "source": {
+            "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryMigrationMapTest.java",
+            "sha256": "24b615d91be1acc63b33b6cb8b4efdd4bf96e453dcfbac4335e60001d53c22a9"
+          }
+        },
+        "SpeakerMigrationMapTest": {
+          "staticProof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41810-f03-speaker-entrymap-typed-close-v1/manifest.json",
+            "sha256": "47468062af3091d06a27673a99311c94b47c2a189c93bdbdb5fcecd126377a47"
+          },
+          "source": {
+            "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerMigrationMapTest.java",
+            "sha256": "cc9094d5e22379c905420d56dd0cdec0f071d62129e215fbb42112b34d625e5b"
+          }
+        },
+        "AudioFileCopyRowTest": {
+          "source": {
+            "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AudioFileCopyRowTest.java",
+            "sha256": "3003f62d570fede1ce9167cd23da7c17248f9374dd3e9a38e49461503091882a"
+          },
+          "staticProof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41828-f03-audio-media-row-typed-close-v1/manifest.json",
+            "sha256": "73400616184d98f5c15f3ac3e2207fb85bb413679d1546a2891308fc4a0145ee"
+          }
+        },
+        "MediaAssetCopyRowTest": {
+          "source": {
+            "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MediaAssetCopyRowTest.java",
+            "sha256": "9ce630f65533be0a5f5fa7e4929f03086ce458373e6803ac7276ac00c3b8cfad"
+          },
+          "staticProof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41828-f03-audio-media-row-typed-close-v1/manifest.json",
+            "sha256": "73400616184d98f5c15f3ac3e2207fb85bb413679d1546a2891308fc4a0145ee"
+          }
+        },
+        "MediaAssetCopyBatchTest": {
+          "source": {
+            "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MediaAssetCopyBatchTest.java",
+            "sha256": "00f4490f88b09d7d9ea23a236bb7c3acbb734001dc8e02a8838acf2e59f26ef3"
+          },
+          "staticProof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41836-f03-pure-media-batch-static-close-v1/manifest.json",
+            "sha256": "5869a06b628fbaa40743a774c4e856dbf77dd1733770aabcdc8ceeb23050c2e2"
+          }
+        },
+        "PostgresCopyTextEncoderTest": {
+          "source": {
+            "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+            "sha256": "b54cfa57df97f34760a3546e38ea8c361eaa7d275d476e264391d4ed9581c29f"
+          },
+          "staticProof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41842-f03-copy-text-music-fixtures-static-close-v1/manifest.json",
+            "sha256": "0384384eba1ed3d3ab93bfa35a3f31f320102c656dcbf9f8bb3b8b3310b9c9e6"
+          }
+        },
+        "MusicLogicalIdTest": {
+          "source": {
+            "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MusicLogicalIdTest.java",
+            "sha256": "410aa72af810aa09e483e2794eac0c1ccf4692c84d61cccef877c93d65751bed"
+          },
+          "staticProof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41842-f03-copy-text-music-fixtures-static-close-v1/manifest.json",
+            "sha256": "0384384eba1ed3d3ab93bfa35a3f31f320102c656dcbf9f8bb3b8b3310b9c9e6"
+          }
+        },
+        "AudioCopyDatasetTest": {
+          "source": {
+            "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AudioCopyDatasetTest.java",
+            "sha256": "463d263e3fb7a3a01a55e9c8f095f54718529fe5cd61d78453eb410d95dd0a06"
+          },
+          "staticProof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41850-f03-audio-dataset-fixture-close-v1/manifest.json",
+            "sha256": "85118514a872e3a85869d4ce91eadd01dc2ae64f30cc34d04759993830164061"
+          }
+        },
+        "PostgresCopyTextWriterTest": {
+          "source": {
+            "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+            "sha256": "e721632451bee77b5272c58908f8b70618187a6c4ce304cb9b13edfd004fc8dc"
+          },
+          "staticProof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41856-f03-memory-text-writer-fixture-close-v1/manifest.json",
+            "sha256": "ad00dbbce062416b070ca289d1d22efd9c814d51841a1c19c60b55a8db2e4804"
+          }
+        },
+        "SpeakerCopyRowTest": {
+          "source": {
+            "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerCopyRowTest.java",
+            "sha256": "8a5a6ddd556c722c6f4a87d379392e2c23ab1d8e68bf6db7056c5409f0d8196b"
+          },
+          "staticProof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41866-f03-speaker-row-fixture-static-close-v1/manifest.json",
+            "sha256": "269d6f6460036fb0bae20fe26c650feeb1f9020077585e73460e41959773dde8"
+          }
+        },
+        "ScenarioEntryCopyRowTest": {
+          "source": {
+            "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyRowTest.java",
+            "sha256": "3af42982b3c8fbf4929fb0e268b9791f1dd7d82472ce30afbc3d393a58c032b1"
+          },
+          "staticProof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41872-f03-entry-row-fixture-static-close-v1/manifest.json",
+            "sha256": "95663b3a254c854673cc7828913811cee96624419c12fc79d8d082fcd56aeda1"
+          }
+        },
+        "ScenarioEntryCopyBatchTest": {
+          "source": {
+            "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyBatchTest.java",
+            "sha256": "be8e3e1f86f813cafc60eac414af56e02bc5b1d72484c6a08666879b86477ccf"
+          },
+          "staticProof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41880-f03-entry-batch-fixture-static-close-v1/manifest.json",
+            "sha256": "d331a71b84430d110472ef58e8bea5cd71da7fb326ff7cb17e4839388068b971"
+          }
+        },
+        "ScenarioFileCopyBatchTest": {
+          "source": {
+            "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileCopyBatchTest.java",
+            "sha256": "6afe0fc2e960d4c45191363e294aa24beb51c40291d987ad284f90bfaac8ec2c"
+          },
+          "staticProof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41888-f03-speaker-single-sync-close-v1/manifest.json",
+            "sha256": "19755b1fe19725171ec7f7fdea17e530ac95161a118595a60f0db6c3d176d92c"
+          }
+        },
+        "SpeakerCopyBatchTest": {
+          "source": {
+            "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerCopyBatchTest.java",
+            "sha256": "65129f24b034381b0dbeabfec6fe0da613ccc3740f76ed6c5530b8f670f10997"
+          },
+          "staticProof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41888-f03-speaker-single-sync-close-v1/manifest.json",
+            "sha256": "19755b1fe19725171ec7f7fdea17e530ac95161a118595a60f0db6c3d176d92c"
+          }
+        },
+        "MigrationMasterCopyManifestTest": {
+          "source": {
+            "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterCopyManifestTest.java",
+            "sha256": "6c2702fab3d384a7e900572264e936b9ab56fda5251809dafc62c6c4a72081e1"
+          },
+          "staticProof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41902-f03-master-copy-manifest-fixtures-close-v1/manifest.json",
+            "sha256": "d12ce89e19c657ae4b60e199fd9035a29caf178938a187bb7629923763910358"
+          }
+        },
+        "MigrationMasterCopyFingerprintTest": {
+          "source": {
+            "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterCopyFingerprintTest.java",
+            "sha256": "e196c8a3945cf2d3a46bba8a0eeb1a43c146f7a082582fbecfb36a7f26491365"
+          },
+          "staticProof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41902-f03-master-copy-manifest-fixtures-close-v1/manifest.json",
+            "sha256": "d12ce89e19c657ae4b60e199fd9035a29caf178938a187bb7629923763910358"
+          }
+        }
+      },
+      "originalFixtureCases": {
+        "mappingManifest": 10,
+        "verifier": 16,
+        "assetDeclared": 12,
+        "fileAndPlacement": 24,
+        "entryAndSpeaker": 36,
+        "audioRow": 17,
+        "mediaRow": 20
+      },
+      "admittedAux": 26,
+      "actualNewPt": 0,
+      "readbackFacts": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41786-f03-verifier-full-fixture-intake-v1/manifest.json",
+        "sha256": "012feb7fafce9dd22caa2f34702faa656d57aa8fb0aa9bd7aab6c8b0aa1f99d7"
+      },
+      "fileEntryExpectations": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41806-p0190302-file-entry-immutable-order-v1/manifest.json",
+        "sha256": "295a13c5706a2bd817fb20fa755a0a88c8ba78a203768941c4bcd366c268a7f2"
+      },
+      "remaining": [
+        "Other Bootstrap product and actual 451",
+        "Root11",
+        "SSC417 24 or real owner"
+      ],
+      "rowProofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41822-f03-audio-row-current-evidence-v1/manifest.json",
+          "sha256": "21218e0c9b0fa1b39913b74819d442438b05f5d48eb293899c02778da0223416"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41824-f03-media-row-current-evidence-v1/manifest.json",
+          "sha256": "0b698fdff115ac020b555bbcded1f434ae72b58c337fb72366108f73f16a70f8"
+        }
+      ],
+      "separateSelectedBatchAccessor": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41830-p0190302-media-typed-accessor-evidence-v1/manifest.json",
+        "sha256": "4c6203e0e6bdd3835cf756946b120b2e707765b70a3a9c37ac642dbb20ee60c7"
+      },
+      "newOwnerTest": {
+        "proof": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41836-f03-pure-media-batch-static-close-v1/manifest.json",
+          "sha256": "5869a06b628fbaa40743a774c4e856dbf77dd1733770aabcdc8ceeb23050c2e2"
+        },
+        "passed": 1,
+        "testId": "PT-MIG-MEDIABATCH019",
+        "scope": "in-memory owned sink; raw coverage not combined"
+      },
+      "originalScopedMappingOnly": {
+        "source": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41838-p0190302-copy-text-and-music-values-v1/manifest.json",
+          "sha256": "05389432f1204d7888337f0058571db0652921545aabf4421aa94e7e162fb5f6"
+        },
+        "javaExactOldFixtureOutcomes": 24,
+        "olderMediaBatchUnchanged": 19
+      },
+      "actualCurrentSelectedLocal": [
+        {
+          "proof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41836-f03-pure-media-batch-static-close-v1/manifest.json",
+            "sha256": "5869a06b628fbaa40743a774c4e856dbf77dd1733770aabcdc8ceeb23050c2e2"
+          },
+          "count": 1
+        },
+        {
+          "proof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41850-f03-audio-dataset-fixture-close-v1/manifest.json",
+            "sha256": "85118514a872e3a85869d4ce91eadd01dc2ae64f30cc34d04759993830164061"
+          },
+          "count": 1
+        },
+        {
+          "proof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41856-f03-memory-text-writer-fixture-close-v1/manifest.json",
+            "sha256": "ad00dbbce062416b070ca289d1d22efd9c814d51841a1c19c60b55a8db2e4804"
+          },
+          "count": 12
+        },
+        {
+          "proof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41886-f03-file-speaker-batch-fixtures-close-v1/manifest.json",
+            "sha256": "6a2b56981ebca0cfcd327c5de1e5f98720f8a7c26a43d1097e52b9b576a065de"
+          },
+          "count": 1,
+          "originalId": "PT-MIG-SPEAKERBATCH009"
+        },
+        {
+          "proof": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41888-f03-speaker-single-sync-close-v1/manifest.json",
+            "sha256": "19755b1fe19725171ec7f7fdea17e530ac95161a118595a60f0db6c3d176d92c"
+          },
+          "count": 1,
+          "originalId": "PT-MIG-SPEAKERBATCH010"
+        }
+      ],
+      "writerRawAndStandardLocal": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41858-f03-writer-current-single-exec-post-v1/manifest.json",
+        "sha256": "7f405db06c0e75622a583d1971c145f0dc0c13e76eb1a06a37a77b321df8d10f"
+      },
+      "audioSyntheticValueExisting": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41846-p0190302-audio-join-current-proof-v1/manifest.json",
+        "sha256": "bda771b7ddfc47a7260f22ced2b1e2cba60ed221aedad6a65494e137a111e46e"
+      },
+      "streamSyntheticExistingHistorical": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41852-p0190302-memory-text-writer-current-v1/manifest.json",
+        "sha256": "5fdb7c1477d4d32b08dc88cac41c2648977e68145877b536b843be4495464f66"
+      },
+      "speakerAndEntryRowOriginal28": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41862-p0190302-speaker-row-current-fixture-v1/manifest.json",
+          "sha256": "54f7653fb5823be5419592afa839e41e1e7947ca25e941af809aa61a1fa96269"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41868-p0190302-entry-row-current-fixture-v1/manifest.json",
+          "sha256": "11fc5c2bd3dac232dc84d60fffe760062c489a95c52258a9e5d6b09e1fd16285"
+        }
+      ],
+      "collectionContractsExisting": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41876-p0190302-entry-batch-current-proof-v1/manifest.json",
+          "sha256": "8446033d9c1d8b91b60662fe5861f64e0a36e8af52428d86d98e6380f301ce4a"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41882-p0190302-file-speaker-batch-current-proof-v1/manifest.json",
+          "sha256": "b4e93b4eea26f1d92b7cff2192a67878ee96ad0744674b9dee12781455f5c31d"
+        }
+      ],
+      "masterManifestCopySyntheticCriteria": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41892-p0190302-migration-master-copy-manifest-v1/manifest.json",
+        "sha256": "2af312c782f973dbadbdd5248f37428382dc9b37fddfb5b5e449b7c0d3193bb1"
+      }
+    },
+    "protocol": {
+      "inheritedMainCount": 169,
+      "prior": "Whole six/451 and applicable real JMS/CHR; local strict compiler, PMD per-site review and local PT bound",
+      "accepted": false,
+      "localPriorSuccessful": 171,
+      "suites": 39,
+      "retainedIsolatedRawCounters": {
+        "LINE": {
+          "missed": 0,
+          "covered": 3639
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1432
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 162
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 1080
+        },
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 20363
+        }
+      },
+      "newRun": 0,
+      "priorCurrentProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41526-protocol-qa054-canonical-rules-v1/manifest.json",
+        "sha256": "8a89feee4bfa2d6b08d3514ff44ab15eaa871f409d8cf152790570e363b21edb"
+      },
+      "remaining": [
+        "actual JMS/CHR",
+        "whole final 451"
+      ]
+    },
+    "storage": {
+      "inheritedMainCount": 25,
+      "prior": "StorageIoException JDBC exception ownership plus held two test sources",
+      "accepted": false
+    },
+    "web": {
+      "inheritedMainCount": 262,
+      "prior": "QA-056 four-type joint admission, regular Web JAR, full typed scope, real HTTP/CHR",
+      "accepted": false
+    }
+  },
+  "localOrdinaryCurrentDistinct": 16,
+  "localOrdinaryExecutionsIncludingReverification": 17,
+  "actualFailures": 0,
+  "actualErrors": 0,
+  "actualSkipped": 0,
+  "productMainChanges": 0,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "newF02F03Receipt": 0,
+  "qa": {
+    "path": "documents/900_OTHER/910_台帳/911_確認事項一覧.md",
+    "sha256": "d0b3fd7b4247db035544f4ee2c20ab1d0002a706060b21f9636b77dbaac2380a"
+  },
+  "held": [
+    "QA-056",
+    "Root11",
+    "32 held tests",
+    "6 product 451",
+    "real media/DB/COPY/native"
+  ],
+  "run": "PG41904",
+  "source": "3c90233f0ad5952b92f9c2e124eecf067d63ef76",
+  "terminalAtUTC": "2026-11-22T02:23:50.544303+00:00",
+  "prior": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41890-f03-copy-collections-six-table-v1/manifest.json",
+    "sha256": "57f9a7c6f9975db89b6aaef550a94334d8ec800f72b36ac43eefd5d062bf278f"
+  },
+  "scopedFixtures": 20,
+  "scopedFixturePhysical": 33,
+  "scopedJVMExecutionByOriginalFixture": {
+    "MigrationMasterCopyManifestTest": 12,
+    "MigrationMasterCopyFingerprintTest": 20
+  }
+}

@@ -1,0 +1,161 @@
+{
+  "run": "PG41908",
+  "source": "3c90233f0ad5952b92f9c2e124eecf067d63ef76",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T02:26:33.075020+00:00",
+  "wbs": "WBS-P020-01.03/2",
+  "pinnedPackage": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41344-p020-current-218-local-v1/snapshot/program/characterization/target/schubert-characterization-0.1.0-SNAPSHOT.jar",
+    "sha256": "3b00e3da151d8f0e6b4f5402270e0f47fe54f5590205e3c7745ccf213f0acc8c"
+  },
+  "mainTool": {
+    "dev/codex/schubert/characterization/GateContractValidator.class": "f229c7070b3d98fa6f3f5d4493d66be1d9d45dc8c04253062703429e335834f9",
+    "dev/codex/schubert/characterization/GateContractValidator$ValidationResult.class": "48da8324ff9f6cfae38bc8ecf8147c5f187c4a0a52ae5e4935c926f775242781"
+  },
+  "toolTree": "0ab3b438584f0be3048734187d729e73cbb8bc08",
+  "originalXML": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41344-p020-current-218-local-v1/reports/TEST-junit-jupiter.xml",
+    "sha256": "8f6b635830262186ba682cf3b682f56d8b732f1a557452d62cebae4c95ef4dd4"
+  },
+  "old218": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG41344-p020-current-218-local-v1/manifest.json",
+    "sha256": "5f9119617ebed6632218f46bd81c2b858f6c8fa3064a827edd1fb9b470d9148c"
+  },
+  "independent": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG41346-p020-current-218-independent-v1/manifest.json",
+    "sha256": "d2191089b0953b97f34e139d3d62a5bde47387bdb3e0ff14dde155198bb41a15"
+  },
+  "fixture": {
+    "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionDocumentsTest.java",
+    "sha256": "c9f828f2a13e68ab4a5128acf8e6083479e54878723a981d28365fe92ea9ad69"
+  },
+  "pinnedInputs": [
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionDocumentsTest.java",
+      "sha256": "c9f828f2a13e68ab4a5128acf8e6083479e54878723a981d28365fe92ea9ad69"
+    },
+    {
+      "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+      "sha256": "9b3b9fb5287741e6b3c316626fad26ea5e95b812bb0e1292562a69a888c7c7c5"
+    },
+    {
+      "path": "program/characterization/pom.xml",
+      "sha256": "e945f851958317aa2a80c4f1b06bcb310d789f69abd12ce38785c6bfb55d491b"
+    },
+    {
+      "path": "pom.xml",
+      "sha256": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38"
+    },
+    {
+      "path": "program/characterization/tests/resources/cases/dif-allowlist.json",
+      "sha256": "43239fe3d3f42c488dcbeb58017fde78830ba3771930a9c97cd65c3c7a7c5cb6"
+    },
+    {
+      "path": "program/characterization/tests/resources/cases/catalog.json",
+      "sha256": "df412392032ad324a5e5dd92b0703c03287a7744af47aa42cd34a0a617e46d38"
+    },
+    {
+      "path": "program/characterization/tests/resources/cases/case-requirements.json",
+      "sha256": "f31eaff19732157415dccc960d85bf6a68e0eb188bf98b79d54a7c0887dea569"
+    },
+    {
+      "path": "program/characterization/tests/resources/cases/gate-contract.json",
+      "sha256": "bd5d0b960a8544f1ea7d7c5621ee261a254c3d868da05abf175beda71b1d8ca9"
+    },
+    {
+      "path": "program/characterization/tests/resources/cases/schema.json",
+      "sha256": "8116075a4a7915addf446845fc4a87f54431af96c274bd48c6fee59e981e23f8"
+    },
+    {
+      "path": "program/characterization/tests/resources/browser/manifest.json",
+      "sha256": "470febbeabe77bbd7b8835baf4cb283c472775c15fa88df89db40bc05c6dbec3"
+    }
+  ],
+  "oracle": {
+    "path": "evidence/01_PT/020_NK-CHR-001/020_Gate判定工具自己所有全階層単体仕様.md",
+    "sha256": "825a57ac1958976099a77d9dafc80c6d9530255e39efddf35e9ceaf7dc1d09f8"
+  },
+  "cases": [
+    {
+      "testId": "PT-CHR-GS017",
+      "fixture": "schemaDraftShapeAndItemConstraintsCannotBeWeakened",
+      "expectedCondition": "draft, root, required declarations, min/max and case requirements",
+      "explicitDiagnostics": [
+        "SCHEMA_CASE_REQUIRED",
+        "SCHEMA_DRAFT",
+        "SCHEMA_MAX_ITEMS",
+        "SCHEMA_MIN_ITEMS",
+        "SCHEMA_REQUIRED",
+        "SCHEMA_ROOT_TYPE"
+      ],
+      "junit": "PASS"
+    },
+    {
+      "testId": "PT-CHR-GS018",
+      "fixture": "catalogRejectsDuplicateMalformedUnknownAndShortIdsAndWrongModes",
+      "expectedCondition": "case ID shape, duplicate IDs, invalid modes and deterministic order",
+      "explicitDiagnostics": [
+        "CATALOG_CASES_NOT_ARRAY",
+        "CATALOG_CURRENT:X",
+        "CATALOG_DUPLICATE:X",
+        "CATALOG_GROUP:CHR-Z99",
+        "CATALOG_GROUP:X",
+        "CATALOG_ID:X",
+        "CATALOG_NK:X",
+        "CATALOG_ORDER"
+      ],
+      "junit": "PASS"
+    },
+    {
+      "testId": "PT-CHR-GS020",
+      "fixture": "differencesRejectUnknownModesCasesBroadSelectorsDuplicatesAndEmptyValues",
+      "expectedCondition": "each declared DIF is scoped; duplicates, wildcards and missing declarations are rejected",
+      "explicitDiagnostics": [
+        "DIF-015_CASE_COVERAGE",
+        "DIF_CASES_DUPLICATE:DIF-002",
+        "DIF_CASES_EMPTY:DIF-001",
+        "DIF_CURRENT:DIF-001",
+        "DIF_DUPLICATE_FIELD:DIF-002",
+        "DIF_ID_SEQUENCE",
+        "DIF_MODE:DIF-001",
+        "DIF_NK:DIF-001",
+        "DIF_NOT_ARRAY",
+        "DIF_SELECTOR_DUPLICATE:DIF-002",
+        "DIF_SELECTOR_EMPTY:DIF-001",
+        "DIF_SELECTOR_TYPE:DIF-001",
+        "DIF_SELECTOR_WILDCARD:DIF-003",
+        "DIF_SELECTOR_WILDCARD:DIF-004",
+        "DIF_SELECTOR_WILDCARD:DIF-005",
+        "DIF_SELECTOR_WILDCARD:DIF-006",
+        "DIF_UNKNOWN_CASE:DIF-002:CHR-Z99"
+      ],
+      "junit": "PASS"
+    },
+    {
+      "testId": "PT-CHR-GS021",
+      "fixture": "requirementsRejectMissingCoreKeysDuplicatesUnknownAndUnboundSupplementals",
+      "expectedCondition": "each case has required fields; supplemental keys must be unique and bound",
+      "explicitDiagnostics": [
+        "REQ_CASE_ORDER",
+        "REQ_CORE:CHR-A01",
+        "REQ_CORE:CHR-A02",
+        "REQ_DUPLICATE:CHR-A01",
+        "REQ_NK_ONLY_CASE:CHR-Z99",
+        "REQ_SUPPLEMENTAL_CASE:CHR-Z99",
+        "REQ_SUPPLEMENTAL_DUPLICATE:CHR-A03",
+        "REQ_SUPPLEMENTAL_EMPTY:CHR-A02"
+      ],
+      "junit": "PASS"
+    }
+  ],
+  "localToolTestsReplayed": 0,
+  "confirmedSameSuccessfulToolCase": 4,
+  "realExposure": false,
+  "formalAcceptanceId": null,
+  "remaining": [
+    "real FileStore and Current/NK browser",
+    "all six quality gates and product 451",
+    "formal parent acceptance"
+  ]
+}
