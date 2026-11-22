@@ -122,6 +122,12 @@ MISSINGを返せるのはroot検査成功後の既存date open、またはdate�
 
 不在を確定したcallerだけが、DB snapshotのmetadata全8論理fieldと元snapshotのmetadata（file descriptor部を除く）、record数、4800byte record streamのSHA-256を照合する。原本と一致する場合だけpublisherを1回呼ぶ。新descriptorも元のcount/hash（sizeは4800×count）へ再照合し、key/date/UUID以外の内容を差替えない。生成前の不一致ではI/Oを行わず、生成後の失敗ではreadyを削除しない。既存成功の再生成不能・容量不足を保存ERRORへ上書きせず、一時障害として元Inboxを保持する。保持header/state/ref/completed_at/24h期限を変えないdescriptor置換の最終DB手順は324 §7.1による。
 
+### 6.2 APIの借用channel読取例外（SSC-478）
+
+`TransferContentVerifier.verify` は借用 `ReadableByteChannel` の読取で捕捉した `IOException` を固定 `StorageIoException(UNAVAILABLE)` へ変換する前に、その原因と抑制例外をSSC-461の追加辺なしで確認する。到達した最初の `Error` を同じインスタンスで伝播する。原因と抑制例外の順序と有限走査は既存の分類処理に従う。元の `Error` は診断文字列に転記しない。通常のIO失敗は原因、抑制例外、pathを持たない従来の固定診断へ変換する。
+
+4800 byteの読取り、件数、途中EOF・無進捗・余剰byteの拒否、SHA-256、外側callerだけがchannelを閉じる所有契約、RD FIL-001～009、UI237および電文・画面契約を維持する。単体試験は既PT-SCN-008-W06の独立した期待値に加え、合成channelに原因・抑制例外を載せた `IOException` を与え、元の `Error` の同一性、非fatal時の固定診断、借用channelの後条件を確認する。実inode・原本・配備に関する確認は既試験の条件に従う。
+
 ## 7. Path検証の実装規約
 
 ### 7.1 論理検証
