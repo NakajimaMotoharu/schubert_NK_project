@@ -11,3 +11,7 @@ JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.
 ```
 
 source0581a081＋PG215作業tree/dev-foundation、Ubuntu26.04.1/Linux7.0.0-31/amd64/JDK25.0.4/Maven3.9.12。015collectorへ8ID/2source/030031、019独立inventoryで79負canary成功（017と正式80予定）。正式manifestへ環境/対象commit/日時/command/exit/input/expected/actual/coverage/BUG/path/hashを保存予定。実template/HTTP/実NKgate・PGPT/IT/ST未完了。
+
+## 2026-11-22 例外宣言の局所再試験
+
+PG42374、d3537433cf0530fd1e83518bc63d7b4f4d8e0893／Core 1e4e9e64830b552727043f3cb8b9435b28cba472。PT-WEB-292/293は2件成功、失敗・エラー・skip各0。残り6件の旧適用証跡PG41598と区別した。3宣言を具体化し、変更前後のfixture命令と例外ハンドラは一致。SpotBugs／欠落class／Checkstyle各0、PMDの有限worker5は記録。BUG-3580／YKT-2815。evidence/01_PT/018_NK-OPS-001/evidence/PG42374-f03-log-closed-view-two-current-v1/manifest.json SHA256 37b81b054120eb67dd99e5ec46cdf711b1afade7a92251848ec069ff86defc15。
