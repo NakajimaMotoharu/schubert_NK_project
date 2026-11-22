@@ -13,9 +13,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
@@ -66,7 +68,8 @@ final class MediaAssetCopyRowTest {
   private static final int TERMINATION_SECONDS = 10;
 
   @Test
-  void videoSeventeenColumnGoldenIsIndependentAndHasAllNullPairFields() throws Exception {
+  void videoSeventeenColumnGoldenIsIndependentAndHasAllNullPairFields()
+      throws NoSuchAlgorithmException {
     var row = new MediaAssetCopyRow(video());
     assertEquals(
         List.of(
@@ -92,14 +95,16 @@ final class MediaAssetCopyRowTest {
   }
 
   @Test
-  void musicSeventeenColumnGoldenUsesTheIndependentFixedLogicalId() throws Exception {
+  void musicSeventeenColumnGoldenUsesTheIndependentFixedLogicalId()
+      throws NoSuchAlgorithmException {
     var row = new MediaAssetCopyRow(music());
     assertArrayEquals(MUSIC_GOLDEN.getBytes(StandardCharsets.UTF_8), row.copyBytes(encoder()));
     assertEquals(MUSIC_ID, row.fields().get(1));
   }
 
   @Test
-  void positiveIdsSizeAndDisplayOrderHaveIndependentNumericBoundaries() throws Exception {
+  void positiveIdsSizeAndDisplayOrderHaveIndependentNumericBoundaries()
+      throws NoSuchAlgorithmException {
     for (int index : List.of(0, 9)) {
       for (String value : List.of(ONE, MAX_N12))
         assertEquals(value, withField(video(), index, value).fields().get(index));
@@ -113,7 +118,8 @@ final class MediaAssetCopyRowTest {
   }
 
   @Test
-  void logicalAndParentByteLimitsAreSeparateFromActualReferenceExistence() throws Exception {
+  void logicalAndParentByteLimitsAreSeparateFromActualReferenceExistence()
+      throws NoSuchAlgorithmException {
     for (int index : List.of(1, 12)) {
       for (String value : List.of(ASCII_A, ASCII_X.repeat(64), exactUtf8(64)))
         assertEquals(value, withField(video(), index, value).fields().get(index));
@@ -125,7 +131,7 @@ final class MediaAssetCopyRowTest {
   }
 
   @Test
-  void mediaTypeAndMusicRoleUseTheirExistingClosedSets() throws Exception {
+  void mediaTypeAndMusicRoleUseTheirExistingClosedSets() throws NoSuchAlgorithmException {
     for (String value : List.of("video", "music", "AUDIO", "")) rejectField(video(), 2, value);
     for (String role : List.of(ROLE_MAIN, ROLE_INSTRUMENTAL, ROLE_NONE)) {
       var input = music();
@@ -140,7 +146,7 @@ final class MediaAssetCopyRowTest {
   }
 
   @Test
-  void mandatoryTitleCategoryAndNameLimitsCountUtf8Bytes() throws Exception {
+  void mandatoryTitleCategoryAndNameLimitsCountUtf8Bytes() throws NoSuchAlgorithmException {
     for (var pair : List.of(List.of(3, 256), List.of(4, 64), List.of(8, 256))) {
       int index = pair.get(0);
       int limit = pair.get(1);
@@ -154,7 +160,7 @@ final class MediaAssetCopyRowTest {
   }
 
   @Test
-  void nullableSectionPreservesEmptyAndIts128ByteLimit() throws Exception {
+  void nullableSectionPreservesEmptyAndIts128ByteLimit() throws NoSuchAlgorithmException {
     assertEquals("", withField(video(), 5, "").fields().get(5));
     String maximum = exactUtf8(128);
     assertEquals(maximum, withField(video(), 5, maximum).fields().get(5));
@@ -163,7 +169,7 @@ final class MediaAssetCopyRowTest {
   }
 
   @Test
-  void storageAndDisplayHave512ByteBoundsWithoutPathResolution() throws Exception {
+  void storageAndDisplayHave512ByteBoundsWithoutPathResolution() throws NoSuchAlgorithmException {
     String storage = ASCII_X.repeat(508) + ".mp4";
     assertEquals(512, storage.getBytes(StandardCharsets.UTF_8).length);
     assertEquals(storage, withField(video(), STORAGE_INDEX, storage).fields().get(STORAGE_INDEX));
@@ -179,7 +185,7 @@ final class MediaAssetCopyRowTest {
   }
 
   @Test
-  void allSixMimeExtensionPairsAreExactAndNeverGuessed() throws Exception {
+  void allSixMimeExtensionPairsAreExactAndNeverGuessed() throws NoSuchAlgorithmException {
     var vectors =
         List.of(
             List.of(
@@ -216,7 +222,7 @@ final class MediaAssetCopyRowTest {
   }
 
   @Test
-  void currentV029PairTruthRequiresEveryConditionalNonNullValue() throws Exception {
+  void currentV029PairTruthRequiresEveryConditionalNonNullValue() throws NoSuchAlgorithmException {
     rejectField(video(), 13, PAIR_KEY);
     rejectField(video(), 14, ROLE_MAIN);
     var both = video();
@@ -237,7 +243,7 @@ final class MediaAssetCopyRowTest {
   }
 
   @Test
-  void assetShaIsExactlyLowercaseHex64() throws Exception {
+  void assetShaIsExactlyLowercaseHex64() throws NoSuchAlgorithmException {
     for (String value :
         List.of(
             SHA.toUpperCase(Locale.ROOT),
@@ -249,7 +255,7 @@ final class MediaAssetCopyRowTest {
   }
 
   @Test
-  void canonicalUtcYearAndMicrosecondBoundariesAreIndependent() throws Exception {
+  void canonicalUtcYearAndMicrosecondBoundariesAreIndependent() throws NoSuchAlgorithmException {
     for (String value :
         List.of(
             "0001-01-01T00:00:00Z",
@@ -268,7 +274,7 @@ final class MediaAssetCopyRowTest {
   }
 
   @Test
-  void everyTextBoundaryRejectsMalformedUnicodeNonNfcAndControls() throws Exception {
+  void everyTextBoundaryRejectsMalformedUnicodeNonNfcAndControls() throws NoSuchAlgorithmException {
     for (int index : List.of(1, 3, 4, 5, 6, 7, 8, 12)) {
       for (String value :
           List.of("e\u0301", "\ud800", "\udc00", "private\u0000", "x\t", "x\n", "x\r", "x\u007f"))
@@ -281,7 +287,8 @@ final class MediaAssetCopyRowTest {
   }
 
   @Test
-  void nullInputsColumnCountsRequiredElementsAndEncoderFailExplicitly() throws Exception {
+  void nullInputsColumnCountsRequiredElementsAndEncoderFailExplicitly()
+      throws NoSuchAlgorithmException {
     reject(null);
     var shortRow = video();
     shortRow.removeLast();
@@ -298,7 +305,8 @@ final class MediaAssetCopyRowTest {
   }
 
   @Test
-  void immutableDeepSnapshotAndFreshCopyBytesHaveIndependentOwnership() throws Exception {
+  void immutableDeepSnapshotAndFreshCopyBytesHaveIndependentOwnership()
+      throws NoSuchAlgorithmException {
     var input = video();
     var row = new MediaAssetCopyRow(input);
     input.clear();
@@ -313,7 +321,7 @@ final class MediaAssetCopyRowTest {
   }
 
   @Test
-  void japaneseMusicLogicalIdComesFromTheIndependentFixedVector() throws Exception {
+  void japaneseMusicLogicalIdComesFromTheIndependentFixedVector() throws NoSuchAlgorithmException {
     var input = music();
     input.set(1, "ae90358a4e9bfb4593d592f221bd62411bffc9d85f997245c117dce405c47edc");
     input.set(6, "音楽/曲.flac");
@@ -327,7 +335,7 @@ final class MediaAssetCopyRowTest {
   }
 
   @Test
-  void pairedMusicKeyHasOneTo256Utf8Bytes() throws Exception {
+  void pairedMusicKeyHasOneTo256Utf8Bytes() throws NoSuchAlgorithmException {
     for (String role : List.of(ROLE_MAIN, ROLE_INSTRUMENTAL)) {
       var input = paired(role);
       input.set(13, ASCII_A);
@@ -341,7 +349,7 @@ final class MediaAssetCopyRowTest {
   }
 
   @Test
-  void sqlLikeDisplayTextIsOnlyEscapedCopyData() throws Exception {
+  void sqlLikeDisplayTextIsOnlyEscapedCopyData() throws NoSuchAlgorithmException {
     var input = video();
     input.set(7, "select 'x'; \\N");
     String expected =
@@ -356,7 +364,8 @@ final class MediaAssetCopyRowTest {
   }
 
   @Test
-  void finiteWorkersReturnIndependentExactGoldenBytes() throws Exception {
+  void finiteWorkersReturnIndependentExactGoldenBytes()
+      throws NoSuchAlgorithmException, InterruptedException, ExecutionException, TimeoutException {
     var row = new MediaAssetCopyRow(video());
     var executor = Executors.newFixedThreadPool(WORKERS);
     try {
@@ -374,7 +383,8 @@ final class MediaAssetCopyRowTest {
   }
 
   @Test
-  void fixedRedactionAndIndependentNormalValueSurviveRejectedMetadata() throws Exception {
+  void fixedRedactionAndIndependentNormalValueSurviveRejectedMetadata()
+      throws NoSuchAlgorithmException {
     rejectField(video(), 3, "private\u0000metadata");
     var row = new MediaAssetCopyRow(video());
     assertEquals("MediaAssetCopyRow[REDACTED]", row.toString());

@@ -10,9 +10,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
@@ -241,7 +243,8 @@ final class AudioFileCopyRowTest {
   }
 
   @Test
-  void finiteWorkersObserveTheSameImmutableGoldenWithoutSharedByteArrays() throws Exception {
+  void finiteWorkersObserveTheSameImmutableGoldenWithoutSharedByteArrays()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var row = new AudioFileCopyRow(fields());
     var executor = Executors.newFixedThreadPool(WORKERS);
     try {
