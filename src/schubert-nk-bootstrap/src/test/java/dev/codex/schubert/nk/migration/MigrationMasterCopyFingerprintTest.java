@@ -541,7 +541,7 @@ final class MigrationMasterCopyFingerprintTest {
             stamp));
   }
 
-  private static MediaAssetCopyBatch media(String stamp) {
+  private static MediaAssetCopyBatch media(String stamp) throws NoSuchAlgorithmException {
     var manifest =
         new AssetMigrationManifest(
             List.of(
