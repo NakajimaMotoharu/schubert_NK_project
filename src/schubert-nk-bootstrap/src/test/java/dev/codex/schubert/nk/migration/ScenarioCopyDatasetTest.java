@@ -13,9 +13,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
@@ -147,7 +149,8 @@ final class ScenarioCopyDatasetTest {
   }
 
   @Test
-  void finiteOwnedConcurrentCopiesKeepBothIndependentGoldenStreams() throws Exception {
+  void finiteOwnedConcurrentCopiesKeepBothIndependentGoldenStreams()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var dataset = normal();
     var executor = Executors.newFixedThreadPool(8);
     try {
@@ -170,7 +173,7 @@ final class ScenarioCopyDatasetTest {
 
   /** SSC351 / PT-MIG-DATASET013. */
   @Test
-  void streamingBothPathsRetainsIndependentFullGoldenBytes() throws Exception {
+  void streamingBothPathsRetainsIndependentFullGoldenBytes() throws IOException {
     var dataset = normal();
     var writer = new PostgresCopyTextWriter(encoder());
     var files = new ByteArrayOutputStream();
@@ -222,13 +225,31 @@ final class ScenarioCopyDatasetTest {
     var failure = new IOException("synthetic dataset sink failure");
     var sink =
         new OutputStream() {
+          private int closes;
+          private int flushes;
+
           @Override
           public void write(int value) throws IOException {
             throw failure;
           }
+
+          @Override
+          public void close() {
+            closes++;
+          }
+
+          @Override
+          public void flush() {
+            flushes++;
+          }
         };
-    assertSame(failure, assertThrows(IOException.class, () -> dataset.writeFiles(writer, sink)));
-    assertSame(failure, assertThrows(IOException.class, () -> dataset.writeEntries(writer, sink)));
+    try (sink) {
+      assertSame(failure, assertThrows(IOException.class, () -> dataset.writeFiles(writer, sink)));
+      assertSame(failure, assertThrows(IOException.class, () -> dataset.writeEntries(writer, sink)));
+      assertEquals(0, sink.closes);
+      assertEquals(0, sink.flushes);
+    }
+    assertEquals(1, sink.closes);
     assertArrayEquals(
         FILE_GOLDEN.getBytes(StandardCharsets.UTF_8), dataset.fileCopyBytes(encoder()));
     assertArrayEquals(
