@@ -1,0 +1,121 @@
+{
+  "eventId": "PGPT-20261008-8554",
+  "workCategory": "CONTRACT_AUDIT",
+  "source": "eea6d4c4031ebd31b5fa89472b14a782b4b736eb",
+  "productionCoreMain": "e8368d22c4da2ec841f008df793594d3be9066af",
+  "canonicalDesignSource": "ca41c03c0c6efff9a3a35b47b480491810bee6f9",
+  "managementWorkIds": [
+    "WBS-G01"
+  ],
+  "planRow": {
+    "ID": "WBS-G01",
+    "元行": "WBS-G01",
+    "費目": "F",
+    "主担当": "WBS-G01",
+    "状態": "計画",
+    "作業": "Java/JS全line/method/class/branch100%・scope漏れ0",
+    "残pp": "2.0",
+    "着手": "設計354・当該source・作業所有・既存成果を照合。元契約の着手依存と個別HOLDを確認",
+    "終了証拠": "Java全4counter100%・JS全line/function/branch100%、全inventory漏れ0。CSS/DDLをJava class母集団へ混ぜない。",
+    "補正根拠": "予測777の元行残。個別費用実測がない部分は前回単価を継承",
+    "契約HOLD": "H-G01",
+    "対象": "",
+    "範囲": "SS 354",
+    "保存証跡": "該当criteriaごとの判定・未解決一覧・照合元manifest・判定者",
+    "順次": "False",
+    "配賦窓": "24",
+    "楽観pp": "0.75",
+    "慎重pp": "4.0",
+    "要求設計の版差": "PT基準仕様 NK-OPS-001、SS 354",
+    "lineNumber": 672,
+    "改訂残pp": "2.0"
+  },
+  "run": "PG42810",
+  "startEvent": "PGPT-20261008-8553",
+  "outcome": {
+    "actualTests": 0,
+    "newToolChecks": 3,
+    "collectorCases": 116,
+    "formalAcceptanceId": null,
+    "technicalCondition": "All four module counters now required nonempty/pass with independently matched package sums. Actual unchanged Protocol admitted; missing branch rejected."
+  },
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42812-formal-module-counter-canaries-v1/manifest.json",
+    "sha256": "03c783af90caed55535a2f5687aa91eee4af3ab7933f8e702a3b1e467acc5eb1"
+  },
+  "nextEvidence": {
+    "run": "PG42814",
+    "wbs": "WBS-F03/2-2-b",
+    "target": "SpotBugs formal reported analysis completeness",
+    "action": "Compare 006 report admission with six-module physical ClassStats and MissingClass requirements. Use authorized Protocol and synthetic cases only."
+  },
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T16:17:52+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 41,
+      "remainingPercent": 59,
+      "resetsAt": 1795879771,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "modelRequested": "gpt-6.2-sol",
+  "modelObserved": null,
+  "reasoningRequested": "high",
+  "reasoningObserved": null,
+  "speedRequested": "standard",
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 41,
+    "remainingPercent": 59,
+    "resetsAt": 1795879771,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "1ff38eb9eed4d9105048ee60928ca609909ea6379f3e954c831183aed6d6caac",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-22T16:17:52+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 41,
+        "remainingPercent": 59,
+        "resetsAt": 1795879771,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": 0,
+  "sameQuotaWindow": true,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-22T16:16:50.875644+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": false,
+  "quotaBefore": {
+    "usedPercent": 41,
+    "remainingPercent": 59,
+    "resetsAt": 1795879771,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null
+}
