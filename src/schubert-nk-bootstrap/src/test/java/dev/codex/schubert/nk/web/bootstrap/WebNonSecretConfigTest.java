@@ -53,7 +53,7 @@ final class WebNonSecretConfigTest {
   }
 
   @Test
-  void opsWebCfg007ExplicitDbMqSourcesAndNegativeBoundaries() {
+  void opsWebCfg007ExplicitDbMqSourcesAndNegativeBoundaries() throws NoSuchAlgorithmException {
     var config =
         WebNonSecretConfig.parse(
             "", "nk.db.url: jdbc:postgresql://127.0.0.1:1/a\nnk.mq.url: tcp://127.0.0.1:65535\n");
@@ -111,7 +111,7 @@ final class WebNonSecretConfigTest {
   }
 
   @Test
-  void opsWebCfg002LayeredRangesAndScalarTypes() {
+  void opsWebCfg002LayeredRangesAndScalarTypes() throws NoSuchAlgorithmException {
     var config =
         WebNonSecretConfig.parse(
             "nk.monitoring.mode: DEBUG\n",

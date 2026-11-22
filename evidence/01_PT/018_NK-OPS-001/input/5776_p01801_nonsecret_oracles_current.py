@@ -158,5 +158,5 @@ def main(version):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--version", choices=("v1", "v2"), required=True)
+    parser.add_argument("--version", choices=("v1", "v2", "v3"), required=True)
     main(parser.parse_args().version)
