@@ -1,0 +1,135 @@
+{
+  "run": "PG42248",
+  "source": "767962ebfe6d95bca68c302782adb6e238fe1ac5",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-F03/2-2-b",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T06:07:02.841818+00:00",
+  "sourceProof": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42242-f03-question-wire-current-preflight-v1/manifest.json",
+      "sha256": "d197343081eee4d2a63b621ffc2887238eb8b96cfd05b0d81eb9026f5572f576"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42244-f03-question-nfc-current-wire-v1/manifest.json",
+      "sha256": "688defe513a4a028e1fa10f87abe627a3024e71592cdfe50e8208c1fc56c98b6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42246-f03-question-form-typed-v1/manifest.json",
+      "sha256": "995572b19d15b3cf6cb78c272ce15b66872db81d9ac546fe1560af24e143c0d7"
+    }
+  ],
+  "fixtureChange": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/QuestionSubmitFormTest.java",
+    "sha256": "89c91096d53f692483d5c5f3029ede573ca8511e640842688b41ba7df3ee376f"
+  },
+  "oldTest": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42242-question-fixed-current-v1/test/dev/codex/schubert/nk/web/form/QuestionSubmitFormTest.class",
+    "sha256": "9c74a7ba5e760bf768f3f911f644483579e781318fdd4f6f2c0e454534772ea9"
+  },
+  "newTest": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42248-question-form-bounded-fixture-v1/test/dev/codex/schubert/nk/web/form/QuestionSubmitFormTest.class",
+    "sha256": "651a7c6cf36e5cfc799b476c0d37b12abf84f4fa4bd346617d63513de9977264"
+  },
+  "testMethodsInstructionsUnchanged": true,
+  "related": [
+    "BUG-3569",
+    "YKT-2807"
+  ],
+  "currentNewCaseId": "PT-QST-FORM008",
+  "junit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42248-question-form-bounded-fixture-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "800ec7648e5ab69552d7d38c6ea6f91a0588fe473ed45896047dcfde93f2737d"
+  },
+  "caseMethod": "qstForm008ConcurrentIndependentBodiesAndTokens",
+  "passCount": 1,
+  "failCount": 0,
+  "skipCount": 0,
+  "exec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42248-question-form-bounded-fixture-v1/own.exec",
+    "sha256": "1b2d01834d033e5573f86cc29599cb2db615229ac3002f0242a770ab738ba5a7"
+  },
+  "pmdRuleRulings": [
+    {
+      "rule": "CloseResource",
+      "method": "qstForm008ConcurrentIndependentBodiesAndTokens",
+      "line": "241",
+      "reason": "Test-owned finite worker lifetime; checked completion by calls bounded at 30s and terminal 10s."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "method": "qstForm008ConcurrentIndependentBodiesAndTokens",
+      "line": "241",
+      "reason": "Test-owned finite worker lifetime; checked completion by calls bounded at 30s and terminal 10s."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "method": "qstForm008ConcurrentIndependentBodiesAndTokens",
+      "line": "247",
+      "reason": "Test-owned finite worker lifetime; checked completion by calls bounded at 30s and terminal 10s."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "method": "qstForm008ConcurrentIndependentBodiesAndTokens",
+      "line": "268",
+      "reason": "Test-owned finite worker lifetime; checked completion by calls bounded at 30s and terminal 10s."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "method": "qstForm008ConcurrentIndependentBodiesAndTokens",
+      "line": "269",
+      "reason": "Test-owned finite worker lifetime; checked completion by calls bounded at 30s and terminal 10s."
+    }
+  ],
+  "spotBugsRuleRulings": [
+    {
+      "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "method": "lambda$qstForm005ClosedBindingMissingDuplicateAndNullContracts$0",
+      "scope": "Deliberate failed-null negative in an independent local binding fixture."
+    }
+  ],
+  "appliedFixedRules": 1,
+  "privateTokenOrActualBrokerActions": 0,
+  "outputs": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42248-question-form-bounded-fixture-v1/pmd.xml",
+      "sha256": "bcdc599174bdbd1f69cbeea895578d813f14a2040c8d86ebb792e6c714f54eaa"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42248-question-form-bounded-fixture-v1/spotbugs.xml",
+      "sha256": "c943e9027bbb4bc6b4171d3da2ca888dd6c467e898fbacf0135188bc302a981d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42248-question-form-bounded-fixture-v1/checkstyle.xml",
+      "sha256": "e54264581cfd84d26d61536bf3aa1565a4c63ed9d8141d520fad90a841989a84"
+    }
+  ],
+  "terminals": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42248-question-form-bounded-fixture-v1/format.terminal.json",
+      "sha256": "c8d941a324974e726aef037e158836e87b75d1ccb05c51edb6f91c7f9bf93106"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42248-question-form-bounded-fixture-v1/compile.terminal.json",
+      "sha256": "bb20b83becaaaa1ee3025221825aa5b51e25afa182e55688cc52f5aabfe9ddc4"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42248-question-form-bounded-fixture-v1/checkstyle.terminal.json",
+      "sha256": "d46db7c083341b10cfe27f4651760a0ddbce972f6e2d890c9c0e98d3d6d30865"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42248-question-form-bounded-fixture-v1/pmd.terminal.json",
+      "sha256": "5516ecac7449bc14f0e0087d170ea052b8e65dadc65090fe3b49a8f55f88868d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42248-question-form-bounded-fixture-v1/spotbugs.terminal.json",
+      "sha256": "93904edb96528adf395e7dc0f7e297466920e5112171d5cb220b699580c79a5d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42248-question-form-bounded-fixture-v1/unit.terminal.json",
+      "sha256": "0f79da4846cdeacfe7d212daca6fbfff63ac8395f96f3427f936a5907f955abd"
+    }
+  ],
+  "whole451": false,
+  "formalAcceptanceId": null
+}

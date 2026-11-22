@@ -1,0 +1,61 @@
+{
+  "run": "PG42244",
+  "source": "62781f6425e1761bc371384084e39afe529c8718",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-F03/2-2-b",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T06:05:13.887813+00:00",
+  "preflight": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42242-f03-question-wire-current-preflight-v1/manifest.json",
+    "sha256": "d197343081eee4d2a63b621ffc2887238eb8b96cfd05b0d81eb9026f5572f576"
+  },
+  "testName": "qstForm002ByteBoundariesAfterNfcWithoutTruncation",
+  "selectedCount": 1,
+  "passedCount": 1,
+  "errors": 0,
+  "skipped": 0,
+  "syntheticPayloadContract": {
+    "layout": "QSBREQ01",
+    "validVectors": 5,
+    "rejectedVectors": 5,
+    "maxUtf8BodyAfterNfc": 4096,
+    "rejectOverflow": true,
+    "rejectedAscii4097RetainedInDisplay": true
+  },
+  "traceNoBodySecret": true,
+  "stage": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42244-web-question-nfc-selected-v1/terminal.json",
+    "sha256": "2866f8822e91248ebdf56422b67247ceb3cb8ca6c952044f413fad67a4f9b26f"
+  },
+  "xml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42244-web-question-nfc-selected-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "549c1012add25141228cef88ed301e120468227bdf44b774ee31dd2f554e4154"
+  },
+  "exec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42244-web-question-nfc-selected-v1/original.exec",
+    "sha256": "f2cdd7789acb0d284ada467ea3c8431e99dd091069226c4bb900c91213cddb9c"
+  },
+  "localRawMostRecentProbes": [
+    {
+      "type": "dev/codex/schubert/nk/protocol/codec/FieldCodec",
+      "crc": "a3fd9264ad99b2ee",
+      "hits": 22,
+      "count": 126
+    },
+    {
+      "type": "dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog",
+      "crc": "a9b95908816c4323",
+      "hits": 61,
+      "count": 111
+    }
+  ],
+  "actualOperationSubmissionOrAuthenticationOrBroker": false,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "correctionToStartEvent": {
+    "id": "PGPT-20261008-8055",
+    "previousPhrase": "declared two layouts",
+    "actualScope": "sole QSBREQ01; both changed codec/definition types measured",
+    "originalEventPreserved": true
+  }
+}
