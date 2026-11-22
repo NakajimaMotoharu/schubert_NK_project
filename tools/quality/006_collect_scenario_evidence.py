@@ -11,6 +11,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 from pgpt_evidence_checksums import write_scope_checksums
+from pgpt_reactor_junit import MODULE_DIRECTORIES, verify_reactor_junit
 from pgpt_evidence_destination import evidence_output_root
 
 
@@ -40,6 +41,7 @@ def main():
     subprocess.run(["git", "diff", "--exit-code", commit, "--", "src", "pom.xml",
                     "program/characterization", "tools/quality"], cwd=repo, check=True,
                    stdout=subprocess.DEVNULL)
+    report_receipt = verify_reactor_junit(repo, run, commit)
     raw = (Path("/tmp") / (run + ".log")).read_bytes()
     if b"BUILD SUCCESS" not in raw or b"[ERROR]" in raw:
         raise SystemExit("build log is not successful")
@@ -47,12 +49,7 @@ def main():
         (evidence / folder).mkdir(parents=True, exist_ok=True)
     modules, methods, regressions = {}, [], []
     current_reports = set()
-    for module, directory in (("characterization", "program/characterization"),
-                              ("protocol", "src/schubert-nk-protocol"),
-                              ("storage", "src/schubert-nk-storage"),
-                              ("bootstrap", "src/schubert-nk-bootstrap"),
-                              ("api", "src/schubert-nk-api"), ("web", "src/schubert-nk-web"),
-                              ("batch", "src/schubert-nk-batch")):
+    for module, directory in MODULE_DIRECTORIES:
         target = repo / directory / "target"
         reports = sorted((target / "surefire-reports").glob("TEST-*.xml"))
         if not reports:
@@ -198,6 +195,12 @@ def main():
         "expectations": "008 PT specification: UI234 independent byte offsets and literal route maps, synthetic SQL fixtures and independently enumerated entry IDs/order/filter/page outcomes. Native storage uses literal bytes and actual filesystem postconditions: one of 100 publishers wins without replacing existing bytes; retained FDs survive path replacement and are all closed. Production is not used to generate expected values.",
         "scope": "Queries/detail, shared retained directory/inode capabilities, root metadata and lexical layout checks, atomic quota and inline/file projection. Internal writer creates, initializes, streams, verifies and publishes real files with collision, cleanup and retained-quota fault tests. Internal Web reader opens existing children read-only, validates the held inode and hash before decode, then verifies decoded bytes/hash/sequence without returning partial data; maximum 48 MB, 100 concurrent reads and fault rejection tested. Projection's separate stub is not a real hash oracle. Complete startup metadata scanning now includes empty/partial parts and verified ready sizes, rejects unknown/corrupt entries and incomplete enumerations, and enforces the 10000-file inventory bound; it is not allocated-block disk usage or a live concurrent snapshot. An internal exclusive-startup diagnostic probe now verifies real A/B file force/hash/group, no-replace collision and directory fsync; only confirmed diagnostic artifacts are cleaned, while uncertain/changed ready files or cleanup failures remain failed startup evidence. Internal staged Scenario service now connects read-only authentication/Inbox/query, DB-free file work and freshly authenticated final Inbox commit/close before reply. T01-T05 use explicit publisher/inspector doubles; T06 connects real PostgreSQL/Artemis send/ACK failures; T07 connects real retained-inode writer/inspector and PostgreSQL with independent 201/10000-record bytes/hash and ready preservation. Full root/exclusive startup composition/readiness and scan-to-service initialization, production registration, actual service UID separation, HTTP and CHR remain incomplete as tracked in 431/008.",
     }
+    if verify_reactor_junit(repo, run, commit) != report_receipt:
+        raise ValueError("reactor JUnit receipt changed during collection")
+    receipt_path = Path("logs") / (run + "-junit-receipt.json")
+    (evidence / receipt_path).write_bytes(report_receipt)
+    manifest["reactorJunitReceipt"] = str(receipt_path)
+    manifest["reactorJunitReceiptSha256"] = hashlib.sha256(report_receipt).hexdigest()
     (evidence / "logs" / (run + "-summary.json")).write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     manifest["files"] = [{"path": str(p.relative_to(evidence)), "sha256": hashlib.sha256(p.read_bytes()).hexdigest()}
                          for p in sorted(evidence.rglob("*")) if p.is_file() and p.name not in ("manifest.json", "checksums.sha256")]

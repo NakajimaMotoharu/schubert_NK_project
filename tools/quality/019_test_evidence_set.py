@@ -3047,6 +3047,48 @@ class EvidenceSetTest(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "file inventory"):
                 validate()
 
+    def test_persisted_reactor_receipt_is_bound_to_its_manifest(self):
+        with tempfile.TemporaryDirectory(prefix="nk-reactor-receipt-") as scratch:
+            root = Path(scratch)
+            scope = gate.ROOT_MANIFEST.removesuffix("/manifest.json")
+            self.write_scope(root, scope)
+            directory = root / scope
+            receipt = "logs/PT-WEB-TEST-junit-receipt.json"
+            path = directory / receipt
+            path.parent.mkdir()
+            original = json.dumps({
+                "schema": "pgpt-reactor-junit-v1", "runId": "PT-WEB-TEST", "targetCommit": "a" * 40
+            }).encode()
+            different_run = original.replace(b"PT-WEB-TEST", b"PT-WEB-OTHER")
+            for linked, content, good_hash in (
+                (receipt, original, True),
+                (receipt, original, False),
+                ("results.xml", original, True),
+                (receipt, different_run, True),
+            ):
+                path.write_bytes(content)
+                expected = hashlib.sha256(content).hexdigest()
+                recorded = expected if good_hash else "b" * 64
+                with self.subTest(linked=linked, recorded=recorded):
+                    manifest = json.loads((directory / "manifest.json").read_bytes())
+                    manifest["files"] = [
+                        {"path": name, "sha256": hashlib.sha256((directory / name).read_bytes()).hexdigest()}
+                        for name in ("results.xml", receipt)
+                    ]
+                    manifest["reactorJunitReceipt"] = linked
+                    manifest["reactorJunitReceiptSha256"] = recorded
+                    (directory / "manifest.json").write_text(json.dumps(manifest))
+                    (directory / "checksums.sha256").write_text("".join(
+                        hashlib.sha256((directory / name).read_bytes()).hexdigest() + "  " + name + "\n"
+                        for name in ("manifest.json", "results.xml", receipt)
+                    ))
+                    if linked == receipt and content == original and good_hash:
+                        result = gate.validate_scope(root, scope, "PT-WEB-TEST", "a" * 40, "dev-foundation")
+                        self.assertEqual(scope, result["scope"])
+                    else:
+                        with self.assertRaisesRegex(ValueError, "persisted reactor JUnit receipt"):
+                            gate.validate_scope(root, scope, "PT-WEB-TEST", "a" * 40, "dev-foundation")
+
     def test_candidate_reservation_rejects_existing_inside_or_aliased_paths(self):
         with tempfile.TemporaryDirectory(prefix="nk-formal-reservation-") as scratch:
             base = Path(scratch)

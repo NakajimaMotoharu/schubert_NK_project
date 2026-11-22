@@ -9,6 +9,7 @@ import re
 import subprocess
 import sys
 
+from pgpt_reactor_junit import verify_reactor_junit
 from pgpt_evidence_destination import CANDIDATE_ROOT_ENV, check_candidate_root
 
 BASE = (
@@ -138,6 +139,20 @@ def validate_scope(root, scope, run, commit, branch):
     for entry in entries:
         if digest(local_file(directory, entry["path"])) != entry["sha256"]:
             raise ValueError("evidence file hash mismatch")
+    if scope == str(Path(ROOT_MANIFEST).parent) and "reactorJunitReceipt" in manifest:
+        receipt = manifest["reactorJunitReceipt"]
+        if receipt not in actual:
+            raise ValueError("invalid persisted reactor JUnit receipt path")
+        payload = local_file(directory, receipt)
+        if digest(payload) != manifest["reactorJunitReceiptSha256"]:
+            raise ValueError("invalid persisted reactor JUnit receipt hash")
+        terminal = json.loads(payload.read_bytes())
+        if (
+            not isinstance(terminal, dict)
+            or (terminal.get("schema"), terminal.get("runId"), terminal.get("targetCommit"))
+            != ("pgpt-reactor-junit-v1", run, commit)
+        ):
+            raise ValueError("invalid persisted reactor JUnit receipt run/source")
     checksums = {}
     for line in (directory / "checksums.sha256").read_text().splitlines():
         match = re.fullmatch(r"([0-9a-f]{64})  (.+)", line)
@@ -241,8 +256,16 @@ def main():
         paths.extend(("tools/quality", ".mvn", "mvnw", "mvnw.cmd"))
     subprocess.run(["git", "diff", "--exit-code", commit, "--", *paths], cwd=repo, check=True)
     if not args.validate_only:
+        receipt = verify_reactor_junit(repo, args.run_id, commit)
         root = reserve_candidate(repo, args.run_id, args.candidate_root)
         collect(repo, args.run_id, candidate_root=root)
+        reactor = root / ROOT_MANIFEST
+        published = load_success_manifest(reactor)
+        if (
+            verify_reactor_junit(repo, args.run_id, commit) != receipt
+            or local_file(reactor.parent, published["reactorJunitReceipt"]).read_bytes() != receipt
+        ):
+            raise ValueError("collected reactor JUnit receipt differs from the terminal record")
     results = validate_all(root, args.run_id, commit, branch)
     print(json.dumps({"runId": args.run_id, "targetCommit": commit, "scopes": results,
                       "evidenceRoot": str(root),
