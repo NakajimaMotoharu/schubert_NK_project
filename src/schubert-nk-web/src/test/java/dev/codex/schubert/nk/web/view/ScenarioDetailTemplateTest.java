@@ -21,6 +21,7 @@ import dev.codex.schubert.nk.protocol.layout.semantic.Sha256Hex;
 import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
 import dev.codex.schubert.nk.web.config.WebMvcConfiguration;
 import dev.codex.schubert.nk.web.session.SessionPrincipal;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -33,9 +34,11 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.jupiter.api.Test;
@@ -384,7 +387,8 @@ class ScenarioDetailTemplateTest {
   }
 
   @Test
-  void detail024ConcurrentRendering() throws Exception {
+  void detail024ConcurrentRendering()
+      throws InterruptedException, ExecutionException, TimeoutException, IOException {
     try (var context = context()) {
       var executor = Executors.newFixedThreadPool(8);
       try {
