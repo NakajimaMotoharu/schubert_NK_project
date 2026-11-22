@@ -17,6 +17,7 @@ import dev.codex.schubert.nk.protocol.layout.semantic.GameCode;
 import dev.codex.schubert.nk.protocol.layout.semantic.ScriptFileId;
 import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
 import dev.codex.schubert.nk.web.session.SessionPrincipal;
+import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -26,9 +27,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jsoup.Jsoup;
 import org.junit.jupiter.api.Test;
 import org.thymeleaf.context.Context;
@@ -259,7 +262,7 @@ class ScenarioSearchResultsViewModelTest {
   }
 
   @Test
-  void web211ClosedBeansAndRedaction() throws Exception {
+  void web211ClosedBeansAndRedaction() throws IntrospectionException {
     Map<Class<?>, Set<String>> expected =
         Map.of(
             ScenarioSearchResultsViewModel.class, Set.of("topBar", "page", "rows"),
@@ -308,7 +311,10 @@ class ScenarioSearchResultsViewModelTest {
     var dom =
         Jsoup.parse(
             engine.process(
-                "<article th:each='row : ${page.rows}'><h2 th:text='${row.chapterTitle}'></h2><span th:text='${row.speaker}'></span><p th:text='${row.body}'></p><a th:href='${row.scenarioHref}'>開く</a><audio th:if='${row.audio.present}' th:src='${row.audio.orElseThrow().href}'></audio></article>",
+                "<article th:each='row : ${page.rows}'><h2 th:text='${row.chapterTitle}'></h2><span"
+                    + " th:text='${row.speaker}'></span><p th:text='${row.body}'></p><a"
+                    + " th:href='${row.scenarioHref}'>開く</a><audio th:if='${row.audio.present}'"
+                    + " th:src='${row.audio.orElseThrow().href}'></audio></article>",
                 context));
     assertEquals("章<script>", dom.select("h2").first().text());
     assertEquals("話者<img>", dom.select("span").first().text());
@@ -321,7 +327,8 @@ class ScenarioSearchResultsViewModelTest {
   }
 
   @Test
-  void web213ConcurrentProjection() throws Exception {
+  void web213ConcurrentProjection()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var executor = Executors.newFixedThreadPool(8);
     try {
       var tasks = new ArrayList<Future<ScenarioSearchResultsViewModel>>();

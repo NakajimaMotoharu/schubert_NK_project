@@ -21,6 +21,7 @@ import dev.codex.schubert.nk.protocol.layout.semantic.SpeakerId;
 import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
 import dev.codex.schubert.nk.web.form.ScenarioSearchForm;
 import dev.codex.schubert.nk.web.session.SessionPrincipal;
+import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -30,9 +31,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.stream.IntStream;
 import org.jsoup.Jsoup;
 import org.junit.jupiter.api.Test;
@@ -377,7 +380,7 @@ class ScenarioSearchViewModelTest {
     assertThrows(UnsupportedOperationException.class, () -> v.getErrors().clear());
   }
 
-  private static void beans(Class<?> type, Set<String> expected) throws Exception {
+  private static void beans(Class<?> type, Set<String> expected) throws IntrospectionException {
     var properties = Introspector.getBeanInfo(type, Object.class).getPropertyDescriptors();
     assertEquals(
         expected,
@@ -393,7 +396,7 @@ class ScenarioSearchViewModelTest {
   }
 
   @Test
-  void web228ClosedBeansAndRedaction() throws Exception {
+  void web228ClosedBeansAndRedaction() throws IntrospectionException {
     beans(
         ScenarioSearchViewModel.class,
         Set.of(
@@ -427,7 +430,8 @@ class ScenarioSearchViewModelTest {
     var doc =
         Jsoup.parse(
             engine.process(
-                "<p th:text='${page.filters.q}'></p><a th:href='${page.nextHref.orElseThrow()}'>次</a>",
+                "<p th:text='${page.filters.q}'></p><a"
+                    + " th:href='${page.nextHref.orElseThrow()}'>次</a>",
                 context));
     assertEquals("<script>&\"", doc.selectFirst("p").text());
     assertTrue(doc.select("script").isEmpty());
@@ -437,7 +441,8 @@ class ScenarioSearchViewModelTest {
   }
 
   @Test
-  void web229ConcurrentSnapshots() throws Exception {
+  void web229ConcurrentSnapshots()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var pool = Executors.newFixedThreadPool(8);
     try {
       var tasks = new ArrayList<Future<?>>();
