@@ -1274,6 +1274,41 @@ class EvidenceSetTest(unittest.TestCase):
         with self.assertRaises(ValueError): batch.validate_reactor(wrong, "PT-WEB-fixture")
         with self.assertRaises(ValueError): batch.validate_reactor(verified, "PT-WEB-other")
 
+    def test_batch_preflight_report_inventory(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            target = Path(temporary)
+            reports = target / "surefire-reports"
+            reports.mkdir()
+            report = reports / "TEST-batch.xml"
+            suite = ET.Element("testsuite", name="LocalBatchFixture", tests="550",
+                               failures="0", errors="0", skipped="0")
+            for index in range(550):
+                ET.SubElement(suite, "testcase", name=f"local{index}", classname="LocalBatchFixture")
+            ET.ElementTree(suite).write(report, encoding="utf-8")
+            self.assertEqual([550], [len(s.findall("testcase")) for s in batch.read_batch_reports(target)])
+            for attribute in ("failures", "errors", "skipped", "tests"):
+                with self.subTest(attribute=attribute):
+                    bad = copy.deepcopy(suite)
+                    bad.set(attribute, "1")
+                    ET.ElementTree(bad).write(report, encoding="utf-8")
+                    with self.assertRaisesRegex(ValueError, "nonpassing or inconsistent"):
+                        batch.read_batch_reports(target)
+            later = copy.deepcopy(suite)
+            later.set("tests", "1466")
+            for index in range(550, 1466):
+                ET.SubElement(later, "testcase", name=f"local{index}", classname="LocalBatchFixture")
+            ET.ElementTree(later).write(report, encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "total does not match"):
+                batch.read_batch_reports(target)
+            rerun = copy.deepcopy(suite)
+            ET.SubElement(rerun[0], "rerunFailure")
+            ET.ElementTree(rerun).write(report, encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "nonpassing or inconsistent"):
+                batch.read_batch_reports(target)
+            report.unlink()
+            with self.assertRaisesRegex(ValueError, "total does not match"):
+                batch.read_batch_reports(target)
+
     def test_batch_runtime_dependency_inventory_and_nonpassing_cases(self):
         cls = "dev.codex.schubert.nk.batch.bootstrap.BatchRuntimeDependencyTest"
         name = "bat283RuntimePostgresDriverAndScopeCanaries"
@@ -2970,7 +3005,7 @@ class EvidenceSetTest(unittest.TestCase):
                         gate.validate_scope(root, scope, "PT-WEB-TEST", "a" * 40, "dev-foundation")
 
     def test_collection_stops_at_each_failure(self):
-        for failed_at in range(52):
+        for failed_at in range(53):
             calls = []
             def fail(command, *, cwd, check):
                 self.assertEqual(Path("/safe/repo"), cwd)
@@ -2983,8 +3018,10 @@ class EvidenceSetTest(unittest.TestCase):
             self.assertEqual(failed_at + 1, len(calls))
         calls = []
         gate.collect(Path("/safe/repo"), "PT-WEB-TEST", lambda cmd, **kwargs: calls.append(cmd))
-        self.assertEqual(52, len(calls))
-        self.assertTrue(calls[0][2].endswith("/006_collect_scenario_evidence.py"))
+        self.assertEqual(53, len(calls))
+        self.assertTrue(calls[0][2].endswith("/020_collect_batch_evidence.py"))
+        self.assertEqual(["PT-WEB-TEST", "--preflight"], calls[0][3:])
+        self.assertTrue(calls[1][2].endswith("/006_collect_scenario_evidence.py"))
         self.assertTrue(calls[-10][2].endswith("/030_collect_sync_consumers.py"))
         self.assertTrue(calls[-9][2].endswith("/031_collect_web_reply_consumers.py"))
         self.assertTrue(calls[-8][2].endswith("/032_collect_web_log_worker.py"))

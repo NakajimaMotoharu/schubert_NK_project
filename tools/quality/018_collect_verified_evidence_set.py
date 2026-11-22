@@ -158,6 +158,10 @@ def collect(repo, run, execute=subprocess.run):
     commands.append([sys.executable, "-B", str(repo / "tools/quality/038_collect_request_sender_resource.py"), run])
     commands.append([sys.executable, "-B", str(repo / "tools/quality/039_collect_jms_resource_compounds.py"), run])
     commands.append([sys.executable, "-B", str(repo / "tools/quality/040_collect_log_replay_vertical.py"), run])
+    # Batch has a fixed certified inventory. Reject incompatible input before any writer runs.
+    preflight = [sys.executable, "-B", str(repo / "tools/quality/020_collect_batch_evidence.py"),
+                 run, "--preflight"]
+    execute(preflight, cwd=repo, check=True)
     for command in commands:
         execute(command, cwd=repo, check=True)
 

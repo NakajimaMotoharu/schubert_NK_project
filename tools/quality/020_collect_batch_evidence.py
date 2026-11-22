@@ -414,21 +414,42 @@ def ownership_description(total, program):
             "No duplicate PT credit.")
 
 
+def read_batch_reports(target):
+    reports = [ET.parse(path).getroot() for path in sorted((target / "surefire-reports").glob("TEST-*.xml"))]
+    case_count = 0
+    for suite in reports:
+        cases = suite.findall("testcase")
+        if (suite.tag != "testsuite" or any(int(suite.get(key, "0")) for key in ("failures", "errors", "skipped"))
+                or len(cases) != int(suite.get("tests", "-1"))
+                or any(child.tag not in ("system-out", "system-err") for case in cases for child in case)):
+            raise ValueError("nonpassing or inconsistent Batch JUnit report")
+        case_count += len(cases)
+    if case_count != BATCH_TEST_COUNT:
+        raise ValueError("Batch JUnit total does not match the fixed collector inventory")
+    return reports
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("run_id")
-    run = parser.parse_args().run_id
+    parser.add_argument("--preflight", action="store_true", help="check the Batch roster without writing evidence")
+    args = parser.parse_args()
+    run = args.run_id
     if not run.startswith("PT-WEB-") or not all(c.isalnum() or c == "-" for c in run):
         raise SystemExit("invalid run ID")
     repo = Path(__file__).resolve().parents[2]
+    target = repo / "src/schubert-nk-batch/target"
+    if args.preflight:
+        methods = validate_reports(select_program_suites(read_batch_reports(target)))
+        print(json.dumps({"runId": run, "batchTests": BATCH_TEST_COUNT,
+                          "programTests": len(methods), "writesEvidence": False}))
+        return
     full = repo / "evidence/01_PT/008_NK-SCN-001/evidence/manifest.json"
     verified = json.loads(full.read_text())
     validate_reactor(verified, run)
     subprocess.run(["git", "diff", "--exit-code", verified["targetCommit"], "--", "src", "pom.xml",
                     "program/characterization", "tools/quality"], cwd=repo, check=True)
-    target = repo / "src/schubert-nk-batch/target"
-    reports = list((target / "surefire-reports").glob("TEST-*.xml"))
-    methods = validate_reports(select_program_suites([ET.parse(report).getroot() for report in reports]))
+    methods = validate_reports(select_program_suites(read_batch_reports(target)))
     evidence = repo / "evidence/01_PT/017_NK-BAT-001/evidence"
     for folder in ("output", "coverage", "logs"):
         (evidence / folder).mkdir(parents=True, exist_ok=True)
