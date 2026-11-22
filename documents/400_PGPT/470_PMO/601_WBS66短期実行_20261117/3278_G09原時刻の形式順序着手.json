@@ -1,0 +1,89 @@
+{
+  "eventId": "PGPT-20261008-8723",
+  "groupId": "PG43002-WBS-G09-TIMES",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T20:35:21+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 49,
+      "remainingPercent": 51,
+      "resetsAt": 1795879771,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "source": "f54087e25b976aca4ea8f3c7cbbc3e0dcb6b2429",
+    "productionCoreMain": "e8368d22c4da2ec841f008df793594d3be9066af",
+    "canonicalDesignSource": "ca41c03c0c6efff9a3a35b47b480491810bee6f9",
+    "run": "PG43002-g09-reactor-timestamp-binding-v1",
+    "workCategory": "IMPLEMENTATION",
+    "managementWorkIds": [
+      "WBS-G09"
+    ],
+    "previousCheckpoint": "PGPT-20261008-8722",
+    "planRow": {
+      "ID": "WBS-G09",
+      "元行": "WBS-G09",
+      "費目": "F",
+      "主担当": "WBS-G09",
+      "状態": "計画",
+      "作業": "全PT完走・F/E/S/flaky/not-run0・再現性",
+      "残pp": "2.0",
+      "着手": "設計354・当該source・作業所有・既存成果を照合。元契約の着手依存と個別HOLDを確認",
+      "終了証拠": "451の正式全module clean verify完走、全PT F/E/S/flaky/disabled/not-run0と再現性、対象run/command/exit/byte/hash固定。",
+      "補正根拠": "予測777の元行残。個別費用実測がない部分は前回単価を継承",
+      "契約HOLD": "H-G09",
+      "対象": "",
+      "範囲": "TST-101",
+      "保存証跡": "該当criteriaごとの判定・未解決一覧・照合元manifest・判定者",
+      "順次": "False",
+      "配賦窓": "24",
+      "楽観pp": "0.75",
+      "慎重pp": "4.0",
+      "要求設計の版差": "PT基準仕様 NK-OPS-001、SS 354",
+      "lineNumber": 688,
+      "改訂残pp": "2.0"
+    },
+    "currentPlan": [
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/11月22日_PGPT再開実行計画.txt",
+        "sha256": "80b9fdc306f664b9c03901a4bdfb34cf66997879676204cfa969858fd68a4016"
+      },
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/短期実行WBS.tsv",
+        "sha256": "a6efedcd63b4ef3bb1d133d939b0ddd7dc4b0147988ac33d668282a25c999527"
+      }
+    ],
+    "startScope": {
+      "workCategory": "IMPLEMENTATION",
+      "core": "7698011f52d6cc5f94c76413b6ab36971783b9c9",
+      "testIds": [
+        "PT-OPS-G09-JUNIT013..015"
+      ],
+      "acceptanceTarget": "451 §6 original successful clock markers must be parseable offset-aware timestamps with ordered temporal values; correct local tool, test only synthetic markers. Existing history replay via validate-only unchanged.",
+      "end": "Positive same instants with distinct offsets; negative empty/missing offset/unparseable and reversed; unchanged exact metadata spelling in receipt and publication; related tool regression",
+      "holds": "No actual runtime, full gate, Job, VM, or service starts",
+      "nextAuthorized": "G13.07 tool trace rebind for current quality scope"
+    },
+    "groupCapPp": 1.2,
+    "estimateAtGroupStartPp": {
+      "low": 0,
+      "base": 0.55,
+      "high": 1.2
+    },
+    "completedOriginalRowPricePp": 0,
+    "sourceOwnership": "LOCAL_DEV_FOUNDATION_TRACKED_SNAPSHOT",
+    "knownOwnedRunInProgress": 0,
+    "costRevision": "PMO-remaining-v3-20261010",
+    "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "actualAllocatedPp": null
+  }
+}
