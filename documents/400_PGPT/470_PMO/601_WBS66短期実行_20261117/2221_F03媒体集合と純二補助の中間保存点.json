@@ -1,0 +1,78 @@
+{
+  "lastEvent": "PGPT-20261008-7716",
+  "atUTC": "2026-11-22T01:51:08.276860+00:00",
+  "source": "0e5cf2756a37f7237165fa3c5f504b0988523d75",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "model": {
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "actualAllocatedPp": null
+  },
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T01:51:08+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 11,
+      "remainingPercent": 89,
+      "resetsAt": 1795879771,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "phase": "MID_COURSE",
+  "prior": {
+    "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/2208_F03音声と媒体行の中間保存点.json",
+    "sha256": "7aa55605e12db14bc988f077f4fa0e1ceccefc60532fc4811e251513c886f296"
+  },
+  "lastEventEvidence": {
+    "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/2220_F03媒体集合と純二補助の表結果.json",
+    "sha256": "3aabbf9fcce86f7f3a9acfef68ba397218f62b379c50082923cdf995f6e307f4"
+  },
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null,
+  "actualOwnedJobs": 0,
+  "externalJobOwnership": null,
+  "knownStashes": 7,
+  "wholeEvidence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41844-f03-media-batch-copy-id-six-table-v1/manifest.json",
+    "sha256": "706be3836b94033870e1daf643ec33ba09845786f908180ab55cb1b22a763dd6"
+  },
+  "changedFixtureOwnerTest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41836-f03-pure-media-batch-static-close-v1/manifest.json",
+    "sha256": "5869a06b628fbaa40743a774c4e856dbf77dd1733770aabcdc8ceeb23050c2e2"
+  },
+  "rawOldFixtures": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41842-f03-copy-text-music-fixtures-static-close-v1/manifest.json",
+    "sha256": "0384384eba1ed3d3ab93bfa35a3f31f320102c656dcbf9f8bb3b8b3310b9c9e6"
+  },
+  "appliedPointEstimatesUnchanged": true,
+  "dedicatedSharedConsumptionPp": null,
+  "next": {
+    "wbs": "WBS-P019-03.02/2",
+    "target": "AudioCopyDataset in-memory join conditions and independent current evidence",
+    "firstCommand": [
+      "git",
+      "diff",
+      "--name-only",
+      "b5de21c03d",
+      "HEAD",
+      "--",
+      ":(glob)src/**/AudioCopyDataset*.java"
+    ]
+  },
+  "hold": [
+    "QA-056",
+    "full 451 / owner acceptance",
+    "actual external source/native/DB/COPY"
+  ]
+}
