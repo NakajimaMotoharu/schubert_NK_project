@@ -294,9 +294,13 @@ public final class ModuleDependencyAudit {
     var target = access.getTarget();
     String owner = access.getTargetOwner().getName();
     String name = target.getName();
+    boolean xmlFileOverload =
+        name.equals("parse")
+            && (owner.equals("javax.xml.parsers.DocumentBuilder")
+                || owner.equals("javax.xml.parsers.SAXParser"));
     boolean knownFileOverload =
         (owner.equals("javax.imageio.ImageIO") && (name.equals("read") || name.equals("write")))
-            || (owner.equals("javax.xml.parsers.DocumentBuilder") && name.equals("parse"));
+            || xmlFileOverload;
     return knownFileOverload
         && target.getRawParameterTypes().stream().anyMatch(type -> type.getName().equals("java.io.File"));
   }
