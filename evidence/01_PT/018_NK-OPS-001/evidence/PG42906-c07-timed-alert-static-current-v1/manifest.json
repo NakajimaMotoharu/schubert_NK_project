@@ -1,0 +1,466 @@
+{
+  "terminalAtUTC": "2026-11-22T18:21:43.170808+00:00",
+  "startedAtUTC": "2026-11-22T18:21:05.028657+00:00",
+  "run": "PG42906",
+  "wbs": "WBS-C07",
+  "source": "7107e5458608ad4185fc01b6f1abc4a3b2a90ddf",
+  "core": "e8368d22c4da2ec841f008df793594d3be9066af",
+  "actualExit": 0,
+  "originalStatic": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40800-f03-timed-alert-static-v1/manifest.json",
+    "sha256": "65a9b48a1c6ffcbc388ad994f6cba6a01022e03e70892e2972b00adc2f5c062c"
+  },
+  "exactFrozenPhysical": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42902-c07-direct-monitor-current-v1/manifest.json",
+    "sha256": "486e8bdc678951f27470c903175c185d1c9de9eabf55d84890a13abf4b3ccbf0"
+  },
+  "currentUnitProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42904-c07-direct-monitor-and-value-v1/manifest.json",
+    "sha256": "483584e9205d9674c70b1d05562a72387b72321fbc663e301283ad151a32255e"
+  },
+  "exactJar": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42660-jackson-candidate-batch-build-v1/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "e1419328a6ae7b934ccdda6d9329585a58df5aa0212cb2ea34a1972fd157f1fb"
+  },
+  "pmdRules": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/pmd.xml",
+    "sha256": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de"
+  },
+  "checkstyleRules": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+    "sha256": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "rootPom": {
+    "path": "pom.xml",
+    "sha256": "564e1a45c177fbe4af859c1d25696dd5355e5a6dcab7035970f61439ed9241e9"
+  },
+  "scopePom": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42906-c07-timed-alert-static-current-v1/pom.xml",
+    "sha256": "3f79355c994014769b388cca96b03e77bdff7c8045d30684e0857dd8639c9910"
+  },
+  "java": {
+    "path": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+    "sha256": "c324471f8b7933a3cb401eafbc35a7055443779b438a3ab928bda3867a1b8ab1"
+  },
+  "jspecify": {
+    "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+    "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+  },
+  "files": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java": "0559748eefb1031ecdc00cd68e008d4e4d8ef9ebbaa78c228af09487ba7a5bf0",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertRegistry.java": "24fc6ea876fa229d117024732ad12adbad089ef72083060f55883c40017567ea",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholds.java": "b0fd95f08991fa72ba262f023c0b64029ed2e9f1678dfd99cebeb14c26ed7aac",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow.java": "89b651524b151fc772903dfd4a29bfa8bc41eb6984c9ca646d555363bba614ca",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy.java": "3f152853fbd798a28dd56d0566fd9f873a5c1bce6ec83f4004916ae3c4a745f3",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine.java": "8ce6319ce1cc66796725d2d2d773abb10e4d181cf8d24276de2d7c171f987978",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ObservationContext.java": "5685db8a219acb224d463f9372c403ad9dfe36ac1d0c6a0fad308d377454cb26",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor.java": "3196f051b34ca46d8ec94e1cd58a914f07474e2e9cbdb326480213697d55acb0",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.java": "5e8a474737f4fbdc71e672a44fa268c48a62d167e0d80e7a86323f902e173e73",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.java": "5588e1ab7234b3799d1c6e1a02fc2a78ee75e447734d2b5b29760dc721ea7990",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor.java": "9615b3c88bfe6d6b28bf7cea5a67860ea0756f6f98d94ce861b252f5bb571484",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/package-info.java": "009823dd0566a5c0e2a7f06af4b540c122629bec50003bc1585d5303c488d924",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringStatusText.java": "31b30e2b7ad7d3dcdb0dd9df1e0d4bd00c3c9f694443955ad600709d0485dc8a"
+  },
+  "changedFromOldSources": [
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy.java"
+  ],
+  "changedFromOldPhysical": [
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy.class",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.class"
+  ],
+  "addedPhysical": [
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State.class"
+  ],
+  "typedExactCurrent": {
+    "dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor$Evaluation.class": "4520f34677461a9938ef53df0005cef519fcd935275bd3760972c9634e2bca12",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity.class": "4a90d8e671376316fe3af1709ae3ed7f91e4ab0cee8a8d8a2bcec405ade38ca6",
+    "dev/codex/schubert/nk/batch/monitoring/AlertThresholds.class": "920342ff7ee7befb1e892e83e41e0ee2c1b363d4e47d115f10dc5a48ca298a77",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event.class": "5d3a5f35f93162b0294e2dc423ec12f650d18fce7ea13d6dd1893445ddcfbcf7",
+    "dev/codex/schubert/nk/batch/monitoring/package-info.class": "be87566494520630402b9cc7c20713ac5fccac9b97505cbe551abc6c24843077",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.class": "22207ad4d75fcb65bd63f4161cf65f2ab2c60d94ae66268fe9357364e8c47a91",
+    "dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor$Evaluation.class": "0bd17c89de01ff0ec69a948aa9e8cc90f0e7682876bb718851451d5a057dc973",
+    "dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor$Evaluation.class": "4c680520112c542ebbcbc5c37c1abbd0a61ea9ddaf629713d2602b8d961523d3",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringStatusText.class": "86cc2c9090684658f6f066d89e9eda832a4c1bd41c154f54d2e5e59420948a48",
+    "dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor$Evaluation.class": "1b38b075d743689baed82583394134b4734758880cbe2ce1c895272cf4e7cce2",
+    "dev/codex/schubert/nk/batch/monitoring/AlertRegistry.class": "c5afca254eee0e556e3e04ade3eb141e8a821864a693580df2b00bfaeea83674",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition.class": "49b34f2b7a8daa57055566a0b422f3a80370b51f2a50355690404f16c07e731b",
+    "dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor.class": "0f18aa9ad5e074a9a1cfeada37aed02086fada5bb5df6ec11cbccc27c5b90c2c",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy.class": "fefef8ba8ca8aabf3767af91e4e9b44637be8c7469bd61afe430685abf5c3312",
+    "dev/codex/schubert/nk/batch/monitoring/ObservationContext.class": "b3ff5e32cbbc02848950edf814043343fb53c25eda1968aa1e8ae4dafed23644",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State.class": "1d140156f6787265537ad923d4c2bb2da3b43cb0373353ef1034cf8aaaafd246",
+    "dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow.class": "96863ad92123629c637304bb9d122efc8822d1b61798213ac8e59617fc98bab8",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service.class": "f363d58c5d7172041618f095846a5c28b8079e63c430c99b0067a2858f469bb5",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy$DetailService.class": "53bce391602d55efcd738c5ad704d71c5aba4ef5fbb73f034baecd529418c3c0",
+    "dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow$State.class": "414d1fcfc1ac0eacfb2f301b62a152e96411dc4971d86f38b113f414efb318c8",
+    "dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor.class": "2c8fb5fe3474b882627f4f85163ba9fbc74fea2197d3dd4cf13af9b2e30e1815",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy$RetentionConfiguration.class": "f52c50c1883813b4f160e56086484749d53c001776981eb10a2568198815f89c",
+    "dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.class": "f27aa32e0bd34bdf29708c97bdb42a657be14324e6238189591497ed9900ae91",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance.class": "9b38a3b425429d131cdc8704285df173c55ad4c05e5c860dd4a815b60c5b23b9",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine.class": "a3b1fbb10a66f67330d01cdb9676ca98de849ee834a591e8c64e1ae62bf9f2b9",
+    "dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.class": "233dc72748d99e918d39f9e5889dd4c91de32013291d9b927a8aaa7249daa3e6"
+  },
+  "stages": {
+    "maven": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-N",
+        "-X",
+        "-f",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42906-c07-timed-alert-static-current-v1/pom.xml",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "compile"
+      ],
+      "exit": 0,
+      "startedAtUTC": "2026-11-22T18:21:05.028657+00:00",
+      "terminalAtUTC": "2026-11-22T18:21:07.976074+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42906-c07-timed-alert-static-current-v1/maven.stdout",
+        "sha256": "7f2c8d7b13f0b1ae428637c065aa5bf41ca32291ce1ec6f339b9354e283d11fd"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42906-c07-timed-alert-static-current-v1/maven.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "spotbugs": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Xmx1g",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/com/github/spotbugs/spotbugs/4.10.4/spotbugs-4.10.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-analysis/9.10.1/asm-analysis-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-util/9.10.1/asm-util-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/bcel/bcel/6.12.0/bcel-6.12.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/github/stephenc/jcip/jcip-annotations/1.0-1/jcip-annotations-1.0-1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/dom4j/dom4j/2.2.0/dom4j-2.2.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/commons/commons-lang3/3.20.0/commons-lang3-3.20.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/commons/commons-text/1.15.0/commons-text-1.15.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/github/spotbugs/spotbugs-annotations/4.10.4/spotbugs-annotations-4.10.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/jaxen/jaxen/2.0.6/jaxen-2.0.6.jar:/home/mini/codex/project1/work/toolchain/m2/repository/net/sf/saxon/Saxon-HE/12.10/Saxon-HE-12.10.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/logging/log4j/log4j-api/2.26.1/log4j-api-2.26.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.26.1/log4j-to-slf4j-2.26.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-simple/2.0.18/slf4j-simple-2.0.18.jar:/home/mini/codex/project1/work/toolchain/m2/repository/commons-io/commons-io/2.22.0/commons-io-2.22.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/xmlresolver/xmlresolver/5.3.3/xmlresolver-5.3.3.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/xmlresolver/xmlresolver/5.3.3/xmlresolver-5.3.3-data.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+        "edu.umd.cs.findbugs.FindBugs2",
+        "-effort:max",
+        "-low",
+        "-xml:withMessages",
+        "-exitcode",
+        "-auxclasspathFromFile",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42906-c07-timed-alert-static-current-v1/spotbugs-aux.txt",
+        "-output",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42906-c07-timed-alert-static-current-v1/spotbugs.xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42906-c07-timed-alert-static-current-v1/target/classes"
+      ],
+      "exit": 0,
+      "startedAtUTC": "2026-11-22T18:21:38.387672+00:00",
+      "terminalAtUTC": "2026-11-22T18:21:43.169699+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42906-c07-timed-alert-static-current-v1/spotbugs.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42906-c07-timed-alert-static-current-v1/spotbugs.stderr",
+        "sha256": "83febadc46f214e89709b832aae077e8a743258c2778ad97727d55ed33462071"
+      }
+    },
+    "pmd": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/record-fix-v1/pmd-record-1298.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/Saxon-HE-12.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/antlr4-runtime-4.13.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/apex-ls_2.13-6.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/apex-parser-5.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/better-files_2.13-3.9.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/checker-qual-3.55.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/common2_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/common_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/commons-lang3-3.20.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/directory-watcher-0.18.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/directory-watcher-better-files_2.13-0.18.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/error_prone_annotations-2.48.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/failureaccess-1.0.3.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/geny_2.13-0.6.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/groovy-5.1.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/gson-2.14.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/gson-extras-3.3.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/guava-33.7.1-jre.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/io_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/j2objc-annotations-3.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/java-diff-utils-4.16.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jline-native-3.29.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jline-terminal-3.29.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jna-5.12.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jsoup-1.23.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jsr250-api-1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jul-to-slf4j-1.7.36.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-build-tools-api-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-compiler-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-daemon-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-script-runtime-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-common-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-compiler-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-compiler-impl-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-jvm-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-stdlib-2.2.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-stdlib-jdk7-2.2.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-stdlib-jdk8-2.2.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-type-mapper-analyzer-0.7.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-type-mapper-model-0.7.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlinx-coroutines-core-jvm-1.8.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlinx-serialization-core-jvm-1.11.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlinx-serialization-json-jvm-1.11.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/mainargs_2.13-0.5.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/nice-xml-messages-3.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/outline-parser_2.13-2.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/parsers_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pcollections-4.0.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/picocli-4.7.7.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-ant-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-apex-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-cli-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-coco-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-core-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-cpp-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-cs-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-css-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-dart-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-designer-7.19.3.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-fortran-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-gherkin-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-go-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-groovy-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-html-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-java-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-javascript-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-jsp-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-julia-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-kotlin-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-lua-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-matlab-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-modelica-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-objectivec-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-perl-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-php-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-plsql-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-python-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-ruby-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-rust-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-scala_2.13-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-swift-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-tsql-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-velocity-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-visualforce-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-xml-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/portable-scala-reflect_2.13-1.1.3.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/progressbar-0.10.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/rhino-1.7.15.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-collection-compat_2.13-2.8.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-json-rpc-upickle-json-serializer_2.13-1.1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-json-rpc_2.13-1.1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-library-2.13.18.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-parallel-collections_2.13-1.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-reflect-2.13.18.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-xml_2.13-1.3.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scalajs-stubs_2.13-1.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/slf4j-api-1.7.36.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/slf4j-simple-1.7.36.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/sobject-types-67.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/sourcecode_2.13-0.4.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/standard-types-67.0.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/summit-ast-3.1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/trees2_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/trees_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/ujson_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upack_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upickle-core_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upickle-implicits_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upickle_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/vf-parser-2.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/xmlresolver-5.3.3-data.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/xmlresolver-5.3.3.jar",
+        "net.sourceforge.pmd.cli.PmdCli",
+        "check",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42906-c07-timed-alert-static-current-v1/src/main/java",
+        "--rulesets",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/pmd.xml",
+        "--use-version",
+        "java-25",
+        "--aux-classpath",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42906-c07-timed-alert-static-current-v1/target/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/jdk-25.0.4/lib/jrt-fs.jar",
+        "--no-cache",
+        "--format",
+        "xml",
+        "--report-file",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42906-c07-timed-alert-static-current-v1/pmd.xml"
+      ],
+      "exit": 4,
+      "startedAtUTC": "2026-11-22T18:21:38.388048+00:00",
+      "terminalAtUTC": "2026-11-22T18:21:42.141391+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42906-c07-timed-alert-static-current-v1/pmd.stdout",
+        "sha256": "617c1a7cb11ca7dcc8605431e80493b0c4a926ca0e3b244c76d883b69b6e991b"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42906-c07-timed-alert-static-current-v1/pmd.stderr",
+        "sha256": "9fd20aa277f91692e12bbbbcda6f115f2ff197d2aca089b22e1777b0a173c688"
+      }
+    },
+    "checkstyle": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "-o",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42906-c07-timed-alert-static-current-v1/checkstyle.xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42906-c07-timed-alert-static-current-v1/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42906-c07-timed-alert-static-current-v1/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertRegistry.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42906-c07-timed-alert-static-current-v1/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholds.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42906-c07-timed-alert-static-current-v1/src/main/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42906-c07-timed-alert-static-current-v1/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42906-c07-timed-alert-static-current-v1/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42906-c07-timed-alert-static-current-v1/src/main/java/dev/codex/schubert/nk/batch/monitoring/ObservationContext.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42906-c07-timed-alert-static-current-v1/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42906-c07-timed-alert-static-current-v1/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42906-c07-timed-alert-static-current-v1/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42906-c07-timed-alert-static-current-v1/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42906-c07-timed-alert-static-current-v1/src/main/java/dev/codex/schubert/nk/batch/monitoring/package-info.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42906-c07-timed-alert-static-current-v1/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringStatusText.java"
+      ],
+      "exit": 0,
+      "startedAtUTC": "2026-11-22T18:21:38.388151+00:00",
+      "terminalAtUTC": "2026-11-22T18:21:39.850985+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42906-c07-timed-alert-static-current-v1/checkstyle.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42906-c07-timed-alert-static-current-v1/checkstyle.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "nullaway": 0,
+  "spotbugs": 0,
+  "spotbugsErrors": {
+    "errors": "0",
+    "missingClasses": "0"
+  },
+  "spotbugsContents": [
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance.class",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition.class",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event.class",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service.class",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity.class",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State.class",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.class",
+    "dev/codex/schubert/nk/batch/monitoring/AlertRegistry.class",
+    "dev/codex/schubert/nk/batch/monitoring/AlertThresholds.class",
+    "dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow$State.class",
+    "dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow.class",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy$DetailService.class",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy$RetentionConfiguration.class",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy.class",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine.class",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringStatusText.class",
+    "dev/codex/schubert/nk/batch/monitoring/ObservationContext.class",
+    "dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor$Evaluation.class",
+    "dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor.class",
+    "dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor$Evaluation.class",
+    "dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.class",
+    "dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor$Evaluation.class",
+    "dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.class",
+    "dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor$Evaluation.class",
+    "dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor.class",
+    "dev/codex/schubert/nk/batch/monitoring/package-info.class"
+  ],
+  "pmd": [
+    {
+      "source": "AlertLifecycle.java",
+      "rule": "AvoidSynchronizedAtMethodLevel",
+      "line": 168
+    },
+    {
+      "source": "AlertLifecycle.java",
+      "rule": "AvoidSynchronizedAtMethodLevel",
+      "line": 172
+    },
+    {
+      "source": "AlertLifecycle.java",
+      "rule": "AvoidSynchronizedAtMethodLevel",
+      "line": 178
+    },
+    {
+      "source": "AlertLifecycle.java",
+      "rule": "AvoidSynchronizedAtMethodLevel",
+      "line": 191
+    },
+    {
+      "source": "ContinuousConditionWindow.java",
+      "rule": "AvoidSynchronizedStatement",
+      "line": 27
+    },
+    {
+      "source": "ContinuousConditionWindow.java",
+      "rule": "NullAssignment",
+      "line": 32
+    },
+    {
+      "source": "TimedDbPoolMonitor.java",
+      "rule": "AvoidSynchronizedStatement",
+      "line": 48
+    },
+    {
+      "source": "TimedDbPoolMonitor.java",
+      "rule": "AvoidSynchronizedStatement",
+      "line": 72
+    },
+    {
+      "source": "TimedFilesystemMonitor.java",
+      "rule": "AvoidSynchronizedStatement",
+      "line": 42
+    },
+    {
+      "source": "TimedFilesystemMonitor.java",
+      "rule": "AvoidSynchronizedStatement",
+      "line": 71
+    },
+    {
+      "source": "TimedJvmHeapMonitor.java",
+      "rule": "AvoidSynchronizedStatement",
+      "line": 45
+    },
+    {
+      "source": "TimedJvmHeapMonitor.java",
+      "rule": "AvoidSynchronizedStatement",
+      "line": 69
+    },
+    {
+      "source": "TimedSyncLatencyMonitor.java",
+      "rule": "AvoidSynchronizedStatement",
+      "line": 42
+    },
+    {
+      "source": "TimedSyncLatencyMonitor.java",
+      "rule": "AvoidSynchronizedStatement",
+      "line": 70
+    }
+  ],
+  "pmdProcessingErrors": [],
+  "checkstyleErrors": [],
+  "originalMavenReattached": true,
+  "preAnalyzerManifestAssemblyStop": "inherited Checkstyle argv slice retained one unrelated input; assertions stopped before analyzers started",
+  "physicalOnly": true,
+  "productTests": 0,
+  "actualExternalOps": 0,
+  "whole451": false,
+  "wholeC07": false,
+  "formalAcceptanceId": null,
+  "originalTerminal": {
+    "path": "../pgpt-runs/PG379/PG42906-c07-timed-alert-static-current-v1/terminal.json",
+    "sha256": "f6ccd0f73bc1563e62d6e252fcf63c596f3c0ed7e3214b7cf853ded4a6e81f7b"
+  },
+  "publicStaticReports": {
+    "spotbugs.xml": {
+      "sha256": "bb60078cd234df7438d9f6205e5cc63bbad20bfabe0ec013cf9c258b6aefd9bb",
+      "originalUnitXmlSha256": null
+    },
+    "pmd.xml": {
+      "sha256": "e0d68aa14ba1f7ec743300ab281eccd51210a73b631f4d6ba6de979ba6d705c0",
+      "originalUnitXmlSha256": null
+    },
+    "checkstyle.xml": {
+      "sha256": "5c8ffb8442253c1f283214578ee097df8126a62b2991774a8a5dc7ca2047e4ea",
+      "originalUnitXmlSha256": null
+    }
+  },
+  "pmdClassification": [
+    {
+      "source": "AlertLifecycle.java",
+      "rule": "AvoidSynchronizedAtMethodLevel",
+      "line": 168,
+      "disposition": "CONTRACT_REQUIRED",
+      "scopeReason": "AlertLifecycleのprivate Stateのみ同期。状態遷移とsnapshotを同じ内部monitorで直列化し、公開ownerのmonitorから隔離。既判断5564/PG41072を現物理に再照合。"
+    },
+    {
+      "source": "AlertLifecycle.java",
+      "rule": "AvoidSynchronizedAtMethodLevel",
+      "line": 172,
+      "disposition": "CONTRACT_REQUIRED",
+      "scopeReason": "AlertLifecycleのprivate Stateのみ同期。状態遷移とsnapshotを同じ内部monitorで直列化し、公開ownerのmonitorから隔離。既判断5564/PG41072を現物理に再照合。"
+    },
+    {
+      "source": "AlertLifecycle.java",
+      "rule": "AvoidSynchronizedAtMethodLevel",
+      "line": 178,
+      "disposition": "CONTRACT_REQUIRED",
+      "scopeReason": "AlertLifecycleのprivate Stateのみ同期。状態遷移とsnapshotを同じ内部monitorで直列化し、公開ownerのmonitorから隔離。既判断5564/PG41072を現物理に再照合。"
+    },
+    {
+      "source": "AlertLifecycle.java",
+      "rule": "AvoidSynchronizedAtMethodLevel",
+      "line": 191,
+      "disposition": "CONTRACT_REQUIRED",
+      "scopeReason": "AlertLifecycleのprivate Stateのみ同期。状態遷移とsnapshotを同じ内部monitorで直列化し、公開ownerのmonitorから隔離。既判断5564/PG41072を現物理に再照合。"
+    },
+    {
+      "source": "ContinuousConditionWindow.java",
+      "rule": "AvoidSynchronizedStatement",
+      "line": 27,
+      "disposition": "CONTRACT_REQUIRED",
+      "scopeReason": "外部所有者が掴めないprivate final lock。時系列窓、lastElapsed、lifecycle遷移またはsnapshotを直列化し、途中状態の観測を防止。既設計の同期順を変更しない。"
+    },
+    {
+      "source": "ContinuousConditionWindow.java",
+      "rule": "NullAssignment",
+      "line": 32,
+      "disposition": "INTENTIONAL_NULLABLE_STATE",
+      "scopeReason": "@Nullable violationStartの意図した未開始状態。NORMAL・UNKNOWNは違反時刻を切り、nullは有効時刻・0秒・合格に変換しない。NullAwayのERROR設定と既MONWINDOWを維持。"
+    },
+    {
+      "source": "TimedDbPoolMonitor.java",
+      "rule": "AvoidSynchronizedStatement",
+      "line": 48,
+      "disposition": "CONTRACT_REQUIRED",
+      "scopeReason": "外部所有者が掴めないprivate final lock。時系列窓、lastElapsed、lifecycle遷移またはsnapshotを直列化し、途中状態の観測を防止。既設計の同期順を変更しない。"
+    },
+    {
+      "source": "TimedDbPoolMonitor.java",
+      "rule": "AvoidSynchronizedStatement",
+      "line": 72,
+      "disposition": "CONTRACT_REQUIRED",
+      "scopeReason": "外部所有者が掴めないprivate final lock。時系列窓、lastElapsed、lifecycle遷移またはsnapshotを直列化し、途中状態の観測を防止。既設計の同期順を変更しない。"
+    },
+    {
+      "source": "TimedFilesystemMonitor.java",
+      "rule": "AvoidSynchronizedStatement",
+      "line": 42,
+      "disposition": "CONTRACT_REQUIRED",
+      "scopeReason": "外部所有者が掴めないprivate final lock。時系列窓、lastElapsed、lifecycle遷移またはsnapshotを直列化し、途中状態の観測を防止。既設計の同期順を変更しない。"
+    },
+    {
+      "source": "TimedFilesystemMonitor.java",
+      "rule": "AvoidSynchronizedStatement",
+      "line": 71,
+      "disposition": "CONTRACT_REQUIRED",
+      "scopeReason": "外部所有者が掴めないprivate final lock。時系列窓、lastElapsed、lifecycle遷移またはsnapshotを直列化し、途中状態の観測を防止。既設計の同期順を変更しない。"
+    },
+    {
+      "source": "TimedJvmHeapMonitor.java",
+      "rule": "AvoidSynchronizedStatement",
+      "line": 45,
+      "disposition": "CONTRACT_REQUIRED",
+      "scopeReason": "外部所有者が掴めないprivate final lock。時系列窓、lastElapsed、lifecycle遷移またはsnapshotを直列化し、途中状態の観測を防止。既設計の同期順を変更しない。"
+    },
+    {
+      "source": "TimedJvmHeapMonitor.java",
+      "rule": "AvoidSynchronizedStatement",
+      "line": 69,
+      "disposition": "CONTRACT_REQUIRED",
+      "scopeReason": "外部所有者が掴めないprivate final lock。時系列窓、lastElapsed、lifecycle遷移またはsnapshotを直列化し、途中状態の観測を防止。既設計の同期順を変更しない。"
+    },
+    {
+      "source": "TimedSyncLatencyMonitor.java",
+      "rule": "AvoidSynchronizedStatement",
+      "line": 42,
+      "disposition": "CONTRACT_REQUIRED",
+      "scopeReason": "外部所有者が掴めないprivate final lock。時系列窓、lastElapsed、lifecycle遷移またはsnapshotを直列化し、途中状態の観測を防止。既設計の同期順を変更しない。"
+    },
+    {
+      "source": "TimedSyncLatencyMonitor.java",
+      "rule": "AvoidSynchronizedStatement",
+      "line": 70,
+      "disposition": "CONTRACT_REQUIRED",
+      "scopeReason": "外部所有者が掴めないprivate final lock。時系列窓、lastElapsed、lifecycle遷移またはsnapshotを直列化し、途中状態の観測を防止。既設計の同期順を変更しない。"
+    }
+  ],
+  "pmdUnclassified": 0,
+  "suppressionsAdded": 0,
+  "reportApplication": "C07_PACKAGE_LOCAL_F03_QUALITY_EVIDENCE"
+}
