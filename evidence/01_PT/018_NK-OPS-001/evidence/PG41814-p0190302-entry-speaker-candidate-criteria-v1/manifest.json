@@ -1,0 +1,392 @@
+{
+  "run": "PG41814",
+  "source": "2706b1f7f3892999e0e641b15ee1d7c81e6e5b49",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-P019-03.02/2",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T01:19:11.351764+00:00",
+  "recordedTyped": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41810-f03-speaker-entrymap-typed-close-v1/manifest.json",
+    "sha256": "47468062af3091d06a27673a99311c94b47c2a189c93bdbdb5fcecd126377a47"
+  },
+  "originalXml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33292-mapverify976-post-v5/original-TEST-junit-jupiter.xml",
+    "sha256": "a55172a64a07208df0457588e90e237cb456f5a36ee780adb89da50596333079"
+  },
+  "cases": [
+    {
+      "testId": "PT-MIG-ORDER001",
+      "independentExpectations": "(10→100,2→900)から手書き2/900/1と10/100/2の全byte golden。target順と区別",
+      "method": "order001LiteralRenumberedGolden()",
+      "originalXmlResult": "PASS",
+      "specification": {
+        "path": "evidence/01_PT/019_NK-MIG-001/011_Scenario現行ID順移行対応・独立十二仕様.md",
+        "sha256": "99207d39350c4fc3dbce506f211d7fd1f126e75fadacce38504f92d4294cbeb7"
+      }
+    },
+    {
+      "testId": "PT-MIG-ORDER002",
+      "independentExpectations": "source LongMIN/負1/0/LongMAXのsigned比較、target N12上端、allaccessorsと固定redaction",
+      "method": "order002SignedSourcesAndN12TargetBoundaries()",
+      "originalXmlResult": "PASS",
+      "specification": {
+        "path": "evidence/01_PT/019_NK-MIG-001/011_Scenario現行ID順移行対応・独立十二仕様.md",
+        "sha256": "99207d39350c4fc3dbce506f211d7fd1f126e75fadacce38504f92d4294cbeb7"
+      }
+    },
+    {
+      "testId": "PT-MIG-ORDER003",
+      "independentExpectations": "source重複拒否、元list不変",
+      "method": "order003DuplicateSourceRejectedWithoutInputChange()",
+      "originalXmlResult": "PASS",
+      "specification": {
+        "path": "evidence/01_PT/019_NK-MIG-001/011_Scenario現行ID順移行対応・独立十二仕様.md",
+        "sha256": "99207d39350c4fc3dbce506f211d7fd1f126e75fadacce38504f92d4294cbeb7"
+      }
+    },
+    {
+      "testId": "PT-MIG-ORDER004",
+      "independentExpectations": "target重複拒否、source順とは別のbijection",
+      "method": "order004DuplicateTargetRejectedIndependently()",
+      "originalXmlResult": "PASS",
+      "specification": {
+        "path": "evidence/01_PT/019_NK-MIG-001/011_Scenario現行ID順移行対応・独立十二仕様.md",
+        "sha256": "99207d39350c4fc3dbce506f211d7fd1f126e75fadacce38504f92d4294cbeb7"
+      }
+    },
+    {
+      "testId": "PT-MIG-ORDER005",
+      "independentExpectations": "IdPair/MappedEntryのtarget0/負値/N12超（LongMAX含む）拒否、source値を勝手に変えない",
+      "method": "order005InvalidTargetDomains()",
+      "originalXmlResult": "PASS",
+      "specification": {
+        "path": "evidence/01_PT/019_NK-MIG-001/011_Scenario現行ID順移行対応・独立十二仕様.md",
+        "sha256": "99207d39350c4fc3dbce506f211d7fd1f126e75fadacce38504f92d4294cbeb7"
+      }
+    },
+    {
+      "testId": "PT-MIG-ORDER006",
+      "independentExpectations": "MappedEntry order0/負/N12超拒否、1/N12許容",
+      "method": "order006MappedEntryOrderDomains()",
+      "originalXmlResult": "PASS",
+      "specification": {
+        "path": "evidence/01_PT/019_NK-MIG-001/011_Scenario現行ID順移行対応・独立十二仕様.md",
+        "sha256": "99207d39350c4fc3dbce506f211d7fd1f126e75fadacce38504f92d4294cbeb7"
+      }
+    },
+    {
+      "testId": "PT-MIG-ORDER007",
+      "independentExpectations": "list/null要素拒否、NPEcatch正常化0",
+      "method": "order007NullBoundaryContracts()",
+      "originalXmlResult": "PASS",
+      "specification": {
+        "path": "evidence/01_PT/019_NK-MIG-001/011_Scenario現行ID順移行対応・独立十二仕様.md",
+        "sha256": "99207d39350c4fc3dbce506f211d7fd1f126e75fadacce38504f92d4294cbeb7"
+      }
+    },
+    {
+      "testId": "PT-MIG-ORDER008",
+      "independentExpectations": "元mutableList/返却List/返却byteへの変更が保存順・goldenに影響しない",
+      "method": "order008ImmutableInputListAndReturnedBytes()",
+      "originalXmlResult": "PASS",
+      "specification": {
+        "path": "evidence/01_PT/019_NK-MIG-001/011_Scenario現行ID順移行対応・独立十二仕様.md",
+        "sha256": "99207d39350c4fc3dbce506f211d7fd1f126e75fadacce38504f92d4294cbeb7"
+      }
+    },
+    {
+      "testId": "PT-MIG-ORDER009",
+      "independentExpectations": "既source毎lookupの独立target/orderと未知source拒否、固定診断/cause/suppressed",
+      "method": "order009ExactLookupAndUnknownRefusal()",
+      "originalXmlResult": "PASS",
+      "specification": {
+        "path": "evidence/01_PT/019_NK-MIG-001/011_Scenario現行ID順移行対応・独立十二仕様.md",
+        "sha256": "99207d39350c4fc3dbce506f211d7fd1f126e75fadacce38504f92d4294cbeb7"
+      }
+    },
+    {
+      "testId": "PT-MIG-ORDER010",
+      "independentExpectations": "空mapはheaderのみ・lookup拒否、移行完了の証明ではない",
+      "method": "order010EmptyIsAValueNotMigrationCompletion()",
+      "originalXmlResult": "PASS",
+      "specification": {
+        "path": "evidence/01_PT/019_NK-MIG-001/011_Scenario現行ID順移行対応・独立十二仕様.md",
+        "sha256": "99207d39350c4fc3dbce506f211d7fd1f126e75fadacce38504f92d4294cbeb7"
+      }
+    },
+    {
+      "testId": "PT-MIG-ORDER011",
+      "independentExpectations": "sourceIDのgap/renumberedtargetに影響されないdense順位、再順序入力の同一byte",
+      "method": "order011DenseRanksIgnoreSourceGapsAndInputOrder()",
+      "originalXmlResult": "PASS",
+      "specification": {
+        "path": "evidence/01_PT/019_NK-MIG-001/011_Scenario現行ID順移行対応・独立十二仕様.md",
+        "sha256": "99207d39350c4fc3dbce506f211d7fd1f126e75fadacce38504f92d4294cbeb7"
+      }
+    },
+    {
+      "testId": "PT-MIG-ORDER012",
+      "independentExpectations": "所有8worker/64taskで固定goldenとlookup、Future各5秒/finallyshutdownNow-await10assert・未終端fail",
+      "method": "order012ConcurrentIndependentReturnOwnership()",
+      "originalXmlResult": "PASS",
+      "specification": {
+        "path": "evidence/01_PT/019_NK-MIG-001/011_Scenario現行ID順移行対応・独立十二仕様.md",
+        "sha256": "99207d39350c4fc3dbce506f211d7fd1f126e75fadacce38504f92d4294cbeb7"
+      }
+    },
+    {
+      "testId": "PT-MIG-SPEAKERMAP001",
+      "independentExpectations": " signed Current順canonical固定byte/任意target順",
+      "method": "speakerMap001SignedCurrentOrderAndArbitraryTargetOrder()",
+      "originalXmlResult": "PASS",
+      "specification": {
+        "path": "evidence/01_PT/019_NK-MIG-001/074_Current話者ID対応と既存列保持COPY変換・独立二十四仕様.md",
+        "sha256": "9f504fa411e4e9ae1f345f860ca08cc1ed9e9a1fe3d51fa27c8206a12e895c1a"
+      }
+    },
+    {
+      "testId": "PT-MIG-SPEAKERMAP002",
+      "independentExpectations": "空headerと空rows",
+      "method": "speakerMap002EmptyHeaderAndExplicitValidTime()",
+      "originalXmlResult": "PASS",
+      "specification": {
+        "path": "evidence/01_PT/019_NK-MIG-001/074_Current話者ID対応と既存列保持COPY変換・独立二十四仕様.md",
+        "sha256": "9f504fa411e4e9ae1f345f860ca08cc1ed9e9a1fe3d51fa27c8206a12e895c1a"
+      }
+    },
+    {
+      "testId": "PT-MIG-SPEAKERMAP003",
+      "independentExpectations": "null list",
+      "method": "speakerMap003NullMappingCollectionFixedFailure()",
+      "originalXmlResult": "PASS",
+      "specification": {
+        "path": "evidence/01_PT/019_NK-MIG-001/074_Current話者ID対応と既存列保持COPY変換・独立二十四仕様.md",
+        "sha256": "9f504fa411e4e9ae1f345f860ca08cc1ed9e9a1fe3d51fa27c8206a12e895c1a"
+      }
+    },
+    {
+      "testId": "PT-MIG-SPEAKERMAP004",
+      "independentExpectations": "null element",
+      "method": "speakerMap004NullMappingElementRejected()",
+      "originalXmlResult": "PASS",
+      "specification": {
+        "path": "evidence/01_PT/019_NK-MIG-001/074_Current話者ID対応と既存列保持COPY変換・独立二十四仕様.md",
+        "sha256": "9f504fa411e4e9ae1f345f860ca08cc1ed9e9a1fe3d51fa27c8206a12e895c1a"
+      }
+    },
+    {
+      "testId": "PT-MIG-SPEAKERMAP005",
+      "independentExpectations": "Current重複跨game",
+      "method": "speakerMap005CurrentPrimaryKeyIsGlobalAcrossGames()",
+      "originalXmlResult": "PASS",
+      "specification": {
+        "path": "evidence/01_PT/019_NK-MIG-001/074_Current話者ID対応と既存列保持COPY変換・独立二十四仕様.md",
+        "sha256": "9f504fa411e4e9ae1f345f860ca08cc1ed9e9a1fe3d51fa27c8206a12e895c1a"
+      }
+    },
+    {
+      "testId": "PT-MIG-SPEAKERMAP006",
+      "independentExpectations": "target重複跨game",
+      "method": "speakerMap006TargetPrimaryKeyIsGlobalAcrossGames()",
+      "originalXmlResult": "PASS",
+      "specification": {
+        "path": "evidence/01_PT/019_NK-MIG-001/074_Current話者ID対応と既存列保持COPY変換・独立二十四仕様.md",
+        "sha256": "9f504fa411e4e9ae1f345f860ca08cc1ed9e9a1fe3d51fa27c8206a12e895c1a"
+      }
+    },
+    {
+      "testId": "PT-MIG-SPEAKERMAP007",
+      "independentExpectations": "record game/target境界とsigned Current両端",
+      "method": "speakerMap007RecordDomainsKeepSignedCurrentAndPositiveN12Target()",
+      "originalXmlResult": "PASS",
+      "specification": {
+        "path": "evidence/01_PT/019_NK-MIG-001/074_Current話者ID対応と既存列保持COPY変換・独立二十四仕様.md",
+        "sha256": "9f504fa411e4e9ae1f345f860ca08cc1ed9e9a1fe3d51fa27c8206a12e895c1a"
+      }
+    },
+    {
+      "testId": "PT-MIG-SPEAKERMAP008",
+      "independentExpectations": "lookup既知/未知/他game",
+      "method": "speakerMap008LookupRequiresKnownGlobalIdAndMatchingGame()",
+      "originalXmlResult": "PASS",
+      "specification": {
+        "path": "evidence/01_PT/019_NK-MIG-001/074_Current話者ID対応と既存列保持COPY変換・独立二十四仕様.md",
+        "sha256": "9f504fa411e4e9ae1f345f860ca08cc1ed9e9a1fe3d51fa27c8206a12e895c1a"
+      }
+    },
+    {
+      "testId": "PT-MIG-SPEAKERMAP009",
+      "independentExpectations": "input snapshot/list immutable",
+      "method": "speakerMap009ConstructorSnapshotAndReturnedMappingsImmutable()",
+      "originalXmlResult": "PASS",
+      "specification": {
+        "path": "evidence/01_PT/019_NK-MIG-001/074_Current話者ID対応と既存列保持COPY変換・独立二十四仕様.md",
+        "sha256": "9f504fa411e4e9ae1f345f860ca08cc1ed9e9a1fe3d51fa27c8206a12e895c1a"
+      }
+    },
+    {
+      "testId": "PT-MIG-SPEAKERMAP010",
+      "independentExpectations": "逆順六列をcanonical target batchへ変換・name空白/slash/norm/flag/NULLnotes保持・Entry FK接続",
+      "method": "speakerMap010UnorderedCurrentColumnsAreCopiedWithoutNameReDerivation()",
+      "originalXmlResult": "PASS",
+      "specification": {
+        "path": "evidence/01_PT/019_NK-MIG-001/074_Current話者ID対応と既存列保持COPY変換・独立二十四仕様.md",
+        "sha256": "9f504fa411e4e9ae1f345f860ca08cc1ed9e9a1fe3d51fa27c8206a12e895c1a"
+      }
+    },
+    {
+      "testId": "PT-MIG-SPEAKERMAP011",
+      "independentExpectations": "raw list/row/Instant null",
+      "method": "speakerMap011NullRawCollectionRowAndInstantRejected()",
+      "originalXmlResult": "PASS",
+      "specification": {
+        "path": "evidence/01_PT/019_NK-MIG-001/074_Current話者ID対応と既存列保持COPY変換・独立二十四仕様.md",
+        "sha256": "9f504fa411e4e9ae1f345f860ca08cc1ed9e9a1fe3d51fa27c8206a12e895c1a"
+      }
+    },
+    {
+      "testId": "PT-MIG-SPEAKERMAP012",
+      "independentExpectations": "row数/幅",
+      "method": "speakerMap012ExactCardinalityAndSixColumnWidth()",
+      "originalXmlResult": "PASS",
+      "specification": {
+        "path": "evidence/01_PT/019_NK-MIG-001/074_Current話者ID対応と既存列保持COPY変換・独立二十四仕様.md",
+        "sha256": "9f504fa411e4e9ae1f345f860ca08cc1ed9e9a1fe3d51fa27c8206a12e895c1a"
+      }
+    },
+    {
+      "testId": "PT-MIG-SPEAKERMAP013",
+      "independentExpectations": "未知/重複Current",
+      "method": "speakerMap013UnknownAndDuplicateCurrentRowsRejected()",
+      "originalXmlResult": "PASS",
+      "specification": {
+        "path": "evidence/01_PT/019_NK-MIG-001/074_Current話者ID対応と既存列保持COPY変換・独立二十四仕様.md",
+        "sha256": "9f504fa411e4e9ae1f345f860ca08cc1ed9e9a1fe3d51fa27c8206a12e895c1a"
+      }
+    },
+    {
+      "testId": "PT-MIG-SPEAKERMAP014",
+      "independentExpectations": "canonical signed文字/0/MIN/MAX/overflow等",
+      "method": "speakerMap014CanonicalSignedIdsAcceptZeroAndExtremesRejectMalformedOverflow()",
+      "originalXmlResult": "PASS",
+      "specification": {
+        "path": "evidence/01_PT/019_NK-MIG-001/074_Current話者ID対応と既存列保持COPY変換・独立二十四仕様.md",
+        "sha256": "9f504fa411e4e9ae1f345f860ca08cc1ed9e9a1fe3d51fa27c8206a12e895c1a"
+      }
+    },
+    {
+      "testId": "PT-MIG-SPEAKERMAP015",
+      "independentExpectations": "game NULL/未知/不一致",
+      "method": "speakerMap015GameMustBePresentCanonicalAndMatchMap()",
+      "originalXmlResult": "PASS",
+      "specification": {
+        "path": "evidence/01_PT/019_NK-MIG-001/074_Current話者ID対応と既存列保持COPY変換・独立二十四仕様.md",
+        "sha256": "9f504fa411e4e9ae1f345f860ca08cc1ed9e9a1fe3d51fa27c8206a12e895c1a"
+      }
+    },
+    {
+      "testId": "PT-MIG-SPEAKERMAP016",
+      "independentExpectations": "Row name/norm/bool/null/NFC/byte等元拒否",
+      "method": "speakerMap016StoredMandatoryValuesKeepRowRejections()",
+      "originalXmlResult": "PASS",
+      "specification": {
+        "path": "evidence/01_PT/019_NK-MIG-001/074_Current話者ID対応と既存列保持COPY変換・独立二十四仕様.md",
+        "sha256": "9f504fa411e4e9ae1f345f860ca08cc1ed9e9a1fe3d51fa27c8206a12e895c1a"
+      }
+    },
+    {
+      "testId": "PT-MIG-SPEAKERMAP017",
+      "independentExpectations": "Instant全時刻境界/µs超過",
+      "method": "speakerMap017TransactionTimestampBoundsAndMicrosecondsEvenForEmpty()",
+      "originalXmlResult": "PASS",
+      "specification": {
+        "path": "evidence/01_PT/019_NK-MIG-001/074_Current話者ID対応と既存列保持COPY変換・独立二十四仕様.md",
+        "sha256": "9f504fa411e4e9ae1f345f860ca08cc1ed9e9a1fe3d51fa27c8206a12e895c1a"
+      }
+    },
+    {
+      "testId": "PT-MIG-SPEAKERMAP018",
+      "independentExpectations": "normalized UK同game衝突と別game許容",
+      "method": "speakerMap018NormalizedUkIsExactPerGameAndNeverAutoRepaired()",
+      "originalXmlResult": "PASS",
+      "specification": {
+        "path": "evidence/01_PT/019_NK-MIG-001/074_Current話者ID対応と既存列保持COPY変換・独立二十四仕様.md",
+        "sha256": "9f504fa411e4e9ae1f345f860ca08cc1ed9e9a1fe3d51fa27c8206a12e895c1a"
+      }
+    },
+    {
+      "testId": "PT-MIG-SPEAKERMAP019",
+      "independentExpectations": "source row/input変更のsnapshot・deep immutable",
+      "method": "speakerMap019CurrentInputMutationCannotChangeReturnedRows()",
+      "originalXmlResult": "PASS",
+      "specification": {
+        "path": "evidence/01_PT/019_NK-MIG-001/074_Current話者ID対応と既存列保持COPY変換・独立二十四仕様.md",
+        "sha256": "9f504fa411e4e9ae1f345f860ca08cc1ed9e9a1fe3d51fa27c8206a12e895c1a"
+      }
+    },
+    {
+      "testId": "PT-MIG-SPEAKERMAP020",
+      "independentExpectations": "canonical返却byte所有",
+      "method": "speakerMap020CanonicalByteArrayIsFreshOwnedOutput()",
+      "originalXmlResult": "PASS",
+      "specification": {
+        "path": "evidence/01_PT/019_NK-MIG-001/074_Current話者ID対応と既存列保持COPY変換・独立二十四仕様.md",
+        "sha256": "9f504fa411e4e9ae1f345f860ca08cc1ed9e9a1fe3d51fa27c8206a12e895c1a"
+      }
+    },
+    {
+      "testId": "PT-MIG-SPEAKERMAP021",
+      "independentExpectations": "record equals/hash全分岐の独立Python32bit固定vector",
+      "method": "speakerMap021GeneratedRecordEqualityHashAndRedactionIndependentVectors()",
+      "originalXmlResult": "PASS",
+      "specification": {
+        "path": "evidence/01_PT/019_NK-MIG-001/074_Current話者ID対応と既存列保持COPY変換・独立二十四仕様.md",
+        "sha256": "9f504fa411e4e9ae1f345f860ca08cc1ed9e9a1fe3d51fa27c8206a12e895c1a"
+      }
+    },
+    {
+      "testId": "PT-MIG-SPEAKERMAP022",
+      "independentExpectations": "Long hash衝突でもCurrent keyを混同しない",
+      "method": "speakerMap022LongHashCollisionNeverConfusesDistinctPrimaryKeys()",
+      "originalXmlResult": "PASS",
+      "specification": {
+        "path": "evidence/01_PT/019_NK-MIG-001/074_Current話者ID対応と既存列保持COPY変換・独立二十四仕様.md",
+        "sha256": "9f504fa411e4e9ae1f345f860ca08cc1ed9e9a1fe3d51fa27c8206a12e895c1a"
+      }
+    },
+    {
+      "testId": "PT-MIG-SPEAKERMAP023",
+      "independentExpectations": "redaction/失敗後fresh正常",
+      "method": "speakerMap023FixedDiagnosticsAndFreshSuccessAfterRejection()",
+      "originalXmlResult": "PASS",
+      "specification": {
+        "path": "evidence/01_PT/019_NK-MIG-001/074_Current話者ID対応と既存列保持COPY変換・独立二十四仕様.md",
+        "sha256": "9f504fa411e4e9ae1f345f860ca08cc1ed9e9a1fe3d51fa27c8206a12e895c1a"
+      }
+    },
+    {
+      "testId": "PT-MIG-SPEAKERMAP024",
+      "independentExpectations": "有限8workers64/Future5/finallyshutdownNow-await10",
+      "method": "speakerMap024FiniteSharedMapReadersRetainIndependentRowsAndTerminate()",
+      "originalXmlResult": "PASS",
+      "specification": {
+        "path": "evidence/01_PT/019_NK-MIG-001/074_Current話者ID対応と既存列保持COPY変換・独立二十四仕様.md",
+        "sha256": "9f504fa411e4e9ae1f345f860ca08cc1ed9e9a1fe3d51fa27c8206a12e895c1a"
+      }
+    }
+  ],
+  "currentProductionArchiveScope": 26,
+  "formalAcceptanceId": null,
+  "freshProductTests": 0,
+  "design": {
+    "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "commit": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "blobSha256": "3874975e619ba279814df4d6f79fd161098756cad882e00d580651fb2d7387cb"
+  },
+  "stillUnqualified": [
+    "actual Current IDs, ordering, text and row observations",
+    "real filesystem or DB and owner confirmation",
+    "real SDK/COPY and SSC417 24",
+    "final six-product 451"
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "run": "PG41816",
+  "source": "2706b1f7f3892999e0e641b15ee1d7c81e6e5b49",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T01:21:27.232744+00:00",
+  "wbs": "WBS-P016-21/2",
+  "currentSources": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/NotificationDetailViewModel.java",
+      "sha256": "4221d0482e8b5f84224a2ec7d91cba648046d5e23bcef3112c5bf6f48353a7cd"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/NotificationDetailProjectionPortTest.java",
+      "sha256": "6f4faa32c912737d9777ad1e6e9f11cd8195b38fcc2d9bcf2f80924c9c2bf990"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.java",
+      "sha256": "4cc72ad360d739a54818f19d87d7e83dde2cb7b5975f6fbf9f544e34b94a4f54"
+    }
+  ],
+  "originalScope": {
+    "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG41640-p01621-notification-detail-current-eight-v1/manifest.json",
+    "sha256": "b567d781d9102152e0ccc4d36bf49c34c2cf01344710fae9544234c3b9665a5a"
+  },
+  "originalXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41640-p01621-notification-detail-current-eight-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "cc17bf851b87f9c885402643929bf3cb4c745b92a7a7ebdf3bcf9a407515a561"
+  },
+  "sourceMatchingRaw": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41640-p01621-notification-detail-current-eight-v1/independent/raw.stdout",
+    "sha256": "ad3bd38f4ca103243c42f4c9870b9b59d41208b07d5f42c0fb3511566ff312d8"
+  },
+  "classProofs": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41640-p01621-notification-detail-current-eight-v1/main/dev/codex/schubert/nk/web/view/NotificationDetailViewModel.class",
+      "sha256": "98240088ebddf2149e8b4cb828c9103892d66f7d1ea0c98f181ef76ab52341ae"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41640-p01621-notification-detail-current-eight-v1/main/dev/codex/schubert/nk/web/view/NotificationDetailViewModel$1.class",
+      "sha256": "5b03b51eb8ae8a6dcb17222d41c9688ade97742c9c374471308bfc705b35217d"
+    }
+  ],
+  "rawStatement": [
+    "CLASS",
+    "dev/codex/schubert/nk/web/view/NotificationDetailViewModel",
+    "5f4f231b64fabc70",
+    "true",
+    "55",
+    "49",
+    "INSTRUCTION:6:256",
+    "BRANCH:1:13",
+    "LINE:0:51",
+    "COMPLEXITY:1:15",
+    "METHOD:0:7",
+    "CLASS:0:1"
+  ],
+  "rawReportedSourceLine": 35,
+  "rawMiss": [
+    "DEFICIT",
+    "dev/codex/schubert/nk/web/view/NotificationDetailViewModel",
+    "<init>",
+    "(Ldev/codex/schubert/nk/web/session/SessionPrincipal;Ldev/codex/schubert/nk/protocol/layout/question/NotificationDetailResponseData;)V",
+    "35",
+    "INSTRUCTION:6:5",
+    "BRANCH:1:5"
+  ],
+  "compiledSwitch": {
+    "offset": 23,
+    "authoredCaseTargets": {
+      "1": 66,
+      "2": 71,
+      "3": 76,
+      "4": 81,
+      "5": 86
+    },
+    "java25GeneratedDefault": 56,
+    "defaultOpcodeSequence": [
+      "56: new           #37                 // class java/lang/MatchException",
+      "59: dup",
+      "60: aconst_null",
+      "61: aconst_null",
+      "62: invokespecial #39                 // Method java/lang/MatchException.\"<init>\":(Ljava/lang/String;Ljava/lang/Throwable;)V",
+      "65: athrow"
+    ],
+    "generatedHelperClassRaw": [
+      "CLASS",
+      "dev/codex/schubert/nk/web/view/NotificationDetailViewModel$1",
+      "ca32db9ecd4aa921",
+      "true",
+      "12",
+      "4128",
+      "INSTRUCTION:5:35",
+      "BRANCH:0:0",
+      "LINE:0:1",
+      "COMPLEXITY:0:1",
+      "METHOD:0:1",
+      "CLASS:0:1"
+    ]
+  },
+  "originalAllStateTest": {
+    "testId": "PT-WEB-NDETAIL002",
+    "actual": "PASS",
+    "independentExpected": {
+      "RECEIVED": "受付中",
+      "PROCESSING": "処理中",
+      "COMPLETED": "処理完了",
+      "ERROR": "エラー",
+      "CANCELLED": "取消済み"
+    }
+  },
+  "policy451": {
+    "rawBranch": "13/14",
+    "productBranchPassClaim": false,
+    "reviewApprovalForGeneratedHandling": null,
+    "exclusionApplied": false,
+    "ordinaryReexecution": 0
+  },
+  "metadataCorrection": [
+    "Constrained offset comparison to constructor; selected original Jupiter XML independently"
+  ],
+  "formalAcceptanceId": null,
+  "unmet": [
+    "explicit 451-review on generated default and switch helper (raw loss remains)",
+    "actual SCR021 owner/cancel and HTTP",
+    "final source full products"
+  ]
+}

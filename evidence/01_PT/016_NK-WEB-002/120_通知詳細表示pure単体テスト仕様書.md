@@ -18,3 +18,7 @@ NK-WEB-002/WBS-P016-21、UI224/236、SS313/314/323/332/351、PG-D349、Notificat
 Fixtureはfixed epoch/immutable DTOと合成display Principal（contextはTest内で反復文字から生成し記録しない）。期待JST/ラベル/URL/状態maskはUI236/SS323の独立literal、Production formatter/projectorをexpectedへ使わない。HTTP/DB/JMS/MVC/Root/VM/実session/key/held4なし。既NotificationController carrier Testを変更/再演/合算しない。
 
 normalD8 PG20112/SB20114再利用、shared012/profile056の新8を単一sessionで実行、F/E/S/abort0・currentSource/CRC・四counter100・独立postを確認。compiler $1 switch classをreportへ保持しACC_SYNTHETIC/$SwitchMap/staticinit/空counterを独立検証、手動除外なし。command/環境/branch/commit/coverage/hashと障害は結果121/manifestへ記録。正式1964/53・新leaf0・工数nullを維持し、全SCR021/PGPTの受入とは分ける。
+
+## 2026-11-22 現候補の生成分岐と生coverage
+
+PG41640の単一execと現候補の同じクラスをPG41816で照合した。PT-WEB-NDETAIL002は五つの状態を独立した文言で検証し、元XMLは成功。Java 25が網羅switch式へ生成したoffset 56のMatchException経路は生branchの残1。outerは生13/14、既定JaCoCo 13/13。同コンパイラの補助$1についても生の未実行5命令を保持する。生成元と出力を識別した段階で、手動除外、正式生100%の判定、451レビュー承認は未成立。実SCR021の所有・取消・HTTPも別に確認を要する。 [元バイトと分岐の照合](../018_NK-OPS-001/evidence/PG41816-p01621-notification-detail-raw-branch-origin-v1/manifest.json)

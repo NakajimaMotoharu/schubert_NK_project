@@ -1,0 +1,120 @@
+{
+  "run": "PG41818",
+  "source": "2706b1f7f3892999e0e641b15ee1d7c81e6e5b49",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-F03/2-2-b",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T01:22:52.822908+00:00",
+  "priorRawNewMatrix": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41812-f03-candidate-six-products-intake-v1/manifest.json",
+    "sha256": "47b87d3baca0491344d35eb3f2b1926aae6de9a0e67259f3d1cdbee71f9604c3"
+  },
+  "originalStatic": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33288-mapverify976-preflight-v5/manifest.json",
+    "sha256": "df5fbcafa9e52f25e124a7ccdff12ffea987128443a99aa7b9d9b84bdd841452"
+  },
+  "originalStrictNullAway": {
+    "prepare": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33284-mapverify976-prepare-v5/manifest.json",
+      "sha256": "2bc57513b6affa024f0433ad1c3679a1690b3fd8e86c092fc751e48fbc7e01d2"
+    },
+    "stage": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-15T00:30:02.789920+00:00",
+      "endUTC": "2026-11-15T00:30:07.064320+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "--no-transfer-progress",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-Dmaven.test.skip=true",
+        "compile"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg33284-mapverify976-prepare-v5",
+      "stdoutSha256": "842c85a1db8441b872cf4f74fc75b1ff98c224effdc2ea6bee7859ab62f00ff6",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "rootCompilerControls": {
+      "path": "pom.xml",
+      "sha256": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38"
+    },
+    "historicalOriginallyMeasuredMainSources": 47
+  },
+  "verifiedPureProductCurrentMemberCount": 26,
+  "verifiedOriginalExactPureSources": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AssetMigrationManifest.java",
+      "sha256": "8e22a0c8da9b500d0213c8550eacfc4527e1839b4fb4b09c7acd40bfa808a547"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AudioMigrationMap.java",
+      "sha256": "44f69f9c9a08c2a7b15018cb4840307f6ca68577a6df1f2d5daad07fff1fe341"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentMigrationMappingManifest.java",
+      "sha256": "512950dd87dd65bda553724928839256d23fe75e4edd6eb73e36b8d2f6325b54"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentMigrationMappingVerifier.java",
+      "sha256": "86fa917f56ddbe06dbddeac8f6ae8157c57627f75657995e328d8c48862bffa0"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoder.java",
+      "sha256": "43af38a386bb4c676bd0da64e53348088a74390e96f17fd098734b863879a75e"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriter.java",
+      "sha256": "85e4fc7789155422bfb3cd98304494e936e4f0b5e8e04bcb15fc1f0ee83808f7"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyBatch.java",
+      "sha256": "99ae9254cbf0de8f01ff8390a9ef751f2d6cb526780c629a83238af13355a56a"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyRow.java",
+      "sha256": "011d66ec491400e61c872fe506b91fe780c26f44e3875dcf61914bc75d2c866d"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap.java",
+      "sha256": "02156c50dd7e69ce1c5b318bad8c7bfe800efdfb1d0242c38d5ce88b5e519e9c"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap.java",
+      "sha256": "23b1ac588950bec8f79e35553b0e2e1c93bff2593ac59c7fb3a8799a626a694d"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMap.java",
+      "sha256": "90a27291fd868d80896cfcae280978ebbf409bba6c906c73bfbab45d79024ad7"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerCopyBatch.java",
+      "sha256": "a6fe0a96272fe8679d7da1fb013338c219d0d02a5707b879513b985cf7094360"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerCopyRow.java",
+      "sha256": "0dbf9ce9e9d97710ec6924988af4afaa988250372abf94a336b6ad3b7b51e9d9"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerMigrationMap.java",
+      "sha256": "52922f18ff3969243cceb6d8599645321f087fd4a1aea7d170164546934c6e21"
+    }
+  ],
+  "bootstrapModulePomDelta": {
+    "path": "src/schubert-nk-bootstrap/pom.xml",
+    "historical": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+    "current": "174e3974a5fe17a226c8c43a0cd49ae70d395cb4f236168da07cd7482a67908c",
+    "jdbcAndCheckerDependencyChanged": true,
+    "buildResultReusedForEntireModule": false,
+    "relevance": "No pgjdbc or checker references from these exact 26 physical pure mapping dependencies. Use original strict result as local reference only."
+  },
+  "localWebIndependentRaw": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41816-p01621-notification-detail-raw-branch-origin-v1/manifest.json",
+    "sha256": "7644aff79d7fb066c144667d01b709fb8579f83808ae920fc6bc0a7ae1633d15"
+  },
+  "reviewNeeded": "SCR021 generated switch raw still 13/14, plus generated switch-table instructions; no exclusion applied",
+  "productTestsRun": 0,
+  "full451": false,
+  "formalAcceptanceId": null,
+  "dedicatedCost": null
+}

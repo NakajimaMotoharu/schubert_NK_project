@@ -1,0 +1,51 @@
+{
+  "run": "PG41820",
+  "source": "2706b1f7f3892999e0e641b15ee1d7c81e6e5b49",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-P020-01.02/2",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T01:23:34.095058+00:00",
+  "targetTestId": "PT-CHR-LOG-COR-008",
+  "sharedAliasNotNew": "PT-CHR-CMP007",
+  "xmlCase": "rejectsMissingOrUncorrelatedL01ProjectionEvenWhenDifClaimsAreValid()",
+  "priorExecutionResult": "PASS",
+  "exactFixture": {
+    "path": "program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorTest.java",
+    "sha256": "fa1eec995233fec725ab232489b41df5d7ddd6d673247ff564da226060d5f8f7"
+  },
+  "expectedFailureDefenses": {
+    "missingProjection": "LOG_PROJECTION_ENVELOPE",
+    "wrongCorrelatedRequest": "LOG_PROJECTION_DB_UNEXPECTED",
+    "unrelatedCurrentArtifact": "LOG_PROJECTION_ARTIFACT_BINDING",
+    "missingBinding": "LOG_PROJECTION_ARTIFACT_BINDING",
+    "extraBindingMember": "LOG_PROJECTION_ARTIFACT_BINDING",
+    "unrelatedNkArtifact": "LOG_PROJECTION_ARTIFACT_BINDING"
+  },
+  "independence": "Fixed synthetic after-row/request and changed membership; assertions require passed=false for each; no genuine runtime, session or data read.",
+  "oracle": {
+    "path": "evidence/01_PT/020_NK-CHR-001/001_NK-CHR-001_相関ログ証拠単体テスト仕様書.md",
+    "sha256": "0af8f161961906c1c5c30a1dc70eb2cc7c3609d02f7470b43357320d1f4e011a"
+  },
+  "contract": {
+    "path": "documents/300_SS/350_運用・品質/355_Characterization Test実行準備・PG開始gate.md",
+    "source": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "line": 138,
+    "sha256": "aff2aafe8f952de073e6dd2e7f5840152539f348f9816c6fa31e84ced93bef45"
+  },
+  "original": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG41344-p020-current-218-local-v1/manifest.json",
+    "sha256": "5f9119617ebed6632218f46bd81c2b858f6c8fa3064a827edd1fb9b470d9148c"
+  },
+  "existingXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41344-p020-current-218-local-v1/reports/TEST-junit-jupiter.xml",
+    "sha256": "8f6b635830262186ba682cf3b682f56d8b732f1a557452d62cebae4c95ef4dd4"
+  },
+  "currentToolConclusion": "Metadata and normalized artifact guard only",
+  "newExec": 0,
+  "formalAcceptanceId": null,
+  "remaining": [
+    "same-source real NK CHR-L01, owned Current/NK observations and comparison",
+    "QA051 final acceptance",
+    "scope 451 and real environment"
+  ]
+}
