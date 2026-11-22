@@ -145,6 +145,25 @@ class ReactorJunitTest(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, "nonpassing"):
                     self.capture()
 
+    def test_duplicate_case_identity_cannot_count_as_two_passes(self):
+        report = ET.fromstring(REPORT)
+        report.set("tests", "2")
+        case = report.find("testcase")
+        ET.SubElement(report, "testcase", case.attrib)
+        self.paths[1].write_bytes(ET.tostring(report))
+        with self.assertRaisesRegex(ValueError, "duplicate reactor JUnit case"):
+            self.capture()
+        self.assertFalse(self.marker(".junit.json").exists())
+
+    def test_same_method_name_in_distinct_classes_is_preserved(self):
+        report = ET.fromstring(REPORT)
+        report.set("tests", "2")
+        ET.SubElement(report, "testcase", {"classname": "fixture.Other", "name": "emptyList()"})
+        self.paths[1].write_bytes(ET.tostring(report))
+        self.success()
+        path = self.paths[1].relative_to(self.repo).as_posix()
+        self.assertEqual(2, json.loads(self.verify())["reports"][path]["tests"])
+
     def test_even_well_named_report_from_an_alias_is_rejected(self):
         before = self.runs / "outside.xml"
         before.write_bytes(REPORT)

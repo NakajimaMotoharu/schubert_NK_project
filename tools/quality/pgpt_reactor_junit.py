@@ -55,6 +55,9 @@ def _report(content):
         )
     ):
         raise ValueError("empty, inconsistent or nonpassing reactor JUnit report")
+    case_ids = {(case.get("classname"), case.get("name")) for case in cases}
+    if len(case_ids) != len(cases):
+        raise ValueError("duplicate reactor JUnit case")
     return {"sha256": _digest(content), "tests": len(cases)}
 
 
