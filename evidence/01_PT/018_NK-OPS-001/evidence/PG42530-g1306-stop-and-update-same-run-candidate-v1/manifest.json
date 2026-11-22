@@ -1,0 +1,459 @@
+{
+  "run": "PG42530",
+  "source": "f8532c27c2666570fe450f285c5a5436aacd8e7e",
+  "previousJavaCore": "b5d5009768a04bb69468beed2471441b2a57ce27",
+  "wbs": "WBS-G13.06",
+  "terminalAtUTC": "2026-11-22T10:23:30.396464+00:00",
+  "actualExit": 0,
+  "actualTests": 23,
+  "passed": 23,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "uniqueNew": 4,
+  "existingRequalified": 19,
+  "initialHarnessIssue": "v1 stopped before compile, static or PT due to obsolete variable in setup. v2 owns all executions.",
+  "testIdToMethod": {
+    "PT-OPS-MAINT-PREBOOT002-S03": "s03OneNanosecondAboveEitherGraceAndInvalidElapsedAreRejected",
+    "PT-OPS-MAINT-PREBOOT002-S01": "s01TheApprovedSequenceAcceptsBothExactGraceBoundaries",
+    "PT-OPS-MAINT-PREBOOT002-S04": "s04AnyNonconfirmedStageBlocksTheUpdateCondition",
+    "PT-OPS-MAINT-PREBOOT004-W02": "missingMarkerIsCriticalAtTheDeadlineAndAfter",
+    "PT-OPS-MAINT-PREBOOT004-W03": "acceptsSameRunNewBootAtTheDeadlineIncludingLaterReview",
+    "PT-OPS-MAINT-PREBOOT002-S02": "s02ReorderedMissingExtraAndRepeatedStagesAreRejected",
+    "PT-OPS-MAINT-PREBOOT003-U10": "u10AValidStopNeverWaivesUnverifiedUpdateSafety",
+    "PT-OPS-MAINT-PREBOOT003-U09": "u09MissingOrStaleUpdateAndEarlierStartKeepTheSystemPrivate",
+    "PT-OPS-MAINT-PREBOOT003-U06": "u06NullObservationsRemainUnverifiedAndCannotRetainAnOldSuccess",
+    "PT-OPS-MAINT-PREBOOT003-U05": "u05EachUnverifiedObservationKeepsTheWarningPrivate",
+    "PT-OPS-MAINT-PREBOOT003-U03": "u03EachUnsafeConditionKeepsBothUpdateOutcomesPrivate",
+    "PT-OPS-MAINT-PREBOOT004-W05": "staleFutureAndLateMarkersDoNotQualifyAtTheDeadline",
+    "PT-OPS-MAINT-PREBOOT004-W06": "backwardObservationIsInvalid",
+    "PT-OPS-MAINT-PREBOOT003-U01": "u01SuccessfulUpdateMeetsAllFiveVerifiedConditions",
+    "PT-OPS-MAINT-PREBOOT004-W07": "malformedOperandsProduceOnlyTheFixedInvalidDecision",
+    "PT-OPS-MAINT-PREBOOT002-S05": "s05StaleAndMissingReceiptsNeverAuthorizeAContinuation",
+    "PT-OPS-MAINT-PREBOOT004-W01": "waitBeforeTheExactSixtyMinuteBoundary",
+    "PT-OPS-MAINT-PREBOOT004-W04": "wrongRunOrSameBootDoesNotQualify",
+    "PT-OPS-MAINT-PREBOOT003-U08": "u08GoodUpdateCannotReplaceMissingFailedOrOutOfOrderStops",
+    "PT-OPS-MAINT-PREBOOT004-W08": "commandPrintsOneDecisionForEachAcceptedOperandShape",
+    "PT-OPS-MAINT-PREBOOT003-U02": "u02UpdateWarningRemainsVisibleWithAllFiveConditionsVerified",
+    "PT-OPS-MAINT-PREBOOT003-U07": "u07OrderedStopAndUpdateEvidenceKeepsSuccessAndWarningDistinct",
+    "PT-OPS-MAINT-PREBOOT003-U04": "u04MissingUpdateOrCheckReceiptCannotMeetTheConditions"
+  },
+  "independentOracle": {
+    "path": "evidence/01_PT/018_NK-OPS-001/5688_日次保守停止後の更新証票単体仕様.md",
+    "sha256": "fba5acbbaa7eeed6760bd1eda21f5420cb99286391d2feb03698a43fdc38cd0b"
+  },
+  "scopedStrictCompiler": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42530-preboot-sequence-composition-v2/compileStrict.terminal.json",
+    "sha256": "d314d3ec890238bac559715c4851700fec3d67474014ecb435864564bdfaafc4"
+  },
+  "sourceInputs": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MaintenanceRebootWatch.java",
+      "sha256": "0b0dc37c470791f0b3fe4a7439b730728bb30b185320e011fe22ea7db47552d9"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MaintenanceStopAssessment.java",
+      "sha256": "7d39459c02a129a48bdf8329068f0befb24ee3fa7e0ca893f36545e0f0b7161f"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment.java",
+      "sha256": "b306bc841e323fba7e6456ea2708ded796a9aa064942cac303aa1a7096aaedfb"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/package-info.java",
+      "sha256": "009823dd0566a5c0e2a7f06af4b540c122629bec50003bc1585d5303c488d924"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MaintenanceRebootWatchTest.java",
+      "sha256": "7eb40364214aaff9291b2bde5c8449cc81f305e1d0eb968a814494df8b4f630a"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MaintenanceStopAssessmentTest.java",
+      "sha256": "aa8fe830a989b4f97720ddeba2abd6df6fcf7709847dda124cdd010cc98eaab2"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessmentTest.java",
+      "sha256": "2de3fb97359a27e6e6ac0a47e073269935bd6a8e8dd326b80a1083f597761ac2"
+    }
+  ],
+  "stages": {
+    "compileStrict": 0,
+    "compileFixture": 0,
+    "format": 0,
+    "unit": 0,
+    "coverage": 0,
+    "checkstyle": 0,
+    "pmd": 4,
+    "spotbugs": 1,
+    "guard": 0
+  },
+  "originalJUnit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42530-preboot-sequence-composition-v2/xml/TEST-junit-jupiter.xml",
+    "sha256": "a4eaeddd9aa7c07f174276feed69645b72792d1ef62cca564c937621c11a6d65"
+  },
+  "singleOriginalExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42530-preboot-sequence-composition-v2/scope.exec",
+    "sha256": "a9ea0086c871d703a076f5bb181eda7a626045087de969859938cdddce71f614"
+  },
+  "classCrc": {
+    "dev/codex/schubert/nk/batch/monitoring/MaintenanceRebootWatch$Decision": "2030db85b7316376",
+    "dev/codex/schubert/nk/batch/monitoring/MaintenanceRebootWatch$Marker": "c7c5950a03b7c5f6",
+    "dev/codex/schubert/nk/batch/monitoring/MaintenanceRebootWatch": "6ceb7e8124417ebd",
+    "dev/codex/schubert/nk/batch/monitoring/MaintenanceStopAssessment$Result": "98ba6ddbd0cf1d6b",
+    "dev/codex/schubert/nk/batch/monitoring/MaintenanceStopAssessment$Stage": "3d4da084d4ab2c72",
+    "dev/codex/schubert/nk/batch/monitoring/MaintenanceStopAssessment$StopReceipt": "47c76ee695f037a0",
+    "dev/codex/schubert/nk/batch/monitoring/MaintenanceStopAssessment": "c8e501af50e7ce5a",
+    "dev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment$Decision": "d4f4e4e8e09e242f",
+    "dev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment$Observation": "eae3c393a1bc5ff6",
+    "dev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment$SafetyChecks": "e3f922aba175b9ab",
+    "dev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment$UpdateReceipt": "3f5dd0571f0bd075",
+    "dev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment$UpdateResult": "5181d73d610f6ae7",
+    "dev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment": "73f0f9bd3802cb81"
+  },
+  "physicalBytes": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42530-preboot-sequence-composition-v2/target/classes/dev/codex/schubert/nk/batch/monitoring/MaintenanceRebootWatch$Decision.class",
+      "sha256": "1322984cdf659078e0b6f986f6be574e207098c1eb9b57fe69f7dfb70858af58"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42530-preboot-sequence-composition-v2/target/classes/dev/codex/schubert/nk/batch/monitoring/MaintenanceRebootWatch$Marker.class",
+      "sha256": "f95df3320b4d3416dfab3eaf05db9023478d0c53b8c0b94361e5368bfb6793d8"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42530-preboot-sequence-composition-v2/target/classes/dev/codex/schubert/nk/batch/monitoring/MaintenanceRebootWatch.class",
+      "sha256": "854c22e821fdaf76bda7a1b3c552db829f367dc457f0c9f629cd042122197976"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42530-preboot-sequence-composition-v2/target/classes/dev/codex/schubert/nk/batch/monitoring/MaintenanceStopAssessment$Result.class",
+      "sha256": "7f52ace33b614bdef6630ad458c8e992df7fbf5f4d817fdcfef7596ce8449c0b"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42530-preboot-sequence-composition-v2/target/classes/dev/codex/schubert/nk/batch/monitoring/MaintenanceStopAssessment$Stage.class",
+      "sha256": "e754240235d71b91df9cd9dccd9b309dc2182f0d0a86ece3994039447e91db6a"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42530-preboot-sequence-composition-v2/target/classes/dev/codex/schubert/nk/batch/monitoring/MaintenanceStopAssessment$StopReceipt.class",
+      "sha256": "ebfc34c763024945853a6284df397707645240acc55e89b91de68947bd3fce5a"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42530-preboot-sequence-composition-v2/target/classes/dev/codex/schubert/nk/batch/monitoring/MaintenanceStopAssessment.class",
+      "sha256": "c28ca866917392c02edb64e09a7114cae94ce715d3866cab12ab5fae98842802"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42530-preboot-sequence-composition-v2/target/classes/dev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment$Decision.class",
+      "sha256": "e8c15194c039ee61cfe704468184fc6f40b3fbed4fd7cfd4348eb38a83c9cd98"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42530-preboot-sequence-composition-v2/target/classes/dev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment$Observation.class",
+      "sha256": "7f392e28b393ffd24731c70ad908d8bebec5dfa830d1777dafcbf98c06478f97"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42530-preboot-sequence-composition-v2/target/classes/dev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment$SafetyChecks.class",
+      "sha256": "aeece1ae4899d31bc02c2aeab67e1f43bc36d89a183068cf5191787d2f56d889"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42530-preboot-sequence-composition-v2/target/classes/dev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment$UpdateReceipt.class",
+      "sha256": "0019ec6bd3592ffe393cc7b2a6d3325d7b04a2afa87927178a61e8337b94e935"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42530-preboot-sequence-composition-v2/target/classes/dev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment$UpdateResult.class",
+      "sha256": "3e283aaa5fb60139afd597e85e78db24bcfe40509cb67e3cdd47e3150a67c1de"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42530-preboot-sequence-composition-v2/target/classes/dev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment.class",
+      "sha256": "bfd1c6907d867d04c51473e5ab55efe923f735161242efe2991d7e99cf550904"
+    }
+  ],
+  "defaultCounters": {
+    "BRANCH": {
+      "missed": 0,
+      "covered": 91
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 119
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 21
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 13
+    }
+  },
+  "rawCounters": {
+    "LINE": {
+      "missed": 3,
+      "covered": 121
+    },
+    "METHOD": {
+      "missed": 27,
+      "covered": 49
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 13
+    },
+    "BRANCH": {
+      "missed": 1,
+      "covered": 91
+    }
+  },
+  "newMethodRawCounters": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 34
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 14
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 8
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 8
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 1
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 0
+    }
+  },
+  "rawMisses": [
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/MaintenanceRebootWatch$Decision",
+      "method": "values",
+      "descriptor": "()[Ldev/codex/schubert/nk/batch/monitoring/MaintenanceRebootWatch$Decision;",
+      "cause": "JAVA_ENUM_GENERATED_METHOD"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/MaintenanceRebootWatch$Decision",
+      "method": "valueOf",
+      "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/batch/monitoring/MaintenanceRebootWatch$Decision;",
+      "cause": "JAVA_ENUM_GENERATED_METHOD"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/MaintenanceRebootWatch$Marker",
+      "method": "toString",
+      "descriptor": "()Ljava/lang/String;",
+      "cause": "JAVA_RECORD_GENERATED_METHOD"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/MaintenanceRebootWatch$Marker",
+      "method": "hashCode",
+      "descriptor": "()I",
+      "cause": "JAVA_RECORD_GENERATED_METHOD"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/MaintenanceRebootWatch$Marker",
+      "method": "equals",
+      "descriptor": "(Ljava/lang/Object;)Z",
+      "cause": "JAVA_RECORD_GENERATED_METHOD"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/MaintenanceRebootWatch",
+      "method": "<init>",
+      "descriptor": "()V",
+      "cause": "EXPLICIT_PRIVATE_EMPTY_UTILITY_CONSTRUCTOR"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/MaintenanceStopAssessment$Result",
+      "method": "values",
+      "descriptor": "()[Ldev/codex/schubert/nk/batch/monitoring/MaintenanceStopAssessment$Result;",
+      "cause": "JAVA_ENUM_GENERATED_METHOD"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/MaintenanceStopAssessment$Result",
+      "method": "valueOf",
+      "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/batch/monitoring/MaintenanceStopAssessment$Result;",
+      "cause": "JAVA_ENUM_GENERATED_METHOD"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/MaintenanceStopAssessment$Stage",
+      "method": "values",
+      "descriptor": "()[Ldev/codex/schubert/nk/batch/monitoring/MaintenanceStopAssessment$Stage;",
+      "cause": "JAVA_ENUM_GENERATED_METHOD"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/MaintenanceStopAssessment$Stage",
+      "method": "valueOf",
+      "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/batch/monitoring/MaintenanceStopAssessment$Stage;",
+      "cause": "JAVA_ENUM_GENERATED_METHOD"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/MaintenanceStopAssessment$StopReceipt",
+      "method": "toString",
+      "descriptor": "()Ljava/lang/String;",
+      "cause": "JAVA_RECORD_GENERATED_METHOD"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/MaintenanceStopAssessment$StopReceipt",
+      "method": "hashCode",
+      "descriptor": "()I",
+      "cause": "JAVA_RECORD_GENERATED_METHOD"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/MaintenanceStopAssessment$StopReceipt",
+      "method": "equals",
+      "descriptor": "(Ljava/lang/Object;)Z",
+      "cause": "JAVA_RECORD_GENERATED_METHOD"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/MaintenanceStopAssessment",
+      "method": "<init>",
+      "descriptor": "()V",
+      "cause": "EXPLICIT_PRIVATE_EMPTY_UTILITY_CONSTRUCTOR"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment$Decision",
+      "method": "values",
+      "descriptor": "()[Ldev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment$Decision;",
+      "cause": "JAVA_ENUM_GENERATED_METHOD"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment$Decision",
+      "method": "valueOf",
+      "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment$Decision;",
+      "cause": "JAVA_ENUM_GENERATED_METHOD"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment$Observation",
+      "method": "values",
+      "descriptor": "()[Ldev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment$Observation;",
+      "cause": "JAVA_ENUM_GENERATED_METHOD"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment$Observation",
+      "method": "valueOf",
+      "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment$Observation;",
+      "cause": "JAVA_ENUM_GENERATED_METHOD"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment$SafetyChecks",
+      "method": "toString",
+      "descriptor": "()Ljava/lang/String;",
+      "cause": "JAVA_RECORD_GENERATED_METHOD"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment$SafetyChecks",
+      "method": "hashCode",
+      "descriptor": "()I",
+      "cause": "JAVA_RECORD_GENERATED_METHOD"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment$SafetyChecks",
+      "method": "equals",
+      "descriptor": "(Ljava/lang/Object;)Z",
+      "cause": "JAVA_RECORD_GENERATED_METHOD"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment$UpdateReceipt",
+      "method": "toString",
+      "descriptor": "()Ljava/lang/String;",
+      "cause": "JAVA_RECORD_GENERATED_METHOD"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment$UpdateReceipt",
+      "method": "hashCode",
+      "descriptor": "()I",
+      "cause": "JAVA_RECORD_GENERATED_METHOD"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment$UpdateReceipt",
+      "method": "equals",
+      "descriptor": "(Ljava/lang/Object;)Z",
+      "cause": "JAVA_RECORD_GENERATED_METHOD"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment$UpdateResult",
+      "method": "values",
+      "descriptor": "()[Ldev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment$UpdateResult;",
+      "cause": "JAVA_ENUM_GENERATED_METHOD"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment$UpdateResult",
+      "method": "valueOf",
+      "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment$UpdateResult;",
+      "cause": "JAVA_ENUM_GENERATED_METHOD"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment",
+      "method": "<init>",
+      "descriptor": "()V",
+      "cause": "EXPLICIT_PRIVATE_EMPTY_UTILITY_CONSTRUCTOR"
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment",
+      "method": "assess",
+      "descriptor": "(Ldev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment$UpdateResult;Ldev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment$SafetyChecks;)Ldev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment$Decision;",
+      "cause": "JAVAC_EXHAUSTIVE_ENUM_SWITCH_FALLBACK"
+    }
+  ],
+  "previousRawClassification": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42512-f03-maintenance-physical-raw-coverage-v1/manifest.json",
+    "sha256": "70b82228bf2cfd49fe021d695bf25c153b9aeaef217b4a86dbafdf6a708bd726"
+  },
+  "rawReport": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42530-preboot-sequence-composition-v2/unfiltered/measure.stdout",
+    "sha256": "9f25caadefa3b43ef81655de8778f93b66c9fd0edc6eb11b40f7cdd34a580531"
+  },
+  "rawAnalyzer": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42512-maintenance-current-unfiltered-v1/analysis-tool/org/jacoco/core/internal/analysis/UnfilteredCodeMeasurement.class",
+    "sha256": "ecea79320babf5b9b2fa2edbf2b3eba2e4a5195b84ef165fa57cf28ffb76525c"
+  },
+  "reports": {
+    "checkstyle": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42530-preboot-sequence-composition-v2/reports/checkstyle.xml",
+      "sha256": "74b89ad9cefc8aa0dc9f92ed7028585b601fe3072ffaf4a143deeeea62025594"
+    },
+    "pmd": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42530-preboot-sequence-composition-v2/reports/pmd.xml",
+      "sha256": "7bf3d1c4ae21eafc7edcc73d1dc36d20a5f95ca05cf33c0bcc0e3244a1684dff"
+    },
+    "spotbugs": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42530-preboot-sequence-composition-v2/reports/spotbugs.xml",
+      "sha256": "1f8bfdcd3773f0ed2664d5c1bef6d30b3aa556cabab1e60864649b70354b604b"
+    }
+  },
+  "pmdRawRetained": [
+    [
+      "MaintenanceRebootWatchTest.java",
+      "CloseResource",
+      99
+    ]
+  ],
+  "spotbugsRawRetained": [
+    [
+      "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "lambda$malformedOperandsProduceOnlyTheFixedInvalidDecision$0"
+    ],
+    [
+      "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "lambda$malformedOperandsProduceOnlyTheFixedInvalidDecision$1"
+    ],
+    [
+      "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "lambda$malformedOperandsProduceOnlyTheFixedInvalidDecision$2"
+    ]
+  ],
+  "staticApplicability": {
+    "newProductionApplicable": 0,
+    "priorFixtureScopeExactlyUnchanged": true,
+    "reference": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42402-g1306-maintenance-reboot-watch-current-v1/manifest.json",
+      "sha256": "03d4392101a025f5675f9c4d30f815f384ddb828620c68965ac0b74fee18d1fe"
+    }
+  },
+  "coverageExclusionsAdded": 0,
+  "passedWhole451": false,
+  "formalAcceptanceId": null,
+  "signedPackagedCandidate": false,
+  "operationsStarted": 0
+}

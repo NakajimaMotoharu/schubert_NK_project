@@ -1,0 +1,72 @@
+{
+  "eventId": "PGPT-20261008-8325",
+  "groupId": "prod-20261122-PG42544",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T10:38:22+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 29,
+      "remainingPercent": 71,
+      "resetsAt": 1795879772,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "source": "dcfe2872748c1fd450000428e98b7e80800d1e6e",
+    "productionCoreMain": "f8532c27c2666570fe450f285c5a5436aacd8e7e",
+    "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "run": "PG42544",
+    "workCategory": "CONTRACT_AUDIT",
+    "managementWorkIds": [
+      "WBS-G07/current-post-publication-delta"
+    ],
+    "previousCheckpoint": 2878,
+    "planRow": {
+      "新版ID": "WBS-G07/current-post-publication-delta",
+      "第58版ID": "WBS-G07",
+      "費用主担当項目": "G07",
+      "改訂残pp": "0.35",
+      "終了条件": "前実scan cursorより後の確定コミットを精査し、全分類根拠。BUG-3497の外部公開結果と指摘真偽を確認。",
+      "先行ID・着手条件": "PG41532のtailと現remote branch head一致",
+      "原票": {
+        "path": "documents/400_PGPT/470_PMO/481_PGPT詳細WBS.json",
+        "sha256": "4227e20a23b10ab8eecd2b69550dd7f58c79bf43a2f77b4c7c98ec943e83a2d9"
+      }
+    },
+    "currentPlan": [
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/11月22日_PGPT再開実行計画.txt",
+        "sha256": "80b9fdc306f664b9c03901a4bdfb34cf66997879676204cfa969858fd68a4016"
+      },
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/短期実行WBS.tsv",
+        "sha256": "a6efedcd63b4ef3bb1d133d939b0ddd7dc4b0147988ac33d668282a25c999527"
+      }
+    ],
+    "startScope": {
+      "action": "Verify newly published from previous PG42490 cursor to newly owned batch evidence and fixture commits. Inspect masked findings and verify digest/ledger references without reading protected contents.",
+      "dependent": "Initial index content and current git identities fixed. No scan replay of previous fixed range.",
+      "expected": "New exact history cursor, scanner outcome and classification summary; no actual credentials printed"
+    },
+    "groupCapPp": 0.38,
+    "estimateAtGroupStartPp": {
+      "low": 0,
+      "base": 0.13,
+      "high": 0.38
+    },
+    "completedOriginalRowPricePp": 0,
+    "sourceOwnership": "LOCAL_DEV_FOUNDATION_TRACKED_SNAPSHOT",
+    "knownOwnedRunInProgress": 0,
+    "costRevision": "PMO-remaining-v3-20261010",
+    "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "actualAllocatedPp": null
+  }
+}
