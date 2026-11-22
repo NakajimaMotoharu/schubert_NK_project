@@ -1,0 +1,133 @@
+{
+  "run": "PG41796",
+  "source": "3f9b2a23efc8e254aa57ba542309c47350435e45",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "terminalAtUTC": "2026-11-22T01:06:35.912721+00:00",
+  "actualExit": 0,
+  "wbs": "WBS-P020-01.02/2",
+  "existingInputSource": "3ab80b846e27308aab029821581b113ecaf78fc9",
+  "originalPackaging": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41344-p020-current-218-local-v1/snapshot/program/characterization/target/schubert-characterization-0.1.0-SNAPSHOT.jar",
+    "sha256": "3b00e3da151d8f0e6b4f5402270e0f47fe54f5590205e3c7745ccf213f0acc8c"
+  },
+  "originalRun": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG41344-p020-current-218-local-v1/manifest.json",
+    "sha256": "5f9119617ebed6632218f46bd81c2b858f6c8fa3064a827edd1fb9b470d9148c"
+  },
+  "originalXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41344-p020-current-218-local-v1/reports/TEST-junit-jupiter.xml",
+    "sha256": "8f6b635830262186ba682cf3b682f56d8b732f1a557452d62cebae4c95ef4dd4"
+  },
+  "originalIndependent": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG41346-p020-current-218-independent-v1/manifest.json",
+    "sha256": "d2191089b0953b97f34e139d3d62a5bde47387bdb3e0ff14dde155198bb41a15"
+  },
+  "baselineGitTree": "cd377044e4ca058ea219ca6a2fec82159559c72c",
+  "productionAndTestSnapshotMatched": [
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateContractValidatorNegativeTest.java",
+      "sha256": "18edb8e21455ba3a6f9c740b9e705d09cb0c9b56fa6f21d9b928e900bc3c84ed"
+    },
+    {
+      "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+      "sha256": "9b3b9fb5287741e6b3c316626fad26ea5e95b812bb0e1292562a69a888c7c7c5"
+    },
+    {
+      "path": "program/characterization/pom.xml",
+      "sha256": "e945f851958317aa2a80c4f1b06bcb310d789f69abd12ce38785c6bfb55d491b"
+    }
+  ],
+  "conditions": [
+    {
+      "testId": "PT-CHR-GS011",
+      "newlyBoundStatusInvocations": [
+        {
+          "invocation": "rejectsEveryNonPassExecutionStatus(String)[1]",
+          "syntheticInputStatus": "FAIL",
+          "expected": [
+            "run2_STATUS:CHR-A02",
+            "run2_REJECTED_STATUS:CHR-A02"
+          ],
+          "observedOldAssertion": "PASS"
+        },
+        {
+          "invocation": "rejectsEveryNonPassExecutionStatus(String)[2]",
+          "syntheticInputStatus": "FAILED",
+          "expected": [
+            "run2_STATUS:CHR-A02",
+            "run2_REJECTED_STATUS:CHR-A02"
+          ],
+          "observedOldAssertion": "PASS"
+        },
+        {
+          "invocation": "rejectsEveryNonPassExecutionStatus(String)[3]",
+          "syntheticInputStatus": "FLAKY",
+          "expected": [
+            "run2_STATUS:CHR-A02",
+            "run2_REJECTED_STATUS:CHR-A02"
+          ],
+          "observedOldAssertion": "PASS"
+        },
+        {
+          "invocation": "rejectsEveryNonPassExecutionStatus(String)[4]",
+          "syntheticInputStatus": "SKIP",
+          "expected": [
+            "run2_STATUS:CHR-A02",
+            "run2_REJECTED_STATUS:CHR-A02"
+          ],
+          "observedOldAssertion": "PASS"
+        },
+        {
+          "invocation": "rejectsEveryNonPassExecutionStatus(String)[5]",
+          "syntheticInputStatus": "SKIPPED",
+          "expected": [
+            "run2_STATUS:CHR-A02",
+            "run2_REJECTED_STATUS:CHR-A02"
+          ],
+          "observedOldAssertion": "PASS"
+        },
+        {
+          "invocation": "rejectsEveryNonPassExecutionStatus(String)[6]",
+          "syntheticInputStatus": "DISABLED",
+          "expected": [
+            "run2_STATUS:CHR-A02",
+            "run2_REJECTED_STATUS:CHR-A02"
+          ],
+          "observedOldAssertion": "PASS"
+        },
+        {
+          "invocation": "rejectsEveryNonPassExecutionStatus(String)[7]",
+          "syntheticInputStatus": "NOT_RUN",
+          "expected": [
+            "run2_STATUS:CHR-A02",
+            "run2_REJECTED_STATUS:CHR-A02"
+          ],
+          "observedOldAssertion": "PASS"
+        }
+      ]
+    },
+    {
+      "testId": "PT-CHR-GS005",
+      "existingConditionReused": true,
+      "method": "rejectsMissingFailedAndIncompleteRunArtifacts()",
+      "alreadyTracedIn": {
+        "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG41630-p020-comparison-negative-current-handoff-v1/manifest.json",
+        "sha256": "9704cdc04b0ef3ff4a354b0fff9224872155be3525f7edbd40cf4d97e569566e"
+      }
+    }
+  ],
+  "trace": {
+    "path": "evidence/01_PT/020_NK-CHR-001/020_Gate判定工具自己所有全階層単体仕様.md",
+    "sha256": "825a57ac1958976099a77d9dafc80c6d9530255e39efddf35e9ceaf7dc1d09f8"
+  },
+  "newTests": 0,
+  "formalAcceptanceId": null,
+  "existing018PhysicalRootUnaffected": true,
+  "actualBrowserOrAuthoritativeComparison": false,
+  "remaining": [
+    "WBS-P020-01.01 current actual FileStore",
+    "current approved Current/NK browser and present ownership",
+    "actual CHR and six-product 451",
+    "parent exit dependencies"
+  ]
+}
