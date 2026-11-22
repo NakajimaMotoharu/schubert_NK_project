@@ -9,3 +9,7 @@ copyRows(Nullable three-column Currentrows with nullable row,Nullable ScenarioEn
 PT-MIG-AUDIOLINKMAP001..024: 001二game三→六列literal、002empty、003全constructor/record null・要素null、004enum/order1/999境界、005triple/UK重複、006unknown-entry/audio・異game、007signedsource順/type/疎order保持、008links/canonical深不変/freshbyte、009record全field/equals/hash独立int31/衝突/NULL-other/redaction、010copy全null/row-null/幅、011件数不足余剰、012二ID正準/両long境界/未知/重複、013kind完全一致/非NFC等無修復、014entry別配置・欠落拒否、015audio数/unknown/game/null/重複拒否、016型別同entryaudio許容・UK独立、017order999/1000・999links境界、018固定六列COPY bytes、019共通timestamp/年µs境界・異stamp拒否、020元rows/map/audio破壊隔離・失敗後fresh、021独立record signedlonghash衝突、022宣言はsubset-linksで未linkentry/audio保持、023全slotの保存値/既Row約束と固定診断、024有限8worker64/Future5/finallyshutdownNow-await10。期待値は本番mapper/encoderから作らず明示target IDs/game/order/固定wire・Python独立hashで作る。既全41Main43Test862定義は同byte保持、新Main1＋record1/新24、全42Main44Test61physical886を同source一exec/Root静的/全CRC-init/既定と無filter四100で確認する。旧862は新規成果に数えない。
 
 追加不足3/9/9.9pp cap10、元費用/SV/各群開始保持、専有実費token null。既残397.324/837.386/1643.415へ当不足だけ追加、BUG2943/V030実DBHOLD維持、実Current候補順宣言の採取と実source組立/全移行/global451/CHR/ITST/HOLD未受入。RD/UI/DDL/grant/QA変更不要。
+
+## 2026-11-22 現候補の音声link fixture試験
+
+PT-MIG-AUDIOLINKMAP018/024。固定独立UTF-8六列と有限並行の当候補選択2件は成功。Main不変、旧fixtureの24 methodのJVM命令一致、該当SpotBugs0。BUG-3566/3567、YKT-2805。元の単独実行の測定を新結果へ合算せず、実DB/COPYおよび全451は未実施。evidence/01_PT/018_NK-OPS-001/evidence/PG42212-f03-audio-link-checked-current-v1/manifest.json SHA256 2b0d3760bf49bf45af11e088a4a3acca6411a31981f8e5afdafcfa9a50b4dec7。

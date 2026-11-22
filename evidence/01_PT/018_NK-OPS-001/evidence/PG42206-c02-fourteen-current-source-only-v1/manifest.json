@@ -1,0 +1,165 @@
+{
+  "run": "PG42206",
+  "source": "0f20e093efa9f57a503ca90702530db203e8fda2",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-C02-a",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T05:45:25.404747+00:00",
+  "priorSourceOnly": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40094-c02-current-unit-text-order-v1/manifest.json",
+      "sha256": "5bb81a5b4c3cea4d870eef5071041b03e8be00d44ef1a6f78f3fd1ffc78a49ef"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40184-c02-api-web-timeout-existing-proof-join-v1/manifest.json",
+      "sha256": "6c862cc57c118845d63b6314c5dbef2a8d403956edf10e79447e77a85771dcc7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40182-c02-source-killmode-independent-v1/manifest.json",
+      "sha256": "a00fd714e1971cb0426f7ffd7af4d3b7498f7e920a63e8584ad561d4b09a713a"
+    }
+  ],
+  "currentConfigurationIdentity": [
+    {
+      "path": "src/deployment/systemd/artemis.service",
+      "sha256": "1b8fe8eaab683ac658bfe8c23816e709725431a0a2b80816bba5449d129c5266"
+    },
+    {
+      "path": "src/deployment/systemd/caddy.service.d/schubert-nk-startup-policy.conf",
+      "sha256": "6711ce8ddf9fcf54f733acfb30c10e4970a051d55dba340bc55f70970060440e"
+    },
+    {
+      "path": "src/deployment/systemd/caddy.service.d/schubert-nk-stop-policy.conf",
+      "sha256": "3710be0c023a4bbbf3a8f095cd2d91c5b97b40ed76056ddd4ff433d4f4e066bc"
+    },
+    {
+      "path": "src/deployment/systemd/optional/inbox-inspector-context-previous.conf",
+      "sha256": "4e1de7eb4bee81acb1afb9fa34d41f01b26829030c225e74d92f1bce122dfd13"
+    },
+    {
+      "path": "src/deployment/systemd/optional/inbox-inspector-response-previous.conf",
+      "sha256": "8629e3e009a38a164b9954326f25cbfcc6faa590fc838fd52307da6c9120e9b4"
+    },
+    {
+      "path": "src/deployment/systemd/schubert-nk-api.service.template",
+      "sha256": "c81f848198dff4e24f7d607aef3caf3b3fa5d401278eeb0b1707662bdbc2d630"
+    },
+    {
+      "path": "src/deployment/systemd/schubert-nk-backup.service.template",
+      "sha256": "2328437591829502f9318c39358b3c5f9ed06afb4d4116febcb3d1860d3b2b8a"
+    },
+    {
+      "path": "src/deployment/systemd/schubert-nk-bootstrap-admin.service.template",
+      "sha256": "e38a6021b2881ec832a8ca7fa8961f8754619b110415ef35a6aa0992e556d392"
+    },
+    {
+      "path": "src/deployment/systemd/schubert-nk-cleanup.service.template",
+      "sha256": "a7446238928b4446a65fdd6088a7a5ad374b5a4507ade1adf9084190091c34a2"
+    },
+    {
+      "path": "src/deployment/systemd/schubert-nk-expiry-cleanup.service.template",
+      "sha256": "0e6c3453373e4eb9c20ff175408ff66db731acda376c0b343e89f3541cf30709"
+    },
+    {
+      "path": "src/deployment/systemd/schubert-nk-inbox-inspector.service",
+      "sha256": "225adff0cee398c1ad7d25bd587e666018b9698a3d0256788c38cf029d8262d8"
+    },
+    {
+      "path": "src/deployment/systemd/schubert-nk-morning-controller.service.template",
+      "sha256": "e9ce87045404893edede09b86dfb55523698ed26eeef3c4cb2b386f16518613b"
+    },
+    {
+      "path": "src/deployment/systemd/schubert-nk-morning.target.template",
+      "sha256": "befb463e738a7cec5379b98cbb9ca68026fe49bb5ab7c593038bae9df8ebfacb"
+    },
+    {
+      "path": "src/deployment/systemd/schubert-nk-web.service.template",
+      "sha256": "eb3980ad64852645ffe2a07ac2ac4f453aeb8ce9cedd1d9147e1a1d3d863acbc"
+    }
+  ],
+  "topologyReceipt": {
+    "originalGraphNodes": 11,
+    "originalOrderEdges": 28,
+    "originIndependentObservedTests": [
+      "PT-C02-TEXT-001",
+      "PT-C02-TEXT-002",
+      "PT-C02-TEXT-003",
+      "PT-C02-TEXT-004",
+      "PT-C02-TEXT-005",
+      "PT-C02-TEXT-006",
+      "PT-C02-TEXT-007",
+      "PT-C02-TEXT-008",
+      "PT-C02-TEXT-009"
+    ]
+  },
+  "checkedSameTimeoutLiterals": [
+    {
+      "service": "api",
+      "directive": "TimeoutStartSec",
+      "literal": "120s",
+      "file": "src/deployment/systemd/schubert-nk-api.service.template",
+      "line": 27,
+      "fileSha256": "c81f848198dff4e24f7d607aef3caf3b3fa5d401278eeb0b1707662bdbc2d630",
+      "designLine": 271,
+      "existingTest": "PT-C02-TEXT-001",
+      "textStatus": "QUALIFIED_REUSED",
+      "effectiveProperty": "TimeoutStartUSec",
+      "effectiveObserved": null,
+      "runtimeTerminalAccepted": false
+    },
+    {
+      "service": "api",
+      "directive": "TimeoutStopSec",
+      "literal": "60s",
+      "file": "src/deployment/systemd/schubert-nk-api.service.template",
+      "line": 28,
+      "fileSha256": "c81f848198dff4e24f7d607aef3caf3b3fa5d401278eeb0b1707662bdbc2d630",
+      "designLine": 272,
+      "existingTest": "PT-C02-TEXT-001",
+      "textStatus": "QUALIFIED_REUSED",
+      "effectiveProperty": "TimeoutStopUSec",
+      "effectiveObserved": null,
+      "runtimeTerminalAccepted": false
+    },
+    {
+      "service": "web",
+      "directive": "TimeoutStartSec",
+      "literal": "120s",
+      "file": "src/deployment/systemd/schubert-nk-web.service.template",
+      "line": 27,
+      "fileSha256": "eb3980ad64852645ffe2a07ac2ac4f453aeb8ce9cedd1d9147e1a1d3d863acbc",
+      "designLine": 271,
+      "existingTest": "PT-C02-TEXT-001",
+      "textStatus": "QUALIFIED_REUSED",
+      "effectiveProperty": "TimeoutStartUSec",
+      "effectiveObserved": null,
+      "runtimeTerminalAccepted": false
+    },
+    {
+      "service": "web",
+      "directive": "TimeoutStopSec",
+      "literal": "30s",
+      "file": "src/deployment/systemd/schubert-nk-web.service.template",
+      "line": 28,
+      "fileSha256": "eb3980ad64852645ffe2a07ac2ac4f453aeb8ce9cedd1d9147e1a1d3d863acbc",
+      "designLine": 272,
+      "existingTest": "PT-C02-TEXT-001",
+      "textStatus": "QUALIFIED_REUSED",
+      "effectiveProperty": "TimeoutStopUSec",
+      "effectiveObserved": null,
+      "runtimeTerminalAccepted": false
+    }
+  ],
+  "designReference": {
+    "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "canonical": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "sha256": "07ab19dd27038241ba8257a1e4dcf180117a844b68479ec6848658a938445192",
+    "wholeDocSameAsOriginal": true
+  },
+  "testReplayed": 0,
+  "actualCurrentSessionOrSystemdInvocations": 0,
+  "actualUnitStartupStopOwnerProof": null,
+  "sharedCostNewAcceptedPricePp": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

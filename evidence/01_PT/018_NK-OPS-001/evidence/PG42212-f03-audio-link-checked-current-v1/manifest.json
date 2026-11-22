@@ -1,0 +1,129 @@
+{
+  "run": "PG42212",
+  "source": "b755c0ffdb1d502c16b154a94d5c97ac6183704d",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "F03/2-2-b",
+  "alsoUsedFor": "WBS-P019-03.02/2",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T05:49:20.440706+00:00",
+  "prior": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42208-p0190302-audio-link-proof-v1/manifest.json",
+      "sha256": "6777eaf5ba2d5af43392c598f7a95d1259b163e449a3148da5a80c36a2da6925"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42210-f03-audio-link-fixture-typed-v1/manifest.json",
+      "sha256": "69404d2d216792c052ecc2a18253a5017bcef8d7bc106b2daf75e6ea432d02ea"
+    }
+  ],
+  "bugs": [
+    "BUG-3566",
+    "BUG-3567"
+  ],
+  "ykt": "YKT-2805",
+  "currentSelectedTestId": [
+    "PT-MIG-AUDIOLINKMAP018",
+    "PT-MIG-AUDIOLINKMAP024"
+  ],
+  "failed": 0,
+  "passed": 2,
+  "skipped": 0,
+  "methods": [
+    "linkMap018WireBytesAreHandwrittenSixColumnValues",
+    "linkMap024FiniteSharedMapperCallsHaveOwnedSnapshots"
+  ],
+  "previousMethodInstructionsUnchangedForAll24": true,
+  "oldTestClass": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42208-p0190302-audio-link-proof-v1/test/dev/codex/schubert/nk/migration/CurrentAudioLinkMapperTest.class",
+    "sha256": "e73ca0f5b52fa5035455b6c9f02fd60d54f9ec0cbe41a5ba70f9addbf6520305"
+  },
+  "newTestClass": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42212-audio-link-finite-current-v1/test/dev/codex/schubert/nk/migration/CurrentAudioLinkMapperTest.class",
+    "sha256": "77d639a2d7571873602269373279cd9c5b7cde5eca80f0331baff63c2c6dce46"
+  },
+  "writtenGoldenBytesAreMemoryOnly": true,
+  "actualCopyDbOrMediaActions": 0,
+  "checkedFindingsCleared": 2,
+  "remainingPmdFixtureSites": {
+    "linkMap009RecordFieldsEqualsHashNullOtherAndRedaction:166:17": {
+      "rule": "EqualsNull",
+      "reason": "Explicit negative equality contract"
+    },
+    "linkMap024FiniteSharedMapperCallsHaveOwnedSnapshots:459:9": {
+      "rule": "CloseResource",
+      "reason": "Fixture-owned finite futures, finally shutdown and bounded owner termination"
+    },
+    "linkMap024FiniteSharedMapperCallsHaveOwnedSnapshots:459:20": {
+      "rule": "DoNotUseThreads",
+      "reason": "Fixture-owned finite futures, finally shutdown and bounded owner termination"
+    },
+    "linkMap024FiniteSharedMapperCallsHaveOwnedSnapshots:464:13": {
+      "rule": "DoNotUseThreads",
+      "reason": "Fixture-owned finite futures, finally shutdown and bounded owner termination"
+    },
+    "linkMap024FiniteSharedMapperCallsHaveOwnedSnapshots:473:7": {
+      "rule": "DoNotUseThreads",
+      "reason": "Fixture-owned finite futures, finally shutdown and bounded owner termination"
+    },
+    "linkMap024FiniteSharedMapperCallsHaveOwnedSnapshots:474:18": {
+      "rule": "DoNotUseThreads",
+      "reason": "Fixture-owned finite futures, finally shutdown and bounded owner termination"
+    }
+  },
+  "spotBugsFindings": 0,
+  "junit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42212-audio-link-finite-current-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "87928930e0ba294df33f649a884d0730b50fb544684e0f32e5871e040c0e2376"
+  },
+  "exec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42212-audio-link-finite-current-v1/original.exec",
+    "sha256": "6992073d3d84109dd7b32218bbe7971c83aeef40adde4ea92f725eea3e398927"
+  },
+  "partialSelectedProbes": {
+    "crc": "56e2d6d00c0c96a9",
+    "hit": 71,
+    "count": 120
+  },
+  "staticReports": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42212-audio-link-finite-current-v1/checkstyle.xml",
+      "sha256": "b2bc7fc6f883ca4975e287f0a980facad415f115f5b8126bf0c75d268df76339"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42212-audio-link-finite-current-v1/pmd.xml",
+      "sha256": "4b637168d4619aa163d1c001d111b3d3d46c5bdfd2f6283bc291ac27da35921d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42212-audio-link-finite-current-v1/spotbugs.xml",
+      "sha256": "27a5a268ea4ef6232344842bf89b1ff161a6910fcf738be5510bf53f8a1c3cc4"
+    }
+  ],
+  "terminalReceipts": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42212-audio-link-finite-current-v1/compile.terminal.json",
+      "sha256": "ed95478be3af04e2415e74509a7b2926a7bfc7dd930b124cd06aafd2ea8f50e0"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42212-audio-link-finite-current-v1/format.terminal.json",
+      "sha256": "15428ba9dc3e49440ba15774a3857698e8726c211e6dde0262636149dc25cebc"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42212-audio-link-finite-current-v1/checkstyle.terminal.json",
+      "sha256": "0fcd1344ef27f3463899b3ddea8a4e99dab4882cf897f0a60e427856c748f4b2"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42212-audio-link-finite-current-v1/pmd.terminal.json",
+      "sha256": "652365415c701cd8004d862c634f5fd358eaf91400a506f35cc485328f2397c2"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42212-audio-link-finite-current-v1/spotbugs.terminal.json",
+      "sha256": "0203cf746d1d2cd9abc7343aa66751cc756aeec615d6d88e9be04b1dd9f5a3d9"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42212-audio-link-finite-current-v1/unit.terminal.json",
+      "sha256": "fedca38714243133b274fd8d0567c4fac54ed12d07ea4e31a37847c66e725117"
+    }
+  ],
+  "whole451": false,
+  "formalAcceptanceId": null
+}
