@@ -13,9 +13,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
@@ -132,7 +134,7 @@ final class MigrationMasterColumnVerifierTest {
               "6\tcreated_at\ttimestamptz\ttimestamp with time zone\ttrue\t\t\ttrue\ttrue\tnk_owner\ttrue"));
 
   @Test
-  void column001SixQueriesSixtySixColumnsAndExactResources() throws Exception {
+  void column001SixQueriesSixtySixColumnsAndExactResources() throws SQLException {
     var f = new Fixture();
     verify(f);
     assertEquals(SQL, f.sql);
@@ -262,7 +264,7 @@ final class MigrationMasterColumnVerifierTest {
   }
 
   @Test
-  void column011SqlNullBooleanCannotMasqueradeAsFalse() throws Exception {
+  void column011SqlNullBooleanCannotMasqueradeAsFalse() throws SQLException {
     for (int table = 0; table < TABLES; table++) {
       for (int row = 0; row < DATA.get(table).size(); row++) {
         var f = new Fixture();
@@ -317,7 +319,7 @@ final class MigrationMasterColumnVerifierTest {
   }
 
   @Test
-  void column016EveryJdbcEventSqlRuntimeAndErrorKeepsOwnership() throws Exception {
+  void column016EveryJdbcEventSqlRuntimeAndErrorKeepsOwnership() {
     var calls = expectedCalls();
     for (int index = 0; index < calls.size(); index++) {
       for (Throwable primary : failures()) {
@@ -343,7 +345,7 @@ final class MigrationMasterColumnVerifierTest {
   }
 
   @Test
-  void column017EveryResultCloseFailureStopsLaterQueries() throws Exception {
+  void column017EveryResultCloseFailureStopsLaterQueries() {
     for (int table = 0; table < TABLES; table++) {
       for (Throwable primary : failures()) {
         var f = new Fixture();
@@ -357,7 +359,7 @@ final class MigrationMasterColumnVerifierTest {
   }
 
   @Test
-  void column018StatementCloseFailureCannotBecomeSuccess() throws Exception {
+  void column018StatementCloseFailureCannotBecomeSuccess() {
     for (Throwable primary : failures()) {
       var f = new Fixture();
       f.statementFailure = primary;
@@ -368,7 +370,7 @@ final class MigrationMasterColumnVerifierTest {
   }
 
   @Test
-  void column019AllFaultKindsPreserveResultThenStatementSuppression() throws Exception {
+  void column019AllFaultKindsPreserveResultThenStatementSuppression() {
     for (int p = 0; p < 3; p++) {
       for (int rc = 0; rc < 3; rc++) {
         for (int sc = 0; sc < 3; sc++) {
@@ -387,7 +389,7 @@ final class MigrationMasterColumnVerifierTest {
   }
 
   @Test
-  void column020SamePrimaryAndEqualValuedDistinctCleanupIdentities() throws Exception {
+  void column020SamePrimaryAndEqualValuedDistinctCleanupIdentities() {
     for (boolean closeOrigin : List.of(true, false)) {
       for (Throwable primary : failures()) {
         var f = closeOrigin ? new Fixture() : readFailure(primary);
@@ -408,7 +410,7 @@ final class MigrationMasterColumnVerifierTest {
   }
 
   @Test
-  void column021RedactionFreshSuccessAndBorrowedConnectionContract() throws Exception {
+  void column021RedactionFreshSuccessAndBorrowedConnectionContract() throws SQLException {
     var verifier = new MigrationMasterColumnVerifier();
     var bad = new Fixture();
     bad.nullStatement = true;
@@ -424,7 +426,8 @@ final class MigrationMasterColumnVerifierTest {
   }
 
   @Test
-  void column022FiniteSharedVerifierHasOnlyPerCallOwnedResources() throws Exception {
+  void column022FiniteSharedVerifierHasOnlyPerCallOwnedResources()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var verifier = new MigrationMasterColumnVerifier();
     var executor = Executors.newFixedThreadPool(WORKERS);
     try {
@@ -448,7 +451,7 @@ final class MigrationMasterColumnVerifierTest {
   }
 
   @Test
-  void column023NotNullCatalogValidityFalseOrSqlNullNeverPassesAnyColumn() throws Exception {
+  void column023NotNullCatalogValidityFalseOrSqlNullNeverPassesAnyColumn() throws SQLException {
     for (int table = 0; table < TABLES; table++) {
       for (int row = 0; row < DATA.get(table).size(); row++) {
         for (String status : java.util.Arrays.asList(SQL_FALSE, null)) {
@@ -468,7 +471,7 @@ final class MigrationMasterColumnVerifierTest {
   }
 
   @Test
-  void column024IdentitySequenceDefinitionFalseOrSqlNullNeverPassesAnyColumn() throws Exception {
+  void column024IdentitySequenceDefinitionFalseOrSqlNullNeverPassesAnyColumn() throws SQLException {
     for (int table = 0; table < TABLES; table++) {
       for (int row = 0; row < DATA.get(table).size(); row++) {
         for (String status : java.util.Arrays.asList(SQL_FALSE, null)) {
@@ -488,7 +491,7 @@ final class MigrationMasterColumnVerifierTest {
   }
 
   @Test
-  void column025EveryOwnerMustMatchAbsoluteDeclaredRole() throws Exception {
+  void column025EveryOwnerMustMatchAbsoluteDeclaredRole() throws SQLException {
     for (int table = 0; table < TABLES; table++) {
       for (int row = 0; row < DATA.get(table).size(); row++) {
         for (String owner :
@@ -509,7 +512,7 @@ final class MigrationMasterColumnVerifierTest {
   }
 
   @Test
-  void column026DefaultAndGeneratedValidityFalseOrSqlNullFailsEachColumn() throws Exception {
+  void column026DefaultAndGeneratedValidityFalseOrSqlNullFailsEachColumn() throws SQLException {
     for (int table = 0; table < TABLES; table++) {
       for (int row = 0; row < DATA.get(table).size(); row++) {
         for (String status : java.util.Arrays.asList(SQL_FALSE, null)) {
