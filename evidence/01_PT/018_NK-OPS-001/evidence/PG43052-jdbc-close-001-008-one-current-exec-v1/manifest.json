@@ -1,0 +1,316 @@
+{
+  "run": "PG43052-jdbc-close-001-008-one-current-exec-v1",
+  "source": "046ffeb75aebc8093a81e0dd3c9bb333238ba862",
+  "productCore": "7698011f52d6cc5f94c76413b6ab36971783b9c9",
+  "wbs": [
+    "WBS-P004-05/2",
+    "WBS-F03/2-2-b"
+  ],
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T21:44:50.753940+00:00",
+  "newTestDefinitions": 0,
+  "qualifiedOrdinaryTests": 8,
+  "oldExecsCombined": 0,
+  "newDynamicRun": true,
+  "rawCounters": {
+    "INSTRUCTION": 48,
+    "BRANCH": 6,
+    "LINE": 21,
+    "COMPLEXITY": 6,
+    "METHOD": 3,
+    "CLASS": 1
+  },
+  "exactUnfilteredLocalScope": true,
+  "realJdbcOperations": 0,
+  "resourceProvider": "JDK synthetic callbacks and interface proxies, no connection or driver",
+  "commands": {
+    "fixtureCompile": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+      "--release",
+      "25",
+      "-g",
+      "-proc:none",
+      "-implicit:none",
+      "-encoding",
+      "UTF-8",
+      "-Xlint:all",
+      "-Werror",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43052-jdbc-close-001-008-one-current-exec-v1/prod:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "-d",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43052-jdbc-close-001-008-one-current-exec-v1/fixtures",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/JdbcResourceCleanupTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/JdbcResourceCleanupOrderTest.java"
+    ],
+    "analyzerCompile": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+      "--release",
+      "25",
+      "-g",
+      "-proc:none",
+      "-implicit:none",
+      "-encoding",
+      "UTF-8",
+      "-Xlint:all",
+      "-Werror",
+      "-cp",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+      "-d",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43052-jdbc-close-001-008-one-current-exec-v1/tool",
+      "tools/quality/jacoco/UnfilteredCodeMeasurement.java"
+    ],
+    "junit": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-Dfile.encoding=UTF-8",
+      "-Duser.timezone=Asia/Tokyo",
+      "-Djunit.jupiter.extensions.autodetection.enabled=false",
+      "-Djunit.jupiter.execution.parallel.enabled=false",
+      "-Djunit.jupiter.execution.timeout.default=15 s",
+      "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/PG43052-jdbc-close-001-008-one-current-exec-v1/tmp",
+      "-Xlog:class+load=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/PG43052-jdbc-close-001-008-one-current-exec-v1/class-load.log",
+      "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/PG43052-jdbc-close-001-008-one-current-exec-v1/unit.exec,sessionid=PG43052-JDBC-CLOSE8,append=false,includes=dev.codex.schubert.nk.api.database.JdbcResourceCleanup:dev.codex.schubert.nk.api.database.JdbcResourceCleanup$SqlClose",
+      "-jar",
+      "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "execute",
+      "--disable-banner",
+      "--disable-ansi-colors",
+      "--fail-if-no-tests",
+      "--details=summary",
+      "--class-path",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43052-jdbc-close-001-008-one-current-exec-v1/fixtures:/home/mini/codex/project1/work/pgpt-runs/PG379/PG43052-jdbc-close-001-008-one-current-exec-v1/prod:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+      "--select-class",
+      "dev.codex.schubert.nk.api.database.JdbcResourceCleanupTest",
+      "--select-class",
+      "dev.codex.schubert.nk.api.database.JdbcResourceCleanupOrderTest",
+      "--reports-dir",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43052-jdbc-close-001-008-one-current-exec-v1/xml"
+    ],
+    "raw": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43052-jdbc-close-001-008-one-current-exec-v1/tool:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+      "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+      "--strict-original-exec",
+      "--line-deficits",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43052-jdbc-close-001-008-one-current-exec-v1/unit.exec",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43052-jdbc-close-001-008-one-current-exec-v1/prod/dev/codex/schubert/nk/api/database/JdbcResourceCleanup$SqlClose.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43052-jdbc-close-001-008-one-current-exec-v1/prod/dev/codex/schubert/nk/api/database/JdbcResourceCleanup.class"
+    ]
+  },
+  "originals": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43052-jdbc-close-001-008-one-current-exec-v1/begin.json",
+      "sha256": "ad6ece260c6b134fbbce9184b3e9612b8a7ace7098cfbc7ff57119c19a99d954"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43052-jdbc-close-001-008-one-current-exec-v1/terminal.json",
+      "sha256": "955f22c1a0c0cae8c9a91246f7270a11ea714496f45070a34988d5b2f5628ea9"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43052-jdbc-close-001-008-one-current-exec-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "270f5320bac3ec0bd12d73a980dbf4d8ea39a102d2236562bf2b5c1a563469a5"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43052-jdbc-close-001-008-one-current-exec-v1/unit.exec",
+      "sha256": "a8e1a1a4f1bb7a02e440159253e7fbdfc0308a10c97f8d00da283ee50ab58c71"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43052-jdbc-close-001-008-one-current-exec-v1/class-load.log",
+      "sha256": "2a6f87cbea9d349ec7ed6cdca95646a1c57e116e8a8aec6c9471217bb8d1e6c0"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43052-jdbc-close-001-008-one-current-exec-v1/fixtureCompile.end.json",
+      "sha256": "d9b81e5842a50e29f4965dca7cfc9e27888925f2d127a14f57e450dd5607abd9"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43052-jdbc-close-001-008-one-current-exec-v1/analyzerCompile.end.json",
+      "sha256": "1fc23ee4c5f2fc3310411e3757dffcbbab6bf1fc185d43177dfe75f00c75655f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43052-jdbc-close-001-008-one-current-exec-v1/junit.end.json",
+      "sha256": "35e4ad434f423643d265a3cf1d84c29bf80bd8e8048f2a84745c32c6d5d5db01"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43052-jdbc-close-001-008-one-current-exec-v1/raw.end.json",
+      "sha256": "c5e1377b12aca69e3ea48484cdb17287ee8eccc160d9244a10e55e3b7338422d"
+    }
+  ],
+  "trace": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41742-p00405-jdbc-cleanup-current-seven-v1/manifest.json",
+      "sha256": "b066c17dad191f4f9c9a7f247864fa0d8f68bb0be8acdc8262e7b50fe1bfeafc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41746-jdbc-cleanup-ordered-two-owners-fixed-v1/manifest.json",
+      "sha256": "459b770593ab7fb33fc8bb54d952737fc0753eb56d7cf2ba318c882efc5bb913"
+    }
+  ],
+  "independentExpectations": [
+    {
+      "className": "dev.codex.schubert.nk.api.database.JdbcResourceCleanupTest",
+      "method": "cleanup001NullActionFailsAtTheExplicitCallBoundary",
+      "testId": "PT-JDBC-CLEANUP001",
+      "independent": "Null action raises NullPointerException at the helper boundary",
+      "outcome": "PASS"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.database.JdbcResourceCleanupTest",
+      "method": "cleanup002SuccessfulCloseRunsOnceAndLeavesThePrimaryGraphUnchanged",
+      "testId": "PT-JDBC-CLEANUP002",
+      "independent": "Successful action called exactly once; incoming primary retains an empty suppressed list",
+      "outcome": "PASS"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.database.JdbcResourceCleanupTest",
+      "method": "cleanup003FailedCloseWithoutPrimaryPropagatesTheSameSqlRuntimeOrError",
+      "testId": "PT-JDBC-CLEANUP003",
+      "independent": "Each SQL/runtime/Error failure remains the same object without primary and close was called once",
+      "outcome": "PASS"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.database.JdbcResourceCleanupTest",
+      "method": "cleanup004FailedCloseRetainsTheExactPrimaryAndSuppressedIdentity",
+      "testId": "PT-JDBC-CLEANUP004",
+      "independent": "A distinct secondary is the sole suppressed reference on the original primary; action called once",
+      "outcome": "PASS"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.database.JdbcResourceCleanupTest",
+      "method": "cleanup005AliasedFailurePreservesTheJdkSelfSuppressionCause",
+      "testId": "PT-JDBC-CLEANUP005",
+      "independent": "Self-suppression keeps JDK IllegalArgumentException with the exact original cause and zero appended values",
+      "outcome": "PASS"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.database.JdbcResourceCleanupTest",
+      "method": "cleanup006TypedStatementOwnerPreservesAllFailureGraphsAndClosesOnce",
+      "testId": "PT-JDBC-CLEANUP006",
+      "independent": "Typed Statement proxy sees just its close once per case; null/primary/alias/branch cases retain identity",
+      "outcome": "PASS"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.database.JdbcResourceCleanupTest",
+      "method": "cleanup007TypedRowOwnerPreservesAllFailureGraphsAndClosesOnce",
+      "testId": "PT-JDBC-CLEANUP007",
+      "independent": "Typed ResultSet proxy sees just its close once per case; null/primary/alias/branch cases retain identity",
+      "outcome": "PASS"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.database.JdbcResourceCleanupOrderTest",
+      "method": "preservesExistingSuppressionAndAppendsBothFailuresInCallOrder",
+      "testId": "PT-JDBC-CLEANUP008",
+      "independent": "Statement then ResultSet close exactly once each; prior suppression followed by both same secondary exception references.",
+      "outcome": "PASS"
+    }
+  ],
+  "sourceInputs": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/JdbcResourceCleanup.java",
+      "sha256": "614b497aa86335988521334eb519c689aa1a056318d93e345e6faf8bd0137a5a"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/JdbcResourceCleanupTest.java",
+      "sha256": "4b217bc193580f03e3a9b2106aca425996a59a71bac1457b3e9ae7eb4cef06c9"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/package-info.java",
+      "sha256": "9f28051696b527a1dee26618b554c0bf6f9d47cdc7324dcba733cb896156e04e"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/JdbcResourceCleanupOrderTest.java",
+      "sha256": "65eb6947a987e0d912344cda4c5d993e66e271ec4d21fc49e1a52a47028fa548"
+    }
+  ],
+  "tools": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+      "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+      "sha256": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar",
+      "sha256": "fb5b0036a0899ea97edfa0fc2c7985b55f3f7c5695028163e5e60d4f3cf6075d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+      "sha256": "ade1e0fdb4cd80d8537b57c6edb70a1360c47fdc518c20c65314517479bc4d0d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar",
+      "sha256": "ed825d10ab1399c8c0cb669e688cf0c8c82629b4c8399b58352b68e92ca10fcb"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar",
+      "sha256": "6d0abefb7cbf972ea16edb37ec14835372505063a45f976ab7ea889ed9497895"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+      "sha256": "3dfb0d5b6a106cd40b5b250e39935fbf2f927f4477546a5369a3ac609cf0506b"
+    },
+    {
+      "path": "tools/quality/jacoco/UnfilteredCodeMeasurement.java",
+      "sha256": "f00a09972ec7c9d89be1390e8895eb770a5e9f7a9e9730341a5cdb0baa0efd7a"
+    }
+  ],
+  "loadScope": [
+    "dev.codex.schubert.nk.api.database.JdbcResourceCleanup",
+    "dev.codex.schubert.nk.api.database.JdbcResourceCleanup$SqlClose",
+    "dev.codex.schubert.nk.api.database.JdbcResourceCleanupOrderTest",
+    "dev.codex.schubert.nk.api.database.JdbcResourceCleanupTest",
+    "dev.codex.schubert.nk.api.database.JdbcResourceCleanupTest$OwnerClose"
+  ],
+  "originalSession": {
+    "labelBytesHex": "504734333035322d4a4442432d434c4f534538",
+    "startMillis": 1795383852639,
+    "endMillis": 1795383853267
+  },
+  "originalExecCrc": {
+    "dev/codex/schubert/nk/api/database/JdbcResourceCleanup": {
+      "crc64": "59cf65efcc2ceb5d",
+      "probeCount": 15,
+      "hitProbeIds": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "missedProbeIds": []
+    }
+  },
+  "artifacts": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43052-jdbc-close-001-008-one-current-exec-v1/coverage-unfiltered.tsv",
+      "sha256": "8290dfec9bf356592a67e41c4d112d07250101331ad7726a10d5e7e05cadc1ee"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43052-jdbc-close-001-008-one-current-exec-v1/sanitized-junit.xml",
+      "sha256": "fa015bd9ee6ccf02ba6addb4e6c7558b74de002cc8713157a058b5ce4362b8b3"
+    }
+  ],
+  "scopeStaticApplicability": "Both fixture sources and the two already allowed primary inputs match the prior local typed analysis. Whole six-module checks not exercised.",
+  "formalAcceptanceId": null,
+  "whole451": false,
+  "remaining": [
+    "Real SQL, UTC, commit/rollback and DB postcondition",
+    "API regular JAR and owner QA-056",
+    "Whole F02 F03 and local-to-formal dependency closure"
+  ]
+}
