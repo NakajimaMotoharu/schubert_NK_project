@@ -1,0 +1,90 @@
+{
+  "run": "PG42322",
+  "source": "d62e52e9a483409e1fa9017ab65565d032d02e9e",
+  "javaCore": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-P020-01.02/2",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T07:02:24.913861+00:00",
+  "canonical": {
+    "path": "documents/200_UI/260_引継ぎ・監査/264_現行互換性Characterization Test仕様.md",
+    "source": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "sha256": "0b0973e6e1e94858e840bc1b85df1daff35e3a0fe9f28ea12331823c2cbcf781",
+    "row": "| DIF-006 | 多くの文字入力に明示上限なし | 固定長byte上限、定義外値拒否 | MQ-015～018、MSG-003～008 | 超過入力をfield error | CHR-S01/E01 | RD確定 |"
+  },
+  "currentAllowlist": {
+    "meta": {
+      "path": "program/characterization/tests/resources/cases/dif-allowlist.json",
+      "sha256": "43239fe3d3f42c488dcbeb58017fde78830ba3771930a9c97cd65c3c7a7c5cb6"
+    },
+    "values": {
+      "id": "DIF-006",
+      "cases": [
+        "CHR-S01",
+        "CHR-E01"
+      ],
+      "field": "input.byteLimit",
+      "mode": "difference",
+      "selectorType": "semantic",
+      "selectors": [
+        "input.byteLimit"
+      ],
+      "current": "mostly implicit",
+      "nk": "fixed-wire explicit"
+    }
+  },
+  "toolOfflineExactCases": [
+    "acceptsTwentyFourPassCasesAndExactlySixteenApprovedDifferences",
+    "differencesRejectUnknownModesCasesBroadSelectorsDuplicatesAndEmptyValues"
+  ],
+  "toolScope": [
+    {
+      "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG41344-p020-current-218-local-v1/manifest.json",
+      "sha256": "5f9119617ebed6632218f46bd81c2b858f6c8fa3064a827edd1fb9b470d9148c"
+    },
+    {
+      "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG41346-p020-current-218-independent-v1/manifest.json",
+      "sha256": "d2191089b0953b97f34e139d3d62a5bde47387bdb3e0ff14dde155198bb41a15"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41344-p020-current-218-local-v1/reports/TEST-junit-jupiter.xml",
+      "sha256": "8f6b635830262186ba682cf3b682f56d8b732f1a557452d62cebae4c95ef4dd4"
+    }
+  ],
+  "scenarioBoundary": {
+    "testIds": [
+      "PT-WEB-215",
+      "PT-SCR003-WIRE-001",
+      "PT-SCR003-WIRE-002"
+    ],
+    "caseMethods": [
+      "allNormalizedMaximaKeepAdjacentFieldsAndPadding",
+      "eachOverflowIsRejectedWithTheOtherTwoFieldsAtTheirMaxima",
+      "web215ByteBoundaries"
+    ],
+    "productSpec": {
+      "path": "evidence/01_PT/016_NK-WEB-002/4707_SCR003検索三上限電文単体仕様と結果.md",
+      "sha256": "125a8b048578eb98e339e5a717e43d693d9407f4b3210cd435b02848688b2e60"
+    },
+    "xml": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41600-scenario-search-form-current-ten-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "e7d855fe59b9b540baff6abcfbdef0b545a12bee68da4285a3e13c8e7a2e66cd"
+    },
+    "run": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41600-scenario-search-form-current-ten-v1/manifest.json",
+      "sha256": "d3119f6aa977759381d46a155d318c1af3fc4813a3184d0cd53f835bfa1f181d"
+    },
+    "ownScopeRawRetained": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41602-two-search-forms-wire-public-enum-current-v1/manifest.json",
+      "sha256": "aea9269e146ee3fabc0311858c8c08426d1f792c1867192d749b36abafc6976d"
+    }
+  },
+  "expectedExternalObservation": {
+    "CHR_S01": "Exact filtering and fixed-width validation observations at boundary.",
+    "CHR_E01": "Observed approved field-error presentation and related rejection without secret disclosure."
+  },
+  "realObservationExists": false,
+  "realCurrentOrNkJobs": 0,
+  "actualRulesChanged": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
