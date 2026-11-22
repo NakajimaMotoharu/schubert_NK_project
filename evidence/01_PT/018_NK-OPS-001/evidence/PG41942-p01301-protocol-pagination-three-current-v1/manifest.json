@@ -1,0 +1,88 @@
+{
+  "run": "PG41942",
+  "source": "dd31957766d7ae4cff8aa8e88485e7414d578c3c",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T02:51:27.954405+00:00",
+  "wbs": "WBS-P013-01/2",
+  "currentProtocol": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41526-protocol-qa054-canonical-rules-v1/manifest.json",
+    "sha256": "8a89feee4bfa2d6b08d3514ff44ab15eaa871f409d8cf152790570e363b21edb"
+  },
+  "currentArchive": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41526-protocol-qa054-canonical-rules-v1/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+    "sha256": "aedd35881ba99acb407cdcdc99b2bb0648863b891ec42d6e717a8d8a3867083f"
+  },
+  "watchedPhysical": {
+    "dev/codex/schubert/nk/protocol/layout/common/PagedResponseData.class": "d4526c9853f84472c249ccabac895b3624095b2e98ea661d42ea4b0da3df7dce",
+    "dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.class": "96595bac9df97df6c451e59ac003a9d43cbf58ff0ec0d03b9f182670fdc7bc6b"
+  },
+  "currentSource": [
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadPaginationBoundaryTest.java",
+      "sha256": "6f8038c90b3854656b38c6b641a0c6ae4f5d0db66a12c562edf594e52c9c739d"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.java",
+      "sha256": "8570121e1e0461a0db760ef0bd4cb5ee40f36d3b77dde144d568cf4c3b23e8ef"
+    }
+  ],
+  "spec": {
+    "path": "evidence/01_PT/002_NK-PRO-002/006_Page境界_単体テスト仕様書.md",
+    "sha256": "86eb7c04246aa2c6a452b77538a068eb91c435fc92ddd94b877b40dfd7fc4878"
+  },
+  "originalAuthenticatedRoster": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41526-protocol-qa054-canonical-rules-v1/case-names.json",
+    "sha256": "ae44c06ebd1906c6805621f57b261770b4033b942abc15db9884c1fe3e258798"
+  },
+  "cases": [
+    {
+      "testId": "PT-PRO-002-PAGE001",
+      "method": "page001SecondPageHasIndependentExpectedBounds",
+      "observed": "PASS"
+    },
+    {
+      "testId": "PT-PRO-002-PAGE002",
+      "method": "page002MaximumEffectivePageKeepsExactNineDigitArithmetic",
+      "observed": "PASS"
+    },
+    {
+      "testId": "PT-PRO-002-PAGE003",
+      "method": "page003RejectsIndependentRangeAndOneFieldArithmeticChanges",
+      "observed": "PASS"
+    }
+  ],
+  "upstreamOriginalXmlSha256": {
+    "TEST-dev.codex.schubert.nk.protocol.layout.PayloadPaginationBoundaryTest.xml": "563d3b5c3824e40998d73803c3fd345be7293bedbed9be763b64a107c21f9894"
+  },
+  "expected": {
+    "normalized": {
+      "2": [
+        2,
+        101,
+        2,
+        101,
+        101,
+        1
+      ],
+      "999999": [
+        999999,
+        99999900,
+        999999,
+        99999801,
+        99999900,
+        100
+      ]
+    },
+    "rejectedCaseVectors": 6
+  },
+  "productionProbe": 0,
+  "newRuns": 0,
+  "originalOwner": "WBS-P002-02",
+  "originalCompletionPriceAdditional": 0,
+  "formalAcceptanceId": null,
+  "remaining": [
+    "API Question/Notification canonical scope current complete dependency verification",
+    "real API/DB and upstream formal end"
+  ]
+}

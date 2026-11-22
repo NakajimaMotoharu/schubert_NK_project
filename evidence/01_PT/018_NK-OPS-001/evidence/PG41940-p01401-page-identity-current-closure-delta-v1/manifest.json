@@ -1,0 +1,141 @@
+{
+  "run": "PG41940",
+  "source": "dd31957766d7ae4cff8aa8e88485e7414d578c3c",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T02:49:57.438292+00:00",
+  "wbs": "WBS-P014-01/2",
+  "workOwnerReference": "Existing PT evidence belongs to WBS-P013-01 and is referenced here at zero completion price. No original work reallocation.",
+  "cases": [
+    {
+      "testId": "PT-QRY-PLAIN005",
+      "method": "plain005SearchResponseUsesEffectivePageWithoutChangingOriginal",
+      "originalOutcome": "PASS",
+      "currentOutcome": null
+    },
+    {
+      "testId": "PT-QRY-PLAIN006",
+      "method": "plain006SearchWrongPageTypeLayoutSizeAndCountAreRejected",
+      "originalOutcome": "PASS",
+      "currentOutcome": null
+    }
+  ],
+  "oldResult": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27310-question-sql18-v1/manifest.json",
+    "sha256": "3a736e276884aee2ad702d10e1bd1c441f0a6a5ad16b251725f8a65b8dcf174a"
+  },
+  "originalXml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27312-question-sql18-independent-v1/original-TEST-junit-jupiter.xml",
+    "sha256": "e3299efd892dcddec309e459b343959bfe2853e9f5a26c9886225cbcdab84054"
+  },
+  "spec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/2015_質問通知plain契約8_単体テスト仕様書.md",
+    "sha256": "02da537a584fa542e25dab1b91baaf0635067941818236da95f6eae367e92fae"
+  },
+  "currentPackage": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41526-protocol-qa054-canonical-rules-v1/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+    "sha256": "aedd35881ba99acb407cdcdc99b2bb0648863b891ec42d6e717a8d8a3867083f"
+  },
+  "currentProtocol": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41526-protocol-qa054-canonical-rules-v1/manifest.json",
+    "sha256": "8a89feee4bfa2d6b08d3514ff44ab15eaa871f409d8cf152790570e363b21edb"
+  },
+  "currentDirectSources": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryRequest.java",
+      "sha256": "7e8ed5ca4175bb673a3396612d7cb3e0f7c9aca239bd1ae8f6337155e5201181"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionQueryPlainContractTest.java",
+      "sha256": "4ebc371e0b1680ad73d5a137eecaff9ca77976ca222304c13cc027a8325c1132"
+    }
+  ],
+  "changedProtocolPhysical": [
+    "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog.class",
+    "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$RecordMapping.class",
+    "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping.class",
+    "dev/codex/schubert/nk/protocol/codec/PayloadCodec.class",
+    "dev/codex/schubert/nk/protocol/codec/FieldCodec.class"
+  ],
+  "protocolCompared": {
+    "dev/codex/schubert/nk/protocol/layout/question/QuestionSearchRequestData.class": {
+      "current": "cdd69dbe163542bd22709fde502bcc63248771f80f051eb7c6b23658d222b828",
+      "old": "cdd69dbe163542bd22709fde502bcc63248771f80f051eb7c6b23658d222b828"
+    },
+    "dev/codex/schubert/nk/protocol/layout/question/NotificationSearchRequestData.class": {
+      "current": "01034c0f11a4e3faaed1b5430413197a6da07b1602680e9e9d5a24e54220b64a",
+      "old": "01034c0f11a4e3faaed1b5430413197a6da07b1602680e9e9d5a24e54220b64a"
+    },
+    "dev/codex/schubert/nk/protocol/layout/common/PagedResponseData.class": {
+      "current": "d4526c9853f84472c249ccabac895b3624095b2e98ea661d42ea4b0da3df7dce",
+      "old": "d4526c9853f84472c249ccabac895b3624095b2e98ea661d42ea4b0da3df7dce"
+    },
+    "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog.class": {
+      "current": "f18438d1948831a140804dad831e20781c3b6aae3f34cff008f20eb16bd8478a",
+      "old": "d2c46934e044267c594929a9fa2efa08c4732140e12276608363e235b201637e"
+    },
+    "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$RecordMapping.class": {
+      "current": "c492dd71f10f6b5d09522232bc23e8eb6d4edf7638a908a4d72c103ec17c5ea4",
+      "old": "9a7ed504590378042272a2884398413750d016925815cb108c73434237e77d36"
+    },
+    "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping.class": {
+      "current": "dbe497881450d18a60aea7e08aa16a8df07aaf751732334693894e96d405de5f",
+      "old": "d884ca560218032f393ebd560daae8de1a6c0be6295495ebfc95d1076f965af4"
+    },
+    "dev/codex/schubert/nk/protocol/layout/TypedPayloadValues.class": {
+      "current": "a67423654bb00235ce3e07a82d8e91ac4e58a2e9a94113f5046d1b4c72b08ece",
+      "old": "a67423654bb00235ce3e07a82d8e91ac4e58a2e9a94113f5046d1b4c72b08ece"
+    },
+    "dev/codex/schubert/nk/protocol/layout/LayoutDefinition.class": {
+      "current": "fd814a677ee8ba089f6e14052ed21f3d489f8c71f75ccbac3921bd5b6c48f0cc",
+      "old": "fd814a677ee8ba089f6e14052ed21f3d489f8c71f75ccbac3921bd5b6c48f0cc"
+    },
+    "dev/codex/schubert/nk/protocol/layout/FixedPayload.class": {
+      "current": "4feed644bafead062a831ec770243d84b602012eb46b97819847849b6f2aa66b",
+      "old": "4feed644bafead062a831ec770243d84b602012eb46b97819847849b6f2aa66b"
+    },
+    "dev/codex/schubert/nk/protocol/layout/WireMessage.class": {
+      "current": "e236efc1130643a1166c08c7d40ae2c986e404e69cc4bdfb54e43f1e57335361",
+      "old": "e236efc1130643a1166c08c7d40ae2c986e404e69cc4bdfb54e43f1e57335361"
+    },
+    "dev/codex/schubert/nk/protocol/layout/LayoutId.class": {
+      "current": "40643fc30454fbb577d65115f940766673f58ff1c074eea884973f7c46158384",
+      "old": "40643fc30454fbb577d65115f940766673f58ff1c074eea884973f7c46158384"
+    },
+    "dev/codex/schubert/nk/protocol/layout/LayoutRegistry.class": {
+      "current": "058a7324d66043691ba54c21d6dc79583ed69c20219aa3e6ef96f939054ba36a",
+      "old": "058a7324d66043691ba54c21d6dc79583ed69c20219aa3e6ef96f939054ba36a"
+    },
+    "dev/codex/schubert/nk/protocol/header/AuthenticationContext.class": {
+      "current": "6fbe0a9f9e9bc939e5545015608690b5af86b8368cf42e07771999ebd9e95793",
+      "old": "6fbe0a9f9e9bc939e5545015608690b5af86b8368cf42e07771999ebd9e95793"
+    },
+    "dev/codex/schubert/nk/protocol/codec/PayloadCodec.class": {
+      "current": "193f1c4544fcc02256343f277d67d00b9eb7c5f12e7af02040cf5fcbad50390d",
+      "old": "b3dcc0e32db9bce45044f5f7d198af40cb73a1184eb25ab020f0cbefc39c6d1a"
+    },
+    "dev/codex/schubert/nk/protocol/codec/FieldCodec.class": {
+      "current": "97a648fe4bfb519ef36d61e2f582dc621a859340a6f73e40a6ccc2f10e70db77",
+      "old": "ec29af3e8e9b2ff2032b7394dd306ea3315b46a4bb13689331cf96de8881969b"
+    }
+  },
+  "changedDependencySources": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticatedActor.java": {
+      "old": "830a87635d2782354fe9c03e5d7612a2ab88364cdc31157b501fbf7baf361469",
+      "current": "c3e1cada9993b4180e513eb2ba314e55862cf9f1bb5157dd7105e1f8425fe29c"
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java": {
+      "old": "db04a40f6d009f37c4e70696657003d9ef4ed759db69b83d91610d0992955b9e",
+      "current": "e86a86a77aad33c5629a5724f21d421e1ca0f359247122abf63538586d8ace89"
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalRequest.java": {
+      "old": "5a56fe3ee6a2dd3fe62f97102d90c9d590eae3013b5db36d9ed3ff5905d31952",
+      "current": "cb8244f32401bd7e2336c08bf76353fb5b388b59541ef426711bfcb38d29ca9b"
+    }
+  },
+  "newTestExecution": 0,
+  "openCondition": "Current approved closed source and class graph for the selected plain contract needs independent qualification before execution. Prior run uses different actual protocol and canonical data.",
+  "realDbNativeOrHeldRun": 0,
+  "committedOriginalPriceDelta": 0,
+  "formalAcceptanceId": null
+}
