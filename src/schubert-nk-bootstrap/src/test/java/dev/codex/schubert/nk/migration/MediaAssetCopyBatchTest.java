@@ -11,13 +11,16 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
@@ -29,7 +32,16 @@ final class MediaAssetCopyBatchTest {
       "6f71a62541ab381ee0186f4f946bb6af57b0824509fc4ab61fd99b3bcac5105c";
   private static final String STAMP = "2026-01-02T03:04:05Z";
   private static final String GOLDEN =
-      "1\tvideo-a\tVIDEO\tA\tMAIN\t\\N\tvideo/a.mp4\tcurrent/a.mp4\ta.mp4\t3\tba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad\tvideo/mp4\tvideo-b\t\\N\t\\N\t1\t2026-01-02T03:04:05Z\n2\tvideo-b\tVIDEO\tB\tMAIN\t\\N\tvideo/b.mp4\tcurrent/b.mp4\tb.mp4\t3\tba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad\tvideo/mp4\t\\N\t\\N\t\\N\t2\t2026-01-02T03:04:05Z\n3\t6f71a62541ab381ee0186f4f946bb6af57b0824509fc4ab61fd99b3bcac5105c\tMUSIC\tC\tBGM\t\\N\tmusic/c.ogg\tmusic/c.ogg\tc.ogg\t3\tba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad\taudio/ogg\t\\N\t\\N\tN\t1\t2026-01-02T03:04:05Z\n";
+      "1\tvideo-a\tVIDEO\tA\tMAIN\t\\N\tvideo/a.mp4\tcurrent/a.mp4\ta.mp4\t3"
+          + "\tba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad\tvideo/mp4\tvideo-b"
+          + "\t\\N\t\\N\t1\t2026-01-02T03:04:05Z\n"
+          + "2\tvideo-b\tVIDEO\tB\tMAIN\t\\N\tvideo/b.mp4\tcurrent/b.mp4\tb.mp4\t3"
+          + "\tba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad\tvideo/mp4\t\\N"
+          + "\t\\N\t\\N\t2\t2026-01-02T03:04:05Z\n"
+          + "3\t6f71a62541ab381ee0186f4f946bb6af57b0824509fc4ab61fd99b3bcac5105c\tMUSIC\tC\tBGM"
+          + "\t\\N\tmusic/c.ogg\tmusic/c.ogg\tc.ogg\t3"
+          + "\tba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad\taudio/ogg\t\\N"
+          + "\t\\N\tN\t1\t2026-01-02T03:04:05Z\n";
   private static final String DIAGNOSTIC = "migration media asset COPY batch is invalid";
   private static final String PARENT_A = "video-a";
   private static final String PARENT_B = "video-b";
@@ -55,7 +67,7 @@ final class MediaAssetCopyBatchTest {
   private static final int TERMINATION_SECONDS = 10;
 
   @Test
-  void independentMixedSeventeenColumnGoldenAndColumnOrder() throws Exception {
+  void independentMixedSeventeenColumnGoldenAndColumnOrder() throws NoSuchAlgorithmException {
     var batch = normal();
     assertArrayEquals(expected(), batch.copyBytes(new PostgresCopyTextEncoder()));
     assertEquals(
@@ -81,7 +93,7 @@ final class MediaAssetCopyBatchTest {
   }
 
   @Test
-  void emptyDeclarationRemainsEmpty() throws Exception {
+  void emptyDeclarationRemainsEmpty() throws IOException {
     var batch = new MediaAssetCopyBatch(new AssetMigrationManifest(List.of()), List.of());
     assertEquals(List.of(), batch.rows());
     assertArrayEquals(new byte[0], batch.copyBytes(new PostgresCopyTextEncoder()));
@@ -93,35 +105,35 @@ final class MediaAssetCopyBatchTest {
   }
 
   @Test
-  void duplicatePrimaryIdIsRejected() throws Exception {
+  void duplicatePrimaryIdIsRejected() throws NoSuchAlgorithmException {
     var rows = raw();
     rows.get(1).set(ID_INDEX, ONE);
     reject(rows, claims());
   }
 
   @Test
-  void duplicateLogicalIdIsRejected() throws Exception {
+  void duplicateLogicalIdIsRejected() throws NoSuchAlgorithmException {
     var rows = raw();
     rows.get(1).set(LOGICAL_INDEX, PARENT_A);
     reject(rows, claims());
   }
 
   @Test
-  void duplicateTypedStorageIsRejected() throws Exception {
+  void duplicateTypedStorageIsRejected() throws NoSuchAlgorithmException {
     var rows = raw();
     rows.get(1).set(STORAGE_INDEX, TARGET_A);
     reject(rows, claims());
   }
 
   @Test
-  void transactionTimestampsMustAgree() throws Exception {
+  void transactionTimestampsMustAgree() throws NoSuchAlgorithmException {
     var rows = raw();
     rows.get(1).set(STAMP_INDEX, "2026-01-02T03:04:06Z");
     reject(rows, claims());
   }
 
   @Test
-  void backwardAndForwardParentReferencesUseTheWholeSet() throws Exception {
+  void backwardAndForwardParentReferencesUseTheWholeSet() throws NoSuchAlgorithmException {
     var rows = raw();
     rows.get(0).set(PARENT_INDEX, null);
     rows.get(1).set(PARENT_INDEX, PARENT_A);
@@ -132,14 +144,14 @@ final class MediaAssetCopyBatchTest {
   }
 
   @Test
-  void unknownParentIsRejectedAfterBuildingTheWholeSet() throws Exception {
+  void unknownParentIsRejectedAfterBuildingTheWholeSet() throws NoSuchAlgorithmException {
     var rows = raw();
     rows.get(0).set(PARENT_INDEX, "absent");
     reject(rows, claims());
   }
 
   @Test
-  void selfAndCyclesRemainAllowedByTheDeclaredForeignKey() throws Exception {
+  void selfAndCyclesRemainAllowedByTheDeclaredForeignKey() throws NoSuchAlgorithmException {
     var rows = raw();
     rows.get(0).set(PARENT_INDEX, PARENT_A);
     assertEquals(PARENT_A, make(rows, claims()).rows().get(0).parentLogicalId().orElseThrow());
@@ -149,7 +161,7 @@ final class MediaAssetCopyBatchTest {
   }
 
   @Test
-  void manifestCardinalityCannotBeSmallerOrLarger() throws Exception {
+  void manifestCardinalityCannotBeSmallerOrLarger() throws NoSuchAlgorithmException {
     var less = claims();
     less.remove(0);
     reject(raw(), less);
@@ -161,7 +173,7 @@ final class MediaAssetCopyBatchTest {
   }
 
   @Test
-  void unknownOrRepeatedSourceCannotConsumeOneClaimTwice() throws Exception {
+  void unknownOrRepeatedSourceCannotConsumeOneClaimTwice() throws NoSuchAlgorithmException {
     var rows = raw();
     rows.get(0).set(DISPLAY_INDEX, "unknown.mp4");
     reject(rows, claims());
@@ -171,7 +183,7 @@ final class MediaAssetCopyBatchTest {
   }
 
   @Test
-  void kindsMustBeMediaAndMatchTheRow() throws Exception {
+  void kindsMustBeMediaAndMatchTheRow() throws NoSuchAlgorithmException {
     for (var kind :
         List.of(
             AssetMigrationManifest.Kind.SCENARIO,
@@ -184,7 +196,7 @@ final class MediaAssetCopyBatchTest {
   }
 
   @Test
-  void targetSizeAndHashEachMatchTheExactDeclaration() throws Exception {
+  void targetSizeAndHashEachMatchTheExactDeclaration() throws NoSuchAlgorithmException {
     var claims = claims();
     claims.set(
         0,
@@ -206,7 +218,7 @@ final class MediaAssetCopyBatchTest {
   }
 
   @Test
-  void nullableBoundariesHaveFixedDiagnostics() throws Exception {
+  void nullableBoundariesHaveFixedDiagnostics() throws NoSuchAlgorithmException {
     var manifest = new AssetMigrationManifest(claims());
     assertEquals(
         DIAGNOSTIC,
@@ -225,7 +237,7 @@ final class MediaAssetCopyBatchTest {
   }
 
   @Test
-  void snapshotAndReturnedViewsAreImmutableAndKeepDeclaredOrder() throws Exception {
+  void snapshotAndReturnedViewsAreImmutableAndKeepDeclaredOrder() throws NoSuchAlgorithmException {
     var input = values(raw());
     Collections.swap(input, 0, 2);
     var batch = new MediaAssetCopyBatch(new AssetMigrationManifest(claims()), input);
@@ -239,7 +251,7 @@ final class MediaAssetCopyBatchTest {
   }
 
   @Test
-  void typedAccessorsExposeValidatedValuesAndOptionalParents() throws Exception {
+  void typedAccessorsExposeValidatedValuesAndOptionalParents() throws NoSuchAlgorithmException {
     var row = normal().rows().get(0);
     assertEquals(ONE, row.id());
     assertEquals(PARENT_A, row.logicalId());
@@ -254,7 +266,7 @@ final class MediaAssetCopyBatchTest {
   }
 
   @Test
-  void returnedBytesAreOwnedAndNullEncoderIsRejected() throws Exception {
+  void returnedBytesAreOwnedAndNullEncoderIsRejected() throws NoSuchAlgorithmException {
     var batch = normal();
     byte[] first = batch.copyBytes(new PostgresCopyTextEncoder());
     byte[] second = batch.copyBytes(new PostgresCopyTextEncoder());
@@ -267,7 +279,8 @@ final class MediaAssetCopyBatchTest {
   }
 
   @Test
-  void borrowedWriterAndSinkKeepOwnershipAndNullContract() throws Exception {
+  void borrowedWriterAndSinkKeepOwnershipAndNullContract()
+      throws IOException, NoSuchAlgorithmException {
     var batch = normal();
     var sink = new TrackingSink();
     batch.writeTo(writer(), sink);
@@ -284,13 +297,18 @@ final class MediaAssetCopyBatchTest {
   }
 
   @Test
-  void ioFailureIdentityPartialOutputAndIndependentRetryArePreserved() throws Exception {
+  void ioFailureIdentityPartialOutputAndIndependentRetryArePreserved()
+      throws IOException, NoSuchAlgorithmException {
     var batch = normal();
     var sink = new FailingSink();
-    assertSame(sink.failure, assertThrows(IOException.class, () -> batch.writeTo(writer(), sink)));
-    assertArrayEquals("1\t".getBytes(StandardCharsets.UTF_8), sink.prefix.toByteArray());
-    assertEquals(0, sink.closes);
-    assertEquals(0, sink.flushes);
+    try (sink) {
+      assertSame(
+          sink.failure, assertThrows(IOException.class, () -> batch.writeTo(writer(), sink)));
+      assertArrayEquals("1\t".getBytes(StandardCharsets.UTF_8), sink.prefix.toByteArray());
+      assertEquals(0, sink.closes);
+      assertEquals(0, sink.flushes);
+    }
+    assertEquals(1, sink.closes);
     var normal = new TrackingSink();
     batch.writeTo(writer(), normal);
     assertArrayEquals(expected(), normal.toByteArray());
@@ -298,7 +316,8 @@ final class MediaAssetCopyBatchTest {
   }
 
   @Test
-  void finiteWorkersUseOneImmutableBatchWithIndependentSinks() throws Exception {
+  void finiteWorkersUseOneImmutableBatchWithIndependentSinks()
+      throws NoSuchAlgorithmException, InterruptedException, ExecutionException, TimeoutException {
     var batch = normal();
     var executor = Executors.newFixedThreadPool(WORKERS);
     try {
@@ -319,18 +338,18 @@ final class MediaAssetCopyBatchTest {
     }
   }
 
-  private static MediaAssetCopyBatch normal() throws Exception {
+  private static MediaAssetCopyBatch normal() throws NoSuchAlgorithmException {
     return make(raw(), claims());
   }
 
   private static MediaAssetCopyBatch make(
       List<List<@Nullable String>> raw, List<AssetMigrationManifest.Entry> claims)
-      throws Exception {
+      throws NoSuchAlgorithmException {
     return new MediaAssetCopyBatch(new AssetMigrationManifest(claims), values(raw));
   }
 
   private static ArrayList<@Nullable MediaAssetCopyRow> values(List<List<@Nullable String>> rows)
-      throws Exception {
+      throws NoSuchAlgorithmException {
     var result = new ArrayList<@Nullable MediaAssetCopyRow>();
     for (var row : rows) result.add(new MediaAssetCopyRow(row));
     return result;
@@ -338,7 +357,7 @@ final class MediaAssetCopyBatchTest {
 
   private static void reject(
       List<List<@Nullable String>> rows, List<AssetMigrationManifest.Entry> claims)
-      throws Exception {
+      throws NoSuchAlgorithmException {
     var validRows = values(rows);
     var manifest = new AssetMigrationManifest(claims);
     assertEquals(
