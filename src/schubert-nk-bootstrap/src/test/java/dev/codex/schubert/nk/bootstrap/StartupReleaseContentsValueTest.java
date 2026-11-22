@@ -10,8 +10,10 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.function.Function;
 import org.junit.jupiter.api.Test;
 
@@ -21,6 +23,7 @@ import org.junit.jupiter.api.Test;
  */
 final class StartupReleaseContentsValueTest {
   private static final String KEY_COMMIT = "commit";
+  private static final String KEY_JAVA = "java";
   private static final String PUBLIC_VALUE = "public";
   private static final String PLATFORM_LINUX = "linux";
   private static final String VERSION = "PG2802";
@@ -53,7 +56,7 @@ final class StartupReleaseContentsValueTest {
     var rows = new ArrayList<>(List.of(SCHEMA, MIGRATION));
     var build = new LinkedHashMap<>(Map.of(KEY_COMMIT, PUBLIC_VALUE));
     var platform = new LinkedHashMap<>(Map.of("os", PLATFORM_LINUX));
-    var versions = new LinkedHashMap<>(Map.of("java", "25"));
+    var versions = new LinkedHashMap<>(Map.of(KEY_JAVA, "25"));
     var artifacts = new LinkedHashMap<>(Map.of("app.jar", DIGEST));
     var value =
         new StartupReleaseManifest.Contents(
@@ -66,7 +69,7 @@ final class StartupReleaseContentsValueTest {
     assertEquals(List.of(SCHEMA, MIGRATION), value.migrations());
     assertEquals(Map.of(KEY_COMMIT, PUBLIC_VALUE), value.build());
     assertEquals(Map.of("os", PLATFORM_LINUX), value.platform());
-    assertEquals(Map.of("java", "25"), value.versions());
+    assertEquals(Map.of(KEY_JAVA, "25"), value.versions());
     assertEquals(Map.of("app.jar", DIGEST), value.artifactHashes());
   }
 
@@ -136,7 +139,7 @@ final class StartupReleaseContentsValueTest {
             List.of(SCHEMA),
             Map.of(KEY_COMMIT, PUBLIC_VALUE),
             Map.of("os", PLATFORM_LINUX),
-            Map.of("java", "25"),
+            Map.of(KEY_JAVA, "25"),
             Map.of("app.jar", DIGEST));
     assertThrows(UnsupportedOperationException.class, () -> value.migrations().add(MIGRATION));
     assertThrows(
@@ -173,7 +176,8 @@ final class StartupReleaseContentsValueTest {
   }
 
   @Test
-  void contents008ConcurrentCopiesKeepOnlyEachWorkersOriginalMap() throws Exception {
+  void contents008ConcurrentCopiesKeepOnlyEachWorkersOriginalMap()
+      throws InterruptedException, ExecutionException, TimeoutException {
     try (var workers = Executors.newFixedThreadPool(2)) {
       var jobs = new ArrayList<java.util.concurrent.Future<String>>();
       for (int index = 0; index < 32; index++) {
@@ -200,7 +204,7 @@ final class StartupReleaseContentsValueTest {
   void contents009PublicSnapshotIdentityIncludesAllSevenComponents() {
     Map<String, String> build = Map.of(KEY_COMMIT, PUBLIC_VALUE);
     Map<String, String> platform = Map.of("os", PLATFORM_LINUX);
-    Map<String, String> versions = Map.of("java", "25");
+    Map<String, String> versions = Map.of(KEY_JAVA, "25");
     Map<String, String> artifacts = Map.of("schubert-nk-batch.jar", DIGEST);
     var snapshot =
         new StartupReleaseManifest.Contents(
