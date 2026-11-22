@@ -1,0 +1,36 @@
+{
+  "source": "f8532c27c2666570fe450f285c5a5436aacd8e7e",
+  "summaryCriteria": {
+    "row_shape_and_order": true,
+    "argument_boundary": true,
+    "fixed_self_lock_observation": true,
+    "read_only_fresh_identity": true,
+    "sealed_declared_scope": true
+  },
+  "referenceCriteria": {
+    "consistent_reference_types": true,
+    "terminal_snapshot_predicates": true
+  },
+  "referenceDefinitionFiles": [
+    "V010__full_inbox_scan_and_restricted_deletion.sql",
+    "V015__question_query_inbox_deletion.sql",
+    "V016__question_mutation_inbox_references.sql"
+  ],
+  "negativeSelfChecks": [
+    "row_shape_and_order",
+    "argument_boundary",
+    "fixed_self_lock_observation",
+    "read_only_fresh_identity",
+    "sealed_declared_scope"
+  ],
+  "migrationFileCount": 30,
+  "summaryDefinitionFiles": [
+    "V019__parent_inbox_inspection_summary.sql"
+  ],
+  "verifiedSourceSHA256": {
+    "V019__parent_inbox_inspection_summary.sql": "6b03d147fff575c05ac20d8a706e2fd83b5fc7565c55f4df8511ed0c3f07be5a",
+    "V012__durable_inbox_inspection_progress.sql": "21e4c781a4b4c1a18240d8e47fae5bc2d11593d7b4ad05590ed10a67ebcb9411",
+    "V016__question_mutation_inbox_references.sql": "99a9ae01ff3a6833d22d7c514c67c2229eb459e38bbf3e38da17a6b796f38aa8"
+  },
+  "databaseOperations": 0
+}

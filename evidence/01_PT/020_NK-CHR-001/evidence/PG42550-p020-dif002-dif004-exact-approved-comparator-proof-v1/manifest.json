@@ -1,0 +1,97 @@
+{
+  "run": "PG42550",
+  "source": "9f65ef6fcbfbd145a37bcb6d7e4c9d94d68a0901",
+  "javaCore": "f8532c27c2666570fe450f285c5a5436aacd8e7e",
+  "toolSource": "3ab80b846e27308aab029821581b113ecaf78fc9",
+  "wbs": "WBS-P020-01.02/2",
+  "terminalAtUTC": "2026-11-22T10:48:35.265884+00:00",
+  "actualExit": 0,
+  "definitions": [
+    {
+      "path": "program/characterization/tests/resources/cases/dif-allowlist.json",
+      "sha256": "43239fe3d3f42c488dcbeb58017fde78830ba3771930a9c97cd65c3c7a7c5cb6"
+    },
+    {
+      "path": "program/characterization/tests/resources/cases/gate-contract.json",
+      "sha256": "bd5d0b960a8544f1ea7d7c5621ee261a254c3d868da05abf175beda71b1d8ca9"
+    }
+  ],
+  "declaredRules": {
+    "DIF-002": {
+      "id": "DIF-002",
+      "cases": [
+        "CHR-L01"
+      ],
+      "field": "authorization.log",
+      "mode": "difference",
+      "selectorType": "semantic",
+      "selectors": [
+        "authorization.log"
+      ],
+      "current": "AUTHENTICATED",
+      "nk": "ADMIN"
+    },
+    "DIF-004": {
+      "id": "DIF-004",
+      "cases": [
+        "CHR-A01",
+        "CHR-A02",
+        "CHR-A03"
+      ],
+      "field": "authentication.backend",
+      "mode": "difference",
+      "selectorType": "semantic",
+      "selectors": [
+        "authentication.backend"
+      ],
+      "current": "file/in-process",
+      "nk": "PostgreSQL/MQ USER ADMIN"
+    }
+  },
+  "canonicalDesignCommit": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+  "approvedUi": {
+    "path": "documents/200_UI/260_引継ぎ・監査/264_現行互換性Characterization Test仕様.md",
+    "sha256": "0b0973e6e1e94858e840bc1b85df1daff35e3a0fe9f28ea12331823c2cbcf781",
+    "lineByRule": {
+      "DIF-002": 81,
+      "DIF-004": 83
+    }
+  },
+  "operatorScope": {
+    "actualCaseEvidencePending": [
+      "CHR-L01 USER versus ADMIN and log event",
+      "CHR-A01/A02/A03 actual PostgreSQL/MQ and request behavior"
+    ],
+    "baselineTreeUnchanged": "cd377044e4ca058ea219ca6a2fec82159559c72c"
+  },
+  "originalUnit": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG41344-p020-current-218-local-v1/manifest.json",
+    "sha256": "5f9119617ebed6632218f46bd81c2b858f6c8fa3064a827edd1fb9b470d9148c"
+  },
+  "originalIndependent": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG41346-p020-current-218-independent-v1/manifest.json",
+    "sha256": "d2191089b0953b97f34e139d3d62a5bde47387bdb3e0ff14dde155198bb41a15"
+  },
+  "originalJUnit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41344-p020-current-218-local-v1/reports/TEST-junit-jupiter.xml",
+    "sha256": "8f6b635830262186ba682cf3b682f56d8b732f1a557452d62cebae4c95ef4dd4"
+  },
+  "currentSubsetReuse": {
+    "acceptsTwentyFourPassCasesAndExactlySixteenApprovedDifferences": {
+      "classname": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+      "oracle": "Aggregate synthetic 24 / declared differences16 acceptance and no extra/unused drift."
+    },
+    "rejectsUnknownOutOfScopeBroadWrongOverlappingAndUnusedObservations": {
+      "classname": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+      "oracle": "DIF002 missing expected values or broad mode and DIF004 no meaningful delta or overlap reject."
+    },
+    "differencesRejectUnknownModesCasesBroadSelectorsDuplicatesAndEmptyValues": {
+      "classname": "dev.codex.schubert.characterization.GateDefinitionDocumentsTest",
+      "oracle": "DIF002 duplicate/unknown case or selector, DIF004 wildcard selectors reject."
+    }
+  },
+  "newDynamic": 0,
+  "backendOrBrowser": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

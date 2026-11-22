@@ -1,0 +1,85 @@
+{
+  "run": "PG42552",
+  "source": "9f65ef6fcbfbd145a37bcb6d7e4c9d94d68a0901",
+  "javaCore": "f8532c27c2666570fe450f285c5a5436aacd8e7e",
+  "wbs": "WBS-P004-05/2",
+  "terminalAtUTC": "2026-11-22T10:50:33.584100+00:00",
+  "actualExit": 0,
+  "priorUnit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27058-user-query159-v1/manifest.json",
+    "sha256": "8b19b095a007bb5f884588a5014e9005e5ddaa1d06ce8126a05d96fd98f61387"
+  },
+  "priorIndependent": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27060-user-query159-independent-v1/manifest.json",
+    "sha256": "7d5d7d425541f9c5101e3a33f1a5c9e7f65336503b992ae2658d42fb901cd4ce"
+  },
+  "specs": [
+    {
+      "path": "evidence/01_PT/010_NK-ADM-001/077_NK-ADM-001_UserSQL界面契約単体テスト仕様書.md",
+      "sha256": "0577bf1c962d7fb759f2dd5a91f788cd00e386d8c52449e76d1cbd14a0b2b0be"
+    },
+    {
+      "path": "evidence/01_PT/010_NK-ADM-001/081_NK-ADM-001_SQL満杯page契約単体テスト仕様書.md",
+      "sha256": "9a8068a23d9a8243df02b6a978bf76a84ca39015992146bba063679daa489c1f"
+    }
+  ],
+  "priorPassingCaseIdMethods": {
+    "PT-ADM-SQL001": "sql001EmptySearchUsesOneReadOnlySnapshotAndRetainsOriginalPage()",
+    "PT-ADM-SQL002": "sql002PrefixNormalizationAndLiteralWildcardEscapingStayInBinds()",
+    "PT-ADM-SQL003": "sql003OneMappedRowKeepsTypedColumnsAndMillisecondProjection()",
+    "PT-ADM-SQL004": "sql004MissingDetailIsAbsenceAndStillClosesOwnedStatementAndRows()",
+    "PT-ADM-SQL005": "sql005DetailProjectsTwoActiveSessionsWithoutSelectingCredentials()",
+    "PT-ADM-SQL006": "sql006LockedProjectionPreservesOptionalTimeAndAbsentLastLogin()",
+    "PT-ADM-SQL007": "sql007UserRoleIsDeniedBeforeAnyConnectionMethod()",
+    "PT-ADM-SQL008": "sql008IndependentNullArgumentsNeverReachTheBorrowedInterface()",
+    "PT-ADM-SQL009": "sql009FullPagePreservesAllFiftyRowsAndRequestedPage()"
+  },
+  "currentTestAndTargetMainByteExact": {
+    "UserQueryRepository.java": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/UserQueryRepository.java",
+      "sha256": "e5fa4a4a646adc7d1a1bbeddc3135fbd90872d4a85c018bd0a06dbf014b5167f"
+    },
+    "UserQueryRequest.java": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryRequest.java",
+      "sha256": "c85cf970f232c076bb5514a429388a7638a2bac2b9ffe9319f11a8f427f475fa"
+    },
+    "UserQuerySqlContractTest.java": {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserQuerySqlContractTest.java",
+      "sha256": "7c08ce9b15f707354b77a02537dafa95d3c21c2976d522ca9c8b436ea2492bb9"
+    }
+  },
+  "knownChangedPeerSources": {
+    "AuthenticatedActor.java": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticatedActor.java",
+      "priorHash": "830a87635d2782354fe9c03e5d7612a2ab88364cdc31157b501fbf7baf361469",
+      "currentHash": "c3e1cada9993b4180e513eb2ba314e55862cf9f1bb5157dd7105e1f8425fe29c"
+    },
+    "PayloadCodec.java": {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java",
+      "priorHash": "fd024359248f91a8914f150c0c08a693471d9fbc1598f1814128cbc018d88853",
+      "currentHash": "41521248b2ad34c0d21fe00f75d9b7982fb023d9e9ae29ad6f87650b3bd559e9"
+    },
+    "FieldCodec.java": {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java",
+      "priorHash": "43a625c478114afea49c8ee423926d7d330d58dd56b3667a803108c068121513",
+      "currentHash": "8018f622988cf80a9c1138ad8619d91a4b32d07d75a55ec8f37730217386a23a"
+    },
+    "LayoutFieldCatalog.java": {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java",
+      "priorHash": "3146b6c3d044f3191fcfa4e8687afbb0d57ee7645ff233ec4a0f02bdeb5421a2",
+      "currentHash": "8bf60bfcab1a3329953571d871d33fbf514e22f9da26a0700448e2000d5d1833"
+    },
+    "CanonicalRequest.java": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalRequest.java",
+      "priorHash": "5a56fe3ee6a2dd3fe62f97102d90c9d590eae3013b5db36d9ed3ff5905d31952",
+      "currentHash": "cb8244f32401bd7e2336c08bf76353fb5b388b59541ef426711bfcb38d29ca9b"
+    }
+  },
+  "reuseAsCurrentPassingTests": 0,
+  "qualificationHeldOn": "UserQueryRepository transitively needs QA056 TemporaryInfrastructureException, and the current used peer artifact was not qualified.",
+  "heldBodiesRead": 0,
+  "newRuntime": 0,
+  "existingDatabaseCondition": "Real PostgreSQL transaction ownership, resource cleanup and UTC bind observed results are pending; old JDK proxy cases remain useful oracles.",
+  "formalAcceptanceId": null,
+  "whole451": false
+}

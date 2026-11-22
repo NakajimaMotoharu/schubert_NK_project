@@ -1,0 +1,65 @@
+{
+  "run": "PG42548",
+  "source": "f8532c27c2666570fe450f285c5a5436aacd8e7e",
+  "repoHead": "9f65ef6fcbfbd145a37bcb6d7e4c9d94d68a0901",
+  "branch": "dev-foundation",
+  "canonicalDesign": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+  "wbs": "WBS-P004-02/2",
+  "fromUTC": "2026-11-22T10:46:06.258292+00:00",
+  "terminalAtUTC": "2026-11-22T10:46:06.444373+00:00",
+  "actualExit": 0,
+  "command": [
+    "python3",
+    "-B",
+    "evidence/01_PT/004_NK-DAT-001/input/42548_verify_summary_declarations.py",
+    "f8532c27c2666570fe450f285c5a5436aacd8e7e"
+  ],
+  "tool": {
+    "path": "evidence/01_PT/004_NK-DAT-001/input/42548_verify_summary_declarations.py",
+    "sha256": "9f8e3b8f040404baf1c80b52bc1a6963d6ba26632fe2ba94a25297296fd08f42"
+  },
+  "spec": {
+    "path": "evidence/01_PT/004_NK-DAT-001/5690_参照保護と集計SQL宣言の静的照合仕様.md",
+    "sha256": "d9aff1c7ff23efd744f48498766bf6c5a1f2eedaf97248849736d8b639905c2e"
+  },
+  "design": [
+    {
+      "path": "documents/300_SS/330_データ・ファイル/331_DB物理・DDL・index・権限設計.md",
+      "sha256": "f57d908ade963d03a7f1dd12dc93e0bd89fefa27223c674c3d363014913c64de"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "sha256": "4c09a2f66d9cb4def976c24d2952953aa5a287a0d545548dc4feda4968ff5bef"
+    }
+  ],
+  "observation": {
+    "path": "evidence/01_PT/004_NK-DAT-001/evidence/PG42548-p00402-summary-and-reference-declaration-fixture-v1/observations.json",
+    "sha256": "ce9cac609ece855aa982f5d9c7c5ce5003e4f238ea017e47605406454ca7e006"
+  },
+  "staticChecksPassed": 7,
+  "harnessNegativeChecksPassed": 5,
+  "currentExplicitTestIds": [
+    "PT-DB-INBOX-DECL001",
+    "PT-DB-INBOX-DECL002",
+    "PT-DB-INBOX-DECL003",
+    "PT-DB-INBOX-DECL004",
+    "PT-DB-INBOX-DECL005"
+  ],
+  "historyLocalJvmEvidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42162-p00402-inspection-summary-values-current-v1/manifest.json",
+      "sha256": "3f170988a3a990d0114833b9e56b537eaf9d993449b095112cf2fcf1efebed19"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42164-p00402-prior-summary-port-evidence-v1/manifest.json",
+      "sha256": "88b3c97bae549f6dec99ea7d1aa81926c557326093147e47ce65b3e78fdcca4b"
+    }
+  ],
+  "newProductJunit": 0,
+  "newDatabaseMethodsExecuted": 0,
+  "actualCoverage": null,
+  "actualDatabaseAclOrConcurrencyVerified": false,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "dynamicDatabaseConditionsClosed": false
+}

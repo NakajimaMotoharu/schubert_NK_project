@@ -1,0 +1,733 @@
+{
+  "run": "PG42546",
+  "source": "9f65ef6fcbfbd145a37bcb6d7e4c9d94d68a0901",
+  "javaCore": "f8532c27c2666570fe450f285c5a5436aacd8e7e",
+  "canonicalDesign": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+  "wbs": "WBS-G13.04",
+  "terminalAtUTC": "2026-11-22T10:42:11.500045+00:00",
+  "actualExit": 0,
+  "requirements": [
+    "SYS-011",
+    "SCP-001",
+    "SCP-002",
+    "SCP-003",
+    "SCP-006"
+  ],
+  "existingDefects": [
+    "BUG-3574",
+    "YKT-2810",
+    "SSC-477"
+  ],
+  "specAndEarlierLiteralInventory": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42270-g1304-api-handler-route-trace-v1/manifest.json",
+    "sha256": "270a4544c257233cebcec5c0b0ac67873487a54e28b0bec444cd24315d2b6973"
+  },
+  "logicalGroups": 10,
+  "normalSourceRoutesMapped": 31,
+  "sourceMethodBindings": {
+    "LGNREQ01": {
+      "designLine": 38,
+      "expectedHandler": "LoginHandler",
+      "wireDataPath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/auth/LoginRequestData.java",
+      "wireDataSha256": "26a303d816443d7375731a897b323087f7eb04e60940b821df5a4e10783c160f",
+      "registrarLine": 293,
+      "entrypoint": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginInboxService.java",
+        "line": 67,
+        "method": "execute",
+        "sha256": "e18a73cbe4851eac8404d2f24cee823964b89b8183f51a345c719cd61ed63090"
+      },
+      "decodingBoundary": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginInboxService.java",
+        "line": 38,
+        "layout": "LGNREQ01",
+        "sha256": "e18a73cbe4851eac8404d2f24cee823964b89b8183f51a345c719cd61ed63090"
+      },
+      "sourceBindingVerified": true,
+      "typedLayoutHandlerMethodProven": false,
+      "endToEndRequestPathProven": false
+    },
+    "LOGREQ01": {
+      "designLine": 40,
+      "expectedHandler": "LogoutHandler",
+      "wireDataPath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/auth/LogoutRequestData.java",
+      "wireDataSha256": "40d4674e04d918235ab5509f79d07a6706b56cce5aa98382103e6a0aacea2c38",
+      "registrarLine": 294,
+      "entrypoint": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LogoutInboxService.java",
+        "line": 66,
+        "method": "execute",
+        "sha256": "8894228a382268524f7a56f808de50a14b2461719e03e1b57c362655a8b2380b"
+      },
+      "decodingBoundary": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LogoutInboxService.java",
+        "line": 74,
+        "layout": "LOGREQ01",
+        "sha256": "8894228a382268524f7a56f808de50a14b2461719e03e1b57c362655a8b2380b"
+      },
+      "sourceBindingVerified": true,
+      "typedLayoutHandlerMethodProven": false,
+      "endToEndRequestPathProven": false
+    },
+    "GAMREQ01": {
+      "designLine": 42,
+      "expectedHandler": "GameListHandler",
+      "wireDataPath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/GameListRequestData.java",
+      "wireDataSha256": "dd1215daa281f971ba16134229338ee8a8cca0720a8469637e8c3b3a56a4a05b",
+      "registrarLine": 295,
+      "entrypoint": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioApplicationService.java",
+        "line": 104,
+        "method": "process",
+        "sha256": "778ab847405c6fabba7d9bfdfc723b302ddb41aa539c77f431c401286cdfabaa"
+      },
+      "decodingBoundary": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioRequest.java",
+        "line": 64,
+        "layout": "GAMREQ01",
+        "sha256": "5530667c85ed9345fbe13aa3c89eef8a3fd51a38b019e8b52f4aea13e818fa5a"
+      },
+      "sourceBindingVerified": true,
+      "typedLayoutHandlerMethodProven": false,
+      "endToEndRequestPathProven": false
+    },
+    "SPKREQ01": {
+      "designLine": 44,
+      "expectedHandler": "SpeakerListHandler",
+      "wireDataPath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/SpeakerListRequestData.java",
+      "wireDataSha256": "36a96085c16dae5702860cc2172962a62c79124a3fd94b5d94dc411b85646815",
+      "registrarLine": 295,
+      "entrypoint": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioApplicationService.java",
+        "line": 104,
+        "method": "process",
+        "sha256": "778ab847405c6fabba7d9bfdfc723b302ddb41aa539c77f431c401286cdfabaa"
+      },
+      "decodingBoundary": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioRequest.java",
+        "line": 65,
+        "layout": "SPKREQ01",
+        "sha256": "5530667c85ed9345fbe13aa3c89eef8a3fd51a38b019e8b52f4aea13e818fa5a"
+      },
+      "sourceBindingVerified": true,
+      "typedLayoutHandlerMethodProven": false,
+      "endToEndRequestPathProven": false
+    },
+    "SRCREQ01": {
+      "designLine": 46,
+      "expectedHandler": "ScenarioSearchHandler",
+      "wireDataPath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/ScenarioSearchRequestData.java",
+      "wireDataSha256": "3f54c2f51f1b8fdcb7a327f11fab1c1d5d714c36ff17e340b4caa3f38f7c31c8",
+      "registrarLine": 295,
+      "entrypoint": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioApplicationService.java",
+        "line": 104,
+        "method": "process",
+        "sha256": "778ab847405c6fabba7d9bfdfc723b302ddb41aa539c77f431c401286cdfabaa"
+      },
+      "decodingBoundary": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioRequest.java",
+        "line": 68,
+        "layout": "SRCREQ01",
+        "sha256": "5530667c85ed9345fbe13aa3c89eef8a3fd51a38b019e8b52f4aea13e818fa5a"
+      },
+      "sourceBindingVerified": true,
+      "typedLayoutHandlerMethodProven": false,
+      "endToEndRequestPathProven": false
+    },
+    "RTEREQ01": {
+      "designLine": 48,
+      "expectedHandler": "RouteListHandler",
+      "wireDataPath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/RouteListRequestData.java",
+      "wireDataSha256": "961efbdfb469d7de55232aeb692551f1a07ab7c3791b96e4022231e9c970150f",
+      "registrarLine": 295,
+      "entrypoint": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioApplicationService.java",
+        "line": 104,
+        "method": "process",
+        "sha256": "778ab847405c6fabba7d9bfdfc723b302ddb41aa539c77f431c401286cdfabaa"
+      },
+      "decodingBoundary": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioRequest.java",
+        "line": 66,
+        "layout": "RTEREQ01",
+        "sha256": "5530667c85ed9345fbe13aa3c89eef8a3fd51a38b019e8b52f4aea13e818fa5a"
+      },
+      "sourceBindingVerified": true,
+      "typedLayoutHandlerMethodProven": false,
+      "endToEndRequestPathProven": false
+    },
+    "SCFREQ01": {
+      "designLine": 50,
+      "expectedHandler": "ScenarioFileListHandler",
+      "wireDataPath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/ScenarioFileListRequestData.java",
+      "wireDataSha256": "eaa6f96baffa023a0ee8739f0bcef478e02488bc9dccf0d2ae9c76986b9357d5",
+      "registrarLine": 295,
+      "entrypoint": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioApplicationService.java",
+        "line": 104,
+        "method": "process",
+        "sha256": "778ab847405c6fabba7d9bfdfc723b302ddb41aa539c77f431c401286cdfabaa"
+      },
+      "decodingBoundary": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioRequest.java",
+        "line": 67,
+        "layout": "SCFREQ01",
+        "sha256": "5530667c85ed9345fbe13aa3c89eef8a3fd51a38b019e8b52f4aea13e818fa5a"
+      },
+      "sourceBindingVerified": true,
+      "typedLayoutHandlerMethodProven": false,
+      "endToEndRequestPathProven": false
+    },
+    "SCNREQ01": {
+      "designLine": 52,
+      "expectedHandler": "ScenarioDetailHandler",
+      "wireDataPath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/ScenarioDetailRequestData.java",
+      "wireDataSha256": "4ad341d195f5e7ae6345afef839ed90d2dc18119c892e3037dc55dba91fafd21",
+      "registrarLine": 295,
+      "entrypoint": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioApplicationService.java",
+        "line": 104,
+        "method": "process",
+        "sha256": "778ab847405c6fabba7d9bfdfc723b302ddb41aa539c77f431c401286cdfabaa"
+      },
+      "decodingBoundary": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioRequest.java",
+        "line": 69,
+        "layout": "SCNREQ01",
+        "sha256": "5530667c85ed9345fbe13aa3c89eef8a3fd51a38b019e8b52f4aea13e818fa5a"
+      },
+      "sourceBindingVerified": true,
+      "typedLayoutHandlerMethodProven": false,
+      "endToEndRequestPathProven": false
+    },
+    "AUDREQ01": {
+      "designLine": 59,
+      "expectedHandler": "AudioDescriptorHandler",
+      "wireDataPath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/AudioDescriptorRequestData.java",
+      "wireDataSha256": "966cb8cd91e5cb839b17f516cc967a12449b9eee909e1d896e49b809a5a6fc1e",
+      "registrarLine": 302,
+      "entrypoint": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaApplicationService.java",
+        "line": 85,
+        "method": "process",
+        "sha256": "217b86beb833a3be43fefffa486ac124a5ba52a0dab205e000dfdb631598aa7a"
+      },
+      "decodingBoundary": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaRequest.java",
+        "line": 67,
+        "layout": "AUDREQ01",
+        "sha256": "73abe09934880c7aaae1d0db57c471788fc9d988c77791d7c876d8567b0cb55a"
+      },
+      "sourceBindingVerified": true,
+      "typedLayoutHandlerMethodProven": false,
+      "endToEndRequestPathProven": false
+    },
+    "ANMREQ01": {
+      "designLine": 61,
+      "expectedHandler": "AnimationMenuHandler",
+      "wireDataPath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/AnimationMenuRequestData.java",
+      "wireDataSha256": "4bfc67a93038d2c833a21c9783417c65ab00c9fd03cc24bb91ef9a65bb696227",
+      "registrarLine": 302,
+      "entrypoint": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaApplicationService.java",
+        "line": 85,
+        "method": "process",
+        "sha256": "217b86beb833a3be43fefffa486ac124a5ba52a0dab205e000dfdb631598aa7a"
+      },
+      "decodingBoundary": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaRequest.java",
+        "line": 68,
+        "layout": "ANMREQ01",
+        "sha256": "73abe09934880c7aaae1d0db57c471788fc9d988c77791d7c876d8567b0cb55a"
+      },
+      "sourceBindingVerified": true,
+      "typedLayoutHandlerMethodProven": false,
+      "endToEndRequestPathProven": false
+    },
+    "ANLREQ01": {
+      "designLine": 63,
+      "expectedHandler": "AnimationListHandler",
+      "wireDataPath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/AnimationListRequestData.java",
+      "wireDataSha256": "ae9b2fb77ab83a4962537ecda88516243d3ce3e4713080d9945949308bda52ca",
+      "registrarLine": 302,
+      "entrypoint": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaApplicationService.java",
+        "line": 85,
+        "method": "process",
+        "sha256": "217b86beb833a3be43fefffa486ac124a5ba52a0dab205e000dfdb631598aa7a"
+      },
+      "decodingBoundary": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaRequest.java",
+        "line": 69,
+        "layout": "ANLREQ01",
+        "sha256": "73abe09934880c7aaae1d0db57c471788fc9d988c77791d7c876d8567b0cb55a"
+      },
+      "sourceBindingVerified": true,
+      "typedLayoutHandlerMethodProven": false,
+      "endToEndRequestPathProven": false
+    },
+    "VIDREQ01": {
+      "designLine": 65,
+      "expectedHandler": "VideoDescriptorHandler",
+      "wireDataPath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/VideoDescriptorRequestData.java",
+      "wireDataSha256": "3f398129709614dd5190184dd58f57175a193e3e51a958cc557ef8d050345f5f",
+      "registrarLine": 302,
+      "entrypoint": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaApplicationService.java",
+        "line": 85,
+        "method": "process",
+        "sha256": "217b86beb833a3be43fefffa486ac124a5ba52a0dab205e000dfdb631598aa7a"
+      },
+      "decodingBoundary": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaRequest.java",
+        "line": 70,
+        "layout": "VIDREQ01",
+        "sha256": "73abe09934880c7aaae1d0db57c471788fc9d988c77791d7c876d8567b0cb55a"
+      },
+      "sourceBindingVerified": true,
+      "typedLayoutHandlerMethodProven": false,
+      "endToEndRequestPathProven": false
+    },
+    "MCTREQ01": {
+      "designLine": 67,
+      "expectedHandler": "MusicCategoryHandler",
+      "wireDataPath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/MusicCategoryRequestData.java",
+      "wireDataSha256": "262f161786c74c973fb08de827241b895fae54b914e1e35409749d339f47114b",
+      "registrarLine": 302,
+      "entrypoint": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaApplicationService.java",
+        "line": 85,
+        "method": "process",
+        "sha256": "217b86beb833a3be43fefffa486ac124a5ba52a0dab205e000dfdb631598aa7a"
+      },
+      "decodingBoundary": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaRequest.java",
+        "line": 71,
+        "layout": "MCTREQ01",
+        "sha256": "73abe09934880c7aaae1d0db57c471788fc9d988c77791d7c876d8567b0cb55a"
+      },
+      "sourceBindingVerified": true,
+      "typedLayoutHandlerMethodProven": false,
+      "endToEndRequestPathProven": false
+    },
+    "MCSREQ01": {
+      "designLine": 69,
+      "expectedHandler": "MusicSectionHandler",
+      "wireDataPath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/MusicSectionRequestData.java",
+      "wireDataSha256": "1179f10e4c80515451240869c52ec9c113b89d883949171daa03660f58eacb73",
+      "registrarLine": 302,
+      "entrypoint": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaApplicationService.java",
+        "line": 85,
+        "method": "process",
+        "sha256": "217b86beb833a3be43fefffa486ac124a5ba52a0dab205e000dfdb631598aa7a"
+      },
+      "decodingBoundary": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaRequest.java",
+        "line": 72,
+        "layout": "MCSREQ01",
+        "sha256": "73abe09934880c7aaae1d0db57c471788fc9d988c77791d7c876d8567b0cb55a"
+      },
+      "sourceBindingVerified": true,
+      "typedLayoutHandlerMethodProven": false,
+      "endToEndRequestPathProven": false
+    },
+    "MTRREQ01": {
+      "designLine": 71,
+      "expectedHandler": "MusicTrackHandler",
+      "wireDataPath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/MusicTrackRequestData.java",
+      "wireDataSha256": "28a578047a92633709aee42b08c52d113981ba4fd406dcc90984db96ebea4dbc",
+      "registrarLine": 302,
+      "entrypoint": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaApplicationService.java",
+        "line": 85,
+        "method": "process",
+        "sha256": "217b86beb833a3be43fefffa486ac124a5ba52a0dab205e000dfdb631598aa7a"
+      },
+      "decodingBoundary": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaRequest.java",
+        "line": 73,
+        "layout": "MTRREQ01",
+        "sha256": "73abe09934880c7aaae1d0db57c471788fc9d988c77791d7c876d8567b0cb55a"
+      },
+      "sourceBindingVerified": true,
+      "typedLayoutHandlerMethodProven": false,
+      "endToEndRequestPathProven": false
+    },
+    "MEDREQ01": {
+      "designLine": 73,
+      "expectedHandler": "MusicDescriptorHandler",
+      "wireDataPath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/MusicDescriptorRequestData.java",
+      "wireDataSha256": "6ca2ed033acb1e238b7000f3c7d488afa8ac2fe74c9c9c9841362ba4e20785f3",
+      "registrarLine": 302,
+      "entrypoint": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaApplicationService.java",
+        "line": 85,
+        "method": "process",
+        "sha256": "217b86beb833a3be43fefffa486ac124a5ba52a0dab205e000dfdb631598aa7a"
+      },
+      "decodingBoundary": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaRequest.java",
+        "line": 74,
+        "layout": "MEDREQ01",
+        "sha256": "73abe09934880c7aaae1d0db57c471788fc9d988c77791d7c876d8567b0cb55a"
+      },
+      "sourceBindingVerified": true,
+      "typedLayoutHandlerMethodProven": false,
+      "endToEndRequestPathProven": false
+    },
+    "LGSREQ01": {
+      "designLine": 75,
+      "expectedHandler": "LogSearchHandler",
+      "wireDataPath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/log/LogSearchRequestData.java",
+      "wireDataSha256": "5f78131cdb62aa454eb68ac962d1e58cf542947c45f94753697a63ebc4d09ad6",
+      "registrarLine": 298,
+      "entrypoint": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryApplicationService.java",
+        "line": 81,
+        "method": "process",
+        "sha256": "48a0381ddf09f251b50b4b2e7882511d0f64aa83ff7d7c9bc63efae306070d8e"
+      },
+      "decodingBoundary": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogRequest.java",
+        "line": 48,
+        "layout": "LGSREQ01",
+        "sha256": "df7ec576fc91533d2cc84e6d1217420c42ea6f589d38f73acb96a37dd5fbba30"
+      },
+      "sourceBindingVerified": true,
+      "typedLayoutHandlerMethodProven": false,
+      "endToEndRequestPathProven": false
+    },
+    "USRREQ01": {
+      "designLine": 82,
+      "expectedHandler": "UserSearchHandler",
+      "wireDataPath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/admin/UserSearchRequestData.java",
+      "wireDataSha256": "58ff4b6dbd140e907ed8d9dd7d9f5225be0972ef6d9fb506a97ffb9c8e11ec7a",
+      "registrarLine": 314,
+      "entrypoint": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryApplicationService.java",
+        "line": 81,
+        "method": "process",
+        "sha256": "26c1ae5f478d9561660fbd010a6496ff3edbe5cdf5416535af50fe12021285c3"
+      },
+      "decodingBoundary": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryRequest.java",
+        "line": 51,
+        "layout": "USRREQ01",
+        "sha256": "c85cf970f232c076bb5514a429388a7638a2bac2b9ffe9319f11a8f427f475fa"
+      },
+      "sourceBindingVerified": true,
+      "typedLayoutHandlerMethodProven": false,
+      "endToEndRequestPathProven": false
+    },
+    "UDTREQ01": {
+      "designLine": 86,
+      "expectedHandler": "UserDetailHandler",
+      "wireDataPath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/admin/UserDetailRequestData.java",
+      "wireDataSha256": "b3a30f36f4121ac716b0a68d729574c32dc8a09d2d63422b51736c52f6da95b3",
+      "registrarLine": 314,
+      "entrypoint": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryApplicationService.java",
+        "line": 81,
+        "method": "process",
+        "sha256": "26c1ae5f478d9561660fbd010a6496ff3edbe5cdf5416535af50fe12021285c3"
+      },
+      "decodingBoundary": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryRequest.java",
+        "line": 52,
+        "layout": "UDTREQ01",
+        "sha256": "c85cf970f232c076bb5514a429388a7638a2bac2b9ffe9319f11a8f427f475fa"
+      },
+      "sourceBindingVerified": true,
+      "typedLayoutHandlerMethodProven": false,
+      "endToEndRequestPathProven": false
+    },
+    "UCRREQ01": {
+      "designLine": 84,
+      "expectedHandler": "UserCreateHandler",
+      "wireDataPath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/admin/UserCreateRequestData.java",
+      "wireDataSha256": "975f2cf129e380283678c4d99122c8613e21622b31725ac88494f7da0de10883",
+      "registrarLine": 317,
+      "entrypoint": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationApplicationService.java",
+        "line": 75,
+        "method": "process",
+        "sha256": "ac2490b101fec96b81e0ff64ab09ab2f5b8858ebe545949bb7f3de43bf56a51b"
+      },
+      "decodingBoundary": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationRequest.java",
+        "line": 86,
+        "layout": "UCRREQ01",
+        "sha256": "52c686c9484de9f4ddfde527002eef98d135414f84083c41e9b7ee13ac57c036"
+      },
+      "sourceBindingVerified": true,
+      "typedLayoutHandlerMethodProven": false,
+      "endToEndRequestPathProven": false
+    },
+    "USTREQ01": {
+      "designLine": 88,
+      "expectedHandler": "UserStatusHandler",
+      "wireDataPath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/admin/UserStatusRequestData.java",
+      "wireDataSha256": "33b3117a8f54b441c63f676f2c3bc789ad7e82be7d841dbf11cd0425b219f6e8",
+      "registrarLine": 317,
+      "entrypoint": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationApplicationService.java",
+        "line": 75,
+        "method": "process",
+        "sha256": "ac2490b101fec96b81e0ff64ab09ab2f5b8858ebe545949bb7f3de43bf56a51b"
+      },
+      "decodingBoundary": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationRequest.java",
+        "line": 99,
+        "layout": "USTREQ01",
+        "sha256": "52c686c9484de9f4ddfde527002eef98d135414f84083c41e9b7ee13ac57c036"
+      },
+      "sourceBindingVerified": true,
+      "typedLayoutHandlerMethodProven": false,
+      "endToEndRequestPathProven": false
+    },
+    "URLREQ01": {
+      "designLine": 90,
+      "expectedHandler": "UserRoleHandler",
+      "wireDataPath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/admin/UserRoleRequestData.java",
+      "wireDataSha256": "099883bf78de39ddf48b0467c0f20b8b1e052cc89c2f1e4efd6be682bbe481ed",
+      "registrarLine": 317,
+      "entrypoint": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationApplicationService.java",
+        "line": 75,
+        "method": "process",
+        "sha256": "ac2490b101fec96b81e0ff64ab09ab2f5b8858ebe545949bb7f3de43bf56a51b"
+      },
+      "decodingBoundary": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationRequest.java",
+        "line": 112,
+        "layout": "URLREQ01",
+        "sha256": "52c686c9484de9f4ddfde527002eef98d135414f84083c41e9b7ee13ac57c036"
+      },
+      "sourceBindingVerified": true,
+      "typedLayoutHandlerMethodProven": false,
+      "endToEndRequestPathProven": false
+    },
+    "UPWREQ01": {
+      "designLine": 92,
+      "expectedHandler": "PasswordResetHandler",
+      "wireDataPath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/admin/PasswordResetRequestData.java",
+      "wireDataSha256": "07b1b58d8ccd0cff7c1fd5a836abfd0b5cdf36b7906b6b31e1f1c41de1a91abe",
+      "registrarLine": 317,
+      "entrypoint": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationApplicationService.java",
+        "line": 75,
+        "method": "process",
+        "sha256": "ac2490b101fec96b81e0ff64ab09ab2f5b8858ebe545949bb7f3de43bf56a51b"
+      },
+      "decodingBoundary": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationRequest.java",
+        "line": 125,
+        "layout": "UPWREQ01",
+        "sha256": "52c686c9484de9f4ddfde527002eef98d135414f84083c41e9b7ee13ac57c036"
+      },
+      "sourceBindingVerified": true,
+      "typedLayoutHandlerMethodProven": false,
+      "endToEndRequestPathProven": false
+    },
+    "ULKREQ01": {
+      "designLine": 94,
+      "expectedHandler": "UserUnlockHandler",
+      "wireDataPath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/admin/UserUnlockRequestData.java",
+      "wireDataSha256": "1b1a8ca063746c14149c53c7121b1d2a8c31619fade43c41bb1780d671cdcec9",
+      "registrarLine": 317,
+      "entrypoint": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationApplicationService.java",
+        "line": 75,
+        "method": "process",
+        "sha256": "ac2490b101fec96b81e0ff64ab09ab2f5b8858ebe545949bb7f3de43bf56a51b"
+      },
+      "decodingBoundary": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationRequest.java",
+        "line": 138,
+        "layout": "ULKREQ01",
+        "sha256": "52c686c9484de9f4ddfde527002eef98d135414f84083c41e9b7ee13ac57c036"
+      },
+      "sourceBindingVerified": true,
+      "typedLayoutHandlerMethodProven": false,
+      "endToEndRequestPathProven": false
+    },
+    "QSSREQ01": {
+      "designLine": 109,
+      "expectedHandler": "QuestionSearchHandler",
+      "wireDataPath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/QuestionSearchRequestData.java",
+      "wireDataSha256": "e93c0affdb135f6af27adbc223d5de106748df8514188513a3ab4f66687c9128",
+      "registrarLine": 330,
+      "entrypoint": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryApplicationService.java",
+        "line": 81,
+        "method": "process",
+        "sha256": "93029308e85bad6c693ffcf30ab435f42fef2b4a56de713f5ec1e7752f071275"
+      },
+      "decodingBoundary": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryRequest.java",
+        "line": 55,
+        "layout": "QSSREQ01",
+        "sha256": "7e8ed5ca4175bb673a3396612d7cb3e0f7c9aca239bd1ae8f6337155e5201181"
+      },
+      "sourceBindingVerified": true,
+      "typedLayoutHandlerMethodProven": false,
+      "endToEndRequestPathProven": false
+    },
+    "QSDREQ01": {
+      "designLine": 111,
+      "expectedHandler": "QuestionDetailHandler",
+      "wireDataPath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/QuestionDetailRequestData.java",
+      "wireDataSha256": "c8e961953b587bde006c568847331c325f9f79ae3ae41cb44b8dfb50a1cfdfdf",
+      "registrarLine": 330,
+      "entrypoint": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryApplicationService.java",
+        "line": 81,
+        "method": "process",
+        "sha256": "93029308e85bad6c693ffcf30ab435f42fef2b4a56de713f5ec1e7752f071275"
+      },
+      "decodingBoundary": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryRequest.java",
+        "line": 55,
+        "layout": "QSDREQ01",
+        "sha256": "7e8ed5ca4175bb673a3396612d7cb3e0f7c9aca239bd1ae8f6337155e5201181"
+      },
+      "sourceBindingVerified": true,
+      "typedLayoutHandlerMethodProven": false,
+      "endToEndRequestPathProven": false
+    },
+    "NTSREQ01": {
+      "designLine": 103,
+      "expectedHandler": "NotificationSearchHandler",
+      "wireDataPath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/NotificationSearchRequestData.java",
+      "wireDataSha256": "c33f1d8853f19f0b927b903f2856d6029bc807f666de8700f26c8e062ec600e2",
+      "registrarLine": 330,
+      "entrypoint": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryApplicationService.java",
+        "line": 81,
+        "method": "process",
+        "sha256": "93029308e85bad6c693ffcf30ab435f42fef2b4a56de713f5ec1e7752f071275"
+      },
+      "decodingBoundary": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryRequest.java",
+        "line": 55,
+        "layout": "NTSREQ01",
+        "sha256": "7e8ed5ca4175bb673a3396612d7cb3e0f7c9aca239bd1ae8f6337155e5201181"
+      },
+      "sourceBindingVerified": true,
+      "typedLayoutHandlerMethodProven": false,
+      "endToEndRequestPathProven": false
+    },
+    "NTDREQ01": {
+      "designLine": 105,
+      "expectedHandler": "NotificationDetailHandler",
+      "wireDataPath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/NotificationDetailRequestData.java",
+      "wireDataSha256": "ff53c6d7cb77d2f6a21a31173b8468f4fbcbdcfba8a643fd5984adf2f0f559a1",
+      "registrarLine": 330,
+      "entrypoint": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryApplicationService.java",
+        "line": 81,
+        "method": "process",
+        "sha256": "93029308e85bad6c693ffcf30ab435f42fef2b4a56de713f5ec1e7752f071275"
+      },
+      "decodingBoundary": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryRequest.java",
+        "line": 55,
+        "layout": "NTDREQ01",
+        "sha256": "7e8ed5ca4175bb673a3396612d7cb3e0f7c9aca239bd1ae8f6337155e5201181"
+      },
+      "sourceBindingVerified": true,
+      "typedLayoutHandlerMethodProven": false,
+      "endToEndRequestPathProven": false
+    },
+    "NTCREQ01": {
+      "designLine": 107,
+      "expectedHandler": "NotificationCancelHandler",
+      "wireDataPath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/NotificationCancelRequestData.java",
+      "wireDataSha256": "f5e5add9b4222ba2ab624bfe8a2ee3cfdacb65bca31df61856587390e2ef06d0",
+      "registrarLine": 335,
+      "entrypoint": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationApplicationService.java",
+        "line": 84,
+        "method": "process",
+        "sha256": "fae41cea1f384210aac9d90898e65b2776676e7955fe48a3b3b59fb8a3b1f6c5"
+      },
+      "decodingBoundary": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationRequest.java",
+        "line": 56,
+        "layout": "NTCREQ01",
+        "sha256": "efcd9884e66c0f5f12dfc3ae1161b1d9b8c7da4259f8f48dc558b5f9dcbcec6a"
+      },
+      "sourceBindingVerified": true,
+      "typedLayoutHandlerMethodProven": false,
+      "endToEndRequestPathProven": false
+    },
+    "QDLREQ01": {
+      "designLine": 113,
+      "expectedHandler": "QuestionDeleteHandler",
+      "wireDataPath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/QuestionDeleteRequestData.java",
+      "wireDataSha256": "d13958aea41cfb4e846dbde2142a9fc90d8c253961d5ea7ff67808e9bec4407b",
+      "registrarLine": 335,
+      "entrypoint": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationApplicationService.java",
+        "line": 84,
+        "method": "process",
+        "sha256": "fae41cea1f384210aac9d90898e65b2776676e7955fe48a3b3b59fb8a3b1f6c5"
+      },
+      "decodingBoundary": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationRequest.java",
+        "line": 56,
+        "layout": "QDLREQ01",
+        "sha256": "efcd9884e66c0f5f12dfc3ae1161b1d9b8c7da4259f8f48dc558b5f9dcbcec6a"
+      },
+      "sourceBindingVerified": true,
+      "typedLayoutHandlerMethodProven": false,
+      "endToEndRequestPathProven": false
+    },
+    "QSBREQ01": {
+      "designLine": 101,
+      "expectedHandler": "QuestionSubmitHandler",
+      "wireDataPath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/QuestionSubmitRequestData.java",
+      "wireDataSha256": "631b79eda983258ffe2ccb33a6a95ed74d498a7f058b95ea1730702211f39ec8",
+      "registrarLine": 337,
+      "entrypoint": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionSubmissionService.java",
+        "line": 130,
+        "method": "process",
+        "sha256": "02b5effa37786246afbbbc39997eaae6ed6713723cc51938df8f82dce123aa13"
+      },
+      "decodingBoundary": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionSubmitRequest.java",
+        "line": 45,
+        "layout": "QSBREQ01",
+        "sha256": "d9ed41871ca79eddaf323630a938b1d468886a6e3e8b3c9f72203d905ae1ab5d"
+      },
+      "sourceBindingVerified": true,
+      "typedLayoutHandlerMethodProven": false,
+      "endToEndRequestPathProven": false
+    }
+  },
+  "independentHistoricalTestReferences": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41494-a10201-dispatcher-criteria-lineage-v1/manifest.json",
+      "sha256": "fd62da37dac4b80b31ac71a78adf50cc4b05fe4827093c651a31c4a2b21251f9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42068-a10201-dispatcher-current-readonly-v1/manifest.json",
+      "sha256": "34fd24fe7e699a9230373e542b0d0134359eca2bb2fd96f376519d1e2090f80d"
+    }
+  ],
+  "fixedGuardStatus": "NOT_RUN_EXISTING_HOLD",
+  "newDynamic": 0,
+  "countsAsTypedHandlers": 0,
+  "knownReason": "Current production registry selects grouped WireMessage processors and models payload in the group. It uses no standalone typed LayoutHandler or RequestContext from SS311.",
+  "missingImplementationEvidence": [
+    "placement of typed per-layout handler after existing authentication and Inbox",
+    "unchanged dispatch/transaction/replay for each operation, coupled registered candidate build",
+    "full F02/F03 QA-056, authorized shared test and real paths"
+  ],
+  "opOrHeldInvocations": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
