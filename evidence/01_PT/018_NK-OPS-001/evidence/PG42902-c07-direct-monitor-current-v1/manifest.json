@@ -1,0 +1,750 @@
+{
+  "run": "PG42902",
+  "source": "96effa88b8ad210fa0c9457e1badbfa1aca1a843",
+  "core": "e8368d22c4da2ec841f008df793594d3be9066af",
+  "wbs": "WBS-C07",
+  "actualExit": 0,
+  "startedAtUTC": "2026-11-22T18:10:23.886405+00:00",
+  "terminalAtUTC": "2026-11-22T18:11:45.204013+00:00",
+  "borrowedPhysicalProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42890-c07-pending-recovery-current-v3/manifest.json",
+    "sha256": "b7a0af22d7c7e95213a2e71fc020b15f2095a2df8b0bed4f842e42ba751bb8ea"
+  },
+  "originalIndependentCases": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40798-timed-alert-pending-recovery-v2/manifest.json",
+    "sha256": "75a60a041819ef5129da4fd6f8d527ac354d4e1ce3acf32062b3fcd88cd5f8af"
+  },
+  "exactJar": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42660-jackson-candidate-batch-build-v1/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "e1419328a6ae7b934ccdda6d9329585a58df5aa0212cb2ea34a1972fd157f1fb"
+  },
+  "testSources": {
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitorTest.java": "a0bd8efc24fd8062d77966e82251af46c2511245ec62f469df6dc1c31c546936",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitorTest.java": "4c4bda479a43021bd08338dd1ef7896ed4b6eba7d4eb10217169fe04c522ea93",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitorTest.java": "aaac0144d732ba723350fb7034e9ba42e05f7b7fb38bc045d693da15a0c5a2c9",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitorTest.java": "f66f5eefe7409adf245a148a7f7fda9428ee15a83adad610d0fde54a34bd006f",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngineTest.java": "257a6f62b8386c709fc29c6260c77287c9171cc341b60fcbce567c00517cead9"
+  },
+  "frozenPhysical": {
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance.class": "9b38a3b425429d131cdc8704285df173c55ad4c05e5c860dd4a815b60c5b23b9",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition.class": "49b34f2b7a8daa57055566a0b422f3a80370b51f2a50355690404f16c07e731b",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event.class": "5d3a5f35f93162b0294e2dc423ec12f650d18fce7ea13d6dd1893445ddcfbcf7",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service.class": "f363d58c5d7172041618f095846a5c28b8079e63c430c99b0067a2858f469bb5",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity.class": "4a90d8e671376316fe3af1709ae3ed7f91e4ab0cee8a8d8a2bcec405ade38ca6",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State.class": "1d140156f6787265537ad923d4c2bb2da3b43cb0373353ef1034cf8aaaafd246",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.class": "22207ad4d75fcb65bd63f4161cf65f2ab2c60d94ae66268fe9357364e8c47a91",
+    "dev/codex/schubert/nk/batch/monitoring/AlertRegistry.class": "c5afca254eee0e556e3e04ade3eb141e8a821864a693580df2b00bfaeea83674",
+    "dev/codex/schubert/nk/batch/monitoring/AlertThresholds.class": "920342ff7ee7befb1e892e83e41e0ee2c1b363d4e47d115f10dc5a48ca298a77",
+    "dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow$State.class": "414d1fcfc1ac0eacfb2f301b62a152e96411dc4971d86f38b113f414efb318c8",
+    "dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow.class": "96863ad92123629c637304bb9d122efc8822d1b61798213ac8e59617fc98bab8",
+    "dev/codex/schubert/nk/batch/monitoring/FilesystemHealthObservation.class": "ca314ebd93bda5f4b3db6b8d9652dec54b9976a75a0fcc9ed7fdef670a73d3c8",
+    "dev/codex/schubert/nk/batch/monitoring/HealthUsageRatio.class": "15c78c469d3c863d097183bacbbffeb05b2ebcf9f3d7b6744cd12f9c87d78e12",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy$DetailService.class": "53bce391602d55efcd738c5ad704d71c5aba4ef5fbb73f034baecd529418c3c0",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy$RetentionConfiguration.class": "f52c50c1883813b4f160e56086484749d53c001776981eb10a2568198815f89c",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy.class": "fefef8ba8ca8aabf3767af91e4e9b44637be8c7469bd61afe430685abf5c3312",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine.class": "a3b1fbb10a66f67330d01cdb9676ca98de849ee834a591e8c64e1ae62bf9f2b9",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringStatusText.class": "86cc2c9090684658f6f066d89e9eda832a4c1bd41c154f54d2e5e59420948a48",
+    "dev/codex/schubert/nk/batch/monitoring/ObservationContext.class": "b3ff5e32cbbc02848950edf814043343fb53c25eda1968aa1e8ae4dafed23644",
+    "dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor$Evaluation.class": "4520f34677461a9938ef53df0005cef519fcd935275bd3760972c9634e2bca12",
+    "dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor.class": "0f18aa9ad5e074a9a1cfeada37aed02086fada5bb5df6ec11cbccc27c5b90c2c",
+    "dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor$Evaluation.class": "1b38b075d743689baed82583394134b4734758880cbe2ce1c895272cf4e7cce2",
+    "dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.class": "233dc72748d99e918d39f9e5889dd4c91de32013291d9b927a8aaa7249daa3e6",
+    "dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor$Evaluation.class": "4c680520112c542ebbcbc5c37c1abbd0a61ea9ddaf629713d2602b8d961523d3",
+    "dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.class": "f27aa32e0bd34bdf29708c97bdb42a657be14324e6238189591497ed9900ae91",
+    "dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor$Evaluation.class": "0bd17c89de01ff0ec69a948aa9e8cc90f0e7682876bb718851451d5a057dc973",
+    "dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor.class": "2c8fb5fe3474b882627f4f85163ba9fbc74fea2197d3dd4cf13af9b2e30e1815",
+    "dev/codex/schubert/nk/batch/monitoring/package-info.class": "be87566494520630402b9cc7c20713ac5fccac9b97505cbe551abc6c24843077"
+  },
+  "caseNames": [
+    [
+      "MonitoringPolicyEngineTest",
+      "asyncByte001EngineUsesStorageBytesIndependentOfMessageCount"
+    ],
+    [
+      "MonitoringPolicyEngineTest",
+      "monPipe001ObservationContextInvariantsAndImmutableValues"
+    ],
+    [
+      "MonitoringPolicyEngineTest",
+      "monPipe002EveryNormalAndWarningEndpointIdentity"
+    ],
+    [
+      "MonitoringPolicyEngineTest",
+      "monPipe003EveryCriticalEndpointAndCauseAwareRecovery"
+    ],
+    [
+      "MonitoringPolicyEngineTest",
+      "monPipe004RejectedInputsDoNotPartiallyUpdateState"
+    ],
+    [
+      "MonitoringPolicyEngineTest",
+      "monPipe005ModeConsistencyDoesNotChangeAlerts"
+    ],
+    [
+      "MonitoringPolicyEngineTest",
+      "monPipe006ConcurrentSingleEntryKeepsOneOwner"
+    ],
+    [
+      "MonitoringPolicyEngineTest",
+      "monPipe007AllSeventyTwoFixedKeysAndImmutableProjection"
+    ],
+    [
+      "MonitoringPolicyEngineTest",
+      "monPipe008MissingObservationResetsOnlyItsConditionAndService"
+    ],
+    [
+      "MonitoringPolicyEngineTest",
+      "restartFlag001RateLimitIsIndependentOfCountAndInvalidCountCannotMutateState"
+    ],
+    [
+      "TimedDbPoolMonitorTest",
+      "dbTime001EightyNeedsFiveMinutesAndWarningNeedsFiveNormalMinutes"
+    ],
+    [
+      "TimedDbPoolMonitorTest",
+      "dbTime002PendingOrTimeoutIsImmediateAndNeedsCauseAndTenNormalMinutes"
+    ],
+    [
+      "TimedDbPoolMonitorTest",
+      "dbTime003UnknownCutsViolationAndNormalRecoveryWithoutInventingZero"
+    ],
+    [
+      "TimedDbPoolMonitorTest",
+      "dbTime004KnownCountsAreIndependentOfUnknownPercent"
+    ],
+    [
+      "TimedDbPoolMonitorTest",
+      "dbTime005InvalidNullAndBackwardsInputsCannotMutateState"
+    ],
+    [
+      "TimedDbPoolMonitorTest",
+      "dbTime006ExplicitGapRestartsWindowAndCriticalRemainsSticky"
+    ],
+    [
+      "TimedDbPoolMonitorTest",
+      "dbTime007ConcurrentSameEpochKeepsImmutableExactEventCount"
+    ],
+    [
+      "TimedDbPoolMonitorTest",
+      "dbTime008BoundariesMaximumCountsAndOwnersStayIndependent"
+    ],
+    [
+      "TimedFilesystemMonitorTest",
+      "timedFs001WarningBoundaryAndFiveMinuteRecovery"
+    ],
+    [
+      "TimedFilesystemMonitorTest",
+      "timedFs002CriticalBoundaryAndExplicitCause"
+    ],
+    [
+      "TimedFilesystemMonitorTest",
+      "timedFs003MissingBreaksViolationWithoutClearingOpenEvent"
+    ],
+    [
+      "TimedFilesystemMonitorTest",
+      "timedFs004MissingAndExplicitGapBreakNormalRecovery"
+    ],
+    [
+      "TimedFilesystemMonitorTest",
+      "timedFs005InvalidInputsCannotChangeOwnerState"
+    ],
+    [
+      "TimedFilesystemMonitorTest",
+      "timedFs006ConcurrentOwnerAndLocalStatusLiteral"
+    ],
+    [
+      "TimedJvmHeapMonitorTest",
+      "heapTime001WarningNeedsTenMinutesAndFiveNormalMinutesToClose"
+    ],
+    [
+      "TimedJvmHeapMonitorTest",
+      "heapTime002NinetyIsImmediateAndCriticalNeedsCauseAndTenMinutes"
+    ],
+    [
+      "TimedJvmHeapMonitorTest",
+      "heapTime003UnknownBreaksBothViolationAndRecoveryWithoutInventingNormal"
+    ],
+    [
+      "TimedJvmHeapMonitorTest",
+      "heapTime004ReportedOomIsIndependentOfMissingUsageAndNeverInventsZero"
+    ],
+    [
+      "TimedJvmHeapMonitorTest",
+      "heapTime005NullInvalidAndBackwardsInputsNeverMutateState"
+    ],
+    [
+      "TimedJvmHeapMonitorTest",
+      "heapTime006ExplicitGapRestartsViolationAndNormalRecovery"
+    ],
+    [
+      "TimedJvmHeapMonitorTest",
+      "heapTime007ConcurrentSameEpochKeepsOneEventAndImmutableSnapshot"
+    ],
+    [
+      "TimedJvmHeapMonitorTest",
+      "heapTime008CriticalIsStickyAcrossWarningAndReportedOomResetsRecovery"
+    ],
+    [
+      "TimedSyncLatencyMonitorTest",
+      "syncTime001StrictTwoSecondWarningNeedsFiveMinutes"
+    ],
+    [
+      "TimedSyncLatencyMonitorTest",
+      "syncTime002StrictTwoPointFiveNeedsFiveMinutesBeforeCriticalPromotion"
+    ],
+    [
+      "TimedSyncLatencyMonitorTest",
+      "syncTime003UnknownCutsBothViolationWindowsRatherThanBecomingZero"
+    ],
+    [
+      "TimedSyncLatencyMonitorTest",
+      "syncTime004UnknownCutsCriticalRecoveryAndCauseMustBeConfirmed"
+    ],
+    [
+      "TimedSyncLatencyMonitorTest",
+      "syncTime005NullInvalidAndBackwardsInputsCannotMutateExistingState"
+    ],
+    [
+      "TimedSyncLatencyMonitorTest",
+      "syncTime006ExplicitGapRestartsViolationAndRecoveryWithStickyCritical"
+    ],
+    [
+      "TimedSyncLatencyMonitorTest",
+      "syncTime007ConcurrentSameEpochMaintainsExactImmutableEventCounts"
+    ],
+    [
+      "TimedSyncLatencyMonitorTest",
+      "syncTime008FiniteMaximumAndWarningRecoveryDoNotMixSeparateOwners"
+    ]
+  ],
+  "plannedOwners": {
+    "TimedFilesystemMonitorTest": 6,
+    "TimedJvmHeapMonitorTest": 8,
+    "TimedDbPoolMonitorTest": 8,
+    "TimedSyncLatencyMonitorTest": 8,
+    "MonitoringPolicyEngineTest": 10
+  },
+  "ordinary": {
+    "tests": 40,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "newCaseDefinitionsInThisRun": 0,
+  "priorEightExecutedHere": 0,
+  "originalZeroExternal": 0,
+  "counters": {
+    "INSTRUCTION": {
+      "covered": 947,
+      "missed": 0
+    },
+    "BRANCH": {
+      "covered": 84,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 180,
+      "missed": 0
+    },
+    "COMPLEXITY": {
+      "covered": 75,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 33,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 9,
+      "missed": 0
+    }
+  },
+  "perClass": {
+    "dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor": {
+      "INSTRUCTION": {
+        "covered": 180,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 14,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 36,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 10,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 3,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor$Evaluation": {
+      "INSTRUCTION": {
+        "covered": 13,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 3,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 1,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor$Evaluation": {
+      "INSTRUCTION": {
+        "covered": 13,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 3,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 1,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor$Evaluation": {
+      "INSTRUCTION": {
+        "covered": 13,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 3,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 1,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor": {
+      "INSTRUCTION": {
+        "covered": 167,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 22,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 30,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 14,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 3,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine": {
+      "INSTRUCTION": {
+        "covered": 199,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 36,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 17,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 17,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor": {
+      "INSTRUCTION": {
+        "covered": 165,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 24,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 31,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 15,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 3,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor": {
+      "INSTRUCTION": {
+        "covered": 184,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 24,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 35,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 15,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 3,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor$Evaluation": {
+      "INSTRUCTION": {
+        "covered": 13,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 3,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 1,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    }
+  },
+  "stages": {
+    "compile": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-g",
+        "-proc:none",
+        "-implicit:none",
+        "-classpath",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/main:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/test",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/inputs/TimedFilesystemMonitorTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/inputs/TimedJvmHeapMonitorTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/inputs/TimedDbPoolMonitorTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/inputs/TimedSyncLatencyMonitorTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/inputs/MonitoringPolicyEngineTest.java"
+      ],
+      "actualExit": 0,
+      "start": "2026-11-22T18:10:23.894332+00:00",
+      "terminal": "2026-11-22T18:10:24.972061+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/compile.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/compile.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "junit": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/unit.exec,sessionid=PG42902-current,append=false",
+        "-Duser.timezone=Asia/Tokyo",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/test:/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/main:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "org.junit.platform.console.ConsoleLauncher",
+        "execute",
+        "--disable-ansi-colors",
+        "--fail-if-no-tests",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/reports",
+        "--select-class",
+        "dev.codex.schubert.nk.batch.monitoring.TimedFilesystemMonitorTest",
+        "--select-class",
+        "dev.codex.schubert.nk.batch.monitoring.TimedJvmHeapMonitorTest",
+        "--select-class",
+        "dev.codex.schubert.nk.batch.monitoring.TimedDbPoolMonitorTest",
+        "--select-class",
+        "dev.codex.schubert.nk.batch.monitoring.TimedSyncLatencyMonitorTest",
+        "--select-class",
+        "dev.codex.schubert.nk.batch.monitoring.MonitoringPolicyEngineTest"
+      ],
+      "actualExit": 0,
+      "start": "2026-11-22T18:10:26.493508+00:00",
+      "terminal": "2026-11-22T18:10:27.768376+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/junit.stdout",
+        "sha256": "1deb41ac4f6e549a6dae22a10e0bdb3e0adca8077a09189e21f418a2446cdd52"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/junit.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "coverage": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/unit.exec",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/main/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine.class",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/main/dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor$Evaluation.class",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/main/dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor.class",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/main/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor$Evaluation.class",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/main/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.class",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/main/dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor$Evaluation.class",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/main/dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.class",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/main/dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor$Evaluation.class",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/main/dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor.class",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/coverage.xml"
+      ],
+      "actualExit": 0,
+      "start": "2026-11-22T18:10:27.769067+00:00",
+      "terminal": "2026-11-22T18:10:27.905931+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/coverage.stdout",
+        "sha256": "69837f7a6f3f6eb19215e711c381848c000d8955c86500d04c8d5b55299f1275"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/coverage.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "classinfo": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "classinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/main/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/main/dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor$Evaluation.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/main/dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/main/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor$Evaluation.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/main/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/main/dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor$Evaluation.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/main/dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/main/dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor$Evaluation.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/main/dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor.class"
+      ],
+      "actualExit": 0,
+      "start": "2026-11-22T18:10:27.905974+00:00",
+      "terminal": "2026-11-22T18:10:28.021958+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/classinfo.stdout",
+        "sha256": "f38953ea1cfda79299cd13aae402a47b6b87b502bc82c0a282ace9703e74903c"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/classinfo.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "execinfo": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "execinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/unit.exec"
+      ],
+      "actualExit": 0,
+      "start": "2026-11-22T18:10:28.022029+00:00",
+      "terminal": "2026-11-22T18:10:28.137632+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/execinfo.stdout",
+        "sha256": "c842280186147a84a2fad5b7b1419cf1c06aa40e5b4550cfc9c2466036fea770"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/execinfo.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "junitXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/reports/TEST-junit-jupiter.xml",
+    "sha256": "d50c09366bfa990370ddec8cc499fb0252c039b8deb51f39581978e2300ff6e6"
+  },
+  "coverageXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/coverage.xml",
+    "sha256": "b0f0a4b023d91a0d86d988e631c85086bf260f727a5697d549ced66cf04e616f"
+  },
+  "exec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/unit.exec",
+    "sha256": "46dea2f763159f212b65acb9954d4db5714bb7b4f387ba2370d826ba2cef8e1d"
+  },
+  "wholeC07": false,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "originalTerminal": {
+    "path": "../pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/terminal.json",
+    "sha256": "94f1d3c82b62029f2dab75673284b7b25e55df52c737c635c886e9bf0400c189"
+  },
+  "originalStrictTerminal": {
+    "path": "../pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/independent-v2/terminal.json",
+    "sha256": "357f179827e1e3b573ec719eba45361f5f40f748b7bf25772844a1720f0ba4ee"
+  },
+  "strictTool": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/jacoco/UnfilteredCodeMeasurement.java",
+    "sha256": "ed7e1ec23dc6d79b65e7c7f7017ec86cc79f21432dbd08f6df7a209d5073e111"
+  },
+  "strictCommands": {
+    "compile": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+      "--release",
+      "25",
+      "-proc:none",
+      "-cp",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+      "-d",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/independent-v2",
+      "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/jacoco/UnfilteredCodeMeasurement.java"
+    ],
+    "raw": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/independent-v2:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+      "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+      "--strict-original-exec",
+      "--line-deficits",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/unit.exec",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/main/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/main/dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor$Evaluation.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/main/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor$Evaluation.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/main/dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor$Evaluation.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/main/dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/main/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/main/dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/main/dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/main/dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor$Evaluation.class"
+    ]
+  },
+  "files": {
+    "TEST-junit-jupiter.xml": {
+      "sha256": "70ad510d160fa9489d2cf52ae5c5d261cec326f6bf764a70279fe8c3a667ed70",
+      "originalUnitXmlSha256": "d50c09366bfa990370ddec8cc499fb0252c039b8deb51f39581978e2300ff6e6"
+    },
+    "coverage.xml": {
+      "sha256": "b0f0a4b023d91a0d86d988e631c85086bf260f727a5697d549ced66cf04e616f",
+      "originalUnitXmlSha256": null
+    },
+    "coverage-unfiltered.tsv": {
+      "sha256": "370d61537363766195269b07b515d8b6ac5c6fab4218dd6b694e7affd9b014f4",
+      "originalUnitXmlSha256": null
+    },
+    "classinfo.txt": {
+      "sha256": "f38953ea1cfda79299cd13aae402a47b6b87b502bc82c0a282ace9703e74903c",
+      "originalUnitXmlSha256": null
+    },
+    "execinfo.txt": {
+      "sha256": "c842280186147a84a2fad5b7b1419cf1c06aa40e5b4550cfc9c2466036fea770",
+      "originalUnitXmlSha256": null
+    }
+  },
+  "strictCoverage": {
+    "INSTRUCTION": {
+      "covered": 991,
+      "missed": 60
+    },
+    "BRANCH": {
+      "covered": 84,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 188,
+      "missed": 4
+    },
+    "COMPLEXITY": {
+      "covered": 83,
+      "missed": 12
+    },
+    "METHOD": {
+      "covered": 41,
+      "missed": 12
+    },
+    "CLASS": {
+      "covered": 9,
+      "missed": 0
+    }
+  },
+  "strictDeficitCount": 16,
+  "ordinarilyReplayedPreviousEight": 0,
+  "bugs": [
+    "BUG-3642"
+  ],
+  "horizontal": [
+    "YKT-2861"
+  ]
+}
