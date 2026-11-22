@@ -3,10 +3,12 @@ package dev.codex.schubert.nk.web.view;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.HexFormat;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -14,7 +16,8 @@ import org.junit.jupiter.api.Test;
 
 /** PG217/SCR014/UI222,225/SS313,352/016021/PT-SCR092-A..H. */
 class LogSearchScriptTest {
-  private static String execute(List<String> args, Path output) throws Exception {
+  private static String execute(List<String> args, Path output)
+      throws IOException, InterruptedException {
     var process =
         new ProcessBuilder(args).redirectErrorStream(true).redirectOutput(output.toFile()).start();
     try {
@@ -29,7 +32,8 @@ class LogSearchScriptTest {
   }
 
   @Test
-  void log092BrowserInputScript() throws Exception {
+  void log092BrowserInputScript()
+      throws IOException, InterruptedException, NoSuchAlgorithmException {
     String node = System.getProperty("nk.pt.node", "node");
     Path output = Path.of("target/pt-log-script");
     Files.createDirectories(output);

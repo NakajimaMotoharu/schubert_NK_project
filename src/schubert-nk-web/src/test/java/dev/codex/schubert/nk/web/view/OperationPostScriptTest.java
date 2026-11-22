@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,7 +14,8 @@ import org.junit.jupiter.api.Test;
 
 /** UI222§8/SS313314352/BUG1222/YKT988/PT-WEB-OPSJS2646; no native or browser authority. */
 class OperationPostScriptTest {
-  private static String execute(List<String> arguments, Path output) throws Exception {
+  private static String execute(List<String> arguments, Path output)
+      throws IOException, InterruptedException {
     var process =
         new ProcessBuilder(arguments)
             .redirectErrorStream(true)
@@ -31,7 +33,8 @@ class OperationPostScriptTest {
   }
 
   @Test
-  void operation2646001IndependentEventContractsAndEveryScriptCounter() throws Exception {
+  void operation2646001IndependentEventContractsAndEveryScriptCounter()
+      throws IOException, InterruptedException {
     String node = System.getProperty("nk.pt.node", "node");
     Path output = Path.of("target/pt-operation-script");
     Files.createDirectories(output);
@@ -68,7 +71,7 @@ class OperationPostScriptTest {
   }
 
   @Test
-  void operation2646002OnlyApprovedUpdateTemplatesConnectExternalScript() throws Exception {
+  void operation2646002OnlyApprovedUpdateTemplatesConnectExternalScript() throws IOException {
     for (String name :
         List.of(
             "admin/user-new", "admin/user-detail", "notifications/detail", "questions/detail")) {
