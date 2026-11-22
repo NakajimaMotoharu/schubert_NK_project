@@ -2,10 +2,12 @@ package dev.codex.schubert.nk.api.application.question;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Clock;
@@ -15,6 +17,7 @@ import java.time.ZoneOffset;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -107,7 +110,7 @@ class StubAnswerProviderTest {
 
   @Test
   @DisplayName("PT-ASY-STB005 concurrent calls and public evidence")
-  void concurrentCallsAndEvidence() throws Exception {
+  void concurrentCallsAndEvidence() throws IOException, InterruptedException, ExecutionException {
     AtomicInteger calls = new AtomicInteger();
     var provider = new StubAnswerProvider(clock(() -> NOW.plusSeconds(calls.getAndIncrement())));
     Set<Instant> expected = new HashSet<>();
@@ -139,6 +142,15 @@ class StubAnswerProviderTest {
             + "uniqueClockValues=64\n"
             + "externalCalls=0\n"
             + "rawBodySaved=false\n");
+  }
+
+  @Test
+  @DisplayName("PT-ASY-STB006 expected failure contains only the fixed diagnostic")
+  void fixedBusinessFailureValue() {
+    var failure = new AnswerBusinessException();
+    assertEquals("answer could not be produced", failure.getMessage());
+    assertNull(failure.getCause());
+    assertEquals(0, failure.getSuppressed().length);
   }
 
   private static Clock clock(Supplier<Instant> source) {
