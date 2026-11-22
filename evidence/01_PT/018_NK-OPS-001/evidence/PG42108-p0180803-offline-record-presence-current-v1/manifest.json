@@ -1,0 +1,83 @@
+{
+  "run": "PG42108",
+  "source": "b8ee4df46f479e11fa72bf53c213b24f756a145f",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-P018-08.03/2",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T04:29:59.380904+00:00",
+  "priorSameTools": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41418-strict-exec-empty-class-green-v2/manifest.json",
+    "sha256": "bf7a28b50b0fa49a3564d25a11e786386b7a8f956a76a7ba510d585f175fc682"
+  },
+  "originalTerminal": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG41418-strict-exec-empty-class-green-v2/python.stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG41418-strict-exec-empty-class-green-v2/python.stderr.txt",
+      "sha256": "db23a1865b512f730836206fbbe5e782e43efaac4c33e775955112fb6fe1ee5d"
+    }
+  ],
+  "actualOriginalToolSuiteTestCount": 36,
+  "sameCurrentInputHashes": {
+    "jacoco_readonly_exec_subset": {
+      "path": "tools/quality/jacoco_readonly_exec_subset.py",
+      "sha256": "232c1a2333528ea05c7cb3880d98237b4f35d3b4bf581e6e7c84ef556f340129"
+    },
+    "jacoco_readonly_exec_subset_encoding_test": {
+      "path": "tools/quality/jacoco_readonly_exec_subset_encoding_test.py",
+      "sha256": "69e387c19ec42d5a61a028042069cd79aeb5687352ca7e4ce6675e3e67ad5a0b"
+    },
+    "jacoco_readonly_exec_subset_modified_utf_test": {
+      "path": "tools/quality/jacoco_readonly_exec_subset_modified_utf_test.py",
+      "sha256": "6e7287887a0563df30bbeac8fd04ddf8ea7cc11d038370c443ad2fa3b72caf45"
+    },
+    "jacoco_readonly_exec_subset_presence_test": {
+      "path": "tools/quality/jacoco_readonly_exec_subset_presence_test.py",
+      "sha256": "d95edb3bec1dd6f66a2557275da20ba2a865f05ef3503d19b9ede6b5ef1b234f"
+    },
+    "jacoco_readonly_exec_subset_scope_test": {
+      "path": "tools/quality/jacoco_readonly_exec_subset_scope_test.py",
+      "sha256": "fc7f244df02b40c1fa8e709952e0c1bfff68dd8e6017b47eb1cbbef808b03d1f"
+    },
+    "jacoco_readonly_exec_subset_test": {
+      "path": "tools/quality/jacoco_readonly_exec_subset_test.py",
+      "sha256": "f6659bbabdc5b002aae5a9024b684a8c3e1057070ab81229146452b27a70a65d"
+    },
+    "public_jacoco_exec_format_utf_test": {
+      "path": "tools/quality/public_jacoco_exec_format_utf_test.py",
+      "sha256": "fe083a209224e76daaef0654bc7adee7cbd661eb10af7568de9c9f0d726c454c"
+    },
+    "public_jacoco_exec_format_v1": {
+      "path": "tools/quality/public_jacoco_exec_format_v1.py",
+      "sha256": "d8b62dc5d0b06bd223ddfa54ad2dd996ff84b4eb3598f8bb1e841926d301f280"
+    }
+  },
+  "focusCasesFromSameOriginalToolSuite": [
+    "test_empty_target_set_accepts_session_structure_without_class_evidence",
+    "test_empty_target_set_keeps_only_count_when_class_data_exists",
+    "test_multiple_targets_each_keep_their_own_crc_and_probes",
+    "test_missing_second_target_rejects_partial_match_despite_shared_prefix",
+    "test_missing_session_does_not_qualify_a_present_class"
+  ],
+  "originalCommand": [
+    "/usr/bin/python3",
+    "-B",
+    "-m",
+    "unittest",
+    "jacoco_readonly_exec_subset_encoding_test",
+    "jacoco_readonly_exec_subset_modified_utf_test",
+    "jacoco_readonly_exec_subset_presence_test",
+    "jacoco_readonly_exec_subset_scope_test",
+    "jacoco_readonly_exec_subset_test",
+    "public_jacoco_exec_format_utf_test"
+  ],
+  "newToolTests": 0,
+  "productionTests": 0,
+  "sourceOrLiveStreamsRead": 0,
+  "rawProductionCoverageAttributed": 0,
+  "requiresCurrentNativeOwnerAndAllThreeLeaves": true,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

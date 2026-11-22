@@ -1,0 +1,82 @@
+{
+  "run": "PG42106",
+  "source": "b8ee4df46f479e11fa72bf53c213b24f756a145f",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-P016-02/2",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T04:28:24.584304+00:00",
+  "publishedPrior": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27600-trace-menu24-normal-v1/manifest.json",
+      "sha256": "b33823118b1df5f0d5aaec233e78772bae8c61a82d052cad705c0331310196ab"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27610-trace-menu24-v1/manifest.json",
+      "sha256": "5ed01138cc55806a22c267d29bd1952878899301eec90a7ea1797d06c57b8c54"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27612-trace-menu24-independent-v1/manifest.json",
+      "sha256": "8b70732c00567b8b4dbdfdbfe307098db330f8cc74218f4012f19f78f92dbe87"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41526-protocol-qa054-canonical-rules-v1/manifest.json",
+      "sha256": "8a89feee4bfa2d6b08d3514ff44ab15eaa871f409d8cf152790570e363b21edb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27612-trace-menu24-independent-v1/original-TEST-junit-jupiter.xml",
+      "sha256": "c916564bbac89698a0e75c0676c454d061866666fee33a37a7c0477de6b1151d"
+    }
+  ],
+  "spec": {
+    "path": "evidence/01_PT/015_NK-WEB-001/044_QA054メニューmarker・Trace・Controller単体仕様.md",
+    "sha256": "a9b0c234aac579db26797a294ae40cffbcae740f8bfd63020d415def1637922c"
+  },
+  "fixtureSource": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/MenuAuditContractTest.java",
+    "sha256": "e4fbe4fd8a06c6cd7ce520856dafc4e02c8ee306f4c874d77b35d499fbee3406"
+  },
+  "targetSource": {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebHttpLogKind.java",
+    "sha256": "9ce1a469cbe242ba480fb6cc474bea4842b84466ef35d5ff4cf7cfca3f16e5e2"
+  },
+  "typedTarget": {
+    "dev/codex/schubert/nk/web/logging/WebHttpLogKind.class": "9659f3fa135809eb07159c966de87d81bf6c18763fc46fbd7663b18cdd1e4a41"
+  },
+  "typedProtocolName": "dev/codex/schubert/nk/protocol/layout/semantic/LogType.class",
+  "typedProtocolBinary": "16abeb98a98e841bd4717e668ae242a03c41cfca3036536103e79171d0aac150",
+  "compile": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+    "--release",
+    "25",
+    "-g",
+    "-proc:none",
+    "-implicit:none",
+    "-encoding",
+    "UTF-8",
+    "-Xlint:all",
+    "-Werror",
+    "-cp",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41526-protocol-qa054-canonical-rules-v1/schubert-nk-protocol-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+    "-d",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42106-p01602-menu-audit-value-proof-v1/main",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebHttpLogKind.java"
+  ],
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42106-p01602-menu-audit-value-proof-v1/compile.stderr",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "contractCaseNames": [
+    "menu001EveryGateAndBoundaryUsesIndependentTruthTable()",
+    "menu002ClosedKindsHaveLiteralMetadataAndNullContracts()"
+  ],
+  "independentOracle": [
+    "truth table if GET and status 200 and root and marked owner",
+    "fixed request and menu labels"
+  ],
+  "protectsActualLiveActions": true,
+  "newNormalPT": 0,
+  "oldWholeRunReusedOnlyPart": 2,
+  "positiveWebToApiAdmitted": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

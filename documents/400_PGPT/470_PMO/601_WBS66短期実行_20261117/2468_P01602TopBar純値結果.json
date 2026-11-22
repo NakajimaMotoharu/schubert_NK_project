@@ -1,0 +1,123 @@
+{
+  "eventId": "PGPT-20261008-7942",
+  "workCategory": "CONTRACT_AUDIT",
+  "source": "b8ee4df46f479e11fa72bf53c213b24f756a145f",
+  "productionCoreMain": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+  "managementWorkIds": [
+    "WBS-P016-02/2"
+  ],
+  "planRow": {
+    "ID": "WBS-P016-02/2",
+    "元行": "WBS-P016-02/2",
+    "費目": "B",
+    "主担当": "WBS-P016-02",
+    "状態": "計画",
+    "作業": "SCR002 Menu・role別navigation／同source証拠による受入判定",
+    "残pp": "0.39",
+    "着手": "設計313・当該source・作業所有・既存成果を照合。必要な局所成果を費目Aで一度だけ作成し、受入候補のTestIDと独立期待値を確定。着手依存、当該A成果、終了依存と未解決条件を確認",
+    "終了証拠": "SCR002 Menu・role別navigation：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。 固有要求：FUN-002",
+    "補正根拠": "登録済み後段単価。追加製造はA、実経路はD、比較はE",
+    "契約HOLD": "",
+    "対象": "",
+    "範囲": "FUN-002",
+    "保存証跡": "個別criteria＋同sourceのTestID・独立期待値・実結果・451適用結果",
+    "順次": "False",
+    "配賦窓": "14",
+    "楽観pp": "0.163",
+    "慎重pp": "0.78",
+    "要求設計の版差": "PT基準仕様 NK-WEB-002、SS 313",
+    "lineNumber": 461,
+    "改訂残pp": "0.39"
+  },
+  "run": "PG42104",
+  "startEvent": "PGPT-20261008-7941",
+  "outcome": {
+    "area": "SCR002 header labels synthetic values only",
+    "existingCases": 2,
+    "supportedWebPhysical": 2,
+    "supportedProtocolPhysical": 2,
+    "newPt": 0,
+    "remaining": [
+      "app Web HTTP and user-owned screen",
+      "451"
+    ]
+  },
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42104-p01602-topbar-pure-values-proof-v1/manifest.json",
+    "sha256": "3366df065dab68d3fbc1889fdb4f9dfe2873b7290bda92d3a42bc83019ac7379"
+  },
+  "nextEvidence": {
+    "wbs": "WBS-P016-02/2",
+    "target": "MenuAuditContractTest menu001/002 fixed catalogue and first-failure semantics only"
+  },
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T04:27:34+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 16,
+      "remainingPercent": 84,
+      "resetsAt": 1795879772,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "modelRequested": "gpt-6.2-sol",
+  "modelObserved": null,
+  "reasoningRequested": "high",
+  "reasoningObserved": null,
+  "speedRequested": "standard",
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 16,
+    "remainingPercent": 84,
+    "resetsAt": 1795879772,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "0d308899dfee124bf268d905c05f72c4109a4a7826e699977228e61a36e954c5",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-22T04:27:34+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 16,
+        "remainingPercent": 84,
+        "resetsAt": 1795879772,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": 0,
+  "sameQuotaWindow": true,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-22T04:27:02.586722+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": false,
+  "quotaBefore": {
+    "usedPercent": 16,
+    "remainingPercent": 84,
+    "resetsAt": 1795879772,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null
+}
