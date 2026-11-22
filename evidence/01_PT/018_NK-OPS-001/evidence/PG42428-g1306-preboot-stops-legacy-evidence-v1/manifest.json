@@ -1,0 +1,70 @@
+{
+  "run": "PG42428",
+  "source": "ccdd56e59793a0b3aae6ac60d032bc2d210a8265",
+  "javaCore": "e753bebbc5391d060ba2d541c242d42dde413b1f",
+  "wbs": "WBS-G13.06",
+  "terminalAtUTC": "2026-11-22T08:51:08.275007+00:00",
+  "priorSelectiveProof": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30122-stop-snapshot7-unit-v1/manifest.json",
+      "sha256": "0ff8231bfccdef4e64944d08b4ec7618956249664c5213388227c2f9cada5b58"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30124-stop-snapshot7-post-v1/manifest.json",
+      "sha256": "c0b71d59eae4f34d59aa3942e5351637b621b3ba8309cb1d1b4ce31b751f3134"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41718-f03-current-batch-scope-receipt-v1/manifest.json",
+      "sha256": "9f0c50db98e8f985dfec248d922b3f662e77097af63834dba7fbb48d10d7e33c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42422-f02-current-maintenance-safety-batch-jar-v1/manifest.json",
+      "sha256": "a60bb629ace8647c58d100daa7399ab6ebabf854148dc4d1188c114a7819a548"
+    }
+  ],
+  "junit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30124-stop-snapshot7-post-v1/original-TEST-junit-jupiter.xml",
+    "sha256": "f9fd182a092d13a299e67e234cad0dc46613c1c7af98774b8afe4efa6378d327"
+  },
+  "matchedScope": {
+    "sourcesAndSettings": 9,
+    "usedSdks": 2,
+    "classes": {
+      "dev/codex/schubert/nk/batch/platform/MaintenanceStopSnapshot.class": {
+        "sha256": "24215a68cad48c13b84d6a7180eda4ae6b2aebee3e126c96cb4f31938ddbe969",
+        "jacocoClassId": "b063a77df20c096b"
+      },
+      "dev/codex/schubert/nk/batch/platform/MaintenanceUnit.class": {
+        "sha256": "650b3540616c612413d26e8f3be0c1ced71271b861fb06a1f7e00d1908176453",
+        "jacocoClassId": "57704d01048adf8b"
+      },
+      "dev/codex/schubert/nk/batch/platform/StopGateFailure.class": {
+        "sha256": "8a52a783cb7f59c6d51fa3f58ff10a0a24e2bdc194a0de8f4c5605512bba57a5",
+        "jacocoClassId": "cc83ed96bc71dbb4"
+      },
+      "dev/codex/schubert/nk/batch/platform/StopGateException.class": {
+        "sha256": "c17fa221e36f0a1d5750d2ee57701cb61ca09960f871aba434d79b1bb2ab6318",
+        "jacocoClassId": "b59b0d98cf3f2452"
+      }
+    }
+  },
+  "testIds": [
+    "PT-OPS-MSTOP001",
+    "PT-OPS-MSTOP002",
+    "PT-OPS-MSTOP003",
+    "PT-OPS-MSTOP004",
+    "PT-OPS-MSTOP005",
+    "PT-OPS-MSTOP006",
+    "PT-OPS-MSTOP007"
+  ],
+  "actualOrdinaryNew": 0,
+  "reusedScopedPureSnapshot": 7,
+  "notes": [
+    "Fixture is a terminal snapshot parser for Morning/backup, and covers missing, unknown, nonterminal and changed snapshot evidence.",
+    "Different scope: no pre-update five-operation gate, per-stage Web/API wait, Artemis journal flush, PostgreSQL readiness or update dispatch.",
+    "Native stop policy/transport and Morning dispatch remain held; no class body from held names read."
+  ],
+  "formalAcceptanceId": null,
+  "wholePreboot002": false,
+  "whole451": false
+}
