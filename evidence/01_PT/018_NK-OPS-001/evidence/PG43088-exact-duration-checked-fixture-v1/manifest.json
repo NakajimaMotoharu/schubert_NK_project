@@ -1,0 +1,251 @@
+{
+  "run": "PG43088-exact-duration-checked-fixture-v1",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T22:45:52.079409+00:00",
+  "source": "60039fc35b8fd55c80c7586e8a69b6855f389d50",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-F03/2-2-b",
+  "relatedWbs": "WBS-P018-09/2",
+  "design": "SS351 §§5,8",
+  "newDefinitions": 0,
+  "plainInMemoryRegistryTests": [
+    {
+      "name": "exDur002BothMixedExtremeOrdersKeepSmallSamplesAndFiniteSum",
+      "owner": "dev.codex.schubert.nk.api.monitoring.ExactDurationMeterRegistryTest"
+    },
+    {
+      "name": "exDur010AuxiliaryGaugeFactoryFailureRetainsCallerOwnershipAndIdentity",
+      "owner": "dev.codex.schubert.nk.api.monitoring.ExactDurationMeterRegistryTest"
+    },
+    {
+      "name": "exDur008ConstructorsRejectNullAndDurationStateNeverReadsClock",
+      "owner": "dev.codex.schubert.nk.api.monitoring.ExactDurationMeterRegistryTest"
+    },
+    {
+      "name": "exDur005EveryIncompatibleFactoryConfigurationFailsClosed",
+      "owner": "dev.codex.schubert.nk.api.monitoring.ExactDurationMeterRegistryTest"
+    },
+    {
+      "name": "exDur006GenericRegistryAcceptedOnlyWhenDetailedObservationDisabled",
+      "owner": "dev.codex.schubert.nk.api.monitoring.ExactDurationMeterRegistryTest"
+    },
+    {
+      "name": "exDur001IndependentBelowEqualAboveEveryFiniteBoundary",
+      "owner": "dev.codex.schubert.nk.api.monitoring.ExactDurationMeterRegistryTest"
+    },
+    {
+      "name": "exDur009ConcurrentUpdatesAndSnapshotsHaveConsistentIndependentIdentity",
+      "owner": "dev.codex.schubert.nk.api.monitoring.ExactDurationMeterRegistryTest"
+    },
+    {
+      "name": "exDur007UnrelatedSummaryAndCounterRemainNormalSdkOwnedMeters",
+      "owner": "dev.codex.schubert.nk.api.monitoring.ExactDurationMeterRegistryTest"
+    },
+    {
+      "name": "exDur004SnapshotIsAtomicDefensiveAndDoesNotAliasMutableBuckets",
+      "owner": "dev.codex.schubert.nk.api.monitoring.ExactDurationMeterRegistryTest"
+    },
+    {
+      "name": "exDur003RejectedScalarInputsLeaveCompleteSnapshotUnchanged",
+      "owner": "dev.codex.schubert.nk.api.monitoring.ExactDurationMeterRegistryTest"
+    }
+  ],
+  "success": 10,
+  "failure": 0,
+  "error": 0,
+  "skipped": 0,
+  "oldSourceProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43086-exact-duration-fixture-current-scope-v1/manifest.json",
+    "sha256": "e3782a2f8b95f3de764bcfecf1657a52a881555ac3eccb5adc3f1245a29f6301"
+  },
+  "sources": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry.java",
+      "sha256": "20f47112dcc5776b4f18c190adbcd782c03355815adce2e380d23cf6d9551108"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ExactDurationSupport.java",
+      "sha256": "5750f04c6fd9b6453c3412323cbffdb60dfca37be224414ab94c24a9d3efde5b"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorder.java",
+      "sha256": "8e3719d6bb520ba2dde1acd9bdf37d0a1269c4cfcc83d6d34148c0ce76633e2a"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/MqProcessingDurationMetricRecorder.java",
+      "sha256": "6446a7eb3accec378ceeeb0f4c85bfd6f4f1a39af82bce866333794dacbd986b"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/package-info.java",
+      "sha256": "8dd0a4c1cf6eca2f906c5d9aee5afc0f40c990ccfa35925ecc8b5edfb2194193"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistryTest.java",
+      "sha256": "a4f43d80101f219192c9edb1d34b5206b1677d9825ff7dbd1bd8700e99575972"
+    }
+  ],
+  "physicalMainUnchanged": true,
+  "stages": {
+    "compileMain": {
+      "actualExit": 0,
+      "terminalAtUTC": "2026-11-22T22:45:43.476193+00:00"
+    },
+    "compileFixture": {
+      "actualExit": 0,
+      "terminalAtUTC": "2026-11-22T22:45:44.282967+00:00"
+    },
+    "style": {
+      "actualExit": 0,
+      "terminalAtUTC": "2026-11-22T22:45:45.020120+00:00"
+    },
+    "pmd": {
+      "actualExit": 4,
+      "terminalAtUTC": "2026-11-22T22:45:47.099929+00:00"
+    },
+    "spotbugs": {
+      "actualExit": 0,
+      "terminalAtUTC": "2026-11-22T22:45:50.206675+00:00"
+    },
+    "junit": {
+      "actualExit": 0,
+      "terminalAtUTC": "2026-11-22T22:45:51.356969+00:00"
+    },
+    "rawCompile": {
+      "actualExit": 0,
+      "terminalAtUTC": "2026-11-22T22:45:51.975056+00:00"
+    },
+    "unfiltered": {
+      "actualExit": 0,
+      "terminalAtUTC": "2026-11-22T22:45:52.079369+00:00"
+    }
+  },
+  "coverage": {
+    "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry": {
+      "crc64": "a4717778756a9117",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 1,
+          "covered": 110
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 13
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 22
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 12
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 6
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry$ExactSummary": {
+      "crc64": "a4a50e76432ea9a2",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 10,
+          "covered": 140
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 10
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 23
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 12
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 7
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    }
+  },
+  "uncovered": [
+    "DEFICIT\tdev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry\trequireCompatible\t(Lio/micrometer/core/instrument/MeterRegistry;)V\t35\tINSTRUCTION:0:3\tBRANCH:1:1",
+    "DEFICIT\tdev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry\trequireCompatible\t(Lio/micrometer/core/instrument/MeterRegistry;)V\t37\tINSTRUCTION:1:0\tBRANCH:0:0",
+    "DEFICIT\tdev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry$ExactSummary\trecord\t(D)V\t88\tINSTRUCTION:5:3\tBRANCH:0:0",
+    "DEFICIT\tdev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry$ExactSummary\ttakeSnapshot\t()Lio/micrometer/core/instrument/distribution/HistogramSnapshot;\t114\tINSTRUCTION:5:0\tBRANCH:0:0"
+  ],
+  "supplementalMainCoverageNotCounted": 5,
+  "static": {
+    "spotbugs": 0,
+    "missingClasses": 0,
+    "checkstyle": 0,
+    "pmdScoped": [
+      {
+        "rule": "CloseResource",
+        "line": 298,
+        "applicability": "Owned executor has explicit finite finally shutdown and termination."
+      },
+      {
+        "rule": "DoNotUseThreads",
+        "line": 298,
+        "applicability": "Five local fixture workers are necessary for independent concurrency, no production launch."
+      },
+      {
+        "rule": "DoNotUseThreads",
+        "line": 330,
+        "applicability": "Owned executor is terminated in finally."
+      },
+      {
+        "rule": "DoNotUseThreads",
+        "line": 331,
+        "applicability": "Finite shutdown observes and asserts worker termination."
+      }
+    ],
+    "suppressionAdded": 0
+  },
+  "receipts": [
+    {
+      "path": "../pgpt-runs/PG379/PG43088-exact-duration-checked-fixture-v1/begin.json",
+      "sha256": "55bb7f9d40982a753ff1a8d93469ac2a6b56a2933022a6650ca585f2358ac290"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43088-exact-duration-checked-fixture-v1/terminal.json",
+      "sha256": "67d2d5c7ad21888d8319250feea5ce087da78b0db8b8cdd4ff1a841f93304f3b"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43088-exact-duration-checked-fixture-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "42d1913b88833d2b9d85e11e2f71ee670b0a98d6445dde618b9aab32e2b27f98"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43088-exact-duration-checked-fixture-v1/unit.exec",
+      "sha256": "1932505d58b09f28ea6e3b095410fbfdf2da63cac51c76e29466d987ac1cfc1d"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43088-exact-duration-checked-fixture-v1/pmd.xml",
+      "sha256": "86bfd7acd17f85ddb416073b208f3cd15e35d01e1c494c096f01ead6a03857a4"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43088-exact-duration-checked-fixture-v1/spotbugs.xml",
+      "sha256": "8b9c488bc053fd7782d4e963d7fe83de734593fbd0c57b9953288e06bd7d1997"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43088-exact-duration-checked-fixture-v1/coverage-unfiltered.tsv",
+      "sha256": "61a6b47daeb43447a273655b29ad2303ba1c2edf1435337bf440b761bfd57b77"
+    }
+  ],
+  "noActualDbJmsReporterOrNetwork": true,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "nextRequired": "Current sibling nine DB-recorder registry value fixtures recorded in a separate historical receipt. Combined exact same-source run needed for accepted DEBUG registry branch; compilers monitor cleanup deficits must remain explicit."
+}

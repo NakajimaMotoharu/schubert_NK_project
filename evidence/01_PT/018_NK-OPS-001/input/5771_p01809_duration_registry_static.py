@@ -16,6 +16,7 @@ PUBLIC = ROOT / "evidence/01_PT/018_NK-OPS-001/evidence"
 CORE = "87927ea17c1c8dbef528bc0c6882c24b1fe7c871"
 PACKAGE = "dev/codex/schubert/nk/api/monitoring"
 TEST = "ExactDurationMeterRegistryTest"
+COMPANION = "DbQueryDurationMetricRecorderTest"
 MAIN_NAMES = (
     "ExactDurationMeterRegistry", "ExactDurationSupport",
     "DbQueryDurationMetricRecorder", "MqProcessingDurationMetricRecorder", "package-info",
@@ -25,6 +26,9 @@ MAIN_CLASS_NAMES = set(MAIN_NAMES) | {
     "DbQueryDurationMetricRecorder$Query", "MqProcessingDurationMetricRecorder$Outcome",
 }
 FIXTURE_CLASS_NAMES = {TEST + name for name in ("", "$1", "$2", "$FaultRegistry", "$GenericRegistry", "$Probe")}
+COMPANION_CLASS_NAMES = {
+    COMPANION + suffix for suffix in ("", "$Registry", "$Registry$1", "$Registry$2", "$Unformattable")
+}
 
 
 def git(*args):
@@ -49,7 +53,7 @@ def verify(root, names):
     }
 
 
-def main(folder, run_tests):
+def main(folder, run_tests, companion):
     folder = folder.resolve()
     folder.mkdir(mode=0o700)
     for name in ("target/classes", "test", "owned-temp", "xml"):
@@ -69,8 +73,11 @@ def main(folder, run_tests):
     base = Path("src/schubert-nk-api/src")
     main = [base / "main/java" / PACKAGE / f"{name}.java" for name in MAIN_NAMES]
     test = base / "test/java" / PACKAGE / f"{TEST}.java"
+    fixtures = [test]
+    if companion:
+        fixtures.append(base / "test/java" / PACKAGE / f"{COMPANION}.java")
     assert all(git("show", f"{CORE}:{path}") == path.read_bytes() for path in main)
-    assert git("show", f"{head}:{test}") == test.read_bytes()
+    assert all(git("show", f"{head}:{path}") == path.read_bytes() for path in fixtures)
     for path in main:
         if str(path) in old["inputHashes"]:
             assert pin(path)["sha256"] == old["inputHashes"][str(path)]
@@ -96,13 +103,13 @@ def main(folder, run_tests):
     compile_flags = ["--release", "25", "-g", "-proc:none", "-implicit:none", "-Xlint:all", "-Werror"]
     stages = {
         "compileMain": [javac, *compile_flags, "-cp", aux, "-d", str(mains), *map(str, main)],
-        "compileFixture": [javac, *compile_flags, "-cp", fixture_cp, "-d", str(tests), str(test)],
+        "compileFixture": [javac, *compile_flags, "-cp", fixture_cp, "-d", str(tests), *map(str, fixtures)],
     }
     old_static = LOCALS / "PG43064-transfer-test-checked-declaration-v1"
     for key in ("style", "pmd", "spotbugs"):
         prior = load(old_static / "begin.json")["commands"][key]
         if key == "style":
-            stages[key] = [*prior[:-2], str(test)]
+            stages[key] = [*prior[:-2], *map(str, fixtures)]
         else:
             position = prior.index("--aux-classpath" if key == "pmd" else "-auxclasspath") + 1
             stages[key] = [str(arg).replace(str(old_static), str(folder)) for arg in prior]
@@ -110,7 +117,7 @@ def main(folder, run_tests):
             if key == "spotbugs":
                 assert stages[key][-2:] == [str(mains), str(tests)]
                 stages[key].pop(-2)
-    (folder / "current-static-sources.txt").write_text(str(test) + "\n")
+    (folder / "current-static-sources.txt").write_text("".join(f"{path}\n" for path in fixtures))
     if run_tests:
         stages["junit"] = [
             java, "-Dfile.encoding=UTF-8", "-Duser.timezone=Asia/Tokyo",
@@ -123,6 +130,8 @@ def main(folder, run_tests):
             "execute", "--disable-ansi-colors", "--fail-if-no-tests", "--reports-dir", str(folder / "xml"),
             "--select-class", PACKAGE.replace("/", ".") + "." + TEST,
         ]
+        if companion:
+            stages["junit"].extend(["--select-class", PACKAGE.replace("/", ".") + "." + COMPANION])
         (folder / "meter").mkdir()
         earlier = LOCALS / "PG43080-scenario-stream-finite-current-v1"
         coverage = load(earlier / "begin.json")["commands"]
@@ -132,8 +141,14 @@ def main(folder, run_tests):
             str(mains / PACKAGE / "ExactDurationMeterRegistry.class"),
             str(mains / PACKAGE / "ExactDurationMeterRegistry$ExactSummary.class"),
         ]
+        if companion:
+            stages["unfiltered"].extend(
+                str(mains / PACKAGE / f"{name}.class") for name in sorted(MAIN_CLASS_NAMES)
+                if name.startswith("DbQueryDurationMetricRecorder")
+            )
     start = dict(source=head, productCore=CORE, startedAtUTC=at(), main=[pin(p) for p in main],
-                 test=pin(test), protocol=pin(protocol), vendor=dependencies, stages=stages,
+                 test=pin(test), companionFixture=pin(fixtures[1]) if companion else None,
+                 protocol=pin(protocol), vendor=dependencies, stages=stages,
                  fixtureAdmitted=pin(old_path), runtimeTests=run_tests)
     (folder / "begin.json").write_text(json.dumps(start, indent=2)+"\n")
     receipts = {}
@@ -149,9 +164,10 @@ def main(folder, run_tests):
         if name == "compileMain":
             verify(mains, MAIN_CLASS_NAMES)
         if name == "compileFixture":
-            verify(tests, FIXTURE_CLASS_NAMES)
+            verify(tests, FIXTURE_CLASS_NAMES | (COMPANION_CLASS_NAMES if companion else set()))
     result = dict(actualExit=0, terminalAtUTC=at(), source=head, stages=receipts,
-                  mainPhysical=sorted(MAIN_CLASS_NAMES), fixturePhysical=sorted(FIXTURE_CLASS_NAMES))
+                  mainPhysical=sorted(MAIN_CLASS_NAMES),
+                  fixturePhysical=sorted(FIXTURE_CLASS_NAMES | (COMPANION_CLASS_NAMES if companion else set())))
     (folder / "terminal.json").write_text(json.dumps(result, indent=2)+"\n")
 
 
@@ -159,5 +175,8 @@ if __name__ == "__main__":
     options = argparse.ArgumentParser(description=__doc__)
     options.add_argument("folder", type=Path)
     options.add_argument("--changed-fixture", action="store_true")
+    options.add_argument("--companion", action="store_true")
     args = options.parse_args()
-    main(args.folder, args.changed_fixture)
+    if args.companion and not args.changed_fixture:
+        options.error("--companion requires --changed-fixture")
+    main(args.folder, args.changed_fixture, args.companion)
