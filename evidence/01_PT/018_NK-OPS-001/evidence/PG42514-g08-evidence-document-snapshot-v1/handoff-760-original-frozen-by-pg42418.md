@@ -1,0 +1,552 @@
+# 11月25日引渡しの現行差分
+
+## 2026-11-22 F02とF03の現Batch包装と型付き
+
+PG42408。現候補のBatch正規Maven包装、650物理。旧Protocol・Storage・Bootstrapの同入力包装を参照し、F02暫定4/6。PG42410でF03は許可範囲281/650、Root11・保留32・実環境・六製品全451と担当受領は未成立。PG42372旧XML3の回収は別欄で未解決。
+
+
+## 2026-11-22 Batch日次保守の外部監視判定と包装差
+
+PG42402／PG42404。現Java候補は 8c99fbd2112183808d8d973bce7b3a9b3c1cef13。外部監視値の期限PT8件、局所四指標100%とstrict NullAway0。実markerの採取、運用owner、alert配信、watch与件の現外部受領は未確認。この記録時点のBatch包装不足はPG42408で解消。実運用と六製品の条件は別途継続。旧sourceの6製品資料と現候補での欠落を分ける。全451、QA-056・Root11・保留32、C02同一InvocationとF04は継続。
+
+
+## 2026-11-22 F03ログ表示とC02タイマー明示値の引渡し追補
+
+PG42362/64/66のSCR014表示8と表示本体2物理の四指標100%・strict NullAway0を追加。入力8／mock template8は元の同候補証拠。F03の単一全体451・保留32／Root11・担当受領は不足。C02にPG42370の現timer明示値T03成功を追加し、実効Unit／service、停止後条件と担当受領は別欄保留。F02 4/6とF04環境の条件に変更なし。
+
+
+## 2026-11-22 四担当の現候補差分とSSC447原試験
+
+PG42222／PG42224／PG42226。SSC447元152件は152成功・失敗0・エラー0・skip0・未実行0。現Protocol171件（別source/run）とUI233・SS323・485・固定資源を照合した64 layoutは別にいずれも一致。F02は正規4/6とQA-056／API Web／Storage JDBC残。F03はMain Checkstyle1,027／許可Test1,134と当候補局所実証を反映し、Root11・保留32・全六製品型付き/451残。C02は十四設定と四期限を現source限定で照合、実効Unit・同一Invocation残。F04はharukaの旧証拠を参照し、現環境・所有・旧VM同等性残。担当からの受領記録は照合範囲で未確認。
+
+## 2026-11-22 F03プール責務局所受入証拠
+
+API/Web各8件、同じメモリfixture、現局所結果PG42156（製品変更なし）。PG42158へ反映。PMD15／SpotBugs12の残りは局所意図条件を記録した。正式受入・実監視・全製品品質は保留。
+
+## 2026-11-22 F03現APIメトリクス追補
+
+PG42138／PG42140／PG42142／PG42144／PG42146。API catalog14／scalar24の同候補入力と依存照合、BUG-3554～3556／YKT-2800、2件の現JVM通常実行成功。PMD6件とSpotBugs11件は原結果掲載、適用性は証拠で個別判定。既存正式判定・六製品451・担当受領は未更新。
+
+## 2026-11-22 現候補のCheckstyle scope
+
+Main 1,027/1,027、Test 1,134/1,166を同ルールで接続。保留32、NullAway/PMD等の型付き、動作および451は別欄。 [現六製品表](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG42132-f03-current-style-gate-receipt-v1/manifest.json)。
+
+## 2026-11-22 Inbox値と比較工具の現候補追補
+
+参照値の元3件と比較工具出力・数値条件を同sourceへ照合。実Inbox・CHRの受入不足を記録。 [現六製品表](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG42122-f03-inbox-values-and-local-gates-v1/manifest.json)。
+
+## 2026-11-22 Web応答・TopBar・メニュー監査と工具
+
+Web純値6件とP018-08合成工具元36件を資料へ追加。実送信および現native照合は別の受入条件。 [現六製品表](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG42110-f03-web-and-offline-native-boundaries-v1/manifest.json)。
+
+## 2026-11-22 Web metricの型付きとrelease公開値
+
+Web metric局所4件の元実証と型付き、release公開値2件、既済Row参照を受領資料へ追記。 [現六製品表](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG42100-f03-bootstrap-and-metrics-six-table-v1/manifest.json)。
+
+## 2026-11-22 File mapper現証拠の追補
+
+元24件の固定11列比較と現限定静的適用0を接続。 [現六製品表](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG42090-f03-file-mapper-six-table-v1/manifest.json)。
+
+## 2026-11-22 Entry mapperとBackup版数証拠の追補
+
+当候補にEntry mapper元24件の局所とBackup版数4件を紐付けた。全六製品451は担当判断の不足条件。 [現六製品表](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG42082-f03-entry-mapper-and-batch-version-six-table-v1/manifest.json)。
+
+## 2026-11-22 DispatcherとOutbox／Backupの追補
+
+A1-02.01の許可不足を候補へ照合し、独立のOutbox DLQとBackupProfile純値を受領資料へ追加。 [現六製品表](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG42072-f03-outbox-and-profile-six-table-v1/manifest.json)。
+
+## 2026-11-22 release現値・ログ固定診断・Scenario fixtureの追加
+
+releaseの行順1件は現物理で合格。固定診断3件とScenario16元件を当候補へ照合し、Scenario限定静的の適用0を確認。 [現六製品表](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG42064-f03-release-and-scenario-values-six-table-v1/manifest.json)。
+
+## 2026-11-22 master合成fixture是正とrelease境界
+
+master合成fixtureの整形と型付き検査を更新。release側は補助Rowの物理差を残し、現通常PTの範囲を分けた。 [現六製品表](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG42052-f03-master-statics-release-boundary-six-table-v1/manifest.json)。
+
+## 2026-11-22 SCR009現PTとmaster検証局所追補
+
+SCR009の件数矛盾1件を当物理で実行し成功、以前の8件・別Debug計測とは別保存。masterの合成20件は同入力の元runを照合。 [現六製品表](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG42044-f03-animation-master-verifier-six-table-v1/manifest.json)。
+
+## 2026-11-22 Storageと三音楽画面の局所追補
+
+Storage二純値型6件とWeb表示件数3件の元runを当候補へ対応。各元runの計測は独立。 [現六製品表](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG42036-f03-storage-music-display-six-table-v1/manifest.json)。
+
+## 2026-11-22 API純値四fixtureの追補
+
+APIの4 fixture18元件を現候補へ照合し、独立した各元runと限定静的検査を付けた。QA-056、正規JARと全体451は受領判断に残る。 [現六製品表](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG42026-f03-api-four-value-fixtures-six-table-v1/manifest.json)。
+
+## 2026-11-22 Backupの試験用版数とカタログ3 fixtureの追補
+
+動画と音楽catalogの現固定黄金と型付き検査、およびBackup版数の改変防止と固定JSON確認を追記。Backupの局所初回error1と復旧結果は両方を保持。 [現六製品表](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG42016-f03-backup-value-six-table-update-v1/manifest.json)。
+
+## 2026-11-22 F03 五・六集合の局所検査
+
+五・六集合の異常sink実試験6件成功。Bootstrap局所24 fixture／41物理、三宣言集合の元単一execの四指標を当候補へ照合。 [六製品表](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41980-f03-master-dataset-six-product-update-v1/manifest.json)、[三集合の証拠](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41982-p0190302-current-three-dataset-four-counters-v1/manifest.json)。
+
+## 2026-11-22 F03 Scenario集合の限定追補
+
+Scenario集合の試験所有側closeを現候補PT1件で確認し、Bootstrap局所を22 fixture／36物理へ更新。全六製品451の終了条件を引渡し表に記載。 [六製品表](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41964-f03-scenario-dataset-six-product-update-v1/manifest.json)。
+
+## 2026-11-22 F03の音声ID対応とAPI頁保留
+
+音声ID対応の24既試験を現候補の閉包へ照合し、局所2物理の四指標を元一execで確認。Bootstrap 21 fixture／34物理。API頁は現依存が異なり旧2件は候補未判定、Protocol三件は現有効。 [六製品表](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41952-f03-audio-map-six-quality-table-v1/manifest.json)、[現API依存差](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41940-p01401-page-identity-current-closure-delta-v1/manifest.json)。
+
+## 2026-11-22 F03の物理保留区分とAPI値の追補
+
+Batch647物理の278計測済み・53直接保留・316依存保留をJARから確認。API純値5型6件、WebのMenu/Error表示2件を現候補へ結合。対象物理の限定結果は六製品全451、QA-056、実環境証拠、判定担当と併記。 [六製品表](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41938-f03-api-five-batch-ten-six-product-v1/manifest.json)。
+
+## 2026-11-22 F03宣言master・Batch局所と比較工具の受領資料
+
+Bootstrapにmaster指紋二fixtureの型付き検査を追加。局所20 fixture／33物理。Batch純値は7条件とV022二条件を照合。比較工具は整数三件と定義結合四件を現候補へ対応。正式判定用の当source六製品451、担当の判断、実CHR・実DBの終了証拠が必要。 [F03六製品表](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41904-f03-master-copy-manifest-six-table-v1/manifest.json)、[Batch値](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41910-f03-batch-step-values-current-seven-criteria-v1/manifest.json)、[比較定義](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41908-p0200103-catalog-schema-dif-requirements-proof-v1/manifest.json)。
+
+## 2026-11-22 F03の宣言集合fixture追補
+
+Entry・File・Speaker集合の限定検査を完了。Speakerの異常2件は現在有効な通常PTを確認。三fixtureを追加してBootstrap 18 fixture／31物理。同候補の六製品451と保留対象の判定は未成立。 [六製品表](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41890-f03-copy-collections-six-table-v1/manifest.json)。
+
+## 2026-11-22 F03話者とEntry行の追補
+
+既存28件を対応。現二fixtureの局所適用0。全15 fixture結果と全451の残条件を記録。 [六製品表](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41874-f03-speaker-entry-row-six-table-v1/manifest.json)。
+
+## 2026-11-22 F03の音声linkと宣言writerを追補
+
+合成音声link1、宣言writer12が現試験で成功。媒体集合1と今回計14。writer単独の生4指標100%を明示し、補助encoderと全体451を区分。 [六製品表](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41860-f03-audio-dataset-writer-six-table-v1/manifest.json)、[独立coverage](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41858-f03-writer-current-single-exec-post-v1/manifest.json)。
+
+## 2026-11-22 F03の媒体集合と二補助fixtureを追補
+
+追加3fixtureは型付き検査の適用指摘0。媒体集合は変更method1件を実行し成功。実媒体・DB・SDK/実COPY・451は別の終了条件。 [六製品表](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41844-f03-media-batch-copy-id-six-table-v1/manifest.json)、[所有側closeの試験](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41836-f03-pure-media-batch-static-close-v1/manifest.json)。
+
+## 2026-11-22 F03の音声・媒体fixtureの追補
+
+PG41828で二fixtureの21指摘を是正し適用0。PG41822／PG41824の現候補は旧実行の37件と対応。全451・担当受領は未成立。 [六製品表](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41832-f03-audio-media-six-product-intake-v1/manifest.json)。
+
+## 2026-11-22 SCR021のcoverageとP020のL01境界
+
+F03のSCR021は生13/14、既定13/13。Java 25生成の残りを特定し、451の承認依存に記録。比較工具はL01欠落・不相関6ベクトルの元1試験を結んだ。現CHR実行の受領とは別。 [SCR021](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41816-p01621-notification-detail-raw-branch-origin-v1/manifest.json)、[CHR-L01](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41820-p0200102-l01-correlation-missing-artifact-v1/manifest.json)。
+
+## 2026-11-22 F03の六fixtureと現六製品表
+
+Bootstrapの同Core六fixture／7クラスの局所適用指摘0。ProtocolはPG41526の別の実測171試験を保持。F02/F03担当の新規受領なし。六製品同候補451と保留32／Root11の裁定が残る。 [PG41812](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41812-f03-candidate-six-products-intake-v1/manifest.json)。
+
+## 2026-11-22 F03値対応表二fixtureとP020入力metadata
+
+ファイル・エントリ二fixtureのSpotBugs適用指摘0。公開済みの独立期待、旧実行24と現バイトを照合。比較工具で既13メタデータケースを現候補へ照合。六製品の正式451、保留の適用と所有者判定は別の終了条件。 [値対応表](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41806-p0190302-file-entry-immutable-order-v1/manifest.json)、[比較metadata](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41800-p0200103-baseline-metadata-local-v1/manifest.json)。
+
+## 2026-11-22 F03の合成fixture是正を追補
+
+PG41794の二fixtureは厳格compile／書式／Checkstyle／SpotBugsの終了0、PMD生14は個別判定済み。現3クラスの命令とgoldenを保持、製品PT再実行0。PG41798に判定条件を反映。F02/F03担当からの新受領0、全451は保留。比較工具は非合格ステータス7件を別証跡に対応。 [F03の追補](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41798-f03-current-two-fixture-static-intake-v1/manifest.json)、[比較工具の証跡](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41796-p0200102-missing-result-and-failure-proof-v1/manifest.json)。
+
+## 2026-11-22 F03の合成読戻し・Batch検査サマリー追補
+
+現Core 1e4e9e64。Bootstrapの合成対応表は10件、別fixtureの読戻しは16件を現候補へ照合。Batchは同じ9クラスと既存13件から検査サマリーの6条件を対応。正式受領なし、六製品451・実移行・実DB・保留32 TestとRoot11は未成立。 [PG41786](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41786-f03-verifier-full-fixture-intake-v1/manifest.json)、[PG41774](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41774-p00402-query-contract-delta-v1/manifest.json)。
+
+## 2026-11-22 当候補のJDBCとBootstrap試験の追補
+
+[PG41760 六製品品質表](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41760-f03-two-fixture-local-quality-intake-v1/manifest.json)。JDBCの新順序ケース1件と既存7件の当バイト証拠、Bootstrapの合成manifest試験型付きを接続。実製品Main改変0。F02/F03への担当受領と全451は未確認。
+
+## 2026-11-22 JDBC例外順序とP004-05の局所追補
+
+[PG41748 当候補六製品表](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41748-jdbc-cleanup-one-exec-and-gate-v1/manifest.json)。JdbcResourceCleanupの七件を当byteで照合、新PT-JDBC-CLEANUP008の例外同一性・順序・close回数を一件追加。初回局所PMD3はBUG-3501、是正後PG41746で静的・JUnit成功。全451や主担当の正式受入とは別。F02/F03の公開資料とGitHubの確認範囲に新受領なし。
+
+## 2026-11-22 Storage／Bootstrap型付きとA1-15.03適用の追補
+
+[PG41738 短期三項目の当候補表](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41738-short-three-current-evidence-handoff-v1/manifest.json)。旧PG41384のTest 1,128/1,160はCheckstyle証拠数。同manifestの書式コマンドはMain四源・Test一源（5源）の差分。旧節の「1,128件の書式とCheckstyle」はこの区別で読む。旧証票自体は保全した。Bootstrapの単独fixture書式初回失敗はBUG-3500で管理し、同値補正後の局所静的をPG41736で確認。F02/F03とP004-03の担当受領・正式判定は未確認。
+
+## 2026-11-22 Batchの現候補局所証跡
+
+[PG41724 六製品表のBatch追補](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41724-f03-batch-six-module-handoff-v1/manifest.json)。許可済み物理278はJAR・実使用依存・既往の検査結果が一致。未測定369、26個の保留試験、Root11を維持。集計値は現行の限定1件成功、旧の合計20件を独立同一入力で再利用。P017の現局所2行とF03品質結果を分け、受領や正式判定は未確認。
+
+六製品の現行差分表は [PG41712](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41712-f03-six-module-additional-web-scope-v1/manifest.json)。局所の新試験5源・12 IDの追補と残条件を同じ表で確認できる。
+
+## 2026-11-22 Web局所資源の追補
+
+PG41702はSCR003の元8件を同値inputで再結合。PG41704/08はSCR090・SCR015の新5件を実HTMLで確認、G13 PG41710の5行に仕様・source・実行・Module表を記録した。11月25日引渡しで使用できる局所証拠。F02の正規包装・QA-056、F03の六製品全体終端と保留32・Root11、実環境・正式451は対象別に不足として維持する。
+
+## 2026-11-22 Scenario階層の独立資源PT
+
+実Game・Route・Fileの3テンプレートを対象に新定義7件が成功。現候補のJava通常PTは既存60を含め67件（延べ70）。今回確認した再利用59のJavaとNode30は新規実行に加算しない。先行六製品の役割別保留、QA-056、Root11・保留32と全451、実環境の受領は継続。[PG41696](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41696-g08-scenario-navigation-local-pt-proof-v1/manifest.json)。
+
+## 2026-11-22 Webの同候補通常PTを追加
+
+現候補で通知明細・アニメ一覧・質問入力・利用者変更／作成・受付表示と資源の7群、合計60件が成功。使用classと依存の一致を確認した元Java39件、元Node30件は独立の再利用証拠として記録した。通知明細の生分岐13/14と受付表示の生method25/27を残しており、F03全6製品、QA-056、実環境、451の成立と受領は未確認。[増分の成果と範囲](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41672-g08-scr019-resource-and-value-candidate-join-v1/manifest.json)。
+
+## 2026-11-22 API局所型付きと六製品の終了依存
+
+PG41632のAPI純値5 Main・package注釈3・8物理で、現候補のNullAway付きコンパイル／SpotBugs／PMDは終了0。回答結果・質問command metadataの旧値の証票は当2物理に一致。PG41636は現Web44とAPI局所5を六製品1,027 Mainの表に反映し、保留32入力、Root11と受領を既存数で維持。API／Webの全包装、同sourceの全451、QA-056四型と実経路の認証が正式判定の残条件。[現候補の六製品照合](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41636-f03-six-current-acceptance-precheck-v1/manifest.json)。
+
+## 2026-11-22 F03の通知・質問・作品表示と管理フォーム
+
+候補Core `1e4e9e64830b552727043f3cb8b9435b28cba472`。PG41608・41612・41614・41616・41618の合算で新たに15 Main、既報のWeb局所範囲29から44。新しい5群は全てNullAway付きコンパイル、SpotBugs、PMDが終了0。viewパッケージ28/28、formパッケージ16/16には原証票を対応付けた。PG41504/41520は旧Coreのコンパイルで、現ソース入力のハッシュ一致を確認した範囲に使う。PG41620の元試験ソース4件は現候補の限定classpathでjavac終了0、物理7。JUnit実行と実測coverage計上は0。
+
+| 製品 | 今回の結果 | 引渡しに残る条件・担当 |
+|---|---|---|
+| Web | 上記15 Mainと元4試験ソースの型照合 | 32入力の保留とは別に四NQ表示の動的、実Browser・HTTP、包装境界、同候補全体品質。アプリ・環境・品質担当 |
+| API | 今回の追加実行なし、既存PG41574範囲を参照 | QA-056四型の判断、API正規JARと実DB／JMS。利用者・アプリ・環境担当 |
+| Protocol | PG41526の176物理を限定compileの入力に使用 | 既存の全169 Mainの静的・PT証拠を六製品の同候補へ接続。品質担当 |
+| Batch | 既存範囲を参照 | 保留26入力と元任務の終了条件。品質・環境担当 |
+| Storage | 既存範囲を参照 | 保留2入力・JDBC責務・実FileStore。品質・環境担当 |
+| Bootstrap | 既存範囲を参照 | 独立のRoot11を元証拠と対応し、重複と適用を確定。品質・環境担当 |
+
+PG27942／27964との照合で二ViewModelはソース一致。準備証票のうち現NotificationControllerには差がある。PG24500との物理比較では通知明細の一クラスと共同依存7ソースが異なるため、投影の旧22件は表示ラベル・件数・順序等の独立期待値として参照した。通知のテンプレートは試験Java・対象resource・SDK15の一致を確認し、既存26件（通知直接11件）をresource証拠として再使用できる。先行の現66件・再利用24件と集計を混ぜない。四NQ動的、保留32、Root11は継続。受領未確認。F03判定IDなし。[PG41608](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41608-f03-notification-list-detail-typed-v1/design-oracle-comparison.json) [PG41610](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41610-f03-notification-template-proof-v1/manifest.json) [PG41620](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41620-f03-original-pure-web-test-link-v1/six-product-disposition.json)
+
+## 2026-11-22 Page・検索・ログの現候補試験追補
+
+現Pageの8件、検索・ログの型付きMock各8件、検索投影16件、二フォーム・公開列挙・wire26件を保存。F03の受入は引き続き六製品・保留32／Root11・451が必要。実画面、実DB／JMSは環境担当。受領未確認。[1985](1985_G08検索頁入力試験追跡結果.json)。
+
+## 2026-11-22 六製品の判定準備
+
+PG41574は現Coreの六製品Main 1,027を一覧化した。Protocol 169 Mainの現品質と、Web表示・入力29 Mainの現範囲を確定。保留32は30 Test源と2 fixture。Root11は重複未確認の別範囲。11月25日引渡し時の四担当不足は[1960](1960_F03六module判定資料結果.json)。現報告の正式F02/F03のID、受領、全451はいずれも未成立。
+
+## 2026-11-22 追補 F03の現ProtocolとScenario
+
+現Protocol全169 Main／176物理のPMD原終了4・生3、個別の適用判断は適用0・未分類0。[1939–1940](1940_F03現Protocol全型付きPMD結果.json)。Scenario表示・入力の七Main／16物理でNullAway、SpotBugs、PMD終了0。[1941–1944](1944_F03現Scenario静的結果.json)。いずれも候補Core `1e4e9e64830b552727043f3cb8b9435b28cba472`。実API/Web全体・F03六製品の判定と担当受領は確認待ち。
+
+## 2026-11-22 追補 現Coreの候補更新と同候補の証拠
+
+現製品Core `1e4e9e64830b552727043f3cb8b9435b28cba472`。SSC447の元152/152は引き続き元sourceと実行票で照合。現Protocol 171/171は別の現source。F02の現4実JARは[PG41528](1930_F02新Protocol包装接続結果.json)と[QA-056の四型](1936_QA056現候補metadata結果.json)、F03の現入力と局所品質は[PG41530](1932_F03新Core構成差分結果.json)で追跡する。正式16/190、中核0/5・指定0/12、受領未確認。
+
+## 2026-11-22 再開後の引渡し差分
+
+候補Core 2611e1acbd57955d591d52e5348999ea293e068d。SSC447元152件は成功152、失敗・エラー・skip・未実行各0。現Protocol171件と証跡を分け、再演なし。
+
+| 担当 | 受渡し資料に追加した現候補の証拠 | 受渡し時に残す不足 |
+|---|---|---|
+| F02 | 4実JARとroot POM・Wrapperの現入力、SYS13の現正本と証拠の対応。 [照合](1876_F02ba同候補照合結果.json) [対応訂正](1878_F02ba要件証拠対応追記訂正.json) [親POM](1904_F02四包装親POM確認.json) | QA-056の四型、API/Webの正規JAR、Storage JDBCの責務境界、実環境と451 |
+| F03 | Main書式1027、TestのCheckstyle1128/1160、保留API4・Batch26・Storage2。Music局所30 Main・36物理のNullAwayとSpotBugsは終了0。PMD生7は個別判定。 [範囲](1879_F0322a保留32適用照合結果.json) [NullAway](1905_F03Music現型付き結果.json) [SpotBugs](1907_F03MusicSpotBugs結果.json) [PMD](1909_F03MusicPMD適用判定結果.json) | 同一候補の六製品全体、32テスト・Root11の適用、451。MockServletは実HTTPの受入条件を満たさない |
+| C02 | 既存のUnit資料と保存済み実効観測要件 | 現環境の対象Unit、所有とInvocationの正規証跡 |
+| F04 | 既存の比較・容量確認資料。差分範囲の試験と正式品証を区別 | 現環境の所有と比較器の実FileStore、担当受領 |
+
+資料はリポジトリに保存し、四担当の受領は未確認。11月25日23:29 JSTに受領と不足条件を確認する。12月2日23:29 JSTのF02・F03判定では、最終証拠または具体的な不足条件を残す。12月6日18:00 JSTは改訂計画の期限内16.650pp・指定2/12見込みと、元の最低条件（中核5/5・固有10/11以上・有効27/190以上）を別々に照合する。本日の正式値は16/190、指定0/12、重点0/5。P002-01の正式復帰は未成立。
+
+## 2026-11-21 SSC447の152件と現Protocolの照合
+
+元SSC447は152/152成功、失敗・エラー・skip・未実行各0。別の現Protocol実行は171/171成功、同各0。実行票をsuite名とcase名で照合し、元152件すべてが現171件にもあり、現行にのみ19件。二つの実行結果は別々に保持する。現Protocolの176物理に対して生の行・メソッド・クラス・分岐・命令の未到達が各0。対象モジュールと親POMは現候補と一致。全6製品の品質、Roots保留、実経路・451・担当受領は未成立。[PG41440](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41440-f03-ssc447-and-current-protocol-cases-v1/manifest.json)。
+
+## 2026-11-21 現Core Outbox差分
+
+現製品Core `2611e1acbd57955d591d52e5348999ea293e068d`。Outbox Main二・Test二の現書式とCheckstyleを既成功証拠の完全一致で対応。現F03はMain 1,027/1,027、Test 1,128/1,160。Outbox閉包八物理の型付き、当二型の四指標、通常10件は局所確認。実全六、保留32試験、451、担当受領は継続。[PG41408](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41408-f03-current-outbox-four-inputs-v1/manifest.json)。
+
+## 2026-11-21 現候補の引渡し要点
+
+製品Core `007b96d8be7c10e265b5a12d01231013ae9e0acd`。SSC447元sourceは `e4794ddf45487268883334d0f8773d89bd47dcba`。元152件は成功152、失敗・エラー・skip・未実行は各0。元未到達は行4、メソッド4、クラス0、分岐58、命令85。歴史結果として保持。[40590](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40590-short-handoff-exact-current-evidence-v1/manifest.json)
+
+| 担当 | 現候補で照合済み | 次に必要な証拠 |
+|---|---|---|
+| F02 | 実包装4/6、Protocol 176物理で5規則0。[41322](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41322-f02-exact-four-package-lineage-v1/manifest.json) [41382](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41382-f02-current-protocol-image-xml-file-v1/manifest.json) | API/Webの正規包装、StorageのJDBC責務移管後の全関連経路、六実JARの依存規則 |
+| F03 | Main 1027/1027、Test 1128/1160の書式とCheckstyle。保留Test32。四製品482 Mainの厳格compiler。[41384](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41384-f03-current-api-web-source-style-v1/manifest.json) [41330](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41330-f03-current-nullaway-lineage-v1/manifest.json) | 六製品の全必要型付き結果と未分類・欠落の処理、Root11等のHOLD、該当451 |
+| C02 | Unit設定テキストの元確認。現環境の実効観測0。[40590](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40590-short-handoff-exact-current-evidence-v1/manifest.json) | 対象・現在所有を認証したUnit、実効設定、停止後条件の同候補receipt |
+| F04 | 比較工具218件・包装17物理を元工具sourceで照合。実FileStoreは現工具で未実行。harukaは元試行時に入場成立せず転送0。[41346](../../../../evidence/01_PT/020_NK-CHR-001/evidence/PG41346-p020-current-218-independent-v1/manifest.json) [41278](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41278-p020-current-217-owner-v1/manifest.json) | 現所有と入場条件の成立、実FileStore、実Current/NK互換、必要環境後条件 |
+
+| F03の製品 | Main | 個別結果 | 残条件 |
+|---|---:|---|---|
+| Protocol | 169 | 実包装176、NullAway/Werror完了。現F02は5規則0。 | 全六の実artifact依存検査・正式451 |
+| Storage | 25 | 実包装79、NullAway/Werror完了。 | java.sql標準1辺・関連caller終端 |
+| Bootstrap | 88 | 実包装201、NullAway/Werror完了。 | native連携1物理の型付き証拠 |
+| Batch | 200 | 実包装647、NullAway/Werror完了。許可型付き278/647。 | 未照合369物理、未解決の実所有・同期条件 |
+| API | 283 | 現行全Mainの書式・Checkstyle。AuthContextCodec局所の型付き完了。 | 実包装、全Main NullAway及び全物理型付き。QA-056を維持 |
+| Web | 262 | 現行全Mainの書式・Checkstyle。Mediaと三codecの独立局所結果。 | 実包装、全Main NullAway及び全物理型付き。QA-056を維持 |
+
+資料を所定の引渡し先文書に登録。受領確認は未確認。正式受入加算0。
+
+## 2026-11-21 08:36 JST　F03厳格compiler来歴
+
+Protocol 169／Storage 25／Bootstrap 88／Batch 200 Mainで、同一現入力のNullAway ERRORとWerrorの元実compile終了を確認。WebのMedia 5＋package境界の部分は別記。API/Web全体、全型付き・451、担当受領は継続。 [証拠](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41330-f03-current-nullaway-lineage-v1/manifest.json)。
+
+## 2026-11-21 08:33 JST　F03現行書式検査の対象分母
+
+Main 1,027/1,027、Test 1,128/1,160。保留32。差分13件を元の成功終端と結合。現型付き全六・451と担当受領を継続。 [証拠](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41328-f03-current-six-source-style-lineage-v1/manifest.json)。
+
+## 2026-11-21 08:25 JST　F02現行四包装と依存境界
+
+PG41322。当Coreの実JAR四本を元ビルド・実archive・入力・依存と照合。Batch実compileはStorage・Bootstrap・Batch、Protocol本体を入力としない。API/Web未包装、Batch型付き未照合369、Bootstrap native連携1、Storageの標準JDBC1と全451は未成立。担当受領は未確認。 [証拠](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41322-f02-exact-four-package-lineage-v1/manifest.json)。
+
+## 2026-11-21 08:20 JST　Bootstrap非秘密設定の引渡し差分
+
+PG41320。Bootstrap許可差分の生PMD51は全51分類、未分類0。native連携1は未解析。元14試験は依拠証跡として保持し、現製品runへ加算なし。F03六製品・451と担当受領は継続。 [証拠](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41320-f03-bootstrap-config-pmd-join-v1/manifest.json)。
+
+## 2026-11-21 08:16 JST　Bootstrap静的の引渡し差分
+
+現201物理の許可差分13でSpotBugs 0。生PMD51の47を個別分類、残4は非秘密設定、native連携1物理は未解析。F03全六・実環境・451と担当受領を継続。 [証拠](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41318-f03-bootstrap-explicit-pmd-flows-v1/manifest.json)。
+
+## 2026-11-21 08:07 JST　Storage静的の引渡し差分
+
+PG41310/312で現Storage25 Main／79物理を照合。74は元の同byte、変更5は型付き静的0、旧PMD18は未変更ResourceScopeの個別適用性。全F03、正式451、実Storage、担当受領を継続。 [証拠](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41312-f03-storage-static-independent-v1/manifest.json)。
+
+## 2026-11-21 07:55 JST　Protocol修正後のF02／F03引渡し差分
+
+現Core 62b239d4da。PG41302/304 Protocol通常171/39、生176物理、実行162 CRC、四指標未到達0。PG41306同JAR依存五規則0、変更二Checkstyle/PMD0。F02包装4/6、実全六・451、C02／F04の実条件・担当受領は未成立。 [現証拠](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41304-protocol-numeric-physical-independent-v1/manifest.json)。
+
+## 2026-11-21 07:27 JST　Mediaと現比較の引渡し差分
+
+PG41284で元4行と現証拠を再接続。F03は現Media 13物理とNullAway0、既静的3の適用／未分類0。F04は比較工具現Maven包装17物理、ローカル216/20、12CRCを確認し、haruka事前条件不成立による実FileStore未実行を分離。F02包装4/6、C02実Unit、実CHR、担当の受領確認と全451は引き続き必要。 [PG41284](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41284-g08-media-compare-current-v1/manifest.json)。
+
+## 2026-11-21 06:50 JST　四担当向け現Range・F03／F02の追加証票
+
+PG41254は当5元作業・6証拠の対応。現Test1,160／Checkstyle対象確認1,128、保留32。F02包装4/6、変更後工具の型付き実Protocol1/6。C02実Unit、F04の実Current/NK、担当受領、全451は継続。 [PG41254](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41254-g08-current-short-and-independent-trace-v1/manifest.json)。
+
+## 2026-11-21 06:25 JST　F03新User・JDBC test source
+
+現Test1,159／Checkstyle1,127、保留32。User型付き・生PMD0。JDBC fixtureの指摘2を是正し再資格3、対象SpotBugs・生PMD0。全六F03・451・担当受領は継続。 [結果](../../../../evidence/01_PT/018_NK-OPS-001/5632_F03新User試験・JDBC循環fixture静的結果.md)。
+
+## 2026-11-21 06:16 JST　現F02新規則の正規Protocol物理
+
+現工具で正規Protocol JAR176物理、6,203依存／3,953呼出・5規則の違反各0。今回の型付き実JARは1/6。F02包装4/6と区別する。API/Web・Storage既JDBC辺、451と担当受領は継続。 [PG41224](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41224-f02-current-protocol-archive-rule-v1/manifest.json)。
+
+## 2026-11-21 06:13 JST　F02の直接archive依存検査
+
+修正後35合成判断、期待違反19。次は新規則の実Protocol JARで必要な同scope再資格。API/Web、Storage旧JDBC辺、全451、担当受領は継続。 [独立結果](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41222-f02-archive-owner-independent-v1/manifest.json)。
+
+## 2026-11-21 06:08 JST　F02 SSC-461 SQL例外の当adapter
+
+SYS-005の移管後契約を3新PTで確認。BFS、同depthの辺順、循環時に同じSQL例外を一回だけ訪問。現Test1,158中Checkstyle確認1,126、保留32。元52上位・Storage直接3・旧JDBC辺、六JAR・451・担当受領は継続。 [PG41216](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41216-f02-ssc461-jdbc-order-fixed-independent-v1/manifest.json)。
+
+## 2026-11-21 06:00 JST　F03現Range NullAway／生PMD
+
+元Rootのcompiler構成で当Mainを解析、製品byte5/5はPG41204同一。PMDは変更Main・新Testの指摘・抑制・処理各0。全Test1,157・確認1,125・保留32、全六・451及び担当受領は継続。 [PG41208](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41208-f03-range-current-nullaway-pmd-v1/manifest.json)。
+
+## 2026-11-21 05:56 JST　F03現Range修正差分
+
+現Main1,027（変更1の当書式・Checkstyle各0）、Test1,157中1,125をCheckstyleへ対応、保留32。Main 5／新Test 1物理SpotBugs指摘・欠落・処理各0。全六型付き・NullAway等、451と担当受領は継続。 [独立証拠](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41206-range-unit-ascii-independent-v1/manifest.json)。
+
+## 2026-11-21 05:47 JST　F03新局所Testの型付き解析
+
+Media fixtureを修正し、対象の六Test source・13物理のSpotBugs指摘・欠落・処理各0。現Test 1,156／Checkstyle確認1,124、保留32。全六製品の型付き静的と451、担当受領は継続。 [PG41200](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41200-f03-media-port-fixture-typed-green-v1/manifest.json)。
+
+## 2026-11-21 05:40 JST　F03のMedia書込みTest差分
+
+現MediaRangePortTestはPG41196で書式・Checkstyle各0。前PG41194のbyteを現Testへ差し替え。Test総数1,156、確認1,124、保留32。 [PG41196](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41196-media-committed-write-error-v1/manifest.json)。
+
+## 2026-11-21 05:37 JST　F03の配信port Test差分
+
+既Checkstyle済みMediaRangePortTestの新byteをPG41194の書式・Checkstyle各0で差し替え。Test総数1,156、確認1,124、保留32。 [PG41194](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41194-media-range-error-releases-permit-v1/manifest.json)。
+
+## 2026-11-21 05:34 JST　F03のRange境界Test追補
+
+現Main 1,027、新Range Testを含む現Test 1,156中1,124のCheckstyleを対応、保留32。追加書式・Checkstyle各0。全六型付き・451・担当受領は継続。 [新規Test](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41190-range-long-cap-neighbors-v1/manifest.json)。
+
+## 2026-11-21 05:29 JST　F03の曲一覧Test追補
+
+現Main 1,027。前PG41184のTest 1,154中1,122に、PG41188の新規曲一覧Testの書式・Checkstyle各0を追加。現Test 1,155中1,123、保留32。全型付き六製品・451・担当受領は継続。 [書式分母](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41184-f03-static-three-view-test-delta-v1/manifest.json) [新規Test](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41188-scr013-music-track-overclaimed-count-v1/manifest.json)。
+
+## 2026-11-21 05:25 JST　F03の三画面Test追補
+
+当Main 1,027。三画面Testを追加し、現Test1,154中1,122のCheckstyleを対応。保留32、当全六型付きと451、担当受領は継続。 [PG41184](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41184-f03-static-three-view-test-delta-v1/manifest.json)。
+
+## 2026-11-21 04:25 JST　F02当Batchの依存境界
+
+許可278物理で4,377辺、他製品Bootstrap39・Storage163。内部未解決と禁止製品辺は0。F02包装4/6、API・Web実JAR、Storage既JDBC辺、全451は残る。 [物理ownerの根拠](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41148-f02-current-batch-admitted-owner-directions-v1/manifest.json)。
+
+## 2026-11-21 04:20 JST　F03現Batchの型付き差分
+
+影響78物理はSpotBugs新72と同候補の既警報6で照合。元同一199と新規状態物理1を含む278/647の対応根拠を保持。残369物理、六製品通し、PMD・451の扱いは継続。受領未確認。 [独立照合](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41144-f03-current-batch-typed-independent-v1/manifest.json)。
+
+## 2026-11-21 04:08 JST　F04現比較工具の実容量再資格
+
+現GateCliと合成FileStoreをharuka所有専用領域の同一runで215/21成功。boot・owner・容量を転送前に再確認し、単一execと17物理／12CRCで生指標を確認。実CHR、C02の実効Unit、担当受領は未確認。 [独立結果](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41128-p020-typed-inventory-filestore-independent-v1/manifest.json)。
+
+## 2026-11-21 03:39 JST　F03現源書式証票
+
+現六製品のMain 1,027の書式・Checkstyleと許可されたTest 1,119／1,151のCheckstyleを同候補へ対応。差分6の実入力・真正終了を再確認し、解析や試験は再起動しなかった。保留32 Test、型付き検査と全451、担当受領は継続。[現証跡](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41102-f03-six-style-current-alert-delta-v1/manifest.json)。
+
+## 2026-11-21 03:16 JST　現在の担当差分
+
+現Core `559f5b5945e82374e0843dcfae11a8d07faef1ea`。F02の現正規Batchと旧入力不変三artifactで4/6。PG41066のProtocol Path境界を同正規JARで確認。F03の警報は84/11、局所七物理全生指標と型付き静的を確認。C02実効Unit、F04本物のCHR環境・元四担当受領、QA-056等の開始条件は未確定。
+
+[Batch組立](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41074-f02-current-alert-batch-maven-v1/manifest.json) [警報独立結果](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41072-f03-alert-owner-state-independent-v1/manifest.json)。
+
+直接OSの確認済み範囲、現当環境で未実証の項目、旧VM固有の来歴を10件に分けた。個別の次証拠と担当は[環境要件対応表](1509_F04直接OSと旧VMの環境要件対応.md)を参照。
+
+## 2026-11-21 02:32 JST　担当別の現行証拠と先に必要な確認
+
+製品Core `2b16a8ed20778fe5896099cb4798cfd1ff96b176`、11月25日23:29 JST用。四担当が参照できる証票。本資料の受領者・受領時刻は未確認。
+
+| 担当 | 現在確認できること | 次に必要な証拠 |
+| --- | --- | --- |
+| F02 | 現4/6製品。比較工具の別JAR全17物理は測定と同じ。 | QA-056の生成・静的範囲、API/Web実組立、SSC-461旧StorageのJDBC辺、現runtimeと451。 |
+| F03 | SSC447元152件の結果、現1,027 Mainの書式、選択Test 1,119のCheckstyle、当Web監視とAPI局所の型付き結果。 | 保留32 Test、QA-056対象を含む型付きの当全六、Root11等の適用範囲、未達生指標と451。 |
+| C02 | 現14設定の同一バイトとAPI/Webの宣言期限。 | 現boot／所有下の実効値、同一Invocation終端、Caddy→Web／Inspectorと停止後条件。 |
+| F04 | 現harukaの専用領域・所有・空き容量、比較工具の実FileStore 1件を含む単一214件／21 suite。 | 実ブラウザ、Current/NK、業務の実サービス／DB／nativeには別の開始根拠が必要。 |
+
+SSC447は元e4794ddfのPG36620。成功152、失敗0、エラー0、skip 0、未実行0。Protocol生はline4／method4／branch58／instruction85が未到達。現Coreの全試験へ加算しない。P004-03の現純DAOは九件成功、実原本と実DB条件は継続。
+
+[担当別の証跡とSHA-256](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41044-wbs66-nov25-four-role-current-delta-v1/manifest.json)。
+
+## 2026-11-21 02:24 JST　比較三入口の重複項目拒否と現FileStore
+
+現工具 `2a2d1922a38780c3ef95df0dc7c057f916a870ca` の修正後、harukaのFileStoreを含む214/21件と同一execの12 CRC／17物理、四生指標を確認。F04通常作業の当boot・owner・領域と真正終端を更新。担当受領、実Current/NK／C02実効値、六製品／451は別。 [現実行](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41036-p020-current-reader3-independent-v1/manifest.json)。
+
+## 2026-11-21 02時台 比較工具の横展開後
+
+最新工具は `ece4b36e4e77c2817b766ed874ae9d7b978d2648`。haruka実FileStoreを含む214/21件に失敗等0、12物理CRCと四生指標全到達。元212工具は履歴保持。F04の実環境試験の証拠を更新。実Current/NK／F02六製品・F03・451と各担当受領は継続。 [最新現工具](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41016-p020-current-214-independent-v1/manifest.json) [現Maven包装・実行17class一致](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41018-f02-current-214-comparison-maven-package-v1/manifest.json)
+
+## 2026-11-21 01時台 現比較工具の実FileStore
+
+F04・P020の比較工具 `3f9fd515747e00268a03f82939c1497cbdbdeed8` で、現haruka boot／作業所有／容量の取得後、一回の新runで212/21 suite、物理17・12 CRC、全生counterに未到達なし。実CHRとIT/STの受入、全六451、担当受領は別。 [現実行と独立確認](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG41006-p020-current-212-independent-v1/manifest.json)
+
+## 2026-11-21 01:36 JST 現Batch製造の反映
+
+現Core `af6db98d62e83ed4dd19d623034373365027dce3`。F02はBatchを正規Mavenで再組立、監視mode三物理が通常PT・NullAway対象と同一。Protocol／Storage／Bootstrapは変更なしの元三artifact。API／Web、Storage旧JDBC辺、実runtime、451は残る。F03の差分一MainはPG40986のFormatterとCheckstyle。C02／F04の実証・各担当の受領は前記どおり。 [現包装](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40988-f02-current-mode-batch-package-v1/manifest.json)
+
+## 2026-11-21 01時台の追補
+
+製品Core `5372bf018acf0efa6dfe451467bf18b2e3fc0780`。F03は六製品Main 1,027の全書式・Checkstyle、Test 1,151中許可済み1,119のCheckstyleを当候補へ照合。Test 32は保留。型付き全六、全451、C02の実効値とF04の実環境、担当受領は引き続き未確定。 [同一バイト照合](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40982-f03-six-current-style-after-login-storage-v3/manifest.json)
+
+## 2026-11-21 00時台の現候補と残条件
+
+製品Core `62142212de26387dd718026a1c839fbb1dc6b2a9`。設計正本 `63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a`。引渡し期限は11月25日23:29 JST。担当受領は未確認。
+
+| 製品モジュール | Main Java | F02 ビルド根拠 | F03 残条件 |
+|---|---:|---|---|
+| protocol | 169 | 元Maven組立の対象入力は現候補と一致。 [PG40802](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40802-f02-current-four-package-v1/manifest.json) | 現Main同一の既170件・176物理を参照。六モジュール同runの451が残る。 |
+| storage | 25 | 元Maven組立の対象入力は現候補と一致。 [PG40802](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40802-f02-current-four-package-v1/manifest.json) | 全現要件の同run、SSC-461の旧JDBC直接辺と実所有が残る。 |
+| bootstrap | 88 | 元Maven組立の対象入力は現候補と一致。 [PG40802](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40802-f02-current-four-package-v1/manifest.json) | 残る型付き品質と実構成／起動所有の同source証拠が必要。 |
+| batch | 200 | 元Maven組立の対象入力は現候補と一致。 [PG40886](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40886-f02-batch-standard-sdk-package-v1/manifest.json) | 現監視SDKなどの局所証拠を参照。保留範囲と六モジュール同runの451が残る。 |
+| api | 283 | 当候補の製品JARが必要。 | 局所23 Main／30物理のNullAway、当一変更型の生四指標100%、SpotBugs終了0、PMD原2の判定。全API、QA-056と451が残る。 [PG40958](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40958-f03-api-metric-exchange-owner-v2/manifest.json) [PG40960](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40960-f03-current-api-exchange-static-v1/manifest.json) |
+| web | 262 | 当候補の製品JARが必要。 | 局所監視SDK証拠を参照。全Web、QA-056、Root11、実経路と451が残る。 |
+
+比較ツールはJava25／Maven3.9.12で17物理を収録し終了0。従前の工具211件の成功は元runに保持。実CHRと比較ツールの配備資格は継続。 [比較ツールpackage](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40952-f02-current-characterization-package-v3/manifest.json) [元工具211](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40708-p020-current-211-independent-v1/manifest.json)
+
+C02は現実効Unit、同boot／Invocationの起動・停止と後条件が必要。14設定と元の実効値来歴を添付。 [14設定](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40094-c02-current-unit-text-order-v1/manifest.json) [起動・停止設定の来歴](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40184-c02-api-web-timeout-existing-proof-join-v1/manifest.json)
+
+F04はharukaの元FileStore同runを添付。次の許可済み操作の現boot、owner、容量、真正終端で再認証する。 [PG40708](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40708-p020-current-211-independent-v1/manifest.json)
+
+SSC447の元152件は成功152、失敗0、エラー0、skip 0、未実行0。元sourceは `e4794ddf45487268883334d0f8773d89bd47dcba`。元Protocol生未到達line4、method4、class0、branch58、instruction85を保持。 [元152の判定](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG36628-ssc447-current152-quality-return-v1/manifest.json)
+
+正式受入17/190、重点0/5、短期0/12、正式PT 1,964件／53領域。工数完成率は未較正。
+
+## 2026-11-20 22時台の現候補
+
+製品Coreは `9ee35bb454768ef48b4a62aca61e3a4c6ad2e1a8`。資料期限は11月25日23:29 JST。以下を担当別の現行参照とし、受領者・受領日時は未確認として記録する。
+
+| 担当 | 現在参照できる証拠 | 残る条件 |
+|---|---|---|
+| F02 | 当BatchのMaven組立成功。変更した監視SDKのclassは局所PT、現型付き静的、実JARでバイト一致。Protocol／Storage／Bootstrapは入力差0の保存済みartifact。 [PG40886](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40886-f02-batch-standard-sdk-package-v1/manifest.json) | 当候補API／Web実artifact、QA-056範囲、全六型付き依存、SSC-461 Storage旧JDBC一辺、13要求の実runtime、451。 |
+| F03 | Main 1,027の書式来歴。Test 1,151中1,119のCheckstyle証拠。更新した監視SDK三型はMain 20／物理27の許可閉包でMaven NullAway、SpotBugs、PMDの元終了0。 [PG40888](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40888-f03-current-style-lineage-v1/manifest.json) [PG40882](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40882-f03-standard-sdk-fixed-receipt-v1/manifest.json) | 保留Test 32、QA-056／057、全六の型付き検査、Root11、警報snapshotの生成例外処理の判断、当source全451。 |
+| C02 | 14テンプレートと実効値の別証拠を参照。今回の製品差分は監視三クラス。 [PG40094](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40094-c02-current-unit-text-order-v1/manifest.json) [PG40184](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40184-c02-api-web-timeout-existing-proof-join-v1/manifest.json) | 現bootのUnit、所有、同Invocationでの真正終端、Caddy／Inspector、停止後条件。 |
+| F04 | harukaの既所有・専有作業領域・FileStore証跡を歴史記録として参照。 [PG40398](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40398-p020-single-session-filestore-independent-v1/manifest.json) | 次の許可済み試験における現在所有、対象、容量、実行終端。実UnitやDBは別条件。 |
+
+SSC447は元Core `e4794ddf45487268883334d0f8773d89bd47dcba` のPG36620で成功152、失敗0、エラー0、skip 0、未実行0。元Protocolの生未到達はline 4、method 4、class 0、branch 58、instruction 85。正式17/190、重点0/5、短期0/12。 [PG36628](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG36628-ssc447-current152-quality-return-v1/manifest.json)
+
+## 2026-11-20 現候補の引渡し
+
+製品Core `cdb649a5f054bc2ceed72ef57e55605f14a590d1`、設計正本 `63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a`。期限 11月25日23:29 JST。以下を現時点の担当別入口とし、引用した各旧試験のsourceと範囲を維持する。受領者・日時の確認待ち。
+
+| 担当 | 引渡し証拠 | 受入までに必要な証拠 |
+|---|---|---|
+| F02 | 現Batch JARとStorage・Bootstrapを含むcompile終了0、他三JARは入力差0の既証拠。検査サマリー変更はABIとSQL文字列差0、既POM内Bootstrapへ1参照。[PG40840](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40840-f02-inspection-corrected-batch-package-v1/manifest.json)、[PG40844](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40844-f02-inspection-repository-exact-abi-v1/manifest.json) | QA-056該当のAPI/Web実JAR、許可された全六の型付き境界、SSC-461旧Storage JDBC一件と関連上位、13要求と451。 |
+| F03 | Main 1,027件のCheckstyleと書式の来歴、Test 1,151件中1,119件がCheckstyle確認済み。検査サマリーの現八source・九物理はNullAway/Werror・SpotBugs 0。現SQL当物理raw四100、警報snapshot raw一行は残る。[PG40818](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40818-f03-g08-current-lineage-v1/manifest.json)、[PG40838](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40838-f03-inspection-summary-typed-v1/manifest.json)、[PG40842](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40842-p00402-inspection-sql-cycle-raw-v1/manifest.json) | 保留32 Test、QA-056/057の適用範囲、Root11、六製品型付き品質、残raw、一つの現releaseで451。 |
+| C02 | 14テンプレートの現値と過去証拠の対応を索引化。[PG40094](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40094-c02-current-unit-text-order-v1/manifest.json)、[PG40184](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40184-c02-api-web-timeout-existing-proof-join-v1/manifest.json) | 現bootでの実効設定と所有、同一Invocationの真正起動・停止、Caddy・Inspectorと後条件。 |
+| F04 | 既harukaの管理工具、実FileStoreの過去証跡を参照。[PG40398](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40398-p020-single-session-filestore-independent-v1/manifest.json) | 許可済みの次の試験で現boot・対象・所有・資源・終端を確認。現稼働状態は未観測。 |
+
+SSC447の元152件は成功152、失敗0、エラー0、skip 0、未実行0。元Coreでの未到達rawはline 4、method 4、class 0、branch 58、instruction 85。現候補の試験には加算しない。[PG36628](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG36628-ssc447-current152-quality-return-v1/manifest.json)
+
+P004-02とP004-05の共通局所は現13件を参照。P004-03は既候補の局所3型と、実原本等の残2型を区分。P004-05の実DB条件とP018-08の実nativeは全て残る。[PG40842](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40842-p00402-inspection-sql-cycle-raw-v1/manifest.json)、[PG40582](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40582-p00403-current-three-allowed-owner-artifacts-v1/manifest.json)、[PG40580](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40580-p00405-current-owner-criterion-receipts-v1/manifest.json)、[PG40260](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40260-p01808-exec-modified-utf-independent-v1/manifest.json)
+
+正式17/190、重点0/5、短期0/12、正式PT 1,964件／53領域、工数完成率未較正。最終判断までの計画価格143.371ppと累計共有消費を分ける。
+
+> 2026-11-20 JST 訂正。PG40750の全JAR依存解析は保留型を含むため受入根拠から除外。PG40766とPG40754の逆方向参照結論、PG40758の関連引渡しを保留。PG40744の4 JAR製造、現1,027ファイルのsource-only書式、許可閉包内の局所型付き静的結果は個別根拠を維持。詳細はBUG-3412／YKT-2735。 [訂正証跡](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40768-static-admission-correction-v1/manifest.json)
+
+
+## 旧候補の担当別資料
+
+対象候補は `517a23cddc9f3883550942f6fa90a4256ef39b73`、設計正本は `63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a`。資料期限は2026-11-25 23:29 JST。各担当の受領日時と受領者は未記録。
+
+| 担当 | 使える証拠 | 次に必要な証拠 |
+|---|---|---|
+| F02 | 現候補でProtocol／Storage／Bootstrap／BatchのMaven JARを作成し1,102物理を確認。SYS-014の配備交換・同一性・受領のIT確認条件を確定。[PG40744](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40744-f02-cleanup-terminal-current-four-jars-v1/manifest.json)、[PG40782](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40782-f02-sys014-it-receipt-v1/manifest.json) | API／Webの現候補実JAR、許可範囲を固定した六製品の型付き依存、Storage旧JDBCとSSC-461、13要求の実行証拠と451。PG40768に記録した範囲外証拠は判定に使用しない。 |
+| F03 | 現Main 1,027件の書式・Checkstyle、現Test 1,145件中1,113件のCheckstyle。Batchの差分2型・物理13件で限定NullAwayを照合。[PG40762](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40762-f03-current-six-source-style-v1/manifest.json)、[PG40784](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40784-f03-current-test-style-delta-v1/manifest.json)、[PG40764](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40764-f03-batch-two-nulls-inherited-v1/manifest.json) | Test保留32件、API／Web・Batch残範囲を含む六製品の型付き検査、Root11、未解決指摘の是正と451。 |
+| C02 | 14設定は現候補と既証拠の全SHAが一致。API／Web起動120秒、API停止60秒、Web停止30秒をテンプレートで確認。[PG40094](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40094-c02-current-unit-text-order-v1/manifest.json)、[PG40184](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40184-c02-api-web-timeout-existing-proof-join-v1/manifest.json) | 現boot・所有者に結び付いた実効4値、同一Invocationでの真正起動・停止、Web→Caddy、Inspector、nativeと停止後条件。 |
+| F04 | 元Core `cb1411d94a1d97aedafe1af60400aaec0ae8c8e8` のharukaで実FileStore 1件・工具208件を同一runで確認。[PG40398](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40398-p020-single-session-filestore-independent-v1/manifest.json) | 次の承認済み実環境操作で、現boot、所有、資源、実Unit／DB／nativeの分離と停止後条件を確認。現時点の稼働状態は未観測。 |
+
+SSC447の実施内訳は元Core `e4794ddf45487268883334d0f8773d89bd47dcba`、元run PG36620で成功152、失敗0、エラー0、skip 0、未実行0。全Protocol生coverageの未到達はline 4、method 4、class 0、branch 58、instruction 85。[PG36628](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG36628-ssc447-current152-quality-return-v1/manifest.json) を参照。
+
+正式受入17/190、重点0/5、短期0/12、正式PT 1,964件／53領域。今回の正式受入加算は0。
+
+## 旧候補の担当別資料と引渡し履歴
+
+期限は2026-11-25 23:29 JST。現候補は `e7bfd5e1f2ec4b4e16ecf32601bed052b5330461`、設計正本は `63c4a673bc98464a5bb8e9dae85eba3ce9ef0d2a`。担当者の受領確認は未記録。
+
+| 担当 | 引渡す証拠 | 次に必要な受入証拠 |
+|---|---|---|
+| F02 | 現Maven 4/6 JAR、1,102物理。Protocol/Storageの保存3,592型依存行を現物理に照合。PostgreSQL／Artemis実装型への直接禁止辺0、Storageの標準JDBC一辺は未解消。依存監査工具は新10・既55が一致。 [PG40546](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40546-f02-schema-typed-edge-independent-v1/manifest.json)、[PG40578](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40578-f02-real-protocol-storage-vendor-edge-audit-v1/manifest.json)、[PG40588](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40588-f02-repository-declaration-independent-v1/manifest.json) | API/Web実JAR、Storage一辺とSSC461の終了、同候補全六の依存・13要求・実runtime・451。QA-056未回答。 |
+| F03 | 現六製品Main 1,027ファイルでCheckstyleとformatterの指摘0を同一byteで照合。現候補のSpotBugsは3/6全456物理で指摘・欠落・処理エラー各0。Batchの許可済み範囲の生PMD397件は分類385件、実所有同期12件が未分類。 [PG40556](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40556-f03-six-main-style-independent-v1/manifest.json)、[PG40504](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40504-f03-current-schema-static-and-trace-independent-v1/manifest.json)、[PG40540](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40540-f03-batch-config-artemis-independent-v1/manifest.json) | Batch未解析Main72、API/Webの型付き全体、三製品PMDの残1、既存Root保留と六製品全体の451。各静的チェックの分母を区別する。 |
+| C02 | 既14設定の資料を保持。旧PG40184が検証した2ファイルは現候補でも同じSHA。API/Web起動120秒、停止API60秒・Web30秒。 [PG40184](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40184-c02-api-web-timeout-existing-proof-join-v1/manifest.json) | 現起動世代・所有下の実効値4つと真正Invocation終端、Web→Caddy、Inspector、native・停止後の資源。 |
+| F04 | harukaで実FileStore 1件と比較工具208件が元runで209成功。工具の生四指標は全到達。元観測はCore `cb1411d94a1d97aedafe1af60400aaec0ae8c8e8`。 [PG40398](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40398-p020-single-session-filestore-independent-v1/manifest.json) | 実作業の開始時に現boot／所有／資源を再認証。実Unit・DB・nativeの分離と旧VM固有条件、引渡し対象の再現性。 |
+
+SSC447は元Core `e4794ddf45487268883334d0f8773d89bd47dcba`、元run PG36620、成功152／失敗0／エラー0／skip0／未実行0。全Protocol生未到達はline 4、method 4、class 0、branch 58、instruction 85。親2型の四指標は元runで全到達。 [PG36628](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG36628-ssc447-current152-quality-return-v1/manifest.json)
+
+中核P004-03は所有5型中3型の当物理が確定し、保留2型・実原本とDB後条件が残る。P004-05は4所有型のうち局所2型の証拠と実JDBC後条件の不足を分けた。P018-08は現候補のnative stream・所有・終端の証拠が必要。 [PG40582](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40582-p00403-current-three-allowed-owner-artifacts-v1/manifest.json)、[PG40580](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40580-p00405-current-owner-criterion-receipts-v1/manifest.json)
+
+正式受入17/190、重点0/5、正式PT 1,964件／53領域。これらの資料による正式加算0。個別受入と現場観測の結果は各担当の根拠へ追記する。
+
+F03追補。現CoreのProtocol全170件／39 suiteがPG40600で成功。現Maven JARの176物理が既現候補と一致し、PG40602で単一exec・非フィルターのline、method、class、branchを全到達と確認。実コード162、未到達0。六製品全体の正式受入は未成立。
+
+## これまでの引渡し記録
+
+2026-11-20 JST。引渡し期限は **11月25日 23:29 JST**。現Production Coreは `ecf8a00fbd37720b80f8e107d59727723c706a12`。527の作成後に得た証拠を以下の各担当へ引き渡す。担当者の受領確認は未記録。
+
+| 担当 | 引渡し証拠 | 次の受入証拠 |
+|---|---|---|
+| F02 ビルド・依存境界 | PG39980でProtocol 176、Storage 79、Bootstrap 201、Batch 646の実JAR、計1,102 class。同JARの保存済み型付き証拠でProtocolのJDBC禁止辺0、Storageの禁止辺1を確認（PG40252／40254）。 | 現sourceのAPI/Web実JARと全六モジュールの依存検査。SSC-461／BUG-3233の直接3箇所、上位callerと旧入口、13要求、451。 |
+| F03 静的品質 | PG40300でProtocol Main 169と現176 classを既存の静的証跡に再接続。PMD元終了4、raw3は個別非該当、適用・未分類・処理エラー各0。現NullAway compileと同class byteのSpotBugs・Checkstyle結果を参照。 | Batchの未判断指摘、個別許可を要するAPI/Web・Root範囲、全六モジュールの現品質結果、同sourceの451。 |
+| C02 Unit・起動終端 | PG40184でAPI開始120秒／停止60秒、Web開始120秒／停止30秒を候補テンプレートから照合。 | 現source・boot・ownerにおける実効Unit値、同一Invocationの真正start／stop、Caddy・Inspector・native後条件。 |
+| F04 環境 | PG40160の通常haruka FileStore 1件が真正終了。PG40190／40192で独立確認済み。JDK 25.0.4、空き224,683,773,952バイト、当時の閾値21,474,836,480バイト。以前のSSH終了255は履歴に保持。 | 次の操作時にboot、所有、資源を再認証。該当するservice／DBの分離、保全・再現性、旧VM固有条件との同等性を確認。 |
+
+SSC447の152件は元source `e4794ddf45487268883334d0f8773d89bd47dcba` で、成功152、失敗0、エラー0、skip0、未実行0。生未到達はL4／M4／C0／B58／I85。現候補の同一runへ合算していない。正式受入は17/190、重点0/5、正式PTは1,964件／53領域。今回の引渡し差分による正式加算と原行価格の完了計上は各0。
+
+差分検証PG40302のSHA-256は `6487caf612a8b73f750b472b4180d9667e851d23c136ba17525fedc32f6b1304`。[機械照合manifest](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40302-g1301-four-handoff-delta-v1/manifest.json)
+
+2026-11-20 JST 追補。F02の現Coreは `e79dd91d5d6449b08facef1e4c73429b8a227544`。PG40326／40328に4 JARと1,102物理、旧版から変更した三依存辺を確定。Storageの一禁止辺と残 67/104 上位、直接3と旧入口、API/Web、13要求と451は残る。F03のPG40300はProtocol 176物理が同一と確認した。正式判定は未更新。[PG40328 manifest](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40328-f02-current-four-jars-independent-v1/manifest.json)
+
+2026-11-20 JST 追補。現Core `a165978ea649ab94593d881835df759f7e118038` の4 JAR・1,102物理とArtemis六依存差はPG40356／40358。SSC-461は上位45/104、残59。現差分のSpotBugsは新6＋byte同一の既3、指摘／欠落／処理エラー各0。実環境、Storage禁止辺、全六モジュール、451と担当受領は未確認。[PG40362 manifest](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40362-f03-current-six-artemis-typed-independent-v1/manifest.json)
+
+2026-11-20 JST 追補。現Core `cb1411d94a1d97aedafe1af60400aaec0ae8c8e8` のF02は4 JAR・1,102物理、PublicAgent一差・上位例外移管48/104。PG40378の4試験、PG40382のbyteと依存辺、PG40386のSpotBugs新1・既9物理一致を確認。F03の広域PG40366は終了2、Prometheusの1欠落はPG40372で是正、保留Root 9は残る。P018-08の実nativeと同source全451、F02/F03全六、C02実Invocation・担当受領は未確認。 [PG40386 manifest](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40386-f03-public-checkpoint-typed-independent-v1/manifest.json)
+
+2026-11-20 JST F04追補。harukaの新boot・mini専有0700領域で、実空き224,268,185,600 byteを開始時に確認。通常FileStore一件を比較器208と同一runで209成功、工具四指標全到達。PG40398が独立根拠。旧PG40160は歴史。実Unit・DB分離・全451、担当受領は未確認。 [PG40398 manifest](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40398-p020-single-session-filestore-independent-v1/manifest.json)
+
+
+2026-11-20 JST追補。F03／P004-05へSSC-473の共通証拠を返却。新候補 2cc96ab800b8753b0f0eafac8e008bd5b69d9a59、設計main 6dcd9fb65a3dad2011abeac1babc75e52394785d、局所87/87、NullAway/Checkstyle/SB 0、PMDの旧時刻指摘2→0。evidence/01_PT/018_NK-OPS-001/evidence/PG40456-migration-utc42-product-and-tool-proof-v1/manifest.json SHA-256 39b35eaafb1011fb3f8b4ab9003730f174838fe498bce5962eae497c2b1d3180。SSC447元152およびPG40452はsource・範囲が異なる。六製品・実PostgreSQL・全451・担当受領は別。
+
+
+2026-11-20 JST追補。F02の現Core 2cc96ab800 はMavenで実四JAR・1,102物理、二変更のみ。evidence/01_PT/018_NK-OPS-001/evidence/PG40460-f02-utc42-physical-and-test-alignment-v1/manifest.json SHA-256 09acc06d5080221e14c0835555b7d7e24272be6a2b04e0835d28d5b3b517c909。直前静的／限定PTを当JARへ無条件に算入せず、必要なbyte整合PTを区別する。
+
+2026-11-20 JST追補。候補 e7bfd5e1f2ec4b4e16ecf32601bed052b5330461 でSchemaHistoryの割込終端を修正、現Maven物理に対応する局所13成功。包装wrapperのSpotBugs子終了は未保存で、対象のXML指摘0だけが確認済み。F03全scopeや実DBを認定していない。 [PG40500](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40500-schema-history-close-static-and-junit-independent-v1/manifest.json)
+
+2026-11-20 JST追補。F03の現 e7bfd5e1f2ec4b4e16ecf32601bed052b5330461。Batch Main formatterは同一182＋新差分18で200、指摘0（PG40522）。型付きPMDは許可128/200 Main・277/646物理、終了4、生397、処理0（PG40526）。DAOの44を含め、264に個別根拠、残133。P004-03／P004-05は共通静的証拠を追加費なしで参照（PG40532、SHA-256 d9a5852701e4c1817afd94bfab881a2b126565dcc6ba67422a104cbd8d2cdb8b）。Protocol／Storage／Bootstrapの現SpotBugs456指摘0、元三製品PMD281中280に判定根拠・native監視1未判定。F02のAPI/Web、F03の六全製品、C02実Unit、F04後続実行、451および受領確認は未成立。
+
+2026-11-20 JST追補。F03の現Core e7bfd5e1f2で6製品Main 1,027ファイルのCheckstyle／formatterを同一source byteの既証拠と差分実行で照合、指摘0（PG40556、SHA-256 0e12bf94b5a4573f9219b19211a2cc1b6258483dc72c1e868fefdb9aafa36354）。Batch型付きPMDの生397件は分類385・実所有同期12保留（PG40540）、元三製品の未判定1は別。F02の現四JAR1,102物理、変更Schema一物理の直接型依存25・増減0（PG40546）。API／Web型付き、Batch未型付き369、実行・451および受領確認は未成立。
+
+2026-11-20 JST F02/F03追補。六製品・root・比較toolの八POMとWrapper二ファイルは、元validate PG38184と依存モデルPG38522の入力と当Coreで同一。証拠をSYS-002/005の宣言・モデル部分に適用。PG40644の実Maven下限拒否とPG40648の実コンパイラ対照3件を併記し、API/Webの実JAR・Batch未解析・451・担当受領の状態を維持。 [PG40650](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40650-f02-current-six-model-handoff-v1/manifest.json)
+
+2026-11-20 JST F03追補。現CoreのAPI Outbox二型とpackage-infoはPG40688／40690／40692で検証。三静的確認成功、同3物理、SpotBugs最終の指摘・解析エラー・欠落各0。初回補助注釈欠落1はBUG-3401に保存。対象のNullAway、API/Web全体、形式451および担当受領は未成立。PGPT-20261008-6573。
+
+
+2026-11-20 JST追補。当製品Core `517a23cddc9f3883550942f6fa90a4256ef39b73`。F02の現四製品JARは1,102 class・17,870参照を照合し、製品間の既定3方向、未宣言・未解決NK各0件。既Storage JDBC一辺、API/Webと全実条件は残る。[実行manifest](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40750-f02-current-four-artifact-dependency-v1/manifest.json)
+
+F03はBatchの旧対象128 Mainのうち126 sourceと270物理の同一性を確認。現差分Expiry17件を局所判定、Cleanup48件のうち24件は未分類。元未分類12と旧対象外72も残る。全六・全451の受入は未成立。[実行manifest](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40754-f03-current-batch-pmd-lineage-v1/manifest.json)
+
+SSC447の元runとC02・F04の既引渡し資料は保存済み。今回追補の担当受領は未確認。試験再実行・正式加算・原行費用完了は各0。
+
+
+2026-11-20 JST F03追補。製品Core `517a23cddc9f3883550942f6fa90a4256ef39b73`。六製品のMain 1,027ファイルの書式とCheckstyleを現候補へ照合。1,025同一byte、差分2のGoogle Java Format／Checkstyle終了0・XML指摘0を確認。Cleanup生PMD48はPG40760で全件判定。型付き全六、全451、保留条件と追補の受領は未成立。 [PG40762](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40762-f03-current-six-source-style-v1/manifest.json)
+
+
+SYS-014追補。入口交換の条件、業務artifact同一性、IT受領欄を4行に分けた。現初期プロファイルと将来承認は別。受領・実証は未取得。 [1155_F02SYS014入口交換のIT引渡し条件](1155_F02SYS014入口交換のIT引渡し条件.md)。
+
+## F03 現Testソースの書式差分
+
+PGPT-20261008-6677、PG40784。Core `517a23cddc9f3883550942f6fa90a4256ef39b73`。Checkstyleは1,145件中1,113件を照合。差分6件の既存証跡5件と新規1件を分類し、新規1件はformatも成功。保留32件は名称・blobのみ。MainのPG40762、型付き検査、451、担当受領はそれぞれ別の証拠を求める。
+
+
+## 警報修正後の候補に対応するF02/F03の追補
+
+PGPT-20261008-6706。候補 `da20ad7753279ae4e8017593866502d3341ec0e5`。PG40802で現四JAR、PG40800で監視局所13sourceの型付き品質、PG40798で局所78。元SSC447の152、F04・C02の元runと区分。担当受領、実API/Web、全451は未確認。
+
+## F03の現候補ソース書式
+
+PGPT-20261008-6730。Core `da20ad7753279ae4e8017593866502d3341ec0e5`。Main 1,027は同一blob 1,019と変更8のformatter・Checkstyle終了0を照合。Testは1,149中1,117をCheckstyle確認、32保留。型付きは13ソース局所（PG40800）、全六F03と451は未成立。 [PG40818](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG40818-f03-g08-current-lineage-v1/manifest.json)
+
+2026-11-22 JST追補。F02・G13.04は、SS311/312/323の同期31 Handler名と当候補の実登録31の差をSSC-477／BUG-3574／YKT-2810へ登録。登録入口の一致と型付き設計規約の確認未了を区別する。evidence/01_PT/018_NK-OPS-001/evidence/PG42270-g1304-api-handler-route-trace-v1/manifest.json SHA256 270a4544c257233cebcec5c0b0ac67873487a54e28b0bec444cd24315d2b6973。F03はSCR015の現在3 Test IDの独立期待・同Core XMLを照合し、実HTTP・権限・業務DB・全451は未成立。evidence/01_PT/018_NK-OPS-001/evidence/PG42272-g1305-scr015-current-bidirectional-v1/manifest.json SHA256 1b75bd198880319e19d955b8f5e8e36aca0f2334efb51345d0e3cad4de656067。
+
+2026-11-22 JST追補。C02の既14設定照合にはSS341の再起動前05:00 JST timer／60分oneshotは含まれず、現候補に二artifactなし。BUG-3577／YKT-2812。evidence/01_PT/018_NK-OPS-001/evidence/PG42286-c02-maintenance-pre-reboot-trace-v1/manifest.json SHA256 7a9e1b20aa7bd7a6ade4fad6203f6ecca6f192670662b27ee9d28dd492c83f03。現計画の担当・独立PT仕様4件はevidence/01_PT/018_NK-OPS-001/evidence/PG42288-g1306-preboot-requirement-owner-matrix-v1/manifest.json SHA256 5775dd515d9f50086d500d79d09cf6d243f0c2b27bcbbb98629a3478eb3819c5。実効Unit、F04実環境、正式受領は引き続き未確認。
+
+2026-11-22 JST追補。Java source 1e4e9e64830b552727043f3cb8b9435b28cba472 と日次timer設定候補 27152c62e0b39a9fafa9aa2fd4576a9efb905da9。F02の正規4/6、F03の許可Checkstyle Main1027・Test1134、G13.07の現1133所有を照合。API/Web正規、実効Unit、同候補署名、全451と担当受領が残る。evidence/01_PT/018_NK-OPS-001/evidence/PG42320-f02-f03-g13-timer-continuation-v1/manifest.json SHA256 bd2c66884bfc2bd9146d59dd2cd207937e2e11cbbd820f7a6cf564ee094aaebd。
