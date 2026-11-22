@@ -1,0 +1,140 @@
+{
+  "eventId": "PGPT-20261008-8132",
+  "workCategory": "SELECTED_TEST",
+  "source": "69ca8b85d0d37795694ae9c3536847debab94860",
+  "productionCoreMain": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+  "managementWorkIds": [
+    "WBS-P016-17/2"
+  ],
+  "planRow": {
+    "ID": "WBS-P016-17/2",
+    "元行": "WBS-P016-17/2",
+    "費目": "B",
+    "主担当": "WBS-P016-17",
+    "状態": "計画",
+    "作業": "SCR017 User詳細・4更新操作／同source証拠による受入判定",
+    "残pp": "0.39",
+    "着手": "設計313・当該source・作業所有・既存成果を照合。必要な局所成果を費目Aで一度だけ作成し、受入候補のTestIDと独立期待値を確定。着手依存、当該A成果、終了依存と未解決条件を確認",
+    "終了証拠": "SCR017 User詳細・4更新操作：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。",
+    "補正根拠": "登録済み後段単価。追加製造はA、実経路はD、比較はE",
+    "契約HOLD": "",
+    "対象": "",
+    "範囲": "SS 313",
+    "保存証跡": "個別criteria＋同sourceのTestID・独立期待値・実結果・451適用結果",
+    "順次": "False",
+    "配賦窓": "14",
+    "楽観pp": "0.163",
+    "慎重pp": "0.78",
+    "要求設計の版差": "PT基準仕様 NK-WEB-002、SS 313",
+    "lineNumber": 506,
+    "改訂残pp": "0.39"
+  },
+  "run": "PG42346",
+  "startEvent": "PGPT-20261008-8131",
+  "outcome": {
+    "result": "THREE_ADMITTED_DETAIL_VALUE_CASES_SCOPE_FOUR100",
+    "passed": 3,
+    "counters": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 202
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 8
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 37
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 11
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 7
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "remaining": "Exact strict NullAway, role controller, real update terminal and six-source evidence"
+  },
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42346-p01617-user-detail-three-four-counters-v1/manifest.json",
+    "sha256": "6692898bc5e44bbc784442dc484ea0db48b0f2f4360422d52f4d34fe3329229f"
+  },
+  "nextEvidence": "Current strict UserDetail compilation and exact two project DTO dependencies.",
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T07:16:05+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 22,
+      "remainingPercent": 78,
+      "resetsAt": 1795879772,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "modelRequested": "gpt-6.2-sol",
+  "modelObserved": null,
+  "reasoningRequested": "high",
+  "reasoningObserved": null,
+  "speedRequested": "standard",
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 22,
+    "remainingPercent": 78,
+    "resetsAt": 1795879772,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "9ace4d43f5de099d1b285b8b1ca1f75e22530e6acf57ee958b276b7632f84a8b",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-22T07:16:05+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 22,
+        "remainingPercent": 78,
+        "resetsAt": 1795879772,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": 0,
+  "sameQuotaWindow": true,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-22T07:15:53.583577+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": false,
+  "quotaBefore": {
+    "usedPercent": 22,
+    "remainingPercent": 78,
+    "resetsAt": 1795879772,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null
+}
