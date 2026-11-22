@@ -1,0 +1,29 @@
+{
+  "run": "PG41794",
+  "attempt": 1,
+  "source": "69cc76cbb2811b328f3f330672ca804d3dacb5e2",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "phase": "compile",
+  "actualExit": 1,
+  "terminalAtUTC": "2026-11-22T01:02:50.896985+00:00",
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41794-f03-synthetic-fixture-typed-close-v1/begin.json",
+    "sha256": "e3fab519a6386a83cbebbd6d962bb0166d513932fc88e54aef8f44d267f2a38e"
+  },
+  "compile": {
+    "exit": 1,
+    "beganAtUTC": "2026-11-22T01:02:49.956365+00:00",
+    "terminalAtUTC": "2026-11-22T01:02:50.896985+00:00",
+    "stdout": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41794-f03-synthetic-fixture-typed-close-v1/compile.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41794-f03-synthetic-fixture-typed-close-v1/compile.stderr",
+      "sha256": "76490b46e7e2c2bae25c1712c438f9002e76302abd56043c404ebfc1e5d3fc16"
+    }
+  },
+  "diagnosis": "Timed Future.get also declares TimeoutException; first repair omitted it. The selected fixture compilation failed before any test or later static process.",
+  "next": "Declare exact TimeoutException in both timed worker methods. Preserve original assertions and finally shutdown.",
+  "newProductTests": 0
+}

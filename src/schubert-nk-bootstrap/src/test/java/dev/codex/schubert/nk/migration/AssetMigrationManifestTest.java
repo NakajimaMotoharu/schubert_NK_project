@@ -20,6 +20,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.junit.jupiter.api.Test;
 
 /** PT-MIG-ASSET001..012, SS343 SSC342: only synthetic metadata, no file/DB/authority. */
@@ -301,7 +302,7 @@ final class AssetMigrationManifestTest {
 
   @Test
   void assetGenerated003EntryHashUsesIndependentPolynomialAndJvmIdentity()
-      throws InterruptedException, ExecutionException {
+      throws InterruptedException, ExecutionException, TimeoutException {
     for (var kind : List.of(Kind.SCENARIO, Kind.AUDIO, Kind.VIDEO, Kind.MUSIC)) {
       int expected =
           (int)

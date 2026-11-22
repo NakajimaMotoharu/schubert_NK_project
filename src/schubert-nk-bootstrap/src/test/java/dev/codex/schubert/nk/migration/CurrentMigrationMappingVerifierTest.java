@@ -20,6 +20,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.junit.jupiter.api.Test;
 
 /** PT-MIG-MAPVERIFY001..016; Python golden and independently reframed malformed data, no IO. */
@@ -467,7 +468,7 @@ final class CurrentMigrationMappingVerifierTest {
 
   @Test
   void mapverify016SharedVerifierHasFiniteIndependentSnapshots()
-      throws InterruptedException, ExecutionException {
+      throws InterruptedException, ExecutionException, TimeoutException {
     var verifier = new CurrentMigrationMappingVerifier();
     var executor = Executors.newFixedThreadPool(WORKERS);
     try {
