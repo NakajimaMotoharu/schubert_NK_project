@@ -15,6 +15,7 @@ import dev.codex.schubert.nk.web.monitoring.HttpMetricContract.Route;
 import dev.codex.schubert.nk.web.monitoring.HttpMetricContract.Status;
 import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
@@ -54,7 +55,7 @@ class WebMonitoringValueContractTest {
   }
 
   @Test
-  void routesRetainTheIndependentSs313OrderAndNeverRetainRawPaths() throws Exception {
+  void routesRetainTheIndependentSs313OrderAndNeverRetainRawPaths() throws IOException {
     dictionary(
         new String[] {
           "ROOT",
