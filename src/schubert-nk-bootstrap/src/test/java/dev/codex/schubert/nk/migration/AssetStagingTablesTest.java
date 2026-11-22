@@ -15,9 +15,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
@@ -92,7 +94,7 @@ final class AssetStagingTablesTest {
           "SELECT count(*) FROM pg_temp.nk_mig_entry_audio_links");
 
   @Test
-  void prepareMatchesAllThreeIndependentColumnListsAndExactSql() throws Exception {
+  void prepareMatchesAllThreeIndependentColumnListsAndExactSql() throws SQLException {
     var f = new Fixture();
     new AssetStagingTables().prepare(f.connection());
     assertEquals(PREPARE_SQL, f.sql);
@@ -104,7 +106,7 @@ final class AssetStagingTablesTest {
   }
 
   @Test
-  void prepareClosesOnlyItsStatementAndBindsOneTimeout() throws Exception {
+  void prepareClosesOnlyItsStatementAndBindsOneTimeout() throws SQLException {
     var f = new Fixture();
     new AssetStagingTables().prepare(f.connection());
     assertEquals(
@@ -225,7 +227,7 @@ final class AssetStagingTablesTest {
   }
 
   @Test
-  void transferMatchesAllTwelveIndependentSqlOperationsAndCounts() throws Exception {
+  void transferMatchesAllTwelveIndependentSqlOperationsAndCounts() throws SQLException {
     var f = new Fixture();
     transfer(f);
     var expected = new ArrayList<>(TARGET_COUNTS);
@@ -252,7 +254,7 @@ final class AssetStagingTablesTest {
   }
 
   @Test
-  void emptyCountsAndAudioZeroWithNoLinksRemainValid() throws Exception {
+  void emptyCountsAndAudioZeroWithNoLinksRemainValid() throws SQLException {
     for (long media : List.of(0L, 149L)) {
       var f = new Fixture();
       f.staged.put(AUDIO_TABLE, 0L);
@@ -265,7 +267,7 @@ final class AssetStagingTablesTest {
   }
 
   @Test
-  void largeUpdateAndCountUseLongWithoutIntegerTruncation() throws Exception {
+  void largeUpdateAndCountUseLongWithoutIntegerTruncation() throws SQLException {
     var f = new Fixture();
     for (var table : List.of(AUDIO_TABLE, MEDIA_TABLE, LINK_TABLE))
       f.staged.put(table, Long.MAX_VALUE);
@@ -414,7 +416,8 @@ final class AssetStagingTablesTest {
   }
 
   @Test
-  void scenarioTwoThenAssetThreeShareTheSameBorrowedTransactionInRequiredOrder() throws Exception {
+  void scenarioTwoThenAssetThreeShareTheSameBorrowedTransactionInRequiredOrder()
+      throws SQLException {
     var f = new Fixture();
     var connection = f.connection();
     var scenario = new ScenarioStagingTables();
@@ -451,7 +454,7 @@ final class AssetStagingTablesTest {
   }
 
   @Test
-  void closeFailuresAndRejectedCallsDoNotPoisonAnIndependentTransaction() throws Exception {
+  void closeFailuresAndRejectedCallsDoNotPoisonAnIndependentTransaction() throws SQLException {
     var broken = new Fixture();
     broken.fault = Fault.QUERY_FAILURE;
     broken.badQuery = 0;
@@ -469,7 +472,8 @@ final class AssetStagingTablesTest {
   }
 
   @Test
-  void finiteWorkersOwnIndependentStatementsAndAllResultsTerminate() throws Exception {
+  void finiteWorkersOwnIndependentStatementsAndAllResultsTerminate()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var tables = new AssetStagingTables();
     var executor = Executors.newFixedThreadPool(WORKERS);
     try {

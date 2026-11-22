@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.lang.reflect.Proxy;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -105,7 +106,7 @@ final class MigrationMasterFinalizerTest {
   }
 
   @Test
-  void final002EmptyUsesOneFalseWithoutConsumingNextval() throws Exception {
+  void final002EmptyUsesOneFalseWithoutConsumingNextval() throws SQLException {
     var f = new Fixture();
     f.expected = new long[IDENTITIES];
     finish(f, new MigrationMasterCopyDataset(new SpeakerCopyBatch(List.of()), emptyContent()));
@@ -143,7 +144,7 @@ final class MigrationMasterFinalizerTest {
   }
 
   @Test
-  void final004AutoCommitFailsBeforeStatementCreation() throws Exception {
+  void final004AutoCommitFailsBeforeStatementCreation() {
     var f = new Fixture();
     f.autoCommit = true;
     assertEquals(
@@ -189,7 +190,7 @@ final class MigrationMasterFinalizerTest {
   }
 
   @Test
-  void final011ReadPrimaryKeepsResultAndOuterSuppressedOrder() throws Exception {
+  void final011ReadPrimaryKeepsResultAndOuterSuppressedOrder() {
     for (Throwable primary : failures()) {
       var f = new Fixture();
       f.failCall = CALL_GET_LONG;
@@ -218,7 +219,7 @@ final class MigrationMasterFinalizerTest {
   }
 
   @Test
-  void final012LastMaxMismatchCannotIssueSequenceOrAnalyze() throws Exception {
+  void final012LastMaxMismatchCannotIssueSequenceOrAnalyze() {
     var f = new Fixture();
     f.faultQuery = IDENTITIES - 1;
     f.shape = Shape.WRONG;
@@ -279,7 +280,7 @@ final class MigrationMasterFinalizerTest {
   }
 
   @Test
-  void final021PreparedResultPrimaryKeepsAllThreeCloseFailuresInOrder() throws Exception {
+  void final021PreparedResultPrimaryKeepsAllThreeCloseFailuresInOrder() {
     for (Throwable primary : failures()) {
       var f = new Fixture();
       f.failCall = CALL_GET_LONG;
@@ -361,7 +362,7 @@ final class MigrationMasterFinalizerTest {
   }
 
   @Test
-  void final027DiagnosticsFixedAndNoFailureNormalized() throws Exception {
+  void final027DiagnosticsFixedAndNoFailureNormalized() {
     assertEquals("MigrationMasterFinalizer[REDACTED]", new MigrationMasterFinalizer().toString());
     var f = new Fixture();
     f.faultQuery = 0;
@@ -395,7 +396,7 @@ final class MigrationMasterFinalizerTest {
   }
 
   @Test
-  void final029DeferredConstraintMustSucceedBeforeAnyMaxOrSequence() throws Exception {
+  void final029DeferredConstraintMustSucceedBeforeAnyMaxOrSequence() {
     for (boolean warning : List.of(false, true)) {
       var f = new Fixture();
       f.badConstraintUpdate = !warning;
@@ -484,7 +485,7 @@ final class MigrationMasterFinalizerTest {
       }
   }
 
-  private static void shapes(int first, int count) throws Exception {
+  private static void shapes(int first, int count) {
     for (int slot = first; slot < first + count; slot++)
       for (var shape :
           List.of(Shape.NULL_RESULT, Shape.MISSING, Shape.SQL_NULL, Shape.WRONG, Shape.EXTRA)) {
@@ -814,7 +815,7 @@ final class MigrationMasterFinalizerTest {
             stamp));
   }
 
-  private static MediaAssetCopyBatch media(String stamp) throws Exception {
+  private static MediaAssetCopyBatch media(String stamp) throws NoSuchAlgorithmException {
     var manifest =
         new AssetMigrationManifest(
             List.of(

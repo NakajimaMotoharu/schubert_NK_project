@@ -17,9 +17,11 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
@@ -81,7 +83,8 @@ final class MigrationMasterContentVerifierTest {
           "L");
 
   @Test
-  void content001SixFixedQueriesAndEveryPayloadColumnMatch() throws Exception {
+  void content001SixFixedQueriesAndEveryPayloadColumnMatch()
+      throws SQLException, NoSuchAlgorithmException {
     var f = new Fixture();
     verify(f, declared(TIME, null));
     assertEquals(SQL, f.sql);
@@ -94,7 +97,7 @@ final class MigrationMasterContentVerifierTest {
   }
 
   @Test
-  void content002EmptyAllTablesStillChecksEveryTerminalRow() throws Exception {
+  void content002EmptyAllTablesStillChecksEveryTerminalRow() throws SQLException {
     var f = new Fixture(emptyTables());
     verify(f, emptyMaster());
     assertEquals(SQL, f.sql);
@@ -103,7 +106,7 @@ final class MigrationMasterContentVerifierTest {
   }
 
   @Test
-  void content003BothNullBoundariesHaveNoIo() throws Exception {
+  void content003BothNullBoundariesHaveNoIo() throws NoSuchAlgorithmException {
     var verifier = new MigrationMasterContentVerifier();
     var master = declared(TIME, null);
     var f = new Fixture();
@@ -122,7 +125,7 @@ final class MigrationMasterContentVerifierTest {
   }
 
   @Test
-  void content004AutoCommitIsRejectedWithoutStatementAcquisition() throws Exception {
+  void content004AutoCommitIsRejectedWithoutStatementAcquisition() throws NoSuchAlgorithmException {
     var f = new Fixture();
     f.auto = true;
     reject(f, declared(TIME, null));
@@ -130,7 +133,7 @@ final class MigrationMasterContentVerifierTest {
   }
 
   @Test
-  void content005NullStatementNeverCreatesOwnership() throws Exception {
+  void content005NullStatementNeverCreatesOwnership() throws NoSuchAlgorithmException {
     var f = new Fixture();
     f.nullStatement = true;
     reject(f, declared(TIME, null));
@@ -139,7 +142,7 @@ final class MigrationMasterContentVerifierTest {
   }
 
   @Test
-  void content006NullResultAtEachTableClosesOnlyPriorResults() throws Exception {
+  void content006NullResultAtEachTableClosesOnlyPriorResults() throws NoSuchAlgorithmException {
     for (int slot = 0; slot < TABLES; slot++) {
       var f = new Fixture();
       f.nullResultSlot = slot;
@@ -156,7 +159,7 @@ final class MigrationMasterContentVerifierTest {
   }
 
   @Test
-  void content008MissingRowAtEveryTableRejectsWithNoLaterQuery() throws Exception {
+  void content008MissingRowAtEveryTableRejectsWithNoLaterQuery() throws NoSuchAlgorithmException {
     for (int slot = 0; slot < TABLES; slot++) {
       var f = new Fixture();
       f.rows.get(slot).removeLast();
@@ -168,7 +171,7 @@ final class MigrationMasterContentVerifierTest {
   }
 
   @Test
-  void content009ExtraRowsIncludingEmptyExpectationAreNeverRead() throws Exception {
+  void content009ExtraRowsIncludingEmptyExpectationAreNeverRead() throws NoSuchAlgorithmException {
     for (boolean empty : List.of(false, true)) {
       for (int slot = 0; slot < TABLES; slot++) {
         var data = empty ? emptyTables() : literals(TIME, null);
@@ -186,7 +189,8 @@ final class MigrationMasterContentVerifierTest {
   }
 
   @Test
-  void content010AllSixtyFiveColumnPositionsDetectIndividualValueChanges() throws Exception {
+  void content010AllSixtyFiveColumnPositionsDetectIndividualValueChanges()
+      throws NoSuchAlgorithmException {
     var source = literals(TIME, null);
     for (int slot = 0; slot < TABLES; slot++) {
       for (int column = 0; column < TYPES.get(slot).length(); column++) {
@@ -201,7 +205,8 @@ final class MigrationMasterContentVerifierTest {
   }
 
   @Test
-  void content011SqlNullIsComparedWithoutInventingZeroFalseOrEmpty() throws Exception {
+  void content011SqlNullIsComparedWithoutInventingZeroFalseOrEmpty()
+      throws SQLException, NoSuchAlgorithmException {
     var source = literals(TIME, null);
     for (int slot = 0; slot < TABLES; slot++) {
       for (int column = 0; column < TYPES.get(slot).length(); column++) {
@@ -217,7 +222,8 @@ final class MigrationMasterContentVerifierTest {
   }
 
   @Test
-  void content012TypedGettersAndImmediateWasNullMatchIndependentEventSequence() throws Exception {
+  void content012TypedGettersAndImmediateWasNullMatchIndependentEventSequence()
+      throws SQLException, NoSuchAlgorithmException {
     var f = new Fixture();
     verify(f, declared(TIME, null));
     var expected = expectedCalls(literals(TIME, null));
@@ -226,7 +232,8 @@ final class MigrationMasterContentVerifierTest {
   }
 
   @Test
-  void content013NullEmptyLiteralBackslashNAndUtf8NotesStayDistinct() throws Exception {
+  void content013NullEmptyLiteralBackslashNAndUtf8NotesStayDistinct()
+      throws SQLException, NoSuchAlgorithmException {
     for (String notes : Arrays.asList(null, "", "\\N", "\t\n日本語\\")) {
       var f = new Fixture(literals(TIME, notes));
       verify(f, declared(TIME, notes));
@@ -237,7 +244,8 @@ final class MigrationMasterContentVerifierTest {
   }
 
   @Test
-  void content014DeclaredCurrentOrderIsNotReplacedByTargetPkOrder() throws Exception {
+  void content014DeclaredCurrentOrderIsNotReplacedByTargetPkOrder()
+      throws SQLException, NoSuchAlgorithmException {
     var expected = declared(TIME, null);
     verify(new Fixture(), expected);
     assertEquals(SPEAKER_B, expected.speakers().rows().getFirst().fields().getFirst());
@@ -248,7 +256,8 @@ final class MigrationMasterContentVerifierTest {
   }
 
   @Test
-  void content015LinksSortByBothNumericIdsThenFixedAsciiType() throws Exception {
+  void content015LinksSortByBothNumericIdsThenFixedAsciiType()
+      throws SQLException, NoSuchAlgorithmException {
     var f = new Fixture();
     verify(f, declared(TIME, null));
     assertEquals(
@@ -261,7 +270,7 @@ final class MigrationMasterContentVerifierTest {
   }
 
   @Test
-  void content016TargetN12AndTimestampMicrosecondYearExtremes() throws Exception {
+  void content016TargetN12AndTimestampMicrosecondYearExtremes() throws SQLException {
     for (String stamp : List.of("0001-01-01T00:00:00Z", "9999-12-31T23:59:59.999999Z")) {
       var data = emptyTables();
       data.getFirst().add(row("999999999999", "1", "Alice", "alice", "false", null, stamp));
@@ -276,7 +285,8 @@ final class MigrationMasterContentVerifierTest {
   }
 
   @Test
-  void content017TypedTimestamptzUsesInstantAndCanonicalUtc() throws Exception {
+  void content017TypedTimestamptzUsesInstantAndCanonicalUtc()
+      throws SQLException, NoSuchAlgorithmException {
     var f = new Fixture();
     f.rows.getFirst().getFirst().set(6, "2026-01-02T12:04:05+09:00");
     verify(f, declared(TIME, null));
@@ -387,7 +397,8 @@ final class MigrationMasterContentVerifierTest {
   }
 
   @Test
-  void content025BorrowedConnectionHasOnlyAutoReadAndStatementAcquisition() throws Exception {
+  void content025BorrowedConnectionHasOnlyAutoReadAndStatementAcquisition()
+      throws SQLException, NoSuchAlgorithmException {
     var f = new Fixture();
     verify(f, declared(TIME, null));
     assertEquals(List.of(CALL_AUTO, CALL_CREATE), f.connectionCalls);
@@ -396,7 +407,8 @@ final class MigrationMasterContentVerifierTest {
   }
 
   @Test
-  void content026FixedRedactionAndFreshSuccessAfterRejection() throws Exception {
+  void content026FixedRedactionAndFreshSuccessAfterRejection()
+      throws SQLException, NoSuchAlgorithmException {
     var verifier = new MigrationMasterContentVerifier();
     var bad = new Fixture();
     bad.nullStatement = true;
@@ -413,7 +425,8 @@ final class MigrationMasterContentVerifierTest {
   }
 
   @Test
-  void content027CallerLiteralRowsAndDeclaredOrderStayUnchanged() throws Exception {
+  void content027CallerLiteralRowsAndDeclaredOrderStayUnchanged()
+      throws SQLException, NoSuchAlgorithmException {
     var inputs = literals(TIME, null);
     var f = new Fixture(inputs);
     var expected = declared(TIME, null);
@@ -424,7 +437,8 @@ final class MigrationMasterContentVerifierTest {
   }
 
   @Test
-  void content028FiniteWorkersKeepIndependentBorrowedResources() throws Exception {
+  void content028FiniteWorkersKeepIndependentBorrowedResources()
+      throws InterruptedException, ExecutionException, TimeoutException, NoSuchAlgorithmException {
     var verifier = new MigrationMasterContentVerifier();
     var expected = declared(TIME, null);
     var executor = Executors.newFixedThreadPool(WORKERS);
@@ -449,7 +463,7 @@ final class MigrationMasterContentVerifierTest {
   }
 
   @Test
-  void content029EmptyDeclaredRowsCannotHideGeneratedSearchMismatchCount() throws Exception {
+  void content029EmptyDeclaredRowsCannotHideGeneratedSearchMismatchCount() throws SQLException {
     for (String count : Arrays.asList("1", "-1", "9223372036854775807", null)) {
       var f = new Fixture(emptyTables());
       f.rows.get(SEARCH_CHECK).getFirst().set(0, count);
@@ -476,7 +490,7 @@ final class MigrationMasterContentVerifierTest {
   }
 
   private static void assertFailure(Fixture f, Throwable primary, List<Throwable> suppressed)
-      throws Exception {
+      throws NoSuchAlgorithmException {
     var expected = declared(TIME, null);
     assertSame(primary, assertThrows(primary.getClass(), () -> verify(f, expected)));
     assertEquals(suppressed.size(), primary.getSuppressed().length);
@@ -534,7 +548,8 @@ final class MigrationMasterContentVerifierTest {
     for (int slot = 0; slot < TABLES; slot++) {
       String key = slotKey(slot);
       result.add(key + SUFFIX_QUERY);
-      for (var ignored : rows.get(slot)) {
+      int rowCount = rows.get(slot).size();
+      for (int row = 0; row < rowCount; row++) {
         result.add(key + SUFFIX_NEXT);
         for (int column = 0; column < TYPES.get(slot).length(); column++) {
           char type = TYPES.get(slot).charAt(column);

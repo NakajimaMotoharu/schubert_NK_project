@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.lang.reflect.Proxy;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -93,7 +94,7 @@ final class MigrationMasterReferenceVerifierTest {
   }
 
   @Test
-  void reference002EmptyStillChecksAllSixTablesAndAllReferences() throws Exception {
+  void reference002EmptyStillChecksAllSixTablesAndAllReferences() throws SQLException {
     var f = new Fixture();
     f.expected = new long[QUERIES];
     verify(f, new MigrationMasterCopyDataset(new SpeakerCopyBatch(List.of()), emptyContent()));
@@ -130,7 +131,7 @@ final class MigrationMasterReferenceVerifierTest {
   }
 
   @Test
-  void reference004AutoCommitHasNoStatementOrQuery() throws Exception {
+  void reference004AutoCommitHasNoStatementOrQuery() {
     var f = new Fixture();
     f.autoCommit = true;
     assertEquals(
@@ -147,7 +148,7 @@ final class MigrationMasterReferenceVerifierTest {
   }
 
   @Test
-  void reference006NullVendorStatementCannotBecomeNpe() throws Exception {
+  void reference006NullVendorStatementCannotBecomeNpe() {
     var f = new Fixture();
     f.nullOuter = true;
     assertEquals(
@@ -162,7 +163,7 @@ final class MigrationMasterReferenceVerifierTest {
   }
 
   @Test
-  void reference008EveryScalarRejectsNullMissingSqlNullWrongAndExtra() throws Exception {
+  void reference008EveryScalarRejectsNullMissingSqlNullWrongAndExtra() {
     for (int slot = 0; slot < QUERIES; slot++)
       for (var shape :
           List.of(Shape.NULL_RESULT, Shape.MISSING, Shape.SQL_NULL, Shape.WRONG, Shape.EXTRA)) {
@@ -194,7 +195,7 @@ final class MigrationMasterReferenceVerifierTest {
   }
 
   @Test
-  void reference012OriginalPrimaryKeepsInnerOuterCloseOrderAndSelfSuppression() throws Exception {
+  void reference012OriginalPrimaryKeepsInnerOuterCloseOrderAndSelfSuppression() {
     for (Throwable primary : failures()) {
       var f = new Fixture();
       f.failCall = CALL_GET_LONG;
@@ -227,7 +228,7 @@ final class MigrationMasterReferenceVerifierTest {
   }
 
   @Test
-  void reference014EachOrphanOrOrderNonzeroRejectsWithNoLaterQuery() throws Exception {
+  void reference014EachOrphanOrOrderNonzeroRejectsWithNoLaterQuery() {
     for (int slot = COUNT_QUERIES; slot < QUERIES; slot++)
       for (long delta : List.of(-1L, 1L, Long.MAX_VALUE)) {
         var f = new Fixture();
@@ -242,7 +243,7 @@ final class MigrationMasterReferenceVerifierTest {
   }
 
   @Test
-  void reference015EachDeclaredCountMismatchRejectsBeforeReferenceChecks() throws Exception {
+  void reference015EachDeclaredCountMismatchRejectsBeforeReferenceChecks() {
     for (int slot = 0; slot < COUNT_QUERIES; slot++)
       for (long delta : List.of(-2L, 1L, Long.MAX_VALUE)) {
         var f = new Fixture();
@@ -268,7 +269,7 @@ final class MigrationMasterReferenceVerifierTest {
   }
 
   @Test
-  void reference017DiagnosticsAndToStringRemainFixedRedacted() throws Exception {
+  void reference017DiagnosticsAndToStringRemainFixedRedacted() {
     assertEquals(
         "MigrationMasterReferenceVerifier[REDACTED]",
         new MigrationMasterReferenceVerifier().toString());
@@ -362,7 +363,8 @@ final class MigrationMasterReferenceVerifierTest {
   }
 
   @Test
-  void reference021EmptyDeclaredRowsCannotHideAnyCheckViolationOrUnknownCount() throws Exception {
+  void reference021EmptyDeclaredRowsCannotHideAnyCheckViolationOrUnknownCount()
+      throws SQLException {
     var declared = new MigrationMasterCopyDataset(new SpeakerCopyBatch(List.of()), emptyContent());
     for (int slot = 16; slot < QUERIES; slot++) {
       for (var shape :
@@ -673,7 +675,7 @@ final class MigrationMasterReferenceVerifierTest {
             stamp));
   }
 
-  private static MediaAssetCopyBatch media(String stamp) throws Exception {
+  private static MediaAssetCopyBatch media(String stamp) throws NoSuchAlgorithmException {
     var manifest =
         new AssetMigrationManifest(
             List.of(
