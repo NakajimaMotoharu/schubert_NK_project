@@ -1,0 +1,64 @@
+{
+  "run": "PG42400",
+  "source": "4dc5794dbe19528f83055da1055d69f89aa346fc",
+  "actualToolSource": "3ab80b846e27308aab029821581b113ecaf78fc9",
+  "javaCore": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-P020-01.02/2",
+  "terminalAtUTC": "2026-11-22T08:16:46.069007+00:00",
+  "design": {
+    "path": "documents/200_UI/260_引継ぎ・監査/264_現行互換性Characterization Test仕様.md",
+    "commit": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "sha256": "0b0973e6e1e94858e840bc1b85df1daff35e3a0fe9f28ea12331823c2cbcf781",
+    "lines": {
+      "DIF-011": 90,
+      "DIF-016": 95
+    }
+  },
+  "existingTests": {
+    "PT-CHR-DEF026": "requiresCacheObservationEvenWhenTheOldHeaderWasUnchanged",
+    "PT-CHR-DEF027": "rejectsCacheControlOtherThanApprovedNoStore",
+    "PT-CHR-DEF028": "rejectsCacheObservationForADifferentField",
+    "PT-CHR-DEF029": "rejectsStringCountEvenWhenItsCharactersMatchTheApprovedNumber",
+    "PT-CHR-DEF030": "requiresOldestInvalidationEvidenceAlongsideTheCorrectCount",
+    "PT-CHR-DEF031": "leavesAnAdditionalSessionLossUnregistered",
+    "PT-CHR-DEF032": "rejectsAnUnapprovedConfiguredMaximum",
+    "PT-CHR-DEF033": "requiresTheOldestSessionsObservedRedirect"
+  },
+  "originalWholeOutcome": {
+    "tests": 218,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "coverageProof": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG41346-p020-current-218-independent-v1/manifest.json",
+    "sha256": "d2191089b0953b97f34e139d3d62a5bde47387bdb3e0ff14dde155198bb41a15"
+  },
+  "frameworkTrace": [
+    {
+      "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG41344-p020-current-218-local-v1/manifest.json",
+      "sha256": "5f9119617ebed6632218f46bd81c2b858f6c8fa3064a827edd1fb9b470d9148c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39954-p020-cache-and-session-independent-v1/manifest.json",
+      "sha256": "c9b8c811bccc4dc68d3b8cb697b216dbe66955d7cbfb344ed715e85fd01bfe79"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41344-p020-current-218-local-v1/reports/TEST-junit-jupiter.xml",
+      "sha256": "8f6b635830262186ba682cf3b682f56d8b732f1a557452d62cebae4c95ef4dd4"
+    }
+  ],
+  "protectedBaselineSource": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG42378-p0200102-dif014-current-tool-proof-v1/manifest.json",
+    "sha256": "838fea686fc0c8f615fd536cb5625d0a33588b58ccb9f798d666ab5db1e04e0e"
+  },
+  "remaining": {
+    "DIF-011": "same-source actual authenticated HTTP cache and follow-up request",
+    "DIF-016": "same-account two active sessions followed by authorized third login, actual oldest eviction, other two preserved and approved response",
+    "shared": "live CHR and 451"
+  },
+  "actualOrdinaryOrRealChr": 0,
+  "replayingOldTests": 0,
+  "formalAcceptanceId": null,
+  "whole451": false
+}

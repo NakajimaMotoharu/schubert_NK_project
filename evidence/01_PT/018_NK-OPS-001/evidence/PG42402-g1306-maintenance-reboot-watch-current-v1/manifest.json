@@ -1,0 +1,199 @@
+{
+  "run": "PG42402",
+  "source": "8c99fbd2112183808d8d973bce7b3a9b3c1cef13",
+  "previousJavaCore": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "newJavaCandidateSource": "8c99fbd2112183808d8d973bce7b3a9b3c1cef13",
+  "wbs": "WBS-G13.06",
+  "buildScope": "cwd-private JDK-only branch",
+  "terminalAtUTC": "2026-11-22T08:25:32.765133+00:00",
+  "priorMeasurement": {
+    "source": "0c4782a2884993d39b691be20632ea673f3fcb0d",
+    "proof": [
+      {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42402-preboot-reboot-marker-decision-v1/begin.json",
+        "sha256": "a43117b863a3f13292a93d3cb1d2af91cf14d83a0b1829c20c20f442c544973a"
+      },
+      {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42402-preboot-reboot-marker-decision-v1/xml/TEST-junit-jupiter.xml",
+        "sha256": "8cd20dad99b274c79b64b16c53dab8f71822c788430f8cba752b232bd067df40"
+      },
+      {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42402-preboot-reboot-marker-decision-v1/reports/pmd.xml",
+        "sha256": "af081ff0eadccdd1f9aa6a88be7a8850e183d391a3f7a24a7c64e4603ee579c3"
+      },
+      {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42402-preboot-reboot-marker-decision-v1/scope.xml",
+        "sha256": "81ee56b8b945665be65bdefdb603eb626ea02ed0d2a67342035a46cb21a408b7"
+      }
+    ],
+    "ordinary": 8,
+    "merged": false
+  },
+  "tested": 8,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "testIds": {
+    "PT-OPS-MAINT-PREBOOT004-W01": "waitBeforeTheExactSixtyMinuteBoundary",
+    "PT-OPS-MAINT-PREBOOT004-W02": "missingMarkerIsCriticalAtTheDeadlineAndAfter",
+    "PT-OPS-MAINT-PREBOOT004-W03": "acceptsSameRunNewBootAtTheDeadlineIncludingLaterReview",
+    "PT-OPS-MAINT-PREBOOT004-W04": "wrongRunOrSameBootDoesNotQualify",
+    "PT-OPS-MAINT-PREBOOT004-W05": "staleFutureAndLateMarkersDoNotQualifyAtTheDeadline",
+    "PT-OPS-MAINT-PREBOOT004-W06": "backwardObservationIsInvalid",
+    "PT-OPS-MAINT-PREBOOT004-W07": "malformedOperandsProduceOnlyTheFixedInvalidDecision",
+    "PT-OPS-MAINT-PREBOOT004-W08": "commandPrintsOneDecisionForEachAcceptedOperandShape"
+  },
+  "targetCoverage": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 201
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 28
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 49
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 21
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 7
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 3
+    }
+  },
+  "reportedClasses": [
+    {
+      "name": "dev/codex/schubert/nk/batch/monitoring/MaintenanceRebootWatch",
+      "methods": [
+        "main",
+        "parseObservation",
+        "evaluate",
+        "canonicalId",
+        "<clinit>"
+      ]
+    },
+    {
+      "name": "dev/codex/schubert/nk/batch/monitoring/MaintenanceRebootWatch$Marker",
+      "methods": [
+        "<init>"
+      ]
+    },
+    {
+      "name": "dev/codex/schubert/nk/batch/monitoring/MaintenanceRebootWatch$Decision",
+      "methods": [
+        "<clinit>"
+      ]
+    }
+  ],
+  "physical": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42402-preboot-reboot-marker-decision-v2/target/classes/dev/codex/schubert/nk/batch/monitoring/MaintenanceRebootWatch$Decision.class",
+      "sha256": "1322984cdf659078e0b6f986f6be574e207098c1eb9b57fe69f7dfb70858af58"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42402-preboot-reboot-marker-decision-v2/target/classes/dev/codex/schubert/nk/batch/monitoring/MaintenanceRebootWatch$Marker.class",
+      "sha256": "f95df3320b4d3416dfab3eaf05db9023478d0c53b8c0b94361e5368bfb6793d8"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42402-preboot-reboot-marker-decision-v2/target/classes/dev/codex/schubert/nk/batch/monitoring/MaintenanceRebootWatch.class",
+      "sha256": "854c22e821fdaf76bda7a1b3c552db829f367dc457f0c9f629cd042122197976"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42402-preboot-reboot-marker-decision-v2/target/classes/dev/codex/schubert/nk/batch/monitoring/package-info.class",
+      "sha256": "be87566494520630402b9cc7c20713ac5fccac9b97505cbe551abc6c24843077"
+    }
+  ],
+  "manualExclusions": 0,
+  "compilerGenerated": {
+    "packageInfo": "no executable code",
+    "others": "Default JaCoCo0.8.15 filtering of compiler-generated record and enum methods; raw unfiltered counters not measured."
+  },
+  "javaCodeCandidateDiff": [
+    "src/deployment/systemd/schubert-nk-maintenance.timer.template",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MaintenanceRebootWatch.java"
+  ],
+  "staticResolution": {
+    "NullAway": 0,
+    "Checkstyle": 0,
+    "rawPmd": 1,
+    "pmdFixtureUse": "Only read and restore the original System.out. The new test-owned stream is closed by try-with-resources. Closing the original would be an invalid fixture behavior.",
+    "rawSpotBugs": [
+      {
+        "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+        "testMethod": "lambda$malformedOperandsProduceOnlyTheFixedInvalidDecision$0",
+        "observed": "W07 asserts rejection of malformed constructor arguments. Test invokes public invariant boundary without changing source contract or suppressing raw findings."
+      },
+      {
+        "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+        "testMethod": "lambda$malformedOperandsProduceOnlyTheFixedInvalidDecision$1",
+        "observed": "W07 asserts rejection of malformed constructor arguments. Test invokes public invariant boundary without changing source contract or suppressing raw findings."
+      },
+      {
+        "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+        "testMethod": "lambda$malformedOperandsProduceOnlyTheFixedInvalidDecision$2",
+        "observed": "W07 asserts rejection of malformed constructor arguments. Test invokes public invariant boundary without changing source contract or suppressing raw findings."
+      }
+    ],
+    "productionApplicable": 0,
+    "additionalFixtureRuntimeConcern": 0,
+    "outputGuard": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42402-preboot-reboot-marker-decision-v2/guard.stdout",
+      "sha256": "0acf19dbb0c79650e85c88a106fd1bf4bf25687d47f305d0f78c5a6573c5ad39"
+    }
+  },
+  "proof": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42402-preboot-reboot-marker-decision-v2/begin.json",
+      "sha256": "cc4a0adfd28060480c41b62e4f6dee5ced82ed24d78f20800b5e749b998bfef3"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42402-preboot-reboot-marker-decision-v2/scope.exec",
+      "sha256": "efda1d9468e37c16f0b98da0b8ebda77fb1d5a352edf257bef31560237e34d83"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42402-preboot-reboot-marker-decision-v2/scope.xml",
+      "sha256": "47ef8ef8cafd1ad6346b269cc632abf5eae2dce8565fcb1fd8f5f1402f1c0cda"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42402-preboot-reboot-marker-decision-v2/guard.stdout",
+      "sha256": "0acf19dbb0c79650e85c88a106fd1bf4bf25687d47f305d0f78c5a6573c5ad39"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42402-preboot-reboot-marker-decision-v2/xml/TEST-junit-jupiter.xml",
+      "sha256": "5de38ead9e877d6c99e3e7ed3c8131cb188a0d4ff8fb6d69ec51e061cd110e7f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42402-preboot-reboot-marker-decision-v2/reports/spotbugs.xml",
+      "sha256": "34b75ed83d4e949b7e1f639d900751dbcb40dc70d092b65be4918ccfe1d9f8e4"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42402-preboot-reboot-marker-decision-v2/reports/pmd.xml",
+      "sha256": "715087a0d12016d415203ed40af78e7f213fbce9ab91277ae789a52c5229d3ae"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42402-preboot-reboot-marker-decision-v2/reports/checkstyle.xml",
+      "sha256": "9c9c1543a036d0c9ba063abe1fa3bb1460400f458e347bc238c3e406ad6cbe58"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42402-preboot-reboot-marker-decision-v2/compileStrict.stdout",
+      "sha256": "8760221690ee52f59e9e256cfe697a8485f4d6458c79546947afdef8ecc53a6c"
+    }
+  ],
+  "completeBatchJar": false,
+  "sameSourceWhole451": false,
+  "actualHostOperations": 0,
+  "formalAcceptanceId": null,
+  "remaining": [
+    "An approved external observer must supply authenticated reboot-marker facts and consume the actual decision.",
+    "Configured service, actor/boot marker collection, publication/alert wiring and real Linux response remain unverified.",
+    "Full same-source Batch packaging/451, CHR, external acceptance and WBS owner index."
+  ]
+}

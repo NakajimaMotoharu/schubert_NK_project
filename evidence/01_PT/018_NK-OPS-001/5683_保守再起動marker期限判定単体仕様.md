@@ -14,3 +14,7 @@ WBS-G13.06、C02、BUG-3577／YKT-2812、SS341 §4.2、UI251 §2、AVL-001／OPS
 | PT-OPS-MAINT-PREBOOT004-W08 | 4引数と7引数で実main入口を呼ぶ | `CRITICAL`／`COMPLETE` の固定行、全引数の再出力なし。 |
 
 実入口は `dev.codex.schubert.nk.batch.monitoring.MaintenanceRebootWatch`。引数はrun ID、開始前boot ID、開始時刻、観測時刻と、任意でmarkerのrun ID／boot ID／時刻の三項目。時刻はJavaのUTC Instant、識別子は正規UUID。監視側は出力の閉集合を判定に使用し、プロセス終了だけを正常の根拠としない。遅延更新は60分以内の完了を証明できない。実markerの作成・信頼性、外部監視への接続、実アラートと後続Linux試験は親仕様5677に残る。
+
+## 実行結果
+
+PG42402の是正後source 8c99fbd2112183808d8d973bce7b3a9b3c1cef13、通常8件成功。分岐28、行49、メソッド7、実行クラス3の各100%。reportに含まれるのは実コードで、package-infoは実行codeなし。Java生成record/enum methodのJaCoCo標準処理を維持し、手動除外0。NullAway／Checkstyle0、PMD生1は借用System.out、SpotBugs生3は意図的null入力のoracle。実経路や全Batch／451は未受入。evidence/01_PT/018_NK-OPS-001/evidence/PG42402-g1306-maintenance-reboot-watch-current-v1/manifest.json SHA256 03d4392101a025f5675f9c4d30f815f384ddb828620c68965ac0b74fee18d1fe。
