@@ -1,0 +1,79 @@
+{
+  "run": "PG42816",
+  "sourceWorktreeHead": "a1c6f5722081d063081a8145e29ac9e9e087b5ce",
+  "branch": "dev-foundation",
+  "wbs": "WBS-F03/2-2-b",
+  "actualExit": 0,
+  "startedAtUTC": "2026-11-22T16:19:27.751235+00:00",
+  "terminalAtUTC": "2026-11-22T16:19:29.188526+00:00",
+  "python": "3.14.4",
+  "inputPins": [
+    {
+      "path": "tools/quality/006_collect_scenario_evidence.py",
+      "sha256": "189944251c050157ca0927626d4ee5de6c041614214fbf076cec7bee07b40d02"
+    },
+    {
+      "path": "tools/quality/019_test_evidence_set.py",
+      "sha256": "84e94a6b8b117f960ddffaab8d6379831bd29d01f60a728ecee57963724cb629"
+    }
+  ],
+  "unit": {
+    "command": [
+      "python3",
+      "-B",
+      "tools/quality/019_test_evidence_set.py",
+      "-v"
+    ],
+    "actualExit": 0,
+    "toolTests": 119,
+    "newCases": 3,
+    "stdout": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42816-formal-spotbugs-completeness-v1/unit.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42816-formal-spotbugs-completeness-v1/unit.stderr",
+      "sha256": "6776ba988710a07072d5aa68dc0f2ddcb64898f8bc539a96b78ac478706dd2d0"
+    }
+  },
+  "archivedProtocol": {
+    "originalManifest": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42762-p01802-protocol-real-local-ci-v1/manifest.json",
+      "sha256": "93ccc017c908317d4ffe38456bd91027b90355386828ea2e27d621483518c7a5"
+    },
+    "sameRawXml": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42762-protocol-real-local-ci-entry-v1/snapshot/src/schubert-nk-protocol/target/spotbugsXml.xml",
+      "sha256": "033f00939b198bf30c3c1133eb5551bad2d032197f3bf38372f81b20b9152a9c"
+    },
+    "physicalClasses": 176,
+    "exactJarBytes": true,
+    "jar": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42762-protocol-real-local-ci-entry-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+      "sha256": "79210c39ae0ceee549878c1c25b22961a44cc4a379d90c8b1708b1c1b5c7efb5"
+    },
+    "parsed": {
+      "tool": "SpotBugs 4.10.4.0",
+      "violations": 0,
+      "errors": 0,
+      "missingClasses": 0,
+      "analysedClasses": 176
+    }
+  },
+  "syntheticMissingClassRaw": {
+    "oldGateAcceptedMissingClass": true,
+    "correctedGateAccepted": false,
+    "diagnostic": "nonpassing or incomplete module SpotBugs report",
+    "archivedReportUnchanged": true
+  },
+  "newProductTests": 0,
+  "newSpotbugsOrMavenExecutions": 0,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "source": "a8d94c1e87a779bd543a71f3b9502c3572ddfca7",
+  "terminal": {
+    "path": "../pgpt-runs/PG379/PG42816-formal-spotbugs-completeness-v1/terminal.json",
+    "sha256": "3374dc14148ca47692acb34a8c5205d856706dfcf862baede3790299cfe49bb7"
+  },
+  "bug": "BUG-3625",
+  "ykt": "YKT-2850"
+}
