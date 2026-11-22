@@ -1,0 +1,123 @@
+{
+  "eventId": "PGPT-20261008-8394",
+  "workCategory": "CONTRACT_AUDIT",
+  "source": "1b0545b63644558ba6732e683559605e3c7510fd",
+  "productionCoreMain": "f8532c27c2666570fe450f285c5a5436aacd8e7e",
+  "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+  "managementWorkIds": [
+    "WBS-P018-02/2"
+  ],
+  "planRow": {
+    "新版ID": "WBS-P018-02/2",
+    "第58版ID": "WBS-P018-02/2",
+    "費用主担当項目": "P018-02",
+    "計画窓": "繰越",
+    "予定期間・週末": "2027-01-10までの計画週",
+    "作業・成果物": "署名BOM・全artifact・host immutable／同source証拠による受入判定",
+    "先行ID・着手条件": "A1-26、WBS-P018-02/1、候補再資格-23.01、候補再資格-64.01、閉/WBS-F02、閉/WBS-F03",
+    "担当": "配布・基盤担当",
+    "旧短期残pp": "0.65",
+    "改訂残pp": "0.65",
+    "終了条件": "署名BOM・全artifact・host immutable：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。 固有要求：SCM-001,SCM-002,SCM-003,SCM-004,SCM-005",
+    "元項目の正式受入に必要な証拠": "現行の署名済み配布物・全artifact・BOM・host所有と不変性を照合。",
+    "参照する元項目": "P018-02、P019-02",
+    "lineNumber": 49
+  },
+  "run": "PG42612",
+  "startEvent": "PGPT-20261008-8393",
+  "outcome": {
+    "modelGeneratedNow": 3,
+    "modelTotal": 6,
+    "verifiedDependencyRecords": 170,
+    "knownModelScopeExtraRecords": {
+      "batch": 14,
+      "api": 13,
+      "web": 14
+    },
+    "licenseMetadataMissingInternalRecords": 8,
+    "ProductCompilation": 0,
+    "criteriaAdvanced": "Independent checksums and root identity for all three newly generated model inventories",
+    "remaining": [
+      "Explain model scope differences/disambiguate classifiers and graph size; first-party licences; full CI and acceptance"
+    ]
+  },
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42612-p01802-batch-and-web-api-model-bom-inventories-v1/manifest.json",
+    "sha256": "00832bfcf651cf855afcdf1b8eb2316b31b8ddc0ccad5ff664d581b693817f9b"
+  },
+  "nextEvidence": {
+    "run": "PG42614",
+    "wbs": "WBS-P018-02/2",
+    "target": "Fresh independent Maven model for runtime and compile scopes to resolve SCM005 model reconciliation",
+    "action": "Run pinned dependency tree goal for exact POM-only reactor, no package/CI/check bypass, inspect actual SBOM discrepancies."
+  },
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T11:54:49+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 32,
+      "remainingPercent": 68,
+      "resetsAt": 1795879772,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "modelRequested": "gpt-6.2-sol",
+  "modelObserved": null,
+  "reasoningRequested": "high",
+  "reasoningObserved": null,
+  "speedRequested": "standard",
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 32,
+    "remainingPercent": 68,
+    "resetsAt": 1795879772,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "fbb75d2981883bd453f9664a9d6a505b1e14fdfbeccd64b8f1e32af01b1594b7",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-22T11:54:49+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 32,
+        "remainingPercent": 68,
+        "resetsAt": 1795879772,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": null,
+  "sameQuotaWindow": false,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-22T11:54:31.808720+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": true,
+  "quotaBefore": {
+    "usedPercent": 32,
+    "remainingPercent": 68,
+    "resetsAt": 1795879771,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null
+}

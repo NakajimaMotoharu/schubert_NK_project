@@ -1,0 +1,415 @@
+{
+  "run": "PG42602",
+  "source": "1b0545b63644558ba6732e683559605e3c7510fd",
+  "javaCore": "f8532c27c2666570fe450f285c5a5436aacd8e7e",
+  "wbs": "WBS-P018-02/2",
+  "terminalAtUTC": "2026-11-22T11:42:46.582318+00:00",
+  "actualExit": 0,
+  "priorHandoff": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42168-f03-p00402-p01802-current-receipt-v1/manifest.json",
+    "sha256": "a6b9f1da46aa616df36f1ac360e7dada77e4e4dfef17f3deb7e1069d55a43117"
+  },
+  "canonicalSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+  "requirements": [
+    {
+      "path": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+      "sha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md",
+      "sha256": "130633a5915be6ad3a88d33264f00aa143ed8522a804f8f1503599bd0bb3a56f"
+    }
+  ],
+  "gateProcedure": {
+    "path": "documents/400_PGPT/450_品質/451_Build・静的解析・coverage方針.md",
+    "sha256": "7980a204c02574b235d588e3a05ae8fb7b26ecb18313f4f000918c9135da6f4c"
+  },
+  "versionControlledStandardCIEntryFound": {
+    "1b0545b63644558ba6732e683559605e3c7510fd": [],
+    "ee27a308b6b7da7bd9744000ee490a8f91956ead": []
+  },
+  "pomDefinitions": {
+    "pom.xml": {
+      "maven-enforcer-plugin": {
+        "version": "3.6.3",
+        "configuredGoals": [
+          [
+            null,
+            [
+              "enforce"
+            ]
+          ]
+        ]
+      },
+      "spotless-maven-plugin": {
+        "version": "3.10.2",
+        "configuredGoals": [
+          [
+            "validate",
+            [
+              "check"
+            ]
+          ]
+        ]
+      },
+      "maven-compiler-plugin": {
+        "version": "3.14.0",
+        "configuredGoals": [
+          [
+            null,
+            []
+          ]
+        ]
+      }
+    },
+    "program/characterization/pom.xml": {
+      "maven-compiler-plugin": {
+        "version": "3.14.0",
+        "configuredGoals": []
+      },
+      "maven-surefire-plugin": {
+        "version": "3.5.4",
+        "configuredGoals": []
+      },
+      "exec-maven-plugin": {
+        "version": "3.5.1",
+        "configuredGoals": []
+      },
+      "jacoco-maven-plugin": {
+        "version": "${jacoco.version}",
+        "configuredGoals": [
+          [
+            null,
+            [
+              "prepare-agent"
+            ]
+          ],
+          [
+            "verify",
+            [
+              "report"
+            ]
+          ],
+          [
+            "verify",
+            [
+              "check"
+            ]
+          ]
+        ]
+      }
+    },
+    "src/schubert-nk-protocol/pom.xml": {
+      "maven-compiler-plugin": {
+        "version": "3.14.0",
+        "configuredGoals": []
+      },
+      "maven-surefire-plugin": {
+        "version": "3.5.4",
+        "configuredGoals": []
+      },
+      "jacoco-maven-plugin": {
+        "version": "${jacoco.version}",
+        "configuredGoals": [
+          [
+            null,
+            [
+              "prepare-agent"
+            ]
+          ],
+          [
+            "verify",
+            [
+              "report"
+            ]
+          ],
+          [
+            "verify",
+            [
+              "check"
+            ]
+          ]
+        ]
+      },
+      "spotbugs-maven-plugin": {
+        "version": "${spotbugs.plugin.version}",
+        "configuredGoals": [
+          [
+            "verify",
+            [
+              "check"
+            ]
+          ]
+        ]
+      }
+    },
+    "src/schubert-nk-storage/pom.xml": {
+      "maven-compiler-plugin": {
+        "version": "3.14.0",
+        "configuredGoals": []
+      },
+      "maven-surefire-plugin": {
+        "version": "3.5.4",
+        "configuredGoals": []
+      },
+      "jacoco-maven-plugin": {
+        "version": "${jacoco.version}",
+        "configuredGoals": [
+          [
+            null,
+            [
+              "prepare-agent"
+            ]
+          ],
+          [
+            "verify",
+            [
+              "report"
+            ]
+          ],
+          [
+            "verify",
+            [
+              "check"
+            ]
+          ]
+        ]
+      },
+      "spotbugs-maven-plugin": {
+        "version": "${spotbugs.plugin.version}",
+        "configuredGoals": [
+          [
+            "verify",
+            [
+              "check"
+            ]
+          ]
+        ]
+      }
+    },
+    "src/schubert-nk-bootstrap/pom.xml": {
+      "maven-jar-plugin": {
+        "version": "3.4.1",
+        "configuredGoals": [
+          [
+            null,
+            [
+              "test-jar"
+            ]
+          ]
+        ]
+      },
+      "maven-compiler-plugin": {
+        "version": "3.14.0",
+        "configuredGoals": []
+      },
+      "maven-surefire-plugin": {
+        "version": "3.5.4",
+        "configuredGoals": []
+      },
+      "jacoco-maven-plugin": {
+        "version": "${jacoco.version}",
+        "configuredGoals": [
+          [
+            null,
+            [
+              "prepare-agent"
+            ]
+          ],
+          [
+            "verify",
+            [
+              "report"
+            ]
+          ],
+          [
+            "verify",
+            [
+              "check"
+            ]
+          ]
+        ]
+      },
+      "spotbugs-maven-plugin": {
+        "version": "${spotbugs.plugin.version}",
+        "configuredGoals": [
+          [
+            "verify",
+            [
+              "check"
+            ]
+          ]
+        ]
+      }
+    },
+    "src/schubert-nk-api/pom.xml": {
+      "maven-compiler-plugin": {
+        "version": "3.14.0",
+        "configuredGoals": []
+      },
+      "jacoco-maven-plugin": {
+        "version": "${jacoco.version}",
+        "configuredGoals": [
+          [
+            null,
+            [
+              "prepare-agent"
+            ]
+          ],
+          [
+            "verify",
+            [
+              "report"
+            ]
+          ],
+          [
+            "verify",
+            [
+              "check"
+            ]
+          ]
+        ]
+      },
+      "spotbugs-maven-plugin": {
+        "version": "${spotbugs.plugin.version}",
+        "configuredGoals": [
+          [
+            "verify",
+            [
+              "check"
+            ]
+          ]
+        ]
+      },
+      "maven-surefire-plugin": {
+        "version": "3.5.4",
+        "configuredGoals": []
+      }
+    },
+    "src/schubert-nk-web/pom.xml": {
+      "maven-compiler-plugin": {
+        "version": "3.14.0",
+        "configuredGoals": []
+      },
+      "jacoco-maven-plugin": {
+        "version": "${jacoco.version}",
+        "configuredGoals": [
+          [
+            null,
+            [
+              "prepare-agent"
+            ]
+          ],
+          [
+            "verify",
+            [
+              "report"
+            ]
+          ],
+          [
+            "verify",
+            [
+              "check"
+            ]
+          ]
+        ]
+      },
+      "spotbugs-maven-plugin": {
+        "version": "${spotbugs.plugin.version}",
+        "configuredGoals": [
+          [
+            "verify",
+            [
+              "check"
+            ]
+          ]
+        ]
+      },
+      "maven-surefire-plugin": {
+        "version": "3.5.4",
+        "configuredGoals": []
+      }
+    },
+    "src/schubert-nk-batch/pom.xml": {
+      "maven-compiler-plugin": {
+        "version": "3.14.0",
+        "configuredGoals": []
+      },
+      "maven-surefire-plugin": {
+        "version": "3.5.4",
+        "configuredGoals": []
+      },
+      "jacoco-maven-plugin": {
+        "version": "${jacoco.version}",
+        "configuredGoals": [
+          [
+            null,
+            [
+              "prepare-agent"
+            ]
+          ],
+          [
+            "verify",
+            [
+              "report"
+            ]
+          ],
+          [
+            "verify",
+            [
+              "check"
+            ]
+          ]
+        ]
+      },
+      "spotbugs-maven-plugin": {
+        "version": "${spotbugs.plugin.version}",
+        "configuredGoals": [
+          [
+            "verify",
+            [
+              "check"
+            ]
+          ]
+        ]
+      }
+    }
+  },
+  "pomDigests": {
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "program/characterization/pom.xml": "e945f851958317aa2a80c4f1b06bcb310d789f69abd12ce38785c6bfb55d491b",
+    "src/schubert-nk-protocol/pom.xml": "f76b730fa1cb1b34a88182ca5b685ca14fb71361c037f9418f0895d2a3022d7d",
+    "src/schubert-nk-storage/pom.xml": "d4ed59631b9ebf965db518fbe4b7894c2beb71ee3f7c1e9cdbf7b4241c8179c7",
+    "src/schubert-nk-bootstrap/pom.xml": "174e3974a5fe17a226c8c43a0cd49ae70d395cb4f236168da07cd7482a67908c",
+    "src/schubert-nk-api/pom.xml": "2aff7af3d90feaee1f6c09f7ad300627ed911e8372504fcfd383391429a58114",
+    "src/schubert-nk-web/pom.xml": "9b6c47c3ab3ba0d105f41f081de10b2234af4653fdc371a8eacdf9cabb78761b",
+    "src/schubert-nk-batch/pom.xml": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495"
+  },
+  "expectedNamedPluginBindings": {
+    "dependencyRisk": [],
+    "license": [],
+    "sbom": [],
+    "spotbugs": [
+      "spotbugs-maven-plugin"
+    ],
+    "pmd": [],
+    "checkstyle": []
+  },
+  "toolkitDiscoveryIsNotCIRun": true,
+  "currentLocalCovered": [
+    "Maven release/format/convergence and NullAway configuration",
+    "all reactor module JaCoCo declarations",
+    "ordinary local artifact packaging and isolated tool receipts"
+  ],
+  "currentMissingProof": [
+    "Tracked commit/merge CI entry and authorized launcher binding",
+    "Independent full-scope static reports and both dependency-risk and license steps",
+    "Release SBOM and artifact digest receipt under same CI source/run",
+    "Execution permission for applicable held builds/tests, and retention of redacted outcomes"
+  ],
+  "externalProviderChecked": false,
+  "backgroundJobsCreated": 0,
+  "actualCIExecutions": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

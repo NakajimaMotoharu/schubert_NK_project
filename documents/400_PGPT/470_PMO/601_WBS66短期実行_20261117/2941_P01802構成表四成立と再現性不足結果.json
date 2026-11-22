@@ -1,0 +1,118 @@
+{
+  "eventId": "PGPT-20261008-8386",
+  "workCategory": "CONTRACT_AUDIT",
+  "source": "1b0545b63644558ba6732e683559605e3c7510fd",
+  "productionCoreMain": "f8532c27c2666570fe450f285c5a5436aacd8e7e",
+  "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+  "managementWorkIds": [
+    "WBS-P018-02/2"
+  ],
+  "planRow": {
+    "新版ID": "WBS-P018-02/2",
+    "第58版ID": "WBS-P018-02/2",
+    "費用主担当項目": "P018-02",
+    "計画窓": "繰越",
+    "予定期間・週末": "2027-01-10までの計画週",
+    "作業・成果物": "署名BOM・全artifact・host immutable／同source証拠による受入判定",
+    "先行ID・着手条件": "A1-26、WBS-P018-02/1、候補再資格-23.01、候補再資格-64.01、閉/WBS-F02、閉/WBS-F03",
+    "担当": "配布・基盤担当",
+    "旧短期残pp": "0.65",
+    "改訂残pp": "0.65",
+    "終了条件": "署名BOM・全artifact・host immutable：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。 固有要求：SCM-001,SCM-002,SCM-003,SCM-004,SCM-005",
+    "元項目の正式受入に必要な証拠": "現行の署名済み配布物・全artifact・BOM・host所有と不変性を照合。",
+    "参照する元項目": "P018-02、P019-02",
+    "lineNumber": 49
+  },
+  "run": "PG42604",
+  "startEvent": "PGPT-20261008-8385",
+  "outcome": {
+    "actualMavenExit": 0,
+    "requiredArtifactEvidencePassed": 4,
+    "reproducibilityFailed": 1,
+    "ptPassed": 0,
+    "criteriaAdvanced": "Protocol standalone draft CycloneDX 1.6 licensed dependency and actual SDK hash; inventoried without product compile",
+    "remaining": [
+      "Correct bound reproducibility Maven property, preserve dynamic-time original",
+      "Other modules, CI, dependency risk and final source/run"
+    ]
+  },
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42604-p01802-protocol-standard-software-inventory-v1/manifest.json",
+    "sha256": "f64fdcf513b61bb1c59273b6ac3c8ccf6f573fdf943ac293773e541f7098d537"
+  },
+  "nextEvidence": {
+    "run": "PG42606",
+    "wbs": "WBS-P018-02/2",
+    "target": "A reproducible official Protocol SBOM with current root/module POM data and locked SDK",
+    "action": "Use official project.build.outputTimestamp knob and run two independent clean output dirs in local offline mode for byte equality."
+  },
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T11:46:46+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 32,
+      "remainingPercent": 68,
+      "resetsAt": 1795879772,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "modelRequested": "gpt-6.2-sol",
+  "modelObserved": null,
+  "reasoningRequested": "high",
+  "reasoningObserved": null,
+  "speedRequested": "standard",
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 32,
+    "remainingPercent": 68,
+    "resetsAt": 1795879772,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "4d350cfcfbd4d1c8fb7ad3ea15bbf69fcb167b06897273c0f3ed868742f488d0",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-22T11:46:46+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 32,
+        "remainingPercent": 68,
+        "resetsAt": 1795879772,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": 0,
+  "sameQuotaWindow": true,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-22T11:46:36.347127+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": false,
+  "quotaBefore": {
+    "usedPercent": 32,
+    "remainingPercent": 68,
+    "resetsAt": 1795879772,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null
+}

@@ -1,0 +1,839 @@
+{
+  "bomFormat" : "CycloneDX",
+  "specVersion" : "1.6",
+  "version" : 1,
+  "metadata" : {
+    "lifecycles" : [
+      {
+        "phase" : "build"
+      }
+    ],
+    "tools" : {
+      "components" : [
+        {
+          "type" : "library",
+          "author" : "OWASP Foundation",
+          "group" : "org.cyclonedx",
+          "name" : "cyclonedx-maven-plugin",
+          "version" : "2.9.3",
+          "description" : "CycloneDX Maven plugin",
+          "hashes" : [
+            {
+              "alg" : "MD5",
+              "content" : "e7c87ab327b65b23c681fc9dc8bb620b"
+            },
+            {
+              "alg" : "SHA-1",
+              "content" : "fa3f0f04f4d5077b5e085d4d09aa2e68aeba5260"
+            },
+            {
+              "alg" : "SHA-256",
+              "content" : "c452d5eebe28bc86bef2e7c72d129f04f60877bef843eac8120f01fb655be293"
+            },
+            {
+              "alg" : "SHA-512",
+              "content" : "ec0344ed2ffe62d565aaf936a37140d04c7fffa8669a666be0366cd44eec3195232d79841cdec47030b79068216ac7e1a8c805255758e3d418dae32a4b9b9beb"
+            },
+            {
+              "alg" : "SHA-384",
+              "content" : "3df26b2a00d87fe090851975ebcc30217f98634e7c47d07128e148f325ebfe3bc0790b2f52ad4591734b7b0de738f003"
+            },
+            {
+              "alg" : "SHA3-384",
+              "content" : "470c1b4962379b5b6494c75bd1475da3519bbe2543999c95f26b4021164d3d05419b0c3f704443162fe5433a204250e9"
+            },
+            {
+              "alg" : "SHA3-256",
+              "content" : "900e9c4edb18940ed3c4a4ba6946957fa613ef0d4b0c380551638f229206373c"
+            },
+            {
+              "alg" : "SHA3-512",
+              "content" : "5e36433e18ae24f7460902da27818874df5d1d73df1a97e49e7369335f7cc61ca595466a2d37789fba7eaa7f7f251b29216c3d7a78910b2ec38e2ed68ea84876"
+            }
+          ]
+        }
+      ]
+    },
+    "component" : {
+      "type" : "library",
+      "bom-ref" : "pkg:maven/dev.codex.schubert/schubert-nk-bootstrap@0.1.0-SNAPSHOT?type=jar",
+      "group" : "dev.codex.schubert",
+      "name" : "schubert-nk-bootstrap",
+      "version" : "0.1.0-SNAPSHOT",
+      "purl" : "pkg:maven/dev.codex.schubert/schubert-nk-bootstrap@0.1.0-SNAPSHOT?type=jar"
+    },
+    "properties" : [
+      {
+        "name" : "maven.goal",
+        "value" : "makeBom"
+      },
+      {
+        "name" : "maven.scopes",
+        "value" : "compile,provided,runtime"
+      },
+      {
+        "name" : "cdx:reproducible",
+        "value" : "enabled"
+      }
+    ]
+  },
+  "components" : [
+    {
+      "type" : "library",
+      "bom-ref" : "pkg:maven/org.snakeyaml/snakeyaml-engine@3.1.1?type=jar",
+      "group" : "org.snakeyaml",
+      "name" : "snakeyaml-engine",
+      "version" : "3.1.1",
+      "description" : "Core YAML 1.2 parser and emitter for Java",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "16a9f224a0ac6d3720a6074fe0aa16b6"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "9f8bf41c9f06191abd4322072849603bdc919ac7"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "59d73655cf077f154137e2d6f6f92c041a954c0b1c534c63800047a0d70a6947"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "a8f9e033f87bb1fa68ca06c2a5b2865df073b9e710a25ea24cfe30b42ab14c47f63a199289f3072d6c7110713509eb5b54ae98102deb7d73ab510dab82128f16"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "103835a568044f71ee2067374e27a7744b8ab34bbcc652bd7aa971daaeac499a06f57da51580b9e9a2582e551129ce86"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "43668214a99b6edf59077839bb0fb058cedd36cfa4613ef08669cb7e8bd4e8b826087b1114a2cc1f2303026fda3b8fff"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "aae912392d9726f9cf3eb82a0cda2f0798f522deb1c9411975052627e343a636"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "dc9719ae08e81fe8641236112b38826b992fbbc2aaccbd79553e03739078d82b67451774c0b0ae04fafa5f17aaf894a793a2f0296de079854462fa8e17053bff"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "Apache-2.0"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/org.snakeyaml/snakeyaml-engine@3.1.1?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://codeberg.org/snakeyaml/snakeyaml-engine"
+        },
+        {
+          "type" : "issue-tracker",
+          "url" : "https://codeberg.org/snakeyaml/snakeyaml-engine/issues"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://codeberg.org/snakeyaml/snakeyaml-engine/src"
+        }
+      ]
+    },
+    {
+      "type" : "library",
+      "bom-ref" : "pkg:maven/com.github.spotbugs/spotbugs-annotations@4.10.4?type=jar",
+      "group" : "com.github.spotbugs",
+      "name" : "spotbugs-annotations",
+      "version" : "4.10.4",
+      "description" : "Annotations the SpotBugs tool supports",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "472925cb4e5451c8f7a1aeeefe286622"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "7eb4c58212378becfb6ea6d236ec24a2352a316e"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "28fa4befaddce5d7b79b07c68e7c12fa27c5d9282c4229528717971606661ea3"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "360495652cc92447a1215a94a38c6070e4cfc4fb9b749a710f85341c823b1dfcb25ef1d536f38139071f38df81a7c4b584159d5625385df4f1c33fd5f03cda6a"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "4ee0b50e507bbbda6d8257dbbfc0a652fa8de55a98094e74c2da15657f35506830c336a93fcd4aa9c35d6eddb4ea9acb"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "fdef0ca412bcc5db50dfadb720960c2938e1bed08ecdac376d8d6f3f6205ff1bd38d916ff1b3b7678a70888b195a29d6"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "20e37a74b89d8ecaa88e4be4c3183a910fa71650446f96aba6b411dce15c63c6"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "db30e7bd60d0778aaf62017aca25e5ce76f7e2019bb2afe9920af14171820a3bb533a72af19690e0b2ef88cb2bdf8ee458e899280b87541e4644d35e6c6af5ec"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "LGPL-2.1-only"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/com.github.spotbugs/spotbugs-annotations@4.10.4?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://spotbugs.github.io/"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/spotbugs/spotbugs/"
+        }
+      ]
+    },
+    {
+      "type" : "library",
+      "bom-ref" : "pkg:maven/com.google.code.findbugs/jsr305@3.0.2?type=jar",
+      "group" : "com.google.code.findbugs",
+      "name" : "jsr305",
+      "version" : "3.0.2",
+      "description" : "JSR305 Annotations for Findbugs",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "dd83accb899363c32b07d7a1b2e4ce40"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "25ea2e8b0c338a877313bd4672d3fe056ea78f0d"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "bb09db62919a50fa5b55906013be6ca4fc7acb2e87455fac5eaf9ede2e41ce8bbafc0e5a385a561264ea4cd71bbbd3ef5a45e02d63277a201d06a0ae1636f804"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "ca0b169d3eb2d0922dc031133a021f861a043bb3e405a88728215fd6ff00fa52fdc7347842dcc2031472e3726164bdc4"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "9903fd7505218999f8262efedb3d935d64bcef84aae781064ab5e1b24755466b269517cada562fa140cd1d417ede57a1"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "223fda9a89a461afaae73b177a2dc20ed4a90f2f8757f5c65f3241b0510f00ff"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "3996b5af57a5d5c6a0cd62b11773360fb051dd86a2ba968476806a2a5d32049b82d69a24a3c694e8fe4d735be6a28e41000cc500cc2a9fb577e058045855d2d6"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "Apache-2.0"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/com.google.code.findbugs/jsr305@3.0.2?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "http://findbugs.sourceforge.net/"
+        },
+        {
+          "type" : "distribution-intake",
+          "url" : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://code.google.com/p/jsr-305/"
+        }
+      ]
+    },
+    {
+      "type" : "library",
+      "bom-ref" : "pkg:maven/com.google.code.gson/gson@2.14.0?type=jar",
+      "group" : "com.google.code.gson",
+      "name" : "gson",
+      "version" : "2.14.0",
+      "description" : "Gson JSON library",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "43b20830936ec97d8df6b174e3509d9e"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "efc0e34ede4e3204eaefb84a00e55e8c86634382"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "2cbd119bf1961c28788310963dc80ba65f58cdeec1dd139c8bdb1240faa2c36f"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "d040d19a47ca2df33365493f9813a1d0a40b91685f7d87ca445b98d37b4c1b801314aef87940dc8b43dd1b0b96f6d5e6e4296778bf1af8dbfb1091425b37da21"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "fb3f4db322b691e37e48df3eda60b8a216d1136619f9e354aa5e3ee7aa0b4afab985ae9510c16a6fe05ea674417b4cd6"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "7943b642d76b35f1e322ec7753c4de85cecc233d4cbd79582e93cf3551896c436f3bcc1166f51789470dec715f515312"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "46eafa830748a2fde4dc595d2aaf94417bc2956570f8406dc000b323738f8764"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "ba3abdb15073b5159782f05dbc440b76139d1d129d80a5cf98b035c399a405dec39b9c7fa7e6d8e5a2676f10fda63ed8b817538a8504ef381992a91fa1832b68"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "Apache-2.0",
+            "url" : "https://www.apache.org/licenses/LICENSE-2.0"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/com.google.code.gson/gson@2.14.0?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://github.com/google/gson"
+        },
+        {
+          "type" : "issue-tracker",
+          "url" : "https://github.com/google/gson/issues"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/google/gson/"
+        }
+      ]
+    },
+    {
+      "type" : "library",
+      "bom-ref" : "pkg:maven/com.google.errorprone/error_prone_annotations@2.48.0?type=jar",
+      "publisher" : "Google LLC",
+      "group" : "com.google.errorprone",
+      "name" : "error_prone_annotations",
+      "version" : "2.48.0",
+      "description" : "Error Prone is a static analysis tool for Java that catches common programming mistakes at compile-time.",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "5eba47749e8c9d5335cbbc5963300607"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "bbe30942a31d1778c74cb272321267eca82dc708"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "b49c5c958316ed67a09c699dda9aa749caf434d51d863dea599ef36a49b9c855"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "1692b210d2b4c1d446da1d86ee787be1c3be56ee8c5f4274f20ef126b57c444a403464df7b9dfdf10bccbe7e0432247ecffe615fbc30d16be7a3282cb2556d34"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "efea2f0806b5bb5cb92ed9f8988e76fbd643868d4d722eca33973c84630ea0f388448c4045534f6216804ac4e71ff5da"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "1f65eda335a3f951f586df57e9f40040c9bfc3a864a1121441de4fd990de7cc12aec90bedc5dffcf722fb3a69f7300d6"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "b8d212a5aa490597dfc742a2d230fc089761ab28ef6498496ed3343103317fe1"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "dd19d297d326c72c3a0285cba46b88946e2c1700cb1d992b3d5ce182bc9aa3722206c8c74ba14768140b6148c8656b5b500517eb201ba270d46a3fb2020d04dd"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "Apache-2.0"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/com.google.errorprone/error_prone_annotations@2.48.0?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://errorprone.info/error_prone_annotations"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/google/error-prone/error_prone_annotations"
+        }
+      ]
+    },
+    {
+      "type" : "library",
+      "bom-ref" : "pkg:maven/dev.codex.schubert/schubert-nk-storage@0.1.0-SNAPSHOT?type=jar",
+      "group" : "dev.codex.schubert",
+      "name" : "schubert-nk-storage",
+      "version" : "0.1.0-SNAPSHOT",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "539794a4055df0aaf2fd848c12f7285e"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "581d8727e775172b73890d494f0453fb7c2a99b9"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "e5be03a72a9cca548f68fc1ca7ee84ced8980dbea72162f58772215227be3ec0"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "e65cda21abf3250d9c559064e503c69aa0b0beab64f5e6fe26f4607ed2d07bec017c9a1208227fbea2da3db31c34751992a378d0826965b27224c603adac1feb"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "2ba10268cd0bf1f5f19192c0a860de07494e9f2de2e290c6b5a42e7fb70c7ee04116e38f27718e22f4e10129c7fbe534"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "f2f06dff445d433b165b025c73fd4afbffe565aca3e3f5d95ae367be72619d69994faf262dbf8d05b102523e28058d1d"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "064e2fea175a1d8244bc91ee12b3d189f970d35607f90d0d58f00d19a3f6f25a"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "967dadb01a4851e35ec76d49c2ff8227fd5ee26ebd96dea67f36eb50d234182352afde34d7732a5514a68c05fb77994f416601966d616d1a648e79b595cafc74"
+        }
+      ],
+      "purl" : "pkg:maven/dev.codex.schubert/schubert-nk-storage@0.1.0-SNAPSHOT?type=jar"
+    },
+    {
+      "type" : "library",
+      "bom-ref" : "pkg:maven/org.postgresql/postgresql@42.7.13?type=jar",
+      "publisher" : "PostgreSQL Global Development Group",
+      "group" : "org.postgresql",
+      "name" : "postgresql",
+      "version" : "42.7.13",
+      "description" : "PostgreSQL JDBC Driver Postgresql",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "52ba042322b750121222bd57423003b5"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "a6e1bd21b412d6ffb3df23cd13d507bc2cc9e37d"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "6e0e4cc2d8cae902084f8a2b18728b073a6fd9d1f87c9d8bff8f298c18185b93"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "9c1c4abd2febc8bfb0cedc02b8ec073f0b5ab1fce25956024e2bf81353b0a67e424fbc4cbf8e804e8d92a11f2c6440538ec962de52938516aa5251efff9ab187"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "3c74706eed0df6c847aca07a7f5554702887a3345e5da057efd629b3f404eb0f6fd33ddbafa687dfca09ca1fa9185a87"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "617e565389029a213ee778fe88fcdaaf5a21b1f97660726de358b40b9c41d304e6a681b71a27fb77fd017514df2e1346"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "8eb1a86d856497aec0b9c428c215a75f3b8acf8c519a33c538a4c95564db9a95"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "cf48526f5d57e7852351197be9c7698353e29f72c2219cf0af0425e9502046d032ba566f98ee3e5446cd5e2d34c30fec2df3ff784ef93d5c3750dc7dff3dc07e"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "BSD-2-Clause",
+            "url" : "https://opensource.org/licenses/BSD-2-Clause"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/org.postgresql/postgresql@42.7.13?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://jdbc.postgresql.org"
+        },
+        {
+          "type" : "issue-tracker",
+          "url" : "https://github.com/pgjdbc/pgjdbc/issues"
+        },
+        {
+          "type" : "mailing-list",
+          "url" : "https://www.postgresql.org/list/pgsql-jdbc/"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/pgjdbc/pgjdbc"
+        }
+      ]
+    },
+    {
+      "type" : "library",
+      "bom-ref" : "pkg:maven/org.checkerframework/checker-qual@3.55.1?type=jar",
+      "group" : "org.checkerframework",
+      "name" : "checker-qual",
+      "version" : "3.55.1",
+      "description" : "checker-qual contains annotations (type qualifiers) that a programmerwrites to specify Java code for type-checking by the Checker Framework.",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "05361199dc29af8334d1405f28b83109"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "3d40699936a66b2d4c1f759f2f1a0446c8cf64fc"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "857658c8bdcbff794949a8d9922f88d63ee3751c203c7cd7d21ea97f9e745288"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "564b78a1a0e76c756b74c60f9441a43cc5232b5d887bf7a701fdf8ff9e646f2900a10a56254534fa69499dff864338037edfb6d05f59ba52351e1013a522f316"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "cd20464a20b4f93e85f5e1917f747696b28803d171fa8d34762b3eac6b4541a0472772c21585fa5f43c1ae188a6dab48"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "1c7d8fe4a8922ef5a739ff7cf52c1a93f3aec79c7024a0e6f827ec865e6c63ee2818ce1d9412d9768bb2f45eb441bc0b"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "9eae4832715938932bbaf8846e4f8d24daf664bc2f368f65a6847644faab7329"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "5be2781a61e995e9cf1b284a9439f32391fc280b41d5b5c34c75539e055be9fd519564caef2f4a96672ad4946fd83ee391126c45d74f30c1ef606e5338dd842e"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "MIT"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/org.checkerframework/checker-qual@3.55.1?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://checkerframework.org/"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/typetools/checker-framework.git"
+        }
+      ]
+    },
+    {
+      "type" : "library",
+      "bom-ref" : "pkg:maven/com.zaxxer/HikariCP@7.1.0?type=jar",
+      "publisher" : "Zaxxer.com",
+      "group" : "com.zaxxer",
+      "name" : "HikariCP",
+      "version" : "7.1.0",
+      "description" : "Ultimate JDBC Connection Pool",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "4f40811c9309be1d38e27dbec4200359"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "13ac26e0d5ef25ae7f1515e59e525c500f013ccc"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "2be45c641b841e81df87292e181f2c203500c5f0e9a1676f135927387f3cf40b"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "d49d6cfd831d0b973fa16e61dc8682f983205dbb4399b679df4f18f3f30e1ddbc5247d3724881c1d3579144cc9aba11bd56e2aa9755a2c4754f5df21cc4760f3"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "dd518256d0ecade85921e17bae8b41d63e458b06cf7b80e8d2d666735b1ad87b6f6c4ebcb9545454cad5253966c3b11b"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "ca14a89ee53fa74f2864fd70da166b9ea70ba7ddf74aa06d19b3f034163ab0afd664bb168f28d9d7c255d7758faff67b"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "5ef8c54addf0ee782714d73dbcb40f64dca61f38dc1dd00b6e477a1854f7d22d"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "d46da214debedf24f58be53c2b679c1300af4ce96f8fdc94e2fb9c73608750056004f3b6d60f00c2884ce899b82a6b191bbc2a1455be6205af226b9ed2129b43"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "Apache-2.0"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/com.zaxxer/HikariCP@7.1.0?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://github.com/brettwooldridge/HikariCP"
+        },
+        {
+          "type" : "issue-tracker",
+          "url" : "https://github.com/brettwooldridge/HikariCP/issues"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/brettwooldridge/HikariCP"
+        }
+      ]
+    },
+    {
+      "type" : "library",
+      "bom-ref" : "pkg:maven/org.slf4j/slf4j-api@2.0.18?type=jar",
+      "publisher" : "QOS.ch",
+      "group" : "org.slf4j",
+      "name" : "slf4j-api",
+      "version" : "2.0.18",
+      "description" : "The slf4j API",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "fe2837bd49bfb76657419002fed20ca9"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "78a9e7a37cd6360e0b818e86341b24123d28d4df"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "44508fd1576500688c790b190acdd16fec4f8c79a3e0b900afd70503cf055f55"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "539288fa0c96cea750d11293dbed4c562630587aa7cd88bbf76ad04390d1c40636506da48faa6453090c7e9baa6b690b9fbded55a7e2b4a91547eeea011f971a"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "917885c7812289f5178f68e3c421153d55abd7fe5cc9a071ffdc5de48b7afc79c352c667a20a3ad0f3b4660952932513"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "d6898eb5dd2e5caa2185c6cd2804735802b3848a3041b82ef7faa7904b3eaf5ac382d43a70a71e22b77a929e10ae2aaf"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "6bbc9103bec05ef3280dd895d8c6267ccf8b940df03c9f5145cfaa77f6e9a41a"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "e2913e96e4b1c94e7cb5c46828d1afe68c5a7248293d5c16aaa9ab462ee8e0ff97dd3d1155d2a64f66ccd9bc1ac0c83476cc886b675004b2f84aaaf50e2b2af2"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "MIT",
+            "url" : "https://opensource.org/license/mit/"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/org.slf4j/slf4j-api@2.0.18?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "http://www.slf4j.org"
+        },
+        {
+          "type" : "distribution-intake",
+          "url" : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/qos-ch/slf4j/slf4j-parent/slf4j-api"
+        }
+      ]
+    },
+    {
+      "type" : "library",
+      "bom-ref" : "pkg:maven/org.jspecify/jspecify@1.0.1?type=jar",
+      "group" : "org.jspecify",
+      "name" : "jspecify",
+      "version" : "1.0.1",
+      "description" : "An artifact of well-named and well-specified annotations to power static analysis checks",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "d4fe1ea4d953b66fcb1d6043c22bffcf"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "3d60fd98eb8ade73004f4195c37b6317e02cf3d7"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "8f5ca6f5c25ee353bfbe3e5e5cd9847b3b3ed1e954a14a52c9aa016c673e02bfbc2e0f9308ad576c2a58720f8bf2139ad9883c7a881050fe96a2f87e2e623711"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "f7c6aea402675ed6d9286e6107d4bf6c2d1f757f9fce4c74807cbd43d426569324cf4c7faed28dc777e90ddb3a63db68"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "d462ead4749cc7b404b1699aedf472664e9bb38db769f2ec78a6457d2d080602f673af8b3114724dd92ee2262f464c41"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "f9392a7b674c37a7617d7e5ab4a6197c235c0a036244eaf550291d6756c0f1c9"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "3154b4940937103d74b77eede7abc7034168dc986284ef00ab4e4d5b537ed6370c6856787ae50711e62906b3011243c9a656b659ddd025c1e6b828c44b980855"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "Apache-2.0"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/org.jspecify/jspecify@1.0.1?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://jspecify.dev/"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/jspecify/jspecify/"
+        }
+      ]
+    }
+  ],
+  "dependencies" : [
+    {
+      "ref" : "pkg:maven/dev.codex.schubert/schubert-nk-bootstrap@0.1.0-SNAPSHOT?type=jar",
+      "dependsOn" : [
+        "pkg:maven/org.snakeyaml/snakeyaml-engine@3.1.1?type=jar",
+        "pkg:maven/com.github.spotbugs/spotbugs-annotations@4.10.4?type=jar",
+        "pkg:maven/com.google.code.gson/gson@2.14.0?type=jar",
+        "pkg:maven/dev.codex.schubert/schubert-nk-storage@0.1.0-SNAPSHOT?type=jar",
+        "pkg:maven/org.postgresql/postgresql@42.7.13?type=jar",
+        "pkg:maven/org.checkerframework/checker-qual@3.55.1?type=jar",
+        "pkg:maven/com.zaxxer/HikariCP@7.1.0?type=jar",
+        "pkg:maven/org.jspecify/jspecify@1.0.1?type=jar"
+      ]
+    },
+    {
+      "ref" : "pkg:maven/org.snakeyaml/snakeyaml-engine@3.1.1?type=jar",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "pkg:maven/com.github.spotbugs/spotbugs-annotations@4.10.4?type=jar",
+      "dependsOn" : [
+        "pkg:maven/com.google.code.findbugs/jsr305@3.0.2?type=jar"
+      ]
+    },
+    {
+      "ref" : "pkg:maven/com.google.code.findbugs/jsr305@3.0.2?type=jar",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "pkg:maven/com.google.code.gson/gson@2.14.0?type=jar",
+      "dependsOn" : [
+        "pkg:maven/com.google.errorprone/error_prone_annotations@2.48.0?type=jar"
+      ]
+    },
+    {
+      "ref" : "pkg:maven/com.google.errorprone/error_prone_annotations@2.48.0?type=jar",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "pkg:maven/dev.codex.schubert/schubert-nk-storage@0.1.0-SNAPSHOT?type=jar",
+      "dependsOn" : [
+        "pkg:maven/org.jspecify/jspecify@1.0.1?type=jar"
+      ]
+    },
+    {
+      "ref" : "pkg:maven/org.jspecify/jspecify@1.0.1?type=jar",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "pkg:maven/org.postgresql/postgresql@42.7.13?type=jar",
+      "dependsOn" : [
+        "pkg:maven/org.checkerframework/checker-qual@3.55.1?type=jar"
+      ]
+    },
+    {
+      "ref" : "pkg:maven/org.checkerframework/checker-qual@3.55.1?type=jar",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "pkg:maven/com.zaxxer/HikariCP@7.1.0?type=jar",
+      "dependsOn" : [
+        "pkg:maven/org.slf4j/slf4j-api@2.0.18?type=jar"
+      ]
+    },
+    {
+      "ref" : "pkg:maven/org.slf4j/slf4j-api@2.0.18?type=jar",
+      "dependsOn" : [ ]
+    }
+  ]
+}

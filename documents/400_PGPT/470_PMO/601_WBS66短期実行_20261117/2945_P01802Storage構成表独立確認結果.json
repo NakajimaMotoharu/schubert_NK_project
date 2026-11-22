@@ -1,0 +1,117 @@
+{
+  "eventId": "PGPT-20261008-8390",
+  "workCategory": "CONTRACT_AUDIT",
+  "source": "1b0545b63644558ba6732e683559605e3c7510fd",
+  "productionCoreMain": "f8532c27c2666570fe450f285c5a5436aacd8e7e",
+  "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+  "managementWorkIds": [
+    "WBS-P018-02/2"
+  ],
+  "planRow": {
+    "新版ID": "WBS-P018-02/2",
+    "第58版ID": "WBS-P018-02/2",
+    "費用主担当項目": "P018-02",
+    "計画窓": "繰越",
+    "予定期間・週末": "2027-01-10までの計画週",
+    "作業・成果物": "署名BOM・全artifact・host immutable／同source証拠による受入判定",
+    "先行ID・着手条件": "A1-26、WBS-P018-02/1、候補再資格-23.01、候補再資格-64.01、閉/WBS-F02、閉/WBS-F03",
+    "担当": "配布・基盤担当",
+    "旧短期残pp": "0.65",
+    "改訂残pp": "0.65",
+    "終了条件": "署名BOM・全artifact・host immutable：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。 固有要求：SCM-001,SCM-002,SCM-003,SCM-004,SCM-005",
+    "元項目の正式受入に必要な証拠": "現行の署名済み配布物・全artifact・BOM・host所有と不変性を照合。",
+    "参照する元項目": "P018-02、P019-02",
+    "lineNumber": 49
+  },
+  "run": "PG42608",
+  "startEvent": "PGPT-20261008-8389",
+  "outcome": {
+    "passedBOMCriteria": 1,
+    "candidateSoftwareBomTechnical": 2,
+    "modelOnlyActual": 1,
+    "actualJavaPT": 0,
+    "criteriaAdvanced": "Exact Storage independent standard BOM, includes pinned JSpecify artifact checksum and Apache licence",
+    "remaining": [
+      "Bootstrap/Batch dependency inventories, full release, applicable risk and CI reception"
+    ]
+  },
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42608-p01802-storage-standard-software-inventory-v1/manifest.json",
+    "sha256": "c7ea1b6f579b35de73202cfc032ceb2385c821f368289755995eb9fbe1be936d"
+  },
+  "nextEvidence": {
+    "run": "PG42610",
+    "wbs": "WBS-P018-02/2",
+    "target": "Bootstrap software inventory using only the original admitted regular Storage artifact",
+    "action": "Use private isolated local repository with exact POMs/regular Storage and pinned cached plugin; check Bootstrap library dependency graph without Java/native."
+  },
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T11:50:30+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 32,
+      "remainingPercent": 68,
+      "resetsAt": 1795879771,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "modelRequested": "gpt-6.2-sol",
+  "modelObserved": null,
+  "reasoningRequested": "high",
+  "reasoningObserved": null,
+  "speedRequested": "standard",
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 32,
+    "remainingPercent": 68,
+    "resetsAt": 1795879771,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "23b393f2c1600678e3e4d1b114600bc60e2b69e4d1bc53214a2eadefd7560d7b",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-22T11:50:30+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 32,
+        "remainingPercent": 68,
+        "resetsAt": 1795879771,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": null,
+  "sameQuotaWindow": false,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-22T11:49:42.769073+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": true,
+  "quotaBefore": {
+    "usedPercent": 32,
+    "remainingPercent": 68,
+    "resetsAt": 1795879772,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null
+}
