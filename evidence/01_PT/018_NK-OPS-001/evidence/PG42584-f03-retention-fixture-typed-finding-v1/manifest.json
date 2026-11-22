@@ -1,0 +1,130 @@
+{
+  "run": "PG42584",
+  "source": "58d7fea6c378c4f31849f7403ef88e7c589d00d5",
+  "javaCore": "f8532c27c2666570fe450f285c5a5436aacd8e7e",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-22T11:23:34.357847+00:00",
+  "actualExit": 4,
+  "compileExit": 0,
+  "previousPoint": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40986-f03-mode-policy-explicit-comparison-v2/unit.exec",
+    "sha256": "c8b3c5afe812615175516b6f9aeecfe41fc58a5f4054759e659c87eed3ed39ef"
+  },
+  "typedInput": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42584-retention-fixture-bounded-static-v1/begin.json",
+    "sha256": "e73a2ab59d03a5ed37123224af7a002fd42b52b78f8cc38a2417c02b8bc071e2"
+  },
+  "allowedModel3": [
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy$DetailService.class",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy$RetentionConfiguration.class",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy.class"
+  ],
+  "targetedTest": {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringRetentionConfigurationTest.java",
+    "sha256": "09a2d0b7c18a9f3c32a67401e785cf7d7f00e68ba2e8ce3af70d6601ebb80230"
+  },
+  "tools": {
+    "checkstyle": {
+      "actualExit": 0,
+      "terminalAtUTC": "2026-11-22T11:23:31.439596+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42584-retention-fixture-bounded-static-v1/checkstyle.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42584-retention-fixture-bounded-static-v1/checkstyle.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "pmd": {
+      "actualExit": 4,
+      "terminalAtUTC": "2026-11-22T11:23:33.952897+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42584-retention-fixture-bounded-static-v1/pmd.stdout",
+        "sha256": "19741b1cb9f5a876b8aac116f84e57abc43697b5e6e7529f48cd1120c2facb16"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42584-retention-fixture-bounded-static-v1/pmd.stderr",
+        "sha256": "0345ca0b2c1012fe5d0aeb91a22cbbfaedebf6054584b763030d9b61af11a25a"
+      }
+    },
+    "spotbugs": {
+      "actualExit": 1,
+      "terminalAtUTC": "2026-11-22T11:23:34.352814+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42584-retention-fixture-bounded-static-v1/spotbugs.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42584-retention-fixture-bounded-static-v1/spotbugs.stderr",
+        "sha256": "83febadc46f214e89709b832aae077e8a743258c2778ad97727d55ed33462071"
+      }
+    }
+  },
+  "reportedStaticPaths": {
+    "checkstyle": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42584-retention-fixture-bounded-static-v1/reports/checkstyle.xml",
+      "sha256": "d5fb41b2ee6e1d96cefbc646c189b283bbcc2a68a71f7e51862e4dd8fe626526"
+    },
+    "pmd": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42584-retention-fixture-bounded-static-v1/reports/pmd.xml",
+      "sha256": "a41e689f95f28a8981cd90ec9fe8011c52662cee383074ea07d86658d4b82a29"
+    },
+    "spotbugs": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42584-retention-fixture-bounded-static-v1/reports/spotbugs.xml",
+      "sha256": "9dba6d39cc3164eb96494c91640975437fdda932e44d5f2aea978e7b6160e422"
+    }
+  },
+  "staticErrors": {
+    "spotbugs": 0,
+    "pmd": 0,
+    "checkstyle": 0
+  },
+  "spotbugs": [
+    {
+      "type": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+      "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringRetentionConfigurationTest",
+      "method": "lambda$retConf004NegativeInvariantsAndNullOptionalAreRejectedNotUnknownSuccess$3"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringRetentionConfigurationTest",
+      "method": "retConf007ParallelModeVerificationCannotMutateOrShareOtherModesConfiguration"
+    }
+  ],
+  "pmd": [
+    {
+      "file": "MonitoringRetentionConfigurationTest.java",
+      "rule": "CloseResource",
+      "line": 178
+    },
+    {
+      "file": "MonitoringRetentionConfigurationTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 178
+    },
+    {
+      "file": "MonitoringRetentionConfigurationTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 180
+    },
+    {
+      "file": "MonitoringRetentionConfigurationTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 183
+    },
+    {
+      "file": "MonitoringRetentionConfigurationTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 184
+    },
+    {
+      "file": "MonitoringRetentionConfigurationTest.java",
+      "rule": "EqualsNull",
+      "line": 199
+    }
+  ],
+  "ordinaryTestsReexecuted": 0,
+  "realOperations": 0,
+  "formalAcceptanceId": null
+}

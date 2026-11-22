@@ -1,0 +1,113 @@
+{
+  "eventId": "PGPT-20261008-8374",
+  "workCategory": "CONTRACT_AUDIT",
+  "source": "16478703e35670a17478b9cf87bd073984f8dbff",
+  "productionCoreMain": "f8532c27c2666570fe450f285c5a5436aacd8e7e",
+  "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+  "managementWorkIds": [
+    "WBS-G07/current-post-publication-delta"
+  ],
+  "planRow": {
+    "新版ID": "WBS-G07/current-post-publication-delta",
+    "第58版ID": "WBS-G07",
+    "費用主担当項目": "G07",
+    "改訂残pp": "0.35",
+    "終了条件": "Only newly tracked commits after PG42544 scan cursor. Reconcile masks against independent artifact hashes. Never read private work objects.",
+    "先行ID・着手条件": "PG42544 checked cursor remains ancestor; local tracked source uniquely owned, previous published remote HEAD matches.",
+    "原票": {
+      "path": "documents/400_PGPT/470_PMO/481_PGPT詳細WBS.json",
+      "sha256": "4227e20a23b10ab8eecd2b69550dd7f58c79bf43a2f77b4c7c98ec943e83a2d9"
+    }
+  },
+  "run": "PG42592",
+  "startEvent": "PGPT-20261008-8373",
+  "outcome": {
+    "newTrackedCommits": 8,
+    "requiresReinspection": 0,
+    "confirmedSecret": 0,
+    "scannerActual": 0,
+    "criteriaAdvanced": "Zero suspected or confirmed sensitive content in exact newly tracked history; unchanged protected Current Git tree",
+    "remaining": [
+      "New paths after frontier before final 451 gate"
+    ]
+  },
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42592-g07-public-interval-no-findings-v1/manifest.json",
+    "sha256": "139add23de8dcbf66be046aa936cba0c761f6564f3a8c4a0530e75c8f84c8b8c"
+  },
+  "nextEvidence": {
+    "run": "PG42594",
+    "wbs": "WBS-P018-10.03/2-照合",
+    "target": "ServiceCredentialLocation fixed diagnostic test on deliberately invalid synthetic UTF-16 input",
+    "action": "Compare PG38490/92 exact storage copy/fixture and current runtime bytes; isolate no actual credential any operations."
+  },
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T11:31:57+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 31,
+      "remainingPercent": 69,
+      "resetsAt": 1795879771,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "modelRequested": "gpt-6.2-sol",
+  "modelObserved": null,
+  "reasoningRequested": "high",
+  "reasoningObserved": null,
+  "speedRequested": "standard",
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 31,
+    "remainingPercent": 69,
+    "resetsAt": 1795879771,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "7da1102e6603a19e30e30e8224e5b516c1bcc4fc12de2ff16099065c43127657",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-22T11:31:57+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 31,
+        "remainingPercent": 69,
+        "resetsAt": 1795879771,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": null,
+  "sameQuotaWindow": false,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-22T11:31:53.042198+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": true,
+  "quotaBefore": {
+    "usedPercent": 31,
+    "remainingPercent": 69,
+    "resetsAt": 1795879772,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null
+}

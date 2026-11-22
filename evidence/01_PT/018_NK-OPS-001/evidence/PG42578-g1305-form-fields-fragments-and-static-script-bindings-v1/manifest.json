@@ -1,0 +1,741 @@
+{
+  "run": "PG42578",
+  "source": "58d7fea6c378c4f31849f7403ef88e7c589d00d5",
+  "javaCore": "f8532c27c2666570fe450f285c5a5436aacd8e7e",
+  "wbs": "WBS-G13.05",
+  "terminalAtUTC": "2026-11-22T11:18:28.355637+00:00",
+  "actualExit": 0,
+  "screenEntryProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42572-g1305-screen-route-and-view-source-matrix-v1/manifest.json",
+    "sha256": "d21780fd19b0e330191cb310c0a56caf59158ac832927009232d911175be6e34"
+  },
+  "design": {
+    "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+    "sha256": "2b4e1ebb15b348b1f25d1502130d6a4a3607893868d7ea5e57d231ec7f3e58ef",
+    "sections": [
+      "§2 local scripts and view",
+      "§4 route registry",
+      "§5 form rules"
+    ]
+  },
+  "templates": {
+    "admin/user-detail.html": {
+      "hash": "c74fe2ced5c6492369f243bf9930e52e88fef40b18492195a1ac01a9b05f8fba",
+      "scope": "SCR-017",
+      "forms": [
+        {
+          "line": 24,
+          "method": "POST",
+          "path": "/admin/users/{id}",
+          "fields": [
+            {
+              "name": "operation",
+              "tag": "input",
+              "required": false
+            },
+            {
+              "name": "id",
+              "tag": "input",
+              "required": false
+            },
+            {
+              "name": "expected_version",
+              "tag": "input",
+              "required": false
+            },
+            {
+              "name": "operation_token",
+              "tag": "input",
+              "required": false
+            },
+            {
+              "name": "enabled",
+              "tag": "input",
+              "required": false
+            },
+            {
+              "name": "role",
+              "tag": "select",
+              "required": false
+            },
+            {
+              "name": "password",
+              "tag": "input",
+              "required": true
+            },
+            {
+              "name": "password_confirmation",
+              "tag": "input",
+              "required": true
+            },
+            {
+              "name": "confirm",
+              "tag": "input",
+              "required": true
+            }
+          ],
+          "hasExplicitCsrfPlaceholder": false,
+          "concurrentSubmitHandler": true
+        }
+      ],
+      "fragments": [
+        "fragments/layout.html"
+      ],
+      "scripts": [
+        "/js/operation-post-submit.js"
+      ]
+    },
+    "admin/user-list.html": {
+      "hash": "75ff8f6521d9e48c852264d839e17f9d2224f17ad2d486b37750cdae612e7655",
+      "scope": "SCR-015",
+      "forms": [
+        {
+          "line": 9,
+          "method": "GET",
+          "path": "/admin/users",
+          "fields": [
+            {
+              "name": "username",
+              "tag": "input",
+              "required": false
+            },
+            {
+              "name": "role",
+              "tag": "select",
+              "required": false
+            },
+            {
+              "name": "state",
+              "tag": "select",
+              "required": false
+            }
+          ],
+          "hasExplicitCsrfPlaceholder": false,
+          "concurrentSubmitHandler": false
+        }
+      ],
+      "fragments": [
+        "fragments/layout.html"
+      ],
+      "scripts": []
+    },
+    "admin/user-new.html": {
+      "hash": "97fd0f78dbfbe4538ca36e5ddda507ed55d762c040d12b09d544fc568b0dbedd",
+      "scope": "SCR-016",
+      "forms": [
+        {
+          "line": 10,
+          "method": "POST",
+          "path": "/admin/users/new",
+          "fields": [
+            {
+              "name": "operation_token",
+              "tag": "input",
+              "required": false
+            },
+            {
+              "name": "username",
+              "tag": "input",
+              "required": true
+            },
+            {
+              "name": "password",
+              "tag": "input",
+              "required": true
+            },
+            {
+              "name": "password_confirmation",
+              "tag": "input",
+              "required": true
+            },
+            {
+              "name": "role",
+              "tag": "select",
+              "required": false
+            },
+            {
+              "name": "enabled",
+              "tag": "select",
+              "required": false
+            }
+          ],
+          "hasExplicitCsrfPlaceholder": false,
+          "concurrentSubmitHandler": true
+        }
+      ],
+      "fragments": [
+        "fragments/layout.html"
+      ],
+      "scripts": [
+        "/js/operation-post-submit.js"
+      ]
+    },
+    "animation-list.html": {
+      "hash": "cfec2c00935f2af53ee51eb1726cfc676e1040312a0632d172f7e9ff283ac702",
+      "scope": "SCR-009",
+      "forms": [],
+      "fragments": [
+        "fragments/layout.html"
+      ],
+      "scripts": []
+    },
+    "animation-watch.html": {
+      "hash": "50cef0d1cd535d0c374205e63df51ba4308675541eb0fcc523168c0e34fc0b6c",
+      "scope": "SCR-010",
+      "forms": [],
+      "fragments": [
+        "fragments/layout.html"
+      ],
+      "scripts": []
+    },
+    "animation.html": {
+      "hash": "008fe35863ee9c48b82c674df78572573313b29c321686259a64e8191cbe5b4d",
+      "scope": "SCR-008",
+      "forms": [],
+      "fragments": [
+        "fragments/layout.html"
+      ],
+      "scripts": []
+    },
+    "error/error.html": {
+      "hash": "6fe51e31810e4481a1999e27fa136970945877a2ad12221411e617b1d10634d0",
+      "scope": "SCR-090",
+      "forms": [],
+      "fragments": [
+        "fragments/layout.html"
+      ],
+      "scripts": []
+    },
+    "fragments/layout.html": {
+      "hash": "a48bda151f893e28858afb26d1c636a564b8bd0cb3c3a16bc63bbb97f0e414bd",
+      "scope": "FRAGMENT",
+      "forms": [
+        {
+          "line": 20,
+          "method": "POST",
+          "path": "/logout",
+          "fields": [],
+          "hasExplicitCsrfPlaceholder": false,
+          "concurrentSubmitHandler": false
+        }
+      ],
+      "fragments": [],
+      "scripts": []
+    },
+    "fragments/log-pagination.html": {
+      "hash": "4b3908ed49684bf3acb35457656802e9e2e1a8dac5a84073b2f213413c543ee2",
+      "scope": "FRAGMENT",
+      "forms": [],
+      "fragments": [],
+      "scripts": []
+    },
+    "fragments/pagination.html": {
+      "hash": "ddf3ccc9a1f88adf5bd61c8c9aa8928022f97c6e8f314c48941aad267bd5cb80",
+      "scope": "FRAGMENT",
+      "forms": [],
+      "fragments": [],
+      "scripts": []
+    },
+    "login.html": {
+      "hash": "ba814efffec4be98d17338cacd63927d50aa552958188ba3fb7db0b77171443a",
+      "scope": "SCR-001",
+      "forms": [
+        {
+          "line": 18,
+          "method": "POST",
+          "path": "/login",
+          "fields": [
+            {
+              "name": "username",
+              "tag": "input",
+              "required": true
+            },
+            {
+              "name": "password",
+              "tag": "input",
+              "required": true
+            }
+          ],
+          "hasExplicitCsrfPlaceholder": false,
+          "concurrentSubmitHandler": false
+        }
+      ],
+      "fragments": [],
+      "scripts": []
+    },
+    "logs.html": {
+      "hash": "7bbd176e40d8a9f5b67be8f57cd27d42ccafd5e3bcabc95a56d75c370ce62708",
+      "scope": "SCR-014",
+      "forms": [
+        {
+          "line": 15,
+          "method": "GET",
+          "path": "/logs",
+          "fields": [
+            {
+              "name": "q",
+              "tag": "input",
+              "required": false
+            },
+            {
+              "name": "log_type",
+              "tag": "select",
+              "required": false
+            },
+            {
+              "name": "action",
+              "tag": "input",
+              "required": false
+            },
+            {
+              "name": "path",
+              "tag": "input",
+              "required": false
+            },
+            {
+              "name": "level",
+              "tag": "select",
+              "required": false
+            },
+            {
+              "name": "from",
+              "tag": "input",
+              "required": false
+            },
+            {
+              "name": "to",
+              "tag": "input",
+              "required": false
+            }
+          ],
+          "hasExplicitCsrfPlaceholder": false,
+          "concurrentSubmitHandler": false
+        }
+      ],
+      "fragments": [
+        "fragments/layout.html",
+        "fragments/log-pagination.html"
+      ],
+      "scripts": [
+        "/js/log-search-validation.js"
+      ]
+    },
+    "menu.html": {
+      "hash": "8369f16fb8b330b1a073003fa0b8c74e68e65b6ca579d85ad82f6582b7ad626a",
+      "scope": "SCR-002",
+      "forms": [],
+      "fragments": [
+        "fragments/layout.html"
+      ],
+      "scripts": []
+    },
+    "music-list.html": {
+      "hash": "59264dd712a377d0fe7da5b30e4277b2cea5d4ba4d450b7db1cbc765b3fcfc6d",
+      "scope": "SCR-013",
+      "forms": [],
+      "fragments": [
+        "fragments/layout.html"
+      ],
+      "scripts": []
+    },
+    "music-sections.html": {
+      "hash": "62b31b622da8c27fbfe8c238ea9a4579d12d22247bd2390b5dbfbbc88650d2e4",
+      "scope": "SCR-012",
+      "forms": [],
+      "fragments": [
+        "fragments/layout.html"
+      ],
+      "scripts": []
+    },
+    "music.html": {
+      "hash": "fbbf5a79417693cff98acdc75eef97fd30561362ce95fff4ad2d8b703d68743f",
+      "scope": "SCR-011",
+      "forms": [],
+      "fragments": [
+        "fragments/layout.html"
+      ],
+      "scripts": []
+    },
+    "notifications/detail.html": {
+      "hash": "10e4f709e65f4da0ee7f6afe05c13b3cc21cb3a0ad497a52ba1a2a2408824701",
+      "scope": "SCR-021",
+      "forms": [
+        {
+          "line": 23,
+          "method": "POST",
+          "path": "/notifications/{id}",
+          "fields": [
+            {
+              "name": "operation",
+              "tag": "input",
+              "required": false
+            },
+            {
+              "name": "id",
+              "tag": "input",
+              "required": false
+            },
+            {
+              "name": "operation_token",
+              "tag": "input",
+              "required": false
+            },
+            {
+              "name": "confirm",
+              "tag": "input",
+              "required": true
+            }
+          ],
+          "hasExplicitCsrfPlaceholder": true,
+          "concurrentSubmitHandler": true
+        }
+      ],
+      "fragments": [
+        "fragments/layout.html"
+      ],
+      "scripts": [
+        "/js/operation-post-submit.js"
+      ]
+    },
+    "notifications/list.html": {
+      "hash": "cb9ecfb4c5105b537acfd3733136e20b737b3aa31af04262986874e1c34236aa",
+      "scope": "SCR-020",
+      "forms": [
+        {
+          "line": 8,
+          "method": "GET",
+          "path": "/notifications",
+          "fields": [
+            {
+              "name": "type",
+              "tag": "select",
+              "required": false
+            },
+            {
+              "name": "from",
+              "tag": "input",
+              "required": false
+            },
+            {
+              "name": "to",
+              "tag": "input",
+              "required": false
+            }
+          ],
+          "hasExplicitCsrfPlaceholder": false,
+          "concurrentSubmitHandler": false
+        }
+      ],
+      "fragments": [
+        "fragments/layout.html"
+      ],
+      "scripts": []
+    },
+    "questions/accepted.html": {
+      "hash": "eded646286168f2c25805deb9938ba8b0db31e321881f781356cbf4bda889f53",
+      "scope": "SCR-019",
+      "forms": [],
+      "fragments": [
+        "fragments/layout.html"
+      ],
+      "scripts": []
+    },
+    "questions/detail.html": {
+      "hash": "106063b219b894417619b35cd8a120cffc4f4aa21432f59bfcf6b54f7595e9f2",
+      "scope": "SCR-023",
+      "forms": [
+        {
+          "line": 20,
+          "method": "POST",
+          "path": "/questions/{id}",
+          "fields": [
+            {
+              "name": "operation",
+              "tag": "input",
+              "required": false
+            },
+            {
+              "name": "id",
+              "tag": "input",
+              "required": false
+            },
+            {
+              "name": "operation_token",
+              "tag": "input",
+              "required": false
+            },
+            {
+              "name": "confirm",
+              "tag": "input",
+              "required": true
+            }
+          ],
+          "hasExplicitCsrfPlaceholder": true,
+          "concurrentSubmitHandler": true
+        }
+      ],
+      "fragments": [
+        "fragments/layout.html"
+      ],
+      "scripts": [
+        "/js/operation-post-submit.js"
+      ]
+    },
+    "questions/list.html": {
+      "hash": "d164e7957f53807c40d46d3247c1354202607f905eedd82f7971cd2a1d483af2",
+      "scope": "SCR-022",
+      "forms": [
+        {
+          "line": 8,
+          "method": "GET",
+          "path": "/questions",
+          "fields": [
+            {
+              "name": "keyword",
+              "tag": "input",
+              "required": false
+            },
+            {
+              "name": "from",
+              "tag": "input",
+              "required": false
+            },
+            {
+              "name": "to",
+              "tag": "input",
+              "required": false
+            },
+            {
+              "name": "username",
+              "tag": "input",
+              "required": false
+            },
+            {
+              "name": "state",
+              "tag": "select",
+              "required": false
+            }
+          ],
+          "hasExplicitCsrfPlaceholder": false,
+          "concurrentSubmitHandler": false
+        }
+      ],
+      "fragments": [
+        "fragments/layout.html"
+      ],
+      "scripts": []
+    },
+    "questions/new.html": {
+      "hash": "a71649b7e8237ad7962e32d92103d87dd92eb84343b77881f3970b3010038643",
+      "scope": "SCR-018",
+      "forms": [
+        {
+          "line": 11,
+          "method": "POST",
+          "path": "/questions/new",
+          "fields": [
+            {
+              "name": "operation_token",
+              "tag": "input",
+              "required": false
+            },
+            {
+              "name": "question",
+              "tag": "textarea",
+              "required": true
+            }
+          ],
+          "hasExplicitCsrfPlaceholder": false,
+          "concurrentSubmitHandler": false
+        }
+      ],
+      "fragments": [
+        "fragments/layout.html"
+      ],
+      "scripts": [
+        "/js/question-input-validation.js"
+      ]
+    },
+    "scenario-files.html": {
+      "hash": "d76bebbaacd86eca98f38b25eb918aacead98d44ea05f7c4bd5a619cfb71fa8f",
+      "scope": "SCR-006",
+      "forms": [],
+      "fragments": [
+        "fragments/layout.html"
+      ],
+      "scripts": []
+    },
+    "scenario-routes.html": {
+      "hash": "e0a641d27ce6f637fd4dfbb5f14b0c0cbce46ab874fdf15d566126b289fe6c88",
+      "scope": "SCR-005",
+      "forms": [],
+      "fragments": [
+        "fragments/layout.html"
+      ],
+      "scripts": []
+    },
+    "scenario.html": {
+      "hash": "b9709c596a3f98653d854f637ae48e742704b80537460c6f3acc5d6bd342a245",
+      "scope": "SCR-007",
+      "forms": [],
+      "fragments": [
+        "fragments/layout.html"
+      ],
+      "scripts": []
+    },
+    "scenarios.html": {
+      "hash": "c98273df221eb44c64c3c5303acb75b806e1b916c253b67ebd8baec300370234",
+      "scope": "SCR-004",
+      "forms": [],
+      "fragments": [
+        "fragments/layout.html"
+      ],
+      "scripts": []
+    },
+    "search.html": {
+      "hash": "e3db4ebdc9372eb396d2fe95cf56aced827d400503cca1317b3572e53a69c4a7",
+      "scope": "SCR-003",
+      "forms": [
+        {
+          "line": 18,
+          "method": "GET",
+          "path": "/search",
+          "fields": [
+            {
+              "name": "q",
+              "tag": "input",
+              "required": false
+            },
+            {
+              "name": "game",
+              "tag": "select",
+              "required": false
+            },
+            {
+              "name": "speaker",
+              "tag": "select",
+              "required": false
+            },
+            {
+              "name": "chapter",
+              "tag": "input",
+              "required": false
+            },
+            {
+              "name": "entry_type",
+              "tag": "select",
+              "required": false
+            },
+            {
+              "name": "voice",
+              "tag": "select",
+              "required": false
+            }
+          ],
+          "hasExplicitCsrfPlaceholder": false,
+          "concurrentSubmitHandler": false
+        }
+      ],
+      "fragments": [
+        "fragments/layout.html",
+        "fragments/pagination.html"
+      ],
+      "scripts": [
+        "/js/search-speaker-submit.js"
+      ]
+    }
+  },
+  "screenCount": 24,
+  "fragmentCount": 3,
+  "staticFormCount": 12,
+  "logicalOperationFormCountNotMeasured": true,
+  "assetReferences": 7,
+  "scriptAssets": {
+    "search-speaker-submit.js": {
+      "path": "src/schubert-nk-web/src/main/resources/static/js/search-speaker-submit.js",
+      "sha256": "dcf25a57a0e304391a0d3c880c263db246e296d6a7af0322283ddb72fa3e48fa",
+      "templates": [
+        "search.html"
+      ],
+      "existingLocalTestSource": [
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioSearchScriptTest.java",
+          "sha256": "ff3ee89e25ce10c551161ad0953715e391742fcffe6b1fa7ca9a56c005a81fe3",
+          "testsDeclared": 1
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioSearchTemplateTest.java",
+          "sha256": "8fbdf8fa3703e589cf74b077bd65bc4182dba71b967c9c182e6d943fae5cc591",
+          "testsDeclared": 8
+        }
+      ],
+      "testSourceLookupAbsence": []
+    },
+    "log-search-validation.js": {
+      "path": "src/schubert-nk-web/src/main/resources/static/js/log-search-validation.js",
+      "sha256": "b5cfbc9a689c91d0f14461e3e46dadb88844b5d0c38358d762dd241a5458efad",
+      "templates": [
+        "logs.html"
+      ],
+      "existingLocalTestSource": [
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/LogSearchScriptTest.java",
+          "sha256": "b96954b82cff3ef2e6bb3da1ad277c8ee01081d91b4c5e2fbc3e8162a0bff76c",
+          "testsDeclared": 1
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/LogSearchTemplateTest.java",
+          "sha256": "ec94acb49cd3815248462f80bf9e776a012421eea8e277799cf322657b1f52f2",
+          "testsDeclared": 8
+        }
+      ],
+      "testSourceLookupAbsence": []
+    },
+    "question-input-validation.js": {
+      "path": "src/schubert-nk-web/src/main/resources/static/js/question-input-validation.js",
+      "sha256": "742ebf22201034123b5e96fbb82b9fe25d0f8a5f0260651a42c011389a10cafa",
+      "templates": [
+        "questions/new.html"
+      ],
+      "existingLocalTestSource": [
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/QuestionInputScriptTest.java",
+          "sha256": "3253e842449d2f82e25365fdd3077b9f4d35d36dd88ccca08edc713930c655b7",
+          "testsDeclared": 1
+        },
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/QuestionFormReturnResourcePortTest.java",
+          "sha256": "ed7312f133d1bb957db5086e7c1ac3c37edbeb2ac44d120a1429a64960c319e5",
+          "testsDeclared": 8
+        }
+      ],
+      "testSourceLookupAbsence": []
+    },
+    "operation-post-submit.js": {
+      "path": "src/schubert-nk-web/src/main/resources/static/js/operation-post-submit.js",
+      "sha256": "771029cb5f80dd32d17af01a5fb8e7fe471a615268de6645d543f57001050429",
+      "templates": [
+        "admin/user-detail.html",
+        "admin/user-new.html",
+        "questions/detail.html",
+        "notifications/detail.html"
+      ],
+      "existingLocalTestSource": [
+        {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/OperationPostScriptTest.java",
+          "sha256": "6ebb98ab4a23ecd7c0b9bcbc1faa90691a9ca474a96fa0cf144395f1c8b7c59f",
+          "testsDeclared": 2
+        }
+      ],
+      "testSourceLookupAbsence": []
+    }
+  },
+  "inlineScriptOrEventDeclarations": 0,
+  "executedClientJS": 0,
+  "actualBrowser": 0,
+  "remaining": [
+    "Pair each specific local script case and rendered projection with actual input/terminal evidence",
+    "Controller-specific validation provenance, runtime route and 451 qualification"
+  ],
+  "formalAcceptanceId": null
+}
