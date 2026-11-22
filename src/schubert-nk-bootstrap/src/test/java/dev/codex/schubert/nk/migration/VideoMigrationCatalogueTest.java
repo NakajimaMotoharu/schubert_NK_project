@@ -11,15 +11,18 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
@@ -50,14 +53,14 @@ final class VideoMigrationCatalogueTest {
   private static final long MAX_N12 = 999999999999L;
 
   @Test
-  void allTwentyMetadataValuesEqualTheIndependentPrimaryDocumentGolden() throws Exception {
+  void allTwentyMetadataValuesEqualTheIndependentPrimaryDocumentGolden() throws IOException {
     assertEquals(
         new String(resource(METADATA_RESOURCE), StandardCharsets.UTF_8),
         canonical(new VideoMigrationCatalogue()));
   }
 
   @Test
-  void everyFixedLogicalIdLooksUpTheSameImmutableValue() throws Exception {
+  void everyFixedLogicalIdLooksUpTheSameImmutableValue() throws IOException {
     var catalogue = new VideoMigrationCatalogue();
     for (var expected : primaryRows()) {
       var video = catalogue.find(expected.get(1)).orElseThrow();
@@ -140,7 +143,7 @@ final class VideoMigrationCatalogueTest {
   }
 
   @Test
-  void catalogueListCannotBeMutatedOrPoisonAnotherInstance() throws Exception {
+  void catalogueListCannotBeMutatedOrPoisonAnotherInstance() throws IOException {
     var catalogue = new VideoMigrationCatalogue();
     assertThrows(UnsupportedOperationException.class, () -> catalogue.videos().clear());
     assertThrows(
@@ -159,7 +162,8 @@ final class VideoMigrationCatalogueTest {
   }
 
   @Test
-  void allTwentySeventeenColumnRowsEqualTheIndependentCopyWireGolden() throws Exception {
+  void allTwentySeventeenColumnRowsEqualTheIndependentCopyWireGolden()
+      throws IOException, NoSuchAlgorithmException {
     var inputs = inputs();
     var rows = new VideoMigrationCatalogue().copyRows(inputs.targetMap, inputs.manifest(), STAMP);
     assertEquals(COUNT, rows.size());
@@ -167,7 +171,8 @@ final class VideoMigrationCatalogueTest {
   }
 
   @Test
-  void mapAndManifestOrderingNeverReplaceTheApprovedDisplayOrder() throws Exception {
+  void mapAndManifestOrderingNeverReplaceTheApprovedDisplayOrder()
+      throws IOException, NoSuchAlgorithmException {
     var inputs = inputs();
     Collections.reverse(inputs.fileClaims);
     var reversed = new LinkedHashMap<@Nullable String, @Nullable Long>();
@@ -184,7 +189,7 @@ final class VideoMigrationCatalogueTest {
   }
 
   @Test
-  void missingOrExtraTargetMapEntriesAreRejected() throws Exception {
+  void missingOrExtraTargetMapEntriesAreRejected() throws IOException {
     var missing = inputs();
     missing.targetMap.remove(FIRST_ID);
     reject(missing);
@@ -194,7 +199,7 @@ final class VideoMigrationCatalogueTest {
   }
 
   @Test
-  void unknownOrNullKeyCannotReplaceAKnownTargetAtTheSameCount() throws Exception {
+  void unknownOrNullKeyCannotReplaceAKnownTargetAtTheSameCount() throws IOException {
     var unknown = inputs();
     unknown.targetMap.remove(FIRST_ID);
     unknown.targetMap.put(UNKNOWN_ID, 1001L);
@@ -206,7 +211,8 @@ final class VideoMigrationCatalogueTest {
   }
 
   @Test
-  void targetValuesAreNonNullPositiveN12AndGloballyUnique() throws Exception {
+  void targetValuesAreNonNullPositiveN12AndGloballyUnique()
+      throws IOException, NoSuchAlgorithmException {
     var nullValue = inputs();
     nullValue.targetMap.put(FIRST_ID, null);
     reject(nullValue);
@@ -230,7 +236,7 @@ final class VideoMigrationCatalogueTest {
   }
 
   @Test
-  void manifestMustDeclareExactlyTwentyFiles() throws Exception {
+  void manifestMustDeclareExactlyTwentyFiles() throws IOException {
     var missing = inputs();
     missing.fileClaims.removeLast();
     reject(missing);
@@ -242,7 +248,7 @@ final class VideoMigrationCatalogueTest {
   }
 
   @Test
-  void unknownAndCaseChangedCurrentPathsCannotReplaceAnApprovedFile() throws Exception {
+  void unknownAndCaseChangedCurrentPathsCannotReplaceAnApprovedFile() throws IOException {
     for (String path : List.of(UNKNOWN_PATH, "MAIN_PART/NUKITASHI_THE_ANIMATION_01.mp4")) {
       var invalid = inputs();
       var old = invalid.fileClaims.get(0);
@@ -255,7 +261,7 @@ final class VideoMigrationCatalogueTest {
   }
 
   @Test
-  void everyOtherAssetKindIsRejectedRatherThanSilentlyFiltered() throws Exception {
+  void everyOtherAssetKindIsRejectedRatherThanSilentlyFiltered() throws IOException {
     for (var kind :
         List.of(
             AssetMigrationManifest.Kind.SCENARIO,
@@ -272,7 +278,8 @@ final class VideoMigrationCatalogueTest {
   }
 
   @Test
-  void claimByteSizeIsForwardedToTheCurrentMediaRowContract() throws Exception {
+  void claimByteSizeIsForwardedToTheCurrentMediaRowContract()
+      throws IOException, NoSuchAlgorithmException {
     for (long size : List.of(0L, MAX_N12 + 1)) {
       var invalid = inputs();
       replaceFirstSize(invalid, size);
@@ -297,7 +304,8 @@ final class VideoMigrationCatalogueTest {
   }
 
   @Test
-  void timestampValidationAndOneCommonMicrosecondValueArePreserved() throws Exception {
+  void timestampValidationAndOneCommonMicrosecondValueArePreserved()
+      throws IOException, NoSuchAlgorithmException {
     var inputs = inputs();
     for (String stamp : List.of("", "2026-01-02T03:04:05.000Z", "2026-01-02T03:04:05+00:00")) {
       assertEquals(
@@ -315,7 +323,7 @@ final class VideoMigrationCatalogueTest {
   }
 
   @Test
-  void allThreeNullableFactoryInputsHaveFixedDiagnostics() throws Exception {
+  void allThreeNullableFactoryInputsHaveFixedDiagnostics() throws IOException {
     var inputs = inputs();
     var catalogue = new VideoMigrationCatalogue();
     assertEquals(
@@ -339,7 +347,8 @@ final class VideoMigrationCatalogueTest {
   }
 
   @Test
-  void returnedRowsAndBytesDoNotAliasMutableInputCollections() throws Exception {
+  void returnedRowsAndBytesDoNotAliasMutableInputCollections()
+      throws IOException, NoSuchAlgorithmException {
     var inputs = inputs();
     var rows = new VideoMigrationCatalogue().copyRows(inputs.targetMap, inputs.manifest(), STAMP);
     inputs.targetMap.clear();
@@ -352,7 +361,8 @@ final class VideoMigrationCatalogueTest {
   }
 
   @Test
-  void aRejectedClaimDoesNotRepairOrPoisonIndependentNormalInput() throws Exception {
+  void aRejectedClaimDoesNotRepairOrPoisonIndependentNormalInput()
+      throws IOException, NoSuchAlgorithmException {
     var invalid = inputs();
     replaceFirstSize(invalid, 0);
     assertThrows(
@@ -366,7 +376,8 @@ final class VideoMigrationCatalogueTest {
   }
 
   @Test
-  void finiteWorkersBindTheSameImmutableClaimsWithoutSharedOutput() throws Exception {
+  void finiteWorkersBindTheSameImmutableClaimsWithoutSharedOutput()
+      throws IOException, InterruptedException, ExecutionException, TimeoutException {
     var inputs = inputs();
     var manifest = inputs.manifest();
     var catalogue = new VideoMigrationCatalogue();
