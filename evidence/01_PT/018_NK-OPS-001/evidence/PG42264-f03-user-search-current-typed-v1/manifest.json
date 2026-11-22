@@ -1,0 +1,112 @@
+{
+  "run": "PG42264",
+  "source": "6fb8bbfe3ca79762bae2c6f86aa22e1bda330797",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-F03/2-2-b",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T06:21:36.003389+00:00",
+  "sources": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserSearchForm.java",
+      "sha256": "d00242a9223aa067fc609945fc6e5bf382429c121b3c49600a3c3a056778c906"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/UserSearchFormContractTest.java",
+      "sha256": "0e9f6ed3535bd02fff46b9591d72a8c8f37e6f0f1d4903ecb2559f6606889949"
+    }
+  ],
+  "compiled": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42260-f03-user-search-usrreq01-v1/main/dev/codex/schubert/nk/web/form/UserSearchForm.class",
+      "sha256": "0ef33fd6aa2b7e4523d52d4ca24e80a2d63166e6c35d0285b35f12ec26bc9a3a"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42260-f03-user-search-usrreq01-v1/test/dev/codex/schubert/nk/web/form/UserSearchFormContractTest.class",
+      "sha256": "ea050a7c71559722d76a1426867a0676393a8feed50347cd1ba56457e5a3295a"
+    }
+  ],
+  "ordinary": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42260-f03-user-search-usrreq01-v1/manifest.json",
+    "sha256": "c09cc079d1e7f6b2a8c1823a38a3e28124be2bc9bbab113ff8fc122b4363aa1c"
+  },
+  "stages": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42264-f03-user-search-current-typed-v1/format.terminal.json",
+      "sha256": "8d4f981e3c7ae6b12a0945391d65991449258bd5f3a439206911ce8c0db71d01"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42264-f03-user-search-current-typed-v1/checkstyle.terminal.json",
+      "sha256": "95fcc0d48f61f5a2f25cfd561a2b7134babefb02e06f69583ca5b940633b40e1"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42264-f03-user-search-current-typed-v1/pmd.terminal.json",
+      "sha256": "7682f546076ccdb92def17d484ba8741f670ede21986a8fcfb7b6738dbd5e717"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42264-f03-user-search-current-typed-v1/spotbugs.terminal.json",
+      "sha256": "930b767f2934ba1b9b09abd5add7c67bb60640ccdff8a0eae5059c77127bec49"
+    }
+  ],
+  "rawReports": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42264-f03-user-search-current-typed-v1/checkstyle.xml",
+      "sha256": "c6cddfce09ba54adde731001424715687ea78f6a2a270bf770e008b2d7c84799"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42264-f03-user-search-current-typed-v1/pmd.xml",
+      "sha256": "7b0916f207204c21d51221a4d004f1fece239956f4a9d8d98cbea0974d2fd650"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42264-f03-user-search-current-typed-v1/spotbugs.xml",
+      "sha256": "b7f5cd5df429e5faf0a50358f61442e97864b9aa0c199cef00a0b0d47d16c663"
+    }
+  ],
+  "setup": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42264-f03-user-search-current-typed-v1/begin.json",
+    "sha256": "8e6fa846cbc2ec4962e40f40890551948c1a682dd470efa6375d0797704d7f7c"
+  },
+  "applicable": [
+    {
+      "rule": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "method": "search008IndependentParallelBindingsNeverShareMutableFields"
+    }
+  ],
+  "negativeNullExpected": [
+    {
+      "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "method": "lambda$search005UnknownFieldsMissingValuesAndAllNullBoundariesStayDistinct$3"
+    }
+  ],
+  "pmdScopedDisposition": [
+    {
+      "rule": "CloseResource",
+      "line": "219",
+      "reason": "Owned fixed pool, all 16 futures individually bounded at five seconds, verified shutdown 10 seconds in finally."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": "219",
+      "reason": "Owned fixed pool, all 16 futures individually bounded at five seconds, verified shutdown 10 seconds in finally."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": "225",
+      "reason": "Owned fixed pool, all 16 futures individually bounded at five seconds, verified shutdown 10 seconds in finally."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": "244",
+      "reason": "Owned fixed pool, all 16 futures individually bounded at five seconds, verified shutdown 10 seconds in finally."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": "245",
+      "reason": "Owned fixed pool, all 16 futures individually bounded at five seconds, verified shutdown 10 seconds in finally."
+    }
+  ],
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "newUnitExecutions": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

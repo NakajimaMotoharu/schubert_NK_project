@@ -1,0 +1,137 @@
+{
+  "run": "PG42266",
+  "source": "0a338c925d0bf3ff84aa6314a76731695a124c41",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-F03/2-2-b",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T06:23:03.987412+00:00",
+  "actualTests": 1,
+  "passCount": 1,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "testId": "USER-SEARCH008",
+  "method": "search008IndependentParallelBindingsNeverShareMutableFields",
+  "fixedException": [
+    "InterruptedException",
+    "ExecutionException",
+    "TimeoutException"
+  ],
+  "independentExpectations": "16 inputs pair each local username with its single page, Optional and closed error map; five seconds per future and ten seconds confirmed shutdown",
+  "eightOriginalFixtureMethodsInstructionIdentical": true,
+  "priorPhysical": {
+    "path": "../pgpt-runs/PG379/PG42260-f03-user-search-usrreq01-v1/test/dev/codex/schubert/nk/web/form/UserSearchFormContractTest.class",
+    "sha256": "ea050a7c71559722d76a1426867a0676393a8feed50347cd1ba56457e5a3295a"
+  },
+  "currentPhysical": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42266-f03-user-search-checked-current-v1/test/dev/codex/schubert/nk/web/form/UserSearchFormContractTest.class",
+    "sha256": "7a9cd513dd59e19e00aa9b75b560630baae72595fb05721a37ed6664b8db9511"
+  },
+  "sourceChange": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/UserSearchFormContractTest.java",
+    "sha256": "e303172b9ee23603b60efe59b13cfc29921dd260a4277c267b333d2a855582bb"
+  },
+  "oldEvidence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42264-f03-user-search-current-typed-v1/manifest.json",
+    "sha256": "3160fc1e1d95e9fe2f265207b985a59a31a47e883a25e09f01af1142829c15f3"
+  },
+  "priorOrdinary": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42260-f03-user-search-usrreq01-v1/manifest.json",
+    "sha256": "c09cc079d1e7f6b2a8c1823a38a3e28124be2bc9bbab113ff8fc122b4363aa1c"
+  },
+  "stages": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42266-f03-user-search-checked-current-v1/format.terminal.json",
+      "sha256": "68fc1c665047c0be33828596add5709d50a1acee13d05ad810e2ecd77d711632"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42266-f03-user-search-checked-current-v1/compile.terminal.json",
+      "sha256": "4bf04b2741ee081b4d2f5776aea70029e7ef51537f798b8887de00b8dff3e2ea"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42266-f03-user-search-checked-current-v1/checkstyle.terminal.json",
+      "sha256": "5dafdd313c989d0f4d866e2b0d6283e230399faeb89041e7e1d179386725b79a"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42266-f03-user-search-checked-current-v1/pmd.terminal.json",
+      "sha256": "5376364d7ab387bb3fe74e08afcab96a6bf67cc164f815910be88ae192e0be84"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42266-f03-user-search-checked-current-v1/spotbugs.terminal.json",
+      "sha256": "483b49ddb7ec68aa1141ad6e23de6ebcf1ea8f56cc7e1cc415f8260a0442fa2a"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42266-f03-user-search-checked-current-v1/unit.terminal.json",
+      "sha256": "3f228f1700471c0999955a0370f05c62d8efbd24f0c6b9923cdb215ec8adcd7d"
+    }
+  ],
+  "rawReports": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42266-f03-user-search-checked-current-v1/checkstyle.xml",
+      "sha256": "94db12c90baaed70a3a5812ad15643c61183996c65afc827512d6b82090153b7"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42266-f03-user-search-checked-current-v1/pmd.xml",
+      "sha256": "111b3b2f64736c6cb20c10d80be823b46e824942893a47f9112a12ff53dab3e1"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42266-f03-user-search-checked-current-v1/spotbugs.xml",
+      "sha256": "273dead9dbc62420a912ffa659c9843cf02dfb80bab34bb799f3280fb16fd678"
+    }
+  ],
+  "notes": {
+    "priorTwoTypeScan": [
+      {
+        "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+        "method": "lambda$search005UnknownFieldsMissingValuesAndAllNullBoundariesStayDistinct$3"
+      }
+    ],
+    "newTestOnlyReport": "SpotBugs 0 in fixture-only run; intentional null oracle unchanged by method instructions"
+  },
+  "pmdScopedDisposition": [
+    {
+      "rule": "CloseResource",
+      "line": "222",
+      "reason": "Owned fixed pool, all 16 futures individually bounded at five seconds, verified shutdown 10 seconds in finally."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": "222",
+      "reason": "Owned fixed pool, all 16 futures individually bounded at five seconds, verified shutdown 10 seconds in finally."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": "228",
+      "reason": "Owned fixed pool, all 16 futures individually bounded at five seconds, verified shutdown 10 seconds in finally."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": "247",
+      "reason": "Owned fixed pool, all 16 futures individually bounded at five seconds, verified shutdown 10 seconds in finally."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": "248",
+      "reason": "Owned fixed pool, all 16 futures individually bounded at five seconds, verified shutdown 10 seconds in finally."
+    }
+  ],
+  "sourceScopedApplicableAfter": 0,
+  "testXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42266-f03-user-search-checked-current-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "a6d32a4a9e869dd4ddb97ddd81866bd1a54a72733f259dbd616ba71bee773cce"
+  },
+  "coverageExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42266-f03-user-search-checked-current-v1/unit.exec",
+    "sha256": "2ef87b814657564b95cb1ee8ecf5d40d4160603b1c78ade0ce5a6e9acf15c279"
+  },
+  "sameSourceClassProbe": [
+    "f40d24a16e0f03f5",
+    "43"
+  ],
+  "coverageFull": false,
+  "bug": "BUG-3573",
+  "ykt": "YKT-2809",
+  "actualEndpoints": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

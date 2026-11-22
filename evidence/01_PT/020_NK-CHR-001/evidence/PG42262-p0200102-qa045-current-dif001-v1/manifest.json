@@ -1,0 +1,165 @@
+{
+  "run": "PG42262",
+  "source": "6fb8bbfe3ca79762bae2c6f86aa22e1bda330797",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "toolsSource": "3ab80b846e27308aab029821581b113ecaf78fc9",
+  "wbs": "WBS-P020-01.02/2",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T06:19:57.284676+00:00",
+  "approved": {
+    "source": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "UI": {
+      "path": "documents/200_UI/260_引継ぎ・監査/264_現行互換性Characterization Test仕様.md",
+      "sha256": "0b0973e6e1e94858e840bc1b85df1daff35e3a0fe9f28ea12331823c2cbcf781",
+      "row": "| DIF-001 | Brand `schubert` | `schubert NK` | 再構築識別、SYS-001 | Header/title変更。Login titleはCurrent `schubert - ログイン`→NK `schubert NK - ログイン`だけ | CHR-A01/U01/U02 | QA-045/UIC-005承認、SSC-074 |"
+    },
+    "SS": {
+      "path": "documents/300_SS/350_運用・品質/355_Characterization Test実行準備・PG開始gate.md",
+      "sha256": "aff2aafe8f952de073e6dd2e7f5840152539f348f9816c6fa31e84ced93bef45"
+    }
+  },
+  "exactRule": {
+    "input": {
+      "path": "program/characterization/tests/resources/cases/dif-allowlist.json",
+      "sha256": "43239fe3d3f42c488dcbeb58017fde78830ba3771930a9c97cd65c3c7a7c5cb6"
+    },
+    "rule": {
+      "id": "DIF-001",
+      "cases": [
+        "CHR-A01",
+        "CHR-U01",
+        "CHR-U02"
+      ],
+      "field": "brand",
+      "mode": "difference",
+      "selectorType": "semantic",
+      "selectors": [
+        "brand"
+      ],
+      "current": "schubert",
+      "nk": "schubert NK"
+    }
+  },
+  "productStaticTitle": {
+    "path": "src/schubert-nk-web/src/main/resources/templates/login.html",
+    "source": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+    "sha256": "ba814efffec4be98d17338cacd63927d50aa552958188ba3fb7db0b77171443a",
+    "expected": "schubert NK - ログイン"
+  },
+  "sameToolInputs": [
+    {
+      "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+      "sha256": "52f251e8f130105972cf0be6c4b8a1b37f1fdb198e06208d131763ef3127d6f3"
+    },
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorTest.java",
+      "sha256": "fa1eec995233fec725ab232489b41df5d7ddd6d673247ff564da226060d5f8f7"
+    }
+  ],
+  "original": [
+    {
+      "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG41344-p020-current-218-local-v1/manifest.json",
+      "sha256": "5f9119617ebed6632218f46bd81c2b858f6c8fa3064a827edd1fb9b470d9148c"
+    },
+    {
+      "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG41346-p020-current-218-independent-v1/manifest.json",
+      "sha256": "d2191089b0953b97f34e139d3d62a5bde47387bdb3e0ff14dde155198bb41a15"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41344-p020-current-218-local-v1/reports/TEST-junit-jupiter.xml",
+      "sha256": "8f6b635830262186ba682cf3b682f56d8b732f1a557452d62cebae4c95ef4dd4"
+    }
+  ],
+  "samePhysical": {
+    "dev/codex/schubert/characterization/ArtifactComparator.class": "f31a9142f016854bbdd98176ffbe4a5bec2f189284bcc9b1cdb4fd5ff9a2197c",
+    "dev/codex/schubert/characterization/ArtifactComparator$ComparisonResult.class": "15b0f67695e648001822085cfeb84f793af95bf8c78abc35bd2a867a9aee508e"
+  },
+  "offlineNamedEvidence": [
+    {
+      "name": "requiresLoginTitleObservationEvenWhenAnotherCaseUsesBrandDifference",
+      "case": "CHR-A01",
+      "expected": "Unobserved approved login title remains unregistered despite an independently valid menu brand change.",
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41344-p020-current-218-local-v1/reports/TEST-junit-jupiter.xml",
+        "sha256": "8f6b635830262186ba682cf3b682f56d8b732f1a557452d62cebae4c95ef4dd4"
+      }
+    },
+    {
+      "name": "rejectsLoginTitleObservationAtAnotherPointer",
+      "case": "CHR-A01",
+      "expected": "An observation outside /title cannot cover the login change.",
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41344-p020-current-218-local-v1/reports/TEST-junit-jupiter.xml",
+        "sha256": "8f6b635830262186ba682cf3b682f56d8b732f1a557452d62cebae4c95ef4dd4"
+      }
+    },
+    {
+      "name": "rejectsCurrentLoginTitleOutsideTheApprovedPair",
+      "case": "CHR-A01",
+      "expected": "Reject the wrong Current title.",
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41344-p020-current-218-local-v1/reports/TEST-junit-jupiter.xml",
+        "sha256": "8f6b635830262186ba682cf3b682f56d8b732f1a557452d62cebae4c95ef4dd4"
+      }
+    },
+    {
+      "name": "rejectsNkLoginTitleOutsideTheApprovedPair",
+      "case": "CHR-A01",
+      "expected": "Reject the wrong NK title.",
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41344-p020-current-218-local-v1/reports/TEST-junit-jupiter.xml",
+        "sha256": "8f6b635830262186ba682cf3b682f56d8b732f1a557452d62cebae4c95ef4dd4"
+      }
+    },
+    {
+      "name": "requiresMenuBrandEvidenceFromTheMenuCase",
+      "case": "CHR-U01",
+      "expected": "Another observed brand change cannot cover an unobserved menu brand difference.",
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41344-p020-current-218-local-v1/reports/TEST-junit-jupiter.xml",
+        "sha256": "8f6b635830262186ba682cf3b682f56d8b732f1a557452d62cebae4c95ef4dd4"
+      }
+    },
+    {
+      "name": "requiresSearchTitleEvidenceEvenWithoutAnyUnregisteredDrift",
+      "case": "CHR-U02",
+      "expected": "Matching search titles still require the named approved observation.",
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41344-p020-current-218-local-v1/reports/TEST-junit-jupiter.xml",
+        "sha256": "8f6b635830262186ba682cf3b682f56d8b732f1a557452d62cebae4c95ef4dd4"
+      }
+    },
+    {
+      "name": "requiresBothCommonStyleTitlesWhenTheSecondOneChanged",
+      "case": "CHR-U02",
+      "expected": "One matching claim cannot cover both changed titles.",
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41344-p020-current-218-local-v1/reports/TEST-junit-jupiter.xml",
+        "sha256": "8f6b635830262186ba682cf3b682f56d8b732f1a557452d62cebae4c95ef4dd4"
+      }
+    },
+    {
+      "name": "refusesCommonStyleTitleOutsideApprovedBrandPositions",
+      "case": "CHR-U02",
+      "expected": "/titles/2 is outside the approved pointers.",
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41344-p020-current-218-local-v1/reports/TEST-junit-jupiter.xml",
+        "sha256": "8f6b635830262186ba682cf3b682f56d8b732f1a557452d62cebae4c95ef4dd4"
+      }
+    },
+    {
+      "name": "leavesNonBrandTitleChangeUnregistered",
+      "case": "CHR-U02",
+      "expected": "A changed sibling title remains unregistered.",
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41344-p020-current-218-local-v1/reports/TEST-junit-jupiter.xml",
+        "sha256": "8f6b635830262186ba682cf3b682f56d8b732f1a557452d62cebae4c95ef4dd4"
+      }
+    }
+  ],
+  "actualNewRun": 0,
+  "actualBrowserOrCurrentNk": 0,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "remaining": "Authenticated runtime observation of named three cases, actual Current/NK comparison using retained authorized baselines, all dataset rows and signed acceptance."
+}
