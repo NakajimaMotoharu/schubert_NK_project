@@ -1,0 +1,250 @@
+{
+  "run": "PG43082-scenario-stream-checked-fixture-v1",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T22:32:28.965368+00:00",
+  "source": "85166c1a5861d1d5ace65c044a9aabcedbf03135",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-P008-03/2",
+  "design": "SS333 §4～5",
+  "testId": [
+    "PT-SCN-008-W04",
+    "PT-SCN-008-W05"
+  ],
+  "tests": [
+    "w05PartialWritesRemainBoundedAndForceOnlyAfterAll4800Bytes",
+    "w05PreflightRejectsNullCountSequenceAndInvalidLastRecordBeforeAnyIo",
+    "w05ZeroNegativeWriteIoForceClosedAndNonfreshChannelsFailWithoutImplicitClose",
+    "w04One201And10000RecordsMatchEveryGoldenByteAndIndependentDigest",
+    "w04ImmutablePreparedRecordsSupportConcurrentIndependentChannels"
+  ],
+  "counts": {
+    "success": 5,
+    "failure": 0,
+    "error": 0,
+    "skip": 0
+  },
+  "newDefinitions": 0,
+  "checkedInputs": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/ScenarioRecordStream.java",
+      "sha256": "c86d8e01903b09c050187c4da462e82279b86eb638d8a2e1f12ecbc09b80f2ae"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/package-info.java",
+      "sha256": "81360fb14c321eed795fb7fa2d68b5afabca317e44f41ab5b5ef9bf8844c3532"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/ScenarioRecordStreamTest.java",
+      "sha256": "601852935ea1d092bab0f8cf3b7f77a5aed998c64914b6683f9ff0cf6dd3cff3"
+    }
+  ],
+  "protocol": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42624-current-protocol-maven-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+    "sha256": "2e11940216614fbe48e663fd83400f1fe3cf1cd9fc626214c954aaddb8c0407f"
+  },
+  "qualifiedStorage": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43082-scenario-stream-checked-fixture-v1/qualified-storage-exceptions.jar",
+    "sha256": "17d5cd6583b7307d98b843db719031d821b6650d10ce2833ed22e83e06725f09"
+  },
+  "storageNames": [
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason.class",
+    "dev/codex/schubert/nk/storage/StorageIoException.class"
+  ],
+  "jdk": "25.0.4",
+  "jacoco": "0.8.15",
+  "junitPlatform": "1.13.4",
+  "command": "python3 -B evidence/01_PT/018_NK-OPS-001/input/5769_p00803_current_record_stream.py --checked-fixture",
+  "stages": {
+    "format": 0,
+    "style": 0,
+    "compileNullaway": 0,
+    "fixtures": 0,
+    "junit": 0,
+    "rawCompile": 0,
+    "unfiltered": 0,
+    "pmd": 4,
+    "spotbugs": 1
+  },
+  "mainCrc64": "ecc9432f4815dd45",
+  "coverage": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 145
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 16
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 30
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 14
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 6
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "wholeProductCoverage": false,
+  "pmdFindings": [
+    {
+      "path": "ScenarioRecordStreamTest.java",
+      "line": 69,
+      "rule": "CloseResource"
+    },
+    {
+      "path": "ScenarioRecordStreamTest.java",
+      "line": 69,
+      "rule": "DoNotUseThreads"
+    },
+    {
+      "path": "ScenarioRecordStreamTest.java",
+      "line": 85,
+      "rule": "DoNotUseThreads"
+    },
+    {
+      "path": "ScenarioRecordStreamTest.java",
+      "line": 91,
+      "rule": "DoNotUseThreads"
+    },
+    {
+      "path": "ScenarioRecordStreamTest.java",
+      "line": 92,
+      "rule": "DoNotUseThreads"
+    }
+  ],
+  "spotbugsFindings": [
+    {
+      "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+      "line": 115
+    }
+  ],
+  "typedMainFindings": 0,
+  "ownedTempFinalEntries": 0,
+  "physicalOriginRoster": [
+    "dev.codex.schubert.nk.api.storage.ScenarioRecordStream",
+    "dev.codex.schubert.nk.api.storage.ScenarioRecordStreamTest",
+    "dev.codex.schubert.nk.api.storage.ScenarioRecordStreamTest$FaultChannel",
+    "dev.codex.schubert.nk.protocol.codec.FieldCodec",
+    "dev.codex.schubert.nk.protocol.codec.FieldEncodingException",
+    "dev.codex.schubert.nk.protocol.codec.MessageEncodingException",
+    "dev.codex.schubert.nk.protocol.codec.PayloadCodec",
+    "dev.codex.schubert.nk.protocol.codec.PermanentProtocolException",
+    "dev.codex.schubert.nk.protocol.file.LargeResultContent",
+    "dev.codex.schubert.nk.protocol.header.InteractionKind",
+    "dev.codex.schubert.nk.protocol.header.MessageKind",
+    "dev.codex.schubert.nk.protocol.layout.FieldArea",
+    "dev.codex.schubert.nk.protocol.layout.FieldDefinition",
+    "dev.codex.schubert.nk.protocol.layout.FieldValue",
+    "dev.codex.schubert.nk.protocol.layout.FieldValue$Numeric",
+    "dev.codex.schubert.nk.protocol.layout.FieldValue$Text",
+    "dev.codex.schubert.nk.protocol.layout.FieldValue$Unset",
+    "dev.codex.schubert.nk.protocol.layout.FieldValueSet",
+    "dev.codex.schubert.nk.protocol.layout.LayoutDefinition",
+    "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalog",
+    "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalog$MutableFields",
+    "dev.codex.schubert.nk.protocol.layout.LayoutFields",
+    "dev.codex.schubert.nk.protocol.layout.LayoutId",
+    "dev.codex.schubert.nk.protocol.layout.LayoutRegistry",
+    "dev.codex.schubert.nk.protocol.layout.LayoutValidationException",
+    "dev.codex.schubert.nk.protocol.layout.Padding",
+    "dev.codex.schubert.nk.protocol.layout.PayloadRecord",
+    "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidator",
+    "dev.codex.schubert.nk.protocol.layout.Presence",
+    "dev.codex.schubert.nk.protocol.layout.TypedFieldValues",
+    "dev.codex.schubert.nk.protocol.layout.UnsupportedLayoutException",
+    "dev.codex.schubert.nk.protocol.layout.WireType",
+    "dev.codex.schubert.nk.protocol.layout.scenario.ScenarioEntryRecord",
+    "dev.codex.schubert.nk.protocol.layout.semantic.DisplayPath",
+    "dev.codex.schubert.nk.protocol.layout.semantic.EntryId",
+    "dev.codex.schubert.nk.protocol.layout.semantic.EntryType",
+    "dev.codex.schubert.nk.protocol.layout.semantic.IdValue",
+    "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolId",
+    "dev.codex.schubert.nk.protocol.layout.semantic.WireEnum",
+    "dev.codex.schubert.nk.storage.StorageIoException",
+    "dev.codex.schubert.nk.storage.StorageIoException$Reason"
+  ],
+  "receipts": [
+    {
+      "path": "../pgpt-runs/PG379/PG43082-scenario-stream-checked-fixture-v1/begin.json",
+      "sha256": "1972bc8848fde5b572f33558a5db5f7ea0f39fed9b5958451979effe0e04e5fb"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43082-scenario-stream-checked-fixture-v1/terminal.json",
+      "sha256": "071a32148ec56ba11207b03999c736eb342cc32f635e62693bc7e84bc8996346"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43082-scenario-stream-checked-fixture-v1/pmd.xml",
+      "sha256": "7b1731f1070625361132c8029dff17597e6be5bdb35576ce543e345baf72b940"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43082-scenario-stream-checked-fixture-v1/spotbugs.xml",
+      "sha256": "3d0fdbe4957f1a62501aec83a505e136b4d5f0d1a426f95bc50b83e9869e0546"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43082-scenario-stream-checked-fixture-v1/coverage-unfiltered.tsv",
+      "sha256": "21e7ef9054462439186abe36ce827ab2b38c5b38373cc434f3ec53114826806f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43082-scenario-stream-checked-fixture-v1/sanitized-junit.xml",
+      "sha256": "e4afc01c65ed45f52c64eb248d492d1686d02148acb3b94fc0d47843834a7714"
+    }
+  ],
+  "priorProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43080-scenario-stream-finite-current-v1/manifest.json",
+    "sha256": "a46b0265cabb29b0aec28ebd8becb9610fa0c3a0bfcc0bb5df99e4f45a38acbb"
+  },
+  "staticAdjudication": [
+    {
+      "engine": "PMD",
+      "line": 69,
+      "rule": "CloseResource",
+      "basis": "Test owns executor; finally explicitly stops it and asserts bounded termination. A close waiting indefinitely would violate test termination."
+    },
+    {
+      "engine": "PMD",
+      "line": 69,
+      "rule": "DoNotUseThreads",
+      "basis": "Finite fixed Eight-worker fixture for the concurrent sharing oracle. Only owned temp files."
+    },
+    {
+      "engine": "PMD",
+      "line": 85,
+      "rule": "DoNotUseThreads",
+      "basis": "16 independent fixture tasks and fixed ten-second invokeAll; result retrieval also bounded."
+    },
+    {
+      "engine": "PMD",
+      "line": 91,
+      "rule": "DoNotUseThreads",
+      "basis": "Owned executor shutdownNow in finally."
+    },
+    {
+      "engine": "PMD",
+      "line": 92,
+      "rule": "DoNotUseThreads",
+      "basis": "Ten-second owned executor termination with an explicit assertion."
+    },
+    {
+      "engine": "SpotBugs",
+      "line": 115,
+      "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+      "basis": "Explicit assertThrows exercises required null-channel negative and no temporary side effect."
+    }
+  ],
+  "eliminatedCheckedDeclarationFindings": 4,
+  "fixtureOnlyChange": true,
+  "endConditions": [
+    "Quality owner accepts applicability, full product 451",
+    "ScenarioFileWriter seven cases on admitted held inode scope"
+  ],
+  "actualWriterOrNativeOrExternalActions": 0,
+  "formalAcceptanceId": null
+}

@@ -27,3 +27,5 @@ PG43072、2026-11-23 JST。試験source `264eba95c8`。既予約をassertionやw
 同一Core `87927ea17c`・試験snapshot `60141d2708`。旧試験の実行待機を有限化したfixtureをPG43080で再資格。独立期待はSS333 §4～5、UI234のbyte offsetと固定値で作る4800-byte record、別の固定formatとSHA-256、1／201／10000件、16 jobs/8 workers。JDK一時領域内の借用channelだけを使用する。正常部分書込、0/負数、write/force例外、既close、非fresh、null、件数超過、末尾record違反を既存五件で照合。全5成功、同一execの生L30/M6/C1/B16の全数、終了時の一時領域0件。NullAway／Checkstyle指摘0、PMD5・SpotBugs5はfixture側。変更試験の待機とcleanupあり。Writer本体の7件、native、実FileStore、正式451は別途判定。
 
 [PG43078 現候補への適用点](../018_NK-OPS-001/evidence/PG43078-scenario-writer-current-evidence-v1/manifest.json) SHA-256 `70212233f088ff5e9acbdb9c8d3ab941231948f88794e4ffab4b8489948265c5`。 [PG43080 同候補レコードPT](../018_NK-OPS-001/evidence/PG43080-scenario-stream-finite-current-v1/manifest.json) SHA-256 `a46b0265cabb29b0aec28ebd8becb9610fa0c3a0bfcc0bb5df99e4f45a38acbb`。
+
+PG43082、試験source `85166c1a58`。既5件再成功、同一Main物理でL30/M6/C1/B16全数。意図したnull負例1は対象契約。PMD生5の有限worker・所有終了を個別保存。解除までWriter7件は未計上。 [公開証跡](../018_NK-OPS-001/evidence/PG43082-scenario-stream-checked-fixture-v1/manifest.json) SHA-256 `8439f47d48593e051af56018bb6854330df534b6e3e6230b083b8b362d9f399d`。
