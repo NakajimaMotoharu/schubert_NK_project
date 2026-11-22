@@ -1,0 +1,67 @@
+{
+  "run": "PG42370",
+  "productionConfigSource": "3b0139d02a7a87042139718b9ffbe2f795b1837b",
+  "javaCore": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "terminalAtUTC": "2026-11-22T07:35:51.903178+00:00",
+  "wbs": "WBS-G13.06",
+  "related": [
+    "WBS-C02-a",
+    "BUG-3579",
+    "YKT-2814",
+    "BUG-3577"
+  ],
+  "assertions": {
+    "testId": "PT-OPS-MAINT-PREBOOT001-T03",
+    "status": "PASS",
+    "timingMicroseconds": [
+      60000000,
+      0
+    ],
+    "rejectedSyntheticInputs": [
+      "missingAccuracy",
+      "wrongAccuracy",
+      "duplicateAccuracy",
+      "missingDelay",
+      "wrongDelay",
+      "duplicateDelay"
+    ]
+  },
+  "proof": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42370-timer-explicit-settings-local-v1/begin.json",
+      "sha256": "69eaf205bfec68078239e6c93cbb65c86ed13efb1bc1ec0926caaa329858de6b"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42370-timer-explicit-settings-local-v1/terminal.json",
+      "sha256": "508a6ad007b99c39acbbf62cd7dac422b8fccff5f0429bfa7ee2ff2cc3ad33b9"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42370-timer-explicit-settings-local-v1/stdout.json",
+      "sha256": "95fc23596821808ab83a6c18a534dc43c7ef1adb7737649913540051b1e91431"
+    }
+  ],
+  "candidateTimer": {
+    "path": "src/deployment/systemd/schubert-nk-maintenance.timer.template",
+    "sha256": "9d4fa7b1a9c8df6c6197d0d2ef339e369a06cb4bdc9e78f627b3e0fee87527d4"
+  },
+  "trackedTimerTemplates": [
+    "src/deployment/systemd/schubert-nk-maintenance.timer.template"
+  ],
+  "inheritedCalendarDeclarationUnchanged": true,
+  "previousCalendarSource": "27152c62e0b39a9fafa9aa2fd4576a9efb905da9",
+  "previousReceipt": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42306-g1306-maintenance-timer-offline-v1/manifest.json",
+    "sha256": "fcaed552f0f726ca27ce485b9a7c6c57bff013234a84215926e32ae4bffe4126"
+  },
+  "actualServiceOperations": 0,
+  "actualOrdinary": 0,
+  "configScopePT": 1,
+  "formalAcceptanceId": null,
+  "whole451": false,
+  "remaining": [
+    "matching preboot service and accounts",
+    "host authorization/lock/reboot safety",
+    "external no-marker critical watch",
+    "actual Linux timer unit and service"
+  ]
+}
