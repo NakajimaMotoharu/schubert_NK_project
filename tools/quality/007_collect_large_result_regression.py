@@ -9,6 +9,8 @@ import shutil
 import subprocess
 import xml.etree.ElementTree as ET
 
+from pgpt_evidence_checksums import write_scope_checksums
+
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
@@ -74,8 +76,7 @@ def main():
     manifest["files"] = [{"path": str(p.relative_to(evidence)), "sha256": hashlib.sha256(p.read_bytes()).hexdigest()}
                          for p in sorted(evidence.rglob("*")) if p.is_file() and p.name not in ("manifest.json", "checksums.sha256")]
     (evidence / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")
-    (evidence / "checksums.sha256").write_text("".join(hashlib.sha256(p.read_bytes()).hexdigest() + "  " + str(p.relative_to(evidence)) + "\n"
-                                                     for p in sorted(evidence.rglob("*")) if p.is_file() and p.name != "checksums.sha256"))
+    write_scope_checksums(evidence, manifest["files"])
     print(json.dumps({"runId": args.run_id, "programTests": len(methods), "status": "PASS_PROGRAM_COMPLETE"}))
 
 

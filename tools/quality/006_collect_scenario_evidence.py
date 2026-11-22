@@ -10,6 +10,8 @@ import shutil
 import subprocess
 import xml.etree.ElementTree as ET
 
+from pgpt_evidence_checksums import write_scope_checksums
+
 
 def scenario_storage_suite(name):
     # PG-D-146: shared module is not shared Program ownership. OPS IDs live in collector022.
@@ -199,8 +201,7 @@ def main():
     manifest["files"] = [{"path": str(p.relative_to(evidence)), "sha256": hashlib.sha256(p.read_bytes()).hexdigest()}
                          for p in sorted(evidence.rglob("*")) if p.is_file() and p.name not in ("manifest.json", "checksums.sha256")]
     (evidence / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    (evidence / "checksums.sha256").write_text("".join(hashlib.sha256(p.read_bytes()).hexdigest() + "  " + str(p.relative_to(evidence)) + "\n"
-                                                     for p in sorted(evidence.rglob("*")) if p.is_file() and p.name != "checksums.sha256"), encoding="utf-8")
+    write_scope_checksums(evidence, manifest["files"])
     print(json.dumps({"runId": run, "tests": sum(v["tests"] for v in modules.values()), "scenarioTests": len(methods), "status": "SLICE_PASS / PROGRAM_IN_PROGRESS"}))
 
 

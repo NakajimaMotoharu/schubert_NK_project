@@ -7,6 +7,8 @@ from pathlib import Path
 import subprocess
 import xml.etree.ElementTree as ET
 
+from pgpt_evidence_checksums import write_scope_checksums
+
 CLASS = "dev.codex.schubert.nk.api.dispatch.ApiLogPathApplicationRuntimeTest"
 METHODS = (
     "realDatabaseAndBrokerBindThreeRoutesAndTerminal(Path)",
@@ -161,10 +163,7 @@ def main():
                          for path in sorted(evidence.rglob("*")) if path.is_file()
                          and path.name not in ("manifest.json", "checksums.sha256")]
     (evidence / "manifest.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n")
-    (evidence / "checksums.sha256").write_text("".join(
-        digest(path) + "  " + str(path.relative_to(evidence)) + "\n"
-        for path in sorted(evidence.rglob("*")) if path.is_file()
-        and path.name != "checksums.sha256"))
+    write_scope_checksums(evidence, manifest["files"])
     print(json.dumps({"runId": run, "testIds": ["PT-JMS-018", "PT-JMS-019", "PT-JMS-022", "PT-JMS-023"],
                       "subcases": len(methods) + len(ready_methods),
                       "scopeResult": manifest["scopeResult"], "programComplete": False}))

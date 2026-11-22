@@ -7,6 +7,8 @@ from pathlib import Path
 import subprocess
 import xml.etree.ElementTree as ET
 
+from pgpt_evidence_checksums import write_scope_checksums
+
 CLASS = "dev.codex.schubert.nk.api.maintenance.StepCleanupBoundaryTest"
 METHODS = ("sevenKindAtomicCounts", "handleArgumentsAndIdentity", "backupLockAndRoleBoundary", "zeroChunkLockedRemainder", "retentionAndProtectedRows", "rollbackOverflowAndForeignKey", "typedProjectionAndNoBypass", "appendOnlyMigrationInventory",)
 TRACES = {"PT-DB-INBOX-259-seven-kinds.txt": b"NOTIFICATIONS=1|1|0|1|1|false|OK\nQUESTIONS=1|1|0|1|1|false|OK\nSESSIONS=3|3|0|3|3|false|OK\nOUTBOX=2|2|0|2|2|false|OK\nBATCH_RUNS=1|1|0|1|1|false|OK\nINBOX_PROGRESS=1|1|0|2|2|false|OK\nLOG_PROGRESS=1|1|0|3|3|false|OK\n"}
@@ -85,8 +87,7 @@ def main():
     manifest["files"] = [{"path": str(p.relative_to(evidence)), "sha256": digest(p)} for p in sorted(evidence.rglob("*"))
                          if p.is_file() and p.name not in ("manifest.json", "checksums.sha256")]
     (evidence / "manifest.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n")
-    (evidence / "checksums.sha256").write_text("".join(digest(p) + "  " + str(p.relative_to(evidence)) + "\n"
-        for p in sorted(evidence.rglob("*")) if p.is_file() and p.name != "checksums.sha256"))
+    write_scope_checksums(evidence, manifest["files"])
     print(json.dumps({"runId": run, "tests": 8, "scopeResult": manifest["scopeResult"], "programComplete": False}))
 
 

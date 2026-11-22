@@ -8,6 +8,8 @@ import shutil
 import subprocess
 import xml.etree.ElementTree as ET
 
+from pgpt_evidence_checksums import write_scope_checksums
+
 PAIR_CLASS = "dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest"
 BATCH_TEST_COUNT = 550
 EXPIRY_AUDIT_CLASS = "dev.codex.schubert.nk.batch.repository.ExpiryAuditRepositoryTest"
@@ -656,9 +658,7 @@ def main():
     manifest["files"] = [{"path": str(p.relative_to(evidence)), "sha256": hashlib.sha256(p.read_bytes()).hexdigest()}
                          for p in sorted(evidence.rglob("*")) if p.is_file() and p.name not in ("manifest.json", "checksums.sha256")]
     (evidence / "manifest.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n")
-    (evidence / "checksums.sha256").write_text("".join(
-        hashlib.sha256(p.read_bytes()).hexdigest() + "  " + str(p.relative_to(evidence)) + "\n"
-        for p in sorted(evidence.rglob("*")) if p.is_file() and p.name != "checksums.sha256"))
+    write_scope_checksums(evidence, manifest["files"])
     print(json.dumps(summary))
 
 

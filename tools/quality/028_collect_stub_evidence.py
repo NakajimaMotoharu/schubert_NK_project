@@ -7,6 +7,8 @@ from pathlib import Path
 import subprocess
 import xml.etree.ElementTree as ET
 
+from pgpt_evidence_checksums import write_scope_checksums
+
 CLASS = "dev.codex.schubert.nk.api.application.question.StubAnswerProviderTest"
 METHODS = ("emptyAnswerAndClock", "nullContracts", "clockFailures", "resultValueAndRedaction",
            "concurrentCallsAndEvidence", "fixedBusinessFailureValue")
@@ -112,9 +114,7 @@ def main():
                          for path in sorted(evidence.rglob("*")) if path.is_file()
                          and path.name not in ("manifest.json", "checksums.sha256")]
     (evidence / "manifest.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n")
-    (evidence / "checksums.sha256").write_text("".join(
-        digest(path) + "  " + str(path.relative_to(evidence)) + "\n"
-        for path in sorted(evidence.rglob("*")) if path.is_file() and path.name != "checksums.sha256"))
+    write_scope_checksums(evidence, manifest["files"])
     print(json.dumps({"runId": run, "tests": len(methods), "scopeResult": manifest["scopeResult"],
                       "programComplete": False}))
 

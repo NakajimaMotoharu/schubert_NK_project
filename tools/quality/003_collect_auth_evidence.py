@@ -10,6 +10,8 @@ import shutil
 import subprocess
 import xml.etree.ElementTree as ET
 
+from pgpt_evidence_checksums import write_scope_checksums
+
 
 RESOURCE_METHODS = {
     "PT-AUT-003-D06": "dev.codex.schubert.nk.api.security.LoginAttemptRepositoryTest#providerIllegalArgumentAndCloseSqlRemainRedactedInfrastructure",
@@ -143,10 +145,7 @@ def main():
         for path in sorted(evidence.rglob("*"))
         if path.is_file() and path.name not in ("manifest.json", "checksums.sha256")]
     (evidence / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    checksum_paths = [path for path in sorted(evidence.rglob("*")) if path.is_file() and path.name != "checksums.sha256"]
-    (evidence / "checksums.sha256").write_text("".join(
-        hashlib.sha256(path.read_bytes()).hexdigest() + "  " + str(path.relative_to(evidence)) + "\n"
-        for path in checksum_paths), encoding="utf-8")
+    write_scope_checksums(evidence, manifest["files"])
     print(json.dumps({"runId": args.run_id, "tests": sum(item["tests"] for item in modules.values()),
                       "authenticationTests": len(auth_methods), "status": "SLICE_PASS / PROGRAM_IN_PROGRESS"}))
 

@@ -7,6 +7,8 @@ from pathlib import Path
 import subprocess
 import xml.etree.ElementTree as ET
 
+from pgpt_evidence_checksums import write_scope_checksums
+
 SUBJECTS = (
     ("PT-JMS-021", "NK-MSG-001", "005_NK-MSG-001", "web",
      "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumerTest",
@@ -116,10 +118,7 @@ def write_scope(repo, full, verified, program_id, folder, methods, coverage):
                          for path in sorted(evidence.rglob("*")) if path.is_file()
                          and path.name not in ("manifest.json", "checksums.sha256")]
     (evidence / "manifest.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n")
-    (evidence / "checksums.sha256").write_text("".join(
-        digest(path) + "  " + str(path.relative_to(evidence)) + "\n"
-        for path in sorted(evidence.rglob("*")) if path.is_file()
-        and path.name != "checksums.sha256"))
+    write_scope_checksums(evidence, manifest["files"])
 
 
 def main():
