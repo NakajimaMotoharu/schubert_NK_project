@@ -10,6 +10,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 from pgpt_evidence_checksums import write_scope_checksums
+from pgpt_evidence_destination import evidence_output_root
 
 
 def main():
@@ -19,7 +20,7 @@ def main():
     if not run.startswith(("PT-ADM-", "PT-WEB-")) or not all(c.isalnum() or c == "-" for c in run):
         raise SystemExit("invalid run ID")
     repo = Path(__file__).resolve().parents[2]
-    verified = json.loads((repo / "evidence/01_PT/008_NK-SCN-001/evidence/manifest.json").read_text())
+    verified = json.loads((evidence_output_root(repo) / "008_NK-SCN-001/evidence/manifest.json").read_text())
     if verified["runId"] != run or verified["exitCode"] != 0:
         raise SystemExit("collect the matching verified full reactor first")
     subprocess.run(["git", "diff", "--exit-code", verified["targetCommit"], "--", "src", "pom.xml",
@@ -173,7 +174,7 @@ def main():
         reports[report.name] = ET.ElementTree(clean)
     if set(methods) != set(expected.values()) or len(methods) != len(expected):
         raise SystemExit("Admin Test IDs do not exactly cover executed methods")
-    evidence = repo / "evidence/01_PT/010_NK-ADM-001/evidence"
+    evidence = evidence_output_root(repo) / "010_NK-ADM-001/evidence"
     for name in ("logs", "output", "coverage"):
         (evidence / name).mkdir(parents=True, exist_ok=True)
     for name, report in reports.items():

@@ -9,6 +9,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 from pgpt_evidence_checksums import write_scope_checksums
+from pgpt_evidence_destination import evidence_output_root
 import bootstrap_ownership
 
 PREFIX = "dev.codex.schubert.nk.api.maintenance."
@@ -497,7 +498,7 @@ def main():
     if not run.startswith("PT-WEB-") or not all(c.isalnum() or c == "-" for c in run):
         raise SystemExit("invalid run ID")
     repo = Path(__file__).resolve().parents[2]
-    full = repo / "evidence/01_PT/008_NK-SCN-001/evidence/manifest.json"
+    full = evidence_output_root(repo) / "008_NK-SCN-001/evidence/manifest.json"
     verified = json.loads(full.read_text())
     if verified["runId"] != run or verified["exitCode"] != 0:
         raise SystemExit("matching successful full reactor required")
@@ -536,7 +537,7 @@ def main():
         if not {SCOPE_SUBJECT, FLOCK_SUBJECT, *PRIVATE_SUBJECTS, LOCK_SUBJECT, *STOP_SUBJECTS, ENV_SUBJECT, CFG_SUBJECT, EFILE_SUBJECT, *PUBLISH_SUBJECTS, *NAMESPACE_SUBJECTS, *UNIT_SUBJECTS, *MQ_SUBJECTS}.issubset(coverage) or any(c["missed"] for v in coverage.values() for c in v.values()):
             raise SystemExit("missing or incomplete parent boundary coverage")
     directory = "018_NK-OPS-001/evidence" if args.deployment else "004_NK-DAT-001/evidence/inspector-launch"
-    evidence = repo / "evidence/01_PT" / directory
+    evidence = evidence_output_root(repo) / directory
     evidence.mkdir(parents=True, exist_ok=True)
     program = "NK-OPS-001" if args.deployment else "NK-DAT-001"
     sanitized = ET.Element("testsuite", name=program + "-inspector-launch", tests=str(len(methods)), failures="0", errors="0", skipped="0")

@@ -12,7 +12,9 @@ from pathlib import Path
 import re
 import subprocess
 import xml.etree.ElementTree as ET
+
 import bootstrap_ownership
+from pgpt_evidence_destination import evidence_output_root
 
 QUESTION_CLASS = "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest"
 QUESTION_METHODS = ["queryProfilesAndFrozenSnapshots", "goldenBoundsAndSemanticDamage",
@@ -87,7 +89,7 @@ def main():
     if not re.fullmatch(r"PT-(ADM|WEB|SCN|MED)-[A-Za-z0-9-]+", run):
         raise SystemExit("invalid run ID")
     repo = Path(__file__).resolve().parents[2]
-    certified = repo / "evidence/01_PT/008_NK-SCN-001/evidence/manifest.json"
+    certified = evidence_output_root(repo) / "008_NK-SCN-001/evidence/manifest.json"
     base = json.loads(certified.read_text())
     if base["runId"] != run or base["exitCode"] != 0:
         raise SystemExit("collect matching full reactor evidence first")
@@ -332,7 +334,7 @@ def main():
         folder = "result-binding"
     if args.question_mutation:
         folder = "question-mutation"
-    out = repo / "evidence/01_PT/004_NK-DAT-001/evidence" / folder
+    out = evidence_output_root(repo) / "004_NK-DAT-001/evidence" / folder
     out.mkdir(parents=True, exist_ok=True)
     clean = ET.Element("testsuite", {k: suite.get(k) for k in
                                     ("name", "tests", "failures", "errors", "skipped", "time")})

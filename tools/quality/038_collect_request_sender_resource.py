@@ -8,6 +8,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 from pgpt_evidence_checksums import write_scope_checksums
+from pgpt_evidence_destination import evidence_output_root
 
 CLASS = "dev.codex.schubert.nk.web.messaging.ArtemisRequestSenderTest"
 SUBJECT = "dev/codex/schubert/nk/web/messaging/ArtemisRequestSender"
@@ -68,7 +69,7 @@ def main():
     if not run.startswith("PT-WEB-") or not all(char.isalnum() or char == "-" for char in run):
         raise SystemExit("invalid run ID")
     repo = Path(__file__).resolve().parents[2]
-    full = repo / "evidence/01_PT/008_NK-SCN-001/evidence/manifest.json"
+    full = evidence_output_root(repo) / "008_NK-SCN-001/evidence/manifest.json"
     verified = json.loads(full.read_text())
     if verified["runId"] != run or verified["exitCode"] != 0:
         raise ValueError("matching successful reactor run required")
@@ -79,7 +80,7 @@ def main():
     methods = validate_suite(ET.parse(target / "surefire-reports" / ("TEST-" + CLASS + ".xml")).getroot())
     coverage = validate_coverage(ET.parse(target / "site/jacoco/jacoco.xml").getroot())
     program = repo / "evidence/01_PT/005_NK-MSG-001"
-    evidence = program / "evidence/request-sender-resource"
+    evidence = evidence_output_root(repo) / "005_NK-MSG-001/evidence/request-sender-resource"
     for folder in ("logs", "input", "output", "coverage"):
         (evidence / folder).mkdir(parents=True, exist_ok=True)
     for name in ("001_NK-MSG-001_単体テスト仕様書.md", "002_NK-MSG-001_実行結果.md"):

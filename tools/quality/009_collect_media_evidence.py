@@ -10,6 +10,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 from pgpt_evidence_checksums import write_scope_checksums
+from pgpt_evidence_destination import evidence_output_root
 
 
 def shared_file_program(classname):
@@ -45,7 +46,7 @@ def main():
     if not run.startswith(("PT-MED-", "PT-ADM-", "PT-WEB-")) or not all(c.isalnum() or c == "-" for c in run):
         raise SystemExit("invalid run ID")
     repo = Path(__file__).resolve().parents[2]
-    verified = json.loads((repo / "evidence/01_PT/008_NK-SCN-001/evidence/manifest.json").read_text())
+    verified = json.loads((evidence_output_root(repo) / "008_NK-SCN-001/evidence/manifest.json").read_text())
     if verified["runId"] != run or verified["exitCode"] != 0:
         raise SystemExit("collect the matching full verified reactor first")
     subprocess.run(["git", "diff", "--exit-code", verified["targetCommit"], "--", "src", "pom.xml",
@@ -165,7 +166,7 @@ def main():
         ET.indent(clean)
         clean_reports[report.name] = ET.ElementTree(clean)
     validate_method_inventory(methods, expected)
-    evidence = repo / "evidence/01_PT/009_NK-MED-001/evidence"
+    evidence = evidence_output_root(repo) / "009_NK-MED-001/evidence"
     for folder in ("logs", "output", "coverage"):
         (evidence / folder).mkdir(parents=True, exist_ok=True)
     for name, report in clean_reports.items():

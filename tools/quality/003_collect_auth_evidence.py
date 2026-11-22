@@ -11,6 +11,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 from pgpt_evidence_checksums import write_scope_checksums
+from pgpt_evidence_destination import evidence_output_root
 
 
 RESOURCE_METHODS = {
@@ -40,7 +41,7 @@ def main():
     if not args.run_id.startswith(("PT-AUT-", "PT-SCN-", "PT-MED-", "PT-ADM-", "PT-WEB-")) or not all(c.isalnum() or c == "-" for c in args.run_id):
         raise SystemExit("invalid run ID")
     repo = Path(__file__).resolve().parents[2]
-    evidence = repo / "evidence/01_PT/007_NK-AUT-001/evidence"
+    evidence = evidence_output_root(repo) / "007_NK-AUT-001/evidence"
     metadata = Path("/tmp")
     read = lambda suffix: (metadata / (args.run_id + suffix)).read_text().strip()
     if read(".exit") != "0":

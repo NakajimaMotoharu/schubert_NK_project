@@ -8,6 +8,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 from pgpt_evidence_checksums import write_scope_checksums
+from pgpt_evidence_destination import evidence_output_root
 
 CLASS = "dev.codex.schubert.nk.api.maintenance.BackupRerunBoundaryTest"
 METHODS = ("sameDayBackupReruns", "ordinarySuccessStillUnique", "attemptAndDateBoundaries",
@@ -37,7 +38,7 @@ def main():
     if not run.startswith("PT-WEB-") or not all(c.isalnum() or c == "-" for c in run):
         raise SystemExit("invalid run ID")
     repo = Path(__file__).resolve().parents[2]
-    full = repo / "evidence/01_PT/008_NK-SCN-001/evidence/manifest.json"
+    full = evidence_output_root(repo) / "008_NK-SCN-001/evidence/manifest.json"
     verified = json.loads(full.read_text())
     if verified["runId"] != run or verified["exitCode"] != 0:
         raise SystemExit("matching successful full reactor required")
@@ -45,7 +46,7 @@ def main():
                     "program/characterization", "tools/quality"], cwd=repo, check=True)
     target = repo / "src/schubert-nk-api/target"
     methods = validate_suite(ET.parse(target / "surefire-reports" / ("TEST-" + CLASS + ".xml")).getroot())
-    evidence = repo / "evidence/01_PT/004_NK-DAT-001/evidence/backup-rerun"
+    evidence = evidence_output_root(repo) / "004_NK-DAT-001/evidence/backup-rerun"
     evidence.mkdir(parents=True, exist_ok=True)
     suite = ET.Element("testsuite", name="NK-DAT-001-backup-rerun", tests="8", failures="0", errors="0", skipped="0")
     for test_id, method in methods.items():

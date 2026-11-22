@@ -10,10 +10,12 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 import xml.etree.ElementTree as ET
 
 sys.dont_write_bytecode = True
 import bootstrap_ownership
+from pgpt_evidence_destination import CANDIDATE_ROOT_ENV, evidence_output_root
 
 
 def module(name, file):
@@ -3040,6 +3042,116 @@ class EvidenceSetTest(unittest.TestCase):
             self.write_scope(root, scope, {"files": [item]})
             with self.assertRaisesRegex(ValueError, "file inventory"):
                 validate()
+
+    def test_candidate_reservation_rejects_existing_inside_or_aliased_paths(self):
+        with tempfile.TemporaryDirectory(prefix="nk-formal-reservation-") as scratch:
+            base = Path(scratch)
+            repo = base / "repo"
+            repo.mkdir()
+            run = "PT-WEB-RESERVATION"
+            candidate = gate.reserve_candidate(repo, run)
+            self.assertEqual(base / "pgpt-formal-candidates" / run, candidate)
+            self.assertEqual(0o700, candidate.stat().st_mode & 0o777)
+            retained = candidate / "retained"
+            retained.write_bytes(b"prior")
+            with self.assertRaises(FileExistsError):
+                gate.reserve_candidate(repo, run)
+            self.assertEqual(b"prior", retained.read_bytes())
+            with self.assertRaisesRegex(ValueError, "outside"):
+                gate.reserve_candidate(repo, run, repo / "evidence-new")
+            alias = base / "alias"
+            alias.symlink_to(candidate)
+            with self.assertRaisesRegex(ValueError, "non-aliased"):
+                gate.reserve_candidate(repo, run, alias / "elsewhere")
+            with patch.dict("os.environ", {}, clear=True):
+                self.assertEqual(repo / "evidence/01_PT", evidence_output_root(repo))
+            with patch.dict("os.environ", {CANDIDATE_ROOT_ENV: str(base / "unreserved")}):
+                with self.assertRaisesRegex(ValueError, "not reserved"):
+                    evidence_output_root(repo)
+
+    def test_candidate_root_is_forwarded_to_all_calls_and_validated(self):
+        with tempfile.TemporaryDirectory(prefix="nk-formal-all-candidate-") as scratch:
+            base = Path(scratch)
+            repo = base / "repo"
+            repo.mkdir()
+            candidate = gate.reserve_candidate(repo, "PT-WEB-TEST", base / "private")
+            canonical = repo / "evidence/01_PT"
+            self.write_scope(canonical, gate.ROOT_MANIFEST.removesuffix("/manifest.json"),
+                             {"runId": "PT-WEB-PREVIOUS"})
+            stored = (canonical / gate.ROOT_MANIFEST).read_bytes()
+            calls = []
+
+            def complete(command, *, cwd, check, env):
+                self.assertEqual(repo, cwd)
+                self.assertTrue(check)
+                self.assertEqual(str(candidate), env[CANDIDATE_ROOT_ENV])
+                self.assertEqual("PT-WEB-TEST", command[3])
+                calls.append(command)
+                if Path(command[2]).name.startswith("040_"):
+                    for scope in gate.SCOPES:
+                        self.write_scope(candidate, scope)
+
+            gate.collect(repo, "PT-WEB-TEST", execute=complete, candidate_root=candidate)
+            self.assertEqual(53, len(calls))
+            self.assertEqual("--preflight", calls[0][-1])
+            self.assertEqual(53, len(gate.validate_all(candidate, "PT-WEB-TEST", "a" * 40, "dev-foundation")))
+            self.assertEqual(stored, (canonical / gate.ROOT_MANIFEST).read_bytes())
+
+    def test_late_writer_failure_preserves_prior_root_and_retains_partial_candidate(self):
+        with tempfile.TemporaryDirectory(prefix="nk-formal-failed-candidate-") as scratch:
+            base = Path(scratch)
+            repo = base / "repo"
+            repo.mkdir()
+            candidate = gate.reserve_candidate(repo, "PT-WEB-TEST", base / "fresh")
+            canonical = repo / "evidence/01_PT"
+            scope = gate.ROOT_MANIFEST.removesuffix("/manifest.json")
+            self.write_scope(canonical, scope, {"runId": "PT-WEB-PREVIOUS"})
+            prior = (canonical / gate.ROOT_MANIFEST).read_bytes()
+            calls = []
+
+            def fail(command, *, cwd, check, env):
+                name = Path(command[2]).name[:3]
+                calls.append(name)
+                if name == "006":
+                    self.write_scope(Path(env[CANDIDATE_ROOT_ENV]), scope)
+                elif name == "003":
+                    raise subprocess.CalledProcessError(4, command)
+
+            with self.assertRaises(subprocess.CalledProcessError) as error:
+                gate.collect(repo, "PT-WEB-TEST", execute=fail, candidate_root=candidate)
+            self.assertEqual(4, error.exception.returncode)
+            self.assertEqual(["020", "006", "003"], calls)
+            self.assertEqual(prior, (canonical / gate.ROOT_MANIFEST).read_bytes())
+            self.assertTrue((candidate / gate.ROOT_MANIFEST).is_file())
+            with self.assertRaises(FileNotFoundError):
+                gate.validate_all(candidate, "PT-WEB-TEST", "a" * 40, "dev-foundation")
+
+    def test_real_child_writer_reads_fixtures_from_checkout_and_writes_to_candidate(self):
+        with tempfile.TemporaryDirectory(prefix="nk-formal-child-writer-") as scratch:
+            base = Path(scratch)
+            repo = base / "repo"
+            program = repo / "evidence/01_PT/005_NK-MSG-001"
+            program.mkdir(parents=True)
+            fixture = "001_NK-MSG-001_単体テスト仕様書.md"
+            (program / fixture).write_bytes(b"original test specification")
+            (program / "002_NK-MSG-001_実行結果.md").write_bytes(b"prior documented result")
+            candidate = gate.reserve_candidate(repo, "PT-WEB-TEST", base / "candidate")
+            self.write_scope(candidate, gate.ROOT_MANIFEST.removesuffix("/manifest.json"))
+            reactor = candidate / gate.ROOT_MANIFEST
+            verified = json.loads(reactor.read_bytes())
+            verified.update(startedAt="begin", completedAt="end", command="fixture",
+                            environment={}, rawLogSha256="a" * 64)
+            for filename in jms_compounds.SOURCES:
+                path = repo / filename
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_bytes(b"independent source fixture")
+            with patch.dict("os.environ", {CANDIDATE_ROOT_ENV: str(candidate)}):
+                jms_compounds.write_scope(repo, reactor, verified, "NK-MSG-001",
+                                          "005_NK-MSG-001", {"PT-FAKE-01": "Fake#one"}, {})
+            scope = "005_NK-MSG-001/evidence/jms-resource-compounds"
+            self.assertEqual(b"original test specification", (candidate / scope / "logs" / fixture).read_bytes())
+            self.assertFalse((program / "evidence").exists())
+            gate.validate_scope(candidate, scope, "PT-WEB-TEST", "a" * 40, "dev-foundation")
 
     def test_collection_stops_at_each_failure(self):
         for failed_at in range(53):

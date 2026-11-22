@@ -10,6 +10,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 from pgpt_evidence_checksums import write_scope_checksums
+from pgpt_evidence_destination import evidence_output_root
 
 
 def validate_session_resource_inventory(mapping):
@@ -169,7 +170,7 @@ def main():
     if not run.startswith("PT-WEB-") or not all(c.isalnum() or c == "-" for c in run):
         raise SystemExit("invalid run ID")
     repo = Path(__file__).resolve().parents[2]
-    verified = json.loads((repo / "evidence/01_PT/008_NK-SCN-001/evidence/manifest.json").read_text())
+    verified = json.loads((evidence_output_root(repo) / "008_NK-SCN-001/evidence/manifest.json").read_text())
     if verified["runId"] != run or verified["exitCode"] != 0:
         raise SystemExit("collect the matching full verified reactor first")
     subprocess.run(["git", "diff", "--exit-code", verified["targetCommit"], "--", "src", "pom.xml",
@@ -478,7 +479,7 @@ def main():
     validate_log_results_inventory({key: value for key, value in expected.items() if "LogSearchResultsViewModelTest#" in value})
     validate_log_form_inventory({key: value for key, value in expected.items() if "LogSearchFormTest#" in value})
     validate_log_view_inventory({key: value for key, value in expected.items() if "LogSearchViewModelTest#" in value})
-    evidence = repo / "evidence/01_PT/015_NK-WEB-001/evidence"
+    evidence = evidence_output_root(repo) / "015_NK-WEB-001/evidence"
     for name in ("logs", "output", "coverage"):
         (evidence / name).mkdir(parents=True, exist_ok=True)
     for name, report in reports.items():
@@ -499,7 +500,7 @@ def main():
                  "026_NK-WEB-001_Log検索通信単体テスト仕様書.md", "027_NK-WEB-001_Log検索通信実行結果.md",
                  "028_NK-WEB-001_Log検索入力単体テスト仕様書.md", "029_NK-WEB-001_Log検索入力実行結果.md",
                  "030_NK-WEB-001_Log検索画面状態単体テスト仕様書.md", "031_NK-WEB-001_Log検索画面状態実行結果.md"):
-        shutil.copyfile(evidence.parent / name, evidence / "logs" / name)
+        shutil.copyfile(repo / "evidence/01_PT/015_NK-WEB-001" / name, evidence / "logs" / name)
     for suffix in ("csv", "xml"):
         shutil.copyfile(repo / "src/schubert-nk-web/target/site/jacoco" / ("jacoco." + suffix),
                         evidence / "coverage" / ("web-jacoco." + suffix))

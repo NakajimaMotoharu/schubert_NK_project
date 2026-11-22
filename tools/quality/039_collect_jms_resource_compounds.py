@@ -8,6 +8,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 from pgpt_evidence_checksums import write_scope_checksums
+from pgpt_evidence_destination import evidence_output_root
 
 SUBJECTS = (
     ("PT-JMS-021", "NK-MSG-001", "005_NK-MSG-001", "web",
@@ -84,8 +85,9 @@ def validate_coverage(report, subject):
 
 def write_scope(repo, full, verified, program_id, folder, methods, coverage):
     program = repo / "evidence/01_PT" / folder
-    evidence = (program / "evidence/jms-resource-compounds" if program_id == "NK-MSG-001"
-                else program / "004_JmsResourceCompounds/evidence")
+    candidate = evidence_output_root(repo) / folder
+    evidence = (candidate / "evidence/jms-resource-compounds" if program_id == "NK-MSG-001"
+                else candidate / "004_JmsResourceCompounds/evidence")
     for name in ("logs", "input", "output", "coverage"):
         (evidence / name).mkdir(parents=True, exist_ok=True)
     for name in ("001_" + program_id + "_単体テスト仕様書.md",
@@ -128,7 +130,7 @@ def main():
     if not run.startswith("PT-WEB-") or not all(char.isalnum() or char == "-" for char in run):
         raise SystemExit("invalid run ID")
     repo = Path(__file__).resolve().parents[2]
-    full = repo / "evidence/01_PT/008_NK-SCN-001/evidence/manifest.json"
+    full = evidence_output_root(repo) / "008_NK-SCN-001/evidence/manifest.json"
     verified = json.loads(full.read_text())
     if verified["runId"] != run or verified["exitCode"] != 0:
         raise ValueError("matching successful reactor run required")

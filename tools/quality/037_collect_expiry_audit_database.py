@@ -8,6 +8,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 from pgpt_evidence_checksums import write_scope_checksums
+from pgpt_evidence_destination import evidence_output_root
 
 CLASS = "dev.codex.schubert.nk.api.database.DatabaseMigrationTest"
 METHODS = {
@@ -53,7 +54,7 @@ def main():
     if not run.startswith("PT-WEB-") or not all(c.isalnum() or c == "-" for c in run):
         raise SystemExit("invalid run ID")
     repo = Path(__file__).resolve().parents[2]
-    full = repo / "evidence/01_PT/008_NK-SCN-001/evidence/manifest.json"
+    full = evidence_output_root(repo) / "008_NK-SCN-001/evidence/manifest.json"
     verified = json.loads(full.read_text())
     if verified["runId"] != run or verified["exitCode"] != 0:
         raise SystemExit("matching successful full reactor required")
@@ -61,7 +62,7 @@ def main():
                     "program/characterization", "tools/quality"], cwd=repo, check=True)
     xml = repo / "src/schubert-nk-api/target/surefire-reports" / ("TEST-" + CLASS + ".xml")
     methods = validate_suite(ET.parse(xml).getroot())
-    evidence = repo / "evidence/01_PT/004_NK-DAT-001/evidence/expiry-audit"
+    evidence = evidence_output_root(repo) / "004_NK-DAT-001/evidence/expiry-audit"
     (evidence / "input").mkdir(parents=True, exist_ok=True)
     (evidence / "output").mkdir(parents=True, exist_ok=True)
     (evidence / "input/independent-oracle.txt").write_bytes(ORACLE)

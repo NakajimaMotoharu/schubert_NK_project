@@ -9,6 +9,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 from pgpt_evidence_checksums import write_scope_checksums
+from pgpt_evidence_destination import evidence_output_root
 
 PAIR_CLASS = "dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest"
 BATCH_TEST_COUNT = 550
@@ -444,13 +445,13 @@ def main():
         print(json.dumps({"runId": run, "batchTests": BATCH_TEST_COUNT,
                           "programTests": len(methods), "writesEvidence": False}))
         return
-    full = repo / "evidence/01_PT/008_NK-SCN-001/evidence/manifest.json"
+    full = evidence_output_root(repo) / "008_NK-SCN-001/evidence/manifest.json"
     verified = json.loads(full.read_text())
     validate_reactor(verified, run)
     subprocess.run(["git", "diff", "--exit-code", verified["targetCommit"], "--", "src", "pom.xml",
                     "program/characterization", "tools/quality"], cwd=repo, check=True)
     methods = validate_reports(select_program_suites(read_batch_reports(target)))
-    evidence = repo / "evidence/01_PT/017_NK-BAT-001/evidence"
+    evidence = evidence_output_root(repo) / "017_NK-BAT-001/evidence"
     for folder in ("output", "coverage", "logs"):
         (evidence / folder).mkdir(parents=True, exist_ok=True)
     completion_root = target / "backup-completion-traces"

@@ -8,6 +8,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 from pgpt_evidence_checksums import write_scope_checksums
+from pgpt_evidence_destination import evidence_output_root
 
 CLASS = "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest"
 METHODS = ("exactAlphabet", "lengthBoundaries", "characterBoundaries", "independentRandomVector",
@@ -69,7 +70,7 @@ def main():
     if not run.startswith("PT-WEB-") or not all(c.isalnum() or c == "-" for c in run):
         raise SystemExit("invalid run ID")
     repo = Path(__file__).resolve().parents[2]
-    full = repo / "evidence/01_PT/008_NK-SCN-001/evidence/manifest.json"
+    full = evidence_output_root(repo) / "008_NK-SCN-001/evidence/manifest.json"
     verified = json.loads(full.read_text())
     if verified["runId"] != run or verified["exitCode"] != 0:
         raise SystemExit("matching successful reactor required")
@@ -91,7 +92,7 @@ def main():
                 traces[name] = path.read_bytes()
     validate_traces(traces)
     program = repo / "evidence/01_PT/011_NK-QST-001"
-    evidence = program / "evidence"
+    evidence = evidence_output_root(repo) / "011_NK-QST-001/evidence"
     for folder, values in (("input", TRACES), ("output", traces)):
         directory = evidence / folder
         directory.mkdir(parents=True, exist_ok=True)

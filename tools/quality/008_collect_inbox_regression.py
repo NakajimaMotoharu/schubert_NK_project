@@ -10,6 +10,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 from pgpt_evidence_checksums import write_scope_checksums
+from pgpt_evidence_destination import evidence_output_root
 
 
 def main():
@@ -19,7 +20,7 @@ def main():
     if not args.run_id.startswith(("PT-SCN-", "PT-MED-", "PT-ADM-", "PT-WEB-")) or not all(c.isalnum() or c == "-" for c in args.run_id):
         raise SystemExit("invalid run ID")
     repo = Path(__file__).resolve().parents[2]
-    source = repo / "evidence/01_PT/008_NK-SCN-001/evidence"
+    source = evidence_output_root(repo) / "008_NK-SCN-001/evidence"
     validated = json.loads((source / "manifest.json").read_text())
     if validated["runId"] != args.run_id or validated["exitCode"] != 0:
         raise SystemExit("collect the matching verified Scenario run first")
@@ -47,7 +48,7 @@ def main():
             or len(replacement_methods) != 3 or len(replacement_ids) != 3
             or set(replacement_methods) != set(replacement_ids.values())):
         raise SystemExit("missing or nonpassing replacement regression")
-    evidence = repo / "evidence/01_PT/006_NK-MSG-002/evidence"
+    evidence = evidence_output_root(repo) / "006_NK-MSG-002/evidence"
     bound_relative = "output/TEST-dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest.xml"
     bound_report = source / bound_relative
     bound_hash = next(f["sha256"] for f in validated["files"] if f["path"] == bound_relative)

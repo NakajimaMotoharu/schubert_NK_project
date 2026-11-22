@@ -8,6 +8,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 from pgpt_evidence_checksums import write_scope_checksums
+from pgpt_evidence_destination import evidence_output_root
 import bootstrap_ownership
 
 GROUPS = (
@@ -75,7 +76,7 @@ def main():
     if not run.startswith("PT-WEB-") or not all(c.isalnum() or c == "-" for c in run):
         raise SystemExit("invalid run ID")
     repo = Path(__file__).resolve().parents[2]
-    full = repo / "evidence/01_PT/008_NK-SCN-001/evidence/manifest.json"
+    full = evidence_output_root(repo) / "008_NK-SCN-001/evidence/manifest.json"
     verified = json.loads(full.read_text())
     if verified["runId"] != run or verified["exitCode"] != 0:
         raise SystemExit("matching successful full reactor required")
@@ -94,7 +95,7 @@ def main():
                                   for c in cls.findall("counter")}
     if not set(subjects).issubset(coverage) or any(c["missed"] for v in coverage.values() for c in v.values()):
         raise SystemExit("missing or incomplete inspector database coverage")
-    evidence = repo / "evidence/01_PT/004_NK-DAT-001/evidence" / folder
+    evidence = evidence_output_root(repo) / "004_NK-DAT-001/evidence" / folder
     evidence.mkdir(parents=True, exist_ok=True)
     sanitized = ET.Element("testsuite", name="NK-DAT-001-" + folder, tests=str(len(methods)), failures="0", errors="0", skipped="0")
     for test_id, method in methods.items():

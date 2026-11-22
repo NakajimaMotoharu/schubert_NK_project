@@ -1,5 +1,13 @@
 # 証跡scope横断gate・BUG-099/100
 
+## 2026-11-23 新規収集と再照合
+
+新規収集は `python3 -B tools/quality/018_collect_verified_evidence_set.py <新規run ID>`。標準出力先は作業ツリーの隣の `pgpt-formal-candidates/<run ID>`。既存の候補先は使用せず、別の未使用パスを指定する場合は `--candidate-root` を渡す。保存候補の再照合は同run IDと `--validate-only --candidate-root <既存候補パス>` で行う。終了値、出力先、53領域、出力の由来を確認してから正式公開を別途判断する。
+
+既存正式証跡は作業ツリー上の既公開成果として保持する。PG42746で、旧正式公開commitに保存された53領域を読み戻した。対象は旧runの保全確認。
+
+## 履歴
+
 2026-09-20 最新確定: 正式PT-WEB-20260920-27/source3b980d71f5573342b7c787ad6eed53db6d8c2940、10:14:36～10:27:24 JST/Maven12:47/exit0、全1719PT（Protocol80/Storage82/API689/Web460/Batch367/CHR41）、failed/error/skipped0。6Java全line/method/class/branch100%、Production5 NullAway/Enforcer/Spotless/SpotBugs未解決0、固定path3method限定review継続・coverage除外追加なし、CHR SpotBugs未設定。JS1file全line/function/branch100%、18collector/41scope整合・81負canary成功。DB29/266＋Batch25/281＋OPS17/142＋QST2/16＋ASY1/5＋Web25/219＝99部分成果929PT（全1719の内数）、今回再開比+304PT/+34部分成果。PG215 Log画面状態8PT・PG216実template8PTを限定認定、BUG226/YKT182完了。LogのBrowser入力検査/ADMIN HTTPは未実装。BUG195/206/YKT154/162/SSC063、実archive/親/質問受付全体/残Web・本文controller-file/readiness/Logout/QA045/実NKgateは未完了。固定加重40.85～52.35%（中心46.6%≒47%、約41～52%）を維持。残量9%で利用者指定の停止、元dev-web3file保全、PGPT/IT/ST未完了。以下は履歴。
 
 ## 1. 正式26の非合格記録（修正前）

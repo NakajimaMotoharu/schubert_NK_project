@@ -3,10 +3,13 @@
 import argparse
 import hashlib
 import json
+import os
 from pathlib import Path
 import re
 import subprocess
 import sys
+
+from pgpt_evidence_destination import CANDIDATE_ROOT_ENV, check_candidate_root
 
 BASE = (
     ("006_collect_scenario_evidence.py", "008_NK-SCN-001"),
@@ -159,7 +162,7 @@ def validate_all(root, run, commit, branch):
     return [validate_scope(root, scope, run, commit, branch) for scope in SCOPES]
 
 
-def collect(repo, run, execute=subprocess.run):
+def collect(repo, run, execute=subprocess.run, *, candidate_root=None):
     commands = [[sys.executable, "-B", str(repo / "tools/quality" / tool), run]
                 for tool, _ in BASE]
     commands.extend([sys.executable, "-B",
@@ -187,24 +190,41 @@ def collect(repo, run, execute=subprocess.run):
     # Batch has a fixed certified inventory. Reject incompatible input before any writer runs.
     preflight = [sys.executable, "-B", str(repo / "tools/quality/020_collect_batch_evidence.py"),
                  run, "--preflight"]
-    execute(preflight, cwd=repo, check=True)
+    options = {"cwd": repo, "check": True}
+    if candidate_root is not None:
+        options["env"] = dict(os.environ, **{CANDIDATE_ROOT_ENV: str(candidate_root)})
+    execute(preflight, **options)
     for command in commands:
-        execute(command, cwd=repo, check=True)
+        execute(command, **options)
+
+
+def reserve_candidate(repo, run, requested=None):
+    if requested is None:
+        area = check_candidate_root(repo, repo.parent / "pgpt-formal-candidates")
+        area.mkdir(mode=0o700, exist_ok=True)
+        requested = area / run
+    candidate = check_candidate_root(repo, requested)
+    candidate.mkdir(mode=0o700)
+    return candidate
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("run_id")
     parser.add_argument("--validate-only", action="store_true")
+    parser.add_argument("--candidate-root", type=Path, help="collect or validate evidence outside the checkout")
     args = parser.parse_args()
     if not re.fullmatch(r"PT-(WEB|ADM|MED|SCN)-[A-Za-z0-9-]+", args.run_id):
         raise SystemExit("invalid run ID")
     repo = Path(__file__).resolve().parents[2]
     temporary_commit = Path("/tmp") / (args.run_id + ".commit")
+    root = repo / "evidence/01_PT"
+    if args.candidate_root is not None:
+        root = check_candidate_root(repo, args.candidate_root)
     if args.validate_only:
         # A persisted manifest can validate an old run after /tmp is cleared. It is not
         # evidence of a new execution, and every mandatory scope is checked below.
-        manifest = load_success_manifest(repo / "evidence/01_PT" / ROOT_MANIFEST)
+        manifest = load_success_manifest(root / ROOT_MANIFEST)
         if manifest["runId"] != args.run_id:
             raise ValueError("invalid persisted reactor run")
         commit = manifest["targetCommit"]
@@ -218,12 +238,14 @@ def main():
     branch = subprocess.check_output(["git", "branch", "--show-current"], cwd=repo, text=True).strip()
     paths = ["src", "pom.xml", "program/characterization"]
     if not args.validate_only:
-        paths.append("tools/quality")
+        paths.extend(("tools/quality", ".mvn", "mvnw", "mvnw.cmd"))
     subprocess.run(["git", "diff", "--exit-code", commit, "--", *paths], cwd=repo, check=True)
     if not args.validate_only:
-        collect(repo, args.run_id)
-    results = validate_all(repo / "evidence/01_PT", args.run_id, commit, branch)
+        root = reserve_candidate(repo, args.run_id, args.candidate_root)
+        collect(repo, args.run_id, candidate_root=root)
+    results = validate_all(root, args.run_id, commit, branch)
     print(json.dumps({"runId": args.run_id, "targetCommit": commit, "scopes": results,
+                      "evidenceRoot": str(root),
                       "result": "PASS_PERSISTED_EVIDENCE_ONLY" if args.validate_only
                       else "PASS_EVIDENCE_SET_ONLY", "phaseComplete": False}))
 

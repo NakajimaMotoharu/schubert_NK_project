@@ -10,6 +10,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 from pgpt_evidence_checksums import write_scope_checksums
+from pgpt_evidence_destination import evidence_output_root
 
 
 def main():
@@ -17,13 +18,13 @@ def main():
     parser.add_argument("run_id")
     args = parser.parse_args()
     repo = Path(__file__).resolve().parents[2]
-    validated = json.loads((repo / "evidence/01_PT/008_NK-SCN-001/evidence/manifest.json").read_text())
+    validated = json.loads((evidence_output_root(repo) / "008_NK-SCN-001/evidence/manifest.json").read_text())
     if validated["runId"] != args.run_id or validated["exitCode"] != 0:
         raise SystemExit("collect the matching verified Scenario run first")
     subprocess.run(["git", "diff", "--exit-code", validated["targetCommit"], "--", "src", "pom.xml",
                     "program/characterization", "tools/quality"], cwd=repo, check=True, stdout=subprocess.DEVNULL)
     target = repo / "src/schubert-nk-protocol/target"
-    evidence = repo / "evidence/01_PT/003_NK-PRO-003/evidence"
+    evidence = evidence_output_root(repo) / "003_NK-PRO-003/evidence"
     old = json.loads((evidence / "manifest.json").read_text())
     old_id = old["runId"]
     if not all(c.isalnum() or c == "-" for c in old_id):

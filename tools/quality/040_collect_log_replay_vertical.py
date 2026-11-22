@@ -8,6 +8,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 from pgpt_evidence_checksums import write_scope_checksums
+from pgpt_evidence_destination import evidence_output_root
 
 CLASS = "dev.codex.schubert.nk.web.logging.WebApiLogReplayIntegrationTest"
 METHOD = "idem016WebOutboxRetriesIntoApiProjectionExactlyOnce"
@@ -93,7 +94,7 @@ def main():
     if not run.startswith("PT-WEB-") or not all(c.isalnum() or c == "-" for c in run):
         raise SystemExit("invalid run ID")
     repo = Path(__file__).resolve().parents[2]
-    full = repo / "evidence/01_PT/008_NK-SCN-001/evidence/manifest.json"
+    full = evidence_output_root(repo) / "008_NK-SCN-001/evidence/manifest.json"
     verified = json.loads(full.read_text())
     if verified["runId"] != run or verified["exitCode"] != 0:
         raise ValueError("matching successful reactor required")
@@ -110,7 +111,7 @@ def main():
     for module, subject in SUBJECTS:
         report = repo / f"src/schubert-nk-{module}/target/site/jacoco/jacoco.xml"
         coverage[subject] = validate_coverage(ET.parse(report).getroot(), subject)
-    evidence = repo / "evidence/01_PT/006_NK-MSG-002/005_LogReplayVertical/evidence"
+    evidence = evidence_output_root(repo) / "006_NK-MSG-002/005_LogReplayVertical/evidence"
     for folder in ("logs", "input", "output", "coverage"):
         (evidence / folder).mkdir(parents=True, exist_ok=True)
     program = repo / "evidence/01_PT/006_NK-MSG-002"

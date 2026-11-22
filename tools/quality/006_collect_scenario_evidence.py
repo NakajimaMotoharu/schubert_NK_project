@@ -11,6 +11,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 from pgpt_evidence_checksums import write_scope_checksums
+from pgpt_evidence_destination import evidence_output_root
 
 
 def scenario_storage_suite(name):
@@ -31,7 +32,7 @@ def main():
     if not run.startswith(("PT-SCN-", "PT-MED-", "PT-ADM-", "PT-WEB-")) or not all(c.isalnum() or c == "-" for c in run):
         raise SystemExit("invalid run ID")
     repo = Path(__file__).resolve().parents[2]
-    evidence = repo / "evidence/01_PT/008_NK-SCN-001/evidence"
+    evidence = evidence_output_root(repo) / "008_NK-SCN-001/evidence"
     read = lambda suffix: (Path("/tmp") / (run + suffix)).read_text().strip()
     if read(".exit") != "0":
         raise SystemExit("failed execution cannot be certified")
