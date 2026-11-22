@@ -1,0 +1,86 @@
+{
+  "run": "PG42442",
+  "source": "24ba9b4365d88b0302665db217e3a14daf9160ca",
+  "javaCore": "b5d5009768a04bb69468beed2471441b2a57ce27",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-22T09:05:46.519381+00:00",
+  "basis": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42442-f03-copy-master-current-static-v1/begin.json",
+      "sha256": "ffd225026be0868fa4166d466e30783508fb04839a5bb18d96835b489f9583f2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42440-f03-copy-master-current-manifest-ordinary-v1/manifest.json",
+      "sha256": "9c3e02a5b06e6de828a2b8b8fb6bb6f17e80f37e650b90d29dc9fd446ca24f72"
+    }
+  ],
+  "actualExit": {
+    "guard": 0,
+    "checkstyle": 0,
+    "pmd": 4,
+    "spotbugs": 0
+  },
+  "rawReports": {
+    "checkstyle": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42442-f03-copy-master-current-static-v1/reports/checkstyle.xml",
+      "sha256": "01c93fe30ddd4084ae3590039ef6858e708c59ea6a556e56524c4cd683913316"
+    },
+    "pmd": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42442-f03-copy-master-current-static-v1/reports/pmd.xml",
+      "sha256": "998f778d6c6bb7a64bb959a0aecd6448ffe3115d066b0e9642bee9f91a6dfcc6"
+    },
+    "spotbugs": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42442-f03-copy-master-current-static-v1/reports/spotbugs.xml",
+      "sha256": "09f1b8e022ca53ec25cbe66b42c4d46233980be03a9db5451fe0bb5b70e35288"
+    }
+  },
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "missingClasses": 0,
+  "pmdRaw": 5,
+  "pmdProcessingErrors": 0,
+  "scopedDispositions": [
+    {
+      "code": "CloseResource",
+      "line": 191,
+      "file": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterCopyManifestTest.java",
+      "reason": "Only for the isolated fixed eight workers in COPYMAN011; accepted receipt requires terminal assertion in its finally.",
+      "testId": "PT-MIG-COPYMAN011"
+    },
+    {
+      "code": "DoNotUseThreads",
+      "line": 191,
+      "file": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterCopyManifestTest.java",
+      "reason": "Only for the isolated fixed eight workers in COPYMAN011; accepted receipt requires terminal assertion in its finally.",
+      "testId": "PT-MIG-COPYMAN011"
+    },
+    {
+      "code": "DoNotUseThreads",
+      "line": 196,
+      "file": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterCopyManifestTest.java",
+      "reason": "Finite submissions of immutable fixture inputs, 64 results, each compared with the fixed independent oracle.",
+      "testId": "PT-MIG-COPYMAN011"
+    },
+    {
+      "code": "DoNotUseThreads",
+      "line": 206,
+      "file": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterCopyManifestTest.java",
+      "reason": "Cleanup in finally with a bounded join; shutdown is only on the fixture-local executor.",
+      "testId": "PT-MIG-COPYMAN011"
+    },
+    {
+      "code": "DoNotUseThreads",
+      "line": 207,
+      "file": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterCopyManifestTest.java",
+      "reason": "Termination checked with explicit bounded 10-second wait, visible failure if not terminated.",
+      "testId": "PT-MIG-COPYMAN011"
+    }
+  ],
+  "untriagedLocal": 0,
+  "scopeReviewFormalAccepted": false,
+  "suppressionsAdded": 0,
+  "productSourceChanges": 0,
+  "repeatedDynamic": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
