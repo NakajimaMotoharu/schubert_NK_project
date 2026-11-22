@@ -10,12 +10,15 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
@@ -53,7 +56,8 @@ final class MigrationCopyDatasetTest {
           "900\t500\t1\tvoice\t1\t" + STAMP + "\n");
 
   @Test
-  void five001IndependentFiveStreamsOrderAndBorrowedOwnership() throws Exception {
+  void five001IndependentFiveStreamsOrderAndBorrowedOwnership()
+      throws IOException, NoSuchAlgorithmException {
     var sinks = sinks();
     write(normal(), writer(), sinks);
     expected(sinks, GOLDEN);
@@ -65,7 +69,7 @@ final class MigrationCopyDatasetTest {
   }
 
   @Test
-  void five002AllEmptyNoInventedRows() throws Exception {
+  void five002AllEmptyNoInventedRows() throws IOException {
     var sinks = sinks();
     write(
         new MigrationCopyDataset(emptyScenario(), List.of(), List.of(), emptyMedia()),
@@ -76,7 +80,7 @@ final class MigrationCopyDatasetTest {
   }
 
   @Test
-  void five003NullScenarioAndMedia() throws Exception {
+  void five003NullScenarioAndMedia() throws NoSuchAlgorithmException {
     var scenario = scenario(true, STAMP);
     var media = media(STAMP);
     assertEquals(
@@ -94,7 +98,7 @@ final class MigrationCopyDatasetTest {
   }
 
   @Test
-  void five004NullAudioOrLinkCollections() throws Exception {
+  void five004NullAudioOrLinkCollections() throws NoSuchAlgorithmException {
     var scenario = scenario(true, STAMP);
     var media = media(STAMP);
     assertThrows(
@@ -106,7 +110,7 @@ final class MigrationCopyDatasetTest {
   }
 
   @Test
-  void five005MissingCollectionElementsRemainInvalid() throws Exception {
+  void five005MissingCollectionElementsRemainInvalid() throws NoSuchAlgorithmException {
     var scenario = scenario(true, STAMP);
     var media = media(STAMP);
     assertThrows(
@@ -122,7 +126,7 @@ final class MigrationCopyDatasetTest {
   }
 
   @Test
-  void five006LinkMustBelongToThisScenario() throws Exception {
+  void five006LinkMustBelongToThisScenario() throws NoSuchAlgorithmException {
     var scenario = scenario(false, STAMP);
     var audio = List.of(audio(STAMP));
     var media = media(STAMP);
@@ -132,7 +136,7 @@ final class MigrationCopyDatasetTest {
   }
 
   @Test
-  void five007UnreferencedAudioDoesNotInventLink() throws Exception {
+  void five007UnreferencedAudioDoesNotInventLink() throws IOException {
     var dataset =
         new MigrationCopyDataset(
             scenario(true, STAMP), List.of(audio(STAMP)), List.of(), emptyMedia());
@@ -145,7 +149,7 @@ final class MigrationCopyDatasetTest {
   }
 
   @Test
-  void five008FileAndAudioTimestampMustAgreeWithoutEntries() throws Exception {
+  void five008FileAndAudioTimestampMustAgreeWithoutEntries() {
     var scenario = scenario(false, STAMP);
     var audio = List.of(audio(OTHER_STAMP));
     var media = emptyMedia();
@@ -158,7 +162,7 @@ final class MigrationCopyDatasetTest {
   }
 
   @Test
-  void five009MediaAndScenarioTimestampMustAgree() throws Exception {
+  void five009MediaAndScenarioTimestampMustAgree() throws NoSuchAlgorithmException {
     var scenario = scenario(true, STAMP);
     var media = media(OTHER_STAMP);
     assertEquals(
@@ -170,7 +174,7 @@ final class MigrationCopyDatasetTest {
   }
 
   @Test
-  void five010FileAndAudioOnlyCommonStampIsValid() throws Exception {
+  void five010FileAndAudioOnlyCommonStampIsValid() throws IOException {
     var dataset =
         new MigrationCopyDataset(
             scenario(false, STAMP), List.of(audio(STAMP)), List.of(), emptyMedia());
@@ -180,7 +184,7 @@ final class MigrationCopyDatasetTest {
   }
 
   @Test
-  void five011MediaOnlyHasItsOwnSingleStamp() throws Exception {
+  void five011MediaOnlyHasItsOwnSingleStamp() throws IOException, NoSuchAlgorithmException {
     var dataset = new MigrationCopyDataset(emptyScenario(), List.of(), List.of(), media(STAMP));
     var sinks = sinks();
     write(dataset, writer(), sinks);
@@ -188,7 +192,7 @@ final class MigrationCopyDatasetTest {
   }
 
   @Test
-  void five012GettersRetainImmutableValidatedValues() throws Exception {
+  void five012GettersRetainImmutableValidatedValues() throws NoSuchAlgorithmException {
     var scenario = scenario(true, STAMP);
     var media = media(STAMP);
     var dataset = new MigrationCopyDataset(scenario, List.of(audio(STAMP)), List.of(link()), media);
@@ -201,7 +205,7 @@ final class MigrationCopyDatasetTest {
   }
 
   @Test
-  void five013EveryNullWriteArgumentFailsBeforeAnyByte() throws Exception {
+  void five013EveryNullWriteArgumentFailsBeforeAnyByte() throws NoSuchAlgorithmException {
     var dataset = normal();
     var sinks = sinks();
     assertEquals(
@@ -220,7 +224,7 @@ final class MigrationCopyDatasetTest {
   }
 
   @Test
-  void five014EachIoFailureStopsLaterStreamsAndPreservesInstance() throws Exception {
+  void five014EachIoFailureStopsLaterStreamsAndPreservesInstance() throws NoSuchAlgorithmException {
     var dataset = normal();
     for (int failedIndex = 0; failedIndex < STREAMS; failedIndex++) {
       var sinks = sinks();
@@ -237,31 +241,61 @@ final class MigrationCopyDatasetTest {
   }
 
   @Test
-  void five015RuntimeAndErrorAreNotWrapped() throws Exception {
+  void five015RuntimeAndErrorAreNotWrapped() throws NoSuchAlgorithmException {
     var dataset = normal();
-    for (Throwable failure :
-        List.of(
-            new IllegalStateException("synthetic runtime"),
-            new AssertionError("synthetic error"))) {
-      var sinks = sinks();
-      var outputs = new ArrayList<OutputStream>(sinks);
-      outputs.set(
-          0,
-          new OutputStream() {
-            @Override
-            public void write(int value) {
-              if (failure instanceof RuntimeException runtime) throw runtime;
-              throw (Error) failure;
-            }
-          });
+    var runtime = new IllegalStateException("synthetic runtime");
+    assertBorrowedUncheckedFailure(
+        dataset,
+        runtime,
+        () -> {
+          throw runtime;
+        });
+    var error = new AssertionError("synthetic error");
+    assertBorrowedUncheckedFailure(
+        dataset,
+        error,
+        () -> {
+          throw error;
+        });
+  }
+
+  private static void assertBorrowedUncheckedFailure(
+      MigrationCopyDataset dataset, Throwable failure, Runnable throwOnWrite) {
+    var sinks = sinks();
+    var outputs = new ArrayList<OutputStream>(sinks);
+    var failing =
+        new OutputStream() {
+          private int closes;
+          private int flushes;
+
+          @Override
+          public void write(int value) {
+            throwOnWrite.run();
+          }
+
+          @Override
+          public void close() {
+            closes++;
+          }
+
+          @Override
+          public void flush() {
+            flushes++;
+          }
+        };
+    try (failing) {
+      outputs.set(0, failing);
       assertSame(
           failure, assertThrows(failure.getClass(), () -> write(dataset, writer(), outputs)));
+      assertEquals(0, failing.closes);
+      assertEquals(0, failing.flushes);
       expected(sinks, List.of("", "", "", "", ""));
     }
+    assertEquals(1, failing.closes);
   }
 
   @Test
-  void five016PartialBytesRemainAndNoAutomaticReplay() throws Exception {
+  void five016PartialBytesRemainAndNoAutomaticReplay() throws NoSuchAlgorithmException {
     var dataset = normal();
     var sinks = sinks();
     var failure = new IOException("synthetic partial");
@@ -275,7 +309,8 @@ final class MigrationCopyDatasetTest {
   }
 
   @Test
-  void five017CallerCollectionMutationsDoNotChangeSnapshot() throws Exception {
+  void five017CallerCollectionMutationsDoNotChangeSnapshot()
+      throws IOException, NoSuchAlgorithmException {
     var audio = new ArrayList<@Nullable AudioFileCopyRow>(List.of(audio(STAMP)));
     var links = new ArrayList<@Nullable List<@Nullable String>>();
     var row = new ArrayList<@Nullable String>(link());
@@ -290,7 +325,8 @@ final class MigrationCopyDatasetTest {
   }
 
   @Test
-  void five018ImmutableValuesCanWriteToSeparateIndependentSinks() throws Exception {
+  void five018ImmutableValuesCanWriteToSeparateIndependentSinks()
+      throws IOException, NoSuchAlgorithmException {
     var dataset = normal();
     for (int attempt = 0; attempt < 2; attempt++) {
       var sinks = sinks();
@@ -300,14 +336,15 @@ final class MigrationCopyDatasetTest {
   }
 
   @Test
-  void five019FixedRedactionAndSuccessAfterRejection() throws Exception {
+  void five019FixedRedactionAndSuccessAfterRejection() throws NoSuchAlgorithmException {
     assertThrows(
         IllegalArgumentException.class, () -> new MigrationCopyDataset(null, null, null, null));
     assertEquals("MigrationCopyDataset[REDACTED]", normal().toString());
   }
 
   @Test
-  void five020FiniteParallelReadersHaveIndependentMemorySinks() throws Exception {
+  void five020FiniteParallelReadersHaveIndependentMemorySinks()
+      throws NoSuchAlgorithmException, InterruptedException, ExecutionException, TimeoutException {
     var dataset = normal();
     var executor = Executors.newFixedThreadPool(WORKERS);
     try {
@@ -327,7 +364,7 @@ final class MigrationCopyDatasetTest {
     }
   }
 
-  private static MigrationCopyDataset normal() throws Exception {
+  private static MigrationCopyDataset normal() throws NoSuchAlgorithmException {
     return new MigrationCopyDataset(
         scenario(true, STAMP), List.of(audio(STAMP)), List.of(link()), media(STAMP));
   }
@@ -410,7 +447,7 @@ final class MigrationCopyDatasetTest {
     return Arrays.<@Nullable String>asList("900", "500", ONE, "voice", ONE, STAMP);
   }
 
-  private static MediaAssetCopyBatch media(String stamp) throws Exception {
+  private static MediaAssetCopyBatch media(String stamp) throws NoSuchAlgorithmException {
     var manifest =
         new AssetMigrationManifest(
             List.of(
