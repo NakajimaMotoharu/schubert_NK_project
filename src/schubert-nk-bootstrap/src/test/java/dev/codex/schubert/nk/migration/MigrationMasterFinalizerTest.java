@@ -169,7 +169,7 @@ final class MigrationMasterFinalizerTest {
   }
 
   @Test
-  void final007EveryPreflightResultShapeIsStrict() throws Exception {
+  void final007EveryPreflightResultShapeIsStrict() {
     shapes(0, IDENTITIES);
   }
 
@@ -259,7 +259,7 @@ final class MigrationMasterFinalizerTest {
   }
 
   @Test
-  void final017EverySetvalResultShapeIsStrict() throws Exception {
+  void final017EverySetvalResultShapeIsStrict() {
     shapes(IDENTITIES, IDENTITIES);
   }
 
@@ -716,7 +716,7 @@ final class MigrationMasterFinalizerTest {
     return new MigrationMasterCopyDataset(speakers(STAMP), content(STAMP));
   }
 
-  private static MigrationCopyDataset content(String stamp) throws Exception {
+  private static MigrationCopyDataset content(String stamp) throws NoSuchAlgorithmException {
     return new MigrationCopyDataset(
         scenario(true, SPEAKER_ID, ONE, stamp),
         List.of(audio(stamp)),

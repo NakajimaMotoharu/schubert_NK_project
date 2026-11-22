@@ -313,7 +313,7 @@ final class MigrationMasterContentVerifierTest {
   }
 
   @Test
-  void content020EachResultCloseFailureIsNotSuccess() throws Exception {
+  void content020EachResultCloseFailureIsNotSuccess() throws NoSuchAlgorithmException {
     for (int slot = 0; slot < TABLES; slot++) {
       for (Throwable failure : failures()) {
         var f = new Fixture();
@@ -327,7 +327,7 @@ final class MigrationMasterContentVerifierTest {
   }
 
   @Test
-  void content021StatementCloseFailureIsNotSuccess() throws Exception {
+  void content021StatementCloseFailureIsNotSuccess() throws NoSuchAlgorithmException {
     for (Throwable failure : failures()) {
       var f = new Fixture();
       f.statementFailure = failure;
@@ -338,7 +338,8 @@ final class MigrationMasterContentVerifierTest {
   }
 
   @Test
-  void content022AllThreeFaultKindsPreserveInnerThenOuterSuppressedOrder() throws Exception {
+  void content022AllThreeFaultKindsPreserveInnerThenOuterSuppressedOrder()
+      throws NoSuchAlgorithmException {
     var calls = expectedCalls(literals(TIME, null));
     for (int slot = 0; slot < TABLES; slot++) {
       for (int p = 0; p < 3; p++) {
@@ -363,7 +364,8 @@ final class MigrationMasterContentVerifierTest {
   }
 
   @Test
-  void content023SamePrimaryNeverCreatesSelfSuppressionIncludingCloseOrigin() throws Exception {
+  void content023SamePrimaryNeverCreatesSelfSuppressionIncludingCloseOrigin()
+      throws NoSuchAlgorithmException {
     var calls = expectedCalls(literals(TIME, null));
     for (int slot : List.of(0, 5, SEARCH_CHECK)) {
       for (boolean closeOrigin : List.of(true, false)) {
@@ -383,7 +385,7 @@ final class MigrationMasterContentVerifierTest {
   }
 
   @Test
-  void content024EqualValuedDistinctCleanupIsKeptTwice() throws Exception {
+  void content024EqualValuedDistinctCleanupIsKeptTwice() throws NoSuchAlgorithmException {
     var primary = new EqualFailure();
     var cleanup = new EqualFailure();
     assertTrue(primary.equals(cleanup));
@@ -498,7 +500,7 @@ final class MigrationMasterContentVerifierTest {
       assertSame(suppressed.get(index), primary.getSuppressed()[index]);
   }
 
-  private static void faultAt(int index) throws Exception {
+  private static void faultAt(int index) throws NoSuchAlgorithmException {
     var calls = expectedCalls(literals(TIME, null));
     for (Throwable failure : failures()) {
       var f = new Fixture();

@@ -581,6 +581,7 @@ final class AssetStagingTablesTest {
     private @Nullable SQLException createFailure;
     private @Nullable SQLException timeoutFailure;
     private @Nullable SQLException statementCloseFailure;
+    private @Nullable SQLException resultCloseFailure;
     private Throwable operationFailure = original;
     private int ddlFailureAt = -1;
     private int ddlNonzeroAt = -1;
@@ -708,6 +709,7 @@ final class AssetStagingTablesTest {
                 return selected == Fault.NULL_VALUE;
               case "close":
                 resultsClosed++;
+                if (resultCloseFailure != null) throw resultCloseFailure;
                 if (selected == Fault.RESULT_CLOSE_FAILURE || selected == Fault.COMBINED)
                   throw cleanup;
                 return null;
@@ -750,6 +752,22 @@ final class AssetStagingTablesTest {
     assertEquals(2, fixture.original.getSuppressed().length);
     assertSame(fixture.cleanup, fixture.original.getSuppressed()[0]);
     assertSame(outer, fixture.original.getSuppressed()[1]);
+    assertEquals(List.of(TARGET_COUNTS.getFirst()), fixture.sql);
+    assertEquals(1, fixture.resultsClosed);
+    assertEquals(1, fixture.statementsClosed);
+  }
+
+  /** SSC366/PT-MIG-ASSETSTAGE031: both owned resources return the original read failure. */
+  @Test
+  void transferBothClosesReturningPrimaryKeepIdentityWithoutSelfSuppression() {
+    var fixture = new Fixture();
+    fixture.fault = Fault.READ_FAILURE;
+    fixture.badQuery = 0;
+    fixture.resultCloseFailure = fixture.original;
+    fixture.statementCloseFailure = fixture.original;
+
+    assertSame(fixture.original, transferFailure(fixture));
+    assertEquals(0, fixture.original.getSuppressed().length);
     assertEquals(List.of(TARGET_COUNTS.getFirst()), fixture.sql);
     assertEquals(1, fixture.resultsClosed);
     assertEquals(1, fixture.statementsClosed);

@@ -452,6 +452,26 @@ final class MigrationMasterReferenceVerifierTest {
     EXTRA
   }
 
+  /** SSC366/PT-MIG-REF022: suppress the distinct row close failure once. */
+  @Test
+  void reference022OuterCloseReturningPrimaryKeepsOnlyDistinctInnerFailure() {
+    var fixture = new Fixture();
+    fixture.failCall = CALL_GET_LONG;
+    fixture.failSlot = 0;
+    fixture.faultQuery = 0;
+    var inner = new SQLException("synthetic row close");
+    fixture.extraResult = inner;
+    fixture.extraOuter = fixture.failure;
+
+    var failure = assertThrows(SQLException.class, () -> verify(fixture, normal()));
+    assertSame(fixture.failure, failure);
+    assertEquals(List.of(inner), List.of(failure.getSuppressed()));
+    assertEquals(List.of(QUERY_SQL.getFirst()), fixture.sql);
+    assertEquals(1, fixture.failureHits);
+    assertEquals(1, fixture.resultCloses);
+    assertEquals(1, fixture.outerCloses);
+  }
+
   private static final class Fixture {
     private long[] expected = {
       1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
@@ -576,7 +596,7 @@ final class MigrationMasterReferenceVerifierTest {
     return new MigrationMasterCopyDataset(speakers(STAMP), content(STAMP));
   }
 
-  private static MigrationCopyDataset content(String stamp) throws Exception {
+  private static MigrationCopyDataset content(String stamp) throws NoSuchAlgorithmException {
     return new MigrationCopyDataset(
         scenario(true, SPEAKER_ID, ONE, stamp),
         List.of(audio(stamp)),
