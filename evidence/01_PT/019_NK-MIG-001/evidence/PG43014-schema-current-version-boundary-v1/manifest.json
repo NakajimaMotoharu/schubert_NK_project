@@ -1,0 +1,336 @@
+{
+  "run": "PG43014-schema-current-version-boundary-v1",
+  "wbs": "WBS-P019-01.02/2",
+  "source": "5a9e0400ba1941b454db083ad1439eaada39deaa",
+  "productionSource": "7698011f52d6cc5f94c76413b6ab36971783b9c9",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T20:53:10.484793+00:00",
+  "verificationInput": {
+    "terminalScope": "Same original exec, no old union",
+    "source": "5a9e0400ba1941b454db083ad1439eaada39deaa",
+    "prodSource": "7698011f52d6cc5f94c76413b6ab36971783b9c9",
+    "startedAtUTC": "2026-11-22T20:52:29.135163+00:00",
+    "qualifiedJarInputs": {
+      "storage": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+        "sha256": "ec7e4054459901003d0c3c4e0e186560f37cd77e0e6a1f26b9a78c2075186ebe"
+      },
+      "bootstrap": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+        "sha256": "4a3de8b3dfe415c5171f42478f06e63b21f982be13cbd232131daf35dbd498d5"
+      }
+    },
+    "exactPermittedPhysical": {
+      "dev/codex/schubert/nk/storage/package-info.class": {
+        "candidate": "b9c4509338ea3545a2ee90fee9391cc4b356ef7f60309562a752596d05c81583",
+        "original": "b9c4509338ea3545a2ee90fee9391cc4b356ef7f60309562a752596d05c81583"
+      },
+      "dev/codex/schubert/nk/storage/StorageIoException.class": {
+        "candidate": "85f86d702a139f126afdd72ca8e221583db824f159351ecd9f07b15fcc569c88",
+        "original": "85f86d702a139f126afdd72ca8e221583db824f159351ecd9f07b15fcc569c88"
+      },
+      "dev/codex/schubert/nk/storage/StorageIoException$Reason.class": {
+        "candidate": "a113bd839666ee3a4038dd3703af0cfb772282278cc6fbfe1e3cccf98286ffec",
+        "original": "a113bd839666ee3a4038dd3703af0cfb772282278cc6fbfe1e3cccf98286ffec"
+      },
+      "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.class": {
+        "candidate": "3a924af5e147928b10e8b6d2024c0dc514acaf3be042c08fe8e89311668810b0",
+        "original": "3a924af5e147928b10e8b6d2024c0dc514acaf3be042c08fe8e89311668810b0"
+      },
+      "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission$Row.class": {
+        "candidate": "daf77974a51a03171b27048a9eaf12367a60527ca8f6638aebe8b0fbaf1b5a1a",
+        "original": "daf77974a51a03171b27048a9eaf12367a60527ca8f6638aebe8b0fbaf1b5a1a"
+      },
+      "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class": {
+        "candidate": "cc8265242a1cd41cc7c77b8e12185cbc387fb583d70e1d1171ba467cb0f3d552",
+        "original": "cc8265242a1cd41cc7c77b8e12185cbc387fb583d70e1d1171ba467cb0f3d552"
+      },
+      "dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.class": {
+        "candidate": "45e370200c04a1cb4e32ba1b458548f80c3351131543ccc52e0443788c7e3264",
+        "original": "45e370200c04a1cb4e32ba1b458548f80c3351131543ccc52e0443788c7e3264"
+      }
+    },
+    "previousOriginal": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40494-schema-history-close-interrupt-green13-v1/manifest.json",
+      "sha256": "bb132117f3fa7cab8f99971d433c56e30c138e8f1c5b7c5db597fe2d886903a2"
+    },
+    "historyMigrationFiles": [
+      {
+        "path": "src/schubert-nk-api/src/main/resources/db/migration/V029__strict_nullable_compound_checks.sql",
+        "sha256": "bb3a2be973f5a8ad6a84868f5c1c15bc44de71d37130f9cf7c56b1bb546eb878"
+      },
+      {
+        "path": "src/schubert-nk-api/src/main/resources/db/migration/V030__preserve_current_audio_role.sql",
+        "sha256": "ae099baa342734e4944a8c5b184f86c1a762026269a8e0573e8faad6626b92be"
+      }
+    ],
+    "toolInputs": [
+      {
+        "path": "tools/quality/jacoco/UnfilteredCodeMeasurement.java",
+        "sha256": "f00a09972ec7c9d89be1390e8895eb770a5e9f7a9e9730341a5cdb0baa0efd7a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31432-generated-code-supplemental-tool-v1/compile.json",
+        "sha256": "c8e7033722c9d00ff3d618bab1c6ab1bde8ac793b4f9e4d2a478db95a0d17401"
+      },
+      {
+        "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar",
+        "sha256": "fb5b0036a0899ea97edfa0fc2c7985b55f3f7c5695028163e5e60d4f3cf6075d"
+      },
+      {
+        "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+      },
+      {
+        "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+      },
+      {
+        "path": "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+        "sha256": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7"
+      }
+    ],
+    "scopeTests": [
+      {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/SchemaHistoryAdmissionTest.java",
+        "sha256": "cdb4ca15b082324deda3c1e40e8c8351b06872aa0bd0fdc6b99de378a0b979be"
+      },
+      {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/SchemaHistoryRowValueTest.java",
+        "sha256": "c53c2e3c61e65c50127d002d8bb658c62980a7d6a171afc733f0a6d20a5c6b0b"
+      }
+    ],
+    "commands": {
+      "compile": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-implicit:none",
+        "-classpath",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43014-schema-current-version-boundary-v1/product:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43014-schema-current-version-boundary-v1/tests",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43014-schema-current-version-boundary-v1/input/SchemaHistoryAdmissionTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43014-schema-current-version-boundary-v1/input/SchemaHistoryRowValueTest.java"
+      ],
+      "junit": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/PG43014-schema-current-version-boundary-v1/original.exec,sessionid=PG43014-current,append=false",
+        "-Duser.timezone=Asia/Tokyo",
+        "-Dfile.encoding=UTF-8",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43014-schema-current-version-boundary-v1/tests:/home/mini/codex/project1/work/pgpt-runs/PG379/PG43014-schema-current-version-boundary-v1/product:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "org.junit.platform.console.ConsoleLauncher",
+        "execute",
+        "--disable-banner",
+        "--disable-ansi-colors",
+        "--fail-if-no-tests",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43014-schema-current-version-boundary-v1/report",
+        "--select-class",
+        "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+        "--select-class",
+        "dev.codex.schubert.nk.api.maintenance.SchemaHistoryRowValueTest"
+      ],
+      "measureCompile": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43014-schema-current-version-boundary-v1/measure",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/jacoco/UnfilteredCodeMeasurement.java"
+      ],
+      "coverage": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43014-schema-current-version-boundary-v1/measure:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+        "--strict-original-exec",
+        "--line-deficits",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43014-schema-current-version-boundary-v1/original.exec",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43014-schema-current-version-boundary-v1/product/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43014-schema-current-version-boundary-v1/product/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission$Row.class"
+      ],
+      "checkstyle": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "-o",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43014-schema-current-version-boundary-v1/checkstyle.xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43014-schema-current-version-boundary-v1/input/SchemaHistoryAdmissionTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43014-schema-current-version-boundary-v1/input/SchemaHistoryRowValueTest.java"
+      ]
+    }
+  },
+  "terminalStages": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43014-schema-current-version-boundary-v1/compile.end.json",
+      "sha256": "dc65f84e40324ae384a8fd77bce31c773f6482abe92579f77b288931bede4251"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43014-schema-current-version-boundary-v1/junit.end.json",
+      "sha256": "95be685e00328ccd037b786d3fe4551c7d0a28424521bac5a536b3cfd3cabd8e"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43014-schema-current-version-boundary-v1/measureCompile.end.json",
+      "sha256": "86c32a1d3b312fb9e2c70775eca05bf588915f0417d57f652754fdf18d4a9da2"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43014-schema-current-version-boundary-v1/coverage.end.json",
+      "sha256": "fbc50491227d6084c58e83d5be7bf3b223ed96b12d4bdaab959b0b8b2420c9c6"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43014-schema-current-version-boundary-v1/checkstyle.end.json",
+      "sha256": "0d2018df71aa28feb3dce8265509600307016d96334730bf5e20978bacdaa232"
+    }
+  ],
+  "productFixturesOriginal": 13,
+  "newDirectTestId": "PT-OPS-SCHEMA014",
+  "independentExpected": [
+    "same version/script/signed checksum accepted",
+    "truncated V029 tail refused",
+    "V031 unknown refused",
+    "same V030 different script refused",
+    "same V030 different checksum refused",
+    "Statement+ResultSet closed once; borrowed connection not owned"
+  ],
+  "sameRunResults": {
+    "tests": 14,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "methodNames": [
+    "opsSchema001ExactFixedQueryAndBorrowedOwner()",
+    "opsSchema002EveryColumnMissingExtraAndFailedRow()",
+    "opsSchema003ExpectedRowInvariantBoundaries()",
+    "opsSchema004ExpectedProfileOrderingAndDefensiveCopy()",
+    "opsSchema005NullProviderSqlExceptionsAndAllOwnership()",
+    "opsSchema006KnownUnknownCloseMatrixAndSameThrowable()",
+    "opsSchema007InterruptBeforeAndAfterNeverAccepts()",
+    "opsSchema008IndependentConcurrentOwners()",
+    "opsSchema009ActualRowsAreIndependentlyReadAndImmutableAfterBothOwnersClose()",
+    "opsSchema010KnownSqlFatalGraphsCloseOwnersAndPreserveOriginalIdentity()",
+    "opsSchema011PublishedRowRetainsSuccessAndValueDiagnostics()",
+    "opsSchema012InterruptWhileClosingRowsRejectsObservedHistory()",
+    "opsSchema013InterruptWhileClosingStatementRejectsObservedHistory()",
+    "opsSchema014CurrentTailRequiresTheExactVersionScriptAndChecksum()"
+  ],
+  "scopedCounters": {
+    "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission": {
+      "crc": "09b591e035a965c5",
+      "capacity": 89,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 312
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 46
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 77
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 31
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 8
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission$Row": {
+      "crc": "90efabf55ea20961",
+      "capacity": 32,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 116
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 26
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 16
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 23
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 10
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    }
+  },
+  "totals": {
+    "LINE": 93,
+    "METHOD": 18,
+    "CLASS": 2,
+    "BRANCH": 72
+  },
+  "originalJUnit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43014-schema-current-version-boundary-v1/report/TEST-junit-jupiter.xml",
+    "sha256": "3a30ae11f51c2aed51426b3f882ec24ba3deb97f6d6cf7d8691b9e40d8ac0556"
+  },
+  "originalExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43014-schema-current-version-boundary-v1/original.exec",
+    "sha256": "e2af3b112c50677f91df7c302c84b9db34d08ad984928a66c85c66c8896e3c2a"
+  },
+  "singleExecSession": [
+    {
+      "labelBytesHex": "504734333031342d63757272656e74",
+      "startMillis": 1795380750062,
+      "endMillis": 1795380751246
+    }
+  ],
+  "publicReports": [
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG43014-schema-current-version-boundary-v1/checkstyle.xml",
+      "sha256": "09fb6e451df0fbe236d087ac51e2c0da1d82c741b811b8b73180ecbef969ccc0"
+    },
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG43014-schema-current-version-boundary-v1/coverage-unfiltered.tsv",
+      "sha256": "daa282077711f6eae820627501358db8b33ec611937e23f5c4af647145a51da5"
+    },
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG43014-schema-current-version-boundary-v1/sanitized-junit.xml",
+      "sha256": "1eab7e3766c44c9555b9d99165d9ac8648266117db2e87f72ccca37a4c89668c"
+    }
+  ],
+  "existingWholeFormatterGap": "Prior SQL fixture line wrapping differs from formatter; new lines formatted locally and current Checkstyle exit 0.",
+  "fixedVersionChecksums": "29 and -30 are fixture metadata only",
+  "sameCurrentProductBinary": true,
+  "actualDB": 0,
+  "actualMigration": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
