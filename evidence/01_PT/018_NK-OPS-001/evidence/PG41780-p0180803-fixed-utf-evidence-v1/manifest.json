@@ -1,0 +1,113 @@
+{
+  "run": "PG41780",
+  "source": "a810f459d749bc52aa27069c57ca6324cb219d34",
+  "productionCore": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "tool": {
+    "path": "tools/quality/jacoco_readonly_exec_subset.py",
+    "sha256": "232c1a2333528ea05c7cb3880d98237b4f35d3b4bf581e6e7c84ef556f340129"
+  },
+  "currentToolChange": "4581ed4d1f8b7d4bdb358c5a185a6ece6b006381",
+  "priorProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40260-p01808-exec-modified-utf-independent-v1/manifest.json",
+    "sha256": "a9c9c03612f6a0972f58742a0c8e91264b164d98bafab157ca08b369c2ee9e60"
+  },
+  "historicalMethodFixtureSameButReaderChanged": true,
+  "existingAllUnitsProofReusedForCurrentReader": false,
+  "specification": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41780-p0180803-fixed-utf-evidence-v1/specification.json",
+    "sha256": "32f4549423a0aa111819b113122c0a037a2331462f5cdf31d7e0b47db3a5a849"
+  },
+  "terminalAtUTC": "2026-11-22T00:52:34.359069+00:00",
+  "actualExit": 0,
+  "results": [
+    {
+      "id": "PT-OPS-EXEC-MUTF-005/strict-preserves-selected-and-session",
+      "inputSha256": "9474ca9814293d48d627fa1876421a8d784cacab724d125fd897bfba05376a41",
+      "expected": {
+        "classes": {
+          "X": {
+            "crc64": "1",
+            "probeCount": 3,
+            "hitProbeIds": [
+              0,
+              2
+            ],
+            "missedProbeIds": [
+              1
+            ]
+          }
+        },
+        "sessions": [
+          {
+            "labelBytesHex": "c080",
+            "startMillis": 17,
+            "endMillis": 18
+          }
+        ],
+        "totalClassRecords": 2
+      },
+      "actual": {
+        "classes": {
+          "X": {
+            "crc64": "1",
+            "probeCount": 3,
+            "hitProbeIds": [
+              0,
+              2
+            ],
+            "missedProbeIds": [
+              1
+            ]
+          }
+        },
+        "sessions": [
+          {
+            "labelBytesHex": "c080",
+            "startMillis": 17,
+            "endMillis": 18
+          }
+        ],
+        "totalClassRecords": 2
+      },
+      "passed": true
+    },
+    {
+      "id": "PT-OPS-EXEC-MUTF-005/strict-rejects-noncanonical-nonselected-name",
+      "inputSha256": "dc36a0ca8c9e5996f1a4afe9a2ddf254935d79df2196cdc222b5f3d18b6be31d",
+      "expected": {
+        "error": "invalid modified UTF field"
+      },
+      "actual": {
+        "error": "invalid modified UTF field"
+      },
+      "passed": true
+    },
+    {
+      "id": "PT-OPS-EXEC-MUTF-005/strict-rejects-missing-target-even-with-session",
+      "inputSha256": "cdb5e72970ae6c6d6fb960eeb7013a47bc2b354fd79a4e2c063a11b520f2f38d",
+      "expected": {
+        "error": "one session and all exact target records required"
+      },
+      "actual": {
+        "error": "one session and all exact target records required"
+      },
+      "passed": true
+    }
+  ],
+  "python": "3.14.4",
+  "executedToolCases": 1,
+  "passedToolCases": 1,
+  "failedToolCases": 0,
+  "skippedToolCases": 0,
+  "notRunToolCases": 0,
+  "executedProductTests": 0,
+  "measuredProductCoverage": null,
+  "nativeActions": 0,
+  "formalAcceptanceId": null,
+  "unmet": [
+    "P018-08.01/.02 exits",
+    "owned current source/boot/run streams",
+    "real native/CRC/source binding and independent owned end",
+    "F02/F03/451"
+  ]
+}

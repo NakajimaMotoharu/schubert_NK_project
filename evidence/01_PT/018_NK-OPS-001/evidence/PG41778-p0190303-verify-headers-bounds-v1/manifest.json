@@ -1,0 +1,119 @@
+{
+  "run": "PG41778",
+  "source": "a810f459d749bc52aa27069c57ca6324cb219d34",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "terminalAtUTC": "2026-11-22T00:50:59.224903+00:00",
+  "actualExit": 0,
+  "previousFixtureProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41770-p0190303-verifyhash-current-v1/manifest.json",
+    "sha256": "3f6649d99d9bcd72a7ad27539996e40e98cb1712bc942889cc813344e73cb884"
+  },
+  "design": [
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "sha256": "3874975e619ba279814df4d6f79fd161098756cad882e00d580651fb2d7387cb",
+      "line": 97,
+      "quoteCore": "e96857ae33f6eb78ea28ec7673ad13b61d7fbbf2da42fde8d12f26e72a6d29f2"
+    }
+  ],
+  "originalXml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33292-mapverify976-post-v5/original-TEST-junit-jupiter.xml",
+    "sha256": "a55172a64a07208df0457588e90e237cb456f5a36ee780adb89da50596333079"
+  },
+  "criteria": [
+    {
+      "testId": "PT-MIG-MAPVERIFY006",
+      "method": "mapverify006HeaderArityAsciiControlLengthAndNewline",
+      "originalResult": "PASS",
+      "localVerifierCaseBytecodeSha": "279f6f0c62e65171a41a9fbe9b25a7bfc62e7ffb193f41562239910da862cfc4",
+      "headerLimitBytes": 95,
+      "variants": 11,
+      "vectorsSha256": [
+        "65c6c7b5fb6a93865c6034c741fd9c6888648459e4135a3e45fa81ac52cf2201",
+        "dc030e4ddbb9fcb869788bcea2d2380da4150eb9ad05143c042e088e499d51cb",
+        "c533176b52f9b41a61fe2408ca0c50611570ff7000729b48a97e8655df7cee16",
+        "a0bf424f0d900b22b70e14c56c2b2f550dc436cb44180b8e226202e375534e63",
+        "5cccdc451496223145d16c2e7e4424b12455becd5afed49c72ab0708d57125fd",
+        "bd96be78b7b32e04e2b3121cf5304a56d1543f737f07677e48cc5a9895426646",
+        "1f3e2727b84b31a52ada3149188e84189e3b5658124ef38a5a09770cb01cf94e",
+        "09503f07f61984b48e76087bd425c57cfcd0ccc2f3f0caedde2bb8b07de63af9",
+        "10158e273ea461a66b5681c7f13dea605545be8039b9978d850ac774b704419d",
+        "adbdfa249bf15ba8463e665caf0d064a9f0b93f4357449fd403e606bf870cdb3",
+        "385cf18c2f36c60a87ff9e1b5b4797fd28e15ccd56923258460bdca6c021343b"
+      ],
+      "evidenceLimits": "Rejection observed for all fixture vectors; selected header vectors breach multiple conditions, so they do not each isolate a decision."
+    },
+    {
+      "testId": "PT-MIG-MAPVERIFY007",
+      "method": "mapverify007CountAndLengthCanonicalDecimalAndOverflow",
+      "originalResult": "PASS",
+      "localVerifierCaseBytecodeSha": "905109890d1bd9cfdc701e4f4bd53c0d26abb2034cea711be8e260a89d7b921e",
+      "isolatedNumericLexicalOrRangeVariants": 26,
+      "fields": [
+        "count",
+        "length"
+      ],
+      "numericInputs": [
+        "",
+        "-1",
+        "-0",
+        "+1",
+        "00",
+        "01",
+        "2147483648",
+        "9223372036854775808",
+        "-9223372036854775809",
+        "99999999999999999999",
+        "1.0",
+        " 1",
+        "1 "
+      ],
+      "individualHashes": {
+        "count": [
+          "12a8bc9ba021f79e1401eeafb4db2a3c06f912ff48eb17582afc2e184967cdef",
+          "e374d243b0c0d20886b389f7feb2304d175553b29b79cb7cf738947004f8bd47",
+          "ea636057a9eb8db1f03979795a284a2fc5a8c8ccd41926c4f68ae042cac5db20",
+          "24c4df65f7be39d7cce7edc06e95c7fcab30ca50541525189cc2c7b8957d3a44",
+          "1d8ece3f6cfd6d0a1cc211375af437d4347141562449b7bba62501755b95cde7",
+          "58f8289691ccca23e3dae39b24fa947c7ae5f875b47fd7852da3092ebe552c0a",
+          "fbd20d4e16067266e21de1113a57d87345916d6c58b865f4431f9b83d1c64024",
+          "621b822a22056a972635cd9d577ad9040112f5888b9cef831c1e2e466b38c1e5",
+          "bec4acca07c48652d75206dd2b963d11f6fcbaa17e245764ef3e8ba219dbe8b6",
+          "26ea3bdd7fc9055cadf85e71809704a601a1b655eb7e5630edeb886a80d22f3c",
+          "bb2be846b9d24fd93482276161329856ab472dd7dbcfe83b628c91f090713620",
+          "c11699afb7b4e7f2b68f693a4dc7f73cb2330850b4dd88e03c92fc73946a2dc9",
+          "55f94a3b7f04c31e43dc129599dccab38da21f89e91edbf8cf86a01992856fd4"
+        ],
+        "length": [
+          "90f565ba9ec3d9a06c01a532dba57c357063c3222608a95810350256b81dd9f5",
+          "dbfb69a920d2923e942826f803034488574585e3c7f2846024fd3a9d9c57aac7",
+          "9a2047041cc5c66f59a2688e0c3be0793d73dc4e47d285a0c0a700d0fda4be41",
+          "8888ec81a851420952b09962ce1798497fcc7874495ed60ec63b5ab4190f7909",
+          "f8013b091a6d9409b019fa625484c10e5edada0c5e2bb36e94445419642c76d0",
+          "091b2e91faa03d3d500ac8c2fcb8787bb0480e039104ef928c9b47ff15780782",
+          "8f1fe086d9cc3d25cfdefd71abc4e19af1fbf1b95ccaa8d8d56e0fdce904acbc",
+          "e863a9a4cc296ca352d88058a7a7ba943173ba6418047aae03694880b665bfc7",
+          "bd9dad6dee02aeb2ffece85c7af3e5551c952e95e5f3b0b6ce68f4e8fac5e56b",
+          "22cdfd33ef17f308188dc700aac0e3933331568cdc0c426470998f10db58fbe9",
+          "51d1a2f112f57499745b1d01b06cb02913e6401bcf1ba5daa2298676af189a7d",
+          "0c75e7c3b21fc0873f210771c5a96de2ad1c42bc6b2b9c176d5d93bc6d277aa3",
+          "563a9c94440f156ba2b27c64579915d37284e2f2fda4b75e2dfebfd3ec89325f"
+        ]
+      },
+      "validMaxTextButInvalidPayloadHashes": [
+        "44ec2f22efd1fd97d5389303ff0dae0c2c6a85822d0fc48472ae67fe460b3f8d",
+        "b46fc8342bf4de7defb8ecc814a16db226934c7bf607de110300b22a108b4031"
+      ],
+      "expected": "fixed IAE, no cause and original vector unchanged for all negative inputs"
+    }
+  ],
+  "newProductTests": 0,
+  "formalAcceptanceId": null,
+  "remaining": [
+    "six-product 451",
+    "SSC417 24",
+    "original Current identifiers and mapping order",
+    "real migration/DB/COPY",
+    "owner receipt"
+  ]
+}

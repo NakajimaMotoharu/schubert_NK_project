@@ -1,0 +1,119 @@
+{
+  "run": "PG41776",
+  "source": "a810f459d749bc52aa27069c57ca6324cb219d34",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": [
+    "WBS-F03/2-2-b",
+    "WBS-P019-03.03/2",
+    "WBS-P004-02/2"
+  ],
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T00:50:18.301978+00:00",
+  "earlierSixProductReference": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41760-f03-two-fixture-local-quality-intake-v1/manifest.json",
+    "sha256": "889943460ada80f078bdaa8929d381ec26eaed88ed87152ed85c6a40e6578bb6"
+  },
+  "mappingManifestTen": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41768-f03-mapping-individual-criteria-intake-v1/manifest.json",
+    "sha256": "b64785b1a71b2d3d53746972f2fdac5d33b59720b2081664e72118cbf07a90ab"
+  },
+  "modules": {
+    "bootstrap": {
+      "additionalFixture": "CurrentMigrationMappingVerifierTest",
+      "existingMatchingCases": [
+        {
+          "id": "PT-MIG-MAPVERIFY002",
+          "evidence": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41770-p0190303-verifyhash-current-v1/manifest.json",
+            "sha256": "3f6649d99d9bcd72a7ad27539996e40e98cb1712bc942889cc813344e73cb884"
+          }
+        },
+        {
+          "id": "PT-MIG-MAPVERIFY003",
+          "evidence": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41770-p0190303-verifyhash-current-v1/manifest.json",
+            "sha256": "3f6649d99d9bcd72a7ad27539996e40e98cb1712bc942889cc813344e73cb884"
+          }
+        },
+        {
+          "id": "PT-MIG-MAPVERIFY004",
+          "evidence": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41772-p0190303-verify-magic-order-v1/manifest.json",
+            "sha256": "0469205db2ebf03db7e036ee0936b4c9dcd5cef2397434b299a8819e0541ce99"
+          }
+        },
+        {
+          "id": "PT-MIG-MAPVERIFY005",
+          "evidence": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41772-p0190303-verify-magic-order-v1/manifest.json",
+            "sha256": "0469205db2ebf03db7e036ee0936b4c9dcd5cef2397434b299a8819e0541ce99"
+          }
+        }
+      ],
+      "originalWholeFixturePriorPass": 16,
+      "localCompiledFixturePhysical": 2,
+      "localCompilationControls": [
+        "Java 25",
+        "-Xlint:all",
+        "-Werror",
+        "explicit fixture, nineteen peers and one verifier class approved for use"
+      ],
+      "remaining": "all other applicable path, run binding, full-application trace and 451"
+    },
+    "batch": {
+      "localExactTypedPhysical": 9,
+      "localExactMainSources": 8,
+      "originalCaseCount": 13,
+      "contractLinks": [
+        "sqlBindingsAndBorrowedOwner",
+        "absentVsZero",
+        "projectionFailsClosed",
+        "beforeOwnedSQL",
+        "nullResources",
+        "ownedCloseAndExceptionPriority"
+      ],
+      "delta": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41774-p00402-query-contract-delta-v1/manifest.json",
+        "sha256": "7d89078a02208146f79f16a535cca694961b2ab8362aca8ea7b3a23bfb7e8825"
+      },
+      "originalQuality": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40838-f03-inspection-summary-typed-v1/manifest.json",
+        "sha256": "90afa7c14c66be40bf8c55d2193d56955a1e3f19b1f934ee8819649e1a484ed6"
+      },
+      "rowCountNoAdditionToProductWideTotals": true,
+      "remaining": "real Inbox ownership and DB predicate, whole Batch typed qualification, and 451"
+    },
+    "api": {
+      "supplementaryLibrary": "JdbcFailureGraph physically shipped in Bootstrap; referenced by Batch",
+      "newScopeAcceptance": null
+    },
+    "web": {
+      "newScopeAcceptance": null
+    },
+    "storage": {
+      "supplementaryLibrary": "StorageIoException value dependency only",
+      "newScopeAcceptance": null
+    },
+    "protocol": {
+      "newScopeAcceptance": null
+    }
+  },
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "newProductTestsExecuted": 0,
+  "newResponsibleReceiptObserved": 0,
+  "receiptChecks": {
+    "ledger": {
+      "path": "documents/900_OTHER/910_台帳/911_確認事項一覧.md",
+      "sha256": "d0b3fd7b4247db035544f4ee2c20ab1d0002a706060b21f9636b77dbaac2380a"
+    },
+    "devFoundationOpenPRs": []
+  },
+  "relevantHolds": [
+    "QA-056 unmatched four",
+    "held32 tests/Root11",
+    "real migration/DB/COPY",
+    "whole six-product 451",
+    "signed owner acceptance"
+  ]
+}

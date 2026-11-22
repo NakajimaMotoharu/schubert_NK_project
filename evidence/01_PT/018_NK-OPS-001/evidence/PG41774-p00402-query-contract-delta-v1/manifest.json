@@ -1,0 +1,214 @@
+{
+  "run": "PG41774",
+  "source": "a810f459d749bc52aa27069c57ca6324cb219d34",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-P004-02/2",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T00:49:33.201268+00:00",
+  "oldActualUnit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40842-p00402-inspection-sql-cycle-raw-v1/manifest.json",
+    "sha256": "b6cfcde4f75ee961bb25039283d662f914c31d7c240f6f38d0305b33f04e8231"
+  },
+  "oldStatic": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40838-f03-inspection-summary-typed-v1/manifest.json",
+    "sha256": "90afa7c14c66be40bf8c55d2193d56955a1e3f19b1f934ee8819649e1a484ed6"
+  },
+  "oldAbi": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40844-f02-inspection-repository-exact-abi-v1/manifest.json",
+    "sha256": "bce2ad96c1a5b095503075c9fd41794a81318cc9620b2998ce25c07a2c6cf138"
+  },
+  "originalExecScope": {
+    "caseCount": 13,
+    "replayed": 0,
+    "rawMain": {
+      "crc64": "5d524ee1e3c908e8",
+      "execMatch": true,
+      "counts": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 226
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 20
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 59
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 16
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 6
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "testXmlOriginalSha256": "55de746ab24d7db414ef3678dbcd34b0d394db52ea0b6543d9ace175bd47dc6f",
+    "originalFileReopened": false,
+    "resultBasis": "original manifest per-case rows and retained single-exec coverage"
+  },
+  "inputs": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "sha256": "5253148aa625da42d74b54ce7b7ca45639cd4392cc2a8e742315531fb8f65c24"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummary.java",
+      "sha256": "0af03ae228a8efec00535de709a528dfc9692cb2a51c4c2a4a0e0fb79cde12aa"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java",
+      "sha256": "c440d3e16da86b7814cf8fbd6247e48c1ab4cd6de2da3a114a38c308ae3c7ce4"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupCounts.java",
+      "sha256": "9a7504e2b266c3de22ce10dfc8b15dadb0ce04f3a5f05bdd86d151c32d341f19"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.java",
+      "sha256": "134bcdaecf9f02adc74d5cb728782c41f19497b0c0c37ee2cd4a70b0155179b6"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java",
+      "sha256": "5f4f8273a29dc2b89d6cf8fbc566b067480c0c7338f1444d5b14a9a878b1debd"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.java",
+      "sha256": "305e82607cfc8acf9656547c5eee663cc9edee55c0381da96d6860b5a98d0d75"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java",
+      "sha256": "d59870fcf8d4f7bf9ff4e0abc2e052efddd9a08e9e93efa39d1f15a97f7063cf"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryPortTest.java",
+      "sha256": "ca88a77ac3dad9b71acb0823fb5c210ec5c35a229fd037f8c5f1aff2f3082c4d"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryGraphContractTest.java",
+      "sha256": "efdcae0419dcbdfaebc625651db1a1dbd48c79f0ff1baffab3588f9389227f87"
+    }
+  ],
+  "currentExactProductByteMembers": {
+    "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.class": {
+      "archive": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41074-f02-current-alert-batch-maven-v1/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+        "sha256": "276c45bf138b351cb0a0a6bc46dc61881fabb1b17b2b09347b4feea4cfea76a6"
+      },
+      "sha256": "f181015412f1f293e91c0eea24a3ac33127d5ef5015f3dc9fb73ac732e0cc009"
+    },
+    "dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.class": {
+      "archive": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41074-f02-current-alert-batch-maven-v1/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+        "sha256": "276c45bf138b351cb0a0a6bc46dc61881fabb1b17b2b09347b4feea4cfea76a6"
+      },
+      "sha256": "0c44a12880351913a9518c4a8a89ae7e1754cd66cf0b1c138505c374e92902dc"
+    },
+    "dev/codex/schubert/nk/batch/repository/InspectionSummary.class": {
+      "archive": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41074-f02-current-alert-batch-maven-v1/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+        "sha256": "276c45bf138b351cb0a0a6bc46dc61881fabb1b17b2b09347b4feea4cfea76a6"
+      },
+      "sha256": "19c6fbf30f92ee694c9ada985f1309851ffaa157474b4b1483e8d337edd3bd03"
+    },
+    "dev/codex/schubert/nk/batch/repository/CleanupCounts.class": {
+      "archive": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41074-f02-current-alert-batch-maven-v1/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+        "sha256": "276c45bf138b351cb0a0a6bc46dc61881fabb1b17b2b09347b4feea4cfea76a6"
+      },
+      "sha256": "09355389bf26d39779e3184b7dd995978314ae00b833e468fbd5078408265af0"
+    },
+    "dev/codex/schubert/nk/batch/repository/BatchRun.class": {
+      "archive": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41074-f02-current-alert-batch-maven-v1/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+        "sha256": "276c45bf138b351cb0a0a6bc46dc61881fabb1b17b2b09347b4feea4cfea76a6"
+      },
+      "sha256": "5cb0c42832ea17425dbf60da6025f2c4783d687e665b18f6cd8e88abc399c909"
+    },
+    "dev/codex/schubert/nk/batch/repository/BatchRepositoryException.class": {
+      "archive": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41074-f02-current-alert-batch-maven-v1/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+        "sha256": "276c45bf138b351cb0a0a6bc46dc61881fabb1b17b2b09347b4feea4cfea76a6"
+      },
+      "sha256": "391b1aac7be2dd58cf9c3dee11cdd12941417fa7d029513475dfffbe4a3d2cb1"
+    },
+    "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class": {
+      "archive": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40802-f02-current-four-package-v1/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+        "sha256": "3de920f0fc7df4909b362fd25856b5b91e2517fa404cbe5756725544472887f7"
+      },
+      "sha256": "cc8265242a1cd41cc7c77b8e12185cbc387fb583d70e1d1171ba467cb0f3d552"
+    },
+    "dev/codex/schubert/nk/storage/StorageIoException.class": {
+      "archive": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40802-f02-current-four-package-v1/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+        "sha256": "e5be03a72a9cca548f68fc1ca7ee84ced8980dbea72162f58772215227be3ec0"
+      },
+      "sha256": "85f86d702a139f126afdd72ca8e221583db824f159351ecd9f07b15fcc569c88"
+    },
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason.class": {
+      "archive": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40802-f02-current-four-package-v1/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+        "sha256": "e5be03a72a9cca548f68fc1ca7ee84ced8980dbea72162f58772215227be3ec0"
+      },
+      "sha256": "a113bd839666ee3a4038dd3703af0cfb772282278cc6fbfe1e3cccf98286ffec"
+    }
+  },
+  "design": [
+    {
+      "path": "documents/300_SS/330_データ・ファイル/331_DB物理・DDL・index・権限設計.md",
+      "source": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+      "sha256": "f57d908ade963d03a7f1dd12dc93e0bd89fefa27223c674c3d363014913c64de",
+      "lines": [
+        256
+      ]
+    }
+  ],
+  "individualSatisfied": {
+    "sqlBindingsAndBorrowedOwner": {
+      "testId": "dev.codex.schubert.nk.batch.repository.InspectionSummaryPortTest.literalSqlTimeoutAndUuidUtcBindingsReturnAllFourColumnsWithoutOwnershipMutation",
+      "method": "literalSqlTimeoutAndUuidUtcBindingsReturnAllFourColumnsWithoutOwnershipMutation",
+      "outcome": "passed"
+    },
+    "absentVsZero": {
+      "testId": "dev.codex.schubert.nk.batch.repository.InspectionSummaryPortTest.trueAbsenceIsDifferentFromZeroKnownCountsAndBothCompleteValuesArePreserved",
+      "method": "trueAbsenceIsDifferentFromZeroKnownCountsAndBothCompleteValuesArePreserved",
+      "outcome": "passed"
+    },
+    "projectionFailsClosed": {
+      "testId": "dev.codex.schubert.nk.batch.repository.InspectionSummaryPortTest.requiredNullCountBalanceAndDuplicateRowsCannotFabricateAValidSummary",
+      "method": "requiredNullCountBalanceAndDuplicateRowsCannotFabricateAValidSummary",
+      "outcome": "passed"
+    },
+    "beforeOwnedSQL": {
+      "testId": "dev.codex.schubert.nk.batch.repository.InspectionSummaryPortTest.nullAndExplicitAutocommitWritableReadCommittedPrerequisitesRejectBeforeOwnedSql",
+      "method": "nullAndExplicitAutocommitWritableReadCommittedPrerequisitesRejectBeforeOwnedSql",
+      "outcome": "passed"
+    },
+    "nullResources": {
+      "testId": "dev.codex.schubert.nk.batch.repository.InspectionSummaryPortTest.nullStatementOrResultSetIsCataloguedAndEveryAcquiredResourceStillCloses",
+      "method": "nullStatementOrResultSetIsCataloguedAndEveryAcquiredResourceStillCloses",
+      "outcome": "passed"
+    },
+    "ownedCloseAndExceptionPriority": {
+      "testId": "dev.codex.schubert.nk.batch.repository.InspectionSummaryPortTest.primaryAndBothCloseScopesHaveIndependentPriorityAndExactSafeSecondaryCounts",
+      "method": "primaryAndBothCloseScopesHaveIndependentPriorityAndExactSafeSecondaryCounts",
+      "outcome": "passed"
+    }
+  },
+  "missing": [
+    "V019 actual DB predicate RUN ownership and cutoff, canonical deployment",
+    "Inbox reference hold and real DB outputs/owner",
+    "same candidate six-product 451 and formal owner intake"
+  ],
+  "formalAcceptanceId": null,
+  "realDatabaseRead": false,
+  "productRunsStarted": 0
+}

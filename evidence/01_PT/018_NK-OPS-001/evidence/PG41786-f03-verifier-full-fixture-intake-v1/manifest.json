@@ -1,0 +1,168 @@
+{
+  "run": "PG41786",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T00:55:07.007469+00:00",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "source": "a810f459d749bc52aa27069c57ca6324cb219d34",
+  "wbs": [
+    "WBS-F03/2-2-b",
+    "WBS-P019-03.03/2"
+  ],
+  "priorSixProductIntake": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41776-f03-two-contract-evidence-intake-v1/manifest.json",
+    "sha256": "6d39c332725e759a96ee86e9880f625fb8244a7520cb4e3f413c3b82b256435b"
+  },
+  "cases": [
+    {
+      "testId": "PT-MIG-MAPVERIFY001",
+      "summary": "正常、空、1ファイル、符号境界、ID共有の固定期待値から四区分とSHAを確認。",
+      "originalProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41784-p0190303-verifier-canonical-rest-v1/manifest.json",
+        "sha256": "b150cfc0c899fd55ba73b363489d32ae97e25bca45f8869d7d027f7cae4b1fac"
+      }
+    },
+    {
+      "testId": "PT-MIG-MAPVERIFY002",
+      "summary": "nullと期待SHA文字列の正準形式違反を固定診断で拒否。",
+      "originalProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41770-p0190303-verifyhash-current-v1/manifest.json",
+        "sha256": "3f6649d99d9bcd72a7ad27539996e40e98cb1712bc942889cc813344e73cb884"
+      }
+    },
+    {
+      "testId": "PT-MIG-MAPVERIFY003",
+      "summary": "元の期待SHAと不一致なら拒否。正常・異常とも入力を変更しない。",
+      "originalProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41770-p0190303-verifyhash-current-v1/manifest.json",
+        "sha256": "3f6649d99d9bcd72a7ad27539996e40e98cb1712bc942889cc813344e73cb884"
+      }
+    },
+    {
+      "testId": "PT-MIG-MAPVERIFY004",
+      "summary": "magicと全短prefixを拒否。候補のSHA自体は一致させて判定。",
+      "originalProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41772-p0190303-verify-magic-order-v1/manifest.json",
+        "sha256": "0469205db2ebf03db7e036ee0936b4c9dcd5cef2397434b299a8819e0541ce99"
+      }
+    },
+    {
+      "testId": "PT-MIG-MAPVERIFY005",
+      "summary": "区分名・順序・重複・欠落・末尾byteを拒否。",
+      "originalProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41772-p0190303-verify-magic-order-v1/manifest.json",
+        "sha256": "0469205db2ebf03db7e036ee0936b4c9dcd5cef2397434b299a8819e0541ce99"
+      }
+    },
+    {
+      "testId": "PT-MIG-MAPVERIFY006",
+      "summary": "ヘッダーの列数、ASCII、制御値、長さ、LF違反を拒否。複合違反のベクトルも含む。",
+      "originalProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41778-p0190303-verify-headers-bounds-v1/manifest.json",
+        "sha256": "42ab88d4bfb7d9b8b9a4fba1a04706bbe6dd2321e5a75de2cd36fd6ab0ec1e46"
+      }
+    },
+    {
+      "testId": "PT-MIG-MAPVERIFY007",
+      "summary": "countとlengthの字句、範囲、上限値と実bodyの不一致を拒否。",
+      "originalProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41778-p0190303-verify-headers-bounds-v1/manifest.json",
+        "sha256": "42ab88d4bfb7d9b8b9a4fba1a04706bbe6dd2321e5a75de2cd36fd6ab0ec1e46"
+      }
+    },
+    {
+      "testId": "PT-MIG-MAPVERIFY008",
+      "summary": "四区分すべての部分digest形式・digest不一致・長さ超過を拒否。",
+      "originalProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41782-p0190303-verify-child-frames-v1/manifest.json",
+        "sha256": "1419356385534c57080fe147ade32464ae726c8266c67b8c81ed94087669d8b3"
+      }
+    },
+    {
+      "testId": "PT-MIG-MAPVERIFY009",
+      "summary": "正しい行数で列幅だけを崩した四区分を各拒否。その他の行・見出し違反も確認。",
+      "originalProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41782-p0190303-verify-child-frames-v1/manifest.json",
+        "sha256": "1419356385534c57080fe147ade32464ae726c8266c67b8c81ed94087669d8b3"
+      }
+    },
+    {
+      "testId": "PT-MIG-MAPVERIFY010",
+      "summary": "符号付き64bit、非負32bitの字句と境界を検証。2147483647のentry indexを保持。",
+      "originalProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41784-p0190303-verifier-canonical-rest-v1/manifest.json",
+        "sha256": "b150cfc0c899fd55ba73b363489d32ae97e25bca45f8869d7d027f7cae4b1fac"
+      }
+    },
+    {
+      "testId": "PT-MIG-MAPVERIFY011",
+      "summary": "FILESのgame、N12、重複、順序、表示順。同一current IDの別gameは許容。",
+      "originalProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41784-p0190303-verifier-canonical-rest-v1/manifest.json",
+        "sha256": "b150cfc0c899fd55ba73b363489d32ae97e25bca45f8869d7d027f7cae4b1fac"
+      }
+    },
+    {
+      "testId": "PT-MIG-MAPVERIFY012",
+      "summary": "ENTRIESのfile所属、game、主キー、順序、entry indexと独立したtarget。",
+      "originalProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41784-p0190303-verifier-canonical-rest-v1/manifest.json",
+        "sha256": "b150cfc0c899fd55ba73b363489d32ae97e25bca45f8869d7d027f7cae4b1fac"
+      }
+    },
+    {
+      "testId": "PT-MIG-MAPVERIFY013",
+      "summary": "SPEAKERSのgame、N12、current/target重複、正規順と独立したtarget割当。",
+      "originalProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41784-p0190303-verifier-canonical-rest-v1/manifest.json",
+        "sha256": "b150cfc0c899fd55ba73b363489d32ae97e25bca45f8869d7d027f7cae4b1fac"
+      }
+    },
+    {
+      "testId": "PT-MIG-MAPVERIFY014",
+      "summary": "AUDIOのgame、N12、current/targetの厳密昇順。",
+      "originalProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41784-p0190303-verifier-canonical-rest-v1/manifest.json",
+        "sha256": "b150cfc0c899fd55ba73b363489d32ae97e25bca45f8869d7d027f7cae4b1fac"
+      }
+    },
+    {
+      "testId": "PT-MIG-MAPVERIFY015",
+      "summary": "返却件数map不変、呼出元byte保持、固定診断・固定表示、異常後の正常読戻し。",
+      "originalProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41784-p0190303-verifier-canonical-rest-v1/manifest.json",
+        "sha256": "b150cfc0c899fd55ba73b363489d32ae97e25bca45f8869d7d027f7cae4b1fac"
+      }
+    },
+    {
+      "testId": "PT-MIG-MAPVERIFY016",
+      "summary": "8 workerの64読取。各入力を独立保持し、Future 5秒と終了10秒を検証。",
+      "originalProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41784-p0190303-verifier-canonical-rest-v1/manifest.json",
+        "sha256": "b150cfc0c899fd55ba73b363489d32ae97e25bca45f8869d7d027f7cae4b1fac"
+      }
+    }
+  ],
+  "declaredNewProductCaseCount": 0,
+  "adoptedExactExistingVerifierCases": 16,
+  "separateMappingManifestTotal": 10,
+  "batchDistinctContractLinks": 6,
+  "toolEvidence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41780-p0180803-fixed-utf-evidence-v1/manifest.json",
+    "sha256": "65d3e35c270a64f1bda986ab1eba44e3ba3ca2aa67db7340fb2d73e37b1ba5ab"
+  },
+  "notEligibleForTotals": [
+    "tool vectors",
+    "original 976 duplicate outcomes",
+    "alternative/historical other product paths"
+  ],
+  "qa056": "unanswered",
+  "formalAcceptanceId": null,
+  "acceptedOriginalDelta": 0,
+  "missing": [
+    "qualified current F03/451 all six products",
+    "pending 32 Test files and Root11",
+    "signed reviewer acceptance",
+    "SSC417 24 and authorized physical migration/COPY/runtime",
+    "F02 QA-056 and current API/Web packaging"
+  ]
+}

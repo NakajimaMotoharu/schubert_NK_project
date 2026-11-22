@@ -1,0 +1,62 @@
+{
+  "program": "NK-OPS-001",
+  "wbs": "WBS-P018-08.03/2",
+  "testId": "PT-OPS-EXEC-MUTF-005",
+  "source": "a810f459d749bc52aa27069c57ca6324cb219d34",
+  "tool": {
+    "path": "tools/quality/jacoco_readonly_exec_subset.py",
+    "sha256": "232c1a2333528ea05c7cb3880d98237b4f35d3b4bf581e6e7c84ef556f340129"
+  },
+  "strictClassNames": true,
+  "objective": "Keep modified UTF and exact selected record checks after strict nonempty class name was introduced",
+  "candidates": [
+    {
+      "id": "PT-OPS-EXEC-MUTF-005/strict-preserves-selected-and-session",
+      "input": "01c0c01007100002c0800000000000000011000000000000001211000000000000000100015803051100000000000000020002c2a200",
+      "targets": [
+        "X"
+      ],
+      "result": {
+        "classes": {
+          "X": {
+            "crc64": "1",
+            "probeCount": 3,
+            "hitProbeIds": [
+              0,
+              2
+            ],
+            "missedProbeIds": [
+              1
+            ]
+          }
+        },
+        "sessions": [
+          {
+            "labelBytesHex": "c080",
+            "startMillis": 17,
+            "endMillis": 18
+          }
+        ],
+        "totalClassRecords": 2
+      }
+    },
+    {
+      "id": "PT-OPS-EXEC-MUTF-005/strict-rejects-noncanonical-nonselected-name",
+      "input": "01c0c01007100002c0800000000000000011000000000000001211000000000000000100015803051100000000000000020002c18000",
+      "targets": [
+        "X"
+      ],
+      "error": "invalid modified UTF field"
+    },
+    {
+      "id": "PT-OPS-EXEC-MUTF-005/strict-rejects-missing-target-even-with-session",
+      "input": "01c0c01007100002c080000000000000001100000000000000121100000000000000020002c2a200",
+      "targets": [
+        "X"
+      ],
+      "error": "one session and all exact target records required"
+    }
+  ],
+  "oracle": "Manually framed Java DataOutput constants and fixed diagnostics; CRC and control sets are literals. Each record probe bitmap is one byte, 0x05.",
+  "boundary": "Synthetic host-tool function only; no stream acquisition and no release/owner certification."
+}

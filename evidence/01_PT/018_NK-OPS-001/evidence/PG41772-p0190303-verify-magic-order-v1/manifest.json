@@ -1,0 +1,165 @@
+{
+  "run": "PG41772",
+  "source": "a810f459d749bc52aa27069c57ca6324cb219d34",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "terminalAtUTC": "2026-11-22T00:47:33.922883+00:00",
+  "actualExit": 0,
+  "originalFixtureProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41770-p0190303-verifyhash-current-v1/manifest.json",
+    "sha256": "3f6649d99d9bcd72a7ad27539996e40e98cb1712bc942889cc813344e73cb884"
+  },
+  "officialPriorRun": {
+    "manifest": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33292-mapverify976-post-v5/manifest.json",
+      "sha256": "5142ceb61632fe077da3eea62be689e4789ff94ac40ed443740384660c0bb77e"
+    },
+    "unitManifest": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33292-mapverify976-post-v5/unit-manifest.json",
+      "sha256": "53fc1babc38d28876a07b6222c35c772c1356c5639c1ffc9903f0ec050add9ba"
+    },
+    "xml": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33292-mapverify976-post-v5/original-TEST-junit-jupiter.xml",
+      "sha256": "a55172a64a07208df0457588e90e237cb456f5a36ee780adb89da50596333079"
+    },
+    "suiteCount": 976,
+    "exit": 0,
+    "prepare": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33284-mapverify976-prepare-v5/manifest.json",
+      "sha256": "2bc57513b6affa024f0433ad1c3679a1690b3fd8e86c092fc751e48fbc7e01d2"
+    }
+  },
+  "exactCurrentProductClassCount": 20,
+  "replayed": 0,
+  "oracle": "Python SHA-256 of fixture literal plus independently changed spans; correctly framed expected content carries fixed magic and four kind bytes",
+  "criteria": [
+    {
+      "testId": "PT-MIG-MAPVERIFY004",
+      "method": "mapverify004MagicAndEveryShortPrefixFailEvenWithMatchingDigest",
+      "originalResult": "PASS",
+      "localVerifierCaseBytecodeSha": "43144f6b526655cdd1d5b8d90083ffe1b19280b8e9ea70685da3f43640dcb738",
+      "expectedRejection": "fixed IAE and unchanged input for every prefix length 0..14 and wrong first magic byte with matching expected full digest",
+      "correctMagicBytes": 14,
+      "prefixCounts": 15,
+      "wrongMagicSHA256": "36dd19e44d26a48f524a48a018ac874c2568511b9685a7f8ee79885c0a8188b2",
+      "prefixSha256": [
+        "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "8ce86a6ae65d3692e7305e2c58ac62eebd97d3d943e093f577da25c36988246b",
+        "cbb7d1c1d280b95ebc7f829a36661edc83a7b8ba34acd7ca67224320d0e36226",
+        "b13064d2b3a3d4fc73d05fbdeb9b01c4d2d62e9967b55eb7a1f3cf2190b98bea",
+        "e9c3f2571da31029f3bb544aa838f9705922a244525dc552495f2b3fdd12eb67",
+        "669c89127db910a59d5ad5f88414db4623095fc5c7f412632921d6fb1ffdffef",
+        "32c57b6479b2e6684425f81cacd5a6f516e89471a752e12435eb83ddfdfb7845",
+        "a257d4876acba44c608104447f4aba97f95ca8e8f30288df336168e41d656fde",
+        "e4509bb6cc3f0d347bc47ada0fe0746269acdc54308282aee3fbe9c8afe1a425",
+        "041e1d00ff838d340c001efe96c9c3777818f8652f7dd8059f6d2276070eacc3",
+        "1969d6990cfbb95e17a480a76ea20389a3a8926119907e84c5e0883bcc133fcc",
+        "2abf1f46d77066951cda0449cd57c7c6fe80c81f0d032569caeb967765bebb32",
+        "341e1f312bb4065671d502da24fe10f51f29e3d970a49d4fa8b51dda75b2850d",
+        "73c0912a7a38b74c0b0149dc5d7011c05ba36be58c5de8ecec601d4c38bb8531",
+        "cdb016d95d02801287e9475943aa592b0cb344cb7ef2745595dfbc3a1b937a32"
+      ]
+    },
+    {
+      "testId": "PT-MIG-MAPVERIFY005",
+      "method": "mapverify005KindOrderUnknownDuplicateMissingAndTrailingBytes",
+      "originalResult": "PASS",
+      "localVerifierCaseBytecodeSha": "34fcc35fa59ea98a20579760ad255c287223b6732ee245c18ffc2cf690b4b1d3",
+      "expectedRejection": "fixed IAE and unchanged input for malformed kind/order frames and trailing or missing payload bytes with matching expected full digest",
+      "rejectedKindAndOrderVectors": [
+        {
+          "expectedFrame": "FILES",
+          "substitute": "",
+          "mutatedSha256": "a58b18a385f372674e705f64f0d1d9fda23b5f3cb008686c3deb586b0bd22566"
+        },
+        {
+          "expectedFrame": "FILES",
+          "substitute": "unknown",
+          "mutatedSha256": "790ae018614cf40ef13a79e149d8b8709a484964bc2b13d9a341c522ecb6aa96"
+        },
+        {
+          "expectedFrame": "FILES",
+          "substitute": "files",
+          "mutatedSha256": "74dcfac4ad34f03fb95d305b0434d8001c11f567885f9040b9ef7b1bfadc65a2"
+        },
+        {
+          "expectedFrame": "FILES",
+          "substitute": "ENTRIES",
+          "mutatedSha256": "dc07f399898d0f1402759b41ea99979a656cb39cb9379cb6c780ce11bf3db98c"
+        },
+        {
+          "expectedFrame": "ENTRIES",
+          "substitute": "",
+          "mutatedSha256": "de91d919a04e4f13a5597bc6364794fbcebb833fb0a60e31ed1cc0b8fcc63e0e"
+        },
+        {
+          "expectedFrame": "ENTRIES",
+          "substitute": "unknown",
+          "mutatedSha256": "64487fcb2c30d2c5842aec9524a72d1270b1e1f15931dd009500ac4e36c3a740"
+        },
+        {
+          "expectedFrame": "ENTRIES",
+          "substitute": "files",
+          "mutatedSha256": "688347e1470c8ca82fbf9a1d394cca58c34c500b77438df241b361e5f5ee988f"
+        },
+        {
+          "expectedFrame": "ENTRIES",
+          "substitute": "SPEAKERS",
+          "mutatedSha256": "ca992e49abefa30d72159dad394e4b24b8478b1d773e5c8b091c4cd6c52298f2"
+        },
+        {
+          "expectedFrame": "SPEAKERS",
+          "substitute": "",
+          "mutatedSha256": "18fdd5f30f2f2217de81879470f384ad3cf4d7f74805fdb303b92754cdeb7236"
+        },
+        {
+          "expectedFrame": "SPEAKERS",
+          "substitute": "unknown",
+          "mutatedSha256": "f1ea6bafe119553886cd06bf687e1e816f18bed3e4dae7e2f62ec008d4fe51ad"
+        },
+        {
+          "expectedFrame": "SPEAKERS",
+          "substitute": "files",
+          "mutatedSha256": "be7abcfca8a8cb8d65efc1b4da64448e2ff7cb0db96bf334a5d3105c2a28019e"
+        },
+        {
+          "expectedFrame": "SPEAKERS",
+          "substitute": "AUDIO",
+          "mutatedSha256": "409cb958e07d5907880d746c781eac528d23beb5a58cd5a184b9337d4d459928"
+        },
+        {
+          "expectedFrame": "AUDIO",
+          "substitute": "",
+          "mutatedSha256": "85f8fe71ce823954f44b47110f1f02b62b6d0c8fad52b442b84b6d439a4d07af"
+        },
+        {
+          "expectedFrame": "AUDIO",
+          "substitute": "unknown",
+          "mutatedSha256": "978b649e70d6e082f8b9ba3adc2251c80b50f4f15ad5cea56590035123be766d"
+        },
+        {
+          "expectedFrame": "AUDIO",
+          "substitute": "files",
+          "mutatedSha256": "67c5e92743a71a320a3961dbac5aac3b25dfa7f1f38f27632cde36b33e727029"
+        },
+        {
+          "expectedFrame": "AUDIO",
+          "substitute": "FILES",
+          "mutatedSha256": "d9bfe5a23f63158abea34b10e3552117f71ef08af3f7b5afc90fcf09381d115b"
+        }
+      ],
+      "trailingSha256": [
+        "f41ce0b3714b363a59b5fb0b43b64eccae36f6f8df03bcc6dc4d3321a1d5a64d",
+        "a141b8c8bf274484374bae3b90102dde35d41036dfab9ee3cbc8446c6ba63260"
+      ],
+      "truncatedSha256": "edd65a9a7ed49aaf918697406ab63cad9c8f32bfacd1b879a44efdd828834dfa"
+    }
+  ],
+  "newFormalAcceptance": 0,
+  "remaining": [
+    "six-product 451",
+    "SSC417 24",
+    "original Current identifiers and mapping order",
+    "real migration/DB/COPY",
+    "owner receipt"
+  ]
+}

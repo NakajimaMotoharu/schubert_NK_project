@@ -1,0 +1,256 @@
+{
+  "run": "PG41784",
+  "source": "a810f459d749bc52aa27069c57ca6324cb219d34",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "terminalAtUTC": "2026-11-22T00:54:20.473490+00:00",
+  "actualExit": 0,
+  "previousFixtureProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41770-p0190303-verifyhash-current-v1/manifest.json",
+    "sha256": "3f6649d99d9bcd72a7ad27539996e40e98cb1712bc942889cc813344e73cb884"
+  },
+  "design": [
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "sha256": "3874975e619ba279814df4d6f79fd161098756cad882e00d580651fb2d7387cb",
+      "line": 95,
+      "quoteCore": "8eb09b2c3a263a179c127ea15eb3dc1a667044b5f27d3e3afa1253f69a6405d3"
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "sha256": "3874975e619ba279814df4d6f79fd161098756cad882e00d580651fb2d7387cb",
+      "line": 99,
+      "quoteCore": "27d83492f34095b0ef556d576d0c6eaae86b4c9a87c0b5f5186ebd7136e0991d"
+    }
+  ],
+  "originalXml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33292-mapverify976-post-v5/original-TEST-junit-jupiter.xml",
+    "sha256": "a55172a64a07208df0457588e90e237cb456f5a36ee780adb89da50596333079"
+  },
+  "criteria": [
+    {
+      "testId": "PT-MIG-MAPVERIFY001",
+      "method": "mapverify001FiveIndependentGoldenArtifactsAndCounts",
+      "originalResult": "PASS",
+      "localVerifierCaseBytecodeSha": "ceb6006facbafdb3afd4a03e13a73a83785b1767d20e3ab9b63fcb219b56865b",
+      "individualCondition": "Five literal documents and independently encoded canonical fixture",
+      "oracle": {
+        "NORMAL": {
+          "sha256": "33a5b664c4abaa54e4f2d403e70a3f2545aa6395a06ebcc7196f404749985ca4",
+          "counts": {
+            "FILES": 2,
+            "ENTRIES": 2,
+            "SPEAKERS": 2,
+            "AUDIO": 2
+          }
+        },
+        "EMPTY": {
+          "sha256": "83b87552a2f59f743b0c28ad12ed8bbb5e0f38c4a3794c68a29f35a3974284e9",
+          "counts": {
+            "FILES": 0,
+            "ENTRIES": 0,
+            "SPEAKERS": 0,
+            "AUDIO": 0
+          }
+        },
+        "ONE_FILE": {
+          "sha256": "ac411723896848964fb14c8fac3945bc758ffa1bdc1ffc83ac9a872775df07f5",
+          "counts": {
+            "FILES": 1,
+            "ENTRIES": 0,
+            "SPEAKERS": 0,
+            "AUDIO": 0
+          }
+        },
+        "BOUNDARY": {
+          "sha256": "d2d9bfab039646d27abd0afb8694553fbd4df6eedfff93dd92e82e19acf8b0e5",
+          "counts": {
+            "FILES": 2,
+            "ENTRIES": 2,
+            "SPEAKERS": 2,
+            "AUDIO": 2
+          }
+        },
+        "OVERLAP": {
+          "sha256": "1e856526747d19fa4761cccfc05dff7dc276e04dc2eb4a7ee5ef2cc1eacb0868",
+          "counts": {
+            "FILES": 2,
+            "ENTRIES": 2,
+            "SPEAKERS": 2,
+            "AUDIO": 2
+          }
+        }
+      }
+    },
+    {
+      "testId": "PT-MIG-MAPVERIFY010",
+      "method": "mapverify010SignedLongLexicalAndUnsignedBounds",
+      "originalResult": "PASS",
+      "localVerifierCaseBytecodeSha": "1c2621c718d44fb39268ec8e7b6f4ae43a1ff5afe338de12e0588ebf861dbdae",
+      "individualCondition": "Reject malformed or overflowing signed ID and unsigned index; retain maximum signed int display index",
+      "oracle": {
+        "rejectedSigned": [
+          "",
+          "-0",
+          "+1",
+          "00",
+          "01",
+          " 1",
+          "1 ",
+          "1.0",
+          "x",
+          "9223372036854775808",
+          "-9223372036854775809"
+        ],
+        "rejectedUnsigned": [
+          -1,
+          2147483648
+        ],
+        "acceptedUnsigned": 2147483647,
+        "negativeDiagnostic": "fixed IAE; absent cause; source remains unchanged"
+      }
+    },
+    {
+      "testId": "PT-MIG-MAPVERIFY011",
+      "method": "mapverify011FileGamePkTargetOrderAndDerivedDisplayAreCanonical",
+      "originalResult": "PASS",
+      "localVerifierCaseBytecodeSha": "a03494546e1617ff61a8c883286e4d76e1ba35ad0d00a69cca697b0e2ed71149",
+      "individualCondition": "FILES game scope, positive N12, uniqueness, canonical current ordering and dense display",
+      "oracle": {
+        "missingGame": [
+          0,
+          3
+        ],
+        "invalidN12": [
+          0,
+          1000000000000
+        ],
+        "sameTargetRejected": 101,
+        "sameGameAndCurrentRejected": [
+          1,
+          -5
+        ],
+        "reversedOrderRejected": true,
+        "wrongDenseDisplayRejected": 2,
+        "sameCurrentDifferentGameAccepted": -5
+      }
+    },
+    {
+      "testId": "PT-MIG-MAPVERIFY012",
+      "method": "mapverify012EntryFileGamePkOrderIndexAndIndependentTargets",
+      "originalResult": "PASS",
+      "localVerifierCaseBytecodeSha": "c0659d4368040fdb9f2f138b982b8669d49d79b9a0fd0623dd3b8363682fc039",
+      "individualCondition": "ENTRIES file exists and game matches, global current and target uniqueness, canonical per-file display/order",
+      "oracle": {
+        "missingTargetFile": 999,
+        "foreignGame": 2,
+        "duplicateCurrent": -10,
+        "duplicateTarget": 201,
+        "invalidEntryIndex": 2,
+        "nonDenseSequentialRows": true,
+        "reversedInputRejected": true,
+        "crossFileTargetPermutationAccepted": [
+          901,
+          201
+        ]
+      }
+    },
+    {
+      "testId": "PT-MIG-MAPVERIFY013",
+      "method": "mapverify013SpeakerPkGameTargetAndCurrentCanonicalOrder",
+      "originalResult": "PASS",
+      "localVerifierCaseBytecodeSha": "dae21391580edd5d04fdae9f624565199fe258bafd05169bf8b376f4dc4a7bf1",
+      "individualCondition": "SPEAKERS allowed game and N12, unique current/target and canonical order",
+      "oracle": {
+        "missingGame": [
+          0,
+          3
+        ],
+        "invalidN12": [
+          0,
+          1000000000000
+        ],
+        "duplicateCurrentRejected": -3,
+        "duplicateTargetRejected": 1,
+        "reversedInputRejected": true,
+        "independentTargetMappingPermutationAccepted": [
+          6,
+          1
+        ]
+      }
+    },
+    {
+      "testId": "PT-MIG-MAPVERIFY014",
+      "method": "mapverify014AudioGameN12AndStrictCurrentAndTargetOrder",
+      "originalResult": "PASS",
+      "localVerifierCaseBytecodeSha": "f6a2e8422b074fd8093fadfe66c3d3bc4209a96838240f93419c4f761d7a767d",
+      "individualCondition": "AUDIO game/N12 and strictly increasing current and target IDs",
+      "oracle": {
+        "missingGame": [
+          0,
+          3
+        ],
+        "invalidN12": [
+          0,
+          1000000000000
+        ],
+        "duplicateCurrentRejected": -5,
+        "duplicateOrReverseTargetsRejected": [
+          21,
+          20
+        ],
+        "reversedInputRejected": true,
+        "distinctOrderedCurrentAccepted": 0
+      }
+    },
+    {
+      "testId": "PT-MIG-MAPVERIFY015",
+      "method": "mapverify015ImmutableCountsRedactionAndFreshFailureIsolation",
+      "originalResult": "PASS",
+      "localVerifierCaseBytecodeSha": "3540db0e2ab7d06dd91b5518ffb0dd9fe124c736dc2140a529e6d40b26585855",
+      "individualCondition": "Immutable counts, source snapshot, no malformed value leakage, successful fresh read after rejection",
+      "oracle": {
+        "normalSha256": "33a5b664c4abaa54e4f2d403e70a3f2545aa6395a06ebcc7196f404749985ca4",
+        "sameSuccessfulCounts": {
+          "FILES": 2,
+          "ENTRIES": 2,
+          "SPEAKERS": 2,
+          "AUDIO": 2
+        },
+        "fixedDiagnostic": "migration mapping serialization is invalid",
+        "fixedToString": "CurrentMigrationMappingVerifier[REDACTED]",
+        "mutationRejected": "UnsupportedOperationException"
+      }
+    },
+    {
+      "testId": "PT-MIG-MAPVERIFY016",
+      "method": "mapverify016SharedVerifierHasFiniteIndependentSnapshots",
+      "originalResult": "PASS",
+      "localVerifierCaseBytecodeSha": "5a2c39c35a5bca608cdde2fd925d2a3e7fa5deae903083574ac3d1ad2ce065c9",
+      "individualCondition": "64 reads can finish independently with a shared verifier and caller-private input buffers",
+      "oracle": {
+        "workers": 8,
+        "tasks": 64,
+        "futureSeconds": 5,
+        "finallyShutdownNow": true,
+        "awaitTerminationSeconds": 10,
+        "acceptedCounts": {
+          "FILES": 2,
+          "ENTRIES": 2,
+          "SPEAKERS": 2,
+          "AUDIO": 2
+        },
+        "mutateCallerArrayAfterVerify": true
+      }
+    }
+  ],
+  "newProductTests": 0,
+  "formalAcceptanceId": null,
+  "limitation": "IDs, numeric boundaries and expected orders are fixture-independent of product. Positive expectations use fixed literals and Python SHA-256. Original Java fixture only simulated the in-memory verifier.",
+  "remaining": [
+    "six-product 451",
+    "SSC417 24",
+    "original Current identifiers and mapping order",
+    "real migration/DB/COPY",
+    "owner receipt"
+  ]
+}
