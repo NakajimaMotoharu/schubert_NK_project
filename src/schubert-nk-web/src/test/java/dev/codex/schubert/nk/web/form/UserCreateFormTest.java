@@ -21,9 +21,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.junit.jupiter.api.Test;
 
 /** UI225/236 independent literals/372-byte oracle; PG-D345/016055/PT-USER-CREATE001..008. */
@@ -275,7 +277,8 @@ class UserCreateFormTest {
   }
 
   @Test
-  void create007OneHundredConcurrentIndependentRequests() throws Exception {
+  void create007OneHundredConcurrentIndependentRequests()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var executor = Executors.newFixedThreadPool(8);
     try {
       var results = new ArrayList<Future<Void>>();

@@ -18,9 +18,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.junit.jupiter.api.Test;
 
 /** Independent UI/SS literals, PG199/SSC072/015012/PT-WEB214..221. */
@@ -263,7 +265,8 @@ class ScenarioSearchFormTest {
   }
 
   @Test
-  void web221ConcurrentValidation() throws Exception {
+  void web221ConcurrentValidation()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var pool = Executors.newFixedThreadPool(8);
     try {
       var futures = new ArrayList<Future<?>>();

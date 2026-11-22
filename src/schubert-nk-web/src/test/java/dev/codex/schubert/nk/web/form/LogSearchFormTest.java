@@ -15,9 +15,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.junit.jupiter.api.Test;
 
 /** PG214/PT-WEB278..285/SSC073/UI222,225,235/SS313,352. */
@@ -274,7 +276,7 @@ class LogSearchFormTest {
   }
 
   @Test
-  void web285ConcurrentBinding() throws Exception {
+  void web285ConcurrentBinding() throws InterruptedException, ExecutionException, TimeoutException {
     var shared = Map.of(LEVEL_FIELD, List.of("WARN"));
     var pool = Executors.newFixedThreadPool(8);
     try {
