@@ -1,0 +1,25 @@
+{
+  "scanRuleEngine": "Gitleaks 8.30.1, staged scan with redaction",
+  "rawExit": 1,
+  "rawHits": 2,
+  "exactScope": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42996-operation-token-current-json-v1/manifest.json",
+    "sha256": "6dc97085c623723335ec511a7df3a5046754f0cec040974ad341c02fe7319b38"
+  },
+  "findings": [
+    {
+      "line": 69,
+      "rule": "generic-api-key",
+      "trackedSourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionOperationToken.java",
+      "classification": "EXACT_TRACKED_JAVA_FILE_SHA256"
+    },
+    {
+      "line": 77,
+      "rule": "generic-api-key",
+      "trackedSourcePath": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionOperationTokenV2Test.java",
+      "classification": "EXACT_TRACKED_JAVA_FILE_SHA256"
+    }
+  ],
+  "confirmedSecrets": 0,
+  "unclassified": 0
+}

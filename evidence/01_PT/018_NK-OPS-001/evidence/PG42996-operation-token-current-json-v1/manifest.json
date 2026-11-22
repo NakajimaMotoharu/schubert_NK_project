@@ -1,0 +1,236 @@
+{
+  "run": "PG42996-operation-token-current-json-v1",
+  "source": "a9caa93c55c20ef9e733df4101521e6e4a5a0c6a",
+  "candidate": "dbdd79f2fa415e91ff29bf9bafecd4984d11eb40",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T20:27:33.634530+00:00",
+  "wbs": "WBS-P015-03/2",
+  "criterion": "QA049 immutable token attributes and JSON v1/v2 compatibility for local encode/decode using test-scoped values and canonical time",
+  "design": {
+    "path": "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+    "commit": "ca41c03c0c6efff9a3a35b47b480491810bee6f9",
+    "sha256": "c1f0269c8ee59173cf41419cc2166156be2712b7b1316a2eea81b9b53a504b41"
+  },
+  "originalIndependent": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27422-session-v2-12-independent-v1/manifest.json",
+    "sha256": "8cac833ac9a1aaceec9b229b3727e7a120a1d04b03db446537b8f86df6ed3b37"
+  },
+  "verifiedOriginal": {
+    "unit-unit-exit.safe.json": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27422-session-v2-12-independent-v1/unit-unit-exit.safe.json",
+      "sha256": "b0e92138d91b9218fe77d1db90cdbd8015f419d7f22a5a2df6452cd6f731f838"
+    },
+    "unit-manifest.json": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27422-session-v2-12-independent-v1/unit-manifest.json",
+      "sha256": "4371ff7b97ddb653fc39f6670871c56e1a6862e16d00d3c2a20f935cb3ba1b21"
+    },
+    "original-TEST-junit-jupiter.xml": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27422-session-v2-12-independent-v1/original-TEST-junit-jupiter.xml",
+      "sha256": "73e8b6c9e3d618028acf831780593ec287061edeed0a9ebc27a939f186cfb863"
+    },
+    "original-class-init.stdout": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27422-session-v2-12-independent-v1/original-class-init.stdout",
+      "sha256": "27616c0da4d789c516f07db69595b522948ec3d8dd8f1420ff3e1236f2d6f8d7"
+    },
+    "original-coverage.xml": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27422-session-v2-12-independent-v1/original-coverage.xml",
+      "sha256": "87531a956f519b15f9d52efaa2e2a640ee8fda9eadfc9bb7410f9b2e622d2759"
+    },
+    "jacoco.exec": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27422-session-v2-12-independent-v1/jacoco.exec",
+      "sha256": "4b47f2842d7d8f128188ef4511d46d88492a766ad0ab85f79e3818bcdd215747"
+    }
+  },
+  "selectedCompilerInput": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42996-operation-token-current-json-v1/begin.json",
+    "sha256": "23a21a50cdbc42b8ce7280006f7cd97f329e95e956412574276cafd2d5dbb3c9"
+  },
+  "compile": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42996-operation-token-current-json-v1/main-compile.exit.json",
+      "sha256": "8952d6fca73c107e8ac101f6872a83d81d647c5a42157b62275de354333b9d99"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42996-operation-token-current-json-v1/test-compile.exit.json",
+      "sha256": "85141b82200d5183ce2c4a1dfa91ca6fca44ae5af74483aad64dfdf8934b2dda"
+    }
+  ],
+  "currentProtocol": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42624-current-protocol-maven-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+    "sha256": "2e11940216614fbe48e663fd83400f1fe3cf1cd9fc626214c954aaddb8c0407f"
+  },
+  "exactSelectedSourceHashes": {
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/AuthenticationContext.java": "aaa18a4c954a425c943e8c30ea1752b665b249e86d8f1767e9e37f4aa61a6b66",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/UserRole.java": "b68402e5705ca2ac5093a1b98a44de5a9f45ed69cb9b231658b4903c51e0bf69",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/WireEnum.java": "a14544397a3ce1c45ff3026c0463c2829ea35a39a8990056a368fc52cf7b6d4b",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionAttributeCodec.java": "92f0f802ed612df710c9e1aa55395d075624e8476eb513cb3eb263330531fd6d",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionAttributeException.java": "6402dedbe748c20ddded76903725f4efb13af7327d52d4aa6b271a9877b26bd7",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionAttributes.java": "f5596cf6c90ff8bf6a648fb47e5b064bb5fbc3528c872aaf5f444a13bf0fa675",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionOperationToken.java": "6a982c339aef53a2297725c114a8cfe023557b3cf36a953c599916e48eaa6f57",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionPrincipal.java": "29af626632ac4c2727f9d0963c3967cb0be7eda57daf762a482268c467dc9232",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionStoreException.java": "93717ee948f88bd799a14cdad397c0d92e584711c32f571df8592be379033ed1",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/InvalidSessionRowException.java": "e3c592ebb82effd50447c356629695def2af5f05e90137de57fe908d4310a853",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/SavedRequestTarget.java": "35e564f94749c3d005a7e4041f33a77921aac492676ea26305c65b66096ff2e3",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/package-info.java": "24641c16e2937e6fdb40acd9c3f86139fb9b54588aaf5931c240d74471d93277",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/package-info.java": "2b2c6b1d5f75a5744f5910035f91dcb04135507c6f3a1a06b6c3ad04bec12dda",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionAttributeCodecTest.java": "5d3fe4a474c47ffd5e51302522c942bfcd91fc2b254326bffcb1ca1dfd1d302b",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionOperationTokenV2Test.java": "429dbd000e47d9a61cd586706ca25c099ee1beabaded610adaa66246cbd4e3ea"
+  },
+  "executedAndLinkablePhysical": {
+    "dev/codex/schubert/nk/protocol/header/AuthenticationContext.class": {
+      "original": "6fbe0a9f9e9bc939e5545015608690b5af86b8368cf42e07771999ebd9e95793",
+      "candidate": "6fbe0a9f9e9bc939e5545015608690b5af86b8368cf42e07771999ebd9e95793"
+    },
+    "dev/codex/schubert/nk/protocol/layout/semantic/UserRole.class": {
+      "original": "97544c0f619535bd68981e891048ac289edda544f03dddbab9110c70aaa69bae",
+      "candidate": "97544c0f619535bd68981e891048ac289edda544f03dddbab9110c70aaa69bae"
+    },
+    "dev/codex/schubert/nk/protocol/layout/semantic/WireEnum.class": {
+      "original": "a3e61c8d6ca6e132715714f82e215647b5bfc7c00d9dda967385ea8be6802338",
+      "candidate": "a3e61c8d6ca6e132715714f82e215647b5bfc7c00d9dda967385ea8be6802338"
+    },
+    "dev/codex/schubert/nk/web/security/SavedRequestTarget.class": {
+      "original": "6951e1bfd181e00c5f7eab45d42616b9c62b74fc1dcb787deaef9321a50b053d",
+      "candidate": "6951e1bfd181e00c5f7eab45d42616b9c62b74fc1dcb787deaef9321a50b053d",
+      "kind": "main"
+    },
+    "dev/codex/schubert/nk/web/security/package-info.class": {
+      "original": "ae66eca5a2867bdfe083cfd31b1f4042e026446990b033aa451b20b202203016",
+      "candidate": "ae66eca5a2867bdfe083cfd31b1f4042e026446990b033aa451b20b202203016",
+      "kind": "main"
+    },
+    "dev/codex/schubert/nk/web/session/InvalidSessionRowException.class": {
+      "original": "b69afa5decd303c72293c68ba918d06c40d8a64b3d8a3e55189291620f5ec1a4",
+      "candidate": "b69afa5decd303c72293c68ba918d06c40d8a64b3d8a3e55189291620f5ec1a4",
+      "kind": "main"
+    },
+    "dev/codex/schubert/nk/web/session/SessionAttributeCodec.class": {
+      "original": "020778c93972de2a62cd9643427a1330b57cd96d2eb884fea109c3fa119c800c",
+      "candidate": "020778c93972de2a62cd9643427a1330b57cd96d2eb884fea109c3fa119c800c",
+      "kind": "main"
+    },
+    "dev/codex/schubert/nk/web/session/SessionAttributeException.class": {
+      "original": "500f7deecdde7a8a85d7f5c7cb4a6579de33d2e7f9e0458cea11280c25e297f1",
+      "candidate": "500f7deecdde7a8a85d7f5c7cb4a6579de33d2e7f9e0458cea11280c25e297f1",
+      "kind": "main"
+    },
+    "dev/codex/schubert/nk/web/session/SessionAttributes.class": {
+      "original": "abfaebb963fefd9bd7a5d7a103f119a28494abf3423866195f46e37600f39abe",
+      "candidate": "abfaebb963fefd9bd7a5d7a103f119a28494abf3423866195f46e37600f39abe",
+      "kind": "main"
+    },
+    "dev/codex/schubert/nk/web/session/SessionOperationToken.class": {
+      "original": "3ca40e77fcbc5ad28443f30c08e0a39c32a50a4c9278165d5be76b6fc91d482b",
+      "candidate": "3ca40e77fcbc5ad28443f30c08e0a39c32a50a4c9278165d5be76b6fc91d482b",
+      "kind": "main"
+    },
+    "dev/codex/schubert/nk/web/session/SessionPrincipal.class": {
+      "original": "a8c12962f9ec1d7525ec643dedb3461529a6be84d9ccdf6d5736596c18cd0b49",
+      "candidate": "a8c12962f9ec1d7525ec643dedb3461529a6be84d9ccdf6d5736596c18cd0b49",
+      "kind": "main"
+    },
+    "dev/codex/schubert/nk/web/session/SessionStoreException.class": {
+      "original": "834c44344725062843f77e5bd267e8084119f0988aa40b4643416ee89defef3a",
+      "candidate": "834c44344725062843f77e5bd267e8084119f0988aa40b4643416ee89defef3a",
+      "kind": "main"
+    },
+    "dev/codex/schubert/nk/web/session/package-info.class": {
+      "original": "3fe914022b11d62e8a2782b393443c76c17914fda383f41dab62bd2feb23518a",
+      "candidate": "3fe914022b11d62e8a2782b393443c76c17914fda383f41dab62bd2feb23518a",
+      "kind": "main"
+    },
+    "dev/codex/schubert/nk/web/session/SessionAttributeCodecTest.class": {
+      "original": "7fee5882efa936219d9a26acebbc795e37c0bd4b19bfb7694ac7a1a10cec6d8e",
+      "candidate": "7fee5882efa936219d9a26acebbc795e37c0bd4b19bfb7694ac7a1a10cec6d8e",
+      "kind": "test"
+    },
+    "dev/codex/schubert/nk/web/session/SessionOperationTokenV2Test.class": {
+      "original": "797ebf9f59fcbad96fdb90b4ac31c7de5e22f7a822291ea097c82e4a214f70d3",
+      "candidate": "797ebf9f59fcbad96fdb90b4ac31c7de5e22f7a822291ea097c82e4a214f70d3",
+      "kind": "test"
+    }
+  },
+  "sourceOrArtifactDifferencesOutsideClosedExecution": [
+    "SessionPayloadCodec.java differs outside either JSON fixture; no assertion of its validity",
+    "root Maven model differs while Gson 2.14.0 and original used JDK/tool JAR hashes remain pinned"
+  ],
+  "testIds": [
+    "PT-WEB-009..015",
+    "TOKV201..205"
+  ],
+  "acceptedOriginalCaseNames": [
+    "web011UnknownDuplicateNullAndTypesNeverDeserialize()",
+    "web013UnicodeSavedTargetsAndTokenPurposesPreserveMeaning()",
+    "web014IndependentDecodeAcceptsOrderButRejectsInvalidValues()",
+    "web009AnonymousAndAuthenticatedGoldenJson()",
+    "tokv204CompletedNullTypesUnknownDuplicateAndCanonicalBounds()",
+    "tokv202CurrentGoldenBytesAndCompletedTimes()",
+    "tokv205MixedCapacityAndConcurrentIndependentLiterals()",
+    "web010PrincipalTokenAndCollectionInvariantsFailFast()",
+    "web015ConcurrentAttributesHaveNoCrossSessionState()",
+    "tokv203LegacyAndReorderedRootVersionRemainStrict()",
+    "tokv201CompletionInvariantAndLegacyConstructor()",
+    "web012MalformedUtf8AndBoundedDocumentsRejectSafely()"
+  ],
+  "qualifiedOriginalLocalPass": 12,
+  "newExecutions": 0,
+  "testFailure": 0,
+  "localCountersFromSingleOriginal": {
+    "dev/codex/schubert/nk/web/session/SessionAttributeCodec": {
+      "INSTRUCTION": {
+        "covered": 501,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 42,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 114,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 37,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 15,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/web/session/SessionOperationToken": {
+      "INSTRUCTION": {
+        "covered": 74,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 4,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 17,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 7,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 5,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    }
+  },
+  "wholeWebPackage": false,
+  "formPostTransactionReplayAndRoutes": "UNQUALIFIED_NO_REAL_LIFECYCLE_EXECUTION",
+  "whole451": false,
+  "formalAcceptanceId": null
+}
