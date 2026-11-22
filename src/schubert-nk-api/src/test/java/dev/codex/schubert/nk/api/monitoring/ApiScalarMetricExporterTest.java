@@ -25,9 +25,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
 
@@ -147,7 +149,8 @@ class ApiScalarMetricExporterTest {
   @Test
   void scalar001LiteralCounterNameAndFraction() {
     assertEquals(
-        "# TYPE nk_inbox_replays_total counter\nnk_inbox_replays_total{layout=\"LGNREQ01\",result=\"0000\"} 2.5\n",
+        "# TYPE nk_inbox_replays_total counter\n"
+            + "nk_inbox_replays_total{layout=\"LGNREQ01\",result=\"0000\"} 2.5\n",
         counterText(2.5));
   }
 
@@ -550,7 +553,8 @@ class ApiScalarMetricExporterTest {
   }
 
   @Test
-  void scalar024ConcurrentCallsAndOtherSourcesDoNotShareState() throws Exception {
+  void scalar024ConcurrentCallsAndOtherSourcesDoNotShareState()
+      throws InterruptedException, ExecutionException, TimeoutException {
     try (var first = new Registry(counter(2), gauge(5));
         var second = new Registry(counter(3), gauge(7));
         var workers = Executors.newFixedThreadPool(4)) {

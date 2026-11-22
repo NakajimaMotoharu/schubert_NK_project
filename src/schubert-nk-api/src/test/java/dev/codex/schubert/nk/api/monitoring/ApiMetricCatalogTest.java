@@ -13,9 +13,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.junit.jupiter.api.Test;
 
 /** APICAT001..014/1773: expected domains are SS literals and an independent route fixture. */
@@ -458,7 +460,8 @@ class ApiMetricCatalogTest {
   }
 
   @Test
-  void apicat014FiniteConcurrentCallsHaveNoRetainedMutableState() throws Exception {
+  void apicat014FiniteConcurrentCallsHaveNoRetainedMutableState()
+      throws InterruptedException, ExecutionException, TimeoutException {
     try (var workers = Executors.newFixedThreadPool(4)) {
       var jobs = new ArrayList<Future<?>>();
       for (int index = 0; index < 64; index++)
