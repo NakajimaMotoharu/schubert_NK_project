@@ -12,9 +12,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
@@ -197,7 +199,8 @@ final class SpeakerCopyRowTest {
   }
 
   @Test
-  void speakerRow016FiniteParallelCopiesHaveIndependentBuffers() throws Exception {
+  void speakerRow016FiniteParallelCopiesHaveIndependentBuffers()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var row = new SpeakerCopyRow(raw());
     var executor = Executors.newFixedThreadPool(WORKERS);
     try {
