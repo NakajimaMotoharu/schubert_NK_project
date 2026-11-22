@@ -1,0 +1,110 @@
+{
+  "eventId": "PGPT-20261008-8778",
+  "workCategory": "CONTRACT_AUDIT",
+  "source": "fbdb574805714a3e7d91b2b7c9c15ce5eade2356",
+  "productionCoreMain": "e8368d22c4da2ec841f008df793594d3be9066af",
+  "canonicalDesignSource": "ca41c03c0c6efff9a3a35b47b480491810bee6f9",
+  "managementWorkIds": [
+    "WBS-P002-01/2"
+  ],
+  "planRow": {
+    "ID": "WBS-P002-01/2",
+    "元行": "WBS-P002-01/2",
+    "費目": "B",
+    "主担当": "WBS-P002-01",
+    "状態": "完了記録",
+    "作業": "固定長fieldのNFC・UTF8・padding検査／同source証拠による受入判定",
+    "残pp": "0.0",
+    "着手": "設計322・当該source・作業所有・既存成果を照合。必要な局所成果を費目Aで一度だけ作成し、受入候補のTestIDと独立期待値を確定。着手依存、当該A成果、終了依存と未解決条件を確認",
+    "終了証拠": "固定長fieldのNFC・UTF8・padding検査：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。 固有要求：MSG-001,MSG-002,MSG-003,MSG-004,MSG-005,MSG-006,MSG-007,MSG-008,MSG-009,MSG-010,MSG-011",
+    "補正根拠": "原実行記録",
+    "契約HOLD": "",
+    "対象": "",
+    "範囲": "MSG-001、MSG-002、MSG-003、MSG-004、MSG-005、MSG-006、MSG-007、MSG-008",
+    "保存証跡": "個別criteria＋同sourceのTestID・独立期待値・実結果・451適用結果",
+    "順次": "False",
+    "配賦窓": "",
+    "楽観pp": "0.0",
+    "慎重pp": "0.0",
+    "要求設計の版差": "PT基準仕様 NK-PRO-002、SS 322",
+    "lineNumber": 295,
+    "改訂残pp": "0.0"
+  },
+  "run": "PG43056-msg009-current-managed-text-v1",
+  "startEvent": "PGPT-20261008-8777",
+  "outcome": "MSG-009 scoped 6686 tracked text files, 6464 current reads and 222 exact old Git blob matches, no encoding/CR/NUL failures. Scope intentionally omits other product trees and generated runtime files. No source edits or formal delta.",
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43056-msg009-current-managed-text-v1/manifest.json",
+    "sha256": "4bc21c52f39ffc301b7fa980234985a36d27ca267e6e4fbb0d6ee69e458f7b1c"
+  },
+  "nextEvidence": "G09 current runner: verify whether final tracked diff admits new untracked inputs created during the build, and exercise the established local synthetic runner fixture if a defect is confirmed. Native P018-08 stays on its authorization and real evidence hold.",
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T21:49:26+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 51,
+      "remainingPercent": 49,
+      "resetsAt": 1795879772,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "modelRequested": "gpt-6.2-sol",
+  "modelObserved": null,
+  "reasoningRequested": "high",
+  "reasoningObserved": null,
+  "speedRequested": "standard",
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 51,
+    "remainingPercent": 49,
+    "resetsAt": 1795879772,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "a745a5ba1d8e731a13a49ab5c6f2c3982abccc7d58d1e005e1ba9ba452c1b5b4",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-22T21:49:26+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 51,
+        "remainingPercent": 49,
+        "resetsAt": 1795879772,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": null,
+  "sameQuotaWindow": false,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-22T21:48:57.084016+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": true,
+  "quotaBefore": {
+    "usedPercent": 51,
+    "remainingPercent": 49,
+    "resetsAt": 1795879771,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null
+}
