@@ -1036,3 +1036,12 @@ PT-MED-RANGE-LONG-001、WBS-P009-04/2、SS333 §10.1–10.2。符号付き上限
 PT-MED-PORT009、WBS-P009-04/2、SS333 §11・UI237。配信portの直接Errorと次の枠解放。 [仕様](../../../evidence/01_PT/009_NK-MED-001/4091_Media配信直接Error時の枠解放単体仕様.md)。
 
 PT-MED-PORT010、WBS-P009-04/2、SS333 §11・UI237。応答開始後の書込みErrorと借用資源。 [仕様](../../../evidence/01_PT/009_NK-MED-001/4093_Media配信開始後の直接Error単体仕様.md)。
+
+## SSC-477 同期Handlerの型・登録（2026-11-22 JST）
+
+| Program / module | 実装と試験ID | 仕様・証拠 |
+|---|---|---|
+| NK-MSG-001 / API | `RequestContext` constructor／公開値／redaction、PT-JMS-HCTX001～004。 `LayoutHandler` の三抽象操作、PT-JMS-HCTX005 | SS311 §6.2、SS312、UI232、005/046–047・PG42724 |
+| NK-MSG-001 / API | `LayoutHandlerRegistry` constructor／find、PT-JMS-HREG001～006 | SS323 §3～6、UI233、005/048–049・PG42726 |
+
+主担当は現API内の同期dispatcherと同じWBS-P005-03。WBS-P005-02はWebとの参照で費用追加なし。PG42728に先行二manifestのWBS表記訂正、三実装の現byte、31固定型、11 Test IDと別ソースの各単一execを記録。現API起動・Listenerからの受信値引渡し、認証／Inbox、実handler各呼出の受入は継続。

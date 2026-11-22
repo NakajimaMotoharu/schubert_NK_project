@@ -1,0 +1,148 @@
+{
+  "run": "PG42728",
+  "source": "e8368d22c4da2ec841f008df793594d3be9066af",
+  "javaCore": "e8368d22c4da2ec841f008df793594d3be9066af",
+  "branch": "dev-foundation",
+  "canonicalMain": "ca41c03c0c6efff9a3a35b47b480491810bee6f9",
+  "terminalAtUTC": "2026-11-22T14:34:30.651157+00:00",
+  "actualExit": 0,
+  "wbs": "WBS-G13.07/2",
+  "scopeOwner": "WBS-P005-03",
+  "referencedWbsOnly": [
+    "WBS-P005-02",
+    "WBS-G13.04"
+  ],
+  "scopeOwnerBasis": {
+    "path": "documents/400_PGPT/470_PMO/481_PGPT詳細WBS.json",
+    "sha256": "4227e20a23b10ab8eecd2b69550dd7f58c79bf43a2f77b4c7c98ec943e83a2d9"
+  },
+  "ownerCorrection": {
+    "previouslyReferenced": "WBS-P005-02",
+    "appliesTo": [
+      "PG42724",
+      "PG42726"
+    ],
+    "reason": "P005-03 owns current API synchronous dispatch; P005-02 owns Web reply and has no additional cost or acceptance"
+  },
+  "independentScopes": [
+    {
+      "sourceFile": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/RequestContext.java",
+        "sha256": "9d3990bff0e3ba1d606daa7f51d430be2109cf4ef789a4cf5c53cb4573d1bc5b"
+      },
+      "measuredDesktopSource": "02ef1afa67e4d6950063aa034421dec478064f8a",
+      "spec": {
+        "path": "evidence/01_PT/005_NK-MSG-001/046_SSC477同期Handler型と受信情報の単体仕様書.md",
+        "sha256": "caed63d29a4c2d203abb63087704b1c9edfeb77181f85d1a60cf5b7f5d47e9c1"
+      },
+      "targetSymbols": [
+        "RequestContext",
+        "constructor",
+        "public accessors",
+        "toString"
+      ],
+      "testIds": [
+        "PT-JMS-HCTX001",
+        "PT-JMS-HCTX002",
+        "PT-JMS-HCTX003",
+        "PT-JMS-HCTX004"
+      ],
+      "proof": {
+        "path": "evidence/01_PT/005_NK-MSG-001/evidence/PG42724-ssc477-request-context-and-handler-v1/manifest.json",
+        "sha256": "42f599c8fe9a8939bdd5a229eb106947f0efad79ff6060945258c973b54c229e"
+      },
+      "module": "api",
+      "owner": "WBS-P005-03",
+      "costOwner": "WBS-P005-03",
+      "registrationStatus": "LOCAL_TYPE_CONTRACT_COMPLETE"
+    },
+    {
+      "sourceFile": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/LayoutHandler.java",
+        "sha256": "dd8e3808d58f2e2c053deed65684e898b376b786e4d6fde699fe2f88e4a3c104"
+      },
+      "measuredDesktopSource": "02ef1afa67e4d6950063aa034421dec478064f8a",
+      "spec": {
+        "path": "evidence/01_PT/005_NK-MSG-001/046_SSC477同期Handler型と受信情報の単体仕様書.md",
+        "sha256": "caed63d29a4c2d203abb63087704b1c9edfeb77181f85d1a60cf5b7f5d47e9c1"
+      },
+      "targetSymbols": [
+        "requestLayout",
+        "requestType",
+        "handle"
+      ],
+      "testIds": [
+        "PT-JMS-HCTX005"
+      ],
+      "proof": {
+        "path": "evidence/01_PT/005_NK-MSG-001/evidence/PG42724-ssc477-request-context-and-handler-v1/manifest.json",
+        "sha256": "42f599c8fe9a8939bdd5a229eb106947f0efad79ff6060945258c973b54c229e"
+      },
+      "module": "api",
+      "owner": "WBS-P005-03",
+      "costOwner": "WBS-P005-03",
+      "registrationStatus": "LOCAL_ABSTRACT_CONTRACT_COMPLETE"
+    },
+    {
+      "sourceFile": {
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/LayoutHandlerRegistry.java",
+        "sha256": "05a585f144f1a2cc95242f65efbcd52dce5497f2da7525729847e973415035d6"
+      },
+      "measuredDesktopSource": "e8368d22c4da2ec841f008df793594d3be9066af",
+      "spec": {
+        "path": "evidence/01_PT/005_NK-MSG-001/048_SSC477型付き同期登録の単体テスト仕様書.md",
+        "sha256": "3be487d5b724cd75832349813efe68fe8b43577623d0d2ce9eb1797b8cd409bc"
+      },
+      "targetSymbols": [
+        "constructor",
+        "find"
+      ],
+      "testIds": [
+        "PT-JMS-HREG001",
+        "PT-JMS-HREG002",
+        "PT-JMS-HREG003",
+        "PT-JMS-HREG004",
+        "PT-JMS-HREG005",
+        "PT-JMS-HREG006"
+      ],
+      "proof": {
+        "path": "evidence/01_PT/005_NK-MSG-001/evidence/PG42726-ssc477-typed-layout-handler-registry-v1/manifest.json",
+        "sha256": "e4ac8ba7dee14881be8f38b7843a2bfb8a95f64af4f1c83549b56b9d0ac2293b"
+      },
+      "module": "api",
+      "owner": "WBS-P005-03",
+      "costOwner": "WBS-P005-03",
+      "registrationStatus": "LOCAL_TYPED_REGISTRATION_COMPLETE"
+    }
+  ],
+  "specs": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md",
+      "sha256": "8ed58c47adb5fa90afcd1dfa437edeb9c990635126cadd79c7cbc90bf4988808"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "sha256": "9c64f99f058d676723353e8bd99eb6d070bdb062d98ee7f4a0fc4e4ae942f6d3"
+    }
+  ],
+  "trackTests": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/dispatch/RequestContextContractTest.java",
+      "sha256": "33e633cb3eb7397271bab29fb6b01f5400e13e062f7eef79c9e543aad7d3304c"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/dispatch/LayoutHandlerRegistryTest.java",
+      "sha256": "a88a4af250c82787c458073caab370f4d048c3b67d0846c4acff6281e5b71ce5"
+    }
+  ],
+  "historicalMaintestedNotCombined": true,
+  "productionAddedPaths": 3,
+  "currentProgramTestIdBindings": 11,
+  "oldApprovalFrozen": true,
+  "formalAcceptanceId": null,
+  "formalAcceptanceDelta": 0,
+  "remainingBindings": 31,
+  "ownedPathWbsCountsUnchanged": true,
+  "whole451": false,
+  "ssc": "SSC-477"
+}

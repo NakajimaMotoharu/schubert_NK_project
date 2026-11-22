@@ -1,0 +1,124 @@
+{
+  "run": "PG42726",
+  "source": "e8368d22c4da2ec841f008df793594d3be9066af",
+  "javaCore": "e8368d22c4da2ec841f008df793594d3be9066af",
+  "branch": "dev-foundation",
+  "wbs": [
+    "WBS-G13.04",
+    "WBS-P005-02"
+  ],
+  "terminalAtUTC": "2026-11-22T14:33:03.138640+00:00",
+  "actualExit": 0,
+  "checkedIndependentSynchronousLayouts": 31,
+  "sourceInput": {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/LayoutHandlerRegistry.java",
+    "sha256": "05a585f144f1a2cc95242f65efbcd52dce5497f2da7525729847e973415035d6"
+  },
+  "fixture": {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/dispatch/LayoutHandlerRegistryTest.java",
+    "sha256": "a88a4af250c82787c458073caab370f4d048c3b67d0846c4acff6281e5b71ce5"
+  },
+  "spec": {
+    "path": "evidence/01_PT/005_NK-MSG-001/048_SSC477型付き同期登録の単体テスト仕様書.md",
+    "sha256": "3be487d5b724cd75832349813efe68fe8b43577623d0d2ce9eb1797b8cd409bc"
+  },
+  "approvedMain": "ca41c03c0c6efff9a3a35b47b480491810bee6f9",
+  "oldPhysicalContextDualTypes": {
+    "path": "evidence/01_PT/005_NK-MSG-001/evidence/PG42724-ssc477-request-context-and-handler-v1/manifest.json",
+    "sha256": "42f599c8fe9a8939bdd5a229eb106947f0efad79ff6060945258c973b54c229e"
+  },
+  "originalSourceMappings": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42546-g1304-api-31-method-level-source-bindings-v1/manifest.json",
+    "sha256": "84288b932fd33d387042021265009a73f43c23e6059550f11d8a89f1758023b5"
+  },
+  "localRun": {
+    "path": "../pgpt-runs/PG379/PG42726-layout-handler-registry-current-v1/terminal.json",
+    "sha256": "0424c8375e2778eb53e3b413cc5319f4e96282ea59d7bff204182c883785e7e7"
+  },
+  "caseToMethod": {
+    "PT-JMS-HREG001": "registersAllApprovedRequestTypesExactlyOnce",
+    "PT-JMS-HREG002": "preservesRegisteredHandlersAfterCallerListChanges",
+    "PT-JMS-HREG003": "rejectsIncompleteAndDuplicateRegistration",
+    "PT-JMS-HREG004": "rejectsIncorrectTypeForAnApprovedLayout",
+    "PT-JMS-HREG005": "rejectsResponsesInternalEventsAndUnknownLayouts",
+    "PT-JMS-HREG006": "rejectsNullEntriesAndNullMetadataExplicitly"
+  },
+  "junitXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42726-layout-handler-registry-current-v1/junit/TEST-junit-jupiter.xml",
+    "sha256": "e9a86877d0407520ae850f893b31b051cc040de9f3b039a8a31d52239c82751e"
+  },
+  "sameRunExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42726-layout-handler-registry-current-v1/ordinary.exec",
+    "sha256": "f5ace2cb5de8ec0f8a38bcb56df07100a952086fb5994c3809d630edac8174ef"
+  },
+  "raw": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42726-layout-handler-registry-current-v1/unfilteredCoverage.stdout",
+    "sha256": "dca395adb49693a78aa5de8f0c5a467fe3b817694487690f10598e74fd0ed99e"
+  },
+  "crc": "9ba56b346daebe74",
+  "ownCounters": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 117
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 12
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 26
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 11
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 5
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "passed": 6,
+  "failed": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "checkstyle": 0,
+  "nullaway": 0,
+  "spotbugsProduct": 0,
+  "spotbugsFixtureIntentional": [
+    {
+      "owner": "dev.codex.schubert.nk.api.dispatch.LayoutHandlerRegistryTest",
+      "method": "lambda$rejectsNullEntriesAndNullMetadataExplicitly$4",
+      "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+      "disposition": "explicit null expected to throw"
+    },
+    {
+      "owner": "dev.codex.schubert.nk.api.dispatch.LayoutHandlerRegistryTest",
+      "method": "lambda$rejectsNullEntriesAndNullMetadataExplicitly$0",
+      "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "disposition": "explicit null expected to throw"
+    }
+  ],
+  "pmdRaw": [
+    {
+      "path": "LayoutHandlerRegistry.java",
+      "rule": "UseConcurrentHashMap",
+      "line": "34"
+    }
+  ],
+  "pmdApplicable": 0,
+  "pmdDisposition": "The temporary HashMap is confined to the constructor; no caller or registered handler can obtain it. Only Map.copyOf is stored in the final field. Changing to ConcurrentHashMap would not implement a product requirement.",
+  "requestHandlerInvocationsDuringRegistration": 0,
+  "openRuntimeDispatchBindings": 31,
+  "qa056TypesReadOrCompiled": 0,
+  "backendOperations": 0,
+  "formalAcceptanceId": null,
+  "whole451": false,
+  "bug": "BUG-3574",
+  "ssc": "SSC-477",
+  "ykt": "YKT-2810"
+}
