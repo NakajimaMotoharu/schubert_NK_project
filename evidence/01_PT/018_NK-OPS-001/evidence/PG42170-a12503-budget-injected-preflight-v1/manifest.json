@@ -1,0 +1,85 @@
+{
+  "run": "PG42170",
+  "source": "388b0380eb783a0639271bce06b95b65a166cd2d",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "A1-25.03",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T05:24:58.986167+00:00",
+  "namedCase": "PT-OPS-MBUDGET002",
+  "method": "mbudget002SignedWrapAndBackwardClockDoNotRestartBudget",
+  "approvedSpec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/244_NK-OPS-001_親単調30分budget単体テスト仕様書.md",
+    "sha256": "3f2af0148d6d95a4e59f220387b7538c7a058a7c761393d9fb93d79c889c7f1c"
+  },
+  "earlier": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG468-caddy-reload-full/manifest.json",
+      "sha256": "648020121ed2dde426f78b91fd2a79a25f2d069200c3dbb138d5af0185adc4a9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG468-caddy-reload-full/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MorningParentBudgetTest.xml",
+      "sha256": "a49786a07eda594b99ab7d42231be9ddb912a61d20e62bf1bef67b8b24c3bc3c"
+    }
+  ],
+  "oldProductAndTestSourceMismatch": true,
+  "nativeRelatedSiblingCasesExcluded": [
+    "PT-OPS-MBUDGET001",
+    "nativeBorrowNeverRestartsParentDeadline"
+  ],
+  "currentInput": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningParentBudget.java",
+      "sha256": "f59b7bd1461b04da66e7726d414a2128b6739e54f8e10d3e7e33f813d8e654eb"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MorningParentBudgetTest.java",
+      "sha256": "9d33840ef9be792cbf4c52a684269d0488b96804b9f55f7c963b47ffa0d07f4a"
+    }
+  ],
+  "currentJars": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41074-f02-current-alert-batch-maven-v1/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+      "sha256": "276c45bf138b351cb0a0a6bc46dc61881fabb1b17b2b09347b4feea4cfea76a6"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40802-f02-current-four-package-v1/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+      "sha256": "e5be03a72a9cca548f68fc1ca7ee84ced8980dbea72162f58772215227be3ec0"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+      "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    }
+  ],
+  "candidatePhysical": {
+    "dev/codex/schubert/nk/batch/platform/MorningParentBudget.class": "dbd96262b775acfbf452fa7d6dff368821f1fc8e0cbb87afcef0fa573da4622b",
+    "dev/codex/schubert/nk/batch/platform/MorningParentBudget$Clock.class": "e74252ef43f9c93a12541e4815fb571847b1fa93a76017f8819ffa421e1ef9db"
+  },
+  "withinPureSelectedMethod": true,
+  "whereCondition": "Local AtomicLong supplier only; no factory and no borrow.",
+  "compiledTest": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42170-mbudget-injected-current-v1/classes/dev/codex/schubert/nk/batch/platform/MorningParentBudgetTest.class",
+    "sha256": "a3a781daf66d47da2ba5fdd1090c7e57e711ed18561c5b7865598d2b600a8183"
+  },
+  "compile": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+    "--release",
+    "25",
+    "-g",
+    "-proc:none",
+    "-Xlint:all",
+    "-Werror",
+    "-cp",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41074-f02-current-alert-batch-maven-v1/schubert-nk-batch-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/PG40802-f02-current-four-package-v1/schubert-nk-storage-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+    "-d",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42170-mbudget-injected-current-v1/classes",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MorningParentBudgetTest.java"
+  ],
+  "initialMetadataFilesTypeCorrected": true,
+  "ordinaryTestsNew": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
