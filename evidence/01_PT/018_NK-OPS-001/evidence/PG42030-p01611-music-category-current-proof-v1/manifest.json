@@ -1,0 +1,174 @@
+{
+  "run": "PG42030",
+  "source": "f61483cb8e70dc8059c6936507555b329e225f2e",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T03:39:12.221176+00:00",
+  "wbs": [
+    "WBS-P016-11/2",
+    "WBS-F03/2-2-b cited"
+  ],
+  "oldTestId": "PT-WEB-SCR011-COUNT-001",
+  "reusedCase": {
+    "classname": "dev.codex.schubert.nk.web.view.MusicCategoryCountBoundaryTest",
+    "name": "rejectsDeclaredZeroWhenOneCategoryRecordIsPresent()"
+  },
+  "independentExpected": "fixed total 0, independent synthetic one-record list, IllegalArgumentException",
+  "requirement": "SCR011 / FUN-007 / IF-013",
+  "design": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+      "sha256": "2b4e1ebb15b348b1f25d1502130d6a4a3607893868d7ea5e57d231ec7f3e58ef"
+    },
+    {
+      "path": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+      "sha256": "ef3526f0be56007b81318e442b064db936a696db6a52a4fc8ffbc45b87acff6f"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/4940_SCR011カテゴリ件数不足側の単体仕様.md",
+      "sha256": "31d700fa9fd4a44269323173d6eef664ee3238d7aebf5c143537072bed5c35cc"
+    }
+  ],
+  "original": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41178-scr011-category-count-underclaim-v1/manifest.json",
+      "sha256": "da5ebd207640695ca871e8d31d8a4d089c1d9bfdf4d81ddf05cfdcab7214bec8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38002-hierarchy-detail-music-current32-unit-v1/manifest.json",
+      "sha256": "104a99eced78392ccc1b182137ea0e5e4cb4a78599aaa118c330ef4905f1ee86"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41200-f03-media-port-fixture-typed-green-v1/manifest.json",
+      "sha256": "0dd72d694ad86e2ef977088fedce26682e099f369970557d58b42f5d038cd281"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41526-protocol-qa054-canonical-rules-v1/manifest.json",
+      "sha256": "8a89feee4bfa2d6b08d3514ff44ab15eaa871f409d8cf152790570e363b21edb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41178-scr011-category-count-underclaim-v1/case.json",
+      "sha256": "24c390779e84ffa9deff2657b1610fc3bc0330a4988feee3219d1772221abeab"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41178-scr011-category-count-underclaim-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "8c57d6d2d99d2f15b34d728ae51bc0cefc49e2a80221b258f9cf73910b6093b0"
+    }
+  ],
+  "currentOnlyCompiled": {
+    "main": {
+      "dev/codex/schubert/nk/web/session/SessionPrincipal.class": "a8c12962f9ec1d7525ec643dedb3461529a6be84d9ccdf6d5736596c18cd0b49",
+      "dev/codex/schubert/nk/web/view/MusicCategoryViewModel.class": "b1596f90b47cf88ec7127f67bfc6adca89d1d64e40a8038b45b9f9a7779867f0",
+      "dev/codex/schubert/nk/web/view/MusicCategoryViewModel$Card.class": "ee2afd3ef66b6b9030adae035f901ae1b3029e96c5ac0fb2ee49c1ead75580e6",
+      "dev/codex/schubert/nk/web/view/TopBarViewModel.class": "ccd4215b0fc53248d9c7ae6f930ad59fa3e108af86993e91cfd792c2761579a8"
+    },
+    "test": {
+      "dev/codex/schubert/nk/web/view/MusicCategoryCountBoundaryTest.class": "4f04b2586eb40445f878abae2cfaa61bcc0c646c34735db3ab2f12229ae572fe"
+    }
+  },
+  "compile": {
+    "main": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+      "--release",
+      "25",
+      "-g",
+      "-proc:none",
+      "-implicit:none",
+      "-encoding",
+      "UTF-8",
+      "-Xlint:all",
+      "-Werror",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41526-protocol-qa054-canonical-rules-v1/schubert-nk-protocol-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/pg37962-log-view-safe-dependencies-v1/qualified-web-safe18.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-web/7.0.9/spring-web-7.0.9.jar",
+      "-d",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42030-p01611-music-category-current-proof-v1/main",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/MusicCategoryViewModel.java",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/TopBarViewModel.java",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionPrincipal.java"
+    ],
+    "test": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+      "--release",
+      "25",
+      "-g",
+      "-proc:none",
+      "-implicit:none",
+      "-encoding",
+      "UTF-8",
+      "-Xlint:all",
+      "-Werror",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42030-p01611-music-category-current-proof-v1/main:/home/mini/codex/project1/work/pgpt-runs/PG379/PG41526-protocol-qa054-canonical-rules-v1/schubert-nk-protocol-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/pg37962-log-view-safe-dependencies-v1/qualified-web-safe18.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-web/7.0.9/spring-web-7.0.9.jar",
+      "-d",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42030-p01611-music-category-current-proof-v1/test",
+      "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/MusicCategoryCountBoundaryTest.java"
+    ]
+  },
+  "terminals": {
+    "main": {
+      "exit": 0,
+      "diagnostics": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42030-p01611-music-category-current-proof-v1/main.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "test": {
+      "exit": 0,
+      "diagnostics": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42030-p01611-music-category-current-proof-v1/test.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "currentProtocolMatchingPhysical": {
+    "dev/codex/schubert/nk/protocol/header/AuthenticationContext.class": "6fbe0a9f9e9bc939e5545015608690b5af86b8368cf42e07771999ebd9e95793",
+    "dev/codex/schubert/nk/protocol/layout/media/MusicCategoryResponseData.class": "384c20dc2d73583e372090a02d1a75064cd4fb37b387b044bca50a22fa05d240",
+    "dev/codex/schubert/nk/protocol/layout/media/MusicCategoryRecord.class": "d5aeefc22e264550fb5352742c9242d0e4c72ca0a71ec0bcaf9420e089b774f0",
+    "dev/codex/schubert/nk/protocol/layout/semantic/UserRole.class": "97544c0f619535bd68981e891048ac289edda544f03dddbab9110c70aaa69bae",
+    "dev/codex/schubert/nk/protocol/layout/PayloadData.class": "0c654933dd8e64834f13a8c1f4b51b3c97de8f73e29469c2d3e811f1ff97a8ac",
+    "dev/codex/schubert/nk/protocol/layout/PayloadRecord.class": "b765c519a12149eec186ef06b71f6660ef222f20850ffeed94a7a3712ad5aafa",
+    "dev/codex/schubert/nk/protocol/layout/FieldValueSet.class": "27f40d7515e63c7f0140bec7aab641df0186eb0423602348781c64e46398a387",
+    "dev/codex/schubert/nk/protocol/layout/TypedFieldValues.class": "785ca4329892a953775cd737b79ed9bab47b892ce25f9c10ec193697bcfc8da7",
+    "dev/codex/schubert/nk/protocol/layout/LayoutId.class": "40643fc30454fbb577d65115f940766673f58ff1c074eea884973f7c46158384"
+  },
+  "currentWholeApplicationJarQualification": false,
+  "newProductPtExecutions": 0,
+  "actualHttpOrDbOrLiveSessionActions": 0,
+  "originalSingleSelectedProbes": {
+    "crc64": "43f7f567bd107c91",
+    "probeCount": 27,
+    "hitProbeIds": [
+      3,
+      4,
+      5,
+      7,
+      8
+    ],
+    "missedProbeIds": [
+      0,
+      1,
+      2,
+      6,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26
+    ]
+  },
+  "whole451": false,
+  "formalAcceptanceId": null
+}

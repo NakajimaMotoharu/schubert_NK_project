@@ -1,0 +1,129 @@
+{
+  "eventId": "PGPT-20261008-7888",
+  "workCategory": "CONTRACT_AUDIT",
+  "source": "f61483cb8e70dc8059c6936507555b329e225f2e",
+  "productionCoreMain": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+  "managementWorkIds": [
+    "WBS-P016-13/2"
+  ],
+  "planRow": {
+    "ID": "WBS-P016-13/2",
+    "元行": "WBS-P016-13/2",
+    "費目": "B",
+    "主担当": "WBS-P016-13",
+    "状態": "計画",
+    "作業": "SCR013 Music曲一覧・pair/track・media／同source証拠による受入判定",
+    "残pp": "0.39",
+    "着手": "設計313・当該source・作業所有・既存成果を照合。必要な局所成果を費目Aで一度だけ作成し、受入候補のTestIDと独立期待値を確定。着手依存、当該A成果、終了依存と未解決条件を確認",
+    "終了証拠": "SCR013 Music曲一覧・pair/track・media：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。 固有要求：FUN-007",
+    "補正根拠": "登録済み後段単価。追加製造はA、実経路はD、比較はE",
+    "契約HOLD": "",
+    "対象": "",
+    "範囲": "FUN-007",
+    "保存証跡": "個別criteria＋同sourceのTestID・独立期待値・実結果・451適用結果",
+    "順次": "False",
+    "配賦窓": "14",
+    "楽観pp": "0.163",
+    "慎重pp": "0.78",
+    "要求設計の版差": "PT基準仕様 NK-WEB-002、SS 313",
+    "lineNumber": 494,
+    "改訂残pp": "0.39"
+  },
+  "run": "PG42034",
+  "startEvent": "PGPT-20261008-7887",
+  "outcome": {
+    "area": "SCR013 track count 1 declared / 0 actual",
+    "testId": "PT-WEB-SCR013-COUNT-001",
+    "qualifiedPriorCases": 1,
+    "qualifiedWebPhysical": 3,
+    "newNormalTests": 0,
+    "table": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42036-f03-storage-music-display-six-table-v1/manifest.json",
+      "sha256": "a57dc67755ce3a9130307f03e6e7c898966f921e451c85edd291c2be0734df05"
+    },
+    "remaining": [
+      "real SCR013 HTTP/Browser and media",
+      "approved regular Web JAR",
+      "451 and ending dependencies"
+    ]
+  },
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42034-p01613-music-track-current-proof-v1/manifest.json",
+    "sha256": "b9a386f5c5c7d182cd9a78827ad2b8d0c8c1195a87edb18e33f00752fbdfe117"
+  },
+  "nextEvidence": {
+    "wbs": "WBS-P016-09/2",
+    "target": "SCR009 AnimationListCountBoundaryTest",
+    "first": "アニメ件数の合成境界、元終端と当型"
+  },
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T03:42:26+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 14,
+      "remainingPercent": 86,
+      "resetsAt": 1795879772,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "modelRequested": "gpt-6.2-sol",
+  "modelObserved": null,
+  "reasoningRequested": "high",
+  "reasoningObserved": null,
+  "speedRequested": "standard",
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 14,
+    "remainingPercent": 86,
+    "resetsAt": 1795879772,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "5648a3427a8649544c1fceaeb4d00c9b6e394d8b830240bc19c724b4c5dd528a",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-22T03:42:26+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 14,
+        "remainingPercent": 86,
+        "resetsAt": 1795879772,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": 0,
+  "sameQuotaWindow": true,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-22T03:41:01.016226+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": false,
+  "quotaBefore": {
+    "usedPercent": 14,
+    "remainingPercent": 86,
+    "resetsAt": 1795879772,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null
+}
