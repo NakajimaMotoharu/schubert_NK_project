@@ -1,0 +1,116 @@
+{
+  "eventId": "PGPT-20261008-8710",
+  "workCategory": "REVIEW",
+  "source": "276339f7fac4f630793cd755d9a23d16991eaddb",
+  "productionCoreMain": "e8368d22c4da2ec841f008df793594d3be9066af",
+  "canonicalDesignSource": "ca41c03c0c6efff9a3a35b47b480491810bee6f9",
+  "managementWorkIds": [
+    "WBS-P019-03.03/2"
+  ],
+  "planRow": {
+    "ID": "WBS-P019-03.03/2",
+    "元行": "WBS-P019-03.03/2",
+    "費目": "B",
+    "主担当": "WBS-P019-03.03",
+    "状態": "計画",
+    "作業": "欠落/重複/破損/途中失敗の独立後条件／同source証拠による受入判定",
+    "残pp": "0.52",
+    "着手": "設計343・当該source・作業所有・既存成果を照合。必要な局所成果を費目Aで一度だけ作成し、受入候補のTestIDと独立期待値を確定。着手依存、当該A成果、終了依存と未解決条件を確認。P019-03のCOPY/SDKを扱う範囲は当該owner確認後",
+    "終了証拠": "欠落/重複/破損/途中失敗の独立後条件の対象別完了記録を確認。該当するSSC417の24試験は未実行。SDK/driver・独立fixture・同sourceの結果を回収。既存1050件を転記しない",
+    "補正根拠": "登録済み後段単価。追加製造はA、実経路はD、比較はE",
+    "契約HOLD": "",
+    "対象": "P019-03親のSSC417・SDK/24未実行。子への一律配賦をせず対象TestIDの帰属を確認",
+    "範囲": "SCP-005、MIG-DAT-003、MIG-DAT-004、MIG-DAT-005、MIG-DAT-006、MIG-003、MIG-004、MIG-005",
+    "保存証跡": "個別criteria＋同sourceのTestID・独立期待値・実結果・451適用結果",
+    "順次": "False",
+    "配賦窓": "5",
+    "楽観pp": "0.195",
+    "慎重pp": "0.975",
+    "要求設計の版差": "PT基準仕様 NK-MIG-001、SS 343",
+    "lineNumber": 771,
+    "改訂残pp": "0.52"
+  },
+  "run": "PG42988",
+  "startEvent": "PGPT-20261008-8709",
+  "outcome": {
+    "technical": "元87は四型の全試験ではなく元UTC範囲。現四型のPG42836/40/54の26+22+51=99ケースを入力・実使用物理で照合、各原exec非合算。再実行0。現実データ・SDK24/DB保留",
+    "formal": 0
+  },
+  "proof": {
+    "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG42988-four-migration-verifier-evidence-current-v1/manifest.json",
+    "sha256": "b2eb95a46db4dffc3c883d24b4c234871afe3a53cc8e72ffd1df666da026d703"
+  },
+  "nextEvidence": {
+    "wbs": "WBS-P020-01.03/2",
+    "objective": "CHR metadataのreview evidence存在判定の不備を登録し独立合成チェックで是正。Current blob未変更"
+  },
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T20:12:45+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 49,
+      "remainingPercent": 51,
+      "resetsAt": 1795879772,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "modelRequested": "gpt-6.2-sol",
+  "modelObserved": null,
+  "reasoningRequested": "high",
+  "reasoningObserved": null,
+  "speedRequested": "standard",
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 49,
+    "remainingPercent": 51,
+    "resetsAt": 1795879772,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "d173ba5f89de9debf5afb7601de9f3fe1c77c90628cd1a0687fe1a6288edee08",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-22T20:12:45+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 49,
+        "remainingPercent": 51,
+        "resetsAt": 1795879772,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": null,
+  "sameQuotaWindow": false,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-22T20:11:19.149749+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": true,
+  "quotaBefore": {
+    "usedPercent": 49,
+    "remainingPercent": 51,
+    "resetsAt": 1795879771,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null
+}
