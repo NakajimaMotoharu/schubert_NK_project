@@ -1,0 +1,275 @@
+{
+  "run": "PG42924",
+  "wbs": "WBS-F03/2-2-b",
+  "sourceBeforeTestChange": "f7ff078a19cf28f1dbd8c43eb8b7490d521b5f54",
+  "core": "e8368d22c4da2ec841f008df793594d3be9066af",
+  "startedAtUTC": "2026-11-22T18:49:03.730993+00:00",
+  "terminalAtUTC": "2026-11-22T18:49:08.917510+00:00",
+  "actualExit": 0,
+  "counts": {
+    "tests": 3,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "caseNames": [
+    [
+      "dev.codex.schubert.nk.api.storage.TransferContentVerifierTest",
+      "w06ActualOne201And10000RecordFilesMatchIndependentLengthAndHash()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.storage.TransferContentVerifierTest",
+      "w06NullEarlyEofZeroExtraBytesIoClosedAndAmbiguousEofFailWithoutClosing()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.storage.TransferContentVerifierTest",
+      "w06ThreeByteReadsStayBoundedAndEveryDigestByteDifferenceIsRejected()"
+    ]
+  ],
+  "inputs": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/TransferContentVerifier.java",
+      "sha256": "ddda7066f611cb0d57f408e2ee9d654c09170e9897c1b887e7f6862fd7487d20"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/package-info.java",
+      "sha256": "81360fb14c321eed795fb7fa2d68b5afabca317e44f41ab5b5ef9bf8844c3532"
+    }
+  ],
+  "testInputs": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferContentVerifierTest.java",
+      "sha256": "c3d0d849079e2a16a01a6d7518ba3c670b73c2102ddf2b18a69aa9f8b50ba431"
+    }
+  ],
+  "absenceOfPrior": 1,
+  "priorReflectionReplays": 0,
+  "staticConformance": {
+    "storage/TransferContentVerifier": {
+      "declaration": "private dev.codex.schubert.nk.api.storage.TransferContentVerifier();",
+      "staticMembers": 1,
+      "physical": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42924-api-transfer-content-without-private-reflection-v1/target/classes/dev/codex/schubert/nk/api/storage/TransferContentVerifier.class",
+        "sha256": "474fc141ae09696af58b55399d90578201f429b9445ff06bf7a0e2b95ad9f9ff"
+      }
+    }
+  },
+  "originalReceipts": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38196-borrowed-file-whole7-unit-v1/manifest.json",
+      "sha256": "0ae5d5b5f2dd3686108576f9ee00c640a51e439490403daceb059f565c384693"
+    }
+  ],
+  "qualifiedAuxiliary": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42924-api-transfer-content-without-private-reflection-v1/qualified-four-safe-types.jar",
+    "sha256": "8e3962832b8031e2d2d40f9377c7ba67466139dee8f206de27debd8b3f868247"
+  },
+  "usedAuxiliaryTypes": {
+    "dev/codex/schubert/nk/protocol/file/LargeResultContent.class": "5fb69f98ac30029c05a18babc8d8bf72b5ea2ca7a58e2be0b7acfcecd4c932d9",
+    "dev/codex/schubert/nk/protocol/file/LargeResultDescriptor.class": "7da565712e5596c704a620e330254812eb48fec3c9c5765a586b05b78f62ad29",
+    "dev/codex/schubert/nk/storage/StorageIoException.class": "85f86d702a139f126afdd72ca8e221583db824f159351ecd9f07b15fcc569c88",
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason.class": "a113bd839666ee3a4038dd3703af0cfb772282278cc6fbfe1e3cccf98286ffec"
+  },
+  "ownedTempFinalEntries": 0,
+  "physical": {
+    "dev/codex/schubert/nk/api/storage/TransferContentVerifier.class": "474fc141ae09696af58b55399d90578201f429b9445ff06bf7a0e2b95ad9f9ff",
+    "dev/codex/schubert/nk/api/storage/package-info.class": "89b0a4ca35e152318e8932bbc1b7cf24cefad2bcc7f717911a7b9854f90b6e24"
+  },
+  "rawCoverage": [
+    "CLASS\tdev/codex/schubert/nk/api/storage/TransferContentVerifier\te4eb4bd8ed77ed86\ttrue\t23\t48\tINSTRUCTION:7:78\tBRANCH:0:10\tLINE:2:20\tCOMPLEXITY:1:6\tMETHOD:1:1\tCLASS:0:1",
+    "METHOD\tdev/codex/schubert/nk/api/storage/TransferContentVerifier\t<init>\t()V\t2\tINSTRUCTION:7:0\tBRANCH:0:0\tLINE:2:0\tCOMPLEXITY:1:0\tMETHOD:1:0\tCLASS:0:0",
+    "DEFICIT\tdev/codex/schubert/nk/api/storage/TransferContentVerifier\t<init>\t()V\t18\tINSTRUCTION:2:0\tBRANCH:0:0",
+    "DEFICIT\tdev/codex/schubert/nk/api/storage/TransferContentVerifier\t<init>\t()V\t19\tINSTRUCTION:5:0\tBRANCH:0:0",
+    "METHOD\tdev/codex/schubert/nk/api/storage/TransferContentVerifier\tverify\t(Ljava/nio/channels/ReadableByteChannel;Ldev/codex/schubert/nk/protocol/file/LargeResultContent;)V\t8\tINSTRUCTION:0:78\tBRANCH:0:10\tLINE:0:20\tCOMPLEXITY:0:6\tMETHOD:0:1\tCLASS:0:0"
+  ],
+  "pom": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42924-api-transfer-content-without-private-reflection-v1/pom.xml",
+    "sha256": "10719396bb9eda180c1b7fc7a631abf597131d5a0e9cc8a1cd6a9c579224e7bc"
+  },
+  "junitXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42924-api-transfer-content-without-private-reflection-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "748d39b15ecd20b8f3137bddb40ea1dc0ac516143d3ef7a775f3885df5879533"
+  },
+  "exec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42924-api-transfer-content-without-private-reflection-v1/unit.exec",
+    "sha256": "c31d7157994eeecfe4c93d9a6fb08814f413b57f4e7921253e36a712416ac552"
+  },
+  "stages": {
+    "compileNullaway": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-N",
+        "-X",
+        "-f",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42924-api-transfer-content-without-private-reflection-v1/pom.xml",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "compile"
+      ],
+      "exit": 0,
+      "start": "2026-11-22T18:49:03.755472+00:00",
+      "terminal": "2026-11-22T18:49:06.157658+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42924-api-transfer-content-without-private-reflection-v1/compileNullaway.stdout",
+        "sha256": "b12dd89aaf153b33050e0050704134bb9949425afafba08e0e2d6dd377369bd9"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42924-api-transfer-content-without-private-reflection-v1/compileNullaway.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "javap-TransferContentVerifier": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-p",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42924-api-transfer-content-without-private-reflection-v1/target/classes/dev/codex/schubert/nk/api/storage/TransferContentVerifier.class"
+      ],
+      "exit": 0,
+      "start": "2026-11-22T18:49:06.158095+00:00",
+      "terminal": "2026-11-22T18:49:06.303979+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42924-api-transfer-content-without-private-reflection-v1/javap-TransferContentVerifier.stdout",
+        "sha256": "fbc82af586060b08339a39f73991a31f22eba2fdd4b5719c8674725284c186aa"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42924-api-transfer-content-without-private-reflection-v1/javap-TransferContentVerifier.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "fixtures": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-implicit:none",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42924-api-transfer-content-without-private-reflection-v1/target/classes:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/PG42924-api-transfer-content-without-private-reflection-v1/qualified-four-safe-types.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42924-api-transfer-content-without-private-reflection-v1/test",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferContentVerifierTest.java"
+      ],
+      "exit": 0,
+      "start": "2026-11-22T18:49:06.304343+00:00",
+      "terminal": "2026-11-22T18:49:06.947795+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42924-api-transfer-content-without-private-reflection-v1/fixtures.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42924-api-transfer-content-without-private-reflection-v1/fixtures.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "junit": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Duser.timezone=Asia/Tokyo",
+        "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/PG42924-api-transfer-content-without-private-reflection-v1/owned-temp",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/PG42924-api-transfer-content-without-private-reflection-v1/unit.exec,append=false,sessionid=PG42924-current",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42924-api-transfer-content-without-private-reflection-v1/test:/home/mini/codex/project1/work/pgpt-runs/PG379/PG42924-api-transfer-content-without-private-reflection-v1/target/classes:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/PG42924-api-transfer-content-without-private-reflection-v1/qualified-four-safe-types.jar",
+        "org.junit.platform.console.ConsoleLauncher",
+        "execute",
+        "--disable-ansi-colors",
+        "--fail-if-no-tests",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42924-api-transfer-content-without-private-reflection-v1/xml",
+        "--select-class",
+        "dev.codex.schubert.nk.api.storage.TransferContentVerifierTest"
+      ],
+      "exit": 0,
+      "start": "2026-11-22T18:49:06.948061+00:00",
+      "terminal": "2026-11-22T18:49:08.193125+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42924-api-transfer-content-without-private-reflection-v1/junit.stdout",
+        "sha256": "f01a3ad934d2be22c7a0ca8f6716106badad073cfd4082e279c5ba2b5a62bf68"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42924-api-transfer-content-without-private-reflection-v1/junit.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "rawCompile": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42924-api-transfer-content-without-private-reflection-v1/meter",
+        "tools/quality/jacoco/UnfilteredCodeMeasurement.java"
+      ],
+      "exit": 0,
+      "start": "2026-11-22T18:49:08.198055+00:00",
+      "terminal": "2026-11-22T18:49:08.818688+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42924-api-transfer-content-without-private-reflection-v1/rawCompile.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42924-api-transfer-content-without-private-reflection-v1/rawCompile.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "unfiltered": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42924-api-transfer-content-without-private-reflection-v1/meter:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+        "--strict-original-exec",
+        "--line-deficits",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42924-api-transfer-content-without-private-reflection-v1/unit.exec",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42924-api-transfer-content-without-private-reflection-v1/target/classes/dev/codex/schubert/nk/api/storage/TransferContentVerifier.class"
+      ],
+      "exit": 0,
+      "start": "2026-11-22T18:49:08.818878+00:00",
+      "terminal": "2026-11-22T18:49:08.915384+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42924-api-transfer-content-without-private-reflection-v1/unfiltered.stdout",
+        "sha256": "d558bfd39810bf68e8baf00e007c8661866a8c4f9dfdef84b1034323f653ae77"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42924-api-transfer-content-without-private-reflection-v1/unfiltered.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "nullAwayDiagnostic": 0,
+  "actualExternalOps": 0,
+  "coverageStaticChecksExcludedFromTestTally": true,
+  "realApiOrDB": 0,
+  "softwareMainEdits": 0,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "testSourceCommit": "91a5c6fc8a74102c1cb375d9ef30ef3815f73758",
+  "originalTerminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42924-api-transfer-content-without-private-reflection-v1/terminal.json",
+    "sha256": "97cfac180e2c9c58150e9f1d9b896e7494720ed79e92cc579d6855512956c7c0"
+  },
+  "publishedFiles": {
+    "TEST-junit-jupiter.xml": {
+      "sha256": "cc1a280517061bbeaed8db1ab4055f4be5b3dbf3c90641525329b112da0f3f70",
+      "originalUnitXmlSha256": "748d39b15ecd20b8f3137bddb40ea1dc0ac516143d3ef7a775f3885df5879533"
+    },
+    "coverage-unfiltered.tsv": {
+      "sha256": "d558bfd39810bf68e8baf00e007c8661866a8c4f9dfdef84b1034323f653ae77",
+      "originalUnitXmlSha256": null
+    },
+    "namespace-javap.txt": {
+      "sha256": "fbc82af586060b08339a39f73991a31f22eba2fdd4b5719c8674725284c186aa",
+      "originalUnitXmlSha256": null
+    }
+  },
+  "rawFour100": false
+}

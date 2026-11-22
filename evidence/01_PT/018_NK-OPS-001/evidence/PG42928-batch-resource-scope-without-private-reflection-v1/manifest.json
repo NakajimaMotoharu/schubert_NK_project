@@ -1,0 +1,271 @@
+{
+  "run": "PG42928",
+  "wbs": "WBS-F03/2-2-b",
+  "sourceBeforeTests": "b1aa1bbbb1c6760fb7bef7eee36b2c73917d8124",
+  "core": "e8368d22c4da2ec841f008df793594d3be9066af",
+  "startedAtUTC": "2026-11-22T18:54:14.641482+00:00",
+  "terminalAtUTC": "2026-11-22T18:54:19.152068+00:00",
+  "actualExit": 0,
+  "softwareMainEdits": 0,
+  "safeOwnedTestExecution": 3,
+  "oldFixtureRetired": 1,
+  "oldFixtureReplayed": 0,
+  "allSelectedFES0": true,
+  "actualExternal": 0,
+  "oldProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39758-process-resource-scope-unit-v1/manifest.json",
+    "sha256": "63466b2b11954b5536a8426b17438b2b603e01a33eaaf2edb03a712497a23dc3"
+  },
+  "currentArchives": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42664-f02-post-jackson-four-regular-artifacts-v1/manifest.json",
+    "sha256": "c690802d2133f1764689af06a54cf4c4ce11ed0b012d7aaf8f3e1a94573c5808"
+  },
+  "testSource": {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScopeValueContractTest.java",
+    "sha256": "2719e5449004c295237670777baa4a35147865e2ad87676c3d240661e07656e5"
+  },
+  "mainSources": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+      "sha256": "2dcbb6a8d2f2e1e7bbb1705ffe182a8493ca0407101a9ad261460fb2d95604c9"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/StopGateException.java",
+      "sha256": "a3edce9d305b127863271fb0757a403ebfcb1e6e973261db3dede83fda1a7758"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/StopGateFailure.java",
+      "sha256": "e62e08a9ba6be579d39a92d420e2c9f0b1067644d735bd4533252890c9227d8e"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "sha256": "99a598b5e08bf426c72b85775b4ed21ae7b4544d9f631b3a3b87254abd543850"
+    }
+  ],
+  "physical": {
+    "dev/codex/schubert/nk/batch/platform/ProcessResourceScope$QueryWork.class": "0a24bbc33e15cc060bacb2ba1d6ebd4982e2d15015972a0eb4d3b9489dd25c1f",
+    "dev/codex/schubert/nk/batch/platform/ProcessResourceScope$OwnedQuery.class": "286c99d6f12932ef9275f827241820d6744f60dc8b353f323bb67ce9ee36a275",
+    "dev/codex/schubert/nk/batch/platform/ProcessResourceScope.class": "71b77902d02e6e16594508d4913bbd2bb2ac2dc4873a3a2fd77a360ec2897611",
+    "dev/codex/schubert/nk/batch/platform/StopGateFailure.class": "8a52a783cb7f59c6d51fa3f58ff10a0a24e2bdc194a0de8f4c5605512bba57a5",
+    "dev/codex/schubert/nk/batch/platform/StopGateException.class": "c17fa221e36f0a1d5750d2ee57701cb61ca09960f871aba434d79b1bb2ab6318",
+    "dev/codex/schubert/nk/storage/ResourceScope$Release.class": "c9f519c33f71a3eb4f120bcd6f22592c7b5efc3ff05164591f904b98d508f96c",
+    "dev/codex/schubert/nk/storage/ResourceScope.class": "022bdb594175f51e2554e42564db54015f675beba0c11c781b89aa9a4c2d13d2",
+    "dev/codex/schubert/nk/storage/ResourceScope$Acquire.class": "e50a2e03b678c0f47f0d00190542b7f1e8f631acb27055d49e4c969b1cd31a91",
+    "dev/codex/schubert/nk/storage/ResourceScope$OwnedAction.class": "5942d0b8d678b791ae99e042d65552ebcd657030b6637bb80754d36aaf83bf83",
+    "dev/codex/schubert/nk/storage/ResourceScope$Action.class": "3d6e9dc674275dce70291887b24fbb95cc15617a31ac49a6328cff3f2f5e3291"
+  },
+  "expectedCases": [
+    "scopeValue002RejectsMissingInputsWithoutAcquiringOrReleasingThem()",
+    "scopeValue003OwnsEachAcquisitionThroughItsOwnRelease()",
+    "scopeValue004BodyAndReleaseFollowTheIndependentLiteralPriorityTable()"
+  ],
+  "unitXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42928-batch-resource-scope-without-private-reflection-v1/report/TEST-junit-jupiter.xml",
+    "sha256": "0f8b37eba9b2446769cc01c359300d95dd0e46918d3465af47a217270bdfd8ae"
+  },
+  "exec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42928-batch-resource-scope-without-private-reflection-v1/unit.exec",
+    "sha256": "49906651996f7ac3af0159496aade745c8c594ce52195ff657f6c9c6fc331f1d"
+  },
+  "statics": {
+    "byteDeclaration": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-p",
+        "-v",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42928-batch-resource-scope-without-private-reflection-v1/physical/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.class"
+      ],
+      "actualExit": 0,
+      "startedAtUTC": "2026-11-22T18:54:14.695060+00:00",
+      "terminalAtUTC": "2026-11-22T18:54:14.920627+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42928-batch-resource-scope-without-private-reflection-v1/byteDeclaration.stdout",
+        "sha256": "2722be6b6d99a571ef2b885bbeaa78b1c98fcd4902ba41f1097ab75fb1b3a1ea"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42928-batch-resource-scope-without-private-reflection-v1/byteDeclaration.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "bytePublicContract": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-p",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42928-batch-resource-scope-without-private-reflection-v1/physical/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.class"
+      ],
+      "actualExit": 0,
+      "startedAtUTC": "2026-11-22T18:54:14.920833+00:00",
+      "terminalAtUTC": "2026-11-22T18:54:15.072079+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42928-batch-resource-scope-without-private-reflection-v1/bytePublicContract.stdout",
+        "sha256": "15df58cd268d104b0bb4a471f94353daa93b8cf0fd95b196174805f9791ba9c0"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42928-batch-resource-scope-without-private-reflection-v1/bytePublicContract.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "style": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "-o",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42928-batch-resource-scope-without-private-reflection-v1/checkstyle.xml",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScopeValueContractTest.java"
+      ],
+      "actualExit": 0,
+      "startedAtUTC": "2026-11-22T18:54:15.076961+00:00",
+      "terminalAtUTC": "2026-11-22T18:54:15.657817+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42928-batch-resource-scope-without-private-reflection-v1/style.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42928-batch-resource-scope-without-private-reflection-v1/style.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "compile": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-implicit:none",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42928-batch-resource-scope-without-private-reflection-v1/physical:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42928-batch-resource-scope-without-private-reflection-v1/tests",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScopeValueContractTest.java"
+      ],
+      "actualExit": 0,
+      "startedAtUTC": "2026-11-22T18:54:15.657994+00:00",
+      "terminalAtUTC": "2026-11-22T18:54:16.380537+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42928-batch-resource-scope-without-private-reflection-v1/compile.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42928-batch-resource-scope-without-private-reflection-v1/compile.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "junit": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Duser.timezone=Asia/Tokyo",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/PG42928-batch-resource-scope-without-private-reflection-v1/unit.exec,append=false,sessionid=PG42928-current",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42928-batch-resource-scope-without-private-reflection-v1/tests:/home/mini/codex/project1/work/pgpt-runs/PG379/PG42928-batch-resource-scope-without-private-reflection-v1/physical:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "org.junit.platform.console.ConsoleLauncher",
+        "execute",
+        "--disable-ansi-colors",
+        "--fail-if-no-tests",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42928-batch-resource-scope-without-private-reflection-v1/report",
+        "--select-class",
+        "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeValueContractTest"
+      ],
+      "actualExit": 0,
+      "startedAtUTC": "2026-11-22T18:54:17.306617+00:00",
+      "terminalAtUTC": "2026-11-22T18:54:18.432501+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42928-batch-resource-scope-without-private-reflection-v1/junit.stdout",
+        "sha256": "786eb64161e55d3504b6e9fd5da9dc9e8c6cf390cf9ed72be561ae8b8f977feb"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42928-batch-resource-scope-without-private-reflection-v1/junit.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "rawCompile": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42928-batch-resource-scope-without-private-reflection-v1/unfiltered",
+        "tools/quality/jacoco/UnfilteredCodeMeasurement.java"
+      ],
+      "actualExit": 0,
+      "startedAtUTC": "2026-11-22T18:54:18.437286+00:00",
+      "terminalAtUTC": "2026-11-22T18:54:19.057910+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42928-batch-resource-scope-without-private-reflection-v1/rawCompile.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42928-batch-resource-scope-without-private-reflection-v1/rawCompile.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "unfiltered": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42928-batch-resource-scope-without-private-reflection-v1/unfiltered:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+        "--strict-original-exec",
+        "--line-deficits",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42928-batch-resource-scope-without-private-reflection-v1/unit.exec",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42928-batch-resource-scope-without-private-reflection-v1/physical/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.class"
+      ],
+      "actualExit": 0,
+      "startedAtUTC": "2026-11-22T18:54:19.058038+00:00",
+      "terminalAtUTC": "2026-11-22T18:54:19.150093+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42928-batch-resource-scope-without-private-reflection-v1/unfiltered.stdout",
+        "sha256": "6ef6ff5f9120c5b1d10f7d02f8d0a983a74078523890351b347eab69cb840486"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42928-batch-resource-scope-without-private-reflection-v1/unfiltered.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "isolatedStaticContract": "final, single private no-arg constructor, two static methods",
+  "rawRows": [
+    "CLASS\tdev/codex/schubert/nk/batch/platform/ProcessResourceScope\t68d3648e4203969b\ttrue\t36\t48\tINSTRUCTION:7:100\tBRANCH:0:22\tLINE:2:32\tCOMPLEXITY:1:13\tMETHOD:1:2\tCLASS:0:1",
+    "METHOD\tdev/codex/schubert/nk/batch/platform/ProcessResourceScope\t<init>\t()V\t2\tINSTRUCTION:7:0\tBRANCH:0:0\tLINE:2:0\tCOMPLEXITY:1:0\tMETHOD:1:0\tCLASS:0:0",
+    "DEFICIT\tdev/codex/schubert/nk/batch/platform/ProcessResourceScope\t<init>\t()V\t17\tINSTRUCTION:2:0\tBRANCH:0:0",
+    "DEFICIT\tdev/codex/schubert/nk/batch/platform/ProcessResourceScope\t<init>\t()V\t18\tINSTRUCTION:5:0\tBRANCH:0:0",
+    "METHOD\tdev/codex/schubert/nk/batch/platform/ProcessResourceScope\tacquire\t(Ldev/codex/schubert/nk/storage/ResourceScope$Acquire;Ljava/util/function/Consumer;Ldev/codex/schubert/nk/batch/platform/ProcessResourceScope$OwnedQuery;)V\t8\tINSTRUCTION:0:62\tBRANCH:0:12\tLINE:0:19\tCOMPLEXITY:0:7\tMETHOD:0:1\tCLASS:0:0",
+    "METHOD\tdev/codex/schubert/nk/batch/platform/ProcessResourceScope\tuse\t(Ljava/lang/Runnable;Ldev/codex/schubert/nk/batch/platform/ProcessResourceScope$QueryWork;)V\t8\tINSTRUCTION:0:38\tBRANCH:0:10\tLINE:0:13\tCOMPLEXITY:0:6\tMETHOD:0:1\tCLASS:0:0"
+  ],
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "testSourceCommit": "652b79f5faa3d15686d27a1ab76d9407bbe4589f",
+  "originalTerminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42928-batch-resource-scope-without-private-reflection-v1/terminal.json",
+    "sha256": "b762f7979cd57b982969aa66b29b017977bc9e0da129d69a912302846b0cd8cf"
+  },
+  "publishedFiles": {
+    "TEST-junit-jupiter.xml": {
+      "sha256": "199faa63c89c10b65f16f2201bf3374c67afa4b2b84c2e26bbaf3e0fd93d91f3",
+      "originalUnitXmlSha256": "0f8b37eba9b2446769cc01c359300d95dd0e46918d3465af47a217270bdfd8ae"
+    },
+    "coverage-unfiltered.tsv": {
+      "sha256": "6ef6ff5f9120c5b1d10f7d02f8d0a983a74078523890351b347eab69cb840486",
+      "originalUnitXmlSha256": null
+    },
+    "namespace-javap.txt": {
+      "sha256": "15df58cd268d104b0bb4a471f94353daa93b8cf0fd95b196174805f9791ba9c0",
+      "originalUnitXmlSha256": null
+    }
+  },
+  "staticTestId": "PT-OPS-SCOPEVALUE-STATIC001",
+  "formalRawCoverage": false
+}

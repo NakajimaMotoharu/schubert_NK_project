@@ -1,0 +1,7 @@
+# G13独立coverage読取と私有反射の追跡
+
+WBS-G13.07/2、SS352/354、451。PG42932は前回46工具を参照し、厳密元coverageのJava・Python工具と回帰fixtureの3 pathを追加した。製品Core `e8368d22c4da2ec841f008df793594d3be9066af` とCurrent baselineは同じ。非反射への変更15試験source、現証拠13件、保留範囲を分離して照合した。旧結果は履歴として保持する。
+
+YKT-2863は追加棚卸し18のうち14試験sourceの是正まで。MorningProcessMainTestは親経路の所有と既起動保留、WebBusinessAssemblyTestは実JMS provider起動、SnapshotScratchOwnershipTestはQA056 ResponseSnapshotCodec、UserMutationRequestTestは同QAの例外型と実DB transactionが必要。保留4の実行、部分抽出、代替の合格加算0。
+
+485/486のstage-0 hash `b04bed03a73080601e0b1f413797636ce100f5c324891e572eb59618d6bcccf4` を確認。正式受入16/190、今回新規0、歴史正式1964PT／53scope、工数率未較正。他sourceの取得済み合格を合算しない。公開 `evidence/01_PT/018_NK-OPS-001/evidence/PG42932-g1307-local-quality-and-coverage-reader-trace-v1/manifest.json` SHA-256 `6b196d3c03cd2f6ba6d70ccf679f6233eebbb601a7b3c4f38467bdc700f3e81c`。

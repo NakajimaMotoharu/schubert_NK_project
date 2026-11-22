@@ -1,0 +1,460 @@
+{
+  "run": "PG42926",
+  "wbs": "WBS-F03/2-2-b",
+  "sourceBeforeTestChange": "91a5c6fc8a74102c1cb375d9ef30ef3815f73758",
+  "core": "e8368d22c4da2ec841f008df793594d3be9066af",
+  "startedAtUTC": "2026-11-22T18:51:36.029721+00:00",
+  "terminalAtUTC": "2026-11-22T18:51:42.656816+00:00",
+  "actualExit": 0,
+  "counts": {
+    "tests": 15,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "caseNames": [
+    [
+      "dev.codex.schubert.nk.web.media.MediaResponseDecoderTest",
+      "context001PositiveAndPortBoundaryPreserveCallerBytes()"
+    ],
+    [
+      "dev.codex.schubert.nk.web.media.MediaResponseDecoderTest",
+      "context002SecondKnownAcquisitionFailureClearsOnlyOwnedFirst()"
+    ],
+    [
+      "dev.codex.schubert.nk.web.media.MediaResponseDecoderTest",
+      "context003ComparisonFailuresClearBothAndKeepFatalIdentity()"
+    ],
+    [
+      "dev.codex.schubert.nk.web.media.MediaResponseDecoderTest",
+      "context004NullArraysAtEitherAcquisitionNeverCompare()"
+    ],
+    [
+      "dev.codex.schubert.nk.web.media.MediaResponseDecoderTest",
+      "context005WrongLengthsAreRejectedAndClearedBeforeOwnershipCanEscape()"
+    ],
+    [
+      "dev.codex.schubert.nk.web.media.MediaResponseDecoderTest",
+      "context006UnknownSecondAcquisitionFailuresKeepIdentityAndClearOwnedFirst()"
+    ],
+    [
+      "dev.codex.schubert.nk.web.media.MediaResponseDecoderTest",
+      "med037ThreeRequestsBindAllApprovedSuccessfulDescriptors()"
+    ],
+    [
+      "dev.codex.schubert.nk.web.media.MediaResponseDecoderTest",
+      "med038ErrorProfilesKeepCodesWithoutFabricatedDescriptors()"
+    ],
+    [
+      "dev.codex.schubert.nk.web.media.MediaResponseDecoderTest",
+      "med039MalformedAndMismatchedRepliesNeverAuthorizeFiles()"
+    ],
+    [
+      "dev.codex.schubert.nk.web.media.MediaResponseDecoderTest",
+      "med040ConcurrentDecodeOwnsBytesAndIsolatesRequests()"
+    ],
+    [
+      "dev.codex.schubert.nk.web.media.MediaVerifiedProjectionTest",
+      "concurrentProjectionOfOneImmutableResultHasIndependentBinding()"
+    ],
+    [
+      "dev.codex.schubert.nk.web.media.MediaVerifiedProjectionTest",
+      "errorProfilesRetainExactCodeWithoutAnyProjectedDescriptor()"
+    ],
+    [
+      "dev.codex.schubert.nk.web.media.MediaVerifiedProjectionTest",
+      "hashCollisionLayoutsNeverAcquireAProjectionFromALegitimateResult()"
+    ],
+    [
+      "dev.codex.schubert.nk.web.media.MediaVerifiedProjectionTest",
+      "normalFacadeProjectsAllKindsAndBothSuccessCodes()"
+    ],
+    [
+      "dev.codex.schubert.nk.web.media.MediaVerifiedProjectionTest",
+      "typedRequestMismatchAndNullGuardsDoNotBecomeAFileGrant()"
+    ]
+  ],
+  "inputs": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/MediaResponseDecoder.java",
+      "sha256": "a24e9f346bdd9f2c94c63c6e02b9e5ff90de921c17f2d49d7c8d882b7509329c"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/MediaDeliveryException.java",
+      "sha256": "1b67c19a97f0cd35f193bc38ad1e155a4691f54ce6ad0c58d9bb37728cc77585"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/MediaDescriptorWireClient.java",
+      "sha256": "eb1a8d9cbc013cd171ea658cad67511a6adceee78c34db39f0ebdb1f3bd8a02a"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ProtectedReadWireClient.java",
+      "sha256": "908ce446ac3fe4b2b3c5c2dc3764ed9e51779805d0a967e65a45847c73ae29ec"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ProtectedReadWireException.java",
+      "sha256": "f22edac4ccb7f971a0123045be353b5cfe1eed0aadb496aabca520f69dce0879"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClient.java",
+      "sha256": "cc0689a25334f9b2eb12983e5e952a0a19af703c28ff4898ff8b57f2a6aa7b39"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyException.java",
+      "sha256": "c5740de502e5044d49e6c9b8e3cc2fd31e2a7e1da2612dadc3ef293dca6f1041"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry.java",
+      "sha256": "1a28f9d8ec9438f13621358c02181557fdc3a19f4afd55303ad727ce6fc9ed75"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/PendingReply.java",
+      "sha256": "81563c7215b1c1f37e816a838b96c0349e0f4aa0316fc20f7e2f42b499b4b6ea"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsRequestSender.java",
+      "sha256": "055dfa7bb41118b3a1d412af02dec07c0c43f071783c6c6cb93d29ee1e1fd8f8"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/package-info.java",
+      "sha256": "61d2e2c3db6780bcd7c5d248d8516f714f0381a650e2ef79b58b7c908fe3dbea"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/package-info.java",
+      "sha256": "5b3d0f04dff20d2e3b538f4dfcd89c479ec2feea7cb1743e0a009cf2256e6ad1"
+    }
+  ],
+  "testInputs": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaResponseDecoderTest.java",
+      "sha256": "080a816175a5057bb773506314ef19180263f34754f28b42007f7e70a3cf461c"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaVerifiedProjectionTest.java",
+      "sha256": "53d3c79851ea9f8ebf72e4432d895816b21137edd70b0b3ed6843abc17b2ece3"
+    }
+  ],
+  "absenceOfPrior": 1,
+  "priorReflectionReplays": 0,
+  "staticConformance": {
+    "media/MediaResponseDecoder": {
+      "declaration": "private dev.codex.schubert.nk.web.media.MediaResponseDecoder();",
+      "staticMembers": 12,
+      "physical": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42926-web-media-decoder-without-private-reflection-v1/target/classes/dev/codex/schubert/nk/web/media/MediaResponseDecoder.class",
+        "sha256": "5932514d5a21bedd24022b65c8e0db316a1e5761aab17aafd061553a69de5526"
+      }
+    }
+  },
+  "originalReceipts": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38154-media-decoder-pure-whole10-unit-v1/manifest.json",
+      "sha256": "29e028b2f111382da052fa053919463a004e0bac228c51010590f6dcfbc42be9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38162-media-context-after-prepare-v1/manifest.json",
+      "sha256": "0e98ada0ef6390c1d8f3564242362993b9428b9c875211d2256cb32e5a1b980e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38170-media-context-pure-whole16-unit-v1/manifest.json",
+      "sha256": "e753e36c05eca2889d52c2dc07610f448b8dce6ee5ecc64b1fdc1153ee13b529"
+    }
+  ],
+  "classpathLibraryInputs": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42624-current-protocol-maven-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+      "sha256": "2e11940216614fbe48e663fd83400f1fe3cf1cd9fc626214c954aaddb8c0407f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+      "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/jakarta/jms/jakarta.jms-api/3.1.0/jakarta.jms-api-3.1.0.jar",
+      "sha256": "6605e08075ab389c359451c7854808cf4b1575e1ea6317e534e9d4df088096df"
+    }
+  ],
+  "brokerProviderPresent": false,
+  "startScopeClarification": "PG38170 already authorized the newer context-owner 16; the 15 locally permitted cases after withdrawal supersede older 9 non-reflective PG38154 cases; d53bb9c2e8 narrows one test file throws clauses and explicit sentinel diagnostics",
+  "physical": {
+    "dev/codex/schubert/nk/web/media/MediaDeliveryException$Reason.class": "a77c84c20ae2a8d208cf1bb9fd4620a727f88e37db2d4638b7de092fbabebd2a",
+    "dev/codex/schubert/nk/web/media/MediaDeliveryException.class": "f4e8761a5abbc5e70b490589521f0f7bd98b52ec717194461ba3807298b43937",
+    "dev/codex/schubert/nk/web/media/MediaResponseDecoder$Binding.class": "9f241d1b03750a33c7fe8f7c383da6f4fb764d699843af55c3d33c5f3a58f700",
+    "dev/codex/schubert/nk/web/media/MediaResponseDecoder$ContextOperations.class": "b2473fab88cb84a90237b8e704a3ed38e541c4128805d5362024a6a712fe4d9d",
+    "dev/codex/schubert/nk/web/media/MediaResponseDecoder$JdkContextOperations.class": "ce9df5d81ba3028e69b604a3ed818dd08d652422bfbb026f544c8709535f095a",
+    "dev/codex/schubert/nk/web/media/MediaResponseDecoder$Result.class": "ef3ae9e4bf7f0b7bc6c84d2b39edc5975c1fb796b014f999c33745aa2ea258d6",
+    "dev/codex/schubert/nk/web/media/MediaResponseDecoder.class": "5932514d5a21bedd24022b65c8e0db316a1e5761aab17aafd061553a69de5526",
+    "dev/codex/schubert/nk/web/media/package-info.class": "77f0db640d6207c4f90ebe32fdf0dfbd5e9cfb8208aa7f5ce54d8917b673efda",
+    "dev/codex/schubert/nk/web/messaging/JmsRequestReplyClient.class": "54a1aeff1136917d88193d462e572e6538fe372080ee3356d32145d66009d5e8",
+    "dev/codex/schubert/nk/web/messaging/JmsRequestReplyException$Reason.class": "49de906b40d2e0da3c50dded1c72727a03d93faf97f087d381c7e0dc3688ac54",
+    "dev/codex/schubert/nk/web/messaging/JmsRequestReplyException.class": "400b7c258d4565111e1b04403efbd79c266278fccfe55595efaba27b0ab4c721",
+    "dev/codex/schubert/nk/web/messaging/JmsRequestSender.class": "af7e1ad0ed83b40be3eb067da57c46b285a0b5b6567a33271fffb1ec17d78092",
+    "dev/codex/schubert/nk/web/messaging/MediaDescriptorWireClient.class": "e472fa30a7883914bf35ad320c9a9a0654e4cfd4534ccfa2653f6d7919e7c42a",
+    "dev/codex/schubert/nk/web/messaging/PendingReply.class": "9ef794983c3ee03641b2382dc2f9f2fa7d04fc42cd2e4fe93afd7f67065dbca0",
+    "dev/codex/schubert/nk/web/messaging/ProtectedReadWireClient$ContextOperations.class": "2465342127fb175f752338b74bb5ed41670f47264d6b840d43883552d14937ad",
+    "dev/codex/schubert/nk/web/messaging/ProtectedReadWireClient$JdkContextOperations.class": "bb65feeb81430896e3e427f904112794733b170a1feb220ac9e00d743df836e0",
+    "dev/codex/schubert/nk/web/messaging/ProtectedReadWireClient$Result.class": "3bc6e18b9d10584a362ee031b6ff5b683d4d66a67ccb4c7607498a17a63e1487",
+    "dev/codex/schubert/nk/web/messaging/ProtectedReadWireClient.class": "a6add0d9b557067826ee90fd784c7eb101590a5277c2165772530aed7983d078",
+    "dev/codex/schubert/nk/web/messaging/ProtectedReadWireException$Reason.class": "d209886c817e798f4dad9c7946918513b7c5b634f46c31915724890a668ea0c1",
+    "dev/codex/schubert/nk/web/messaging/ProtectedReadWireException.class": "e744cbc89cd07c818d029af1a31b24dc57360ac79fab570a8711c26ed2e77eea",
+    "dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry.class": "e0f96e0e6e9cf85633d8ca1c0c772421559ce169d3aad9bf050d56338d07c84d",
+    "dev/codex/schubert/nk/web/messaging/package-info.class": "2c807cdc75f9e6e76cedc54352ef269711e6d11025186524a5ee4eceb9e22314"
+  },
+  "rawCoverage": [
+    "CLASS\tdev/codex/schubert/nk/web/media/MediaResponseDecoder\tb7126d5c0b3265e1\ttrue\t117\t49\tINSTRUCTION:7:497\tBRANCH:0:36\tLINE:2:101\tCOMPLEXITY:1:28\tMETHOD:1:10\tCLASS:0:1",
+    "METHOD\tdev/codex/schubert/nk/web/media/MediaResponseDecoder\t<init>\t()V\t2\tINSTRUCTION:7:0\tBRANCH:0:0\tLINE:2:0\tCOMPLEXITY:1:0\tMETHOD:1:0\tCLASS:0:0",
+    "DEFICIT\tdev/codex/schubert/nk/web/media/MediaResponseDecoder\t<init>\t()V\t41\tINSTRUCTION:2:0\tBRANCH:0:0",
+    "DEFICIT\tdev/codex/schubert/nk/web/media/MediaResponseDecoder\t<init>\t()V\t42\tINSTRUCTION:5:0\tBRANCH:0:0",
+    "METHOD\tdev/codex/schubert/nk/web/media/MediaResponseDecoder\tdecode\t(Ldev/codex/schubert/nk/protocol/layout/WireMessage;[B)Ldev/codex/schubert/nk/web/media/MediaResponseDecoder$Result;\t9\tINSTRUCTION:0:5\tBRANCH:0:0\tLINE:0:1\tCOMPLEXITY:0:1\tMETHOD:0:1\tCLASS:0:0",
+    "METHOD\tdev/codex/schubert/nk/web/media/MediaResponseDecoder\tdecode\t(Ldev/codex/schubert/nk/protocol/layout/WireMessage;[BLdev/codex/schubert/nk/web/media/MediaResponseDecoder$ContextOperations;)Ldev/codex/schubert/nk/web/media/MediaResponseDecoder$Result;\t8\tINSTRUCTION:0:157\tBRANCH:0:8\tLINE:0:31\tCOMPLEXITY:0:5\tMETHOD:0:1\tCLASS:0:0",
+    "METHOD\tdev/codex/schubert/nk/web/media/MediaResponseDecoder\tdecodeVerified\t(Ldev/codex/schubert/nk/protocol/layout/TypedPayloadValues;Ldev/codex/schubert/nk/web/messaging/ProtectedReadWireClient$Result;)Ldev/codex/schubert/nk/web/media/MediaResponseDecoder$Result;\t9\tINSTRUCTION:0:52\tBRANCH:0:2\tLINE:0:10\tCOMPLEXITY:0:2\tMETHOD:0:1\tCLASS:0:0",
+    "METHOD\tdev/codex/schubert/nk/web/media/MediaResponseDecoder\tproject\t(Ldev/codex/schubert/nk/web/media/MediaResponseDecoder$Binding;Ldev/codex/schubert/nk/protocol/layout/TypedPayloadValues;Ldev/codex/schubert/nk/protocol/header/ResultCode;)Ldev/codex/schubert/nk/web/media/MediaResponseDecoder$Result;\t10\tINSTRUCTION:0:67\tBRANCH:0:4\tLINE:0:15\tCOMPLEXITY:0:3\tMETHOD:0:1\tCLASS:0:0",
+    "METHOD\tdev/codex/schubert/nk/web/media/MediaResponseDecoder\tbinding\t(Ldev/codex/schubert/nk/protocol/layout/WireMessage;)Ldev/codex/schubert/nk/web/media/MediaResponseDecoder$Binding;\t10\tINSTRUCTION:0:59\tBRANCH:0:6\tLINE:0:11\tCOMPLEXITY:0:4\tMETHOD:0:1\tCLASS:0:0",
+    "METHOD\tdev/codex/schubert/nk/web/media/MediaResponseDecoder\tbinding\t(Ldev/codex/schubert/nk/protocol/layout/TypedPayloadValues;)Ldev/codex/schubert/nk/web/media/MediaResponseDecoder$Binding;\t10\tINSTRUCTION:0:86\tBRANCH:0:10\tLINE:0:17\tCOMPLEXITY:0:6\tMETHOD:0:1\tCLASS:0:0",
+    "METHOD\tdev/codex/schubert/nk/web/media/MediaResponseDecoder\tsameContext\t(Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;Ldev/codex/schubert/nk/web/media/MediaResponseDecoder$ContextOperations;)Z\t10\tINSTRUCTION:0:33\tBRANCH:0:0\tLINE:0:7\tCOMPLEXITY:0:1\tMETHOD:0:1\tCLASS:0:0",
+    "METHOD\tdev/codex/schubert/nk/web/media/MediaResponseDecoder\tcontextBytes\t(Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;Ldev/codex/schubert/nk/web/media/MediaResponseDecoder$ContextOperations;)[B\t10\tINSTRUCTION:0:25\tBRANCH:0:4\tLINE:0:6\tCOMPLEXITY:0:3\tMETHOD:0:1\tCLASS:0:0",
+    "METHOD\tdev/codex/schubert/nk/web/media/MediaResponseDecoder\trequire\t(Z)V\t10\tINSTRUCTION:0:8\tBRANCH:0:2\tLINE:0:2\tCOMPLEXITY:0:2\tMETHOD:0:1\tCLASS:0:0",
+    "METHOD\tdev/codex/schubert/nk/web/media/MediaResponseDecoder\t<clinit>\t()V\t8\tINSTRUCTION:0:5\tBRANCH:0:0\tLINE:0:1\tCOMPLEXITY:0:1\tMETHOD:0:1\tCLASS:0:0"
+  ],
+  "pom": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42926-web-media-decoder-without-private-reflection-v1/pom.xml",
+    "sha256": "ca1e25e0fb243b07ae4074231d2483847e00a88f1982a4300147afe095e7ee1f"
+  },
+  "junitXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42926-web-media-decoder-without-private-reflection-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "f00616ea0a0ad4b1e9fde5b699e0429237081109300cbab2ca4540176a6a3b67"
+  },
+  "exec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42926-web-media-decoder-without-private-reflection-v1/unit.exec",
+    "sha256": "7e29f4c1020b7d9395c8c09cab16d0b2c7fa2085ffad501f65e69b43e24257d2"
+  },
+  "stages": {
+    "compileNullaway": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-N",
+        "-X",
+        "-f",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42926-web-media-decoder-without-private-reflection-v1/pom.xml",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "compile"
+      ],
+      "exit": 0,
+      "start": "2026-11-22T18:51:36.112952+00:00",
+      "terminal": "2026-11-22T18:51:39.139010+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42926-web-media-decoder-without-private-reflection-v1/compileNullaway.stdout",
+        "sha256": "a272b20fe56242e2cc62d0e58df0d1a6845b16cdd4d9a27bee2bb97d63fa552e"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42926-web-media-decoder-without-private-reflection-v1/compileNullaway.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "javap-MediaResponseDecoder": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-p",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42926-web-media-decoder-without-private-reflection-v1/target/classes/dev/codex/schubert/nk/web/media/MediaResponseDecoder.class"
+      ],
+      "exit": 0,
+      "start": "2026-11-22T18:51:39.140498+00:00",
+      "terminal": "2026-11-22T18:51:39.288621+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42926-web-media-decoder-without-private-reflection-v1/javap-MediaResponseDecoder.stdout",
+        "sha256": "39fa3c8e9db8f6ae69771ade3dc3b92356da5fa9916879af9bd40fb29101e681"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42926-web-media-decoder-without-private-reflection-v1/javap-MediaResponseDecoder.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "fixtures": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-implicit:none",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42926-web-media-decoder-without-private-reflection-v1/target/classes:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/PG42624-current-protocol-maven-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/jakarta/jms/jakarta.jms-api/3.1.0/jakarta.jms-api-3.1.0.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42926-web-media-decoder-without-private-reflection-v1/test",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaResponseDecoderTest.java",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaVerifiedProjectionTest.java"
+      ],
+      "exit": 0,
+      "start": "2026-11-22T18:51:39.289032+00:00",
+      "terminal": "2026-11-22T18:51:40.293972+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42926-web-media-decoder-without-private-reflection-v1/fixtures.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42926-web-media-decoder-without-private-reflection-v1/fixtures.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "junit": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Duser.timezone=Asia/Tokyo",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/PG42926-web-media-decoder-without-private-reflection-v1/unit.exec,append=false,sessionid=PG42926-current",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42926-web-media-decoder-without-private-reflection-v1/test:/home/mini/codex/project1/work/pgpt-runs/PG379/PG42926-web-media-decoder-without-private-reflection-v1/target/classes:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/PG42624-current-protocol-maven-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/jakarta/jms/jakarta.jms-api/3.1.0/jakarta.jms-api-3.1.0.jar",
+        "org.junit.platform.console.ConsoleLauncher",
+        "execute",
+        "--disable-ansi-colors",
+        "--fail-if-no-tests",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42926-web-media-decoder-without-private-reflection-v1/xml",
+        "--select-class",
+        "dev.codex.schubert.nk.web.media.MediaResponseDecoderTest",
+        "--select-class",
+        "dev.codex.schubert.nk.web.media.MediaVerifiedProjectionTest"
+      ],
+      "exit": 0,
+      "start": "2026-11-22T18:51:40.294300+00:00",
+      "terminal": "2026-11-22T18:51:41.946590+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42926-web-media-decoder-without-private-reflection-v1/junit.stdout",
+        "sha256": "32ba54dc6e6dfae8de2ff9f5dedd9d9878803580eb728bebd7238e26fa3e59ae"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42926-web-media-decoder-without-private-reflection-v1/junit.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "rawCompile": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42926-web-media-decoder-without-private-reflection-v1/meter",
+        "tools/quality/jacoco/UnfilteredCodeMeasurement.java"
+      ],
+      "exit": 0,
+      "start": "2026-11-22T18:51:41.952000+00:00",
+      "terminal": "2026-11-22T18:51:42.552111+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42926-web-media-decoder-without-private-reflection-v1/rawCompile.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42926-web-media-decoder-without-private-reflection-v1/rawCompile.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "unfiltered": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42926-web-media-decoder-without-private-reflection-v1/meter:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+        "--strict-original-exec",
+        "--line-deficits",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42926-web-media-decoder-without-private-reflection-v1/unit.exec",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42926-web-media-decoder-without-private-reflection-v1/target/classes/dev/codex/schubert/nk/web/media/MediaResponseDecoder.class"
+      ],
+      "exit": 0,
+      "start": "2026-11-22T18:51:42.552225+00:00",
+      "terminal": "2026-11-22T18:51:42.653499+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42926-web-media-decoder-without-private-reflection-v1/unfiltered.stdout",
+        "sha256": "9496bf7777d96acd7495b4d9ba16b0995d9cf6a219167e95edcf6b81c7f654bd"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42926-web-media-decoder-without-private-reflection-v1/unfiltered.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "nullAwayDiagnostic": 0,
+  "actualExternalOps": 0,
+  "coverageStaticChecksExcludedFromTestTally": true,
+  "realApiOrDB": 0,
+  "softwareMainEdits": 0,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "testSourceCommit": "b1aa1bbbb1c6760fb7bef7eee36b2c73917d8124",
+  "originalTerminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42926-web-media-decoder-without-private-reflection-v1/terminal.json",
+    "sha256": "b85b34d4be0a72ff16d907cd7a2cc0eda471ec9d1e498a9d15df9df8a5fc8550"
+  },
+  "publishedFiles": {
+    "TEST-junit-jupiter.xml": {
+      "sha256": "8182ea6471c0f07578c3b08c0f6e158938d3714cb12534c886fe07f099ab1f43",
+      "originalUnitXmlSha256": "f00616ea0a0ad4b1e9fde5b699e0429237081109300cbab2ca4540176a6a3b67"
+    },
+    "coverage-unfiltered.tsv": {
+      "sha256": "c6630676ddec9ae2f79685cf268dd1c8af90c882f38cb6d1ed8e5af851747718",
+      "originalUnitXmlSha256": null
+    },
+    "namespace-javap.txt": {
+      "sha256": "39fa3c8e9db8f6ae69771ade3dc3b92356da5fa9916879af9bd40fb29101e681",
+      "originalUnitXmlSha256": null
+    }
+  },
+  "rawFour100": false,
+  "independentFullOwner": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42926-web-media-decoder-without-private-reflection-v1/expanded-terminal.json",
+    "sha256": "c40dfc9992052dd8ce6bc010e05df5a8c0cbbd98981d87707280b13e64a8dcae"
+  },
+  "ownerCounter": {
+    "INSTRUCTION": {
+      "missed": 7,
+      "covered": 546
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 36
+    },
+    "LINE": {
+      "missed": 2,
+      "covered": 118
+    },
+    "COMPLEXITY": {
+      "missed": 1,
+      "covered": 37
+    },
+    "METHOD": {
+      "missed": 1,
+      "covered": 19
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 4
+    }
+  },
+  "ownerRemaining": [
+    [
+      "dev/codex/schubert/nk/web/media/MediaResponseDecoder",
+      "<init>",
+      "()V",
+      "41",
+      "INSTRUCTION:2:0",
+      "BRANCH:0:0"
+    ],
+    [
+      "dev/codex/schubert/nk/web/media/MediaResponseDecoder",
+      "<init>",
+      "()V",
+      "42",
+      "INSTRUCTION:5:0",
+      "BRANCH:0:0"
+    ]
+  ],
+  "beforeJunitPreflightStop": "MediaResponseDecoderTest differs from old fixture; d53bb9c2e8 narrowing and fault switch verified before dynamic run"
+}
