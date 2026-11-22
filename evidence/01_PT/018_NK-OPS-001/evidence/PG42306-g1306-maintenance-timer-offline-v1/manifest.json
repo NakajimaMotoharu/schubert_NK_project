@@ -1,0 +1,109 @@
+{
+  "run": "PG42306",
+  "source": "27152c62e0b39a9fafa9aa2fd4576a9efb905da9",
+  "previousJavaCore": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-G13.06",
+  "related": [
+    "WBS-C02-a",
+    "WBS-G13.06",
+    "BUG-3577",
+    "YKT-2812"
+  ],
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T06:49:28.951825+00:00",
+  "productionConfigCandidate": "27152c62e0b39a9fafa9aa2fd4576a9efb905da9",
+  "actualProductDiffPathInventory": [
+    "src/deployment/systemd/schubert-nk-maintenance.timer.template"
+  ],
+  "exactNewTimerTemplate": {
+    "path": "src/deployment/systemd/schubert-nk-maintenance.timer.template",
+    "sha256": "8f5885660d0c55bffa51151615d4f55f8dd3d4c56d438a952392a5c211c8115f"
+  },
+  "oracle": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/42306_daily_timer_contract.py",
+    "sha256": "02c06ee342b6808ad9092cf30d8464572da52467376c7115e02eecad7a249b56"
+  },
+  "spec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/5678_日次保守timer単体テスト仕様書.md",
+    "sha256": "283d2532c1ff4803bd5fc9b6511db48c5c16b8113e225d12a382d63731089671"
+  },
+  "stage": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42306-scheduled-maintenance-timer-finite-v1/unit.terminal.json",
+    "sha256": "68618e95b5c4abc38c344fdb5458fc3730ed6436f8a564c2b94d78b68c39368e"
+  },
+  "execution": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42306-scheduled-maintenance-timer-finite-v1/begin.json",
+    "sha256": "d94e101fdad7b165c6e8c56f555980d626beffa7880d529d1cc87ca913bbc6c6"
+  },
+  "systemdParserVersion": "systemd 259 (259.9-0ubuntu0.1)",
+  "localEvidence": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42306-scheduled-maintenance-timer-finite-v1/unit.stdout",
+    "sha256": "83e85763178cdeb36b969f2f6eca654c6b3a21712d592ec35d8b1162c166970a"
+  },
+  "actualVectors": {
+    "PT-OPS-MAINT-PREBOOT001-T01": "PASS",
+    "PT-OPS-MAINT-PREBOOT001-T02": {
+      "status": "PASS",
+      "cases": [
+        {
+          "baseUTC": "2026-11-21 19:59:59 UTC",
+          "expectedUTC": [
+            "2026-11-21 20:00:00 UTC",
+            "2026-11-22 20:00:00 UTC"
+          ],
+          "observedUTC": [
+            "2026-11-21 20:00:00 UTC",
+            "2026-11-22 20:00:00 UTC"
+          ]
+        },
+        {
+          "baseUTC": "2026-11-21 20:00:00 UTC",
+          "expectedUTC": [
+            "2026-11-22 20:00:00 UTC",
+            "2026-11-23 20:00:00 UTC"
+          ],
+          "observedUTC": [
+            "2026-11-22 20:00:00 UTC",
+            "2026-11-23 20:00:00 UTC"
+          ]
+        },
+        {
+          "baseUTC": "2026-11-21 20:00:01 UTC",
+          "expectedUTC": [
+            "2026-11-22 20:00:00 UTC",
+            "2026-11-23 20:00:00 UTC"
+          ],
+          "observedUTC": [
+            "2026-11-22 20:00:00 UTC",
+            "2026-11-23 20:00:00 UTC"
+          ]
+        },
+        {
+          "baseUTC": "2026-12-30 20:00:01 UTC",
+          "expectedUTC": [
+            "2026-12-31 20:00:00 UTC",
+            "2027-01-01 20:00:00 UTC"
+          ],
+          "observedUTC": [
+            "2026-12-31 20:00:00 UTC",
+            "2027-01-01 20:00:00 UTC"
+          ]
+        }
+      ]
+    },
+    "rejectedSyntheticInputs": [
+      "duplicateCalendar",
+      "wrongService",
+      "missedTimerReplay",
+      "wrongTimeZone"
+    ]
+  },
+  "localCases2": 2,
+  "syntheticNegativeCount": 4,
+  "dynamicJavaOrNativeProductTestsAdded": 0,
+  "previousCoreEvidenceUnreassigned": true,
+  "realInstallOrEnableOrServiceAction": 0,
+  "serviceAndFullReleaseStillPending": true,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
