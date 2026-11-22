@@ -1,0 +1,91 @@
+{
+  "run": "PG42460",
+  "source": "203f28fa11cefe3e64c866d18d90df2724d267ca",
+  "javaCore": "b5d5009768a04bb69468beed2471441b2a57ce27",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-22T09:18:56.068157+00:00",
+  "prior": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33372-copyman990-post-v3/manifest.json",
+    "sha256": "6c13b3f5f638601dee68b6a6ffcc539f8ff9e7c03506433d94ca7b9dd6e5b7be"
+  },
+  "testIds": {
+    "PT-MIG-STREAM001": "independentGoldenRetainsNullEscapesAndUtf8AcrossTwoRows",
+    "PT-MIG-STREAM002": "emptyIterableMakesNoSinkCallsAndDoesNotOwnIt",
+    "PT-MIG-STREAM003": "obtainsOneIteratorAndWritesCurrentRowBeforeObtainingTheNext",
+    "PT-MIG-STREAM004": "constructorRejectsNullEncoderWithFixedDiagnostic",
+    "PT-MIG-STREAM005": "nullSourceAndSinkAreRejectedBeforeRequestingAnIterator",
+    "PT-MIG-STREAM006": "nullOrEmptyRowsFailWithoutWritingThatRow",
+    "PT-MIG-STREAM007": "mixedWidthRejectsBeforeSendingTheSecondRowAndKeepsTheDeclaredPrefix",
+    "PT-MIG-STREAM008": "invalidFieldPreservesCodecDiagnosticAndDoesNotSendMalformedRow",
+    "PT-MIG-STREAM009": "originalSinkFailureStopsBeforeObtainingAnotherRowWithoutCloseOrFlush",
+    "PT-MIG-STREAM010": "originalIteratorFailureRemainsFailureAfterThePreviousRowWasSent",
+    "PT-MIG-STREAM011": "callerOwnsInputsSinkAndLaterCallsAndRedactionStaysFixed",
+    "PT-MIG-STREAM012": "finiteOwnedConcurrentWritesUseIndependentSinksAndLiteralGolden",
+    "PT-MIG-COPY012": "copy012ConcurrentCallsHaveSeparateOutputOwnership"
+  },
+  "actualOrdinary": 13,
+  "passed": 13,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "logicalEncoderReuse": 11,
+  "changedNestedFixture4": [
+    "dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest$1.class",
+    "dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest$2.class",
+    "dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest$4.class",
+    "dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest$TrackingSink.class"
+  ],
+  "currentPhysical": [
+    {
+      "relative": "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder.class",
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42460-copy-text-encoder-writer-current-v1/main/dev/codex/schubert/nk/migration/PostgresCopyTextEncoder.class",
+      "sha256": "d92993e0256be418b35ffd962f68d96ad6457020a1c8f547694c068b5e46f83d"
+    },
+    {
+      "relative": "dev/codex/schubert/nk/migration/PostgresCopyTextWriter.class",
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42460-copy-text-encoder-writer-current-v1/main/dev/codex/schubert/nk/migration/PostgresCopyTextWriter.class",
+      "sha256": "e498970c4ef48d9af38f4de7f0e292f32188a9da38e153d9d235c4f1c4e697f2"
+    }
+  ],
+  "fixtureSource": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+      "sha256": "b54cfa57df97f34760a3546e38ea8c361eaa7d275d476e264391d4ed9581c29f"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "sha256": "e721632451bee77b5272c58908f8b70618187a6c4ce304cb9b13edfd004fc8dc"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42460-copy-text-encoder-writer-current-v1/begin.json",
+      "sha256": "4a5491afc82ac51fe71488dcb5bf33e1b14780ad9199ed722929178d3c34f7c1"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42460-copy-text-encoder-writer-current-v1/diff-methods.json",
+      "sha256": "a7a2dfea8c21c4a653e21702f052a7ec17cf02a3acce2ea30774dc90dbab48ef"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42460-copy-text-encoder-writer-current-v1/unit-plan.json",
+      "sha256": "da537123b864514e6babb13922cc8fdd2602638c451b7bf54de9a140e5700a55"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42460-copy-text-encoder-writer-current-v1/terminal.json",
+      "sha256": "22edc5e6a72d481f993a39964f730c0bb763f38dd1cb25056f33254d64c3f6d9"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42460-copy-text-encoder-writer-current-v1/init.log",
+      "sha256": "79fba0d8aa9ffca4d3acab8f6a3b9f5d5aaeea3a6faca2b0148c5b64eecc37da"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42460-copy-text-encoder-writer-current-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "f54c02789c916f3acdf13dd108347a9c22cc681fb5f5df68829c73071dab68c0"
+    }
+  ],
+  "actualCopyDatabaseOrAuthority": 0,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "newCoverage": false,
+  "priorCoverageCombined": false
+}

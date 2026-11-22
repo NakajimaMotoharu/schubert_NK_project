@@ -1,0 +1,55 @@
+{
+  "run": "PG42458",
+  "source": "203f28fa11cefe3e64c866d18d90df2724d267ca",
+  "javaCore": "b5d5009768a04bb69468beed2471441b2a57ce27",
+  "wbs": "WBS-G13.06",
+  "terminalAtUTC": "2026-11-22T09:15:58.305107+00:00",
+  "currentConfig": {
+    "path": "src/deployment/systemd/schubert-nk-maintenance.timer.template",
+    "sha256": "9d4fa7b1a9c8df6c6197d0d2ef339e369a06cb4bdc9e78f627b3e0fee87527d4"
+  },
+  "calendarExpression": "*-*-* 05:00:00 Asia/Tokyo",
+  "priorConfig": {
+    "path": "src/deployment/systemd/schubert-nk-maintenance.timer.template",
+    "sha256": "8f5885660d0c55bffa51151615d4f55f8dd3d4c56d438a952392a5c211c8115f"
+  },
+  "priorAssertions": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42306-g1306-maintenance-timer-offline-v1/manifest.json",
+    "sha256": "fcaed552f0f726ca27ce485b9a7c6c57bff013234a84215926e32ae4bffe4126"
+  },
+  "currentSettingReceipts": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42370-g1306-daily-timer-explicit-values-v1/manifest.json",
+      "sha256": "801fd1f4e9088c490fb74ecc0b7491ea41257d6347b020f72ce4d6fee785d6c6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42388-g1306-systemd-timer-verify-offline-v1/manifest.json",
+      "sha256": "eeadc0d9caae4dcecce1b2609bdc050098fbc024114856b0d7080cafda182f76"
+    }
+  ],
+  "oldVsCurrentExactDirectives": {
+    "preserved": {
+      "OnCalendar": "*-*-* 05:00:00 Asia/Tokyo",
+      "Persistent": "false",
+      "Unit": "schubert-nk-maintenance.service"
+    },
+    "added": {
+      "AccuracySec": "1min",
+      "RandomizedDelaySec": "0"
+    }
+  },
+  "priorCalendarVectorsReusedAsExpressionEvidence": 4,
+  "calendarCommandReplayed": 0,
+  "wholeT01SameInput": false,
+  "wholeT01Reason": "Original assertion required exactly three Timer keys; two explicitly validated settings were added.",
+  "systemdVersionCurrent": "systemd 259 (259.9-0ubuntu0.1)",
+  "historicalSystemdBinaryDigestUnavailable": true,
+  "currentSystemdTool": {
+    "path": "/usr/bin/systemd-analyze",
+    "sha256": "188138cf3aea2111c7744069b58c0597559808163d1b7f74ded0348d85e4bef3"
+  },
+  "runtimeServiceAction": 0,
+  "actualOperatingScheduleOrInvocation": false,
+  "formalAcceptanceId": null,
+  "whole451": false
+}

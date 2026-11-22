@@ -1,0 +1,174 @@
+{
+  "run": "PG42462",
+  "source": "203f28fa11cefe3e64c866d18d90df2724d267ca",
+  "javaCore": "b5d5009768a04bb69468beed2471441b2a57ce27",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-22T09:21:09.949407+00:00",
+  "dynamic": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42460-f03-copy-text-encoding-stream-current-v1/manifest.json",
+    "sha256": "2d49aa3b2f3716d5e3534e18a9601165a95576d78e06df1f1b542611f3a5fd50"
+  },
+  "sourceInputs": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42462-f03-copy-encoding-current-static-v1/begin.json",
+    "sha256": "e984ae43346a634e9b28bc68b8a346332c3955dd20d7f11e3ff8adb68d1b628b"
+  },
+  "raw": {
+    "checkstyle": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42462-f03-copy-encoding-current-static-v1/reports/checkstyle.xml",
+      "sha256": "4d64f823f21b62dd24434b0a608d3fe54250d8dbdb516718618e85b6ef0a2040"
+    },
+    "pmd": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42462-f03-copy-encoding-current-static-v1/reports/pmd.xml",
+      "sha256": "42ee1f6ff6915b311f3d62083d973316a83cfecb8b8d9a58811b3fd208e7c598"
+    },
+    "spotbugs": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42462-f03-copy-encoding-current-static-v1/reports/spotbugs.xml",
+      "sha256": "1bb47f1ea11b108c3abf75595aecfe20ed7879050bc88b75eef27cb425ee1bf4"
+    }
+  },
+  "firstGuardRejectionPreserved": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42462-f03-copy-encoding-current-static-v1/guard.terminal.json",
+    "sha256": "b9bcbda739b5ec22b97192027d06f2a59cc5bd169e40b3be8eaab4c90697402f"
+  },
+  "acceptedPlan": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42462-f03-copy-encoding-current-static-v1/reports/direct-sources-plan.json",
+    "sha256": "d19c2523c0dde65106bbf54cca10b93207e01cc1dcdb51233ce7c915732a7f65"
+  },
+  "engineExits": {
+    "guard-corrected": 0,
+    "checkstyle": 0,
+    "pmd": 4,
+    "spotbugs": 0
+  },
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "pmdRaw": 20,
+  "pmdLocalUntriaged": 0,
+  "dispositions": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+      "line": 167,
+      "rule": "CloseResource",
+      "rationale": "Finite fixture-local worker pool; fixed outcomes, owned-pool cleanup and bounded wait assertions."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+      "line": 167,
+      "rule": "DoNotUseThreads",
+      "rationale": "Finite fixture-local worker pool; fixed outcomes, owned-pool cleanup and bounded wait assertions."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+      "line": 172,
+      "rule": "DoNotUseThreads",
+      "rationale": "Finite fixture-local worker pool; fixed outcomes, owned-pool cleanup and bounded wait assertions."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+      "line": 181,
+      "rule": "DoNotUseThreads",
+      "rationale": "Finite fixture-local worker pool; fixed outcomes, owned-pool cleanup and bounded wait assertions."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+      "line": 182,
+      "rule": "DoNotUseThreads",
+      "rationale": "Finite fixture-local worker pool; fixed outcomes, owned-pool cleanup and bounded wait assertions."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "line": 36,
+      "rule": "CloseResource",
+      "rationale": "Fixture-local borrowed memory sink, with close and flush checked as non-events or explicit failure if invoked."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "line": 46,
+      "rule": "CloseResource",
+      "rationale": "Fixture-local borrowed memory sink, with close and flush checked as non-events or explicit failure if invoked."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "line": 56,
+      "rule": "CloseResource",
+      "rationale": "Fixture-local borrowed memory sink, with close and flush checked as non-events or explicit failure if invoked."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "line": 119,
+      "rule": "CloseResource",
+      "rationale": "Fixture-local borrowed memory sink, with close and flush checked as non-events or explicit failure if invoked."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "line": 134,
+      "rule": "CloseResource",
+      "rationale": "Fixture-local borrowed memory sink, with close and flush checked as non-events or explicit failure if invoked."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "line": 151,
+      "rule": "CloseResource",
+      "rationale": "Fixture-local borrowed memory sink, with close and flush checked as non-events or explicit failure if invoked."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "line": 183,
+      "rule": "CloseResource",
+      "rationale": "Fixture-local borrowed memory sink, with close and flush checked as non-events or explicit failure if invoked."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "line": 212,
+      "rule": "CloseResource",
+      "rationale": "Fixture-local borrowed memory sink, with close and flush checked as non-events or explicit failure if invoked."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "line": 243,
+      "rule": "CloseResource",
+      "rationale": "Fixture-local borrowed memory sink, with close and flush checked as non-events or explicit failure if invoked."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "line": 251,
+      "rule": "CloseResource",
+      "rationale": "Fixture-local borrowed memory sink, with close and flush checked as non-events or explicit failure if invoked."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "line": 261,
+      "rule": "CloseResource",
+      "rationale": "Finite fixture-local worker pool; fixed outcomes, owned-pool cleanup and bounded wait assertions."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "line": 261,
+      "rule": "DoNotUseThreads",
+      "rationale": "Finite fixture-local worker pool; fixed outcomes, owned-pool cleanup and bounded wait assertions."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "line": 266,
+      "rule": "DoNotUseThreads",
+      "rationale": "Finite fixture-local worker pool; fixed outcomes, owned-pool cleanup and bounded wait assertions."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "line": 277,
+      "rule": "DoNotUseThreads",
+      "rationale": "Finite fixture-local worker pool; fixed outcomes, owned-pool cleanup and bounded wait assertions."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "line": 278,
+      "rule": "DoNotUseThreads",
+      "rationale": "Finite fixture-local worker pool; fixed outcomes, owned-pool cleanup and bounded wait assertions."
+    }
+  ],
+  "scopeFormalReviewerApproval": false,
+  "suppressions": 0,
+  "productRepeat": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
