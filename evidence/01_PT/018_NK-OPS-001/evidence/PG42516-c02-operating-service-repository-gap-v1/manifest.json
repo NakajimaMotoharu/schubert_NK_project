@@ -1,0 +1,52 @@
+{
+  "run": "PG42516",
+  "javaCore": "b5d5009768a04bb69468beed2471441b2a57ce27",
+  "source": "50db28ad4e34fefc61c10b66063d4f01e98527fb",
+  "wbs": "WBS-C02-a",
+  "terminalAtUTC": "2026-11-22T10:03:43.210098+00:00",
+  "design": [
+    {
+      "path": "documents/200_UI/250_運用・非機能/251_朝バッチ・バックアップ・起動停止設計.md",
+      "sha256": "6dc961aebad948e77567b6c2d584d01c00eb62aee27826aefd47dd41e286f7dd"
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md",
+      "sha256": "857b4062d624ab8b99a2bfc72524f380c655c930db9388755968981e7c76d6c5"
+    }
+  ],
+  "designSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+  "systemdTrackedRosterSha256": "98dea09f1974d29c5cd7587e553b92f34e79fc7819fbafee891cefb8014cbd37",
+  "timer": {
+    "path": "src/deployment/systemd/schubert-nk-maintenance.timer.template",
+    "sha256": "9d4fa7b1a9c8df6c6197d0d2ef339e369a06cb4bdc9e78f627b3e0fee87527d4"
+  },
+  "serviceFileTracked": false,
+  "requiredOwnerAndReleaseContract": [
+    "schubert-nk-maintenance.service oneshot and bounded next actor",
+    "same M owner and current boot release/running operation ownership before stop",
+    "ordered exact pre-update stop confirmations",
+    "actual package result/safety/failed private postcondition",
+    "verified external observer and reboot completion marker",
+    "same-source full release and independent effective unit checks"
+  ],
+  "currentPreparatoryEvidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42388-g1306-systemd-timer-verify-offline-v1/manifest.json",
+      "sha256": "eeadc0d9caae4dcecce1b2609bdc050098fbc024114856b0d7080cafda182f76"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42510-g1306-current-maintenance-single-run-coverage-v1/manifest.json",
+      "sha256": "5b082e47b209498fc32b9a0375918fc30853f96e419a47c7a6845ed222de0ea3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42512-f03-maintenance-physical-raw-coverage-v1/manifest.json",
+      "sha256": "70b82228bf2cfd49fe021d695bf25c153b9aeaef217b4a86dbafdf6a708bd726"
+    }
+  ],
+  "noInstanceOperations": 0,
+  "authorizationsChanged": 0,
+  "realEffectiveStateObserved": false,
+  "pendingC02": true,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

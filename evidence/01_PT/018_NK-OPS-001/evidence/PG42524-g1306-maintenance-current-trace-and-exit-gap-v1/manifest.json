@@ -1,0 +1,141 @@
+{
+  "run": "PG42524",
+  "source": "50db28ad4e34fefc61c10b66063d4f01e98527fb",
+  "javaCore": "b5d5009768a04bb69468beed2471441b2a57ce27",
+  "terminalAtUTC": "2026-11-22T10:12:29.056615+00:00",
+  "actualExit": 0,
+  "wbs": "WBS-G13.06",
+  "otherDesignLinks": [
+    "WBS-C02-a",
+    "WBS-C02-b",
+    "WBS-P018-03",
+    "WBS-G12"
+  ],
+  "designCommit": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+  "designBindings": {
+    "ss341": {
+      "path": "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md",
+      "sha256": "857b4062d624ab8b99a2bfc72524f380c655c930db9388755968981e7c76d6c5",
+      "lineEvidence": {
+        "## 4.1 実行順": 107,
+        "## 4.2 Reboot不成立のwatch": 122,
+        "Maintenance開始から60分": 124,
+        "schubert-nk-maintenance.service": 75,
+        "60min": 75,
+        "Caddyをmaintenance responseへ": 110,
+        "flock": 90
+      }
+    },
+    "ss342": {
+      "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+      "sha256": "07ab19dd27038241ba8257a1e4dcf180117a844b68479ec6848658a938445192",
+      "lineEvidence": {
+        "AccuracySec=1min": 300,
+        "RandomizedDelaySec=0": 300,
+        "Persistent=false": 300
+      }
+    },
+    "ss361": {
+      "path": "documents/300_SS/360_引継ぎ・監査/361_RD・UI・SSトレーサビリティ.md",
+      "sha256": "e4462e29b2a958c5742fb4e8fe93baafcb43beedb04d2c8d026c9258c0660611",
+      "lineEvidence": {
+        "SYS-011": 32,
+        "SCP-001": 33,
+        "SCP-006": 33,
+        "355": 25
+      }
+    }
+  },
+  "originalLocalCriteriaPreserved": true,
+  "evidence": {
+    "PG42288": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42288-g1306-preboot-requirement-owner-matrix-v1/manifest.json",
+      "sha256": "5775dd515d9f50086d500d79d09cf6d243f0c2b27bcbbb98629a3478eb3819c5"
+    },
+    "PG42458": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42458-g1306-calendar-input-equivalence-v1/manifest.json",
+      "sha256": "4d72633d11eeb3ca26d2d7a0db402f95a7868fafda4ba89fe8ca326bca633a9c"
+    },
+    "PG42488": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42488-g08-maintenance-delta-test-member-trace-v1/manifest.json",
+      "sha256": "bfb9e30cb7146f71e4ba658661baf54edf2cbee93b6f8b1180b6b22c9da62154"
+    },
+    "PG42510": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42510-g1306-current-maintenance-single-run-coverage-v1/manifest.json",
+      "sha256": "5b082e47b209498fc32b9a0375918fc30853f96e419a47c7a6845ed222de0ea3"
+    },
+    "PG42512": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42512-f03-maintenance-physical-raw-coverage-v1/manifest.json",
+      "sha256": "70b82228bf2cfd49fe021d695bf25c153b9aeaef217b4a86dbafdf6a708bd726"
+    },
+    "PG42516": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42516-c02-operating-service-repository-gap-v1/manifest.json",
+      "sha256": "d98fea844e71d70ec4a16212cf596b04cf891e82d0a0727fc0f218a700b9735a"
+    },
+    "PG42522": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42522-f03-maintenance-data-exact-case-reuse-v1/manifest.json",
+      "sha256": "d0045581ae91254746e5f6cc07e898035d734283b39d2706f093593f1c004abf"
+    }
+  },
+  "scopeDecisions": [
+    {
+      "id": "PT-OPS-MAINT-PREBOOT001",
+      "sourceCondition": "JST 05:00 explicit settings; T02 expression and T03/04 independent offline syntax",
+      "proof": [
+        "PG42458",
+        "PG42516"
+      ],
+      "pending": "Service binding, actor start under exclusive lock and one dispatch of the real timer"
+    },
+    {
+      "id": "PT-OPS-MAINT-PREBOOT002",
+      "sourceCondition": "S01–S05 exact ordered observations, Web 30s, API 60s and fail-closed",
+      "proof": [
+        "PG42488",
+        "PG42510"
+      ],
+      "pending": "Caddy listener/request barrier, posted ownership and actual Unit finality before update"
+    },
+    {
+      "id": "PT-OPS-MAINT-PREBOOT003",
+      "sourceCondition": "U01–U06 exact package-result/safety decision including allowed warning",
+      "proof": [
+        "PG42488",
+        "PG42510"
+      ],
+      "pending": "Effective runner, actual upgrade and all safety/active retention receipts"
+    },
+    {
+      "id": "PT-OPS-MAINT-PREBOOT004",
+      "sourceCondition": "W01–W08 true 60-minute marker decision; local data and separate pure CLI proofs",
+      "proof": [
+        "PG42488",
+        "PG42510",
+        "PG42522"
+      ],
+      "pending": "Independent monitor service, marker ownership and true outside critical delivery; current unit service missing"
+    },
+    {
+      "id": "C02",
+      "sourceCondition": "Fixed timer target and exact committed service-roster proof",
+      "proof": [
+        "PG42516"
+      ],
+      "pending": "One known authorized service entry, packages, generation and watchdog configuration on real boot"
+    },
+    {
+      "id": "F03/451",
+      "sourceCondition": "One exact exec has standard counters all 100 on 12 classes",
+      "proof": [
+        "PG42510",
+        "PG42512"
+      ],
+      "pending": "Unfiltered uncovered 3 lines, 24 methods, 1 branch; full 6/451 unmet"
+    }
+  ],
+  "formalAcceptanceId": null,
+  "addedProductTests": 0,
+  "completedOriginalRowPricePp": 0,
+  "whole451": false,
+  "newRuntimeActions": 0
+}
