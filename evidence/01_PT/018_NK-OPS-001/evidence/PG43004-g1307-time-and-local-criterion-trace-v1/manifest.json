@@ -1,0 +1,54 @@
+{
+  "run": "PG43004-g1307-time-and-local-criterion-trace-v1",
+  "source": "c781cbb3ed19f6d020c8e9d2e81b51f74ab8eb4d",
+  "productCore": "7698011f52d6cc5f94c76413b6ab36971783b9c9",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T20:40:56.577922+00:00",
+  "traceOwner": "WBS-G13.07/2",
+  "touchedToolPaths": [
+    {
+      "path": "tools/quality/006_collect_scenario_evidence.py",
+      "sha256": "7b64174e6f2b205033415ac565f1f02fd90fad7ba7a96af01ab2326640ad911e"
+    },
+    {
+      "path": "tools/quality/pgpt_reactor_junit.py",
+      "sha256": "49c2f9c58abd7ac70f9ef1aebac47f92f502f73ab25c86331f3e35425e9dad8a"
+    },
+    {
+      "path": "tools/quality/tests/test_pgpt_reactor_junit.py",
+      "sha256": "0f10e10e73c7f5d11841aae93c07f02430039f4d7c2b38cb4dfb6badad261859"
+    }
+  ],
+  "scopeReferences": {
+    "P006-02": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42994-outbox-retry-contract-v1/manifest.json",
+      "sha256": "560722345a8eb4e386d71f80d38cfd85be162a4af36c338dfb7cfb330ba71c04"
+    },
+    "P015-03": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42996-operation-token-current-json-v1/manifest.json",
+      "sha256": "6dc97085c623723335ec511a7df3a5046754f0cec040974ad341c02fe7319b38"
+    },
+    "F03/2-2-b": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43000-f03-current-batch-window-scope-v1/manifest.json",
+      "sha256": "377db1e4d2ca2773a7f4384ab98687e2a14f91294662542815863d2d023cb995"
+    },
+    "G09": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43002-g09-reactor-timestamp-binding-v1/manifest.json",
+      "sha256": "4e3363b34f29b8ab6f8a8d44163b00b6285a10454a7dd47d0bda9aa07b619a09"
+    }
+  },
+  "scopes": {
+    "G09": "current private synthetic tool group151 including stricter original timestamps; full reactor gate remains open",
+    "F03/2-2-b": "current Batch 53 in a distinct product run and latest six-module review; raw holds/review absent remain",
+    "P006-02": "application business Outbox local value rule and fixture, existing receipt candidate requalified; JMS and 451 remain",
+    "P015-03": "operation token JSON-only 12 original tests; real DB/API verification and 451 remain"
+  },
+  "historicOfficialTests": 1964,
+  "historicOfficialScopes": 53,
+  "currentProductExecutions": 0,
+  "completedOriginalPricePp": 0,
+  "priorScopeReceiptsUntouched": true,
+  "localOrHistoricalSumsNotMerged": true,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
