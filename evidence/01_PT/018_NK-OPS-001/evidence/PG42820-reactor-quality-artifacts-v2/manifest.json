@@ -1,0 +1,126 @@
+{
+  "run": "PG42820",
+  "sourceWorktreeHead": "4b634a4404c265dc35a2597dafa7f7b530c896d7",
+  "branch": "dev-foundation",
+  "wbs": "WBS-G08",
+  "actualExit": 0,
+  "startedAtUTC": "2026-11-22T16:22:37.723172+00:00",
+  "terminalAtUTC": "2026-11-22T16:22:39.214548+00:00",
+  "python": "3.14.4",
+  "checks": {
+    "fixed-receipts": {
+      "command": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/quality/tests",
+        "-p",
+        "test_pgpt_reactor_junit.py",
+        "-v"
+      ],
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42820-reactor-quality-artifacts-v2/fixed-receipts.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42820-reactor-quality-artifacts-v2/fixed-receipts.stderr",
+        "sha256": "a92a27b58d4f1e8104caa8b522118baf3895d2699bd721515fe9c2934710e96e"
+      }
+    },
+    "collectors": {
+      "command": [
+        "python3",
+        "-B",
+        "tools/quality/019_test_evidence_set.py",
+        "-v"
+      ],
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42820-reactor-quality-artifacts-v2/collectors.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42820-reactor-quality-artifacts-v2/collectors.stderr",
+        "sha256": "a14e04679d126023986a0a88e502c68850ae604ea6a400929a0eb4d7917b944b"
+      }
+    },
+    "runner-syntax": {
+      "command": [
+        "sh",
+        "-n",
+        "tools/quality/030_run_pgpt_verify.sh"
+      ],
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42820-reactor-quality-artifacts-v2/runner-syntax.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42820-reactor-quality-artifacts-v2/runner-syntax.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "proofPins": [
+    {
+      "path": "tools/quality/pgpt_reactor_junit.py",
+      "sha256": "bb7680a52fe2bb4935b4875a4d838d960652920c17c898b8abf2b0c94770baf2"
+    },
+    {
+      "path": "tools/quality/006_collect_scenario_evidence.py",
+      "sha256": "065ba1aee97e810017efd50cb340d40c28fc1c1eba08a6c3284ee03d31538c8d"
+    },
+    {
+      "path": "tools/quality/018_collect_verified_evidence_set.py",
+      "sha256": "bf6a22678ed853341e4b95cc6e8e3063a70ae412adf28d8b0f3cb378bfb57c50"
+    },
+    {
+      "path": "tools/quality/019_test_evidence_set.py",
+      "sha256": "b5add9c092f30b5d7cba27fc4be6237abb64edf83395a82bd89a460404e06b8b"
+    },
+    {
+      "path": "tools/quality/030_run_pgpt_verify.sh",
+      "sha256": "92f33a117a12c38f096c549d0e015fb44624fc60a75c9603878328f25ac83667"
+    },
+    {
+      "path": "tools/quality/tests/test_pgpt_reactor_junit.py",
+      "sha256": "7d83b451648e574df2a6d92c38dcd6dee47dec67f788cf37d2d3b1ec0a479448"
+    }
+  ],
+  "toolTests": 14,
+  "collectorTests": 119,
+  "newFixtureCases": 4,
+  "allowedProtocolArtifact": {
+    "originalEvidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42762-p01802-protocol-real-local-ci-v1/manifest.json",
+      "sha256": "93ccc017c908317d4ffe38456bd91027b90355386828ea2e27d621483518c7a5"
+    },
+    "compileHashes": 176,
+    "originalQualityFileHashes": {
+      "jacoco.exec": "ee483b07d5f869c429090e3abd3a41265a50b0ae67e81e5e3dc9cf8fb03d5fea",
+      "site/jacoco/jacoco.xml": "9a36b54da73edffb5f021c459bf39984809b9d9fda2d4c7efe4bbb20468ece2b",
+      "site/jacoco/jacoco.csv": "7f32fcb0076ad0cee654fd624328bfaaf0a1ecbe08ebefb967380f7439fea79c",
+      "spotbugsXml.xml": "033f00939b198bf30c3c1133eb5551bad2d032197f3bf38372f81b20b9152a9c"
+    },
+    "sameJarClassBytes": 176,
+    "reexecuted": false
+  },
+  "observationOnly": true,
+  "fullReactorExecuted": false,
+  "ordinaryJava": 0,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "source": "760ec3d700ac15e926c6217b7d7cd0c2db6f5200",
+  "terminal": {
+    "path": "../pgpt-runs/PG379/PG42820-reactor-quality-artifacts-v2/terminal.json",
+    "sha256": "6156ac10445e032c6a0f6521d7e043c6d019984d5266f4fb6a5d8fd065867912"
+  },
+  "rawOrdinaryJacoco": true,
+  "externalNativeTrial": false,
+  "bug": "BUG-3626",
+  "ykt": "YKT-2851"
+}
