@@ -16,6 +16,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import java.util.concurrent.atomic.AtomicReference;
 import org.junit.jupiter.api.Test;
 
 /** Decimal byte/explicit counter oracle, no physical capacity test claimed. PT-SCN-008-C01..C03. */
@@ -68,9 +69,12 @@ class TransferCapacityTest {
     }
     for (long bytes : new long[] {1, 4800, 48_000_000}) {
       var reservation = capacity.reserve(bytes);
-      assertEquals(bytes, capacity.snapshot().bytes());
-      assertEquals(1, capacity.snapshot().files());
-      reservation.close();
+      try {
+        assertEquals(bytes, capacity.snapshot().bytes());
+        assertEquals(1, capacity.snapshot().files());
+      } finally {
+        reservation.close();
+      }
     }
   }
 
@@ -78,17 +82,25 @@ class TransferCapacityTest {
   void c02RetainAndReleaseAreExactlyOnceIncludingUndeletedPartialFile() {
     var capacity = new TransferCapacity(4800, 1);
     var first = capacity.reserve(9600);
-    var second = capacity.reserve(4800);
-    assertEquals(19200, capacity.snapshot().bytes());
-    assertEquals(3, capacity.snapshot().files());
-    // Ready or undeleted partial files conservatively keep their full reservation.
-    first.retain();
-    first.close();
-    assertEquals(19200, capacity.snapshot().bytes());
-    assertThrows(IllegalStateException.class, first::retain);
-    second.close();
-    second.close();
-    assertThrows(IllegalStateException.class, second::retain);
+    try {
+      var second = capacity.reserve(4800);
+      try {
+        assertEquals(19200, capacity.snapshot().bytes());
+        assertEquals(3, capacity.snapshot().files());
+        // Ready or undeleted partial files conservatively keep their full reservation.
+        first.retain();
+        first.close();
+        assertEquals(19200, capacity.snapshot().bytes());
+        assertThrows(IllegalStateException.class, first::retain);
+        second.close();
+        second.close();
+        assertThrows(IllegalStateException.class, second::retain);
+      } finally {
+        second.close();
+      }
+    } finally {
+      first.close();
+    }
     assertEquals(14400, capacity.snapshot().bytes());
     assertEquals(2, capacity.snapshot().files());
     assertEquals(NORMAL_CAPACITY_LEVEL, capacity.snapshot().level().name());
@@ -102,11 +114,14 @@ class TransferCapacityTest {
   void c02InFlightAdmissionCanReachCriticalButNeverExhaustTheFiveGbDesignBudget() {
     var capacity = new TransferCapacity(4_499_999_999L, 100);
     var reservation = capacity.reserve(48_000_000);
-    assertEquals(4_547_999_999L, capacity.snapshot().bytes());
-    assertEquals(101, capacity.snapshot().files());
-    assertEquals(CRITICAL_CAPACITY_LEVEL, capacity.snapshot().level().name());
-    assertCapacity(capacity);
-    reservation.close();
+    try {
+      assertEquals(4_547_999_999L, capacity.snapshot().bytes());
+      assertEquals(101, capacity.snapshot().files());
+      assertEquals(CRITICAL_CAPACITY_LEVEL, capacity.snapshot().level().name());
+      assertCapacity(capacity);
+    } finally {
+      reservation.close();
+    }
     assertEquals(4_499_999_999L, capacity.snapshot().bytes());
     assertEquals("WARNING", capacity.snapshot().level().name());
     capacity.reserve(1).retain();
@@ -158,19 +173,18 @@ class TransferCapacityTest {
       throws InterruptedException, ExecutionException, TimeoutException {
     var capacity = new TransferCapacity(0, 0);
     var executor = Executors.newVirtualThreadPerTaskExecutor();
+    var acquired = new AtomicReference<TransferCapacity.Reservation>();
     try {
-      TransferCapacity.Reservation reservation;
       synchronized (capacity) {
-        reservation =
-            executor
-                .submit(
-                    () -> {
-                      var result = capacity.reserve(4800);
-                      assertEquals(4800, capacity.snapshot().bytes());
-                      return result;
-                    })
-                .get(5, TimeUnit.SECONDS);
+        executor
+            .submit(
+                () -> {
+                  acquired.set(capacity.reserve(4800));
+                  assertEquals(4800, capacity.snapshot().bytes());
+                })
+            .get(5, TimeUnit.SECONDS);
       }
+      var reservation = acquired.get();
       synchronized (reservation) {
         executor
             .submit(
@@ -185,8 +199,16 @@ class TransferCapacityTest {
       assertEquals(1, capacity.snapshot().files());
     } finally {
       executor.shutdownNow();
-      assertTrue(
-          executor.awaitTermination(10, TimeUnit.SECONDS), "capacity virtual executor terminated");
+      try {
+        assertTrue(
+            executor.awaitTermination(10, TimeUnit.SECONDS),
+            "capacity virtual executor terminated");
+      } finally {
+        var reservation = acquired.get();
+        if (reservation != null) {
+          reservation.close();
+        }
+      }
     }
   }
 
