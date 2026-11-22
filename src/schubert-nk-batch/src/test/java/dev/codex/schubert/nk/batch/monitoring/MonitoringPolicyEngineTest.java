@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
@@ -314,7 +315,8 @@ class MonitoringPolicyEngineTest {
   }
 
   @Test
-  void monPipe006ConcurrentSingleEntryKeepsOneOwner() throws Exception {
+  void monPipe006ConcurrentSingleEntryKeepsOneOwner()
+      throws InterruptedException, ExecutionException {
     var engine = new MonitoringPolicyEngine();
     var context = context(0, CauseClearance.UNCONFIRMED);
     var executor = Executors.newFixedThreadPool(4);
