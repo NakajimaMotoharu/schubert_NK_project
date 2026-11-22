@@ -8,14 +8,17 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.junit.jupiter.api.Test;
 
 /** PT-MIG-COPYMAN001..012; independently framed tuples/Python SHA, no data/DB IO. */
@@ -80,7 +83,7 @@ final class MigrationMasterCopyManifestTest {
       "e377044a13ed472d31cb6b1518f7004b8661a7330102b82d8e929a903d8d5cde";
 
   @Test
-  void copyman001IndependentNormalSixTuples() throws Exception {
+  void copyman001IndependentNormalSixTuples() throws IOException, NoSuchAlgorithmException {
     var result = normal();
     assertArrayEquals(NORMAL_VECTOR.getBytes(StandardCharsets.US_ASCII), result.canonicalBytes());
     assertEquals(NORMAL_HASH, result.sha256());
@@ -88,7 +91,7 @@ final class MigrationMasterCopyManifestTest {
   }
 
   @Test
-  void copyman002EmptySixStreamsHaveFixedEmptySha() throws Exception {
+  void copyman002EmptySixStreamsHaveFixedEmptySha() throws IOException, NoSuchAlgorithmException {
     var result = new MigrationMasterCopyManifest(emptyMappings(), empty());
     assertArrayEquals(EMPTY_VECTOR.getBytes(StandardCharsets.US_ASCII), result.canonicalBytes());
     assertEquals(EMPTY_HASH, result.sha256());
@@ -110,7 +113,7 @@ final class MigrationMasterCopyManifestTest {
   }
 
   @Test
-  void copyman003NullBoundaries() throws Exception {
+  void copyman003NullBoundaries() throws NoSuchAlgorithmException {
     var data = MigrationMasterCopyFingerprintTest.normal();
     assertThrows(IllegalArgumentException.class, () -> new MigrationMasterCopyManifest(null, data));
     assertThrows(
@@ -119,27 +122,27 @@ final class MigrationMasterCopyManifestTest {
   }
 
   @Test
-  void copyman004FileCountMismatch() throws Exception {
+  void copyman004FileCountMismatch() throws NoSuchAlgorithmException {
     rejectCount(0);
   }
 
   @Test
-  void copyman005EntryCountMismatch() throws Exception {
+  void copyman005EntryCountMismatch() throws NoSuchAlgorithmException {
     rejectCount(1);
   }
 
   @Test
-  void copyman006SpeakerCountMismatch() throws Exception {
+  void copyman006SpeakerCountMismatch() throws NoSuchAlgorithmException {
     rejectCount(2);
   }
 
   @Test
-  void copyman007AudioCountMismatch() throws Exception {
+  void copyman007AudioCountMismatch() throws NoSuchAlgorithmException {
     rejectCount(3);
   }
 
   @Test
-  void copyman008BytesAreDefensive() throws Exception {
+  void copyman008BytesAreDefensive() throws IOException, NoSuchAlgorithmException {
     var result = normal();
     var bytes = result.canonicalBytes();
     bytes[0] = 0;
@@ -149,7 +152,7 @@ final class MigrationMasterCopyManifestTest {
   }
 
   @Test
-  void copyman009SixCountsAreImmutable() throws Exception {
+  void copyman009SixCountsAreImmutable() throws IOException, NoSuchAlgorithmException {
     var result = normal();
     assertEquals(
         Map.of(
@@ -170,7 +173,8 @@ final class MigrationMasterCopyManifestTest {
   }
 
   @Test
-  void copyman010SameCopyTuplesDifferentDeclaredMappingChangesBinding() throws Exception {
+  void copyman010SameCopyTuplesDifferentDeclaredMappingChangesBinding()
+      throws IOException, NoSuchAlgorithmException {
     var result =
         new MigrationMasterCopyManifest(
             mappings(-1, -3), MigrationMasterCopyFingerprintTest.normal());
@@ -180,7 +184,8 @@ final class MigrationMasterCopyManifestTest {
   }
 
   @Test
-  void copyman011FiniteConcurrentImmutableSource() throws Exception {
+  void copyman011FiniteConcurrentImmutableSource()
+      throws NoSuchAlgorithmException, InterruptedException, ExecutionException, TimeoutException {
     var mapping = mappings(-1, -2);
     var data = MigrationMasterCopyFingerprintTest.normal();
     var executor = Executors.newFixedThreadPool(WORKERS);
@@ -204,7 +209,7 @@ final class MigrationMasterCopyManifestTest {
   }
 
   @Test
-  void copyman012FixedRedactionAndRepeatedSnapshot() throws Exception {
+  void copyman012FixedRedactionAndRepeatedSnapshot() throws IOException, NoSuchAlgorithmException {
     assertEquals("MigrationMasterCopyManifest[REDACTED]", normal().toString());
     assertEquals(NORMAL_HASH, normal().sha256());
     var failure =
@@ -214,12 +219,12 @@ final class MigrationMasterCopyManifestTest {
     assertNull(failure.getCause());
   }
 
-  private static MigrationMasterCopyManifest normal() throws Exception {
+  private static MigrationMasterCopyManifest normal() throws IOException, NoSuchAlgorithmException {
     return new MigrationMasterCopyManifest(
         mappings(-1, -2), MigrationMasterCopyFingerprintTest.normal());
   }
 
-  private static void rejectCount(int part) throws Exception {
+  private static void rejectCount(int part) throws NoSuchAlgorithmException {
     var data = MigrationMasterCopyFingerprintTest.normal();
     var failure =
         assertThrows(

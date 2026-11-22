@@ -10,9 +10,11 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
@@ -179,7 +181,8 @@ final class MigrationMasterCopyFingerprintTest {
           "entry_audio_links|1|39|61373bdf3db56554603cf93197cc4c65dbe7cd0ba45a99577ff2a564b1bae4b8");
 
   @Test
-  void finger001IndependentSixRowsByteCountsAndShaVectors() throws Exception {
+  void finger001IndependentSixRowsByteCountsAndShaVectors()
+      throws IOException, NoSuchAlgorithmException {
     assertEquals(
         NORMAL_METADATA, metadata(new MigrationMasterCopyFingerprint().fingerprint(normal())));
   }
@@ -201,7 +204,8 @@ final class MigrationMasterCopyFingerprintTest {
   }
 
   @Test
-  void finger004ImmutableMetadataListAndAllStableGetters() throws Exception {
+  void finger004ImmutableMetadataListAndAllStableGetters()
+      throws IOException, NoSuchAlgorithmException {
     var result = new MigrationMasterCopyFingerprint().fingerprint(normal());
     assertThrows(UnsupportedOperationException.class, () -> result.clear());
     assertEquals(
@@ -212,14 +216,16 @@ final class MigrationMasterCopyFingerprintTest {
   }
 
   @Test
-  void finger005JapaneseNameCountsUtf8BytesNotCharacters() throws Exception {
+  void finger005JapaneseNameCountsUtf8BytesNotCharacters()
+      throws IOException, NoSuchAlgorithmException {
     assertEquals(
         JAPANESE_METADATA,
         metadata(new MigrationMasterCopyFingerprint().fingerprint(withSpeaker("アリス", null))));
   }
 
   @Test
-  void finger006NullAndLiteralBackslashNRemainDifferentBytes() throws Exception {
+  void finger006NullAndLiteralBackslashNRemainDifferentBytes()
+      throws IOException, NoSuchAlgorithmException {
     var fingerprint = new MigrationMasterCopyFingerprint();
     assertEquals(
         LITERAL_NULL_METADATA, metadata(fingerprint.fingerprint(withSpeaker(NORMAL_NAME, "\\N"))));
@@ -229,7 +235,8 @@ final class MigrationMasterCopyFingerprintTest {
   }
 
   @Test
-  void finger007CopyEscapingHasIndependentControlAndSlashVector() throws Exception {
+  void finger007CopyEscapingHasIndependentControlAndSlashVector()
+      throws IOException, NoSuchAlgorithmException {
     assertEquals(
         CONTROLS_METADATA,
         metadata(
@@ -238,14 +245,16 @@ final class MigrationMasterCopyFingerprintTest {
   }
 
   @Test
-  void finger008DeclaredSpeakerOrderIsNeverSortedForHash() throws Exception {
+  void finger008DeclaredSpeakerOrderIsNeverSortedForHash()
+      throws IOException, NoSuchAlgorithmException {
     var fingerprint = new MigrationMasterCopyFingerprint();
     assertEquals(TWO_SPEAKERS_METADATA, metadata(fingerprint.fingerprint(twoSpeakers(false))));
     assertEquals(REVERSE_SPEAKERS_METADATA, metadata(fingerprint.fingerprint(twoSpeakers(true))));
   }
 
   @Test
-  void finger009AddedSpeakerChangesOnlyItsCountBytesAndHash() throws Exception {
+  void finger009AddedSpeakerChangesOnlyItsCountBytesAndHash()
+      throws IOException, NoSuchAlgorithmException {
     assertEquals(
         TWO_SPEAKERS_METADATA,
         metadata(new MigrationMasterCopyFingerprint().fingerprint(twoSpeakers(false))));
@@ -254,7 +263,7 @@ final class MigrationMasterCopyFingerprintTest {
   }
 
   @Test
-  void finger010NoLinksHasOnlyLinkEmptyHash() throws Exception {
+  void finger010NoLinksHasOnlyLinkEmptyHash() throws IOException, NoSuchAlgorithmException {
     var source = normal();
     var content = source.content();
     var changed =
@@ -267,7 +276,8 @@ final class MigrationMasterCopyFingerprintTest {
   }
 
   @Test
-  void finger011NoAudioAndLinksHaveIndependentEmptyMetadata() throws Exception {
+  void finger011NoAudioAndLinksHaveIndependentEmptyMetadata()
+      throws IOException, NoSuchAlgorithmException {
     var source = normal();
     var content = source.content();
     var changed =
@@ -280,7 +290,8 @@ final class MigrationMasterCopyFingerprintTest {
   }
 
   @Test
-  void finger012NoMediaOnlyChangesMediaHashAndCounts() throws Exception {
+  void finger012NoMediaOnlyChangesMediaHashAndCounts()
+      throws IOException, NoSuchAlgorithmException {
     var source = normal();
     var content = source.content();
     var changed =
@@ -296,7 +307,8 @@ final class MigrationMasterCopyFingerprintTest {
   }
 
   @Test
-  void finger013NoEntriesAndLinksPreserveOtherFourTables() throws Exception {
+  void finger013NoEntriesAndLinksPreserveOtherFourTables()
+      throws IOException, NoSuchAlgorithmException {
     var source = normal();
     var content = source.content();
     var changed =
@@ -313,7 +325,8 @@ final class MigrationMasterCopyFingerprintTest {
   }
 
   @Test
-  void finger014NoFilesEntriesLinksPreserveRemainingTables() throws Exception {
+  void finger014NoFilesEntriesLinksPreserveRemainingTables()
+      throws IOException, NoSuchAlgorithmException {
     var source = normal();
     var content = source.content();
     var changed =
@@ -327,7 +340,8 @@ final class MigrationMasterCopyFingerprintTest {
   }
 
   @Test
-  void finger015RepeatedOwnedDigestsNeverAccumulateOrExposeInput() throws Exception {
+  void finger015RepeatedOwnedDigestsNeverAccumulateOrExposeInput()
+      throws IOException, NoSuchAlgorithmException {
     var fingerprint = new MigrationMasterCopyFingerprint();
     var source = normal();
     var first = fingerprint.fingerprint(source);
@@ -339,7 +353,8 @@ final class MigrationMasterCopyFingerprintTest {
   }
 
   @Test
-  void finger016FiniteParallelFingerprintsHaveNoSharedDigestState() throws Exception {
+  void finger016FiniteParallelFingerprintsHaveNoSharedDigestState()
+      throws NoSuchAlgorithmException, InterruptedException, ExecutionException, TimeoutException {
     var fingerprint = new MigrationMasterCopyFingerprint();
     var source = normal();
     var executor = Executors.newFixedThreadPool(WORKERS);
@@ -356,7 +371,8 @@ final class MigrationMasterCopyFingerprintTest {
   }
 
   @Test
-  void finger017IdenticalDifferenceIsEmptyImmutableAndFresh() throws Exception {
+  void finger017IdenticalDifferenceIsEmptyImmutableAndFresh()
+      throws IOException, NoSuchAlgorithmException {
     var fingerprint = new MigrationMasterCopyFingerprint();
     var source = normal();
     var result = fingerprint.difference(source, source);
@@ -366,7 +382,8 @@ final class MigrationMasterCopyFingerprintTest {
   }
 
   @Test
-  void finger018RowsDifferBeforeByteAndHashConditions() throws Exception {
+  void finger018RowsDifferBeforeByteAndHashConditions()
+      throws IOException, NoSuchAlgorithmException {
     var fingerprint = new MigrationMasterCopyFingerprint();
     assertEquals(
         List.of(EXPECTED_SPEAKER_TABLE), fingerprint.difference(normal(), twoSpeakers(false)));
@@ -374,7 +391,8 @@ final class MigrationMasterCopyFingerprintTest {
   }
 
   @Test
-  void finger019ByteDifferenceAndSameByteHashDifferenceAreDetected() throws Exception {
+  void finger019ByteDifferenceAndSameByteHashDifferenceAreDetected()
+      throws IOException, NoSuchAlgorithmException {
     var fingerprint = new MigrationMasterCopyFingerprint();
     var longer = withSpeaker("Alicee", null);
     var sameBytes = withSpeaker("ALICE", null);
@@ -385,7 +403,8 @@ final class MigrationMasterCopyFingerprintTest {
   }
 
   @Test
-  void finger020DifferenceNullBoundariesAndSixTableTimestampChange() throws Exception {
+  void finger020DifferenceNullBoundariesAndSixTableTimestampChange()
+      throws IOException, NoSuchAlgorithmException {
     var fingerprint = new MigrationMasterCopyFingerprint();
     var source = normal();
     assertEquals(
@@ -419,7 +438,7 @@ final class MigrationMasterCopyFingerprintTest {
   }
 
   private static MigrationMasterCopyDataset withSpeaker(String name, @Nullable String notes)
-      throws Exception {
+      throws NoSuchAlgorithmException {
     return new MigrationMasterCopyDataset(
         new SpeakerCopyBatch(
             List.of(
@@ -429,7 +448,8 @@ final class MigrationMasterCopyFingerprintTest {
         content(STAMP));
   }
 
-  private static MigrationMasterCopyDataset twoSpeakers(boolean reverse) throws Exception {
+  private static MigrationMasterCopyDataset twoSpeakers(boolean reverse)
+      throws NoSuchAlgorithmException {
     var alice = speakers(STAMP).rows().getFirst();
     var bob =
         new SpeakerCopyRow(
@@ -438,11 +458,11 @@ final class MigrationMasterCopyFingerprintTest {
         new SpeakerCopyBatch(reverse ? List.of(bob, alice) : List.of(alice, bob)), content(STAMP));
   }
 
-  static MigrationMasterCopyDataset normal() throws Exception {
+  static MigrationMasterCopyDataset normal() throws NoSuchAlgorithmException {
     return new MigrationMasterCopyDataset(speakers(STAMP), content(STAMP));
   }
 
-  private static MigrationCopyDataset content(String stamp) throws Exception {
+  private static MigrationCopyDataset content(String stamp) throws NoSuchAlgorithmException {
     return new MigrationCopyDataset(
         scenario(true, SPEAKER_ID, ONE, stamp),
         List.of(audio(stamp)),
