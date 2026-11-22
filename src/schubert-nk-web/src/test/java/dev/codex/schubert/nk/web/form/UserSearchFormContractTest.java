@@ -18,9 +18,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.junit.jupiter.api.Test;
 
 /** USER-SEARCH001..008; UI225236/SS313323332; independent96byte/Unicode/page vectors. */
@@ -215,7 +217,8 @@ final class UserSearchFormContractTest {
   }
 
   @Test
-  void search008IndependentParallelBindingsNeverShareMutableFields() throws Exception {
+  void search008IndependentParallelBindingsNeverShareMutableFields()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var executor = Executors.newFixedThreadPool(4);
     try {
       var results = new ArrayList<Future<?>>();
