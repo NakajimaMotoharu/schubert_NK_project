@@ -1,0 +1,437 @@
+{
+  "run": "PG43124-p01810-protocol-fixed-diagnostics-current-v1",
+  "source": "c47432dba54fa4a7041a70d73a37ce7aa7843f5a",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "startEvent": "PGPT-20261008-8846",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T23:41:26.945097+00:00",
+  "wbs": "WBS-P018-10.02/2",
+  "design": [
+    "SS323",
+    "SS351"
+  ],
+  "testId": "PT-PRO-001-T01",
+  "original": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42624-f03-protocol-current-ordinary-171-and-unfiltered-v1/manifest.json",
+    "sha256": "6f0e070551dc9d6e36771fcdd31b2314e01118938949fffcdb487b5d04c4e747"
+  },
+  "qualifiedArchive": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43046-p00201-current-codec-recheck-v1/manifest.json",
+    "sha256": "0e15412c3ce060337d9c6237d648799aa423dce024d07a0c846e7ba2e9168b4e"
+  },
+  "archiveMain": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42762-protocol-real-local-ci-entry-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+    "sha256": "79210c39ae0ceee549878c1c25b22961a44cc4a379d90c8b1708b1c1b5c7efb5"
+  },
+  "independentFixture": [
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalogTest.java",
+      "sha256": "d7e9d8889ff34d42ffffca3249bc68aedd597643d57731ce22fec37bf710b90c"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/IndependentNamedFieldOracle.java",
+      "sha256": "b07077a027ccca66dadec8faf12aefdda9d98407ba0e6d24aaf992c335297510"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/resources/protocol/named-types-ss323.tsv",
+      "sha256": "9529fce86672b27a435665331648110521be6f59c5fe3fe5ca516df5234c7a76"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/resources/protocol/named-accessors-independent.tsv",
+      "sha256": "27b9a458374f5b9edda50d78fae42ee76dabf15d8d1ecd9c94e56dbab63162d5"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/resources/protocol/fields-ui234-236.tsv",
+      "sha256": "30e2c52a92603e3b80bed0bab50271319507f0a66fd93a404e36baa4c12b35a2"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/resources/protocol/layouts-ui233.tsv",
+      "sha256": "c4f290595f5cabf19c11877e2dea95627b4d42490116431bac3bfde58950d711"
+    }
+  ],
+  "matchingProtocolReference": "beb0dcb3e06db77cfe1aa9e02cf6210bd993d3f3",
+  "matchingPhysicalPopulation": 176,
+  "requirements": {
+    "layouts": 64,
+    "recordLayouts": 14,
+    "fixedTypes": 69
+  },
+  "originalPassingCases": [
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+      "method": "allNamedTypesHaveIndependentDirectionalFieldMeaning",
+      "outcome": "PASS"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+      "method": "allSixtyFourLayoutsRoundTripThroughSixtyNineExplicitNamedTypes",
+      "outcome": "PASS"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+      "method": "explicitCatalogMatchesIndependentSs323NamedTypeFixture",
+      "outcome": "PASS"
+    }
+  ],
+  "originalCaseList": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42624-f03-protocol-current-ordinary-171-and-unfiltered-v1/case-results.json",
+    "sha256": "ae44c06ebd1906c6805621f57b261770b4033b942abc15db9884c1fe3e258798"
+  },
+  "fixedInstructionBodies": [
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.admin.PasswordResetRequestData",
+      "sha256": "e7e01252b4c5e512db03a6178e3a1cf73613d6607d0fcd22f0af6ae383ad8b4b",
+      "expectedDiagnostic": "PasswordResetRequestData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.admin.UserCreateRequestData",
+      "sha256": "d734ddac5fbab168dd50c558e1079141b1f2921f6391f6df275b18feaf0aed5d",
+      "expectedDiagnostic": "UserCreateRequestData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.admin.UserDetailRequestData",
+      "sha256": "c5f1e3157170055a9d2c6714ae8824f843a310ae1f98ab1ab93ceb4563fc7b25",
+      "expectedDiagnostic": "UserDetailRequestData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.admin.UserDetailResponseData",
+      "sha256": "8c9bca1c7681f466d47a1938917b29f5dbb72edfcf4461f1924c342dab9d6f4f",
+      "expectedDiagnostic": "UserDetailResponseData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.admin.UserMutationResponseData",
+      "sha256": "dd89d2b22d026a2cdeb12aa9c7636a16903cae685e69f02a7ad2a5c3cff303b5",
+      "expectedDiagnostic": "UserMutationResponseData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.admin.UserRecord",
+      "sha256": "bc9c1a0930ae4e42e81ef449280c5b363b275540480aac4233cb01679b94c4d2",
+      "expectedDiagnostic": "UserRecord[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.admin.UserRoleRequestData",
+      "sha256": "830272f5b85646a211d4e353ad46c42287fbbac4ba54bc81ab71b36b593ab99d",
+      "expectedDiagnostic": "UserRoleRequestData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.admin.UserSearchRequestData",
+      "sha256": "05e24e077e66087870995605dc76979fbe61fbb664402f111749c76ca3a48689",
+      "expectedDiagnostic": "UserSearchRequestData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.admin.UserStatusRequestData",
+      "sha256": "0e260393cf10d0b8bc9beb6ff76e6e0e2dde611dc31b4cc68771042b528ef023",
+      "expectedDiagnostic": "UserStatusRequestData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.admin.UserUnlockRequestData",
+      "sha256": "168fb3bed04883ff0530d8f7b185ead780bdc5220f113e7a05e0cb78c6648646",
+      "expectedDiagnostic": "UserUnlockRequestData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.auth.LoginRequestData",
+      "sha256": "6bc53ad62522ce286e191c23573c6e4c832d1b4d0b1daa8108471bbe1fee8fe1",
+      "expectedDiagnostic": "LoginRequestData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.auth.LoginResponseData",
+      "sha256": "b03c16f93564a2da80b88d123165ba32edeccd07643f470ded9a6eb1ba60ba5a",
+      "expectedDiagnostic": "LoginResponseData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.auth.LogoutRequestData",
+      "sha256": "992c64b3bacc19cf5e257bc50235110ee565d3cb92e05e2d424e3473ffab56f8",
+      "expectedDiagnostic": "LogoutRequestData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.auth.LogoutResponseData",
+      "sha256": "9c2dcdd92403eccedbf3229be5bfb94e2c65d97a304f1917416d3df2d0d4713f",
+      "expectedDiagnostic": "LogoutResponseData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.common.PagedResponseData",
+      "sha256": "d4526c9853f84472c249ccabac895b3624095b2e98ea661d42ea4b0da3df7dce",
+      "expectedDiagnostic": "PagedResponseData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.log.LogRecord",
+      "sha256": "3a93f1ff74ce59cbede41dfc11dca3632a7ad69f3aed0fa9cfc403e968a4a004",
+      "expectedDiagnostic": "LogRecord[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.log.LogSearchRequestData",
+      "sha256": "3b4d0288c2c92a3856ef746cf11b766354b91e90cb85aa2443747c05346e7314",
+      "expectedDiagnostic": "LogSearchRequestData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.log.WebLogEventData",
+      "sha256": "fc1e336e010e604bf27ed6522cd06335eb84fee1b8022a2cb7f5d3e8303ac04c",
+      "expectedDiagnostic": "WebLogEventData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.media.AnimationListRequestData",
+      "sha256": "93d7c43b9e31266f32cb5b1c33415fb4a73a024108d380d91cc184ac685b48f7",
+      "expectedDiagnostic": "AnimationListRequestData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.media.AnimationListResponseData",
+      "sha256": "6fd7167ef1243cbf3dd0f7ad7638b8ef8926222fc7fcbaafee3708296e974937",
+      "expectedDiagnostic": "AnimationListResponseData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.media.AnimationMenuRequestData",
+      "sha256": "2577684e8f647464a1da66c05206183f468477dd2f23bce53c3e6e491061eef8",
+      "expectedDiagnostic": "AnimationMenuRequestData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.media.AnimationMenuResponseData",
+      "sha256": "f9d973d4aff5f465475668b6e300102c977158e4b587028c118cdb8dd37f765b",
+      "expectedDiagnostic": "AnimationMenuResponseData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.media.AnimationRecord",
+      "sha256": "9de2b407fea7fe8b178104f72ad4fdbd7fc2096ba566672192e5dc9787d3629b",
+      "expectedDiagnostic": "AnimationRecord[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.media.AudioDescriptorRequestData",
+      "sha256": "1cbd74a6e682b592e01cdb872b980db34aff1777a44ffad6bde12a3defbed144",
+      "expectedDiagnostic": "AudioDescriptorRequestData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.media.MediaDescriptorData",
+      "sha256": "12c31b616c4ec82ca49b3b1226feddcdd1fb992726f85e18598342682a85bcae",
+      "expectedDiagnostic": "MediaDescriptorData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.media.MusicCategoryRecord",
+      "sha256": "d5aeefc22e264550fb5352742c9242d0e4c72ca0a71ec0bcaf9420e089b774f0",
+      "expectedDiagnostic": "MusicCategoryRecord[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.media.MusicCategoryRequestData",
+      "sha256": "eaebf1052830978abeaf6c62aab0fc88c7b12083ecd151078b30e0977429cdec",
+      "expectedDiagnostic": "MusicCategoryRequestData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.media.MusicCategoryResponseData",
+      "sha256": "384c20dc2d73583e372090a02d1a75064cd4fb37b387b044bca50a22fa05d240",
+      "expectedDiagnostic": "MusicCategoryResponseData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.media.MusicDescriptorRequestData",
+      "sha256": "21a1d33078415ba7a2632670988433d1915ec71672994ef46eb7c039c375281e",
+      "expectedDiagnostic": "MusicDescriptorRequestData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.media.MusicSectionRecord",
+      "sha256": "78a03b70e0af2e688942675ae266f7025dcdd3fcc746fee5413ccbef19d75219",
+      "expectedDiagnostic": "MusicSectionRecord[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.media.MusicSectionRequestData",
+      "sha256": "584cbc362a528faeda89af99eff43e04d2fe45f430d2974f6faec888160deb23",
+      "expectedDiagnostic": "MusicSectionRequestData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.media.MusicSectionResponseData",
+      "sha256": "6047ef1db721997074708414a81124e1b1d4718d32f554b4edd1205f9408352f",
+      "expectedDiagnostic": "MusicSectionResponseData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.media.MusicTrackRecord",
+      "sha256": "3be7cfd87f0352894d6fbbde602988b4772223e6e76f6bc16b4ae0161a481af1",
+      "expectedDiagnostic": "MusicTrackRecord[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.media.MusicTrackRequestData",
+      "sha256": "c09110f735d4562a09f96725b3470d933ac45417d7dd5077637d279af6f38536",
+      "expectedDiagnostic": "MusicTrackRequestData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.media.MusicTrackResponseData",
+      "sha256": "15e54a9c05eb65b2d8de0fdd7d7f1f18e1a95ca51c4e4aba6640b881859d03f5",
+      "expectedDiagnostic": "MusicTrackResponseData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.media.VideoDescriptorRequestData",
+      "sha256": "b97c05ace0c33cd4a30486d175c0006adfe1703bea02ac4e36684b305e6f1a44",
+      "expectedDiagnostic": "VideoDescriptorRequestData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.media.VideoDescriptorResponseData",
+      "sha256": "49fb9af637b5a175619fb05682836939b473b90a3b84a17cc0d3f62863cf9e84",
+      "expectedDiagnostic": "VideoDescriptorResponseData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.question.NotificationCancelRequestData",
+      "sha256": "0498835d19d5c66143c04d510688d2edee0066d592a1c93a83430247897d3594",
+      "expectedDiagnostic": "NotificationCancelRequestData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.question.NotificationCancelResponseData",
+      "sha256": "9f28dac14b4c843af04e0d0723dad610483da8de8048a751724432ec8050a3c4",
+      "expectedDiagnostic": "NotificationCancelResponseData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.question.NotificationDetailRequestData",
+      "sha256": "525a71f87c51353a4d69495f95077b8909a9a936b8f04b9bf1bf4ad87585f398",
+      "expectedDiagnostic": "NotificationDetailRequestData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.question.NotificationDetailResponseData",
+      "sha256": "13416c6822c71ac6cf9bc8b796607c3d4335f0fc0b1dace5369707da46d48d70",
+      "expectedDiagnostic": "NotificationDetailResponseData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.question.NotificationRecord",
+      "sha256": "28ae5bf1c29799647ad39282a851b9e853f4c7c4b25c457b4059209be0419967",
+      "expectedDiagnostic": "NotificationRecord[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.question.NotificationSearchRequestData",
+      "sha256": "01034c0f11a4e3faaed1b5430413197a6da07b1602680e9e9d5a24e54220b64a",
+      "expectedDiagnostic": "NotificationSearchRequestData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.question.QuestionDeleteRequestData",
+      "sha256": "7cc9a32c7e082c9a1ceb9a47d9e6bd931bc5c999574faace71646e75c76b75a5",
+      "expectedDiagnostic": "QuestionDeleteRequestData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.question.QuestionDeleteResponseData",
+      "sha256": "72ee94224a899c594aac4ad92abf848f77c8c27b3130f6b98a9481b9fd4892f2",
+      "expectedDiagnostic": "QuestionDeleteResponseData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.question.QuestionDetailRequestData",
+      "sha256": "6473113433b495daa6f4a3eea51cd7142efaf10055fd0ffe76107a6fa548781f",
+      "expectedDiagnostic": "QuestionDetailRequestData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.question.QuestionDetailResponseData",
+      "sha256": "12c3df2dbaabeee0422ecd8ec20892e5a8e1fa07b669dfa57c9cf0684e63b3db",
+      "expectedDiagnostic": "QuestionDetailResponseData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.question.QuestionSearchRequestData",
+      "sha256": "cdd69dbe163542bd22709fde502bcc63248771f80f051eb7c6b23658d222b828",
+      "expectedDiagnostic": "QuestionSearchRequestData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.question.QuestionSubmitRequestData",
+      "sha256": "3026f691697010b20dbd36e676b772f434010be217ba4858f1b3fd467cb5887a",
+      "expectedDiagnostic": "QuestionSubmitRequestData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.question.QuestionSubmitResponseData",
+      "sha256": "644bd695a87c561977fec597b4bab70fd76061c9adb56b633ce9288c0b8c80a9",
+      "expectedDiagnostic": "QuestionSubmitResponseData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.question.QuestionSummaryRecord",
+      "sha256": "0b9dc150be0bcd6e8b4f9b63505987047f707e9d39bf8dee7ed151cf346bd8bc",
+      "expectedDiagnostic": "QuestionSummaryRecord[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.question.QuestionWorkData",
+      "sha256": "825c3e01ff362159f4cfe64d793f98d4e1cdafcb1c4127fd4acce9a254f0de6a",
+      "expectedDiagnostic": "QuestionWorkData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.scenario.GameListRequestData",
+      "sha256": "4b68e41b482de599228f3f1471615ca79716144994a141af3e5dd581c76d6962",
+      "expectedDiagnostic": "GameListRequestData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.scenario.GameListResponseData",
+      "sha256": "611707e1b96592f847625a0f6a48fd8a848cdefd4780e6d79c6ebe419549e9ba",
+      "expectedDiagnostic": "GameListResponseData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.scenario.GameRecord",
+      "sha256": "0eaeee7d1fc70aa26905afbdfdc8669ac3211f23075f944938e6ffb0854fe4fb",
+      "expectedDiagnostic": "GameRecord[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.scenario.RouteListRequestData",
+      "sha256": "0fc726d0046558581ec04b19768cdb264365bf8d77aa11eee8880abbea3e15dd",
+      "expectedDiagnostic": "RouteListRequestData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.scenario.RouteListResponseData",
+      "sha256": "fcb10c323d10acff5601c9a2a1c9f97b481c9890aa9ec29473e50acfbe9101f8",
+      "expectedDiagnostic": "RouteListResponseData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.scenario.RouteRecord",
+      "sha256": "4c69d66bac3394cd9ef55c55d1477c6e2788a37e3ad19da2cc7088b0431fcbf5",
+      "expectedDiagnostic": "RouteRecord[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.scenario.ScenarioDetailRequestData",
+      "sha256": "f719cbe15b08759dd088f390c301505863816efb7339d3be4aaba370e8412640",
+      "expectedDiagnostic": "ScenarioDetailRequestData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.scenario.ScenarioDetailResponseData",
+      "sha256": "3818ea0d87c147669b343e374aca18bd3b1fa12c5451ab8f928c0ddf71a3d20e",
+      "expectedDiagnostic": "ScenarioDetailResponseData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.scenario.ScenarioEntryRecord",
+      "sha256": "b2e10b99c78f7248d30a0a7982fc9563bee308734ee6abc6a427a32d4886a1ef",
+      "expectedDiagnostic": "ScenarioEntryRecord[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.scenario.ScenarioFileListRequestData",
+      "sha256": "b9be0332a48a4c25ace90d13125f10ca24071f7abb77f17abd991c26bd972d27",
+      "expectedDiagnostic": "ScenarioFileListRequestData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.scenario.ScenarioFileListResponseData",
+      "sha256": "165f429739a33316df20f161f478fa84774f78346f873854bd0dc3e6527cbf1b",
+      "expectedDiagnostic": "ScenarioFileListResponseData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.scenario.ScenarioFileRecord",
+      "sha256": "162945f25ecfb0d470381c92d57662e93af92c694440bd4cbfc5f653950cf800",
+      "expectedDiagnostic": "ScenarioFileRecord[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.scenario.ScenarioSearchRecord",
+      "sha256": "2a744be3d6d80bd3914e706f318070df6c01b61b1fc4f5d34889993a82d62d5d",
+      "expectedDiagnostic": "ScenarioSearchRecord[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.scenario.ScenarioSearchRequestData",
+      "sha256": "21e5f25b190d4f08d69c634b19f0969f196d85a787879e278e845c77267693b8",
+      "expectedDiagnostic": "ScenarioSearchRequestData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.scenario.SpeakerListRequestData",
+      "sha256": "379af39037d3cda6ce939bbbddbfe37c7213760f43104e186341dfc75a3cc644",
+      "expectedDiagnostic": "SpeakerListRequestData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.scenario.SpeakerListResponseData",
+      "sha256": "4c45015357be20c713f07d92ca193b27525b2194b1fe3500ff5c74c50592e315",
+      "expectedDiagnostic": "SpeakerListResponseData[REDACTED]"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.layout.scenario.SpeakerRecord",
+      "sha256": "c2f7ed5a2768d9bdc55d01c57b8d4f6961021668c9cbaa8c9544b02d2c98d021",
+      "expectedDiagnostic": "SpeakerRecord[REDACTED]"
+    }
+  ],
+  "disassembler": {
+    "path": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+    "sha256": "59d0b7cf9e1936f16cd6dd39d5214a0c8507a1d5895a1e9b95c52aa4f436d71b"
+  },
+  "disassemblySha256": "f9241921a2fbb2ab747e1430ee797d763fadf2843ff58d2994e9bef4c30a6356",
+  "replayedTests": 0,
+  "directEnvironmentActions": 0,
+  "sameCandidateNativeOrLiveDiagnostics": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
