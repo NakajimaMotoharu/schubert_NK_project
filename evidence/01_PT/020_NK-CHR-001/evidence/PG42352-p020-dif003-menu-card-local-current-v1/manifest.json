@@ -1,0 +1,78 @@
+{
+  "run": "PG42352",
+  "source": "ef44d02dfd42ed499a18167cd0e33eefc5489d7a",
+  "javaCore": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-P020-01.02/2",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T07:18:12.384272+00:00",
+  "authorizedRule": {
+    "path": "documents/200_UI/260_引継ぎ・監査/264_現行互換性Characterization Test仕様.md",
+    "source": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "sha256": "0b0973e6e1e94858e840bc1b85df1daff35e3a0fe9f28ea12331823c2cbcf781",
+    "row": "| DIF-003 | 現行4機能menu | 質問・通知・回答、ADMIN User管理追加 | FUN-009～013 | Card追加 | CHR-U01/N01 | RD確定 |"
+  },
+  "allowlistCurrent": {
+    "source": {
+      "path": "program/characterization/tests/resources/cases/dif-allowlist.json",
+      "sha256": "43239fe3d3f42c488dcbeb58017fde78830ba3771930a9c97cd65c3c7a7c5cb6"
+    },
+    "rule": {
+      "id": "DIF-003",
+      "cases": [
+        "CHR-U01",
+        "CHR-N01"
+      ],
+      "field": "menu.cards",
+      "mode": "difference",
+      "selectorType": "semantic",
+      "selectors": [
+        "menu.cards"
+      ],
+      "current": "4 legacy plus log",
+      "nk": "legacy plus question notification answer and admin user"
+    }
+  },
+  "namedToolCases": [
+    "aSeparateN01ClaimCannotSatisfyTheU01MenuContract",
+    "acceptsTheFiveLegacyAndNineApprovedAdministratorCardsInOrder",
+    "rejectsAUserMenuOrAnUnrelatedPointerAsTheAdministratorObservation",
+    "rejectsRenamingACurrentFunctionEvenIfTheClaimMatches",
+    "rejectsReorderingLegacyFunctionsWithinTheAdministratorMenu",
+    "requiresTheMenuCardArrayObservationOnU01"
+  ],
+  "toolEvidence": [
+    {
+      "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG41344-p020-current-218-local-v1/manifest.json",
+      "sha256": "5f9119617ebed6632218f46bd81c2b858f6c8fa3064a827edd1fb9b470d9148c"
+    },
+    {
+      "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG41346-p020-current-218-independent-v1/manifest.json",
+      "sha256": "d2191089b0953b97f34e139d3d62a5bde47387bdb3e0ff14dde155198bb41a15"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41344-p020-current-218-local-v1/reports/TEST-junit-jupiter.xml",
+      "sha256": "8f6b635830262186ba682cf3b682f56d8b732f1a557452d62cebae4c95ef4dd4"
+    }
+  ],
+  "currentIndependentNineCardProjection": {
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41926-f03-web-menu-error-pure-catalog-v1/manifest.json",
+      "sha256": "1bb198354533ff15eb299a5078466628adf550fc1f064d9f1a37ff0b0316383c"
+    },
+    "case": {
+      "method": "menuCatalogRetainsAllNineFixedDisplayAndDestinationVectors",
+      "existing": "PASS",
+      "independentDisplayDestinationRows": 9
+    }
+  },
+  "currentDirectOperations": 0,
+  "currentComparisonReal": 0,
+  "coverageReassigned": 0,
+  "formalAcceptanceId": null,
+  "whole451": false,
+  "remaining": [
+    "Actual U01 ordered ADMIN menu observation at current source.",
+    "Actual NK-only N01 feature paths and distinct observed result",
+    "Authorized real operating role and complete CHR plus 451"
+  ]
+}

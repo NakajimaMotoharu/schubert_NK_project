@@ -1,0 +1,44 @@
+{
+  "run": "PG42356",
+  "source": "ef44d02dfd42ed499a18167cd0e33eefc5489d7a",
+  "javaCore": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-G12",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T07:22:14.642176+00:00",
+  "tool": {
+    "path": "/usr/bin/systemd-analyze",
+    "sha256": "188138cf3aea2111c7744069b58c0597559808163d1b7f74ded0348d85e4bef3",
+    "systemdAnalyzeVersion": "systemd 259 (259.9-0ubuntu0.1)",
+    "source": "Installed Ubuntu distribution systemd binary package",
+    "package": "systemd",
+    "packageVersion": "259.9-0ubuntu0.1",
+    "os": "Ubuntu 26.04.1 LTS",
+    "arch": "x86_64"
+  },
+  "priorActualTimer": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42306-g1306-maintenance-timer-offline-v1/manifest.json",
+    "sha256": "fcaed552f0f726ca27ce485b9a7c6c57bff013234a84215926e32ae4bffe4126"
+  },
+  "reproduction": {
+    "executable": "/usr/bin/python3",
+    "arguments": [
+      "-I",
+      "-B",
+      "evidence/01_PT/018_NK-OPS-001/input/42306_daily_timer_contract.py",
+      "src/deployment/systemd/schubert-nk-maintenance.timer.template",
+      "/usr/bin/systemd-analyze"
+    ]
+  },
+  "updatedToolchain": {
+    "path": "documents/400_PGPT/420_環境/421_開発環境・toolchain構築記録.md",
+    "sha256": "b41e3d83df5143ab4f294aa00548eb0e3ed70292f728ab3bc95801a28317a13e"
+  },
+  "updatedHandoff": {
+    "path": "documents/400_PGPT/460_完了報告/464_IT・ST引継ぎ事項.md",
+    "sha256": "c43669072451077ba623978798e1c710a3c71bf1aa2cdf411638f55e23872358"
+  },
+  "liveEnvironmentJob": 0,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "actualOfficialHandoffComplete": false
+}

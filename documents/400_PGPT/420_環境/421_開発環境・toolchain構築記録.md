@@ -1,5 +1,12 @@
 # 開発環境・toolchain構築記録
 
+## 2026-11-22 JST 日次保守calendar・PG42306
+
+Ubuntu 26.04.1 LTS／x86_64 の導入済みUbuntu OS package systemd 259.9-0ubuntu0.1 を使用。実体 /usr/bin/systemd-analyze、SHA256 188138cf3aea2111c7744069b58c0597559808163d1b7f74ded0348d85e4bef3。孤立した暦式解析のみ。再現はテストスクリプトへtimer sourceと同実体を渡す。新規導入・設定作成は0。
+
+証跡 evidence/01_PT/018_NK-OPS-001/evidence/PG42306-g1306-maintenance-timer-offline-v1/manifest.json SHA256 fcaed552f0f726ca27ce485b9a7c6c57bff013234a84215926e32ae4bffe4126。
+
+
 ## 2026-11-05 通常PGPTの明示選択JUnit/coverage工具
 
 既pinのJUnit5.13.4/platform1.13.4とJaCoCo0.8.15に合わせ、Maven Central公式artifactのConsoleStandalone1.13.4とJaCoCoCLI0.8.15-nodepsをhost toolchainへ導入。URL・固定SHA256/SHA512・取得過程の404/既存byte保全・publisherSHA1の限界はPGPT500/635へ保存。production依存/POM/実サービス変更0。635記載URLからartifactとpublisher.sha1を取得して照合し、計算SHA256が635に一致することを確認。標準Consoleの明示12method selector/--fail-if-no-testsと標準JaCoCo reportだけに用い、新しい用途別launcherを増設しない。compileはJDK25.0.4/-proc:none、現FlywayCore13.4.0は型参照のみ。private credential/DB/VM/Rootへの接続は含まない。使用結果は3505/3506、636の具体PT事前判定へ結合する。

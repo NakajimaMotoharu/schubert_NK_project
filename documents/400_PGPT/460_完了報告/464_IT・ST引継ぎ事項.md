@@ -1,5 +1,12 @@
 # IT・ST引継ぎ事項
 
+## 2026-11-22 JST 日次保守timerのPG/PT引渡し・工程継続中
+
+最新の正式認定は1964試験／53scope、WBS正式16/190。設定候補 27152c62e0b39a9fafa9aa2fd4576a9efb905da9 の05:00 JST timerはPG42306のoffline二条件で成立。既存batch.ymlの時刻・zoneと一致。後続の着手には承認済みserviceの製造、M排他、60分期限、固定stop順、更新・reboot安全の独立PT、環境所有と当sourceのrendered Unit/BOMが必要。実Unit・監視marker・再起動・保持条件の検証は後続の承認済みLinux環境へ引き継ぐ。工数率は未較正。
+
+証跡 evidence/01_PT/018_NK-OPS-001/evidence/PG42306-g1306-maintenance-timer-offline-v1/manifest.json SHA256 fcaed552f0f726ca27ce485b9a7c6c57bff013234a84215926e32ae4bffe4126。
+
+
 <!-- PGPT-CURRENT-20261108-HANDOFF-BEGIN -->
 ## 2026-11-08T23:51:30.065774+09:00 最新技術成果（PG/PT継続中・工程未完了）
 
