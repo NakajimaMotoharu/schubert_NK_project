@@ -1,0 +1,131 @@
+{
+  "run": "PG42078",
+  "source": "e6fbcfd26b2941edf7d33d38e998ffbfc3ebf3db",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-F03/2-2-b",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T04:12:52.971778+00:00",
+  "target": {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentScenarioEntryMapperTest.java",
+    "sha256": "80993c1ac9810be89b0b3dd1e804446db0f93ee0374a433f674b51bf5dc499a7"
+  },
+  "boundedFixtureClosure": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42076-p0190301-scenario-entry-proof-v1/manifest.json",
+    "sha256": "56fcd13d845f46e44151e7e31966edf72f4e6951633b07ccdec6d6ac547b449c"
+  },
+  "commandReceipt": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42078-f03-scenario-entry-mapper-typed-v1/begin.json",
+    "sha256": "0cc283acc3f086286563b13eb58be1ea584de33bb054177328f97893cdc5c75a"
+  },
+  "tools": {
+    "format": {
+      "actualExit": 1,
+      "start": "2026-11-22T04:12:47.242516+00:00",
+      "end": "2026-11-22T04:12:48.279106+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42078-f03-scenario-entry-mapper-typed-v1/format.stdout",
+        "sha256": "c55ae39e1ebba0d07f55ebe40e28f0fb608f19131b3ecf3921385cf33c62cbb4"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42078-f03-scenario-entry-mapper-typed-v1/format.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "checkstyle": {
+      "actualExit": 0,
+      "start": "2026-11-22T04:12:47.242819+00:00",
+      "end": "2026-11-22T04:12:48.148993+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42078-f03-scenario-entry-mapper-typed-v1/checkstyle.stdout",
+        "sha256": "2ee89ca49ecae1bb5b3de5ffcc8a964e605f1b1c6fbe072073a1ea4feaa4e230"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42078-f03-scenario-entry-mapper-typed-v1/checkstyle.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "pmd": {
+      "actualExit": 4,
+      "start": "2026-11-22T04:12:48.149290+00:00",
+      "end": "2026-11-22T04:12:52.393395+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42078-f03-scenario-entry-mapper-typed-v1/pmd.stdout",
+        "sha256": "d547774c7856324988d662bf039c4762f4af7ac32c638d9beeb361bbc173f84f"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42078-f03-scenario-entry-mapper-typed-v1/pmd.stderr",
+        "sha256": "141eb65d74f7997b8eef554fecec67bc550322bbe8156e05a8f2f34e7c0a69e8"
+      }
+    },
+    "spotbugs": {
+      "actualExit": 1,
+      "start": "2026-11-22T04:12:48.279403+00:00",
+      "end": "2026-11-22T04:12:52.967115+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42078-f03-scenario-entry-mapper-typed-v1/spotbugs.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42078-f03-scenario-entry-mapper-typed-v1/spotbugs.stderr",
+        "sha256": "83febadc46f214e89709b832aae077e8a743258c2778ad97727d55ed33462071"
+      }
+    }
+  },
+  "pmdFindings": [
+    {
+      "rule": "CloseResource",
+      "line": 329,
+      "endLine": 329,
+      "file": "CurrentScenarioEntryMapperTest.java"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 329,
+      "endLine": 329,
+      "file": "CurrentScenarioEntryMapperTest.java"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 334,
+      "endLine": 334,
+      "file": "CurrentScenarioEntryMapperTest.java"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 338,
+      "endLine": 338,
+      "file": "CurrentScenarioEntryMapperTest.java"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 339,
+      "endLine": 339,
+      "file": "CurrentScenarioEntryMapperTest.java"
+    }
+  ],
+  "pmdErrors": [],
+  "spotbugsFindings": [
+    {
+      "rule": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "method": "entryMap024ConcurrentCallsShareOnlyImmutableMappings"
+    }
+  ],
+  "spotbugsErrors": {
+    "errors": "0",
+    "missingClasses": "0"
+  },
+  "outputReports": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42078-f03-scenario-entry-mapper-typed-v1/pmd.xml",
+      "sha256": "1fbe0a2483879f2fd86116313aac53eb3b9abd21ab1e5df7a0309cb1c01284ea"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42078-f03-scenario-entry-mapper-typed-v1/spotbugs.xml",
+      "sha256": "0d8ac028ed2257e0fca15040f8c5f5424c69c56d1b77757ffae6be335b7c8290"
+    }
+  ],
+  "applicableUnresolved": 6,
+  "productTestsExecuted": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
