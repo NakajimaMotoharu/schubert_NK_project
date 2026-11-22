@@ -7,7 +7,7 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * Caller-declared sample continuity only, never actual observation or clock authority.
- * NK-OPS-001/P018-09; MON005..013; UI252; SS351 §7/10; PG-D523/MONWINDOW001..008.
+ * NK-OPS-001/P018-09; MON005..013; UI252; SS351 §7/10; PG-D523/1197/MONWINDOW001..008.
  */
 public final class ContinuousConditionWindow {
   public enum State {
@@ -18,7 +18,7 @@ public final class ContinuousConditionWindow {
 
   private final Object lock = new Object();
   private @Nullable Duration previous;
-  private @Nullable Duration violationStart;
+  private Optional<Duration> violationStart = Optional.empty();
 
   /** UNKNOWN is absent, NORMAL is zero; neither may preserve a preceding violation period. */
   public Optional<Duration> observe(State state, Duration elapsed, boolean consecutive) {
@@ -29,11 +29,14 @@ public final class ContinuousConditionWindow {
         throw new IllegalArgumentException("invalid observation sequence");
       previous = elapsed;
       if (state != State.VIOLATING) {
-        violationStart = null;
+        violationStart = Optional.empty();
         return state == State.NORMAL ? Optional.of(Duration.ZERO) : Optional.empty();
       }
-      if (!consecutive || violationStart == null) violationStart = elapsed;
-      return Optional.of(elapsed.minus(violationStart));
+      if (!consecutive || violationStart.isEmpty()) {
+        violationStart = Optional.of(elapsed);
+        return Optional.of(Duration.ZERO);
+      }
+      return Optional.of(elapsed.minus(violationStart.orElseThrow()));
     }
   }
 }
