@@ -1,0 +1,93 @@
+{
+  "run": "PG42286",
+  "source": "480d9d507f3f417d4ee86b99cd73f8ac832af163",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-C02-a",
+  "relatedWbs": [
+    "WBS-C02-b",
+    "WBS-P018-03",
+    "WBS-G13.06"
+  ],
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T06:36:44.324277+00:00",
+  "design": [
+    {
+      "path": "documents/100_RD/150_非機能要件/151_性能・可用性要件.md",
+      "commit": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+      "sha256": "c33570a425c17f3ae3256925726254f7ff19179e5a5649b3043d778b4cfca26c"
+    },
+    {
+      "path": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+      "commit": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+      "sha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87"
+    },
+    {
+      "path": "documents/200_UI/250_運用・非機能/251_朝バッチ・バックアップ・起動停止設計.md",
+      "commit": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+      "sha256": "6dc961aebad948e77567b6c2d584d01c00eb62aee27826aefd47dd41e286f7dd"
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md",
+      "commit": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+      "sha256": "857b4062d624ab8b99a2bfc72524f380c655c930db9388755968981e7c76d6c5"
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+      "commit": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+      "sha256": "07ab19dd27038241ba8257a1e4dcf180117a844b68479ec6848658a938445192"
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "commit": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+      "sha256": "3874975e619ba279814df4d6f79fd161098756cad882e00d580651fb2d7387cb"
+    }
+  ],
+  "requirements": [
+    "AVL-001",
+    "OPS-003",
+    "OPS-008"
+  ],
+  "expectedProductArtifacts": [
+    "schubert-nk-maintenance.timer",
+    "schubert-nk-maintenance.service"
+  ],
+  "currentProductionSearch": {
+    "treeEntries": 324,
+    "deployTreeEntries": 36,
+    "assemblyCandidateInputs": 314,
+    "timerPaths": [],
+    "servicePaths": [],
+    "literalOwnerOrReferencePaths": [],
+    "postRebootOnlyPathAndHash": [
+      {
+        "path": "src/deployment/systemd/schubert-nk-morning-controller.service.template",
+        "sha256": "e9ce87045404893edede09b86dfb55523698ed26eeef3c4cb2b386f16518613b"
+      },
+      {
+        "path": "src/deployment/systemd/schubert-nk-morning.target.template",
+        "sha256": "befb463e738a7cec5379b98cbb9ca68026fe49bb5ab7c593038bae9df8ebfacb"
+      }
+    ]
+  },
+  "previous14CurrentStatic": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42206-c02-fourteen-current-source-only-v1/manifest.json",
+    "sha256": "6e8af116f301a781b0002d11aa00c04b69f73e66b0a200fb729b1a26476594ef"
+  },
+  "previousC02NotRevoked": true,
+  "preRebootClosure": "UNPROVEN_MISSING_NAMED_PRODUCT_ARTIFACT_AND_INSTALLABILITY",
+  "observedSafeCriteria": [
+    "05:00 JST",
+    "one isolated schedule target",
+    "60min service completion",
+    "lock and controlled ordered stop",
+    "package change and failure classification",
+    "safe reboot prerequisite and fail closed"
+  ],
+  "actualToolsInvoked": [
+    "read-only git ls-tree",
+    "read-only git grep"
+  ],
+  "actualVmOrSystemdOrRebootOperations": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
