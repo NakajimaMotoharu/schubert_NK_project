@@ -1,0 +1,690 @@
+{
+  "run": "PG42650",
+  "source": "70e1e542e1e990a9e04b3a641d9743bdbdd00721",
+  "javaCore": "f8532c27c2666570fe450f285c5a5436aacd8e7e",
+  "wbs": "WBS-P019-03.01/2",
+  "terminalAtUTC": "2026-11-22T12:47:19.465966+00:00",
+  "actualExit": 0,
+  "originalCompilerClosureAttempts": [
+    {
+      "wasProductTest": false,
+      "compileFailure": {
+        "path": "../pgpt-runs/PG379/PG42650-projection-five-fixture-original-typed-v1/run.json",
+        "sha256": "228aeb4aa2ea5aa4d75aa7205a065955694e2d69c52c5d0a112c4ae3f8f78ee9"
+      },
+      "missing": "JSR305 Immutable annotation"
+    },
+    {
+      "wasProductTest": false,
+      "compileFailure": {
+        "path": "../pgpt-runs/PG379/PG42650-projection-five-fixture-original-typed-v2/run.json",
+        "sha256": "1746471f164db1ed88179dbeef993b5f49fc85e297abe42eae5f1aee4d015305"
+      },
+      "missing": "Speaker map/batch and text encoder"
+    },
+    {
+      "wasProductTest": false,
+      "compileFailure": {
+        "path": "../pgpt-runs/PG379/PG42650-projection-five-fixture-original-typed-v3/run.json",
+        "sha256": "ba01e86c98416ed96b0fc7a3ef44a78a7a8695e66fa1478d211db2fc973bfb15"
+      },
+      "missing": "Statement-independent writer and entry batch"
+    },
+    {
+      "wasProductTest": false,
+      "compileFailure": {
+        "path": "../pgpt-runs/PG379/PG42650-projection-five-fixture-original-typed-v4/run.json",
+        "sha256": "af531b131a371bf693b392a3708280256b0e5be3ec3ed5179f0489e0250b4f67"
+      },
+      "missing": "entry placement and migration maps"
+    }
+  ],
+  "finished": {
+    "path": "../pgpt-runs/PG379/PG42650-projection-five-fixture-original-typed-v5/run.json",
+    "sha256": "4bea19a382acd176f356bce1778e8becb953dcb60fee02f635cfa69bd27b1fa2"
+  },
+  "spotbugsRaw": [
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentAudioLinkProjectionReaderTest",
+      "method": "audioLinkRead001SignedIdsAndThreeColumns",
+      "line": "52"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentAudioLinkProjectionReaderTest",
+      "method": "audioLinkRead002EmptySnapshotStillExecutesOneBoundedQuery",
+      "line": "66"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentAudioLinkProjectionReaderTest",
+      "method": "audioLinkRead009ZeroNegativeAndBothLongExtremesAreRetained",
+      "line": "150"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentAudioLinkProjectionReaderTest",
+      "method": "audioLinkRead011StoredKindNotRecomputedValidatedOrNormalized",
+      "line": "172"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentAudioLinkProjectionReaderTest",
+      "method": "audioLinkRead012DeepImmutableSnapshotIsIndependentOfLaterFixtureChange",
+      "line": "182"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentAudioLinkProjectionReaderTest",
+      "method": "audioLinkRead013IndependentSqlTypedCallsWasNullTimeoutAndCloseOrder",
+      "line": "193"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentAudioLinkProjectionReaderTest",
+      "method": "audioLinkRead018ExtractionDoesNotRepairDuplicatesOrGivenResultOrder",
+      "line": "328"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentAudioLinkProjectionReaderTest",
+      "method": "audioLinkRead019FailureDoesNotPoisonLaterReadAndRedactionIsFixed",
+      "line": "345"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentAudioLinkProjectionReaderTest",
+      "method": "audioLinkRead020SharedStatelessReaderUsesOnlyPerCallOwnedResources",
+      "line": "361"
+    },
+    {
+      "type": "BX_UNBOXING_IMMEDIATELY_REBOXED",
+      "cls": "dev.codex.schubert.nk.migration.CurrentAudioLinkProjectionReaderTest$Fixture",
+      "method": "lambda$result$0",
+      "line": "511"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_THROWABLE",
+      "cls": "dev.codex.schubert.nk.migration.CurrentAudioLinkProjectionReaderTest$Fixture",
+      "method": "call",
+      "line": "520"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentAudioProjectionReaderTest",
+      "method": "audioRead001TenColumnsSignedIdsAndExactDecimal",
+      "line": "69"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentAudioProjectionReaderTest",
+      "method": "audioRead002EmptySnapshotStillExecutesOneBoundedQuery",
+      "line": "104"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentAudioProjectionReaderTest",
+      "method": "audioRead009UnknownGameSignedSizeAndNullableDurationArePreserved",
+      "line": "188"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentAudioProjectionReaderTest",
+      "method": "audioRead011StoredTextAndNullableMetadataAreNotRecomputed",
+      "line": "219"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentAudioProjectionReaderTest",
+      "method": "audioRead012DeepImmutableSnapshotsRetainNullableMetadata",
+      "line": "235"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentAudioProjectionReaderTest",
+      "method": "audioRead013IndependentSqlTypedGettersAndImmediateWasNullOrder",
+      "line": "247"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentAudioProjectionReaderTest",
+      "method": "audioRead018NumericPrecisionScaleMagnitudeAndPrimitiveBoundaries",
+      "line": "397"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentAudioProjectionReaderTest",
+      "method": "audioRead019FailureDoesNotPoisonLaterReadAndRedactionIsFixed",
+      "line": "440"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentAudioProjectionReaderTest",
+      "method": "audioRead020SharedStatelessReaderUsesOnlyPerCallOwnedResources",
+      "line": "456"
+    },
+    {
+      "type": "BX_UNBOXING_IMMEDIATELY_REBOXED",
+      "cls": "dev.codex.schubert.nk.migration.CurrentAudioProjectionReaderTest$Fixture",
+      "method": "lambda$result$0",
+      "line": "621"
+    },
+    {
+      "type": "BX_UNBOXING_IMMEDIATELY_REBOXED",
+      "cls": "dev.codex.schubert.nk.migration.CurrentAudioProjectionReaderTest$Fixture",
+      "method": "lambda$result$0",
+      "line": "620"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_THROWABLE",
+      "cls": "dev.codex.schubert.nk.migration.CurrentAudioProjectionReaderTest$Fixture",
+      "method": "call",
+      "line": "630"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentScenarioEntryProjectionReaderTest",
+      "method": "entryRead001TenTypedColumnsAndSignedBigintExtremes",
+      "line": "60"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentScenarioEntryProjectionReaderTest",
+      "method": "entryRead002EmptySnapshotStillExecutesOneBoundedQuery",
+      "line": "77"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentScenarioEntryProjectionReaderTest",
+      "method": "entryRead009NullableSpeakerAndUnknownDomainNumbersArePreserved",
+      "line": "161"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentScenarioEntryProjectionReaderTest",
+      "method": "entryRead011StoredTextAndNullableRawAreNeverRepaired",
+      "line": "189"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentScenarioEntryProjectionReaderTest",
+      "method": "entryRead012DeepImmutableSnapshotsRetainNullableValues",
+      "line": "204"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentScenarioEntryProjectionReaderTest",
+      "method": "entryRead013IndependentSqlTypedGetterAndImmediateWasNullOrder",
+      "line": "218"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentScenarioEntryProjectionReaderTest",
+      "method": "entryRead018EveryRequiredNumericBoundaryAndNullableTextHasIndependentLiteral",
+      "line": "372"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentScenarioEntryProjectionReaderTest",
+      "method": "entryRead019FailureDoesNotPoisonLaterReadAndRedactionIsFixed",
+      "line": "414"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentScenarioEntryProjectionReaderTest",
+      "method": "entryRead020SharedStatelessReaderUsesOnlyPerCallOwnedResources",
+      "line": "430"
+    },
+    {
+      "type": "BX_UNBOXING_IMMEDIATELY_REBOXED",
+      "cls": "dev.codex.schubert.nk.migration.CurrentScenarioEntryProjectionReaderTest$Fixture",
+      "method": "lambda$result$0",
+      "line": "580"
+    },
+    {
+      "type": "BX_UNBOXING_IMMEDIATELY_REBOXED",
+      "cls": "dev.codex.schubert.nk.migration.CurrentScenarioEntryProjectionReaderTest$Fixture",
+      "method": "lambda$result$0",
+      "line": "579"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_THROWABLE",
+      "cls": "dev.codex.schubert.nk.migration.CurrentScenarioEntryProjectionReaderTest$Fixture",
+      "method": "call",
+      "line": "589"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentScenarioFileProjectionReaderTest",
+      "method": "fileRead001EightColumnsAndSignedIdExtremes",
+      "line": "61"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentScenarioFileProjectionReaderTest",
+      "method": "fileRead002EmptySnapshotStillExecutesOneBoundedQuery",
+      "line": "77"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentScenarioFileProjectionReaderTest",
+      "method": "fileRead009NullableSizeUnknownGameAndNegativeSizeArePreserved",
+      "line": "161"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentScenarioFileProjectionReaderTest",
+      "method": "fileRead011StoredTextAndNullableMetadataAreNeverRepaired",
+      "line": "185"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentScenarioFileProjectionReaderTest",
+      "method": "fileRead012DeepImmutableSnapshotsRetainNullableMetadata",
+      "line": "203"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentScenarioFileProjectionReaderTest",
+      "method": "fileRead013IndependentSqlTypedGetterAndImmediateWasNullOrder",
+      "line": "215"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentScenarioFileProjectionReaderTest",
+      "method": "fileRead018GameAndSizeBoundariesAndNullableTextHaveIndependentLiterals",
+      "line": "361"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentScenarioFileProjectionReaderTest",
+      "method": "fileRead019FailureDoesNotPoisonLaterReadAndRedactionIsFixed",
+      "line": "387"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentScenarioFileProjectionReaderTest",
+      "method": "fileRead020SharedStatelessReaderUsesOnlyPerCallOwnedResources",
+      "line": "403"
+    },
+    {
+      "type": "BX_UNBOXING_IMMEDIATELY_REBOXED",
+      "cls": "dev.codex.schubert.nk.migration.CurrentScenarioFileProjectionReaderTest$Fixture",
+      "method": "lambda$result$0",
+      "line": "553"
+    },
+    {
+      "type": "BX_UNBOXING_IMMEDIATELY_REBOXED",
+      "cls": "dev.codex.schubert.nk.migration.CurrentScenarioFileProjectionReaderTest$Fixture",
+      "method": "lambda$result$0",
+      "line": "552"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_THROWABLE",
+      "cls": "dev.codex.schubert.nk.migration.CurrentScenarioFileProjectionReaderTest$Fixture",
+      "method": "call",
+      "line": "562"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentSpeakerProjectionReaderTest",
+      "method": "speakerRead001SixTypedColumnsAndBothSignedBigintExtremes",
+      "line": "60"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentSpeakerProjectionReaderTest",
+      "method": "speakerRead002EmptySnapshotStillExecutesOneBoundedQuery",
+      "line": "76"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentSpeakerProjectionReaderTest",
+      "method": "speakerRead009NullableOrUnknownGameIsPreservedThenRejectedByTargetMap",
+      "line": "158"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentSpeakerProjectionReaderTest",
+      "method": "speakerRead011StoredValuesAreNotCleanedLoweredOrNormalized",
+      "line": "183"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentSpeakerProjectionReaderTest",
+      "method": "speakerRead012ReturnedRowsAreDeepImmutableSnapshotsIncludingNullNotes",
+      "line": "198"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentSpeakerProjectionReaderTest",
+      "method": "speakerRead013IndependentSqlTypedGetterAndImmediateWasNullCallOrder",
+      "line": "210"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentSpeakerProjectionReaderTest",
+      "method": "speakerRead018ProjectionMapBatchMatchesIndependentFixedCopy",
+      "line": "352"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentSpeakerProjectionReaderTest",
+      "method": "speakerRead019FailureDoesNotPoisonLaterReadAndRedactionIsFixed",
+      "line": "365"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.migration.CurrentSpeakerProjectionReaderTest",
+      "method": "speakerRead020SharedStatelessReaderUsesOnlyPerCallOwnedResources",
+      "line": "381"
+    },
+    {
+      "type": "BX_UNBOXING_IMMEDIATELY_REBOXED",
+      "cls": "dev.codex.schubert.nk.migration.CurrentSpeakerProjectionReaderTest$Fixture",
+      "method": "lambda$result$0",
+      "line": "539"
+    },
+    {
+      "type": "BX_UNBOXING_IMMEDIATELY_REBOXED",
+      "cls": "dev.codex.schubert.nk.migration.CurrentSpeakerProjectionReaderTest$Fixture",
+      "method": "lambda$result$0",
+      "line": "538"
+    },
+    {
+      "type": "BX_UNBOXING_IMMEDIATELY_REBOXED",
+      "cls": "dev.codex.schubert.nk.migration.CurrentSpeakerProjectionReaderTest$Fixture",
+      "method": "lambda$result$0",
+      "line": "537"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_THROWABLE",
+      "cls": "dev.codex.schubert.nk.migration.CurrentSpeakerProjectionReaderTest$Fixture",
+      "method": "call",
+      "line": "548"
+    }
+  ],
+  "pmdRaw": [
+    {
+      "source": "CurrentAudioLinkProjectionReaderTest.java",
+      "rule": "NullAssignment",
+      "line": 140
+    },
+    {
+      "source": "CurrentAudioLinkProjectionReaderTest.java",
+      "rule": "NullAssignment",
+      "line": 163
+    },
+    {
+      "source": "CurrentAudioLinkProjectionReaderTest.java",
+      "rule": "CloseResource",
+      "line": 362
+    },
+    {
+      "source": "CurrentAudioLinkProjectionReaderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 362
+    },
+    {
+      "source": "CurrentAudioLinkProjectionReaderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 367
+    },
+    {
+      "source": "CurrentAudioLinkProjectionReaderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 379
+    },
+    {
+      "source": "CurrentAudioLinkProjectionReaderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 380
+    },
+    {
+      "source": "CurrentAudioLinkProjectionReaderTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 431
+    },
+    {
+      "source": "CurrentAudioLinkProjectionReaderTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 454
+    },
+    {
+      "source": "CurrentAudioLinkProjectionReaderTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 486
+    },
+    {
+      "source": "CurrentAudioProjectionReaderTest.java",
+      "rule": "NullAssignment",
+      "line": 178
+    },
+    {
+      "source": "CurrentAudioProjectionReaderTest.java",
+      "rule": "NullAssignment",
+      "line": 201
+    },
+    {
+      "source": "CurrentAudioProjectionReaderTest.java",
+      "rule": "NullAssignment",
+      "line": 209
+    },
+    {
+      "source": "CurrentAudioProjectionReaderTest.java",
+      "rule": "NullAssignment",
+      "line": 228
+    },
+    {
+      "source": "CurrentAudioProjectionReaderTest.java",
+      "rule": "CloseResource",
+      "line": 457
+    },
+    {
+      "source": "CurrentAudioProjectionReaderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 457
+    },
+    {
+      "source": "CurrentAudioProjectionReaderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 462
+    },
+    {
+      "source": "CurrentAudioProjectionReaderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 473
+    },
+    {
+      "source": "CurrentAudioProjectionReaderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 474
+    },
+    {
+      "source": "CurrentAudioProjectionReaderTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 540
+    },
+    {
+      "source": "CurrentAudioProjectionReaderTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 563
+    },
+    {
+      "source": "CurrentAudioProjectionReaderTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 595
+    },
+    {
+      "source": "CurrentScenarioEntryProjectionReaderTest.java",
+      "rule": "NullAssignment",
+      "line": 151
+    },
+    {
+      "source": "CurrentScenarioEntryProjectionReaderTest.java",
+      "rule": "NullAssignment",
+      "line": 179
+    },
+    {
+      "source": "CurrentScenarioEntryProjectionReaderTest.java",
+      "rule": "NullAssignment",
+      "line": 198
+    },
+    {
+      "source": "CurrentScenarioEntryProjectionReaderTest.java",
+      "rule": "CloseResource",
+      "line": 431
+    },
+    {
+      "source": "CurrentScenarioEntryProjectionReaderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 431
+    },
+    {
+      "source": "CurrentScenarioEntryProjectionReaderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 436
+    },
+    {
+      "source": "CurrentScenarioEntryProjectionReaderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 447
+    },
+    {
+      "source": "CurrentScenarioEntryProjectionReaderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 448
+    },
+    {
+      "source": "CurrentScenarioEntryProjectionReaderTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 499
+    },
+    {
+      "source": "CurrentScenarioEntryProjectionReaderTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 522
+    },
+    {
+      "source": "CurrentScenarioEntryProjectionReaderTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 554
+    },
+    {
+      "source": "CurrentScenarioFileProjectionReaderTest.java",
+      "rule": "NullAssignment",
+      "line": 151
+    },
+    {
+      "source": "CurrentScenarioFileProjectionReaderTest.java",
+      "rule": "NullAssignment",
+      "line": 175
+    },
+    {
+      "source": "CurrentScenarioFileProjectionReaderTest.java",
+      "rule": "NullAssignment",
+      "line": 195
+    },
+    {
+      "source": "CurrentScenarioFileProjectionReaderTest.java",
+      "rule": "CloseResource",
+      "line": 404
+    },
+    {
+      "source": "CurrentScenarioFileProjectionReaderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 404
+    },
+    {
+      "source": "CurrentScenarioFileProjectionReaderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 409
+    },
+    {
+      "source": "CurrentScenarioFileProjectionReaderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 420
+    },
+    {
+      "source": "CurrentScenarioFileProjectionReaderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 421
+    },
+    {
+      "source": "CurrentScenarioFileProjectionReaderTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 472
+    },
+    {
+      "source": "CurrentScenarioFileProjectionReaderTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 495
+    },
+    {
+      "source": "CurrentScenarioFileProjectionReaderTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 527
+    },
+    {
+      "source": "CurrentSpeakerProjectionReaderTest.java",
+      "rule": "NullAssignment",
+      "line": 149
+    },
+    {
+      "source": "CurrentSpeakerProjectionReaderTest.java",
+      "rule": "NullAssignment",
+      "line": 173
+    },
+    {
+      "source": "CurrentSpeakerProjectionReaderTest.java",
+      "rule": "CloseResource",
+      "line": 382
+    },
+    {
+      "source": "CurrentSpeakerProjectionReaderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 382
+    },
+    {
+      "source": "CurrentSpeakerProjectionReaderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 387
+    },
+    {
+      "source": "CurrentSpeakerProjectionReaderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 398
+    },
+    {
+      "source": "CurrentSpeakerProjectionReaderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 399
+    },
+    {
+      "source": "CurrentSpeakerProjectionReaderTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 457
+    },
+    {
+      "source": "CurrentSpeakerProjectionReaderTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 480
+    },
+    {
+      "source": "CurrentSpeakerProjectionReaderTest.java",
+      "rule": "UseProperClassLoader",
+      "line": 512
+    }
+  ],
+  "bySpotType": {
+    "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION": 45,
+    "BX_UNBOXING_IMMEDIATELY_REBOXED": 10,
+    "THROWS_METHOD_THROWS_CLAUSE_THROWABLE": 5
+  },
+  "checkstyle": 0,
+  "productJavaPt": 0,
+  "databaseServer": 0,
+  "actualCopyPortOrNative": 0,
+  "formalAcceptanceId": null
+}
