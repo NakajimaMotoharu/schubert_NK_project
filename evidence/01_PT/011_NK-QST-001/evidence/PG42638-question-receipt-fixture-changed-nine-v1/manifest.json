@@ -1,0 +1,315 @@
+{
+  "run": "PG42638",
+  "source": "f8e4b2277bdb3dc75cdb1fe132c84001f1fa5d7e",
+  "javaCore": "f8532c27c2666570fe450f285c5a5436aacd8e7e",
+  "branch": "dev-foundation",
+  "os": "Linux 7.0.0-43-generic",
+  "jdk": "25.0.4",
+  "wbs": [
+    "WBS-F03/2-2-b",
+    "WBS-P011-01/2"
+  ],
+  "terminalAtUTC": "2026-11-22T12:32:44.762872+00:00",
+  "actualExit": 0,
+  "runs": [
+    {
+      "path": "../pgpt-runs/PG379/PG42638-question-receipt-fixture-changed-nine-v1/run.json",
+      "sha256": "f149ab00b942fb2efc5f49c51040b5c98517d0c5cba26025679923483dd46850"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG42638-question-receipt-fixture-changed-nine-v1/rawSubmit.json",
+      "sha256": "2f9c2630420f5df3f4ac9104fbb9183e94ace8e636eb08a16dbd9a0d8639e118"
+    }
+  ],
+  "proofBefore": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42634-f03-question-receipt-fixture-original-v1/manifest.json",
+      "sha256": "196da96eb514cdd0da51214a21c79d596e8117ddf7b87caef6cb100f457256cb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42636-f03-question-receipt-lateral-original-v1/manifest.json",
+      "sha256": "fc68e3e9fdcad9325372b62ddcc51474fe90fcc376a7ec2d43fc43c54d41e846"
+    }
+  ],
+  "related": [
+    "BUG-3592",
+    "BUG-3593",
+    "YKT-2827"
+  ],
+  "ordinary": {
+    "passed": 9,
+    "failed": 0,
+    "skipped": 0,
+    "errors": 0,
+    "executedSelected": [
+      "PT-QST-RID007",
+      "PT-QST-RID008",
+      "PT-QST-RID009",
+      "PT-QST-RNGREC-001",
+      "PT-QST-RNGREC-002",
+      "PT-QST-RNGREC-003",
+      "PT-QST-RNGREC-004",
+      "PT-QST-PORT008",
+      "PT-QST-PORT005"
+    ]
+  },
+  "fixedEvidence": {
+    "path": "../pgpt-runs/PG379/PG42638-question-receipt-fixture-changed-nine-v1/target/question-receipt-traces/PT-QST-RID008.txt",
+    "sha256": "589c9a9908f79744c9f6567eb37628de324e152e07b0359dfbd92f0cf5026fed"
+  },
+  "defectsApplicableAfter": 0,
+  "spotbugs": 0,
+  "checkstyle": 0,
+  "pmdRaw": [
+    {
+      "source": "QuestionReceiptIdTest.java",
+      "rule": "UseConcurrentHashMap",
+      "line": 148,
+      "reason": "fixture creates both oracle and observed maps on the calling test thread; no worker receives either map"
+    },
+    {
+      "source": "QuestionReceiptIdTest.java",
+      "rule": "UseConcurrentHashMap",
+      "line": 150,
+      "reason": "fixture creates both oracle and observed maps on the calling test thread; no worker receives either map"
+    },
+    {
+      "source": "QuestionReceiptIdTest.java",
+      "rule": "CloseResource",
+      "line": 151,
+      "reason": "owner executor shutdownNow then bounded awaitTermination(10 seconds) in finally"
+    },
+    {
+      "source": "QuestionReceiptIdTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 151,
+      "reason": "JUnit-owned finite workers necessary for the independent ownership and monitor contract; no application server pool"
+    },
+    {
+      "source": "QuestionReceiptIdTest.java",
+      "rule": "AvoidSynchronizedStatement",
+      "line": 156,
+      "reason": "independent oracle holds the public monitor to prove it is distinct from the generator lock"
+    },
+    {
+      "source": "QuestionReceiptIdTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 162,
+      "reason": "JUnit-owned finite workers necessary for the independent ownership and monitor contract; no application server pool"
+    },
+    {
+      "source": "QuestionReceiptIdTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 163,
+      "reason": "JUnit-owned finite workers necessary for the independent ownership and monitor contract; no application server pool"
+    },
+    {
+      "source": "QuestionReceiptIdTest.java",
+      "rule": "CloseResource",
+      "line": 212,
+      "reason": "owner executor shutdownNow then bounded awaitTermination(10 seconds) in finally"
+    },
+    {
+      "source": "QuestionReceiptIdTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 212,
+      "reason": "JUnit-owned finite workers necessary for the independent ownership and monitor contract; no application server pool"
+    },
+    {
+      "source": "QuestionReceiptIdTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 216,
+      "reason": "JUnit-owned finite workers necessary for the independent ownership and monitor contract; no application server pool"
+    },
+    {
+      "source": "QuestionReceiptIdTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 219,
+      "reason": "JUnit-owned finite workers necessary for the independent ownership and monitor contract; no application server pool"
+    },
+    {
+      "source": "QuestionReceiptIdTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 220,
+      "reason": "JUnit-owned finite workers necessary for the independent ownership and monitor contract; no application server pool"
+    },
+    {
+      "source": "QuestionReceiptRecoveryTest.java",
+      "rule": "CloseResource",
+      "line": 109,
+      "reason": "owner executor shutdownNow then bounded awaitTermination(10 seconds) in finally"
+    },
+    {
+      "source": "QuestionReceiptRecoveryTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 109,
+      "reason": "JUnit-owned finite workers necessary for the independent ownership and monitor contract; no application server pool"
+    },
+    {
+      "source": "QuestionReceiptRecoveryTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 111,
+      "reason": "JUnit-owned finite workers necessary for the independent ownership and monitor contract; no application server pool"
+    },
+    {
+      "source": "QuestionReceiptRecoveryTest.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "line": 112,
+      "reason": "existing PG27206 test fixture guards the bounded recovery worker shutdown; no production exception path"
+    },
+    {
+      "source": "QuestionReceiptRecoveryTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 113,
+      "reason": "JUnit-owned finite workers necessary for the independent ownership and monitor contract; no application server pool"
+    },
+    {
+      "source": "QuestionReceiptRecoveryTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 114,
+      "reason": "JUnit-owned finite workers necessary for the independent ownership and monitor contract; no application server pool"
+    },
+    {
+      "source": "QuestionSubmitRequestPortTest.java",
+      "rule": "CloseResource",
+      "line": 245,
+      "reason": "owner executor shutdownNow then bounded awaitTermination(10 seconds) in finally"
+    },
+    {
+      "source": "QuestionSubmitRequestPortTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 245,
+      "reason": "JUnit-owned finite workers necessary for the independent ownership and monitor contract; no application server pool"
+    },
+    {
+      "source": "QuestionSubmitRequestPortTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 248,
+      "reason": "JUnit-owned finite workers necessary for the independent ownership and monitor contract; no application server pool"
+    },
+    {
+      "source": "QuestionSubmitRequestPortTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 257,
+      "reason": "JUnit-owned finite workers necessary for the independent ownership and monitor contract; no application server pool"
+    },
+    {
+      "source": "QuestionSubmitRequestPortTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 267,
+      "reason": "JUnit-owned finite workers necessary for the independent ownership and monitor contract; no application server pool"
+    },
+    {
+      "source": "QuestionSubmitRequestPortTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 279,
+      "reason": "JUnit-owned finite workers necessary for the independent ownership and monitor contract; no application server pool"
+    },
+    {
+      "source": "QuestionSubmitRequestPortTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 281,
+      "reason": "JUnit-owned finite workers necessary for the independent ownership and monitor contract; no application server pool"
+    }
+  ],
+  "originalExec": {
+    "path": "../pgpt-runs/PG379/PG42638-question-receipt-fixture-changed-nine-v1/selected.exec",
+    "sha256": "8d53c8ba6cd71fca40d9d751f4973cbb1a5f69274cc2b9eea8d151b79f22340d"
+  },
+  "coverageScopeOnly": [
+    {
+      "owner": "QuestionReceiptId",
+      "classId": "6345582c2a078b00",
+      "metrics": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 31
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 1
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 7
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 6
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 6
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "owner": "QuestionReceiptIdGenerator",
+      "classId": "35f2c7eb4c58d8c2",
+      "metrics": {
+        "INSTRUCTION": {
+          "missed": 8,
+          "covered": 67
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 6
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 14
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 5
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 2
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "owner": "QuestionSubmitRequest",
+      "classId": "1adffba83a801c40",
+      "metrics": {
+        "INSTRUCTION": {
+          "missed": 60,
+          "covered": 153
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 3
+        },
+        "LINE": {
+          "missed": 13,
+          "covered": 39
+        },
+        "COMPLEXITY": {
+          "missed": 3,
+          "covered": 8
+        },
+        "METHOD": {
+          "missed": 2,
+          "covered": 7
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    }
+  ],
+  "wholeFourCoverage": false,
+  "whole451": false,
+  "protectedRuns": 0,
+  "formalAcceptanceId": null
+}
