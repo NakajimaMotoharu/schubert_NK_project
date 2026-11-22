@@ -1,0 +1,271 @@
+{
+  "run": "PG42690",
+  "source": "5a96814088522b1b70b3c2692391b61ab863df17",
+  "javaCore": "f8532c27c2666570fe450f285c5a5436aacd8e7e",
+  "pomSource": "3d35cff39183e1e5a7b72cbb76603b7d4c530f04",
+  "wbs": "WBS-F02-b-a",
+  "canonical": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+  "rd": {
+    "path": "documents/100_RD/110_総則・方針/111_システム化方針.md",
+    "sha256": "63a265f5395f847a680f36c1e13271c69061c5fb4079167411ce94d20f3f8e6e"
+  },
+  "terminalAtUTC": "2026-11-22T13:32:52.621957+00:00",
+  "actualExit": 0,
+  "prior": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41478-wbs66-f02-exact-candidate-intake-v1/manifest.json",
+    "sha256": "aec01ede4d9ca2d48d5ab342a19c1baaee526239c3a08dc8cf88cd0899f10e16"
+  },
+  "correction": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41478-wbs66-f02-exact-candidate-intake-v1/requirement-evidence-correction.json",
+    "sha256": "d4b637fa0ea0bdb041555fe5340468749031dfdc12b64c0fd1690f60a73dc31b"
+  },
+  "currentCriteria": [
+    {
+      "id": "SYS-001",
+      "canonicalLine": 12,
+      "expected": "次期システムの名称をschubert NKとする。",
+      "earlierEvidence": "Approved text/title linked by PG41472",
+      "earlierUnmet": "Current real CHR-A01",
+      "thisCandidateEvidence": "Approved text/title linked by PG41472",
+      "currentProof": [],
+      "remaining": "Current real CHR-A01",
+      "oldDependency": "G10/CHR-A01",
+      "formalAcceptanceId": null,
+      "accepted": false
+    },
+    {
+      "id": "SYS-002",
+      "canonicalLine": 13,
+      "expected": "Java 25 LTSを使用する。Ubuntu標準パッケージ`openjdk-25-jdk`で動作可能な構成とする。",
+      "earlierEvidence": "Four actual Java 25 Maven packages; six POM dependencies inspected",
+      "earlierUnmet": "API and Web standard packages; final platform verification",
+      "thisCandidateEvidence": "正規artifact 4/6、JDK 25のEnforcerと六製品の依存収束。",
+      "currentProof": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42664-f02-post-jackson-four-regular-artifacts-v1/manifest.json",
+          "sha256": "c690802d2133f1764689af06a54cf4c4ce11ed0b012d7aaf8f3e1a94573c5808"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42666-f02-maven-enforcer-six-current-model-v1/manifest.json",
+          "sha256": "b564cf804a60ed4a636178376ec3fb17c38a3a98fec6d380e789bf50aa5cc779"
+        }
+      ],
+      "remaining": "API/Web正規JAR、Ubuntu標準JDKによる現対象の実動。",
+      "oldDependency": "N01/N02/runtime HOLD",
+      "formalAcceptanceId": null,
+      "accepted": false
+    },
+    {
+      "id": "SYS-003",
+      "canonicalLine": 14,
+      "expected": "OSはUbuntu Server 26.04 LTSとする。",
+      "earlierEvidence": "Approved Ubuntu Server 26.04 LTS target and current deployment design reference",
+      "earlierUnmet": "Current target host OS/boot identity and admitted runtime receipt",
+      "thisCandidateEvidence": "現在の配備先Ubuntu 26.04の設定・所有の票を既候補として特定。",
+      "currentProof": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38454-f04-haruka-readonly-owner-resource-precheck-v1/manifest.json",
+          "sha256": "6050957e80dbbe1e0bf70e3fc0d5152b2103c4cc55dfbd72b1e45307433239cc"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42516-c02-operating-service-repository-gap-v1/manifest.json",
+          "sha256": "d98fea844e71d70ec4a16212cf596b04cf891e82d0a0727fc0f218a700b9735a"
+        }
+      ],
+      "remaining": "現haruka実行条件・適用releaseとhost/bootの証拠。",
+      "oldDependency": "N01/N02/VM HOLD",
+      "formalAcceptanceId": null,
+      "accepted": false
+    },
+    {
+      "id": "SYS-004",
+      "canonicalLine": 15,
+      "expected": "DBMSはPostgreSQL 18系を使用し、構築時点の最新minor releaseを採用する。",
+      "earlierEvidence": "Canonical PostgreSQL 18 line and historic PostgreSQL test references",
+      "earlierUnmet": "Current PostgreSQL 18 minor, effective driver and actual DB postconditions",
+      "thisCandidateEvidence": "Flyway 13.4.0＋同候補Jacksonの公開型のSDK3件、Maven model。",
+      "currentProof": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42658-p01802-jackson-model-and-offline-validation-v1/manifest.json",
+          "sha256": "88ca7703d654db4e70ab2e05fb822a61f694655917f42f1735e7043126af1de3"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42662-p01802-jackson-flyway-public-value-compat-v1/manifest.json",
+          "sha256": "f87d015970ff5ce81ae1f430f01f75625f5c7caa3e9296cd9982233273ba0d9a"
+        }
+      ],
+      "remaining": "現PostgreSQL 18系とminor、driver・schema・実DBの後条件。",
+      "oldDependency": "N03/DB HOLD",
+      "formalAcceptanceId": null,
+      "accepted": false
+    },
+    {
+      "id": "SYS-005",
+      "canonicalLine": 16,
+      "expected": "Web層とサーバ側アプリケーション層の通信は、すべてApache ActiveMQ Artemisを介する。",
+      "earlierEvidence": "Canonical Artemis-only Web/API boundary; POM compile/test split supports the boundary review",
+      "earlierUnmet": "Actual JMS producer/consumer event and typed six-JAR graph; absence of direct Web/API product communication",
+      "thisCandidateEvidence": "四正規包装に加え六GAV/収束の現在値を取得。",
+      "currentProof": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42664-f02-post-jackson-four-regular-artifacts-v1/manifest.json",
+          "sha256": "c690802d2133f1764689af06a54cf4c4ce11ed0b012d7aaf8f3e1a94573c5808"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42666-f02-maven-enforcer-six-current-model-v1/manifest.json",
+          "sha256": "b564cf804a60ed4a636178376ec3fb17c38a3a98fec6d380e789bf50aa5cc779"
+        }
+      ],
+      "remaining": "現Web→APIの全電文の実Artemis経路、API/Web正規結果、Storage JDBC境界。",
+      "oldDependency": "P005/P006/N04 dynamic HOLD",
+      "formalAcceptanceId": null,
+      "accepted": false
+    },
+    {
+      "id": "SYS-006",
+      "canonicalLine": 17,
+      "expected": "ブラウザ向け画面デザインは極力維持する。MQ導入等に伴う必要不可欠な変更は許容する。",
+      "earlierEvidence": "Canonical browser design rule; existing isolated DOM and approved copy evidence",
+      "earlierUnmet": "Current real browser/CHR and explicit approved DIF correspondence",
+      "thisCandidateEvidence": "24画面・33入口のsourceと43合成fixtureおよび旧113HTML同値。",
+      "currentProof": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42572-g1305-screen-route-and-view-source-matrix-v1/manifest.json",
+          "sha256": "d21780fd19b0e330191cb310c0a56caf59158ac832927009232d911175be6e34"
+        },
+        {
+          "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG42648-six-resource-fixture-43-current-v1/manifest.json",
+          "sha256": "4855375c4745623c581be4872e5fae38557753a669a8c6d3d60fb01eec801127"
+        }
+      ],
+      "remaining": "対象sourceの実BrowserとCurrent／NK画面の比較、未承認差分確認。",
+      "oldDependency": "G10/CHR-A01",
+      "formalAcceptanceId": null,
+      "accepted": false
+    },
+    {
+      "id": "SYS-007",
+      "canonicalLine": 18,
+      "expected": "Web層より後段の内部処理方式は、利用者から見た挙動を極端に変えない範囲で変更できる。安定性を優先する。",
+      "earlierEvidence": "Canonical user-visible compatibility/stability rule; original implementation evidence linked",
+      "earlierUnmet": "Current actual NK comparison, approved DIF and applicable lifecycle evidence",
+      "thisCandidateEvidence": "六候補の接続不足を実証担当別に確認。",
+      "currentProof": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42628-f03-current-six-product-evidence-and-owner-gap-v1/manifest.json",
+          "sha256": "1c0f0aab6b0e7019ca4d540e083c93f4a511be37bc412a16e3418f1d0db4b51a"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42684-p020-current-comparator-filestore-required-v1/manifest.json",
+          "sha256": "88a6c46b1d932999b823337b05f7b0c9c49ceb066cc1e5d02a6820247b4819da"
+        }
+      ],
+      "remaining": "Current／NK互換、実CHR-A01/L01、QA051 finalと基準sourceの一致。",
+      "oldDependency": "G10/CHR-L01/QA051 final HOLD",
+      "formalAcceptanceId": null,
+      "accepted": false
+    },
+    {
+      "id": "SYS-008",
+      "canonicalLine": 19,
+      "expected": "本番環境はオンプレミス、単一拠点、インターネット接続ありとする。",
+      "earlierEvidence": "Canonical single-site on-premises topology and recorded configuration design",
+      "earlierUnmet": "Current authorized target topology and internet connectivity receipt",
+      "thisCandidateEvidence": "Canonical single-site on-premises topology and recorded configuration design",
+      "currentProof": [],
+      "remaining": "Current authorized target topology and internet connectivity receipt",
+      "oldDependency": "C01/C02/N01..N05",
+      "formalAcceptanceId": null,
+      "accepted": false
+    },
+    {
+      "id": "SYS-009",
+      "canonicalLine": 20,
+      "expected": "コンテナおよびKubernetesは初期前提としない。必要性が確認された場合に再評価する。",
+      "earlierEvidence": "Canonical non-container initial profile and recorded configuration design",
+      "earlierUnmet": "Current non-container Linux Unit topology and qualifying terminal",
+      "thisCandidateEvidence": "管理用C02のsystemd対象と不足を既資料へ照合。",
+      "currentProof": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42516-c02-operating-service-repository-gap-v1/manifest.json",
+          "sha256": "d98fea844e71d70ec4a16212cf596b04cf891e82d0a0727fc0f218a700b9735a"
+        }
+      ],
+      "remaining": "実systemd有効Unit、現host所有と実環境の配備証票。",
+      "oldDependency": "C02/N01 deployment evidence still separate",
+      "formalAcceptanceId": null,
+      "accepted": false
+    },
+    {
+      "id": "SYS-010",
+      "canonicalLine": 21,
+      "expected": "大容量マスタ素材を含む業務データはローカルストレージに保持し、外部ストレージサービスを利用しない。",
+      "earlierEvidence": "Canonical local-storage requirement; existing physical Storage JAR, current JDBC source edge separate",
+      "earlierUnmet": "Current admitted local FileStore/large data, original-file retention, and no external storage",
+      "thisCandidateEvidence": "現Storage正規JAR、現在比較器のFileStore必要条件を明示。",
+      "currentProof": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42664-f02-post-jackson-four-regular-artifacts-v1/manifest.json",
+          "sha256": "c690802d2133f1764689af06a54cf4c4ce11ed0b012d7aaf8f3e1a94573c5808"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42684-p020-current-comparator-filestore-required-v1/manifest.json",
+          "sha256": "88a6c46b1d932999b823337b05f7b0c9c49ceb066cc1e5d02a6820247b4819da"
+        }
+      ],
+      "remaining": "現ローカルストレージ・実FileStore・原マスタの保持と権限。",
+      "oldDependency": "P003/P019/N03 local-original HOLD",
+      "formalAcceptanceId": null,
+      "accepted": false
+    },
+    {
+      "id": "SYS-012",
+      "canonicalLine": 23,
+      "expected": "初期公開方式はdomainを使用せず、到達確認済みのglobal IP addressと現行外部port `55160/tcp`を使用する。本番サーバ側のport開放は完了済みとする。",
+      "earlierEvidence": "Canonical requirement preserved; original implementation evidence linked",
+      "earlierUnmet": "Current external port and safe owner proof",
+      "thisCandidateEvidence": "Canonical requirement preserved; original implementation evidence linked",
+      "currentProof": [],
+      "remaining": "Current external port and safe owner proof",
+      "oldDependency": "C01/C02/N05 HOLD",
+      "formalAcceptanceId": null,
+      "accepted": false
+    },
+    {
+      "id": "SYS-013",
+      "canonicalLine": 24,
+      "expected": "初期TLS方式は現行相当のCaddy内部証明書を許容し、client側の証明書警告を許容する。通信暗号化は維持する。",
+      "earlierEvidence": "Canonical requirement preserved; original implementation evidence linked",
+      "earlierUnmet": "Current Caddy/TLS proof",
+      "thisCandidateEvidence": "Canonical requirement preserved; original implementation evidence linked",
+      "currentProof": [],
+      "remaining": "Current Caddy/TLS proof",
+      "oldDependency": "C01/N05 HOLD",
+      "formalAcceptanceId": null,
+      "accepted": false
+    },
+    {
+      "id": "SYS-014",
+      "canonicalLine": 25,
+      "expected": "Domainまたは公的に信頼されるIP address証明書を将来採用する場合に、業務アプリを改修せず入口設定と証明書を交換できる構成とする。",
+      "earlierEvidence": "Existing entrance-transition handoff 1155 and exact requirement",
+      "earlierUnmet": "Current receipt and approved runtime exchange proof",
+      "thisCandidateEvidence": "Existing entrance-transition handoff 1155 and exact requirement",
+      "currentProof": [],
+      "remaining": "Current receipt and approved runtime exchange proof",
+      "oldDependency": "C01/N05/IT-ST handoff",
+      "formalAcceptanceId": null,
+      "accepted": false
+    }
+  ],
+  "sysItems": 13,
+  "changedProofRows": 8,
+  "actualNewProductTests": 0,
+  "doc": {
+    "path": "evidence/01_PT/018_NK-OPS-001/5703_F02現候補SYS13個別証拠と受入不足.md",
+    "sha256": "c6f58f9744ff205b8f161d4e5da961c60f76c7a65a0ad1c2360053d6572bc1da"
+  },
+  "actualRuntimeActions": 0,
+  "formalAcceptanceId": null,
+  "independentReceiverReceipt": false
+}
