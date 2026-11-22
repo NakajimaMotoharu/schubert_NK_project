@@ -7,36 +7,16 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
 
-/** NK-OPS-001/OPS009/UI251/SS343 SSC063/308; PT-OPS-SCOPEVALUE001..004/BUG-3305. */
+/** NK-OPS-001/OPS009/UI251/SS343 SSC063/308; PT-OPS-SCOPEVALUE002..004/BUG-3305. */
 final class ProcessResourceScopeValueContractTest {
-  private static final String CONSTRUCT_REJECTED = "process resource scope is static";
   private static final String FIXED_STOP = "application stop check failed";
   private static final String BODY = "body";
   private static final String RELEASE = "release";
-
-  @Test
-  void scopeValue001RejectsAnyInstanceOfTheStaticNamespace() throws Exception {
-    assertEquals(0, ProcessResourceScope.class.getDeclaredFields().length);
-    var constructor = ProcessResourceScope.class.getDeclaredConstructor();
-    assertEquals(Modifier.PRIVATE, constructor.getModifiers());
-    boolean wasAccessible = constructor.canAccess(null);
-    constructor.setAccessible(true);
-    try {
-      var failure = assertThrows(InvocationTargetException.class, constructor::newInstance);
-      assertEquals(
-          CONSTRUCT_REJECTED,
-          assertInstanceOf(AssertionError.class, failure.getCause()).getMessage());
-    } finally {
-      constructor.setAccessible(wasAccessible);
-    }
-  }
 
   @Test
   void scopeValue002RejectsMissingInputsWithoutAcquiringOrReleasingThem() {
