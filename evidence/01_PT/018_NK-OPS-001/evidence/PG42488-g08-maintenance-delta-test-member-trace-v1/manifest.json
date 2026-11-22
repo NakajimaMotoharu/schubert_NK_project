@@ -1,0 +1,139 @@
+{
+  "run": "PG42488",
+  "source": "2ac2e2df2360d6d9edffce1ddd24dc8c1e796e4e",
+  "javaCore": "b5d5009768a04bb69468beed2471441b2a57ce27",
+  "wbs": "WBS-G08",
+  "terminalAtUTC": "2026-11-22T09:40:19.260114+00:00",
+  "approvedDesignOrigin": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+  "approved": [
+    {
+      "path": "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md",
+      "sha256": "857b4062d624ab8b99a2bfc72524f380c655c930db9388755968981e7c76d6c5"
+    },
+    {
+      "path": "documents/200_UI/250_運用・非機能/251_朝バッチ・バックアップ・起動停止設計.md",
+      "sha256": "6dc961aebad948e77567b6c2d584d01c00eb62aee27826aefd47dd41e286f7dd"
+    },
+    {
+      "path": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+      "sha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87"
+    }
+  ],
+  "archive": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42432-f02-current-batch-stop-sequence-maven-v1/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "c8b2aca1ac35f251282d05843e12885adf215bce20614500e161bdd00250ae45"
+  },
+  "classes": {
+    "MaintenanceRebootWatch": {
+      "code": {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MaintenanceRebootWatch.java",
+        "sha256": "0b0dc37c470791f0b3fe4a7439b730728bb30b185320e011fe22ea7db47552d9"
+      },
+      "productionSourceAtExecution": "8c99fbd2112183808d8d973bce7b3a9b3c1cef13",
+      "requirement": [
+        "OPS-003",
+        "SS341 §4.2",
+        "UI251 §2"
+      ],
+      "scope": {
+        "dev/codex/schubert/nk/batch/monitoring/MaintenanceRebootWatch$Decision.class": "1322984cdf659078e0b6f986f6be574e207098c1eb9b57fe69f7dfb70858af58",
+        "dev/codex/schubert/nk/batch/monitoring/MaintenanceRebootWatch$Marker.class": "f95df3320b4d3416dfab3eaf05db9023478d0c53b8c0b94361e5368bfb6793d8",
+        "dev/codex/schubert/nk/batch/monitoring/MaintenanceRebootWatch.class": "854c22e821fdaf76bda7a1b3c552db829f367dc457f0c9f629cd042122197976"
+      },
+      "owner": "WBS-C02",
+      "testIds": {
+        "PT-OPS-MAINT-PREBOOT004-W01": "waitBeforeTheExactSixtyMinuteBoundary",
+        "PT-OPS-MAINT-PREBOOT004-W02": "missingMarkerIsCriticalAtTheDeadlineAndAfter",
+        "PT-OPS-MAINT-PREBOOT004-W03": "acceptsSameRunNewBootAtTheDeadlineIncludingLaterReview",
+        "PT-OPS-MAINT-PREBOOT004-W04": "wrongRunOrSameBootDoesNotQualify",
+        "PT-OPS-MAINT-PREBOOT004-W05": "staleFutureAndLateMarkersDoNotQualifyAtTheDeadline",
+        "PT-OPS-MAINT-PREBOOT004-W06": "backwardObservationIsInvalid",
+        "PT-OPS-MAINT-PREBOOT004-W07": "malformedOperandsProduceOnlyTheFixedInvalidDecision",
+        "PT-OPS-MAINT-PREBOOT004-W08": "commandPrintsOneDecisionForEachAcceptedOperandShape"
+      },
+      "priorLocalProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42402-g1306-maintenance-reboot-watch-current-v1/manifest.json",
+        "sha256": "03d4392101a025f5675f9c4d30f815f384ddb828620c68965ac0b74fee18d1fe"
+      }
+    },
+    "MaintenanceUpdateAssessment": {
+      "code": {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment.java",
+        "sha256": "82cdbcd899d59ead61874569d868b0bd309d015a37bccad5ffd4ab0e5d2fd944"
+      },
+      "productionSourceAtExecution": "e753bebbc5391d060ba2d541c242d42dde413b1f",
+      "requirement": [
+        "OPS-008",
+        "SS341 §4.1",
+        "UI251 §3"
+      ],
+      "scope": {
+        "dev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment$Decision.class": "1ecc5790dc456bfddb33b05323639743a0b5d82725fd0edd6fb1f6a577c5ded1",
+        "dev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment$Observation.class": "e8bc0aab9c624458e52ab7efc7d5034b5e2f4c866cc80fdc68425dd84bc4b410",
+        "dev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment$SafetyChecks.class": "97e33be59043ee36479af53bf4a9a1a914ea8797ac27d5c41586ff809b471928",
+        "dev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment$UpdateResult.class": "cdfed8fcf348bdd2880a40445c31a0b013ee1a616a9186fa510608b7111de034",
+        "dev/codex/schubert/nk/batch/monitoring/MaintenanceUpdateAssessment.class": "2319337f1b641b92d78d07951aac913b7716d9cbf9fbc26da09d62cbc180b3bc"
+      },
+      "owner": "WBS-C02",
+      "testIds": {
+        "PT-OPS-MAINT-PREBOOT003-U01": "u01SuccessfulUpdateMeetsAllFiveVerifiedConditions",
+        "PT-OPS-MAINT-PREBOOT003-U02": "u02UpdateWarningRemainsVisibleWithAllFiveConditionsVerified",
+        "PT-OPS-MAINT-PREBOOT003-U04": "u04MissingUpdateOrCheckReceiptCannotMeetTheConditions",
+        "PT-OPS-MAINT-PREBOOT003-U06": "u06NullObservationsRemainUnverifiedAndCannotRetainAnOldSuccess",
+        "PT-OPS-MAINT-PREBOOT003-U05": "u05EachUnverifiedObservationKeepsTheWarningPrivate",
+        "PT-OPS-MAINT-PREBOOT003-U03": "u03EachUnsafeConditionKeepsBothUpdateOutcomesPrivate"
+      },
+      "priorLocalProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42420-g1306-maintenance-update-safety-v1/manifest.json",
+        "sha256": "6463018f09ec74638ec824b2f227ced08717b3019b65a0f59e39c1a98ebae1be"
+      }
+    },
+    "MaintenanceStopAssessment": {
+      "code": {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MaintenanceStopAssessment.java",
+        "sha256": "7d39459c02a129a48bdf8329068f0befb24ee3fa7e0ca893f36545e0f0b7161f"
+      },
+      "productionSourceAtExecution": "b5d5009768a04bb69468beed2471441b2a57ce27",
+      "requirement": [
+        "OPS-003",
+        "SS341 §4.1",
+        "UI251 §3"
+      ],
+      "scope": {
+        "dev/codex/schubert/nk/batch/monitoring/MaintenanceStopAssessment$Result.class": "7f52ace33b614bdef6630ad458c8e992df7fbf5f4d817fdcfef7596ce8449c0b",
+        "dev/codex/schubert/nk/batch/monitoring/MaintenanceStopAssessment$Stage.class": "e754240235d71b91df9cd9dccd9b309dc2182f0d0a86ece3994039447e91db6a",
+        "dev/codex/schubert/nk/batch/monitoring/MaintenanceStopAssessment$StopReceipt.class": "ebfc34c763024945853a6284df397707645240acc55e89b91de68947bd3fce5a",
+        "dev/codex/schubert/nk/batch/monitoring/MaintenanceStopAssessment.class": "c28ca866917392c02edb64e09a7114cae94ce715d3866cab12ab5fae98842802"
+      },
+      "owner": "WBS-C02",
+      "testIds": {
+        "PT-OPS-MAINT-PREBOOT002-S03": "s03OneNanosecondAboveEitherGraceAndInvalidElapsedAreRejected",
+        "PT-OPS-MAINT-PREBOOT002-S05": "s05StaleAndMissingReceiptsNeverAuthorizeAContinuation",
+        "PT-OPS-MAINT-PREBOOT002-S01": "s01TheApprovedSequenceAcceptsBothExactGraceBoundaries",
+        "PT-OPS-MAINT-PREBOOT002-S04": "s04AnyNonconfirmedStageBlocksTheUpdateCondition",
+        "PT-OPS-MAINT-PREBOOT002-S02": "s02ReorderedMissingExtraAndRepeatedStagesAreRejected"
+      },
+      "priorLocalProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42430-g1306-maintenance-stop-order-v1/manifest.json",
+        "sha256": "0dfd092b79554e720fcd78dcb34feb93b4a114cb229f504f7b95a39ae86241c1"
+      }
+    }
+  },
+  "normalLauncher": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42412-g1306-watch-packaged-cli-proof-v1/manifest.json",
+    "sha256": "9a712c899a20404d845c37ebbe1fee669c2221f8cf6c858823a65506390df990"
+  },
+  "timer": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42458-g1306-calendar-input-equivalence-v1/manifest.json",
+    "sha256": "4d72633d11eeb3ca26d2d7a0db402f95a7868fafda4ba89fe8ca326bca633a9c"
+  },
+  "oldScopeCoverageCombined": false,
+  "trace": {
+    "path": "evidence/01_PT/018_NK-OPS-001/5686_日次保守現候補の要件と試験対応.md",
+    "sha256": "dc4891751b36d43af2b45b3be8a2524a772d2d37c8422be7b1e46be1a0f89bdf"
+  },
+  "endToEndServiceIntegrated": false,
+  "addedPt": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

@@ -1,0 +1,51 @@
+{
+  "run": "PG42486",
+  "source": "2ac2e2df2360d6d9edffce1ddd24dc8c1e796e4e",
+  "javaCore": "b5d5009768a04bb69468beed2471441b2a57ce27",
+  "wbs": "WBS-P004-01.02/2",
+  "terminalAtUTC": "2026-11-22T09:38:13.371337+00:00",
+  "design": {
+    "path": "documents/300_SS/330_データ・ファイル/331_DB物理・DDL・index・権限設計.md",
+    "sha256": "f57d908ade963d03a7f1dd12dc93e0bd89fefa27223c674c3d363014913c64de"
+  },
+  "designSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+  "originalStaticOracle": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29714-nullable-check-source-static-join-v1/manifest.json",
+    "sha256": "86dd88c1180ce85d765d36250a9c1d363c149915dd387bd600aeabd74a07a730"
+  },
+  "firstCommittedFromPriorWorkspace": "56af00a92b000c14a020bcb5a25e52bb920228d1",
+  "historicalSourceNote": "PG29714 reports its precommit HEAD, and binds exact V029 workspace bytes by SHA. PG29720 commit contains that exact latest file.",
+  "spec": {
+    "path": "evidence/01_PT/004_NK-DAT-001/4238_V030音声role互換・DDL単体仕様とHOLD.md",
+    "sha256": "37f04deb7035085cc14af7c8df427272332fd3c7a8ab43e3573f2fffe0d837d7"
+  },
+  "current": {
+    "path": "src/schubert-nk-api/src/main/resources/db/migration/V029__strict_nullable_compound_checks.sql",
+    "sha256": "bb3a2be973f5a8ad6a84868f5c1c15bc44de71d37130f9cf7c56b1bb546eb878"
+  },
+  "verifiedConstraints": {
+    "schubert.auth_sessions": [
+      "ck_auth_sessions_revocation"
+    ],
+    "schubert.media_assets": [
+      "ck_media_assets_pair"
+    ],
+    "schubert.notifications": [
+      "ck_notifications_error"
+    ],
+    "schubert.request_inbox": [
+      "ck_request_inbox_response_snapshot_pair",
+      "ck_request_inbox_result_reference"
+    ]
+  },
+  "ordinaryDatabasePtNotRun": 15,
+  "laterV030": {
+    "path": "src/schubert-nk-api/src/main/resources/db/migration/V030__preserve_current_audio_role.sql",
+    "sha256": "ae099baa342734e4944a8c5b184f86c1a762026269a8e0573e8faad6626b92be"
+  },
+  "noLaterReplacement": true,
+  "actualSqlExecution": 0,
+  "actualDatabaseMigrationOrSqlState": false,
+  "formalAcceptanceId": null,
+  "whole451": false
+}
