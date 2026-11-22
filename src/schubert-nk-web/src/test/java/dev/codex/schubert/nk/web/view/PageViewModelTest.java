@@ -8,7 +8,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.protocol.layout.common.PagedResponseData;
+import java.beans.IntrospectionException;
 import java.beans.Introspector;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -16,8 +18,10 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.OptionalInt;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jsoup.Jsoup;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -116,7 +120,8 @@ class PageViewModelTest {
 
   @Test
   @DisplayName("PT-WEB-179 independent parallel projections")
-  void web179IndependentParallelProjection() throws Exception {
+  void web179IndependentParallelProjection()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var fixtures =
         List.of(fixture(1, 50, 0, 1, 0, 0, 0, 0), pages().get(1), pages().get(3), pages().get(5));
     var executor = Executors.newFixedThreadPool(8);
@@ -135,7 +140,8 @@ class PageViewModelTest {
 
   @Test
   @DisplayName("PT-WEB-180 closed JavaBean contract")
-  void web180JavaBeanDisplayContract() throws Exception {
+  void web180JavaBeanDisplayContract()
+      throws IntrospectionException, IllegalAccessException, InvocationTargetException {
     var model = PageViewModel.from(pages().get(1).data(), 50);
     Set<String> names = new HashSet<>();
     for (var property :

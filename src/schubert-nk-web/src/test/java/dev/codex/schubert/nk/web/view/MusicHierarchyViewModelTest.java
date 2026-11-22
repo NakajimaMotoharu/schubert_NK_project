@@ -12,6 +12,7 @@ import dev.codex.schubert.nk.protocol.layout.media.MusicSectionRecord;
 import dev.codex.schubert.nk.protocol.layout.media.MusicSectionResponseData;
 import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
 import dev.codex.schubert.nk.web.session.SessionPrincipal;
+import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -21,9 +22,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jsoup.Jsoup;
 import org.junit.jupiter.api.Test;
 import org.thymeleaf.context.Context;
@@ -240,7 +243,7 @@ class MusicHierarchyViewModelTest {
   }
 
   @Test
-  void web251ClosedBeansAndRedaction() throws Exception {
+  void web251ClosedBeansAndRedaction() throws IntrospectionException {
     var c = categories(categories());
     var s = sections("曲", sections());
     properties(c, Set.of("topBar", "categories", EXPECTED_TRACK_COUNT_PROPERTY));
@@ -310,7 +313,8 @@ class MusicHierarchyViewModelTest {
   }
 
   @Test
-  void web253ConcurrentProjection() throws Exception {
+  void web253ConcurrentProjection()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var records = categories();
     var sections = sections();
     var pool = Executors.newFixedThreadPool(8);
@@ -349,7 +353,7 @@ class MusicHierarchyViewModelTest {
     assertEquals(sections(), sections);
   }
 
-  private static void properties(Object bean, Set<String> expected) throws Exception {
+  private static void properties(Object bean, Set<String> expected) throws IntrospectionException {
     var actual = new HashSet<String>();
     for (var property :
         Introspector.getBeanInfo(bean.getClass(), Object.class).getPropertyDescriptors())
