@@ -1,0 +1,91 @@
+{
+  "run": "PG42634",
+  "source": "52d600d37dac10a60dcaa3ee941e0a5e6b77a3c9",
+  "javaCore": "f8532c27c2666570fe450f285c5a5436aacd8e7e",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-22T12:28:53.325632+00:00",
+  "actualExit": 0,
+  "os": "Linux 7.0.0-43-generic",
+  "jdk": "25.0.4",
+  "ordinaryTests": 0,
+  "rawSpotBugs": [
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "method": "concurrentCalls",
+      "line": "128"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "method": "equalityAndPublicEvidence",
+      "line": "169"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "method": "providerFailureReleasesPrivateStateToAnotherWorker",
+      "line": "187"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_RUNTIMEEXCEPTION",
+      "method": "lambda$providerFailureReleasesPrivateStateToAnotherWorker$0",
+      "line": "199"
+    }
+  ],
+  "pmd": [
+    {
+      "rule": "UseConcurrentHashMap",
+      "line": 145
+    },
+    {
+      "rule": "UseConcurrentHashMap",
+      "line": 147
+    },
+    {
+      "rule": "CloseResource",
+      "line": 148
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 148
+    },
+    {
+      "rule": "AvoidSynchronizedStatement",
+      "line": 153
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 159
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 160
+    },
+    {
+      "rule": "CloseResource",
+      "line": 204
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 204
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 208
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 211
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 212
+    }
+  ],
+  "checkstyle": 0,
+  "noErrorMissing": true,
+  "toolRun": {
+    "path": "../pgpt-runs/PG379/PG42634-qualified-receipt-fixture-static-v1/run.json",
+    "sha256": "4d12be6172629fc1b3bf06299a7de1f690bb980aa619898ec3a0056b88befbc9"
+  },
+  "protectedOperations": 0,
+  "formalAcceptanceId": null
+}

@@ -1,0 +1,365 @@
+{
+  "run": "PG42628",
+  "source": "ee45475434f464713ebd0b2b8e0b9d9f82994065",
+  "javaCore": "f8532c27c2666570fe450f285c5a5436aacd8e7e",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-22T12:20:47.783598+00:00",
+  "actualExit": 0,
+  "priorMatrix": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42520-f03-storage-and-six-product-current-matrix-v1/manifest.json",
+    "sha256": "afdd25f45c01b3357db1a8bd6ccfce6aea8a32112b660c2e0bc09ff9702ff4ad"
+  },
+  "regularArtifactEvidence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42626-f02-regular-four-protocol-fresh-source-and-remaining-v1/manifest.json",
+    "sha256": "45d8831d248b6c4fbb1afc636669552f042b2e35996135ad33a1c8759a20195a"
+  },
+  "modules": {
+    "protocol": {
+      "normal171": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42624-f03-protocol-current-ordinary-171-and-unfiltered-v1/manifest.json",
+        "sha256": "6f0e070551dc9d6e36771fcdd31b2314e01118938949fffcdb487b5d04c4e747"
+      },
+      "physicalForMavenAndRaw": 176,
+      "methodBranchEtc": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 20363
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 1080
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 3639
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1975
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1432
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 162
+        }
+      },
+      "pmdDisposition": [
+        {
+          "file": "PayloadGoldenVectorTest.java",
+          "line": 164,
+          "rule": "CloseResource",
+          "reason": "Executor shutdownNow and bounded await in finally on every test outcome."
+        },
+        {
+          "file": "PayloadGoldenVectorTest.java",
+          "line": 164,
+          "rule": "DoNotUseThreads",
+          "reason": "Existing finite owned test executor and deterministic worker fixture."
+        },
+        {
+          "file": "PayloadGoldenVectorTest.java",
+          "line": 169,
+          "rule": "DoNotUseThreads",
+          "reason": "Existing finite owned test executor and deterministic worker fixture."
+        },
+        {
+          "file": "PayloadGoldenVectorTest.java",
+          "line": 184,
+          "rule": "DoNotUseThreads",
+          "reason": "Existing finite owned test executor and deterministic worker fixture."
+        },
+        {
+          "file": "PayloadGoldenVectorTest.java",
+          "line": 185,
+          "rule": "DoNotUseThreads",
+          "reason": "Existing finite owned test executor and deterministic worker fixture."
+        },
+        {
+          "file": "IndependentNamedFieldOracle.java",
+          "line": 89,
+          "rule": "UseConcurrentHashMap",
+          "reason": "Private inputs and maps local to one independent fixture invocation."
+        },
+        {
+          "file": "IndependentNamedFieldOracle.java",
+          "line": 94,
+          "rule": "UseConcurrentHashMap",
+          "reason": "Private inputs and maps local to one independent fixture invocation."
+        },
+        {
+          "file": "IndependentNamedFieldOracle.java",
+          "line": 102,
+          "rule": "UseConcurrentHashMap",
+          "reason": "Private inputs and maps local to one independent fixture invocation."
+        },
+        {
+          "file": "IndependentNamedFieldOracle.java",
+          "line": 185,
+          "rule": "UseConcurrentHashMap",
+          "reason": "Private inputs and maps local to one independent fixture invocation."
+        },
+        {
+          "file": "IndependentNamedFieldOracle.java",
+          "line": 188,
+          "rule": "EqualsNull",
+          "reason": "Independent assertion for absent previous fixture mapping."
+        },
+        {
+          "file": "IndependentNamedFieldOracle.java",
+          "line": 190,
+          "rule": "UseConcurrentHashMap",
+          "reason": "Private inputs and maps local to one independent fixture invocation."
+        },
+        {
+          "file": "IndependentNamedFieldOracle.java",
+          "line": 198,
+          "rule": "NullAssignment",
+          "reason": "Intentional explicitly invalid synthetic input expected to be rejected."
+        },
+        {
+          "file": "IndependentNamedFieldOracle.java",
+          "line": 205,
+          "rule": "UseConcurrentHashMap",
+          "reason": "Private inputs and maps local to one independent fixture invocation."
+        },
+        {
+          "file": "IndependentNamedFieldOracle.java",
+          "line": 251,
+          "rule": "UseConcurrentHashMap",
+          "reason": "Private inputs and maps local to one independent fixture invocation."
+        },
+        {
+          "file": "PayloadTypeCatalogStateContractTest.java",
+          "line": 58,
+          "rule": "CloseResource",
+          "reason": "Executor shutdownNow and bounded await in finally on every test outcome."
+        },
+        {
+          "file": "PayloadTypeCatalogStateContractTest.java",
+          "line": 58,
+          "rule": "DoNotUseThreads",
+          "reason": "Existing finite owned test executor and deterministic worker fixture."
+        },
+        {
+          "file": "PayloadTypeCatalogStateContractTest.java",
+          "line": 60,
+          "rule": "DoNotUseThreads",
+          "reason": "Existing finite owned test executor and deterministic worker fixture."
+        },
+        {
+          "file": "PayloadTypeCatalogStateContractTest.java",
+          "line": 61,
+          "rule": "DoNotUseThreads",
+          "reason": "Existing finite owned test executor and deterministic worker fixture."
+        },
+        {
+          "file": "PayloadTypeCatalogStateContractTest.java",
+          "line": 68,
+          "rule": "DoNotUseThreads",
+          "reason": "Existing finite owned test executor and deterministic worker fixture."
+        },
+        {
+          "file": "PayloadTypeCatalogStateContractTest.java",
+          "line": 69,
+          "rule": "DoNotUseThreads",
+          "reason": "Existing finite owned test executor and deterministic worker fixture."
+        },
+        {
+          "file": "WebLogActionContractTest.java",
+          "line": 182,
+          "rule": "NullAssignment",
+          "reason": "Intentional explicitly invalid synthetic input expected to be rejected."
+        },
+        {
+          "file": "WebLogActionContractTest.java",
+          "line": 212,
+          "rule": "CloseResource",
+          "reason": "Executor shutdownNow and bounded await in finally on every test outcome."
+        },
+        {
+          "file": "WebLogActionContractTest.java",
+          "line": 212,
+          "rule": "DoNotUseThreads",
+          "reason": "Existing finite owned test executor and deterministic worker fixture."
+        },
+        {
+          "file": "WebLogActionContractTest.java",
+          "line": 214,
+          "rule": "DoNotUseThreads",
+          "reason": "Existing finite owned test executor and deterministic worker fixture."
+        },
+        {
+          "file": "WebLogActionContractTest.java",
+          "line": 215,
+          "rule": "DoNotUseThreads",
+          "reason": "Existing finite owned test executor and deterministic worker fixture."
+        },
+        {
+          "file": "WebLogActionContractTest.java",
+          "line": 222,
+          "rule": "DoNotUseThreads",
+          "reason": "Existing finite owned test executor and deterministic worker fixture."
+        },
+        {
+          "file": "WebLogActionContractTest.java",
+          "line": 223,
+          "rule": "DoNotUseThreads",
+          "reason": "Existing finite owned test executor and deterministic worker fixture."
+        }
+      ],
+      "next": "Whole-project synchronized acceptance under 451",
+      "javaMainCount": 169,
+      "currentRegular": {
+        "currentRegularArtifact": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42624-current-protocol-maven-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+          "sha256": "2e11940216614fbe48e663fd83400f1fe3cf1cd9fc626214c954aaddb8c0407f"
+        },
+        "originalProducingSource": "b31a1fb86fba08e139d307061b53cfabacf1bf57",
+        "physicalNames": 176,
+        "workingSourceReproduced": true,
+        "originProof": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42624-f03-protocol-current-ordinary-171-and-unfiltered-v1/manifest.json",
+          "sha256": "6f0e070551dc9d6e36771fcdd31b2314e01118938949fffcdb487b5d04c4e747"
+        }
+      },
+      "full451Accepted": false
+    },
+    "storage": {
+      "localStatic": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41730-f03-storage-current-typed-scope-v1/manifest.json",
+        "sha256": "9f4a47121c6a28fc6e8714d7de202470404f5ec3ad9ebcb14341c063e02ead72"
+      },
+      "physicalForLocalTyped": 79,
+      "heldPhysical": 0,
+      "heldTests": 2,
+      "latestIsolationProof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42594-p0181003-storage-unencodable-location-current-proof-v1/manifest.json",
+        "sha256": "0a8e5291dd8a1cc851a75055daca943af721ac0cadeb7985eb56ace80e4995dc"
+      },
+      "next": "SSC461 legacy SQL edge work and owner decision for two held tests, then same-run 451",
+      "javaMainCount": 25,
+      "currentRegular": {
+        "currentRegularArtifact": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40802-f02-current-four-package-v1/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+          "sha256": "e5be03a72a9cca548f68fc1ca7ee84ced8980dbea72162f58772215227be3ec0"
+        },
+        "originalProducingSource": "da20ad7753279ae4e8017593866502d3341ec0e5",
+        "physicalNames": 79,
+        "workingSourceReproduced": true,
+        "originProof": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42408-f02-batch-reboot-watch-regular-maven-v1/manifest.json",
+          "sha256": "63df845d7842438da77524e6ba379c83d3d47b3e33a8f382518738f16e624c40"
+        }
+      },
+      "full451Accepted": false
+    },
+    "bootstrap": {
+      "localStatic": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42518-f03-bootstrap-current-regular-and-row-proof-v1/manifest.json",
+        "sha256": "f8126e03c1da3e2c44e26c91f88e6efe9eeb1c1542416b7cb537481f7e43ec11"
+      },
+      "physicalForLocalTyped": 200,
+      "totalRegularPhysical": 201,
+      "heldPhysical": 1,
+      "next": "Authorized owner evidence for the held native scope, then same-run 451",
+      "javaMainCount": 88,
+      "currentRegular": {
+        "currentRegularArtifact": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40802-f02-current-four-package-v1/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+          "sha256": "3de920f0fc7df4909b362fd25856b5b91e2517fa404cbe5756725544472887f7"
+        },
+        "originalProducingSource": "da20ad7753279ae4e8017593866502d3341ec0e5",
+        "physicalNames": 201,
+        "workingSourceReproduced": true,
+        "originProof": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42518-f03-bootstrap-current-regular-and-row-proof-v1/manifest.json",
+          "sha256": "f8126e03c1da3e2c44e26c91f88e6efe9eeb1c1542416b7cb537481f7e43ec11"
+        }
+      },
+      "full451Accepted": false
+    },
+    "batch": {
+      "localStatic": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42532-f02-batch-package-and-f03-physical-requalification-v1/manifest.json",
+        "sha256": "cada937647f900533d2096574bd6b1d28421392f527d100ccb80984c0e407adc"
+      },
+      "physicalForLocalTyped": 291,
+      "totalRegularPhysical": 660,
+      "heldOrUnmeasured": 369,
+      "heldTests": 26,
+      "next": "53 named and 316 transitive held physicals, Root11, and regular full suite: owner evidence and same-run 451",
+      "javaMainCount": 203,
+      "currentRegular": {
+        "currentRegularArtifact": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42532-f02-current-batch-sequence-observation-maven-v1/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+          "sha256": "f19ff4c6afe709a4c4ddd967883826ea76a065210ed42c8d53141dd0afb9e1ca"
+        },
+        "originalProducingSource": "f8532c27c2666570fe450f285c5a5436aacd8e7e",
+        "physicalNames": 660,
+        "workingSourceReproduced": true,
+        "originProof": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42532-f02-batch-package-and-f03-physical-requalification-v1/manifest.json",
+          "sha256": "cada937647f900533d2096574bd6b1d28421392f527d100ccb80984c0e407adc"
+        }
+      },
+      "full451Accepted": false
+    },
+    "api": {
+      "currentRoutes": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42546-g1304-api-31-method-level-source-bindings-v1/manifest.json",
+        "sha256": "84288b932fd33d387042021265009a73f43c23e6059550f11d8a89f1758023b5"
+      },
+      "earlierLocalTyped": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42328-f03-target-forms-one-run-continuation-v1/manifest.json",
+        "sha256": "4e259ccf486cdc81d699b4011d02c728abb22a0c7cfb2cf4753c600a75c86a59"
+      },
+      "heldTests": 4,
+      "next": "QA056 four types, regular candidate package, complete typed diagnostics and normal PT under 451",
+      "javaMainCount": 283,
+      "currentRegular": null,
+      "full451Accepted": false
+    },
+    "web": {
+      "currentRoutes": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42572-g1305-screen-route-and-view-source-matrix-v1/manifest.json",
+        "sha256": "d21780fd19b0e330191cb310c0a56caf59158ac832927009232d911175be6e34"
+      },
+      "currentResourceTests": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42580-g1305-four-local-script-ordinary-exact-receipts-v1/manifest.json",
+        "sha256": "ca42b3b62829f3d501c8ec136478873774d0c048ec0fd1845ee8140d90ebe675"
+      },
+      "earlierLocalTyped": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42328-f03-target-forms-one-run-continuation-v1/manifest.json",
+        "sha256": "4e259ccf486cdc81d699b4011d02c728abb22a0c7cfb2cf4753c600a75c86a59"
+      },
+      "next": "QA056, regular candidate package and full-type/normal-PT evidence under 451",
+      "javaMainCount": 262,
+      "currentRegular": null,
+      "full451Accepted": false
+    }
+  },
+  "allJavaMain": 1030,
+  "heldTestsAcrossProducts": 32,
+  "root11": "HOLD",
+  "whole451": false,
+  "officialDelta": 0,
+  "formalAcceptanceId": null,
+  "newActualPt": 0,
+  "protectedOperations": 0,
+  "ssc461": {
+    "candidates": {
+      "BackupFailureSnapshot": 1,
+      "CleanupDatabaseSession": 3,
+      "CleanupTerminalRepository": 2
+    },
+    "basis": "SS311 SSC461",
+    "reason": "The existing owning repository tests depend on BatchDatabaseFixture and actual ownership. Independent local fixtures are retained for their scope."
+  },
+  "ownerHandoff": {
+    "path": "evidence/01_PT/018_NK-OPS-001/5699_F03六製品の同候補証拠・担当別残条件.md",
+    "sha256": "46108ebfc7d5b16f96a91f6eec1fc3455fd54c3abdc403fd9cf7e93fddb98dab"
+  }
+}

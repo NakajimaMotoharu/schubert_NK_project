@@ -1,0 +1,78 @@
+{
+  "eventId": "PGPT-20261008-8411",
+  "groupId": "prod-20261122-PG42630-v2",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T12:21:17+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 33,
+      "remainingPercent": 67,
+      "resetsAt": 1795879771,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "source": "ee45475434f464713ebd0b2b8e0b9d9f82994065",
+    "productionCoreMain": "f8532c27c2666570fe450f285c5a5436aacd8e7e",
+    "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "run": "PG42630",
+    "workCategory": "IMPLEMENTATION",
+    "managementWorkIds": [
+      "WBS-P018-02/2"
+    ],
+    "previousCheckpoint": 2965,
+    "planRow": {
+      "新版ID": "WBS-P018-02/2",
+      "第58版ID": "WBS-P018-02/2",
+      "費用主担当項目": "P018-02",
+      "計画窓": "繰越",
+      "予定期間・週末": "2027-01-10までの計画週",
+      "作業・成果物": "署名BOM・全artifact・host immutable／同source証拠による受入判定",
+      "先行ID・着手条件": "A1-26、WBS-P018-02/1、候補再資格-23.01、候補再資格-64.01、閉/WBS-F02、閉/WBS-F03",
+      "担当": "配布・基盤担当",
+      "旧短期残pp": "0.65",
+      "改訂残pp": "0.65",
+      "終了条件": "署名BOM・全artifact・host immutable：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。 固有要求：SCM-001,SCM-002,SCM-003,SCM-004,SCM-005",
+      "元項目の正式受入に必要な証拠": "現行の署名済み配布物・全artifact・BOM・host所有と不変性を照合。",
+      "参照する元項目": "P018-02、P019-02",
+      "lineNumber": 49
+    },
+    "currentPlan": [
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/11月22日_PGPT再開実行計画.txt",
+        "sha256": "80b9fdc306f664b9c03901a4bdfb34cf66997879676204cfa969858fd68a4016"
+      },
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/短期実行WBS.tsv",
+        "sha256": "a6efedcd63b4ef3bb1d133d939b0ddd7dc4b0147988ac33d668282a25c999527"
+      }
+    ],
+    "startScope": {
+      "action": "SS352 SCM005の固定Maven SBOMから既存cacheのJAR SHA-256・一意参照とlicense情報を独立照合するオフライン工具",
+      "dependent": "PG42606/08/10/12/18の元構成表とMaven repo。独立fixtureで未知辺、正/不一致hash、欠落licenseを確認。最初の計測startは未登録区分で拒否されeventなしのため原receipt保全",
+      "held": "release runtime classpath、CI起動、実VM/DB及びライセンス承認は対象外",
+      "expected": "単体試験、六既存モデルの構造とhash・宣言欠落。正式受入加算0",
+      "workCategory": "IMPLEMENTATION"
+    },
+    "groupCapPp": 1.1,
+    "estimateAtGroupStartPp": {
+      "low": 0,
+      "base": 0.45,
+      "high": 1.1
+    },
+    "completedOriginalRowPricePp": 0,
+    "sourceOwnership": "LOCAL_DEV_FOUNDATION_TRACKED_SNAPSHOT",
+    "knownOwnedRunInProgress": 0,
+    "costRevision": "PMO-remaining-v3-20261010",
+    "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "actualAllocatedPp": null
+  }
+}

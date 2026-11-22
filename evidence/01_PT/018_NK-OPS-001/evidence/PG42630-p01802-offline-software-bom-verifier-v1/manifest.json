@@ -1,0 +1,161 @@
+{
+  "run": "PG42630",
+  "source": "52d600d37dac10a60dcaa3ee941e0a5e6b77a3c9",
+  "javaCore": "f8532c27c2666570fe450f285c5a5436aacd8e7e",
+  "wbs": "WBS-P018-02/2",
+  "terminalAtUTC": "2026-11-22T12:24:23.298891+00:00",
+  "actualExit": 0,
+  "os": "Linux 7.0.0-43-generic",
+  "python": "3.14.4",
+  "testSpec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/5700_Maven構成表オフライン照合_試験仕様.md",
+    "sha256": "8e9577da5b9225b16a8aca4b5acc2ef89509dae63d728f6fbdc7900d858aafa9"
+  },
+  "tool": {
+    "path": "tools/quality/verify_maven_sbom.py",
+    "sha256": "1848fe889a13e27235ba02004bae559b42ef35a49cc3caf8cea5fe7295338c70"
+  },
+  "tests": {
+    "path": "tools/quality/tests/test_verify_maven_sbom.py",
+    "sha256": "d219b2aa0f02d3caa366deec3ce5d61437f6c36dc6030d3515f21d6e34f14e77"
+  },
+  "origRun": {
+    "path": "../pgpt-runs/PG379/PG42630-offline-sbom-verifier-v1/run.json",
+    "sha256": "bf4dcc2b062be9ffea89380408ffc77a2ba4e81297fd715a78dba59ccc1ebc08"
+  },
+  "initialGroupStart": {
+    "term": "METRICS_CATEGORY_REJECTED",
+    "noEvent": true,
+    "noTest": true
+  },
+  "unitPass": 7,
+  "commandContractCase": "PT-OPS-SBOM-021",
+  "modelsPassed": 6,
+  "perModule": {
+    "protocol": {
+      "bom": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42606-p01802-protocol-reproducible-bom-requalification-v1/software-bom.json",
+        "sha256": "8c62b7f9dd0b7f079238f82aeb4ace7302d16720d9b7860ed9db93de4241bdf3"
+      },
+      "expected": {
+        "verifiedJarHashes": 1,
+        "dependencyRows": 2,
+        "missingLicenseCount": 0
+      },
+      "actual": {
+        "rootRef": "pkg:maven/dev.codex.schubert/schubert-nk-protocol@0.1.0-SNAPSHOT?type=jar",
+        "verifiedJarHashes": 1,
+        "dependencyRows": 2,
+        "missingLicenseMetadata": []
+      }
+    },
+    "storage": {
+      "bom": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42608-p01802-storage-standard-software-inventory-v1/software-bom.json",
+        "sha256": "fd913b405154e549b0903b0249316f5c10a97358ed1dcfb08ddbb6dd672402ae"
+      },
+      "expected": {
+        "verifiedJarHashes": 1,
+        "dependencyRows": 2,
+        "missingLicenseCount": 0
+      },
+      "actual": {
+        "rootRef": "pkg:maven/dev.codex.schubert/schubert-nk-storage@0.1.0-SNAPSHOT?type=jar",
+        "verifiedJarHashes": 1,
+        "dependencyRows": 2,
+        "missingLicenseMetadata": []
+      }
+    },
+    "bootstrap": {
+      "bom": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42610-p01802-bootstrap-standard-software-inventory-v1/software-bom.json",
+        "sha256": "eda3cfb295b13536676a336cb02a8e435c78afea8d96319a67dff8793d139e02"
+      },
+      "expected": {
+        "verifiedJarHashes": 11,
+        "dependencyRows": 12,
+        "missingLicenseCount": 1
+      },
+      "actual": {
+        "rootRef": "pkg:maven/dev.codex.schubert/schubert-nk-bootstrap@0.1.0-SNAPSHOT?type=jar",
+        "verifiedJarHashes": 11,
+        "dependencyRows": 12,
+        "missingLicenseMetadata": [
+          "pkg:maven/dev.codex.schubert/schubert-nk-storage@0.1.0-SNAPSHOT?type=jar"
+        ]
+      }
+    },
+    "batch": {
+      "bom": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42612-p01802-batch-and-web-api-model-bom-inventories-v1/batch-software-bom.json",
+        "sha256": "02a7c8d11c47f0d273ce8805bc450b0a8f4e38555cf96319b8f881e50f4125a0"
+      },
+      "expected": {
+        "verifiedJarHashes": 54,
+        "dependencyRows": 55,
+        "missingLicenseCount": 2
+      },
+      "actual": {
+        "rootRef": "pkg:maven/dev.codex.schubert/schubert-nk-batch@0.1.0-SNAPSHOT?type=jar",
+        "verifiedJarHashes": 54,
+        "dependencyRows": 55,
+        "missingLicenseMetadata": [
+          "pkg:maven/dev.codex.schubert/schubert-nk-bootstrap@0.1.0-SNAPSHOT?type=jar",
+          "pkg:maven/dev.codex.schubert/schubert-nk-storage@0.1.0-SNAPSHOT?type=jar"
+        ]
+      }
+    },
+    "api": {
+      "bom": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42612-p01802-batch-and-web-api-model-bom-inventories-v1/api-software-bom.json",
+        "sha256": "c3ce6b257c7cc0f7e794957a4ffefab253483b550afdfacaaca8d5490f47bb15"
+      },
+      "expected": {
+        "verifiedJarHashes": 50,
+        "dependencyRows": 51,
+        "missingLicenseCount": 3
+      },
+      "actual": {
+        "rootRef": "pkg:maven/dev.codex.schubert/schubert-nk-api@0.1.0-SNAPSHOT?type=jar",
+        "verifiedJarHashes": 50,
+        "dependencyRows": 51,
+        "missingLicenseMetadata": [
+          "pkg:maven/dev.codex.schubert/schubert-nk-bootstrap@0.1.0-SNAPSHOT?type=jar",
+          "pkg:maven/dev.codex.schubert/schubert-nk-protocol@0.1.0-SNAPSHOT?type=jar",
+          "pkg:maven/dev.codex.schubert/schubert-nk-storage@0.1.0-SNAPSHOT?type=jar"
+        ]
+      }
+    },
+    "web": {
+      "bom": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42612-p01802-batch-and-web-api-model-bom-inventories-v1/web-software-bom.json",
+        "sha256": "6c24517358bf39411a70db9eb8f78022c52b27b03921ab8cbc7a16b831f0abfb"
+      },
+      "expected": {
+        "verifiedJarHashes": 66,
+        "dependencyRows": 67,
+        "missingLicenseCount": 3
+      },
+      "actual": {
+        "rootRef": "pkg:maven/dev.codex.schubert/schubert-nk-web@0.1.0-SNAPSHOT?type=jar",
+        "verifiedJarHashes": 66,
+        "dependencyRows": 67,
+        "missingLicenseMetadata": [
+          "pkg:maven/dev.codex.schubert/schubert-nk-bootstrap@0.1.0-SNAPSHOT?type=jar",
+          "pkg:maven/dev.codex.schubert/schubert-nk-protocol@0.1.0-SNAPSHOT?type=jar",
+          "pkg:maven/dev.codex.schubert/schubert-nk-storage@0.1.0-SNAPSHOT?type=jar"
+        ]
+      }
+    }
+  },
+  "verifiedComponentRecords": 183,
+  "missingLicenseRecords": 9,
+  "effectiveLicenseAndDistributionReview": "OPEN",
+  "physicalReleaseClasspath": "OPEN",
+  "knownVulnerabilityGate": "OPEN",
+  "ciRun": "NOT_RUN",
+  "onlineOrBackendOperations": 0,
+  "productJavaPt": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
