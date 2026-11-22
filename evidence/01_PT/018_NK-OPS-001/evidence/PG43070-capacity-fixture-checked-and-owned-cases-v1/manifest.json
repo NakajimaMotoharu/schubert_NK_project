@@ -1,0 +1,373 @@
+{
+  "run": "PG43070-capacity-fixture-checked-and-owned-cases-v1",
+  "source": "066e63bab660f36ebc9c002e34083f00e17da150",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": [
+    "WBS-F03/2-2-b",
+    "WBS-P008-03/2"
+  ],
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T22:11:21.607867+00:00",
+  "formalAcceptanceId": null,
+  "whole451": false,
+  "tests": 6,
+  "noNewDefinitions": true,
+  "ordinaryProductScope": "Exact product Main, fixture checked exception signatures and new race failure-finally only",
+  "spotbugsRaw": 0,
+  "productionDiagnostic": 0,
+  "pmdRaw": 24,
+  "pmdRemainingLegacyFailurePaths": 5,
+  "pmdDispositions": [
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "CloseResource",
+      "line": 70,
+      "disposition": "RETAIN_LEGACY_FIXTURE_FAILURE_PATH_REVIEW",
+      "reason": "An existing scenario fixture discharges its in-memory reservation on ordinary assertion paths. Failure-time ownership has separate cleanup under review."
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "CloseResource",
+      "line": 80,
+      "disposition": "RETAIN_LEGACY_FIXTURE_FAILURE_PATH_REVIEW",
+      "reason": "An existing scenario fixture discharges its in-memory reservation on ordinary assertion paths. Failure-time ownership has separate cleanup under review."
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "CloseResource",
+      "line": 81,
+      "disposition": "RETAIN_LEGACY_FIXTURE_FAILURE_PATH_REVIEW",
+      "reason": "An existing scenario fixture discharges its in-memory reservation on ordinary assertion paths. Failure-time ownership has separate cleanup under review."
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "CloseResource",
+      "line": 104,
+      "disposition": "RETAIN_LEGACY_FIXTURE_FAILURE_PATH_REVIEW",
+      "reason": "An existing scenario fixture discharges its in-memory reservation on ordinary assertion paths. Failure-time ownership has separate cleanup under review."
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "CloseResource",
+      "line": 123,
+      "disposition": "NOT_APPLICABLE_EXPLICIT_FINITE_FIXTURE_TERMINATION",
+      "reason": "Scope has finally shutdownNow and bounded awaitTermination on all paths, independently asserted."
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 123,
+      "disposition": "NOT_APPLICABLE_BOUNDED_JUNIT_THREADS",
+      "reason": "Finite JUnit workers and joins. No container thread implementation or injected external operation, with shutdown and awaitTermination in each executor owner."
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 138,
+      "disposition": "NOT_APPLICABLE_BOUNDED_JUNIT_THREADS",
+      "reason": "Finite JUnit workers and joins. No container thread implementation or injected external operation, with shutdown and awaitTermination in each executor owner."
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 147,
+      "disposition": "NOT_APPLICABLE_BOUNDED_JUNIT_THREADS",
+      "reason": "Finite JUnit workers and joins. No container thread implementation or injected external operation, with shutdown and awaitTermination in each executor owner."
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 148,
+      "disposition": "NOT_APPLICABLE_BOUNDED_JUNIT_THREADS",
+      "reason": "Finite JUnit workers and joins. No container thread implementation or injected external operation, with shutdown and awaitTermination in each executor owner."
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "CloseResource",
+      "line": 160,
+      "disposition": "NOT_APPLICABLE_EXPLICIT_FINITE_FIXTURE_TERMINATION",
+      "reason": "Scope has finally shutdownNow and bounded awaitTermination on all paths, independently asserted."
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 160,
+      "disposition": "NOT_APPLICABLE_BOUNDED_JUNIT_THREADS",
+      "reason": "Finite JUnit workers and joins. No container thread implementation or injected external operation, with shutdown and awaitTermination in each executor owner."
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "CloseResource",
+      "line": 162,
+      "disposition": "RETAIN_LEGACY_FIXTURE_FAILURE_PATH_REVIEW",
+      "reason": "An existing scenario fixture discharges its in-memory reservation on ordinary assertion paths. Failure-time ownership has separate cleanup under review."
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "AvoidSynchronizedStatement",
+      "line": 163,
+      "disposition": "NOT_APPLICABLE_CALLER_MONITOR_ORACLE",
+      "reason": "The test explicitly takes a caller monitor to prove the service uses its own private lock. Removing the caller monitor would remove this independent behavior."
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 165,
+      "disposition": "NOT_APPLICABLE_BOUNDED_JUNIT_THREADS",
+      "reason": "Finite JUnit workers and joins. No container thread implementation or injected external operation, with shutdown and awaitTermination in each executor owner."
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "AvoidSynchronizedStatement",
+      "line": 174,
+      "disposition": "NOT_APPLICABLE_CALLER_MONITOR_ORACLE",
+      "reason": "The test explicitly takes a caller monitor to prove the service uses its own private lock. Removing the caller monitor would remove this independent behavior."
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 175,
+      "disposition": "NOT_APPLICABLE_BOUNDED_JUNIT_THREADS",
+      "reason": "Finite JUnit workers and joins. No container thread implementation or injected external operation, with shutdown and awaitTermination in each executor owner."
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 187,
+      "disposition": "NOT_APPLICABLE_BOUNDED_JUNIT_THREADS",
+      "reason": "Finite JUnit workers and joins. No container thread implementation or injected external operation, with shutdown and awaitTermination in each executor owner."
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 189,
+      "disposition": "NOT_APPLICABLE_BOUNDED_JUNIT_THREADS",
+      "reason": "Finite JUnit workers and joins. No container thread implementation or injected external operation, with shutdown and awaitTermination in each executor owner."
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "CloseResource",
+      "line": 197,
+      "disposition": "NOT_APPLICABLE_EXPLICIT_FINITE_FIXTURE_TERMINATION",
+      "reason": "Scope has finally shutdownNow and bounded awaitTermination on all paths, independently asserted."
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 197,
+      "disposition": "NOT_APPLICABLE_BOUNDED_JUNIT_THREADS",
+      "reason": "Finite JUnit workers and joins. No container thread implementation or injected external operation, with shutdown and awaitTermination in each executor owner."
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 205,
+      "disposition": "NOT_APPLICABLE_BOUNDED_JUNIT_THREADS",
+      "reason": "Finite JUnit workers and joins. No container thread implementation or injected external operation, with shutdown and awaitTermination in each executor owner."
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 216,
+      "disposition": "NOT_APPLICABLE_BOUNDED_JUNIT_THREADS",
+      "reason": "Finite JUnit workers and joins. No container thread implementation or injected external operation, with shutdown and awaitTermination in each executor owner."
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 237,
+      "disposition": "NOT_APPLICABLE_BOUNDED_JUNIT_THREADS",
+      "reason": "Finite JUnit workers and joins. No container thread implementation or injected external operation, with shutdown and awaitTermination in each executor owner."
+    },
+    {
+      "path": "TransferCapacityTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 239,
+      "disposition": "NOT_APPLICABLE_BOUNDED_JUNIT_THREADS",
+      "reason": "Finite JUnit workers and joins. No container thread implementation or injected external operation, with shutdown and awaitTermination in each executor owner."
+    }
+  ],
+  "rawClassCounters": {
+    "dev/codex/schubert/nk/api/error/CapacityExceededException": {
+      "INSTRUCTION": [
+        0,
+        6
+      ],
+      "BRANCH": [
+        0,
+        0
+      ],
+      "LINE": [
+        0,
+        3
+      ],
+      "COMPLEXITY": [
+        0,
+        2
+      ],
+      "METHOD": [
+        0,
+        2
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/api/storage/TransferCapacity": {
+      "INSTRUCTION": [
+        6,
+        145
+      ],
+      "BRANCH": [
+        0,
+        20
+      ],
+      "LINE": [
+        1,
+        28
+      ],
+      "COMPLEXITY": [
+        0,
+        13
+      ],
+      "METHOD": [
+        0,
+        3
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/api/storage/TransferCapacity$Level": {
+      "INSTRUCTION": [
+        9,
+        41
+      ],
+      "BRANCH": [
+        0,
+        0
+      ],
+      "LINE": [
+        0,
+        4
+      ],
+      "COMPLEXITY": [
+        2,
+        3
+      ],
+      "METHOD": [
+        2,
+        3
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/api/storage/TransferCapacity$Reservation": {
+      "INSTRUCTION": [
+        7,
+        104
+      ],
+      "BRANCH": [
+        0,
+        4
+      ],
+      "LINE": [
+        0,
+        22
+      ],
+      "COMPLEXITY": [
+        0,
+        5
+      ],
+      "METHOD": [
+        0,
+        3
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/api/storage/TransferCapacity$Snapshot": {
+      "INSTRUCTION": [
+        6,
+        25
+      ],
+      "BRANCH": [
+        0,
+        0
+      ],
+      "LINE": [
+        0,
+        1
+      ],
+      "COMPLEXITY": [
+        2,
+        5
+      ],
+      "METHOD": [
+        2,
+        5
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    }
+  },
+  "unfilteredCurrent": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43070-capacity-fixture-checked-and-owned-cases-v1/unfiltered.stdout",
+    "sha256": "4ac06ffe236daacd920de386a098ee96b26f3961566d0e7725c403370d02d260"
+  },
+  "session": {
+    "labelBytesHex": "504734333037302d63757272656e74",
+    "startMillis": 1795385418653,
+    "endMillis": 1795385419772
+  },
+  "independentCasePreserved": "The race still asserts both valid terminal states and double-close behavior; finally closes fixture reservation on intermediate test failure.",
+  "originals": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43070-capacity-fixture-checked-and-owned-cases-v1/begin.json",
+      "sha256": "3262c86b9638ef94f505301dcf662fdb6dfae16d65e39763cc0a5c209bb28260"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43070-capacity-fixture-checked-and-owned-cases-v1/terminal.json",
+      "sha256": "0b984ed84f02bff4f0d5b3cf8fefc787c15012d26dec90248712cc467ddd538e"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43070-capacity-fixture-checked-and-owned-cases-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "3d1e5b886197b9f17ae101668b8d22105e6c28676dee53ace7d741e89f4a6b62"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43070-capacity-fixture-checked-and-owned-cases-v1/unit.exec",
+      "sha256": "171ab089080c11899caa4e6bf7dc29fb457f90fb55796d4c8fd9c56b80c8a76d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43070-capacity-fixture-checked-and-owned-cases-v1/pmd.xml",
+      "sha256": "63efd3a1a8f1611e41bba7474b07a3584bed0edbe41acef5b90524ba8b5300e0"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43070-capacity-fixture-checked-and-owned-cases-v1/spotbugs.xml",
+      "sha256": "b944e44380f9679228d99941c9c5177973c37269cacb30f4a6b98fbee7ce2eed"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43068-transfer-capacity-same-reservation-race-v1/manifest.json",
+      "sha256": "f35ed616e3c736d5cd8e6560ab5763d2c84d2022b68180eb65e25ddbf6b4c3a2"
+    }
+  ],
+  "public": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43070-capacity-fixture-checked-and-owned-cases-v1/sanitized-junit.xml",
+      "sha256": "122583b690ab9e664625600e40a69dfdd3eb6ce1348d4c67f27414d102f8e0b8"
+    }
+  ],
+  "related": [
+    "BUG-3661",
+    "YKT-2878"
+  ],
+  "liveOperations": 0
+}
