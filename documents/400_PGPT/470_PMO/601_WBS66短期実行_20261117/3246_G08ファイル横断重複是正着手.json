@@ -1,0 +1,86 @@
+{
+  "eventId": "PGPT-20261008-8691",
+  "groupId": "nov22-roster-pg42970",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T19:48:37+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 48,
+      "remainingPercent": 52,
+      "resetsAt": 1795879772,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "source": "1eada278ab695942d47ccc96b4aa896ee12621cc",
+    "productionCoreMain": "e8368d22c4da2ec841f008df793594d3be9066af",
+    "canonicalDesignSource": "ca41c03c0c6efff9a3a35b47b480491810bee6f9",
+    "run": "PG42970",
+    "workCategory": "IMPLEMENTATION",
+    "managementWorkIds": [
+      "WBS-G08"
+    ],
+    "previousCheckpoint": "3245",
+    "planRow": {
+      "ID": "WBS-G08",
+      "元行": "WBS-G08",
+      "費目": "F",
+      "主担当": "WBS-G08",
+      "状態": "計画",
+      "作業": "全scope同source/run・collector/manifest/hash一致",
+      "残pp": "2.0",
+      "着手": "設計354・当該source・作業所有・既存成果を照合。元契約の着手依存と個別HOLDを確認",
+      "終了証拠": "018 collector/017019negative canary正常、固定必須scope全件同source/run/branch/exit・file hash/trace一致、別source補完0。",
+      "補正根拠": "予測777の元行残。個別費用実測がない部分は前回単価を継承",
+      "契約HOLD": "H-G08",
+      "対象": "",
+      "範囲": "SS 354",
+      "保存証跡": "該当criteriaごとの判定・未解決一覧・照合元manifest・判定者",
+      "順次": "False",
+      "配賦窓": "25",
+      "楽観pp": "0.75",
+      "慎重pp": "4.0",
+      "要求設計の版差": "PT基準仕様 NK-OPS-001、SS 354",
+      "lineNumber": 687,
+      "改訂残pp": "2.0"
+    },
+    "currentPlan": [
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/11月22日_PGPT再開実行計画.txt",
+        "sha256": "80b9fdc306f664b9c03901a4bdfb34cf66997879676204cfa969858fd68a4016"
+      },
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/短期実行WBS.tsv",
+        "sha256": "a6efedcd63b4ef3bb1d133d939b0ddd7dc4b0147988ac33d668282a25c999527"
+      }
+    ],
+    "startScope": {
+      "workCategory": "IMPLEMENTATION",
+      "target": "同一module内で複数XMLに同一caseが現れた場合の目録・正規終端・旧Batch事前検査を是正",
+      "entry": "元518?の資格は維持し、5713の独立一意条件と451、PG42968読取。BUG3647/YKT2865を先に起票",
+      "exitCriterion": "修正前の合成三負と独立正例、現全工具回帰、既Protocol原結果非実行の照合。認定profile/source schema変更なし",
+      "excludes": "実製品PT・Root・QA056・全回帰、旧証拠の更新、業務・承認変更",
+      "successor": "正式候補roster全scope・G13の有限追跡、残WBSへ"
+    },
+    "groupCapPp": 4.5,
+    "estimateAtGroupStartPp": {
+      "low": 0,
+      "base": 0.95,
+      "high": 4.5
+    },
+    "completedOriginalRowPricePp": 0,
+    "sourceOwnership": "LOCAL_DEV_FOUNDATION_TRACKED_SNAPSHOT",
+    "knownOwnedRunInProgress": 0,
+    "costRevision": "PMO-remaining-v3-20261010",
+    "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "actualAllocatedPp": null
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "run": "PG42968",
+  "source": "51e8da82333e56515e059e8f32d615cafeacff37",
+  "head": "1eada278ab695942d47ccc96b4aa896ee12621cc",
+  "wbs": "WBS-G08",
+  "legacyProfile": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42714-g08-batch-preflight-before-publication-v1/manifest.json",
+    "sha256": "0a693acd7f4ae466e743ee826cc6f8b08d79bfb758859fe8630962cf123d6362"
+  },
+  "legacyBatchExpectedCount": 550,
+  "scopedPartialCurrentSuite": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42964-c07-snapshot-single-monitor-v1/manifest.json",
+    "sha256": "fe0942930c7a2ed746877552adfa1638b5786a7c7dab260e2add0f1bf6a9a340"
+  },
+  "spec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/5760_C07四監視snapshot並行観測_単体テスト仕様・結果.md",
+    "sha256": "3beb10630d1e7ea2ce08f485273ad0eb0c5cd9d63f3fb35a131cd30f146abba5"
+  },
+  "originalExport": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42964-c07-snapshot-single-monitor-v1/sanitized-junit.xml",
+    "sha256": "42316c8030eecfcefcd43d9ec176112376401ee8e6cd20c6369da24b2abdb062"
+  },
+  "caseMappings": [
+    {
+      "testId": "PT-OPS-MON-SNAP001",
+      "testClass": "dev.codex.schubert.nk.batch.monitoring.TimedMonitorSnapshotConcurrencyTest",
+      "case": "snap001FilesystemPublishesWholeEvents()"
+    },
+    {
+      "testId": "PT-OPS-MON-SNAP002",
+      "testClass": "dev.codex.schubert.nk.batch.monitoring.TimedMonitorSnapshotConcurrencyTest",
+      "case": "snap002HeapPublishesWholeEvents()"
+    },
+    {
+      "testId": "PT-OPS-MON-SNAP003",
+      "testClass": "dev.codex.schubert.nk.batch.monitoring.TimedMonitorSnapshotConcurrencyTest",
+      "case": "snap003PoolPublishesWholeEvents()"
+    },
+    {
+      "testId": "PT-OPS-MON-SNAP004",
+      "testClass": "dev.codex.schubert.nk.batch.monitoring.TimedMonitorSnapshotConcurrencyTest",
+      "case": "snap004LatencyPublishesWholeEvents()"
+    }
+  ],
+  "currentCandidateRoster": "partial source delta only; all expected suites and independent finished-run receipt outstanding",
+  "additionalCheckNeed": {
+    "tool": {
+      "path": "tools/quality/check_batch_candidate_roster.py",
+      "sha256": "a4481a3d4b2abcd018aeb6731426ba2089e72792ba632f29d2c8efd7053249f5"
+    },
+    "finding": "case uniqueness is currently checked within one suite only; the expected and observed same classname/name can be recorded under two suites",
+    "executionBeforeDefectRegistration": 0
+  },
+  "legacyProfileChanged": false,
+  "formalAcceptanceId": null,
+  "externalActions": 0,
+  "terminalAtUTC": "2026-11-22T19:47:26.051288+00:00"
+}
