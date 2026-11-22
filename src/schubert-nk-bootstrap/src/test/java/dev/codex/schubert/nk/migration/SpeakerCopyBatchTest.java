@@ -35,7 +35,8 @@ final class SpeakerCopyBatchTest {
   private static final String FIRST_ID = "700";
   private static final String SECOND_ID = "600";
   private static final String GOLDEN =
-      "700\t1\t話者A\t宣言名\ttrue\t\\N\t2026-01-02T03:04:05Z\n600\t2\t話者B\t宣言名\tfalse\t\\N\t2026-01-02T03:04:05Z\n";
+      "700\t1\t話者A\t宣言名\ttrue\t\\N\t2026-01-02T03:04:05Z\n"
+          + "600\t2\t話者B\t宣言名\tfalse\t\\N\t2026-01-02T03:04:05Z\n";
   private static final int WORKERS = 8;
   private static final int TASKS = 64;
   private static final int WAIT_SECONDS = 5;
@@ -169,9 +170,17 @@ final class SpeakerCopyBatchTest {
   @Test
   void speakerBatch010RuntimeAndErrorPropagateIdenticalInstances() {
     var runtime = new IllegalStateException("synthetic runtime");
-    assertUncheckedBorrowedFailure(runtime, () -> { throw runtime; });
+    assertUncheckedBorrowedFailure(
+        runtime,
+        () -> {
+          throw runtime;
+        });
     var error = new AssertionError("synthetic error");
-    assertUncheckedBorrowedFailure(error, () -> { throw error; });
+    assertUncheckedBorrowedFailure(
+        error,
+        () -> {
+          throw error;
+        });
   }
 
   private static void assertUncheckedBorrowedFailure(Throwable failure, Runnable throwOnWrite) {
