@@ -11,9 +11,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
@@ -230,7 +232,10 @@ final class CurrentScenarioEntryMapperTest {
   @Test
   void entryMap018IndependentFixedCopyBytesContainMappedIdsAndEscapes() {
     String expected =
-        "800\t1\t900\t1\t0\t1\tdialogue\t500\t Alice / label \tHello\\nworld\ttext\\t\\\\raw\t2026-01-02T03:04:05Z\n600\t2\t700\t2\t2\t3\tnarration\t\\N\t\\N\tother\traw2\t2026-01-02T03:04:05Z\n";
+        "800\t1\t900\t1\t0\t1\tdialogue\t500\t Alice / label \tHello\\n"
+            + "world\ttext\\t\\\\r"
+            + "aw\t2026-01-02T03:04:05Z\n"
+            + "600\t2\t700\t2\t2\t3\tnarration\t\\N\t\\N\tother\traw2\t2026-01-02T03:04:05Z\n";
     assertEquals(
         expected,
         new String(
@@ -324,7 +329,8 @@ final class CurrentScenarioEntryMapperTest {
   }
 
   @Test
-  void entryMap024ConcurrentCallsShareOnlyImmutableMappings() throws Exception {
+  void entryMap024ConcurrentCallsShareOnlyImmutableMappings()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var m = mapper();
     var executor = Executors.newFixedThreadPool(WORKERS);
     try {
