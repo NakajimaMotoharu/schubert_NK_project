@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
@@ -220,7 +222,8 @@ final class MusicMigrationPairingTest {
   }
 
   @Test
-  void finiteWorkersShareNoMutablePairOrShadowState() throws Exception {
+  void finiteWorkersShareNoMutablePairOrShadowState()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var planner = new MusicMigrationPairing();
     var input = tracks(PATH_A, ALPHA, PATH_Z, ALPHA_INST);
     var executor = Executors.newFixedThreadPool(WORKERS);
