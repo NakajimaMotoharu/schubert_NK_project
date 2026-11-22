@@ -1,0 +1,145 @@
+{
+  "run": "PG42238",
+  "source": "c9d1aa73c723af6d140355a2870d7f33b1c1861e",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-F03/2-2-b",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T06:03:15.252136+00:00",
+  "sourceProof": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42232-f03-target-form-wire-current-preflight-v1/manifest.json",
+      "sha256": "233474eba65009ef0963d4e4b0d77a6e1744d766b9e965d262f5466bcbcc0152"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42234-f03-target-form-current-wire-v1/manifest.json",
+      "sha256": "6e0389d2bb7f4c4f27f5f771eddb1938a16c701a210eb5130ca75db6d7bcc203"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42236-f03-target-form-typed-v1/manifest.json",
+      "sha256": "d9d96c02dfad47ba60894ac7a01141edf0fc04d795af2a0361dacc50ebb31268"
+    }
+  ],
+  "fixtureChange": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/TargetOperationFormTest.java",
+    "sha256": "1922ab2c52c81304a58ef55eac1acb0f4213f50c9cee683be9f0b5f3c01b7d79"
+  },
+  "oldTest": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42232-target-forms-fixed-current-v1/test/dev/codex/schubert/nk/web/form/TargetOperationFormTest.class",
+    "sha256": "94f26382042e0bb97eed610f53cf85a671384aa5fd1f843e95c327957e99ffa4"
+  },
+  "newTest": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42238-target-form-bounded-fixture-v1/test/dev/codex/schubert/nk/web/form/TargetOperationFormTest.class",
+    "sha256": "c5c5275bb2f5ab29816e9659eda2a9a52637bcb55486ffbc4bac7a652cb215be"
+  },
+  "testMethodsInstructionsUnchanged": true,
+  "related": [
+    "BUG-3568",
+    "YKT-2806"
+  ],
+  "currentNewCaseId": "PT-TARGET008",
+  "junit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42238-target-form-bounded-fixture-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "1c46f0c162054eb3a87743e3baacf8bdf42da6220e4536d72346a973ddf7e300"
+  },
+  "caseMethod": "target008OneHundredParallelBindHasNoSharedMutableState",
+  "passCount": 1,
+  "failCount": 0,
+  "skipCount": 0,
+  "exec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42238-target-form-bounded-fixture-v1/own.exec",
+    "sha256": "63511b47957fcc1caa51cb447cb3ab4f50bb12176a46c3578dd4c644cb1f7b27"
+  },
+  "pmdRuleRulings": [
+    {
+      "rule": "CloseResource",
+      "method": "target008OneHundredParallelBindHasNoSharedMutableState",
+      "line": "192",
+      "reason": "Test-owned finite worker lifetime; checked completion by calls bounded at 5s and terminal 10s."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "method": "target008OneHundredParallelBindHasNoSharedMutableState",
+      "line": "192",
+      "reason": "Test-owned finite worker lifetime; checked completion by calls bounded at 5s and terminal 10s."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "method": "target008OneHundredParallelBindHasNoSharedMutableState",
+      "line": "197",
+      "reason": "Test-owned finite worker lifetime; checked completion by calls bounded at 5s and terminal 10s."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "method": "target008OneHundredParallelBindHasNoSharedMutableState",
+      "line": "206",
+      "reason": "Test-owned finite worker lifetime; checked completion by calls bounded at 5s and terminal 10s."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "method": "target008OneHundredParallelBindHasNoSharedMutableState",
+      "line": "207",
+      "reason": "Test-owned finite worker lifetime; checked completion by calls bounded at 5s and terminal 10s."
+    }
+  ],
+  "spotBugsRuleRulings": [
+    {
+      "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "method": "lambda$target006TopLevelNullAndUnsupportedInternalSelector$0",
+      "scope": "Deliberate failed-null negative in an independent local binding fixture."
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "method": "lambda$target006TopLevelNullAndUnsupportedInternalSelector$1",
+      "scope": "Deliberate failed-null negative in an independent local binding fixture."
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "method": "lambda$target006TopLevelNullAndUnsupportedInternalSelector$2",
+      "scope": "Deliberate failed-null negative in an independent local binding fixture."
+    }
+  ],
+  "appliedFixedRules": 1,
+  "privateTokenOrActualBrokerActions": 0,
+  "outputs": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42238-target-form-bounded-fixture-v1/pmd.xml",
+      "sha256": "0f74cfff74c720902289dec754914c5d5b380aaef28ac2ea5156a42e3da04163"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42238-target-form-bounded-fixture-v1/spotbugs.xml",
+      "sha256": "607f0b577dd7d79c6ff2b37dd3ea5e0d7715cae9d821bb916b1efcb85cea69eb"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42238-target-form-bounded-fixture-v1/checkstyle.xml",
+      "sha256": "c3cc1b20732f1993c171852d6023dc7bacd14a760ff99ba7d36c99b4191287ba"
+    }
+  ],
+  "terminals": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42238-target-form-bounded-fixture-v1/format.terminal.json",
+      "sha256": "b6422b62ad1366c7c4b4e17c69c19eabc19cd221e9c9fc02ef10f2e50d1a8cb0"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42238-target-form-bounded-fixture-v1/compile.terminal.json",
+      "sha256": "df3fffb6766171a85a533e10c5d3956b00cf1fc38cc14f108a60f0c1162408a0"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42238-target-form-bounded-fixture-v1/checkstyle.terminal.json",
+      "sha256": "29415bc7618988251afe078ace4dd1687f926995d41f018e70df48820d0c544f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42238-target-form-bounded-fixture-v1/pmd.terminal.json",
+      "sha256": "adb35d0e5515719d777b7e69c4873688e2eec044f06e689e182d293fd092005a"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42238-target-form-bounded-fixture-v1/spotbugs.terminal.json",
+      "sha256": "9205ced6131c75f4d8f5a12e874f7f256c615b83667b00f1cbca614ef2be13b6"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42238-target-form-bounded-fixture-v1/unit.terminal.json",
+      "sha256": "6856b039b184189e46bd6cadc16eac40fdda8dec3272159bf34a2c8bdc452b95"
+    }
+  ],
+  "whole451": false,
+  "formalAcceptanceId": null
+}
