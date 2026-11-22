@@ -13,9 +13,11 @@ import dev.codex.schubert.nk.migration.ScenarioFileMigrationMap.FilePair;
 import dev.codex.schubert.nk.migration.ScenarioFileMigrationMap.MappedFile;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.junit.jupiter.api.Test;
 
 /** PT-MIG-SCENARIOGEN001..016; BUG2901/SSC363: independent primitive value/key contracts. */
@@ -178,7 +180,10 @@ final class ScenarioGeneratedValueTest {
             new ScenarioFileMigrationMap(
                 List.of(new FilePair(1, Long.MIN_VALUE, 1), new FilePair(1, Long.MIN_VALUE, 2))));
     assertEquals(
-        "NKMIGFILEORDER1\n1\t-9223372036854775808\t1\t1\n1\t9223372036854775807\t3\t2\n2\t-9223372036854775808\t2\t1\n",
+        "NKMIGFILEORDER1\n"
+            + "1\t-9223372036854775808\t1\t1\n"
+            + "1\t9223372036854775807\t3\t2\n"
+            + "2\t-9223372036854775808\t2\t1\n",
         new String(map.canonicalBytes(), java.nio.charset.StandardCharsets.US_ASCII));
   }
 
@@ -200,7 +205,8 @@ final class ScenarioGeneratedValueTest {
   }
 
   @Test
-  void scenarioGen016LargeIndexPairAndFiniteIsolation() throws Exception {
+  void scenarioGen016LargeIndexPairAndFiniteIsolation()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var files =
         new ScenarioFileMigrationMap(
             List.of(
