@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -23,9 +24,30 @@ final class MigrationMasterCopyVerifierTest {
   private static final String ZERO = "0";
   private static final String LF = "\n";
   private static final String NORMAL_FRAME =
-      "NKMIGCOPY1\nMAPPING\ta9dd686885362b4e2455c9ada4770fcbafd983819fee70ca02a0177323bd0500\nspeakers\t1\t46\t7075f6a72b05c4cff3830220732aa044852d3c871eb3c016c550015c2aa501ac\nscript_files\t1\t141\t57621009e943ae8a6da658cc58070e0442f5af23a9300ef631e6a6fe4302e101\nscript_entries\t1\t63\tae22539e017a3b2884b3cd62b362ad1738ce54a5d2459693d8c670c9c0eafe95\naudio_files\t1\t136\t5916f31fc39b26175b3383fc5944e9972fb532fa30e76ac8f70e0de18070cbe3\nmedia_assets\t1\t169\t8d47e701d4300e31892e1ee4516660581c632689da66c0cad440be50954b30fe\nentry_audio_links\t1\t39\tcaed946009561acc38580f847b47b139f453a88356b204b73391bcb5cc4f9eef\n";
+      "NKMIGCOPY1\n"
+          + "MAPPING\ta9dd686885362b4e2455c9ada4770fcbafd983819fee70ca02a0177323bd0500\n"
+          + "speakers\t1\t46\t7075f6a72b05c4cff3830220732aa044852d3c871eb3c016c550015c2aa501ac\n"
+          + "script_files\t1\t141"
+          + "\t57621009e943ae8a6da658cc58070e0442f5af23a9300ef631e6a6fe4302e101\n"
+          + "script_entries\t1\t63"
+          + "\tae22539e017a3b2884b3cd62b362ad1738ce54a5d2459693d8c670c9c0eafe95\n"
+          + "audio_files\t1\t136"
+          + "\t5916f31fc39b26175b3383fc5944e9972fb532fa30e76ac8f70e0de18070cbe3\n"
+          + "media_assets\t1\t169"
+          + "\t8d47e701d4300e31892e1ee4516660581c632689da66c0cad440be50954b30fe\n"
+          + "entry_audio_links\t1\t39"
+          + "\tcaed946009561acc38580f847b47b139f453a88356b204b73391bcb5cc4f9eef\n";
   private static final String EMPTY_FRAME =
-      "NKMIGCOPY1\nMAPPING\t83b87552a2f59f743b0c28ad12ed8bbb5e0f38c4a3794c68a29f35a3974284e9\nspeakers\t0\t0\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nscript_files\t0\t0\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nscript_entries\t0\t0\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\naudio_files\t0\t0\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nmedia_assets\t0\t0\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nentry_audio_links\t0\t0\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\n";
+      "NKMIGCOPY1\n"
+          + "MAPPING\t83b87552a2f59f743b0c28ad12ed8bbb5e0f38c4a3794c68a29f35a3974284e9\n"
+          + "speakers\t0\t0\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\n"
+          + "script_files\t0\t0\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\n"
+          + "script_entries\t0\t0"
+          + "\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\n"
+          + "audio_files\t0\t0\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\n"
+          + "media_assets\t0\t0\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\n"
+          + "entry_audio_links\t0\t0"
+          + "\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\n";
   private static final String NORMAL_SHA =
       "744f7e0bd0a7dd16ab4454db3c0852c244101d25b22692de2cf167adb5dbdc90";
   private static final String EMPTY_SHA =
@@ -61,7 +83,8 @@ final class MigrationMasterCopyVerifierTest {
   }
 
   @Test
-  void copyverify002EmptyGoldenPreservesExplicitSixTuples() throws Exception {
+  void copyverify002EmptyGoldenPreservesExplicitSixTuples()
+      throws IOException, NoSuchAlgorithmException {
     var bytes = EMPTY_FRAME.getBytes(StandardCharsets.US_ASCII);
     var result =
         new MigrationMasterCopyVerifier()
@@ -280,7 +303,7 @@ final class MigrationMasterCopyVerifierTest {
     return NORMAL_FRAME.getBytes(StandardCharsets.US_ASCII);
   }
 
-  private static CurrentMigrationMappingManifest mappings() throws Exception {
+  private static CurrentMigrationMappingManifest mappings() throws NoSuchAlgorithmException {
     return MigrationMasterCopyManifestTest.mappings(-1, -2);
   }
 
