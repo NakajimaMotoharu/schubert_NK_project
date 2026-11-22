@@ -9,3 +9,5 @@ PG22626全八F-E-S-abort0/真正0、一回だけ。22628は同execのbootstrap m
 製品初期化はContentsと供給SchemaHistoryAdmission.Rowの二型だけ。実methodも当Contents七custom CodeとRow constructorだけで、外側StartupReleaseManifest/SchemaHistoryAdmission初期化0・read/create/verify/DB/native/Root/credential/四held型動作0。fixtureは公開schema行metadataとsynthetic version/digest/Mapだけ、実署名/BOM/permit/run/原本の認証や復旧ではない。Rowはsupportでwhole資格を加算しない。仕様入力/独立literal期待値/actual assertion/XML/OS/JDK25.0.4/JUnit1.13.4/SDK/command/終了code/日時/hashはpostのinputHashes/dependencies/environment/files/原stageを参照。
 
 新規unique八（Java326→334/総430→438）、公開nested値型whole Code一型の局所証拠を追加。親source StartupReleaseManifestのwhole追加0、whole source94/元282交差74残208/元partial80の18残62/正式1964PT-53scope/新leaf0/工数null/全HOLD不変。原2/5/9cap10・owner/cost WBS-P018-02、追加工具費/N-T不明null。全85静的分類の固定scopeへ新Testを混ぜず、新Testの静的確認を別manifestで保有する。
+
+2026-11-22追補。PT-OPS-RELEASE-CONTENTS007だけを現候補の合成値二物理で実行し順序と空を確認。外側クラスの初期化なし。 [PG42054](evidence/PG42054-f03-release-value-order-current-v1/manifest.json)。

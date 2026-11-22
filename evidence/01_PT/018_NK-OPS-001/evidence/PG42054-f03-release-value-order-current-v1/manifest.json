@@ -1,0 +1,89 @@
+{
+  "run": "PG42054",
+  "source": "c382fe5237112cbd75da1d60ee331192023ef891",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-F03/2-2-b",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T03:58:03.957954+00:00",
+  "caseId": "PT-OPS-RELEASE-CONTENTS007",
+  "case": "contents007MigrationOrderAndEmptyBoundariesRemainCapturedValues",
+  "actual": "expected fixed row order and empty collection",
+  "originalReference": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42050-f03-release-contents-immutable-proof-v1/manifest.json",
+    "sha256": "087f45b9c8348062336b27ff7af630ee34093ff57aa3041838702ba160fe2241"
+  },
+  "commands": [
+    [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-Dfile.encoding=UTF-8",
+      "-Duser.timezone=Asia/Tokyo",
+      "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/PG42054-f03-release-value-order-current-v1/init.log",
+      "-jar",
+      "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "execute",
+      "--disable-banner",
+      "--disable-ansi-colors",
+      "--fail-if-no-tests",
+      "--details=summary",
+      "--class-path",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42054-f03-release-value-order-current-v1/product-values:/home/mini/codex/project1/work/pgpt-runs/PG379/PG42054-f03-release-value-order-current-v1/fixture:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+      "--select-method",
+      "dev.codex.schubert.nk.bootstrap.StartupReleaseContentsValueTest#contents007MigrationOrderAndEmptyBoundariesRemainCapturedValues",
+      "--reports-dir",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42054-f03-release-value-order-current-v1/xml"
+    ]
+  ],
+  "input": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/StartupReleaseContentsValueTest.java",
+      "sha256": "30d2c82b6e73c3593534f3a4aca11548b576f0114f7d58950facac58b94efd8b"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42054-f03-release-value-order-current-v1/fixture/dev/codex/schubert/nk/bootstrap/StartupReleaseContentsValueTest.class",
+      "sha256": "3ceac02a76b88c1fe8684dd62f4064f70451fa541c667c43e2c7c1b426a9fd2d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+      "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    }
+  ],
+  "originalTerminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42054-f03-release-value-order-current-v1/terminal.json",
+    "sha256": "7e387ace6dc1fa1f769ae655aeca7423c2913be8fe35e030a791d6cf492676f9"
+  },
+  "resultXML": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42054-f03-release-value-order-current-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "af9b6c1a0ef2ded20b4b5fc85f8f6df1bf52687c245ce32efd749983eb9c842a"
+  },
+  "currentValueClassPins": {
+    "dev/codex/schubert/nk/bootstrap/StartupReleaseManifest$Contents.class": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42054-f03-release-value-order-current-v1/product-values/dev/codex/schubert/nk/bootstrap/StartupReleaseManifest$Contents.class",
+      "sha256": "a9228a934fa66b2599a59a1aade4f3f232d3c67d19b51b468a3664401732236d"
+    },
+    "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission$Row.class": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42054-f03-release-value-order-current-v1/product-values/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission$Row.class",
+      "sha256": "daf77974a51a03171b27048a9eaf12367a60527ca8f6638aebe8b0fbaf1b5a1a"
+    }
+  },
+  "initializedOwnNamedValuesAndFixture": [
+    "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission$Row",
+    "dev/codex/schubert/nk/bootstrap/StartupReleaseContentsValueTest",
+    "dev/codex/schubert/nk/bootstrap/StartupReleaseManifest$Contents"
+  ],
+  "totalTests": 1,
+  "passTests": 1,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRunSelected": 0,
+  "archivalRemainingOtherCasesNotReplayed": 7,
+  "rootOuterInitialized": false,
+  "realBOMOrDbOrRuntimeActions": 0,
+  "coverageClaim": null,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
