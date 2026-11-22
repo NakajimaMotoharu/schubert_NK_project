@@ -22,9 +22,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.jupiter.api.Test;
@@ -290,7 +292,8 @@ class MusicHierarchyTemplateTest {
   }
 
   @Test
-  void music071ConcurrentRendering() throws Exception {
+  void music071ConcurrentRendering()
+      throws InterruptedException, ExecutionException, TimeoutException {
     try (var c = context()) {
       var pool = Executors.newFixedThreadPool(8);
       try {
