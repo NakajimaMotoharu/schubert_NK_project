@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.batch.repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLDataException;
 import java.sql.SQLException;
 import java.time.Instant;
@@ -148,11 +149,7 @@ public final class BatchRunRepository {
         statementFailure = failure;
         throw failure;
       } finally {
-        try {
-          query.close();
-        } catch (SQLException | RuntimeException | Error failure) {
-          if (JdbcResourceFailures.replace(statementFailure, failure)) throw failure;
-        }
+        closeStatement(query, statementFailure);
       }
       require(changed == 0 || changed == 1);
       if (changed == 0) require(replayed(attempt, endedAt, result));
@@ -279,21 +276,13 @@ public final class BatchRunRepository {
         rowFailure = failure;
         throw failure;
       } finally {
-        try {
-          row.close();
-        } catch (SQLException | RuntimeException | Error failure) {
-          if (JdbcResourceFailures.replace(rowFailure, failure)) throw failure;
-        }
+        closeRows(row, rowFailure);
       }
     } catch (SQLException | RuntimeException | Error failure) {
       statementFailure = failure;
       throw failure;
     } finally {
-      try {
-        query.close();
-      } catch (SQLException | RuntimeException | Error failure) {
-        if (JdbcResourceFailures.replace(statementFailure, failure)) throw failure;
-      }
+      closeStatement(query, statementFailure);
     }
     return List.copyOf(result);
   }
@@ -318,11 +307,7 @@ public final class BatchRunRepository {
       statementFailure = failure;
       throw failure;
     } finally {
-      try {
-        query.close();
-      } catch (SQLException | RuntimeException | Error failure) {
-        if (JdbcResourceFailures.replace(statementFailure, failure)) throw failure;
-      }
+      closeStatement(query, statementFailure);
     }
   }
 
@@ -370,21 +355,13 @@ public final class BatchRunRepository {
         rowFailure = failure;
         throw failure;
       } finally {
-        try {
-          row.close();
-        } catch (SQLException | RuntimeException | Error failure) {
-          if (JdbcResourceFailures.replace(rowFailure, failure)) throw failure;
-        }
+        closeRows(row, rowFailure);
       }
     } catch (SQLException | RuntimeException | Error failure) {
       statementFailure = failure;
       throw failure;
     } finally {
-      try {
-        query.close();
-      } catch (SQLException | RuntimeException | Error failure) {
-        if (JdbcResourceFailures.replace(statementFailure, failure)) throw failure;
-      }
+      closeStatement(query, statementFailure);
     }
     return result;
   }
@@ -417,23 +394,32 @@ public final class BatchRunRepository {
         rowFailure = failure;
         throw failure;
       } finally {
-        try {
-          row.close();
-        } catch (SQLException | RuntimeException | Error failure) {
-          if (JdbcResourceFailures.replace(rowFailure, failure)) throw failure;
-        }
+        closeRows(row, rowFailure);
       }
     } catch (SQLException | RuntimeException | Error failure) {
       statementFailure = failure;
       throw failure;
     } finally {
-      try {
-        query.close();
-      } catch (SQLException | RuntimeException | Error failure) {
-        if (JdbcResourceFailures.replace(statementFailure, failure)) throw failure;
-      }
+      closeStatement(query, statementFailure);
     }
     return matches;
+  }
+
+  private static void closeStatement(PreparedStatement query, @Nullable Throwable primary)
+      throws SQLException {
+    try {
+      query.close();
+    } catch (SQLException | RuntimeException | Error cleanup) {
+      if (JdbcResourceFailures.replace(primary, cleanup)) throw cleanup;
+    }
+  }
+
+  private static void closeRows(ResultSet rows, @Nullable Throwable primary) throws SQLException {
+    try {
+      rows.close();
+    } catch (SQLException | RuntimeException | Error cleanup) {
+      if (JdbcResourceFailures.replace(primary, cleanup)) throw cleanup;
+    }
   }
 
   private static void bindResult(PreparedStatement query, Instant ended, BatchStepResult result)
