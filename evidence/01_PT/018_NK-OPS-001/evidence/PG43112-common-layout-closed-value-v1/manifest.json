@@ -1,0 +1,77 @@
+{
+  "run": "PG43112-common-layout-closed-value-v1",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T23:14:54.393691+00:00",
+  "source": "06d5f566effe7680e2ad32a4d11e658bb28cfa13",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-P015-07/2",
+  "design": "UI222/223/235/236, SS313",
+  "commonResources": [
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/fragments/layout.html",
+      "sha256": "a48bda151f893e28858afb26d1c636a564b8bd0cb3c3a16bc63bbb97f0e414bd"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/fragments/pagination.html",
+      "sha256": "ddf3ccc9a1f88adf5bd61c8c9aa8928022f97c6e8f314c48941aad267bd5cb80"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/fragments/log-pagination.html",
+      "sha256": "4b3908ed49684bf3acb35457656802e9e2e1a8dac5a84073b2f213413c543ee2"
+    }
+  ],
+  "previousProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42104-p01602-topbar-pure-values-proof-v1/manifest.json",
+      "sha256": "3366df065dab68d3fbc1889fdb4f9dfe2873b7290bda92d3a42bc83019ac7379"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42800-search-templates-normal-and-required-dom-v1/manifest.json",
+      "sha256": "f7aa53672580e4bd44b7119c4161a47c65f68ad7a5b59e49728b2b7df3c33e71"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42828-scenario-detail-template-current-v2/manifest.json",
+      "sha256": "8e8a9401d8f037b755f55dfc26e851f941f1d08318808539ef5abd5b46843e2b"
+    }
+  ],
+  "confirmedUnchangedProductTrees": [
+    "src/schubert-nk-web/src/main",
+    "src/schubert-nk-protocol/src/main"
+  ],
+  "qualification": [
+    {
+      "criterion": "navigation",
+      "independentExpectation": "Common menu and notification start at / and /notifications, fixed order Japanese labels.",
+      "evidenceRef": "PG42800 selected search templates"
+    },
+    {
+      "criterion": "roleText",
+      "independentExpectation": "USER/ADMIN and normalized username exact, brand schubert NK; no retained auth object.",
+      "evidenceRef": "PG42104 value fixtures and PG42828 isolated Scenario DOM"
+    },
+    {
+      "criterion": "logoutAction",
+      "independentExpectation": "POST /logout from existing Common fragment.",
+      "evidenceRef": "PG42800 selected ScenarioSearchTemplateTest"
+    },
+    {
+      "criterion": "pageControls",
+      "independentExpectation": "Empty result hides pagination, ready page count and fixed prev/next and range labels.",
+      "evidenceRef": "PG42800 selected separate search and log template fixtures"
+    }
+  ],
+  "existingScopedCasesPerIndependentRun": [
+    2,
+    16,
+    8
+  ],
+  "productNewExecuted": 0,
+  "actualLoginOrSessionOrSecurityFilterRun": 0,
+  "residual": [
+    "Actual Csrf generated hidden field and full page routing on current Web assembly",
+    "Current Web normal package, QA056 and formal 451",
+    "Current/NK actual-browser and all WBS acceptance dependencies"
+  ],
+  "whole451": false,
+  "formalAcceptanceId": null
+}

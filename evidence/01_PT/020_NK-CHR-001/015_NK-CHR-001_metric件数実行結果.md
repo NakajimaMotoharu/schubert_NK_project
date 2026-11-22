@@ -9,3 +9,5 @@ PG18784正常jar/同sourceの全66unique・11Testclassは終了0、failure/error
 PG18778 build/testcompile全0、PG18780 SpotBugs Main5指摘・解析0、Checkstyle0、PMDraw36は744の全36行個別適用性根拠（localMap17/有限JUnit thread18/outercontinue1）あり。抑制・除外0。独立期待値は014のSS literalと手作成型/境界/未知値、productionでexpected生成0。Null negativeとown2threadは通常PT、実VM/DB/browser/captureは実行0。
 
 証跡: `evidence/01_PT/020_NK-CHR-001/evidence/PG18784-metric-count-sixtysix-v1/manifest.json` SHA256 `6641873848e09a56e3130ec80a928a81495142b889963f690282333927f9e6f3`。元run/source/正常classCRC/単一session/exec・六resource/hash・全選択TestIDの照合済み。BUG2275/YKT2020の当pure範囲は検証済み、実consumer残はOPEN。BUG2277/YKT2022の実公開後条件HOLDは解除0。正式1964PT/53scope、歴史17/190、工数null、新leaf0不変。
+
+PG43108（2026-11-23 JST）。試験source `06d5f566ef`、元工具artifactを変更せず既6成功。SpotBugs0、Checkstyle0、元bounded-worker PMD6の個別適用根拠を維持。別runの旧227は履歴。実CHRと正式工程は未受入。 [公開manifest](evidence/PG43108-chr-metric-direct-values-v1/manifest.json) SHA-256 `867c4de02cced25f55a9404fe187b0afdc9e04ff1e39e47e78084f98974dd875`。

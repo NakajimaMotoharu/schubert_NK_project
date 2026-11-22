@@ -1,0 +1,82 @@
+{
+  "run": "PG43114-closed-web-result-map-v1",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T23:18:37.012903+00:00",
+  "source": "06d5f566effe7680e2ad32a4d11e658bb28cfa13",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-P015-06/2",
+  "testId": "PT-WEB-158",
+  "design": "UI221/232, SS313/351",
+  "mapper": {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/error/WebResultMapper.java",
+    "sha256": "9618aa56862faf36f1328f7c0004c757bef8a2e299488a0b2ceb7fd98ee75a5e"
+  },
+  "currentResultCode": {
+    "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/ResultCode.java",
+    "sha256": "ade5ac5514ed62f2be57419eeab2d3a5e27da98a1c6607621be60e3a11c162f4"
+  },
+  "oracle": {
+    "path": "tools/quality/architecture/ErrorValueContractTest.java",
+    "sha256": "11d2ad00b9dc679a3fc8fd35ccaf4de32259eff742aa0d26d5ca471759cfd712"
+  },
+  "statusTable": {
+    "0000": 200,
+    "0100": 400,
+    "0101": 401,
+    "0102": 401,
+    "0103": 403,
+    "0104": 404,
+    "0105": 409,
+    "0106": 429,
+    "0107": 409,
+    "0200": 200,
+    "9000": 503,
+    "9001": 503
+  },
+  "sameMapperSourceProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41458-scr090-closed-error-display-v1/manifest.json",
+    "sha256": "cf097f337f19b3addd07494ba0b312afb96821c27a09c38916835f8f664db1a8"
+  },
+  "sameMapperScopedPost": {
+    "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG41046-p01624-web-mapper-closed-class-v1/manifest.json",
+    "sha256": "459b69862a3948e717df8f62ce83bce78416468d37c2846b2e18629fa5b0f1fe"
+  },
+  "mapperNormalizedRaw": {
+    "crc": "f3c107492c84f65c",
+    "counters": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 106
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 0
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 17
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 3
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 3
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "reusedLocalTests": 2,
+  "candidateNewRuns": 0,
+  "actualSessionOrHttpActions": 0,
+  "remaining": [
+    "Actual 0102 API/session termination and owner binding",
+    "Current Web regular assembly and whole 451, QA056"
+  ],
+  "whole451": false,
+  "formalAcceptanceId": null
+}

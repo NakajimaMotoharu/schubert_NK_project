@@ -1,0 +1,110 @@
+{
+  "eventId": "PGPT-20261008-8830",
+  "workCategory": "IMPLEMENTATION",
+  "source": "7e19e9da76b8f359b129801132de878780265633",
+  "productionCoreMain": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "canonicalDesignSource": "7745de1fb04c8b9e2cfccc11103d7b3c57b090d7",
+  "managementWorkIds": [
+    "WBS-P020-01.03/2"
+  ],
+  "planRow": {
+    "ID": "WBS-P020-01.03/2",
+    "元行": "WBS-P020-01.03/2",
+    "費目": "B",
+    "主担当": "WBS-P020-01.03",
+    "状態": "計画",
+    "作業": "CHR-G01～G06工具gate/manifest/source契約（各case実行はCHR）／同source証拠による受入判定",
+    "残pp": "0.488",
+    "着手": "設計355・当該source・作業所有・既存成果を照合。必要な局所成果を費目Aで一度だけ作成し、受入候補のTestIDと独立期待値を確定。着手依存、当該A成果、終了依存と未解決条件を確認",
+    "終了証拠": "CHR-G01～G06工具gate/manifest/source契約（各case実行はCHR）の対象別完了記録を確認",
+    "補正根拠": "登録済み後段単価。追加製造はA、実経路はD、比較はE",
+    "契約HOLD": "",
+    "対象": "",
+    "範囲": "SCP-004、TST-001、TST-002、TST-003、TST-004、TST-005",
+    "保存証跡": "個別criteria＋同sourceのTestID・独立期待値・実結果・451適用結果",
+    "順次": "False",
+    "配賦窓": "4",
+    "楽観pp": "0.163",
+    "慎重pp": "0.975",
+    "要求設計の版差": "PT基準仕様 NK-CHR-001",
+    "lineNumber": 818,
+    "改訂残pp": "0.488"
+  },
+  "run": "PG43108-chr-metric-direct-values-v1",
+  "startEvent": "PGPT-20261008-8829",
+  "outcome": "Six changed fixture tool tests pass, with independent declared one vs observed twenty-four. SpotBugs and Checkstyle 0, bounded fixture PMD six retain original count and exact disposition. No real CHR or broader replay.",
+  "proof": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG43108-chr-metric-direct-values-v1/manifest.json",
+    "sha256": "867c4de02cced25f55a9404fe187b0afdc9e04ff1e39e47e78084f98974dd875"
+  },
+  "nextEvidence": "WBS-G13.07/2 current source and latest applicable product/CHR/fence evidence join. Separate local successes by exact run and commit.",
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T23:10:47+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 54,
+      "remainingPercent": 46,
+      "resetsAt": 1795879772,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "modelRequested": "gpt-6.2-sol",
+  "modelObserved": null,
+  "reasoningRequested": "high",
+  "reasoningObserved": null,
+  "speedRequested": "standard",
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 54,
+    "remainingPercent": 46,
+    "resetsAt": 1795879772,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "7df99e5683a0a18fc00a246ce804c0f2bf4c1ebd1c75510cba9ef769a4f45ac0",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-22T23:10:47+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 54,
+        "remainingPercent": 46,
+        "resetsAt": 1795879772,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": 0,
+  "sameQuotaWindow": true,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-22T23:09:40.930823+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": false,
+  "quotaBefore": {
+    "usedPercent": 54,
+    "remainingPercent": 46,
+    "resetsAt": 1795879772,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null
+}

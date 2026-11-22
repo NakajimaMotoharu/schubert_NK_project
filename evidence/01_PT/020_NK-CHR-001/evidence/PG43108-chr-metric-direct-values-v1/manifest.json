@@ -1,0 +1,129 @@
+{
+  "run": "PG43108-chr-metric-direct-values-v1",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T23:09:40.930823+00:00",
+  "source": "06d5f566effe7680e2ad32a4d11e658bb28cfa13",
+  "toolMainSource": "17a32407ae0a4ca56430f7bf100657b589d3a914",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-P020-01.03/2",
+  "testId": "PT-CHR-METRIC001..006",
+  "priorScope": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG43106-chr-metric-fixture-current-static-v1/manifest.json",
+    "sha256": "2743e922f8f02a39b50f660517a078417c985836bae966af5671b6d00cf4fb36"
+  },
+  "sourceFixture": {
+    "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateMetricsCountTest.java",
+    "sha256": "8dec83c4a7869a21b8a78f15f1f8f2aafc0502feb0b8d0d1f06172c162546a3c"
+  },
+  "exactRetainedTool": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43030-chr-nk-only-definition-v1/snapshot/program/characterization/target/schubert-characterization-0.1.0-SNAPSHOT.jar",
+    "sha256": "6e16d61b1aa5a85e94d6bc9f06231e3e1582b67d3a7b7f547d92a2171f43dacf"
+  },
+  "scope": "In-memory metrics count projection",
+  "independentExpected": {
+    "declaredCaseOrder": 1,
+    "actualCaseCount": 24,
+    "applicableCurrent": 23,
+    "differences": 16,
+    "baseline": 27
+  },
+  "toolTestsSuccess": 6,
+  "realChrRuns": 0,
+  "productionTests": 0,
+  "coverageScopeNotRemeasured": true,
+  "priorWhole227NotRepeated": true,
+  "noCanonicalResourcesLoadedByFixture": true,
+  "spotbugs": 0,
+  "pmd": [
+    {
+      "rule": "CloseResource",
+      "line": 153,
+      "localDisposition": "Two executor workers have one fixture owner with finite explicit shutdown."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 153,
+      "localDisposition": "Two workers are the pure test oracle, not a production thread pool."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 155,
+      "localDisposition": "First callback reads only its valid JSON object and result is bounded."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 156,
+      "localDisposition": "Second callback reads only its invalid JSON object and result is bounded."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 160,
+      "localDisposition": "Explicit owned executor cleanup in finally."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 161,
+      "localDisposition": "Ten second termination assertion checks postcondition."
+    }
+  ],
+  "checkstyle": 0,
+  "suppressionAdded": 0,
+  "receipts": [
+    {
+      "path": "../pgpt-runs/PG379/PG43108-chr-metric-direct-values-v1/begin.json",
+      "sha256": "da503f8f2fb56b538c6b9947b499eb385ab428f8d92c74d35804d86b6061fc3d"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43108-chr-metric-direct-values-v1/terminal.json",
+      "sha256": "2e0fe5f17cd84761202d82f8a2f6cd374b07d4538f6fe5e0e16640defa6b6ca3"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43108-chr-metric-direct-values-v1/spotbugs.xml",
+      "sha256": "38802cad698b3ae095df89acdf4a9be0d490a5ad0002c8be72ae579d86e69610"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43108-chr-metric-direct-values-v1/pmd.xml",
+      "sha256": "9f558b540a280c4d699e61c1170e74b568485813392253e408ac1d851fd9629e"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43108-chr-metric-direct-values-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "866b6ad119b29a74eabbb381267439302a45d70c3ac6cb8d807cec54f8021088"
+    },
+    {
+      "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG43108-chr-metric-direct-values-v1/sanitized-junit.xml",
+      "sha256": "2eee50dfe911482c5f3f304e3821408f0991c335c972918dd53e04ea1c4768af"
+    }
+  ],
+  "caseNames": [
+    "invalidOrMissingCurrentCountIsUnknownAndNeverAZeroOrCoercedValue",
+    "validSnapshotUsesExactProvidedCountsAndIsImmutable",
+    "concurrentIndependentSnapshotsNeverShareUnknownValues",
+    "unavailableDeclarationArraysAreOmittedInsteadOfReportedAsZero",
+    "javaNullAndNegativeProvidedCountsFailWithoutNpe",
+    "baselineCountComparisonRejectsCoercionAndRespectsExactIntegerBoundary"
+  ],
+  "quality": {
+    "compile": {
+      "exit": 0,
+      "terminalAtUTC": "2026-11-22T23:09:34.889011+00:00"
+    },
+    "style": {
+      "exit": 0,
+      "terminalAtUTC": "2026-11-22T23:09:35.488350+00:00"
+    },
+    "pmd": {
+      "exit": 4,
+      "terminalAtUTC": "2026-11-22T23:09:37.511073+00:00"
+    },
+    "spotbugs": {
+      "exit": 0,
+      "terminalAtUTC": "2026-11-22T23:09:40.238070+00:00"
+    },
+    "junit": {
+      "exit": 0,
+      "terminalAtUTC": "2026-11-22T23:09:40.926858+00:00"
+    }
+  },
+  "whole451": false,
+  "formalAcceptanceId": null
+}
