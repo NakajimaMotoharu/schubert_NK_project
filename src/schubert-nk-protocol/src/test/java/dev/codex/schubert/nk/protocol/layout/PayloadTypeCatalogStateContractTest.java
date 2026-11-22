@@ -5,20 +5,24 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.junit.jupiter.api.Test;
 
 /** SS323354/SSC445/451: independent immutable registry bindings under bounded concurrent reads. */
 class PayloadTypeCatalogStateContractTest {
   @Test // PT-PRO-CATALOG-STATE001
-  void concurrentReadersRetainAllIndependentSixtyFourTypeBindings() throws Exception {
+  void concurrentReadersRetainAllIndependentSixtyFourTypeBindings()
+      throws IOException, InterruptedException, ExecutionException, TimeoutException {
     List<List<String>> inputRows = new ArrayList<>();
     try (var input = getClass().getResourceAsStream("/protocol/named-types-ss323.tsv")) {
       assertNotNull(input);

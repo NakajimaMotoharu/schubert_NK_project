@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import dev.codex.schubert.nk.protocol.header.InteractionKind;
 import dev.codex.schubert.nk.protocol.header.MessageKind;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ class LayoutMetadataTest {
   private static final String FIELD_RULE_TEXT = "rule";
 
   @Test
-  void registryMatchesIndependentUi233Catalog() throws Exception {
+  void registryMatchesIndependentUi233Catalog() throws IOException {
     List<String> expected;
     try (var input = getClass().getResourceAsStream("/protocol/layouts-ui233.tsv")) {
       if (input == null) {

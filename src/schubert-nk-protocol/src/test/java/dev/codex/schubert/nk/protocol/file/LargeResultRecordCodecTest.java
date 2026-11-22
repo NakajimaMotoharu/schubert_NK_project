@@ -31,7 +31,7 @@ class LargeResultRecordCodecTest {
    * PT-PRO-003-H01 / BUG-034: independent JCA digest, every byte-position tamper, no timing test.
    */
   @Test
-  void verificationRejectsAllThirtyTwoDigestBytePositions() throws Exception {
+  void verificationRejectsAllThirtyTwoDigestBytePositions() throws NoSuchAlgorithmException {
     byte[] record = record((byte) 0x22);
     byte[] expected = MessageDigest.getInstance("SHA-256").digest(record);
     assertArrayEquals(

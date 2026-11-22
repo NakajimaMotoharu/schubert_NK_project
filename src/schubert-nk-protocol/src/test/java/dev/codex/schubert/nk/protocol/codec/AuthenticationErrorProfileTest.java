@@ -12,6 +12,7 @@ import dev.codex.schubert.nk.protocol.layout.FieldValueSet;
 import dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalog;
 import dev.codex.schubert.nk.protocol.layout.LayoutId;
 import dev.codex.schubert.nk.protocol.layout.PayloadValues;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -165,7 +166,7 @@ final class AuthenticationErrorProfileTest {
   }
 
   @Test
-  void allOtherResponseErrorProfilesRetainTheirIndividualContracts() throws Exception {
+  void allOtherResponseErrorProfilesRetainTheirIndividualContracts() throws IOException {
     List<String[]> independentLayouts = independentRows("layouts-ui233.tsv");
     List<String[]> independentFields = independentRows("fields-ui234-236.tsv");
     int responses = 0;
@@ -221,7 +222,7 @@ final class AuthenticationErrorProfileTest {
         .copyData();
   }
 
-  private static List<String[]> independentRows(String filename) throws Exception {
+  private static List<String[]> independentRows(String filename) throws IOException {
     try (var input =
         java.util.Objects.requireNonNull(
             AuthenticationErrorProfileTest.class.getResourceAsStream("/protocol/" + filename))) {

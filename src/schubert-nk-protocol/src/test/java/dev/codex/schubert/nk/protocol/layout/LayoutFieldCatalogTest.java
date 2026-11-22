@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import dev.codex.schubert.nk.protocol.header.InteractionKind;
 import dev.codex.schubert.nk.protocol.header.MessageKind;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ class LayoutFieldCatalogTest {
   private static final String FIELD_RULE_TEXT = "rule";
 
   @Test
-  void catalogMatchesIndependentUi234To236Fixture() throws Exception {
+  void catalogMatchesIndependentUi234To236Fixture() throws IOException {
     String fixture = fixture();
     List<String> expected =
         fixture.lines().filter(line -> !line.isBlank() && !line.startsWith("#")).toList();
@@ -75,7 +76,7 @@ class LayoutFieldCatalogTest {
   }
 
   @Test
-  void parserRejectsMalformedUnknownAndDuplicateRows() throws Exception {
+  void parserRejectsMalformedUnknownAndDuplicateRows() throws IOException {
     LayoutRegistry registry = LayoutRegistry.standard();
     assertThrows(NullPointerException.class, () -> LayoutFieldCatalog.parse(null, registry));
     assertThrows(NullPointerException.class, () -> LayoutFieldCatalog.parse(fixture(), null));
@@ -297,7 +298,7 @@ class LayoutFieldCatalogTest {
         () -> new LayoutFields(layout, List.of(valid), List.of(field(FieldArea.RECORD, 1, 1))));
   }
 
-  private static String fixture() throws Exception {
+  private static String fixture() throws IOException {
     try (var input =
         LayoutFieldCatalogTest.class.getResourceAsStream("/protocol/fields-ui234-236.tsv")) {
       if (input == null) {

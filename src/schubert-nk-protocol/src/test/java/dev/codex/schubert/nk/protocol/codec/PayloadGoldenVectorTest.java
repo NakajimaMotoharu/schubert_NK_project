@@ -27,8 +27,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeoutException;
 import org.junit.jupiter.api.Test;
 
 class PayloadGoldenVectorTest {
@@ -144,7 +146,8 @@ class PayloadGoldenVectorTest {
   }
 
   @Test
-  void sharedCodecProducesIdenticalBytesUnderConcurrentUse() throws Exception {
+  void sharedCodecProducesIdenticalBytesUnderConcurrentUse()
+      throws InterruptedException, ExecutionException, TimeoutException {
     PayloadCodec codec = PayloadCodec.standard();
     LayoutFields layout = LayoutFieldCatalog.standard().require("LGNREQ01");
     PayloadValues values =

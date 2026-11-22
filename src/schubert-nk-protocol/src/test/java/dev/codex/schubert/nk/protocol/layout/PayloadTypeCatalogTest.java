@@ -27,7 +27,8 @@ class PayloadTypeCatalogTest {
   private static final String SAFE_TEXT = "safe";
 
   @Test
-  void allNamedTypesHaveIndependentDirectionalFieldMeaning() throws Exception {
+  void allNamedTypesHaveIndependentDirectionalFieldMeaning()
+      throws IOException, ReflectiveOperationException {
     IndependentNamedFieldOracle.verifyAll();
   }
 

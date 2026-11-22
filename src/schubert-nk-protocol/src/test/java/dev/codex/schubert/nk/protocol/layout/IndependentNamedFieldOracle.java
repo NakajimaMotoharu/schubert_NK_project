@@ -9,6 +9,7 @@ import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
 import dev.codex.schubert.nk.protocol.layout.semantic.ProtocolId;
 import dev.codex.schubert.nk.protocol.layout.semantic.WireEnum;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -84,7 +85,7 @@ final class IndependentNamedFieldOracle {
 
   private IndependentNamedFieldOracle() {}
 
-  static void verifyAll() throws Exception {
+  static void verifyAll() throws IOException, ReflectiveOperationException {
     Map<String, String> accessors = new LinkedHashMap<>();
     for (String[] row : fixture("named-accessors-independent.tsv")) {
       assertEquals(2, row.length);
@@ -138,7 +139,7 @@ final class IndependentNamedFieldOracle {
       List<Field> fields,
       Map<String, String> accessors,
       Set<String> usedNames)
-      throws Exception {
+      throws ReflectiveOperationException {
     LinkedHashMap<String, FieldValue> input = new LinkedHashMap<>();
     List<Class<?>> signature = new ArrayList<>();
     List<Object> arguments = new ArrayList<>();
@@ -356,7 +357,7 @@ final class IndependentNamedFieldOracle {
   }
 
   private static Object independentInput(Class<?> scalar, FieldValue wire, int index)
-      throws Exception {
+      throws ReflectiveOperationException {
     String text =
         wire instanceof FieldValue.Text value
             ? value.value()
@@ -380,7 +381,7 @@ final class IndependentNamedFieldOracle {
   }
 
   private static void assertScalar(FieldValue wire, Object actual, int index, String context)
-      throws Exception {
+      throws ReflectiveOperationException {
     assertNotNull(actual, context);
     if (actual instanceof Instant) {
       assertEquals(TIME.plusMillis(index), actual, context);
@@ -432,7 +433,7 @@ final class IndependentNamedFieldOracle {
     expected.forEach((name, value) -> assertEquals(value, actual.getOrUnset(name), name));
   }
 
-  private static List<String[]> fixture(String name) throws Exception {
+  private static List<String[]> fixture(String name) throws IOException {
     try (var input = IndependentNamedFieldOracle.class.getResourceAsStream("/protocol/" + name)) {
       assertNotNull(input, name);
       try (var reader = new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8))) {

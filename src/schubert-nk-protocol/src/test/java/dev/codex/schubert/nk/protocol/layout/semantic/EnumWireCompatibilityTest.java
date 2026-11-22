@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.ObjectStreamClass;
@@ -18,7 +19,8 @@ import org.junit.jupiter.api.Test;
 final class EnumWireCompatibilityTest {
   /** PT-PRO-F03-ENUM001: Java serialization enum grammar, literal names and fixed descriptor. */
   @Test
-  void enum001SerializedAnswerStateMatchesIndependentProtocolVector() throws Exception {
+  void enum001SerializedAnswerStateMatchesIndependentProtocolVector()
+      throws IOException, ClassNotFoundException {
     var expected = new ByteArrayOutputStream();
     // STREAM_MAGIC/VERSION, TC_ENUM, TC_CLASSDESC, UTF length 58; not a production serializer.
     expected.writeBytes(HexFormat.of().parseHex("aced00057e72003a"));

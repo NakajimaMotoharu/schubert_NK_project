@@ -24,7 +24,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeoutException;
 import org.junit.jupiter.api.Test;
 
 /** UI235 §12.2 literal-byte oracle; QA054/SSC336, no backend or credential fixture. */
@@ -142,7 +144,7 @@ class WebLogActionContractTest {
   }
 
   @Test // PT-PRO-QA054-009
-  void everyCanonicalConstructorReferenceRejectsNull() throws Exception {
+  void everyCanonicalConstructorReferenceRejectsNull() throws NoSuchMethodException {
     var constructor =
         WebLogEventData.class.getDeclaredConstructor(
             Instant.class,
@@ -205,7 +207,8 @@ class WebLogActionContractTest {
   }
 
   @Test // PT-PRO-QA054-011
-  void independentConcurrentCallersDoNotMixCategories() throws Exception {
+  void independentConcurrentCallersDoNotMixCategories()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var workers = Executors.newFixedThreadPool(2);
     try {
       var first = workers.submit(() -> encode(legacy(Optional.empty())));
