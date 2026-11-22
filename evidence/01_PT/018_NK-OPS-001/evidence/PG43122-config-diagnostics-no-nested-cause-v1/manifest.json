@@ -1,0 +1,193 @@
+{
+  "run": "PG43122-config-diagnostics-no-nested-cause-v1",
+  "source": "6ad471d7b932ea9d090aad3c35f458bf6371f852",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "actualExit": 0,
+  "initiatedAtUTC": "2026-11-22T23:38:09.354774+00:00",
+  "terminalAtUTC": "2026-11-22T23:38:18.505190+00:00",
+  "wbs": "WBS-P018-10.02/2",
+  "design": [
+    "SS343",
+    "SS351"
+  ],
+  "defect": "BUG-3670",
+  "horizontal": "YKT-2886",
+  "stages": {
+    "format": {
+      "exit": 0,
+      "at": "2026-11-22T23:38:09.909179+00:00"
+    },
+    "compile": {
+      "exit": 0,
+      "at": "2026-11-22T23:38:10.717632+00:00"
+    },
+    "junit": {
+      "exit": 0,
+      "at": "2026-11-22T23:38:12.008574+00:00"
+    },
+    "rawCompile": {
+      "exit": 0,
+      "at": "2026-11-22T23:38:12.630711+00:00"
+    },
+    "unfiltered": {
+      "exit": 0,
+      "at": "2026-11-22T23:38:12.740444+00:00"
+    },
+    "style": {
+      "exit": 0,
+      "at": "2026-11-22T23:38:13.323015+00:00"
+    },
+    "pmd": {
+      "exit": 4,
+      "at": "2026-11-22T23:38:15.521090+00:00"
+    },
+    "spotbugs": {
+      "exit": 0,
+      "at": "2026-11-22T23:38:18.504840+00:00"
+    }
+  },
+  "tests": 6,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "newDefinitions": 0,
+  "testCases": [
+    {
+      "testID": "PT-OPS-APICFG003",
+      "testClass": "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest",
+      "method": "opsApiCfg003YamlsRejectDuplicateUnknownSecretAndStructures"
+    },
+    {
+      "testID": "PT-OPS-APICFG004",
+      "testClass": "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest",
+      "method": "opsApiCfg004AllFixedKeysUrlsAndRootsFailClosed"
+    },
+    {
+      "testID": "PT-OPS-APICFG007",
+      "testClass": "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest",
+      "method": "opsApiCfg007IndependentManifestCountAndCanonicalHash"
+    },
+    {
+      "testID": "PT-OPS-WEBCFG003",
+      "testClass": "dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest",
+      "method": "opsWebCfg003RejectMalformedUnknownSecretAndDecodedValues"
+    },
+    {
+      "testID": "PT-OPS-WEBCFG004",
+      "testClass": "dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest",
+      "method": "opsWebCfg004FixedKeysPortsTimeoutsCountsAndRoots"
+    },
+    {
+      "testID": "PT-OPS-WEBCFG007",
+      "testClass": "dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest",
+      "method": "opsWebCfg007ExplicitDbMqSourcesAndNegativeBoundaries"
+    }
+  ],
+  "fixture": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfigTest.java",
+      "sha256": "5ab2839cc4ccce751fa87616d0d857fcf1279ee37b0d5f59c342e3bd55ea4cf9"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfigTest.java",
+      "sha256": "d65a6c7239ce8f3205dfd32730e8722c65dac4518963b7c304911f954bdc4322"
+    }
+  ],
+  "productionInputs": {
+    "dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig.class": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43122-config-diagnostics-no-nested-cause-v1/target/classes/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig.class",
+      "sha256": "b3193906a439d650f767fd53aa9172065de506afb725b8f6c84b11498c04bc8e"
+    },
+    "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43122-config-diagnostics-no-nested-cause-v1/target/classes/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class",
+      "sha256": "cc8265242a1cd41cc7c77b8e12185cbc387fb583d70e1d1171ba467cb0f3d552"
+    },
+    "dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfig.class": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43122-config-diagnostics-no-nested-cause-v1/target/classes/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfig.class",
+      "sha256": "d4378ed797af2b047ec28613a0cd193a86eb6a35be19349973b33e6ca06db1d7"
+    },
+    "dev/codex/schubert/nk/storage/StorageIoException.class": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43122-config-diagnostics-no-nested-cause-v1/target/classes/dev/codex/schubert/nk/storage/StorageIoException.class",
+      "sha256": "85f86d702a139f126afdd72ca8e221583db824f159351ecd9f07b15fcc569c88"
+    },
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason.class": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43122-config-diagnostics-no-nested-cause-v1/target/classes/dev/codex/schubert/nk/storage/StorageIoException$Reason.class",
+      "sha256": "a113bd839666ee3a4038dd3703af0cfb772282278cc6fbfe1e3cccf98286ffec"
+    }
+  },
+  "independentExpected": {
+    "API": "API non-secret configuration unavailable",
+    "WEB": "Web non-secret configuration unavailable",
+    "cause": null,
+    "suppressedCount": 0,
+    "inputs": "previous fixture YAML synthetic fixed normal and negative cases"
+  },
+  "coverage": {
+    "LINE": {
+      "covered": 238,
+      "missed": 3
+    },
+    "METHOD": {
+      "covered": 22,
+      "missed": 3
+    },
+    "CLASS": {
+      "covered": 2,
+      "missed": 0
+    },
+    "BRANCH": {
+      "covered": 148,
+      "missed": 2
+    }
+  },
+  "archiveAggregation": false,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "rawPmd": 10,
+  "samePmdTypesAs": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43118-nonsecret-config-independent-concurrent-oracles-v3/manifest.json",
+    "sha256": "1d929834c4b1b0e02528e5f3586f3d1e50c8c66258b0436f58d4513ece035492"
+  },
+  "pmdSuppressions": 0,
+  "public": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43122-config-diagnostics-no-nested-cause-v1/sanitized-junit.xml",
+      "sha256": "1cdf26ce24bb749500022c0dd73487aa52c13f4aee1ad335bd1cf3293530afdd"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43122-config-diagnostics-no-nested-cause-v1/coverage-unfiltered.tsv",
+      "sha256": "3874d9d613735b0562af7be66f94af62d9f6b054b68756093fadd1ab1ed5f5e0"
+    }
+  ],
+  "private": [
+    {
+      "path": "../pgpt-runs/PG379/PG43122-config-diagnostics-no-nested-cause-v1/terminal.json",
+      "sha256": "2729cd525f29dc8b205ba3cd365be103c61b5717083dc19d22fa6ebc0d31cb48"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43122-config-diagnostics-no-nested-cause-v1/begin.json",
+      "sha256": "1752ec4ff711a0d9a30c0fff6ea6bd5d35ae4e3cc017e80a3df3d81065a5fcd0"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43122-config-diagnostics-no-nested-cause-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "233be19ad3009de78767e315201db2adb6cbc2e08c3cabf757de70073ce22a13"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43122-config-diagnostics-no-nested-cause-v1/unit.exec",
+      "sha256": "294e9d23c00ee8ac4237bd82671bae8dc81b33b3df23f3e52c0e131468cf13c0"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43122-config-diagnostics-no-nested-cause-v1/pmd.xml",
+      "sha256": "4cc6f627eb1a0c318d610d47813ec29162e436e9ee69ea8aee486edd0655c329"
+    }
+  ],
+  "currentMainTyped": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43120-f03-config-main-typed-current-v1/manifest.json",
+    "sha256": "b8084a08e8137430083852bd5b7f2fdfa174be6a05129a9fb7c5830a23de11c3"
+  },
+  "realCredentialsRead": 0,
+  "realLogSinkActions": 0,
+  "externalOperations": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
