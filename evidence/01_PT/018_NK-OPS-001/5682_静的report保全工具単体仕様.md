@@ -12,3 +12,7 @@ BUG-3583／YKT-2818、WBS-G08、SS354および451のsource/run/証跡固定。�
 | PT-OPS-STATIC-REPORT-006 | 現runを参照するsymlinkのディレクトリ | 拒否。 |
 
 各試験は旧証跡を模した固定ファイルのSHA-256を前後で比較する。解析対象や補助JARの許可とhashは従来の入力照合で確認する。出力検査は準備時点の判定で、同時に変更し得る第三者との排他や解析結果の正当性は別の条件。
+
+## 実行結果
+
+b65d7b159a57193b3bf87f787b18deaa561f86fc、PG42394。6件成功。実際に出力を誤った保存済み引数は、参照だけで `REPORT_OUTSIDE_CURRENT_RUN`。解析工具の起動は0。evidence/01_PT/018_NK-OPS-001/evidence/PG42394-g08-static-reports-output-guard-v1/manifest.json SHA256 4b8819ef489c44918214856e15245c677c6140299ffe95631c8b650a844266bd。

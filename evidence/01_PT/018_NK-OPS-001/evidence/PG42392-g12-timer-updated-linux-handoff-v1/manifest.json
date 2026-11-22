@@ -1,0 +1,59 @@
+{
+  "run": "PG42392",
+  "source": "a3b08ecd60bbfe6c02def78a4146bf7f027f2ae6",
+  "javaCore": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-G12",
+  "terminalAtUTC": "2026-11-22T08:08:51.112520+00:00",
+  "configSource": "3b0139d02a7a87042139718b9ffbe2f795b1837b",
+  "designCommit": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+  "design": [
+    {
+      "path": "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md",
+      "sha256": "857b4062d624ab8b99a2bfc72524f380c655c930db9388755968981e7c76d6c5"
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+      "sha256": "07ab19dd27038241ba8257a1e4dcf180117a844b68479ec6848658a938445192"
+    }
+  ],
+  "toolEvidenceBySource": [
+    {
+      "id": "PT-OPS-MAINT-PREBOOT001-T01/T02",
+      "evidence": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42306-g1306-maintenance-timer-offline-v1/manifest.json",
+        "sha256": "fcaed552f0f726ca27ce485b9a7c6c57bff013234a84215926e32ae4bffe4126"
+      },
+      "status": "historical syntax/absolute calendar pair, expression unchanged"
+    },
+    {
+      "id": "PT-OPS-MAINT-PREBOOT001-T03",
+      "evidence": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42370-g1306-daily-timer-explicit-values-v1/manifest.json",
+        "sha256": "801fd1f4e9088c490fb74ecc0b7491ea41257d6347b020f72ce4d6fee785d6c6"
+      },
+      "status": "explicit timer accuracy and no added delay"
+    },
+    {
+      "id": "PT-OPS-MAINT-PREBOOT001-T04",
+      "evidence": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42388-g1306-systemd-timer-verify-offline-v1/manifest.json",
+        "sha256": "eeadc0d9caae4dcecce1b2609bdc050098fbc024114856b0d7080cafda182f76"
+      },
+      "status": "systemd syntax successful with fixture only; production service missing"
+    }
+  ],
+  "openAcceptance": [
+    "Implement and qualify the fixed preboot service and its one-owner admission. Connect the timer only after this succeeds.",
+    "On a later authorized Linux target, bind rendered timer/service to same source and release, validate both native unit files, and verify the actual next elapse and effective limits.",
+    "Retain genuine owned stop/update/reboot and reboot completion marker evidence. An external monitor observes the same maintenance run and evaluates the 60-minute marker condition.",
+    "Bind reboot before/after identities, proper logs and source to same environment and restart and fail scenarios. Preserve 451 and IT/ST role boundaries."
+  ],
+  "sourceBinding": {
+    "path": "src/deployment/systemd/schubert-nk-maintenance.timer.template",
+    "sha256": "9d4fa7b1a9c8df6c6197d0d2ef339e369a06cb4bdc9e78f627b3e0fee87527d4"
+  },
+  "newExecutions": 0,
+  "actualHostOperations": 0,
+  "formalAcceptanceId": null,
+  "completedITST": false
+}

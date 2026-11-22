@@ -1,0 +1,56 @@
+{
+  "run": "PG42394",
+  "source": "b65d7b159a57193b3bf87f787b18deaa561f86fc",
+  "javaCore": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-G08",
+  "terminalAtUTC": "2026-11-22T08:11:09.492747+00:00",
+  "tool": {
+    "path": "tools/quality/static_report_paths.py",
+    "sha256": "3edb05a81d6208ffa04fc712695fde9239096ed7920e878eac8cc38202bfe17e"
+  },
+  "test": {
+    "path": "tools/quality/tests/test_static_report_paths.py",
+    "sha256": "edc26d78681015a19fede9998119222211ed1e14b9a61f4aaa41e940520aef9b"
+  },
+  "testIds": {
+    "PT-OPS-STATIC-REPORT-001": "test_001_three_fresh_absolute_paths",
+    "PT-OPS-STATIC-REPORT-002": "test_002_previous_run_or_relative_output",
+    "PT-OPS-STATIC-REPORT-003": "test_003_existing_report_and_dangling_symlink",
+    "PT-OPS-STATIC-REPORT-004": "test_004_duplicate_output_options",
+    "PT-OPS-STATIC-REPORT-005": "test_005_previous_file_list_or_symlink",
+    "PT-OPS-STATIC-REPORT-006": "test_006_symlink_run_directory"
+  },
+  "successfulGuardTests": 6,
+  "negativeKnownPlan": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42390-bootstrap-yaml-input-synthetic-v1/static/begin.json",
+    "sha256": "bd71711e839ca01a7843327ae83bb302b03516a7590575cfe2e02f461074fe21"
+  },
+  "knownReplayDecision": "REPORT_OUTSIDE_CURRENT_RUN",
+  "toolInvocationsToOldPlan": 0,
+  "productTests": 0,
+  "proof": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42394-static-report-path-guard-v1/begin.json",
+      "sha256": "09a2f54f921de4d91fd08085a9d2903333ebe3cc51b52ee1b18957bf1bead087"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42394-static-report-path-guard-v1/unit.stderr",
+      "sha256": "1f6b71c43474c7265bb681aed416ac4f38102bf4aed050c7f8821a61707b7b50"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42394-static-report-path-guard-v1/unit.terminal.json",
+      "sha256": "1af39dc78e14aa297be9433318cc2a9091df04b181719e79950d6b193697dfa9"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42394-static-report-path-guard-v1/actualOldPlanReadOnly.stdout",
+      "sha256": "7f866baeab1b0bb6a85722449c49a0bd9bdbf60aea328cec3a3930c10ccd8f50"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42394-static-report-path-guard-v1/actualOldPlanReadOnly.terminal.json",
+      "sha256": "ddecef21a47c3ae76add5c0e5b52c30ac2b57f7c8a6f9cf7706aa45bca2fc6b0"
+    }
+  ],
+  "compatibleExistingInputScope": true,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

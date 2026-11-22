@@ -1,5 +1,16 @@
 # IT・ST引継ぎ事項
 
+## 2026-11-22 JST 日次タイマーの現候補とLinuxへ渡す条件
+
+現設定候補は 3b0139d02a7a87042139718b9ffbe2f795b1837b。05:00 JST、時刻精度1分、ランダム遅延0、過去予定の追い付き実行なし。PG42370 T03の設定確認とPG42388 T04のsystemd構文確認が成立。T01/T02の旧時刻証拠は元sourceを保持。構文検査では試験専用サービスを使用し、参照ファイルの欠落は構文終了とは別に検査する。
+
+- PG/PTでは、固定本番サービスの製造、同一所有者の排他、停止順・真正終端、更新と再起動の安全判定を閉じる。実サービスの受入後にタイマーを実配備する。
+- 承認済みLinux環境では、同source／BOMのrendered timer/serviceを両方照合する。実効次回時刻、制限、予定とmanual再実行の排他、停止・復旧前後の同run／異bootを採取する。
+- 外部監視で保守開始と同runのreboot完了markerを照合する。60分の未更新criticalと、時限内復旧の対照を別々に確認する。監視接続・配備が未認証なら保留を維持する。
+
+証跡 evidence/01_PT/018_NK-OPS-001/evidence/PG42392-g12-timer-updated-linux-handoff-v1/manifest.json SHA256 879efd8a4240ba6e06e4a9011fb796043564d79ddefe142c2e525efaae2e90be。正式1964試験／53スコープ、WBS16/190。IT/STは後続工程。
+
+
 ## 2026-11-22 JST 日次保守timerのPG/PT引渡し・工程継続中
 
 最新の正式認定は1964試験／53scope、WBS正式16/190。設定候補 27152c62e0b39a9fafa9aa2fd4576a9efb905da9 の05:00 JST timerはPG42306のoffline二条件で成立。既存batch.ymlの時刻・zoneと一致。後続の着手には承認済みserviceの製造、M排他、60分期限、固定stop順、更新・reboot安全の独立PT、環境所有と当sourceのrendered Unit/BOMが必要。実Unit・監視marker・再起動・保持条件の検証は後続の承認済みLinux環境へ引き継ぐ。工数率は未較正。
