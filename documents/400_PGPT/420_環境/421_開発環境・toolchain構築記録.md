@@ -544,3 +544,11 @@ BUG3001/YKT2530は表示escape誤読による誤検知取り下げ、source修�
 ## SSC449 pgjdbc annotation compile scope（2026-11-17）
 
 BUG3129/YKT2600。既pgjdbc42.7.13公式POMがruntime宣言するorg.checkerframework:checker-qual:3.55.1を、Bootstrapの正規compile依存として同版で明示する。新規download/ツール更新なし。既Maven Central cacheのJAR SHA256 `857658c8bdcbff794949a8d9922f88d63ee3751c203c7cd7d21ea97f9e745288`、元POM/JARのpath/hashはPG36838へ保存。SDKのpublic qualifierを実際に型解決し、annotation stub、Xlint classfile除外、Werror解除をしない。compileの再現は原Root POM・Java25.0.4/Maven3.9.12で通常`compile`、Test source/アプリ/DB/native実行は別の許可条件を適用する。既runtimeの同GAVをcompileにも可視化する変更であり、driver/runtime版や業務Main/Test/SQLは変更しない。正規main設計PR412/7e883a3fd07e55f7dbd8d91cc516294b3db034bcを先行反映済み。是正後compile/staticの成否は新runの実物だけで判定、PG36830/34/36失敗を保全する。
+
+## 2026-11-22 CycloneDXによるMaven依存構成表
+
+SCM-005／SS352 §13。Maven Centralの公式CycloneDX Maven Plugin 2.9.3をstrict-checksumsで取得し、既存JDK25.0.4とMaven Wrapper 3.9.12で使用。生成形式はCycloneDX JSON 1.6。プラグインの取得とJARのSHA-256、固定実行引数はPG42604に保存。makeBomのMavenオンラインモード要件はPG42606の比較結果を参照。
+
+リポジトリrootで tools/quality/generate_maven_sbom.sh にmodule名、対象sourceへ固定済みのMaven repository、固定出力時刻を渡す。検証例は tools/quality/generate_maven_sbom.sh protocol /path/to/verified-maven-repository 2026-11-22T00:00:00Z。出力は選択moduleのtarget配下へ新規生成する。compile、test、package、deployは当commandが起動しない。配布用モデルにcompile/provided/runtimeを含め、testとsystemは対象外。製品試験・ライセンス方針・脆弱性検査・配布artifactでの照合は451とSCM-005の残条件。
+
+構成表コマンドのPTは evidence/01_PT/018_NK-OPS-001/5697_構成表コマンドの単体仕様と実行結果.md。公開版情報 https://github.com/CycloneDX/cyclonedx-maven-plugin/releases/tag/cyclonedx-maven-plugin-2.9.3。
