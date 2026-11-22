@@ -43,6 +43,74 @@ scenario = module("scenario_collector", "006_collect_scenario_evidence.py")
 
 
 class EvidenceSetTest(unittest.TestCase):
+    @staticmethod
+    def _fixture_module_coverage():
+        return ET.fromstring(
+            """
+            <report name="fixture.Protocol">
+              <package name="fixture/branchless">
+                <counter type="LINE" missed="0" covered="3"/>
+                <counter type="METHOD" missed="0" covered="1"/>
+                <counter type="CLASS" missed="0" covered="1"/>
+              </package>
+              <package name="fixture/conditional">
+                <counter type="LINE" missed="0" covered="5"/>
+                <counter type="METHOD" missed="0" covered="2"/>
+                <counter type="CLASS" missed="0" covered="1"/>
+                <counter type="BRANCH" missed="0" covered="2"/>
+              </package>
+              <counter type="LINE" missed="0" covered="8"/>
+              <counter type="METHOD" missed="0" covered="3"/>
+              <counter type="CLASS" missed="0" covered="2"/>
+              <counter type="BRANCH" missed="0" covered="2"/>
+            </report>
+            """
+        )
+
+    def test_required_module_coverage_counters_are_integer_package_totals(self):
+        values = scenario.validate_module_coverage(self._fixture_module_coverage())
+        self.assertEqual(
+            {"LINE": 8, "METHOD": 3, "CLASS": 2, "BRANCH": 2},
+            {key: row["covered"] for key, row in values.items()},
+        )
+        self.assertTrue(all(row["missed"] == 0 for row in values.values()))
+
+    def test_absent_duplicate_and_zero_module_coverage_counter_fail(self):
+        for metric in ("LINE", "METHOD", "CLASS", "BRANCH"):
+            for variant in ("missing", "duplicate", "zero"):
+                with self.subTest(metric=metric, variant=variant):
+                    report = self._fixture_module_coverage()
+                    row = report.find(f"counter[@type='{metric}']")
+                    if variant == "missing":
+                        report.remove(row)
+                    elif variant == "duplicate":
+                        report.append(copy.deepcopy(row))
+                    else:
+                        row.set("covered", "0")
+                    with self.assertRaises(ValueError):
+                        scenario.validate_module_coverage(report)
+
+    def test_inconsistent_packages_and_malformed_jacoco_counts_fail(self):
+        for variant in ("covered", "missed", "duplicate", "missing", "malformed", "invalid-type"):
+            with self.subTest(variant=variant):
+                report = self._fixture_module_coverage()
+                package = report.find("package")
+                line = package.find("counter[@type='LINE']")
+                if variant == "covered":
+                    line.set("covered", "4")
+                elif variant == "missed":
+                    line.set("missed", "1")
+                elif variant == "duplicate":
+                    report.append(copy.deepcopy(package))
+                elif variant == "missing":
+                    report.remove(package)
+                elif variant == "malformed":
+                    line.set("covered", "-1")
+                else:
+                    line.set("type", "LINES")
+                with self.assertRaises(ValueError):
+                    scenario.validate_module_coverage(report)
+
     def test_web_log_jdbc_resource_suite_canaries(self):
         expected = ("PT-IDEM-012-R02", "PT-IDEM-012-R03", "PT-IDEM-012-R04",
                     "PT-IDEM-012-R05")

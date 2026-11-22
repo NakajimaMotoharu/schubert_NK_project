@@ -2,9 +2,11 @@
 """Certify Scenario PT using allowlisted metadata; reject failed, skipped, flaky and partial coverage."""
 
 import argparse
+from collections import defaultdict
 import hashlib
 import json
 import platform
+import re
 from pathlib import Path
 import shutil
 import subprocess
@@ -23,6 +25,52 @@ def scenario_storage_suite(name):
         "dev.codex.schubert.nk.storage.ChildDirectoryPublicationTest",
         "dev.codex.schubert.nk.storage.PrivateChildDirectoryTest",
         "dev.codex.schubert.nk.storage.ResourceScopeTest"}
+
+
+REQUIRED_COVERAGE = frozenset(("LINE", "METHOD", "CLASS", "BRANCH"))
+JACOCO_COUNTERS = REQUIRED_COVERAGE | {"INSTRUCTION", "COMPLEXITY"}
+
+
+def _coverage_rows(element):
+    counters = {}
+    for counter in element.findall("counter"):
+        metric = counter.get("type")
+        missed = counter.get("missed", "")
+        covered = counter.get("covered", "")
+        if (
+            metric not in JACOCO_COUNTERS
+            or metric in counters
+            or not re.fullmatch(r"[0-9]+", missed)
+            or not re.fullmatch(r"[0-9]+", covered)
+        ):
+            raise ValueError("invalid or duplicated JaCoCo counter")
+        counters[metric] = {"missed": int(missed), "covered": int(covered)}
+    return counters
+
+
+def validate_module_coverage(report):
+    """Require four nonempty module counters with matching package totals."""
+    root = _coverage_rows(report)
+    packages = report.findall("package")
+    names = [package.get("name") for package in packages]
+    if (
+        report.tag != "report"
+        or not packages
+        or None in names
+        or len(names) != len(set(names))
+        or not REQUIRED_COVERAGE <= root.keys()
+        or any(root[metric]["covered"] == 0 for metric in REQUIRED_COVERAGE)
+        or any(values["missed"] for values in root.values())
+    ):
+        raise ValueError("incomplete or nonpassing module JaCoCo report")
+    totals = defaultdict(lambda: {"missed": 0, "covered": 0})
+    for package in packages:
+        for metric, values in _coverage_rows(package).items():
+            totals[metric]["missed"] += values["missed"]
+            totals[metric]["covered"] += values["covered"]
+    if root != totals:
+        raise ValueError("module JaCoCo counters disagree with package totals")
+    return root
 
 
 def main():
@@ -90,10 +138,7 @@ def main():
                 ET.ElementTree(clean).write(evidence / "output" / report.name,
                                             encoding="UTF-8", xml_declaration=True)
         jacoco = ET.parse(target / "site/jacoco/jacoco.xml").getroot()
-        counters = {c.get("type"): {"missed": int(c.get("missed")), "covered": int(c.get("covered"))}
-                    for c in jacoco.findall("counter")}
-        if not counters or any(v["missed"] for v in counters.values()):
-            raise SystemExit("coverage is not 100 percent")
+        counters = validate_module_coverage(jacoco)
         shutil.copyfile(target / "site/jacoco/jacoco.csv", evidence / "coverage" / (module + "-jacoco.csv"))
         static = "not configured for characterization runner"
         if module != "characterization":
