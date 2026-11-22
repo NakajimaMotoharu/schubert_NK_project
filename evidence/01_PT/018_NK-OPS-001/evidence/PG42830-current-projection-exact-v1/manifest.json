@@ -1,0 +1,107 @@
+{
+  "run": "PG42830",
+  "source": "5926c8db5dc8f28852b1e51e693a1bee58c28dfa",
+  "core": "e8368d22c4da2ec841f008df793594d3be9066af",
+  "branch": "dev-foundation",
+  "wbs": "WBS-P019-03.02/2",
+  "actualExit": 0,
+  "startedAtUTC": "2026-11-22T16:35:52.636538+00:00",
+  "terminalAtUTC": "2026-11-22T16:35:53.524709+00:00",
+  "originalCasesQualified": 12,
+  "actualProductTestsThisRun": 0,
+  "originalCurrentInputReceipt": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32900-current-assembly918-prepare-v2/manifest.json",
+      "sha256": "fa502b77a169b78a17a226c069a2900fef33e33f0e5077d550d2da87795a838e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32906-current-assembly918-unit-v2/manifest.json",
+      "sha256": "fb951bd32fd567c67c33b75f954f36f0fc43358800ca9cb5f72986adb7782080"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32908-current-assembly918-post-v2/manifest.json",
+      "sha256": "782a2c8c2c7934e44164316ac7eccd308543a55c02b7df41bedd2c8f7aea812e"
+    }
+  ],
+  "olderTestSourceNotTransferred": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32856-current-snapshot898-prepare-v3/manifest.json",
+    "sha256": "68692dac0c6c9037626578fef3019348fb23d62acaa39b8ce6ac91c9663e6dab"
+  },
+  "originalJupiterXml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32908-current-assembly918-post-v2/original-TEST-junit-jupiter.xml",
+    "sha256": "e452fd13256c35afadacabca3a620a2400d1d27970097d01eac7e47943e405ab"
+  },
+  "productCaseNames": [
+    "snapshot001AllFiveFixedQueriesTypedValuesAndCloseOrder()",
+    "snapshot002AllEmptyListsRemainEmpty()",
+    "snapshot003NullAndEachNegativeCountFailBeforeConnectionRead()",
+    "snapshot004BeforeAndAfterReadonlyNonautoAreRequired()",
+    "snapshot005RepeatableAndSerializableOnlyAndNoModeChange()",
+    "snapshot006EveryAttributePhasePropagatesAllThreeFaultKinds()",
+    "snapshot007EveryChildMainPhasePropagatesAndStopsLaterReaders()",
+    "snapshot008EveryChildExactCardinalityAndNoExtraFields()",
+    "snapshot009OwnedCleanupKeepsPrimarySuppressionOrderAndIdentity()",
+    "snapshot010DeepImmutableRowsRetainNullableStoredValues()",
+    "snapshot011FailureDoesNotPoisonSharedCoordinatorAndNoPartialSuccess()",
+    "snapshot012FiniteConcurrentCallsOwnAllFiveFixtures()"
+  ],
+  "usedProductArchive": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+    "sha256": "4a3de8b3dfe415c5171f42478f06e63b21f982be13cbd232131daf35dbd498d5"
+  },
+  "comparedMainFixtures": {
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentAudioLinkProjectionReader.java": "fe4d7988dae688fb589d47a4056c7ab82077b2565e6dc3ffa8a3d71d1a7aeec2",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentAudioProjectionReader.java": "fbd5388c58212b11d1492e42624130f019ff4ea4d1b332bd95596e96764f4f2c",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentMigrationProjection.java": "b1defeb746f70baf41b840e35da8eaaf312dc5fa323f04dfc4af8ecca2410f52",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentScenarioEntryProjectionReader.java": "652bf8c557d37c57ddaddb1fa1690d0c7f80a184ae8770b28c88c4edc607c74e",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentScenarioFileProjectionReader.java": "9bf74db29e26b5ead8a7dfc0e9b996fd01d09df5bf695ac6aa7bf2b0e3995ca1",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentSpeakerProjectionReader.java": "607d81ec04cdaa56d9b7f67386a06933cb26d2da626d3d1096fb7b7181e70fea"
+  },
+  "componentTest": {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentMigrationProjectionTest.java",
+    "sha256": "1fff006ab28c623d1153331b9d02607c33968e56293289276a27a31f85e0da00"
+  },
+  "exactMainPhysical": 7,
+  "exactTestPhysical": {
+    "dev/codex/schubert/nk/migration/CurrentMigrationProjectionTest.class": "e62d9f8c31df4c1a80af7c4cfa0fc0e00f40f98fe03041b9874c17acf15b39b0",
+    "dev/codex/schubert/nk/migration/CurrentMigrationProjectionTest$Fixture.class": "e1ae2f62471ee7ab4056fd3d5ac6d31ff21246ca22a61b4e426664373362767b",
+    "dev/codex/schubert/nk/migration/CurrentMigrationProjectionTest$Cursor.class": "d563233ca9bf5a568fd64c34f8ffa0a28acb0746e06aa232fcc5329033bcccc3"
+  },
+  "pinnedSdk": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7"
+  },
+  "compile": {
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+      "--release",
+      "25",
+      "-g",
+      "-proc:none",
+      "-implicit:none",
+      "-encoding",
+      "UTF-8",
+      "-Xlint:all",
+      "-Werror",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42830-current-projection-exact-v1/production:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+      "-d",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42830-current-projection-exact-v1/test",
+      "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentMigrationProjectionTest.java"
+    ],
+    "actualExit": 0,
+    "stdout": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42830-current-projection-exact-v1/compiler.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42830-current-projection-exact-v1/compiler.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "currentDatabaseOrCopyActions": 0,
+  "newCoverage": null,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
