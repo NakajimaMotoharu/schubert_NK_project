@@ -1444,6 +1444,20 @@ class EvidenceSetTest(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "total does not match"):
                 batch.read_batch_reports(target)
 
+    def test_batch_preflight_rejects_duplicate_case_across_reports(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            target = Path(temporary)
+            reports = target / "surefire-reports"
+            reports.mkdir()
+            for name, start, end in (("First", 0, 275), ("Second", 274, 549)):
+                suite = ET.Element("testsuite", name=name, tests="275",
+                                   failures="0", errors="0", skipped="0")
+                for index in range(start, end):
+                    ET.SubElement(suite, "testcase", name=f"local{index}", classname="LocalCase")
+                ET.ElementTree(suite).write(reports / f"TEST-{name}.xml", encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "duplicate Batch JUnit case"):
+                batch.read_batch_reports(target)
+
     def test_batch_runtime_dependency_inventory_and_nonpassing_cases(self):
         cls = "dev.codex.schubert.nk.batch.bootstrap.BatchRuntimeDependencyTest"
         name = "bat283RuntimePostgresDriverAndScopeCanaries"

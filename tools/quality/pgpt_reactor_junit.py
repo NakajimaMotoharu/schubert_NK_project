@@ -35,7 +35,7 @@ def _run_path(directory, run, suffix):
     return directory / (run + suffix)
 
 
-def _report(content):
+def _report(content, module_cases):
     suite = ET.fromstring(content)
     cases = suite.findall("testcase")
     if (
@@ -56,8 +56,9 @@ def _report(content):
     ):
         raise ValueError("empty, inconsistent or nonpassing reactor JUnit report")
     case_ids = {(case.get("classname"), case.get("name")) for case in cases}
-    if len(case_ids) != len(cases):
+    if len(case_ids) != len(cases) or module_cases & case_ids:
         raise ValueError("duplicate reactor JUnit case")
+    module_cases.update(case_ids)
     return {"sha256": _digest(content), "tests": len(cases)}
 
 
@@ -111,10 +112,11 @@ def _snapshot(repo, run, commit, directory):
         files = sorted(folder.glob("TEST-*.xml"))
         if not files:
             raise ValueError("missing original reactor JUnit reports for " + module)
+        module_cases = set()
         for file in files:
             if not file.is_file() or file != file.resolve():
                 raise ValueError("reactor report must be a local regular file")
-            reports[file.relative_to(repo).as_posix()] = _report(file.read_bytes())
+            reports[file.relative_to(repo).as_posix()] = _report(file.read_bytes(), module_cases)
         for relative, sha256 in quality_artifact_hashes(target, module).items():
             quality[(target.relative_to(repo) / relative).as_posix()] = sha256
     return {

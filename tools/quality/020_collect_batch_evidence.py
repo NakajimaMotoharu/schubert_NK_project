@@ -417,15 +417,20 @@ def ownership_description(total, program):
 
 def read_batch_reports(target):
     reports = [ET.parse(path).getroot() for path in sorted((target / "surefire-reports").glob("TEST-*.xml"))]
-    case_count = 0
+    module_cases = set()
     for suite in reports:
         cases = suite.findall("testcase")
         if (suite.tag != "testsuite" or any(int(suite.get(key, "0")) for key in ("failures", "errors", "skipped"))
                 or len(cases) != int(suite.get("tests", "-1"))
                 or any(child.tag not in ("system-out", "system-err") for case in cases for child in case)):
             raise ValueError("nonpassing or inconsistent Batch JUnit report")
-        case_count += len(cases)
-    if case_count != BATCH_TEST_COUNT:
+        case_ids = {(case.get("classname"), case.get("name")) for case in cases}
+        if any(not owner or not name for owner, name in case_ids):
+            raise ValueError("missing Batch JUnit case identity")
+        if len(case_ids) != len(cases) or module_cases & case_ids:
+            raise ValueError("duplicate Batch JUnit case")
+        module_cases.update(case_ids)
+    if len(module_cases) != BATCH_TEST_COUNT:
         raise ValueError("Batch JUnit total does not match the fixed collector inventory")
     return reports
 

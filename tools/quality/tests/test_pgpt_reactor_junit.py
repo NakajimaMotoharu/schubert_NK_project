@@ -164,6 +164,13 @@ class ReactorJunitTest(unittest.TestCase):
         path = self.paths[1].relative_to(self.repo).as_posix()
         self.assertEqual(2, json.loads(self.verify())["reports"][path]["tests"])
 
+    def test_duplicate_case_across_reports_in_one_module_is_rejected(self):
+        duplicate = self.paths[1].with_name("TEST-fixture.SuiteAlias.xml")
+        duplicate.write_bytes(REPORT.replace(b'name="fixture.Unit"', b'name="fixture.SuiteAlias"'))
+        with self.assertRaisesRegex(ValueError, "duplicate reactor JUnit case"):
+            self.capture()
+        self.assertFalse(self.marker(".junit.json").exists())
+
     def test_even_well_named_report_from_an_alias_is_rejected(self):
         before = self.runs / "outside.xml"
         before.write_bytes(REPORT)

@@ -161,6 +161,18 @@ class BatchCandidateRosterTest(unittest.TestCase):
         self.assertFalse(bad.stdout)
         self.assertIn(b"SHA-256 mismatch", bad.stderr)
 
+    def test_009_same_case_cannot_be_expected_in_two_suites(self):
+        repeated = ["fixture.BatchOwnership", "closesOnce()"]
+        self.plan["suites"]["fixture.BatchTerminal"] = [repeated]
+        self.terminal.write_bytes(
+            TERMINAL.replace(b'classname="fixture.BatchTerminal" name="finalWarning()"',
+                             b'classname="fixture.BatchOwnership" name="closesOnce()"')
+        )
+        self.execution["reports"] = self.report_pins()
+        self.save_inputs()
+        with self.assertRaisesRegex(ValueError, "duplicate Batch test case"):
+            self.verify()
+
 
 if __name__ == "__main__":
     unittest.main()

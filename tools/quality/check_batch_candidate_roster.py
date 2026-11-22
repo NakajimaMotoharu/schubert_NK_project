@@ -47,6 +47,7 @@ def expected_suites(suites):
     if not isinstance(suites, dict) or not suites:
         raise ValueError("Batch suite expectations are required")
     expected = {}
+    planned_cases = set()
     for name, cases in suites.items():
         if not CLASS.fullmatch(name) or not isinstance(cases, list) or not cases:
             raise ValueError("invalid or empty Batch suite expectation")
@@ -55,8 +56,9 @@ def expected_suites(suites):
             if not isinstance(case, list) or len(case) != 2 or not valid_case(*case):
                 raise ValueError("invalid Batch test case expectation")
             key = tuple(case)
-            if key in members:
+            if key in planned_cases:
                 raise ValueError("duplicate Batch test case expectation")
+            planned_cases.add(key)
             members.add(key)
         expected[f"TEST-{name}.xml"] = (name, members)
     return expected
