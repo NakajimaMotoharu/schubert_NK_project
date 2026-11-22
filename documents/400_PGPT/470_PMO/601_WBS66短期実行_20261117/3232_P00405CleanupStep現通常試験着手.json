@@ -1,0 +1,79 @@
+{
+  "eventId": "PGPT-20261008-8677",
+  "groupId": "nov22-cleanup-pg42956",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T19:30:28+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 47,
+      "remainingPercent": 53,
+      "resetsAt": 1795879772,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "source": "30664ca96f71e13b7c031549e138e078aa6c0e49",
+    "productionCoreMain": "e8368d22c4da2ec841f008df793594d3be9066af",
+    "canonicalDesignSource": "ca41c03c0c6efff9a3a35b47b480491810bee6f9",
+    "run": "PG42956",
+    "workCategory": "SELECTED_TEST",
+    "managementWorkIds": [
+      "WBS-P004-05/2"
+    ],
+    "previousCheckpoint": "3231",
+    "planRow": {
+      "新版ID": "WBS-P004-05/2",
+      "第58版ID": "WBS-P004-05/2",
+      "費用主担当項目": "P004-05",
+      "計画窓": "繰越",
+      "予定期間・週末": "2026-12-20までの計画週",
+      "作業・成果物": "JDBC UTC・SQL exception・transaction境界／同source証拠による受入判定",
+      "先行ID・着手条件": "A1-02、A3-03、WBS-P004-05/1、閉/WBS-F02、閉/WBS-F03",
+      "担当": "API・DB担当",
+      "旧短期残pp": "0.423",
+      "改訂残pp": "0.423",
+      "終了条件": "JDBC UTC・SQL exception・transaction境界：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。",
+      "元項目の正式受入に必要な証拠": "残るAPI先行4行、実ApiJdbcPoolとJdbcSyncRequestProcessorのcommit・rollback、UTC、実DB後条件。",
+      "参照する元項目": "P004-05",
+      "lineNumber": 21
+    },
+    "currentPlan": [
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/11月22日_PGPT再開実行計画.txt",
+        "sha256": "80b9fdc306f664b9c03901a4bdfb34cf66997879676204cfa969858fd68a4016"
+      },
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/短期実行WBS.tsv",
+        "sha256": "a6efedcd63b4ef3bb1d133d939b0ddd7dc4b0147988ac33d668282a25c999527"
+      }
+    ],
+    "startScope": {
+      "workCategory": "SELECTED_TEST",
+      "target": "現正規BatchのCleanupStepRepositoryへ既存CleanupStepPortTest全10件の合成JDK Proxyを適用",
+      "entry": "PG42954の現在と元入力照合、PG40856通常fixture、PG39800の古いfixture hash差、PG42942正規Jar",
+      "exitCriterion": "現製品・fixture・全依存SHA一致、元XML 10 F/E/S0、対象class raw四counterを観測、実DB/実削除呼出0",
+      "excludes": "QA056・Root11・保留fixture・実DB/JMS/FS・実削除・全回帰",
+      "successor": "同sourceのraw欠落と独立expectationがある場合だけ修正候補へ。他のJDBC所有・短期WBSへ継続"
+    },
+    "groupCapPp": 3.5,
+    "estimateAtGroupStartPp": {
+      "low": 0,
+      "base": 0.42,
+      "high": 3.5
+    },
+    "completedOriginalRowPricePp": 0,
+    "sourceOwnership": "LOCAL_DEV_FOUNDATION_TRACKED_SNAPSHOT",
+    "knownOwnedRunInProgress": 0,
+    "costRevision": "PMO-remaining-v3-20261010",
+    "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "actualAllocatedPp": null
+  }
+}
