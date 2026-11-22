@@ -1,0 +1,125 @@
+{
+  "eventId": "PGPT-20261008-8750",
+  "workCategory": "SELECTED_TEST",
+  "source": "cbac155a450ab199343b8608b4109f484e467c96",
+  "productionCoreMain": "e8368d22c4da2ec841f008df793594d3be9066af",
+  "canonicalDesignSource": "ca41c03c0c6efff9a3a35b47b480491810bee6f9",
+  "managementWorkIds": [
+    "WBS-C07"
+  ],
+  "planRow": {
+    "ID": "WBS-C07",
+    "元行": "WBS-C07",
+    "費目": "C",
+    "主担当": "WBS-C07",
+    "状態": "計画",
+    "作業": "log/metric/alert・STANDARD/DEBUG設定",
+    "残pp": "1.5",
+    "着手": "設計351・当該source・作業所有・既存成果を照合。元契約の着手依存と個別HOLDを確認。製品の実効receiptの引渡し見込は週表の条件付き日程。所有者・許可・証拠未確認なら成果準備だけを進める",
+    "終了証拠": "log/metric/alert・STANDARD/DEBUG設定：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。個別照合は 8設定とendpoint・保存期間の後条件",
+    "補正根拠": "既存準備の控除を維持。実機取得と共通全回帰は元ownerが一度だけ計上",
+    "契約HOLD": "8設定とendpoint・保存期間の後条件",
+    "対象": "",
+    "範囲": "SS 351",
+    "保存証跡": "承認済み設定/規約と当sourceの差、適用範囲、実証結果",
+    "順次": "False",
+    "配賦窓": "4",
+    "楽観pp": "0.5",
+    "慎重pp": "3.0",
+    "要求設計の版差": "PT基準仕様 NK-OPS-001",
+    "lineNumber": 592,
+    "改訂残pp": "1.5"
+  },
+  "run": "PG43028-current-monitor-window-single-coverage-v1",
+  "startEvent": "PGPT-20261008-8749",
+  "outcome": {
+    "result": "54_LOCAL_CURRENT_RUN_FULL_FOUR_COUNTERS_11_TYPES",
+    "newCaseExecutions": 54,
+    "newTestDefinitions": 0,
+    "actualOperations": 0,
+    "completeScope": {
+      "LINE": 205,
+      "METHOD": 60,
+      "CLASS": 11,
+      "BRANCH": 98
+    },
+    "whole451": false
+  },
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43028-current-monitor-window-single-coverage-v1/manifest.json",
+    "sha256": "dc58786178d83f8b4ec69f17fd025c1a1f9471d7fbc460c21e5bfab5c1747d50"
+  },
+  "nextEvidence": {
+    "work": "P020のNK限定補足定義に型・空・重複の未検査があるか、承認済み独立定義と現fixtureを確認する。",
+    "holdsUnchanged": true
+  },
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T21:13:23+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 50,
+      "remainingPercent": 50,
+      "resetsAt": 1795879771,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "modelRequested": "gpt-6.2-sol",
+  "modelObserved": null,
+  "reasoningRequested": "high",
+  "reasoningObserved": null,
+  "speedRequested": "standard",
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 50,
+    "remainingPercent": 50,
+    "resetsAt": 1795879771,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "ddb7d243205f303368651d612fe00b40021cf00c0aa67124b3b25d37be2a8f50",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-22T21:13:23+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 50,
+        "remainingPercent": 50,
+        "resetsAt": 1795879771,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": 0,
+  "sameQuotaWindow": true,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-22T21:12:08.542432+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": false,
+  "quotaBefore": {
+    "usedPercent": 50,
+    "remainingPercent": 50,
+    "resetsAt": 1795879771,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null
+}
