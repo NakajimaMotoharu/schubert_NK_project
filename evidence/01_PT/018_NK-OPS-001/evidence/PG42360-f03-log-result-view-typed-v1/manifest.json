@@ -1,0 +1,100 @@
+{
+  "run": "PG42360",
+  "source": "b24740608fd2476605a7a8d411d7e8e539a09fb1",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-22T07:27:11.496212+00:00",
+  "fixture": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/LogSearchResultsViewModelTest.java",
+    "sha256": "09a9aead7e61cd9112d24058fccf4840ce7944f3df96433786092a3d571362f3"
+  },
+  "productClasses": {
+    "dev/codex/schubert/nk/web/view/LogSearchResultsViewModel$Row.class": "610d692f808e81679c92a6a1c65943ac82fe5c7fb45228f25f3095b2818ed52e",
+    "dev/codex/schubert/nk/web/view/PageViewModel.class": "79f1a49b217008d873518ba2da6f5e871ed0a2e5f13f74ca9336675a65fd6a21",
+    "dev/codex/schubert/nk/web/view/LogSearchResultsViewModel.class": "4dc8e6879ad30414f9571af06087be1237e003692dc05d6df7a069ae64dc387e",
+    "dev/codex/schubert/nk/web/session/SessionPrincipal.class": "a8c12962f9ec1d7525ec643dedb3461529a6be84d9ccdf6d5736596c18cd0b49",
+    "dev/codex/schubert/nk/web/view/TopBarViewModel.class": "ccd4215b0fc53248d9c7ae6f930ad59fa3e108af86993e91cfd792c2761579a8"
+  },
+  "originalAnalysisMissingClasses": 8,
+  "supplementalAnalysisMissingClasses": 0,
+  "staticToolErrors": 0,
+  "rawSpotBugs": [
+    {
+      "rule": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "methods": [
+        "properties"
+      ]
+    },
+    {
+      "rule": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "methods": [
+        "web269ConcurrentProjection"
+      ]
+    }
+  ],
+  "rawPMD": [
+    {
+      "rule": "CloseResource",
+      "line": "332",
+      "method": "web269ConcurrentProjection"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": "332",
+      "method": "web269ConcurrentProjection"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": "338",
+      "method": "web269ConcurrentProjection"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": "352",
+      "method": "web269ConcurrentProjection"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": "353",
+      "method": "web269ConcurrentProjection"
+    }
+  ],
+  "pmdOwnerConclusion": "64 finite local tasks. Each get has a 10-second bound. shutdownNow executes in finally and awaitTermination has its own 10-second bound with an oracle. Retain raw findings and final policy review.",
+  "proof": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42360-f03-log-result-view-typed-v1/begin.json",
+      "sha256": "f761a72d3d76e9208e6202158c8af882ebfac0371fc6bd9f9a3b27a22337b4f7"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42360-f03-log-result-view-typed-v1/format.terminal.json",
+      "sha256": "cc1ac874b944463885ad77273812636e648144e0083de3d43210726990bca18a"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42360-f03-log-result-view-typed-v1/checkstyle.xml",
+      "sha256": "7c149a13ab21fa7c6f06f632e48e8e9739fb4c5da04ae07742dddd26ee4fb153"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42360-f03-log-result-view-typed-v1/pmd.xml",
+      "sha256": "6397dc59a5b140fa9937e5c9ce23cc671e9a2ad121dc8cd47a5428b6a7a4d68e"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42360-f03-log-result-view-typed-v1/spotbugs.xml",
+      "sha256": "09a58a8522db68f6f2f0fb0302b82809c1da6c7b7a978ab4a5c19d2cbaaeabd8"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42360-f03-log-result-view-typed-v1/supplement/begin.json",
+      "sha256": "793759498aba9d52e31620ff208bd303f64e2fa7dab18cce32926c50f2e978a4"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42360-f03-log-result-view-typed-v1/supplement/spotbugs.terminal.json",
+      "sha256": "6abd44ad23f6cda1e996f5229d748c81a55b98563d43c21e414978bbffc39f39"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42360-f03-log-result-view-typed-v1/supplement/spotbugs.xml",
+      "sha256": "cc4d8018a18628bbd865bb1b4f449c9c17dea37f28cf0cb43d67b8e9841f7f70"
+    }
+  ],
+  "testRuns": 0,
+  "formalAcceptanceId": null,
+  "whole451": false
+}

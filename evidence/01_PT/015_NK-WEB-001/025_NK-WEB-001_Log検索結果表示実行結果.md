@@ -13,3 +13,7 @@ JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.
 ```
 
 sourcec784bf10＋PG212/213作業tree/dev-foundation、Ubuntu26.04.1/Linux7.0.0-31/amd64/JDK25.0.4/Maven3.9.12。015collectorに各8ID/計4source/024～027、019独立inventory追加で77負canary成功、017と正式78予定。正式manifestへ環境/対象commit/日時/command/exit/input/expected/actual/coverage/関連BUG/SSC/path/hashを保存予定。form/template/HTTP/実broker/実NKgate・PGPT/IT/ST未完了。
+
+## 2026-11-22 現候補の局所再試験
+
+PG42362／試験source c9b95413be15f435a4fbf50c70947d94df8655cb、Java Core 1e4e9e64830b552727043f3cb8b9435b28cba472。独立期待値のPT-WEB-262～269は8成功、失敗・エラー・skipped各0。投影本体とRowは行61、メソッド25、クラス2、分岐18が各100%。従属Page/TopBarも報告した範囲の未測定を保持。SpotBugsは指摘・欠落class・解析error各0、Checkstyleとformatはexit0。PMDの有限worker5指摘は保持し、全451の判定は保留。証跡 evidence/01_PT/018_NK-OPS-001/evidence/PG42362-f03-log-result-fixture-current-v1/manifest.json SHA256 5f707ea329998b1e1b232c66d7802ce7201be1ad76f6a4e1267f93153971cc51。BUG-3578／YKT-2813。実HTTP・業務接続・全体認定は未実行。
