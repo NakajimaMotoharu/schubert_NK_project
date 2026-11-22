@@ -1,0 +1,252 @@
+{
+  "run": "PG43128-p002-reply-envelope-current-qualification-v1",
+  "source": "0844dbb85494dac887fd8dd47db11ee30dccdfee",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "actualExit": 0,
+  "startedAtUTC": "2026-11-22T23:49:14.672219+00:00",
+  "terminalAtUTC": "2026-11-22T23:49:24.116373+00:00",
+  "wbs": "P002再判定-b",
+  "design": [
+    "SS321",
+    "SS322",
+    "SS323"
+  ],
+  "requirements": [
+    "MSG-001",
+    "MSG-007"
+  ],
+  "stages": {
+    "format": {
+      "actualExit": 0,
+      "atUTC": "2026-11-22T23:49:15.199035+00:00"
+    },
+    "main": {
+      "actualExit": 0,
+      "atUTC": "2026-11-22T23:49:15.743762+00:00"
+    },
+    "fixture": {
+      "actualExit": 0,
+      "atUTC": "2026-11-22T23:49:16.446865+00:00"
+    },
+    "junit": {
+      "actualExit": 0,
+      "atUTC": "2026-11-22T23:49:17.626057+00:00"
+    },
+    "rawCompile": {
+      "actualExit": 0,
+      "atUTC": "2026-11-22T23:49:18.271871+00:00"
+    },
+    "unfiltered": {
+      "actualExit": 0,
+      "atUTC": "2026-11-22T23:49:18.375256+00:00"
+    },
+    "style": {
+      "actualExit": 0,
+      "atUTC": "2026-11-22T23:49:19.057217+00:00"
+    },
+    "pmd": {
+      "actualExit": 4,
+      "atUTC": "2026-11-22T23:49:21.103923+00:00"
+    },
+    "spotbugs": {
+      "actualExit": 1,
+      "atUTC": "2026-11-22T23:49:24.113571+00:00"
+    }
+  },
+  "caseCount": 8,
+  "results": {
+    "failed": 0,
+    "errors": 0,
+    "skips": 0
+  },
+  "caseMethods": [
+    [
+      "dev.codex.schubert.nk.api.messaging.outbound.JmsReplyEnvelopeContractTest",
+      "envelope001LiteralSyncAndApprovedAsyncRepliesKeepBodyAndExactProperties()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.messaging.outbound.JmsReplyEnvelopeContractTest",
+      "envelope002NullMalformedRequestOversizeAndLengthMismatchNeverAcquireMessage()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.messaging.outbound.JmsReplyEnvelopeContractTest",
+      "envelope003ProviderFailuresKeepIdentityAndNeverRetryOrContinue()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.messaging.outbound.JmsReplyEnvelopeContractTest",
+      "envelope004NullProviderResultFailsBeforeAnyMessageOperation()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.messaging.outbound.JmsReplyEnvelopeContractTest",
+      "envelope005LogoutSuccessKeepsLiteralBodyAndProperties()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.messaging.outbound.JmsReplyEnvelopeContractTest",
+      "envelope006EmptyAndReservedHeaderNeverAcquireMessage()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.messaging.outbound.JmsReplyEnvelopeContractTest",
+      "envelope007InternalEventNeverAcquiresMessage()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.messaging.outbound.JmsReplyEnvelopeContractTest",
+      "envelope008ShortBodyAndExactCapMismatchNeverAcquireMessage()"
+    ]
+  ],
+  "expectedSource": "unchanged literal wire vectors and independent borrowed port assertions",
+  "scope": {
+    "main": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory.java",
+      "sha256": "90c2401c0755b6ef1bb7e15c3847d268d9401a30d7ea9a4409f7516d7c500957"
+    },
+    "fixture": {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/JmsReplyEnvelopeContractTest.java",
+      "sha256": "d8d97b6c6aa9f27436fc4c6a0b10d1412fefcc0d98b70b41956cb3a3f501921a"
+    },
+    "newDefinitions": 0,
+    "currentProtocol": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42762-protocol-real-local-ci-entry-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+      "sha256": "79210c39ae0ceee549878c1c25b22961a44cc4a379d90c8b1708b1c1b5c7efb5"
+    },
+    "compileClasspathBorrowedVendor": [
+      {
+        "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+      },
+      {
+        "path": "/home/mini/codex/project1/work/toolchain/m2/repository/jakarta/jms/jakarta.jms-api/3.1.0/jakarta.jms-api-3.1.0.jar",
+        "sha256": "6605e08075ab389c359451c7854808cf4b1575e1ea6317e534e9d4df088096df"
+      }
+    ],
+    "olderApiArchiveRead": false,
+    "oldHeaderSha256": "49fd7f743dc4f83efd9398eb42adb913dc90399935f43b815d673742cdf7703d",
+    "currentHeaderSha256": "a6065f2c4db802a85d308b5e503ddc286c74046e7c7531048e2e74fe4f672733"
+  },
+  "sameExecCounters": {
+    "INSTRUCTION": {
+      "missed": 9,
+      "covered": 81
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 6
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 16
+    },
+    "COMPLEXITY": {
+      "missed": 2,
+      "covered": 7
+    },
+    "METHOD": {
+      "missed": 2,
+      "covered": 4
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "generatedMethodDeficits": [
+    "values",
+    "valueOf"
+  ],
+  "noExclusions": true,
+  "oldExecMerged": false,
+  "static": {
+    "checkstyle": 0,
+    "spotbugs": [
+      {
+        "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+        "line": 69,
+        "type": "INTENTIONAL_NULL_PARAMETER"
+      },
+      {
+        "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+        "line": 72,
+        "type": "INTENTIONAL_NULL_PARAMETER"
+      },
+      {
+        "rule": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+        "line": 42,
+        "type": "CHECKED_DECLARATION_FOLLOW_UP"
+      },
+      {
+        "rule": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+        "line": 125,
+        "type": "CHECKED_DECLARATION_FOLLOW_UP"
+      }
+    ],
+    "pmd": [
+      {
+        "rule": "UseConcurrentHashMap",
+        "line": 250
+      },
+      {
+        "rule": "UseProperClassLoader",
+        "line": 260
+      },
+      {
+        "rule": "UseProperClassLoader",
+        "line": 283
+      }
+    ],
+    "pmdSuppressed": 0,
+    "missingSpotBugsClasses": 0,
+    "typedNullAwayNotExecuted": true
+  },
+  "originals": [
+    {
+      "path": "evidence/01_PT/005_NK-MSG-001/evidence/PG23074-jms-boundary-independent-v1/manifest.json",
+      "sha256": "0b7db8261b59f946d346cc58b3d2c66ec8e3f1cdb26970d078c7f50f7aff5aff"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43128-p002-reply-envelope-current-qualification-v1/begin.json",
+      "sha256": "3aaa70647744565c7585f1e31bc8ac8345fa47d74847646cd08cb3e38ab93a09"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43128-p002-reply-envelope-current-qualification-v1/terminal.json",
+      "sha256": "5f5ca9796e4008ec43687fec9df4d923b786c09b7bcde3afcd927d9d357ecb81"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43128-p002-reply-envelope-current-qualification-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "8045fd5eebd1c11a4cb8f3c01817358abc9b5a7d9b081b4d1e1c184154e79222"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43128-p002-reply-envelope-current-qualification-v1/target/classes/dev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory.class",
+      "sha256": "6e70fd6fc5a9699baba079e661819ab30f20090e76e8949145f755f9e38133e4"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43128-p002-reply-envelope-current-qualification-v1/unit.exec",
+      "sha256": "97fa262807032a0e3a018bb52fc1180cf9807b4395f9c415afecce17dc1b2c64"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43128-p002-reply-envelope-current-qualification-v1/pmd.xml",
+      "sha256": "9b327b5804ab6b70962c6ab1035eb16d1543539729bf86699f4eea3f1d108598"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43128-p002-reply-envelope-current-qualification-v1/spotbugs.xml",
+      "sha256": "54e45333ebff093412667069fbb68178f4a1afda241a7d30503f33e784c5f535"
+    }
+  ],
+  "sanitized": [
+    {
+      "path": "evidence/01_PT/005_NK-MSG-001/evidence/PG43128-p002-reply-envelope-current-qualification-v1/sanitized-junit.xml",
+      "sha256": "282f7d441dcacadc75f6920d49befe617633f7a6936243c8eeb3f489c81bf833"
+    },
+    {
+      "path": "evidence/01_PT/005_NK-MSG-001/evidence/PG43128-p002-reply-envelope-current-qualification-v1/coverage-unfiltered.tsv",
+      "sha256": "2745b46e2d841d7e4a5e81c3736b1f6a7d34048ffeac717cc4e6ba60210ccba1"
+    }
+  ],
+  "actualBrokerConnections": 0,
+  "actualSend": 0,
+  "remaining": [
+    "actual MSG-001 delivery identity and authorized transport",
+    "conversion plus live send absence for MSG-007",
+    "typed F03 and whole 451"
+  ],
+  "whole451": false,
+  "formalAcceptanceId": null
+}
