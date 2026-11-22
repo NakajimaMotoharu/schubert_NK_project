@@ -19,6 +19,7 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -218,7 +219,8 @@ class FilesystemHealthObservationTest {
   }
 
   @Test
-  void fsInput007NullAndConcurrentIndependentReadsDoNotAcquireOwnership() throws Exception {
+  void fsInput007NullAndConcurrentIndependentReadsDoNotAcquireOwnership()
+      throws InterruptedException, ExecutionException {
     assertThrows(NullPointerException.class, () -> new FilesystemHealthObservation(null));
     var store = new FixtureStore();
     var source = new FilesystemHealthObservation(store);
@@ -311,7 +313,8 @@ class FilesystemHealthObservationTest {
   }
 
   @Test
-  void fsInput010NullBackwardsGapAndConcurrentPollHaveOneSerializedOwner() throws Exception {
+  void fsInput010NullBackwardsGapAndConcurrentPollHaveOneSerializedOwner()
+      throws InterruptedException, ExecutionException {
     var store = new FixtureStore();
     store.usable = 100;
     assertThrows(NullPointerException.class, () -> new FilesystemHealthMonitor(null, Service.WEB));

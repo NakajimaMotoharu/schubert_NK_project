@@ -9,6 +9,7 @@ import dev.codex.schubert.nk.batch.monitoring.ContinuousConditionWindow.State;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
@@ -128,7 +129,8 @@ class ContinuousConditionWindowTest {
   }
 
   @Test
-  void monWindow007ConcurrentSamePointHasOneOrigin() throws Exception {
+  void monWindow007ConcurrentSamePointHasOneOrigin()
+      throws InterruptedException, ExecutionException {
     var executor = Executors.newFixedThreadPool(4);
     try {
       var tasks = new ArrayList<Callable<Duration>>();

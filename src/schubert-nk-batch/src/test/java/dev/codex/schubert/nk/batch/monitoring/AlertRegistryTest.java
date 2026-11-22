@@ -13,6 +13,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
@@ -72,7 +73,8 @@ class AlertRegistryTest {
     int retained = 0;
     for (var condition : new Condition[] {Condition.DLQ, Condition.INTEGRITY_CONFIG})
       for (var service : Service.values()) {
-        var event = registry.activeEvents().get(retained++);
+        var event = registry.activeEvents().get(retained);
+        retained++;
         assertEquals(condition, event.condition());
         assertEquals(service, event.service());
         assertEquals(BigInteger.ONE, event.count());
@@ -126,7 +128,8 @@ class AlertRegistryTest {
   }
 
   @Test
-  void alertReg004ConcurrentCallersShareOneKeyOwner() throws Exception {
+  void alertReg004ConcurrentCallersShareOneKeyOwner()
+      throws InterruptedException, ExecutionException {
     var registry = new AlertRegistry();
     var executor = Executors.newFixedThreadPool(4);
     try {

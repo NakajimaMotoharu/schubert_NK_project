@@ -9,6 +9,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
@@ -230,7 +231,8 @@ class AlertThresholdsTest {
   }
 
   @Test
-  void threshold014ConcurrentStatelessEvaluations() throws Exception {
+  void threshold014ConcurrentStatelessEvaluations()
+      throws InterruptedException, ExecutionException {
     var executor = Executors.newFixedThreadPool(4);
     var expected =
         List.of(

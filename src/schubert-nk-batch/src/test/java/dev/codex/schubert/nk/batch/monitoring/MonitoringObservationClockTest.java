@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.batch.monitoring;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -17,6 +18,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -39,7 +41,7 @@ class MonitoringObservationClockTest {
       if (failure.isPresent()) {
         Throwable value = failure.orElseThrow();
         if (value instanceof Error fatal) throw fatal;
-        throw (RuntimeException) value;
+        throw assertInstanceOf(RuntimeException.class, value);
       }
       return at.orElse(null);
     }
@@ -160,7 +162,7 @@ class MonitoringObservationClockTest {
       LongSupplier broken =
           () -> {
             if (failure instanceof Error fatal) throw fatal;
-            throw (RuntimeException) failure;
+            throw assertInstanceOf(RuntimeException.class, failure);
           };
       assertSame(
           failure,
@@ -172,7 +174,7 @@ class MonitoringObservationClockTest {
               () -> {
                 if (armed.getAndIncrement() == 0) return 0;
                 if (failure instanceof Error fatal) throw fatal;
-                throw (RuntimeException) failure;
+                throw assertInstanceOf(RuntimeException.class, failure);
               });
       int readBefore = wall.reads.get();
       assertSame(
@@ -205,7 +207,8 @@ class MonitoringObservationClockTest {
   }
 
   @Test
-  void obsClock007ConcurrentContextsHaveUniqueMonotonicSnapshots() throws Exception {
+  void obsClock007ConcurrentContextsHaveUniqueMonotonicSnapshots()
+      throws InterruptedException, ExecutionException {
     var wall = new FixtureClock();
     var ticks = new AtomicLong();
     var clock = new MonitoringObservationClock(wall, ticks::getAndIncrement);

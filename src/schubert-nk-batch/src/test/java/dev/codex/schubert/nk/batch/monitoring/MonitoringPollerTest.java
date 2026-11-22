@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.batch.monitoring;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -13,6 +14,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -31,7 +33,7 @@ class MonitoringPollerTest {
 
   private static void fail(Throwable failure) {
     if (failure instanceof Error fatal) throw fatal;
-    throw (RuntimeException) failure;
+    throw assertInstanceOf(RuntimeException.class, failure);
   }
 
   @Test
@@ -197,7 +199,8 @@ class MonitoringPollerTest {
   }
 
   @Test
-  void poll007ParallelNonAtomicActionsAreSerializedIntoOneToSixtyFour() throws Exception {
+  void poll007ParallelNonAtomicActionsAreSerializedIntoOneToSixtyFour()
+      throws InterruptedException, ExecutionException {
     var poll = new MonitoringPoller<Integer>();
     int[] count = {0};
     var actual = new HashSet<Integer>();
