@@ -1,0 +1,129 @@
+{
+  "run": "PG43002-g09-reactor-timestamp-binding-v1",
+  "source": "567128de6b2bfe3dad2751cab963433ef03315e8",
+  "terminalAtUTC": "2026-11-22T20:38:00.676539+00:00",
+  "actualExit": 0,
+  "wbs": [
+    "WBS-G09",
+    "WBS-G08"
+  ],
+  "scope": "Existing local synthetic Python tool group, no reactor product execution",
+  "markerContract": "Original ISO 8601 timestamps with explicit offset and valid date; compare absolute instants and preserve originals on capture and publish; same instant accepted.",
+  "testIds": [
+    "PT-OPS-G09-JUNIT013",
+    "PT-OPS-G09-JUNIT014",
+    "PT-OPS-G09-JUNIT015"
+  ],
+  "fixedIndependentCases": {
+    "invalidFormatOrDate": 10,
+    "reversedAtCapture": 1,
+    "equalInstantsWithDifferentOffsets": 1,
+    "reversedAtVerification": 1
+  },
+  "originalRed": {
+    "actualExit": 1,
+    "methods": 3,
+    "subcaseFailures": 12,
+    "genuineMissingRejection": 11,
+    "exactReasonAtRecheck": 1,
+    "stdout": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43002-g09-reactor-timestamp-binding-v1/red.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43002-g09-reactor-timestamp-binding-v1/red.stderr",
+      "sha256": "8a96fb97ab4b9055705060c6a4f025a3ed9b68e17610395e2d78ffa2ed2f2753"
+    }
+  },
+  "terminals": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43002-g09-reactor-timestamp-binding-v1/after.begin.json",
+      "sha256": "1cd1d5bea0bf3cd97192dec2927ce40d485bef7ef713525ab9250f5b930afe83"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43002-g09-reactor-timestamp-binding-v1/after.end.json",
+      "sha256": "460f5813eba99167262ebbfb08692fecf1a5913395c2a3d81d9bf2c7c22901be"
+    }
+  ],
+  "toolCounts": {
+    "tests": 151,
+    "passed": 151,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "sourceAndCommands": {
+    "source": "567128de6b2bfe3dad2751cab963433ef03315e8",
+    "startedAtUTC": "2026-11-22T20:36:59.016988+00:00",
+    "command": [
+      "/usr/bin/python3",
+      "-B",
+      "-m",
+      "unittest",
+      "-v",
+      "test_check_batch_candidate_roster",
+      "test_pgpt_reactor_junit",
+      "019_test_evidence_set"
+    ],
+    "inputs": [
+      {
+        "path": "tools/quality/006_collect_scenario_evidence.py",
+        "sha256": "7b64174e6f2b205033415ac565f1f02fd90fad7ba7a96af01ab2326640ad911e"
+      },
+      {
+        "path": "tools/quality/pgpt_reactor_junit.py",
+        "sha256": "49c2f9c58abd7ac70f9ef1aebac47f92f502f73ab25c86331f3e35425e9dad8a"
+      },
+      {
+        "path": "tools/quality/tests/test_pgpt_reactor_junit.py",
+        "sha256": "0f10e10e73c7f5d11841aae93c07f02430039f4d7c2b38cb4dfb6badad261859"
+      },
+      {
+        "path": "tools/quality/tests/test_check_batch_candidate_roster.py",
+        "sha256": "6874bf28c0c8051e4a2bc0247af72f42bae8729bd5d2b879b08f033170d2cf0a"
+      },
+      {
+        "path": "tools/quality/019_test_evidence_set.py",
+        "sha256": "c50828270e5e59ab42872378da85979e8e906a6a5ddc9fab5cb330869fa6bed1"
+      },
+      {
+        "path": "tools/quality/018_collect_verified_evidence_set.py",
+        "sha256": "1f3fbd4b31e748ef73918b0c57a82c06f67a8b22b04b81b9bbf3fdc6cf916f02"
+      }
+    ],
+    "runnerReference": {
+      "path": "tools/quality/030_run_pgpt_verify.sh",
+      "sha256": "233d97af3bef1cfd0dcc12a0fb384abcc722806ceeb56c12060932fb36badac5"
+    },
+    "env": {
+      "python": "3.14.4",
+      "os": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43"
+    }
+  },
+  "formalHistory": {
+    "original": {
+      "path": "evidence/01_PT/008_NK-SCN-001/evidence/manifest.json",
+      "sha256": "59a5aa8831ea208c92fd12674bfb018c88ff57490ac975235de12efbb0f54df7"
+    },
+    "times": {
+      "startedAt": "2026-09-25T09:08:43+09:00",
+      "completedAt": "2026-09-25T09:21:10+09:00"
+    },
+    "productRunUnchanged": true,
+    "repeatCount": 0
+  },
+  "affectedPaths": [
+    "030 produces existing explicit-offset markers; unchanged",
+    "capture and verify share one snapshot with validated timestamps",
+    "006 directly publishes values from receipt",
+    "018 compares receipt before and after collection",
+    "persisted validate-only and original time bytes untouched"
+  ],
+  "schema": "pgpt-reactor-junit-v3 unchanged",
+  "relatedBug": "BUG-3651",
+  "relatedYkt": "YKT-2869",
+  "proofRead": "First digest comparison used different relative and absolute path labels. Reattached to original files and checked normalized path, no second evaluation.",
+  "newProductExecutions": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
