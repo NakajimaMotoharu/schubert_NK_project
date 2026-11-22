@@ -22,6 +22,7 @@ import org.junit.jupiter.api.Test;
 class TransferCapacityTest {
   private static final long CRITICAL_BYTE_GATE = 4_500_000_000L;
   private static final long CRITICAL_FILE_GATE = 9_000;
+  private static final String NORMAL_CAPACITY_LEVEL = "NORMAL";
   private static final String CRITICAL_CAPACITY_LEVEL = "CRITICAL";
 
   @Test
@@ -41,7 +42,7 @@ class TransferCapacityTest {
       String expected =
           bytes >= 4_500_000_000L
               ? CRITICAL_CAPACITY_LEVEL
-              : bytes >= 3_500_000_000L ? "WARNING" : "NORMAL";
+              : bytes >= 3_500_000_000L ? "WARNING" : NORMAL_CAPACITY_LEVEL;
       assertEquals(bytes, capacity.snapshot().bytes());
       assertEquals(100, capacity.snapshot().files());
       assertEquals(expected, capacity.snapshot().level().name());
@@ -50,7 +51,9 @@ class TransferCapacityTest {
     for (long files : new long[] {0, 4_999, 5_000, 5_001, 8_999, 9_000, 9_001, Long.MAX_VALUE}) {
       var capacity = new TransferCapacity(0, files);
       String expected =
-          files >= 9_000 ? CRITICAL_CAPACITY_LEVEL : files >= 5_000 ? "WARNING" : "NORMAL";
+          files >= 9_000
+              ? CRITICAL_CAPACITY_LEVEL
+              : files >= 5_000 ? "WARNING" : NORMAL_CAPACITY_LEVEL;
       assertEquals(files, capacity.snapshot().files());
       assertEquals(expected, capacity.snapshot().level().name());
       if (files >= CRITICAL_FILE_GATE) assertCapacity(capacity);
@@ -88,7 +91,7 @@ class TransferCapacityTest {
     assertThrows(IllegalStateException.class, second::retain);
     assertEquals(14400, capacity.snapshot().bytes());
     assertEquals(2, capacity.snapshot().files());
-    assertEquals("NORMAL", capacity.snapshot().level().name());
+    assertEquals(NORMAL_CAPACITY_LEVEL, capacity.snapshot().level().name());
     var snapshot = capacity.snapshot();
     capacity.reserve(4800).retain();
     assertEquals(14400, snapshot.bytes());
@@ -112,7 +115,8 @@ class TransferCapacityTest {
   }
 
   @Test
-  void c03OnlyOneOf100SimultaneousReservationsCanCrossEachCriticalBoundary() throws Exception {
+  void c03OnlyOneOf100SimultaneousReservationsCanCrossEachCriticalBoundary()
+      throws InterruptedException, ExecutionException, TimeoutException {
     for (var capacity :
         List.of(new TransferCapacity(0, 8999), new TransferCapacity(4_499_999_999L, 100))) {
       var before = capacity.snapshot();
@@ -150,7 +154,8 @@ class TransferCapacityTest {
   }
 
   @Test
-  void c03CallerMonitorsCannotBlockReservationMetricsRetainOrClose() throws Exception {
+  void c03CallerMonitorsCannotBlockReservationMetricsRetainOrClose()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var capacity = new TransferCapacity(0, 0);
     var executor = Executors.newVirtualThreadPerTaskExecutor();
     try {
@@ -194,35 +199,39 @@ class TransferCapacityTest {
       for (int trial = 0; trial < 8; trial++) {
         var capacity = new TransferCapacity(128, 7);
         var reservation = capacity.reserve(4800);
-        var start = new CyclicBarrier(2);
-        var retain =
-            executor.submit(
-                () -> {
-                  start.await(5, TimeUnit.SECONDS);
-                  try {
-                    reservation.retain();
-                    return true;
-                  } catch (IllegalStateException alreadyClosed) {
-                    return false;
-                  }
-                });
-        var close =
-            executor.submit(
-                () -> {
-                  start.await(5, TimeUnit.SECONDS);
-                  reservation.close();
-                  return null;
-                });
-        boolean retained = retain.get(5, TimeUnit.SECONDS);
-        close.get(5, TimeUnit.SECONDS);
+        try {
+          var start = new CyclicBarrier(2);
+          var retain =
+              executor.submit(
+                  () -> {
+                    start.await(5, TimeUnit.SECONDS);
+                    try {
+                      reservation.retain();
+                      return true;
+                    } catch (IllegalStateException alreadyClosed) {
+                      return false;
+                    }
+                  });
+          var close =
+              executor.submit(
+                  () -> {
+                    start.await(5, TimeUnit.SECONDS);
+                    reservation.close();
+                    return null;
+                  });
+          boolean retained = retain.get(5, TimeUnit.SECONDS);
+          close.get(5, TimeUnit.SECONDS);
 
-        var after = capacity.snapshot();
-        assertEquals(retained ? 4928 : 128, after.bytes());
-        assertEquals(retained ? 8 : 7, after.files());
-        assertEquals("NORMAL", after.level().name());
-        assertThrows(IllegalStateException.class, reservation::retain);
-        reservation.close();
-        assertEquals(after, capacity.snapshot());
+          var after = capacity.snapshot();
+          assertEquals(retained ? 4928 : 128, after.bytes());
+          assertEquals(retained ? 8 : 7, after.files());
+          assertEquals(NORMAL_CAPACITY_LEVEL, after.level().name());
+          assertThrows(IllegalStateException.class, reservation::retain);
+          reservation.close();
+          assertEquals(after, capacity.snapshot());
+        } finally {
+          reservation.close();
+        }
       }
     } finally {
       executor.shutdownNow();
