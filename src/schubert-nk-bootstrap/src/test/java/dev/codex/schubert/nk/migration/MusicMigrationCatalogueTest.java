@@ -10,14 +10,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
@@ -43,14 +46,15 @@ final class MusicMigrationCatalogueTest {
   private static final int ORDER_COLUMN = 15;
 
   @Test
-  void full129RowsMatchEveryIndependentGoldenByte() throws Exception {
+  void full129RowsMatchEveryIndependentGoldenByte() throws IOException, NoSuchAlgorithmException {
     var rows = copy(inputs());
     assertEquals(129, rows.size());
     assertArrayEquals(resource(MUSIC_WIRE), wire(rows));
   }
 
   @Test
-  void video20AndMusic129JoinAll149RowsAndBorrowedStream() throws Exception {
+  void video20AndMusic129JoinAll149RowsAndBorrowedStream()
+      throws IOException, NoSuchAlgorithmException {
     var input = inputs();
     var claims = new ArrayList<>(input.claims);
     var videoClaims = new ArrayList<AssetMigrationManifest.Entry>();
@@ -86,7 +90,7 @@ final class MusicMigrationCatalogueTest {
   }
 
   @Test
-  void onlyTheApproved129DeclarationCountCanEnterTheFactory() throws Exception {
+  void onlyTheApproved129DeclarationCountCanEnterTheFactory() throws IOException {
     var input = inputs();
     input.claims.clear();
     reject(input);
@@ -101,7 +105,7 @@ final class MusicMigrationCatalogueTest {
   }
 
   @Test
-  void allOtherManifestKindsAreRejected() throws Exception {
+  void allOtherManifestKindsAreRejected() throws IOException {
     for (var kind :
         List.of(
             AssetMigrationManifest.Kind.VIDEO,
@@ -118,7 +122,7 @@ final class MusicMigrationCatalogueTest {
   }
 
   @Test
-  void targetMapCardinalityAndUnknownKeysCannotReplaceTheKnownLogicalIds() throws Exception {
+  void targetMapCardinalityAndUnknownKeysCannotReplaceTheKnownLogicalIds() throws IOException {
     var input = inputs();
     input.ids.clear();
     reject(input);
@@ -135,7 +139,8 @@ final class MusicMigrationCatalogueTest {
   }
 
   @Test
-  void nullableAndNonPositiveOrOversizedTargetValuesAreRejected() throws Exception {
+  void nullableAndNonPositiveOrOversizedTargetValuesAreRejected()
+      throws IOException, NoSuchAlgorithmException {
     for (Long id : new Long[] {null, 0L, -1L, 1000000000000L}) {
       var input = inputs();
       input.ids.put(input.logicalByPath.get(REPLACE_PATH), id);
@@ -151,7 +156,7 @@ final class MusicMigrationCatalogueTest {
   }
 
   @Test
-  void targetIdCannotBeReusedAcrossDifferentGroups() throws Exception {
+  void targetIdCannotBeReusedAcrossDifferentGroups() throws IOException {
     var input = inputs();
     input.ids.put(
         input.logicalByPath.get(REPLACE_PATH), input.ids.get(input.logicalByPath.get(ALONE_PATH)));
@@ -159,7 +164,8 @@ final class MusicMigrationCatalogueTest {
   }
 
   @Test
-  void inputMapAndManifestOrderDoNotChangeCanonicalSourceOrder() throws Exception {
+  void inputMapAndManifestOrderDoNotChangeCanonicalSourceOrder()
+      throws IOException, NoSuchAlgorithmException {
     var input = inputs();
     Collections.reverse(input.claims);
     var keys = new ArrayList<>(input.ids.keySet());
@@ -172,7 +178,8 @@ final class MusicMigrationCatalogueTest {
   }
 
   @Test
-  void categoriesAndSectionsRemainSeparatedAndLocalOrdersRestart() throws Exception {
+  void categoriesAndSectionsRemainSeparatedAndLocalOrdersRestart()
+      throws IOException, NoSuchAlgorithmException {
     var rows = copy(inputs());
     var anime = find(rows, "曲/アニメ/01-01 Anime.m4a");
     assertEquals("アニメ", anime.fields().get(5));
@@ -187,7 +194,8 @@ final class MusicMigrationCatalogueTest {
   }
 
   @Test
-  void exactFuzzyAndBothMissingSidesFreezeApprovedKeysRolesAndOrders() throws Exception {
+  void exactFuzzyAndBothMissingSidesFreezeApprovedKeysRolesAndOrders()
+      throws IOException, NoSuchAlgorithmException {
     var rows = copy(inputs());
     assertPair(rows, "曲/ゲーム/01-01 Alpha.ogg", "alpha", "M", "1");
     assertPair(rows, "曲/ゲーム/01-02 Alpha inst.ogg", "alpha", "I", "1");
@@ -199,7 +207,8 @@ final class MusicMigrationCatalogueTest {
   }
 
   @Test
-  void nonSongTracksHaveNoKeyAndUnicodeCodepointLocalPathOrder() throws Exception {
+  void nonSongTracksHaveNoKeyAndUnicodeCodepointLocalPathOrder()
+      throws IOException, NoSuchAlgorithmException {
     var input = inputs();
     replacePath(input, REPLACE_PATH, "BGM/ゲーム/😀.ogg", MUSIC_TARGET);
     replacePath(input, REPLACE_SECOND, "BGM/ゲーム/\ue000.ogg", "music/second.ogg");
@@ -214,7 +223,8 @@ final class MusicMigrationCatalogueTest {
   }
 
   @Test
-  void currentOneAndTwoComponentPathsAndLeadingDotTitleArePreserved() throws Exception {
+  void currentOneAndTwoComponentPathsAndLeadingDotTitleArePreserved()
+      throws IOException, NoSuchAlgorithmException {
     var input = inputs();
     replacePath(input, REPLACE_PATH, "Solo.ogg", MUSIC_TARGET);
     var row = find(copy(input), "Solo.ogg");
@@ -232,7 +242,8 @@ final class MusicMigrationCatalogueTest {
   }
 
   @Test
-  void allFiveMimeMappingsAndUnknownExtensionsAreExplicit() throws Exception {
+  void allFiveMimeMappingsAndUnknownExtensionsAreExplicit()
+      throws IOException, NoSuchAlgorithmException {
     var rows = copy(inputs());
     assertEquals("audio/mp4", find(rows, "曲/アニメ/01-01 Anime.m4a").fields().get(11));
     assertEquals("audio/mpeg", find(rows, "BGM/アニメ/02.mp3").fields().get(11));
@@ -247,7 +258,7 @@ final class MusicMigrationCatalogueTest {
   }
 
   @Test
-  void targetExtensionCannotMisrepresentTheDeclaredSourceFormat() throws Exception {
+  void targetExtensionCannotMisrepresentTheDeclaredSourceFormat() throws IOException {
     var input = inputs();
     var old = claim(input, REPLACE_PATH);
     replaceClaim(
@@ -261,7 +272,8 @@ final class MusicMigrationCatalogueTest {
   }
 
   @Test
-  void byteSizeBoundariesAndDeclaredHashAreNotReobservedOrRepaired() throws Exception {
+  void byteSizeBoundariesAndDeclaredHashAreNotReobservedOrRepaired()
+      throws IOException, NoSuchAlgorithmException {
     for (long size : new long[] {0, 1000000000000L}) {
       var input = inputs();
       var old = claim(input, REPLACE_PATH);
@@ -287,7 +299,8 @@ final class MusicMigrationCatalogueTest {
   }
 
   @Test
-  void timestampInvalidFormsAreRejectedByTheExistingRowContract() throws Exception {
+  void timestampInvalidFormsAreRejectedByTheExistingRowContract()
+      throws IOException, NoSuchAlgorithmException {
     var input = inputs();
     for (var stamp : List.of("bad", "2026-01-02T03:04:05+00:00", "2026-01-02T03:04:05.000000001Z"))
       assertEquals(
@@ -303,7 +316,7 @@ final class MusicMigrationCatalogueTest {
   }
 
   @Test
-  void duplicateNormalizedKeysCannotSilentlyDropEitherRole() throws Exception {
+  void duplicateNormalizedKeysCannotSilentlyDropEitherRole() throws IOException {
     for (var path : List.of("曲/ゲーム/01-07 Alpha.ogg", "曲/ゲーム/01-07 Alpha inst.ogg")) {
       var input = inputs();
       replacePath(input, ALONE_PATH, path, MUSIC_TARGET);
@@ -312,14 +325,14 @@ final class MusicMigrationCatalogueTest {
   }
 
   @Test
-  void emptyDerivedPairKeysAreNotInventedOrChangedToNone() throws Exception {
+  void emptyDerivedPairKeysAreNotInventedOrChangedToNone() throws IOException {
     var input = inputs();
     replacePath(input, ALONE_PATH, "曲/ゲーム/!!!.ogg", MUSIC_TARGET);
     reject(input);
   }
 
   @Test
-  void allThreeNullableArgumentsHaveFixedDiagnostics() throws Exception {
+  void allThreeNullableArgumentsHaveFixedDiagnostics() throws IOException {
     var input = inputs();
     var catalogue = new MusicMigrationCatalogue();
     assertEquals(
@@ -342,7 +355,7 @@ final class MusicMigrationCatalogueTest {
   }
 
   @Test
-  void sourceMetadataBoundsDoNotTruncateFilenameTitles() throws Exception {
+  void sourceMetadataBoundsDoNotTruncateFilenameTitles() throws IOException {
     var input = inputs();
     replacePath(input, REPLACE_PATH, "BGM/ゲーム/" + "a".repeat(257) + ".ogg", MUSIC_TARGET);
     assertEquals(
@@ -351,7 +364,8 @@ final class MusicMigrationCatalogueTest {
   }
 
   @Test
-  void mutableInputsAndReturnedListsAndRowsDoNotShareOwnership() throws Exception {
+  void mutableInputsAndReturnedListsAndRowsDoNotShareOwnership()
+      throws IOException, NoSuchAlgorithmException {
     var input = inputs();
     var rows = copy(input);
     input.ids.clear();
@@ -362,7 +376,8 @@ final class MusicMigrationCatalogueTest {
   }
 
   @Test
-  void encodedBytesAreIndependentAndMatchTheSeparateFirstGoldenRow() throws Exception {
+  void encodedBytesAreIndependentAndMatchTheSeparateFirstGoldenRow()
+      throws IOException, NoSuchAlgorithmException {
     var row = copy(inputs()).get(0);
     var encoder = new PostgresCopyTextEncoder();
     byte[] first = row.copyBytes(encoder);
@@ -375,7 +390,8 @@ final class MusicMigrationCatalogueTest {
   }
 
   @Test
-  void rejectionDoesNotPoisonNormalCatalogueAndDiagnosticsStayRedacted() throws Exception {
+  void rejectionDoesNotPoisonNormalCatalogueAndDiagnosticsStayRedacted()
+      throws IOException, NoSuchAlgorithmException {
     var invalid = inputs();
     invalid.ids.clear();
     reject(invalid);
@@ -384,7 +400,8 @@ final class MusicMigrationCatalogueTest {
   }
 
   @Test
-  void finiteWorkersProduceTheSameIndependent129RowGolden() throws Exception {
+  void finiteWorkersProduceTheSameIndependent129RowGolden()
+      throws IOException, InterruptedException, ExecutionException, TimeoutException {
     var input = inputs();
     var manifest = input.manifest();
     var catalogue = new MusicMigrationCatalogue();
@@ -442,11 +459,11 @@ final class MusicMigrationCatalogueTest {
     input.claims.set(input.claims.indexOf(old), next);
   }
 
-  private static List<MediaAssetCopyRow> copy(Inputs input) throws Exception {
+  private static List<MediaAssetCopyRow> copy(Inputs input) throws NoSuchAlgorithmException {
     return new MusicMigrationCatalogue().copyRows(input.ids, input.manifest(), STAMP);
   }
 
-  private static void reject(Inputs input) throws Exception {
+  private static void reject(Inputs input) {
     assertEquals(
         DIAGNOSTIC, assertThrows(IllegalArgumentException.class, () -> copy(input)).getMessage());
   }
