@@ -13,8 +13,10 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
@@ -27,7 +29,7 @@ final class GateMetricsCountTest {
   private static final String DIFFERENCE_COUNT = "differenceCount";
 
   @Test
-  void validSnapshotUsesExactProvidedCountsAndIsImmutable() throws Exception {
+  void validSnapshotUsesExactProvidedCountsAndIsImmutable() {
     List<JsonNode> input = fixture();
     List<JsonNode> unchanged = input.stream().<JsonNode>map(JsonNode::deepCopy).toList();
     Map<String, Object> metrics = metrics(input);
@@ -55,7 +57,7 @@ final class GateMetricsCountTest {
   }
 
   @Test
-  void javaNullAndNegativeProvidedCountsFailWithoutNpe() throws Exception {
+  void javaNullAndNegativeProvidedCountsFailWithoutNpe() {
     List<JsonNode> input = fixture();
     for (int index = 0; index < 2; index++) {
       List<JsonNode> bad = new ArrayList<>(input);
@@ -78,7 +80,7 @@ final class GateMetricsCountTest {
   }
 
   @Test
-  void invalidOrMissingCurrentCountIsUnknownAndNeverAZeroOrCoercedValue() throws Exception {
+  void invalidOrMissingCurrentCountIsUnknownAndNeverAZeroOrCoercedValue() {
     List<Executable> checks = new ArrayList<>();
     for (JsonNode invalid :
         List.of(
@@ -98,7 +100,7 @@ final class GateMetricsCountTest {
   }
 
   @Test
-  void unavailableDeclarationArraysAreOmittedInsteadOfReportedAsZero() throws Exception {
+  void unavailableDeclarationArraysAreOmittedInsteadOfReportedAsZero() {
     List<Executable> checks = new ArrayList<>();
     for (JsonNode invalid :
         List.of(JSON.nullNode(), JSON.createObjectNode(), JSON.getNodeFactory().textNode("bad"))) {
@@ -143,7 +145,8 @@ final class GateMetricsCountTest {
   }
 
   @Test
-  void concurrentIndependentSnapshotsNeverShareUnknownValues() throws Exception {
+  void concurrentIndependentSnapshotsNeverShareUnknownValues()
+      throws InterruptedException, ExecutionException, TimeoutException {
     List<JsonNode> valid = fixture();
     List<JsonNode> invalid = fixture();
     object(invalid, 0).put(CURRENT_COUNT, "23");
@@ -160,9 +163,14 @@ final class GateMetricsCountTest {
     assertEquals(23, metrics(valid).get(CURRENT_COUNT));
   }
 
-  private static List<JsonNode> fixture() throws Exception {
-    List<JsonNode> definitions = GateDefinitionDocumentsTest.fixture();
-    return new ArrayList<>(List.of(definitions.get(0), definitions.get(3)));
+  private static List<JsonNode> fixture() {
+    ObjectNode contract = JSON.createObjectNode().put(CURRENT_COUNT, 23);
+    // The reported 24 cases come from observed inputs, not the declaration array length.
+    contract.putArray("caseOrder").add("synthetic-declaration");
+    ObjectNode approvedDifferences = JSON.createObjectNode();
+    var declarations = approvedDifferences.putArray("differences");
+    for (int i = 0; i < 16; i++) declarations.add("synthetic-difference-" + i);
+    return new ArrayList<>(List.of(contract, approvedDifferences));
   }
 
   private static ObjectNode object(List<JsonNode> input, int index) {

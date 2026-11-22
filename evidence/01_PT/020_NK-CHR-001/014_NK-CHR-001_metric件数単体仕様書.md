@@ -14,3 +14,5 @@ GateContractValidator#gateMetrics/#matchesBaselineFileCount、RD SCP001/004,MIG0
 |PT-CHR-METRIC006|GateMetricsCountTest#concurrentIndependentSnapshotsNeverShareUnknownValues|
 
 先に旧map/predicateを742同値抽出したAPIに新6全methodをoriginalred、then不正宣言省略/typedpredicateをPG。後続はbuild/static/sourcefreeze→新6＋関連60=66unique/11class、正常Main10physical/source/単exec/session/XML/resource/CRCを独立post。旧sourceの60と合算0。wholeGCV/CLI/physicalcallerの未達を分母除外せず、actualsource/runtime許可・後条件を単体PASSに変換0。環境/tool/command/commit/日時/原red/結果/coverage/BUGと証跡hashは015結果・manifestに保存。
+
+PG43108／BUG-3668。METRIC001～006の共通fixtureはメモリ上のJSONのみ。caseOrderへ合成宣言1、別途実測引数24、適用23、差分配列16とbaseline引数27を独立に固定する。結果のcaseCount期待24で宣言長への誤依存を検出する。無効値・欠落・並行の元期待と有限終端を維持する。Currentの基準・定義資源・実adapterに接続しない。
