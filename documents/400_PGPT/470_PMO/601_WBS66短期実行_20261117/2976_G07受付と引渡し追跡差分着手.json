@@ -1,0 +1,76 @@
+{
+  "eventId": "PGPT-20261008-8421",
+  "groupId": "prod-20261122-PG42642",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T12:35:13+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 34,
+      "remainingPercent": 66,
+      "resetsAt": 1795879772,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "source": "a110b8f6807a57e08ece11c95b97919eb827ae8d",
+    "productionCoreMain": "f8532c27c2666570fe450f285c5a5436aacd8e7e",
+    "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "run": "PG42642",
+    "workCategory": "CONTRACT_AUDIT",
+    "managementWorkIds": [
+      "WBS-G07/current-post-publication-delta"
+    ],
+    "previousCheckpoint": 2975,
+    "planRow": {
+      "新版ID": "WBS-G07/current-post-publication-delta",
+      "第58版ID": "WBS-G07",
+      "費用主担当項目": "G07",
+      "改訂残pp": "0.35",
+      "原票": {
+        "path": "documents/400_PGPT/470_PMO/481_PGPT詳細WBS.json",
+        "sha256": "4227e20a23b10ab8eecd2b69550dd7f58c79bf43a2f77b4c7c98ec943e83a2d9"
+      },
+      "先行ID": "PG42620 tracked-cursor",
+      "終了条件": "Scan only tracked additions after previous cursor, preserve redacted results and independently reconcile matches"
+    },
+    "currentPlan": [
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/11月22日_PGPT再開実行計画.txt",
+        "sha256": "80b9fdc306f664b9c03901a4bdfb34cf66997879676204cfa969858fd68a4016"
+      },
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/短期実行WBS.tsv",
+        "sha256": "a6efedcd63b4ef3bb1d133d939b0ddd7dc4b0147988ac33d668282a25c999527"
+      }
+    ],
+    "startScope": {
+      "action": "Gitleaks追跡増分、Cursor以後のみを確認する",
+      "dependent": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42620-g07-new-publication-interval-three-known-masks-v1/manifest.json",
+        "sha256": "1db816cb3772071395c09a555146a16ef2d763d76f076e3c479c97ea4ea25b9c"
+      },
+      "held": "未追跡ファイル・秘密値・運用各環境は扱わない",
+      "expected": "0または個別の公知hash参照・確定漏えい・未確認を別に保存"
+    },
+    "groupCapPp": 0.3,
+    "estimateAtGroupStartPp": {
+      "low": 0,
+      "base": 0.1,
+      "high": 0.3
+    },
+    "completedOriginalRowPricePp": 0,
+    "sourceOwnership": "LOCAL_DEV_FOUNDATION_TRACKED_SNAPSHOT",
+    "knownOwnedRunInProgress": 0,
+    "costRevision": "PMO-remaining-v3-20261010",
+    "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "actualAllocatedPp": null
+  }
+}
