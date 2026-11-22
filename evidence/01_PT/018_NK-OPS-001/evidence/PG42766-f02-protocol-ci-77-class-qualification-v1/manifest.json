@@ -1,0 +1,71 @@
+{
+  "run": "PG42766",
+  "source": "3811978a0444036427c7a27453329c3b86794c16",
+  "javaCore": "e8368d22c4da2ec841f008df793594d3be9066af",
+  "branch": "dev-foundation",
+  "wbs": [
+    "WBS-F02-b-b",
+    "WBS-P002-01"
+  ],
+  "terminalAtUTC": "2026-11-22T15:23:40.080789+00:00",
+  "actualExit": 0,
+  "currentCI": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42762-p01802-protocol-real-local-ci-v1/manifest.json",
+    "sha256": "93ccc017c908317d4ffe38456bd91027b90355386828ea2e27d621483518c7a5"
+  },
+  "priorF02": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42690-f02-current-sys13-after-pom-remediation-v1/manifest.json",
+    "sha256": "db416893485b955f47b43cc3050829d1d6658bd401befe68eb101b98cb6efa96"
+  },
+  "priorLocalThreeScopes": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41566-p002-current-three-scope-fixed-run-v1/manifest.json",
+    "sha256": "0beaf2497e5043e38c5615f5f17fe9f5545a2c5813c346828b1bbfe307f591aa"
+  },
+  "threeScopes": [
+    {
+      "wbs": "WBS-P001-01",
+      "earlierPublishedFormalStatus": "ACCEPTED",
+      "currentlyMatchingClassIdentities": 6,
+      "naturalNoCodePhys": 1,
+      "recognizedPriorScopedCases": 7,
+      "formalAcceptanceId": null
+    },
+    {
+      "wbs": "WBS-P001-02",
+      "earlierPublishedFormalStatus": "ACCEPTED",
+      "currentlyMatchingClassIdentities": 27,
+      "naturalNoCodePhys": 5,
+      "recognizedPriorScopedCases": 14,
+      "formalAcceptanceId": null
+    },
+    {
+      "wbs": "WBS-P002-01",
+      "earlierPublishedFormalStatus": "RECHECK_REQUIRED",
+      "currentlyMatchingClassIdentities": 44,
+      "naturalNoCodePhys": 5,
+      "recognizedPriorScopedCases": 30,
+      "formalAcceptanceId": null
+    }
+  ],
+  "newProtocolProofDelta": {
+    "SYS-002": {
+      "closedTechnicalCondition": "Current canonical Protocol standalone build using actual offline CI entry on JDK25.0.4/Maven3.9.12",
+      "remaining": "API/Web正規JAR、Ubuntu標準JDKによる現対象の実動。"
+    },
+    "SYS-005": {
+      "closedTechnicalCondition": "Current Protocol actual canonical regular package and Maven entry selected exactly one product module",
+      "remaining": "現Web→APIの全電文の実Artemis経路、API/Web正規結果、Storage JDBC境界。"
+    }
+  },
+  "notReassessedFullSet": 17,
+  "priorSameSourceScopeReusedForExactBytes": true,
+  "additionalTestInvocations": 0,
+  "initialAuditDraftIssue": "Required an exec observation for classes whose historical receipts have zero executable counters; corrected without running product tests.",
+  "blockingRequirements": [
+    "F02 API and Web regular JAR plus QA-056",
+    "Storage final JDBC ownership and agreed dependencies",
+    "P002-01 final dependency acceptance, current affected JMS and CHR, project 451"
+  ],
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null
+}
