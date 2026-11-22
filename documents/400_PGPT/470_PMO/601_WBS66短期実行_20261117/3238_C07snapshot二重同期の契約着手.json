@@ -1,0 +1,86 @@
+{
+  "eventId": "PGPT-20261008-8683",
+  "groupId": "nov22-c07-pg42962",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T19:37:22+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 48,
+      "remainingPercent": 52,
+      "resetsAt": 1795879772,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "source": "2159e19f767dc3fc55ef478fc1469934b95390ff",
+    "productionCoreMain": "e8368d22c4da2ec841f008df793594d3be9066af",
+    "canonicalDesignSource": "ca41c03c0c6efff9a3a35b47b480491810bee6f9",
+    "run": "PG42962",
+    "workCategory": "CONTRACT_AUDIT",
+    "managementWorkIds": [
+      "WBS-C07"
+    ],
+    "previousCheckpoint": "3237",
+    "planRow": {
+      "ID": "WBS-C07",
+      "元行": "WBS-C07",
+      "費目": "C",
+      "主担当": "WBS-C07",
+      "状態": "計画",
+      "作業": "log/metric/alert・STANDARD/DEBUG設定",
+      "残pp": "1.5",
+      "着手": "設計351・当該source・作業所有・既存成果を照合。元契約の着手依存と個別HOLDを確認。製品の実効receiptの引渡し見込は週表の条件付き日程。所有者・許可・証拠未確認なら成果準備だけを進める",
+      "終了証拠": "log/metric/alert・STANDARD/DEBUG設定：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。個別照合は 8設定とendpoint・保存期間の後条件",
+      "補正根拠": "既存準備の控除を維持。実機取得と共通全回帰は元ownerが一度だけ計上",
+      "契約HOLD": "8設定とendpoint・保存期間の後条件",
+      "対象": "",
+      "範囲": "SS 351",
+      "保存証跡": "承認済み設定/規約と当sourceの差、適用範囲、実証結果",
+      "順次": "False",
+      "配賦窓": "4",
+      "楽観pp": "0.5",
+      "慎重pp": "3.0",
+      "要求設計の版差": "PT基準仕様 NK-OPS-001",
+      "lineNumber": 592,
+      "改訂残pp": "1.5"
+    },
+    "currentPlan": [
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/11月22日_PGPT再開実行計画.txt",
+        "sha256": "80b9fdc306f664b9c03901a4bdfb34cf66997879676204cfa969858fd68a4016"
+      },
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/短期実行WBS.tsv",
+        "sha256": "a6efedcd63b4ef3bb1d133d939b0ddd7dc4b0147988ac33d668282a25c999527"
+      }
+    ],
+    "startScope": {
+      "workCategory": "CONTRACT_AUDIT",
+      "target": "C07四監視のsnapshot観測順契約、同時呼出とlifecycle状態の単一書換を検討",
+      "entry": "BUG3642/YKT2861、PG42904 raw残4、PG42906型付き、SS351正本と公開caller",
+      "exitCriterion": "現在の外部観測仕様の制約、除去が許される同期だけを証明、必要なら台帳/設計/局所正常PTへ。安全な製造が不明なら次独立作業へ",
+      "excludes": "実メトリクス・監視、実FS,VM,DB,Root,QA056,保留、正式451",
+      "successor": "依存とDIF不変が確認できた局所PG/PTかYKT残検討"
+    },
+    "groupCapPp": 3.5,
+    "estimateAtGroupStartPp": {
+      "low": 0,
+      "base": 0.5,
+      "high": 3.5
+    },
+    "completedOriginalRowPricePp": 0,
+    "sourceOwnership": "LOCAL_DEV_FOUNDATION_TRACKED_SNAPSHOT",
+    "knownOwnedRunInProgress": 0,
+    "costRevision": "PMO-remaining-v3-20261010",
+    "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "actualAllocatedPp": null
+  }
+}
