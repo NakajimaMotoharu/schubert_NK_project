@@ -430,8 +430,7 @@ class ScenarioSearchViewModelTest {
     var doc =
         Jsoup.parse(
             engine.process(
-                "<p th:text='${page.filters.q}'></p><a"
-                    + " th:href='${page.nextHref.orElseThrow()}'>次</a>",
+                "<p th:text='${page.filters.q}'></p><a th:href='${page.nextHref.orElseThrow()}'>次</a>",
                 context));
     assertEquals("<script>&\"", doc.selectFirst("p").text());
     assertTrue(doc.select("script").isEmpty());

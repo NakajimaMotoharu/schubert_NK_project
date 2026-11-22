@@ -311,10 +311,7 @@ class ScenarioSearchResultsViewModelTest {
     var dom =
         Jsoup.parse(
             engine.process(
-                "<article th:each='row : ${page.rows}'><h2 th:text='${row.chapterTitle}'></h2><span"
-                    + " th:text='${row.speaker}'></span><p th:text='${row.body}'></p><a"
-                    + " th:href='${row.scenarioHref}'>開く</a><audio th:if='${row.audio.present}'"
-                    + " th:src='${row.audio.orElseThrow().href}'></audio></article>",
+                "<article th:each='row : ${page.rows}'><h2 th:text='${row.chapterTitle}'></h2><span th:text='${row.speaker}'></span><p th:text='${row.body}'></p><a th:href='${row.scenarioHref}'>開く</a><audio th:if='${row.audio.present}' th:src='${row.audio.orElseThrow().href}'></audio></article>",
                 context));
     assertEquals("章<script>", dom.select("h2").first().text());
     assertEquals("話者<img>", dom.select("span").first().text());
