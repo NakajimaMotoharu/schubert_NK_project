@@ -354,6 +354,28 @@ final class GateDefinitionDocumentsTest {
     }
   }
 
+  /** PT-CHR-DEF-015: structure of a declared NK-only supplemental case. */
+  @Test
+  void declaredNkOnlySupplementalChecksMustBeDistinctNonblankStrings() throws Exception {
+    assertEquals(List.of(), validate(fixture()));
+    for (String malformed :
+        List.of(
+            "[]",
+            "null",
+            "{}",
+            "\"web-log-outbox-retry\"",
+            "[null]",
+            "[7]",
+            "[\"  \"]",
+            "[\"web-log-outbox-retry\",\"web-log-outbox-retry\"]")) {
+      var input = fixture();
+      object(input, REQUIREMENTS)
+          .withObject("/nkOnlySupplementalChecks")
+          .set("CHR-L01", JSON.readTree(malformed));
+      assertEquals(List.of("REQ_NK_ONLY_CHECKS:CHR-L01"), validate(input), malformed);
+    }
+  }
+
   @Test
   void concurrentValidAndInvalidDefinitionsRemainIndependent() throws Exception {
     List<JsonNode> valid = fixture();

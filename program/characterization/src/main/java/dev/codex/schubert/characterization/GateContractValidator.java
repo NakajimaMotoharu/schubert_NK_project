@@ -489,6 +489,10 @@ final class GateContractValidator {
                   expectedCases.contains(entry.getKey()),
                   "REQ_NK_ONLY_CASE:" + entry.getKey(),
                   failures);
+              if (!validNkOnlyChecks(entry.getValue())) {
+                failures.add("REQ_NK_ONLY_CHECKS:" + entry.getKey());
+                return;
+              }
               for (String check : strings(entry.getValue())) {
                 require(
                     strings(supplemental.path(entry.getKey())).contains(check),
@@ -496,6 +500,16 @@ final class GateContractValidator {
                     failures);
               }
             });
+  }
+
+  private static boolean validNkOnlyChecks(JsonNode checks) {
+    if (!checks.isArray() || checks.isEmpty()) return false;
+    Set<String> names = new HashSet<>();
+    for (JsonNode check : checks) {
+      if (!check.isTextual() || check.textValue().isBlank() || !names.add(check.textValue()))
+        return false;
+    }
+    return true;
   }
 
   private static void validateRun(
