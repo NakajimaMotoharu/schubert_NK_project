@@ -1,0 +1,70 @@
+{
+  "run": "PG43022-cutback-current-static-and-unrun-branches-v1",
+  "wbs": "WBS-P019-05.03/2",
+  "source": "ecadd8f979f244494ac546a2360dda1da531106c",
+  "productionCore": "7698011f52d6cc5f94c76413b6ab36971783b9c9",
+  "terminalAtUTC": "2026-11-22T21:02:31.615340+00:00",
+  "actualExit": 0,
+  "approvedDesign": [
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "source": "ca41c03c0c6efff9a3a35b47b480491810bee6f9",
+      "sha256": "3874975e619ba279814df4d6f79fd161098756cad882e00d580651fb2d7387cb"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/353_障害検知・復旧runbook.md",
+      "source": "ca41c03c0c6efff9a3a35b47b480491810bee6f9",
+      "sha256": "39708837ac8fc5e9245d8633eb40580ddb048e517ddf8ec19c8192e434a34719"
+    }
+  ],
+  "priorPreparation": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30254-p01905-four-cutback-contract-preparations-v1/manifest.json",
+    "sha256": "3b34b93e2dfbc4f2f95d230761a437bd470b804bda5cc460d925b7bfe4ef2ea0"
+  },
+  "exactCurrentStaticReuse": {
+    "path": "evidence/01_PT/004_NK-DAT-001/evidence/PG42570-v030-forward-and-guarded-rollback-source-proof-v1/manifest.json",
+    "sha256": "501d3df23fa99df4d113a5e761ea3a9a26defb6dec43ba188b1f0e0d06398cf6"
+  },
+  "currentForwardInventory": {
+    "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG43016-migration-current-sql-and-version-proof-v1/manifest.json",
+    "sha256": "bbbb380f92c3801b5e972d801c74bc30ce264f2928a865e26833546f849580fc"
+  },
+  "unchangedSqlPieces": [
+    {
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V030__preserve_current_audio_role.sql",
+      "sha256": "ae099baa342734e4944a8c5b184f86c1a762026269a8e0573e8faad6626b92be"
+    },
+    {
+      "path": "src/deployment/migration/030_audio_role_rollback.sql.template",
+      "sha256": "7782bc9255094b81824dafddbafb50023a866fc90648d0bf54e95b4dee04e114"
+    }
+  ],
+  "staticFactsVerifiedByOriginal": [
+    "one column/constraint forward 1..11",
+    "same legacy baseline 1..8",
+    "lock then byte-length guard and fixed refusal",
+    "cutback after guard only",
+    "write or ACL side-effect SQL statements absent",
+    "source facts after append only"
+  ],
+  "nextIndependentProof": {
+    "localStatic": "COMPLETE_FOR_V030_CONTRACT",
+    "priorRestoreOracle": [
+      "PT-MIG-CBACK010..014"
+    ],
+    "dynamicResults": "NOT_RUN",
+    "required": [
+      "verified intended actor, current release identity and isolated restore target",
+      "manifest and restore version checked in approved environment",
+      "non-overwrite and retained inputs independently documented",
+      "conditional cutback rejection and stopped state with independent database/queue conditions",
+      "owner decision on the termination and distinct class for partial completion"
+    ]
+  },
+  "currentTargetEnvironmentObserved": false,
+  "actualRestorationActions": 0,
+  "changeProductionOrDesign": 0,
+  "newTests": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
