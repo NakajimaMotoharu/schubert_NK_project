@@ -1,0 +1,73 @@
+{
+  "run": "PG42134",
+  "source": "03e8fc63b27b192ae10f44abefa6733788a93f5b",
+  "toolsSource": "3ab80b846e27308aab029821581b113ecaf78fc9",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-P020-01.03/2",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T04:46:57.270062+00:00",
+  "originalSameTools": [
+    {
+      "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG41344-p020-current-218-local-v1/manifest.json",
+      "sha256": "5f9119617ebed6632218f46bd81c2b858f6c8fa3064a827edd1fb9b470d9148c"
+    },
+    {
+      "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG41346-p020-current-218-independent-v1/manifest.json",
+      "sha256": "d2191089b0953b97f34e139d3d62a5bde47387bdb3e0ff14dde155198bb41a15"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41344-p020-current-218-local-v1/reports/TEST-junit-jupiter.xml",
+      "sha256": "8f6b635830262186ba682cf3b682f56d8b732f1a557452d62cebae4c95ef4dd4"
+    }
+  ],
+  "snapshotInputs": [
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateEvidenceDocumentsTest.java",
+      "sha256": "832da3b92ca67ed157981b140300fb72cc8cfd0364969ea3145475592f24af2f"
+    },
+    {
+      "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+      "sha256": "9b3b9fb5287741e6b3c316626fad26ea5e95b812bb0e1292562a69a888c7c7c5"
+    },
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionDocumentsTest.java",
+      "sha256": "c9f828f2a13e68ab4a5128acf8e6083479e54878723a981d28365fe92ea9ad69"
+    }
+  ],
+  "namedToolPhysical": {
+    "dev/codex/schubert/characterization/GateContractValidator.class": "f229c7070b3d98fa6f3f5d4493d66be1d9d45dc8c04253062703429e335834f9",
+    "dev/codex/schubert/characterization/GateContractValidator$ValidationResult.class": "48da8324ff9f6cfae38bc8ecf8147c5f187c4a0a52ae5e4935c926f775242781"
+  },
+  "package": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41344-p020-current-218-local-v1/snapshot/program/characterization/target/schubert-characterization-0.1.0-SNAPSHOT.jar",
+    "sha256": "3b00e3da151d8f0e6b4f5402270e0f47fe54f5590205e3c7745ccf213f0acc8c"
+  },
+  "independentSpec": {
+    "path": "evidence/01_PT/020_NK-CHR-001/008_NK-CHR-001_metadata検査単体仕様書.md",
+    "sha256": "b477593841ad10bc1f5880caf8a560133d4b5d0ee1c2bc0b87a07d90c0e9eb99"
+  },
+  "qualifiedExistingEvidenceTestIds": {
+    "PT-CHR-META001": "acceptsIndependentLiteralMetadataAndKeepsInputsAndResultsImmutable",
+    "PT-CHR-META002": "rejectsEveryJavaNullBoundaryAndReportsJsonNullWithoutNpe",
+    "PT-CHR-META003": "comparisonCountsAndEmptyDifferenceCollectionsMustBeStrict",
+    "PT-CHR-META004": "sourceAndInventoryCountsRejectCoercionDefaultsOverflowAndNegativeValues",
+    "PT-CHR-META005": "sourceHashesRequireCanonicalTextOnBothSides",
+    "PT-CHR-META006": "preflightMetadataUsesTypedCapacityAndExactStaticMarkers",
+    "PT-CHR-META007": "reviewMetadataRequiresBooleanChecksAndTypedRoleWithoutGrantingApproval",
+    "PT-CHR-META008": "statusMarkersAndRepeatInventoryCannotSubstituteDifferentEvidence",
+    "PT-CHR-META009": "concurrentFrozenFramesKeepTheirDiagnosticsIndependent"
+  },
+  "actualCurrentTestScope": "source & physical equivalence, prior local 218 exec",
+  "fixedEdgeSemantics": [
+    "typed comparison, source and inventory values",
+    "fixed hash and capacity constraints",
+    "review markers validated as metadata only",
+    "concurrent immutable diagnostics"
+  ],
+  "baselineReadOrModified": false,
+  "actualProductOrChrOrFileStoreStarted": 0,
+  "newTests": 0,
+  "coverageAggregateAdded": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

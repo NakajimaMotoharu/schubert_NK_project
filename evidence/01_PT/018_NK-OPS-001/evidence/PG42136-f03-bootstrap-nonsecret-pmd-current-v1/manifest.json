@@ -1,0 +1,136 @@
+{
+  "run": "PG42136",
+  "source": "03e8fc63b27b192ae10f44abefa6733788a93f5b",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-F03/2-2-b",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T04:51:03.575348+00:00",
+  "sources": [
+    {
+      "path": "pom.xml",
+      "sha256": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38"
+    },
+    {
+      "path": "src/deployment/config/api.yml.template",
+      "sha256": "206f4ed29da0fca31c1bab15015eb5b4db93255846c411f5d1815050d66bf267"
+    },
+    {
+      "path": "src/deployment/config/common.yml.template",
+      "sha256": "d61acf911e08a15cfdb2700eb81db7bbbb920cb3ccd80f1665652af4b4b7880a"
+    },
+    {
+      "path": "src/deployment/config/web.yml.template",
+      "sha256": "3e9a7ba4ada50e82e450cdd634439c2c122fed051de089010dee07dfd2d25cb7"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/pom.xml",
+      "sha256": "174e3974a5fe17a226c8c43a0cd49ae70d395cb4f236168da07cd7482a67908c"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig.java",
+      "sha256": "5bc27f0fddf5098f96a094b092598655baf517edc396cb70a0d11bcaeb8e3b22"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.java",
+      "sha256": "305e82607cfc8acf9656547c5eee663cc9edee55c0381da96d6860b5a98d0d75"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfig.java",
+      "sha256": "612d92a60eb5c2ccb23992768f795d5ccc9f7b93eacd18eb2aa6ee370023aaf3"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfigTest.java",
+      "sha256": "b9101fe7cf8a6465da8ebc19ac60adad64573dc8813aef95ad6c2948c3f299fb"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfigTest.java",
+      "sha256": "ca0762458d24466e5ec9226fb24067250a5d17035e0bdfbecd931851e90fe74d"
+    },
+    {
+      "path": "src/schubert-nk-storage/pom.xml",
+      "sha256": "d4ed59631b9ebf965db518fbe4b7894c2beb71ee3f7c1e9cdbf7b4241c8179c7"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java",
+      "sha256": "d59870fcf8d4f7bf9ff4e0abc2e052efddd9a08e9e93efa39d1f15a97f7063cf"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/package-info.java",
+      "sha256": "64e8bb6e4ebe10b606244200eec59e677465215d210c686aefd9da22c9a7bf6e"
+    },
+    {
+      "path": "tools/quality/static/checkstyle.xml",
+      "sha256": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+    },
+    {
+      "path": "tools/quality/static/pmd.xml",
+      "sha256": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de"
+    }
+  ],
+  "dependency": {
+    "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/snakeyaml/snakeyaml-engine/3.1.1/snakeyaml-engine-3.1.1.jar",
+    "sha256": "59d73655cf077f154137e2d6f6f92c041a954c0b1c534c63800047a0d70a6947"
+  },
+  "dispositions": [
+    {
+      "source": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig.java",
+      "line": 124,
+      "method": "parseSource",
+      "rule": "AvoidCatchingGenericException",
+      "disposition": "EARLIER_INDEPENDENT_SCOPE_INAPPLICABLE_ON_EXACT_INPUT",
+      "rationale": "Fixed diagnostic boundary with fatal graph propagated; original operator or library diagnostics cannot escape. SSC461 and BUG3233 preserved."
+    },
+    {
+      "source": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig.java",
+      "line": 171,
+      "method": "validate",
+      "rule": "AvoidCatchingGenericException",
+      "disposition": "EARLIER_INDEPENDENT_SCOPE_INAPPLICABLE_ON_EXACT_INPUT",
+      "rationale": "Fixed diagnostic boundary with fatal graph propagated; original operator or library diagnostics cannot escape. SSC461 and BUG3233 preserved."
+    },
+    {
+      "source": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfig.java",
+      "line": 118,
+      "method": "parseSource",
+      "rule": "AvoidCatchingGenericException",
+      "disposition": "EARLIER_INDEPENDENT_SCOPE_INAPPLICABLE_ON_EXACT_INPUT",
+      "rationale": "Fixed diagnostic boundary with fatal graph propagated; original operator or library diagnostics cannot escape. SSC461 and BUG3233 preserved."
+    },
+    {
+      "source": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfig.java",
+      "line": 167,
+      "method": "validate",
+      "rule": "AvoidCatchingGenericException",
+      "disposition": "EARLIER_INDEPENDENT_SCOPE_INAPPLICABLE_ON_EXACT_INPUT",
+      "rationale": "Fixed diagnostic boundary with fatal graph propagated; original operator or library diagnostics cannot escape. SSC461 and BUG3233 preserved."
+    }
+  ],
+  "basis": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41314-f03-bootstrap-changed-static-v1/manifest.json",
+      "sha256": "00adb8a89b17e427034a46be182939f4b6e547542925cde0df784c050186f5af"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41314-f03-bootstrap-changed-static-v1/pmd.xml",
+      "sha256": "64a9890695fda4933b72fdaabc3a4eabb85f7e90eb6be167ae0b8f49415aadae"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38864-f02-nonsecret-config-independent-v1/manifest.json",
+      "sha256": "c02641886551b4d4dd68f86777585d7e6a2241bc6fb80f9030ba4744bf827371"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38858-ssc461-nonsecret-config-static-v1/manifest.json",
+      "sha256": "467ffe7f115048498da326bebcdcb8428df29ab11e17df774e33e1a407cc11ba"
+    }
+  ],
+  "originalRawExit": 4,
+  "newExecutions": 0,
+  "rawSuppressions": 0,
+  "aggregateClassifiedRemainderUpdated": false,
+  "remaining": [
+    "Classification of other Bootstrap findings",
+    "All-six-module typed quality and 451",
+    "QA-056, Root11 and 32 held tests unchanged"
+  ],
+  "formalAcceptanceId": null
+}

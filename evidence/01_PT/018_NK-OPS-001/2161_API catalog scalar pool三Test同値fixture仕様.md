@@ -9,3 +9,7 @@ PG=元33raw中23Stringの意味名定数だけ、全元tokenへ逆復元、誤�
 normal六compile/packageでformat/NullAway/JSpecify/Werror（PT0）、source固定後原46method/三suiteを専用JVM240s・新所有空CWD/拡張・parallel自動無効で必要通常PT。一execを完全API467=実447+空metadata20へ照合、全Main1843不変/三SourceFile物理Test差/他byte不変、対象Main五の四counterと全API未達を実測する。除外/到達用assert/旧exec合成なし。PMD/CS実行、gate1や未達をPASS化しない。
 
 command=11123 checked entry経由11180 plan/11182 inverse→11184 normal→11186原46→11188static→11190独立→原担当trace/2162。実時刻/OS/JDK/tool/source/branch/command/exit/全case/期待根拠/実測/XML/exec/hash/BUGを公開manifestに結合。実Hikari/SQL/DB/JMS/HTTP/service/Root/VM/native/実鍵/Browser0、原安全HOLD維持。新実装/PTは既成果の確認再演と区別し、正式1964/53・17/190・工数null・QA051final/全F03/451は更新を実証するまで未変更。
+
+## 2026-11-22 現候補のAPIメトリクス検証仕様追補
+
+対象Core 1e4e9e64830b552727043f3cb8b9435b28cba472、試験source cfbdb33c080224f54fbd3876b452b3945ac962b8。APICAT014／SCALAR024はメモリ内の固定16系統・2つの合成メータsource、4worker・各64件・各10秒上限。既存固定ラベル・カウンタ2/3、ゲージ5/7を期待し、終了とsource所有を確認。BUG-3554～3556／YKT-2800。新規選択は2成功・失敗0・除外0。残36個別は既存実行を候補のクラス・依存・JVM命令・固定入力へ照合。全体coverageと451は未判定。証跡 evidence/01_PT/018_NK-OPS-001/evidence/PG42144-f03-api-metrics-bounded-waits-v2/manifest.json SHA256 6fe65874fe6b4d08646d671cd778c036c4916f3073e6cec929fc650c0af0e3a4。

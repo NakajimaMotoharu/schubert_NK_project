@@ -1,0 +1,286 @@
+{
+  "run": "PG42144",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-F03/2-2-b",
+  "source": "cfbdb33c080224f54fbd3876b452b3945ac962b8",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T05:01:28.043088+00:00",
+  "bug": [
+    "BUG-3554",
+    "BUG-3555"
+  ],
+  "ykt": "YKT-2800",
+  "sourceInputs": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricCatalogTest.java",
+      "sha256": "79130dcc4c327d4b48fa3799746715667b2493e5436fcbf68886e41ff2820dc1"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporterTest.java",
+      "sha256": "336c336dd75cb831a726557e654d3624ad804fc3a46b9402f5d0d2c97c2965ad"
+    }
+  ],
+  "prior": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42142-f03-api-monitoring-four-static-v1/manifest.json",
+    "sha256": "56278ebd90b5723753c2d3090c179b100aa8a0cd6f28fe6c249f9fa61fda4412"
+  },
+  "currentObservedCases": [
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.ApiScalarMetricExporterTest",
+      "name": "scalar024ConcurrentCallsAndOtherSourcesDoNotShareState",
+      "timeSec": "0.224"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.ApiMetricCatalogTest",
+      "name": "apicat014FiniteConcurrentCallsHaveNoRetainedMutableState",
+      "timeSec": "0.133"
+    }
+  ],
+  "selectedCount": 2,
+  "passCount": 2,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "testsMethodsInstructions": {
+    "ApiScalarMetricExporterTest.class": {
+      "executedMethodInstructionCount": 24,
+      "oldClass": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42140-f03-api-scalar-metric-current-v1/test/dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporterTest.class",
+        "sha256": "94397414be306dbe8ff329fd69c62039a1839dc222057bbe170a30d5e45c3108"
+      },
+      "newClass": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42144-api-metrics-bounded-waits-v2/test/dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporterTest.class",
+        "sha256": "e69727cfe63cc4c9bbd62be3a6e6c924edb7fea405a00ce8e1bcee2c363def7d"
+      },
+      "allMethodInstructionsEqual": true
+    },
+    "ApiMetricCatalogTest.class": {
+      "executedMethodInstructionCount": 14,
+      "oldClass": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42138-f03-api-metric-catalog-current-v1/test/dev/codex/schubert/nk/api/monitoring/ApiMetricCatalogTest.class",
+        "sha256": "9a5dbe8f54fceb4054c16d859bec814735d750e343e20d04305eb84e64a57e8f"
+      },
+      "newClass": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42144-api-metrics-bounded-waits-v2/test/dev/codex/schubert/nk/api/monitoring/ApiMetricCatalogTest.class",
+        "sha256": "edeababc764c7a8c64f3ba02bb6d249a89f47ba3d1c96d3c4d7347920b0926fc"
+      },
+      "allMethodInstructionsEqual": true
+    }
+  },
+  "publicTestIds": [
+    "APICAT014",
+    "SCALAR024"
+  ],
+  "testResultHash": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42144-api-metrics-bounded-waits-v2/xml/TEST-junit-jupiter.xml",
+    "sha256": "8576559e555cec0a28c6bfd9bba5383eaedf33af4ca113228e2358a571efbaa1"
+  },
+  "exec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42144-api-metrics-bounded-waits-v2/original.exec",
+    "sha256": "288fae8ffa47a99cee713c1f12b9f3b02d9ac91e3ecf09ab1c42761b42e2b0c1"
+  },
+  "partialCurrentPositiveCrc": [
+    {
+      "crc": "3254bd389c4ee344",
+      "hits": 72,
+      "probeCount": 81,
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiMetricCatalog"
+    },
+    {
+      "crc": "b3b7afc0efec0d8f",
+      "hits": 70,
+      "probeCount": 99,
+      "type": "dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter"
+    }
+  ],
+  "wholeCoverageRollup": false,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "keptRawPmd": [
+    {
+      "file": "ApiMetricCatalogTest.java",
+      "rule": "OverrideBothEqualsAndHashCodeOnComparable",
+      "line": 191,
+      "method": "compareTo",
+      "applicability": "INTENTIONAL_TEST_FIXTURE",
+      "rationale": "Deliberately malformed metric-provider double; only key/value are used. The allocator avoids ordering input Tag objects; Scalar compareTo independently fails if production calls it."
+    },
+    {
+      "file": "ApiMetricCatalogTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 465,
+      "method": "apicat014FiniteConcurrentCallsHaveNoRetainedMutableState",
+      "applicability": "INTENTIONAL_TEST_FIXTURE",
+      "rationale": "Unit test owns four finite workers and every future is bounded to ten seconds. Thread use is required by the independent concurrency oracle; product Java has no such findings here."
+    },
+    {
+      "file": "ApiMetricCatalogTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 469,
+      "method": "apicat014FiniteConcurrentCallsHaveNoRetainedMutableState",
+      "applicability": "INTENTIONAL_TEST_FIXTURE",
+      "rationale": "Unit test owns four finite workers and every future is bounded to ten seconds. Thread use is required by the independent concurrency oracle; product Java has no such findings here."
+    },
+    {
+      "file": "ApiScalarMetricExporterTest.java",
+      "rule": "OverrideBothEqualsAndHashCodeOnComparable",
+      "line": 95,
+      "method": "compareTo",
+      "applicability": "INTENTIONAL_TEST_FIXTURE",
+      "rationale": "Deliberately malformed metric-provider double; only key/value are used. The allocator avoids ordering input Tag objects; Scalar compareTo independently fails if production calls it."
+    },
+    {
+      "file": "ApiScalarMetricExporterTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 560,
+      "method": "scalar024ConcurrentCallsAndOtherSourcesDoNotShareState",
+      "applicability": "INTENTIONAL_TEST_FIXTURE",
+      "rationale": "Unit test owns four finite workers and every future is bounded to ten seconds. Thread use is required by the independent concurrency oracle; product Java has no such findings here."
+    },
+    {
+      "file": "ApiScalarMetricExporterTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 564,
+      "method": "scalar024ConcurrentCallsAndOtherSourcesDoNotShareState",
+      "applicability": "INTENTIONAL_TEST_FIXTURE",
+      "rationale": "Unit test owns four finite workers and every future is bounded to ten seconds. Thread use is required by the independent concurrency oracle; product Java has no such findings here."
+    }
+  ],
+  "keptRawSpotBugs": [
+    {
+      "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+      "classname": "dev.codex.schubert.nk.api.monitoring.ApiMetricCatalogTest",
+      "method": "lambda$apicat010NullContractsFailWithoutNormalizingUnknown$0",
+      "applicability": "INTENTIONAL_TEST_FIXTURE",
+      "rationale": "Deliberate null-contract negative vector inside assertThrows. Appears only when target Main is also analyzed; independent ordinary test evidence retained."
+    },
+    {
+      "rule": "EI_EXPOSE_REP",
+      "classname": "dev.codex.schubert.nk.api.monitoring.ApiMetricCatalogTest$1",
+      "method": "getTags",
+      "applicability": "INTENTIONAL_TEST_FIXTURE",
+      "rationale": "Injected provider returns controlled test-owned tags by reference to keep mutable/null/duplicate provider vectors observable; a defensive copy in the oracle double would invalidate this boundary proof."
+    },
+    {
+      "rule": "EQ_COMPARETO_USE_OBJECT_EQUALS",
+      "classname": "dev.codex.schubert.nk.api.monitoring.ApiMetricCatalogTest$MutableTag",
+      "method": "compareTo",
+      "applicability": "INTENTIONAL_TEST_FIXTURE",
+      "rationale": "Fixture presents invalid or mutable Tag, with no compare/equality use by code under test. Values are harvested from getTags and independently asserted."
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+      "classname": "dev.codex.schubert.nk.api.monitoring.ApiScalarMetricExporterTest",
+      "method": "lambda$scalar007NullApiBoundariesAreNotUnknownObservations$0",
+      "applicability": "INTENTIONAL_TEST_FIXTURE",
+      "rationale": "Deliberate null-contract negative vector inside assertThrows. Appears only when target Main is also analyzed; independent ordinary test evidence retained."
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+      "classname": "dev.codex.schubert.nk.api.monitoring.ApiScalarMetricExporterTest",
+      "method": "lambda$scalar007NullApiBoundariesAreNotUnknownObservations$1",
+      "applicability": "INTENTIONAL_TEST_FIXTURE",
+      "rationale": "Deliberate null-contract negative vector inside assertThrows. Appears only when target Main is also analyzed; independent ordinary test evidence retained."
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+      "classname": "dev.codex.schubert.nk.api.monitoring.ApiScalarMetricExporterTest",
+      "method": "lambda$scalar007NullApiBoundariesAreNotUnknownObservations$2",
+      "applicability": "INTENTIONAL_TEST_FIXTURE",
+      "rationale": "Deliberate null-contract negative vector inside assertThrows. Appears only when target Main is also analyzed; independent ordinary test evidence retained."
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+      "classname": "dev.codex.schubert.nk.api.monitoring.ApiScalarMetricExporterTest",
+      "method": "lambda$scalar007NullApiBoundariesAreNotUnknownObservations$3",
+      "applicability": "INTENTIONAL_TEST_FIXTURE",
+      "rationale": "Deliberate null-contract negative vector inside assertThrows. Appears only when target Main is also analyzed; independent ordinary test evidence retained."
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "classname": "dev.codex.schubert.nk.api.monitoring.ApiScalarMetricExporterTest",
+      "method": "lambda$scalar007NullApiBoundariesAreNotUnknownObservations$4",
+      "applicability": "INTENTIONAL_TEST_FIXTURE",
+      "rationale": "Deliberate null-contract negative vector inside assertThrows. Appears only when target Main is also analyzed; independent ordinary test evidence retained."
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "classname": "dev.codex.schubert.nk.api.monitoring.ApiScalarMetricExporterTest",
+      "method": "lambda$scalar007NullApiBoundariesAreNotUnknownObservations$5",
+      "applicability": "INTENTIONAL_TEST_FIXTURE",
+      "rationale": "Deliberate null-contract negative vector inside assertThrows. Appears only when target Main is also analyzed; independent ordinary test evidence retained."
+    },
+    {
+      "rule": "EI_EXPOSE_REP",
+      "classname": "dev.codex.schubert.nk.api.monitoring.ApiScalarMetricExporterTest$1",
+      "method": "getTags",
+      "applicability": "INTENTIONAL_TEST_FIXTURE",
+      "rationale": "Injected provider returns controlled test-owned tags by reference to keep mutable/null/duplicate provider vectors observable; a defensive copy in the oracle double would invalidate this boundary proof."
+    },
+    {
+      "rule": "EQ_COMPARETO_USE_OBJECT_EQUALS",
+      "classname": "dev.codex.schubert.nk.api.monitoring.ApiScalarMetricExporterTest$2",
+      "method": "compareTo",
+      "applicability": "INTENTIONAL_TEST_FIXTURE",
+      "rationale": "Fixture presents invalid or mutable Tag, with no compare/equality use by code under test. Values are harvested from getTags and independently asserted."
+    }
+  ],
+  "removedApplicableBroadCheckedExceptions": 2,
+  "scopedApplicableRemaining": 0,
+  "unchangedProductionInstances": 2,
+  "formatExtraScope": "GJF split the existing SCALAR001 Java literal; instruction identity confirms the independent golden value is unchanged.",
+  "reports": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42144-api-metrics-bounded-waits-v2/checkstyle.xml",
+      "sha256": "cd413cf279ac69fcd78fb0fac2b0a7084dfa89077b7e9100139658bad1396ca2"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42144-api-metrics-bounded-waits-v2/pmd.xml",
+      "sha256": "fc073b4a9af1d4da7b07f4d3eda93174705705235f936968ec4e8d892b3c896e"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42144-api-metrics-bounded-waits-v2/spotbugs.xml",
+      "sha256": "e39bb5ccbf969bfdce8f52baa84f9bd362bb4ea8dc518d37929a2c6b32d54237"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42144-api-metrics-bounded-waits-v2/spotbugs-complete-scope.xml",
+      "sha256": "df449ca4f79166523d17173646ed8b3755be373e949c9e99e0a7d551b97e09f4"
+    }
+  ],
+  "stages": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42144-api-metrics-bounded-waits-v2/format.terminal.json",
+      "sha256": "9c3a56bc764cef664b518e8b8f313383b8fe4ae8b621752b96ede531a5802533"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42144-api-metrics-bounded-waits-v2/compile.terminal.json",
+      "sha256": "c4b25b2360b0e6f26c7c18524459227a49043bac40095fe16400561cc876dbd9"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42144-api-metrics-bounded-waits-v2/checkstyle.terminal.json",
+      "sha256": "53d159ca8975fcfbdc03ff87d5a5d227f69254c886e7b08019b1d98f9710be46"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42144-api-metrics-bounded-waits-v2/pmd.terminal.json",
+      "sha256": "12f48811fce9c9dc246930c3251fd313075e1568d76681fbbcd68df3101bd077"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42144-api-metrics-bounded-waits-v2/spotbugs.terminal.json",
+      "sha256": "e0f1bad1e95fcba07ff519363144f27c34dccf4d05b79cebb5d94e8059948542"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42144-api-metrics-bounded-waits-v2/unit.terminal.json",
+      "sha256": "f997f41088ee2d9f5092614eae5c6a2cc45ea04c1c7ef869b55e5064e6740229"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42144-api-metrics-bounded-waits-v2/spotbugs-complete-scope.terminal.json",
+      "sha256": "76a06bfa4a14a5bcf3e1ad4cfe2dd765f8958d5a0de850de9387eeb45a217a7d"
+    }
+  ],
+  "runReceipt": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42144-api-metrics-bounded-waits-v2/begin.json",
+    "sha256": "5e13b9de417e1083eb9396518c2bc026e8776e3bd6b9bfda12541ab77f9456a8"
+  },
+  "remoteNativeBackendActions": 0,
+  "initialFormatterFailureWasNotTestFailure": true
+}

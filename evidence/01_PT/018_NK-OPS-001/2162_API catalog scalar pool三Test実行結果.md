@@ -22,3 +22,7 @@ APICAT001..014/14、SCALAR001..024/24、POOLMET001..008/8の元全46が成功。
 残raw10=THREAD6/Comparable2/identity比較2。THREADは通常JUnit自己所有TWR4又は8worker64task、元内側10sと外側JVM240s。identity二つは元immutable Counts参照がfirst/secondそのものかを調べる既oracleで、equalsではcopy誤りを見落とすため変更しない。Comparable二つ（MutableTagとthrow-only Tag fixture）は未分類のまま、raw全10と全体pendingを保持・PT免除false。
 
 原主担当/費用P01809三SHAだけ更新・他980row保持、登録1808/UNKNOWN二/元941943/予算/acceptance/全旧runtime保持。485/486整合検証・全WBSaudit前後1同HOLD。全F03/全451/CHR/native/実経路は未受入、正式1964PT/53scope・個別17/190・工数null・QA051final/QA053通知現存せず/全安全HOLD不変更。秘密実体/rawtoken0、限定公開scanは全G07合格の代替ではない。
+
+## 2026-11-22 現候補のAPIメトリクス検証結果追補
+
+対象Core 1e4e9e64830b552727043f3cb8b9435b28cba472、試験source cfbdb33c080224f54fbd3876b452b3945ac962b8。APICAT014／SCALAR024はメモリ内の固定16系統・2つの合成メータsource、4worker・各64件・各10秒上限。既存固定ラベル・カウンタ2/3、ゲージ5/7を期待し、終了とsource所有を確認。BUG-3554～3556／YKT-2800。新規選択は2成功・失敗0・除外0。残36個別は既存実行を候補のクラス・依存・JVM命令・固定入力へ照合。全体coverageと451は未判定。証跡 evidence/01_PT/018_NK-OPS-001/evidence/PG42144-f03-api-metrics-bounded-waits-v2/manifest.json SHA256 6fe65874fe6b4d08646d671cd778c036c4916f3073e6cec929fc650c0af0e3a4。
