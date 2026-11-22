@@ -1,0 +1,61 @@
+{
+  "run": "PG42822",
+  "source": "8c89ff358e084886427d78a34fbd90c994f2153f",
+  "productionCore": "e8368d22c4da2ec841f008df793594d3be9066af",
+  "branch": "dev-foundation",
+  "wbs": "WBS-P010-04/2",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T16:27:15.713604+00:00",
+  "sources": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/log/LogSearchAuditPortTest.java",
+      "sha256": "b8bacd64944858ca6ce331d30d796667bc03201242ad091774011f9f36162141"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryAuditWriter.java",
+      "sha256": "cf74fa263488cf9ae7c3199724630c735dd4b35c26b7fb20152883979773d1f5"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogRequest.java",
+      "sha256": "df7ec576fc91533d2cc84e6d1217420c42ea6f589d38f73acb96a37dd5fbba30"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/LogQueryRepository.java",
+      "sha256": "6ee33c4b5c5ea6d765aa809a3f9a714fe46f5069dfcd1d3b703acaee638c860d"
+    }
+  ],
+  "priorBlocked": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40860-log-search-audit-null-v1-before/manifest.json",
+    "sha256": "bbfef44e5551cc112bbf444811c639e659ab19fab6238040490bcdb8d000e313"
+  },
+  "related": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41516-qa054-ordinary-audit-lineage-v1/manifest.json",
+      "sha256": "f8831a28dc45cbdf5114dbc495eec7098150ac49affb2ade05d617fccc26d946"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41526-protocol-qa054-canonical-rules-v1/manifest.json",
+      "sha256": "8a89feee4bfa2d6b08d3514ff44ab15eaa871f409d8cf152790570e363b21edb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40894-audit-writer-statement-inventory-v1/manifest.json",
+      "sha256": "1ebd7c115075dbb1f8f0d270f6ec4be396b4c42920239a27fedfe2d938c23a7e"
+    }
+  ],
+  "historicalOrdinary": {
+    "path": "evidence/01_PT/010_NK-ADM-001/evidence/PG19488-qa054-log-search-audit-eight-v1/manifest.json",
+    "sha256": "5ac5349ff6decce61cd767827058861c740c46e162b758b34f0f2a0818ad7339"
+  },
+  "status": "READ_ONLY_HOLD_INTERSECTION",
+  "unexecuted": "PT-ADM-SEARCHPORT009",
+  "reason": "LogSearchAuditPortTest uses LogRequest which depends on current LogQueryRepository; the production repository depends on a QA-056 held type.",
+  "touchedHeldBodies": false,
+  "newCompileOrProductRuns": 0,
+  "normalPassTransferred": 0,
+  "bugs": [
+    "BUG-3417",
+    "YKT-2739"
+  ],
+  "formalAcceptanceId": null,
+  "whole451": false
+}
