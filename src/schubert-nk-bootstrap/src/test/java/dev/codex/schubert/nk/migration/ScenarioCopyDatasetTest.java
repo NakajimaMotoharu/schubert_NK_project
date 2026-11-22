@@ -245,7 +245,8 @@ final class ScenarioCopyDatasetTest {
         };
     try (sink) {
       assertSame(failure, assertThrows(IOException.class, () -> dataset.writeFiles(writer, sink)));
-      assertSame(failure, assertThrows(IOException.class, () -> dataset.writeEntries(writer, sink)));
+      assertSame(
+          failure, assertThrows(IOException.class, () -> dataset.writeEntries(writer, sink)));
       assertEquals(0, sink.closes);
       assertEquals(0, sink.flushes);
     }
