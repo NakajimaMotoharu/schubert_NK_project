@@ -1,0 +1,84 @@
+{
+  "eventId": "PGPT-20261008-8445",
+  "groupId": "prod-20261122-PG42668",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T13:08:05+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 35,
+      "remainingPercent": 65,
+      "resetsAt": 1795879771,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "source": "d6bc8d37d7d79d03c8a183230fba564840f5b9bd",
+    "productionCoreMain": "f8532c27c2666570fe450f285c5a5436aacd8e7e",
+    "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "run": "PG42668",
+    "workCategory": "CONTRACT_AUDIT",
+    "managementWorkIds": [
+      "WBS-P012-02/2"
+    ],
+    "previousCheckpoint": 2999,
+    "planRow": {
+      "ID": "WBS-P012-02/2",
+      "元行": "WBS-P012-02/2",
+      "費目": "B",
+      "主担当": "WBS-P012-02",
+      "状態": "計画",
+      "作業": "初期empty AnswerProvider・回答状態／同source証拠による受入判定",
+      "残pp": "0.39",
+      "着手": "設計312・当該source・作業所有・既存成果を照合。必要な局所成果を費目Aで一度だけ作成し、受入候補のTestIDと独立期待値を確定。着手依存、当該A成果、終了依存と未解決条件を確認",
+      "終了証拠": "初期empty AnswerProvider・回答状態：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。 固有要求：EXT-001,EXT-002,EXT-003,EXT-004,EXT-005,ASY-007,ASY-008,QST-003,QST-101,QST-102,QST-103,QST-104,QST-105",
+      "補正根拠": "登録済み後段単価。追加製造はA、実経路はD、比較はE",
+      "契約HOLD": "",
+      "対象": "",
+      "範囲": "EXT-001、EXT-002、EXT-003、EXT-004、EXT-005、ASY-007、ASY-008、QST-003",
+      "保存証跡": "個別criteria＋同sourceのTestID・独立期待値・実結果・451適用結果",
+      "順次": "False",
+      "配賦窓": "14",
+      "楽観pp": "0.163",
+      "慎重pp": "0.78",
+      "要求設計の版差": "PT基準仕様 NK-ASY-001",
+      "lineNumber": 420,
+      "改訂残pp": "0.39"
+    },
+    "currentPlan": [
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/11月22日_PGPT再開実行計画.txt",
+        "sha256": "80b9fdc306f664b9c03901a4bdfb34cf66997879676204cfa969858fd68a4016"
+      },
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/短期実行WBS.tsv",
+        "sha256": "a6efedcd63b4ef3bb1d133d939b0ddd7dc4b0147988ac33d668282a25c999527"
+      }
+    ],
+    "startScope": {
+      "action": "SS312既empty provider fixtureで現候補の型付き品質とAnswerBusinessExceptionの個別不足を確定",
+      "dependent": "PG24874の元五件の余計な再演なし、純値四型とJDK Clockの既合成fixture",
+      "held": "DB/JMS、Worker接続、認証・QA056、失敗例外graph及び451は未着手",
+      "expected": "局所診断・独立期待値と有効な候補不足。必要な修正前に起票し、合否を分離"
+    },
+    "groupCapPp": 0.43,
+    "estimateAtGroupStartPp": {
+      "low": 0,
+      "base": 0.13,
+      "high": 0.43
+    },
+    "completedOriginalRowPricePp": 0,
+    "sourceOwnership": "LOCAL_DEV_FOUNDATION_TRACKED_SNAPSHOT",
+    "knownOwnedRunInProgress": 0,
+    "costRevision": "PMO-remaining-v3-20261010",
+    "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "actualAllocatedPp": null
+  }
+}
