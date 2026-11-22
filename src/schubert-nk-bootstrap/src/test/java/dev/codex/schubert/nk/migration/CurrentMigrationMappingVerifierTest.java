@@ -40,87 +40,92 @@ final class CurrentMigrationMappingVerifierTest {
       List.of(PART_FILES, PART_ENTRIES, PART_SPEAKERS, PART_AUDIO);
   private static final Map<String, Integer> TWO =
       Map.of(PART_FILES, 2, PART_ENTRIES, 2, PART_SPEAKERS, 2, PART_AUDIO, 2);
+  private static final String FILE_BODY_HEADER = "NKMIGFILEORDER1\n";
+  private static final String ENTRY_BODY_HEADER = "NKMIGENTRYPLACEMENT1\n";
+  private static final String SPEAKER_BODY_HEADER =
+      "game_id\tcurrent_speaker_id\ttarget_speaker_id\n";
+  private static final String AUDIO_BODY_HEADER = "game_id\tcurrent_audio_id\ttarget_audio_id\n";
   private static final String NORMAL =
-      "NKMIGMAPPING1\n"
+      MAGIC
           + "FILES\t2\t37\t9c5820c79b521c94a56a2b07bf070756a1e7fe84f64b090740e1338483ee867a\n"
-          + "NKMIGFILEORDER1\n"
+          + FILE_BODY_HEADER
           + "1\t-5\t101\t1\n"
           + "2\t5\t401\t1\n"
           + "ENTRIES\t2\t56\t412afc944908b31f37ee180a3c3043262ebed7643c2d240f8b23e683ca6657cf\n"
-          + "NKMIGENTRYPLACEMENT1\n"
+          + ENTRY_BODY_HEADER
           + "-10\t201\t1\t1\t101\t0\n"
           + "20\t901\t2\t2\t401\t0\n"
           + "SPEAKERS\t2\t58\tf07376a3f3c4c9c13d3b20eab12b5626091eeee779babebb68d74d8e1fcf6dc6\n"
-          + "game_id\tcurrent_speaker_id\ttarget_speaker_id\n"
+          + SPEAKER_BODY_HEADER
           + "1\t-3\t1\n"
           + "2\t4\t6\n"
           + "AUDIO\t2\t56\t80b919a39739429d9c905d3a1730aba0faa88a340155c2bb0a50889b41720cb3\n"
-          + "game_id\tcurrent_audio_id\ttarget_audio_id\n"
+          + AUDIO_BODY_HEADER
           + "1\t-5\t21\n"
           + "2\t8\t32\n";
   private static final String NORMAL_HASH =
       "33a5b664c4abaa54e4f2d403e70a3f2545aa6395a06ebcc7196f404749985ca4";
   private static final String EMPTY =
-      "NKMIGMAPPING1\n"
+      MAGIC
           + "FILES\t0\t16\tfee61b49e4c39e9062c2c6e845fefe03ca5160ce7b8881791b8338085d7e473a\n"
-          + "NKMIGFILEORDER1\n"
+          + FILE_BODY_HEADER
           + "ENTRIES\t0\t21\t5946c60b76d7bd7a3efa92a5bcc5d773d9e558a3b6260baea98e9e104ede6f30\n"
-          + "NKMIGENTRYPLACEMENT1\n"
+          + ENTRY_BODY_HEADER
           + "SPEAKERS\t0\t45\t6ba2aea78407a77e5467625c22e68382bd06a746d097af921057a0f89a3acc13\n"
-          + "game_id\tcurrent_speaker_id\ttarget_speaker_id\n"
+          + SPEAKER_BODY_HEADER
           + "AUDIO\t0\t41\t6a09be7493407eb5d1d18db65c2de8d7898eef78648b626ab8d0c81005cdede5\n"
-          + "game_id\tcurrent_audio_id\ttarget_audio_id\n";
+          + AUDIO_BODY_HEADER;
   private static final String EMPTY_HASH =
       "83b87552a2f59f743b0c28ad12ed8bbb5e0f38c4a3794c68a29f35a3974284e9";
   private static final String ONE_FILE =
-      "NKMIGMAPPING1\n"
+      MAGIC
           + "FILES\t1\t25\t4f704e2edf473a1a5c2cc3cb29a168f3acac78f61fc276ce87c9f9c5b1c8db6f\n"
-          + "NKMIGFILEORDER1\n"
+          + FILE_BODY_HEADER
           + "1\t9\t90\t1\n"
           + "ENTRIES\t0\t21\t5946c60b76d7bd7a3efa92a5bcc5d773d9e558a3b6260baea98e9e104ede6f30\n"
-          + "NKMIGENTRYPLACEMENT1\n"
+          + ENTRY_BODY_HEADER
           + "SPEAKERS\t0\t45\t6ba2aea78407a77e5467625c22e68382bd06a746d097af921057a0f89a3acc13\n"
-          + "game_id\tcurrent_speaker_id\ttarget_speaker_id\n"
+          + SPEAKER_BODY_HEADER
           + "AUDIO\t0\t41\t6a09be7493407eb5d1d18db65c2de8d7898eef78648b626ab8d0c81005cdede5\n"
-          + "game_id\tcurrent_audio_id\ttarget_audio_id\n";
+          + AUDIO_BODY_HEADER;
   private static final String ONE_FILE_HASH =
       "ac411723896848964fb14c8fac3945bc758ffa1bdc1ffc83ac9a872775df07f5";
   private static final String BOUNDARY =
-      "NKMIGMAPPING1\n"
+      MAGIC
           + "FILES\t2\t80\t88acd97c20f6df8d75afce084077141f0e712d07ecc23433e17c110ddba60aa9\n"
-          + "NKMIGFILEORDER1\n"
+          + FILE_BODY_HEADER
           + "1\t-9223372036854775808\t1\t1\n"
           + "2\t9223372036854775807\t999999999999\t1\n"
           + "ENTRIES\t2\t104\t9fd7e5409bb4fbe3b2f0fae72677416a00dfd435ab8b5af8497105fe4a745364\n"
-          + "NKMIGENTRYPLACEMENT1\n"
+          + ENTRY_BODY_HEADER
           + "-9223372036854775808\t2\t1\t1\t1\t0\n"
           + "9223372036854775807\t999999999998\t2\t2\t999999999999\t0\n"
           + "SPEAKERS\t2\t105\tedb26e744dfe8422bf5e0227298e221f8ac22ca834ca4a84e9b25e1a48357c7f\n"
-          + "game_id\tcurrent_speaker_id\ttarget_speaker_id\n"
+          + SPEAKER_BODY_HEADER
           + "1\t-9223372036854775808\t3\n"
           + "2\t9223372036854775807\t999999999997\n"
           + "AUDIO\t2\t101\tb57f5526485b2caa8e18a6d45578cfc2ad1214726ef1284a7935da83145ae37c\n"
-          + "game_id\tcurrent_audio_id\ttarget_audio_id\n"
+          + AUDIO_BODY_HEADER
           + "1\t-9223372036854775808\t4\n"
           + "2\t9223372036854775807\t999999999996\n";
   private static final String BOUNDARY_HASH =
       "d2d9bfab039646d27abd0afb8694553fbd4df6eedfff93dd92e82e19acf8b0e5";
   private static final String OVERLAP =
-      "NKMIGMAPPING1\n"
+      MAGIC
           + "FILES\t2\t37\t9c5820c79b521c94a56a2b07bf070756a1e7fe84f64b090740e1338483ee867a\n"
-          + "NKMIGFILEORDER1\n"
+          + FILE_BODY_HEADER
           + "1\t-5\t101\t1\n"
           + "2\t5\t401\t1\n"
           + "ENTRIES\t2\t56\t412afc944908b31f37ee180a3c3043262ebed7643c2d240f8b23e683ca6657cf\n"
-          + "NKMIGENTRYPLACEMENT1\n"
+          + ENTRY_BODY_HEADER
           + "-10\t201\t1\t1\t101\t0\n"
           + "20\t901\t2\t2\t401\t0\n"
           + "SPEAKERS\t2\t62\t934746dd24a1e6367a1dae234c329f84312825da86d8586743954cbcd277f96f\n"
-          + "game_id\tcurrent_speaker_id\ttarget_speaker_id\n"
+          + SPEAKER_BODY_HEADER
           + "1\t-3\t101\n"
           + "2\t4\t401\n"
           + "AUDIO\t2\t58\t4e877fc321c01cb7c528dc76f55199881138951b6dd806fb2b13ef30ca3be6e3\n"
-          + "game_id\tcurrent_audio_id\ttarget_audio_id\n"
+          + AUDIO_BODY_HEADER
           + "1\t-5\t101\n"
           + "2\t8\t401\n";
   private static final String OVERLAP_HASH =
