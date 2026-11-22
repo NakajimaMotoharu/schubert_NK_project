@@ -1,0 +1,112 @@
+{
+  "eventId": "PGPT-20261008-8284",
+  "workCategory": "CONTRACT_AUDIT",
+  "source": "d9ab5b5c69af32dacb93749dbead8200739b7d96",
+  "productionCoreMain": "b5d5009768a04bb69468beed2471441b2a57ce27",
+  "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+  "managementWorkIds": [
+    "WBS-P018-10.03/2-照合"
+  ],
+  "planRow": {
+    "新版ID": "WBS-P018-10.03/2-照合",
+    "第58版ID": "WBS-P018-10.03/2-照合",
+    "費用主担当項目": "P018-10",
+    "計画窓": "繰越",
+    "予定期間・週末": "2027-01-03までの計画週",
+    "作業・成果物": "不足TestIDを実行済み/1と照合し、未解決の期待値だけを補う",
+    "先行ID・着手条件": "WBS-P018-10.03/1、閉/WBS-P018-10.02",
+    "担当": "診断・監査担当",
+    "旧短期残pp": "0.3",
+    "改訂残pp": "0.3",
+    "終了条件": "既存/1を読み、残る差分・受入に使える範囲・実行担当を保存。実装や回帰は元主担当",
+    "元項目の正式受入に必要な証拠": "QA-056適用判断後、実caller・sink、3子の契約と451を照合。",
+    "参照する元項目": "P018-10",
+    "lineNumber": 39
+  },
+  "run": "PG42502",
+  "startEvent": "PGPT-20261008-8283",
+  "outcome": {
+    "exactOnePrior": 1,
+    "newPt": 0,
+    "publishedXmlDigestSeparate": true,
+    "actualSink": 0,
+    "formalAcceptanceId": null
+  },
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42502-p0181003-current-pendingreply-diagnostic-reuse-v1/manifest.json",
+    "sha256": "91b12127d5a7535aa7f9dd5535a6209261e28329754e8ebaa8860857c15b4687"
+  },
+  "nextEvidence": {
+    "wbs": "WBS-P018-10.03/2-照合",
+    "concrete": "Review current isolated Batch observation fixed diagnostics and null inputs without operational roots; current receipt only"
+  },
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T09:51:36+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 27,
+      "remainingPercent": 73,
+      "resetsAt": 1795879772,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "modelRequested": "gpt-6.2-sol",
+  "modelObserved": null,
+  "reasoningRequested": "high",
+  "reasoningObserved": null,
+  "speedRequested": "standard",
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 27,
+    "remainingPercent": 73,
+    "resetsAt": 1795879772,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "413a4c8531816470ca5e23c10f950a06583986dd67e19b15fb9dfaabef407cf9",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-22T09:51:36+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 27,
+        "remainingPercent": 73,
+        "resetsAt": 1795879772,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": null,
+  "sameQuotaWindow": false,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-22T09:51:06.014456+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": true,
+  "quotaBefore": {
+    "usedPercent": 27,
+    "remainingPercent": 73,
+    "resetsAt": 1795879771,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null
+}

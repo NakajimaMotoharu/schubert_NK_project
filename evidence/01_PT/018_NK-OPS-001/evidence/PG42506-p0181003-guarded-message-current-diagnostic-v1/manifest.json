@@ -1,0 +1,57 @@
+{
+  "run": "PG42506",
+  "source": "d9ab5b5c69af32dacb93749dbead8200739b7d96",
+  "javaCore": "b5d5009768a04bb69468beed2471441b2a57ce27",
+  "wbs": "WBS-P018-10.03/2-照合",
+  "terminalAtUTC": "2026-11-22T09:53:07.464985+00:00",
+  "pastArtifacts": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39160-ssc467-guarded-jms-diagnostic-unit-v1/manifest.json",
+      "sha256": "3c8a3c6bbb618d25130fb4e256074b22143048c405b672019f7ce27bee9a5973"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39164-ssc467-guarded-jms-diagnostic-post-v1/manifest.json",
+      "sha256": "bc2e936830cf812302d2e548018466738d67e4b3f3658724397cb99e240f45cf"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39168-p01810-guarded-jms-value-independent-v1/manifest.json",
+      "sha256": "3a7449e61ac9390c506cf660023e736519c80bb4dd719736354ff804c7089ef6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39164-ssc467-guarded-jms-diagnostic-post-v1/original-TEST-junit-jupiter.xml",
+      "sha256": "646bab3d7c63f758630c4dacb4b9bd6517294e8126cfd4383d1de997cf28eb8f"
+    }
+  ],
+  "exactSourceAndSdk": [
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/guard/GuardedJmsMessage.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/guard/package-info.java",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/GuardedJmsDiagnosticTest.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/TransportBodyType.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/TransportMetadata.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/package-info.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutId.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutValidationException.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/package-info.java"
+  ],
+  "protocolJar": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41526-protocol-qa054-canonical-rules-v1/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+    "sha256": "aedd35881ba99acb407cdcdc99b2bb0648863b891ec42d6e717a8d8a3867083f"
+  },
+  "exactProtocolPhysicalCrc": {
+    "dev/codex/schubert/nk/protocol/layout/package-info": "4d826d1b0d56d19e",
+    "dev/codex/schubert/nk/protocol/layout/LayoutId": "240169cacdc45dd7",
+    "dev/codex/schubert/nk/protocol/layout/LayoutValidationException": "172946afc5ba5e3f",
+    "dev/codex/schubert/nk/protocol/codec/package-info": "2c09672c6d6e58f5",
+    "dev/codex/schubert/nk/protocol/codec/TransportBodyType": "439179502827eea6",
+    "dev/codex/schubert/nk/protocol/codec/TransportMetadata": "73563a1b06736c49"
+  },
+  "existingQualifiedCases": [
+    "differentBodiesAndMetadataProduceOneFixedDiagnosticWithoutChangingReadback",
+    "nullBodyOrMetadataCannotCreateAnEnvelope"
+  ],
+  "freshProductPt": 0,
+  "actualMessageTransportOrSink": 0,
+  "apiWholeJarAccepted": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
