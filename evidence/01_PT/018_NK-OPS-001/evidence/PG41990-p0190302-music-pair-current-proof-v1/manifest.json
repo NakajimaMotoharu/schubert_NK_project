@@ -1,0 +1,305 @@
+{
+  "run": "PG41990",
+  "source": "33e2255e2405b4333c7475dd7c9de3eb6583b898",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T03:12:51.693463+00:00",
+  "wbs": "WBS-P019-03.02/2",
+  "productionArchive": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40802-f02-current-four-package-v1/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+    "sha256": "3de920f0fc7df4909b362fd25856b5b91e2517fa404cbe5756725544472887f7"
+  },
+  "explicitAdmittedPureClasses": {
+    "dev/codex/schubert/nk/migration/MusicMigrationPairing$Result.class": "f3d5a86b7d60ae7cf3712a46b0589e3abd09569308b28f5304283cf86639d4bb",
+    "dev/codex/schubert/nk/migration/MusicMigrationPairing.class": "159b664a335849db4b32cec979fcf55db4029934d2fe25c6df8e7dc41eb2d232",
+    "dev/codex/schubert/nk/migration/MusicMigrationPairing$Pair.class": "b694e38b9096c2cb043521e4e9cd532a2c7d965125a21aeb2d8d4a7e78a8505e"
+  },
+  "exactTestClasses": {
+    "dev/codex/schubert/nk/migration/MusicMigrationPairingTest.class": "95b97fb4b52aa72543ce94e1695e09cd5c54c00523b4a13473f3f26aaf6f7279"
+  },
+  "exactSources": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MusicMigrationPairingTest.java",
+      "sha256": "9bfdc29e8d92cd0830d27cd66e01c2037bf7758b5fb7d9c14b2065086abc28f0"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MusicMigrationPairing.java",
+      "sha256": "ec7cb8ad7f74896b4d5fceee8ce4beb75f4dc4d0b91e65cc6a0bcd4f74d0304d"
+    }
+  ],
+  "compileArguments": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+    "--release",
+    "25",
+    "-g",
+    "-proc:none",
+    "-implicit:none",
+    "-encoding",
+    "UTF-8",
+    "-Xlint:all",
+    "-Werror",
+    "-cp",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41990-p0190302-music-pair-current-proof-v1/pure:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+    "-d",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41990-p0190302-music-pair-current-proof-v1/test",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MusicMigrationPairingTest.java"
+  ],
+  "dependencyProof": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41990-p0190302-music-pair-current-proof-v1/jdeps.stdout",
+    "sha256": "edb94ecdce7307649bbe9be9525a55a84b9290ad9d19f5b9c71454695465cd80"
+  },
+  "priorUnitXML": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33682-copyverify1050-post-v1/original-TEST-junit-jupiter.xml",
+    "sha256": "67175d909d8203dd81ce5c3542636b49cc3bad75310c7596e86305c90e178f30"
+  },
+  "priorRun": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33680-copyverify1050-unit-v1/manifest.json",
+    "sha256": "234bc5166418c28e2a25f86e9885fcd8036c623974719f8488bfdad52b88f7dd"
+  },
+  "cases": [
+    {
+      "testId": "PT-MIG-MUSICPAIR001",
+      "method": "emptyGroupHasNoPairsOrShadowedPaths",
+      "original": "PASS",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/045_Music宣言pair算出・独立二十六仕様.md",
+        "sha256": "c4bf0b04a85e22745764d2f6f6e8032edb1e7a6dcdfa7699f688c4e1f0bfb872"
+      }
+    },
+    {
+      "testId": "PT-MIG-MUSICPAIR002",
+      "method": "exactMainAndInstrumentalHaveOnePair",
+      "original": "PASS",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/045_Music宣言pair算出・独立二十六仕様.md",
+        "sha256": "c4bf0b04a85e22745764d2f6f6e8032edb1e7a6dcdfa7699f688c4e1f0bfb872"
+      }
+    },
+    {
+      "testId": "PT-MIG-MUSICPAIR003",
+      "method": "unmatchedMainKeepsTheInstrumentalPlaceholder",
+      "original": "PASS",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/045_Music宣言pair算出・独立二十六仕様.md",
+        "sha256": "c4bf0b04a85e22745764d2f6f6e8032edb1e7a6dcdfa7699f688c4e1f0bfb872"
+      }
+    },
+    {
+      "testId": "PT-MIG-MUSICPAIR004",
+      "method": "unmatchedInstrumentalKeepsTheMainPlaceholder",
+      "original": "PASS",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/045_Music宣言pair算出・独立二十六仕様.md",
+        "sha256": "c4bf0b04a85e22745764d2f6f6e8032edb1e7a6dcdfa7699f688c4e1f0bfb872"
+      }
+    },
+    {
+      "testId": "PT-MIG-MUSICPAIR005",
+      "method": "currentCaseInsensitiveSubstringRoleIncludesInstinct",
+      "original": "PASS",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/045_Music宣言pair算出・独立二十六仕様.md",
+        "sha256": "c4bf0b04a85e22745764d2f6f6e8032edb1e7a6dcdfa7699f688c4e1f0bfb872"
+      }
+    },
+    {
+      "testId": "PT-MIG-MUSICPAIR006",
+      "method": "numericPrefixRequiresTheOriginalFollowingWhitespace",
+      "original": "PASS",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/045_Music宣言pair算出・独立二十六仕様.md",
+        "sha256": "c4bf0b04a85e22745764d2f6f6e8032edb1e7a6dcdfa7699f688c4e1f0bfb872"
+      }
+    },
+    {
+      "testId": "PT-MIG-MUSICPAIR007",
+      "method": "currentHalfFullWidthAndUnclosedAnnotationsAndSuffixAreRetained",
+      "original": "PASS",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/045_Music宣言pair算出・独立二十六仕様.md",
+        "sha256": "c4bf0b04a85e22745764d2f6f6e8032edb1e7a6dcdfa7699f688c4e1f0bfb872"
+      }
+    },
+    {
+      "testId": "PT-MIG-MUSICPAIR008",
+      "method": "onlyTheExactCurrentPunctuationSetIsRemovedFromKeys",
+      "original": "PASS",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/045_Music宣言pair算出・独立二十六仕様.md",
+        "sha256": "c4bf0b04a85e22745764d2f6f6e8032edb1e7a6dcdfa7699f688c4e1f0bfb872"
+      }
+    },
+    {
+      "testId": "PT-MIG-MUSICPAIR009",
+      "method": "oneEditInsertDeleteSubstituteAndEmptySidesHaveIndependentOracles",
+      "original": "PASS",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/045_Music宣言pair算出・独立二十六仕様.md",
+        "sha256": "c4bf0b04a85e22745764d2f6f6e8032edb1e7a6dcdfa7699f688c4e1f0bfb872"
+      }
+    },
+    {
+      "testId": "PT-MIG-MUSICPAIR010",
+      "method": "distanceTwoRemainsAnAcceptedFuzzyPair",
+      "original": "PASS",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/045_Music宣言pair算出・独立二十六仕様.md",
+        "sha256": "c4bf0b04a85e22745764d2f6f6e8032edb1e7a6dcdfa7699f688c4e1f0bfb872"
+      }
+    },
+    {
+      "testId": "PT-MIG-MUSICPAIR011",
+      "method": "distanceThreeLeavesBothUnmatched",
+      "original": "PASS",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/045_Music宣言pair算出・独立二十六仕様.md",
+        "sha256": "c4bf0b04a85e22745764d2f6f6e8032edb1e7a6dcdfa7699f688c4e1f0bfb872"
+      }
+    },
+    {
+      "testId": "PT-MIG-MUSICPAIR012",
+      "method": "exactKeyWinsOverAnEarlierCloseInstrumental",
+      "original": "PASS",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/045_Music宣言pair算出・独立二十六仕様.md",
+        "sha256": "c4bf0b04a85e22745764d2f6f6e8032edb1e7a6dcdfa7699f688c4e1f0bfb872"
+      }
+    },
+    {
+      "testId": "PT-MIG-MUSICPAIR013",
+      "method": "closestDistanceWinsOverAnEarlierDistanceTwo",
+      "original": "PASS",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/045_Music宣言pair算出・独立二十六仕様.md",
+        "sha256": "c4bf0b04a85e22745764d2f6f6e8032edb1e7a6dcdfa7699f688c4e1f0bfb872"
+      }
+    },
+    {
+      "testId": "PT-MIG-MUSICPAIR014",
+      "method": "equalDistanceUsesTheFirstDisplayPath",
+      "original": "PASS",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/045_Music宣言pair算出・独立二十六仕様.md",
+        "sha256": "c4bf0b04a85e22745764d2f6f6e8032edb1e7a6dcdfa7699f688c4e1f0bfb872"
+      }
+    },
+    {
+      "testId": "PT-MIG-MUSICPAIR015",
+      "method": "consumedInstrumentalCannotBeReusedByTheNextMain",
+      "original": "PASS",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/045_Music宣言pair算出・独立二十六仕様.md",
+        "sha256": "c4bf0b04a85e22745764d2f6f6e8032edb1e7a6dcdfa7699f688c4e1f0bfb872"
+      }
+    },
+    {
+      "testId": "PT-MIG-MUSICPAIR016",
+      "method": "mainRowsPrecedeUnmatchedInstrumentalsInTheirOwnPathOrders",
+      "original": "PASS",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/045_Music宣言pair算出・独立二十六仕様.md",
+        "sha256": "c4bf0b04a85e22745764d2f6f6e8032edb1e7a6dcdfa7699f688c4e1f0bfb872"
+      }
+    },
+    {
+      "testId": "PT-MIG-MUSICPAIR017",
+      "method": "mapInsertionOrderDoesNotReplaceUnicodeCodepointPathOrder",
+      "original": "PASS",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/045_Music宣言pair算出・独立二十六仕様.md",
+        "sha256": "c4bf0b04a85e22745764d2f6f6e8032edb1e7a6dcdfa7699f688c4e1f0bfb872"
+      }
+    },
+    {
+      "testId": "PT-MIG-MUSICPAIR018",
+      "method": "collisionsOverwriteValuesKeepFirstKeyPositionAndReportBothShadowedPaths",
+      "original": "PASS",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/045_Music宣言pair算出・独立二十六仕様.md",
+        "sha256": "c4bf0b04a85e22745764d2f6f6e8032edb1e7a6dcdfa7699f688c4e1f0bfb872"
+      }
+    },
+    {
+      "testId": "PT-MIG-MUSICPAIR019",
+      "method": "emptyDerivedKeyIsPreservedWithoutClaimingDatabaseRepresentability",
+      "original": "PASS",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/045_Music宣言pair算出・独立二十六仕様.md",
+        "sha256": "c4bf0b04a85e22745764d2f6f6e8032edb1e7a6dcdfa7699f688c4e1f0bfb872"
+      }
+    },
+    {
+      "testId": "PT-MIG-MUSICPAIR020",
+      "method": "nullableInputMapAndItsKeysAndValuesUseFixedDiagnostics",
+      "original": "PASS",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/045_Music宣言pair算出・独立二十六仕様.md",
+        "sha256": "c4bf0b04a85e22745764d2f6f6e8032edb1e7a6dcdfa7699f688c4e1f0bfb872"
+      }
+    },
+    {
+      "testId": "PT-MIG-MUSICPAIR021",
+      "method": "relativePathGrammarDoesNotRepairUnsafeInputs",
+      "original": "PASS",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/045_Music宣言pair算出・独立二十六仕様.md",
+        "sha256": "c4bf0b04a85e22745764d2f6f6e8032edb1e7a6dcdfa7699f688c4e1f0bfb872"
+      }
+    },
+    {
+      "testId": "PT-MIG-MUSICPAIR022",
+      "method": "malformedUnicodeNonNfcControlsAndEmptyTextAreRejectedAtBothBoundaries",
+      "original": "PASS",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/045_Music宣言pair算出・独立二十六仕様.md",
+        "sha256": "c4bf0b04a85e22745764d2f6f6e8032edb1e7a6dcdfa7699f688c4e1f0bfb872"
+      }
+    },
+    {
+      "testId": "PT-MIG-MUSICPAIR023",
+      "method": "utf8ByteBoundsIncludeSupplementaryCharactersWithoutTruncation",
+      "original": "PASS",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/045_Music宣言pair算出・独立二十六仕様.md",
+        "sha256": "c4bf0b04a85e22745764d2f6f6e8032edb1e7a6dcdfa7699f688c4e1f0bfb872"
+      }
+    },
+    {
+      "testId": "PT-MIG-MUSICPAIR024",
+      "method": "resultsDoNotAliasInputAndAllViewsAndDiagnosticsAreClosed",
+      "original": "PASS",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/045_Music宣言pair算出・独立二十六仕様.md",
+        "sha256": "c4bf0b04a85e22745764d2f6f6e8032edb1e7a6dcdfa7699f688c4e1f0bfb872"
+      }
+    },
+    {
+      "testId": "PT-MIG-MUSICPAIR025",
+      "method": "rejectedDeclarationDoesNotPoisonAnIndependentNormalCall",
+      "original": "PASS",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/045_Music宣言pair算出・独立二十六仕様.md",
+        "sha256": "c4bf0b04a85e22745764d2f6f6e8032edb1e7a6dcdfa7699f688c4e1f0bfb872"
+      }
+    },
+    {
+      "testId": "PT-MIG-MUSICPAIR026",
+      "method": "finiteWorkersShareNoMutablePairOrShadowState",
+      "original": "PASS",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/045_Music宣言pair算出・独立二十六仕様.md",
+        "sha256": "c4bf0b04a85e22745764d2f6f6e8032edb1e7a6dcdfa7699f688c4e1f0bfb872"
+      }
+    }
+  ],
+  "independentValues": [
+    "zero/one/two/three differences and stable ties",
+    "missing partner placeholder",
+    "fixed Unicode order and ownership"
+  ],
+  "newlyExecuted": 0,
+  "formalAcceptanceId": null,
+  "actualAssetIo": 0,
+  "db": 0,
+  "full451": false
+}
