@@ -1,0 +1,88 @@
+{
+  "eventId": "PGPT-20261008-8727",
+  "groupId": "PG43006-WBS-P018-08-03-CORRECT",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T20:41:33+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 49,
+      "remainingPercent": 51,
+      "resetsAt": 1795879771,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "source": "ac84ee57e70bc452abf04f2736353772315592eb",
+    "productionCoreMain": "e8368d22c4da2ec841f008df793594d3be9066af",
+    "canonicalDesignSource": "ca41c03c0c6efff9a3a35b47b480491810bee6f9",
+    "run": "PG43006-exec-multi-target-no-partial-v1",
+    "workCategory": "IMPLEMENTATION",
+    "managementWorkIds": [
+      "WBS-P018-08.03/2"
+    ],
+    "previousCheckpoint": "PGPT-20261008-8726",
+    "planRow": {
+      "ID": "WBS-P018-08.03/2",
+      "元行": "WBS-P018-08.03/2",
+      "費目": "B",
+      "主担当": "WBS-P018-08.03",
+      "状態": "計画",
+      "作業": "source/byte/noMatch判定・欠落streamのnegative／同source証拠による受入判定",
+      "残pp": "0.65",
+      "着手": "設計354・当該source・作業所有・既存成果を照合。必要な局所成果を費目Aで一度だけ作成し、受入候補のTestIDと独立期待値を確定。着手依存、当該A成果、終了依存と未解決条件を確認",
+      "終了証拠": "source/byte/noMatch判定・欠落streamのnegativeの対象別完了記録を確認",
+      "補正根拠": "登録済み後段単価。追加製造はA、実経路はD、比較はE",
+      "契約HOLD": "",
+      "対象": "",
+      "範囲": "SS 354",
+      "保存証跡": "個別criteria＋同sourceのTestID・独立期待値・実結果・451適用結果",
+      "順次": "False",
+      "配賦窓": "4",
+      "楽観pp": "0.26",
+      "慎重pp": "1.3",
+      "要求設計の版差": "PT基準仕様 NK-OPS-001、SS 354",
+      "lineNumber": 742,
+      "改訂残pp": "0.65"
+    },
+    "currentPlan": [
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/11月22日_PGPT再開実行計画.txt",
+        "sha256": "80b9fdc306f664b9c03901a4bdfb34cf66997879676204cfa969858fd68a4016"
+      },
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/短期実行WBS.tsv",
+        "sha256": "a6efedcd63b4ef3bb1d133d939b0ddd7dc4b0147988ac33d668282a25c999527"
+      }
+    ],
+    "startScope": {
+      "workCategory": "IMPLEMENTATION",
+      "candidate": "7698011f52d6cc5f94c76413b6ab36971783b9c9",
+      "acceptanceTarget": "No coverage output on multi-target class-validation failure; same successful CLASS/METHOD/DEFICIT format and requested ordering. Use only generated fixture classes with pinned tool dependencies.",
+      "holds": "No original real exec/native, actual program class or VM commands, Root and QA holds intact.",
+      "testIds": [
+        "PT-OPS-EXEC-CRC-006..008"
+      ],
+      "nextAuthorized": "WBS-F03 eligibility and staged safety post, follow remaining independent work"
+    },
+    "groupCapPp": 1.3,
+    "estimateAtGroupStartPp": {
+      "low": 0,
+      "base": 0.48,
+      "high": 1.3
+    },
+    "completedOriginalRowPricePp": 0,
+    "sourceOwnership": "LOCAL_DEV_FOUNDATION_TRACKED_SNAPSHOT",
+    "knownOwnedRunInProgress": 0,
+    "costRevision": "PMO-remaining-v3-20261010",
+    "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "actualAllocatedPp": null
+  }
+}
