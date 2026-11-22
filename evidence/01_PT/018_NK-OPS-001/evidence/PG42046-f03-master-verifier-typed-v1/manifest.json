@@ -1,0 +1,135 @@
+{
+  "run": "PG42046",
+  "source": "5a7e9f4a229eba32998f0583f93fcc99e85a150f",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-F03/2-2-b",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T03:51:56.481735+00:00",
+  "target": {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterCopyVerifierTest.java",
+    "sha256": "d144a6486f36db6f4d92bb25c490db029454cc74917c5fd5f62811fc57afec08"
+  },
+  "boundedFixtureClosure": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42042-p0190302-master-verifier-proof-v1-v2/manifest.json",
+    "sha256": "b6d29d063bfc649b88a7fd57c9f46eabad004e1378841cfb3521d1094de709dc"
+  },
+  "commandReceipt": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42046-f03-master-verifier-typed-v1/begin.json",
+    "sha256": "c64d2c9e6fb003800148d36b4e4dcfefa5c335fc9390217e6a1768d07cbcd5da"
+  },
+  "tools": {
+    "format": {
+      "actualExit": 1,
+      "start": "2026-11-22T03:51:51.082272+00:00",
+      "end": "2026-11-22T03:51:51.975219+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42046-f03-master-verifier-typed-v1/format.stdout",
+        "sha256": "9f480fcb5093d535ce56c69ce413d1482979059491163ebb7bb72f59c4bcb188"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42046-f03-master-verifier-typed-v1/format.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "checkstyle": {
+      "actualExit": 0,
+      "start": "2026-11-22T03:51:51.082432+00:00",
+      "end": "2026-11-22T03:51:51.997531+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42046-f03-master-verifier-typed-v1/checkstyle.stdout",
+        "sha256": "2ee89ca49ecae1bb5b3de5ffcc8a964e605f1b1c6fbe072073a1ea4feaa4e230"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42046-f03-master-verifier-typed-v1/checkstyle.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "pmd": {
+      "actualExit": 4,
+      "start": "2026-11-22T03:51:51.975406+00:00",
+      "end": "2026-11-22T03:51:56.047078+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42046-f03-master-verifier-typed-v1/pmd.stdout",
+        "sha256": "18023b01f345b28be4307a87c82258743c8ad254b22d55808a22935631036ba4"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42046-f03-master-verifier-typed-v1/pmd.stderr",
+        "sha256": "141eb65d74f7997b8eef554fecec67bc550322bbe8156e05a8f2f34e7c0a69e8"
+      }
+    },
+    "spotbugs": {
+      "actualExit": 1,
+      "start": "2026-11-22T03:51:51.997798+00:00",
+      "end": "2026-11-22T03:51:56.477004+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42046-f03-master-verifier-typed-v1/spotbugs.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42046-f03-master-verifier-typed-v1/spotbugs.stderr",
+        "sha256": "83febadc46f214e89709b832aae077e8a743258c2778ad97727d55ed33462071"
+      }
+    }
+  },
+  "pmdFindings": [
+    {
+      "rule": "CloseResource",
+      "line": 265,
+      "endLine": 265,
+      "file": "MigrationMasterCopyVerifierTest.java"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 265,
+      "endLine": 265,
+      "file": "MigrationMasterCopyVerifierTest.java"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 269,
+      "endLine": 269,
+      "file": "MigrationMasterCopyVerifierTest.java"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 274,
+      "endLine": 274,
+      "file": "MigrationMasterCopyVerifierTest.java"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 275,
+      "endLine": 275,
+      "file": "MigrationMasterCopyVerifierTest.java"
+    }
+  ],
+  "pmdErrors": [],
+  "spotbugsFindings": [
+    {
+      "rule": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "method": "copyverify002EmptyGoldenPreservesExplicitSixTuples"
+    },
+    {
+      "rule": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "method": "mappings"
+    }
+  ],
+  "spotbugsErrors": {
+    "errors": "0",
+    "missingClasses": "0"
+  },
+  "outputReports": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42046-f03-master-verifier-typed-v1/pmd.xml",
+      "sha256": "a76da2749752bcedb1885e9d2b08d6c6a43ec42ee9215d9fb33bbecefe9d1c86"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42046-f03-master-verifier-typed-v1/spotbugs.xml",
+      "sha256": "474f060d90ee43950dff55ec1cc701fb77ec27644b6b70d18911538d6c5788d7"
+    }
+  ],
+  "applicableUnresolved": 7,
+  "productTestsExecuted": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
