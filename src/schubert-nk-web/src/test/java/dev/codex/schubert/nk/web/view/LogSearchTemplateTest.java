@@ -28,9 +28,11 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import org.jsoup.Jsoup;
@@ -177,11 +179,12 @@ class LogSearchTemplateTest {
       for (var e : fields.entrySet()) {
         var input = d.selectFirst("[name=" + e.getKey() + "]");
         assertNotNull(input);
-        assertEquals(
-            e.getValue(),
-            input.tagName().equals("select")
-                ? input.selectFirst("option[selected]").attr(VALUE_ATTRIBUTE)
-                : input.attr(VALUE_ATTRIBUTE));
+        var valueInput = input;
+        if (input.tagName().equals("select")) {
+          valueInput = input.selectFirst("option[selected]");
+          assertNotNull(valueInput, "Expected a selected option for " + e.getKey());
+        }
+        assertEquals(e.getValue(), valueInput.attr(VALUE_ATTRIBUTE));
         assertEquals("log-errors", input.attr("aria-describedby"));
       }
       assertEquals(
@@ -440,7 +443,8 @@ class LogSearchTemplateTest {
   }
 
   @Test
-  void log091ConcurrentRendering() throws Exception {
+  void log091ConcurrentRendering()
+      throws InterruptedException, ExecutionException, TimeoutException {
     try (var c = context()) {
       var pool = Executors.newFixedThreadPool(8);
       try {

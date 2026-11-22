@@ -24,6 +24,7 @@ import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
 import dev.codex.schubert.nk.web.config.WebMvcConfiguration;
 import dev.codex.schubert.nk.web.form.ScenarioSearchForm;
 import dev.codex.schubert.nk.web.session.SessionPrincipal;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -35,9 +36,11 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import org.jsoup.Jsoup;
@@ -328,11 +331,13 @@ class ScenarioSearchTemplateTest {
         assertTrue(dom.select(".empty-results").isEmpty());
       }
       var encoded = render(context, page(Map.of("q", "a &+", PAGE_KEY, "2"), 2, 201));
+      var encodedPagination = encoded.select(".pagination").first();
+      assertNotNull(encodedPagination, "Encoded search result requires pagination");
       assertEquals(
           List.of(
               "/search?q=a%20%26%2B&game=&speaker=&chapter=&entry_type=&voice=&page=1",
               "/search?q=a%20%26%2B&game=&speaker=&chapter=&entry_type=&voice=&page=3"),
-          encoded.select(".pagination").first().select("a").eachAttr(HREF_ATTRIBUTE));
+          encodedPagination.select("a").eachAttr(HREF_ATTRIBUTE));
     }
   }
 
@@ -614,7 +619,8 @@ class ScenarioSearchTemplateTest {
   }
 
   @Test
-  void search033ConcurrentRendering() throws Exception {
+  void search033ConcurrentRendering()
+      throws InterruptedException, ExecutionException, TimeoutException, IOException {
     try (var context = context()) {
       var pool = Executors.newFixedThreadPool(8);
       try {
