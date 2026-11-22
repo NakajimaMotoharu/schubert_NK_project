@@ -73,6 +73,14 @@ class VerifyRunnerTest(unittest.TestCase):
             'if [ -e "$PGPT_FIXTURE_STATE/change-branch" ]; then\n'
             '  git switch -qc dev-other\n'
             "fi\n"
+            'if [ -e "$PGPT_FIXTURE_STATE/add-input" ]; then\n'
+            '  mkdir -p src\n'
+            '  printf "%s\\n" "local generated input" > src/generated-fixture.txt\n'
+            "fi\n"
+            'if [ -e "$PGPT_FIXTURE_STATE/add-target" ]; then\n'
+            '  mkdir -p target\n'
+            '  printf "%s\\n" "local generated output" > target/result.txt\n'
+            "fi\n"
             'if [ -e "$PGPT_FIXTURE_STATE/fail-build" ]; then exit 9; fi\n'
         )
         wrapper.chmod(0o700)
@@ -203,6 +211,31 @@ class VerifyRunnerTest(unittest.TestCase):
         self.assertNotEqual(0, self.invoke().returncode)
         self.assertEqual([], list(self.records.iterdir()))
         self.assertFalse((self.state / "builds").exists())
+
+    def test_010_new_untracked_input_stops_capture_even_if_default_status_hides_it(self):
+        self.git("config", "status.showUntrackedFiles", "no")
+        (self.state / "add-input").touch()
+        result = self.invoke()
+        self.assertEqual(1, result.returncode, result.stderr)
+        self.assertEqual("1", self.marker("exit").read_text().strip())
+        self.assertEqual(self.commit, self.marker("commit").read_text().strip())
+        self.assertFalse((self.state / "collector").exists())
+        self.assertEqual(
+            "local generated input\n", (self.repo / "src/generated-fixture.txt").read_text()
+        )
+
+    def test_011_ignored_build_output_preserves_a_clean_checkout(self):
+        (self.repo / ".gitignore").write_text("/target/\n")
+        self.git("add", ".gitignore")
+        self.git("commit", "-qm", "Ignore generated test output")
+        source = self.git("rev-parse", "HEAD").stdout.strip()
+        (self.state / "add-target").touch()
+        result = self.invoke()
+        self.assertEqual(0, result.returncode, result.stderr)
+        self.assertEqual("0", self.marker("exit").read_text().strip())
+        self.assertEqual(source, self.marker("commit").read_text().strip())
+        self.assertTrue((self.state / "collector").is_file())
+        self.assertEqual("local generated output\n", (self.repo / "target/result.txt").read_text())
 
 
 if __name__ == "__main__":

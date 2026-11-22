@@ -11,8 +11,11 @@ umask 077
 git_dir=$(git rev-parse --absolute-git-dir)
 exec 9>"$git_dir/pgpt-verify.lock"
 flock -n 9
-state=$(git status --porcelain)
-test -z "$state"
+require_clean_checkout() {
+    state=$(git status --porcelain --untracked-files=normal) || return $?
+    test -z "$state"
+}
+require_clean_checkout
 source_branch=$(git branch --show-current)
 test -n "$source_branch"
 record="/tmp/$run_id"
@@ -38,7 +41,7 @@ if [ "$result" -eq 0 ]; then
         fi
     fi
     if [ "$result" -eq 0 ]; then
-        git diff --quiet "$source_commit" -- src pom.xml program/characterization tools/quality .mvn mvnw mvnw.cmd || result=$?
+        require_clean_checkout || result=$?
     fi
     if [ "$result" -eq 0 ]; then
         python3 -B tools/quality/pgpt_reactor_junit.py "$run_id" "$source_commit" || result=$?
