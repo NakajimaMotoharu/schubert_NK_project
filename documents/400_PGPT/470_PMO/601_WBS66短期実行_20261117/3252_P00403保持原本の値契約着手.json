@@ -1,0 +1,79 @@
+{
+  "eventId": "PGPT-20261008-8697",
+  "groupId": "nov22-record-pg42976",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T19:56:38+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 48,
+      "remainingPercent": 52,
+      "resetsAt": 1795879771,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "source": "2bfa900ed428763b3e323243a06fb90d70b83cf3",
+    "productionCoreMain": "e8368d22c4da2ec841f008df793594d3be9066af",
+    "canonicalDesignSource": "ca41c03c0c6efff9a3a35b47b480491810bee6f9",
+    "run": "PG42976",
+    "workCategory": "REVIEW",
+    "managementWorkIds": [
+      "WBS-P004-03/2"
+    ],
+    "previousCheckpoint": "3251",
+    "planRow": {
+      "新版ID": "WBS-P004-03/2",
+      "第58版ID": "WBS-P004-03/2",
+      "費用主担当項目": "P004-03",
+      "計画窓": "繰越",
+      "予定期間・週末": "2026-12-13までの計画週",
+      "作業・成果物": "参照原本DAO・保持・退役／同source証拠による受入判定",
+      "先行ID・着手条件": "A1-15、WBS-P004-03/1、候補再資格-03.01、候補再資格-31.01、閉/WBS-F02、閉/WBS-F03",
+      "担当": "DB・資源管理担当",
+      "旧短期残pp": "0.423",
+      "改訂残pp": "0.423",
+      "終了条件": "参照原本DAO・保持・退役：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。",
+      "元項目の正式受入に必要な証拠": "残るMaintenanceRunFilesと退役時の所有、実FileStore・DBの原本保持、F02・F03の受入。",
+      "参照する元項目": "P004-03",
+      "lineNumber": 15
+    },
+    "currentPlan": [
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/11月22日_PGPT再開実行計画.txt",
+        "sha256": "80b9fdc306f664b9c03901a4bdfb34cf66997879676204cfa969858fd68a4016"
+      },
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/短期実行WBS.tsv",
+        "sha256": "a6efedcd63b4ef3bb1d133d939b0ddd7dc4b0147988ac33d668282a25c999527"
+      }
+    ],
+    "startScope": {
+      "workCategory": "REVIEW",
+      "target": "短期P004-03のMaintenanceRunState／MaintenanceRecord値と保存原実行を現包装へ照合、元10/9保持DAOの差も 確認",
+      "entry": "PG42522の原8とPG42182原6、PG42952参照DAO、PG42964当包装",
+      "exitCriterion": "独立した固定状態、欠落/不正、保存診断と当包装の物理証拠、実原本／FileStore／適用依存を分離、全PT再現不要",
+      "excludes": "実DB・実原本・退役・FileStoreの保留操作、VM、Root11、QA056、全製品451",
+      "successor": "実操作に依存しないP004-03/05の値契約又はF03優先。既合格再演なし"
+    },
+    "groupCapPp": 2.1,
+    "estimateAtGroupStartPp": {
+      "low": 0,
+      "base": 0.35,
+      "high": 2.1
+    },
+    "completedOriginalRowPricePp": 0,
+    "sourceOwnership": "LOCAL_DEV_FOUNDATION_TRACKED_SNAPSHOT",
+    "knownOwnedRunInProgress": 0,
+    "costRevision": "PMO-remaining-v3-20261010",
+    "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "actualAllocatedPp": null
+  }
+}
