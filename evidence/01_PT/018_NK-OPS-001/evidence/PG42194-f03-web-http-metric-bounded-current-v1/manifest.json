@@ -1,0 +1,212 @@
+{
+  "run": "PG42194",
+  "source": "a551c4744d799d85c2756e1839315393e5944800",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-F03/2-2-b",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T05:38:34.617522+00:00",
+  "before": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42190-f03-http-metric-bounded-current-v1/manifest.json",
+      "sha256": "f9809105b0785dc4c37c12d74ff61344a9ad13011692c47b674ad59b7098e812"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42192-f03-web-http-metric-test-findings-v1/manifest.json",
+      "sha256": "2d241aa4f7a095c595293367bff6a41b4bf0c62403a510695c2d393e153ce62a"
+    }
+  ],
+  "related": [
+    "BUG-3563",
+    "BUG-3564",
+    "YKT-2803"
+  ],
+  "compiledFixture": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42194-web-http-metric-bounded-v1/test/dev/codex/schubert/nk/web/monitoring/HttpMetricContractTest.class",
+    "sha256": "67d5b6c52d278ed432a4ac4ee27bf78828ec2ea4c8de4ee0e6af80541cc6e42e"
+  },
+  "sameTestInstructionsAfterThrowsChange": true,
+  "sourceFixture": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricContractTest.java",
+    "sha256": "ddf10a7c85cd28803d8eaaf4c8f06cd622895d7754d69fbcceedb655e1cd75b6"
+  },
+  "pinnedRouteFixture": {
+    "path": "src/schubert-nk-web/src/test/resources/monitoring/http-route-labels.txt",
+    "sha256": "1777c4710e6448bdb459d5fd2beccf389f57ec4ea9effdca171cdbd6888d5331"
+  },
+  "cases": [
+    "httpMetric002IndependentWholeFiniteLabelMatrix",
+    "httpMetric006ConcurrentClassifiersAreStateless"
+  ],
+  "exactRetainedOtherCases": 4,
+  "newNormalOwnCases": 2,
+  "passed": 2,
+  "errors": 0,
+  "failed": 0,
+  "skipped": 0,
+  "routeCount35": true,
+  "independentExpectedLabelCells": 1750,
+  "actualNetworkOrService": false,
+  "junit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42194-web-http-metric-bounded-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "e251af7cffba8e904549345d2ea757df6a1d2948c781d77f82a27d79ea20ef7e"
+  },
+  "actualProbeRows": [
+    {
+      "crc": "b96a4a1a6bd5a8b1",
+      "hit": 14,
+      "probes": 26,
+      "name": "dev/codex/schubert/nk/web/monitoring/HttpMetricContract"
+    },
+    {
+      "crc": "6c1c548555e371b4",
+      "hit": 11,
+      "probes": 15,
+      "name": "dev/codex/schubert/nk/web/monitoring/HttpMetricContract$Status"
+    },
+    {
+      "crc": "132e1c4462717b1a",
+      "hit": 13,
+      "probes": 16,
+      "name": "dev/codex/schubert/nk/web/monitoring/HttpMetricContract$Labels"
+    },
+    {
+      "crc": "47b8326be6fad100",
+      "hit": 48,
+      "probes": 49,
+      "name": "dev/codex/schubert/nk/web/monitoring/HttpMetricContract$Route"
+    },
+    {
+      "crc": "a3f6ef695aeb8ce0",
+      "hit": 18,
+      "probes": 18,
+      "name": "dev/codex/schubert/nk/web/monitoring/HttpMetricContract$Method"
+    }
+  ],
+  "exec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42194-web-http-metric-bounded-v1/original.exec",
+    "sha256": "671b2c77f504fba749a3c13dae7e585fe392d3ee320b683ac816b802234fa963"
+  },
+  "applicableCheckedSitesFixed": 2,
+  "pmdPerSite": [
+    {
+      "rule": "CloseResource",
+      "method": "httpMetric006ConcurrentClassifiersAreStateless",
+      "line": "229",
+      "disposition": "TEST_OWNED_FINITE_EXECUTOR_STOPPED_AND_CONFIRMED_IN_FINALLY"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "method": "httpMetric006ConcurrentClassifiersAreStateless",
+      "line": "229",
+      "disposition": "TEST_OWNED_FINITE_EXECUTOR_STOPPED_AND_CONFIRMED_IN_FINALLY"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "method": "httpMetric006ConcurrentClassifiersAreStateless",
+      "line": "236",
+      "disposition": "TEST_OWNED_FINITE_EXECUTOR_STOPPED_AND_CONFIRMED_IN_FINALLY"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "method": "httpMetric006ConcurrentClassifiersAreStateless",
+      "line": "239",
+      "disposition": "TEST_OWNED_FINITE_EXECUTOR_STOPPED_AND_CONFIRMED_IN_FINALLY"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "method": "httpMetric006ConcurrentClassifiersAreStateless",
+      "line": "240",
+      "disposition": "TEST_OWNED_FINITE_EXECUTOR_STOPPED_AND_CONFIRMED_IN_FINALLY"
+    }
+  ],
+  "spotbugsRemainingScope": [
+    {
+      "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+      "method": "lambda$httpMetric004NullUnknownAndStatusBoundariesAreExplicit$2",
+      "applicability": "INTENTIONAL_INDEPENDENT_NULL_NEGATIVE"
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+      "method": "lambda$httpMetric004NullUnknownAndStatusBoundariesAreExplicit$6",
+      "applicability": "INTENTIONAL_INDEPENDENT_NULL_NEGATIVE"
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+      "method": "lambda$httpMetric004NullUnknownAndStatusBoundariesAreExplicit$7",
+      "applicability": "INTENTIONAL_INDEPENDENT_NULL_NEGATIVE"
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "method": "lambda$httpMetric004NullUnknownAndStatusBoundariesAreExplicit$0",
+      "applicability": "INTENTIONAL_INDEPENDENT_NULL_NEGATIVE"
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "method": "lambda$httpMetric004NullUnknownAndStatusBoundariesAreExplicit$10",
+      "applicability": "INTENTIONAL_INDEPENDENT_NULL_NEGATIVE"
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "method": "lambda$httpMetric004NullUnknownAndStatusBoundariesAreExplicit$4",
+      "applicability": "INTENTIONAL_INDEPENDENT_NULL_NEGATIVE"
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "method": "lambda$httpMetric004NullUnknownAndStatusBoundariesAreExplicit$5",
+      "applicability": "INTENTIONAL_INDEPENDENT_NULL_NEGATIVE"
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "method": "lambda$httpMetric004NullUnknownAndStatusBoundariesAreExplicit$8",
+      "applicability": "INTENTIONAL_INDEPENDENT_NULL_NEGATIVE"
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "method": "lambda$httpMetric004NullUnknownAndStatusBoundariesAreExplicit$9",
+      "applicability": "INTENTIONAL_INDEPENDENT_NULL_NEGATIVE"
+    }
+  ],
+  "staticAnalysisRaw": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42194-web-http-metric-bounded-v1/checkstyle.xml",
+      "sha256": "c9f19d4c037b23817f9ea8731a0511f2acbb22f50e03ab8bb8c423a1465511a2"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42194-web-http-metric-bounded-v1/pmd.xml",
+      "sha256": "89f721299c8c30f5f0eab53b5b61e8d1a71355670baf1c8b5bda9ffb8365fb48"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42194-web-http-metric-bounded-v1/spotbugs.xml",
+      "sha256": "f8ff65aabc66ce46a1a9ba576fee8bfc7e47a795ffb082dce2bd3936815014b6"
+    }
+  ],
+  "terminals": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42194-web-http-metric-bounded-v1/format.terminal.json",
+      "sha256": "85ae7133c7ac4a6f5ebfc6d0d7f0800dc51add5a03e1bc7aa8fc88b2f59e72f5"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42194-web-http-metric-bounded-v1/compile.terminal.json",
+      "sha256": "d65f5a5ebeaf31eb6a962abc394a2ad39d614cf8ca03add450d51e10268ec0bc"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42194-web-http-metric-bounded-v1/checkstyle.terminal.json",
+      "sha256": "5446ff16c1cb5ec59d4d0902279aaa8246f2cb414d8566c542d28ec8af877931"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42194-web-http-metric-bounded-v1/pmd.terminal.json",
+      "sha256": "a0fed6f74bacb9f2c3339a7e3aec2f9e63da68329488185b096eea3807b3f73b"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42194-web-http-metric-bounded-v1/spotbugs.terminal.json",
+      "sha256": "fa3dee83f5f8a30eee6a072e67b581fbfff5322bff0260e654790ca72ff908e4"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42194-web-http-metric-bounded-v1/test.terminal.json",
+      "sha256": "c471def999461973eec97a470b5a312a24370272be8441665dca6759f4883835"
+    }
+  ],
+  "initialToolScriptSyntaxErrorNoRuns": true,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

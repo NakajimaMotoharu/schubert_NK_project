@@ -16,3 +16,7 @@ Routeは既承認SS313のregistered template・static assetと既WebRequestTrace
 |006 / httpMetric006|64並行classificationで同固定map・所有executor終端、実service/DB/sleepなし |
 
 新6通常PTを一固定sourceから実行し、当6実行class＋metadata1のCRC/単一session/四counter100、親Enforcer/lint/Werror/NullAway/SpotBugs/Checkstyle/PMD個別適用性を検証。全Webや既Batch73のcoverageへ合算せず、Production実Jarの当class同byteを独立確認する。全体451/同source全scope/正式1964-53/実NK CHR/native/QA051final/HOLDは維持。境界期待は上記literal/独立goldenから作り、新Production parseでexpectedを生成0。実環境/command/source/結果/hashは1571以降へ。
+
+## 2026-11-22 現候補の合成routeと有限並行
+
+httpMetric002／006。固定35行×10method×5状態級を当resourceで実測。4workerの64fixtureと終了制限を保持し例外契約だけを限定。選択2成功、該当広域例外0、同試験JVM実命令一致。Main・実HTTP・全451はこの選択に含めない。BUG-3563/3564、YKT-2803。evidence/01_PT/018_NK-OPS-001/evidence/PG42194-f03-web-http-metric-bounded-current-v1/manifest.json SHA256 570e3dea4ca18b8e7eb783ef679c352c0ea4a3355046b61a19bf9549292b6091。

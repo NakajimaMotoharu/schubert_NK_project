@@ -17,3 +17,7 @@
 当Webの四100はsource76/6classだけ。Batch73のsource71は歴史のまま、当Jarで同byteと確認した20classを当sourceの実行済みと呼ばず、coverageを合算しない。原e7/4222・common3c/44も再演/転用0。Production source deltaは既Batch25＋Web4=29追加だけで旧Main/POM/config/DDL変更0。default485/既受入register/正式1964-53は更新せず、原190新受入0/工数null/QA051final/PTALT0/全体451/native/CHRと全actualHOLDを維持する。
 
 開始0.5/1.5/3ppと原/v4/v5を維持し、専有N/T不明を0にしない。次のMicrometer実接続にはcore/runtime依存の正規追加・公開名変換/owner接続/故障時契約が必要。現Webのcore1.17.1はdependencyManagementのみ、既toolchainのApache Artemis2.56.0配布にHdrHistogram2.2.2 jarが存在することをpathだけ確認した。使用前に版/hash/出所/既cache衝突を認証し、既存物や実VM/Root/鍵/配備を変更せず独立PG/PT可能範囲を進める。
+
+## 2026-11-22 現候補の合成routeと有限並行
+
+httpMetric002／006。固定35行×10method×5状態級を当resourceで実測。4workerの64fixtureと終了制限を保持し例外契約だけを限定。選択2成功、該当広域例外0、同試験JVM実命令一致。Main・実HTTP・全451はこの選択に含めない。BUG-3563/3564、YKT-2803。evidence/01_PT/018_NK-OPS-001/evidence/PG42194-f03-web-http-metric-bounded-current-v1/manifest.json SHA256 570e3dea4ca18b8e7eb783ef679c352c0ea4a3355046b61a19bf9549292b6091。
