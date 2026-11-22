@@ -1,0 +1,52 @@
+{
+  "run": "PG42388",
+  "source": "115e5fb9b214cad7d53ec1eb70268634d62b5504",
+  "configurationSource": "3b0139d02a7a87042139718b9ffbe2f795b1837b",
+  "javaCore": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-G13.06",
+  "terminalAtUTC": "2026-11-22T07:59:31.324064+00:00",
+  "assertions": {
+    "testId": "PT-OPS-MAINT-PREBOOT001-T04",
+    "validSyntaxExit": 0,
+    "unknownKeyExit": 1,
+    "missingServiceNativeVerifyExit": 0,
+    "missingServiceReferenceDetected": true,
+    "syntheticDependency": true
+  },
+  "proof": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42388-daily-timer-offline-systemd-v2/begin.json",
+      "sha256": "1e3c1716d722dc4dc5df4cea2fca3e390611c283ac873d30a03669d0f7f38c5a"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42388-daily-timer-offline-systemd-v2/terminal.json",
+      "sha256": "6cb3f5256632930dbc61e1d222ebf1f024bd0b27aa154da88589b1936490c5f4"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42388-daily-timer-offline-systemd-v2/stdout.json",
+      "sha256": "1f4cfabe3388baaa58141565baf3369132c547790fa352326eea2c499cc0b3b5"
+    }
+  ],
+  "originalToolFailure": {
+    "retained": [
+      {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42388-daily-timer-offline-systemd-v1/begin.json",
+        "sha256": "9f01ae3745d3bf0c205b21735b95a1024b67185eca856be824b831bbd8627dba"
+      },
+      {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42388-daily-timer-offline-systemd-v1/terminal.json",
+        "sha256": "faa0fb348d98660c5a38b105e39a65cfe82b1e674d45c92e62da484cb54941c4"
+      },
+      {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42388-daily-timer-offline-systemd-v1/fixture-before.py",
+        "sha256": "bfd8a22fdfdeaecffe1b4bf77e39ab6e2b9a4c609cafde15350ee749d53d0bce"
+      }
+    ],
+    "cause": "Native verify of the timer alone can return zero while the target file is absent. Earlier assumed it could witness the reference."
+  },
+  "actualDbServiceOrHostActions": 0,
+  "realProductionServicePresent": false,
+  "localStaticTests": 1,
+  "formalAcceptanceId": null,
+  "whole451": false
+}

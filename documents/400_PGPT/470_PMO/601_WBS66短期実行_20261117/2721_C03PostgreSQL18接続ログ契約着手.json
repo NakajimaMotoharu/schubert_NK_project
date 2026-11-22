@@ -1,0 +1,85 @@
+{
+  "eventId": "PGPT-20261008-8167",
+  "groupId": "nov22-pg42386-c03-postgresql18-log-config",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T07:55:46+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 24,
+      "remainingPercent": 76,
+      "resetsAt": 1795879772,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "source": "0afc958857e2886de7fd78c0a927a0b75513ce46",
+    "productionCoreMain": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+    "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "run": "PG42386",
+    "workCategory": "CONTRACT_AUDIT",
+    "managementWorkIds": [
+      "WBS-C03"
+    ],
+    "previousCheckpoint": "2720",
+    "planRow": {
+      "ID": "WBS-C03",
+      "元行": "WBS-C03",
+      "費目": "C",
+      "主担当": "WBS-C03",
+      "状態": "計画",
+      "作業": "PostgreSQL/HBA/role timeout設定",
+      "残pp": "1.25",
+      "着手": "設計342・当該source・作業所有・既存成果を照合。元契約の着手依存と個別HOLDを確認。製品の実効receiptの引渡し見込は週表の条件付き日程。所有者・許可・証拠未確認なら成果準備だけを進める",
+      "終了証拠": "PostgreSQL/HBA/role timeout設定：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。個別照合は GUC32・HBA16・timeout20と実DBの許可・反映",
+      "補正根拠": "既存準備の控除を維持。実機取得と共通全回帰は元ownerが一度だけ計上",
+      "契約HOLD": "GUC32・HBA16・timeout20と実DBの許可・反映",
+      "対象": "",
+      "範囲": "SS 342",
+      "保存証跡": "承認済み設定/規約と当sourceの差、適用範囲、実証結果",
+      "順次": "False",
+      "配賦窓": "3",
+      "楽観pp": "0.5",
+      "慎重pp": "2.5",
+      "要求設計の版差": "PT基準仕様 NK-OPS-001",
+      "lineNumber": 588,
+      "改訂残pp": "1.25"
+    },
+    "currentPlan": [
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/11月22日_PGPT再開実行計画.txt",
+        "sha256": "80b9fdc306f664b9c03901a4bdfb34cf66997879676204cfa969858fd68a4016"
+      },
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/短期実行WBS.tsv",
+        "sha256": "a6efedcd63b4ef3bb1d133d939b0ddd7dc4b0147988ac33d668282a25c999527"
+      }
+    ],
+    "startScope": {
+      "workCategory": "CONTRACT_AUDIT",
+      "testIds": [
+        "PT-OPS-PGCFG-006"
+      ],
+      "exitCriteria": "Exact PostgreSQL 18 published implementation reference and SS342 semantics; if incompatible, record issue and bounded alternative without starting DB."
+    },
+    "groupCapPp": 0.5,
+    "estimateAtGroupStartPp": {
+      "low": 0,
+      "base": 0.22,
+      "high": 0.5
+    },
+    "completedOriginalRowPricePp": 0,
+    "sourceOwnership": "LOCAL_DEV_FOUNDATION_TRACKED_SNAPSHOT",
+    "knownOwnedRunInProgress": 0,
+    "costRevision": "PMO-remaining-v3-20261010",
+    "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "actualAllocatedPp": null
+  }
+}

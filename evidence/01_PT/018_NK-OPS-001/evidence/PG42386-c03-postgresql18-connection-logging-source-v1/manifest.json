@@ -1,0 +1,45 @@
+{
+  "run": "PG42386",
+  "source": "0afc958857e2886de7fd78c0a927a0b75513ce46",
+  "javaCore": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-C03",
+  "terminalAtUTC": "2026-11-22T07:56:34.343812+00:00",
+  "design": {
+    "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "commit": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "sha256": "07ab19dd27038241ba8257a1e4dcf180117a844b68479ec6848658a938445192"
+  },
+  "configuration": {
+    "path": "src/deployment/postgresql/postgresql.conf.template",
+    "sha256": "aa4474413deccf08e3f30b458355602145dd611ac0329e2a83a1f1007f9149eb"
+  },
+  "sourceSettings": {
+    "log_connections": "on",
+    "log_disconnections": "on",
+    "log_statement": "'none'",
+    "log_parameter_max_length": "0",
+    "log_parameter_max_length_on_error": "0",
+    "log_min_error_statement": "'panic'",
+    "log_error_verbosity": "'terse'",
+    "log_min_duration_statement": "-1",
+    "log_min_duration_sample": "-1",
+    "log_transaction_sample_rate": "0"
+  },
+  "officialDatabaseReference": "https://www.postgresql.org/docs/18/runtime-config-logging.html#GUC-LOG-CONNECTIONS",
+  "officialReferenceCheckedJST": "2026-11-22",
+  "postgres18Type": "string",
+  "enabledCompatibilityAlias": [
+    "receipt",
+    "authentication",
+    "authorization"
+  ],
+  "setupDurationEnabledByOn": false,
+  "implementedConfigurationChange": false,
+  "localStartupOrSQL": 0,
+  "formalAcceptanceId": null,
+  "remaining": [
+    "C03 current owned installation, effective config, role and timeout",
+    "Connection/session event and primary error redaction in approved environment",
+    "PT-OPS-PGCFG-006 native execution remains separate"
+  ]
+}

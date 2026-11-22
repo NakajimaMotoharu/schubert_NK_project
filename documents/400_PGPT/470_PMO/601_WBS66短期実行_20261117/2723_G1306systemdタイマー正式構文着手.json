@@ -1,0 +1,85 @@
+{
+  "eventId": "PGPT-20261008-8169",
+  "groupId": "nov22-pg42388-timer-systemd-parser",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T07:57:28+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 24,
+      "remainingPercent": 76,
+      "resetsAt": 1795879772,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "source": "0afc958857e2886de7fd78c0a927a0b75513ce46",
+    "productionCoreMain": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+    "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "run": "PG42388",
+    "workCategory": "SELECTED_TEST",
+    "managementWorkIds": [
+      "WBS-G13.06"
+    ],
+    "previousCheckpoint": "2722",
+    "planRow": {
+      "ID": "WBS-G13.06",
+      "元行": "WBS-G13.06",
+      "費目": "F",
+      "主担当": "WBS-G13.06",
+      "状態": "計画",
+      "作業": "batch全Unit/run/tool→要求/WBSの欠落照合",
+      "残pp": "2.5",
+      "着手": "設計361・当該source・作業所有・既存成果を照合。元契約の着手依存と個別HOLDを確認",
+      "終了証拠": "batch全Unit/run/tool→要求/WBSの欠落照合の対象別完了記録を確認。契約別の版差照合先で示した現在候補と、個別採用した設計・期待値を明示",
+      "補正根拠": "予測777の元行残。個別費用実測がない部分は前回単価を継承",
+      "契約HOLD": "H-G13.06",
+      "対象": "",
+      "範囲": "SYS-011、SCP-001、SCP-002、SCP-003、SCP-006",
+      "保存証跡": "該当criteriaごとの判定・未解決一覧・照合元manifest・判定者",
+      "順次": "False",
+      "配賦窓": "12",
+      "楽観pp": "1.0",
+      "慎重pp": "5.0",
+      "要求設計の版差": "PT基準仕様 NK-OPS-001",
+      "lineNumber": 857,
+      "改訂残pp": "2.5"
+    },
+    "currentPlan": [
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/11月22日_PGPT再開実行計画.txt",
+        "sha256": "80b9fdc306f664b9c03901a4bdfb34cf66997879676204cfa969858fd68a4016"
+      },
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/短期実行WBS.tsv",
+        "sha256": "a6efedcd63b4ef3bb1d133d939b0ddd7dc4b0147988ac33d668282a25c999527"
+      }
+    ],
+    "startScope": {
+      "workCategory": "SELECTED_TEST",
+      "testIds": [
+        "PT-OPS-MAINT-PREBOOT001-T04"
+      ],
+      "exitCriteria": "Read exact timer using systemd-analyze verify, include unknown option mutation, synthetic no-op service only in tightly scoped parser inputs, distinguish production dependency still missing."
+    },
+    "groupCapPp": 0.55,
+    "estimateAtGroupStartPp": {
+      "low": 0,
+      "base": 0.24,
+      "high": 0.55
+    },
+    "completedOriginalRowPricePp": 0,
+    "sourceOwnership": "LOCAL_DEV_FOUNDATION_TRACKED_SNAPSHOT",
+    "knownOwnedRunInProgress": 0,
+    "costRevision": "PMO-remaining-v3-20261010",
+    "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "actualAllocatedPp": null
+  }
+}
