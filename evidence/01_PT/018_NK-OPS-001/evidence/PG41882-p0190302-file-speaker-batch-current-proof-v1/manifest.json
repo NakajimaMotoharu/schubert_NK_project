@@ -1,0 +1,404 @@
+{
+  "run": "PG41882",
+  "source": "4bd35fc2e0d05eb71c479c94d313285090108b55",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T02:10:47.719422+00:00",
+  "wbs": "WBS-P019-03.02/2",
+  "productionArchive": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40802-f02-current-four-package-v1/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+    "sha256": "3de920f0fc7df4909b362fd25856b5b91e2517fa404cbe5756725544472887f7"
+  },
+  "explicitAdmittedPureClasses": {
+    "dev/codex/schubert/nk/migration/ScenarioEntryCopyBatch.class": "85e1e2dfee1d13b7c45c3e0f4813b9f90ab335e2bbe182f51f89a99a297b2fbf",
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap.class": "e396c01d1b8c4697dce412f04195006365142d762a7f3d35cea31652850d9258",
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$FilePair.class": "d487add339f71bd42ca456dc838be7a15f2d2569f6f08b38572f8aa30212ea52",
+    "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap.class": "cf6890389883a8d6dc7a4033ca35a124a4796b9a4bcd239e586ab5fa5f2dd0f1",
+    "dev/codex/schubert/nk/migration/SpeakerCopyBatch.class": "1b54712d173109ac3f84cc6746d4e0256e89d240ec55ad9e9f97c61373548643",
+    "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$PlacedEntry.class": "0decb1b7b350b7d023ec0e6da08587bcfcd24c46ae109c2ad8fcce56fce760b3",
+    "dev/codex/schubert/nk/migration/ScenarioFileCopyBatch.class": "62013aa1df711baa5719c7c8e86f15493b46aa79b50134b0e948e8f81d44a2e3",
+    "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$MappedEntry.class": "07a4cc7ce7c32e6f16e5df45b85c10401eb5bce9fc8947c3a935dba5b919c9f7",
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$MappedFile.class": "447b030258eb82c86fbad715d2618b51601e7f6a5952786d812d86d04f287b6f",
+    "dev/codex/schubert/nk/migration/SpeakerCopyRow.class": "ff7c6bf1584c9882a999bd2687197aa4d877d5a08e667afda002d165f9dc9289",
+    "dev/codex/schubert/nk/migration/PostgresCopyTextWriter.class": "e498970c4ef48d9af38f4de7f0e292f32188a9da38e153d9d235c4f1c4e697f2",
+    "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap.class": "ca16026d985c464470c266e887056a88b671c3c455c7eb6a33b5a8d0ab5b62c1",
+    "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$Placement.class": "0e768edb60604b9829a724c52487391ed24c897b0625ae41414da089aea1b054",
+    "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$IdPair.class": "53e54e1f27334878352ffd5e0e222f439c01e03653de0e668e2ed7485d4dca28",
+    "dev/codex/schubert/nk/migration/ScenarioEntryCopyRow.class": "369d40e90619f69d4747f9e4d8fa821637153d1a442dd5de80736277ca1f0109",
+    "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder.class": "d92993e0256be418b35ffd962f68d96ad6457020a1c8f547694c068b5e46f83d"
+  },
+  "exactTestClasses": {
+    "dev/codex/schubert/nk/migration/SpeakerCopyBatchTest$1.class": "ab3c01019510913abf54070eca827bb08dd8e47b2062c5522d072c4a9ac01cb1",
+    "dev/codex/schubert/nk/migration/ScenarioFileCopyBatchTest.class": "77f8dabacfad623ce17829bcb49b8040aa41adfb5bc66382d2533ae8f7ef16f6",
+    "dev/codex/schubert/nk/migration/SpeakerCopyBatchTest$MemorySink.class": "dc9783d9aeef1e9ca94d0b4051a20869c32703f30c1957449caa6ca5f34ea880",
+    "dev/codex/schubert/nk/migration/SpeakerCopyBatchTest.class": "4bf6063b67a5ab35596ac7e8ff6ddc0ff9bcd8a5a97dbbf09123fe76069a8614",
+    "dev/codex/schubert/nk/migration/SpeakerCopyBatchTest$FailingSink.class": "2c5806edb1f5a1131865af68e84f16e9cd2f53f303b7f6c985b641c24824a69e"
+  },
+  "exactSources": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileCopyBatchTest.java",
+      "sha256": "c429571193e26ddba8726df4e5ce74238361030e806f12f75abb25c081b37089"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerCopyBatchTest.java",
+      "sha256": "2d47fd03b673e296d9cec4282542c7e62bf3c9fe13777490c133a941cd087538"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoder.java",
+      "sha256": "43af38a386bb4c676bd0da64e53348088a74390e96f17fd098734b863879a75e"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriter.java",
+      "sha256": "85e4fc7789155422bfb3cd98304494e936e4f0b5e8e04bcb15fc1f0ee83808f7"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyBatch.java",
+      "sha256": "99ae9254cbf0de8f01ff8390a9ef751f2d6cb526780c629a83238af13355a56a"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyRow.java",
+      "sha256": "011d66ec491400e61c872fe506b91fe780c26f44e3875dcf61914bc75d2c866d"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap.java",
+      "sha256": "02156c50dd7e69ce1c5b318bad8c7bfe800efdfb1d0242c38d5ce88b5e519e9c"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap.java",
+      "sha256": "23b1ac588950bec8f79e35553b0e2e1c93bff2593ac59c7fb3a8799a626a694d"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioFileCopyBatch.java",
+      "sha256": "a3d806645c57008ceed394e75b4ca5561e8c8cfdd8d7291619262abce942be59"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMap.java",
+      "sha256": "90a27291fd868d80896cfcae280978ebbf409bba6c906c73bfbab45d79024ad7"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerCopyBatch.java",
+      "sha256": "a6fe0a96272fe8679d7da1fb013338c219d0d02a5707b879513b985cf7094360"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerCopyRow.java",
+      "sha256": "0dbf9ce9e9d97710ec6924988af4afaa988250372abf94a336b6ad3b7b51e9d9"
+    }
+  ],
+  "compileArguments": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+    "--release",
+    "25",
+    "-g",
+    "-proc:none",
+    "-implicit:none",
+    "-encoding",
+    "UTF-8",
+    "-Xlint:all",
+    "-Werror",
+    "-cp",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41882-p0190302-file-speaker-batch-current-proof-v1/pure:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+    "-d",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41882-p0190302-file-speaker-batch-current-proof-v1/test",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileCopyBatchTest.java",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerCopyBatchTest.java"
+  ],
+  "dependencyProof": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41882-p0190302-file-speaker-batch-current-proof-v1/jdeps.stdout",
+    "sha256": "4ffbe515c2735828a0e26d042bf7a45b805e2c76464115c26437ccb28d0d6174"
+  },
+  "priorUnitXML": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33292-mapverify976-post-v5/original-TEST-junit-jupiter.xml",
+    "sha256": "a55172a64a07208df0457588e90e237cb456f5a36ee780adb89da50596333079"
+  },
+  "history": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30840-file-copy-batch38-fixed-post-v1/manifest.json",
+      "sha256": "4958a8bc4dc14f92fa790dbe65b9014834d43696c48af33ee4a386f5e21645a7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31634-speaker-batch132-prefix-fixed-post-v1/manifest.json",
+      "sha256": "73c3d11fa14c822745aaa94ffc7f997f5b2119a402f2192a5b427d473d435f63"
+    }
+  ],
+  "cases": [
+    {
+      "testId": "PT-MIG-FCOPY001",
+      "method": "independentThreeRowGoldenUsesMappingOrderAndExplicitElevenColumns",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/023_ScenarioFile十一列COPYbatch・独立十四仕様.md",
+        "sha256": "cd643e708501f44c5345ffea890d5ced05eaae8aa61c22cb9f2632b31c6d337f"
+      },
+      "originalXML": "PASS"
+    },
+    {
+      "testId": "PT-MIG-FCOPY002",
+      "method": "emptyAndCountAndFieldShapeBoundariesAreExplicit",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/023_ScenarioFile十一列COPYbatch・独立十四仕様.md",
+        "sha256": "cd643e708501f44c5345ffea890d5ced05eaae8aa61c22cb9f2632b31c6d337f"
+      },
+      "originalXML": "PASS"
+    },
+    {
+      "testId": "PT-MIG-FCOPY003",
+      "method": "duplicateTargetIsRejectedEvenWhenOtherFieldsDiffer",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/023_ScenarioFile十一列COPYbatch・独立十四仕様.md",
+        "sha256": "cd643e708501f44c5345ffea890d5ced05eaae8aa61c22cb9f2632b31c6d337f"
+      },
+      "originalXML": "PASS"
+    },
+    {
+      "testId": "PT-MIG-FCOPY004",
+      "method": "unknownTargetAndEachDeclaredMappingColumnMustMatchExactly",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/023_ScenarioFile十一列COPYbatch・独立十四仕様.md",
+        "sha256": "cd643e708501f44c5345ffea890d5ced05eaae8aa61c22cb9f2632b31c6d337f"
+      },
+      "originalXML": "PASS"
+    },
+    {
+      "testId": "PT-MIG-FCOPY005",
+      "method": "storageUniquenessIsPerGameAndNeverChangesDeclaredNames",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/023_ScenarioFile十一列COPYbatch・独立十四仕様.md",
+        "sha256": "cd643e708501f44c5345ffea890d5ced05eaae8aa61c22cb9f2632b31c6d337f"
+      },
+      "originalXML": "PASS"
+    },
+    {
+      "testId": "PT-MIG-FCOPY006",
+      "method": "storageRejectsAbsoluteBackslashEmptyAndDotSegments",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/023_ScenarioFile十一列COPYbatch・独立十四仕様.md",
+        "sha256": "cd643e708501f44c5345ffea890d5ced05eaae8aa61c22cb9f2632b31c6d337f"
+      },
+      "originalXML": "PASS"
+    },
+    {
+      "testId": "PT-MIG-FCOPY007",
+      "method": "everyTextColumnRejectsNonNfcMalformedSurrogateAndControl",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/023_ScenarioFile十一列COPYbatch・独立十四仕様.md",
+        "sha256": "cd643e708501f44c5345ffea890d5ced05eaae8aa61c22cb9f2632b31c6d337f"
+      },
+      "originalXML": "PASS"
+    },
+    {
+      "testId": "PT-MIG-FCOPY008",
+      "method": "byteCeilingsAndSectionUnicodeCodepointsUseDdlUnits",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/023_ScenarioFile十一列COPYbatch・独立十四仕様.md",
+        "sha256": "cd643e708501f44c5345ffea890d5ced05eaae8aa61c22cb9f2632b31c6d337f"
+      },
+      "originalXML": "PASS"
+    },
+    {
+      "testId": "PT-MIG-FCOPY009",
+      "method": "shaRequiresExactlyLowercaseSixtyFourHexCharacters",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/023_ScenarioFile十一列COPYbatch・独立十四仕様.md",
+        "sha256": "cd643e708501f44c5345ffea890d5ced05eaae8aa61c22cb9f2632b31c6d337f"
+      },
+      "originalXML": "PASS"
+    },
+    {
+      "testId": "PT-MIG-FCOPY010",
+      "method": "byteSizeRejectsSignsLeadingZeroAndOverflowWhileZeroAndMaximumRemainExact",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/023_ScenarioFile十一列COPYbatch・独立十四仕様.md",
+        "sha256": "cd643e708501f44c5345ffea890d5ced05eaae8aa61c22cb9f2632b31c6d337f"
+      },
+      "originalXML": "PASS"
+    },
+    {
+      "testId": "PT-MIG-FCOPY011",
+      "method": "timestampRequiresSharedCanonicalUtcMicrosecondsWithinDeclaredYears",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/023_ScenarioFile十一列COPYbatch・独立十四仕様.md",
+        "sha256": "cd643e708501f44c5345ffea890d5ced05eaae8aa61c22cb9f2632b31c6d337f"
+      },
+      "originalXML": "PASS"
+    },
+    {
+      "testId": "PT-MIG-FCOPY012",
+      "method": "nullBoundariesAndRedactionUseOneFixedNonSecretDiagnostic",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/023_ScenarioFile十一列COPYbatch・独立十四仕様.md",
+        "sha256": "cd643e708501f44c5345ffea890d5ced05eaae8aa61c22cb9f2632b31c6d337f"
+      },
+      "originalXML": "PASS"
+    },
+    {
+      "testId": "PT-MIG-FCOPY013",
+      "method": "snapshotsAreDeepAndReturnedRowsColumnsAndBytesCannotMutateState",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/023_ScenarioFile十一列COPYbatch・独立十四仕様.md",
+        "sha256": "cd643e708501f44c5345ffea890d5ced05eaae8aa61c22cb9f2632b31c6d337f"
+      },
+      "originalXML": "PASS"
+    },
+    {
+      "testId": "PT-MIG-FCOPY014",
+      "method": "ownedFiniteConcurrentCopiesAllMatchIndependentGolden",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/023_ScenarioFile十一列COPYbatch・独立十四仕様.md",
+        "sha256": "cd643e708501f44c5345ffea890d5ced05eaae8aa61c22cb9f2632b31c6d337f"
+      },
+      "originalXML": "PASS"
+    },
+    {
+      "testId": "PT-MIG-SPEAKERBATCH001",
+      "method": "speakerBatch001TwoLiteralRowsKeepDeclaredOrderAndBorrowedSink",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/060_Speaker集合とEntry複合参照・独立十六仕様.md",
+        "sha256": "ec82cfe1f4091853c637fb73a4b1013cca01e62895df7eb803382193eb869a18"
+      },
+      "originalXML": "PASS"
+    },
+    {
+      "testId": "PT-MIG-SPEAKERBATCH002",
+      "method": "speakerBatch002EmptyBatchAndEmptyReferencesStayEmpty",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/060_Speaker集合とEntry複合参照・独立十六仕様.md",
+        "sha256": "ec82cfe1f4091853c637fb73a4b1013cca01e62895df7eb803382193eb869a18"
+      },
+      "originalXML": "PASS"
+    },
+    {
+      "testId": "PT-MIG-SPEAKERBATCH003",
+      "method": "speakerBatch003NullOuterAndElementsHaveFixedDiagnostic",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/060_Speaker集合とEntry複合参照・独立十六仕様.md",
+        "sha256": "ec82cfe1f4091853c637fb73a4b1013cca01e62895df7eb803382193eb869a18"
+      },
+      "originalXML": "PASS"
+    },
+    {
+      "testId": "PT-MIG-SPEAKERBATCH004",
+      "method": "speakerBatch004PrimaryIdsAreUniqueAcrossBothGames",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/060_Speaker集合とEntry複合参照・独立十六仕様.md",
+        "sha256": "ec82cfe1f4091853c637fb73a4b1013cca01e62895df7eb803382193eb869a18"
+      },
+      "originalXML": "PASS"
+    },
+    {
+      "testId": "PT-MIG-SPEAKERBATCH005",
+      "method": "speakerBatch005GameNormalizedKeyUsesExactTupleValues",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/060_Speaker集合とEntry複合参照・独立十六仕様.md",
+        "sha256": "ec82cfe1f4091853c637fb73a4b1013cca01e62895df7eb803382193eb869a18"
+      },
+      "originalXML": "PASS"
+    },
+    {
+      "testId": "PT-MIG-SPEAKERBATCH006",
+      "method": "speakerBatch006MixedTimestampCannotPassAsOneTransaction",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/060_Speaker集合とEntry複合参照・独立十六仕様.md",
+        "sha256": "ec82cfe1f4091853c637fb73a4b1013cca01e62895df7eb803382193eb869a18"
+      },
+      "originalXML": "PASS"
+    },
+    {
+      "testId": "PT-MIG-SPEAKERBATCH007",
+      "method": "speakerBatch007CallerListAndOutputBuffersHaveSeparateOwnership",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/060_Speaker集合とEntry複合参照・独立十六仕様.md",
+        "sha256": "ec82cfe1f4091853c637fb73a4b1013cca01e62895df7eb803382193eb869a18"
+      },
+      "originalXML": "PASS"
+    },
+    {
+      "testId": "PT-MIG-SPEAKERBATCH008",
+      "method": "speakerBatch008EveryNullableWriteBoundaryFailsBeforeBytes",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/060_Speaker集合とEntry複合参照・独立十六仕様.md",
+        "sha256": "ec82cfe1f4091853c637fb73a4b1013cca01e62895df7eb803382193eb869a18"
+      },
+      "originalXML": "PASS"
+    },
+    {
+      "testId": "PT-MIG-SPEAKERBATCH009",
+      "method": "speakerBatch009PartialIoHasOneFailureAndNoAutomaticReplay",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/060_Speaker集合とEntry複合参照・独立十六仕様.md",
+        "sha256": "ec82cfe1f4091853c637fb73a4b1013cca01e62895df7eb803382193eb869a18"
+      },
+      "originalXML": "PASS"
+    },
+    {
+      "testId": "PT-MIG-SPEAKERBATCH010",
+      "method": "speakerBatch010RuntimeAndErrorPropagateIdenticalInstances",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/060_Speaker集合とEntry複合参照・独立十六仕様.md",
+        "sha256": "ec82cfe1f4091853c637fb73a4b1013cca01e62895df7eb803382193eb869a18"
+      },
+      "originalXML": "PASS"
+    },
+    {
+      "testId": "PT-MIG-SPEAKERBATCH011",
+      "method": "speakerBatch011MissingReferencesAndNarrationWithoutSpeakers",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/060_Speaker集合とEntry複合参照・独立十六仕様.md",
+        "sha256": "ec82cfe1f4091853c637fb73a4b1013cca01e62895df7eb803382193eb869a18"
+      },
+      "originalXML": "PASS"
+    },
+    {
+      "testId": "PT-MIG-SPEAKERBATCH012",
+      "method": "speakerBatch012KnownDialogueSpeakersMustBelongToSameGame",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/060_Speaker集合とEntry複合参照・独立十六仕様.md",
+        "sha256": "ec82cfe1f4091853c637fb73a4b1013cca01e62895df7eb803382193eb869a18"
+      },
+      "originalXML": "PASS"
+    },
+    {
+      "testId": "PT-MIG-SPEAKERBATCH013",
+      "method": "speakerBatch013UnknownAndCrossGameSpeakersAreRejected",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/060_Speaker集合とEntry複合参照・独立十六仕様.md",
+        "sha256": "ec82cfe1f4091853c637fb73a4b1013cca01e62895df7eb803382193eb869a18"
+      },
+      "originalXML": "PASS"
+    },
+    {
+      "testId": "PT-MIG-SPEAKERBATCH014",
+      "method": "speakerBatch014EvenNarrationSharesOneTimestampAcrossSets",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/060_Speaker集合とEntry複合参照・独立十六仕様.md",
+        "sha256": "ec82cfe1f4091853c637fb73a4b1013cca01e62895df7eb803382193eb869a18"
+      },
+      "originalXML": "PASS"
+    },
+    {
+      "testId": "PT-MIG-SPEAKERBATCH015",
+      "method": "speakerBatch015FixedRedactionAndIndependentSuccessAfterRejection",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/060_Speaker集合とEntry複合参照・独立十六仕様.md",
+        "sha256": "ec82cfe1f4091853c637fb73a4b1013cca01e62895df7eb803382193eb869a18"
+      },
+      "originalXML": "PASS"
+    },
+    {
+      "testId": "PT-MIG-SPEAKERBATCH016",
+      "method": "speakerBatch016FiniteSharedReadersKeepIndependentCopies",
+      "expectedBasis": {
+        "path": "evidence/01_PT/019_NK-MIG-001/060_Speaker集合とEntry複合参照・独立十六仕様.md",
+        "sha256": "ec82cfe1f4091853c637fb73a4b1013cca01e62895df7eb803382193eb869a18"
+      },
+      "originalXML": "PASS"
+    }
+  ],
+  "independentResults": {
+    "fileDeclaredOrderAndElevenColumns": true,
+    "speakerSevenColumnsAndFixedForeignKey": true,
+    "onlyExpectedLiteralAndBorrowedData": true
+  },
+  "newlyExecuted": 0,
+  "formalAcceptanceId": null,
+  "sdkUsed": false,
+  "full451": false
+}
