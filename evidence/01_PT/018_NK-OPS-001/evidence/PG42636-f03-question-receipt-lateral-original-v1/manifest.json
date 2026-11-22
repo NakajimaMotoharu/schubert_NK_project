@@ -1,0 +1,103 @@
+{
+  "run": "PG42636",
+  "source": "206a87eeafeb0ac474893bfcb800f6fcdee72a6d",
+  "javaCore": "f8532c27c2666570fe450f285c5a5436aacd8e7e",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-22T12:30:35.844667+00:00",
+  "actualExit": 0,
+  "localOriginal": {
+    "path": "../pgpt-runs/PG379/PG42636-question-receipt-lateral-static-original-v1/run.json",
+    "sha256": "4b8945e3c4400169a3a5b72d0ce02247be7f9b7b64db500b005af513fdbdce28"
+  },
+  "rawSpotBugs": [
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.api.application.question.QuestionReceiptRecoveryTest",
+      "method": "fromAnotherThread",
+      "line": "103"
+    },
+    {
+      "type": "NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE",
+      "cls": "dev.codex.schubert.nk.api.application.question.QuestionSubmitRequestPortTest",
+      "method": "sourceAndReturnedBuffersHaveSeparateOwners",
+      "line": "180"
+    },
+    {
+      "type": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+      "cls": "dev.codex.schubert.nk.api.application.question.QuestionSubmitRequestPortTest",
+      "method": "parallelCopiesAndControlledCloseKeepIndependentOwnership",
+      "line": "240"
+    }
+  ],
+  "rawPmd": [
+    {
+      "source": "QuestionReceiptRecoveryTest.java",
+      "rule": "CloseResource",
+      "line": 103
+    },
+    {
+      "source": "QuestionReceiptRecoveryTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 103
+    },
+    {
+      "source": "QuestionReceiptRecoveryTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 105
+    },
+    {
+      "source": "QuestionReceiptRecoveryTest.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "line": 106
+    },
+    {
+      "source": "QuestionReceiptRecoveryTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 107
+    },
+    {
+      "source": "QuestionReceiptRecoveryTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 108
+    },
+    {
+      "source": "QuestionSubmitRequestPortTest.java",
+      "rule": "CloseResource",
+      "line": 241
+    },
+    {
+      "source": "QuestionSubmitRequestPortTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 241
+    },
+    {
+      "source": "QuestionSubmitRequestPortTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 244
+    },
+    {
+      "source": "QuestionSubmitRequestPortTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 253
+    },
+    {
+      "source": "QuestionSubmitRequestPortTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 263
+    },
+    {
+      "source": "QuestionSubmitRequestPortTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 275
+    },
+    {
+      "source": "QuestionSubmitRequestPortTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 277
+    }
+  ],
+  "checkstyle": 0,
+  "originalOnly": true,
+  "ordinary": 0,
+  "formalAcceptanceId": null
+}
