@@ -1,0 +1,838 @@
+{
+  "run": "PG42874",
+  "previousCaseRosterProof": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG42872-canonical-chr-roster-current-v2/manifest.json",
+    "sha256": "8bf42ae28cafaf374505297d4abd0ba17e5e3650ef7c75523a71f45fab0178e9"
+  },
+  "source": "51cd4873ac9f70e83be87adfb574097a1a29a130",
+  "core": "e8368d22c4da2ec841f008df793594d3be9066af",
+  "wbs": "WBS-P020-01.02/2",
+  "actualExit": 0,
+  "startedAtUTC": "2026-11-22T17:34:29.426370+00:00",
+  "terminalAtUTC": "2026-11-22T17:34:43.115646+00:00",
+  "originalProof": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG41344-p020-current-218-local-v1/manifest.json",
+    "sha256": "5f9119617ebed6632218f46bd81c2b858f6c8fa3064a827edd1fb9b470d9148c"
+  },
+  "baselineTree": "cd377044e4ca058ea219ca6a2fec82159559c72c",
+  "originalCases": 221,
+  "newCases": [
+    [
+      "dev.codex.schubert.characterization.ArtifactComparatorTest",
+      "rejectsAnUnapprovedDifferenceAtTheSameAllowlistSize"
+    ],
+    [
+      "dev.codex.schubert.characterization.GateDefinitionDocumentsTest",
+      "contractRejectsADuplicateDifferenceIdAtTheSameSize"
+    ],
+    [
+      "dev.codex.schubert.characterization.GateDefinitionDocumentsTest",
+      "contractRejectsAnUnapprovedDifferenceIdAtTheSameSize"
+    ]
+  ],
+  "ordinaryCases": 224,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "scopeDeclaredNotRun": 0,
+  "heldRealFileStore": 1,
+  "changedInputs": {
+    "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java": "8012d018125889b5108c1b1226dcd483360f38167bf1d3a9c12b55e31b138748",
+    "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java": "d05a0ae5a779a6eec771008c32633c1f9d42d846d2abe821778ad899e4528464",
+    "program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorTest.java": "e70f9f31bd56649d2bf9eaf15995f8c87b98b684dfae67a331fd7cf82a0693d9",
+    "program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionDocumentsTest.java": "f90c768e41d0a176e1adbbdda374a5a0856ecd05e916e81ea7ffe8d52c7c48fe"
+  },
+  "singleExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/unit.exec",
+    "sha256": "ef296d9dbed58f0edf87787ac5469420816fb9ac7166c138830ea78b3a5ab4f1"
+  },
+  "xml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/reports/TEST-junit-jupiter.xml",
+    "sha256": "e423e7b51c7d89be84021e5af187d10531e13249299213e6d68d656cdb7e3aea"
+  },
+  "coverageXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/coverage.xml",
+    "sha256": "b7c4b30ada874bfd71ee156bef2aa2323b89639a07b0f44ce9b4fb0749612a48"
+  },
+  "coverageByClass": {
+    "dev/codex/schubert/characterization/ArtifactComparator": {
+      "INSTRUCTION": {
+        "covered": 1818,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 180,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 363,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 126,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 36,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/characterization/GateContractValidator$ValidationResult": {
+      "INSTRUCTION": {
+        "covered": 13,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 2,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 2,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 2,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/characterization/GateCli$TreeStats": {
+      "INSTRUCTION": {
+        "covered": 12,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 1,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 1,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/characterization/CharacterizationIoScope$Open": {},
+    "dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator": {
+      "INSTRUCTION": {
+        "covered": 1203,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 246,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 219,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 149,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 26,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/characterization/GateCli$UsableSpace": {},
+    "dev/codex/schubert/characterization/GateCli$FileJsonOutput": {
+      "INSTRUCTION": {
+        "covered": 31,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 8,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 4,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 4,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/characterization/CharacterizationIoScope$Work": {},
+    "dev/codex/schubert/characterization/GateCli": {
+      "INSTRUCTION": {
+        "covered": 2268,
+        "missed": 12
+      },
+      "BRANCH": {
+        "covered": 210,
+        "missed": 1
+      },
+      "LINE": {
+        "covered": 447,
+        "missed": 2
+      },
+      "COMPLEXITY": {
+        "covered": 177,
+        "missed": 2
+      },
+      "METHOD": {
+        "covered": 70,
+        "missed": 1
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/characterization/CharacterizationIoScope": {
+      "INSTRUCTION": {
+        "covered": 50,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 2,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 16,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 3,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 2,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/characterization/ArtifactComparator$ComparisonResult": {
+      "INSTRUCTION": {
+        "covered": 47,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 7,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 2,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 2,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/characterization/TargetAdapter$Target": {
+      "INSTRUCTION": {
+        "covered": 61,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 7,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 14,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 9,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 5,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/characterization/GateCli$JsonOutput": {},
+    "dev/codex/schubert/characterization/GateContractValidator": {
+      "INSTRUCTION": {
+        "covered": 2845,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 261,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 510,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 194,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 60,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/characterization/GateCli$BaselineNumbers": {
+      "INSTRUCTION": {
+        "covered": 28,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 6,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 4,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 4,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/characterization/TargetAdapter": {
+      "INSTRUCTION": {
+        "covered": 357,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 74,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 70,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 47,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 10,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/characterization/CharacterizationIoScope$Release": {}
+  },
+  "package": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/snapshot/program/characterization/target/schubert-characterization-0.1.0-SNAPSHOT.jar",
+    "sha256": "1c0f768735d48ba208e57eb072e4b77adc2a69fb07f8e6dd6e6db3cf04abb8f6"
+  },
+  "classPhysical": {
+    "dev/codex/schubert/characterization/ArtifactComparator$ComparisonResult.class": "e999430f9a3be0719fa407028fd7a70d4181f285d92f59c85f8d0df70acb2ca4",
+    "dev/codex/schubert/characterization/ArtifactComparator.class": "8f8f33cd6ca5021dd8f234aca896e68e7dbd454ddaea0641c407466995af1197",
+    "dev/codex/schubert/characterization/CharacterizationIoScope$Open.class": "f2393025ee9c5ef01c62d4b231e864409394562fbd2b4202906202d49ef9e27e",
+    "dev/codex/schubert/characterization/CharacterizationIoScope$Release.class": "95ecedd79ce4de9045b81712251dfa379ee68c991e6947d70112f7a429c546cc",
+    "dev/codex/schubert/characterization/CharacterizationIoScope$Work.class": "fb34fa7cd207d0b356cf01e34ef6d886caec2cfdc062f3df6c7c720a21e3795a",
+    "dev/codex/schubert/characterization/CharacterizationIoScope.class": "f76c2ce062349d736a5ba3bbc6174e64bc413826c1d28e6ab8efc9bbfba4d3ad",
+    "dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.class": "91fbc7022ef4b213c12b7c259c1aac9013afe76da4d5026667d3fc3b44b3a6df",
+    "dev/codex/schubert/characterization/GateCli$BaselineNumbers.class": "f42911db04f894f5fe3fa64377c3514878ff16f75aab081b4554ba1fb2386812",
+    "dev/codex/schubert/characterization/GateCli$FileJsonOutput.class": "667e70369ec0aa172646f8ed8265833a5994ec1fc218c084f0287b401f849c74",
+    "dev/codex/schubert/characterization/GateCli$JsonOutput.class": "8d7047d7bf57b8d93b832edfdfbcaa023022e1c03b8e9221a955277c49427c1f",
+    "dev/codex/schubert/characterization/GateCli$TreeStats.class": "b6ce1e4494583aa2dd04f5938dca4e8489d330208bd214cb36ee0bf45c2c65d1",
+    "dev/codex/schubert/characterization/GateCli$UsableSpace.class": "d5ba88d5f1f47cd3e9f233632fd1687cc7be6a64c8090a768b73741b4948a42c",
+    "dev/codex/schubert/characterization/GateCli.class": "fb055d3db3e72e307b6624f31e204c517e11c80c4c1a625537d9519f72b91ff3",
+    "dev/codex/schubert/characterization/GateContractValidator$ValidationResult.class": "c932bca75b4c928b8def2c10eef0b4bc5d8e8080bc4410bcfbbf59e90bee5e29",
+    "dev/codex/schubert/characterization/GateContractValidator.class": "d42aa05386cb75ca44f36dbc5b48e03c163443663d564c22157dd13f47974746",
+    "dev/codex/schubert/characterization/TargetAdapter$Target.class": "bbdfbbdc098fffcb83102bef3eb8e1d84af8860217330d104cc11114fbc00c53",
+    "dev/codex/schubert/characterization/TargetAdapter.class": "a31b5fb44c9933b6660936e6cbffb59ff9b0021636b7aae42393b3c957e3852b"
+  },
+  "changeType": "Characterization tool, not product Core",
+  "steps": {
+    "package": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-N",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-f",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/snapshot/program/characterization/pom.xml",
+        "-Dmaven.test.skip=true",
+        "package"
+      ],
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/package.stdout",
+        "sha256": "48e364c64946a126f70a21e1e5762379b295ceef1dec3d371f08741e09d91fa4"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/package.stderr",
+        "sha256": "05ed4976f99856c1417eead6c52058f5565d748a00ae7939fa02188545fafda4"
+      },
+      "startedAtUTC": "2026-11-22T17:34:29.472676+00:00",
+      "terminalAtUTC": "2026-11-22T17:34:35.334638+00:00"
+    },
+    "compile-tests": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/snapshot/program/characterization/target/classes:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/microsoft/playwright/playwright/1.55.0/playwright-1.55.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.19.2/jackson-annotations-2.19.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-core/2.19.2/jackson-core-2.19.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-databind/2.19.2/jackson-databind-2.19.2.jar",
+        "-sourcepath",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/snapshot/program/characterization/tests/java",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/tests",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateCliTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateContractTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateContractValidatorNegativeTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/TargetAdapterTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorEmptyInputTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/BaselineNumericMetadataTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/CharacterizationHashTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidatorTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/CorrelatedLogHttpNumberTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/CorrelatedMenuActionContractTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateBaselineMetadataTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionDocumentsTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionNumericTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateEvidenceDocumentsTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateMetricsCountTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateSyntheticRunPortTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/CommonValueContractTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/CharacterizationIoScopeTest.java",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/snapshot/program/characterization/tests/java/dev/codex/schubert/characterization/GateOutputFailureContractTest.java"
+      ],
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/compile-tests.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/compile-tests.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "startedAtUTC": "2026-11-22T17:34:35.334684+00:00",
+      "terminalAtUTC": "2026-11-22T17:34:37.997365+00:00"
+    },
+    "junit": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Xmx1g",
+        "-Djava.awt.headless=true",
+        "-Duser.language=ja",
+        "-Duser.country=JP",
+        "-Duser.timezone=Asia/Tokyo",
+        "-Dchr.unitProjectRoot=/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/snapshot",
+        "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/tmp",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/unit.exec,sessionid=PG42874-approved-dif-roster-current-v1",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-ansi-colors",
+        "--fail-if-no-tests",
+        "--class-path",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/snapshot/program/characterization/target/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/tests:/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/snapshot/program/characterization/tests/resources:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/microsoft/playwright/playwright/1.55.0/playwright-1.55.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.19.2/jackson-annotations-2.19.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-core/2.19.2/jackson-core-2.19.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-databind/2.19.2/jackson-databind-2.19.2.jar",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/reports",
+        "--config=junit.jupiter.execution.parallel.enabled=false",
+        "--select-class",
+        "dev.codex.schubert.characterization.ArtifactComparatorTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.GateCliTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.GateContractTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.GateContractValidatorNegativeTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.TargetAdapterTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.ArtifactComparatorEmptyInputTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.BaselineNumericMetadataTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.CharacterizationHashTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.CorrelatedLogEvidenceValidatorTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.CorrelatedLogHttpNumberTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.CorrelatedMenuActionContractTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.GateBaselineMetadataTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.GateDefinitionDocumentsTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.GateDefinitionNumericTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.GateEvidenceDocumentsTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.GateMetricsCountTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.GateSyntheticRunPortTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.CommonValueContractTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.CharacterizationIoScopeTest",
+        "--select-class",
+        "dev.codex.schubert.characterization.GateOutputFailureContractTest"
+      ],
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/junit.stdout",
+        "sha256": "b7c896bab4d1ede702709eab997c3324e70ccb04f1b2f235426f31cfbb2d9f88"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/junit.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "startedAtUTC": "2026-11-22T17:34:37.997422+00:00",
+      "terminalAtUTC": "2026-11-22T17:34:42.642795+00:00"
+    },
+    "coverage": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/unit.exec",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/snapshot/program/characterization/target/classes",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/coverage.xml"
+      ],
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/coverage.stdout",
+        "sha256": "bee5dbcc90bacbcd9803239154262f89b8dd3911ab2549df919ea0947d23508d"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/coverage.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "startedAtUTC": "2026-11-22T17:34:42.650254+00:00",
+      "terminalAtUTC": "2026-11-22T17:34:42.839931+00:00"
+    },
+    "classinfo": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "classinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/snapshot/program/characterization/target/classes"
+      ],
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/classinfo.stdout",
+        "sha256": "0d8672fa9c406ef522da02f1e936e40c3da8bf8acf5839f1cc71517ad734ad5f"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/classinfo.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "startedAtUTC": "2026-11-22T17:34:42.839952+00:00",
+      "terminalAtUTC": "2026-11-22T17:34:42.995016+00:00"
+    },
+    "execinfo": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "execinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/unit.exec"
+      ],
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/execinfo.stdout",
+        "sha256": "bfaea4dce9cbdeb1f3be62a953f5c49b7685373b553215213146f2fa6886e9bf"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/execinfo.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "startedAtUTC": "2026-11-22T17:34:42.995039+00:00",
+      "terminalAtUTC": "2026-11-22T17:34:43.112692+00:00"
+    }
+  },
+  "nkActual": 0,
+  "full451": false,
+  "formalAcceptanceId": null,
+  "rawTerminal": {
+    "path": "../pgpt-runs/PG379/PG42874-approved-dif-roster-current-v1/terminal.json",
+    "sha256": "d7de37856dfc735959cd1e7b9f14b6537539cf0c152d5743d2abb2a91ad8ab4c"
+  },
+  "redProbe": {
+    "path": "../pgpt-runs/PG379/PG42874-approved-dif-roster-before-v1/terminal.json",
+    "sha256": "683f35da96ab31ba5c81f88219eecf4550d80cf34eafd22d3b1f39e2eb96b567"
+  },
+  "publishedJUnit": {
+    "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG42874-approved-dif-roster-current-v1/junit/TEST-junit-jupiter.xml",
+    "sha256": "255f9532b37a327106d159076d8372042f46b92049eed94f87f7e62dbbde37f9",
+    "originalUnitXmlSha256": "e423e7b51c7d89be84021e5af187d10531e13249299213e6d68d656cdb7e3aea"
+  },
+  "publishedCoverage": [
+    {
+      "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG42874-approved-dif-roster-current-v1/coverage/classinfo.txt",
+      "sha256": "0d8672fa9c406ef522da02f1e936e40c3da8bf8acf5839f1cc71517ad734ad5f"
+    },
+    {
+      "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG42874-approved-dif-roster-current-v1/coverage/coverage.xml",
+      "sha256": "b7c4b30ada874bfd71ee156bef2aa2323b89639a07b0f44ce9b4fb0749612a48"
+    },
+    {
+      "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG42874-approved-dif-roster-current-v1/coverage/jacoco.exec",
+      "sha256": "ef296d9dbed58f0edf87787ac5469420816fb9ac7166c138830ea78b3a5ab4f1"
+    }
+  ],
+  "wholeLocalToolCounters": {
+    "INSTRUCTION": {
+      "covered": 8733,
+      "missed": 12
+    },
+    "BRANCH": {
+      "covered": 986,
+      "missed": 1
+    },
+    "LINE": {
+      "covered": 1661,
+      "missed": 2
+    },
+    "COMPLEXITY": {
+      "covered": 718,
+      "missed": 2
+    },
+    "METHOD": {
+      "covered": 219,
+      "missed": 1
+    },
+    "CLASS": {
+      "covered": 12,
+      "missed": 0
+    }
+  },
+  "exactCompiledCrc": {
+    "dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator": "15e3f958f82f71d4",
+    "dev/codex/schubert/characterization/GateCli": "26142a7a929f3dde",
+    "dev/codex/schubert/characterization/GateCli$BaselineNumbers": "b43bec90856a8dde",
+    "dev/codex/schubert/characterization/GateCli$UsableSpace": "a94a22d9b22f5e24",
+    "dev/codex/schubert/characterization/CharacterizationIoScope$Open": "41310f9c3951bfd0",
+    "dev/codex/schubert/characterization/GateCli$FileJsonOutput": "600ee4481afbd7c4",
+    "dev/codex/schubert/characterization/TargetAdapter$Target": "cbef2159e8b5849b",
+    "dev/codex/schubert/characterization/ArtifactComparator": "b764c4c60f1ede03",
+    "dev/codex/schubert/characterization/ArtifactComparator$ComparisonResult": "b93235c83e425f6e",
+    "dev/codex/schubert/characterization/CharacterizationIoScope$Work": "3ef7c949b1aac880",
+    "dev/codex/schubert/characterization/GateCli$JsonOutput": "79fb74ea40d84f9e",
+    "dev/codex/schubert/characterization/GateCli$TreeStats": "1f783f3a62e39a9d",
+    "dev/codex/schubert/characterization/GateContractValidator": "6cfa9c563bf371a9",
+    "dev/codex/schubert/characterization/CharacterizationIoScope": "238bdb3523c300a5",
+    "dev/codex/schubert/characterization/TargetAdapter": "91cec019ce2c2d5a",
+    "dev/codex/schubert/characterization/GateContractValidator$ValidationResult": "6fae7fd1e0608dba",
+    "dev/codex/schubert/characterization/CharacterizationIoScope$Release": "f42617867a72d493"
+  },
+  "observedProbes": {
+    "dev/codex/schubert/characterization/GateCli$BaselineNumbers": {
+      "CRC": "b43bec90856a8dde",
+      "hit": 11,
+      "total": 11
+    },
+    "dev/codex/schubert/characterization/GateCli$TreeStats": {
+      "CRC": "1f783f3a62e39a9d",
+      "hit": 7,
+      "total": 7
+    },
+    "dev/codex/schubert/characterization/GateCli$FileJsonOutput": {
+      "CRC": "600ee4481afbd7c4",
+      "hit": 5,
+      "total": 5
+    },
+    "dev/codex/schubert/characterization/TargetAdapter": {
+      "CRC": "91cec019ce2c2d5a",
+      "hit": 101,
+      "total": 101
+    },
+    "dev/codex/schubert/characterization/ArtifactComparator": {
+      "CRC": "b764c4c60f1ede03",
+      "hit": 444,
+      "total": 444
+    },
+    "dev/codex/schubert/characterization/GateContractValidator": {
+      "CRC": "6cfa9c563bf371a9",
+      "hit": 669,
+      "total": 669
+    },
+    "dev/codex/schubert/characterization/GateCli": {
+      "CRC": "26142a7a929f3dde",
+      "hit": 552,
+      "total": 554
+    },
+    "dev/codex/schubert/characterization/CharacterizationIoScope": {
+      "CRC": "238bdb3523c300a5",
+      "hit": 13,
+      "total": 13
+    },
+    "dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator": {
+      "CRC": "15e3f958f82f71d4",
+      "hit": 336,
+      "total": 336
+    },
+    "dev/codex/schubert/characterization/GateContractValidator$ValidationResult": {
+      "CRC": "6fae7fd1e0608dba",
+      "hit": 7,
+      "total": 7
+    },
+    "dev/codex/schubert/characterization/ArtifactComparator$ComparisonResult": {
+      "CRC": "b93235c83e425f6e",
+      "hit": 18,
+      "total": 18
+    },
+    "dev/codex/schubert/characterization/TargetAdapter$Target": {
+      "CRC": "cbef2159e8b5849b",
+      "hit": 21,
+      "total": 21
+    }
+  },
+  "fourRelevantClassCounters": {
+    "dev/codex/schubert/characterization/ArtifactComparator": {
+      "INSTRUCTION": {
+        "covered": 1818,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 180,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 363,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 126,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 36,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/characterization/GateContractValidator$ValidationResult": {
+      "INSTRUCTION": {
+        "covered": 13,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 2,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 2,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 2,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/characterization/ArtifactComparator$ComparisonResult": {
+      "INSTRUCTION": {
+        "covered": 47,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 7,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 2,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 2,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/characterization/GateContractValidator": {
+      "INSTRUCTION": {
+        "covered": 2845,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 261,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 510,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 194,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 60,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    }
+  },
+  "testIds": [
+    "PT-CHR-DEF086",
+    "PT-CHR-DEF087",
+    "PT-CHR-DEF088"
+  ],
+  "bugClosed": "BUG-3640",
+  "ykt": "YKT-2859"
+}
