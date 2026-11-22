@@ -20,6 +20,7 @@ import dev.codex.schubert.nk.protocol.layout.semantic.ScriptFileId;
 import dev.codex.schubert.nk.protocol.layout.semantic.Sha256Hex;
 import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
 import dev.codex.schubert.nk.web.session.SessionPrincipal;
+import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -30,9 +31,11 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jsoup.Jsoup;
 import org.junit.jupiter.api.Test;
 import org.thymeleaf.context.Context;
@@ -330,7 +333,7 @@ class ScenarioDetailViewModelTest {
   }
 
   @Test
-  void web202ClosedBeanContract() throws Exception {
+  void web202ClosedBeanContract() throws IntrospectionException {
     Map<Class<?>, Set<String>> expected =
         Map.of(
             ScenarioDetailViewModel.class,
@@ -372,7 +375,10 @@ class ScenarioDetailViewModelTest {
     context.setVariable("page", page(records()));
     var html =
         engine.process(
-            "<h1 th:text='${page.title}'></h1><article th:each='entry : ${page.entries}' th:id='${entry.anchor}'><span th:text='${entry.speaker}'></span><p th:text='${entry.body}'></p><a th:each='audio : ${entry.audio}' th:href='${audio.href}' th:text='${audio.displayPath}'></a></article>",
+            "<h1 th:text='${page.title}'></h1><article th:each='entry : ${page.entries}'"
+                + " th:id='${entry.anchor}'><span th:text='${entry.speaker}'></span><p"
+                + " th:text='${entry.body}'></p><a th:each='audio : ${entry.audio}'"
+                + " th:href='${audio.href}' th:text='${audio.displayPath}'></a></article>",
             context);
     var dom = Jsoup.parse(html);
     assertEquals("章<script>", dom.selectFirst("h1").text());
@@ -384,7 +390,8 @@ class ScenarioDetailViewModelTest {
   }
 
   @Test
-  void web204ConcurrentProjection() throws Exception {
+  void web204ConcurrentProjection()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var pool = Executors.newFixedThreadPool(8);
     try {
       var tasks = new ArrayList<Future<ScenarioDetailViewModel>>();
