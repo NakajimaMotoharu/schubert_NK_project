@@ -22,14 +22,17 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HexFormat;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -38,7 +41,8 @@ class ScenarioRecordStreamTest {
   @TempDir Path root;
 
   @Test
-  void w04One201And10000RecordsMatchEveryGoldenByteAndIndependentDigest() throws Exception {
+  void w04One201And10000RecordsMatchEveryGoldenByteAndIndependentDigest()
+      throws IOException, NoSuchAlgorithmException {
     for (int count : new int[] {1, 201, 10000}) {
       List<ScenarioEntryRecord> source = records(count);
       var prepared = new ScenarioRecordStream(source);
@@ -59,7 +63,8 @@ class ScenarioRecordStreamTest {
   }
 
   @Test
-  void w04ImmutablePreparedRecordsSupportConcurrentIndependentChannels() throws Exception {
+  void w04ImmutablePreparedRecordsSupportConcurrentIndependentChannels()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var prepared = new ScenarioRecordStream(records(3));
     var pool = Executors.newFixedThreadPool(8);
     try {
@@ -89,7 +94,7 @@ class ScenarioRecordStreamTest {
   }
 
   @Test
-  void w05PreflightRejectsNullCountSequenceAndInvalidLastRecordBeforeAnyIo() throws Exception {
+  void w05PreflightRejectsNullCountSequenceAndInvalidLastRecordBeforeAnyIo() throws IOException {
     assertThrows(NullPointerException.class, () -> new ScenarioRecordStream(null));
     assertThrows(
         NullPointerException.class,
@@ -114,7 +119,8 @@ class ScenarioRecordStreamTest {
   }
 
   @Test
-  void w05PartialWritesRemainBoundedAndForceOnlyAfterAll4800Bytes() throws Exception {
+  void w05PartialWritesRemainBoundedAndForceOnlyAfterAll4800Bytes()
+      throws IOException, NoSuchAlgorithmException {
     var prepared = new ScenarioRecordStream(records(1));
     Path path = root.resolve("partial");
     try (var channel = new FaultChannel(path, 0)) {
@@ -129,7 +135,7 @@ class ScenarioRecordStreamTest {
 
   @Test
   void w05ZeroNegativeWriteIoForceClosedAndNonfreshChannelsFailWithoutImplicitClose()
-      throws Exception {
+      throws IOException {
     var prepared = new ScenarioRecordStream(records(1));
     for (int mode = 1; mode <= 4; mode++) {
       Path path = root.resolve("fault-" + mode);
@@ -183,7 +189,8 @@ class ScenarioRecordStreamTest {
         Optional.empty());
   }
 
-  private static String independentFileCheck(Path path, int count) throws Exception {
+  private static String independentFileCheck(Path path, int count)
+      throws IOException, NoSuchAlgorithmException {
     MessageDigest digest = MessageDigest.getInstance("SHA-256");
     try (var input = Files.newInputStream(path)) {
       for (int i = 0; i < count; i++) {

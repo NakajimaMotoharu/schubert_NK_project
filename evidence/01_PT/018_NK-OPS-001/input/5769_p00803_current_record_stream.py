@@ -1,5 +1,6 @@
 """Exercise only the current ScenarioRecordStream fixture in a new owned local run."""
 
+import argparse
 from datetime import datetime, timezone
 import hashlib
 import json
@@ -14,6 +15,7 @@ REPO = Path.cwd()
 LOCAL = (REPO.parent / "pgpt-runs/PG379").resolve()
 PUBLIC = REPO / "evidence/01_PT/018_NK-OPS-001/evidence"
 RUN = "PG43080-scenario-stream-finite-current-v1"
+FOLLOW_UP = "PG43082-scenario-stream-checked-fixture-v1"
 BASE = "dev/codex/schubert/nk/api/storage"
 PRODUCTION = "src/schubert-nk-api/src/main/java/"
 TESTS = "src/schubert-nk-api/src/test/java/"
@@ -114,7 +116,7 @@ def commands(folder, main, test, protocol, storage):
     def adapt(arg):
         return (arg.replace(str(former), str(folder)).replace(str(typed), str(folder))
                 .replace(str(folder / old_aux.name), os.pathsep.join(map(str, (protocol, storage))))
-                .replace("PG43062-current", "PG43080-current")
+                .replace("PG43062-current", folder.name + "-current")
                 .replace("TransferContentVerifier", "ScenarioRecordStream"))
     planned = {
         key: [adapt(arg) for arg in checked[key]]
@@ -126,8 +128,8 @@ def commands(folder, main, test, protocol, storage):
     return planned
 
 
-def main():
-    folder = LOCAL / RUN
+def main(run):
+    folder = LOCAL / run
     folder.mkdir(mode=0o700)
     for name in ("test", "xml", "owned-temp", "meter"):
         (folder / name).mkdir()
@@ -139,7 +141,7 @@ def main():
              "unfiltered", "pmd", "spotbugs")
     jdk = REPO.parent / "toolchain/jdk-25.0.4"
     write_json(folder / "begin.json", dict(
-        run=RUN, source=snapshot, productCore=CORE, startedAtUTC=unix_time(),
+        run=run, source=snapshot, productCore=CORE, startedAtUTC=unix_time(),
         inputs=[pin(REPO / name) for name in (main_source, package, test)],
         acceptedArtifacts=pin(source_receipt), protocol=pin(protocol), selectedStorage=pin(storage),
         storageParent=original_storage, storageNames=sorted(STORAGE_NAMES), commands=planned,
@@ -177,4 +179,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--checked-fixture", action="store_true")
+    options = parser.parse_args()
+    main(FOLLOW_UP if options.checked_fixture else RUN)
