@@ -1,0 +1,700 @@
+{
+  "run": "PG42998-c07-condition-window-absence-v2",
+  "source": "7698011f52d6cc5f94c76413b6ab36971783b9c9",
+  "previousProduct": "dbdd79f2fa415e91ff29bf9bafecd4984d11eb40",
+  "terminalAtUTC": "2026-11-22T20:32:06.267712+00:00",
+  "actualExit": 0,
+  "wbs": [
+    "WBS-C07",
+    "WBS-F03/2-2-b"
+  ],
+  "spec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/1561_ContinuousConditionWindow_単体テスト仕様書.md",
+    "sha256": "dbd817d61bf4ab922d16b3a4d231c0c241e2422b9ceabe117978d242fb941ed7"
+  },
+  "sourceDiff": [
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow.java"
+  ],
+  "groupTrace": {
+    "bug": "BUG-3650",
+    "ykt": "YKT-2868",
+    "decision": "PG-D-1197"
+  },
+  "regularJar": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42998-c07-condition-window-absence-v2/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "67984cee98423520add862115216219a86fb204d5a409bec829366ad79d4921b"
+  },
+  "regularPhysical": 660,
+  "samePublicAbi": true,
+  "physicalDiff": [
+    "dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow.class"
+  ],
+  "originalCohortReceipt": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42964-c07-snapshot-single-monitor-v1/manifest.json",
+    "sha256": "fe0942930c7a2ed746877552adfa1638b5786a7c7dab260e2add0f1bf6a9a340"
+  },
+  "originalWindowAndDependentCaseRoster": [
+    [
+      "ContinuousConditionWindowTest",
+      "monWindow001FirstContinuousAndSameTimestampBoundaries()"
+    ],
+    [
+      "ContinuousConditionWindowTest",
+      "monWindow002NormalBreaksViolationHistory()"
+    ],
+    [
+      "ContinuousConditionWindowTest",
+      "monWindow003UnknownIsAbsentAndBreaksHistory()"
+    ],
+    [
+      "ContinuousConditionWindowTest",
+      "monWindow004ExplicitGapNeverBridgesOldPeriod()"
+    ],
+    [
+      "ContinuousConditionWindowTest",
+      "monWindow005RejectedSequenceLeavesStateUnchanged()"
+    ],
+    [
+      "ContinuousConditionWindowTest",
+      "monWindow006WholeNonnegativeDurationDomain()"
+    ],
+    [
+      "ContinuousConditionWindowTest",
+      "monWindow007ConcurrentSamePointHasOneOrigin()"
+    ],
+    [
+      "ContinuousConditionWindowTest",
+      "monWindow008SeparateThresholdPeriodsConnectWithoutActualObservations()"
+    ],
+    [
+      "GeneratedBatchValueContractTest",
+      "genBatch006AllFiveEvaluationRecordsHaveEveryFieldInValueContracts()"
+    ],
+    [
+      "MonitoringPolicyEngineTest",
+      "asyncByte001EngineUsesStorageBytesIndependentOfMessageCount()"
+    ],
+    [
+      "MonitoringPolicyEngineTest",
+      "monPipe001ObservationContextInvariantsAndImmutableValues()"
+    ],
+    [
+      "MonitoringPolicyEngineTest",
+      "monPipe002EveryNormalAndWarningEndpointIdentity()"
+    ],
+    [
+      "MonitoringPolicyEngineTest",
+      "monPipe003EveryCriticalEndpointAndCauseAwareRecovery()"
+    ],
+    [
+      "MonitoringPolicyEngineTest",
+      "monPipe004RejectedInputsDoNotPartiallyUpdateState()"
+    ],
+    [
+      "MonitoringPolicyEngineTest",
+      "monPipe005ModeConsistencyDoesNotChangeAlerts()"
+    ],
+    [
+      "MonitoringPolicyEngineTest",
+      "monPipe006ConcurrentSingleEntryKeepsOneOwner()"
+    ],
+    [
+      "MonitoringPolicyEngineTest",
+      "monPipe007AllSeventyTwoFixedKeysAndImmutableProjection()"
+    ],
+    [
+      "MonitoringPolicyEngineTest",
+      "monPipe008MissingObservationResetsOnlyItsConditionAndService()"
+    ],
+    [
+      "MonitoringPolicyEngineTest",
+      "restartFlag001RateLimitIsIndependentOfCountAndInvalidCountCannotMutateState()"
+    ],
+    [
+      "TimedDbPoolMonitorTest",
+      "dbTime001EightyNeedsFiveMinutesAndWarningNeedsFiveNormalMinutes()"
+    ],
+    [
+      "TimedDbPoolMonitorTest",
+      "dbTime002PendingOrTimeoutIsImmediateAndNeedsCauseAndTenNormalMinutes()"
+    ],
+    [
+      "TimedDbPoolMonitorTest",
+      "dbTime003UnknownCutsViolationAndNormalRecoveryWithoutInventingZero()"
+    ],
+    [
+      "TimedDbPoolMonitorTest",
+      "dbTime004KnownCountsAreIndependentOfUnknownPercent()"
+    ],
+    [
+      "TimedDbPoolMonitorTest",
+      "dbTime005InvalidNullAndBackwardsInputsCannotMutateState()"
+    ],
+    [
+      "TimedDbPoolMonitorTest",
+      "dbTime006ExplicitGapRestartsWindowAndCriticalRemainsSticky()"
+    ],
+    [
+      "TimedDbPoolMonitorTest",
+      "dbTime007ConcurrentSameEpochKeepsImmutableExactEventCount()"
+    ],
+    [
+      "TimedDbPoolMonitorTest",
+      "dbTime008BoundariesMaximumCountsAndOwnersStayIndependent()"
+    ],
+    [
+      "TimedFilesystemMonitorTest",
+      "timedFs001WarningBoundaryAndFiveMinuteRecovery()"
+    ],
+    [
+      "TimedFilesystemMonitorTest",
+      "timedFs002CriticalBoundaryAndExplicitCause()"
+    ],
+    [
+      "TimedFilesystemMonitorTest",
+      "timedFs003MissingBreaksViolationWithoutClearingOpenEvent()"
+    ],
+    [
+      "TimedFilesystemMonitorTest",
+      "timedFs004MissingAndExplicitGapBreakNormalRecovery()"
+    ],
+    [
+      "TimedFilesystemMonitorTest",
+      "timedFs005InvalidInputsCannotChangeOwnerState()"
+    ],
+    [
+      "TimedFilesystemMonitorTest",
+      "timedFs006ConcurrentOwnerAndLocalStatusLiteral()"
+    ],
+    [
+      "TimedJvmHeapMonitorTest",
+      "heapTime001WarningNeedsTenMinutesAndFiveNormalMinutesToClose()"
+    ],
+    [
+      "TimedJvmHeapMonitorTest",
+      "heapTime002NinetyIsImmediateAndCriticalNeedsCauseAndTenMinutes()"
+    ],
+    [
+      "TimedJvmHeapMonitorTest",
+      "heapTime003UnknownBreaksBothViolationAndRecoveryWithoutInventingNormal()"
+    ],
+    [
+      "TimedJvmHeapMonitorTest",
+      "heapTime004ReportedOomIsIndependentOfMissingUsageAndNeverInventsZero()"
+    ],
+    [
+      "TimedJvmHeapMonitorTest",
+      "heapTime005NullInvalidAndBackwardsInputsNeverMutateState()"
+    ],
+    [
+      "TimedJvmHeapMonitorTest",
+      "heapTime006ExplicitGapRestartsViolationAndNormalRecovery()"
+    ],
+    [
+      "TimedJvmHeapMonitorTest",
+      "heapTime007ConcurrentSameEpochKeepsOneEventAndImmutableSnapshot()"
+    ],
+    [
+      "TimedJvmHeapMonitorTest",
+      "heapTime008CriticalIsStickyAcrossWarningAndReportedOomResetsRecovery()"
+    ],
+    [
+      "TimedMonitorSnapshotConcurrencyTest",
+      "snap001FilesystemPublishesWholeEvents()"
+    ],
+    [
+      "TimedMonitorSnapshotConcurrencyTest",
+      "snap002HeapPublishesWholeEvents()"
+    ],
+    [
+      "TimedMonitorSnapshotConcurrencyTest",
+      "snap003PoolPublishesWholeEvents()"
+    ],
+    [
+      "TimedMonitorSnapshotConcurrencyTest",
+      "snap004LatencyPublishesWholeEvents()"
+    ],
+    [
+      "TimedSyncLatencyMonitorTest",
+      "syncTime001StrictTwoSecondWarningNeedsFiveMinutes()"
+    ],
+    [
+      "TimedSyncLatencyMonitorTest",
+      "syncTime002StrictTwoPointFiveNeedsFiveMinutesBeforeCriticalPromotion()"
+    ],
+    [
+      "TimedSyncLatencyMonitorTest",
+      "syncTime003UnknownCutsBothViolationWindowsRatherThanBecomingZero()"
+    ],
+    [
+      "TimedSyncLatencyMonitorTest",
+      "syncTime004UnknownCutsCriticalRecoveryAndCauseMustBeConfirmed()"
+    ],
+    [
+      "TimedSyncLatencyMonitorTest",
+      "syncTime005NullInvalidAndBackwardsInputsCannotMutateExistingState()"
+    ],
+    [
+      "TimedSyncLatencyMonitorTest",
+      "syncTime006ExplicitGapRestartsViolationAndRecoveryWithStickyCritical()"
+    ],
+    [
+      "TimedSyncLatencyMonitorTest",
+      "syncTime007ConcurrentSameEpochMaintainsExactImmutableEventCounts()"
+    ],
+    [
+      "TimedSyncLatencyMonitorTest",
+      "syncTime008FiniteMaximumAndWarningRecoveryDoNotMixSeparateOwners()"
+    ]
+  ],
+  "independentExpectations": [
+    "zero/absent/fixed origin, normal and unknown do not bridge history, gap creates new origin",
+    "reverse, negative and null errors leave prior state intact",
+    "Duration maximum and 64 same-point tasks",
+    "four monitored thresholds and snapshot event fields are checked against fixed independent values"
+  ],
+  "originalJUnit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42998-c07-condition-window-absence-v2/reports/TEST-junit-jupiter.xml",
+    "sha256": "178c73a6f3a58cbc8638920a31acd3e3e2d0200bf431d6e7c8340956f6748747"
+  },
+  "originalExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42998-c07-condition-window-absence-v2/unit.exec",
+    "sha256": "bda59858f54195d6baf52d92336106e3845f380f4919f23a3dfb3d94909b0a9b"
+  },
+  "sourceArchive": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42998-c07-condition-window-absence-v2/source.tar",
+    "sha256": "4b91b4d14af474d8a4b3f8faad87061fc109914f2bbab5cebe83a6c7a1f221a2"
+  },
+  "testRun": "PG42998-c07-condition-window-absence-v2",
+  "ordinaryResults": {
+    "tests": 53,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "exactSelectedProductEntries": {
+    "dev/codex/schubert/nk/batch/monitoring/HealthUsageRatio.class": "15c78c469d3c863d097183bacbbffeb05b2ebcf9f3d7b6744cd12f9c87d78e12",
+    "dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor$Evaluation.class": "4520f34677461a9938ef53df0005cef519fcd935275bd3760972c9634e2bca12",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity.class": "4a90d8e671376316fe3af1709ae3ed7f91e4ab0cee8a8d8a2bcec405ade38ca6",
+    "dev/codex/schubert/nk/batch/monitoring/BatchMetricContract$Status.class": "04eea81c82f2f3ebe325fb98b562bd6b3f534d7c10ab757790836c802dfbeed9",
+    "dev/codex/schubert/nk/batch/monitoring/AlertThresholds.class": "920342ff7ee7befb1e892e83e41e0ee2c1b363d4e47d115f10dc5a48ca298a77",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event.class": "5d3a5f35f93162b0294e2dc423ec12f650d18fce7ea13d6dd1893445ddcfbcf7",
+    "dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorder$Counts.class": "423ee9fb32f0c0ef09ab95dd504694861c56ddd84cf71253cd6eaa31db1d0f2a",
+    "dev/codex/schubert/nk/batch/monitoring/package-info.class": "be87566494520630402b9cc7c20713ac5fccac9b97505cbe551abc6c24843077",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.class": "22207ad4d75fcb65bd63f4161cf65f2ab2c60d94ae66268fe9357364e8c47a91",
+    "dev/codex/schubert/nk/batch/monitoring/TransferHealthMonitor.class": "930fb2d0f0b625fed4bb48fc9aabeea2dfb1f6aaf70d302e4290f27a64a30bae",
+    "dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor$Evaluation.class": "0bd17c89de01ff0ec69a948aa9e8cc90f0e7682876bb718851451d5a057dc973",
+    "dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor$Evaluation.class": "4c680520112c542ebbcbc5c37c1abbd0a61ea9ddaf629713d2602b8d961523d3",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringStatusText.class": "86cc2c9090684658f6f066d89e9eda832a4c1bd41c154f54d2e5e59420948a48",
+    "dev/codex/schubert/nk/batch/monitoring/FilesystemHealthObservation.class": "ca314ebd93bda5f4b3db6b8d9652dec54b9976a75a0fcc9ed7fdef670a73d3c8",
+    "dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor$Evaluation.class": "1b38b075d743689baed82583394134b4734758880cbe2ce1c895272cf4e7cce2",
+    "dev/codex/schubert/nk/batch/monitoring/AlertRegistry.class": "c5afca254eee0e556e3e04ade3eb141e8a821864a693580df2b00bfaeea83674",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition.class": "49b34f2b7a8daa57055566a0b422f3a80370b51f2a50355690404f16c07e731b",
+    "dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorder$Suffix.class": "f0d311b18e46b9340b57c284991829715b2d5144fd4acaac02d863ce495ba355",
+    "dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor.class": "7e474de22e95e3a301771ec1c4c9cef6a7c423910fe5efe6e4952799ae233c29",
+    "dev/codex/schubert/nk/batch/monitoring/MetricContract$Kind.class": "3437405816efa5b8685e06f6af4f27f647085a92c16ef44d38bbca651761ffdc",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy.class": "fefef8ba8ca8aabf3767af91e4e9b44637be8c7469bd61afe430685abf5c3312",
+    "dev/codex/schubert/nk/batch/monitoring/ObservationContext.class": "b3ff5e32cbbc02848950edf814043343fb53c25eda1968aa1e8ae4dafed23644",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State.class": "1d140156f6787265537ad923d4c2bb2da3b43cb0373353ef1034cf8aaaafd246",
+    "dev/codex/schubert/nk/batch/monitoring/TransferHealthMonitor$Evaluation.class": "4f7ad9c97774b3667fe7e096108071de561c540c008b74f7e004ef879696fd22",
+    "dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow.class": "e514f0288d13ce61ba7dbc20b543e3a5135bedfcd61466c86d38ce457d835ed2",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service.class": "f363d58c5d7172041618f095846a5c28b8079e63c430c99b0067a2858f469bb5",
+    "dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorder.class": "31acf6df095f2e777e7b8cc5f27f0c096407b474eb14a7e41a25ad543f4936c2",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy$DetailService.class": "53bce391602d55efcd738c5ad704d71c5aba4ef5fbb73f034baecd529418c3c0",
+    "dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow$State.class": "414d1fcfc1ac0eacfb2f301b62a152e96411dc4971d86f38b113f414efb318c8",
+    "dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor.class": "d9d9886b991ddff12ecfab23913058b1890107cffd6ec49e8bed83a9ad8ab0b2",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy$RetentionConfiguration.class": "f52c50c1883813b4f160e56086484749d53c001776981eb10a2568198815f89c",
+    "dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.class": "49cb8a9e392e02e9467f25927d61c6f01fc97e4136178690dc4c167f91fb6e1d",
+    "dev/codex/schubert/nk/batch/monitoring/BatchMetricContract$Step.class": "577169daf95bbd68e6bd847af9ec446bae7fd4731557f1bd7b304ddb83bccf97",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance.class": "9b38a3b425429d131cdc8704285df173c55ad4c05e5c860dd4a815b60c5b23b9",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine.class": "a3b1fbb10a66f67330d01cdb9676ca98de849ee834a591e8c64e1ae62bf9f2b9",
+    "dev/codex/schubert/nk/batch/monitoring/MetricContract.class": "452824388b2830e531c85f63e6b8d2c41e05d1b441c882eeeb4439045ac54688",
+    "dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.class": "55420e9becb1c63c8fdba673e1b7ef41e1ed5d2b66670df4afdc205a825c6dca",
+    "dev/codex/schubert/nk/batch/monitoring/BatchMetricContract.class": "6bedbe3fa4e9bb08b73fd91afde4586f56c077752d9440df830a5387e8760044"
+  },
+  "rawCounters": {
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine": {
+      "crc64": "3bed84c2f506392a",
+      "probeCapacity": 42,
+      "counts": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 199
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 36
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 17
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 17
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor$Evaluation": {
+      "crc64": "ea599fe453d09e26",
+      "probeCapacity": 7,
+      "counts": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 29
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 4
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 6
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 6
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor": {
+      "crc64": "b0e79a72060f7016",
+      "probeCapacity": 40,
+      "counts": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 165
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 22
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 30
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 14
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 3
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor$Evaluation": {
+      "crc64": "96e6625da0ae776d",
+      "probeCapacity": 7,
+      "counts": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 29
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 4
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 6
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 6
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor": {
+      "crc64": "285fa6b2f21c7ad7",
+      "probeCapacity": 40,
+      "counts": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 178
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 14
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 36
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 10
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 3
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor$Evaluation": {
+      "crc64": "fac77a1fd844ed37",
+      "probeCapacity": 7,
+      "counts": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 29
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 4
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 6
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 6
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor": {
+      "crc64": "aa1b73a4b32db1b0",
+      "probeCapacity": 42,
+      "counts": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 163
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 24
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 31
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 15
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 3
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor$Evaluation": {
+      "crc64": "79bbbe9614bfd2e0",
+      "probeCapacity": 7,
+      "counts": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 29
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 4
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 6
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 6
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor": {
+      "crc64": "4410794c18c1e5ae",
+      "probeCapacity": 46,
+      "counts": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 182
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 24
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 35
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 15
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 3
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow": {
+      "crc64": "bc79ea14ab43b2b3",
+      "probeCapacity": 23,
+      "counts": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 89
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 14
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 17
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 9
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 2
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow$State": {
+      "crc64": "5533be2633f1412a",
+      "probeCapacity": 8,
+      "counts": {
+        "INSTRUCTION": {
+          "missed": 9,
+          "covered": 41
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 4
+        },
+        "COMPLEXITY": {
+          "missed": 2,
+          "covered": 3
+        },
+        "METHOD": {
+          "missed": 2,
+          "covered": 3
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    }
+  },
+  "unfilteredEnumMissing": [
+    "compiler-generated values()",
+    "compiler-generated valueOf(String)"
+  ],
+  "independentOriginalSession": [
+    {
+      "labelBytesHex": "504734323939382d63757272656e74",
+      "startMillis": 1795379474117,
+      "endMillis": 1795379477602
+    }
+  ],
+  "analyzer": {
+    "nullAwayCompile": 0,
+    "spotbugs": 0,
+    "checkstyle": 0,
+    "pmdRawExit": 4,
+    "pmdRawRemaining": 9,
+    "pmdRemoved": [
+      "ContinuousConditionWindow.observe NullAssignment"
+    ],
+    "newRawFindings": 0,
+    "configChanged": false
+  },
+  "sourceBoundTerminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42998-c07-condition-window-absence-v2/execution-terminal.json",
+    "sha256": "383ed375b1d28c435e32f49740f2cd7dca61154bf203f3a92c581b322336a2d4"
+  },
+  "priorSetupFailure": "v1 stopped before any build/PT when its diff assertion counted one unrelated test-only commit; v2 checks Main and known test-only delta separately",
+  "publicFiles": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42998-c07-condition-window-absence-v2/checkstyle.xml",
+      "sha256": "4d4203712209071b9bbb6df5ffde94e650201ce02240aaa9b2c50967c23cfc1e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42998-c07-condition-window-absence-v2/coverage-unfiltered.tsv",
+      "sha256": "8a307b69ab849e2ffea245ca3373707ea5564221225a4706a047f0efbfae1dad"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42998-c07-condition-window-absence-v2/pmd.xml",
+      "sha256": "e0081adab7310fabcb34d1e1732f2586664e42d2924bcb4ec778ba6b8881f6a1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42998-c07-condition-window-absence-v2/sanitized-junit.xml",
+      "sha256": "e7b82b3f3c691e6f6467228db700d0af0f424c08c98f22bf6a28897237e2f4a4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42998-c07-condition-window-absence-v2/spotbugs.xml",
+      "sha256": "ca7bec802e9f96af585c00836fe4e0fcad3bbe0d37f005f5379cf1e9adb6dff4"
+    }
+  ],
+  "externalOperations": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
