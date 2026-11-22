@@ -180,7 +180,12 @@ public final class ArtifactComparator {
           failures);
       require("RUN".equals(item.path("nk").asText()), "CATALOG_NK:" + id, failures);
     }
-    require(expectedCases.size() == 24, "CATALOG_CASE_COUNT", failures);
+    if (require(expectedCases.size() == 24, "CATALOG_CASE_COUNT", failures)) {
+      require(
+          GateContractValidator.matchesApprovedCaseIds(expectedCases),
+          "CATALOG_CASE_IDS",
+          failures);
+    }
 
     Map<String, Path> currentFiles = artifactFiles(currentArtifacts, failures, "CURRENT");
     Map<String, Path> nkFiles = artifactFiles(nkArtifacts, failures, "NK");

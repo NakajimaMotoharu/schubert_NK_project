@@ -42,6 +42,14 @@ final class GateContractValidator {
   private static final String FIELD_EVIDENCE = "evidence";
   private static final String FIELD_ENVIRONMENT = "environment";
 
+  // UI264 and SS355 §5 fix both the identity and the order of the gate cases.
+  private static final List<String> APPROVED_CASE_ORDER =
+      List.of(
+          "CHR-A01", "CHR-A02", "CHR-A03", "CHR-U01", "CHR-U02", "CHR-S01", "CHR-S02", "CHR-S03",
+          "CHR-S04", "CHR-S05", "CHR-S06", "CHR-S07", "CHR-S08", "CHR-M01", "CHR-M02", "CHR-M03",
+          "CHR-M04", "CHR-M05", "CHR-M06", "CHR-M07", "CHR-L01", "CHR-E01", "CHR-N01", "CHR-O01");
+  private static final Set<String> APPROVED_CASE_IDS = Set.copyOf(APPROVED_CASE_ORDER);
+
   private static final ObjectMapper JSON =
       new ObjectMapper()
           .enable(DeserializationFeature.FAIL_ON_TRAILING_TOKENS)
@@ -199,6 +207,7 @@ final class GateContractValidator {
     List<String> cases = strings(contract.path(FIELD_CASE_ORDER));
     require(cases.size() == 24, "CONTRACT_CASE_COUNT", failures);
     require(new HashSet<>(cases).size() == cases.size(), "CONTRACT_CASE_DUPLICATE", failures);
+    require(APPROVED_CASE_ORDER.equals(cases), "CONTRACT_CASE_ORDER", failures);
     require(
         strings(contract.path("differenceIds")).size() == 16,
         "CONTRACT_DIFFERENCE_COUNT",
@@ -261,6 +270,10 @@ final class GateContractValidator {
       require("RUN".equals(item.path("nk").asText()), "CATALOG_NK:" + id, failures);
     }
     require(expectedOrder.equals(actualOrder), "CATALOG_ORDER", failures);
+  }
+
+  static boolean matchesApprovedCaseIds(Set<String> caseIds) {
+    return APPROVED_CASE_IDS.equals(caseIds);
   }
 
   static boolean matchesCurrentDisposition(String caseId, JsonNode disposition) {

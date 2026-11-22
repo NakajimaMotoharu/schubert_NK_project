@@ -422,6 +422,29 @@ class ArtifactComparatorTest {
     assertEquals(24, result.comparedCaseCount());
   }
 
+  /** PT-CHR-DEF083: the number of distinct IDs cannot replace the approved roster. */
+  @Test
+  void rejectsAnUnapprovedCaseAtTheSameCatalogSize() throws Exception {
+    Fixture fixture = fixture("case-id-outside-approved-roster");
+    mutate(
+        fixture.project().resolve(FIXTURE_CATALOG_PATH),
+        catalog -> {
+          var entries = catalog.withArray("cases");
+          assertEquals(24, entries.size());
+          var thirdScenario = (ObjectNode) entries.get(7);
+          assertEquals("CHR-S03", thirdScenario.path("id").asText());
+          thirdScenario.put("id", "CHR-S99");
+        });
+
+    ArtifactComparator.ComparisonResult result =
+        ArtifactComparator.compare(
+            fixture.project(), fixture.current(), fixture.nk(), fixture.observations());
+
+    assertFalse(result.passed());
+    assertEquals(24, result.expectedCaseCount());
+    assertContains(result.failures(), "CATALOG_CASE_IDS");
+  }
+
   @Test
   void rejectsRepeatedDifferenceDefinitionEvenWhenSixteenRulesStillMatch() throws Exception {
     Fixture fixture = fixture("duplicate-difference-definition");

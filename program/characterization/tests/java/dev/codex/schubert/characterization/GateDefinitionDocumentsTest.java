@@ -143,6 +143,29 @@ final class GateDefinitionDocumentsTest {
         "CONTRACT_BASELINE_HASH");
   }
 
+  /** PT-CHR-DEF084: a same-group replacement cannot redefine the approved contract. */
+  @Test
+  void contractRejectsAnUnapprovedIdAtTheSameSize() throws IOException {
+    List<JsonNode> input = fixture();
+    ArrayNode order = object(input, CONTRACT).withArray("caseOrder");
+    assertEquals(24, order.size());
+    assertEquals("CHR-A03", order.get(2).asText());
+    order.set(2, JSON.getNodeFactory().textNode("CHR-A99"));
+    assertContains(input, "CONTRACT_CASE_ORDER");
+  }
+
+  /** PT-CHR-DEF085: equivalent members in a different order are not the gate contract. */
+  @Test
+  void contractRejectsReorderedApprovedIds() throws IOException {
+    List<JsonNode> input = fixture();
+    ArrayNode order = object(input, CONTRACT).withArray("caseOrder");
+    JsonNode first = order.get(0);
+    order.set(0, order.get(1));
+    order.set(1, first);
+    assertContains(input, "CONTRACT_CASE_ORDER");
+    assertEquals(List.of(), validate(fixture()));
+  }
+
   @Test
   void schemaDraftShapeAndItemConstraintsCannotBeWeakened() throws Exception {
     List<JsonNode> input = fixture();
