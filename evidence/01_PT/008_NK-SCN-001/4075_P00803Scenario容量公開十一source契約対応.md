@@ -17,3 +17,5 @@ P00803 own11全文/SS3335～7・13とC01～03/W06～10/U01～03/P01～05対応�
 ## PT-SCN-008-C03-RACE 同じ予約のretainとclose
 
 SS333 §13、PG-D-057。メモリ基準128 byte・7件、4800 byteの一予約に二workerを同時に入れる。retainが成功した場合の独立期待は4928 byte・8件、closeが先に消費してretainが拒否された場合は128 byte・7件。どちらでも次のretainは拒否、再closeは同じsnapshotを保持する。各待機5秒以内、finallyでexecutorを停止して10秒以内の終端を確認。固定値だけを使い容量filesystemを観測しない。元C01～C03の五試験も同候補で実行する。
+
+PG43068、2026-11-23 JST。製品 `87927ea17c`／試験 `ccc0aa4f5d`。元5＋競合1は成功6、対象五物理の分岐24/24。例外時finallyや未測定の生成methodは生結果に保持する。NullAwayとCheckstyleに指摘なし。型付き警告は試験側のPMD26とSpotBugs2の適用性確認へ渡した。実root、実容量、配備と正式451は継続。[PG43068 manifest](../018_NK-OPS-001/evidence/PG43068-transfer-capacity-same-reservation-race-v1/manifest.json)

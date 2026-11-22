@@ -1,0 +1,389 @@
+{
+  "run": "PG43068-transfer-capacity-same-reservation-race-v1",
+  "source": "ccc0aa4f5d1dfd8dd47a74701a927278ba79cdd3",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-P008-03/2",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T22:08:11.166672+00:00",
+  "focusTest": "PT-SCN-008-C03-RACE",
+  "scopeCases": 6,
+  "newDefinitions": 1,
+  "sourceMainEdits": 0,
+  "realFilesystemOrBackend": 0,
+  "independent": {
+    "validSchedules": {
+      "closeFirst": [
+        128,
+        7
+      ],
+      "retainFirst": [
+        4928,
+        8
+      ]
+    },
+    "attempts": 8,
+    "duplicateRetainRejected": true,
+    "closeIdempotent": true,
+    "workersTerminated": true,
+    "localMode": "NORMAL"
+  },
+  "sourceInputs": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/TransferCapacity.java",
+      "sha256": "93d56d7ef295998c5f637c90f0aafaa2f15fbdc4d366ab6e238c833c96788db7"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/error/CapacityExceededException.java",
+      "sha256": "97da7ca6adc387e39046443ca298a4dd39dbbf574fa2b9e16951c8b9d227793c"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/package-info.java",
+      "sha256": "81360fb14c321eed795fb7fa2d68b5afabca317e44f41ab5b5ef9bf8844c3532"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/error/package-info.java",
+      "sha256": "6d496cedab57489acd06260f7192bb62bee6f1d5729ecdc6c92643cb720fc01b"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferCapacityTest.java",
+      "sha256": "f5d3986dd92465afc808c658a2bab292444d854428196889cec0a2ea9d2b63fa"
+    }
+  ],
+  "auxiliary": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43068-transfer-capacity-same-reservation-race-v1/qualified-result-code.jar",
+    "sha256": "b461ea20ecc232b5a74f737548322835cdb5c75154f5693e71186d18b5613207"
+  },
+  "currentProtocolJar": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42624-current-protocol-maven-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+    "sha256": "2e11940216614fbe48e663fd83400f1fe3cf1cd9fc626214c954aaddb8c0407f"
+  },
+  "rawClassCounters": {
+    "dev/codex/schubert/nk/api/error/CapacityExceededException": {
+      "INSTRUCTION": [
+        0,
+        6
+      ],
+      "BRANCH": [
+        0,
+        0
+      ],
+      "LINE": [
+        0,
+        3
+      ],
+      "COMPLEXITY": [
+        0,
+        2
+      ],
+      "METHOD": [
+        0,
+        2
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/api/storage/TransferCapacity": {
+      "INSTRUCTION": [
+        6,
+        145
+      ],
+      "BRANCH": [
+        0,
+        20
+      ],
+      "LINE": [
+        1,
+        28
+      ],
+      "COMPLEXITY": [
+        0,
+        13
+      ],
+      "METHOD": [
+        0,
+        3
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/api/storage/TransferCapacity$Level": {
+      "INSTRUCTION": [
+        9,
+        41
+      ],
+      "BRANCH": [
+        0,
+        0
+      ],
+      "LINE": [
+        0,
+        4
+      ],
+      "COMPLEXITY": [
+        2,
+        3
+      ],
+      "METHOD": [
+        2,
+        3
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/api/storage/TransferCapacity$Reservation": {
+      "INSTRUCTION": [
+        7,
+        104
+      ],
+      "BRANCH": [
+        0,
+        4
+      ],
+      "LINE": [
+        0,
+        22
+      ],
+      "COMPLEXITY": [
+        0,
+        5
+      ],
+      "METHOD": [
+        0,
+        3
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/api/storage/TransferCapacity$Snapshot": {
+      "INSTRUCTION": [
+        6,
+        25
+      ],
+      "BRANCH": [
+        0,
+        0
+      ],
+      "LINE": [
+        0,
+        1
+      ],
+      "COMPLEXITY": [
+        2,
+        5
+      ],
+      "METHOD": [
+        2,
+        5
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    }
+  },
+  "sameOriginalExec": {
+    "labelBytesHex": "504734333036382d63757272656e74",
+    "startMillis": 1795385213892,
+    "endMillis": 1795385214972
+  },
+  "originals": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43068-transfer-capacity-same-reservation-race-v1/begin.json",
+      "sha256": "cdaaa98ce619852e2ea54672b35c3d8d6b797fe0fa2e9d1c58167a4876389237"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43068-transfer-capacity-same-reservation-race-v1/terminal.json",
+      "sha256": "90cae1f3df2afaf04b822fe8e97bc4bd360225fad6d2df17bb85ce180b7bfa44"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43068-transfer-capacity-same-reservation-race-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "30f78b61c37963f2cb94737fa669214b779f04cb9c3cd1d42cd5591751c9f485"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43068-transfer-capacity-same-reservation-race-v1/unit.exec",
+      "sha256": "2037c8238fb09ac9c82fc6d34481d75e2b0ae782c8fd9a1c2ffe09e4811e2a08"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43068-transfer-capacity-same-reservation-race-v1/pmd.xml",
+      "sha256": "2be3f819aeca0b57074a8498e0c1addfdd3cd1ad7fad2c3ef2256151a3f642a6"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43068-transfer-capacity-same-reservation-race-v1/spotbugs.xml",
+      "sha256": "415c99ce990c3ac8468a35a114facfe3299dbb35e7668aed1377c8e261130a32"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43068-transfer-capacity-same-reservation-race-v1/typed-commands.json",
+      "sha256": "54afc32e276022fd4884f477bff1470b8af8cab395450eb6df761a5d9f803bbb"
+    }
+  ],
+  "static": {
+    "mainProdFindings": 0,
+    "fixturePmdRaw": [
+      {
+        "rule": "AvoidDuplicateLiterals",
+        "line": 44,
+        "file": "TransferCapacityTest.java"
+      },
+      {
+        "rule": "CloseResource",
+        "line": 67,
+        "file": "TransferCapacityTest.java"
+      },
+      {
+        "rule": "CloseResource",
+        "line": 77,
+        "file": "TransferCapacityTest.java"
+      },
+      {
+        "rule": "CloseResource",
+        "line": 78,
+        "file": "TransferCapacityTest.java"
+      },
+      {
+        "rule": "CloseResource",
+        "line": 101,
+        "file": "TransferCapacityTest.java"
+      },
+      {
+        "rule": "CloseResource",
+        "line": 119,
+        "file": "TransferCapacityTest.java"
+      },
+      {
+        "rule": "DoNotUseThreads",
+        "line": 119,
+        "file": "TransferCapacityTest.java"
+      },
+      {
+        "rule": "DoNotUseThreads",
+        "line": 134,
+        "file": "TransferCapacityTest.java"
+      },
+      {
+        "rule": "DoNotUseThreads",
+        "line": 143,
+        "file": "TransferCapacityTest.java"
+      },
+      {
+        "rule": "DoNotUseThreads",
+        "line": 144,
+        "file": "TransferCapacityTest.java"
+      },
+      {
+        "rule": "CloseResource",
+        "line": 155,
+        "file": "TransferCapacityTest.java"
+      },
+      {
+        "rule": "DoNotUseThreads",
+        "line": 155,
+        "file": "TransferCapacityTest.java"
+      },
+      {
+        "rule": "CloseResource",
+        "line": 157,
+        "file": "TransferCapacityTest.java"
+      },
+      {
+        "rule": "AvoidSynchronizedStatement",
+        "line": 158,
+        "file": "TransferCapacityTest.java"
+      },
+      {
+        "rule": "DoNotUseThreads",
+        "line": 160,
+        "file": "TransferCapacityTest.java"
+      },
+      {
+        "rule": "AvoidSynchronizedStatement",
+        "line": 169,
+        "file": "TransferCapacityTest.java"
+      },
+      {
+        "rule": "DoNotUseThreads",
+        "line": 170,
+        "file": "TransferCapacityTest.java"
+      },
+      {
+        "rule": "DoNotUseThreads",
+        "line": 182,
+        "file": "TransferCapacityTest.java"
+      },
+      {
+        "rule": "DoNotUseThreads",
+        "line": 184,
+        "file": "TransferCapacityTest.java"
+      },
+      {
+        "rule": "CloseResource",
+        "line": 192,
+        "file": "TransferCapacityTest.java"
+      },
+      {
+        "rule": "DoNotUseThreads",
+        "line": 192,
+        "file": "TransferCapacityTest.java"
+      },
+      {
+        "rule": "CloseResource",
+        "line": 196,
+        "file": "TransferCapacityTest.java"
+      },
+      {
+        "rule": "DoNotUseThreads",
+        "line": 199,
+        "file": "TransferCapacityTest.java"
+      },
+      {
+        "rule": "DoNotUseThreads",
+        "line": 210,
+        "file": "TransferCapacityTest.java"
+      },
+      {
+        "rule": "DoNotUseThreads",
+        "line": 228,
+        "file": "TransferCapacityTest.java"
+      },
+      {
+        "rule": "DoNotUseThreads",
+        "line": 230,
+        "file": "TransferCapacityTest.java"
+      }
+    ],
+    "fixtureSpotBugsRaw": [
+      {
+        "rule": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+        "owner": "dev.codex.schubert.nk.api.storage.TransferCapacityTest",
+        "method": "c03CallerMonitorsCannotBlockReservationMetricsRetainOrClose"
+      },
+      {
+        "rule": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+        "owner": "dev.codex.schubert.nk.api.storage.TransferCapacityTest",
+        "method": "c03OnlyOneOf100SimultaneousReservationsCanCrossEachCriticalBoundary"
+      }
+    ],
+    "checkstyle": 0,
+    "nullAwayCompile": 0
+  },
+  "outputs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43068-transfer-capacity-same-reservation-race-v1/coverage-unfiltered.tsv",
+      "sha256": "4ac06ffe236daacd920de386a098ee96b26f3961566d0e7725c403370d02d260"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43068-transfer-capacity-same-reservation-race-v1/sanitized-junit.xml",
+      "sha256": "84e52a46b7f6f730caa73a71971fb0596dc18be044f4fabb5b1244ec57ac9ecf"
+    }
+  ],
+  "additionalProductTestsNotRun": "Actual capacity scan, persistent publication, native and full product scope are separate.",
+  "whole451": false,
+  "formalAcceptanceId": null
+}
