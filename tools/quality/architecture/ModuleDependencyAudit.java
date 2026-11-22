@@ -65,7 +65,11 @@ public final class ModuleDependencyAudit {
           "java.io.File", "java.io.FileInputStream", "java.io.FileOutputStream",
           "java.io.FileReader", "java.io.FileWriter", "java.io.RandomAccessFile",
           "java.nio.channels.FileChannel", "java.nio.channels.AsynchronousFileChannel",
-          "java.util.zip.ZipFile", "java.util.jar.JarFile");
+          "java.util.zip.ZipFile", "java.util.jar.JarFile",
+          "javax.imageio.stream.FileImageInputStream",
+          "javax.imageio.stream.FileImageOutputStream",
+          "javax.imageio.stream.FileCacheImageInputStream",
+          "javax.imageio.stream.FileCacheImageOutputStream");
   private static final Set<String> FILE_OPENING_WRITERS =
       Set.of("java.io.PrintWriter", "java.io.PrintStream", "java.util.Formatter");
   private static final Map<String, Set<String>> ALLOWED =
