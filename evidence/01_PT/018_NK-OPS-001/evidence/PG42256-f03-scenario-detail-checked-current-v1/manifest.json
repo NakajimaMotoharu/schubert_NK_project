@@ -1,0 +1,155 @@
+{
+  "run": "PG42256",
+  "source": "4591b920f124714027af3c77cbf1cbb58ac574e8",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-F03/2-2-b",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T06:15:42.468711+00:00",
+  "sourceProof": [
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG41682-p01607-scenario-detail-runtime-comparison-v1/manifest.json",
+      "sha256": "244f2f1a20a8590ced27ac0858967a68be78543a6211c81d96b462ce580d5e39"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42254-f03-scenario-detail-fixture-typed-v1/manifest.json",
+      "sha256": "c087b935245b6e04b05c99a0c6a75f1defc5b1ec36c8c6f1b5c1a565b572e490"
+    }
+  ],
+  "fixtureChange": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioDetailViewModelTest.java",
+    "sha256": "7881374d03cf1937b0f5e873a468590f257924e326c5a46484f9d4b42b73f30e"
+  },
+  "oldTest": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41682-p01607-scenario-detail-runtime-comparison-v1/current-fixture/dev/codex/schubert/nk/web/view/ScenarioDetailViewModelTest.class",
+    "sha256": "9b235aaabc02d4744cad72e0e5b2322854a7bcfa9aee6e71ab9df0e2335e44b5"
+  },
+  "newTest": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42256-scenario-detail-exact-selected-v2/test/dev/codex/schubert/nk/web/view/ScenarioDetailViewModelTest.class",
+    "sha256": "9a4ec670dc9b361cc01813ecd0d34541c02dc53f373e06585e95357af4048a1e"
+  },
+  "testMethodsInstructionsUnchanged": true,
+  "originalScenarioMethods": [
+    "web203SyntheticHtmlEscaping()",
+    "web198NavigationPairs()",
+    "web205RedactedDiagnostics()",
+    "web201ImmutableSnapshot()",
+    "web202ClosedBeanContract()",
+    "web199SequenceRejection()",
+    "web196EmptyAndBounds()",
+    "web194HeaderAndNavigation()",
+    "web195GroupingAndAudio()",
+    "web197NullContracts()",
+    "web200EntryMetadataConsistency()",
+    "web204ConcurrentProjection()"
+  ],
+  "related": [
+    "BUG-3570",
+    "BUG-3571",
+    "BUG-3572",
+    "YKT-2808"
+  ],
+  "currentNewCaseIds": [
+    "PT-WEB-202",
+    "PT-WEB-204"
+  ],
+  "junit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42256-scenario-detail-exact-selected-v2/xml/TEST-junit-jupiter.xml",
+    "sha256": "4c506a4eb22a7857d5df60ed8498c58dc1689ddaed3be0dc5e8c8085f732da92"
+  },
+  "caseMethods": [
+    "web202ClosedBeanContract",
+    "web204ConcurrentProjection"
+  ],
+  "passCount": 2,
+  "failCount": 0,
+  "skipCount": 0,
+  "exec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42256-scenario-detail-exact-selected-v2/original.exec",
+    "sha256": "6ea400743b244a2feb692f8e01a8f337d7175cd20f6b737a5ee779801ac228ad"
+  },
+  "productClassProbe": [
+    "4815ad0b35afc3d6",
+    "28"
+  ],
+  "pmdRuleRulings": [
+    {
+      "rule": "CloseResource",
+      "method": "web204ConcurrentProjection",
+      "line": "395",
+      "reason": "Worker executor is shut down in finally and its termination is checked with a 10 second limit."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "method": "web204ConcurrentProjection",
+      "line": "395",
+      "reason": "Eight test-owned workers exercise concurrent projection."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "method": "web204ConcurrentProjection",
+      "line": "401",
+      "reason": "Task submission is finite and all futures are checked."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "method": "web204ConcurrentProjection",
+      "line": "419",
+      "reason": "Test-owned executor is shut down in finally."
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "method": "web204ConcurrentProjection",
+      "line": "420",
+      "reason": "Finally awaits termination with 10 second limit."
+    }
+  ],
+  "spotBugsIssues": 0,
+  "appliedFixedRules": 2,
+  "firstFormatFailure": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42256-scenario-detail-exact-selected-v1/format.terminal.json",
+    "sha256": "ef243d8a2b1848c5cbca0a5a3612ff4237620cfc9130e9a0e482603a029433d6"
+  },
+  "firstAttemptJunitInvocations": 0,
+  "outputs": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42256-scenario-detail-exact-selected-v2/pmd.xml",
+      "sha256": "11bf7eb2bcac958a615896bf833c5caeb117ebeb7bd7c16604f9886ecc9b9b31"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42256-scenario-detail-exact-selected-v2/spotbugs.xml",
+      "sha256": "1e6de5aa387c37ea18870a8360b241624d9876760606ba3a2966abdd5fd81f5f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42256-scenario-detail-exact-selected-v2/checkstyle.xml",
+      "sha256": "218dd6f31f2f65ba5b3dfe74e677c4860430b0efc1fabbcd64cd1698a9b51994"
+    }
+  ],
+  "terminals": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42256-scenario-detail-exact-selected-v2/format.terminal.json",
+      "sha256": "9edaefaceab7bd82b107b6f17371b78b44e762a8865a1845445c4e18ddffee79"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42256-scenario-detail-exact-selected-v2/compile.terminal.json",
+      "sha256": "54a6f22ef22a0ff53836b439face772170a0774eba671e370b258cb6419bc9cd"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42256-scenario-detail-exact-selected-v2/checkstyle.terminal.json",
+      "sha256": "0b47c3d80936914149a22d5032cd054da6b71b5cb3cb7869880383f1942c8f2c"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42256-scenario-detail-exact-selected-v2/pmd.terminal.json",
+      "sha256": "1bf8a6eeb2bd15ffd073a73d3da37b2372625c4e16d330a40f093891504d81ce"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42256-scenario-detail-exact-selected-v2/spotbugs.terminal.json",
+      "sha256": "afbd4b1c2ce822d87b7e5dc8fc22b665a833a2c35a7abb80d3ebfbc0e6837717"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42256-scenario-detail-exact-selected-v2/unit.terminal.json",
+      "sha256": "58a989bd94efa016c8c0207dc5c4bdfcdcb619d2caed9099d8dc01f76be232df"
+    }
+  ],
+  "whole451": false,
+  "formalAcceptanceId": null
+}

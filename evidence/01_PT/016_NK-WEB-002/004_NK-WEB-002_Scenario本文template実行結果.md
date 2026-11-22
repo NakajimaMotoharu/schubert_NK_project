@@ -16,3 +16,7 @@ Ubuntu26.04.1/Linux7.0.0-31/amd64/JDK25.0.4/Maven3.9.12/JUnit5.13.4/JaCoCo0.8.15
 BUG218は直接resolver.renderのrequestへDispatcherServlet.WEB_APPLICATION_CONTEXT_ATTRIBUTEを設定して修正。YKT174検索で同じdirect renderは新helper1箇所だけ、7PT/64並行へ共通適用。既存Menu/Error/階層はDispatcherServlet経由なので非該当、合成StringTemplateは非Web contextで別。修正後全対象を実行しCSRF/HTML期待は維持した。台帳完了は正式全回帰後。
 
 SCR024の公開traceにtemplate名・合成fixture・並行64・最大10000/999・actualNkGate=falseだけを保存し、raw HTML/CSRF/contextは保存しない。029 collectorは全SCR001～024、4仕様/結果、14source hash、012/024 trace、全reactorを結合する。環境/対象commit/command/exit/coverage/結果/evidence hashは正式成功後manifestへ固定する。
+
+## 現候補の独立fixture
+
+2026-11-22 JST、PG42256のPT-WEB-202/204は2成功・0失敗・0スキップ。元12件のJVM命令同一。初回は整形で終了1、PT未起動。製品変更0、局所coverageは部分。 BUG-3570～3572／YKT-2808。evidence/01_PT/018_NK-OPS-001/evidence/PG42256-f03-scenario-detail-checked-current-v1/manifest.json SHA256 b61845e73f76babafd8c5221b26a0823ff854499da47ba77c21635b663a26896。

@@ -14,3 +14,7 @@ NK-WEB-002/SCR007、scenario.html、schubert.cssのScenario規則、WebMvcConfig
 | PT-SCR-024 | detail024ConcurrentRendering | 64独立本文/actor/CSRFで共通resolver | 全DOM値一致・他request値の混入なし |
 
 期待値はCurrent scenario.html/styles.cssとUIの明示literalから作成し、Production templateのparse結果をexpected生成へ使わない。共通UI以外の表示変更をしない。新CSSは全新規rule/declarationを照合し、templateのif/each/三項両側を空/単/複数/最大とrole・前後・speaker有無で実行する。Java4coverageを下げずNullAway/SpotBugs・既存階層16/Menu/Error回帰を行う。秘密値は合成fixtureだけ、raw CSRF/session/contextを保存しない。正式PT-WEB-20260920-14で8PTと全回帰成功、004/manifestへcommand/時刻/OS/JDK/対象commit/結果/coverage/関連BUG/hashを確定後記録する。
+
+## 現候補の独立fixture
+
+PT-WEB-202の閉じたBeanプロパティ、PT-WEB-204の並行独立投影を同じ固定期待で確認する。PT-WEB-203の合成HTMLを含む元12件のテスト命令を照合する。 BUG-3570～3572／YKT-2808。evidence/01_PT/018_NK-OPS-001/evidence/PG42256-f03-scenario-detail-checked-current-v1/manifest.json SHA256 b61845e73f76babafd8c5221b26a0823ff854499da47ba77c21635b663a26896。
