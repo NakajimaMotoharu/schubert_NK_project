@@ -338,10 +338,13 @@ ControllerはJDBC、JMS template、filesystem APIを直接呼ばない。Control
 ### 6.2 Handler規約
 
 `LayoutHandler<Q,S>`は`LayoutId requestLayout()`、`Class<Q> requestType()`、`S handle(RequestContext,Q)`だけを公開する。
-Dispatcherは認証・inbox処理後にhandlerを呼ぶ。HandlerはJMS ACK/send、HTTP、templateを扱わない。
+Dispatcherは当該layoutに適用するSS312 §3.1–3.3、§4.2の認証とInbox処理に従い、新規業務を実行するときにhandlerを呼ぶ。Handlerは既caller transactionに参加し、JMS ACK/send、HTTP、templateを扱わない。
 
-`RequestContext`はmessage/correlation/request ID、actor user ID/username/role、受信日時、delivery countを保持するが、raw認証context、
-password、全bodyを保持・`toString`出力しない。
+SSC-477: `RequestContext`のMessage IDとCorrelation IDはUI232に従い照合済み電文headerの値を保持する。Request IDはSS351のHTTP単位の識別子であり、その値を既存境界から取得できる場合だけ保持する。通常の同期MQ requestではHTTP Request IDを持たず、Message ID・Correlation ID・JMS provider IDを代入しない。
+
+actor user ID・username・roleは認証済みの一主体として扱う。通常の保護layoutでは既認証結果から設定し、LGNREQ01の匿名InboxとLOGREQ01の失効専用処理はSS312の契約に従って業務認可用actorを渡さない。参照の事前検査actorは最終認証の代わりに用いない。
+
+受信日時は当該配送を受けたAPI側の時刻、delivery countは受信guardで照合済みの`JMSXDeliveryCount`を保持する。電文の送信時刻・再送推定値から補わない。raw認証context、password、全body、JMS objectを保持せず、`toString`は固定のredacted表記とする。電文・JMS property、認証・認可、Inbox、取引の既契約を維持する。
 
 ## 7. `schubert-nk-batch`
 
