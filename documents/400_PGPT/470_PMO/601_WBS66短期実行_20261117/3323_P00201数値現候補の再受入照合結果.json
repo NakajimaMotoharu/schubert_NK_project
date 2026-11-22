@@ -1,0 +1,110 @@
+{
+  "eventId": "PGPT-20261008-8768",
+  "workCategory": "CONTRACT_AUDIT",
+  "source": "368ff39fc7e8bb616a3592e638ad20681dc305c7",
+  "productionCoreMain": "e8368d22c4da2ec841f008df793594d3be9066af",
+  "canonicalDesignSource": "ca41c03c0c6efff9a3a35b47b480491810bee6f9",
+  "managementWorkIds": [
+    "WBS-P002-01/2"
+  ],
+  "planRow": {
+    "ID": "WBS-P002-01/2",
+    "元行": "WBS-P002-01/2",
+    "費目": "B",
+    "主担当": "WBS-P002-01",
+    "状態": "完了記録",
+    "作業": "固定長fieldのNFC・UTF8・padding検査／同source証拠による受入判定",
+    "残pp": "0.0",
+    "着手": "設計322・当該source・作業所有・既存成果を照合。必要な局所成果を費目Aで一度だけ作成し、受入候補のTestIDと独立期待値を確定。着手依存、当該A成果、終了依存と未解決条件を確認",
+    "終了証拠": "固定長fieldのNFC・UTF8・padding検査：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。 固有要求：MSG-001,MSG-002,MSG-003,MSG-004,MSG-005,MSG-006,MSG-007,MSG-008,MSG-009,MSG-010,MSG-011",
+    "補正根拠": "原実行記録",
+    "契約HOLD": "",
+    "対象": "",
+    "範囲": "MSG-001、MSG-002、MSG-003、MSG-004、MSG-005、MSG-006、MSG-007、MSG-008",
+    "保存証跡": "個別criteria＋同sourceのTestID・独立期待値・実結果・451適用結果",
+    "順次": "False",
+    "配賦窓": "",
+    "楽観pp": "0.0",
+    "慎重pp": "0.0",
+    "要求設計の版差": "PT基準仕様 NK-PRO-002、SS 322",
+    "lineNumber": 295,
+    "改訂残pp": "0.0"
+  },
+  "run": "PG43046-p00201-current-codec-recheck-v1",
+  "startEvent": "PGPT-20261008-8767",
+  "outcome": "Original 43 plus one current owner interface, UTF-8/LF scoped. CI original 171 and 39 report hashes, all 176 class payloads equal to preserved raw local run; numeric N03 exact and new owner interface has no executable Code. Two formal dependency receipts remain historical and applicable whole451 incomplete. No original tests replayed.",
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43046-p00201-current-codec-recheck-v1/manifest.json",
+    "sha256": "0e15412c3ce060337d9c6237d648799aa423dce024d07a0c846e7ba2e9168b4e"
+  },
+  "nextEvidence": "WBS-P018-02: check permitted software-delivery dependency and distribution record equality on current ordinary candidate; keep QA061 product terms and approver as outstanding.",
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T21:37:10+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 51,
+      "remainingPercent": 49,
+      "resetsAt": 1795879771,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "modelRequested": "gpt-6.2-sol",
+  "modelObserved": null,
+  "reasoningRequested": "high",
+  "reasoningObserved": null,
+  "speedRequested": "standard",
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 51,
+    "remainingPercent": 49,
+    "resetsAt": 1795879771,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "58b6b17796e6f3099802a88ea03403458c51f9af96bd31731d8fc7208405ef90",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-22T21:37:10+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 51,
+        "remainingPercent": 49,
+        "resetsAt": 1795879771,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": 0,
+  "sameQuotaWindow": true,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-22T21:36:54.790293+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": false,
+  "quotaBefore": {
+    "usedPercent": 51,
+    "remainingPercent": 49,
+    "resetsAt": 1795879771,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null
+}

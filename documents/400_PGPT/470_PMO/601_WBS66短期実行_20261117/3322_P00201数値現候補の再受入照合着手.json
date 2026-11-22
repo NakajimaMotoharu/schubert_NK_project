@@ -1,0 +1,85 @@
+{
+  "eventId": "PGPT-20261008-8767",
+  "groupId": "PG43046-p00201-current-codec-recheck-v1",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T21:36:08+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 51,
+      "remainingPercent": 49,
+      "resetsAt": 1795879771,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "source": "368ff39fc7e8bb616a3592e638ad20681dc305c7",
+    "productionCoreMain": "e8368d22c4da2ec841f008df793594d3be9066af",
+    "canonicalDesignSource": "ca41c03c0c6efff9a3a35b47b480491810bee6f9",
+    "run": "PG43046-p00201-current-codec-recheck-v1",
+    "workCategory": "CONTRACT_AUDIT",
+    "managementWorkIds": [
+      "WBS-P002-01/2"
+    ],
+    "previousCheckpoint": "3321",
+    "planRow": {
+      "ID": "WBS-P002-01/2",
+      "元行": "WBS-P002-01/2",
+      "費目": "B",
+      "主担当": "WBS-P002-01",
+      "状態": "完了記録",
+      "作業": "固定長fieldのNFC・UTF8・padding検査／同source証拠による受入判定",
+      "残pp": "0.0",
+      "着手": "設計322・当該source・作業所有・既存成果を照合。必要な局所成果を費目Aで一度だけ作成し、受入候補のTestIDと独立期待値を確定。着手依存、当該A成果、終了依存と未解決条件を確認",
+      "終了証拠": "固定長fieldのNFC・UTF8・padding検査：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。 固有要求：MSG-001,MSG-002,MSG-003,MSG-004,MSG-005,MSG-006,MSG-007,MSG-008,MSG-009,MSG-010,MSG-011",
+      "補正根拠": "原実行記録",
+      "契約HOLD": "",
+      "対象": "",
+      "範囲": "MSG-001、MSG-002、MSG-003、MSG-004、MSG-005、MSG-006、MSG-007、MSG-008",
+      "保存証跡": "個別criteria＋同sourceのTestID・独立期待値・実結果・451適用結果",
+      "順次": "False",
+      "配賦窓": "",
+      "楽観pp": "0.0",
+      "慎重pp": "0.0",
+      "要求設計の版差": "PT基準仕様 NK-PRO-002、SS 322",
+      "lineNumber": 295,
+      "改訂残pp": "0.0"
+    },
+    "currentPlan": [
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/11月22日_PGPT再開実行計画.txt",
+        "sha256": "80b9fdc306f664b9c03901a4bdfb34cf66997879676204cfa969858fd68a4016"
+      },
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/短期実行WBS.tsv",
+        "sha256": "a6efedcd63b4ef3bb1d133d939b0ddd7dc4b0147988ac33d668282a25c999527"
+      }
+    ],
+    "startScope": {
+      "productCore": "7698011f52d6cc5f94c76413b6ab36971783b9c9",
+      "workCategory": "CONTRACT_AUDIT",
+      "evidenceGoal": "Reconcile the reopened shared codec current inputs, N03, the historical 43 plus current registry additions, and the two accepted dependency sources.",
+      "acceptanceRequires": "Current equivalent ordinary candidate, independent local oracles, applicable 451 and end dependencies on the accepted candidate.",
+      "nextAuthorized": "Short WBS P018-02: bind QA061 technical distribution evidence to current Flyway Jackson alignment and test any uncovered local metadata policy."
+    },
+    "groupCapPp": 0.35,
+    "estimateAtGroupStartPp": {
+      "low": 0,
+      "base": 0.0,
+      "high": 0.35
+    },
+    "completedOriginalRowPricePp": 0,
+    "sourceOwnership": "LOCAL_DEV_FOUNDATION_TRACKED_SNAPSHOT",
+    "knownOwnedRunInProgress": 0,
+    "costRevision": "PMO-remaining-v3-20261010",
+    "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "actualAllocatedPp": null
+  }
+}
