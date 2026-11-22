@@ -1,0 +1,119 @@
+{
+  "eventId": "PGPT-20261008-8728",
+  "workCategory": "IMPLEMENTATION",
+  "source": "ac84ee57e70bc452abf04f2736353772315592eb",
+  "productionCoreMain": "e8368d22c4da2ec841f008df793594d3be9066af",
+  "canonicalDesignSource": "ca41c03c0c6efff9a3a35b47b480491810bee6f9",
+  "managementWorkIds": [
+    "WBS-P018-08.03/2"
+  ],
+  "planRow": {
+    "ID": "WBS-P018-08.03/2",
+    "元行": "WBS-P018-08.03/2",
+    "費目": "B",
+    "主担当": "WBS-P018-08.03",
+    "状態": "計画",
+    "作業": "source/byte/noMatch判定・欠落streamのnegative／同source証拠による受入判定",
+    "残pp": "0.65",
+    "着手": "設計354・当該source・作業所有・既存成果を照合。必要な局所成果を費目Aで一度だけ作成し、受入候補のTestIDと独立期待値を確定。着手依存、当該A成果、終了依存と未解決条件を確認",
+    "終了証拠": "source/byte/noMatch判定・欠落streamのnegativeの対象別完了記録を確認",
+    "補正根拠": "登録済み後段単価。追加製造はA、実経路はD、比較はE",
+    "契約HOLD": "",
+    "対象": "",
+    "範囲": "SS 354",
+    "保存証跡": "個別criteria＋同sourceのTestID・独立期待値・実結果・451適用結果",
+    "順次": "False",
+    "配賦窓": "4",
+    "楽観pp": "0.26",
+    "慎重pp": "1.3",
+    "要求設計の版差": "PT基準仕様 NK-OPS-001、SS 354",
+    "lineNumber": 742,
+    "改訂残pp": "0.65"
+  },
+  "run": "PG43006-exec-multi-target-no-partial-v1",
+  "startEvent": "PGPT-20261008-8727",
+  "outcome": {
+    "result": "40_LOCAL_COVERAGE_TOOL_TESTS_PASS_ANALYSIS_COMPLETE_BEFORE_OUTPUT",
+    "productRunAdded": 0,
+    "toolPT": 40,
+    "newToolCases": 3,
+    "formalQuality": "OPEN"
+  },
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43006-exec-multi-target-no-partial-v1/manifest.json",
+    "sha256": "ac67699899900ef5c3aebd2968068fbe99947934b08ec589fafd7477b1760f3f"
+  },
+  "nextEvidence": {
+    "work": "G07。PG42972の公開cursor以降を秘密検査と機械一致で分類。原証跡・基準保全、F02/03実条件は維持し独立WBSを続ける。",
+    "holdsUnchanged": true
+  },
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T20:44:12+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 49,
+      "remainingPercent": 51,
+      "resetsAt": 1795879771,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "modelRequested": "gpt-6.2-sol",
+  "modelObserved": null,
+  "reasoningRequested": "high",
+  "reasoningObserved": null,
+  "speedRequested": "standard",
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 49,
+    "remainingPercent": 51,
+    "resetsAt": 1795879771,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "283a699f94244855428b7f363b8a3eb054d8ccb4234916d86ed736221acfae39",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-22T20:44:12+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 49,
+        "remainingPercent": 51,
+        "resetsAt": 1795879771,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": 0,
+  "sameQuotaWindow": true,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-22T20:43:40.762201+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": false,
+  "quotaBefore": {
+    "usedPercent": 49,
+    "remainingPercent": 51,
+    "resetsAt": 1795879771,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null
+}

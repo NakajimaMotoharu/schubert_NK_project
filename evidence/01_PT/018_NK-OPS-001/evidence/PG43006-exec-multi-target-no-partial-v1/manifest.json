@@ -1,0 +1,116 @@
+{
+  "run": "PG43006-exec-multi-target-no-partial-v1",
+  "source": "ec0921634f73e5a4345dbc060a0e78d3361ad7a3",
+  "terminalAtUTC": "2026-11-22T20:43:40.762201+00:00",
+  "actualExit": 0,
+  "wbs": "WBS-P018-08.03/2",
+  "toolInputs": {
+    "run": "PG43006-exec-multi-target-no-partial-v1",
+    "source": "ec0921634f73e5a4345dbc060a0e78d3361ad7a3",
+    "startedAtUTC": "2026-11-22T20:43:15.528739+00:00",
+    "pins": [
+      {
+        "path": "tools/quality/jacoco/UnfilteredCodeMeasurement.java",
+        "sha256": "f00a09972ec7c9d89be1390e8895eb770a5e9f7a9e9730341a5cdb0baa0efd7a"
+      },
+      {
+        "path": "tools/quality/jacoco_strict_original_order_test.py",
+        "sha256": "70939c5a6f1b5989952dc98e377dc00be79d8bc089cb598fa61ca4e8ca2ff5a0"
+      },
+      {
+        "path": "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "sha256": "25b400f003089d23cc5320cdaf1a16cabee19b8aa3434d0ff021b3d9f42154b4"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31432-generated-code-supplemental-tool-v1/compile.json",
+        "sha256": "c8e7033722c9d00ff3d618bab1c6ab1bde8ac793b4f9e4d2a478db95a0d17401"
+      }
+    ],
+    "dependencies": [
+      {
+        "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+        "sha256": "ade1e0fdb4cd80d8537b57c6edb70a1360c47fdc518c20c65314517479bc4d0d"
+      },
+      {
+        "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar",
+        "sha256": "ed825d10ab1399c8c0cb669e688cf0c8c82629b4c8399b58352b68e92ca10fcb"
+      },
+      {
+        "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar",
+        "sha256": "6d0abefb7cbf972ea16edb37ec14835372505063a45f976ab7ea889ed9497895"
+      },
+      {
+        "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "sha256": "3dfb0d5b6a106cd40b5b250e39935fbf2f927f4477546a5369a3ac609cf0506b"
+      }
+    ],
+    "commands": {
+      "tests": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-v",
+        "-s",
+        "tools/quality",
+        "-p",
+        "jacoco*test.py"
+      ],
+      "style": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "tools/quality/jacoco/UnfilteredCodeMeasurement.java"
+      ]
+    }
+  },
+  "verifiedOriginalTerminal": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43006-exec-multi-target-no-partial-v1/tests.end.json",
+      "sha256": "94d7b65d1411feb1b5bcacda32052ecb71aee6870f6565b8ee0a67eb217ef0f8"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43006-exec-multi-target-no-partial-v1/style.end.json",
+      "sha256": "ab0ef2b5ada30adaf14cbac2164cdc4d1bb817db2b7ea96fc24c0c74e955778e"
+    }
+  ],
+  "related": [
+    "BUG-3652",
+    "YKT-2870",
+    "PG-D-1199"
+  ],
+  "originalRed": {
+    "methods": 2,
+    "subcaseFailure": 4,
+    "exit": 1,
+    "stderr": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43006-exec-multi-target-no-partial-v1/red.stderr",
+      "sha256": "6bb67abdd7a409445bac50aee3eb345296eaba5679277e996e9ff92d3e8ca7fc"
+    }
+  },
+  "localOrdinaryToolTests": 40,
+  "priorLocalCases": 37,
+  "newCases": [
+    "PT-OPS-EXEC-CRC-006",
+    "PT-OPS-EXEC-CRC-007",
+    "PT-OPS-EXEC-CRC-008"
+  ],
+  "newCaseIndependentExpectations": {
+    "lateMismatch": "earlier class has legal matching CRC, last class uses another CRC, both modes exit 1 with no stdout",
+    "duplicate": "previous class matched, next path repeats binary class, exit 1 with no stdout both modes",
+    "success": "two distinct legal simple Java methods, explicit requested order, four success counters plus instructions independently known"
+  },
+  "testsPassed": 40,
+  "staticFormatterExit": 0,
+  "jdk": "25.0.4",
+  "javaCompilation": "Existing exact pinned classpath, -Xlint:all -Werror, synthetic targeted Java only",
+  "outputCommitment": "Do not print classes until the last selected class is checked and measured. Output order/fields and missing-exec semantics remain checked.",
+  "productExecutions": 0,
+  "actualNativeOrBootOperations": 0,
+  "preservedCoverage": "Original product exec files and previous test records retained; no union or reinterpretation",
+  "whole451": false,
+  "formalAcceptanceId": null
+}
