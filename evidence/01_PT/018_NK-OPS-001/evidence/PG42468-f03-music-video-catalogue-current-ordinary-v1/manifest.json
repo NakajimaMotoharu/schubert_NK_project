@@ -1,0 +1,279 @@
+{
+  "run": "PG42468",
+  "source": "17612dc0e32cc1d39b577e0448d8e8242c0d19f7",
+  "javaCore": "b5d5009768a04bb69468beed2471441b2a57ce27",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-22T09:25:53.141485+00:00",
+  "actualNewOrdinary": 41,
+  "succession": {
+    "music": 24,
+    "video": 17
+  },
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "oldExactVideo": 7,
+  "currentExactSdk": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+      "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+      "sha256": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7"
+    }
+  ],
+  "resources": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/resources/fixtures/migration-video-catalogue-20.tsv",
+      "sha256": "14866542997faf06cff53d4d1792455183eca9e4f7494bed788f027768cef53c"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/resources/fixtures/migration-video-copy-20.wire",
+      "sha256": "8e5f015e191c68488ef03cfe022143ef64e30b9c2ad831098c217f9bea79b7a0"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/resources/fixtures/migration-music-catalogue-129.tsv",
+      "sha256": "b76b08743169996935379d3116280419b85055b5f44af08d004b11b353b71aaf"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/resources/fixtures/migration-music-copy-129.wire",
+      "sha256": "6fdc83ef26afac1a4dac7348e0e6096dc5a75a906902d1658712967ba8586ab2"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/resources/fixtures/migration-music-extra-id-vectors.tsv",
+      "sha256": "f475606af5cec7e7ead2780d898e6fbcd959494969090834fa587d8e7a998821"
+    }
+  ],
+  "productPhysical": 16,
+  "tests": {
+    "PT-MIG-MUSICCAT001": {
+      "method": "full129RowsMatchEveryIndependentGoldenByte",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-MUSICCAT002": {
+      "method": "video20AndMusic129JoinAll149RowsAndBorrowedStream",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-MUSICCAT003": {
+      "method": "onlyTheApproved129DeclarationCountCanEnterTheFactory",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-MUSICCAT004": {
+      "method": "allOtherManifestKindsAreRejected",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-MUSICCAT005": {
+      "method": "targetMapCardinalityAndUnknownKeysCannotReplaceTheKnownLogicalIds",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-MUSICCAT006": {
+      "method": "nullableAndNonPositiveOrOversizedTargetValuesAreRejected",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-MUSICCAT007": {
+      "method": "targetIdCannotBeReusedAcrossDifferentGroups",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-MUSICCAT008": {
+      "method": "inputMapAndManifestOrderDoNotChangeCanonicalSourceOrder",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-MUSICCAT009": {
+      "method": "categoriesAndSectionsRemainSeparatedAndLocalOrdersRestart",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-MUSICCAT010": {
+      "method": "exactFuzzyAndBothMissingSidesFreezeApprovedKeysRolesAndOrders",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-MUSICCAT011": {
+      "method": "nonSongTracksHaveNoKeyAndUnicodeCodepointLocalPathOrder",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-MUSICCAT012": {
+      "method": "currentOneAndTwoComponentPathsAndLeadingDotTitleArePreserved",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-MUSICCAT013": {
+      "method": "allFiveMimeMappingsAndUnknownExtensionsAreExplicit",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-MUSICCAT014": {
+      "method": "targetExtensionCannotMisrepresentTheDeclaredSourceFormat",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-MUSICCAT015": {
+      "method": "byteSizeBoundariesAndDeclaredHashAreNotReobservedOrRepaired",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-MUSICCAT016": {
+      "method": "timestampInvalidFormsAreRejectedByTheExistingRowContract",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-MUSICCAT017": {
+      "method": "duplicateNormalizedKeysCannotSilentlyDropEitherRole",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-MUSICCAT018": {
+      "method": "emptyDerivedPairKeysAreNotInventedOrChangedToNone",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-MUSICCAT019": {
+      "method": "allThreeNullableArgumentsHaveFixedDiagnostics",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-MUSICCAT020": {
+      "method": "sourceMetadataBoundsDoNotTruncateFilenameTitles",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-MUSICCAT021": {
+      "method": "mutableInputsAndReturnedListsAndRowsDoNotShareOwnership",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-MUSICCAT022": {
+      "method": "encodedBytesAreIndependentAndMatchTheSeparateFirstGoldenRow",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-MUSICCAT023": {
+      "method": "rejectionDoesNotPoisonNormalCatalogueAndDiagnosticsStayRedacted",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-MUSICCAT024": {
+      "method": "finiteWorkersProduceTheSameIndependent129RowGolden",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-VIDEO001": {
+      "method": "allTwentyMetadataValuesEqualTheIndependentPrimaryDocumentGolden",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-VIDEO002": {
+      "method": "everyFixedLogicalIdLooksUpTheSameImmutableValue",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-VIDEO003": {
+      "method": "bothEndpointLookupsRetainTheApprovedNumbersAndPaths",
+      "status": "EXACT_PRIOR"
+    },
+    "PT-MIG-VIDEO004": {
+      "method": "unknownEmptyCaseAndWhitespaceIdsNeverSelectAnotherEntry",
+      "status": "EXACT_PRIOR"
+    },
+    "PT-MIG-VIDEO005": {
+      "method": "nullLookupIsAnExplicitFixedInputFailure",
+      "status": "EXACT_PRIOR"
+    },
+    "PT-MIG-VIDEO006": {
+      "method": "categoryCountsAreExactlyFifteenFourAndOne",
+      "status": "EXACT_PRIOR"
+    },
+    "PT-MIG-VIDEO007": {
+      "method": "allFourSubtracksReferToTheFixedMainIdsAndOtherParentsAreAbsent",
+      "status": "EXACT_PRIOR"
+    },
+    "PT-MIG-VIDEO008": {
+      "method": "fixedIdsPathsAndDenseDisplayOrdersHaveNoDuplicates",
+      "status": "EXACT_PRIOR"
+    },
+    "PT-MIG-VIDEO009": {
+      "method": "catalogueListCannotBeMutatedOrPoisonAnotherInstance",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-VIDEO010": {
+      "method": "bothPublicValueStringsAreFixedAndRedacted",
+      "status": "EXACT_PRIOR"
+    },
+    "PT-MIG-VIDEO011": {
+      "method": "allTwentySeventeenColumnRowsEqualTheIndependentCopyWireGolden",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-VIDEO012": {
+      "method": "mapAndManifestOrderingNeverReplaceTheApprovedDisplayOrder",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-VIDEO013": {
+      "method": "missingOrExtraTargetMapEntriesAreRejected",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-VIDEO014": {
+      "method": "unknownOrNullKeyCannotReplaceAKnownTargetAtTheSameCount",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-VIDEO015": {
+      "method": "targetValuesAreNonNullPositiveN12AndGloballyUnique",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-VIDEO016": {
+      "method": "manifestMustDeclareExactlyTwentyFiles",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-VIDEO017": {
+      "method": "unknownAndCaseChangedCurrentPathsCannotReplaceAnApprovedFile",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-VIDEO018": {
+      "method": "everyOtherAssetKindIsRejectedRatherThanSilentlyFiltered",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-VIDEO019": {
+      "method": "claimByteSizeIsForwardedToTheCurrentMediaRowContract",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-VIDEO020": {
+      "method": "timestampValidationAndOneCommonMicrosecondValueArePreserved",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-VIDEO021": {
+      "method": "allThreeNullableFactoryInputsHaveFixedDiagnostics",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-VIDEO022": {
+      "method": "returnedRowsAndBytesDoNotAliasMutableInputCollections",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-VIDEO023": {
+      "method": "aRejectedClaimDoesNotRepairOrPoisonIndependentNormalInput",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-VIDEO024": {
+      "method": "finiteWorkersBindTheSameImmutableClaimsWithoutSharedOutput",
+      "status": "CURRENT_PASS"
+    }
+  },
+  "evidence": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42468-music-video-catalogue-current-v1/begin.json",
+      "sha256": "550805ba90a4bea5fa9d44648f33551f95a2dce207f6e1259d9800ba3eeb0934"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42468-music-video-catalogue-current-v1/current-scope.json",
+      "sha256": "d84eb929ce4a5c55d4b6fc88f25572996753bf483942efc7abf669eb119b5867"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42468-music-video-catalogue-current-v1/run-plan.json",
+      "sha256": "a10cf6b7c77a1992b351a0ede16e26a4b8c7513288dd2e19939e79603f4f1424"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42468-music-video-catalogue-current-v1/terminal.json",
+      "sha256": "26a3431ab4ed079b81a8495a3c50ec35c274f2f63bfaef2646f3d66d04a364a0"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42468-music-video-catalogue-current-v1/init.log",
+      "sha256": "f95009ac06e9f65f61388529475bbf85e0a3ee12c0daab6ea2152a01d9a13896"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42468-music-video-catalogue-current-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "b406b2cb492e40c5ec4f22d8a1ed1ce185d035bb8444dfd3480912fb058bc2e8"
+    }
+  ],
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "realMediaFileOrDatabaseOperations": 0,
+  "coverageUnion": false,
+  "newCoverage": false,
+  "typedFollowupPending": true
+}

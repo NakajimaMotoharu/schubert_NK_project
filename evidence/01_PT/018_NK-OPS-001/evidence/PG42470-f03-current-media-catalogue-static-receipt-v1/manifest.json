@@ -1,0 +1,118 @@
+{
+  "run": "PG42470",
+  "source": "17612dc0e32cc1d39b577e0448d8e8242c0d19f7",
+  "javaCore": "b5d5009768a04bb69468beed2471441b2a57ce27",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-22T09:27:02.439583+00:00",
+  "analysisInputs": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42470-media-catalogue-static-v1/begin.json",
+    "sha256": "5788b21c979d8203777d608041083c11ee7ade76bc1bcec223bdcd3a465d40d9"
+  },
+  "evidence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42468-f03-music-video-catalogue-current-ordinary-v1/manifest.json",
+    "sha256": "6cbc01fcb31000be04830546dfd1b307595a6fe64ad63f62703e1ab184fa8f78"
+  },
+  "rawReports": {
+    "checkstyle": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42470-media-catalogue-static-v1/reports/checkstyle.xml",
+      "sha256": "f4ff84f47c9eb94913cb0b69cc67bbc7a314e934362d4545abc73d240c0bff4f"
+    },
+    "pmd": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42470-media-catalogue-static-v1/reports/pmd.xml",
+      "sha256": "c7ae035b662cde7324a4daa7481bd434bd3e526d8c1996ff0e7164c3fc95b62a"
+    },
+    "spotbugs": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42470-media-catalogue-static-v1/reports/spotbugs.xml",
+      "sha256": "731f8fabfaacb3817523246d4a1e32ccf92f346fd7e70e835990f470d6b1b848"
+    }
+  },
+  "actualExit": {
+    "guard": 0,
+    "checkstyle": 0,
+    "pmd": 4,
+    "spotbugs": 0
+  },
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "pmdRaw": 12,
+  "classifiedOccurrence": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MusicMigrationCatalogueTest.java",
+      "rule": "CloseResource",
+      "line": 85,
+      "reason": "Borrowed in-memory sink; test explicitly observes close and flush stay zero."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MusicMigrationCatalogueTest.java",
+      "rule": "CloseResource",
+      "line": 409,
+      "reason": "Finite fixture workers with independently checked result and explicit finally termination."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MusicMigrationCatalogueTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 409,
+      "reason": "Finite fixture workers with independently checked result and explicit finally termination."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MusicMigrationCatalogueTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 413,
+      "reason": "Finite fixture workers with independently checked result and explicit finally termination."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MusicMigrationCatalogueTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 417,
+      "reason": "Finite fixture workers with independently checked result and explicit finally termination."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MusicMigrationCatalogueTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 418,
+      "reason": "Finite fixture workers with independently checked result and explicit finally termination."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/VideoMigrationCatalogueTest.java",
+      "rule": "CloseResource",
+      "line": 385,
+      "reason": "Finite fixture workers with independently checked result and explicit finally termination."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/VideoMigrationCatalogueTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 385,
+      "reason": "Finite fixture workers with independently checked result and explicit finally termination."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/VideoMigrationCatalogueTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 390,
+      "reason": "Finite fixture workers with independently checked result and explicit finally termination."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/VideoMigrationCatalogueTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 394,
+      "reason": "Finite fixture workers with independently checked result and explicit finally termination."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/VideoMigrationCatalogueTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 395,
+      "reason": "Finite fixture workers with independently checked result and explicit finally termination."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/VideoMigrationCatalogueTest.java",
+      "rule": "CloseResource",
+      "line": 443,
+      "reason": "Missing fixture throws before use; actual JAR-input alias enters try-with-resources and is closed."
+    }
+  ],
+  "processingErrors": 0,
+  "dispositionApproval": "local evidence pending formal review",
+  "extraConfirmationPt": 0,
+  "suppressions": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

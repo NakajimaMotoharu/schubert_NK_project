@@ -1,0 +1,106 @@
+{
+  "run": "PG42464",
+  "source": "17612dc0e32cc1d39b577e0448d8e8242c0d19f7",
+  "javaCore": "b5d5009768a04bb69468beed2471441b2a57ce27",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-22T09:22:40.028016+00:00",
+  "spec": {
+    "path": "evidence/01_PT/019_NK-MIG-001/037_Music安定logicalID・独立十二仕様.md",
+    "sha256": "8f431998358f228fe118b1dfe730824a3959e2d8bf427b120243cbc06a08a185"
+  },
+  "pt": {
+    "PT-MIG-MUSICID001": {
+      "method": "asciiPrefixAndUtf8MatchTheFixedIndependentSha256Vector",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-MUSICID002": {
+      "method": "japanesePathUsesUtf8AndLowercase64Hex",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-MUSICID003": {
+      "method": "canonicalAndDecomposedFormsUseTheSameFixedNfcVector",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-MUSICID004": {
+      "method": "nullAndEmptyAreExplicitFixedInputFailures",
+      "status": "EXACT_PRIOR"
+    },
+    "PT-MIG-MUSICID005": {
+      "method": "unpairedSurrogatesFailBeforeEncodingAndPairedScalarHasFixedVector",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-MUSICID006": {
+      "method": "isoControlsCannotEnterTheHashedCanonicalDisplayMetadata",
+      "status": "EXACT_PRIOR"
+    },
+    "PT-MIG-MUSICID007": {
+      "method": "asciiOneAnd512BytesHaveFixedVectorsWhile513IsRejected",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-MUSICID008": {
+      "method": "byteCeilingAppliesAfterNfcRatherThanToThe768ByteSource",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-MUSICID009": {
+      "method": "supplementary128ScalarsAre512Utf8BytesRatherThan256Characters",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-MUSICID010": {
+      "method": "caseWhitespaceSeparatorsAndPunctuationAreNotTrimmedOrRewritten",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-MUSICID011": {
+      "method": "fixedRedactionAndIndependentSuccessDoNotRetainRejectedMetadata",
+      "status": "CURRENT_PASS"
+    },
+    "PT-MIG-MUSICID012": {
+      "method": "finiteWorkersUseFreshDigestsForTheSameStatelessIdentity",
+      "status": "CURRENT_PASS"
+    }
+  },
+  "actualPt": 10,
+  "passed": 10,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "reusedMethods": 2,
+  "currentProduct": {
+    "relative": "dev/codex/schubert/nk/migration/MusicLogicalId.class",
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42464-music-logical-id-current-v1/main/dev/codex/schubert/nk/migration/MusicLogicalId.class",
+    "sha256": "24079b291b751577369f256ef32a31d9dd86b0e83885a5d79b51d761a04dd59b"
+  },
+  "originalJunit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33372-copyman990-post-v3/original-TEST-junit-jupiter.xml",
+    "sha256": "d24b20ca011091f164725753793bc9b4aab13961286c5f000dbd36469b50ba2c"
+  },
+  "evidence": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42464-music-logical-id-current-v1/begin.json",
+      "sha256": "558a1a47e3012012d219e41558f891dcff7fec519f943de6106054b5902c12f0"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42464-music-logical-id-current-v1/diff-methods.json",
+      "sha256": "4291e2974db8d4d74cfc78e59e7329f42e037fb9ae1a842398b54ef95de60ab4"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42464-music-logical-id-current-v1/unit-plan.json",
+      "sha256": "163c4b23e8f1376cccbbcc71e2c6576c698ea95ad165157a51315ea17bea76c4"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42464-music-logical-id-current-v1/terminal.json",
+      "sha256": "8b4966c0cdef57d12ff43df31daecf11c95af59dd4545cb51fe2cbd32428b8bd"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42464-music-logical-id-current-v1/init.log",
+      "sha256": "1120e5328016439d4a7a6e9ac2e72d68de49ed9c1fcab32cd7ae8219fce5b4de"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42464-music-logical-id-current-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "4164ec72f963fde295278303546b4b0050bbe9fe055b194424aacaab10035dec"
+    }
+  ],
+  "actualFileOrDataAccess": 0,
+  "newCoverage": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
