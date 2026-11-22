@@ -1,0 +1,111 @@
+{
+  "run": "PG43054-f02-storage-legacy-and-bootstrap-exact-boundary-v1",
+  "source": "f09018cdc29a2b8023d0bf09c62dc42c69ecae05",
+  "productCore": "7698011f52d6cc5f94c76413b6ab36971783b9c9",
+  "wbs": [
+    "WBS-F02-b-a",
+    "WBS-P004-05/2"
+  ],
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T21:46:44.177915+00:00",
+  "regularJarReceipts": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42626-f02-regular-four-protocol-fresh-source-and-remaining-v1/manifest.json",
+      "sha256": "45d8831d248b6c4fbb1afc636669552f042b2e35996135ad33a1c8759a20195a"
+    }
+  ],
+  "physicalTargets": [
+    {
+      "module": "storage",
+      "jar": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40802-f02-current-four-package-v1/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+        "sha256": "e5be03a72a9cca548f68fc1ca7ee84ced8980dbea72162f58772215227be3ec0"
+      },
+      "currentBuildInputSource": "da20ad7753279ae4e8017593866502d3341ec0e5",
+      "entry": "dev/codex/schubert/nk/storage/StorageIoException.class",
+      "sha256": "85f86d702a139f126afdd72ca8e221583db824f159351ecd9f07b15fcc569c88",
+      "javaP": {
+        "path": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "sha256": "59d0b7cf9e1936f16cd6dd39d5214a0c8507a1d5895a1e9b95c52aa4f436d71b"
+      },
+      "disassemblySha256": "25591ac562c0c9a07c7cefc537e7344af82564e512b7f11bae1e2d7a8f4a8679",
+      "directSqlMethods": [
+        "private static java.lang.Throwable lambda$preserveFatal$0(java.lang.Throwable);"
+      ],
+      "disposition": "LEGACY_SQL_EDGE_RETAINED_PENDING_COMPLETE_CALLER_MIGRATION"
+    },
+    {
+      "module": "storage",
+      "jar": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40802-f02-current-four-package-v1/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+        "sha256": "e5be03a72a9cca548f68fc1ca7ee84ced8980dbea72162f58772215227be3ec0"
+      },
+      "currentBuildInputSource": "da20ad7753279ae4e8017593866502d3341ec0e5",
+      "entry": "dev/codex/schubert/nk/storage/StorageIoException$Reason.class",
+      "sha256": "a113bd839666ee3a4038dd3703af0cfb772282278cc6fbfe1e3cccf98286ffec",
+      "javaP": {
+        "path": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "sha256": "59d0b7cf9e1936f16cd6dd39d5214a0c8507a1d5895a1e9b95c52aa4f436d71b"
+      },
+      "disassemblySha256": "d943eda9f448c520c702556e4a318c0cf591869af8508e3d0583eeae3e933f1d",
+      "directSqlMethods": [],
+      "disposition": "REASON_CLOSED_VALUE_NO_DIRECT_SQL"
+    },
+    {
+      "module": "bootstrap",
+      "jar": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG40802-f02-current-four-package-v1/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+        "sha256": "3de920f0fc7df4909b362fd25856b5b91e2517fa404cbe5756725544472887f7"
+      },
+      "currentBuildInputSource": "da20ad7753279ae4e8017593866502d3341ec0e5",
+      "entry": "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class",
+      "sha256": "cc8265242a1cd41cc7c77b8e12185cbc387fb583d70e1d1171ba467cb0f3d552",
+      "javaP": {
+        "path": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "sha256": "59d0b7cf9e1936f16cd6dd39d5214a0c8507a1d5895a1e9b95c52aa4f436d71b"
+      },
+      "disassemblySha256": "c7135c9b274ff80e08a8c56bd3444ba74c6ad559e60f77ab6796a4ff763b82fb",
+      "directSqlMethods": [
+        "private static java.lang.Throwable lambda$preserveFatal$0(java.lang.Throwable);"
+      ],
+      "disposition": "BOOTSTRAP_OWNS_SQL_CALLBACK_FOR_MIGRATED_CALLERS"
+    }
+  ],
+  "retainedQualification": [
+    {
+      "receipt": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41230-f03-jdbc-graph-fixture-expression-fixed-v1/manifest.json",
+        "sha256": "3bfbde1125b667e770997c1c74dc33fc2d14db17c764dea6f77e32d56b248b28"
+      },
+      "independent": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41232-f03-jdbc-graph-fixture-expression-independent-v1/manifest.json",
+        "sha256": "ba00a6753567adaa7d162fd6e82ce4a4193e67cafb358d616bd3242cdefa8466"
+      },
+      "tests": 3,
+      "source": "6c2e8b027818c8dac0ed0f895edb85658e9c4ff1"
+    },
+    {
+      "receipt": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41294-f02-storage-extra-edge-v1/manifest.json",
+        "sha256": "2aca5b1180ed4482f33927da975ad403119f2f381114880bca3ef1df6ce0fb8c"
+      },
+      "tests": 8,
+      "source": "73257d02769aae531c5af42ebd06226aabf1b712"
+    }
+  ],
+  "currentJdkCleanupSeparate": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43052-jdbc-close-001-008-one-current-exec-v1/manifest.json",
+    "sha256": "a5de7bb6d72db02d4bdc4b9db2e604b4b9809bd2be2e20a635eaab172e542ab1"
+  },
+  "knownRemaining": "The Storage unary overload retains the direct java.sql next link. SSC461 requires the remaining caller and FileOperation ownership before removing it.",
+  "scopeHeld": [
+    "Current API/Web regular proof pending QA056",
+    "Original protected tests and live filesystem/JDBC untouched"
+  ],
+  "qeAdjudication": null,
+  "rebuiltProductJars": 0,
+  "newProductTests": 0,
+  "oldExecsCombined": 0,
+  "formalAcceptanceId": null,
+  "whole451": false
+}
