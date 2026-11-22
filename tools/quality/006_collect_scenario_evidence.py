@@ -226,7 +226,7 @@ def main():
         raise SystemExit("missing required Scenario lifecycle Test ID/method evidence")
     manifest = {
         "runId": run, "programId": "NK-SCN-001", "targetCommit": commit,
-        "branch": subprocess.check_output(["git", "branch", "--show-current"], cwd=repo, text=True).strip(),
+        "branch": json.loads(report_receipt)["branch"],
         "startedAt": read(".started"), "completedAt": read(".completed"), "exitCode": 0,
         "command": "JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -Dnk.pt.node=/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node --no-transfer-progress clean verify",
         "environment": {"os": platform.platform(), "jdk": "25.0.4", "maven": "3.9.12",

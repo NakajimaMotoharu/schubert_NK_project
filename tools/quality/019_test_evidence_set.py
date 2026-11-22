@@ -3193,11 +3193,18 @@ class EvidenceSetTest(unittest.TestCase):
                 "schema": "pgpt-reactor-junit-v1", "runId": "PT-WEB-TEST", "targetCommit": "a" * 40
             }).encode()
             different_run = original.replace(b"PT-WEB-TEST", b"PT-WEB-OTHER")
-            for linked, content, good_hash in (
-                (receipt, original, True),
-                (receipt, original, False),
-                ("results.xml", original, True),
-                (receipt, different_run, True),
+            previous = original.replace(b"pgpt-reactor-junit-v1", b"pgpt-reactor-junit-v2")
+            current = json.dumps({
+                **json.loads(original), "schema": "pgpt-reactor-junit-v3", "branch": "dev-foundation"
+            }).encode()
+            for linked, content, good_hash, valid in (
+                (receipt, original, True, True),
+                (receipt, previous, True, True),
+                (receipt, current, True, True),
+                (receipt, current.replace(b"dev-foundation", b"dev-other"), True, False),
+                (receipt, original, False, False),
+                ("results.xml", original, True, False),
+                (receipt, different_run, True, False),
             ):
                 path.write_bytes(content)
                 expected = hashlib.sha256(content).hexdigest()
@@ -3215,7 +3222,7 @@ class EvidenceSetTest(unittest.TestCase):
                         hashlib.sha256((directory / name).read_bytes()).hexdigest() + "  " + name + "\n"
                         for name in ("manifest.json", "results.xml", receipt)
                     ))
-                    if linked == receipt and content == original and good_hash:
+                    if valid:
                         result = gate.validate_scope(root, scope, "PT-WEB-TEST", "a" * 40, "dev-foundation")
                         self.assertEqual(scope, result["scope"])
                     else:

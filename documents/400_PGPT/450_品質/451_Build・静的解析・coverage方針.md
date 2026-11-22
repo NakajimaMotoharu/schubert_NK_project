@@ -71,6 +71,8 @@ Nullability/static analysis、constructor/factory invariant、API/DB/config/coll
 
 新規正式収集は、030が成功終了を公開する前に原Surefire XMLの七領域、件数、ハッシュ、source・run・時刻・build logのハッシュを固定する。006／018は同receiptと現原XMLを収集の前後で照合し、別run・置換・欠落・余分・非合格を拒否する。新規収集用v2はJaCoCo原exec/XML/CSV（七領域）、原SpotBugs XML（製品六領域）及び実compiled Mainの全byteのハッシュも含める。required四counterとpackage合計、SpotBugsのMissingClass・ErrorとClassStatsを収録で照合する。既認定領域はその正式保存物を読取照合する。PT仕様5721～5724を参照。
 
+現行新runは選択した名前付きclean checkoutの030から起動する。030はcheckout単位の排他と全checkout共通の一回用ID予約を取得する。v3原終端には既存v2の原出力に加え、開始branchを固定する。収集時も同branchを照合し、rootのbranchを終端から採用する。旧v1/v2の保存物はvalidation-onlyの履歴として読める。PT仕様5728・5729を参照。
+
 ## 7. 完了gate
 
 Build、全PT、4指標coverage、NPE/static、重大BUG 0、全BUG再試験、全YKT完了、未回答QA/RDF/UIC/SSC 0、未承認CHR差分0、secret hit 0、trace漏れ0、clean worktree、必要commit/branch/PR/push済みをすべて満たした場合だけPGPT完了とする。Remote認証やLinux実測など工程外依存は隠さずblockerとして報告し、未達のまま完了扱いしない。

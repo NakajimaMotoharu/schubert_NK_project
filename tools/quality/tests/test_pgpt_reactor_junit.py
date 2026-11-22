@@ -3,6 +3,7 @@
 import hashlib
 import json
 from pathlib import Path
+import subprocess
 import tempfile
 import unittest
 import xml.etree.ElementTree as ET
@@ -12,6 +13,7 @@ from pgpt_reactor_junit import capture_reactor_junit, verify_reactor_junit
 
 RUN = "PT-WEB-SYNTHETIC-01"
 SOURCE = "a" * 40
+BRANCH = "dev-fixture"
 MODULES = (
     "program/characterization",
     "src/schubert-nk-api",
@@ -35,10 +37,13 @@ class ReactorJunitTest(unittest.TestCase):
         self.addCleanup(scratch.cleanup)
         root = Path(scratch.name)
         self.repo = root / "repo"
+        self.repo.mkdir()
+        self.git("init", "-q", f"--initial-branch={BRANCH}")
         self.runs = root / "runs"
         self.runs.mkdir()
         for suffix, value in (
             (".commit", SOURCE),
+            (".branch", BRANCH),
             (".started", "2026-11-23T00:00:00+09:00"),
             (".completed", "2026-11-23T00:01:00+09:00"),
             (".log", "synthetic terminal log"),
@@ -65,6 +70,9 @@ class ReactorJunitTest(unittest.TestCase):
     def marker(self, suffix):
         return self.runs / (RUN + suffix)
 
+    def git(self, *args):
+        return subprocess.run(["git", *args], cwd=self.repo, capture_output=True, check=True)
+
     def capture(self):
         return capture_reactor_junit(self.repo, RUN, SOURCE, self.runs)
 
@@ -79,7 +87,7 @@ class ReactorJunitTest(unittest.TestCase):
         self.success()
         content = self.verify()
         output = json.loads(content)
-        self.assertEqual((RUN, SOURCE), (output["runId"], output["targetCommit"]))
+        self.assertEqual((RUN, SOURCE, BRANCH), (output["runId"], output["targetCommit"], output["branch"]))
         self.assertEqual(
             {
                 path.relative_to(self.repo).as_posix(): {
@@ -168,7 +176,7 @@ class ReactorJunitTest(unittest.TestCase):
     def test_quality_hashes_include_every_declared_report_and_real_class_path(self):
         self.success()
         decoded = json.loads(self.verify())
-        self.assertEqual("pgpt-reactor-junit-v2", decoded["schema"])
+        self.assertEqual("pgpt-reactor-junit-v3", decoded["schema"])
         expected = {
             path.relative_to(self.repo).as_posix(): hashlib.sha256(path.read_bytes()).hexdigest()
             for path in self.quality
@@ -209,15 +217,39 @@ class ReactorJunitTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "missing, empty or redirected"):
             self.capture()
 
-    def test_original_junit_only_receipt_cannot_be_used_for_a_new_candidate(self):
+    def test_previous_receipts_cannot_be_used_for_a_new_candidate(self):
         self.success()
         receipt = self.marker(".junit.json")
-        old = json.loads(receipt.read_bytes())
-        old["schema"] = "pgpt-reactor-junit-v1"
-        del old["qualityArtifacts"]
-        receipt.write_text(json.dumps(old, sort_keys=True, indent=2) + "\n")
-        with self.assertRaisesRegex(ValueError, "differs"):
+        current = json.loads(receipt.read_bytes())
+        for old_schema in ("pgpt-reactor-junit-v1", "pgpt-reactor-junit-v2"):
+            with self.subTest(old_schema=old_schema):
+                old = {**current, "schema": old_schema}
+                del old["branch"]
+                if old_schema.endswith("v1"):
+                    del old["qualityArtifacts"]
+                receipt.write_text(json.dumps(old, sort_keys=True, indent=2) + "\n")
+                with self.assertRaisesRegex(ValueError, "differs"):
+                    self.verify()
+
+    def test_original_branch_rejects_same_commit_after_switch(self):
+        self.success()
+        self.git("symbolic-ref", "HEAD", "refs/heads/dev-other")
+        with self.assertRaisesRegex(ValueError, "branch does not match"):
             self.verify()
+        self.git("symbolic-ref", "HEAD", "refs/heads/" + BRANCH)
+        self.assertEqual(BRANCH, json.loads(self.verify())["branch"])
+
+    def test_missing_or_different_branch_marker_cannot_start_terminal(self):
+        branch = self.marker(".branch")
+        branch.unlink()
+        with self.assertRaises(FileNotFoundError):
+            self.capture()
+        for value in ("", "dev-other"):
+            with self.subTest(value=value):
+                branch.write_text(value + "\n")
+                with self.assertRaisesRegex(ValueError, "branch does not match"):
+                    self.capture()
+            self.assertFalse(self.marker(".junit.json").exists())
 
     def test_unparseable_or_missing_receipt_is_rejected(self):
         self.paths[2].write_text("<unclosed")

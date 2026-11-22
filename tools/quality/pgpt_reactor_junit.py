@@ -5,6 +5,7 @@ import hashlib
 import json
 from pathlib import Path
 import re
+import subprocess
 import xml.etree.ElementTree as ET
 
 
@@ -94,6 +95,10 @@ def _snapshot(repo, run, commit, directory):
     observed = _run_path(directory, run, ".commit").read_text().strip()
     if commit != observed:
         raise ValueError("reactor commit does not match")
+    branch = subprocess.check_output(["git", "branch", "--show-current"], cwd=repo,
+                                     text=True).strip()
+    if not branch or branch != _run_path(directory, run, ".branch").read_text().strip():
+        raise ValueError("reactor branch does not match")
     reports = {}
     quality = {}
     repo = repo.resolve()
@@ -110,9 +115,10 @@ def _snapshot(repo, run, commit, directory):
         for relative, sha256 in quality_artifact_hashes(target, module).items():
             quality[(target.relative_to(repo) / relative).as_posix()] = sha256
     return {
-        "schema": "pgpt-reactor-junit-v2",
+        "schema": "pgpt-reactor-junit-v3",
         "runId": run,
         "targetCommit": commit,
+        "branch": branch,
         "startedAt": _run_path(directory, run, ".started").read_text().strip(),
         "completedAt": _run_path(directory, run, ".completed").read_text().strip(),
         "buildLogSha256": _file_digest(_run_path(directory, run, ".log")),

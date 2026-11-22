@@ -149,10 +149,13 @@ def validate_scope(root, scope, run, commit, branch):
         terminal = json.loads(payload.read_bytes())
         if (
             not isinstance(terminal, dict)
-            or terminal.get("schema") not in {"pgpt-reactor-junit-v1", "pgpt-reactor-junit-v2"}
+            or terminal.get("schema") not in {
+                "pgpt-reactor-junit-v1", "pgpt-reactor-junit-v2", "pgpt-reactor-junit-v3"
+            }
             or (terminal.get("runId"), terminal.get("targetCommit")) != (run, commit)
+            or (terminal["schema"] == "pgpt-reactor-junit-v3" and terminal.get("branch") != branch)
         ):
-            raise ValueError("invalid persisted reactor JUnit receipt run/source")
+            raise ValueError("invalid persisted reactor JUnit receipt run/source/branch")
     checksums = {}
     for line in (directory / "checksums.sha256").read_text().splitlines():
         match = re.fullmatch(r"([0-9a-f]{64})  (.+)", line)
