@@ -1,5 +1,21 @@
 # IT・ST引継ぎ事項
 
+## 2026-11-23 Linux側への引継ぎ候補と開始条件
+
+正式認定はPT-WEB-20260925-24の1964試験／53領域。元WBSの有効受入は16/190、短期指定0/12、工数完成率は未較正。現Java Coreは `e8368d22c4da2ec841f008df793594d3be9066af`。正式開始判定にはPG/PTの同一sourceの終端、署名付きBOM、承認された対象環境・担当、変更と切戻しの記録を揃える。[SS362](../../300_SS/360_引継ぎ・監査/362_PG・PT・IT工程引継ぎ事項.md)
+
+| 担当 | 現候補で引き継げる証拠 | 開始・完了までに取得する証拠 |
+| --- | --- | --- |
+| ビルド・品質 | Protocolの実offline CIはJDK25.0.4／Maven3.9.12、JUnit171／39、標準JaCoCo四指標100%、SpotBugs0、現通常JAR。旧正式53領域は公開履歴から再照合。 | StorageのJDBC責務、APIとWebの正規JAR、現sourceの全製品・全必須scope、保留32入力とRoot11、現Batch完全目録、451正式判定。 |
+| Linux・運用 | 下段の05:00 JSTタイマー、外部監視へ渡す判定値、同runの開始／完了marker契約。 | 承認済みLinuxの現在boot、rendered Unit・有効設定・所有者、普通API/Web/Caddyの起動と順序、同一環境での保守・停止・再起動・監視の真正後条件。 |
+| DB・移行・復元 | 既定の変更管理、固定DDLと独立期待値、比較用Current baseline。 | 同source・同環境でのJDK/DB/Artemisの正規バージョン、移行全件（設計基準59,627ファイル・19.24 GB）の件数／hash／時間、DB query planと物理サイズ、Backup 7世代・80 GBとRTO 24時間の復元時系列。実原本・Backupの使用と責任者を先に確認する。 |
+| 性能・互換 | QA-050の承認済み初期backoffと、その後15分間隔。現起動・Broker・Webの実測は未受入。 | Linux上のWeb/API JVM・DB pool/SQL・Artemis journal/paging容量、再送と重複防止の実測、実CHR-A01/L01と現source native。性能に問題が確認された場合は承認手順を通して間隔を変更し、再試験する。 |
+| 配布・ライセンス | QA-061は回答受領、配布条件と判定担当は未決。候補構成表・配布元のhash・依存検査の局所結果を保持。 | 配布条件、依存ライセンスの受入基準と判定担当、同候補の実配布成果物・構成表・署名・承認を突合する。 |
+
+PG/PT側の残件は451と456で追跡する。Linux側は実測範囲・source/run・日時・OS/JDK/ミドルウェア・対象識別・次操作の承認を分けて受領する。各担当の正式受領、同一sourceの実インフラ・性能試験、IT/ST開始判定はいずれも未到達。
+
+[Protocol実CI](../../../evidence/01_PT/018_NK-OPS-001/5714_ProtocolローカルCI実行_仕様と結果.md)・[旧認定の原証跡](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG42746-g08-certified-historical-53-v1/manifest.json)・[配布判定](../../../evidence/01_PT/018_NK-OPS-001/5708_QA061回答と配布判定残条件.md)
+
 ## 2026-11-22 日次保守の監視判定と運用検収
 
 現Java候補 8c99fbd2112183808d8d973bce7b3a9b3c1cef13。Maven包装済みのBatch JARから追加された3物理を照合し、同候補の期限判定8件と、JAR由来の通常CLI入口4例を確認した。後者は外部監視へ接続せず、合成された観測値を入力した。timerの設定候補と構文証拠は下段を参照する。
