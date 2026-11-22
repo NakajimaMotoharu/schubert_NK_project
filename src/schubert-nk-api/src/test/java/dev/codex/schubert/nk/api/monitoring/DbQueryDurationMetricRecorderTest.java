@@ -24,8 +24,10 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
@@ -138,7 +140,8 @@ class DbQueryDurationMetricRecorderTest {
     if (failure.isPresent()) {
       var problem = failure.orElseThrow();
       if (problem instanceof Error error) throw error;
-      throw (RuntimeException) problem;
+      if (problem instanceof Unformattable runtimeFailure) throw runtimeFailure;
+      throw new AssertionError("unexpected fixture failure type");
     }
   }
 
@@ -392,7 +395,8 @@ class DbQueryDurationMetricRecorderTest {
   }
 
   @Test
-  void dbTime007ConcurrentSampleCountSumAndMaximumUsePrecomputedIntegerInputs() throws Exception {
+  void dbTime007ConcurrentSampleCountSumAndMaximumUsePrecomputedIntegerInputs()
+      throws InterruptedException, ExecutionException, TimeoutException {
     try (var registry = new Registry();
         var otherRegistry = new Registry()) {
       var executor = Executors.newFixedThreadPool(8);
