@@ -1,0 +1,437 @@
+{
+  "run": "PG41828",
+  "source": "1c699b56c47fcfc16718533e631de4779c34cfb0",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-F03/2-2-b",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T01:42:50.732046+00:00",
+  "bugs": [
+    "BUG-3510"
+  ],
+  "ykt": "YKT-2794",
+  "affected": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AudioFileCopyRowTest.java",
+      "sha256": "3003f62d570fede1ce9167cd23da7c17248f9374dd3e9a38e49461503091882a"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MediaAssetCopyRowTest.java",
+      "sha256": "9ce630f65533be0a5f5fa7e4929f03086ce458373e6803ac7276ac00c3b8cfad"
+    }
+  ],
+  "initial": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41826-f03-audio-media-row-typed-static-v1/manifest.json",
+    "sha256": "516524ca8280344e3ca540dbc4195529e68239f5f821914ecf8c4898589cb417"
+  },
+  "sourceOwnership": "Fixed feature revision; same Production Core; product changes 0",
+  "change": [
+    "Checked declaration-specific NoSuchAlgorithmException and bounded Future/termination checked exceptions; assertion and fixture bodies unchanged"
+  ],
+  "actualAuxMembers": {
+    "dev/codex/schubert/nk/migration/AudioFileCopyRow.class": "ea50b38127af77e325c23f0d9810232341fd2eb2e0e4b17f179d4e9bae20500f",
+    "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder.class": "d92993e0256be418b35ffd962f68d96ad6457020a1c8f547694c068b5e46f83d",
+    "dev/codex/schubert/nk/migration/MediaAssetCopyRow.class": "6c5adc60b233b941b9d509dfdae40bbf8f2b0218a41b25776d31c23a99459555",
+    "dev/codex/schubert/nk/migration/MusicLogicalId.class": "24079b291b751577369f256ef32a31d9dd86b0e83885a5d79b51d761a04dd59b"
+  },
+  "fixtureClasses": {
+    "dev/codex/schubert/nk/migration/MediaAssetCopyRowTest.class": "9fa7422d4f4b88192dd4e2d637403805700b4249267b86e1cc131be362ac5c59",
+    "dev/codex/schubert/nk/migration/AudioFileCopyRowTest.class": "71a5ad97b3e0be7aa1d64a948b636d2b62db7c03f74f1d3d9be5fd42e58acf15"
+  },
+  "commands": {
+    "format": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-jar",
+      "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+      "--dry-run",
+      "--set-exit-if-changed",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AudioFileCopyRowTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MediaAssetCopyRowTest.java"
+    ],
+    "checkstyle": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-jar",
+      "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+      "-c",
+      "tools/quality/static/checkstyle.xml",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AudioFileCopyRowTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MediaAssetCopyRowTest.java"
+    ],
+    "pmd": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-cp",
+      "/home/mini/codex/project1/work/toolchain/static-gates-20261015/record-fix-v1/pmd-record-1298.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/Saxon-HE-12.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/antlr4-runtime-4.13.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/apex-ls_2.13-6.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/apex-parser-5.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/better-files_2.13-3.9.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/checker-qual-3.55.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/common2_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/common_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/commons-lang3-3.20.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/directory-watcher-0.18.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/directory-watcher-better-files_2.13-0.18.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/error_prone_annotations-2.48.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/failureaccess-1.0.3.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/geny_2.13-0.6.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/groovy-5.1.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/gson-2.14.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/gson-extras-3.3.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/guava-33.7.1-jre.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/io_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/j2objc-annotations-3.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/java-diff-utils-4.16.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jline-native-3.29.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jline-terminal-3.29.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jna-5.12.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jsoup-1.23.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jsr250-api-1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jul-to-slf4j-1.7.36.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-build-tools-api-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-compiler-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-daemon-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-script-runtime-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-common-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-compiler-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-compiler-impl-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-jvm-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-stdlib-2.2.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-stdlib-jdk7-2.2.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-stdlib-jdk8-2.2.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-type-mapper-analyzer-0.7.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-type-mapper-model-0.7.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlinx-coroutines-core-jvm-1.8.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlinx-serialization-core-jvm-1.11.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlinx-serialization-json-jvm-1.11.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/mainargs_2.13-0.5.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/nice-xml-messages-3.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/outline-parser_2.13-2.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/parsers_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pcollections-4.0.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/picocli-4.7.7.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-ant-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-apex-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-cli-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-coco-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-core-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-cpp-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-cs-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-css-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-dart-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-designer-7.19.3.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-fortran-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-gherkin-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-go-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-groovy-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-html-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-java-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-javascript-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-jsp-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-julia-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-kotlin-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-lua-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-matlab-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-modelica-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-objectivec-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-perl-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-php-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-plsql-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-python-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-ruby-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-rust-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-scala_2.13-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-swift-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-tsql-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-velocity-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-visualforce-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-xml-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/portable-scala-reflect_2.13-1.1.3.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/progressbar-0.10.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/rhino-1.7.15.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-collection-compat_2.13-2.8.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-json-rpc-upickle-json-serializer_2.13-1.1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-json-rpc_2.13-1.1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-library-2.13.18.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-parallel-collections_2.13-1.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-reflect-2.13.18.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-xml_2.13-1.3.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scalajs-stubs_2.13-1.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/slf4j-api-1.7.36.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/slf4j-simple-1.7.36.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/sobject-types-67.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/sourcecode_2.13-0.4.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/standard-types-67.0.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/summit-ast-3.1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/trees2_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/trees_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/ujson_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upack_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upickle-core_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upickle-implicits_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upickle_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/vf-parser-2.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/xmlresolver-5.3.3-data.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/xmlresolver-5.3.3.jar",
+      "net.sourceforge.pmd.cli.PmdCli",
+      "check",
+      "--file-list",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41828-f03-audio-media-row-typed-close-v1/sources.txt",
+      "--rulesets",
+      "tools/quality/static/pmd.xml",
+      "--use-version",
+      "java-25",
+      "--aux-classpath",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41826-f03-audio-media-row-typed-static-v1/pure:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+      "--no-cache",
+      "--format",
+      "xml",
+      "--report-file",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41828-f03-audio-media-row-typed-close-v1/pmd.xml"
+    ],
+    "spotbugs": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-Xmx1g",
+      "-cp",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/com/github/spotbugs/spotbugs/4.10.4/spotbugs-4.10.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-analysis/9.10.1/asm-analysis-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-util/9.10.1/asm-util-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/bcel/bcel/6.12.0/bcel-6.12.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/github/stephenc/jcip/jcip-annotations/1.0-1/jcip-annotations-1.0-1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/dom4j/dom4j/2.2.0/dom4j-2.2.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/commons/commons-lang3/3.20.0/commons-lang3-3.20.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/commons/commons-text/1.15.0/commons-text-1.15.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/github/spotbugs/spotbugs-annotations/4.10.4/spotbugs-annotations-4.10.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/jaxen/jaxen/2.0.6/jaxen-2.0.6.jar:/home/mini/codex/project1/work/toolchain/m2/repository/net/sf/saxon/Saxon-HE/12.10/Saxon-HE-12.10.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/logging/log4j/log4j-api/2.26.1/log4j-api-2.26.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.26.1/log4j-to-slf4j-2.26.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-simple/2.0.18/slf4j-simple-2.0.18.jar:/home/mini/codex/project1/work/toolchain/m2/repository/commons-io/commons-io/2.22.0/commons-io-2.22.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/xmlresolver/xmlresolver/5.3.3/xmlresolver-5.3.3.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/xmlresolver/xmlresolver/5.3.3/xmlresolver-5.3.3-data.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+      "edu.umd.cs.findbugs.FindBugs2",
+      "-effort:max",
+      "-low",
+      "-xml:withMessages",
+      "-exitcode",
+      "-auxclasspath",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41826-f03-audio-media-row-typed-static-v1/pure:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+      "-output",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41828-f03-audio-media-row-typed-close-v1/spotbugs.xml",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41828-f03-audio-media-row-typed-close-v1/test"
+    ],
+    "compile": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+      "--release",
+      "25",
+      "-g",
+      "-proc:none",
+      "-implicit:none",
+      "-encoding",
+      "UTF-8",
+      "-Xlint:all",
+      "-Werror",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41826-f03-audio-media-row-typed-static-v1/pure:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+      "-d",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41828-f03-audio-media-row-typed-close-v1/test",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AudioFileCopyRowTest.java",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MediaAssetCopyRowTest.java"
+    ]
+  },
+  "steps": {
+    "compile": {
+      "exit": 0,
+      "beganAtUTC": "2026-11-22T01:42:42.940385+00:00",
+      "terminalAtUTC": "2026-11-22T01:42:43.826079+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41828-f03-audio-media-row-typed-close-v1/compile.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41828-f03-audio-media-row-typed-close-v1/compile.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "format": {
+      "exit": 0,
+      "beganAtUTC": "2026-11-22T01:42:43.827548+00:00",
+      "terminalAtUTC": "2026-11-22T01:42:45.803322+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41828-f03-audio-media-row-typed-close-v1/format.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41828-f03-audio-media-row-typed-close-v1/format.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "checkstyle": {
+      "exit": 0,
+      "beganAtUTC": "2026-11-22T01:42:43.828425+00:00",
+      "terminalAtUTC": "2026-11-22T01:42:45.890935+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41828-f03-audio-media-row-typed-close-v1/checkstyle.stdout",
+        "sha256": "2ee89ca49ecae1bb5b3de5ffcc8a964e605f1b1c6fbe072073a1ea4feaa4e230"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41828-f03-audio-media-row-typed-close-v1/checkstyle.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "pmd": {
+      "exit": 4,
+      "beganAtUTC": "2026-11-22T01:42:43.829218+00:00",
+      "terminalAtUTC": "2026-11-22T01:42:48.751503+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41828-f03-audio-media-row-typed-close-v1/pmd.stdout",
+        "sha256": "4b4460a3112552a49d1c2a9751021160dd303d6fcc3fbe3e7e5286a8704ec957"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41828-f03-audio-media-row-typed-close-v1/pmd.stderr",
+        "sha256": "e00dbf43342ca121ed33a7a86273b672c0847e27e6557469f75112c144c20db7"
+      }
+    },
+    "spotbugs": {
+      "exit": 0,
+      "beganAtUTC": "2026-11-22T01:42:43.829838+00:00",
+      "terminalAtUTC": "2026-11-22T01:42:49.771852+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41828-f03-audio-media-row-typed-close-v1/spotbugs.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41828-f03-audio-media-row-typed-close-v1/spotbugs.stderr",
+        "sha256": "83febadc46f214e89709b832aae077e8a743258c2778ad97727d55ed33462071"
+      }
+    }
+  },
+  "spotbugs": 0,
+  "spotbugsErrors": {
+    "errors": "0",
+    "missingClasses": "0"
+  },
+  "pmdRaw": 10,
+  "pmdApplicable": 0,
+  "pmdUnclassified": 0,
+  "pmdProcessingErrors": 0,
+  "pmdEachDisposition": [
+    {
+      "current": {
+        "file": "AudioFileCopyRowTest.java",
+        "rule": "CloseResource",
+        "line": 249,
+        "end": 249
+      },
+      "prior": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AudioFileCopyRowTest.java",
+        "rule": "CloseResource",
+        "line": "246",
+        "reason": "SSC396 fresh site review on current Role11 source: the inverse code-token proof confirms only the declared width/new independent vector changed; this exact owned-resource, synthetic SQL-null, JDK-only Proxy or finite-worker contract remains individually valid. This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+        "disposition": "NOT_APPLICABLE",
+        "message": "Ensure that resources like this ExecutorService object are closed after use"
+      },
+      "verbatimLinesSha": "3292bf1a5ad5078588fc3646cc63c6632ef34784c864b511a89d295716deaef9"
+    },
+    {
+      "current": {
+        "file": "AudioFileCopyRowTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 249,
+        "end": 249
+      },
+      "prior": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AudioFileCopyRowTest.java",
+        "rule": "DoNotUseThreads",
+        "line": "246",
+        "reason": "SSC396 fresh site review on current Role11 source: the inverse code-token proof confirms only the declared width/new independent vector changed; this exact owned-resource, synthetic SQL-null, JDK-only Proxy or finite-worker contract remains individually valid. This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+        "disposition": "NOT_APPLICABLE",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "verbatimLinesSha": "3292bf1a5ad5078588fc3646cc63c6632ef34784c864b511a89d295716deaef9"
+    },
+    {
+      "current": {
+        "file": "AudioFileCopyRowTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 253,
+        "end": 253
+      },
+      "prior": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AudioFileCopyRowTest.java",
+        "rule": "DoNotUseThreads",
+        "line": "250",
+        "reason": "SSC396 fresh site review on current Role11 source: the inverse code-token proof confirms only the declared width/new independent vector changed; this exact owned-resource, synthetic SQL-null, JDK-only Proxy or finite-worker contract remains individually valid. This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+        "disposition": "NOT_APPLICABLE",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "verbatimLinesSha": "d30e6bff0995f20c80cbd68da8bae2442e88416c3a594ba6908adc72455c18dc"
+    },
+    {
+      "current": {
+        "file": "AudioFileCopyRowTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 258,
+        "end": 258
+      },
+      "prior": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AudioFileCopyRowTest.java",
+        "rule": "DoNotUseThreads",
+        "line": "255",
+        "reason": "SSC396 fresh site review on current Role11 source: the inverse code-token proof confirms only the declared width/new independent vector changed; this exact owned-resource, synthetic SQL-null, JDK-only Proxy or finite-worker contract remains individually valid. This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+        "disposition": "NOT_APPLICABLE",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "verbatimLinesSha": "39db74392ac1dfab61d6cee2b4935e25623be2db72f97fdbe5826d6ede7d79cc"
+    },
+    {
+      "current": {
+        "file": "AudioFileCopyRowTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 259,
+        "end": 259
+      },
+      "prior": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AudioFileCopyRowTest.java",
+        "rule": "DoNotUseThreads",
+        "line": "256",
+        "reason": "SSC396 fresh site review on current Role11 source: the inverse code-token proof confirms only the declared width/new independent vector changed; this exact owned-resource, synthetic SQL-null, JDK-only Proxy or finite-worker contract remains individually valid. This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+        "disposition": "NOT_APPLICABLE",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "verbatimLinesSha": "24d24d21372fbed7b29cce34093963104c87ccb5a0f8d673607bdbb1244185c9"
+    },
+    {
+      "current": {
+        "file": "MediaAssetCopyRowTest.java",
+        "rule": "CloseResource",
+        "line": 370,
+        "end": 370
+      },
+      "prior": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MediaAssetCopyRowTest.java",
+        "rule": "CloseResource",
+        "line": "361",
+        "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed value/hash/COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+        "disposition": "NOT_APPLICABLE",
+        "message": "Ensure that resources like this ExecutorService object are closed after use"
+      },
+      "verbatimLinesSha": "3292bf1a5ad5078588fc3646cc63c6632ef34784c864b511a89d295716deaef9"
+    },
+    {
+      "current": {
+        "file": "MediaAssetCopyRowTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 370,
+        "end": 370
+      },
+      "prior": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MediaAssetCopyRowTest.java",
+        "rule": "DoNotUseThreads",
+        "line": "361",
+        "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed value/hash/COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+        "disposition": "NOT_APPLICABLE",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "verbatimLinesSha": "3292bf1a5ad5078588fc3646cc63c6632ef34784c864b511a89d295716deaef9"
+    },
+    {
+      "current": {
+        "file": "MediaAssetCopyRowTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 374,
+        "end": 374
+      },
+      "prior": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MediaAssetCopyRowTest.java",
+        "rule": "DoNotUseThreads",
+        "line": "365",
+        "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed value/hash/COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+        "disposition": "NOT_APPLICABLE",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "verbatimLinesSha": "d30e6bff0995f20c80cbd68da8bae2442e88416c3a594ba6908adc72455c18dc"
+    },
+    {
+      "current": {
+        "file": "MediaAssetCopyRowTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 380,
+        "end": 380
+      },
+      "prior": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MediaAssetCopyRowTest.java",
+        "rule": "DoNotUseThreads",
+        "line": "371",
+        "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed value/hash/COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+        "disposition": "NOT_APPLICABLE",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "verbatimLinesSha": "39db74392ac1dfab61d6cee2b4935e25623be2db72f97fdbe5826d6ede7d79cc"
+    },
+    {
+      "current": {
+        "file": "MediaAssetCopyRowTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 381,
+        "end": 381
+      },
+      "prior": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MediaAssetCopyRowTest.java",
+        "rule": "DoNotUseThreads",
+        "line": "372",
+        "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed value/hash/COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+        "disposition": "NOT_APPLICABLE",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "verbatimLinesSha": "24d24d21372fbed7b29cce34093963104c87ccb5a0f8d673607bdbb1244185c9"
+    }
+  ],
+  "priorDispositionAuthority": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33288-mapverify976-preflight-v5/manifest.json",
+    "sha256": "df5fbcafa9e52f25e124a7ccdff12ffea987128443a99aa7b9d9b84bdd841452"
+  },
+  "normalizedAllClassDeclarationsAndInstructions": {
+    "dev/codex/schubert/nk/migration/MediaAssetCopyRowTest.class": "6c0c452dd22869d67c3f1b9a6a7264e1019e01e0d50c6009185da0131ea67946",
+    "dev/codex/schubert/nk/migration/AudioFileCopyRowTest.class": "3e3486f2663ab1914a6aae9fee0de24552dd7d07d4181f58c35129c3371b05c0"
+  },
+  "reports": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41828-f03-audio-media-row-typed-close-v1/pmd.xml",
+      "sha256": "c7b72e6fdcd39111da6ef487e1ded6469d089cc1bff8ad51730d0be14da5c08f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41828-f03-audio-media-row-typed-close-v1/spotbugs.xml",
+      "sha256": "1ce1fea938450ec559065f5977ee48fc746b3353cd0e08c6d1184be7a2cfc9ed"
+    }
+  ],
+  "existingRuntimeEvidenceReused": true,
+  "runtimeEvidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41822-f03-audio-row-current-evidence-v1/manifest.json",
+      "sha256": "21218e0c9b0fa1b39913b74819d442438b05f5d48eb293899c02778da0223416"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41824-f03-media-row-current-evidence-v1/manifest.json",
+      "sha256": "0b698fdff115ac020b555bbcded1f434ae72b58c337fb72366108f73f16a70f8"
+    }
+  ],
+  "exactHistoricalCases": {
+    "AudioFileCopyRowTest": [
+      "independentTwelveColumnGoldenHasExactOrderAndUtf8()",
+      "nullableContainerDurationAndEmptyContainerRemainDistinct()",
+      "actualFileByteSizeRequiresPositiveCanonicalN12()",
+      "finiteWorkersObserveTheSameImmutableGoldenWithoutSharedByteArrays()",
+      "containerVarcharLimitCountsCodePointsAndPreservesEmpty()",
+      "fixedRedactionAndIndependentValueSurviveRejectedInput()",
+      "sqlLikeLiteralIsOnlyCopyDataWithIndependentBackslashEscape()",
+      "relativeStorageHasByteBoundariesAndRejectsAllDangerousSegments()",
+      "mandatoryTextLimitsAreByteCountsWithoutInventedRoleEnum()",
+      "currentMovieAudioElevenBytesArePreservedWithoutRenamingOrTruncating()",
+      "timestampHasIndependentYearMicrosecondAndCanonicalBoundaries()",
+      "durationAllowsCanonicalZeroAndMaximumWithoutNumericNormalization()",
+      "immutableSnapshotAndFreshBytesHaveSeparateOwnership()",
+      "allTextColumnsRejectNonNfcUnpairedSurrogatesAndIsoControls()",
+      "idPositiveN12AndTwoGamesHaveIndependentBoundaries()",
+      "nullMissingAndExtraColumnsNeverBecomeNpeOrDefaultValues()",
+      "shaIsExactlyLowerHexWithoutHashingProductionInputAsOracle()"
+    ],
+    "MediaAssetCopyRowTest": [
+      "pairedMusicKeyHasOneTo256Utf8Bytes()",
+      "musicSeventeenColumnGoldenUsesTheIndependentFixedLogicalId()",
+      "positiveIdsSizeAndDisplayOrderHaveIndependentNumericBoundaries()",
+      "everyTextBoundaryRejectsMalformedUnicodeNonNfcAndControls()",
+      "sqlLikeDisplayTextIsOnlyEscapedCopyData()",
+      "canonicalUtcYearAndMicrosecondBoundariesAreIndependent()",
+      "logicalAndParentByteLimitsAreSeparateFromActualReferenceExistence()",
+      "immutableDeepSnapshotAndFreshCopyBytesHaveIndependentOwnership()",
+      "nullableSectionPreservesEmptyAndIts128ByteLimit()",
+      "mandatoryTitleCategoryAndNameLimitsCountUtf8Bytes()",
+      "mediaTypeAndMusicRoleUseTheirExistingClosedSets()",
+      "storageAndDisplayHave512ByteBoundsWithoutPathResolution()",
+      "japaneseMusicLogicalIdComesFromTheIndependentFixedVector()",
+      "allSixMimeExtensionPairsAreExactAndNeverGuessed()",
+      "fixedRedactionAndIndependentNormalValueSurviveRejectedMetadata()",
+      "finiteWorkersReturnIndependentExactGoldenBytes()",
+      "videoSeventeenColumnGoldenIsIndependentAndHasAllNullPairFields()",
+      "assetShaIsExactlyLowercaseHex64()",
+      "currentV029PairTruthRequiresEveryConditionalNonNullValue()",
+      "nullInputsColumnCountsRequiredElementsAndEncoderFailExplicitly()"
+    ]
+  },
+  "newlyExecutedProductTests": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
