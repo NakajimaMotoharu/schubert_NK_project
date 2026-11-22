@@ -1,0 +1,86 @@
+{
+  "run": "PG42448",
+  "source": "536f9b5cfa0e4490b03070d7245b4fd41f8bc7b8",
+  "javaCore": "b5d5009768a04bb69468beed2471441b2a57ce27",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-22T09:09:58.554465+00:00",
+  "ordinary": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42446-f03-bootstrap-copy-fingerprint-current-v1/manifest.json",
+    "sha256": "08b35128bc815c0d81e8e1c918fe104a009a5b95fba78e8304df39d885bbeb08"
+  },
+  "runtimeRepeated": 0,
+  "staticTarget": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42448-bootstrap-copy-fingerprint-static-v1/begin.json",
+    "sha256": "51e89fee752dda9b0199e28d9e5fa1bf2bb942f6cc7751f7414a89ffdc15d065"
+  },
+  "engineExits": {
+    "guard": 0,
+    "checkstyle": 0,
+    "pmd": 4,
+    "spotbugs": 0
+  },
+  "raw": {
+    "checkstyle": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42448-bootstrap-copy-fingerprint-static-v1/reports/checkstyle.xml",
+      "sha256": "cf8fd781d26cf4bb35dfadd5ead10e9aea147a7ae7de9cd8cdb965c8d50cd0ce"
+    },
+    "pmd": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42448-bootstrap-copy-fingerprint-static-v1/reports/pmd.xml",
+      "sha256": "10ec237236fbfac3284b811dccb608acc8f8062fb779c431572b15f07e260717"
+    },
+    "spotbugs": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42448-bootstrap-copy-fingerprint-static-v1/reports/spotbugs.xml",
+      "sha256": "b260b9a89ba735b5a3cc382cfd14e5eae4beaa25321ef2da27191c03e9291351"
+    }
+  },
+  "spotbugs": 0,
+  "checkstyle": 0,
+  "missingClass": 0,
+  "pmdRaw": 6,
+  "localUntriaged": 0,
+  "pmdDisposition": [
+    {
+      "file": "MigrationMasterCopyFingerprint.java",
+      "rule": "CloseResource",
+      "line": 54,
+      "scopeReason": "Borrowed in-memory DigestSink. Owns only Java MessageDigest and a byte counter; JDK OutputStream.close is return-only, and subclass adds no close or external resource."
+    },
+    {
+      "file": "MigrationMasterCopyFingerprintTest.java",
+      "rule": "CloseResource",
+      "line": 360,
+      "scopeReason": "Fixture-local fixed-size worker pool; owns bounded parallel independence test and its finally termination."
+    },
+    {
+      "file": "MigrationMasterCopyFingerprintTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 360,
+      "scopeReason": "Fixture-local fixed-size worker pool; owns bounded parallel independence test and its finally termination."
+    },
+    {
+      "file": "MigrationMasterCopyFingerprintTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 364,
+      "scopeReason": "A finite set of in-memory fingerprint requests; exact outputs are tested per future with a fixed bound."
+    },
+    {
+      "file": "MigrationMasterCopyFingerprintTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 368,
+      "scopeReason": "Explicit fixture-local shutdown in finally."
+    },
+    {
+      "file": "MigrationMasterCopyFingerprintTest.java",
+      "rule": "DoNotUseThreads",
+      "line": 369,
+      "scopeReason": "Bounded termination with asserted success before returning."
+    }
+  ],
+  "selectedReviewedJdkBehavior": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42448-bootstrap-copy-fingerprint-static-v1/jdk-outputstream-close.json",
+    "sha256": "a1d24ad57b40dfe7f50c881305f636f42d7452a4fb8331bc4e1c9b690ba27cae"
+  },
+  "localSuppressionAdded": false,
+  "staticWhole451": false,
+  "formalAcceptanceId": null
+}
