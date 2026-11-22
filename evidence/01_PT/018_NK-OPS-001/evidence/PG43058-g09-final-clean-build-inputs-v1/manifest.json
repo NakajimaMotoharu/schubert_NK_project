@@ -1,0 +1,112 @@
+{
+  "run": "PG43058-g09-final-clean-build-inputs-v1",
+  "source": "57e354281380c58e1ade76e42310bd7c8bdf1111",
+  "productCore": "7698011f52d6cc5f94c76413b6ab36971783b9c9",
+  "wbs": [
+    "WBS-G09",
+    "WBS-G08"
+  ],
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T21:51:16.900984+00:00",
+  "testTerminalAtUTC": "2026-11-22T21:50:52Z",
+  "startedAtUTC": "2026-11-22T21:50:51Z",
+  "command": [
+    "python3",
+    "-B",
+    "-m",
+    "unittest",
+    "-v",
+    "test_pgpt_verify_runner",
+    "test_pgpt_reactor_junit"
+  ],
+  "staticShellCommand": [
+    "sh",
+    "-n",
+    "tools/quality/030_run_pgpt_verify.sh"
+  ],
+  "pythonPath": "tools/quality:tools/quality/tests",
+  "environment": {
+    "python": "Python 3.14.4",
+    "platform": "Linux x86_64"
+  },
+  "inputs": [
+    {
+      "path": "tools/quality/030_run_pgpt_verify.sh",
+      "sha256": "c0fa0c42e9ae46c13c1f1023acd13be5843d98a77dd9aa875b62563ca6a86944"
+    },
+    {
+      "path": "tools/quality/pgpt_reactor_junit.py",
+      "sha256": "35d34d123a4a25d882504e79bc55f67115ad42042953a25573fd7e860b6231d4"
+    },
+    {
+      "path": "tools/quality/tests/test_pgpt_verify_runner.py",
+      "sha256": "4fe6fad792475ebe7b1908fe383d5d81ab3715ffe50fd37f44f942ad811fc795"
+    },
+    {
+      "path": "tools/quality/tests/test_pgpt_reactor_junit.py",
+      "sha256": "68d7736f5d79f397a13224f9209a2f4d59ef0c26e6264ab847000e80547e5434"
+    }
+  ],
+  "terminals": [
+    {
+      "path": "../pgpt-runs/PG379/PG43058-g09-final-clean-build-inputs-v1/red-source.txt",
+      "sha256": "465471f9829b90aca3834ebc64488e14ac94ab8fbbfc3a1d80faef1ab41a6417"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43058-g09-final-clean-build-inputs-v1/red-inputs.sha256",
+      "sha256": "162e1187d0747845e3cf16eed16f4385b0174019a2318b10bae23b436f545acc"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43058-g09-final-clean-build-inputs-v1/red.exit",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43058-g09-final-clean-build-inputs-v1/red.stderr",
+      "sha256": "fdc0f080265431ef3253ca69345c25ffe0dd2edf59920a7e91d883179ec59e75"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43058-g09-final-clean-build-inputs-v1/source.txt",
+      "sha256": "ce21d946192d336efc09fc38840d83da90daedfb5cb56339570d68d574d561a8"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43058-g09-final-clean-build-inputs-v1/exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43058-g09-final-clean-build-inputs-v1/python.stderr",
+      "sha256": "cebaaecbeeecac47291e7b792a7c96a8e0a5e7ab8d6c4e00c565c8a3108b9ec9"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43058-g09-final-clean-build-inputs-v1/start-at.txt",
+      "sha256": "0485d7e84ff538903668a9974403a95cd2339f27103311a22d2198ee77d54f88"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43058-g09-final-clean-build-inputs-v1/end-at.txt",
+      "sha256": "8e29aef83358416211a24b8a2cfb89553e90f4657c5a23b546809295ac8dfccf"
+    }
+  ],
+  "independent": {
+    "testIds": [
+      "PT-OPS-G09-RUN010",
+      "PT-OPS-G09-RUN011"
+    ],
+    "priorUnexpectedExit": 0,
+    "correctedDirtyExit": 1,
+    "collectorRunsOnDirty": 0,
+    "ignoredTargetAcceptedAndPreserved": true,
+    "realMavenRuns": 0
+  },
+  "counts": {
+    "toolPassed": 35,
+    "toolFailed": 0,
+    "toolErrors": 0,
+    "toolSkipped": 0,
+    "newProductTests": 0
+  },
+  "related": [
+    "BUG-3658",
+    "YKT-2876"
+  ],
+  "whole451": false,
+  "formalAcceptanceId": null
+}
