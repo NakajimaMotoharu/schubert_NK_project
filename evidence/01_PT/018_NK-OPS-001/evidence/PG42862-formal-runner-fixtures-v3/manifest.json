@@ -1,0 +1,137 @@
+{
+  "run": "PG42862",
+  "worktreeHead": "0d2f2d5c53573b456634145d5389af348c5af62f",
+  "branch": "dev-foundation",
+  "wbs": "WBS-G09",
+  "actualExit": 0,
+  "startedAtUTC": "2026-11-22T17:12:19.135328+00:00",
+  "terminalAtUTC": "2026-11-22T17:12:21.120271+00:00",
+  "reproducedOriginal": {
+    "source": "46ea725d02232190018093170f59349f85253208",
+    "launcherOriginal": "tools/quality/030_run_pgpt_verify.sh",
+    "hardCodedOriginalCheckout": true,
+    "statementsChangedForHarness": [
+      "cd target",
+      "temporary marker directory"
+    ],
+    "syntheticBuildInvocations": 2,
+    "firstExit": 0,
+    "duplicateExit": 0
+  },
+  "inputPins": [
+    {
+      "path": "tools/quality/030_run_pgpt_verify.sh",
+      "sha256": "72a7ef7772184c5ba5b0363e32e3a4fe678b7657342dd8ad1595d855744256ee"
+    },
+    {
+      "path": "tools/quality/tests/test_pgpt_verify_runner.py",
+      "sha256": "5836673a9add87380b1bef4b988dc1adc34d5c89be2ecddd21fc38e276126605"
+    },
+    {
+      "path": "tools/quality/pgpt_reactor_junit.py",
+      "sha256": "bb7680a52fe2bb4935b4875a4d838d960652920c17c898b8abf2b0c94770baf2"
+    },
+    {
+      "path": "tools/quality/019_test_evidence_set.py",
+      "sha256": "b5add9c092f30b5d7cba27fc4be6237abb64edf83395a82bd89a460404e06b8b"
+    }
+  ],
+  "observations": [
+    {
+      "name": "shell",
+      "command": [
+        "sh",
+        "-n",
+        "tools/quality/030_run_pgpt_verify.sh"
+      ],
+      "exitCode": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42862-formal-runner-fixtures-v3/shell.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42862-formal-runner-fixtures-v3/shell.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "passes": null
+    },
+    {
+      "name": "runner-and-terminal",
+      "command": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "-v",
+        "test_pgpt_verify_runner",
+        "test_pgpt_reactor_junit"
+      ],
+      "exitCode": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42862-formal-runner-fixtures-v3/runner-and-terminal.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42862-formal-runner-fixtures-v3/runner-and-terminal.stderr",
+        "sha256": "394700cfa4ae00c3880a51b6a8d9e6050d4316e88b49242ff55d436d66defdb9"
+      },
+      "passes": 20
+    },
+    {
+      "name": "collector",
+      "command": [
+        "python3",
+        "-B",
+        "tools/quality/019_test_evidence_set.py"
+      ],
+      "exitCode": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42862-formal-runner-fixtures-v3/collector.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42862-formal-runner-fixtures-v3/collector.stderr",
+        "sha256": "198855c43d81ed984d2bb1959baba6755f7eef885d82d0bf45fc6f3e10c79314"
+      },
+      "passes": 119
+    }
+  ],
+  "newLauncherFixtureTests": 6,
+  "previousTerminalFixtureTests": 14,
+  "previousCollectorTests": 119,
+  "mavenBuilds": 0,
+  "productTests": 0,
+  "formalAcceptanceId": null,
+  "whole451": false,
+  "source": "0f079aa58503a02f411f544634788ab90179919f",
+  "core": "e8368d22c4da2ec841f008df793594d3be9066af",
+  "terminal": {
+    "path": "../pgpt-runs/PG379/PG42862-formal-runner-fixtures-v3/terminal.json",
+    "sha256": "f55dd5e8e46ea3abf8262de3c69676794b59ad471142647b374992efabef81da"
+  },
+  "bug": "BUG-3634",
+  "ykt": "YKT-2855",
+  "harnessBootstrapNotes": [
+    {
+      "variant": "v1",
+      "exit": 1,
+      "stage": "fixture attribution before assertions",
+      "actualMaven": 0
+    },
+    {
+      "variant": "v2",
+      "exit": 1,
+      "stage": "diagnostic proved overlapping fixture path rewrite; retained and fixed v3",
+      "actualMaven": 0
+    }
+  ],
+  "approvedExistingEntry": {
+    "path": "../pgpt_foundation_verify.sh",
+    "sha256": "2c5e01ad3f3ec60355fe61b14fd4743070b723951707f2bf96c498fee5d1a31d",
+    "changed": false
+  },
+  "remainingArtifacts": [
+    "real fresh complete 451 from an authorized clean checkout",
+    "provenance of branch from run start to evidence collection"
+  ]
+}
