@@ -1,5 +1,10 @@
 # 開発環境・toolchain構築記録
 
+## 2026-11-22 22:04 JST OSV-Scanner 2.7.1の固定Maven構成表検査
+
+2026-11-22 JST、PG42656。Linux x86_64の公式release資産を、GitHub公開releaseのSHA-256とbyte長で照合。作業用の専用スロットにだけ配置した。公開Maven corpusは2026-11-20T16:33:30Z版、公開HTTPSから取得し実SHA-256を固定。再現はmanifestのpath/hashと同じ二入力を用い、OSV_SCANNER_LOCAL_DB_CACHE_DIRECTORYにosv-scalibr/Maven/all.zipを配置して各固定.cdx.jsonを `osv-scanner scan source --offline --all-packages --format json -L` へ明示。Gitには実体を入れず、公開metadata・実測・終了値をPG42656/58へ保存。依存コードはSDKの別局所PTまで実行せず、製品配布や依存情報の外部送信は0。 [OSVのオフライン仕様](https://google.github.io/osv-scanner/usage/offline-mode/)
+
+
 ## 2026-11-22 JST 日次保守calendar・PG42306
 
 Ubuntu 26.04.1 LTS／x86_64 の導入済みUbuntu OS package systemd 259.9-0ubuntu0.1 を使用。実体 /usr/bin/systemd-analyze、SHA256 188138cf3aea2111c7744069b58c0597559808163d1b7f74ded0348d85e4bef3。孤立した暦式解析のみ。再現はテストスクリプトへtimer sourceと同実体を渡す。新規導入・設定作成は0。

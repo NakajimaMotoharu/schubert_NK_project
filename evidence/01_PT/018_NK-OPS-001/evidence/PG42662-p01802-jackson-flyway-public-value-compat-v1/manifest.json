@@ -1,0 +1,72 @@
+{
+  "run": "PG42662",
+  "source": "63d4c31c77a15910571961ed0d9dd6dc7463598f",
+  "pomSource": "3d35cff39183e1e5a7b72cbb76603b7d4c530f04",
+  "javaCore": "f8532c27c2666570fe450f285c5a5436aacd8e7e",
+  "wbs": "WBS-P018-02/2",
+  "terminalAtUTC": "2026-11-22T13:03:19.663383+00:00",
+  "actualExit": 0,
+  "toolFixture": {
+    "path": "tools/quality/tests/FlywayJacksonSdkContractTest.java",
+    "sha256": "73c6095888a4e5f840691f99694322440425aca55ecbf480feeafb10a3406aa7"
+  },
+  "normalSdkCases": {
+    "passed": 3,
+    "failed": 0,
+    "errors": 0,
+    "skip": 0,
+    "byMethod": {
+      "streamingAndBindingUseTheManagedJacksonPatch": "PT-OPS-SBOM-024A",
+      "readsIndependentUtf8Fixture": "PT-OPS-SBOM-024B",
+      "serializesFlywayPublicResultFields": "PT-OPS-SBOM-024C"
+    }
+  },
+  "oracles": [
+    "Core and databind report 3.1.8",
+    "Fixed UTF-8 Japanese string, row count 2 and true boolean",
+    "Flyway public value yields exactly the two distinct literal JSON and HTML fields"
+  ],
+  "originalTerminal": {
+    "path": "../pgpt-runs/PG379/PG42662-flyway-jackson-sdk-values-v1/run.json",
+    "sha256": "2245376c66da0f75a5e500d6a86c75d2b10505c938fd5162579e423298806861"
+  },
+  "xmlProof": {
+    "path": "../pgpt-runs/PG379/PG42662-flyway-jackson-sdk-values-v1/junit/TEST-junit-jupiter.xml",
+    "sha256": "816c49a41f1842ecc6cbd2719328db6de263bb116300175fe261caf9392dfc70"
+  },
+  "sdkArtifacts": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42610-current-bootstrap-from-qualified-storage-v1/repository/org/flywaydb/flyway-core/13.4.0/flyway-core-13.4.0.jar",
+      "sha256": "e6147827cb883a8bb359231202e8d0d32e0f8e905caf0e20d2890e36dcd12251"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42610-current-bootstrap-from-qualified-storage-v1/repository/tools/jackson/core/jackson-core/3.1.8/jackson-core-3.1.8.jar",
+      "sha256": "762caa009970e8c35527fcc2cfbde50afed0d6a195ee4a7fac22d80fea72c471"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42610-current-bootstrap-from-qualified-storage-v1/repository/tools/jackson/core/jackson-databind/3.1.8/jackson-databind-3.1.8.jar",
+      "sha256": "2e7583c96f3eaf11591a727c75278b25a0f1227d29a7c5e8306f252f441bfb58"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42610-current-bootstrap-from-qualified-storage-v1/repository/com/fasterxml/jackson/core/jackson-annotations/2.21/jackson-annotations-2.21.jar",
+      "sha256": "53ca085f4a150f703f49e1aabd935bd03b43e1ea3d55d135438292af22cef56b"
+    }
+  ],
+  "regularBuild": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42660-f02-jackson-current-regular-batch-and-sdk-abi-v1/manifest.json",
+    "sha256": "178d8453612965e57630e56e58686dd0e2e8d5b687f8b9bb415e8b7453a04fe7"
+  },
+  "actualProductMigrationStarted": 0,
+  "actualBackendStarted": 0,
+  "countsAsProductPt": 0,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "bugs": [
+    "BUG-3596",
+    "YKT-2830"
+  ],
+  "spec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/5702_BatchとAPIのJackson依存是正_試験仕様.md",
+    "sha256": "fa5078871a812ac164ac73fbf06f4cb76d00b629c6f92b310759e2c97b087b98"
+  }
+}
