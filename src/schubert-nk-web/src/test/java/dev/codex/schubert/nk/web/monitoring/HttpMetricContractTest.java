@@ -11,6 +11,7 @@ import dev.codex.schubert.nk.web.monitoring.HttpMetricContract.Metric;
 import dev.codex.schubert.nk.web.monitoring.HttpMetricContract.Route;
 import dev.codex.schubert.nk.web.monitoring.HttpMetricContract.Status;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
@@ -21,6 +22,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
@@ -45,7 +47,7 @@ class HttpMetricContractTest {
           STATUS_CLASS_LABEL,
           "2xx");
 
-  private static List<String> routes() throws Exception {
+  private static List<String> routes() throws IOException {
     try (var reader =
         new BufferedReader(
             new InputStreamReader(
@@ -88,7 +90,7 @@ class HttpMetricContractTest {
   }
 
   @Test
-  void httpMetric002IndependentWholeFiniteLabelMatrix() throws Exception {
+  void httpMetric002IndependentWholeFiniteLabelMatrix() throws IOException {
     var routes = routes();
     assertEquals(35, routes.size());
     assertEquals(routes, contract.routeTemplates());
@@ -222,7 +224,8 @@ class HttpMetricContractTest {
   }
 
   @Test
-  void httpMetric006ConcurrentClassifiersAreStateless() throws Exception {
+  void httpMetric006ConcurrentClassifiersAreStateless()
+      throws InterruptedException, ExecutionException {
     var executor = Executors.newFixedThreadPool(4);
     try {
       var tasks = new ArrayList<Callable<Map<String, String>>>();
