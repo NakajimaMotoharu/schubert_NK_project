@@ -125,12 +125,15 @@ def main(output, mode):
         owners, physical = ARCHIVE["prior"]["fixture_owners"](scratch / "classes")
         jars = {}
         for module, entries in owners.items():
+            if artifact and module == "protocol":
+                assert not entries
+                jars[module] = artifact
+                continue
             jar = scratch / (module + ".jar")
             H["archive"](jar, entries, scratch / "classes")
             jars[module] = jar
         if artifact:
-            assert "protocol" not in jars and len(physical) == 5
-            jars["protocol"] = artifact
+            assert len(physical) == 5 and jars["protocol"] == artifact
         steps["audit"], _ = H["execute"](
             output, "audit",
             [java, "-cp", f"{scratch / 'audit'}{os.pathsep}{libraries}", "ModuleDependencyAudit",
