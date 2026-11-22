@@ -14,16 +14,20 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
 /** PT-MIG-ENTRYREAD001..020; independent fixed SQL, typed-column calls and in-memory faults. */
 final class CurrentScenarioEntryProjectionReaderTest {
   private static final String SQL =
-      "SELECT id,game_id,script_file_id,entry_index,line_number,entry_type,speaker_id,speaker_label,body,raw_block FROM scenario.script_entries ORDER BY id";
+      "SELECT"
+          + " id,game_id,script_file_id,entry_index,line_number,entry_type,speaker_id,speaker_label,body,raw_block"
+          + " FROM scenario.script_entries ORDER BY id";
   private static final String DIAGNOSTIC = "migration entry projection is invalid";
   private static final String INPUT_DIAGNOSTIC = "migration entry projection input is invalid";
   private static final String CALL_AUTO = "getAutoCommit";
@@ -56,7 +60,7 @@ final class CurrentScenarioEntryProjectionReaderTest {
   private static final int TERMINATION_SECONDS = 10;
 
   @Test
-  void entryRead001TenTypedColumnsAndSignedBigintExtremes() throws Exception {
+  void entryRead001TenTypedColumnsAndSignedBigintExtremes() throws SQLException {
     var f = normal();
     f.data.get(0)[0] = Long.MIN_VALUE;
     f.data.get(1)[0] = Long.MAX_VALUE;
@@ -73,7 +77,7 @@ final class CurrentScenarioEntryProjectionReaderTest {
   }
 
   @Test
-  void entryRead002EmptySnapshotStillExecutesOneBoundedQuery() throws Exception {
+  void entryRead002EmptySnapshotStillExecutesOneBoundedQuery() throws SQLException {
     var f = new Fixture();
     assertEquals(List.of(), new CurrentScenarioEntryProjectionReader().read(f.connection(), 0));
     assertEquals(List.of(SQL), f.sql);
@@ -157,7 +161,7 @@ final class CurrentScenarioEntryProjectionReaderTest {
   }
 
   @Test
-  void entryRead009NullableSpeakerAndUnknownDomainNumbersArePreserved() throws Exception {
+  void entryRead009NullableSpeakerAndUnknownDomainNumbersArePreserved() throws SQLException {
     for (Long speaker : Arrays.asList(null, Long.MIN_VALUE, 0L, Long.MAX_VALUE)) {
       var f = normal();
       f.data.get(0)[1] = -9;
@@ -185,7 +189,7 @@ final class CurrentScenarioEntryProjectionReaderTest {
   }
 
   @Test
-  void entryRead011StoredTextAndNullableRawAreNeverRepaired() throws Exception {
+  void entryRead011StoredTextAndNullableRawAreNeverRepaired() throws SQLException {
     String retained = "  A/e\u0301\t\n\0Z  ";
     for (int column : List.of(5, 7, 8, 9)) {
       var f = normal();
@@ -200,7 +204,7 @@ final class CurrentScenarioEntryProjectionReaderTest {
   }
 
   @Test
-  void entryRead012DeepImmutableSnapshotsRetainNullableValues() throws Exception {
+  void entryRead012DeepImmutableSnapshotsRetainNullableValues() throws SQLException {
     var f = normal();
     var rows = new CurrentScenarioEntryProjectionReader().read(f.connection(), 2);
     f.data.get(0)[8] = "changed";
@@ -214,7 +218,7 @@ final class CurrentScenarioEntryProjectionReaderTest {
   }
 
   @Test
-  void entryRead013IndependentSqlTypedGetterAndImmediateWasNullOrder() throws Exception {
+  void entryRead013IndependentSqlTypedGetterAndImmediateWasNullOrder() throws SQLException {
     var f = normal();
     f.data.remove(1);
     new CurrentScenarioEntryProjectionReader().read(f.connection(), 1);
@@ -368,7 +372,7 @@ final class CurrentScenarioEntryProjectionReaderTest {
 
   @Test
   void entryRead018EveryRequiredNumericBoundaryAndNullableTextHasIndependentLiteral()
-      throws Exception {
+      throws SQLException {
     var f = normal();
     f.data.get(0)[2] = Long.MIN_VALUE;
     f.data.get(1)[2] = Long.MAX_VALUE;
@@ -410,7 +414,7 @@ final class CurrentScenarioEntryProjectionReaderTest {
   }
 
   @Test
-  void entryRead019FailureDoesNotPoisonLaterReadAndRedactionIsFixed() throws Exception {
+  void entryRead019FailureDoesNotPoisonLaterReadAndRedactionIsFixed() throws SQLException {
     var reader = new CurrentScenarioEntryProjectionReader();
     var bad = normal();
     bad.nullResult = true;
@@ -426,7 +430,8 @@ final class CurrentScenarioEntryProjectionReaderTest {
   }
 
   @Test
-  void entryRead020SharedStatelessReaderUsesOnlyPerCallOwnedResources() throws Exception {
+  void entryRead020SharedStatelessReaderUsesOnlyPerCallOwnedResources()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var reader = new CurrentScenarioEntryProjectionReader();
     var executor = Executors.newFixedThreadPool(WORKERS);
     try {
@@ -576,8 +581,8 @@ final class CurrentScenarioEntryProjectionReaderTest {
                   Object value = data.get(position)[column - 1];
                   lastNull = value == null;
                   return switch (name) {
-                    case "getLong" -> value == null ? 0L : (Long) value;
-                    case "getInt" -> value == null ? 0 : (Integer) value;
+                    case "getLong" -> value == null ? Long.valueOf(0L) : (Long) value;
+                    case "getInt" -> value == null ? Integer.valueOf(0) : (Integer) value;
                     default -> value;
                   };
                 }
@@ -585,11 +590,18 @@ final class CurrentScenarioEntryProjectionReaderTest {
               });
     }
 
-    void call(String phase) throws Throwable {
+    void call(String phase) throws SQLException {
       calls.add(phase);
       if (phase.equals(failurePhase)) {
         failurePhaseHits++;
-        if (failurePhaseHits == failureOccurrence && failure != null) throw failure;
+        if (failurePhaseHits == failureOccurrence && failure != null) {
+          switch (failure) {
+            case SQLException sql -> throw sql;
+            case RuntimeException runtime -> throw runtime;
+            case Error fatal -> throw fatal;
+            default -> throw new AssertionError("unsupported fixture failure", failure);
+          }
+        }
       }
     }
   }

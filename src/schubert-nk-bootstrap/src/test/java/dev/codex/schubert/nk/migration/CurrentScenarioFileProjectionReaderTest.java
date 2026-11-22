@@ -14,16 +14,19 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
 /** PT-MIG-FILEREAD001..020; independent fixed SQL, typed-column calls and in-memory faults. */
 final class CurrentScenarioFileProjectionReaderTest {
   private static final String SQL =
-      "SELECT id,game_id,relative_path,file_name,section_code,chapter_title,sha256,byte_size FROM scenario.script_files ORDER BY id";
+      "SELECT id,game_id,relative_path,file_name,section_code,chapter_title,sha256,byte_size FROM"
+          + " scenario.script_files ORDER BY id";
   private static final String DIAGNOSTIC = "migration file projection is invalid";
   private static final String INPUT_DIAGNOSTIC = "migration file projection input is invalid";
   private static final String CALL_AUTO = "getAutoCommit";
@@ -57,7 +60,7 @@ final class CurrentScenarioFileProjectionReaderTest {
   private static final int TERMINATION_SECONDS = 10;
 
   @Test
-  void fileRead001EightColumnsAndSignedIdExtremes() throws Exception {
+  void fileRead001EightColumnsAndSignedIdExtremes() throws SQLException {
     var f = normal();
     f.data.get(0)[0] = Long.MIN_VALUE;
     f.data.get(1)[0] = Long.MAX_VALUE;
@@ -73,7 +76,7 @@ final class CurrentScenarioFileProjectionReaderTest {
   }
 
   @Test
-  void fileRead002EmptySnapshotStillExecutesOneBoundedQuery() throws Exception {
+  void fileRead002EmptySnapshotStillExecutesOneBoundedQuery() throws SQLException {
     var f = new Fixture();
     assertEquals(List.of(), new CurrentScenarioFileProjectionReader().read(f.connection(), 0));
     assertEquals(List.of(SQL), f.sql);
@@ -157,7 +160,7 @@ final class CurrentScenarioFileProjectionReaderTest {
   }
 
   @Test
-  void fileRead009NullableSizeUnknownGameAndNegativeSizeArePreserved() throws Exception {
+  void fileRead009NullableSizeUnknownGameAndNegativeSizeArePreserved() throws SQLException {
     for (Long size : Arrays.asList(null, Long.MIN_VALUE, -1L, 0L, Long.MAX_VALUE)) {
       var f = normal();
       f.data.get(0)[1] = -9;
@@ -181,7 +184,7 @@ final class CurrentScenarioFileProjectionReaderTest {
   }
 
   @Test
-  void fileRead011StoredTextAndNullableMetadataAreNeverRepaired() throws Exception {
+  void fileRead011StoredTextAndNullableMetadataAreNeverRepaired() throws SQLException {
     String retained = "  A/e\u0301\t\n\0Z  ";
     for (int column : List.of(2, 3, 4, 5, 6)) {
       var f = normal();
@@ -199,7 +202,7 @@ final class CurrentScenarioFileProjectionReaderTest {
   }
 
   @Test
-  void fileRead012DeepImmutableSnapshotsRetainNullableMetadata() throws Exception {
+  void fileRead012DeepImmutableSnapshotsRetainNullableMetadata() throws SQLException {
     var f = normal();
     var rows = new CurrentScenarioFileProjectionReader().read(f.connection(), 2);
     f.data.get(0)[2] = "changed";
@@ -211,7 +214,7 @@ final class CurrentScenarioFileProjectionReaderTest {
   }
 
   @Test
-  void fileRead013IndependentSqlTypedGetterAndImmediateWasNullOrder() throws Exception {
+  void fileRead013IndependentSqlTypedGetterAndImmediateWasNullOrder() throws SQLException {
     var f = normal();
     f.data.remove(1);
     new CurrentScenarioFileProjectionReader().read(f.connection(), 1);
@@ -357,7 +360,8 @@ final class CurrentScenarioFileProjectionReaderTest {
   }
 
   @Test
-  void fileRead018GameAndSizeBoundariesAndNullableTextHaveIndependentLiterals() throws Exception {
+  void fileRead018GameAndSizeBoundariesAndNullableTextHaveIndependentLiterals()
+      throws SQLException {
     var f = normal();
     f.data.get(0)[1] = Integer.MIN_VALUE;
     f.data.get(1)[1] = Integer.MAX_VALUE;
@@ -383,7 +387,7 @@ final class CurrentScenarioFileProjectionReaderTest {
   }
 
   @Test
-  void fileRead019FailureDoesNotPoisonLaterReadAndRedactionIsFixed() throws Exception {
+  void fileRead019FailureDoesNotPoisonLaterReadAndRedactionIsFixed() throws SQLException {
     var reader = new CurrentScenarioFileProjectionReader();
     var bad = normal();
     bad.nullResult = true;
@@ -399,7 +403,8 @@ final class CurrentScenarioFileProjectionReaderTest {
   }
 
   @Test
-  void fileRead020SharedStatelessReaderUsesOnlyPerCallOwnedResources() throws Exception {
+  void fileRead020SharedStatelessReaderUsesOnlyPerCallOwnedResources()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var reader = new CurrentScenarioFileProjectionReader();
     var executor = Executors.newFixedThreadPool(WORKERS);
     try {
@@ -549,8 +554,8 @@ final class CurrentScenarioFileProjectionReaderTest {
                   Object value = data.get(position)[column - 1];
                   lastNull = value == null;
                   return switch (name) {
-                    case "getLong" -> value == null ? 0L : (Long) value;
-                    case "getInt" -> value == null ? 0 : (Integer) value;
+                    case "getLong" -> value == null ? Long.valueOf(0L) : (Long) value;
+                    case "getInt" -> value == null ? Integer.valueOf(0) : (Integer) value;
                     default -> value;
                   };
                 }
@@ -558,11 +563,18 @@ final class CurrentScenarioFileProjectionReaderTest {
               });
     }
 
-    void call(String phase) throws Throwable {
+    void call(String phase) throws SQLException {
       calls.add(phase);
       if (phase.equals(failurePhase)) {
         failurePhaseHits++;
-        if (failurePhaseHits == failureOccurrence && failure != null) throw failure;
+        if (failurePhaseHits == failureOccurrence && failure != null) {
+          switch (failure) {
+            case SQLException sql -> throw sql;
+            case RuntimeException runtime -> throw runtime;
+            case Error fatal -> throw fatal;
+            default -> throw new AssertionError("unsupported fixture failure", failure);
+          }
+        }
       }
     }
   }

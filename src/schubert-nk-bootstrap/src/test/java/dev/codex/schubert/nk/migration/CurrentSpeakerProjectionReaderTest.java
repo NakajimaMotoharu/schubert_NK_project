@@ -16,16 +16,19 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
 /** PT-MIG-SPEAKERREAD001..020; independent fixed SQL, typed-column calls and in-memory faults. */
 final class CurrentSpeakerProjectionReaderTest {
   private static final String SQL =
-      "SELECT id,game_id,name,normalized_name,is_protagonist,notes FROM scenario.speakers ORDER BY id";
+      "SELECT id,game_id,name,normalized_name,is_protagonist,notes FROM scenario.speakers ORDER BY"
+          + " id";
   private static final String DIAGNOSTIC = "migration speaker projection is invalid";
   private static final String INPUT_DIAGNOSTIC = "migration speaker projection input is invalid";
   private static final String CALL_AUTO = "getAutoCommit";
@@ -56,7 +59,7 @@ final class CurrentSpeakerProjectionReaderTest {
   private static final int TERMINATION_SECONDS = 10;
 
   @Test
-  void speakerRead001SixTypedColumnsAndBothSignedBigintExtremes() throws Exception {
+  void speakerRead001SixTypedColumnsAndBothSignedBigintExtremes() throws SQLException {
     var f = normal();
     f.data.get(0)[0] = Long.MIN_VALUE;
     f.data.get(1)[0] = Long.MAX_VALUE;
@@ -72,7 +75,7 @@ final class CurrentSpeakerProjectionReaderTest {
   }
 
   @Test
-  void speakerRead002EmptySnapshotStillExecutesOneBoundedQuery() throws Exception {
+  void speakerRead002EmptySnapshotStillExecutesOneBoundedQuery() throws SQLException {
     var f = new Fixture();
     assertEquals(List.of(), new CurrentSpeakerProjectionReader().read(f.connection(), 0));
     assertEquals(List.of(SQL), f.sql);
@@ -154,7 +157,7 @@ final class CurrentSpeakerProjectionReaderTest {
   }
 
   @Test
-  void speakerRead009NullableOrUnknownGameIsPreservedThenRejectedByTargetMap() throws Exception {
+  void speakerRead009NullableOrUnknownGameIsPreservedThenRejectedByTargetMap() throws SQLException {
     for (Integer game : Arrays.asList(null, 3)) {
       var f = normal();
       f.data.get(0)[1] = game;
@@ -179,7 +182,7 @@ final class CurrentSpeakerProjectionReaderTest {
   }
 
   @Test
-  void speakerRead011StoredValuesAreNotCleanedLoweredOrNormalized() throws Exception {
+  void speakerRead011StoredValuesAreNotCleanedLoweredOrNormalized() throws SQLException {
     var f = normal();
     String retained = "  A/e\u0301\t\n\0Z  ";
     f.data.get(0)[2] = retained;
@@ -194,7 +197,7 @@ final class CurrentSpeakerProjectionReaderTest {
   }
 
   @Test
-  void speakerRead012ReturnedRowsAreDeepImmutableSnapshotsIncludingNullNotes() throws Exception {
+  void speakerRead012ReturnedRowsAreDeepImmutableSnapshotsIncludingNullNotes() throws SQLException {
     var f = normal();
     var rows = new CurrentSpeakerProjectionReader().read(f.connection(), 2);
     f.data.get(0)[2] = "changed";
@@ -206,7 +209,7 @@ final class CurrentSpeakerProjectionReaderTest {
   }
 
   @Test
-  void speakerRead013IndependentSqlTypedGetterAndImmediateWasNullCallOrder() throws Exception {
+  void speakerRead013IndependentSqlTypedGetterAndImmediateWasNullCallOrder() throws SQLException {
     var f = new Fixture();
     f.data.add(new Object[] {0L, 1, NAME, NORMALIZED, true, null});
     new CurrentSpeakerProjectionReader().read(f.connection(), 1);
@@ -348,20 +351,21 @@ final class CurrentSpeakerProjectionReaderTest {
   }
 
   @Test
-  void speakerRead018ProjectionMapBatchMatchesIndependentFixedCopy() throws Exception {
+  void speakerRead018ProjectionMapBatchMatchesIndependentFixedCopy() throws SQLException {
     var f = normal();
     f.data.get(1)[5] = "";
     var rows = new CurrentSpeakerProjectionReader().read(f.connection(), 2);
     var batch = mapping().copyRows(rows, Instant.parse(FIXED_TIME));
     String expected =
-        "700\t1\t Alice / label \talice\ttrue\t\\N\t2026-01-02T03:04:05Z\n900\t2\tBob\tb o b\tfalse\t\t2026-01-02T03:04:05Z\n";
+        "700\t1\t Alice / label \talice\ttrue\t\\N\t2026-01-02T03:04:05Z\n"
+            + "900\t2\tBob\tb o b\tfalse\t\t2026-01-02T03:04:05Z\n";
     assertEquals(
         expected,
         new String(batch.copyBytes(new PostgresCopyTextEncoder()), StandardCharsets.UTF_8));
   }
 
   @Test
-  void speakerRead019FailureDoesNotPoisonLaterReadAndRedactionIsFixed() throws Exception {
+  void speakerRead019FailureDoesNotPoisonLaterReadAndRedactionIsFixed() throws SQLException {
     var reader = new CurrentSpeakerProjectionReader();
     var bad = normal();
     bad.nullResult = true;
@@ -377,7 +381,8 @@ final class CurrentSpeakerProjectionReaderTest {
   }
 
   @Test
-  void speakerRead020SharedStatelessReaderUsesOnlyPerCallOwnedResources() throws Exception {
+  void speakerRead020SharedStatelessReaderUsesOnlyPerCallOwnedResources()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var reader = new CurrentSpeakerProjectionReader();
     var executor = Executors.newFixedThreadPool(WORKERS);
     try {
@@ -534,9 +539,9 @@ final class CurrentSpeakerProjectionReaderTest {
                   Object value = data.get(position)[column - 1];
                   lastNull = value == null;
                   return switch (name) {
-                    case "getLong" -> value == null ? 0L : (Long) value;
-                    case "getInt" -> value == null ? 0 : (Integer) value;
-                    case "getBoolean" -> value == null ? false : (Boolean) value;
+                    case "getLong" -> value == null ? Long.valueOf(0L) : (Long) value;
+                    case "getInt" -> value == null ? Integer.valueOf(0) : (Integer) value;
+                    case "getBoolean" -> value == null ? Boolean.FALSE : (Boolean) value;
                     default -> value;
                   };
                 }
@@ -544,11 +549,18 @@ final class CurrentSpeakerProjectionReaderTest {
               });
     }
 
-    void call(String phase) throws Throwable {
+    void call(String phase) throws SQLException {
       calls.add(phase);
       if (phase.equals(failurePhase)) {
         failurePhaseHits++;
-        if (failurePhaseHits == failureOccurrence && failure != null) throw failure;
+        if (failurePhaseHits == failureOccurrence && failure != null) {
+          switch (failure) {
+            case SQLException sql -> throw sql;
+            case RuntimeException runtime -> throw runtime;
+            case Error fatal -> throw fatal;
+            default -> throw new AssertionError("unsupported fixture failure", failure);
+          }
+        }
       }
     }
   }

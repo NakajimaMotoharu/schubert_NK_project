@@ -15,16 +15,20 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
 /** PT-MIG-AUDIOREAD001..020; independent fixed SQL, typed-column calls and in-memory faults. */
 final class CurrentAudioProjectionReaderTest {
   private static final String SQL =
-      "SELECT id,game_id,relative_path,file_name,basename_upper,audio_role,container,duration_seconds,byte_size,sha256 FROM scenario.audio_files ORDER BY id";
+      "SELECT"
+          + " id,game_id,relative_path,file_name,basename_upper,audio_role,container,duration_seconds,byte_size,sha256"
+          + " FROM scenario.audio_files ORDER BY id";
   private static final String DIAGNOSTIC = "migration audio projection is invalid";
   private static final String INPUT_DIAGNOSTIC = "migration audio projection input is invalid";
   private static final String CALL_AUTO = "getAutoCommit";
@@ -65,7 +69,7 @@ final class CurrentAudioProjectionReaderTest {
   private static final int TERMINATION_SECONDS = 10;
 
   @Test
-  void audioRead001TenColumnsSignedIdsAndExactDecimal() throws Exception {
+  void audioRead001TenColumnsSignedIdsAndExactDecimal() throws SQLException {
     var f = normal();
     f.data.get(0)[0] = Long.MIN_VALUE;
     f.data.get(1)[0] = Long.MAX_VALUE;
@@ -100,7 +104,7 @@ final class CurrentAudioProjectionReaderTest {
   }
 
   @Test
-  void audioRead002EmptySnapshotStillExecutesOneBoundedQuery() throws Exception {
+  void audioRead002EmptySnapshotStillExecutesOneBoundedQuery() throws SQLException {
     var f = new Fixture();
     assertEquals(List.of(), new CurrentAudioProjectionReader().read(f.connection(), 0));
     assertEquals(List.of(SQL), f.sql);
@@ -184,7 +188,7 @@ final class CurrentAudioProjectionReaderTest {
   }
 
   @Test
-  void audioRead009UnknownGameSignedSizeAndNullableDurationArePreserved() throws Exception {
+  void audioRead009UnknownGameSignedSizeAndNullableDurationArePreserved() throws SQLException {
     for (Long size : Arrays.asList(null, Long.MIN_VALUE, -1L, 0L, Long.MAX_VALUE)) {
       var f = normal();
       f.data.get(0)[1] = -9;
@@ -215,7 +219,7 @@ final class CurrentAudioProjectionReaderTest {
   }
 
   @Test
-  void audioRead011StoredTextAndNullableMetadataAreNotRecomputed() throws Exception {
+  void audioRead011StoredTextAndNullableMetadataAreNotRecomputed() throws SQLException {
     String retained = "  A/e\u0301\t\n\0Z  ";
     for (int column : List.of(2, 3, 4, 5, 6, 9)) {
       var f = normal();
@@ -231,7 +235,7 @@ final class CurrentAudioProjectionReaderTest {
   }
 
   @Test
-  void audioRead012DeepImmutableSnapshotsRetainNullableMetadata() throws Exception {
+  void audioRead012DeepImmutableSnapshotsRetainNullableMetadata() throws SQLException {
     var f = normal();
     var rows = new CurrentAudioProjectionReader().read(f.connection(), 2);
     f.data.get(0)[2] = "changed";
@@ -243,7 +247,7 @@ final class CurrentAudioProjectionReaderTest {
   }
 
   @Test
-  void audioRead013IndependentSqlTypedGettersAndImmediateWasNullOrder() throws Exception {
+  void audioRead013IndependentSqlTypedGettersAndImmediateWasNullOrder() throws SQLException {
     var f = normal();
     f.data.remove(1);
     new CurrentAudioProjectionReader().read(f.connection(), 1);
@@ -393,7 +397,7 @@ final class CurrentAudioProjectionReaderTest {
   }
 
   @Test
-  void audioRead018NumericPrecisionScaleMagnitudeAndPrimitiveBoundaries() throws Exception {
+  void audioRead018NumericPrecisionScaleMagnitudeAndPrimitiveBoundaries() throws SQLException {
     String[][] vectors = {
       {"999999999.999", "999999999.999"},
       {"-999999999.999", "-999999999.999"},
@@ -436,7 +440,7 @@ final class CurrentAudioProjectionReaderTest {
   }
 
   @Test
-  void audioRead019FailureDoesNotPoisonLaterReadAndRedactionIsFixed() throws Exception {
+  void audioRead019FailureDoesNotPoisonLaterReadAndRedactionIsFixed() throws SQLException {
     var reader = new CurrentAudioProjectionReader();
     var bad = normal();
     bad.nullResult = true;
@@ -452,7 +456,8 @@ final class CurrentAudioProjectionReaderTest {
   }
 
   @Test
-  void audioRead020SharedStatelessReaderUsesOnlyPerCallOwnedResources() throws Exception {
+  void audioRead020SharedStatelessReaderUsesOnlyPerCallOwnedResources()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var reader = new CurrentAudioProjectionReader();
     var executor = Executors.newFixedThreadPool(WORKERS);
     try {
@@ -617,8 +622,8 @@ final class CurrentAudioProjectionReaderTest {
                   Object value = data.get(position)[column - 1];
                   lastNull = value == null;
                   return switch (name) {
-                    case "getLong" -> value == null ? 0L : (Long) value;
-                    case "getInt" -> value == null ? 0 : (Integer) value;
+                    case "getLong" -> value == null ? Long.valueOf(0L) : (Long) value;
+                    case "getInt" -> value == null ? Integer.valueOf(0) : (Integer) value;
                     default -> value;
                   };
                 }
@@ -626,11 +631,18 @@ final class CurrentAudioProjectionReaderTest {
               });
     }
 
-    void call(String phase) throws Throwable {
+    void call(String phase) throws SQLException {
       calls.add(phase);
       if (phase.equals(failurePhase)) {
         failurePhaseHits++;
-        if (failurePhaseHits == failureOccurrence && failure != null) throw failure;
+        if (failurePhaseHits == failureOccurrence && failure != null) {
+          switch (failure) {
+            case SQLException sql -> throw sql;
+            case RuntimeException runtime -> throw runtime;
+            case Error fatal -> throw fatal;
+            default -> throw new AssertionError("unsupported fixture failure", failure);
+          }
+        }
       }
     }
   }

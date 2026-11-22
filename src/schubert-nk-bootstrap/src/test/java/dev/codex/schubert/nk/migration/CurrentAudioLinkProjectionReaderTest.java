@@ -14,16 +14,19 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
 /** PT-MIG-AUDIOLINKREAD001..020; independent fixed SQL, typed-column calls and in-memory faults. */
 final class CurrentAudioLinkProjectionReaderTest {
   private static final String SQL =
-      "SELECT entry_id,audio_file_id,link_type FROM scenario.entry_audio_links ORDER BY entry_id,audio_file_id,link_type COLLATE \"C\"";
+      "SELECT entry_id,audio_file_id,link_type FROM scenario.entry_audio_links ORDER BY"
+          + " entry_id,audio_file_id,link_type COLLATE \"C\"";
   private static final String DIAGNOSTIC = "migration audio link projection is invalid";
   private static final String INPUT_DIAGNOSTIC = "migration audio link projection input is invalid";
   private static final String CALL_AUTO = "getAutoCommit";
@@ -48,7 +51,7 @@ final class CurrentAudioLinkProjectionReaderTest {
   private static final int TERMINATION_SECONDS = 10;
 
   @Test
-  void audioLinkRead001SignedIdsAndThreeColumns() throws Exception {
+  void audioLinkRead001SignedIdsAndThreeColumns() throws SQLException {
     var f = normal();
     f.data.get(0)[0] = Long.MIN_VALUE;
     f.data.get(0)[1] = Long.MAX_VALUE;
@@ -62,7 +65,7 @@ final class CurrentAudioLinkProjectionReaderTest {
   }
 
   @Test
-  void audioLinkRead002EmptySnapshotStillExecutesOneBoundedQuery() throws Exception {
+  void audioLinkRead002EmptySnapshotStillExecutesOneBoundedQuery() throws SQLException {
     var f = new Fixture();
     assertEquals(List.of(), new CurrentAudioLinkProjectionReader().read(f.connection(), 0));
     assertEquals(List.of(SQL), f.sql);
@@ -146,7 +149,7 @@ final class CurrentAudioLinkProjectionReaderTest {
   }
 
   @Test
-  void audioLinkRead009ZeroNegativeAndBothLongExtremesAreRetained() throws Exception {
+  void audioLinkRead009ZeroNegativeAndBothLongExtremesAreRetained() throws SQLException {
     for (long value : new long[] {Long.MIN_VALUE, -1, 0, 1, Long.MAX_VALUE}) {
       var f = normal();
       f.data.get(0)[0] = value;
@@ -167,7 +170,7 @@ final class CurrentAudioLinkProjectionReaderTest {
   }
 
   @Test
-  void audioLinkRead011StoredKindNotRecomputedValidatedOrNormalized() throws Exception {
+  void audioLinkRead011StoredKindNotRecomputedValidatedOrNormalized() throws SQLException {
     for (String value :
         List.of("", "unknown", "voice", "se", "bgm", "other", "e\u0301", "  音声\t\n\0 ")) {
       var f = normal();
@@ -178,7 +181,8 @@ final class CurrentAudioLinkProjectionReaderTest {
   }
 
   @Test
-  void audioLinkRead012DeepImmutableSnapshotIsIndependentOfLaterFixtureChange() throws Exception {
+  void audioLinkRead012DeepImmutableSnapshotIsIndependentOfLaterFixtureChange()
+      throws SQLException {
     var f = normal();
     var rows = new CurrentAudioLinkProjectionReader().read(f.connection(), 2);
     f.data.get(0)[2] = "changed";
@@ -189,7 +193,7 @@ final class CurrentAudioLinkProjectionReaderTest {
   }
 
   @Test
-  void audioLinkRead013IndependentSqlTypedCallsWasNullTimeoutAndCloseOrder() throws Exception {
+  void audioLinkRead013IndependentSqlTypedCallsWasNullTimeoutAndCloseOrder() throws SQLException {
     var f = normal();
     f.data.remove(1);
     new CurrentAudioLinkProjectionReader().read(f.connection(), 1);
@@ -324,7 +328,7 @@ final class CurrentAudioLinkProjectionReaderTest {
   }
 
   @Test
-  void audioLinkRead018ExtractionDoesNotRepairDuplicatesOrGivenResultOrder() throws Exception {
+  void audioLinkRead018ExtractionDoesNotRepairDuplicatesOrGivenResultOrder() throws SQLException {
     var f = normal();
     f.data.add(new Object[] {-20L, 700L, KIND});
     assertEquals(
@@ -341,7 +345,7 @@ final class CurrentAudioLinkProjectionReaderTest {
   }
 
   @Test
-  void audioLinkRead019FailureDoesNotPoisonLaterReadAndRedactionIsFixed() throws Exception {
+  void audioLinkRead019FailureDoesNotPoisonLaterReadAndRedactionIsFixed() throws SQLException {
     var reader = new CurrentAudioLinkProjectionReader();
     var bad = normal();
     bad.nullResult = true;
@@ -357,7 +361,8 @@ final class CurrentAudioLinkProjectionReaderTest {
   }
 
   @Test
-  void audioLinkRead020SharedStatelessReaderUsesOnlyPerCallOwnedResources() throws Exception {
+  void audioLinkRead020SharedStatelessReaderUsesOnlyPerCallOwnedResources()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var reader = new CurrentAudioLinkProjectionReader();
     var executor = Executors.newFixedThreadPool(WORKERS);
     try {
@@ -508,7 +513,7 @@ final class CurrentAudioLinkProjectionReaderTest {
                   Object value = data.get(position)[column - 1];
                   lastNull = value == null;
                   return switch (name) {
-                    case "getLong" -> value == null ? 0L : (Long) value;
+                    case "getLong" -> value == null ? Long.valueOf(0L) : (Long) value;
                     default -> value;
                   };
                 }
@@ -516,11 +521,18 @@ final class CurrentAudioLinkProjectionReaderTest {
               });
     }
 
-    void call(String phase) throws Throwable {
+    void call(String phase) throws SQLException {
       calls.add(phase);
       if (phase.equals(failurePhase)) {
         failurePhaseHits++;
-        if (failurePhaseHits == failureOccurrence && failure != null) throw failure;
+        if (failurePhaseHits == failureOccurrence && failure != null) {
+          switch (failure) {
+            case SQLException sql -> throw sql;
+            case RuntimeException runtime -> throw runtime;
+            case Error fatal -> throw fatal;
+            default -> throw new AssertionError("unsupported fixture failure", failure);
+          }
+        }
       }
     }
   }
