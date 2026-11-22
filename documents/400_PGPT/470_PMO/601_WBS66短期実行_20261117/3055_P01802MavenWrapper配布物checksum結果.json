@@ -1,0 +1,121 @@
+{
+  "eventId": "PGPT-20261008-8500",
+  "workCategory": "IMPLEMENTATION",
+  "source": "d727d69d179238056cfc6021f93243444d7f18a5",
+  "productionCoreMain": "e8368d22c4da2ec841f008df793594d3be9066af",
+  "canonicalDesignSource": "ca41c03c0c6efff9a3a35b47b480491810bee6f9",
+  "managementWorkIds": [
+    "WBS-P018-02/2"
+  ],
+  "planRow": {
+    "ID": "WBS-P018-02/2",
+    "元行": "WBS-P018-02/2",
+    "費目": "B",
+    "主担当": "WBS-P018-02",
+    "状態": "計画",
+    "作業": "署名BOM・全artifact・host immutable／同source証拠による受入判定",
+    "残pp": "0.65",
+    "着手": "設計343・当該source・作業所有・既存成果を照合。必要な局所成果を費目Aで一度だけ作成し、受入候補のTestIDと独立期待値を確定。着手依存、当該A成果、終了依存と未解決条件を確認",
+    "終了証拠": "署名BOM・全artifact・host immutable：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。 固有要求：SCM-001,SCM-002,SCM-003,SCM-004,SCM-005",
+    "補正根拠": "登録済み後段単価。追加製造はA、実経路はD、比較はE",
+    "契約HOLD": "",
+    "対象": "",
+    "範囲": "SCM-001、SCM-002、SCM-003、SCM-004、SCM-005",
+    "保存証跡": "個別criteria＋同sourceのTestID・独立期待値・実結果・451適用結果",
+    "順次": "False",
+    "配賦窓": "2",
+    "楽観pp": "0.26",
+    "慎重pp": "1.3",
+    "要求設計の版差": "PT基準仕様 NK-OPS-001、SS 343",
+    "lineNumber": 550,
+    "改訂残pp": "0.65"
+  },
+  "run": "PG42734",
+  "startEvent": "PGPT-20261008-8499",
+  "outcome": {
+    "status": "EXECUTED_TOOL_SCOPE",
+    "toolTestsPassed": 2,
+    "normalJavaDelta": 0,
+    "productCoverage": null,
+    "qa061": "ANSWER_RECEIVED_DISTRIBUTION_CRITERIA_AND_OWNER_PENDING"
+  },
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42734-p01802-maven-wrapper-distribution-checksum-v1/manifest.json",
+    "sha256": "d8636fa75c3bf219ea6e405b90c26171db98d76dfbe899816046ad77d3f47e94"
+  },
+  "nextEvidence": {
+    "run": "PG42736",
+    "wbs": "WBS-P018-02/2",
+    "target": "既存Maven Wrapper Linuxキャッシュの公式ZIP差分",
+    "action": "既公式ZIPで実利用のインストール済みlib・boot・conf・bin等を読取照合"
+  },
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T14:44:55+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 38,
+      "remainingPercent": 62,
+      "resetsAt": 1795879771,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "modelRequested": "gpt-6.2-sol",
+  "modelObserved": null,
+  "reasoningRequested": "high",
+  "reasoningObserved": null,
+  "speedRequested": "standard",
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 38,
+    "remainingPercent": 62,
+    "resetsAt": 1795879771,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "ee8ae39586160f3841f05fd043cc927fe5750d59da2611828a4f3a5cc29b1c92",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-22T14:44:55+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 38,
+        "remainingPercent": 62,
+        "resetsAt": 1795879771,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": 0,
+  "sameQuotaWindow": true,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-22T14:42:54.612354+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": false,
+  "quotaBefore": {
+    "usedPercent": 38,
+    "remainingPercent": 62,
+    "resetsAt": 1795879771,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null
+}

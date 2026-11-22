@@ -557,3 +557,11 @@ SCM-005／SS352 §13。Maven Centralの公式CycloneDX Maven Plugin 2.9.3をstri
 リポジトリrootで tools/quality/generate_maven_sbom.sh にmodule名、対象sourceへ固定済みのMaven repository、固定出力時刻を渡す。検証例は tools/quality/generate_maven_sbom.sh protocol /path/to/verified-maven-repository 2026-11-22T00:00:00Z。出力は選択moduleのtarget配下へ新規生成する。compile、test、package、deployは当commandが起動しない。配布用モデルにcompile/provided/runtimeを含め、testとsystemは対象外。製品試験・ライセンス方針・脆弱性検査・配布artifactでの照合は451とSCM-005の残条件。
 
 構成表コマンドのPTは evidence/01_PT/018_NK-OPS-001/5697_構成表コマンドの単体仕様と実行結果.md。公開版情報 https://github.com/CycloneDX/cyclonedx-maven-plugin/releases/tag/cyclonedx-maven-plugin-2.9.3。
+
+## 2026-11-22 Maven Wrapper 3.3.4のMaven 3.9.12配布物固定
+
+RD171 SCM-004/005・SS352 §13。Maven Centralの固定版ZIPをApache公式のSHA-512公開値と照合し、配布ZIPのSHA-256 `305773a68d6ddfd413df58c82b3f8050e89778e777f3a745c8e5b8cbea4018ef` を `.mvn/wrapper/maven-wrapper.properties` の `distributionSha256Sum` に固定した。開発者の通常コマンドはリポジトリrootの `./mvnw --version`。PG42734では別々の空のMavenユーザー領域、同一の照合済みZIP、JDK25.0.4で検証し、正規値で起動成功、不一致で展開前拒否を確認した。既存キャッシュと既存toolchainは変更していない。[試験仕様と結果](../../../evidence/01_PT/018_NK-OPS-001/5709_MavenWrapper配布物照合_仕様と結果.md)
+
+## 2026-11-22 Maven構成表の依存検査入口
+
+SCM-005／SS352 §13。OSV Scanner 2.7.1と固定Mavenコーパスの取得元・版・SHA-256はPG42658。既存の照合済み工具とデータをPG42738で再利用した。新規インストールは0。ローカル入口は `python3 -B tools/quality/verify_maven_advisories.py BOM MAVEN_REPOSITORY SCANNER SCANNER_SHA256 OSV_CACHE DB_SHA256`。終了0は全座標確認かつ指摘0、終了1は全座標確認かつ指摘あり、終了2は未成立。コーパスの取得・更新、外部CIの登録、実配布artifactの検査は別途行う。[試験仕様と結果](../../../evidence/01_PT/018_NK-OPS-001/5710_Maven依存のオフライン照合_仕様と結果.md)

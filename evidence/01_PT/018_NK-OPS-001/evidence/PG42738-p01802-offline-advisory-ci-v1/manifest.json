@@ -1,0 +1,101 @@
+{
+  "run": "PG42738",
+  "branch": "dev-foundation",
+  "source": "f8e89da09ad62c9523dfcaf35d442e6060d7c36c",
+  "javaCore": "e8368d22c4da2ec841f008df793594d3be9066af",
+  "wbs": "WBS-P018-02/2",
+  "startedAtUTC": "2026-11-22T14:50:08.422272+00:00",
+  "terminalAtUTC": "2026-11-22T14:50:09.216422+00:00",
+  "actualExit": 0,
+  "unitCasesExpected": 9,
+  "unitCasesPassed": 9,
+  "protocolModel": {
+    "bomSha256": "8c62b7f9dd0b7f079238f82aeb4ace7302d16720d9b7860ed9db93de4241bdf3",
+    "scannerSha256": "fb7dab19a8bd9bbe5c3189f09d4b7ee1820c9553a23bac202648a56efd2f6ee8",
+    "databaseSha256": "75fb59af0d2c7bbae5ef447ca1093b371168b0ec0704c77e9bb1271f83a0aff8",
+    "scannedMavenPackages": 1,
+    "findings": []
+  },
+  "officialScanner": "2.7.1",
+  "noCorpusFalsePassRejected": true,
+  "priorModelProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42658-p01802-jackson-model-and-offline-validation-v1/manifest.json",
+    "sha256": "88ca7703d654db4e70ab2e05fb822a61f694655917f42f1735e7043126af1de3"
+  },
+  "runs": {
+    "unit": {
+      "exit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42738-offline-advisory-ci-v1/unit.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42738-offline-advisory-ci-v1/unit.stderr",
+        "sha256": "1c60dba4711e24c4cdfbec807297574218fbbda55dbe02d622c991f0c1a2cc26"
+      },
+      "command": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/quality/tests",
+        "-p",
+        "test_verify_maven_advisories.py",
+        "-v"
+      ]
+    },
+    "protocol": {
+      "exit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42738-offline-advisory-ci-v1/protocol.stdout",
+        "sha256": "f7b436c3d3cd21741fb4bcd42b4f89eb2f49fec3ffc33c27bd8a3642f378d142"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42738-offline-advisory-ci-v1/protocol.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "python3",
+        "-B",
+        "tools/quality/verify_maven_advisories.py",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42658-jackson-model-and-sbom-v1/inputs/protocol.cdx.json",
+        "/home/mini/codex/project1/work/toolchain/m2/repository",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42656-offline-osv-model-v1/osv-scanner_linux_amd64",
+        "fb7dab19a8bd9bbe5c3189f09d4b7ee1820c9553a23bac202648a56efd2f6ee8",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42656-offline-osv-model-v1/cache",
+        "75fb59af0d2c7bbae5ef447ca1093b371168b0ec0704c77e9bb1271f83a0aff8"
+      ]
+    },
+    "wrongCorpus": {
+      "exit": 2,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42738-offline-advisory-ci-v1/wrongCorpus.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42738-offline-advisory-ci-v1/wrongCorpus.stderr",
+        "sha256": "26f968ee5dc95f2860d26b5e2b2f92547edac39893303ec98a5bddb3398bb4ff"
+      },
+      "command": [
+        "python3",
+        "-B",
+        "tools/quality/verify_maven_advisories.py",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42658-jackson-model-and-sbom-v1/inputs/protocol.cdx.json",
+        "/home/mini/codex/project1/work/toolchain/m2/repository",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42656-offline-osv-model-v1/osv-scanner_linux_amd64",
+        "fb7dab19a8bd9bbe5c3189f09d4b7ee1820c9553a23bac202648a56efd2f6ee8",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42656-offline-osv-model-v1/cache",
+        "0000000000000000000000000000000000000000000000000000000000000000"
+      ]
+    }
+  },
+  "productJavaTests": 0,
+  "hostedCIStarted": false,
+  "formallyAccepted": false,
+  "localTerminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42738-offline-advisory-ci-v1/terminal.json",
+    "sha256": "9466e1eb7c1ac6da8244ed3175e30cbe006e6f3c0a809d69c2026a28f0c0a289"
+  }
+}
