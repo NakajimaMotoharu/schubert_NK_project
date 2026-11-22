@@ -1,0 +1,106 @@
+{
+  "run": "PG43094-f02-ssc461-caller-roster-current-v1",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T22:54:13.810128+00:00",
+  "source": "1cb75bc04d75cb551ff143d29162226422a249d1",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-F02-a",
+  "requirement": "SYS-005",
+  "ssc": "SSC-461",
+  "originalRoster": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40438-f02-ssc461-exact-current-callers-v1/manifest.json",
+    "sha256": "e79cbfbcdc9c2ebe645b74f86875db19d7a35252d5c8961600075eb38bfd6ea5"
+  },
+  "priorReconciliation": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40702-f02-ssc461-current-roster-delta-v1/manifest.json",
+    "sha256": "9a5ff725f4c56eb0598e5b7f4ced99cc7e42eb850fffd9ab4e7227700e3a34ac"
+  },
+  "upperOriginalCohort": {
+    "prior": 52,
+    "current": 51,
+    "migrated": 53,
+    "originalUpper": 104
+  },
+  "storageOriginalPositions": 3,
+  "independentNewTransferScope": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43062-transfer-verification-fatal-contract-v1/manifest.json",
+    "sha256": "6ca3d0858ba46bb9a43778cfcdaa49af5d90c8ef7cc08ca56da61c719bbaec35"
+  },
+  "frozenBatchJar": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42998-c07-condition-window-absence-v2/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "67984cee98423520add862115216219a86fb204d5a409bec829366ad79d4921b"
+  },
+  "currentExactPhysical": {
+    "dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.class": "200e23c6fa5fd6e1aff5afc61780f5883b1d8f5b2521163f98f7479f24ca581c",
+    "dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.class": "534463dfae829916b8a201751f40e2409ddf678763d8a6d843545caba36d1a93"
+  },
+  "anchorsCheckedByGitIdentity": 52,
+  "unchangedAnchorMetadata": 50,
+  "changedAdmittedUpperSources": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+      "priorBlob": "cd0075c12a3e0405bc2e836f52c2e063400dbae2",
+      "currentBlob": "3954b585bf93881e907f5f161b4cb24f07075f86",
+      "previousSites": {
+        "StorageIoException": [
+          237,
+          357,
+          551
+        ],
+        "JdbcFailureGraph": []
+      },
+      "currentSites": {
+        "StorageIoException": [
+          238,
+          552
+        ],
+        "JdbcFailureGraph": [
+          358
+        ]
+      },
+      "ordinaryEvidence": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42978-cleanup-terminal-reference-current-v1/manifest.json",
+        "sha256": "16669b8b2618df5333ae668f3edb42fdbd9071025f1da04039b3b4c910431b70"
+      },
+      "remaining": "Two read/readRejected methods remain associated with existing held full PostgreSQL setup, including the failure cohort. Retain the original one-argument caller paths."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+      "priorBlob": "3239ee6a56896c79907f14c07c00fd17e9f07abd",
+      "currentBlob": "97a228ea582fca35b7f9aa32c37e94072ae1be69",
+      "previousSites": {
+        "StorageIoException": [],
+        "JdbcFailureGraph": [
+          157,
+          187,
+          247,
+          319
+        ]
+      },
+      "currentSites": {
+        "StorageIoException": [],
+        "JdbcFailureGraph": [
+          157,
+          197,
+          266,
+          342
+        ]
+      },
+      "ordinaryEvidence": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42954-batch-cleanup-expiry-jdbc-cross-check-v1/manifest.json",
+        "sha256": "0b7be932c29979e7246506abbfd62ebb1c631d0b5c1e9a8b7d6f5b2973591480"
+      },
+      "remaining": "Fresh artifact and unchanged four adapter calls. The existing select/update/actual database owner receipt remains independent."
+    }
+  ],
+  "heldSourceBodiesRead": 0,
+  "productTestsNewlyRun": 0,
+  "anyServiceOrDbOrNativeAction": false,
+  "formalAcceptanceId": null,
+  "whole451": false,
+  "remaining": [
+    "Complete original upper-owner planned 51 legacy and three Storage-owned positions.",
+    "Preserve current unary edge until FileOperation approval and complete migration proof.",
+    "Full current regular API and Web, scope disposition and 451 remain pending."
+  ]
+}

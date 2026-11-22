@@ -1,0 +1,470 @@
+{
+  "run": "PG43092-duration-db-fixture-type-current-v1",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T22:50:51.901371+00:00",
+  "source": "1cb75bc04d75cb551ff143d29162226422a249d1",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-P018-09/2",
+  "relatedQuality": "WBS-F03/2-2-b",
+  "design": "SS351 Local DEBUG instrumentation",
+  "exactJavaSources": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry.java",
+      "sha256": "20f47112dcc5776b4f18c190adbcd782c03355815adce2e380d23cf6d9551108"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ExactDurationSupport.java",
+      "sha256": "5750f04c6fd9b6453c3412323cbffdb60dfca37be224414ab94c24a9d3efde5b"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorder.java",
+      "sha256": "8e3719d6bb520ba2dde1acd9bdf37d0a1269c4cfcc83d6d34148c0ce76633e2a"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/MqProcessingDurationMetricRecorder.java",
+      "sha256": "6446a7eb3accec378ceeeb0f4c85bfd6f4f1a39af82bce866333794dacbd986b"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/package-info.java",
+      "sha256": "8dd0a4c1cf6eca2f906c5d9aee5afc0f40c990ccfa35925ecc8b5edfb2194193"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistryTest.java",
+      "sha256": "a4f43d80101f219192c9edb1d34b5206b1677d9825ff7dbd1bd8700e99575972"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorderTest.java",
+      "sha256": "fc0501f18c1fe090748364d11958fac7f780b3da3119d281a0f4188f6e5ddf22"
+    }
+  ],
+  "archiveProtocol": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42624-current-protocol-maven-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+    "sha256": "2e11940216614fbe48e663fd83400f1fe3cf1cd9fc626214c954aaddb8c0407f"
+  },
+  "stages": {
+    "compileMain": {
+      "actualExit": 0,
+      "terminalAtUTC": "2026-11-22T22:50:41.052793+00:00"
+    },
+    "compileFixture": {
+      "actualExit": 0,
+      "terminalAtUTC": "2026-11-22T22:50:42.114574+00:00"
+    },
+    "style": {
+      "actualExit": 0,
+      "terminalAtUTC": "2026-11-22T22:50:42.930115+00:00"
+    },
+    "pmd": {
+      "actualExit": 4,
+      "terminalAtUTC": "2026-11-22T22:50:45.240077+00:00"
+    },
+    "spotbugs": {
+      "actualExit": 0,
+      "terminalAtUTC": "2026-11-22T22:50:49.773601+00:00"
+    },
+    "junit": {
+      "actualExit": 0,
+      "terminalAtUTC": "2026-11-22T22:50:51.167594+00:00"
+    },
+    "rawCompile": {
+      "actualExit": 0,
+      "terminalAtUTC": "2026-11-22T22:50:51.785804+00:00"
+    },
+    "unfiltered": {
+      "actualExit": 0,
+      "terminalAtUTC": "2026-11-22T22:50:51.901340+00:00"
+    }
+  },
+  "independentOldCaseRoster": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25594-api-exact-db-duration-original-whole19-v1/manifest.json",
+    "sha256": "7d4f3ad0c343403bf7b937eb59bb4fa278ce09e380e5899b6f2ffb4555e3b373"
+  },
+  "caseRows": [
+    [
+      "dev.codex.schubert.nk.api.monitoring.DbQueryDurationMetricRecorderTest",
+      "dbTime001ExactlyFourFixedSeriesRequestHistogramSecondsAndFiveObservationBuckets"
+    ],
+    [
+      "dev.codex.schubert.nk.api.monitoring.DbQueryDurationMetricRecorderTest",
+      "dbTime002IndependentSecondsHistogramCdfAndTwoMaximumSamplesNeverLongWrap"
+    ],
+    [
+      "dev.codex.schubert.nk.api.monitoring.DbQueryDurationMetricRecorderTest",
+      "dbTime003QueryAndOutcomeClosedParsersAndGeneratedFactoriesUseIndependentTypedConstants"
+    ],
+    [
+      "dev.codex.schubert.nk.api.monitoring.DbQueryDurationMetricRecorderTest",
+      "dbTime004NullNegativeAndUnknownModeNeverRecordAndStandardStoresNoDetailedSamples"
+    ],
+    [
+      "dev.codex.schubert.nk.api.monitoring.DbQueryDurationMetricRecorderTest",
+      "dbTime005PartialFactoryFailurePreservesOriginalProblemAndCallerRegistryOwnership"
+    ],
+    [
+      "dev.codex.schubert.nk.api.monitoring.DbQueryDurationMetricRecorderTest",
+      "dbTime006FailureBeforeOrAfterSampleNeverRetriesCompensatesOrNormalizesSuccess"
+    ],
+    [
+      "dev.codex.schubert.nk.api.monitoring.DbQueryDurationMetricRecorderTest",
+      "dbTime007ConcurrentSampleCountSumAndMaximumUsePrecomputedIntegerInputs"
+    ],
+    [
+      "dev.codex.schubert.nk.api.monitoring.DbQueryDurationMetricRecorderTest",
+      "dbTime008ForeignCounterCannotBeReplacedBySummaryOrClosed"
+    ],
+    [
+      "dev.codex.schubert.nk.api.monitoring.DbQueryDurationMetricRecorderTest",
+      "dbTime009ExtremeRangeOrdersKeepIndependentSmallBucketCountsAndFiniteTotals"
+    ],
+    [
+      "dev.codex.schubert.nk.api.monitoring.ExactDurationMeterRegistryTest",
+      "exDur001IndependentBelowEqualAboveEveryFiniteBoundary"
+    ],
+    [
+      "dev.codex.schubert.nk.api.monitoring.ExactDurationMeterRegistryTest",
+      "exDur002BothMixedExtremeOrdersKeepSmallSamplesAndFiniteSum"
+    ],
+    [
+      "dev.codex.schubert.nk.api.monitoring.ExactDurationMeterRegistryTest",
+      "exDur003RejectedScalarInputsLeaveCompleteSnapshotUnchanged"
+    ],
+    [
+      "dev.codex.schubert.nk.api.monitoring.ExactDurationMeterRegistryTest",
+      "exDur004SnapshotIsAtomicDefensiveAndDoesNotAliasMutableBuckets"
+    ],
+    [
+      "dev.codex.schubert.nk.api.monitoring.ExactDurationMeterRegistryTest",
+      "exDur005EveryIncompatibleFactoryConfigurationFailsClosed"
+    ],
+    [
+      "dev.codex.schubert.nk.api.monitoring.ExactDurationMeterRegistryTest",
+      "exDur006GenericRegistryAcceptedOnlyWhenDetailedObservationDisabled"
+    ],
+    [
+      "dev.codex.schubert.nk.api.monitoring.ExactDurationMeterRegistryTest",
+      "exDur007UnrelatedSummaryAndCounterRemainNormalSdkOwnedMeters"
+    ],
+    [
+      "dev.codex.schubert.nk.api.monitoring.ExactDurationMeterRegistryTest",
+      "exDur008ConstructorsRejectNullAndDurationStateNeverReadsClock"
+    ],
+    [
+      "dev.codex.schubert.nk.api.monitoring.ExactDurationMeterRegistryTest",
+      "exDur009ConcurrentUpdatesAndSnapshotsHaveConsistentIndependentIdentity"
+    ],
+    [
+      "dev.codex.schubert.nk.api.monitoring.ExactDurationMeterRegistryTest",
+      "exDur010AuxiliaryGaugeFactoryFailureRetainsCallerOwnershipAndIdentity"
+    ]
+  ],
+  "runtime": {
+    "count": 19,
+    "success": 19,
+    "failure": 0,
+    "error": 0,
+    "skipped": 0,
+    "newDefinitions": 0,
+    "outsideJVM": 0
+  },
+  "coverage": {
+    "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry": {
+      "crc64": "a4717778756a9117",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 111
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 14
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 23
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 13
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 6
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry$ExactSummary": {
+      "crc64": "a4a50e76432ea9a2",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 10,
+          "covered": 140
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 10
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 23
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 12
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 7
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorder": {
+      "crc64": "327d1bba3cf3f8ee",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 206
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 22
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 33
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 15
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 3
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorder$Outcome": {
+      "crc64": "14f12a96e3c4ed78",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 72
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 4
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 6
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 8
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 6
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorder$Query": {
+      "crc64": "a38f8c310472b54f",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 72
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 4
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 6
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 8
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 6
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    }
+  },
+  "aggregate": {
+    "LINE": {
+      "covered": 91,
+      "missed": 1
+    },
+    "METHOD": {
+      "covered": 28,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 5,
+      "missed": 0
+    },
+    "BRANCH": {
+      "covered": 54,
+      "missed": 0
+    }
+  },
+  "unfilteredDeficits": [
+    "DEFICIT\tdev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry$ExactSummary\trecord\t(D)V\t88\tINSTRUCTION:5:3\tBRANCH:0:0",
+    "DEFICIT\tdev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry$ExactSummary\ttakeSnapshot\t()Lio/micrometer/core/instrument/distribution/HistogramSnapshot;\t114\tINSTRUCTION:5:0\tBRANCH:0:0"
+  ],
+  "productTypeScope": "Five exact registry and DB duration recorder classes, excluding nonmeasured unrelated scope from this numerator.",
+  "noPriorExecAggregation": true,
+  "spotbugs": [],
+  "pmd": [
+    {
+      "file": "DbQueryDurationMetricRecorderTest.java",
+      "line": 238,
+      "rule": "UseConcurrentHashMap",
+      "localDisposition": "Oracle map is populated/read exclusively on the JUnit owner thread; workers only record fixed input."
+    },
+    {
+      "file": "DbQueryDurationMetricRecorderTest.java",
+      "line": 402,
+      "rule": "CloseResource",
+      "localDisposition": "Executor is owned, shutdownNow is in finally and awaitTermination is bounded and asserted."
+    },
+    {
+      "file": "DbQueryDurationMetricRecorderTest.java",
+      "line": 402,
+      "rule": "DoNotUseThreads",
+      "localDisposition": "Fixed in-memory concurrent oracle, bounded submit/get or explicit final shutdown. No application thread or actual resource."
+    },
+    {
+      "file": "DbQueryDurationMetricRecorderTest.java",
+      "line": 405,
+      "rule": "UseConcurrentHashMap",
+      "localDisposition": "Oracle map is populated/read exclusively on the JUnit owner thread; workers only record fixed input."
+    },
+    {
+      "file": "DbQueryDurationMetricRecorderTest.java",
+      "line": 406,
+      "rule": "UseConcurrentHashMap",
+      "localDisposition": "Oracle map is populated/read exclusively on the JUnit owner thread; workers only record fixed input."
+    },
+    {
+      "file": "DbQueryDurationMetricRecorderTest.java",
+      "line": 407,
+      "rule": "UseConcurrentHashMap",
+      "localDisposition": "Oracle map is populated/read exclusively on the JUnit owner thread; workers only record fixed input."
+    },
+    {
+      "file": "DbQueryDurationMetricRecorderTest.java",
+      "line": 423,
+      "rule": "DoNotUseThreads",
+      "localDisposition": "Fixed in-memory concurrent oracle, bounded submit/get or explicit final shutdown. No application thread or actual resource."
+    },
+    {
+      "file": "DbQueryDurationMetricRecorderTest.java",
+      "line": 444,
+      "rule": "DoNotUseThreads",
+      "localDisposition": "Fixed in-memory concurrent oracle, bounded submit/get or explicit final shutdown. No application thread or actual resource."
+    },
+    {
+      "file": "DbQueryDurationMetricRecorderTest.java",
+      "line": 445,
+      "rule": "DoNotUseThreads",
+      "localDisposition": "Fixed in-memory concurrent oracle, bounded submit/get or explicit final shutdown. No application thread or actual resource."
+    },
+    {
+      "file": "ExactDurationMeterRegistryTest.java",
+      "line": 298,
+      "rule": "CloseResource",
+      "localDisposition": "Executor is owned, shutdownNow is in finally and awaitTermination is bounded and asserted."
+    },
+    {
+      "file": "ExactDurationMeterRegistryTest.java",
+      "line": 298,
+      "rule": "DoNotUseThreads",
+      "localDisposition": "Fixed in-memory concurrent oracle, bounded submit/get or explicit final shutdown. No application thread or actual resource."
+    },
+    {
+      "file": "ExactDurationMeterRegistryTest.java",
+      "line": 330,
+      "rule": "DoNotUseThreads",
+      "localDisposition": "Fixed in-memory concurrent oracle, bounded submit/get or explicit final shutdown. No application thread or actual resource."
+    },
+    {
+      "file": "ExactDurationMeterRegistryTest.java",
+      "line": 331,
+      "rule": "DoNotUseThreads",
+      "localDisposition": "Fixed in-memory concurrent oracle, bounded submit/get or explicit final shutdown. No application thread or actual resource."
+    }
+  ],
+  "pmdSuppressionsAdded": 0,
+  "preCorrectionOwnerProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43090-duration-registry-current-nineteen-v1/manifest.json",
+    "sha256": "b6d0098a2f72397b34c191b6089063f3e3338dc3e85b6c4cff752bb64870d9a1"
+  },
+  "fixtureDefect": "BUG-3666",
+  "horizontalReview": "YKT-2883",
+  "fixtureWarningsEliminated": 3,
+  "originalErrorAndRuntimeInstanceOraclesRetained": true,
+  "receipts": [
+    {
+      "path": "../pgpt-runs/PG379/PG43092-duration-db-fixture-type-current-v1/begin.json",
+      "sha256": "229e8d3393d2c8ee6b95282e08731ec30e6137efef13602efad6c7f73a84883d"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43092-duration-db-fixture-type-current-v1/terminal.json",
+      "sha256": "7c32b2054267eac5125205342d28d16b7b92ea63549869b17051cf5f829ce863"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43092-duration-db-fixture-type-current-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "9d5919c0179b1dee8c329cacd1c4593bd3e282fc65202ed8ba24d15fcb577912"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43092-duration-db-fixture-type-current-v1/unit.exec",
+      "sha256": "23ec9cda026447a2463b4ad3994b13e70e48eeb8c95f93b9dd4f9f2337a007b0"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43092-duration-db-fixture-type-current-v1/spotbugs.xml",
+      "sha256": "b68ed5445f641963625ee11bcd073bd8377d3b19f84288fca26ff9330cdc9886"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43092-duration-db-fixture-type-current-v1/pmd.xml",
+      "sha256": "b713bdff6ac2f70c0969df3ccffb9ebdfcfaa2fd3fc874d1ba994b386427734f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43092-duration-db-fixture-type-current-v1/sanitized-junit.xml",
+      "sha256": "aa93f35d360e97f996572d5e147fd999fcbbee0005125b0dfdb4c94657a2b30c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43092-duration-db-fixture-type-current-v1/coverage-unfiltered.tsv",
+      "sha256": "928cfcdf17ca097f925b20a076f1c52187582a99e96fec84d8b4b4d0e581ecac"
+    }
+  ],
+  "remaining": [
+    "Synthetic monitor-exception uncovered raw instructions and line retained for quality assessment.",
+    "Actual metrics endpoints and whole current 451 held."
+  ],
+  "formalAcceptanceId": null,
+  "whole451": false
+}
