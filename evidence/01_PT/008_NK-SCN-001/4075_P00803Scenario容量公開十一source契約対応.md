@@ -13,3 +13,7 @@ NK-SCN-001。対象source/hash、承認設計commit/hash、独立期待値/TestI
 P00803 own11全文/SS3335～7・13とC01～03/W06～10/U01～03/P01～05対応。PG26854 09748712 metadata0。Capacitywhole5 Main/Test/ResultCode/physical5同一限定保持、旧他fixture二Protocol差は転用0。旧whole9aggregate100とstrictgate1/全sourcefourfalseの双方保全。actualnative全fixtureHOLD、Writerworker無期限未是正。Main820/Test不変更/PT0。
 
 実行: `python3 -B evidence/01_PT/018_NK-OPS-001/input/1363_scenario_transfer_contract_audit.py` metadata終了0。新規製品PT/coverageなし。原/1の準備だけ、原/2・451・元190未受入。独立期待値は公開設計の固定境界・順序・後条件に基づき、production methodで生成しない。正式1964PT/53scope・工数null。
+
+## PT-SCN-008-C03-RACE 同じ予約のretainとclose
+
+SS333 §13、PG-D-057。メモリ基準128 byte・7件、4800 byteの一予約に二workerを同時に入れる。retainが成功した場合の独立期待は4928 byte・8件、closeが先に消費してretainが拒否された場合は128 byte・7件。どちらでも次のretainは拒否、再closeは同じsnapshotを保持する。各待機5秒以内、finallyでexecutorを停止して10秒以内の終端を確認。固定値だけを使い容量filesystemを観測しない。元C01～C03の五試験も同候補で実行する。

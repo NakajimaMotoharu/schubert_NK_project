@@ -11,8 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.Callable;
+import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.junit.jupiter.api.Test;
 
 /** Decimal byte/explicit counter oracle, no physical capacity test claimed. PT-SCN-008-C01..C03. */
@@ -179,6 +182,52 @@ class TransferCapacityTest {
       executor.shutdownNow();
       assertTrue(
           executor.awaitTermination(10, TimeUnit.SECONDS), "capacity virtual executor terminated");
+    }
+  }
+
+  /** PT-SCN-008-C03-RACE; SS333 §13 and PG-D-057. */
+  @Test
+  void c03CompetingCloseAndRetainDischargeTheSameReservationOnce()
+      throws InterruptedException, ExecutionException, TimeoutException {
+    var executor = Executors.newFixedThreadPool(2);
+    try {
+      for (int trial = 0; trial < 8; trial++) {
+        var capacity = new TransferCapacity(128, 7);
+        var reservation = capacity.reserve(4800);
+        var start = new CyclicBarrier(2);
+        var retain =
+            executor.submit(
+                () -> {
+                  start.await(5, TimeUnit.SECONDS);
+                  try {
+                    reservation.retain();
+                    return true;
+                  } catch (IllegalStateException alreadyClosed) {
+                    return false;
+                  }
+                });
+        var close =
+            executor.submit(
+                () -> {
+                  start.await(5, TimeUnit.SECONDS);
+                  reservation.close();
+                  return null;
+                });
+        boolean retained = retain.get(5, TimeUnit.SECONDS);
+        close.get(5, TimeUnit.SECONDS);
+
+        var after = capacity.snapshot();
+        assertEquals(retained ? 4928 : 128, after.bytes());
+        assertEquals(retained ? 8 : 7, after.files());
+        assertEquals("NORMAL", after.level().name());
+        assertThrows(IllegalStateException.class, reservation::retain);
+        reservation.close();
+        assertEquals(after, capacity.snapshot());
+      }
+    } finally {
+      executor.shutdownNow();
+      assertTrue(
+          executor.awaitTermination(10, TimeUnit.SECONDS), "reservation executor terminated");
     }
   }
 
