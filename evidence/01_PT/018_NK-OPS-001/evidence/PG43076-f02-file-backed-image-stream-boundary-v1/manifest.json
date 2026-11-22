@@ -1,0 +1,168 @@
+{
+  "run": "PG43076-f02-file-backed-image-stream-boundary-v1",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T22:22:42.585400+00:00",
+  "wbs": "WBS-F02-a",
+  "requirement": "SYS-005",
+  "design": "SS311 §3／§5.2",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "scope": "LOCAL_ARCHITECTURE_TOOL_ONLY",
+  "toolSource": "3e7177748cf6133baba1fa3d4b7a6d93d3928146",
+  "protocolHarnessSource": "2be3eb75a6e161f017bf73a40ddaebd1bc707aee",
+  "testSource": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5768_f02_image_stream_ownership.py",
+    "sha256": "d84aa0723976aa7722431b68b34a96c07e4d3846fedb96f7b75241b5be5677a3"
+  },
+  "fixedTool": {
+    "path": "tools/quality/architecture/ModuleDependencyAudit.java",
+    "sha256": "cfc900087b7fca179df29174a95dae61586d6318430ea23cbef65bbd161bf521"
+  },
+  "defect": "BUG-3662",
+  "horizontalReview": "YKT-2879",
+  "oldMissingFindings": 12,
+  "currentRetainedFixtureCases": 60,
+  "currentNewFixtureCases": 7,
+  "rows": [
+    {
+      "testId": "PT-F02-FILECALL018",
+      "fixture": "dev.codex.schubert.nk.web.synthetic.ImageDiskController",
+      "rule": "CONTROLLER_BOUNDARY",
+      "expectedTargets": [
+        "javax.imageio.stream.FileCacheImageInputStream",
+        "javax.imageio.stream.FileCacheImageOutputStream",
+        "javax.imageio.stream.FileImageInputStream",
+        "javax.imageio.stream.FileImageOutputStream"
+      ],
+      "observedTargets": [
+        "javax.imageio.stream.FileCacheImageInputStream",
+        "javax.imageio.stream.FileCacheImageOutputStream",
+        "javax.imageio.stream.FileImageInputStream",
+        "javax.imageio.stream.FileImageOutputStream"
+      ]
+    },
+    {
+      "testId": "PT-F02-FILECALL019",
+      "fixture": "dev.codex.schubert.nk.api.messaging.inbound.ImageDiskListener",
+      "rule": "FRAMEWORK_FENCES",
+      "expectedTargets": [
+        "javax.imageio.stream.FileCacheImageInputStream",
+        "javax.imageio.stream.FileCacheImageOutputStream",
+        "javax.imageio.stream.FileImageInputStream",
+        "javax.imageio.stream.FileImageOutputStream"
+      ],
+      "observedTargets": [
+        "javax.imageio.stream.FileCacheImageInputStream",
+        "javax.imageio.stream.FileCacheImageOutputStream",
+        "javax.imageio.stream.FileImageInputStream",
+        "javax.imageio.stream.FileImageOutputStream"
+      ]
+    },
+    {
+      "testId": "PT-F02-FILECALL020",
+      "fixture": "dev.codex.schubert.nk.protocol.ImageDiskSource",
+      "rule": "FRAMEWORK_FENCES",
+      "expectedTargets": [
+        "javax.imageio.stream.FileCacheImageInputStream",
+        "javax.imageio.stream.FileCacheImageOutputStream",
+        "javax.imageio.stream.FileImageInputStream",
+        "javax.imageio.stream.FileImageOutputStream"
+      ],
+      "observedTargets": [
+        "javax.imageio.stream.FileCacheImageInputStream",
+        "javax.imageio.stream.FileCacheImageOutputStream",
+        "javax.imageio.stream.FileImageInputStream",
+        "javax.imageio.stream.FileImageOutputStream"
+      ]
+    },
+    {
+      "testId": "PT-F02-FILECALL021",
+      "fixture": "dev.codex.schubert.nk.web.synthetic.ImageMemoryController",
+      "rule": "CONTROLLER_BOUNDARY",
+      "expectedTargets": [],
+      "observedTargets": []
+    },
+    {
+      "testId": "PT-F02-FILECALL022",
+      "fixture": "dev.codex.schubert.nk.api.messaging.inbound.ImageMemoryListener",
+      "rule": "FRAMEWORK_FENCES",
+      "expectedTargets": [],
+      "observedTargets": []
+    },
+    {
+      "testId": "PT-F02-FILECALL023",
+      "fixture": "dev.codex.schubert.nk.protocol.ImageMemorySource",
+      "rule": "FRAMEWORK_FENCES",
+      "expectedTargets": [],
+      "observedTargets": []
+    },
+    {
+      "testId": "PT-F02-FILECALL024",
+      "fixture": "dev.codex.schubert.nk.batch.ImageDiskAdapter",
+      "rule": "FRAMEWORK_FENCES",
+      "expectedTargets": [],
+      "observedTargets": []
+    }
+  ],
+  "currentObservedFindings": 44,
+  "currentExpectedHistoricalFindings": 32,
+  "protocolRegularPhysical": 176,
+  "protocolSyntheticAnchors": 5,
+  "actualProductStaticBoundaryFindings": 0,
+  "productTestsNewlyRun": 0,
+  "fileActions": 0,
+  "harnessPreflightFailure": {
+    "mode": "protocol",
+    "detail": "An empty synthetic Protocol slot existed before installing the fixed JAR. No archive inspection was launched.",
+    "correctedBy": "2be3eb75a6e161f017bf73a40ddaebd1bc707aee"
+  },
+  "localEvidence": [
+    {
+      "mode": "before",
+      "archive": {
+        "path": "../pgpt-runs/PG379/PG43076-f02-file-backed-image-stream-boundary-v1/before/manifest.json",
+        "sha256": "c54c95fc8f6ee00cfe7028cc3075ab548daa5b54835d6c82f91a642a395e9f9d"
+      },
+      "rawAudit": {
+        "path": "../pgpt-runs/PG379/PG43076-f02-file-backed-image-stream-boundary-v1/before/audit.stdout.txt",
+        "sha256": "f658ef90b373e45749ff581d9a0bf646d91ef5439081aee843233d79896b1c76"
+      },
+      "auditExit": 0,
+      "source": "117e878a092b5ef19a1d0d2d5168a0bce46b233f"
+    },
+    {
+      "mode": "regression",
+      "archive": {
+        "path": "../pgpt-runs/PG379/PG43076-f02-file-backed-image-stream-boundary-v1/regression/manifest.json",
+        "sha256": "2f99f98e0f869ba1f7f035016cae5e2b5cef0b5b245026f7c92d7e4025c0bc59"
+      },
+      "rawAudit": {
+        "path": "../pgpt-runs/PG379/PG43076-f02-file-backed-image-stream-boundary-v1/regression/audit.stdout.txt",
+        "sha256": "471ad1b640c7d1cd9faa562103d51c2cbfd629a0ebea17dce72cbbaca44ec421"
+      },
+      "auditExit": 1,
+      "source": "3e7177748cf6133baba1fa3d4b7a6d93d3928146"
+    },
+    {
+      "mode": "protocol-v2",
+      "archive": {
+        "path": "../pgpt-runs/PG379/PG43076-f02-file-backed-image-stream-boundary-v1/protocol-v2/manifest.json",
+        "sha256": "3e6ab901bec9540abd63f8f97883fa56bc0b0e280cafa98fe00b7c4b85ff5b89"
+      },
+      "rawAudit": {
+        "path": "../pgpt-runs/PG379/PG43076-f02-file-backed-image-stream-boundary-v1/protocol-v2/audit.stdout.txt",
+        "sha256": "ad8cf24f0bad19199d1da972b3735dd50798e5286b43be6e96214cee728e5cf1"
+      },
+      "auditExit": 0,
+      "source": "2be3eb75a6e161f017bf73a40ddaebd1bc707aee"
+    }
+  ],
+  "jdk": "25",
+  "formalAcceptanceId": null,
+  "wholeF02": false,
+  "whole451": false,
+  "remaining": [
+    "Admitted API and Web regular JAR receipts",
+    "Storage JDBC legacy responsibility",
+    "Six product module controls and required 451 evidence"
+  ]
+}

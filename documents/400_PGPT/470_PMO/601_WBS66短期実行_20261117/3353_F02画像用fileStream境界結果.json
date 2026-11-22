@@ -1,0 +1,110 @@
+{
+  "eventId": "PGPT-20261008-8798",
+  "workCategory": "IMPLEMENTATION",
+  "source": "41aa4938c02dd53df047211bb9fafb012de7f029",
+  "productionCoreMain": "e8368d22c4da2ec841f008df793594d3be9066af",
+  "canonicalDesignSource": "7745de1fb04c8b9e2cfccc11103d7b3c57b090d7",
+  "managementWorkIds": [
+    "WBS-F02-a"
+  ],
+  "planRow": {
+    "ID": "WBS-F02-a",
+    "元行": "WBS-F02",
+    "費目": "C",
+    "主担当": "WBS-F02",
+    "状態": "計画",
+    "作業": "6製品moduleのtoolchain・現在のruntime証拠を13要求と対応付ける",
+    "残pp": "0.6",
+    "着手": "設計311、342・当該source・作業所有・既存成果を照合。元契約の着手依存と個別HOLDを確認",
+    "終了証拠": "対象6件と不足SYS・担当・残条件の対応表。既存buildを再演しない",
+    "補正根拠": "777残1.00内の内訳",
+    "契約HOLD": "",
+    "対象": "SYS-001、SYS-002、SYS-003、SYS-004、SYS-005、SYS-006、SYS-007、SYS-008、SYS-009、SYS-010、SYS-012、SYS-013、SYS-014",
+    "範囲": "SYS-001、SYS-002、SYS-003、SYS-004、SYS-005、SYS-006、SYS-007、SYS-008",
+    "保存証跡": "承認済み設定/規約と当sourceの差、適用範囲、実証結果",
+    "順次": "False",
+    "配賦窓": "1",
+    "楽観pp": "0.3",
+    "慎重pp": "1.2",
+    "要求設計の版差": "PT基準仕様 NK-OPS-001、SS 311",
+    "lineNumber": 582,
+    "改訂残pp": "0.6"
+  },
+  "run": "PG43076-f02-file-backed-image-stream-boundary-v1",
+  "startEvent": "PGPT-20261008-8797",
+  "outcome": "Tool correction only. Old 12 misses; new exact 67 synthetic cases, 44 expected findings, zero misses. Current admitted 176 Protocol physical classes checked with zero findings. No new Product PT or full F02/451.",
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43076-f02-file-backed-image-stream-boundary-v1/manifest.json",
+    "sha256": "60b245bf61e6c9654e6d5a1c6279955c8477b3d78584c0c899ab1e6b4fd5b7be"
+  },
+  "nextEvidence": "Bind F02 scope and capacity receipts to WBS, then assess the current independent P008-03 published writer and parent resource obligations without operating real FileStore.",
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T22:24:10+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 52,
+      "remainingPercent": 48,
+      "resetsAt": 1795879771,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "modelRequested": "gpt-6.2-sol",
+  "modelObserved": null,
+  "reasoningRequested": "high",
+  "reasoningObserved": null,
+  "speedRequested": "standard",
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 52,
+    "remainingPercent": 48,
+    "resetsAt": 1795879771,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "b1c259c48d79421751400b59d86ad3301c1049f1db914d0cf1290e76ce2364ff",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-22T22:24:10+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 52,
+        "remainingPercent": 48,
+        "resetsAt": 1795879771,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": null,
+  "sameQuotaWindow": false,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-22T22:22:42.585400+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": true,
+  "quotaBefore": {
+    "usedPercent": 52,
+    "remainingPercent": 48,
+    "resetsAt": 1795879772,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null
+}
