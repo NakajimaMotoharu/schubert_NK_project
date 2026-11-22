@@ -15,6 +15,8 @@ import org.jspecify.annotations.Nullable;
  */
 public final class MaintenanceRebootWatch {
   private static final Duration DEADLINE = Duration.ofMinutes(60);
+  private static final int BASE_ARGUMENT_COUNT = 4;
+  private static final int ARGUMENT_COUNT_WITH_MARKER = 7;
 
   private MaintenanceRebootWatch() {}
 
@@ -43,13 +45,13 @@ public final class MaintenanceRebootWatch {
 
   static Decision parseObservation(String @Nullable [] args) {
     if (args == null
-        || (args.length != 4 && args.length != 7)
+        || (args.length != BASE_ARGUMENT_COUNT && args.length != ARGUMENT_COUNT_WITH_MARKER)
         || Arrays.stream(args).anyMatch(Objects::isNull)) {
       return Decision.INVALID_OBSERVATION;
     }
     try {
       Optional<Marker> marker = Optional.empty();
-      if (args.length == 7) {
+      if (args.length == ARGUMENT_COUNT_WITH_MARKER) {
         marker =
             Optional.of(
                 new Marker(canonicalId(args[4]), canonicalId(args[5]), Instant.parse(args[6])));
