@@ -1,0 +1,122 @@
+{
+  "eventId": "PGPT-20261008-8448",
+  "workCategory": "SELECTED_TEST",
+  "source": "0be4cd51fc9e05d07ef0d2764bb28c76ec913bc3",
+  "productionCoreMain": "f8532c27c2666570fe450f285c5a5436aacd8e7e",
+  "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+  "managementWorkIds": [
+    "WBS-P012-02/2"
+  ],
+  "planRow": {
+    "ID": "WBS-P012-02/2",
+    "元行": "WBS-P012-02/2",
+    "費目": "B",
+    "主担当": "WBS-P012-02",
+    "状態": "計画",
+    "作業": "初期empty AnswerProvider・回答状態／同source証拠による受入判定",
+    "残pp": "0.39",
+    "着手": "設計312・当該source・作業所有・既存成果を照合。必要な局所成果を費目Aで一度だけ作成し、受入候補のTestIDと独立期待値を確定。着手依存、当該A成果、終了依存と未解決条件を確認",
+    "終了証拠": "初期empty AnswerProvider・回答状態：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。 固有要求：EXT-001,EXT-002,EXT-003,EXT-004,EXT-005,ASY-007,ASY-008,QST-003,QST-101,QST-102,QST-103,QST-104,QST-105",
+    "補正根拠": "登録済み後段単価。追加製造はA、実経路はD、比較はE",
+    "契約HOLD": "",
+    "対象": "",
+    "範囲": "EXT-001、EXT-002、EXT-003、EXT-004、EXT-005、ASY-007、ASY-008、QST-003",
+    "保存証跡": "個別criteria＋同sourceのTestID・独立期待値・実結果・451適用結果",
+    "順次": "False",
+    "配賦窓": "14",
+    "楽観pp": "0.163",
+    "慎重pp": "0.78",
+    "要求設計の版差": "PT基準仕様 NK-ASY-001",
+    "lineNumber": 420,
+    "改訂残pp": "0.39"
+  },
+  "run": "PG42670",
+  "startEvent": "PGPT-20261008-8447",
+  "outcome": {
+    "productNormal": 6,
+    "uniqueNewTest": 1,
+    "rawScopePhysical": 4,
+    "branchDenominator": 0,
+    "spotbugs": 0,
+    "formalAcceptanceId": null
+  },
+  "proof": {
+    "path": "evidence/01_PT/012_NK-ASY-001/evidence/PG42670-p012-empty-provider-six-current-v1/manifest.json",
+    "sha256": "93e47d4cd5ac244a3fc2d0c8bb75a281d4c780244ae878e3a013ebf427b3bfbc"
+  },
+  "nextEvidence": {
+    "run": "PG42672",
+    "wbs": "WBS-F03/2-2-b",
+    "target": "ログ検索の合成表示・電文Java fixture",
+    "action": "対象定義の既局所証跡に対する実差分を確認し、未実証の型付き品質だけを補う"
+  },
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T13:12:10+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 35,
+      "remainingPercent": 65,
+      "resetsAt": 1795879772,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "modelRequested": "gpt-6.2-sol",
+  "modelObserved": null,
+  "reasoningRequested": "high",
+  "reasoningObserved": null,
+  "speedRequested": "standard",
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 35,
+    "remainingPercent": 65,
+    "resetsAt": 1795879772,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "bda27db38c2420b237186986acca5e49a8b6daa5946464d6025bf91d0b9d22d8",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-22T13:12:10+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 35,
+        "remainingPercent": 65,
+        "resetsAt": 1795879772,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": 0,
+  "sameQuotaWindow": true,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-22T13:10:10.447887+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": false,
+  "quotaBefore": {
+    "usedPercent": 35,
+    "remainingPercent": 65,
+    "resetsAt": 1795879772,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null
+}
