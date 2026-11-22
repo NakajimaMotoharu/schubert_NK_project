@@ -9,3 +9,7 @@ JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -o -Dmaven.
 ```
 
 source803e02ef＋PG204作業tree/dev-foundation、Ubuntu26.04.1/Linux7.0.0-31/amd64/JDK25.0.4/Maven3.9.12、tool変更なし。入力/独立期待は016のmenu15/4/1/20、3main/2sub（sub先行も含む）、OVA0/4/50/51、各不整合/null・不変所有・閉bean・固定percent URL・HTML逃避・64並行。実際は全assert成功。015 collectorへ230～237/source3hash/016017を追加、019独立inventory含む68canary成功。017の1と計69は次正式gateで確認する。正式command/対象commit/時刻/環境/exit/coverage/source・証跡hashはmanifestへ記録する。
+
+## 2026-11-22 現候補の例外宣言再試験
+
+PG42382／a55900c5087c8ba9e2562d8fe1493a04aadbb9b6／Core 1e4e9e64830b552727043f3cb8b9435b28cba472。PT-WEB-235/237の2件成功、F/E/skip 0。独立の表示・Bean・並行期待を維持し、型付きSpotBugs 0。有限workerのPMD生指摘を保持。残りの元試験は同じ理由で再演していない。BUG-3581／YKT-2816、evidence/01_PT/018_NK-OPS-001/evidence/PG42382-f03-two-views-four-current-v1/manifest.json SHA256 2b645964726a54149e518e23159bc1386e043ce55b1e778d239820f638c8edfc。

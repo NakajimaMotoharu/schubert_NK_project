@@ -16,3 +16,7 @@ command: `JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -
 BUG212再現は3constructorの保持式をStream.toListの直接代入にした初稿。runtime WEB187は不変だがstatic EI_EXPOSE_REPがgetGames/getRoutes/getFilesで各1件出た。保持時List.copyOfへ統一し全3警告0、warning抑制/coverage除外なし。YKT168検索はweb/view全.toList/List.copyOf/List.of、新3fieldを修正、既存Menu.cardsはList.copyOfで非該当、他既存viewはlist非保持。WEB187/191とgetter全試験が再発確認。台帳は正式全回帰後まで再試験待ち。
 
 入力/期待値は006と独立literal fixture、実際値はassertされたgetter/合成DOM。collector015が12ID・4source hash・006/007を収集し、019独立inventoryは欠落/余分/未知methodを拒否する。正式command/対象commit/OS/tool/時刻/exit/coverage/evidence hashはmanifestへ成功後固定する。
+
+## 2026-11-22 現候補の例外宣言再試験
+
+PG42382／a55900c5087c8ba9e2562d8fe1493a04aadbb9b6／Core 1e4e9e64830b552727043f3cb8b9435b28cba472。PT-WEB-188/190の2件成功、F/E/skip 0。独立の表示・Bean・並行期待を維持し、型付きSpotBugs 0。有限workerのPMD生指摘を保持。残りの元試験は同じ理由で再演していない。BUG-3581／YKT-2816、evidence/01_PT/018_NK-OPS-001/evidence/PG42382-f03-two-views-four-current-v1/manifest.json SHA256 2b645964726a54149e518e23159bc1386e043ce55b1e778d239820f638c8edfc。
