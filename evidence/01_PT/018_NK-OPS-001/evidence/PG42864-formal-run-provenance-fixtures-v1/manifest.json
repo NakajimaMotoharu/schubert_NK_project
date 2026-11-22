@@ -1,0 +1,159 @@
+{
+  "run": "PG42864",
+  "worktreeHead": "4834f4dc2c045678e55302d97cec0733e9d46e4c",
+  "branch": "dev-foundation",
+  "wbs": "WBS-G08",
+  "actualExit": 0,
+  "startedAtUTC": "2026-11-22T17:16:46.438675+00:00",
+  "terminalAtUTC": "2026-11-22T17:16:49.650820+00:00",
+  "reproduced": {
+    "oldSource": "0f079aa58503a02f411f544634788ab90179919f",
+    "distinctIdsSameCheckoutBuilds": 2,
+    "sameCommitChangedBranchMisaccepted": true,
+    "fixtureMarkersPrivate": true
+  },
+  "observations": [
+    {
+      "name": "shell",
+      "command": [
+        "sh",
+        "-n",
+        "tools/quality/030_run_pgpt_verify.sh"
+      ],
+      "exitCode": 0,
+      "passed": null,
+      "logs": {
+        "stdout": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42864-formal-run-provenance-fixtures-v1/shell.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42864-formal-run-provenance-fixtures-v1/shell.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "name": "runner-and-terminal",
+      "command": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "-v",
+        "test_pgpt_verify_runner",
+        "test_pgpt_reactor_junit"
+      ],
+      "exitCode": 0,
+      "passed": 25,
+      "logs": {
+        "stdout": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42864-formal-run-provenance-fixtures-v1/runner-and-terminal.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42864-formal-run-provenance-fixtures-v1/runner-and-terminal.stderr",
+          "sha256": "6e57546bafd0a10cbd4e9ea20c307356c9e2678b7774ea0694e0786eedc3c48f"
+        }
+      }
+    },
+    {
+      "name": "collector",
+      "command": [
+        "python3",
+        "-B",
+        "tools/quality/019_test_evidence_set.py"
+      ],
+      "exitCode": 0,
+      "passed": 119,
+      "logs": {
+        "stdout": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42864-formal-run-provenance-fixtures-v1/collector.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42864-formal-run-provenance-fixtures-v1/collector.stderr",
+          "sha256": "044407ea055ee35d531edb2b791e775ae4806ec022efea628c14285f15528463"
+        }
+      }
+    }
+  ],
+  "newRunnerTests": 3,
+  "newTerminalTests": 2,
+  "retainedCollectorCases": 119,
+  "rawBranchCanariesOnExistingCollectorCase": [
+    "legacy v1/v2 preserved",
+    "v3 original branch accepted",
+    "v3 different branch rejected"
+  ],
+  "historicalValidation": {
+    "source": "858713c0bf310ae8bf62078b0a1cedbce4e968db",
+    "run": "PT-WEB-20260925-24",
+    "validatedScopes": 53,
+    "currentPromotion": false,
+    "previousProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42804-reactor-junit-terminal-tool-v1/manifest.json",
+      "sha256": "887ed62874861172b811ee320589c7429462c3d63aea76d9543fd5afc7c80101"
+    },
+    "archivedCommit": "244a21965187c43c60f7f29e743be5d1401d263a"
+  },
+  "inputPins": [
+    {
+      "path": "tools/quality/030_run_pgpt_verify.sh",
+      "sha256": "233d97af3bef1cfd0dcc12a0fb384abcc722806ceeb56c12060932fb36badac5"
+    },
+    {
+      "path": "tools/quality/018_collect_verified_evidence_set.py",
+      "sha256": "1f3fbd4b31e748ef73918b0c57a82c06f67a8b22b04b81b9bbf3fdc6cf916f02"
+    },
+    {
+      "path": "tools/quality/006_collect_scenario_evidence.py",
+      "sha256": "6c7ee0e807b3d4e904366ee9e4e0a89e2c57e78e3e4d3461c49a1cb8dbef083e"
+    },
+    {
+      "path": "tools/quality/019_test_evidence_set.py",
+      "sha256": "674bbda1c17ee081ac271a198519cd8ec7b4e9b934ae5f0577f9ac4b2e75ce08"
+    },
+    {
+      "path": "tools/quality/pgpt_reactor_junit.py",
+      "sha256": "5e6387d00c2725812daff7bde7b1bef8f1922afe391fb162f4addf3100ba147d"
+    },
+    {
+      "path": "tools/quality/tests/test_pgpt_reactor_junit.py",
+      "sha256": "58731714dcb05eafc60fd646e060baaddb4929dca43b31205eff8023b74d682a"
+    },
+    {
+      "path": "tools/quality/tests/test_pgpt_verify_runner.py",
+      "sha256": "8571832fb2065a380ee210c2a8caa4345f6205f7e92408524a69ee438c174c61"
+    },
+    {
+      "path": "documents/400_PGPT/450_品質/451_Build・静的解析・coverage方針.md",
+      "sha256": "1612ea760b1802d217977060fd0a0f6fc8230121d2af0497c075d0941151d828"
+    }
+  ],
+  "ordinaryMaven": 0,
+  "productTests": 0,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "source": "fb2404e9af5c8d845e03c69c2ad60dc39e2a5427",
+  "core": "e8368d22c4da2ec841f008df793594d3be9066af",
+  "terminal": {
+    "path": "../pgpt-runs/PG379/PG42864-formal-run-provenance-fixtures-v1/terminal.json",
+    "sha256": "ad252c77ab51238e6d893c12e971c87c94b93e360ddba8134f3953d1ece07ecb"
+  },
+  "bugs": [
+    "BUG-3635",
+    "BUG-3636"
+  ],
+  "ykt": "YKT-2856",
+  "receiptVersion": "pgpt-reactor-junit-v3",
+  "scopeExclusions": [
+    "direct Maven outside runner",
+    "approved but not executed future whole 451"
+  ],
+  "setupSyntaxFailure": {
+    "ordinaryProductExecutions": 0,
+    "affectedTestsStarted": 0,
+    "fixedBeforeRecordedExecution": true
+  }
+}
