@@ -1,0 +1,271 @@
+{
+  "run": "PG41806",
+  "source": "62a65e6d355a5385ee3c944efe9541124859b5dd",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T01:12:38.269718+00:00",
+  "wbs": "WBS-P019-03.02/2",
+  "cases": [
+    {
+      "testId": "PT-MIG-FILEORDER001",
+      "expectation": "独立手書きgolden: game1(2→900/order1,10→100/order2)、game2(1→50/order1)。",
+      "originalMeasuredResult": "PASS",
+      "originalMethod": "ScenarioFileMigrationMapTest.file001LiteralGoldenIndependentOfRenumbering()",
+      "spec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/013_Scenariofileゲーム内順と前後対応・独立十二仕様.md",
+        "sha256": "1210c7019eda6e9b776b73ad3f9534f4921e2cabcc94138e359b13b79c26dbfe"
+      }
+    },
+    {
+      "testId": "PT-MIG-FILEORDER002",
+      "expectation": "各game source signed両端/0・game別同source分離・N12target上端。",
+      "originalMeasuredResult": "PASS",
+      "originalMethod": "ScenarioFileMigrationMapTest.file002SignedSourcesAndMaximumTarget()",
+      "spec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/013_Scenariofileゲーム内順と前後対応・独立十二仕様.md",
+        "sha256": "1210c7019eda6e9b776b73ad3f9534f4921e2cabcc94138e359b13b79c26dbfe"
+      }
+    },
+    {
+      "testId": "PT-MIG-FILEORDER003",
+      "expectation": "同game/source重複拒否、別game同sourceは別keyの値。",
+      "originalMeasuredResult": "PASS",
+      "originalMethod": "ScenarioFileMigrationMapTest.file003DuplicateSourceIsPerGame()",
+      "spec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/013_Scenariofileゲーム内順と前後対応・独立十二仕様.md",
+        "sha256": "1210c7019eda6e9b776b73ad3f9534f4921e2cabcc94138e359b13b79c26dbfe"
+      }
+    },
+    {
+      "testId": "PT-MIG-FILEORDER004",
+      "expectation": "target全game重複拒否。",
+      "originalMeasuredResult": "PASS",
+      "originalMethod": "ScenarioFileMigrationMapTest.file004DuplicateTargetIsGlobal()",
+      "spec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/013_Scenariofileゲーム内順と前後対応・独立十二仕様.md",
+        "sha256": "1210c7019eda6e9b776b73ad3f9534f4921e2cabcc94138e359b13b79c26dbfe"
+      }
+    },
+    {
+      "testId": "PT-MIG-FILEORDER005",
+      "expectation": "game負/0/3/IntegerMAXをPair/MapRow/lookup/previous/nextで拒否。",
+      "originalMeasuredResult": "PASS",
+      "originalMethod": "ScenarioFileMigrationMapTest.file005InvalidGameDomainsAtEveryBoundary()",
+      "spec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/013_Scenariofileゲーム内順と前後対応・独立十二仕様.md",
+        "sha256": "1210c7019eda6e9b776b73ad3f9534f4921e2cabcc94138e359b13b79c26dbfe"
+      }
+    },
+    {
+      "testId": "PT-MIG-FILEORDER006",
+      "expectation": "target/order0・負・N12超/LongMAX拒否、1/N12許容。",
+      "originalMeasuredResult": "PASS",
+      "originalMethod": "ScenarioFileMigrationMapTest.file006N12TargetAndOrderBoundaries()",
+      "spec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/013_Scenariofileゲーム内順と前後対応・独立十二仕様.md",
+        "sha256": "1210c7019eda6e9b776b73ad3f9534f4921e2cabcc94138e359b13b79c26dbfe"
+      }
+    },
+    {
+      "testId": "PT-MIG-FILEORDER007",
+      "expectation": "null list/要素拒否。",
+      "originalMeasuredResult": "PASS",
+      "originalMethod": "ScenarioFileMigrationMapTest.file007NullContractsEstablishConstructorInvariant()",
+      "spec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/013_Scenariofileゲーム内順と前後対応・独立十二仕様.md",
+        "sha256": "1210c7019eda6e9b776b73ad3f9534f4921e2cabcc94138e359b13b79c26dbfe"
+      }
+    },
+    {
+      "testId": "PT-MIG-FILEORDER008",
+      "expectation": "mutable入力/返却List/返却byte改変からsnapshot保護。",
+      "originalMeasuredResult": "PASS",
+      "originalMethod": "ScenarioFileMigrationMapTest.file008InputListAndReturnedBytesCannotMutateSnapshot()",
+      "spec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/013_Scenariofileゲーム内順と前後対応・独立十二仕様.md",
+        "sha256": "1210c7019eda6e9b776b73ad3f9534f4921e2cabcc94138e359b13b79c26dbfe"
+      }
+    },
+    {
+      "testId": "PT-MIG-FILEORDER009",
+      "expectation": "同じsource IDのgame別lookupと未知拒否、固定cause/suppressed無し。",
+      "originalMeasuredResult": "PASS",
+      "originalMethod": "ScenarioFileMigrationMapTest.file009UnknownIsSafeRefusalNotBoundary()",
+      "spec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/013_Scenariofileゲーム内順と前後対応・独立十二仕様.md",
+        "sha256": "1210c7019eda6e9b776b73ad3f9534f4921e2cabcc94138e359b13b79c26dbfe"
+      }
+    },
+    {
+      "testId": "PT-MIG-FILEORDER010",
+      "expectation": "first/lastの空、game内隣接、game跨ぎ前後を独立tupleでassert。",
+      "originalMeasuredResult": "PASS",
+      "originalMethod": "ScenarioFileMigrationMapTest.file010WithinGameAndCrossGameNeighbors()",
+      "spec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/013_Scenariofileゲーム内順と前後対応・独立十二仕様.md",
+        "sha256": "1210c7019eda6e9b776b73ad3f9534f4921e2cabcc94138e359b13b79c26dbfe"
+      }
+    },
+    {
+      "testId": "PT-MIG-FILEORDER011",
+      "expectation": "empty headerと未知拒否、source gap/入力再順序でも各game順位固定。",
+      "originalMeasuredResult": "PASS",
+      "originalMethod": "ScenarioFileMigrationMapTest.file011EmptyAndGapsAreExplicitValues()",
+      "spec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/013_Scenariofileゲーム内順と前後対応・独立十二仕様.md",
+        "sha256": "1210c7019eda6e9b776b73ad3f9534f4921e2cabcc94138e359b13b79c26dbfe"
+      }
+    },
+    {
+      "testId": "PT-MIG-FILEORDER012",
+      "expectation": "owned8worker/64task Future各5秒・finallyshutdownNow-await10assert、返却byte独立/lookup/navigation。",
+      "originalMeasuredResult": "PASS",
+      "originalMethod": "ScenarioFileMigrationMapTest.file012ConcurrentReturnsRemainIndependentlyOwned()",
+      "spec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/013_Scenariofileゲーム内順と前後対応・独立十二仕様.md",
+        "sha256": "1210c7019eda6e9b776b73ad3f9534f4921e2cabcc94138e359b13b79c26dbfe"
+      }
+    },
+    {
+      "testId": "PT-MIG-PLACE001",
+      "expectation": "手書きgolden: global entry2→900/order1/game1/file500/index7、10→100/order2/game1/file800/index3、30→50/order3/game2/file600/index0。file source20→500、10→800とgame2 source10→600。file並びとentry全体順を混同しない。",
+      "originalMeasuredResult": "PASS",
+      "originalMethod": "ScenarioEntryPlacementMapTest.place001IndependentGlobalGoldenAndFileReferences()",
+      "spec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/015_Entryとfile移行参照・順序接続の独立十二仕様.md",
+        "sha256": "62f80d2ac96a5894e8bd969d4a573362b25c03050af96fce0057d04fea64b371"
+      }
+    },
+    {
+      "testId": "PT-MIG-PLACE002",
+      "expectation": "同file内index0/IntegerMAXの順はglobal entry順と逆でも0→MAX。減算比較しない。",
+      "originalMeasuredResult": "PASS",
+      "originalMethod": "ScenarioEntryPlacementMapTest.place002FileIndexOrderIsIndependentOfGlobalOrder()",
+      "spec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/015_Entryとfile移行参照・順序接続の独立十二仕様.md",
+        "sha256": "62f80d2ac96a5894e8bd969d4a573362b25c03050af96fce0057d04fea64b371"
+      }
+    },
+    {
+      "testId": "PT-MIG-PLACE003",
+      "expectation": "unknown file・別game sourcefileの参照拒否、既知別game同file sourceを分離。",
+      "originalMeasuredResult": "PASS",
+      "originalMethod": "ScenarioEntryPlacementMapTest.place003UnknownFileAndCrossGameMismatchRefuse()",
+      "spec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/015_Entryとfile移行参照・順序接続の独立十二仕様.md",
+        "sha256": "62f80d2ac96a5894e8bd969d4a573362b25c03050af96fce0057d04fea64b371"
+      }
+    },
+    {
+      "testId": "PT-MIG-PLACE004",
+      "expectation": "unknown global source entry拒否。",
+      "originalMeasuredResult": "PASS",
+      "originalMethod": "ScenarioEntryPlacementMapTest.place004UnknownEntryCannotAcquireAPlacement()",
+      "spec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/015_Entryとfile移行参照・順序接続の独立十二仕様.md",
+        "sha256": "62f80d2ac96a5894e8bd969d4a573362b25c03050af96fce0057d04fea64b371"
+      }
+    },
+    {
+      "testId": "PT-MIG-PLACE005",
+      "expectation": "currentEntryId重複、file/index重複を個別拒否、別file同index可。",
+      "originalMeasuredResult": "PASS",
+      "originalMethod": "ScenarioEntryPlacementMapTest.place005DuplicateEntryAndFileIndexAreIndependent()",
+      "spec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/015_Entryとfile移行参照・順序接続の独立十二仕様.md",
+        "sha256": "62f80d2ac96a5894e8bd969d4a573362b25c03050af96fce0057d04fea64b371"
+      }
+    },
+    {
+      "testId": "PT-MIG-PLACE006",
+      "expectation": "入力件数不足/余剰拒否、空map/headerと既知空fileの空List、未知file拒否。",
+      "originalMeasuredResult": "PASS",
+      "originalMethod": "ScenarioEntryPlacementMapTest.place006ExactCardinalityAndKnownEmptyFile()",
+      "spec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/015_Entryとfile移行参照・順序接続の独立十二仕様.md",
+        "sha256": "62f80d2ac96a5894e8bd969d4a573362b25c03050af96fce0057d04fea64b371"
+      }
+    },
+    {
+      "testId": "PT-MIG-PLACE007",
+      "expectation": "game上下境界をPlacement/PlacedEntry/entriesForFileで拒否。",
+      "originalMeasuredResult": "PASS",
+      "originalMethod": "ScenarioEntryPlacementMapTest.place007GameDomainsAtEveryPublicBoundary()",
+      "spec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/015_Entryとfile移行参照・順序接続の独立十二仕様.md",
+        "sha256": "62f80d2ac96a5894e8bd969d4a573362b25c03050af96fce0057d04fea64b371"
+      }
+    },
+    {
+      "testId": "PT-MIG-PLACE008",
+      "expectation": "entryIndex負拒否・0/MAX許容、PlacedEntryのtarget/order/file N12下限上限とその外を個別検査。",
+      "originalMeasuredResult": "PASS",
+      "originalMethod": "ScenarioEntryPlacementMapTest.place008IndexAndIndependentN12Fields()",
+      "spec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/015_Entryとfile移行参照・順序接続の独立十二仕様.md",
+        "sha256": "62f80d2ac96a5894e8bd969d4a573362b25c03050af96fce0057d04fea64b371"
+      }
+    },
+    {
+      "testId": "PT-MIG-PLACE009",
+      "expectation": "null両map/List/要素、unknownlookup・固定診断/cause/suppressed無し。",
+      "originalMeasuredResult": "PASS",
+      "originalMethod": "ScenarioEntryPlacementMapTest.place009NullUnknownAndFixedDiagnosticContracts()",
+      "spec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/015_Entryとfile移行参照・順序接続の独立十二仕様.md",
+        "sha256": "62f80d2ac96a5894e8bd969d4a573362b25c03050af96fce0057d04fea64b371"
+      }
+    },
+    {
+      "testId": "PT-MIG-PLACE010",
+      "expectation": "元mutable入力/返却List/返却byteの所有分離。",
+      "originalMeasuredResult": "PASS",
+      "originalMethod": "ScenarioEntryPlacementMapTest.place010SnapshotAndReturnOwnership()",
+      "spec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/015_Entryとfile移行参照・順序接続の独立十二仕様.md",
+        "sha256": "62f80d2ac96a5894e8bd969d4a573362b25c03050af96fce0057d04fea64b371"
+      }
+    },
+    {
+      "testId": "PT-MIG-PLACE011",
+      "expectation": "source signed端/0と入力再順序、target再採番逆転に独立したglobal tuple/order。",
+      "originalMeasuredResult": "PASS",
+      "originalMethod": "ScenarioEntryPlacementMapTest.place011SignedSourcesAndInputReordering()",
+      "spec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/015_Entryとfile移行参照・順序接続の独立十二仕様.md",
+        "sha256": "62f80d2ac96a5894e8bd969d4a573362b25c03050af96fce0057d04fea64b371"
+      }
+    },
+    {
+      "testId": "PT-MIG-PLACE012",
+      "expectation": "owned8worker64task、Future各5秒/finallyshutdownNow-await10assert、独立byte/lookup/file順。",
+      "originalMeasuredResult": "PASS",
+      "originalMethod": "ScenarioEntryPlacementMapTest.place012ConcurrentOwnershipAndLookup()",
+      "spec": {
+        "path": "evidence/01_PT/019_NK-MIG-001/015_Entryとfile移行参照・順序接続の独立十二仕様.md",
+        "sha256": "62f80d2ac96a5894e8bd969d4a573362b25c03050af96fce0057d04fea64b371"
+      }
+    }
+  ],
+  "qualifiedTyped": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41804-f03-typed-two-map-throws-close-v1/manifest.json",
+    "sha256": "4077bfa272eab770e67581dd3c1074dd31753b075b59055d65a836904989dda1"
+  },
+  "sameOriginalXML": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33292-mapverify976-post-v5/original-TEST-junit-jupiter.xml",
+    "sha256": "a55172a64a07208df0457588e90e237cb456f5a36ee780adb89da50596333079"
+  },
+  "design": {
+    "source": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "expectedCanonicalBlobSha256": "3874975e619ba279814df4d6f79fd161098756cad882e00d580651fb2d7387cb"
+  },
+  "newProductTests": 0,
+  "formalAcceptanceId": null,
+  "useLimits": [
+    "Only file and entry synthetic tests, Speaker COPY text companion excluded from selected closure",
+    "Located original historic fixtures never added other than explicit matching conditions",
+    "No actual game/file/entry / DB / COPY / Current acceptance",
+    "Whole F03/451 and P019 termination open"
+  ]
+}
