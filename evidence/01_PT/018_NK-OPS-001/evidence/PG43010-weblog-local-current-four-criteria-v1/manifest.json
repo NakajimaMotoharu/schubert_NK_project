@@ -1,0 +1,152 @@
+{
+  "run": "PG43010-weblog-local-current-four-criteria-v1",
+  "source": "140c5676d7cf93dcde254b2aeb3b20ad543ca1a4",
+  "productSource": "7698011f52d6cc5f94c76413b6ab36971783b9c9",
+  "terminalAtUTC": "2026-11-22T20:46:52.615934+00:00",
+  "actualExit": 0,
+  "wbs": "WBS-P018-10.03/2",
+  "canonical": {
+    "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+    "source": "ca41c03c0c6efff9a3a35b47b480491810bee6f9",
+    "sha256": "860f584a2f032e9b06112907f8ec138a12d0b69b94546f7e17ad7dfb9b65414c"
+  },
+  "readOnlyPrior": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42056-p0181003-weblog-diagnostic-current-v1/manifest.json",
+      "sha256": "04af8b0971dd3ecb9d636ad6cce3740b4dfeaff5f043e83df57537b9cf3c88bd"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42112-p0181003-weblog-reason-current-v1/manifest.json",
+      "sha256": "698b2d0551ddca8447d73c94fa6c8c2f3ddf677c3a3d9330fb044c4e06cd4e78"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38404-ssc454-web-value-privacy-post-v1/manifest.json",
+      "sha256": "589a7bd279e88f7efc892e3e0c70caf53cccce1788edb41f9190466678da467b"
+    }
+  ],
+  "originalXML": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38404-ssc454-web-value-privacy-post-v1/original-TEST-junit-jupiter.xml",
+    "sha256": "3c2d92ba1ee6b8a82db72280189d01d1b3301ee5f821099b71f4c033d4fdddc5"
+  },
+  "sourceInputs": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/ClaimedWebLog.java",
+      "sha256": "5aad3ffe6cf9fa219708a27b04a58d98fb67c0e16a4f44561296d34cc87acdfb"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload.java",
+      "sha256": "9318b03aefff1e169886a4c274236bb2ca1a7fd722b6fddc1dc25cc3e738f014"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogPayloadException.java",
+      "sha256": "a040ed22b820dccdb7da66a7af28dcdc1ea0a43c295aae150202090daac127df"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity.java",
+      "sha256": "b8279f85ba0b8f52466f28c8908f03cb0420556722d9711e4e11168c078c80ca"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/package-info.java",
+      "sha256": "aff885116b242f5aebd8c386981d4d73d4a93286fcff36f7a6f09ee1a1ee33d5"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogValueContractTest.java",
+      "sha256": "7655700a868614ea23120398ce90bb0eeaaec0ba24567d0094854b569cf4ba2f"
+    }
+  ],
+  "jars": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+      "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+    }
+  ],
+  "commands": {
+    "main": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+      "--release",
+      "25",
+      "-g",
+      "-proc:none",
+      "-implicit:none",
+      "-encoding",
+      "UTF-8",
+      "-Xlint:all",
+      "-Werror",
+      "-cp",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "-d",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43010-weblog-local-current-four-criteria-v1/main",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/ClaimedWebLog.java",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload.java",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity.java",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogPayloadException.java",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/package-info.java"
+    ],
+    "test": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+      "--release",
+      "25",
+      "-g",
+      "-proc:none",
+      "-implicit:none",
+      "-encoding",
+      "UTF-8",
+      "-Xlint:all",
+      "-Werror",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43010-weblog-local-current-four-criteria-v1/main:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "-d",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43010-weblog-local-current-four-criteria-v1/test",
+      "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogValueContractTest.java"
+    ]
+  },
+  "compileTerminals": {
+    "main": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43010-weblog-local-current-four-criteria-v1/main.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43010-weblog-local-current-four-criteria-v1/main.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "test": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43010-weblog-local-current-four-criteria-v1/test.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43010-weblog-local-current-four-criteria-v1/test.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "exactFileCounts": {
+    "main": 6,
+    "fixture": 1
+  },
+  "executedPreviouslyWithExactInput": [
+    "value003ClaimedRowHasAllEightComponentsAndRejectsEachInvalidBoundary()",
+    "value002CiphertextOwnershipBoundsAndArrayReferenceEqualityRemainExplicit()",
+    "value001IdentityIsCompleteAndAadMatchesIndependentEightFieldGolden()",
+    "value004PayloadReasonHasFixedNamesLookupDefensiveValuesAndClosedDiagnostic()"
+  ],
+  "relatedDirectLocalCriterion": "Raw fixed diagnostics of identity, ciphertext and row lease, rejection of unknown/null and closed exception reasons from the same original selected fixture; no other test cases added",
+  "scopeReuse": 4,
+  "newOrdinaryRuns": 0,
+  "oldExecAggregated": false,
+  "wholeWebPackage": false,
+  "remaining": [
+    "actual log sink",
+    "Web normal runtime, QA-056 and whole 451",
+    "broad logging criteria and formal owner approval"
+  ],
+  "formalAcceptanceId": null
+}
