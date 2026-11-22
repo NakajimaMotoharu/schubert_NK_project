@@ -1,0 +1,67 @@
+{
+  "run": "PG42310",
+  "source": "85f6ca60652a39999a164568dc5fe57ed1778dca",
+  "configurationCandidate": "27152c62e0b39a9fafa9aa2fd4576a9efb905da9",
+  "previousJavaCore": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-P018-02/2",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T06:52:13.071240+00:00",
+  "references": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42306-g1306-maintenance-timer-offline-v1/manifest.json",
+      "sha256": "fcaed552f0f726ca27ce485b9a7c6c57bff013234a84215926e32ae4bffe4126"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40420-p01802-current-release-three-port-scopes-v1/manifest.json",
+      "sha256": "dcd733fd8c570c209cde161933ed1d91129ca43768570d7e32e7931fd532317e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42206-c02-fourteen-current-source-only-v1/manifest.json",
+      "sha256": "6e8af116f301a781b0002d11aa00c04b69f73e66b0a200fb729b1a26476594ef"
+    }
+  ],
+  "sourceTemplate": {
+    "path": "src/deployment/systemd/schubert-nk-maintenance.timer.template",
+    "sha256": "8f5885660d0c55bffa51151615d4f55f8dd3d4c56d438a952392a5c211c8115f"
+  },
+  "sourceConfig": {
+    "path": "src/deployment/config/batch.yml.template",
+    "sha256": "f8777bdd604dd1c0e1064d9c743fc15986baba737dcd852038e7bc5060efb8d9",
+    "equivalentPriorJavaCore": true
+  },
+  "schedule": {
+    "hourMinute": "05:00",
+    "zone": "Asia/Tokyo",
+    "calendar": "*-*-* 05:00:00 Asia/Tokyo",
+    "currentStaticPairConsistent": true
+  },
+  "existingSignerScope": {
+    "heldOwners": [
+      "ReleasePayloadVerification",
+      "StartupReleaseManifest"
+    ],
+    "appliedToNewArtifact": false
+  },
+  "approvedDesign": {
+    "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "sha256": "3874975e619ba279814df4d6f79fd161098756cad882e00d580651fb2d7387cb",
+    "source": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "anchors": [
+      1864,
+      2346,
+      2355
+    ]
+  },
+  "publishedConfigDeliverable": "Render/stage Unit through authorized deployment, bind source version + input/rendered hashes, validator conditions, rights and signed payload metadata per applicable inventory; unchanged historical BOM stays separate.",
+  "requiredServiceBinding": "schubert-nk-maintenance.service",
+  "retentionPrerequisites": [
+    "Named service production and smoke",
+    "Maintenance ownership and full controlled stop/update/reboot test evidence",
+    "Fresh rendered config validation and applicable released BOM/source",
+    "no automatically enabled split artifact"
+  ],
+  "oldSignedWorkReplayed": 0,
+  "actualSourceOrDeployActions": 0,
+  "formalAcceptanceId": null,
+  "whole451": false
+}
