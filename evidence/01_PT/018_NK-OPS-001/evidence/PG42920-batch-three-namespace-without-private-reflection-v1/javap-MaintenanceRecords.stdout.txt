@@ -1,0 +1,20 @@
+Compiled from "MaintenanceRecords.java"
+public final class dev.codex.schubert.nk.batch.file.MaintenanceRecords {
+  private static final java.time.format.DateTimeFormatter TIME;
+  private dev.codex.schubert.nk.batch.file.MaintenanceRecords();
+  public static byte[] anchor(dev.codex.schubert.nk.batch.repository.BatchRun);
+  public static byte[] activation(dev.codex.schubert.nk.batch.repository.MaintenanceActivation);
+  public static byte[] completion(dev.codex.schubert.nk.batch.repository.MaintenanceCompletion);
+  public static byte[] retirement(dev.codex.schubert.nk.batch.repository.MaintenanceRetirement);
+  public static dev.codex.schubert.nk.batch.repository.MaintenanceRetirement readRetirement(byte[]) throws java.io.IOException;
+  public static dev.codex.schubert.nk.batch.repository.BatchRun readAnchor(byte[]) throws java.io.IOException;
+  public static dev.codex.schubert.nk.batch.repository.MaintenanceActivation readActivation(byte[]) throws java.io.IOException;
+  public static dev.codex.schubert.nk.batch.repository.MaintenanceCompletion readCompletion(byte[]) throws java.io.IOException;
+  private static java.lang.String[] lines(byte[], java.lang.String, int, int, int) throws java.io.IOException;
+  private static dev.codex.schubert.nk.batch.repository.BatchRun run(java.lang.String[]);
+  private static java.lang.String identity(dev.codex.schubert.nk.batch.repository.BatchRun);
+  private static byte[] ascii(java.lang.String);
+  private static void require(boolean) throws java.io.IOException;
+  private static java.io.IOException invalid();
+  static {};
+}
