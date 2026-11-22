@@ -14,6 +14,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,14 +26,16 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeoutException;
 import org.junit.jupiter.api.Test;
 
 /** BAK/BKO/UI251/SS341 6.4/343 5.3; SSC058/PG165; BAT186..193 in method order. */
 final class BackupManifestCodecTest {
   @Test
-  void independentCanonicalGolden() throws Exception {
+  void independentCanonicalGolden() throws IOException, NoSuchAlgorithmException {
     byte[] golden = golden();
     assertEquals(965, golden.length);
     assertEquals(
@@ -50,7 +53,7 @@ final class BackupManifestCodecTest {
   }
 
   @Test
-  void allFieldsAndMaximumLengths() throws Exception {
+  void allFieldsAndMaximumLengths() throws IOException {
     String input =
         text()
             .replace("12345678-9abc-def0-8123-456789abcdef", "00000000-0000-0000-0000-000000000000")
@@ -119,7 +122,7 @@ final class BackupManifestCodecTest {
   }
 
   @Test
-  void structuralByteMutation() throws Exception {
+  void structuralByteMutation() throws IOException {
     byte[] original = golden();
     for (int i = 0; i < original.length; i++)
       for (byte replacement : new byte[] {'~', 0, (byte) 0xff}) {
@@ -137,7 +140,7 @@ final class BackupManifestCodecTest {
   }
 
   @Test
-  void noncanonicalScalarsAndDates() throws Exception {
+  void noncanonicalScalarsAndDates() throws IOException {
     String source = text();
     for (String bad :
         List.of(
@@ -181,7 +184,7 @@ final class BackupManifestCodecTest {
   }
 
   @Test
-  void missingUnknownDuplicateAndOrder() throws Exception {
+  void missingUnknownDuplicateAndOrder() throws IOException {
     String source = text();
     for (String bad :
         List.of(
@@ -225,7 +228,7 @@ final class BackupManifestCodecTest {
   }
 
   @Test
-  void sizeAndNullBoundaries() throws Exception {
+  void sizeAndNullBoundaries() throws IOException {
     rejected(new byte[0]);
     for (int size : new int[] {1, 4095, 4096, 4097}) {
       byte[] input = Arrays.copyOf(golden(), size);
@@ -237,7 +240,7 @@ final class BackupManifestCodecTest {
   }
 
   @Test
-  void inputOutputOwnership() throws Exception {
+  void inputOutputOwnership() throws IOException {
     byte[] source = golden();
     var value = BackupManifestCodec.decode(source);
     Arrays.fill(source, (byte) 'x');
@@ -251,7 +254,8 @@ final class BackupManifestCodecTest {
   }
 
   @Test
-  void concurrentCanonicalRoundTrips() throws Exception {
+  void concurrentCanonicalRoundTrips()
+      throws IOException, InterruptedException, ExecutionException, TimeoutException {
     byte[] expected = golden();
     var value = manifest();
     var pool = Executors.newFixedThreadPool(8);
