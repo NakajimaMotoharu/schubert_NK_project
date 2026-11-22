@@ -3,6 +3,7 @@ package dev.codex.schubert.nk.web.bootstrap;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -49,6 +50,7 @@ final class WebNonSecretConfigTest {
     var failure =
         assertThrows(IllegalArgumentException.class, () -> WebNonSecretConfig.parse(common, web));
     assertEquals(INVALID, failure.getMessage());
+    assertNull(failure.getCause());
     assertEquals(0, failure.getSuppressed().length);
   }
 

@@ -53,7 +53,18 @@ def write(path, value):
 
 
 def main(version):
-    run_id = f"{RUN_PREFIX}-{version}"
+    diagnostics = version == "diagnostics"
+    run_id = "PG43122-config-diagnostics-no-nested-cause-v1" if diagnostics else f"{RUN_PREFIX}-{version}"
+    earlier_suite, = PUBLISHED.glob("PG38862*/manifest.json")
+    original_cases = sorted(
+        (case["classname"], case["name"].removesuffix("()")) for case in read(earlier_suite)["cases"]
+    )
+    assert len(original_cases) == 14
+    selected = (
+        [case for case in original_cases if case[1][9:12] in {"003", "004", "007"}]
+        if diagnostics else original_cases
+    )
+    assert len(selected) == (6 if diagnostics else 14)
     folder = STORE / run_id
     folder.mkdir(mode=0o700)
     for name in ("target/classes", "test", "meter", "xml", "fixture-repo/src/deployment/config"):
@@ -112,7 +123,12 @@ def main(version):
                  "-cp",os.pathsep.join([str(folder/"test"),cp]),"org.junit.platform.console.ConsoleLauncher",
                  "execute","--disable-ansi-colors","--fail-if-no-tests","--reports-dir",str(folder/"xml")],
     }
-    for name in FIXTURES:steps["junit"].extend(["--select-class",name.replace("/",".")])
+    if diagnostics:
+        for classname, name in selected:
+            steps["junit"].extend(["--select-method", f"{classname}#{name}"])
+    else:
+        for name in FIXTURES:
+            steps["junit"].extend(["--select-class", name.replace("/", ".")])
     for key in ("rawCompile","unfiltered","style","pmd","spotbugs"):
         code=original["commands"][key]
         stages=[arg.replace(str(prior),str(folder)) for arg in code]
@@ -146,17 +162,15 @@ def main(version):
                 f"{name}.class" for name in FIXTURES}
     junit=folder/"xml/TEST-junit-jupiter.xml"
     suite=ET.parse(junit).getroot()
-    assert suite.get("tests")=="14" and all(suite.get(f)=="0" for f in ("failures","errors","skipped"))
-    old,=PUBLISHED.glob("PG38862*/manifest.json")
+    assert suite.get("tests")==str(len(selected)) and all(suite.get(f)=="0" for f in ("failures","errors","skipped"))
     cases=sorted((c.get("classname"),c.get("name").removesuffix("()")) for c in suite.findall("testcase"))
-    original_cases=sorted((c["classname"],c["name"].removesuffix("()")) for c in read(old)["cases"])
-    assert len(cases)==14 and cases==original_cases
+    assert cases==selected
     write(folder/"terminal.json",dict(actualExit=0,source=source,productCore=CORE,terminalAtUTC=now(),
-         results=results,cases=cases,priorCaseList=pin(old),junit=pin(junit),exec=pin(folder/"unit.exec"),
+         results=results,cases=cases,priorCaseList=pin(earlier_suite),junit=pin(junit),exec=pin(folder/"unit.exec"),
          coverage=pin(folder/"unfiltered.stdout"),externalIo=0,controlledTemplateFiles=3))
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--version", choices=("v1", "v2", "v3"), required=True)
+    parser.add_argument("--version", choices=("v1", "v2", "v3", "diagnostics"), required=True)
     main(parser.parse_args().version)
