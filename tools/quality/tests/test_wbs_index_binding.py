@@ -7,7 +7,7 @@ import subprocess
 from tempfile import TemporaryDirectory
 import unittest
 
-from wbs_index_binding import ACCEPTANCE, INVENTORY, validate_index
+from wbs_index_binding import ACCEPTANCE, INVENTORY, _GUARD, validate_index
 
 
 class WbsIndexBindingTest(unittest.TestCase):
@@ -55,3 +55,24 @@ class WbsIndexBindingTest(unittest.TestCase):
         self.git("rm", "-f", "--", ACCEPTANCE)
         with self.assertRaisesRegex(ValueError, "expected one staged WBS blob"):
             validate_index(self.root)
+
+    def test_non_json_constants_are_rejected_at_both_publication_entry_points(self):
+        verify_files = _GUARD["verify_files"]
+        for doc in ("inventory", "acceptance"):
+            for token in (b"NaN", b"Infinity", b"-Infinity"):
+                inventory = self.old_inventory
+                if doc == "inventory":
+                    inventory = b'{"observed": ' + token + b"}\n"
+                self.inventory.write_bytes(inventory)
+                if doc == "acceptance":
+                    expected = sha256(inventory).hexdigest().encode()
+                    self.acceptance.write_bytes(
+                        b'{"inventorySha256": "' + expected + b'", "observed": ' + token + b"}\n"
+                    )
+                else:
+                    self.set_reference(inventory)
+                self.git("add", "--", INVENTORY, ACCEPTANCE)
+                for check in (verify_files, validate_index):
+                    with self.subTest(document=doc, literal=token.decode(), entry=check.__name__):
+                        with self.assertRaisesRegex(ValueError, "non-JSON numeric constant"):
+                            check(self.root)

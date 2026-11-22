@@ -17,9 +17,15 @@ def unique_object(pairs):
     return result
 
 
+def reject_non_json_constant(_token):
+    raise ValueError('non-JSON numeric constant')
+
+
 def validate_bytes(inventory, acceptance):
-    source = json.loads(inventory, object_pairs_hook=unique_object)
-    target = json.loads(acceptance, object_pairs_hook=unique_object)
+    source = json.loads(inventory, object_pairs_hook=unique_object,
+                        parse_constant=reject_non_json_constant)
+    target = json.loads(acceptance, object_pairs_hook=unique_object,
+                        parse_constant=reject_non_json_constant)
     if not isinstance(source, dict) or not isinstance(target, dict):
         raise ValueError('WBS documents must be objects')
     expected = target.get('inventorySha256')
