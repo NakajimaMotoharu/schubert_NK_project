@@ -1,6 +1,7 @@
 package dev.codex.schubert.nk.api.persistence;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -17,12 +18,13 @@ import dev.codex.schubert.nk.protocol.layout.semantic.ScriptFileId;
 import dev.codex.schubert.nk.protocol.layout.semantic.Sha256Hex;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
-/** PT-SCN-SHAPE001..003; fills the original shape branches, no file/DB/authentication access. */
+/** PT-SCN-SHAPE001..004; immutable shape/value contracts without file/DB/authentication access. */
 final class ScenarioSnapshotShapeTest {
   @Test
   void fileMetadataAnd10001RecordsRejectAtShapeBeforeAnyResultEscapes() {
@@ -70,25 +72,55 @@ final class ScenarioSnapshotShapeTest {
     assertThrows(UnsupportedOperationException.class, () -> one.records().clear());
   }
 
+  @Test
+  void shape004EqualLogicalSnapshotsRemainSearchableAfterInputMutation() {
+    var input = new ArrayList<>(List.of(entry()));
+    var captured = new ScenarioDetailSnapshot(header(DeliveryMode.INLINE), input);
+    var sameValue = new ScenarioDetailSnapshot(header(DeliveryMode.INLINE), List.of(entry()));
+    var values = new HashSet<ScenarioDetailSnapshot>();
+    assertTrue(values.add(captured));
+    input.clear();
+    assertEquals(captured, sameValue);
+    assertTrue(values.contains(sameValue));
+    assertFalse(values.add(sameValue));
+
+    var differentBody =
+        new ScenarioDetailSnapshot(header(DeliveryMode.INLINE), List.of(entry("different body")));
+    var differentTitle =
+        new ScenarioDetailSnapshot(
+            header(DeliveryMode.INLINE, "different title"), List.of(entry()));
+    assertTrue(values.add(differentBody));
+    assertTrue(values.add(differentTitle));
+    assertEquals(3, values.size());
+  }
+
   private static ScenarioEntryRecord entry() {
+    return entry("independent shape fixture");
+  }
+
+  private static ScenarioEntryRecord entry(String body) {
     return new ScenarioEntryRecord(
         new EntryId(1),
         1,
         1,
         EntryType.NARRATION,
         Optional.empty(),
-        "independent shape fixture",
+        body,
         0,
         Optional.empty(),
         Optional.empty());
   }
 
   private static ScenarioDetailResponseData header(DeliveryMode mode) {
+    return header(mode, "shape fixture");
+  }
+
+  private static ScenarioDetailResponseData header(DeliveryMode mode, String title) {
     boolean file = mode == DeliveryMode.FILE;
     return new ScenarioDetailResponseData(
         new ScriptFileId(1),
         GameCode.NUKITASHI_1,
-        "shape fixture",
+        title,
         DisplayPath.of("scenario/shape.txt"),
         Optional.empty(),
         Optional.empty(),

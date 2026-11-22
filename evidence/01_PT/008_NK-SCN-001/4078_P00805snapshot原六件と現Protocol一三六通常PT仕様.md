@@ -10,3 +10,7 @@ prepare: `PYTHONPATH=tools/quality python3 -B evidence/01_PT/018_NK-OPS-001/inpu
 
 
 実行追記: source a27bf16e22698294a5900b13f06a09d1d213d830、26878真正0/136FESabort0、[26882独立結果](../018_NK-OPS-001/evidence/PG26882-snapshot-current-independent-v1/manifest.json) hash8780b454913911e0736b30ae9f8b004c4be59376be7dafe954b684db058aa704。全178physical/CI170/code160/positive164CRC、L3499/M744/C160/B1026未網羅0、手動除外/旧execunion0。環境・command・exit・二scope分離・BUG/現在sourceは[26884](../018_NK-OPS-001/evidence/PG26884-snapshot136-regenerator1-scope-join-v1/manifest.json)。未実行の開始時記録は履歴として維持、元190/全451未受入。
+
+## PT-SCN-SHAPE004 snapshot不変性と等しい値の重複排除
+
+BUG-3667、FUN-004/005、UI234／SS332 §4.2／SS333 §6.1。独立に作った同じtitle/body/連番の二snapshotを使う。元の可変入力をclearしても、先に格納した値は同内容で等値、集合検索は成功、重複挿入はfalse。body差だけとtitle差だけのsnapshotは個別に挿入成功し、集合の期待値は3件。実装methodで期待値を算出しない。現在Protocolを固定し元6＋新1。JDK25／NullAway、同一execの生class/line/method/branch、元null境界negを保持。実FileStore/再生成/CHRは別。

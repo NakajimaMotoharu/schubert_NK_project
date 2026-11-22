@@ -1,5 +1,6 @@
 """Qualify the two existing immutable snapshot fixtures using current Protocol only."""
 
+import argparse
 from datetime import datetime, timezone
 import hashlib
 import json
@@ -14,6 +15,7 @@ ROOT = Path.cwd()
 LOCALS = (ROOT.parent / "pgpt-runs/PG379").resolve()
 PUBLIC = ROOT / "evidence/01_PT/018_NK-OPS-001/evidence"
 RUN = "PG43098-scenario-snapshot-current-six-v1"
+VALUE_RUN = "PG43100-scenario-snapshot-value-semantics-v1"
 PKG = "dev/codex/schubert/nk/api/persistence"
 FIXTURES = ("ScenarioDetailSnapshotBoundaryTest", "ScenarioSnapshotShapeTest")
 MAIN_NAMES = ("ScenarioDetailSnapshot", "package-info")
@@ -54,10 +56,10 @@ def check_physical(folder, names):
     }
 
 
-def main():
+def main(value_fixture):
     ref = PUBLIC / "PG43096-scenario-snapshot-current-proof-v1/manifest.json"
     spec = read(ref)
-    local = LOCALS / RUN
+    local = LOCALS / (VALUE_RUN if value_fixture else RUN)
     local.mkdir(mode=0o700)
     for name in ("test", "xml", "owned-temp", "meter"):
         (local / name).mkdir()
@@ -68,7 +70,8 @@ def main():
     pinned = {row["path"]:row["sha256"] for row in spec["currentInputsAllSameFour"]}
     for path in main_paths + tests:
         assert bytes_match(source, path)
-        assert sha(path)==pinned[str(path)]
+        changed_shape_fixture = value_fixture and path.stem == "ScenarioSnapshotShapeTest"
+        assert (sha(path) != pinned[str(path)]) == changed_shape_fixture
     for path in main_paths:
         assert bytes_match(core, path)
         p = local / "src/main/java" / path.relative_to(sources / "main/java")
@@ -96,7 +99,7 @@ def main():
     def adapt(argument):
         return (argument.replace(str(previous), str(local))
             .replace(os.pathsep + str(local / "qualified-storage-exceptions.jar"), "")
-            .replace("PG43080-current", RUN)
+            .replace("PG43080-current", local.name)
             .replace("dev/codex/schubert/nk/api/storage/ScenarioRecordStream.class", PKG + "/ScenarioDetailSnapshot.class"))
     stages = {key:[adapt(arg) for arg in prior[key]] for key in (
         "format", "style", "compileNullaway", "fixtures", "junit", "rawCompile", "unfiltered", "pmd", "spotbugs")}
@@ -136,4 +139,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--value-fixture", action="store_true")
+    options = parser.parse_args()
+    main(options.value_fixture)
