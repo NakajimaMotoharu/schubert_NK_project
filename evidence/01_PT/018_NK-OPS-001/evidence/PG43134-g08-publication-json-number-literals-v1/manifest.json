@@ -1,0 +1,92 @@
+{
+  "run": "PG43134-g08-publication-json-number-literals-v1",
+  "source": "499d380d80b64a64b4e9c117b8469d45c1f67e7d",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T23:57:22.433416+00:00",
+  "wbs": "WBS-G08",
+  "related": [
+    "BUG-3674",
+    "YKT-2888"
+  ],
+  "design": [
+    "SS354",
+    "451"
+  ],
+  "oracle": {
+    "invalidLiterals": [
+      "NaN",
+      "Infinity",
+      "-Infinity"
+    ],
+    "documents": [
+      "inventory",
+      "acceptance digest"
+    ],
+    "entrypoints": [
+      "worktree",
+      "index"
+    ],
+    "controlledCases": 12,
+    "diagnostic": "non-JSON numeric constant",
+    "syntaxSource": "RFC 8259 number tokens"
+  },
+  "before": {
+    "exit": 1,
+    "expectedRejectionsMissing": 12,
+    "tests": 5
+  },
+  "after": {
+    "exit": 0,
+    "toolTests": 5,
+    "negativeAssertions": 12,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  },
+  "actualCurrentPair": [
+    {
+      "path": "documents/400_PGPT/470_PMO/485_WBS網羅性・受入対応.json",
+      "sha256": "33e55b84a2d82b1d13e62391b975acb1cb485ba379ad0721b7121791b82e3079"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/486_WBS現行実績.json",
+      "sha256": "b7ec5672bccd3a568506adf20dca03decfcb44d688e2c9b1b5a075e7796aefc8"
+    }
+  ],
+  "sameWorktreeAndIndex": true,
+  "productTests": 0,
+  "environmentActions": 0,
+  "sharedGuard": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/580_wbs_inventory_reference_guard.py",
+    "sha256": "cfc95c15e4d2de59bfc91211d60766be6e877713799c078027084726878e58ce"
+  },
+  "sharedGuardTest": {
+    "path": "tools/quality/tests/test_wbs_index_binding.py",
+    "sha256": "35ec1bdd1aa3b576290117d6a6ed818f06ed53392fa39573c79a9811d457d3a0"
+  },
+  "records": [
+    {
+      "path": "../pgpt-runs/PG379/PG43134-g08-publication-json-number-literals-v1/before.log",
+      "sha256": "085ea6e0cba3dc0ff61acef9f09db0bb84bd7c1b9a9fa071e12f564af3d0434b"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43134-g08-publication-json-number-literals-v1/before.exit",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43134-g08-publication-json-number-literals-v1/after.log",
+      "sha256": "f301adb5ceb5245a1563e33d3499b0c61d9630ab84531442f32e0ba9dd6351c2"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43134-g08-publication-json-number-literals-v1/index.actual.json",
+      "sha256": "0f02c4d112fbf0a45569df1a40805f8b7f869bb0696b022f411a5479ef5f3e4c"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43134-g08-publication-json-number-literals-v1/worktree.actual.json",
+      "sha256": "0f02c4d112fbf0a45569df1a40805f8b7f869bb0696b022f411a5479ef5f3e4c"
+    }
+  ],
+  "formalAcceptanceId": null,
+  "whole451": false
+}
