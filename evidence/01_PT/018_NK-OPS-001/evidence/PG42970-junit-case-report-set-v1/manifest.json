@@ -1,0 +1,105 @@
+{
+  "run": "PG42970",
+  "source": "8dc375177e52bb5754d4972ef585887a4d4e7f0f",
+  "codeChange": "c8de7796ee",
+  "work": "WBS-G08",
+  "bug": "BUG-3647",
+  "ykt": "YKT-2865",
+  "initialBefore": {
+    "path": "../pgpt-runs/PG379/PG42970-junit-case-report-set-v1/before.json",
+    "sha256": "bac731c06473cc2ff6b8d79892ef5b5c4d49dfa5d9ff268aed510a36d5e6238a"
+  },
+  "correctedBeforeReactor": {
+    "path": "../pgpt-runs/PG379/PG42970-junit-case-report-set-v1/corrected-before-reactor.json",
+    "sha256": "f7cda89064441ad3541d26c18f94e75205d0feefe05cb26ea0766535fc96ed0b"
+  },
+  "confirmedOldMissingValidRejections": 3,
+  "intermediateToolRun": {
+    "preservedStderr": {
+      "path": "../pgpt-runs/PG379/PG42970-junit-case-report-set-v1/after.stderr",
+      "sha256": "479eb9ab12f5593c4dfabd2c2fb0f3f7cdda8c527b0a05fc92478860de1981db"
+    },
+    "failures": 2,
+    "cause": "reactor duplicate fixture altered classname; extra-suite fixture reused the same case"
+  },
+  "actualExit": 0,
+  "toolPTCount": 148,
+  "passed": 148,
+  "failures": 0,
+  "errors": 0,
+  "skip": 0,
+  "testIds": {
+    "PT-OPS-G08-RST009": "planned Batch cross-suite repeated case rejected",
+    "PT-OPS-G09-JUNIT011": "same-module repeated case rejected before terminal write",
+    "PT-OPS-G08-BAT-PREFLIGHT02": "fixed-size Batch report set rejects a repeated case"
+  },
+  "command": [
+    "/usr/bin/python3",
+    "-B",
+    "-m",
+    "unittest",
+    "-v",
+    "test_check_batch_candidate_roster",
+    "test_pgpt_reactor_junit",
+    "019_test_evidence_set"
+  ],
+  "cwd": "/home/mini/codex/project1/work/pgpt-foundation/tools/quality",
+  "rawStdout": {
+    "path": "../pgpt-runs/PG379/PG42970-junit-case-report-set-v1/after-final.stdout",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "rawStderr": {
+    "path": "../pgpt-runs/PG379/PG42970-junit-case-report-set-v1/after-final.stderr",
+    "sha256": "4bf819a2fd78d240ed6476258471dc70b52e81d3301a914623feb3ed652b9957"
+  },
+  "sourceInputs": [
+    {
+      "path": "tools/quality/check_batch_candidate_roster.py",
+      "sha256": "d5993679babad5c019d94a3d0e5f4c1d7e8fab4f4ddfdd760a46bd9b3d083ccc"
+    },
+    {
+      "path": "tools/quality/pgpt_reactor_junit.py",
+      "sha256": "e8719f70a2cee44d6882c1668c53358a4b069790070d2eb693ede9cee07170d6"
+    },
+    {
+      "path": "tools/quality/020_collect_batch_evidence.py",
+      "sha256": "d4e574824c8652abd6043b0eaab9e712de0cbdddc6adc971414a0927d94cfbd0"
+    },
+    {
+      "path": "tools/quality/019_test_evidence_set.py",
+      "sha256": "c50828270e5e59ab42872378da85979e8e906a6a5ddc9fab5cb330869fa6bed1"
+    },
+    {
+      "path": "tools/quality/tests/test_check_batch_candidate_roster.py",
+      "sha256": "6874bf28c0c8051e4a2bc0247af72f42bae8729bd5d2b879b08f033170d2cf0a"
+    },
+    {
+      "path": "tools/quality/tests/test_pgpt_reactor_junit.py",
+      "sha256": "a923f33b276ccd4c823daedc82819d3e24cff6eea786a21ff2cbabc73c5af052"
+    }
+  ],
+  "gateSchemaChanged": false,
+  "legacyBatch550Unchanged": true,
+  "originalProtocol": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42624-f03-protocol-current-ordinary-171-and-unfiltered-v1/manifest.json",
+    "sha256": "6f0e070551dc9d6e36771fcdd31b2314e01118938949fffcdb487b5d04c4e747"
+  },
+  "originalProtocolFiles": 39,
+  "originalProtocolCases": 171,
+  "originalGlobalCaseCheckScope": "per module",
+  "appExecutions": 0,
+  "formalAcceptanceId": null,
+  "whole451": false,
+  "postRecovery": {
+    "originalFinalRunnerSuccessObserved": true,
+    "postExit": 1,
+    "reason": "post checked the whole verbose log for the word skipped before finding the terminal block",
+    "newTestsInPost": 0
+  },
+  "administrativeCorrection": "3246 refers to unchanged old Batch 550; retain event and start estimates.",
+  "terminalAtUTC": "2026-11-22T19:51:58.081330+00:00",
+  "terminal": {
+    "path": "../pgpt-runs/PG379/PG42970-junit-case-report-set-v1/terminal.json",
+    "sha256": "23b863e6cc835f8c73793842676652e91492c3bbc09759d746f540823c69d742"
+  }
+}
