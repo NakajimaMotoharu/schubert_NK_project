@@ -1,0 +1,116 @@
+{
+  "run": "PG42166",
+  "source": "6d3fffc8fcaf6c574565b84b14e7346f0996b3bb",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-P018-02/2",
+  "sharedWbs": "WBS-P019-02",
+  "sharedAddedPp": 0,
+  "alreadyAccountedInOriginalPlan": true,
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T05:22:04.069577+00:00",
+  "wbsRow": {
+    "新版ID": "WBS-P018-02/2",
+    "第58版ID": "WBS-P018-02/2",
+    "費用主担当項目": "P018-02",
+    "計画窓": "繰越",
+    "予定期間・週末": "2027-01-10までの計画週",
+    "作業・成果物": "署名BOM・全artifact・host immutable／同source証拠による受入判定",
+    "先行ID・着手条件": "A1-26、WBS-P018-02/1、候補再資格-23.01、候補再資格-64.01、閉/WBS-F02、閉/WBS-F03",
+    "担当": "配布・基盤担当",
+    "旧短期残pp": "0.65",
+    "改訂残pp": "0.65",
+    "終了条件": "署名BOM・全artifact・host immutable：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。 固有要求：SCM-001,SCM-002,SCM-003,SCM-004,SCM-005",
+    "元項目の正式受入に必要な証拠": "現行の署名済み配布物・全artifact・BOM・host所有と不変性を照合。",
+    "参照する元項目": "P018-02、P019-02",
+    "lineNumber": 49
+  },
+  "planRequirements": {
+    "SCM-001": "`schubert_NK_project`を独立Git repositoryとして管理する。",
+    "SCM-002": "Markdown文書を含む開発成果物をGit管理する。",
+    "SCM-003": "main branchをrelease可能な状態に保つ。実装変更は短命の作業branchで行い、自動試験と差分reviewの成功後にmainへ取り込む。Release対象commitには一意なversion tagを付与する。",
+    "SCM-004": "Maven Wrapper等によりbuild tool versionを固定する。",
+    "SCM-005": "commitまたはmerge時に単体試験、静的検査、dependency検査およびpackage作成を自動実行できるCI構成を設ける。"
+  },
+  "designInputs": [
+    {
+      "path": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+      "source": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+      "sha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87"
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "source": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+      "sha256": "3874975e619ba279814df4d6f79fd161098756cad882e00d580651fb2d7387cb"
+    }
+  ],
+  "wrapperDefinition": {
+    "path": ".mvn/wrapper/maven-wrapper.properties",
+    "sha256": "e67de487071199117b7c9808dca5f56c73a44b656c925140ec68761947bdd384"
+  },
+  "wrapperScript": {
+    "path": "mvnw",
+    "sha256": "cae96cef89ebea3531221f4ae17c23cf8edf67d00eae8306d4186ae1bbed4d02"
+  },
+  "wrapperVersion": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42166-shared-scm-current-proof-v1/wrapper-version.safe.json",
+    "sha256": "e0b767910a58ad1eeb8405eac0a81921e3295b37a4735aa2f2551f854e967be8"
+  },
+  "sourceTrees": {
+    "development": {
+      "trackedCount": 187789,
+      "trackedDocumentationCount": 209,
+      "commonCIEntrypoints": []
+    },
+    "approvedDesign": {
+      "trackedCount": 225,
+      "trackedDocumentationCount": 74,
+      "commonCIEntrypoints": []
+    }
+  },
+  "scmCriteria": [
+    {
+      "id": "SCM-001",
+      "evidence": "Independent expected origin and remote dev-foundation ref equals this tracked HEAD",
+      "partial": true
+    },
+    {
+      "id": "SCM-002",
+      "evidence": "Versioned Markdown exists in both trees; release scope is still conditional",
+      "partial": true
+    },
+    {
+      "id": "SCM-003",
+      "evidence": "main and feature known; full review, production inclusion and unique release tagging remain separate",
+      "partial": true
+    },
+    {
+      "id": "SCM-004",
+      "evidence": "Pinned wrapper descriptor and actual Java25.0.4/Maven3.9.12 version execution",
+      "partial": false
+    },
+    {
+      "id": "SCM-005",
+      "evidence": "No common versioned hosted CI workflow entrypoint identified on either checked branch; repository-specific hook settings, authorized coverage and signer workflow remain independently unverified",
+      "partial": true
+    }
+  ],
+  "limitedReleaseValues": {
+    "PG42092": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42092-p01802-inventory-public-values-current-v1/manifest.json",
+      "sha256": "682b52f3cd3cfe9225448ed19c4617fbda3d5369f7c235b63ffc9448c7b442a9"
+    },
+    "PG42054": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42054-f03-release-value-order-current-v1/manifest.json",
+      "sha256": "bc242c6214582a2bc7bb759cea21a15b24a02c3bad2bd276fc7230b8515e38ad"
+    }
+  },
+  "existingProtocolBuild": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41526-protocol-qa054-canonical-rules-v1/manifest.json",
+    "sha256": "8a89feee4bfa2d6b08d3514ff44ab15eaa871f409d8cf152790570e363b21edb"
+  },
+  "initialReceiptPreparation": "Preserved Japanese tree paths without Git quoting and used measured design document counts.",
+  "externalGitRemoteRead": true,
+  "rootOrSignatureOrBuildStarted": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

@@ -1,0 +1,128 @@
+{
+  "run": "PG42162",
+  "source": "6d3fffc8fcaf6c574565b84b14e7346f0996b3bb",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-P004-02/2",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T05:17:34.529733+00:00",
+  "batchCandidate": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41074-f02-current-alert-batch-maven-v1/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "276c45bf138b351cb0a0a6bc46dc61881fabb1b17b2b09347b4feea4cfea76a6"
+  },
+  "originalDirectSpec": [
+    {
+      "path": "evidence/01_PT/004_NK-DAT-001/452_P00402summary通常閉包二十三仕様.md",
+      "sha256": "7fcbcc314ad6a2f0d2c95924a846bd7d1105e697c355942ffe048573779aa9d7"
+    },
+    {
+      "path": "evidence/01_PT/004_NK-DAT-001/453_P00402summary二十三・raw六全二十八結果.md",
+      "sha256": "d3c4834bfbe1270966143402b6989b8b0b110432d5c6f8d8cc5283f847606a02"
+    },
+    {
+      "path": "evidence/01_PT/004_NK-DAT-001/evidence/PG37400-summary23/test-case-index.json",
+      "sha256": "a512a1416bd0fbea34610579aef1ccf2489bc34d0faff0dff1c8430feab39353"
+    }
+  ],
+  "exactCurrentProductTypes": [
+    {
+      "source": {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummary.java",
+        "sha256": "0af03ae228a8efec00535de709a528dfc9692cb2a51c4c2a4a0e0fb79cde12aa"
+      },
+      "physicalMember": "dev/codex/schubert/nk/batch/repository/InspectionSummary.class",
+      "sha256": "19c6fbf30f92ee694c9ada985f1309851ffaa157474b4b1483e8d337edd3bd03"
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java",
+        "sha256": "c440d3e16da86b7814cf8fbd6247e48c1ab4cd6de2da3a114a38c308ae3c7ce4"
+      },
+      "physicalMember": "dev/codex/schubert/nk/batch/repository/BatchRun.class",
+      "sha256": "5cb0c42832ea17425dbf60da6025f2c4783d687e665b18f6cd8e88abc399c909"
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupCounts.java",
+        "sha256": "9a7504e2b266c3de22ce10dfc8b15dadb0ce04f3a5f05bdd86d151c32d341f19"
+      },
+      "physicalMember": "dev/codex/schubert/nk/batch/repository/CleanupCounts.class",
+      "sha256": "09355389bf26d39779e3184b7dd995978314ae00b833e468fbd5078408265af0"
+    }
+  ],
+  "exactCurrentFixture": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42162-p00402-summary-values-v1/test/dev/codex/schubert/nk/batch/repository/InspectionSummaryValueContractTest.class",
+    "sha256": "f68f41cb8123d46dd2da455b5d2a87e33c3f328dc4bc61fb4e753bfc007cabd3"
+  },
+  "testedSource": {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryValueContractTest.java",
+    "sha256": "703488090a0514f9d5f7cc0bd81bf30afa537557f5c2f35cf51a4f14d3a51dec"
+  },
+  "linkOriginalCaseProof": [
+    {
+      "path": "evidence/01_PT/004_NK-DAT-001/evidence/PG37400-summary23/manifest.json",
+      "sha256": "ada4396ea160741b6412dc3968d02a2ef8dbde7274fe2ee88eef5f9729e39b82"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37400-summary-whole23-unit-v1/manifest.json",
+      "sha256": "7d2d71d7b3443ac27212061ee136a4d58a4cfa13ca3683533410de7e9a62f88b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37402-summary23-independent-v1/manifest.json",
+      "sha256": "606478465b75ba56fd3d4299b43b9917728761e0ba385a80407e4ad7889dc94f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37394-summary-test-static-v2/manifest.json",
+      "sha256": "e392c656e123de88c61ce58ed89648c4447b5058dbcfdf79f17dfc8c18a293b4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37402-summary23-independent-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "11e64945a1c7c148380450f36d550fe9f39cd816ef089d4dfe68f3193e6b9e48"
+    }
+  ],
+  "sameInputCaseNames": [
+    "raw001SummaryIdentityIncludesEachComponentAndDiagnosticStaysRedacted()",
+    "raw002RunIdentityIncludesBothFieldsWithIndependentJdkHashVector()",
+    "raw003CountsRetainAllFieldsAndLiteralDiagnosticWithoutMutableState()"
+  ],
+  "sourcePreparerOnly": {
+    "compile": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+      "--release",
+      "25",
+      "-g",
+      "-proc:none",
+      "-Xlint:all",
+      "-Werror",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41074-f02-current-alert-batch-maven-v1/schubert-nk-batch-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "-d",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42162-p00402-summary-values-v1/test",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryValueContractTest.java"
+    ],
+    "dependencyProof": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/jdeps",
+      "--multi-release",
+      "25",
+      "-verbose:class",
+      "-filter:none",
+      "-classpath",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41074-f02-current-alert-batch-maven-v1/schubert-nk-batch-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42162-p00402-summary-values-v1/test/dev/codex/schubert/nk/batch/repository/InspectionSummaryValueContractTest.class"
+    ],
+    "dependencyOutputSha256": "de2fe94497bd92ad97237a3361e5c35e2a3613da213562161a061e0b953ee87b",
+    "observedProjectTypes": [
+      "dev.codex.schubert.nk.batch.repository.BatchRun",
+      "dev.codex.schubert.nk.batch.repository.CleanupCounts",
+      "dev.codex.schubert.nk.batch.repository.InspectionSummary"
+    ]
+  },
+  "remaining": [
+    "SQL summary actual DB and role",
+    "Retained references, owning permission and authentic runtime",
+    "All related source and full 451",
+    "F02/F03 and independent owner signed disposition"
+  ],
+  "newTestExecutions": 0,
+  "oldClassCoverageNotMerged": true,
+  "formalAcceptanceId": null
+}

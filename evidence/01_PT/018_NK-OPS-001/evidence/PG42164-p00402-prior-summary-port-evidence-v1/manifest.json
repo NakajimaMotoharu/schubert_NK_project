@@ -1,0 +1,163 @@
+{
+  "run": "PG42164",
+  "source": "6d3fffc8fcaf6c574565b84b14e7346f0996b3bb",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-P004-02/2",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T05:19:12.439313+00:00",
+  "priorEvidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40842-p00402-inspection-sql-cycle-raw-v1/manifest.json",
+      "sha256": "b6cfcde4f75ee961bb25039283d662f914c31d7c240f6f38d0305b33f04e8231"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40844-f02-inspection-repository-exact-abi-v1/manifest.json",
+      "sha256": "bce2ad96c1a5b095503075c9fd41794a81318cc9620b2998ce25c07a2c6cf138"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40838-f03-inspection-summary-typed-v1/manifest.json",
+      "sha256": "90afa7c14c66be40bf8c55d2193d56955a1e3f19b1f934ee8819649e1a484ed6"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/485_WBS網羅性・受入対応.json",
+      "sha256": "c759e7c88603c85b05066740e270e41065195b94a7fdde24c08e29950ba4b61b"
+    }
+  ],
+  "retainedOriginalPublicCaseCount": 13,
+  "exactCurrentDependencyTypes": [
+    {
+      "module": "storage",
+      "type": "dev/codex/schubert/nk/storage/StorageIoException.class",
+      "sha256": "85f86d702a139f126afdd72ca8e221583db824f159351ecd9f07b15fcc569c88"
+    },
+    {
+      "module": "storage",
+      "type": "dev/codex/schubert/nk/storage/StorageIoException$Reason.class",
+      "sha256": "a113bd839666ee3a4038dd3703af0cfb772282278cc6fbfe1e3cccf98286ffec"
+    },
+    {
+      "module": "bootstrap",
+      "type": "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class",
+      "sha256": "cc8265242a1cd41cc7c77b8e12185cbc387fb583d70e1d1171ba467cb0f3d552"
+    },
+    {
+      "module": "batch",
+      "type": "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.class",
+      "sha256": "f181015412f1f293e91c0eea24a3ac33127d5ef5015f3dc9fb73ac732e0cc009"
+    },
+    {
+      "module": "batch",
+      "type": "dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.class",
+      "sha256": "0c44a12880351913a9518c4a8a89ae7e1754cd66cf0b1c138505c374e92902dc"
+    },
+    {
+      "module": "batch",
+      "type": "dev/codex/schubert/nk/batch/repository/InspectionSummary.class",
+      "sha256": "19c6fbf30f92ee694c9ada985f1309851ffaa157474b4b1483e8d337edd3bd03"
+    },
+    {
+      "module": "batch",
+      "type": "dev/codex/schubert/nk/batch/repository/CleanupCounts.class",
+      "sha256": "09355389bf26d39779e3184b7dd995978314ae00b833e468fbd5078408265af0"
+    },
+    {
+      "module": "batch",
+      "type": "dev/codex/schubert/nk/batch/repository/BatchRun.class",
+      "sha256": "5cb0c42832ea17425dbf60da6025f2c4783d687e665b18f6cd8e88abc399c909"
+    },
+    {
+      "module": "batch",
+      "type": "dev/codex/schubert/nk/batch/repository/BatchRepositoryException.class",
+      "sha256": "391b1aac7be2dd58cf9c3dee11cdd12941417fa7d029513475dfffbe4a3d2cb1"
+    }
+  ],
+  "sourceInputs": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "sha256": "5253148aa625da42d74b54ce7b7ca45639cd4392cc2a8e742315531fb8f65c24"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummary.java",
+      "sha256": "0af03ae228a8efec00535de709a528dfc9692cb2a51c4c2a4a0e0fb79cde12aa"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java",
+      "sha256": "c440d3e16da86b7814cf8fbd6247e48c1ab4cd6de2da3a114a38c308ae3c7ce4"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupCounts.java",
+      "sha256": "9a7504e2b266c3de22ce10dfc8b15dadb0ce04f3a5f05bdd86d151c32d341f19"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.java",
+      "sha256": "134bcdaecf9f02adc74d5cb728782c41f19497b0c0c37ee2cd4a70b0155179b6"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java",
+      "sha256": "5f4f8273a29dc2b89d6cf8fbc566b067480c0c7338f1444d5b14a9a878b1debd"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.java",
+      "sha256": "305e82607cfc8acf9656547c5eee663cc9edee55c0381da96d6860b5a98d0d75"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java",
+      "sha256": "d59870fcf8d4f7bf9ff4e0abc2e052efddd9a08e9e93efa39d1f15a97f7063cf"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryPortTest.java",
+      "sha256": "ca88a77ac3dad9b71acb0823fb5c210ec5c35a229fd037f8c5f1aff2f3082c4d"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryGraphContractTest.java",
+      "sha256": "efdcae0419dcbdfaebc625651db1a1dbd48c79f0ff1baffab3588f9389227f87"
+    }
+  ],
+  "oldOriginalXmlDigest": "55de746ab24d7db414ef3678dbcd34b0d394db52ea0b6543d9ace175bd47dc6f",
+  "finalRetainedOriginalXml": null,
+  "firstMetadataStepKeyCorrected": true,
+  "archiveUnverifiedScope": "Original XML payload not available in retention paths; the previous manifest outcome and digest retained without new qualification",
+  "independentRequirementIds": [
+    "INSPPORT011",
+    "INSPPORT012"
+  ],
+  "originalNamedRaw": {
+    "crc64": "5d524ee1e3c908e8",
+    "execMatch": true,
+    "counts": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 226
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 20
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 59
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 16
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 6
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "originalRawPath": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40842-p00402-inspection-sql-cycle-raw-v1/unfiltered.tsv",
+    "sha256": "6f5ee638f1c97e21dd52cc30c02ed2b1c7518848def7f63324fc7f913a368cf5"
+  },
+  "currentCoverageCredit": 0,
+  "newTestExecutions": 0,
+  "actualClusterRoleSqlDualTransactionEvidence": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
