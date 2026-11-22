@@ -12,9 +12,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.junit.jupiter.api.Test;
 
 /** NK-BAT-001/OPS009/UI251/SS331 8.3/341; SSC055/PG163; BAT130..137. */
@@ -207,7 +209,7 @@ final class BatchStepValuesTest {
   }
 
   @Test
-  void nullContractsAndRedaction() throws Exception {
+  void nullContractsAndRedaction() throws ReflectiveOperationException {
     assertThrows(
         NullPointerException.class,
         () -> new BatchStepAttempt(1, null, BatchStep.CLEAN_LOG, 1, NOW, false));
@@ -264,7 +266,8 @@ final class BatchStepValuesTest {
   }
 
   @Test
-  void independentConcurrentValues() throws Exception {
+  void independentConcurrentValues()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var pool = Executors.newVirtualThreadPerTaskExecutor();
     try {
       List<Future<BatchStepAttempt>> futures = new ArrayList<>();

@@ -14,9 +14,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.junit.jupiter.api.Test;
 
 /** NK-BAT-001/OPS009/DAT009/UI251/SS331 3.14/332/341; SSC057/PG164; BAT154..161. */
@@ -339,7 +341,7 @@ final class CleanupStepValuesTest {
   }
 
   @Test
-  void concurrentValues() throws Exception {
+  void concurrentValues() throws InterruptedException, ExecutionException, TimeoutException {
     var pool = Executors.newVirtualThreadPerTaskExecutor();
     try {
       List<Future<CleanupStepChunk>> values = new ArrayList<>();
