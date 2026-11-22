@@ -1,0 +1,146 @@
+{
+  "run": "PG42202",
+  "source": "22676495ffbcd45466dd8d2d8b078a2343fc56e1",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-F03/2-2-b",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T05:43:42.110796+00:00",
+  "localTestsSelected": 1,
+  "localTestsPassed": 1,
+  "localTestsFailed": 0,
+  "localTestsSkipped": 0,
+  "testName": "routesRetainTheIndependentSs313OrderAndNeverRetainRawPaths",
+  "trace": [
+    "BUG-3565",
+    "YKT-2804"
+  ],
+  "priorLocalStatic": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42200-f03-web-monitoring-value-static-v1/manifest.json",
+    "sha256": "0d14eab7b43d27384d8efc8157c400549681711c6513af2955151d7ed9160e59"
+  },
+  "fixedIndependentRoute": {
+    "path": "src/schubert-nk-web/src/test/resources/monitoring/http-route-labels.txt",
+    "sha256": "1777c4710e6448bdb459d5fd2beccf389f57ec4ea9effdca171cdbd6888d5331"
+  },
+  "freshLocalRun": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42202-web-monitoring-route-fixture-v1/begin.json",
+    "sha256": "862bb8fea6fe69116c7a64b25d720e3f462c86f1158b6c078276c7790e371d23"
+  },
+  "junit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42202-web-monitoring-route-fixture-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "85770846c3999f42c9d02218e2a09fb09923939c12cff116c146f22679e00afe"
+  },
+  "currentFixture": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42202-web-monitoring-route-fixture-v1/test/dev/codex/schubert/nk/web/monitoring/WebMonitoringValueContractTest.class",
+    "sha256": "109a83996f2caa1cc800f785905f779ea30634e2bd650bc168454ff3f7627e29"
+  },
+  "exec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42202-web-monitoring-route-fixture-v1/own.exec",
+    "sha256": "1f1bf0181ffc5c52bf3c4446f0144028d8aa6617e629a5b3b250a649e536efa8"
+  },
+  "changedThrowableContractOnly": true,
+  "oldAndCurrentFixtureInstructionsIdentical": true,
+  "priorDifferentCandidateSetsNotMerged": true,
+  "rawPmd": [
+    {
+      "rule": "EqualsNull",
+      "method": "labelsHaveIndependentValueHashDisplayAndImmutableMapContracts",
+      "line": 207,
+      "application": "IMMUTABLE_VALUE_EQUALS_NULL_NEGATIVE"
+    },
+    {
+      "rule": "EqualsNull",
+      "method": "outboxObservationRetainsAllSixValueComponentsAndTheFixedZeroAgeHash",
+      "line": 245,
+      "application": "IMMUTABLE_VALUE_EQUALS_NULL_NEGATIVE"
+    },
+    {
+      "rule": "EqualsNull",
+      "method": "poolCountsRetainIndependentValuesAndFixedHash",
+      "line": 281,
+      "application": "IMMUTABLE_VALUE_EQUALS_NULL_NEGATIVE"
+    },
+    {
+      "rule": "NullAssignment",
+      "method": "dictionary",
+      "line": 332,
+      "application": "CALLER_OWNED_ENUM_VALUES_ARRAY_INDEPENDENCE_TEST"
+    }
+  ],
+  "rawSpotBugs": [
+    {
+      "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "method": "lambda$mediaModesRetainOnlyTheThreeDeliveryLabels$2",
+      "application": "INTENTIONAL_NEGATIVE_NULL_IN_ASSERT_THROWS"
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "method": "lambda$methodsRetainTheirClosedDictionaryAndStrictUnknownFallback$0",
+      "application": "INTENTIONAL_NEGATIVE_NULL_IN_ASSERT_THROWS"
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "method": "lambda$metricsExposeOnlyTheTwoApprovedNamesTypesAndLabelSets$2",
+      "application": "INTENTIONAL_NEGATIVE_NULL_IN_ASSERT_THROWS"
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "method": "lambda$outboxStatusesRetainExactPersistedNamesOnly$2",
+      "application": "INTENTIONAL_NEGATIVE_NULL_IN_ASSERT_THROWS"
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "method": "lambda$poolStatesRetainLowercaseLabelsAndCaseSensitiveParsing$2",
+      "application": "INTENTIONAL_NEGATIVE_NULL_IN_ASSERT_THROWS"
+    },
+    {
+      "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+      "method": "lambda$routesRetainTheIndependentSs313OrderAndNeverRetainRawPaths$0",
+      "application": "INTENTIONAL_NEGATIVE_NULL_IN_ASSERT_THROWS"
+    }
+  ],
+  "knownCheckedExceptionRiskRemoved": 1,
+  "diagnostics": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42202-web-monitoring-route-fixture-v1/pmd.xml",
+      "sha256": "ad0bae51c8f54fc435159909c80b1de13d04b25480b592f39c7dcf555181812d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42202-web-monitoring-route-fixture-v1/spotbugs.xml",
+      "sha256": "0da981f3e7b045f7928b0e1379ec7f1fe9183db6a343be20439a320bb7dce315"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42202-web-monitoring-route-fixture-v1/checkstyle.xml",
+      "sha256": "4ad3a27b286335118d27b41117d94f29039d66b147a49c21b81cc93831f2079d"
+    }
+  ],
+  "terminalFiles": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42202-web-monitoring-route-fixture-v1/format.terminal.json",
+      "sha256": "d0f3be0257011d3e50c46df351a4ddd79e71b520d67c1d520b19edebb098dcec"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42202-web-monitoring-route-fixture-v1/compile.terminal.json",
+      "sha256": "24b771a9d6df53e93f49b8a5d4338356d36f683f9276a2fea780f0c0fcc88e36"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42202-web-monitoring-route-fixture-v1/checkstyle.terminal.json",
+      "sha256": "39e4d12e722f3b024614b0b5434e41665847dd0bc0915611f6f17143ee7c9366"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42202-web-monitoring-route-fixture-v1/pmd.terminal.json",
+      "sha256": "e2c85a80afe3a9efd5215d8a863b0aad2d18ca93a1b7f3baee5a550795a60309"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42202-web-monitoring-route-fixture-v1/spotbugs.terminal.json",
+      "sha256": "c5d482095a2487c26e52859b399b88037aeaccc4c8b6d41d502ff5dd0b69c6ca"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42202-web-monitoring-route-fixture-v1/unit.terminal.json",
+      "sha256": "b6b68b653f517c130c0fcaff3a6f05f83047d965d58fb395a5bbac40b1fa3a17"
+    }
+  ],
+  "newActualServiceActions": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

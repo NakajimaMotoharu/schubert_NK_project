@@ -20,3 +20,7 @@ Routeは既承認SS313のregistered template・static assetと既WebRequestTrace
 ## 2026-11-22 現候補の合成routeと有限並行
 
 httpMetric002／006。固定35行×10method×5状態級を当resourceで実測。4workerの64fixtureと終了制限を保持し例外契約だけを限定。選択2成功、該当広域例外0、同試験JVM実命令一致。Main・実HTTP・全451はこの選択に含めない。BUG-3563/3564、YKT-2803。evidence/01_PT/018_NK-OPS-001/evidence/PG42194-f03-web-http-metric-bounded-current-v1/manifest.json SHA256 570e3dea4ca18b8e7eb783ef679c352c0ea4a3355046b61a19bf9549292b6091。
+
+## 2026-11-22 Web監視値の別fixture
+
+WebMonitoringValueContractTestの固定mode合成試験はPG42198。同fixtureの独立route35行と順序はPG42202／BUG-3565／YKT-2804で1成功、fixtureのchecked例外のみ限定。実HTTPや他の試験の合算は行わず、同候補別結果を保管。evidence/01_PT/018_NK-OPS-001/evidence/PG42202-f03-web-monitoring-route-fixture-v1/manifest.json SHA256 3df55341bb17799d8e388aac57fbc1eae87b29e6cdfb64556ebae431fe16c287。
