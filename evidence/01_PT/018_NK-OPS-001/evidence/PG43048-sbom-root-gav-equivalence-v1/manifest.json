@@ -1,0 +1,182 @@
+{
+  "run": "PG43048-sbom-root-gav-equivalence-v1",
+  "source": "eab10e0c3e6ed93dd51986f00f945c2909a005d2",
+  "productCore": "7698011f52d6cc5f94c76413b6ab36971783b9c9",
+  "wbs": "WBS-P018-02/2",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T21:39:40.880761+00:00",
+  "testTerminalAtUTC": "2026-11-22T21:39:16Z",
+  "startedAtUTC": "2026-11-22T21:39:16Z",
+  "command": [
+    "python3",
+    "-B",
+    "-m",
+    "unittest",
+    "-v",
+    "test_verify_maven_sbom",
+    "test_verify_maven_advisories"
+  ],
+  "pythonPath": "tools/quality:tools/quality/tests",
+  "environment": {
+    "python": "Python 3.14.4",
+    "platform": "Linux x86_64"
+  },
+  "toolInputs": [
+    {
+      "path": "tools/quality/verify_maven_sbom.py",
+      "sha256": "5faef5590ff36bea86764bfd04d61fca0b5bc706eb41c734d79604488cd351a6"
+    },
+    {
+      "path": "tools/quality/verify_maven_advisories.py",
+      "sha256": "be0dbf2ebcf110da7003f5795d8f9ba1ec321881e200cd0c0efec71adf490ea6"
+    },
+    {
+      "path": "tools/quality/tests/test_verify_maven_sbom.py",
+      "sha256": "22284d32c082d7460db31d78a99a8986c1057fbc9f1acd18572fad75b1793d57"
+    },
+    {
+      "path": "tools/quality/tests/test_verify_maven_advisories.py",
+      "sha256": "18c404cb886c198f4f366d533ec0da1aa1440429d081c82bbc9543f8f7825a03"
+    }
+  ],
+  "terminals": [
+    {
+      "path": "../pgpt-runs/PG379/PG43048-sbom-root-gav-equivalence-v1/red-source.txt",
+      "sha256": "268cb805794fb40dd3cbe9b1657d3a9fb5113b634dc14c8c286478b4fb496f85"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43048-sbom-root-gav-equivalence-v1/red-inputs.sha256",
+      "sha256": "a16b73c2dd522624b47c19cc0004eefd5d7dd178d1f3a6dfebe45007ed34fc92"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43048-sbom-root-gav-equivalence-v1/red.exit",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43048-sbom-root-gav-equivalence-v1/red.stderr",
+      "sha256": "588b7fe413d7c07f2c3f71dcaa04ef5d836434fd2031101612ce4e504aa50880"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43048-sbom-root-gav-equivalence-v1/source.txt",
+      "sha256": "9b4a8ea0d9044f564f2874aae4a68ebe1600558d39ea380b3945e734970c9323"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43048-sbom-root-gav-equivalence-v1/exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43048-sbom-root-gav-equivalence-v1/python.stderr",
+      "sha256": "a19d291ba16b3108ba3b3bd01fe1b0d119a3d46c69f9be8c2087f73207dbde0d"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43048-sbom-root-gav-equivalence-v1/start-at.txt",
+      "sha256": "51137355054677c1175b8d7b5ae7be294ca2d4d9fb6af335e077eb75a25399b2"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43048-sbom-root-gav-equivalence-v1/end-at.txt",
+      "sha256": "51137355054677c1175b8d7b5ae7be294ca2d4d9fb6af335e077eb75a25399b2"
+    }
+  ],
+  "previous": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42884-p01802-distribution-review-metadata-v1/manifest.json",
+    "sha256": "ca92223a75805de5599a8861055fa2e5b98f3469ba0bf7101e57152111689922"
+  },
+  "modelRootComparison": {
+    "api": {
+      "pom": {
+        "path": "src/schubert-nk-api/pom.xml",
+        "sha256": "2aff7af3d90feaee1f6c09f7ad300627ed911e8372504fcfd383391429a58114"
+      },
+      "rootRef": "pkg:maven/dev.codex.schubert/schubert-nk-api@0.1.0-SNAPSHOT?type=jar",
+      "retainedInput": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42658-jackson-model-and-sbom-v1/inputs/api.cdx.json",
+        "sha256": "c3ce6b257c7cc0f7e794957a4ffefab253483b550afdfacaaca8d5490f47bb15"
+      }
+    },
+    "batch": {
+      "pom": {
+        "path": "src/schubert-nk-batch/pom.xml",
+        "sha256": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495"
+      },
+      "rootRef": "pkg:maven/dev.codex.schubert/schubert-nk-batch@0.1.0-SNAPSHOT?type=jar",
+      "retainedInput": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42658-jackson-model-and-sbom-v1/inputs/batch.cdx.json",
+        "sha256": "7e6d372741a49c4d56ec05f3ea590c21e9be2e9676d2887acc0b90a84b38d9bf"
+      }
+    },
+    "bootstrap": {
+      "pom": {
+        "path": "src/schubert-nk-bootstrap/pom.xml",
+        "sha256": "174e3974a5fe17a226c8c43a0cd49ae70d395cb4f236168da07cd7482a67908c"
+      },
+      "rootRef": "pkg:maven/dev.codex.schubert/schubert-nk-bootstrap@0.1.0-SNAPSHOT?type=jar",
+      "retainedInput": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42658-jackson-model-and-sbom-v1/inputs/bootstrap.cdx.json",
+        "sha256": "eda3cfb295b13536676a336cb02a8e435c78afea8d96319a67dff8793d139e02"
+      }
+    },
+    "protocol": {
+      "pom": {
+        "path": "src/schubert-nk-protocol/pom.xml",
+        "sha256": "f76b730fa1cb1b34a88182ca5b685ca14fb71361c037f9418f0895d2a3022d7d"
+      },
+      "rootRef": "pkg:maven/dev.codex.schubert/schubert-nk-protocol@0.1.0-SNAPSHOT?type=jar",
+      "retainedInput": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42658-jackson-model-and-sbom-v1/inputs/protocol.cdx.json",
+        "sha256": "8c62b7f9dd0b7f079238f82aeb4ace7302d16720d9b7860ed9db93de4241bdf3"
+      }
+    },
+    "storage": {
+      "pom": {
+        "path": "src/schubert-nk-storage/pom.xml",
+        "sha256": "d4ed59631b9ebf965db518fbe4b7894c2beb71ee3f7c1e9cdbf7b4241c8179c7"
+      },
+      "rootRef": "pkg:maven/dev.codex.schubert/schubert-nk-storage@0.1.0-SNAPSHOT?type=jar",
+      "retainedInput": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42658-jackson-model-and-sbom-v1/inputs/storage.cdx.json",
+        "sha256": "fd913b405154e549b0903b0249316f5c10a97358ed1dcfb08ddbb6dd672402ae"
+      }
+    },
+    "web": {
+      "pom": {
+        "path": "src/schubert-nk-web/pom.xml",
+        "sha256": "9b6c47c3ab3ba0d105f41f081de10b2234af4653fdc371a8eacdf9cabb78761b"
+      },
+      "rootRef": "pkg:maven/dev.codex.schubert/schubert-nk-web@0.1.0-SNAPSHOT?type=jar",
+      "retainedInput": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42658-jackson-model-and-sbom-v1/inputs/web.cdx.json",
+        "sha256": "97aaa66128a52410e6c1cb6d1125c3a021d2e0bc87c809b24bc514308e340d4a"
+      }
+    }
+  },
+  "independent": {
+    "newTests": [
+      "PT-OPS-SBOM-025",
+      "PT-OPS-OSV-010"
+    ],
+    "syntheticMalformed": 6,
+    "missingRejectionBefore": 6,
+    "scannerCallsOnMismatch": 0
+  },
+  "counts": {
+    "passed": 18,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "newProductTests": 0,
+    "newBomsGenerated": 0,
+    "actualScans": 0,
+    "actualJarReads": 0
+  },
+  "qa061": {
+    "response": "配布条件・担当ともに未決",
+    "distributionTerms": null,
+    "approver": null
+  },
+  "formalAcceptanceId": null,
+  "related": [
+    "BUG-3657",
+    "YKT-2875"
+  ],
+  "whole451": false
+}

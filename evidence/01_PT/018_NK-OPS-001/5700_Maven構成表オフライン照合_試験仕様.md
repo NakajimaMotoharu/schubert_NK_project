@@ -16,3 +16,9 @@ NK-OPS-001、WBS-P018-02/2、RD171 SCM-005、SS352 §13。対象は `tools/quali
 | PT-OPS-SBOM-021 | 採取済み六製品の構成表を読み、各固定GAVのcacheを照合 | PG42606/08/10/12と一致する各モジュールのJAR件数、宣言欠落 |
 
 Unitは `PYTHONPATH=tools/quality python3 -B -m unittest discover -s tools/quality/tests -p test_verify_maven_sbom.py -v`。実行結果のsource、exit、manifestはPG42630の証跡を参照。ライセンスの充足、配布クラスパス、CI稼働、製品通常PTと451は別工程の証拠。
+
+## PG43048 root座標と参照の一致
+
+PT-OPS-SBOM-025は3-byteの既依存と到達可能なグラフを保持したまま、rootのgroup、artifact、version、PURL、添付type又は重複qualifierを個別に不正化して照合する。期待は6形すべて拒否。PT-OPS-OSV-010はroot不一致時に外部scannerを発行しないことを合成呼出で確認する。
+
+2026-11-23 JST、dev-foundation、工具source `eab10e0c3e`。修正前6形すべて拒否漏れ、修正後18工具試験成功。保存済みCycloneDX六件のroot座標は現六POMの明示・継承座標と一致した。実JAR・配布・advisoryの再検証には含めない。QA-061の配布条件と担当は未決。[PG43048 manifest](evidence/PG43048-sbom-root-gav-equivalence-v1/manifest.json)
