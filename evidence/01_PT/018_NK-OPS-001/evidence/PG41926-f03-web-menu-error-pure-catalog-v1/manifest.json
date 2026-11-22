@@ -1,0 +1,77 @@
+{
+  "run": "PG41926",
+  "source": "66f60012f5729553d95f11a03bb98f22a083a0e2",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T02:41:25.377819+00:00",
+  "wbs": "WBS-F03/2-2-b",
+  "priorExactSource": "e2a4746c47e976bc26af37af209498d1aec3b1b8",
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41602-two-search-forms-wire-public-enum-current-v1/manifest.json",
+    "sha256": "aea9269e146ee3fabc0311858c8c08426d1f792c1867192d749b36abafc6976d"
+  },
+  "junit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41602-two-search-forms-wire-public-enum-current-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "f2439fb551c29c01efd447d3cf6d75b4b4101fbddf326904d058e0e54608fa0d"
+  },
+  "rawLocal": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41602-two-search-forms-wire-public-enum-current-v1/unfiltered.tsv",
+    "sha256": "136d97897481e2abc7587ec366ab97c8bcddcd0637cf510cee7e11722651adb0"
+  },
+  "sameCurrentProductFixedClassHashes": {
+    "dev/codex/schubert/nk/web/view/TopBarViewModel.class": "ccd4215b0fc53248d9c7ae6f930ad59fa3e108af86993e91cfd792c2761579a8",
+    "dev/codex/schubert/nk/web/view/ErrorViewModel.class": "043c9dc242708337b6109ac44f046ce5386847da1055a473e1104cd12a15c3d2",
+    "dev/codex/schubert/nk/web/view/ErrorViewModel$Status.class": "ad635b2543ace6e929b89b1d5b8b0ca0b76df6af6a9db9cb7b28f25fe70284b0",
+    "dev/codex/schubert/nk/web/view/MenuCard.class": "3a2e400e3e8461801e5eb57cc863518ed10baa0d6284fbcc76c0162ab891c064"
+  },
+  "symbolsAndOwnedInputs": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/ErrorViewModel.java",
+      "sha256": "6f0861b6b343749426dac94b3e6234ca01d47978b0582976874a96cb6ef62b27"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/TopBarViewModel.java",
+      "sha256": "16afe37089d96cb31e7849e5bf5e289196588c6f4b8e1d4732fd402887e24a09"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/MenuCard.java",
+      "sha256": "7fa6583a49c37dedd196d696a2c0d7c45f2e7b7097044d63aa2aef5ef2915ad3"
+    }
+  ],
+  "fixture": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/WebPublicEnumContractTest.java",
+    "sha256": "06fc09e3412268f533c4b73019c4519c79a78305180778f2f793e2c1965bf073"
+  },
+  "independentSpecifications": [
+    {
+      "path": "evidence/01_PT/015_NK-WEB-001/4168_NK-WEB-001_公開八enum契約単体テスト仕様書.md",
+      "sha256": "5783aa622aa0196eca21f4bf11ed4e181aa87c087a52db546bb6ee03ac8b46b3"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/4184_NK-WEB-002_公開八enum契約単体テスト仕様書.md",
+      "sha256": "64ea559b9be1cce1844e7cb5bba212c8da7e2f130130a8d429d6d61b05c1ce28"
+    }
+  ],
+  "canonicalUi": {
+    "source": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "path": "documents/200_UI/220_画面・認証/223_現行機能画面設計.md",
+    "sha256": "db8c325e5d79f27a41ac5c92c815590d2434320ffcecd8dffd80953aa7c2aa1d",
+    "scope": "UI223 §2 for display order and role scope; literal labels and messages from independent prior PT spec and fixture"
+  },
+  "results": [
+    {
+      "method": "menuCatalogRetainsAllNineFixedDisplayAndDestinationVectors",
+      "existing": "PASS",
+      "independentDisplayDestinationRows": 9
+    },
+    {
+      "method": "errorStatusesRetainHttpAndDisplayVectorsWithoutRetainingAnException",
+      "existing": "PASS",
+      "independentStatusAndMessageRows": 9
+    }
+  ],
+  "countedCurrentPreviously": 2,
+  "independentNewExecutions": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

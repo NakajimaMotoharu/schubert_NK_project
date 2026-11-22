@@ -1,0 +1,145 @@
+{
+  "run": "PG41920",
+  "source": "66f60012f5729553d95f11a03bb98f22a083a0e2",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-F03/2-2-b",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T02:38:25.035602+00:00",
+  "exactMainSources": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/AnswerResult.java",
+      "sha256": "bfa7c5a2827d5c97579a030df72997f928f5817b6d68ea9b0d918d88aef3fae6"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionCommandMetadata.java",
+      "sha256": "c62cea835ecc09e2e811cdf704d2e8c562b207f802a50c8f1789868fff3cfc1c"
+    }
+  ],
+  "fixture": {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionValueContractTest.java",
+    "sha256": "a9d4c3a9ced433c3c460df2da9f8cda2c7f69a700e88548d64270b87d37559db"
+  },
+  "narrowCompile": [
+    [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+      "--release",
+      "25",
+      "-g",
+      "-proc:none",
+      "-implicit:none",
+      "-encoding",
+      "UTF-8",
+      "-Xlint:all",
+      "-Werror",
+      "-d",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41920-f03-api-question-data-current-proof-v1/main",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/AnswerResult.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionCommandMetadata.java"
+    ],
+    [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+      "--release",
+      "25",
+      "-g",
+      "-proc:none",
+      "-implicit:none",
+      "-encoding",
+      "UTF-8",
+      "-Xlint:all",
+      "-Werror",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41920-f03-api-question-data-current-proof-v1/main:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "-d",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41920-f03-api-question-data-current-proof-v1/test",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionValueContractTest.java"
+    ]
+  ],
+  "compileTerminals": [
+    {
+      "task": "main",
+      "exit": 0,
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41920-f03-api-question-data-current-proof-v1/main.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "task": "test",
+      "exit": 0,
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41920-f03-api-question-data-current-proof-v1/test.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "mainPhysicalOldCurrent": {
+    "dev/codex/schubert/nk/api/application/question/QuestionCommandMetadata.class": [
+      "30112eb88301f4acc1c504526b33bfb11f65cc3008320ad2ca21e14c9f458bfc",
+      "30112eb88301f4acc1c504526b33bfb11f65cc3008320ad2ca21e14c9f458bfc"
+    ],
+    "dev/codex/schubert/nk/api/application/question/AnswerResult.class": [
+      "e2a819a1a9d98c05ec22e60963884d9d3b56598768d69c8cde6df0caaed80427",
+      "e2a819a1a9d98c05ec22e60963884d9d3b56598768d69c8cde6df0caaed80427"
+    ]
+  },
+  "fixturePhysicalOldCurrent": {
+    "dev/codex/schubert/nk/api/application/question/QuestionValueContractTest.class": [
+      "f4cd96cb976adb729bc5e9f491ee9e0f428739f9a7aea72b40c699c4023f41ec",
+      "f4cd96cb976adb729bc5e9f491ee9e0f428739f9a7aea72b40c699c4023f41ec"
+    ]
+  },
+  "sourceIndependence": {
+    "spec": {
+      "path": "evidence/01_PT/018_NK-OPS-001/4381_API質問値・Outbox純値全十一仕様.md",
+      "sha256": "5d979ca53636d7cf5b387359ecbec0f49d528d42aad38314110a9496834db50b"
+    },
+    "fixedVectors": [
+      {
+        "type": "dateRange",
+        "expected": "inclusive UTC years 0001 and 9999; 0000 and 10000 reject"
+      },
+      {
+        "type": "truncation",
+        "expected": "4 vectors, drop nanoseconds beyond first six fractional digits before UTC bounds"
+      },
+      {
+        "type": "answer",
+        "expected": "unchanged decomposed public body and original *untruncated* returned time; metadata uses separate time contract"
+      }
+    ]
+  },
+  "oldCommonRunner": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35360-api-command-outbox11-unit-v1/manifest.json",
+    "sha256": "55903d7aa0daaa4a2775b1b35364310624dbbb918f5a712af5bb579a92071f8e"
+  },
+  "oldIndependent": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35362-api-command-outbox11-post-v1/manifest.json",
+    "sha256": "5c1750ed5143cde0feb11d0809b94584a97f12a2bbeef183d266f6ead481a7d5"
+  },
+  "oldXml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35362-api-command-outbox11-post-v1/original-TEST-junit-jupiter.xml",
+    "sha256": "3a4f85d6fbe71dc208b2af191d1be8c46e6d6e9ea0eb3d6693e18f5467d43882"
+  },
+  "cases": [
+    {
+      "testId": "PT-CMD-VALUE003",
+      "method": "value003ProviderAnswerRetainsExactBodyAndTimeWithClosedRenderingAndNonnullComponents()",
+      "junit": "PASS"
+    },
+    {
+      "testId": "PT-CMD-VALUE001",
+      "method": "value001UtcYearAndMicrosecondGoldenBoundsPreserveTraceAndTruncateBeforeRangeCheck()",
+      "junit": "PASS"
+    },
+    {
+      "testId": "PT-CMD-VALUE002",
+      "method": "value002EveryTraceComponentDefinesValueIdentityAfterCanonicalMicrosecondTruncation()",
+      "junit": "PASS"
+    }
+  ],
+  "backend": 0,
+  "regularWholeApiPackaging": false,
+  "newExecutions": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

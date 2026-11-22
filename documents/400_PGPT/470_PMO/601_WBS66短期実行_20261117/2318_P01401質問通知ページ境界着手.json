@@ -1,0 +1,87 @@
+{
+  "eventId": "PGPT-20261008-7807",
+  "groupId": "WBS66-NOV22-PG41940",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-22T02:47:37+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 12,
+      "remainingPercent": 88,
+      "resetsAt": 1795879771,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "source": "66f60012f5729553d95f11a03bb98f22a083a0e2",
+    "productionCoreMain": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+    "canonicalDesignSource": "ee27a308b6b7da7bd9744000ee490a8f91956ead",
+    "run": "PG41940",
+    "workCategory": "CONTRACT_AUDIT",
+    "managementWorkIds": [
+      "WBS-P014-01/2"
+    ],
+    "previousCheckpoint": "2317",
+    "planRow": {
+      "ID": "WBS-P014-01/2",
+      "元行": "WBS-P014-01/2",
+      "費目": "B",
+      "主担当": "WBS-P014-01",
+      "状態": "計画",
+      "作業": "Question/Answer一覧・明細・USER/ADMIN scope／同source証拠による受入判定",
+      "残pp": "0.39",
+      "着手": "設計332・当該source・作業所有・既存成果を照合。必要な局所成果を費目Aで一度だけ作成し、受入候補のTestIDと独立期待値を確定。着手依存、当該A成果、終了依存と未解決条件を確認",
+      "終了証拠": "Question/Answer一覧・明細・USER/ADMIN scope：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。 固有要求：FUN-012,QST-005,QST-006",
+      "補正根拠": "登録済み後段単価。追加製造はA、実経路はD、比較はE",
+      "契約HOLD": "",
+      "対象": "",
+      "範囲": "FUN-012、QST-005、QST-006",
+      "保存証跡": "個別criteria＋同sourceのTestID・独立期待値・実結果・451適用結果",
+      "順次": "False",
+      "配賦窓": "13",
+      "楽観pp": "0.163",
+      "慎重pp": "0.78",
+      "要求設計の版差": "PT基準仕様 NK-QRY-001、SS 332",
+      "lineNumber": 429,
+      "改訂残pp": "0.39"
+    },
+    "currentPlan": [
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/11月22日_PGPT再開実行計画.txt",
+        "sha256": "80b9fdc306f664b9c03901a4bdfb34cf66997879676204cfa969858fd68a4016"
+      },
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/短期実行WBS.tsv",
+        "sha256": "a6efedcd63b4ef3bb1d133d939b0ddd7dc4b0147988ac33d668282a25c999527"
+      }
+    ],
+    "startScope": {
+      "workCategory": "CONTRACT_AUDIT",
+      "target": "QuestionQueryPlainContractTestのplain005/006、要求と異なる実効頁・不整合値の独立期待値",
+      "completion": "同候補・元XML・当UI236/SS323、repository/DB/actor executionなし",
+      "nextEligible": [
+        "残差分があれば局所試験",
+        "次の独立WBS未計測仕様"
+      ]
+    },
+    "groupCapPp": 0.1,
+    "estimateAtGroupStartPp": {
+      "low": 0,
+      "base": 0.015,
+      "high": 0.1
+    },
+    "completedOriginalRowPricePp": 0,
+    "sourceOwnership": "LOCAL_DEV_FOUNDATION_TRACKED_SNAPSHOT",
+    "knownOwnedRunInProgress": 0,
+    "costRevision": "PMO-remaining-v3-20261010",
+    "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "actualAllocatedPp": null
+  }
+}

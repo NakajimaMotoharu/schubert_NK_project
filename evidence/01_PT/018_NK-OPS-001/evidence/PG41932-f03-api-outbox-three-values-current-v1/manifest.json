@@ -1,0 +1,240 @@
+{
+  "run": "PG41932",
+  "source": "66f60012f5729553d95f11a03bb98f22a083a0e2",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-F03/2-2-b",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T02:44:37.007666+00:00",
+  "exactMainSources": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport.java",
+      "sha256": "c9ba13a64c580fea33b744134a5534d44142233f72a28c40d5cc0442e2fc472f"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination.java",
+      "sha256": "8ab0216109c17c6d5cf96039b6ac968dd2cb6fc401c2f93b0f92cc08c3ed8e80"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule.java",
+      "sha256": "f565b0413b5e262907e209f523915e3050beb7062fec3b369d178124c58e8854"
+    }
+  ],
+  "fixture": {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxValueContractTest.java",
+    "sha256": "b194e691797ce0e77608ac357062a8150c064f7ea25a5af0be437edb9396088b"
+  },
+  "narrowCompile": [
+    [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+      "--release",
+      "25",
+      "-g",
+      "-proc:none",
+      "-implicit:none",
+      "-encoding",
+      "UTF-8",
+      "-Xlint:all",
+      "-Werror",
+      "-d",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41932-f03-api-outbox-three-values-current-v1/main",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule.java"
+    ],
+    [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+      "--release",
+      "25",
+      "-g",
+      "-proc:none",
+      "-implicit:none",
+      "-encoding",
+      "UTF-8",
+      "-Xlint:all",
+      "-Werror",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41932-f03-api-outbox-three-values-current-v1/main:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "-d",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41932-f03-api-outbox-three-values-current-v1/test",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxValueContractTest.java"
+    ]
+  ],
+  "compileTerminals": [
+    {
+      "task": "main",
+      "exit": 0,
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41932-f03-api-outbox-three-values-current-v1/main.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "task": "test",
+      "exit": 0,
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41932-f03-api-outbox-three-values-current-v1/test.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "mainPhysicalOldCurrent": {
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule.class": [
+      "6ea9674669c18745a2f7c478f94959eaeceb7f3df609b0b2da015950e654b0be",
+      "6ea9674669c18745a2f7c478f94959eaeceb7f3df609b0b2da015950e654b0be"
+    ],
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination.class": [
+      "d1935ee173a91313ee76ae4ce03c0e788261e3db32882087cb7e1123608b88b9",
+      "d1935ee173a91313ee76ae4ce03c0e788261e3db32882087cb7e1123608b88b9"
+    ],
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport.class": [
+      "12338f68dd73f2ee4bcc7be41cf60fd8e3055246b55b725e05562ca89a78de67",
+      "12338f68dd73f2ee4bcc7be41cf60fd8e3055246b55b725e05562ca89a78de67"
+    ]
+  },
+  "fixturePhysicalOldCurrent": {
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxValueContractTest.class": [
+      "233f0723de069574621a8766f3bab5d6493cd3987f2cad3d21e0b9dc7de7c3b8",
+      "233f0723de069574621a8766f3bab5d6493cd3987f2cad3d21e0b9dc7de7c3b8"
+    ]
+  },
+  "sourceIndependence": {
+    "spec": {
+      "path": "evidence/01_PT/018_NK-OPS-001/4381_API質問値・Outbox純値全十一仕様.md",
+      "sha256": "5d979ca53636d7cf5b387359ecbec0f49d528d42aad38314110a9496834db50b"
+    },
+    "baselineMilliseconds": [
+      1000,
+      5000,
+      30000,
+      60000,
+      300000
+    ],
+    "literalExpectedOffsets": [
+      [
+        900,
+        1000,
+        1100
+      ],
+      [
+        4500,
+        5000,
+        5500
+      ],
+      [
+        27000,
+        30000,
+        33000
+      ],
+      [
+        54000,
+        60000,
+        66000
+      ],
+      [
+        270000,
+        300000,
+        330000
+      ]
+    ],
+    "expectedRange": "1 through 100, three jitter positions each",
+    "providerScope": "in-process arithmetic only"
+  },
+  "oldCommonRunner": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35360-api-command-outbox11-unit-v1/manifest.json",
+    "sha256": "55903d7aa0daaa4a2775b1b35364310624dbbb918f5a712af5bb579a92071f8e"
+  },
+  "oldIndependent": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35362-api-command-outbox11-post-v1/manifest.json",
+    "sha256": "5c1750ed5143cde0feb11d0809b94584a97f12a2bbeef183d266f6ead481a7d5"
+  },
+  "oldXml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35362-api-command-outbox11-post-v1/original-TEST-junit-jupiter.xml",
+    "sha256": "3a4f85d6fbe71dc208b2af191d1be8c46e6d6e9ea0eb3d6693e18f5467d43882"
+  },
+  "oldRaw": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35364-api-command-outbox11-unfiltered-v1/manifest.json",
+    "sha256": "f3ed3e5209ec6eaa663aba5e95d346a122bf5ba1a8c2667d40c506add97d5f8d"
+  },
+  "rawSingleExec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35363-api-command-outbox11-post-join-v1/jacoco.exec",
+    "sha256": "b9357da58dcbddcbd388157666abd8c693743a3708726d948d0d8a04a026b65d"
+  },
+  "scopedRawCounters": {
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule": {
+      "LINE": {
+        "missed": 0,
+        "covered": 15
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 7
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 13
+      }
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination": {
+      "LINE": {
+        "missed": 0,
+        "covered": 13
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 9
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 2
+      }
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport": {
+      "LINE": {
+        "missed": 0,
+        "covered": 5
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 8
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 10
+      }
+    }
+  },
+  "cases": [
+    {
+      "testId": "PT-OUTBOX-VALUE002",
+      "method": "value002DestinationKeepsExactlyTwoFixedAddressesAndDefensiveClosedEnumFactories()",
+      "junit": "PASS"
+    },
+    {
+      "testId": "PT-OUTBOX-VALUE003",
+      "method": "value003ApplicationRetryUsesIndependentFiveByThreeGoldenOffsetsAndAllHundredAttempts()",
+      "junit": "PASS"
+    },
+    {
+      "testId": "PT-OUTBOX-VALUE001",
+      "method": "value001ReportEqualityRetainsEveryConsistentCountAndOrdinaryPublicRendering()",
+      "junit": "PASS"
+    }
+  ],
+  "backend": 0,
+  "regularWholeApiPackaging": false,
+  "newExecutions": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

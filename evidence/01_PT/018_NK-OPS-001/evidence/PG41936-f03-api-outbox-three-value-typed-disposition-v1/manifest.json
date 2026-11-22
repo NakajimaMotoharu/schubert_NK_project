@@ -1,0 +1,44 @@
+{
+  "run": "PG41936",
+  "source": "66f60012f5729553d95f11a03bb98f22a083a0e2",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T02:45:54.010594+00:00",
+  "raw": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41934-f03-api-outbox-three-values-typed-v1/manifest.json",
+    "sha256": "21d8ddb1488d81dcc9574ed75731b5a5797cd72c60c6a8a08b509d3097cfdf6f"
+  },
+  "original": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41932-f03-api-outbox-three-values-current-v1/manifest.json",
+    "sha256": "aad5c27053e86b8948c56911e40ec919a6b21cdac2a803051f744c2b72ab5782"
+  },
+  "cases": [
+    {
+      "analyzer": "PMD",
+      "line": 58,
+      "site": "caller-owned clone is deliberately altered, then internal catalog is asserted unchanged"
+    },
+    {
+      "analyzer": "PMD",
+      "line": 87,
+      "site": "caller-owned clone is deliberately altered, then internal catalog is asserted unchanged"
+    },
+    {
+      "analyzer": "SpotBugs",
+      "line": 116,
+      "site": "intentional invalid argument in an existing independent negative test",
+      "target": "nextAttemptAt"
+    },
+    {
+      "analyzer": "SpotBugs",
+      "line": 70,
+      "site": "intentional invalid argument in an existing independent negative test",
+      "target": "fromAddress"
+    }
+  ],
+  "applicable": 0,
+  "unclassified": 0,
+  "suppressions": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
