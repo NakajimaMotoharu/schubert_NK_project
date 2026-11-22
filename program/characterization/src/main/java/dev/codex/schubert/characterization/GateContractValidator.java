@@ -591,7 +591,7 @@ final class GateContractValidator {
   }
 
   /**
-   * Metadata consistency only (SS355 / PT-CHR-META001..010); no collection, permission, source
+   * Metadata consistency only (SS355 / PT-CHR-META001..011); no collection, permission, source
    * ownership, actual approval or physical baseline qualification occurs in this stage.
    */
   static List<String> validateEvidenceDocuments(
@@ -619,6 +619,8 @@ final class GateContractValidator {
       throw new IllegalArgumentException("baseline reference is required");
     List<String> failures = new ArrayList<>();
     validateComparison(comparison, failures);
+    JsonNode reportedFailures = sourceReport.path("failures");
+    require(reportedFailures.isArray() && reportedFailures.isEmpty(), "SOURCE_FAILURES", failures);
     validateSource(sourceReport, firstInventory, expectedSource, "run1", failures);
     validateSource(sourceReport, secondInventory, expectedSource, "run2", failures);
     require(firstInventory.equals(secondInventory), "INVENTORY_REPEAT_DIFF", failures);
@@ -653,8 +655,6 @@ final class GateContractValidator {
       String label,
       List<String> failures) {
     require(VALUE_PASS.equals(sourceReport.path(FIELD_STATUS).asText()), "SOURCE_STATUS", failures);
-    JsonNode reportedFailures = sourceReport.path("failures");
-    require(reportedFailures.isArray() && reportedFailures.isEmpty(), "SOURCE_FAILURES", failures);
     for (String field :
         List.of(
             "sourceFileCount",
