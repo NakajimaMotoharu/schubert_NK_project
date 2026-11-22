@@ -1,0 +1,482 @@
+{
+  "run": "PG42868",
+  "source": "ad8edd756667312a9e91ed027ac93ae49ea1fcad",
+  "core": "e8368d22c4da2ec841f008df793594d3be9066af",
+  "branch": "dev-foundation",
+  "wbs": "WBS-F03/2-2-b",
+  "actualExit": 0,
+  "startedAtUTC": "2026-11-22T17:20:20.814095+00:00",
+  "terminalAtUTC": "2026-11-22T17:20:28.978068+00:00",
+  "original": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40462-migration-utc42-maven-exact87-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "6877647ff4c1e475398f921d374d0d56566e1508327e685dca8c1421523f8590"
+  },
+  "plannedExactCaseNames": [
+    "dev.codex.schubert.nk.migration.MigrationGamesVerifierTest/games001FixedV004TwoRowsSqlAndExactTypedProtocol",
+    "dev.codex.schubert.nk.migration.MigrationGamesVerifierTest/games002NullInputFailsBeforeAnyBorrowedRead",
+    "dev.codex.schubert.nk.migration.MigrationGamesVerifierTest/games003AutoAndNullVendorHandlesHaveOwnedPostconditions",
+    "dev.codex.schubert.nk.migration.MigrationGamesVerifierTest/games004MissingAndExtraRowsRejectWithoutReadingExtraFields",
+    "dev.codex.schubert.nk.migration.MigrationGamesVerifierTest/games005AllTenSqlNullPositionsReject",
+    "dev.codex.schubert.nk.migration.MigrationGamesVerifierTest/games006IdsAndOrdersMatchCanonicalFixedValuesAndOrder",
+    "dev.codex.schubert.nk.migration.MigrationGamesVerifierTest/games007StoredCodeTitleMustMatchWithoutRepair",
+    "dev.codex.schubert.nk.migration.MigrationGamesVerifierTest/games008CreatedAtIsTheExactV004Instant",
+    "dev.codex.schubert.nk.migration.MigrationGamesVerifierTest/games009EveryPhaseAndGetterOccurrenceKeepsOriginalFault",
+    "dev.codex.schubert.nk.migration.MigrationGamesVerifierTest/games010CleanCloseFailuresAreNotSuccess",
+    "dev.codex.schubert.nk.migration.MigrationGamesVerifierTest/games011AllPrimaryAndBothCleanupKindsKeepSuppressionOrder",
+    "dev.codex.schubert.nk.migration.MigrationGamesVerifierTest/games012SelfIdentityNeverSelfSuppresses",
+    "dev.codex.schubert.nk.migration.MigrationGamesVerifierTest/games013NullResultAndTimeoutFailureCloseOnlyTheStatement",
+    "dev.codex.schubert.nk.migration.MigrationGamesVerifierTest/games014CallerWriteTransactionIsAllowedAndNeverMutated",
+    "dev.codex.schubert.nk.migration.MigrationGamesVerifierTest/games015FailureDoesNotPoisonLaterInvocation",
+    "dev.codex.schubert.nk.migration.MigrationGamesVerifierTest/games016DiagnosticsAndDisplayNeverContainRowValues",
+    "dev.codex.schubert.nk.migration.MigrationGamesVerifierTest/games017IndependentLiteralTitlesAreNotRecomputedFromInput",
+    "dev.codex.schubert.nk.migration.MigrationGamesVerifierTest/games018VerificationDoesNotModifyTheFixture",
+    "dev.codex.schubert.nk.migration.MigrationGamesVerifierTest/games019EqualValueThrowableInstancesRemainDistinctSuppressedObjects",
+    "dev.codex.schubert.nk.migration.MigrationGamesVerifierTest/games020FiniteConcurrentCallsUseIndependentOwnedHandles"
+  ],
+  "newCaseNames": [],
+  "candidate": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+    "sha256": "4a3de8b3dfe415c5171f42478f06e63b21f982be13cbd232131daf35dbd498d5"
+  },
+  "fixedMainPhysical": {
+    "dev/codex/schubert/nk/migration/MigrationGamesVerifier.class": "f4d916aa12edcd5274dffb0d91bcdb65ebd7a568b554e116d58b38d0620c561d"
+  },
+  "changedMainPhysical": {},
+  "currentTestPhysical": {
+    "dev/codex/schubert/nk/migration/MigrationGamesVerifierTest$Fixture.class": "9aedf13b31a2316398fed403226168101c4984b4891998e4003e6e54c872aa29",
+    "dev/codex/schubert/nk/migration/MigrationGamesVerifierTest.class": "187e73416cc4fa69db5dba021145d045d0719aefb491186b3da6c07fc53ab627",
+    "dev/codex/schubert/nk/migration/MigrationGamesVerifierTest$EqualSql.class": "e0e76e78232c43802dde48b8bfe8e40c5f0d781d3672269e8de4675c917149f9"
+  },
+  "currentInputs": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/inputs/MigrationGamesVerifierTest.java",
+      "sha256": "fb8d541d3aed8c87467310ab7d06d1045941d9008b4cb8063031ee74098f200d"
+    }
+  ],
+  "sdk": {
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7"
+  },
+  "compile": {
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+      "--release",
+      "25",
+      "-g",
+      "-proc:none",
+      "-implicit:none",
+      "-encoding",
+      "UTF-8",
+      "-Xlint:all",
+      "-Werror",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/test:/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/main:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+      "-d",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/test",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/inputs/MigrationGamesVerifierTest.java"
+    ],
+    "actualExit": 0,
+    "startedAtUTC": "2026-11-22T17:20:20.829675+00:00",
+    "terminalAtUTC": "2026-11-22T17:20:21.681561+00:00",
+    "stdout": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/compile.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/compile.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "typed": {
+    "spotbugs": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Xmx1g",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/com/github/spotbugs/spotbugs/4.10.4/spotbugs-4.10.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-analysis/9.10.1/asm-analysis-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-util/9.10.1/asm-util-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/bcel/bcel/6.12.0/bcel-6.12.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/github/stephenc/jcip/jcip-annotations/1.0-1/jcip-annotations-1.0-1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/dom4j/dom4j/2.2.0/dom4j-2.2.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/commons/commons-lang3/3.20.0/commons-lang3-3.20.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/commons/commons-text/1.15.0/commons-text-1.15.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/github/spotbugs/spotbugs-annotations/4.10.4/spotbugs-annotations-4.10.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/jaxen/jaxen/2.0.6/jaxen-2.0.6.jar:/home/mini/codex/project1/work/toolchain/m2/repository/net/sf/saxon/Saxon-HE/12.10/Saxon-HE-12.10.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/logging/log4j/log4j-api/2.26.1/log4j-api-2.26.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.26.1/log4j-to-slf4j-2.26.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-simple/2.0.18/slf4j-simple-2.0.18.jar:/home/mini/codex/project1/work/toolchain/m2/repository/commons-io/commons-io/2.22.0/commons-io-2.22.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/xmlresolver/xmlresolver/5.3.3/xmlresolver-5.3.3.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/xmlresolver/xmlresolver/5.3.3/xmlresolver-5.3.3-data.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+        "edu.umd.cs.findbugs.FindBugs2",
+        "-effort:max",
+        "-low",
+        "-xml:withMessages",
+        "-exitcode",
+        "-auxclasspath",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/test:/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/main:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+        "-output",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/spotbugs.xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/test/dev/codex/schubert/nk/migration/MigrationGamesVerifierTest$EqualSql.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/test/dev/codex/schubert/nk/migration/MigrationGamesVerifierTest$Fixture.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/test/dev/codex/schubert/nk/migration/MigrationGamesVerifierTest.class"
+      ],
+      "actualExit": 1,
+      "startedAtUTC": "2026-11-22T17:20:22.626527+00:00",
+      "terminalAtUTC": "2026-11-22T17:20:27.372661+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/spotbugs.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/spotbugs.stderr",
+        "sha256": "83febadc46f214e89709b832aae077e8a743258c2778ad97727d55ed33462071"
+      }
+    },
+    "pmd": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/record-fix-v1/pmd-record-1298.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/Saxon-HE-12.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/antlr4-runtime-4.13.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/apex-ls_2.13-6.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/apex-parser-5.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/better-files_2.13-3.9.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/checker-qual-3.55.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/common2_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/common_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/commons-lang3-3.20.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/directory-watcher-0.18.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/directory-watcher-better-files_2.13-0.18.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/error_prone_annotations-2.48.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/failureaccess-1.0.3.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/geny_2.13-0.6.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/groovy-5.1.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/gson-2.14.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/gson-extras-3.3.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/guava-33.7.1-jre.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/io_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/j2objc-annotations-3.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/java-diff-utils-4.16.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jline-native-3.29.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jline-terminal-3.29.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jna-5.12.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jsoup-1.23.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jsr250-api-1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jul-to-slf4j-1.7.36.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-build-tools-api-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-compiler-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-daemon-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-script-runtime-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-common-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-compiler-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-compiler-impl-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-jvm-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-stdlib-2.2.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-stdlib-jdk7-2.2.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-stdlib-jdk8-2.2.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-type-mapper-analyzer-0.7.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-type-mapper-model-0.7.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlinx-coroutines-core-jvm-1.8.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlinx-serialization-core-jvm-1.11.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlinx-serialization-json-jvm-1.11.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/mainargs_2.13-0.5.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/nice-xml-messages-3.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/outline-parser_2.13-2.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/parsers_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pcollections-4.0.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/picocli-4.7.7.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-ant-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-apex-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-cli-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-coco-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-core-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-cpp-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-cs-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-css-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-dart-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-designer-7.19.3.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-fortran-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-gherkin-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-go-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-groovy-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-html-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-java-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-javascript-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-jsp-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-julia-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-kotlin-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-lua-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-matlab-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-modelica-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-objectivec-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-perl-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-php-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-plsql-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-python-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-ruby-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-rust-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-scala_2.13-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-swift-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-tsql-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-velocity-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-visualforce-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-xml-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/portable-scala-reflect_2.13-1.1.3.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/progressbar-0.10.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/rhino-1.7.15.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-collection-compat_2.13-2.8.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-json-rpc-upickle-json-serializer_2.13-1.1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-json-rpc_2.13-1.1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-library-2.13.18.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-parallel-collections_2.13-1.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-reflect-2.13.18.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-xml_2.13-1.3.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scalajs-stubs_2.13-1.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/slf4j-api-1.7.36.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/slf4j-simple-1.7.36.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/sobject-types-67.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/sourcecode_2.13-0.4.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/standard-types-67.0.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/summit-ast-3.1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/trees2_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/trees_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/ujson_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upack_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upickle-core_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upickle-implicits_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upickle_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/vf-parser-2.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/xmlresolver-5.3.3-data.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/xmlresolver-5.3.3.jar",
+        "net.sourceforge.pmd.cli.PmdCli",
+        "check",
+        "--file-list",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/sources.txt",
+        "--rulesets",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/pmd.xml",
+        "--use-version",
+        "java-25",
+        "--minimum-priority",
+        "5",
+        "--aux-classpath",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/test:/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/main:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+        "--no-cache",
+        "--format",
+        "xml",
+        "--report-file",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/pmd.xml"
+      ],
+      "actualExit": 4,
+      "startedAtUTC": "2026-11-22T17:20:22.626840+00:00",
+      "terminalAtUTC": "2026-11-22T17:20:26.993875+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/pmd.stdout",
+        "sha256": "45515020054910fb7086ec986da089a2b930112306cb28995f2b7b398105330b"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/pmd.stderr",
+        "sha256": "91c2a7fa23697b34812378a4f931b636783640631a3342ea1859d1191bf0068b"
+      }
+    },
+    "checkstyle": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "-o",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/checkstyle.xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/inputs/MigrationGamesVerifierTest.java"
+      ],
+      "actualExit": 0,
+      "startedAtUTC": "2026-11-22T17:20:22.627059+00:00",
+      "terminalAtUTC": "2026-11-22T17:20:24.093716+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/checkstyle.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/checkstyle.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "spotbugs": [
+    {
+      "rule": "THROWS_METHOD_THROWS_CLAUSE_THROWABLE",
+      "method": "call",
+      "owner": "dev.codex.schubert.nk.migration.MigrationGamesVerifierTest$Fixture",
+      "lines": [
+        "557"
+      ]
+    }
+  ],
+  "pmdRaw": [
+    {
+      "file": "MigrationGamesVerifierTest.java",
+      "rule": "NullAssignment",
+      "at": "140"
+    },
+    {
+      "file": "MigrationGamesVerifierTest.java",
+      "rule": "CloseResource",
+      "at": "383"
+    },
+    {
+      "file": "MigrationGamesVerifierTest.java",
+      "rule": "DoNotUseThreads",
+      "at": "383"
+    },
+    {
+      "file": "MigrationGamesVerifierTest.java",
+      "rule": "DoNotUseThreads",
+      "at": "388"
+    },
+    {
+      "file": "MigrationGamesVerifierTest.java",
+      "rule": "DoNotUseThreads",
+      "at": "398"
+    },
+    {
+      "file": "MigrationGamesVerifierTest.java",
+      "rule": "DoNotUseThreads",
+      "at": "399"
+    },
+    {
+      "file": "MigrationGamesVerifierTest.java",
+      "rule": "UseProperClassLoader",
+      "at": "462"
+    },
+    {
+      "file": "MigrationGamesVerifierTest.java",
+      "rule": "UseProperClassLoader",
+      "at": "485"
+    },
+    {
+      "file": "MigrationGamesVerifierTest.java",
+      "rule": "UseProperClassLoader",
+      "at": "519"
+    }
+  ],
+  "checkstyle": 0,
+  "spotbugsErrors": 0,
+  "typedReports": {
+    "spotbugs": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/spotbugs.xml",
+      "sha256": "89c8f2303830c8ef3d919987a544bca9565d903d4ba95aaedf277b2f33a0c2b0"
+    },
+    "checkstyle": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/checkstyle.xml",
+      "sha256": "8ea593d28da6d1e9d30204ff7e632ee951991372970f134cbfb9eb02c0bd6fb4"
+    },
+    "pmd": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/pmd.xml",
+      "sha256": "a13fbc93de0ffc45f4e5a405a86fa588c0d0fad004d8138be6343dd75ee62ee4"
+    }
+  },
+  "actualOrdinary": {
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/jacoco.exec,sessionid=PG42868-ordinary,append=false",
+      "-Duser.timezone=Pacific/Honolulu",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/test:/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/main:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+      "org.junit.platform.console.ConsoleLauncher",
+      "execute",
+      "--disable-ansi-colors",
+      "--details=summary",
+      "--reports-dir",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/junit",
+      "--select-class",
+      "dev.codex.schubert.nk.migration.MigrationGamesVerifierTest"
+    ],
+    "actualExit": 0,
+    "startedAtUTC": "2026-11-22T17:20:27.374470+00:00",
+    "terminalAtUTC": "2026-11-22T17:20:28.601179+00:00",
+    "stdout": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/junit.stdout",
+      "sha256": "7c51be5fb247c5db9e836e3d09eddf1b4dae4df3b3adc8fcab5f9498f9d38996"
+    },
+    "stderr": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/junit.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "xml": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/junit/TEST-junit-jupiter.xml",
+      "sha256": "eda94011bfa809417f4f9871aab35b2a102dfc4021f8eca1e3152ea955e19ec9"
+    },
+    "cases": {
+      "tests": 20,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "exactNames": true
+  },
+  "coverage": {
+    "xml": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/coverage.xml",
+      "sha256": "75a0c177a84a5cc3d934a7315c18427cde1e53f649456c113066b6f4a9815b9a"
+    },
+    "exec": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/jacoco.exec",
+      "sha256": "0b8f10f2bc3b41277077ed50e6123b6353660eebf25c8984ab32a76f2198a40c"
+    },
+    "classinfo": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "classinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/main/dev/codex/schubert/nk/migration/MigrationGamesVerifier.class"
+      ],
+      "actualExit": 0,
+      "startedAtUTC": "2026-11-22T17:20:28.743944+00:00",
+      "terminalAtUTC": "2026-11-22T17:20:28.862504+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/classinfo.stdout",
+        "sha256": "d5713ff0317aa8e7d72a49b9d01e36a5a7586fa48d6779056d7f801a187982c8"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/classinfo.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "execinfo": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "execinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/jacoco.exec"
+      ],
+      "actualExit": 0,
+      "startedAtUTC": "2026-11-22T17:20:28.862545+00:00",
+      "terminalAtUTC": "2026-11-22T17:20:28.974940+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/execinfo.stdout",
+        "sha256": "d6b8a9563054f0f64ed462ca0ef7e0fed434228a98727074837ba5882b926d2a"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/execinfo.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "report": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/jacoco.exec",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/main/dev/codex/schubert/nk/migration/MigrationGamesVerifier.class",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/coverage.xml"
+      ],
+      "actualExit": 0,
+      "startedAtUTC": "2026-11-22T17:20:28.601520+00:00",
+      "terminalAtUTC": "2026-11-22T17:20:28.743856+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/jacoco.stdout",
+        "sha256": "c164c0ecb31b3c17b1456e0dfeae554189c2d5b0107cfcd3cde7908d881ba452"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/jacoco.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "records": {
+      "dev/codex/schubert/nk/migration/MigrationGamesVerifier": {
+        "INSTRUCTION": {
+          "covered": 213,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 30,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 66,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 25,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 10,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        }
+      }
+    },
+    "coverageIncludedProductTypes": [
+      "dev/codex/schubert/nk/migration/MigrationGamesVerifier.class"
+    ],
+    "rawJoinCount": 1
+  },
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "rawTerminal": {
+    "path": "../pgpt-runs/PG379/PG42868-fixed-games-ordinary-v1/terminal.json",
+    "sha256": "bc38bc106ca017491a219f8c69a905eea70076fd0805f937d15ba4dcd40b343e"
+  },
+  "testIds": [
+    "PT-MIG-GAMES001",
+    "PT-MIG-GAMES002",
+    "PT-MIG-GAMES003",
+    "PT-MIG-GAMES004",
+    "PT-MIG-GAMES005",
+    "PT-MIG-GAMES006",
+    "PT-MIG-GAMES007",
+    "PT-MIG-GAMES008",
+    "PT-MIG-GAMES009",
+    "PT-MIG-GAMES010",
+    "PT-MIG-GAMES011",
+    "PT-MIG-GAMES012",
+    "PT-MIG-GAMES013",
+    "PT-MIG-GAMES014",
+    "PT-MIG-GAMES015",
+    "PT-MIG-GAMES016",
+    "PT-MIG-GAMES017",
+    "PT-MIG-GAMES018",
+    "PT-MIG-GAMES019",
+    "PT-MIG-GAMES020"
+  ],
+  "aggregate": {
+    "INSTRUCTION": {
+      "covered": 213,
+      "missed": 0
+    },
+    "BRANCH": {
+      "covered": 30,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 66,
+      "missed": 0
+    },
+    "COMPLEXITY": {
+      "covered": 25,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 10,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 1,
+      "missed": 0
+    }
+  },
+  "actualProbeCRC": "48a4a771276261de",
+  "actualProbes": 61,
+  "sanitizedJUnit": {
+    "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG42868-fixed-games-ordinary-v1/junit/TEST-junit-jupiter.xml",
+    "sha256": "7e7eec832e33b0944f1ac1d30cee868f69e4526546b8dc0b62b63f70b82e8fa0",
+    "originalUnitXmlSha256": "eda94011bfa809417f4f9871aab35b2a102dfc4021f8eca1e3152ea955e19ec9"
+  },
+  "publishedCoverage": [
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG42868-fixed-games-ordinary-v1/coverage/classinfo.txt",
+      "sha256": "d5713ff0317aa8e7d72a49b9d01e36a5a7586fa48d6779056d7f801a187982c8"
+    },
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG42868-fixed-games-ordinary-v1/coverage/coverage.xml",
+      "sha256": "75a0c177a84a5cc3d934a7315c18427cde1e53f649456c113066b6f4a9815b9a"
+    },
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/evidence/PG42868-fixed-games-ordinary-v1/coverage/jacoco.exec",
+      "sha256": "0b8f10f2bc3b41277077ed50e6123b6353660eebf25c8984ab32a76f2198a40c"
+    }
+  ],
+  "bugsClosed": [
+    "BUG-3637",
+    "BUG-3638"
+  ],
+  "ykt": "YKT-2857"
+}
