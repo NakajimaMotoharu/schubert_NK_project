@@ -1,0 +1,49 @@
+test_class_before_session_is_rejected_by_both_strict_readers (__main__.StrictOriginalOrderTest.test_class_before_session_is_rejected_by_both_strict_readers) ... 
+  test_class_before_session_is_rejected_by_both_strict_readers (__main__.StrictOriginalOrderTest.test_class_before_session_is_rejected_by_both_strict_readers) (reader='Python') ... FAIL
+  test_class_before_session_is_rejected_by_both_strict_readers (__main__.StrictOriginalOrderTest.test_class_before_session_is_rejected_by_both_strict_readers) (reader='Java') ... FAIL
+test_session_then_class_keeps_target_identity (__main__.StrictOriginalOrderTest.test_session_then_class_keeps_target_identity) ... ok
+test_session_without_class_retains_unmeasured_target (__main__.StrictOriginalOrderTest.test_session_without_class_retains_unmeasured_target) ... ok
+test_unselected_class_before_session_is_also_rejected (__main__.StrictOriginalOrderTest.test_unselected_class_before_session_is_also_rejected) ... 
+  test_unselected_class_before_session_is_also_rejected (__main__.StrictOriginalOrderTest.test_unselected_class_before_session_is_also_rejected) (reader='Python') ... FAIL
+  test_unselected_class_before_session_is_also_rejected (__main__.StrictOriginalOrderTest.test_unselected_class_before_session_is_also_rejected) (reader='Java') ... FAIL
+
+======================================================================
+FAIL: test_class_before_session_is_rejected_by_both_strict_readers (__main__.StrictOriginalOrderTest.test_class_before_session_is_rejected_by_both_strict_readers) (reader='Python')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/jacoco_strict_original_order_test.py", line 93, in test_class_before_session_is_rejected_by_both_strict_readers
+    with self.assertRaisesRegex(ValueError, 'execution class before original session'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_class_before_session_is_rejected_by_both_strict_readers (__main__.StrictOriginalOrderTest.test_class_before_session_is_rejected_by_both_strict_readers) (reader='Java')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/jacoco_strict_original_order_test.py", line 97, in test_class_before_session_is_rejected_by_both_strict_readers
+    self.assertEqual(1, result.returncode, result.stdout)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : b'CLASS\torderfixture/One\t39be80740e947edd\ttrue\t1\t1537\tINSTRUCTION:0:2\tBRANCH:0:0\tLINE:0:1\tCOMPLEXITY:0:1\tMETHOD:0:1\tCLASS:0:1\nMETHOD\torderfixture/One\tvalue\t()I\t1\tINSTRUCTION:0:2\tBRANCH:0:0\tLINE:0:1\tCOMPLEXITY:0:1\tMETHOD:0:1\tCLASS:0:0\n'
+
+======================================================================
+FAIL: test_unselected_class_before_session_is_also_rejected (__main__.StrictOriginalOrderTest.test_unselected_class_before_session_is_also_rejected) (reader='Python')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/jacoco_strict_original_order_test.py", line 106, in test_unselected_class_before_session_is_also_rejected
+    with self.assertRaisesRegex(ValueError, 'execution class before original session'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_unselected_class_before_session_is_also_rejected (__main__.StrictOriginalOrderTest.test_unselected_class_before_session_is_also_rejected) (reader='Java')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/jacoco_strict_original_order_test.py", line 110, in test_unselected_class_before_session_is_also_rejected
+    self.assertEqual(1, result.returncode, result.stdout)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : b'CLASS\torderfixture/One\t39be80740e947edd\ttrue\t1\t1537\tINSTRUCTION:0:2\tBRANCH:0:0\tLINE:0:1\tCOMPLEXITY:0:1\tMETHOD:0:1\tCLASS:0:1\nMETHOD\torderfixture/One\tvalue\t()I\t1\tINSTRUCTION:0:2\tBRANCH:0:0\tLINE:0:1\tCOMPLEXITY:0:1\tMETHOD:0:1\tCLASS:0:0\n'
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.933s
+
+FAILED (failures=4)

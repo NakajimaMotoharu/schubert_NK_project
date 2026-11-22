@@ -1,0 +1,240 @@
+{
+  "run": "PG42910",
+  "wbs": "WBS-P018-08.03/2",
+  "sourcePreflight": "6d4298aaf54f0c2a3a95db9d9d6e70affb69d753",
+  "startedAtUTC": "2026-11-22T18:28:04.248905+00:00",
+  "terminalAtUTC": "2026-11-22T18:28:06.438316+00:00",
+  "actualExit": 0,
+  "originalRegression": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42910-p01808-original-exec-order-v1/before.json",
+    "sha256": "cf5397c0402a9b696226ca54a29f3b9ebcbc2cdaf8b63f46a478c61b38a434c3"
+  },
+  "sourcePins": [
+    {
+      "path": "tools/quality/jacoco/UnfilteredCodeMeasurement.java",
+      "sha256": "c0986f2b5be06e7c74419b86c02a8b3e6da8d7e8d7f241ec0a6c7828f72922a6"
+    },
+    {
+      "path": "tools/quality/jacoco_readonly_exec_subset.py",
+      "sha256": "603bc7f0b54093e35e78047a5f0cba349abf31616e17642540db7dcc920080b1"
+    },
+    {
+      "path": "tools/quality/jacoco_strict_original_order_test.py",
+      "sha256": "369569c53e7dee5740222360a1d812cbca677a6a8aec41776e1d2566cb98bc1d"
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+      "sha256": "ade1e0fdb4cd80d8537b57c6edb70a1360c47fdc518c20c65314517479bc4d0d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar",
+      "sha256": "ed825d10ab1399c8c0cb669e688cf0c8c82629b4c8399b58352b68e92ca10fcb"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar",
+      "sha256": "6d0abefb7cbf972ea16edb37ec14835372505063a45f976ab7ea889ed9497895"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+      "sha256": "3dfb0d5b6a106cd40b5b250e39935fbf2f927f4477546a5369a3ac609cf0506b"
+    }
+  ],
+  "steps": {
+    "tools-unit": {
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-v",
+        "-s",
+        "tools/quality",
+        "-p",
+        "jacoco*test.py"
+      ],
+      "startedAtUTC": "2026-11-22T18:28:04.253525+00:00",
+      "terminalAtUTC": "2026-11-22T18:28:05.297935+00:00",
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42910-p01808-original-exec-order-v1/tools-unit.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42910-p01808-original-exec-order-v1/tools-unit.stderr",
+        "sha256": "e927af3b5bc0f9be01bd08fca7b8f008f2e64436ae7245471d84bc14a5458f0f"
+      }
+    },
+    "pinned-writer": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-c",
+        "-classpath",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+        "org.jacoco.core.runtime.RuntimeData"
+      ],
+      "startedAtUTC": "2026-11-22T18:28:05.298351+00:00",
+      "terminalAtUTC": "2026-11-22T18:28:05.495350+00:00",
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42910-p01808-original-exec-order-v1/pinned-writer.stdout",
+        "sha256": "2f3f87469dce20aa2c97a042fb7ad4de78cd16cc5f05523191c46cafcf7971c1"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42910-p01808-original-exec-order-v1/pinned-writer.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "javac": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42910-p01808-original-exec-order-v1/reader-1dlb0jnw",
+        "tools/quality/jacoco/UnfilteredCodeMeasurement.java"
+      ],
+      "startedAtUTC": "2026-11-22T18:28:05.495688+00:00",
+      "terminalAtUTC": "2026-11-22T18:28:06.182094+00:00",
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42910-p01808-original-exec-order-v1/javac.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42910-p01808-original-exec-order-v1/javac.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "pg42902-existing-original": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42910-p01808-original-exec-order-v1/reader-1dlb0jnw:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+        "--strict-original-exec",
+        "--line-deficits",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/unit.exec",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/main/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/main/dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/main/dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor$Evaluation.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/main/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/main/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor$Evaluation.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/main/dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/main/dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor$Evaluation.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/main/dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/main/dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor$Evaluation.class"
+      ],
+      "startedAtUTC": "2026-11-22T18:28:06.192406+00:00",
+      "terminalAtUTC": "2026-11-22T18:28:06.307159+00:00",
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42910-p01808-original-exec-order-v1/pg42902-existing-original.stdout",
+        "sha256": "22523b78970c27b231c398949ebd9c54c0a6f6b6ebb49936eeb512382f4281cb"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42910-p01808-original-exec-order-v1/pg42902-existing-original.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "pg42904-existing-original": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42910-p01808-original-exec-order-v1/reader-1dlb0jnw:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+        "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+        "--strict-original-exec",
+        "--line-deficits",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42904-c07-direct-monitor-and-value-v1/unit.exec",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42904-c07-direct-monitor-and-value-v1/main/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42904-c07-direct-monitor-and-value-v1/main/dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42904-c07-direct-monitor-and-value-v1/main/dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor$Evaluation.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42904-c07-direct-monitor-and-value-v1/main/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42904-c07-direct-monitor-and-value-v1/main/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor$Evaluation.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42904-c07-direct-monitor-and-value-v1/main/dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42904-c07-direct-monitor-and-value-v1/main/dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor$Evaluation.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42904-c07-direct-monitor-and-value-v1/main/dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor.class",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42904-c07-direct-monitor-and-value-v1/main/dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor$Evaluation.class"
+      ],
+      "startedAtUTC": "2026-11-22T18:28:06.313508+00:00",
+      "terminalAtUTC": "2026-11-22T18:28:06.434846+00:00",
+      "actualExit": 0,
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42910-p01808-original-exec-order-v1/pg42904-existing-original.stdout",
+        "sha256": "3c3ab460dc5428756b428400d9fa3708f2592e938508e4c3385622abda166c1f"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42910-p01808-original-exec-order-v1/pg42904-existing-original.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "toolsTests": 37,
+  "newToolTests": 4,
+  "replayedOriginalExec": [
+    {
+      "run": "PG42902",
+      "manifest": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42902-c07-direct-monitor-current-v1/manifest.json",
+        "sha256": "486e8bdc678951f27470c903175c185d1c9de9eabf55d84890a13abf4b3ccbf0"
+      },
+      "rawExec": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42902-c07-direct-monitor-current-v1/unit.exec",
+        "sha256": "46dea2f763159f212b65acb9954d4db5714bb7b4f387ba2370d826ba2cef8e1d"
+      },
+      "sameUnfilteredRows": true,
+      "exactIndependentPresent": 9,
+      "runtimeUnitReplay": 0
+    },
+    {
+      "run": "PG42904",
+      "manifest": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42904-c07-direct-monitor-and-value-v1/manifest.json",
+        "sha256": "483584e9205d9674c70b1d05562a72387b72321fbc663e301283ad151a32255e"
+      },
+      "rawExec": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42904-c07-direct-monitor-and-value-v1/unit.exec",
+        "sha256": "3a64750d3ae8756d7baabf8968fd989d778d27ceccb775a7d0ce077e323d6360"
+      },
+      "sameUnfilteredRows": true,
+      "exactIndependentPresent": 9,
+      "runtimeUnitReplay": 0
+    }
+  ],
+  "replayedProductTests": 0,
+  "actualExternalOps": 0,
+  "authorizedFixture": "local synthetic writer-format tool test and two retained host exec files",
+  "formalAcceptanceId": null,
+  "exclusions": [
+    "real native",
+    "ROOT",
+    "DB",
+    "VM",
+    "network",
+    "held product tests"
+  ],
+  "toolSource": "71608bf048a977eba653371a28dc3851c65f55b9",
+  "originalTerminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42910-p01808-original-exec-order-v1/terminal.json",
+    "sha256": "5bb27ce2ad647cf871a213b81fd6d9555ea8d88fcda34b55c158b1a214b003af"
+  },
+  "publishedSyntheticEvidence": {
+    "before.stderr": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42910-p01808-original-exec-order-v1/before.stderr",
+      "sha256": "ee8fb73242ed50e75161c4310ef857a25448f3d8e320d8bc02e79f9f50dd1e7c"
+    },
+    "tools-unit.stderr": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42910-p01808-original-exec-order-v1/tools-unit.stderr",
+      "sha256": "e927af3b5bc0f9be01bd08fca7b8f008f2e64436ae7245471d84bc14a5458f0f"
+    }
+  },
+  "whole451": false,
+  "realNativeAccepted": false
+}
