@@ -15,9 +15,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
@@ -29,7 +32,7 @@ final class PostgresCopyTextWriterTest {
   private static final String CODEC_DIAGNOSTIC = "migration COPY text data is invalid";
 
   @Test
-  void independentGoldenRetainsNullEscapesAndUtf8AcrossTwoRows() throws Exception {
+  void independentGoldenRetainsNullEscapesAndUtf8AcrossTwoRows() throws IOException {
     var sink = new TrackingSink();
     writer().writeRows(List.of(first(), second()), sink);
     assertArrayEquals(
@@ -39,7 +42,7 @@ final class PostgresCopyTextWriterTest {
   }
 
   @Test
-  void emptyIterableMakesNoSinkCallsAndDoesNotOwnIt() throws Exception {
+  void emptyIterableMakesNoSinkCallsAndDoesNotOwnIt() throws IOException {
     var sink = new TrackingSink();
     writer().writeRows(List.of(), sink);
     assertArrayEquals(new byte[0], sink.bytes());
@@ -49,7 +52,7 @@ final class PostgresCopyTextWriterTest {
   }
 
   @Test
-  void obtainsOneIteratorAndWritesCurrentRowBeforeObtainingTheNext() throws Exception {
+  void obtainsOneIteratorAndWritesCurrentRowBeforeObtainingTheNext() throws IOException {
     var sink = new TrackingSink();
     var iterators = new int[1];
     Iterable<List<@Nullable String>> input =
@@ -65,6 +68,7 @@ final class PostgresCopyTextWriterTest {
 
             @Override
             public List<@Nullable String> next() {
+              if (!hasNext()) throw new NoSuchElementException();
               int previousPosition = position;
               position++;
               if (previousPosition == 0) return first();
@@ -171,6 +175,7 @@ final class PostgresCopyTextWriterTest {
 
                 @Override
                 public List<@Nullable String> next() {
+                  if (!hasNext()) throw new NoSuchElementException();
                   acquired[0]++;
                   return first();
                 }
@@ -217,6 +222,7 @@ final class PostgresCopyTextWriterTest {
 
               @Override
               public List<@Nullable String> next() {
+                if (!hasNext()) throw new NoSuchElementException();
                 int previousPosition = position;
                 position++;
                 if (previousPosition == 0) return first();
@@ -231,7 +237,7 @@ final class PostgresCopyTextWriterTest {
   }
 
   @Test
-  void callerOwnsInputsSinkAndLaterCallsAndRedactionStaysFixed() throws Exception {
+  void callerOwnsInputsSinkAndLaterCallsAndRedactionStaysFixed() throws IOException {
     var row = first();
     var unchanged = new ArrayList<>(row);
     var sink = new TrackingSink();
@@ -249,7 +255,8 @@ final class PostgresCopyTextWriterTest {
   }
 
   @Test
-  void finiteOwnedConcurrentWritesUseIndependentSinksAndLiteralGolden() throws Exception {
+  void finiteOwnedConcurrentWritesUseIndependentSinksAndLiteralGolden()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var writer = writer();
     var executor = Executors.newFixedThreadPool(8);
     try {
@@ -284,16 +291,21 @@ final class PostgresCopyTextWriterTest {
     return new ArrayList<>(List.of("", "\t", "\\", "é"));
   }
 
-  private static final class TrackingSink extends OutputStream {
-    private final ByteArrayOutputStream output = new ByteArrayOutputStream();
+  private static final class TrackingSink extends ByteArrayOutputStream {
     private boolean closed;
     private boolean flushed;
     private int writes;
 
     @Override
     public void write(int value) {
+      super.write(value);
       writes++;
-      output.write(value);
+    }
+
+    @Override
+    public void write(byte[] bytes, int offset, int length) {
+      super.write(bytes, offset, length);
+      writes += length;
     }
 
     @Override
@@ -307,7 +319,7 @@ final class PostgresCopyTextWriterTest {
     }
 
     byte[] bytes() {
-      return output.toByteArray();
+      return toByteArray();
     }
   }
 }

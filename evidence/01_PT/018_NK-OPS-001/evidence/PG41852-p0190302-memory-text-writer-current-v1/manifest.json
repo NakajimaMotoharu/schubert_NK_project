@@ -1,0 +1,150 @@
+{
+  "run": "PG41852",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T01:54:26.495209+00:00",
+  "source": "a1a02134d5bd0808a2a29d8992d890a5fd1971a8",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-P019-03.02/2",
+  "testId": "PT-MIG-STREAM001",
+  "originalMethod": "independentGoldenRetainsNullEscapesAndUtf8AcrossTwoRows",
+  "originalResult": "PASS",
+  "priorActualTest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33292-mapverify976-post-v5/original-TEST-junit-jupiter.xml",
+    "sha256": "a55172a64a07208df0457588e90e237cb456f5a36ee780adb89da50596333079"
+  },
+  "priorCaseRoster": 12,
+  "caseRows": [
+    {
+      "testId": "PT-MIG-STREAM001",
+      "method": "independentGoldenRetainsNullEscapesAndUtf8AcrossTwoRows",
+      "originalResult": "PASS"
+    },
+    {
+      "testId": "PT-MIG-STREAM002",
+      "method": "emptyIterableMakesNoSinkCallsAndDoesNotOwnIt",
+      "originalResult": "PASS"
+    },
+    {
+      "testId": "PT-MIG-STREAM003",
+      "method": "obtainsOneIteratorAndWritesCurrentRowBeforeObtainingTheNext",
+      "originalResult": "PASS"
+    },
+    {
+      "testId": "PT-MIG-STREAM004",
+      "method": "constructorRejectsNullEncoderWithFixedDiagnostic",
+      "originalResult": "PASS"
+    },
+    {
+      "testId": "PT-MIG-STREAM005",
+      "method": "nullSourceAndSinkAreRejectedBeforeRequestingAnIterator",
+      "originalResult": "PASS"
+    },
+    {
+      "testId": "PT-MIG-STREAM006",
+      "method": "nullOrEmptyRowsFailWithoutWritingThatRow",
+      "originalResult": "PASS"
+    },
+    {
+      "testId": "PT-MIG-STREAM007",
+      "method": "mixedWidthRejectsBeforeSendingTheSecondRowAndKeepsTheDeclaredPrefix",
+      "originalResult": "PASS"
+    },
+    {
+      "testId": "PT-MIG-STREAM008",
+      "method": "invalidFieldPreservesCodecDiagnosticAndDoesNotSendMalformedRow",
+      "originalResult": "PASS"
+    },
+    {
+      "testId": "PT-MIG-STREAM009",
+      "method": "originalSinkFailureStopsBeforeObtainingAnotherRowWithoutCloseOrFlush",
+      "originalResult": "PASS"
+    },
+    {
+      "testId": "PT-MIG-STREAM010",
+      "method": "originalIteratorFailureRemainsFailureAfterThePreviousRowWasSent",
+      "originalResult": "PASS"
+    },
+    {
+      "testId": "PT-MIG-STREAM011",
+      "method": "callerOwnsInputsSinkAndLaterCallsAndRedactionStaysFixed",
+      "originalResult": "PASS"
+    },
+    {
+      "testId": "PT-MIG-STREAM012",
+      "method": "finiteOwnedConcurrentWritesUseIndependentSinksAndLiteralGolden",
+      "originalResult": "PASS"
+    }
+  ],
+  "ownedPureScope": {
+    "dev/codex/schubert/nk/migration/PostgresCopyTextWriter.class": "e498970c4ef48d9af38f4de7f0e292f32188a9da38e153d9d235c4f1c4e697f2",
+    "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder.class": "d92993e0256be418b35ffd962f68d96ad6457020a1c8f547694c068b5e46f83d"
+  },
+  "ownedPureFiles": {
+    "PostgresCopyTextWriter": {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriter.java",
+      "sha256": "85e4fc7789155422bfb3cd98304494e936e4f0b5e8e04bcb15fc1f0ee83808f7"
+    },
+    "PostgresCopyTextEncoder": {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoder.java",
+      "sha256": "43af38a386bb4c676bd0da64e53348088a74390e96f17fd098734b863879a75e"
+    }
+  },
+  "exactFixture": {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+    "sha256": "48357e8d92a245361933a34d43e0e705f430554000b2afaff36fb36fd98ab24b"
+  },
+  "exactFixtureClasses": {
+    "dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest$3.class": "2c615827b4129b58154139bf2da509730f9ee94f43c281300d3b06f77805a934",
+    "dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest$4.class": "ace69e8e79db5ce0444d272ebaa8ff839a0e2306c191b1dd0e5a78357fd3f68b",
+    "dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest$2.class": "b3fa09d8a6419cba9e496df2cc01960ea81f0bbfddc383baf4a79255117f3e02",
+    "dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest$1.class": "4ed7fd3d50479414fe33c0dd5a03da59a3fa1d33b54c6a97fabffa6e1d8ebbe5",
+    "dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.class": "ce9f792b54810d862523247c7489f1499ba57ce71225d07917b49293e002dcfd",
+    "dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest$TrackingSink.class": "e5d90ebd9b8f344d9f406142a13c7fe20089d63d4fe82a4336ef0d5f85a4e8a8"
+  },
+  "commands": [
+    [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+      "--release",
+      "25",
+      "-g",
+      "-proc:none",
+      "-implicit:none",
+      "-encoding",
+      "UTF-8",
+      "-Xlint:all",
+      "-Werror",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41852-p0190302-memory-text-writer-current-v1/allowed:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+      "-d",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41852-p0190302-memory-text-writer-current-v1/test",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java"
+    ]
+  ],
+  "typedDependencyClosure": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41852-p0190302-memory-text-writer-current-v1/jdeps.stdout",
+    "sha256": "3a0e138108aea47394feae1dc02c619356a082d28f296289c433a1324eda0744"
+  },
+  "approvedArchive": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41736-f03-bootstrap-current-and-row-fixture-typed-fixed-v1/manifest.json",
+    "sha256": "45d93e41f5299c2c3e36017069c8f936cc04ff581093cfcd43766a279a0c11de"
+  },
+  "spec": {
+    "path": "evidence/01_PT/019_NK-MIG-001/027_COPY行streamとdataset接続・独立十五仕様.md",
+    "sha256": "fee6d8807a24272be618c553d356c062c0a853ec2ab8cda37f153bcec4effef3"
+  },
+  "independentAssertions": {
+    "goldenTwoRows": true,
+    "nullAndEmptyDiffer": true,
+    "orderedIteratorAndPartialPrefix": true,
+    "borrowedCloseAndFlushZero": true,
+    "primaryExceptionIdentity": true
+  },
+  "formalAcceptanceId": null,
+  "newProductExecution": 0,
+  "realBackendOperation": false,
+  "remaining": [
+    "Current typed quality for this writer fixture",
+    "real DB/COPY and source",
+    "F03 six-module 451"
+  ]
+}

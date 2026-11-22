@@ -1,0 +1,490 @@
+{
+  "run": "PG41850",
+  "source": "a1a02134d5bd0808a2a29d8992d890a5fd1971a8",
+  "core": "1e4e9e64830b552727043f3cb8b9435b28cba472",
+  "wbs": "WBS-F03/2-2-b",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-22T01:53:44.537484+00:00",
+  "bugs": [
+    "BUG-3515",
+    "BUG-3516"
+  ],
+  "ykt": "YKT-2796",
+  "affected": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AudioCopyDatasetTest.java",
+      "sha256": "463d263e3fb7a3a01a55e9c8f095f54718529fe5cd61d78453eb410d95dd0a06"
+    }
+  ],
+  "initial": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41848-f03-audio-dataset-fixture-static-v1/manifest.json",
+    "sha256": "d3311db989e7e2111d95004f0efb87f3c33ad46a56d3c760d0bc8ebc14267e61"
+  },
+  "sourceOwnership": "Fixed feature revision; same Production Core; product changes 0",
+  "change": [
+    "Exact checked signatures",
+    "Canonical source formatting",
+    "One JUnit fixture is now its failing memory sink’s explicit owner and freshly tested"
+  ],
+  "actualAuxMembers": {
+    "dev/codex/schubert/nk/migration/AudioFileCopyRow.class": "ea50b38127af77e325c23f0d9810232341fd2eb2e0e4b17f179d4e9bae20500f",
+    "dev/codex/schubert/nk/migration/ScenarioEntryCopyBatch.class": "85e1e2dfee1d13b7c45c3e0f4813b9f90ab335e2bbe182f51f89a99a297b2fbf",
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap.class": "e396c01d1b8c4697dce412f04195006365142d762a7f3d35cea31652850d9258",
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$FilePair.class": "d487add339f71bd42ca456dc838be7a15f2d2569f6f08b38572f8aa30212ea52",
+    "dev/codex/schubert/nk/migration/AudioCopyDataset.class": "d09917c25977312f611df8b7a5234ae3a800633132ac97747260e90cf66111f3",
+    "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap.class": "cf6890389883a8d6dc7a4033ca35a124a4796b9a4bcd239e586ab5fa5f2dd0f1",
+    "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$PlacedEntry.class": "0decb1b7b350b7d023ec0e6da08587bcfcd24c46ae109c2ad8fcce56fce760b3",
+    "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$MappedEntry.class": "07a4cc7ce7c32e6f16e5df45b85c10401eb5bce9fc8947c3a935dba5b919c9f7",
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$MappedFile.class": "447b030258eb82c86fbad715d2618b51601e7f6a5952786d812d86d04f287b6f",
+    "dev/codex/schubert/nk/migration/PostgresCopyTextWriter.class": "e498970c4ef48d9af38f4de7f0e292f32188a9da38e153d9d235c4f1c4e697f2",
+    "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap.class": "ca16026d985c464470c266e887056a88b671c3c455c7eb6a33b5a8d0ab5b62c1",
+    "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$Placement.class": "0e768edb60604b9829a724c52487391ed24c897b0625ae41414da089aea1b054",
+    "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$IdPair.class": "53e54e1f27334878352ffd5e0e222f439c01e03653de0e668e2ed7485d4dca28",
+    "dev/codex/schubert/nk/migration/ScenarioEntryCopyRow.class": "369d40e90619f69d4747f9e4d8fa821637153d1a442dd5de80736277ca1f0109",
+    "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder.class": "d92993e0256be418b35ffd962f68d96ad6457020a1c8f547694c068b5e46f83d"
+  },
+  "fixtureClasses": {
+    "dev/codex/schubert/nk/migration/AudioCopyDatasetTest$MemorySink.class": "72c683562db133450ed678c07311136d760094ab9c59d8ff34583123cdc3e376",
+    "dev/codex/schubert/nk/migration/AudioCopyDatasetTest$FailingSink.class": "78b150eb28cc658eb509833e90656d06c0627163b01003a35a729da7d1f7a4f0",
+    "dev/codex/schubert/nk/migration/AudioCopyDatasetTest.class": "bafb0464bf7a4048aaddcadce2beafbc90cf604b3f8c3887e35ab98cfb524fbd"
+  },
+  "commands": {
+    "format": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-jar",
+      "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+      "--dry-run",
+      "--set-exit-if-changed",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AudioCopyDatasetTest.java"
+    ],
+    "checkstyle": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-jar",
+      "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+      "-c",
+      "tools/quality/static/checkstyle.xml",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AudioCopyDatasetTest.java"
+    ],
+    "pmd": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-cp",
+      "/home/mini/codex/project1/work/toolchain/static-gates-20261015/record-fix-v1/pmd-record-1298.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/Saxon-HE-12.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/antlr4-runtime-4.13.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/apex-ls_2.13-6.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/apex-parser-5.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/better-files_2.13-3.9.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/checker-qual-3.55.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/common2_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/common_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/commons-lang3-3.20.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/directory-watcher-0.18.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/directory-watcher-better-files_2.13-0.18.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/error_prone_annotations-2.48.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/failureaccess-1.0.3.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/geny_2.13-0.6.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/groovy-5.1.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/gson-2.14.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/gson-extras-3.3.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/guava-33.7.1-jre.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/io_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/j2objc-annotations-3.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/java-diff-utils-4.16.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jline-native-3.29.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jline-terminal-3.29.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jna-5.12.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jsoup-1.23.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jsr250-api-1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jul-to-slf4j-1.7.36.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-build-tools-api-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-compiler-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-daemon-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-script-runtime-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-common-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-compiler-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-compiler-impl-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-jvm-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-stdlib-2.2.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-stdlib-jdk7-2.2.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-stdlib-jdk8-2.2.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-type-mapper-analyzer-0.7.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-type-mapper-model-0.7.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlinx-coroutines-core-jvm-1.8.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlinx-serialization-core-jvm-1.11.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlinx-serialization-json-jvm-1.11.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/mainargs_2.13-0.5.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/nice-xml-messages-3.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/outline-parser_2.13-2.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/parsers_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pcollections-4.0.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/picocli-4.7.7.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-ant-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-apex-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-cli-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-coco-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-core-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-cpp-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-cs-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-css-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-dart-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-designer-7.19.3.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-fortran-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-gherkin-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-go-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-groovy-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-html-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-java-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-javascript-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-jsp-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-julia-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-kotlin-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-lua-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-matlab-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-modelica-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-objectivec-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-perl-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-php-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-plsql-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-python-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-ruby-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-rust-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-scala_2.13-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-swift-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-tsql-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-velocity-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-visualforce-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-xml-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/portable-scala-reflect_2.13-1.1.3.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/progressbar-0.10.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/rhino-1.7.15.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-collection-compat_2.13-2.8.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-json-rpc-upickle-json-serializer_2.13-1.1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-json-rpc_2.13-1.1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-library-2.13.18.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-parallel-collections_2.13-1.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-reflect-2.13.18.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-xml_2.13-1.3.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scalajs-stubs_2.13-1.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/slf4j-api-1.7.36.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/slf4j-simple-1.7.36.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/sobject-types-67.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/sourcecode_2.13-0.4.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/standard-types-67.0.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/summit-ast-3.1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/trees2_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/trees_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/ujson_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upack_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upickle-core_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upickle-implicits_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upickle_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/vf-parser-2.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/xmlresolver-5.3.3-data.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/xmlresolver-5.3.3.jar",
+      "net.sourceforge.pmd.cli.PmdCli",
+      "check",
+      "--file-list",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41850-f03-audio-dataset-fixture-close-v1/sources.txt",
+      "--rulesets",
+      "tools/quality/static/pmd.xml",
+      "--use-version",
+      "java-25",
+      "--aux-classpath",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41848-f03-audio-dataset-fixture-static-v1/pure:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+      "--no-cache",
+      "--format",
+      "xml",
+      "--report-file",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41850-f03-audio-dataset-fixture-close-v1/pmd.xml"
+    ],
+    "spotbugs": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-Xmx1g",
+      "-cp",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/com/github/spotbugs/spotbugs/4.10.4/spotbugs-4.10.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-analysis/9.10.1/asm-analysis-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-util/9.10.1/asm-util-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/bcel/bcel/6.12.0/bcel-6.12.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/github/stephenc/jcip/jcip-annotations/1.0-1/jcip-annotations-1.0-1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/dom4j/dom4j/2.2.0/dom4j-2.2.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/commons/commons-lang3/3.20.0/commons-lang3-3.20.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/commons/commons-text/1.15.0/commons-text-1.15.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/github/spotbugs/spotbugs-annotations/4.10.4/spotbugs-annotations-4.10.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/jaxen/jaxen/2.0.6/jaxen-2.0.6.jar:/home/mini/codex/project1/work/toolchain/m2/repository/net/sf/saxon/Saxon-HE/12.10/Saxon-HE-12.10.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/logging/log4j/log4j-api/2.26.1/log4j-api-2.26.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.26.1/log4j-to-slf4j-2.26.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-simple/2.0.18/slf4j-simple-2.0.18.jar:/home/mini/codex/project1/work/toolchain/m2/repository/commons-io/commons-io/2.22.0/commons-io-2.22.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/xmlresolver/xmlresolver/5.3.3/xmlresolver-5.3.3.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/xmlresolver/xmlresolver/5.3.3/xmlresolver-5.3.3-data.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+      "edu.umd.cs.findbugs.FindBugs2",
+      "-effort:max",
+      "-low",
+      "-xml:withMessages",
+      "-exitcode",
+      "-auxclasspath",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41848-f03-audio-dataset-fixture-static-v1/pure:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+      "-output",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41850-f03-audio-dataset-fixture-close-v1/spotbugs.xml",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41850-f03-audio-dataset-fixture-close-v1/test"
+    ],
+    "compile": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+      "--release",
+      "25",
+      "-g",
+      "-proc:none",
+      "-implicit:none",
+      "-encoding",
+      "UTF-8",
+      "-Xlint:all",
+      "-Werror",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41848-f03-audio-dataset-fixture-static-v1/pure:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+      "-d",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41850-f03-audio-dataset-fixture-close-v1/test",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AudioCopyDatasetTest.java"
+    ]
+  },
+  "steps": {
+    "compile": {
+      "exit": 0,
+      "beganAtUTC": "2026-11-22T01:53:36.713100+00:00",
+      "terminalAtUTC": "2026-11-22T01:53:37.582789+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41850-f03-audio-dataset-fixture-close-v1/compile.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41850-f03-audio-dataset-fixture-close-v1/compile.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "format": {
+      "exit": 0,
+      "beganAtUTC": "2026-11-22T01:53:37.584144+00:00",
+      "terminalAtUTC": "2026-11-22T01:53:39.405894+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41850-f03-audio-dataset-fixture-close-v1/format.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41850-f03-audio-dataset-fixture-close-v1/format.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "checkstyle": {
+      "exit": 0,
+      "beganAtUTC": "2026-11-22T01:53:37.584473+00:00",
+      "terminalAtUTC": "2026-11-22T01:53:39.375729+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41850-f03-audio-dataset-fixture-close-v1/checkstyle.stdout",
+        "sha256": "2ee89ca49ecae1bb5b3de5ffcc8a964e605f1b1c6fbe072073a1ea4feaa4e230"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41850-f03-audio-dataset-fixture-close-v1/checkstyle.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "pmd": {
+      "exit": 4,
+      "beganAtUTC": "2026-11-22T01:53:37.585254+00:00",
+      "terminalAtUTC": "2026-11-22T01:53:42.748850+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41850-f03-audio-dataset-fixture-close-v1/pmd.stdout",
+        "sha256": "8292eba758a0c77bfbd74321eddd2c8bca012cc5dae938ffbf2440fcf1b8f2fa"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41850-f03-audio-dataset-fixture-close-v1/pmd.stderr",
+        "sha256": "7507d32090c42cece0c76d32b122c635a1f951686a2ddb8a23b9baf9f7583ef9"
+      }
+    },
+    "spotbugs": {
+      "exit": 0,
+      "beganAtUTC": "2026-11-22T01:53:37.586294+00:00",
+      "terminalAtUTC": "2026-11-22T01:53:42.436392+00:00",
+      "stdout": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41850-f03-audio-dataset-fixture-close-v1/spotbugs.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41850-f03-audio-dataset-fixture-close-v1/spotbugs.stderr",
+        "sha256": "83febadc46f214e89709b832aae077e8a743258c2778ad97727d55ed33462071"
+      }
+    }
+  },
+  "spotbugs": 0,
+  "spotbugsErrors": {
+    "errors": "0",
+    "missingClasses": "0"
+  },
+  "pmdRaw": 12,
+  "pmdApplicable": 0,
+  "pmdUnclassified": 0,
+  "pmdProcessingErrors": 0,
+  "removedOldPMDSourceSite": 278,
+  "pmdEachDisposition": [
+    {
+      "current": {
+        "file": "AudioCopyDatasetTest.java",
+        "rule": "CloseResource",
+        "line": 56,
+        "end": 56
+      },
+      "prior": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AudioCopyDatasetTest.java",
+        "rule": "CloseResource",
+        "line": "54",
+        "reason": "This exact source-owned synthetic sink is ByteArrayOutputStream plus close/flush memory flags, or OutputStream whose write only throws a fixed supplied synthetic IOException. It constructs no file/socket/driver/native/OS handle, retains no external resource. The test must prove the production borrower never calls close/flush, including failure; wrapping it in try-with-resources would erase this ownership assertion.",
+        "disposition": "NOT_APPLICABLE",
+        "message": "Ensure that resources like this MemorySink object are closed after use"
+      },
+      "verbatimLinesSha": "97cd4f3bca7235e76a8a8c7201aa51a06b09ed6312a42ad286ae9b8a1cc300f5"
+    },
+    {
+      "current": {
+        "file": "AudioCopyDatasetTest.java",
+        "rule": "CloseResource",
+        "line": 57,
+        "end": 57
+      },
+      "prior": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AudioCopyDatasetTest.java",
+        "rule": "CloseResource",
+        "line": "55",
+        "reason": "This exact source-owned synthetic sink is ByteArrayOutputStream plus close/flush memory flags, or OutputStream whose write only throws a fixed supplied synthetic IOException. It constructs no file/socket/driver/native/OS handle, retains no external resource. The test must prove the production borrower never calls close/flush, including failure; wrapping it in try-with-resources would erase this ownership assertion.",
+        "disposition": "NOT_APPLICABLE",
+        "message": "Ensure that resources like this MemorySink object are closed after use"
+      },
+      "verbatimLinesSha": "5c646aa840cb84b7f078081b62d82b86da7c8ab7d23e36a58618e82eb9fd8e87"
+    },
+    {
+      "current": {
+        "file": "AudioCopyDatasetTest.java",
+        "rule": "CloseResource",
+        "line": 74,
+        "end": 74
+      },
+      "prior": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AudioCopyDatasetTest.java",
+        "rule": "CloseResource",
+        "line": "72",
+        "reason": "This exact source-owned synthetic sink is ByteArrayOutputStream plus close/flush memory flags, or OutputStream whose write only throws a fixed supplied synthetic IOException. It constructs no file/socket/driver/native/OS handle, retains no external resource. The test must prove the production borrower never calls close/flush, including failure; wrapping it in try-with-resources would erase this ownership assertion.",
+        "disposition": "NOT_APPLICABLE",
+        "message": "Ensure that resources like this MemorySink object are closed after use"
+      },
+      "verbatimLinesSha": "55ec5f988fd7b6ad421e047c67426bc502a05837bc40a761c189eb084eac7a91"
+    },
+    {
+      "current": {
+        "file": "AudioCopyDatasetTest.java",
+        "rule": "CloseResource",
+        "line": 80,
+        "end": 80
+      },
+      "prior": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AudioCopyDatasetTest.java",
+        "rule": "CloseResource",
+        "line": "78",
+        "reason": "This exact source-owned synthetic sink is ByteArrayOutputStream plus close/flush memory flags, or OutputStream whose write only throws a fixed supplied synthetic IOException. It constructs no file/socket/driver/native/OS handle, retains no external resource. The test must prove the production borrower never calls close/flush, including failure; wrapping it in try-with-resources would erase this ownership assertion.",
+        "disposition": "NOT_APPLICABLE",
+        "message": "Ensure that resources like this MemorySink object are closed after use"
+      },
+      "verbatimLinesSha": "a279ecb9d3626f3984bfb760ed0aa198d9ba76788cdf41d21a8b002df2dcfcac"
+    },
+    {
+      "current": {
+        "file": "AudioCopyDatasetTest.java",
+        "rule": "CloseResource",
+        "line": 269,
+        "end": 269
+      },
+      "prior": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AudioCopyDatasetTest.java",
+        "rule": "CloseResource",
+        "line": "267",
+        "reason": "This exact source-owned synthetic sink is ByteArrayOutputStream plus close/flush memory flags, or OutputStream whose write only throws a fixed supplied synthetic IOException. It constructs no file/socket/driver/native/OS handle, retains no external resource. The test must prove the production borrower never calls close/flush, including failure; wrapping it in try-with-resources would erase this ownership assertion.",
+        "disposition": "NOT_APPLICABLE",
+        "message": "Ensure that resources like this MemorySink object are closed after use"
+      },
+      "verbatimLinesSha": "a279ecb9d3626f3984bfb760ed0aa198d9ba76788cdf41d21a8b002df2dcfcac"
+    },
+    {
+      "current": {
+        "file": "AudioCopyDatasetTest.java",
+        "rule": "CloseResource",
+        "line": 290,
+        "end": 290
+      },
+      "prior": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AudioCopyDatasetTest.java",
+        "rule": "CloseResource",
+        "line": "283",
+        "reason": "This exact source-owned synthetic sink is ByteArrayOutputStream plus close/flush memory flags, or OutputStream whose write only throws a fixed supplied synthetic IOException. It constructs no file/socket/driver/native/OS handle, retains no external resource. The test must prove the production borrower never calls close/flush, including failure; wrapping it in try-with-resources would erase this ownership assertion.",
+        "disposition": "NOT_APPLICABLE",
+        "message": "Ensure that resources like this MemorySink object are closed after use"
+      },
+      "verbatimLinesSha": "6d72558884f51acaf789c0ed5937cf010f546b5d8d16cb3e04a50a84c5f77c68"
+    },
+    {
+      "current": {
+        "file": "AudioCopyDatasetTest.java",
+        "rule": "CloseResource",
+        "line": 337,
+        "end": 337
+      },
+      "prior": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AudioCopyDatasetTest.java",
+        "rule": "CloseResource",
+        "line": "329",
+        "reason": "This exact standalone JUnit site owns8 workers for64 immutable dataset memory-stream golden assertions, not a managed J2EE webapp. Every Future joins5s; finally shutdownNow and assert awaitTermination10s prove finite termination without unbounded implicit close. No DB/driver/file/socket/native/Root/service action and no blanket Test exclusion.",
+        "disposition": "NOT_APPLICABLE",
+        "message": "Ensure that resources like this ExecutorService object are closed after use"
+      },
+      "verbatimLinesSha": "3292bf1a5ad5078588fc3646cc63c6632ef34784c864b511a89d295716deaef9"
+    },
+    {
+      "current": {
+        "file": "AudioCopyDatasetTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 337,
+        "end": 337
+      },
+      "prior": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AudioCopyDatasetTest.java",
+        "rule": "DoNotUseThreads",
+        "line": "329",
+        "reason": "This exact standalone JUnit site owns8 workers for64 immutable dataset memory-stream golden assertions, not a managed J2EE webapp. Every Future joins5s; finally shutdownNow and assert awaitTermination10s prove finite termination without unbounded implicit close. No DB/driver/file/socket/native/Root/service action and no blanket Test exclusion.",
+        "disposition": "NOT_APPLICABLE",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "verbatimLinesSha": "3292bf1a5ad5078588fc3646cc63c6632ef34784c864b511a89d295716deaef9"
+    },
+    {
+      "current": {
+        "file": "AudioCopyDatasetTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 342,
+        "end": 349
+      },
+      "prior": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AudioCopyDatasetTest.java",
+        "rule": "DoNotUseThreads",
+        "line": "334",
+        "reason": "This exact standalone JUnit site owns8 workers for64 immutable dataset memory-stream golden assertions, not a managed J2EE webapp. Every Future joins5s; finally shutdownNow and assert awaitTermination10s prove finite termination without unbounded implicit close. No DB/driver/file/socket/native/Root/service action and no blanket Test exclusion.",
+        "disposition": "NOT_APPLICABLE",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "verbatimLinesSha": "1a321c5dd12f03716f34ea0068ea5371e4b599ff1e6d0e1f3c1965cae36a1cc7"
+    },
+    {
+      "current": {
+        "file": "AudioCopyDatasetTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 356,
+        "end": 356
+      },
+      "prior": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AudioCopyDatasetTest.java",
+        "rule": "DoNotUseThreads",
+        "line": "348",
+        "reason": "This exact standalone JUnit site owns8 workers for64 immutable dataset memory-stream golden assertions, not a managed J2EE webapp. Every Future joins5s; finally shutdownNow and assert awaitTermination10s prove finite termination without unbounded implicit close. No DB/driver/file/socket/native/Root/service action and no blanket Test exclusion.",
+        "disposition": "NOT_APPLICABLE",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "verbatimLinesSha": "39db74392ac1dfab61d6cee2b4935e25623be2db72f97fdbe5826d6ede7d79cc"
+    },
+    {
+      "current": {
+        "file": "AudioCopyDatasetTest.java",
+        "rule": "DoNotUseThreads",
+        "line": 357,
+        "end": 357
+      },
+      "prior": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AudioCopyDatasetTest.java",
+        "rule": "DoNotUseThreads",
+        "line": "349",
+        "reason": "This exact standalone JUnit site owns8 workers for64 immutable dataset memory-stream golden assertions, not a managed J2EE webapp. Every Future joins5s; finally shutdownNow and assert awaitTermination10s prove finite termination without unbounded implicit close. No DB/driver/file/socket/native/Root/service action and no blanket Test exclusion.",
+        "disposition": "NOT_APPLICABLE",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "verbatimLinesSha": "24d24d21372fbed7b29cce34093963104c87ccb5a0f8d673607bdbb1244185c9"
+    },
+    {
+      "current": {
+        "file": "AudioCopyDatasetTest.java",
+        "rule": "CloseResource",
+        "line": 366,
+        "end": 366
+      },
+      "prior": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AudioCopyDatasetTest.java",
+        "rule": "CloseResource",
+        "line": "358",
+        "reason": "This exact source-owned synthetic sink is ByteArrayOutputStream plus close/flush memory flags, or OutputStream whose write only throws a fixed supplied synthetic IOException. It constructs no file/socket/driver/native/OS handle, retains no external resource. The test must prove the production borrower never calls close/flush, including failure; wrapping it in try-with-resources would erase this ownership assertion.",
+        "disposition": "NOT_APPLICABLE",
+        "message": "Ensure that resources like this MemorySink object are closed after use"
+      },
+      "verbatimLinesSha": "a279ecb9d3626f3984bfb760ed0aa198d9ba76788cdf41d21a8b002df2dcfcac"
+    }
+  ],
+  "priorDispositionAuthority": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33288-mapverify976-preflight-v5/manifest.json",
+    "sha256": "df5fbcafa9e52f25e124a7ccdff12ffea987128443a99aa7b9d9b84bdd841452"
+  },
+  "normalizedAllClassDeclarationsAndInstructions": {
+    "dev/codex/schubert/nk/migration/AudioCopyDatasetTest$MemorySink.class": "988fbbd52ca026561897ad26807d43faf5ac737c1fe3bc58c976dc0a5e17a209",
+    "dev/codex/schubert/nk/migration/AudioCopyDatasetTest$FailingSink.class": "f38c7dc97bc0f750b0a5c37ddcde097bad5b9af9e29b77bf34a42fbe0c552a22",
+    "dev/codex/schubert/nk/migration/AudioCopyDatasetTest.class": "1ce703302a30f5ee6d536daae6d22b8a3176e25a184cb18037ed9292ec27bbb0"
+  },
+  "reports": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41850-f03-audio-dataset-fixture-close-v1/pmd.xml",
+      "sha256": "7c95f2d8636d2344eb4282f704571845c312bd467f379ebd3e0bea0f0f05a173"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41850-f03-audio-dataset-fixture-close-v1/spotbugs.xml",
+      "sha256": "e500dc706dbd6f1fc9bd019811a9a76b4e84182d25e8fece38f95bb252444992"
+    }
+  ],
+  "existingRuntimeEvidenceReused": true,
+  "runtimeEvidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41846-p0190302-audio-join-current-proof-v1/manifest.json",
+      "sha256": "bda771b7ddfc47a7260f22ced2b1e2cba60ed221aedad6a65494e137a111e46e"
+    }
+  ],
+  "exactHistoricalCases": {
+    "AudioCopyDatasetTest": [
+      "bothUnknownReferenceDirectionsAreRejected()",
+      "bothOutputBoundariesRejectNullWriterOrSinkAndNeverCloseOrFlush()",
+      "inputAndReturnedCollectionsHaveDeepIndependentOwnership()",
+      "uniqueOrderDomainHasExactly999PossibleLinksPerEntryType()",
+      "declarationOrderAndPositiveTargetExtremesAreNotRenumbered()",
+      "emptyAudioOnlyAndEntryOnlyDeclareNoImaginaryLinks()",
+      "allThreeSourcesHaveOneCommonTransactionTimestamp()",
+      "fixedRedactionAndIndependentSuccessDoNotRetainRejectedValues()",
+      "audioCompositeForeignKeyIncludesTheDeclaredGame()",
+      "storagePathUniquenessIncludesGameRatherThanChangingPaths()",
+      "finiteWorkersObserveIndependentGoldenStreamsFromTheImmutableDataset()",
+      "linkColumnGrammarIsIndependentOfAnyAvailableReference()",
+      "nullableInputsAndElementsFailExplicitlyWithoutBorrowingAnything()",
+      "entryCompositeForeignKeyIncludesTheDeclaredGame()",
+      "linkTimestampsHaveIndependentCanonicalUtcMicrosecondBoundaries()",
+      "audioPrimaryIdsAreGloballyUniqueAcrossGamesAndPaths()",
+      "uniqueDisplayOrderIncludesEntryAndType()",
+      "primaryKeyIncludesTypeButRejectsSameEntryAudioTypeTwice()",
+      "independentAudioAndLinkGoldenHaveExactSeparateStreams()"
+    ]
+  },
+  "selectedJUnit": {
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-Dfile.encoding=UTF-8",
+      "-Duser.timezone=Asia/Tokyo",
+      "-Djunit.jupiter.extensions.autodetection.enabled=false",
+      "-jar",
+      "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "execute",
+      "--disable-banner",
+      "--class-path",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41850-f03-audio-dataset-fixture-close-v1/test:/home/mini/codex/project1/work/pgpt-runs/PG379/PG41848-f03-audio-dataset-fixture-static-v1/pure:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+      "--select-method",
+      "dev.codex.schubert.nk.migration.AudioCopyDatasetTest#bothOriginalIoFailuresAreRetainedWithoutClosingOrMutatingDataset",
+      "--fail-if-no-tests",
+      "--reports-dir",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41850-f03-audio-dataset-fixture-close-v1/junit"
+    ],
+    "begin": "2026-11-22T01:53:43.930149+00:00",
+    "end": "2026-11-22T01:53:44.537108+00:00",
+    "actualExit": 0,
+    "passed": 1,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "notRunInSelectedScope": 0,
+    "originalXML": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG41850-f03-audio-dataset-fixture-close-v1/junit/TEST-junit-jupiter.xml",
+      "sha256": "5a5b6339fdc437ca253e0e9e505267facacc1c0eda643d06ab38d97a4bb6f262"
+    },
+    "expectation": "same synthetic IOException for both audio/link paths; borrowed closes/flushes zero; owner close one; fresh exact link bytes"
+  },
+  "changedMethod": "bothOriginalIoFailuresAreRetainedWithoutClosingOrMutatingDataset",
+  "newlyExecutedProductTests": 1,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
