@@ -1,0 +1,126 @@
+{
+  "run": "PG43898",
+  "source": "f1f5a32d3b7d64f59eef46a9bab86225c8774506",
+  "productionCore": "458fe8fe258b8c94f388b0bc547d0899a74b37d2",
+  "terminalAtUTC": "2026-11-23T20:09:22.006994+00:00",
+  "wbs": [
+    "WBS-F03/2-2-b",
+    "WBS-P003-05",
+    "WBS-F02-b-a"
+  ],
+  "bug": [
+    "BUG-3751",
+    "BUG-3233"
+  ],
+  "ssc": "SSC-461",
+  "fixture": {
+    "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/OwnedDirectoryCallbackValueTest.java",
+    "sha256": "a18e64573cf9cec639c31f70fff0439f3c4ef270aadf81160b32af8202ad4d23"
+  },
+  "oracle": {
+    "path": "evidence/01_PT/003_NK-PRO-003/4150_Storageファイルcallback固定診断単体仕様.md",
+    "sha256": "fcb9e91b59062f9dc9a649e13c52cf8005bdc36afd2eb9ca52d51ae3d0050ca7"
+  },
+  "cases": [
+    {
+      "id": "PT-STORAGE-CB001",
+      "method": "callback001SuccessKeepsTheResultAndDirectoryOwnership"
+    },
+    {
+      "id": "PT-STORAGE-CB002",
+      "method": "callback002ExpectedFileFailureCategoriesDropProviderDiagnostics"
+    },
+    {
+      "id": "PT-STORAGE-CB003",
+      "method": "callback003EachConversionPropagatesTheOriginalFatalBeforeRedaction"
+    }
+  ],
+  "sourceInputs": "a24ff61c25ac27746921f1fabbf66c63a957f7db",
+  "packagedStorage": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+    "sha256": "ec7e4054459901003d0c3c4e0e186560f37cd77e0e6a1f26b9a78c2075186ebe"
+  },
+  "admittedPhysical": {
+    "dev/codex/schubert/nk/storage/OwnedTransferDirectory.class": "9257dff43ad220edd72dc3e6e888f4ea4214e1bb73876f1a49290ff56e0bd236",
+    "dev/codex/schubert/nk/storage/OwnedTransferDirectory$FileOperation.class": "595741ff5fc5df1ed2af49e461475bee23c9839d335120859a08ba878052c5cf",
+    "dev/codex/schubert/nk/storage/OwnedTransferDirectory$EntryOpen.class": "66fca1e6ce64219b9eb7e59a0f4a0b330be44d0dd735f1f6768677279fb751b3",
+    "dev/codex/schubert/nk/storage/OwnedTransferDirectory$EntryHandle.class": "7946462e8c196341028d3c82fc80f827816eee636131d3b4e3f84396b1b3f28b",
+    "dev/codex/schubert/nk/storage/DirectoryCalls.class": "a7a18b1d98070fb3fed529213827e46205c3c45e0bdefc280039d398c0bdd333",
+    "dev/codex/schubert/nk/storage/ResourceScope.class": "022bdb594175f51e2554e42564db54015f675beba0c11c781b89aa9a4c2d13d2",
+    "dev/codex/schubert/nk/storage/ResourceScope$Acquire.class": "e50a2e03b678c0f47f0d00190542b7f1e8f631acb27055d49e4c969b1cd31a91",
+    "dev/codex/schubert/nk/storage/ResourceScope$Action.class": "3d6e9dc674275dce70291887b24fbb95cc15617a31ac49a6328cff3f2f5e3291",
+    "dev/codex/schubert/nk/storage/ResourceScope$OwnedAction.class": "5942d0b8d678b791ae99e042d65552ebcd657030b6637bb80754d36aaf83bf83",
+    "dev/codex/schubert/nk/storage/ResourceScope$Release.class": "c9f519c33f71a3eb4f120bcd6f22592c7b5efc3ff05164591f904b98d508f96c",
+    "dev/codex/schubert/nk/storage/StorageIoException.class": "85f86d702a139f126afdd72ca8e221583db824f159351ecd9f07b15fcc569c88",
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason.class": "a113bd839666ee3a4038dd3703af0cfb772282278cc6fbfe1e3cccf98286ffec"
+  },
+  "executed": {
+    "tests": 3,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "codes": {
+    "compile": 0,
+    "unit": 0,
+    "raw": 0
+  },
+  "coverage": {
+    "targets": {
+      "atDirectory": [
+        "BRANCH:0:0",
+        "LINE:0:6",
+        "COMPLEXITY:0:1",
+        "METHOD:0:1"
+      ],
+      "execute": [
+        "BRANCH:0:0",
+        "LINE:0:10",
+        "COMPLEXITY:0:1",
+        "METHOD:0:1"
+      ]
+    },
+    "wholeClass": "CLASS\tdev/codex/schubert/nk/storage/OwnedTransferDirectory\teca929c0d1b659c5\ttrue\t222\t49\tINSTRUCTION:936:116\tBRANCH:38:2\tLINE:199:35\tCOMPLEXITY:61:6\tMETHOD:41:6\tCLASS:0:1"
+  },
+  "outputs": {
+    "compileAndUnit": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43898-storage-owned-directory-fake-callback-three-v2/terminal.json",
+      "sha256": "586f104327f9dcb4285e0dbb21ded9d289e07c0d0500e0d38aef60d13ae2ba57"
+    },
+    "static": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43898-storage-owned-directory-fake-callback-three-v2/fixture-style-terminal.json",
+      "sha256": "90d1275a6665f1fd6cb43b50788e2731c25dc5726149ac04ce5f502d5c3716ec"
+    },
+    "raw": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43898-storage-owned-directory-fake-callback-three-v2/raw.out",
+      "sha256": "7f73c33bcb6addc013634ac82eae89314dc1fa2cdf9f702cd47b6f6e746d45a6"
+    },
+    "junit": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43898-storage-owned-directory-fake-callback-three-v2/reports/TEST-junit-jupiter.xml",
+      "sha256": "cfe6c118395e37d30e62a8fc0aefbccf42f74f994b64e920b1652969b09fece1"
+    },
+    "exec": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43898-storage-owned-directory-fake-callback-three-v2/unit.exec",
+      "sha256": "3f149131fd21b262e510a5b3388719cf5390da932597da78c551bad92e292646"
+    }
+  },
+  "originalBeforeFormat": {
+    "source": "a8214647e6d95e176a941ed648b8109ae82d0f22",
+    "historicalThreePassed": true,
+    "styleExit": 1,
+    "terminal": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43898-storage-owned-directory-fake-callback-three/terminal.json",
+      "sha256": "f9fb9627e1bf9758be0a8eafb56b02684e8540e73b38b6c79abe708f9e0afd9f"
+    },
+    "style": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43898-storage-owned-directory-fake-callback-three/fixture-style-terminal.json",
+      "sha256": "cf4394036308f9efc7359b9f4db30d81f2a1d4c4e6fab4d70d24a27bacc6b0e6"
+    }
+  },
+  "realIo": false,
+  "formalAcceptanceId": null,
+  "remaining": [
+    "Storage JDBC physical dependency stays until old one-argument entries and all caller evidence can be migrated",
+    "Normal format and scoped Checkstyle achieved; same-source six-module 451 and native lifecycle outstanding"
+  ]
+}
