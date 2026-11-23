@@ -1,0 +1,77 @@
+{
+  "eventId": "PGPT-20261008-9429",
+  "groupId": "p02003-current-offline-comparison-jar-PG43728",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-23T15:17:39+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 80,
+      "remainingPercent": 20,
+      "resetsAt": 1795879771,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "source": "996cf1491fe75d5c73f2714b9b0f1e59b4b00093",
+    "productionCoreMain": "98a8f53578cab17d9b67b1a16218179d39d4bc8f",
+    "canonicalDesignSource": "e8cd2907eda6cd5a2ee43ed87d7837f613b3ac15",
+    "run": "PG43728",
+    "workCategory": "REVIEW",
+    "managementWorkIds": [
+      "WBS-P020-01.03/2"
+    ],
+    "previousCheckpoint": "3983/PG43726",
+    "planRow": {
+      "新版ID": "WBS-P020-01.03/2",
+      "第58版ID": "WBS-P020-01.03/2",
+      "費用主担当項目": "P020-01",
+      "計画窓": "繰越",
+      "予定期間・週末": "2027-01-17までの計画週",
+      "作業・成果物": "CHR-G01～G06工具gate/manifest/source契約（各case実行はCHR）／同source証拠による受入判定",
+      "先行ID・着手条件": "WBS-P020-01.03/1、閉/WBS-P020-01.02",
+      "担当": "環境・比較担当",
+      "旧短期残pp": "0.488",
+      "改訂残pp": "0.488",
+      "終了条件": "CHR-G01～G06工具gate/manifest/source契約（各case実行はCHR）の対象別完了記録を確認",
+      "元項目の正式受入に必要な証拠": "harukaの現所有を確認し、FileStore・実ブラウザ・Current/NK双方の個別DIFを記録。",
+      "参照する元項目": "P020-01",
+      "lineNumber": 57
+    },
+    "currentPlan": [
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/11月22日_PGPT再開実行計画.txt",
+        "sha256": "80b9fdc306f664b9c03901a4bdfb34cf66997879676204cfa969858fd68a4016"
+      },
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/短期実行WBS.tsv",
+        "sha256": "a6efedcd63b4ef3bb1d133d939b0ddd7dc4b0147988ac33d668282a25c999527"
+      }
+    ],
+    "startScope": {
+      "workCategory": "REVIEW",
+      "work": "同候補の比較工具Mainだけから正規Maven JARを生成し、PG43726の17使用物理と差・ABIを個別照合。",
+      "startDependency": "PG41018通常包装の選択条件と現POMを照合。比較工具のみ。六製品・試験・比較実業務・FileStoreは起動せず、閉/WBS-P020-01.02を要する判定は保留。",
+      "endCriterion": "正規包装終端・依存提案・各使用型の収録/byte/CRCまたは明示差。実FileStore/実CHR/全451に加算しない。"
+    },
+    "groupCapPp": 0.85,
+    "estimateAtGroupStartPp": {
+      "low": 0,
+      "base": 0.32,
+      "high": 0.85
+    },
+    "completedOriginalRowPricePp": 0,
+    "sourceOwnership": "LOCAL_DEV_FOUNDATION_TRACKED_SNAPSHOT",
+    "knownOwnedRunInProgress": 0,
+    "costRevision": "PMO-remaining-v3-20261010",
+    "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "actualAllocatedPp": null
+  }
+}
