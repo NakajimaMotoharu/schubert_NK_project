@@ -1,0 +1,59 @@
+{
+  "run": "PG43558",
+  "source": "0207cd92c32aa75c9e540e1f6b9423722eefe8ff",
+  "terminalAtUTC": "2026-11-23T10:26:04.303436+00:00",
+  "fixture": "LOCAL TEMPORARY WORKDIR AND RECORDING MAVEN STUB ONLY",
+  "environment": "CDPATH points at the working directory; the same directory name is supplied once relative and once absolute",
+  "tools": {
+    "protocol": {
+      "script": {
+        "path": "tools/quality/verify_protocol_ci.sh",
+        "sha256": "639709fed393cca232bc26e723c089375908fa5a6f88e033a70973359f545e5b"
+      },
+      "states": {
+        "absolute": {
+          "exit": 0,
+          "repoArgumentCount": 1,
+          "exactSelectedCanonicalPath": true,
+          "repositoryArgumentHasNewline": false
+        },
+        "literal_relative": {
+          "exit": 0,
+          "repoArgumentCount": 1,
+          "exactSelectedCanonicalPath": false,
+          "repositoryArgumentHasNewline": true
+        }
+      }
+    },
+    "sbom": {
+      "script": {
+        "path": "tools/quality/generate_maven_sbom.sh",
+        "sha256": "6e90cd2eb2db7ab27a4d55593f01dd75d2340ef285976bf4073114e82053a2ac"
+      },
+      "states": {
+        "absolute": {
+          "exit": 0,
+          "repoArgumentCount": 1,
+          "exactSelectedCanonicalPath": true,
+          "repositoryArgumentHasNewline": false
+        },
+        "literal_relative": {
+          "exit": 0,
+          "repoArgumentCount": 1,
+          "exactSelectedCanonicalPath": false,
+          "repositoryArgumentHasNewline": true
+        }
+      }
+    }
+  },
+  "actualMaven": false,
+  "network": false,
+  "raw": {
+    "path": "../pgpt-runs/PG379/PG43558-release-cache-path-contract-v1/before.json",
+    "sha256": "8c288dd439293f6a3ee91d2ca84b14002a076ab4c147585748eee455a4ec47a7"
+  },
+  "expected": "one canonical path matching the explicitly selected local cache",
+  "actual": "both wrappers receive a newline-separated duplicate for their relative argument when CDPATH is set",
+  "result": "TWO_LOCAL_CONTRACT_FAILURES_CONFIRMED",
+  "formalAcceptanceId": null
+}
