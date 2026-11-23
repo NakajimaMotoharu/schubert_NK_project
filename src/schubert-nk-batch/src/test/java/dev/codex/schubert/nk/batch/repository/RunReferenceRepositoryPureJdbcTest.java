@@ -24,6 +24,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 import org.junit.jupiter.api.Test;
 
 /** NK-DAT-001; DAT009/OPS009/UI251/SS332; RRF-PURE-001..009; no database or native calls. */
@@ -126,11 +128,14 @@ final class RunReferenceRepositoryPureJdbcTest {
     var fixture = new Fixture();
     assertThrows(NullPointerException.class, () -> fixture.read(null));
     assertTrue(fixture.events.isEmpty());
-    for (int mode = 0; mode < 3; mode++) {
+    var invalidSettings =
+        List.<Consumer<Fixture>>of(
+            input -> input.autoCommit = true,
+            input -> input.readOnly = true,
+            input -> input.isolation = Connection.TRANSACTION_SERIALIZABLE);
+    for (var setting : invalidSettings) {
       var invalid = new Fixture();
-      if (mode == 0) invalid.autoCommit = true;
-      if (mode == 1) invalid.readOnly = true;
-      if (mode == 2) invalid.isolation = Connection.TRANSACTION_SERIALIZABLE;
+      setting.accept(invalid);
       redacted(() -> invalid.read(RUN));
       assertFalse(invalid.statementAcquired);
       invalid.closed();
@@ -156,17 +161,28 @@ final class RunReferenceRepositoryPureJdbcTest {
 
   @Test
   void missingProjectionAndCardinality() {
-    for (int mode = 0; mode < 9; mode++) {
+    var invalidResults =
+        List.<Consumer<Fixture>>of(
+            input -> input.nullStatement = true,
+            input -> input.nullRow = true,
+            input -> input.rowCount = 0,
+            input -> input.rowCount = 2,
+            input -> input.values = new Boolean[] {false, false, false, false});
+    for (var result : invalidResults) {
       var fixture = new Fixture();
-      if (mode == 0) fixture.nullStatement = true;
-      if (mode == 1) fixture.nullRow = true;
-      if (mode == 2) fixture.rowCount = 0;
-      if (mode == 3) fixture.rowCount = 2;
-      if (mode == 4) fixture.values = new Boolean[] {false, false, false, false};
-      if (mode >= 5) fixture.values[mode - 5] = null;
-      redacted(() -> fixture.read(RUN));
-      fixture.closed();
+      result.accept(fixture);
+      assertProjectionRejected(fixture);
     }
+    for (int column = 0; column < COLUMNS.size(); column++) {
+      var fixture = new Fixture();
+      fixture.values[column] = null;
+      assertProjectionRejected(fixture);
+    }
+  }
+
+  private static void assertProjectionRejected(Fixture fixture) {
+    redacted(() -> fixture.read(RUN));
+    fixture.closed();
   }
 
   @Test
@@ -225,13 +241,16 @@ final class RunReferenceRepositoryPureJdbcTest {
 
   @Test
   void fatalProviderGraphIsNotDiscarded() {
-    for (int edge = 0; edge < 3; edge++) {
+    var edges =
+        List.<BiConsumer<SQLException, AssertionError>>of(
+            SQLException::initCause,
+            SQLException::addSuppressed,
+            (sql, fatal) -> sql.setNextException(new SQLException("next", fatal)));
+    for (var edge : edges) {
       var fixture = new Fixture();
       var fatal = new AssertionError("fatal graph");
       var sql = new SQLException("provider detail");
-      if (edge == 0) sql.initCause(fatal);
-      if (edge == 1) sql.addSuppressed(fatal);
-      if (edge == 2) sql.setNextException(new SQLException("next", fatal));
+      edge.accept(sql, fatal);
       fixture.fail(ROW_NEXT, 1, sql);
       assertSame(fatal, assertThrows(AssertionError.class, () -> fixture.read(RUN)));
       fixture.closed();
