@@ -1,0 +1,217 @@
+{
+  "run": "PG43340-current-storage-reason-one-v1",
+  "source": "5c011d944e5b5c41ee3cf2f0cba1620fd1526a69",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-23T04:49:53.987953+00:00",
+  "actualExit": 0,
+  "sourceInput": {
+    "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageReasonValueContractTest.java",
+    "sha256": "352483829274800db29d48ca4892395d9afd89b9d26cd639b2d38bfbc20109fe"
+  },
+  "currentArtifact": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+    "sha256": "ec7e4054459901003d0c3c4e0e186560f37cd77e0e6a1f26b9a78c2075186ebe"
+  },
+  "toolInputs": [
+    {
+      "path": "tools/quality/jacoco/UnfilteredCodeMeasurement.java",
+      "sha256": "5f97aceb8b7f8eeb3b6c81495105e7b05435b8a82204d1850ed993e0fd639b5f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar",
+      "sha256": "fb5b0036a0899ea97edfa0fc2c7985b55f3f7c5695028163e5e60d4f3cf6075d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+      "sha256": "ade1e0fdb4cd80d8537b57c6edb70a1360c47fdc518c20c65314517479bc4d0d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar",
+      "sha256": "ed825d10ab1399c8c0cb669e688cf0c8c82629b4c8399b58352b68e92ca10fcb"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar",
+      "sha256": "6d0abefb7cbf972ea16edb37ec14835372505063a45f976ab7ea889ed9497895"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+      "sha256": "3dfb0d5b6a106cd40b5b250e39935fbf2f927f4477546a5369a3ac609cf0506b"
+    }
+  ],
+  "exactPhysicalInputs": [
+    {
+      "entry": "dev/codex/schubert/nk/storage/StorageIoException.class",
+      "sha256": "85f86d702a139f126afdd72ca8e221583db824f159351ecd9f07b15fcc569c88"
+    },
+    {
+      "entry": "dev/codex/schubert/nk/storage/StorageIoException$Reason.class",
+      "sha256": "a113bd839666ee3a4038dd3703af0cfb772282278cc6fbfe1e3cccf98286ffec"
+    }
+  ],
+  "commands": {
+    "compile": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+      "--release",
+      "25",
+      "-encoding",
+      "UTF-8",
+      "-Xlint:all",
+      "-Werror",
+      "-proc:none",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43340-current-storage-reason-one-v1/two:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "-d",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43340-current-storage-reason-one-v1/test-classes",
+      "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageReasonValueContractTest.java"
+    ],
+    "pt": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/PG43340-current-storage-reason-one-v1/selected.exec,append=false,sessionid=PG43340-REASON001,includes=dev.codex.schubert.nk.storage.StorageIoException*",
+      "-jar",
+      "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "execute",
+      "--class-path",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43340-current-storage-reason-one-v1/two:/home/mini/codex/project1/work/pgpt-runs/PG379/PG43340-current-storage-reason-one-v1/test-classes",
+      "--select-method",
+      "dev.codex.schubert.nk.storage.StorageReasonValueContractTest#reason001ClosedCatalogFactoryAndRedactedFailureKeepTheirIndependentLiteralContract",
+      "--reports-dir",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43340-current-storage-reason-one-v1/xml",
+      "--details",
+      "summary",
+      "--disable-banner",
+      "--fail-if-no-tests"
+    ],
+    "measure_compile": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+      "--release",
+      "25",
+      "-proc:none",
+      "-cp",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+      "-d",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43340-current-storage-reason-one-v1/measure-classes",
+      "tools/quality/jacoco/UnfilteredCodeMeasurement.java"
+    ],
+    "measure": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43340-current-storage-reason-one-v1/measure-classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+      "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+      "--strict-original-exec",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43340-current-storage-reason-one-v1/selected.exec",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43340-current-storage-reason-one-v1/two/dev/codex/schubert/nk/storage/StorageIoException.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43340-current-storage-reason-one-v1/two/dev/codex/schubert/nk/storage/StorageIoException$Reason.class"
+    ]
+  },
+  "original": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41914-f03-storage-value-reason-current-v1/manifest.json",
+    "sha256": "f5a4f59e6daeba948f5f7c165d64d6d067182347fdec9e31c9ab16a8310f0d82"
+  },
+  "lineage": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43310-f02-storage-extra-edge-exact-current-v1/manifest.json",
+    "sha256": "26361425ee8ab4c71df13b85210af37805d71a73fd592c6dd592cd7a6babeeff"
+  },
+  "testId": "PT-STORAGE-REASON001",
+  "currentExecution": {
+    "tests": 1,
+    "success": 1,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "definitionsAdded": 0,
+    "xml": {
+      "path": "../pgpt-runs/PG379/PG43340-current-storage-reason-one-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "a61b51a529c64e7760c121649a2689133cff498c394d9d0d4f13249c1dd8b89a"
+    }
+  },
+  "expected": [
+    "literal reason catalog/order",
+    "constructor and getter",
+    "static public error description; empty cause/suppressed",
+    "defensive array copy",
+    "null and unknown input checks"
+  ],
+  "coverage": {
+    "sourceOfReport": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43340-current-storage-reason-one-v1/coverage-unfiltered.tsv",
+      "sha256": "b2aa9fd8883d57c94c9f3e4e05c2cc076b906e190f5af061108165b0794c2025"
+    },
+    "exec": {
+      "path": "../pgpt-runs/PG379/PG43340-current-storage-reason-one-v1/selected.exec",
+      "sha256": "4957840b2a6587d4fbf37b5e99fe0f31ac6efcbbf604c4b73519fd4a7bb32683"
+    },
+    "singleSession": true,
+    "independentCrcAndProbeMatch": true,
+    "perPhysical": {
+      "dev/codex/schubert/nk/storage/StorageIoException": {
+        "crc64": "1271c02831786cbb",
+        "probeCount": 25,
+        "counters": {
+          "INSTRUCTION": {
+            "missed": 80,
+            "covered": 13
+          },
+          "BRANCH": {
+            "missed": 12,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 19,
+            "covered": 4
+          },
+          "COMPLEXITY": {
+            "missed": 9,
+            "covered": 2
+          },
+          "METHOD": {
+            "missed": 3,
+            "covered": 2
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        }
+      },
+      "dev/codex/schubert/nk/storage/StorageIoException$Reason": {
+        "crc64": "a64b044af8a34f92",
+        "probeCount": 8,
+        "counters": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 50
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 4
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 5
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 5
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        }
+      }
+    }
+  },
+  "actualProductDbFileOrNativeOperations": 0,
+  "allProductionRawFour100": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
