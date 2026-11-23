@@ -1,6 +1,8 @@
 package dev.codex.schubert.nk.batch.repository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -53,6 +55,12 @@ final class CleanupTerminalReferencesJdbcGraphTest {
   private static final String IDENTITY_ROWS_CLOSE = "result close";
   private static final String IDENTITY_STATEMENT_CLOSE = "statement close";
   private static final String CLOSE_METHOD = "close";
+  private static final String TERMINAL_QUERY = "terminal query";
+  private static final String TERMINAL_TIMEOUT = "terminal timeout";
+  private static final String TERMINAL_RUN = "terminal run";
+  private static final String TERMINAL_DATE = "terminal date";
+  private static final String TERMINAL_ROWS_CLOSE = "terminal rows close";
+  private static final String TERMINAL_CLOSE = "terminal close";
   private static final List<String> EXPECTED_CALLS =
       List.of(IDENTITY_CHECK, IDENTITY_ROWS_CLOSE, IDENTITY_STATEMENT_CLOSE, "prior success");
   private static final List<String> EXPECTED_READ_CALLS =
@@ -60,22 +68,33 @@ final class CleanupTerminalReferencesJdbcGraphTest {
           IDENTITY_CHECK,
           IDENTITY_ROWS_CLOSE,
           IDENTITY_STATEMENT_CLOSE,
-          "terminal query",
-          "terminal timeout",
-          "terminal run",
-          "terminal date",
-          "terminal close");
+          TERMINAL_QUERY,
+          TERMINAL_TIMEOUT,
+          TERMINAL_RUN,
+          TERMINAL_DATE,
+          TERMINAL_CLOSE);
+  private static final List<String> EXPECTED_ACQUIRED_CLOSE_CALLS =
+      List.of(
+          IDENTITY_CHECK,
+          IDENTITY_ROWS_CLOSE,
+          IDENTITY_STATEMENT_CLOSE,
+          TERMINAL_QUERY,
+          TERMINAL_TIMEOUT,
+          TERMINAL_RUN,
+          TERMINAL_DATE,
+          TERMINAL_ROWS_CLOSE,
+          TERMINAL_CLOSE);
   private static final List<String> EXPECTED_SUCCESS_READ_CALLS =
       List.of(
           IDENTITY_CHECK,
           IDENTITY_ROWS_CLOSE,
           IDENTITY_STATEMENT_CLOSE,
-          "terminal query",
-          "terminal timeout",
-          "terminal run",
-          "terminal date",
-          "terminal rows close",
-          "terminal close",
+          TERMINAL_QUERY,
+          TERMINAL_TIMEOUT,
+          TERMINAL_RUN,
+          TERMINAL_DATE,
+          TERMINAL_ROWS_CLOSE,
+          TERMINAL_CLOSE,
           IDENTITY_CHECK,
           IDENTITY_ROWS_CLOSE,
           IDENTITY_STATEMENT_CLOSE);
@@ -157,6 +176,84 @@ final class CleanupTerminalReferencesJdbcGraphTest {
     assertEquals(EXPECTED_SUCCESS_READ_CALLS, calls);
   }
 
+  /** PT-F02-CTERM-READ004. */
+  @Test
+  void ordinaryTerminalReadKeepsRuntimePrimaryAndRecordsTwoSanitizedCloseFailures() {
+    var calls = new ArrayList<String>();
+    var primary = new IllegalStateException("independent row failure");
+    var repository =
+        new CleanupTerminalRepository(
+            terminalConnection(
+                () ->
+                    terminalRows(
+                        calls,
+                        () -> {
+                          throw primary;
+                        },
+                        () -> {
+                          throw new SQLException("independent result close detail");
+                        }),
+                calls,
+                () -> {
+                  throw new SQLException("independent statement close detail");
+                }),
+            () -> 5_000_000_000L);
+
+    assertSame(
+        primary, assertThrows(IllegalStateException.class, () -> repository.read(RUN, ENDED)));
+    var suppressed = primary.getSuppressed();
+    assertEquals(2, suppressed.length);
+    assertFixedDiagnostic(assertInstanceOf(BatchRepositoryException.class, suppressed[0]));
+    assertFixedDiagnostic(assertInstanceOf(BatchRepositoryException.class, suppressed[1]));
+    assertNotSame(suppressed[0], suppressed[1]);
+    assertEquals(EXPECTED_ACQUIRED_CLOSE_CALLS, calls);
+  }
+
+  /** PT-F02-CTERM-READ005. */
+  @Test
+  void ordinaryTerminalReadRejectsAnOtherwiseCompleteReadWhenResultCloseFails() {
+    var calls = new ArrayList<String>();
+    var repository =
+        new CleanupTerminalRepository(
+            terminalConnection(
+                () ->
+                    successfulTerminalRows(
+                        calls,
+                        () -> {
+                          throw new SQLException("independent result close failure");
+                        }),
+                calls),
+            () -> 5_000_000_000L);
+
+    assertFixedDiagnostic(
+        assertThrows(BatchRepositoryException.class, () -> repository.read(RUN, ENDED)));
+    assertEquals(EXPECTED_ACQUIRED_CLOSE_CALLS, calls);
+  }
+
+  /** PT-F02-CTERM-READ006. */
+  @Test
+  void ordinaryTerminalReadKeepsAnOriginalCloseErrorOverTheKnownSqlFailure() {
+    var calls = new ArrayList<String>();
+    var closeError = new LinkageError("independent close error");
+    var repository =
+        new CleanupTerminalRepository(
+            terminalConnection(
+                () ->
+                    terminalRows(
+                        calls,
+                        () -> {
+                          throw new SQLException("independent row failure");
+                        },
+                        () -> {
+                          throw closeError;
+                        }),
+                calls),
+            () -> 5_000_000_000L);
+
+    assertSame(closeError, assertThrows(LinkageError.class, () -> repository.read(RUN, ENDED)));
+    assertEquals(EXPECTED_ACQUIRED_CLOSE_CALLS, calls);
+  }
+
   private static void assertFixedDiagnostic(BatchRepositoryException failure) {
     assertEquals("batch repository operation failed", failure.getMessage());
     assertNull(failure.getCause());
@@ -197,27 +294,32 @@ final class CleanupTerminalReferencesJdbcGraphTest {
   }
 
   private static Connection terminalConnection(RowsSupplier rows, List<String> calls) {
+    return terminalConnection(rows, calls, () -> {});
+  }
+
+  private static Connection terminalConnection(
+      RowsSupplier rows, List<String> calls, CloseAction closeAction) {
     return connection(
         TERMINAL_READ_SQL,
         () -> {
-          calls.add("terminal query");
+          calls.add(TERMINAL_QUERY);
           return proxy(
               PreparedStatement.class,
               (unused, method, args) ->
                   switch (method.getName()) {
                     case "setQueryTimeout" -> {
                       assertEquals(5, args[0]);
-                      calls.add("terminal timeout");
+                      calls.add(TERMINAL_TIMEOUT);
                       yield null;
                     }
                     case "setObject" -> {
                       switch ((int) args[0]) {
                         case 1 -> {
-                          calls.add("terminal run");
+                          calls.add(TERMINAL_RUN);
                           assertEquals(new UUID(0, 7), args[1]);
                         }
                         case 2 -> {
-                          calls.add("terminal date");
+                          calls.add(TERMINAL_DATE);
                           assertEquals(LocalDate.of(2026, 10, 2), args[1]);
                         }
                         default -> throw new AssertionError("unexpected terminal parameter");
@@ -226,7 +328,8 @@ final class CleanupTerminalReferencesJdbcGraphTest {
                     }
                     case "executeQuery" -> rows.read();
                     case CLOSE_METHOD -> {
-                      calls.add("terminal close");
+                      calls.add(TERMINAL_CLOSE);
+                      closeAction.close();
                       yield null;
                     }
                     default ->
@@ -246,7 +349,37 @@ final class CleanupTerminalReferencesJdbcGraphTest {
     ResultSet read() throws SQLException;
   }
 
+  @FunctionalInterface
+  private interface CloseAction {
+    void close() throws SQLException;
+  }
+
+  @FunctionalInterface
+  private interface NextRow {
+    boolean next() throws SQLException;
+  }
+
+  private static ResultSet terminalRows(List<String> calls, NextRow next, CloseAction closeAction) {
+    return proxy(
+        ResultSet.class,
+        (unused, method, args) ->
+            switch (method.getName()) {
+              case "next" -> next.next();
+              case CLOSE_METHOD -> {
+                calls.add(TERMINAL_ROWS_CLOSE);
+                closeAction.close();
+                yield null;
+              }
+              default ->
+                  throw new AssertionError("unexpected terminal row call: " + method.getName());
+            });
+  }
+
   private static ResultSet successfulTerminalRows(List<String> calls) {
+    return successfulTerminalRows(calls, () -> {});
+  }
+
+  private static ResultSet successfulTerminalRows(List<String> calls, CloseAction closeAction) {
     var cursor = new AtomicInteger(-1);
     return proxy(
         ResultSet.class,
@@ -257,7 +390,8 @@ final class CleanupTerminalReferencesJdbcGraphTest {
               case "getObject" ->
                   ((Class<?>) args[1]).cast(terminalColumn(cursor.get(), (String) args[0]));
               case CLOSE_METHOD -> {
-                calls.add("terminal rows close");
+                calls.add(TERMINAL_ROWS_CLOSE);
+                closeAction.close();
                 yield null;
               }
               default ->
