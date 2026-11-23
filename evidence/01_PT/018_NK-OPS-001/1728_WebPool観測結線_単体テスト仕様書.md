@@ -50,3 +50,7 @@ Collectorはprivate owner lock内でread→完全publication。invalidはunknown
 実行command/OS/JDK/tool/version/branch/対象commit/開始終端・coverage/結果/BUG/エビデンスpath/hashは1729と各公開manifestへ結合する。正常六compileのPT0はUNRUN、同sourceが変われば旧sourceの成功を転用しない。Program別24IDをcase/class/method・要求・仕様・証跡へ一意trace。秘密・rawセッション/token/key/password/実DB結果は取得/保存しない。
 
 groupP01809_WEB_POOL_OBSERVATION_V1、PG8120 fresh receipt/開始3-5-9pp・cap10。原-v4-v5/既usage38de08c8/旧markerlast27区間と共有累積null/90再基底化0・実token/PGPT-PMO配賦/工数null維持。元製造24新IDと必要既90再資格・追加発見/手戻り/toolを分離する。正式1964/53/原190新受入0/QA051final/PTALT0/whole451-native-CHR/全actualHOLDは不変更。collector/kernelのPG/PT完了だけを実pool/source/scheduler/exporter受入へ拡大しない。
+
+## 2026-11-24 排他方式の是正
+
+BUG-3738／YKT-2929、WBS-F03/2-2-b。WebDbPoolMetricCollectorの借用観測から公開までは同一の私有ReentrantLockで直列化する。正常、STANDARD早期return、供給RuntimeException／Errorでfinally解放。WEBPOOLCONN001～008の元合成proxyと全期待値を保持し、同一runでL/M/C/Bを採取する。PG43806で同期指摘を修正前後比較する。元例外を保持するPMD catchの生結果と全451の未検証を別計上する。

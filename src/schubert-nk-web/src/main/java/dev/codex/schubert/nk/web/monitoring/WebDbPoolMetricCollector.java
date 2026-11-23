@@ -6,12 +6,13 @@ import dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricRecorder.Counts;
 import io.micrometer.core.instrument.MeterRegistry;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Owner-local borrowed getter publication only, not a real-pool collector startup. PG-D579/1728.
  */
 public final class WebDbPoolMetricCollector {
-  private final Object lock = new Object();
+  private final ReentrantLock lock = new ReentrantLock();
   private final WebDbPoolMetricObservation observation;
   private final WebDbPoolMetricRecorder metrics;
 
@@ -24,7 +25,8 @@ public final class WebDbPoolMetricCollector {
   public Optional<Counts> collect(HikariPoolMXBean pool, HikariConfigMXBean config) {
     Objects.requireNonNull(pool, "borrowed pool observation");
     Objects.requireNonNull(config, "borrowed pool configuration observation");
-    synchronized (lock) {
+    lock.lock();
+    try {
       if (!metrics.detailedMetricsRequested()) return Optional.empty();
       try {
         Optional<Counts> supplied = observation.observe(pool, config);
@@ -35,6 +37,8 @@ public final class WebDbPoolMetricCollector {
         metrics.missing();
         throw unavailableObservation;
       }
+    } finally {
+      lock.unlock();
     }
   }
 
