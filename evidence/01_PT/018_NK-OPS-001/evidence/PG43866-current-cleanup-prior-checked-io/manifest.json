@@ -1,0 +1,157 @@
+{
+  "run": "PG43866",
+  "source": "0635b60c2eb9384a803e31ed1da163e6bdd86d13",
+  "productionCore": "458fe8fe258b8c94f388b0bc547d0899a74b37d2",
+  "terminalAtUTC": "2026-11-23T19:16:37.719024+00:00",
+  "wbs": "A1-21.05",
+  "related": [
+    "WBS-P004-05/2",
+    "WBS-F03/2-2-b",
+    "SS332",
+    "SSC-461",
+    "BUG-3749"
+  ],
+  "spec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/5799_清掃終端の通常読取単体試験仕様.md",
+    "sha256": "5b89994e11b24ff65a950b30562cf35dfd82477d9f9b290fa1339d450090f83a"
+  },
+  "currentProductionClass": {
+    "path": "../pgpt-runs/PG379/PG43832-cleanup-terminal-sql-after-v1/scope/target/classes/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.class",
+    "sha256": "c643ba712f9c13bd24e0ab1045c8cffdaa0bb2dcccf79fade688cba310295688"
+  },
+  "currentNormalBatch": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43834-cleanup-terminal-batch-normal-jar/manifest.json",
+    "sha256": "2e47cd0d1bffaf46cc41fcf929d469737e9269f45d8cd9feb81b4e6efe51018a"
+  },
+  "priorRawOwnership": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43862-current-cleanup-jdbc-ownership/manifest.json",
+    "sha256": "1697f74cf1bf4a39da13b9e22bcb3c7eff6d176d4d682ca920bf0420cb701916"
+  },
+  "priorExplicitIoRawHolds": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG3948-jdbc-finally-assessment-v1/manifest.json",
+    "sha256": "d54f9b93a362edb1232da84ea461f021d9e2e728cfb7d8d543d5ec786666e13f"
+  },
+  "capturedPairLocations": [
+    {
+      "testId": "PT-F02-CTERM-REF-003",
+      "resource": "ResultSet",
+      "finallyStart": 316,
+      "arbitration": 321
+    },
+    {
+      "testId": "PT-F02-CTERM-REF-004",
+      "resource": "PreparedStatement",
+      "finallyStart": 328,
+      "arbitration": 333
+    }
+  ],
+  "cases": {
+    "PT-F02-CTERM-REF-003": "checkedPriorLookupFailureRemainsPrimaryWhenResultCloseThrowsSql",
+    "PT-F02-CTERM-REF-004": "checkedPriorLookupFailureRemainsPrimaryWhenStatementCloseThrowsError"
+  },
+  "currentCounts": {
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "currentCoverage": {
+    "line": [
+      77,
+      314
+    ],
+    "method": [
+      8,
+      21
+    ],
+    "class": [
+      1,
+      1
+    ],
+    "branch": [
+      14,
+      172
+    ]
+  },
+  "originalRawFinallyRetained": true,
+  "otherBranchesStillUnverified": true,
+  "parentTestBeforeCorrection": [
+    {
+      "path": "../pgpt-runs/PG379/PG43866-current-cleanup-prior-checked-io-two/terminal.json",
+      "sha256": "187e51133ea2973d426f119f96927848d6414d81616576bb6ad22df9390f9a6f"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43866-current-cleanup-prior-checked-io-two/fixture-pmd-terminal.json",
+      "sha256": "b64631b2ea33ab413449ba0df2fae6689fd2e41c1a0fa7eb6bf5ae3ce86bd865"
+    }
+  ],
+  "actualBeforePassesRetainedSeparate": 2,
+  "artifacts": [
+    {
+      "path": "../pgpt-runs/PG379/PG43866-current-cleanup-prior-checked-io-two-retest/begin.json",
+      "sha256": "3ec41c241e3285a55ee94706fcc6f1ef6d7ec6026731236b12c7a655bfd377b9"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43866-current-cleanup-prior-checked-io-two-retest/terminal.json",
+      "sha256": "4d491185e8528c4d71cfcad255ac46fe748db6ba2a706e5a359afbba1beca19f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43866-current-cleanup-prior-checked-io-two-retest/reports/TEST-junit-jupiter.xml",
+      "sha256": "5eeb5494f8615a4b4ead77719052871c2a13422a2ba38e8aa27f0e227b1841ef"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43866-current-cleanup-prior-checked-io-two-retest/unit.exec",
+      "sha256": "59967ce786f08695b517ab94762293a640e93a63b25f0287e26a5d086bad1213"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43866-current-cleanup-prior-checked-io-two-retest/instruction-equivalence.json",
+      "sha256": "72bbdae636617726c71505cd3af516b2fb7b19a053a731d260f636f845d8444a"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43866-current-cleanup-prior-checked-io-two-retest/fixture-pmd-terminal.json",
+      "sha256": "57eda7c692455fb5860965133796ebd29546e8ddac2c84afb6fe5e639a89c2f2"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43866-current-cleanup-prior-checked-io-two-retest/fixture-style-terminal.json",
+      "sha256": "3dbd30787e1df185941865a6f26a3b88c50d749ce0653a189dab14ac408a38b3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43866-current-cleanup-prior-checked-io/coverage.tsv",
+      "sha256": "5fe4ef3a9d05d4fc8dfeefd7bd668dd8fef840d4e603a600d2aff3611699cfd6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43866-current-cleanup-prior-checked-io/selected.tsv",
+      "sha256": "a046481afa72fff2b43312d41e80ad124b1a659eb068ec654e4617570b409683"
+    }
+  ],
+  "rawStatic": {
+    "toolExit": 4,
+    "removedRule": "AvoidDuplicateLiterals",
+    "remaining": [
+      {
+        "line": 123,
+        "rule": "CloseResource",
+        "message": "Ensure that resources like this Connection object are closed after use"
+      },
+      {
+        "line": 154,
+        "rule": "CloseResource",
+        "message": "Ensure that resources like this Connection object are closed after use"
+      },
+      {
+        "line": 600,
+        "rule": "UseProperClassLoader",
+        "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead."
+      }
+    ],
+    "reasons": {
+      "CloseResource": "Both Connection instances are borrowed non-resource JDK fixtures; observable terminal path verifies no close on the borrowed owner and exactly one on each child.",
+      "UseProperClassLoader": "Existing JDK interface proxy loader matches the non-container fixture; no context loader change required."
+    },
+    "suppressed": 0
+  },
+  "currentRealOriginalLookupOrDbActions": 0,
+  "realDbApprovedProofRemainder": true,
+  "formalAcceptanceId": null,
+  "whole451": false
+}
