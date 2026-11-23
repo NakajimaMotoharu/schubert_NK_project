@@ -2,7 +2,9 @@ package dev.codex.schubert.nk.batch.repository;
 
 import dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph;
 import dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame;
+import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.Instant;
@@ -36,59 +38,101 @@ public record BackupFailureSnapshot(
 
   /** Guard must be the base owner/environment, not a recursive guard that calls this method. */
   public void verifyLatest(Connection connection, MaintenanceOwnerFrame.Guard guard)
-      throws java.io.IOException {
+      throws IOException {
     Objects.requireNonNull(connection);
     Objects.requireNonNull(guard);
     guard.check();
     if (!new RunReferenceRepository(connection).read(database.run()).identityConsistent())
-      throw new java.io.IOException("failed backup run identity unavailable");
+      throw new IOException("failed backup run identity unavailable");
     verifyRow(connection, database, guard);
     verifyRow(connection, configuration, guard);
     guard.check();
     if (!new RunReferenceRepository(connection).read(database.run()).identityConsistent())
-      throw new java.io.IOException("failed backup run identity unavailable");
+      throw new IOException("failed backup run identity unavailable");
     guard.check();
   }
 
   private void verifyRow(Connection c, BatchStepAttempt expected, MaintenanceOwnerFrame.Guard guard)
-      throws java.io.IOException {
+      throws IOException {
     guard.check();
     String sql =
         "select id,run_id,business_date,step,attempt,started_at,ended_at,status,"
             + "target_count,success_count,failure_count,byte_count,error_code,error_summary"
             + " from schubert.batch_runs where run_id=? and step=? order by attempt desc limit 1";
-    try (var statement = c.prepareStatement(sql)) {
+    try {
+      var statement = c.prepareStatement(sql);
       if (statement == null) throw new SQLException("missing statement");
-      statement.setQueryTimeout(guard.queryTimeoutSeconds());
-      statement.setObject(1, expected.run().id());
-      statement.setString(2, expected.step().name());
-      try (var row = statement.executeQuery()) {
-        if (row == null
-            || !row.next()
-            || !Long.valueOf(expected.id()).equals(row.getObject("id", Long.class))
-            || !expected.run().id().equals(row.getObject("run_id", java.util.UUID.class))
-            || !expected
-                .businessDate()
-                .equals(row.getObject("business_date", java.time.LocalDate.class))
-            || !expected.step().name().equals(row.getObject("step", String.class))
-            || !Integer.valueOf(expected.attempt()).equals(row.getObject("attempt", Integer.class))
-            || !matchesInstant(row, "started_at", expected.startedAt())
-            || !matchesInstant(row, "ended_at", endedAt)
-            || !"FAILED".equals(row.getObject("status", String.class))
-            || !Long.valueOf(1).equals(row.getObject("target_count", Long.class))
-            || !Long.valueOf(0).equals(row.getObject("success_count", Long.class))
-            || !Long.valueOf(1).equals(row.getObject("failure_count", Long.class))
-            || !Long.valueOf(0).equals(row.getObject("byte_count", Long.class))
-            || !"COMMAND_FAILURE".equals(row.getObject("error_code", String.class))
-            || !"batch command failed".equals(row.getObject("error_summary", String.class))
-            || row.next()) throw new SQLException("failed backup projection mismatch");
+      @Nullable Throwable statementFailure = null;
+      try {
+        statement.setQueryTimeout(guard.queryTimeoutSeconds());
+        statement.setObject(1, expected.run().id());
+        statement.setString(2, expected.step().name());
+        var row = statement.executeQuery();
+        if (row == null) throw new SQLException("failed backup projection mismatch");
+        @Nullable Throwable rowFailure = null;
+        try {
+          requireProjection(row, expected);
+        } catch (SQLException | RuntimeException | Error failure) {
+          rowFailure = failure;
+          throw failure;
+        } finally {
+          closeRow(row, rowFailure);
+        }
+        guard.check();
+      } catch (SQLException | IOException | RuntimeException | Error failure) {
+        statementFailure = failure;
+        throw failure;
+      } finally {
+        closeStatement(statement, statementFailure);
       }
-      guard.check();
     } catch (SQLException failure) {
       JdbcFailureGraph.preserveFatal(failure);
-      throw new java.io.IOException("failed backup observation unavailable");
+      throw new IOException("failed backup observation unavailable");
     }
     guard.check();
+  }
+
+  private void requireProjection(ResultSet row, BatchStepAttempt expected) throws SQLException {
+    if (!row.next()
+        || !Long.valueOf(expected.id()).equals(row.getObject("id", Long.class))
+        || !expected.run().id().equals(row.getObject("run_id", java.util.UUID.class))
+        || !expected.businessDate().equals(row.getObject("business_date", java.time.LocalDate.class))
+        || !expected.step().name().equals(row.getObject("step", String.class))
+        || !Integer.valueOf(expected.attempt()).equals(row.getObject("attempt", Integer.class))
+        || !matchesInstant(row, "started_at", expected.startedAt())
+        || !matchesInstant(row, "ended_at", endedAt)
+        || !"FAILED".equals(row.getObject("status", String.class))
+        || !Long.valueOf(1).equals(row.getObject("target_count", Long.class))
+        || !Long.valueOf(0).equals(row.getObject("success_count", Long.class))
+        || !Long.valueOf(1).equals(row.getObject("failure_count", Long.class))
+        || !Long.valueOf(0).equals(row.getObject("byte_count", Long.class))
+        || !"COMMAND_FAILURE".equals(row.getObject("error_code", String.class))
+        || !"batch command failed".equals(row.getObject("error_summary", String.class))
+        || row.next()) throw new SQLException("failed backup projection mismatch");
+  }
+
+  private static void closeRow(ResultSet row, @Nullable Throwable primary) throws SQLException {
+    try {
+      row.close();
+    } catch (SQLException | RuntimeException | Error secondary) {
+      if (!retainPrimary(primary, secondary)) throw secondary;
+    }
+  }
+
+  private static void closeStatement(PreparedStatement statement, @Nullable Throwable primary)
+      throws SQLException {
+    try {
+      statement.close();
+    } catch (SQLException | RuntimeException | Error secondary) {
+      if (!retainPrimary(primary, secondary)) throw secondary;
+    }
+  }
+
+  /** SSC-481 / BUG-3757. Retain the original failure and append only distinct close failures. */
+  private static boolean retainPrimary(@Nullable Throwable primary, Throwable secondary) {
+    if (primary == null) return false;
+    if (primary != secondary) primary.addSuppressed(secondary);
+    return true;
   }
 
   /** SS332 SSC-056 / BUG-3754. Compare the JDBC 4.2 projection as an instant. */
