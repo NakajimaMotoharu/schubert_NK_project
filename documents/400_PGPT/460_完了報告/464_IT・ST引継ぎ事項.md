@@ -1,5 +1,19 @@
 # IT・ST引継ぎ事項
 
+## 2026-11-23 現候補の差分とLinux受領条件
+
+製品Core `87927ea17c1c8dbef528bc0c6882c24b1fe7c871`。正式認定はPT-WEB-20260925-24の1964試験／53領域、有効受入16/190、指定0/12。局所試験と工具試験は別集計。IT/ST開始には同じ製品候補のPG/PT正式終端、署名付きBOM、環境・所有、切戻しの承認が必要。引継ぎ先の受領と開始日は未確定。
+
+| 担当範囲 | 現候補で引き継げる追加証拠 | 引き継ぎ先に必要な結果 |
+| --- | --- | --- |
+| ビルド・品質 | Java宣言1033、正規4製品／1116物理。旧SSC447の152件は元source別。Schema履歴14件の局所単一実行。 | QA-056の適用判断、API/Web正規JAR、Storageの現JDBC境界と保留32入力／Root11の判断、六製品同一source・runの451。 [PG43184](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43184-f03-current-six-product-delta-package-v1/manifest.json) |
+| Linux・運用 | 既Unit宣言14とtimeout 4件は現候補に一致。05:00 JSTのtimer宣言確認。局所JDK/Javac25.0.4と既Maven3.9.12実体を照合。 | 固定maintenance.service、本番適用確認、同bootのUnit所有、API/Web/Caddyの真正起動と逆順停止。旧配備状態・接続観測から現候補を認定しない。 [PG43182](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43182-c02-current-declarations-and-missing-effective-state-v1/manifest.json) [PG43194](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43194-f04-local-tooling-current-handoff-v1/manifest.json) |
+| DB・メッセージ | 清掃通常読取の局所5件、JMS Guard／Writerの局所14件・5物理の四指標。 | 承認済みLinux環境で借用接続・JMS実効設定、原本/Backup保持、再送時の重複防止と処理後条件。実DB、実Broker、実移行と前節の性能試験は対象ごとの条件を満たして着手する。 [PG43208](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43208-a12105-cleanup-terminal-ordinary-projection-v1/manifest.json) [PG43204](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43204-p00503-guard-dlq-record-observations-v3/manifest.json) |
+| 実互換・native | 証跡工具は出力途中失敗を非zero扱いに修正。公開差分59commitの秘密スキャン検出0。 | 同候補の実NK CHR、元Current基準保持、当sourceのCRC/session/owner、実Browser、実効nativeと451の同じ証跡束。 [PG43210](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43210-p0180803-coverage-output-terminal-v1/manifest.json) [PG43214](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43214-g07-since-43136-public-delta-v1/manifest.json) |
+| 配布 | 正規4 JARの自身Maven座標を確認。QA-061は回答済み。 | 製品配布条件、外部依存ライセンス判定基準と承認担当、同候補の最終収録範囲、署名。条件と担当は未決。 [PG43192](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43192-p01802-candidate-jar-composition-v1/manifest.json) |
+
+過去候補、再送・性能の合格条件、移行と復元の未実測値は下段に保全する。
+
 ## 2026-11-23 現候補の引継ぎ条件と再送の実測区分
 
 現製品候補は `7698011f52d6cc5f94c76413b6ab36971783b9c9`。正規のProtocol・Storage・Bootstrap・Batchの4製品を照合し、API・Webの正規JARとStorageのJDBC責務、全6製品の同一source/runでの451、担当の正式受領が残る。過去の認定1964試験／53領域を維持し、現候補の局所結果をその件数に加算しない。PG/PTの受入、実NK互換、nativeと実起動の残条件は456・460で管理する。この候補に対するIT/STの開始日は未確定。[現F03と六製品表](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43000-f03-current-batch-window-scope-v1/manifest.json)
