@@ -1,0 +1,274 @@
+{
+  "run": "PG43894",
+  "source": "17bea047004a5e117b08ede2174570ff1b5bbc70",
+  "productionCore": "458fe8fe258b8c94f388b0bc547d0899a74b37d2",
+  "terminalAtUTC": "2026-11-23T20:01:50.694145+00:00",
+  "wbs": [
+    "WBS-F03/2-2-b",
+    "WBS-P015-01"
+  ],
+  "reusedContractEvidence": 10,
+  "freshRuns": 0,
+  "normalWebCandidateNotBuilt": true,
+  "constructorExecution": {
+    "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG21398-invalid-row-base-constructor-method-v1/manifest.json",
+    "sha256": "001dc2b456dbd33a6813f2b0d54747b82b3237f9481d735212eed3dbdaa4c79d"
+  },
+  "independentConstructorQualification": {
+    "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG21402-invalid-row-independent-post-v1/manifest.json",
+    "sha256": "672fd714ba23cb40af051b5406c034f096ef5a80577ea89962afcc83b376495a"
+  },
+  "slices": [
+    {
+      "run": "PG20376",
+      "storedQualification": {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG20376-web-session-snapshot-eight-v1/manifest.json",
+        "sha256": "3d3746899dffed0ca900c5e55a231d834f29dbc0ae18bf64e399a2c6ad2c41af"
+      },
+      "storedTerminal": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20376-web-session-snapshot-eight-unit-v1/manifest.safe.json",
+        "sha256": "42b0969cdc24a25da24ce1b9056efe437e3e57108f1a1ba0976dc3c15d4947a6"
+      },
+      "storedJunit": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg20376-web-session-snapshot-eight-unit-v1/xml/TEST-junit-jupiter.xml",
+        "sha256": "fa46559a706c226ead9ee1ff07eb7966b38f8aa22d10a127fdd2463d2da476a4"
+      },
+      "independentSpecifications": {
+        "path": "evidence/01_PT/015_NK-WEB-001/048_WebSessionSnapshot不変値単体仕様.md",
+        "sha256": "5886316246499c628b82afd69fbffde54181e69b0403225acb1ee241e4671252"
+      },
+      "caseMethods": [
+        {
+          "id": "PT-WEB-SNAP001",
+          "method": "matchingIndependentHashRetainsInputObjects"
+        },
+        {
+          "id": "PT-WEB-SNAP002",
+          "method": "mismatchedIdentityRejectsWithFixedMessage"
+        },
+        {
+          "id": "PT-WEB-SNAP003",
+          "method": "nullSessionIdentityRejects"
+        },
+        {
+          "id": "PT-WEB-SNAP004",
+          "method": "nullRowRejects"
+        },
+        {
+          "id": "PT-WEB-SNAP005",
+          "method": "nullAttributesReject"
+        },
+        {
+          "id": "PT-WEB-SNAP006",
+          "method": "expiredRowRemainsDataWithoutAuthenticationGrant"
+        },
+        {
+          "id": "PT-WEB-SNAP007",
+          "method": "retainedPayloadKeepsDefensiveByteOwnership"
+        },
+        {
+          "id": "PT-WEB-SNAP008",
+          "method": "parallelSnapshotsKeepDistinctRows"
+        }
+      ],
+      "sameSourceInputs": {
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/WebSessionSnapshot.java": {
+          "source": "d8ff9efb16a7da1b073bdf9770487e3e6415b636",
+          "sha256": "8c0315b1e424ec958cb32c571bd3fdd2a2842bdd02290c476836b40919d7ba9e"
+        },
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/WebSessionId.java": {
+          "source": "d8ff9efb16a7da1b073bdf9770487e3e6415b636",
+          "sha256": "2d717ffa28d2aa7badf6f6a5e1e77043697aeb1c1eb78da5f41c844ff49ea6fa"
+        },
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/WebSessionRow.java": {
+          "source": "d8ff9efb16a7da1b073bdf9770487e3e6415b636",
+          "sha256": "13d4d3f0b7938c5cb790a539817efeaf9453e05b25238fa7fb3baba1b2b8525b"
+        },
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionPayloadIdentity.java": {
+          "source": "d8ff9efb16a7da1b073bdf9770487e3e6415b636",
+          "sha256": "f669b82c1ebce568c46198438b01ce65e9133eb1a50e7d94725ef060d3e1e25d"
+        },
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedSessionPayload.java": {
+          "source": "d8ff9efb16a7da1b073bdf9770487e3e6415b636",
+          "sha256": "b2d8816f5704d9d5d879908bf6ae5f4e95d436c1397b5e6ad71b78d09c45d799"
+        },
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionAttributes.java": {
+          "source": "d8ff9efb16a7da1b073bdf9770487e3e6415b636",
+          "sha256": "f5596cf6c90ff8bf6a648fb47e5b064bb5fbc3528c872aaf5f444a13bf0fa675"
+        },
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionOperationToken.java": {
+          "source": "d8ff9efb16a7da1b073bdf9770487e3e6415b636",
+          "sha256": "6a982c339aef53a2297725c114a8cfe023557b3cf36a953c599916e48eaa6f57"
+        },
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionPrincipal.java": {
+          "source": "d8ff9efb16a7da1b073bdf9770487e3e6415b636",
+          "sha256": "29af626632ac4c2727f9d0963c3967cb0be7eda57daf762a482268c467dc9232"
+        },
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/package-info.java": {
+          "source": "d8ff9efb16a7da1b073bdf9770487e3e6415b636",
+          "sha256": "24641c16e2937e6fdb40acd9c3f86139fb9b54588aaf5931c240d74471d93277"
+        },
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/SavedRequestTarget.java": {
+          "source": "d8ff9efb16a7da1b073bdf9770487e3e6415b636",
+          "sha256": "35e564f94749c3d005a7e4041f33a77921aac492676ea26305c65b66096ff2e3"
+        },
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/WebSessionSnapshotPortTest.java": {
+          "source": "9df2c352a43eaeea0aede878ec93e4e136ffd538",
+          "sha256": "07c2bf38b0e268e87218c29c673065d052c89ac2d7966a941eb50e531bd419fd"
+        },
+        "src/schubert-nk-web/pom.xml": {
+          "source": "d8ff9efb16a7da1b073bdf9770487e3e6415b636",
+          "sha256": "9b6c47c3ab3ba0d105f41f081de10b2234af4653fdc371a8eacdf9cabb78761b"
+        }
+      },
+      "rootPomDifference": {
+        "path": "pom.xml",
+        "before": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+        "after": "564e1a45c177fbe4af859c1d25696dd5355e5a6dcab7035970f61439ed9241e9",
+        "meaning": "Jackson 3 dependency management, no Jackson on these isolated fixture classpaths"
+      },
+      "toolchain": {
+        "java.vendor": "Ubuntu",
+        "java.version": "25.0.4",
+        "os.arch": "amd64"
+      },
+      "physicalHashes": {
+        "dev/codex/schubert/nk/web/session/WebSessionSnapshot": "b001f0ea2756a52bef6650c95d803afc97871f69803b66b8cd027f118a6496bd"
+      },
+      "historicalCoverage": {
+        "dev/codex/schubert/nk/web/session/WebSessionSnapshot": {
+          "INSTRUCTION": {
+            "covered": 44,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 2,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 11,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 6,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 5,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 1,
+            "missed": 0
+          }
+        }
+      },
+      "freshJointCoverage": false
+    },
+    {
+      "run": "PG21394",
+      "storedQualification": {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG21394-invalid-row-two-v1/manifest.json",
+        "sha256": "f89ac2f2e56cd515617e744a6734fcde167e0cecac1eb3e99909fad1eb8a443d"
+      },
+      "storedTerminal": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21394-invalid-row-two-unit-v1/manifest.json",
+        "sha256": "430c9b5cae973d77a59642f42cd4af64c34ec9b283ec76225bbd6792e2dd94da"
+      },
+      "storedJunit": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg21394-invalid-row-two-unit-v1/xml/TEST-junit-jupiter.xml",
+        "sha256": "1f7163e464b88c866b2523db277753999819cdf76bfae478af51450cde8a8bea"
+      },
+      "independentSpecifications": {
+        "path": "evidence/01_PT/015_NK-WEB-001/076_不正session行例外_固定診断単体仕様.md",
+        "sha256": "7dc8a22cd369ef3c5a479270678a513a99f3987efcfa541c0b86264f07394378"
+      },
+      "caseMethods": [
+        {
+          "id": "PT-WEB-INVALIDROW001",
+          "method": "invalidRowHasFixedPublicDiagnosticAndNoProviderCauseOrSuppressedData"
+        },
+        {
+          "id": "PT-WEB-INVALIDROW002",
+          "method": "eachFailureOwnsItsDiagnosticStateWithoutChangingAnotherFailure"
+        }
+      ],
+      "sameSourceInputs": {
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/InvalidSessionRowException.java": {
+          "source": "4217e14083c6ecac116216e08d57f4361eb2f12d",
+          "sha256": "e3c592ebb82effd50447c356629695def2af5f05e90137de57fe908d4310a853"
+        },
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionStoreException.java": {
+          "source": "4217e14083c6ecac116216e08d57f4361eb2f12d",
+          "sha256": "93717ee948f88bd799a14cdad397c0d92e584711c32f571df8592be379033ed1"
+        },
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/package-info.java": {
+          "source": "4217e14083c6ecac116216e08d57f4361eb2f12d",
+          "sha256": "24641c16e2937e6fdb40acd9c3f86139fb9b54588aaf5931c240d74471d93277"
+        },
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/InvalidSessionRowPortTest.java": {
+          "source": "ed62b0201abeebdde1f992be610620c2e689829e",
+          "sha256": "26310781b9d568fc66188b0e2ae67adf31a5ab51f51c506c51c75ea6bd9414ef"
+        },
+        "src/schubert-nk-web/pom.xml": {
+          "source": "4217e14083c6ecac116216e08d57f4361eb2f12d",
+          "sha256": "9b6c47c3ab3ba0d105f41f081de10b2234af4653fdc371a8eacdf9cabb78761b"
+        }
+      },
+      "rootPomDifference": {
+        "path": "pom.xml",
+        "before": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+        "after": "564e1a45c177fbe4af859c1d25696dd5355e5a6dcab7035970f61439ed9241e9",
+        "meaning": "Jackson 3 dependency management, no Jackson on these isolated fixture classpaths"
+      },
+      "toolchain": {
+        "java.vendor": "Ubuntu",
+        "java.version": "25.0.4",
+        "os.arch": "amd64"
+      },
+      "physicalHashes": {
+        "dev/codex/schubert/nk/web/session/InvalidSessionRowException": "b69afa5decd303c72293c68ba918d06c40d8a64b3d8a3e55189291620f5ec1a4"
+      },
+      "historicalCoverage": {
+        "dev/codex/schubert/nk/web/session/InvalidSessionRowException": {
+          "INSTRUCTION": {
+            "covered": 3,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 1,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 1,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 1,
+            "missed": 0
+          }
+        }
+      },
+      "freshJointCoverage": false
+    }
+  ],
+  "junit": {
+    "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+    "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "javaExecutable": {
+    "path": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+    "sha256": "c324471f8b7933a3cb401eafbc35a7055443779b438a3ab928bda3867a1b8ab1"
+  },
+  "formalAcceptanceId": null,
+  "whole451": false,
+  "remaining": [
+    "Current normal Web package",
+    "Current same-source 451",
+    "Actual session lifecycle"
+  ]
+}
