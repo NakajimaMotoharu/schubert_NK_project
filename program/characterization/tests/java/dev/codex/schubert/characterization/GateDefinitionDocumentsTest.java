@@ -1,5 +1,6 @@
 package dev.codex.schubert.characterization;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 /** PT-CHR-DEF-001..011. Pure definition checks, never capture/baseline/preflight/run validation. */
 final class GateDefinitionDocumentsTest {
@@ -374,6 +376,49 @@ final class GateDefinitionDocumentsTest {
           .set("CHR-L01", JSON.readTree(malformed));
       assertEquals(List.of("REQ_NK_ONLY_CHECKS:CHR-L01"), validate(input), malformed);
     }
+  }
+
+  /** PT-CHR-DEF-016: required artifact fields and supplemental check names are text arrays. */
+  @Test
+  void declaredRequiredFieldsAndSupplementalChecksMustBeNonblankTextArrays() throws IOException {
+    assertEquals(List.of(), validate(fixture()));
+    var requiredObject = fixture();
+    object(requiredObject, REQUIREMENTS)
+        .withObject("/requirements")
+        .putObject(ACTION_CASE)
+        .put("first", "caseId")
+        .put("second", "status");
+    var supplementalObject = fixture();
+    object(supplementalObject, REQUIREMENTS)
+        .withObject("/supplementalChecks")
+        .putObject("CHR-A02")
+        .put("first", "ip-limit-observed-not-hardcoded");
+
+    List<Executable> checks = new ArrayList<>();
+    checks.add(() -> assertEquals(List.of("REQ_FIELDS:CHR-A01"), validate(requiredObject)));
+    checks.add(
+        () ->
+            assertEquals(
+                List.of("REQ_SUPPLEMENTAL_CHECKS:CHR-A02"), validate(supplementalObject)));
+    for (JsonNode invalid :
+        List.of(JSON.readTree("7"), JSON.readTree("null"), JSON.readTree("\" \""))) {
+      var invalidRequired = fixture();
+      object(invalidRequired, REQUIREMENTS)
+          .withObject("/requirements")
+          .withArray(ACTION_CASE)
+          .add(invalid);
+      var invalidSupplemental = fixture();
+      object(invalidSupplemental, REQUIREMENTS)
+          .withObject("/supplementalChecks")
+          .withArray("CHR-A02")
+          .add(invalid);
+      checks.add(() -> assertEquals(List.of("REQ_FIELDS:CHR-A01"), validate(invalidRequired)));
+      checks.add(
+          () ->
+              assertEquals(
+                  List.of("REQ_SUPPLEMENTAL_CHECKS:CHR-A02"), validate(invalidSupplemental)));
+    }
+    assertAll(checks);
   }
 
   @Test
