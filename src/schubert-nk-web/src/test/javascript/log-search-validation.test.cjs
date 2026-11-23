@@ -73,7 +73,9 @@ test("PT-SCR092-E NFC and ASCII trim byte vectors", () => {
   for (const [raw, expected] of [
     ["e\u0301".repeat(128), ""], ["  " + "a".repeat(256) + " ", ""],
     ["\u00A0" + "a".repeat(252) + "\u00A0", ""],
+    ["\uFEFF" + "a".repeat(253), ""],
     ["e\u0301".repeat(129), "メッセージはUTF-8で256 byte以内にしてください。"],
+    ["\uFEFF" + "a".repeat(254), "メッセージはUTF-8で256 byte以内にしてください。"],
     ["\u00A0" + "a".repeat(254) + "\u00A0", "メッセージはUTF-8で256 byte以内にしてください。"]]) {
     controls.q.value = raw;
     controls.q.events.input();

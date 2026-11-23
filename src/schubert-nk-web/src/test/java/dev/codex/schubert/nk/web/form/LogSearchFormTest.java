@@ -159,6 +159,12 @@ class LogSearchFormTest {
     assertEquals(Optional.of("😀"), form("q", "😀").toRequest().keyword());
     assertTrue(form("q", "😀".repeat(64)).isValid());
     assertEquals(Code.LENGTH, form("q", "😀".repeat(65)).getIssues().get(Field.Q));
+    // A leading U+FEFF is three bytes of field data, outside the ASCII trim set.
+    String atLimit = "\ufeff" + "a".repeat(253);
+    var leadingBom = form("q", atLimit);
+    assertTrue(leadingBom.isValid());
+    assertEquals(Optional.of(atLimit), leadingBom.toRequest().keyword());
+    assertEquals(Code.LENGTH, form("q", atLimit + "a").getIssues().get(Field.Q));
   }
 
   @Test
