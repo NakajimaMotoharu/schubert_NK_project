@@ -1,0 +1,205 @@
+{
+  "run": "PG43220-p019-schema-row-components-v2",
+  "source": "af25331e2441924e99339d35e03e5f68af165ccd",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-P019-01.02/2",
+  "testID": "PT-OPS-SCHEMA015",
+  "scope": "Specified synthetic schema/SQL row component and equality values only",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-23T01:58:17.391755+00:00",
+  "pinnedPriorProduct": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43178-p0190102-schema-history-single-exec-v1/manifest.json",
+    "sha256": "9cdffd38cd7b865fffd4de244c8fea7bf2e2df07cd74d59abd2ce771453011b0"
+  },
+  "baselineRecoveredNoRerun": true,
+  "prerunFailure": {
+    "stage": "fixture javac",
+    "rootCause": "Old known Main class directory was rewritten as a nonexistent directory for the new run",
+    "sourceChanged": false,
+    "ordinaryTestsExecuted": 0,
+    "terminalHash": "74ba7caa1eccbeabf2823ff3c122aa0d254c01e4b3ffc127dbe32ba94015e785"
+  },
+  "fixture": {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/SchemaHistoryRowComponentsTest.java",
+    "sha256": "eef8474e91e216d18f4f3b5ac919602cd79d72193ae100543cf05f0e47504235"
+  },
+  "scopePhysical": [
+    {
+      "className": "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.class",
+      "sha256": "3a924af5e147928b10e8b6d2024c0dc514acaf3be042c08fe8e89311668810b0"
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission$Row.class",
+      "sha256": "daf77974a51a03171b27048a9eaf12367a60527ca8f6638aebe8b0fbaf1b5a1a"
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.class",
+      "sha256": "45e370200c04a1cb4e32ba1b458548f80c3351131543ccc52e0443788c7e3264"
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class",
+      "sha256": "cc8265242a1cd41cc7c77b8e12185cbc387fb583d70e1d1171ba467cb0f3d552"
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException.class",
+      "sha256": "85f86d702a139f126afdd72ca8e221583db824f159351ecd9f07b15fcc569c88"
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason.class",
+      "sha256": "a113bd839666ee3a4038dd3703af0cfb772282278cc6fbfe1e3cccf98286ffec"
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/package-info.class",
+      "sha256": "b9c4509338ea3545a2ee90fee9391cc4b356ef7f60309562a752596d05c81583"
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+      "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+      "sha256": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7"
+    }
+  ],
+  "localIndependentJunit": {
+    "total": 1,
+    "passCount": 1,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "notRun": 0,
+    "method": "opsSchema015BothRowKindsRetainValuesAndCompareByContent",
+    "xml": [
+      {
+        "file": "TEST-junit-jupiter.xml",
+        "sha256": "a2aa5b4b95c5cc6cb046a3b2a5fbd984bef689e3bf7554832d50d33f9ec2e3fc",
+        "cases": 1
+      },
+      {
+        "file": "TEST-junit-platform-suite.xml",
+        "sha256": "7e6e6531b6dd7e7968eab5393b3ddd27175b8ea65378a52aeb1d90a12869f551",
+        "cases": 0
+      },
+      {
+        "file": "TEST-junit-vintage.xml",
+        "sha256": "8bb15a723965156296034926dfc1b8872f2279e033e1fe009912c94b682f7297",
+        "cases": 0
+      }
+    ]
+  },
+  "static": {
+    "formatExit": 0,
+    "javacAllLintExit": 0,
+    "checkstyleFindings": 0,
+    "spotbugsFindings": 0,
+    "pmdFindings": 0,
+    "scope": "new fixture only",
+    "hashes": {
+      "style.stdout": "2ee89ca49ecae1bb5b3de5ffcc8a964e605f1b1c6fbe072073a1ea4feaa4e230",
+      "spotbugs.xml": "c821743e545c999e085ee9083595fdc92c64ee1285f2faa901378c01031e686c",
+      "pmd.xml": "db463a1f45ce8ce262304f655bf8e3437b1ff70cddae618520e771097fe52580"
+    },
+    "fullNullAway": false
+  },
+  "verifier": {
+    "method": "XML, independent fixed JUnit ID, raw measured METHOD counters and static XML checked",
+    "proofLink": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43220-p019-schema-row-components-v2/coverage-unfiltered.tsv",
+      "sha256": "5a37b607de9e1aa67750bcfbf58a25f9412398cd95333adea678c0e09b3a6975"
+    }
+  },
+  "authorizedCommandManifestSha256": "7f22f1c8b9b1468a724476a763c3f21267e7240b03d5d1e7de173d32911ec652",
+  "stageExits": {
+    "format": 0,
+    "fixture": 0,
+    "style": 0,
+    "spotbugs": 0,
+    "pmd": 0,
+    "junit": 0,
+    "rawCompile": 0,
+    "unfiltered": 0
+  },
+  "streamSha256": "64f1b41cacdd2967bb9fd2bad15bb6724d1eeb11758c27a61571ebb83a6224c1",
+  "strictUnfilteredOutputSha256": "8b6f1e0390d5b87391e17ba3328ec3698ecae90211b6198472e50fd4e909884d",
+  "newMethodWitnesses": [
+    {
+      "method": "checksum",
+      "descriptor": "()Ljava/lang/Integer;",
+      "rawCounters": [
+        "1",
+        "INSTRUCTION:0:3",
+        "BRANCH:0:0",
+        "LINE:0:1",
+        "COMPLEXITY:0:1",
+        "METHOD:0:1",
+        "CLASS:0:0"
+      ]
+    },
+    {
+      "method": "equals",
+      "descriptor": "(Ljava/lang/Object;)Z",
+      "rawCounters": [
+        "17",
+        "INSTRUCTION:0:4",
+        "BRANCH:0:0",
+        "LINE:0:1",
+        "COMPLEXITY:0:1",
+        "METHOD:0:1",
+        "CLASS:0:0"
+      ]
+    },
+    {
+      "method": "installedRank",
+      "descriptor": "()I",
+      "rawCounters": [
+        "1",
+        "INSTRUCTION:0:3",
+        "BRANCH:0:0",
+        "LINE:0:1",
+        "COMPLEXITY:0:1",
+        "METHOD:0:1",
+        "CLASS:0:0"
+      ]
+    },
+    {
+      "method": "type",
+      "descriptor": "()Ljava/lang/String;",
+      "rawCounters": [
+        "1",
+        "INSTRUCTION:0:3",
+        "BRANCH:0:0",
+        "LINE:0:1",
+        "COMPLEXITY:0:1",
+        "METHOD:0:1",
+        "CLASS:0:0"
+      ]
+    },
+    {
+      "method": "version",
+      "descriptor": "()Ljava/lang/String;",
+      "rawCounters": [
+        "1",
+        "INSTRUCTION:0:3",
+        "BRANCH:0:0",
+        "LINE:0:1",
+        "COMPLEXITY:0:1",
+        "METHOD:0:1",
+        "CLASS:0:0"
+      ]
+    }
+  ],
+  "older14NotRerun": true,
+  "executionStreamsMerged": false,
+  "productionChanged": false,
+  "actualDatabaseOrMigrationUsed": false,
+  "newOrdinaryTestExecutions": 1,
+  "newTestDefinitions": 1,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
