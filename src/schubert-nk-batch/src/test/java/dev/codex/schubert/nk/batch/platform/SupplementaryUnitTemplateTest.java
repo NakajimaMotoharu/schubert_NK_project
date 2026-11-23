@@ -31,6 +31,7 @@ class SupplementaryUnitTemplateTest {
   private static final String ADMIN = "schubert-nk-bootstrap-admin.service.template";
   private static final String START = "caddy.service.d/schubert-nk-startup-policy.conf";
   private static final String STOP = "caddy.service.d/schubert-nk-stop-policy.conf";
+  private static final String WEB_UNIT = "schubert-nk-web.service";
   private static final Map<String, String> HARDENING =
       Map.ofEntries(
           Map.entry("NoNewPrivileges", DIRECTIVE_TRUE),
@@ -102,6 +103,8 @@ class SupplementaryUnitTemplateTest {
       return m;
     }
     if (name.equals(START)) {
+      put(m, UNIT_SECTION, "After", WEB_UNIT);
+      put(m, UNIT_SECTION, "Requires", WEB_UNIT);
       for (var entry :
           Map.ofEntries(
                   Map.entry("User", "caddy"),
@@ -264,9 +267,7 @@ class SupplementaryUnitTemplateTest {
     var actual = parse(text);
     var expected = expected(name);
     assertEquals(
-        name.equals(START) || name.equals(STOP)
-            ? List.of(SERVICE_SECTION)
-            : List.of(UNIT_SECTION, SERVICE_SECTION),
+        name.equals(STOP) ? List.of(SERVICE_SECTION) : List.of(UNIT_SECTION, SERVICE_SECTION),
         actual.sections());
     assertEquals(
         expected.keySet(),
@@ -331,5 +332,19 @@ class SupplementaryUnitTemplateTest {
     rejected(STOP, source(STOP), "not-a-directive\n");
     rejected(STOP, source(STOP), "[Unknown]\nTimeoutStopSec=30s\nSendSIGKILL=no\n");
     assertThrows(NullPointerException.class, () -> parse(null));
+  }
+
+  /** PT-OPS-UNIT-SUP006: Caddy follows Web through both dependencies (SS342 §4.1). */
+  @Test
+  void unitSup006CaddyWebOrderAndRequirementAreExplicit() throws IOException {
+    String start = source(START);
+    verify(START, start);
+    String after = "After=" + WEB_UNIT + "\n";
+    String requires = "Requires=" + WEB_UNIT + "\n";
+    rejected(START, start, start.replace(after, ""));
+    rejected(START, start, start.replace(requires, ""));
+    rejected(START, start, start.replace(requires, "Wants=" + WEB_UNIT + "\n"));
+    rejected(START, start, start.replace(after, after + "After=postgresql.service\n"));
+    rejected(START, start, start + "[Install]\nWantedBy=multi-user.target\n");
   }
 }
