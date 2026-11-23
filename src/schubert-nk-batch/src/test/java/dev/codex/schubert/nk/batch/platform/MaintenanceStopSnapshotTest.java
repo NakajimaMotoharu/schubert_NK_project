@@ -236,4 +236,35 @@ final class MaintenanceStopSnapshotTest {
       Thread.interrupted();
     }
   }
+
+  /** PT-OPS-MCATALOG001. Java identifiers and service names use distinct namespaces. */
+  @Test
+  void mcatalog001FixedNamesSelectTheOrderedServices() {
+    var names =
+        List.of("CADDY", "WEB", "API", "CLEANUP", "INSPECTOR", "EXPIRY", "BACKUP", "ARTEMIS");
+    assertEquals(names, Arrays.stream(MaintenanceUnit.values()).map(Enum::name).toList());
+    for (int index = 0; index < names.size(); index++) {
+      assertEquals(NAMES.get(index), MaintenanceUnit.valueOf(names.get(index)).serviceName());
+    }
+    assertThrows(IllegalArgumentException.class, () -> MaintenanceUnit.valueOf("caddy.service"));
+    assertThrows(NullPointerException.class, () -> MaintenanceUnit.valueOf(null));
+  }
+
+  /** PT-OPS-MCATALOG002. Strict reason names and a defensive enumeration snapshot. */
+  @Test
+  void mcatalog002FixedReasonsSurviveLookupAndCallerMutation() {
+    var names = List.of("MALFORMED_STATE", "NOT_STOPPED", "COMMAND_FAILURE", "TIMEOUT", "INTERRUPTED");
+    var callerValues = StopGateFailure.values();
+    assertEquals(names, Arrays.stream(callerValues).map(Enum::name).toList());
+    for (String name : names) {
+      var failure = new StopGateException(StopGateFailure.valueOf(name));
+      assertEquals(name, failure.reason().name());
+      assertEquals("application stop check failed", failure.getMessage());
+    }
+    callerValues[0] = StopGateFailure.INTERRUPTED;
+    assertEquals(names, Arrays.stream(StopGateFailure.values()).map(Enum::name).toList());
+    assertThrows(IllegalArgumentException.class, () -> StopGateFailure.valueOf("timeout"));
+    assertThrows(IllegalArgumentException.class, () -> StopGateFailure.valueOf("TIMEOUT "));
+    assertThrows(NullPointerException.class, () -> StopGateFailure.valueOf(null));
+  }
 }
