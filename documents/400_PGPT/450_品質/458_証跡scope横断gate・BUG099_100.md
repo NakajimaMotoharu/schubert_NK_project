@@ -1,5 +1,9 @@
 # 証跡scope横断gate・BUG-099/100
 
+## 保存JUnit証明書の形式検証（BUG-3692／YKT-2900）
+
+PT-QA-TRACE-002、G08。正式manifestと保存済みJUnit証明書に共通の厳格UTF-8 JSON読取を適用する。重複キーとJSON外数値を拒否する。既正規v1～v3のrun/sourceと、v3のbranch、本文hashと実ファイルの一致を維持する。019の保存証明書fixtureで合成の重複キー二種、非有限値三種の拒否を確認し、019の120件、017の1件は各終了0。正式証跡の置換・再収集は別に実施する。[PG43290](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43290-g08-persisted-junit-json-v1/manifest.json)。
+
 ## 2026-11-23 新規収集と再照合
 
 新規収集は `python3 -B tools/quality/018_collect_verified_evidence_set.py <新規run ID>`。標準出力先は作業ツリーの隣の `pgpt-formal-candidates/<run ID>`。既存の候補先は使用せず、別の未使用パスを指定する場合は `--candidate-root` を渡す。保存候補の再照合は同run IDと `--validate-only --candidate-root <既存候補パス>` で行う。終了値、出力先、53領域、出力の由来を確認してから正式公開を別途判断する。
