@@ -1,0 +1,262 @@
+{
+  "run": "PG43540",
+  "wbs": "WBS-C07",
+  "source": "c2cd526f72fb680a7f19eb3d16a225c85fd54b7f",
+  "productionCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "terminalAtUTC": "2026-11-23T09:58:27.190356+00:00",
+  "actualToolTerminalAtUTC": "2026-11-23T09:57:38.180248+00:00",
+  "actualExit": 0,
+  "input": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43540-c07-mode-four-current-v1/begin.json",
+    "sha256": "9772a4870f0434979d81becacf9a73659faff11a17bd4b38089a1b45f6112d02"
+  },
+  "originalTerminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43540-c07-mode-four-current-v1/terminal.json",
+    "sha256": "b5e1ac6a6e28f2e8aec2f0fccc47ff1317758af6b62dcf38d2f5b56b7b0957af"
+  },
+  "originalJunit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43540-c07-mode-four-current-v1/reports/TEST-junit-jupiter.xml",
+    "sha256": "6a95c16602e7aca1b9eb4744d44359d7b2030de26926bb33e6dea9e21a2f30d5"
+  },
+  "originalExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43540-c07-mode-four-current-v1/chosen.exec",
+    "sha256": "c0fc16640925fc208c58ab82690b9f7a77e1e03425d65186610bd55bfa4a3133"
+  },
+  "originalExecSession": {
+    "labelBytesHex": "504734333534302d4330372d4d4f444539",
+    "startMillis": 1795427857448,
+    "endMillis": 1795427858029
+  },
+  "coverage": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43540-current-mode-nine-partial-four-v1/unfiltered.tsv",
+    "sha256": "187f4516f380bb12214a6b488866274995f626e37bdc86ca2ee477b3ad1e7a93"
+  },
+  "counters": {
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy": {
+      "crc": "32e0add2eb1aa21e",
+      "matched": true,
+      "probeCapacity": 30,
+      "counters": {
+        "INSTRUCTION": [
+          33,
+          127
+        ],
+        "BRANCH": [
+          6,
+          10
+        ],
+        "LINE": [
+          7,
+          22
+        ],
+        "COMPLEXITY": [
+          4,
+          15
+        ],
+        "METHOD": [
+          1,
+          10
+        ],
+        "CLASS": [
+          0,
+          1
+        ]
+      }
+    },
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy$DetailService": {
+      "crc": "761218a040b30640",
+      "matched": true,
+      "probeCapacity": 9,
+      "counters": {
+        "INSTRUCTION": [
+          0,
+          60
+        ],
+        "BRANCH": [
+          0,
+          0
+        ],
+        "LINE": [
+          0,
+          5
+        ],
+        "COMPLEXITY": [
+          0,
+          5
+        ],
+        "METHOD": [
+          0,
+          5
+        ],
+        "CLASS": [
+          0,
+          1
+        ]
+      }
+    },
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy$RetentionConfiguration": {
+      "crc": "31817964a7da4877",
+      "matched": false,
+      "probeCapacity": 10,
+      "counters": {
+        "INSTRUCTION": [
+          36,
+          0
+        ],
+        "BRANCH": [
+          4,
+          0
+        ],
+        "LINE": [
+          4,
+          0
+        ],
+        "COMPLEXITY": [
+          8,
+          0
+        ],
+        "METHOD": [
+          6,
+          0
+        ],
+        "CLASS": [
+          1,
+          0
+        ]
+      }
+    },
+    "dev/codex/schubert/nk/batch/monitoring/ObservationContext": {
+      "crc": "45dd5ef40bfe0038",
+      "matched": true,
+      "probeCapacity": 12,
+      "counters": {
+        "INSTRUCTION": [
+          5,
+          46
+        ],
+        "BRANCH": [
+          1,
+          1
+        ],
+        "LINE": [
+          0,
+          7
+        ],
+        "COMPLEXITY": [
+          1,
+          7
+        ],
+        "METHOD": [
+          0,
+          7
+        ],
+        "CLASS": [
+          0,
+          1
+        ]
+      }
+    }
+  },
+  "missing": {
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy": [
+      {
+        "method": "verifyObservedRetention",
+        "descriptor": "(Ljava/util/Optional;)V"
+      }
+    ],
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy$RetentionConfiguration": [
+      {
+        "method": "<init>",
+        "descriptor": "(IJ)V"
+      },
+      {
+        "method": "toString",
+        "descriptor": "()Ljava/lang/String;"
+      },
+      {
+        "method": "hashCode",
+        "descriptor": "()I"
+      },
+      {
+        "method": "equals",
+        "descriptor": "(Ljava/lang/Object;)Z"
+      },
+      {
+        "method": "days",
+        "descriptor": "()I"
+      },
+      {
+        "method": "bytes",
+        "descriptor": "()J"
+      }
+    ],
+    "dev/codex/schubert/nk/batch/monitoring/ObservationContext": [
+      {
+        "method": "<init>",
+        "descriptor": "(Ldev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance;Ljava/time/Instant;Ljava/time/Duration;)V"
+      }
+    ]
+  },
+  "preciseEarlier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40986-f03-mode-policy-explicit-comparison-v2/manifest.json",
+    "sha256": "12165f5e40f95221a019cfe91fc82e2d3bfab6391416c51184a9e53f69f6163d"
+  },
+  "expected": [
+    [
+      "MonitoringModePolicyTest",
+      "monMode001ApprovedLiteralSettings"
+    ],
+    [
+      "MonitoringModePolicyTest",
+      "monMode002MatchingObservationsNotMutated"
+    ],
+    [
+      "MonitoringModePolicyTest",
+      "monMode003AllThirtyTwoServiceStates"
+    ],
+    [
+      "MonitoringModePolicyTest",
+      "monMode004MissingObservationNeverMeansHealthy"
+    ],
+    [
+      "MonitoringModePolicyTest",
+      "monMode005NullContractsAreNotNormalObservations"
+    ],
+    [
+      "MonitoringModePolicyTest",
+      "monMode006UnknownAndAliasedInputIsRedacted"
+    ],
+    [
+      "MonitoringModePolicyTest",
+      "monMode007ConcurrentCallersCannotChangePolicy"
+    ],
+    [
+      "GeneratedBatchValueContractTest",
+      "genBatch004ModeContinuityAndSuffixFactoriesCannotShareReturnedArrays"
+    ],
+    [
+      "GeneratedBatchValueContractTest",
+      "genBatch005ObservationContextGeneratedContractsUseIndependentPlatformHashes"
+    ]
+  ],
+  "result": {
+    "executed": 9,
+    "passed": 9,
+    "failed": 0,
+    "skipped": 0,
+    "oldExecCombined": 0,
+    "scopeCoverageConfirmed": false,
+    "productOrdinaryExecutionsCumulative": 3142,
+    "productApplicableSuccessesCumulative": 3094,
+    "formalAcceptanceId": null,
+    "whole451": false
+  },
+  "nextMinimalCurrentSources": {
+    "retention": "existing MonitoringRetentionConfigurationTest eight cases",
+    "observation": "existing MonitoringPolicyEngineTest#monPipe001 (fixed null/negative assertions)"
+  },
+  "remaining": [
+    "supplement four-class local counter proof in a fresh designed run",
+    "actual operational/effective release and 451"
+  ]
+}
