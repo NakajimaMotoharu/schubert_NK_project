@@ -1,5 +1,9 @@
 # IT・ST引継ぎ事項
 
+## 2026-11-23 21:01 JST C08の配布・復旧引継ぎ照合
+
+承認済みSS353のRB-001～010を、現候補で渡せる10件の技術区分と、実Linuxで取得する証拠に対応付けた。担当欄は設計上の役割で、個人の割当や受領は未確定。実効Unit・実DB/JMS・FileStore・native・Browser、同候補の署名BOMと配布条件・承認担当、切戻し判定が残る。QA-061の配布条件と担当は未決。実環境の取得・受領済み0、IT/ST開始判定未到達。 [C08の十項目と原証跡](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43618-c08-itst-handoff-static-prerequisites/manifest.json)
+
 ## 2026-11-23 18:09 JST PG43500 外部依存POMの親宣言
 
 取得元POMに直接欄がない17座標は、同じ保全cacheの親POMを追い、17件すべての最も近い宣言箇所を固定した。現四製品の36件は直接19／親宣言17の局所根拠を持つ。P019-02は共通成果参照で追加費0。配布条件・承認担当、署名付き全六の実配布クラスパスと実際の判定は未成立。 [PG43500](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43500-current-retained-parent-license-declarations-v1/manifest.json)

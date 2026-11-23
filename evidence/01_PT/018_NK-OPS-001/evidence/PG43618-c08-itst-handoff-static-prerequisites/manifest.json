@@ -1,0 +1,169 @@
+{
+  "run": "PG43618",
+  "source": "26a68cafe13ba7692896b4bf1236e88fb16ee94a",
+  "productionCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": [
+    "WBS-C08"
+  ],
+  "terminalAtUTC": "2026-11-23T12:00:46.830712+00:00",
+  "actualExit": 0,
+  "approvedRunbook": {
+    "path": "documents/300_SS/350_運用・品質/353_障害検知・復旧runbook.md",
+    "commit": "7745de1fb04c8b9e2cfccc11103d7b3c57b090d7",
+    "sha256": "39708837ac8fc5e9245d8633eb40580ddb048e517ddf8ec19c8192e434a34719"
+  },
+  "handoffAtStart": {
+    "path": "documents/400_PGPT/460_完了報告/464_IT・ST引継ぎ事項.md",
+    "sha256": "ffb44d03414b49bc4bfe488cbced9159ed877e9c06778333e39b4c2ac3a59904"
+  },
+  "currentNormativeRunbooks": [
+    {
+      "id": "RB-001",
+      "title": "Web/Caddy障害",
+      "plannedOwner": "Linux運用",
+      "currentTechnicalScope": "Caddy/Webの追跡Unit宣言と起動順のみ",
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43584-c02-current-unit-order-graph-v1/manifest.json",
+        "sha256": "35b35b3cf208501f6aa793e1525efca2ed1d31cb2b013c57fb01449b5897b40c"
+      },
+      "witnessSource": "bfd632227ca3d816e6ef3f1f304a61fe5dcbe465",
+      "requiredExistingPrerequisite": "同一bootの実効設定、同一候補での起動・応答・真正停止",
+      "actualLinuxReceipt": null,
+      "readyForITST": false
+    },
+    {
+      "id": "RB-002",
+      "title": "API障害",
+      "plannedOwner": "ビルド・API",
+      "currentTechnicalScope": "APIの局所品質証拠と包装の不足",
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43578-f03-six-module-scoped-delta-v1/manifest.json",
+        "sha256": "f110f156822f91933c65c0d833449becc47a13ce6db199d8f3d5c99db45423ee"
+      },
+      "witnessSource": "f3a2c3d9c715e4a0db5c39f8e0495ff9a896de36",
+      "requiredExistingPrerequisite": "QA-056の確定、API正規JAR、同候補の実起動・所有終端",
+      "actualLinuxReceipt": null,
+      "readyForITST": false
+    },
+    {
+      "id": "RB-003",
+      "title": "Artemis/Broker障害",
+      "plannedOwner": "JMS・Linux運用",
+      "currentTechnicalScope": "ブローカー雛形のXSDと六宛先の順序・routing",
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43574-broker-template-durable-offline-current-v1/manifest.json",
+        "sha256": "6503b229e6eda954a6a1a5bbad1fc2f4b3121b6b5f382d5182983e24e46f9f06"
+      },
+      "witnessSource": "a2e709c214485d9cb9e678b1d6ba169860b1bc36",
+      "requiredExistingPrerequisite": "同候補の実効JMSと必要な送受信・再送後条件",
+      "actualLinuxReceipt": null,
+      "readyForITST": false
+    },
+    {
+      "id": "RB-004",
+      "title": "Protocol error・DLQ",
+      "plannedOwner": "Protocol・JMS",
+      "currentTechnicalScope": "電文期待値と現fixtureの局所再試験",
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43596-protocol-fixture-provenance-guard/final-check.json",
+        "sha256": "3b885e0027f650fa13e5576996da5745523e2e1818596622ce8a10cad9a61a5a"
+      },
+      "witnessSource": "955745c9aac59b03e9cb589673c323e14c9ecba2",
+      "requiredExistingPrerequisite": "実電文・DLQの同候補証跡と再送時の業務重複防止",
+      "actualLinuxReceipt": null,
+      "readyForITST": false
+    },
+    {
+      "id": "RB-005",
+      "title": "PostgreSQL障害・restore",
+      "plannedOwner": "DB・運用",
+      "currentTechnicalScope": "合成DAOの借用接続・検査summaryの局所条件",
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43254-p00402-inspection-summary-corrected13-v1/manifest.json",
+        "sha256": "f9b548a6fce93dfa09cc859bf5b19b28622f4a232a6a54992b8d51fced6f009b"
+      },
+      "witnessSource": "83bb487538a56dfe59ae4437b2946ae0e04eed81",
+      "requiredExistingPrerequisite": "承認済み環境でのDB実効値、原本・Backup・復旧後条件の独立証拠",
+      "actualLinuxReceipt": null,
+      "readyForITST": false
+    },
+    {
+      "id": "RB-006",
+      "title": "Disk・memory・resource枯渇",
+      "plannedOwner": "環境・監視",
+      "currentTechnicalScope": "保全mode・保持・観測値の局所PT",
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43542-current-mode-18-single-exec-v1/manifest.json",
+        "sha256": "bb850ab86348ace37f0a15d37438a90eff0288c4d442f22442bdc90470e4fce3"
+      },
+      "witnessSource": "78d16f1496ee21caaf8afce1f7de4c6135764b9b",
+      "requiredExistingPrerequisite": "実FileStore/JVM/DB/JMS容量と通知の実測",
+      "actualLinuxReceipt": null,
+      "readyForITST": false
+    },
+    {
+      "id": "RB-007",
+      "title": "Backup/morning障害",
+      "plannedOwner": "Batch・運用",
+      "currentTechnicalScope": "追跡Unit 11と依存順28辺",
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43584-c02-current-unit-order-graph-v1/manifest.json",
+        "sha256": "35b35b3cf208501f6aa793e1525efca2ed1d31cb2b013c57fb01449b5897b40c"
+      },
+      "witnessSource": "bfd632227ca3d816e6ef3f1f304a61fe5dcbe465",
+      "requiredExistingPrerequisite": "固定保守service、真正終端、同一owner排他、Backup保持・外部監視",
+      "actualLinuxReceipt": null,
+      "readyForITST": false
+    },
+    {
+      "id": "RB-008",
+      "title": "File/media integrity障害",
+      "plannedOwner": "資源・環境",
+      "currentTechnicalScope": "合成の容量と移送値の局所検証",
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43072-capacity-older-fixture-reservations-v1/manifest.json",
+        "sha256": "620b325d39fff024fcf2298b86e954a560c90273b614062e85731273ef2c8577"
+      },
+      "witnessSource": "264eba95c806be90364e88dd036a4f591b16d7da",
+      "requiredExistingPrerequisite": "現FileStoreの所有、原本・整理後条件と保全実測",
+      "actualLinuxReceipt": null,
+      "readyForITST": false
+    },
+    {
+      "id": "RB-009",
+      "title": "Credential・crypto・security incident",
+      "plannedOwner": "セキュリティ担当",
+      "currentTechnicalScope": "現公開Git範囲の秘密検出0",
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43610-g07-new-published-delta/manifest.json",
+        "sha256": "19372e1543a32d5c365c9dab558f95dfedb68795b1b67f954c42add365339f69"
+      },
+      "witnessSource": "a7c6fe6c503a2b08aa45fd3bdec0ffaaeac9fc69",
+      "requiredExistingPrerequisite": "秘密実体なしで環境側の運用記録・担当受領を確認",
+      "actualLinuxReceipt": null,
+      "readyForITST": false
+    },
+    {
+      "id": "RB-010",
+      "title": "Config/release drift",
+      "plannedOwner": "リリース・運用",
+      "currentTechnicalScope": "四製品・固定corpusの外部36座標",
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43592-four-current-local-offline-advisory-models/qualified-repository-manifest.json",
+        "sha256": "7722218185ef10faa73055d7863b0c166af99cfe6b95f2eda9aac6da960c9d6f"
+      },
+      "witnessSource": "3cb90c292a7d42b09cfbaa2b5b66354b6c42ff93",
+      "requiredExistingPrerequisite": "QA-061の配布条件と担当、同候補の署名BOM・全配布物・切戻し受入",
+      "actualLinuxReceipt": null,
+      "readyForITST": false
+    }
+  ],
+  "handoffRows": 10,
+  "currentlyReceivedQualifiedEffectiveRuns": 0,
+  "noNewContractOrExternalChanges": true,
+  "realEnvironmentAccess": false,
+  "productTestsExecuted": 0,
+  "whole451": false,
+  "apparentStartJudgment": "WAITING_FOR_EXISTING_RELEASE_AND_LINUX_PRECONDITIONS",
+  "formalAcceptanceId": null
+}
