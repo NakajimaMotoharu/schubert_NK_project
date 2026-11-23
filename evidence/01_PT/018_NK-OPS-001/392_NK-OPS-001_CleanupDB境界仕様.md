@@ -18,3 +18,7 @@ NK-OPS-001/NK-BAT-001、CleanupTerminalRepository.read/references/readRejected/e
 |PT-OPS-CTERM009|六BACKUP_UNAVAILABLE/SKIPPED/zero・同時刻＋Transfer SUCCESSの独立SQL正常形、正常profileへの混入/誤reason/時刻差/nonzero/Transfer混入を拒否。referencesの独立current SKIPとprior SUCCESSにnullscope/欠落/複数/別step/同id/非priorattempt/WARNING及びpublic current不整合を投入し、固定拒否と全FD/元全列不変を確認|
 
 負値入力はspec literal/実JDBCインターフェースだけ、source/read/private診断を成功oracleに使わない。期待時刻は手書きUTC、期待fieldはDDLと十四列SQL、各projection拒否後原行をSQL後条件へ照合。並行/native・再送は既同owner/regressionへ分離、coverage除外0、未実行・中断・別source・global100未達の合格加算0。command/source/XML/static/counter/BUG・hashは393へ。秘密/rawsession/DB dump/私有logはGit外。
+
+## SSC-461 Cleanup終端SQL分類の独立単体
+
+PT-BAT-SSC461-CT001～004、PG43832、BUG-3233／YKT-2680。公開read／readRejectedに固定run・観測時刻・5秒の合成guardを供給し、借用Connection代理の最初のgetAutoCommitでSQLExceptionを発生させる。取引やprepared resourcesは未取得。固定BatchRepositoryException、空cause・suppressed、SQL nextの同一Error、普通causeの優先、代理呼出は各一回で他操作0を独立確認する。readBackupUnavailableの共有read本文、既SQL・close・提出済みintegration試験は変更しない。現sourceの局所静的・公開ABIとbefore/afterの選択結果を保持。実DBとは別。
