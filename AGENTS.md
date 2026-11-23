@@ -8,3 +8,4 @@
 - 485または486を変更する手動commitでは、485の全バイトのSHA-256を486の `inventorySha256` に反映し、必要なファイルをstageしてから `python3 -B tools/quality/wbs_index_binding.py` を実行する。stage済みの二文書が一致したことを確認してからcommitする。
 - JARを静的解析に渡す前に、今回のコマンドが読む対象と補助入力を、既存の許可範囲・保留範囲と照合する。ビルド済みJARの収録範囲だけで静的解析の許可を判断しない。範囲が未確定の実行は保留し、許可済みの独立作業を継続する。
 - 独立して固定済みの許可範囲と収録一覧が揃う場合、`tools/quality/static_input_scope.py`で計画の対象・補助入力のSHA-256と全収録型を照合できる。照合結果はメタデータの整合性を示す。実コマンドが読む入力との対応と既存の実施許可は別途確認する。
+- Java sourceのみを読む書式・静的検査の新規対象は、ツール固有の実施許可を対象pathごとに先に確認する。実施前に `static_input_scope.py --source-only` で、source commit、ツール名・実体SHA-256、全pathとGit blobを固定済みの許可・保留・収録記録へ照合する。planは `source`、`tool`、`toolSha256`、`filesByPath`（pathからblobへの対応）を持つ。scopeは同じsource・ツール名・実体と `admitted`／`held`、inventoryは同じsourceと `filesByPath` を持つ。実コマンドには確認済み実体と確認済みファイルだけを明示し、ワイルドカードやディレクトリの自動発見は使わない。実施根拠と実入力を確認できない範囲は保留する。

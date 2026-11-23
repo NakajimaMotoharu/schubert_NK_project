@@ -1,4 +1,4 @@
-"""Synthetic regression cases for BUG-3412; no artifact or analyzer access."""
+"""Synthetic regression cases for artifact and source input scope."""
 
 import contextlib
 import hashlib
@@ -8,7 +8,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from static_input_scope import ScopeError, compare_scope, main, read_metadata
+from static_input_scope import ScopeError, compare_scope, compare_source_scope, main, read_metadata
 
 
 class StaticInputScopeTest(unittest.TestCase):
@@ -94,6 +94,85 @@ class StaticInputScopeTest(unittest.TestCase):
                 self.assertEqual(1, main(args))
             self.assertEqual({"scopeMatch": False, "reason": "RECEIPT_DIGEST_MISMATCH"},
                              json.loads(output.getvalue()))
+
+
+class SourceInputScopeTest(unittest.TestCase):
+    def setUp(self):
+        self.source = "d" * 40
+        self.blob = "e" * 40
+        self.path = "fixture/src/Admitted.java"
+        self.held = "fixture/src/Held.java"
+        self.plan = {"source": self.source, "tool": "formatter", "toolSha256": "a" * 64,
+                     "filesByPath": {self.path: self.blob}}
+        self.scope = {"source": self.source, "tool": "formatter", "toolSha256": "a" * 64,
+                      "admitted": [self.path], "held": [self.held]}
+        self.inventory = {"source": self.source,
+                          "filesByPath": {self.path: self.blob, self.held: "b" * 40}}
+
+    def reject(self, reason):
+        with self.assertRaisesRegex(ScopeError, "^" + reason + "$"):
+            compare_source_scope(self.plan, self.scope, self.inventory)
+
+    def test_cli_accepts_only_exact_tool_path_and_blob_metadata(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            args = ["--source-only"]
+            for flag, record in (("plan", self.plan), ("scope", self.scope),
+                                 ("inventory", self.inventory)):
+                path = root / flag
+                data = json.dumps(record).encode("utf-8")
+                path.write_bytes(data)
+                args.extend(("--" + flag, str(path)))
+                if flag != "plan":
+                    args.extend(("--" + flag + "-sha256", hashlib.sha256(data).hexdigest()))
+            output = io.StringIO()
+            with contextlib.redirect_stdout(output):
+                self.assertEqual(0, main(args))
+            self.assertEqual({"scopeMatch": True, "tool": "formatter", "files": 1},
+                             json.loads(output.getvalue()))
+
+    def test_other_tool_receipt_is_rejected(self):
+        self.scope["tool"] = "checkstyle"
+        self.reject("TOOL_MISMATCH")
+
+    def test_other_tool_artifact_is_rejected(self):
+        self.scope["toolSha256"] = "b" * 64
+        self.reject("TOOL_MISMATCH")
+
+    def test_old_source_receipt_is_rejected(self):
+        self.inventory["source"] = "f" * 40
+        self.reject("SOURCE_MISMATCH")
+
+    def test_later_held_path_invalidates_entire_batch(self):
+        self.plan["filesByPath"][self.held] = "b" * 40
+        self.reject("HELD_SOURCE_PATH")
+
+    def test_unreviewed_path_is_rejected_even_when_in_inventory(self):
+        extra = "fixture/src/Unreviewed.java"
+        self.inventory["filesByPath"][extra] = "b" * 40
+        self.plan["filesByPath"][extra] = "b" * 40
+        self.reject("UNASSESSED_SOURCE_PATH")
+
+    def test_missing_inventory_path_is_rejected(self):
+        del self.inventory["filesByPath"][self.path]
+        self.reject("UNCATALOGUED_SOURCE_PATH")
+
+    def test_changed_blob_at_same_path_is_rejected(self):
+        self.plan["filesByPath"][self.path] = "c" * 40
+        self.reject("SOURCE_BLOB_MISMATCH")
+
+    def test_path_aliases_and_wildcards_are_rejected_even_if_listed(self):
+        for path in ("../Admitted.java", "/Admitted.java", "fixture//Admitted.java",
+                     "fixture/./Admitted.java", "fixture/*", "fixture\\Admitted.java"):
+            with self.subTest(path=path):
+                self.plan["filesByPath"] = {path: self.blob}
+                self.scope["admitted"] = [path]
+                self.inventory["filesByPath"] = {path: self.blob}
+                self.reject("INVALID_SOURCE_PATH")
+
+    def test_unmodeled_arg_list_is_rejected(self):
+        self.plan["inputs"] = ["fixture/src"]
+        self.reject("INVALID_SOURCE_PLAN_FIELDS")
 
 
 if __name__ == "__main__":
