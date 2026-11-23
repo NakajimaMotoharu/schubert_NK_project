@@ -196,6 +196,39 @@ class ReactorJunitTest(unittest.TestCase):
                     self.capture()
                 self.assertFalse(self.marker(".junit.json").exists())
 
+    def test_junit023_invalid_property_shapes_never_create_terminal_evidence(self):
+        property_block = b'<properties><property name="dummy" value="fixture-omitted-property"/></properties>'
+        invalid_blocks = (
+            b"<properties><note>fixture label</note></properties>",
+            b'<properties><property name="locale"/></properties>',
+            b'<properties><property name="locale" value="fixed"><note>label</note></property></properties>',
+            b"<properties/><properties/>",
+        )
+        for invalid in invalid_blocks:
+            with self.subTest(invalid=invalid):
+                self.marker(".junit.json").unlink(missing_ok=True)
+                self.paths[1].write_bytes(REPORT.replace(property_block, invalid))
+                with self.assertRaisesRegex(ValueError, "invalid reactor JUnit properties"):
+                    self.capture()
+                self.assertFalse(self.marker(".junit.json").exists())
+
+    def test_junit024_empty_or_populated_optional_properties_preserve_original_bytes(self):
+        property_block = b'<properties><property name="dummy" value="fixture-omitted-property"/></properties>'
+        valid_blocks = (
+            b"",
+            b"<properties/>",
+            b'<properties><property name="one" value=""/><property name="two" value="a &amp; b"/></properties>',
+        )
+        exercised_paths = self.paths[:len(valid_blocks)]
+        for target, properties in zip(exercised_paths, valid_blocks, strict=True):
+            target.write_bytes(REPORT.replace(property_block, properties))
+        self.success()
+        reports = json.loads(self.verify())["reports"]
+        for path in exercised_paths:
+            relative = path.relative_to(self.repo).as_posix()
+            self.assertEqual(1, reports[relative]["tests"])
+            self.assertEqual(hashlib.sha256(path.read_bytes()).hexdigest(), reports[relative]["sha256"])
+
     def test_invalid_counters_or_absent_case_cannot_pass(self):
         for content in (
             REPORT.replace(b'tests="1"', b'tests="2"'),

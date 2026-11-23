@@ -50,6 +50,24 @@ def reactor_run_record(directory, run, suffix):
     return path
 
 
+def _verify_report_properties(suite):
+    containers = suite.findall("properties")
+    if len(containers) > 1:
+        raise ValueError("invalid reactor JUnit properties")
+    if not containers:
+        return
+    container = containers[0]
+    if container.attrib or (container.text or "").strip() or any(
+        row.tag != "property"
+        or row.attrib.keys() != {"name", "value"}
+        or len(row)
+        or (row.text or "").strip()
+        or (row.tail or "").strip()
+        for row in container
+    ):
+        raise ValueError("invalid reactor JUnit properties")
+
+
 def _report(content, module_cases):
     suite = ET.fromstring(content)
     cases = suite.findall("testcase")
@@ -77,6 +95,7 @@ def _report(content, module_cases):
         )
     ):
         raise ValueError("empty, inconsistent or nonpassing reactor JUnit report")
+    _verify_report_properties(suite)
     case_ids = {(case.get("classname"), case.get("name")) for case in cases}
     if len(case_ids) != len(cases) or module_cases & case_ids:
         raise ValueError("duplicate reactor JUnit case")
