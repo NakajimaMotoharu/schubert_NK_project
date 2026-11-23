@@ -1,0 +1,93 @@
+{
+  "run": "PG43808",
+  "source": "4b00cc3e15cc3c7b6415d2784acfcfccf2d793ad",
+  "oldSource": "adcb63f28202215d9af88663459a20ed64d3bf1d",
+  "terminalAtUTC": "2026-11-23T17:55:50.282353+00:00",
+  "wbs": "WBS-F03/2-2-b",
+  "related": "WBS-P018-09",
+  "scope": "Web MediaStreamsMetricCollector only; same source coverage of one class",
+  "oldAttempts": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43808-web-media-before-v1/compile.out",
+      "sha256": "d5da2897c129cea6e0899e0d64a686cecb4e5a3b65d2247e7fcd7ce273bf0ff4"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43808-web-media-before-retest-v1/terminal.json",
+      "sha256": "e4267b56872613e04c8ee6867456512cce57d436a86931da10c8589c886a5cfc"
+    }
+  ],
+  "firstProductUnitAttemptPassed": true,
+  "tests": {
+    "ids": "PT-OPS-MEDIACONN001–008",
+    "executed": 8,
+    "passed": 8,
+    "failed": 0,
+    "skipped": 0,
+    "newIds": 0
+  },
+  "raw": {
+    "priorPMD": [
+      [
+        "AvoidSynchronizedStatement",
+        28
+      ],
+      [
+        "AvoidCatchingGenericException",
+        35
+      ],
+      [
+        "AvoidCatchingGenericException",
+        35
+      ]
+    ],
+    "newPMD": [
+      [
+        "AvoidCatchingGenericException",
+        37
+      ],
+      [
+        "AvoidCatchingGenericException",
+        37
+      ]
+    ],
+    "pmdExit": 4,
+    "unexplainedPmdFindingsOfThisSpecificLock": 0,
+    "spotBugs": 0,
+    "checkstyleMain": 0,
+    "checkstyleTest": 0,
+    "nullAwayMain": 0,
+    "formatMainInputs": 4,
+    "formatTestInputs": 1
+  },
+  "singleExecCoverage": {
+    "line": 18,
+    "method": 3,
+    "class": 1,
+    "branch": 4,
+    "instruction": 87,
+    "missed": 0
+  },
+  "independentTest": "JVM test worker IDs establish real lock ownership while first input is pinned and second supplier is not invoked. Fixed gauges and result values 7/11/13 preserve read and publication order, then independent AUDIO and VIDEO states.",
+  "files": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43808-web-media-before-bound-v1/terminal.json",
+      "sha256": "50dcdb11fbe003c117dd1234665863dd017869fca9910e9a7a80352d38f2cc2e"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43808-web-media-after-v1/terminal.json",
+      "sha256": "c1616a0eb10709c8513787e3c924a8ab96db6483cf0869a3519a5e02a675daac"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43808-web-media-after-v1/fixture-style-terminal.json",
+      "sha256": "beceb767e1eea40dffa1db29b48a2caaefc7c3bc3e8fe0d159602225840cc5a6"
+    }
+  ],
+  "bugs": [
+    "BUG-3740",
+    "BUG-3741",
+    "YKT-2929"
+  ],
+  "actualExternalOperations": 0,
+  "phasesF03And451Accepted": false,
+  "newFormalAcceptanceId": null
+}
