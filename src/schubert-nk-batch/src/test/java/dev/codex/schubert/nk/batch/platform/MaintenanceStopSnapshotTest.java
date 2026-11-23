@@ -253,7 +253,8 @@ final class MaintenanceStopSnapshotTest {
   /** PT-OPS-MCATALOG002. Strict reason names and a defensive enumeration snapshot. */
   @Test
   void mcatalog002FixedReasonsSurviveLookupAndCallerMutation() {
-    var names = List.of("MALFORMED_STATE", "NOT_STOPPED", "COMMAND_FAILURE", "TIMEOUT", "INTERRUPTED");
+    var names =
+        List.of("MALFORMED_STATE", "NOT_STOPPED", "COMMAND_FAILURE", "TIMEOUT", "INTERRUPTED");
     var callerValues = StopGateFailure.values();
     assertEquals(names, Arrays.stream(callerValues).map(Enum::name).toList());
     for (String name : names) {
