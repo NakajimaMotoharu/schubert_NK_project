@@ -1,0 +1,98 @@
+{
+  "run": "PG43502",
+  "source": "036deb687eca6c6c498e4866d3cda6678bf30fa3",
+  "productionCoreMain": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "startedAtUTC": "2026-11-23T09:11:45.595867+00:00",
+  "observedToolTerminalAtUTC": "2026-11-23T09:11:45.962132+00:00",
+  "terminalAtUTC": "2026-11-23T09:14:43.047724+00:00",
+  "actualExit": 0,
+  "tool": "3.14.4 (main, Aug 20 2026, 10:41:58) [GCC 15.2.0]",
+  "os": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+  "argv": [
+    "/usr/bin/python3",
+    "-B",
+    "-m",
+    "unittest",
+    "-v",
+    "test_verify_maven_sbom",
+    "test_verify_maven_advisories"
+  ],
+  "inputs": [
+    {
+      "path": "tools/quality/verify_maven_sbom.py",
+      "sha256": "2ec9f0d41d356e617dc7b55927cdb5588bb68fa34e64372f13fe281f2137e35a"
+    },
+    {
+      "path": "tools/quality/verify_maven_advisories.py",
+      "sha256": "8c7ad50f14008c1755f476f11976dcfe2ff49f8796c64957f6f83367939e1499"
+    },
+    {
+      "path": "tools/quality/tests/test_verify_maven_sbom.py",
+      "sha256": "6c01da553318b5ef8d08379cc496c01dfa691c7d64d75050d818b475b5c87971"
+    },
+    {
+      "path": "tools/quality/tests/test_verify_maven_advisories.py",
+      "sha256": "211f1385b30cb842da9ff69e2a253fdb6180a98080d831937bbedcd0abcbe5c4"
+    }
+  ],
+  "originalEvidence": [
+    {
+      "path": "../pgpt-runs/PG379/PG43502-maven-metadata-strict-green-v1/begin.json",
+      "sha256": "30b26f92233100a758a3ff0046aa823808809716840b4a3e3e896001b9807ca1"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43502-maven-metadata-strict-green-v1/terminal.json",
+      "sha256": "cf335dba04a775cc035672946706108d96ed6542bd996e1b25f167c16dbe4a35"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43502-maven-metadata-strict-green-v1/junit.stderr",
+      "sha256": "e0f4685e606cbc41349ca3065552cc0e9343049c1f016976e5ca8a3302806baf"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43502-maven-metadata-strict-green-v1/junit.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "trace": [
+    "RD171 SCM-005",
+    "SS352",
+    "BUG-3712",
+    "YKT-2912"
+  ],
+  "staticBefore": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43502-sbom-strict-json-static-before-v1/manifest.json",
+    "sha256": "4865f6f67e8cbc6188cc88d1efbbca01a2438d14350d0dad051b13bbfc347a2b"
+  },
+  "roster": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43502-maven-metadata-strict-green-v1/pass.tsv",
+    "sha256": "6e380883223d2258a4b043a8fcf37542ac337a18f44323ecaf924e50ed00b9fe"
+  },
+  "scope": "temporary third-party strings and no real scanner: test_verify_maven_advisories mocks subprocess at every scan test",
+  "result": {
+    "passed": 24,
+    "failed": 0,
+    "skipped": 0,
+    "selectedTests": {
+      "PT-OPS-SBOM-028": "test_sbom028_cli_rejects_non_json_numeric_constants",
+      "PT-OPS-OSV-012": "test_012_non_json_input_stops_before_the_scanner",
+      "PT-OPS-OSV-013": "test_013_non_json_mocked_scanner_result_is_rejected"
+    },
+    "productPtAdded": 0,
+    "productOrdinaryTotal": 3118,
+    "productApplicableSuccess": 3070,
+    "actualScanner": 0,
+    "actualPackages": 0,
+    "whole451": false,
+    "formalAcceptanceId": null
+  },
+  "oracle": {
+    "PT-OPS-SBOM-028": "NaN, Infinity and -Infinity: exit 1, expected diagnostic, empty stdout",
+    "PT-OPS-OSV-012": "A non-JSON token in the BOM stops before mocked scanner invocation",
+    "PT-OPS-OSV-013": "A mocked scanner result with a non-JSON token is rejected"
+  },
+  "remaining": [
+    "identities and approvals for distribution and dependencies (QA-061 answer recorded)",
+    "six-product release SBOM and actual external approval",
+    "formal product 451"
+  ]
+}
