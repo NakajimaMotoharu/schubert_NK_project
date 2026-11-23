@@ -1,0 +1,148 @@
+{
+  "run": "PG43332-chr-lock-text-retry-header-v2",
+  "source": "b4f8e867a49aac240e792b9494de10b44eeca137",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-P020-01.02/2",
+  "terminalAtUTC": "2026-11-23T04:37:58.386816+00:00",
+  "actualExit": 0,
+  "commands": {
+    "compile": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+      "--release",
+      "25",
+      "-encoding",
+      "UTF-8",
+      "-Xlint:all",
+      "-Werror",
+      "-proc:none",
+      "-cp",
+      "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.19.2/jackson-annotations-2.19.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-core/2.19.2/jackson-core-2.19.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-databind/2.19.2/jackson-databind-2.19.2.jar",
+      "-d",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43332-chr-lock-text-retry-header-v2/classes",
+      "/home/mini/codex/project1/work/pgpt-foundation/program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+      "/home/mini/codex/project1/work/pgpt-foundation/program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+      "/home/mini/codex/project1/work/pgpt-foundation/program/characterization/src/main/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.java",
+      "/home/mini/codex/project1/work/pgpt-foundation/program/characterization/src/main/java/dev/codex/schubert/characterization/CharacterizationIoScope.java",
+      "/home/mini/codex/project1/work/pgpt-foundation/program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorQa055Test.java"
+    ],
+    "pt": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-Dchr.unitProjectRoot=/home/mini/codex/project1/work/pgpt-foundation",
+      "-jar",
+      "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "execute",
+      "--class-path",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43332-chr-lock-text-retry-header-v2/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.19.2/jackson-annotations-2.19.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-core/2.19.2/jackson-core-2.19.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-databind/2.19.2/jackson-databind-2.19.2.jar",
+      "--select-method",
+      "dev.codex.schubert.characterization.ArtifactComparatorQa055Test#lockedLoginTextAndRetryAfterRemainSeparateComparisonValues",
+      "--reports-dir",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43332-chr-lock-text-retry-header-v2/xml",
+      "--details",
+      "summary",
+      "--disable-banner",
+      "--fail-if-no-tests"
+    ]
+  },
+  "approvedDesign": {
+    "commit": "7745de1fb04c8b9e2cfccc11103d7b3c57b090d7",
+    "role": "UI226 §2, SS355 §§7.2 and 8; QA-055/UIC-012/SSC-338"
+  },
+  "testId": "PT-CHR-QA055-001",
+  "inputHashes": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+      "sha256": "8012d018125889b5108c1b1226dcd483360f38167bf1d3a9c12b55e31b138748"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+      "sha256": "1799ecf34db25f73e06eaad087cb67a4a0f6b4c6b4192b90fdafb96af05b9dea"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/program/characterization/src/main/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.java",
+      "sha256": "5dd057ba194844cf3b25cd23bed425690bfc6be04308a552d67aaa0710d05457"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/program/characterization/src/main/java/dev/codex/schubert/characterization/CharacterizationIoScope.java",
+      "sha256": "da07865268475f3be05f53844367ebfce849a9b8ed5c01e9a6669a0ad72b80d6"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorQa055Test.java",
+      "sha256": "fb4248ed7c0427adfaadd5cde8d36385704f7f885f136af14af959ec72c33646"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/program/characterization/tests/resources/cases/catalog.json",
+      "sha256": "df412392032ad324a5e5dd92b0703c03287a7744af47aa42cd34a0a617e46d38"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/program/characterization/tests/resources/cases/dif-allowlist.json",
+      "sha256": "43239fe3d3f42c488dcbeb58017fde78830ba3771930a9c97cd65c3c7a7c5cb6"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+      "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.19.2/jackson-annotations-2.19.2.jar",
+      "sha256": "e516743a316dcf83c572ffc9cb6e8c5e8c134880c8c5155b02f7b34e9c5dc3cf"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-core/2.19.2/jackson-core-2.19.2.jar",
+      "sha256": "aa77eaf29293a868c47372194f7c5287d77d9370b04ea25d3fffc1e4904b5880"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-databind/2.19.2/jackson-databind-2.19.2.jar",
+      "sha256": "0a1bd4e9b0d670e632d40ee8c625ad376233502f03c2f5889baea95d025b47a7"
+    }
+  ],
+  "firstAttempt": {
+    "exit": 1,
+    "reason": "The general comparator fixture also needs CLI and auxiliary fixture classes; no tests started. Kept the scope local by writing one dedicated fixture.",
+    "proof": [
+      {
+        "path": "../pgpt-runs/PG379/PG43332-chr-lock-text-retry-header-v1/begin.json",
+        "sha256": "3a208eb27bdd061b0f2cb264c24ab35135e2e1bf530365798790ab34c0856c67"
+      },
+      {
+        "path": "../pgpt-runs/PG379/PG43332-chr-lock-text-retry-header-v1/end.json",
+        "sha256": "85c107c846594c9452a06cb990824faaf90b700c8951f498315ffbba6d632ff4"
+      },
+      {
+        "path": "../pgpt-runs/PG379/PG43332-chr-lock-text-retry-header-v1/compile.stderr",
+        "sha256": "203cfba65b6bdd7dc9fad357c44ed153bd2897ccafae7f295ccf53efa7e7aea7"
+      }
+    ]
+  },
+  "ordinaryLocal": {
+    "found": 1,
+    "success": 1,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "xml": {
+      "path": "../pgpt-runs/PG379/PG43332-chr-lock-text-retry-header-v2/xml/TEST-junit-jupiter.xml",
+      "sha256": "c4eeadba0f8e229e28f3e8c283e4256abe98da32c2ba9dd0db36ed84151cda01"
+    },
+    "marker": {
+      "path": "../pgpt-runs/PG379/PG43332-chr-lock-text-retry-header-v2/end.json",
+      "sha256": "85f419978cc9d82b3de56008c80a3934af8259520d4ee052a90f255dba90f248"
+    }
+  },
+  "independentAssertions": [
+    "matching fixed Japanese text and 27 emits zero unregistered differences",
+    "changed text only yields CHR-A02:/lockedMessage",
+    "changed Retry-After only yields CHR-A02:/lockedHeaders/Retry-After",
+    "other cases intentionally absent and overall comparison remains FAIL"
+  ],
+  "canonicalCurrentTree": "cd377044e4ca058ea219ca6a2fec82159559c72c",
+  "tool": "JDK25.0.4 / JUnit 1.13.4 / Jackson 2.19.2",
+  "newChrToolTests": 1,
+  "actualNkOrCurrentCaseRuns": 0,
+  "newProductTests": 0,
+  "officialCoverageMeasured": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
