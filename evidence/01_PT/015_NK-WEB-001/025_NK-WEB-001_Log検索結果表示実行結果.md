@@ -17,3 +17,7 @@ sourcec784bf10＋PG212/213作業tree/dev-foundation、Ubuntu26.04.1/Linux7.0.0-3
 ## 2026-11-22 現候補の局所再試験
 
 PG42362／試験source c9b95413be15f435a4fbf50c70947d94df8655cb、Java Core 1e4e9e64830b552727043f3cb8b9435b28cba472。独立期待値のPT-WEB-262～269は8成功、失敗・エラー・skipped各0。投影本体とRowは行61、メソッド25、クラス2、分岐18が各100%。従属Page/TopBarも報告した範囲の未測定を保持。SpotBugsは指摘・欠落class・解析error各0、Checkstyleとformatはexit0。PMDの有限worker5指摘は保持し、全451の判定は保留。証跡 evidence/01_PT/018_NK-OPS-001/evidence/PG42362-f03-log-result-fixture-current-v1/manifest.json SHA256 5f707ea329998b1e1b232c66d7802ce7201be1ad76f6a4e1267f93153971cc51。BUG-3578／YKT-2813。実HTTP・業務接続・全体認定は未実行。
+
+## PG43378 現候補の二表示
+
+PT-WEB-262～269、286～293の単一実行で16件成功。失敗、エラー、skippedは各0。表示二本体と内側三型の生四指標は L138/M55/C5/B30 で各100%。ログ保管、実検索、HTTP、実Browser、全451は別条件。公開manifest evidence/01_PT/018_NK-OPS-001/evidence/PG43378-log-search-current-sixteen-v1/manifest.json（SHA256 e5b7d3de6ae40ef10746fd2c9b668e16acbf5df181f1c71d5e4b492e581066a9）。
