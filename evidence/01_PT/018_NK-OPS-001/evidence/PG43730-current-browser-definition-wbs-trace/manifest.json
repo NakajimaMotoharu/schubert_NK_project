@@ -1,0 +1,100 @@
+{
+  "run": "PG43730",
+  "source": "1e746e10caf861553831450ef409a6072b8ffedf",
+  "productionCore": "98a8f53578cab17d9b67b1a16218179d39d4bc8f",
+  "currentToolSource": "3506661133949541e72851381235213cf32f421f",
+  "canonicalDesignSource": "e8cd2907eda6cd5a2ee43ed87d7837f613b3ac15",
+  "before": {
+    "documents/400_PGPT/470_PMO/485_WBS網羅性・受入対応.json": {
+      "path": "documents/400_PGPT/470_PMO/485_WBS網羅性・受入対応.json",
+      "sha256": "e3fa3804e4e8048ae99432202f72879b203f357882a746f75d0208f59aeffe14"
+    },
+    "documents/400_PGPT/470_PMO/486_WBS現行実績.json": {
+      "path": "documents/400_PGPT/470_PMO/486_WBS現行実績.json",
+      "sha256": "ae1f5f9402e54687500eb1fadebbdf5b23f0e99e1e66ed97947339eb07097a5d"
+    }
+  },
+  "after": {
+    "documents/400_PGPT/470_PMO/485_WBS網羅性・受入対応.json": {
+      "path": "documents/400_PGPT/470_PMO/485_WBS網羅性・受入対応.json",
+      "sha256": "0b29ca1ea995dd79bbe6d6778b6c97307a13abb07b9dd33ccadf04b8b78b70a3"
+    },
+    "documents/400_PGPT/470_PMO/486_WBS現行実績.json": {
+      "path": "documents/400_PGPT/470_PMO/486_WBS現行実績.json",
+      "sha256": "499ecefa62c8f528ffa6d55eb743da58c1859a5b499073eaf960e42ad585dd87"
+    }
+  },
+  "record": {
+    "owner": "WBS-P020-01",
+    "verificationRefs": [
+      "WBS-P020-01.03/2",
+      "WBS-G13.07/2",
+      "WBS-F03/2-2-b"
+    ],
+    "productionCore": "98a8f53578cab17d9b67b1a16218179d39d4bc8f",
+    "toolSource": "3506661133949541e72851381235213cf32f421f",
+    "canonicalDesignSource": "e8cd2907eda6cd5a2ee43ed87d7837f613b3ac15",
+    "design": {
+      "path": "documents/300_SS/350_運用・品質/355_Characterization Test実行準備・PG開始gate.md",
+      "sha256": "aff2aafe8f952de073e6dd2e7f5840152539f348f9816c6fa31e84ced93bef45"
+    },
+    "program": "NK-CHR-001",
+    "requirements": [
+      "TST-004",
+      "UI264",
+      "SS355 §6/§11・12"
+    ],
+    "implementation": {
+      "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+      "sha256": "4d1862eb5029b0b858d774e5a47b1fd0ad00a36cea6c8c0d36e1d73d65517ed1"
+    },
+    "fixture": {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionDocumentsTest.java",
+      "sha256": "4a6edf0126cda6b4f9f6aef9e6edd5f7bb25e6756dd8cbaedc659ada4a975660"
+    },
+    "case": {
+      "id": "PT-CHR-DEF-019",
+      "method": "browserDefinitionsMustMatchTheIndependentDesignEvenWhenTheyAgree",
+      "specification": {
+        "path": "evidence/01_PT/020_NK-CHR-001/081_比較ゲートのBrowser固定値の独立単体試験.md",
+        "sha256": "442ae74696bf4ebe295296cd3ae06d92a62d5a5adff2ea9571063193e1e63546"
+      }
+    },
+    "fixtures": [
+      {
+        "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG43724-synthetic-generator-corrected/manifest.json",
+        "sha256": "bb64542b93ed65cf6e5b2a12723c41ec67cdb6836a84e3b9dad704daaa288097"
+      }
+    ],
+    "packagedScope": {
+      "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG43728-packaged-pinned-browser-qualification/manifest.json",
+      "sha256": "d35ef4f71003c7438a777f8c5981e69d37a268aded248984f82c9b07432dce71"
+    },
+    "singleJarScoped30": true,
+    "executedRealChr": 0,
+    "productTestIdsAdded": 0,
+    "newToolTestIds": 1,
+    "sameRunArtifactPassed": true,
+    "whole451": false,
+    "formalAcceptanceId": null,
+    "completedParentPricePp": 0,
+    "unsatisfied": [
+      "closed WBS-P020-01.02 and WBS-P020-01.01",
+      "haruka owner / FileStore",
+      "real Browser and Current–NK / CHR / QA-051",
+      "fully qualified product and tool evidence"
+    ]
+  },
+  "actualExit": 0,
+  "acceptance": {
+    "valid": 16,
+    "original": 190,
+    "priority": 0,
+    "priorityTotal": 5,
+    "short": 0,
+    "shortTotal": 12,
+    "newFormal": 0
+  },
+  "productTestExecutions": 0,
+  "terminalAtUTC": "2026-11-23T15:22:23.257155+00:00"
+}
