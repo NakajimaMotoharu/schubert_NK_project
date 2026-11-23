@@ -147,7 +147,8 @@ final class BackupFailureUtcProjectionTest {
     var fixture = fixture(ReadFault.DISTINCT_CLOSES_AFTER_RUNTIME);
     var actual = assertThrows(IllegalStateException.class, fixture::verify);
     assertSame(fixture.primaryRuntime, actual);
-    assertEquals(List.of(fixture.rowClose, fixture.statementClose), List.of(actual.getSuppressed()));
+    assertEquals(
+        List.of(fixture.rowClose, fixture.statementClose), List.of(actual.getSuppressed()));
     assertEquals(COMPLETE.subList(0, 4), fixture.closed);
   }
 
@@ -183,7 +184,8 @@ final class BackupFailureUtcProjectionTest {
     private final List<String> closed = new ArrayList<>();
     private final SQLException repeated = new SQLException("synthetic repeat failure");
     private final SQLException rowClose = new SQLException("synthetic result close failure");
-    private final SQLException statementClose = new SQLException("synthetic statement close failure");
+    private final SQLException statementClose =
+        new SQLException("synthetic statement close failure");
     private final IllegalStateException primaryRuntime =
         new IllegalStateException("synthetic row read failure");
     private int prepared;
@@ -250,8 +252,8 @@ final class BackupFailureUtcProjectionTest {
                   yield null;
                 }
                 case "executeQuery" -> {
-                  if (position == FIRST_BACKUP_QUERY && fault == ReadFault.REPEATED_STATEMENT_FAILURE)
-                    throw repeated;
+                  if (position == FIRST_BACKUP_QUERY
+                      && fault == ReadFault.REPEATED_STATEMENT_FAILURE) throw repeated;
                   yield position == FIRST_BACKUP_QUERY && fault == ReadFault.MISSING_RESULT_SET
                       ? null
                       : rows(position, identity);
