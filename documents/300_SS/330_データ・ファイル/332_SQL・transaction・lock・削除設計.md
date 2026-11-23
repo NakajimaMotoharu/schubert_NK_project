@@ -1,5 +1,18 @@
 # SQL・transaction・lock・削除設計
 
+## SSC-481 Backup失敗ペア再読のJDBC解放
+
+BUG-3757／YKT-2935、NK-BAT-001・NK-DAT-001、BAK-001・OPS-009、UI251、SS341・343 SSC-124、PT-BAT-BACKUP-UTC008。対象は `BackupFailureSnapshot.verifyRow` が取得する文と結果セット。借用Connectionとbase guardの所有、SQL、時刻・列検査、同run照合、タイムアウトは従来どおり。
+
+結果セットを文より先に、取得した資源だけを一回閉じる。取得、読取、検証またはguardで失敗しても、取得済み資源の解放を続ける。優先順位は当読取の従来のtry-with-resourcesと同じとする。
+
+- 本処理が失敗し、その後の解放が別の例外インスタンスで失敗する場合、本処理の例外を保持し、解放の例外を結果セット、文の順で抑制例外へ追加する。
+- 本処理と資源解放が同じ例外インスタンスを返す場合、その例外を保持して追加を省く。自己抑制由来の別例外に変換しない。解放だけが失敗した場合は、その例外を当scopeの一次失敗として扱う。
+- 既知のSQLExceptionは既定のfatal分類後に固定IOExceptionへ変換する。元のプロバイダー診断、原因、抑制例外は固定IOExceptionへ格納しない。既のIOException、未知のRuntimeExceptionとErrorは当読取の既定どおり扱う。
+
+文や結果セットの未取得・null、同一インスタンスと別インスタンス、二資源の解放順、固定診断を独立合成PTで分ける。他のJDBC読取の順位規則、権限、実DBの認証や運用手順は本箇所により変更しない。
+
+
 ## SSC341 Morning専用DBの既知SQL変換とconnection解放の限定fatal確認（2026-11-13）
 
 BUG2852/YKT2359、SS341/343、WBS-P017-01.03/P017-02.03、PT-MDB-CAT341-001～012。対象はMorningDatabaseSessionの既知SQLException/BatchRepositoryExceptionから固定IOExceptionへ変換する既存20捕捉箇所と、そのexecute所有connectionのSQL close変換/closeReplaceだけである。既SS332のtyped priorityを先に適用し、batchのchecked IOException/未知Runtime/Errorを一般化して置換しない。SQL、DB role、transaction/commit/rollback回数、run/cutoff、原本・M/A/advisory・callback lifetime、正常結果を変更しない。
