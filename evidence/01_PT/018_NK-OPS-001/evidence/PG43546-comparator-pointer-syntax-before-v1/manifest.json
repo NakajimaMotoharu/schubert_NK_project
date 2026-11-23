@@ -1,0 +1,31 @@
+{
+  "run": "PG43546",
+  "source": "6b1329bdbfd167806af8b96bacba7d64e43fbdc7",
+  "productionCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "terminalAtUTC": "2026-11-23T10:06:25.745532+00:00",
+  "actualExit": 0,
+  "verifiedBehavior": "source evidence only",
+  "toolPath": {
+    "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+    "sha256": "0a69c4063099692b2623d84e02e010a63b4cd012dc0ebc4d63f5447bf56000a0"
+  },
+  "sourceLocations": {
+    "325": "valid &= require(validPointer(pointer), \"OBSERVATION_POINTER:\" + observationKey, failures);",
+    "338": "& validPointer(pointer);",
+    "588": "private static boolean validPointer(String pointer) {",
+    "589": "return pointer.startsWith(\"/\")",
+    "590": "&& !pointer.contains(\"*\")",
+    "591": "&& !pointer.contains(\"..\")",
+    "592": "&& !pointer.endsWith(\"/\");"
+  },
+  "authorizedDesign": {
+    "source": "7745de1fb04c8b9e2cfccc11103d7b3c57b090d7",
+    "path": "documents/300_SS/350_運用・品質/355_Characterization Test実行準備・PG開始gate.md",
+    "sha256": "aff2aafe8f952de073e6dd2e7f5840152539f348f9816c6fa31e84ced93bef45"
+  },
+  "expected": "JSON Pointer format checks RFC6901 §3 together with the existing narrower comparison scope.",
+  "knownObserved": "The helper only checks prefix and project wildcard/path conditions, with no escape syntax validation.",
+  "official": "https://www.rfc-editor.org/rfc/rfc6901.html#section-3",
+  "fullComparisonInvocations": 0,
+  "difOrBaselineChanges": 0
+}
