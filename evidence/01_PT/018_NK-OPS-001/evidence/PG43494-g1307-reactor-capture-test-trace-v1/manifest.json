@@ -1,0 +1,77 @@
+{
+  "run": "PG43494",
+  "wbs": {
+    "WBS-G08": {
+      "lineNumber": 687,
+      "objective": "全scope同source/run・collector/manifest/hash一致",
+      "acceptanceCriterion": "018 collector/017019negative canary正常、固定必須scope全件同source/run/branch/exit・file hash/trace一致、別source補完0。"
+    },
+    "WBS-G09": {
+      "lineNumber": 688,
+      "objective": "全PT完走・F/E/S/flaky/not-run0・再現性",
+      "acceptanceCriterion": "451の正式全module clean verify完走、全PT F/E/S/flaky/disabled/not-run0と再現性、対象run/command/exit/byte/hash固定。"
+    },
+    "WBS-G13.07/2": {
+      "lineNumber": 859,
+      "objective": "G13 最終候補での多対多join・差分再照合",
+      "acceptanceCriterion": "RD/UI/SS・20Program・CHR24・設定全体の多対多join/二重割当照合の対象別完了記録を確認。契約別の版差照合先で示した現在候補と、個別採用した設計・期待値を明示"
+    }
+  },
+  "terminalAtUTC": "2026-11-23T08:59:30.545799+00:00",
+  "actualExit": 0,
+  "source": "968a5f9fd1812770678dd03ff2ccdc34d40d70fd",
+  "productionCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "canonicalSource": "7745de1fb04c8b9e2cfccc11103d7b3c57b090d7",
+  "upstreamEvidence": [
+    {
+      "path": "documents/300_SS/350_運用・品質/354_PT・IT試験観点詳細設計.md",
+      "sha256": "2707b6b3b53b87abc803626737dbdc1366eae695fdfda8ddb0c93e35ea11b2b7"
+    },
+    {
+      "path": "documents/400_PGPT/450_品質/451_Build・静的解析・coverage方針.md",
+      "sha256": "1612ea760b1802d217977060fd0a0f6fc8230121d2af0497c075d0941151d828"
+    }
+  ],
+  "programSpec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/5807_Reactor新規証明のcheckout結合_単体テスト仕様.md",
+    "sha256": "d7e899cbab62410808ebf121e4114e8389b51038891b2c4eeb2c8c7320f310c4"
+  },
+  "expectedToolIncidence": "capture_live_git_head_around_original_artifacts",
+  "tests": {
+    "PT-OPS-G09-JUNIT018": "test_junit018_new_capture_requires_the_original_checkout_commit",
+    "PT-OPS-G09-JUNIT019": "test_junit019_capture_checks_the_checkout_after_reading_artifacts",
+    "PT-OPS-G09-JUNIT020": "test_junit020_original_receipt_still_verifies_after_an_unrelated_commit"
+  },
+  "unchangedExistingReadCallers": [
+    {
+      "path": "tools/quality/006_collect_scenario_evidence.py",
+      "sha256": "f597c7e6809497c7bc1d56e39f9d2bf860f8cd18fb4636853951a4b487dab766"
+    },
+    {
+      "path": "tools/quality/018_collect_verified_evidence_set.py",
+      "sha256": "2fca14075518e59cf4a766a5e5f08b625ba59ae87648ab07bb7dff4300f7a3d6"
+    },
+    {
+      "path": "tools/quality/030_run_pgpt_verify.sh",
+      "sha256": "c0fa0c42e9ae46c13c1f1023acd13be5843d98a77dd9aa875b62563ca6a86944"
+    }
+  ],
+  "currentToolRun": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43492-reactor-capture-checkout-green-v1/manifest.json",
+    "sha256": "7ac7a8714394e3d8ba16b06f4003ac13560377d2dfa0355cb457ed7ae9d7a863"
+  },
+  "actualOriginalLog": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43492-reactor-capture-checkout-green-v1/terminal.json",
+    "sha256": "939a2b397b44dd09ba4590b9298e7bd8e061e637fb7adc09faa4834b6abafa6a"
+  },
+  "existingProofsPreserved": true,
+  "whole451": false,
+  "realReactorTest": 0,
+  "newProductPt": 0,
+  "formalAcceptanceId": null,
+  "missing": [
+    "same-source original always-clean six-product reactor on an approved release candidate",
+    "all actual source/run/branch/name scope obligations",
+    "qualification decisions and owner receipts"
+  ]
+}
