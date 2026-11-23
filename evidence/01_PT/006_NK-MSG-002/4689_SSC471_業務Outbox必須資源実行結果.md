@@ -1,5 +1,9 @@
 # 4689 SSC-471 業務Outboxの必須JDBC資源実行結果
 
+## 2026-11-23 現候補の借用JDBC局所12件
+
+現製品Core `87927ea17c1c8dbef528bc0c6882c24b1fe7c871`。固定のPT-OUT-JDBC001～012はPG43436／43438／43440／43442の四実行で各一回成功。固定SQL・UTC、取得順・値、CASと再送、null、例外の同一性・抑制順・close回数を各Test IDへ対応。実PG接続は0。元PG39653は保持し、現四execのカウンタは合算しない。API正規包装、実UTC・transaction、F02/F03と全451は未成立。 [現候補の個別判定](../018_NK-OPS-001/evidence/PG43444-g1304-outbox-jdbc-criteria-owner-intake-v1/manifest.json)
+
 2026-11-18 JST、dev-foundation、製品Core 15ee95822be0f4387e1e127cf43d43a08945c3c6、固定試験candidate 583dad40fbfe1e7a29c445351da0a3d9c66346d3。設計PR438／907de7ce26b0cc2bfc1a7530fc75f8ae845e9161。JDK25.0.4、Maven3.9.12、JaCoCo0.8.15、JUnit Console1.13.4。終了日時 2026-11-18T13:50:48.039805+00:00 UTC。指示と独立期待は4688と元007、手順5193～5195。
 
 - PG39653の元JDBC001～009・追加010～012全12初回成功、失敗・error・skip・未実行0。PG39654の独立標準post終了0。PG39656で現JDBC経路一型の生line178/178、method13/13、class1/1、branch40/40、instruction699/699。十物理・正CRC8、支援生不足40明細、除外・旧exec合算0。旧全9の検証は原PG21014/28・PG39634を参照。

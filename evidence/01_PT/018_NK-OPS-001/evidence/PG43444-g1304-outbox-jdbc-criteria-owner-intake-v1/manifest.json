@@ -1,0 +1,275 @@
+{
+  "run": "PG43444-g1304-outbox-jdbc-criteria-owner-intake-v1",
+  "source": "17fc352320459b5b419ac46ad5ab6cb48eed9273",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "terminalAtUTC": "2026-11-23T07:21:33.638152+00:00",
+  "actualExit": 0,
+  "wbs": "WBS-G13.04",
+  "referencedAcceptanceTarget": "WBS-P004-05/2",
+  "otherArtifactOwner": "WBS-P006-02",
+  "noDuplicatePrice": 0,
+  "actualOpenRef": false,
+  "caseCriteria": {
+    "PT-OUT-JDBC009": {
+      "method": "sqlNullReturningIdentifierCannotBecomeSuccessfulZero",
+      "resultReceipt": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43436-current-returned-outbox-null-v1/manifest.json",
+        "sha256": "2b42369d220bbd5398649414b12634aeb312e51ef1f14665cd9dd891469b5b86"
+      },
+      "spec": {
+        "path": "evidence/01_PT/006_NK-MSG-002/007_JdbcOutbox自己所有境界単体仕様.md",
+        "sha256": "008c242626e18643f932f8abd45f46a4deae9267526bc6ef403ce63b4210912a"
+      },
+      "independentExpectation": "NN採番NULLが0成功にならない、独立retained回帰"
+    },
+    "PT-OUT-JDBC001": {
+      "method": "enqueueBindsExactUtcAndOptionalDlqWithoutOwningTransaction",
+      "resultReceipt": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43438-current-outbox-projections-five-v1/manifest.json",
+        "sha256": "4e771d570bdd63c8d6d06c84e373c554d108ace351668280a35fc8e3e8159a77"
+      },
+      "spec": {
+        "path": "evidence/01_PT/006_NK-MSG-002/007_JdbcOutbox自己所有境界単体仕様.md",
+        "sha256": "008c242626e18643f932f8abd45f46a4deae9267526bc6ef403ce63b4210912a"
+      },
+      "independentExpectation": "正常INSERT全binding13、DLQ5列/typedNULL5列/UTC、空result拒否/ownedclose"
+    },
+    "PT-OUT-JDBC002": {
+      "method": "claimUsesBoundedLeaseStableOrderAndImmutableRowBody",
+      "resultReceipt": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43438-current-outbox-projections-five-v1/manifest.json",
+        "sha256": "4e771d570bdd63c8d6d06c84e373c554d108ace351668280a35fc8e3e8159a77"
+      },
+      "spec": {
+        "path": "evidence/01_PT/006_NK-MSG-002/007_JdbcOutbox自己所有境界単体仕様.md",
+        "sha256": "008c242626e18643f932f8abd45f46a4deae9267526bc6ef403ce63b4210912a"
+      },
+      "independentExpectation": "limit境界1/100、SQL、lease10秒、同時刻id昇順、空・immutable/clone"
+    },
+    "PT-OUT-JDBC003": {
+      "method": "requiredAndInvalidRowsFailClosedIncludingNullableAttempt",
+      "resultReceipt": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43438-current-outbox-projections-five-v1/manifest.json",
+        "sha256": "4e771d570bdd63c8d6d06c84e373c554d108ace351668280a35fc8e3e8159a77"
+      },
+      "spec": {
+        "path": "evidence/01_PT/006_NK-MSG-002/007_JdbcOutbox自己所有境界単体仕様.md",
+        "sha256": "008c242626e18643f932f8abd45f46a4deae9267526bc6ef403ce63b4210912a"
+      },
+      "independentExpectation": "必須全12列NULL、各invalid、typedattemptNULL拒否/例外保持"
+    },
+    "PT-OUT-JDBC004": {
+      "method": "dlqMetadataIsAllOrNoneAndPreservesClosedProjection",
+      "resultReceipt": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43438-current-outbox-projections-five-v1/manifest.json",
+        "sha256": "4e771d570bdd63c8d6d06c84e373c554d108ace351668280a35fc8e3e8159a77"
+      },
+      "spec": {
+        "path": "evidence/01_PT/006_NK-MSG-002/007_JdbcOutbox自己所有境界単体仕様.md",
+        "sha256": "008c242626e18643f932f8abd45f46a4deae9267526bc6ef403ce63b4210912a"
+      },
+      "independentExpectation": "all-none、or各短絡branch/各必須欠落、正DLQ5列とASYNC不整合拒否"
+    },
+    "PT-OUT-JDBC008": {
+      "method": "sharedRepositoryParallelCallsKeepOwnRowsBindingsAndBody",
+      "resultReceipt": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43438-current-outbox-projections-five-v1/manifest.json",
+        "sha256": "4e771d570bdd63c8d6d06c84e373c554d108ace351668280a35fc8e3e8159a77"
+      },
+      "spec": {
+        "path": "evidence/01_PT/006_NK-MSG-002/007_JdbcOutbox自己所有境界単体仕様.md",
+        "sha256": "008c242626e18643f932f8abd45f46a4deae9267526bc6ef403ce63b4210912a"
+      },
+      "independentExpectation": "共有Repo二worker16固有row/parameter/body/close分離"
+    },
+    "PT-OUT-JDBC010": {
+      "method": "requiredStatementNullStopsAllFourOperationsBeforeBinding",
+      "resultReceipt": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43440-current-outbox-resource-three-v1/manifest.json",
+        "sha256": "1ac23c711da2e60d07eacbf30244bfe64f0af2c982841b90cd3515075ad5b4d3"
+      },
+      "spec": {
+        "path": "evidence/01_PT/006_NK-MSG-002/4688_SSC471_業務Outbox必須資源単体仕様.md",
+        "sha256": "a0cffc4f2bff1cf317af76d1eaf83673a3c97af24fcafcea28aeb01e1e53a0b6"
+      },
+      "independentExpectation": "既required-value契約の固定SQLDataException 22004、autoCommit→prepareだけ、affectedやJDBC呼出の成功なし、未取得closeなし、借用close/commit/rollback/configなし。"
+    },
+    "PT-OUT-JDBC011": {
+      "method": "requiredRowsNullClosesTheAlreadyAcquiredStatementExactlyOnce",
+      "resultReceipt": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43440-current-outbox-resource-three-v1/manifest.json",
+        "sha256": "1ac23c711da2e60d07eacbf30244bfe64f0af2c982841b90cd3515075ad5b4d3"
+      },
+      "spec": {
+        "path": "evidence/01_PT/006_NK-MSG-002/4688_SSC471_業務Outbox必須資源単体仕様.md",
+        "sha256": "a0cffc4f2bff1cf317af76d1eaf83673a3c97af24fcafcea28aeb01e1e53a0b6"
+      },
+      "independentExpectation": "既22004、文終了一回、ResultSetへの一切の呼出しなし、borrowed Connectionを保持。"
+    },
+    "PT-OUT-JDBC012": {
+      "method": "jdbcPrimarySuppressionAndJdkSelfFailureCloseRowsBeforeStatement",
+      "resultReceipt": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43440-current-outbox-resource-three-v1/manifest.json",
+        "sha256": "1ac23c711da2e60d07eacbf30244bfe64f0af2c982841b90cd3515075ad5b4d3"
+      },
+      "spec": {
+        "path": "evidence/01_PT/006_NK-MSG-002/4688_SSC471_業務Outbox必須資源単体仕様.md",
+        "sha256": "a0cffc4f2bff1cf317af76d1eaf83673a3c97af24fcafcea28aeb01e1e53a0b6"
+      },
+      "independentExpectation": "元一次のobject identity、行close・文closeのsuppression順、一回ずつ。行が同一の場合はJDK IllegalArgumentExceptionのcauseが元一次、新一次へ文障害だけをsuppressed。"
+    },
+    "PT-OUT-JDBC005": {
+      "method": "sentAndFailureCompareAndSetUseIndependentRetryTableAndCap",
+      "resultReceipt": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43442-current-outbox-retry-three-v1/manifest.json",
+        "sha256": "ccf42d35d79a96df95f4441a0b67df4066e90462c180068b24dec965e1908022"
+      },
+      "spec": {
+        "path": "evidence/01_PT/006_NK-MSG-002/007_JdbcOutbox自己所有境界単体仕様.md",
+        "sha256": "008c242626e18643f932f8abd45f46a4deae9267526bc6ef403ce63b4210912a"
+      },
+      "independentExpectation": "SENT/ERROR CAS0/1/2、retry表/±100permille/99/100継続、defaultjitter範囲"
+    },
+    "PT-OUT-JDBC006": {
+      "method": "argumentsAndTransactionsPreventSqlAndRespectErrorBounds",
+      "resultReceipt": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43442-current-outbox-retry-three-v1/manifest.json",
+        "sha256": "ccf42d35d79a96df95f4441a0b67df4066e90462c180068b24dec965e1908022"
+      },
+      "spec": {
+        "path": "evidence/01_PT/006_NK-MSG-002/007_JdbcOutbox自己所有境界単体仕様.md",
+        "sha256": "008c242626e18643f932f8abd45f46a4deae9267526bc6ef403ce63b4210912a"
+      },
+      "independentExpectation": "null/空/不明/limit0,101、borrowed transaction、error64/256境界・control、jitter外拒否"
+    },
+    "PT-OUT-JDBC007": {
+      "method": "ordinarySqlFaultsCloseOnlyRepositoryResourcesAndRemainFailures",
+      "resultReceipt": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43442-current-outbox-retry-three-v1/manifest.json",
+        "sha256": "ccf42d35d79a96df95f4441a0b67df4066e90462c180068b24dec965e1908022"
+      },
+      "spec": {
+        "path": "evidence/01_PT/006_NK-MSG-002/007_JdbcOutbox自己所有境界単体仕様.md",
+        "sha256": "008c242626e18643f932f8abd45f46a4deae9267526bc6ef403ce63b4210912a"
+      },
+      "independentExpectation": "普通SQL/set/get/execute/close故障、SQL同一性、borrowedConnection無commit/rollback/close"
+    }
+  },
+  "caseRuns": [
+    {
+      "run": 43436,
+      "tests": 1,
+      "receipt": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43436-current-returned-outbox-null-v1/manifest.json",
+        "sha256": "2b42369d220bbd5398649414b12634aeb312e51ef1f14665cd9dd891469b5b86"
+      },
+      "originalExec": {
+        "path": "../pgpt-runs/PG379/PG43436-current-returned-outbox-null-v1/selected.exec",
+        "sha256": "59f37584b941bbcddd64514093f03ef06a4b78dc3bfd66c1ce0341745a70f22a"
+      }
+    },
+    {
+      "run": 43438,
+      "tests": 5,
+      "receipt": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43438-current-outbox-projections-five-v1/manifest.json",
+        "sha256": "4e771d570bdd63c8d6d06c84e373c554d108ace351668280a35fc8e3e8159a77"
+      },
+      "originalExec": {
+        "path": "../pgpt-runs/PG379/PG43438-current-outbox-projections-five-v1/selected.exec",
+        "sha256": "8bb2359b3a4da1e10a392c01bb8b22fc63ee28f3f88949dc839afbf10f7b4ef1"
+      }
+    },
+    {
+      "run": 43440,
+      "tests": 3,
+      "receipt": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43440-current-outbox-resource-three-v1/manifest.json",
+        "sha256": "1ac23c711da2e60d07eacbf30244bfe64f0af2c982841b90cd3515075ad5b4d3"
+      },
+      "originalExec": {
+        "path": "../pgpt-runs/PG379/PG43440-current-outbox-resource-three-v1/selected.exec",
+        "sha256": "19e25a97405797b90e8ca2bfd4c9c5ffd86786b70874c7a7508bbc5683faac5d"
+      }
+    },
+    {
+      "run": 43442,
+      "tests": 3,
+      "receipt": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43442-current-outbox-retry-three-v1/manifest.json",
+        "sha256": "ccf42d35d79a96df95f4441a0b67df4066e90462c180068b24dec965e1908022"
+      },
+      "originalExec": {
+        "path": "../pgpt-runs/PG379/PG43442-current-outbox-retry-three-v1/selected.exec",
+        "sha256": "af6b78a1c356225095842e13bbfdc8fa20c8b11537d4921a4d7e16f2fc33f1fb"
+      }
+    }
+  ],
+  "uniqueSuccessfulLocalCases": 12,
+  "unionUsed": false,
+  "canonicalCommit": "7745de1fb04c8b9e2cfccc11103d7b3c57b090d7",
+  "design": [
+    {
+      "path": "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md",
+      "sha256": "604412aaf1814b888643a2ba67179cd166612e46471362bd719c2779149f0e4f"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/331_DB物理・DDL・index・権限設計.md",
+      "sha256": "f57d908ade963d03a7f1dd12dc93e0bd89fefa27223c674c3d363014913c64de"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "sha256": "4c09a2f66d9cb4def976c24d2952953aa5a287a0d545548dc4feda4968ff5bef"
+    }
+  ],
+  "exactPhysicalOwners": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/RequiredColumn.java",
+      "sourceSha256": "8cd379b0c607eaba8b1642c77bcbdcfb7cc613c1bc1f7c1c2976a4d0283bc7d2",
+      "artifactOwner": "WBS-P004-05",
+      "compiled": {
+        "sha256": "419998b0126541856fba9c5989cbd3df66e1ad7f6798c46463ee141a3ceff2ef",
+        "samePrevious": true
+      }
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository.java",
+      "sourceSha256": "1db71eadabee0bb1ae3de1bc8e04930e97a6d1c68d30f01362c6acaa915c2173",
+      "artifactOwner": "WBS-P006-02",
+      "compiled": {
+        "sha256": "1d3dda01fd81bd74b9854cf2126324dd47d72597eea167a5a47a45a55501114c",
+        "samePrevious": true
+      }
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry.java",
+      "sourceSha256": "97e9737bf3afd955019405f713355de62da50dfba9f96a9e7d549ce9568cf5aa",
+      "artifactOwner": "WBS-P006-02",
+      "compiled": {
+        "sha256": "adbf88229a5f9ee9450d663b40d1c14d8cb2fdb7ab284d1e033ea2efb0007350",
+        "samePrevious": false
+      }
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest.java",
+      "sourceSha256": "d0ba9bbf396af4cba3b912a87a37f9cc3162130cb5c8423c39ddc1f9c92e9f02",
+      "artifactOwner": "WBS-P006-02",
+      "compiled": {
+        "sha256": "974d34dc68a2ff9b13a9b32a8fda4e72e09640440c4ac64577e0538b148c91b7",
+        "samePrevious": false
+      }
+    }
+  ],
+  "retainedProgramRecordBefore": {
+    "path": "evidence/01_PT/006_NK-MSG-002/4689_SSC471_業務Outbox必須資源実行結果.md",
+    "sha256": "ea24fe17ab55781643fc9f2bfa8dd64dec3c8a144cbe0903b3739e4e4c5ae2f7"
+  },
+  "newDynamic": 0,
+  "formalAcceptanceId": null,
+  "remaining": [
+    "Actual Postgres UTC/borrowed transaction and SQL-state integration",
+    "API regular artefact",
+    "F02/F03 as exit dependencies",
+    "whole source/run 451"
+  ]
+}
