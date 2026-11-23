@@ -1,0 +1,85 @@
+{
+  "run": "PG43168-p00504-jms-ownership-historical-applicability-v1",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-23T00:45:21.994301+00:00",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-P005-04/2",
+  "historicalReview": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG13773-jms-owner-six-contexts-recovery-v1/manifest.json",
+    "sha256": "c2dfafc531151efaa2d8c36fb59da12137e8fc4578b9f522812cdaf7e260d815"
+  },
+  "historicalSource": "17ab52b253282ce45016f0586c0167a22029fd8c",
+  "historicalToolOnly": true,
+  "ownerEvidence": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ApiBrokerContexts.java",
+      "previousBlob": "5f612f4100f049e5dd62b331a184a8ff0fdb8b99",
+      "currentBlob": "5f612f4100f049e5dd62b331a184a8ff0fdb8b99",
+      "sameInput": true,
+      "scope": "QA-056 TemporaryInfrastructureException; ordinary three factories and verified close",
+      "eligibleForLocalDynamicOwnerTest": false,
+      "status": "QA056_NO_CURRENT_OWNERSHIP_RESULT"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider.java",
+      "previousBlob": "a21952b64ed31b70a5e2f56674fdb8db803b95c1",
+      "currentBlob": "a21952b64ed31b70a5e2f56674fdb8db803b95c1",
+      "sameInput": true,
+      "scope": "QA-056 TemporaryInfrastructureException; provider settings and cleanup evidence",
+      "eligibleForLocalDynamicOwnerTest": false,
+      "status": "QA056_NO_CURRENT_OWNERSHIP_RESULT"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsContextFactory.java",
+      "previousBlob": "65520be466d5b1f45c85097a96612740be9f966b",
+      "currentBlob": "65520be466d5b1f45c85097a96612740be9f966b",
+      "sameInput": true,
+      "scope": "Interface declaration; no live creation or close behavior in class",
+      "eligibleForLocalDynamicOwnerTest": false,
+      "status": "DECLARATION_ONLY"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/TransactedJmsContextProvider.java",
+      "previousBlob": "e6562f6b65a9a5dae28bf6a3f4ab4c5dc9e77f8a",
+      "currentBlob": "e6562f6b65a9a5dae28bf6a3f4ab4c5dc9e77f8a",
+      "sameInput": true,
+      "scope": "Interface declaration; no live creation or close behavior in class",
+      "eligibleForLocalDynamicOwnerTest": false,
+      "status": "DECLARATION_ONLY"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/WebBrokerContexts.java",
+      "previousBlob": "46631a9705e310b5a48e0860bcb8906d14a3a17a",
+      "currentBlob": "46631a9705e310b5a48e0860bcb8906d14a3a17a",
+      "sameInput": true,
+      "scope": "QA-056 WebStartupException; ordinary shared factory verified close",
+      "eligibleForLocalDynamicOwnerTest": false,
+      "status": "QA056_NO_CURRENT_OWNERSHIP_RESULT"
+    }
+  ],
+  "design": {
+    "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "sha256": "a48d9744e6138fd0ce9e99fd9b9e1ed4c3e6fa18aea2448bcdfb1acadf89b156"
+  },
+  "earlierNativeDistinctSource": [
+    {
+      "path": "evidence/01_PT/005_NK-MSG-001/evidence/api-native-broker/manifest.json",
+      "sha256": "e7097e6cf1c894114ff90027697c3f6fb760e8fb80741624b10d96198897844c"
+    },
+    {
+      "path": "evidence/01_PT/006_NK-MSG-002/evidence/web-native-broker/manifest.json",
+      "sha256": "59a79100d51f6245e6eae0ae5b025b939702881d028b221b903c4b4c54ba4473"
+    }
+  ],
+  "requiredConditions": [
+    "Current API and Web regular artifacts with QA-056 decision",
+    "Per-context AUTH/configuration ownership through ordinary provider paths under approved environment",
+    "Confirmed close and uncertain close outcomes with live owner provenance",
+    "Whole 451 and dependent WBS closures"
+  ],
+  "currentOwnerBehaviorObserved": false,
+  "productTestExecutions": 0,
+  "credentialsOpened": 0,
+  "externalActions": 0,
+  "formalAcceptanceId": null
+}
