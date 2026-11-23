@@ -11,7 +11,8 @@ ROOT, RUNS, RECORDS = (EARLIER[k] for k in ("ROOT", "RUNS", "RECORDS"))
 get, pin, git, now, put, manifest = (EARLIER[k] for k in ("get", "pin", "git", "now", "put", "manifest"))
 OLD = EARLIER["RUN_AFTER"]
 INITIAL = "PG43204-p00503-guard-dlq-record-observations-v1"
-RUN = "PG43204-p00503-guard-dlq-record-observations-v2"
+INTERMEDIATE = "PG43204-p00503-guard-dlq-record-observations-v2"
+RUN = "PG43204-p00503-guard-dlq-record-observations-v3"
 NEW = (
     ("dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest",
      "retainedSnapshotRemainsFindableAfterCallerCopiesChange()"),
@@ -50,6 +51,9 @@ def main():
     first_report = first / "format.stdout"
     assert first_report.read_text().splitlines() == [str(files[1])]
     assert not (first / "fixtures.stdout").exists() and not (first / "junit.stdout").exists()
+    intermediate = RUNS / INTERMEDIATE / "terminal.json"
+    reviewed = get(intermediate)
+    assert len(reviewed["scopedCases"]) == 14 and reviewed["pmd"].count("AvoidDuplicateLiterals") == 1
     out = RUNS / RUN
     out.mkdir(mode=0o700)
     for name in ("target/classes", "test", "xml", "meter"):
@@ -68,7 +72,8 @@ def main():
     put(out / "begin.json", dict(run=RUN, source=head, productCore=core, startedAtUTC=now(), commands=commands,
         scopedInputs=list(map(pin, files)), physical=record["currentPhysical"], previous=pin(proof),
         initialFormat=dict(exit=1, commandLedger=pin(first / "begin.json"), observation=pin(first_report),
-                           fixtureCompileStarted=False, productTestsStarted=False)))
+                           fixtureCompileStarted=False, productTestsStarted=False),
+        intermediate=pin(intermediate)))
     exits = {}
     for key, cmd in commands.items():
         result = subprocess.run(cmd, cwd=ROOT, capture_output=True, timeout=120, check=False)
