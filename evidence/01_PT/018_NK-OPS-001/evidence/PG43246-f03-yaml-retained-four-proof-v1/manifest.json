@@ -1,0 +1,109 @@
+{
+  "run": "PG43246-f03-yaml-retained-four-proof-v1",
+  "source": "75048ac10d60555fef37ad9b646adee8dd3885aa",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-F03/2-2-b",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-23T02:34:37.989180+00:00",
+  "originalReferences": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42390-f03-bootstrap-yaml-malformed-unicode-v1/manifest.json",
+      "sha256": "992c8a55f17f8cd77096c19de92b8e4cf54ebcf9d5b0ff4b8176e74c2bc084f4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42396-f03-yaml-size-guarded-typed-v1/manifest.json",
+      "sha256": "b9adb379101f8389f1a541d4c0a9c62c384ce66966b82b4accf7a4e7795ca8d9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40296-public-config-yaml-utf8-limit-v1/manifest.json",
+      "sha256": "e780d5b5cf32371c4edd08e6917cea0115085d9afe0db302f453a23ba2549e0b"
+    }
+  ],
+  "realArtifacts": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43066-f03-transfer-current-ownership-trace-v1/manifest.json",
+    "sha256": "8da8b76521b2f5bb1d71accebf1a78d0fee6c01d296b720dce78379af0bf3310"
+  },
+  "runtimeByteAudit": [
+    {
+      "className": "dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfig.class",
+      "normalCurrentSha256": "d4378ed797af2b047ec28613a0cd193a86eb6a35be19349973b33e6ca06db1d7",
+      "earlierOrdinaryByteBoundSha256": "d4378ed797af2b047ec28613a0cd193a86eb6a35be19349973b33e6ca06db1d7",
+      "earlierTypedAndMalformedSha256": "d4378ed797af2b047ec28613a0cd193a86eb6a35be19349973b33e6ca06db1d7",
+      "sameAllThree": true
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig.class",
+      "normalCurrentSha256": "b3193906a439d650f767fd53aa9172065de506afb725b8f6c84b11498c04bc8e",
+      "earlierOrdinaryByteBoundSha256": "b3193906a439d650f767fd53aa9172065de506afb725b8f6c84b11498c04bc8e",
+      "earlierTypedAndMalformedSha256": "b3193906a439d650f767fd53aa9172065de506afb725b8f6c84b11498c04bc8e",
+      "sameAllThree": true
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class",
+      "normalCurrentSha256": "cc8265242a1cd41cc7c77b8e12185cbc387fb583d70e1d1171ba467cb0f3d552",
+      "earlierOrdinaryByteBoundSha256": "cc8265242a1cd41cc7c77b8e12185cbc387fb583d70e1d1171ba467cb0f3d552",
+      "earlierTypedAndMalformedSha256": "cc8265242a1cd41cc7c77b8e12185cbc387fb583d70e1d1171ba467cb0f3d552",
+      "sameAllThree": true
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason.class",
+      "normalCurrentSha256": "a113bd839666ee3a4038dd3703af0cfb772282278cc6fbfe1e3cccf98286ffec",
+      "earlierOrdinaryByteBoundSha256": "a113bd839666ee3a4038dd3703af0cfb772282278cc6fbfe1e3cccf98286ffec",
+      "earlierTypedAndMalformedSha256": "a113bd839666ee3a4038dd3703af0cfb772282278cc6fbfe1e3cccf98286ffec",
+      "sameAllThree": true
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException.class",
+      "normalCurrentSha256": "85f86d702a139f126afdd72ca8e221583db824f159351ecd9f07b15fcc569c88",
+      "earlierOrdinaryByteBoundSha256": "85f86d702a139f126afdd72ca8e221583db824f159351ecd9f07b15fcc569c88",
+      "earlierTypedAndMalformedSha256": "85f86d702a139f126afdd72ca8e221583db824f159351ecd9f07b15fcc569c88",
+      "sameAllThree": true
+    }
+  ],
+  "matches": 5,
+  "sameSyntheticFixtures": true,
+  "previousTwoXmlScopes": [
+    {
+      "xml": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42390-bootstrap-yaml-input-synthetic-v1/xml/TEST-junit-jupiter.xml",
+        "sha256": "e38a2cf001af4e1aaf07fbab60e45a76f943f9b46d36d4b8c8f5a6ebb9d1f003"
+      },
+      "cases": [
+        "apiRejectsIsolatedUtf16Surrogates",
+        "webRejectsIsolatedUtf16Surrogates"
+      ]
+    },
+    {
+      "xml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40296-public-config-yaml-utf8-limit-v1/xml/TEST-junit-jupiter.xml",
+        "sha256": "3b754fd61dc4b9286635a08d7c84803e71a51a264372673972730caadb083f7e"
+      },
+      "cases": [
+        "opsApiCfg008Utf8ByteLimit",
+        "opsWebCfg008Utf8ByteLimit"
+      ]
+    }
+  ],
+  "ordinaryResultsRetained": 4,
+  "independentMalformedInputs": 4,
+  "independentSizeBounds": [
+    "exact 16384 bytes",
+    "16385 bytes refused"
+  ],
+  "sdkCheckCount": 3,
+  "originalSizeInitLog": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40296-public-config-yaml-utf8-limit-v1/class-init.log.gz",
+    "sha256": "b01f159fb92cb8c75fc1c430cdb5407ad3cc2b93271638420aa05098384938a9"
+  },
+  "sizeProductTypesActuallyInitialized": [
+    "dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig",
+    "dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfig"
+  ],
+  "sizeOtherApplicationTypeNames": [],
+  "typedSpotBugsOld": 0,
+  "noNewDynamicExecution": true,
+  "qualificationLimit": "Known parser and test bytes; other current callers, artifacts and whole451 are independent",
+  "actualEnvironmentReads": 0,
+  "formalAcceptanceId": null,
+  "whole451": false
+}
