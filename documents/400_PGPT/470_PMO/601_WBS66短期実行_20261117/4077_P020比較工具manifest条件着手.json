@@ -1,0 +1,77 @@
+{
+  "eventId": "PGPT-20261008-9522",
+  "groupId": "PG43824_P020_SYNTHETIC_GATE_BASELINE_METADATA",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-23T18:12:58+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 84,
+      "remainingPercent": 16,
+      "resetsAt": 1795879771,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "source": "36a875db46570aa43ed2a6df6d2e99fac27dd29b",
+    "productionCoreMain": "b82c7b62ee4dbbcf094760be9022e8fd62a6a3fa",
+    "canonicalDesignSource": "e8cd2907eda6cd5a2ee43ed87d7837f613b3ac15",
+    "run": "PG43824",
+    "workCategory": "CONTRACT_AUDIT",
+    "managementWorkIds": [
+      "WBS-P020-01.03/2"
+    ],
+    "previousCheckpoint": 4076,
+    "planRow": {
+      "新版ID": "WBS-P020-01.03/2",
+      "第58版ID": "WBS-P020-01.03/2",
+      "費用主担当項目": "P020-01",
+      "計画窓": "繰越",
+      "予定期間・週末": "2027-01-17までの計画週",
+      "作業・成果物": "CHR-G01～G06工具gate/manifest/source契約（各case実行はCHR）／同source証拠による受入判定",
+      "先行ID・着手条件": "WBS-P020-01.03/1、閉/WBS-P020-01.02",
+      "担当": "環境・比較担当",
+      "旧短期残pp": "0.488",
+      "改訂残pp": "0.488",
+      "終了条件": "CHR-G01～G06工具gate/manifest/source契約（各case実行はCHR）の対象別完了記録を確認",
+      "元項目の正式受入に必要な証拠": "harukaの現所有を確認し、FileStore・実ブラウザ・Current/NK双方の個別DIFを記録。",
+      "参照する元項目": "P020-01",
+      "lineNumber": 57
+    },
+    "currentPlan": [
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/11月22日_PGPT再開実行計画.txt",
+        "sha256": "80b9fdc306f664b9c03901a4bdfb34cf66997879676204cfa969858fd68a4016"
+      },
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/短期実行WBS.tsv",
+        "sha256": "a6efedcd63b4ef3bb1d133d939b0ddd7dc4b0147988ac33d668282a25c999527"
+      }
+    ],
+    "startScope": {
+      "goal": "Validate current GateBaselineMetadataTest and exact actual packaged comparison-tool scope with immutable in-memory test JSON, keeping Current baseline bytes untouched.",
+      "dependency": "PG43728 standalone tool JAR; PG41800 nominal metadata and PG43702 current gate fixture report; no external targets or runtime.",
+      "end": "Verify exactly eight named synthetic fixture contracts and complete candidate dependency binding. Execute only changed needed scope. Actual CHR and ending dependency deferred.",
+      "nextIndependent": "Current GateOutputFailureContractTest phase recovery only if its tool class scope differs or another additional independent negative normal check."
+    },
+    "groupCapPp": 0.45,
+    "estimateAtGroupStartPp": {
+      "low": 0,
+      "base": 0.25,
+      "high": 0.45
+    },
+    "completedOriginalRowPricePp": 0,
+    "sourceOwnership": "LOCAL_DEV_FOUNDATION_TRACKED_SNAPSHOT",
+    "knownOwnedRunInProgress": 0,
+    "costRevision": "PMO-remaining-v3-20261010",
+    "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "actualAllocatedPp": null
+  }
+}
