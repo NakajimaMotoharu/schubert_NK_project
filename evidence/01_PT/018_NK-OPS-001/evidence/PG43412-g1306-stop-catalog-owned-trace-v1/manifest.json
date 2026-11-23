@@ -1,0 +1,109 @@
+{
+  "run": "PG43412-g1306-stop-catalog-owned-trace-v1",
+  "source": "3bdb3f8783b5204d2b52547970faf7758baedeb7",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-G13.06",
+  "terminalAtUTC": "2026-11-23T06:34:11.249117+00:00",
+  "actualExit": 0,
+  "testDefinitions": {
+    "PT-OPS-MCATALOG001": "mcatalog001FixedNamesSelectTheOrderedServices",
+    "PT-OPS-MCATALOG002": "mcatalog002FixedReasonsSurviveLookupAndCallerMutation"
+  },
+  "testFixture": {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MaintenanceStopSnapshotTest.java",
+    "sha256": "ef27b8d4af118af3e17602176ba3dc6549557fc050caf179e46c8baf8cd98f4e"
+  },
+  "currentSpec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/5803_停止観測値のJava列挙カタログ独立PT仕様書.md",
+    "sha256": "67c3cb03ffd2c299ebc0bff63e34912421a3c68694ca934624009b9be2f91f3d"
+  },
+  "retainedExistingContract": {
+    "path": "evidence/01_PT/018_NK-OPS-001/166_NK-OPS-001_親全停止・終端単体テスト仕様書.md",
+    "sha256": "a09640cc6df855ea2916aab0856e709554d0d6d152ee87d03f12590a567f17d3"
+  },
+  "canonicalSource": "7745de1fb04c8b9e2cfccc11103d7b3c57b090d7",
+  "canonicalDesign": [
+    {
+      "path": "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md",
+      "sha256": "857b4062d624ab8b99a2bfc72524f380c655c930db9388755968981e7c76d6c5"
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "sha256": "3874975e619ba279814df4d6f79fd161098756cad882e00d580651fb2d7387cb"
+    }
+  ],
+  "originalOwnerRecordsUnchanged": true,
+  "candidateOverlay": [
+    {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceStopSnapshot.java",
+      "physical": {
+        "path": "../pgpt-runs/PG379/PG43410-mstop-catalog-current-nine-v2/production/dev/codex/schubert/nk/batch/platform/MaintenanceStopSnapshot.class",
+        "sha256": "24215a68cad48c13b84d6a7180eda4ae6b2aebee3e126c96cb4f31938ddbe969"
+      },
+      "artifactOwner": "WBS-P018-04",
+      "costOwner": "WBS-P018-04",
+      "historicalInventorySha256": "767e81698cf113cf65b1bd7a6d939dcff07dee94725d297dc78984d9817cc3b4",
+      "currentGitSha256": "767e81698cf113cf65b1bd7a6d939dcff07dee94725d297dc78984d9817cc3b4",
+      "mappedNewTestIds": []
+    },
+    {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnit.java",
+      "physical": {
+        "path": "../pgpt-runs/PG379/PG43410-mstop-catalog-current-nine-v2/production/dev/codex/schubert/nk/batch/platform/MaintenanceUnit.class",
+        "sha256": "650b3540616c612413d26e8f3be0c1ced71271b861fb06a1f7e00d1908176453"
+      },
+      "artifactOwner": "WBS-P017-12",
+      "costOwner": "WBS-P017-12",
+      "historicalInventorySha256": "3bb39b88aa020d05bda682e2e3c4af42246588c79263d0e2e2b4f6dcc743ad9a",
+      "currentGitSha256": "e764ee58aacff2e95fbc30f9102fe40295a25ac0b41df0aaa3ef03a625e34733",
+      "mappedNewTestIds": [
+        "PT-OPS-MCATALOG001"
+      ]
+    },
+    {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/StopGateFailure.java",
+      "physical": {
+        "path": "../pgpt-runs/PG379/PG43410-mstop-catalog-current-nine-v2/production/dev/codex/schubert/nk/batch/platform/StopGateFailure.class",
+        "sha256": "8a52a783cb7f59c6d51fa3f58ff10a0a24e2bdc194a0de8f4c5605512bba57a5"
+      },
+      "artifactOwner": "WBS-P018-04",
+      "costOwner": "WBS-P018-04",
+      "historicalInventorySha256": "e62e08a9ba6be579d39a92d420e2c9f0b1067644d735bd4533252890c9227d8e",
+      "currentGitSha256": "e62e08a9ba6be579d39a92d420e2c9f0b1067644d735bd4533252890c9227d8e",
+      "mappedNewTestIds": [
+        "PT-OPS-MCATALOG002"
+      ]
+    },
+    {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/StopGateException.java",
+      "physical": {
+        "path": "../pgpt-runs/PG379/PG43410-mstop-catalog-current-nine-v2/production/dev/codex/schubert/nk/batch/platform/StopGateException.class",
+        "sha256": "c17fa221e36f0a1d5750d2ee57701cb61ca09960f871aba434d79b1bb2ab6318"
+      },
+      "artifactOwner": "WBS-P018-04",
+      "costOwner": "WBS-P018-04",
+      "historicalInventorySha256": "a1a12c5e601b8b1d2fb76f66765b311c325dff72eaea4579bcc0c85df6519892",
+      "currentGitSha256": "a3edce9d305b127863271fb0757a403ebfcb1e6e973261db3dede83fda1a7758",
+      "mappedNewTestIds": [
+        "PT-OPS-MCATALOG002"
+      ]
+    }
+  ],
+  "currentRunEvidence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43410-mstop-catalog-current-nine-v2/manifest.json",
+    "sha256": "8495fab3d2efb3ca9c2034e624a646de6b284ebb5d7e9cb4b2c61d4af267c2d4"
+  },
+  "sameSourceXml": {
+    "path": "../pgpt-runs/PG379/PG43410-mstop-catalog-current-nine-v2/xml/TEST-junit-jupiter.xml",
+    "sha256": "52610c758ac75b7667fc3e5a855545cb79910f257f811b1d504c33df1ceac1e1"
+  },
+  "parentFormalChange": 0,
+  "productTestsRerun": 0,
+  "unqualified": [
+    "PT-OPS-MSTOP008",
+    "actual Stop and Service owner",
+    "whole451"
+  ],
+  "formalAcceptanceId": null,
+  "initialIndexBindingPrecondition": "The prior already verified 485/486 pair did not end in a newline. No writes occurred before this precondition rejected. Preserve object values and normalize final newline on this intentional metadata revision."
+}
