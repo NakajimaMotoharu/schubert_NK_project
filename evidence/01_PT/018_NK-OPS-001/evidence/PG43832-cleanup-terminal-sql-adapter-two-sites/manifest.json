@@ -1,0 +1,93 @@
+{
+  "run": "PG43832",
+  "source": "458fe8fe258b8c94f388b0bc547d0899a74b37d2",
+  "wbs": "WBS-F02-b-a",
+  "related": [
+    "SSC-461",
+    "BUG-3233",
+    "YKT-2680",
+    "WBS-P017-07"
+  ],
+  "terminalAtUTC": "2026-11-23T18:29:56.428130+00:00",
+  "before": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43832-cleanup-terminal-sql-before-v1/terminal.json",
+    "sha256": "b931d09e9c54d263371f2b8d51e7ba9d92bdeea616450953d0fe5b72e3bc4699"
+  },
+  "current": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43832-cleanup-terminal-sql-after-v1/terminal.json",
+    "sha256": "1c5a07bbb329cfc4a5bb2fabea8d19c8ec0532e965d810f360a095c90fdf1716"
+  },
+  "currentTestIds": [
+    "PT-BAT-SSC461-CT001",
+    "PT-BAT-SSC461-CT002",
+    "PT-BAT-SSC461-CT003",
+    "PT-BAT-SSC461-CT004"
+  ],
+  "sameFixedFixture": true,
+  "ordinary": {
+    "original": 4,
+    "candidate": 4,
+    "failures": 0,
+    "skipped": 0
+  },
+  "pmd": {
+    "old": 48,
+    "current": 48,
+    "sameEveryDiagnosticWithSingleLineShift": true,
+    "rawTypeCounts": {
+      "CloseResource": 8,
+      "AvoidCatchingGenericException": 32,
+      "DoNotThrowExceptionInFinally": 8
+    },
+    "suppressionAdded": false
+  },
+  "localCoverage": {
+    "line": [
+      21,
+      314
+    ],
+    "method": [
+      6,
+      21
+    ],
+    "class": [
+      1,
+      1
+    ],
+    "branch": [
+      0,
+      172
+    ],
+    "sourceExec": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43832-cleanup-terminal-sql-after-v1/unfiltered.out",
+      "sha256": "354a6f7c7f1e66e62685a0d4d5f618707b9aa486a6094bc88fde827db1a006ed"
+    },
+    "noCombinedOldExec": true
+  },
+  "otherStatic": "SpotBugs, Checkstyle, NullAway and formatting zero within explicit target and fixture scope",
+  "staticOrigins": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43832-cleanup-terminal-sql-before-v1/static-terminal.json",
+      "sha256": "8e9341d60db86e4407b083131203a0f143b2065d31c1f04d6a23d7ce0c3f6abe"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43832-cleanup-terminal-sql-after-v1/static-terminal.json",
+      "sha256": "be4aa557a15efd824cbc211422ab73bfff05424eaed0abadd1c9fe1a96f3650f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43832-cleanup-terminal-sql-after-v1/fixture-style-terminal.json",
+      "sha256": "354429b3cae22721c8e1c14a84a75b77496893ea32da4f1a4ba4b3da1febc0d7"
+    }
+  ],
+  "abiUnchanged": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43832-cleanup-terminal-sql-after-v1/abi.out",
+    "sha256": "9f53f93c467210cfd77ab1284baa4b646cab9cb85414464ee8636c418d44915c"
+  },
+  "verifiedRetiredCallsites": 2,
+  "changedSQLStatementBindsOrCloseCode": false,
+  "independentFixture": "Owned in-memory JDK proxy, connection.getAutoCommit throws synthesized SQL failure before resources. Read/Rejected preserve fixed type/message, original first Error and exact one borrowed call. Existing SQL projection intentionally outside this fixture.",
+  "realDbOrBackendOps": 0,
+  "activeWholeF02": false,
+  "activeWhole451": false,
+  "formalAcceptanceId": null
+}
