@@ -1,4 +1,62 @@
 {
+  "currentStorageFileCallbackTracePG43902": {
+    "wbs": "WBS-P003-05",
+    "linked": [
+      "WBS-F02-b-a",
+      "WBS-F03/2-2-b"
+    ],
+    "traceWork": "WBS-G13.06",
+    "ssc": "SSC-461",
+    "cases": [
+      {
+        "id": "PT-STORAGE-CB001",
+        "method": "callback001SuccessKeepsTheResultAndDirectoryOwnership"
+      },
+      {
+        "id": "PT-STORAGE-CB002",
+        "method": "callback002ExpectedFileFailureCategoriesDropProviderDiagnostics"
+      },
+      {
+        "id": "PT-STORAGE-CB003",
+        "method": "callback003EachConversionPropagatesTheOriginalFatalBeforeRedaction"
+      }
+    ],
+    "testSource": "f1f5a32d3b7d64f59eef46a9bab86225c8774506",
+    "sourceFixture": {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/OwnedDirectoryCallbackValueTest.java",
+      "sha256": "a18e64573cf9cec639c31f70fff0439f3c4ef270aadf81160b32af8202ad4d23"
+    },
+    "oracle": {
+      "path": "evidence/01_PT/003_NK-PRO-003/4150_Storageファイルcallback固定診断単体仕様.md",
+      "sha256": "fcb9e91b59062f9dc9a649e13c52cf8005bdc36afd2eb9ca52d51ae3d0050ca7"
+    },
+    "unit": {
+      "path": "evidence/01_PT/003_NK-PRO-003/evidence/PG43898-current-storage-file-callback-pure/manifest.json",
+      "sha256": "b45d05b1c2ae67117db14a3e764d82a1c18cd1358806795140eea57f5a11403d"
+    },
+    "fixtureStatic": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43900-storage-web-value-fixtures-pmd/manifest.json",
+      "sha256": "2e2fd8ac5e3bf2b310496e08d6f26cbddbb6cbfe8228e110e80372b982682a61"
+    },
+    "canonicalDesign": {
+      "path": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+      "source": "e8cd2907eda6cd5a2ee43ed87d7837f613b3ac15",
+      "sha256": "f1f8d15f3abf0a44b583ecda98f975da393bd4d56f8fa5c241725a23f8af5b38"
+    },
+    "inputUnaffected": 3,
+    "testsReexecuted": 0,
+    "formalAcceptanceId": null,
+    "whole451": false,
+    "remaining": [
+      "Ownership of remaining FileOperation permissions and ordinary/next-edge distinction before migration",
+      "Whole SSC-461, real FileStore and formal six-product verification"
+    ],
+    "proof": {
+      "path": "evidence/01_PT/003_NK-PRO-003/evidence/PG43902-storage-file-callback-wbs-trace/manifest.json",
+      "sha256": "e136d724eaa215ebeb9a39aea23e29e96212d0c37875259bdebef60c0481dc95"
+    },
+    "completedOriginalRowPricePp": 0
+  },
   "currentWebPrincipalValueTracePG43892": {
     "owner": "WBS-P015-01",
     "traceWork": "WBS-G13.06",
@@ -10722,7 +10780,7 @@
   },
   "beforeSsc261InventorySha256": "443af5012e6a3d2a9088bb38d4a28ae3f7ff7645e6e4689fde2bea543fe19b9b",
   "beforeStrictReferenceCandidateInventorySha256": "44976d5ce11f24a89ea7db68c4d5ce1674f9a72032b6a96e453adc461a850968",
-  "inventorySha256": "c44c1ffd484d0d17a6287733c540ed27eb9f95376fa1a45fe60d9c0155bb4030",
+  "inventorySha256": "4468ca4e594cd23eb951d62d8f1172982f4a450c7c9c744b4be2ee28e9d2743c",
   "expiryCandidateObservation": {
     "source": "1ec19782a1afe22d1de75b05f4cd12b8a8a8a172",
     "run": "PG713/714+PG715/717/719+PG722/725/728/729/730+PG737/738/739",
