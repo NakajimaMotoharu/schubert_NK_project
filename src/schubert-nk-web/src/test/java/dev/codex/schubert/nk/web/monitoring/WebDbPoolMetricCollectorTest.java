@@ -8,13 +8,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricObservationTest.Fixture;
 import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
+import java.lang.management.ManagementFactory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.locks.LockSupport;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -192,9 +194,11 @@ class WebDbPoolMetricCollectorTest {
       var release = new CountDownLatch(1);
       var calledSecond = new CountDownLatch(1);
       var enteredSecond = new CountDownLatch(1);
-      var secondThread = new AtomicReference<Thread>();
+      var firstThreadId = new AtomicLong();
+      var secondThreadId = new AtomicLong();
       first.beforeActive =
           () -> {
+            firstThreadId.set(Thread.currentThread().threadId());
             entered.countDown();
             assertTrue(release.await(5, TimeUnit.SECONDS));
           };
@@ -205,15 +209,22 @@ class WebDbPoolMetricCollectorTest {
         var two =
             executor.submit(
                 () -> {
-                  secondThread.set(Thread.currentThread());
+                  var pool = second.pool();
+                  var config = second.config();
+                  secondThreadId.set(Thread.currentThread().threadId());
                   calledSecond.countDown();
-                  return collector.collect(second.pool(), second.config());
+                  return collector.collect(pool, config);
                 });
         assertTrue(calledSecond.await(5, TimeUnit.SECONDS));
+        var threads = ManagementFactory.getThreadMXBean();
+        var waiter = threads.getThreadInfo(secondThreadId.get());
         long deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(2);
-        while (secondThread.get().getState() != Thread.State.BLOCKED
-            && System.nanoTime() < deadline) Thread.onSpinWait();
-        assertEquals(Thread.State.BLOCKED, secondThread.get().getState());
+        while ((waiter == null || waiter.getLockOwnerId() != firstThreadId.get())
+            && System.nanoTime() < deadline) {
+          LockSupport.parkNanos(TimeUnit.MILLISECONDS.toNanos(1));
+          waiter = threads.getThreadInfo(secondThreadId.get());
+        }
+        assertTrue(waiter != null && waiter.getLockOwnerId() == firstThreadId.get());
         assertFalse(enteredSecond.await(100, TimeUnit.MILLISECONDS));
         assertTrue(collector.snapshot().isEmpty());
         release.countDown();

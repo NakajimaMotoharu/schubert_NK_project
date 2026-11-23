@@ -37,7 +37,7 @@ Collectorはprivate owner lock内でread→完全publication。invalidはunknown
 |同|WEBPOOLCONN003|4getter×cyclic/unformattable/Errorでunknown/同一Throwable/再試行なし、次validで回復|
 |同|WEBPOOLCONN004|STANDARDで悪意getterも未読、入力nullはNPE、保持0|
 |同|WEBPOOLCONN005|constructor各null/未知mode・collect nullは先行拒否、既snapshotは不変|
-|同|WEBPOOLCONN006|同owner first getterで有限latch保持、second threadが実BLOCKEDになりgetter未入場→順にpublication/全future回収|
+|同|WEBPOOLCONN006|同owner first getterで有限latch保持、後続workerが先行ownerを待つことをJVMが報告しgetter未入場→順にpublication/全future回収|
 |同|WEBPOOLCONN007|64並行Proxy入力を各正しいcomplete tupleで返却、series4|
 |同|WEBPOOLCONN008|別ownerと100連続供給で値独立・series4、control/close/credential読取0|
 
@@ -54,3 +54,5 @@ groupP01809_WEB_POOL_OBSERVATION_V1、PG8120 fresh receipt/開始3-5-9pp・cap10
 ## 2026-11-24 排他方式の是正
 
 BUG-3738／YKT-2929、WBS-F03/2-2-b。WebDbPoolMetricCollectorの借用観測から公開までは同一の私有ReentrantLockで直列化する。正常、STANDARD早期return、供給RuntimeException／Errorでfinally解放。WEBPOOLCONN001～008の元合成proxyと全期待値を保持し、同一runでL/M/C/Bを採取する。PG43806で同期指摘を修正前後比較する。元例外を保持するPMD catchの生結果と全451の未検証を別計上する。
+
+BUG-3739。共有poolではなくPTの二workerだけを使用し、先行getterを有限latchで保持する。ThreadMXBeanが後続workerの待機先として先行worker IDを返し、後続getter未到達かつ公開値空を確認する。その後先行1・後続2と最終2を固定期待し、両futureと実行器を回収する。monitor固有の状態名を識別子にしない。元試験失敗と再試験は別runで保存する。
