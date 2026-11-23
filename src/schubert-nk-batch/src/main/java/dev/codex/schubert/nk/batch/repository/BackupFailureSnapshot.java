@@ -96,7 +96,9 @@ public record BackupFailureSnapshot(
     if (!row.next()
         || !Long.valueOf(expected.id()).equals(row.getObject("id", Long.class))
         || !expected.run().id().equals(row.getObject("run_id", java.util.UUID.class))
-        || !expected.businessDate().equals(row.getObject("business_date", java.time.LocalDate.class))
+        || !expected
+            .businessDate()
+            .equals(row.getObject("business_date", java.time.LocalDate.class))
         || !expected.step().name().equals(row.getObject("step", String.class))
         || !Integer.valueOf(expected.attempt()).equals(row.getObject("attempt", Integer.class))
         || !matchesInstant(row, "started_at", expected.startedAt())
