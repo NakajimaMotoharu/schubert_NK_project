@@ -1,0 +1,103 @@
+{
+  "run": "PG43806",
+  "source": "b6eeb4843c566d85efff5b144aa886035c582954",
+  "productionCoreMain": "adcb63f28202215d9af88663459a20ed64d3bf1d",
+  "wbs": "WBS-F03/2-2-b",
+  "linkedOriginal": "WBS-P018-09",
+  "terminalAtUTC": "2026-11-23T17:51:03.290595+00:00",
+  "status": "SCOPED_RECHECK_PASS",
+  "findings": {
+    "beforePMD": [
+      [
+        "AvoidSynchronizedStatement",
+        27
+      ],
+      [
+        "AvoidCatchingGenericException",
+        34
+      ],
+      [
+        "AvoidCatchingGenericException",
+        34
+      ]
+    ],
+    "afterPMD": [
+      [
+        "AvoidCatchingGenericException",
+        36
+      ],
+      [
+        "AvoidCatchingGenericException",
+        36
+      ]
+    ],
+    "rawPMDExit": 4,
+    "catchFindingsRetained": 2,
+    "spotbugs": 0,
+    "checkstyle": 0,
+    "fixtureGjf": 0,
+    "fixtureCheckstyle": 0,
+    "spotlessSelectedMain": 4,
+    "nullAwayCompileExit": 0
+  },
+  "ordinary": {
+    "firstRun": {
+      "executed": 8,
+      "success": 7,
+      "failed": 1
+    },
+    "qualifiedRerun": {
+      "executed": 8,
+      "success": 8,
+      "failed": 0,
+      "skipped": 0
+    },
+    "newDistinctTestId": 0,
+    "caseRange": "PT-OPS-WEBPOOLCONN001-008",
+    "firstPartialSuccessAddedToApplicableTotal": false
+  },
+  "coverage": {
+    "singleExec": true,
+    "scope": "WebDbPoolMetricCollector.class",
+    "line": 19,
+    "method": 3,
+    "class": 1,
+    "branch": 4,
+    "allMatched": true,
+    "missed": 0
+  },
+  "expectation": "Existing independent numbers and borrowing invariants; case 006 now verifies distinct JVM owned workers and the actual owner while the first is pinned, no getter entry or publication before release, then values 1/2, final 2, complete futures and shutdown. One phase with unit exit1 remains retained.",
+  "sourcesStable": [
+    "the production source is identical in after-v1 and after-retest-v1",
+    "only approved local proxy interfaces, synthetic signature-only types and an in-memory meter registry are used"
+  ],
+  "artifacts": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43806-web-pool-before-v1/terminal.json",
+      "sha256": "81a42de1b7b7d19045fc4889e19827d00d533cd382b1b4f5ad10b5fc9a3bc222"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43806-web-pool-after-v1/terminal.json",
+      "sha256": "50cd6634458b713097312a660663674e94fe3a7d41ecd6e699db9f0258079e1f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43806-web-pool-after-retest-v1/terminal.json",
+      "sha256": "a7db398e50f51dbe3fb6eff2871823a36007b22f13e0eef906df251a341e12ca"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43806-web-pool-after-retest-v1/fixture-style-terminal.json",
+      "sha256": "66ec1392d931ac3f0f83f01ffc651c0b4363fb2cfd18b189c1cde7e533d8fe18"
+    }
+  ],
+  "bugs": [
+    "BUG-3738",
+    "BUG-3739",
+    "YKT-2929"
+  ],
+  "unresolved": [
+    "Five more registered collectors require typed baseline and owner-specific test evidence",
+    "Production Web packaging, QA-056, phase F03 and 451"
+  ],
+  "externalOperations": 0,
+  "formalAcceptanceId": null
+}
