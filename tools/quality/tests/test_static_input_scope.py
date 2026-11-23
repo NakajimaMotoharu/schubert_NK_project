@@ -70,6 +70,16 @@ class StaticInputScopeTest(unittest.TestCase):
             with self.assertRaisesRegex(ScopeError, "^DUPLICATE_FIELD$"):
                 read_metadata(path, hashlib.sha256(data).hexdigest())
 
+    def test_non_json_constants_are_rejected_even_with_exact_digest(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory, "scope.json")
+            for token in (b"NaN", b"Infinity", b"-Infinity"):
+                with self.subTest(token=token):
+                    data = b'{"observation":{"value":' + token + b'}}'
+                    path.write_bytes(data)
+                    with self.assertRaisesRegex(ScopeError, "^INVALID_JSON_CONSTANT$"):
+                        read_metadata(path, hashlib.sha256(data).hexdigest())
+
     def test_cli_rejects_an_inventory_with_a_different_digest(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
