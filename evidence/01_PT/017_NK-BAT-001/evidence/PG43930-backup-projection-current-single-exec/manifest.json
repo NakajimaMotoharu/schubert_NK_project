@@ -1,0 +1,130 @@
+{
+  "run": "PG43930",
+  "source": "1a17ed920f6657b747175e6fc880b937d5d9ceef",
+  "productionCore": "23a7874f01b432a01256ee0e58823f8038fca59a",
+  "terminalAtUTC": "2026-11-23T20:55:38.695559+00:00",
+  "wbs": [
+    "WBS-P017-06",
+    "WBS-P004-05/2",
+    "WBS-F03/2-2-b"
+  ],
+  "oracle": {
+    "path": "evidence/01_PT/017_NK-BAT-001/4748_Backup失敗行の時刻瞬間照合単体仕様.md",
+    "sha256": "e90eefd678d6a8fe354f9fa219d954f753c3ca29439ed49dd2d7dc2e1dd4e9f2"
+  },
+  "issuedIds": [
+    {
+      "id": "PT-BAT-BACKUP-UTC001",
+      "method": "utc001SameInstantsAtDifferentOffsetsCompleteBothRowsAndRecheck"
+    },
+    {
+      "id": "PT-BAT-BACKUP-UTC002",
+      "method": "utc002SameWallTimeAtDifferentOffsetAndOneMicrosecondDriftStillFail"
+    },
+    {
+      "id": "PT-BAT-BACKUP-UTC003",
+      "method": "utc003MissingEitherRequiredTimeFailsWithFixedDiagnosticAndOwnedClose"
+    },
+    {
+      "id": "PT-BAT-BACKUP-UTC004",
+      "method": "utc004EveryOtherRequiredProjectionColumnRejectsNullIndependently"
+    },
+    {
+      "id": "PT-BAT-BACKUP-UTC005",
+      "method": "utc005MissingHandlesAndUnexpectedRowCountsRetainOnlyOwnedCloses"
+    },
+    {
+      "id": "PT-BAT-BACKUP-UTC006",
+      "method": "utc006RunIdentityMustRemainConsistentBeforeAndAfterBothRows"
+    },
+    {
+      "id": "PT-BAT-BACKUP-UTC007",
+      "method": "utc007ProjectionAndBothOwnedCloseFailuresKeepOneFixedDiagnostic"
+    }
+  ],
+  "incrementalNewIds": [
+    "PT-BAT-BACKUP-UTC004",
+    "PT-BAT-BACKUP-UTC005",
+    "PT-BAT-BACKUP-UTC006",
+    "PT-BAT-BACKUP-UTC007"
+  ],
+  "regularArchive": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43916-corrected-backup-utc-batch-regular-jar/manifest.json",
+    "sha256": "649dfe3d0042c66c3be36b6c2047b83f2385165e65eb0eb9e960269a7f17d0fa"
+  },
+  "ordinaryTerminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43930-backup-read-projection-current-accepted-fixture/terminal.json",
+    "sha256": "a94c5319ad5929b4c81094bd12544620746f74ffba91b1c10f29761a64f8dc7a"
+  },
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43930-backup-read-projection-current-accepted-fixture/begin.json",
+    "sha256": "94a20508b1215207845422cd3192bb63efdafd0a765ad504a14bd9d6d906ecc2"
+  },
+  "junit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43930-backup-read-projection-current-accepted-fixture/reports/TEST-junit-jupiter.xml",
+    "sha256": "334b541b4884a3f5fe6547b91d63513a038ce57a678174c088aa7cb64f31887b"
+  },
+  "exec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43930-backup-read-projection-current-accepted-fixture/unit.exec",
+    "sha256": "909254c97b6a92e0bac6dcf26de9ab11942979e9259ea8da7390b3307f11c2ea"
+  },
+  "exactCoveredClass": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43930-backup-read-projection-current-accepted-fixture/product/dev/codex/schubert/nk/batch/repository/BackupFailureSnapshot.class",
+    "sha256": "16b79d3cc55fe56e15d4001e368475398f7cb9de7f71174dba95490a4d48ade3"
+  },
+  "priorTrials": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43930-backup-read-projection-current-once/terminal.json",
+      "sha256": "3f8afea6353dffc08ddc4eb620209a47db9d3f31430b3b3ffecec54b41b870ab"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43930-backup-read-projection-current-compound/terminal.json",
+      "sha256": "043949853f0b70af4efe629fa42b25b46483e6af97ba656809e4692788a95539"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43930-backup-read-projection-current-final/terminal.json",
+      "sha256": "5dc9e4207dfc80612d199aedffae70b4da51228df8ae0f770666379fa5bdd893"
+    }
+  ],
+  "counts": {
+    "tests": 15,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "completeClassRaw": "CLASS\tdev/codex/schubert/nk/batch/repository/BackupFailureSnapshot\t0a5870c3f2826205\ttrue\t106\t65585\tINSTRUCTION:0:361\tBRANCH:2:66\tLINE:0:65\tCOMPLEXITY:2:42\tMETHOD:0:10\tCLASS:0:1",
+  "unfiltered": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43930-backup-read-projection-current-accepted-fixture/raw.out",
+    "sha256": "cf3b50e80e337654d3fa66c7007298a526aad63244ec318b2f61cdfd85aa835e"
+  },
+  "missedBranchesAtSourceLines": [
+    85,
+    87
+  ],
+  "deficitMapping": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43930-backup-read-projection-current-compound/bytecode.txt",
+    "sha256": "d9d4a89a83ef2277ea31cb05ece5c6bdc6f4996ed728ae5218781cd5705187a5"
+  },
+  "assessment": "Two normal TWR close condition edges still uncovered. Keep denominator and false branches in raw data. Review close precedence contract independently before any modification.",
+  "correctedBug": "BUG-3756",
+  "static": {
+    "formatAndCheckstyle": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43930-backup-read-projection-current-accepted-fixture/fixture-style-terminal.json",
+      "sha256": "45cedad86b5d96b81c87127c64c99c8185e8a1421cb450eb1ced30c4634f43bc"
+    },
+    "pmdRaw": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43930-backup-read-projection-current-accepted-fixture/fixture-pmd-terminal.json",
+      "sha256": "9d8b0cb7c90c29b0f47804382500c15cb87a8224c016cfa312923eb2b42daaa0"
+    },
+    "priorFormat": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43930-backup-read-projection-current-final/fixture-style-terminal.json",
+      "sha256": "56b7c1a5f8802d8925d9903b0173722a91f940c165ebce6d8d99848ffcb3a26a"
+    },
+    "priorPmd": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43930-backup-read-projection-current-compound/fixture-pmd-terminal.json",
+      "sha256": "fa251cd9ae216ed1a2c3226fc43d88d5e64fe6b0725fb980e4464c8b8093ce82"
+    }
+  },
+  "formalAcceptanceId": null,
+  "whole451": false
+}
