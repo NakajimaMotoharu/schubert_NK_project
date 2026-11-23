@@ -20,3 +20,5 @@ NK-OPS-001/P01809/共有C07追加費0、RD171/UI252/SS342351/PG-D543。DbPoolMet
 既API POM Hikari7.1.0を再利用しProduction依存版変更0。既installed Jar SHA2be45c641b841e81df87292e181f2c203500c5f0e9a1676f135927387f3cf40b/POM SHA5b8df2699933ea898aa50d4def4fc2226b15e6f4d993e373a16070f7ed480216、M2 com/zaxxer/HikariCP/7.1.0・POM upstream https://github.com/brettwooldridge/HikariCP。取得/導入0。host harnessに当一dependencyだけ追加し、親/format/lint/Werror/NullAway/SB/coverage四1.0/実PTを厳密XML意味比較/負改変で保全する。既十二guardのharness旧byteを新byteへ読み替えない。
 
 新16＋必要既API32=48PT6suite/全13Java/実10＋metadata1・全1733physical/75sourceは未実測予定。元PG7362/7364以降へsource/branch/OS/JDK/tool・command/time/終了/XML/実counter/静的/BUG-SSC/evidence path/hashを保存。SDK4Jar＋既Hikari一Jarは個別pinし、歴史Batch/Webの四SDK/旧成功は当sourceへ合算0。actual Hikari/DB/management/identity/sampling/outer有限collector/alert/Root/exporter/native/CHR/全体451は未受入HOLD、正式1964/53・歴史17/別source新7・原190新受入0/工数null/QA051final/PTALT0維持。
+
+BUG-3736／YKT-2929再試験。POOLCONN001～008の既期待値を維持し、読取から公開までの一所有者の排他、失敗後の同一例外と全未知、後続成功回復、STANDARDの非観測を自己所有SDK fixtureで確認する。同期の実装をprivate ReentrantLockとfinallyへ変更。PMDの同期1指摘と広いcatch二指摘を個別評価し、原XML・source・単一execを保全する。
