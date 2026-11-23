@@ -1,0 +1,96 @@
+{
+  "run": "PG43562",
+  "source": "667558f950329245e67201c1a0ea687d994bdae1",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-23T10:28:18.848102+00:00",
+  "wbs": "WBS-P018-02/2",
+  "relatedReference": "WBS-P019-02",
+  "referencePricePp": 0,
+  "requirement": "SCM-005",
+  "design": [
+    "RD171",
+    "SS352 §13",
+    "SS354"
+  ],
+  "originalDefect": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43558-release-cache-path-before-v1/manifest.json",
+    "sha256": "26148919d42e3e3b18e5ed2e8a58efbab92974522834c210cc9cdeba42724f0f"
+  },
+  "candidateBeforeFix": "0207cd92c32aa75c9e540e1f6b9423722eefe8ff",
+  "begin": {
+    "path": "../pgpt-runs/PG379/PG43562-release-cache-path-current-v1/begin.json",
+    "sha256": "af9007b9ba847f0c8f024d690fe346c1c59a58fe16a209aabad5db3bc2568d42"
+  },
+  "originalTerminal": {
+    "path": "../pgpt-runs/PG379/PG43562-release-cache-path-current-v1/terminal.json",
+    "sha256": "77bee5e90c3e4cc48ba66ff79d567b5114198cca8f480185f43f1539f836ce09"
+  },
+  "dependencyTools": [
+    {
+      "path": "/usr/bin/python3.14",
+      "sha256": "52e0a13e60a981d8c4b6478be2ba5176f69da07948a056bf49cf6f077e30cb41"
+    },
+    {
+      "path": "/usr/bin/bash",
+      "sha256": "3efccc187bafa75ff1e37d246270ab3e7aa559f242c7a52bf3ec2a1b5450bdbd"
+    }
+  ],
+  "priorTriageRun": {
+    "path": "../pgpt-runs/PG379/PG43560-release-cache-path-current-v1/terminal.json",
+    "sha256": "d8d994e663bc2346f8910d03970cc2eae3a90066c5ac7e45420713e73179a3cb"
+  },
+  "duplicateDraftIds": {
+    "PT-OPS-CI-PRO005": "PT-OPS-CI-PRO006",
+    "PT-OPS-SBOM-014": "PT-OPS-SBOM-029"
+  },
+  "revisedNewIds": [
+    "PT-OPS-CI-PRO006",
+    "PT-OPS-SBOM-029"
+  ],
+  "unchangedExistingIdsIncluded": 9,
+  "sameSourceFirstFinalRun": 11,
+  "newToolTestDefinitions": 2,
+  "tests": {
+    "redFailedAsExpected": 2,
+    "greenPassed": 11,
+    "greenFailed": 0,
+    "greenSkipped": 0,
+    "greenNotRun": 0,
+    "greenCaseNames": [
+      "test_ci_pro006_relative_repository_is_resolved_from_the_worktree",
+      "test_fixed_offline_module_and_maven_phase",
+      "test_maven_failure_is_the_command_failure",
+      "test_missing_invalid_and_extra_repository_arguments",
+      "test_requires_the_protocol_worktree_root",
+      "test_sbom008_fixed_direct_goal_and_arguments",
+      "test_sbom009_invalid_arguments_never_invoke_maven",
+      "test_sbom010_forwards_maven_failure_and_preserves_previous_output",
+      "test_sbom011_success_without_artifact_is_rejected",
+      "test_sbom012_rejects_target_symlink_before_work",
+      "test_sbom029_relative_repository_is_resolved_from_the_worktree"
+    ]
+  },
+  "shellParse": 2,
+  "actualMaven": false,
+  "actualReleaseOrDB": false,
+  "runnerModel": null,
+  "coverageNotMeasured": true,
+  "actualProductPt": 0,
+  "overall451": false,
+  "QA061DistributionDecision": null,
+  "QA061ApprovalOwner": null,
+  "relatedDefects": [
+    "BUG-3714",
+    "YKT-2914"
+  ],
+  "formal": {
+    "acceptedOriginal": 16,
+    "totalOriginal": 190,
+    "newFormalAcceptance": 0,
+    "formalAcceptanceId": null,
+    "officialTests": 1964,
+    "officialScopes": 53,
+    "effortRate": null
+  }
+}
