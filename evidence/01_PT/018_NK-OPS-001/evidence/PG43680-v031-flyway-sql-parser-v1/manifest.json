@@ -1,0 +1,105 @@
+{
+  "run": "PG43680",
+  "source": "aeeb6bd49eac49162902d408cc6f491f19b5bbde",
+  "productionCoreMain": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "terminalAtUTC": "2026-11-23T13:46:01.442927+00:00",
+  "startedAtUTC": "2026-11-23T13:46:00.811038+00:00",
+  "exitCode": 0,
+  "testId": "PT-DB-ACL031-S05",
+  "workingDirectory": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43680-v031-flyway-sql-parser-v1",
+  "jdk": "25.0.4",
+  "flyway": "13.4.0",
+  "migration": {
+    "path": "src/schubert-nk-api/src/main/resources/db/migration/V031__restrict_routine_default_privileges.sql",
+    "sha256": "1b481fdb50b84c1bb6204144d04813f6f362013394cada067085d457a90ce3a3"
+  },
+  "approvedDesign": "e8cd2907eda6cd5a2ee43ed87d7837f613b3ac15",
+  "oracle": [
+    "SET ROLE NK_OWNER",
+    "ALTER DEFAULT PRIVILEGES FOR ROLE NK_OWNER REVOKE EXECUTE ON ROUTINES FROM PUBLIC",
+    "RESET ROLE"
+  ],
+  "commands": {
+    "compile": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+      "--release",
+      "25",
+      "-Xlint:all",
+      "-Werror",
+      "-proc:none",
+      "-implicit:none",
+      "-encoding",
+      "UTF-8",
+      "-cp",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/flywaydb/flyway-core/13.4.0/flyway-core-13.4.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/flywaydb/flyway-database-postgresql/13.4.0/flyway-database-postgresql-13.4.0.jar",
+      "-d",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43680-v031-flyway-sql-parser-v1/classes",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43680-v031-flyway-sql-parser-v1/V031TransactionCheck.java"
+    ],
+    "parse": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43680-v031-flyway-sql-parser-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/flywaydb/flyway-core/13.4.0/flyway-core-13.4.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/flywaydb/flyway-database-postgresql/13.4.0/flyway-database-postgresql-13.4.0.jar",
+      "V031TransactionCheck",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43680-v031-flyway-sql-parser-v1/V031__restrict_routine_default_privileges.sql"
+    ]
+  },
+  "exactToolJarInputs": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/flywaydb/flyway-core/13.4.0/flyway-core-13.4.0.jar",
+      "sha256": "e6147827cb883a8bb359231202e8d0d32e0f8e905caf0e20d2890e36dcd12251"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/flywaydb/flyway-database-postgresql/13.4.0/flyway-database-postgresql-13.4.0.jar",
+      "sha256": "1219a89b93fe5dc74ddec8271d810136751820d5bc2a880e51f6ff21e02d66ac"
+    }
+  ],
+  "harness": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43680-v031-flyway-sql-parser-v1/V031TransactionCheck.java",
+    "sha256": "badff0746271e55d8a47dae4238c00463b30fa69743a538caed63e6067f0129d"
+  },
+  "record": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43680-v031-flyway-sql-parser-v1/begin.json",
+      "sha256": "c0d307ade19949fe342e5a23e9cb2fa91d711071f75f9dbfda90d004ad7a9b5a"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43680-v031-flyway-sql-parser-v1/terminal.json",
+      "sha256": "f5523326c38524e900a13b2135ea53fa03c70d790e43b8615570ba11b5468771"
+    }
+  ],
+  "outputs": {
+    "compile": {
+      "exit": 0,
+      "out": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43680-v031-flyway-sql-parser-v1/compile.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "err": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43680-v031-flyway-sql-parser-v1/compile.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "parse": {
+      "exit": 0,
+      "out": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43680-v031-flyway-sql-parser-v1/parse.stdout",
+        "sha256": "2503539452d3b1ba30809eebced2cbf3864108d1ad1d6f6cf2e244f2de213a1f"
+      },
+      "err": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43680-v031-flyway-sql-parser-v1/parse.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "staticResult": {
+    "statements": 3,
+    "transactional": 3,
+    "referencedSql": 0,
+    "sqlExecuted": 0
+  },
+  "databasePT": "NOT_RUN",
+  "databaseCatalog": "NOT_RUN",
+  "productTestExecutions": 0,
+  "formalAcceptanceId": null
+}
