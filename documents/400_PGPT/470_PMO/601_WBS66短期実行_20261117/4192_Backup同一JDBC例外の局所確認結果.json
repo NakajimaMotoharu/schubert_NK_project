@@ -1,0 +1,117 @@
+{
+  "eventId": "PGPT-20261008-9637",
+  "workCategory": "SELECTED_TEST",
+  "source": "7d0688c625be5b0a98000278b81b853b905d3b0a",
+  "productionCoreMain": "23a7874f01b432a01256ee0e58823f8038fca59a",
+  "canonicalDesignSource": "e8cd2907eda6cd5a2ee43ed87d7837f613b3ac15",
+  "managementWorkIds": [
+    "WBS-P004-05/2"
+  ],
+  "planRow": {
+    "新版ID": "WBS-P004-05/2",
+    "第58版ID": "WBS-P004-05/2",
+    "費用主担当項目": "P004-05",
+    "計画窓": "繰越",
+    "予定期間・週末": "2026-12-20までの計画週",
+    "作業・成果物": "JDBC UTC・SQL exception・transaction境界／同source証拠による受入判定",
+    "先行ID・着手条件": "A1-02、A3-03、WBS-P004-05/1、閉/WBS-F02、閉/WBS-F03",
+    "担当": "API・DB担当",
+    "旧短期残pp": "0.423",
+    "改訂残pp": "0.423",
+    "終了条件": "JDBC UTC・SQL exception・transaction境界：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。",
+    "元項目の正式受入に必要な証拠": "残るAPI先行4行、実ApiJdbcPoolとJdbcSyncRequestProcessorのcommit・rollback、UTC、実DB後条件。",
+    "参照する元項目": "P004-05",
+    "lineNumber": 21
+  },
+  "run": "PG43938",
+  "startEvent": "PGPT-20261008-9636",
+  "outcome": {
+    "provisionalFailures2": 2,
+    "appliedPt": 0,
+    "productionChange": false,
+    "newFormal": 0,
+    "open": [
+      "BUG-3757",
+      "YKT-2935",
+      "SSC-481"
+    ],
+    "technicalExecutions": 4136,
+    "technicalApplicable": 4003
+  },
+  "proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43938-backup-checked-exception-alias-observation/manifest.json",
+    "sha256": "a6df65a30909cf7041060f641269c03fc230b6d65a2a730aa2493c193046335b"
+  },
+  "nextEvidence": {
+    "work": "Resolve SSC-481 exact reader-specific failure policy in SS332. Then controlled fixed source and independent test, including normal/exception rows and both owned releases. Same-source Batch and 451 not yet."
+  },
+  "quotaObservation": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-23T21:02:38+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 89,
+      "remainingPercent": 11,
+      "resetsAt": 1795879771,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "completedOriginalRowPricePp": 0,
+  "modelRequested": "gpt-6.2-sol",
+  "modelObserved": null,
+  "reasoningRequested": "high",
+  "reasoningObserved": null,
+  "speedRequested": "standard",
+  "speedObserved": null,
+  "actualAllocatedPp": null,
+  "quotaAfter": {
+    "usedPercent": 89,
+    "remainingPercent": 11,
+    "resetsAt": 1795879771,
+    "windowDurationMins": 10080
+  },
+  "quotaReceipt": {
+    "sha256": "b0352ef3266dbb9d9181aca00ae67cc9f37b291df031bf4a35eaf05d6fd0b6b4",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-23T21:02:38+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 89,
+        "remainingPercent": 11,
+        "resetsAt": 1795879771,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "vendorSignatureAvailable": false,
+    "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+  },
+  "observedSharedPp": 0,
+  "sameQuotaWindow": true,
+  "groupCapExceeded": false,
+  "newImplementationAllowedByQuota": true,
+  "attribution": "UNKNOWN",
+  "tokenTotals": null,
+  "terminalAtUTC": "2026-11-23T21:01:52.530620+00:00",
+  "postTerminalReceiptVerified": true,
+  "missingOrChangedWindowIsNotZero": false,
+  "quotaBefore": {
+    "usedPercent": 89,
+    "remainingPercent": 11,
+    "resetsAt": 1795879771,
+    "windowDurationMins": 10080
+  },
+  "quotaAfterLegacyPrimaryOnly": true,
+  "fullObservationPreservedInReceipt": true,
+  "costRevision": "PMO-remaining-v3-20261010",
+  "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+  "acceptedOriginal": 16,
+  "totalOriginal": 190,
+  "newFormalAcceptance": 0,
+  "formalAcceptanceId": null,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortRate": null
+}

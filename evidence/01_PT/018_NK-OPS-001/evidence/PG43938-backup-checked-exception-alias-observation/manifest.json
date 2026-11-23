@@ -1,0 +1,84 @@
+{
+  "run": "PG43938",
+  "source": "7d0688c625be5b0a98000278b81b853b905d3b0a",
+  "productionCore": "23a7874f01b432a01256ee0e58823f8038fca59a",
+  "terminalAtUTC": "2026-11-23T21:01:52.530620+00:00",
+  "wbs": [
+    "WBS-P004-05/2",
+    "WBS-P017-06"
+  ],
+  "normative": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43934-backup-owned-close-design-review/manifest.json",
+    "sha256": "27ce227336240382ac05e86bfd8d00ad0caa2d76292f531c983e64d8fed1662a"
+  },
+  "regularArchive": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43916-corrected-backup-utc-batch-regular-jar/manifest.json",
+    "sha256": "649dfe3d0042c66c3be36b6c2047b83f2385165e65eb0eb9e960269a7f17d0fa"
+  },
+  "exactTargetSha": "16b79d3cc55fe56e15d4001e368475398f7cb9de7f71174dba95490a4d48ade3",
+  "probeCommands": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43938-backup-repeat-jdbc-failure-observation-v2/begin.json",
+      "sha256": "ff3c548ed465ad61c11ef8a783d926945043ac76f37111c331c0c56e34e87f0b"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43938-backup-repeat-jdbc-failure-statement-only/begin.json",
+      "sha256": "74ea2fcb1209bd2d4e12dfa072bf37f9dd1eb6c3066e21cd92d322773e9ef5c1"
+    }
+  ],
+  "ordinaryScope": "Tracked normal reader and two provisional independent JDK JDBC proxy observations. No real DB or runtime mutation.",
+  "probeCases": [
+    {
+      "resource": "ResultSet",
+      "fixture": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43938-backup-repeat-jdbc-failure-observation-v2/fixture/BackupFailureUtcProjectionTest.java",
+        "sha256": "4c2a3d00cb575f185759df00fc9f4da644145f1a04e4af98a14121e97d545e8e"
+      },
+      "runTerminal": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43938-backup-repeat-jdbc-failure-observation-v2/terminal.json",
+        "sha256": "22ddedb8fa5bdcd7d9b97665daffee68a680bb84aa2ebc02f7bc8ca406778ace"
+      },
+      "junit": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43938-backup-repeat-jdbc-failure-observation-v2/reports/TEST-junit-jupiter.xml",
+        "sha256": "44254986aa7f7f9da85a3db32a03bc904d208c492a25b6287a5565cd41f9b393"
+      },
+      "actual": "java.lang.IllegalArgumentException",
+      "expected": "java.io.IOException",
+      "status": "REPRODUCED_FAILED",
+      "source": "7d0688c625be5b0a98000278b81b853b905d3b0a"
+    },
+    {
+      "resource": "PreparedStatement",
+      "fixture": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43938-backup-repeat-jdbc-failure-statement-only/fixture/BackupFailureUtcProjectionTest.java",
+        "sha256": "a39ca07f6aa03be0cb6a9a4e8278a6db6819b2a0c383dc64c73c89901dc50cb3"
+      },
+      "runTerminal": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43938-backup-repeat-jdbc-failure-statement-only/terminal.json",
+        "sha256": "daab37d65c04c08c8dcfa761ae37cf2741792b4d98c0e9aced9d3e41df8bb9d2"
+      },
+      "junit": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43938-backup-repeat-jdbc-failure-statement-only/reports/TEST-junit-jupiter.xml",
+        "sha256": "f2717368966d38e54f2bd1b3c4bf911d7349e72f12843deb29ece2058f02a8b2"
+      },
+      "actual": "java.lang.IllegalArgumentException",
+      "expected": "java.io.IOException",
+      "status": "REPRODUCED_FAILED",
+      "source": "7d0688c625be5b0a98000278b81b853b905d3b0a"
+    }
+  ],
+  "beforeFirstLaunch": {
+    "exit": 1,
+    "noJob": true,
+    "cause": "full source pin mismatch, no compile and no JUnit"
+  },
+  "discovered": {
+    "BUG": "BUG-3757",
+    "YKT": "YKT-2935",
+    "SSC": "SSC-481"
+  },
+  "publicCaseIdProposed": "PT-BAT-BACKUP-UTC008",
+  "applicableSuccesses": 0,
+  "formalAcceptanceId": null,
+  "productionSourceAltered": false
+}
