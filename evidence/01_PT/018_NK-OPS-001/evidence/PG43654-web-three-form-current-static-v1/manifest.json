@@ -1,0 +1,213 @@
+{
+  "run": "PG43654",
+  "source": "57155caacf8b78c86e48f4019857b623ff12eda6",
+  "productionCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-F03/2-2-b",
+  "terminalAtUTC": "2026-11-23T12:46:30.587650+00:00",
+  "actualExit": 0,
+  "verificationExit": 0,
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43654-web-three-form-current-static-v1/begin.json",
+    "sha256": "03816f5da61e070d0777bf349b84fc4a1133d35581acf30ba52cd2fdf6ade26a"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43654-web-three-form-current-static-v1/terminal.json",
+    "sha256": "ff47226cad65e4f2b717586f0f7f8e26e5f6ac5acd9c7598aaa2dec15a4ac702"
+  },
+  "executions": {
+    "spotbugs": 0,
+    "pmd": 4
+  },
+  "admissions": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37922-web-form-owned-buffer33-static-v1/manifest.json",
+      "sha256": "6a4309283293588dc4f1e5e85e503981feda1f65ec96561c974c5c583d77cb91"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42672-f03-three-form-fixtures-original-v1/manifest.json",
+      "sha256": "ed40aafedbaf2ed625f97b0369c38540867abdb10d0cd12a7a1ff10e50b6e74d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43646-current-protocol-package-v1/manifest.json",
+      "sha256": "8152630ccb7755cd39f7aeadda6ebf7518cbea5a688a6f1af46fcf23a5508648"
+    }
+  ],
+  "reports": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43654-web-three-form-current-static-v1/spotbugs.xml",
+      "sha256": "5e7b1aa053f7bbdc45015e78dd9d160f6e052b3a9caa8ebcb10601fee48e3dee"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43654-web-three-form-current-static-v1/pmd.xml",
+      "sha256": "3055a5e8bbbf340dde96ac1adedb677394b4dbdc23a6abf1118098fe8cf2703d"
+    }
+  ],
+  "actualProductTests": 0,
+  "previousProductTestsPreserved": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43648-scr016-form-current-v1/manifest.json",
+      "sha256": "c04db0bdea1a3b28440c01d3308c46346abd95e6cb169ca860f626d5fe0381e3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43650-scr017-mutation-forms-current-v1/manifest.json",
+      "sha256": "351be047d48c75205541f71312de017a7a33a864e76bc6efb0867eb79a8fdfab"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43652-scr018-question-form-current-v1/manifest.json",
+      "sha256": "5d0eb49d6a56a73d26b2e846799ecede856656cf9d5da3823bcc3c74e4425888"
+    }
+  ],
+  "spotBugsAnalyzed": 1,
+  "spotBugsFindings": 0,
+  "spotBugsMissingClasses": 0,
+  "spotBugsErrors": 0,
+  "previousBroadThrowsRaw": 1,
+  "currentBroadThrowsRaw": 0,
+  "pmdFixtures": 3,
+  "pmdRawFindings": 19,
+  "pmdApplicable": 0,
+  "pmdUnclassified": 0,
+  "pmdProcessingErrors": 0,
+  "classifications": [
+    {
+      "file": "QuestionSubmitFormTest.java",
+      "line": 241,
+      "rule": "CloseResource",
+      "disposition": "NOT_APPLICABLE_TO_THIS_CALLSITE",
+      "why": "The dedicated fixture executor is stopped by shutdownNow in finally and awaitTermination is an asserted finite condition. An ordinary production ownership finding is not inferred from this fixture."
+    },
+    {
+      "file": "QuestionSubmitFormTest.java",
+      "line": 241,
+      "rule": "DoNotUseThreads",
+      "disposition": "NOT_APPLICABLE_TO_THIS_CALLSITE",
+      "why": "The approved ordinary parallel test intentionally evaluates one hundred independent forms with eight bounded workers, waiting on futures and asserting worker termination in finally."
+    },
+    {
+      "file": "QuestionSubmitFormTest.java",
+      "line": 247,
+      "rule": "DoNotUseThreads",
+      "disposition": "NOT_APPLICABLE_TO_THIS_CALLSITE",
+      "why": "The approved ordinary parallel test intentionally evaluates one hundred independent forms with eight bounded workers, waiting on futures and asserting worker termination in finally."
+    },
+    {
+      "file": "QuestionSubmitFormTest.java",
+      "line": 268,
+      "rule": "DoNotUseThreads",
+      "disposition": "NOT_APPLICABLE_TO_THIS_CALLSITE",
+      "why": "The approved ordinary parallel test intentionally evaluates one hundred independent forms with eight bounded workers, waiting on futures and asserting worker termination in finally."
+    },
+    {
+      "file": "QuestionSubmitFormTest.java",
+      "line": 269,
+      "rule": "DoNotUseThreads",
+      "disposition": "NOT_APPLICABLE_TO_THIS_CALLSITE",
+      "why": "The approved ordinary parallel test intentionally evaluates one hundred independent forms with eight bounded workers, waiting on futures and asserting worker termination in finally."
+    },
+    {
+      "file": "UserCreateFormTest.java",
+      "line": 282,
+      "rule": "CloseResource",
+      "disposition": "NOT_APPLICABLE_TO_THIS_CALLSITE",
+      "why": "The dedicated fixture executor is stopped by shutdownNow in finally and awaitTermination is an asserted finite condition. An ordinary production ownership finding is not inferred from this fixture."
+    },
+    {
+      "file": "UserCreateFormTest.java",
+      "line": 282,
+      "rule": "DoNotUseThreads",
+      "disposition": "NOT_APPLICABLE_TO_THIS_CALLSITE",
+      "why": "The approved ordinary parallel test intentionally evaluates one hundred independent forms with eight bounded workers, waiting on futures and asserting worker termination in finally."
+    },
+    {
+      "file": "UserCreateFormTest.java",
+      "line": 288,
+      "rule": "DoNotUseThreads",
+      "disposition": "NOT_APPLICABLE_TO_THIS_CALLSITE",
+      "why": "The approved ordinary parallel test intentionally evaluates one hundred independent forms with eight bounded workers, waiting on futures and asserting worker termination in finally."
+    },
+    {
+      "file": "UserCreateFormTest.java",
+      "line": 310,
+      "rule": "DoNotUseThreads",
+      "disposition": "NOT_APPLICABLE_TO_THIS_CALLSITE",
+      "why": "The approved ordinary parallel test intentionally evaluates one hundred independent forms with eight bounded workers, waiting on futures and asserting worker termination in finally."
+    },
+    {
+      "file": "UserCreateFormTest.java",
+      "line": 311,
+      "rule": "DoNotUseThreads",
+      "disposition": "NOT_APPLICABLE_TO_THIS_CALLSITE",
+      "why": "The approved ordinary parallel test intentionally evaluates one hundred independent forms with eight bounded workers, waiting on futures and asserting worker termination in finally."
+    },
+    {
+      "file": "UserMutationFormTest.java",
+      "line": 70,
+      "rule": "CloseResource",
+      "disposition": "NOT_APPLICABLE_TO_THIS_CALLSITE",
+      "why": "The local Form record receives this exact form and its close callback. Successful acquisitions return the owner to test scopes with try-with-resources or explicit finally. The closed-form ownership case exercises the same boundary."
+    },
+    {
+      "file": "UserMutationFormTest.java",
+      "line": 74,
+      "rule": "CloseResource",
+      "disposition": "NOT_APPLICABLE_TO_THIS_CALLSITE",
+      "why": "The local Form record receives this exact form and its close callback. Successful acquisitions return the owner to test scopes with try-with-resources or explicit finally. The closed-form ownership case exercises the same boundary."
+    },
+    {
+      "file": "UserMutationFormTest.java",
+      "line": 78,
+      "rule": "CloseResource",
+      "disposition": "NOT_APPLICABLE_TO_THIS_CALLSITE",
+      "why": "The local Form record receives this exact form and its close callback. Successful acquisitions return the owner to test scopes with try-with-resources or explicit finally. The closed-form ownership case exercises the same boundary."
+    },
+    {
+      "file": "UserMutationFormTest.java",
+      "line": 82,
+      "rule": "CloseResource",
+      "disposition": "NOT_APPLICABLE_TO_THIS_CALLSITE",
+      "why": "The local Form record receives this exact form and its close callback. Successful acquisitions return the owner to test scopes with try-with-resources or explicit finally. The closed-form ownership case exercises the same boundary."
+    },
+    {
+      "file": "UserMutationFormTest.java",
+      "line": 492,
+      "rule": "CloseResource",
+      "disposition": "NOT_APPLICABLE_TO_THIS_CALLSITE",
+      "why": "The dedicated fixture executor is stopped by shutdownNow in finally and awaitTermination is an asserted finite condition. An ordinary production ownership finding is not inferred from this fixture."
+    },
+    {
+      "file": "UserMutationFormTest.java",
+      "line": 492,
+      "rule": "DoNotUseThreads",
+      "disposition": "NOT_APPLICABLE_TO_THIS_CALLSITE",
+      "why": "The approved ordinary parallel test intentionally evaluates one hundred independent forms with eight bounded workers, waiting on futures and asserting worker termination in finally."
+    },
+    {
+      "file": "UserMutationFormTest.java",
+      "line": 519,
+      "rule": "DoNotUseThreads",
+      "disposition": "NOT_APPLICABLE_TO_THIS_CALLSITE",
+      "why": "The approved ordinary parallel test intentionally evaluates one hundred independent forms with eight bounded workers, waiting on futures and asserting worker termination in finally."
+    },
+    {
+      "file": "UserMutationFormTest.java",
+      "line": 522,
+      "rule": "DoNotUseThreads",
+      "disposition": "NOT_APPLICABLE_TO_THIS_CALLSITE",
+      "why": "The approved ordinary parallel test intentionally evaluates one hundred independent forms with eight bounded workers, waiting on futures and asserting worker termination in finally."
+    },
+    {
+      "file": "UserMutationFormTest.java",
+      "line": 523,
+      "rule": "DoNotUseThreads",
+      "disposition": "NOT_APPLICABLE_TO_THIS_CALLSITE",
+      "why": "The approved ordinary parallel test intentionally evaluates one hundred independent forms with eight bounded workers, waiting on futures and asserting worker termination in finally."
+    }
+  ],
+  "suppressionsAdded": 0,
+  "remaining": [
+    "SpotBugs tests not positively admitted as targets in this group: UserMutationFormTest and QuestionSubmitFormTest",
+    "regular Web packaging, whole451, real Web path"
+  ],
+  "formalAcceptanceId": null,
+  "whole451": false
+}
