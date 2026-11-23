@@ -1,0 +1,203 @@
+{
+  "run": "PG43144-f03-outbox-value-fixture-current-v1",
+  "source": "9854a501cca494d5c56700f0b38f37e986ef9d53",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-23T00:09:49.839371+00:00",
+  "wbs": "WBS-F03/2-2-b",
+  "related": [
+    "BUG-3675",
+    "YKT-2889",
+    "WBS-P006-02/2",
+    "SS324",
+    "SS332"
+  ],
+  "beforeStatic": {
+    "receipts": [
+      {
+        "path": "../pgpt-runs/PG379/PG43142-f03-outbox-value-fixture-static-before-v1/terminal.json",
+        "sha256": "c6ee0ade22da475872592c1eb13f4184ba4dbde718be8a3fd52c3de01cf9d4c1"
+      },
+      {
+        "path": "../pgpt-runs/PG379/PG43142-f03-outbox-value-fixture-static-before-v1/pmd.xml",
+        "sha256": "6de6d23e81e71d379e52a2cb9fe42353b793b7172dfc78c3ea9a83ab0b2978f8"
+      }
+    ],
+    "rawPmd": [
+      {
+        "rule": "NullAssignment",
+        "line": 58
+      },
+      {
+        "rule": "NullAssignment",
+        "line": 87
+      }
+    ],
+    "ordinaryTests": 0
+  },
+  "finalStatic": {
+    "spotbugs": [
+      {
+        "rule": "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+        "line": 116,
+        "meaning": "intentional public null argument negative check"
+      },
+      {
+        "rule": "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+        "line": 70,
+        "meaning": "intentional public null argument negative check"
+      }
+    ],
+    "pmd": [],
+    "checkstyle": 0,
+    "suppressed": 0,
+    "typedNullAwayExecuted": false
+  },
+  "exactProductClassBytes": true,
+  "sourceInputs": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination.java",
+      "sha256": "8ab0216109c17c6d5cf96039b6ac968dd2cb6fc401c2f93b0f92cc08c3ed8e80"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport.java",
+      "sha256": "c9ba13a64c580fea33b744134a5534d44142233f72a28c40d5cc0442e2fc472f"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule.java",
+      "sha256": "f565b0413b5e262907e209f523915e3050beb7062fec3b369d178124c58e8854"
+    }
+  ],
+  "fixtureInputs": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxValueContractTest.java",
+      "sha256": "c35b604dd71fd4f04482adaf3bc80bbf37583b48e80a676992c9fd41c5319fe5"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReportBoundaryTest.java",
+      "sha256": "19d79b9b2d1c49b87b1d56df39f6bd4d37103403cca4311541bfdf741e440ffc"
+    }
+  ],
+  "historicalStandalone": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35363-api-command-outbox11-post-join-v1/manifest.json",
+    "sha256": "a5c8669d2c4e88ec9994cbb9cf201e8818e310a0970a4b37aa78e2164603c24e"
+  },
+  "independentOracle": [
+    "two fixed destination names and addresses",
+    "same values absent shared array",
+    "one retry INSTANCE and independent 300 UTC offsets",
+    "28 integer boundary vectors"
+  ],
+  "results": {
+    "ordinary": 6,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "definitionsAdded": 0
+  },
+  "caseRoster": [
+    [
+      "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatchReportBoundaryTest",
+      "acceptsZeroAndExactMaximumWithoutNarrowingValidCounts()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatchReportBoundaryTest",
+      "rejectsEveryNegativeComponentAndNonWrappingMismatch()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatchReportBoundaryTest",
+      "rejectsWrappedSumsInEveryComponentPosition()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.messaging.outbound.OutboxValueContractTest",
+      "value001ReportEqualityRetainsEveryConsistentCountAndOrdinaryPublicRendering()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.messaging.outbound.OutboxValueContractTest",
+      "value002DestinationKeepsExactlyTwoFixedAddressesAndDefensiveClosedEnumFactories()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.messaging.outbound.OutboxValueContractTest",
+      "value003ApplicationRetryUsesIndependentFiveByThreeGoldenOffsetsAndAllHundredAttempts()"
+    ]
+  ],
+  "coverage": [
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination",
+      "crc": "f335df72f09e3b86",
+      "coverage": {
+        "BRANCH": 2,
+        "LINE": 13,
+        "METHOD": 9,
+        "CLASS": 1
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport",
+      "crc": "9faf3e1b9d11b160",
+      "coverage": {
+        "BRANCH": 10,
+        "LINE": 5,
+        "METHOD": 8,
+        "CLASS": 1
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule",
+      "crc": "60500b8b9cf1018d",
+      "coverage": {
+        "BRANCH": 13,
+        "LINE": 15,
+        "METHOD": 7,
+        "CLASS": 1
+      }
+    }
+  ],
+  "totals": {
+    "LINE": 33,
+    "METHOD": 24,
+    "CLASS": 3,
+    "BRANCH": 25
+  },
+  "oldExecMerged": false,
+  "rawCounterExclusions": 0,
+  "original": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43144-f03-outbox-value-fixture-current-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "a0175d61bec4c5436d7b48c3e4d5bed1616a4edf8e59d6b8d54a6148d4eec828"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43144-f03-outbox-value-fixture-current-v1/unit.exec",
+      "sha256": "0e8283341ab8bc0e3fd7756bfe917876bfa1fafaf2ab6ac084cb5742a03908ea"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43144-f03-outbox-value-fixture-current-v1/unfiltered.stdout",
+      "sha256": "3af33c088f42d6e9e405cb03da426185bd7b966e1818b5d4182dcf69744997c7"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43144-f03-outbox-value-fixture-current-v1/coverage-unfiltered.tsv",
+      "sha256": "3af33c088f42d6e9e405cb03da426185bd7b966e1818b5d4182dcf69744997c7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43144-f03-outbox-value-fixture-current-v1/sanitized-junit.xml",
+      "sha256": "4ecb11632fadf6f0e4c6f5142b84ce1483d91599d1bcb8bd3efd506ac59e330b"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43144-f03-outbox-value-fixture-current-v1/terminal.json",
+      "sha256": "0b80bdd2856659068f403e238074125a34c51a4fdcf5425b321463b811cefbc6"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43144-f03-outbox-value-fixture-current-v1/spotbugs.xml",
+      "sha256": "eca1f9a6d642b115893a64e3bf1f7a4ec32798d0964e1d6e6113a74214ac0c24"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43144-f03-outbox-value-fixture-current-v1/pmd.xml",
+      "sha256": "e7a56fba88fb35ad42587aca48b0a8ebc75450c577f183bf5894ccf2142badb1"
+    }
+  ],
+  "actualBrokerOrDb": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
