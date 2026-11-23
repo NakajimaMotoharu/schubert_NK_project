@@ -55,7 +55,7 @@ final class OutboxValueContractTest {
     }
     OutboxDestination[] copy = OutboxDestination.values();
     assertNotSame(values, copy);
-    copy[0] = null;
+    copy[0] = OutboxDestination.DLQ;
     assertSame(OutboxDestination.ASYNC_WORK, OutboxDestination.values()[0]);
     for (String unknown : List.of("", "NK.ASYNC.WORK", "nk.async.work ", "unknown")) {
       IllegalArgumentException failure =
@@ -83,9 +83,9 @@ final class OutboxValueContractTest {
     assertThrows(IllegalArgumentException.class, () -> OutboxRetrySchedule.valueOf("unknown"));
     assertThrows(NullPointerException.class, () -> OutboxRetrySchedule.valueOf(null));
     OutboxRetrySchedule[] copy = OutboxRetrySchedule.values();
-    assertNotSame(copy, OutboxRetrySchedule.values());
-    copy[0] = null;
-    assertSame(schedule, OutboxRetrySchedule.values()[0]);
+    OutboxRetrySchedule[] next = OutboxRetrySchedule.values();
+    assertNotSame(copy, next);
+    assertArrayEquals(new OutboxRetrySchedule[] {schedule}, next);
     long[] bases = {1000, 5000, 30000, 60000, 300000};
     long[][] offsets = {
       {900, 1000, 1100},
