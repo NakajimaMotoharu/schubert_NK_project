@@ -1,0 +1,245 @@
+{
+  "run": "PG43602",
+  "source": "06eb343a3b4274ecde9b2565ece3adf92e0f139e",
+  "productionCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": [
+    "WBS-P016-03/2"
+  ],
+  "actualExit": 0,
+  "predecessorDiscovery": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43600-scr003-discovery-before-v1/manifest.json",
+    "sha256": "47dc05d3a92a6a713c8b7ba78bf53744901db11cfb19d406c3ef591979304c8f"
+  },
+  "predecessorProductStarted": 0,
+  "linkageInputs": {
+    "dev/codex/schubert/nk/web/form/LogSearchForm$Code.class": {
+      "path": "../pgpt-runs/PG379/PG43602-scr003-search-form-enum-qualified-one-exec/discovery-linkage/dev/codex/schubert/nk/web/form/LogSearchForm$Code.class",
+      "sha256": "abf0963cd9058d705b1345f9e68f36a02ba20a5950ebb22626fa405fdad21ee7"
+    },
+    "dev/codex/schubert/nk/web/form/LogSearchForm$Field.class": {
+      "path": "../pgpt-runs/PG379/PG43602-scr003-search-form-enum-qualified-one-exec/discovery-linkage/dev/codex/schubert/nk/web/form/LogSearchForm$Field.class",
+      "sha256": "6eacef774bb6256ecafda32a518b46891232fa747c7100ab98f1ef51b42d3c68"
+    },
+    "dev/codex/schubert/nk/web/form/LogSearchForm.class": {
+      "path": "../pgpt-runs/PG379/PG43602-scr003-search-form-enum-qualified-one-exec/discovery-linkage/dev/codex/schubert/nk/web/form/LogSearchForm.class",
+      "sha256": "3edbc8bd57a03f394e97c010cdc8ac35c1115341538cf396b4c63b41e12219a0"
+    },
+    "dev/codex/schubert/nk/web/logging/WebHttpLogKind.class": {
+      "path": "../pgpt-runs/PG379/PG43602-scr003-search-form-enum-qualified-one-exec/discovery-linkage/dev/codex/schubert/nk/web/logging/WebHttpLogKind.class",
+      "sha256": "9659f3fa135809eb07159c966de87d81bf6c18763fc46fbd7663b18cdd1e4a41"
+    },
+    "dev/codex/schubert/nk/web/revocation/RevocationFailureCode.class": {
+      "path": "../pgpt-runs/PG379/PG43602-scr003-search-form-enum-qualified-one-exec/discovery-linkage/dev/codex/schubert/nk/web/revocation/RevocationFailureCode.class",
+      "sha256": "83a5fa435fe616a83039b7f835ddd83998e0bcf0e58070389a05a7501d58f4dc"
+    },
+    "dev/codex/schubert/nk/web/view/ErrorViewModel$Status.class": {
+      "path": "../pgpt-runs/PG379/PG43602-scr003-search-form-enum-qualified-one-exec/discovery-linkage/dev/codex/schubert/nk/web/view/ErrorViewModel$Status.class",
+      "sha256": "ad635b2543ace6e929b89b1d5b8b0ca0b76df6af6a9db9cb7b28f25fe70284b0"
+    },
+    "dev/codex/schubert/nk/web/view/ErrorViewModel.class": {
+      "path": "../pgpt-runs/PG379/PG43602-scr003-search-form-enum-qualified-one-exec/discovery-linkage/dev/codex/schubert/nk/web/view/ErrorViewModel.class",
+      "sha256": "043c9dc242708337b6109ac44f046ce5386847da1055a473e1104cd12a15c3d2"
+    },
+    "dev/codex/schubert/nk/web/view/MenuCard.class": {
+      "path": "../pgpt-runs/PG379/PG43602-scr003-search-form-enum-qualified-one-exec/discovery-linkage/dev/codex/schubert/nk/web/view/MenuCard.class",
+      "sha256": "3a2e400e3e8461801e5eb57cc863518ed10baa0d6284fbcc76c0162ab891c064"
+    }
+  },
+  "bug": "BUG-3717",
+  "ykt": "YKT-2917",
+  "startedAtUTC": "2026-11-23T11:35:16.814474+00:00",
+  "terminalAtUTC": "2026-11-23T11:35:17.746408+00:00",
+  "actualProductExecutions": 12,
+  "passed": 12,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "existingFormAndWireRerunForOneStream": 10,
+  "pureEnumCases": 2,
+  "newTestDefinitions": 0,
+  "trialCommand": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+    "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/PG43602-scr003-search-form-enum-qualified-one-exec/same.exec,sessionid=PG43602-SCR003-ENUM,append=false,includes=dev.codex.schubert.nk.web.form.ScenarioSearchForm*",
+    "-jar",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+    "execute",
+    "--disable-ansi-colors",
+    "--fail-if-no-tests",
+    "--reports-dir",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43602-scr003-search-form-enum-qualified-one-exec/junit",
+    "--class-path",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43598-scr003-search-form-current-boundaries/main:/home/mini/codex/project1/work/pgpt-runs/PG379/PG43600-scr003-search-form-enum-one-exec/selected-fixtures:/home/mini/codex/project1/work/pgpt-runs/PG379/PG42762-protocol-real-local-ci-entry-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/PG43602-scr003-search-form-enum-qualified-one-exec/discovery-linkage",
+    "--select-class",
+    "dev.codex.schubert.nk.web.form.ScenarioSearchFormTest",
+    "--select-class",
+    "dev.codex.schubert.nk.web.form.ScenarioSearchFormWireTest",
+    "--select-method",
+    "dev.codex.schubert.nk.web.view.WebPublicEnumContractTest#scenarioFieldsRetainTheClosedBindingDictionary",
+    "--select-method",
+    "dev.codex.schubert.nk.web.view.WebPublicEnumContractTest#scenarioIssuesRetainTheClosedValidationDictionary"
+  ],
+  "measurementCommand": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+    "-cp",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43598-scr003-search-form-current-boundaries/measure:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+    "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+    "--strict-original-exec",
+    "--line-deficits",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43602-scr003-search-form-enum-qualified-one-exec/same.exec",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43598-scr003-search-form-current-boundaries/main/dev/codex/schubert/nk/web/form/ScenarioSearchForm$Code.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43598-scr003-search-form-current-boundaries/main/dev/codex/schubert/nk/web/form/ScenarioSearchForm$Field.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43598-scr003-search-form-current-boundaries/main/dev/codex/schubert/nk/web/form/ScenarioSearchForm.class"
+  ],
+  "tools": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "sha256": "c324471f8b7933a3cb401eafbc35a7055443779b438a3ab928bda3867a1b8ab1"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+      "sha256": "2136da000c36cd6ea5e714ecf8ea7fb4e41f29c75849b6b7e62531373b91a3b1"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+      "sha256": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+      "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar",
+      "sha256": "fb5b0036a0899ea97edfa0fc2c7985b55f3f7c5695028163e5e60d4f3cf6075d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+      "sha256": "ade1e0fdb4cd80d8537b57c6edb70a1360c47fdc518c20c65314517479bc4d0d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar",
+      "sha256": "ed825d10ab1399c8c0cb669e688cf0c8c82629b4c8399b58352b68e92ca10fcb"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar",
+      "sha256": "6d0abefb7cbf972ea16edb37ec14835372505063a45f976ab7ea889ed9497895"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+      "sha256": "3dfb0d5b6a106cd40b5b250e39935fbf2f927f4477546a5369a3ac609cf0506b"
+    },
+    {
+      "path": "tools/quality/jacoco/UnfilteredCodeMeasurement.java",
+      "sha256": "5f97aceb8b7f8eeb3b6c81495105e7b05435b8a82204d1850ed993e0fd639b5f"
+    }
+  ],
+  "previousFormRun": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43598-scr003-search-form-current-boundaries/manifest.json",
+    "sha256": "5812801afe35c034a7d958a1637bd60234d6cffd3a7d61b6be3d608624bae447"
+  },
+  "enumTestProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41602-two-search-forms-wire-public-enum-current-v1/manifest.json",
+    "sha256": "aea9269e146ee3fabc0311858c8c08426d1f792c1867192d749b36abafc6976d"
+  },
+  "enumOriginalCompile": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37856-web-forms-complete24-admission-v1/normalized-prepare.json",
+    "sha256": "659be0128c7e8ce435652eeb8d38f7a7a35b200707b72016061995efabed60f1"
+  },
+  "enumSource": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/WebPublicEnumContractTest.java",
+    "sha256": "06fc09e3412268f533c4b73019c4519c79a78305180778f2f793e2c1965bf073"
+  },
+  "testByteHashes": {
+    "dev/codex/schubert/nk/web/form/ScenarioSearchFormTest.class": "26e7b7cc94709cd7f2c0b92610c078f862054d17647b1cac98e64b30032b2281",
+    "dev/codex/schubert/nk/web/form/ScenarioSearchFormWireTest.class": "d4df9a9f48b53d639ef47a7a9175dcd1f86a1967192aff0d7d875228c7db30bf",
+    "dev/codex/schubert/nk/web/view/WebPublicEnumContractTest.class": "231d72e84bf54864eb575fa493d8b39b0a12950713fb886e25e63c9346853e60"
+  },
+  "countersMissedAndCovered": {
+    "INSTRUCTION": [
+      0,
+      555
+    ],
+    "BRANCH": [
+      0,
+      42
+    ],
+    "LINE": [
+      0,
+      90
+    ],
+    "COMPLEXITY": [
+      0,
+      48
+    ],
+    "METHOD": [
+      0,
+      27
+    ],
+    "CLASS": [
+      0,
+      3
+    ]
+  },
+  "physicalProductInputs": [
+    {
+      "path": "../pgpt-runs/PG379/PG43598-scr003-search-form-current-boundaries/main/dev/codex/schubert/nk/web/form/ScenarioSearchForm$Code.class",
+      "sha256": "c8461f4876f798d3c404744e0cd62359629179bb839e5ddbd739e372fb91f91e"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43598-scr003-search-form-current-boundaries/main/dev/codex/schubert/nk/web/form/ScenarioSearchForm$Field.class",
+      "sha256": "b112182a1f1e00bff62cd9443c31492a78563ebf16cff9add527e5ec62292f10"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43598-scr003-search-form-current-boundaries/main/dev/codex/schubert/nk/web/form/ScenarioSearchForm.class",
+      "sha256": "be4f91d6dcd8eae8397960fe0811c7f8132802b64eee3395cc0fb89efbd23967"
+    }
+  ],
+  "protocolJar": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42762-protocol-real-local-ci-entry-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+    "sha256": "79210c39ae0ceee549878c1c25b22961a44cc4a379d90c8b1708b1c1b5c7efb5"
+  },
+  "begin": {
+    "path": "../pgpt-runs/PG379/PG43602-scr003-search-form-enum-qualified-one-exec/begin.json",
+    "sha256": "d85287502782271c0debcce59655333df3b091cdea4373da6b6d74c5f44e4211"
+  },
+  "terminal": {
+    "path": "../pgpt-runs/PG379/PG43602-scr003-search-form-enum-qualified-one-exec/terminal.json",
+    "sha256": "a1cf10dcf44b9394a414bab191bb88e0553c5f5b6103ef9d310e729a3bf4bfef"
+  },
+  "coverage": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43602-scr003-search-form-enum-qualified-one-exec/unfiltered.tsv",
+    "sha256": "a4ef1e5def760421962e127ca394f79ad0e19a7c8c8711faed1105943c936896"
+  },
+  "junit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43602-scr003-search-form-enum-qualified-one-exec/junit/TEST-junit-jupiter.xml",
+    "sha256": "900194b7effee807086232398eb8cf9eacef4c60cf4d227767c5fedda2e7d3fd"
+  },
+  "exec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43602-scr003-search-form-enum-qualified-one-exec/same.exec",
+    "sha256": "e60d90d5467825aebd4ef01b0b1e2e762d67c3cc98389aea07db1ed21d16ea59"
+  },
+  "tests": [
+    "allNormalizedMaximaKeepAdjacentFieldsAndPadding",
+    "eachOverflowIsRejectedWithTheOtherTwoFieldsAtTheirMaxima",
+    "scenarioFieldsRetainTheClosedBindingDictionary",
+    "scenarioIssuesRetainTheClosedValidationDictionary",
+    "web214CanonicalRequest",
+    "web215ByteBoundaries",
+    "web216UnicodeAndEnums",
+    "web217BindingAllowlist",
+    "web218PageBoundaries",
+    "web219InvalidCannotRequest",
+    "web220NullOwnershipRedaction",
+    "web221ConcurrentValidation"
+  ],
+  "oneOriginalStream": true,
+  "otherExecImported": false,
+  "productJVM": "selected ordinary local Web form values and Protocol",
+  "actualHttpOrBrowser": false,
+  "database": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
