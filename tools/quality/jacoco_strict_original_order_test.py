@@ -192,6 +192,30 @@ public final class OutputFailure {
             self.assertIn('METHOD:0:1', record)
             self.assertIn('CLASS:0:1', record)
 
+    def test_crc009_later_matching_crc_with_wrong_name_has_no_measurement(self):
+        raw = HEADER + SESSION + self.entry + class_record('orderfixture/Other', self.second_crc)
+        for strict in (True, False):
+            with self.subTest(strict=strict):
+                result = self.measure(raw, self.target, self.second, strict=strict)
+                self.assertEqual(1, result.returncode, result.stderr)
+                self.assertIn(b'execution/class name mismatch', result.stderr)
+                self.assertEqual(b'', result.stdout)
+
+    def test_crc010_later_matching_identity_with_wrong_probe_count_has_no_measurement(self):
+        # Keep the record emitted by the writer. Two's straight-line method needs one probe.
+        wrong_count = class_record(SECOND, self.second_crc)[:-2] + b'\x02\x01'
+        raw = HEADER + SESSION + self.entry + wrong_count
+        parsed = decode(raw, {NAME, SECOND}, strict_class_names=True)
+        self.assertEqual(2, parsed['classes'][SECOND]['probeCount'])
+        self.assertEqual([0], parsed['classes'][SECOND]['hitProbeIds'])
+        self.assertEqual([1], parsed['classes'][SECOND]['missedProbeIds'])
+        for strict in (True, False):
+            with self.subTest(strict=strict):
+                result = self.measure(raw, self.target, self.second, strict=strict)
+                self.assertEqual(1, result.returncode, result.stderr)
+                self.assertIn(b'ExecutionData.assertCompatibility', result.stderr)
+                self.assertEqual(b'', result.stdout)
+
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
