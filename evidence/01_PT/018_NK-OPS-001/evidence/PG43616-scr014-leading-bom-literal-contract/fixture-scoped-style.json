@@ -1,0 +1,157 @@
+{
+  "run": "PG43616",
+  "source": "70b7b214c911d652f62653b32187c2131f7374db",
+  "productionCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": [
+    "WBS-P016-25.02/2"
+  ],
+  "terminalAtUTC": "2026-11-23T11:58:42.466092+00:00",
+  "actualExit": 0,
+  "productReceipts": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43616-scr014-leading-bom-literal-contract/manifest.json",
+    "sha256": "1db1e19eb788f2731d602516222a4d8e27d2bfae1a46e47522589685183bc468"
+  },
+  "sourceOnlyStyle": {
+    "google-java-format": {
+      "priorAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43288-f03-allowed-test-format-deltas-v1/manifest.json",
+        "sha256": "faefcbfb12ab54d61543b22fd798705c472f7fa13055b0ffbcf0dedf01a7149b"
+      },
+      "sourceInputs": {
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/LogSearchFormTest.java": {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/LogSearchFormTest.java",
+          "sha256": "b97890423455dd5b038e8e0944abeee24a336925b7235c10c961e0d44c5b776e"
+        }
+      },
+      "tool": {
+        "path": "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "sha256": "25b400f003089d23cc5320cdaf1a16cabee19b8aa3434d0ff021b3d9f42154b4"
+      },
+      "guard": {
+        "path": "../pgpt-runs/PG379/PG43616-scr014-leading-bom-literal-contract/google-java-format-scope-match.json",
+        "sha256": "4540e86534e87101527afc7480d45c4214a24165d63df9f38c37bf7080764135"
+      },
+      "scope": {
+        "path": "../pgpt-runs/PG379/PG43616-scr014-leading-bom-literal-contract/google-java-format-scope.json",
+        "sha256": "abaef1bb4e52c30ac49fb0eb5e163f743c35ab1af81e71512c3ab77e81067b55"
+      },
+      "inventory": {
+        "path": "../pgpt-runs/PG379/PG43616-scr014-leading-bom-literal-contract/google-java-format-inventory.json",
+        "sha256": "5bbc308902876131aaa53a55f7206793fffdc02efddccf25ffd9633f5e0ab3c5"
+      },
+      "guardCommand": [
+        "python3",
+        "-B",
+        "tools/quality/static_input_scope.py",
+        "--source-only",
+        "--plan",
+        "../pgpt-runs/PG379/PG43616-scr014-leading-bom-literal-contract/google-java-format-plan.json",
+        "--scope",
+        "../pgpt-runs/PG379/PG43616-scr014-leading-bom-literal-contract/google-java-format-scope.json",
+        "--scope-sha256",
+        "abaef1bb4e52c30ac49fb0eb5e163f743c35ab1af81e71512c3ab77e81067b55",
+        "--inventory",
+        "../pgpt-runs/PG379/PG43616-scr014-leading-bom-literal-contract/google-java-format-inventory.json",
+        "--inventory-sha256",
+        "5bbc308902876131aaa53a55f7206793fffdc02efddccf25ffd9633f5e0ab3c5"
+      ],
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Xmx768m",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/LogSearchFormTest.java"
+      ],
+      "exit": 0,
+      "stdout": {
+        "path": "../pgpt-runs/PG379/PG43616-scr014-leading-bom-literal-contract/google-java-format.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "../pgpt-runs/PG379/PG43616-scr014-leading-bom-literal-contract/google-java-format.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "checkstyle": {
+      "priorAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43260-f03-allowed-source-style-delta-v2/manifest.json",
+        "sha256": "5349d24e7d16649a28052b5410fead651526b722e867a510aa269bac94d5c11c"
+      },
+      "sourceInputs": {
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/LogSearchFormTest.java": {
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/LogSearchFormTest.java",
+          "sha256": "b97890423455dd5b038e8e0944abeee24a336925b7235c10c961e0d44c5b776e"
+        }
+      },
+      "tool": {
+        "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "sha256": "754e218ab1fcabb1e1c5f8530e9d3aa37636806c22987bb279dd907a6ee749b2"
+      },
+      "guard": {
+        "path": "../pgpt-runs/PG379/PG43616-scr014-leading-bom-literal-contract/checkstyle-scope-match.json",
+        "sha256": "c45f5f11e9f5d6ef72d99fa0546a44c66975ef1dcabe8ddcc0fb895de7127ec4"
+      },
+      "scope": {
+        "path": "../pgpt-runs/PG379/PG43616-scr014-leading-bom-literal-contract/checkstyle-scope.json",
+        "sha256": "178e4d8bead13f47ed7295cdf988d7a8884673ed5addbd219b095c4d1cbfd8c4"
+      },
+      "inventory": {
+        "path": "../pgpt-runs/PG379/PG43616-scr014-leading-bom-literal-contract/checkstyle-inventory.json",
+        "sha256": "5bbc308902876131aaa53a55f7206793fffdc02efddccf25ffd9633f5e0ab3c5"
+      },
+      "guardCommand": [
+        "python3",
+        "-B",
+        "tools/quality/static_input_scope.py",
+        "--source-only",
+        "--plan",
+        "../pgpt-runs/PG379/PG43616-scr014-leading-bom-literal-contract/checkstyle-plan.json",
+        "--scope",
+        "../pgpt-runs/PG379/PG43616-scr014-leading-bom-literal-contract/checkstyle-scope.json",
+        "--scope-sha256",
+        "178e4d8bead13f47ed7295cdf988d7a8884673ed5addbd219b095c4d1cbfd8c4",
+        "--inventory",
+        "../pgpt-runs/PG379/PG43616-scr014-leading-bom-literal-contract/checkstyle-inventory.json",
+        "--inventory-sha256",
+        "5bbc308902876131aaa53a55f7206793fffdc02efddccf25ffd9633f5e0ab3c5"
+      ],
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "-o",
+        "../pgpt-runs/PG379/PG43616-scr014-leading-bom-literal-contract/checkstyle.xml",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/LogSearchFormTest.java"
+      ],
+      "exit": 0,
+      "stdout": {
+        "path": "../pgpt-runs/PG379/PG43616-scr014-leading-bom-literal-contract/checkstyle.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "../pgpt-runs/PG379/PG43616-scr014-leading-bom-literal-contract/checkstyle.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "relevantHeldRoster": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43320-f03-formatter-admission-correction-v1/manifest.json",
+    "sha256": "048aea3bc6d87ffb8155a73ae36c2889ba110f74b72dcac98c47a81b96f6991b"
+  },
+  "checkstyleReport": {
+    "path": "../pgpt-runs/PG379/PG43616-scr014-leading-bom-literal-contract/checkstyle.xml",
+    "sha256": "1f35daa9df5545e94afd45ddee3e7311b9a9f9259a5cceb1253986b36e0b1736"
+  },
+  "checkstyleFindings": 0,
+  "formatterChangedFiles": 0,
+  "totalLocallyCoveredClasses": 3,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
