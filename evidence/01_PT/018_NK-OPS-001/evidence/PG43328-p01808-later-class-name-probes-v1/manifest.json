@@ -1,0 +1,78 @@
+{
+  "run": "PG43328-p01808-later-class-name-probes-v1",
+  "source": "99a996692f9a67d0102ade9537d477116132fb00",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-P018-08.03/2",
+  "terminalAtUTC": "2026-11-23T04:32:35.665548+00:00",
+  "terminalTimeBasis": "EXIT_ALREADY_OBSERVED",
+  "actualExit": 0,
+  "design": [
+    "SS354",
+    "451"
+  ],
+  "testIds": [
+    "PT-OPS-EXEC-CRC-009",
+    "PT-OPS-EXEC-CRC-010"
+  ],
+  "command": "PYTHONPATH=tools/quality python3 -B -m unittest -v jacoco_strict_original_order_test.StrictOriginalOrderTest.test_crc009_later_matching_crc_with_wrong_name_has_no_measurement jacoco_strict_original_order_test.StrictOriginalOrderTest.test_crc010_later_matching_identity_with_wrong_probe_count_has_no_measurement",
+  "inputHashes": [
+    {
+      "path": "tools/quality/jacoco_strict_original_order_test.py",
+      "sha256": "1f2f1944c0fae071b40d5dbb5ebdd7374c696655581f439b76969f9413cecf4d"
+    },
+    {
+      "path": "tools/quality/jacoco/UnfilteredCodeMeasurement.java",
+      "sha256": "5f97aceb8b7f8eeb3b6c81495105e7b05435b8a82204d1850ed993e0fd639b5f"
+    },
+    {
+      "path": "tools/quality/jacoco_readonly_exec_subset.py",
+      "sha256": "603bc7f0b54093e35e78047a5f0cba349abf31616e17642540db7dcc920080b1"
+    }
+  ],
+  "toolObservations": {
+    "program": "JDK25.0.4 + JaCoCo 0.8.15 + ASM 9.10.1",
+    "newToolTests": 2,
+    "passed": 2,
+    "modesPerCase": 2,
+    "suiteStillSeparate": true
+  },
+  "firstAttempt": {
+    "exit": 1,
+    "passed": 1,
+    "failures": 1,
+    "reason": "No-hit input was rejected by the canonical encoding guard first. Preserve a single hit to exercise the count-specific branch.",
+    "logs": [
+      {
+        "path": "../pgpt-runs/PG379/PG43328-p01808-later-class-name-probes-v1/stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "../pgpt-runs/PG379/PG43328-p01808-later-class-name-probes-v1/stderr.log",
+        "sha256": "d4f1207b279603184ab49f9e2418a9f4d8d6ae6795f7206ba70a4b1a831f935c"
+      }
+    ]
+  },
+  "finalAttempt": {
+    "exit": 0,
+    "passed": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "expectedSubprocessExit": 1,
+    "stdoutPerSubcaseBytes": 0,
+    "logs": [
+      {
+        "path": "../pgpt-runs/PG379/PG43328-p01808-later-class-name-probes-v1/after/stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "../pgpt-runs/PG379/PG43328-p01808-later-class-name-probes-v1/after/stderr.log",
+        "sha256": "12df4fd6e2c5faa4086a7f7e2771836627521390765ec3c140e1eb7165bf93da"
+      }
+    ]
+  },
+  "scope": "Two generated Java interface shapes and fixed synthetic 0x1007 records. Product/native/CHR not executed. Existing product counter totals are unmodified.",
+  "whole451": false,
+  "productPt": 0,
+  "formalAcceptanceId": null
+}
