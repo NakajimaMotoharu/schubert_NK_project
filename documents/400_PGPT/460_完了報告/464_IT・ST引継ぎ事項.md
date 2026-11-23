@@ -1,5 +1,9 @@
 # IT・ST引継ぎ事項
 
+## 2026-11-23 23:50 JST 監視と後続実測の追補
+
+Batch監視の局所入力の遷移・並行試験は現候補で成功。正規ownerから観測入力を供給したときの実filesystem/JVM/DB/JMSと監視出力、V031の実DB新規・V030更新、実CHRと全451が後続依存。QA-061は配布条件・担当とも未決。IT/ST開始と受入は未判定。 [現判定と根拠](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43716-current-phase-and-handoff-delta/manifest.json)
+
 ## 2026-11-23 22:34 JST V031・実DBと配布引継ぎの追補
 
 SSC-479を設計正本main e8cd2907で確認。V031 checksum 1880247817は独立計算と固定Flyway資源の一致値。権限と所有が成立した実DBで、新規／V030更新を分けて適用し、V031履歴・対象owner既定ACL・旧個別ACL同値・再試行0を観測する。旧SQLとCurrent baselineを保持し、正規release履歴を実際の候補で照合する。QA-061の配布条件・担当は未決。IT/ST開始の判定は未実施。 [現判定と根拠](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43674-current-stage-and-handoff-v1/manifest.json)
