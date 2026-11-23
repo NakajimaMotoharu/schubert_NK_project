@@ -23,7 +23,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeoutException;
 import org.junit.jupiter.api.Test;
 
 /** SSC095/PG312/PT-OPS-SCHEMA001..008. Literal six-column oracle, no observed DB expected. */
@@ -61,7 +63,7 @@ final class SchemaHistoryAdmissionTest {
 
   @Test
   void opsSchema009ActualRowsAreIndependentlyReadAndImmutableAfterBothOwnersClose()
-      throws Exception {
+      throws SQLException {
     var probe = new Probe();
     var observed = new SchemaHistoryAdmission(RELEASE).inspect(probe.connection());
     assertEquals(
@@ -91,11 +93,12 @@ final class SchemaHistoryAdmissionTest {
   }
 
   @Test
-  void opsSchema001ExactFixedQueryAndBorrowedOwner() throws Exception {
+  void opsSchema001ExactFixedQueryAndBorrowedOwner() throws SQLException {
     var probe = new Probe();
     new SchemaHistoryAdmission(RELEASE).verify(probe.connection());
     assertEquals(
-        "select installed_rank,version,type,script,checksum,success from schubert_meta.startup_schema_history() order by installed_rank",
+        "select installed_rank,version,type,script,checksum,success from"
+            + " schubert_meta.startup_schema_history() order by installed_rank",
         probe.sql);
     assertEquals(5, probe.timeout);
     assertArrayEquals(new int[] {1, 1, 0}, probe.closed);
@@ -245,7 +248,7 @@ final class SchemaHistoryAdmissionTest {
   }
 
   @Test
-  void opsSchema004ExpectedProfileOrderingAndDefensiveCopy() throws Exception {
+  void opsSchema004ExpectedProfileOrderingAndDefensiveCopy() throws SQLException {
     assertThrows(NullPointerException.class, () -> new SchemaHistoryAdmission(null));
     assertThrows(
         NullPointerException.class,
@@ -412,7 +415,8 @@ final class SchemaHistoryAdmissionTest {
   }
 
   @Test
-  void opsSchema008IndependentConcurrentOwners() throws Exception {
+  void opsSchema008IndependentConcurrentOwners()
+      throws InterruptedException, ExecutionException, TimeoutException {
     var admission = new SchemaHistoryAdmission(RELEASE);
     var executor = Executors.newVirtualThreadPerTaskExecutor();
     try {
