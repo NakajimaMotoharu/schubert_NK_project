@@ -1,5 +1,11 @@
 # 開発環境・toolchain構築記録
 
+## 2026-11-23 10:15 JST 現候補の局所試験と再現工具
+
+PG43194で導入済みJDK/Javac 25.0.4の実体・version・hash、既Maven Wrapper cacheのmaven-core 3.9.12のMaven属性、JUnit Console 1.13.4／JSpecify 1.0.1の固定実体を照合した。元cacheの入手元およびchecksumはPG42734/36を参照する。JDKは manifest の絶対pathから `java -version` と `javac -version` を実行した。Maven実行、download、設定変更なし。対象試験の再現コマンドはPG43176／43188のfix manifestに保存した。容量は照合時に11644747776 byte。現外部環境の資格は別に扱う。
+
+[PG43194 実行環境と照合証跡](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43194-f04-local-tooling-current-handoff-v1/manifest.json)
+
 ## 2026-11-22 22:04 JST OSV-Scanner 2.7.1の固定Maven構成表検査
 
 2026-11-22 JST、PG42656。Linux x86_64の公式release資産を、GitHub公開releaseのSHA-256とbyte長で照合。作業用の専用スロットにだけ配置した。公開Maven corpusは2026-11-20T16:33:30Z版、公開HTTPSから取得し実SHA-256を固定。再現はmanifestのpath/hashと同じ二入力を用い、OSV_SCANNER_LOCAL_DB_CACHE_DIRECTORYにosv-scalibr/Maven/all.zipを配置して各固定.cdx.jsonを `osv-scanner scan source --offline --all-packages --format json -L` へ明示。Gitには実体を入れず、公開metadata・実測・終了値をPG42656/58へ保存。依存コードはSDKの別局所PTまで実行せず、製品配布や依存情報の外部送信は0。 [OSVのオフライン仕様](https://google.github.io/osv-scanner/usage/offline-mode/)

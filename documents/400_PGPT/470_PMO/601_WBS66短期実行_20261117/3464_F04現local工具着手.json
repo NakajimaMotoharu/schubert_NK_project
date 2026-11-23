@@ -1,0 +1,83 @@
+{
+  "eventId": "PGPT-20261008-8909",
+  "groupId": "f04-local-tools-reproducibility-pg43194",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-23T01:15:26+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 57,
+      "remainingPercent": 43,
+      "resetsAt": 1795879771,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "source": "7ef0e754347ad4c71575e8f817d40af1f150107b",
+    "productionCoreMain": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+    "canonicalDesignSource": "7745de1fb04c8b9e2cfccc11103d7b3c57b090d7",
+    "run": "PG43194-f04-local-tooling-current-handoff-v1",
+    "workCategory": "CONTRACT_AUDIT",
+    "managementWorkIds": [
+      "WBS-F04-引渡し"
+    ],
+    "previousCheckpoint": "3463 / PGPT-20261008-8908",
+    "planRow": {
+      "ID": "WBS-F04-引渡し",
+      "元行": "WBS-F04",
+      "費目": "C",
+      "主担当": "WBS-F04",
+      "状態": "計画",
+      "作業": "要件ごとの現候補の証拠と未解決の環境条件を引き渡す",
+      "残pp": "0.75",
+      "着手": "使用する構成・許可・所有・当sourceの証跡が揃った項目だけ判定",
+      "終了証拠": "F04の4条件を個別に判定。VM固有の比較又は明示された設計判断が不足なら該当要件を保留。直接OSの基本動作だけで旧VM契約の受入を成立させない",
+      "補正根拠": "元F04残1.50の内訳。haruka 11/14の準備済証拠を再利用。元ホストやVMの準備や再起動を新設しない",
+      "契約HOLD": "旧VM固有条件／既存HOLDは当該操作だけ",
+      "対象": "342・343／haruka直接OS・旧VM固有証明",
+      "範囲": "SS 342、343",
+      "保存証跡": "承認済み設定/規約と当sourceの差、適用範囲、実証結果",
+      "順次": "True",
+      "配賦窓": "3",
+      "楽観pp": "0.25",
+      "慎重pp": "1.5",
+      "要求設計の版差": "PT基準仕様 NK-OPS-001、SS 343",
+      "lineNumber": 1008,
+      "改訂残pp": "0.75"
+    },
+    "currentPlan": [
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/11月22日_PGPT再開実行計画.txt",
+        "sha256": "80b9fdc306f664b9c03901a4bdfb34cf66997879676204cfa969858fd68a4016"
+      },
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/短期実行WBS.tsv",
+        "sha256": "a6efedcd63b4ef3bb1d133d939b0ddd7dc4b0147988ac33d668282a25c999527"
+      }
+    ],
+    "startScope": {
+      "target": "Reproduce local read-only declared tools in the latest accepted scope receipts; join unsatisfied Haruka/VM criteria without network/remote I/O",
+      "exitRule": "Compare actual pinned Java/Python version and existing hashes, TSV/POM scope and exact archived F04 reader handoff. No downloads or file cleanup, no qualified external environment claim.",
+      "nextAuthorized": "WBS-G08 or F03: choose an actual verification gap with current scope; do not repeat any of the closed local cases"
+    },
+    "groupCapPp": 0.55,
+    "estimateAtGroupStartPp": {
+      "low": 0,
+      "base": 0.2,
+      "high": 0.55
+    },
+    "completedOriginalRowPricePp": 0,
+    "sourceOwnership": "LOCAL_DEV_FOUNDATION_TRACKED_SNAPSHOT",
+    "knownOwnedRunInProgress": 0,
+    "costRevision": "PMO-remaining-v3-20261010",
+    "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "actualAllocatedPp": null
+  }
+}
