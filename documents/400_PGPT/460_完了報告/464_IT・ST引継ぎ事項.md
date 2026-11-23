@@ -1,5 +1,9 @@
 # IT・ST引継ぎ事項
 
+## 2026-11-23 18:09 JST PG43500 外部依存POMの親宣言
+
+取得元POMに直接欄がない17座標は、同じ保全cacheの親POMを追い、17件すべての最も近い宣言箇所を固定した。現四製品の36件は直接19／親宣言17の局所根拠を持つ。P019-02は共通成果参照で追加費0。配布条件・承認担当、署名付き全六の実配布クラスパスと実際の判定は未成立。 [PG43500](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43500-current-retained-parent-license-declarations-v1/manifest.json)
+
 ## 2026-11-23 四正規製品の配布依存メタデータ
 
 外部36座標のcacheを同一SHAで照合。取得元POMでライセンスの直接欄19、直接欄のないPOM17。18 archiveの通知・ライセンス名候補は旧記録のpath/hashを同一バイトから参照した。製品配布条件・承認担当はQA-061の回答どおり未決。署名付き全六製品と実配布クラスパスを照合してから判定する。 [PG43498](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43498-current-four-external-license-inputs-v1/manifest.json)
