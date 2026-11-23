@@ -71,6 +71,7 @@ public final class UnfilteredCodeMeasurement {
       measurements.add(analysis);
     }
     for (var measurement : measurements) printMeasurement(measurement, lineDeficits);
+    if (System.out.checkError()) throw new IOException("coverage measurement output incomplete");
   }
 
   private static void printMeasurement(Measurement analysis, boolean lineDeficits) {

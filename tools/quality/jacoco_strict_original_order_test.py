@@ -60,9 +60,33 @@ class StrictOriginalOrderTest(unittest.TestCase):
         other.write_text(
             'package orderfixture; public interface Two { default int value() { return 9; } }\n'
         )
+        output_failure = cls.directory / 'OutputFailure.java'
+        output_failure.write_text(
+            """package orderfixture;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement;
+
+public final class OutputFailure {
+  public static void main(String[] args) throws IOException {
+    System.setOut(new PrintStream(new OutputStream() {
+      private int accepted = 24;
+
+      @Override
+      public void write(int value) throws IOException {
+        if (accepted == 0) throw new IOException("synthetic output failure");
+        accepted--;
+      }
+    }));
+    UnfilteredCodeMeasurement.main(args);
+  }
+}
+"""
+        )
         subprocess.run(
             [BIN / 'javac', '--release', '25', '-Xlint:all', '-Werror', '-proc:none',
-             '-cp', classpath, '-d', cls.directory, TOOL, fixture, other],
+             '-cp', classpath, '-d', cls.directory, TOOL, fixture, other, output_failure],
             check=True, capture_output=True, timeout=30,
         )
         cls.target = cls.directory / (NAME + '.class')
@@ -94,6 +118,19 @@ class StrictOriginalOrderTest(unittest.TestCase):
         result = self.measure(raw)
         self.assertEqual(0, result.returncode, result.stderr)
         self.assertIn(f'CLASS\t{NAME}\t{self.crc:016x}\tfalse\t1\t'.encode(), result.stdout)
+
+    def test_output_failure_cannot_report_success_in_either_mode(self):
+        execution = self.directory / 'output-failure.exec'
+        execution.write_bytes(HEADER + SESSION + self.entry)
+        for strict in (False, True):
+            with self.subTest(strict=strict):
+                flags = ['--strict-original-exec'] if strict else []
+                result = subprocess.run(
+                    [*self.command[:-1], 'orderfixture.OutputFailure', *flags, execution, self.target],
+                    capture_output=True, timeout=30,
+                )
+                self.assertEqual(1, result.returncode)
+                self.assertIn(b'coverage measurement output incomplete', result.stderr)
 
     def test_class_before_session_is_rejected_by_both_strict_readers(self):
         raw = HEADER + self.entry + SESSION
