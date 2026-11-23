@@ -5,3 +5,5 @@ BUG2866 元Snapshot whole7/64task8workerをFuture5秒・finallyshutdownNow-await
 仕様[4267](4267_停止snapshot原七・独立十二値と有限worker通常PT仕様.md)。[実行](evidence/PG30122-stop-snapshot7-unit-v1/manifest.json)、[独立post](evidence/PG30124-stop-snapshot7-post-v1/manifest.json)、[join](evidence/PG30136-stop-snapshot7-independent-trace-join-v1/manifest.json)に全MSTOP001..007→mstop同suffix、command/OS/JDK/tool/source/branch/XML/input/output/終了code/hash/BUGを対応。PG30114は旧sourceのformat限定結果、現scopeに転用せずPG30126/prepare以降のsourceを固定。
 
 元全7期待値は保持、12値固定順はliteral根拠で追加。原費用/元S/V不変更、追加.35/1.05/2.1だけ完了。共有差と専有実費/token不明はnull。実停止/親/全451/元190未受入。
+
+PG43408は現候補Batchと一致する元PG30122の単一execから無filter四物理を読取測定した。Snapshotは全数、MaintenanceUnit.valueOfとStopGateFailure.values/valueOfの3生成methodは未到達。元7件、既定の四指標、未成立の正式条件を保持。公開証拠 evidence/01_PT/018_NK-OPS-001/evidence/PG43408-mstop-raw-original-stream-v1/manifest.json（SHA256 532ff05edd0ee313be6eb7ac8598c1e72db1a6894bd417d94706072b2472a4d7）。
