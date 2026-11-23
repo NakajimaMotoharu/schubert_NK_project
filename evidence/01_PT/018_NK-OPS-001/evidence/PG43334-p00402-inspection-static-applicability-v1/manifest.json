@@ -1,0 +1,191 @@
+{
+  "run": "PG43334-p00402-inspection-static-applicability-v1",
+  "source": "6ac083d94d2d9381c32999dd3483cf17d1f4e974",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-P004-02/2",
+  "terminalAtUTC": "2026-11-23T04:40:35.908694+00:00",
+  "actualExit": 0,
+  "related": [
+    "PG43242",
+    "SS332",
+    "SS354",
+    "451",
+    "YKT-2899"
+  ],
+  "priorProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43242-f03-inspection-fixture-four-v1/manifest.json",
+    "sha256": "4ec0d3f4b4e0065a9ac23fbab23a59a0cebd1c9ce9c1d59c9547ff7a77b5429c"
+  },
+  "exactFixtures": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryPortTest.java",
+      "sha256": "1c58be5862701602934d2e0f15f72e255150342fe17ee2ebf25444f83953f6ba"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryGraphContractTest.java",
+      "sha256": "efdcae0419dcbdfaebc625651db1a1dbd48c79f0ff1baffab3588f9389227f87"
+    }
+  ],
+  "approvedOriginalOutcome": {
+    "spotbugs": 1,
+    "pmd": 17,
+    "checkstyle": 0,
+    "pmdRules": {
+      "UseProperClassLoader": 3,
+      "DoNotUseThreads": 11,
+      "CloseResource": 1,
+      "UseConcurrentHashMap": 2
+    },
+    "originalRawHashes": [
+      "d61d782a11fa04aae4a217d40c65bd368a2c324d87a6f0b8c845ecde59201e60",
+      "497d6466ce784ea90f99ff059cbdc18f8e8238ae1c8eb078b859f65ed221e8cb"
+    ]
+  },
+  "currentScopeJudgment": [
+    {
+      "rule": "THROWS_METHOD_THROWS_CLAUSE_THROWABLE",
+      "reviewedSourceSites": [
+        {
+          "code": "private void hit(String point) throws Throwable",
+          "lineNumbers": [
+            515
+          ]
+        }
+      ],
+      "reason": "The proxy deliberately throws the same injected SQLException, unchecked exception or Error instance at varying sites. The declaration is private to the test fixture; the provider boundary and SQL-only redaction checks rely on original identity.",
+      "toolRowsIndependentlyReparsed": false
+    },
+    {
+      "rule": "UseProperClassLoader",
+      "reviewedSourceSites": [
+        {
+          "code": "Fixture.class.getClassLoader()",
+          "lineNumbers": [
+            425,
+            458,
+            490
+          ]
+        }
+      ],
+      "reason": "All three uses construct in-process proxies of explicit public java.sql interface classes. They neither load fixture-name resources nor consult the context loader.",
+      "toolRowsIndependentlyReparsed": false
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "reviewedSourceSites": [
+        {
+          "code": "Executors.newSingleThreadExecutor()",
+          "lineNumbers": [
+            313
+          ]
+        },
+        {
+          "code": ".get(5, TimeUnit.SECONDS)",
+          "lineNumbers": [
+            333
+          ]
+        },
+        {
+          "code": "worker.shutdownNow()",
+          "lineNumbers": [
+            336
+          ]
+        },
+        {
+          "code": "worker.awaitTermination(5, TimeUnit.SECONDS)",
+          "lineNumbers": [
+            337
+          ]
+        },
+        {
+          "code": "Thread.interrupted();",
+          "lineNumbers": [
+            329
+          ]
+        }
+      ],
+      "reason": "INSPPORT008 checks interruption of the fixture owner before and after provider read; worker is local and bound to 5 second Future and termination checks. Clears only its own fixture flag; compares parent flag.",
+      "toolRowsIndependentlyReparsed": false
+    },
+    {
+      "rule": "UseConcurrentHashMap",
+      "reviewedSourceSites": [
+        {
+          "code": "var row = new HashMap<String, Object>();",
+          "lineNumbers": [
+            364
+          ]
+        },
+        {
+          "code": "row.put(column, value)",
+          "lineNumbers": [
+            374
+          ]
+        },
+        {
+          "code": "private final Map<String, Throwable> faults",
+          "lineNumbers": [
+            405
+          ]
+        },
+        {
+          "code": "private final Map<Integer, Object> bindings",
+          "lineNumbers": [
+            407
+          ]
+        }
+      ],
+      "reason": "A fixture and its maps are allocated and used on the test or single worker thread. The row map is intentionally nullable for independent negative input. Shared mutable product mappings are outside this review.",
+      "toolRowsIndependentlyReparsed": false
+    },
+    {
+      "rule": "CloseResource",
+      "reviewedSourceSites": [
+        {
+          "code": "fixture.assertClosed();",
+          "lineNumbers": [
+            82,
+            102,
+            154,
+            187,
+            216,
+            237,
+            262,
+            306,
+            327,
+            382
+          ]
+        },
+        {
+          "code": "private void assertClosed()",
+          "lineNumbers": [
+            521
+          ]
+        },
+        {
+          "code": "closedRows++",
+          "lineNumbers": [
+            506
+          ]
+        },
+        {
+          "code": "closedStatements++",
+          "lineNumbers": [
+            477
+          ]
+        }
+      ],
+      "reason": "Test delegates Statement/ResultSet ownership to the consumer and asserts exactly-one close and close order; the fixture has no driver-backed resources. The exact historic PMD line was not imported.",
+      "toolRowsIndependentlyReparsed": false
+    }
+  ],
+  "perDiagnosticAnchorExtent": "Source anchors are classified. No original unredacted tool rows were read or separately bound in this step. Raw totals and residual applicability remain visible.",
+  "evidenceLimits": [
+    "Same candidate scope only",
+    "no waiver, filters, suppressions or product operations",
+    "real DB and all six-module typed quality pending"
+  ],
+  "newDynamicRun": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
