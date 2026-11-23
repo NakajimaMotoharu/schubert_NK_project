@@ -12,6 +12,7 @@ import java.lang.reflect.Proxy;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
@@ -41,6 +42,7 @@ final class BackupFailureUtcProjectionTest {
     MISSING_RESULT_SET,
     EMPTY_RESULT_SET,
     EXTRA_RESULT_ROW,
+    BOTH_CLOSES_AFTER_REJECTION,
     INITIAL_INCONSISTENT_RUN,
     FINAL_INCONSISTENT_RUN
   }
@@ -113,6 +115,12 @@ final class BackupFailureUtcProjectionTest {
     }
     assertEquals(COMPLETE.subList(0, 2), initial.closed);
     assertEquals(COMPLETE, end.closed);
+  }
+
+  /** PT-BAT-BACKUP-UTC007. */
+  @Test
+  void utc007ProjectionAndBothOwnedCloseFailuresKeepOneFixedDiagnostic() {
+    rejectsProjection(fixture(ReadFault.BOTH_CLOSES_AFTER_REJECTION), COMPLETE.subList(0, 4));
   }
 
   private static Fixture fixture(ReadFault fault) {
@@ -205,6 +213,8 @@ final class BackupFailureUtcProjectionTest {
                         : rows(position, identity);
                 case "close" -> {
                   closed.add("stmt-" + position);
+                  if (position == 2 && fault == ReadFault.BOTH_CLOSES_AFTER_REJECTION)
+                    throw new SQLException("synthetic statement close failure");
                   yield null;
                 }
                 default -> throw new AssertionError("unexpected statement operation");
@@ -214,7 +224,8 @@ final class BackupFailureUtcProjectionTest {
     private ResultSet rows(int position, boolean identity) {
       int rowCount = 1;
       if (position == 2) {
-        if (fault == ReadFault.EMPTY_RESULT_SET) rowCount = 0;
+        if (fault == ReadFault.EMPTY_RESULT_SET || fault == ReadFault.BOTH_CLOSES_AFTER_REJECTION)
+          rowCount = 0;
         if (fault == ReadFault.EXTRA_RESULT_ROW) rowCount = 2;
       }
       final int expectedRows = rowCount;
@@ -233,6 +244,8 @@ final class BackupFailureUtcProjectionTest {
                         : field(position, (String) args[0]);
                 case "close" -> {
                   closed.add("row-" + position);
+                  if (position == 2 && fault == ReadFault.BOTH_CLOSES_AFTER_REJECTION)
+                    throw new SQLException("synthetic result close failure");
                   yield null;
                 }
                 default -> throw new AssertionError("unexpected result operation " + method);

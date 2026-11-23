@@ -10,5 +10,6 @@ NK-BAT-001／NK-DAT-001、BAK-001／OPS-009、UI251、SS331／SS332 SSC-056／SS
 | PT-BAT-BACKUP-UTC004 | SQLの必須非時刻12列を一つずつnull。各一件で固定IOException、初回run参照と最初のBackupの取得資源だけを逆順解放 |
 | PT-BAT-BACKUP-UTC005 | Backupの文なし、結果セットなし、0行、2行。いずれも固定IOException。得られた行／文だけを閉じ、借用接続は保持 |
 | PT-BAT-BACKUP-UTC006 | 初回と最終のrun識別照合をそれぞれ不一致にする。固定run診断。初回不一致ではBackup読取0、最終不一致では両行と再照合の資源を解放 |
+| PT-BAT-BACKUP-UTC007 | 最初のBackup結果が0行で、取得済み行と文のcloseがそれぞれ別のSQLExceptionを返す。閉鎖は両方一回かつ逆順。固定IOExceptionだけが外へ届く |
 
 期待値はSS332の物理値変換規則と、上表の固定時刻から判定する。借用Connectionのcommit、rollback、close、実DB、既存データや実Backupに触れない。修正前の再現と現単一exec、既存PT-BAT-SSC461-BF001～004の最小回帰を独立に識別する。
