@@ -1,0 +1,71 @@
+{
+  "run": "PG43196-g09-reactor-metadata-origin-v1",
+  "wbs": "WBS-G09",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-23T01:19:10.435399+00:00",
+  "source": "363e32e69f4e1b9c91a39d822b891634c981d4c3",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "originalToolSource": "b8fdfa5dee229ab826c7d376f23cc8ca5950a019",
+  "bug": "BUG-3683",
+  "ykt": "YKT-2895",
+  "editedArtifacts": [
+    {
+      "path": "tools/quality/pgpt_reactor_junit.py",
+      "sha256": "3876fbd63d2120bb7606bcbec9e1401f4948b262f60efddcb43ba7c844362f38"
+    },
+    {
+      "path": "tools/quality/006_collect_scenario_evidence.py",
+      "sha256": "f597c7e6809497c7bc1d56e39f9d2bf860f8cd18fb4636853951a4b487dab766"
+    },
+    {
+      "path": "tools/quality/018_collect_verified_evidence_set.py",
+      "sha256": "c273a0adc0c92793a865cf58dc83031b8fd18a762f8e758140aa3791500fbaf9"
+    },
+    {
+      "path": "tools/quality/tests/test_pgpt_reactor_junit.py",
+      "sha256": "60672a2f5c96f388169012e1a57a5aba9856fef151061ebd01e58734e3363c10"
+    }
+  ],
+  "unchangedOutputSchema": "pgpt-reactor-junit-v3",
+  "syntaxChecks": 3,
+  "oldSubcaseFailures": 7,
+  "toolReactorChecks": 25,
+  "toolLauncherChecks": 11,
+  "toolChecksumChecks": 4,
+  "appliedToTwoCollectors": true,
+  "readPaths": [
+    "commit",
+    "branch",
+    "started",
+    "completed",
+    "log",
+    "junit.json",
+    "exit"
+  ],
+  "preservedValidReceiptBytes": true,
+  "sourceCommitAndBranchRulesUnchanged": true,
+  "before": {
+    "path": "../pgpt-runs/PG379/PG43196-g09-reactor-metadata-origin-v1/before.log",
+    "sha256": "4c2552d6dbf52cbec365676bf18d18a44e50f149cc9aa25687382e356b8abcf4"
+  },
+  "after": [
+    {
+      "path": "../pgpt-runs/PG379/PG43196-g09-reactor-metadata-origin-v1/after.log",
+      "sha256": "ee879275a729b3fbf8a66b0d4a21f0977185ab79d68e61c6352c14c99300802d"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43196-g09-reactor-metadata-origin-v1/runner.log",
+      "sha256": "939025d4778394f0c70dec6cb3ecbedc8532c28ddf143bf2ea6ee3e15a79c772"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43196-g09-reactor-metadata-origin-v1/collector.log",
+      "sha256": "94f6ed0269bd7631bd847027d0b73389388a50e351e0d0b341bd17aee694e72a"
+    }
+  ],
+  "commandPattern": "PYTHONPATH=tools/quality python3 -B -m unittest discover -s tools/quality/tests -p <suite> -v",
+  "onlySyntheticFixtures": true,
+  "actualReactorsStarted": 0,
+  "actualProductTests": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
