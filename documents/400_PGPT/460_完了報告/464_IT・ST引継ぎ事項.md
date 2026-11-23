@@ -12,6 +12,8 @@
 | 実互換・native | 証跡工具は出力途中失敗を非zero扱いに修正。公開差分59commitの秘密スキャン検出0。 | 同候補の実NK CHR、元Current基準保持、当sourceのCRC/session/owner、実Browser、実効nativeと451の同じ証跡束。 [PG43210](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43210-p0180803-coverage-output-terminal-v1/manifest.json) [PG43214](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43214-g07-since-43136-public-delta-v1/manifest.json) |
 | 配布 | 正規4 JARの自身Maven座標を確認。4 JARのルートとMETA-INFに対象名の通知エントリ0。過去の6 SBOMには外部69座標の宣言記録あり。 | 製品配布条件、外部依存ライセンス判定基準と承認担当、同候補の最終収録範囲と必要な通知、署名。QA-061の回答を受領し、条件と担当は未決。 [包装構成](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43192-p01802-candidate-jar-composition-v1/manifest.json) [宣言の照合](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43228-p01802-retained-license-declarations-v1/manifest.json) [通知の収録状況](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43230-p01802-four-regular-notice-entries-v1/manifest.json) |
 
+配布資料の追補。現行POMの外部直接compile/runtimeは41宣言、20座標。保存済み宣言メタデータに全41宣言が同製品・同版で対応する。test/provided 24宣言は別計上。現JARの推移依存と最終通知、配布条件・担当は引き続き判定待ち。[現POM照合](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG43284-p01802-direct-release-declaration-lineage-v1/manifest.json)。
+
 過去候補、再送・性能の合格条件、移行と復元の未実測値は下段に保全する。
 
 ## 2026-11-23 現候補の引継ぎ条件と再送の実測区分

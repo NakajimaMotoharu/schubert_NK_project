@@ -1,0 +1,557 @@
+{
+  "source": "8b7d3de7fbadce6f477b031d43de1c839b7d0a7c",
+  "buildModelInputs": [
+    {
+      "path": "pom.xml",
+      "sha256": "564e1a45c177fbe4af859c1d25696dd5355e5a6dcab7035970f61439ed9241e9"
+    },
+    {
+      "path": "src/schubert-nk-protocol/pom.xml",
+      "sha256": "f76b730fa1cb1b34a88182ca5b685ca14fb71361c037f9418f0895d2a3022d7d"
+    },
+    {
+      "path": "src/schubert-nk-storage/pom.xml",
+      "sha256": "d4ed59631b9ebf965db518fbe4b7894c2beb71ee3f7c1e9cdbf7b4241c8179c7"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/pom.xml",
+      "sha256": "174e3974a5fe17a226c8c43a0cd49ae70d395cb4f236168da07cd7482a67908c"
+    },
+    {
+      "path": "src/schubert-nk-api/pom.xml",
+      "sha256": "2aff7af3d90feaee1f6c09f7ad300627ed911e8372504fcfd383391429a58114"
+    },
+    {
+      "path": "src/schubert-nk-web/pom.xml",
+      "sha256": "9b6c47c3ab3ba0d105f41f081de10b2234af4653fdc371a8eacdf9cabb78761b"
+    },
+    {
+      "path": "src/schubert-nk-batch/pom.xml",
+      "sha256": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495"
+    }
+  ],
+  "productionScope": "direct compile/default and runtime only",
+  "testOrProvidedScopeSeparate": true,
+  "records": [
+    {
+      "module": "api",
+      "declaredDirectCoordinate": "pkg:maven/com.google.code.gson/gson@2.14.0?type=jar",
+      "scope": "compile",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": true
+    },
+    {
+      "module": "api",
+      "declaredDirectCoordinate": "pkg:maven/com.zaxxer/HikariCP@7.1.0?type=jar",
+      "scope": "compile",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": true
+    },
+    {
+      "module": "api",
+      "declaredDirectCoordinate": "pkg:maven/io.micrometer/micrometer-core@1.17.1?type=jar",
+      "scope": "compile",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": true
+    },
+    {
+      "module": "api",
+      "declaredDirectCoordinate": "pkg:maven/io.micrometer/micrometer-registry-prometheus@1.17.1?type=jar",
+      "scope": "compile",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": true
+    },
+    {
+      "module": "api",
+      "declaredDirectCoordinate": "pkg:maven/io.prometheus/prometheus-metrics-exposition-textformats@1.7.0?type=jar",
+      "scope": "compile",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": true
+    },
+    {
+      "module": "api",
+      "declaredDirectCoordinate": "pkg:maven/org.apache.artemis/artemis-jakarta-client@2.56.0?type=jar",
+      "scope": "compile",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": true
+    },
+    {
+      "module": "api",
+      "declaredDirectCoordinate": "pkg:maven/org.jspecify/jspecify@1.0.1?type=jar",
+      "scope": "compile",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": true
+    },
+    {
+      "module": "api",
+      "declaredDirectCoordinate": "pkg:maven/org.postgresql/postgresql@42.7.13?type=jar",
+      "scope": "compile",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": true
+    },
+    {
+      "module": "api",
+      "declaredDirectCoordinate": "pkg:maven/org.snakeyaml/snakeyaml-engine@3.1.1?type=jar",
+      "scope": "compile",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": true
+    },
+    {
+      "module": "api",
+      "declaredDirectCoordinate": "pkg:maven/org.springframework.security/spring-security-crypto@7.1.1?type=jar",
+      "scope": "compile",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": true
+    },
+    {
+      "module": "api",
+      "declaredDirectCoordinate": "pkg:maven/org.springframework/spring-core@7.0.9?type=jar",
+      "scope": "compile",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": true
+    },
+    {
+      "module": "api",
+      "declaredDirectCoordinate": "pkg:maven/com.google.code.findbugs/jsr305@3.0.2?type=jar",
+      "scope": "provided",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": false
+    },
+    {
+      "module": "api",
+      "declaredDirectCoordinate": "pkg:maven/org.apache.artemis/artemis-jakarta-server@2.56.0?type=jar",
+      "scope": "test",
+      "optional": false,
+      "historicalMetadata": null,
+      "sameModuleHistoricalMetadata": false
+    },
+    {
+      "module": "api",
+      "declaredDirectCoordinate": "pkg:maven/org.apache.artemis/artemis-server@2.56.0?type=jar",
+      "scope": "test",
+      "optional": false,
+      "historicalMetadata": null,
+      "sameModuleHistoricalMetadata": false
+    },
+    {
+      "module": "api",
+      "declaredDirectCoordinate": "pkg:maven/org.flywaydb/flyway-core@13.4.0?type=jar",
+      "scope": "test",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": false
+    },
+    {
+      "module": "api",
+      "declaredDirectCoordinate": "pkg:maven/org.flywaydb/flyway-database-postgresql@13.4.0?type=jar",
+      "scope": "test",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": false
+    },
+    {
+      "module": "api",
+      "declaredDirectCoordinate": "pkg:maven/org.junit.jupiter/junit-jupiter@5.13.4?type=jar",
+      "scope": "test",
+      "optional": false,
+      "historicalMetadata": null,
+      "sameModuleHistoricalMetadata": false
+    },
+    {
+      "module": "batch",
+      "declaredDirectCoordinate": "pkg:maven/io.micrometer/micrometer-core@1.17.1?type=jar",
+      "scope": "compile",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": true
+    },
+    {
+      "module": "batch",
+      "declaredDirectCoordinate": "pkg:maven/io.micrometer/micrometer-registry-prometheus@1.17.1?type=jar",
+      "scope": "compile",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": true
+    },
+    {
+      "module": "batch",
+      "declaredDirectCoordinate": "pkg:maven/org.apache.artemis/artemis-jakarta-client@2.56.0?type=jar",
+      "scope": "compile",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": true
+    },
+    {
+      "module": "batch",
+      "declaredDirectCoordinate": "pkg:maven/org.flywaydb/flyway-core@13.4.0?type=jar",
+      "scope": "compile",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": true
+    },
+    {
+      "module": "batch",
+      "declaredDirectCoordinate": "pkg:maven/org.jspecify/jspecify@1.0.1?type=jar",
+      "scope": "compile",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": true
+    },
+    {
+      "module": "batch",
+      "declaredDirectCoordinate": "pkg:maven/com.github.spotbugs/spotbugs-annotations@4.10.4?type=jar",
+      "scope": "provided",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": false
+    },
+    {
+      "module": "batch",
+      "declaredDirectCoordinate": "pkg:maven/org.flywaydb/flyway-database-postgresql@13.4.0?type=jar",
+      "scope": "runtime",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": true
+    },
+    {
+      "module": "batch",
+      "declaredDirectCoordinate": "pkg:maven/org.postgresql/postgresql@42.7.13?type=jar",
+      "scope": "runtime",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": true
+    },
+    {
+      "module": "batch",
+      "declaredDirectCoordinate": "pkg:maven/org.apache.artemis/artemis-jakarta-server@2.56.0?type=jar",
+      "scope": "test",
+      "optional": false,
+      "historicalMetadata": null,
+      "sameModuleHistoricalMetadata": false
+    },
+    {
+      "module": "batch",
+      "declaredDirectCoordinate": "pkg:maven/org.apache.artemis/artemis-server@2.56.0?type=jar",
+      "scope": "test",
+      "optional": false,
+      "historicalMetadata": null,
+      "sameModuleHistoricalMetadata": false
+    },
+    {
+      "module": "batch",
+      "declaredDirectCoordinate": "pkg:maven/org.junit.jupiter/junit-jupiter@5.13.4?type=jar",
+      "scope": "test",
+      "optional": false,
+      "historicalMetadata": null,
+      "sameModuleHistoricalMetadata": false
+    },
+    {
+      "module": "bootstrap",
+      "declaredDirectCoordinate": "pkg:maven/com.google.code.gson/gson@2.14.0?type=jar",
+      "scope": "compile",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": true
+    },
+    {
+      "module": "bootstrap",
+      "declaredDirectCoordinate": "pkg:maven/com.zaxxer/HikariCP@7.1.0?type=jar",
+      "scope": "compile",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": true
+    },
+    {
+      "module": "bootstrap",
+      "declaredDirectCoordinate": "pkg:maven/org.checkerframework/checker-qual@3.55.1?type=jar",
+      "scope": "compile",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": true
+    },
+    {
+      "module": "bootstrap",
+      "declaredDirectCoordinate": "pkg:maven/org.jspecify/jspecify@1.0.1?type=jar",
+      "scope": "compile",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": true
+    },
+    {
+      "module": "bootstrap",
+      "declaredDirectCoordinate": "pkg:maven/org.postgresql/postgresql@42.7.13?type=jar",
+      "scope": "compile",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": true
+    },
+    {
+      "module": "bootstrap",
+      "declaredDirectCoordinate": "pkg:maven/org.snakeyaml/snakeyaml-engine@3.1.1?type=jar",
+      "scope": "compile",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": true
+    },
+    {
+      "module": "bootstrap",
+      "declaredDirectCoordinate": "pkg:maven/com.github.spotbugs/spotbugs-annotations@4.10.4?type=jar",
+      "scope": "provided",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": false
+    },
+    {
+      "module": "bootstrap",
+      "declaredDirectCoordinate": "pkg:maven/org.flywaydb/flyway-core@13.4.0?type=jar",
+      "scope": "test",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": false
+    },
+    {
+      "module": "bootstrap",
+      "declaredDirectCoordinate": "pkg:maven/org.flywaydb/flyway-database-postgresql@13.4.0?type=jar",
+      "scope": "test",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": false
+    },
+    {
+      "module": "bootstrap",
+      "declaredDirectCoordinate": "pkg:maven/org.junit.jupiter/junit-jupiter@5.13.4?type=jar",
+      "scope": "test",
+      "optional": false,
+      "historicalMetadata": null,
+      "sameModuleHistoricalMetadata": false
+    },
+    {
+      "module": "protocol",
+      "declaredDirectCoordinate": "pkg:maven/org.jspecify/jspecify@1.0.1?type=jar",
+      "scope": "compile",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": true
+    },
+    {
+      "module": "protocol",
+      "declaredDirectCoordinate": "pkg:maven/org.junit.jupiter/junit-jupiter@5.13.4?type=jar",
+      "scope": "test",
+      "optional": false,
+      "historicalMetadata": null,
+      "sameModuleHistoricalMetadata": false
+    },
+    {
+      "module": "storage",
+      "declaredDirectCoordinate": "pkg:maven/org.jspecify/jspecify@1.0.1?type=jar",
+      "scope": "compile",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": true
+    },
+    {
+      "module": "storage",
+      "declaredDirectCoordinate": "pkg:maven/org.junit.jupiter/junit-jupiter@5.13.4?type=jar",
+      "scope": "test",
+      "optional": false,
+      "historicalMetadata": null,
+      "sameModuleHistoricalMetadata": false
+    },
+    {
+      "module": "web",
+      "declaredDirectCoordinate": "pkg:maven/com.google.code.gson/gson@2.14.0?type=jar",
+      "scope": "compile",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": true
+    },
+    {
+      "module": "web",
+      "declaredDirectCoordinate": "pkg:maven/com.zaxxer/HikariCP@7.1.0?type=jar",
+      "scope": "compile",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": true
+    },
+    {
+      "module": "web",
+      "declaredDirectCoordinate": "pkg:maven/io.micrometer/micrometer-core@1.17.1?type=jar",
+      "scope": "compile",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": true
+    },
+    {
+      "module": "web",
+      "declaredDirectCoordinate": "pkg:maven/io.micrometer/micrometer-registry-prometheus@1.17.1?type=jar",
+      "scope": "compile",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": true
+    },
+    {
+      "module": "web",
+      "declaredDirectCoordinate": "pkg:maven/io.prometheus/prometheus-metrics-exposition-textformats@1.7.0?type=jar",
+      "scope": "compile",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": true
+    },
+    {
+      "module": "web",
+      "declaredDirectCoordinate": "pkg:maven/org.apache.artemis/artemis-jakarta-client@2.56.0?type=jar",
+      "scope": "compile",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": true
+    },
+    {
+      "module": "web",
+      "declaredDirectCoordinate": "pkg:maven/org.apache.tomcat.embed/tomcat-embed-core@11.0.25?type=jar",
+      "scope": "compile",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": true
+    },
+    {
+      "module": "web",
+      "declaredDirectCoordinate": "pkg:maven/org.jspecify/jspecify@1.0.1?type=jar",
+      "scope": "compile",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": true
+    },
+    {
+      "module": "web",
+      "declaredDirectCoordinate": "pkg:maven/org.snakeyaml/snakeyaml-engine@3.1.1?type=jar",
+      "scope": "compile",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": true
+    },
+    {
+      "module": "web",
+      "declaredDirectCoordinate": "pkg:maven/org.springframework.security/spring-security-web@7.1.1?type=jar",
+      "scope": "compile",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": true
+    },
+    {
+      "module": "web",
+      "declaredDirectCoordinate": "pkg:maven/org.springframework.session/spring-session-core@4.1.1?type=jar",
+      "scope": "compile",
+      "optional": false,
+      "historicalMetadata": "NAME_METADATA",
+      "sameModuleHistoricalMetadata": true
+    },
+    {
+      "module": "web",
+      "declaredDirectCoordinate": "pkg:maven/org.springframework/spring-web@7.0.9?type=jar",
+      "scope": "compile",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": true
+    },
+    {
+      "module": "web",
+      "declaredDirectCoordinate": "pkg:maven/org.springframework/spring-webmvc@7.0.9?type=jar",
+      "scope": "compile",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": true
+    },
+    {
+      "module": "web",
+      "declaredDirectCoordinate": "pkg:maven/org.thymeleaf/thymeleaf-spring6@3.1.5.RELEASE?type=jar",
+      "scope": "compile",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": true
+    },
+    {
+      "module": "web",
+      "declaredDirectCoordinate": "pkg:maven/com.github.spotbugs/spotbugs-annotations@4.10.4?type=jar",
+      "scope": "provided",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": false
+    },
+    {
+      "module": "web",
+      "declaredDirectCoordinate": "pkg:maven/org.postgresql/postgresql@42.7.13?type=jar",
+      "scope": "runtime",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": true
+    },
+    {
+      "module": "web",
+      "declaredDirectCoordinate": "pkg:maven/org.apache.artemis/artemis-jakarta-server@2.56.0?type=jar",
+      "scope": "test",
+      "optional": false,
+      "historicalMetadata": null,
+      "sameModuleHistoricalMetadata": false
+    },
+    {
+      "module": "web",
+      "declaredDirectCoordinate": "pkg:maven/org.apache.artemis/artemis-server@2.56.0?type=jar",
+      "scope": "test",
+      "optional": false,
+      "historicalMetadata": null,
+      "sameModuleHistoricalMetadata": false
+    },
+    {
+      "module": "web",
+      "declaredDirectCoordinate": "pkg:maven/org.flywaydb/flyway-core@13.4.0?type=jar",
+      "scope": "test",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": false
+    },
+    {
+      "module": "web",
+      "declaredDirectCoordinate": "pkg:maven/org.flywaydb/flyway-database-postgresql@13.4.0?type=jar",
+      "scope": "test",
+      "optional": false,
+      "historicalMetadata": "SINGLE_ID_METADATA",
+      "sameModuleHistoricalMetadata": false
+    },
+    {
+      "module": "web",
+      "declaredDirectCoordinate": "pkg:maven/org.jsoup/jsoup@1.23.2?type=jar",
+      "scope": "test",
+      "optional": false,
+      "historicalMetadata": null,
+      "sameModuleHistoricalMetadata": false
+    },
+    {
+      "module": "web",
+      "declaredDirectCoordinate": "pkg:maven/org.junit.jupiter/junit-jupiter@5.13.4?type=jar",
+      "scope": "test",
+      "optional": false,
+      "historicalMetadata": null,
+      "sameModuleHistoricalMetadata": false
+    },
+    {
+      "module": "web",
+      "declaredDirectCoordinate": "pkg:maven/org.springframework/spring-test@7.0.9?type=jar",
+      "scope": "test",
+      "optional": false,
+      "historicalMetadata": null,
+      "sameModuleHistoricalMetadata": false
+    }
+  ]
+}
