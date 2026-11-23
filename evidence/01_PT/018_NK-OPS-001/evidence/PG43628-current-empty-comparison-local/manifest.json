@@ -1,0 +1,49 @@
+{
+  "run": "PG43628",
+  "source": "503fefe038ca3502d526c6363bcb187beb8b2cd9",
+  "productionCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": [
+    "WBS-P020-01.02/2"
+  ],
+  "actualExit": 0,
+  "firstPreflightOnly": "Fixed previously qualified class manifest contains 17 rather than 16. No compilation or tests started under the first slot.",
+  "startedAtUTC": "2026-11-23T12:13:14.404993+00:00",
+  "terminalAtUTC": "2026-11-23T12:13:15.941638+00:00",
+  "fixSource": "9a355a4ce326699e2b3622654b05e89bc31c2a36",
+  "existingProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43548-comparator-pointer-positive-24-16-v1/manifest.json",
+    "sha256": "4b4e519b6397a4751354ff88079d74a64e6d6d8fac068b45e200e0a7c8daeef4"
+  },
+  "freshToolTests": 2,
+  "proofMethods": [
+    "comparisonResultOwnsImmutableNonNullListSnapshots",
+    "emptyJsonInputsFailClosedWithoutNullDereference"
+  ],
+  "activeFixture": {
+    "path": "program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorEmptyInputTest.java",
+    "sha256": "4cb2aa3657224f3ba033d3bbc8f8d437f4a536e5b729e21145e469ba6a65b570"
+  },
+  "begin": {
+    "path": "../pgpt-runs/PG379/PG43628-current-empty-comparison-local-qualified-v2/begin.json",
+    "sha256": "51751c51afc2af9e832c2393ff6e7fe54aa7719dee2ec8bd9becbbb9ea68d8fa"
+  },
+  "terminal": {
+    "path": "../pgpt-runs/PG379/PG43628-current-empty-comparison-local-qualified-v2/terminal.json",
+    "sha256": "42aef3d6d4e576c54275ad494545b86dadf5d4033b1601240f01038ab7ee278f"
+  },
+  "junit": {
+    "path": "../pgpt-runs/PG379/PG43628-current-empty-comparison-local-qualified-v2/junit/TEST-junit-jupiter.xml",
+    "sha256": "1f65fba96b3eb11da05c2b8ae951e20b191a0f94ea2188818bf9843e2c181945"
+  },
+  "expected": [
+    "empty/whitespace JSON in five positions gives exact per-position failure, with a fixed count",
+    "constructor lists and public outputs are independent immutable data"
+  ],
+  "currentBaselineTree": "cd377044e4ca058ea219ca6a2fec82159559c72c",
+  "networkOrFileStoreOperation": false,
+  "browserOrActualChr": false,
+  "productionTestsAdded": 0,
+  "coverageClaim": null,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
