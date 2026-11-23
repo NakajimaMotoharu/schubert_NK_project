@@ -1,0 +1,326 @@
+{
+  "run": "PG43202-p00503-jms-guard-dlq-exact12-v1",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-23T01:24:24.374988+00:00",
+  "source": "0baf7c123a301fee2e3d14ffa3eb9ab4e7030868",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-P005-03/2",
+  "design": [
+    "SS312",
+    "SS321",
+    "SS354",
+    "451"
+  ],
+  "tests": 12,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "newDefinitions": 0,
+  "scope": "JDK proxy and Artemis address value objects, no JMS endpoint construction or actual connection",
+  "beforeStatic": {
+    "receipt": {
+      "path": "../pgpt-runs/PG379/PG43200-p00503-jms-guard-dlq-local-quality-v1/terminal.json",
+      "sha256": "7ff93ecfe6f30e41f8f18b4e4d482310da7089487c50677eae9dc8cbfc1dc5de"
+    },
+    "spotBugs": [
+      {
+        "kind": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+        "method": "destinationMustBePermanentArtemisUnqualifiedAndExact"
+      },
+      {
+        "kind": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+        "method": "identityPropertiesMustRetainExactLowercaseCanonicalUuidText"
+      },
+      {
+        "kind": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+        "method": "replyToMustMatchPresenceAndPermanentAllowlistedAddress"
+      },
+      {
+        "kind": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+        "method": "validBytesMessageProducesAnImmutableRedactedSnapshot"
+      },
+      {
+        "kind": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+        "method": "exactPrintable128AndErrorCode32BoundariesAreRetainedWithoutTrimming"
+      },
+      {
+        "kind": "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+        "method": "writerCopiesBodyAndOnlyApprovedBoundedMetadata"
+      }
+    ],
+    "pmd": [
+      [
+        "UseProperClassLoader",
+        250
+      ],
+      [
+        "UseConcurrentHashMap",
+        278
+      ],
+      [
+        "UseConcurrentHashMap",
+        292
+      ],
+      [
+        "UseConcurrentHashMap",
+        298
+      ],
+      [
+        "UseProperClassLoader",
+        315
+      ],
+      [
+        "CompareObjectsWithEquals",
+        360
+      ],
+      [
+        "CloseResource",
+        64
+      ],
+      [
+        "CompareObjectsWithEquals",
+        205
+      ],
+      [
+        "UseProperClassLoader",
+        211
+      ],
+      [
+        "UseConcurrentHashMap",
+        215
+      ],
+      [
+        "UseConcurrentHashMap",
+        216
+      ]
+    ],
+    "stages": {
+      "format": 0,
+      "main": 0,
+      "fixtures": 0,
+      "style": 0,
+      "spotbugs": 1,
+      "pmd": 4
+    }
+  },
+  "actualStatic": {
+    "spotBugs": [],
+    "pmd": [
+      [
+        "UseProperClassLoader",
+        251
+      ],
+      [
+        "UseConcurrentHashMap",
+        279
+      ],
+      [
+        "UseConcurrentHashMap",
+        293
+      ],
+      [
+        "UseConcurrentHashMap",
+        299
+      ],
+      [
+        "UseProperClassLoader",
+        316
+      ],
+      [
+        "CompareObjectsWithEquals",
+        361
+      ],
+      [
+        "CloseResource",
+        65
+      ],
+      [
+        "CompareObjectsWithEquals",
+        206
+      ],
+      [
+        "UseProperClassLoader",
+        212
+      ],
+      [
+        "UseConcurrentHashMap",
+        216
+      ],
+      [
+        "UseConcurrentHashMap",
+        217
+      ]
+    ],
+    "stages": {
+      "format": 0,
+      "main": 0,
+      "fixtures": 0,
+      "style": 0,
+      "spotbugs": 0,
+      "pmd": 4,
+      "junit": 0,
+      "rawCompile": 0,
+      "unfiltered": 0
+    }
+  },
+  "currentPhysical": [
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/guard/GuardedJmsMessage.class",
+      "sha256": "d3f7abc900267d4fe4e6c00df230375434c8f2a73c96193509c586cfb7c11a07"
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuard.class",
+      "sha256": "8624866d9fdf9dbf74accdc84f0aad895c9e16e0d8db90f7486c18bbc8c3de6d"
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/FatalDlqMessageWriter.class",
+      "sha256": "98857f58ffa11ad93a847aeb7ed20f3802a8e75941a4403e4244fdfa78ad6b21"
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/FatalDlqMetadata$DetectedBy.class",
+      "sha256": "d9c9766a65c17ce0351f5703cdc45f7e61f42b3042b5d62644f5fd9b39436568"
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/FatalDlqMetadata.class",
+      "sha256": "dc47d512426d33e31f3f121d149e0dffeea0757c9e643770de30d0ac0484aa0d"
+    }
+  ],
+  "exactLocalCounterTuple": {
+    "line": [
+      117,
+      117
+    ],
+    "method": [
+      32,
+      37
+    ],
+    "klass": [
+      5,
+      5
+    ],
+    "branch": [
+      52,
+      52
+    ]
+  },
+  "rawFiveUnmeasuredMethods": [
+    "GuardedJmsMessage.equals",
+    "GuardedJmsMessage.hashCode",
+    "FatalDlqMetadata.toString",
+    "FatalDlqMetadata.equals",
+    "FatalDlqMetadata.hashCode"
+  ],
+  "independentExpectations": "Fixed local transport input, exact approved properties and copy boundaries, provider failure identity, immutable payload, no result or failure counted from historical other tests",
+  "inputFiles": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/guard/GuardedJmsMessage.java",
+      "sha256": "9f50a140f32bcafb0a94a150ce693a2243c2f30a658909f010ca1b007ae378a0"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuard.java",
+      "sha256": "71e75c66912360eed21bfe600c1fc281fbaa73be11c674c91c5ab77f4f4496da"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/FatalDlqMetadata.java",
+      "sha256": "ecb1f660cd83fbc28c7133e38f1ea1a67ef47f7bf46085e220b810047d963efc"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/FatalDlqMessageWriter.java",
+      "sha256": "a1ae6af67703defb14f811b91e1b872c1d6ad2442d2fac8d758d18b39d661095"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+      "sha256": "7fa470a8723e0be85005aaa78b32b96c07111978a70655337ea2e2e17cbb1d00"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/FatalDlqMessageWriterTest.java",
+      "sha256": "3af9cf5f2cf049c675c9d0c472105d78ddd8143a355e65452f6630ed574782c7"
+    }
+  ],
+  "knownDependencyReceipts": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42762-protocol-real-local-ci-entry-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+      "sha256": "79210c39ae0ceee549878c1c25b22961a44cc4a379d90c8b1708b1c1b5c7efb5"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/jakarta/jms/jakarta.jms-api/3.1.0/jakarta.jms-api-3.1.0.jar",
+      "sha256": "6605e08075ab389c359451c7854808cf4b1575e1ea6317e534e9d4df088096df"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+      "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-jakarta-client/2.56.0/artemis-jakarta-client-2.56.0.jar",
+      "sha256": "89eb1f27e583119db4c1c23db26cbc1916c82bfc5fcc23dbcb7ef040602f09d6"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar",
+      "sha256": "111cbc7a359b5597085b5328ab74c2f81dd40e7211d07bd12e6ffa83d9de99d9"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar",
+      "sha256": "02b43c47403dd0ef6dcd4573d0744bc6bae935edae016eb19f2d4ebb5eb33722"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-common/4.1.137.Final/netty-common-4.1.137.Final.jar",
+      "sha256": "d31926b01adcc07af86f5e27b81b6d6c115df17d366e835d1fc3f5a1924e7e52"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-buffer/4.1.137.Final/netty-buffer-4.1.137.Final.jar",
+      "sha256": "f474b14c7734f15e0540394cb6f39d67777b7581a42919e4ac89d253d4efd929"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+      "sha256": "44508fd1576500688c790b190acdd16fec4f8c79a3e0b900afd70503cf055f55"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jctools/jctools-core/4.0.7/jctools-core-4.0.7.jar",
+      "sha256": "fab373e48733e00bdf7114edbdb49f54114b0237e088b161c05984a6705fed50"
+    }
+  ],
+  "historical12CaseSubsetOnly": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26594-event-current-test-compile-v2/manifest.json",
+      "sha256": "d5c53e2cb120aef420c8e5fdc7b45201a70cb5f1e26b33a410c150d64668dc8e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26600-event-connected170-v2/manifest.json",
+      "sha256": "de4a44ac8e789a84862ddebfe6f5d0ef259ae71d0e630b71abb211e4241ed060"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43046-p00201-current-codec-recheck-v1/manifest.json",
+      "sha256": "0e15412c3ce060337d9c6237d648799aa423dce024d07a0c846e7ba2e9168b4e"
+    }
+  ],
+  "actualOneExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43202-p00503-jms-guard-dlq-exact12-v1/unit.exec",
+    "sha256": "f36a9d2426c5d7b3396020e30b14f388eaef85226916b3e1d16ef25f46845969"
+  },
+  "sanitized": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43202-p00503-jms-guard-dlq-exact12-v1/coverage-unfiltered.tsv",
+      "sha256": "ab56f2d849173c9d7793b0bef82a270d7b5b42be1d0ba2da245f52bf1c36f5be"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43202-p00503-jms-guard-dlq-exact12-v1/sanitized-junit.json",
+      "sha256": "ffbea372ed5f4def7efb5854add7e6c6c4db32284d2a6487de544de20dc56154"
+    }
+  ],
+  "commandReceipt": {
+    "path": "../pgpt-runs/PG379/PG43202-p00503-jms-guard-dlq-exact12-v1/begin.json",
+    "sha256": "56729e7e431c5d91c9528df3dfd5e491f5701a90f94cdb59a94e513ee8903375"
+  },
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5795_p00503_jms_proxy_fixture_quality.py",
+    "sha256": "c8f057697745e9844836eeeeed3f654a22ad895be1729a3bbc68e10ee09a9064"
+  },
+  "brokerActions": 0,
+  "qa056OrNativeInvocations": 0,
+  "formalAcceptanceId": null,
+  "whole451": false
+}
