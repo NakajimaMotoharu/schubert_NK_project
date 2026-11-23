@@ -1,0 +1,287 @@
+{
+  "run": "PG43278-p01810-current-config-diagnostic-four-counter-v1",
+  "source": "4f75fb145590d7e165b8d9949122c0fe71df96d8",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "design": [
+    "SS343",
+    "SS351",
+    "SS352"
+  ],
+  "wbs": "WBS-P018-10.02/2",
+  "related": [
+    "BUG-3670",
+    "WBS-P018-01/2",
+    "WBS-F03/2-2-b"
+  ],
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-23T03:15:00.845379+00:00",
+  "eligible": 14,
+  "passed": 14,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "newDefinitions": 0,
+  "artifactQualification": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43066-f03-transfer-current-ownership-trace-v1/manifest.json",
+    "sha256": "8da8b76521b2f5bb1d71accebf1a78d0fee6c01d296b720dce78379af0bf3310"
+  },
+  "fixture": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfigTest.java",
+      "sha256": "5ab2839cc4ccce751fa87616d0d857fcf1279ee37b0d5f59c342e3bd55ea4cf9"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfigTest.java",
+      "sha256": "d65a6c7239ce8f3205dfd32730e8722c65dac4518963b7c304911f954bdc4322"
+    }
+  ],
+  "physicalProduction": {
+    "dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig.class": {
+      "module": "bootstrap",
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43278-p01810-current-config-diagnostic-four-counter-v1/target/classes/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig.class",
+      "sha256": "b3193906a439d650f767fd53aa9172065de506afb725b8f6c84b11498c04bc8e"
+    },
+    "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class": {
+      "module": "bootstrap",
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43278-p01810-current-config-diagnostic-four-counter-v1/target/classes/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class",
+      "sha256": "cc8265242a1cd41cc7c77b8e12185cbc387fb583d70e1d1171ba467cb0f3d552"
+    },
+    "dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfig.class": {
+      "module": "bootstrap",
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43278-p01810-current-config-diagnostic-four-counter-v1/target/classes/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfig.class",
+      "sha256": "d4378ed797af2b047ec28613a0cd193a86eb6a35be19349973b33e6ca06db1d7"
+    },
+    "dev/codex/schubert/nk/storage/StorageIoException.class": {
+      "module": "storage",
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43278-p01810-current-config-diagnostic-four-counter-v1/target/classes/dev/codex/schubert/nk/storage/StorageIoException.class",
+      "sha256": "85f86d702a139f126afdd72ca8e221583db824f159351ecd9f07b15fcc569c88"
+    },
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason.class": {
+      "module": "storage",
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43278-p01810-current-config-diagnostic-four-counter-v1/target/classes/dev/codex/schubert/nk/storage/StorageIoException$Reason.class",
+      "sha256": "a113bd839666ee3a4038dd3703af0cfb772282278cc6fbfe1e3cccf98286ffec"
+    }
+  },
+  "templateFixtures": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43278-p01810-current-config-diagnostic-four-counter-v1/fixture-repo/src/deployment/config/common.yml.template",
+      "sha256": "d61acf911e08a15cfdb2700eb81db7bbbb920cb3ccd80f1665652af4b4b7880a"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43278-p01810-current-config-diagnostic-four-counter-v1/fixture-repo/src/deployment/config/api.yml.template",
+      "sha256": "206f4ed29da0fca31c1bab15015eb5b4db93255846c411f5d1815050d66bf267"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43278-p01810-current-config-diagnostic-four-counter-v1/fixture-repo/src/deployment/config/web.yml.template",
+      "sha256": "3e9a7ba4ada50e82e450cdd634439c2c122fed051de089010dee07dfd2d25cb7"
+    }
+  ],
+  "testDependencies": [
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/snakeyaml/snakeyaml-engine/3.1.1/snakeyaml-engine-3.1.1.jar",
+      "sha256": "59d73655cf077f154137e2d6f6f92c041a954c0b1c534c63800047a0d70a6947"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+      "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+    }
+  ],
+  "stageReceipts": [
+    {
+      "path": "../pgpt-runs/PG379/PG43278-p01810-current-config-diagnostic-four-counter-v1/begin.json",
+      "sha256": "525962e8767b73e819ebdb002d0b29462fc5a4590f191e99eda10acb513b1946"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43278-p01810-current-config-diagnostic-four-counter-v1/terminal.json",
+      "sha256": "170c84bf3011c62b0b2c67c053071f7e36a3633035332ac9c68457c397a2fc44"
+    }
+  ],
+  "stages": {
+    "format": {
+      "exit": 0,
+      "atUTC": "2026-11-23T03:14:52.869571+00:00"
+    },
+    "compile": {
+      "exit": 0,
+      "atUTC": "2026-11-23T03:14:53.585975+00:00"
+    },
+    "junit": {
+      "exit": 0,
+      "atUTC": "2026-11-23T03:14:54.753974+00:00"
+    },
+    "rawCompile": {
+      "exit": 0,
+      "atUTC": "2026-11-23T03:14:55.420635+00:00"
+    },
+    "unfiltered": {
+      "exit": 0,
+      "atUTC": "2026-11-23T03:14:55.535532+00:00"
+    },
+    "style": {
+      "exit": 0,
+      "atUTC": "2026-11-23T03:14:56.152014+00:00"
+    },
+    "pmd": {
+      "exit": 4,
+      "atUTC": "2026-11-23T03:14:58.122493+00:00"
+    },
+    "spotbugs": {
+      "exit": 0,
+      "atUTC": "2026-11-23T03:15:00.845328+00:00"
+    }
+  },
+  "originalXml": [
+    {
+      "file": "TEST-junit-jupiter.xml",
+      "sha256": "3ec236bda71e7f648259bb5a81b7db8a4ad4f48f9f433980973bb6fdaa240325",
+      "cases": 14
+    },
+    {
+      "file": "TEST-junit-platform-suite.xml",
+      "sha256": "4807f21df48d179bb1ade4b4cf1d43c2dd8506622c97217890992469ca72cf75",
+      "cases": 0
+    },
+    {
+      "file": "TEST-junit-vintage.xml",
+      "sha256": "0d744d4a189fa4c79a663b771d9d9280d441b0b6034c3a556a57ada11beaea3e",
+      "cases": 0
+    }
+  ],
+  "publishedCaseResult": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43278-p01810-current-config-diagnostic-four-counter-v1/junit-cases.json",
+    "sha256": "7e43a9d95202e64e3db3c0d88494163a44e514cf2776d78945201bac57efe131"
+  },
+  "coverage": {
+    "raw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43278-p01810-current-config-diagnostic-four-counter-v1/coverage-unfiltered.tsv",
+      "sha256": "d9e40e84b468e41c78dc287606843a285a52b7bb2cffc587c07b5c8e4d708b75"
+    },
+    "exec": {
+      "path": "../pgpt-runs/PG379/PG43278-p01810-current-config-diagnostic-four-counter-v1/unit.exec",
+      "sha256": "5d63396431f4a4230a0fd59cd1e942a29623fa15163dacda24ec6a1d17bc6751"
+    },
+    "aggregateArchives": false,
+    "sessionIndependentlyConfirmed": true,
+    "excludeClasses": [],
+    "measuredClasses": {
+      "dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig": {
+        "crc64": "e7957cc681f49cc4",
+        "probes": 142,
+        "counters": {
+          "INSTRUCTION": [
+            0,
+            610
+          ],
+          "BRANCH": [
+            0,
+            70
+          ],
+          "LINE": [
+            0,
+            114
+          ],
+          "COMPLEXITY": [
+            0,
+            47
+          ],
+          "METHOD": [
+            0,
+            12
+          ],
+          "CLASS": [
+            0,
+            1
+          ]
+        }
+      },
+      "dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfig": {
+        "crc64": "94460c1f19430748",
+        "probes": 155,
+        "counters": {
+          "INSTRUCTION": [
+            0,
+            645
+          ],
+          "BRANCH": [
+            0,
+            80
+          ],
+          "LINE": [
+            0,
+            127
+          ],
+          "COMPLEXITY": [
+            0,
+            53
+          ],
+          "METHOD": [
+            0,
+            13
+          ],
+          "CLASS": [
+            0,
+            1
+          ]
+        }
+      }
+    },
+    "measuredTotals": {
+      "LINE": {
+        "covered": 241,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 25,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 2,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 150,
+        "missed": 0
+      }
+    }
+  },
+  "static": {
+    "checkstyle": 0,
+    "spotbugs": 0,
+    "pmd": 10,
+    "pmdRules": {
+      "CloseResource": 2,
+      "DoNotUseThreads": 8
+    },
+    "rawPmd": {
+      "path": "../pgpt-runs/PG379/PG43278-p01810-current-config-diagnostic-four-counter-v1/pmd.xml",
+      "sha256": "7b00004459d42a474a07cdbd7d08c786c6a0a155fe0e2178f70a3d6d845e0873"
+    }
+  },
+  "priorEvidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43118-nonsecret-config-independent-concurrent-oracles-v3/manifest.json",
+      "sha256": "1d929834c4b1b0e02528e5f3586f3d1e50c8c66258b0436f58d4513ece035492"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43122-config-diagnostics-no-nested-cause-v1/manifest.json",
+      "sha256": "a84d4386cbb337889d906dcee85396cbee081ebbb80e36c489602a911dbff978"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43120-f03-config-main-typed-current-v1/manifest.json",
+      "sha256": "b8084a08e8137430083852bd5b7f2fdfa174be6a05129a9fb7c5830a23de11c3"
+    }
+  ],
+  "oracle": [
+    "SS343 text and pre-fixed GOLDEN UTF-8/current three public templates",
+    "JDK SHA-256 over fixture expectation, never the produced hash",
+    "fixed diagnostic, no nested cause, no suppressed errors"
+  ],
+  "actualRuntime": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}

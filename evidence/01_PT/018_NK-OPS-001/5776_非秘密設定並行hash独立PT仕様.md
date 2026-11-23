@@ -11,3 +11,7 @@ PG43118-v1/v2 は検査例外の宣言不足で compile 1、JUnit 未起動。v3
 ### 公開診断の原因・抑制確認（BUG-3670）
 
 SS343／351、API/Webの003・004・007を既存の合成入力で選択実行する。固定メッセージ、原因null、抑制0を独立観測し、実ログ・実credentialには接触しない。実行 `python3 -B evidence/01_PT/018_NK-OPS-001/input/5776_p01801_nonsecret_oracles_current.py --version diagnostics`。PG43122で6成功、F/E/S各0、同runの部分counterを保存。[manifest](evidence/PG43122-config-diagnostics-no-nested-cause-v1/manifest.json)。
+
+### 公開診断修正後の同一実行
+
+PG43278は正規Bootstrap・Storage JARから固定した同じ物理5、公開雛形3、修正後fixture2で、API/Web各001～007を実行した。14成功、失敗・エラー・スキップ・未実行各0。二Mainの同一実行における生counterは行241/241、メソッド25/25、クラス2/2、分岐150/150。CheckstyleとSpotBugsは指摘0、PMDは試験に10件を保持。実設定や実運用ログ、全451の判定は別に残る。[実行manifest](evidence/PG43278-p01810-current-config-diagnostic-four-counter-v1/manifest.json)。
