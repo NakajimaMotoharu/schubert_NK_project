@@ -1,0 +1,59 @@
+{
+  "run": "PG43322-f03-source-plan-scope-regression-v1",
+  "source": "d440794292d598ca0e5d9885dd6b8c1c641c1265",
+  "groupStartSource": "447fcf4ab3c161b631f22cc002cb3da0988f5e50",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-F03/2-2-b",
+  "defect": "BUG-3695",
+  "horizontal": "YKT-2902",
+  "design": [
+    "451",
+    "SS354"
+  ],
+  "terminalAtUTC": "2026-11-23T04:25:30.932522+00:00",
+  "terminalTimeBasis": "TOOL_EXIT_OBSERVED_BEFORE_CHECKPOINT",
+  "actualExit": 0,
+  "testTool": "Python 3.14.4",
+  "command": "PYTHONPATH=tools/quality python3 -B -m unittest discover -s tools/quality/tests -p test_static_input_scope.py -v",
+  "inputs": [
+    {
+      "path": "tools/quality/static_input_scope.py",
+      "sha256": "39b7d6a00eb77940bd14c5d7c758e15c015e23122e6074dc2868ba2daae51cab"
+    },
+    {
+      "path": "tools/quality/tests/test_static_input_scope.py",
+      "sha256": "57ea5c1492460537c5c714315787bad18582c05f04ff004da4c92916792885bd"
+    }
+  ],
+  "counts": {
+    "tests": 21,
+    "failed": 0,
+    "errors": 0,
+    "skip": 0,
+    "newMethods": 10,
+    "binaryRegressionMethods": 11,
+    "productPt": 0,
+    "coverageMeasured": false
+  },
+  "checks": [
+    "exact CLI metadata",
+    "different tool",
+    "different tool digest",
+    "different source",
+    "held later path",
+    "unreviewed path",
+    "inventory omission",
+    "same path changed blob",
+    "path aliases or wildcard",
+    "unmodeled input argument"
+  ],
+  "scope": "Synthetic metadata only. Approved scope and actual input identity remain separate prerequisites.",
+  "historicalAdmission": {
+    "eligible": 359,
+    "eligiblePopulation": 1135,
+    "excluded": 450,
+    "knownOverlap": 8,
+    "unverified": 442
+  },
+  "nextAction": "WBS-G08。PG43302の元event・追記訂正event・現行公開manifest・Git保全版のhashを照合し、どのhashを参照するかを明確にする。保留範囲の調査・再測定はしない。"
+}
