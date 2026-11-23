@@ -1,0 +1,175 @@
+{
+  "run": "PG43446-inspection-fixed-value-trace-current-core-v1",
+  "wbs": "WBS-P018-10.03/2-照合",
+  "source": "2cba954e119738d516ca4cfc4feed6323086f2e4",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "terminalAtUTC": "2026-11-23T07:24:35.855966+00:00",
+  "actualExit": 0,
+  "priorReceipts": [
+    {
+      "prior": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42022-f03-api-inspection-run-step-current-proof-v1/manifest.json",
+        "sha256": "a7802d67b93f4b8af2f9cee95008318ba9b169c7bd17696f1781a8b06e311457"
+      },
+      "historicalInput": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38848-ssc465-inspection-step-unit-v1/manifest.json",
+        "sha256": "0700e62d856c9795b222ae542857542ffa2063bf8e5f596882870ac1deca9686"
+      },
+      "caseNames": [
+        "runPreservesLiteralMicrosecondsAndRejectsNoncanonicalCutoffs()",
+        "runUsesBothComponentsForValueKeys()",
+        "stepRequiresCursorOnlyForNonEndAndRedactsIt()",
+        "stepUsesBothComponentsForValueKeysAndRetainsTheOutcomeVocabulary()"
+      ],
+      "testIdsOrCatalog": [
+        "CATALOG-016",
+        "CATALOG-017"
+      ],
+      "independentOracle": {
+        "path": "evidence/01_PT/018_NK-OPS-001/4612_SSC465InspectionStep固定診断単体仕様.md",
+        "sha256": "3a1c677ddf618e8754ebcdc2d6dc5af62cf7b8bb45d32899ea00ad5a1495ff2e"
+      },
+      "stableSourceDigests": {
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectionRun.java": "7db64d61edb32a3df73d75d163c098eda5954afef235e1428d28b8d1e3ab8575",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectionStep.java": "836d977e800c43bc27e8d844fc1def103b70ea074c9407d180fec92d87bb4f98",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectionRunStepValueContractTest.java": "c5e26c2e000c10df1d74c04adc57bd71e56d7af5de695913fbd6724ab17144d7"
+      },
+      "currentMatchingCompiledPhysical": {
+        "dev/codex/schubert/nk/api/maintenance/InspectionRun.class": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42022-f03-api-inspection-run-step-current-proof-v1/main/dev/codex/schubert/nk/api/maintenance/InspectionRun.class",
+          "sha256": "d8af97cf742bf608982655bf5a24351c255234827053ee0a45707ba89fb0e551"
+        },
+        "dev/codex/schubert/nk/api/maintenance/InspectionStep.class": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42022-f03-api-inspection-run-step-current-proof-v1/main/dev/codex/schubert/nk/api/maintenance/InspectionStep.class",
+          "sha256": "0420163b6064aa2a4f513b5892560cc2c60f99127e2004b2afdbf363e0f70e12"
+        },
+        "dev/codex/schubert/nk/api/maintenance/InspectionStep$Outcome.class": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42022-f03-api-inspection-run-step-current-proof-v1/main/dev/codex/schubert/nk/api/maintenance/InspectionStep$Outcome.class",
+          "sha256": "e9329a6a5226e772e22cdf88950f5088cdd33cdac7e4544f3f1eb5a9a1a33787"
+        },
+        "dev/codex/schubert/nk/api/maintenance/InspectionRunStepValueContractTest.class": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42022-f03-api-inspection-run-step-current-proof-v1/test/dev/codex/schubert/nk/api/maintenance/InspectionRunStepValueContractTest.class",
+          "sha256": "4d448284ce6807efe8b5b96e83bd8c18289608ed1e01272bd553ed4c72f4bce8"
+        }
+      },
+      "originalXml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38850-ssc465-inspection-step-post-v1/original-TEST-junit-jupiter.xml",
+        "sha256": "de264b201016a3489712b5f6949869306c895f22feefd4db35018c5ffa9bb999"
+      },
+      "originalRawScope": {
+        "LINE": {
+          "covered": 22,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 17,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 3,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 10,
+          "missed": 0
+        }
+      }
+    },
+    {
+      "prior": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42024-f03-api-inspection-progress-current-proof-v1/manifest.json",
+        "sha256": "6a0eee2476da1229250dafb58553b242a783886335b5f2a71fe580c36a792d4d"
+      },
+      "historicalInput": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38378-ssc453-inspection-outcome-unit-v1/manifest.json",
+        "sha256": "793966f253786ec22ce58ee67ed108a0e8225c1f87159ae27ffc4dd5ae6244ff"
+      },
+      "caseNames": [
+        "completedExecutionRequiresMatchingCompletedProgress()",
+        "executionMapsTheFiveOutcomesAndKeepsOnlyTheSuppliedObservation()",
+        "executionUsesBothValueComponentsAndTheFixedOutcomeVocabulary()",
+        "progressKeepsAllCountsAndRejectsInconsistentArithmeticAndCursor()",
+        "progressSeparatesRunCursorCountsAndCompletionInValueKeys()"
+      ],
+      "testIdsOrCatalog": [
+        "PT-OPS-INS-VALUE005",
+        "PT-OPS-INS-VALUE006",
+        "PT-OPS-INS-VALUE007",
+        "PT-OPS-INS-VALUE008",
+        "PT-OPS-INS-VALUE009"
+      ],
+      "independentOracle": {
+        "path": "evidence/01_PT/018_NK-OPS-001/4563_InspectionProgressExecution公開値・単体テスト仕様書.md",
+        "sha256": "5805ddfca0a032560993cf0d039403f9cebc7521bac4d08193f1756288db5f30"
+      },
+      "stableSourceDigests": {
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectionRun.java": "7db64d61edb32a3df73d75d163c098eda5954afef235e1428d28b8d1e3ab8575",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectionProgress.java": "fe4338f4db6a24eb7c33ffe8da1b208d677caa90c29cd064b3a094dca15a58f3",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectionExecution.java": "a6386577f68382a34d5f58bfd81f5bd50746622c610511af3c49c110063e44af",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectionProgressExecutionValueContractTest.java": "9c139f6e81f5d556ca7e60ec3fe392e1dbbff30027dcd4c7be08818253df97fd"
+      },
+      "currentMatchingCompiledPhysical": {
+        "dev/codex/schubert/nk/api/maintenance/InspectionRun.class": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42024-f03-api-inspection-progress-current-proof-v1/main/dev/codex/schubert/nk/api/maintenance/InspectionRun.class",
+          "sha256": "d8af97cf742bf608982655bf5a24351c255234827053ee0a45707ba89fb0e551"
+        },
+        "dev/codex/schubert/nk/api/maintenance/InspectionProgress.class": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42024-f03-api-inspection-progress-current-proof-v1/main/dev/codex/schubert/nk/api/maintenance/InspectionProgress.class",
+          "sha256": "352976ca1f7c1dc2d7da21037419654bbc1569c64b5a9f1d096f7232b1d75e21"
+        },
+        "dev/codex/schubert/nk/api/maintenance/InspectionExecution.class": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42024-f03-api-inspection-progress-current-proof-v1/main/dev/codex/schubert/nk/api/maintenance/InspectionExecution.class",
+          "sha256": "cb71561e1a2607aae44d7e64c16cbdf3fad141b7a377e199f722399cb17742ad"
+        },
+        "dev/codex/schubert/nk/api/maintenance/InspectionExecution$Status.class": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42024-f03-api-inspection-progress-current-proof-v1/main/dev/codex/schubert/nk/api/maintenance/InspectionExecution$Status.class",
+          "sha256": "2acf0311299db325a39bc619e56573eee6847fedf2ff017d81a6772d3cbe6bad"
+        },
+        "dev/codex/schubert/nk/api/maintenance/InspectionProgressExecutionValueContractTest.class": {
+          "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42024-f03-api-inspection-progress-current-proof-v1/test/dev/codex/schubert/nk/api/maintenance/InspectionProgressExecutionValueContractTest.class",
+          "sha256": "6ee88b604945894861850e766c032ab3f73297e36290af704c581ff0439b1c3e"
+        }
+      },
+      "originalXml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38380-ssc453-inspection-outcome-post-v1/original-TEST-junit-jupiter.xml",
+        "sha256": "b08bdb6ac618ec3037829f118a7a14e65cdba6c2b0968502fa3a49955d4c8827"
+      },
+      "originalRawScope": {
+        "LINE": {
+          "missed": 0,
+          "covered": 32
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 23
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 26
+        }
+      }
+    }
+  ],
+  "priorDistinctCasesReferenced": 9,
+  "newExecutableTests": 0,
+  "actualDatabaseOrSinkOrInspector": 0,
+  "regularApiCompiled": 0,
+  "priorRawScopesUnmerged": true,
+  "canonicalDesignCommit": "7745de1fb04c8b9e2cfccc11103d7b3c57b090d7",
+  "design": {
+    "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+    "sha256": "860f584a2f032e9b06112907f8ec138a12d0b69b94546f7e17ad7dfb9b65414c"
+  },
+  "ownMeaning": "Standalone candidate holds and already-covered fixed diagnostics. Existing history not a newly negotiated acceptance.",
+  "remaining": [
+    "Current live structured caller and sink",
+    "WBS-P018-10 formal three-child criteria",
+    "QA-056 and F02/F03 exit dependencies",
+    "451 full"
+  ],
+  "formalAcceptanceId": null
+}
