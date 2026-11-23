@@ -1,0 +1,131 @@
+{
+  "run": "PG43794-v3",
+  "source": "65f5c3748f32a41917d711fc8ae332c1833b308d",
+  "productionCoreMain": "5542a9e9018071868e7d2317bb126ec09ed6f64e",
+  "terminalAtUTC": "2026-11-23T17:29:36.919516+00:00",
+  "actualExit": 0,
+  "counts": {
+    "tests": 11,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "firstCompleteTestSource": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43794-current-api-exact-duration-eleven/manifest.json",
+    "sha256": "4b6c0713e209cf77c9dd9c6b6b2b73d2afb1fde147c660c089cb768c74598824"
+  },
+  "preliminaryV2": {
+    "exitCode": 1,
+    "enteredTest": false,
+    "issue": "BUG-3735"
+  },
+  "strictMavenCompile": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43794-exact-duration-typed-compile-v1/terminal.json",
+    "sha256": "94955d9c008723a83bbe30506c5bdae1bfd668b7b0e42a2ee63eb61f133abe1e"
+  },
+  "exactStrictCompilersPhysicalMatch": 4,
+  "selectedPhysicalCount": 9,
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43794-api-exact-duration-current-11-v3/begin.json",
+    "sha256": "72a85ee580c4d5ab298dc9bdf75ad006738f9336cfac7a037db0a0e2254015af"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43794-api-exact-duration-current-11-v3/terminal.json",
+    "sha256": "6ba9481883a6880efebb1853520caa1cfeb72676193e0306766243639c15d7f6"
+  },
+  "unitXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43794-api-exact-duration-current-11-v3/xml/TEST-junit-jupiter.xml",
+    "sha256": "61e13575f796b13f21e75b9cd9edf6f123994f424a694cfd55703bf29bed58db"
+  },
+  "singleExec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43794-api-exact-duration-current-11-v3/unit.exec",
+    "sha256": "ffd7e3872b3d8bc2858e245d47f7d3ed270ea3f756fa26c90b9bcf0722f609d2"
+  },
+  "rawCoverage": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43794-api-exact-duration-current-11-v3/unfiltered.out",
+    "sha256": "5d9b6546837073576ce3c89fdc84c1356dd1057a7212af70e43318a5a3893817"
+  },
+  "classMeasurements": {
+    "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry": {
+      "id": "9cac91834dd9c808",
+      "missedCovered": {
+        "INSTRUCTION": [
+          0,
+          111
+        ],
+        "BRANCH": [
+          0,
+          14
+        ],
+        "LINE": [
+          0,
+          23
+        ],
+        "COMPLEXITY": [
+          0,
+          13
+        ],
+        "METHOD": [
+          0,
+          6
+        ],
+        "CLASS": [
+          0,
+          1
+        ]
+      }
+    },
+    "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry$ExactSummary": {
+      "id": "2acaa9b7d3bcab64",
+      "missedCovered": {
+        "INSTRUCTION": [
+          6,
+          146
+        ],
+        "BRANCH": [
+          0,
+          10
+        ],
+        "LINE": [
+          1,
+          25
+        ],
+        "COMPLEXITY": [
+          0,
+          12
+        ],
+        "METHOD": [
+          0,
+          7
+        ],
+        "CLASS": [
+          0,
+          1
+        ]
+      }
+    }
+  },
+  "lineDeficits": [
+    {
+      "class": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry$ExactSummary",
+      "method": "takeSnapshot",
+      "line": 120,
+      "instruction": "INSTRUCTION:4:3",
+      "branch": "BRANCH:0:0"
+    },
+    {
+      "class": "dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry$ExactSummary",
+      "method": "takeSnapshot",
+      "line": 121,
+      "instruction": "INSTRUCTION:2:0",
+      "branch": "BRANCH:0:0"
+    }
+  ],
+  "notMerged": true,
+  "nonZeroExternalActions": 0,
+  "correctedBehavior": "EXDUR006 fixed DEBUG expected counters; EXDUR011 initial rejection releases state for another worker",
+  "productionIssue": "BUG-3734",
+  "horizontal": "YKT-2929",
+  "whole451": false,
+  "formalAcceptanceId": null
+}
