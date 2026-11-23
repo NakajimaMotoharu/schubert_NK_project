@@ -129,7 +129,8 @@ final class FatalDlqMessageWriterTest {
     var actor = FatalDlqMetadata.DetectedBy.API_SYNC;
     var metadata = new FatalDlqMetadata("INVALID_HEADER", actor, Instant.EPOCH);
     assertEquals(new FatalDlqMetadata("INVALID_HEADER", actor, Instant.ofEpochSecond(0)), metadata);
-    assertNotEquals(new FatalDlqMetadata("INVALID_HEADER", actor, Instant.ofEpochSecond(1)), metadata);
+    assertNotEquals(
+        new FatalDlqMetadata("INVALID_HEADER", actor, Instant.ofEpochSecond(1)), metadata);
     assertEquals(
         "FatalDlqMetadata[errorCode=INVALID_HEADER, detectedBy=API_SYNC,"
             + " detectedAt=1970-01-01T00:00:00Z]",
