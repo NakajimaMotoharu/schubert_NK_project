@@ -1,0 +1,210 @@
+{
+  "run": "PG43802",
+  "source": "2ff699391b0041727afee81ac250caaafd0b473f",
+  "wbs": "WBS-F02-b-a",
+  "terminalAtUTC": "2026-11-23T17:41:28.636570+00:00",
+  "exitCode": 0,
+  "regularQualifiedJars": 4,
+  "modulePaths": {
+    "protocol": "src/schubert-nk-protocol",
+    "storage": "src/schubert-nk-storage",
+    "bootstrap": "src/schubert-nk-bootstrap",
+    "batch": "src/schubert-nk-batch",
+    "api": "src/schubert-nk-api",
+    "web": "src/schubert-nk-web"
+  },
+  "productPomDependencies": {
+    "protocol": {},
+    "storage": {},
+    "bootstrap": {
+      "compile": [
+        "storage"
+      ]
+    },
+    "batch": {
+      "compile": [
+        "bootstrap",
+        "storage"
+      ],
+      "test": [
+        "bootstrap:test-jar"
+      ]
+    },
+    "api": {
+      "compile": [
+        "bootstrap",
+        "protocol",
+        "storage"
+      ],
+      "test": [
+        "bootstrap:test-jar"
+      ]
+    },
+    "web": {
+      "compile": [
+        "bootstrap",
+        "protocol",
+        "storage"
+      ],
+      "test": [
+        "api",
+        "bootstrap:test-jar"
+      ]
+    }
+  },
+  "normalPackagings": {
+    "protocol": {
+      "jar": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43646-current-protocol-package-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+        "sha256": "237c599325b65f9fd8c95c0808cf71cf849b4755e1d8bcc05aff567e01c9376f"
+      },
+      "originalSource": "2f2d7b7087347eb57c5602476f9031f065b634a5",
+      "buildReceipt": {
+        "path": "../pgpt-runs/PG379/PG43646-current-protocol-package-v1/begin.json",
+        "sha256": "8875da948cbbab93e9ea933019df3d92799971038d9603ca8ae005a47c56afad"
+      },
+      "ownMainAndPomBlob": {
+        "src/schubert-nk-protocol/src/main": "3e049d0773acd661b69473dd69bc2d41725fde9b",
+        "src/schubert-nk-protocol/pom.xml": "9e1b868711e88e06748011ca7d345fcfb3d212e4",
+        "pom.xml": "b1060c70c81c0a312dbbe2b737f7176a2e5d2e76"
+      },
+      "wrapperConfigChanges": [],
+      "compilerInputsUnchangedFromPriorF02Receipt": true,
+      "distributionChange": "none",
+      "deps": {},
+      "changedIncludedDependenciesSincePriorF02Receipt": {},
+      "classes": 176,
+      "manifestCRLF": 4,
+      "originalPackagedResultApplicableForArtifactIdentity": true
+    },
+    "storage": {
+      "jar": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+        "sha256": "ec7e4054459901003d0c3c4e0e186560f37cd77e0e6a1f26b9a78c2075186ebe"
+      },
+      "originalSource": "3d35cff39183e1e5a7b72cbb76603b7d4c530f04",
+      "buildReceipt": {
+        "path": "../pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/begin.json",
+        "sha256": "f0aed928b9518444fe7540124da5aba44a8ebb4746736150d26e0d446d304bb0"
+      },
+      "ownMainAndPomBlob": {
+        "src/schubert-nk-storage/src/main": "a24ff61c25ac27746921f1fabbf66c63a957f7db",
+        "src/schubert-nk-storage/pom.xml": "b0d15b225c56fdcae318600fb436984e7fb33876",
+        "pom.xml": "b1060c70c81c0a312dbbe2b737f7176a2e5d2e76"
+      },
+      "wrapperConfigChanges": [
+        ".mvn/wrapper/maven-wrapper.properties"
+      ],
+      "compilerInputsUnchangedFromPriorF02Receipt": true,
+      "distributionChange": "none; added download checksum only and original packaging used Maven 3.9.12 directly",
+      "deps": {},
+      "changedIncludedDependenciesSincePriorF02Receipt": {},
+      "classes": 79,
+      "manifestCRLF": 4,
+      "originalPackagedResultApplicableForArtifactIdentity": true
+    },
+    "bootstrap": {
+      "jar": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+        "sha256": "4a3de8b3dfe415c5171f42478f06e63b21f982be13cbd232131daf35dbd498d5"
+      },
+      "originalSource": "3d35cff39183e1e5a7b72cbb76603b7d4c530f04",
+      "buildReceipt": {
+        "path": "../pgpt-runs/PG379/PG42664-current-compiled-storage-bootstrap-archives-v1/begin.json",
+        "sha256": "f0aed928b9518444fe7540124da5aba44a8ebb4746736150d26e0d446d304bb0"
+      },
+      "ownMainAndPomBlob": {
+        "src/schubert-nk-bootstrap/src/main": "d601666ae00a963c5f57da4d7842eb42a637c3e8",
+        "src/schubert-nk-bootstrap/pom.xml": "540cbf7c804ce2574ecb037a7f2e589855156218",
+        "pom.xml": "b1060c70c81c0a312dbbe2b737f7176a2e5d2e76"
+      },
+      "wrapperConfigChanges": [
+        ".mvn/wrapper/maven-wrapper.properties"
+      ],
+      "compilerInputsUnchangedFromPriorF02Receipt": true,
+      "distributionChange": "none; added download checksum only and original packaging used Maven 3.9.12 directly",
+      "deps": {
+        "compile": [
+          "storage"
+        ]
+      },
+      "changedIncludedDependenciesSincePriorF02Receipt": {
+        "storage": []
+      },
+      "classes": 201,
+      "manifestCRLF": 4,
+      "originalPackagedResultApplicableForArtifactIdentity": true
+    },
+    "batch": {
+      "jar": {
+        "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43690-current-monitor-lock-compile-v3/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+        "sha256": "5450a2884f297fce02052a152763ec3dbce82f6fa4e8fc3348b7c2e1397dfc25"
+      },
+      "originalSource": "98a8f53578cab17d9b67b1a16218179d39d4bc8f",
+      "buildReceipt": {
+        "path": "../pgpt-runs/PG379/PG43690-current-monitor-owned-batch-jar-v1/begin.json",
+        "sha256": "a809c7fd58ddf41036a27dd9ece96bf05b820ed3243280e157fd48f18d309590"
+      },
+      "ownMainAndPomBlob": {
+        "src/schubert-nk-batch/src/main": "7d3952370ef5e18271c9ce10c344b33af43b28b0",
+        "src/schubert-nk-batch/pom.xml": "e181f798331dbddfe82111108f770e27538b0f04",
+        "pom.xml": "b1060c70c81c0a312dbbe2b737f7176a2e5d2e76"
+      },
+      "wrapperConfigChanges": [],
+      "compilerInputsUnchangedFromPriorF02Receipt": true,
+      "distributionChange": "none",
+      "deps": {
+        "compile": [
+          "bootstrap",
+          "storage"
+        ],
+        "test": [
+          "bootstrap:test-jar"
+        ]
+      },
+      "changedIncludedDependenciesSincePriorF02Receipt": {
+        "bootstrap": [],
+        "storage": []
+      },
+      "classes": 660,
+      "manifestCRLF": 4,
+      "originalPackagedResultApplicableForArtifactIdentity": true
+    }
+  },
+  "originalEvidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43704-f02-current-four-jar-receipts/manifest.json",
+      "sha256": "25e49b924f8e1e861d0c7f5844b5ae521e1cd928a05721733041825ded5a9672"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43770-current-api-web-runtime-model-identity/manifest.json",
+      "sha256": "dc044b991b5acf0901656d01446bf42fd448200a472badbc2a3db1567ebf23a3"
+    },
+    {
+      "path": "../pgpt-runs/PG379/PG43704-f02-current-four-jar-receipts/terminal.json",
+      "sha256": "3b227bd32619f511b7de944f93335a43e119c411eaaa04bed548c28fc7744b58"
+    }
+  ],
+  "trackedPomBytesMatchCount": 8,
+  "currentApiWebDependencyModel": {
+    "api": 36,
+    "web": 50
+  },
+  "productChangesSincePriorMultiproductSource": [
+    "src/deployment/systemd/caddy.service.d/schubert-nk-startup-policy.conf",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricCollector.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry.java",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistryTest.java",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/SupplementaryUnitTemplateTest.java"
+  ],
+  "freshMavenOrUnitExecutions": 0,
+  "distinctSourcePackagedApiWebCount": 0,
+  "unresolved": [
+    "same candidate API/Web normal Maven application JARs",
+    "QA-056 four types",
+    "Storage adapter and actual JDBC",
+    "QA-062 packaging line endings",
+    "F02 formal disposition and 451"
+  ],
+  "formalAcceptanceId": null
+}
