@@ -1,0 +1,141 @@
+{
+  "run": "PG43424-current-poller-boundaries-v2",
+  "wbs": "WBS-F03/2-2-b",
+  "source": "087469471c3a19209ef9e85cbace55f8c627c622",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "terminalAtUTC": "2026-11-23T06:54:23.702956+00:00",
+  "actualRunTerminalAtUTC": "2026-11-23T06:54:03.737482+00:00",
+  "actualExit": 0,
+  "executed": 5,
+  "applicable": 5,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRunWithinExactSelection": 0,
+  "otherOriginalCasesNotExecuted": [
+    "002",
+    "007",
+    "008"
+  ],
+  "labelRerunIntent": "Record current one selected run for typed normal, backwards, clock continuity, null boundaries and null-result branches. Original pre-correction cohort/tool exit remains separate from this evidence",
+  "repairTool": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5805_poller_observation_boundary_selected.py",
+    "sha256": "7700073099567c9f7128c6937108c993b4fffc67d5ab736d82f78aa00cf5f2f9"
+  },
+  "failedFirstLaunch": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43424-current-poller-boundaries-v1/manifest.json",
+    "sha256": "4c65b77dbfe97d3dbd64c1e416256512f7b0842244f1985532932991b760bb28"
+  },
+  "trackedDefect": "BUG-3705",
+  "tests": {
+    "PT-OPS-POLL001": "poll001NormalFlagsContextAndResultHaveNoRetries",
+    "PT-OPS-POLL003": "poll003BackwardsContextIsRejectedBeforeActionAndDoesNotInventGap",
+    "PT-OPS-POLL004": "poll004ClockFailureHasNoActionAndCrossApiGapIsConsumed",
+    "PT-OPS-POLL005": "poll005NullBoundariesDoNotCallOrChangeContinuity",
+    "PT-OPS-POLL006": "poll006NullResultIsFailureAndDoesNotCommitLaterEpoch"
+  },
+  "independentOracle": {
+    "path": "evidence/01_PT/018_NK-OPS-001/1599_監視Poll・Heap結線_単体テスト仕様書.md",
+    "sha256": "8bd26f7741f382368f8cc4d9542bfe7ca81f4a82f8cd22a0ee4ee090b36edb1e"
+  },
+  "unfilteredClassCounters": {
+    "INSTRUCTION": [
+      0,
+      132
+    ],
+    "BRANCH": [
+      0,
+      8
+    ],
+    "LINE": [
+      0,
+      36
+    ],
+    "COMPLEXITY": [
+      0,
+      8
+    ],
+    "METHOD": [
+      0,
+      4
+    ],
+    "CLASS": [
+      0,
+      1
+    ]
+  },
+  "session": {
+    "labelBytesHex": "504734333432342d504f4c4c35",
+    "startMillis": 1795416843012,
+    "endMillis": 1795416843584
+  },
+  "exactProbeCount": 29,
+  "classCrc64": "a44decebc98b04a1",
+  "classSha256": "417e264c4f703f02968f7d619978e9d8aba9a65ce5e64f7e950ed8eb42ae3024",
+  "initializedProjectClasses": [
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClock",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClockTest",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClockTest$FixtureClock",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringPoller",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest",
+    "dev/codex/schubert/nk/batch/monitoring/ObservationContext"
+  ],
+  "retainedOriginalFixtureProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42598-f03-monitoring-fixtures-selected-twelve-retest-v1/manifest.json",
+    "sha256": "caedc10867051ff375ee7cc7fb9533247524b1b2b2b6db7fd133e7bcc929d024"
+  },
+  "input": {
+    "path": "../pgpt-runs/PG379/PG43424-current-poller-boundaries-v2/begin.json",
+    "sha256": "611aa170fafa1f0fb3df22ac32a54e8348c031f352500d8b2fdc2e568976869a"
+  },
+  "terminal": {
+    "path": "../pgpt-runs/PG379/PG43424-current-poller-boundaries-v2/terminal.json",
+    "sha256": "c9ef86cc5c4b6b5a396be6c50772204bf3aa14cfa5e549ca7c71e46947439234"
+  },
+  "originalExec": {
+    "path": "../pgpt-runs/PG379/PG43424-current-poller-boundaries-v2/selected.exec",
+    "sha256": "db3a671302a685847241d6bc9b144bc07fa9ea6b29071801ef3d9f672c1ae98c"
+  },
+  "originalXml": {
+    "path": "../pgpt-runs/PG379/PG43424-current-poller-boundaries-v2/xml/TEST-junit-jupiter.xml",
+    "sha256": "e4a6bc5a35097a3716137494a94b07a7fe42bee278a27b8830e1e6cb0e76e68e"
+  },
+  "sanitizedXml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43424-current-poller-boundaries-v2/sanitized-junit.xml",
+    "sha256": "d447c1488b90d1ca0a5aae15486a1166d6fa5732a4cd7fe9a6d4f7bdc39029df"
+  },
+  "sanitizedCoverage": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43424-current-poller-boundaries-v2/coverage-unfiltered.tsv",
+    "sha256": "907d3a5bce9ea48f7eb56ee2e1fbadc8c21d90e45d549dc10bad44cd81b4c9da"
+  },
+  "fixtureReuse": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/FilesystemHealthObservationTest.java",
+      "sha256": "adbf77d02398cecb4881e65405a6551bacb1e616c7d7f4096e160efa276d693d"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClockTest.java",
+      "sha256": "d1c23014fc0e162c9c2e341a3ad6a2b69869efa91f9f1bcb25d158beccb5690e"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.java",
+      "sha256": "5686e480c3ed1f0dd6b14c0e55ca4657726823204f6aeeb63524cd9b57e6f485"
+    }
+  ],
+  "actualTestDependenciesOnly": [
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.class",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClockTest.class",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClockTest$UnformattableFailure.class",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClockTest$FixtureClock.class",
+    "dev/codex/schubert/nk/batch/monitoring/FilesystemHealthObservationTest.class",
+    "dev/codex/schubert/nk/batch/monitoring/FilesystemHealthObservationTest$UnformattableIOException.class",
+    "dev/codex/schubert/nk/batch/monitoring/FilesystemHealthObservationTest$FixtureStore.class"
+  ],
+  "suppliedFileStoreClassNotInitialized": true,
+  "actualFileStoreUse": 0,
+  "actualClockSourceUse": 0,
+  "networkActions": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
