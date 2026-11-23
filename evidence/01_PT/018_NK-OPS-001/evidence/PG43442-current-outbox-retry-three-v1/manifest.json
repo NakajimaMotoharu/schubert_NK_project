@@ -1,0 +1,273 @@
+{
+  "run": "PG43442-current-outbox-retry-three-v1",
+  "wbs": "WBS-P004-05/2",
+  "source": "7e044393e7d15aaf5a7878d2e5df1f1ae1c87a23",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "terminalAtUTC": "2026-11-23T07:19:48.381003+00:00",
+  "actualRunTerminalAtUTC": "2026-11-23T07:19:40.825689+00:00",
+  "actualExit": 0,
+  "executed": 3,
+  "applicable": 3,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRunWithinExactSelection": 0,
+  "testIds": {
+    "PT-OUT-JDBC005": "sentAndFailureCompareAndSetUseIndependentRetryTableAndCap",
+    "PT-OUT-JDBC006": "argumentsAndTransactionsPreventSqlAndRespectErrorBounds",
+    "PT-OUT-JDBC007": "ordinarySqlFaultsCloseOnlyRepositoryResourcesAndRemainFailures"
+  },
+  "independentOracle": {
+    "path": "evidence/01_PT/006_NK-MSG-002/007_JdbcOutbox自己所有境界単体仕様.md",
+    "sha256": "008c242626e18643f932f8abd45f46a4deae9267526bc6ef403ce63b4210912a"
+  },
+  "unchangedCompiledInputReused": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43436-current-returned-outbox-null-v1/manifest.json",
+    "sha256": "2b42369d220bbd5398649414b12634aeb312e51ef1f14665cd9dd891469b5b86"
+  },
+  "originalLimitedCases": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39653-bug3296-business-outbox-unit-v1/manifest.json",
+    "sha256": "ca73000f39d0638679101e16b6afc68b9d4f74aa96ffa737b5eca6715609c36c"
+  },
+  "frozenFixtureSource": {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxPortTest.java",
+    "sha256": "02c2b2bcd516450620ccccd81d822bf6a8e6de44e957a4d5b6e5b163c098ab0a"
+  },
+  "compiledTenPhysical": {
+    "dev/codex/schubert/nk/api/database/package-info.class": {
+      "sha256": "3cca901840ef72be16132784cbf33e12e200e334b58e3807a4a03d0cdb2ef69a",
+      "samePrevious": true
+    },
+    "dev/codex/schubert/nk/api/database/RequiredColumn.class": {
+      "sha256": "419998b0126541856fba9c5989cbd3df66e1ad7f6798c46463ee141a3ceff2ef",
+      "samePrevious": true
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry.class": {
+      "sha256": "adbf88229a5f9ee9450d663b40d1c14d8cb2fdb7ab284d1e033ea2efb0007350",
+      "samePrevious": false
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata.class": {
+      "sha256": "25fc2bfed69e1dcee0b9213f8448a45e3f3cc8eba3ed20d1cfdb31d0503284db",
+      "samePrevious": true
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/package-info.class": {
+      "sha256": "8b27ff9b19d5dc8b5889a1a4fe3488ce50fb6dc83ddd543b38e5f2cbc212bb9e",
+      "samePrevious": true
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule.class": {
+      "sha256": "6ea9674669c18745a2f7c478f94959eaeceb7f3df609b0b2da015950e654b0be",
+      "samePrevious": true
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxIntegrityException.class": {
+      "sha256": "aaa42a91d293116e9a25e9d8c8f51641acdd75572a56d403ada8e45acef3a190",
+      "samePrevious": true
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination.class": {
+      "sha256": "d1935ee173a91313ee76ae4ce03c0e788261e3db32882087cb7e1123608b88b9",
+      "samePrevious": true
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest.class": {
+      "sha256": "974d34dc68a2ff9b13a9b32a8fda4e72e09640440c4ac64577e0538b148c91b7",
+      "samePrevious": false
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository.class": {
+      "sha256": "1d3dda01fd81bd74b9854cf2126324dd47d72597eea167a5a47a45a55501114c",
+      "samePrevious": true
+    }
+  },
+  "physicalDelta": [
+    "OutboxEntry.class",
+    "OutboxRequest.class"
+  ],
+  "projectInitialization": [
+    "dev/codex/schubert/nk/api/database/RequiredColumn",
+    "dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxPortTest",
+    "dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxPortTest$Fixture",
+    "dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule"
+  ],
+  "individuallyRelevantMethods": {
+    "markSent": [
+      {
+        "descriptor": "(Ljava/sql/Connection;Ldev/codex/schubert/nk/api/messaging/outbound/OutboxEntry;Ljava/time/Instant;)Z",
+        "rawCounters": [
+          "INSTRUCTION:0:62",
+          "BRANCH:0:2",
+          "LINE:0:16",
+          "COMPLEXITY:0:2",
+          "METHOD:0:1",
+          "CLASS:0:0"
+        ]
+      }
+    ],
+    "markFailure": [
+      {
+        "descriptor": "(Ljava/sql/Connection;Ldev/codex/schubert/nk/api/messaging/outbound/OutboxEntry;Ljava/time/Instant;Ljava/lang/String;Ljava/lang/String;)Z",
+        "rawCounters": [
+          "INSTRUCTION:0:104",
+          "BRANCH:0:2",
+          "LINE:0:26",
+          "COMPLEXITY:0:2",
+          "METHOD:0:1",
+          "CLASS:0:0"
+        ]
+      }
+    ],
+    "closeRows": [
+      {
+        "descriptor": "(Ljava/sql/ResultSet;Ljava/lang/Throwable;)V",
+        "rawCounters": [
+          "INSTRUCTION:4:11",
+          "BRANCH:2:2",
+          "LINE:1:6",
+          "COMPLEXITY:2:1",
+          "METHOD:0:1",
+          "CLASS:0:0"
+        ]
+      }
+    ],
+    "closeStatement": [
+      {
+        "descriptor": "(Ljava/sql/PreparedStatement;Ljava/lang/Throwable;)V",
+        "rawCounters": [
+          "INSTRUCTION:4:11",
+          "BRANCH:2:2",
+          "LINE:1:6",
+          "COMPLEXITY:2:1",
+          "METHOD:0:1",
+          "CLASS:0:0"
+        ]
+      }
+    ],
+    "requireTransaction": [
+      {
+        "descriptor": "(Ljava/sql/Connection;)V",
+        "rawCounters": [
+          "INSTRUCTION:0:13",
+          "BRANCH:0:2",
+          "LINE:0:4",
+          "COMPLEXITY:0:2",
+          "METHOD:0:1",
+          "CLASS:0:0"
+        ]
+      }
+    ],
+    "requireError": [
+      {
+        "descriptor": "(Ljava/lang/String;ILjava/lang/String;)Ljava/lang/String;",
+        "rawCounters": [
+          "INSTRUCTION:0:24",
+          "BRANCH:0:6",
+          "LINE:0:6",
+          "COMPLEXITY:0:4",
+          "METHOD:0:1",
+          "CLASS:0:0"
+        ]
+      }
+    ]
+  },
+  "unfilteredPerClass": {
+    "dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository": {
+      "counters": {
+        "INSTRUCTION": [
+          188,
+          511
+        ],
+        "BRANCH": [
+          17,
+          23
+        ],
+        "LINE": [
+          38,
+          140
+        ],
+        "COMPLEXITY": [
+          13,
+          20
+        ],
+        "METHOD": [
+          1,
+          12
+        ],
+        "CLASS": [
+          0,
+          1
+        ]
+      },
+      "classSha256": "1d3dda01fd81bd74b9854cf2126324dd47d72597eea167a5a47a45a55501114c",
+      "crc": "121ba7e51653e855",
+      "distinctCoveredProbes": 114
+    },
+    "dev/codex/schubert/nk/api/database/RequiredColumn": {
+      "counters": {
+        "INSTRUCTION": [
+          13,
+          4
+        ],
+        "BRANCH": [
+          1,
+          1
+        ],
+        "LINE": [
+          3,
+          2
+        ],
+        "COMPLEXITY": [
+          2,
+          1
+        ],
+        "METHOD": [
+          1,
+          1
+        ],
+        "CLASS": [
+          0,
+          1
+        ]
+      },
+      "classSha256": "419998b0126541856fba9c5989cbd3df66e1ad7f6798c46463ee141a3ceff2ef",
+      "crc": "acbdd66ef7fda4d1",
+      "distinctCoveredProbes": 1
+    }
+  },
+  "session": {
+    "labelBytesHex": "504734333434322d4f555433",
+    "startMillis": 1795418380046,
+    "endMillis": 1795418380654
+  },
+  "candidateRegularAPIProved": false,
+  "allCounterClosure": false,
+  "input": {
+    "path": "../pgpt-runs/PG379/PG43442-current-outbox-retry-three-v1/begin.json",
+    "sha256": "ce5d398f97c690313ab92431d29d1fb0c7bf2bd53d50d254a7c9f390b3a10a2f"
+  },
+  "terminal": {
+    "path": "../pgpt-runs/PG379/PG43442-current-outbox-retry-three-v1/terminal.json",
+    "sha256": "4a21d6868cfcc8bee36e8678c5ae3b6702ddc7c4608c205f04ed75aa43109ce0"
+  },
+  "originalExec": {
+    "path": "../pgpt-runs/PG379/PG43442-current-outbox-retry-three-v1/selected.exec",
+    "sha256": "af6b78a1c356225095842e13bbfdc8fa20c8b11537d4921a4d7e16f2fc33f1fb"
+  },
+  "originalXml": {
+    "path": "../pgpt-runs/PG379/PG43442-current-outbox-retry-three-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "52660f65ea5268c6451725a31c0ae5851c9dcb5fcfe0f5733ca96d689a71285b"
+  },
+  "sanitizedXml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43442-current-outbox-retry-three-v1/sanitized-junit.xml",
+    "sha256": "23c94af34ae58f1424152ec5d5aa87091ec639e4c504be9a2b915df9f0baddd9"
+  },
+  "sanitizedCoverage": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43442-current-outbox-retry-three-v1/coverage-unfiltered.tsv",
+    "sha256": "8fad719bee188b115a0ca1df56f3135d28b6d94be532381aa7f5b2362fff756d"
+  },
+  "actualJdbcConnection": 0,
+  "actualDriver": 0,
+  "actualBroker": 0,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
