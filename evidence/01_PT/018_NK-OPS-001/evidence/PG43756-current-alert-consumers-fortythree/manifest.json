@@ -1,0 +1,862 @@
+{
+  "run": "PG43756",
+  "source": "3fcc7028599a283fa2446a73b322382e4ebdbf95",
+  "productionCoreMain": "98a8f53578cab17d9b67b1a16218179d39d4bc8f",
+  "wbs": [
+    "WBS-F03/2-2-b"
+  ],
+  "terminalAtUTC": "2026-11-23T16:42:13.976506+00:00",
+  "actualExit": 0,
+  "counts": {
+    "tests": 43,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "originalExistingTestIds": 43,
+  "fixtures": {
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AsyncQueueMonitorTest.java": {
+      "sha256": "3022f2f15d89860c9fc174b409be0bcea9413e6ea8bdb1ad57ced64ccd14e4b4",
+      "specification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1674_AsyncQueue警報_単体テスト仕様書.md",
+        "sha256": "b8052f8bdc506e3ce7ac607a96685b50d91fee4e6b8d597f9e5d6f961e127b3d"
+      },
+      "methods": [
+        "asyncQueue001KnownNormalAndMissingRemainDifferentWithoutInventedEvents",
+        "asyncQueue002ExactAbsoluteAndRatioBoundariesUseIndependentGoldenValues",
+        "asyncQueue003UnknownAndPartialLowEvidenceBreakNormalRecoveryWithoutClosing",
+        "asyncQueue004CriticalStaysStickyUntilTenNormalMinutesAndConfirmedCause",
+        "asyncQueue005ExplicitGapCannotBridgeTheFiveMinuteNormalWindow",
+        "asyncQueue006InvalidInputsAndReversedElapsedCannotMutatePriorEvent",
+        "asyncQueue007ConcurrentSameOwnerAndIndependentOwnerHaveExactCounts",
+        "asyncByte002ByteUsageInvariantsAndGeneratedContractsHaveIndependentOracles",
+        "asyncQueue008GeneratedEvaluationContractsHaveIndependentFieldAndPlatformOracles"
+      ]
+    },
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AsyncQueueRecoveryCompositionTest.java": {
+      "sha256": "3d4121f4daddd2791ebfc677ccb80da6dd711ad3de5de054165585082588d488",
+      "specification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/2661_Async供給監視元whole24_単体テスト仕様.md",
+        "sha256": "e26afe181b0cd176dc91ddc4ce3a774278f976bfe50afb6ec78d430cb246508a"
+      },
+      "methods": [
+        "partialByteCriticalRequiresFreshContinuousRecoveryAndCauseConfirmation",
+        "simultaneousCriticalCountAndBytesCountAsOneObservation"
+      ]
+    },
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/DlqHealthMonitorTest.java": {
+      "sha256": "4a0ab80de9f2b87320a295f5f054e0e0abbb06e241e8f7c1d76200dd7321eaab",
+      "specification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1689_DLQ供給観測警報_単体テスト仕様書.md",
+        "sha256": "635308ecdd7c5cfabd0141623a9dcc970ef1dc72a80064a2dae46e8d238d7a1e"
+      },
+      "methods": [
+        "dlqMon001KnownEmptyAndUnknownRemainDistinctWithoutInventingEvents",
+        "dlqMon002CoherentEntryMatrixUsesIndependentSeverityAndAllServiceKeys",
+        "dlqMon003NormalEvenConfirmedCannotAutoCloseWarningOrCritical",
+        "dlqMon004UnknownGapAndEscalationPreserveExactHistoricalEvents",
+        "dlqMon005NullNegativeIncoherentAndReversedInputsCannotMutateEvent",
+        "dlqMon006ConcurrentSameOwnerAndSeparateOwnerKeepExactCounts",
+        "dlqMon007ObservationGeneratedContractsUseIndependentLongAndBooleanOracles",
+        "dlqMon008EvaluationGeneratedContractsUseIndependentBooleanAndIdentityOracles"
+      ]
+    },
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/ExpiryBacklogMonitorTest.java": {
+      "sha256": "86698293f2c2c45a6c0fb77a470616778ebbfb110e3a07527e2b0115430a0b08",
+      "specification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1676_Expiry件数警報_単体テスト仕様書.md",
+        "sha256": "7e695969610798798d4008c7319f5a0d01cd219782433298001221d40f5a018c"
+      },
+      "methods": [
+        "expiryMon001KnownNormalAndUnknownDoNotInventAnEvent",
+        "expiryMon002ExactCountBoundariesHaveFixedSeverityAndKey",
+        "expiryMon003MissingBreaksWarningRecoveryWithoutErasingOldEvent",
+        "expiryMon004CriticalStaysStickyUntilTenNormalMinutesAndCauseConfirmed",
+        "expiryMon005ExplicitGapRestartsTheFiveMinuteWarningRecovery",
+        "expiryMon006NullNegativeAndReversedTimeCannotChangeAcceptedEvent",
+        "expiryMon007ConcurrentSameOwnerAndIndependentOwnerHaveExactCounts",
+        "expiryMon008GeneratedEvaluationContractsUseIndependentBooleanAndIdentityHashes"
+      ]
+    },
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/IntegrityHealthMonitorTest.java": {
+      "sha256": "3ff7dc0dad30e7dc1ba6b7e640fad3c6cb1ebc640e3320f0899feb0b144b3810",
+      "specification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1687_Integrity供給観測警報_単体テスト仕様書.md",
+        "sha256": "fa8a4b925d01bc07e0309853d44418f9afe6c55afa3576f51ae78e7dc59544ef"
+      },
+      "methods": [
+        "integrityMon001KnownZeroAndMissingDoNotInventOrConflateEvents",
+        "integrityMon002OneOrMaximumFailureIsCriticalWithFixedIdentity",
+        "integrityMon003NormalEvenConfirmedAndMaximumElapsedCannotAutoClose",
+        "integrityMon004UnknownAndExplicitGapKeepOldEventAndNewViolationHistory",
+        "integrityMon005NullNegativeAndReversedTimeRejectWithoutMutatingEvent",
+        "integrityMon006EveryClosedServiceUsesItsOwnImmutableLogicalKey",
+        "integrityMon007ConcurrentCallersKeepExactCountAndIndependentOwner",
+        "integrityMon008GeneratedEvaluationUsesIndependentBooleanAndIdentityOracles"
+      ]
+    },
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/RestartHealthMonitorTest.java": {
+      "sha256": "0944cf9e5c9be4a5e22c3adea792f35fdfe53c7af77827138d0c17ab6e46e0ae",
+      "specification": {
+        "path": "evidence/01_PT/018_NK-OPS-001/1685_Restart供給観測・rateLimit是正_単体テスト仕様書.md",
+        "sha256": "f4156357ec77057ff1300434295975e1bbddd4663f64233e757c35342ddd9f47"
+      },
+      "methods": [
+        "restartMon001KnownNormalUnknownAndPartialFlagsRemainDistinct",
+        "restartMon002CountAndRateLimitUseIndependentFixedGoldenMatrix",
+        "restartMon003MissingOrPartialNormalCannotBridgeFiveMinuteRecovery",
+        "restartMon004RateLimitCriticalNeedsTenMinutesAndCauseConfirmation",
+        "restartMon005GapNullNegativeAndReversedTimeCannotFakeRecovery",
+        "restartMon006ConcurrentSameOwnerAndDifferentOwnerKeepExactEvents",
+        "restartMon007EveryClosedServicePreservesCountAndIndependentFlagIdentity",
+        "restartMon008GeneratedEvaluationContractsUseIndependentBooleanAndIdentityOracles"
+      ]
+    }
+  },
+  "productJar": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43690-current-monitor-lock-compile-v3/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "5450a2884f297fce02052a152763ec3dbce82f6fa4e8fc3348b7c2e1397dfc25"
+  },
+  "productClassSHA256": {
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.class": "c06ee5ef5a9ed3b2af734ad391032a3b24c98ddf1755412b3ee0fabcf07ae64a",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance.class": "a970748255e48eba8630f16d92620d38749205b11c82ab83643b66bccec515f3",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition.class": "1b3e729ba49ac50fe0c7274b2aebc1f415e64cdd9b1ecd853e7d0d7ffb7c2389",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event.class": "66b736642a640060d7eca336282c566727413d6a618c404f69763a754d13e7ac",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service.class": "ffafebf7acde9841c62d3b2ce8a358770ece99a5d5456f7a415c8ff79a63c848",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity.class": "bedd266b398c2f063dfc4e78679cbaca9018b157b11f93d20b1797c000a7b357",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State.class": "bf1a0a3462feeb22d70c8bd3e41c2a1f4949ea6cad42276a854db7e19f0e2e6f",
+    "dev/codex/schubert/nk/batch/monitoring/AlertThresholds.class": "920342ff7ee7befb1e892e83e41e0ee2c1b363d4e47d115f10dc5a48ca298a77",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClock.class": "3e4ccfbd83e8bf28cde448b8ac493008416e915553f1c26610619fb2e2e95b1a",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringPoller.class": "417e264c4f703f02968f7d619978e9d8aba9a65ce5e64f7e950ed8eb42ae3024",
+    "dev/codex/schubert/nk/batch/monitoring/ObservationContext.class": "b3ff5e32cbbc02848950edf814043343fb53c25eda1968aa1e8ae4dafed23644",
+    "dev/codex/schubert/nk/batch/monitoring/AsyncQueueMonitor.class": "cc02a1f97e9d6071eb6b0b2db6f422640eafbeb4143127e3e0dbca39c4e45307",
+    "dev/codex/schubert/nk/batch/monitoring/AsyncQueueMonitor$ByteUsage.class": "cb30ddcdeb9a2b8a1e651f9e452f34e6a8d09f7a21d28aaf96591239463f9fc8",
+    "dev/codex/schubert/nk/batch/monitoring/AsyncQueueMonitor$Evaluation.class": "6db71205155fa9787fafcecc901f985b4f3618afc75358026a3e9548864852c3",
+    "dev/codex/schubert/nk/batch/monitoring/DlqHealthMonitor.class": "56e81b4b26386ef9e00740f5eeb430bbcc82ba99aede80fc9abd09a9a4565870",
+    "dev/codex/schubert/nk/batch/monitoring/DlqHealthMonitor$Observation.class": "0ecdb1ffeb207cadd40d7bbf4c57c3ff6cea30a376df3729ee715f0a277a00e7",
+    "dev/codex/schubert/nk/batch/monitoring/DlqHealthMonitor$Evaluation.class": "33b958d25e1d01ebc0d23094f6fa17a3e007f1929da77cb0df29f85cd040342d",
+    "dev/codex/schubert/nk/batch/monitoring/ExpiryBacklogMonitor.class": "32613d1ffd47b12059809bceb4c66f20376638c7ba564af97bff7794c9c33c99",
+    "dev/codex/schubert/nk/batch/monitoring/ExpiryBacklogMonitor$Evaluation.class": "5ef5d98709842d33780fba6e82e412c7d7468209480c4354f60cd4adc340e864",
+    "dev/codex/schubert/nk/batch/monitoring/IntegrityHealthMonitor.class": "f1518d3e9ca2f22c5fb48c126cb28f5ee436c1014b9ce9d18925c0c6ed9648bb",
+    "dev/codex/schubert/nk/batch/monitoring/IntegrityHealthMonitor$Evaluation.class": "4cd38baabcdac53783d9ef4316d990e2ab778dcab133b477ce21ac827c3baa54",
+    "dev/codex/schubert/nk/batch/monitoring/RestartHealthMonitor.class": "3283ff32ba8bc0b61735ee0ebace776699e0092bd88ff0483f6037b1dccb3918",
+    "dev/codex/schubert/nk/batch/monitoring/RestartHealthMonitor$Evaluation.class": "c5fa3ece61c14c7f8ca763abf2396023c777d2393afb6b7577b90aa3324b61ac"
+  },
+  "fullClosureCounters": {
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle": {
+      "INSTRUCTION": [
+        34,
+        79
+      ],
+      "BRANCH": [
+        6,
+        4
+      ],
+      "LINE": [
+        3,
+        21
+      ],
+      "COMPLEXITY": [
+        5,
+        7
+      ],
+      "METHOD": [
+        1,
+        6
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance": {
+      "INSTRUCTION": [
+        5,
+        35
+      ],
+      "BRANCH": [
+        0,
+        0
+      ],
+      "LINE": [
+        0,
+        3
+      ],
+      "COMPLEXITY": [
+        1,
+        4
+      ],
+      "METHOD": [
+        1,
+        4
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition": {
+      "INSTRUCTION": [
+        9,
+        131
+      ],
+      "BRANCH": [
+        0,
+        0
+      ],
+      "LINE": [
+        0,
+        13
+      ],
+      "COMPLEXITY": [
+        2,
+        3
+      ],
+      "METHOD": [
+        2,
+        3
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event": {
+      "INSTRUCTION": [
+        0,
+        45
+      ],
+      "BRANCH": [
+        0,
+        0
+      ],
+      "LINE": [
+        0,
+        16
+      ],
+      "COMPLEXITY": [
+        0,
+        8
+      ],
+      "METHOD": [
+        0,
+        8
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service": {
+      "INSTRUCTION": [
+        5,
+        75
+      ],
+      "BRANCH": [
+        0,
+        0
+      ],
+      "LINE": [
+        0,
+        7
+      ],
+      "COMPLEXITY": [
+        1,
+        4
+      ],
+      "METHOD": [
+        1,
+        4
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity": {
+      "INSTRUCTION": [
+        9,
+        41
+      ],
+      "BRANCH": [
+        0,
+        0
+      ],
+      "LINE": [
+        0,
+        4
+      ],
+      "COMPLEXITY": [
+        2,
+        3
+      ],
+      "METHOD": [
+        2,
+        3
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$State": {
+      "INSTRUCTION": [
+        10,
+        238
+      ],
+      "BRANCH": [
+        1,
+        23
+      ],
+      "LINE": [
+        2,
+        52
+      ],
+      "COMPLEXITY": [
+        1,
+        22
+      ],
+      "METHOD": [
+        0,
+        11
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/monitoring/AlertThresholds": {
+      "INSTRUCTION": [
+        283,
+        155
+      ],
+      "BRANCH": [
+        75,
+        35
+      ],
+      "LINE": [
+        47,
+        25
+      ],
+      "COMPLEXITY": [
+        54,
+        26
+      ],
+      "METHOD": [
+        16,
+        9
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClock": {
+      "INSTRUCTION": [
+        91,
+        0
+      ],
+      "BRANCH": [
+        4,
+        0
+      ],
+      "LINE": [
+        19,
+        0
+      ],
+      "COMPLEXITY": [
+        4,
+        0
+      ],
+      "METHOD": [
+        2,
+        0
+      ],
+      "CLASS": [
+        1,
+        0
+      ]
+    },
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringPoller": {
+      "INSTRUCTION": [
+        50,
+        82
+      ],
+      "BRANCH": [
+        1,
+        7
+      ],
+      "LINE": [
+        17,
+        19
+      ],
+      "COMPLEXITY": [
+        2,
+        6
+      ],
+      "METHOD": [
+        1,
+        3
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/monitoring/ObservationContext": {
+      "INSTRUCTION": [
+        15,
+        36
+      ],
+      "BRANCH": [
+        1,
+        1
+      ],
+      "LINE": [
+        0,
+        7
+      ],
+      "COMPLEXITY": [
+        4,
+        4
+      ],
+      "METHOD": [
+        3,
+        4
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/monitoring/AsyncQueueMonitor": {
+      "INSTRUCTION": [
+        0,
+        114
+      ],
+      "BRANCH": [
+        0,
+        12
+      ],
+      "LINE": [
+        0,
+        17
+      ],
+      "COMPLEXITY": [
+        0,
+        10
+      ],
+      "METHOD": [
+        0,
+        4
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/monitoring/AsyncQueueMonitor$ByteUsage": {
+      "INSTRUCTION": [
+        0,
+        38
+      ],
+      "BRANCH": [
+        0,
+        4
+      ],
+      "LINE": [
+        0,
+        5
+      ],
+      "COMPLEXITY": [
+        0,
+        8
+      ],
+      "METHOD": [
+        0,
+        6
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/monitoring/AsyncQueueMonitor$Evaluation": {
+      "INSTRUCTION": [
+        0,
+        35
+      ],
+      "BRANCH": [
+        0,
+        0
+      ],
+      "LINE": [
+        0,
+        4
+      ],
+      "COMPLEXITY": [
+        0,
+        7
+      ],
+      "METHOD": [
+        0,
+        7
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/monitoring/DlqHealthMonitor": {
+      "INSTRUCTION": [
+        0,
+        95
+      ],
+      "BRANCH": [
+        0,
+        6
+      ],
+      "LINE": [
+        0,
+        15
+      ],
+      "COMPLEXITY": [
+        0,
+        7
+      ],
+      "METHOD": [
+        0,
+        4
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/monitoring/DlqHealthMonitor$Observation": {
+      "INSTRUCTION": [
+        0,
+        48
+      ],
+      "BRANCH": [
+        0,
+        8
+      ],
+      "LINE": [
+        0,
+        5
+      ],
+      "COMPLEXITY": [
+        0,
+        11
+      ],
+      "METHOD": [
+        0,
+        7
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/monitoring/DlqHealthMonitor$Evaluation": {
+      "INSTRUCTION": [
+        0,
+        29
+      ],
+      "BRANCH": [
+        0,
+        0
+      ],
+      "LINE": [
+        0,
+        4
+      ],
+      "COMPLEXITY": [
+        0,
+        6
+      ],
+      "METHOD": [
+        0,
+        6
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/monitoring/ExpiryBacklogMonitor": {
+      "INSTRUCTION": [
+        0,
+        80
+      ],
+      "BRANCH": [
+        0,
+        6
+      ],
+      "LINE": [
+        0,
+        14
+      ],
+      "COMPLEXITY": [
+        0,
+        7
+      ],
+      "METHOD": [
+        0,
+        4
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/monitoring/ExpiryBacklogMonitor$Evaluation": {
+      "INSTRUCTION": [
+        0,
+        29
+      ],
+      "BRANCH": [
+        0,
+        0
+      ],
+      "LINE": [
+        0,
+        4
+      ],
+      "COMPLEXITY": [
+        0,
+        6
+      ],
+      "METHOD": [
+        0,
+        6
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/monitoring/IntegrityHealthMonitor": {
+      "INSTRUCTION": [
+        0,
+        82
+      ],
+      "BRANCH": [
+        0,
+        6
+      ],
+      "LINE": [
+        0,
+        14
+      ],
+      "COMPLEXITY": [
+        0,
+        7
+      ],
+      "METHOD": [
+        0,
+        4
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/monitoring/IntegrityHealthMonitor$Evaluation": {
+      "INSTRUCTION": [
+        0,
+        29
+      ],
+      "BRANCH": [
+        0,
+        0
+      ],
+      "LINE": [
+        0,
+        4
+      ],
+      "COMPLEXITY": [
+        0,
+        6
+      ],
+      "METHOD": [
+        0,
+        6
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/monitoring/RestartHealthMonitor": {
+      "INSTRUCTION": [
+        0,
+        107
+      ],
+      "BRANCH": [
+        0,
+        12
+      ],
+      "LINE": [
+        0,
+        16
+      ],
+      "COMPLEXITY": [
+        0,
+        10
+      ],
+      "METHOD": [
+        0,
+        4
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "dev/codex/schubert/nk/batch/monitoring/RestartHealthMonitor$Evaluation": {
+      "INSTRUCTION": [
+        0,
+        35
+      ],
+      "BRANCH": [
+        0,
+        0
+      ],
+      "LINE": [
+        0,
+        4
+      ],
+      "COMPLEXITY": [
+        0,
+        7
+      ],
+      "METHOD": [
+        0,
+        7
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    }
+  },
+  "wrapperRawMissedCovered": {
+    "AsyncQueueMonitor": {
+      "LINE": [
+        0,
+        26
+      ],
+      "METHOD": [
+        0,
+        17
+      ],
+      "CLASS": [
+        0,
+        3
+      ],
+      "BRANCH": [
+        0,
+        16
+      ]
+    },
+    "DlqHealthMonitor": {
+      "LINE": [
+        0,
+        24
+      ],
+      "METHOD": [
+        0,
+        17
+      ],
+      "CLASS": [
+        0,
+        3
+      ],
+      "BRANCH": [
+        0,
+        14
+      ]
+    },
+    "ExpiryBacklogMonitor": {
+      "LINE": [
+        0,
+        18
+      ],
+      "METHOD": [
+        0,
+        10
+      ],
+      "CLASS": [
+        0,
+        2
+      ],
+      "BRANCH": [
+        0,
+        6
+      ]
+    },
+    "IntegrityHealthMonitor": {
+      "LINE": [
+        0,
+        18
+      ],
+      "METHOD": [
+        0,
+        10
+      ],
+      "CLASS": [
+        0,
+        2
+      ],
+      "BRANCH": [
+        0,
+        6
+      ]
+    },
+    "RestartHealthMonitor": {
+      "LINE": [
+        0,
+        20
+      ],
+      "METHOD": [
+        0,
+        11
+      ],
+      "CLASS": [
+        0,
+        2
+      ],
+      "BRANCH": [
+        0,
+        12
+      ]
+    }
+  },
+  "begin": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43756-current-alert-consumers-fortythree-v1/begin.json",
+    "sha256": "dad348743ed8eea86efb7ecdef8a6acc6f6e71fe95757f18a25748ee5b98b33e"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43756-current-alert-consumers-fortythree-v1/terminal.json",
+    "sha256": "77e3e700a54e848e44af42ad501d2213afcff4a13987b8caebe7bb955e0bcbec"
+  },
+  "xml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43756-current-alert-consumers-fortythree-v1/reports/TEST-junit-jupiter.xml",
+    "sha256": "0f0537d59679087cbdcf8039634562dd8582eedfa11160f7dc63e5fc99e1d77c"
+  },
+  "exec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43756-current-alert-consumers-fortythree-v1/unit.exec",
+    "sha256": "717e40848b9d543eb05dd514197e2c637b136725fab98f83aef3006fabd83372"
+  },
+  "raw": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43756-current-alert-consumers-fortythree-v1/raw.stdout",
+    "sha256": "ddc4b887c7870bbe1c0ec124d7524848e6bdb5c7f22cb399a76533c3a664dc20"
+  },
+  "exactMethodSelection": true,
+  "executionScope": "JVM supplied fixture values",
+  "actualExternalEnvironmentActions": 0,
+  "formalAcceptanceId": null,
+  "whole451": false
+}
