@@ -1,0 +1,244 @@
+{
+  "run": "PG43462",
+  "terminalAtUTC": "2026-11-23T08:05:55.903382+00:00",
+  "actualExit": 0,
+  "productionCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "source": "33fb6f7db1a497d3af293e30a654c95262b2ea91",
+  "basis": [
+    {
+      "path": "documents/300_SS/350_運用・品質/354_PT・IT試験観点詳細設計.md",
+      "sha256": "2707b6b3b53b87abc803626737dbdc1366eae695fdfda8ddb0c93e35ea11b2b7"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/355_Characterization Test実行準備・PG開始gate.md",
+      "sha256": "aff2aafe8f952de073e6dd2e7f5840152539f348f9816c6fa31e84ced93bef45"
+    }
+  ],
+  "requirements": [
+    "SCP-004",
+    "TST-001",
+    "TST-002",
+    "TST-003",
+    "TST-004",
+    "TST-005"
+  ],
+  "WBS": {
+    "WBS-P020-01.02/2": {
+      "line": 816,
+      "work": "比較/DIFマスク・未登録差分・欠落caseのnegative／同source証拠による受入判定",
+      "endCriteria": "比較/DIFマスク・未登録差分・欠落caseのnegativeの対象別完了記録を確認"
+    },
+    "WBS-P020-01.03/2": {
+      "line": 818,
+      "work": "CHR-G01～G06工具gate/manifest/source契約（各case実行はCHR）／同source証拠による受入判定",
+      "endCriteria": "CHR-G01～G06工具gate/manifest/source契約（各case実行はCHR）の対象別完了記録を確認"
+    },
+    "WBS-G03.05": {
+      "line": 851,
+      "work": "batch/bootstrap/migration/CHR工具のTestID/証跡/親子trace照合",
+      "endCriteria": "batch/bootstrap/migration/CHR工具のTestID/証跡/親子trace照合の対象別完了記録を確認"
+    },
+    "WBS-G13.07/2": {
+      "line": 859,
+      "work": "G13 最終候補での多対多join・差分再照合",
+      "endCriteria": "RD/UI/SS・20Program・CHR24・設定全体の多対多join/二重割当照合の対象別完了記録を確認。契約別の版差照合先で示した現在候補と、個別採用した設計・期待値を明示"
+    }
+  },
+  "originalWbs": {
+    "path": "../PMO/hourly-monitor/wbs66-20261116/58_直近20pp不足時の対象と予算判断を実行用の検収表へ渡す/WBS.tsv",
+    "sha256": "31f8be31c8b3a1c3bbc87d049f682d1523c285b83ec6471d91840f825ded3794"
+  },
+  "mappedClaims": [
+    {
+      "testId": "PT-CHR-DEF-016",
+      "method": "declaredRequiredFieldsAndSupplementalChecksMustBeNonblankTextArrays",
+      "clazz": "dev.codex.schubert.characterization.GateDefinitionDocumentsTest",
+      "scope": "ENTRIES_REQUIRED_AND_SUPPLEMENTAL_TYPES",
+      "workId": "WBS-P020-01.03/2",
+      "gates": [
+        "CHR-G01"
+      ],
+      "spec": {
+        "path": "evidence/01_PT/020_NK-CHR-001/074_比較ゲートの必須項目と補足観点の型_単体テスト仕様.md",
+        "sha256": "b5bd0894a1fdac577df8e200d4c4a557fea5a778afbba8b773d617067b138870"
+      },
+      "result": {
+        "path": "evidence/01_PT/020_NK-CHR-001/075_比較ゲートの必須項目と補足観点の型_実行結果.md",
+        "sha256": "c180043c79e3bbedd480541eb267656245a5d04841401eb2dbd194d2514d2019"
+      },
+      "originalStream": "PG43456-chr-definition-text-array-current-v2",
+      "verifiedInCurrentToolStream": "PG43460-comparator-name-types-current-v3",
+      "currentTestInput": {
+        "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionDocumentsTest.java",
+        "sha256": "69176861f75e7842b4129bc4c70bf553dce1062d66337eecfd76e10e243e7701"
+      }
+    },
+    {
+      "testId": "PT-CHR-DEF-017",
+      "method": "declaredFontAndSelectorNamesRejectNonTextEntries",
+      "clazz": "dev.codex.schubert.characterization.GateDefinitionDocumentsTest",
+      "scope": "FONT_AND_DIFFERENCE_SELECTOR_TYPES",
+      "workId": "WBS-P020-01.03/2",
+      "gates": [
+        "CHR-G01",
+        "CHR-G05"
+      ],
+      "spec": {
+        "path": "evidence/01_PT/020_NK-CHR-001/076_比較ゲートのフォントと差分selector型_単体テスト仕様.md",
+        "sha256": "6403598f5eef03579d604d4294dfc78477de6d04ad70ad85a7b06f2efcad8c46"
+      },
+      "result": {
+        "path": "evidence/01_PT/020_NK-CHR-001/077_比較ゲートのフォントと差分selector型_実行結果.md",
+        "sha256": "920d11c9bc780f6c590e9dd9a196f087b627aa28d1f5a725acea1ef916eb2589"
+      },
+      "originalStream": "PG43458-chr-font-selector-types-current-v3",
+      "verifiedInCurrentToolStream": "PG43460-comparator-name-types-current-v3",
+      "currentTestInput": {
+        "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionDocumentsTest.java",
+        "sha256": "69176861f75e7842b4129bc4c70bf553dce1062d66337eecfd76e10e243e7701"
+      }
+    },
+    {
+      "testId": "PT-CHR-DEF-018",
+      "method": "sharedDefinitionNameReaderUsesOnlyTextArrays",
+      "clazz": "dev.codex.schubert.characterization.GateDefinitionDocumentsTest",
+      "scope": "SHARED_TEXT_ARRAY_READER",
+      "workId": "WBS-P020-01.02/2",
+      "gates": [
+        "CHR-G01",
+        "CHR-G05"
+      ],
+      "spec": {
+        "path": "evidence/01_PT/020_NK-CHR-001/078_比較器とゲートの宣言名型_単体テスト仕様.md",
+        "sha256": "61a47d964d566e4cb9c06e30e605aef2ea75f304f490065de15adad60c00923c"
+      },
+      "result": {
+        "path": "evidence/01_PT/020_NK-CHR-001/079_比較器とゲートの宣言名型_実行結果.md",
+        "sha256": "02c9221386c8308fa73335c4c2e4d2382049853b93aba43b293f24972e477eef"
+      },
+      "originalStream": "PG43460-comparator-name-types-current-v3",
+      "verifiedInCurrentToolStream": "PG43460-comparator-name-types-current-v3",
+      "currentTestInput": {
+        "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionDocumentsTest.java",
+        "sha256": "69176861f75e7842b4129bc4c70bf553dce1062d66337eecfd76e10e243e7701"
+      }
+    },
+    {
+      "testId": "PT-CHR-CMP002",
+      "method": "acceptsTwentyFourPassCasesAndExactlySixteenApprovedDifferences",
+      "clazz": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+      "scope": "APPROVED_24_AND_16_SYNTHETIC",
+      "workId": "WBS-P020-01.02/2",
+      "gates": [
+        "CHR-G05"
+      ],
+      "spec": {
+        "path": "evidence/01_PT/020_NK-CHR-001/078_比較器とゲートの宣言名型_単体テスト仕様.md",
+        "sha256": "61a47d964d566e4cb9c06e30e605aef2ea75f304f490065de15adad60c00923c"
+      },
+      "result": {
+        "path": "evidence/01_PT/020_NK-CHR-001/079_比較器とゲートの宣言名型_実行結果.md",
+        "sha256": "02c9221386c8308fa73335c4c2e4d2382049853b93aba43b293f24972e477eef"
+      },
+      "originalStream": "PG43460-comparator-name-types-current-v3",
+      "verifiedInCurrentToolStream": "PG43460-comparator-name-types-current-v3",
+      "currentTestInput": {
+        "path": "program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorTest.java",
+        "sha256": "e70f9f31bd56649d2bf9eaf15995f8c87b98b684dfae67a331fd7cf82a0693d9"
+      }
+    },
+    {
+      "testId": "PT-CHR-DEF080",
+      "method": "rejectsNonArrayComparisonDefinitions",
+      "clazz": "dev.codex.schubert.characterization.ArtifactComparatorTest",
+      "scope": "INVALID_DEFINITIONS_DIAGNOSTIC",
+      "workId": "WBS-P020-01.02/2",
+      "gates": [
+        "CHR-G05"
+      ],
+      "spec": {
+        "path": "evidence/01_PT/020_NK-CHR-001/078_比較器とゲートの宣言名型_単体テスト仕様.md",
+        "sha256": "61a47d964d566e4cb9c06e30e605aef2ea75f304f490065de15adad60c00923c"
+      },
+      "result": {
+        "path": "evidence/01_PT/020_NK-CHR-001/079_比較器とゲートの宣言名型_実行結果.md",
+        "sha256": "02c9221386c8308fa73335c4c2e4d2382049853b93aba43b293f24972e477eef"
+      },
+      "originalStream": "PG43460-comparator-name-types-current-v3",
+      "verifiedInCurrentToolStream": "PG43460-comparator-name-types-current-v3",
+      "currentTestInput": {
+        "path": "program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorTest.java",
+        "sha256": "e70f9f31bd56649d2bf9eaf15995f8c87b98b684dfae67a331fd7cf82a0693d9"
+      }
+    }
+  ],
+  "originalStreams": {
+    "PG43456-chr-definition-text-array-current-v2": {
+      "manifest": {
+        "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG43456-chr-definition-text-array-current-v2/manifest.json",
+        "sha256": "37e1afbd1751622112f53031a04cb574684d8690a6a73b622b1fa6ff47b922a8"
+      },
+      "toolSource": "51dec0c08d3287b1c98ef1b51ade0d68ff2bff90",
+      "sanitizedJUnit": {
+        "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG43456-chr-definition-text-array-current-v2/sanitized-junit.xml",
+        "sha256": "2476aeecfbea83c2d3b725d6ee0972d63976d61b3be623a6c5ff1a0ddec24f62"
+      },
+      "execSha256": "ff45d7b70353ce5139fad07f694fa36fc2417f0783a58b5dbcd32f484e44da2d",
+      "tests": 21,
+      "selectedCounters": {
+        "LINE": 63,
+        "METHOD": 5,
+        "BRANCH": 36
+      }
+    },
+    "PG43458-chr-font-selector-types-current-v3": {
+      "manifest": {
+        "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG43458-chr-font-selector-types-current-v3/manifest.json",
+        "sha256": "9a795849b6009c9babbafc253c211865261a6f980a9f194e3a150397bef8eaef"
+      },
+      "toolSource": "ce6e89ce9c16fb9e2e9397c90803d15e188880dd",
+      "sanitizedJUnit": {
+        "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG43458-chr-font-selector-types-current-v3/sanitized-junit.xml",
+        "sha256": "254d0be2a06b3f3559580a4aecc9f31d37a0ae32c80153e5aca7cf7b2e6b2586"
+      },
+      "execSha256": "b26766eeb637895834d4068714a87d251477f589cb9d329a90c92ca26304aca3",
+      "tests": 22,
+      "selectedCounters": {
+        "LINE": 85,
+        "METHOD": 4,
+        "BRANCH": 56
+      }
+    },
+    "PG43460-comparator-name-types-current-v3": {
+      "manifest": {
+        "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG43460-comparator-name-types-current-v3/manifest.json",
+        "sha256": "1af1122941fc8ad7ed0079a3f6acf74ccd8cbe74f9e2aaf134bbc23cc2cf1a06"
+      },
+      "toolSource": "33fb6f7db1a497d3af293e30a654c95262b2ea91",
+      "sanitizedJUnit": {
+        "path": "evidence/01_PT/020_NK-CHR-001/evidence/PG43460-comparator-name-types-current-v3/selected-junit.redacted.xml",
+        "sha256": "eaeb8219f35455fea0b11474121ebe6bb97d6a0a1828f8dd48c30de1989a809e"
+      },
+      "execSha256": "801f2ed562c4d4b50ccdb4d530bffa796ca0d641f73c6d5b3730c9d9f43ee52b",
+      "tests": 25,
+      "selectedCounters": {
+        "lineCovered": 8,
+        "lineMissed": 0,
+        "methodCovered": 1,
+        "methodMissed": 0,
+        "branchCovered": 8,
+        "branchMissed": 0
+      }
+    }
+  },
+  "ordinaryNewTests": 0,
+  "proofsCombined": false,
+  "toolNewTests": 0,
+  "currentBaselineTree": "cd377044e4ca058ea219ca6a2fec82159559c72c",
+  "unresolved": [
+    "actual Current/NK conventional and owner-approved real runs",
+    "whole 451 of candidate",
+    "independent formal gate and exit dependencies"
+  ],
+  "formalAcceptanceId": null
+}
