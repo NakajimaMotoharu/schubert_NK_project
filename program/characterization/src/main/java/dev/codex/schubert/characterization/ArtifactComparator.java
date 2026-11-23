@@ -341,7 +341,7 @@ public final class ArtifactComparator {
       }
       valid &=
           require(
-              strings(rule.path("cases")).contains(caseId),
+              GateContractValidator.strings(rule.path("cases")).contains(caseId),
               "OBSERVATION_CASE_SCOPE:" + observationKey,
               failures);
       valid &=
@@ -361,7 +361,7 @@ public final class ArtifactComparator {
               failures);
       valid &=
           require(
-              strings(rule.path("selectors")).contains(selector),
+              GateContractValidator.strings(rule.path("selectors")).contains(selector),
               "OBSERVATION_SELECTOR:" + observationKey,
               failures);
 
@@ -590,12 +590,6 @@ public final class ArtifactComparator {
         && !pointer.contains("*")
         && !pointer.contains("..")
         && !pointer.endsWith("/");
-  }
-
-  private static List<String> strings(JsonNode values) {
-    List<String> result = new ArrayList<>();
-    values.forEach(value -> result.add(value.asText()));
-    return result;
   }
 
   private static boolean sessionActivityMatches(JsonNode artifact, boolean oldestActive) {

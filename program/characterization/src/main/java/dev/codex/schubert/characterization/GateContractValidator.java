@@ -19,6 +19,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Machine assertions for UI 264 and SS 355.
@@ -970,8 +971,9 @@ final class GateContractValidator {
     return Files.isRegularFile(path) ? read(path) : JSON.createObjectNode();
   }
 
-  private static List<String> strings(JsonNode node) {
-    if (!node.isArray()) {
+  /** Reads a definition array as text without coercing other JSON values. */
+  static List<String> strings(@Nullable JsonNode node) {
+    if (node == null || !node.isArray()) {
       return List.of();
     }
     List<String> values = new ArrayList<>();

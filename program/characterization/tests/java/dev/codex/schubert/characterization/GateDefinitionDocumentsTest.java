@@ -446,6 +446,22 @@ final class GateDefinitionDocumentsTest {
     assertAll(checks);
   }
 
+  /** PT-CHR-DEF-018: the gate and comparison share the typed name-list reader. */
+  @Test
+  void sharedDefinitionNameReaderUsesOnlyTextArrays() throws IOException {
+    var names = JSON.readTree("[\"first\",\"second\"]");
+    var original = names.deepCopy();
+    List<String> read = GateContractValidator.strings(names);
+    assertEquals(List.of("first", "second"), read);
+    assertEquals(original, names);
+    assertThrows(UnsupportedOperationException.class, () -> read.add("third"));
+    assertEquals(List.of(), GateContractValidator.strings(null));
+    for (String malformed :
+        List.of("null", "[]", "\"first\"", "{\"a\":\"first\"}", "[\"first\",7]", "[false]")) {
+      assertEquals(List.of(), GateContractValidator.strings(JSON.readTree(malformed)), malformed);
+    }
+  }
+
   @Test
   void concurrentValidAndInvalidDefinitionsRemainIndependent() throws Exception {
     List<JsonNode> valid = fixture();
