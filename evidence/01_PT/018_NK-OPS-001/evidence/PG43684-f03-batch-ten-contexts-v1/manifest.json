@@ -1,0 +1,362 @@
+{
+  "run": "PG43684",
+  "source": "a306e1faaefe7d2058c8b363a76dddda5c7a6804",
+  "productionCoreMain": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "executableSource": "7698011f52d6cc5f94c76413b6ab36971783b9c9",
+  "terminalAtUTC": "2026-11-23T13:53:55.115156+00:00",
+  "actualExit": 0,
+  "analysis": "RECONCILE_RETAINED_ACTUAL_RESULTS",
+  "physical": 10,
+  "dispositions": {
+    "CURRENT_BACKUP_TYPED_NOT_RUNTIME": 3,
+    "CURRENT_MONITOR_SCOPED_ANALYZER_AND_ORDINARY": 5,
+    "CURRENT_WRAPPER_SCOPED_TYPED_AND_ORDINARY": 2
+  },
+  "rows": [
+    {
+      "name": "dev/codex/schubert/nk/batch/backup/BackupCommitService.class",
+      "sha256": "0617df8ae283495ba2942b4df133048639e435f0a4b1b5ba1f91c0fc23cd557e",
+      "oldScope": "PG40482→PG41140",
+      "changedNeighborTypes": [],
+      "indirectDependencyEdges": [
+        [
+          "dev/codex/schubert/nk/batch/backup/BackupCommitService.class",
+          "dev/codex/schubert/nk/batch/repository/BackupStepRepository.class"
+        ],
+        [
+          "dev/codex/schubert/nk/batch/repository/BackupStepRepository.class",
+          "dev/codex/schubert/nk/batch/repository/BatchRunRepository.class"
+        ]
+      ],
+      "currentSource": {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+        "gitBlob": "898d594ed77d77817f04bb74cfdc8286e035f075"
+      },
+      "disposition": "CURRENT_BACKUP_TYPED_NOT_RUNTIME",
+      "typed": "PG43490",
+      "pmd": "PG43508",
+      "rawPmdBackupScope": 27,
+      "ordinaryCurrent": null,
+      "realBackupAndDb": "HOLD",
+      "wholeProductQuality": false
+    },
+    {
+      "name": "dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow$State.class",
+      "sha256": "414d1fcfc1ac0eacfb2f301b62a152e96411dc4971d86f38b113f414efb318c8",
+      "oldScope": "PG40482→PG41140",
+      "changedNeighborTypes": [
+        "dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow.class",
+        "dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor.class",
+        "dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.class",
+        "dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.class",
+        "dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor.class"
+      ],
+      "indirectDependencyEdges": [],
+      "currentSource": {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow.java",
+        "gitBlob": "ab4633071f0dda44c236a5d0ff2afd944c7e7161"
+      },
+      "disposition": "CURRENT_MONITOR_SCOPED_ANALYZER_AND_ORDINARY",
+      "typed": "PG42998",
+      "ordinary": "PG43028",
+      "wholeProductQuality": false,
+      "localCoverage": {
+        "LINE": [
+          0,
+          4
+        ],
+        "METHOD": [
+          0,
+          5
+        ],
+        "CLASS": [
+          0,
+          1
+        ],
+        "BRANCH": [
+          0,
+          0
+        ]
+      },
+      "rawPmdScopeUnresolved": 9
+    },
+    {
+      "name": "dev/codex/schubert/nk/batch/monitoring/FilesystemHealthMonitor.class",
+      "sha256": "4b5f52e679e8ab59441f3dcc783677f8ded48cc11a1779d92cb9f14d13687f52",
+      "oldScope": "PG41142",
+      "changedNeighborTypes": [
+        "dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.class"
+      ],
+      "indirectDependencyEdges": [],
+      "currentSource": {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/FilesystemHealthMonitor.java",
+        "gitBlob": "7901c92fbbc97f0a0e7e565c5fad87ef8f1684f2"
+      },
+      "disposition": "CURRENT_WRAPPER_SCOPED_TYPED_AND_ORDINARY",
+      "typed": [
+        "PG43488",
+        "PG43506"
+      ],
+      "ordinary": "PG43486",
+      "wholeProductQuality": false,
+      "rawTargetPmd": 0
+    },
+    {
+      "name": "dev/codex/schubert/nk/batch/monitoring/JvmHeapHealthMonitor.class",
+      "sha256": "a33e0bbdb9bd97fef9b5229e4c6f49a899bf94daab9f341e520ef556f1ca412c",
+      "oldScope": "PG41142",
+      "changedNeighborTypes": [
+        "dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.class"
+      ],
+      "indirectDependencyEdges": [],
+      "currentSource": {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/JvmHeapHealthMonitor.java",
+        "gitBlob": "0a671d192b641e7a5794fa6a619da80baa58ade1"
+      },
+      "disposition": "CURRENT_WRAPPER_SCOPED_TYPED_AND_ORDINARY",
+      "typed": [
+        "PG43488",
+        "PG43506"
+      ],
+      "ordinary": "PG43486",
+      "wholeProductQuality": false,
+      "rawTargetPmd": 0
+    },
+    {
+      "name": "dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor$Evaluation.class",
+      "sha256": "4520f34677461a9938ef53df0005cef519fcd935275bd3760972c9634e2bca12",
+      "oldScope": "PG41142",
+      "changedNeighborTypes": [
+        "dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor.class"
+      ],
+      "indirectDependencyEdges": [],
+      "currentSource": {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor.java",
+        "gitBlob": "2b86404b448cfa6de67eaf49343c6de8ae92820a"
+      },
+      "disposition": "CURRENT_MONITOR_SCOPED_ANALYZER_AND_ORDINARY",
+      "typed": "PG42998",
+      "ordinary": "PG43028",
+      "wholeProductQuality": false,
+      "localCoverage": {
+        "LINE": [
+          0,
+          4
+        ],
+        "METHOD": [
+          0,
+          6
+        ],
+        "CLASS": [
+          0,
+          1
+        ],
+        "BRANCH": [
+          0,
+          0
+        ]
+      },
+      "rawPmdScopeUnresolved": 9
+    },
+    {
+      "name": "dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor$Evaluation.class",
+      "sha256": "1b38b075d743689baed82583394134b4734758880cbe2ce1c895272cf4e7cce2",
+      "oldScope": "PG41142",
+      "changedNeighborTypes": [
+        "dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.class"
+      ],
+      "indirectDependencyEdges": [],
+      "currentSource": {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.java",
+        "gitBlob": "1cafedd6c6a4b78518f4384d05ed093132c367f0"
+      },
+      "disposition": "CURRENT_MONITOR_SCOPED_ANALYZER_AND_ORDINARY",
+      "typed": "PG42998",
+      "ordinary": "PG43028",
+      "wholeProductQuality": false,
+      "localCoverage": {
+        "LINE": [
+          0,
+          4
+        ],
+        "METHOD": [
+          0,
+          6
+        ],
+        "CLASS": [
+          0,
+          1
+        ],
+        "BRANCH": [
+          0,
+          0
+        ]
+      },
+      "rawPmdScopeUnresolved": 9
+    },
+    {
+      "name": "dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor$Evaluation.class",
+      "sha256": "4c680520112c542ebbcbc5c37c1abbd0a61ea9ddaf629713d2602b8d961523d3",
+      "oldScope": "PG41142",
+      "changedNeighborTypes": [
+        "dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.class"
+      ],
+      "indirectDependencyEdges": [],
+      "currentSource": {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.java",
+        "gitBlob": "00afc23d81b74bb595cbeeb091b99b5a6e74f2f1"
+      },
+      "disposition": "CURRENT_MONITOR_SCOPED_ANALYZER_AND_ORDINARY",
+      "typed": "PG42998",
+      "ordinary": "PG43028",
+      "wholeProductQuality": false,
+      "localCoverage": {
+        "LINE": [
+          0,
+          4
+        ],
+        "METHOD": [
+          0,
+          6
+        ],
+        "CLASS": [
+          0,
+          1
+        ],
+        "BRANCH": [
+          0,
+          0
+        ]
+      },
+      "rawPmdScopeUnresolved": 9
+    },
+    {
+      "name": "dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor$Evaluation.class",
+      "sha256": "0bd17c89de01ff0ec69a948aa9e8cc90f0e7682876bb718851451d5a057dc973",
+      "oldScope": "PG41142",
+      "changedNeighborTypes": [
+        "dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor.class"
+      ],
+      "indirectDependencyEdges": [],
+      "currentSource": {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor.java",
+        "gitBlob": "4535d8d7c7d6cd21347d1169adc0b60c09bca13f"
+      },
+      "disposition": "CURRENT_MONITOR_SCOPED_ANALYZER_AND_ORDINARY",
+      "typed": "PG42998",
+      "ordinary": "PG43028",
+      "wholeProductQuality": false,
+      "localCoverage": {
+        "LINE": [
+          0,
+          4
+        ],
+        "METHOD": [
+          0,
+          6
+        ],
+        "CLASS": [
+          0,
+          1
+        ],
+        "BRANCH": [
+          0,
+          0
+        ]
+      },
+      "rawPmdScopeUnresolved": 9
+    },
+    {
+      "name": "dev/codex/schubert/nk/batch/repository/BackupStepRepository$Terminal.class",
+      "sha256": "cca7bd3bd491b637229a389685b22c5f697bdf410fff073a3b1c876c3e09e1fe",
+      "oldScope": "PG40482→PG41140",
+      "changedNeighborTypes": [],
+      "indirectDependencyEdges": [
+        [
+          "dev/codex/schubert/nk/batch/repository/BackupStepRepository$Terminal.class",
+          "dev/codex/schubert/nk/batch/repository/BackupStepRepository.class"
+        ],
+        [
+          "dev/codex/schubert/nk/batch/repository/BackupStepRepository.class",
+          "dev/codex/schubert/nk/batch/repository/BatchRunRepository.class"
+        ]
+      ],
+      "currentSource": {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
+        "gitBlob": "02b7718a8ddbcc283b62a8d9f97c9225e0b5a6d0"
+      },
+      "disposition": "CURRENT_BACKUP_TYPED_NOT_RUNTIME",
+      "typed": "PG43490",
+      "pmd": "PG43508",
+      "rawPmdBackupScope": 27,
+      "ordinaryCurrent": null,
+      "realBackupAndDb": "HOLD",
+      "wholeProductQuality": false
+    },
+    {
+      "name": "dev/codex/schubert/nk/batch/repository/BackupStepRepository.class",
+      "sha256": "9056b3e7a2f02d5450f9fd98b6900f45b99c76513eff9dc10799a3d4ffc1dc10",
+      "oldScope": "PG40482→PG41140",
+      "changedNeighborTypes": [
+        "dev/codex/schubert/nk/batch/repository/BatchRunRepository.class"
+      ],
+      "indirectDependencyEdges": [],
+      "currentSource": {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
+        "gitBlob": "02b7718a8ddbcc283b62a8d9f97c9225e0b5a6d0"
+      },
+      "disposition": "CURRENT_BACKUP_TYPED_NOT_RUNTIME",
+      "typed": "PG43490",
+      "pmd": "PG43508",
+      "rawPmdBackupScope": 27,
+      "ordinaryCurrent": null,
+      "realBackupAndDb": "HOLD",
+      "wholeProductQuality": false
+    }
+  ],
+  "record": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43482-batch-admitted-278-current-physical-delta-v1/manifest.json",
+      "sha256": "50f08875438e8892277f0d8c541f39b593e16491470861db5174cdf6a76be918"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42998-c07-condition-window-absence-v2/manifest.json",
+      "sha256": "71d38e9dba282f599430168b30cec1fa09935a98d9827e9465f6303d01740b39"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43028-current-monitor-window-single-coverage-v1/manifest.json",
+      "sha256": "dc58786178d83f8b4ec69f17fd025c1a1f9471d7fbc460c21e5bfab5c1747d50"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43488-two-monitor-wrappers-spotbugs-v1/manifest.json",
+      "sha256": "d61539db5112376175118963ae41e9c9c6c1032d6a2dc78b925f5d08ee20eb3a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43506-current-two-monitor-wrappers-pmd-v1/manifest.json",
+      "sha256": "680af17a6ca232ab68a3eedbb460efb987de8c39e26547eebb42526040f980a3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43490-three-backup-linked-static-v1/manifest.json",
+      "sha256": "09c2b60e5dda9942f2ddb67a41ff32380b805a718f5e4a0b4bc4d9ec646e1af5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43508-current-two-backup-linked-pmd-v1/manifest.json",
+      "sha256": "a5ed4793a06431ab5711bdfc54b47583b9247220ffd729e1bcdad7a26d7ed0b0"
+    }
+  ],
+  "pinnedBatchJar": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42998-c07-condition-window-absence-v2/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "67984cee98423520add862115216219a86fb204d5a409bec829366ad79d4921b"
+  },
+  "actualTerminalXml": "PG43028",
+  "newDynamicProductPT": 0,
+  "newAnalyzerExecutions": 0,
+  "whole451": false,
+  "formalAcceptanceId": null,
+  "originalTerminal": {
+    "path": "../pgpt-runs/PG379/PG43684-f03-batch-ten-contexts-v1/terminal.json",
+    "sha256": "9e806d86402928824a11c10c7d23545a8259bef4f71176069cca7b33ac60fac9"
+  },
+  "discrepancyResolved": "PG43482の十件すべてで依存辺と現局所検査を同定。実Backup三物理は通常PT未計上。",
+  "preflight": "初回の突合は直接辺だけの前提で2件を未一致、直接8とBackupStepRepository経由2に分けて再照合。解析・試験の再実行なし。"
+}
