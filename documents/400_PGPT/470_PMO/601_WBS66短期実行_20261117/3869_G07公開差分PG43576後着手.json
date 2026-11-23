@@ -1,0 +1,82 @@
+{
+  "eventId": "PGPT-20261008-9314",
+  "groupId": "PG43610-g07-new-published-delta",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-23T11:46:28+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 75,
+      "remainingPercent": 25,
+      "resetsAt": 1795879772,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "source": "a7c6fe6c503a2b08aa45fd3bdec0ffaaeac9fc69",
+    "productionCoreMain": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+    "canonicalDesignSource": "7745de1fb04c8b9e2cfccc11103d7b3c57b090d7",
+    "run": "PG43610",
+    "workCategory": "REVIEW",
+    "managementWorkIds": [
+      "WBS-G07/current-post-publication-delta"
+    ],
+    "previousCheckpoint": "3868",
+    "planRow": {
+      "新版ID": "WBS-G07/current-post-publication-delta",
+      "第58版ID": "WBS-G07",
+      "費用主担当項目": "G07",
+      "改訂残pp": "0.35",
+      "原票": {
+        "path": "documents/400_PGPT/470_PMO/481_PGPT詳細WBS.json",
+        "sha256": "3f053f3bb8e0c5eeb2707dcde28bd6e4cb9e952da7f3abc04b72de41032ee5c1"
+      },
+      "先行ID": "PG43418 validated public delta end",
+      "終了条件": "Explicit range after previous cursor and sanitized artifact digest matching",
+      "既存の原票参照版": {
+        "commit": "49919d4ba38e853226db7159ba06c36ce3280ab2",
+        "artifact": {
+          "path": "documents/400_PGPT/470_PMO/481_PGPT詳細WBS.json",
+          "sha256": "4227e20a23b10ab8eecd2b69550dd7f58c79bf43a2f77b4c7c98ec943e83a2d9"
+        }
+      }
+    },
+    "currentPlan": [
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/11月22日_PGPT再開実行計画.txt",
+        "sha256": "80b9fdc306f664b9c03901a4bdfb34cf66997879676204cfa969858fd68a4016"
+      },
+      {
+        "path": "../PMO/hourly-monitor/更新判断-20261207/11月21日改訂/短期実行WBS.tsv",
+        "sha256": "a6efedcd63b4ef3bb1d133d939b0ddd7dc4b0147988ac33d668282a25c999527"
+      }
+    ],
+    "startScope": {
+      "workCategory": "REVIEW",
+      "target": "Sequential public commits after previous non-overlapping G07 cursor",
+      "startDependency": "PG43576 end cursor and current confirmed origin/dev-foundation, no private material needed",
+      "expectedEvidence": "Pinned gitleaks run on exact reachable commit range and read-only protected metadata check.",
+      "safety": "Public Git commit diff only, redacted results; no private/untracked/stash content, environment or network scanner",
+      "plannedNext": "Return to next independent currently testable quality criterion."
+    },
+    "groupCapPp": 0.55,
+    "estimateAtGroupStartPp": {
+      "low": 0,
+      "base": 0.2,
+      "high": 0.55
+    },
+    "completedOriginalRowPricePp": 0,
+    "sourceOwnership": "LOCAL_DEV_FOUNDATION_TRACKED_SNAPSHOT",
+    "knownOwnedRunInProgress": 0,
+    "costRevision": "PMO-remaining-v3-20261010",
+    "estimateRevisionSha256": "6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": null,
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "actualAllocatedPp": null
+  }
+}

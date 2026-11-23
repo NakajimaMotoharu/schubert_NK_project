@@ -1,0 +1,53 @@
+{
+  "run": "PG43610",
+  "source": "a7c6fe6c503a2b08aa45fd3bdec0ffaaeac9fc69",
+  "productionCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": [
+    "WBS-G07/current-post-publication-delta"
+  ],
+  "actualExit": 0,
+  "startedAtUTC": "2026-11-23T11:46:59.803566+00:00",
+  "terminalAtUTC": "2026-11-23T11:47:01.924777+00:00",
+  "command": [
+    "../toolchain/gitleaks-8.30.1-linux-x64/gitleaks",
+    "git",
+    "--no-banner",
+    "--redact=100",
+    "--log-opts=f8dddc21fb2722ccc1ea453b790fc547074597ad..a7c6fe6c503a2b08aa45fd3bdec0ffaaeac9fc69",
+    "--report-format=json",
+    "--report-path=../pgpt-runs/PG379/PG43610-g07-new-published-delta/report.json",
+    "."
+  ],
+  "scanner": {
+    "path": "../toolchain/gitleaks-8.30.1-linux-x64/gitleaks",
+    "sha256": "88f91962aa2f93ac6ab281d553b9e125f5197bbbce38f9f2437f7299c32e5509"
+  },
+  "priorCursor": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43576-g07-public-33-no-findings-v1/manifest.json",
+    "sha256": "a4ac9aaa3ac153b90d0867c1c7542fc2aa848eac90b14d90da83cddfccef4235"
+  },
+  "rangeStart": "f8dddc21fb2722ccc1ea453b790fc547074597ad",
+  "rangeEnd": "a7c6fe6c503a2b08aa45fd3bdec0ffaaeac9fc69",
+  "scannedPublicCommits": 21,
+  "changedTrackedPaths": 69,
+  "secretFindings": 0,
+  "redactedOutputOnly": true,
+  "redactedReport": {
+    "path": "../pgpt-runs/PG379/PG43610-g07-new-published-delta/report.json",
+    "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+  },
+  "redactedStdout": {
+    "path": "../pgpt-runs/PG379/PG43610-g07-new-published-delta/stdout.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "redactedStderr": {
+    "path": "../pgpt-runs/PG379/PG43610-g07-new-published-delta/stderr.log",
+    "sha256": "52222c978dec59fdd09ca0ddd4eb2c7b42f1dcb1b0eb64ca69fd5bc0bdaed1f9"
+  },
+  "protectedBaseline": "cd377044e4ca058ea219ca6a2fec82159559c72c",
+  "observedStashCount": 7,
+  "untrackedOrPrivateContentScanned": false,
+  "historicalUnclassified": 3280,
+  "allQualityConditions": false,
+  "formalAcceptanceId": null
+}
