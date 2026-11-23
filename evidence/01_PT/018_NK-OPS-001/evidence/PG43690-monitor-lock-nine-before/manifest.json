@@ -1,0 +1,99 @@
+{
+  "run": "PG43690",
+  "stage": "BEFORE_FIX",
+  "source": "6e2707341edff480e0957259b4adc8ca8d9429bf",
+  "productionCoreMain": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "terminalAtUTC": "2026-11-23T14:03:33.299671+00:00",
+  "actualExit": 0,
+  "rawPmd": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42998-c07-condition-window-absence-v2/pmd.xml",
+    "sha256": "e0081adab7310fabcb34d1e1732f2586664e42d2924bcb4ec778ba6b8881f6a1"
+  },
+  "rawAnalyzerExit": 4,
+  "previousResult": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42998-c07-condition-window-absence-v2/manifest.json",
+    "sha256": "71d38e9dba282f599430168b30cec1fa09935a98d9827e9465f6303d01740b39"
+  },
+  "applicableFindings": 9,
+  "sourceFiles": 6,
+  "findings": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java": [
+      {
+        "beginline": "168",
+        "endline": "168",
+        "rule": "AvoidSynchronizedAtMethodLevel",
+        "method": "snapshot",
+        "priority": "3"
+      },
+      {
+        "beginline": "172",
+        "endline": "172",
+        "rule": "AvoidSynchronizedAtMethodLevel",
+        "method": "interrupt",
+        "priority": "3"
+      },
+      {
+        "beginline": "178",
+        "endline": "178",
+        "rule": "AvoidSynchronizedAtMethodLevel",
+        "method": "violation",
+        "priority": "3"
+      },
+      {
+        "beginline": "191",
+        "endline": "191",
+        "rule": "AvoidSynchronizedAtMethodLevel",
+        "method": "normal",
+        "priority": "3"
+      }
+    ],
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow.java": [
+      {
+        "beginline": "27",
+        "endline": "27",
+        "rule": "AvoidSynchronizedStatement",
+        "method": "observe",
+        "priority": "3"
+      }
+    ],
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor.java": [
+      {
+        "beginline": "48",
+        "endline": "48",
+        "rule": "AvoidSynchronizedStatement",
+        "method": "observe",
+        "priority": "3"
+      }
+    ],
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.java": [
+      {
+        "beginline": "42",
+        "endline": "42",
+        "rule": "AvoidSynchronizedStatement",
+        "method": "observe",
+        "priority": "3"
+      }
+    ],
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.java": [
+      {
+        "beginline": "45",
+        "endline": "45",
+        "rule": "AvoidSynchronizedStatement",
+        "method": "observe",
+        "priority": "3"
+      }
+    ],
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor.java": [
+      {
+        "beginline": "42",
+        "endline": "42",
+        "rule": "AvoidSynchronizedStatement",
+        "method": "observe",
+        "priority": "3"
+      }
+    ]
+  },
+  "bug": "BUG-3726",
+  "ykt": "YKT-2925",
+  "actualProductTests": 0
+}
