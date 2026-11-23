@@ -90,7 +90,10 @@ final class BackupFailureUtcProjectionTest {
               switch (method.getName()) {
                 case "getAutoCommit", "isReadOnly" -> false;
                 case "getTransactionIsolation" -> Connection.TRANSACTION_READ_COMMITTED;
-                case "prepareStatement" -> statement(++prepared, (String) args[0]);
+                case "prepareStatement" -> {
+                  prepared++;
+                  yield statement(prepared, (String) args[0]);
+                }
                 default -> throw new AssertionError("unexpected operation on borrowed Connection");
               });
     }

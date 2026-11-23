@@ -112,7 +112,8 @@ final class BackupFailureSqlDiagnosticTest {
     }
 
     private PreparedStatement statement(String sql) {
-      boolean identity = ++prepared == 1;
+      prepared++;
+      boolean identity = prepared == 1;
       assertEquals(identity ? IDENTITY_SQL : BACKUP_SQL, sql);
       return proxy(
           PreparedStatement.class,
