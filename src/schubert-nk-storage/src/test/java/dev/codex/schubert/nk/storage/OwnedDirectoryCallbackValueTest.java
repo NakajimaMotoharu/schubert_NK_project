@@ -74,7 +74,8 @@ final class OwnedDirectoryCallbackValueTest {
         var sample = new FileFailure(failure, "");
         assertSame(
             fatal,
-            assertThrows(AssertionError.class, () -> directory.atDirectory(ignored -> sample.raise())));
+            assertThrows(
+                AssertionError.class, () -> directory.atDirectory(ignored -> sample.raise())));
         assertEquals(0, calls.closed);
       }
       assertEquals("still-owned", directory.atDirectory(ignored -> "still-owned"));
