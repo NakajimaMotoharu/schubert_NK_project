@@ -24,14 +24,16 @@ PROMCFG001..008. These files do not install, invoke, configure or stop a service
   design and real qualification. No existing data is deleted or moved.
   STANDARD must not run a daemon with retention size0 interpreted as unlimited.
 
-Before any later permitted deployment, pin the actual Prometheus/promtool version,
-source/checksum, installation, service identity, directories/permissions and total
-capacity mechanism; parse the exact profiles with that binary without scrapes;
-then validate same-source endpoint contents and registry compatibility, DEBUG
-operation, STANDARD stop/no scrape and retention. Current artifact checks use
-independent static semantics only; promtool and all daemon/runtime checks are
-UNRUN/HOLD. Existing API readiness-only response does not prove all26 detailed
-metrics. No new role, VM/native/Root/DB access or permission change is implemented.
+The two tracked profile templates match the bytes checked on the host with the
+pinned Prometheus LTS 3.13.5 `promtool check config --syntax-only`. The six
+syntax test IDs and the separate eight offline parser checks retain their original
+results. [Host syntax results and toolchain](../../../../evidence/01_PT/018_NK-OPS-001/1738_Prometheus公式構文parser_結果・toolchain記録.md)
+[Independent offline parser results](../../../../evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG8654-prometheus-profile-parser-post-v1/manifest.json)
+
+Deployment validation still requires the target binary and rendered profiles,
+service identity, directory permissions and total capacity mechanism. Same-source
+endpoint and registry checks, DEBUG scrapes, STANDARD service stop and retention
+remain pending on the approved target environment.
 
 Official primary references consulted2026-10-24 (latest docs, not installed-version
 qualification):
