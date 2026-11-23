@@ -1,0 +1,202 @@
+{
+  "run": "PG43206-a12105-terminal-jdbc-local-baseline-v1",
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-23T01:35:12.539664+00:00",
+  "source": "bb22166ef5881ea93e47c417a089a54abd0a5c3a",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": [
+    "A1-21.05",
+    "WBS-F02-b-a"
+  ],
+  "design": "SS332/SSC461, SS354; existing borrowed connections",
+  "plannedProductionChange": "Omitted after approval-boundary review. Ordinary read and backup-unavailable shared one private implementation catch. Rejected read crosses failed profile. No actual production change.",
+  "exactInputs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG42978-cleanup-terminal-reference-current-v1/manifest.json",
+      "sha256": "16669b8b2618df5333ae668f3edb42fdbd9071025f1da04039b3b4c910431b70"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43066-f03-transfer-current-ownership-trace-v1/manifest.json",
+      "sha256": "8da8b76521b2f5bb1d71accebf1a78d0fee6c01d296b720dce78379af0bf3310"
+    }
+  ],
+  "physical": [
+    {
+      "member": "dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.class",
+      "module": "batch",
+      "sha256": "200e23c6fa5fd6e1aff5afc61780f5883b1d8f5b2521163f98f7479f24ca581c"
+    },
+    {
+      "member": "dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository$Projection.class",
+      "module": "batch",
+      "sha256": "22ecc77c19041c95338b0aed303ea0e3e29534315cebe5f2cf2b6983c3f8af5c"
+    },
+    {
+      "member": "dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository$RejectedSnapshot.class",
+      "module": "batch",
+      "sha256": "f67bfc551b345e6698f2b10b1889125c45963a1ee5c5d82351f895b43c0e2564"
+    },
+    {
+      "member": "dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository$RejectedEntry.class",
+      "module": "batch",
+      "sha256": "13b74bd62a27d2e60077c30feecf721dfb7ac22b9f29ce988d655f867b27b7f8"
+    },
+    {
+      "member": "dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository$Snapshot.class",
+      "module": "batch",
+      "sha256": "820d3f0d9b45d95b47a407575e1dc8d44c9cee16b91e7b98e681ab1364a8a468"
+    },
+    {
+      "member": "dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository$Entry.class",
+      "module": "batch",
+      "sha256": "2e11a77e71576586b44d0febfbdaefa384141c638c8973aef6b83e83a3019aaf"
+    },
+    {
+      "member": "dev/codex/schubert/nk/batch/repository/BatchRepositoryException.class",
+      "module": "batch",
+      "sha256": "391b1aac7be2dd58cf9c3dee11cdd12941417fa7d029513475dfffbe4a3d2cb1"
+    },
+    {
+      "member": "dev/codex/schubert/nk/batch/repository/BatchRun.class",
+      "module": "batch",
+      "sha256": "5cb0c42832ea17425dbf60da6025f2c4783d687e665b18f6cd8e88abc399c909"
+    },
+    {
+      "member": "dev/codex/schubert/nk/batch/repository/BatchStep.class",
+      "module": "batch",
+      "sha256": "06e90b35ca09ac687bfd480caac794fa7be6a47dff9db3d397e682f75f010b1c"
+    },
+    {
+      "member": "dev/codex/schubert/nk/batch/repository/BatchStepAttempt.class",
+      "module": "batch",
+      "sha256": "d61f86c115e29d12da29964711253fcd3e8fc64b8cb2d263efd87702295ae547"
+    },
+    {
+      "member": "dev/codex/schubert/nk/batch/repository/BatchStepResult.class",
+      "module": "batch",
+      "sha256": "d30ca3fc460ebcceb4daee963ab618f582adb9dfdd916e9daeb51f3207a77417"
+    },
+    {
+      "member": "dev/codex/schubert/nk/batch/repository/BatchStepResult$Status.class",
+      "module": "batch",
+      "sha256": "08893a338b6e7ffab7272cd1789215001855261ec7ac0a4dafa92f41af5a3a27"
+    },
+    {
+      "member": "dev/codex/schubert/nk/batch/repository/BatchStepResult$Reason.class",
+      "module": "batch",
+      "sha256": "5006eeb26f8c82ba35e7830649019b41125edae1d8e396cdd411fee2f82830a7"
+    },
+    {
+      "member": "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.class",
+      "module": "batch",
+      "sha256": "f181015412f1f293e91c0eea24a3ac33127d5ef5015f3dc9fb73ac732e0cc009"
+    },
+    {
+      "member": "dev/codex/schubert/nk/batch/repository/RunReferenceRepository.class",
+      "module": "batch",
+      "sha256": "dc394e1d15ba729bbecd4f895c264b3adb042233f8ac7d603cab68d6e91682bb"
+    },
+    {
+      "member": "dev/codex/schubert/nk/batch/repository/RunReferences.class",
+      "module": "batch",
+      "sha256": "9cd7197824647e7ad066678a66a54bfdf196f0251027bebeb765b6babd8d8fe2"
+    },
+    {
+      "member": "dev/codex/schubert/nk/batch/repository/SuccessRunLookup.class",
+      "module": "batch",
+      "sha256": "ba6a3cd7a9d176ed849112546d0ad7bf3aebc9d22a4527c0bfd834247adfc525"
+    },
+    {
+      "member": "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class",
+      "module": "bootstrap",
+      "sha256": "cc8265242a1cd41cc7c77b8e12185cbc387fb583d70e1d1171ba467cb0f3d552"
+    },
+    {
+      "member": "dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Guard.class",
+      "module": "bootstrap",
+      "sha256": "53f2b39f586ec6ee172b0e3009d46638a60ca8f1ce8ad442f497affa6cbd869b"
+    },
+    {
+      "member": "dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame.class",
+      "module": "bootstrap",
+      "sha256": "cf12980ffcb4982da0b9cd5425730825a5cd8762bfdcdc581aa3cf6ab18b46ea"
+    },
+    {
+      "member": "dev/codex/schubert/nk/storage/StorageIoException.class",
+      "module": "storage",
+      "sha256": "85f86d702a139f126afdd72ca8e221583db824f159351ecd9f07b15fcc569c88"
+    },
+    {
+      "member": "dev/codex/schubert/nk/storage/StorageIoException$Reason.class",
+      "module": "storage",
+      "sha256": "a113bd839666ee3a4038dd3703af0cfb772282278cc6fbfe1e3cccf98286ffec"
+    }
+  ],
+  "fixture": {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalReferencesJdbcGraphTest.java",
+    "sha256": "2093106d07d44495c1645ec3e5b31ba7d7dce9030e6a67d2783b323b23797eb4"
+  },
+  "selectedCases": 4,
+  "newDefinitions": 2,
+  "independentCases": {
+    "PT-F02-CTERM-READ001": "The original LinkageError in the known JDBC next edge is propagated with identity after exactly one terminal statement close.",
+    "PT-F02-CTERM-READ002": "Fixed catalog text, no cause/suppressed data, same exact prepare/timeout/run/date and statement ownership; borrowed connection not closed."
+  },
+  "stageExits": {
+    "format": 0,
+    "fixtures": 0,
+    "style": 0,
+    "spotbugs": 0,
+    "pmd": 4,
+    "junit": 0,
+    "rawCompile": 0,
+    "unfiltered": 0
+  },
+  "spotBugs": [],
+  "pmd": [
+    "CloseResource",
+    "UseProperClassLoader"
+  ],
+  "mainCounters": {
+    "line": [
+      55,
+      314
+    ],
+    "method": [
+      9,
+      21
+    ],
+    "klass": [
+      1,
+      1
+    ],
+    "branch": [
+      11,
+      172
+    ]
+  },
+  "unfilteredRaw": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43206-a12105-terminal-jdbc-local-baseline-v1/unfiltered.stdout",
+    "sha256": "082b7cdf4096f09fbb89ab799b3c6d1868a711c95dc97fd0c69fea5d36c443aa"
+  },
+  "public": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43206-a12105-terminal-jdbc-local-baseline-v1/sanitized-junit.json",
+      "sha256": "cf0d573618ca4ca3120ae22ac8744b726b7bd18d76945ee34edf8fecfd3fc92d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG43206-a12105-terminal-jdbc-local-baseline-v1/coverage-unfiltered.tsv",
+      "sha256": "ad0b99085169b22950ea1641b5160f320ebf02f1c1905ad97a3841d0c78dd19c"
+    }
+  ],
+  "commandReceipt": {
+    "path": "../pgpt-runs/PG379/PG43206-a12105-terminal-jdbc-local-baseline-v1/begin.json",
+    "sha256": "a21ab08441480922b516c97efc33fd5aa9263281fee067ffe23d17761b2f03fe"
+  },
+  "oldCompatibleJdbcSitesRemoved": 0,
+  "stillOpenUpperSites": 51,
+  "actualDbConnections": 0,
+  "failedProfileExecuted": false,
+  "formalAcceptanceId": null,
+  "whole451": false
+}
