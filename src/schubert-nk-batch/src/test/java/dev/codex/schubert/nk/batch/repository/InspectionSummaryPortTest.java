@@ -20,13 +20,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
 /** INSPPORT001..012: borrowed inspection data only, no actual database or child owner. */
 final class InspectionSummaryPortTest {
+  private static final String EVENT_PREPARE = "prepare";
+  private static final String EVENT_QUERY = "query";
+  private static final String RESULT_NEXT_METHOD = "next";
   private static final String TEXT_AUTO = "auto";
   private static final String TEXT_COMPLETE = "complete";
   private static final String TEXT_DELETED_COUNT = "deleted_count";
@@ -60,11 +65,11 @@ final class InspectionSummaryPortTest {
             TEXT_AUTO,
             TEXT_READONLY,
             TEXT_ISOLATION,
-            "prepare",
+            EVENT_PREPARE,
             "timeout",
             "bind1",
             "bind2",
-            "query",
+            EVENT_QUERY,
             "next1",
             TEXT_INSPECTED_COUNT,
             TEXT_DELETED_COUNT,
@@ -159,11 +164,11 @@ final class InspectionSummaryPortTest {
             TEXT_AUTO,
             TEXT_READONLY,
             TEXT_ISOLATION,
-            "prepare",
+            EVENT_PREPARE,
             "timeout",
             "bind1",
             "bind2",
-            "query",
+            EVENT_QUERY,
             "next1",
             TEXT_INSPECTED_COUNT,
             TEXT_DELETED_COUNT,
@@ -237,7 +242,7 @@ final class InspectionSummaryPortTest {
   void singleSqlFailurePreservesNestedErrorAfterOwnedResourcesClose() {
     var cases = new ArrayList<Executable>();
     for (var point :
-        List.of("prepare", "query", TEXT_COMPLETE, TEXT_ROWCLOSE, TEXT_STATEMENTCLOSE)) {
+        List.of(EVENT_PREPARE, EVENT_QUERY, TEXT_COMPLETE, TEXT_ROWCLOSE, TEXT_STATEMENTCLOSE)) {
       for (var edge : List.of("cause", "suppressed", "next")) {
         cases.add(
             () -> {
@@ -255,8 +260,8 @@ final class InspectionSummaryPortTest {
                   fatal, assertThrows(AssertionError.class, fixture::read), point + " " + edge);
               assertEquals(0, fatal.getSuppressed().length);
               fixture.assertClosed();
-              int statements = point.equals("prepare") ? 0 : 1;
-              int rows = point.equals("prepare") || point.equals("query") ? 0 : 1;
+              int statements = point.equals(EVENT_PREPARE) ? 0 : 1;
+              int rows = point.equals(EVENT_PREPARE) || point.equals(EVENT_QUERY) ? 0 : 1;
               assertEquals(statements, fixture.closedStatements);
               assertEquals(rows, fixture.closedRows);
               List<String> closeEvents =
@@ -302,7 +307,8 @@ final class InspectionSummaryPortTest {
   }
 
   @Test
-  void beforeAndAfterInterruptRejectOnAnOwnedWorkerAndNeverChangeTheParentFlag() throws Exception {
+  void beforeAndAfterInterruptRejectOnAnOwnedWorkerAndNeverChangeTheParentFlag()
+      throws ExecutionException, InterruptedException, TimeoutException {
     boolean parentFlag = Thread.currentThread().isInterrupted();
     var worker = Executors.newSingleThreadExecutor();
     try {
@@ -436,7 +442,7 @@ final class InspectionSummaryPortTest {
                     }
                     case "prepareStatement" -> {
                       sql = (String) args[0];
-                      hit("prepare");
+                      hit(EVENT_PREPARE);
                       yield missing.equals("statement") ? null : statement();
                     }
                     default ->
@@ -464,7 +470,7 @@ final class InspectionSummaryPortTest {
                   return null;
                 }
                 if (name.equals("executeQuery")) {
-                  hit("query");
+                  hit(EVENT_QUERY);
                   return missing.equals("row") ? null : resultSet();
                 }
                 if (name.equals("close")) {
@@ -485,9 +491,9 @@ final class InspectionSummaryPortTest {
               new Class<?>[] {ResultSet.class},
               (proxy, method, args) -> {
                 String name = method.getName();
-                if (name.equals("next")) {
+                if (name.equals(RESULT_NEXT_METHOD)) {
                   index[0]++;
-                  hit("next" + (index[0] + 1));
+                  hit(RESULT_NEXT_METHOD + (index[0] + 1));
                   return index[0] < results.size();
                 }
                 if (name.equals("getObject")) {
