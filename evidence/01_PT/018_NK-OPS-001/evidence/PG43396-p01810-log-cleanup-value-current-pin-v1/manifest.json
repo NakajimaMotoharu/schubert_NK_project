@@ -1,0 +1,70 @@
+{
+  "run": "PG43396-p01810-log-cleanup-value-current-pin-v1",
+  "source": "79033e06128dd606ca85e93b73d40acd86f20803",
+  "productCore": "87927ea17c1c8dbef528bc0c6882c24b1fe7c871",
+  "wbs": "WBS-P018-10.03/2-照合",
+  "primaryTestOwner": "WBS-P017-07.01",
+  "terminalAtUTC": "2026-11-23T06:09:23.581925+00:00",
+  "actualExit": 0,
+  "existingTestIdMap": {
+    "summaryUsesFixedDeltasAndCumulativeWarning": "PT-BAT-CLEANVALUE003",
+    "summaryRejectsEachInvalidComponent": "PT-BAT-CLEANVALUE004",
+    "progressRetainsValuesAndRejectsNulls": "PT-BAT-CLEANVALUE005",
+    "chunkRequiresZeroCountsForEveryRejectedReason": "PT-BAT-CLEANVALUE006"
+  },
+  "specification": {
+    "path": "evidence/01_PT/018_NK-OPS-001/1981_LogCleanup値契約_独立単体テスト仕様書.md",
+    "sha256": "128251a50a47ceeb3a9402f77a6efe3bd93c3d5ac47cf7c9f28be9f6ea4e0241"
+  },
+  "priorOrdinary": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28330-cleanup-values14-unit-v1/manifest.json",
+      "sha256": "5cee5316895ea0a6f76c82a6ef89f1fad8fbfec1fd7ddbe836a1ba0a5839973c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG41716-cleanup-values-diff-v1/manifest.json",
+      "sha256": "9245126bea8ccda92d36516f8a55f402c42304e212d42e5f6783430066eefcde"
+    }
+  ],
+  "originalXml": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg28330-cleanup-values14-unit-v1/xml/TEST-junit-jupiter.xml",
+    "sha256": "e04cd817332d11594503b1054a02ac5ebdcc126cb72b514ee762c59ad5ad4ce2"
+  },
+  "currentRegularBatchJar": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG42998-c07-condition-window-absence-v2/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+    "sha256": "67984cee98423520add862115216219a86fb204d5a409bec829366ad79d4921b"
+  },
+  "currentSourceInput": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupSummary.java": "14c7ddab5f5156bb31f86da057d7460f98c8863ea680bcabdf47505568f3bab1",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java": "c440d3e16da86b7814cf8fbd6247e48c1ab4cd6de2da3a114a38c308ae3c7ce4",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupChunk.java": "89a3708504bedbc86eb7bdc7a99e84a61047ccb8fe2a9fad961c0944a687abe8",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupCounts.java": "9a7504e2b266c3de22ce10dfc8b15dadb0ce04f3a5f05bdd86d151c32d341f19",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupReason.java": "5a753a16012cee16134b37686d7ee7c26cde29e2a52449fe81bd2bd73a914597",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/LogCleanupProgress.java": "57cd675756ee9d372388f562ee2242f75df95ce95173f56fe9b861b4723a2833",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupValueContractTest.java": "dbaba0cc274785efc8a6e33168d5e51bab85eb1ab1b7e5efa4699e2522e3432b"
+  },
+  "physicalUsedClassHashes": {
+    "dev/codex/schubert/nk/batch/cleanup/LogCleanupSummary.class": "496696ca2425509b1f8a0b356a39dd72b10dd1197b495c9a7eec9e9fb0a004ee",
+    "dev/codex/schubert/nk/batch/repository/BatchRun.class": "5cb0c42832ea17425dbf60da6025f2c4783d687e665b18f6cd8e88abc399c909",
+    "dev/codex/schubert/nk/batch/repository/CleanupChunk.class": "470f2248050af33a7688e5f4a926f0b1a24763c1ecd0c4d10357c0f1ad9b0645",
+    "dev/codex/schubert/nk/batch/repository/CleanupCounts.class": "09355389bf26d39779e3184b7dd995978314ae00b833e468fbd5078408265af0",
+    "dev/codex/schubert/nk/batch/repository/CleanupReason.class": "2d662a78aa8d04b9672f41444e168627aa6facd6cf7f0c1eef5abd66160f0550",
+    "dev/codex/schubert/nk/batch/repository/LogCleanupProgress.class": "ef8401701e2d1d0466b7e59db0304b9c2977fadf91c15e591d93340cb8ecddc2"
+  },
+  "localPositiveRule": "Fixed counts (7,4,3), cumulative (10,5,5), and WARNING 10 only in summary diagnostic. No run UUID or cutoff.",
+  "localNegativeRules": [
+    "missing required values",
+    "mismatched run/incomplete/regressed counts",
+    "nonzero outcome for LOCK_BUSY or BACKUP_GATE"
+  ],
+  "priorEvidenceCount": 4,
+  "newProductPT": 0,
+  "newCoverage": false,
+  "actualDeleteOrSink": 0,
+  "unmet": [
+    "applicable actual sink and caller scope",
+    "F02/F03",
+    "closure of 3 subcriteria and whole451"
+  ],
+  "formalAcceptanceId": null
+}
