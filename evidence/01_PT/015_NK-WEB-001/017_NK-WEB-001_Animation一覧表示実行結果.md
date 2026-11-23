@@ -13,3 +13,6 @@ source803e02ef＋PG204作業tree/dev-foundation、Ubuntu26.04.1/Linux7.0.0-31/am
 ## 2026-11-22 現候補の例外宣言再試験
 
 PG42382／a55900c5087c8ba9e2562d8fe1493a04aadbb9b6／Core 1e4e9e64830b552727043f3cb8b9435b28cba472。PT-WEB-235/237の2件成功、F/E/skip 0。独立の表示・Bean・並行期待を維持し、型付きSpotBugs 0。有限workerのPMD生指摘を保持。残りの元試験は同じ理由で再演していない。BUG-3581／YKT-2816、evidence/01_PT/018_NK-OPS-001/evidence/PG42382-f03-two-views-four-current-v1/manifest.json SHA256 2b645964726a54149e518e23159bc1386e043ce55b1e778d239820f638c8edfc。
+## PG43370 現メニュー・一覧の選択試験
+
+UI235 §§4–5、SCR008／009、PT-WEB-230～237。現在のfixture・正規Protocol・現SDKを固定し、8/8成功、失敗・エラー・skip・未実行0。対象四物理の同一execで行91/91、メソッド28/28、クラス4/4、分岐52/52。111 probeと全CRCを独立照合した。旧全8件と狭い選択再試験は別の元証跡。実配信・HTTP・Browser、正式Web JARと全451は未受入。[PG43370](../018_NK-OPS-001/evidence/PG43370-animation-menu-list-current-eight-v1/manifest.json)
