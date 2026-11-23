@@ -1,0 +1,45 @@
+{
+  "run": "PG43822",
+  "source": "b82c7b62ee4dbbcf094760be9022e8fd62a6a3fa",
+  "terminalAtUTC": "2026-11-23T18:12:16.828612+00:00",
+  "wbs": "WBS-F03/2-2-b",
+  "relatedOwner": "WBS-P018-09",
+  "status": "INDIVIDUAL_QA056_DEPENDENCY_HOLD",
+  "classification": "Same writer synchronization shape. Its two public overloads share an owner. The owned readonly attempt overload depends on an imported QA-056 type and cannot be compiled/analysed as a full current class in the authorized profile. The borrowed fixture alone cannot accept the other overload or the shared post-cleanup invalidation. No type stubbing or replacement scope.",
+  "sourceProofs": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxObservationSource.java",
+      "sha256": "1d2c0e44fab847e256b794a04bdabd3bf770db3deb59afe37c8e3a80faaccc3d"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiReadOnlyObservationAttempt.java",
+      "sha256": "fe7fbb7d9858f05579839ab7ce6b80ec58566d90dbfc0d13d69a73aa730319ea"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxObservationSourceTest.java",
+      "sha256": "7bf403ccc605f19ed94c5aef2db9f77977c260af748a1da34d14cc4fa1794f7f"
+    }
+  ],
+  "independentExpectedSources": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/1854_APIOutboxObservationSource_製造・単体仕様.md",
+      "sha256": "cc7455dfbe758ff1145a40c0f3d8f58c02e5bbfdfb83f9da07c5d1283cf0ada9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/1860_APIOutboxCleanupPublication_製造・単体仕様.md",
+      "sha256": "1c8a59339d3c84f43785ff5583eb6e16ae81083fe33b34ed756645393d8e7d5a"
+    }
+  ],
+  "localBorrowedExistingCaseCount": 20,
+  "wholeOverloadExpectedCasesAccordingToSpecification": 34,
+  "historicalCompileOnlyEvidence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25326-api-pool-outbox-current-console-preflight-v1/manifest.json",
+    "sha256": "84208791f2a26bdb2a1f786c0d161458f807a725dbe3266d56e5428548daf30e"
+  },
+  "historicalResultStatus": "NOT_RUN_COMPILE_ONLY_NOT_PASS",
+  "knownCurrentTypedRawRules": null,
+  "staticCompileOrFixtureExecutions": 0,
+  "heldTypeInputOpened": false,
+  "whole451": false,
+  "formalAcceptanceId": null
+}
