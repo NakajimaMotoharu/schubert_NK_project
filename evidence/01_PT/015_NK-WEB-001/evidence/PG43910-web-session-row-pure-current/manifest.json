@@ -1,0 +1,118 @@
+{
+  "run": "PG43910",
+  "source": "59f3b0523f80d347457f91afa7fe1fda00ee04e6",
+  "productionCore": "458fe8fe258b8c94f388b0bc547d0899a74b37d2",
+  "terminalAtUTC": "2026-11-23T20:24:30.837965+00:00",
+  "wbs": [
+    "WBS-F03/2-2-b",
+    "WBS-P015-01"
+  ],
+  "approvedDesign": {
+    "path": "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+    "source": "e8cd2907eda6cd5a2ee43ed87d7837f613b3ac15",
+    "sha256": "c1f0269c8ee59173cf41419cc2166156be2712b7b1316a2eea81b9b53a504b41"
+  },
+  "ddl": {
+    "path": "src/schubert-nk-api/src/main/resources/db/migration/V003__business_message_log_and_web_tables.sql",
+    "source": "458fe8fe258b8c94f388b0bc547d0899a74b37d2",
+    "sha256": "85f05cda30be1dd7856fb1eee3b25f42c6513641ab5d30b92410210f5460aa5e"
+  },
+  "oracle": {
+    "path": "evidence/01_PT/015_NK-WEB-001/4694_WebSessionRow境界の単体仕様.md",
+    "sha256": "154cd563bca00cfc03d3a82fbe0b31a09118054bd988909d7ad4777868a0f541"
+  },
+  "cases": [
+    {
+      "id": "PT-WEB-ROW001",
+      "method": "row001InclusiveBoundsAndEqualTimestampsAreAccepted"
+    },
+    {
+      "id": "PT-WEB-ROW002",
+      "method": "row002RejectsSubMicrosecondAndOutOfOrderMetadataSeparately"
+    },
+    {
+      "id": "PT-WEB-ROW003",
+      "method": "row003RejectsIdleAndVersionOutsideTheirOwnInclusiveBounds"
+    },
+    {
+      "id": "PT-WEB-ROW004",
+      "method": "row004EveryRequiredReferenceRejectsNullAtItsOwnBoundary"
+    },
+    {
+      "id": "PT-WEB-ROW005",
+      "method": "row005ValueEqualityAndGeneralDiagnosticHaveIndependentExpectations"
+    }
+  ],
+  "sourcePins": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/WebSessionRow.java": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43910-web-session-row-boundaries-five/fixture/WebSessionRow.java",
+      "sha256": "13d4d3f0b7938c5cb790a539817efeaf9453e05b25238fa7fb3baba1b2b8525b"
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionPayloadIdentity.java": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43910-web-session-row-boundaries-five/fixture/SessionPayloadIdentity.java",
+      "sha256": "f669b82c1ebce568c46198438b01ce65e9133eb1a50e7d94725ef060d3e1e25d"
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedSessionPayload.java": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43910-web-session-row-boundaries-five/fixture/EncryptedSessionPayload.java",
+      "sha256": "b2d8816f5704d9d5d879908bf6ae5f4e95d436c1397b5e6ad71b78d09c45d799"
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/package-info.java": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43910-web-session-row-boundaries-five/fixture/package-info.java",
+      "sha256": "24641c16e2937e6fdb40acd9c3f86139fb9b54588aaf5931c240d74471d93277"
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/WebSessionRowValueTest.java": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43910-web-session-row-boundaries-five/fixture/WebSessionRowValueTest.java",
+      "sha256": "be6a86c4591a211171e14a87191df475b3e26dea2060ebc0286fc754addecac4"
+    }
+  },
+  "counts": {
+    "tests": 5,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "scopedRaw": "CLASS\tdev/codex/schubert/nk/web/session/WebSessionRow\t052edf3c7ff5b966\ttrue\t29\t65585\tINSTRUCTION:0:110\tBRANCH:0:16\tLINE:0:17\tCOMPLEXITY:0:19\tMETHOD:0:11\tCLASS:0:1",
+  "exitCodes": {
+    "compile": 0,
+    "compileFixture": 0,
+    "unit": 0,
+    "raw": 0
+  },
+  "junit": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43910-web-session-row-boundaries-five/reports/TEST-junit-jupiter.xml",
+    "sha256": "6b9eca0c52ad6fe9c34ec73d50b2e5a15549b32af02aa734cee4088c71c4feb9"
+  },
+  "product": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43910-web-session-row-boundaries-five/classes/dev/codex/schubert/nk/web/session/WebSessionRow.class",
+    "sha256": "bc03f2d0fd316bc4e511a0da9a0d6c15fbe716627ab561d05e002c1f9cd5a6b5"
+  },
+  "exec": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43910-web-session-row-boundaries-five/unit.exec",
+    "sha256": "fc96c995d0eba738a2a095a47bb2aadbfc1e9a4acbdb94480ba723334885cd35"
+  },
+  "terminal": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43910-web-session-row-boundaries-five/terminal.json",
+    "sha256": "159f1c3387a5df06e45b57199d7d7a8437ccd374a80ef6e25f79d4c3c56ca670"
+  },
+  "raw": {
+    "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43910-web-session-row-boundaries-five/raw.out",
+    "sha256": "a7e91775dae592438d141661c4cfd5a83a9184576264804618bb186317614d15"
+  },
+  "static": {
+    "PMD": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43910-web-session-row-boundaries-five/fixture-pmd-terminal.json",
+      "sha256": "4162dd11fa53fbf7e50424d109253f98eb1ab50a7f23022faea56cca69603909"
+    },
+    "formatAndCheckstyle": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/PG43910-web-session-row-boundaries-five/fixture-style-terminal.json",
+      "sha256": "85fd290003bfcb7ad6af4f38f34294788ed76ace84f1c4d09b6938f359ecd304"
+    }
+  },
+  "native": false,
+  "productionIo": false,
+  "remaining": [
+    "Normal Web packaging identity and six-product 451",
+    "Database JDBC/session lifecycle and integration"
+  ],
+  "formalAcceptanceId": null
+}
