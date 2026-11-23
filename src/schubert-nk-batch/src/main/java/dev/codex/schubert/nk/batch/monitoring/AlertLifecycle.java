@@ -191,7 +191,8 @@ public final class AlertLifecycle {
             Severity level = observed;
             if (active.isPresent() && active.orElseThrow().severity() == Severity.CRITICAL)
               level = Severity.CRITICAL;
-            active = Optional.of(new Event(conditionKey, serviceKey, level, first, at, count, true));
+            active =
+                Optional.of(new Event(conditionKey, serviceKey, level, first, at, count, true));
             return active;
           });
     }
@@ -212,7 +213,8 @@ public final class AlertLifecycle {
                 event.severity() == Severity.CRITICAL ? CRITICAL_RECOVERY : WARNING_RECOVERY;
             boolean enough = elapsed.minus(since).compareTo(recovery) >= 0;
             if (enough
-                && (event.severity() != Severity.CRITICAL || clearance == CauseClearance.CONFIRMED)) {
+                && (event.severity() != Severity.CRITICAL
+                    || clearance == CauseClearance.CONFIRMED)) {
               var closed =
                   new Event(
                       conditionKey,
